@@ -25,8 +25,47 @@
 
 
 
+/**
+ * libxfce4panel_major_version:
+ *
+ * The major version number of the libxfce4panel library (e.g. in
+ * version 4.8.0 this is 4).
+ *
+ * This variable is in the library, so represents the
+ * libxfce4panel library you have linked against. Contrast with the
+ * #LIBXFCE4PANEL_MAJOR_VERSION macro, which represents the major
+ * version of the libxfce4panel headers you have included.
+ **/
 const guint libxfce4panel_major_version = LIBXFCE4PANEL_MAJOR_VERSION;
+
+
+
+/**
+ * libxfce4panel_minor_version:
+ *
+ * The minor version number of the libxfce4panel library (e.g. in
+ * version 4.8.0 this is 8).
+ *
+ * This variable is in the library, so represents the
+ * libxfce4panel library you have linked against. Contrast with the
+ * #LIBXFCE4PANEL_MINOR_VERSION macro, which represents the minor
+ * version of the libxfce4panel headers you have included.
+ **/
 const guint libxfce4panel_minor_version = LIBXFCE4PANEL_MINOR_VERSION;
+
+
+
+/**
+ * libxfce4panel_micro_version:
+ *
+ * The micro version number of the libxfce4panel library (e.g. in
+ * version 4.8.0 this is 0).
+ *
+ * This variable is in the library, so represents the
+ * libxfce4panel library you have linked against. Contrast with the
+ * #LIBXFCE4PANEL_MICRO_VERSION macro, which represents the micro
+ * version of the libxfce4panel headers you have included.
+ **/
 const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
 
 
@@ -37,16 +76,16 @@ const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
  * @required_minor: the required minor version.
  * @required_micro: the required micro version.
  *
- * Checks that the <systemitem class="library">libxfce4panel</systemitem> library
- * in use is compatible with the given version. Generally you would pass in
- * the constants #LIBXFCE4PANEL_MAJOR_VERSION, #LIBXFCE4PANEL_MINOR_VERSION and
- * #LIBXFCE4PANEL_MICRO_VERSION as the three arguments to this function; that produces
- * a check that the library in use is compatible with the version of
- * <systemitem class="library">libxfce4panel</systemitem> the extension was
+ * Checks that the libxfce4panel library in use is compatible with
+ * the given version. Generally you would pass in the constants
+ * #LIBXFCE4PANEL_MAJOR_VERSION, #LIBXFCE4PANEL_MINOR_VERSION and
+ * #LIBXFCE4PANEL_MICRO_VERSION as the three arguments to this
+ * function; that produces a check that the library in use is
+ * compatible with the version of libxfce4panel the extension was
  * compiled against.
  *
  * <example>
- * <title>Checking the runtime version of the Libxfce4ui library</title>
+ * <title>Checking the runtime version of the Libxfce4panel library</title>
  * <programlisting>
  * const gchar *mismatch;
  * mismatch = libxfce4panel_check_version (LIBXFCE4PANEL_MAJOR_VERSION,
@@ -64,8 +103,8 @@ const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
  **/
 const gchar *
 libxfce4panel_check_version (guint required_major,
-                          guint required_minor,
-                          guint required_micro)
+                             guint required_minor,
+                             guint required_micro)
 {
   if (required_major > LIBXFCE4PANEL_MAJOR_VERSION)
     return "Xfce Panel version too old (major mismatch)";
