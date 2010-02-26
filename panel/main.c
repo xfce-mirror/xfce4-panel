@@ -139,8 +139,14 @@ main (gint argc, gchar **argv)
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
+#ifdef G_ENABLE_DEBUG
+  /* do NOT remove this line for now, If something doesn't work,
+   * fix your code instead! */
+  g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
+#endif
+
   /* initialize gtk+ */
-  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, (gchar *) GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, GETTEXT_PACKAGE, &error))
     {
       if (G_LIKELY (error))
         {
