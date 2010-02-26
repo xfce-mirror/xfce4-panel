@@ -164,10 +164,9 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GtkBuilder     *builder;
   GObject        *dialog;
   GObject        *object;
-  GError         *error = NULL;
 
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, tasklist_dialog_glade, tasklist_dialog_glade_length, &error))
+  if (gtk_builder_add_from_string (builder, tasklist_dialog_glade, tasklist_dialog_glade_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
@@ -202,9 +201,6 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     {
       /* release the builder */
       g_object_unref (G_OBJECT (builder));
-      
-      g_message ("%s", error->message);
-      g_error_free (error);
     }
 }
 

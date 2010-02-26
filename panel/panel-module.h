@@ -46,7 +46,7 @@ PanelModule             *panel_module_new_from_desktop_file     (const gchar    
 XfcePanelPluginProvider *panel_module_create_plugin             (PanelModule             *module,
                                                                  GdkScreen               *screen,
                                                                  const gchar             *name,
-                                                                 const gchar             *id,
+                                                                 gint                     unique_id,
                                                                  gchar                  **arguments);
 
 const gchar             *panel_module_get_internal_name         (PanelModule             *module);

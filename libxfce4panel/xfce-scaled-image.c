@@ -25,6 +25,7 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 #define MAX_PIXBUF_SIZE (128)
 
@@ -400,7 +401,7 @@ xfce_scaled_image_set_from_icon_name (XfceScaledImage *image,
   xfce_scaled_image_cleanup (image);
 
   /* set the new icon name */
-  if (G_LIKELY (icon_name && *icon_name != '\0'))
+  if (G_LIKELY (IS_STRING (icon_name)))
     image->icon_name = g_strdup (icon_name);
 
   /* queue a resize */
@@ -422,7 +423,7 @@ xfce_scaled_image_set_from_file (XfceScaledImage *image,
   /* cleanup */
   xfce_scaled_image_cleanup (image);
 
-  if (G_LIKELY (filename && *filename != '\0'))
+  if (G_LIKELY (IS_STRING (filename)))
     {
       /* try to load the image from the file */
       pixbuf = gdk_pixbuf_new_from_file (filename, &error);

@@ -39,15 +39,18 @@ typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 #define PANEL_DBUS_SERVICE_PATH      "/org/xfce/Panel"
 #define PANEL_DBUS_SERVICE_NAME      PANEL_DBUS_SERVICE_INTERFACE
 
-/* relative plugin filename */
-#define PANEL_PLUGIN_RELATIVE_PATH   "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%s.rc"
+/* relative plugin filename (printf format) */
+#define PANEL_PLUGIN_RELATIVE_PATH   "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%d.rc"
 
-/* xfconf property base */
-#define PANEL_PLUGIN_PROPERTY_BASE   "/plugins/plugin-%s"
+/* xfconf property base (printf format) */
+#define PANEL_PLUGIN_PROPERTY_BASE   "/plugins/plugin-%d"
+
+/* commonly used macro */
+#define IS_STRING(string)            ((string) != NULL && *(string) != '\0')
 
 /* provider contruct function */
 typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
-                                                         const gchar  *id,
+                                                         gint          id,
                                                          const gchar  *display_name,
                                                          gchar       **arguments,
                                                          GdkScreen    *screen);
@@ -63,7 +66,7 @@ struct _XfcePanelPluginProviderIface
 
   /*< public >*/
   const gchar *(*get_name)            (XfcePanelPluginProvider       *provider);
-  const gchar *(*get_id)              (XfcePanelPluginProvider       *provider);
+  gint         (*get_unique_id)       (XfcePanelPluginProvider       *provider);
   void         (*set_size)            (XfcePanelPluginProvider       *provider,
                                        gint                           size);
   void         (*set_orientation)     (XfcePanelPluginProvider       *provider,
@@ -91,7 +94,7 @@ GType        xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
 
 const gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);
 
-const gchar *xfce_panel_plugin_provider_get_id              (XfcePanelPluginProvider       *provider);
+gint         xfce_panel_plugin_provider_get_unique_id       (XfcePanelPluginProvider       *provider);
 
 void         xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider       *provider,
                                                              gint                           size);

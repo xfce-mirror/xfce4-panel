@@ -75,44 +75,42 @@
     </method>
 
     <!--
-      GetProperty (plugin-name : STRING, property : STRING, value : VARIANT) : VOID
+      GetProperty (plugin-id : INTEGER, property : STRING, value : VARIANT) : VOID
 
       plugin_name : Plugin id of the plugin requesting the property.
       property    : Name of the property.
       value       : GValue with the property value.
     -->
     <method name="GetProperty">
-      <arg name="plugin_id" direction="in" type="s" />
+      <arg name="plugin_id" direction="in" type="i" />
       <arg name="property" direction="in" type="s" />
       <arg name="value" direction="out" type="v" />
     </method>
 
     <!--
-      SetProperty (plugin-name : STRING, property : STRING, value : VARIANT) : VOID
+      SetProperty (plugin-id : INTEGER, property : STRING, value : VARIANT) : VOID
 
       plugin_name : Plugin id of the plugin setting the property.
       property    : Name of the property.
       value       : GValue with the property value.
     -->
     <method name="SetProperty">
-      <arg name="plugin_id" direction="in" type="s" />
+      <arg name="plugin_id" direction="in" type="i" />
       <arg name="property" direction="in" type="s" />
       <arg name="value" direction="in" type="v" />
     </method>
 
     <!--
-      PropertyChanged (plugin-name : STRING, property : STRING, value : VARIANT) : VOID
+      PropertyChanged (plugin-id : INTEGER, property : STRING, value : VARIANT) : VOID
 
       plugin_name : Plugin id of the plugin this signal was send to.
       property    : Name of the property that has been changed.
       value       : GValue with the property value.
     -->
     <signal name="PropertyChanged">
-      <arg name="plugin_id" type="s" />
+      <arg name="plugin_id" type="i" />
       <arg name="property" type="s" />
       <arg name="value" type="v"/>
     </signal>
-
   </interface>
-
 </node>

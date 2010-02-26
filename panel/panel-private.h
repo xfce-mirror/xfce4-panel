@@ -29,19 +29,6 @@ G_BEGIN_DECLS
 #define PANEL_UNSET_FLAG(flags,flag) G_STMT_START{ ((flags) &= ~(flag)); }G_STMT_END
 #define PANEL_HAS_FLAG(flags,flag)   (((flags) & (flag)) != 0)
 
-/* handling deprecated functions in gtk */
-#if GTK_CHECK_VERSION (2,12,0)
-#define _widget_set_tooltip_text(widget,text) gtk_widget_set_tooltip_text (widget, text)
-#define _window_set_opacity(window,opacity)   gtk_window_set_opacity (window, opacity)
-#else
-
-void _widget_set_tooltip_text (GtkWidget   *widget,
-                               const gchar *text);
-
-void _window_set_opacity      (GtkWindow   *window,
-                               gdouble      opacity);
-#endif
-
 G_END_DECLS
 
 #endif /* !__PANEL_PRIVATE_H__ */

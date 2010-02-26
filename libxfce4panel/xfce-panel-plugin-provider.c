@@ -87,12 +87,12 @@ xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 
 
 
-PANEL_SYMBOL_EXPORT const gchar *
-xfce_panel_plugin_provider_get_id (XfcePanelPluginProvider *provider)
+PANEL_SYMBOL_EXPORT gint
+xfce_panel_plugin_provider_get_unique_id (XfcePanelPluginProvider *provider)
 {
-  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), -1);
 
-  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_id) (provider);
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_unique_id) (provider);
 }
 
 

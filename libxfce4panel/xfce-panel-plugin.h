@@ -64,10 +64,6 @@ struct _XfcePanelPluginClass
   void (*reserved2) (void);
   void (*reserved3) (void);
   void (*reserved4) (void);
-  void (*reserved5) (void);
-  void (*reserved6) (void);
-  void (*reserved7) (void);
-  void (*reserved8) (void);
 };
 
 struct _XfcePanelPlugin
@@ -87,7 +83,7 @@ const gchar         *xfce_panel_plugin_get_name            (XfcePanelPlugin   *p
 
 const gchar         *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin);
 
-const gchar         *xfce_panel_plugin_get_id              (XfcePanelPlugin   *plugin);
+gint                 xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin);
 
 const gchar         *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin);
 

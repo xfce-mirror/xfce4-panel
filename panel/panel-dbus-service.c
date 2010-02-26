@@ -91,15 +91,15 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
   /**
    * Emited when a plugin property changes
    **/
-  /* TODO implement this */
+  /* TODO implement this (update: no idea, what TODO here...) */
   dbus_service_signals[PROPERTY_CHANGED] =
     g_signal_new (I_("property-changed"),
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,
-                  panel_marshal_VOID__STRING_STRING_BOXED,
+                  panel_marshal_VOID__INT_STRING_BOXED,
                   G_TYPE_NONE, 3,
-                  G_TYPE_STRING,
+                  G_TYPE_INT,
                   G_TYPE_STRING,
                   G_TYPE_VALUE);
 
@@ -259,7 +259,7 @@ panel_dbus_service_terminate (PanelDBusService  *service,
 
 static gboolean
 panel_dbus_service_get_property (PanelDBusService *service,
-                                 const gchar      *plugin_id,
+                                 gint              plugin_id,
                                  const gchar      *property,
                                  GValue           *value,
                                  GError           *error)
@@ -271,7 +271,7 @@ panel_dbus_service_get_property (PanelDBusService *service,
   gboolean                 succeed = FALSE;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
-  panel_return_val_if_fail (plugin_id != NULL, FALSE);
+  panel_return_val_if_fail (plugin_id != -1, FALSE);
   panel_return_val_if_fail (property != NULL, FALSE);
 
   /* get the module factory */
@@ -311,7 +311,7 @@ panel_dbus_service_get_property (PanelDBusService *service,
 
 static gboolean
 panel_dbus_service_set_property (PanelDBusService *service,
-                                 const gchar      *plugin_id,
+                                 gint              plugin_id,
                                  const gchar      *property,
                                  const GValue     *value,
                                  GError           *error)
@@ -320,7 +320,7 @@ panel_dbus_service_set_property (PanelDBusService *service,
   XfcePanelPluginProvider *provider;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
-  panel_return_val_if_fail (plugin_id != NULL, FALSE);
+  panel_return_val_if_fail (plugin_id != -1, FALSE);
   panel_return_val_if_fail (property != NULL, FALSE);
   panel_return_val_if_fail (value && G_TYPE_CHECK_VALUE (value), FALSE);
 
@@ -367,14 +367,14 @@ panel_dbus_service_get (void)
 
 
 void
-panel_dbus_service_set_plugin_property (const gchar  *plugin_id,
+panel_dbus_service_set_plugin_property (gint          plugin_id,
                                         const gchar  *property,
                                         const GValue *value)
 {
   PanelDBusService *service;
 
-  panel_return_if_fail (plugin_id && *plugin_id != '\0');
-  panel_return_if_fail (property && *property != '\0');
+  panel_return_if_fail (plugin_id != -1);
+  panel_return_if_fail (IS_STRING (property));
   panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
 
   /* get the dbus service */

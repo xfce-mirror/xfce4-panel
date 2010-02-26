@@ -523,10 +523,10 @@ panel_window_set_property (GObject      *object,
 
         /* set the autohide window opacity if created */
         if (window->autohide_window)
-          _window_set_opacity (GTK_WINDOW (window->autohide_window), window->leave_opacity);
+          gtk_window_set_opacity (GTK_WINDOW (window->autohide_window), window->leave_opacity);
 
         /* update the panel window opacity */
-        _window_set_opacity (GTK_WINDOW (window), window->leave_opacity);
+        gtk_window_set_opacity (GTK_WINDOW (window), window->leave_opacity);
         break;
 
       case PROP_BACKGROUND_ALPHA:
@@ -998,7 +998,7 @@ panel_window_autohide_window (PanelWindow *window)
   gtk_window_move (GTK_WINDOW (popup), OFFSCREEN, OFFSCREEN);
 
   /* set window opacity */
-  _window_set_opacity (GTK_WINDOW (popup), window->leave_opacity);
+  gtk_window_set_opacity (GTK_WINDOW (popup), window->leave_opacity);
 
   /* show the window */
   gtk_widget_show (popup);
@@ -1020,7 +1020,7 @@ panel_window_enter_notify_event (GtkWidget        *widget,
 
   /* set the opacity (when they differ) */
   if (window->leave_opacity != window->enter_opacity)
-    _window_set_opacity (GTK_WINDOW (window), window->enter_opacity);
+    gtk_window_set_opacity (GTK_WINDOW (window), window->enter_opacity);
 
   /* stop a running autohide timeout */
   if (window->autohide_timer != 0)
@@ -1047,7 +1047,7 @@ panel_window_leave_notify_event (GtkWidget        *widget,
 
   /* set the opacity (when they differ) */
   if (window->leave_opacity != window->enter_opacity)
-    _window_set_opacity (GTK_WINDOW (window), window->leave_opacity);
+    gtk_window_set_opacity (GTK_WINDOW (window), window->leave_opacity);
 
   /* stop a running autohide timeout */
   if (window->autohide_timer != 0)

@@ -53,12 +53,12 @@ gboolean                 panel_module_factory_has_module          (PanelModuleFa
                                                                    const gchar         *name);
 
 XfcePanelPluginProvider *panel_module_factory_get_plugin          (PanelModuleFactory  *factory,
-                                                                   const gchar         *id);
+                                                                   gint                 unique_id);
 
 XfcePanelPluginProvider *panel_module_factory_create_plugin       (PanelModuleFactory  *factory,
                                                                    GdkScreen           *screen,
                                                                    const gchar         *name,
-                                                                   const gchar         *id,
+                                                                   gint                 unique_id,
                                                                    gchar              **arguments);
 
 G_END_DECLS

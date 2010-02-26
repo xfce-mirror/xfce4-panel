@@ -175,7 +175,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   entry = gtk_entry_new ();
   gtk_box_pack_start (GTK_BOX (hbox), entry, FALSE, FALSE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
-  _widget_set_tooltip_text (entry, _("Enter search phrase here"));
+  gtk_widget_set_tooltip_text (entry, _("Enter search phrase here"));
   gtk_widget_show (entry);
 
   /* scroller */
@@ -593,7 +593,7 @@ panel_item_dialog_visible_func (GtkTreeModel *model,
 
   /* get the search string from the entry */
   text = gtk_entry_get_text (entry);
-  if (G_UNLIKELY (text == NULL || *text == '\0'))
+  if (G_UNLIKELY (!IS_STRING (text)))
     return TRUE;
 
   /* get the data from the model */

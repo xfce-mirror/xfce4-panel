@@ -37,18 +37,18 @@ G_BEGIN_DECLS
 #define XFCE_PANEL_PLUGIN_REGISTER_OBJECT(TYPE) \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
   __xpp_construct_obj (const gchar  *name, \
-                       const gchar  *id, \
+                       gint          unique_id, \
                        const gchar  *display_name, \
                        gchar       **arguments, \
                        GdkScreen    *screen) \
   { \
     panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL); \
-    panel_return_val_if_fail (name != NULL && id != NULL, NULL); \
+    panel_return_val_if_fail (name != NULL && unique_id != -1, NULL); \
     panel_return_val_if_fail (g_type_is_a (TYPE, XFCE_TYPE_PANEL_PLUGIN), NULL); \
     \
     return g_object_new (TYPE, \
                          "name", name, \
-                         "id", id, \
+                         "unique-id", unique_id, \
                          "display-name", display_name, \
                          "arguments", arguments, NULL); \
   }
@@ -72,7 +72,7 @@ G_BEGIN_DECLS
   \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
   __xpp_construct (const gchar  *name, \
-                   const gchar  *id, \
+                   gint          unique_id, \
                    const gchar  *display_name, \
                    gchar       **arguments, \
                    GdkScreen    *screen) \
@@ -80,13 +80,13 @@ G_BEGIN_DECLS
     XfcePanelPlugin *plugin = NULL; \
     \
     panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL); \
-    panel_return_val_if_fail (name != NULL && id != NULL, NULL); \
+    panel_return_val_if_fail (name != NULL && unique_id != -1, NULL); \
     \
     CODE \
       { \
         plugin = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
                                "name", name, \
-                               "id", id, \
+                               "unique-id", unique_id, \
                                "display-name", display_name, \
                                "arguments", arguments, NULL); \
         \

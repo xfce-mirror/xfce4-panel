@@ -248,7 +248,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
   const gchar *value;
   gchar       *path;
 
-  panel_return_val_if_fail (filename != NULL && *filename != '\0', NULL);
+  panel_return_val_if_fail (IS_STRING (filename), NULL);
 
   /* open the desktop file */
   rc = xfce_rc_simple_open (filename, TRUE);
@@ -330,7 +330,7 @@ XfcePanelPluginProvider *
 panel_module_create_plugin (PanelModule  *module,
                             GdkScreen    *screen,
                             const gchar  *name,
-                            const gchar  *id,
+                            gint          unique_id,
                             gchar       **arguments)
 {
   XfcePanelPluginProvider *plugin = NULL;
@@ -338,8 +338,8 @@ panel_module_create_plugin (PanelModule  *module,
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
-  panel_return_val_if_fail (name != NULL && *name != '\0', NULL);
-  panel_return_val_if_fail (id != NULL && *id != '\0', NULL);
+  panel_return_val_if_fail (IS_STRING (name), NULL);
+  panel_return_val_if_fail (unique_id != -1, NULL);
   panel_return_val_if_fail (exo_str_is_equal (name, G_TYPE_MODULE (module)->name), NULL);
 
   /* return null if the module is not usable (unique and already used) */
@@ -349,7 +349,7 @@ panel_module_create_plugin (PanelModule  *module,
   if (module->run_in_wrapper)
     {
       /* create external plugin */
-      plugin = panel_plugin_external_new (module, name, id, arguments);
+      plugin = panel_plugin_external_new (module, name, unique_id, arguments);
     }
   else
     {
@@ -362,7 +362,7 @@ panel_module_create_plugin (PanelModule  *module,
           panel_return_val_if_fail (module->construct_func != NULL, NULL);
 
           /* create a new panel plugin */
-          plugin = (*module->construct_func) (name, id, module->name, arguments, screen);
+          plugin = (*module->construct_func) (name, unique_id, module->name, arguments, screen);
         }
       else
         {

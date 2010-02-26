@@ -57,7 +57,7 @@ static void         panel_plugin_external_plug_added          (GtkSocket        
 static void         panel_plugin_external_provider_signal     (XfcePanelPluginProvider       *provider,
                                                                XfcePanelPluginProviderSignal  signal);
 static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider       *provider);
-static const gchar *panel_plugin_external_get_id              (XfcePanelPluginProvider       *provider);
+static gint         panel_plugin_external_get_unique_id       (XfcePanelPluginProvider       *provider);
 static void         panel_plugin_external_set_size            (XfcePanelPluginProvider       *provider,
                                                                gint                           size);
 static void         panel_plugin_external_set_orientation     (XfcePanelPluginProvider       *provider,
@@ -82,7 +82,7 @@ struct _PanelPluginExternal
   GtkSocket  __parent__;
 
   /* plugin information */
-  gchar            *id;
+  gint              unique_id;
 
   /* startup arguments */
   gchar           **arguments;
@@ -139,7 +139,7 @@ static void
 panel_plugin_external_init (PanelPluginExternal *external)
 {
   /* initialize */
-  external->id = NULL;
+  external->unique_id = -1;
   external->module = NULL;
   external->arguments = NULL;
   external->dbus_queue = NULL;
@@ -157,7 +157,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
 {
   iface->provider_signal = panel_plugin_external_provider_signal;
   iface->get_name = panel_plugin_external_get_name;
-  iface->get_id = panel_plugin_external_get_id;
+  iface->get_unique_id = panel_plugin_external_get_unique_id;
   iface->set_size = panel_plugin_external_set_size;
   iface->set_orientation = panel_plugin_external_set_orientation;
   iface->set_screen_position = panel_plugin_external_set_screen_position;
@@ -174,7 +174,6 @@ panel_plugin_external_finalize (GObject *object)
   QueuedData          *data;
 
   /* cleanup */
-  g_free (external->id);
   g_strfreev (external->arguments);
 
   /* free the queue */
@@ -201,15 +200,16 @@ panel_plugin_external_realize (GtkWidget *widget)
   gchar               **argv;
   GError               *error = NULL;
   gboolean              succeed;
-  gchar                *socket_id;
+  gchar                *socket_id, *unique_id;
   gint                  i, argc = 12;
   GdkScreen            *screen;
 
   /* realize the socket first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->realize) (widget);
 
-  /* get the socket id in a string */
+  /* get the socket id and unique id in a string */
   socket_id = g_strdup_printf ("%d", gtk_socket_get_id (GTK_SOCKET (widget)));
+  unique_id = g_strdup_printf ("%d", external->unique_id);
 
   /* add the number of arguments to the argv count */
   if (G_UNLIKELY (external->arguments != NULL))
@@ -223,7 +223,7 @@ panel_plugin_external_realize (GtkWidget *widget)
   argv[1]  = "-n";
   argv[2]  = (gchar *) panel_module_get_internal_name (external->module);
   argv[3]  = "-i";
-  argv[4]  = (gchar *) external->id;
+  argv[4]  = unique_id;
   argv[5]  = "-d";
   argv[6]  = (gchar *) panel_module_get_name (external->module);
   argv[7]  = "-f";
@@ -247,6 +247,7 @@ panel_plugin_external_realize (GtkWidget *widget)
 
   /* cleanup */
   g_free (socket_id);
+  g_free (unique_id);
   g_free (argv);
 
   /* handle problem */
@@ -273,7 +274,7 @@ panel_plugin_external_unrealize (GtkWidget *widget)
   g_value_set_boolean (&value, FALSE);
 
   /* send (don't queue here) */
-  panel_dbus_service_set_plugin_property (external->id, "Quit", &value);
+  panel_dbus_service_set_plugin_property (external->unique_id, "Quit", &value);
 
   /* unset */
   g_value_unset (&value);
@@ -335,9 +336,9 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
       response = GTK_RESPONSE_OK;
 
       /* print a message we did an autorestart */
-      g_message ("Automatically restarting plugin %s-%s, try %d",
+      g_message ("Automatically restarting plugin %s-%d, try %d",
                  panel_module_get_internal_name (external->module),
-                 external->id, external->n_restarts);
+                 external->unique_id, external->n_restarts);
 	}
 
   /* handle the response */
@@ -381,11 +382,14 @@ panel_plugin_external_plug_added (GtkSocket *socket)
 
   if (G_LIKELY (external->dbus_queue))
     {
+      /* reverse the order fo the queue, since we prepended all the time */
+      external->dbus_queue = g_slist_reverse (external->dbus_queue);
+      
       /* flush the queue */
       for (li = external->dbus_queue; li != NULL; li = li->next)
         {
           data = li->data;
-          panel_dbus_service_set_plugin_property (external->id, data->property, &data->value);
+          panel_dbus_service_set_plugin_property (external->unique_id, data->property, &data->value);
           g_value_unset (&data->value);
           g_slice_free (QueuedData, data);
         }
@@ -432,13 +436,13 @@ panel_plugin_external_get_name (XfcePanelPluginProvider *provider)
 
 
 
-static const gchar *
-panel_plugin_external_get_id (XfcePanelPluginProvider *provider)
+static gint
+panel_plugin_external_get_unique_id (XfcePanelPluginProvider *provider)
 {
-  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), NULL);
-  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), -1);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), -1);
 
-  return PANEL_PLUGIN_EXTERNAL (provider)->id;
+  return PANEL_PLUGIN_EXTERNAL (provider)->unique_id;
 }
 
 
@@ -452,12 +456,12 @@ panel_plugin_external_set_property (PanelPluginExternal *external,
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
-  panel_return_if_fail (property != NULL && *property != '\0');
+  panel_return_if_fail (IS_STRING (property));
 
   if (G_LIKELY (external->plug_embedded))
     {
       /* directly send the new property */
-      panel_dbus_service_set_plugin_property (external->id, property, value);
+      panel_dbus_service_set_plugin_property (external->unique_id, property, value);
     }
   else
     {
@@ -467,8 +471,8 @@ panel_plugin_external_set_property (PanelPluginExternal *external,
       g_value_init (&data->value, G_VALUE_TYPE (value));
       g_value_copy (value, &data->value);
 
-      /* add to the queue */
-      external->dbus_queue = g_slist_append (external->dbus_queue, data);
+      /* add to the queue (still in reversed order here) */
+      external->dbus_queue = g_slist_prepend (external->dbus_queue, data);
     }
 }
 
@@ -585,20 +589,20 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 XfcePanelPluginProvider *
 panel_plugin_external_new (PanelModule  *module,
                            const gchar  *name,
-                           const gchar  *id,
+                           gint          unique_id,
                            gchar       **arguments)
 {
   PanelPluginExternal *external;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (name != NULL, NULL);
-  panel_return_val_if_fail (id != NULL, NULL);
+  panel_return_val_if_fail (unique_id != -1, NULL);
 
   /* create new object */
   external = g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL, NULL);
 
   /* set name, id and module */
-  external->id = g_strdup (id);
+  external->unique_id = unique_id;
   external->module = g_object_ref (G_OBJECT (module));
   external->arguments = g_strdupv (arguments);
 

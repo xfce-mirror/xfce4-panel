@@ -51,19 +51,18 @@
 
 gchar          *opt_name = NULL;
 static gchar   *opt_display_name = NULL;
-static gchar   *opt_id = NULL;
+static gint     opt_unique_id = -1;
 static gchar   *opt_filename = NULL;
 static gint     opt_socket_id = 0;
 static gchar  **opt_arguments = NULL;
 static GQuark   plug_quark = 0;
 
 
-
 static GOptionEntry option_entries[] =
 {
   { "name", 'n', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_name, NULL, NULL },
   { "display-name", 'd', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_display_name, NULL, NULL },
-  { "id", 'i', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_id, NULL, NULL },
+  { "unique-id", 'i', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_unique_id, NULL, NULL },
   { "filename", 'f', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_filename, NULL, NULL },
   { "socket-id", 's', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
@@ -74,7 +73,7 @@ static GOptionEntry option_entries[] =
 
 static void
 dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
-                                       const gchar             *plugin_id,
+                                       gint                     plugin_id,
                                        const gchar             *property,
                                        const GValue            *value,
                                        XfcePanelPluginProvider *provider)
@@ -83,14 +82,15 @@ dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
   panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
+  panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
   /* check if the signal is for this panel */
-  if (!plugin_id || strcmp (plugin_id, xfce_panel_plugin_provider_get_id (provider)) != 0)
+  if (plugin_id != opt_unique_id)
     return;
 
   /* handle the property */
-  if (G_UNLIKELY (property == NULL || *property == '\0'))
-    g_message ("External plugin '%s' received null property", plugin_id);
+  if (G_UNLIKELY (!IS_STRING (property)))
+    g_message ("External plugin '%s-%d' received null property.", opt_name, opt_unique_id);
   else if (strcmp (property, "Size") == 0)
     xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
   else if (strcmp (property, "Orientation") == 0)
@@ -113,7 +113,7 @@ dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
       else if (strcmp (property, "ActivePanel") == 0)
         wrapper_plug_set_selected (plug, g_value_get_boolean (value));
       else
-        g_message ("External plugin '%s' received unknown property '%s'", plugin_id, property);
+        g_message ("External plugin '%s-%d' received unknown property '%s'.", opt_name, opt_unique_id, property);
     }
 }
 
@@ -124,16 +124,13 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
                              XfcePanelPluginProviderSignal  signal,
                              DBusGProxy                    *dbus_gproxy)
 {
-  GValue       value = { 0, };
-  GError      *error = NULL;
-  const gchar *id;
-  guint        active_panel = 0;
-  gboolean     result = FALSE;
+  GValue    value = { 0, };
+  GError   *error = NULL;
+  guint     active_panel = 0;
+  gboolean  result = FALSE;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  /* get the plugin id */
-  id = xfce_panel_plugin_provider_get_id (provider);
+  panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
   /* handle the signal */
   switch (signal)
@@ -149,7 +146,8 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
         g_value_set_uint (&value, signal);
 
         /* invoke the method */
-        result = wrapper_dbus_client_set_property (dbus_gproxy, id, "ProviderSignal", &value, &error);
+        result = wrapper_dbus_client_set_property (dbus_gproxy, opt_unique_id, 
+                                                   "ProviderSignal", &value, &error);
 
         /* unset */
         g_value_unset (&value);
@@ -158,7 +156,8 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
       case ADD_NEW_ITEMS:
       case PANEL_PREFERENCES:
         /* try to get the panel number of this plugin */
-        if (wrapper_dbus_client_get_property (dbus_gproxy, id, "PanelNumber", &value, NULL))
+        if (wrapper_dbus_client_get_property (dbus_gproxy, opt_unique_id, 
+                                              "PanelNumber", &value, NULL))
           {
             /* set the panel number */
             active_panel = g_value_get_uint (&value);
@@ -173,7 +172,7 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
         break;
 
       default:
-        g_critical ("Plugin '%s' received an unknown provider signal %d.", id, signal);
+        g_critical ("Plugin '%s-%d' received an unknown provider signal '%d'.", opt_name, opt_unique_id, signal);
         return;
     }
 
@@ -205,8 +204,7 @@ dbus_gproxy_dbus_filter (DBusConnection *connection,
 									               DBUS_TYPE_INVALID))
         {
           /* check if the panel service lost the owner, if so, leave the mainloop */
-          if (strcmp (service, "org.xfce.Panel") == 0
-              && (new_owner == NULL || *new_owner == '\0'))
+          if (strcmp (service, "org.xfce.Panel") == 0 && !IS_STRING (new_owner))
             gtk_main_quit ();
         }
     }
@@ -256,7 +254,7 @@ main (gint argc, gchar **argv)
     }
 
   /* check if the module exists */
-  if (opt_filename == NULL || *opt_filename == '\0'
+  if (!IS_STRING (opt_filename)
       || g_file_test (opt_filename, G_FILE_TEST_EXISTS) == FALSE)
     {
       /* print error */
@@ -268,9 +266,9 @@ main (gint argc, gchar **argv)
 
   /* check if all the other arguments are defined */
   if (opt_socket_id == 0
-      || opt_name == NULL || *opt_name == '\0'
-      || opt_id == NULL || *opt_id == '\0'
-      || opt_display_name == NULL || *opt_display_name == '\0')
+      || !IS_STRING (opt_name)
+      || opt_unique_id == -1
+      || !IS_STRING (opt_display_name))
     {
       /* print error */
       g_critical ("One of the required arguments is missing.");
@@ -280,7 +278,7 @@ main (gint argc, gchar **argv)
     }
 
   /* change the process name to something that makes sence */
-  g_snprintf (process_name, sizeof (process_name), "panel-%s", opt_name);
+  g_snprintf (process_name, sizeof (process_name), "panel-%s-%d", opt_name, opt_unique_id);
   prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0);
 
   /* try to connect to dbus */
@@ -325,9 +323,9 @@ main (gint argc, gchar **argv)
     }
 
   /* setup signal for property changes */
-  dbus_g_object_register_marshaller (wrapper_marshal_VOID__STRING_STRING_BOXED, G_TYPE_NONE,
-                                     G_TYPE_STRING, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
-  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_STRING, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_STRING_BOXED, G_TYPE_NONE,
+                                     G_TYPE_INT, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
 
   /* load the module and link the function */
   module = g_module_open (opt_filename, G_MODULE_BIND_LOCAL);
@@ -338,7 +336,7 @@ main (gint argc, gchar **argv)
           && !g_module_symbol (module, "__xpp_construct", (gpointer) &construct_func))
         {
           /* print error */
-          g_critical ("Plugin '%s' lacks a plugin register function", opt_name);
+          g_critical ("Plugin '%s-%d' lacks a plugin register function", opt_name, opt_unique_id);
 
           /* close the module */
           g_module_close (module);
@@ -357,7 +355,8 @@ main (gint argc, gchar **argv)
     }
 
   /* contruct the panel plugin */
-  provider = (*construct_func) (opt_name, opt_id, opt_display_name, opt_arguments, gdk_screen_get_default ());
+  provider = (*construct_func) (opt_name, opt_unique_id, opt_display_name, 
+                                opt_arguments, gdk_screen_get_default ());
   if (G_LIKELY (provider))
     {
       /* create quark */
@@ -391,7 +390,7 @@ main (gint argc, gchar **argv)
   else
     {
       /* print error */
-      g_critical ("Failed to contruct the plugin '%s'.", opt_name);
+      g_critical ("Failed to contruct the plugin '%s-%d'.", opt_name, opt_unique_id);
 
       /* release the proxy */
       g_object_unref (G_OBJECT (dbus_gproxy));

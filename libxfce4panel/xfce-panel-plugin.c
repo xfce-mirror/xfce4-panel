@@ -32,7 +32,8 @@
 
 #define XFCE_PANEL_PLUGIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate))
 
-typedef const gchar *(*ProviderToPlugin) (XfcePanelPluginProvider *provider);
+typedef const gchar *(*ProviderToPluginChar) (XfcePanelPluginProvider *provider);
+typedef gint         (*ProviderToPluginInt)  (XfcePanelPluginProvider *provider);
 
 
 static void          xfce_panel_plugin_class_init             (XfcePanelPluginClass         *klass);
@@ -79,7 +80,7 @@ enum
   PROP_NAME,
   PROP_DISPLAY_NAME,
   PROP_ARGUMENTS,
-  PROP_ID
+  PROP_UNIQUE_ID
 };
 
 enum
@@ -99,7 +100,7 @@ struct _XfcePanelPluginPrivate
   /* plugin information */
   gchar               *name;
   gchar               *display_name;
-  gchar               *id;
+  gint                 unique_id;
   gchar               *property_base;
   gchar              **arguments;
   gint                 size;
@@ -328,18 +329,17 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * XfcePanelPlugin:id:
    *
    * The unique id of the #XfcePanelPlugin. Plugin writer can use it to
-   * read the unique id, but xfce_panel_plugin_get_id() is recommended
-   * since that returns a const string.
+   * read the unique id, but xfce_panel_plugin_get_unique_id() is recommended.
    **/
   g_object_class_install_property (gobject_class,
-                                   PROP_ID,
-                                   g_param_spec_string ("id",
-                                                        "ID",
-                                                        "Unique plugin ID",
-                                                        NULL,
-                                                        G_PARAM_READWRITE
-                                                        | G_PARAM_STATIC_STRINGS
-                                                        | G_PARAM_CONSTRUCT_ONLY));
+                                   PROP_UNIQUE_ID,
+                                   g_param_spec_int ("unique-id",
+                                                     "Unique ID",
+                                                     "Unique plugin ID",
+                                                     -1, G_MAXINT, -1,
+                                                     G_PARAM_READWRITE
+                                                     | G_PARAM_STATIC_STRINGS
+                                                     | G_PARAM_CONSTRUCT_ONLY));
 
   /**
    * XfcePanelPlugin:arguments:
@@ -373,7 +373,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   /* initialize plugin value */
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;
-  plugin->priv->id = NULL;
+  plugin->priv->unique_id = -1;
   plugin->priv->property_base = NULL;
   plugin->priv->arguments = NULL;
   plugin->priv->size = 0;
@@ -395,8 +395,8 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 static void
 xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
 {
-  iface->get_name = (ProviderToPlugin) xfce_panel_plugin_get_name;
-  iface->get_id = (ProviderToPlugin) xfce_panel_plugin_get_id;
+  iface->get_name = (ProviderToPluginChar) xfce_panel_plugin_get_name;
+  iface->get_unique_id = (ProviderToPluginInt) xfce_panel_plugin_get_unique_id;
   iface->set_size = xfce_panel_plugin_set_size;
   iface->set_orientation = xfce_panel_plugin_set_orientation;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
@@ -423,8 +423,8 @@ xfce_panel_plugin_get_property (GObject    *object,
         g_value_set_static_string (value, private->display_name);
         break;
 
-      case PROP_ID:
-        g_value_set_static_string (value, private->id);
+      case PROP_UNIQUE_ID:
+        g_value_set_int (value, private->unique_id);
         break;
 
       case PROP_ARGUMENTS:
@@ -457,8 +457,8 @@ xfce_panel_plugin_set_property (GObject      *object,
         private->display_name = g_value_dup_string (value);
         break;
 
-      case PROP_ID:
-        private->id = g_value_dup_string (value);
+      case PROP_UNIQUE_ID:
+        private->unique_id = g_value_get_int (value);
         break;
 
       case PROP_ARGUMENTS:
@@ -504,7 +504,6 @@ xfce_panel_plugin_finalize (GObject *object)
   /* cleanup */
   g_free (plugin->priv->name);
   g_free (plugin->priv->display_name);
-  g_free (plugin->priv->id);
   g_free (plugin->priv->property_base);
   g_strfreev (plugin->priv->arguments);
 
@@ -765,12 +764,11 @@ xfce_panel_plugin_relative_filename (XfcePanelPlugin *plugin)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (xfce_panel_plugin_get_name (plugin) != NULL, NULL);
-  panel_return_val_if_fail (xfce_panel_plugin_get_id (plugin) != NULL, NULL);
+  panel_return_val_if_fail (xfce_panel_plugin_get_unique_id (plugin) != -1, NULL);
 
   /* return the relative configuration filename */
   return g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH,
-                          xfce_panel_plugin_get_name (plugin),
-                          xfce_panel_plugin_get_id (plugin));
+                          plugin->priv->name, plugin->priv->unique_id);
 }
 
 
@@ -932,18 +930,12 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 
 
 
-/**
- * xfce_panel_plugin_get_id:
- * @plugin :
- *
- * Return value: the unique id of the panel plugin.
- **/
-PANEL_SYMBOL_EXPORT const gchar *
-xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
+gint
+xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
 {
-  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), -1);
 
-  return plugin->priv->id;
+  return plugin->priv->unique_id;
 }
 
 
@@ -963,7 +955,8 @@ xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
 
   /* create the propert if needed */
   if (plugin->priv->property_base == NULL)
-    plugin->priv->property_base = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE, plugin->priv->id);
+    plugin->priv->property_base = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE, 
+                                                   plugin->priv->unique_id);
 
   return plugin->priv->property_base;
 }

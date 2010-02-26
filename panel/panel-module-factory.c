@@ -113,7 +113,7 @@ panel_module_factory_init (PanelModuleFactory *factory)
 
   /* create hash tables */
   factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
-  factory->plugins = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  factory->plugins = g_hash_table_new_full (g_int_hash, g_int_equal, NULL, NULL);
 
   /* load all the modules */
   panel_module_factory_load_modules (factory);
@@ -210,7 +210,8 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
                   g_hash_table_insert (factory->modules, internal_name, module);
 
                   /* check if this is the launcher */
-                  if (factory->has_launcher == FALSE && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name))
+                  if (factory->has_launcher == FALSE 
+                      && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name))
                     factory->has_launcher = TRUE;
                 }
               else
@@ -330,20 +331,6 @@ panel_module_factory_get_modules_foreach (gpointer key,
 
 
 
-static const gchar *
-panel_module_factory_get_unique_id (void)
-{
-  static gint  counter = 0;
-  static gchar id[30];
-
-  /* create a unique if of the current time and counter */
-  g_snprintf (id, sizeof (id), "%ld%d", time (NULL), counter++);
-
-  return id;
-}
-
-
-
 GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
@@ -380,12 +367,12 @@ panel_module_factory_has_module (PanelModuleFactory *factory,
 
 XfcePanelPluginProvider *
 panel_module_factory_get_plugin (PanelModuleFactory *factory,
-                                 const gchar        *id)
+                                 gint                unique_id)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
-  panel_return_val_if_fail (id != NULL, NULL);
+  panel_return_val_if_fail (unique_id != -1, NULL);
 
-  return g_hash_table_lookup (factory->plugins, id);
+  return g_hash_table_lookup (factory->plugins, &unique_id);
 }
 
 
@@ -394,11 +381,12 @@ XfcePanelPluginProvider *
 panel_module_factory_create_plugin (PanelModuleFactory  *factory,
                                     GdkScreen           *screen,
                                     const gchar         *name,
-                                    const gchar         *id,
+                                    gint                 unique_id,
                                     gchar              **arguments)
 {
   PanelModule             *module;
   XfcePanelPluginProvider *provider;
+  static gint              unique_id_counter = 0;
 
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
@@ -415,15 +403,16 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
     }
 
   /* make sure this plugin has a unique id */
-  while (id == NULL || g_hash_table_lookup (factory->plugins, id) != NULL)
-    id = panel_module_factory_get_unique_id ();
+  while (unique_id == -1
+         || g_hash_table_lookup (factory->plugins, &unique_id) != NULL)
+    unique_id = ++unique_id_counter;
 
   /* create the new module */
-  provider = panel_module_create_plugin (module, screen, name, id, arguments);
+  provider = panel_module_create_plugin (module, screen, name, unique_id, arguments);
 
   /* insert plugin in the hash table */
   if (G_LIKELY (provider))
-    g_hash_table_insert (factory->plugins, g_strdup (id), provider);
+    g_hash_table_insert (factory->plugins, &unique_id, provider);
 
   return provider;
 }

@@ -74,16 +74,19 @@ G_BEGIN_DECLS
 /* make api compatible with 4.4 panel */
 #ifndef XFCE_DISABLE_DEPRECATED
 
+/* panel plugin functio for the id, probably not used by anyone */
+#define xfce_panel_plugin_get_id(plugin) (g_strdup_printf ("%d", xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin))))
+
 /* convenience functions (deprecated) */
 #define xfce_create_panel_button        xfce_panel_create_button
 #define xfce_create_panel_toggle_button xfce_panel_create_toggle_button
 #define xfce_allow_panel_customization  xfce_panel_allow_customization
 
 /* register definitions (deprecated) */
-#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL             XFCE_PANEL_PLUGIN_REGISTER
-#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK  XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL             XFCE_PANEL_PLUGIN_REGISTER
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK  XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
+#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL            XFCE_PANEL_PLUGIN_REGISTER
+#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL            XFCE_PANEL_PLUGIN_REGISTER
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
 
 /* parameter flags (deprecated) */
 #define PANEL_PARAM_READABLE  G_PARAM_READABLE | PANEL_PARAM_STATIC_STRINGS

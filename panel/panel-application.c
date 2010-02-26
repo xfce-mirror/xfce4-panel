@@ -57,7 +57,7 @@ static gboolean  panel_application_plugin_insert      (PanelApplication       *a
                                                        PanelWindow            *window,
                                                        GdkScreen              *screen,
                                                        const gchar            *name,
-                                                       const gchar            *id,
+                                                       gint                    unique_id,
                                                        gchar                 **arguments,
                                                        gint                    position);
 static gboolean  panel_application_save_timeout       (gpointer                user_data);
@@ -251,7 +251,8 @@ panel_application_load (PanelApplication *application)
   guint          i, n_panels;
   guint          j, n_plugins;
   gchar          buf[100];
-  gchar         *name, *id;
+  gchar         *name;
+  gint           unique_id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
@@ -275,15 +276,14 @@ panel_application_load (PanelApplication *application)
             {
               /* read the plugin id */
               g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
-              id = xfconf_channel_get_string (channel, buf, NULL);
+              unique_id = xfconf_channel_get_int (channel, buf, -1);
 
               panel_application_plugin_insert (application, window,
                                                gtk_window_get_screen (GTK_WINDOW (window)),
-                                               name, id, NULL, -1);
+                                               name, unique_id, NULL, -1);
 
               /* cleanup */
               g_free (name);
-              g_free (id);
             }
         }
 
@@ -389,12 +389,12 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
       case REMOVE_PLUGIN:
         /* create the xfconf property base */
         property = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE,
-                                    xfce_panel_plugin_provider_get_id (provider));
+                                    xfce_panel_plugin_provider_get_unique_id (provider));
 
         /* build the plugin rc filename */
         filename = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH,
                                     xfce_panel_plugin_provider_get_name (provider),
-                                    xfce_panel_plugin_provider_get_id (provider));
+                                    xfce_panel_plugin_provider_get_unique_id (provider));
 
         /* destroy the plugin if it's a panel plugin (ie. not external) */
         if (XFCE_IS_PANEL_PLUGIN (provider))
@@ -437,7 +437,7 @@ panel_application_plugin_insert (PanelApplication  *application,
                                  PanelWindow       *window,
                                  GdkScreen         *screen,
                                  const gchar       *name,
-                                 const gchar       *id,
+                                 gint               unique_id,
                                  gchar            **arguments,
                                  gint               position)
 {
@@ -451,7 +451,7 @@ panel_application_plugin_insert (PanelApplication  *application,
   panel_return_val_if_fail (name != NULL, FALSE);
 
   /* create a new panel plugin */
-  provider = panel_module_factory_create_plugin (application->factory, screen, name, id, arguments);
+  provider = panel_module_factory_create_plugin (application->factory, screen, name, unique_id, arguments);
 
   if (G_LIKELY (provider != NULL))
     {
@@ -617,7 +617,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
 
             /* create a new item with a unique id */
             succeed = panel_application_plugin_insert (application, window, screen, name,
-                                                       NULL, NULL, position);
+                                                       -1, NULL, position);
           }
         break;
 
@@ -758,7 +758,7 @@ panel_application_save (PanelApplication *application,
 
           /* save the plugin id */
           g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
-          xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_id (provider));
+          xfconf_channel_set_int (channel, buf, xfce_panel_plugin_provider_get_unique_id (provider));
 
           /* ask the plugin to save */
           if (save_plugin_providers)
@@ -840,9 +840,9 @@ panel_application_add_new_item (PanelApplication  *application,
       /* get the window */
       window = g_slist_nth_data (application->windows, nth);
 
-      /* add the panel to the end of the choosen window */
+      /* add the plugin to the end of the choosen window */
       panel_application_plugin_insert (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
-                                       plugin_name, NULL, arguments, -1);
+                                       plugin_name, -1, arguments, -1);
     }
   else
     {
