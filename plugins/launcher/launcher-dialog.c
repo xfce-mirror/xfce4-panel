@@ -30,6 +30,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <garcon/garcon.h>
 #include <xfconf/xfconf.h>
+#include <gio/gio.h>
 
 #include <common/panel-private.h>
 #include <common/panel-builder.h>
@@ -389,13 +390,15 @@ static void
 launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
                                         LauncherPluginDialog *dialog)
 {
-  GObject      *object;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  gint          n_children = -1;
-  gint          position = 0;
-  GtkTreePath  *path;
-  gboolean      sensitive;
+  GObject        *object;
+  GtkTreeModel   *model;
+  GtkTreeIter     iter;
+  gint            n_children = -1;
+  gint            position = 0;
+  GtkTreePath    *path;
+  gboolean        sensitive;
+  GarconMenuItem *item = NULL;
+  gboolean        editable = FALSE;
 
   panel_return_if_fail (GTK_IS_TREE_SELECTION (selection));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -409,6 +412,13 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
       path = gtk_tree_model_get_path (model, &iter);
       position = gtk_tree_path_get_indices (path)[0];
       gtk_tree_path_free (path);
+
+      gtk_tree_model_get (model, &iter, COL_ITEM, &item, -1);
+      if (G_LIKELY (item != NULL))
+        {
+          editable = launcher_plugin_item_is_editable (dialog->plugin, item, NULL);
+          g_object_unref (G_OBJECT (item));
+        }
     }
 
   /* update the sensitivity of the buttons */
@@ -424,8 +434,7 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
   gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
   object = gtk_builder_get_object (dialog->builder, "item-edit");
-  sensitive = !!(position >= 0 && n_children > 0);
-  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), editable);
 
   object = gtk_builder_get_object (dialog->builder, "arrow-position");
   gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
@@ -456,6 +465,9 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
   GError           *error = NULL;
   GarconMenuItem   *item;
   GtkWidget        *toplevel;
+  gchar            *filename;
+  gboolean          can_delete;
+  GFile            *item_file;
 
   panel_return_if_fail (GTK_IS_BUILDABLE (button));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -484,32 +496,64 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
           /* get item name */
           gtk_tree_model_get (model, &iter_a, COL_ITEM, &item, -1);
           if (G_LIKELY (item != NULL))
-            {
-              display_name = garcon_menu_item_get_name (item);
-              g_object_unref (G_OBJECT (item));
-            }
+            display_name = garcon_menu_item_get_name (item);
 
           /* ask the user */
           toplevel = gtk_widget_get_toplevel (button);
           if (xfce_dialog_confirm (GTK_WINDOW (toplevel), GTK_STOCK_DELETE, NULL,
                   _("If you delete an item, it will be permanently removed"),
-                  _("Are you sure you want to remove \"%s\"?"), display_name))
-            gtk_list_store_remove (GTK_LIST_STORE (model), &iter_a);
-        }
-      else if (strcmp (name, "item-new") == 0)
-        {
-          /* TODO */
-        }
-      else if (strcmp (name, "item-edit") == 0)
-        {
-          gtk_tree_model_get (model, &iter_a, COL_ITEM, &item, -1);
-          if (G_UNLIKELY (item == NULL))
-            return;
+                  _("Are you sure you want to remove \"%s\"?"),
+                  exo_str_is_empty (display_name) ? _("Unnamed item") : display_name))
+            {
+              /* remove the item from the store */
+              gtk_list_store_remove (GTK_LIST_STORE (model), &iter_a);
 
+              /* delete the desktop file if possible */
+              if (item != NULL
+                  && launcher_plugin_item_is_editable (dialog->plugin, item, &can_delete)
+                  && can_delete)
+                {
+                  item_file = garcon_menu_item_get_file (item);
+                  if (!g_file_delete (item_file, NULL, &error))
+                    {
+                      toplevel = gtk_widget_get_toplevel (button);
+                      xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
+                          _("Failed to remove the desktop file from the config directory"));
+                      g_error_free (error);
+                    }
+                  g_object_unref (G_OBJECT (item_file));
+                }
+            }
+
+          if (G_LIKELY (item != NULL))
+            g_object_unref (G_OBJECT (item));
+        }
+      else if (strcmp (name, "item-new") == 0
+               || strcmp (name, "item-edit") == 0)
+        {
+          if (strcmp (name, "item-edit") == 0)
+            {
+              gtk_tree_model_get (model, &iter_a, COL_ITEM, &item, -1);
+              if (G_UNLIKELY (item == NULL))
+                return;
+
+              /* build command */
+              uri = garcon_menu_item_get_uri (item);
+              command = g_strdup_printf ("exo-desktop-item-edit --xid=%d '%s'",
+                                         LAUNCHER_WIDGET_XID (button), uri);
+              g_free (uri);
+            }
+          else
+            {
+              /* build command */
+              filename = launcher_plugin_unique_filename (dialog->plugin);
+              command = g_strdup_printf ("exo-desktop-item-edit -c --xid=%d '%s'",
+                                         LAUNCHER_WIDGET_XID (button), filename);
+              g_free (filename);
+            }
+
+          /* spawn item editor */
           screen = gtk_widget_get_screen (button);
-          uri = garcon_menu_item_get_uri (item);
-          command = g_strdup_printf ("exo-desktop-item-edit --xid=%d '%s'",
-                                     LAUNCHER_WIDGET_XID (button), uri);
           if (!gdk_spawn_command_line_on_screen (screen, command, &error))
             {
               toplevel = gtk_widget_get_toplevel (button);
@@ -517,7 +561,7 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
                   _("Failed to open desktop item editor"));
               g_error_free (error);
             }
-          g_free (uri);
+
           g_free (command);
         }
       else if (strcmp (name, "item-move-up") == 0)

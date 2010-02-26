@@ -97,8 +97,9 @@ static gboolean launcher_plugin_item_exec_on_screen (GarconMenuItem *item, guint
 static void launcher_plugin_item_exec (GarconMenuItem *item, guint32 event_time, GdkScreen *screen, GSList *uri_list);
 static void launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item, guint32 event_time, GdkScreen *screen);
 static void launcher_plugin_exec_append_quoted (GString *string, const gchar *unquoted);
-static gboolean launcher_plugin_exec_parse (GarconMenuItem *item, GSList *uri_list, gint *argc, gchar ***argv, GError **error);
+static gboolean launcher_plugin_exec_parse (GarconMenuItem *item, GSList *uri_list, gchar ***argv, GError **error);
 static GSList *launcher_plugin_uri_list_extract (GtkSelectionData *data);
+static gboolean launcher_plugin_dup_desktop_file (GFile *src_file, GFile *dst_file, GError **error);
 static void launcher_plugin_uri_list_free (GSList *uri_list);
 
 
@@ -129,6 +130,9 @@ struct _LauncherPlugin
   guint              move_first : 1;
   guint              show_label : 1;
   LauncherArrowType  arrow_position;
+
+  GFile             *config_directory;
+  GFileMonitor      *config_monitor;
 };
 
 enum
@@ -335,6 +339,7 @@ launcher_plugin_get_property (GObject    *object,
   GPtrArray      *array;
   GValue         *tmp;
   GSList         *li;
+  GFile          *item_file;
 
   switch (prop_id)
     {
@@ -345,7 +350,12 @@ launcher_plugin_get_property (GObject    *object,
             tmp = g_new0 (GValue, 1);
             g_value_init (tmp, G_TYPE_STRING);
             panel_return_if_fail (GARCON_IS_MENU_ITEM (li->data));
-            g_value_take_string (tmp, garcon_menu_item_get_uri (li->data));
+            item_file = garcon_menu_item_get_file (li->data);
+            if (g_file_has_prefix (item_file, plugin->config_directory))
+              g_value_take_string (tmp, g_file_get_basename (item_file));
+            else
+              g_value_take_string (tmp, g_file_get_uri (item_file));
+            g_object_unref (G_OBJECT (item_file));
             g_ptr_array_add (array, tmp);
           }
         g_value_set_boxed (value, array);
@@ -372,50 +382,6 @@ launcher_plugin_get_property (GObject    *object,
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
-    }
-}
-
-
-
-static gboolean
-launcher_plugin_looks_like_an_uri (const gchar *string)
-{
-  const gchar *s = string;
-
-  /* <scheme> starts with an alpha character */
-  if (g_ascii_isalpha (*s))
-    {
-      /* <scheme> continues with (alpha | digit | "+" | "-" | ".")* */
-      for (++s; g_ascii_isalnum (*s) || *s == '+' || *s == '-' || *s == '.'; ++s);
-
-      /* <scheme> must be followed by ":" */
-      return (*s == ':');
-    }
-
-  return FALSE;
-}
-
-
-
-static void
-launcher_plugin_file_changed (GFileMonitor     *monitor,
-                              GFile            *file,
-                              GFile            *other_file,
-                              GFileMonitorEvent event_type,
-                              gpointer          user_data)
-{
-  GarconMenuItem *item = GARCON_MENU_ITEM (user_data);
-  GError         *error = NULL;
-
-  /* only update on the last event */
-  if (event_type != G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT)
-    return;
-
-  /* reload the item */
-  if (!garcon_menu_item_reload (item, &error))
-    {
-      g_critical ("Failed to reload a menu item: %s.", error->message);
-      g_error_free (error);
     }
 }
 
@@ -461,9 +427,11 @@ launcher_plugin_set_property (GObject      *object,
   const GValue   *tmp;
   const gchar    *str;
   GSList         *li, *items = NULL;
-  gchar          *uri;
-  GFile          *gfile;
-  GFileMonitor   *monitor;
+  GFile          *item_file, *other_file;
+  gchar          *path;
+  GError         *error;
+
+  panel_return_if_fail (G_IS_FILE (plugin->config_directory));
 
   /* destroy the menu, all the setting changes need this */
   launcher_plugin_menu_destroy (plugin);
@@ -477,7 +445,7 @@ launcher_plugin_set_property (GObject      *object,
           {
             for (i = 0; i < array->len; i++)
               {
-                /* get the uri from the array */
+                /* get the string from the array */
                 tmp = g_ptr_array_index (array, i);
                 panel_return_if_fail (G_VALUE_HOLDS_STRING (tmp));
                 str = g_value_get_string (tmp);
@@ -485,53 +453,77 @@ launcher_plugin_set_property (GObject      *object,
                   continue;
                 item = NULL;
 
-                /* maybe we can find the item in the existing list */
-                for (li = plugin->items; item == NULL && li != NULL; li = g_slist_next (li))
+                if (G_UNLIKELY (g_path_is_absolute (str)
+                    || exo_str_looks_like_an_uri (str)))
                   {
-                    uri = garcon_menu_item_get_uri (GARCON_MENU_ITEM (li->data));
-                    if (exo_str_is_equal (str, uri))
+                    item_file = g_file_new_for_commandline_arg (str);
+                    if (!g_file_has_prefix (item_file, plugin->config_directory))
                       {
-                        /* move the item to the new list */
+                        if (g_file_query_exists (item_file, NULL))
+                          {
+                            path = launcher_plugin_unique_filename (plugin);
+                            other_file = g_file_new_for_path (path);
+                            g_free (path);
+
+                            error = NULL;
+                            if (launcher_plugin_dup_desktop_file (item_file, other_file, &error))
+                              {
+                                g_object_unref (G_OBJECT (item_file));
+                                item_file = other_file;
+                              }
+                            else
+                              {
+                                g_critical ("Failed to copy desktop file to config directory: %s", error->message);
+                                g_error_free (error);
+
+                                g_object_unref (G_OBJECT (other_file));
+                              }
+                          }
+                        else
+                          {
+                            /* file does not exist */
+                            g_object_unref (G_OBJECT (item_file));
+                            continue;
+                          }
+                      }
+                  }
+                else
+                  {
+                    /* assume the file is in our config directory */
+                    item_file = g_file_get_child (plugin->config_directory, str);
+                  }
+
+                /* maybe we can find the item in the existing list */
+                panel_assert (item_file != NULL);
+                panel_assert (item == NULL);
+                for (li = plugin->items; item == NULL && li != NULL; li = li->next)
+                  {
+                    other_file = garcon_menu_item_get_file (GARCON_MENU_ITEM (li->data));
+                    if (g_file_equal (item_file, other_file))
+                      {
                         item = GARCON_MENU_ITEM (li->data);
                         plugin->items = g_slist_delete_link (plugin->items, li);
                       }
-                    g_free (uri);
+                    g_object_unref (G_OBJECT (other_file));
                   }
 
-                /* try to create a new item */
-                if (G_LIKELY (item == NULL))
+                /* no existing item found, create a new menu item */
+                if (item == NULL)
                   {
-                    if (G_LIKELY (launcher_plugin_looks_like_an_uri (str)))
+                    item = garcon_menu_item_new (item_file);
+                    if (G_UNLIKELY (item == NULL))
                       {
-                        item = garcon_menu_item_new_for_uri (str);
-                      }
-                    else if (g_path_is_absolute (str))
-                      {
-                        item = garcon_menu_item_new_for_path (str);
-                      }
-                    else
-                      {
-                        /* TODO, lookup in item pool using garcon */
+                        /* still nothing found, try the pool... */
+
+                        continue;
                       }
                   }
 
-                /* append the item and start file monitoring */
-                if (G_LIKELY (item != NULL))
-                  {
-                    items = g_slist_append (items, item);
-                    g_signal_connect (G_OBJECT (item), "changed",
-                        G_CALLBACK (launcher_plugin_item_changed), plugin);
-
-                    gfile = garcon_menu_item_get_file (item);
-                    monitor = g_file_monitor_file (gfile, G_FILE_MONITOR_NONE, NULL, NULL);
-                    g_object_unref (G_OBJECT (gfile));
-                    if (G_LIKELY (monitor != NULL))
-                      {
-                        g_signal_connect (G_OBJECT (monitor), "changed",
-                            G_CALLBACK (launcher_plugin_file_changed), item);
-                        g_object_weak_ref (G_OBJECT (item), (GWeakNotify) g_object_unref, monitor);
-                      }
-                  }
+                /* add the item to the list */
+                panel_assert (item != NULL);
+                items = g_slist_append (items, item);
+                g_signal_connect (G_OBJECT (item), "changed",
+                    G_CALLBACK (launcher_plugin_item_changed), plugin);
               }
           }
 
@@ -631,6 +623,97 @@ launcher_plugin_style_set (GtkWidget *widget,
 
 
 static void
+launcher_plugin_file_changed (GFileMonitor      *monitor,
+                              GFile             *changed_file,
+                              GFile             *other_file,
+                              GFileMonitorEvent  event_type,
+                              LauncherPlugin    *plugin)
+{
+  GSList         *li;
+  GarconMenuItem *item;
+  GFile          *item_file;
+  gboolean        found;
+  GError         *error = NULL;
+  gchar          *base_name;
+  gboolean        result;
+  gboolean        exists;
+  gboolean        update_plugin = FALSE;
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (plugin->config_monitor == monitor);
+
+  /* waited until all events are proccessed */
+  if (event_type != G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
+      && event_type != G_FILE_MONITOR_EVENT_DELETED)
+    return;
+
+  /* we only act on desktop files */
+  base_name = g_file_get_basename (changed_file);
+  result = g_str_has_suffix (base_name, ".desktop");
+  g_free (base_name);
+  if (!result)
+    return;
+
+  exists = g_file_query_exists (changed_file, NULL);
+
+  /* lookup the file in the menu items */
+  for (li = plugin->items, found = FALSE; !found && li != NULL; li = li->next)
+    {
+      item = GARCON_MENU_ITEM (li->data);
+      item_file = garcon_menu_item_get_file (item);
+      found = g_file_equal (changed_file, item_file);
+      if (found)
+        {
+          if (exists)
+            {
+              /* reload the file */
+              if (!garcon_menu_item_reload (item, &error))
+                {
+                  g_critical ("Failed to reload menu item: %s", error->message);
+                  g_error_free (error);
+                }
+            }
+          else
+            {
+              /* remove from the list */
+              plugin->items = g_slist_delete_link (plugin->items, li);
+              g_object_unref (G_OBJECT (item));
+              update_plugin = TRUE;
+            }
+        }
+      g_object_unref (G_OBJECT (item_file));
+    }
+
+  if (!found && exists)
+    {
+      /* add the new file to the config */
+      item = garcon_menu_item_new (changed_file);
+      if (G_LIKELY (item != NULL))
+        {
+          plugin->items = g_slist_append (plugin->items, item);
+          g_signal_connect (G_OBJECT (item), "changed",
+              G_CALLBACK (launcher_plugin_item_changed), plugin);
+          update_plugin = TRUE;
+        }
+    }
+
+  if (update_plugin)
+    {
+      launcher_plugin_button_update (plugin);
+      launcher_plugin_menu_destroy (plugin);
+      launcher_plugin_menu_destroy (plugin);
+
+      /* save the new config */
+      g_object_notify (G_OBJECT (plugin), "items");
+
+      /* update the dialog */
+      g_signal_emit (G_OBJECT (plugin), launcher_signals[ITEMS_CHANGED], 0);
+    }
+}
+
+
+
+static void
 launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin      *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
@@ -638,6 +721,8 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   guint                i;
   GPtrArray           *array;
   GValue              *value;
+  gchar               *file, *path;
+  GError              *error = NULL;
   const PanelProperty  properties[] =
   {
     { "show-label", G_TYPE_BOOLEAN },
@@ -650,6 +735,15 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* show the configure menu item */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+
+  /* lookup the config directory where this launcher stores it's desktop files */
+  file = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d",
+                          xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (plugin)),
+                          xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)));
+  path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, file, FALSE);
+  plugin->config_directory = g_file_new_for_path (path);
+  g_free (file);
+  g_free (path);
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),
@@ -686,6 +780,20 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
         }
     }
 
+  /* start file monitor in our config directory */
+  plugin->config_monitor = g_file_monitor_directory (plugin->config_directory,
+                                                     G_FILE_MONITOR_NONE, NULL, &error);
+  if (G_LIKELY (plugin->config_monitor != NULL))
+    {
+      g_signal_connect (G_OBJECT (plugin->config_monitor), "changed",
+                        G_CALLBACK (launcher_plugin_file_changed), plugin);
+    }
+  else
+    {
+      g_critical ("Failed to start file monitor: %s", error->message);
+      g_error_free (error);
+    }
+
   /* show the beast */
   gtk_widget_show (plugin->box);
   gtk_widget_show (plugin->button);
@@ -698,6 +806,16 @@ static void
 launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
+
+  /* stop monitoring */
+  if (plugin->config_monitor != NULL)
+    {
+      g_file_monitor_cancel (plugin->config_monitor);
+      g_object_unref (G_OBJECT (plugin->config_monitor));
+    }
+
+  if (plugin->config_directory != NULL)
+    g_object_unref (G_OBJECT (plugin->config_directory));
 
   /* destroy the menu and timeout */
   launcher_plugin_menu_destroy (plugin);
@@ -1679,7 +1797,7 @@ launcher_plugin_item_exec_on_screen (GarconMenuItem *item,
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
 
   /* parse the execute command */
-  if (launcher_plugin_exec_parse (item, uri_list, NULL, &argv, &error))
+  if (launcher_plugin_exec_parse (item, uri_list, &argv, &error))
     {
       /* launch the command on the screen */
       succeed = xfce_spawn_on_screen (screen,
@@ -1738,14 +1856,12 @@ launcher_plugin_item_exec (GarconMenuItem *item,
       for (li = uri_list; li != NULL && proceed; li = li->next)
         {
           fake.data = li->data;
-          proceed = launcher_plugin_item_exec_on_screen (item, event_time,
-                                                         screen, &fake);
+          proceed = launcher_plugin_item_exec_on_screen (item, event_time, screen, &fake);
         }
     }
   else
     {
-      launcher_plugin_item_exec_on_screen (item, event_time,
-                                           screen, uri_list);
+      launcher_plugin_item_exec_on_screen (item, event_time, screen, uri_list);
     }
 }
 
@@ -1818,7 +1934,6 @@ launcher_plugin_exec_append_quoted (GString     *string,
 static gboolean
 launcher_plugin_exec_parse (GarconMenuItem   *item,
                             GSList           *uri_list,
-                            gint             *argc,
                             gchar          ***argv,
                             GError          **error)
 {
@@ -1912,7 +2027,7 @@ launcher_plugin_exec_parse (GarconMenuItem   *item,
         }
     }
 
-  result = g_shell_parse_argv (string->str, argc, argv, error);
+  result = g_shell_parse_argv (string->str, NULL, argv, error);
   g_string_free (string, TRUE);
 
   return result;
@@ -2008,6 +2123,53 @@ launcher_plugin_uri_list_free (GSList *uri_list)
 
 
 
+static gboolean
+launcher_plugin_dup_desktop_file (GFile   *src_file,
+                                  GFile   *dst_file,
+                                  GError **error)
+{
+  GKeyFile *key_file;
+  gchar    *contents;
+  gsize     length;
+  gboolean  result;
+  gchar    *uri;
+
+  panel_return_val_if_fail (G_IS_FILE (src_file), FALSE);
+  panel_return_val_if_fail (G_IS_FILE (dst_file), FALSE);
+  panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+  if (!g_file_load_contents (src_file, NULL, &contents, &length, NULL, error))
+    return FALSE;
+
+  key_file = g_key_file_new ();
+  result = g_key_file_load_from_data (key_file, contents, length, G_KEY_FILE_NONE, error);
+  if (G_UNLIKELY (!result))
+    goto err1;
+  g_free (contents);
+
+  uri = g_file_get_uri (src_file);
+  g_key_file_set_string (key_file, G_KEY_FILE_DESKTOP_GROUP, "X-XFCE-Source", uri);
+  g_free (uri);
+
+  contents = g_key_file_to_data (key_file, &length, error);
+  if (G_UNLIKELY (contents == NULL))
+    {
+      result = FALSE;
+      goto err1;
+    }
+
+  result = g_file_replace_contents (dst_file, contents, length, NULL, FALSE,
+                                    G_FILE_CREATE_NONE, NULL, NULL, error);
+
+err1:
+  g_free (contents);
+  g_key_file_free (key_file);
+
+  return result;
+}
+
+
+
 GSList *
 launcher_plugin_get_items (LauncherPlugin *plugin)
 {
@@ -2016,4 +2178,66 @@ launcher_plugin_get_items (LauncherPlugin *plugin)
   /* set extra reference and return a copy of the list */
   g_slist_foreach (plugin->items, (GFunc) g_object_ref, NULL);
   return g_slist_copy (plugin->items);
+}
+
+
+
+gchar *
+launcher_plugin_unique_filename (LauncherPlugin *plugin)
+{
+  gchar        *filename, *path;
+  static guint  counter = 0;
+  GTimeVal      timeval;
+
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
+
+  g_get_current_time (&timeval);
+  filename = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d"
+                              G_DIR_SEPARATOR_S "%ld%d.desktop",
+                              xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (plugin)),
+                              xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)),
+                              timeval.tv_sec, ++counter);
+  path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, filename, TRUE);
+  g_free (filename);
+
+  return path;
+
+}
+
+
+
+gboolean
+launcher_plugin_item_is_editable (LauncherPlugin *plugin,
+                                  GarconMenuItem *item,
+                                  gboolean       *can_delete)
+{
+  GFile     *item_file;
+  gboolean   editable = FALSE;
+  GFileInfo *file_info;
+
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (GARCON_IS_MENU_ITEM (item), FALSE);
+
+  item_file = garcon_menu_item_get_file (item);
+  if (!g_file_has_prefix (item_file, plugin->config_directory))
+    goto out;
+
+  file_info = g_file_query_info (item_file,
+                                 G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE ","
+                                 G_FILE_ATTRIBUTE_ACCESS_CAN_DELETE,
+                                 G_FILE_QUERY_INFO_NONE, NULL, NULL);
+  if (G_LIKELY (file_info != NULL))
+    {
+      editable = g_file_info_get_attribute_boolean (file_info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+
+      if (editable && can_delete != NULL)
+        *can_delete = g_file_info_get_attribute_boolean (file_info, G_FILE_ATTRIBUTE_ACCESS_CAN_DELETE);
+
+      g_object_unref (G_OBJECT (file_info));
+    }
+
+out:
+  g_object_unref (G_OBJECT (item_file));
+
+  return editable;
 }
