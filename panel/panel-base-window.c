@@ -115,38 +115,44 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_ENTER_OPACITY,
-                                   g_param_spec_uint ("enter-opacity", NULL, NULL,
+                                   g_param_spec_uint ("enter-opacity",
+                                                      NULL, NULL,
                                                       0, 100, 100,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_LEAVE_OPACITY,
-                                   g_param_spec_uint ("leave-opacity", NULL, NULL,
+                                   g_param_spec_uint ("leave-opacity",
+                                                      NULL, NULL,
                                                       0, 100, 100,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_BACKGROUND_ALPHA,
-                                   g_param_spec_uint ("background-alpha", NULL, NULL,
+                                   g_param_spec_uint ("background-alpha",
+                                                      NULL, NULL,
                                                       0, 100, 100,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_BORDERS,
-                                   g_param_spec_uint ("borders", NULL, NULL,
+                                   g_param_spec_uint ("borders",
+                                                      NULL, NULL,
                                                       0, G_MAXUINT,
                                                       PANEL_BORDER_NONE,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ACTIVE,
-                                   g_param_spec_boolean ("active", NULL, NULL,
+                                   g_param_spec_boolean ("active",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_COMPOSITED,
-                                   g_param_spec_boolean ("composited", NULL, NULL,
+                                   g_param_spec_boolean ("composited",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READABLE));
 }
@@ -156,10 +162,7 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 static void
 panel_base_window_init (PanelBaseWindow *window)
 {
-  /* set private pointer */
   window->priv = PANEL_BASE_WINDOW_GET_PRIVATE (window);
-
-  /* init */
   window->is_composited = FALSE;
   window->background_alpha = 1.00;
 
@@ -168,7 +171,7 @@ panel_base_window_init (PanelBaseWindow *window)
   window->priv->borders = PANEL_BORDER_MASK;
   window->priv->active_timeout_id = 0;
 
-  /* set compositing */
+  /* set colormap */
   panel_base_window_composited_changed (GTK_WIDGET (window));
 }
 
@@ -263,12 +266,14 @@ panel_base_window_set_property (GObject      *object,
       case PROP_ACTIVE:
         if (g_value_get_boolean (value))
           {
-            /* start new timeout if not already running */
             if (priv->active_timeout_id == 0)
-              priv->active_timeout_id = g_timeout_add_seconds_full (
-                  G_PRIORITY_DEFAULT_IDLE, 1,
-                  panel_base_window_active_timeout, object,
-                  panel_base_window_active_timeout_destroyed);
+              {
+                /* start timeout for the marching ants selection */
+                priv->active_timeout_id = g_timeout_add_seconds_full (
+                    G_PRIORITY_DEFAULT_IDLE, 1,
+                    panel_base_window_active_timeout, object,
+                    panel_base_window_active_timeout_destroyed);
+              }
           }
         else if (priv->active_timeout_id != 0)
           {
@@ -276,7 +281,7 @@ panel_base_window_set_property (GObject      *object,
             g_source_remove (priv->active_timeout_id);
           }
 
-        /* queue a draw */
+        /* queue a draw for first second */
         gtk_widget_queue_resize (GTK_WIDGET (object));
         break;
 
@@ -293,7 +298,7 @@ panel_base_window_finalize (GObject *object)
 {
   PanelBaseWindowPrivate *priv = PANEL_BASE_WINDOW (object)->priv;
 
-  /* stop running active timeout */
+  /* stop running marching ants timeout */
   if (priv->active_timeout_id != 0)
     g_source_remove (priv->active_timeout_id);
 
@@ -317,7 +322,6 @@ panel_base_window_expose_event (GtkWidget      *widget,
   GTimeVal                timeval;
   gboolean                result;
 
-  /* let gtk do it's thing */
   result = (*GTK_WIDGET_CLASS (panel_base_window_parent_class)->expose_event) (widget, event);
 
   if (!GTK_WIDGET_DRAWABLE (widget))
@@ -353,6 +357,7 @@ panel_base_window_expose_event (GtkWidget      *widget,
       cairo_clip (cr);
     }
 
+  /* draw marching ants selection if the timeout is running */
   if (G_UNLIKELY (priv->active_timeout_id != 0))
     {
       /* red color, no alpha */
@@ -369,58 +374,49 @@ panel_base_window_expose_event (GtkWidget      *widget,
     }
   else
     {
-      /* safe some time if the bottom and right borders are not drawn */
       if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_BOTTOM | PANEL_BORDER_RIGHT))
         {
-          /* set dark color */
+          /* use dark color for buttom and right line */
           color = &(widget->style->dark[GTK_STATE_NORMAL]);
           panel_util_set_source_rgba (cr, color, alpha);
 
-          /* bottom line */
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_BOTTOM))
             {
               cairo_move_to (cr, 0.00, height - 1.00);
               cairo_rel_line_to (cr, width, 0.00);
             }
 
-          /* right line */
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_RIGHT))
             {
               cairo_move_to (cr, width - 1.00, 0.00);
               cairo_rel_line_to (cr, 0.00, height);
             }
 
-          /* stroke the dark lines */
           cairo_stroke (cr);
         }
 
-      /* safe some time if the top and left borders are not drawn */
       if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP | PANEL_BORDER_LEFT))
         {
-          /* set light color */
+          /* use light color for top and left line */
           color = &(widget->style->light[GTK_STATE_NORMAL]);
           panel_util_set_source_rgba (cr, color, alpha);
 
-          /* left line */
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_LEFT))
             {
               cairo_move_to (cr, 0.00, 0.00);
               cairo_rel_line_to (cr, 0.00, height);
             }
 
-          /* top line */
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP))
             {
               cairo_move_to (cr, 0.00, 0.00);
               cairo_rel_line_to (cr, width, 0.00);
             }
 
-          /* stroke the light lines */
           cairo_stroke (cr);
         }
     }
 
-  /* destroy cairo context */
   cairo_destroy (cr);
 
   return result;
@@ -432,13 +428,14 @@ static gboolean
 panel_base_window_enter_notify_event (GtkWidget        *widget,
                                       GdkEventCrossing *event)
 {
-  PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
+  PanelBaseWindowPrivate *priv = PANEL_BASE_WINDOW (widget)->priv;
 
-  /* set the opacity (when they differ) */
+  /* switch to enter opacity when compositing is enabled
+   * and the two values are different */
   if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->is_composited
-      && window->priv->leave_opacity != window->priv->enter_opacity)
-    gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->enter_opacity);
+      && PANEL_BASE_WINDOW (widget)->is_composited
+      && priv->leave_opacity != priv->enter_opacity)
+    gtk_window_set_opacity (GTK_WINDOW (widget), priv->enter_opacity);
 
   return FALSE;
 }
@@ -449,13 +446,14 @@ static gboolean
 panel_base_window_leave_notify_event (GtkWidget        *widget,
                                       GdkEventCrossing *event)
 {
-  PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
+  PanelBaseWindowPrivate *priv = PANEL_BASE_WINDOW (widget)->priv;
 
-  /* set the opacity (when they differ) */
+  /* switch to leave opacity when compositing is enabled
+   * and the two values are different */
   if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->is_composited
-      && window->priv->leave_opacity != window->priv->enter_opacity)
-    gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->leave_opacity);
+      && PANEL_BASE_WINDOW (widget)->is_composited
+      && priv->leave_opacity != priv->enter_opacity)
+    gtk_window_set_opacity (GTK_WINDOW (widget), priv->leave_opacity);
 
   return FALSE;
 }
@@ -522,7 +520,7 @@ panel_base_window_composited_changed (GtkWidget *widget)
 static gboolean
 panel_base_window_active_timeout (gpointer user_data)
 {
-  /* queue a redraw */
+  /* redraw to update marching ants */
   gtk_widget_queue_draw (GTK_WIDGET (user_data));
 
   return TRUE;
@@ -545,6 +543,7 @@ panel_base_window_set_plugin_background_alpha (GtkWidget *widget,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (user_data));
 
+  /* if the plugin is external, send the new alpha value to the wrapper/socket  */
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (widget),
         PANEL_BASE_WINDOW (user_data)->background_alpha);
@@ -564,11 +563,9 @@ panel_base_window_move_resize (PanelBaseWindow *window,
 {
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (window));
 
-  /* resize the window if needed */
   if (width > 0 && height > 0)
     gtk_window_resize (GTK_WINDOW (window), width, height);
 
-  /* move the window to the new position */
   gtk_window_move (GTK_WINDOW (window), x, y);
 }
 
@@ -598,6 +595,7 @@ panel_base_window_get_borders (PanelBaseWindow *window)
 
   panel_return_val_if_fail (PANEL_IS_BASE_WINDOW (window), PANEL_BORDER_NONE);
 
+  /* show all borders for the marching ants */
   if (priv->active_timeout_id != 0)
     return PANEL_BORDER_MASK;
 
