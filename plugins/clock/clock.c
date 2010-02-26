@@ -41,7 +41,6 @@
 static void     xfce_clock_class_init                (XfceClockClass  *klass);
 static void     xfce_clock_init                      (XfceClock       *clock);
 static void     xfce_clock_finalize                  (GObject         *object);
-static void     xfce_clock_save                      (XfcePanelPlugin *plugin);
 static void     xfce_clock_size_changed              (XfcePanelPlugin *plugin,
                                                       gint             size);
 static void     xfce_clock_configure_plugin          (XfcePanelPlugin *plugin);
@@ -72,12 +71,12 @@ xfce_clock_class_init (XfceClockClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = xfce_clock_finalize;
-    
+
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->save = xfce_clock_save;
   plugin_class->size_changed = xfce_clock_size_changed;
   plugin_class->configure_plugin = xfce_clock_configure_plugin;
-  
+
 #if !GTK_CHECK_VERSION (2,12,0)
   /* allocate share tooltip */
   shared_tooltips = gtk_tooltips_new ();
@@ -96,7 +95,7 @@ xfce_clock_init (XfceClock *clock)
   clock->mode = XFCE_CLOCK_MODE_DIGITAL;
   clock->tooltip_format = NULL;
   clock->digital_format = NULL;
-  
+
   /* read the user settings */
   xfce_clock_load (clock);
 
@@ -105,7 +104,7 @@ xfce_clock_init (XfceClock *clock)
   gtk_container_add (GTK_CONTAINER (clock), clock->frame);
   gtk_frame_set_shadow_type (GTK_FRAME (clock->frame), clock->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
   gtk_widget_show (clock->frame);
-  
+
   /* set the clock mode (create clock widget) */
   xfce_clock_widget_update_mode (clock);
 
@@ -117,7 +116,7 @@ xfce_clock_init (XfceClock *clock)
 
   /* start the tooltip timer */
   xfce_clock_tooltip_timer (clock);
-  
+
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (clock));
 }
@@ -128,29 +127,31 @@ static void
 xfce_clock_finalize (GObject *object)
 {
   XfceClock *clock = XFCE_CLOCK (object);
-  
+
   /* stop running timeouts */
   if (G_LIKELY (clock->widget_timer_id != 0))
     g_source_remove (clock->widget_timer_id);
 
   if (G_LIKELY (clock->tooltip_timer_id != 0))
     g_source_remove (clock->tooltip_timer_id);
-  
+
   /* cleanup */
   g_free (clock->tooltip_format);
   g_free (clock->digital_format);
-  
+
   (*G_OBJECT_CLASS (xfce_clock_parent_class)->finalize) (object);
 }
 
 
 
-static void
+void
 xfce_clock_save (XfcePanelPlugin *plugin)
 {
   XfceClock *clock = XFCE_CLOCK (plugin);
   gchar     *filename;
   XfceRc    *rc;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (clock));
 
   /* config filename */
   filename = xfce_panel_plugin_save_location (plugin, TRUE);
@@ -158,7 +159,7 @@ xfce_clock_save (XfcePanelPlugin *plugin)
     {
       /* open rc file */
       rc = xfce_rc_simple_open (filename, FALSE);
-      
+
       /* cleanup */
       g_free (filename);
 
@@ -187,13 +188,13 @@ xfce_clock_save (XfcePanelPlugin *plugin)
 
 
 
-static void     
+static void
 xfce_clock_size_changed (XfcePanelPlugin *plugin,
                          gint             size)
 {
   XfceClock      *clock = XFCE_CLOCK (plugin);
   GtkOrientation  orientation;
-  
+
   /* set the frame border */
   gtk_container_set_border_width (GTK_CONTAINER (clock->frame), size > 26 ? 1 : 0);
 
@@ -228,7 +229,7 @@ xfce_clock_load (XfceClock *clock)
   const gchar *value;
   XfceRc      *rc;
   gboolean     succeed = FALSE;
-  
+
   panel_return_if_fail (XFCE_IS_CLOCK (clock));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (clock));
 
@@ -239,7 +240,7 @@ xfce_clock_load (XfceClock *clock)
     {
       /* open rc file (readonly) */
       rc = xfce_rc_simple_open (filename, TRUE);
-      
+
       /* cleanup */
       g_free (filename);
 
@@ -267,12 +268,12 @@ xfce_clock_load (XfceClock *clock)
 
           /* close the rc file */
           xfce_rc_close (rc);
-          
+
           /* loading succeeded */
           succeed = TRUE;
         }
     }
-    
+
   if (succeed == FALSE)
     {
       /* fallback to defaults */
@@ -425,7 +426,7 @@ xfce_clock_util_strdup_strftime (const gchar *format,
   gchar *converted, *result;
   gsize  length;
   gchar  buffer[BUFFER_SIZE];
-  
+
   /* return null */
   if (G_UNLIKELY (format == NULL))
       return NULL;
@@ -461,7 +462,7 @@ xfce_clock_tooltip_timer_update (gpointer user_data)
   /* stop running this timeout */
   if (clock->tooltip_format == NULL)
     return FALSE;
-  
+
   /* get the local time */
   xfce_clock_util_get_localtime (&tm);
 
@@ -471,10 +472,10 @@ xfce_clock_tooltip_timer_update (gpointer user_data)
 #if GTK_CHECK_VERSION (2,12,0)
   /* set the tooltip */
   gtk_widget_set_tooltip_text (GTK_WIDGET (clock), string);
-#else  
+#else
   /* set the tooltip */
   if (G_LIKELY (shared_tooltips))
-    gtk_tooltips_set_tip (shared_tooltips, GTK_WIDGET (clock), string, NULL); 
+    gtk_tooltips_set_tip (shared_tooltips, GTK_WIDGET (clock), string, NULL);
 #endif
 
   /* cleanup */
@@ -506,7 +507,7 @@ void
 xfce_clock_tooltip_timer (XfceClock *clock)
 {
   guint interval;
-  
+
   panel_return_if_fail (XFCE_IS_CLOCK (clock));
 
   /* stop a running timeout */
@@ -515,7 +516,7 @@ xfce_clock_tooltip_timer (XfceClock *clock)
       g_source_remove (clock->tooltip_timer_id);
       clock->tooltip_timer_id = 0;
     }
-    
+
   /* start a new timeout if there is a format string */
   if (clock->tooltip_format != NULL)
     {
@@ -537,7 +538,7 @@ xfce_clock_tooltip_timer (XfceClock *clock)
 #if GTK_CHECK_VERSION (2,12,0)
       /* unset the tooltip */
       gtk_widget_set_tooltip_text (GTK_WIDGET (clock), NULL);
-#else  
+#else
       /* unset the tooltip */
       if (G_LIKELY (shared_tooltips))
         gtk_tooltips_set_tip (shared_tooltips, GTK_WIDGET (clock), NULL, NULL);
@@ -552,8 +553,8 @@ xfce_clock_widget_timer_sync (gpointer user_data)
 {
   XfceClock *clock = XFCE_CLOCK (user_data);
 
-  if (G_LIKELY (clock->widget 
-                && clock->update_func != NULL 
+  if (G_LIKELY (clock->widget
+                && clock->update_func != NULL
                 && clock->widget_interval > 0))
     {
       /* start the clock update timeout */
@@ -580,7 +581,7 @@ xfce_clock_widget_timer (XfceClock *clock)
   guint interval;
 
   panel_return_if_fail (XFCE_IS_CLOCK (clock));
-  
+
   /* stop a running timeout */
   if (clock->widget_timer_id != 0)
     {
@@ -595,7 +596,7 @@ xfce_clock_widget_timer (XfceClock *clock)
 
       /* start the sync timeout (use precision timer) */
       clock->widget_timer_id = g_timeout_add (interval, xfce_clock_widget_timer_sync, clock);
-      
+
       /* manual update if reasonable */
       if (interval >= CLOCK_INTERVAL_SECOND)
         (*clock->update_func) (GTK_WIDGET (clock->widget));
@@ -609,7 +610,7 @@ xfce_clock_widget_update_properties (XfceClock *clock)
 {
   panel_return_if_fail (XFCE_IS_CLOCK (clock));
   panel_return_if_fail (clock->widget != NULL);
-  
+
   /* leave when there is no widget */
   if (clock->widget == NULL)
     return;
@@ -668,7 +669,7 @@ void
 xfce_clock_widget_update_mode (XfceClock *clock)
 {
   GtkWidget *widget = NULL;
-  
+
   panel_return_if_fail (XFCE_IS_CLOCK (clock));
 
   /* stop runing timeout */
@@ -733,7 +734,7 @@ xfce_panel_plugin_register_types (XfcePanelModule *panel_module)
   xfce_clock_binary_register_type (panel_module);
   xfce_clock_digital_register_type (panel_module);
   xfce_clock_lcd_register_type (panel_module);
-  
+
   g_message ("Clock types registered");
 }
 

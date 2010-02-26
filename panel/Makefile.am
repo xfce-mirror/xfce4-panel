@@ -16,15 +16,17 @@ bin_PROGRAMS = 									\
 	xfce4-panel
 	
 xfce4_panel_built_sources =							\
-	panel-dbus-infos.h
+	panel-dbus-service-infos.h
 
 xfce4_panel_SOURCES =								\
 	$(xfce4_panel_built_sources)						\
 	main.c									\
 	panel-application.c							\
 	panel-application.h							\
-	panel-dbus.c								\
-	panel-dbus.h								\
+	panel-dbus-client.c							\
+	panel-dbus-client.h							\
+	panel-dbus-service.c							\
+	panel-dbus-service.h							\
 	panel-dialogs.c								\
 	panel-dialogs.h								\
 	panel-glue.c								\
@@ -80,11 +82,11 @@ DISTCLEANFILES =								\
 BUILT_SOURCES =									\
 	$(xfce4_panel_built_sources)
 	
-panel-dbus-infos.h: $(srcdir)/panel-dbus-infos.xml Makefile
-	dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $(srcdir)/panel-dbus-infos.xml > panel-dbus-infos.h
+panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
+	dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $(srcdir)/panel-dbus-service-infos.xml > panel-dbus-service-infos.h
 endif
 
 EXTRA_DIST =									\
-	panel-dbus-infos.h
+	panel-dbus-service-infos.xml
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

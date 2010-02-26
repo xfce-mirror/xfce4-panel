@@ -108,6 +108,7 @@ XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.5.0])
 XDT_CHECK_PACKAGE([EXO], [exo-0.3], [0.3.1.11])
 XDT_CHECK_PACKAGE([DBUS], [dbus-glib-1], [0.34])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
+XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.12])
 
 dnl ***********************************
 dnl *** Check for optional packages ***
@@ -122,11 +123,13 @@ dnl *** Check for gtk-doc ***
 dnl *************************
 GTK_DOC_CHECK([1.0])
 
-dnl *************************************
-dnl *** Disable deprecated components ***
-dnl *************************************
-AC_DEFINE([XFCE_DISABLE_DEPRECATED], [1], [Define to 1 to disable deprecated Xfce components])
-AC_DEFINE([G_DISABLE_DEPRECATED], [1], [Define to 1 to disable deprecated Glib components])
+dnl *********************************************************
+dnl *** Disable deprecated components and single includes ***
+dnl *********************************************************
+PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DXFCE_DISABLE_DEPRECATED -DPANGO_DISABLE_SINGLE_INCLUDES"
+PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DG_DISABLE_DEPRECATED -DG_DISABLE_SINGLE_INCLUDES"
+PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DGTK_DISABLE_DEPRECATED -DGTK_DISABLE_SINGLE_INCLUDES"
+PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES"
 
 dnl ***********************************
 dnl *** Check for debugging support ***
@@ -236,5 +239,6 @@ plugins/Makefile
 plugins/clock/Makefile
 plugins/launcher/Makefile
 plugins/systray/Makefile
+plugins/tasklist/Makefile
 po/Makefile.in
 ])

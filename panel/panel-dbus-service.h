@@ -15,22 +15,16 @@
  * Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __PANEL_DBUS_H__
-#define __PANEL_DBUS_H__
+#ifndef __PANEL_DBUS_SERVICE_H__
+#define __PANEL_DBUS_SERVICE_H__
 
-#include <gtk/gtk.h>
+#include <glib.h>
 
 typedef struct _PanelDBusServiceClass PanelDBusServiceClass;
 typedef struct _PanelDBusService      PanelDBusService;
 
-enum
-{
-  SIGNAL_CUSTOMIZE,
-  SIGNAL_ADD,
-  SIGNAL_SAVE,
-  SIGNAL_RESTART,
-  SIGNAL_QUIT
-};
+#define PANEL_DBUS_SERVICE_PATH      "/org/xfce/Panel"
+#define PANEL_DBUS_SERVICE_INTERFACE "org.xfce.Panel"
 
 #define PANEL_TYPE_DBUS_SERVICE            (panel_dbus_service_get_type ())
 #define PANEL_DBUS_SERVICE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_DBUS_SERVICE, PanelDBusService))
@@ -43,10 +37,7 @@ GType     panel_dbus_service_get_type     (void) G_GNUC_CONST;
 
 GObject  *panel_dbus_service_new          (void);
 
-gboolean  panel_dbus_client_send_signal   (guint32   signal_id,
-                                           GError  **error);
-
 G_END_DECLS
 
-#endif /* !__PANEL_DBUS_H__ */
+#endif /* !__PANEL_DBUS_SERVICE_H__ */
 

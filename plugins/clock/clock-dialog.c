@@ -61,7 +61,7 @@ static void
 xfce_clock_dialog_reload_settings (XfceClock *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     if (G_LIKELY (clock->widget))
     {
         /* save the settings */
@@ -82,7 +82,7 @@ xfce_clock_dialog_mode_changed (GtkComboBox *combo,
                                 XfceClock   *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* set the new mode */
     clock->mode = gtk_combo_box_get_active (combo);
 
@@ -110,7 +110,7 @@ xfce_clock_dialog_show_frame_toggled (GtkToggleButton *button,
                                       XfceClock       *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* set frame mode */
     clock->show_frame = gtk_toggle_button_get_active (button);
 
@@ -126,7 +126,7 @@ xfce_clock_dialog_tooltip_format_changed (GtkComboBox *combo,
 {
     gint       index;
     GtkWidget *entry;
-    
+
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
 
     /* stop running timeout */
@@ -143,7 +143,7 @@ xfce_clock_dialog_tooltip_format_changed (GtkComboBox *combo,
     entry = g_object_get_data (G_OBJECT (combo), I_("entry"));
 
     /* set one of the default formats */
-    if (index < G_N_ELEMENTS (tooltip_formats))
+    if (index < (gint) G_N_ELEMENTS (tooltip_formats))
     {
         /* hide the entry */
         gtk_widget_hide (entry);
@@ -174,7 +174,7 @@ xfce_clock_dialog_tooltip_entry_changed (GtkEntry  *entry,
                                          XfceClock *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* cleanup old format */
     g_free (clock->tooltip_format);
 
@@ -192,7 +192,7 @@ xfce_clock_dialog_show_seconds_toggled (GtkToggleButton *button,
                                         XfceClock       *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* whether we show seconds */
     clock->show_seconds = gtk_toggle_button_get_active (button);
 
@@ -207,7 +207,7 @@ xfce_clock_dialog_show_military_toggled (GtkToggleButton *button,
                                          XfceClock       *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* whether we show a 24h clock */
     clock->show_military = gtk_toggle_button_get_active (button);
 
@@ -222,7 +222,7 @@ xfce_clock_dialog_show_meridiem_toggled (GtkToggleButton *button,
                                          XfceClock       *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* whether we show am/pm */
     clock->show_meridiem = gtk_toggle_button_get_active (button);
 
@@ -237,7 +237,7 @@ xfce_clock_dialog_flash_separators_toggled (GtkToggleButton *button,
                                             XfceClock       *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* whether flash the separators */
     clock->flash_separators = gtk_toggle_button_get_active (button);
 
@@ -252,7 +252,7 @@ xfce_clock_dialog_true_binary_toggled (GtkToggleButton *button,
                                        XfceClock       *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* whether we this is a true binary clock */
     clock->true_binary = gtk_toggle_button_get_active (button);
 
@@ -270,7 +270,7 @@ xfce_clock_dialog_digital_format_changed (GtkComboBox *combo,
     GtkWidget *entry;
 
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* get index of selected item */
     index = gtk_combo_box_get_active (combo);
 
@@ -278,7 +278,7 @@ xfce_clock_dialog_digital_format_changed (GtkComboBox *combo,
     entry = g_object_get_data (G_OBJECT (combo), I_("entry"));
 
     /* set one of the default formats */
-    if (index < G_N_ELEMENTS (digital_formats))
+    if (index < (gint) G_N_ELEMENTS (digital_formats))
     {
         /* hide the entry */
         gtk_widget_hide (entry);
@@ -309,7 +309,7 @@ xfce_clock_dialog_digital_entry_changed (GtkEntry  *entry,
                                          XfceClock *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* cleanup old format */
     g_free (clock->digital_format);
 
@@ -399,7 +399,7 @@ xfce_clock_dialog_response (GtkWidget *dialog,
                             XfceClock *clock)
 {
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
-    
+
     /* destroy the dialog */
     gtk_widget_destroy (dialog);
 
@@ -408,6 +408,9 @@ xfce_clock_dialog_response (GtkWidget *dialog,
 
     /* unblock the plugin menu */
     xfce_panel_plugin_unblock_menu (XFCE_PANEL_PLUGIN (clock));
+
+    /* save the settings */
+    xfce_clock_save (XFCE_PANEL_PLUGIN (clock));
 }
 
 
@@ -417,7 +420,7 @@ xfce_clock_dialog_options (XfceClock *clock)
 {
     GtkWidget *button, *bin, *vbox, *combo, *entry;
     gboolean   has_active;
-    
+
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
 
     /* get the frame bin */
@@ -477,7 +480,7 @@ xfce_clock_dialog_options (XfceClock *clock)
         g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (xfce_clock_dialog_digital_format_changed), clock);
         gtk_widget_show (combo);
 
-        entry = gtk_entry_new_with_max_length (BUFFER_SIZE-1);
+        entry = gtk_entry_new  ();
         gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
         g_object_set_data (G_OBJECT (combo), I_("entry"), entry);
         if (!has_active)
@@ -498,7 +501,7 @@ xfce_clock_dialog_show (XfceClock *clock)
     GtkWidget *frame, *bin, *vbox, *combo;
     GtkWidget *button, *entry;
     gboolean   has_active;
-    
+
     panel_return_if_fail (XFCE_IS_CLOCK (clock));
 
     /* block the right-click menu */
@@ -514,7 +517,7 @@ xfce_clock_dialog_show (XfceClock *clock)
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
     g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (xfce_clock_dialog_response), clock);
-    
+
     /* let the plugin take the dialg window */
     xfce_panel_plugin_take_window (XFCE_PANEL_PLUGIN (clock), GTK_WINDOW (dialog));
 
@@ -532,7 +535,7 @@ xfce_clock_dialog_show (XfceClock *clock)
     vbox = gtk_vbox_new (FALSE, 8);
     gtk_container_add (GTK_CONTAINER (bin), vbox);
     gtk_widget_show (vbox);
-    
+
 
     combo = gtk_combo_box_new_text ();
     gtk_box_pack_start (GTK_BOX (vbox), combo, TRUE, TRUE, 0);
@@ -566,7 +569,7 @@ xfce_clock_dialog_show (XfceClock *clock)
     g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (xfce_clock_dialog_tooltip_format_changed), clock);
     gtk_widget_show (combo);
 
-    entry = gtk_entry_new_with_max_length (BUFFER_SIZE-1);
+    entry = gtk_entry_new ();
     gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
     g_object_set_data (G_OBJECT (combo), I_("entry"), entry);
     if (!has_active)

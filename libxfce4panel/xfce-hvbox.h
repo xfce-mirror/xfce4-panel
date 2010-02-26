@@ -27,7 +27,7 @@
 #ifndef __XFCE_HVBOX_H__
 #define __XFCE_HVBOX_H__
 
-#include <gtk/gtkbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

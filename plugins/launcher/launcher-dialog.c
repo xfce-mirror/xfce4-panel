@@ -840,7 +840,7 @@ launcher_dialog_tree_update_row (LauncherDialog *ld,
             case COLUMN_NAME:
                 /* build name */
                 name = ld->entry->name ? ld->entry->name : _("Unnamed");
-            
+
                 /* set new name */
                 gtk_list_store_set (ld->store, &iter,
                                     COLUMN_NAME, name,
@@ -914,8 +914,7 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
     GtkTreePath      *path;
     GtkTreeIter       iter_a;
     GtkTreeIter       iter_b;
-    guint             position;
-    gint              list_length;
+    gint              position, list_length;
     GList            *li;
     GdkPixbuf        *icon = NULL;
     LauncherEntry    *entry;
@@ -1336,7 +1335,7 @@ launcher_dialog_add_tree (LauncherDialog *ld)
         {
             /* load icon */
             icon = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->treeview), entry->icon, LAUNCHER_TREE_ICON_SIZE);
-            
+
             /* build name */
             name = entry->name ? entry->name : _("Unnamed");
 

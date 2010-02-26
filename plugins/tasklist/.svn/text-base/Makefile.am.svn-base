@@ -22,7 +22,7 @@ libtasklist_la_SOURCES = 						\
 libtasklist_la_CFLAGS =							\
 	$(GTK_CFLAGS)							\
 	$(LIBXFCE4UTIL_CFLAGS)						\
-	$(LIBXFCE4UI_CFLAGS)						\
+	$(LIBXFCEGUI4_CFLAGS)						\
 	$(LIBWNCK_CFLAGS)						\
 	$(PLATFORM_CFLAGS)
 
@@ -40,7 +40,7 @@ libtasklist_la_LIBADD =							\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la			\
 	$(GTK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)						\
-	$(LIBXFCE4UI_LIBS)						\
+	$(LIBXFCEGUI4_LIBS)						\
 	$(LIBWNCK_LIBS)
 
 libtasklist_la_DEPENDENCIES =						\

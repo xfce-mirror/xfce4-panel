@@ -23,8 +23,7 @@
 #ifndef __XFCE_ARROW_BUTTON_H__
 #define __XFCE_ARROW_BUTTON_H__
 
-#include <gtk/gtkenums.h>
-#include <gtk/gtktogglebutton.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

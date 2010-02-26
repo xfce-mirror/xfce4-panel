@@ -73,22 +73,22 @@ struct _XfceClockClass
 struct _XfceClock
 {
   XfcePanelPlugin __parent__;
-  
+
   GtkWidget     *frame;
   GtkWidget     *widget;
-  
+
   /* active clock */
   XfceClockMode  mode;
-  
+
   /* widget timer update */
   GSourceFunc    update_func;
   guint          widget_interval;
   guint          widget_timer_id;
-  
+
   /* tooltip timer update */
   guint          tooltip_interval;
   guint          tooltip_timer_id;
-  
+
   /* settings */
   gchar         *tooltip_format;
   gchar         *digital_format;
@@ -105,6 +105,8 @@ struct _XfceClock
 GType  xfce_clock_get_type                 (void) G_GNUC_CONST G_GNUC_INTERNAL;
 
 void   xfce_clock_register_type            (XfcePanelModule *panel_module) G_GNUC_INTERNAL;
+
+void   xfce_clock_save                     (XfcePanelPlugin *plugin);
 
 void   xfce_clock_util_get_localtime       (struct tm       *tm) G_GNUC_INTERNAL;
 

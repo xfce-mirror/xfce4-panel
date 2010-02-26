@@ -25,7 +25,7 @@
 #ifndef __XFCE_PANEL_CONVENIENCE_H__
 #define __XFCE_PANEL_CONVENIENCE_H__
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

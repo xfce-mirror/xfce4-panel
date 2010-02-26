@@ -151,7 +151,7 @@ xfce_arrow_button_set_property (GObject      *object,
       case PROP_ARROW_TYPE:
         xfce_arrow_button_set_arrow_type (button, g_value_get_enum (value));
         break;
-          
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -173,7 +173,7 @@ xfce_arrow_button_get_property (GObject    *object,
       case PROP_ARROW_TYPE:
         g_value_set_enum (value, xfce_arrow_button_get_arrow_type (button));
         break;
-          
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -216,7 +216,7 @@ xfce_arrow_button_size_request (GtkWidget      *widget,
                                 GtkRequisition *requisition)
 {
   gint size;
-  
+
   /* calculate the requested arrow size */
   size = ARROW_WIDTH + ARROW_PADDING + 2 * MAX (widget->style->xthickness, widget->style->ythickness);
 
@@ -237,7 +237,7 @@ xfce_arrow_button_add (GtkContainer *container,
 static GType
 xfce_arrow_button_child_type (GtkContainer *container)
 {
-  return GTK_TYPE_NONE;
+  return GTK_TYPE_WIDGET;
 }
 
 

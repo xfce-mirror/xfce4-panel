@@ -31,7 +31,9 @@
 
 #include <panel/panel-private.h>
 #include <panel/panel-application.h>
-#include <panel/panel-dbus.h>
+#include <panel/panel-dbus-service.h>
+#include <panel/panel-dbus-client.h>
+
 
 
 static gboolean  opt_customize = FALSE;
@@ -59,32 +61,6 @@ static const GOptionEntry option_entries[] =
 
 
 
-static gint
-send_signal (guint signal_id)
-{
-  GError *error = NULL;
-
-  if (panel_dbus_client_send_signal (signal_id, &error))
-    {
-      /* stop any running startup notification */
-      gdk_notify_startup_complete ();
-
-      return EXIT_SUCCESS;
-    }
-  else
-    {
-      /* print warning */
-      g_critical ("Failed to send D-BUS message: %s", error ? error->message : "");
-
-      /* cleanup */
-      g_error_free (error);
-
-      return EXIT_FAILURE;
-    }
-}
-
-
-
 gint
 main (gint argc, gchar **argv)
 {
@@ -92,6 +68,7 @@ main (gint argc, gchar **argv)
   GError           *error = NULL;
   GObject          *dbus_service;
   extern gboolean   dbus_quit_with_restart;
+  gboolean          result;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -138,15 +115,33 @@ main (gint argc, gchar **argv)
       return EXIT_SUCCESS;
     }
   else if (opt_customize)
-    return send_signal (SIGNAL_CUSTOMIZE);
+    {
+      /* send a signal to the running instance to show the preferences dialog */
+      result = panel_dbus_client_display_preferences_dialog (NULL, &error);
+
+      goto dbus_return;
+    }
   else if (opt_add)
-    return send_signal (SIGNAL_ADD);
+    {
+      /* send a signal to the running instance to show the add items dialog */
+      result = panel_dbus_client_display_items_dialog (NULL, &error);
+
+      goto dbus_return;
+    }
   else if (opt_save)
-    return send_signal (SIGNAL_SAVE);
-  else if (G_UNLIKELY (opt_restart))
-    return send_signal (SIGNAL_RESTART);
-  else if (G_UNLIKELY (opt_quit))
-    return send_signal (SIGNAL_QUIT);
+    {
+      /* send a save signal to the running instance */
+      result = panel_dbus_client_save (&error);
+
+      goto dbus_return;
+    }
+  else if (opt_restart || opt_quit)
+    {
+      /* send a terminate signal to the running instance */
+      result = panel_dbus_client_terminate (opt_restart, &error);
+
+      goto dbus_return;
+    }
 
   /* create a new application */
   application = panel_application_get ();
@@ -162,7 +157,7 @@ main (gint argc, gchar **argv)
 
   /* destroy all the opened dialogs */
   panel_application_destroy_dialogs (application);
-  
+
   /* save the configuration */
   panel_application_save (application);
 
@@ -174,10 +169,26 @@ main (gint argc, gchar **argv)
     {
       /* message */
       g_message (_("Restarting..."));
-      
+
       /* spawn ourselfs again */
       g_spawn_command_line_async (argv[0], NULL);
     }
 
   return EXIT_SUCCESS;
+
+  dbus_return:
+
+  /* stop any running startup notification */
+  gdk_notify_startup_complete ();
+
+  if (G_UNLIKELY (error != NULL))
+    {
+      /* print warning */
+      g_critical ("Failed to send D-BUS message: %s", error ? error->message : "No error message");
+
+      /* cleanup */
+      g_error_free (error);
+    }
+
+  return result ? EXIT_SUCCESS : EXIT_FAILURE;
 }

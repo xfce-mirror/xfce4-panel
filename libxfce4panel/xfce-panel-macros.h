@@ -65,12 +65,12 @@ G_BEGIN_DECLS
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL             XFCE_PANEL_PLUGIN_REGISTER
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK  XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
 
-/* parameter flags */ 
+/* parameter flags */
 #define PANEL_PARAM_READABLE  G_PARAM_READABLE | PANEL_PARAM_STATIC_STRINGS
 #define PANEL_PARAM_READWRITE G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS
 #define PANEL_PARAM_WRITABLE  G_PARAM_WRITABLE | PANEL_PARAM_STATIC_STRINGS
 
-/* slice allocator */
+/* slice allocator (deprecated) */
 #define panel_slice_alloc(block_size)             (g_slice_alloc ((block_size)))
 #define panel_slice_alloc0(block_size)            (g_slice_alloc0 ((block_size)))
 #define panel_slice_free1(block_size, mem_block)  G_STMT_START{ g_slice_free1 ((block_size), (mem_block)); }G_STMT_END
@@ -78,7 +78,7 @@ G_BEGIN_DECLS
 #define panel_slice_new0(type)                    (g_slice_new0 (type))
 #define panel_slice_free(type, ptr)               G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
 
-/* debug macros */
+/* debug macros (deprecated) */
 #define _panel_assert(expr)                  panel_assert (expr)
 #define _panel_assert_not_reached()          panel_assert_not_reached ()
 #define _panel_return_if_fail(expr)          panel_return_if_fail (expr)

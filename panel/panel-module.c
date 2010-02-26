@@ -39,7 +39,7 @@ static void      panel_module_dispose        (GObject          *object);
 static void      panel_module_finalize       (GObject          *object);
 static gboolean  panel_module_load           (GTypeModule      *type_module);
 static void      panel_module_unload         (GTypeModule      *type_module);
-static void      panel_module_item_finalized (gpointer          user_data, 
+static void      panel_module_item_finalized (gpointer          user_data,
                                               GObject          *item);
 
 
@@ -119,12 +119,12 @@ panel_module_init (PanelModule *module)
 
 
 
-static void      
+static void
 panel_module_dispose (GObject *object)
 {
-  /* Do nothing to avoid problems with dispose in GTypeModule when 
+  /* Do nothing to avoid problems with dispose in GTypeModule when
    * types are registered.
-   * 
+   *
    * For us this is not a problem since the modules are released when
    * everything is destroyed. So we really want that last unref before
    * closing the application. */
@@ -176,11 +176,11 @@ panel_module_load (GTypeModule *type_module)
 
       return FALSE;
     }
-  
+
   /* run the register function if available */
   if (g_module_symbol (module->library, "xfce_panel_plugin_register_types", (gpointer) &register_func))
     (*register_func) (type_module);
-    
+
   return TRUE;
 }
 
@@ -252,12 +252,12 @@ panel_module_new_from_desktop_file (const gchar *filename,
       /* read library location from the desktop file */
       module_name = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL);
       directory = xfce_rc_read_entry (rc, "X-XFCE-Module-Path", NULL);
-      
+
       if (G_LIKELY (module_name != NULL && directory != NULL))
         {
           /* build the module path */
           path = g_module_build_path (directory, module_name);
-          
+
           /* test if the module exists */
           if (G_LIKELY (g_file_test (path, G_FILE_TEST_EXISTS)))
             {
@@ -294,7 +294,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
 
           /* whether the plugin is unique */
           module->is_unique = xfce_rc_read_bool_entry (rc, "X-XFCE-Unique", FALSE);
-          
+
           /* whether to run the plugin external */
           module->run_in_wrapper = xfce_rc_read_bool_entry (rc, "X-XFCE-External", TRUE);
         }
@@ -334,11 +334,11 @@ panel_module_create_plugin (PanelModule *module,
   panel_return_val_if_fail (name != NULL, NULL);
   panel_return_val_if_fail (id != NULL, NULL);
   panel_return_val_if_fail (exo_str_is_equal (name, G_TYPE_MODULE (module)->name), NULL);
-  
+
   /* return null if the module is not usable (unique and already used) */
   if (G_UNLIKELY (panel_module_is_usable (module) == FALSE))
     return NULL;
-    
+
   /* whether we're going to start the module external */
   external = !!(use_wrapper == FORCE_EXTERNAL || (use_wrapper == FROM_DESKTOP_FILE && module->run_in_wrapper));
 
@@ -356,9 +356,9 @@ panel_module_create_plugin (PanelModule *module,
         {
           /* debug check */
           panel_return_val_if_fail (module->construct_func != NULL, NULL);
-          
+
           /* create a new panel plugin */
-          plugin = (*module->construct_func) (name, module->name, id, screen);
+          plugin = (*module->construct_func) (name, id, module->name, screen);
         }
       else
         {
@@ -371,10 +371,10 @@ panel_module_create_plugin (PanelModule *module,
     {
       /* increase count */
       module->use_count++;
-      
+
       /* handle module use count and unloading */
       g_object_weak_ref (G_OBJECT (plugin), panel_module_item_finalized, module);
-      
+
       /* emit unique-changed if the plugin is unique */
       if (module->is_unique)
         panel_module_factory_emit_unique_changed (module);
@@ -395,7 +395,7 @@ panel_module_get_internal_name (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
-  
+
   return G_TYPE_MODULE (module)->name;
 }
 
@@ -406,7 +406,7 @@ panel_module_get_library_filename (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
-  
+
   return module->filename;
 }
 
@@ -451,7 +451,7 @@ gboolean
 panel_module_is_valid (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
-  
+
   return g_file_test (module->filename, G_FILE_TEST_EXISTS);
 }
 

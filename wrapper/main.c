@@ -64,7 +64,7 @@ main (gint argc, gchar **argv)
   PluginConstructFunc      construct_func;
   XfcePanelPluginProvider *provider = NULL;
   GtkWidget               *plug;
-  
+
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
@@ -74,31 +74,31 @@ main (gint argc, gchar **argv)
   /* initialize the gthread system */
   if (!g_thread_supported ())
     g_thread_init (NULL);
-    
+
   /* initialize gtk */
   if (!gtk_init_with_args (&argc, &argv, "", (GOptionEntry *) option_entries, GETTEXT_PACKAGE, &error))
     {
       /* print error */
       g_critical ("Failed to initialize GTK+: %s", error ? error->message : "Unable to open display");
-      
+
       /* cleanup */
       if (G_LIKELY (error != NULL))
         g_error_free (error);
-        
+
       /* leave */
       return EXIT_FAILURE;
     }
-  
+
   /* check arguments */
   if (opt_filename == NULL || opt_socket_id == 0 || opt_name == NULL || opt_id == NULL)
     {
       /* print error */
       g_critical ("One of the required arguments for the wrapper is missing");
-      
+
       /* leave */
       return EXIT_FAILURE;
     }
-  
+
   /* try to open the library */
   library = g_module_open (opt_filename, 0);
   if (G_LIKELY (library != NULL))
@@ -107,7 +107,7 @@ main (gint argc, gchar **argv)
       if (g_module_symbol (library, "xfce_panel_plugin_init", (gpointer) &construct_func))
         {
           /* create the panel plugin */
-          provider = (*construct_func) (opt_name, NULL, opt_id, gdk_screen_get_default ());
+          provider = (*construct_func) (opt_name, opt_id, NULL, gdk_screen_get_default ());
         }
       else
         {
@@ -115,24 +115,24 @@ main (gint argc, gchar **argv)
           g_critical ("Plugin '%s' lacks required symbol: %s", opt_display_name, g_module_error ());
         }
     }
-  
+
   if (G_LIKELY (provider != NULL))
     {
       /* create the plug */
       plug = wrapper_plug_new (opt_socket_id, provider);
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
       gtk_widget_show (plug);
-      
+
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
-      
+
       /* enter the mainloop */
       gtk_main ();
 
       /* destroy the plug (and provider) */
       gtk_widget_destroy (plug);
     }
-  
+
   /* close the library */
   if (G_LIKELY (library != NULL))
     g_module_close (library);
