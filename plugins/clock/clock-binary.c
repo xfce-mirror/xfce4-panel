@@ -48,10 +48,13 @@ static void      xfce_clock_binary_get_property  (GObject              *object,
                                                   guint                 prop_id,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
+static void      xfce_clock_binary_finalize      (GObject              *object);
 static void      xfce_clock_binary_size_request  (GtkWidget            *widget,
-                                            GtkRequisition       *requisition);
+                                                  GtkRequisition       *requisition);
 static gboolean  xfce_clock_binary_expose_event  (GtkWidget            *widget,
                                                   GdkEventExpose       *event);
+static gboolean  xfce_clock_binary_update        (gpointer              user_data);
+
 
 
 enum
@@ -70,10 +73,9 @@ struct _XfceClockBinary
 {
   GtkImage  __parent__;
 
-  /* whether we draw seconds */
-  guint     show_seconds : 1;
+  ClockPluginTimeout *timeout;
 
-  /* if this is a true binary clock */
+  guint     show_seconds : 1;
   guint     true_binary : 1;
 };
 
@@ -92,6 +94,7 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = xfce_clock_binary_set_property;
   gobject_class->get_property = xfce_clock_binary_get_property;
+  gobject_class->finalize = xfce_clock_binary_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request = xfce_clock_binary_size_request;
@@ -102,14 +105,14 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
                                    g_param_spec_boolean ("show-seconds", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_BLURB));
+                                                         | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_TRUE_BINARY,
                                    g_param_spec_boolean ("true-binary", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_BLURB));
+                                                         | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -120,6 +123,9 @@ xfce_clock_binary_init (XfceClockBinary *binary)
   /* init */
   binary->show_seconds = FALSE;
   binary->true_binary = FALSE;
+  binary->timeout = clock_plugin_timeout_new (CLOCK_INTERVAL_MINUTE,
+                                              xfce_clock_binary_update,
+                                              binary);
 }
 
 
@@ -146,6 +152,11 @@ xfce_clock_binary_set_property (GObject      *object,
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
     }
+
+  /* reschedule the timeout and resize */
+  clock_plugin_timeout_set_interval (binary->timeout,
+      binary->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE);
+  gtk_widget_queue_resize (GTK_WIDGET (binary));
 }
 
 
@@ -172,6 +183,17 @@ xfce_clock_binary_get_property (GObject    *object,
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
     }
+}
+
+
+
+static void
+xfce_clock_binary_finalize (GObject *object)
+{
+  /* stop the timeout */
+  clock_plugin_timeout_free (XFCE_CLOCK_BINARY (object)->timeout);
+
+  (*G_OBJECT_CLASS (xfce_clock_binary_parent_class)->finalize) (object);
 }
 
 
@@ -336,15 +358,7 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
 
 
 
-GtkWidget *
-xfce_clock_binary_new (void)
-{
-  return g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
-}
-
-
-
-gboolean
+static gboolean
 xfce_clock_binary_update (gpointer user_data)
 {
   GtkWidget *widget = GTK_WIDGET (user_data);
@@ -360,10 +374,8 @@ xfce_clock_binary_update (gpointer user_data)
 
 
 
-guint
-xfce_clock_binary_interval (XfceClockBinary *binary)
+GtkWidget *
+xfce_clock_binary_new (void)
 {
-  panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), CLOCK_INTERVAL_SECOND);
-
-  return binary->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
+  return g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
 }

@@ -36,7 +36,7 @@
 #define RELATIVE_DOTS  (3 * RELATIVE_SPACE)
 
 
-/* prototypes */
+
 static void      xfce_clock_lcd_set_property (GObject           *object,
                                               guint              prop_id,
                                               const GValue      *value,
@@ -45,6 +45,7 @@ static void      xfce_clock_lcd_get_property (GObject           *object,
                                               guint              prop_id,
                                               GValue            *value,
                                               GParamSpec        *pspec);
+static void      xfce_clock_lcd_finalize     (GObject           *object);
 static void      xfce_clock_lcd_size_request (GtkWidget         *widget,
                                               GtkRequisition    *requisition);
 static gboolean  xfce_clock_lcd_expose_event (GtkWidget         *widget,
@@ -59,7 +60,7 @@ static gdouble   xfce_clock_lcd_draw_digit   (cairo_t           *cr,
                                               gdouble            size,
                                               gdouble            offset_x,
                                               gdouble            offset_y);
-
+static gboolean  xfce_clock_lcd_update       (gpointer           user_data);
 
 
 enum
@@ -80,17 +81,12 @@ struct _XfceClockLcd
 {
   GtkImage __parent__;
 
-  /* whether we show seconds */
-  guint    show_seconds : 1;
+  ClockPluginTimeout *timeout;
 
-  /* whether it's a 24h clock */
-  guint    show_military : 1;
-
-  /* whether we display am/pm */
-  guint    show_meridiem : 1;
-
-  /* whether to flash the separators */
-  guint    flash_separators : 1;
+  guint               show_seconds : 1;
+  guint               show_military : 1;
+  guint               show_meridiem : 1;
+  guint               flash_separators : 1;
 };
 
 
@@ -108,6 +104,7 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = xfce_clock_lcd_set_property;
   gobject_class->get_property = xfce_clock_lcd_get_property;
+  gobject_class->finalize = xfce_clock_lcd_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request = xfce_clock_lcd_size_request;
@@ -121,7 +118,7 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                    g_param_spec_boolean ("show-seconds", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_BLURB));
+                                                         | G_PARAM_STATIC_STRINGS));
 
   /**
    * Whether we show a 24h clock
@@ -131,7 +128,7 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                    g_param_spec_boolean ("show-military", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_BLURB));
+                                                         | G_PARAM_STATIC_STRINGS));
 
   /**
    * Whether we show am or pm
@@ -141,7 +138,7 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                    g_param_spec_boolean ("show-meridiem", NULL, NULL,
                                                          TRUE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_BLURB));
+                                                         | G_PARAM_STATIC_STRINGS));
 
   /**
    * Whether to flash the time separators
@@ -151,7 +148,7 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                    g_param_spec_boolean ("flash-separators", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_BLURB));
+                                                         | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -159,11 +156,13 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
 static void
 xfce_clock_lcd_init (XfceClockLcd *lcd)
 {
-  /* init */
   lcd->show_seconds = FALSE;
   lcd->show_meridiem = FALSE;
   lcd->show_military = TRUE;
   lcd->flash_separators = FALSE;
+  lcd->timeout = clock_plugin_timeout_new (CLOCK_INTERVAL_MINUTE,
+                                           xfce_clock_lcd_update,
+                                           lcd);
 }
 
 
@@ -175,6 +174,7 @@ xfce_clock_lcd_set_property (GObject      *object,
                              GParamSpec   *pspec)
 {
   XfceClockLcd *lcd = XFCE_CLOCK_LCD (object);
+  gboolean      show_seconds;
 
   switch (prop_id)
     {
@@ -198,6 +198,12 @@ xfce_clock_lcd_set_property (GObject      *object,
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
     }
+
+  /* reschedule the timeout and resize */
+  show_seconds = lcd->show_seconds || lcd->flash_separators;
+  clock_plugin_timeout_set_interval (lcd->timeout,
+      show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE);
+  gtk_widget_queue_resize (GTK_WIDGET (lcd));
 }
 
 
@@ -232,6 +238,17 @@ xfce_clock_lcd_get_property (GObject    *object,
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
     }
+}
+
+
+
+static void
+xfce_clock_lcd_finalize (GObject *object)
+{
+  /* stop the timeout */
+  clock_plugin_timeout_free (XFCE_CLOCK_LCD (object)->timeout);
+
+  (*G_OBJECT_CLASS (xfce_clock_lcd_parent_class)->finalize) (object);
 }
 
 
@@ -317,8 +334,12 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
       if (!lcd->show_military && ticks > 12)
         ticks -= 12;
 
-      /* queue a resize when the number of hour digits changed */
-      if (G_UNLIKELY ((ticks == 10 || ticks == 0) && tm.tm_min == 0 && tm.tm_sec == 0))
+      /* queue a resize when the number of hour digits changed,
+       * because we might miss the exact second (due to slightly delayed
+       * timeout) we queue a resize the first 3 seconds or anything in
+       * the first minute */
+      if ((ticks == 10 || ticks == 0) && tm.tm_min == 0
+          && (!lcd->show_seconds || tm.tm_sec < 3))
         gtk_widget_queue_resize (widget);
 
       if (ticks >= 10)
@@ -542,15 +563,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
 
 
 
-GtkWidget *
-xfce_clock_lcd_new (void)
-{
-  return g_object_new (XFCE_CLOCK_TYPE_LCD, NULL);
-}
-
-
-
-gboolean
+static gboolean
 xfce_clock_lcd_update (gpointer user_data)
 {
   GtkWidget *widget = GTK_WIDGET (user_data);
@@ -566,13 +579,8 @@ xfce_clock_lcd_update (gpointer user_data)
 
 
 
-guint
-xfce_clock_lcd_interval (XfceClockLcd *lcd)
+GtkWidget *
+xfce_clock_lcd_new (void)
 {
-  panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), CLOCK_INTERVAL_SECOND);
-
-  if (lcd->show_seconds || lcd->flash_separators)
-    return CLOCK_INTERVAL_SECOND;
-  else
-    return CLOCK_INTERVAL_MINUTE;
+  return g_object_new (XFCE_CLOCK_TYPE_LCD, NULL);
 }

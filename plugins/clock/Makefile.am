@@ -35,6 +35,7 @@ libclock_la_CFLAGS = \
 	$(CAIRO_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(PLATFORM_CFLAGS) \
+	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS)
 
 libclock_la_LDFLAGS =	 \
@@ -51,6 +52,7 @@ libclock_la_LIBADD = \
 	$(CAIRO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
+	$(EXO_LIBS) \
 	$(XFCONF_LIBS)
 
 libclock_la_DEPENDENCIES = \

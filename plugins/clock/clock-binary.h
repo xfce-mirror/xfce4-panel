@@ -34,13 +34,9 @@ typedef struct _XfceClockBinary      XfceClockBinary;
 
 GType      xfce_clock_binary_get_type      (void) G_GNUC_CONST;
 
-void       xfce_clock_binary_register_type (GTypeModule     *type_module);
+void       xfce_clock_binary_register_type (GTypeModule *type_module);
 
 GtkWidget *xfce_clock_binary_new           (void) G_GNUC_MALLOC;
-
-gboolean   xfce_clock_binary_update        (gpointer         user_data);
-
-guint      xfce_clock_binary_interval      (XfceClockBinary *binary);
 
 G_END_DECLS
 

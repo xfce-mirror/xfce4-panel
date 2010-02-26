@@ -26,19 +26,13 @@
 
 G_BEGIN_DECLS
 
-#define CLOCK_INTERVAL_SECOND (1000)
-#define CLOCK_INTERVAL_MINUTE (60 * 1000)
-#define CLOCK_INTERVAL_HOUR   (3600 * 1000)
+#define CLOCK_INTERVAL_SECOND (1)
+#define CLOCK_INTERVAL_MINUTE (60)
+#define CLOCK_INTERVAL_HOUR   (3600)
 
-#define BUFFER_SIZE            256
-#define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
-#define DEFAULT_DIGITAL_FORMAT "%R"
-
-
-
-typedef struct _ClockPlugin      ClockPlugin;
-typedef struct _ClockPluginClass ClockPluginClass;
-typedef enum   _ClockPluginMode  ClockPluginMode;
+typedef struct _ClockPlugin        ClockPlugin;
+typedef struct _ClockPluginClass   ClockPluginClass;
+typedef struct _ClockPluginTimeout ClockPluginTimeout;
 
 #define XFCE_TYPE_CLOCK_PLUGIN            (clock_plugin_get_type ())
 #define XFCE_CLOCK_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_CLOCK_PLUGIN, ClockPlugin))
@@ -49,16 +43,25 @@ typedef enum   _ClockPluginMode  ClockPluginMode;
 
 
 
-GType      clock_plugin_get_type             (void) G_GNUC_CONST;
+GType               clock_plugin_get_type             (void) G_GNUC_CONST;
 
-void       clock_plugin_register_type        (GTypeModule     *type_module);
+void                clock_plugin_register_type        (GTypeModule        *type_module);
 
-void       clock_plugin_get_localtime        (struct tm       *tm);
+ClockPluginTimeout *clock_plugin_timeout_new          (guint               interval,
+                                                       GSourceFunc         function,
+                                                       gpointer            data);
 
-gchar     *clock_plugin_strdup_strftime      (const gchar     *format,
-                                              const struct tm *tm);
+void                clock_plugin_timeout_set_interval (ClockPluginTimeout *timeout,
+                                                       guint               interval);
 
-guint      clock_plugin_interval_from_format (const gchar     *format);
+void                clock_plugin_timeout_free         (ClockPluginTimeout *timeout);
+
+void                clock_plugin_get_localtime        (struct tm          *tm);
+
+gchar              *clock_plugin_strdup_strftime      (const gchar        *format,
+                                                       const struct tm    *tm);
+
+guint               clock_plugin_interval_from_format (const gchar        *format);
 
 G_END_DECLS
 

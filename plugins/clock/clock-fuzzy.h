@@ -34,13 +34,9 @@ typedef struct _XfceClockFuzzy      XfceClockFuzzy;
 
 GType      xfce_clock_fuzzy_get_type      (void) G_GNUC_CONST;
 
-void       xfce_clock_fuzzy_register_type (GTypeModule    *type_module);
+void       xfce_clock_fuzzy_register_type (GTypeModule *type_module);
 
 GtkWidget *xfce_clock_fuzzy_new           (void) G_GNUC_MALLOC;
-
-gboolean   xfce_clock_fuzzy_update        (gpointer        user_data);
-
-guint      xfce_clock_fuzzy_interval      (XfceClockFuzzy *fuzzy);
 
 G_END_DECLS
 

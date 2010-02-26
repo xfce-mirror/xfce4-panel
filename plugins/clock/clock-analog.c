@@ -34,17 +34,12 @@
 #include "clock.h"
 #include "clock-analog.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
 #define CLOCK_SCALE 0.1
-#define TICKS_TO_RADIANS(x)   (M_PI - (M_PI / 30.0) * (x))
-#define HOURS_TO_RADIANS(x,y) (M_PI - (M_PI / 6.0) * (((x) > 12 ? (x) - 12 : (x)) + (y) / 60.0))
+#define TICKS_TO_RADIANS(x)   (G_PI - (G_PI / 30.0) * (x))
+#define HOURS_TO_RADIANS(x,y) (G_PI - (G_PI / 6.0) * (((x) > 12 ? (x) - 12 : (x)) + (y) / 60.0))
 
 
 
-/* prototypes */
 static void      xfce_clock_analog_set_property  (GObject              *object,
                                                   guint                 prop_id,
                                                   const GValue         *value,
@@ -53,8 +48,9 @@ static void      xfce_clock_analog_get_property  (GObject              *object,
                                                   guint                 prop_id,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
+static void      xfce_clock_analog_finalize      (GObject              *object);
 static void      xfce_clock_analog_size_request  (GtkWidget            *widget,
-                                            GtkRequisition       *requisition);
+                                                  GtkRequisition       *requisition);
 static gboolean  xfce_clock_analog_expose_event  (GtkWidget            *widget,
                                                   GdkEventExpose       *event);
 static void      xfce_clock_analog_draw_ticks    (cairo_t              *cr,
@@ -68,6 +64,7 @@ static void      xfce_clock_analog_draw_pointer  (cairo_t              *cr,
                                                   gdouble               angle,
                                                   gdouble               scale,
                                                   gboolean              line);
+static gboolean  xfce_clock_analog_update        (gpointer              user_data);
 
 
 
@@ -86,8 +83,9 @@ struct _XfceClockAnalog
 {
   GtkImage __parent__;
 
-    /* draw seconds */
-  guint show_seconds : 1;
+  ClockPluginTimeout *timeout;
+
+  guint               show_seconds : 1;
 };
 
 
@@ -105,6 +103,7 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = xfce_clock_analog_set_property;
   gobject_class->get_property = xfce_clock_analog_get_property;
+  gobject_class->finalize = xfce_clock_analog_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request = xfce_clock_analog_size_request;
@@ -115,7 +114,7 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
                                    g_param_spec_boolean ("show-seconds", NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE
-                                                         | G_PARAM_STATIC_BLURB));
+                                                         | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -123,8 +122,10 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
 static void
 xfce_clock_analog_init (XfceClockAnalog *analog)
 {
-  /* init */
   analog->show_seconds = FALSE;
+  analog->timeout = clock_plugin_timeout_new (CLOCK_INTERVAL_MINUTE,
+                                              xfce_clock_analog_update,
+                                              analog);
 }
 
 
@@ -147,6 +148,11 @@ xfce_clock_analog_set_property (GObject      *object,
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
     }
+
+  /* reschedule the timeout and redraw */
+  clock_plugin_timeout_set_interval (analog->timeout,
+      analog->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE);
+  xfce_clock_analog_update (analog);
 }
 
 
@@ -169,6 +175,17 @@ xfce_clock_analog_get_property (GObject    *object,
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
     }
+}
+
+
+
+static void
+xfce_clock_analog_finalize (GObject *object)
+{
+  /* stop the timeout */
+  clock_plugin_timeout_free (XFCE_CLOCK_ANALOG (object)->timeout);
+
+  (*G_OBJECT_CLASS (xfce_clock_analog_parent_class)->finalize) (object);
 }
 
 
@@ -270,7 +287,7 @@ xfce_clock_analog_draw_ticks (cairo_t *cr,
 
       /* draw arc */
       cairo_move_to (cr, x, y);
-      cairo_arc (cr, x, y, radius * CLOCK_SCALE, 0, 2 * M_PI);
+      cairo_arc (cr, x, y, radius * CLOCK_SCALE, 0, 2 * G_PI);
       cairo_close_path (cr);
     }
 
@@ -308,12 +325,12 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
   else
     {
       /* calculate start position */
-      xs = xc + sin (angle - 0.5 * M_PI) * radius * CLOCK_SCALE;
-      ys = yc + cos (angle - 0.5 * M_PI) * radius * CLOCK_SCALE;
+      xs = xc + sin (angle - 0.5 * G_PI) * radius * CLOCK_SCALE;
+      ys = yc + cos (angle - 0.5 * G_PI) * radius * CLOCK_SCALE;
 
       /* draw the pointer */
       cairo_move_to (cr, xs, ys);
-      cairo_arc (cr, xc, yc, radius * CLOCK_SCALE, -angle + M_PI, -angle);
+      cairo_arc (cr, xc, yc, radius * CLOCK_SCALE, -angle + G_PI, -angle);
       cairo_line_to (cr, xt, yt);
       cairo_close_path (cr);
 
@@ -324,15 +341,7 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
 
 
 
-GtkWidget *
-xfce_clock_analog_new (void)
-{
-  return g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
-}
-
-
-
-gboolean
+static gboolean
 xfce_clock_analog_update (gpointer user_data)
 {
   GtkWidget *widget = GTK_WIDGET (user_data);
@@ -348,10 +357,8 @@ xfce_clock_analog_update (gpointer user_data)
 
 
 
-guint
-xfce_clock_analog_interval (XfceClockAnalog *analog)
+GtkWidget *
+xfce_clock_analog_new (void)
 {
-  panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), CLOCK_INTERVAL_SECOND);
-
-  return analog->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
+  return g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
 }

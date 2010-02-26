@@ -34,13 +34,9 @@ typedef struct _XfceClockDigital      XfceClockDigital;
 
 GType      xfce_clock_digital_get_type      (void) G_GNUC_CONST;
 
-void       xfce_clock_digital_register_type (GTypeModule      *type_module);
+void       xfce_clock_digital_register_type (GTypeModule *type_module);
 
 GtkWidget *xfce_clock_digital_new           (void) G_GNUC_MALLOC;
-
-gboolean   xfce_clock_digital_update        (gpointer          user_data);
-
-guint      xfce_clock_digital_interval      (XfceClockDigital *digital);
 
 G_END_DECLS
 
