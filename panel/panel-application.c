@@ -266,7 +266,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
-                         property_base, properties, NULL);
+                         property_base, properties);
 
   /* cleanup */
   g_free (property_base);

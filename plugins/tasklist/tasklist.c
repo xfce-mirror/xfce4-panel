@@ -150,7 +150,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* bind all properties */
   panel_properties_bind (plugin->channel, G_OBJECT (plugin->tasklist),
                          xfce_panel_plugin_get_property_base (panel_plugin),
-                         properties, NULL);
+                         properties);
 
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);

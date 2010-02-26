@@ -32,8 +32,7 @@ struct _PanelProperty
 void panel_properties_bind              (XfconfChannel       *channel,
                                          GObject             *object,
                                          const gchar         *property_base,
-                                         const PanelProperty *properties,
-                                         GHashTable          *hash_table);
+                                         const PanelProperty *properties);
 
 void panel_properties_unbind            (GObject             *object);
 

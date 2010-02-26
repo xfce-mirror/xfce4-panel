@@ -155,13 +155,13 @@ void
 panel_properties_bind (XfconfChannel       *channel,
                        GObject             *object,
                        const gchar         *property_base,
-                       const PanelProperty *properties,
-                       GHashTable          *hash_table)
+                       const PanelProperty *properties)
 {
   const PanelProperty *prop;
   const GValue        *value;
   gchar                buf[512];
   PropertyBinding     *binding;
+  GHashTable          *hash_table;
 
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
   panel_return_if_fail (G_IS_OBJECT (object));
@@ -169,9 +169,7 @@ panel_properties_bind (XfconfChannel       *channel,
   panel_return_if_fail (properties != NULL);
 
   /* get or ref the hash table */
-  if (G_LIKELY (hash_table != NULL))
-    g_hash_table_ref (hash_table);
-  else if (shared_hash_table != NULL)
+  if (shared_hash_table != NULL)
     hash_table = g_hash_table_ref (shared_hash_table);
   else
     hash_table = xfconf_channel_get_properties (channel, property_base);
