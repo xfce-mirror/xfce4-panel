@@ -38,6 +38,7 @@
 #define SIGNAL_REMOVED                  SIGNAL_PREFIX_S "g"
 #define SIGNAL_WRAPPER_SET_SENSITIVE    SIGNAL_PREFIX_S "h"
 #define SIGNAL_WRAPPER_BACKGROUND_ALPHA SIGNAL_PREFIX_S "i"
+#define SIGNAL_WRAPPER_QUIT             SIGNAL_PREFIX_S "j"
 
 /* special types for dbus communication */
 #define PANEL_TYPE_DBUS_SET_MESSAGE dbus_g_type_get_struct ("GValueArray", \

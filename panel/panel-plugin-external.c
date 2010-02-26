@@ -62,6 +62,7 @@ static void         panel_plugin_external_set_property          (GObject        
                                                                  guint                              prop_id,
                                                                  const GValue                      *value,
                                                                  GParamSpec                        *pspec);
+static void         panel_plugin_external_destroy               (GtkObject                         *object);
 static void         panel_plugin_external_realize               (GtkWidget                         *widget);
 static gboolean     panel_plugin_external_plug_removed          (GtkSocket                         *socket);
 static void         panel_plugin_external_plug_added            (GtkSocket                         *socket);
@@ -173,6 +174,7 @@ static void
 panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 {
   GObjectClass   *gobject_class;
+  GtkObjectClass *gtkobject_class;
   GtkWidgetClass *gtkwidget_class;
   GtkSocketClass *gtksocket_class;
 
@@ -181,6 +183,9 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   gobject_class->finalize = panel_plugin_external_finalize;
   gobject_class->set_property = panel_plugin_external_set_property;
   gobject_class->get_property = panel_plugin_external_get_property;
+
+  gtkobject_class = GTK_OBJECT_CLASS (klass);
+  gtkobject_class->destroy = panel_plugin_external_destroy;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->realize = panel_plugin_external_realize;
@@ -394,6 +399,17 @@ panel_plugin_external_set_property (GObject      *object,
 
 
 static void
+panel_plugin_external_destroy (GtkObject *object)
+{
+  panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (object),
+                                        TRUE, SIGNAL_WRAPPER_QUIT);
+
+  (*GTK_OBJECT_CLASS (panel_plugin_external_parent_class)->destroy) (object);
+}
+
+
+
+static void
 panel_plugin_external_realize (GtkWidget *widget)
 {
   PanelPluginExternal  *external = PANEL_PLUGIN_EXTERNAL (widget);
@@ -560,14 +576,6 @@ panel_plugin_external_dbus_provider_signal (PanelPluginExternal            *exte
 
   switch (provider_signal)
     {
-      case PROVIDER_SIGNAL_REMOVE_PLUGIN:
-        /* we're forced removing the plugin, don't ask for a restart */
-        external->plug_embedded = FALSE;
-
-        /* destroy ourselfs, unrealize will close the plugin */
-        gtk_widget_destroy (GTK_WIDGET (external));
-        break;
-
       case PROVIDER_SIGNAL_SHOW_CONFIGURE:
         external->show_configure = TRUE;
         break;

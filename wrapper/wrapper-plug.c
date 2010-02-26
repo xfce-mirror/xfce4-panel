@@ -31,7 +31,7 @@
 
 static gboolean wrapper_plug_expose_event (GtkWidget      *widget,
                                            GdkEventExpose *event);
-static void     wrapper_plug_set_colormap  (WrapperPlug   *plug);
+static void     wrapper_plug_set_colormap (WrapperPlug    *plug);
 
 
 

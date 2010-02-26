@@ -108,6 +108,8 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
             xfce_panel_plugin_provider_removed (provider);
           else if (strcmp (property, SIGNAL_WRAPPER_SET_SENSITIVE) == 0)
             gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
+          else if (strcmp (property, SIGNAL_WRAPPER_QUIT) == 0)
+            gtk_main_quit ();
           else
             panel_assert_not_reached ();
         }

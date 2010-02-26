@@ -507,9 +507,8 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
         name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
 
-        /* destroy the plugin if it's a panel plugin (ie. not external) */
-        if (XFCE_IS_PANEL_PLUGIN (provider))
-          gtk_widget_destroy (GTK_WIDGET (provider));
+        /* destroy the plugin */
+        gtk_widget_destroy (GTK_WIDGET (provider));
 
         /* remove the plugin configuration */
         panel_application_plugin_delete_config (application, name, unique_id);

@@ -409,14 +409,6 @@ panel_plugin_external_46_client_event (GtkWidget      *widget,
 
       switch (provider_signal)
         {
-          case PROVIDER_SIGNAL_REMOVE_PLUGIN:
-            /* we're forced removing the plugin, don't ask for a restart */
-            external->plug_embedded = FALSE;
-
-            /* destroy ourselfs, unrealize will close the plugin */
-            gtk_widget_destroy (GTK_WIDGET (external));
-            break;
-
           case PROVIDER_SIGNAL_SHOW_CONFIGURE:
             external->show_configure = TRUE;
             break;
