@@ -115,7 +115,7 @@ tasklist_plugin_init (TasklistPlugin *plugin)
   gtk_widget_show (plugin->handle);
 
   plugin->tasklist = g_object_new (XFCE_TYPE_TASKLIST, NULL);
-  gtk_box_pack_start (GTK_BOX (box), plugin->tasklist, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), plugin->tasklist, TRUE, TRUE, 0);
 }
 
 
