@@ -16,6 +16,8 @@ libexec_PROGRAMS = 								\
 
 xfce4_panel_wrapper_SOURCES =							\
 	main.c									\
+	wrapper-module.c							\
+	wrapper-module.h							\
 	wrapper-plug.c								\
 	wrapper-plug.h
 

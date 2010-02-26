@@ -151,8 +151,8 @@ panel_module_finalize (GObject *object)
 static gboolean
 panel_module_load (GTypeModule *type_module)
 {
-  PanelModule *module = PANEL_MODULE (type_module);
-  PluginRegisterTypesFunc register_func;
+  PanelModule             *module = PANEL_MODULE (type_module);
+  PluginRegisterTypesFunc  register_func;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), FALSE);
@@ -177,7 +177,7 @@ panel_module_load (GTypeModule *type_module)
       return FALSE;
     }
 
-  /* run the register function if available */
+  /* run the type register function if available */
   if (g_module_symbol (module->library, "xfce_panel_plugin_register_types", (gpointer) &register_func))
     (*register_func) (type_module);
 
@@ -219,8 +219,9 @@ panel_module_item_finalized (gpointer  user_data,
   module->use_count--;
 
   /* unuse the library if the plugin runs internal */
-  if (!xfce_panel_plugin_provider_is_external (XFCE_PANEL_PLUGIN_PROVIDER (item)))
-    g_type_module_unuse (G_TYPE_MODULE (module));
+  /* TODO this needs to be fixed */
+  //if (!xfce_panel_plugin_provider_is_external (XFCE_PANEL_PLUGIN_PROVIDER (item)))
+  //  g_type_module_unuse (G_TYPE_MODULE (module));
 
   /* emit signal unique signal in the factory */
   if (module->is_unique)
@@ -258,7 +259,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
           /* build the module path */
           path = g_module_build_path (directory, module_name);
 
-          /* test if the module exists */
+          /* test if the library exists */
           if (G_LIKELY (g_file_test (path, G_FILE_TEST_EXISTS)))
             {
               /* create new module */
@@ -332,8 +333,8 @@ panel_module_create_plugin (PanelModule  *module,
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
-  panel_return_val_if_fail (name != NULL, NULL);
-  panel_return_val_if_fail (id != NULL, NULL);
+  panel_return_val_if_fail (name != NULL && *name != '\0', NULL);
+  panel_return_val_if_fail (id != NULL && *id != '\0', NULL);
   panel_return_val_if_fail (exo_str_is_equal (name, G_TYPE_MODULE (module)->name), NULL);
 
   /* return null if the module is not usable (unique and already used) */

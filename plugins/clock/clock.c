@@ -728,6 +728,8 @@ xfce_clock_widget_update_mode (XfceClock *clock)
 G_MODULE_EXPORT void
 xfce_panel_plugin_register_types (XfcePanelModule *panel_module)
 {
+  panel_return_if_fail (G_IS_TYPE_MODULE (panel_module));
+
   /* register the types */
   xfce_clock_register_type (panel_module);
   xfce_clock_analog_register_type (panel_module);

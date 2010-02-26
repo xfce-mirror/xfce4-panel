@@ -27,20 +27,21 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
+#include <wrapper/wrapper-module.h>
 #include <wrapper/wrapper-plug.h>
 
 
 
-static gchar *opt_name = NULL;
-static gchar *opt_display_name = NULL;
-static gchar *opt_id = NULL;
-static gchar *opt_filename = NULL;
-static gint   opt_socket_id = 0;
+static gchar  *opt_name = NULL;
+static gchar  *opt_display_name = NULL;
+static gchar  *opt_id = NULL;
+static gchar  *opt_filename = NULL;
+static gint    opt_socket_id = 0;
+static gchar **opt_arguments = NULL;
 
 
 
@@ -51,6 +52,7 @@ static const GOptionEntry option_entries[] =
   { "id", 'i', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_id, NULL, NULL },
   { "filename", 'f', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_filename, NULL, NULL },
   { "socket-id", 's', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL },
+  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
   { NULL }
 };
 
@@ -60,10 +62,10 @@ gint
 main (gint argc, gchar **argv)
 {
   GError                  *error = NULL;
-  GModule                 *library;
-  PluginConstructFunc      construct_func;
-  XfcePanelPluginProvider *provider = NULL;
+  XfcePanelPluginProvider *provider;
   GtkWidget               *plug;
+  WrapperModule           *module;
+  gboolean                 succeed = FALSE;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -76,7 +78,7 @@ main (gint argc, gchar **argv)
     g_thread_init (NULL);
 
   /* initialize gtk */
-  if (!gtk_init_with_args (&argc, &argv, "", (GOptionEntry *) option_entries, GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), (GOptionEntry *) option_entries, GETTEXT_PACKAGE, &error))
     {
       /* print error */
       g_critical ("Failed to initialize GTK+: %s", error ? error->message : "Unable to open display");
@@ -90,7 +92,7 @@ main (gint argc, gchar **argv)
     }
 
   /* check arguments */
-  if (opt_filename == NULL || opt_socket_id == 0 || opt_name == NULL || opt_id == NULL)
+  if (opt_filename == NULL || opt_socket_id == 0 || opt_name == NULL || opt_id == NULL || opt_display_name == NULL)
     {
       /* print error */
       g_critical ("One of the required arguments for the wrapper is missing");
@@ -99,43 +101,38 @@ main (gint argc, gchar **argv)
       return EXIT_FAILURE;
     }
 
-  /* try to open the library */
-  library = g_module_open (opt_filename, 0);
-  if (G_LIKELY (library != NULL))
+  /* try to create a wrapper module */
+  module = wrapper_module_new (opt_filename, opt_name);
+  if (G_LIKELY (module != NULL))
     {
-      /* try to ling the plugin init func */
-      if (g_module_symbol (library, "xfce_panel_plugin_init", (gpointer) &construct_func))
+      /* try to create the panel plugin */
+      provider = wrapper_module_create_plugin (module, opt_name, opt_id, opt_display_name, opt_arguments);
+      if (G_LIKELY (provider != NULL))
         {
-          /* create the panel plugin */
-          provider = (*construct_func) (opt_name, opt_id, NULL, NULL, gdk_screen_get_default ());
+          /* create the plug */
+          plug = wrapper_plug_new (opt_socket_id, provider);
+          gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
+          gtk_widget_show (plug);
+
+          /* show the plugin */
+          gtk_widget_show (GTK_WIDGET (provider));
+
+          /* everything worked fine */
+          succeed = TRUE;
+
+          /* enter the mainloop */
+          gtk_main ();
+
+          /* destroy the plug (and provider) */
+          gtk_widget_destroy (plug);
+
+          /* decrease the module use count */
+          g_type_module_unuse (G_TYPE_MODULE (module));
         }
-      else
-        {
-          /* print warning */
-          g_critical ("Plugin '%s' lacks required symbol: %s", opt_display_name, g_module_error ());
-        }
+
+      /* g_object_unref for the module doesn't work,
+       * so we don't do that... */
     }
 
-  if (G_LIKELY (provider != NULL))
-    {
-      /* create the plug */
-      plug = wrapper_plug_new (opt_socket_id, provider);
-      gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
-      gtk_widget_show (plug);
-
-      /* show the plugin */
-      gtk_widget_show (GTK_WIDGET (provider));
-
-      /* enter the mainloop */
-      gtk_main ();
-
-      /* destroy the plug (and provider) */
-      gtk_widget_destroy (plug);
-    }
-
-  /* close the library */
-  if (G_LIKELY (library != NULL))
-    g_module_close (library);
-
-  return EXIT_SUCCESS;
+  return succeed ? EXIT_SUCCESS : EXIT_FAILURE;
 }

@@ -66,16 +66,19 @@ struct _PanelPluginExternal
   GtkSocket  __parent__;
 
   /* plugin information */
-  gchar           *id;
+  gchar            *id;
+
+  /* startup arguments */
+  gchar           **arguments;
 
   /* the module */
-  PanelModule     *module;
+  PanelModule      *module;
 
   /* the plug window id */
-  GdkNativeWindow  plug_window_id;
+  GdkNativeWindow   plug_window_id;
 
   /* message queue */
-  GSList          *queue;
+  GSList           *queue;
 };
 
 typedef struct
@@ -127,6 +130,7 @@ panel_plugin_external_init (PanelPluginExternal *external)
   external->module = NULL;
   external->plug_window_id = 0;
   external->queue = NULL;
+  external->arguments = NULL;
 
   g_signal_connect (G_OBJECT (external), "notify::sensitive", G_CALLBACK (panel_plugin_external_set_sensitive), NULL);
 }
@@ -154,6 +158,7 @@ panel_plugin_external_finalize (GObject *object)
 
   /* cleanup */
   g_free (external->id);
+  g_strfreev (external->arguments);
 
   /* release the module */
   g_object_unref (G_OBJECT (external->module));
@@ -166,12 +171,13 @@ panel_plugin_external_finalize (GObject *object)
 static void
 panel_plugin_external_realize (GtkWidget *widget)
 {
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
-  gchar               *argv[12];
-  GPid                 pid;
-  GError              *error = NULL;
-  gboolean             succeed;
-  gchar               *socket_id;
+  PanelPluginExternal  *external = PANEL_PLUGIN_EXTERNAL (widget);
+  gchar               **argv;
+  GPid                  pid;
+  GError               *error = NULL;
+  gboolean              succeed;
+  gchar                *socket_id;
+  gint                  i, argc = 12;
 
   /* realize the socket first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->realize) (widget);
@@ -179,7 +185,14 @@ panel_plugin_external_realize (GtkWidget *widget)
   /* get the socket id in a string */
   socket_id = g_strdup_printf ("%d", gtk_socket_get_id (GTK_SOCKET (widget)));
 
-  /* construct the argv */
+  /* add the number of arguments to the argv count */
+  if (G_UNLIKELY (external->arguments != NULL))
+    argc += g_strv_length (external->arguments);
+
+  /* allocate argv */
+  argv = g_new0 (gchar *, argc);
+
+  /* setup the basic argv */
   argv[0]  = LIBEXECDIR "/xfce4-panel-wrapper";
   argv[1]  = "-n";
   argv[2]  = (gchar *) panel_module_get_internal_name (external->module);
@@ -191,13 +204,21 @@ panel_plugin_external_realize (GtkWidget *widget)
   argv[8]  = (gchar *) panel_module_get_library_filename (external->module);
   argv[9]  = "-s";
   argv[10] = socket_id;
-  argv[11] = NULL;
+
+  /* append the arguments */
+  if (G_UNLIKELY (external->arguments != NULL))
+    for (i = 0; external->arguments[i] != NULL; i++)
+      argv[i + 11] = external->arguments[i];
+
+  /* close the argv */
+  argv[argc - 1] = NULL;
 
   /* spawn the proccess */
   succeed = gdk_spawn_on_screen (gdk_screen_get_default (), NULL, argv, NULL, 0, NULL, NULL, &pid, &error);
 
   /* cleanup */
   g_free (socket_id);
+  g_free (argv);
 
   /* handle problem */
   if (G_UNLIKELY (succeed == FALSE))
@@ -475,6 +496,7 @@ panel_plugin_external_new (PanelModule  *module,
   /* set name, id and module */
   external->id = g_strdup (id);
   external->module = g_object_ref (G_OBJECT (module));
+  external->arguments = g_strdupv (arguments);
 
   return XFCE_PANEL_PLUGIN_PROVIDER (external);
 }

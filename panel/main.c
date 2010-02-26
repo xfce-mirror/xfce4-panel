@@ -44,7 +44,7 @@ static gboolean   opt_restart = FALSE;
 static gboolean   opt_quit = FALSE;
 static gboolean   opt_version = FALSE;
 static gchar     *opt_client_id = NULL;
-static gchar    **arguments = NULL;
+static gchar    **opt_arguments = NULL;
 
 
 
@@ -59,7 +59,7 @@ static const GOptionEntry option_entries[] =
   { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_("Quit the running panel instance"), NULL },
   { "version", 'v', 0, G_OPTION_ARG_NONE, &opt_version, N_("Print version information and exit"), NULL },
   { "sm-client-id", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_client_id, NULL, NULL },
-  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &arguments, NULL, NULL },
+  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
   { NULL }
 };
 
@@ -145,7 +145,7 @@ main (gint argc, gchar **argv)
       gdk_notify_startup_complete ();
 
       /* send a add new item signal to the running instance */
-      result = panel_dbus_client_add_new_item (opt_add, arguments, &error);
+      result = panel_dbus_client_add_new_item (opt_add, opt_arguments, &error);
 
       goto dbus_return;
     }

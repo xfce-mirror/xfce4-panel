@@ -842,7 +842,7 @@ panel_application_add_new_item (PanelApplication  *application,
 
       /* add the panel to the end of the choosen window */
       panel_application_insert_plugin (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
-                                       plugin_name, NULL, arguments, FROM_DESKTOP_FILE, -1);
+                                       plugin_name, NULL, arguments, /* FROM_DESKTOP_FILE */ FORCE_EXTERNAL, -1);
     }
   else
     {
