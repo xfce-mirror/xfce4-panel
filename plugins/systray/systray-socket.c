@@ -309,36 +309,49 @@ systray_socket_is_composited (SystraySocket *socket)
 gchar *
 systray_socket_get_title  (SystraySocket *socket)
 {
-  gchar         *name = NULL;
-  GdkDisplay    *display;
-  gint           succeed;
-  XTextProperty  xprop;
+  gchar      *name = NULL;
+  GdkDisplay *display;
+  Atom        utf8_string, type;
+  gint        result;
+  gint        format;
+  gulong      nitems;
+  gulong      bytes_after;
+  gchar      *val;
 
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), NULL);
 
-  /* get the display of the socket */
   display = gtk_widget_get_display (GTK_WIDGET (socket));
 
-  /* avoid exiting the application on X errors */
+  utf8_string = gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING");
+
   gdk_error_trap_push ();
 
-  /* try to get the wm name (this is more relaiable with qt applications) */
-  succeed = XGetWMName (GDK_DISPLAY_XDISPLAY (display), socket->window, &xprop);
+  result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display),
+                               socket->window,
+                               gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_NAME"),
+                               0, G_MAXLONG, False,
+                               utf8_string,
+                               &type, &format, &nitems,
+                               &bytes_after, (guchar **) &val);
 
-  /* check if everything went fine */
-  if (G_LIKELY (gdk_error_trap_pop () == 0 && succeed >= Success))
+  if (gdk_error_trap_pop () != 0 || result != Success || val == NULL)
+    return NULL;
+
+  if (type != utf8_string || format != 8 || nitems == 0)
     {
-      /* check the xprop content */
-      if (G_LIKELY (xprop.value && xprop.nitems > 0))
-  {
-    /* get the lowercase name if it's utf-8 valid */
-    if (g_utf8_validate ((const gchar *) xprop.value, xprop.nitems, NULL))
-      name = g_utf8_strdown ((const gchar *) xprop.value, xprop.nitems);
-
-    /* cleanup */
-    XFree (xprop.value);
-  }
+      XFree (val);
+      return NULL;
     }
+
+  if (!g_utf8_validate (val, nitems, NULL))
+    {
+      XFree (val);
+      return NULL;
+    }
+
+  name = g_utf8_strdown (val, nitems);
+
+  XFree (val);
 
   return name;
 }
