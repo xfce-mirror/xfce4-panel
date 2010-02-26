@@ -44,7 +44,7 @@
 static void panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass);
 static void panel_preferences_dialog_init (PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_finalize (GObject *object);
-static void panel_preferences_dialog_help (GtkWidget *button);
+static void panel_preferences_dialog_response (GtkWidget *window, gint response_id, PanelPreferencesDialog *dialog);
 
 
 static void panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog);
@@ -145,14 +145,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   /* get the dialog */
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
   panel_application_take_dialog (dialog->application, GTK_WINDOW (window));
-  g_object_weak_ref (G_OBJECT (window), (GWeakNotify) g_object_unref, dialog);
-
-  /* close button */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "button-close");
-  g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), window);
-
-  /* help button */
-  connect_signal ("button-help", "clicked", panel_preferences_dialog_help);
+  g_signal_connect (G_OBJECT (window), "response", G_CALLBACK (panel_preferences_dialog_response), dialog);
 
   /* panel selector buttons and combobox */
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
@@ -233,20 +226,34 @@ panel_preferences_dialog_finalize (GObject *object)
 
 
 static void
-panel_preferences_dialog_help (GtkWidget *button)
+panel_preferences_dialog_response (GtkWidget              *window, 
+                                   gint                    response_id, 
+                                   PanelPreferencesDialog *dialog)
 {
   GError    *error = NULL;
   GdkScreen *screen;
+  
+  panel_return_if_fail (GTK_IS_DIALOG (window));
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  /* get the dialog screen */
-  screen = gtk_widget_get_screen (button);
-
-  /* open the help url */
-  if (exo_url_show_on_screen (PREFERENCES_HELP_URL, NULL, screen, &error) == FALSE)
+  if (G_UNLIKELY (response_id == 1))
     {
-      /* show error and cleanup */
-      g_warning ("Failed to open help: %s", error->message);
-      g_error_free (error);
+      /* get the dialog screen */
+      screen = gtk_widget_get_screen (window);
+
+      /* open the help url */
+      if (exo_url_show_on_screen (PREFERENCES_HELP_URL, NULL, screen, &error) == FALSE)
+        {
+          /* show error and cleanup */
+          g_warning ("Failed to open help: %s", error->message);
+          g_error_free (error);
+        }
+    }
+  else
+    {
+      /* destroy the builder and dialog */
+      gtk_widget_destroy (window);
+      g_object_unref (G_OBJECT (dialog));
     }
 }
 

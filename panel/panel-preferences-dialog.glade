@@ -684,7 +684,7 @@
     </child>
     <action-widgets>
       <action-widget response="0">button-close</action-widget>
-      <action-widget response="0">button-help</action-widget>
+      <action-widget response="1">button-help</action-widget>
     </action-widgets>
   </object>
   <object class="GtkAdjustment" id="size">
@@ -721,9 +721,9 @@
   </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="label10"/>
-      <widget name="label9"/>
       <widget name="label7"/>
+      <widget name="label9"/>
+      <widget name="label10"/>
     </widgets>
   </object>
 </interface>
