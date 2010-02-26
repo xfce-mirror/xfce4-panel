@@ -71,6 +71,7 @@ enum
 {
   COLUMN_ICON_NAME,
   COLUMN_DISPLAY_NAME,
+  COLUMN_TOOLTIP,
   COLUMN_PROVIDER,
   N_COLUMNS
 };
@@ -167,12 +168,13 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("item-about", "clicked", panel_preferences_dialog_item_about);
 
   /* create store for panel items */
-  dialog->store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_OBJECT);
+  dialog->store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_OBJECT);
 
   /* build tree for panel items */
   treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
   panel_return_if_fail (GTK_IS_WIDGET (treeview));
   gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (dialog->store));
+  gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (treeview), COLUMN_TOOLTIP);
 
   /* setup tree selection */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -527,6 +529,7 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
   GList       *items, *li;
   guint        i;
   PanelModule *module;
+  gchar       *tooltip;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
@@ -544,13 +547,20 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
       /* get the panel module from the plugin */
       module = panel_module_get_from_plugin_provider (li->data);
 
-      /* insert in the store */
+      tooltip = g_strdup_printf (_("Internal name: %s-%d"),
+                                 xfce_panel_plugin_provider_get_name (li->data),
+                                 xfce_panel_plugin_provider_get_unique_id (li->data));
+
       gtk_list_store_insert_with_values (dialog->store, NULL, i,
                                          COLUMN_ICON_NAME,
                                          panel_module_get_icon_name (module),
                                          COLUMN_DISPLAY_NAME,
                                          panel_module_get_display_name (module),
+                                         COLUMN_TOOLTIP,
+                                         tooltip,
                                          COLUMN_PROVIDER, li->data, -1);
+
+      g_free (tooltip);
     }
 
   /* cleanup */
