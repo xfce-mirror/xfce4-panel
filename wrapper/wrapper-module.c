@@ -210,7 +210,7 @@ wrapper_module_new_provider (WrapperModule  *module,
   if (g_type_module_use (G_TYPE_MODULE (module)))
     {
       if (module->type != G_TYPE_NONE)
-        {g_message ("New plugin from object");
+        {
           /* create the object */
           plugin = g_object_new (module->type,
                                  "name", name,
@@ -219,11 +219,11 @@ wrapper_module_new_provider (WrapperModule  *module,
                                  "arguments", arguments, NULL);
         }
       else if (module->construct_func != NULL)
-        {g_message ("New plugin from construct function");
+        {
           /* create a new panel plugin */
-          plugin = GTK_WIDGET ((*module->construct_func) (name, unique_id,
-                                                          display_name,
-                                                          arguments, screen));
+          plugin = (*module->construct_func) (name, unique_id,
+                                              display_name,
+                                              arguments, screen);
         }
 
       if (G_LIKELY (plugin != NULL))

@@ -71,7 +71,7 @@ struct _PanelModule
   gchar               *filename;
 
   /* plugin information from the desktop file */
-  gchar               *name;
+  gchar               *display_name;
   gchar               *comment;
   gchar               *icon_name;
 
@@ -120,7 +120,7 @@ panel_module_init (PanelModule *module)
   module->type = G_TYPE_NONE;
   module->filename = NULL;
   module->run_in_wrapper = TRUE;
-  module->name = NULL;
+  module->display_name = NULL;
   module->comment = NULL;
   module->icon_name = NULL;
   module->is_unique = FALSE;
@@ -149,7 +149,7 @@ panel_module_finalize (GObject *object)
 
   /* cleanup */
   g_free (module->filename);
-  g_free (module->name);
+  g_free (module->display_name);
   g_free (module->comment);
   g_free (module->icon_name);
 
@@ -226,15 +226,14 @@ panel_module_unload (GTypeModule *type_module)
 
 
 static void
-panel_module_item_finalized (gpointer  user_data,
-                             GObject  *item)
+panel_module_plugin_destroyed (gpointer  user_data,
+                               GObject  *where_the_plugin_was)
 {
   PanelModule *module = PANEL_MODULE (user_data);
 
   panel_return_if_fail (PANEL_IS_MODULE (module));
   panel_return_if_fail (G_IS_TYPE_MODULE (module));
   panel_return_if_fail (module->use_count > 0);
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
 
   /* decrease counter */
   module->use_count--;
@@ -302,8 +301,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
           g_type_module_set_name (G_TYPE_MODULE (module), name);
 
           /* read the plugin name */
-          value = xfce_rc_read_entry (rc, "Name", NULL);
-          module->name = g_strdup (value);
+          value = xfce_rc_read_entry (rc, "Name", name);
+          module->display_name = g_strdup (value);
 
           /* read the plugin comment */
           value = xfce_rc_read_entry (rc, "Comment", NULL);
@@ -340,31 +339,31 @@ panel_module_new_from_desktop_file (const gchar *filename,
 
 
 
-XfcePanelPluginProvider *
-panel_module_create_plugin (PanelModule  *module,
-                            GdkScreen    *screen,
-                            const gchar  *name,
-                            gint          unique_id,
-                            gchar       **arguments)
+GtkWidget *
+panel_module_new_plugin (PanelModule  *module,
+                         GdkScreen    *screen,
+                         gint          unique_id,
+                         gchar       **arguments)
 {
-  XfcePanelPluginProvider *plugin = NULL;
+  GtkWidget   *plugin = NULL;
+  const gchar *name;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
-  panel_return_val_if_fail (IS_STRING (name), NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
-  panel_return_val_if_fail (exo_str_is_equal (name,
-                            G_TYPE_MODULE (module)->name), NULL);
 
   /* return null if the module is not usable (unique and already used) */
   if (G_UNLIKELY (panel_module_is_usable (module) == FALSE))
     return NULL;
+  
+  /* get the internal plugin name */
+  name = panel_module_get_name (module);
 
   if (module->run_in_wrapper)
     {
       /* create external plugin */
-      plugin = panel_plugin_external_new (module, name, unique_id, arguments);
+      plugin = panel_plugin_external_new (module, unique_id, arguments);
     }
   else
     {
@@ -372,35 +371,30 @@ panel_module_create_plugin (PanelModule  *module,
       if (g_type_module_use (G_TYPE_MODULE (module)))
         {
           if (module->type != G_TYPE_NONE)
-            {g_message ("New plugin from object");
+            {
               plugin = g_object_new (module->type,
                                      "name", name,
                                      "unique-id", unique_id,
-                                     "display-name", module->name,
+                                     "display-name", module->display_name,
                                      "arguments", arguments, NULL);
             }
-          else
-            {g_message ("New plugin from construct function");
+          else if (module->construct_func != NULL)
+            {
               /* create a new panel plugin */
-              panel_return_val_if_fail (module->construct_func != NULL, NULL);
-              plugin = (*module->construct_func) (name, unique_id, module->name,
+              plugin = (*module->construct_func) (name, unique_id, 
+                                                  module->display_name,
                                                   arguments, screen);
             }
         }
-      else
-        {
-          /* this should never happen */
-          panel_assert_not_reached ();
-        }
     }
 
-  if (G_LIKELY (plugin))
+  if (G_LIKELY (plugin != NULL))
     {
       /* increase count */
       module->use_count++;
 
       /* handle module use count and unloading */
-      g_object_weak_ref (G_OBJECT (plugin), panel_module_item_finalized, module);
+      g_object_weak_ref (G_OBJECT (plugin), panel_module_plugin_destroyed, module);
 
       /* emit unique-changed if the plugin is unique */
       if (module->is_unique)
@@ -421,7 +415,7 @@ panel_module_create_plugin (PanelModule  *module,
 
 
 const gchar *
-panel_module_get_internal_name (PanelModule *module)
+panel_module_get_name (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
@@ -432,7 +426,7 @@ panel_module_get_internal_name (PanelModule *module)
 
 
 const gchar *
-panel_module_get_library_filename (PanelModule *module)
+panel_module_get_filename (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
@@ -443,22 +437,13 @@ panel_module_get_library_filename (PanelModule *module)
 
 
 const gchar *
-panel_module_get_name (PanelModule *module)
+panel_module_get_display_name (PanelModule *module)
 {
-  const gchar *name;
-
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
+  panel_return_val_if_fail (g_utf8_validate (module->display_name, -1, NULL), NULL);
 
-  if (module->name != NULL)
-    name = module->name;
-  else
-    name = G_TYPE_MODULE (module)->name;
-
-  panel_return_val_if_fail (name != NULL
-                            && g_utf8_validate (name, -1, NULL), NULL);
-
-  return name;
+  return module->display_name;
 }
 
 
@@ -467,9 +452,7 @@ const gchar *
 panel_module_get_comment (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
-  panel_return_val_if_fail (module->comment == NULL
-                            || g_utf8_validate (module->comment, -1,
-                                                NULL), NULL);
+  panel_return_val_if_fail (g_utf8_validate (module->comment, -1, NULL), NULL);
 
   return module->comment;
 }
@@ -480,9 +463,7 @@ const gchar *
 panel_module_get_icon_name (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
-  panel_return_val_if_fail (module->icon_name == NULL
-                            || g_utf8_validate (module->icon_name, -1,
-                                                NULL), NULL);
+  panel_return_val_if_fail (g_utf8_validate (module->icon_name, -1, NULL), NULL);
 
   return module->icon_name;
 }

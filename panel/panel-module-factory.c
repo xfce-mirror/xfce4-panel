@@ -257,7 +257,7 @@ panel_module_factory_modules_cleanup (gpointer key,
   remove_from_table = !panel_module_is_valid (module);
 
   /* if we're going to remove this item, check if it's the launcher */
-  if (remove_from_table && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_internal_name (module)))
+  if (remove_from_table && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_name (module)))
     factory->has_launcher = FALSE;
 
   return remove_from_table;
@@ -376,7 +376,7 @@ panel_module_factory_has_module (PanelModuleFactory *factory,
 
 
 
-XfcePanelPluginProvider *
+GtkWidget *
 panel_module_factory_get_plugin (PanelModuleFactory *factory,
                                  gint                unique_id)
 {
@@ -388,23 +388,23 @@ panel_module_factory_get_plugin (PanelModuleFactory *factory,
   /* traverse the list to find the plugin with this unique id */
   for (li = factory->plugins; li != NULL; li = li->next)
     if (xfce_panel_plugin_provider_get_unique_id (XFCE_PANEL_PLUGIN_PROVIDER (li->data)) == unique_id)
-      return XFCE_PANEL_PLUGIN_PROVIDER (li->data);
+      return GTK_WIDGET (li->data);
 
   return NULL;
 }
 
 
 
-XfcePanelPluginProvider *
-panel_module_factory_create_plugin (PanelModuleFactory  *factory,
-                                    GdkScreen           *screen,
-                                    const gchar         *name,
-                                    gint                 unique_id,
-                                    gchar              **arguments)
+GtkWidget *
+panel_module_factory_new_plugin (PanelModuleFactory  *factory,
+                                 const gchar         *name,
+                                 GdkScreen           *screen,
+                                 gint                 unique_id,
+                                 gchar              **arguments)
 {
-  PanelModule             *module;
-  XfcePanelPluginProvider *provider;
-  static gint              unique_id_counter = 0;
+  PanelModule *module;
+  GtkWidget   *provider;
+  static gint  unique_id_counter = 0;
 
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
@@ -426,7 +426,7 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
     unique_id = ++unique_id_counter;
 
   /* create the new module */
-  provider = panel_module_create_plugin (module, screen, name, unique_id, arguments);
+  provider = panel_module_new_plugin (module, screen, unique_id, arguments);
 
   /* insert plugin in the list */
   if (G_LIKELY (provider))

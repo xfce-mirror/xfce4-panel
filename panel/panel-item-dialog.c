@@ -470,7 +470,7 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
   if (G_LIKELY (module))
     {
       /* get the internal module name */
-      internal_name = panel_module_get_internal_name (module);
+      internal_name = panel_module_get_name (module);
 
       /* set the selection data */
       gtk_selection_data_set (selection_data, selection_data->target, 8, (guchar *) internal_name, strlen (internal_name));
@@ -541,12 +541,12 @@ panel_item_dialog_compare_func (GtkTreeModel *model,
       /* don't move the separator */
       result = 0;
     }
-  else if (exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_internal_name (module_a)))
+  else if (exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_name (module_a)))
     {
       /* move the launcher to the first position */
       result = -1;
     }
-  else if (exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_internal_name (module_b)))
+  else if (exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_name (module_b)))
     {
       /* move the launcher to the first position */
       result = 1;
@@ -554,8 +554,8 @@ panel_item_dialog_compare_func (GtkTreeModel *model,
   else
     {
       /* get the visible module names */
-      name_a = panel_module_get_name (module_a);
-      name_b = panel_module_get_name (module_b);
+      name_a = panel_module_get_display_name (module_a);
+      name_b = panel_module_get_display_name (module_b);
 
       /* get sort order */
       if (G_LIKELY (name_a && name_b))
@@ -610,7 +610,7 @@ panel_item_dialog_visible_func (GtkTreeModel *model,
   text_casefolded = g_utf8_casefold (normalized, -1);
   g_free (normalized);
 
-  name = panel_module_get_name (module);
+  name = panel_module_get_display_name (module);
   if (G_LIKELY (name != NULL))
     {
       /* casefold the name */
@@ -671,7 +671,7 @@ panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
     return;
 
   /* get module info */
-  name = panel_module_get_name (module);
+  name = panel_module_get_display_name (module);
   comment = panel_module_get_comment (module);
 
   /* create the markup string */

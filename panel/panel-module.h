@@ -38,32 +38,31 @@ typedef struct _PanelModule      PanelModule;
 
 
 
-GType                    panel_module_get_type                  (void) G_GNUC_CONST;
+GType        panel_module_get_type                 (void) G_GNUC_CONST;
 
-PanelModule             *panel_module_new_from_desktop_file     (const gchar             *filename,
-                                                                 const gchar             *name);
+PanelModule *panel_module_new_from_desktop_file    (const gchar             *filename,
+                                                    const gchar             *name);
 
-XfcePanelPluginProvider *panel_module_create_plugin             (PanelModule             *module,
-                                                                 GdkScreen               *screen,
-                                                                 const gchar             *name,
-                                                                 gint                     unique_id,
-                                                                 gchar                  **arguments);
+GtkWidget   *panel_module_new_plugin               (PanelModule             *module,
+                                                    GdkScreen               *screen,
+                                                    gint                     unique_id,
+                                                    gchar                  **arguments);
 
-const gchar             *panel_module_get_internal_name         (PanelModule             *module);
+const gchar *panel_module_get_name                 (PanelModule             *module);
 
-const gchar             *panel_module_get_library_filename      (PanelModule             *module);
+const gchar *panel_module_get_filename             (PanelModule             *module);
 
-const gchar             *panel_module_get_name                  (PanelModule             *module);
+const gchar *panel_module_get_display_name         (PanelModule             *module);
 
-const gchar             *panel_module_get_comment               (PanelModule             *module);
+const gchar *panel_module_get_comment              (PanelModule             *module);
 
-const gchar             *panel_module_get_icon_name             (PanelModule             *module);
+const gchar *panel_module_get_icon_name            (PanelModule             *module);
 
-PanelModule             *panel_module_get_from_plugin_provider  (XfcePanelPluginProvider *provider);
+PanelModule *panel_module_get_from_plugin_provider (XfcePanelPluginProvider *provider);
 
-gboolean                 panel_module_is_valid                  (PanelModule             *module);
+gboolean     panel_module_is_valid                 (PanelModule             *module);
 
-gboolean                 panel_module_is_usable                 (PanelModule             *module);
+gboolean     panel_module_is_usable                (PanelModule             *module);
 
 G_END_DECLS
 

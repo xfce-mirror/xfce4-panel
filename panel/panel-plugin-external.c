@@ -234,13 +234,13 @@ panel_plugin_external_realize (GtkWidget *widget)
   /* setup the basic argv */
   argv[0]  = (gchar *) LIBEXECDIR "/xfce4-panel-wrapper";
   argv[1]  = (gchar *) "-n";
-  argv[2]  = (gchar *) panel_module_get_internal_name (external->module);
+  argv[2]  = (gchar *) panel_module_get_name (external->module);
   argv[3]  = (gchar *) "-i";
   argv[4]  = (gchar *) unique_id;
   argv[5]  = (gchar *) "-d";
-  argv[6]  = (gchar *) panel_module_get_name (external->module);
+  argv[6]  = (gchar *) panel_module_get_display_name (external->module);
   argv[7]  = (gchar *) "-f";
-  argv[8]  = (gchar *) panel_module_get_library_filename (external->module);
+  argv[8]  = (gchar *) panel_module_get_filename (external->module);
   argv[9]  = (gchar *) "-s";
   argv[10] = (gchar *) socket_id;
 
@@ -329,7 +329,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
                                        GTK_DIALOG_DESTROY_WITH_PARENT,
                                        GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
                                        _("Plugin '%s' unexpectedly left the building, do you want to restart it?"),
-                                       panel_module_get_name (external->module));
+                                       panel_module_get_display_name (external->module));
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("If you press Execute "
                                                 "the panel will try to restart the plugin otherwise it "
                                                 "will be permanently removed from the panel."));
@@ -352,7 +352,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
       /* print a message we did an autorestart */
       g_message ("Automatically restarting plugin %s-%d, try %d",
-                 panel_module_get_internal_name (external->module),
+                 panel_module_get_name (external->module),
                  external->unique_id, external->n_restarts);
   }
 
@@ -463,7 +463,7 @@ panel_plugin_external_get_name (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), NULL);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
 
-  return panel_module_get_internal_name (PANEL_PLUGIN_EXTERNAL (provider)->module);
+  return panel_module_get_name (PANEL_PLUGIN_EXTERNAL (provider)->module);
 }
 
 
@@ -686,16 +686,14 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 
 
 
-XfcePanelPluginProvider *
+GtkWidget *
 panel_plugin_external_new (PanelModule  *module,
-                           const gchar  *name,
                            gint          unique_id,
                            gchar       **arguments)
 {
   PanelPluginExternal *external;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
-  panel_return_val_if_fail (name != NULL, NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
 
   /* create new object */
@@ -706,7 +704,7 @@ panel_plugin_external_new (PanelModule  *module,
   external->module = g_object_ref (G_OBJECT (module));
   external->arguments = g_strdupv (arguments);
 
-  return XFCE_PANEL_PLUGIN_PROVIDER (external);
+  return GTK_WIDGET (external);
 }
 
 

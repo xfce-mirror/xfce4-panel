@@ -314,8 +314,8 @@ panel_dbus_service_plugin_provider_signal (PanelDBusService *service,
                                            gint              provider_signal,
                                            GError           *error)
 {
-  PanelModuleFactory      *factory;
-  XfcePanelPluginProvider *provider;
+  PanelModuleFactory *factory;
+  GtkWidget          *provider;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (plugin_id != -1, FALSE);

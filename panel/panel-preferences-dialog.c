@@ -534,7 +534,7 @@ panel_preferences_dialog_item_store_rebuild (PanelPreferencesDialog *dialog)
                                          COLUMN_ICON_NAME,
                                          panel_module_get_icon_name (module),
                                          COLUMN_DISPLAY_NAME,
-                                         panel_module_get_name (module),
+                                         panel_module_get_display_name (module),
                                          COLUMN_PROVIDER, li->data, -1);
     }
 
@@ -648,7 +648,7 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
       /* create question dialog (same code is also in xfce-panel-plugin.c) */
       toplevel = gtk_widget_get_toplevel (button);
       widget = gtk_message_dialog_new (GTK_WINDOW (toplevel), GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                       _("Are you sure that you want to remove \"%s\"?"), panel_module_get_name (module));
+                                       _("Are you sure that you want to remove \"%s\"?"), panel_module_get_display_name (module));
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget), _("If you remove the item from the panel, it is permanently lost."));
       gtk_dialog_add_buttons (GTK_DIALOG (widget), GTK_STOCK_CANCEL, GTK_RESPONSE_NO, GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
       gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);

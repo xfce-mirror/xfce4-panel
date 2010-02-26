@@ -39,27 +39,27 @@ typedef struct _PanelModuleFactory      PanelModuleFactory;
 
 #define LAUNCHER_PLUGIN_NAME "launcher"
 
-GType                    panel_module_factory_get_type            (void) G_GNUC_CONST;
+GType               panel_module_factory_get_type            (void) G_GNUC_CONST;
 
-PanelModuleFactory      *panel_module_factory_get                 (void);
+PanelModuleFactory *panel_module_factory_get                 (void);
 
-gboolean                 panel_module_factory_has_launcher        (PanelModuleFactory  *factory);
+gboolean            panel_module_factory_has_launcher        (PanelModuleFactory  *factory);
 
-void                     panel_module_factory_emit_unique_changed (PanelModule         *module);
+void                panel_module_factory_emit_unique_changed (PanelModule         *module);
 
-GList                   *panel_module_factory_get_modules         (PanelModuleFactory  *factory);
+GList              *panel_module_factory_get_modules         (PanelModuleFactory  *factory);
 
-gboolean                 panel_module_factory_has_module          (PanelModuleFactory  *factory,
-                                                                   const gchar         *name);
+gboolean            panel_module_factory_has_module          (PanelModuleFactory  *factory,
+                                                              const gchar         *name);
 
-XfcePanelPluginProvider *panel_module_factory_get_plugin          (PanelModuleFactory  *factory,
-                                                                   gint                 unique_id);
+GtkWidget          *panel_module_factory_get_plugin          (PanelModuleFactory  *factory,
+                                                              gint                 unique_id);
 
-XfcePanelPluginProvider *panel_module_factory_create_plugin       (PanelModuleFactory  *factory,
-                                                                   GdkScreen           *screen,
-                                                                   const gchar         *name,
-                                                                   gint                 unique_id,
-                                                                   gchar              **arguments);
+GtkWidget          *panel_module_factory_new_plugin          (PanelModuleFactory  *factory,
+                                                              const gchar         *name,
+                                                              GdkScreen           *screen,
+                                                              gint                 unique_id,
+                                                              gchar              **arguments);
 
 G_END_DECLS
 

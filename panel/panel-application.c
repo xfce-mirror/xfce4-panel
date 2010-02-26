@@ -539,8 +539,7 @@ panel_application_plugin_insert (PanelApplication  *application,
                                  gchar            **arguments,
                                  gint               position)
 {
-  GtkWidget               *itembar;
-  XfcePanelPluginProvider *provider;
+  GtkWidget *itembar, *provider;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
@@ -548,9 +547,9 @@ panel_application_plugin_insert (PanelApplication  *application,
   panel_return_val_if_fail (name != NULL, FALSE);
 
   /* create a new panel plugin */
-  provider = panel_module_factory_create_plugin (application->factory,
-                                                 screen, name, unique_id,
-                                                 arguments);
+  provider = panel_module_factory_new_plugin (application->factory,
+                                              name, screen, unique_id,
+                                              arguments);
   if (G_UNLIKELY (provider == NULL))
     return FALSE;
 
@@ -558,7 +557,7 @@ panel_application_plugin_insert (PanelApplication  *application,
    * new plugin is created */
   if (G_UNLIKELY (unique_id == -1))
     {
-      unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
+      unique_id = xfce_panel_plugin_provider_get_unique_id (XFCE_PANEL_PLUGIN_PROVIDER (provider));
       panel_application_plugin_delete_config (application, name, unique_id);
     }
 
@@ -574,10 +573,10 @@ panel_application_plugin_insert (PanelApplication  *application,
                         GTK_WIDGET (provider), position);
 
   /* send all the needed info about the panel to the plugin */
-  panel_glue_set_provider_info (provider, window);
+  panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (provider), window);
 
   /* show the plugin */
-  gtk_widget_show (GTK_WIDGET (provider));
+  gtk_widget_show (provider);
 
   return TRUE;
 }
