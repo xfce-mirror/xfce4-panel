@@ -330,7 +330,7 @@ main (gint argc, gchar **argv)
   dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_STRING, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
 
   /* load the module and link the function */
-  module = g_module_open (opt_filename, 0);
+  module = g_module_open (opt_filename, G_MODULE_BIND_LOCAL);
   if (G_LIKELY (module))
     {
       /* get the contruct symbol */
