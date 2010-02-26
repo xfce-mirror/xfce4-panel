@@ -33,33 +33,37 @@
 #include "systray-manager.h"
 #include "systray-dialog_glade.h"
 
+#define ICON_SIZE (22)
 
 
-static void     systray_plugin_get_property            (GObject         *object,
-                                                        guint            prop_id,
-                                                        GValue          *value,
-                                                        GParamSpec      *pspec);
-static void     systray_plugin_set_property            (GObject         *object,
-                                                        guint            prop_id,
-                                                        const GValue    *value,
-                                                        GParamSpec      *pspec);
-static void     systray_plugin_construct               (XfcePanelPlugin *panel_plugin);
-static void     systray_plugin_free_data               (XfcePanelPlugin *panel_plugin);
-static void     systray_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
-                                                        gint             screen_position);
-static void     systray_plugin_orientation_changed     (XfcePanelPlugin *panel_plugin,
-                                                        GtkOrientation   orientation);
-static gboolean systray_plugin_size_changed            (XfcePanelPlugin *panel_plugin,
-                                                        gint size);
-static void     systray_plugin_configure_plugin        (XfcePanelPlugin *panel_plugin);
-static void     systray_plugin_icon_added              (SystrayManager  *manager,
-                                                        GtkWidget       *icon,
-                                                        SystrayPlugin   *plugin);
-static void     systray_plugin_icon_removed            (SystrayManager  *manager,
-                                                        GtkWidget       *icon,
-                                                        SystrayPlugin   *plugin);
-static void     systray_plugin_lost_selection          (SystrayManager  *manager,
-                                                        SystrayPlugin   *plugin);
+
+static void     systray_plugin_get_property                 (GObject         *object,
+                                                             guint            prop_id,
+                                                             GValue          *value,
+                                                             GParamSpec      *pspec);
+static void     systray_plugin_set_property                 (GObject         *object,
+                                                             guint            prop_id,
+                                                             const GValue    *value,
+                                                             GParamSpec      *pspec);
+static void     systray_plugin_construct                    (XfcePanelPlugin *panel_plugin);
+static void     systray_plugin_free_data                    (XfcePanelPlugin *panel_plugin);
+static void     systray_plugin_screen_position_changed      (XfcePanelPlugin *panel_plugin,
+                                                             gint             screen_position);
+static void     systray_plugin_orientation_changed          (XfcePanelPlugin *panel_plugin,
+                                                             GtkOrientation   orientation);
+static gboolean systray_plugin_size_changed                 (XfcePanelPlugin *panel_plugin,
+                                                             gint size);
+static void     systray_plugin_configure_plugin             (XfcePanelPlugin *panel_plugin);
+static void     systray_plugin_icon_added                   (SystrayManager  *manager,
+                                                             GtkWidget       *icon,
+                                                             SystrayPlugin   *plugin);
+static void     systray_plugin_icon_removed                 (SystrayManager  *manager,
+                                                             GtkWidget       *icon,
+                                                             SystrayPlugin   *plugin);
+static void     systray_plugin_lost_selection               (SystrayManager  *manager,
+                                                             SystrayPlugin   *plugin);
+static void     systray_plugin_dialog_add_application_names (SystrayPlugin   *plugin,
+                                                             GtkListStore    *store);
 
 
 
@@ -99,6 +103,15 @@ enum
 XFCE_PANEL_DEFINE_PLUGIN (SystrayPlugin, systray_plugin,
     systray_box_register_type,
     systray_manager_register_type)
+
+
+
+/* known applications to improve the icon and name */
+static const gchar *known_applications[][3] =
+{
+  /* application name, icon-name, translated name */
+  { "networkmanager applet", "network-workgroup", N_("Network Manager Applet") },
+};
 
 
 
@@ -464,6 +477,10 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       exo_mutual_binding_new (G_OBJECT (plugin), "show-frame",
                               G_OBJECT (object), "active");
 
+      object = gtk_builder_get_object (builder, "applications-store");
+      panel_return_if_fail (GTK_IS_LIST_STORE (object));
+      systray_plugin_dialog_add_application_names (plugin, GTK_LIST_STORE (object));
+
       gtk_widget_show (GTK_WIDGET (dialog));
     }
   else
@@ -533,4 +550,154 @@ systray_plugin_lost_selection (SystrayManager *manager,
                     "of a notification area. This plugin will close.");
   xfce_dialog_show_error (gtk_widget_get_screen (GTK_WIDGET (plugin)), &error,
                           _("The notification area lost selection"));
+}
+
+
+static gchar *
+systray_plugin_dialog_camel_case (const gchar *text)
+{
+  const gchar *t;
+  gboolean     upper = TRUE;
+  gunichar     c;
+  GString     *result;
+
+  panel_return_val_if_fail (IS_STRING (text), NULL);
+
+  /* allocate a new string for the result */
+  result = g_string_sized_new (32);
+
+  /* convert the input text */
+  for (t = text; *t != '\0'; t = g_utf8_next_char (t))
+    {
+      /* check the next char */
+      c = g_utf8_get_char (t);
+      if (g_unichar_isspace (c))
+        {
+          upper = TRUE;
+        }
+      else if (upper)
+        {
+          c = g_unichar_toupper (c);
+          upper = FALSE;
+        }
+      else
+        {
+          c = g_unichar_tolower (c);
+        }
+
+      /* append the char to the result */
+      g_string_append_unichar (result, c);
+    }
+
+  return g_string_free (result, FALSE);
+}
+
+
+
+static GdkPixbuf *
+systray_plugin_dialog_icon (GtkIconTheme *icon_theme,
+                            const gchar  *icon_name)
+{
+  GdkPixbuf   *icon = NULL;
+  gchar       *first_occ;
+  const gchar *p;
+
+  panel_return_val_if_fail (IS_STRING (icon_name), NULL);
+  panel_return_val_if_fail (GTK_IS_ICON_THEME (icon_theme), NULL);
+
+  /* try to load the icon from the theme */
+  icon = gtk_icon_theme_load_icon (icon_theme, icon_name, ICON_SIZE, 0, NULL);
+  if (icon != NULL)
+    return icon;
+
+  /* try the first part when the name contains a space */
+  p = g_utf8_strchr (icon_name, -1, ' ');
+  if (p != NULL)
+    {
+      /* get the string before the first occurrence */
+      first_occ = g_strndup (icon_name, p - icon_name);
+
+      /* try to load the icon from the theme */
+      icon = gtk_icon_theme_load_icon (icon_theme, first_occ, ICON_SIZE, 0, NULL);
+
+      /* cleanup */
+      g_free (first_occ);
+    }
+
+  return icon;
+}
+
+
+
+static void
+systray_plugin_dialog_add_application_names (SystrayPlugin *plugin,
+                                             GtkListStore  *store)
+{
+  GList        *names, *li;
+  const gchar  *name;
+  guint         i;
+  gboolean      hidden;
+  const gchar  *title, *icon_name;
+  gchar        *camelcase;
+  GdkPixbuf    *icon;
+  GtkIconTheme *icon_theme;
+  GtkTreeIter   iter;
+
+  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->box));
+  panel_return_if_fail (GTK_IS_LIST_STORE (store));
+
+  /* get the icon theme */
+  icon_theme = gtk_icon_theme_get_default ();
+
+  /* get the know application names and insert them in the store */
+  names = systray_box_name_list (XFCE_SYSTRAY_BOX (plugin->box));
+  for (li = names; li != NULL; li = li->next)
+    {
+      name = li->data;
+
+      /* skip invalid names */
+      if (!IS_STRING (name))
+        continue;
+
+      /* init */
+      title = NULL;
+      icon_name = name;
+      camelcase = NULL;
+      hidden = systray_box_name_get_hidden (XFCE_SYSTRAY_BOX (plugin->box), name);
+
+      /* lookup the application in the store */
+      for (i = 0; i < G_N_ELEMENTS (known_applications); i++)
+        {
+          if (strcmp (name, known_applications[i][0]) == 0)
+            {
+              /* get the info from the array */
+              icon_name = known_applications[i][1];
+              title = _(known_applications[i][2]);
+              break;
+            }
+        }
+
+      /* create fallback title if the application was not found */
+      if (title == NULL)
+        {
+          camelcase = systray_plugin_dialog_camel_case (name);
+          title = camelcase;
+        }
+
+      /* try to load the icon name */
+      icon = systray_plugin_dialog_icon (icon_theme, icon_name);
+
+      /* insert in the store */
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter, 0, icon, 1, title, 2, hidden, -1);
+
+      /* cleanup */
+      g_free (camelcase);
+      if (icon != NULL)
+        g_object_unref (G_OBJECT (icon));
+    }
+
+  /* cleanup */
+  g_list_free (names);
 }
