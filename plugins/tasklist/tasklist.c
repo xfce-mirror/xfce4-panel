@@ -55,7 +55,6 @@ struct _TasklistPlugin
   XfconfChannel *channel;
 
   /* the tasklist widget */
-  GtkWidget     *box;
   GtkWidget     *tasklist;
   GtkWidget     *handle;
 };
@@ -94,6 +93,8 @@ tasklist_plugin_class_init (TasklistPluginClass *klass)
 static void
 tasklist_plugin_init (TasklistPlugin *plugin)
 {
+  GtkWidget *box;
+
   /* initialize xfconf */
   xfconf_init (NULL);
 
@@ -101,19 +102,20 @@ tasklist_plugin_init (TasklistPlugin *plugin)
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* create widgets */
-  plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
-  gtk_widget_show (plugin->box);
+  box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (plugin), box);
+  exo_binding_new (G_OBJECT (plugin), "orientation", G_OBJECT (box), "orientation");
+  gtk_widget_show (box);
 
   plugin->handle = gtk_alignment_new (0.00, 0.00, 0.00, 0.00);
-  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->handle, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), plugin->handle, TRUE, TRUE, 0);
   g_signal_connect (G_OBJECT (plugin->handle), "expose-event",
       G_CALLBACK (tasklist_plugin_handle_expose_event), plugin);
   gtk_widget_set_size_request (plugin->handle, 8, 8);
   gtk_widget_show (plugin->handle);
 
   plugin->tasklist = g_object_new (XFCE_TYPE_TASKLIST, NULL);
-  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->tasklist, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), plugin->tasklist, FALSE, TRUE, 0);
 }
 
 
