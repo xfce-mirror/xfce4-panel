@@ -36,10 +36,6 @@ typedef struct _PanelApplication      PanelApplication;
 
 GType             panel_application_get_type          (void) G_GNUC_CONST;
 
-void              panel_application_multihead_area    (GtkWidget *widget,
-                                                       gboolean is_horizontal,
-                                                       gboolean span_monitors);
-
 PanelApplication *panel_application_get               (void);
 
 void              panel_application_save              (PanelApplication  *application,
