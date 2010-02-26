@@ -35,10 +35,6 @@ void _window_set_opacity      (GtkWindow   *window,
                                gdouble      opacity);
 #endif
 
-void _set_source_rgba         (cairo_t     *cr,
-                               GdkColor    *color,
-                               gdouble      alpha);
-
 G_END_DECLS
 
 #endif /* !__PANEL_PRIVATE_H__ */

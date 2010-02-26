@@ -136,7 +136,7 @@ struct _PanelWindow
   /* whether we span monitors */
   guint                span_monitors : 1;
 
-  /* whether the panel has an rgba colormap */
+  /* whether the panel has a rgba colormap */
   guint                is_composited : 1;
 
   /* whether the panel is locked */
@@ -340,6 +340,7 @@ panel_window_expose_event (GtkWidget      *widget,
   cairo_t      *cr;
   GdkColor     *color;
   GtkStateType  state = GTK_STATE_NORMAL;
+  gdouble       alpha = window->is_composited ? window->background_alpha : 1.00;
 
   if (GTK_WIDGET_DRAWABLE (widget))
     {
@@ -350,14 +351,13 @@ panel_window_expose_event (GtkWidget      *widget,
       if (G_UNLIKELY (window->is_active_panel))
         state = GTK_STATE_SELECTED;
 
-      if (window->is_active_panel ||
-          (window->is_composited && window->background_alpha < 1.00))
+      if (alpha < 1.00 || window->is_active_panel)
         {
           /* get the background gdk color */
           color = &(widget->style->bg[state]);
 
           /* set the cairo source color */
-          _set_source_rgba (cr, color, window->background_alpha);
+          xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
           /* create retangle */
           cairo_rectangle (cr, event->area.x, event->area.y,
@@ -1058,7 +1058,7 @@ panel_window_paint_handle (PanelWindow  *window,
         color = &(widget->style->dark[state]);
 
       /* set source color */
-      _set_source_rgba (cr, color, alpha);
+      xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
       /* draw the dots */
       for (xx = 0; xx < width; xx += 3)
@@ -1087,7 +1087,7 @@ panel_window_paint_border (PanelWindow  *window,
 
   /* dark color */
   color = &(widget->style->dark[state]);
-  _set_source_rgba (cr, color, alpha);
+  xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
   /* set start position to bottom left */
   cairo_move_to (cr, alloc->x, alloc->y + alloc->height);
@@ -1103,7 +1103,7 @@ panel_window_paint_border (PanelWindow  *window,
 
   /* light color */
   color = &(widget->style->light[state]);
-  _set_source_rgba (cr, color, alpha);
+  xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
   /* set start position to bottom left */
   cairo_move_to (cr, alloc->x, alloc->y + alloc->height);
@@ -1503,7 +1503,7 @@ panel_window_set_colormap (PanelWindow *window)
     }
 
   /* set the colormap */
-  if (G_LIKELY (colormap))
+  if (colormap)
     gtk_widget_set_colormap (widget, colormap);
 
   /* restore the window */
