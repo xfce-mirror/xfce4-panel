@@ -698,7 +698,9 @@ panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
   comment = panel_module_get_comment (module);
 
   /* create the markup string */
-  markup = g_strdup_printf ("<b>%s</b>\n%s", name, comment ? comment : "");
+  if (exo_str_is_empty (comment))
+    comment = "";
+  markup = g_markup_printf_escaped ("<b>%s</b>\n%s", name, comment);
 
   /* release module */
   g_object_unref (G_OBJECT (module));

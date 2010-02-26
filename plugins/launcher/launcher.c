@@ -1636,7 +1636,7 @@ launcher_plugin_item_query_tooltip (GtkWidget      *widget,
   comment = garcon_menu_item_get_comment (item);
   if (!exo_str_is_empty (comment))
     {
-      markup = g_strdup_printf ("<b>%s</b>\n%s", name, comment);
+      markup = g_markup_printf_escaped ("<b>%s</b>\n%s", name, comment);
       gtk_tooltip_set_markup (tooltip, markup);
       g_free (markup);
     }

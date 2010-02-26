@@ -643,9 +643,9 @@ launcher_dialog_items_set_item (GtkTreeModel   *model,
   comment = garcon_menu_item_get_comment (item);
 
   if (!exo_str_is_empty (comment))
-    markup = g_strdup_printf ("<b>%s</b>\n%s", name, comment);
+    markup = g_markup_printf_escaped ("<b>%s</b>\n%s", name, comment);
   else
-    markup = g_strdup_printf ("<b>%s</b>", name);
+    markup = g_markup_printf_escaped ("<b>%s</b>", name);
 
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
                       COL_ICON, garcon_menu_item_get_icon_name (item),
