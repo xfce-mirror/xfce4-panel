@@ -62,7 +62,7 @@ static void
 wrapper_plug_class_init (WrapperPlugClass *klass)
 {
   GtkWidgetClass *gtkwidget_class;
-  
+
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->expose_event = wrapper_plug_expose_event;
 }
@@ -76,8 +76,8 @@ wrapper_plug_init (WrapperPlug *plug)
   plug->background_alpha = 1.00;
   plug->is_selected = FALSE;
   plug->is_composited = FALSE;
-  
-  /* allow painting, else compositing won't work */                                        
+
+  /* allow painting, else compositing won't work */
   gtk_widget_set_app_paintable (GTK_WIDGET (plug), TRUE);
 
   /* connect signal to monitor the compositor changes */
@@ -212,16 +212,16 @@ wrapper_plug_new (GdkNativeWindow socket_id)
 
 
 
-void         
+void
 wrapper_plug_set_background_alpha (WrapperPlug *plug,
                                    gdouble      alpha)
 {
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
   panel_return_if_fail (GTK_IS_WIDGET (plug));
-  
+
   /* set the alpha */
   plug->background_alpha = CLAMP (alpha, 0.00, 1.00);
-  
+
   /* redraw */
   if (plug->is_composited)
     gtk_widget_queue_draw (GTK_WIDGET (plug));
@@ -229,16 +229,16 @@ wrapper_plug_set_background_alpha (WrapperPlug *plug,
 
 
 
-void         
+void
 wrapper_plug_set_selected (WrapperPlug *plug,
                            gboolean     selected)
 {
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
   panel_return_if_fail (GTK_IS_WIDGET (plug));
-  
+
   /* set value */
   plug->is_selected = !!selected;
-  
+
   /* redraw */
   gtk_widget_queue_draw (GTK_WIDGET (plug));
 }

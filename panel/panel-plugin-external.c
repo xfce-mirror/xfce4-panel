@@ -252,9 +252,14 @@ static void
 panel_plugin_external_unrealize (GtkWidget *widget)
 {
   //PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
+  //GValue               value = { 0, };
 
-  /* send message to quit the wrapper */
-  /* TODO quit */
+  /* create dummy value */
+  //g_value_init (&value, G_TYPE_BOOLEAN);
+  //g_value_set_boolean (&value, FALSE);
+  
+  /* send */
+  //panel_dbus_service_set_plugin_property (external->id, 
 
   return (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->unrealize) (widget);
 }

@@ -118,7 +118,8 @@ dbus_proxy_provider_expand_changed (XfcePanelPluginProvider *provider,
                                     gboolean                 expand,
                                     DBusGProxy              *dbus_proxy)
 {
-  GValue value = { 0, };
+  GValue  value = { 0, };
+  GError *error = NULL;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -127,9 +128,12 @@ dbus_proxy_provider_expand_changed (XfcePanelPluginProvider *provider,
   g_value_set_boolean (&value, expand);
 
   /* call */
-  wrapper_dbus_client_set_property (dbus_proxy,
-                                    xfce_panel_plugin_provider_get_id (provider),
-                                    "Expand", &value, NULL);
+  if (!wrapper_dbus_client_set_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
+                                         "Expand", &value, &error))
+    {
+      g_critical ("DBus error: %s", error->message);
+      g_error_free (error);
+    }
 
   /* unset */
   g_value_unset (&value);
@@ -141,12 +145,17 @@ static void
 dbus_proxy_provider_move_item (XfcePanelPluginProvider *provider,
                                DBusGProxy              *dbus_proxy)
 {
+  GError *error = NULL;
+  
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* call */
-  wrapper_dbus_client_set_property (dbus_proxy,
-                                    xfce_panel_plugin_provider_get_id (provider),
-                                    "MoveItem", NULL, NULL);
+  if (!wrapper_dbus_client_set_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
+                                         "MoveItem", NULL, NULL))
+    {
+      g_critical ("DBus error: %s", error->message);
+      g_error_free (error);
+    }
 }
 
 
@@ -155,7 +164,8 @@ static void
 dbus_proxy_provider_add_new_items (XfcePanelPluginProvider *provider,
                                    DBusGProxy              *dbus_proxy)
 {
-  gchar *name;
+  gchar  *name;
+  GError *error = NULL;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -163,7 +173,11 @@ dbus_proxy_provider_add_new_items (XfcePanelPluginProvider *provider,
   name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
 
   /* call */
-  wrapper_dbus_client_display_items_dialog (dbus_proxy, name, NULL);
+  if (!wrapper_dbus_client_display_items_dialog (dbus_proxy, name, NULL))
+    {
+      g_critical ("DBus error: %s", error->message);
+      g_error_free (error);
+    }
 
   /* cleanup */
   g_free (name);
@@ -175,7 +189,8 @@ static void
 dbus_proxy_provider_panel_preferences (XfcePanelPluginProvider *provider,
                                        DBusGProxy              *dbus_proxy)
 {
-  gchar *name;
+  gchar  *name;
+  GError *error = NULL;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -183,7 +198,11 @@ dbus_proxy_provider_panel_preferences (XfcePanelPluginProvider *provider,
   name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
 
   /* call */
-  wrapper_dbus_client_display_preferences_dialog (dbus_proxy, name, NULL);
+  if (!wrapper_dbus_client_display_preferences_dialog (dbus_proxy, name, &error))
+    {
+      g_critical ("DBus error: %s", error->message);
+      g_error_free (error);
+    }
 
   /* cleanup */
   g_free (name);

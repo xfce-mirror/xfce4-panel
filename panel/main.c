@@ -193,12 +193,12 @@ main (gint argc, gchar **argv)
 
       goto dbus_return;
     }
+  
+  /* create dbus service */
+  dbus_service = panel_dbus_service_get ();
 
   /* create a new application */
   application = panel_application_get ();
-
-  /* create dbus service */
-  dbus_service = panel_dbus_service_get ();
 
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
@@ -206,7 +206,7 @@ main (gint argc, gchar **argv)
 
   /* enter the main loop */
   gtk_main ();
-
+  
   /* release dbus service */
   g_object_unref (G_OBJECT (dbus_service));
 
