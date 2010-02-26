@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (c) 2007-2010 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -23,8 +23,12 @@
 #ifdef HAVE_TIME_H
 #include <time.h>
 #endif
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
 
 #include <gtk/gtk.h>
+#include <exo/exo.h>
 
 #include "clock.h"
 #include "clock-fuzzy.h"
@@ -75,32 +79,70 @@ struct _XfceClockFuzzy
   guint               fuzziness;
 };
 
-const gchar *i18n_day_sectors[] =
+static const gchar *i18n_day_sectors[] =
 {
-  N_("Night"),   N_("Early morning"),
-  N_("Morning"), N_("Almost noon"),
-  N_("Noon"),    N_("Afternoon"),
-  N_("Evening"), N_("Late evening")
+  N_("Night"),
+  N_("Early morning"),
+  N_("Morning"),
+  N_("Almost noon"),
+  N_("Noon"),
+  N_("Afternoon"),
+  N_("Evening"),
+  N_("Late evening")
 };
 
-const gchar *i18n_hour_sectors[] =
+static const gchar *i18n_hour_sectors[] =
 {
-  N_("five past %s"),        N_("ten past %s"),
-  N_("quarter past %s"),     N_("twenty past %s"),
-  N_("twenty five past %s"), N_("half past %s"),
-  N_("twenty five to %s"),   N_("twenty to %s"),
-  N_("quarter to %s"),       N_("ten to %s"),
-  N_("five to %s"),          N_("%s o'clock")
+  /* I18N: %0 will be replaced with the preceding hour, %1 with
+   * the comming hour */
+  N_("%0 o'clock"),
+  N_("five past %0"),
+  N_("ten past %0"),
+  N_("quarter past %0"),
+  N_("twenty past %0"),
+  N_("twenty five past %0"),
+  N_("half past %0"),
+  N_("twenty five to %1"),
+  N_("twenty to %1"),
+  N_("quarter to %1"),
+  N_("ten to %1"),
+  N_("five to %1"),
+  N_("%1 o'clock")
 };
 
-const gchar *i18n_hour_names[] =
+static const gchar *i18n_hour_sectors_one[] =
 {
-  N_("one"),    N_("two"),
-  N_("three"),  N_("four"),
-  N_("five"),   N_("six"),
-  N_("seven"),  N_("eight"),
-  N_("nine"),   N_("ten"),
-  N_("eleven"), N_("twelve")
+  /* I18N: some languages have a singular form for the first hour,
+   * other languages should just use the same strings as above */
+  NC_("one", "%0 o'clock"),
+  NC_("one", "five past %0"),
+  NC_("one", "ten past %0"),
+  NC_("one", "quarter past %0"),
+  NC_("one", "twenty past %0"),
+  NC_("one", "twenty five past %0"),
+  NC_("one", "half past %0"),
+  NC_("one", "twenty five to %1"),
+  NC_("one", "twenty to %1"),
+  NC_("one", "quarter to %1"),
+  NC_("one", "ten to %1"),
+  NC_("one", "five to %1"),
+  NC_("one", "%1 o'clock")
+};
+
+static const gchar *i18n_hour_names[] =
+{
+  N_("one"),
+  N_("two"),
+  N_("three"),
+  N_("four"),
+  N_("five"),
+  N_("six"),
+  N_("seven"),
+  N_("eight"),
+  N_("nine"),
+  N_("ten"),
+  N_("eleven"),
+  N_("twelve")
 };
 
 
@@ -210,9 +252,12 @@ xfce_clock_fuzzy_update (gpointer user_data)
 {
   XfceClockFuzzy *fuzzy = XFCE_CLOCK_FUZZY (user_data);
   struct tm       tm;
-  gint            hour_sector;
-  gint            minutes, hour;
+  gint            sector;
+  gint            minute, hour;
   gchar          *string;
+  const gchar    *time_format;
+  gchar          *p;
+  gchar           pattern[3];
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (fuzzy), FALSE);
 
@@ -223,21 +268,49 @@ xfce_clock_fuzzy_update (gpointer user_data)
       || fuzzy->fuzziness == FUZZINESS_15_MINS)
     {
       /* set the time */
-      minutes = tm.tm_min;
-      hour = tm.tm_hour > 12 ? tm.tm_hour - 12 : tm.tm_hour;
+      minute = tm.tm_min;
+      hour = tm.tm_hour;
+      sector = 0;
 
       /* get the hour sector */
       if (fuzzy->fuzziness == FUZZINESS_5_MINS)
-        hour_sector = minutes >= 3 ? (minutes - 3) / 5 : 11;
+        {
+          if (minute > 2)
+            sector = (minute - 3) / 5 + 1;
+        }
       else
-        hour_sector = minutes > 7 ? ((minutes - 7) / 15 + 1) * 3 - 1 : 11;
+        {
+          if (minute > 6)
+            sector = ((minute - 7) / 15 + 1) * 3;
+        }
 
-      /* advance 1 hour, if we're half past */
-      if (hour_sector <= 6)
-        hour--;
+      /* translated time string */
+      time_format = _(i18n_hour_sectors[sector]);
 
-      /* set the time string */
-      string = g_strdup_printf (_(i18n_hour_sectors[hour_sector]), _(i18n_hour_names[hour]));
+      /* add hour offset (%0 or %1 on the string) */
+      p = strchr (time_format, '%');
+      panel_assert (p != NULL && g_ascii_isdigit (*(p + 1)));
+      if (G_LIKELY (p != NULL))
+        hour += g_ascii_digit_value (*(p + 1));
+
+      if (hour % 12 > 0)
+        hour = hour % 12 - 1;
+      else
+        hour = 12 - hour % 12 - 1;
+
+      if (hour == 0)
+        {
+          /* get the singular form of the format */
+          time_format = _(i18n_hour_sectors_one[sector]);
+
+          /* make sure we have to correct digit for the replace pattern */
+          p = strchr (time_format, '%');
+          panel_assert (p != NULL && g_ascii_isdigit (*(p + 1)));
+        }
+
+      /* replace the %? with the hour name */
+      g_snprintf (pattern, sizeof (pattern), "%%%c", p != NULL ? *(p + 1) : '0');
+      string = exo_str_replace (time_format, pattern, _(i18n_hour_names[hour]));
       gtk_label_set_text (GTK_LABEL (fuzzy), string);
       g_free (string);
     }
