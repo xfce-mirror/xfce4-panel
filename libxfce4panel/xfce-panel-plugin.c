@@ -283,9 +283,9 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:name:
    *
-   * The internal name of the #XfcePanelPlugin. This property is used during plugin
-   * construction and can't be set twice. Plugin writer can use it to read the
-   * plugin name, but xfce_panel_plugin_get_name() is recommended since that
+   * The internal, unstranslated, name of the #XfcePanelPlugin. Plugin 
+   * writer can use it to read the plugin name, but 
+   * xfce_panel_plugin_get_name() is recommended since that
    * returns a const string.
    **/
   g_object_class_install_property (gobject_class,
@@ -319,8 +319,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:id:
    *
-   * The unique id of the #XfcePanelPlugin. This property is used during
-   * plugin construction and can't be set twice. Plugin writer can use it to
+   * The unique id of the #XfcePanelPlugin. Plugin writer can use it to
    * read the unique id, but xfce_panel_plugin_get_id() is recommended
    * since that returns a const string.
    **/
@@ -337,19 +336,22 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:arguments:
    *
-   * The argument the plugin was started with. If the plugin was not started with
-   * any arguments this value is %NULL. Plugin writer can use it to read the
-   * arguments array, but xfce_panel_plugin_get_arguments() is recommended.
+   * The arguments the plugin was started with. If the plugin was not 
+   * started with any arguments this value is %NULL. Plugin writer can 
+   * use it to read the arguments array, but 
+   * xfce_panel_plugin_get_arguments() is recommended.
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_ARGUMENTS,
                                    g_param_spec_boxed ("arguments",
-                                                       "Arguemnts",
+                                                       "Arguments",
                                                        "Startup arguments for the plugin",
                                                        G_TYPE_STRV,
                                                        G_PARAM_READWRITE
                                                        | G_PARAM_STATIC_STRINGS
                                                        | G_PARAM_CONSTRUCT_ONLY));
+                                                       
+  /** TODO properties for size, expand, orientation, screen-position **/
 }
 
 
@@ -926,10 +928,10 @@ xfce_panel_plugin_get_arguments (XfcePanelPlugin   *plugin,
                                  gchar           ***arguments)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
-  g_return_val_if_fail (arguments != NULL, FALSE);
 
   /* dupplicate the arguments */
-  *arguments = g_strdupv (plugin->priv->arguments);
+  if (G_LIKELY (arguments))
+    *arguments = g_strdupv (plugin->priv->arguments);
 
   return !!(plugin->priv->arguments != NULL);
 }

@@ -135,7 +135,9 @@ xfce_hvbox_new (GtkOrientation orientation,
   XfceHVBox *box;
 
   /* create new object */
-  box = g_object_new (XFCE_TYPE_HVBOX, "homogeneous", homogeneous, "spacing", spacing, NULL);
+  box = g_object_new (XFCE_TYPE_HVBOX,
+                      "homogeneous", homogeneous,
+                      "spacing", spacing, NULL);
 
   /* store the orientation */
   box->orientation = orientation;
