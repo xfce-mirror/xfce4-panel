@@ -25,6 +25,7 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
+#include <common/panel-xfconf.h>
 #include <xfconf/xfconf.h>
 #include <exo/exo.h>
 
@@ -274,18 +275,23 @@ separator_plugin_expose_event (GtkWidget      *widget,
 static void
 separator_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
+  SeparatorPlugin     *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
+  const PanelProperty  properties[] =
+  {
+    { "style", G_TYPE_UINT },
+    { "expand", G_TYPE_BOOLEAN },
+    { NULL, G_TYPE_NONE }
+  };
 
   /* set the xfconf channel */
-  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
 
-  /* bind properties */
-  xfconf_g_property_bind (plugin->channel, "/style",
-                          G_TYPE_UINT, plugin, "style");
-  xfconf_g_property_bind (plugin->channel, "/expand",
-                          G_TYPE_BOOLEAN, plugin, "expand");
+  /* connect all properties */
+  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+                         xfce_panel_plugin_get_property_base (panel_plugin),
+                         properties, NULL);
 
-  /* now we draw the plugin */
+  /* make sure the plugin is drawn */
   gtk_widget_queue_draw (GTK_WIDGET (panel_plugin));
 }
 
@@ -299,7 +305,8 @@ separator_plugin_free_data (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
 
   /* release the xfonf channel */
-  g_object_unref (G_OBJECT (plugin->channel));
+  if (G_LIKELY (plugin->channel != NULL))
+    g_object_unref (G_OBJECT (plugin->channel));
 
   /* shutdown xfconf */
   xfconf_shutdown ();
