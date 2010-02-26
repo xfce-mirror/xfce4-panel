@@ -36,6 +36,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -361,8 +362,8 @@ panel_plugin_external_46_realize (GtkWidget *widget)
   argv = g_new0 (gchar *, argc + 1);
   argv[PLUGIN_ARGV_0] = (gchar *) panel_module_get_filename (external->module);
   argv[PLUGIN_ARGV_FILENAME] = (gchar *) ""; /* unused, for wrapper only */
-  argv[PLUGIN_ARGV_UNIQUE_ID] = (gchar *) unique_id;
-  argv[PLUGIN_ARGV_SOCKET_ID] = (gchar *) socket_id;
+  argv[PLUGIN_ARGV_UNIQUE_ID] = unique_id;
+  argv[PLUGIN_ARGV_SOCKET_ID] = socket_id;
   argv[PLUGIN_ARGV_NAME] = (gchar *) panel_module_get_name (external->module);
   argv[PLUGIN_ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
   argv[PLUGIN_ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
@@ -377,6 +378,11 @@ panel_plugin_external_46_realize (GtkWidget *widget)
                                  NULL, argv, NULL,
                                  G_SPAWN_DO_NOT_REAP_CHILD, NULL,
                                  NULL, &pid, &error);
+
+  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
+               "plugin=%s, unique-id=%s. socked-id=%s, argc=%d, pid=%d",
+               argv[PLUGIN_ARGV_0], unique_id,
+               socket_id, argc, pid);
 
   if (G_LIKELY (succeed))
     {
