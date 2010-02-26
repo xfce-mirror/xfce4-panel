@@ -116,10 +116,7 @@ panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass)
   gobject_class->finalize = panel_preferences_dialog_finalize;
 }
 
-#define connect_signal(name,detail_signal,c_handler) \
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), name); \
-  panel_return_if_fail (G_IS_OBJECT (object)); \
-  g_signal_connect (G_OBJECT (object), detail_signal, G_CALLBACK (c_handler), dialog);
+
 
 static void
 panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
@@ -146,6 +143,11 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
   panel_application_take_dialog (dialog->application, GTK_WINDOW (window));
   g_signal_connect (G_OBJECT (window), "response", G_CALLBACK (panel_preferences_dialog_response), dialog);
+  
+#define connect_signal(name,detail_signal,c_handler) \
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), name); \
+  panel_return_if_fail (G_IS_OBJECT (object)); \
+  g_signal_connect (G_OBJECT (object), detail_signal, G_CALLBACK (c_handler), dialog);
 
   /* panel selector buttons and combobox */
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
@@ -232,7 +234,7 @@ panel_preferences_dialog_response (GtkWidget              *window,
 {
   GError    *error = NULL;
   GdkScreen *screen;
-  
+
   panel_return_if_fail (GTK_IS_DIALOG (window));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
