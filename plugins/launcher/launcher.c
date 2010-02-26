@@ -153,10 +153,10 @@ GQuark launcher_plugin_quark = 0;
 /* target types for dropping in the launcher plugin */
 static const GtkTargetEntry drop_targets[] =
 {
-    { (gchar *) "text/uri-list", 0, 0, },
-    { (gchar *) "STRING", 0, 0 },
-    { (gchar *) "UTF8_STRING", 0, 0 },
-    { (gchar *) "text/plain", 0, 0 },
+    { "text/uri-list", 0, 0, },
+    { "STRING", 0, 0 },
+    { "UTF8_STRING", 0, 0 },
+    { "text/plain", 0, 0 },
 };
 
 
@@ -265,10 +265,8 @@ launcher_plugin_init (LauncherPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->button, TRUE, TRUE, 0);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_widget_set_has_tooltip (plugin->button, TRUE);
-  gtk_drag_dest_set (plugin->button,
-                     GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
-                     drop_targets, G_N_ELEMENTS (drop_targets),
-                     GDK_ACTION_COPY);
+  gtk_drag_dest_set (plugin->button, GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
+                     drop_targets, G_N_ELEMENTS (drop_targets), DK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
       G_CALLBACK (launcher_plugin_button_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "button-release-event",
@@ -515,10 +513,7 @@ launcher_plugin_style_set (GtkWidget *widget,
   (*GTK_WIDGET_CLASS (launcher_plugin_parent_class)->style_set) (widget, previous_style);
 
   /* read the style properties */
-  gtk_widget_style_get (widget,
-                        "menu-icon-size", &menu_icon_size,
-                        NULL);
-
+  gtk_widget_style_get (widget, "menu-icon-size", &menu_icon_size, NULL);
   if (plugin->menu_icon_size != menu_icon_size)
     {
       plugin->menu_icon_size = menu_icon_size;
@@ -921,7 +916,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
   plugin->menu = gtk_menu_new ();
   gtk_menu_attach_to_widget (GTK_MENU (plugin->menu), GTK_WIDGET (plugin), NULL);
   g_signal_connect (G_OBJECT (plugin->menu), "deactivate",
-                    G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
+      G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
 
   /* get the arrow type of the plugin */
   arrow_type = xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow));
@@ -938,13 +933,12 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
       /* create the menu item */
       name = xfce_menu_item_get_name (item);
-      mi = gtk_image_menu_item_new_with_label (IS_STRING (name) ? name :
-                                               _("Unnamed Item"));
+      mi = gtk_image_menu_item_new_with_label (
+          IS_STRING (name) ? name : _("Unnamed Item"));
       g_object_set_qdata (G_OBJECT (mi), launcher_plugin_quark, plugin);
       gtk_widget_show (mi);
-      gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL,
-                         drop_targets, G_N_ELEMENTS (drop_targets),
-                         GDK_ACTION_COPY);
+      gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets,
+                         G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
       g_signal_connect (G_OBJECT (mi), "button-release-event",
           G_CALLBACK (launcher_plugin_menu_item_released), item);
       g_signal_connect (G_OBJECT (mi), "drag-data-received",
