@@ -58,18 +58,18 @@ void            panel_itembar_set_child_expand      (PanelItembar   *itembar,
                                                      GtkWidget      *widget,
                                                      gboolean        expand);
 
-guint           panel_itembar_get_n_children        (PanelItembar   *itembar);
+GSList         *panel_itembar_get_children          (PanelItembar   *itembar);
 
 gint            panel_itembar_get_child_index       (PanelItembar   *itembar,
                                                      GtkWidget      *widget);
 
 GtkWidget      *panel_itembar_get_nth_child         (PanelItembar   *itembar,
                                                      guint           idx);
-                                                     
+
 guint           panel_itembar_get_drop_index        (PanelItembar   *itembar,
                                                      gint            x,
                                                      gint            y);
-                                                
+
 GtkWidget      *panel_itembar_get_child_at_position (PanelItembar   *itembar,
                                                      gint            x,
                                                      gint            y);

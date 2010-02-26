@@ -71,6 +71,7 @@ struct _XfcePanelPluginProviderIface
                                        XfceScreenPosition       screen_position);
   void         (*set_opacity)         (XfcePanelPluginProvider *provider,
                                        gdouble                  opacity);
+  void         (*save)                (XfcePanelPluginProvider *provider);
 };
 
 GType        xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
@@ -90,6 +91,8 @@ void         xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProv
 
 void         xfce_panel_plugin_provider_set_opacity         (XfcePanelPluginProvider *provider,
                                                              gdouble                  opacity);
+
+void         xfce_panel_plugin_provider_save                (XfcePanelPluginProvider *provider);
 
 G_END_DECLS
 

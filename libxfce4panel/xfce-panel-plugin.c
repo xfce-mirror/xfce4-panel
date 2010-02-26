@@ -63,6 +63,9 @@ static void         xfce_panel_plugin_set_orientation      (XfcePanelPluginProvi
                                                             GtkOrientation                orientation);
 static void         xfce_panel_plugin_set_screen_position  (XfcePanelPluginProvider      *provider,
                                                             XfceScreenPosition            screen_position);
+static void         xfce_panel_plugin_set_opacity          (XfcePanelPluginProvider      *provider,
+                                                            gdouble                       opacity);
+static void         xfce_panel_plugin_save                 (XfcePanelPluginProvider      *provider);
 static void         xfce_panel_plugin_take_window_notify   (gpointer                      data,
                                                             GObject                      *where_the_object_was);
 
@@ -370,6 +373,8 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
   iface->set_size = xfce_panel_plugin_set_size;
   iface->set_orientation = xfce_panel_plugin_set_orientation;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
+  iface->set_opacity = xfce_panel_plugin_set_opacity;
+  iface->save = xfce_panel_plugin_save;
 }
 
 
@@ -461,9 +466,6 @@ xfce_panel_plugin_set_property (GObject      *object,
 static void
 xfce_panel_plugin_dispose (GObject *object)
 {
-  /* let the plugin save its configuration */
-  g_signal_emit (G_OBJECT (object), plugin_signals[SAVE], 0);
-
   /* allow the plugin to cleanup */
   g_signal_emit (G_OBJECT (object), plugin_signals[FREE_DATA], 0);
 
@@ -905,7 +907,7 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
 
-  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
   //~ if (G_LIKELY (xfce_panel_plugin_get_screen_position (plugin) != screen_position))
@@ -916,6 +918,28 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
       /* emit signal */
       g_signal_emit (G_OBJECT (plugin), plugin_signals[SCREEN_POSITION_CHANGED], 0, screen_position);
     //~ }
+}
+
+
+
+static void
+xfce_panel_plugin_set_opacity (XfcePanelPluginProvider *provider,
+                               gdouble                  opacity)
+{
+  //XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+
+  //panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+}
+
+
+
+static void
+xfce_panel_plugin_save (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  /* emit signal */
+  g_signal_emit (G_OBJECT (provider), plugin_signals[SAVE], 0);
 }
 
 

@@ -125,7 +125,7 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
 const gchar *
 xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 {
-  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
 
   return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_name) (provider);
 }
@@ -135,7 +135,7 @@ xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 const gchar *
 xfce_panel_plugin_provider_get_id (XfcePanelPluginProvider *provider)
 {
-  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
 
   return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_id) (provider);
 }
@@ -146,7 +146,7 @@ void
 xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
                                      gint                     size)
 {
-  g_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_size) (provider, size);
 }
@@ -157,7 +157,7 @@ void
 xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
                                             GtkOrientation           orientation)
 {
-  g_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_orientation) (provider, orientation);
 }
@@ -168,7 +168,28 @@ void
 xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provider,
                                                 XfceScreenPosition       screen_position)
 {
-  g_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_screen_position) (provider, screen_position);
+}
+
+
+
+void
+xfce_panel_plugin_provider_set_opacity (XfcePanelPluginProvider *provider,
+                                        gdouble                  opacity)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_opacity) (provider, opacity);
+}
+
+
+
+void
+xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->save) (provider);
 }

@@ -42,6 +42,7 @@
 #include <panel/panel-glue.h>
 
 #define PANEL_CONFIG_PATH "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "panels.new.xml"
+#define AUTOSAVE_INTERVAL (10 * 60)
 
 
 
@@ -52,6 +53,7 @@ static void panel_application_load (PanelApplication *application);
 static void panel_application_load_set_property (PanelWindow *window, const gchar *name, const gchar *value);
 static void panel_application_load_start_element (GMarkupParseContext *context, const gchar *element_name, const gchar **attribute_names, const gchar **attribute_values, gpointer  user_data, GError **error);
 static void panel_application_load_end_element (GMarkupParseContext *context, const gchar *element_name, gpointer user_data, GError **error);
+static gboolean panel_application_save_timeout (gpointer user_data);
 static gchar *panel_application_save_xml_contents (PanelApplication *application);
 static void panel_application_window_destroyed (GtkWidget *window, PanelApplication *application);
 
@@ -73,6 +75,9 @@ struct _PanelApplication
 
   /* internal list of opened dialogs */
   GSList  *dialogs;
+
+  /* autosave timeout */
+  guint    autosave_timeout_id;
 };
 
 typedef enum
@@ -131,6 +136,13 @@ panel_application_init (PanelApplication *application)
 
   /* load setup */
   panel_application_load (application);
+
+  /* start the autosave timeout */
+#if GLIB_CHECK_VERSION (2, 14, 0)
+  application->autosave_timeout_id = g_timeout_add_seconds (AUTOSAVE_INTERVAL, panel_application_save_timeout, application);
+#else
+  application->autosave_timeout_id = g_timeout_add (AUTOSAVE_INTERVAL * 1000, panel_application_save_timeout, application);
+#endif
 }
 
 
@@ -142,6 +154,9 @@ panel_application_finalize (GObject *object)
   GSList           *li;
 
   panel_return_if_fail (application->dialogs == NULL);
+
+  /* stop the autosave timeout */
+  g_source_remove (application->autosave_timeout_id);
 
   /* destroy the windows if they are still opened */
   for (li = application->windows; li != NULL; li = li->next)
@@ -584,6 +599,23 @@ panel_application_load_end_element (GMarkupParseContext  *context,
 
 
 
+static gboolean
+panel_application_save_timeout (gpointer user_data)
+{
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (user_data), FALSE);
+
+  GDK_THREADS_ENTER ();
+
+  /* save */
+  panel_application_save (PANEL_APPLICATION (user_data));
+
+  GDK_THREADS_LEAVE ();
+
+  return TRUE;
+}
+
+
+
 static gchar *
 panel_application_save_xml_contents (PanelApplication *application)
 {
@@ -736,10 +768,12 @@ panel_application_get (void)
 void
 panel_application_save (PanelApplication *application)
 {
-  gchar    *filename;
-  gchar    *contents;
-  gboolean  succeed;
-  GError   *error = NULL;
+  gchar     *filename;
+  gchar     *contents;
+  gboolean   succeed;
+  GError    *error = NULL;
+  GSList    *li;
+  GtkWidget *itembar;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
@@ -769,6 +803,16 @@ panel_application_save (PanelApplication *application)
     {
       /* print warning */
       g_critical ("Failed to create panel configuration file");
+    }
+
+  /* save the settings of all plugins */
+  for (li = application->windows; li != NULL; li = li->next)
+    {
+      /* get the itembar */
+      itembar = gtk_bin_get_child (GTK_BIN (li->data));
+
+      /* save all the plugins on the itembar */
+      gtk_container_foreach (GTK_CONTAINER (itembar), (GtkCallback) xfce_panel_plugin_provider_save, NULL);
     }
 }
 

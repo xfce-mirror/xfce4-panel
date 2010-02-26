@@ -36,38 +36,38 @@
 static void      panel_itembar_class_init       (PanelItembarClass *klass);
 static void      panel_itembar_init             (PanelItembar      *itembar);
 static void      panel_itembar_set_property     (GObject           *object,
-                                                 guint              prop_id, 
-                                                 const GValue      *value, 
+                                                 guint              prop_id,
+                                                 const GValue      *value,
                                                  GParamSpec        *pspec);
 static void      panel_itembar_finalize         (GObject           *object);
 static void      panel_itembar_realize          (GtkWidget         *widget);
 static void      panel_itembar_unrealize        (GtkWidget         *widget);
 static void      panel_itembar_map              (GtkWidget         *widget);
 static void      panel_itembar_unmap            (GtkWidget         *widget);
-static gboolean  panel_itembar_expose_event     (GtkWidget         *widget, 
+static gboolean  panel_itembar_expose_event     (GtkWidget         *widget,
                                                  GdkEventExpose    *event);
-static void      panel_itembar_size_request     (GtkWidget         *widget, 
+static void      panel_itembar_size_request     (GtkWidget         *widget,
                                                  GtkRequisition    *requisition);
-static void      panel_itembar_size_allocate    (GtkWidget         *widget, 
+static void      panel_itembar_size_allocate    (GtkWidget         *widget,
                                                  GtkAllocation     *allocation);
-static gboolean  panel_itembar_drag_motion      (GtkWidget         *widget, 
-                                                 GdkDragContext    *drag_context, 
-                                                 gint               drag_x,      
-                                                 gint               drag_y, 
+static gboolean  panel_itembar_drag_motion      (GtkWidget         *widget,
+                                                 GdkDragContext    *drag_context,
+                                                 gint               drag_x,
+                                                 gint               drag_y,
                                                  guint              time);
-static void      panel_itembar_drag_leave       (GtkWidget         *widget, 
-                                                 GdkDragContext    *drag_context, 
+static void      panel_itembar_drag_leave       (GtkWidget         *widget,
+                                                 GdkDragContext    *drag_context,
                                                  guint              time);
-static void      panel_itembar_add              (GtkContainer      *container, 
+static void      panel_itembar_add              (GtkContainer      *container,
                                                  GtkWidget         *child);
-static void      panel_itembar_remove           (GtkContainer      *container, 
+static void      panel_itembar_remove           (GtkContainer      *container,
                                                  GtkWidget         *child);
-static void      panel_itembar_forall           (GtkContainer      *container, 
-                                                 gboolean           include_internals, 
-                                                 GtkCallback        callback, 
+static void      panel_itembar_forall           (GtkContainer      *container,
+                                                 gboolean           include_internals,
+                                                 GtkCallback        callback,
                                                  gpointer           callback_data);
 static GType     panel_itembar_child_type       (GtkContainer      *container);
-static void      panel_itembar_set_orientation  (PanelItembar      *itembar, 
+static void      panel_itembar_set_orientation  (PanelItembar      *itembar,
                                                  GtkOrientation     orientation);
 
 
@@ -80,10 +80,10 @@ struct _PanelItembarClass
 struct _PanelItembar
 {
   GtkContainer __parent__;
-  
+
   /* window to send all events to the itembar */
   GdkWindow      *event_window;
-  
+
   /* dnd highlight line */
   GdkWindow      *highlight_window;
 
@@ -92,7 +92,7 @@ struct _PanelItembar
 
   /* internal list of children */
   GSList         *children;
-  
+
   /* current sensitivity state */
   guint           sensitive : 1;
 };
@@ -188,13 +188,13 @@ panel_itembar_init (PanelItembar *itembar)
   itembar->highlight_window = NULL;
   itembar->sensitive = TRUE;
   itembar->orientation = GTK_ORIENTATION_HORIZONTAL;
-  
+
   /* setup */
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (itembar), GTK_NO_WINDOW);
 
   /* don't redraw on allocation */
   gtk_widget_set_redraw_on_allocate (GTK_WIDGET (itembar), FALSE);
-  
+
   /* set the itembar drag destination targets */
   gtk_drag_dest_set (GTK_WIDGET (itembar), GTK_DEST_DEFAULT_MOTION,
                      drop_targets, G_N_ELEMENTS (drop_targets),
@@ -240,10 +240,10 @@ panel_itembar_realize (GtkWidget *widget)
 {
   PanelItembar  *itembar = PANEL_ITEMBAR (widget);
   GdkWindowAttr  attributes;
-  
+
   /* let gtk handle it's own realation first */
   (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->realize) (widget);
-  
+
   /* setup the window attributes */
   attributes.x = widget->allocation.x;
   attributes.y = widget->allocation.y;
@@ -252,10 +252,10 @@ panel_itembar_realize (GtkWidget *widget)
   attributes.wclass = GDK_INPUT_ONLY;
   attributes.window_type = GDK_WINDOW_CHILD;
   attributes.event_mask = gtk_widget_get_events (widget);
-  
+
   /* allocate the event window */
   itembar->event_window = gdk_window_new (GDK_WINDOW (widget->window), &attributes, GDK_WA_X | GDK_WA_Y);
-  
+
   /* set the window user data */
   gdk_window_set_user_data (GDK_WINDOW (itembar->event_window), widget);
 }
@@ -266,7 +266,7 @@ static void
 panel_itembar_unrealize (GtkWidget *widget)
 {
   PanelItembar *itembar = PANEL_ITEMBAR (widget);
-  
+
   /* destroy the event window */
   if (G_LIKELY (itembar->event_window))
     {
@@ -274,7 +274,7 @@ panel_itembar_unrealize (GtkWidget *widget)
       gdk_window_destroy (itembar->event_window);
       itembar->event_window = NULL;
     }
-    
+
   (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->unrealize) (widget);
 }
 
@@ -284,13 +284,13 @@ static void
 panel_itembar_map (GtkWidget *widget)
 {
   PanelItembar *itembar = PANEL_ITEMBAR (widget);
-  
+
   /* show the event window */
   if (G_LIKELY (itembar->event_window))
     gdk_window_show (itembar->event_window);
-  
+
   (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->map) (widget);
-  
+
   /* raise the window if we're in insensitive mode */
   if (G_UNLIKELY (!itembar->sensitive && itembar->event_window))
     gdk_window_raise (itembar->event_window);
@@ -302,11 +302,11 @@ static void
 panel_itembar_unmap (GtkWidget *widget)
 {
   PanelItembar *itembar = PANEL_ITEMBAR (widget);
-  
+
   /* hide the event window */
   if (G_LIKELY (itembar->event_window))
     gdk_window_hide (itembar->event_window);
-  
+
   (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->unmap) (widget);
 }
 
@@ -317,13 +317,13 @@ panel_itembar_expose_event (GtkWidget      *widget,
                             GdkEventExpose *event)
 {
   PanelItembar *itembar = PANEL_ITEMBAR (widget);
-  
+
   (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->expose_event) (widget, event);
-  
+
   /* keep our event window on top */
   if (itembar->sensitive == FALSE && itembar->event_window)
     gdk_window_raise (itembar->event_window);
-    
+
   return TRUE;
 }
 
@@ -389,10 +389,10 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
   /* set widget allocation */
   widget->allocation = *allocation;
-  
+
   /* allocate the event window */
   if (G_LIKELY (itembar->event_window))
-    gdk_window_move_resize (GDK_WINDOW (itembar->event_window), allocation->x, 
+    gdk_window_move_resize (GDK_WINDOW (itembar->event_window), allocation->x,
                             allocation->y, allocation->width, allocation->height);
 
   /* get the border width */
@@ -547,7 +547,7 @@ panel_itembar_drag_motion (GtkWidget      *widget,
   gint           x = 0, y = 0;
   gint           width, height;
   gboolean       is_horizontal;
-  
+
   if (G_UNLIKELY (itembar->highlight_window == NULL))
     {
       /* setup window attributes */
@@ -558,24 +558,24 @@ panel_itembar_drag_motion (GtkWidget      *widget,
       attributes.event_mask = GDK_VISIBILITY_NOTIFY_MASK | GDK_EXPOSURE_MASK | GDK_POINTER_MOTION_MASK;
       attributes.width = HIGHLIGHT_THINKNESS;
       attributes.height = HIGHLIGHT_THINKNESS;
-      
+
       /* allocate window */
-      itembar->highlight_window = gdk_window_new (gtk_widget_get_parent_window (widget), &attributes, 
+      itembar->highlight_window = gdk_window_new (gtk_widget_get_parent_window (widget), &attributes,
                                                   GDK_WA_VISUAL | GDK_WA_COLORMAP);
-      
+
       /* set user data */
       gdk_window_set_user_data (itembar->highlight_window, widget);
-      
+
       /* set window background */
       gdk_window_set_background (itembar->highlight_window, &widget->style->fg[widget->state]);
     }
-    
+
   /* get orientaion */
   is_horizontal = !!(itembar->orientation == GTK_ORIENTATION_HORIZONTAL);
-    
+
   /* get the drop index */
   drop_index = panel_itembar_get_drop_index (itembar, drag_x, drag_y);
-  
+
   /* get the nth child */
   child = panel_itembar_get_nth_child (itembar, drop_index);
   if (G_LIKELY (child))
@@ -590,32 +590,32 @@ panel_itembar_drag_motion (GtkWidget      *widget,
     {
       /* get the last child */
       child = panel_itembar_get_nth_child (itembar, g_slist_length (itembar->children) - 1);
-      
+
       /* get coordinate at end of the child */
       if (is_horizontal)
         x = child->allocation.x + child->allocation.width;
       else
         y = child->allocation.y + child->allocation.height;
     }
-    
+
   /* get size of the hightlight */
   width = is_horizontal ? HIGHLIGHT_THINKNESS : widget->allocation.width;
   height = is_horizontal ? widget->allocation.height : HIGHLIGHT_THINKNESS;
-  
+
   /* show line between the two children */
   x += HIGHLIGHT_THINKNESS / 2;
   y += HIGHLIGHT_THINKNESS / 2;
-  
+
   /* keep the heightlight window inside the itembar */
   x = CLAMP (x, widget->allocation.x, widget->allocation.x + widget->allocation.width - HIGHLIGHT_THINKNESS);
   y = CLAMP (y, widget->allocation.y, widget->allocation.y + widget->allocation.height - HIGHLIGHT_THINKNESS);
-  
+
   /* move the hightlight window */
   gdk_window_move_resize (itembar->highlight_window, x, y, width, height);
-  
+
   /* show the window */
   gdk_window_show (itembar->highlight_window);
-  
+
   return TRUE;
 }
 
@@ -627,7 +627,7 @@ panel_itembar_drag_leave (GtkWidget      *widget,
                           guint           time)
 {
   PanelItembar *itembar = PANEL_ITEMBAR (widget);
-  
+
   /* destroy the drag highlight window */
   if (G_LIKELY (itembar->highlight_window))
     {
@@ -757,13 +757,13 @@ panel_itembar_set_sensitive (PanelItembar *itembar,
 {
   PanelItembarChild *child;
   GSList            *li;
-  
+
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
   panel_return_if_fail (itembar->event_window == NULL || GDK_IS_WINDOW (itembar->event_window));
-  
+
   /* set internal value */
   itembar->sensitive = !!sensitive;
-  
+
   /* raise or lower the event window */
   if (G_LIKELY (itembar->event_window))
     {
@@ -772,13 +772,13 @@ panel_itembar_set_sensitive (PanelItembar *itembar,
       else
         gdk_window_raise (itembar->event_window);
     }
-    
+
   /* walk the children */
   for (li = itembar->children; li != NULL; li = li->next)
     {
       /* get child */
       child = li->data;
-      
+
       /* set widget sensitivity */
       gtk_widget_set_sensitive (child->widget, sensitive);
     }
@@ -939,7 +939,7 @@ panel_itembar_get_child_index (PanelItembar *itembar,
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), -1);
   panel_return_val_if_fail (GTK_IS_WIDGET (widget), -1);
   panel_return_val_if_fail (widget->parent == GTK_WIDGET (itembar), -1);
-  
+
   /* walk the children to find the child widget */
   for (idx = 0, li = itembar->children; li != NULL; li = li->next, idx++)
     {
@@ -973,7 +973,7 @@ panel_itembar_get_nth_child (PanelItembar *itembar,
 
 
 
-guint           
+guint
 panel_itembar_get_drop_index (PanelItembar  *itembar,
                               gint           x,
                               gint           y)
@@ -983,29 +983,29 @@ panel_itembar_get_drop_index (PanelItembar  *itembar,
   GtkAllocation     *allocation;
   gboolean           is_horizontal;
   guint              idx;
-  
+
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), 0);
-  
+
   /* add the itembar position */
   x += GTK_WIDGET (itembar)->allocation.x;
   y += GTK_WIDGET (itembar)->allocation.y;
-  
+
   /* whether the itembar is horizontal */
   is_horizontal = !!(itembar->orientation == GTK_ORIENTATION_HORIZONTAL);
-  
+
   for (li = itembar->children, idx = 0; li != NULL; li = li->next, idx++)
     {
       child = li->data;
-      
+
       /* get the child allocation */
       allocation = &(child->widget->allocation);
-      
+
       /* check if the drop index is before the half of the allocation */
       if ((is_horizontal && x < (allocation->x + allocation->width / 2))
           || (!is_horizontal && y < (allocation->y + allocation->height / 2)))
         break;
     }
-    
+
   return idx;
 }
 
@@ -1019,21 +1019,21 @@ panel_itembar_get_child_at_position (PanelItembar *itembar,
   PanelItembarChild *child;
   GSList            *li;
   GtkAllocation     *allocation;
-  
+
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), NULL);
-  
+
   for (li = itembar->children; li != NULL; li = li->next)
     {
       child = li->data;
-      
+
       /* get the child allocation */
       allocation = &(child->widget->allocation);
-      
+
       /* check if the coordinate is inside the allocation */
       if (x >= allocation->x && x <= (allocation->x + allocation->width)
           && y >= allocation->y && y <= (allocation->y + allocation->height))
         return child->widget;
     }
-    
+
   return NULL;
 }
