@@ -57,6 +57,7 @@ static void launcher_plugin_style_set (GtkWidget *widget, GtkStyle *previous_sty
 static void launcher_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_removed (XfcePanelPlugin *panel_plugin);
+static gboolean launcher_plugin_remote_event (XfcePanelPlugin *panel_plugin, const gchar *name, const GValue *value);
 static void launcher_plugin_save (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
 static gboolean launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
@@ -197,6 +198,7 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
   plugin_class->configure_plugin = launcher_plugin_configure_plugin;
   plugin_class->screen_position_changed = launcher_plugin_screen_position_changed;
   plugin_class->removed = launcher_plugin_removed;
+  plugin_class->remote_event = launcher_plugin_remote_event;
 
   g_object_class_install_property (gobject_class,
                                    PROP_ITEMS,
@@ -1016,6 +1018,27 @@ launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
           xfce_panel_plugin_get_unique_id (panel_plugin));
       g_error_free (error);
     }
+}
+
+
+
+static gboolean
+launcher_plugin_remote_event (XfcePanelPlugin *panel_plugin,
+                              const gchar     *name,
+                              const GValue    *value)
+{
+  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
+
+  if (exo_str_is_equal (name, "popup")
+      && LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->items)
+      && (plugin->menu == NULL || !GTK_WIDGET_VISIBLE (plugin->menu)))
+    {
+      launcher_plugin_menu_popup (plugin);
+
+      return TRUE;
+    }
+
+  return FALSE;
 }
 
 
