@@ -63,6 +63,8 @@ static void launcher_plugin_icon_theme_changed (GtkIconTheme *icon_theme, Launch
 
 static void launcher_plugin_pack_widgets (LauncherPlugin *plugin);
 
+static GdkPixbuf *launcher_plugin_tooltip_pixbuf (GdkScreen *screen, const gchar *icon_name);
+
 static void launcher_plugin_menu_deactivate (GtkWidget *menu, LauncherPlugin *plugin);
 static gboolean launcher_plugin_menu_item_released (GtkMenuItem *widget, GdkEventButton *event, XfceMenuItem *item);
 static void launcher_plugin_menu_item_drag_data_received (GtkWidget *widget,GdkDragContext *context, gint x,gint y,GtkSelectionData *data, guint info, guint drag_time, XfceMenuItem *item);
@@ -114,6 +116,8 @@ struct _LauncherPlugin
   GtkWidget         *menu;
 
   GSList            *items;
+
+  GdkPixbuf         *tooltip_cache;
 
   guint              menu_timeout_id;
   GtkIconSize        menu_icon_size;
@@ -243,6 +247,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->menu = NULL;
   plugin->items = NULL;
   plugin->child = NULL;
+  plugin->tooltip_cache = NULL;
   plugin->menu_timeout_id = 0;
   plugin->menu_icon_size = DEFAULT_MENU_ICON_SIZE;
 
@@ -334,6 +339,7 @@ launcher_plugin_get_property (GObject    *object,
 
       case PROP_DISABLE_TOOLTIPS:
         g_value_set_boolean (value, plugin->disable_tooltips);
+        gtk_widget_set_has_tooltip (plugin->button, !plugin->disable_tooltips);
         break;
 
       case PROP_MOVE_FIRST:
@@ -597,6 +603,10 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* free items */
   g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
   g_slist_free (plugin->items);
+
+  /* release the cached tooltip */
+  if (plugin->tooltip_cache != NULL)
+    g_object_unref (G_OBJECT (plugin->tooltip_cache));
 }
 
 
@@ -769,6 +779,31 @@ launcher_plugin_pack_widgets (LauncherPlugin *plugin)
 
 
 
+static GdkPixbuf *
+launcher_plugin_tooltip_pixbuf (GdkScreen   *screen,
+                                const gchar *icon_name)
+{
+  GtkIconTheme *theme;
+
+  panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
+
+  if (!IS_STRING (icon_name))
+    return NULL;
+
+  /* load directly from a file */
+  if (G_UNLIKELY (g_path_is_absolute (icon_name)))
+    return exo_gdk_pixbuf_new_from_file_at_max_size (icon_name, 32, 32, TRUE, NULL);
+
+  if (G_LIKELY (screen != NULL))
+    theme = gtk_icon_theme_get_for_screen (screen);
+  else
+    theme = gtk_icon_theme_get_default ();
+
+  return gtk_icon_theme_load_icon (theme, icon_name, 32, 0, NULL);
+}
+
+
+
 static void
 launcher_plugin_menu_deactivate (GtkWidget      *menu,
                                  LauncherPlugin *plugin)
@@ -906,7 +941,6 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       mi = gtk_image_menu_item_new_with_label (IS_STRING (name) ? name :
                                                _("Unnamed Item"));
       g_object_set_qdata (G_OBJECT (mi), launcher_plugin_quark, plugin);
-      gtk_widget_set_has_tooltip (mi, TRUE);
       gtk_widget_show (mi);
       gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL,
                          drop_targets, G_N_ELEMENTS (drop_targets),
@@ -920,8 +954,11 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
       /* only connect the tooltip signal if tips are enabled */
       if (plugin->disable_tooltips == FALSE)
-        g_signal_connect (G_OBJECT (mi), "query-tooltip",
-            G_CALLBACK (launcher_plugin_item_query_tooltip), item);
+        {
+          gtk_widget_set_has_tooltip (mi, TRUE);
+          g_signal_connect (G_OBJECT (mi), "query-tooltip",
+              G_CALLBACK (launcher_plugin_item_query_tooltip), item);
+        }
 
       /* depending on the menu position we prepend or append */
       if (G_UNLIKELY (arrow_type == GTK_ARROW_DOWN))
@@ -1028,6 +1065,13 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
   const gchar  *icon_name;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+
+  /* invalate the tooltip icon cache */
+  if (plugin->tooltip_cache != NULL)
+    {
+      g_object_unref (G_OBJECT (plugin->tooltip_cache));
+      plugin->tooltip_cache = NULL;
+    }
 
   /* get first item */
   if (G_LIKELY (plugin->items != NULL))
@@ -1160,18 +1204,36 @@ launcher_plugin_button_query_tooltip (GtkWidget      *widget,
                                       GtkTooltip     *tooltip,
                                       LauncherPlugin *plugin)
 {
+  gboolean      result;
+  XfceMenuItem *item;
+
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (plugin->disable_tooltips == FALSE, FALSE);
 
   /* check if we show tooltips */
-  if (plugin->disable_tooltips
-      || plugin->arrow_position
+  if (plugin->arrow_position == LAUNCHER_ARROW_INTERNAL
       || plugin->items == NULL
       || plugin->items->data == NULL)
     return FALSE;
 
-  return launcher_plugin_item_query_tooltip (widget, x, y, keyboard_mode,
-                                             tooltip,
-                                             XFCE_MENU_ITEM (plugin->items->data));
+  /* get the first item */
+  item = XFCE_MENU_ITEM (plugin->items->data);
+
+  /* handle the basic tooltip data */
+  result = launcher_plugin_item_query_tooltip (widget, x, y, keyboard_mode, tooltip, item);
+  if (G_LIKELY (result))
+    {
+      /* set the cached icon if not already set */
+      if (G_UNLIKELY (plugin->tooltip_cache == NULL))
+        plugin->tooltip_cache =
+            launcher_plugin_tooltip_pixbuf (gtk_widget_get_screen (widget),
+                                            xfce_menu_item_get_icon_name (item));
+
+      if (G_LIKELY (plugin->tooltip_cache != NULL))
+        gtk_tooltip_set_icon (tooltip, plugin->tooltip_cache);
+    }
+
+  return result;
 }
 
 
@@ -1464,7 +1526,8 @@ launcher_plugin_item_query_tooltip (GtkWidget    *widget,
                                     XfceMenuItem *item)
 {
   gchar       *markup;
-  const gchar *name, *comment, *icon_name;
+  const gchar *name, *comment;
+  GdkPixbuf   *pixbuf;
 
   panel_return_val_if_fail (XFCE_IS_MENU_ITEM (item), FALSE);
 
@@ -1485,11 +1548,20 @@ launcher_plugin_item_query_tooltip (GtkWidget    *widget,
       gtk_tooltip_set_text (tooltip, name);
     }
 
-  icon_name = xfce_menu_item_get_icon_name (item);
-  if (G_LIKELY (icon_name))
+  /* we use the cached pixbuf for the button, because they are more
+   * likely to occur and we don't want to poke the hard drive multiple
+   * times for a simple pixbuf. for menu items this is not a big real,
+   * so here we use the pixbuf directly */
+  if (GTK_IS_MENU_ITEM (widget))
     {
-      /* TODO pixbuf with cache */
-    }
+      pixbuf = launcher_plugin_tooltip_pixbuf (gtk_widget_get_screen (widget),
+                                               xfce_menu_item_get_icon_name (item));
+      if (G_LIKELY (pixbuf != NULL))
+        {
+          gtk_tooltip_set_icon (tooltip, pixbuf);
+          g_object_unref (G_OBJECT (pixbuf));
+        }
+     }
 
   return TRUE;
 }
