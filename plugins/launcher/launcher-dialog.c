@@ -42,6 +42,13 @@ typedef struct
 }
 LauncherPluginDialog;
 
+enum
+{
+  COL_ADD_ICON,
+  COL_ADD_NAME,
+  COL_ADD_FILENAME
+};
+
 
 
 static gboolean
@@ -66,7 +73,7 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
   text_casefolded = g_utf8_casefold (normalized, -1);
   g_free (normalized);
 
-  gtk_tree_model_get (model, iter, 0, &name, -1);
+  gtk_tree_model_get (model, iter, COL_ADD_NAME, &name, -1);
   if (G_LIKELY (name != NULL))
     {
       /* casefold the name */
@@ -97,13 +104,25 @@ launcher_dialog_add_store_insert (gpointer filename,
 {
   GtkListStore *store = GTK_LIST_STORE (user_data);
   GtkTreeIter   iter;
+  const gchar  *icon_name;
 
   panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
   panel_return_if_fail (GTK_IS_LIST_STORE (user_data));
+  
+  /* TODO get rid of this and support absolute paths too */
+  icon_name = xfce_menu_item_get_icon_name (item);
+  if (icon_name != NULL
+      && (g_path_is_absolute (icon_name)
+          || !gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), icon_name)))
+    icon_name = NULL;
 
   /* insert the item */
   gtk_list_store_append (store, &iter);
-  gtk_list_store_set (store, &iter, 0, xfce_menu_item_get_name (item), -1);
+  gtk_list_store_set (store, &iter,
+                      COL_ADD_ICON, icon_name,
+                      COL_ADD_NAME, xfce_menu_item_get_name (item), 
+                      COL_ADD_FILENAME, xfce_menu_item_get_filename (item),
+                      -1);
 }
 
 
@@ -332,8 +351,31 @@ launcher_dialog_add_response (GtkWidget            *widget,
                               gint                  response_id,
                               LauncherPluginDialog *dialog)
 {
+  GObject          *treeview, *store;
+  GtkTreeSelection *selection;
+  GtkTreeModel     *model;
+  GtkTreeIter       iter;
+  gchar            *filename;
+
   panel_return_if_fail (GTK_IS_DIALOG (widget));
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
+  
+  if (response_id != 0)
+    {
+      /* set the selected item in the treeview */
+      treeview = gtk_builder_get_object (dialog->builder, "add-treeview");
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+      if (gtk_tree_selection_get_selected (selection, &model, &iter))
+        {
+          gtk_tree_model_get (model, &iter, COL_ADD_FILENAME, &filename, -1);
+          
+          g_free (filename);
+        }
+    }
+  
+  /* empty the store */
+  store = gtk_builder_get_object (dialog->builder, "add-store");
+  gtk_list_store_clear (GTK_LIST_STORE (store));
 
   /* hide the dialog, since it's owned by gtkbuilder */
   gtk_widget_hide (widget);
@@ -406,13 +448,17 @@ launcher_dialog_show (LauncherPlugin *plugin)
       g_signal_connect (G_OBJECT (object), "delete-event", G_CALLBACK (exo_noop_true), NULL);
 
       object = gtk_builder_get_object (builder, "add-store");
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (object), 0, GTK_SORT_ASCENDING);
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (object), COL_ADD_NAME, GTK_SORT_ASCENDING);
 
       /* setup search filter in the add dialog */
       object = gtk_builder_get_object (builder, "add-store-filter");
       entry = gtk_builder_get_object (builder, "add-search");
       gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (object), launcher_dialog_add_visible_function, entry, NULL);
       g_signal_connect_swapped (G_OBJECT (entry), "changed", G_CALLBACK (gtk_tree_model_filter_refilter), object);
+
+      /* setup the icon size */
+      object = gtk_builder_get_object (builder, "addrenderericon");
+      g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
 
       /* show the dialog */
       gtk_widget_show (GTK_WIDGET (window));

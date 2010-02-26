@@ -31,7 +31,11 @@
   </object>
   <object class="GtkListStore" id="add-store">
     <columns>
+      <!-- column-name icon -->
+      <column type="gchararray"/>
       <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name filename -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -267,6 +271,7 @@
                     <child>
                       <object class="GtkComboBox" id="arrow-position">
                         <property name="visible">True</property>
+                        <property name="model">arrow-position-store</property>
                         <property name="button_sensitivity">on</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
@@ -351,7 +356,6 @@
   </object>
   <object class="XfceTitledDialog" id="dialog-editor">
     <property name="title" translatable="yes">Edit Custom Launcher</property>
-    <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">applications-other</property>
@@ -637,7 +641,6 @@
   </object>
   <object class="XfceTitledDialog" id="dialog-add">
     <property name="title" translatable="yes">Add New Entry</property>
-    <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="default_width">400</property>
     <property name="default_height">400</property>
@@ -703,11 +706,17 @@
                     <property name="enable_search">False</property>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                        <property name="title">Icon</property>
+                        <property name="spacing">2</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <object class="GtkCellRendererPixbuf" id="addrenderericon"/>
                           <attributes>
-                            <attribute name="text">0</attribute>
+                            <attribute name="icon-name">0</attribute>
+                          </attributes>
+                        </child>
+                        <child>
+                          <object class="GtkCellRendererText" id="addrenderername"/>
+                          <attributes>
+                            <attribute name="text">1</attribute>
                           </attributes>
                         </child>
                       </object>

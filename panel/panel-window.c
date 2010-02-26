@@ -70,11 +70,10 @@ static void panel_window_struts_update (PanelWindow  *window, gint x, gint y, gi
 static void panel_window_set_colormap (PanelWindow *window);
 static void panel_window_get_position (PanelWindow *window, gint *root_x, gint *root_y);
 static void panel_window_set_borders (PanelWindow *window);
-static void panel_window_set_autohide (PanelWindow *window, gboolean     autohide);
+static void panel_window_set_autohide (PanelWindow *window, gboolean autohide);
 static void panel_window_menu_quit (gpointer boolean);
 static void panel_window_menu_deactivate (GtkMenu *menu, PanelWindow *window);
 static void panel_window_menu_popup (PanelWindow *window);
-
 static void panel_window_set_plugin_active_panel (GtkWidget *widget, gpointer user_data);
 static void panel_window_set_plugin_background_alpha (GtkWidget *widget, gpointer user_data);
 static void panel_window_set_plugin_size (GtkWidget *widget, gpointer user_data);
@@ -235,7 +234,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->size_request = panel_window_size_request;
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
-
+  
   g_object_class_install_property (gobject_class,
                                    PROP_HORIZONTAL,
                                    g_param_spec_boolean ("horizontal", NULL, NULL,
@@ -305,7 +304,9 @@ panel_window_class_init (PanelWindowClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_SNAP_EDGE,
                                    g_param_spec_uint ("snap-edge", NULL, NULL,
-                                                      PANEL_SNAP_EGDE_NONE, PANEL_SNAP_EGDE_S, PANEL_SNAP_EGDE_NONE,
+                                                      PANEL_SNAP_EGDE_NONE, 
+                                                      PANEL_SNAP_EGDE_S, 
+                                                      PANEL_SNAP_EGDE_NONE,
                                                       EXO_PARAM_READWRITE));
 
   /* initialize the atoms */
