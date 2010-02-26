@@ -74,6 +74,10 @@ panel_properties_bind (XfconfChannel       *channel,
       property = g_strconcat (property_base, "/", prop->property, NULL);
       xfconf_g_property_bind (channel, property, prop->type, object, prop->property);
       g_free (property);
+
+      /* notify the property to it gets saved */
+      if (save_properties)
+        g_object_notify (G_OBJECT (object), prop->property);
     }
 }
 
