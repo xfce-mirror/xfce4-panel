@@ -39,6 +39,8 @@ GType panel_plugin_external_get_type (void) G_GNUC_CONST;
 
 XfcePanelPluginProvider *panel_plugin_external_new (PanelModule *module, const gchar *name, const gchar *id, gchar **arguments);
 
+void panel_plugin_external_set_background_alpha (PanelPluginExternal *external, gint percentage);
+
 G_END_DECLS
 
 #endif /* !__PANEL_PLUGIN_EXTERNAL_H__ */

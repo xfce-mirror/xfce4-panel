@@ -30,6 +30,7 @@
 #include <panel/panel-window.h>
 #include <panel/panel-glue.h>
 #include <panel/panel-application.h>
+#include <panel/panel-plugin-external.h>
 
 #define HANDLE_SIZE       (8)
 #define HANDLE_SPACING    (2)
@@ -1880,12 +1881,26 @@ panel_window_get_background_alpha (PanelWindow *window)
 }
 
 
+static void
+panel_window_set_plugin_background_alpha (GtkWidget *widget,
+                                          gpointer   user_data)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
+
+  /* we only have to send the alpha to external plugins */
+  if (PANEL_IS_PLUGIN_EXTERNAL (widget))
+    panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (widget), panel_window_get_background_alpha (PANEL_WINDOW (user_data)));
+}
+
+
 
 void
 panel_window_set_background_alpha (PanelWindow *window,
                                    gint         alpha)
 {
-  gdouble value;
+  gdouble    value;
+  GtkWidget *itembar;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (alpha >= 0 && alpha <= 100);
@@ -1897,8 +1912,14 @@ panel_window_set_background_alpha (PanelWindow *window,
       /* set new alpha value */
       window->background_alpha = value;
 
-      /* redraw */
+      /* redraw the window */
       gtk_widget_queue_draw (GTK_WIDGET (window));
+
+      /* get the itembar */
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+
+      /* walk the plugins */
+      gtk_container_foreach (GTK_CONTAINER (itembar), panel_window_set_plugin_background_alpha, window);
     }
 }
 

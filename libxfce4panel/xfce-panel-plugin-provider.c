@@ -176,17 +176,6 @@ xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provide
 
 
 void
-xfce_panel_plugin_provider_set_opacity (XfcePanelPluginProvider *provider,
-                                        gdouble                  opacity)
-{
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_opacity) (provider, opacity);
-}
-
-
-
-void
 xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));

@@ -40,6 +40,7 @@
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-dialogs.h>
 #include <panel/panel-glue.h>
+#include <panel/panel-plugin-external.h>
 
 #define PANEL_CONFIG_PATH "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "panels.new.xml"
 #define AUTOSAVE_INTERVAL (10 * 60)
@@ -337,7 +338,7 @@ expand_handle (GtkWidget *plugin,
 {
   GtkWidget *itembar;
 
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   /* get the itembar */
@@ -439,12 +440,17 @@ panel_application_insert_plugin (PanelApplication  *application,
       /* add the item to the panel */
       panel_itembar_insert (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), position);
 
-      /* show the plugin */
-      gtk_widget_show (GTK_WIDGET (provider));
+      /* set the background alpha if the plugin is external */
+      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
+        panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider), panel_window_get_background_alpha (window));
 
+      /* send plugin information */
       xfce_panel_plugin_provider_set_orientation (provider, panel_window_get_orientation (window));
       xfce_panel_plugin_provider_set_screen_position (provider, panel_glue_get_screen_position (window));
       xfce_panel_plugin_provider_set_size (provider, panel_window_get_size (window));
+
+      /* show the plugin */
+      gtk_widget_show (GTK_WIDGET (provider));
 
       /* we've succeeded */
       succeed = TRUE;

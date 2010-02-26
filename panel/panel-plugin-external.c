@@ -44,6 +44,7 @@ static gboolean     panel_plugin_external_plug_removed        (GtkSocket        
 static void         panel_plugin_external_send_message        (PanelPluginExternal          *external,
                                                                XfcePanelPluginMessage        message,
                                                                glong                         value);
+static void         panel_plugin_external_free_queue          (PanelPluginExternal          *external);
 static void         panel_plugin_external_flush_queue         (PanelPluginExternal          *external);
 static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider      *provider);
 static const gchar *panel_plugin_external_get_id              (XfcePanelPluginProvider      *provider);
@@ -53,6 +54,7 @@ static void         panel_plugin_external_set_orientation     (XfcePanelPluginPr
                                                                GtkOrientation                orientation);
 static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider      *provider,
                                                                XfceScreenPosition            screen_position);
+static void         panel_plugin_external_save                (XfcePanelPluginProvider      *provider);
 static void         panel_plugin_external_set_sensitive       (PanelPluginExternal          *external);
 
 
@@ -145,6 +147,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
   iface->set_size = panel_plugin_external_set_size;
   iface->set_orientation = panel_plugin_external_set_orientation;
   iface->set_screen_position = panel_plugin_external_set_screen_position;
+  iface->save = panel_plugin_external_save;
 }
 
 
@@ -154,11 +157,12 @@ panel_plugin_external_finalize (GObject *object)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (object);
 
-  panel_return_if_fail (external->queue == NULL);
-
   /* cleanup */
   g_free (external->id);
   g_strfreev (external->arguments);
+
+  /* free the queue if needed */
+  panel_plugin_external_free_queue (external);
 
   /* release the module */
   g_object_unref (G_OBJECT (external->module));
@@ -383,6 +387,29 @@ panel_plugin_external_send_message (PanelPluginExternal    *external,
 
 
 static void
+panel_plugin_external_free_queue (PanelPluginExternal *external)
+{
+  GSList *li;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  if (external->queue != NULL)
+    {
+      /* cleanup all the queue data */
+      for (li = external->queue; li != NULL; li = li->next)
+        g_slice_free (QueueData, li->data);
+
+      /* free the list */
+      g_slist_free (external->queue);
+
+      /* set to null */
+      external->queue = NULL;
+    }
+}
+
+
+
+static void
 panel_plugin_external_flush_queue (PanelPluginExternal *external)
 {
   GSList    *li;
@@ -391,25 +418,17 @@ panel_plugin_external_flush_queue (PanelPluginExternal *external)
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (external->plug_window_id != 0);
 
-  if (external->queue != NULL)
+  if (G_LIKELY (external->queue != NULL))
     {
-      /* free all message */
+      /* send all messages in the queue */
       for (li = external->queue; li != NULL; li = li->next)
         {
           data = li->data;
-
-          /* send message */
           panel_plugin_external_send_message (external, data->message, data->value);
-
-          /* cleanup */
-          g_slice_free (QueueData, data);
         }
 
-      /* cleanup */
-      g_slist_free (external->queue);
-
-      /* set to null */
-      external->queue = NULL;
+      /* free the queue */
+      panel_plugin_external_free_queue (external);
     }
 }
 
@@ -441,6 +460,9 @@ static void
 panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
                                 gint                     size)
 {
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
   /* send the signal to the wrapper */
   panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SET_SIZE, size);
 }
@@ -451,6 +473,9 @@ static void
 panel_plugin_external_set_orientation (XfcePanelPluginProvider *provider,
                                        GtkOrientation           orientation)
 {
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
   /* send the signal to the wrapper */
   panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SET_ORIENTATION, orientation);
 }
@@ -461,8 +486,23 @@ static void
 panel_plugin_external_set_screen_position (XfcePanelPluginProvider *provider,
                                            XfceScreenPosition       screen_position)
 {
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
   /* send the signal to the wrapper */
   panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SET_SCREEN_POSITION, screen_position);
+}
+
+
+
+static void
+panel_plugin_external_save (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  /* send the signal to the wrapper */
+  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SAVE, 0);
 }
 
 
@@ -501,3 +541,15 @@ panel_plugin_external_new (PanelModule  *module,
   return XFCE_PANEL_PLUGIN_PROVIDER (external);
 }
 
+
+
+void
+panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
+                                            gint                 percentage)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (external));
+
+  /* send the signal to the wrapper */
+  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (external), MESSAGE_SET_BACKGROUND_ALPHA, percentage);
+}

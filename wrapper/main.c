@@ -114,7 +114,7 @@ main (gint argc, gchar **argv)
           gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
           gtk_widget_show (plug);
 
-          /* show the plugin */
+          /* realize the plugin */
           gtk_widget_show (GTK_WIDGET (provider));
 
           /* everything worked fine */
