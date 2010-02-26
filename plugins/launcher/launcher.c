@@ -25,7 +25,6 @@
 #endif
 
 #include <exo/exo.h>
-#include <dbus/dbus-glib.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <garcon/garcon.h>
@@ -44,7 +43,6 @@
 #define NO_ARROW_INSIDE_BUTTON(plugin) ((plugin)->arrow_position != LAUNCHER_ARROW_INTERNAL \
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
 #define ARROW_INSIDE_BUTTON(plugin)    (!NO_ARROW_INSIDE_BUTTON (plugin))
-#define LAUNCHER_TYPE_PTR_ARRAY        (dbus_g_type_get_collection("GPtrArray", G_TYPE_VALUE))
 #define RELATIVE_CONFIG_PATH           PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d"
 
 
@@ -273,7 +271,7 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
                                    PROP_ITEMS,
                                    g_param_spec_boxed ("items",
                                                        NULL, NULL,
-                                                       LAUNCHER_TYPE_PTR_ARRAY,
+                                                       PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
                                                        EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -941,7 +939,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty  properties[] =
   {
     { "show-label", G_TYPE_BOOLEAN },
-    { "items", LAUNCHER_TYPE_PTR_ARRAY },
+    { "items", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
     { "disable-tooltips", G_TYPE_BOOLEAN },
     { "move-first", G_TYPE_BOOLEAN },
     { "arrow-position", G_TYPE_UINT },
