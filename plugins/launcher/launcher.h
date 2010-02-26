@@ -85,7 +85,6 @@ struct _LauncherPlugin
 
   /* whether the menu appends in revered order */
   guint                   menu_reversed_order : 1;
-  gchar *test;
 };
 
 struct _LauncherPluginEntry
