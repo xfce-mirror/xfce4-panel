@@ -54,8 +54,9 @@ libwindowmenu_la_DEPENDENCIES = \
 bin_SCRIPTS = \
 	xfce4-popup-windowmenu
 
-xfce4-popup-windowmenu: xfce4-popup-windowmenu.in Makefile
-	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" $< >$@
+xfce4-popup-windowmenu: xfce4-popup-windowmenu.sh Makefile
+	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" \
+	-e "s,\@localedir\@,$(localedir),g" $< >$@
 
 #
 # .desktop file
@@ -67,7 +68,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	windowmenu-dialog.glade \
-	xfce4-popup-windowmenu.in \
+	xfce4-popup-windowmenu.sh \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \

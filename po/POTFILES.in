@@ -3,127 +3,88 @@ panel-preferences.desktop.in
 
 common/panel-builder.c
 
-libxfce4panel/libxfce4panel.h
-libxfce4panel/libxfce4panel-enums.h
 libxfce4panel/xfce-arrow-button.c
-libxfce4panel/xfce-arrow-button.h
 libxfce4panel/xfce-hvbox.c
-libxfce4panel/xfce-hvbox.h
 libxfce4panel/xfce-panel-convenience.c
-libxfce4panel/xfce-panel-convenience.h
 libxfce4panel/xfce-panel-image.c
-libxfce4panel/xfce-panel-image.h
-libxfce4panel/xfce-panel-macros.h
 libxfce4panel/xfce-panel-plugin-provider.c
-libxfce4panel/xfce-panel-plugin-provider.h
 libxfce4panel/xfce-panel-plugin.c
-libxfce4panel/xfce-panel-plugin.h
 
 panel/main.c
 panel/panel-application.c
-panel/panel-application.h
 panel/panel-base-window.c
-panel/panel-base-window.h
 panel/panel-dbus-client.c
-panel/panel-dbus-client.h
 panel/panel-dbus-service.c
-panel/panel-dbus-service.h
 panel/panel-dialogs.c
-panel/panel-dialogs.h
 panel/panel-item-dialog.c
-panel/panel-item-dialog.h
 panel/panel-itembar.c
-panel/panel-itembar.h
 panel/panel-module-factory.c
-panel/panel-module-factory.h
 panel/panel-module.c
-panel/panel-module.h
 panel/panel-plugin-external.c
-panel/panel-plugin-external.h
 panel/panel-plugin-external-46.c
-panel/panel-plugin-external-46.h
 panel/panel-preferences-dialog.c
-panel/panel-preferences-dialog.h
 panel/panel-preferences-dialog.glade
 panel/panel-window.c
-panel/panel-window.h
 
 wrapper/main.c
 wrapper/wrapper-module.c
-wrapper/wrapper-module.h
 wrapper/wrapper-plug.c
-wrapper/wrapper-plug.h
 
 migrate/main.c
 
 plugins/actions/actions-dialog.glade
 plugins/actions/actions.c
 plugins/actions/actions.desktop.in
-plugins/actions/actions.h
 
 plugins/applicationsmenu/applicationsmenu-dialog.glade
 plugins/applicationsmenu/applicationsmenu.c
 plugins/applicationsmenu/applicationsmenu.desktop.in
+plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh
 
+plugins/clock/clock.c
 plugins/clock/clock-analog.c
-plugins/clock/clock-analog.h
 plugins/clock/clock-binary.c
-plugins/clock/clock-binary.h
 plugins/clock/clock-dialog.glade
 plugins/clock/clock-digital.c
-plugins/clock/clock-digital.h
 plugins/clock/clock-fuzzy.c
-plugins/clock/clock-fuzzy.h
 plugins/clock/clock-lcd.c
-plugins/clock/clock-lcd.h
-plugins/clock/clock.c
 plugins/clock/clock.desktop.in
-plugins/clock/clock.h
 
 plugins/directorymenu/directorymenu.c
 plugins/directorymenu/directorymenu.desktop.in
 plugins/directorymenu/directorymenu-dialog.glade
+plugins/directorymenu/xfce4-popup-directorymenu.sh
 
-plugins/launcher/launcher-dialog.c
-plugins/launcher/launcher-dialog.h
-plugins/launcher/launcher-dialog.glade
 plugins/launcher/launcher.c
+plugins/launcher/launcher-dialog.c
+plugins/launcher/launcher-dialog.glade
 plugins/launcher/launcher.desktop.in
-plugins/launcher/launcher.h
 
-plugins/pager/pager-dialog.glade
 plugins/pager/pager.c
+plugins/pager/pager-dialog.glade
 plugins/pager/pager.desktop.in
-plugins/pager/pager.h
 
-plugins/separator/separator-dialog.glade
 plugins/separator/separator.c
+plugins/separator/separator-dialog.glade
 plugins/separator/separator.desktop.in
-plugins/separator/separator.h
 
 plugins/showdesktop/showdesktop.c
 plugins/showdesktop/showdesktop.desktop.in
-plugins/showdesktop/showdesktop.h
 
+plugins/systray/systray.c
 plugins/systray/systray-box.c
-plugins/systray/systray-box.h
 plugins/systray/systray-dialog.glade
 plugins/systray/systray-manager.c
-plugins/systray/systray-manager.h
 plugins/systray/systray-marshal.list
 plugins/systray/systray-socket.c
-plugins/systray/systray-socket.h
-plugins/systray/systray.c
 plugins/systray/systray.desktop.in
-plugins/systray/systray.h
 
+plugins/tasklist/tasklist.c
 plugins/tasklist/tasklist-dialog.glade
 plugins/tasklist/tasklist-widget.c
-plugins/tasklist/tasklist-widget.h
-plugins/tasklist/tasklist.c
 plugins/tasklist/tasklist.desktop.in
 
-plugins/windowmenu/windowmenu-dialog.glade
 plugins/windowmenu/windowmenu.c
+plugins/windowmenu/windowmenu-dialog.glade
 plugins/windowmenu/windowmenu.desktop.in
-plugins/windowmenu/windowmenu.h
+plugins/windowmenu/xfce4-popup-windowmenu.sh

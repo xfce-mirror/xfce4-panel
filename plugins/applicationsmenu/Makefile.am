@@ -53,8 +53,9 @@ libapplicationsmenu_la_DEPENDENCIES = \
 bin_SCRIPTS = \
 	xfce4-popup-applicationsmenu
 
-xfce4-popup-applicationsmenu: xfce4-popup-applicationsmenu.in Makefile
-	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" $< >$@
+xfce4-popup-applicationsmenu: xfce4-popup-applicationsmenu.sh Makefile
+	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" \
+	-e "s,\@localedir\@,$(localedir),g" $< >$@
 
 #
 # .desktop file
@@ -66,7 +67,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	applicationsmenu-dialog.glade \
-	xfce4-popup-applicationsmenu.in \
+	xfce4-popup-applicationsmenu.sh \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \

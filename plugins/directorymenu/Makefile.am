@@ -55,8 +55,9 @@ libdirectorymenu_la_DEPENDENCIES = \
 bin_SCRIPTS = \
 	xfce4-popup-directorymenu
 
-xfce4-popup-directorymenu: xfce4-popup-directorymenu.in Makefile
-	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" $< >$@
+xfce4-popup-directorymenu: xfce4-popup-directorymenu.sh Makefile
+	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" \
+	-e "s,\@localedir\@,$(localedir),g" $< >$@
 
 #
 # .desktop file
@@ -68,7 +69,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	directorymenu-dialog.glade \
-	xfce4-popup-directorymenu.in \
+	xfce4-popup-directorymenu.sh \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2009 Nick Schermer <nick@xfce.org>
+# Copyright (C) 2010 Nick Schermer <nick@xfce.org>
 #
 # This library is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the Free
@@ -16,6 +16,25 @@
 # along with this library; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
 #
+
+export TEXTDOMAIN="xfce4-panel"
+export TEXTDOMAINDIR="@localedir@"
+
+case "$1" in
+  -h|--help)
+    echo "$(gettext "Usage:")"
+    echo "  $(basename $0) [$(gettext "OPTION")...]"
+    echo
+    echo "$(gettext "Options:")"
+    echo "  -h, --help      $(gettext "Show help options")"
+    echo "  -V, --version   $(gettext "Print version information and exit")"
+    exit 0
+    ;;
+  -V|--version)
+    exec @bindir@/xfce4-panel -V "$(basename $0)"
+    exit 0
+    ;;
+esac
 
 exec @bindir@/xfce4-panel --plugin-event=windowmenu:popup
 
