@@ -28,7 +28,7 @@
 #include <libxfce4panel/xfce-panel-convenience.h>
 
 /**
- * xfce_create_panel_button:
+ * xfce_panel_create_button:
  *
  * Create regular #GtkButton with a few properties set to be useful in the
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.
@@ -36,7 +36,7 @@
  * Returns: newly created #GtkButton.
  **/
 GtkWidget *
-xfce_create_panel_button (void)
+xfce_panel_create_button (void)
 {
   GtkWidget *button = gtk_button_new ();
 
@@ -52,7 +52,7 @@ xfce_create_panel_button (void)
 
 
 /**
- * xfce_create_panel_toggle_button:
+ * xfce_panel_create_toggle_button:
  *
  * Create regular #GtkToggleButton with a few properties set to be useful in
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.
@@ -60,7 +60,7 @@ xfce_create_panel_button (void)
  * Returns: newly created #GtkToggleButton.
  **/
 GtkWidget *
-xfce_create_panel_toggle_button (void)
+xfce_panel_create_toggle_button (void)
 {
   GtkWidget *button = gtk_toggle_button_new ();
 
@@ -76,7 +76,7 @@ xfce_create_panel_toggle_button (void)
 
 
 /**
- * xfce_allow_panel_customization:
+ * xfce_panel_allow_customization:
  *
  * Check if the user is allowed to customize the panel. Uses the kiosk mode
  * implementation from libxfce4util.
@@ -85,7 +85,7 @@ xfce_create_panel_toggle_button (void)
  *          otherwise.
  **/
 gboolean
-xfce_allow_panel_customization (void )
+xfce_panel_allow_customization (void )
 {
   static gboolean  allow_customization = FALSE;
   static gboolean  checked = FALSE;
@@ -100,4 +100,34 @@ xfce_allow_panel_customization (void )
     }
 
   return allow_customization;
+}
+
+
+
+void
+xfce_panel_cairo_set_source_rgba (cairo_t  *cr,
+                                  GdkColor *color,
+                                  gdouble   alpha)
+{
+  g_return_if_fail (cr != NULL);
+  g_return_if_fail (color != NULL);
+  g_return_if_fail (alpha >= 0.00 && alpha <= 1.00);
+
+  if (alpha >= 1.00)
+    {
+      /* set normal source color */
+      cairo_set_source_rgb (cr,
+                            color->red / 65535.00,
+                            color->green / 65535.00,
+                            color->blue / 65535.00);
+    }
+  else
+    {
+      /* set source color with alpha */
+      cairo_set_source_rgba (cr,
+                             color->red / 65535.00,
+                             color->green / 65535.00,
+                             color->blue / 65535.00,
+                             alpha);
+    }
 }

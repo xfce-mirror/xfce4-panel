@@ -29,9 +29,15 @@
 
 G_BEGIN_DECLS
 
-GtkWidget  *xfce_create_panel_button         (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
-GtkWidget  *xfce_create_panel_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
-gboolean    xfce_allow_panel_customization   (void);
+GtkWidget *xfce_panel_create_button         (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
+GtkWidget *xfce_panel_create_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
+gboolean   xfce_panel_allow_customization   (void);
+
+void       xfce_panel_cairo_set_source_rgba (cairo_t  *cr,
+                                             GdkColor *color,
+                                             gdouble   alpha);
 
 G_END_DECLS
 

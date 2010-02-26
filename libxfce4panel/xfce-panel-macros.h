@@ -56,16 +56,25 @@ G_BEGIN_DECLS
 #define panel_atom_intern(string) gdk_atom_intern ((string), FALSE)
 #endif
 
+/* cairo context source color */
+#define panel_cairo_set_source_rgba (cr, color, alpha) \
+  if (
+
 /* make api compatible with 4.4 panel */
 #ifndef XFCE_DISABLE_DEPRECATED
 
-/* register definitions */
+/* convenience functions (deprecated) */
+#define xfce_create_panel_button()        xfce_panel_create_button()
+#define xfce_create_panel_toggle_button() xfce_panel_create_toggle_button()
+#define xfce_allow_panel_customization()  xfce_panel_allow_customization()
+
+/* register definitions (deprecated) */
 #define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL             XFCE_PANEL_PLUGIN_REGISTER
 #define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK  XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL             XFCE_PANEL_PLUGIN_REGISTER
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK  XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
 
-/* parameter flags */
+/* parameter flags (deprecated) */
 #define PANEL_PARAM_READABLE  G_PARAM_READABLE | PANEL_PARAM_STATIC_STRINGS
 #define PANEL_PARAM_READWRITE G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS
 #define PANEL_PARAM_WRITABLE  G_PARAM_WRITABLE | PANEL_PARAM_STATIC_STRINGS
