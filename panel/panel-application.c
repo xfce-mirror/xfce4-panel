@@ -666,7 +666,7 @@ panel_application_window_destroyed (GtkWidget        *window,
       passed_destroyed_window = TRUE;
 
       /* disconnect bindings from this panel */
-      xfconf_g_property_unbind_all (G_OBJECT (li->data));
+      panel_properties_unbind (G_OBJECT (li->data));
 
       /* remove the properties of this panel */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u", n);

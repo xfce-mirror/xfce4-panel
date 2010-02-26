@@ -39,8 +39,8 @@ typedef struct
 static void panel_properties_object_notify     (GObject       *object,
                                                 GParamSpec    *pspec,
                                                 gpointer       user_data);
-static void panel_properties_object_destroyed  (gpointer       user_data,
-                                                GObject       *where_the_object_was);
+static void panel_properties_object_disconnect (gpointer       user_data,
+                                                GClosure      *closure);
 static void panel_properties_channel_notify    (XfconfChannel *channel,
                                                 const gchar   *property,
                                                 const GValue  *value,
@@ -84,21 +84,24 @@ panel_properties_object_notify (GObject    *object,
 
 
 static void
-panel_properties_object_destroyed (gpointer  user_data,
-                                   GObject  *where_the_object_was)
+panel_properties_object_disconnect (gpointer  user_data,
+                                    GClosure *closure)
 {
   PropertyBinding *binding = user_data;
 
-  panel_return_if_fail (binding->object == where_the_object_was);
   panel_return_if_fail (XFCONF_IS_CHANNEL (binding->channel));
 
   /* disconnect from the channel */
-  g_signal_handlers_disconnect_by_func (G_OBJECT (binding->channel),
-      panel_properties_channel_notify, binding);
-  g_object_weak_unref (G_OBJECT (binding->channel),
-      panel_properties_channel_destroyed, binding);
+  if (g_signal_handlers_disconnect_by_func (G_OBJECT (binding->channel),
+          panel_properties_channel_notify, binding) > 0)
+    {
+      g_object_weak_unref (G_OBJECT (binding->channel),
+          panel_properties_channel_destroyed, binding);
+    }
 
   /* cleanup */
+  g_free (binding->channel_prop);
+  g_free (binding->object_prop);
   g_slice_free (PropertyBinding, binding);
 }
 
@@ -111,10 +114,25 @@ panel_properties_channel_notify (XfconfChannel *channel,
                                  gpointer       user_data)
 {
   PropertyBinding *binding = user_data;
+  GParamSpec      *pspec;
+  GValue           def_value = { 0, };
 
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
   panel_return_if_fail (binding->channel == channel);
   panel_return_if_fail (G_IS_OBJECT (binding->object));
+
+  /* for a property reset, set the default value */
+  if (G_VALUE_TYPE (value) == G_TYPE_INVALID)
+    {
+      pspec = g_object_class_find_property(G_OBJECT_GET_CLASS (binding->object),
+                                           binding->object_prop);
+      panel_return_if_fail (pspec == NULL);
+      if (G_UNLIKELY (pspec == NULL))
+        return;
+
+      g_param_value_set_default (pspec, &def_value);
+      value = &def_value;
+    }
 
   /* block property notify */
   g_signal_handlers_block_by_func (G_OBJECT (binding->object),
@@ -126,6 +144,10 @@ panel_properties_channel_notify (XfconfChannel *channel,
   /* unblock property notify */
   g_signal_handlers_unblock_by_func (G_OBJECT (binding->object),
       G_CALLBACK (panel_properties_object_notify), binding);
+
+  /* cleanup */
+  if (G_UNLIKELY (value == &def_value))
+    g_value_unset (&def_value);
 }
 
 
@@ -139,14 +161,10 @@ panel_properties_channel_destroyed (gpointer  user_data,
   panel_return_if_fail (binding->channel == (XfconfChannel *) where_the_channel_was);
   panel_return_if_fail (G_IS_OBJECT (binding->object));
 
-  /* disconnect from the object */
+  /* disconnect from the object, which will take
+   * care of freeing everything else */
   g_signal_handlers_disconnect_by_func (G_OBJECT (binding->object),
       panel_properties_object_notify, binding);
-  g_object_weak_unref (G_OBJECT (binding->object),
-      panel_properties_object_destroyed, binding);
-
-  /* cleanup */
-  g_slice_free (PropertyBinding, binding);
 }
 
 
@@ -157,9 +175,14 @@ panel_properties_get_channel (void)
   static XfconfChannel *channel = NULL;
 
   if (G_UNLIKELY (channel == NULL))
-    channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
+    {
+      channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
+      g_object_add_weak_pointer (G_OBJECT (channel), (gpointer) &channel);
+    }
   else
-    g_object_ref (G_OBJECT (channel));
+    {
+      g_object_ref (G_OBJECT (channel));
+    }
 
   return channel;
 }
@@ -203,7 +226,7 @@ panel_properties_bind (XfconfChannel       *channel,
       if (hash_table != NULL)
         {
           value = g_hash_table_lookup (hash_table, binding->channel_prop);
-          if (value != NULL)
+          if (G_IS_VALUE (value))
             {
               if (G_LIKELY (G_VALUE_TYPE (value) == prop->type))
                 g_object_set_property (object, prop->property, value);
@@ -217,9 +240,9 @@ panel_properties_bind (XfconfChannel       *channel,
 
       /* monitor object property changes */
       g_snprintf (buf, sizeof (buf), "notify::%s", prop->property);
-      g_object_weak_ref (G_OBJECT (object), panel_properties_object_destroyed, binding);
-      g_signal_connect (G_OBJECT (object), buf,
-          G_CALLBACK (panel_properties_object_notify), binding);
+      g_signal_connect_data (G_OBJECT (object), buf,
+          G_CALLBACK (panel_properties_object_notify), binding,
+          panel_properties_object_disconnect, 0);
 
       /* monitor channel changes */
       g_snprintf (buf, sizeof (buf), "property-changed::%s", binding->channel_prop);
@@ -231,6 +254,19 @@ panel_properties_bind (XfconfChannel       *channel,
   /* cleanup */
   if (G_LIKELY (hash_table != NULL))
     g_hash_table_unref (hash_table);
+}
+
+
+
+void
+panel_properties_unbind (GObject *object)
+{
+  panel_return_if_fail (G_IS_OBJECT (object));
+  panel_return_if_fail (!XFCONF_IS_CHANNEL (object));
+
+  /* disconnect the notify functions */
+  g_signal_handlers_disconnect_matched (object, G_SIGNAL_MATCH_FUNC,
+      0, 0, NULL, G_CALLBACK (panel_properties_object_notify), NULL);
 }
 
 
