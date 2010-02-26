@@ -59,8 +59,10 @@ struct _PanelModule
   /* to plugin library */
   GModule             *library;
 
-  /* plugin init function */
   PluginConstructFunc  construct_func;
+
+  /* plugin type */
+  GType                type;
 
   /* whether to run the plugin in the wrapper */
   guint                run_in_wrapper : 1;
@@ -115,6 +117,7 @@ panel_module_init (PanelModule *module)
   /* initialize */
   module->library = NULL;
   module->construct_func = NULL;
+  module->type = G_TYPE_NONE;
   module->filename = NULL;
   module->run_in_wrapper = TRUE;
   module->name = NULL;
@@ -158,29 +161,39 @@ panel_module_finalize (GObject *object)
 static gboolean
 panel_module_load (GTypeModule *type_module)
 {
-  PanelModule *module = PANEL_MODULE (type_module);
+  PanelModule          *module = PANEL_MODULE (type_module);
+  PluginInitializeFunc  init_func;
+  gboolean              make_resident = TRUE;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), FALSE);
 
-  /* load the module */
+  /* open the module */
   module->library = g_module_open (module->filename, G_MODULE_BIND_LOCAL);
   if (G_UNLIKELY (module->library == NULL))
     {
-      g_critical ("Failed to load plugin '%s': %s", panel_module_get_name (module), g_module_error ());
-
+      /* print error and leave */
+      g_critical ("Failed to load module \"%s\": %s.", module->filename,
+                  g_module_error ());
       return FALSE;
     }
 
   /* try to link the contruct function */
-  if (g_module_symbol (module->library, "__xpp_construct_obj", (gpointer) &module->construct_func))
+  if (g_module_symbol (module->library, "__xpp_initialize", (gpointer) &init_func))
     {
-      /* don't unload the module because it contains gtypes */
-      g_module_make_resident (module->library);
+      /* initialize the plugin */
+      module->type = init_func (type_module, &make_resident);
+
+      /* whether to make this plugin resident or not */
+      if (make_resident)
+        g_module_make_resident (module->library);
     }
-  else if (!g_module_symbol (module->library, "__xpp_construct", (gpointer) &module->construct_func))
+  else if (!g_module_symbol (module->library, "__xpp_construct",
+                             (gpointer) &module->construct_func))
     {
-      g_critical ("Plugin '%s' lacks a plugin register function", panel_module_get_name (module));
+      /* print critical warning */
+      g_critical ("Module \"%s\" lacks a plugin register function.",
+                  module->filename);
 
       /* unload */
       panel_module_unload (type_module);
@@ -201,12 +214,13 @@ panel_module_unload (GTypeModule *type_module)
   panel_return_if_fail (PANEL_IS_MODULE (module));
   panel_return_if_fail (G_IS_TYPE_MODULE (module));
 
-  /* unload the library */
+  /* close the module */
   g_module_close (module->library);
 
   /* reset plugin state */
   module->library = NULL;
   module->construct_func = NULL;
+  module->type = G_TYPE_NONE;
 }
 
 
@@ -308,7 +322,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
       else if (xfce_rc_has_entry (rc, "X-XFCE-Exec"))
         {
           /* old external plugin, not usable anymore */
-          g_message ("The plugin from desktop file \"%s\" should be ported to an internal plugin", filename);
+          g_message ("The plugin from desktop file \"%s\" should "
+                     "be ported to an internal plugin", filename);
         }
       else
         {
@@ -339,7 +354,8 @@ panel_module_create_plugin (PanelModule  *module,
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
   panel_return_val_if_fail (IS_STRING (name), NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
-  panel_return_val_if_fail (exo_str_is_equal (name, G_TYPE_MODULE (module)->name), NULL);
+  panel_return_val_if_fail (exo_str_is_equal (name,
+                            G_TYPE_MODULE (module)->name), NULL);
 
   /* return null if the module is not usable (unique and already used) */
   if (G_UNLIKELY (panel_module_is_usable (module) == FALSE))
@@ -353,15 +369,23 @@ panel_module_create_plugin (PanelModule  *module,
   else
     {
       /* increase the module use count */
-      g_type_module_use (G_TYPE_MODULE (module));
-
-      if (G_LIKELY (module->library))
+      if (g_type_module_use (G_TYPE_MODULE (module)))
         {
-          /* debug check */
-          panel_return_val_if_fail (module->construct_func != NULL, NULL);
-
-          /* create a new panel plugin */
-          plugin = (*module->construct_func) (name, unique_id, module->name, arguments, screen);
+          if (module->type != G_TYPE_NONE)
+            {g_message ("New plugin from object");
+              plugin = g_object_new (module->type,
+                                     "name", name,
+                                     "unique-id", unique_id,
+                                     "display-name", module->name,
+                                     "arguments", arguments, NULL);
+            }
+          else
+            {g_message ("New plugin from construct function");
+              /* create a new panel plugin */
+              panel_return_val_if_fail (module->construct_func != NULL, NULL);
+              plugin = (*module->construct_func) (name, unique_id, module->name,
+                                                  arguments, screen);
+            }
         }
       else
         {
@@ -421,12 +445,20 @@ panel_module_get_library_filename (PanelModule *module)
 const gchar *
 panel_module_get_name (PanelModule *module)
 {
+  const gchar *name;
+
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
-  panel_return_val_if_fail (module->name == NULL || g_utf8_validate (module->name, -1, NULL), NULL);
-  panel_return_val_if_fail (module->name != NULL || g_utf8_validate (G_TYPE_MODULE (module)->name, -1, NULL), NULL);
 
-  return module->name ? module->name : G_TYPE_MODULE (module)->name;
+  if (module->name != NULL)
+    name = module->name;
+  else
+    name = G_TYPE_MODULE (module)->name;
+
+  panel_return_val_if_fail (name != NULL
+                            && g_utf8_validate (name, -1, NULL), NULL);
+
+  return name;
 }
 
 
@@ -435,7 +467,9 @@ const gchar *
 panel_module_get_comment (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
-  panel_return_val_if_fail (module->comment == NULL || g_utf8_validate (module->comment, -1, NULL), NULL);
+  panel_return_val_if_fail (module->comment == NULL
+                            || g_utf8_validate (module->comment, -1,
+                                                NULL), NULL);
 
   return module->comment;
 }
@@ -446,7 +480,9 @@ const gchar *
 panel_module_get_icon_name (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
-  panel_return_val_if_fail (module->icon_name == NULL || g_utf8_validate (module->icon_name, -1, NULL), NULL);
+  panel_return_val_if_fail (module->icon_name == NULL
+                            || g_utf8_validate (module->icon_name, -1,
+                                                NULL), NULL);
 
   return module->icon_name;
 }
