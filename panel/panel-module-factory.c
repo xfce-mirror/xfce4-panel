@@ -396,7 +396,8 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
                                  const gchar         *name,
                                  GdkScreen           *screen,
                                  gint                 unique_id,
-                                 gchar              **arguments)
+                                 gchar              **arguments,
+                                 gint                *return_unique_id)
 {
   PanelModule *module;
   GtkWidget   *provider;
@@ -421,6 +422,10 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
          || panel_module_factory_get_plugin (factory, unique_id) != NULL)
     unique_id = ++unique_id_counter;
 
+  /* set the return value with an always valid unique id */
+  if (G_LIKELY (return_unique_id != NULL))
+    *return_unique_id = unique_id;
+
   /* create the new module */
   provider = panel_module_new_plugin (module, screen, unique_id, arguments);
 
@@ -429,7 +434,7 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
     {
       factory->plugins = g_slist_prepend (factory->plugins, provider);
       g_object_weak_ref (G_OBJECT (provider), panel_module_factory_remove_plugin, factory);
-  }
+    }
 
   return provider;
 }

@@ -570,6 +570,7 @@ panel_application_plugin_insert (PanelApplication  *application,
                                  gint               position)
 {
   GtkWidget *itembar, *provider;
+  gint       new_unique_id;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
@@ -579,24 +580,21 @@ panel_application_plugin_insert (PanelApplication  *application,
   /* create a new panel plugin */
   provider = panel_module_factory_new_plugin (application->factory,
                                               name, screen, unique_id,
-                                              arguments);
+                                              arguments, &new_unique_id);
   if (G_UNLIKELY (provider == NULL))
     return FALSE;
 
   /* make sure there is no panel configuration with this unique id when a
    * new plugin is created */
   if (G_UNLIKELY (unique_id == -1))
-    {
-      unique_id = xfce_panel_plugin_provider_get_unique_id (XFCE_PANEL_PLUGIN_PROVIDER (provider));
-      panel_application_plugin_delete_config (application, name, unique_id);
-    }
+    panel_application_plugin_delete_config (application, name, new_unique_id);
 
   /* get the panel itembar */
   itembar = gtk_bin_get_child (GTK_BIN (window));
 
   /* add signal to monitor provider signals */
   g_signal_connect (G_OBJECT (provider), "provider-signal",
-                    G_CALLBACK (panel_application_plugin_provider_signal), application);
+      G_CALLBACK (panel_application_plugin_provider_signal), application);
 
   /* add the item to the panel */
   panel_itembar_insert (PANEL_ITEMBAR (itembar),
