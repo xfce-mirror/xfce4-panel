@@ -578,7 +578,7 @@ panel_window_set_property (GObject      *object,
 
     case PROP_SPAN_MONITORS:
       val_bool = g_value_get_boolean (value);
-      if (window->span_monitors == val_bool)
+      if (window->span_monitors != val_bool)
         {
           window->span_monitors = !!val_bool;
           panel_window_screen_layout_changed (window->screen, window);
