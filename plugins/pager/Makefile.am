@@ -57,7 +57,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	pager-dialog.ui \
+	pager-dialog.glade \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -70,7 +70,7 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libpager_built_sources)
 
-pager-dialog_ui.h: pager-dialog.ui
+pager-dialog_ui.h: pager-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=pager_dialog_ui $< >$@
 endif
 

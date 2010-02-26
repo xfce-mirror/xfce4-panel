@@ -56,7 +56,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	separator-dialog.ui \
+	separator-dialog.glade \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -69,7 +69,7 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libseparator_built_sources)
 
-separator-dialog_ui.h: separator-dialog.ui
+separator-dialog_ui.h: separator-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=separator_dialog_ui $< >$@
 endif
 

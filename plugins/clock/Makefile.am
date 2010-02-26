@@ -66,7 +66,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	clock-dialog.ui \
+	clock-dialog.glade \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -79,7 +79,7 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libclock_built_sources)
 
-clock-dialog_ui.h: clock-dialog.ui
+clock-dialog_ui.h: clock-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=clock_dialog_ui $< >$@
 endif
 

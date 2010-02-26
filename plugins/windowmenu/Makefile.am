@@ -66,7 +66,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	windowmenu-dialog.ui \
+	windowmenu-dialog.glade \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -79,7 +79,7 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libwindowmenu_built_sources)
 
-windowmenu-dialog_ui.h: windowmenu-dialog.ui
+windowmenu-dialog_ui.h: windowmenu-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=windowmenu_dialog_ui $< >$@
 endif
 

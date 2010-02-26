@@ -58,7 +58,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	tasklist-dialog.ui \
+	tasklist-dialog.glade \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -71,7 +71,7 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libtasklist_built_sources)
 
-tasklist-dialog_ui.h: tasklist-dialog.ui
+tasklist-dialog_ui.h: tasklist-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=tasklist_dialog_ui $< >$@
 endif
 

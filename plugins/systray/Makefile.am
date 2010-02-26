@@ -65,7 +65,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	$(desktop_in_files) \
-	systray-dialog.ui \
+	systray-dialog.glade \
 	systray-marshal.list
 
 DISTCLEANFILES = \
@@ -88,7 +88,7 @@ systray-marshal.c: systray-marshal.list Makefile
 	$(AM_V_GEN) echo "#include \"systray-marshal.h\"" > $@ \
 	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
 
-systray-dialog_ui.h: systray-dialog.ui
+systray-dialog_ui.h: systray-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 endif
 

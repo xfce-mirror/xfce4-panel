@@ -54,7 +54,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	actions-dialog.ui \
+	actions-dialog.glade \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -67,7 +67,7 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libactions_built_sources)
 
-actions-dialog_ui.h: actions-dialog.ui
+actions-dialog_ui.h: actions-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=actions_dialog_ui $< >$@
 endif
 

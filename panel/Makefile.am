@@ -88,7 +88,7 @@ panel-dbus-client-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 panel-plugin-external-infos.h: $(srcdir)/panel-plugin-external-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --prefix=panel_plugin_external --mode=glib-server $< > $@
 
-panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.ui Makefile
+panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.glade Makefile
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
 
 #panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
@@ -109,6 +109,6 @@ endif
 EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
 	panel-plugin-external-infos.xml \
-	panel-preferences-dialog.ui
+	panel-preferences-dialog.glade
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

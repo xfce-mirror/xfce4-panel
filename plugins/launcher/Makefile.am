@@ -61,7 +61,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	launcher-dialog.ui \
+	launcher-dialog.glade \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -74,7 +74,7 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libclock_built_sources)
 
-launcher-dialog_ui.h: launcher-dialog.ui
+launcher-dialog_ui.h: launcher-dialog.glade
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=launcher_dialog_ui $< >$@
 endif
 
