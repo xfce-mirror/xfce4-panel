@@ -93,6 +93,8 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
             xfce_panel_plugin_provider_set_orientation (provider, g_value_get_uint (value));
           else if (strcmp (property, SIGNAL_SET_SCREEN_POSITION) == 0)
             xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_uint (value));
+          else if (strcmp (property, SIGNAL_SET_LOCKED) == 0)
+            xfce_panel_plugin_provider_set_locked (provider, g_value_get_boolean (value));
           else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_ALPHA) == 0)
             {
               plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);

@@ -222,5 +222,16 @@ xfce_panel_plugin_provider_remote_event (XfcePanelPluginProvider *provider,
 
 
 
+void
+xfce_panel_plugin_provider_set_locked (XfcePanelPluginProvider *provider,
+                                       gboolean                 locked)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_locked) (provider, locked);
+}
+
+
+
 #define __XFCE_PANEL_PLUGIN_PROVIDER_C__
 #include <libxfce4panel/libxfce4panel-aliasdef.c>

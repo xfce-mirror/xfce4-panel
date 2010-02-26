@@ -96,6 +96,8 @@ static void          xfce_panel_plugin_removed                (XfcePanelPluginPr
 static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginProvider          *provider,
                                                                const gchar                      *name,
                                                                const GValue                     *value);
+static void          xfce_panel_plugin_set_locked             (XfcePanelPluginProvider          *provider,
+                                                               gboolean                          locked);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                          data,
                                                                GObject                          *where_the_object_was);
 
@@ -152,6 +154,7 @@ struct _XfcePanelPluginPrivate
   guint                expand : 1;
   GtkOrientation       orientation;
   XfceScreenPosition   screen_position;
+  guint                locked : 1;
 
   /* flags for rembering states */
   PluginFlags          flags;
@@ -168,7 +171,9 @@ struct _XfcePanelPluginPrivate
 
 
 
-static guint plugin_signals[LAST_SIGNAL];
+static guint  plugin_signals[LAST_SIGNAL];
+static GQuark item_properties = 0;
+static GQuark item_about = 0;
 
 
 
@@ -531,6 +536,9 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                          FALSE,
                                                          G_PARAM_READWRITE
                                                          | G_PARAM_STATIC_STRINGS));
+
+  item_properties = g_quark_from_static_string ("item-properties");
+  item_about = g_quark_from_static_string ("item-about");
 }
 
 
@@ -554,6 +562,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->menu_blocked = 0;
   plugin->priv->panel_lock = 0;
   plugin->priv->flags = 0;
+  plugin->priv->locked = TRUE;
 
   /* hide the event box window to make the plugin transparent */
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
@@ -576,6 +585,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->show_about = xfce_panel_plugin_show_about;
   iface->removed = xfce_panel_plugin_removed;
   iface->remote_event = xfce_panel_plugin_remote_event;
+  iface->set_locked = xfce_panel_plugin_set_locked;
 }
 
 
@@ -768,8 +778,9 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
       menu = xfce_panel_plugin_menu_get (plugin);
 
       /* if the menu is block, some items are insensitive */
-      item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("properties-item"));
-      gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
+      item = g_object_get_qdata (G_OBJECT (menu), item_properties);
+      if (item != NULL)
+        gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
       gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button, event->time);
@@ -836,8 +847,9 @@ xfce_panel_plugin_menu_add_items (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
   /* open items dialog */
-  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                          PROVIDER_SIGNAL_ADD_NEW_ITEMS);
+  if (!xfce_panel_plugin_get_locked (plugin))
+    xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                            PROVIDER_SIGNAL_ADD_NEW_ITEMS);
 }
 
 
@@ -850,8 +862,9 @@ xfce_panel_plugin_menu_panel_preferences (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
   /* open preferences dialog */
-  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                          PROVIDER_SIGNAL_PANEL_PREFERENCES);
+  if (!xfce_panel_plugin_get_locked (plugin))
+    xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                            PROVIDER_SIGNAL_PANEL_PREFERENCES);
 }
 
 
@@ -904,11 +917,14 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
   GtkWidget *menu, *submenu;
   GtkWidget *item;
   GtkWidget *image;
+  gboolean   locked;
 
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
   if (G_UNLIKELY (plugin->priv->menu == NULL))
     {
+      locked = xfce_panel_plugin_get_locked (plugin);
+
       menu = gtk_menu_new ();
       gtk_menu_attach_to_widget (GTK_MENU (menu), GTK_WIDGET (plugin), NULL);
 
@@ -923,85 +939,91 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
-      /* properties item */
-      item = gtk_image_menu_item_new_from_stock (GTK_STOCK_PROPERTIES, NULL);
-      g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_show_configure), plugin);
-      g_object_set_data (G_OBJECT (menu), g_intern_static_string ("properties-item"), item);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_CONFIGURE))
-        gtk_widget_show (item);
+      if (!locked)
+        {
+          /* properties item */
+          item = gtk_image_menu_item_new_from_stock (GTK_STOCK_PROPERTIES, NULL);
+          g_signal_connect_swapped (G_OBJECT (item), "activate",
+              G_CALLBACK (xfce_panel_plugin_show_configure), plugin);
+          g_object_set_qdata (G_OBJECT (menu), item_properties, item);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_CONFIGURE))
+            gtk_widget_show (item);
 
-      /* about item */
-      item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
-      g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_show_about), plugin);
-      g_object_set_data (G_OBJECT (menu), g_intern_static_string ("about-item"), item);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_ABOUT))
-        gtk_widget_show (item);
+          /* about item */
+          item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
+          g_signal_connect_swapped (G_OBJECT (item), "activate",
+              G_CALLBACK (xfce_panel_plugin_show_about), plugin);
+          g_object_set_qdata (G_OBJECT (menu), item_about, item);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_ABOUT))
+            gtk_widget_show (item);
 
-      /* move item */
-      item = gtk_image_menu_item_new_with_mnemonic (_("_Move"));
-      g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_menu_move), plugin);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      gtk_widget_show (item);
+          /* move item */
+          item = gtk_image_menu_item_new_with_mnemonic (_("_Move"));
+          g_signal_connect_swapped (G_OBJECT (item), "activate",
+              G_CALLBACK (xfce_panel_plugin_menu_move), plugin);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          gtk_widget_show (item);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_MENU);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-      gtk_widget_show (image);
+          image = gtk_image_new_from_stock (GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_MENU);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+          gtk_widget_show (image);
 
-      /* separator */
-      item = gtk_separator_menu_item_new ();
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      gtk_widget_show (item);
+          /* separator */
+          item = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          gtk_widget_show (item);
 
-      /* remove */
-      item = gtk_image_menu_item_new_from_stock (GTK_STOCK_REMOVE, NULL);
-      g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_menu_remove), plugin);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      gtk_widget_show (item);
+          /* remove */
+          item = gtk_image_menu_item_new_from_stock (GTK_STOCK_REMOVE, NULL);
+          g_signal_connect_swapped (G_OBJECT (item), "activate",
+              G_CALLBACK (xfce_panel_plugin_menu_remove), plugin);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          gtk_widget_show (item);
 
-      /* separator */
-      item = gtk_separator_menu_item_new ();
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      gtk_widget_show (item);
+          /* separator */
+          item = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          gtk_widget_show (item);
+        }
 
       /* create a panel submenu item */
       submenu = gtk_menu_new ();
-      item = gtk_image_menu_item_new_with_mnemonic ("_Xfce Panel");
+      item = gtk_menu_item_new_with_mnemonic ("_Xfce Panel");
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
       gtk_widget_show (item);
 
-      /* add new items */
-      item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
-      g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_menu_add_items), plugin);
-      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
-      gtk_widget_show (item);
+      if (!locked)
+        {
+          /* add new items */
+          item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
+          g_signal_connect_swapped (G_OBJECT (item), "activate",
+              G_CALLBACK (xfce_panel_plugin_menu_add_items), plugin);
+          gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+          gtk_widget_show (item);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-      gtk_widget_show (image);
+          image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+          gtk_widget_show (image);
 
-      /* customize panel */
-      item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
-      g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_menu_panel_preferences), plugin);
-      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
-      gtk_widget_show (item);
+          /* customize panel */
+          item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
+          g_signal_connect_swapped (G_OBJECT (item), "activate",
+              G_CALLBACK (xfce_panel_plugin_menu_panel_preferences), plugin);
+          gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+          gtk_widget_show (item);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-      gtk_widget_show (image);
+          image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+          gtk_widget_show (image);
 
-      /* separator */
-      item = gtk_separator_menu_item_new ();
-      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
-      gtk_widget_show (item);
+          /* separator */
+          item = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+          gtk_widget_show (item);
+        }
 
       /* quit item */
       item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
@@ -1157,10 +1179,13 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
 static void
 xfce_panel_plugin_save (XfcePanelPluginProvider *provider)
 {
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* only send the save signal if the plugin is not locked */
-  if (XFCE_PANEL_PLUGIN (provider)->priv->menu_blocked == 0)
+  if (XFCE_PANEL_PLUGIN (provider)->priv->menu_blocked == 0
+      && !xfce_panel_plugin_get_locked (plugin))
     g_signal_emit (G_OBJECT (provider), plugin_signals[SAVE], 0);
 }
 
@@ -1186,8 +1211,8 @@ xfce_panel_plugin_show_configure (XfcePanelPluginProvider *provider)
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
-  /* emit configure-plugin signal */
-  if (G_LIKELY (plugin->priv->menu_blocked == 0))
+  if (plugin->priv->menu_blocked == 0
+      && !xfce_panel_plugin_get_locked (plugin))
     g_signal_emit (G_OBJECT (plugin), plugin_signals[CONFIGURE_PLUGIN], 0);
 }
 
@@ -1244,6 +1269,29 @@ xfce_panel_plugin_remote_event (XfcePanelPluginProvider *provider,
                  name, value, &stop_emission);
 
   return stop_emission;
+}
+
+
+
+static void
+xfce_panel_plugin_set_locked (XfcePanelPluginProvider *provider,
+                              gboolean                 locked)
+{
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  if (G_LIKELY (plugin->priv->locked != locked))
+    {
+      plugin->priv->locked = locked;
+
+      /* destroy the menu if it exists */
+      if (plugin->priv->menu != NULL)
+        {
+          gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
+          plugin->priv->menu = NULL;
+        }
+    }
 }
 
 
@@ -1615,7 +1663,7 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
     {
        /* get and show the properties item */
        menu = xfce_panel_plugin_menu_get (plugin);
-       item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("properties-item"));
+       item = g_object_get_qdata (G_OBJECT (menu), item_properties);
        if (G_LIKELY (item != NULL))
          gtk_widget_show (item);
     }
@@ -1650,7 +1698,7 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
     {
        /* get and show the about item */
        menu = xfce_panel_plugin_menu_get (plugin);
-       item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("about-item"));
+       item = g_object_get_qdata (G_OBJECT (menu), item_about);
        if (G_LIKELY (item != NULL))
          gtk_widget_show (item);
     }
@@ -1658,6 +1706,35 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
   /* emit signal, used by the external plugin */
   xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
                                           PROVIDER_SIGNAL_SHOW_ABOUT);
+}
+
+
+
+/**
+ * xfce_panel_plugin_remove:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * Whether the plugin is locked (not allowing customization). This
+ * is emitted through the panel based on the Xfconf locking of the
+ * panel window the plugin is embedded on.
+ *
+ * It is however possible to send a fake signal to the plugin to
+ * override this propery, so you should only use this for interface
+ * elements and (if you use Xfconf) check the locking yourself
+ * before you write any values or query the kiosk mode using the
+ * api in libxfce4util.
+ *
+ * Returns: %TRUE if the user is not allowed to modify the plugin,
+ *          %FALSE is customization is allowed.
+ *
+ * Since: 4.8.0
+ **/
+gboolean
+xfce_panel_plugin_get_locked (XfcePanelPlugin *plugin)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), TRUE);
+
+  return plugin->priv->locked;
 }
 
 

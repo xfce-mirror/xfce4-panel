@@ -31,6 +31,7 @@
 
 #include <panel/panel-window.h>
 #include <panel/panel-application.h>
+#include <panel/panel-dialogs.h>
 #include <panel/panel-module.h>
 #include <panel/panel-itembar.h>
 #include <panel/panel-item-dialog.h>
@@ -353,7 +354,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   /* hook up the bindings */
   panel_preferences_dialog_bindings_add (dialog, "horizontal", "active");
   panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active");
-  panel_preferences_dialog_bindings_add (dialog, "locked", "active");
+  panel_preferences_dialog_bindings_add (dialog, "position-locked", "active");
   panel_preferences_dialog_bindings_add (dialog, "autohide", "active");
   panel_preferences_dialog_bindings_add (dialog, "size", "value");
   panel_preferences_dialog_bindings_add (dialog, "length", "value");
@@ -519,6 +520,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   gint       nth;
   GtkWidget *itembar;
   GObject   *object;
+  gboolean   locked = TRUE;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -548,7 +550,18 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 
       /* update the items treeview */
       panel_preferences_dialog_item_store_rebuild (itembar, dialog);
+
+      /* make the entire notebook insensitive when the window is locked */
+      locked = panel_window_get_locked (dialog->active);
+      object = gtk_builder_get_object (GTK_BUILDER (dialog), "notebook");
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
     }
+
+  /* sensitivity of the remove button */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-remove");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
 
   /* sensitivity of the add button in item tab */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-add");
@@ -972,6 +985,10 @@ panel_preferences_dialog_show (PanelWindow *active)
   GdkScreen *screen;
 
   panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
+
+  /* check if not the entire application is locked */
+  if (panel_dialogs_kiosk_warning ())
+    return;
 
   if (G_LIKELY (dialog_singleton == NULL))
     {

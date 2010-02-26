@@ -36,6 +36,7 @@ enum /*< skip >*/
   PANEL_CLIENT_EVENT_REMOVED,
   PANEL_CLIENT_EVENT_SAVE,
   PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA,
+  PANEL_CLIENT_EVENT_SET_LOCKED,
   PANEL_CLIENT_EVENT_SET_ORIENTATION,
   PANEL_CLIENT_EVENT_SET_SCREEN_POSITION,
   PANEL_CLIENT_EVENT_SET_SENSITIVE,
@@ -117,6 +118,10 @@ enum /*< skip >*/
               gtk_widget_queue_draw (plug); \
             break; \
             \
+          case PANEL_CLIENT_EVENT_SET_LOCKED: \
+            xfce_panel_plugin_provider_set_locked (provider, !!value) \
+            break; \
+            \
           case PANEL_CLIENT_EVENT_SET_ORIENTATION: \
             xfce_panel_plugin_provider_set_orientation (provider, value); \
             break; \
@@ -126,7 +131,7 @@ enum /*< skip >*/
             break; \
             \
           case PANEL_CLIENT_EVENT_SET_SENSITIVE: \
-            gtk_widget_set_sensitive (plug, value); \
+            gtk_widget_set_sensitive (plug, !!value); \
             break; \
             \
           case PANEL_CLIENT_EVENT_SET_SIZE: \

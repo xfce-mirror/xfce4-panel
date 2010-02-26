@@ -65,6 +65,8 @@ struct _XfcePanelPluginProviderInterface
   gboolean     (*remote_event)        (XfcePanelPluginProvider       *provider,
                                        const gchar                   *name,
                                        const GValue                  *value);
+  void         (*set_locked)          (XfcePanelPluginProvider       *provider,
+                                       gboolean                       locked);
 };
 
 /* signals send from the plugin to the panel (possibly through the wrapper) */
@@ -147,6 +149,9 @@ void                  xfce_panel_plugin_provider_removed             (XfcePanelP
 gboolean              xfce_panel_plugin_provider_remote_event        (XfcePanelPluginProvider       *provider,
                                                                       const gchar                   *name,
                                                                       const GValue                  *value);
+
+void                  xfce_panel_plugin_provider_set_locked          (XfcePanelPluginProvider       *provider,
+                                                                      gboolean                       locked);
 
 G_END_DECLS
 

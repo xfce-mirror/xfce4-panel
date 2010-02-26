@@ -44,6 +44,11 @@ void       panel_window_freeze_autohide  (PanelWindow *window);
 
 void       panel_window_thaw_autohide    (PanelWindow *window);
 
+void       panel_window_set_locked       (PanelWindow *window,
+                                          gboolean     locked);
+
+gboolean   panel_window_get_locked       (PanelWindow *window);
+
 G_END_DECLS
 
 #endif /* !__PANEL_WINDOW_H__ */

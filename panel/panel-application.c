@@ -253,7 +253,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   gchar               *property_base;
   const PanelProperty  properties[] =
   {
-    { "locked", G_TYPE_BOOLEAN },
+    { "position-locked", G_TYPE_BOOLEAN },
     { "autohide", G_TYPE_BOOLEAN },
     { "span-monitors", G_TYPE_BOOLEAN },
     { "horizontal", G_TYPE_BOOLEAN },
@@ -278,6 +278,10 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
                          property_base, properties, save_properties);
+
+  /* set locking for this panel */
+  panel_window_set_locked (window,
+      xfconf_channel_is_property_locked (application->xfconf, property_base));
 
   g_free (property_base);
 }
@@ -465,8 +469,10 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
   switch (provider_signal)
     {
     case PROVIDER_SIGNAL_MOVE_PLUGIN:
-      /* start plugin drag */
-      panel_application_plugin_move (GTK_WIDGET (provider), application);
+      /* check the window locking, not that of the provider, because
+       * the users might have worked around that and both should be identical */
+      if (!panel_window_get_locked (window))
+        panel_application_plugin_move (GTK_WIDGET (provider), application);
       break;
 
     case PROVIDER_SIGNAL_EXPAND_PLUGIN:
@@ -500,28 +506,33 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
       break;
 
     case PROVIDER_SIGNAL_REMOVE_PLUGIN:
-      /* give plugin the opportunity to cleanup special configuration */
-      xfce_panel_plugin_provider_removed (provider);
+      /* check the window locking, not that of the provider, because
+       * the users might have worked around that and both should be identical */
+      if (!panel_window_get_locked (window))
+        {
+          /* give plugin the opportunity to cleanup special configuration */
+          xfce_panel_plugin_provider_removed (provider);
 
-      /* store the provider's unique id and name (lost after destroy) */
-      unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
-      name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
+          /* store the provider's unique id and name (lost after destroy) */
+          unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
+          name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
 
-      /* destroy the plugin */
-      gtk_widget_destroy (GTK_WIDGET (provider));
+          /* destroy the plugin */
+          gtk_widget_destroy (GTK_WIDGET (provider));
 
-      /* remove the plugin configuration */
-      panel_application_plugin_delete_config (application, name, unique_id);
-      g_free (name);
+          /* remove the plugin configuration */
+          panel_application_plugin_delete_config (application, name, unique_id);
+          g_free (name);
+        }
       break;
 
     case PROVIDER_SIGNAL_ADD_NEW_ITEMS:
-      /* open the items dialog */
+      /* open the items dialog, locking is handled in the object */
       panel_item_dialog_show (window);
       break;
 
     case PROVIDER_SIGNAL_PANEL_PREFERENCES:
-      /* open the panel preferences */
+      /* open the panel preferences, locking is handled in the object */
       panel_preferences_dialog_show (window);
       break;
 
@@ -570,6 +581,10 @@ panel_application_plugin_insert (PanelApplication  *application,
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
   panel_return_val_if_fail (name != NULL, FALSE);
+
+  /* leave if the window is locked */
+  if (panel_window_get_locked (window))
+    return FALSE;
 
   /* create a new panel plugin */
   provider = panel_module_factory_new_plugin (application->factory,
@@ -720,6 +735,13 @@ panel_application_drag_data_received (PanelWindow      *window,
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
 
+  /* we don't allow any kind of drops here when the panel is locked */
+  if (panel_window_get_locked (window))
+    {
+      gdk_drag_status (context, 0, drag_time);
+      return;
+    }
+
   /* get the application */
   application = panel_application_get ();
 
@@ -865,6 +887,10 @@ panel_application_drag_motion (GtkWidget        *window,
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
   panel_return_val_if_fail (!application->drop_occurred, FALSE);
 
+  /* don't allow anything when the window is locked */
+  if (panel_window_get_locked (PANEL_WINDOW (window)))
+    goto not_a_drop_zone;
+
   /* determine the drag target */
   target = gtk_drag_dest_find_target (window, context, NULL);
 
@@ -904,6 +930,7 @@ panel_application_drag_motion (GtkWidget        *window,
           panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y));
     }
 
+not_a_drop_zone:
   gdk_drag_status (context, drag_action, drag_time);
 
   return (drag_action == 0);
@@ -1007,6 +1034,10 @@ panel_application_save (PanelApplication *application,
 
   for (li = application->windows, i = 0; li != NULL; li = li->next, i++)
     {
+      /* skip this window if it is locked */
+      if (panel_window_get_locked (li->data))
+        continue;
+
       /* get the itembar children */
       itembar = gtk_bin_get_child (GTK_BIN (li->data));
       children = gtk_container_get_children (GTK_CONTAINER (itembar));
@@ -1053,7 +1084,8 @@ panel_application_save (PanelApplication *application,
     }
 
   /* store the number of panels */
-  xfconf_channel_set_uint (channel, "/panels", i);
+  if (!xfconf_channel_is_property_locked (channel, "/panels"))
+    xfconf_channel_set_uint (channel, "/panels", i);
 }
 
 
@@ -1310,4 +1342,30 @@ panel_application_windows_autohide (PanelApplication *application,
       else
         panel_window_thaw_autohide (PANEL_WINDOW (li->data));
     }
+}
+
+
+
+gboolean
+panel_application_get_locked (PanelApplication *application)
+{
+  GSList *li;
+
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), TRUE);
+  panel_return_val_if_fail (XFCONF_IS_CHANNEL (application->xfconf), TRUE);
+
+  /* don't even look for the individual window if the
+   * entire channel is locked */
+  if (xfconf_channel_is_property_locked (application->xfconf, "/"))
+    return TRUE;
+
+  /* if one of the windows is not locked, the user can still modify
+   * some settings, so then we return %FALSE */
+  for (li = application->windows; li != NULL; li = li->next)
+    if (!panel_window_get_locked (li->data))
+      return FALSE;
+
+  /* TODO we could extend this to a plugin basis (ie. panels are
+   * locked but maybe not all the plugins) */
+  return TRUE;
 }

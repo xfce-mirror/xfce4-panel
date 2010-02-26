@@ -33,6 +33,7 @@
 
 #include <panel/panel-application.h>
 #include <panel/panel-item-dialog.h>
+#include <panel/panel-dialogs.h>
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 #include <panel/panel-preferences-dialog.h>
@@ -700,6 +701,10 @@ panel_item_dialog_show (PanelWindow *window)
   PanelApplication *application;
 
   panel_return_if_fail (window == NULL || PANEL_IS_WINDOW (window));
+
+  /* check if not the entire application is locked */
+  if (panel_dialogs_kiosk_warning ())
+    return;
 
   if (G_LIKELY (dialog_singleton == NULL))
     {

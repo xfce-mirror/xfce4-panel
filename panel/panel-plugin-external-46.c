@@ -85,6 +85,8 @@ static void         panel_plugin_external_46_removed               (XfcePanelPlu
 static gboolean     panel_plugin_external_46_remote_event          (XfcePanelPluginProvider          *provider,
                                                                     const gchar                      *name,
                                                                     const GValue                     *value);
+static void         panel_plugin_external_46_set_locked            (XfcePanelPluginProvider          *provider,
+                                                                    gboolean                          locked);
 static void         panel_plugin_external_46_set_sensitive         (PanelPluginExternal46            *external);
 static void         panel_plugin_external_46_child_watch           (GPid                              pid,
                                                                     gint                              status,
@@ -235,6 +237,7 @@ panel_plugin_external_46_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->show_about = panel_plugin_external_46_show_about;
   iface->removed = panel_plugin_external_46_removed;
   iface->remote_event = panel_plugin_external_46_remote_event;
+  iface->set_locked = panel_plugin_external_46_set_locked;
 }
 
 
@@ -736,6 +739,20 @@ panel_plugin_external_46_remote_event (XfcePanelPluginProvider *provider,
              "remote events.", panel_plugin_external_46_get_name (provider));
 
   return TRUE;
+}
+
+
+
+static void
+panel_plugin_external_46_set_locked (XfcePanelPluginProvider *provider,
+                                     gboolean                 locked)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  panel_plugin_external_46_queue_add (PANEL_PLUGIN_EXTERNAL_46 (provider),
+                                      PANEL_CLIENT_EVENT_SET_LOCKED,
+                                      locked);
 }
 
 

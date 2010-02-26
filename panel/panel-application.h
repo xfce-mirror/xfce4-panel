@@ -75,6 +75,8 @@ void              panel_application_windows_sensitive (PanelApplication  *applic
 void              panel_application_windows_autohide  (PanelApplication  *application,
                                                        gboolean           freeze);
 
+gboolean          panel_application_get_locked        (PanelApplication  *application);
+
 G_END_DECLS
 
 #endif /* !__PANEL_APPLICATION_H__ */

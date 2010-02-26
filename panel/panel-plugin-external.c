@@ -99,6 +99,8 @@ static void         panel_plugin_external_removed               (XfcePanelPlugin
 static gboolean     panel_plugin_external_remote_event          (XfcePanelPluginProvider           *provider,
                                                                  const gchar                       *name,
                                                                  const GValue                      *value);
+static void         panel_plugin_external_set_locked            (XfcePanelPluginProvider           *provider,
+                                                                 gboolean                           locked);
 static void         panel_plugin_external_set_sensitive         (PanelPluginExternal               *external);
 static void         panel_plugin_external_child_watch           (GPid                               pid,
                                                                  gint                               status,
@@ -268,6 +270,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->show_about = panel_plugin_external_show_about;
   iface->removed = panel_plugin_external_removed;
   iface->remote_event = panel_plugin_external_remote_event;
+  iface->set_locked = panel_plugin_external_set_locked;
 }
 
 
@@ -848,6 +851,26 @@ panel_plugin_external_remote_event (XfcePanelPluginProvider *provider,
                                    FALSE, name, real_value);
 
   return TRUE;
+}
+
+
+
+static void
+panel_plugin_external_set_locked (XfcePanelPluginProvider *provider,
+                                  gboolean                 locked)
+{
+  GValue value = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  g_value_set_boolean (&value, locked);
+
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   FALSE, SIGNAL_SET_LOCKED, &value);
+
+  g_value_unset (&value);
 }
 
 

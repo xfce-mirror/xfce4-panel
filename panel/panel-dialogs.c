@@ -26,6 +26,7 @@
 
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 #include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -142,6 +143,29 @@ panel_dialogs_choose_panel (PanelApplication *application)
   panel_application_window_select (application, NULL);
 
   return response;
+}
+
+
+
+gboolean
+panel_dialogs_kiosk_warning (void)
+{
+  PanelApplication *application;
+  gboolean          locked;
+
+  application = panel_application_get ();
+  locked = panel_application_get_locked (application);
+  g_object_unref (G_OBJECT (application));
+
+  if (locked)
+    {
+      xfce_dialog_show_warning (NULL,
+          _("Because the panel is running in kiosk mode, you are not allowed "
+            "to make changes to the panel configuration as a regular user"),
+          _("Modifying the panel is not allowed"));
+    }
+
+  return locked;
 }
 
 

@@ -135,7 +135,7 @@ enum
   PROP_HORIZONTAL,
   PROP_SIZE,
   PROP_LENGTH,
-  PROP_LOCKED,
+  PROP_POSITION_LOCKED,
   PROP_AUTOHIDE,
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
@@ -221,6 +221,10 @@ struct _PanelWindow
 {
   PanelBaseWindow      __parent__;
 
+  /* whether the user is allowed to make
+   * changes to this window */
+  guint                locked : 1;
+
   /* screen and working area of this panel */
   GdkScreen           *screen;
   GdkRectangle         area;
@@ -251,8 +255,8 @@ struct _PanelWindow
   gint                 popup_delay;
   gint                 popdown_delay;
 
-  /* whether the window is locked */
-  guint                locked : 1;
+  /* whether the window position is locked */
+  guint                position_locked : 1;
 
   /* window base point */
   gint                 base_x;
@@ -327,8 +331,8 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_LOCKED,
-                                   g_param_spec_boolean ("locked", NULL, NULL,
+                                   PROP_POSITION_LOCKED,
+                                   g_param_spec_boolean ("position-locked", NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
 
@@ -391,6 +395,7 @@ panel_window_class_init (PanelWindowClass *klass)
 static void
 panel_window_init (PanelWindow *window)
 {
+  window->locked = TRUE;
   window->screen = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_disabled = FALSE;
@@ -399,7 +404,7 @@ panel_window_init (PanelWindow *window)
   window->length = 0.10;
   window->snap_position = SNAP_POSITION_NONE;
   window->span_monitors = FALSE;
-  window->locked = FALSE;
+  window->position_locked = FALSE;
   window->autohide_state = AUTOHIDE_DISABLED;
   window->autohide_timeout_id = 0;
   window->autohide_block = 0;
@@ -453,8 +458,8 @@ panel_window_get_property (GObject    *object,
       g_value_set_uint (value,  rint (window->length * 100.00));
       break;
 
-    case PROP_LOCKED:
-      g_value_set_boolean (value, window->locked);
+    case PROP_POSITION_LOCKED:
+      g_value_set_boolean (value, window->position_locked);
       break;
 
     case PROP_AUTOHIDE:
@@ -557,11 +562,11 @@ panel_window_set_property (GObject      *object,
         }
       break;
 
-    case PROP_LOCKED:
+    case PROP_POSITION_LOCKED:
       val_bool = g_value_get_boolean (value);
-      if (window->locked != val_bool)
+      if (window->position_locked != val_bool)
         {
-          window->locked = !!val_bool;
+          window->position_locked = !!val_bool;
           gtk_widget_queue_resize (GTK_WIDGET (window));
         }
       break;
@@ -661,7 +666,7 @@ panel_window_expose_event (GtkWidget      *widget,
   /* expose the background and borders handled in PanelBaseWindow */
   (*GTK_WIDGET_CLASS (panel_window_parent_class)->expose_event) (widget, event);
 
-  if (window->locked || !GTK_WIDGET_DRAWABLE (widget))
+  if (window->position_locked || !GTK_WIDGET_DRAWABLE (widget))
     goto end;
 
   if (window->horizontal)
@@ -891,7 +896,7 @@ panel_window_button_press_event (GtkWidget      *widget,
 
   if (event->button == 1
       && event->type == GDK_BUTTON_PRESS
-      && !window->locked
+      && !window->position_locked
       && modifiers == 0)
     {
       panel_return_val_if_fail (window->grab_time == 0, FALSE);
@@ -995,7 +1000,7 @@ panel_window_size_request (GtkWidget      *widget,
     gtk_widget_size_request (GTK_BIN (widget)->child, &child_requisition);
 
   /* handle size */
-  if (!window->locked)
+  if (!window->position_locked)
     {
       if (window->horizontal)
         extra_width += 2 * HANDLE_SIZE_TOTAL;
@@ -1108,7 +1113,7 @@ panel_window_size_allocate (GtkWidget     *widget,
         child_alloc.height--;
 
       /* keep space for the panel handles if not locked */
-      if (!window->locked)
+      if (!window->position_locked)
         {
           if (window->horizontal)
             {
@@ -2005,16 +2010,6 @@ panel_window_menu_deactivate (GtkMenu     *menu,
 
 
 static void
-panel_window_menu_add_items (PanelWindow *window)
-{
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  panel_item_dialog_show (window);
-}
-
-
-
-static void
 panel_window_menu_popup (PanelWindow *window,
                          guint32      event_time)
 {
@@ -2042,31 +2037,34 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
-  /* add new items */
-  item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
-  g_signal_connect_swapped (G_OBJECT (item), "activate",
-      G_CALLBACK (panel_window_menu_add_items), window);
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-  gtk_widget_show (item);
+  if (!panel_window_get_locked (window))
+    {
+      /* add new items */
+      item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
+      g_signal_connect_swapped (G_OBJECT (item), "activate",
+          G_CALLBACK (panel_item_dialog_show), window);
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
 
-  image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-  gtk_widget_show (image);
+      image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+      gtk_widget_show (image);
 
-  /* customize panel */
-  item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
-  g_signal_connect_swapped (G_OBJECT (item), "activate",
-      G_CALLBACK (panel_preferences_dialog_show), window);
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-  gtk_widget_show (item);
+      /* customize panel */
+      item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
+      g_signal_connect_swapped (G_OBJECT (item), "activate",
+          G_CALLBACK (panel_preferences_dialog_show), window);
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
 
-  image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-  gtk_widget_show (image);
+      image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+      gtk_widget_show (image);
 
-  item = gtk_separator_menu_item_new ();
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-  gtk_widget_show (item);
+      item = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
+    }
 
   /* quit item */
   item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
@@ -2227,6 +2225,9 @@ panel_window_set_povider_info (PanelWindow *window,
   panel_window_set_plugin_orientation (provider, window);
   panel_window_set_plugin_screen_position (provider, window);
 
+  xfce_panel_plugin_provider_set_locked (XFCE_PANEL_PLUGIN_PROVIDER (provider),
+                                         panel_window_get_locked (window));
+
   if (PANEL_BASE_WINDOW (window)->background_alpha < 1.0)
     {
       if (PANEL_IS_PLUGIN_EXTERNAL (provider))
@@ -2268,4 +2269,25 @@ panel_window_thaw_autohide (PanelWindow *window)
   if (window->autohide_block == 0
       && window->autohide_state != AUTOHIDE_DISABLED)
     panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+}
+
+
+
+void
+panel_window_set_locked (PanelWindow *window,
+                         gboolean     locked)
+{
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  window->locked = locked;
+}
+
+
+
+gboolean
+panel_window_get_locked (PanelWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), TRUE);
+
+  return window->locked;
 }
