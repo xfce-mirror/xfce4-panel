@@ -43,6 +43,8 @@ xfce4_panel_SOURCES = \
 	panel-module-factory.h \
 	panel-plugin-external.c \
 	panel-plugin-external.h \
+	panel-plugin-external-46.c \
+	panel-plugin-external-46.h \
 	panel-preferences-dialog.c \
 	panel-preferences-dialog.h \
 	panel-window.c \

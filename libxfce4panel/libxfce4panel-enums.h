@@ -17,9 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#if !defined(LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H) && !defined(LIBXFCE4PANEL_COMPILATION)&& !defined(XFCE_DISABLE_DEPRECATED)
+/* #if !defined(LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H) && !defined(LIBXFCE4PANEL_COMPILATION)
 #error "Only <libxfce4panel/libxfce4panel.h> can be included directly, this file may disappear or change contents"
-#endif
+#endif */
 
 #ifndef __LIBXFCE4PANEL_ENUMS_H__
 #define __LIBXFCE4PANEL_ENUMS_H__

@@ -16,9 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#if !defined(LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H) && !defined(LIBXFCE4PANEL_COMPILATION) && !defined(XFCE_DISABLE_DEPRECATED)
+/* #if !defined(LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H) && !defined(LIBXFCE4PANEL_COMPILATION)
 #error "Only <libxfce4panel/libxfce4panel.h> can be included directly, this file may disappear or change contents"
-#endif
+#endif */
 
 #ifndef __XFCE_PANEL_PLUGIN_H__
 #define __XFCE_PANEL_PLUGIN_H__
@@ -32,6 +32,10 @@ G_BEGIN_DECLS
 typedef struct _XfcePanelPluginPrivate XfcePanelPluginPrivate;
 typedef struct _XfcePanelPluginClass   XfcePanelPluginClass;
 typedef struct _XfcePanelPlugin        XfcePanelPlugin;
+
+typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
+typedef gboolean (*XfcePanelPluginPreInit) (gint argc, gchar **argv);
+typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 
 #define XFCE_TYPE_PANEL_PLUGIN            (xfce_panel_plugin_get_type ())
 #define XFCE_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPlugin))

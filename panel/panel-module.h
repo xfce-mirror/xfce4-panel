@@ -25,8 +25,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PanelModuleClass PanelModuleClass;
-typedef struct _PanelModule      PanelModule;
+typedef struct _PanelModuleClass  PanelModuleClass;
+typedef struct _PanelModule       PanelModule;
+typedef enum   _PanelModuleRunMode PanelModuleRunMode;
 
 #define PANEL_TYPE_MODULE            (panel_module_get_type ())
 #define PANEL_MODULE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_MODULE, PanelModule))

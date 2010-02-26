@@ -16,13 +16,35 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+/* #if !defined(LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H) && !defined(LIBXFCE4PANEL_COMPILATION)
+#error "Only <libxfce4panel/libxfce4panel.h> can be included directly, this file may disappear or change contents"
+#endif */
+
 #ifndef __LIBXFCE4PANEL_DEPRECATED_H__
 #define __LIBXFCE4PANEL_DEPRECATED_H__
 
-//#ifndef XFCE_DISABLE_DEPRECATED
-
+/* #ifndef XFCE_DISABLE_DEPRECATED */
+#include <libxfce4panel/xfce-panel-plugin-provider.h>
+/* #endif *//* !XFCE_DISABLE_DEPRECATED */
 
 G_BEGIN_DECLS
+
+enum /*< skip >*/
+{
+  PANEL_CLIENT_EVENT_REMOVE,
+  PANEL_CLIENT_EVENT_SAVE,
+  PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA,
+  PANEL_CLIENT_EVENT_SET_ORIENTATION,
+  PANEL_CLIENT_EVENT_SET_SCREEN_POSITION,
+  PANEL_CLIENT_EVENT_SET_SENSITIVE,
+  PANEL_CLIENT_EVENT_SET_SIZE,
+  PANEL_CLIENT_EVENT_SHOW_ABOUT,
+  PANEL_CLIENT_EVENT_SHOW_CONFIGURE
+};
+
+#define PANEL_CLIENT_EVENT_ATOM "XFCE4_PANEL_PLUGIN_46"
+
+/* #ifndef XFCE_DISABLE_DEPRECATED */
 
 #define panel_slice_alloc(block_size)            (g_slice_alloc ((block_size)))
 #define panel_slice_alloc0(block_size)           (g_slice_alloc0 ((block_size)))
@@ -40,11 +62,307 @@ G_BEGIN_DECLS
 #define _panel_return_if_fail(expr)          g_return_if_fail (expr)
 #define _panel_return_val_if_fail(expr, val) g_return_val_if_fail (expr, (val))
 
+#define xfce_create_panel_button        xfce_panel_create_button
+#define xfce_create_panel_toggle_button xfce_panel_create_toggle_button
+#define xfce_allow_panel_customization  xfce_panel_allow_customization
+
 #define _panel_g_type_register_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init) \
     g_type_register_static_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init, 0)
 
-G_END_DECLS
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct_func)  \
+    XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL (construct_func, NULL, NULL)
 
-//#endif /* !XFCE_DISABLE_DEPRECATED */
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct_func ,check_func) \
+    XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL (construct_func, NULL, check_func)
+
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct_func, preinit_func, check_func) \
+  static GdkAtom  _xpp_atom = GDK_NONE; \
+  static gdouble  _xpp_alpha = 1.00; \
+  static gboolean _xpp_composited = FALSE; \
+  \
+  static gboolean \
+  _xpp_client_event (GtkWidget       *plug, \
+                     GdkEventClient  *event, \
+                     XfcePanelPlugin *xpp) \
+  { \
+    XfcePanelPluginProvider *provider = XFCE_PANEL_PLUGIN_PROVIDER (xpp); \
+    gint                     value; \
+    gint                     message; \
+    \
+    g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (xpp), TRUE); \
+    g_return_val_if_fail (GTK_IS_PLUG (plug), TRUE); \
+    g_return_val_if_fail (_xpp_atom != GDK_NONE, TRUE); \
+    g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (xpp), TRUE); \
+    \
+    if (event->message_type == _xpp_atom) \
+      { \
+        message = event->data.s[0]; \
+        value = event->data.s[1]; \
+        \
+        switch (message) \
+          { \
+            case PANEL_CLIENT_EVENT_REMOVE: \
+              xfce_panel_plugin_provider_remove (provider); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SAVE: \
+              xfce_panel_plugin_provider_save (provider); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA: \
+              _xpp_alpha = value / 100.00; \
+              if (_xpp_composited) \
+                gtk_widget_queue_draw (plug); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SET_ORIENTATION: \
+              xfce_panel_plugin_provider_set_orientation (provider, value); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SET_SCREEN_POSITION: \
+              xfce_panel_plugin_provider_set_screen_position (provider, value); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SET_SENSITIVE: \
+              gtk_widget_set_sensitive (plug, value); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SET_SIZE: \
+              xfce_panel_plugin_provider_set_size (provider, value); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SHOW_ABOUT: \
+              xfce_panel_plugin_provider_show_about (provider); \
+              break; \
+              \
+            case PANEL_CLIENT_EVENT_SHOW_CONFIGURE: \
+              xfce_panel_plugin_provider_show_configure (provider); \
+              break; \
+              \
+            default: \
+              g_warning ("Received unknow client event %d", message); \
+              break; \
+          } \
+        \
+        return FALSE; \
+      } \
+    \
+    return TRUE; \
+  } \
+  \
+  static void \
+  _xpp_provider_signal (GtkWidget *xpp, \
+                        guint      message, \
+                        GtkWidget *plug) \
+  { \
+    GdkEventClient event; \
+    \
+    g_return_if_fail (GTK_IS_PLUG (plug)); \
+    g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
+    g_return_if_fail (GDK_IS_WINDOW (plug->window)); \
+    g_return_if_fail (_xpp_atom != GDK_NONE); \
+    \
+    event.type = GDK_CLIENT_EVENT; \
+    event.window = plug->window; \
+    event.send_event = TRUE; \
+    event.message_type = _xpp_atom; \
+    event.data_format = 16; \
+    event.data.s[0] = message; \
+    event.data.s[1] = 0; \
+    \
+    gdk_error_trap_push (); \
+    gdk_event_send_client_message ((GdkEvent *) &event,  \
+        GDK_WINDOW_XID (gtk_plug_get_socket_window (GTK_PLUG (plug)))); \
+    gdk_flush (); \
+    if (gdk_error_trap_pop () != 0) \
+      g_warning ("Failed to send provider-signal %d", message); \
+  } \
+  \
+  static void \
+  _xpp_realize (XfcePanelPlugin *xpp) \
+  { \
+    g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
+    \
+    g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), \
+        G_CALLBACK (_xpp_realize), NULL); \
+    \
+    ((XfcePanelPluginFunc) construct_func) (xpp); \
+  } \
+  \
+  static gboolean \
+  _xpp_expose_event (GtkWidget      *plug, \
+                     GdkEventExpose *event) \
+  { \
+    cairo_t  *cr; \
+    GdkColor *color; \
+    \
+    if (_xpp_composited \
+        && GTK_WIDGET_DRAWABLE (plug) \
+        && _xpp_alpha < 1.00) \
+      { \
+        cr = gdk_cairo_create (plug->window); \
+        cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE); \
+        \
+        color = &(plug->style->bg[GTK_STATE_NORMAL]); \
+        cairo_set_source_rgba (cr, \
+                               color->red / 65535.00, \
+                               color->green / 65535.00, \
+                               color->blue / 65535.00, \
+                               _xpp_alpha); \
+        \
+        cairo_rectangle (cr, event->area.x, event->area.y, \
+                         event->area.width, event->area.height); \
+        \
+        cairo_fill (cr); \
+        cairo_destroy (cr); \
+      } \
+    \
+    return FALSE; \
+  } \
+  \
+  static void \
+  _xpp_plug_embedded (GtkPlug *plug) \
+  { \
+    g_return_if_fail (GTK_IS_PLUG (plug)); \
+    \
+    if (!gtk_plug_get_embedded (plug)) \
+      gtk_main_quit (); \
+  } \
+  \
+  static void \
+  _xpp_set_colormap (GtkWidget *plug) \
+  { \
+    GdkColormap *colormap = NULL; \
+    GdkScreen   *screen; \
+    gboolean     restore; \
+    \
+    g_return_if_fail (GTK_IS_WIDGET (plug)); \
+    \
+    restore = GTK_WIDGET_REALIZED (plug); \
+    if (restore) \
+      { \
+        gtk_widget_hide (plug); \
+        gtk_widget_unrealize (plug); \
+      } \
+    \
+    screen = gtk_widget_get_screen (plug); \
+    \
+    _xpp_composited = gtk_widget_is_composited (plug); \
+    \
+    if (_xpp_composited) \
+      colormap = gdk_screen_get_rgba_colormap (screen); \
+    \
+    if (colormap == NULL) \
+      { \
+        colormap = gdk_screen_get_rgb_colormap (screen); \
+        _xpp_composited = FALSE; \
+      } \
+    \
+    if (colormap != NULL) \
+      gtk_widget_set_colormap (plug, colormap); \
+    \
+    if (restore) \
+      { \
+        gtk_widget_realize (plug); \
+        gtk_widget_show (plug); \
+      } \
+    \
+    gtk_widget_queue_draw (plug); \
+  } \
+  \
+  gint \
+  main (gint argc, gchar **argv) \
+  { \
+    GtkWidget     *plug; \
+    GdkScreen     *screen; \
+    GtkWidget     *xpp; \
+    GError        *error = NULL; \
+    gchar         *opt_name = NULL; \
+    gchar         *opt_display_name = NULL; \
+    gint           opt_unique_id = -1; \
+    gchar         *opt_comment = NULL; \
+    gint           opt_socket_id = 0; \
+    gchar        **opt_arguments = NULL; \
+    GOptionEntry   option_entries[] = \
+    { \
+      { "name", 'n', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_name, NULL, NULL }, \
+      { "display-name", 'd', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_display_name, NULL, NULL }, \
+      { "comment", 'c', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_comment, NULL, NULL }, \
+      { "unique-id", 'i', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_unique_id, NULL, NULL }, \
+      { "socket-id", 's', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL }, \
+      { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL }, \
+      { NULL } \
+    }; \
+    \
+    _xpp_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM); \
+    \
+    if (preinit_func != NULL) \
+      { \
+        if (!((XfcePanelPluginPreInit) preinit_func) (argc, argv)) \
+          return 2; /* WRAPPER_EXIT_PREINIT */ \
+      } \
+    \
+    if (!gtk_init_with_args (&argc, &argv, "", option_entries, NULL, &error)) \
+      { \
+        g_critical ("Failed to initialize"); \
+        return 1 /* WRAPPER_EXIT_FAILURE */; \
+      } \
+    \
+    if (opt_unique_id == -1 || opt_name == NULL || opt_display_name == NULL \
+        || opt_comment == NULL || opt_socket_id == 0) \
+      { \
+        g_critical ("Missing argument(s)"); \
+        return 1 /* WRAPPER_EXIT_FAILURE */; \
+      } \
+    \
+    if (check_func != NULL) \
+      { \
+        screen = gdk_screen_get_default (); \
+        if (!((XfcePanelPluginCheck) check_func) (screen)) \
+          return 3; /* WRAPPER_EXIT_NO_PROVIDER */ \
+      } \
+    \
+    plug = gtk_plug_new (opt_socket_id); \
+    g_signal_connect (G_OBJECT (plug), "embedded", \
+        G_CALLBACK (_xpp_plug_embedded), NULL); \
+    g_signal_connect (G_OBJECT (plug), "expose-event", \
+        G_CALLBACK (_xpp_expose_event), NULL); \
+    g_signal_connect (G_OBJECT (plug), "composited-changed", \
+        G_CALLBACK (_xpp_set_colormap), NULL); \
+    \
+    gtk_widget_set_app_paintable (plug, TRUE); \
+    if (gtk_widget_is_composited (plug)) \
+      _xpp_set_colormap (plug); \
+    \
+    xpp = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
+                        "name", opt_name, \
+                        "unique-id", opt_unique_id, \
+                        "display-name", opt_display_name, \
+                        "comment", opt_comment,  \
+                        "arguments", opt_arguments, NULL); \
+    gtk_container_add (GTK_CONTAINER (plug), xpp); \
+    g_signal_connect_after (G_OBJECT (xpp), "realize", \
+        G_CALLBACK (_xpp_realize), NULL); \
+    g_signal_connect_after (G_OBJECT (xpp), "destroy", \
+        G_CALLBACK (gtk_main_quit), NULL); \
+    g_signal_connect (G_OBJECT (xpp), "provider-signal", \
+        G_CALLBACK (_xpp_provider_signal), plug); \
+    gtk_widget_show (xpp); \
+    \
+    g_signal_connect (G_OBJECT (plug), "client-event", \
+       G_CALLBACK (_xpp_client_event), xpp); \
+    gtk_widget_show (plug); \
+    \
+    gtk_main (); \
+    \
+    if (GTK_IS_WIDGET (plug)) \
+      gtk_widget_destroy (plug); \
+    \
+    return 0 /* WRAPPER_EXIT_SUCCESS */; \
+  }
+
+/* #endif *//* !XFCE_DISABLE_DEPRECATED */
+
+G_END_DECLS
 
 #endif /* !__LIBXFCE4PANEL_DEPRECATED_H__ */

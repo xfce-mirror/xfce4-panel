@@ -28,6 +28,7 @@ libxfce4panel_headers = \
 	xfce-panel-convenience.h \
 	xfce-panel-macros.h \
 	xfce-panel-plugin.h \
+	xfce-panel-plugin-provider.h \
 	xfce-panel-image.h
 
 libxfce4panel_includedir = \
@@ -45,7 +46,6 @@ libxfce4panel_1_0_la_SOURCES = \
 	xfce-panel-convenience.c \
 	xfce-panel-plugin.c \
 	xfce-panel-plugin-provider.c \
-	xfce-panel-plugin-provider.h \
 	xfce-panel-image.c
 
 libxfce4panel_1_0_la_CFLAGS =	 \

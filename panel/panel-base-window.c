@@ -30,6 +30,7 @@
 #include <common/panel-private.h>
 #include <panel/panel-base-window.h>
 #include <panel/panel-plugin-external.h>
+#include <panel/panel-plugin-external-46.h>
 
 
 
@@ -546,6 +547,9 @@ panel_base_window_set_plugin_background_alpha (GtkWidget *widget,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (widget),
+        PANEL_BASE_WINDOW (user_data)->background_alpha);
+  else if (PANEL_IS_PLUGIN_EXTERNAL_46 (widget))
+    panel_plugin_external_46_set_background_alpha (PANEL_PLUGIN_EXTERNAL_46 (widget),
         PANEL_BASE_WINDOW (user_data)->background_alpha);
 }
 

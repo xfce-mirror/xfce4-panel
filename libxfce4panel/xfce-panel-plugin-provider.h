@@ -26,7 +26,6 @@ G_BEGIN_DECLS
 
 typedef struct _XfcePanelPluginProviderIface  XfcePanelPluginProviderIface;
 typedef struct _XfcePanelPluginProvider       XfcePanelPluginProvider;
-typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 
 #define XFCE_TYPE_PANEL_PLUGIN_PROVIDER           (xfce_panel_plugin_provider_get_type ())
 #define XFCE_PANEL_PLUGIN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProvider))
@@ -48,7 +47,7 @@ struct _XfcePanelPluginProviderIface
   /*< private >*/
   GTypeInterface __parent__;
 
-  /*< public >*/
+  /*<public >*/
   const gchar *(*get_name)            (XfcePanelPluginProvider       *provider);
   gint         (*get_unique_id)       (XfcePanelPluginProvider       *provider);
   void         (*set_size)            (XfcePanelPluginProvider       *provider,
@@ -70,7 +69,7 @@ struct _XfcePanelPluginProviderIface
 
 /* signals send from the plugin to the panel (possibly
  * through the wrapper) */
-enum _XfcePanelPluginProviderSignal
+typedef enum /*< skip >*/
 {
   PROVIDER_SIGNAL_MOVE_PLUGIN = 0,
   PROVIDER_SIGNAL_EXPAND_PLUGIN,
@@ -88,7 +87,8 @@ enum _XfcePanelPluginProviderSignal
   PROVIDER_SIGNAL_SHOW_CONFIGURE,
   PROVIDER_SIGNAL_SHOW_ABOUT,
   PROVIDER_SIGNAL_FOCUS_PLUGIN
-};
+}
+XfcePanelPluginProviderSignal;
 
 
 

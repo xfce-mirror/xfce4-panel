@@ -391,9 +391,10 @@ panel_application_plugin_move (GtkWidget        *item,
   /* set the drag context icon name */
   module = panel_module_get_from_plugin_provider (XFCE_PANEL_PLUGIN_PROVIDER (item));
   icon_name = panel_module_get_icon_name (module);
-  if (G_UNLIKELY (icon_name == NULL))
-    icon_name = GTK_STOCK_DND;
-  gtk_drag_set_icon_name (context, icon_name, 0, 0);
+  if (G_LIKELY (icon_name != NULL))
+    gtk_drag_set_icon_name (context, icon_name, 0, 0);
+  else
+    gtk_drag_set_icon_default (context);
 
   /* release the drag list */
   gtk_target_list_unref (target_list);
