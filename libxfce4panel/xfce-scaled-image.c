@@ -24,8 +24,9 @@
 #endif
 
 #include <gtk/gtk.h>
-
 #include <libxfce4panel/libxfce4panel.h>
+
+#define MAX_PIXBUF_SIZE (128)
 
 
 
@@ -54,17 +55,20 @@ struct _XfceScaledImage
 
 
 
-static void     xfce_scaled_image_class_init    (XfceScaledImageClass *klass);
-static void     xfce_scaled_image_init          (XfceScaledImage      *tasklist);
-static void     xfce_scaled_image_finalize      (GObject              *object);
-static void     xfce_scaled_image_size_request  (GtkWidget            *widget,
-                                                 GtkRequisition       *requisition);
-static gboolean xfce_scaled_image_expose_event  (GtkWidget            *widget,
-                                                 GdkEventExpose       *event);
-static void     xfce_scaled_image_size_allocate (GtkWidget            *widget,
-                                                 GtkAllocation        *allocation);
-static void     xfce_scaled_image_update_cache  (XfceScaledImage      *image);
-static void     xfce_scaled_image_cleanup       (XfceScaledImage      *image);
+static void       xfce_scaled_image_class_init    (XfceScaledImageClass *klass);
+static void       xfce_scaled_image_init          (XfceScaledImage      *tasklist);
+static void       xfce_scaled_image_finalize      (GObject              *object);
+static void       xfce_scaled_image_size_request  (GtkWidget            *widget,
+                                                   GtkRequisition       *requisition);
+static gboolean   xfce_scaled_image_expose_event  (GtkWidget            *widget,
+                                                   GdkEventExpose       *event);
+static void       xfce_scaled_image_size_allocate (GtkWidget            *widget,
+                                                   GtkAllocation        *allocation);
+static GdkPixbuf *xfce_scaled_image_scale_pixbuf  (GdkPixbuf            *source,
+                                                   gint                  dest_width,
+                                                   gint                  dest_height);
+static void       xfce_scaled_image_update_cache  (XfceScaledImage      *image);
+static void       xfce_scaled_image_cleanup       (XfceScaledImage      *image);
 
 
 
@@ -97,7 +101,7 @@ xfce_scaled_image_init (XfceScaledImage *image)
   image->pixbuf = NULL;
   image->icon_name = NULL;
   image->cache = NULL;
-  image->width = -1;
+  image->size = -1;
   image->height = -1;
 }
 
@@ -201,21 +205,49 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
 
 
 
+static GdkPixbuf *
+xfce_scaled_image_scale_pixbuf (GdkPixbuf *source,
+                                gint       dest_width,
+                                gint       dest_height)
+{
+  gdouble wratio;
+  gdouble hratio;
+  gint    source_width;
+  gint    source_height;
+
+  panel_return_val_if_fail (GDK_IS_PIXBUF (source), NULL);
+  panel_return_val_if_fail (dest_width > 0, NULL);
+  panel_return_val_if_fail (dest_height > 0, NULL);
+
+  source_width = gdk_pixbuf_get_width (source);
+  source_height = gdk_pixbuf_get_height (source);
+
+  /* check if we need to scale */
+  if (G_UNLIKELY (source_width <= dest_width && source_height <= dest_height))
+    return g_object_ref (G_OBJECT (source));
+
+  /* calculate the new dimensions */
+  wratio = (gdouble) source_width  / (gdouble) dest_width;
+  hratio = (gdouble) source_height / (gdouble) dest_height;
+
+  if (hratio > wratio)
+    dest_width  = rint (source_width / hratio);
+  else
+    dest_height = rint (source_height / wratio);
+
+  return gdk_pixbuf_scale_simple (source, MAX (dest_width, 1), MAX (dest_height, 1), GDK_INTERP_BILINEAR);
+}
+
+
+
 static void
 xfce_scaled_image_update_cache (XfceScaledImage *image)
 {
-  gint       source_width, source_height;
-  gint       dest_width, dest_height;
-  gdouble    wratio, hratio;
   GdkPixbuf *pixbuf = NULL;
   GdkScreen *screen;
 
   panel_return_if_fail (image->cache == NULL);
   panel_return_if_fail (image->pixbuf != NULL || image->icon_name != NULL);
-
-  /* target size */
-  dest_width = image->width;
-  dest_height = image->height;
 
   if (image->pixbuf)
     {
@@ -236,33 +268,11 @@ xfce_scaled_image_update_cache (XfceScaledImage *image)
     
   if (G_LIKELY (pixbuf))
     {
-      /* get the pixbuf size */
-      source_width = gdk_pixbuf_get_width (pixbuf);
-      source_height = gdk_pixbuf_get_height (pixbuf);
-
-      if (dest_width >= source_width && dest_height >= source_height)
-        {
-          /* use the origional pixmap (we already increased the reference) */
-          image->cache = pixbuf;
-        }
-      else
-        {
-          /* calculate the new dimensions */
-          wratio = (gdouble) source_width  / (gdouble) dest_width;
-          hratio = (gdouble) source_height / (gdouble) dest_height;
-
-          if (hratio > wratio)
-            dest_width  = rint (source_width / hratio);
-          else
-            dest_height = rint (source_height / wratio);
-
-          /* scale the pixbuf */
-          if (dest_width > 1 && dest_height > 1)
-            image->cache = gdk_pixbuf_scale_simple (pixbuf, dest_width, dest_height, GDK_INTERP_BILINEAR);
-            
-          /* release the pixbuf */
-          g_object_unref (G_OBJECT (pixbuf));
-        }
+      /* create a cache icon that fits in the available size */
+      image->cache = xfce_scaled_image_scale_pixbuf (pixbuf, image->width, image->height);
+      
+      /* release the pixbuf */
+      g_object_unref (G_OBJECT (pixbuf));
     }
 }
 
@@ -354,14 +364,24 @@ PANEL_SYMBOL_EXPORT void
 xfce_scaled_image_set_from_pixbuf (XfceScaledImage *image,
                                    GdkPixbuf       *pixbuf)
 {
+  gint source_width;
+  gint source_height;
+  
   g_return_if_fail (XFCE_IS_SCALED_IMAGE (image));
   g_return_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf));
 
   /* cleanup */
   xfce_scaled_image_cleanup (image);
-
-  /* set the new pixbuf */
-  image->pixbuf = g_object_ref (G_OBJECT (pixbuf));
+  
+  /* get the new pixbuf sizes */
+  source_width = gdk_pixbuf_get_width (pixbuf);
+  source_height = gdk_pixbuf_get_height (pixbuf);
+  
+  /* set the new pixbuf, scale it to the maximum size if needed */
+  if (G_LIKELY (source_width <= MAX_PIXBUF_SIZE && source_height <= MAX_PIXBUF_SIZE))
+    image->pixbuf = g_object_ref (G_OBJECT (pixbuf));
+  else
+    image->pixbuf = xfce_scaled_image_scale_pixbuf (pixbuf, MAX_PIXBUF_SIZE, MAX_PIXBUF_SIZE);
 
   /* queue a resize */
   gtk_widget_queue_resize (GTK_WIDGET (image));
@@ -393,7 +413,8 @@ PANEL_SYMBOL_EXPORT void
 xfce_scaled_image_set_from_file (XfceScaledImage *image,
                                  const gchar     *filename)
 {
-  GError *error = NULL;
+  GError    *error = NULL;
+  GdkPixbuf *pixbuf;
 
   g_return_if_fail (XFCE_IS_SCALED_IMAGE (image));
   panel_return_if_fail (filename == NULL || g_path_is_absolute (filename));
@@ -404,9 +425,17 @@ xfce_scaled_image_set_from_file (XfceScaledImage *image,
   if (G_LIKELY (filename && *filename != '\0'))
     {
       /* try to load the image from the file */
-      image->pixbuf = gdk_pixbuf_new_from_file (filename, &error);
+      pixbuf = gdk_pixbuf_new_from_file (filename, &error);
 
-      if (G_LIKELY (error != NULL))
+      if (G_LIKELY (pixbuf))
+        {
+          /* set the new pixbuf */
+          xfce_scaled_image_set_from_pixbuf (image, pixbuf);
+          
+          /* release the pixbuf */
+          g_object_unref (G_OBJECT (pixbuf));
+        }
+      else
         {
           /* print a warning what went wrong */
           g_critical ("Failed to loading image from filename: %s", error->message);
@@ -415,7 +444,4 @@ xfce_scaled_image_set_from_file (XfceScaledImage *image,
           g_error_free (error);
         }
     }
-    
-  /* queue a resize */
-  gtk_widget_queue_resize (GTK_WIDGET (image));
 }
