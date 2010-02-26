@@ -1,7 +1,7 @@
 /* $Id$ */
 /*
  * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2 of the License, or (at your option)
@@ -32,8 +32,9 @@
 
 #include "tasklist-widget.h"
 
+
 #define MIN_BUTTON_SIZE                      (25)
-#define MAX_BUTTON_LENGTH                    (200)
+#define DEFAULT_BUTTON_LENGTH                (200)
 #define WIREFRAME_SIZE                       (5)
 #define xfce_taskbar_lock()                  G_BEGIN_DECLS { locked++; } G_END_DECLS;
 #define xfce_taskbar_unlock()                G_BEGIN_DECLS { if (locked > 0) locked--; else g_assert_not_reached (); } G_END_DECLS;
@@ -62,47 +63,51 @@ struct _XfceTasklist
   GtkContainer __parent__;
 
   /* the screen of this tasklist */
-  WnckScreen        *screen;
+  WnckScreen         *screen;
 
   /* all the applications in the tasklist */
-  GSList            *children;
+  GSList             *children;
 
   /* number of visible buttons, we cache this to avoid a loop */
-  guint              n_visible_children;
+  guint               n_visible_children;
 
   /* classgroups of all the windows in the taskbar */
-  GSList            *class_groups;
+  GSList             *class_groups;
 
   /* normal or iconbox style */
-  XfceTasklistStyle  style;
+  XfceTasklistStyle   style;
 
   /* size of the panel pluin */
-  gint               size;
+  gint                size;
 
   /* orientation of the tasklist */
-  GtkOrientation     orientation;
+  GtkOrientation      orientation;
 
   /* relief of the tasklist buttons */
-  GtkReliefStyle     button_relief;
+  GtkReliefStyle      button_relief;
 
   /* whether we show application from all workspaces or
    * only the active workspace */
-  guint              all_workspaces : 1;
+  guint               all_workspaces : 1;
 
   /* whether we switch to another workspace when we try to
    * unminimize an application on another workspace */
-  guint              switch_workspace : 1;
+  guint               switch_workspace : 1;
 
   /* whether we only show monimized applications in the
    * tasklist */
-  guint              only_minimized : 1;
+  guint               only_minimized : 1;
 
   /* whether we show wireframes when hovering a button in
    * the tasklist */
-  guint              show_wireframes : 1;
+  guint               show_wireframes : 1;
 
   /* wireframe window */
-  Window             wireframe_window;
+  Window              wireframe_window;
+
+  /* gtk style properties */
+  gint                max_button_length;
+  PangoEllipsizeMode  ellipsize_mode;
 };
 
 struct _XfceTasklistChild
@@ -128,7 +133,7 @@ struct _XfceTasklistChild
 
 static const GtkTargetEntry drop_targets[] =
 {
-  { (gchar *) "application/x-xfce-panel-plugin-task", GTK_TARGET_SAME_WIDGET, 0 }
+  { (gchar *) "xfce-panel/plugin-task", GTK_TARGET_SAME_WIDGET, 0 }
 };
 
 
@@ -141,6 +146,7 @@ static void xfce_tasklist_set_property (GObject *object, guint prop_id, const GV
 static void xfce_tasklist_finalize (GObject          *object);
 static void xfce_tasklist_size_request (GtkWidget *widget, GtkRequisition *requisition);
 static void xfce_tasklist_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
+static void xfce_tasklist_style_set (GtkWidget *widget, GtkStyle *previous_style);
 static void xfce_tasklist_realize (GtkWidget *widget);
 static void xfce_tasklist_unrealize (GtkWidget *widget);
 static gboolean xfce_tasklist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint drag_time);
@@ -185,6 +191,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request = xfce_tasklist_size_request;
   gtkwidget_class->size_allocate = xfce_tasklist_size_allocate;
+  gtkwidget_class->style_set = xfce_tasklist_style_set;
   gtkwidget_class->realize = xfce_tasklist_realize;
   gtkwidget_class->unrealize = xfce_tasklist_unrealize;
   gtkwidget_class->drag_motion = xfce_tasklist_drag_motion;
@@ -197,7 +204,8 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_STYLE,
-                                   g_param_spec_uint ("style", NULL, NULL,
+                                   g_param_spec_uint ("style",
+                                                      NULL, NULL,
                                                       XFCE_TASKLIST_STYLE_MIN,
                                                       XFCE_TASKLIST_STYLE_MAX,
                                                       XFCE_TASKLIST_STYLE_DEFAULT,
@@ -205,33 +213,52 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_INCLUDE_ALL_WORKSPACES,
-                                   g_param_spec_boolean ("include-all-workspaces", NULL, NULL,
+                                   g_param_spec_boolean ("include-all-workspaces",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_FLAT_BUTTONS,
-                                   g_param_spec_boolean ("flat-buttons", NULL, NULL,
+                                   g_param_spec_boolean ("flat-buttons",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
-                                   g_param_spec_boolean ("switch-workspace-on-unminimize", NULL, NULL,
+                                   g_param_spec_boolean ("switch-workspace-on-unminimize",
+                                                         NULL, NULL,
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_ONLY_MINIMIZED,
-                                   g_param_spec_boolean ("show-only-minimized", NULL, NULL,
+                                   g_param_spec_boolean ("show-only-minimized",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_WIREFRAMES,
-                                   g_param_spec_boolean ("show-wireframes", NULL, NULL,
+                                   g_param_spec_boolean ("show-wireframes",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
+
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("max-button-length",
+                                                             NULL, NULL,
+                                                             -1, G_MAXINT,
+                                                             DEFAULT_BUTTON_LENGTH,
+                                                             EXO_PARAM_READABLE));
+
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_enum ("ellipsize-mode",
+                                                              NULL, NULL,
+                                                              PANGO_TYPE_ELLIPSIZE_MODE,
+                                                              PANGO_ELLIPSIZE_END,
+                                                              EXO_PARAM_READABLE));
 }
 
 
@@ -255,6 +282,8 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->class_groups = NULL;
   tasklist->show_wireframes = FALSE;
   tasklist->wireframe_window = 0;
+  tasklist->max_button_length = DEFAULT_BUTTON_LENGTH;
+  tasklist->ellipsize_mode = PANGO_ELLIPSIZE_END;
 
   /* set the itembar drag destination targets */
   gtk_drag_dest_set (GTK_WIDGET (tasklist), 0, drop_targets,
@@ -398,14 +427,24 @@ xfce_tasklist_size_request (GtkWidget      *widget,
       if (tasklist->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
           if (tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
-            requisition->width += MAX_BUTTON_LENGTH;
+            {
+              if (tasklist->max_button_length != -1)
+                requisition->width += tasklist->max_button_length;
+              else
+                requisition->width += DEFAULT_BUTTON_LENGTH;
+            }
           else
             requisition->width += tasklist->size;
         }
       else
         {
           if (tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
-            requisition->height += MAX_BUTTON_LENGTH;
+            {
+              if (tasklist->max_button_length != -1)
+                requisition->height += tasklist->max_button_length;
+              else
+                requisition->height += DEFAULT_BUTTON_LENGTH;
+            }
           else
             requisition->height += tasklist->size;
         }
@@ -421,7 +460,7 @@ xfce_tasklist_size_request (GtkWidget      *widget,
 
 static void
 xfce_tasklist_size_allocate (GtkWidget     *widget,
-                            GtkAllocation *allocation)
+                             GtkAllocation *allocation)
 {
   XfceTasklist      *tasklist = XFCE_TASKLIST (widget);
   guint              rows, cols;
@@ -451,7 +490,9 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
         rows = tasklist->n_visible_children;
 
       /* calculate the size of the buttons */
-      width = MIN (allocation->width / cols, MAX_BUTTON_LENGTH);
+      width = allocation->width / cols;
+      if (tasklist->max_button_length != -1)
+        width = MIN (width, tasklist->max_button_length);
       height = allocation->height / rows;
 
       if (tasklist->style == XFCE_TASKLIST_STYLE_ICONBOX && height < width)
@@ -470,8 +511,10 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
         rows = tasklist->n_visible_children;
 
       /* calculate the size of the buttons */
+      height = allocation->height / cols;
+      if (tasklist->max_button_length != -1)
+        height = MIN (height, tasklist->max_button_length);
       width = allocation->width / rows;
-      height = MIN (allocation->height / cols, MAX_BUTTON_LENGTH);
 
       if (tasklist->style == XFCE_TASKLIST_STYLE_ICONBOX && width < height)
         height = width;
@@ -513,6 +556,30 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   g_assert (i == tasklist->n_visible_children);
 }
 
+
+static void
+xfce_tasklist_style_set (GtkWidget *widget,
+                         GtkStyle  *previous_style)
+{
+  XfceTasklist *tasklist = XFCE_TASKLIST (widget);
+  gint          max_button_length;
+
+  /* let gtk update the widget style */
+  (*GTK_WIDGET_CLASS (xfce_tasklist_parent_class)->style_set) (widget, previous_style);
+
+  /* read the style properties */
+  gtk_widget_style_get (GTK_WIDGET (tasklist),
+                        "max-button-length", &max_button_length,
+                        "ellipsize-mode", &tasklist->ellipsize_mode,
+                        NULL);
+
+  /* update the widget */
+  if (tasklist->max_button_length != max_button_length)
+    {
+      tasklist->max_button_length = max_button_length;
+      gtk_widget_queue_resize (widget);
+    }
+}
 
 
 static void
@@ -1342,7 +1409,7 @@ tasklist_button_new (XfceTasklistChild *child)
 
   child->icon = xfce_scaled_image_new ();
   if (child->tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
-    gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, TRUE, 0);
   else
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, TRUE, TRUE, 0);
   gtk_widget_show (child->icon);
@@ -1350,7 +1417,7 @@ tasklist_button_new (XfceTasklistChild *child)
   child->label = gtk_label_new (NULL);
   gtk_box_pack_start (GTK_BOX (child->box), child->label, TRUE, TRUE, 0);
   gtk_misc_set_alignment (GTK_MISC (child->label), 0.0, 0.5);
-  gtk_label_set_ellipsize (GTK_LABEL (child->label), PANGO_ELLIPSIZE_END);
+  gtk_label_set_ellipsize (GTK_LABEL (child->label), child->tasklist->ellipsize_mode);
 
   /* don't show the icon if we're in iconbox style */
   if (child->tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
