@@ -30,13 +30,13 @@
 
 
 
-static void            xfce_hvbox_class_init    (XfceHVBoxClass *klass);
-static void            xfce_hvbox_init          (XfceHVBox      *hvbox);
-static GtkWidgetClass *xfce_hvbox_get_class     (XfceHVBox      *hvbox);
-static void            xfce_hvbox_size_request  (GtkWidget      *widget,
-                                                 GtkRequisition *requisition);
-static void            xfce_hvbox_size_allocate (GtkWidget      *widget,
-                                                 GtkAllocation  *allocation);
+static void     xfce_hvbox_class_init    (XfceHVBoxClass *klass);
+static void     xfce_hvbox_init          (XfceHVBox      *hvbox);
+static gpointer xfce_hvbox_get_class     (XfceHVBox      *hvbox);
+static void     xfce_hvbox_size_request  (GtkWidget      *widget,
+                                          GtkRequisition *requisition);
+static void     xfce_hvbox_size_allocate (GtkWidget      *widget,
+                                          GtkAllocation  *allocation);
 
 
 
@@ -65,18 +65,22 @@ xfce_hvbox_init (XfceHVBox *hvbox)
 
 
 
-static GtkWidgetClass *
+static gpointer
 xfce_hvbox_get_class (XfceHVBox *hvbox)
 {
-  GType type;
+  GType    type;
+  gpointer klass;
 
   if (hvbox->orientation == GTK_ORIENTATION_HORIZONTAL)
     type = GTK_TYPE_HBOX;
   else
     type = GTK_TYPE_VBOX;
 
-  /* return the widget class of the type */
-  return GTK_WIDGET_CLASS (gtk_type_class (type));
+  /* peek the class, this only works if the class already exists */
+  klass = g_type_class_peek (type);
+  
+  /* return the type or create the class */
+  return klass ? klass : g_type_class_ref (type);
 }
 
 
@@ -85,12 +89,13 @@ static void
 xfce_hvbox_size_request (GtkWidget      *widget,
                          GtkRequisition *requisition)
 {
-  GtkWidgetClass *klass;
+  gpointer klass;
 
   /* get the widget class */
   klass = xfce_hvbox_get_class (XFCE_HVBOX (widget));
-
-  (*klass->size_request) (widget, requisition);
+  
+  /* request the size */
+  (*GTK_WIDGET_CLASS (klass)->size_request) (widget, requisition);
 }
 
 
@@ -99,12 +104,13 @@ static void
 xfce_hvbox_size_allocate (GtkWidget     *widget,
                           GtkAllocation *allocation)
 {
-  GtkWidgetClass *klass;
+  gpointer klass;
 
   /* get the widget class */
   klass = xfce_hvbox_get_class (XFCE_HVBOX (widget));
 
-  (*klass->size_allocate) (widget, allocation);
+  /* allocate the size */
+  (*GTK_WIDGET_CLASS (klass)->size_allocate) (widget, allocation);
 }
 
 

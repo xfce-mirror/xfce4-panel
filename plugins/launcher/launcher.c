@@ -109,10 +109,6 @@ launcher_utility_icon_theme_changed (GSignalInvocationHint *ihint,
                                      const GValue          *param_values,
                                      LauncherPlugin        *launcher)
 {
-    /* only update if we already have an image, this fails when the signal is connected */
-    if (G_LIKELY (gtk_image_get_storage_type (GTK_IMAGE (launcher->image)) == GTK_IMAGE_EMPTY))
-        return TRUE;
-
     /* update the button icon */
     launcher_icon_button_set_icon (launcher);
 
