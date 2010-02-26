@@ -441,7 +441,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   y = allocation->y + border_width;
 
   /* check if the expandable childs fit in the available expandable size */
-  expandable_children_fit = (req_expandable_size == alloc_expandable_size || req_expandable_size <= 0);
+  expandable_children_fit = !!(req_expandable_size == alloc_expandable_size);
 
   /* make sure the allocated expandable size is not below zero */
   alloc_expandable_size = MAX (0, alloc_expandable_size);
@@ -463,13 +463,19 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       child_allocation.y = y;
 
       /* set the width or height of the child */
-      if (G_UNLIKELY (child->expand && expandable_children_fit == FALSE))
+      if (G_UNLIKELY (child->expand && !expandable_children_fit))
         {
           /* get requested size */
           req_size = itembar->horizontal ? child_requisition.width : child_requisition.height;
 
           /* calculate allocated size */
-          alloc_size = alloc_expandable_size * req_size / req_expandable_size;
+          if (G_LIKELY (req_expandable_size > 0 || req_size > 0))
+            alloc_size = alloc_expandable_size * req_size / req_expandable_size;
+          else
+            alloc_size = alloc_expandable_size / n_expand_children;
+
+          /* decrease counter */
+          n_expand_children--;
 
           /* set the calculated expanding size */
           if (itembar->horizontal)
