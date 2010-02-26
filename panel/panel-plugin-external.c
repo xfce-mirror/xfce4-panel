@@ -34,6 +34,7 @@
 
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
+#include <common/panel-debug.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -296,6 +297,7 @@ panel_plugin_external_constructor (GType                  type,
       panel_return_val_if_fail (PANEL_PLUGIN_EXTERNAL (object)->unique_id != -1, NULL);
       path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, PANEL_PLUGIN_EXTERNAL (object)->unique_id);
       dbus_g_connection_register_g_object (connection, path, object);
+      panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL, "register dbus path %s", path);
       g_free (path);
 
       dbus_g_connection_unref (connection);
@@ -439,8 +441,8 @@ panel_plugin_external_realize (GtkWidget *widget)
   argv = g_new0 (gchar *, argc + 1);
   argv[PLUGIN_ARGV_0] = (gchar *) WRAPPER_BIN;
   argv[PLUGIN_ARGV_FILENAME] = (gchar *) panel_module_get_filename (external->module);
-  argv[PLUGIN_ARGV_UNIQUE_ID] = (gchar *) unique_id;
-  argv[PLUGIN_ARGV_SOCKET_ID] = (gchar *) socket_id;
+  argv[PLUGIN_ARGV_UNIQUE_ID] = unique_id;
+  argv[PLUGIN_ARGV_SOCKET_ID] = socket_id;
   argv[PLUGIN_ARGV_NAME] = (gchar *) panel_module_get_name (external->module);
   argv[PLUGIN_ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
   argv[PLUGIN_ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
@@ -455,6 +457,11 @@ panel_plugin_external_realize (GtkWidget *widget)
                                  NULL, argv, NULL,
                                  G_SPAWN_DO_NOT_REAP_CHILD, NULL,
                                  NULL, &pid, &error);
+
+  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+               "library=%s, unique-id=%s. socked-id=%s, argc=%d, pid=%d",
+               argv[PLUGIN_ARGV_FILENAME], unique_id,
+               socket_id, argc, pid);
 
   if (G_LIKELY (succeed))
     {

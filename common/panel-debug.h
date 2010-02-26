@@ -22,6 +22,7 @@
 #define PANEL_DEBUG_DOMAIN_POSITIONING "positioning"
 #define PANEL_DEBUG_DOMAIN_STRUTS      "struts"
 #define PANEL_DEBUG_DOMAIN_APPLICATION "application"
+#define PANEL_DEBUG_DOMAIN_EXTERNAL    "external"
 
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 
@@ -29,6 +30,6 @@ extern gboolean panel_debug_enabled;
 
 void panel_debug (const gchar *domain,
                   const gchar *message,
-                  ...);
+                  ...) G_GNUC_PRINTF (2, 3);
 
 #endif /* !__PANEL_DEBUG_H__ */
