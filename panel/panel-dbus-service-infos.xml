@@ -85,26 +85,17 @@
 
     -->
     <signal name="PropertyChanged">
-			<arg name="plugin_id" type="i" />
-			<arg name="property" type="i" />
-			<arg name="value" type="v" />
-		</signal>
+      <arg name="plugin_id" type="i" />
+      <arg name="property" type="i" />
+      <arg name="value" type="v" />
+    </signal>
 
-		<!--
+    <!--
 
     -->
     <method name="ProviderSignal">
       <arg name="plugin_id" direction="in" type="i" />
       <arg name="signal" direction="in" type="i" />
-    </method>
-
-    <!--
-
-    -->
-    <method name="PanelProperty">
-      <arg name="plugin_id" direction="in" type="i" />
-      <arg name="property" direction="in" type="i" />
-      <arg name="value" direction="out" type="v" />
     </method>
   </interface>
 </node>

@@ -62,11 +62,6 @@ static gboolean  panel_dbus_service_plugin_provider_signal     (PanelDBusService
                                                                 gint               plugin_id,
                                                                 gint               provider_signal,
                                                                 GError            *error);
-static gboolean  panel_dbus_service_plugin_panel_property      (PanelDBusService  *service,
-                                                                gint               plugin_id,
-                                                                gint               property,
-                                                                GValue            *value,
-                                                                GError            *error);
 
 
 
@@ -328,18 +323,6 @@ panel_dbus_service_plugin_provider_signal (PanelDBusService *service,
   /* release the factory */
   g_object_unref (G_OBJECT (factory));
 
-  return TRUE;
-}
-
-
-
-static gboolean
-panel_dbus_service_plugin_panel_property (PanelDBusService *service,
-                                          gint              plugin_id,
-                                          gint              property,
-                                          GValue           *value,
-                                          GError           *error)
-{
   return TRUE;
 }
 
