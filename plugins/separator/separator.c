@@ -170,18 +170,18 @@ separator_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_STYLE:
-        g_value_set_uint (value, plugin->style);
-        break;
+    case PROP_STYLE:
+      g_value_set_uint (value, plugin->style);
+      break;
 
-      case PROP_EXPAND:
-        expand = xfce_panel_plugin_get_expand (XFCE_PANEL_PLUGIN (plugin));
-        g_value_set_boolean (value, expand);
-        break;
+    case PROP_EXPAND:
+      expand = xfce_panel_plugin_get_expand (XFCE_PANEL_PLUGIN (plugin));
+      g_value_set_boolean (value, expand);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -198,23 +198,23 @@ separator_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_STYLE:
-        plugin->style = g_value_get_uint (value);
-        gtk_widget_queue_draw (GTK_WIDGET (object));
+    case PROP_STYLE:
+      plugin->style = g_value_get_uint (value);
+      gtk_widget_queue_draw (GTK_WIDGET (object));
 
-        wrap = plugin->style == SEPARATOR_PLUGIN_STYLE_WRAP;
-        xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (object),
-             wrap ? PROVIDER_SIGNAL_WRAP_PLUGIN : PROVIDER_SIGNAL_UNWRAP_PLUGIN);
-        break;
+      wrap = plugin->style == SEPARATOR_PLUGIN_STYLE_WRAP;
+      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (object),
+           wrap ? PROVIDER_SIGNAL_WRAP_PLUGIN : PROVIDER_SIGNAL_UNWRAP_PLUGIN);
+      break;
 
-      case PROP_EXPAND:
-        xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin),
-                                      g_value_get_boolean (value));
-        break;
+    case PROP_EXPAND:
+      xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin),
+                                    g_value_get_boolean (value));
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -235,99 +235,99 @@ separator_plugin_expose_event (GtkWidget      *widget,
 
   switch (plugin->style)
     {
-      case SEPARATOR_PLUGIN_STYLE_TRANSPARENT:
-      case SEPARATOR_PLUGIN_STYLE_WRAP:
-        /* do nothing */
-        break;
+    case SEPARATOR_PLUGIN_STYLE_TRANSPARENT:
+    case SEPARATOR_PLUGIN_STYLE_WRAP:
+      /* do nothing */
+      break;
 
-      case SEPARATOR_PLUGIN_STYLE_SEPARATOR:
-        if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-            GTK_ORIENTATION_HORIZONTAL)
-          {
-            gtk_paint_vline (widget->style,
-                             widget->window,
-                             state,
-                             &(event->area),
-                             widget, "separator",
-                             alloc->y + alloc->height * SEPARATOR_OFFSET,
-                             alloc->y + alloc->height * (1.00 - SEPARATOR_OFFSET),
-                             alloc->x + alloc->width / 2 - 1);
-          }
-        else
-          {
-            gtk_paint_hline (widget->style,
-                             widget->window,
-                             state,
-                             &(event->area),
-                             widget, "separator",
-                             alloc->x + alloc->width * SEPARATOR_OFFSET,
-                             alloc->x + alloc->width * (1.00 - SEPARATOR_OFFSET),
-                             alloc->y + alloc->height / 2 - 1);
-          }
-        break;
+    case SEPARATOR_PLUGIN_STYLE_SEPARATOR:
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+          GTK_ORIENTATION_HORIZONTAL)
+        {
+          gtk_paint_vline (widget->style,
+                           widget->window,
+                           state,
+                           &(event->area),
+                           widget, "separator",
+                           alloc->y + alloc->height * SEPARATOR_OFFSET,
+                           alloc->y + alloc->height * (1.00 - SEPARATOR_OFFSET),
+                           alloc->x + alloc->width / 2 - 1);
+        }
+      else
+        {
+          gtk_paint_hline (widget->style,
+                           widget->window,
+                           state,
+                           &(event->area),
+                           widget, "separator",
+                           alloc->x + alloc->width * SEPARATOR_OFFSET,
+                           alloc->x + alloc->width * (1.00 - SEPARATOR_OFFSET),
+                           alloc->y + alloc->height / 2 - 1);
+        }
+      break;
 
-      case SEPARATOR_PLUGIN_STYLE_HANDLE:
-        gtk_paint_handle (widget->style,
-                          widget->window,
-                          state,
-                          GTK_SHADOW_NONE,
-                          &(event->area),
-                          widget, "handlebox",
-                          alloc->x, alloc->y,
-                          alloc->width,
-                          alloc->height,
-                          xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-                              GTK_ORIENTATION_HORIZONTAL ? GTK_ORIENTATION_VERTICAL
-                              : GTK_ORIENTATION_HORIZONTAL);
-        break;
+    case SEPARATOR_PLUGIN_STYLE_HANDLE:
+      gtk_paint_handle (widget->style,
+                        widget->window,
+                        state,
+                        GTK_SHADOW_NONE,
+                        &(event->area),
+                        widget, "handlebox",
+                        alloc->x, alloc->y,
+                        alloc->width,
+                        alloc->height,
+                        xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+                            GTK_ORIENTATION_HORIZONTAL ? GTK_ORIENTATION_VERTICAL
+                            : GTK_ORIENTATION_HORIZONTAL);
+      break;
 
-      case SEPARATOR_PLUGIN_STYLE_DOTS:
-        if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-            GTK_ORIENTATION_HORIZONTAL)
-          {
-            rows = MAX (alloc->height / DOTS_SIZE, 1);
-            w = DOTS_SIZE;
-            h = rows * DOTS_SIZE;
-          }
-        else
-          {
-            cols = MAX (alloc->width / DOTS_SIZE, 1);
-            h = DOTS_SIZE;
-            w = cols * DOTS_SIZE;
-          }
+    case SEPARATOR_PLUGIN_STYLE_DOTS:
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+          GTK_ORIENTATION_HORIZONTAL)
+        {
+          rows = MAX (alloc->height / DOTS_SIZE, 1);
+          w = DOTS_SIZE;
+          h = rows * DOTS_SIZE;
+        }
+      else
+        {
+          cols = MAX (alloc->width / DOTS_SIZE, 1);
+          h = DOTS_SIZE;
+          w = cols * DOTS_SIZE;
+        }
 
-        x = alloc->x + (alloc->width - w) / 2;
-        y = alloc->y + (alloc->height - h) / 2;
+      x = alloc->x + (alloc->width - w) / 2;
+      y = alloc->y + (alloc->height - h) / 2;
 
-        for (i = 0; i < G_N_ELEMENTS (bits); i++)
-          {
-            /* pick color, but be same order as bits array */
-            if (i == 0)
-              gc = widget->style->dark_gc[state];
-            else if (i == 1)
-              gc = widget->style->light_gc[state];
-            else
-              gc = widget->style->mid_gc[state];
+      for (i = 0; i < G_N_ELEMENTS (bits); i++)
+        {
+          /* pick color, but be same order as bits array */
+          if (i == 0)
+            gc = widget->style->dark_gc[state];
+          else if (i == 1)
+            gc = widget->style->light_gc[state];
+          else
+            gc = widget->style->mid_gc[state];
 
-            /* clip to drawing area */
-            gdk_gc_set_clip_rectangle (gc, &(event->area));
+          /* clip to drawing area */
+          gdk_gc_set_clip_rectangle (gc, &(event->area));
 
-            /* set the stipple for the gc */
-            bmap = gdk_bitmap_create_from_data (widget->window, bits[i],
-                                                DOTS_SIZE, DOTS_SIZE);
-            gdk_gc_set_stipple (gc, bmap);
-            gdk_gc_set_fill (gc, GDK_STIPPLED);
-            g_object_unref (G_OBJECT (bmap));
+          /* set the stipple for the gc */
+          bmap = gdk_bitmap_create_from_data (widget->window, bits[i],
+                                              DOTS_SIZE, DOTS_SIZE);
+          gdk_gc_set_stipple (gc, bmap);
+          gdk_gc_set_fill (gc, GDK_STIPPLED);
+          g_object_unref (G_OBJECT (bmap));
 
-            /* draw the dots */
-            gdk_gc_set_ts_origin (gc, x, y);
-            gdk_draw_rectangle (widget->window, gc, TRUE, x, y, w, h);
-            gdk_gc_set_fill (gc, GDK_SOLID);
+          /* draw the dots */
+          gdk_gc_set_ts_origin (gc, x, y);
+          gdk_draw_rectangle (widget->window, gc, TRUE, x, y, w, h);
+          gdk_gc_set_fill (gc, GDK_SOLID);
 
-            /* unset the clip */
-            gdk_gc_set_clip_rectangle (gc, NULL);
-          }
-        break;
+          /* unset the clip */
+          gdk_gc_set_clip_rectangle (gc, NULL);
+        }
+      break;
     }
 
   return FALSE;

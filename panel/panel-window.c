@@ -441,49 +441,49 @@ panel_window_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_HORIZONTAL:
-        g_value_set_boolean (value, window->horizontal);
-        break;
+    case PROP_HORIZONTAL:
+      g_value_set_boolean (value, window->horizontal);
+      break;
 
-      case PROP_SIZE:
-        g_value_set_uint (value, window->size);
-        break;
+    case PROP_SIZE:
+      g_value_set_uint (value, window->size);
+      break;
 
-      case PROP_LENGTH:
-        g_value_set_uint (value,  rint (window->length * 100.00));
-        break;
+    case PROP_LENGTH:
+      g_value_set_uint (value,  rint (window->length * 100.00));
+      break;
 
-      case PROP_LOCKED:
-        g_value_set_boolean (value, window->locked);
-        break;
+    case PROP_LOCKED:
+      g_value_set_boolean (value, window->locked);
+      break;
 
-      case PROP_AUTOHIDE:
-        g_value_set_boolean (value, !!(window->autohide_state != AUTOHIDE_DISABLED));
-        break;
+    case PROP_AUTOHIDE:
+      g_value_set_boolean (value, !!(window->autohide_state != AUTOHIDE_DISABLED));
+      break;
 
-      case PROP_SPAN_MONITORS:
-        g_value_set_boolean (value, window->span_monitors);
-        break;
+    case PROP_SPAN_MONITORS:
+      g_value_set_boolean (value, window->span_monitors);
+      break;
 
-      case PROP_OUTPUT_NAME:
-        g_value_set_static_string (value, window->output_name);
-        break;
+    case PROP_OUTPUT_NAME:
+      g_value_set_static_string (value, window->output_name);
+      break;
 
-      case PROP_POSITION:
-        position = g_strdup_printf ("p=%d;x=%d;y=%d",
-                                    window->snap_position,
-                                    window->base_x,
-                                    window->base_y);
-        g_value_take_string (value, position);
-        break;
+    case PROP_POSITION:
+      position = g_strdup_printf ("p=%d;x=%d;y=%d",
+                                  window->snap_position,
+                                  window->base_x,
+                                  window->base_y);
+      g_value_take_string (value, position);
+      break;
 
-      case PROP_DISABLE_STRUTS:
-        g_value_set_boolean (value, window->struts_disabled);
-        break;
+    case PROP_DISABLE_STRUTS:
+      g_value_set_boolean (value, window->struts_disabled);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -506,120 +506,120 @@ panel_window_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_HORIZONTAL:
-        val_bool = g_value_get_boolean (value);
-        if (window->horizontal != val_bool)
-          {
-            window->horizontal = !!val_bool;
-            panel_window_screen_layout_changed (window->screen, window);
-          }
+    case PROP_HORIZONTAL:
+      val_bool = g_value_get_boolean (value);
+      if (window->horizontal != val_bool)
+        {
+          window->horizontal = !!val_bool;
+          panel_window_screen_layout_changed (window->screen, window);
+        }
 
-        /* send the new orientation to the panel plugins */
-        itembar = gtk_bin_get_child (GTK_BIN (window));
-        if (G_LIKELY (itembar != NULL))
-          gtk_container_foreach (GTK_CONTAINER (itembar),
-              panel_window_set_plugin_orientation, window);
+      /* send the new orientation to the panel plugins */
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+      if (G_LIKELY (itembar != NULL))
+        gtk_container_foreach (GTK_CONTAINER (itembar),
+            panel_window_set_plugin_orientation, window);
 
-        /* send the new screen position */
-        if (G_LIKELY (itembar != NULL))
-          gtk_container_foreach (GTK_CONTAINER (itembar),
-              panel_window_set_plugin_screen_position, window);
-        break;
+      /* send the new screen position */
+      if (G_LIKELY (itembar != NULL))
+        gtk_container_foreach (GTK_CONTAINER (itembar),
+            panel_window_set_plugin_screen_position, window);
+      break;
 
-      case PROP_SIZE:
-        val_uint = g_value_get_uint (value);
-        if (window->size != val_uint)
-          {
-            window->size = val_uint;
-            gtk_widget_queue_resize (GTK_WIDGET (window));
-          }
+    case PROP_SIZE:
+      val_uint = g_value_get_uint (value);
+      if (window->size != val_uint)
+        {
+          window->size = val_uint;
+          gtk_widget_queue_resize (GTK_WIDGET (window));
+        }
 
-        /* send the new size to the panel plugins */
-        itembar = gtk_bin_get_child (GTK_BIN (window));
-        if (G_LIKELY (itembar != NULL))
-          gtk_container_foreach (GTK_CONTAINER (itembar),
-              panel_window_set_plugin_size, window);
-        break;
+      /* send the new size to the panel plugins */
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+      if (G_LIKELY (itembar != NULL))
+        gtk_container_foreach (GTK_CONTAINER (itembar),
+            panel_window_set_plugin_size, window);
+      break;
 
-      case PROP_LENGTH:
-        val_double = g_value_get_uint (value) / 100.00;
-        if (window->length != val_double)
-          {
-            if (window->length == 1.00 || val_double == 1.00)
-              update = TRUE;
+    case PROP_LENGTH:
+      val_double = g_value_get_uint (value) / 100.00;
+      if (window->length != val_double)
+        {
+          if (window->length == 1.00 || val_double == 1.00)
+            update = TRUE;
 
-            window->length = val_double;
+          window->length = val_double;
 
-            if (update)
-              panel_window_screen_update_borders (window);
+          if (update)
+            panel_window_screen_update_borders (window);
 
-            gtk_widget_queue_resize (GTK_WIDGET (window));
-          }
-        break;
+          gtk_widget_queue_resize (GTK_WIDGET (window));
+        }
+      break;
 
-      case PROP_LOCKED:
-        val_bool = g_value_get_boolean (value);
-        if (window->locked != val_bool)
-          {
-            window->locked = !!val_bool;
-            gtk_widget_queue_resize (GTK_WIDGET (window));
-          }
-        break;
+    case PROP_LOCKED:
+      val_bool = g_value_get_boolean (value);
+      if (window->locked != val_bool)
+        {
+          window->locked = !!val_bool;
+          gtk_widget_queue_resize (GTK_WIDGET (window));
+        }
+      break;
 
-      case PROP_AUTOHIDE:
-        panel_window_set_autohide (window, g_value_get_boolean (value));
-        break;
+    case PROP_AUTOHIDE:
+      panel_window_set_autohide (window, g_value_get_boolean (value));
+      break;
 
-      case PROP_SPAN_MONITORS:
-        val_bool = g_value_get_boolean (value);
-        if (window->span_monitors == val_bool)
-          {
-            window->span_monitors = !!val_bool;
-            panel_window_screen_layout_changed (window->screen, window);
-          }
-        break;
+    case PROP_SPAN_MONITORS:
+      val_bool = g_value_get_boolean (value);
+      if (window->span_monitors == val_bool)
+        {
+          window->span_monitors = !!val_bool;
+          panel_window_screen_layout_changed (window->screen, window);
+        }
+      break;
 
-      case PROP_OUTPUT_NAME:
-        g_free (window->output_name);
-        window->output_name = g_value_dup_string (value);
-        panel_window_screen_layout_changed (window->screen, window);
-        break;
+    case PROP_OUTPUT_NAME:
+      g_free (window->output_name);
+      window->output_name = g_value_dup_string (value);
+      panel_window_screen_layout_changed (window->screen, window);
+      break;
 
-      case PROP_POSITION:
-        val_string = g_value_get_string (value);
-        if (!exo_str_is_empty (val_string)
-            && sscanf (val_string, "p=%d;x=%d;y=%d", &snap_position, &x, &y) == 3)
-          {
-            window->snap_position = CLAMP (snap_position, SNAP_POSITION_NONE, SNAP_POSITION_S);
-            window->base_x = x;
-            window->base_y = y;
+    case PROP_POSITION:
+      val_string = g_value_get_string (value);
+      if (!exo_str_is_empty (val_string)
+          && sscanf (val_string, "p=%d;x=%d;y=%d", &snap_position, &x, &y) == 3)
+        {
+          window->snap_position = CLAMP (snap_position, SNAP_POSITION_NONE, SNAP_POSITION_S);
+          window->base_x = x;
+          window->base_y = y;
 
-            panel_window_screen_layout_changed (window->screen, window);
+          panel_window_screen_layout_changed (window->screen, window);
 
-            /* send the new screen position to the panel plugins */
-            itembar = gtk_bin_get_child (GTK_BIN (window));
-            if (G_LIKELY (itembar != NULL))
-              gtk_container_foreach (GTK_CONTAINER (itembar),
-                  panel_window_set_plugin_screen_position, window);
-          }
-        else
-          {
-            g_message ("no valid position defined");
-          }
-        break;
+          /* send the new screen position to the panel plugins */
+          itembar = gtk_bin_get_child (GTK_BIN (window));
+          if (G_LIKELY (itembar != NULL))
+            gtk_container_foreach (GTK_CONTAINER (itembar),
+                panel_window_set_plugin_screen_position, window);
+        }
+      else
+        {
+          g_message ("no valid position defined");
+        }
+      break;
 
-      case PROP_DISABLE_STRUTS:
-        val_bool = g_value_get_boolean (value);
-        if (val_bool != window->struts_disabled)
-          {
-            window->struts_disabled = val_bool;
-            panel_window_screen_layout_changed (window->screen, window);
-          }
-        break;
+    case PROP_DISABLE_STRUTS:
+      val_bool = g_value_get_boolean (value);
+      if (val_bool != window->struts_disabled)
+        {
+          window->struts_disabled = val_bool;
+          panel_window_screen_layout_changed (window->screen, window);
+        }
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -1141,71 +1141,71 @@ panel_window_size_allocate_set_xy (PanelWindow *window,
   /* x-position */
   switch (window->snap_position)
     {
-      case SNAP_POSITION_NONE:
-      case SNAP_POSITION_N:
-      case SNAP_POSITION_S:
-        /* clamp base point on screen */
-        value = window->base_x - (window_width / 2);
-        hight = window->area.x + window->area.width - window_width;
-        *return_x = CLAMP (value, window->area.x, hight);
-        break;
+    case SNAP_POSITION_NONE:
+    case SNAP_POSITION_N:
+    case SNAP_POSITION_S:
+      /* clamp base point on screen */
+      value = window->base_x - (window_width / 2);
+      hight = window->area.x + window->area.width - window_width;
+      *return_x = CLAMP (value, window->area.x, hight);
+      break;
 
-      case SNAP_POSITION_W:
-      case SNAP_POSITION_NW:
-      case SNAP_POSITION_WC:
-      case SNAP_POSITION_SW:
-        /* left */
-        *return_x = window->area.x;
-        break;
+    case SNAP_POSITION_W:
+    case SNAP_POSITION_NW:
+    case SNAP_POSITION_WC:
+    case SNAP_POSITION_SW:
+      /* left */
+      *return_x = window->area.x;
+      break;
 
-      case SNAP_POSITION_E:
-      case SNAP_POSITION_NE:
-      case SNAP_POSITION_EC:
-      case SNAP_POSITION_SE:
-        /* right */
-        *return_x = window->area.x + window->area.width - window_width;
-        break;
+    case SNAP_POSITION_E:
+    case SNAP_POSITION_NE:
+    case SNAP_POSITION_EC:
+    case SNAP_POSITION_SE:
+      /* right */
+      *return_x = window->area.x + window->area.width - window_width;
+      break;
 
-      case SNAP_POSITION_NC:
-      case SNAP_POSITION_SC:
-        /* center */
-        *return_x = window->area.x + (window->area.width - window_width) / 2;
-        break;
+    case SNAP_POSITION_NC:
+    case SNAP_POSITION_SC:
+      /* center */
+      *return_x = window->area.x + (window->area.width - window_width) / 2;
+      break;
     }
 
   /* y-position */
   switch (window->snap_position)
     {
-      case SNAP_POSITION_NONE:
-      case SNAP_POSITION_E:
-      case SNAP_POSITION_W:
-        /* clamp base point on screen */
-        value = window->base_y - (window_height / 2);
-        hight = window->area.y + window->area.height - window_height;
-        *return_y = CLAMP (value, window->area.y, hight);
-        break;
+    case SNAP_POSITION_NONE:
+    case SNAP_POSITION_E:
+    case SNAP_POSITION_W:
+      /* clamp base point on screen */
+      value = window->base_y - (window_height / 2);
+      hight = window->area.y + window->area.height - window_height;
+      *return_y = CLAMP (value, window->area.y, hight);
+      break;
 
-      case SNAP_POSITION_NE:
-      case SNAP_POSITION_NW:
-      case SNAP_POSITION_NC:
-      case SNAP_POSITION_N:
-        /* top */
-        *return_y = window->area.y;
-        break;
+    case SNAP_POSITION_NE:
+    case SNAP_POSITION_NW:
+    case SNAP_POSITION_NC:
+    case SNAP_POSITION_N:
+      /* top */
+      *return_y = window->area.y;
+      break;
 
-      case SNAP_POSITION_SE:
-      case SNAP_POSITION_SW:
-      case SNAP_POSITION_SC:
-      case SNAP_POSITION_S:
-        /* bottom */
-        *return_y = window->area.y + window->area.height - window_height;
-        break;
+    case SNAP_POSITION_SE:
+    case SNAP_POSITION_SW:
+    case SNAP_POSITION_SC:
+    case SNAP_POSITION_S:
+      /* bottom */
+      *return_y = window->area.y + window->area.height - window_height;
+      break;
 
-      case SNAP_POSITION_EC:
-      case SNAP_POSITION_WC:
-        /* center */
-        *return_y = window->area.y + (window->area.height - window_height) / 2;
-        break;
+    case SNAP_POSITION_EC:
+    case SNAP_POSITION_WC:
+      /* center */
+      *return_y = window->area.y + (window->area.height - window_height) / 2;
+      break;
     }
 }
 
@@ -1280,36 +1280,36 @@ panel_window_screen_struts_edge (PanelWindow *window)
    * visually snapped and where the struts are set */
   switch (window->snap_position)
     {
-      case SNAP_POSITION_NONE:
-        return STRUTS_EDGE_NONE;
+    case SNAP_POSITION_NONE:
+      return STRUTS_EDGE_NONE;
 
-      case SNAP_POSITION_E:
-      case SNAP_POSITION_EC:
-        return window->horizontal ? STRUTS_EDGE_NONE : STRUTS_EDGE_RIGHT;
+    case SNAP_POSITION_E:
+    case SNAP_POSITION_EC:
+      return window->horizontal ? STRUTS_EDGE_NONE : STRUTS_EDGE_RIGHT;
 
-      case SNAP_POSITION_NE:
-        return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_RIGHT;
+    case SNAP_POSITION_NE:
+      return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_RIGHT;
 
-      case SNAP_POSITION_SE:
-        return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_RIGHT;
+    case SNAP_POSITION_SE:
+      return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_RIGHT;
 
-      case SNAP_POSITION_W:
-      case SNAP_POSITION_WC:
-        return window->horizontal ? STRUTS_EDGE_NONE : STRUTS_EDGE_LEFT;
+    case SNAP_POSITION_W:
+    case SNAP_POSITION_WC:
+      return window->horizontal ? STRUTS_EDGE_NONE : STRUTS_EDGE_LEFT;
 
-      case SNAP_POSITION_NW:
-        return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_LEFT;
+    case SNAP_POSITION_NW:
+      return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_LEFT;
 
-      case SNAP_POSITION_SW:
-        return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_LEFT;
+    case SNAP_POSITION_SW:
+      return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_LEFT;
 
-      case SNAP_POSITION_NC:
-      case SNAP_POSITION_N:
-        return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_NONE;
+    case SNAP_POSITION_NC:
+    case SNAP_POSITION_N:
+      return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_NONE;
 
-      case SNAP_POSITION_SC:
-      case SNAP_POSITION_S:
-        return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_NONE;
+    case SNAP_POSITION_SC:
+    case SNAP_POSITION_S:
+      return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_NONE;
     }
 
   return STRUTS_EDGE_NONE;
@@ -1457,44 +1457,44 @@ panel_window_screen_update_borders (PanelWindow *window)
   /* the border we want to hide */
   switch (window->snap_position)
     {
-      case SNAP_POSITION_NONE:
-        break;
+    case SNAP_POSITION_NONE:
+      break;
 
-      case SNAP_POSITION_E:
-      case SNAP_POSITION_EC:
-        unset_borders = PANEL_BORDER_RIGHT;
-        break;
+    case SNAP_POSITION_E:
+    case SNAP_POSITION_EC:
+      unset_borders = PANEL_BORDER_RIGHT;
+      break;
 
-      case SNAP_POSITION_W:
-      case SNAP_POSITION_WC:
-        unset_borders = PANEL_BORDER_LEFT;
-        break;
+    case SNAP_POSITION_W:
+    case SNAP_POSITION_WC:
+      unset_borders = PANEL_BORDER_LEFT;
+      break;
 
-      case SNAP_POSITION_N:
-      case SNAP_POSITION_NC:
-        unset_borders = PANEL_BORDER_TOP;
-        break;
+    case SNAP_POSITION_N:
+    case SNAP_POSITION_NC:
+      unset_borders = PANEL_BORDER_TOP;
+      break;
 
-      case SNAP_POSITION_S:
-      case SNAP_POSITION_SC:
-        unset_borders = PANEL_BORDER_BOTTOM;
-        break;
+    case SNAP_POSITION_S:
+    case SNAP_POSITION_SC:
+      unset_borders = PANEL_BORDER_BOTTOM;
+      break;
 
-      case SNAP_POSITION_NE:
-        unset_borders = PANEL_BORDER_RIGHT | PANEL_BORDER_TOP;
-        break;
+    case SNAP_POSITION_NE:
+      unset_borders = PANEL_BORDER_RIGHT | PANEL_BORDER_TOP;
+      break;
 
-      case SNAP_POSITION_SE:
-        unset_borders = PANEL_BORDER_RIGHT | PANEL_BORDER_BOTTOM;
-        break;
+    case SNAP_POSITION_SE:
+      unset_borders = PANEL_BORDER_RIGHT | PANEL_BORDER_BOTTOM;
+      break;
 
-      case SNAP_POSITION_NW:
-        unset_borders = PANEL_BORDER_LEFT | PANEL_BORDER_TOP;
-        break;
+    case SNAP_POSITION_NW:
+      unset_borders = PANEL_BORDER_LEFT | PANEL_BORDER_TOP;
+      break;
 
-      case SNAP_POSITION_SW:
-        unset_borders = PANEL_BORDER_LEFT | PANEL_BORDER_BOTTOM;
-        break;
+    case SNAP_POSITION_SW:
+      unset_borders = PANEL_BORDER_LEFT | PANEL_BORDER_BOTTOM;
+      break;
     }
 
   /* the visible borders */
@@ -2142,58 +2142,58 @@ panel_window_set_plugin_screen_position (GtkWidget *widget,
 
   switch (window->snap_position)
     {
-      case SNAP_POSITION_NONE:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
-            XFCE_SCREEN_POSITION_FLOATING_V;
-        break;
+    case SNAP_POSITION_NONE:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
+          XFCE_SCREEN_POSITION_FLOATING_V;
+      break;
 
-      case SNAP_POSITION_NW:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_NW_H :
-            XFCE_SCREEN_POSITION_NW_V;
-        break;
+    case SNAP_POSITION_NW:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_NW_H :
+          XFCE_SCREEN_POSITION_NW_V;
+      break;
 
-      case SNAP_POSITION_NE:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_NE_H :
-            XFCE_SCREEN_POSITION_NE_V;
-        break;
+    case SNAP_POSITION_NE:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_NE_H :
+          XFCE_SCREEN_POSITION_NE_V;
+      break;
 
-      case SNAP_POSITION_SW:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_SW_H :
-            XFCE_SCREEN_POSITION_SW_V;
-        break;
+    case SNAP_POSITION_SW:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_SW_H :
+          XFCE_SCREEN_POSITION_SW_V;
+      break;
 
-      case SNAP_POSITION_SE:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_SE_H :
-            XFCE_SCREEN_POSITION_SE_V;
-        break;
+    case SNAP_POSITION_SE:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_SE_H :
+          XFCE_SCREEN_POSITION_SE_V;
+      break;
 
-      case SNAP_POSITION_W:
-      case SNAP_POSITION_WC:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
-            XFCE_SCREEN_POSITION_W;
-        break;
+    case SNAP_POSITION_W:
+    case SNAP_POSITION_WC:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
+          XFCE_SCREEN_POSITION_W;
+      break;
 
-      case SNAP_POSITION_E:
-      case SNAP_POSITION_EC:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
-            XFCE_SCREEN_POSITION_E;
-        break;
+    case SNAP_POSITION_E:
+    case SNAP_POSITION_EC:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
+          XFCE_SCREEN_POSITION_E;
+      break;
 
-      case SNAP_POSITION_S:
-      case SNAP_POSITION_SC:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_S :
-            XFCE_SCREEN_POSITION_FLOATING_V;
-        break;
+    case SNAP_POSITION_S:
+    case SNAP_POSITION_SC:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_S :
+          XFCE_SCREEN_POSITION_FLOATING_V;
+      break;
 
-      case SNAP_POSITION_N:
-      case SNAP_POSITION_NC:
-        position = window->horizontal ? XFCE_SCREEN_POSITION_N :
-            XFCE_SCREEN_POSITION_FLOATING_V;
-        break;
+    case SNAP_POSITION_N:
+    case SNAP_POSITION_NC:
+      position = window->horizontal ? XFCE_SCREEN_POSITION_N :
+          XFCE_SCREEN_POSITION_FLOATING_V;
+      break;
 
-      default:
-        panel_assert_not_reached ();
-        break;
+    default:
+      panel_assert_not_reached ();
+      break;
     }
 
   xfce_panel_plugin_provider_set_screen_position (XFCE_PANEL_PLUGIN_PROVIDER (widget),

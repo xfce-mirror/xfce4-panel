@@ -206,17 +206,17 @@ actions_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_FIRST_ACTION:
-        g_value_set_uint (value, plugin->first_action - 1);
-        break;
+    case PROP_FIRST_ACTION:
+      g_value_set_uint (value, plugin->first_action - 1);
+      break;
 
-      case PROP_SECOND_ACTION:
-        g_value_set_uint (value, plugin->second_action);
-        break;
+    case PROP_SECOND_ACTION:
+      g_value_set_uint (value, plugin->second_action);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -233,44 +233,44 @@ actions_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_FIRST_ACTION:
-        /* set new value and update icon */
-        action = plugin->first_action = g_value_get_uint (value) + 1;
-        gtk_widget_set_tooltip_text (plugin->first_button,
-            _(action_entries[action].title));
-        xfce_panel_image_set_from_source (
-            XFCE_PANEL_IMAGE (plugin->first_image),
-            action_entries[action].icon_name);
-        break;
+    case PROP_FIRST_ACTION:
+      /* set new value and update icon */
+      action = plugin->first_action = g_value_get_uint (value) + 1;
+      gtk_widget_set_tooltip_text (plugin->first_button,
+          _(action_entries[action].title));
+      xfce_panel_image_set_from_source (
+          XFCE_PANEL_IMAGE (plugin->first_image),
+          action_entries[action].icon_name);
+      break;
 
-      case PROP_SECOND_ACTION:
-        /* set new value */
-        action = plugin->second_action = g_value_get_uint (value);
+    case PROP_SECOND_ACTION:
+      /* set new value */
+      action = plugin->second_action = g_value_get_uint (value);
 
-        /* update button visibility and icon */
-        if (action == ACTION_DISABLED)
-          {
-            gtk_widget_hide (plugin->second_button);
-          }
-        else
-          {
-            gtk_widget_show (plugin->second_button);
-            gtk_widget_set_tooltip_text (plugin->second_button,
-                _(action_entries[action].title));
-            xfce_panel_image_set_from_source (
-                XFCE_PANEL_IMAGE (plugin->second_image),
-                action_entries[action].icon_name);
-          }
+      /* update button visibility and icon */
+      if (action == ACTION_DISABLED)
+        {
+          gtk_widget_hide (plugin->second_button);
+        }
+      else
+        {
+          gtk_widget_show (plugin->second_button);
+          gtk_widget_set_tooltip_text (plugin->second_button,
+              _(action_entries[action].title));
+          xfce_panel_image_set_from_source (
+              XFCE_PANEL_IMAGE (plugin->second_image),
+              action_entries[action].icon_name);
+        }
 
-        /* update plugin size */
-        actions_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+      /* update plugin size */
+      actions_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
 
-        break;
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

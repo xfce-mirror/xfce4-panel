@@ -155,18 +155,18 @@ xfce_clock_fuzzy_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_FUZZINESS:
-        fuzziness = g_value_get_uint (value);
-        if (G_LIKELY (fuzzy->fuzziness != fuzziness))
-          {
-            fuzzy->fuzziness = fuzziness;
-            xfce_clock_fuzzy_update (fuzzy);
-          }
-        break;
+    case PROP_FUZZINESS:
+      fuzziness = g_value_get_uint (value);
+      if (G_LIKELY (fuzzy->fuzziness != fuzziness))
+        {
+          fuzzy->fuzziness = fuzziness;
+          xfce_clock_fuzzy_update (fuzzy);
+        }
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -182,13 +182,13 @@ xfce_clock_fuzzy_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_FUZZINESS:
-        g_value_set_uint (value, fuzzy->fuzziness);
-        break;
+    case PROP_FUZZINESS:
+      g_value_set_uint (value, fuzzy->fuzziness);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

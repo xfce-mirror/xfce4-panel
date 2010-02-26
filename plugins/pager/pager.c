@@ -159,21 +159,21 @@ pager_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_WORKSPACE_SCROLLING:
-        g_value_set_boolean (value, plugin->scrolling);
-        break;
+    case PROP_WORKSPACE_SCROLLING:
+      g_value_set_boolean (value, plugin->scrolling);
+      break;
 
-      case PROP_SHOW_NAMES:
-        g_value_set_boolean (value, plugin->show_names);
-        break;
+    case PROP_SHOW_NAMES:
+      g_value_set_boolean (value, plugin->show_names);
+      break;
 
-      case PROP_ROWS:
-        g_value_set_uint (value, plugin->rows);
-        break;
+    case PROP_ROWS:
+      g_value_set_uint (value, plugin->rows);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -189,30 +189,30 @@ pager_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_WORKSPACE_SCROLLING:
-        plugin->scrolling = g_value_get_boolean (value);
-        break;
+    case PROP_WORKSPACE_SCROLLING:
+      plugin->scrolling = g_value_get_boolean (value);
+      break;
 
-      case PROP_SHOW_NAMES:
-        plugin->show_names = g_value_get_boolean (value);
+    case PROP_SHOW_NAMES:
+      plugin->show_names = g_value_get_boolean (value);
 
-        if (plugin->wnck_pager != NULL)
-          wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
-                                       plugin->show_names ?
-                                           WNCK_PAGER_DISPLAY_NAME :
-                                           WNCK_PAGER_DISPLAY_CONTENT);
-        break;
+      if (plugin->wnck_pager != NULL)
+        wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
+                                     plugin->show_names ?
+                                         WNCK_PAGER_DISPLAY_NAME :
+                                         WNCK_PAGER_DISPLAY_CONTENT);
+      break;
 
-      case PROP_ROWS:
-        plugin->rows = g_value_get_uint (value);
+    case PROP_ROWS:
+      plugin->rows = g_value_get_uint (value);
 
-        if (plugin->wnck_pager != NULL)
-          wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
-        break;
+      if (plugin->wnck_pager != NULL)
+        wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -235,10 +235,21 @@ pager_plugin_scroll_event (GtkWidget      *widget,
   /* translate the gdk scroll direction into a wnck motion direction */
   switch (event->direction)
     {
-      case GDK_SCROLL_UP:   direction = WNCK_MOTION_UP;    break;
-      case GDK_SCROLL_DOWN: direction = WNCK_MOTION_DOWN;  break;
-      case GDK_SCROLL_LEFT: direction = WNCK_MOTION_LEFT;  break;
-      default:              direction = WNCK_MOTION_RIGHT; break;
+    case GDK_SCROLL_UP:
+      direction = WNCK_MOTION_UP;
+      break;
+
+    case GDK_SCROLL_DOWN:
+      direction = WNCK_MOTION_DOWN;
+      break;
+
+    case GDK_SCROLL_LEFT:
+      direction = WNCK_MOTION_LEFT;
+      break;
+
+    default:
+      direction = WNCK_MOTION_RIGHT;
+      break;
     }
 
   /* get the active workspace's neighbor */

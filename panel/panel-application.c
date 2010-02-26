@@ -464,91 +464,91 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 
   switch (provider_signal)
     {
-      case PROVIDER_SIGNAL_MOVE_PLUGIN:
-        /* start plugin drag */
-        panel_application_plugin_move (GTK_WIDGET (provider), application);
-        break;
+    case PROVIDER_SIGNAL_MOVE_PLUGIN:
+      /* start plugin drag */
+      panel_application_plugin_move (GTK_WIDGET (provider), application);
+      break;
 
-      case PROVIDER_SIGNAL_EXPAND_PLUGIN:
-      case PROVIDER_SIGNAL_COLLAPSE_PLUGIN:
-        itembar = gtk_bin_get_child (GTK_BIN (window));
-        gtk_container_child_set (GTK_CONTAINER (itembar),
-                                 GTK_WIDGET (provider),
-                                 "expand",
-                                 provider_signal == PROVIDER_SIGNAL_EXPAND_PLUGIN,
-                                 NULL);
-        break;
+    case PROVIDER_SIGNAL_EXPAND_PLUGIN:
+    case PROVIDER_SIGNAL_COLLAPSE_PLUGIN:
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+      gtk_container_child_set (GTK_CONTAINER (itembar),
+                               GTK_WIDGET (provider),
+                               "expand",
+                               provider_signal == PROVIDER_SIGNAL_EXPAND_PLUGIN,
+                               NULL);
+      break;
 
-      case PROVIDER_SIGNAL_WRAP_PLUGIN:
-      case PROVIDER_SIGNAL_UNWRAP_PLUGIN:
-        itembar = gtk_bin_get_child (GTK_BIN (window));
-        gtk_container_child_set (GTK_CONTAINER (itembar),
-                                 GTK_WIDGET (provider),
-                                 "wrap",
-                                 provider_signal == PROVIDER_SIGNAL_WRAP_PLUGIN,
-                                 NULL);
-        break;
+    case PROVIDER_SIGNAL_WRAP_PLUGIN:
+    case PROVIDER_SIGNAL_UNWRAP_PLUGIN:
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+      gtk_container_child_set (GTK_CONTAINER (itembar),
+                               GTK_WIDGET (provider),
+                               "wrap",
+                               provider_signal == PROVIDER_SIGNAL_WRAP_PLUGIN,
+                               NULL);
+      break;
 
-      case PROVIDER_SIGNAL_LOCK_PANEL:
-        /* increase window's autohide counter */
-        panel_window_freeze_autohide (window);
-        break;
+    case PROVIDER_SIGNAL_LOCK_PANEL:
+      /* increase window's autohide counter */
+      panel_window_freeze_autohide (window);
+      break;
 
-      case PROVIDER_SIGNAL_UNLOCK_PANEL:
-        /* decrease window's autohide counter */
-        panel_window_thaw_autohide (window);
-        break;
+    case PROVIDER_SIGNAL_UNLOCK_PANEL:
+      /* decrease window's autohide counter */
+      panel_window_thaw_autohide (window);
+      break;
 
-      case PROVIDER_SIGNAL_REMOVE_PLUGIN:
-        /* give plugin the opportunity to cleanup special configuration */
-        xfce_panel_plugin_provider_removed (provider);
+    case PROVIDER_SIGNAL_REMOVE_PLUGIN:
+      /* give plugin the opportunity to cleanup special configuration */
+      xfce_panel_plugin_provider_removed (provider);
 
-        /* store the provider's unique id and name (lost after destroy) */
-        unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
-        name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
+      /* store the provider's unique id and name (lost after destroy) */
+      unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
+      name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
 
-        /* destroy the plugin */
-        gtk_widget_destroy (GTK_WIDGET (provider));
+      /* destroy the plugin */
+      gtk_widget_destroy (GTK_WIDGET (provider));
 
-        /* remove the plugin configuration */
-        panel_application_plugin_delete_config (application, name, unique_id);
-        g_free (name);
-        break;
+      /* remove the plugin configuration */
+      panel_application_plugin_delete_config (application, name, unique_id);
+      g_free (name);
+      break;
 
-      case PROVIDER_SIGNAL_ADD_NEW_ITEMS:
-        /* open the items dialog */
-        panel_item_dialog_show (window);
-        break;
+    case PROVIDER_SIGNAL_ADD_NEW_ITEMS:
+      /* open the items dialog */
+      panel_item_dialog_show (window);
+      break;
 
-      case PROVIDER_SIGNAL_PANEL_PREFERENCES:
-        /* open the panel preferences */
-        panel_preferences_dialog_show (window);
-        break;
+    case PROVIDER_SIGNAL_PANEL_PREFERENCES:
+      /* open the panel preferences */
+      panel_preferences_dialog_show (window);
+      break;
 
-      case PROVIDER_SIGNAL_PANEL_QUIT:
-      case PROVIDER_SIGNAL_PANEL_RESTART:
-        /* quit or restart */
-        panel_dbus_service_exit_panel (provider_signal == PROVIDER_SIGNAL_PANEL_RESTART);
-        break;
+    case PROVIDER_SIGNAL_PANEL_QUIT:
+    case PROVIDER_SIGNAL_PANEL_RESTART:
+      /* quit or restart */
+      panel_dbus_service_exit_panel (provider_signal == PROVIDER_SIGNAL_PANEL_RESTART);
+      break;
 
-      case PROVIDER_SIGNAL_PANEL_ABOUT:
-        /* show the about dialog */
-        panel_dialogs_show_about ();
-        break;
+    case PROVIDER_SIGNAL_PANEL_ABOUT:
+      /* show the about dialog */
+      panel_dialogs_show_about ();
+      break;
 
-      case PROVIDER_SIGNAL_FOCUS_PLUGIN:
-         /* focus the panel window (as part of focusing a widget within the plugin) */
-         gtk_window_present_with_time (GTK_WINDOW (window), GDK_CURRENT_TIME);
-         break;
+    case PROVIDER_SIGNAL_FOCUS_PLUGIN:
+       /* focus the panel window (as part of focusing a widget within the plugin) */
+       gtk_window_present_with_time (GTK_WINDOW (window), GDK_CURRENT_TIME);
+       break;
 
-      case PROVIDER_SIGNAL_SHOW_CONFIGURE:
-      case PROVIDER_SIGNAL_SHOW_ABOUT:
-        /* signals we can ignore, only for external plugins */
-        break;
+    case PROVIDER_SIGNAL_SHOW_CONFIGURE:
+    case PROVIDER_SIGNAL_SHOW_ABOUT:
+      /* signals we can ignore, only for external plugins */
+      break;
 
-      default:
-        g_critical ("Received unknown provider signal %d", provider_signal);
-        break;
+    default:
+      g_critical ("Received unknown provider signal %d", provider_signal);
+      break;
     }
 }
 
@@ -758,77 +758,77 @@ panel_application_drag_data_received (PanelWindow      *window,
 
       switch (info)
         {
-          case TARGET_PLUGIN_NAME:
-            if (G_LIKELY (selection_data->length > 0))
-              {
-                /* create a new item with a unique id */
-                name = (const gchar *) selection_data->data;
-                succeed = panel_application_plugin_insert (application, window,
-                                                           screen, name,
-                                                           -1, NULL, position);
-              }
-            break;
+        case TARGET_PLUGIN_NAME:
+          if (G_LIKELY (selection_data->length > 0))
+            {
+              /* create a new item with a unique id */
+              name = (const gchar *) selection_data->data;
+              succeed = panel_application_plugin_insert (application, window,
+                                                         screen, name,
+                                                         -1, NULL, position);
+            }
+          break;
 
-          case TARGET_PLUGIN_WIDGET:
-            /* get the source widget */
-            provider = gtk_drag_get_source_widget (context);
+        case TARGET_PLUGIN_WIDGET:
+          /* get the source widget */
+          provider = gtk_drag_get_source_widget (context);
 
-            /* debug check */
-            panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+          /* debug check */
+          panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-            /* check if we move to another itembar */
-            if (gtk_widget_get_parent (provider) == itembar)
-              {
-                /* get the current position on the itembar */
-                old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
-                                                              provider);
+          /* check if we move to another itembar */
+          if (gtk_widget_get_parent (provider) == itembar)
+            {
+              /* get the current position on the itembar */
+              old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
+                                                            provider);
 
-                /* decrease the counter if we drop after the current position */
-                if (position > old_position)
-                  position--;
+              /* decrease the counter if we drop after the current position */
+              if (position > old_position)
+                position--;
 
-                /* reorder the child if needed */
-                if (old_position != position)
-                  panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
-              }
-            else
-              {
-                /* reparent the widget, this will also call remove and add for the itembar */
-                gtk_widget_reparent (provider, itembar);
-
-                /* move the item to the correct position on the itembar */
+              /* reorder the child if needed */
+              if (old_position != position)
                 panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
+            }
+          else
+            {
+              /* reparent the widget, this will also call remove and add for the itembar */
+              gtk_widget_reparent (provider, itembar);
 
-                /* send all the needed panel information to the plugin */
-                panel_window_set_povider_info (window, provider);
-              }
+              /* move the item to the correct position on the itembar */
+              panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
 
-            /* everything went fine */
-            succeed = TRUE;
-            break;
+              /* send all the needed panel information to the plugin */
+              panel_window_set_povider_info (window, provider);
+            }
 
-          case TARGET_TEXT_URI_LIST:
-            if (G_LIKELY (application->drop_desktop_files))
-              {
-                /* pass all the uris to the launcher, it will filter out
-                 * the desktop files on it's own */
-                uris = gtk_selection_data_get_uris (selection_data);
-                if (G_LIKELY (uris != NULL))
-                  {
-                    /* create a new item with a unique id */
-                    succeed = panel_application_plugin_insert (application, window,
-                                                               screen, LAUNCHER_PLUGIN_NAME,
-                                                               -1, uris, position);
-                    g_strfreev (uris);
-                  }
+          /* everything went fine */
+          succeed = TRUE;
+          break;
 
-                application->drop_desktop_files = FALSE;
-              }
-            break;
+        case TARGET_TEXT_URI_LIST:
+          if (G_LIKELY (application->drop_desktop_files))
+            {
+              /* pass all the uris to the launcher, it will filter out
+               * the desktop files on it's own */
+              uris = gtk_selection_data_get_uris (selection_data);
+              if (G_LIKELY (uris != NULL))
+                {
+                  /* create a new item with a unique id */
+                  succeed = panel_application_plugin_insert (application, window,
+                                                             screen, LAUNCHER_PLUGIN_NAME,
+                                                             -1, uris, position);
+                  g_strfreev (uris);
+                }
 
-          default:
-            panel_assert_not_reached ();
-            break;
+              application->drop_desktop_files = FALSE;
+            }
+          break;
+
+        default:
+          panel_assert_not_reached ();
+          break;
         }
 
       /* save the panel configuration if we succeeded */

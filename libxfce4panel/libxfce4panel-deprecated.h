@@ -103,47 +103,47 @@ enum /*< skip >*/
         \
         switch (message) \
           { \
-            case PANEL_CLIENT_EVENT_REMOVED: \
-              xfce_panel_plugin_provider_removed (provider); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SAVE: \
-              xfce_panel_plugin_provider_save (provider); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA: \
-              _xpp_alpha = value / 100.00; \
-              if (_xpp_composited) \
-                gtk_widget_queue_draw (plug); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SET_ORIENTATION: \
-              xfce_panel_plugin_provider_set_orientation (provider, value); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SET_SCREEN_POSITION: \
-              xfce_panel_plugin_provider_set_screen_position (provider, value); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SET_SENSITIVE: \
-              gtk_widget_set_sensitive (plug, value); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SET_SIZE: \
-              xfce_panel_plugin_provider_set_size (provider, value); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SHOW_ABOUT: \
-              xfce_panel_plugin_provider_show_about (provider); \
-              break; \
-              \
-            case PANEL_CLIENT_EVENT_SHOW_CONFIGURE: \
-              xfce_panel_plugin_provider_show_configure (provider); \
-              break; \
-              \
-            default: \
-              g_warning ("Received unknow client event %d", message); \
-              break; \
+          case PANEL_CLIENT_EVENT_REMOVED: \
+            xfce_panel_plugin_provider_removed (provider); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SAVE: \
+            xfce_panel_plugin_provider_save (provider); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA: \
+            _xpp_alpha = value / 100.00; \
+            if (_xpp_composited) \
+              gtk_widget_queue_draw (plug); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SET_ORIENTATION: \
+            xfce_panel_plugin_provider_set_orientation (provider, value); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SET_SCREEN_POSITION: \
+            xfce_panel_plugin_provider_set_screen_position (provider, value); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SET_SENSITIVE: \
+            gtk_widget_set_sensitive (plug, value); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SET_SIZE: \
+            xfce_panel_plugin_provider_set_size (provider, value); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SHOW_ABOUT: \
+            xfce_panel_plugin_provider_show_about (provider); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_SHOW_CONFIGURE: \
+            xfce_panel_plugin_provider_show_configure (provider); \
+            break; \
+            \
+          default: \
+            g_warning ("Received unknow client event %d", message); \
+            break; \
           } \
         \
         return FALSE; \

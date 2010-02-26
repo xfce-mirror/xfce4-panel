@@ -134,13 +134,13 @@ xfce_hvbox_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_ORIENTATION:
-        g_value_set_enum (value, hvbox->orientation);
-        break;
+    case PROP_ORIENTATION:
+      g_value_set_enum (value, hvbox->orientation);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -156,13 +156,13 @@ xfce_hvbox_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_ORIENTATION:
-        xfce_hvbox_set_orientation (hvbox, g_value_get_enum (value));
-        break;
+    case PROP_ORIENTATION:
+      xfce_hvbox_set_orientation (hvbox, g_value_get_enum (value));
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

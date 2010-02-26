@@ -206,21 +206,21 @@ xfce_panel_image_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_SOURCE:
-        g_value_set_string (value, priv->source);
-        break;
+    case PROP_SOURCE:
+      g_value_set_string (value, priv->source);
+      break;
 
-      case PROP_PIXBUF:
-        g_value_set_object (value, priv->pixbuf);
-        break;
+    case PROP_PIXBUF:
+      g_value_set_object (value, priv->pixbuf);
+      break;
 
-      case PROP_SIZE:
-        g_value_set_int (value, priv->size);
-        break;
+    case PROP_SIZE:
+      g_value_set_int (value, priv->size);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -237,29 +237,29 @@ xfce_panel_image_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_SOURCE:
-        xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (object),
-                                          g_value_get_string (value));
-        break;
+    case PROP_SOURCE:
+      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (object),
+                                        g_value_get_string (value));
+      break;
 
-      case PROP_PIXBUF:
-        xfce_panel_image_set_from_pixbuf (XFCE_PANEL_IMAGE (object),
-                                          g_value_get_object (value));
-        break;
+    case PROP_PIXBUF:
+      xfce_panel_image_set_from_pixbuf (XFCE_PANEL_IMAGE (object),
+                                        g_value_get_object (value));
+      break;
 
-      case PROP_SIZE:
-        priv = XFCE_PANEL_IMAGE (object)->priv;
-        size = g_value_get_int (value);
-        if (G_LIKELY (priv->size != size))
-          {
-            priv->size = size;
-            gtk_widget_queue_resize (GTK_WIDGET (object));
-          }
-        break;
+    case PROP_SIZE:
+      priv = XFCE_PANEL_IMAGE (object)->priv;
+      size = g_value_get_int (value);
+      if (G_LIKELY (priv->size != size))
+        {
+          priv->size = size;
+          gtk_widget_queue_resize (GTK_WIDGET (object));
+        }
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

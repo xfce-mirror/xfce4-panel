@@ -139,17 +139,17 @@ xfce_clock_binary_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_SHOW_SECONDS:
-        binary->show_seconds = g_value_get_boolean (value);
-        break;
+    case PROP_SHOW_SECONDS:
+      binary->show_seconds = g_value_get_boolean (value);
+      break;
 
-      case PROP_TRUE_BINARY:
-        binary->true_binary = g_value_get_boolean (value);
-        break;
+    case PROP_TRUE_BINARY:
+      binary->true_binary = g_value_get_boolean (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 
   /* reschedule the timeout and resize */
@@ -170,17 +170,17 @@ xfce_clock_binary_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_SHOW_SECONDS:
-        g_value_set_boolean (value, binary->show_seconds);
-        break;
+    case PROP_SHOW_SECONDS:
+      g_value_set_boolean (value, binary->show_seconds);
+      break;
 
-      case PROP_TRUE_BINARY:
-        g_value_set_boolean (value, binary->true_binary);
-        break;
+    case PROP_TRUE_BINARY:
+      g_value_set_boolean (value, binary->true_binary);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

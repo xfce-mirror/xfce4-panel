@@ -219,17 +219,17 @@ panel_itembar_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_HORIZONTAL:
-        itembar->horizontal = g_value_get_boolean (value);
-        break;
+    case PROP_HORIZONTAL:
+      itembar->horizontal = g_value_get_boolean (value);
+      break;
 
-      case PROP_SIZE:
-        itembar->size = g_value_get_uint (value);
-        break;
+    case PROP_SIZE:
+      itembar->size = g_value_get_uint (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 
   gtk_widget_queue_resize (GTK_WIDGET (itembar));
@@ -245,9 +245,9 @@ panel_itembar_get_property (GObject    *object,
 {
   switch (prop_id)
     {
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -640,23 +640,23 @@ panel_itembar_set_child_property (GtkContainer *container,
 
   switch (prop_id)
     {
-      case CHILD_PROP_EXPAND:
-        boolean = g_value_get_boolean (value);
-        if (child->expand == boolean)
-          return;
-        child->expand = boolean;
-        break;
+    case CHILD_PROP_EXPAND:
+      boolean = g_value_get_boolean (value);
+      if (child->expand == boolean)
+        return;
+      child->expand = boolean;
+      break;
 
-      case CHILD_PROP_WRAP:
-        boolean = g_value_get_boolean (value);
-        if (child->wrap == boolean)
-          return;
-        child->wrap = boolean;
-        break;
+    case CHILD_PROP_WRAP:
+      boolean = g_value_get_boolean (value);
+      if (child->wrap == boolean)
+        return;
+      child->wrap = boolean;
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (container, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (container, prop_id, pspec);
+      break;
     }
 
   gtk_widget_queue_resize (GTK_WIDGET (container));
@@ -679,17 +679,17 @@ panel_itembar_get_child_property (GtkContainer *container,
 
   switch (prop_id)
     {
-      case CHILD_PROP_EXPAND:
-        g_value_set_boolean (value, child->expand);
-        break;
+    case CHILD_PROP_EXPAND:
+      g_value_set_boolean (value, child->expand);
+      break;
 
-      case CHILD_PROP_WRAP:
-        g_value_set_boolean (value, child->wrap);
-        break;
+    case CHILD_PROP_WRAP:
+      g_value_set_boolean (value, child->wrap);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (container, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (container, prop_id, pspec);
+      break;
     }
 }
 

@@ -188,33 +188,33 @@ panel_base_window_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_ENTER_OPACITY:
-        g_value_set_uint (value, rint (priv->enter_opacity * 100.00));
-        break;
+    case PROP_ENTER_OPACITY:
+      g_value_set_uint (value, rint (priv->enter_opacity * 100.00));
+      break;
 
-      case PROP_LEAVE_OPACITY:
-        g_value_set_uint (value, rint (priv->leave_opacity * 100.00));
-        break;
+    case PROP_LEAVE_OPACITY:
+      g_value_set_uint (value, rint (priv->leave_opacity * 100.00));
+      break;
 
-      case PROP_BACKGROUND_ALPHA:
-        g_value_set_uint (value, rint (window->background_alpha * 100.00));
-        break;
+    case PROP_BACKGROUND_ALPHA:
+      g_value_set_uint (value, rint (window->background_alpha * 100.00));
+      break;
 
-      case PROP_BORDERS:
-        g_value_set_uint (value, priv->borders);
-        break;
+    case PROP_BORDERS:
+      g_value_set_uint (value, priv->borders);
+      break;
 
-      case PROP_ACTIVE:
-        g_value_set_boolean (value, !!(priv->active_timeout_id != 0));
-        break;
+    case PROP_ACTIVE:
+      g_value_set_boolean (value, !!(priv->active_timeout_id != 0));
+      break;
 
-      case PROP_COMPOSITED:
-        g_value_set_boolean (value, window->is_composited);
-        break;
+    case PROP_COMPOSITED:
+      g_value_set_boolean (value, window->is_composited);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -232,62 +232,62 @@ panel_base_window_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_ENTER_OPACITY:
-        /* set the new enter opacity */
-        priv->enter_opacity = g_value_get_uint (value) / 100.00;
-        break;
+    case PROP_ENTER_OPACITY:
+      /* set the new enter opacity */
+      priv->enter_opacity = g_value_get_uint (value) / 100.00;
+      break;
 
-      case PROP_LEAVE_OPACITY:
-        /* set the new leave opacity */
-        priv->leave_opacity = g_value_get_uint (value) / 100.00;
-        if (window->is_composited)
-          gtk_window_set_opacity (GTK_WINDOW (object), priv->leave_opacity);
-        break;
+    case PROP_LEAVE_OPACITY:
+      /* set the new leave opacity */
+      priv->leave_opacity = g_value_get_uint (value) / 100.00;
+      if (window->is_composited)
+        gtk_window_set_opacity (GTK_WINDOW (object), priv->leave_opacity);
+      break;
 
-      case PROP_BACKGROUND_ALPHA:
-        /* set the new background alpha */
-        window->background_alpha = g_value_get_uint (value) / 100.00;
-        if (window->is_composited)
-          gtk_widget_queue_draw (GTK_WIDGET (object));
+    case PROP_BACKGROUND_ALPHA:
+      /* set the new background alpha */
+      window->background_alpha = g_value_get_uint (value) / 100.00;
+      if (window->is_composited)
+        gtk_widget_queue_draw (GTK_WIDGET (object));
 
-        /* send the new background alpha to the external plugins */
-        itembar = gtk_bin_get_child (GTK_BIN (window));
-        if (G_LIKELY (itembar != NULL))
-          gtk_container_foreach (GTK_CONTAINER (itembar),
-              panel_base_window_set_plugin_background_alpha, window);
-        break;
+      /* send the new background alpha to the external plugins */
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+      if (G_LIKELY (itembar != NULL))
+        gtk_container_foreach (GTK_CONTAINER (itembar),
+            panel_base_window_set_plugin_background_alpha, window);
+      break;
 
-      case PROP_BORDERS:
-        /* set new window borders and redraw the widget */
-        panel_base_window_set_borders (PANEL_BASE_WINDOW (object),
-                                       g_value_get_uint (value));
-        break;
+    case PROP_BORDERS:
+      /* set new window borders and redraw the widget */
+      panel_base_window_set_borders (PANEL_BASE_WINDOW (object),
+                                     g_value_get_uint (value));
+      break;
 
-      case PROP_ACTIVE:
-        if (g_value_get_boolean (value))
-          {
-            if (priv->active_timeout_id == 0)
-              {
-                /* start timeout for the marching ants selection */
-                priv->active_timeout_id = g_timeout_add_seconds_full (
-                    G_PRIORITY_DEFAULT_IDLE, 1,
-                    panel_base_window_active_timeout, object,
-                    panel_base_window_active_timeout_destroyed);
-              }
-          }
-        else if (priv->active_timeout_id != 0)
-          {
-            /* stop timeout */
-            g_source_remove (priv->active_timeout_id);
-          }
+    case PROP_ACTIVE:
+      if (g_value_get_boolean (value))
+        {
+          if (priv->active_timeout_id == 0)
+            {
+              /* start timeout for the marching ants selection */
+              priv->active_timeout_id = g_timeout_add_seconds_full (
+                  G_PRIORITY_DEFAULT_IDLE, 1,
+                  panel_base_window_active_timeout, object,
+                  panel_base_window_active_timeout_destroyed);
+            }
+        }
+      else if (priv->active_timeout_id != 0)
+        {
+          /* stop timeout */
+          g_source_remove (priv->active_timeout_id);
+        }
 
-        /* queue a draw for first second */
-        gtk_widget_queue_resize (GTK_WIDGET (object));
-        break;
+      /* queue a draw for first second */
+      gtk_widget_queue_resize (GTK_WIDGET (object));
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

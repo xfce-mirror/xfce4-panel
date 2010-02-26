@@ -269,29 +269,29 @@ window_menu_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_STYLE:
-        g_value_set_uint (value, plugin->button_style);
-        break;
+    case PROP_STYLE:
+      g_value_set_uint (value, plugin->button_style);
+      break;
 
-      case PROP_WORKSPACE_ACTIONS:
-        g_value_set_boolean (value, plugin->workspace_actions);
-        break;
+    case PROP_WORKSPACE_ACTIONS:
+      g_value_set_boolean (value, plugin->workspace_actions);
+      break;
 
-      case PROP_WORKSPACE_NAMES:
-        g_value_set_boolean (value, plugin->workspace_names);
-        break;
+    case PROP_WORKSPACE_NAMES:
+      g_value_set_boolean (value, plugin->workspace_names);
+      break;
 
-      case PROP_URGENTCY_NOTIFICATION:
-        g_value_set_boolean (value, plugin->urgentcy_notification);
-        break;
+    case PROP_URGENTCY_NOTIFICATION:
+      g_value_set_boolean (value, plugin->urgentcy_notification);
+      break;
 
-      case PROP_ALL_WORKSPACES:
-        g_value_set_boolean (value, plugin->all_workspaces);
-        break;
+    case PROP_ALL_WORKSPACES:
+      g_value_set_boolean (value, plugin->all_workspaces);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -312,60 +312,60 @@ window_menu_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_STYLE:
-        button_style = g_value_get_uint (value);
-        if (plugin->button_style != button_style)
-          {
-            plugin->button_style = button_style;
+    case PROP_STYLE:
+      button_style = g_value_get_uint (value);
+      if (plugin->button_style != button_style)
+        {
+          plugin->button_style = button_style;
 
-            /* show or hide the icon */
-            if (button_style == BUTTON_STYLE_ICON)
-              gtk_widget_show (plugin->icon);
-            else
-              gtk_widget_hide (plugin->icon);
+          /* show or hide the icon */
+          if (button_style == BUTTON_STYLE_ICON)
+            gtk_widget_show (plugin->icon);
+          else
+            gtk_widget_hide (plugin->icon);
 
-            /* update the plugin */
-            window_menu_plugin_size_changed (panel_plugin,
-                xfce_panel_plugin_get_size (panel_plugin));
-            window_menu_plugin_screen_position_changed (panel_plugin,
-                xfce_panel_plugin_get_screen_position (panel_plugin));
-            window_menu_plugin_active_window_changed (plugin->screen,
-                NULL, plugin);
-          }
-        break;
+          /* update the plugin */
+          window_menu_plugin_size_changed (panel_plugin,
+              xfce_panel_plugin_get_size (panel_plugin));
+          window_menu_plugin_screen_position_changed (panel_plugin,
+              xfce_panel_plugin_get_screen_position (panel_plugin));
+          window_menu_plugin_active_window_changed (plugin->screen,
+              NULL, plugin);
+        }
+      break;
 
-      case PROP_WORKSPACE_ACTIONS:
-        plugin->workspace_actions = g_value_get_boolean (value);
-        break;
+    case PROP_WORKSPACE_ACTIONS:
+      plugin->workspace_actions = g_value_get_boolean (value);
+      break;
 
-      case PROP_WORKSPACE_NAMES:
-        plugin->workspace_names = g_value_get_boolean (value);
-        break;
+    case PROP_WORKSPACE_NAMES:
+      plugin->workspace_names = g_value_get_boolean (value);
+      break;
 
-      case PROP_URGENTCY_NOTIFICATION:
-        urgentcy_notification = g_value_get_boolean (value);
-        if (plugin->urgentcy_notification != urgentcy_notification)
-          {
-            plugin->urgentcy_notification = urgentcy_notification;
+    case PROP_URGENTCY_NOTIFICATION:
+      urgentcy_notification = g_value_get_boolean (value);
+      if (plugin->urgentcy_notification != urgentcy_notification)
+        {
+          plugin->urgentcy_notification = urgentcy_notification;
 
-            if (plugin->screen != NULL)
-              {
-                /* (dis)connect window signals */
-                if (plugin->urgentcy_notification)
-                  window_menu_plugin_windows_connect (plugin, TRUE);
-                else
-                  window_menu_plugin_windows_disconnect (plugin);
-              }
-          }
-        break;
+          if (plugin->screen != NULL)
+            {
+              /* (dis)connect window signals */
+              if (plugin->urgentcy_notification)
+                window_menu_plugin_windows_connect (plugin, TRUE);
+              else
+                window_menu_plugin_windows_disconnect (plugin);
+            }
+        }
+      break;
 
-      case PROP_ALL_WORKSPACES:
-        plugin->all_workspaces = g_value_get_boolean (value);
-        break;
+    case PROP_ALL_WORKSPACES:
+      plugin->all_workspaces = g_value_get_boolean (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -1067,21 +1067,21 @@ window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
   /* construct an event */
   switch (event->keyval)
     {
-      case GDK_space:
-      case GDK_Return:
-      case GDK_KP_Space:
-      case GDK_KP_Enter:
-        /* active the menu item */
-        fake_event.button = 1;
-        break;
+    case GDK_space:
+    case GDK_Return:
+    case GDK_KP_Space:
+    case GDK_KP_Enter:
+      /* active the menu item */
+      fake_event.button = 1;
+      break;
 
-      case GDK_Menu:
-        /* popup the window actions menu */
-        fake_event.button = 3;
-        break;
+    case GDK_Menu:
+      /* popup the window actions menu */
+      fake_event.button = 3;
+      break;
 
-      default:
-        return FALSE;
+    default:
+      return FALSE;
     }
 
   /* popdown the menu, this will also update the active item */

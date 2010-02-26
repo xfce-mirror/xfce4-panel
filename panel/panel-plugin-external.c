@@ -348,21 +348,21 @@ panel_plugin_external_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_UNIQUE_ID:
-        g_value_set_int (value, external->unique_id);
-        break;
+    case PROP_UNIQUE_ID:
+      g_value_set_int (value, external->unique_id);
+      break;
 
-      case PROP_ARGUMENTS:
-        g_value_set_boxed (value, external->arguments);
-        break;
+    case PROP_ARGUMENTS:
+      g_value_set_boxed (value, external->arguments);
+      break;
 
-      case PROP_MODULE:
-        g_value_set_object (value, external->module);
-        break;
+    case PROP_MODULE:
+      g_value_set_object (value, external->module);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -378,21 +378,21 @@ panel_plugin_external_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_UNIQUE_ID:
-        external->unique_id = g_value_get_int (value);
-        break;
+    case PROP_UNIQUE_ID:
+      external->unique_id = g_value_get_int (value);
+      break;
 
-      case PROP_ARGUMENTS:
-        external->arguments = g_value_dup_boxed (value);
-        break;
+    case PROP_ARGUMENTS:
+      external->arguments = g_value_dup_boxed (value);
+      break;
 
-      case PROP_MODULE:
-        external->module = g_value_dup_object (value);
-        break;
+    case PROP_MODULE:
+      external->module = g_value_dup_object (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -576,19 +576,19 @@ panel_plugin_external_dbus_provider_signal (PanelPluginExternal            *exte
 
   switch (provider_signal)
     {
-      case PROVIDER_SIGNAL_SHOW_CONFIGURE:
-        external->show_configure = TRUE;
-        break;
+    case PROVIDER_SIGNAL_SHOW_CONFIGURE:
+      external->show_configure = TRUE;
+      break;
 
-      case PROVIDER_SIGNAL_SHOW_ABOUT:
-        external->show_about = TRUE;
-        break;
+    case PROVIDER_SIGNAL_SHOW_ABOUT:
+      external->show_about = TRUE;
+      break;
 
-      default:
-        /* other signals are handled in panel-applications.c */
-        xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
-                                                provider_signal);
-        break;
+    default:
+      /* other signals are handled in panel-applications.c */
+      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
+                                              provider_signal);
+      break;
     }
 
   return TRUE;
@@ -887,15 +887,15 @@ panel_plugin_external_child_watch (GPid     pid,
       /* extract our return value from the status */
       switch (WEXITSTATUS (status))
         {
-          case PLUGIN_EXIT_SUCCESS:
-          case PLUGIN_EXIT_FAILURE:
-          case PLUGIN_EXIT_PREINIT_FAILED:
-          case PLUGIN_EXIT_CHECK_FAILED:
-          case PLUGIN_EXIT_NO_PROVIDER:
-            /* wait until everything is settled, then destroy the
-             * external plugin so it is removed from the configuration */
-            exo_gtk_object_destroy_later (GTK_OBJECT (external));
-            break;
+        case PLUGIN_EXIT_SUCCESS:
+        case PLUGIN_EXIT_FAILURE:
+        case PLUGIN_EXIT_PREINIT_FAILED:
+        case PLUGIN_EXIT_CHECK_FAILED:
+        case PLUGIN_EXIT_NO_PROVIDER:
+          /* wait until everything is settled, then destroy the
+           * external plugin so it is removed from the configuration */
+          exo_gtk_object_destroy_later (GTK_OBJECT (external));
+          break;
         }
     }
 

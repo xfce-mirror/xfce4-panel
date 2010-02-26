@@ -139,13 +139,13 @@ xfce_clock_analog_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_SHOW_SECONDS:
-        analog->show_seconds = g_value_get_boolean (value);
-        break;
+    case PROP_SHOW_SECONDS:
+      analog->show_seconds = g_value_get_boolean (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 
   /* reschedule the timeout and redraw */
@@ -166,13 +166,13 @@ xfce_clock_analog_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_SHOW_SECONDS:
-        g_value_set_boolean (value, analog->show_seconds);
-        break;
+    case PROP_SHOW_SECONDS:
+      g_value_set_boolean (value, analog->show_seconds);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

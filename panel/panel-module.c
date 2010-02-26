@@ -404,51 +404,51 @@ panel_module_new_plugin (PanelModule  *module,
 
   switch (module->mode)
     {
-      case INTERNAL:
-        if (g_type_module_use (G_TYPE_MODULE (module)))
-          {
-            if (module->plugin_type != G_TYPE_NONE)
-              {
-                /* plugin is build as an object, to use its gtype */
-                plugin = g_object_new (module->plugin_type,
-                                       "name", panel_module_get_name (module),
-                                       "unique-id", unique_id,
-                                       "display-name", module->display_name,
-                                       "comment", module->comment,
-                                       "arguments", arguments,
-                                       NULL);
-              }
-            else if (module->construct_func != NULL)
-              {
-                /* create plugin using the 'old style' construct function */
-                plugin = (*module->construct_func) (panel_module_get_name (module),
-                                                    unique_id,
-                                                    module->display_name,
-                                                    module->comment,
-                                                    arguments,
-                                                    screen);
-              }
+    case INTERNAL:
+      if (g_type_module_use (G_TYPE_MODULE (module)))
+        {
+          if (module->plugin_type != G_TYPE_NONE)
+            {
+              /* plugin is build as an object, to use its gtype */
+              plugin = g_object_new (module->plugin_type,
+                                     "name", panel_module_get_name (module),
+                                     "unique-id", unique_id,
+                                     "display-name", module->display_name,
+                                     "comment", module->comment,
+                                     "arguments", arguments,
+                                     NULL);
+            }
+          else if (module->construct_func != NULL)
+            {
+              /* create plugin using the 'old style' construct function */
+              plugin = (*module->construct_func) (panel_module_get_name (module),
+                                                  unique_id,
+                                                  module->display_name,
+                                                  module->comment,
+                                                  arguments,
+                                                  screen);
+            }
 
-            if (G_LIKELY (plugin != NULL))
-              break;
-            else
-              g_type_module_unuse (G_TYPE_MODULE (module));
-          }
+          if (G_LIKELY (plugin != NULL))
+            break;
+          else
+            g_type_module_unuse (G_TYPE_MODULE (module));
+        }
 
-        /* fall-through (make wrapper plugin), probably a plugin with
-         * preinit_func which is not supported for internal plugins */
+      /* fall-through (make wrapper plugin), probably a plugin with
+       * preinit_func which is not supported for internal plugins */
 
-      case WRAPPER:
-        plugin = panel_plugin_external_new (module, unique_id, arguments);
-        break;
+    case WRAPPER:
+      plugin = panel_plugin_external_new (module, unique_id, arguments);
+      break;
 
-      case EXTERNAL_46:
-        plugin = panel_plugin_external_46_new (module, unique_id, arguments);
-        break;
+    case EXTERNAL_46:
+      plugin = panel_plugin_external_46_new (module, unique_id, arguments);
+      break;
 
-      default:
-        panel_assert_not_reached ();
-        break;
+    default:
+      panel_assert_not_reached ();
+      break;
     }
 
   if (G_LIKELY (plugin != NULL))

@@ -198,13 +198,13 @@ xfce_arrow_button_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_ARROW_TYPE:
-        xfce_arrow_button_set_arrow_type (button, g_value_get_enum (value));
-        break;
+    case PROP_ARROW_TYPE:
+      xfce_arrow_button_set_arrow_type (button, g_value_get_enum (value));
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -220,13 +220,13 @@ xfce_arrow_button_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_ARROW_TYPE:
-        g_value_set_enum (value, xfce_arrow_button_get_arrow_type (button));
-        break;
+    case PROP_ARROW_TYPE:
+      g_value_set_enum (value, xfce_arrow_button_get_arrow_type (button));
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -314,18 +314,18 @@ xfce_arrow_button_size_request (GtkWidget      *widget,
       /* reserve space for the arrow */
       switch (button->priv->arrow_type)
         {
-          case GTK_ARROW_UP:
-          case GTK_ARROW_DOWN:
-            requisition->width += ARROW_WIDTH;
-            break;
+        case GTK_ARROW_UP:
+        case GTK_ARROW_DOWN:
+          requisition->width += ARROW_WIDTH;
+          break;
 
-          case GTK_ARROW_LEFT:
-          case GTK_ARROW_RIGHT:
-            requisition->height += ARROW_WIDTH;
-            break;
+        case GTK_ARROW_LEFT:
+        case GTK_ARROW_RIGHT:
+          requisition->height += ARROW_WIDTH;
+          break;
 
-          default:
-            break;
+        default:
+          break;
         }
     }
   else if (button->priv->arrow_type != GTK_ARROW_NONE)
@@ -359,16 +359,16 @@ xfce_arrow_button_size_allocate (GtkWidget     *widget,
           /* update the allocation to make space for the arrow */
           switch (button->priv->arrow_type)
             {
-              case GTK_ARROW_LEFT:
-              case GTK_ARROW_RIGHT:
-                child_allocation.height -= ARROW_WIDTH;
-                child_allocation.y += ARROW_WIDTH;
-                break;
+            case GTK_ARROW_LEFT:
+            case GTK_ARROW_RIGHT:
+              child_allocation.height -= ARROW_WIDTH;
+              child_allocation.y += ARROW_WIDTH;
+              break;
 
-              default:
-                child_allocation.width -= ARROW_WIDTH;
-                child_allocation.x += ARROW_WIDTH;
-                break;
+            default:
+              child_allocation.width -= ARROW_WIDTH;
+              child_allocation.x += ARROW_WIDTH;
+              break;
             }
 
           /* set the child allocation again */

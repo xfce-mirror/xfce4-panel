@@ -113,14 +113,14 @@ xfce_clock_digital_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_DIGITAL_FORMAT:
-        g_free (digital->format);
-        digital->format = g_value_dup_string (value);
-        break;
+    case PROP_DIGITAL_FORMAT:
+      g_free (digital->format);
+      digital->format = g_value_dup_string (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 
   /* reschedule the timeout and redraw */
@@ -141,13 +141,13 @@ xfce_clock_digital_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_DIGITAL_FORMAT:
-        g_value_set_string (value, digital->format);
-        break;
+    case PROP_DIGITAL_FORMAT:
+      g_value_set_string (value, digital->format);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

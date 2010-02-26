@@ -243,21 +243,21 @@ clock_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_MODE:
-        g_value_set_uint (value, plugin->mode);
-        break;
+    case PROP_MODE:
+      g_value_set_uint (value, plugin->mode);
+      break;
 
-      case PROP_SHOW_FRAME:
-        g_value_set_boolean (value, plugin->show_frame);
-        break;
+    case PROP_SHOW_FRAME:
+      g_value_set_boolean (value, plugin->show_frame);
+      break;
 
-      case PROP_TOOLTIP_FORMAT:
-        g_value_set_string (value, plugin->tooltip_format);
-        break;
+    case PROP_TOOLTIP_FORMAT:
+      g_value_set_string (value, plugin->tooltip_format);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -274,32 +274,32 @@ clock_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_MODE:
-        if (plugin->mode != g_value_get_uint (value))
-          {
-            plugin->mode = g_value_get_uint (value);
-            clock_plugin_set_mode (plugin);
-          }
-        break;
+    case PROP_MODE:
+      if (plugin->mode != g_value_get_uint (value))
+        {
+          plugin->mode = g_value_get_uint (value);
+          clock_plugin_set_mode (plugin);
+        }
+      break;
 
-      case PROP_SHOW_FRAME:
-        show_frame = g_value_get_boolean (value);
-        if (plugin->show_frame != show_frame)
-          {
-            plugin->show_frame = show_frame;
-            gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
-                show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
-          }
-        break;
+    case PROP_SHOW_FRAME:
+      show_frame = g_value_get_boolean (value);
+      if (plugin->show_frame != show_frame)
+        {
+          plugin->show_frame = show_frame;
+          gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
+              show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
+        }
+      break;
 
-      case PROP_TOOLTIP_FORMAT:
-        g_free (plugin->tooltip_format);
-        plugin->tooltip_format = g_value_dup_string (value);
-        break;
+    case PROP_TOOLTIP_FORMAT:
+      g_free (plugin->tooltip_format);
+      plugin->tooltip_format = g_value_dup_string (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -450,30 +450,30 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
   mode = gtk_combo_box_get_active (combo);
   switch (mode)
     {
-      case CLOCK_PLUGIN_MODE_ANALOG:
-        active = 1 << 1;
-        break;
+    case CLOCK_PLUGIN_MODE_ANALOG:
+      active = 1 << 1;
+      break;
 
-      case CLOCK_PLUGIN_MODE_BINARY:
-        active = 1 << 1 | 1 << 2;
-        break;
+    case CLOCK_PLUGIN_MODE_BINARY:
+      active = 1 << 1 | 1 << 2;
+      break;
 
-      case CLOCK_PLUGIN_MODE_DIGITAL:
-        active = 1 << 6;
-        break;
+    case CLOCK_PLUGIN_MODE_DIGITAL:
+      active = 1 << 6;
+      break;
 
-      case CLOCK_PLUGIN_MODE_FUZZY:
-        active = 1 << 7;
-        break;
+    case CLOCK_PLUGIN_MODE_FUZZY:
+      active = 1 << 7;
+      break;
 
-      case CLOCK_PLUGIN_MODE_LCD:
-        active = 1 << 1 | 1 << 3 | 1 << 4 | 1 << 5;
-        break;
+    case CLOCK_PLUGIN_MODE_LCD:
+      active = 1 << 1 | 1 << 3 | 1 << 4 | 1 << 5;
+      break;
 
-      default:
-        panel_assert_not_reached ();
-        active = 0;
-        break;
+    default:
+      panel_assert_not_reached ();
+      active = 0;
+      break;
     }
 
   /* show or hide the dialog widgets */
@@ -975,14 +975,14 @@ clock_plugin_interval_from_format (const gchar *format)
         {
           switch (*++p)
             {
-              case 'c':
-              case 'N':
-              case 'r':
-              case 's':
-              case 'S':
-              case 'T':
-              case 'X':
-                return CLOCK_INTERVAL_SECOND;
+            case 'c':
+            case 'N':
+            case 'r':
+            case 's':
+            case 'S':
+            case 'T':
+            case 'X':
+              return CLOCK_INTERVAL_SECOND;
             }
         }
     }

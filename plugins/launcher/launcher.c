@@ -413,44 +413,44 @@ launcher_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_ITEMS:
-        array = g_ptr_array_new ();
-        for (li = plugin->items; li != NULL; li = li->next)
-          {
-            tmp = g_new0 (GValue, 1);
-            g_value_init (tmp, G_TYPE_STRING);
-            panel_return_if_fail (GARCON_IS_MENU_ITEM (li->data));
-            item_file = garcon_menu_item_get_file (li->data);
-            if (g_file_has_prefix (item_file, plugin->config_directory))
-              g_value_take_string (tmp, g_file_get_basename (item_file));
-            else
-              g_value_take_string (tmp, g_file_get_uri (item_file));
-            g_object_unref (G_OBJECT (item_file));
-            g_ptr_array_add (array, tmp);
-          }
-        g_value_set_boxed (value, array);
-        xfconf_array_free (array);
-        break;
+    case PROP_ITEMS:
+      array = g_ptr_array_new ();
+      for (li = plugin->items; li != NULL; li = li->next)
+        {
+          tmp = g_new0 (GValue, 1);
+          g_value_init (tmp, G_TYPE_STRING);
+          panel_return_if_fail (GARCON_IS_MENU_ITEM (li->data));
+          item_file = garcon_menu_item_get_file (li->data);
+          if (g_file_has_prefix (item_file, plugin->config_directory))
+            g_value_take_string (tmp, g_file_get_basename (item_file));
+          else
+            g_value_take_string (tmp, g_file_get_uri (item_file));
+          g_object_unref (G_OBJECT (item_file));
+          g_ptr_array_add (array, tmp);
+        }
+      g_value_set_boxed (value, array);
+      xfconf_array_free (array);
+      break;
 
-      case PROP_DISABLE_TOOLTIPS:
-        g_value_set_boolean (value, plugin->disable_tooltips);
-        break;
+    case PROP_DISABLE_TOOLTIPS:
+      g_value_set_boolean (value, plugin->disable_tooltips);
+      break;
 
-      case PROP_MOVE_FIRST:
-        g_value_set_boolean (value, plugin->move_first);
-        break;
+    case PROP_MOVE_FIRST:
+      g_value_set_boolean (value, plugin->move_first);
+      break;
 
-      case PROP_SHOW_LABEL:
-        g_value_set_boolean (value, plugin->show_label);
-        break;
+    case PROP_SHOW_LABEL:
+      g_value_set_boolean (value, plugin->show_label);
+      break;
 
-      case PROP_ARROW_POSITION:
-        g_value_set_uint (value, plugin->arrow_position);
-        break;
+    case PROP_ARROW_POSITION:
+      g_value_set_uint (value, plugin->arrow_position);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -740,74 +740,74 @@ launcher_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_ITEMS:
-        /* load new items from the array */
-        array = g_value_get_boxed (value);
-        if (G_LIKELY (array != NULL))
-          launcher_plugin_items_load (plugin, array);
-        else
-          launcher_plugin_items_free (plugin->items);
+    case PROP_ITEMS:
+      /* load new items from the array */
+      array = g_value_get_boxed (value);
+      if (G_LIKELY (array != NULL))
+        launcher_plugin_items_load (plugin, array);
+      else
+        launcher_plugin_items_free (plugin->items);
 
-        /* emit signal */
-        g_signal_emit (G_OBJECT (plugin), launcher_signals[ITEMS_CHANGED], 0);
+      /* emit signal */
+      g_signal_emit (G_OBJECT (plugin), launcher_signals[ITEMS_CHANGED], 0);
 
-        /* update the button */
-        launcher_plugin_button_update (plugin);
+      /* update the button */
+      launcher_plugin_button_update (plugin);
 
-        /* update the widget packing */
-        goto update_arrow;
-        break;
+      /* update the widget packing */
+      goto update_arrow;
+      break;
 
-      case PROP_DISABLE_TOOLTIPS:
-        plugin->disable_tooltips = g_value_get_boolean (value);
-        gtk_widget_set_has_tooltip (plugin->button, !plugin->disable_tooltips);
-        break;
+    case PROP_DISABLE_TOOLTIPS:
+      plugin->disable_tooltips = g_value_get_boolean (value);
+      gtk_widget_set_has_tooltip (plugin->button, !plugin->disable_tooltips);
+      break;
 
-      case PROP_MOVE_FIRST:
-        plugin->move_first = g_value_get_boolean (value);
-        break;
+    case PROP_MOVE_FIRST:
+      plugin->move_first = g_value_get_boolean (value);
+      break;
 
-      case PROP_SHOW_LABEL:
-        plugin->show_label = g_value_get_boolean (value);
+    case PROP_SHOW_LABEL:
+      plugin->show_label = g_value_get_boolean (value);
 
-        /* destroy the old child */
-        if (plugin->child != NULL)
-          gtk_widget_destroy (plugin->child);
+      /* destroy the old child */
+      if (plugin->child != NULL)
+        gtk_widget_destroy (plugin->child);
 
-        /* create child */
-        if (G_UNLIKELY (plugin->show_label))
-          plugin->child = gtk_label_new (NULL);
-        else
-          plugin->child = xfce_panel_image_new ();
-        gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
-        gtk_widget_show (plugin->child);
+      /* create child */
+      if (G_UNLIKELY (plugin->show_label))
+        plugin->child = gtk_label_new (NULL);
+      else
+        plugin->child = xfce_panel_image_new ();
+      gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
+      gtk_widget_show (plugin->child);
 
-        /* update size */
-        launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+      /* update size */
+      launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
 
-        /* update the button */
-        launcher_plugin_button_update (plugin);
-        break;
+      /* update the button */
+      launcher_plugin_button_update (plugin);
+      break;
 
-      case PROP_ARROW_POSITION:
-        plugin->arrow_position = g_value_get_uint (value);
+    case PROP_ARROW_POSITION:
+      plugin->arrow_position = g_value_get_uint (value);
 
 update_arrow:
-        /* update the arrow button visibility */
-        launcher_plugin_arrow_visibility (plugin);
+      /* update the arrow button visibility */
+      launcher_plugin_arrow_visibility (plugin);
 
-        /* repack the widgets */
-        launcher_plugin_pack_widgets (plugin);
+      /* repack the widgets */
+      launcher_plugin_pack_widgets (plugin);
 
-        /* update the plugin size */
-        launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-        break;
+      /* update the plugin size */
+      launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -1176,24 +1176,24 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
       switch (plugin->arrow_position)
         {
-          case LAUNCHER_ARROW_NORTH:
-          case LAUNCHER_ARROW_SOUTH:
-            a_height = ARROW_BUTTON_SIZE;
+        case LAUNCHER_ARROW_NORTH:
+        case LAUNCHER_ARROW_SOUTH:
+          a_height = ARROW_BUTTON_SIZE;
 
-            if (horizontal)
-              p_width -= ARROW_BUTTON_SIZE;
-            else
-              p_height += ARROW_BUTTON_SIZE;
-            break;
+          if (horizontal)
+            p_width -= ARROW_BUTTON_SIZE;
+          else
+            p_height += ARROW_BUTTON_SIZE;
+          break;
 
-          default:
-            a_width = ARROW_BUTTON_SIZE;
+        default:
+          a_width = ARROW_BUTTON_SIZE;
 
-            if (horizontal)
-              p_width += ARROW_BUTTON_SIZE;
-            else
-              p_height -= ARROW_BUTTON_SIZE;
-            break;
+          if (horizontal)
+            p_width += ARROW_BUTTON_SIZE;
+          else
+            p_height -= ARROW_BUTTON_SIZE;
+          break;
         }
 
       /* set the arrow size */
@@ -1857,25 +1857,25 @@ launcher_plugin_button_expose_event (GtkWidget      *widget,
   /* calculate the position based on the arrow type */
   switch (arrow_type)
     {
-      case GTK_ARROW_UP:
-        /* north east */
-        x += widget->allocation.width - offset;
-        break;
+    case GTK_ARROW_UP:
+      /* north east */
+      x += widget->allocation.width - offset;
+      break;
 
-      case GTK_ARROW_DOWN:
-        /* south west */
-        y += widget->allocation.height - offset;
-        break;
+    case GTK_ARROW_DOWN:
+      /* south west */
+      y += widget->allocation.height - offset;
+      break;
 
-      case GTK_ARROW_RIGHT:
-        /* south east */
-        x += widget->allocation.width - offset;
-        y += widget->allocation.height - offset;
-        break;
+    case GTK_ARROW_RIGHT:
+      /* south east */
+      x += widget->allocation.width - offset;
+      y += widget->allocation.height - offset;
+      break;
 
-      default:
-        /* north west */
-        break;
+    default:
+      /* north west */
+      break;
     }
 
   /* paint the arrow */
@@ -2246,62 +2246,62 @@ launcher_plugin_exec_parse (GarconMenuItem   *item,
         {
           switch (*++p)
             {
-              case 'f':
-              case 'F':
-                for (li = uri_list; li != NULL; li = li->next)
-                  {
-                    filename = g_filename_from_uri ((const gchar *) li->data,
-                                                    NULL, NULL);
-                    if (G_LIKELY (filename != NULL))
-                      launcher_plugin_exec_append_quoted (string, filename);
-                    g_free (filename);
+            case 'f':
+            case 'F':
+              for (li = uri_list; li != NULL; li = li->next)
+                {
+                  filename = g_filename_from_uri ((const gchar *) li->data,
+                                                  NULL, NULL);
+                  if (G_LIKELY (filename != NULL))
+                    launcher_plugin_exec_append_quoted (string, filename);
+                  g_free (filename);
 
-                    if (*p == 'f')
-                      break;
-                    if (li->next != NULL)
-                      g_string_append_c (string, ' ');
-                  }
-                break;
+                  if (*p == 'f')
+                    break;
+                  if (li->next != NULL)
+                    g_string_append_c (string, ' ');
+                }
+              break;
 
-              case 'u':
-              case 'U':
-                for (li = uri_list; li != NULL; li = li->next)
-                  {
-                    launcher_plugin_exec_append_quoted (string, (const gchar *)
-                                                        li->data);
+            case 'u':
+            case 'U':
+              for (li = uri_list; li != NULL; li = li->next)
+                {
+                  launcher_plugin_exec_append_quoted (string, (const gchar *)
+                                                      li->data);
 
-                    if (*p == 'u')
-                      break;
-                    if (li->next != NULL)
-                      g_string_append_c (string, ' ');
-                  }
-                break;
+                  if (*p == 'u')
+                    break;
+                  if (li->next != NULL)
+                    g_string_append_c (string, ' ');
+                }
+              break;
 
-              case 'i':
-                tmp = garcon_menu_item_get_icon_name (item);
-                if (!exo_str_is_empty (tmp))
-                  {
-                    g_string_append (string, "--icon ");
-                    launcher_plugin_exec_append_quoted (string, tmp);
-                  }
-                break;
-
-              case 'c':
-                tmp = garcon_menu_item_get_name (item);
-                if (!exo_str_is_empty (tmp))
+            case 'i':
+              tmp = garcon_menu_item_get_icon_name (item);
+              if (!exo_str_is_empty (tmp))
+                {
+                  g_string_append (string, "--icon ");
                   launcher_plugin_exec_append_quoted (string, tmp);
-                break;
+                }
+              break;
 
-              case 'k':
-                uri = garcon_menu_item_get_uri (item);
-                if (!exo_str_is_empty (uri))
-                  launcher_plugin_exec_append_quoted (string, uri);
-                g_free (uri);
-                break;
+            case 'c':
+              tmp = garcon_menu_item_get_name (item);
+              if (!exo_str_is_empty (tmp))
+                launcher_plugin_exec_append_quoted (string, tmp);
+              break;
 
-              case '%':
-                g_string_append_c (string, '%');
-                break;
+            case 'k':
+              uri = garcon_menu_item_get_uri (item);
+              if (!exo_str_is_empty (uri))
+                launcher_plugin_exec_append_quoted (string, uri);
+              g_free (uri);
+              break;
+
+            case '%':
+              g_string_append_c (string, '%');
+              break;
             }
         }
       else

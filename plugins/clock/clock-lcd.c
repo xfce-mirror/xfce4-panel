@@ -177,25 +177,25 @@ xfce_clock_lcd_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_SHOW_SECONDS:
-        lcd->show_seconds = g_value_get_boolean (value);
-        break;
+    case PROP_SHOW_SECONDS:
+      lcd->show_seconds = g_value_get_boolean (value);
+      break;
 
-      case PROP_SHOW_MILITARY:
-        lcd->show_military = g_value_get_boolean (value);
-        break;
+    case PROP_SHOW_MILITARY:
+      lcd->show_military = g_value_get_boolean (value);
+      break;
 
-      case PROP_SHOW_MERIDIEM:
-        lcd->show_meridiem = g_value_get_boolean (value);
-        break;
+    case PROP_SHOW_MERIDIEM:
+      lcd->show_meridiem = g_value_get_boolean (value);
+      break;
 
-      case PROP_FLASH_SEPARATORS:
-        lcd->flash_separators = g_value_get_boolean (value);
-        break;
+    case PROP_FLASH_SEPARATORS:
+      lcd->flash_separators = g_value_get_boolean (value);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 
   /* reschedule the timeout and resize */
@@ -217,25 +217,25 @@ xfce_clock_lcd_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_SHOW_SECONDS:
-        g_value_set_boolean (value, lcd->show_seconds);
-        break;
+    case PROP_SHOW_SECONDS:
+      g_value_set_boolean (value, lcd->show_seconds);
+      break;
 
-      case PROP_SHOW_MILITARY:
-        g_value_set_boolean (value, lcd->show_military);
-        break;
+    case PROP_SHOW_MILITARY:
+      g_value_set_boolean (value, lcd->show_military);
+      break;
 
-      case PROP_SHOW_MERIDIEM:
-        g_value_set_boolean (value, lcd->show_meridiem);
-        break;
+    case PROP_SHOW_MERIDIEM:
+      g_value_set_boolean (value, lcd->show_meridiem);
+      break;
 
-      case PROP_FLASH_SEPARATORS:
-        g_value_set_boolean (value, lcd->flash_separators);
-        break;
+    case PROP_FLASH_SEPARATORS:
+      g_value_set_boolean (value, lcd->flash_separators);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 

@@ -590,45 +590,45 @@ xfce_panel_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_NAME:
-        g_value_set_static_string (value, private->name);
-        break;
+    case PROP_NAME:
+      g_value_set_static_string (value, private->name);
+      break;
 
-      case PROP_DISPLAY_NAME:
-        g_value_set_static_string (value, private->display_name);
-        break;
+    case PROP_DISPLAY_NAME:
+      g_value_set_static_string (value, private->display_name);
+      break;
 
-      case PROP_COMMENT:
-        g_value_set_static_string (value, private->comment);
-        break;
+    case PROP_COMMENT:
+      g_value_set_static_string (value, private->comment);
+      break;
 
-      case PROP_UNIQUE_ID:
-        g_value_set_int (value, private->unique_id);
-        break;
+    case PROP_UNIQUE_ID:
+      g_value_set_int (value, private->unique_id);
+      break;
 
-      case PROP_ARGUMENTS:
-        g_value_set_boxed (value, private->arguments);
-        break;
+    case PROP_ARGUMENTS:
+      g_value_set_boxed (value, private->arguments);
+      break;
 
-      case PROP_ORIENTATION:
-        g_value_set_enum (value, private->orientation);
-        break;
+    case PROP_ORIENTATION:
+      g_value_set_enum (value, private->orientation);
+      break;
 
-      case PROP_SIZE:
-        g_value_set_int (value, private->size);
-        break;
+    case PROP_SIZE:
+      g_value_set_int (value, private->size);
+      break;
 
-      case PROP_SCREEN_POSITION:
-        g_value_set_enum (value, private->screen_position);
-        break;
+    case PROP_SCREEN_POSITION:
+      g_value_set_enum (value, private->screen_position);
+      break;
 
-      case PROP_EXPAND:
-        g_value_set_boolean (value, private->expand);
-        break;
+    case PROP_EXPAND:
+      g_value_set_boolean (value, private->expand);
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -644,34 +644,34 @@ xfce_panel_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_NAME:
-        private->name = g_value_dup_string (value);
-        break;
+    case PROP_NAME:
+      private->name = g_value_dup_string (value);
+      break;
 
-      case PROP_DISPLAY_NAME:
-        private->display_name = g_value_dup_string (value);
-        break;
+    case PROP_DISPLAY_NAME:
+      private->display_name = g_value_dup_string (value);
+      break;
 
-      case PROP_COMMENT:
-        private->comment = g_value_dup_string (value);
-        break;
+    case PROP_COMMENT:
+      private->comment = g_value_dup_string (value);
+      break;
 
-      case PROP_UNIQUE_ID:
-        private->unique_id = g_value_get_int (value);
-        break;
+    case PROP_UNIQUE_ID:
+      private->unique_id = g_value_get_int (value);
+      break;
 
-      case PROP_ARGUMENTS:
-        private->arguments = g_value_dup_boxed (value);
-        break;
+    case PROP_ARGUMENTS:
+      private->arguments = g_value_dup_boxed (value);
+      break;
 
-      case PROP_EXPAND:
-        xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (object),
-                                      g_value_get_boolean (value));
-        break;
+    case PROP_EXPAND:
+      xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (object),
+                                    g_value_get_boolean (value));
+      break;
 
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
     }
 }
 
@@ -1876,21 +1876,21 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   switch (xfce_panel_plugin_arrow_type (plugin))
     {
-      case GTK_ARROW_UP:
-        *y -= requisition.height;
-        break;
+    case GTK_ARROW_UP:
+      *y -= requisition.height;
+      break;
 
-      case GTK_ARROW_DOWN:
-        *y += attach_widget->allocation.height;
-        break;
+    case GTK_ARROW_DOWN:
+      *y += attach_widget->allocation.height;
+      break;
 
-      case GTK_ARROW_LEFT:
-        *x -= requisition.width;
-        break;
+    case GTK_ARROW_LEFT:
+      *x -= requisition.width;
+      break;
 
-      default: /* GTK_ARROW_RIGHT and GTK_ARROW_NONE */
-        *x += attach_widget->allocation.width;
-        break;
+    default: /* GTK_ARROW_RIGHT and GTK_ARROW_NONE */
+      *x += attach_widget->allocation.width;
+      break;
     }
 
   /* get the monitor geometry */
