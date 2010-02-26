@@ -13,6 +13,16 @@ rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
 	@rm -f $(PACKAGE)-$(VERSION).tar.gz
 
+desktopdir = $(datadir)/applications
+desktop_in_in_files = 							\
+	Panel-desktop-handler.desktop.in				\
+	Panel-preferences.desktop.in.in
+desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
+%.desktop.in: %.desktop.in.in
+	sed -e "s,\@libexecdir\@,$(libexecdir),g" < $< > $@
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
+
 EXTRA_DIST = 								\
 	intltool-extract.in						\
 	intltool-merge.in						\
