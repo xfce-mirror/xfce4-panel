@@ -54,10 +54,6 @@
 
 
 
-typedef struct _QueuedData QueuedData;
-
-
-
 static void         panel_plugin_external_provider_init         (XfcePanelPluginProviderIface    *iface);
 static GObject     *panel_plugin_external_constructor           (GType                            type,
                                                                  guint                            n_construct_params,
@@ -72,7 +68,6 @@ static void         panel_plugin_external_set_property          (GObject        
                                                                  const GValue                    *value,
                                                                  GParamSpec                      *pspec);
 static void         panel_plugin_external_realize               (GtkWidget                       *widget);
-static void         panel_plugin_external_unrealize             (GtkWidget                       *widget);
 static gboolean     panel_plugin_external_plug_removed          (GtkSocket                       *socket);
 static void         panel_plugin_external_plug_added            (GtkSocket                       *socket);
 static gboolean     panel_plugin_external_dbus_reply            (PanelPluginExternal             *external,
@@ -83,9 +78,13 @@ static gboolean     panel_plugin_external_dbus_provider_signal  (PanelPluginExte
                                                                  XfcePanelPluginProviderSignal    provider_signal,
                                                                  GError                         **error);
 static void         panel_plugin_external_dbus_set              (PanelPluginExternal             *external,
+                                                                 gboolean                         force);
+static void         panel_plugin_external_queue_add             (PanelPluginExternal             *external,
+                                                                 gboolean                         force,
                                                                  const gchar                     *property,
                                                                  const GValue                    *value);
-static void         panel_plugin_external_dbus_set_noop         (PanelPluginExternal             *external,
+static void         panel_plugin_external_queue_add_noop        (PanelPluginExternal             *external,
+                                                                 gboolean                         force,
                                                                  const gchar                     *property);
 static const gchar *panel_plugin_external_get_name              (XfcePanelPluginProvider         *provider);
 static gint         panel_plugin_external_get_unique_id         (XfcePanelPluginProvider         *provider);
@@ -109,7 +108,6 @@ static void         panel_plugin_external_child_watch           (GPid           
                                                                  gint                             status,
                                                                  gpointer                         user_data);
 static void         panel_plugin_external_child_watch_destroyed (gpointer                         user_data);
-static void         panel_plugin_external_queue_data_free       (QueuedData                      *data);
 
 
 
@@ -140,7 +138,7 @@ struct _PanelPluginExternal
   guint             plug_embedded : 1;
 
   /* dbus message queue */
-  GSList           *dbus_queue;
+  GPtrArray        *queue;
 
   /* counter to count the number of restarts */
   guint             n_restarts;
@@ -152,12 +150,6 @@ struct _PanelPluginExternal
   /* child watch data */
   GPid              pid;
   guint             watch_id;
-};
-
-struct _QueuedData
-{
-  gchar  *property;
-  GValue  value;
 };
 
 enum
@@ -200,7 +192,6 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->realize = panel_plugin_external_realize;
-  gtkwidget_class->unrealize = panel_plugin_external_unrealize;
 
   gtksocket_class = GTK_SOCKET_CLASS (klass);
   gtksocket_class->plug_removed = panel_plugin_external_plug_removed;
@@ -211,11 +202,9 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,
-                  panel_marshal_VOID__STRING_BOXED_UINT,
-                  G_TYPE_NONE, 3,
-                  G_TYPE_STRING,
-                  G_TYPE_VALUE,
-                  G_TYPE_UINT);
+                  g_cclosure_marshal_VOID__BOXED,
+                  G_TYPE_NONE, 1,
+                  PANEL_TYPE_DBUS_SET_SIGNAL);
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
@@ -254,7 +243,7 @@ panel_plugin_external_init (PanelPluginExternal *external)
   external->unique_id = -1;
   external->module = NULL;
   external->arguments = NULL;
-  external->dbus_queue = NULL;
+  external->queue = NULL;
   external->plug_embedded = FALSE;
   external->n_restarts = 0;
   external->show_configure = FALSE;
@@ -333,12 +322,8 @@ panel_plugin_external_finalize (GObject *object)
       g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
     }
 
-  /* free the queue */
-  if (G_UNLIKELY (external->dbus_queue != NULL))
-    {
-      g_slist_foreach (external->dbus_queue, (GFunc) panel_plugin_external_queue_data_free, NULL);
-      g_slist_free (external->dbus_queue);
-    }
+  if (external->queue != NULL)
+    g_ptr_array_free (external->queue, TRUE);
 
   g_strfreev (external->arguments);
 
@@ -482,28 +467,6 @@ panel_plugin_external_realize (GtkWidget *widget)
 
 
 
-static void
-panel_plugin_external_unrealize (GtkWidget *widget)
-{
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
-  GValue               value = { 0, };
-
-  /* create dummy value */
-  g_value_init (&value, G_TYPE_BOOLEAN);
-  g_value_set_boolean (&value, FALSE);
-
-  /* send directly (don't queue here) */
-  g_signal_emit (G_OBJECT (external), external_signals[SET], 0,
-                 SIGNAL_WRAPPER_QUIT, &value, 0);
-
-  /* unset */
-  g_value_unset (&value);
-
-  return (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->unrealize) (widget);
-}
-
-
-
 static gboolean
 panel_plugin_external_plug_removed (GtkSocket *socket)
 {
@@ -603,32 +566,12 @@ static void
 panel_plugin_external_plug_added (GtkSocket *socket)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
-  GSList              *li;
-  QueuedData          *data;
 
   /* plug has been added */
   external->plug_embedded = TRUE;
 
-  if (G_LIKELY (external->dbus_queue))
-    {
-      /* reverse the order fo the queue, since we prepended all the time */
-      external->dbus_queue = g_slist_reverse (external->dbus_queue);
-
-      /* flush the queue */
-      for (li = external->dbus_queue; li != NULL; li = li->next)
-        {
-          data = li->data;
-
-          g_signal_emit (G_OBJECT (external), external_signals[SET], 0,
-                         data->property, &data->value, 0);
-
-          panel_plugin_external_queue_data_free (data);
-        }
-
-      /* free the list */
-      g_slist_free (external->dbus_queue);
-      external->dbus_queue = NULL;
-    }
+  if (external->queue != NULL)
+    panel_plugin_external_dbus_set (external, FALSE);
 }
 
 
@@ -687,51 +630,66 @@ panel_plugin_external_dbus_provider_signal (PanelPluginExternal            *exte
 
 static void
 panel_plugin_external_dbus_set (PanelPluginExternal *external,
-                                const gchar         *property,
-                                const GValue        *value)
+                                gboolean             force)
 {
-  QueuedData *data;
-
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-  panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
+  panel_return_if_fail (external->queue != NULL);
 
-  if (G_LIKELY (external->plug_embedded))
+  if (force || external->plug_embedded)
     {
-      /* directly send the new property */
       g_signal_emit (G_OBJECT (external), external_signals[SET], 0,
-                     property, value, 0);
-    }
-  else
-    {
-      /* queue the property */
-      data = g_slice_new0 (QueuedData);
-      data->property = g_strdup (property);
-      g_value_init (&data->value, G_VALUE_TYPE (value));
-      g_value_copy (value, &data->value);
+                     external->queue);
 
-      /* add to the queue (still in reversed order here) */
-      external->dbus_queue = g_slist_prepend (external->dbus_queue, data);
+      g_ptr_array_free (external->queue, TRUE);
+      external->queue = NULL;
     }
 }
 
 
 
 static void
-panel_plugin_external_dbus_set_noop (PanelPluginExternal *external,
-                                     const gchar         *property)
+panel_plugin_external_queue_add (PanelPluginExternal *external,
+                                 gboolean             force,
+                                 const gchar         *property,
+                                 const GValue        *value)
+{
+  GValue message = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+  panel_return_if_fail (G_TYPE_CHECK_VALUE (value));
+  panel_return_if_fail (!force || external->queue == NULL);
+
+  if (external->queue == NULL)
+    external->queue = g_ptr_array_sized_new (1);
+
+  g_value_init (&message, PANEL_TYPE_DBUS_SET_MESSAGE);
+  g_value_take_boxed (&message, dbus_g_type_specialized_construct (G_VALUE_TYPE (&message)));
+
+  dbus_g_type_struct_set (&message,
+                          DBUS_SET_PROPERTY, property,
+                          DBUS_SET_VALUE, value,
+                          DBUS_SET_REPLY_ID, 0,
+                          G_MAXUINT);
+
+  g_ptr_array_add (external->queue, g_value_get_boxed (&message));
+
+  panel_plugin_external_dbus_set (external, force);
+}
+
+
+
+static void
+panel_plugin_external_queue_add_noop (PanelPluginExternal *external,
+                                      gboolean             force,
+                                      const gchar         *property)
 {
   GValue value = { 0, };
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  /* create a noop value */
-  g_value_init (&value, G_TYPE_BOOLEAN);
-  g_value_set_boolean (&value, FALSE);
-
   /* send the value */
-  panel_plugin_external_dbus_set (external, property, &value);
-
-  /* unset */
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  panel_plugin_external_queue_add (external, force, property, &value);
   g_value_unset (&value);
 }
 
@@ -768,16 +726,13 @@ panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* create a new value */
   g_value_init (&value, G_TYPE_INT);
   g_value_set_int (&value, size);
 
-  /* send the value */
-  panel_plugin_external_dbus_set (PANEL_PLUGIN_EXTERNAL (provider),
-                                  SIGNAL_SET_SIZE,
-                                  &value);
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   FALSE, SIGNAL_SET_SIZE,
+                                   &value);
 
-  /* unset */
   g_value_unset (&value);
 }
 
@@ -792,16 +747,13 @@ panel_plugin_external_set_orientation (XfcePanelPluginProvider *provider,
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* create a new value */
   g_value_init (&value, G_TYPE_UINT);
   g_value_set_uint (&value, orientation);
 
-  /* send the value */
-  panel_plugin_external_dbus_set (PANEL_PLUGIN_EXTERNAL (provider),
-                                  SIGNAL_SET_ORIENTATION,
-                                  &value);
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   FALSE, SIGNAL_SET_ORIENTATION,
+                                   &value);
 
-  /* unset */
   g_value_unset (&value);
 }
 
@@ -816,16 +768,13 @@ panel_plugin_external_set_screen_position (XfcePanelPluginProvider *provider,
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* set the orientation */
   g_value_init (&value, G_TYPE_UINT);
   g_value_set_uint (&value, screen_position);
 
-  /* send the value */
-  panel_plugin_external_dbus_set (PANEL_PLUGIN_EXTERNAL (provider),
-                                  SIGNAL_SET_SCREEN_POSITION,
-                                  &value);
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   FALSE, SIGNAL_SET_SCREEN_POSITION,
+                                   &value);
 
-  /* unset */
   g_value_unset (&value);
 }
 
@@ -838,8 +787,8 @@ panel_plugin_external_save (XfcePanelPluginProvider *provider)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* send signal to wrapper */
-  panel_plugin_external_dbus_set_noop (PANEL_PLUGIN_EXTERNAL (provider),
-                                       SIGNAL_SAVE);
+  panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                        FALSE, SIGNAL_SAVE);
 }
 
 
@@ -862,8 +811,8 @@ panel_plugin_external_show_configure (XfcePanelPluginProvider *provider)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* send signal to wrapper */
-  panel_plugin_external_dbus_set_noop (PANEL_PLUGIN_EXTERNAL (provider),
-                                       SIGNAL_SHOW_CONFIGURE);
+  panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                        FALSE, SIGNAL_SHOW_CONFIGURE);
 }
 
 
@@ -886,8 +835,8 @@ panel_plugin_external_show_about (XfcePanelPluginProvider *provider)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* send signal to wrapper */
-  panel_plugin_external_dbus_set_noop (PANEL_PLUGIN_EXTERNAL (provider),
-                                       SIGNAL_SHOW_ABOUT);
+  panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                        FALSE, SIGNAL_SHOW_ABOUT);
 }
 
 
@@ -899,8 +848,8 @@ panel_plugin_external_remove (XfcePanelPluginProvider *provider)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* send signal to wrapper */
-  panel_plugin_external_dbus_set_noop (PANEL_PLUGIN_EXTERNAL (provider),
-                                       SIGNAL_REMOVE);
+  panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                        FALSE, SIGNAL_REMOVE);
 }
 
 
@@ -915,8 +864,8 @@ panel_plugin_external_remote_event (XfcePanelPluginProvider *provider,
 
   /* TODO handle the return value */
 
-  panel_plugin_external_dbus_set (PANEL_PLUGIN_EXTERNAL (provider),
-                                  name, value);
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   FALSE, name, value);
 
   return TRUE;
 }
@@ -930,16 +879,13 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  /* set the boolean */
   g_value_init (&value, G_TYPE_BOOLEAN);
   g_value_set_boolean (&value, GTK_WIDGET_IS_SENSITIVE (external));
 
-  /* send message */
-  panel_plugin_external_dbus_set (external,
-                                  SIGNAL_WRAPPER_SET_SENSITIVE,
-                                  &value);
+  panel_plugin_external_queue_add (external, FALSE,
+                                   SIGNAL_WRAPPER_SET_SENSITIVE,
+                                   &value);
 
-  /* unset */
   g_value_unset (&value);
 }
 
@@ -980,16 +926,6 @@ panel_plugin_external_child_watch_destroyed (gpointer user_data)
 
 
 
-static void
-panel_plugin_external_queue_data_free (QueuedData *data)
-{
-  g_free (data->property);
-  g_value_unset (&data->value);
-  g_slice_free (QueuedData, data);
-}
-
-
-
 GtkWidget *
 panel_plugin_external_new (PanelModule  *module,
                            gint          unique_id,
@@ -1014,15 +950,12 @@ panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  /* set the boolean */
   g_value_init (&value, G_TYPE_INT);
   g_value_set_int (&value, percentage);
 
-  /* send message */
-  panel_plugin_external_dbus_set (external,
-                                  SIGNAL_WRAPPER_BACKGROUND_ALPHA,
-                                  &value);
+  panel_plugin_external_queue_add (external, FALSE,
+                                   SIGNAL_WRAPPER_BACKGROUND_ALPHA,
+                                   &value);
 
-  /* unset */
   g_value_unset (&value);
 }

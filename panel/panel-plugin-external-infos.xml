@@ -17,9 +17,7 @@
                  return together with the Reply method.
     -->
     <signal name="Set">
-      <arg name="property" type="s" />
-      <arg name="value" type="v" />
-      <arg name="reply_id" type="u" />
+      <arg name="values" type="a(svu)" />
     </signal>
 
     <!--

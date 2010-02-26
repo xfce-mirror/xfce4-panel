@@ -36,8 +36,23 @@
 #define SIGNAL_SHOW_CONFIGURE           SIGNAL_PREFIX_S "e"
 #define SIGNAL_SHOW_ABOUT               SIGNAL_PREFIX_S "f"
 #define SIGNAL_REMOVE                   SIGNAL_PREFIX_S "g"
-#define SIGNAL_WRAPPER_QUIT             SIGNAL_PREFIX_S "h"
-#define SIGNAL_WRAPPER_SET_SENSITIVE    SIGNAL_PREFIX_S "i"
-#define SIGNAL_WRAPPER_BACKGROUND_ALPHA SIGNAL_PREFIX_S "j"
+#define SIGNAL_WRAPPER_SET_SENSITIVE    SIGNAL_PREFIX_S "h"
+#define SIGNAL_WRAPPER_BACKGROUND_ALPHA SIGNAL_PREFIX_S "i"
+
+/* special types for dbus communication */
+#define PANEL_TYPE_DBUS_SET_MESSAGE dbus_g_type_get_struct ("GValueArray", \
+                                                            G_TYPE_STRING, \
+                                                            G_TYPE_VALUE, \
+                                                            G_TYPE_UINT, \
+                                                            G_TYPE_INVALID)
+#define PANEL_TYPE_DBUS_SET_SIGNAL  dbus_g_type_get_collection ("GPtrArray", \
+                                                                PANEL_TYPE_DBUS_SET_MESSAGE)
+
+enum
+{
+  DBUS_SET_PROPERTY,
+  DBUS_SET_VALUE,
+  DBUS_SET_REPLY_ID
+};
 
 #endif /* !__PANEL_DBUS_H__ */
