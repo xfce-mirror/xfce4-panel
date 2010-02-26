@@ -149,19 +149,17 @@ main (gint argc, gchar **argv)
       if (G_LIKELY (error))
         {
           /* print error */
-          g_print ("%s: %s.\n", G_LOG_DOMAIN, error->message);
+          g_print ("%s: %s.\n", PACKAGE_NAME, error->message);
           g_print (_("Type '%s --help' for usage."), G_LOG_DOMAIN);
           g_print ("\n");
 
           /* cleanup */
           g_error_free (error);
-          }
-        else
-          {
-            g_error ("Unable to open display.");
-          }
-
-        return EXIT_FAILURE;
+        }
+      else
+        {
+          g_error ("Unable to open display.");
+        }
 
       /* leave */
       return EXIT_FAILURE;
@@ -230,8 +228,14 @@ main (gint argc, gchar **argv)
     }
 
   /* initialize xfconf */
-  /* TODO */
-  xfconf_init (NULL);
+  if (!xfconf_init (&error))
+    {
+      /* print error and exit */
+      g_error ("Failed to connect to xfconf daemon: %s.", error->message);
+      g_error_free (error);
+
+      return EXIT_FAILURE;
+    }
 
   /* create dbus service */
   dbus_service = panel_dbus_service_get ();
