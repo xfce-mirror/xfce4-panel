@@ -1,10 +1,10 @@
-/* $Id: xfce-tray-manager.c 26412 2007-12-02 09:48:17Z nick $ */
+/* $Id$ */
 /*
  * Copyright (c) 2002      Anders Carlsson <andersca@gnu.org>
  * Copyright (c) 2003-2004 Benedikt Meurer <benny@xfce.org>
  * Copyright (c) 2003-2004 Olivier Fourdan <fourdan@xfce.org>
  * Copyright (c) 2003-2006 Vincent Untz
- * Copyright (c) 2007      Nick Schermer <nick@xfce.org>
+ * Copyright (c) 2007-2009 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
