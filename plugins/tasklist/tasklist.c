@@ -55,7 +55,9 @@ struct _TasklistPlugin
   XfconfChannel *channel;
 
   /* the tasklist widget */
+  GtkWidget     *box;
   GtkWidget     *tasklist;
+  GtkWidget     *handle;
 };
 
 
@@ -65,6 +67,7 @@ static void tasklist_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static void tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
 static gboolean tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
 static void tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
+static gboolean tasklist_plugin_handle_expose_event (GtkWidget *widget, GdkEventExpose *event, TasklistPlugin *plugin);
 
 
 
@@ -97,9 +100,20 @@ tasklist_plugin_init (TasklistPlugin *plugin)
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
-  /* create the tasklist */
+  /* create widgets */
+  plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
+  gtk_widget_show (plugin->box);
+
+  plugin->handle = gtk_alignment_new (0.00, 0.00, 0.00, 0.00);
+  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->handle, TRUE, TRUE, 0);
+  g_signal_connect (G_OBJECT (plugin->handle), "expose-event",
+      G_CALLBACK (tasklist_plugin_handle_expose_event), plugin);
+  gtk_widget_set_size_request (plugin->handle, 8, 8);
+  gtk_widget_show (plugin->handle);
+
   plugin->tasklist = g_object_new (XFCE_TYPE_TASKLIST, NULL);
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->tasklist);
+  gtk_box_pack_start (GTK_BOX (plugin->box), plugin->tasklist, FALSE, TRUE, 0);
 }
 
 
@@ -227,3 +241,37 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     }
 }
 
+
+
+static gboolean
+tasklist_plugin_handle_expose_event (GtkWidget *widget,
+                                     GdkEventExpose *event,
+                                     TasklistPlugin *plugin)
+{
+  GtkOrientation orientation;
+
+  panel_return_val_if_fail (XFCE_IS_TASKLIST_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (plugin->handle == widget, FALSE);
+
+  if (!GTK_WIDGET_DRAWABLE (widget))
+    return FALSE;
+
+  /* get the orientation */
+  if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+      GTK_ORIENTATION_HORIZONTAL)
+    orientation = GTK_ORIENTATION_VERTICAL;
+  else
+    orientation = GTK_ORIENTATION_HORIZONTAL;
+
+  /* paint the handle */
+  gtk_paint_handle (widget->style, widget->window,
+                    GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
+                    &(event->area), widget, "handlebox",
+                    widget->allocation.x,
+                    widget->allocation.y,
+                    widget->allocation.width,
+                    widget->allocation.height,
+                    orientation);
+
+  return TRUE;
+}
