@@ -62,7 +62,7 @@ static void launcher_plugin_save (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
 static gboolean launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
 static void launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
-static void launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin, gint position);
+static void launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin, XfceScreenPosition position);
 
 static void launcher_plugin_icon_theme_changed (GtkIconTheme *icon_theme, LauncherPlugin *plugin);
 
@@ -981,8 +981,8 @@ launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static void
-launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
-                                         gint             position)
+launcher_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
+                                         XfceScreenPosition  position)
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
 

@@ -82,43 +82,43 @@ enum
 
 
 
-static void      window_menu_plugin_get_property            (GObject          *object,
-                                                             guint             prop_id,
-                                                             GValue           *value,
-                                                             GParamSpec       *pspec);
-static void      window_menu_plugin_set_property            (GObject          *object,
-                                                             guint             prop_id,
-                                                             const GValue     *value,
-                                                             GParamSpec       *pspec);
-static void      window_menu_plugin_screen_changed          (GtkWidget        *widget,
-                                                             GdkScreen        *previous_screen);
-static void      window_menu_plugin_construct               (XfcePanelPlugin  *panel_plugin);
-static void      window_menu_plugin_free_data               (XfcePanelPlugin  *panel_plugin);
-static void      window_menu_plugin_screen_position_changed (XfcePanelPlugin  *panel_plugin,
-                                                             gint             position);
-static gboolean  window_menu_plugin_size_changed            (XfcePanelPlugin  *panel_plugin,
-                                                             gint              size);
-static void      window_menu_plugin_configure_plugin        (XfcePanelPlugin  *panel_plugin);
-static void      window_menu_plugin_active_window_changed   (WnckScreen       *screen,
-                                                             WnckWindow       *previous_window,
-                                                             WindowMenuPlugin *plugin);
-static void      window_menu_plugin_window_state_changed    (WnckWindow       *window,
-                                                             WnckWindowState   changed_mask,
-                                                             WnckWindowState   new_state,
-                                                             WindowMenuPlugin *plugin);
-static void      window_menu_plugin_window_opened           (WnckScreen       *screen,
-                                                             WnckWindow       *window,
-                                                             WindowMenuPlugin *plugin);
-static void      window_menu_plugin_window_closed           (WnckScreen       *screen,
-                                                             WnckWindow       *window,
-                                                             WindowMenuPlugin *plugin);
-static void      window_menu_plugin_windows_disconnect      (WindowMenuPlugin *plugin);
-static void      window_menu_plugin_windows_connect         (WindowMenuPlugin *plugin,
-                                                             gboolean          traverse_windows);
-static gboolean  window_menu_plugin_button_press_event      (GtkWidget        *button,
-                                                             GdkEventButton   *event,
-                                                             WindowMenuPlugin *plugin);
-static GtkWidget *window_menu_plugin_menu_new               (WindowMenuPlugin *plugin);
+static void      window_menu_plugin_get_property            (GObject            *object,
+                                                             guint               prop_id,
+                                                             GValue             *value,
+                                                             GParamSpec         *pspec);
+static void      window_menu_plugin_set_property            (GObject            *object,
+                                                             guint               prop_id,
+                                                             const GValue       *value,
+                                                             GParamSpec         *pspec);
+static void      window_menu_plugin_screen_changed          (GtkWidget          *widget,
+                                                             GdkScreen          *previous_screen);
+static void      window_menu_plugin_construct               (XfcePanelPlugin    *panel_plugin);
+static void      window_menu_plugin_free_data               (XfcePanelPlugin    *panel_plugin);
+static void      window_menu_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
+                                                             XfceScreenPosition  screen_position);
+static gboolean  window_menu_plugin_size_changed            (XfcePanelPlugin    *panel_plugin,
+                                                             gint                size);
+static void      window_menu_plugin_configure_plugin        (XfcePanelPlugin    *panel_plugin);
+static void      window_menu_plugin_active_window_changed   (WnckScreen         *screen,
+                                                             WnckWindow         *previous_window,
+                                                             WindowMenuPlugin   *plugin);
+static void      window_menu_plugin_window_state_changed    (WnckWindow         *window,
+                                                             WnckWindowState     changed_mask,
+                                                             WnckWindowState     new_state,
+                                                             WindowMenuPlugin   *plugin);
+static void      window_menu_plugin_window_opened           (WnckScreen         *screen,
+                                                             WnckWindow         *window,
+                                                             WindowMenuPlugin   *plugin);
+static void      window_menu_plugin_window_closed           (WnckScreen         *screen,
+                                                             WnckWindow         *window,
+                                                             WindowMenuPlugin   *plugin);
+static void      window_menu_plugin_windows_disconnect      (WindowMenuPlugin   *plugin);
+static void      window_menu_plugin_windows_connect         (WindowMenuPlugin   *plugin,
+                                                             gboolean            traverse_windows);
+static gboolean  window_menu_plugin_button_press_event      (GtkWidget          *button,
+                                                             GdkEventButton     *event,
+                                                             WindowMenuPlugin   *plugin);
+static GtkWidget *window_menu_plugin_menu_new               (WindowMenuPlugin   *plugin);
 
 
 
@@ -439,8 +439,8 @@ window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 static void
-window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
-                                            gint             position)
+window_menu_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
+                                            XfceScreenPosition  screen_position)
 {
   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
   GtkArrowType      arrow_type = GTK_ARROW_NONE;

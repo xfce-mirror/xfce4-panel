@@ -39,33 +39,33 @@
 
 
 
-static void     systray_plugin_get_property                 (GObject         *object,
-                                                             guint            prop_id,
-                                                             GValue          *value,
-                                                             GParamSpec      *pspec);
-static void     systray_plugin_set_property                 (GObject         *object,
-                                                             guint            prop_id,
-                                                             const GValue    *value,
-                                                             GParamSpec      *pspec);
-static void     systray_plugin_construct                    (XfcePanelPlugin *panel_plugin);
-static void     systray_plugin_free_data                    (XfcePanelPlugin *panel_plugin);
-static void     systray_plugin_screen_position_changed      (XfcePanelPlugin *panel_plugin,
-                                                             gint             screen_position);
-static void     systray_plugin_orientation_changed          (XfcePanelPlugin *panel_plugin,
-                                                             GtkOrientation   orientation);
-static gboolean systray_plugin_size_changed                 (XfcePanelPlugin *panel_plugin,
+static void     systray_plugin_get_property                 (GObject            *object,
+                                                             guint               prop_id,
+                                                             GValue             *value,
+                                                             GParamSpec         *pspec);
+static void     systray_plugin_set_property                 (GObject            *object,
+                                                             guint               prop_id,
+                                                             const GValue       *value,
+                                                             GParamSpec         *pspec);
+static void     systray_plugin_construct                    (XfcePanelPlugin    *panel_plugin);
+static void     systray_plugin_free_data                    (XfcePanelPlugin    *panel_plugin);
+static void     systray_plugin_screen_position_changed      (XfcePanelPlugin    *panel_plugin,
+                                                             XfceScreenPosition  screen_position);
+static void     systray_plugin_orientation_changed          (XfcePanelPlugin    *panel_plugin,
+                                                             GtkOrientation      orientation);
+static gboolean systray_plugin_size_changed                 (XfcePanelPlugin    *panel_plugin,
                                                              gint size);
-static void     systray_plugin_configure_plugin             (XfcePanelPlugin *panel_plugin);
-static void     systray_plugin_icon_added                   (SystrayManager  *manager,
-                                                             GtkWidget       *icon,
-                                                             SystrayPlugin   *plugin);
-static void     systray_plugin_icon_removed                 (SystrayManager  *manager,
-                                                             GtkWidget       *icon,
-                                                             SystrayPlugin   *plugin);
-static void     systray_plugin_lost_selection               (SystrayManager  *manager,
-                                                             SystrayPlugin   *plugin);
-static void     systray_plugin_dialog_add_application_names (SystrayPlugin   *plugin,
-                                                             GtkListStore    *store);
+static void     systray_plugin_configure_plugin             (XfcePanelPlugin    *panel_plugin);
+static void     systray_plugin_icon_added                   (SystrayManager     *manager,
+                                                             GtkWidget          *icon,
+                                                             SystrayPlugin      *plugin);
+static void     systray_plugin_icon_removed                 (SystrayManager     *manager,
+                                                             GtkWidget          *icon,
+                                                             SystrayPlugin      *plugin);
+static void     systray_plugin_lost_selection               (SystrayManager     *manager,
+                                                             SystrayPlugin      *plugin);
+static void     systray_plugin_dialog_add_application_names (SystrayPlugin      *plugin,
+                                                             GtkListStore       *store);
 
 
 
@@ -334,11 +334,10 @@ systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 static void
-systray_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
-                                        gint             screen_position)
+systray_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
+                                        XfceScreenPosition  screen_position)
 {
   SystrayPlugin      *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
-  XfceScreenPosition  position;
   GdkScreen          *screen;
   GdkRectangle        geom;
   gint                mon, x, y;
@@ -346,11 +345,8 @@ systray_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 
   panel_return_if_fail (GTK_WIDGET_REALIZED (panel_plugin));
 
-  /* get the plugin position */
-  position = xfce_panel_plugin_get_screen_position (panel_plugin);
-
   /* get the button position */
-  switch (position)
+  switch (screen_position)
     {
       /*    horizontal west */
       case XFCE_SCREEN_POSITION_NW_H:
@@ -389,7 +385,7 @@ systray_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
         gdk_window_get_root_origin (GTK_WIDGET (panel_plugin)->window, &x, &y);
 
         /* get the position based on the screen position */
-        if (position == XFCE_SCREEN_POSITION_FLOATING_H)
+        if (screen_position == XFCE_SCREEN_POSITION_FLOATING_H)
             arrow_type = ((x < (geom.x + geom.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT);
         else
             arrow_type = ((y < (geom.y + geom.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP);
