@@ -27,6 +27,7 @@
 #include <glib-object.h>
 
 G_BEGIN_DECLS
+
 /**
  * XfceScreenPosition
  * @XFCE_SCREEN_POSITION_NONE       : No position has been set.

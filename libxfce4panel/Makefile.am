@@ -21,6 +21,7 @@ libxfce4panel_built_sources = \
 
 libxfce4panel_headers = \
 	libxfce4panel.h \
+	libxfce4panel-config.h \
 	libxfce4panel-deprecated.h \
 	libxfce4panel-enums.h \
 	xfce-arrow-button.h \
@@ -41,6 +42,7 @@ libxfce4panel_include_HEADERS = \
 libxfce4panel_1_0_la_SOURCES = \
 	$(libxfce4panel_built_sources) \
 	$(libxfce4panel_headers) \
+	libxfce4panel-config.c \
 	xfce-arrow-button.c \
 	xfce-hvbox.c \
 	xfce-panel-convenience.c \
