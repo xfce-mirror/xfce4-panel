@@ -3,6 +3,7 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libpanel-common\" \
 	-DLIBXFCE4PANEL_COMPILATION \
+	-DHELPDIR=\"$(docdir)/html\" \
 	$(PLATFORM_CPPFLAGS)
 
 noinst_LTLIBRARIES = \
@@ -19,6 +20,8 @@ libpanel_common_la_SOURCES = \
 libpanel_common_la_CFLAGS = \
 	$(XFCONF_CFLAGS) \
 	$(GTK_CFLAGS) \
+	$(EXO_CFLAGS) \
+	$(LIBXFCE4UI_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libpanel_common_la_LDFLAGS = \
@@ -27,7 +30,9 @@ libpanel_common_la_LDFLAGS = \
 
 libpanel_common_la_LIBADD = \
 	$(XFCONF_LIBS) \
-	$(GTK_LIBS)
+	$(GTK_LIBS) \
+	$(LIBXFCE4UI_LIBS) \
+	$(EXO_LIBS)
 
 EXTRA_DIST = \
 	panel-dbus.h \

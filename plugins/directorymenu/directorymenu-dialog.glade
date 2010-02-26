@@ -39,8 +39,8 @@
                         <child>
                           <object class="GtkFileChooserButton" id="base-directory">
                             <property name="visible">True</property>
-                            <property name="action">select-folder</property>
                             <property name="local_only">False</property>
+                            <property name="action">select-folder</property>
                             <property name="title" translatable="yes">Select A Directory</property>
                           </object>
                           <packing>
@@ -212,6 +212,21 @@
                 <property name="position">0</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkButton" id="help-button">
+                <property name="label">gtk-help</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+                <property name="secondary">True</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -223,13 +238,14 @@
     </child>
     <action-widgets>
       <action-widget response="0">close-button</action-widget>
+      <action-widget response="0">help-button</action-widget>
     </action-widgets>
   </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="label7"/>
-      <widget name="label2"/>
       <widget name="label4"/>
+      <widget name="label2"/>
+      <widget name="label7"/>
     </widgets>
   </object>
 </interface>

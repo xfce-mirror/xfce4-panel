@@ -27,9 +27,13 @@
   if (xfce_titled_dialog_get_type () == 0) \
     return;
 
-GtkBuilder *panel_builder_new (XfcePanelPlugin  *panel_plugin,
-                               const gchar      *buffer,
-                               gsize             length,
-                               GObject         **dialog_return) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkBuilder *panel_builder_new       (XfcePanelPlugin  *panel_plugin,
+                                     const gchar      *buffer,
+                                     gsize             length,
+                                     GObject         **dialog_return) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
+void        panel_builder_show_help (GtkWindow        *parent,
+                                     const gchar      *page,
+                                     const gchar      *offset);
 
 #endif /* !__PANEL_BUILDER_H__ */

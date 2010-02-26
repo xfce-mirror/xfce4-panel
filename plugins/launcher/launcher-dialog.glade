@@ -368,7 +368,7 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="help-button">
                 <property name="label">gtk-help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -406,7 +406,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="1">button1</action-widget>
+      <action-widget response="1">help-button</action-widget>
       <action-widget response="0">button2</action-widget>
     </action-widgets>
   </object>

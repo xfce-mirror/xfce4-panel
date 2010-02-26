@@ -25,6 +25,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <common/panel-private.h>
+#include <common/panel-builder.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -262,25 +263,12 @@ panel_preferences_dialog_response (GtkWidget              *window,
                                    gint                    response_id,
                                    PanelPreferencesDialog *dialog)
 {
-  GError    *error = NULL;
-  GdkScreen *screen;
-
   panel_return_if_fail (GTK_IS_DIALOG (window));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   if (G_UNLIKELY (response_id == 1))
     {
-      /* get the dialog screen */
-      screen = gtk_widget_get_screen (window);
-
-      /* open the help url */
-      if (!gtk_show_uri (screen, PREFERENCES_HELP_URL,
-                         gtk_get_current_event_time (), &error))
-        {
-          xfce_dialog_show_error (GTK_WINDOW (window), error,
-                                  _("Failed to open manual"));
-          g_error_free (error);
-        }
+      panel_builder_show_help (GTK_WINDOW (window), "preferences", NULL);
     }
   else
     {

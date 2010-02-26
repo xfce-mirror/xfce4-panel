@@ -20,8 +20,32 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_LOCALE_H
+#include <locale.h>
+#endif
+
+#include <libxfce4ui/libxfce4ui.h>
+#include <exo/exo.h>
+
 #include <common/panel-private.h>
 #include <common/panel-builder.h>
+
+
+
+static void
+panel_builder_help_button_clicked (GtkWidget       *button,
+                                   XfcePanelPlugin *panel_plugin)
+{
+  GtkWidget *toplevel;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin));
+  panel_return_if_fail (GTK_IS_WIDGET (button));
+
+  toplevel = gtk_widget_get_toplevel (button);
+  panel_builder_show_help (GTK_WINDOW (toplevel),
+      xfce_panel_plugin_get_name (panel_plugin),
+      "properties");
+}
 
 
 
@@ -55,7 +79,12 @@ panel_builder_new (XfcePanelPlugin  *panel_plugin,
           button = gtk_builder_get_object (builder, "close-button");
           if (G_LIKELY (button != NULL))
             g_signal_connect_swapped (G_OBJECT (button), "clicked",
-                                      G_CALLBACK (gtk_widget_destroy), dialog);
+                G_CALLBACK (gtk_widget_destroy), dialog);
+
+          button = gtk_builder_get_object (builder, "help-button");
+          if (G_LIKELY (button != NULL))
+            g_signal_connect (G_OBJECT (button), "clicked",
+                G_CALLBACK (panel_builder_help_button_clicked), panel_plugin);
 
           if (G_LIKELY (dialog_return != NULL))
             *dialog_return = dialog;
@@ -78,3 +107,70 @@ panel_builder_new (XfcePanelPlugin  *panel_plugin,
   return NULL;
 }
 
+
+
+void
+panel_builder_show_help (GtkWindow   *parent,
+                         const gchar *page,
+                         const gchar *offset)
+{
+  GdkScreen *screen;
+  gchar     *filename;
+  gchar     *uri = NULL;
+  GError    *error = NULL;
+  gchar     *locale;
+  gboolean   exists;
+
+  panel_return_if_fail (parent == NULL || GTK_IS_WINDOW (parent));
+
+  if (G_LIKELY (parent != NULL))
+    screen = gtk_window_get_screen (parent);
+  else
+    screen = gdk_screen_get_default ();
+
+  if (page == NULL)
+    page = "index";
+
+  /* get the locale of the user */
+  locale = g_strdup (setlocale (LC_MESSAGES, NULL));
+  if (G_LIKELY (locale != NULL))
+    locale = g_strdelimit (locale, "._", '\0');
+  else
+    locale = g_strdup ("C");
+
+  /* check if the help page exists on the system */
+  filename = g_strconcat (HELPDIR, G_DIR_SEPARATOR_S, locale,
+                          G_DIR_SEPARATOR_S, page, ".html", NULL);
+  exists = g_file_test (filename, G_FILE_TEST_EXISTS);
+  if (!exists)
+    {
+      g_free (filename);
+      filename = g_strconcat (HELPDIR, G_DIR_SEPARATOR_S "C"
+                              G_DIR_SEPARATOR_S, page, ".html", NULL);
+      exists = g_file_test (filename, G_FILE_TEST_EXISTS);
+    }
+
+  if (G_LIKELY (exists))
+    uri = g_strconcat ("file://", filename, "#", offset, NULL);
+  else if (xfce_dialog_confirm (parent, GTK_STOCK_HELP, _("_Read Online"),
+               _("You can read the user manual online. This manual may however "
+                 "not exactly match your panel version."),
+               _("The Xfce Panel user manual is not installed on your computer")))
+    uri = g_strconcat ("http://foo-projects.org/~nick/docs/xfce4-panel/?lang=",
+                       locale, "&page=", page, "&offset=", offset, NULL);
+
+  g_free (filename);
+  g_free (locale);
+
+  /* try to run the documentation browser */
+  if (uri != NULL
+      && !exo_execute_preferred_application_on_screen ("WebBrowser", uri, NULL,
+                                                       NULL, screen, &error))
+    {
+      /* display an error message to the user */
+      xfce_dialog_show_error (parent, error, _("Failed to open the documentation browser"));
+      g_error_free (error);
+    }
+
+  g_free (uri);
+}

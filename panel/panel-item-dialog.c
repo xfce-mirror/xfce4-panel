@@ -29,6 +29,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
+#include <common/panel-builder.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include <panel/panel-application.h>
@@ -291,9 +292,7 @@ static void
 panel_item_dialog_response (GtkDialog *gtk_dialog,
                             gint       response_id)
 {
-  GError          *error = NULL;
   PanelItemDialog *dialog = PANEL_ITEM_DIALOG (gtk_dialog);
-  GdkScreen       *screen;
   PanelModule     *module;
 
   panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
@@ -302,14 +301,7 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
 
   if (response_id == GTK_RESPONSE_HELP)
     {
-      screen = gtk_widget_get_screen (GTK_WIDGET (gtk_dialog));
-      if (!gtk_show_uri (screen, ITEMS_HELP_URL,
-                         gtk_get_current_event_time (), &error))
-        {
-          xfce_dialog_show_error (GTK_WINDOW (gtk_dialog), error,
-                                  _("Failed to open manual"));
-          g_error_free (error);
-        }
+      panel_builder_show_help (GTK_WINDOW (gtk_dialog), "add-new-items", NULL);
     }
   else if (response_id == GTK_RESPONSE_OK)
     {
