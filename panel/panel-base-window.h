@@ -41,8 +41,7 @@ enum _PanelBorders
   PANEL_BORDER_LEFT   = 1 << 0,
   PANEL_BORDER_RIGHT  = 1 << 1,
   PANEL_BORDER_TOP    = 1 << 2,
-  PANEL_BORDER_BOTTOM = 1 << 3,
-  PANEL_BORDER_MASK   = 0x0f
+  PANEL_BORDER_BOTTOM = 1 << 3
 };
 
 struct _PanelBaseWindowClass

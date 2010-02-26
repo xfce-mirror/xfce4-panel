@@ -168,7 +168,7 @@ panel_base_window_init (PanelBaseWindow *window)
 
   window->priv->enter_opacity = 1.00;
   window->priv->leave_opacity = 1.00;
-  window->priv->borders = PANEL_BORDER_MASK;
+  window->priv->borders = PANEL_BORDER_NONE;
   window->priv->active_timeout_id = 0;
 
   /* set colormap */
@@ -597,7 +597,8 @@ panel_base_window_get_borders (PanelBaseWindow *window)
 
   /* show all borders for the marching ants */
   if (priv->active_timeout_id != 0)
-    return PANEL_BORDER_MASK;
+    return PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM
+           | PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT;
 
   return priv->borders;
 }

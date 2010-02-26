@@ -1461,56 +1461,58 @@ panel_window_screen_force_update (PanelWindow *window)
 static void
 panel_window_screen_update_borders (PanelWindow *window)
 {
-  PanelBorders borders = PANEL_BORDER_MASK;
-  PanelBorders unset_borders = 0;
+  PanelBorders borders;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  /* the border we want to hide */
   switch (window->snap_position)
     {
     case SNAP_POSITION_NONE:
+      borders = PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM
+                | PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT;
       break;
 
     case SNAP_POSITION_E:
     case SNAP_POSITION_EC:
-      unset_borders = PANEL_BORDER_RIGHT;
+      borders = PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM
+                | PANEL_BORDER_LEFT;
       break;
 
     case SNAP_POSITION_W:
     case SNAP_POSITION_WC:
-      unset_borders = PANEL_BORDER_LEFT;
+      borders = PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM
+                | PANEL_BORDER_RIGHT;
       break;
 
     case SNAP_POSITION_N:
     case SNAP_POSITION_NC:
-      unset_borders = PANEL_BORDER_TOP;
+      borders = PANEL_BORDER_BOTTOM | PANEL_BORDER_LEFT
+                | PANEL_BORDER_RIGHT;
       break;
 
     case SNAP_POSITION_S:
     case SNAP_POSITION_SC:
-      unset_borders = PANEL_BORDER_BOTTOM;
+      borders = PANEL_BORDER_TOP | PANEL_BORDER_LEFT
+                | PANEL_BORDER_RIGHT;
       break;
 
     case SNAP_POSITION_NE:
-      unset_borders = PANEL_BORDER_RIGHT | PANEL_BORDER_TOP;
+
+      borders = PANEL_BORDER_BOTTOM | PANEL_BORDER_LEFT;
       break;
 
     case SNAP_POSITION_SE:
-      unset_borders = PANEL_BORDER_RIGHT | PANEL_BORDER_BOTTOM;
+      borders = PANEL_BORDER_LEFT | PANEL_BORDER_TOP;
       break;
 
     case SNAP_POSITION_NW:
-      unset_borders = PANEL_BORDER_LEFT | PANEL_BORDER_TOP;
+      borders = PANEL_BORDER_RIGHT | PANEL_BORDER_BOTTOM;
       break;
 
     case SNAP_POSITION_SW:
-      unset_borders = PANEL_BORDER_LEFT | PANEL_BORDER_BOTTOM;
+      borders = PANEL_BORDER_RIGHT | PANEL_BORDER_TOP;
       break;
     }
-
-  /* the visible borders */
-  PANEL_UNSET_FLAG (borders, unset_borders);
 
   /* don't show the side borders if the length is 100% */
   if (window->length == 1.00)
