@@ -292,6 +292,35 @@ launcher_dialog_add_selection_changed (GtkTreeSelection     *selection,
 
 
 
+static gboolean
+launcher_dialog_add_button_press_event (GtkTreeView          *treeview,
+                                        GdkEventButton       *event,
+                                        LauncherPluginDialog *dialog)
+{
+  GObject *object;
+
+  panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
+  panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
+
+  if (event->button == 1  && event->type == GDK_2BUTTON_PRESS
+      && event->window == gtk_tree_view_get_bin_window (treeview)
+      && gtk_tree_view_get_path_at_pos (treeview, event->x, event->y,
+                                        NULL, NULL, NULL, NULL))
+    {
+      object = gtk_builder_get_object (dialog->builder, "button-add");
+      panel_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
+      if (gtk_widget_get_sensitive (GTK_WIDGET (object)))
+        {
+          gtk_button_clicked (GTK_BUTTON (object));
+          return TRUE;
+        }
+    }
+
+  return FALSE;
+}
+
+
+
 static void
 launcher_dialog_add_response (GtkWidget            *widget,
                               gint                  response_id,
@@ -547,6 +576,35 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
 
   object = gtk_builder_get_object (dialog->builder, "arrow-position-label");
   gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
+}
+
+
+
+static gboolean
+launcher_dialog_tree_button_press_event (GtkTreeView          *treeview,
+                                         GdkEventButton       *event,
+                                         LauncherPluginDialog *dialog)
+{
+  GObject *object;
+
+  panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
+  panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
+
+  if (event->button == 1  && event->type == GDK_2BUTTON_PRESS
+      && event->window == gtk_tree_view_get_bin_window (treeview)
+      && gtk_tree_view_get_path_at_pos (treeview, event->x, event->y,
+                                        NULL, NULL, NULL, NULL))
+    {
+      object = gtk_builder_get_object (dialog->builder, "item-edit");
+      panel_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
+      if (gtk_widget_get_sensitive (GTK_WIDGET (object)))
+        {
+          gtk_button_clicked (GTK_BUTTON (object));
+          return TRUE;
+        }
+    }
+
+  return FALSE;
 }
 
 
@@ -931,6 +989,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
   g_signal_connect (G_OBJECT (selection), "changed",
       G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
   launcher_dialog_tree_selection_changed (selection, dialog);
+  g_signal_connect (G_OBJECT (object), "button-press-event",
+      G_CALLBACK (launcher_dialog_tree_button_press_event), dialog);
 
   /* connect bindings to the advanced properties */
   for (i = 0; i < G_N_ELEMENTS (binding_names); i++)
@@ -963,6 +1023,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
   g_signal_connect (G_OBJECT (selection), "changed",
       G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
+  g_signal_connect (G_OBJECT (object), "button-press-event",
+      G_CALLBACK (launcher_dialog_add_button_press_event), dialog);
 
   /* setup search filter in the add dialog */
   object = gtk_builder_get_object (builder, "add-store-filter");
