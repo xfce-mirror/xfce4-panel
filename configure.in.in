@@ -47,17 +47,15 @@ dnl *** Check for UNIX variants ***
 dnl *******************************
 AC_AIX()
 AC_ISC_POSIX()
-AC_MINIX()
-AM_CONDITIONAL([HAVE_CYGWIN], [test "`uname | grep \"CYGWIN\"`" != ""])
 
 dnl ********************************
 dnl *** Check for basic programs ***
 dnl ********************************
 AC_PROG_CC()
+AM_PROG_CC_C_O()
 AC_PROG_LD()
 AC_PROG_INSTALL()
 AC_PROG_INTLTOOL()
-AC_CHECK_PROGS([PERL], [perl5 perl])
 
 dnl **************************
 dnl *** Initialize libtool ***
@@ -242,6 +240,7 @@ wrapper/Makefile
 plugins/Makefile
 plugins/clock/Makefile
 plugins/launcher/Makefile
+plugins/pager/Makefile
 plugins/separator/Makefile
 plugins/showdesktop/Makefile
 plugins/systray/Makefile

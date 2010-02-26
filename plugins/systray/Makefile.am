@@ -56,7 +56,7 @@ libsystray_la_DEPENDENCIES = \
 desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_in_files = systray.desktop.in.in
 desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
-%.desktop.in: %.desktop.in.in
+systray.desktop.in: $(desktop_in_in_files)
 	sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

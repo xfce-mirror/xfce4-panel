@@ -3,6 +3,7 @@
 SUBDIRS = \
 	clock \
 	launcher \
+	pager \
 	separator \
 	showdesktop \
 	systray \

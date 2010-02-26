@@ -12,10 +12,13 @@ plugindir = \
 plugin_LTLIBRARIES = \
 	libseparator.la
 
-libseparator_la_SOURCES = \
-	separator.c \
-	separator.h \
+libseparator_built_sources = \
 	separator-dialog_glade.h
+
+libseparator_la_SOURCES = \
+	$(libseparator_built_sources) \
+	separator.c \
+	separator.h
 
 libseparator_la_CFLAGS = \
 	$(GTK_CFLAGS) \
@@ -28,12 +31,8 @@ libseparator_la_CFLAGS = \
 libseparator_la_LDFLAGS = \
 	-avoid-version \
 	-module \
+	-no-undefined \
 	$(PLATFORM_LDFLAGS)
-
-if HAVE_CYGWIN
-libseparator_la_LDFLAGS += \
-	-no-undefined
-endif
 
 libseparator_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
@@ -48,7 +47,10 @@ libseparator_la_DEPENDENCIES = \
 
 if MAINTAINER_MODE
 BUILT_SOURCES = \
-	separator-dialog_glade.h
+	$(libseparator_built_sources)
+
+DISTCLEANFILES = \
+	$(libclock_built_sources)
 
 separator-dialog_glade.h: separator-dialog.glade
 	exo-csource --static --strip-comments --strip-content --name=separator_dialog_glade $< >$@
@@ -60,7 +62,7 @@ endif
 desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_in_files = separator.desktop.in.in
 desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
-%.desktop.in: %.desktop.in.in
+separator.desktop.in: $(desktop_in_in_files)
 	sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

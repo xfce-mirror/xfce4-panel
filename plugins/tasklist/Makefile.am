@@ -13,11 +13,14 @@ plugindir = \
 plugin_LTLIBRARIES = \
 	libtasklist.la
 
+libtasklist_built_sources = \
+	tasklist-dialog_glade.h
+
 libtasklist_la_SOURCES = \
+	$(libtasklist_built_sources) \
 	tasklist.c \
 	tasklist-widget.c \
-	tasklist-widget.h \
-	tasklist-dialog_glade.h
+	tasklist-widget.h
 
 libtasklist_la_CFLAGS = \
 	$(GTK_CFLAGS) \
@@ -48,7 +51,10 @@ libtasklist_la_DEPENDENCIES = \
 
 if MAINTAINER_MODE
 BUILT_SOURCES = \
-	tasklist-dialog_glade.h
+	$(libtasklist_built_sources)
+
+DISTCLEANFILES = \
+	$(libclock_built_sources)
 
 tasklist-dialog_glade.h: tasklist-dialog.glade
 	exo-csource --static --strip-comments --strip-content --name=tasklist_dialog_glade $< >$@
@@ -60,7 +66,7 @@ endif
 desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_in_files = tasklist.desktop.in.in
 desktop_in_files =  $(desktop_in_in_files:.desktop.in.in=.desktop.in)
-%.desktop.in: %.desktop.in.in
+tasklist.desktop.in: $(desktop_in_in_files)
 	sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

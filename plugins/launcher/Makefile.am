@@ -15,12 +15,15 @@ plugindir = \
 plugin_LTLIBRARIES = \
 	liblauncher.la
 
+liblauncher_built_sources = \
+	launcher-dialog_glade.h
+
 liblauncher_la_SOURCES = \
+	$(liblauncher_built_sources) \
 	launcher.c \
 	launcher.h \
 	launcher-dialog.c \
-	launcher-dialog.h \
-	launcher-dialog_glade.h
+	launcher-dialog.h
 
 liblauncher_la_CFLAGS = \
 	$(GTK_CFLAGS) \
@@ -51,7 +54,10 @@ liblauncher_la_DEPENDENCIES = \
 
 if MAINTAINER_MODE
 BUILT_SOURCES = \
-	launcher-dialog_glade.h
+	$(liblauncher_built_sources)
+
+DISTCLEANFILES = \
+	$(libclock_built_sources)
 
 launcher-dialog_glade.h: launcher-dialog.glade
 	exo-csource --static --strip-comments --strip-content --name=launcher_dialog_glade $< >$@
@@ -63,7 +69,7 @@ endif
 desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_in_files = launcher.desktop.in.in
 desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
-%.desktop.in: %.desktop.in.in
+launcher.desktop.in: $(desktop_in_in_files)
 	sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

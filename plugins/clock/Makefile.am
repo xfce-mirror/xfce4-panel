@@ -12,7 +12,11 @@ plugindir = \
 plugin_LTLIBRARIES = \
 	libclock.la
 
+libclock_built_sources = \
+	clock-dialog_glade.h
+
 libclock_la_SOURCES = \
+	$(libclock_built_sources) \
 	clock.c \
 	clock.h \
 	clock-analog.c \
@@ -53,7 +57,10 @@ libclock_la_DEPENDENCIES = \
 
 if MAINTAINER_MODE
 BUILT_SOURCES = \
-	clock-dialog_glade.h
+	$(libclock_built_sources)
+
+DISTCLEANFILES = \
+	$(libclock_built_sources)
 
 clock-dialog_glade.h: clock-dialog.glade
 	exo-csource --static --strip-comments --strip-content --name=clock_dialog_glade $< >$@
@@ -63,9 +70,9 @@ endif
 # .desktop file
 #
 desktopdir = $(datadir)/xfce4/panel-plugins
-desktop_in_in_files =	 clock.desktop.in.in
+desktop_in_in_files =	clock.desktop.in.in
 desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
-%.desktop.in: %.desktop.in.in
+clock.desktop.in: $(desktop_in_in_files)
 	sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
