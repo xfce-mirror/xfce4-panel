@@ -26,6 +26,7 @@
 #endif
 
 #include <wrapper/wrapper-plug.h>
+#include <common/panel-private.h>
 
 
 
@@ -119,7 +120,8 @@ wrapper_plug_expose_event (GtkWidget      *widget,
       color = &(widget->style->bg[state]);
 
       /* set the cairo source color */
-      xfce_panel_cairo_set_source_rgba (cr, color, alpha);
+      cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color),
+                             plug->background_alpha);
 
       /* create retangle */
       cairo_rectangle (cr, event->area.x, event->area.y,
