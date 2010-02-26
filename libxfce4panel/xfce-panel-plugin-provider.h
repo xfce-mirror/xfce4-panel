@@ -118,9 +118,6 @@ gboolean     xfce_panel_plugin_provider_get_show_about      (XfcePanelPluginProv
 
 void         xfce_panel_plugin_provider_show_about          (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_register_types      (XfcePanelPluginProvider       *provider,
-                                                             GTypeModule                   *module);
-
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_PLUGIN_PROVIDER_H__ */
