@@ -35,6 +35,7 @@ libactions_la_LDFLAGS = \
 
 libactions_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
@@ -42,7 +43,8 @@ libactions_la_LIBADD = \
 	$(XFCONF_LIBS)
 
 libactions_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la
+	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la
 
 #
 # .desktop file
