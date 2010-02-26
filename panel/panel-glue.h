@@ -21,21 +21,23 @@
 #include <gtk/gtk.h>
 #include <panel/panel-window.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 G_BEGIN_DECLS
 
-void               panel_glue_popup_menu          (PanelWindow    *window);
+void               panel_glue_popup_menu          (PanelWindow             *window);
 
-XfceScreenPosition panel_glue_get_screen_position (PanelWindow    *window);
+XfceScreenPosition panel_glue_get_screen_position (PanelWindow             *window);
 
-void               panel_glue_set_size            (PanelWindow    *window,
-                                                   gint            size);
-                          
-void               panel_glue_set_orientation     (PanelWindow    *window,
-                                                   GtkOrientation  orientation);
-                                 
-void               panel_glue_set_screen_position (PanelWindow    *window);
-                                     
+void               panel_glue_set_size            (PanelWindow             *window,
+                                                   gint                     size);
+
+void               panel_glue_set_orientation     (PanelWindow             *window,
+                                                   GtkOrientation           orientation);
+
+void               panel_glue_set_screen_position (PanelWindow             *window);
+
+void               panel_glue_set_provider_info   (XfcePanelPluginProvider *provider);
 
 G_END_DECLS
 

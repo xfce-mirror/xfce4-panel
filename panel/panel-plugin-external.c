@@ -30,6 +30,8 @@
 #include <panel/panel-private.h>
 #include <panel/panel-module.h>
 #include <panel/panel-plugin-external.h>
+#include <panel/panel-window.h>
+#include <panel/panel-glue.h>
 
 
 
@@ -337,6 +339,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   GtkWidget           *dialog;
   gint                 response;
   gchar               *filename, *path;
+  PanelWindow         *window;
 
   /* create dialog */
   dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (socket))),
@@ -344,14 +347,15 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
                                    GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
                                    _("Plugin '%s' unexpectedly left the building, do you want to restart it?"),
                                    panel_module_get_name (external->module));
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("If you press Execute the panel will try"
-                                            " to restart the plugin. Remove will remove it from the panel permanently."));
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("If you press Execute "
+                                            "the panel will try to restart the plugin otherwise it "
+                                            "will be permanently removed from the panel."));
   gtk_dialog_add_buttons (GTK_DIALOG (dialog), GTK_STOCK_EXECUTE, GTK_RESPONSE_OK,
                           GTK_STOCK_REMOVE, GTK_RESPONSE_CLOSE, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
-  /* don't send or queue messages */
+  /* don't queue messages */
   external->plug_window_id = -1;
 
   /* reset the pid */
@@ -370,12 +374,20 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   /* handle the response */
   if (response == GTK_RESPONSE_OK)
     {
+      /* get the plugin panel */
+      window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (socket)));
+
+      /* debug check */
+      panel_return_val_if_fail (PANEL_IS_WINDOW (window), TRUE);
+
+      /* queue messages again */
+      external->plug_window_id = 0;
+
+      /* send panel information to the plugin */
+      panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (external));
+
       /* show the socket again (realize will spawn the plugin) */
       gtk_widget_show (GTK_WIDGET (socket));
-
-      /* TODO: The plugin needs an update from the panel status (size/orientation/...) here.
-       *       This should be handled from the application (signal to plugins for panel status
-       *       on realize/show?). */
 
       /* don't process other events */
       return TRUE;

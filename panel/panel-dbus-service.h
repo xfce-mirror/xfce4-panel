@@ -40,4 +40,3 @@ GObject  *panel_dbus_service_new          (void);
 G_END_DECLS
 
 #endif /* !__PANEL_DBUS_SERVICE_H__ */
-

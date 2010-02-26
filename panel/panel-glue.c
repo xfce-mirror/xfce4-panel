@@ -34,6 +34,8 @@
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-dialogs.h>
 #include <panel/panel-dbus-service.h>
+#include <panel/panel-plugin-external.h>
+#include <panel/panel-window.h>
 
 
 
@@ -312,4 +314,27 @@ panel_glue_set_screen_position (PanelWindow *window)
 
   /* send the new size to all plugins */
   gtk_container_foreach (GTK_CONTAINER (itembar), panel_glue_set_screen_position_foreach, GINT_TO_POINTER (screen_position));
+}
+
+
+
+void
+panel_glue_set_provider_info (XfcePanelPluginProvider *provider)
+{
+  PanelWindow *window;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  panel_return_if_fail (PANEL_IS_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider))));
+
+  /* get the plugins panel window */
+  window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
+
+  /* set the background alpha if the plugin is external */
+  if (PANEL_IS_PLUGIN_EXTERNAL (provider))
+    panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider), panel_window_get_background_alpha (window));
+
+  /* send plugin information */
+  xfce_panel_plugin_provider_set_orientation (provider, panel_window_get_orientation (window));
+  xfce_panel_plugin_provider_set_screen_position (provider, panel_glue_get_screen_position (window));
+  xfce_panel_plugin_provider_set_size (provider, panel_window_get_size (window));
 }

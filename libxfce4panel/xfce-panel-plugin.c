@@ -815,7 +815,7 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
 
-  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
   if (G_LIKELY (xfce_panel_plugin_get_size (plugin) != size))
@@ -878,7 +878,7 @@ xfce_panel_plugin_set_orientation (XfcePanelPluginProvider *provider,
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
 
-  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
   if (G_LIKELY (xfce_panel_plugin_get_orientation (plugin) != orientation))
@@ -912,14 +912,14 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
-  //~ if (G_LIKELY (xfce_panel_plugin_get_screen_position (plugin) != screen_position))
-    //~ {
+  if (G_LIKELY (xfce_panel_plugin_get_screen_position (plugin) != screen_position))
+    {
       /* store new screen position */
       plugin->priv->screen_position = screen_position;
 
       /* emit signal */
       g_signal_emit (G_OBJECT (plugin), plugin_signals[SCREEN_POSITION_CHANGED], 0, screen_position);
-    //~ }
+    }
 }
 
 

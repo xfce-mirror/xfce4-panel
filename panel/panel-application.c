@@ -47,16 +47,56 @@
 
 
 
-static void panel_application_class_init (PanelApplicationClass *klass);
-static void panel_application_init (PanelApplication *application);
-static void panel_application_finalize (GObject *object);
-static void panel_application_load (PanelApplication *application);
-static void panel_application_load_set_property (PanelWindow *window, const gchar *name, const gchar *value);
-static void panel_application_load_start_element (GMarkupParseContext *context, const gchar *element_name, const gchar **attribute_names, const gchar **attribute_values, gpointer  user_data, GError **error);
-static void panel_application_load_end_element (GMarkupParseContext *context, const gchar *element_name, gpointer user_data, GError **error);
-static gboolean panel_application_save_timeout (gpointer user_data);
-static gchar *panel_application_save_xml_contents (PanelApplication *application);
-static void panel_application_window_destroyed (GtkWidget *window, PanelApplication *application);
+static void      panel_application_class_init         (PanelApplicationClass  *klass);
+static void      panel_application_init               (PanelApplication       *application);
+static void      panel_application_finalize           (GObject                *object);
+static void      panel_application_load               (PanelApplication       *application);
+static void      panel_application_load_set_property  (PanelWindow            *window,
+                                                       const gchar            *name,
+                                                       const gchar            *value);
+static void      panel_application_load_start_element (GMarkupParseContext    *context,
+                                                       const gchar            *element_name,
+                                                       const gchar           **attribute_names,
+                                                       const gchar           **attribute_values,
+                                                       gpointer                user_data,
+                                                       GError                **error);
+static void      panel_application_load_end_element   (GMarkupParseContext    *context,
+                                                       const gchar            *element_name,
+                                                       gpointer                user_data,
+                                                       GError                **error);
+static void      panel_application_plugin_expand      (GtkWidget              *plugin,
+                                                       gboolean                expand,
+                                                       PanelWindow            *window);
+static void      panel_application_plugin_move        (GtkWidget              *item,
+                                                       PanelApplication       *application);
+static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
+                                                       PanelWindow            *window,
+                                                       GdkScreen              *screen,
+                                                       const gchar            *name,
+                                                       const gchar            *id,
+                                                       gchar                 **arguments,
+                                                       gint                    position);
+static gboolean  panel_application_save_timeout       (gpointer                user_data);
+static gchar    *panel_application_save_xml_contents  (PanelApplication       *application);
+static void      panel_application_window_destroyed   (GtkWidget              *window,
+                                                       PanelApplication       *application);
+static void      panel_application_dialog_destroyed   (GtkWindow              *dialog,
+                                                       PanelApplication       *application);
+static void      panel_application_drag_data_received (GtkWidget              *itembar,
+                                                       GdkDragContext         *context,
+                                                       gint                    x,
+                                                       gint                    y,
+                                                       GtkSelectionData       *selection_data,
+                                                       guint                   info,
+                                                       guint                   time,
+                                                       PanelWindow            *window);
+static gboolean  panel_application_drag_drop          (GtkWidget              *itembar,
+                                                       GdkDragContext         *context,
+                                                       gint                    x,
+                                                       gint                    y,
+                                                       guint                   time,
+                                                       PanelWindow            *window);
+
 
 
 struct _PanelApplicationClass
@@ -106,6 +146,11 @@ static GMarkupParser markup_parser =
   NULL,
   NULL,
   NULL
+};
+
+static const GtkTargetEntry drag_targets[] =
+{
+    { "application/x-xfce-panel-plugin-widget", 0, 0 }
 };
 
 
@@ -173,6 +218,20 @@ panel_application_finalize (GObject *object)
   g_object_unref (G_OBJECT (application->factory));
 
   (*G_OBJECT_CLASS (panel_application_parent_class)->finalize) (object);
+}
+
+
+
+static const gchar *
+panel_application_get_unique_id (void)
+{
+  static gint  counter = 0;
+  static gchar id[30];
+
+  /* create a unique if of the current time and counter */
+  g_snprintf (id, sizeof (id), "%ld%d", time (NULL), counter++);
+
+  return id;
 }
 
 
@@ -331,140 +390,6 @@ panel_application_load_set_property (PanelWindow *window,
 }
 
 
-/* TODO: finish and rename function */
-static void
-expand_handle (GtkWidget *plugin,
-               gboolean expand,
-               PanelWindow *window)
-{
-  GtkWidget *itembar;
-
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  /* get the itembar */
-  itembar = gtk_bin_get_child (GTK_BIN (window));
-
-  /* set new expand mode */
-  panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), plugin, expand);
-}
-
-
-
-/* TODO: move away from here */
-static const GtkTargetEntry drag_targets[] =
-{
-    { "application/x-xfce-panel-plugin-widget", 0, 0 }
-};
-
-
-
-/* TODO: finish and rename function */
-static void
-move_handle (GtkWidget        *item,
-             PanelApplication *application)
-{
-  GdkEvent      *event;
-  GtkTargetList *target_list;
-
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-
-  /* get a copy of the current event */
-  event = gtk_get_current_event ();
-  if (G_LIKELY (event))
-    {
-      /* make the window insensitive */
-      panel_application_windows_sensitive (application, FALSE);
-
-      /* create a target list */
-      target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
-
-      /* begin a drag */
-      gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, event);
-
-      /* release the drag list */
-      gtk_target_list_unref (target_list);
-
-      /* free the event */
-      gdk_event_free (event);
-    }
-}
-
-
-
-static const gchar *
-panel_application_get_unique_id (void)
-{
-  static gint  counter = 0;
-  static gchar id[30];
-
-  /* create a unique if of the current time and counter */
-  g_snprintf (id, sizeof (id), "%ld%d", time (NULL), counter++);
-
-  return id;
-}
-
-
-
-static gboolean
-panel_application_insert_plugin (PanelApplication  *application,
-                                 PanelWindow       *window,
-                                 GdkScreen         *screen,
-                                 const gchar       *name,
-                                 const gchar       *id,
-                                 gchar            **arguments,
-                                 gint               position)
-{
-  GtkWidget               *itembar;
-  gboolean                 succeed = FALSE;
-  XfcePanelPluginProvider *provider;
-
-  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
-  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
-  panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
-  panel_return_val_if_fail (name != NULL, FALSE);
-
-  /* create a new unique id if needed */
-  if (id == NULL)
-    id = panel_application_get_unique_id ();
-
-  /* create a new panel plugin */
-  provider = panel_module_factory_create_plugin (application->factory, screen, name, id, arguments);
-
-  if (G_LIKELY (provider != NULL))
-    {
-      /* get the panel itembar */
-      itembar = gtk_bin_get_child (GTK_BIN (window));
-
-      g_signal_connect (G_OBJECT (provider), "expand-changed", G_CALLBACK (expand_handle), window);
-      g_signal_connect_swapped (G_OBJECT (provider), "panel-preferences", G_CALLBACK (panel_preferences_dialog_show), window);
-      g_signal_connect (G_OBJECT (provider), "add-new-items", G_CALLBACK (panel_item_dialog_show), NULL);
-      g_signal_connect (G_OBJECT (provider), "move-item", G_CALLBACK (move_handle), application);
-
-      /* add the item to the panel */
-      panel_itembar_insert (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), position);
-
-      /* set the background alpha if the plugin is external */
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider), panel_window_get_background_alpha (window));
-
-      /* send plugin information */
-      xfce_panel_plugin_provider_set_orientation (provider, panel_window_get_orientation (window));
-      xfce_panel_plugin_provider_set_screen_position (provider, panel_glue_get_screen_position (window));
-      xfce_panel_plugin_provider_set_size (provider, panel_window_get_size (window));
-
-      /* show the plugin */
-      gtk_widget_show (GTK_WIDGET (provider));
-
-      /* we've succeeded */
-      succeed = TRUE;
-    }
-
-  return succeed;
-}
-
-
 
 static void
 panel_application_load_start_element (GMarkupParseContext  *context,
@@ -542,7 +467,7 @@ panel_application_load_start_element (GMarkupParseContext  *context,
 
             /* append the new plugin */
             if (G_LIKELY (name != NULL))
-              panel_application_insert_plugin (parser->application, parser->window,
+              panel_application_plugin_insert (parser->application, parser->window,
                                                gtk_window_get_screen (GTK_WINDOW (parser->window)),
                                                name, id, NULL, -1);
           }
@@ -606,6 +531,131 @@ panel_application_load_end_element (GMarkupParseContext  *context,
                      "Unknown element <%s>", element_name);
         break;
     }
+}
+
+
+
+static void
+panel_application_plugin_expand (GtkWidget   *plugin,
+                                 gboolean     expand,
+                                 PanelWindow *window)
+{
+  GtkWidget *itembar;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  /* get the itembar */
+  itembar = gtk_bin_get_child (GTK_BIN (window));
+
+  /* set new expand mode */
+  panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), plugin, expand);
+}
+
+
+
+static void
+panel_application_plugin_move_end (GtkWidget        *item,
+                                   GdkDragContext   *context,
+                                   PanelApplication *application)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+
+  /* disconnect this signal */
+  g_signal_handlers_disconnect_by_func (G_OBJECT (item), G_CALLBACK (panel_application_plugin_move_end), application);
+
+  /* make the window insensitive */
+  panel_application_windows_sensitive (application, TRUE);
+}
+
+
+
+static void
+panel_application_plugin_move (GtkWidget        *item,
+                               PanelApplication *application)
+{
+  GdkEvent      *event;
+  GtkTargetList *target_list;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+
+  /* get a copy of the current event */
+  event = gtk_get_current_event ();
+  if (G_LIKELY (event))
+    {
+      /* make the window insensitive */
+      panel_application_windows_sensitive (application, FALSE);
+
+      /* create a target list */
+      target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
+
+      /* begin a drag */
+      gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, event);
+
+      /* release the drag list */
+      gtk_target_list_unref (target_list);
+
+      /* free the event */
+      gdk_event_free (event);
+
+      /* signal to make the window sensitive again on a drag end */
+      g_signal_connect (G_OBJECT (item), "drag-end", G_CALLBACK (panel_application_plugin_move_end), application);
+    }
+}
+
+
+
+static gboolean
+panel_application_plugin_insert (PanelApplication  *application,
+                                 PanelWindow       *window,
+                                 GdkScreen         *screen,
+                                 const gchar       *name,
+                                 const gchar       *id,
+                                 gchar            **arguments,
+                                 gint               position)
+{
+  GtkWidget               *itembar;
+  gboolean                 succeed = FALSE;
+  XfcePanelPluginProvider *provider;
+
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
+  panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
+  panel_return_val_if_fail (name != NULL, FALSE);
+
+  /* create a new unique id if needed */
+  if (id == NULL)
+    id = panel_application_get_unique_id ();
+
+  /* create a new panel plugin */
+  provider = panel_module_factory_create_plugin (application->factory, screen, name, id, arguments);
+
+  if (G_LIKELY (provider != NULL))
+    {
+      /* get the panel itembar */
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+
+      g_signal_connect (G_OBJECT (provider), "expand-changed", G_CALLBACK (panel_application_plugin_expand), window);
+      g_signal_connect (G_OBJECT (provider), "move-item", G_CALLBACK (panel_application_plugin_move), application);
+      g_signal_connect (G_OBJECT (provider), "add-new-items", G_CALLBACK (panel_item_dialog_show), NULL);
+      g_signal_connect_swapped (G_OBJECT (provider), "panel-preferences", G_CALLBACK (panel_preferences_dialog_show), window);
+
+      /* add the item to the panel */
+      panel_itembar_insert (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), position);
+
+      /* send all the needed info about the panel to the plugin */
+      panel_glue_set_provider_info (provider);
+
+      /* show the plugin */
+      gtk_widget_show (GTK_WIDGET (provider));
+
+      /* we've succeeded */
+      succeed = TRUE;
+    }
+
+  return succeed;
 }
 
 
@@ -756,6 +806,135 @@ panel_application_dialog_destroyed (GtkWindow        *dialog,
 
 
 
+static void
+panel_application_drag_data_received (GtkWidget        *itembar,
+                                      GdkDragContext   *context,
+                                      gint              x,
+                                      gint              y,
+                                      GtkSelectionData *selection_data,
+                                      guint             info,
+                                      guint             time,
+                                      PanelWindow      *window)
+{
+  guint             position;
+  PanelApplication *application;
+  GtkWidget        *provider;
+  gboolean          succeed = FALSE;
+  GdkScreen        *screen;
+  const gchar      *name;
+  guint             old_position;
+
+  panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
+  panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  /* get the application */
+  application = panel_application_get ();
+
+  /* get the drop index on the itembar */
+  position = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
+
+  /* get the widget screen */
+  screen = gtk_widget_get_screen (itembar);
+
+  switch (info)
+    {
+      case PANEL_ITEMBAR_TARGET_PLUGIN_NAME:
+        if (G_LIKELY (selection_data->length > 0))
+          {
+            /* get the name from the selection data */
+            name = (const gchar *) selection_data->data;
+
+            /* create a new item with a unique id */
+            succeed = panel_application_plugin_insert (application, window, screen, name,
+                                                       NULL, NULL, position);
+          }
+        break;
+
+      case PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET:
+        /* get the source widget */
+        provider = gtk_drag_get_source_widget (context);
+
+        /* debug check */
+        panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+        /* check if we move to another itembar */
+        if (gtk_widget_get_parent (provider) == itembar)
+          {
+            /* get the current position on the itembar */
+            old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), provider);
+
+            /* decrease the counter if we drop after the current position */
+            if (position > old_position)
+              position--;
+
+            /* reorder the child if needed */
+            if (old_position != position)
+              panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
+          }
+        else
+          {
+            /* reparent the widget, this will also call remove and add for the itembar */
+            gtk_widget_reparent (provider, itembar);
+
+            /* move the item to the correct position on the itembar */
+            panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
+
+            /* send all the needed panel information to the plugin */
+            panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (provider));
+          }
+
+        /* everything went fine */
+        succeed = TRUE;
+        break;
+
+      default:
+        panel_assert_not_reached ();
+        break;
+    }
+
+  /* save the panel configuration if we succeeded */
+  if (G_LIKELY (succeed))
+    panel_application_save (application);
+
+  /* release the application */
+  g_object_unref (G_OBJECT (application));
+
+  /* tell the peer that we handled the drop */
+  gtk_drag_finish (context, succeed, FALSE, time);
+}
+
+
+
+static gboolean
+panel_application_drag_drop (GtkWidget      *itembar,
+                             GdkDragContext *context,
+                             gint            x,
+                             gint            y,
+                             guint           time,
+                             PanelWindow    *window)
+{
+  GdkAtom target;
+
+  panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), FALSE);
+  panel_return_val_if_fail (GDK_IS_DRAG_CONTEXT (context), FALSE);
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
+
+  target = gtk_drag_dest_find_target (itembar, context, NULL);
+
+  /* we cannot handle the drag data */
+  if (G_UNLIKELY (target == GDK_NONE))
+    return FALSE;
+
+  /* request the drag data */
+  gtk_drag_get_data (itembar, context, target, time);
+
+  /* we call gtk_drag_finish later */
+  return TRUE;
+}
+
+
+
 PanelApplication *
 panel_application_get (void)
 {
@@ -891,7 +1070,7 @@ panel_application_add_new_item (PanelApplication  *application,
       window = g_slist_nth_data (application->windows, nth);
 
       /* add the panel to the end of the choosen window */
-      panel_application_insert_plugin (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
+      panel_application_plugin_insert (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
                                        plugin_name, NULL, arguments, -1);
     }
   else
@@ -899,139 +1078,6 @@ panel_application_add_new_item (PanelApplication  *application,
       /* print warning */
       g_warning (_("The plugin (%s) you want to add is not recognized by the panel."), plugin_name);
     }
-}
-
-
-
-static void
-panel_application_drag_data_received (GtkWidget        *itembar,
-                                      GdkDragContext   *context,
-                                      gint              x,
-                                      gint              y,
-                                      GtkSelectionData *selection_data,
-                                      guint             info,
-                                      guint             time,
-                                      PanelWindow      *window)
-{
-  guint             position;
-  PanelApplication *application;
-  GtkWidget        *provider;
-  gboolean          succeed = FALSE;
-  GdkScreen        *screen;
-  const gchar      *name;
-  guint             old_position;
-
-  panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
-  panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  /* get the application */
-  application = panel_application_get ();
-
-  /* get the drop index on the itembar */
-  position = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
-
-  /* get the widget screen */
-  screen = gtk_widget_get_screen (itembar);
-
-  switch (info)
-    {
-      case PANEL_ITEMBAR_TARGET_PLUGIN_NAME:
-        if (G_LIKELY (selection_data->length > 0))
-          {
-            /* get the name from the selection data */
-            name = (const gchar *) selection_data->data;
-
-            /* create a new item with a unique id */
-            succeed = panel_application_insert_plugin (application, window, screen, name,
-                                                       NULL, NULL, position);
-          }
-        break;
-
-      case PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET:
-        /* make the itembar sensitive again */
-        panel_application_windows_sensitive (application, TRUE);
-
-        /* get the source widget */
-        provider = gtk_drag_get_source_widget (context);
-
-        /* debug check */
-        panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-        /* check if we move to another itembar */
-        if (gtk_widget_get_parent (provider) == itembar)
-          {
-            /* get the current position on the itembar */
-            old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), provider);
-
-            /* decrease the counter if we drop after the current position */
-            if (position > old_position)
-              position--;
-
-            /* reorder the child if needed */
-            if (old_position != position)
-              panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
-          }
-        else
-          {
-            /* reparent the widget, this will also call remove and add for the itembar */
-            gtk_widget_reparent (provider, itembar);
-
-            /* move the item to the correct position on the itembar */
-            panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
-
-            /* set new panel size */
-            /* TODO: update more panel-dependent settings after a move */
-            xfce_panel_plugin_provider_set_size (XFCE_PANEL_PLUGIN_PROVIDER (provider), panel_window_get_size (window));
-          }
-
-        /* everything went fine */
-        succeed = TRUE;
-        break;
-
-      default:
-        panel_assert_not_reached ();
-        break;
-    }
-
-  /* save the panel configuration if we succeeded */
-  if (G_LIKELY (succeed))
-    panel_application_save (application);
-
-  /* release the application */
-  g_object_unref (G_OBJECT (application));
-
-  /* tell the peer that we handled the drop */
-  gtk_drag_finish (context, succeed, FALSE, time);
-}
-
-
-
-static gboolean
-panel_application_drag_drop (GtkWidget      *itembar,
-                             GdkDragContext *context,
-                             gint            x,
-                             gint            y,
-                             guint           time,
-                             PanelWindow    *window)
-{
-  GdkAtom target;
-
-  panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), FALSE);
-  panel_return_val_if_fail (GDK_IS_DRAG_CONTEXT (context), FALSE);
-  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
-
-  target = gtk_drag_dest_find_target (itembar, context, NULL);
-
-  /* we cannot handle the drag data */
-  if (G_UNLIKELY (target == GDK_NONE))
-    return FALSE;
-
-  /* request the drag data */
-  gtk_drag_get_data (itembar, context, target, time);
-
-  /* we call gtk_drag_finish later */
-  return TRUE;
 }
 
 
