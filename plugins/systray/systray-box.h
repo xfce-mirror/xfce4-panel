@@ -22,7 +22,6 @@
 
 typedef struct _SystrayBoxClass SystrayBoxClass;
 typedef struct _SystrayBox      SystrayBox;
-typedef struct _SystrayBoxChild SystrayBoxChild;
 
 #define XFCE_TYPE_SYSTRAY_BOX            (systray_box_get_type ())
 #define XFCE_SYSTRAY_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SYSTRAY_BOX, SystrayBox))

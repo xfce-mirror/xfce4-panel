@@ -94,20 +94,21 @@ struct _SystrayBox
   gint          rows;
 };
 
-struct _SystrayBoxChild
+typedef struct
 {
   /* the child widget */
   GtkWidget    *widget;
 
   /* whether it could be hidden */
-  guint         hidden : 1;
+  guint         auto_hide : 1;
 
-  /* whether the icon is invisible */
-  guint         invisible : 1;
+  /* invisible icon because of invalid requisition */
+  guint         invalid : 1;
 
   /* the name of the applcation */
   gchar        *name;
-};
+}
+SystrayBoxChild;
 
 
 
@@ -216,31 +217,31 @@ systray_box_size_request (GtkWidget      *widget,
       if (G_UNLIKELY (child_req.width == 1 || child_req.height == 1))
         {
           /* icons that return a 1 by 1 requisition supposed to be hidden */
-          if (child_info->invisible == FALSE)
+          if (child_info->invalid == FALSE)
             {
               /* this icon should not be visible */
-              child_info->invisible = TRUE;
+              child_info->invalid = TRUE;
 
               /* decrease the hidden counter if needed */
-              if (child_info->hidden)
+              if (child_info->auto_hide)
                 box->n_hidden_childeren--;
             }
         }
       else
         {
           /* restore icon if it was previously invisible */
-          if (G_UNLIKELY (child_info->invisible))
+          if (G_UNLIKELY (child_info->invalid))
             {
               /* visible icon */
-              child_info->invisible = FALSE;
+              child_info->invalid = FALSE;
 
               /* update counter */
-              if (child_info->hidden)
+              if (child_info->auto_hide)
                 box->n_hidden_childeren++;
             }
 
           /* count the number of visible childeren */
-          if (child_info->hidden == FALSE || box->show_hidden == TRUE)
+          if (child_info->auto_hide == FALSE || box->show_hidden == TRUE)
             {
               /* pick largest icon */
               if (child_size == -1)
@@ -380,7 +381,7 @@ systray_box_size_allocate (GtkWidget     *widget,
     {
       child_info = li->data;
 
-      if (child_info->invisible || (child_info->hidden && !box->show_hidden))
+      if (child_info->invalid || (child_info->auto_hide && !box->show_hidden))
         {
           /* put icons offscreen */
           child_allocation.x = child_allocation.y = OFFSCREEN;
@@ -455,10 +456,10 @@ systray_box_remove (GtkContainer *container,
       if (child_info->widget == child)
         {
           /* whether the need to redraw afterwards */
-          need_resize = !child_info->hidden;
+          need_resize = !child_info->auto_hide;
 
           /* update hidden counter */
-          if (child_info->hidden && !child_info->invisible)
+          if (child_info->auto_hide && !child_info->invalid)
             box->n_hidden_childeren--;
 
           /* remove from list */
@@ -577,8 +578,8 @@ systray_box_compare_function (gconstpointer a,
   const SystrayBoxChild *child_b = b;
 
   /* sort hidden icons before visible ones */
-  if (child_a->hidden != child_b->hidden)
-    return (child_a->hidden ? -1 : 1);
+  if (child_a->auto_hide != child_b->auto_hide)
+    return (child_a->auto_hide ? -1 : 1);
 
   /* put icons without name after the hidden icons */
   if (!IS_STRING (child_a->name) || !IS_STRING (child_b->name))
@@ -669,12 +670,12 @@ systray_box_add_with_name (SystrayBox  *box,
   /* create child info */
   child_info = g_slice_new (SystrayBoxChild);
   child_info->widget = child;
-  child_info->invisible = FALSE;
+  child_info->invalid = FALSE;
   child_info->name = g_strdup (name);
-  child_info->hidden = systray_box_name_get_hidden (box, child_info->name);
+  child_info->auto_hide = systray_box_name_get_hidden (box, child_info->name);
 
   /* update hidden counter */
-  if (child_info->hidden)
+  if (child_info->auto_hide)
       box->n_hidden_childeren++;
 
   /* insert sorted */
@@ -727,10 +728,10 @@ systray_box_name_set_hidden (SystrayBox  *box,
       child_info = li->data;
 
       /* update the hidden state */
-      child_info->hidden = systray_box_name_get_hidden (box, child_info->name);
+      child_info->auto_hide = systray_box_name_get_hidden (box, child_info->name);
 
       /* increase counter if needed */
-      if (child_info->hidden && !child_info->invisible)
+      if (child_info->auto_hide && !child_info->invalid)
         n_hidden_childeren++;
     }
 
@@ -812,11 +813,11 @@ systray_box_name_clear (SystrayBox *box)
       child_info = li->data;
 
       /* update the hidden state */
-      if (child_info->hidden)
+      if (child_info->auto_hide)
         {
           n_hidden_childeren++;
 
-          child_info->hidden = FALSE;
+          child_info->auto_hide = FALSE;
         }
     }
 
