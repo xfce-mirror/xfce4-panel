@@ -62,7 +62,8 @@ enum
   COL_ICON,
   COL_NAME,
   COL_ITEM,
-  COL_SEARCH
+  COL_SEARCH,
+  COL_TOOLTIP
 };
 
 
@@ -145,6 +146,8 @@ launcher_dialog_add_store_insert_menu (GarconMenu   *menu,
   GList       *li, *items;
   GList       *menus;
   GtkTreeIter  iter;
+  gchar       *tooltip;
+  GFile       *item_file;
 
   panel_return_if_fail (GARCON_IS_MENU (menu));
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
@@ -153,11 +156,19 @@ launcher_dialog_add_store_insert_menu (GarconMenu   *menu,
   items = garcon_menu_get_items (menu);
   for (li = items; li != NULL; li = li->next)
     {
+      panel_return_if_fail (GARCON_IS_MENU_ITEM (li->data));
       if (!garcon_menu_element_get_visible (GARCON_MENU_ELEMENT (li->data)))
         continue;
 
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       launcher_dialog_items_set_item (model, &iter, li->data);
+
+      item_file = garcon_menu_item_get_file (li->data);
+      tooltip = g_file_get_parse_name (item_file);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+                          COL_TOOLTIP, tooltip, -1);
+      g_object_unref (G_OBJECT (item_file));
+      g_free (tooltip);
     }
   g_list_free (items);
 
