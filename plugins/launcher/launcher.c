@@ -719,7 +719,7 @@ static void
 launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin      *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
-  const gchar * const *filenames;
+  const gchar * const *uris;
   guint                i;
   GPtrArray           *array;
   GValue              *value;
@@ -756,23 +756,25 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   if (G_UNLIKELY (plugin->items == NULL))
     {
       /* get the plugin arguments list */
-      filenames = xfce_panel_plugin_get_arguments (panel_plugin);
-      if (G_LIKELY (filenames != NULL))
+      uris = xfce_panel_plugin_get_arguments (panel_plugin);
+      if (G_LIKELY (uris != NULL))
         {
           /* create array with all the filenames */
           array = g_ptr_array_new ();
-          for (i = 0; filenames[i] != NULL; i++)
+          for (i = 0; uris[i] != NULL; i++)
             {
+              if (!g_str_has_suffix (uris[i], ".desktop"))
+                continue;
+
               value = g_new0 (GValue, 1);
               g_value_init (value, G_TYPE_STRING);
-              g_value_set_static_string (value, filenames[i]);
+              g_value_set_static_string (value, uris[i]);
               g_ptr_array_add (array, value);
             }
 
-          /* set items */
-          g_object_set (G_OBJECT (plugin), "items", array, NULL);
-
-          /* cleanup */
+          /* set new file list */
+          if (G_LIKELY (array->len > 0))
+            g_object_set (G_OBJECT (plugin), "items", array, NULL);
           xfconf_array_free (array);
         }
       else

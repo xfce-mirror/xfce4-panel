@@ -125,7 +125,7 @@ struct _PanelApplication
   /* drag and drop data */
   guint     drop_data_ready : 1;
   guint     drop_occurred : 1;
-  gchar   **drop_uris;
+  guint     drop_desktop_files : 1;
 };
 
 enum
@@ -177,7 +177,7 @@ panel_application_init (PanelApplication *application)
   application->windows = NULL;
   application->dialogs = NULL;
   application->autosave_timeout_id = 0;
-  application->drop_uris = NULL;
+  application->drop_desktop_files = FALSE;
   application->drop_data_ready = FALSE;
   application->drop_occurred = FALSE;
 
@@ -217,7 +217,6 @@ panel_application_finalize (GObject *object)
   GSList           *li;
 
   panel_return_if_fail (application->dialogs == NULL);
-  panel_return_if_fail (application->drop_uris == NULL);
 
   /* stop the autosave timeout */
   g_source_remove (application->autosave_timeout_id);
@@ -709,9 +708,9 @@ panel_application_drag_data_received (PanelWindow      *window,
   GdkScreen         *screen;
   const gchar       *name;
   guint              old_position;
-  gchar            **uri_list, *tmp;
-  GSList            *uris, *li;
+  gchar            **uris;
   guint              i;
+  gboolean           found;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
@@ -722,32 +721,18 @@ panel_application_drag_data_received (PanelWindow      *window,
 
   if (!application->drop_data_ready)
     {
-      panel_assert (application->drop_uris == NULL);
+      panel_assert (!application->drop_desktop_files);
 
       if (info == TARGET_TEXT_URI_LIST)
         {
-          /* extract the URI list from the selection data */
-          uri_list = gtk_selection_data_get_uris (selection_data);
-          if (G_LIKELY (uri_list != NULL))
+          /* look if the selection data contains atleast 1 desktop file */
+          uris = gtk_selection_data_get_uris (selection_data);
+          if (G_LIKELY (uris != NULL))
             {
-              /* add the valid desktop items to a list */
-              for (i = 0, uris = NULL; uri_list[i] != NULL; i++)
-                if (g_str_has_suffix (uri_list[i], ".desktop")
-                    && (tmp = g_filename_from_uri (uri_list[i], NULL, NULL)) != NULL)
-                  uris = g_slist_append (uris, tmp);
-
-              /* cleanup */
-              g_strfreev (uri_list);
-
-              /* allocate a string for the valid uris */
-              if (uris != NULL)
-                {
-                  /* allocate a string and add the files */
-                  application->drop_uris = g_new0 (gchar *, g_slist_length (uris) + 1);
-                  for (li = uris, i = 0; li != NULL; li = li->next, i++)
-                    application->drop_uris[i] = li->data;
-                  g_slist_free (uris);
-                }
+              for (i = 0, found = FALSE; !found && uris[i] != NULL; i++)
+                found = g_str_has_suffix (uris[i], ".desktop");
+              g_strfreev (uris);
+              application->drop_desktop_files = found;
             }
         }
 
@@ -756,99 +741,104 @@ panel_application_drag_data_received (PanelWindow      *window,
     }
 
   /* check if the data was droppped */
-  if (!application->drop_occurred)
+  if (application->drop_occurred)
+    {
+      /* reset the state */
+      application->drop_occurred = FALSE;
+
+      /* get the drop index on the itembar */
+      position = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
+
+      /* get the widget screen */
+      screen = gtk_window_get_screen (GTK_WINDOW (window));
+
+      switch (info)
+        {
+          case TARGET_PLUGIN_NAME:
+            if (G_LIKELY (selection_data->length > 0))
+              {
+                /* create a new item with a unique id */
+                name = (const gchar *) selection_data->data;
+                succeed = panel_application_plugin_insert (application, window,
+                                                           screen, name,
+                                                           -1, NULL, position);
+              }
+            break;
+
+          case TARGET_PLUGIN_WIDGET:
+            /* get the source widget */
+            provider = gtk_drag_get_source_widget (context);
+
+            /* debug check */
+            panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+            /* check if we move to another itembar */
+            if (gtk_widget_get_parent (provider) == itembar)
+              {
+                /* get the current position on the itembar */
+                old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
+                                                              provider);
+
+                /* decrease the counter if we drop after the current position */
+                if (position > old_position)
+                  position--;
+
+                /* reorder the child if needed */
+                if (old_position != position)
+                  panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
+              }
+            else
+              {
+                /* reparent the widget, this will also call remove and add for the itembar */
+                gtk_widget_reparent (provider, itembar);
+
+                /* move the item to the correct position on the itembar */
+                panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
+
+                /* send all the needed panel information to the plugin */
+                panel_window_set_povider_info (window, provider);
+              }
+
+            /* everything went fine */
+            succeed = TRUE;
+            break;
+
+          case TARGET_TEXT_URI_LIST:
+            if (G_LIKELY (application->drop_desktop_files))
+              {
+                /* pass all the uris to the launcher, it will filter out
+                 * the desktop files on it's own */
+                uris = gtk_selection_data_get_uris (selection_data);
+                if (G_LIKELY (uris != NULL))
+                  {
+                    /* create a new item with a unique id */
+                    succeed = panel_application_plugin_insert (application, window,
+                                                               screen, LAUNCHER_PLUGIN_NAME,
+                                                               -1, uris, position);
+                    g_strfreev (uris);
+                  }
+
+                application->drop_desktop_files = FALSE;
+              }
+            break;
+
+          default:
+            panel_assert_not_reached ();
+            break;
+        }
+
+      /* save the panel configuration if we succeeded */
+      if (G_LIKELY (succeed))
+        panel_application_save (application, FALSE);
+
+      /* tell the peer that we handled the drop */
+      gtk_drag_finish (context, succeed, FALSE, drag_time);
+    }
+  else
     {
       gdk_drag_status (context, 0, drag_time);
-      goto bailout;
     }
 
-  /* reset the state */
-  application->drop_occurred = FALSE;
-
-  /* get the drop index on the itembar */
-  position = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
-
-  /* get the widget screen */
-  screen = gtk_window_get_screen (GTK_WINDOW (window));
-
-  switch (info)
-    {
-      case TARGET_PLUGIN_NAME:
-        if (G_LIKELY (selection_data->length > 0))
-          {
-            /* create a new item with a unique id */
-            name = (const gchar *) selection_data->data;
-            succeed = panel_application_plugin_insert (application, window,
-                                                       screen, name,
-                                                       -1, NULL, position);
-          }
-        break;
-
-      case TARGET_PLUGIN_WIDGET:
-        /* get the source widget */
-        provider = gtk_drag_get_source_widget (context);
-
-        /* debug check */
-        panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-        /* check if we move to another itembar */
-        if (gtk_widget_get_parent (provider) == itembar)
-          {
-            /* get the current position on the itembar */
-            old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
-                                                          provider);
-
-            /* decrease the counter if we drop after the current position */
-            if (position > old_position)
-              position--;
-
-            /* reorder the child if needed */
-            if (old_position != position)
-              panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
-          }
-        else
-          {
-            /* reparent the widget, this will also call remove and add for the itembar */
-            gtk_widget_reparent (provider, itembar);
-
-            /* move the item to the correct position on the itembar */
-            panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
-
-            /* send all the needed panel information to the plugin */
-            panel_window_set_povider_info (window, provider);
-          }
-
-        /* everything went fine */
-        succeed = TRUE;
-        break;
-
-      case TARGET_TEXT_URI_LIST:
-        /* get the uri list fo the selection data for the new launcher */
-        if (G_LIKELY (application->drop_uris))
-          {
-            /* create a new item with a unique id */
-            succeed = panel_application_plugin_insert (application, window,
-                                                       screen, LAUNCHER_PLUGIN_NAME,
-                                                       -1, application->drop_uris,
-                                                       position);
-
-            /* TODO drag leave is never called and thus application->drop_uris is not freed */
-          }
-        break;
-
-      default:
-        panel_assert_not_reached ();
-        break;
-    }
-
-  /* save the panel configuration if we succeeded */
-  if (G_LIKELY (succeed))
-    panel_application_save (application, FALSE);
-
-  /* tell the peer that we handled the drop */
-  gtk_drag_finish (context, succeed, FALSE, drag_time);
-
-bailout:
   /* release the application */
   g_object_unref (G_OBJECT (application));
 }
@@ -863,8 +853,9 @@ panel_application_drag_motion (GtkWidget        *window,
                                guint             drag_time,
                                PanelApplication *application)
 {
-  GdkAtom    target;
-  GtkWidget *itembar;
+  GdkAtom        target;
+  GtkWidget     *itembar;
+  GdkDragAction  drag_action = 0;
 
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (GDK_IS_DRAG_CONTEXT (context), FALSE);
@@ -885,47 +876,34 @@ panel_application_drag_motion (GtkWidget        *window,
           /* we cannot drop here (yet!) */
           return TRUE;
         }
-      else if (application->drop_uris != NULL)
+      else if (application->drop_desktop_files)
         {
           /* there are valid uris in the drop data */
-          gdk_drag_status (context, GDK_ACTION_COPY, drag_time);
-        }
-      else
-        {
-          goto invalid_drop;
+          drag_action = GDK_ACTION_COPY;
         }
     }
   else if (target == gdk_atom_intern_static_string ("xfce-panel/plugin-name"))
     {
-      /* highlight the drop zone */
-      itembar = gtk_bin_get_child (GTK_BIN (window));
-      panel_itembar_set_drop_highlight_item (PANEL_ITEMBAR (itembar),
-          panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y));
-
       /* insert a new plugin */
-      gdk_drag_status (context, GDK_ACTION_COPY, drag_time);
+      drag_action = GDK_ACTION_COPY;
     }
   else if (target == gdk_atom_intern_static_string ("xfce-panel/plugin-widget"))
     {
+      /* move an existing plugin */
+      drag_action = GDK_ACTION_MOVE;
+    }
+
+  if (drag_action != 0)
+    {
       /* highlight the drop zone */
       itembar = gtk_bin_get_child (GTK_BIN (window));
       panel_itembar_set_drop_highlight_item (PANEL_ITEMBAR (itembar),
           panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y));
-
-      /* move an existing plugin */
-      gdk_drag_status (context, GDK_ACTION_MOVE, drag_time);
-    }
-  else
-    {
-      invalid_drop:
-
-      /* not a valid drop */
-      gdk_drag_status (context, 0, drag_time);
-
-      return TRUE;
     }
 
-  return FALSE;
+  gdk_drag_status (context, drag_action, drag_time);
+
+  return (drag_action == 0);
 }
 
 
@@ -946,7 +924,7 @@ panel_application_drag_drop (GtkWidget        *window,
 
   target = gtk_drag_dest_find_target (window, context, NULL);
 
-  /* we cannot handle the drag data */
+  /* we cannot handle the drop */
   if (G_UNLIKELY (target == GDK_NONE))
     return FALSE;
 
@@ -975,15 +953,10 @@ panel_application_drag_leave (GtkWidget        *window,
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
-  /* cleanup the drop data */
-  if (application->drop_uris != NULL)
-    {
-      g_strfreev (application->drop_uris);
-      application->drop_uris = NULL;
-    }
-
   /* reset the state */
   application->drop_data_ready = FALSE;
+  application->drop_desktop_files = FALSE;
+  application->drop_occurred = FALSE;
 
   /* unset the highlight position */
   itembar = gtk_bin_get_child (GTK_BIN (window));
