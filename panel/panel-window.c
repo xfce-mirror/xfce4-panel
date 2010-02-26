@@ -1619,9 +1619,10 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   panel_return_if_fail (n_monitors > 0);
 
   panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
-               "monitors=%d, output-name=%s, span-monitors=%s",
+               "monitors=%d, output-name=%s, span-monitors=%s, base=%d,%d",
                n_monitors, window->output_name,
-               PANEL_DEBUG_BOOL (window->span_monitors));
+               PANEL_DEBUG_BOOL (window->span_monitors),
+               window->base_x, window->base_y);
 
   if (window->output_name == NULL
       && (window->span_monitors || n_monitors == 1))
