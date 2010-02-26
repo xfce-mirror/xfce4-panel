@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 18:00+0100\n"
-"PO-Revision-Date: 2010-02-17 21:19+0100\n"
+"POT-Creation-Date: 2010-02-17 21:10+0100\n"
+"PO-Revision-Date: 2010-02-17 23:08+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -54,17 +54,20 @@ msgid "_Move"
 msgstr "_Flyt"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1011 ../panel/panel-window.c:2066
+#: ../libxfce4panel/xfce-panel-plugin.c:1011
+#: ../panel/panel-window.c:2066
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1022 ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1022
+#: ../panel/panel-window.c:2077
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1046 ../panel/panel-window.c:2100
+#: ../libxfce4panel/xfce-panel-plugin.c:1046
+#: ../panel/panel-window.c:2100
 msgid "_Restart"
 msgstr "_Genstart"
 
@@ -72,7 +75,8 @@ msgstr "_Genstart"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Vis dialogen 'Panelindstillinger'"
 
-#: ../panel/main.c:75 ../panel/main.c:76
+#: ../panel/main.c:75
+#: ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
@@ -192,7 +196,8 @@ msgstr ""
 "Mere info: http://www.dansk-gruppen.dk"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:102
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Tilføj nyt element"
 
@@ -201,7 +206,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Vælg venligst et panel for det nye udvidelsesmodul:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127 ../panel/panel-preferences-dialog.c:628
+#: ../panel/panel-dialogs.c:127
+#: ../panel/panel-preferences-dialog.c:628
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -241,7 +247,8 @@ msgstr "_Søg:"
 msgid "Enter search phrase here"
 msgstr "Indtasts søgeudtryk her"
 
-#: ../panel/panel-item-dialog.c:310 ../panel/panel-preferences-dialog.c:281
+#: ../panel/panel-item-dialog.c:310
+#: ../panel/panel-preferences-dialog.c:281
 msgid "Failed to open manual"
 msgstr "Kunne ikke åbne manual"
 
@@ -314,8 +321,7 @@ msgstr "Ele_menter"
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Measurements"
 msgstr "Dimensioner til panel"
@@ -483,8 +489,7 @@ msgstr "Vis _sekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "I_ntervaller:"
@@ -510,20 +515,28 @@ msgstr "_Vis AM/PM"
 msgid "Show _frame"
 msgstr "Vis _ramme"
 
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Show _inactive dots"
+msgstr "Vis _inaktive prikker"
+
 #: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Show gri_d"
+msgstr "Vis _gitter"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr "Formatet beskriver dato- og tidsdele som skal indsættes i filnavnet. Som eksempel, %Y vil blive erstattet med året, %m med måneden og %d med dagen. Gennemlæs dokumentationen for datohjælpeprogrammet for yderligere information."
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr "Ægte _binært ur"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
 msgstr "_Layout:"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
 msgstr "_Værktøjstipformat:"
 
@@ -562,122 +575,146 @@ msgstr "Sen aften"
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:98
-#, c-format
+#, no-c-format
 msgid "%0 o'clock"
-msgstr "klokken er %0 o"
+msgstr "klokken er %0"
 
 #: ../plugins/clock/clock-fuzzy.c:99
+#, no-c-format
 msgid "five past %0"
 msgstr "5 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:100
+#, no-c-format
 msgid "ten past %0"
 msgstr "10 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:101
+#, no-c-format
 msgid "quarter past %0"
 msgstr "et kvarter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
+#, no-c-format
 msgid "twenty past %0"
 msgstr "20 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
+#, no-c-format
 msgid "twenty five past %0"
 msgstr "25 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:104
+#, no-c-format
 msgid "half past %0"
 msgstr "30 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
+#, no-c-format
 msgid "twenty five to %1"
 msgstr "25 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:106
+#, no-c-format
 msgid "twenty to %1"
 msgstr "20 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:107
+#, no-c-format
 msgid "quarter to %1"
 msgstr "et kvarter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
+#, no-c-format
 msgid "ten to %1"
 msgstr "10 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
+#, no-c-format
 msgid "five to %1"
 msgstr "5 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
+#, no-c-format
 msgid "%1 o'clock"
 msgstr "klokken er %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
 #: ../plugins/clock/clock-fuzzy.c:117
-#, c-format
+#, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr "klokken er %0 o"
+msgstr "klokken er %0"
 
 #: ../plugins/clock/clock-fuzzy.c:118
+#, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "5 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:119
+#, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "10 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:120
+#, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "et kvarter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:121
+#, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "20 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:122
+#, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "25 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:123
+#, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "30 minutter over %0"
 
 #: ../plugins/clock/clock-fuzzy.c:124
+#, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "25 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:125
+#, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "20 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:126
+#, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "et kvarter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:127
+#, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "10 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
+#, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "5 minutter i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
+#, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "klokken er %1"
@@ -738,7 +775,7 @@ msgstr "Uge %V"
 msgid "Failed to execute clock command"
 msgstr "Kunne ikke udføre klokkommando"
 
-#: ../plugins/clock/clock.c:651
+#: ../plugins/clock/clock.c:653
 msgid "Custom Format"
 msgstr "Tilpasset format"
 
@@ -1192,3 +1229,4 @@ msgstr "Fjern arbejdsområde %d"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Skift mellem åbne vinduer ved brug afen menu"
+
