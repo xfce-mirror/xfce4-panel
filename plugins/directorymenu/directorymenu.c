@@ -773,6 +773,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
 #ifdef HAVE_GIO_UNIX
           /* for native desktop files we make an exception and try
            * to load them like a normal menu */
+          desktopinfo = NULL;
           if (G_UNLIKELY (file_type != G_FILE_TYPE_DIRECTORY
               && g_file_is_native (file)
               && g_str_has_suffix (display_name, ".desktop")))
