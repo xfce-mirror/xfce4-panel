@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel-devel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-23 12:00+0100\n"
-"PO-Revision-Date: 2010-02-23 14:11-0000\n"
+"POT-Creation-Date: 2010-02-24 11:54+0100\n"
+"PO-Revision-Date: 2010-02-24 12:14-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -35,20 +35,20 @@ msgstr "Personalizar o Painel Xfce"
 msgid "Panel Preferences"
 msgstr "Preferências do Painel"
 
-#: ../common/panel-builder.c:155
+#: ../common/panel-utils.c:155
 msgid "_Read Online"
 msgstr "_Ler Online"
 
-#: ../common/panel-builder.c:156
+#: ../common/panel-utils.c:156
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr "Pode ler o manual de utilizador online. No entanto, este manual pode não concidir com a sua versão."
 
-#: ../common/panel-builder.c:158
+#: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
 msgstr "O manual do Painel XFCE não está instalado no computador"
 
 #. display an error message to the user
-#: ../common/panel-builder.c:171
+#: ../common/panel-utils.c:171
 msgid "Failed to open the documentation browser"
 msgstr "Falha ao abrir o navegador de documentação"
 
@@ -65,25 +65,25 @@ msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se remover este item do painel, será perdido para sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:985
+#: ../libxfce4panel/xfce-panel-plugin.c:999
 msgid "_Move"
 msgstr "_Mover"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1023
-#: ../panel/panel-window.c:2067
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-window.c:2076
 msgid "Add _New Items..."
 msgstr "Adicionar _Novos Itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
-#: ../panel/panel-window.c:2078
+#: ../libxfce4panel/xfce-panel-plugin.c:1048
+#: ../panel/panel-window.c:2087
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do Pain_el..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1058
-#: ../panel/panel-window.c:2101
+#: ../libxfce4panel/xfce-panel-plugin.c:1072
+#: ../panel/panel-window.c:2110
 msgid "_Restart"
 msgstr "_Reiniciar"
 
@@ -121,6 +121,9 @@ msgid "Quit the running panel instance"
 msgstr "Fechar o painel em execução"
 
 #: ../panel/main.c:81
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Imprimir informação de versão e sair"
 
@@ -134,59 +137,59 @@ msgstr "[ARGUMENTOS...]"
 msgid "Type \"%s --help\" for usage."
 msgstr "Digite \"%s --help\" para utilização."
 
-#: ../panel/main.c:171
+#: ../panel/main.c:175
 msgid "The Xfce development team. All rights reserved."
 msgstr "A equipa de desenvolvimento Xfce. Todos os direitos reservados."
 
-#: ../panel/main.c:172
+#: ../panel/main.c:176
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Por favor, reporte erros para <%s>."
 
-#: ../panel/main.c:218
+#: ../panel/main.c:222
 msgid "There is already a running instance"
 msgstr "Já existe uma instância em execução"
 
 #. spawn ourselfs again
-#: ../panel/main.c:258
+#: ../panel/main.c:262
 msgid "Restarting..."
 msgstr "Reiniciando..."
 
-#: ../panel/main.c:273
+#: ../panel/main.c:277
 msgid "Failed to show the preferences dialog"
 msgstr "Falha ao mostrar o diálogo de preferências"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:279
 msgid "Failed to show the add new items dialog"
 msgstr "Falha ao mostrar o diálogo adicionar novos itens"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:281
 msgid "Failed to save the panel configuration"
 msgstr "Falha ao gravar a configuração do painel"
 
-#: ../panel/main.c:279
+#: ../panel/main.c:283
 msgid "Failed to add a plugin to the panel"
 msgstr "Falha ao adicionar plugin ao painel"
 
-#: ../panel/main.c:281
+#: ../panel/main.c:285
 msgid "Failed to restart the panel"
 msgstr "Falha ao reiniciar o painel"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:287
 msgid "Failed to quit the panel"
 msgstr "Falha ao fechar o painel"
 
-#: ../panel/main.c:285
+#: ../panel/main.c:289
 msgid "Failed to send D-Bus message"
 msgstr "Falha ao enviar a mensagem D-BUS"
 
 #. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:292
+#: ../panel/main.c:296
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância de %s foi encontrada"
 
-#: ../panel/panel-application.c:193
+#: ../panel/panel-application.c:194
 msgid "Failed to launch the migration application"
 msgstr "Falha ao lançar a aplicação de migração"
 
@@ -607,23 +610,65 @@ msgstr "Menu Xfce"
 msgid "Select An Icon"
 msgstr "Seleccione Um Ícone"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:670
+#: ../plugins/applicationsmenu/applicationsmenu.c:683
 #: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Falha ao exectar o comando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:823
+#: ../plugins/applicationsmenu/applicationsmenu.c:837
 msgid "No applications found"
 msgstr "Nenhuma aplicação encontrada"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:835
+#: ../plugins/applicationsmenu/applicationsmenu.c:849
 msgid "Failed to load the applications menu"
 msgstr "Falha ao carregar o menu das aplicações"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
 msgstr "Mostrar um menu que contenha as categorias das aplicações"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+msgid "Usage:"
+msgstr "Utilização:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+msgid "OPTION"
+msgstr "OPÇÃO"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+msgid "Options:"
+msgstr "Opções:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+msgid "Popup menu at current mouse position"
+msgstr "Abrir menu na posição actual do rato"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+msgid "Show help options"
+msgstr "Mostrar ajuda de opções"
+
+#: ../plugins/clock/clock.c:144
+msgid "Week %V"
+msgstr "Semana %V"
+
+#: ../plugins/clock/clock.c:383
+msgid "Failed to execute clock command"
+msgstr "Falha ao executar o comando do relógio"
+
+#: ../plugins/clock/clock.c:677
+msgid "Custom Format"
+msgstr "Formato Personalizado"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
@@ -936,52 +981,40 @@ msgstr "onze"
 msgid "twelve"
 msgstr "doze"
 
-#: ../plugins/clock/clock.c:144
-msgid "Week %V"
-msgstr "Semana %V"
-
-#: ../plugins/clock/clock.c:383
-msgid "Failed to execute clock command"
-msgstr "Falha ao executar o comando do relógio"
-
-#: ../plugins/clock/clock.c:677
-msgid "Custom Format"
-msgstr "Formato Personalizado"
-
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
 msgstr "Que horas são?"
 
-#: ../plugins/directorymenu/directorymenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Falha ao lançar a aplicação \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:569
+#: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Falha ao consultar o tipo de conteúdo de \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:578
+#: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Nenhuma aplicação encontrada para \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:593
+#: ../plugins/directorymenu/directorymenu.c:605
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Falha ao lanção a aplicação omissa para \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:684
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Falha ao executar a aplicação preferida para a categoria \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:757
+#: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
 msgstr "Abrir Pasta"
 
-#: ../plugins/directorymenu/directorymenu.c:768
+#: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
 msgstr "Abrir no Terminal"
 
@@ -1019,6 +1052,14 @@ msgstr "Directório _Base:"
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
 msgstr "Exemplo do _Ficheiro:"
+
+#: ../plugins/launcher/launcher.c:1441
+msgid "Unnamed Item"
+msgstr "Item Sem Nome"
+
+#: ../plugins/launcher/launcher.c:1581
+msgid "No items"
+msgstr "Sem itens"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
@@ -1110,17 +1151,13 @@ msgstr "Oeste"
 msgid "_Arrow button position:"
 msgstr "Posição do botão s_eta:"
 
-#: ../plugins/launcher/launcher.c:1441
-msgid "Unnamed Item"
-msgstr "Item Sem Nome"
-
-#: ../plugins/launcher/launcher.c:1581
-msgid "No items"
-msgstr "Sem itens"
-
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Lançador de programas com menu opcional"
+
+#: ../plugins/pager/pager.c:404
+msgid "Unable to open the Xfce workspace settings"
+msgstr "Incapaz de abrir as definições da área de trabalho"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1148,10 +1185,6 @@ msgstr "Alternador de Áreas de Trabalho"
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Workspace _Settings..."
 msgstr "De_finições da Área de Trabalho..."
-
-#: ../plugins/pager/pager.c:404
-msgid "Unable to open the Xfce workspace settings"
-msgstr "Incapaz de abrir as definições da área de trabalho"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1206,6 +1239,19 @@ msgstr "Ocultar todas as janelas e mostrar ambiente de trabalho"
 msgid "Show Desktop"
 msgstr "Mostrar Ambiente de Trabalho"
 
+#. create fake error and show it
+#: ../plugins/systray/systray.c:551
+msgid "Most likely another widget took over the function of a notification area. This plugin will close."
+msgstr "Provavelmente, já existe um widget que se apoderou da função. Este plugin irá terminar."
+
+#: ../plugins/systray/systray.c:554
+msgid "The notification area lost selection"
+msgstr "A área de notificação perdeu a selecção"
+
+#: ../plugins/systray/systray.c:747
+msgid "Are you sure you want to clear the list of known applications?"
+msgstr "Tem a certeza que quer limpar a lista de aplicações conhecidas?"
+
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
 msgstr "Limpar Ap_licações Conhecidas"
@@ -1227,19 +1273,6 @@ msgstr "_Número de linhas:"
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Falha ao adquirir o gestor de selecção para o ecrã %d"
-
-#. create fake error and show it
-#: ../plugins/systray/systray.c:551
-msgid "Most likely another widget took over the function of a notification area. This plugin will close."
-msgstr "Provavelmente, já existe um widget que se apoderou da função. Este plugin irá terminar."
-
-#: ../plugins/systray/systray.c:554
-msgid "The notification area lost selection"
-msgstr "A área de notificação perdeu a selecção"
-
-#: ../plugins/systray/systray.c:747
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Tem a certeza que quer limpar a lista de aplicações conhecidas?"
 
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
@@ -1339,6 +1372,37 @@ msgstr "Fechar _Todas"
 msgid "Switch between open windows using buttons"
 msgstr "Trocar entre janelas abertas usando botões"
 
+#: ../plugins/windowmenu/windowmenu.c:652
+msgid "Desktop"
+msgstr "Ambiente de Trabalho"
+
+#: ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "Área de Trabalho %d"
+
+#: ../plugins/windowmenu/windowmenu.c:1243
+msgid "No Windows"
+msgstr "Sem Janelas"
+
+#: ../plugins/windowmenu/windowmenu.c:1258
+msgid "Urgent Windows"
+msgstr "Janelas Urgentes"
+
+#: ../plugins/windowmenu/windowmenu.c:1300
+msgid "Add Workspace"
+msgstr "Adicionar Área de Trabalho"
+
+#: ../plugins/windowmenu/windowmenu.c:1320
+#, c-format
+msgid "Remove Workspace \"%s\""
+msgstr "Remover Área de Trabalho \"%s\""
+
+#: ../plugins/windowmenu/windowmenu.c:1322
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Remover Área de Trabalho %d"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
 msgstr "Seta"
@@ -1363,37 +1427,6 @@ msgstr "Mostrar a_cções da área de trabalho"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Window Menu"
 msgstr "Menu da Janela"
-
-#: ../plugins/windowmenu/windowmenu.c:648
-msgid "Desktop"
-msgstr "Ambiente de Trabalho"
-
-#: ../plugins/windowmenu/windowmenu.c:881
-#, c-format
-msgid "Workspace %d"
-msgstr "Área de Trabalho %d"
-
-#: ../plugins/windowmenu/windowmenu.c:1270
-msgid "No Windows"
-msgstr "Sem Janelas"
-
-#: ../plugins/windowmenu/windowmenu.c:1285
-msgid "Urgent Windows"
-msgstr "Janelas Urgentes"
-
-#: ../plugins/windowmenu/windowmenu.c:1327
-msgid "Add Workspace"
-msgstr "Adicionar Área de Trabalho"
-
-#: ../plugins/windowmenu/windowmenu.c:1347
-#, c-format
-msgid "Remove Workspace \"%s\""
-msgstr "Remover Área de Trabalho \"%s\""
-
-#: ../plugins/windowmenu/windowmenu.c:1349
-#, c-format
-msgid "Remove Workspace %d"
-msgstr "Remover Área de Trabalho %d"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
