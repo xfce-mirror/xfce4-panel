@@ -46,6 +46,7 @@
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
 #define ARROW_INSIDE_BUTTON(plugin)    (!NO_ARROW_INSIDE_BUTTON (plugin))
 #define LAUNCHER_TYPE_PTR_ARRAY        (dbus_g_type_get_collection("GPtrArray", G_TYPE_VALUE))
+#define RELATIVE_CONFIG_PATH           PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d"
 
 
 
@@ -56,6 +57,7 @@ static void launcher_plugin_style_set (GtkWidget *widget, GtkStyle *previous_sty
 
 static void launcher_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_free_data (XfcePanelPlugin *panel_plugin);
+static void launcher_plugin_removed (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_save (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
 static gboolean launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
@@ -196,6 +198,7 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
   plugin_class->size_changed = launcher_plugin_size_changed;
   plugin_class->configure_plugin = launcher_plugin_configure_plugin;
   plugin_class->screen_position_changed = launcher_plugin_screen_position_changed;
+  plugin_class->removed = launcher_plugin_removed;
 
   g_object_class_install_property (gobject_class,
                                    PROP_ITEMS,
@@ -737,7 +740,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* lookup the config directory where this launcher stores it's desktop files */
-  file = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d",
+  file = g_strdup_printf (RELATIVE_CONFIG_PATH,
                           xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (plugin)),
                           xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)));
   path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, file, FALSE);
@@ -827,6 +830,53 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* release the cached tooltip */
   if (plugin->tooltip_cache != NULL)
     g_object_unref (G_OBJECT (plugin->tooltip_cache));
+}
+
+
+
+static void
+launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
+{
+  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
+  GError         *error = NULL;
+  GSList         *li;
+  GFile          *item_file;
+  gboolean        result = TRUE;
+
+  panel_return_if_fail (G_IS_FILE (plugin->config_directory));
+
+  /* leave if there is not config */
+  if (!g_file_query_exists (plugin->config_directory, NULL))
+    return;
+
+  /* stop monitoring */
+  if (plugin->config_monitor != NULL)
+    {
+      g_file_monitor_cancel (plugin->config_monitor);
+      g_object_unref (G_OBJECT (plugin->config_monitor));
+      plugin->config_monitor = NULL;
+    }
+
+  /* cleanup desktop files in the config dir */
+  for (li = plugin->items; result && li != NULL; li = li->next)
+    {
+      item_file = garcon_menu_item_get_file (li->data);
+      if (g_file_has_prefix (item_file, plugin->config_directory))
+        result = g_file_delete (item_file, NULL, &error);
+      g_object_unref (G_OBJECT (item_file));
+    }
+
+  /* remove config dir if everything went fine */
+  if (result)
+    result = g_file_delete (plugin->config_directory, NULL, &error);
+
+  if (!result)
+    {
+      xfce_dialog_show_error (NULL, error,
+          _("Failed to cleanup the configuration of launcher %d"),
+          xfce_panel_plugin_get_unique_id (panel_plugin));
+      g_error_free (error);
+    }
 }
 
 
@@ -2192,8 +2242,7 @@ launcher_plugin_unique_filename (LauncherPlugin *plugin)
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
 
   g_get_current_time (&timeval);
-  filename = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d"
-                              G_DIR_SEPARATOR_S "%ld%d.desktop",
+  filename = g_strdup_printf (RELATIVE_CONFIG_PATH G_DIR_SEPARATOR_S "%ld%d.desktop",
                               xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (plugin)),
                               xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)),
                               timeval.tv_sec, ++counter);
