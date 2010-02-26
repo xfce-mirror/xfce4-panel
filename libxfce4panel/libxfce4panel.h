@@ -86,13 +86,13 @@ G_BEGIN_DECLS
   }
 
 #define _XPP_DEFINE_PLUGIN(TypeName, type_name, resident, args...) \
-  GType __xpp_initialize (GTypeModule *type_module, gboolean *make_resident); \
+  GType __xpp_init (GTypeModule *type_module, gboolean *make_resident); \
   \
   XFCE_PANEL_DEFINE_TYPE (TypeName, type_name, XFCE_TYPE_PANEL_PLUGIN) \
   \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT GType \
-  __xpp_initialize (GTypeModule *type_module, \
-                    gboolean    *make_resident) \
+  __xpp_init (GTypeModule *type_module, \
+              gboolean    *make_resident) \
   { \
     typedef void (*XppRegFunc) (GTypeModule *module); \
     XppRegFunc reg_funcs[] = { type_name##_register_type, args }; \
@@ -109,22 +109,74 @@ G_BEGIN_DECLS
     return type_name##_get_type (); \
   }
 
-#define XFCE_PANEL_PLUGIN_REGISTER(init_func) \
-  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (init_func, {})
+typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
 
+typedef gboolean (*XfcePanelPluginPreInit) (gint argc, gchar **argv);
+
+typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
+
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER:
+ * construct_func : name of the function that points to an
+ *                  #XfcePanelPluginFunc function.
+ *
+ * Since: 4.8
+ **/
+#define XFCE_PANEL_PLUGIN_REGISTER(construct_func) \
+  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, /* foo */, /* foo */)
+
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK:
+ * construct_func : name of the function that points to an
+ *                  #XfcePanelPluginFunc function.
+ * check_func     : name of the function that points to an
+ *                  #XfcePanelPluginCheck function.
+ *
+ * Since: 4.8
+ **/
 #define XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK(construct_func, check_func) \
-  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
+  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, /* foo */, \
+    if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
 
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTENDED(construct_func, CODE) \
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_FULL:
+ * construct_func : name of the function that points to an
+ *                  #XfcePanelPluginFunc function.
+ * preinit_func   : name of the function that points to an
+ *                  #XfcePanelPluginPreInit function.
+ * check_func     : name of the function that points to an
+ *                  #XfcePanelPluginCheck function.
+ *
+ * Since: 4.8
+ **/
+#define XFCE_PANEL_PLUGIN_REGISTER_FULL(construct_func, preinit_func, check_func) \
+  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, \
+    PANEL_SYMBOL_EXPORT G_MODULE_EXPORT gboolean \
+    __xpp_preinit (gint    argc, \
+                   gchar **argv); \
+    PANEL_SYMBOL_EXPORT G_MODULE_EXPORT gboolean \
+    __xpp_preinit (gint    argc, \
+                   gchar **argv) \
+    { \
+      return (*preinit_func) (argc, argv); \
+    }, \
+    \
+    if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
+
+/* <private> */
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTENDED(construct_func, PREINIT_CODE, CHECK_CODE) \
   static void \
   __xpp_realize (XfcePanelPlugin *xpp) \
   { \
     panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     \
-    g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), G_CALLBACK (__xpp_realize), NULL); \
+    g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), \
+        G_CALLBACK (__xpp_realize), NULL); \
     \
     (*construct_func) (xpp); \
   } \
+  \
+  PREINIT_CODE \
   \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
   __xpp_construct (const gchar  *xpp_name, \
@@ -146,7 +198,7 @@ G_BEGIN_DECLS
     panel_return_val_if_fail (GDK_IS_SCREEN (xpp_screen), NULL); \
     panel_return_val_if_fail (xpp_name != NULL && xpp_unique_id != -1, NULL); \
     \
-    CODE \
+    CHECK_CODE \
       { \
         xpp = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
                             "name", xpp_name, \
@@ -155,7 +207,8 @@ G_BEGIN_DECLS
                             "comment", xpp_comment, \
                             "arguments", xpp_arguments, NULL); \
         \
-        g_signal_connect_after (G_OBJECT (xpp), "realize", G_CALLBACK (__xpp_realize), NULL); \
+        g_signal_connect_after (G_OBJECT (xpp), "realize", \
+            G_CALLBACK (__xpp_realize), NULL); \
       } \
     \
     return xpp; \
