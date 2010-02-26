@@ -32,7 +32,9 @@ typedef struct _PagerPlugin      PagerPlugin;
 #define XFCE_IS_PAGER_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PAGER_PLUGIN))
 #define XFCE_PAGER_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PAGER_PLUGIN, PagerPluginClass))
 
-GType pager_plugin_get_type (void) G_GNUC_CONST;
+GType pager_plugin_get_type      (void) G_GNUC_CONST;
+
+void  pager_plugin_register_type (GTypeModule *type_module);
 
 G_END_DECLS
 

@@ -91,10 +91,8 @@ enum
 
 
 
-/* define and register the plugin */
-G_DEFINE_TYPE (PagerPlugin, pager_plugin, XFCE_TYPE_PANEL_PLUGIN)
-
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_PAGER_PLUGIN)
+/* define the plugin */
+XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (PagerPlugin, pager_plugin)
 
 
 
@@ -111,7 +109,6 @@ pager_plugin_class_init (PagerPluginClass *klass)
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->scroll_event = pager_plugin_scroll_event;
-  widget_class->screen_changed = pager_plugin_screen_changed;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = pager_plugin_construct;
@@ -278,10 +275,6 @@ pager_plugin_screen_changed (GtkWidget *widget,
   GdkScreen   *screen;
   WnckScreen  *wnck_screen;
 
-  /* do nothing until the xfconf properties are initialized */
-  if (plugin->channel == NULL)
-    return;
-
   /* get the active screen */
   screen = gtk_widget_get_screen (widget);
   wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
@@ -329,7 +322,9 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
                           G_TYPE_UINT, plugin, "rows");
 
   /* create the pager */
-  pager_plugin_screen_changed (GTK_WIDGET (panel_plugin), NULL);
+  g_signal_connect (G_OBJECT (plugin), "screen-changed",
+      G_CALLBACK (pager_plugin_screen_changed), NULL);
+  pager_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
 }
 
 
@@ -341,8 +336,13 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
 
+  /* disconnect screen changed signal */
+  g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
+      pager_plugin_screen_changed, NULL);
+
   /* release the xfonf channel */
-  g_object_unref (G_OBJECT (plugin->channel));
+  if (G_LIKELY (plugin->channel != NULL))
+    g_object_unref (G_OBJECT (plugin->channel));
 
   /* shutdown xfconf */
   xfconf_shutdown ();
@@ -443,13 +443,14 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   /* load the dialog from the glade file */
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, pager_dialog_glade, pager_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, pager_dialog_glade,
+      pager_dialog_glade_length, NULL))
     {
       /* signals to monitor number of workspace changes */
       g_signal_connect (G_OBJECT (plugin->wnck_screen), "workspace-created",
-                        G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
+          G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
       g_signal_connect (G_OBJECT (plugin->wnck_screen), "workspace-destroyed",
-                        G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
+          G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
 
       xfce_panel_plugin_block_menu (panel_plugin);
       g_object_weak_ref (G_OBJECT (builder), pager_plugin_configure_destroyed, plugin);
