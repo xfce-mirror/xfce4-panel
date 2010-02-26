@@ -307,12 +307,12 @@ panel_application_load (PanelApplication *application,
 {
   const GValue *value;
   PanelWindow  *window;
-  guint         i, n_panels;
-  guint         j, n_plugins;
-  gchar         buf[100];
+  guint         i, j, n_panels;
+  gchar         buf[50];
   const gchar  *name;
   gint          unique_id;
   GdkScreen    *screen;
+  GPtrArray    *array;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
@@ -325,33 +325,35 @@ panel_application_load (PanelApplication *application,
     {
       /* create a new window */
       window = panel_application_new_window (application, NULL, FALSE);
+      screen = gtk_window_get_screen (GTK_WINDOW (window));
 
       /* walk all the plugins on the panel */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
       value = g_hash_table_lookup (hash_table, buf);
-      n_plugins = value != NULL ? g_value_get_uint (value) : 0;
-      for (j = 0; j < n_plugins; j++)
+      array = value ? g_value_get_boxed (value) : NULL;
+      if (value == NULL || array->len % 2 != 0)
+        continue;
+
+      /* walk the array in pairs of two */
+      for (j = 0; j < array->len; j += 2)
         {
           /* get the plugin module name */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/module", i, j);
-          value = g_hash_table_lookup (hash_table, buf);
+          value = g_ptr_array_index (array, j);
           name = value != NULL ? g_value_get_string (value) : NULL;
           if (G_UNLIKELY (name == NULL))
             continue;
 
-          /* read the plugin id */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
-          value = g_hash_table_lookup (hash_table, buf);
+          /* get the plugin id */
+          value = g_ptr_array_index (array, j + 1);
           unique_id = value != NULL ? g_value_get_int (value) : -1;
+          if (G_UNLIKELY (unique_id < 1))
+            continue;
 
-          screen = gtk_window_get_screen (GTK_WINDOW (window));
+          /* append the plugin to the panel */
           if (!panel_application_plugin_insert (application, window, screen,
                                                 name, unique_id, NULL, -1))
             {
               /* plugin could not be loaded, remove it from the channel */
-              g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u", i, j);
-              xfconf_channel_reset_property (application->xfconf, buf, TRUE);
-
               g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
               xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
@@ -1021,9 +1023,11 @@ panel_application_save (PanelApplication *application,
   GList                   *children, *lp;
   GtkWidget               *itembar;
   XfcePanelPluginProvider *provider;
-  guint                    i, j;
-  gchar                    buf[100];
+  guint                    i;
+  gchar                    buf[50];
   XfconfChannel           *channel = application->xfconf;
+  GPtrArray               *array;
+  GValue                  *value;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
@@ -1035,30 +1039,49 @@ panel_application_save (PanelApplication *application,
       itembar = gtk_bin_get_child (GTK_BIN (li->data));
       children = gtk_container_get_children (GTK_CONTAINER (itembar));
 
+      /* create property name */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
+
+      /* only cleanup and continue if there are not children */
+      if (G_UNLIKELY (children == NULL))
+        {
+          xfconf_channel_reset_property (channel, buf, FALSE);
+          continue;
+        }
+
+      /* create empty pointer array */
+      array = g_ptr_array_new ();
+
       /* walk all the plugin children */
-      for (lp = children, j = 0; lp != NULL; lp = lp->next, j++)
+      for (lp = children; lp != NULL; lp = lp->next)
         {
           provider = XFCE_PANEL_PLUGIN_PROVIDER (lp->data);
 
-          /* save the plugin name */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/module", i, j);
-          xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_name (provider));
+          /* add plugin name to the array */
+          value = g_new0 (GValue, 1);
+          g_value_init (value, G_TYPE_STRING);
+          g_value_set_static_string (value,
+              xfce_panel_plugin_provider_get_name (provider));
+          g_ptr_array_add (array, value);
 
-          /* save the plugin id */
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
-          xfconf_channel_set_int (channel, buf, xfce_panel_plugin_provider_get_unique_id (provider));
+          /* add plugin id to the array */
+          value = g_new0 (GValue, 1);
+          g_value_init (value, G_TYPE_INT);
+          g_value_set_int (value,
+              xfce_panel_plugin_provider_get_unique_id (provider));
+          g_ptr_array_add (array, value);
 
           /* ask the plugin to save */
           if (save_plugin_providers)
             xfce_panel_plugin_provider_save (provider);
         }
 
+      /* store the plugins for this panel */
+      xfconf_channel_set_arrayv (channel, buf, array);
+
       /* cleanup */
       g_list_free (children);
-
-      /* store the number of plugins in this panel */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
-      xfconf_channel_set_uint (channel, buf, j);
+      xfconf_array_free (array);
     }
 
   /* store the number of panels */
