@@ -246,9 +246,6 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->menu_timeout_id = 0;
   plugin->menu_icon_size = DEFAULT_MENU_ICON_SIZE;
 
-  /* show the configure menu item */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
   /* monitor the default icon theme for changes */
   icon_theme = gtk_icon_theme_get_default ();
   if (G_LIKELY (icon_theme != NULL))
@@ -544,6 +541,9 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "arrow-position", G_TYPE_UINT },
     { NULL, G_TYPE_NONE }
   };
+
+  /* show the configure menu item */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),

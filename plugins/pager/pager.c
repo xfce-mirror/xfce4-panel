@@ -148,9 +148,6 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->show_names = FALSE;
   plugin->rows = 1;
   plugin->wnck_pager = NULL;
-
-  /* show the properties dialog */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 }
 
 
@@ -309,6 +306,9 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "rows", G_TYPE_UINT },
     { NULL, G_TYPE_NONE }
   };
+
+  /* show the properties dialog */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),

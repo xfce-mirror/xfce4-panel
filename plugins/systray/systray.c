@@ -155,9 +155,6 @@ systray_plugin_init (SystrayPlugin *plugin)
   plugin->manager = NULL;
   plugin->show_frame = FALSE;
 
-  /* show configure */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
   /* plugin widgets */
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
@@ -297,6 +294,9 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-frame", G_TYPE_BOOLEAN },
     { NULL, G_TYPE_NONE }
   };
+
+  /* show configure */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),

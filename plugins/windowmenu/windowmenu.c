@@ -201,9 +201,6 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->all_workspaces = TRUE;
   plugin->urgent_windows = 0;
 
-  /* show configure */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
   /* create the widgets */
   plugin->button = xfce_arrow_button_new (GTK_ARROW_NONE);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
@@ -386,6 +383,9 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "all-workspaces", G_TYPE_BOOLEAN },
     { NULL, G_TYPE_NONE }
   };
+
+  /* show configure */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* show the icon */
   gtk_widget_show (plugin->icon);

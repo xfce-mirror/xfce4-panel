@@ -90,9 +90,6 @@ tasklist_plugin_init (TasklistPlugin *plugin)
 {
   GtkWidget *box;
 
-  /* show configure */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
   /* create widgets */
   box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
   gtk_container_add (GTK_CONTAINER (plugin), box);
@@ -131,6 +128,9 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-handle", G_TYPE_BOOLEAN },
     { NULL, G_TYPE_NONE }
   };
+
+  /* show configure */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* expand the plugin */
   xfce_panel_plugin_set_expand (panel_plugin, TRUE);

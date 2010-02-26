@@ -179,9 +179,6 @@ actions_plugin_init (ActionsPlugin *plugin)
   plugin->first_action = ACTION_LOG_OUT_DIALOG;
   plugin->second_action = ACTION_DISABLED;
 
-  /* show the properties dialog */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, TRUE, 0);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
 
@@ -300,6 +297,9 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "second-action", G_TYPE_UINT },
     { NULL, G_TYPE_NONE }
   };
+
+  /* show the properties dialog */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),

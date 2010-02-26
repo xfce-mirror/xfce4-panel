@@ -137,9 +137,6 @@ separator_plugin_init (SeparatorPlugin *plugin)
 {
   /* initialize */
   plugin->style = SEPARATOR_PLUGIN_STYLE_SEPARATOR;
-
-  /* show the properties dialog */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 }
 
 
@@ -273,6 +270,9 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "expand", G_TYPE_BOOLEAN },
     { NULL, G_TYPE_NONE }
   };
+
+  /* show the properties dialog */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* connect all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),
