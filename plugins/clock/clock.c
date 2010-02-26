@@ -120,6 +120,7 @@ struct _ClockPluginTimeout
   GSourceFunc function;
   gpointer    data;
   guint       timeout_id;
+  guint       restart : 1;
 };
 
 typedef struct
@@ -600,8 +601,20 @@ static gboolean
 clock_plugin_timeout_running (gpointer user_data)
 {
   ClockPluginTimeout *timeout = user_data;
+  gboolean            result;
+  struct tm           tm;
 
-  return (timeout->function) (timeout->data);
+  result = (timeout->function) (timeout->data);
+
+  /* check if the timeout still runs in time if updating once a minute */
+  if (result && timeout->interval == CLOCK_INTERVAL_MINUTE)
+    {
+      /* sync again when we don't run on time */
+      clock_plugin_get_localtime (&tm);
+      timeout->restart = tm.tm_sec != 0;
+    }
+
+  return result && !timeout->restart;
 }
 
 
@@ -610,7 +623,11 @@ static void
 clock_plugin_timeout_destroyed (gpointer user_data)
 {
   ClockPluginTimeout *timeout = user_data;
+
   timeout->timeout_id = 0;
+
+  if (G_UNLIKELY (timeout->restart))
+    clock_plugin_timeout_set_interval (timeout, timeout->interval);
 }
 
 
@@ -654,6 +671,7 @@ clock_plugin_timeout_new (guint       interval,
   timeout->function = function;
   timeout->data = data;
   timeout->timeout_id = 0;
+  timeout->restart = FALSE;
 
   clock_plugin_timeout_set_interval (timeout, interval);
 
@@ -666,32 +684,38 @@ void
 clock_plugin_timeout_set_interval (ClockPluginTimeout *timeout,
                                    guint               interval)
 {
-  GTimeVal timeval;
-  guint    next_interval;
+  struct tm tm;
+  guint     next_interval;
+  gboolean  restart = timeout->restart;
 
   panel_return_if_fail (timeout != NULL);
   panel_return_if_fail (interval > 0);
 
-  /* leave if nothing changed */
-  if (G_UNLIKELY (timeout->interval == interval))
+  /* leave if nothing changed and we're not restarting */
+  if (!restart && timeout->interval == interval)
     return;
   timeout->interval = interval;
+  timeout->restart = FALSE;
 
   /* stop running timeout */
   if (G_LIKELY (timeout->timeout_id != 0))
     g_source_remove (timeout->timeout_id);
   timeout->timeout_id = 0;
 
-  /* run timeout, leave if it returns false */
-  if (!(timeout->function) (timeout->data))
+  /* run function when not restarting, leave if it returns false */
+  if (!restart && !(timeout->function) (timeout->data))
     return;
 
-  /* get the seconds to the next internal (+ 1 second)*/
-  g_get_current_time (&timeval);
+  /* get the seconds to the next internal */
   if (interval == CLOCK_INTERVAL_MINUTE)
-    next_interval = 60 - timeval.tv_sec % 60;
+    {
+      clock_plugin_get_localtime (&tm);
+      next_interval = 60 - tm.tm_sec;
+    }
   else
-    next_interval = 0;
+    {
+      next_interval = 0;
+    }
 
   if (next_interval > 0)
     {
@@ -716,6 +740,7 @@ clock_plugin_timeout_free (ClockPluginTimeout *timeout)
 {
   panel_return_if_fail (timeout != NULL);
 
+  timeout->restart = FALSE;
   if (G_LIKELY (timeout->timeout_id != 0))
     g_source_remove (timeout->timeout_id);
   g_slice_free (ClockPluginTimeout, timeout);
