@@ -42,18 +42,14 @@ libshowdesktop_la_DEPENDENCIES = \
 # .desktop file
 #
 desktopdir = $(datadir)/xfce4/panel-plugins
-desktop_in_in_files = showdesktop.desktop.in.in
-desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
-showdesktop.desktop.in: $(desktop_in_in_files)
-	sed -e "s,\@plugindir\@,$(plugindir),g" < $< > $@
+desktop_in_files = showdesktop.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	$(desktop_in_in_files)
+	$(desktop_in_files)
 
 DISTCLEANFILES = \
-	$(desktop_DATA) \
-	$(desktop_in_files)
+	$(desktop_DATA)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
