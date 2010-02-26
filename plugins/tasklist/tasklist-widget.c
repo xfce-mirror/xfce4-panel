@@ -586,14 +586,17 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
       /* calculate the child position */
       if (tasklist->horizontal)
         {
-          child_allocation.x = allocation->x + (i / rows) * width;
-          child_allocation.y = allocation->y + (i % rows) * height;
+          child_allocation.x = (i / rows) * width;
+          child_allocation.y = (i % rows) * height;
         }
       else
         {
-          child_allocation.x = allocation->x + (i % rows) * width;
-          child_allocation.y = allocation->y + (i / rows) * height;
+          child_allocation.x = (i % rows) * width;
+          child_allocation.y = (i / rows) * height;
         }
+
+      child_allocation.x += allocation->x;
+      child_allocation.y += allocation->y;
 
       /* allocate the child */
       gtk_widget_size_allocate (child->button, &child_allocation);
@@ -1595,7 +1598,7 @@ xfce_tasklist_set_show_labels (XfceTasklist *tasklist,
                                          FALSE, FALSE, 0,
                                          GTK_PACK_START);
             }
-          else /* XFCE_TASKLIST_STYLE_ICONBOX */
+          else
             {
               gtk_widget_hide (child->label);
               gtk_box_set_child_packing (GTK_BOX (child->box),
