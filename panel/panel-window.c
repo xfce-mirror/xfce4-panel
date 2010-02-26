@@ -58,13 +58,14 @@ static void panel_window_size_request (GtkWidget *widget, GtkRequisition *requis
 static void panel_window_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
 static void panel_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen);
 static void panel_window_paint_handle (PanelWindow *window,  gboolean start, GtkStateType state, cairo_t *rc);
-static void panel_window_paint_border (PanelWindow *window, GtkStateType state, cairo_t *rc);
+static void panel_window_paint_borders (PanelWindow *window, GtkStateType state, cairo_t *rc);
 static void panel_window_calculate_position (PanelWindow *window, gint width, gint height, gint *x, gint *y);
 static void panel_window_working_area (PanelWindow  *window, gint root_x, gint root_y, GdkRectangle *dest);
 static gboolean panel_window_struts_are_possible (PanelWindow *window, gint x, gint y, gint width, gint height);
 static void panel_window_struts_update (PanelWindow  *window, gint x, gint y, gint width, gint height);
 static void panel_window_set_colormap (PanelWindow *window);
 static void panel_window_get_position (PanelWindow *window, gint *root_x, gint *root_y);
+static void panel_window_set_borders (PanelWindow *window);
 
 enum
 {
@@ -123,6 +124,9 @@ struct _PanelWindow
 
   /* snapping edge of the window */
   PanelWindowSnapEdge  snap_edge;
+
+  /* the borders we're going to draw */
+  PanelWindowBorders   borders;
 
   /* whether we should apply struts for this screen position */
   gint                 struts_possible;
@@ -247,6 +251,7 @@ panel_window_init (PanelWindow *window)
   window->struts_possible = -1;
   window->size = 48;
   window->snap_edge = PANEL_SNAP_EGDE_NONE;
+  window->borders = 0;
   window->span_monitors = FALSE;
   window->length = 0.25;
   window->horizontal = TRUE;
@@ -377,8 +382,8 @@ panel_window_expose_event (GtkWidget      *widget,
           panel_window_paint_handle (window, FALSE, state, cr);
         }
 
-      /* paint the panel border */
-      panel_window_paint_border (window, state, cr);
+      /* paint the panel borders */
+      panel_window_paint_borders (window, state, cr);
 
       /* destroy cairo context */
       cairo_destroy (cr);
@@ -437,15 +442,16 @@ static gboolean
 panel_window_motion_notify (GtkWidget      *widget,
                             GdkEventMotion *event)
 {
-  PanelWindow  *window = PANEL_WINDOW (widget);
-  gint          clamp_x, clamp_y;
-  GdkScreen    *screen;
-  gint          window_width, window_height;
-  gint          window_x, window_y;
-  GdkRectangle  area;
-  gint          snap_x, snap_y;
-  guint         snap_horizontal;
-  guint         snap_vertical;
+  PanelWindow         *window = PANEL_WINDOW (widget);
+  gint                 clamp_x, clamp_y;
+  GdkScreen           *screen;
+  gint                 window_width, window_height;
+  gint                 window_x, window_y;
+  GdkRectangle         area;
+  gint                 snap_x, snap_y;
+  guint                snap_horizontal;
+  guint                snap_vertical;
+  PanelWindowSnapEdge  snap_edge = PANEL_SNAP_EGDE_NONE;
 
   if (window->drag_motion)
     {
@@ -480,22 +486,20 @@ panel_window_motion_notify (GtkWidget      *widget,
 
       /* detect the snap mode */
       if (snap_horizontal == SNAP_START)
-        window->snap_edge = PANEL_SNAP_EGDE_W + snap_vertical;
+        snap_edge = PANEL_SNAP_EGDE_W + snap_vertical;
       else if (snap_horizontal == SNAP_END)
-        window->snap_edge = PANEL_SNAP_EGDE_E + snap_vertical;
+        snap_edge = PANEL_SNAP_EGDE_E + snap_vertical;
       else if (snap_horizontal == SNAP_CENTER && snap_vertical == SNAP_START)
-        window->snap_edge = PANEL_SNAP_EGDE_NC;
+        snap_edge = PANEL_SNAP_EGDE_NC;
       else if (snap_horizontal == SNAP_CENTER && snap_vertical == SNAP_END)
-        window->snap_edge = PANEL_SNAP_EGDE_SC;
+        snap_edge = PANEL_SNAP_EGDE_SC;
       else if (snap_horizontal == SNAP_NONE && snap_vertical == SNAP_START)
-        window->snap_edge = PANEL_SNAP_EGDE_N;
+        snap_edge = PANEL_SNAP_EGDE_N;
       else if (snap_horizontal == SNAP_NONE && snap_vertical == SNAP_END)
-        window->snap_edge = PANEL_SNAP_EGDE_S;
-      else
-        window->snap_edge = PANEL_SNAP_EGDE_NONE;
+        snap_edge = PANEL_SNAP_EGDE_S;
 
       /* when snapping succeeded, set the snap coordinates for visual feedback */
-      if (window->snap_edge != PANEL_SNAP_EGDE_NONE)
+      if (snap_edge != PANEL_SNAP_EGDE_NONE)
         {
           clamp_x = snap_x;
           clamp_y = snap_y;
@@ -503,6 +507,16 @@ panel_window_motion_notify (GtkWidget      *widget,
 
       /* move and resize the window */
       gdk_window_move_resize (widget->window, clamp_x, clamp_y, window_width, window_height);
+
+      /* if the snap edge changed, update the border */
+      if (window->snap_edge != snap_edge)
+        {
+          /* set the new value */
+          window->snap_edge = snap_edge;
+
+          /* update the borders */
+          panel_window_set_borders (window);
+        }
 
       return TRUE;
     }
@@ -571,6 +585,9 @@ panel_window_button_release_event (GtkWidget      *widget,
 
       /* release the pointer */
       gdk_pointer_ungrab (event->time);
+
+      /* update the borders */
+      panel_window_set_borders (window);
 
       /* update working area, struts and reallocate */
       panel_window_screen_changed (widget, gtk_window_get_screen (GTK_WINDOW (widget)));
@@ -789,6 +806,7 @@ panel_window_size_request (GtkWidget      *widget,
 {
   PanelWindow    *window = PANEL_WINDOW (widget);
   GtkRequisition  child_requisition;
+  gint            extra_width = 0, extra_height = 0;
 
   if (GTK_WIDGET_REALIZED (widget))
     {
@@ -802,31 +820,47 @@ panel_window_size_request (GtkWidget      *widget,
       if (window->locked == FALSE)
         {
           if (window->horizontal)
-            child_requisition.width += HANDLE_SIZE_TOTAL;
+            extra_width += HANDLE_SIZE_TOTAL;
           else
-            child_requisition.height += HANDLE_SIZE_TOTAL;
+            extra_height += HANDLE_SIZE_TOTAL;
         }
+
+      /* handle the borders */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_LEFT))
+        extra_width++;
+
+      /* handle the borders */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_RIGHT))
+        extra_width++;
+
+      /* handle the borders */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_TOP))
+        extra_height++;
+
+      /* handle the borders */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_BOTTOM))
+        extra_height++;
 
       /* get the real allocated size */
       if (window->horizontal)
         {
           /* calculate the panel width (fits content, fits on the screen, and extands to user size) */
-          requisition->width = CLAMP (child_requisition.width,
+          requisition->width = CLAMP (child_requisition.width + extra_width,
                                       window->working_area.width * window->length,
                                       window->working_area.width);
 
           /* set height based on user setting */
-          requisition->height = window->size;
+          requisition->height = window->size + extra_height;
         }
       else
         {
           /* calculate the panel width (fits content, fits on the screen, and extands to user size) */
-          requisition->height = CLAMP (child_requisition.height,
+          requisition->height = CLAMP (child_requisition.height + extra_height,
                                        window->working_area.height * window->length,
                                        window->working_area.height);
 
           /* set width based on user setting */
-          requisition->width = window->size;
+          requisition->width = window->size + extra_width;
         }
     }
 }
@@ -931,7 +965,26 @@ panel_window_size_allocate (GtkWidget     *widget,
           /* set the child allocation */
           child_allocation = *allocation;
 
-          /* change to allocation to keep the handles free */
+          /* extract the border sizes from the allocation */
+          if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_LEFT))
+            {
+              child_allocation.x++;
+              child_allocation.width--;
+            }
+
+          if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_TOP))
+            {
+              child_allocation.y++;
+              child_allocation.height--;
+            }
+
+          if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_RIGHT))
+            child_allocation.width--;
+
+          if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_BOTTOM))
+            child_allocation.height--;
+
+          /* keep free space for the handles if needed */
           if (window->locked == FALSE)
             {
               if (window->horizontal)
@@ -1073,49 +1126,69 @@ panel_window_paint_handle (PanelWindow  *window,
 
 
 static void
-panel_window_paint_border (PanelWindow  *window,
-                           GtkStateType  state,
-                           cairo_t      *cr)
+panel_window_paint_borders (PanelWindow  *window,
+                            GtkStateType  state,
+                            cairo_t      *cr)
 {
   GtkWidget     *widget = GTK_WIDGET (window);
   GtkAllocation *alloc = &(widget->allocation);
   GdkColor      *color;
   gdouble        alpha = window->is_composited ? window->background_alpha : 1.00;
 
-  /* 1px line */
-  cairo_set_line_width (cr, 2.0);
+  /* 1px line (1.5 results in a sharp 1px line) */
+  cairo_set_line_width (cr, 1.5);
 
-  /* dark color */
-  color = &(widget->style->dark[state]);
-  xfce_panel_cairo_set_source_rgba (cr, color, alpha);
+  /* possibly save some time */
+  if (PANEL_HAS_FLAG (window->borders, (PANEL_BORDER_BOTTOM | PANEL_BORDER_RIGHT)))
+    {
+      /* dark color */
+      color = &(widget->style->dark[state]);
+      xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
-  /* set start position to bottom left */
-  cairo_move_to (cr, alloc->x, alloc->y + alloc->height);
+      /* move the cursor the the bottom left */
+      cairo_move_to (cr, alloc->x, alloc->y + alloc->height);
 
-  /* bottom line */
-  cairo_rel_line_to (cr, alloc->width, 0);
+      /* bottom line */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_BOTTOM))
+        cairo_rel_line_to (cr, alloc->width, 0);
+      else
+        cairo_rel_move_to (cr, alloc->width, 0);
 
-  /* right line */
-  cairo_rel_line_to (cr, 0, -alloc->height);
+      /* right line */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_RIGHT))
+        cairo_rel_line_to (cr, 0, -alloc->height);
+      else
+        cairo_rel_move_to (cr, 0, -alloc->height);
 
-  /* stroke this part */
-  cairo_stroke (cr);
+      /* stroke this part */
+      cairo_stroke (cr);
+    }
 
-  /* light color */
-  color = &(widget->style->light[state]);
-  xfce_panel_cairo_set_source_rgba (cr, color, alpha);
+  /* possibly save some time */
+  if (PANEL_HAS_FLAG (window->borders, (PANEL_BORDER_TOP | PANEL_BORDER_LEFT)))
+    {
+      /* light color */
+      color = &(widget->style->light[state]);
+      xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
-  /* set start position to bottom left */
-  cairo_move_to (cr, alloc->x, alloc->y + alloc->height);
+      /* move the cursor the the bottom left */
+      cairo_move_to (cr, alloc->x, alloc->y + alloc->height);
 
-  /* left line */
-  cairo_rel_line_to (cr, 0, -alloc->height);
+      /* left line */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_LEFT))
+        cairo_rel_line_to (cr, 0, -alloc->height);
+      else
+        cairo_rel_move_to (cr, 0, -alloc->height);
 
-  /* top line */
-  cairo_rel_line_to (cr, alloc->width, 0);
+      /* top line */
+      if (PANEL_HAS_FLAG (window->borders, PANEL_BORDER_TOP))
+        cairo_rel_line_to (cr, alloc->width, 0);
+      else
+        cairo_rel_move_to (cr, alloc->width, 0);
 
-  /* stroke the lines */
-  cairo_stroke (cr);
+      /* stroke the lines */
+      cairo_stroke (cr);
+    }
 }
 
 
@@ -1529,12 +1602,79 @@ panel_window_get_position (PanelWindow *window,
                            gint        *root_x,
                            gint        *root_y)
 {
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
   /* get the window position of the visible window */
   if (G_UNLIKELY (window->autohide_window
       && (window->autohide_status == HIDDEN || window->autohide_status == POPUP_QUEUED)))
     gtk_window_get_position (GTK_WINDOW (window->autohide_window), root_x, root_y);
   else
     gtk_window_get_position (GTK_WINDOW (window), root_x, root_y);
+}
+
+
+
+static void
+panel_window_set_borders (PanelWindow *window)
+{
+  PanelWindowBorders borders = 0;
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  if (window->horizontal)
+    {
+      /* only attempt to show the side borders if we're not filling the area */
+      if (window->length < 1.00)
+        {
+          /* show the left border if we don't snap to the left */
+          if (snap_edge_is_left (window->snap_edge) == FALSE)
+            PANEL_SET_FLAG (borders, PANEL_BORDER_LEFT);
+
+          /* show the right border if we don't snap to the right */
+          if (snap_edge_is_right (window->snap_edge) == FALSE)
+            PANEL_SET_FLAG (borders, PANEL_BORDER_RIGHT);
+        }
+
+      /* show the top border if not snapped to the top */
+      if (snap_edge_is_top (window->snap_edge) == FALSE)
+        PANEL_SET_FLAG (borders, PANEL_BORDER_TOP);
+
+      /* show the bottom border if not snapped to the bottom */
+      if (snap_edge_is_bottom (window->snap_edge) == FALSE)
+        PANEL_SET_FLAG (borders, PANEL_BORDER_BOTTOM);
+    }
+  else
+    {
+      /* only attempt to show the top borders if we're not filling the area */
+      if (window->length < 1.00)
+        {
+          /* show the top border if we don't snap to the top */
+          if (snap_edge_is_top (window->snap_edge) == FALSE)
+            PANEL_SET_FLAG (borders, PANEL_BORDER_TOP);
+
+          /* show the bottom border if we don't snap to the bottom */
+          if (snap_edge_is_bottom (window->snap_edge) == FALSE)
+            PANEL_SET_FLAG (borders, PANEL_BORDER_BOTTOM);
+        }
+
+      /* show the left border if not snapped to the left */
+      if (snap_edge_is_left (window->snap_edge) == FALSE)
+        PANEL_SET_FLAG (borders, PANEL_BORDER_LEFT);
+
+      /* show the right border if not snapped to the right */
+      if (snap_edge_is_right (window->snap_edge) == FALSE)
+        PANEL_SET_FLAG (borders, PANEL_BORDER_RIGHT);
+    }
+
+  /* set the new value and queue a resize if needed */
+  if (window->borders != borders)
+    {
+      /* set the new value */
+      window->borders = borders;
+
+      /* queue a resize */
+      gtk_widget_queue_resize (GTK_WIDGET (window));
+    }
 }
 
 
@@ -1616,6 +1756,9 @@ panel_window_set_snap_edge (PanelWindow         *window,
     {
       /* set snap edge value */
       window->snap_edge = snap_edge;
+
+      /* update the window borders */
+      panel_window_set_borders (window);
 
       /* queue a resize */
       gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -1741,6 +1884,9 @@ panel_window_set_length (PanelWindow *window,
     {
       /* set new length */
       window->length = length;
+
+      /* update the panel borders */
+      panel_window_set_borders (window);
 
       /* resize */
       gtk_widget_queue_resize (GTK_WIDGET (window));

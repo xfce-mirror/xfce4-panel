@@ -929,14 +929,9 @@ panel_application_drag_data_received (GtkWidget        *itembar,
   /* get the widget screen */
   screen = gtk_widget_get_screen (itembar);
 
-  /* TODO replace with enums */
   switch (info)
     {
-      case 0:
-        /* uri */
-        break;
-
-      case 1:
+      case PANEL_ITEMBAR_TARGET_PLUGIN_NAME:
         if (G_LIKELY (selection_data->length > 0))
           {
             /* get the name from the selection data */
@@ -948,7 +943,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
           }
         break;
 
-      case 2:
+      case PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET:
         /* make the itembar sensitive again */
         panel_application_windows_sensitive (application, TRUE);
 

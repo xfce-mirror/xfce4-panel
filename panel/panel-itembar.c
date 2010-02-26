@@ -114,19 +114,12 @@ enum
 G_DEFINE_TYPE (PanelItembar, panel_itembar, GTK_TYPE_CONTAINER);
 
 
-/* todo move this */
-enum
-{
-  TARGET_TEXT_URI_LIST,
-  TARGET_PLUGIN_NAME,
-  TARGET_PLUGIN_WIDGET
-};
 
+/* drop targets */
 static const GtkTargetEntry drop_targets[] =
 {
-  { "text/uri-list", 0, TARGET_TEXT_URI_LIST, },
-  { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME },
-  { "application/x-xfce-panel-plugin-widget", 0, TARGET_PLUGIN_WIDGET },
+  { "application/x-xfce-panel-plugin-name", 0, PANEL_ITEMBAR_TARGET_PLUGIN_NAME },
+  { "application/x-xfce-panel-plugin-widget", 0, PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET },
 };
 
 

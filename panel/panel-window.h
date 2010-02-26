@@ -26,6 +26,7 @@ G_BEGIN_DECLS
 typedef struct _PanelWindowClass    PanelWindowClass;
 typedef struct _PanelWindow         PanelWindow;
 typedef enum   _PanelWindowSnapEdge PanelWindowSnapEdge;
+typedef enum   _PanelWindowBorders  PanelWindowBorders;
 
 #define PANEL_TYPE_WINDOW            (panel_window_get_type ())
 #define PANEL_WINDOW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_WINDOW, PanelWindow))
@@ -41,6 +42,7 @@ typedef enum   _PanelWindowSnapEdge PanelWindowSnapEdge;
 #define snap_edge_is_left(snap_edge)   (snap_edge >= PANEL_SNAP_EGDE_W && snap_edge <= PANEL_SNAP_EGDE_SW)
 #define snap_edge_is_right(snap_edge)  (snap_edge >= PANEL_SNAP_EGDE_E && snap_edge <= PANEL_SNAP_EGDE_SE)
 
+#define PANEL_BORDER_ALL (PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT | PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM)
 
 
 enum _PanelWindowSnapEdge
@@ -67,6 +69,13 @@ enum _PanelWindowSnapEdge
   PANEL_SNAP_EGDE_S,    /* 12 bottom */
 };
 
+enum _PanelWindowBorders
+{
+  PANEL_BORDER_LEFT   = 1 << 0,
+  PANEL_BORDER_RIGHT  = 1 << 1,
+  PANEL_BORDER_TOP    = 1 << 2,
+  PANEL_BORDER_BOTTOM = 1 << 3,
+};
 
 
 GType                panel_window_get_type              (void) G_GNUC_CONST;
