@@ -50,7 +50,8 @@
 
 
 static void      panel_application_finalize           (GObject                *object);
-static void      panel_application_load               (PanelApplication       *application);
+static void      panel_application_load               (PanelApplication       *application,
+                                                       GHashTable             *hash_table);
 static void      panel_application_plugin_move        (GtkWidget              *item,
                                                        PanelApplication       *application);
 static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
@@ -172,7 +173,9 @@ panel_application_class_init (PanelApplicationClass *klass)
 static void
 panel_application_init (PanelApplication *application)
 {
-  PanelWindow *window;
+  PanelWindow  *window;
+  GHashTable   *hash_table;
+  const GValue *value;
 
   /* initialize */
   application->windows = NULL;
@@ -185,11 +188,23 @@ panel_application_init (PanelApplication *application)
   /* get the xfconf channel */
   application->xfconf = xfconf_channel_new ("xfce4-panel");
 
+  /* get all the panel properties */
+  hash_table = xfconf_channel_get_properties (application->xfconf, NULL);
+
+  /* check if we need to force all plugins to run external */
+  value = g_hash_table_lookup (hash_table, "/force-all-external");
+  if (value != NULL && g_value_get_boolean (value))
+    panel_module_factory_force_all_external ();
+
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
 
+  /* set the shared hash table */
+  panel_properties_shared_hash_table (hash_table);
+
   /* load setup */
-  panel_application_load (application);
+  if (G_LIKELY (hash_table != NULL))
+    panel_application_load (application, hash_table);
 
   /* start the autosave timeout */
   panel_application_save_reschedule (application);
@@ -197,6 +212,12 @@ panel_application_init (PanelApplication *application)
   /* create empty window */
   if (G_UNLIKELY (application->windows == NULL))
     window = panel_application_new_window (application, NULL, TRUE);
+
+  /* unset the shared hash table */
+  panel_properties_shared_hash_table (NULL);
+
+  /* cleanup */
+  g_hash_table_destroy (hash_table);
 }
 
 
@@ -275,9 +296,9 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
 
 static void
-panel_application_load (PanelApplication *application)
+panel_application_load (PanelApplication *application,
+                        GHashTable       *hash_table)
 {
-  GHashTable   *hash_table;
   const GValue *value;
   PanelWindow  *window;
   guint         i, n_panels;
@@ -289,19 +310,6 @@ panel_application_load (PanelApplication *application)
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
-
-  /* get all the panel properties */
-  hash_table = xfconf_channel_get_properties (application->xfconf, NULL);
-  if (G_UNLIKELY (hash_table == NULL))
-    return;
-
-  /* check if we need to force all plugins to run external */
-  value = g_hash_table_lookup (hash_table, "/force-all-external");
-  if (value != NULL && g_value_get_boolean (value))
-    panel_module_factory_force_all_external ();
-
-  /* set the shared hash table */
-  panel_properties_shared_hash_table (hash_table);
 
   /* walk all the panel in the configuration */
   value = g_hash_table_lookup (hash_table, "/panels");
@@ -321,37 +329,31 @@ panel_application_load (PanelApplication *application)
           g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/module", i, j);
           value = g_hash_table_lookup (hash_table, buf);
           name = value != NULL ? g_value_get_string (value) : NULL;
-          if (name != NULL)
+          if (G_UNLIKELY (name == NULL))
+            continue;
+
+          /* read the plugin id */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
+          value = g_hash_table_lookup (hash_table, buf);
+          unique_id = value != NULL ? g_value_get_int (value) : -1;
+
+          screen = gtk_window_get_screen (GTK_WINDOW (window));
+          if (!panel_application_plugin_insert (application, window, screen,
+                                                name, unique_id, NULL, -1))
             {
-              /* read the plugin id */
-              g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
-              value = g_hash_table_lookup (hash_table, buf);
-              unique_id = value != NULL ? g_value_get_int (value) : -1;
+              /* plugin could not be loaded, remove it from the channel */
+              g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u", i, j);
+              xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
-              screen = gtk_window_get_screen (GTK_WINDOW (window));
-              if (!panel_application_plugin_insert (application, window, screen,
-                                                    name, unique_id, NULL, -1))
-                {
-                  /* plugin could not be loaded, remove it from the channel */
-                  g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u", i, j);
-                  xfconf_channel_reset_property (application->xfconf, buf, TRUE);
+              g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
+              xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
-                  g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
-                  xfconf_channel_reset_property (application->xfconf, buf, TRUE);
-
-                  /* show warnings */
-                  g_critical (_("Plugin \"%s-%d\" was not found and has been "
-                              "removed from the configuration"), name, unique_id);
-                }
+              /* show warnings */
+              g_critical (_("Plugin \"%s-%d\" was not found and has been "
+                          "removed from the configuration"), name, unique_id);
             }
         }
     }
-
-  /* unset the shared hash table */
-  panel_properties_shared_hash_table (NULL);
-
-  /* cleanup */
-  g_hash_table_destroy (hash_table);
 }
 
 
