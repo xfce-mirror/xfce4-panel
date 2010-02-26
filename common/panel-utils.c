@@ -151,7 +151,7 @@ panel_utils_show_help (GtkWindow   *parent,
     }
 
   if (G_LIKELY (exists))
-    uri = g_strconcat ("file://", filename, "#", offset, NULL);
+    uri = g_strconcat ("file://", filename, offset != NULL ? "#" : NULL, offset, NULL);
   else if (xfce_dialog_confirm (parent, "web-browser", _("_Read Online"),
                _("You can read the user manual online. This manual may however "
                  "not exactly match your panel version."),
