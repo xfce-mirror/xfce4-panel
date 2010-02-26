@@ -58,6 +58,7 @@ static gboolean panel_window_button_press_event (GtkWidget *widget, GdkEventButt
 static gboolean panel_window_button_release_event (GtkWidget *widget, GdkEventButton *event);
 static gboolean panel_window_enter_notify_event (GtkWidget *widget, GdkEventCrossing *event);
 static gboolean panel_window_leave_notify_event (GtkWidget *widget, GdkEventCrossing *event);
+static void panel_window_grab_notify (GtkWidget *widget, gboolean was_grabbed);
 static void panel_window_size_request (GtkWidget *widget, GtkRequisition *requisition);
 static void panel_window_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
 static void panel_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen);
@@ -230,6 +231,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->button_release_event = panel_window_button_release_event;
   gtkwidget_class->enter_notify_event = panel_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_window_leave_notify_event;
+  gtkwidget_class->grab_notify = panel_window_grab_notify;
   gtkwidget_class->size_request = panel_window_size_request;
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
@@ -1049,6 +1051,23 @@ panel_window_leave_notify_event (GtkWidget        *widget,
     panel_window_autohide_queue (window, POPDOWN_QUEUED);
 
   return FALSE;
+}
+
+
+
+static void
+panel_window_grab_notify (GtkWidget *widget,
+                          gboolean   was_grabbed)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+
+  /* avoid hiding the panel when the window is grabbed. this
+   * (for example) happens when the user drags in the pager plugin
+   * see bug #4597 */
+  if (was_grabbed)
+    panel_window_thaw_autohide (window);
+  else
+    panel_window_freeze_autohide (window);
 }
 
 
