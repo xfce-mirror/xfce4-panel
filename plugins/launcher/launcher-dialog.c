@@ -644,7 +644,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   const gchar          *button_names[] = { "item-add", "item-delete",
                                            "item-move-up", "item-move-down",
                                            "item-edit", "item-new" };
-  const gchar          *binding_names[] = { "disable-tooltips", /* "show-labels", */
+  const gchar          *binding_names[] = { "disable-tooltips", "show-label",
                                             "move-first", "arrow-position" };
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));

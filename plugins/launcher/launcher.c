@@ -71,7 +71,7 @@ static void launcher_plugin_menu_popup_destroyed (gpointer user_data);
 static gboolean launcher_plugin_menu_popup (gpointer user_data);
 static void launcher_plugin_menu_destroy (LauncherPlugin *plugin);
 
-static void launcher_plugin_button_set_icon (LauncherPlugin *plugin);
+static void launcher_plugin_button_update (LauncherPlugin *plugin);
 static void launcher_plugin_button_state_changed (GtkWidget *button_a, GtkStateType state, GtkWidget *button_b);
 static gboolean launcher_plugin_button_press_event (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
 static gboolean launcher_plugin_button_release_event (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
@@ -110,7 +110,7 @@ struct _LauncherPlugin
   GtkWidget         *box;
   GtkWidget         *button;
   GtkWidget         *arrow;
-  GtkWidget         *image;
+  GtkWidget         *child;
   GtkWidget         *menu;
 
   GSList            *items;
@@ -120,6 +120,7 @@ struct _LauncherPlugin
 
   guint              disable_tooltips : 1;
   guint              move_first : 1;
+  guint              show_label : 1;
   LauncherArrowType  arrow_position;
 };
 
@@ -129,6 +130,7 @@ enum
   PROP_ITEMS,
   PROP_DISABLE_TOOLTIPS,
   PROP_MOVE_FIRST,
+  PROP_SHOW_LABEL,
   PROP_ARROW_POSITION
 };
 
@@ -200,6 +202,13 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_LABEL,
+                                   g_param_spec_boolean ("show-label",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_ARROW_POSITION,
                                    g_param_spec_uint ("arrow-position",
                                                       NULL, NULL,
@@ -229,9 +238,11 @@ launcher_plugin_init (LauncherPlugin *plugin)
 
   plugin->disable_tooltips = FALSE;
   plugin->move_first = FALSE;
+  plugin->show_label = FALSE;
   plugin->arrow_position = LAUNCHER_ARROW_DEFAULT;
   plugin->menu = NULL;
   plugin->items = NULL;
+  plugin->child = NULL;
   plugin->menu_timeout_id = 0;
   plugin->menu_icon_size = DEFAULT_MENU_ICON_SIZE;
 
@@ -250,13 +261,11 @@ launcher_plugin_init (LauncherPlugin *plugin)
   /* create the panel widgets */
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
-  gtk_widget_show (plugin->box);
 
   plugin->button = xfce_panel_create_button ();
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->button, TRUE, TRUE, 0);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_widget_set_has_tooltip (plugin->button, TRUE);
-  gtk_widget_show (plugin->button);
   gtk_drag_dest_set (plugin->button, GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
                      drop_targets, G_N_ELEMENTS (drop_targets),
                      GDK_ACTION_COPY);
@@ -275,9 +284,8 @@ launcher_plugin_init (LauncherPlugin *plugin)
   g_signal_connect_after (G_OBJECT (plugin->button), "expose-event",
                           G_CALLBACK (launcher_plugin_button_expose_event), plugin);
 
-  plugin->image = xfce_scaled_image_new ();
-  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->image);
-  gtk_widget_show (plugin->image);
+  plugin->child = xfce_scaled_image_new ();
+  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
 
   plugin->arrow = xfce_arrow_button_new (GTK_ARROW_UP);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->arrow, FALSE, FALSE, 0);
@@ -337,6 +345,11 @@ launcher_plugin_get_property (GObject    *object,
 
       case PROP_MOVE_FIRST:
         g_value_set_boolean (value, plugin->move_first);
+        break;
+
+      case PROP_SHOW_LABEL:
+        g_value_set_boolean (value, plugin->show_label);
+
         break;
 
       case PROP_ARROW_POSITION:
@@ -432,8 +445,8 @@ launcher_plugin_set_property (GObject      *object,
               }
           }
 
-        /* update the icon */
-        launcher_plugin_button_set_icon (plugin);
+        /* update the button */
+        launcher_plugin_button_update (plugin);
 
         /* update the widget packing */
         goto update_arrow;
@@ -445,6 +458,29 @@ launcher_plugin_set_property (GObject      *object,
 
       case PROP_MOVE_FIRST:
         plugin->move_first = g_value_get_boolean (value);
+        break;
+
+      case PROP_SHOW_LABEL:
+        plugin->show_label = g_value_get_boolean (value);
+
+        /* destroy the old child */
+        if (plugin->child != NULL)
+          gtk_widget_destroy (plugin->child);
+
+        /* create child */
+        if (G_UNLIKELY (plugin->show_label))
+          plugin->child = gtk_label_new (NULL);
+        else
+          plugin->child = xfce_scaled_image_new ();
+        gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
+        gtk_widget_show (plugin->child);
+
+        /* update size */
+        launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+
+        /* update the button */
+        launcher_plugin_button_update (plugin);
         break;
 
       case PROP_ARROW_POSITION:
@@ -504,6 +540,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   GValue              *value;
   const PanelProperty  properties[] =
   {
+    { "show-label", G_TYPE_BOOLEAN },
     { "items", LAUNCHER_TYPE_PTR_ARRAY },
     { "disable-tooltips", G_TYPE_BOOLEAN },
     { "move-first", G_TYPE_BOOLEAN },
@@ -542,9 +579,14 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
       else
         {
           /* update the icon */
-          launcher_plugin_button_set_icon (plugin);
+          launcher_plugin_button_update (plugin);
         }
     }
+
+  /* show the beast */
+  gtk_widget_show (plugin->box);
+  gtk_widget_show (plugin->button);
+  gtk_widget_show (plugin->child);
 }
 
 
@@ -647,7 +689,10 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     }
 
   /* set the panel plugin size */
-  gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
+  if (plugin->show_label)
+    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
+  else
+    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
 
   return TRUE;
 }
@@ -687,7 +732,7 @@ launcher_plugin_icon_theme_changed (GtkIconTheme   *icon_theme,
   panel_return_if_fail (GTK_IS_ICON_THEME (icon_theme));
 
   /* update the button icon */
-  launcher_plugin_button_set_icon (plugin);
+  launcher_plugin_button_update (plugin);
 
   /* destroy the menu */
   launcher_plugin_menu_destroy (plugin);
@@ -778,7 +823,7 @@ launcher_plugin_menu_item_released (GtkMenuItem    *widget,
 
       /* destroy the menu and update the icon */
       launcher_plugin_menu_destroy (plugin);
-      launcher_plugin_button_set_icon (plugin);
+      launcher_plugin_button_update (plugin);
     }
 
   return FALSE;
@@ -985,35 +1030,46 @@ launcher_plugin_menu_destroy (LauncherPlugin *plugin)
 
 
 static void
-launcher_plugin_button_set_icon (LauncherPlugin *plugin)
+launcher_plugin_button_update (LauncherPlugin *plugin)
 {
-  XfceMenuItem *item;
+  XfceMenuItem *item = NULL;
   const gchar  *icon_name;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_SCALED_IMAGE (plugin->image));
 
+  /* get first item */
   if (G_LIKELY (plugin->items != NULL))
+    item = XFCE_MENU_ITEM (plugin->items->data);
+
+  if (G_UNLIKELY (plugin->show_label))
     {
-      item = XFCE_MENU_ITEM (plugin->items->data);
+      panel_return_if_fail (GTK_IS_LABEL (plugin->child));
+      gtk_label_set_text (GTK_LABEL (plugin->child),
+          item != NULL ? xfce_menu_item_get_name (item) : _("No items"));
+    }
+  else if (G_LIKELY (item != NULL))
+    {
+      panel_return_if_fail (XFCE_IS_SCALED_IMAGE (plugin->child));
 
       icon_name = xfce_menu_item_get_icon_name (item);
-      if (IS_STRING (icon_name))
-        {
-          if (g_path_is_absolute (icon_name))
-            xfce_scaled_image_set_from_file (XFCE_SCALED_IMAGE (plugin->image),
-                                             icon_name);
-          else
-            xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->image),
-                                                  icon_name);
-          /* TODO some more name checking */
-          return;
-        }
-    }
+      if (!IS_STRING (icon_name))
+        goto fallback_image;
 
-  /* set missing image icon */
-  xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->image),
-                                        GTK_STOCK_MISSING_IMAGE);
+      if (g_path_is_absolute (icon_name))
+        xfce_scaled_image_set_from_file (XFCE_SCALED_IMAGE (plugin->child),
+                                         icon_name);
+      else
+        xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->child),
+                                              icon_name);
+    }
+  else
+    {
+fallback_image:
+      /* set missing image icon */
+      panel_return_if_fail (XFCE_IS_SCALED_IMAGE (plugin->child));
+      xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->child),
+                                            GTK_STOCK_MISSING_IMAGE);
+    }
 }
 
 
