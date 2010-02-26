@@ -52,6 +52,7 @@ static void launcher_plugin_style_set (GtkWidget *widget, GtkStyle *previous_sty
 
 static void launcher_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_free_data (XfcePanelPlugin *panel_plugin);
+static void launcher_plugin_save (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
 static gboolean launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
 static void launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
@@ -174,6 +175,7 @@ launcher_plugin_class_init (XfceLauncherPluginClass *klass)
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = launcher_plugin_construct;
   plugin_class->free_data = launcher_plugin_free_data;
+  plugin_class->save = launcher_plugin_save;
   plugin_class->orientation_changed = launcher_plugin_orientation_changed;
   plugin_class->size_changed = launcher_plugin_size_changed;
   plugin_class->configure_plugin = launcher_plugin_configure_plugin;
@@ -184,7 +186,7 @@ launcher_plugin_class_init (XfceLauncherPluginClass *klass)
                                    g_param_spec_boxed ("items",
                                                        NULL, NULL,
                                                        LAUNCHER_TYPE_PTR_ARRAY,
-                                                       EXO_PARAM_WRITABLE));
+                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_DISABLE_TOOLTIPS,
@@ -311,13 +313,26 @@ launcher_plugin_get_property (GObject    *object,
                               GValue     *value,
                               GParamSpec *pspec)
 {
+  GPtrArray *array;
+  GValue    *tmp;
+  GSList    *li;
+
   XfceLauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (object);
 
   switch (prop_id)
     {
       case PROP_ITEMS:
-        /* property is write-only */
-        panel_assert_not_reached ();
+        array = g_ptr_array_new ();
+        for (li = plugin->items; li != NULL; li = li->next)
+          {
+            tmp = g_new0 (GValue, 1);
+            g_value_init (tmp, G_TYPE_STRING);
+            panel_return_if_fail (XFCE_IS_MENU_ITEM (li->data));
+            g_value_set_string (tmp, xfce_menu_item_get_filename (li->data));
+            g_ptr_array_add (array, tmp);
+          }
+        g_value_set_boxed (value, array);
+        xfconf_array_free (array);
         break;
 
       case PROP_DISABLE_TOOLTIPS:
@@ -346,11 +361,13 @@ launcher_plugin_set_property (GObject      *object,
                               const GValue *value,
                               GParamSpec   *pspec)
 {
-  XfceLauncherPlugin  *plugin = XFCE_LAUNCHER_PLUGIN (object);
-  GPtrArray           *array;
-  guint                i;
-  XfceMenuItem        *item;
-  const GValue        *file;
+  XfceLauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (object);
+  GPtrArray          *array;
+  guint               i;
+  XfceMenuItem       *item;
+  const GValue       *tmp;
+  const gchar        *filename;
+  XfceMenu           *menu = NULL;
 
   /* destroy the menu, all the setting changes need this */
   launcher_plugin_menu_destroy (plugin);
@@ -371,17 +388,52 @@ launcher_plugin_set_property (GObject      *object,
         if (G_LIKELY (array != NULL))
           {
             for (i = 0; i < array->len; i++)
-             {
-               /* create a new item from the file */
-               file = g_ptr_array_index (array, i);
-               panel_return_if_fail (G_VALUE_HOLDS_STRING (file));
-               item = xfce_menu_item_new (g_value_get_string (file));
-               if (G_LIKELY (item != NULL))
-                 plugin->items = g_slist_append (plugin->items, item);
-               else
-                 /* TODO */
-                 g_message ("Lookup the item in the pool...");
-             }
+              {
+                /* get the filename from the array */
+                tmp = g_ptr_array_index (array, i);
+                panel_return_if_fail (G_VALUE_HOLDS_STRING (tmp));
+                filename = g_value_get_string (tmp);
+                item = NULL;
+
+                /* either load the file directly or look in the item
+                 * pool for the desktop id */
+                if (G_LIKELY (g_path_is_absolute (filename)))
+                  {
+                    /* load the file */
+                    item = xfce_menu_item_new (filename);
+                    if (G_LIKELY (item != NULL))
+                      plugin->items = g_slist_append (plugin->items, item);
+                  }
+                else
+                  {
+                    if (G_LIKELY (menu == NULL))
+                      {
+                        /* initialize the menu library and load the menu */
+                        xfce_menu_init (NULL);
+                        menu = xfce_menu_new (SYSCONFDIR "/xdg/menus/launcher.menu", /* TODO */ NULL);
+                      }
+
+                    /* lookup the (probably) desktop id in the pool */
+                    if (G_LIKELY (menu != NULL))
+                      {
+                        item = xfce_menu_item_pool_lookup (
+                            xfce_menu_get_item_pool (menu), filename);
+                        if (G_LIKELY (item != NULL))
+                          plugin->items = g_slist_append (plugin->items,
+                              g_object_ref (G_OBJECT (item)));
+                      }
+                  }
+              }
+
+            /* release the menu */
+            if (G_UNLIKELY (menu != NULL))
+              {
+                /* release the menu */
+                g_object_unref (G_OBJECT (menu));
+
+                /* shutdown menu library */
+                xfce_menu_shutdown ();
+              }
           }
 
         /* update the icon */
@@ -518,6 +570,15 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* free items */
   g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
   g_slist_free (plugin->items);
+}
+
+
+
+static void 
+launcher_plugin_save (XfcePanelPlugin *panel_plugin)
+{
+  /* make sure the items are stored */
+  g_object_notify (G_OBJECT (panel_plugin), "items");
 }
 
 
