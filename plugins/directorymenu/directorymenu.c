@@ -784,7 +784,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
 
               if (G_LIKELY (desktopinfo != NULL))
                 {
-                  display_name = g_app_info_get_display_name (G_APP_INFO (desktopinfo));
+                  display_name = g_app_info_get_name (G_APP_INFO (desktopinfo));
                   icon = g_app_info_get_icon (G_APP_INFO (desktopinfo));
                 }
             }
