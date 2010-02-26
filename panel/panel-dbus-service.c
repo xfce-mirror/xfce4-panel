@@ -139,7 +139,8 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
 static void
 panel_dbus_service_init (PanelDBusService *service)
 {
-  GError *error = NULL;
+  GError         *error = NULL;
+  DBusConnection *connection;
 
   /* TODO implement derror handing in the dbus_bus_request_name functions */
 
@@ -148,13 +149,14 @@ panel_dbus_service_init (PanelDBusService *service)
 
   if (G_LIKELY (service->connection != NULL))
     {
+      /* get the connection */
+      connection = dbus_g_connection_get_connection (service->connection);
+
       /* request the org.xfce.Panel name */
-      dbus_bus_request_name (dbus_g_connection_get_connection (service->connection),
-                             PANEL_DBUS_PANEL_INTERFACE, 0, NULL);
+      dbus_bus_request_name (connection, PANEL_DBUS_PANEL_INTERFACE, 0, NULL);
 
       /* request the org.xfce.PanelPlugin name */
-      dbus_bus_request_name (dbus_g_connection_get_connection (service->connection),
-                             PANEL_DBUS_PLUGIN_INTERFACE, 0, NULL);
+      dbus_bus_request_name (connection, PANEL_DBUS_PLUGIN_INTERFACE, 0, NULL);
 
       /* register the /org/xfce/Panel object */
       dbus_g_connection_register_g_object (service->connection, PANEL_DBUS_PATH,
@@ -176,10 +178,25 @@ static void
 panel_dbus_service_finalize (GObject *object)
 {
   PanelDBusService *service = PANEL_DBUS_SERVICE (object);
+  DBusConnection   *connection;
 
-  /* release the connection */
   if (G_LIKELY (service->connection != NULL))
-    dbus_g_connection_unref (service->connection);
+    {
+      /* get the connection */
+      connection = dbus_g_connection_get_connection (service->connection);
+
+      /* release the org.xfce.Panel name */
+      dbus_bus_release_name (connection, PANEL_DBUS_PANEL_INTERFACE, NULL);
+
+      /* release the org.xfce.PanelPlugin name */
+      dbus_bus_release_name (connection, PANEL_DBUS_PLUGIN_INTERFACE, NULL);
+
+      /* flush the connection */
+      dbus_g_connection_flush (service->connection);
+
+      /* release the connection */
+      dbus_g_connection_unref (service->connection);
+    }
 
   (*G_OBJECT_CLASS (panel_dbus_service_parent_class)->finalize) (object);
 }
