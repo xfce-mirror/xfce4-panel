@@ -21,6 +21,9 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_SYS_PRCTL_H
+#include <sys/prctl.h>
+#endif
 #ifdef HAVE_STDIO_H
 #include <stdio.h>
 #endif
@@ -224,6 +227,7 @@ main (gint argc, gchar **argv)
   DBusConnection          *dbus_connection;
   DBusGProxy              *dbus_gproxy;
   WrapperPlug             *plug;
+  gchar                    process_name[16];
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -274,6 +278,10 @@ main (gint argc, gchar **argv)
       /* leave */
       return EXIT_FAILURE;
     }
+
+  /* change the process name to something that makes sence */
+  g_snprintf (process_name, sizeof (process_name), "panel-%s", opt_name);
+  prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0);
 
   /* try to connect to dbus */
   dbus_gconnection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
