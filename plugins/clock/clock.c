@@ -407,19 +407,20 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       object = gtk_builder_get_object (builder, "mode");
       g_signal_connect (G_OBJECT (object), "changed", G_CALLBACK (clock_plugin_configure_plugin_visibility), builder);
 
-      #define create_binding(property, type) \
+      #define create_binding(property, type, name) \
         object = gtk_builder_get_object (builder, property); \
         panel_return_if_fail (G_IS_OBJECT (object)); \
-        xfconf_g_property_bind (plugin->channel, "/" property, type, object, "active")
+        xfconf_g_property_bind (plugin->channel, "/" property, type, object, name)
 
       /* create bindings */
-      create_binding ("mode", G_TYPE_UINT);
-      create_binding ("show-frame", G_TYPE_BOOLEAN);
-      create_binding ("show-seconds", G_TYPE_BOOLEAN);
-      create_binding ("true-binary", G_TYPE_BOOLEAN);
-      create_binding ("show-military", G_TYPE_BOOLEAN);
-      create_binding ("flash-separators", G_TYPE_BOOLEAN);
-      create_binding ("show-meridiem", G_TYPE_BOOLEAN);
+      create_binding ("mode", G_TYPE_UINT, "active");
+      create_binding ("show-frame", G_TYPE_BOOLEAN, "active");
+      create_binding ("show-seconds", G_TYPE_BOOLEAN, "active");
+      create_binding ("true-binary", G_TYPE_BOOLEAN, "active");
+      create_binding ("show-military", G_TYPE_BOOLEAN, "active");
+      create_binding ("flash-separators", G_TYPE_BOOLEAN, "active");
+      create_binding ("show-meridiem", G_TYPE_BOOLEAN, "active");
+      create_binding ("fuzziness", G_TYPE_UINT, "value");
 
       /* TODO remove when implemented by glade */
       GtkCellRenderer *cell1 = gtk_cell_renderer_text_new ();

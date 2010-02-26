@@ -49,11 +49,10 @@ enum
   FUZZINESS_5_MINS = 0,
   FUZZINESS_15_MINS,
   FUZZINESS_DAY,
-  FUZZINESS_WEEK,
 
   FUZZINESS_MIN = FUZZINESS_5_MINS,
-  FUZZINESS_MAX = FUZZINESS_WEEK,
-  FUZZINESS_DEFAULT = FUZZINESS_15_MINS
+  FUZZINESS_MAX = FUZZINESS_DAY,
+  FUZZINESS_DEFAULT = FUZZINESS_5_MINS
 };
 
 enum
@@ -73,6 +72,34 @@ struct _XfceClockFuzzy
 
   /* fuzziness */
   guint fuzziness;
+};
+
+const gchar *i18n_day_sectors[] =
+{
+  N_("Night"),   N_("Early morning"),
+  N_("Morning"), N_("Almost noon"),
+  N_("Noon"),    N_("Afternoon"),
+  N_("Evening"), N_("Late evening")
+};
+
+const gchar *i18n_hour_sectors[] =
+{
+  N_("five past %s"),        N_("ten past %s"),
+  N_("quarter past %s"),     N_("twenty past %s"),
+  N_("twenty five past %s"), N_("half past %s"),
+  N_("twenty five to %s"),   N_("twenty to %s"),
+  N_("quarter to %s"),       N_("ten to %s"),
+  N_("five to %s"),          N_("%s o'clock")
+};
+
+const gchar *i18n_hour_names[] =
+{
+  N_("one"),    N_("two"),
+  N_("three"),  N_("four"),
+  N_("five"),   N_("six"),
+  N_("seven"),  N_("eight"),
+  N_("nine"),   N_("ten"),
+  N_("eleven"), N_("twelve")
 };
 
 
@@ -171,25 +198,41 @@ xfce_clock_fuzzy_update (gpointer user_data)
 {
   XfceClockFuzzy *clock = XFCE_CLOCK_FUZZY (user_data);
   struct tm       tm;
-  const gchar    *strings_day[] = { N_("Night"),   N_("Early morning"),
-                                    N_("Morning"), N_("Almost noon"),
-                                    N_("Noon"),    N_("Afternoon"),
-                                    N_("Evening"), N_("Late evening") };
+  gint            hour_sector;
+  gint            minutes, hour;
+  gchar          *string;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (clock), FALSE);
 
   /* get the local time */
   clock_plugin_get_localtime (&tm);
 
-  switch (clock->fuzziness)
+  if (clock->fuzziness == FUZZINESS_5_MINS
+      || clock->fuzziness == FUZZINESS_15_MINS)
     {
-      case FUZZINESS_5_MINS:
-      case FUZZINESS_15_MINS:
-      case FUZZINESS_DAY:
-      case FUZZINESS_WEEK:
-        gtk_label_set_text (GTK_LABEL (clock), _(strings_day[tm.tm_hour / 3]));
-        break;
-    };
+      /* set the time */
+      minutes = tm.tm_min;
+      hour = tm.tm_hour > 12 ? tm.tm_hour - 12 : tm.tm_hour;
+
+      /* get the hour sector */
+      if (clock->fuzziness == FUZZINESS_5_MINS)
+        hour_sector = minutes >= 3 ? (minutes - 3) / 5 : 11;
+      else
+        hour_sector = minutes > 7 ? ((minutes - 7) / 15 + 1) * 3 - 1 : 11;
+
+      /* advance 1 hour, if we're half past */
+      if (hour_sector <= 6)
+        hour--;
+
+      /* set the time string */
+      string = g_strdup_printf (_(i18n_hour_sectors[hour_sector]), _(i18n_hour_names[hour]));
+      gtk_label_set_text (GTK_LABEL (clock), string);
+      g_free (string);
+    }
+  else /* FUZZINESS_DAY */
+    {
+      gtk_label_set_text (GTK_LABEL (clock), _(i18n_day_sectors[tm.tm_hour / 3]));
+    }
 
   return TRUE;
 }
