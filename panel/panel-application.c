@@ -296,20 +296,27 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 static void
 panel_application_load (PanelApplication *application)
 {
-  XfconfChannel *channel = application->xfconf;
-  PanelWindow   *window;
-  guint          i, n_panels;
-  guint          j, n_plugins;
-  gchar          buf[100];
-  gchar         *name;
-  gint           unique_id;
-  GdkScreen     *screen;
+  GHashTable   *hash_table;
+  const GValue *value;
+  PanelWindow  *window;
+  guint         i, n_panels;
+  guint         j, n_plugins;
+  gchar         buf[100];
+  const gchar  *name;
+  gint          unique_id;
+  GdkScreen    *screen;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
 
+  /* get all the panel properties */
+  hash_table = xfconf_channel_get_properties (application->xfconf, "/panels");
+  if (G_UNLIKELY (hash_table == NULL))
+    return;
+
   /* walk all the panel in the configuration */
-  n_panels = xfconf_channel_get_uint (channel, "/panels", 0);
+  value = g_hash_table_lookup (hash_table, "/panels");
+  n_panels = value != NULL ? g_value_get_uint (value) : 0;
   for (i = 0; i < n_panels; i++)
     {
       /* create a new window */
@@ -317,17 +324,20 @@ panel_application_load (PanelApplication *application)
 
       /* walk all the plugins on the panel */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
-      n_plugins = xfconf_channel_get_uint (channel, buf, 0);
+      value = g_hash_table_lookup (hash_table, buf);
+      n_plugins = value != NULL ? g_value_get_uint (value) : 0;
       for (j = 0; j < n_plugins; j++)
         {
           /* get the plugin module name */
           g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/module", i, j);
-          name = xfconf_channel_get_string (channel, buf, NULL);
-          if (IS_STRING (name))
+          value = g_hash_table_lookup (hash_table, buf);
+          name = value != NULL ? g_value_get_string (value) : NULL;
+          if (name != NULL)
             {
               /* read the plugin id */
               g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
-              unique_id = xfconf_channel_get_int (channel, buf, -1);
+              value = g_hash_table_lookup (hash_table, buf);
+              unique_id = value != NULL ? g_value_get_int (value) : -1;
 
               screen = gtk_window_get_screen (GTK_WINDOW (window));
               if (!panel_application_plugin_insert (application, window, screen,
@@ -335,24 +345,21 @@ panel_application_load (PanelApplication *application)
                 {
                   /* plugin could not be loaded, remove it from the channel */
                   g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u", i, j);
-                  xfconf_channel_reset_property (channel, buf, TRUE);
+                  xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
                   g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
-                  xfconf_channel_reset_property (channel, buf, TRUE);
+                  xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
                   /* show warnings */
                   g_critical (_("Plugin \"%s-%d\" was not found and has been "
                               "removed from the configuration"), name, unique_id);
                 }
-
-              /* cleanup */
-              g_free (name);
             }
         }
-
-      /* show the window */
-      //gtk_widget_show (GTK_WIDGET (window));
     }
+
+  /* cleanup */
+  g_hash_table_destroy (hash_table);
 }
 
 
