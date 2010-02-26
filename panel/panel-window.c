@@ -1481,7 +1481,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   gchar        *name;
   StrutsEgde    struts_edge;
   gboolean      force_struts_update = FALSE;
-/* TODO test how many times this function is called */
+
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (GDK_IS_SCREEN (screen));
   panel_return_if_fail (window->screen == screen);
