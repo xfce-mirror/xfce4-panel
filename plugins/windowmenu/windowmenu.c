@@ -26,6 +26,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libwnck/libwnck.h>
+#include <common/panel-xfconf.h>
 #include <gdk/gdkkeysyms.h>
 #include <common/panel-private.h>
 
@@ -382,25 +383,27 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
 static void
 window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin    *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  const PanelProperty  properties[] =
+  {
+    { "style", G_TYPE_UINT },
+    { "workspace-actions", G_TYPE_BOOLEAN },
+    { "workspace-names", G_TYPE_BOOLEAN },
+    { "urgentcy-notification", G_TYPE_BOOLEAN },
+    { "all-workspaces", G_TYPE_BOOLEAN },
+    { NULL, G_TYPE_NONE }
+  };
 
   /* open the xfconf channel */
-  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
 
   /* show the icon */
   gtk_widget_show (plugin->icon);
 
-  /* bind the properties */
-  xfconf_g_property_bind (plugin->channel, "/style",
-                          G_TYPE_UINT, plugin, "style");
-  xfconf_g_property_bind (plugin->channel, "/workspace-actions",
-                          G_TYPE_BOOLEAN, plugin, "workspace-actions");
-  xfconf_g_property_bind (plugin->channel, "/workspace-names",
-                          G_TYPE_BOOLEAN, plugin, "workspace-names");
-  xfconf_g_property_bind (plugin->channel, "/urgentcy-notification",
-                          G_TYPE_BOOLEAN, plugin, "urgentcy-notification");
-  xfconf_g_property_bind (plugin->channel, "/all-workspaces",
-                          G_TYPE_BOOLEAN, plugin, "all-workspaces");
+  /* bind all properties */
+  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+                         xfce_panel_plugin_get_property_base (panel_plugin),
+                         properties, NULL);
 
   /* monitor screen changes */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
