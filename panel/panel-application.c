@@ -46,6 +46,7 @@
 #include <panel/panel-plugin-external.h>
 
 #define AUTOSAVE_INTERVAL (10 * 60)
+#define MIGRATE_BIN       LIBEXECDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "migrate"
 
 
 
@@ -189,7 +190,7 @@ panel_application_init (PanelApplication *application)
   /* check for any configuration */
   if (!xfconf_channel_has_property (application->xfconf, "/panels"))
     {
-      if (!g_spawn_command_line_sync (LIBEXECDIR G_DIR_SEPARATOR_S "migrate", NULL, NULL, NULL, &error))
+      if (!g_spawn_command_line_sync (MIGRATE_BIN, NULL, NULL, NULL, &error))
         {
           xfce_dialog_show_error (NULL, error, _("Failed to launch the migration application"));
           g_error_free (error);

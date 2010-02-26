@@ -4,7 +4,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"libsystray\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel
+plugindir = $(libdir)/xfce4/panel-plugins
 
 plugin_LTLIBRARIES = \
 	libsystray.la
@@ -58,7 +58,7 @@ libsystray_la_DEPENDENCIES = \
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel
+desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_files = systray.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

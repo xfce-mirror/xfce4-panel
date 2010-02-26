@@ -4,7 +4,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"libclock\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel
+plugindir = $(libdir)/xfce4/panel-plugins
 
 plugin_LTLIBRARIES = \
 	libclock.la
@@ -60,7 +60,7 @@ libclock_la_DEPENDENCIES = \
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel
+desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_files =	clock.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

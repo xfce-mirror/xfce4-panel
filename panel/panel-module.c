@@ -33,6 +33,8 @@
 #include <panel/panel-module-factory.h>
 #include <panel/panel-plugin-external.h>
 
+#define PANEL_PLUGINS_LIB_DIR LIBDIR G_DIR_SEPARATOR_S "panel-plugins"
+
 
 
 static void      panel_module_dispose          (GObject          *object);
@@ -271,7 +273,6 @@ panel_module_plugin_destroyed (gpointer  user_data,
 PanelModule *
 panel_module_new_from_desktop_file (const gchar *filename,
                                     const gchar *name,
-                                    const gchar *lib_directory,
                                     gboolean     force_external)
 {
   PanelModule *module = NULL;
@@ -295,7 +296,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
       if (G_LIKELY (module_name != NULL))
         {
           /* build the module path */
-          path = g_module_build_path (lib_directory, module_name);
+          path = g_module_build_path (PANEL_PLUGINS_LIB_DIR, module_name);
 
           /* test if the library exists */
           if (G_LIKELY (g_file_test (path, G_FILE_TEST_EXISTS)))

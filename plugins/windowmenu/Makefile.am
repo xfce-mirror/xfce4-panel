@@ -5,7 +5,7 @@ INCLUDES = \
 	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel
+plugindir = $(libdir)/xfce4/panel-plugins
 
 plugin_LTLIBRARIES = \
 	libwindowmenu.la
@@ -60,7 +60,7 @@ xfce4-popup-windowmenu: xfce4-popup-windowmenu.in Makefile
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel
+desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_files = windowmenu.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

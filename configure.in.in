@@ -8,8 +8,8 @@ dnl
 dnl ***************************
 dnl *** Version information ***
 dnl ***************************
-m4_define([libxfce4panel_verinfo], [0:0:0])
-m4_define([libxfce4panel_version_api], [2])
+m4_define([libxfce4panel_verinfo], [2:2:1])
+m4_define([libxfce4panel_version_api], [1.0])
 m4_define([xfce4_panel_version_major], [4])
 m4_define([xfce4_panel_version_minor], [7])
 m4_define([xfce4_panel_version_micro], [0])
@@ -181,7 +181,7 @@ AC_OUTPUT([
 Makefile
 common/Makefile
 libxfce4panel/Makefile
-libxfce4panel/libxfce4panel-2.pc
+libxfce4panel/libxfce4panel-1.0.pc
 migrate/Makefile
 panel/Makefile
 wrapper/Makefile

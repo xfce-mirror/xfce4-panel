@@ -52,6 +52,8 @@
 #define N_RESTART_TRIES (2)
 #endif
 
+#define WRAPPER_BIN LIBEXECDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "wrapper"
+
 
 
 static void         panel_plugin_external_provider_init         (XfcePanelPluginProviderIface    *iface);
@@ -418,7 +420,7 @@ panel_plugin_external_realize (GtkWidget *widget)
 
   /* setup the basic argv */
   argv = g_new0 (gchar *, argc);
-  argv[0]  = (gchar *) LIBEXECDIR G_DIR_SEPARATOR_S "wrapper";
+  argv[0]  = (gchar *) WRAPPER_BIN;
   argv[1]  = (gchar *) "-n";
   argv[2]  = (gchar *) panel_module_get_name (external->module);
   argv[3]  = (gchar *) "-i";
