@@ -166,7 +166,7 @@ typedef GTypeModule XfcePanelTypeModule;
   static void \
   xfce_panel_module_realize (XfcePanelPlugin *xpp) \
   { \
-    panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
+    g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     \
     g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), \
         G_CALLBACK (xfce_panel_module_realize), NULL); \
@@ -193,8 +193,8 @@ typedef GTypeModule XfcePanelTypeModule;
   { \
     XfcePanelPlugin *xpp = NULL; \
     \
-    panel_return_val_if_fail (GDK_IS_SCREEN (xpp_screen), NULL); \
-    panel_return_val_if_fail (xpp_name != NULL && xpp_unique_id != -1, NULL); \
+    g_return_val_if_fail (GDK_IS_SCREEN (xpp_screen), NULL); \
+    g_return_val_if_fail (xpp_name != NULL && xpp_unique_id != -1, NULL); \
     \
     CHECK_CODE \
       { \
