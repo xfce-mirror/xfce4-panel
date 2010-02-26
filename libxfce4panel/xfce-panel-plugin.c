@@ -414,6 +414,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:comment:
    *
+   * TODO
    *
    * Since 4.8.0
    **/
@@ -461,6 +462,11 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                        | G_PARAM_STATIC_STRINGS
                                                        | G_PARAM_CONSTRUCT_ONLY));
 
+  /**
+   * XfcePanelPlugin:orientation:
+   *
+   * TODO
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
                                    g_param_spec_enum ("orientation",
@@ -471,6 +477,11 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                       G_PARAM_READABLE
                                                       | G_PARAM_STATIC_STRINGS));
 
+  /**
+   * XfcePanelPlugin:size:
+   *
+   * TODO
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
                                    g_param_spec_int ("size",
@@ -480,6 +491,11 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                      G_PARAM_READABLE
                                                      | G_PARAM_STATIC_STRINGS));
 
+  /**
+   * XfcePanelPlugin:screen-position:
+   *
+   * TODO
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_SCREEN_POSITION,
                                    g_param_spec_enum  ("screen-position",
@@ -490,6 +506,11 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                        G_PARAM_READABLE
                                                        | G_PARAM_STATIC_STRINGS));
 
+  /**
+   * XfcePanelPlugin:expand:
+   *
+   * TODO
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_EXPAND,
                                    g_param_spec_boolean ("expand",
@@ -1260,7 +1281,9 @@ xfce_panel_plugin_take_window_notify (gpointer  data,
  * xfce_panel_plugin_get_name:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the name of the panel plugin.
+ * TODO
+ *
+ * Returns: the name of the panel plugin.
  **/
 const gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
@@ -1277,7 +1300,7 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_display_name:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the (translated) display name of the plugin.
+ * Returns: the (translated) display name of the plugin.
  **/
 const gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
@@ -1293,6 +1316,14 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 
 
 
+/**
+ * xfce_panel_plugin_get_comment:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * TODO
+ *
+ * Returns: the (translated) comment of the plugin.
+ **/
 const gchar *
 xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
 {
@@ -1308,7 +1339,9 @@ xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_unique_id:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the unique id of the plugin.
+ * TODO
+ *
+ * Returns: the unique id of the plugin.
  *
  * Since 4.8
  **/
@@ -1325,9 +1358,11 @@ xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_get_property_base:
- * @plugin :
+ * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the property base for the xfconf channel userd by a plugin.
+ * TODO
+ *
+ * Returns: the property base for the xfconf channel userd by a plugin.
  *
  * See also: xfconf_channel_new_with_property_base() and
  *           XFCE_PANEL_PLUGIN_CHANNEL_NAME.
@@ -1352,8 +1387,10 @@ xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_arguments:
  * @plugin    : an #XfcePanelPlugin.
  *
- * Return value: the argument vector. The vector is owned by the plugin and
- *               should not be freed.
+ * TODO
+ *
+ * Returns: the argument vector. The vector is owned by the plugin and
+ *          should not be freed.
  *
  * Since: 4.8.0
  **/
@@ -1372,7 +1409,9 @@ xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_size:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the current size of the panel.
+ * TODO
+ *
+ * Returns: the current size of the panel.
  **/
 gint
 xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
@@ -1390,8 +1429,10 @@ xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_expand:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: %TRUE when the plugin should expand,
- *               %FALSE otherwise.
+ * TODO
+ *
+ * Returns: %TRUE when the plugin should expand,
+ *          %FALSE otherwise.
  **/
 gboolean
 xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
@@ -1407,6 +1448,9 @@ xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_set_expand:
  * @plugin : an #XfcePanelPlugin.
+ * @expand : TODO.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
@@ -1440,7 +1484,9 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_get_orientation:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the current #GtkOrientation of the panel.
+ * TODO
+ *
+ * Returns: the current #GtkOrientation of the panel.
  **/
 GtkOrientation
 xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
@@ -1457,7 +1503,9 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_screen_position:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the current #XfceScreenPosition of the panel.
+ * TODO
+ *
+ * Returns: the current #XfceScreenPosition of the panel.
  **/
 XfceScreenPosition
 xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
@@ -1474,6 +1522,8 @@ xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_take_window:
  * @plugin : an #XfcePanelPlugin.
  * @window : a #GtkWindow.
+ *
+ * TODO
  *
  * Since: 4.8.0
  **/
@@ -1497,6 +1547,8 @@ xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_add_action_widget:
  * @plugin : an #XfcePanelPlugin.
  * @widget : a #GtkWidget.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
@@ -1516,6 +1568,8 @@ xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_menu_insert_item:
  * @plugin : an #XfcePanelPlugin.
  * @item   : a #GtkMenuItem.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
@@ -1538,6 +1592,8 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
 /**
  * xfce_panel_plugin_menu_show_configure:
  * @plugin : an #XfcePanelPlugin.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
@@ -1571,6 +1627,8 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_menu_show_about:
  * @plugin : an #XfcePanelPlugin.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
@@ -1604,6 +1662,8 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_block_menu:
  * plugin : an #XfcePanelPlugin.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
@@ -1619,6 +1679,8 @@ xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_unblock_menu:
  * plugin : an #XfcePanelPlugin.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
@@ -1637,6 +1699,8 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_register_menu:
  * @plugin : an #XfcePanelPlugin.
  * @menu   : a #GtkMenu.
+ *
+ * TODO
  **/
 void
 xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
@@ -1665,7 +1729,9 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_arrow_type:
  * @plugin : an #XfcePanelPlugin.
  *
- * Return value: the #GtkArrowType to use.
+ * TODO
+ *
+ * Returns: the #GtkArrowType to use.
  *
  * Since: 4.6.0
  **/
@@ -1720,6 +1786,8 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * @attach_widget : a #GtkWidget relative to which the menu should be positioned.
  * @x             : return location for the x coordinate.
  * @y             : return location for the x coordinate.
+ *
+ * TODO
  *
  * Since: 4.6.0
  **/
@@ -1809,9 +1877,11 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_position_menu:
  * @menu         : a #GtkMenu.
  * @x            : return location for the x coordinate.
- * @x            : return location for the y coordinate.
+ * @y            : return location for the y coordinate.
  * @push_in      : keep inside the screen (see #GtkMenuPositionFunc)
  * @panel_plugin : an #XfcePanelPlugin.
+ *
+ * TODO
  *
  * Since: 4.6.0
  **/
@@ -1844,6 +1914,15 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
 
 
 
+/**
+ * xfce_panel_plugin_focus_widget:
+ * @plugin : an #XfcePanelPlugin.
+ * @widget : a #GtkWidget inside the plugins that should be focussed.
+ *
+ * TODO
+ *
+ * Since: 4.6.0
+ **/
 void
 xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
                                 GtkWidget       *widget)
@@ -1862,6 +1941,15 @@ xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
 
 
 
+/**
+ * xfce_panel_plugin_block_autohide:
+ * @plugin  : an #XfcePanelPlugin.
+ * @blocked : TODO
+ *
+ * TODO
+ *
+ * Since: 4.6.0
+ **/
 void
 xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
                                   gboolean         blocked)

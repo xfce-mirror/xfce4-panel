@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+]>
+
+<book id="index" lang="en">
+  <bookinfo>
+    <title>Libxfce4panel Reference Manual</title>
+    <releaseinfo>Version <xi:include href="version.xml" parse="text"/></releaseinfo>
+    <pubdate>November 2009</pubdate>
+
+    <copyright>
+      <year>2006</year>
+      <year>2007</year>
+      <holder>Jasper Huijsmans</holder>
+    </copyright>
+
+    <copyright>
+      <year>2008</year>
+      <year>2009</year>
+      <holder>Nick Schermer</holder>
+    </copyright>
+
+
+    <legalnotice id="legalnotice">
+      <para>
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1 or
+        any later version published by the Free Software Foundation; with no
+        Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+        Texts. The complete license text is available from the <ulink
+        type="http" url="http://www.gnu.org/">Free Software Foundation</ulink>.
+      </para>
+    </legalnotice>
+
+    <authorgroup>
+      <author>
+        <firstname>Nick</firstname>
+        <surname>Schermer</surname>
+        <affiliation>
+          <address><email>nick@xfce.org</email></address>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </bookinfo>
+
+  <part id="libxfce4panel-panel">
+    <title>Panel Plugins</title>
+
+    <xi:include href="xml/xfce-panel-plugin.xml"/>
+  </part>
+
+  <part id="libxfce4panel-widgets">
+    <title>Additional Widgets</title>
+
+    <xi:include href="xml/xfce-arrow-button.xml"/>
+    <xi:include href="xml/xfce-hvbox.xml"/>
+    <xi:include href="xml/xfce-panel-image.xml"/>
+  </part>
+
+  <part id="libxfce4panel-miscelleanous">
+    <title>Miscelleanous</title>
+
+    <xi:include href="xml/libxfce4panel-config.xml"/>
+    <xi:include href="xml/xfce-panel-convenience.xml"/>
+  </part>
+
+  <!--
+  <part id="libxfce4panel-deprecated-widgets">
+    <title>Deprecated widgets</title>
+  </part>
+  -->
+
+  <index>
+    <title>Index</title>
+  </index>
+</book>
+
+<!--
+  vi:set ts=2 sw=2 et ai:
+-->

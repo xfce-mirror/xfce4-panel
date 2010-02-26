@@ -405,7 +405,7 @@ xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
 
 /**
  * xfce_arrow_button_new:
- * @type : #GtkArrowType for the arrow button
+ * @arrow_type : #GtkArrowType for the arrow button
  *
  * Creates a new #XfceArrowButton widget.
  *
@@ -440,8 +440,8 @@ xfce_arrow_button_get_arrow_type (XfceArrowButton *button)
 
 /**
  * xfce_arrow_button_set_arrow_type:
- * @button : a #XfceArrowButton
- * @type   : a valid  #GtkArrowType
+ * @button     : a #XfceArrowButton
+ * @arrow_type : a valid  #GtkArrowType
  *
  * Sets the arrow type for @button.
  **/
@@ -478,6 +478,8 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
  * Whether the button is blinking.
  *
  * Returns: %TRUE when @button is blinking.
+ *
+ * Since: 4.8.0
  **/
 gboolean
 xfce_arrow_button_get_blinking (XfceArrowButton *button)
@@ -495,6 +497,8 @@ xfce_arrow_button_get_blinking (XfceArrowButton *button)
  *             stop the blinking.
  *
  * Make the button blink.
+ *
+ * Since: 4.8.0
  **/
 void
 xfce_arrow_button_set_blinking (XfceArrowButton *button,

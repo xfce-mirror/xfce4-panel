@@ -1,6 +1,7 @@
 
 SUBDIRS = \
 	libxfce4panel \
+	docs \
 	common \
 	panel \
 	plugins \

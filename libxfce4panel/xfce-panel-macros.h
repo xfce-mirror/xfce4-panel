@@ -99,7 +99,7 @@ typedef GTypeModule XfcePanelTypeModule;
   xfce_panel_module_init (GTypeModule *type_module, \
                           gboolean    *make_resident) \
   { \
-    typedef void (*XppRegFunc) (GTypeModule *module); \
+    typedef void (*XppRegFunc) (XfcePanelTypeModule *module); \
     XppRegFunc reg_funcs[] = { type_name##_register_type, args }; \
     guint      i; \
     \
@@ -119,6 +119,8 @@ typedef GTypeModule XfcePanelTypeModule;
  * construct_func : name of the function that points to an
  *                  #XfcePanelPluginFunc function.
  *
+ * TODO
+ *
  * Since: 4.8
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER(construct_func) \
@@ -130,6 +132,8 @@ typedef GTypeModule XfcePanelTypeModule;
  *                  #XfcePanelPluginFunc function.
  * check_func     : name of the function that points to an
  *                  #XfcePanelPluginCheck function.
+ *
+ * TODO
  *
  * Since: 4.8
  **/
@@ -145,6 +149,8 @@ typedef GTypeModule XfcePanelTypeModule;
  *                  #XfcePanelPluginPreInit function.
  * check_func     : name of the function that points to an
  *                  #XfcePanelPluginCheck function.
+ *
+ * TODO
  *
  * Since: 4.8
  **/

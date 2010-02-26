@@ -57,6 +57,7 @@ AM_PROG_CC_C_O()
 AC_PROG_LD()
 AC_PROG_INSTALL()
 AC_PROG_INTLTOOL()
+AC_PROG_LIBTOOL()
 
 dnl **************************
 dnl *** Initialize libtool ***
@@ -118,7 +119,7 @@ XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.22])
 dnl *************************
 dnl *** Check for gtk-doc ***
 dnl *************************
-GTK_DOC_CHECK([1.0])
+GTK_DOC_CHECK([1.9])
 
 dnl ***********************************
 dnl *** Check for debugging support ***
@@ -164,6 +165,12 @@ if test x"$have_gnuc_visibility" = x"yes"; then
 fi
 AM_CONDITIONAL([HAVE_GNUC_VISIBILITY], [test x"$have_gnuc_visibility" = x"yes"])
 
+dnl *************************************
+dnl *** Compensate for broken gtk-doc ***
+dnl *************************************
+XDT_SUPPORTED_FLAGS([GTK_DOC_EXTRA_CFLAGS], [-Wno-sign-compare])
+AC_SUBST([GTK_DOC_EXTRA_CFLAGS])
+
 dnl *********************************
 dnl *** Substitute platform flags ***
 dnl *********************************
@@ -180,6 +187,9 @@ AC_SUBST([PLATFORM_LDFLAGS])
 AC_OUTPUT([
 Makefile
 common/Makefile
+docs/Makefile
+docs/references/Makefile
+docs/references/version.xml
 libxfce4panel/Makefile
 libxfce4panel/libxfce4panel-1.0.pc
 libxfce4panel/libxfce4panel-config.h

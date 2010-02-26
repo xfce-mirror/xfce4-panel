@@ -203,7 +203,7 @@ xfce_hvbox_size_allocate (GtkWidget     *widget,
  *
  * Creates a new #XfceHVBox container widget.
  *
- * Return value: the newly allocated #XfceHVBox container widget.
+ * Returns: the newly allocated #XfceHVBox container widget.
  **/
 GtkWidget *
 xfce_hvbox_new (GtkOrientation orientation,
@@ -260,7 +260,7 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
  * xfce_hvbox_get_orientation:
  * @hvbox       : #XfceHVBox
  *
- * Returns the current orientation of the #XfceHVBox.
+ * Returns: the current orientation of the #XfceHVBox.
  **/
 GtkOrientation
 xfce_hvbox_get_orientation (XfceHVBox *hvbox)
