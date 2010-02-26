@@ -828,6 +828,8 @@ panel_application_drag_data_received (PanelWindow      *window,
                                                        screen, LAUNCHER_PLUGIN_NAME,
                                                        -1, application->drop_uris,
                                                        position);
+
+            /* TODO drag leave is never called and thus application->drop_uris is not freed */
           }
         break;
 
