@@ -538,7 +538,9 @@ static void
 panel_application_plugin_move (GtkWidget        *item,
                                PanelApplication *application)
 {
-  GtkTargetList *target_list;
+  GtkTargetList  *target_list;
+  const gchar    *icon_name;
+  GdkDragContext *context;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
@@ -550,9 +552,11 @@ panel_application_plugin_move (GtkWidget        *item,
   target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
 
   /* begin a drag */
-  gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
+  context = gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
   
-  /* TODO do something fancy here. A snapshot of the plugin or the icon name... */
+  /* set the drag context icon name */
+  icon_name = panel_module_get_icon_name_from_plugin (XFCE_PANEL_PLUGIN_PROVIDER (item));
+  gtk_drag_set_icon_name (context, icon_name ? icon_name : GTK_STOCK_DND, 0, 0); 
 
   /* release the drag list */
   gtk_target_list_unref (target_list);
@@ -564,14 +568,18 @@ panel_application_plugin_move (GtkWidget        *item,
 
 
 static void
-panel_application_plugin_provider_signal (XfcePanelPluginProvider *provider,
-                                          ProviderSignal           signal,
-                                          PanelApplication        *application)
+panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provider,
+                                          XfcePanelPluginProviderSignal  signal,
+                                          PanelApplication              *application)
 {
-  GtkWidget *toplevel, *itembar;
+  GtkWidget   *itembar;
+  PanelWindow *window;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  
+  /* get the panel of the plugin */
+  window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
 
   switch (signal)
     {
@@ -583,16 +591,20 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider *provider,
       case EXPAND_PLUGIN:
       case COLLAPSE_PLUGIN:
         /* get the itembar */
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (provider));
-        itembar = gtk_bin_get_child (GTK_BIN (toplevel));
+        itembar = gtk_bin_get_child (GTK_BIN (window));
 
         /* set new expand mode */
         panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), !!(signal == EXPAND_PLUGIN));
         break;
 
       case LOCK_PANEL:
+        /* block autohide */
+        panel_window_freeze_autohide (window);
+        break;
+        
       case UNLOCK_PANEL:
-        /* TODO: implement */
+        /* unblock autohide */
+        panel_window_thaw_autohide (window);
         break;
 
       case REMOVE_PLUGIN:
@@ -603,15 +615,12 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider *provider,
 
       case ADD_NEW_ITEMS:
         /* open the items dialog */
-        panel_item_dialog_show ();
+        panel_item_dialog_show (window);
         break;
 
       case PANEL_PREFERENCES:
-        /* get the panel window widget */
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (provider));
-
         /* open the panel preferences */
-        panel_preferences_dialog_show (PANEL_WINDOW (toplevel));
+        panel_preferences_dialog_show (window);
         break;
 
       default:

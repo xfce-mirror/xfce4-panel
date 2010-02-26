@@ -24,6 +24,7 @@
 #include <dbus/dbus-glib.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 #include <panel/panel-private.h>
 #include <panel/panel-dbus-client.h>
@@ -44,12 +45,11 @@ panel_dbus_client_get_proxy (GError **error)
     return NULL;
 
   /* get the proxy */
-  dbus_proxy = dbus_g_proxy_new_for_name (dbus_connection, PANEL_DBUS_SERVICE_INTERFACE,
+  dbus_proxy = dbus_g_proxy_new_for_name (dbus_connection, PANEL_DBUS_SERVICE_NAME,
                                           PANEL_DBUS_SERVICE_PATH, PANEL_DBUS_SERVICE_INTERFACE);
 
   return dbus_proxy;
 }
-
 
 
 

@@ -25,9 +25,6 @@
 typedef struct _PanelDBusServiceClass PanelDBusServiceClass;
 typedef struct _PanelDBusService      PanelDBusService;
 
-#define PANEL_DBUS_SERVICE_PATH      "/org/xfce/Panel"
-#define PANEL_DBUS_SERVICE_INTERFACE "org.xfce.Panel"
-
 #define PANEL_TYPE_DBUS_SERVICE            (panel_dbus_service_get_type ())
 #define PANEL_DBUS_SERVICE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_DBUS_SERVICE, PanelDBusService))
 #define PANEL_DBUS_CLASS_SERVICE(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_DBUS_SERVICE, PanelDBusServiceClass))

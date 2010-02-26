@@ -38,29 +38,29 @@
 
 
 
-static void         panel_plugin_external_class_init          (PanelPluginExternalClass     *klass);
-static void         panel_plugin_external_init                (PanelPluginExternal          *external);
-static void         panel_plugin_external_provider_init       (XfcePanelPluginProviderIface *iface);
-static void         panel_plugin_external_finalize            (GObject                      *object);
-static void         panel_plugin_external_realize             (GtkWidget                    *widget);
-static void         panel_plugin_external_unrealize           (GtkWidget                    *widget);
-static gboolean     panel_plugin_external_plug_removed        (GtkSocket                    *socket);
-static void         panel_plugin_external_plug_added          (GtkSocket                    *socket);
-static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider      *provider);
-static const gchar *panel_plugin_external_get_id              (XfcePanelPluginProvider      *provider);
-static void         panel_plugin_external_set_size            (XfcePanelPluginProvider      *provider,
-                                                               gint                          size);
-static void         panel_plugin_external_set_orientation     (XfcePanelPluginProvider      *provider,
-                                                               GtkOrientation                orientation);
-static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider      *provider,
-                                                               XfceScreenPosition            screen_position);
-static void         panel_plugin_external_save                (XfcePanelPluginProvider      *provider);
-static void         panel_plugin_external_set_sensitive       (PanelPluginExternal          *external);
-static void         panel_plugin_external_provider_signal     (PanelPluginExternal          *external,
-                                                               ProviderSignal                signal);
-static void         panel_plugin_external_set_property        (PanelPluginExternal          *external,
-                                                               const gchar                  *property,
-                                                               const GValue                 *value);
+static void         panel_plugin_external_class_init          (PanelPluginExternalClass      *klass);
+static void         panel_plugin_external_init                (PanelPluginExternal           *external);
+static void         panel_plugin_external_provider_init       (XfcePanelPluginProviderIface  *iface);
+static void         panel_plugin_external_finalize            (GObject                       *object);
+static void         panel_plugin_external_realize             (GtkWidget                     *widget);
+static void         panel_plugin_external_unrealize           (GtkWidget                     *widget);
+static gboolean     panel_plugin_external_plug_removed        (GtkSocket                     *socket);
+static void         panel_plugin_external_plug_added          (GtkSocket                     *socket);
+static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider       *provider);
+static const gchar *panel_plugin_external_get_id              (XfcePanelPluginProvider       *provider);
+static void         panel_plugin_external_set_size            (XfcePanelPluginProvider       *provider,
+                                                               gint                           size);
+static void         panel_plugin_external_set_orientation     (XfcePanelPluginProvider       *provider,
+                                                               GtkOrientation                 orientation);
+static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider       *provider,
+                                                               XfceScreenPosition             screen_position);
+static void         panel_plugin_external_save                (XfcePanelPluginProvider       *provider);
+static void         panel_plugin_external_set_sensitive       (PanelPluginExternal           *external);
+static void         panel_plugin_external_provider_signal     (PanelPluginExternal           *external,
+                                                               XfcePanelPluginProviderSignal  signal);
+static void         panel_plugin_external_set_property        (PanelPluginExternal           *external,
+                                                               const gchar                   *property,
+                                                               const GValue                  *value);
 
 
 
@@ -548,8 +548,8 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 
 
 static void
-panel_plugin_external_provider_signal (PanelPluginExternal *external,
-                                       ProviderSignal       signal)
+panel_plugin_external_provider_signal (PanelPluginExternal           *external,
+                                       XfcePanelPluginProviderSignal  signal)
 {
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 

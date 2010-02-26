@@ -82,6 +82,9 @@ struct _PanelModule
 };
 
 
+static GQuark module_quark = 0;
+
+
 
 G_DEFINE_TYPE (PanelModule, panel_module, G_TYPE_TYPE_MODULE);
 
@@ -100,6 +103,9 @@ panel_module_class_init (PanelModuleClass *klass)
   gtype_module_class = G_TYPE_MODULE_CLASS (klass);
   gtype_module_class->load = panel_module_load;
   gtype_module_class->unload = panel_module_unload;
+  
+  /* initialize the quark */
+  module_quark = g_quark_from_static_string ("panel-module");
 }
 
 
@@ -371,6 +377,9 @@ panel_module_create_plugin (PanelModule  *module,
       /* emit unique-changed if the plugin is unique */
       if (module->is_unique)
         panel_module_factory_emit_unique_changed (module);
+      
+      /* add link to the module */
+      g_object_set_qdata (G_OBJECT (plugin), module_quark, module);
     }
   else if (module->run_in_wrapper == FALSE)
     {
@@ -436,6 +445,22 @@ panel_module_get_icon_name (PanelModule *module)
   panel_return_val_if_fail (module->icon_name == NULL || g_utf8_validate (module->icon_name, -1, NULL), NULL);
 
   return module->icon_name;
+}
+
+
+
+const gchar *
+panel_module_get_icon_name_from_plugin (XfcePanelPluginProvider *provider)
+{
+  PanelModule *module;
+  
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
+  
+  /* get the module */
+  module = g_object_get_qdata (G_OBJECT (provider), module_quark);
+  
+  /* return the icon name */
+  return panel_module_get_icon_name (module);
 }
 
 

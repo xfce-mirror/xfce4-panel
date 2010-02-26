@@ -38,7 +38,7 @@ enum
 
 
 
-static void xfce_panel_plugin_provider_base_init (gpointer klass);
+static void xfce_panel_plugin_provider_class_init (gpointer klass);
 
 
 
@@ -49,25 +49,14 @@ static guint provider_signals[LAST_SIGNAL];
 GType
 xfce_panel_plugin_provider_get_type (void)
 {
-  static GType type = G_TYPE_INVALID;
+  static GType type = 0;
 
-  if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-      static const GTypeInfo info =
-      {
-        sizeof (XfcePanelPluginProviderIface),
-        (GBaseInitFunc) xfce_panel_plugin_provider_base_init,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        0,
-        NULL,
-        NULL
-      };
-
-      type = g_type_register_static (G_TYPE_INTERFACE, I_("XfcePanelPluginProvider"), &info, 0);
+  if (G_UNLIKELY (type == 0))
+    {      
+      type = g_type_register_static_simple (G_TYPE_INTERFACE, I_("XfcePanelPluginProvider"),
+						                                sizeof (XfcePanelPluginProviderIface),
+						                                (GClassInitFunc) xfce_panel_plugin_provider_class_init,
+						                                0, NULL, 0);
     }
 
   return type;
@@ -76,23 +65,15 @@ xfce_panel_plugin_provider_get_type (void)
 
 
 static void
-xfce_panel_plugin_provider_base_init (gpointer klass)
+xfce_panel_plugin_provider_class_init (gpointer klass)
 {
-  static gboolean initialized = FALSE;
-
-  if (G_UNLIKELY (!initialized))
-    {
-      provider_signals[PROVIDER_SIGNAL] =
-        g_signal_new (I_("provider-signal"),
-                      G_TYPE_FROM_CLASS (klass),
-                      G_SIGNAL_RUN_LAST,
-                      0, NULL, NULL,
-                      g_cclosure_marshal_VOID__UINT,
-                      G_TYPE_NONE, 1, G_TYPE_UINT);
-
-      /* initialization finished */
-      initialized = TRUE;
-    }
+  provider_signals[PROVIDER_SIGNAL] =
+    g_signal_new (I_("provider-signal"),
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__UINT,
+                  G_TYPE_NONE, 1, G_TYPE_UINT);
 }
 
 

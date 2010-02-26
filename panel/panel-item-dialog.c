@@ -688,20 +688,26 @@ panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
 
 
 void
-panel_item_dialog_show (void)
+panel_item_dialog_show (PanelWindow *active)
 {
-  static GtkWidget *dialog = NULL;
+  static PanelItemDialog *dialog = NULL;
 
   if (G_LIKELY (dialog == NULL))
     {
       /* create new dialog singleton */
       dialog = g_object_new (PANEL_TYPE_ITEM_DIALOG, NULL);
       g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer) &dialog);
-      gtk_widget_show (dialog);
     }
-  else
-    {
-      /* focus the window */
-      gtk_window_present (GTK_WINDOW (dialog));
-    }
+  
+  if (G_UNLIKELY (active == NULL))
+    active = panel_application_get_window (dialog->application, 0);
+  
+  /* show the dialog on the same screen as the panel */
+  gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (active)));
+
+  /* show the dialog */
+  gtk_widget_show (GTK_WIDGET (dialog));
+  
+  /* focus the window */
+  gtk_window_present (GTK_WINDOW (dialog));
 }

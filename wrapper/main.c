@@ -117,9 +117,9 @@ dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
 
 
 static void
-dbus_gproxy_provider_signal (XfcePanelPluginProvider *provider,
-                            ProviderSignal           signal,
-                            DBusGProxy              *dbus_gproxy)
+dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
+                             XfcePanelPluginProviderSignal  signal,
+                             DBusGProxy                    *dbus_gproxy)
 {
   GValue       value = { 0, };
   GError      *error = NULL;
@@ -301,7 +301,8 @@ main (gint argc, gchar **argv)
 			                  "',member='NameOwnerChanged'", NULL);
 
   /* get the dbus proxy */
-  dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection, "org.xfce.Panel", "/org/xfce/Panel", "org.xfce.Panel");
+  dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection, PANEL_DBUS_SERVICE_NAME,
+                                           PANEL_DBUS_SERVICE_PATH, PANEL_DBUS_SERVICE_INTERFACE);
   if (G_UNLIKELY (dbus_gproxy == NULL))
     {
       /* print error */

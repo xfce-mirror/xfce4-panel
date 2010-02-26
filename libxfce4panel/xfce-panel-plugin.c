@@ -750,21 +750,20 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
                                    XfcePanelPlugin *plugin)
 {
     panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+    panel_return_if_fail (plugin->priv->registered_menus > 0);
     panel_return_if_fail (GTK_IS_MENU (menu));
 
     if (G_LIKELY (plugin->priv->registered_menus > 0))
       {
+        /* disconnect this signal */
+        g_signal_handlers_disconnect_by_func (G_OBJECT (menu), G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
+        
         /* decrease the counter */
         plugin->priv->registered_menus--;
 
         /* emit signal to unlock the panel */
         if (G_LIKELY (plugin->priv->registered_menus == 0))
           g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", UNLOCK_PANEL);
-      }
-    else
-      {
-        /* show a warning */
-        g_message ("Plugin %s-%s unregistered a menu without registering it.", plugin->priv->name, plugin->priv->id);
       }
 }
 

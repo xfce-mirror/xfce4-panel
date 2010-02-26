@@ -2029,7 +2029,7 @@ panel_window_freeze_autohide (PanelWindow *window)
   window->autohide_block++;
 
   /* block autohide */
-  if (window->autohide_status != DISABLED && window->autohide_block == 1)
+  if (window->autohide_block == 1 && window->autohide_status != DISABLED)
     panel_window_autohide_queue (window, BLOCKED);
 }
 
@@ -2045,7 +2045,7 @@ panel_window_thaw_autohide (PanelWindow *window)
   window->autohide_block--;
 
   /* queue an autohide when needed */
-  if (window->autohide_status != DISABLED && window->autohide_block == 0)
+  if (window->autohide_block == 0 && window->autohide_status != DISABLED)
     panel_window_autohide_queue (window, POPDOWN_QUEUED);
 }
 

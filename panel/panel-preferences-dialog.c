@@ -817,7 +817,7 @@ void
 panel_preferences_dialog_show (PanelWindow *active)
 {
   static PanelPreferencesDialog *dialog = NULL;
-  gint                           idx;
+  gint                           idx = 0;
 
   panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
 
@@ -826,20 +826,23 @@ panel_preferences_dialog_show (PanelWindow *active)
       /* create new dialog singleton */
       dialog = g_object_new (PANEL_TYPE_PREFERENCES_DIALOG, NULL);
       g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer) &dialog);
-      gtk_widget_show (GTK_WIDGET (dialog));
     }
-  else
-    {
-      /* focus the window */
-      gtk_window_present (GTK_WINDOW (dialog));
-    }
-
+  
   /* get the active window index */
   if (G_LIKELY (active))
     idx = panel_application_get_window_index (dialog->application, active);
   else
-    idx = 0;
+    active = panel_application_get_window (dialog->application, idx);
+
+  /* show the dialog on the same screen as the panel */
+  gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (active)));
+
+  /* show the dialog */
+  gtk_widget_show (GTK_WIDGET (dialog));
 
   /* select the active window in the dialog */
   gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->selector), idx);
+
+  /* focus the window */
+  gtk_window_present (GTK_WINDOW (dialog));
 }

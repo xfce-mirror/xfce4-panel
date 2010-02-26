@@ -25,36 +25,26 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfcePanelPluginProviderIface XfcePanelPluginProviderIface;
-typedef struct _XfcePanelPluginProvider      XfcePanelPluginProvider;
-typedef enum   _ProviderSignal               ProviderSignal;
-
-typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
-                                                         const gchar  *id,
-                                                         const gchar  *display_name,
-                                                         gchar       **arguments,
-                                                         GdkScreen    *screen);
-
-
-
-enum _ProviderSignal
-{
-  MOVE_PLUGIN,
-  EXPAND_PLUGIN,
-  COLLAPSE_PLUGIN,
-  LOCK_PANEL,
-  UNLOCK_PANEL,
-  REMOVE_PLUGIN,
-  ADD_NEW_ITEMS,
-  PANEL_PREFERENCES,
-};
-
-
+typedef struct _XfcePanelPluginProviderIface  XfcePanelPluginProviderIface;
+typedef struct _XfcePanelPluginProvider       XfcePanelPluginProvider;
+typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 
 #define XFCE_TYPE_PANEL_PLUGIN_PROVIDER           (xfce_panel_plugin_provider_get_type ())
 #define XFCE_PANEL_PLUGIN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProvider))
 #define XFCE_IS_PANEL_PLUGIN_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER))
 #define XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProviderIface))
+
+/* panel dbus names */
+#define PANEL_DBUS_SERVICE_INTERFACE "org.xfce.Panel"
+#define PANEL_DBUS_SERVICE_PATH      "/org/xfce/Panel"
+#define PANEL_DBUS_SERVICE_NAME      PANEL_DBUS_SERVICE_INTERFACE
+
+/* provider contruct function */
+typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
+                                                         const gchar  *id,
+                                                         const gchar  *display_name,
+                                                         gchar       **arguments,
+                                                         GdkScreen    *screen);
 
 struct _XfcePanelPluginProviderIface
 {
@@ -72,6 +62,20 @@ struct _XfcePanelPluginProviderIface
                                        XfceScreenPosition       screen_position);
   void         (*save)                (XfcePanelPluginProvider *provider);
 };
+
+enum _XfcePanelPluginProviderSignal
+{
+  MOVE_PLUGIN,
+  EXPAND_PLUGIN,
+  COLLAPSE_PLUGIN,
+  LOCK_PANEL,
+  UNLOCK_PANEL,
+  REMOVE_PLUGIN,
+  ADD_NEW_ITEMS,
+  PANEL_PREFERENCES,
+};
+
+
 
 GType        xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
 
