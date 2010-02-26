@@ -36,6 +36,10 @@
 
 
 
+#define WORKSPACE_SETTINGS_COMMAND "xfwm4-workspace-settings"
+
+
+
 static void     pager_plugin_get_property              (GObject           *object,
                                                         guint              prop_id,
                                                         GValue            *value,
@@ -396,7 +400,7 @@ pager_plugin_configure_workspace_settings (GtkWidget *button)
     screen = gdk_screen_get_default ();
 
   /* try to start the settings dialog */
-  if (!gdk_spawn_command_line_on_screen (screen, "xfwm4-workspace-settings", &error))
+  if (!gdk_spawn_command_line_on_screen (screen, WORKSPACE_SETTINGS_COMMAND, &error))
     {
       /* show an error dialog */
       toplevel = gtk_widget_get_toplevel (button);
@@ -452,6 +456,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
   GtkBuilder  *builder;
   GObject     *dialog, *object;
+  gchar       *path;
 
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
 
@@ -470,18 +475,27 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_weak_ref (G_OBJECT (builder), pager_plugin_configure_destroyed, plugin);
 
   object = gtk_builder_get_object (builder, "settings-button");
+  panel_return_if_fail (GTK_IS_BUTTON (object));
   g_signal_connect (G_OBJECT (object), "clicked",
       G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
 
+  /* don't show button if xfwm4 is not installed */
+  path = g_find_program_in_path (WORKSPACE_SETTINGS_COMMAND);
+  g_object_set (G_OBJECT (object), "visible", path != NULL, NULL);
+  g_free (path);
+
   object = gtk_builder_get_object (builder, "workspace-scrolling");
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
   exo_mutual_binding_new (G_OBJECT (plugin), "workspace-scrolling",
                           G_OBJECT (object), "active");
 
   object = gtk_builder_get_object (builder, "show-names");
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
   exo_mutual_binding_new (G_OBJECT (plugin), "show-names",
                           G_OBJECT (object), "active");
 
   object = gtk_builder_get_object (builder, "rows");
+  panel_return_if_fail (GTK_IS_ADJUSTMENT (object));
   exo_mutual_binding_new (G_OBJECT (plugin), "rows",
                           G_OBJECT (object), "value");
 
