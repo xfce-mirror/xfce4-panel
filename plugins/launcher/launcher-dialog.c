@@ -176,7 +176,7 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
   
   /* initialize the menu library */
   xfce_menu_init (NULL);
-  
+
   /* load our menu file */
   menu = xfce_menu_new (SYSCONFDIR "/xdg/menus/launcher.menu", &error);
   if (G_UNLIKELY (menu != NULL))
@@ -188,7 +188,7 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
       xfce_menu_item_pool_foreach (xfce_menu_get_item_pool (menu),
                                    launcher_dialog_add_store_insert,
                                    store);
-          
+
       /* release the menu */
       g_object_unref (G_OBJECT (menu));
     }

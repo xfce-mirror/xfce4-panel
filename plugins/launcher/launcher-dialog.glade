@@ -56,6 +56,7 @@
   </object>
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Launcher Properties</property>
+    <property name="window_position">center</property>
     <property name="default_width">350</property>
     <property name="default_height">400</property>
     <property name="icon_name">gtk-properties</property>
@@ -322,7 +323,6 @@
                     <child>
                       <object class="GtkComboBox" id="arrow-position">
                         <property name="visible">True</property>
-                        <property name="model">arrow-position-store</property>
                         <property name="active">0</property>
                         <property name="button_sensitivity">on</property>
                         <child>
@@ -412,6 +412,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">applications-other</property>
     <property name="type_hint">normal</property>
+    <property name="transient_for">dialog</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox3">
@@ -699,6 +700,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">gtk-add</property>
     <property name="type_hint">normal</property>
+    <property name="transient_for">dialog</property>
     <property name="has_separator">False</property>
     <property name="subtitle" translatable="yes">Add one or more existing items to the launcher</property>
     <child internal-child="vbox">
