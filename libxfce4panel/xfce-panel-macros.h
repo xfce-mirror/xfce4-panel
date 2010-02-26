@@ -80,7 +80,7 @@ G_BEGIN_DECLS
 #define PANEL_SYMBOL_EXPORT
 #endif
 
-/* make api compatible with 4.4 panel */
+/* make api compatible with 4.6 */
 #ifndef XFCE_DISABLE_DEPRECATED
 
 /* panel plugin functio for the id, probably not used by anyone */
