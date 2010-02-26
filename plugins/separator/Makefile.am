@@ -21,12 +21,12 @@ libseparator_la_SOURCES = \
 
 libseparator_la_CFLAGS = \
 	$(GTK_CFLAGS) \
+	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(CAIRO_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(PLATFORM_CFLAGS) \
 	$(EXO_CFLAGS) \
-	$(XFCONF_CFLAGS)
+	$(PLATFORM_CFLAGS)
 
 libseparator_la_LDFLAGS = \
 	-avoid-version \
@@ -37,7 +37,7 @@ libseparator_la_LDFLAGS = \
 
 libseparator_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la \
+	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(CAIRO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
@@ -47,7 +47,7 @@ libseparator_la_LIBADD = \
 
 libseparator_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la
+	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file

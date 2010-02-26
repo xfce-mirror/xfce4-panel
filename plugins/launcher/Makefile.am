@@ -44,7 +44,7 @@ liblauncher_la_LDFLAGS = \
 
 liblauncher_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la \
+	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
@@ -55,7 +55,7 @@ liblauncher_la_LIBADD = \
 
 liblauncher_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la
+	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file

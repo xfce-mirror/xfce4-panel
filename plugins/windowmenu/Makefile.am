@@ -38,17 +38,17 @@ libwindowmenu_la_LDFLAGS = \
 
 libwindowmenu_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la \
+	$(top_builddir)/common/libpanel-common.la \
 	$(EXO_LIBS) \
 	$(GTK_LIBS) \
-	$(XFCONF_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(LIBWNCK_LIBS)
+	$(LIBWNCK_LIBS) \
+	$(XFCONF_LIBS)
 
 libwindowmenu_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la
+	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file

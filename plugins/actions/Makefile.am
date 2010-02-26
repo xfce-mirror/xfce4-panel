@@ -23,9 +23,9 @@ libactions_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(PLATFORM_CFLAGS) \
 	$(EXO_CFLAGS) \
-	$(XFCONF_CFLAGS)
+	$(XFCONF_CFLAGS) \
+	$(PLATFORM_CFLAGS)
 
 libactions_la_LDFLAGS = \
 	-avoid-version \
@@ -36,7 +36,7 @@ libactions_la_LDFLAGS = \
 
 libactions_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la \
+	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
@@ -45,7 +45,7 @@ libactions_la_LIBADD = \
 
 libactions_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la
+	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file

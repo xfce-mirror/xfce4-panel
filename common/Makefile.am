@@ -2,28 +2,29 @@
 
 INCLUDES = \
 	-I$(top_srcdir) \
-	-DG_LOG_DOMAIN=\"libpanel-xfconf\" \
+	-DG_LOG_DOMAIN=\"libpanel-common\" \
 	-DLIBXFCE4PANEL_COMPILATION \
 	$(PLATFORM_CPPFLAGS)
 
 noinst_LTLIBRARIES = \
-	libpanel-xfconf.la
+	libpanel-common.la
 
-libpanel_xfconf_la_SOURCES = \
+libpanel_common_la_SOURCES = \
 	panel-builder.c \
 	panel-builder.h \
 	panel-xfconf.c \
 	panel-xfconf.h
 
-libpanel_xfconf_la_CFLAGS = \
+libpanel_common_la_CFLAGS = \
 	$(XFCONF_CFLAGS) \
-	$(GTK_CFLAGS)
+	$(GTK_CFLAGS) \
+	$(PLATFORM_CFLAGS)
 
-libpanel_xfconf_la_LDFLAGS = \
+libpanel_common_la_LDFLAGS = \
 	-no-undefined \
 	$(PLATFORM_LDFLAGS)
 
-libpanel_xfconf_la_LIBADD = \
+libpanel_common_la_LIBADD = \
 	$(XFCONF_LIBS) \
 	$(GTK_LIBS)
 

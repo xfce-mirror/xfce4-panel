@@ -67,7 +67,7 @@ xfce4_panel_LDFLAGS = \
 
 xfce4_panel_LDADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la \
+	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(EXO_LIBS) \
 	$(GMODULE_LIBS) \
@@ -79,7 +79,7 @@ xfce4_panel_LDADD = \
 
 xfce4_panel_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la
+	$(top_builddir)/common/libpanel-common.la
 
 if MAINTAINER_MODE
 

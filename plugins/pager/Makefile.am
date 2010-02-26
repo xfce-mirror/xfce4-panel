@@ -22,9 +22,9 @@ libpager_la_SOURCES = \
 
 libpager_la_CFLAGS = \
 	$(GTK_CFLAGS) \
+	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBWNCK_CFLAGS) \
-	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(EXO_CFLAGS) \
 	$(PLATFORM_CFLAGS)
@@ -38,17 +38,17 @@ libpager_la_LDFLAGS = \
 
 libpager_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la \
+	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBWNCK_LIBS) \
-	$(XFCONF_LIBS) \
 	$(EXO_LIBS) \
-	$(LIBXFCE4UI_LIBS)
+	$(LIBXFCE4UI_LIBS) \
+	$(XFCONF_LIBS)
 
 libpager_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
-	$(top_builddir)/common/libpanel-xfconf.la
+	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file
