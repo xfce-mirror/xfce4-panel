@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 21:10+0100\n"
-"PO-Revision-Date: 2010-02-17 23:08+0100\n"
+"POT-Creation-Date: 2010-02-18 18:00+0100\n"
+"PO-Revision-Date: 2010-02-18 18:17+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -284,105 +284,144 @@ msgid "Internal name: %s-%d"
 msgstr "Intert navn: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
+msgid "Add a new panel"
+msgstr "Tilføj et nyt panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Add new item to this panel"
+msgstr "Tilføj nye elementer til dette panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
 msgstr "Alfaværdi af panelbaggrunden mellem 0 (gennemsigtig) eller 100 (ugennemsigtig)."
 
-#: ../panel/panel-preferences-dialog.glade.h:2
+#: ../panel/panel-preferences-dialog.glade.h:4
 msgid "Automatically show and _hide the panel"
 msgstr "Automatisk vis og sk_jul panelet"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
+#: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Background"
 msgstr "Baggrund"
 
-#: ../panel/panel-preferences-dialog.glade.h:4
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "C_ompositing"
 msgstr "Red_igering"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "D_isplay"
 msgstr "_Vis"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Edit the currently selected item"
+msgstr "Redigér det aktuelle valgte element"
+
+#: ../panel/panel-preferences-dialog.glade.h:9
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Generelt"
 
-#: ../panel/panel-preferences-dialog.glade.h:7
+#: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Horizontal"
 msgstr "Horisontal"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Ite_ms"
 msgstr "Ele_menter"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Measurements"
 msgstr "Dimensioner til panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item down by one row"
+msgstr "Flyt det aktuelle valgte element en række ned"
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item up by one row"
+msgstr "Flyt det aktuelle valgte element en række op"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "O_utput:"
 msgstr "Ud_data:"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid "Remove currently selected item"
+msgstr "Fjern det aktuelle valgte element"
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Remove the currently selected panel"
+msgstr "Fjern det aktuelle valgte panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Vælg denne indstilling for af brede panelet ud over flere skærme."
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:22
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Vælg denne indstilling for at skjule håndtagene til panelet og fastlåse positionen."
+
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Vælg denne indstilling for at skjule panelet når markøren ikke er over det. Dette virker kun, når panelet er hæftet til en skærmkant."
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Show about information of the currently selected item"
+msgstr "Vis om information af det aktuelle valgte element"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Span mo_nitors"
 msgstr "Udbred på _skærme"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Transparency"
 msgstr "Gennemsigtighed"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr "Gennemsigtigt når markøren svæver over panelet."
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr "Gennemsigtigt når markøren ikke svæver over panelet."
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "_Enter:"
 msgstr "_Indtast:"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "_Leave:"
 msgstr "_Forlad:"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Lock panel"
 msgstr "_Lås panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "_Orientation:"
 msgstr "_Orientering:"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "_Size (pixels):"
 msgstr "_Størrelse (pixels):"
 
@@ -456,6 +495,7 @@ msgid "Analog"
 msgstr "Analog"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 #: ../plugins/pager/pager-dialog.glade.h:1
 #: ../plugins/separator/separator-dialog.glade.h:1
 #: ../plugins/systray/systray-dialog.glade.h:1
@@ -821,12 +861,43 @@ msgid "Open in Terminal"
 msgstr "Åbn i terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Mappemenu"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Vis en mappestruktur i en menu"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Indtast en liste over mønstre som bruges til at bestemme hvilke filer som der er synlige i en mappe. Hvis du angiver mere end ét mønster her skal listeelementerne adskilles med et semikolon (eks. *.txt;*.doc)."
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+msgid "Filtering"
+msgstr "Filtrering"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+msgid "Select A Directory"
+msgstr "Vælg en mappe"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+msgid "Show _hidden files"
+msgstr "Vis _skjulte filer"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "_Base Directory:"
+msgstr "_Basismappe:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "_File Pattern:"
+msgstr "_Filmønster:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "_Icon:"
+msgstr "_Ikon:"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
@@ -877,10 +948,6 @@ msgstr "Slå væ_rktøjstips fra"
 msgid "East"
 msgstr "Øst"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Edit the currently selected item"
-msgstr "Redigér det aktuelle valgte element"
-
 # fuzzy, skal bruges i 4.6
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
@@ -890,14 +957,6 @@ msgstr "Invendig knap"
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
 msgstr "Starter"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-msgid "Move currently selected item down by one row"
-msgstr "Flyt det aktuelle valgte element en række ned"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-msgid "Move currently selected item up by one row"
-msgstr "Flyt det aktuelle valgte element en række op"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
@@ -1078,11 +1137,6 @@ msgstr "Altid"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
 msgstr "Te_gn en vinduesramme når svævning over en knap"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
-msgstr "Filtrering"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
