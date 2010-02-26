@@ -1,6 +1,7 @@
 # $Id$
 
 SUBDIRS = \
+	actions \
 	clock \
 	launcher \
 	pager \
