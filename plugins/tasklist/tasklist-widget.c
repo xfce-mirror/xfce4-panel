@@ -1415,6 +1415,7 @@ tasklist_button_button_press_event (GtkWidget         *button,
   else if (event->button == 3)
     {
       panel_plugin = gtk_widget_get_parent (GTK_WIDGET (child->tasklist));
+      panel_plugin = gtk_widget_get_parent (panel_plugin);
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin), FALSE);
 
       menu = wnck_action_menu_new (child->window);
