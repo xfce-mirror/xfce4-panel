@@ -114,6 +114,9 @@ static void      window_menu_plugin_window_opened           (WnckScreen       *s
 static void      window_menu_plugin_window_closed           (WnckScreen       *screen,
                                                              WnckWindow       *window,
                                                              WindowMenuPlugin *plugin);
+static void      window_menu_plugin_windows_disconnect      (WindowMenuPlugin *plugin);
+static void      window_menu_plugin_windows_connect         (WindowMenuPlugin *plugin,
+                                                             gboolean          traverse_windows);
 static gboolean  window_menu_plugin_button_press_event      (GtkWidget        *button,
                                                              GdkEventButton   *event,
                                                              WindowMenuPlugin *plugin);
@@ -207,10 +210,6 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
-  /* monitor screen changes */
-  g_signal_connect (G_OBJECT (plugin), "screen-changed",
-                    G_CALLBACK (window_menu_plugin_screen_changed), NULL);
-
   /* create the widgets */
   plugin->button = xfce_arrow_button_new (GTK_ARROW_NONE);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
@@ -272,22 +271,24 @@ window_menu_plugin_set_property (GObject      *object,
   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
   XfcePanelPlugin  *panel_plugin = XFCE_PANEL_PLUGIN (object);
   guint             button_style;
+  gboolean          urgentcy_notification;
+
+  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
 
   switch (prop_id)
     {
       case PROP_STYLE:
         button_style = g_value_get_uint (value);
-
-        /* show or hide the icon */
-        if (button_style == BUTTON_STYLE_ICON)
-          gtk_widget_show (plugin->icon);
-        else
-          gtk_widget_hide (plugin->icon);
-
         if (plugin->button_style != button_style)
           {
             /* set new value */
             plugin->button_style = button_style;
+
+            /* show or hide the icon */
+            if (button_style == BUTTON_STYLE_ICON)
+              gtk_widget_show (plugin->icon);
+            else
+              gtk_widget_hide (plugin->icon);
 
             /* update the plugin */
             window_menu_plugin_size_changed (panel_plugin,
@@ -308,7 +309,21 @@ window_menu_plugin_set_property (GObject      *object,
         break;
 
       case PROP_URGENTCY_NOTIFICATION:
-        plugin->urgentcy_notification = g_value_get_boolean (value);
+        urgentcy_notification = g_value_get_boolean (value);
+        if (plugin->urgentcy_notification != urgentcy_notification)
+          {
+            /* set new value */
+            plugin->urgentcy_notification = urgentcy_notification;
+
+            if (plugin->screen != NULL)
+              {
+                /* (dis)connect window signals */
+                if (plugin->urgentcy_notification)
+                  window_menu_plugin_windows_connect (plugin, TRUE);
+                else
+                  window_menu_plugin_windows_disconnect (plugin);
+              }
+          }
         break;
 
       case PROP_ALL_WORKSPACES:
@@ -343,13 +358,12 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
 
   if (G_UNLIKELY (plugin->screen != NULL))
     {
+      /* disconnect from all windows on the old screen */
+      window_menu_plugin_windows_disconnect (plugin);
+
       /* disconnect from the previous screen */
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
           window_menu_plugin_active_window_changed, plugin);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
-          window_menu_plugin_window_opened, plugin);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
-          window_menu_plugin_window_closed, plugin);
     }
 
   /* set the new screen */
@@ -358,10 +372,9 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
   /* connect signal to monitor this screen */
   g_signal_connect (G_OBJECT (plugin->screen), "active-window-changed",
       G_CALLBACK (window_menu_plugin_active_window_changed), plugin);
-  g_signal_connect (G_OBJECT (plugin->screen), "window-opened",
-      G_CALLBACK (window_menu_plugin_window_opened), plugin);
-  g_signal_connect (G_OBJECT (plugin->screen), "window-closed",
-      G_CALLBACK (window_menu_plugin_window_closed), plugin);
+
+  if (plugin->urgentcy_notification)
+     window_menu_plugin_windows_connect (plugin, FALSE);
 }
 
 
@@ -389,6 +402,13 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
   xfconf_g_property_bind (plugin->channel, "/all-workspaces",
                           G_TYPE_BOOLEAN, plugin, "all-workspaces");
 
+  /* monitor screen changes */
+  g_signal_connect (G_OBJECT (plugin), "screen-changed",
+      G_CALLBACK (window_menu_plugin_screen_changed), NULL);
+
+  /* initialize the screen */
+  window_menu_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
+
   /* show the button */
   gtk_widget_show (plugin->button);
 }
@@ -407,12 +427,12 @@ window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* disconnect from the screen */
   if (G_LIKELY (plugin->screen != NULL))
     {
+      /* disconnect from all windows */
+      window_menu_plugin_windows_disconnect (plugin);
+
+      /* disconnect from the screen */
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
           window_menu_plugin_active_window_changed, plugin);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
-          window_menu_plugin_window_opened, plugin);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
-          window_menu_plugin_window_closed, plugin);
 
       /* unset the screen */
       plugin->screen = NULL;
@@ -439,7 +459,8 @@ window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
   if (plugin->button_style == BUTTON_STYLE_ARROW)
     arrow_type = xfce_panel_plugin_arrow_type (panel_plugin);
 
-  xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button), arrow_type);
+  xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button),
+                                    arrow_type);
 }
 
 
@@ -569,6 +590,7 @@ window_menu_plugin_window_state_changed (WnckWindow       *window,
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (plugin->urgentcy_notification);
+  panel_return_if_fail (plugin->urgentcy_notification);
 
   /* only response to urgency changes and urgency notify is enabled */
   if (!PANEL_HAS_FLAG (changed_mask, URGENT_FLAGS))
@@ -585,7 +607,6 @@ window_menu_plugin_window_state_changed (WnckWindow       *window,
     xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (plugin->button), TRUE);
   else if (plugin->urgent_windows == 0)
     xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (plugin->button), FALSE);
-
 }
 
 
@@ -599,10 +620,7 @@ window_menu_plugin_window_opened (WnckScreen       *screen,
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
-
-  /* leave when urgency notify is disabled */
-  if (!plugin->urgentcy_notification)
-    return;
+  panel_return_if_fail (plugin->urgentcy_notification);
 
   /* monitor the window's state */
   g_signal_connect (G_OBJECT (window), "state-changed",
@@ -625,15 +643,73 @@ window_menu_plugin_window_closed (WnckScreen       *screen,
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
-
-  /* leave when urgency notify is disabled */
-  if (!plugin->urgentcy_notification)
-    return;
+  panel_return_if_fail (plugin->urgentcy_notification);
 
   /* check if we need to update the urgency counter */
   if (wnck_window_needs_attention (window))
     window_menu_plugin_window_state_changed (window, URGENT_FLAGS,
                                              0, plugin);
+}
+
+
+
+static void
+window_menu_plugin_windows_disconnect (WindowMenuPlugin *plugin)
+{
+  GList *windows, *li;
+
+  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WNCK_IS_SCREEN (plugin->screen));
+
+  /* disconnect screen signals */
+  g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
+     window_menu_plugin_window_closed, plugin);
+  g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
+     window_menu_plugin_window_opened, plugin);
+
+  /* disconnect the state changed signal from all windows */
+  windows = wnck_screen_get_windows (plugin->screen);
+  for (li = windows; li != NULL; li = li->next)
+    {
+      panel_return_if_fail (WNCK_IS_WINDOW (li->data));
+      g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
+          window_menu_plugin_window_state_changed, plugin);
+    }
+
+  /* stop blinking */
+  plugin->urgent_windows = 0;
+  xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (plugin->button), FALSE);
+}
+
+
+
+static void
+window_menu_plugin_windows_connect (WindowMenuPlugin *plugin,
+                                    gboolean          traverse_windows)
+{
+  GList *windows, *li;
+
+  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WNCK_IS_SCREEN (plugin->screen));
+  panel_return_if_fail (plugin->urgentcy_notification);
+
+  g_signal_connect (G_OBJECT (plugin->screen), "window-opened",
+      G_CALLBACK (window_menu_plugin_window_opened), plugin);
+  g_signal_connect (G_OBJECT (plugin->screen), "window-closed",
+      G_CALLBACK (window_menu_plugin_window_closed), plugin);
+
+  if (traverse_windows)
+    {
+      /* connect the state changed signal to all windows */
+      windows = wnck_screen_get_windows (plugin->screen);
+      for (li = windows; li != NULL; li = li->next)
+        {
+          panel_return_if_fail (WNCK_IS_WINDOW (li->data));
+          window_menu_plugin_window_opened (plugin->screen,
+                                            WNCK_WINDOW (li->data),
+                                            plugin);
+        }
+    }
 }
 
 
@@ -730,7 +806,7 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
   /* create fallback name if no name is set */
   if (!IS_STRING (name))
     name = name_num = g_strdup_printf (_("Workspace %d"),
-                                       wnck_workspace_get_number (workspace) + 1);
+        wnck_workspace_get_number (workspace) + 1);
 
   /* create the menu item */
   mi = gtk_menu_item_new_with_label (name);
@@ -992,7 +1068,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   gint                  urgent_windows = 0;
   gboolean              has_windows;
   gboolean              is_empty = TRUE;
-  guint                 n_workspaces;
+  guint                 n_workspaces = 0;
   const gchar          *name = NULL;
   gchar                *utf8 = NULL, *label;
 
@@ -1027,7 +1103,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
       workspaces = &fake;
     }
 
-  for (lp = workspaces, n_workspaces = 0; lp != NULL; lp = lp->next, n_workspaces++)
+  for (lp = workspaces; lp != NULL; lp = lp->next, n_workspaces++)
     {
       workspace = WNCK_WORKSPACE (lp->data);
 
