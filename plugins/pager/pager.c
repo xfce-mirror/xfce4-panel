@@ -28,12 +28,21 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <xfconf/xfconf.h>
 #include <libwnck/libwnck.h>
+#include <exo/exo.h>
 
 #include "pager.h"
 #include "pager-dialog_glade.h"
 
 
 
+static void     pager_plugin_get_property              (GObject           *object,
+                                                        guint              prop_id,
+                                                        GValue            *value,
+                                                        GParamSpec        *pspec);
+static void     pager_plugin_set_property              (GObject           *object,
+                                                        guint              prop_id,
+                                                        const GValue      *value,
+                                                        GParamSpec        *pspec);
 static gboolean pager_plugin_scroll_event              (GtkWidget         *widget,
                                                         GdkEventScroll    *event);
 static void     pager_plugin_screen_changed            (GtkWidget         *widget,
@@ -42,12 +51,7 @@ static void     pager_plugin_construct                 (XfcePanelPlugin   *panel
 static void     pager_plugin_free_data                 (XfcePanelPlugin   *panel_plugin);
 static gboolean pager_plugin_size_changed              (XfcePanelPlugin   *panel_plugin,
                                                         gint               size);
-static void     pager_plugin_save                      (XfcePanelPlugin   *panel_plugin);
 static void     pager_plugin_configure_plugin          (XfcePanelPlugin   *panel_plugin);
-static void     pager_plugin_property_changed          (XfconfChannel     *channel,
-                                                        const gchar       *property_name,
-                                                        const GValue      *value,
-                                                        PagerPlugin       *plugin);
 
 
 
@@ -77,6 +81,14 @@ struct _PagerPlugin
   gint           rows;
 };
 
+enum
+{
+  PROP_0,
+  PROP_WORKSPACE_SCROLLING,
+  PROP_SHOW_NAMES,
+  PROP_ROWS
+};
+
 
 
 G_DEFINE_TYPE (PagerPlugin, pager_plugin, XFCE_TYPE_PANEL_PLUGIN);
@@ -92,7 +104,12 @@ static void
 pager_plugin_class_init (PagerPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
+  GObjectClass         *gobject_class;
   GtkWidgetClass       *widget_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->get_property = pager_plugin_get_property;
+  gobject_class->set_property = pager_plugin_set_property;
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->scroll_event = pager_plugin_scroll_event;
@@ -101,9 +118,31 @@ pager_plugin_class_init (PagerPluginClass *klass)
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = pager_plugin_construct;
   plugin_class->free_data = pager_plugin_free_data;
-  plugin_class->save = pager_plugin_save;
   plugin_class->size_changed = pager_plugin_size_changed;
   plugin_class->configure_plugin = pager_plugin_configure_plugin;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_WORKSPACE_SCROLLING,
+                                   g_param_spec_boolean ("workspace-scrolling",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_NAMES,
+                                   g_param_spec_boolean ("show-names",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ROWS,
+                                   g_param_spec_uint ("rows",
+                                                      NULL, NULL,
+                                                      1, 50, 1,
+                                                      EXO_PARAM_READWRITE));
+
+
 }
 
 
@@ -113,7 +152,7 @@ pager_plugin_init (PagerPlugin *plugin)
 {
   /* init, draw nothing */
   plugin->wnck_screen = NULL;
-  plugin->scrolling = FALSE;
+  plugin->scrolling = TRUE;
   plugin->show_names = FALSE;
   plugin->rows = 1;
   plugin->wnck_pager = NULL;
@@ -124,6 +163,75 @@ pager_plugin_init (PagerPlugin *plugin)
 
   /* initialize xfconf */
   xfconf_init (NULL);
+}
+
+
+
+static void
+pager_plugin_get_property (GObject    *object,
+                           guint       prop_id,
+                           GValue     *value,
+                           GParamSpec *pspec)
+{
+  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object);
+
+  switch (prop_id)
+    {
+      case PROP_WORKSPACE_SCROLLING:
+        g_value_set_boolean (value, plugin->scrolling);
+        break;
+
+      case PROP_SHOW_NAMES:
+        g_value_set_boolean (value, plugin->show_names);
+        break;
+
+      case PROP_ROWS:
+        g_value_set_uint (value, plugin->rows);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+
+
+static void
+pager_plugin_set_property (GObject      *object,
+                           guint         prop_id,
+                           const GValue *value,
+                           GParamSpec   *pspec)
+{
+  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (object);
+
+  switch (prop_id)
+    {
+      case PROP_WORKSPACE_SCROLLING:
+        plugin->scrolling = g_value_get_boolean (value);
+        break;
+
+      case PROP_SHOW_NAMES:
+        plugin->show_names = g_value_get_boolean (value);
+
+        if (plugin->wnck_pager != NULL)
+          wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
+                                       plugin->show_names ?
+                                           WNCK_PAGER_DISPLAY_NAME :
+                                           WNCK_PAGER_DISPLAY_CONTENT);
+        break;
+
+      case PROP_ROWS:
+        plugin->rows = g_value_get_uint (value);
+
+        if (plugin->wnck_pager != NULL)
+          wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
 }
 
 
@@ -198,8 +306,8 @@ pager_plugin_screen_changed (GtkWidget *widget,
       /* set the pager properties */
       wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
                                    plugin->show_names ?
-                                   WNCK_PAGER_DISPLAY_NAME :
-                                   WNCK_PAGER_DISPLAY_CONTENT);
+                                       WNCK_PAGER_DISPLAY_NAME :
+                                       WNCK_PAGER_DISPLAY_CONTENT);
       wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
     }
 }
@@ -213,13 +321,14 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* set the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
-  g_signal_connect (G_OBJECT (plugin->channel), "property-changed",
-                    G_CALLBACK (pager_plugin_property_changed), plugin);
 
-  /* read xfconf settings */
-  plugin->scrolling = xfconf_channel_get_bool (plugin->channel, "/workspace-scrolling", FALSE);
-  plugin->show_names = xfconf_channel_get_bool (plugin->channel, "/show-names", FALSE);
-  plugin->rows = CLAMP (xfconf_channel_get_int (plugin->channel, "/rows", 1), 1, 50);\
+  /* bind properties */
+  xfconf_g_property_bind (plugin->channel, "/workspace-scrolling",
+                          G_TYPE_BOOLEAN, plugin, "workspace-scrolling");
+  xfconf_g_property_bind (plugin->channel, "/show-names",
+                          G_TYPE_BOOLEAN, plugin, "show-names");
+  xfconf_g_property_bind (plugin->channel, "/rows",
+                          G_TYPE_UINT, plugin, "rows");
 
   /* create the pager */
   pager_plugin_screen_changed (GTK_WIDGET (panel_plugin), NULL);
@@ -259,21 +368,6 @@ pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-pager_plugin_save (XfcePanelPlugin *panel_plugin)
-{
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
-
-  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
-
-  /* store settings */
-  xfconf_channel_set_bool (plugin->channel, "/workspace-scrolling", plugin->scrolling);
-  xfconf_channel_set_bool (plugin->channel, "/show-names", plugin->show_names);
-  xfconf_channel_set_uint (plugin->channel, "/rows", plugin->rows);
-}
-
-
-
-static void
 pager_plugin_configure_workspace_settings (GtkWidget *button)
 {
   GdkScreen *screen;
@@ -290,7 +384,8 @@ pager_plugin_configure_workspace_settings (GtkWidget *button)
   if (!gdk_spawn_command_line_on_screen (screen, "xfwm4-workspace-settings", &error))
     {
       /* show an error dialog */
-      xfce_dialog_show_error (button, error, _("Unable to open the Xfce workspace settings"));
+      xfce_dialog_show_error (button, error,
+          _("Unable to open the Xfce workspace settings"));
       g_error_free (error);
     }
 }
@@ -348,9 +443,6 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
   panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
 
-  /* save before we opend the dialog, so all properties exist in xfonf */
-  pager_plugin_save (panel_plugin);
-
   /* load the dialog from the glade file */
   builder = gtk_builder_new ();
   if (gtk_builder_add_from_string (builder, pager_dialog_glade, pager_dialog_glade_length, NULL))
@@ -369,19 +461,24 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
 
       object = gtk_builder_get_object (builder, "close-button");
-      g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
+      g_signal_connect_swapped (G_OBJECT (object), "clicked",
+          G_CALLBACK (gtk_widget_destroy), dialog);
 
       object = gtk_builder_get_object (builder, "settings-button");
-      g_signal_connect (G_OBJECT (object), "clicked", G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
+      g_signal_connect (G_OBJECT (object), "clicked",
+          G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
 
       object = gtk_builder_get_object (builder, "workspace-scrolling");
-      xfconf_g_property_bind (plugin->channel, "/workspace-scrolling", G_TYPE_BOOLEAN, object, "active");
+      exo_mutual_binding_new (G_OBJECT (plugin), "workspace-scrolling",
+                              G_OBJECT (object), "active");
 
       object = gtk_builder_get_object (builder, "show-names");
-      xfconf_g_property_bind (plugin->channel, "/show-names", G_TYPE_BOOLEAN, object, "active");
+      exo_mutual_binding_new (G_OBJECT (plugin), "show-names",
+                              G_OBJECT (object), "active");
 
       object = gtk_builder_get_object (builder, "rows");
-      xfconf_g_property_bind (plugin->channel, "/rows", G_TYPE_UINT, object, "value");
+      exo_mutual_binding_new (G_OBJECT (plugin), "rows",
+                              G_OBJECT (object), "value");
 
       /* update the rows limit */
       pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
@@ -392,45 +489,5 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     {
       /* release the builder */
       g_object_unref (G_OBJECT (builder));
-    }
-}
-
-
-
-static void
-pager_plugin_property_changed (XfconfChannel *channel,
-                               const gchar   *property_name,
-                               const GValue  *value,
-                               PagerPlugin   *plugin)
-{
-  guint n_workspaces;
-
-  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
-  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
-  panel_return_if_fail (plugin->channel == channel);
-  panel_return_if_fail (WNCK_IS_PAGER (plugin->wnck_pager));
-  panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
-
-  /* update the changed property */
-  if (strcmp (property_name, "/workspace-scrolling") == 0)
-    {
-      /* store new setting */
-      plugin->scrolling = g_value_get_boolean (value);
-    }
-  else if (strcmp (property_name, "/show-names") == 0)
-    {
-      /* store new value and set wnck pager display mode */
-      plugin->show_names = g_value_get_boolean (value);
-      wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
-                                   plugin->show_names ?
-                                   WNCK_PAGER_DISPLAY_NAME :
-                                   WNCK_PAGER_DISPLAY_CONTENT);
-    }
-  else if (strcmp (property_name, "/rows") == 0)
-    {
-      /* store new value and set wnck pager rows */
-      n_workspaces = MIN (wnck_screen_get_workspace_count (plugin->wnck_screen), 1);
-      plugin->rows = CLAMP (g_value_get_uint (value), 1, n_workspaces);
-      wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
     }
 }

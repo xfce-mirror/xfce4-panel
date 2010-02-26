@@ -27,6 +27,7 @@ libpager_la_CFLAGS = \
 	$(LIBWNCK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
+	$(EXO_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libpager_la_LDFLAGS = \
@@ -41,6 +42,7 @@ libpager_la_LIBADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBWNCK_LIBS) \
 	$(XFCONF_LIBS) \
+	$(EXO_LIBS) \
 	$(LIBXFCE4UI_LIBS)
 
 libpager_la_DEPENDENCIES = \
