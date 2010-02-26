@@ -34,7 +34,7 @@
 #include "tasklist-widget.h"
 
 
-#define MIN_BUTTON_SIZE          (25)
+#define DEFAULT_BUTTON_SIZE      (25)
 #define DEFAULT_BUTTON_LENGTH    (200)
 #define WIREFRAME_SIZE           (5)
 #define xfce_taskbar_lock()      G_BEGIN_DECLS { locked++; } G_END_DECLS;
@@ -109,6 +109,7 @@ struct _XfceTasklist
 
   /* gtk style properties */
   gint                max_button_length;
+  gint                max_button_size;
   PangoEllipsizeMode  ellipsize_mode;
 };
 
@@ -260,14 +261,24 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
-                                                             NULL, NULL,
+                                                             NULL,
+                                                             "The maximum length of a window button",
                                                              -1, G_MAXINT,
                                                              DEFAULT_BUTTON_LENGTH,
                                                              EXO_PARAM_READABLE));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("max-button-size",
+                                                             NULL,
+                                                             "The maximum size of a window button",
+                                                             1, G_MAXINT,
+                                                             DEFAULT_BUTTON_SIZE,
+                                                             EXO_PARAM_READABLE));
+
+  gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_enum ("ellipsize-mode",
-                                                              NULL, NULL,
+                                                              NULL,
+                                                              "The ellipsize mode used for the button label",
                                                               PANGO_TYPE_ELLIPSIZE_MODE,
                                                               PANGO_ELLIPSIZE_END,
                                                               EXO_PARAM_READABLE));
@@ -295,6 +306,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_wireframes = FALSE;
   tasklist->wireframe_window = 0;
   tasklist->max_button_length = DEFAULT_BUTTON_LENGTH;
+  tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
   tasklist->ellipsize_mode = PANGO_ELLIPSIZE_END;
 
   /* set the itembar drag destination targets */
@@ -496,7 +508,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   if (tasklist->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       /* get the number of rows and columns */
-      rows = MAX (allocation->height / MIN_BUTTON_SIZE, 1);
+      rows = MAX (allocation->height / tasklist->max_button_size, 1);
       cols = MAX (tasklist->n_visible_children / rows, 1);
 
       /* make sure the children fit and use all the space */
@@ -517,7 +529,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   else
     {
       /* get the number of rows and columns */
-      rows = MAX (allocation->width / MIN_BUTTON_SIZE, 1);
+      rows = MAX (allocation->width / tasklist->max_button_size, 1);
       cols = MAX (tasklist->n_visible_children / rows, 1);
 
       /* make sure the children fit and use all the space */
@@ -579,6 +591,7 @@ xfce_tasklist_style_set (GtkWidget *widget,
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (widget);
   gint          max_button_length;
+  gint          max_button_size;
 
   /* let gtk update the widget style */
   (*GTK_WIDGET_CLASS (xfce_tasklist_parent_class)->style_set) (widget, previous_style);
@@ -587,12 +600,16 @@ xfce_tasklist_style_set (GtkWidget *widget,
   gtk_widget_style_get (GTK_WIDGET (tasklist),
                         "max-button-length", &max_button_length,
                         "ellipsize-mode", &tasklist->ellipsize_mode,
+                        "max-button-size", &max_button_size,
                         NULL);
 
   /* update the widget */
-  if (tasklist->max_button_length != max_button_length)
+  if (tasklist->max_button_length != max_button_length
+      || tasklist->max_button_size != max_button_size)
     {
       tasklist->max_button_length = max_button_length;
+      tasklist->max_button_size = max_button_size;
+
       gtk_widget_queue_resize (widget);
     }
 }
