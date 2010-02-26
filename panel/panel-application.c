@@ -62,7 +62,6 @@ static gboolean  panel_application_plugin_insert      (PanelApplication       *a
                                                        gchar                 **arguments,
                                                        gint                    position);
 static gboolean  panel_application_save_timeout       (gpointer                user_data);
-static void      panel_application_save_reschedule    (PanelApplication       *application);
 static void      panel_application_window_destroyed   (GtkWidget              *window,
                                                        PanelApplication       *application);
 static void      panel_application_dialog_destroyed   (GtkWindow              *dialog,
@@ -116,18 +115,18 @@ struct _PanelApplication
   XfconfChannel      *xfconf;
 
   /* internal list of all the panel windows */
-  GSList  *windows;
+  GSList             *windows;
 
   /* internal list of opened dialogs */
-  GSList  *dialogs;
+  GSList             *dialogs;
 
   /* autosave timeout */
-  guint    autosave_timeout_id;
+  guint               autosave_timeout_id;
 
   /* drag and drop data */
-  guint     drop_data_ready : 1;
-  guint     drop_occurred : 1;
-  guint     drop_desktop_files : 1;
+  guint               drop_data_ready : 1;
+  guint               drop_occurred : 1;
+  guint               drop_desktop_files : 1;
 };
 
 enum
@@ -176,7 +175,6 @@ panel_application_init (PanelApplication *application)
   PanelWindow *window;
   GError      *error = NULL;
 
-  /* initialize */
   application->windows = NULL;
   application->dialogs = NULL;
   application->autosave_timeout_id = 0;
@@ -187,7 +185,7 @@ panel_application_init (PanelApplication *application)
   /* get the xfconf channel (singleton) */
   application->xfconf = panel_properties_get_channel (G_OBJECT (application));
 
-  /* check for any configuration */
+  /* check if we need to launch the migration application */
   if (!xfconf_channel_has_property (application->xfconf, "/panels"))
     {
       if (!g_spawn_command_line_sync (MIGRATE_BIN, NULL, NULL, NULL, &error))
@@ -208,9 +206,12 @@ panel_application_init (PanelApplication *application)
   panel_application_load (application);
 
   /* start the autosave timeout */
-  panel_application_save_reschedule (application);
+  application->autosave_timeout_id =
+      g_timeout_add_seconds (AUTOSAVE_INTERVAL,
+                             panel_application_save_timeout,
+                             application);
 
-  /* create empty window */
+  /* create empty window if everything else failed */
   if (G_UNLIKELY (application->windows == NULL))
     window = panel_application_new_window (application, NULL, TRUE);
 }
@@ -228,18 +229,15 @@ panel_application_finalize (GObject *object)
   /* stop the autosave timeout */
   g_source_remove (application->autosave_timeout_id);
 
-  /* destroy the windows if they are still opened */
+  /* free all windows */
   for (li = application->windows; li != NULL; li = li->next)
     {
       g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
           G_CALLBACK (panel_application_window_destroyed), application);
       gtk_widget_destroy (GTK_WIDGET (li->data));
     }
-
-  /* cleanup the list of windows */
   g_slist_free (application->windows);
 
-  /* release the factory */
   g_object_unref (G_OBJECT (application->factory));
 
   (*G_OBJECT_CLASS (panel_application_parent_class)->finalize) (object);
@@ -281,7 +279,6 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   panel_properties_bind (application->xfconf, G_OBJECT (window),
                          property_base, properties, save_properties);
 
-  /* cleanup */
   g_free (property_base);
 }
 
@@ -339,8 +336,8 @@ panel_application_load (PanelApplication *application)
                 xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
               /* show warnings */
-              g_message (_("Plugin \"%s-%d\" was not found and has been "
-                         "removed from the configuration"), name, unique_id);
+              g_message ("Plugin \"%s-%d\" was not found and has been "
+                         "removed from the configuration", name, unique_id);
             }
 
           g_free (name);
@@ -364,7 +361,7 @@ panel_application_plugin_move_drag_end (GtkWidget        *item,
   g_signal_handlers_disconnect_by_func (G_OBJECT (item),
       G_CALLBACK (panel_application_plugin_move_drag_end), application);
 
-  /* make the window insensitive */
+  /* make the window sensitive again */
   panel_application_windows_sensitive (application, TRUE);
 }
 
@@ -385,11 +382,10 @@ panel_application_plugin_move (GtkWidget        *item,
   /* make the window insensitive */
   panel_application_windows_sensitive (application, FALSE);
 
-  /* create a target list */
+  /* create drag context */
   target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
-
-  /* begin a drag */
   context = gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
+  gtk_target_list_unref (target_list);
 
   /* set the drag context icon name */
   module = panel_module_get_from_plugin_provider (XFCE_PANEL_PLUGIN_PROVIDER (item));
@@ -398,9 +394,6 @@ panel_application_plugin_move (GtkWidget        *item,
     gtk_drag_set_icon_name (context, icon_name, 0, 0);
   else
     gtk_drag_set_icon_default (context);
-
-  /* release the drag list */
-  gtk_target_list_unref (target_list);
 
   /* signal to make the window sensitive again on a drag end */
   g_signal_connect (G_OBJECT (item), "drag-end",
@@ -446,6 +439,7 @@ panel_application_plugin_remove (GtkWidget *widget,
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
 
+  /* ask the plugin to cleanup when we destroy a panel window */
   xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (widget),
                                           PROVIDER_SIGNAL_REMOVE_PLUGIN);
 }
@@ -461,44 +455,47 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
   PanelWindow *window;
   gint         unique_id;
   gchar       *name;
-  gint         nth;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* get the panel of the plugin */
   window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  /* handle the signal emitted from the plugin provider */
   switch (provider_signal)
     {
       case PROVIDER_SIGNAL_MOVE_PLUGIN:
-        /* invoke the move function */
+        /* start plugin drag */
         panel_application_plugin_move (GTK_WIDGET (provider), application);
         break;
 
       case PROVIDER_SIGNAL_EXPAND_PLUGIN:
       case PROVIDER_SIGNAL_COLLAPSE_PLUGIN:
         itembar = gtk_bin_get_child (GTK_BIN (window));
-        gtk_container_child_set (GTK_CONTAINER (itembar), GTK_WIDGET (provider),
-                                 "expand", provider_signal == PROVIDER_SIGNAL_EXPAND_PLUGIN, NULL);
+        gtk_container_child_set (GTK_CONTAINER (itembar),
+                                 GTK_WIDGET (provider),
+                                 "expand",
+                                 provider_signal == PROVIDER_SIGNAL_EXPAND_PLUGIN,
+                                 NULL);
         break;
 
       case PROVIDER_SIGNAL_WRAP_PLUGIN:
       case PROVIDER_SIGNAL_UNWRAP_PLUGIN:
         itembar = gtk_bin_get_child (GTK_BIN (window));
-        gtk_container_child_set (GTK_CONTAINER (itembar), GTK_WIDGET (provider),
-                                 "wrap", provider_signal == PROVIDER_SIGNAL_WRAP_PLUGIN, NULL);
+        gtk_container_child_set (GTK_CONTAINER (itembar),
+                                 GTK_WIDGET (provider),
+                                 "wrap",
+                                 provider_signal == PROVIDER_SIGNAL_WRAP_PLUGIN,
+                                 NULL);
         break;
 
       case PROVIDER_SIGNAL_LOCK_PANEL:
-        /* block autohide */
+        /* increase window's autohide counter */
         panel_window_freeze_autohide (window);
         break;
 
       case PROVIDER_SIGNAL_UNLOCK_PANEL:
-        /* unblock autohide */
+        /* decrease window's autohide counter */
         panel_window_thaw_autohide (window);
         break;
 
@@ -506,7 +503,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         /* give plugin the opportunity to cleanup special configuration */
         xfce_panel_plugin_provider_remove (provider);
 
-        /* store the provider's unique id and name */
+        /* store the provider's unique id and name (lost after destroy) */
         unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
         name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
 
@@ -520,12 +517,8 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         break;
 
       case PROVIDER_SIGNAL_ADD_NEW_ITEMS:
-        /* select active window */
-        nth = panel_application_get_window_index (application, window);
-        panel_application_window_select (application, nth);
-
         /* open the items dialog */
-        panel_item_dialog_show (gtk_widget_get_screen (GTK_WIDGET (window)));
+        panel_item_dialog_show (window);
         break;
 
       case PROVIDER_SIGNAL_PANEL_PREFERENCES:
@@ -535,17 +528,17 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 
       case PROVIDER_SIGNAL_PANEL_QUIT:
       case PROVIDER_SIGNAL_PANEL_RESTART:
-        /* quit of restart the entire panel */
+        /* quit or restart */
         panel_dbus_service_exit_panel (provider_signal == PROVIDER_SIGNAL_PANEL_RESTART);
         break;
 
       case PROVIDER_SIGNAL_PANEL_ABOUT:
-        /* show the panel about dialog */
+        /* show the about dialog */
         panel_dialogs_show_about ();
         break;
 
       case PROVIDER_SIGNAL_FOCUS_PLUGIN:
-         /* focus the panel window */
+         /* focus the panel window (as part of focusing a widget within the plugin) */
          gtk_window_present_with_time (GTK_WINDOW (window), GDK_CURRENT_TIME);
          break;
 
@@ -591,14 +584,12 @@ panel_application_plugin_insert (PanelApplication  *application,
   if (G_UNLIKELY (unique_id == -1))
     panel_application_plugin_delete_config (application, name, new_unique_id);
 
-  /* get the panel itembar */
-  itembar = gtk_bin_get_child (GTK_BIN (window));
-
   /* add signal to monitor provider signals */
   g_signal_connect (G_OBJECT (provider), "provider-signal",
       G_CALLBACK (panel_application_plugin_provider_signal), application);
 
   /* add the item to the panel */
+  itembar = gtk_bin_get_child (GTK_BIN (window));
   panel_itembar_insert (PANEL_ITEMBAR (itembar),
                         GTK_WIDGET (provider), position);
 
@@ -620,29 +611,11 @@ panel_application_save_timeout (gpointer user_data)
 
   GDK_THREADS_ENTER ();
 
-  /* save */
   panel_application_save (PANEL_APPLICATION (user_data), TRUE);
 
   GDK_THREADS_LEAVE ();
 
   return TRUE;
-}
-
-
-
-static void
-panel_application_save_reschedule (PanelApplication *application)
-{
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-
-  /* stop a running timeout */
-  if (G_UNLIKELY (application->autosave_timeout_id != 0))
-    g_source_remove (application->autosave_timeout_id);
-
-  /* start a new timeout */
-  application->autosave_timeout_id =
-      g_timeout_add_seconds (AUTOSAVE_INTERVAL, panel_application_save_timeout,
-                             application);
 }
 
 
@@ -701,7 +674,8 @@ panel_application_window_destroyed (GtkWidget        *window,
   /* schedule a save to store the new number of panels */
   panel_application_save (application, FALSE);
 
-  /* quit if there are no windows opened */
+  /* quit if there are no windows */
+  /* TODO, allow removing all windows and ask user what to do */
   if (application->windows == NULL)
     gtk_main_quit ();
 }
@@ -870,7 +844,6 @@ panel_application_drag_data_received (PanelWindow      *window,
       gdk_drag_status (context, 0, drag_time);
     }
 
-  /* release the application */
   g_object_unref (G_OBJECT (application));
 }
 
@@ -891,7 +864,7 @@ panel_application_drag_motion (GtkWidget        *window,
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (GDK_IS_DRAG_CONTEXT (context), FALSE);
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
-  panel_return_val_if_fail (application->drop_occurred == FALSE, FALSE);
+  panel_return_val_if_fail (!application->drop_occurred, FALSE);
 
   /* determine the drag target */
   target = gtk_drag_dest_find_target (window, context, NULL);
@@ -1033,7 +1006,6 @@ panel_application_save (PanelApplication *application,
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
 
-  /* save the settings of all plugins */
   for (li = application->windows, i = 0; li != NULL; li = li->next, i++)
     {
       /* get the itembar children */
@@ -1077,7 +1049,6 @@ panel_application_save (PanelApplication *application,
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
       xfconf_channel_set_arrayv (channel, buf, array);
 
-      /* cleanup */
       g_list_free (children);
       xfconf_array_free (array);
     }
@@ -1115,14 +1086,10 @@ panel_application_destroy_dialogs (PanelApplication *application)
   /* destroy all dialogs */
   for (li = application->dialogs; li != NULL; li = lnext)
     {
-      /* get next element */
       lnext = li->next;
-
-      /* destroy the window */
       gtk_widget_destroy (GTK_WIDGET (li->data));
     }
 
-  /* check */
   panel_return_if_fail (application->dialogs == NULL);
 }
 
@@ -1133,10 +1100,10 @@ panel_application_add_new_item (PanelApplication  *application,
                                 const gchar       *plugin_name,
                                 gchar            **arguments)
 {
-  PanelWindow *window;
   gint         nth = 0;
   GSList      *li;
   gboolean     active;
+  PanelWindow *window;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (plugin_name != NULL);
@@ -1144,9 +1111,10 @@ panel_application_add_new_item (PanelApplication  *application,
 
   if (panel_module_factory_has_module (application->factory, plugin_name))
     {
-      /* look for an active panel or ask the user */
+      /* find a suitable window if there are 2 or more windows */
       if (LIST_HAS_TWO_OR_MORE_ENTRIES (application->windows))
         {
+          /* try to find an avtive panel */
           for (li = application->windows, nth = 0; li != NULL; li = li->next, nth++)
             {
               g_object_get (G_OBJECT (li->data), "active", &active, NULL);
@@ -1154,24 +1122,23 @@ panel_application_add_new_item (PanelApplication  *application,
                 break;
             }
 
+          /* no active panel found, ask user to select a panel, leave when
+           * the cancel button is pressed */
           if (li == NULL
               && (nth = panel_dialogs_choose_panel (application)) == -1)
             return;
         }
 
-      /* get the window */
-      window = g_slist_nth_data (application->windows, nth);
-
       /* add the plugin to the end of the choosen window */
+      window = g_slist_nth_data (application->windows, nth);
       panel_application_plugin_insert (application, window,
                                        gtk_widget_get_screen (GTK_WIDGET (window)),
                                        plugin_name, -1, arguments, -1);
     }
   else
     {
-      /* print warning */
-      g_warning (_("The plugin (%s) you want to add is not "
-                   "recognized by the panel."), plugin_name);
+      g_warning ("The plugin \"%s\" you want to add is not "
+                 "known by the panel", plugin_name);
     }
 }
 
@@ -1194,12 +1161,12 @@ panel_application_new_window (PanelApplication *application,
   /* create panel window */
   window = panel_window_new ();
 
-  /* realize */
+  /* realize, else some properties do not apply */
   gtk_widget_realize (window);
 
   /* monitor window destruction */
   g_signal_connect (G_OBJECT (window), "destroy",
-                    G_CALLBACK (panel_application_window_destroyed), application);
+      G_CALLBACK (panel_application_window_destroyed), application);
 
   /* put on the correct screen */
   gtk_window_set_screen (GTK_WINDOW (window), screen ? screen : gdk_screen_get_default ());
@@ -1278,8 +1245,8 @@ panel_application_get_window_index (PanelApplication *application,
 
 
 PanelWindow *
-panel_application_get_window (PanelApplication *application,
-                              guint             idx)
+panel_application_get_nth_window (PanelApplication *application,
+                                  guint             idx)
 {
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), 0);
 
@@ -1290,16 +1257,15 @@ panel_application_get_window (PanelApplication *application,
 
 void
 panel_application_window_select (PanelApplication *application,
-                                 gint              nth)
+                                 PanelWindow      *window)
 {
   GSList *li;
-  gint    n;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
   /* update state for all windows */
-  for (li = application->windows, n = 0; li != NULL; li = li->next, n++)
-    g_object_set (G_OBJECT (li->data), "active", !!(n == nth), NULL);
+  for (li = application->windows; li != NULL; li = li->next)
+    g_object_set (G_OBJECT (li->data), "active", window == li->data, NULL);
 }
 
 
@@ -1316,10 +1282,8 @@ panel_application_windows_sensitive (PanelApplication *application,
   /* walk the windows */
   for (li = application->windows; li != NULL; li = li->next)
     {
-      /* get the window itembar */
-      itembar = gtk_bin_get_child (GTK_BIN (li->data));
-
       /* set sensitivity of the itembar (and the plugins) */
+      itembar = gtk_bin_get_child (GTK_BIN (li->data));
       gtk_widget_set_sensitive (itembar, sensitive);
 
       /* block autohide for all windows */

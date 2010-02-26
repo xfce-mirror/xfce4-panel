@@ -35,7 +35,7 @@ typedef struct _PanelItemDialog      PanelItemDialog;
 
 GType      panel_item_dialog_get_type (void) G_GNUC_CONST;
 
-void       panel_item_dialog_show     (GdkScreen *screen);
+void       panel_item_dialog_show     (PanelWindow *window);
 
 gboolean   panel_item_dialog_visible  (void);
 

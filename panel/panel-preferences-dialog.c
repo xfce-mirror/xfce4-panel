@@ -241,7 +241,7 @@ panel_preferences_dialog_finalize (GObject *object)
 
   /* deselect all windows */
   if (!panel_item_dialog_visible ())
-    panel_application_window_select (dialog->application, -1);
+    panel_application_window_select (dialog->application, NULL);
 
   /* release the application */
   g_object_unref (G_OBJECT (dialog->application));
@@ -531,8 +531,8 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 
   /* set the selected window */
   nth = gtk_combo_box_get_active (combobox);
-  dialog->active = panel_application_get_window (dialog->application, nth);
-  panel_application_window_select (dialog->application, nth);
+  dialog->active = panel_application_get_nth_window (dialog->application, nth);
+  panel_application_window_select (dialog->application, dialog->active);
 
   if (G_LIKELY (dialog->active != NULL))
     {
@@ -882,7 +882,7 @@ panel_preferences_dialog_item_add (GtkWidget              *button,
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   /* show the items dialog */
-  panel_item_dialog_show (gtk_widget_get_screen (button));
+  panel_item_dialog_show (dialog->active);
 }
 
 
@@ -1009,7 +1009,7 @@ panel_preferences_dialog_show (PanelWindow *active)
   if (G_LIKELY (active))
     idx = panel_application_get_window_index (dialog_singleton->application, active);
   else
-    active = panel_application_get_window (dialog_singleton->application, idx);
+    active = panel_application_get_nth_window (dialog_singleton->application, idx);
 
   /* get the active screen */
   if (active != NULL)

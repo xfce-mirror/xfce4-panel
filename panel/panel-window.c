@@ -1982,16 +1982,10 @@ panel_window_menu_deactivate (GtkMenu     *menu,
 static void
 panel_window_menu_add_items (PanelWindow *window)
 {
-  gint              nth;
-  PanelApplication *application;
-
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  application = panel_application_get ();
-  nth = panel_application_get_window_index (application, window);
-  panel_application_window_select (application, nth);
-  g_object_unref (G_OBJECT (application));
-  panel_item_dialog_show (gtk_widget_get_screen (GTK_WIDGET (window)));
+  /* show the item dialog */
+  panel_item_dialog_show (window);
 }
 
 

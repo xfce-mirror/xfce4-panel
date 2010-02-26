@@ -63,11 +63,11 @@ guint             panel_application_get_n_windows     (PanelApplication  *applic
 gint              panel_application_get_window_index  (PanelApplication  *application,
                                                        PanelWindow       *window);
 
-PanelWindow      *panel_application_get_window        (PanelApplication  *application,
+PanelWindow      *panel_application_get_nth_window    (PanelApplication  *application,
                                                        guint              idx);
 
 void              panel_application_window_select     (PanelApplication  *application,
-                                                       gint               nth);
+                                                       PanelWindow       *window);
 
 void              panel_application_windows_sensitive (PanelApplication  *application,
                                                        gboolean           sensitive);

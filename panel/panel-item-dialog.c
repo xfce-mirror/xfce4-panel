@@ -310,7 +310,7 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
   else
     {
       if (!panel_preferences_dialog_visible ())
-        panel_application_window_select (dialog->application, -1);
+        panel_application_window_select (dialog->application, NULL);
 
       gtk_widget_destroy (GTK_WIDGET (gtk_dialog));
     }
@@ -714,9 +714,12 @@ panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
 
 
 void
-panel_item_dialog_show (GdkScreen *screen)
+panel_item_dialog_show (PanelWindow *window)
 {
-  panel_return_if_fail (screen == NULL || GDK_IS_SCREEN (screen));
+  GdkScreen        *screen;
+  PanelApplication *application;
+
+  panel_return_if_fail (window == NULL || PANEL_IS_WINDOW (window));
 
   if (G_LIKELY (dialog_singleton == NULL))
     {
@@ -726,8 +729,19 @@ panel_item_dialog_show (GdkScreen *screen)
     }
 
   /* show the dialog on the same screen as the panel */
-  if (G_UNLIKELY (screen == NULL))
-    screen = gdk_screen_get_default ();
+  if (G_UNLIKELY (window != NULL))
+    {
+      /* set the active panel */
+      application = panel_application_get ();
+      panel_application_window_select (application, window);
+      g_object_unref (G_OBJECT (application));
+
+      screen = gtk_window_get_screen (GTK_WINDOW (window));
+    }
+  else
+    {
+      screen = gdk_screen_get_default ();
+    }
   gtk_window_set_screen (GTK_WINDOW (dialog_singleton), screen);
 
   /* show the dialog */
