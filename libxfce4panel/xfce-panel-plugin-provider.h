@@ -67,6 +67,7 @@ struct _XfcePanelPluginProviderIface
   void         (*show_configure)      (XfcePanelPluginProvider       *provider);
   gboolean     (*get_show_about)      (XfcePanelPluginProvider       *provider);
   void         (*show_about)          (XfcePanelPluginProvider       *provider);
+  void         (*remove)              (XfcePanelPluginProvider       *provider);
 };
 
 /* signals send from the plugin to the panel (possibly
@@ -120,6 +121,8 @@ void         xfce_panel_plugin_provider_show_configure      (XfcePanelPluginProv
 gboolean     xfce_panel_plugin_provider_get_show_about      (XfcePanelPluginProvider       *provider);
 
 void         xfce_panel_plugin_provider_show_about          (XfcePanelPluginProvider       *provider);
+
+void         xfce_panel_plugin_provider_remove              (XfcePanelPluginProvider       *provider);
 
 G_END_DECLS
 

@@ -59,7 +59,7 @@ gchar *wrapper_name = NULL;
 
 
 
-G_DEFINE_TYPE (WrapperPlug, wrapper_plug, GTK_TYPE_PLUG);
+G_DEFINE_TYPE (WrapperPlug, wrapper_plug, GTK_TYPE_PLUG)
 
 
 

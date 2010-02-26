@@ -66,6 +66,7 @@ static gboolean     panel_plugin_external_get_show_configure  (XfcePanelPluginPr
 static void         panel_plugin_external_show_configure      (XfcePanelPluginProvider         *provider);
 static gboolean     panel_plugin_external_get_show_about      (XfcePanelPluginProvider         *provider);
 static void         panel_plugin_external_show_about          (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_remove              (XfcePanelPluginProvider         *provider);
 static void         panel_plugin_external_set_sensitive       (PanelPluginExternal             *external);
 static void         panel_plugin_external_set_property        (PanelPluginExternal             *external,
                                                                DBusPropertyChanged              property,
@@ -174,6 +175,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
   iface->show_configure = panel_plugin_external_show_configure;
   iface->get_show_about = panel_plugin_external_get_show_about;
   iface->show_about = panel_plugin_external_show_about;
+  iface->remove = panel_plugin_external_remove;
 }
 
 
@@ -657,6 +659,19 @@ panel_plugin_external_show_about (XfcePanelPluginProvider *provider)
   /* send signal to wrapper */
   panel_plugin_external_set_property_noop (PANEL_PLUGIN_EXTERNAL (provider),
                                            PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_ABOUT);
+}
+
+
+
+static void
+panel_plugin_external_remove (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  /* send signal to wrapper */
+  panel_plugin_external_set_property_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                           PROPERTY_CHANGED_PROVIDER_REMOVE);
 }
 
 

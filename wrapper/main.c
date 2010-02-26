@@ -123,6 +123,10 @@ dbus_gproxy_property_changed (DBusGProxy              *dbus_gproxy,
         xfce_panel_plugin_provider_show_about (provider);
         break;
 
+      case PROPERTY_CHANGED_PROVIDER_REMOVE:
+        xfce_panel_plugin_provider_remove (provider);
+        break;
+
       case PROPERTY_CHANGED_WRAPPER_QUIT:
         gtk_main_quit ();
         break;

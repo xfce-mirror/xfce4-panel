@@ -58,6 +58,7 @@ struct _XfcePanelPluginClass
   void     (*save)                    (XfcePanelPlugin *plugin);
   void     (*about)                   (XfcePanelPlugin *plugin);
   void     (*configure_plugin)        (XfcePanelPlugin *plugin);
+  void     (*removed)                 (XfcePanelPlugin *plugin);
 
   /*< private >*/
   void (*reserved1) (void);

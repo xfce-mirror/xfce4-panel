@@ -77,6 +77,7 @@ static gboolean      xfce_panel_plugin_get_show_configure     (XfcePanelPluginPr
 static void          xfce_panel_plugin_show_configure         (XfcePanelPluginProvider      *provider);
 static gboolean      xfce_panel_plugin_get_show_about         (XfcePanelPluginProvider      *provider);
 static void          xfce_panel_plugin_show_about             (XfcePanelPluginProvider      *provider);
+static void          xfce_panel_plugin_remove                 (XfcePanelPluginProvider      *provider);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                      data,
                                                                GObject                      *where_the_object_was);
 
@@ -102,6 +103,7 @@ enum
   CONFIGURE_PLUGIN,
   FREE_DATA,
   ORIENTATION_CHANGED,
+  REMOVED,
   SAVE,
   SIZE_CHANGED,
   SCREEN_POSITION_CHANGED,
@@ -256,6 +258,30 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                   NULL, NULL,
                   g_cclosure_marshal_VOID__ENUM,
                   G_TYPE_NONE, 1, GTK_TYPE_ORIENTATION);
+
+  /**
+   * XfcePanelPlugin::removed
+   * @plugin : an #XfcePanelPlugin.
+   *
+   * This signal is emmitted when the plugin is permanently removed from
+   * the panel configuration by the user. Developers can use this signal
+   * to cleanup custom setting locations that for example store passwords.
+   *
+   * Note that if you use the xfconf channel and base property provided
+   * by xfce_panel_plugin_get_property_base() or the rc file location
+   * returned by xfce_panel_plugin_save_location(), the panel will take
+   * care of removing those settings.
+   *
+   * Since: 4.8
+   **/
+  plugin_signals[REMOVED] =
+    g_signal_new (I_("removed"),
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (XfcePanelPluginClass, removed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 
   /**
    * XfcePanelPlugin::save
@@ -483,6 +509,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
   iface->show_configure = xfce_panel_plugin_show_configure;
   iface->get_show_about = xfce_panel_plugin_get_show_about;
   iface->show_about = xfce_panel_plugin_show_about;
+  iface->remove = xfce_panel_plugin_remove;
 }
 
 
@@ -709,36 +736,36 @@ xfce_panel_plugin_menu_move (XfcePanelPlugin *plugin)
 static void
 xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
 {
-  GtkWidget *widget;
+  GtkWidget *dialog;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
   /* create question dialog (same code is also in panel-preferences-dialog.c) */
-  widget = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+  dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
       GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
       _("Are you sure that you want to remove \"%s\"?"),
       xfce_panel_plugin_get_display_name (plugin));
-  gtk_window_set_screen (GTK_WINDOW (widget),
+  gtk_window_set_screen (GTK_WINDOW (dialog),
       gtk_widget_get_screen (GTK_WIDGET (plugin)));
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget),
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
       _("If you remove the item from the panel, it is permanently lost."));
-  gtk_dialog_add_buttons (GTK_DIALOG (widget), GTK_STOCK_CANCEL,
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog), GTK_STOCK_CANCEL,
       GTK_RESPONSE_NO, GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
-  gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
 
   /* run the dialog */
-  if (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_YES)
+  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
     {
       /* hide the dialog */
-      gtk_widget_hide (widget);
+      gtk_widget_hide (dialog);
 
       /* ask the panel or wrapper to remove the plugin */
       xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
                                               PROVIDER_SIGNAL_REMOVE_PLUGIN);
     }
 
-  /* destroy */
-  gtk_widget_destroy (widget);
+  /* destroy window */
+  gtk_widget_destroy (dialog);
 }
 
 
@@ -1143,6 +1170,17 @@ xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider)
   /* emit about signal */
   if (G_LIKELY (plugin->priv->menu_blocked == 0))
     g_signal_emit (G_OBJECT (provider), plugin_signals[ABOUT], 0);
+}
+
+
+
+static void
+xfce_panel_plugin_remove (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  /* emit removed signal */
+  g_signal_emit (G_OBJECT (provider), plugin_signals[REMOVED], 0);
 }
 
 
