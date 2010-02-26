@@ -27,16 +27,16 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfceLauncherPluginClass XfceLauncherPluginClass;
-typedef struct _XfceLauncherPlugin      XfceLauncherPlugin;
-typedef enum   _LauncherArrowType       LauncherArrowType;
+typedef struct _LauncherPluginClass LauncherPluginClass;
+typedef struct _LauncherPlugin      LauncherPlugin;
+typedef enum   _LauncherArrowType   LauncherArrowType;
 
 #define XFCE_TYPE_LAUNCHER_PLUGIN            (launcher_plugin_get_type ())
-#define XFCE_LAUNCHER_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, XfceLauncherPlugin))
-#define XFCE_LAUNCHER_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_LAUNCHER_PLUGIN, XfceLauncherPluginClass))
+#define XFCE_LAUNCHER_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPlugin))
+#define XFCE_LAUNCHER_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPluginClass))
 #define XFCE_IS_LAUNCHER_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_LAUNCHER_PLUGIN))
 #define XFCE_IS_LAUNCHER_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_LAUNCHER_PLUGIN))
-#define XFCE_LAUNCHER_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, XfceLauncherPluginClass))
+#define XFCE_LAUNCHER_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPluginClass))
 
 enum _LauncherArrowType
 {
@@ -48,11 +48,11 @@ enum _LauncherArrowType
   LAUNCHER_ARROW_INTERNAL
 };
 
-GType             launcher_plugin_get_type      (void) G_GNUC_CONST;
+GType   launcher_plugin_get_type      (void) G_GNUC_CONST;
 
-void              launcher_plugin_register_type (GTypeModule *type_module);
+void    launcher_plugin_register_type (GTypeModule    *type_module);
 
-GSList           *launcher_plugin_get_items     (XfceLauncherPlugin *plugin);
+GSList *launcher_plugin_get_items     (LauncherPlugin *plugin);
 
 G_END_DECLS
 

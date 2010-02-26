@@ -38,9 +38,9 @@
 
 typedef struct
 {
-  XfceLauncherPlugin *plugin;
-  GtkBuilder         *builder;
-  guint               idle_populate_id;
+  LauncherPlugin *plugin;
+  GtkBuilder     *builder;
+  guint           idle_populate_id;
 }
 LauncherPluginDialog;
 
@@ -634,7 +634,7 @@ launcher_dialog_items_load (LauncherPluginDialog *dialog)
 
 
 void
-launcher_dialog_show (XfceLauncherPlugin *plugin)
+launcher_dialog_show (LauncherPlugin *plugin)
 {
   LauncherPluginDialog *dialog;
   GtkBuilder           *builder;
