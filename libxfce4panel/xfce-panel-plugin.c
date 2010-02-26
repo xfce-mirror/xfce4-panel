@@ -1220,7 +1220,7 @@ xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
  *
  * Since 4.8
  **/
-gint
+PANEL_SYMBOL_EXPORT gint
 xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), -1);
