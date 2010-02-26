@@ -47,17 +47,6 @@ libseparator_la_LIBADD = \
 libseparator_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
 
-if MAINTAINER_MODE
-BUILT_SOURCES = \
-	$(libseparator_built_sources)
-
-DISTCLEANFILES = \
-	$(libseparator_built_sources)
-
-separator-dialog_glade.h: separator-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=separator_dialog_glade $< >$@
-endif
-
 #
 # .desktop file
 #
@@ -76,5 +65,16 @@ EXTRA_DIST = \
 DISTCLEANFILES = \
 	$(desktop_DATA) \
 	$(desktop_in_files)
+
+if MAINTAINER_MODE
+BUILT_SOURCES = \
+	$(libseparator_built_sources)
+
+DISTCLEANFILES += \
+	$(libseparator_built_sources)
+
+separator-dialog_glade.h: separator-dialog.glade
+	exo-csource --static --strip-comments --strip-content --name=separator_dialog_glade $< >$@
+endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

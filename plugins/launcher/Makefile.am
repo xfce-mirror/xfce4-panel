@@ -55,17 +55,6 @@ liblauncher_la_LIBADD = \
 liblauncher_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
 
-if MAINTAINER_MODE
-BUILT_SOURCES = \
-	$(liblauncher_built_sources)
-
-DISTCLEANFILES = \
-	$(libclock_built_sources)
-
-launcher-dialog_glade.h: launcher-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=launcher_dialog_glade $< >$@
-endif
-
 #
 # .desktop file
 #
@@ -91,5 +80,16 @@ EXTRA_DIST = \
 DISTCLEANFILES = \
 	$(desktop_DATA) \
 	$(desktop_in_files)
+
+if MAINTAINER_MODE
+BUILT_SOURCES = \
+	$(liblauncher_built_sources)
+
+DISTCLEANFILES += \
+	$(libclock_built_sources)
+
+launcher-dialog_glade.h: launcher-dialog.glade
+	exo-csource --static --strip-comments --strip-content --name=launcher_dialog_glade $< >$@
+endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
