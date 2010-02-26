@@ -49,6 +49,7 @@ static void panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *di
 static void panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog, const gchar *property1, const gchar *property2);
 static void panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog);
 
+static void panel_preferences_dialog_output_changed (GtkComboBox *combobox, PanelPreferencesDialog *dialog);
 
 static void panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox, PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog);
@@ -69,11 +70,17 @@ static void panel_preferences_dialog_item_selection_changed (GtkTreeSelection *s
 
 enum
 {
-  COLUMN_ICON_NAME,
-  COLUMN_DISPLAY_NAME,
-  COLUMN_TOOLTIP,
-  COLUMN_PROVIDER,
-  N_COLUMNS
+  ITEM_COLUMN_ICON_NAME,
+  ITEM_COLUMN_DISPLAY_NAME,
+  ITEM_COLUMN_TOOLTIP,
+  ITEM_COLUMN_PROVIDER,
+  N_ITEM_COLUMNS
+};
+
+enum
+{
+  OUTPUT_NAME,
+  OUTPUT_TITLE
 };
 
 struct _PanelPreferencesDialogClass
@@ -97,7 +104,11 @@ struct _PanelPreferencesDialog
   /* store for the items list */
   GtkListStore     *store;
 
-  gulong            changed_handler_id;
+  /* changed signal for the active panel's itembar */
+  gulong            items_changed_handler_id;
+
+  /* changed signal for the output selector */
+  gulong            output_changed_handler_id;
 };
 
 
@@ -168,13 +179,13 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("item-about", "clicked", panel_preferences_dialog_item_about);
 
   /* create store for panel items */
-  dialog->store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_OBJECT);
+  dialog->store = gtk_list_store_new (N_ITEM_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_OBJECT);
 
   /* build tree for panel items */
   treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
   panel_return_if_fail (GTK_IS_WIDGET (treeview));
   gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (dialog->store));
-  gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (treeview), COLUMN_TOOLTIP);
+  gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (treeview), ITEM_COLUMN_TOOLTIP);
 
   /* setup tree selection */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -184,7 +195,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* icon renderer */
   renderer = gtk_cell_renderer_pixbuf_new ();
-  column = gtk_tree_view_column_new_with_attributes ("", renderer, "icon-name", COLUMN_ICON_NAME, NULL);
+  column = gtk_tree_view_column_new_with_attributes ("", renderer, "icon-name", ITEM_COLUMN_ICON_NAME, NULL);
   g_object_set (G_OBJECT (renderer), "stock-size", GTK_ICON_SIZE_BUTTON, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
@@ -192,8 +203,16 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, renderer, TRUE);
-  gtk_tree_view_column_set_attributes (column, renderer, "text", COLUMN_DISPLAY_NAME, NULL);
+  gtk_tree_view_column_set_attributes (column, renderer, "text", ITEM_COLUMN_DISPLAY_NAME, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
+  /* connect the output changed signal */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-name");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (object));
+  dialog->output_changed_handler_id =
+      g_signal_connect (G_OBJECT (object), "changed",
+                        G_CALLBACK (panel_preferences_dialog_output_changed),
+                        dialog);
 
   /* rebuild the panel combobox */
   panel_preferences_dialog_panel_combobox_rebuild (dialog);
@@ -211,10 +230,10 @@ panel_preferences_dialog_finalize (GObject *object)
   GtkWidget              *itembar;
 
   /* disconnect changed signal */
-  if (dialog->active != NULL && dialog->changed_handler_id != 0)
+  if (dialog->active != NULL && dialog->items_changed_handler_id != 0)
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      g_signal_handler_disconnect (G_OBJECT (itembar), dialog->changed_handler_id);
+      g_signal_handler_disconnect (G_OBJECT (itembar), dialog->items_changed_handler_id);
     }
 
   /* thaw all autohide blocks */
@@ -310,6 +329,18 @@ panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog,
 static void
 panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 {
+  GdkScreen   *screen;
+  GdkDisplay  *display;
+  gint         n_screens, n_monitors = 1;
+  GObject     *object;
+  GObject     *store;
+  gchar       *output_name = NULL;
+  gboolean     selector_visible = TRUE;
+  GtkTreeIter  iter;
+  gboolean     output_selected = FALSE;
+  gint         n = 0, i;
+  gchar       *name, *title;
+
   /* remove all the active bindings */
   panel_preferences_dialog_bindings_unbind (dialog);
 
@@ -320,6 +351,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
   /* hook up the bindings */
   panel_preferences_dialog_bindings_add (dialog, "horizontal", "active");
+  panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active");
   panel_preferences_dialog_bindings_add (dialog, "locked", "active");
   panel_preferences_dialog_bindings_add (dialog, "autohide", "active");
   panel_preferences_dialog_bindings_add (dialog, "size", "value");
@@ -328,6 +360,153 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "enter-opacity", "value");
   panel_preferences_dialog_bindings_add (dialog, "leave-opacity", "value");
   panel_preferences_dialog_bindings_add (dialog, "composited", "visible");
+
+  /* get run mode of the driver (multiple screens or randr) */
+  display = gtk_widget_get_display (GTK_WIDGET (dialog->active));
+  n_screens = gdk_display_get_n_screens (display);
+  n_monitors = 1;
+  if (G_LIKELY (n_screens <= 1))
+    {
+      screen = gtk_widget_get_screen (GTK_WIDGET (dialog->active));
+      n_monitors = gdk_screen_get_n_monitors (screen);
+    }
+
+  /* show or hide the span-monitors option */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_set (G_OBJECT (object), "visible", n_monitors > 1, NULL);
+
+  /* update the output selector */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-name");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (object));
+
+  g_signal_handler_block (G_OBJECT (object), dialog->output_changed_handler_id);
+
+  store = gtk_builder_get_object (GTK_BUILDER (dialog), "output-store");
+  panel_return_if_fail (GTK_IS_LIST_STORE (store));
+  gtk_list_store_clear (GTK_LIST_STORE (store));
+
+  g_object_get (G_OBJECT (dialog->active), "output-name", &output_name, NULL);
+
+  if (n_screens > 1
+      || n_monitors > 1
+      || !exo_str_is_empty (output_name))
+    {
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                         OUTPUT_NAME, NULL,
+                                         OUTPUT_TITLE, _("Automatic"), -1);
+      if (exo_str_is_empty (output_name))
+        {
+          gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
+          output_selected = TRUE;
+        }
+
+      if (n_screens > 1)
+        {
+          for (i = 0; i < n_screens; i++)
+            {
+              /* warn the user about layouts we don't support */
+              screen = gdk_display_get_screen (display, i);
+              if (gdk_screen_get_n_monitors (screen) > 1)
+                g_message ("Screen %d has multiple monitors, the panel does not "
+                           "support such a configuration", i + 1);
+
+              /* I18N: screen name in the output selector */
+              title = g_strdup_printf (_("Screen %d"), i + 1);
+              name = g_strdup_printf ("screen-%d", i);
+              gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                                 OUTPUT_NAME, name,
+                                                 OUTPUT_TITLE, title, -1);
+
+              if (!output_selected && exo_str_is_equal (name, output_name))
+                {
+                  gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
+                  output_selected = TRUE;
+                }
+
+              g_free (name);
+              g_free (title);
+            }
+        }
+      else if (n_monitors >= 1)
+        {
+          for (i = 0; i < n_monitors; i++)
+            {
+              name = gdk_screen_get_monitor_plug_name (screen, i);
+              if (exo_str_is_empty (name))
+                {
+                  g_free (name);
+
+                  /* I18N: monitor name in the output selector */
+                  title = g_strdup_printf (_("Monitor %d"), i + 1);
+                  name = g_strdup_printf ("monitor-%d", i);
+                }
+              else
+                {
+                  /* use the randr name for the title */
+                  title = g_strdup (name);
+                }
+
+              gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                                 OUTPUT_NAME, name,
+                                                 OUTPUT_TITLE, title, -1);
+              if (!output_selected && exo_str_is_equal (name, output_name))
+                {
+                  gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
+                  output_selected = TRUE;
+                }
+
+              g_free (name);
+              g_free (title);
+            }
+        }
+
+      /* add the output from the config if still nothing has been selected */
+      if (!output_selected && !exo_str_is_empty (output_name))
+        {
+          gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                             OUTPUT_NAME, output_name,
+                                             OUTPUT_TITLE, output_name, -1);
+          gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
+        }
+    }
+  else
+    {
+      /* hide the selector */
+      selector_visible = FALSE;
+    }
+
+  g_free (output_name);
+
+  g_signal_handler_unblock (G_OBJECT (object), dialog->output_changed_handler_id);
+
+  /* update visibility of the output selector */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-box");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_set (G_OBJECT (object), "visible", selector_visible, NULL);
+}
+
+
+
+static void
+panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
+                                         PanelPreferencesDialog *dialog)
+{
+  GtkTreeIter   iter;
+  GtkTreeModel *model;
+  gchar        *output_name = NULL;
+
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  panel_return_if_fail (PANEL_WINDOW (dialog->active));
+
+  if (gtk_combo_box_get_active_iter (combobox, &iter))
+    {
+      model = gtk_combo_box_get_model (combobox);
+      gtk_tree_model_get (model, &iter, OUTPUT_NAME, &output_name, -1);
+      g_object_set (G_OBJECT (dialog->active), "output-name", output_name, NULL);
+      g_free (output_name);
+    }
 }
 
 
@@ -344,10 +523,10 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   /* disconnect signal we used to monitor changes in the itembar */
-  if (dialog->active != NULL && dialog->changed_handler_id != 0)
+  if (dialog->active != NULL && dialog->items_changed_handler_id != 0)
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      g_signal_handler_disconnect (G_OBJECT (itembar), dialog->changed_handler_id);
+      g_signal_handler_disconnect (G_OBJECT (itembar), dialog->items_changed_handler_id);
     }
 
   /* set the selected window */
@@ -358,7 +537,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   if (G_LIKELY (dialog->active != NULL))
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      dialog->changed_handler_id =
+      dialog->items_changed_handler_id =
           g_signal_connect (G_OBJECT (itembar), "changed",
                             G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
                             dialog);
@@ -386,7 +565,7 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
   gchar   *name;
 
   /* get the combo box and model */
-  store = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-liststore");
+  store = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
   combo = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
@@ -402,7 +581,8 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
   n_items = panel_application_get_n_windows (dialog->application);
   for (n = 0; n < n_items; n++)
     {
-      name = g_strdup_printf ("Panel %d", n + 1);
+      /* I18N: panel combo box in the preferences dialog */
+      name = g_strdup_printf (_("Panel %d"), n + 1);
       gtk_list_store_insert_with_values (GTK_LIST_STORE (store), NULL, n, 0, name, -1);
       g_free (name);
     }
@@ -464,7 +644,6 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
   /* get active panel */
   nth = panel_application_get_window_index (dialog->application, dialog->active);
 
-  /* destroy the window */
   toplevel = gtk_widget_get_toplevel (widget);
   if (xfce_dialog_confirm (GTK_WINDOW (toplevel), GTK_STOCK_REMOVE, NULL,
           _("The panel and plugin configurations will be permanently removed"),
@@ -510,7 +689,7 @@ panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       /* get the selected provider */
-      gtk_tree_model_get (model, &iter, COLUMN_PROVIDER, &provider, -1);
+      gtk_tree_model_get (model, &iter, ITEM_COLUMN_PROVIDER, &provider, -1);
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
 
       if (return_iter)
@@ -547,18 +726,19 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
       /* get the panel module from the plugin */
       module = panel_module_get_from_plugin_provider (li->data);
 
+      /* I18N: tooltip in preferences dialog when hovering an item in the list */
       tooltip = g_strdup_printf (_("Internal name: %s-%d"),
                                  xfce_panel_plugin_provider_get_name (li->data),
                                  xfce_panel_plugin_provider_get_unique_id (li->data));
 
       gtk_list_store_insert_with_values (dialog->store, NULL, i,
-                                         COLUMN_ICON_NAME,
+                                         ITEM_COLUMN_ICON_NAME,
                                          panel_module_get_icon_name (module),
-                                         COLUMN_DISPLAY_NAME,
+                                         ITEM_COLUMN_DISPLAY_NAME,
                                          panel_module_get_display_name (module),
-                                         COLUMN_TOOLTIP,
+                                         ITEM_COLUMN_TOOLTIP,
                                          tooltip,
-                                         COLUMN_PROVIDER, li->data, -1);
+                                         ITEM_COLUMN_PROVIDER, li->data, -1);
 
       g_free (tooltip);
     }
@@ -605,7 +785,7 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
       if (G_LIKELY (position != -1))
         {
           /* block the changed signal */
-          g_signal_handler_block (G_OBJECT (itembar), dialog->changed_handler_id);
+          g_signal_handler_block (G_OBJECT (itembar), dialog->items_changed_handler_id);
 
           /* move the item on the panel */
           panel_itembar_reorder_child (PANEL_ITEMBAR (itembar),
@@ -613,7 +793,7 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
                                        position + direction);
 
           /* unblock the changed signal */
-          g_signal_handler_unblock (G_OBJECT (itembar), dialog->changed_handler_id);
+          g_signal_handler_unblock (G_OBJECT (itembar), dialog->items_changed_handler_id);
 
           /* most the item up or down in the list */
           if (direction == 1)
@@ -797,7 +977,7 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
     }
   else
     {
-      /* make all items insensitive, except the add button */
+      /* make all items insensitive, except for the add button */
       for (i = 0; i < G_N_ELEMENTS (button_names); i++)
         {
           object = gtk_builder_get_object (GTK_BUILDER (dialog), button_names[i]);

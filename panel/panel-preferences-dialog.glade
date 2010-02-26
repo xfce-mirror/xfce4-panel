@@ -17,13 +17,20 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="panel-liststore">
+  <object class="GtkListStore" id="panel-store">
     <columns>
       <!-- column-name title -->
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkListStore" id="item-liststore"/>
+  <object class="GtkListStore" id="output-store">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Xfce Panel</property>
     <property name="window_position">center-on-parent</property>
@@ -48,7 +55,7 @@
                 <child>
                   <object class="GtkComboBox" id="panel-combobox">
                     <property name="visible">True</property>
-                    <property name="model">panel-liststore</property>
+                    <property name="model">panel-store</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext2"/>
                       <attributes>
@@ -137,6 +144,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label1">
                                         <property name="visible">True</property>
+                                        <property name="xalign">0</property>
                                         <property name="label" translatable="yes">_Orientation:</property>
                                         <property name="use_underline">True</property>
                                         <property name="wrap_mode">word-char</property>
@@ -169,17 +177,69 @@
                                   </packing>
                                 </child>
                                 <child>
+                                  <object class="GtkHBox" id="output-box">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label13">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">O_utput:</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="mnemonic_widget">output-name</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkComboBox" id="output-name">
+                                        <property name="visible">True</property>
+                                        <property name="model">output-store</property>
+                                        <child>
+                                          <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                                          <attributes>
+                                            <attribute name="text">1</attribute>
+                                          </attributes>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkCheckButton" id="span-monitors">
+                                    <property name="label" translatable="yes">Span mo_nitors</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">Select this option to extend the panel over multiple monitors.</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="draw_indicator">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
                                   <object class="GtkCheckButton" id="locked">
                                     <property name="label" translatable="yes">_Lock panel</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
-                                    <property name="tooltip_text">Lock this panel so it can't be dragged with the mouse</property>
+                                    <property name="tooltip_text">Select this option to hide the handles of the panel and lock its position.</property>
                                     <property name="use_underline">True</property>
                                     <property name="draw_indicator">True</property>
                                   </object>
                                   <packing>
-                                    <property name="position">1</property>
+                                    <property name="position">3</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -188,11 +248,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge.</property>
                                     <property name="use_underline">True</property>
                                     <property name="draw_indicator">True</property>
                                   </object>
                                   <packing>
-                                    <property name="position">2</property>
+                                    <property name="position">4</property>
                                   </packing>
                                 </child>
                               </object>
@@ -355,6 +416,7 @@
                                   <object class="GtkHScale" id="alpha-scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Alpha value of the panel background, between 0 (transparent) and 100 (opaque).</property>
                                     <property name="adjustment">background-alpha</property>
                                     <property name="digits">0</property>
                                     <property name="value_pos">right</property>
@@ -430,6 +492,7 @@
                                   <object class="GtkHScale" id="enter-opacity-scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Transparency when the pointer is hovering over the panel.</property>
                                     <property name="adjustment">enter-opacity</property>
                                     <property name="digits">0</property>
                                     <property name="value_pos">right</property>
@@ -443,6 +506,7 @@
                                   <object class="GtkHScale" id="leave-opacity-scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Transparency when the pointer is not hovering the panel.</property>
                                     <property name="adjustment">leave-opacity</property>
                                     <property name="digits">0</property>
                                     <property name="value_pos">right</property>
@@ -505,7 +569,6 @@
                           <object class="GtkTreeView" id="item-treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="model">item-liststore</property>
                             <property name="headers_visible">False</property>
                             <property name="rules_hint">True</property>
                             <property name="enable_search">False</property>
@@ -746,11 +809,17 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkSizeGroup" id="sizegroup1">
+  <object class="GtkSizeGroup" id="composing-sizegroup">
     <widgets>
-      <widget name="label7"/>
-      <widget name="label9"/>
       <widget name="label10"/>
+      <widget name="label9"/>
+      <widget name="label7"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="display-sizegroup">
+    <widgets>
+      <widget name="label13"/>
+      <widget name="label1"/>
     </widgets>
   </object>
 </interface>
