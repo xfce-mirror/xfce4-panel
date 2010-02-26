@@ -178,6 +178,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
 }
 
 
+
 static void
 launcher_plugin_property_changed (XfconfChannel  *channel,
                                   const gchar    *property_name,
@@ -192,19 +193,19 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->channel == channel);
 
-  if (strcmp (property_name, "/disable-tooltips") == 0)
+  if (exo_str_is_equal (property_name, "/disable-tooltips"))
     {
       plugin->disable_tooltips = g_value_get_boolean (value);
     }
-  else if (strcmp (property_name, "/move-first") == 0)
+  else if (exo_str_is_equal (property_name, "/move-first"))
     {
       plugin->move_first = g_value_get_boolean (value);
     }
-  else if (strcmp (property_name, "/show-labels") == 0)
+  else if (exo_str_is_equal (property_name, "/show-labels"))
     {
       plugin->show_labels = g_value_get_boolean (value);
     }
-  else if (strcmp (property_name, "/arrow-position") == 0)
+  else if (exo_str_is_equal (property_name, "/arrow-position"))
     {
       plugin->arrow_position = MIN (g_value_get_uint (value), ARROW_POS_MAX);
     }
@@ -214,7 +215,7 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
       entry = g_list_nth_data (plugin->entries, nth);
       if (G_LIKELY (entry))
         {
-          if (strcmp (property, "name") == 0)
+          if (exo_str_is_equal (property, "name"))
             {
               g_free (entry->name);
               entry->name = g_value_dup_string (value);
@@ -222,36 +223,41 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
               if (nth > 0 || plugin->show_labels)
                 launcher_plugin_rebuild (plugin, FALSE);
             }
-          else if (strcmp (property, "comment") == 0)
+          else if (exo_str_is_equal (property, "comment"))
             {
               g_free (entry->comment);
               entry->comment = g_value_dup_string (value);
             }
-          else if (strcmp (property, "icon") == 0)
+          else if (exo_str_is_equal (property, "icon"))
             {
               g_free (entry->icon);
               entry->icon = g_value_dup_string (value);
 
               launcher_plugin_rebuild (plugin, (nth == 0));
             }
-          else if (strcmp (property, "command") == 0)
+          else if (exo_str_is_equal (property, "command"))
             {
               g_free (entry->exec);
               entry->exec = g_value_dup_string (value);
             }
-          else if (strcmp (property, "working-directory") == 0)
+          else if (exo_str_is_equal (property, "working-directory"))
             {
               g_free (entry->path);
               entry->path = g_value_dup_string (value);
             }
-          else if (strcmp (property, "terminal") == 0)
-            entry->terminal = g_value_get_boolean (value);
+          else if (exo_str_is_equal (property, "terminal"))
+            {
+              entry->terminal = g_value_get_boolean (value);
+            }
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
-          else if (strcmp (property, "startup-notify") == 0)
-            entry->startup_notify = g_value_get_boolean (value);
+          else if (exo_str_is_equal (property, "startup-notify"))
+            {
+              entry->startup_notify = g_value_get_boolean (value);
+            }
 #endif
         }
 
+      /* cleanup */
       g_free (property);
     }
 }
@@ -418,7 +424,7 @@ launcher_plugin_save (XfcePanelPlugin *panel_plugin)
       entry = li->data;
 
       g_snprintf (buf, sizeof (buf), "/entries/entry-%d/name", i);
-      if (entry->name)
+      if (G_LIKELY (entry->name))
         xfconf_channel_set_string (plugin->channel, buf, entry->name);
       else
         xfconf_channel_reset_property (plugin->channel, buf, FALSE);
@@ -430,13 +436,13 @@ launcher_plugin_save (XfcePanelPlugin *panel_plugin)
         xfconf_channel_reset_property (plugin->channel, buf, FALSE);
 
       g_snprintf (buf, sizeof (buf), "/entries/entry-%d/icon", i);
-      if (entry->icon)
+      if (G_LIKELY (entry->icon))
         xfconf_channel_set_string (plugin->channel, buf, entry->icon);
       else
         xfconf_channel_reset_property (plugin->channel, buf, FALSE);
 
       g_snprintf (buf, sizeof (buf), "/entries/entry-%d/command", i);
-      if (entry->exec)
+      if (G_LIKELY (entry->exec))
         xfconf_channel_set_string (plugin->channel, buf, entry->exec);
       else
         xfconf_channel_reset_property (plugin->channel, buf, FALSE);

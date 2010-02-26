@@ -38,10 +38,10 @@ typedef enum   _LauncherPluginArrowPos LauncherPluginArrowPos;
 
 #define LIST_HAS_ONE_ENTRY(list)             ((list) != NULL && (list)->next == NULL)
 #define LIST_HAS_TWO_OR_MORE_ENTRIES(list)   ((list) != NULL && (list)->next != NULL)
-#define launcher_plugin_filenames_free(list) G_STMT_START{ \
+#define launcher_plugin_filenames_free(list) G_STMT_START { \
                                              g_slist_foreach (list, (GFunc) g_free, NULL); \
                                              g_slist_free (list); \
-                                             }G_STMT_END
+                                             } G_STMT_END
 
 enum _LauncherPluginArrowPos
 {
@@ -51,7 +51,7 @@ enum _LauncherPluginArrowPos
   ARROW_POS_TOP,
   ARROW_POS_BOTTOM,
   ARROW_POS_INSIDE_BUTTON,
-  
+
   ARROW_POS_MIN = ARROW_POS_DEFAULT,
   ARROW_POS_MAX = ARROW_POS_INSIDE_BUTTON
 };
