@@ -1513,13 +1513,13 @@ launcher_plugin_item_exec_on_screen (XfceMenuItem *item,
   if (launcher_plugin_exec_parse (item, uri_list, NULL, &argv, &error))
     {
       /* launch the command on the screen */
-      succeed = xfce_execute_argv_on_screen (screen,
-                                             xfce_menu_item_get_path (item),
-                                             argv, NULL, G_SPAWN_SEARCH_PATH,
-                                             xfce_menu_item_supports_startup_notification (item),
-                                             event_time,
-                                             xfce_menu_item_get_icon_name (item),
-                                             &error);
+      succeed = xfce_spawn_on_screen (screen,
+                                      xfce_menu_item_get_path (item),
+                                      argv, NULL, G_SPAWN_SEARCH_PATH,
+                                      xfce_menu_item_supports_startup_notification (item),
+                                      event_time,
+                                      xfce_menu_item_get_icon_name (item),
+                                      &error);
 
       /* cleanup */
       g_strfreev (argv);
@@ -1528,7 +1528,7 @@ launcher_plugin_item_exec_on_screen (XfceMenuItem *item,
   if (G_UNLIKELY (succeed == FALSE))
     {
       /* show an error dialog */
-      xfce_dialog_show_error (screen, error,
+      xfce_dialog_show_error (NULL, error,
                               _("Failed to execute command \"%s\"."),
                               xfce_menu_item_get_command (item));
 

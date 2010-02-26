@@ -549,7 +549,7 @@ systray_plugin_lost_selection (SystrayManager *manager,
   /* create fake error and show it */
   error.message = _("Most likely another widget took over the function "
                     "of a notification area. This plugin will close.");
-  xfce_dialog_show_error (gtk_widget_get_screen (GTK_WIDGET (plugin)), &error,
+  xfce_dialog_show_error (NULL, &error,
                           _("The notification area lost selection"));
 }
 

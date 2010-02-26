@@ -355,6 +355,7 @@ pager_plugin_configure_workspace_settings (GtkWidget *button)
 {
   GdkScreen *screen;
   GError    *error = NULL;
+  GtkWidget *toplevel;
 
   panel_return_if_fail (GTK_IS_WIDGET (button));
 
@@ -367,7 +368,8 @@ pager_plugin_configure_workspace_settings (GtkWidget *button)
   if (!gdk_spawn_command_line_on_screen (screen, "xfwm4-workspace-settings", &error))
     {
       /* show an error dialog */
-      xfce_dialog_show_error (button, error,
+      toplevel = gtk_widget_get_toplevel (button);
+      xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
           _("Unable to open the Xfce workspace settings"));
       g_error_free (error);
     }

@@ -445,8 +445,7 @@ actions_plugin_button_clicked (GtkWidget     *button,
   if (!g_spawn_command_line_async (action_entries[action].command, &error))
     {
       /* show error */
-      xfce_dialog_show_error (gtk_widget_get_screen (button),
-                              error, _("Failed to execute command \"%s\""),
+      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\""),
                               action_entries[action].command);
       g_error_free (error);
     }

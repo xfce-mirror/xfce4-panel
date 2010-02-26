@@ -453,14 +453,17 @@ static void
 panel_preferences_dialog_panel_remove (GtkWidget              *widget,
                                        PanelPreferencesDialog *dialog)
 {
-  gint     nth;
-  GObject *combo;
+  gint       nth;
+  GObject   *combo;
+  GtkWidget *toplevel;
 
   /* get active panel */
   nth = panel_application_get_window_index (dialog->application, dialog->active);
 
   /* destroy the window */
-  if (xfce_dialog_confirm (dialog, GTK_STOCK_REMOVE, NULL,
+  toplevel = gtk_widget_get_toplevel (widget);
+  if (xfce_dialog_confirm (GTK_WINDOW (toplevel), GTK_STOCK_REMOVE, NULL,
+          _("The panel and plugin configurations will be permanently removed"),
           _("Are you sure you want to remove panel %d?"), nth + 1))
     {
       /* release the bindings */
