@@ -30,6 +30,7 @@
 #include <common/panel-private.h>
 
 #include "systray-box.h"
+#include "systray-socket.h"
 
 #define BUTTON_SIZE        (16)
 #define SPACING            (2)
@@ -44,6 +45,8 @@ static void     systray_box_size_request       (GtkWidget       *widget,
                                                 GtkRequisition  *requisition);
 static void     systray_box_size_allocate      (GtkWidget       *widget,
                                                 GtkAllocation   *allocation);
+static gboolean systray_box_expose_event       (GtkWidget       *widget,
+                                                GdkEventExpose  *event);
 static void     systray_box_add                (GtkContainer    *container,
                                                 GtkWidget       *child);
 static void     systray_box_remove             (GtkContainer    *container,
@@ -132,6 +135,7 @@ systray_box_class_init (SystrayBoxClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request = systray_box_size_request;
   gtkwidget_class->size_allocate = systray_box_size_allocate;
+  gtkwidget_class->expose_event = systray_box_expose_event;
 
   gtkcontainer_class = GTK_CONTAINER_CLASS (klass);
   gtkcontainer_class->add = systray_box_add;
@@ -432,7 +436,50 @@ systray_box_size_allocate (GtkWidget     *widget,
 
       /* allocate widget size */
       gtk_widget_size_allocate (child_info->widget, &child_allocation);
-  }
+    }
+}
+
+
+
+static gboolean
+systray_box_expose_event (GtkWidget      *widget,
+                          GdkEventExpose *event)
+{
+  SystrayBox      *box = XFCE_SYSTRAY_BOX (widget);
+  cairo_t         *cr;
+  SystrayBoxChild *child_info;
+  GSList          *li;
+  gboolean         result;
+
+  result = GTK_WIDGET_CLASS (systray_box_parent_class)->expose_event (widget, event);
+
+  if (gtk_widget_is_composited (widget))
+    {
+      cr = gdk_cairo_create (widget->window);
+      gdk_cairo_region (cr, event->region);
+      cairo_clip (cr);
+
+      for (li = box->childeren; li != NULL; li = li->next)
+        {
+          child_info = li->data;
+
+          /* skip invisible or not composited children */
+          if (child_info->invalid
+              || (child_info->auto_hide && !box->show_hidden)
+              || !systray_socket_is_composited (XFCE_SYSTRAY_SOCKET (child_info->widget)))
+            continue;
+
+          /* paint the child */
+          gdk_cairo_set_source_pixmap (cr, child_info->widget->window,
+				                               child_info->widget->allocation.x,
+				                               child_info->widget->allocation.y);
+          cairo_paint (cr);
+        }
+
+      cairo_destroy (cr);
+    }
+
+  return result;
 }
 
 

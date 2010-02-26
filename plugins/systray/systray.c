@@ -30,6 +30,7 @@
 
 #include "systray.h"
 #include "systray-box.h"
+#include "systray-socket.h"
 #include "systray-manager.h"
 #include "systray-dialog_glade.h"
 
@@ -102,7 +103,8 @@ enum
 /* define the plugin */
 XFCE_PANEL_DEFINE_PLUGIN (SystrayPlugin, systray_plugin,
     systray_box_register_type,
-    systray_manager_register_type)
+    systray_manager_register_type,
+    systray_socket_register_type)
 
 
 
@@ -512,7 +514,7 @@ systray_plugin_icon_added (SystrayManager *manager,
   panel_return_if_fail (GTK_IS_WIDGET (icon));
 
   /* get the application name */
-  name = systray_manager_get_application_name (icon);
+  name = systray_socket_get_title (XFCE_SYSTRAY_SOCKET (icon));
 
   /* add the icon to the widget */
   systray_box_add_with_name (XFCE_SYSTRAY_BOX (plugin->box), icon, name);

@@ -40,6 +40,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include "systray-manager.h"
+#include "systray-socket.h"
 #include "systray-marshal.h"
 
 
@@ -139,7 +140,6 @@ struct _SystrayMessage
 
 
 static guint  systray_manager_signals[LAST_SIGNAL];
-static GQuark xwindow_quark = 0;
 
 
 
@@ -202,9 +202,6 @@ systray_manager_class_init (SystrayManagerClass *klass)
                     0, NULL, NULL,
                     g_cclosure_marshal_VOID__VOID,
                     G_TYPE_NONE, 0);
-
-  /* initialize quark */
-  xwindow_quark = g_quark_from_static_string ("systray-manager-xwindow");
 }
 
 
@@ -656,7 +653,8 @@ static void
 systray_manager_handle_cancel_message (SystrayManager      *manager,
                                        XClientMessageEvent *xevent)
 {
-  GtkSocket *socket;
+  GtkSocket       *socket;
+  GdkNativeWindow  window = xevent->data.l[2];
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
 
@@ -666,12 +664,10 @@ systray_manager_handle_cancel_message (SystrayManager      *manager,
   /* try to find the window in the list of known tray icons */
   socket = g_hash_table_lookup (manager->sockets, GUINT_TO_POINTER (xevent->window));
 
-  if (G_LIKELY (socket))
-    {
-      /* emit the cancelled signal */
-      g_signal_emit (manager, systray_manager_signals[MESSAGE_CANCELLED], 0,
-                     socket, xevent->data.l[2]);
-    }
+  /* emit the cancelled signal */
+  if (G_LIKELY (socket != NULL))
+    g_signal_emit (manager, systray_manager_signals[MESSAGE_CANCELLED],
+                   0, socket, window);
 }
 
 
@@ -680,65 +676,22 @@ static void
 systray_manager_handle_dock_request (SystrayManager      *manager,
                                      XClientMessageEvent *xevent)
 {
-  GtkWidget         *socket;
-  Window            *xwindow;
-  XWindowAttributes  attr;
-  GdkVisual         *visual;
-  GdkColormap       *colormap;
-  gint               result;
-  GdkScreen         *screen;
-  GdkDisplay        *display;
-  gboolean           release_colormap = FALSE;
+  GtkWidget       *socket;
+  GdkScreen       *screen;
+  GdkNativeWindow  window = xevent->data.l[2];
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
 
-  /* check if we already have this notification */
-  if (g_hash_table_lookup (manager->sockets, GUINT_TO_POINTER (xevent->data.l[2])))
+  /* check if we already have this window */
+  if (g_hash_table_lookup (manager->sockets, GUINT_TO_POINTER (window)))
     return;
 
-  /* get the window attributes, leave if this fails */
-  display = gtk_widget_get_display (manager->invisible);
-  gdk_error_trap_push ();
-  result = XGetWindowAttributes (GDK_DISPLAY_XDISPLAY (display),
-                                 xevent->data.l[2], &attr);
-  if (gdk_error_trap_pop () != 0 || result == 0)
-    return;
-
-  /* get the windows visual */
+  /* create the socket */
   screen = gtk_widget_get_screen (manager->invisible);
-  visual = gdk_x11_screen_lookup_visual (screen, attr.visual->visualid);
-  if (visual == NULL)
+  socket = systray_socket_new (screen, window);
+  if (G_UNLIKELY (socket == NULL))
     return;
-
-  /* get the correct colormap */
-  if (visual == gdk_screen_get_rgb_visual (screen))
-    colormap = gdk_screen_get_rgb_colormap (screen);
-  else if (visual == gdk_screen_get_rgba_visual (screen))
-    colormap = gdk_screen_get_rgba_colormap (screen);
-  else if (visual == gdk_screen_get_system_visual (screen))
-    colormap = gdk_screen_get_system_colormap (screen);
-  else
-    {
-      /* create custom colormap */
-      colormap = gdk_colormap_new (visual, FALSE);
-      release_colormap = TRUE;
-    }
-
-  /* create a new socket */
-  socket = gtk_socket_new ();
-  gtk_widget_set_colormap (GTK_WIDGET (socket), colormap);
-
-  /* allocate and set the xwindow */
-  xwindow = g_new (Window, 1);
-  *xwindow = xevent->data.l[2];
-
-  /* release the custom colormap */
-  if (release_colormap)
-    g_object_unref (G_OBJECT (colormap));
-
-  /* connect the xwindow data to the socket */
-  g_object_set_qdata_full (G_OBJECT (socket), xwindow_quark, xwindow, g_free);
 
   /* add the icon to the tray */
   g_signal_emit (manager, systray_manager_signals[ICON_ADDED], 0, socket);
@@ -752,10 +705,10 @@ systray_manager_handle_dock_request (SystrayManager      *manager,
           G_CALLBACK (systray_manager_handle_undock_request), manager);
 
       /* register the xembed client window id for this socket */
-      gtk_socket_add_id (GTK_SOCKET (socket), *xwindow);
+      gtk_socket_add_id (GTK_SOCKET (socket), window);
 
       /* add the socket to the list of known sockets */
-      g_hash_table_insert (manager->sockets, GUINT_TO_POINTER (*xwindow), socket);
+      g_hash_table_insert (manager->sockets, GUINT_TO_POINTER (window), socket);
     }
   else
     {
@@ -773,8 +726,8 @@ static gboolean
 systray_manager_handle_undock_request (GtkSocket *socket,
                                        gpointer   user_data)
 {
-  SystrayManager *manager = XFCE_SYSTRAY_MANAGER (user_data);
-  Window         *xwindow;
+  SystrayManager  *manager = XFCE_SYSTRAY_MANAGER (user_data);
+  GdkNativeWindow *window;
 
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager), FALSE);
 
@@ -782,13 +735,10 @@ systray_manager_handle_undock_request (GtkSocket *socket,
   g_signal_emit (manager, systray_manager_signals[ICON_REMOVED], 0, socket);
 
   /* get the xwindow */
-  xwindow = g_object_get_qdata (G_OBJECT (socket), xwindow_quark);
+  window = systray_socket_get_window (XFCE_SYSTRAY_SOCKET (socket));
 
   /* remove the socket from the list */
-  g_hash_table_remove (manager->sockets, GUINT_TO_POINTER (*xwindow));
-
-  /* unset object data */
-  g_object_set_qdata (G_OBJECT (socket), xwindow_quark, NULL);
+  g_hash_table_remove (manager->sockets, GUINT_TO_POINTER (*window));
 
   /* destroy the socket */
   return FALSE;
@@ -877,50 +827,6 @@ systray_manager_set_orientation (SystrayManager *manager,
                    XA_CARDINAL, 32,
                    PropModeReplace,
                    (guchar *) &data, 1);
-}
-
-
-
-gchar *
-systray_manager_get_application_name (GtkWidget *socket)
-{
-  gchar         *name = NULL;
-  GdkDisplay    *display;
-  gint           succeed;
-  XTextProperty  xprop;
-  Window        *xwindow;
-
-  /* get the xwindow */
-  xwindow = g_object_get_qdata (G_OBJECT (socket), xwindow_quark);
-
-  if (G_LIKELY (xwindow != NULL))
-    {
-      /* get the display of the socket */
-      display = gtk_widget_get_display (socket);
-
-      /* avoid exiting the application on X errors */
-      gdk_error_trap_push ();
-
-      /* try to get the wm name (this is more relaiable with qt applications) */
-      succeed = XGetWMName (GDK_DISPLAY_XDISPLAY (display), *xwindow, &xprop);
-
-      /* check if everything went fine */
-      if (G_LIKELY (gdk_error_trap_pop () == 0 && succeed >= Success))
-        {
-          /* check the xprop content */
-          if (G_LIKELY (xprop.value && xprop.nitems > 0))
-            {
-              /* get the lowercase name if it's utf-8 valid */
-              if (G_LIKELY (g_utf8_validate ((const gchar *) xprop.value, xprop.nitems, NULL)))
-                name = g_utf8_strdown ((const gchar *) xprop.value, xprop.nitems);
-
-              /* cleanup */
-              XFree (xprop.value);
-            }
-        }
-    }
-
-  return name;
 }
 
 

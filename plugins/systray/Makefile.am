@@ -24,7 +24,9 @@ libsystray_la_SOURCES = \
 	systray-box.c \
 	systray-box.h \
 	systray-manager.c \
-	systray-manager.h
+	systray-manager.h \
+	systray-socket.c \
+	systray-socket.h
 
 libsystray_la_CFLAGS = \
 	$(LIBX11_CFLAGS) \
