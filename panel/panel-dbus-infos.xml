@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  $Id$
+
+  This program is free software; you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by the Free
+  Software Foundation; either version 2 of the License, or (at your option)
+  any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+  more details.
+
+  You should have received a copy of the GNU General Public License along with
+  this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+  Place, Suite 330, Boston, MA  02111-1307  USA
+-->
+
+<node name="/org/xfce/Panel">
+
+  <interface name="org.xfce.Panel">
+    <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="panel_dbus_service" />
+
+    <!--
+      Methode to open the panel customize dialog
+    -->
+    <method name="CustomizePanel">
+    </method>
+    
+    <!--
+      Methode to open the 'add new items' dialog
+    -->
+    <method name="AddItems">
+    </method>
+    
+    <!--
+      Methode to save the panel configuration
+    -->
+    <method name="Save">
+    </method>
+    
+    <!--
+      Methode to terminate the panel and optionally restart it
+    -->
+    <method name="Terminate">
+      <arg direction="in" name="restart" type="b" />
+    </method>
+  </interface>
+  
+  <interface name="org.xfce.Panel.Plugin">
+    <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="panel_plugin_dbus_service" />
+    
+    <!--
+      Signal for the plugin when one of the properties changes
+    -->
+    <signal name="PropertiesChanged">
+      <arg name="size" type="i" />
+      <arg name="screen-position" type="u" />
+      <arg name="orientation" type="u" />
+    </signal>
+    
+    <!--
+      Signal to for the plugin when the sensitivity changes
+    -->
+    <signal name="SensitiveChanged">
+      <arg name="sensitive" type="b"/>
+    </method>
+    
+    <!--
+      Property of the plugin to read if it should expand
+    -->
+    <property name="ExpandPlugin" type="b" access="readwrite">
+    </property>
+  </interface>
+</node>

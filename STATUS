@@ -1,0 +1,26 @@
+Status Xfce Panel
+=================
+
+New features
+------------
+- Plugins can run both internal and external without recompiling.
+  External plugins now run inside a wrapper program. As a result
+  a lot of code has been removed from libxfce4panel.
+
+
+Bugs Fixed
+----------
+692  : Corner offset of panels. Panels can now be moved and
+       locked in any position.
+1933 : Panel Grows and shrinks from the center. You can
+       also snap a panel on an screen edge.
+2203 : Arbitrarily resizable panels.
+2465 : Normal Width also applies to height. This feature has
+       been removed.
+2471 : Hidden panel doesn't grow. The hidden window is now
+       also properly allocated when the window is hidden.
+2955 : Then opening the properties or add items dialog it
+       appears on the correct screen.
+3748 : Panel desn't pick up changes made with XRandr. The
+       monitor configuration is no longer stored and recalculated
+       when the screen size or monitor number changes (GTK+ 2.14).
