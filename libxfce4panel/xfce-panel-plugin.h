@@ -92,6 +92,8 @@ const gchar         *xfce_panel_plugin_get_name            (XfcePanelPlugin   *p
 
 const gchar         *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin);
 
+const gchar         *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin);
+
 gint                 xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin);
 
 const gchar         *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin);

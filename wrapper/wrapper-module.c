@@ -187,10 +187,10 @@ WrapperModule *
 wrapper_module_new (const gchar *filename)
 {
   WrapperModule *module;
-  
+
   module = g_object_new (WRAPPER_TYPE_MODULE, NULL);
   module->filename = g_strdup (filename);
-  
+
   return module;
 }
 
@@ -202,6 +202,7 @@ wrapper_module_new_provider (WrapperModule  *module,
                              const gchar    *name,
                              gint            unique_id,
                              const gchar    *display_name,
+                             const gchar    *comment,
                              gchar         **arguments)
 {
   GtkWidget *plugin = NULL;
@@ -216,14 +217,18 @@ wrapper_module_new_provider (WrapperModule  *module,
                                  "name", name,
                                  "unique-id", unique_id,
                                  "display-name", display_name,
+                                 "comment", comment,
                                  "arguments", arguments, NULL);
         }
       else if (module->construct_func != NULL)
         {
           /* create a new panel plugin */
-          plugin = (*module->construct_func) (name, unique_id,
+          plugin = (*module->construct_func) (name,
+                                              unique_id,
                                               display_name,
-                                              arguments, screen);
+                                              comment,
+                                              arguments,
+                                              screen);
         }
 
       if (G_LIKELY (plugin != NULL))

@@ -85,6 +85,7 @@ enum
   PROP_0,
   PROP_NAME,
   PROP_DISPLAY_NAME,
+  PROP_COMMENT,
   PROP_ARGUMENTS,
   PROP_UNIQUE_ID
 };
@@ -115,6 +116,7 @@ struct _XfcePanelPluginPrivate
   /* plugin information */
   gchar               *name;
   gchar               *display_name;
+  gchar               *comment;
   gint                 unique_id;
   gchar               *property_base;
   gchar              **arguments;
@@ -340,6 +342,22 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                         | G_PARAM_CONSTRUCT_ONLY));
 
   /**
+   * XfcePanelPlugin:comment:
+   *
+   *
+   * Since 4.8.0
+   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_COMMENT,
+                                   g_param_spec_string ("comment",
+                                                        "Comment",
+                                                        "Plugin comment",
+                                                        NULL,
+                                                        G_PARAM_READWRITE
+                                                        | G_PARAM_STATIC_STRINGS
+                                                        | G_PARAM_CONSTRUCT_ONLY));
+
+  /**
    * XfcePanelPlugin:id:
    *
    * The unique id of the #XfcePanelPlugin. Plugin writer can use it to
@@ -387,6 +405,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   /* initialize plugin value */
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;
+  plugin->priv->comment = NULL;
   plugin->priv->unique_id = -1;
   plugin->priv->property_base = NULL;
   plugin->priv->arguments = NULL;
@@ -440,6 +459,10 @@ xfce_panel_plugin_get_property (GObject    *object,
         g_value_set_static_string (value, private->display_name);
         break;
 
+      case PROP_COMMENT:
+        g_value_set_static_string (value, private->comment);
+        break;
+
       case PROP_UNIQUE_ID:
         g_value_set_int (value, private->unique_id);
         break;
@@ -472,6 +495,10 @@ xfce_panel_plugin_set_property (GObject      *object,
 
       case PROP_DISPLAY_NAME:
         private->display_name = g_value_dup_string (value);
+        break;
+
+      case PROP_COMMENT:
+        private->comment = g_value_dup_string (value);
         break;
 
       case PROP_UNIQUE_ID:
@@ -521,6 +548,7 @@ xfce_panel_plugin_finalize (GObject *object)
   /* cleanup */
   g_free (plugin->priv->name);
   g_free (plugin->priv->display_name);
+  g_free (plugin->priv->comment);
   g_free (plugin->priv->property_base);
   g_strfreev (plugin->priv->arguments);
 
@@ -1051,8 +1079,6 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 PANEL_SYMBOL_EXPORT const gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 {
-
-
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
   if (G_LIKELY (plugin->priv->display_name))
@@ -1063,6 +1089,24 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 
 
 
+PANEL_SYMBOL_EXPORT const gchar *
+xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
+
+  return plugin->priv->comment;
+}
+
+
+
+/**
+ * xfce_panel_plugin_get_unique_id:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * Return value: the unique id of the plugin.
+ *
+ * Since 4.8
+ **/
 gint
 xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
 {

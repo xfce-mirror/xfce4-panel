@@ -60,9 +60,9 @@ G_BEGIN_DECLS
 
 /* visibility support */
 #ifdef HAVE_GNUC_VISIBILITY
-#define PANEL_SYMBOL_EXPORT G_MODULE_EXPORT __attribute__ ((visibility("default")))
+#define PANEL_SYMBOL_EXPORT __attribute__ ((visibility("default")))
 #else
-#define PANEL_SYMBOL_EXPORT G_MODULE_EXPORT
+#define PANEL_SYMBOL_EXPORT
 #endif
 
 /* make api compatible with 4.4 panel */

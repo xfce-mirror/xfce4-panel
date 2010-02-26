@@ -90,7 +90,7 @@ G_BEGIN_DECLS
   \
   XFCE_PANEL_DEFINE_TYPE (TypeName, type_name, XFCE_TYPE_PANEL_PLUGIN) \
   \
-  PANEL_SYMBOL_EXPORT GType \
+  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT GType \
   __xpp_initialize (GTypeModule *type_module, \
                     gboolean    *make_resident) \
   { \
@@ -130,12 +130,14 @@ G_BEGIN_DECLS
   __xpp_construct (const gchar  *name, \
                    gint          unique_id, \
                    const gchar  *display_name, \
+                   const gchar  *comment, \
                    gchar       **arguments, \
                    GdkScreen    *screen); \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
   __xpp_construct (const gchar  *name, \
                    gint          unique_id, \
                    const gchar  *display_name, \
+                   const gchar  *comment, \
                    gchar       **arguments, \
                    GdkScreen    *screen) \
   { \
@@ -150,6 +152,7 @@ G_BEGIN_DECLS
                                "name", name, \
                                "unique-id", unique_id, \
                                "display-name", display_name, \
+                               "comment", comment, \
                                "arguments", arguments, NULL); \
         \
         g_signal_connect_after (G_OBJECT (plugin), "realize", G_CALLBACK (__xpp_realize), NULL); \

@@ -356,7 +356,7 @@ panel_module_new_plugin (PanelModule  *module,
   /* return null if the module is not usable (unique and already used) */
   if (G_UNLIKELY (panel_module_is_usable (module) == FALSE))
     return NULL;
-  
+
   /* get the internal plugin name */
   name = panel_module_get_name (module);
 
@@ -376,14 +376,19 @@ panel_module_new_plugin (PanelModule  *module,
                                      "name", name,
                                      "unique-id", unique_id,
                                      "display-name", module->display_name,
-                                     "arguments", arguments, NULL);
+                                     "comment", module->comment,
+                                     "arguments", arguments,
+                                     NULL);
             }
           else if (module->construct_func != NULL)
             {
               /* create a new panel plugin */
-              plugin = (*module->construct_func) (name, unique_id, 
+              plugin = (*module->construct_func) (name,
+                                                  unique_id,
                                                   module->display_name,
-                                                  arguments, screen);
+                                                  module->comment,
+                                                  arguments,
+                                                  screen);
             }
         }
     }

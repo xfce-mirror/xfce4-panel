@@ -44,6 +44,7 @@ GtkWidget     *wrapper_module_new_provider (WrapperModule  *module,
                                             const gchar    *name,
                                             gint            unique_id,
                                             const gchar    *display_name,
+                                            const gchar    *comment,
                                             gchar         **arguments) G_GNUC_MALLOC;
 
 G_END_DECLS

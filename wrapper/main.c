@@ -54,6 +54,7 @@
 
 static gchar   *opt_display_name = NULL;
 static gint     opt_unique_id = -1;
+static gchar   *opt_comment = NULL;
 static gchar   *opt_filename = NULL;
 static gint     opt_socket_id = 0;
 static gchar  **opt_arguments = NULL;
@@ -65,6 +66,7 @@ static GOptionEntry option_entries[] =
 {
   { "name", 'n', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &wrapper_name, NULL, NULL },
   { "display-name", 'd', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_display_name, NULL, NULL },
+  { "comment", 'c', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_comment, NULL, NULL },
   { "unique-id", 'i', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_unique_id, NULL, NULL },
   { "filename", 'f', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_filename, NULL, NULL },
   { "socket-id", 's', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL },
@@ -226,7 +228,7 @@ main (gint argc, gchar **argv)
     {
       /* set error if not set by gtk */
       if (error == NULL)
-        g_set_error (&error, 0, 0, "Unable to open display \"%s\"", 
+        g_set_error (&error, 0, 0, "Unable to open display \"%s\"",
                      gdk_get_display_arg_name ());
       goto error;
     }
@@ -299,12 +301,14 @@ main (gint argc, gchar **argv)
 
   /* create a new wrapper module */
   module = wrapper_module_new (opt_filename);
-  
+
   /* create the plugin provider */
   provider = wrapper_module_new_provider (module,
                                           gdk_screen_get_default (),
-                                          wrapper_name, opt_unique_id, 
-                                          opt_display_name, opt_arguments);
+                                          wrapper_name, opt_unique_id,
+                                          opt_display_name,
+                                          opt_comment,
+                                          opt_arguments);
   if (G_LIKELY (provider != NULL))
     {
       /* create quark */
@@ -328,7 +332,7 @@ main (gint argc, gchar **argv)
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
       gtk_widget_show (GTK_WIDGET (plug));
       gtk_widget_show (GTK_WIDGET (provider));
-      
+
       /* everything went fine */
       succeed = TRUE;
 
@@ -356,12 +360,12 @@ error:
   /* close the module */
   if (G_LIKELY (module != NULL))
     g_object_unref (G_OBJECT (module));
-  
+
   if (G_UNLIKELY (error != NULL))
     {
       /* print the critical error */
       g_critical ("Wrapper %s-%d: %s.", wrapper_name, opt_unique_id, error->message);
-      
+
       /* cleanup */
       g_error_free (error);
     }

@@ -38,6 +38,7 @@ typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 typedef GtkWidget *(*PluginConstructFunc)   (const gchar  *name,
                                              gint          unique_id,
                                              const gchar  *display_name,
+                                             const gchar  *comment,
                                              gchar       **arguments,
                                              GdkScreen    *screen);
 typedef GType      (*PluginInitializeFunc)  (GTypeModule  *module,
