@@ -41,7 +41,7 @@ GType      panel_plugin_external_get_type             (void) G_GNUC_CONST;
 
 GtkWidget *panel_plugin_external_new                  (PanelModule          *module,
                                                        gint                  unique_id,
-                                                       gchar               **arguments);
+                                                       gchar               **arguments) G_GNUC_MALLOC;
 
 void       panel_plugin_external_set_background_alpha (PanelPluginExternal  *external,
                                                        gint                  percentage);

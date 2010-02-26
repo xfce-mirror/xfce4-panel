@@ -47,23 +47,23 @@ PanelModule *panel_module_new_from_desktop_file    (const gchar             *fil
 GtkWidget   *panel_module_new_plugin               (PanelModule             *module,
                                                     GdkScreen               *screen,
                                                     gint                     unique_id,
-                                                    gchar                  **arguments);
+                                                    gchar                  **arguments) G_GNUC_MALLOC;
 
-const gchar *panel_module_get_name                 (PanelModule             *module);
+const gchar *panel_module_get_name                 (PanelModule             *module) G_GNUC_PURE;
 
-const gchar *panel_module_get_filename             (PanelModule             *module);
+const gchar *panel_module_get_filename             (PanelModule             *module) G_GNUC_PURE;
 
-const gchar *panel_module_get_display_name         (PanelModule             *module);
+const gchar *panel_module_get_display_name         (PanelModule             *module) G_GNUC_PURE;
 
-const gchar *panel_module_get_comment              (PanelModule             *module);
+const gchar *panel_module_get_comment              (PanelModule             *module) G_GNUC_PURE;
 
-const gchar *panel_module_get_icon_name            (PanelModule             *module);
+const gchar *panel_module_get_icon_name            (PanelModule             *module) G_GNUC_PURE;
 
 PanelModule *panel_module_get_from_plugin_provider (XfcePanelPluginProvider *provider);
 
 gboolean     panel_module_is_valid                 (PanelModule             *module);
 
-gboolean     panel_module_is_usable                (PanelModule             *module);
+gboolean     panel_module_is_usable                (PanelModule             *module) G_GNUC_PURE;
 
 G_END_DECLS
 

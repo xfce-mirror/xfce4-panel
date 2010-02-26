@@ -40,7 +40,7 @@ typedef struct _PanelItembarChild PanelItembarChild;
 
 GType           panel_itembar_get_type              (void) G_GNUC_CONST;
 
-GtkWidget      *panel_itembar_new                   (void);
+GtkWidget      *panel_itembar_new                   (void) G_GNUC_MALLOC;
 
 void            panel_itembar_set_sensitive         (PanelItembar   *itembar,
                                                      gboolean        sensitive);

@@ -61,7 +61,7 @@ GtkWidget          *panel_module_factory_new_plugin          (PanelModuleFactory
                                                               const gchar         *name,
                                                               GdkScreen           *screen,
                                                               gint                 unique_id,
-                                                              gchar              **arguments);
+                                                              gchar              **arguments) G_GNUC_MALLOC;
 
 G_END_DECLS
 
