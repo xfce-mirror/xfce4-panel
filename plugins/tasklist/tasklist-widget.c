@@ -811,6 +811,9 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   /* TODO if we compare the allocation with the requisition we can
    * do a fast path to the child allocation, i think */
 
+  /* useless but hides compiler warning */
+  w = h = x = y = rows = cols = 0;
+
   xfce_tasklist_size_layout (tasklist, &area, &rows, &cols, &arrow_visible);
 
   /* allocate the arrow button for the overflow menu */
@@ -842,9 +845,6 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
 
   area_x = area.x;
   area_width = area.width;
-
-  /* useless but hides compiler warning */
-  w = h = x = y = rows = cols = 0;
 
   /* allocate all the children */
   for (li = tasklist->windows, i = 0; li != NULL; li = li->next)
