@@ -45,6 +45,7 @@ libclock_la_LDFLAGS =	 \
 
 libclock_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la \
 	$(GTK_LIBS) \
 	$(CAIRO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
@@ -52,7 +53,8 @@ libclock_la_LIBADD = \
 	$(XFCONF_LIBS)
 
 libclock_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la
+	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la
 
 #
 # .desktop file

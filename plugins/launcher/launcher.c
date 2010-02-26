@@ -246,8 +246,8 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->menu_timeout_id = 0;
   plugin->menu_icon_size = DEFAULT_MENU_ICON_SIZE;
 
-  /* initialize xfconf */
-  xfconf_init (NULL);
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
 
   /* show the configure menu item */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
@@ -598,9 +598,6 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   /* destroy the menu and timeout */
   launcher_plugin_menu_destroy (plugin);
-
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 
   /* free items */
   g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);

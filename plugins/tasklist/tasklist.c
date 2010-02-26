@@ -21,7 +21,6 @@
 #include <config.h>
 #endif
 
-#include <xfconf/xfconf.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
@@ -60,7 +59,6 @@ struct _TasklistPlugin
 
 
 static void tasklist_plugin_construct (XfcePanelPlugin *panel_plugin);
-static void tasklist_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static void tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
 static gboolean tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
 static void tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
@@ -80,7 +78,6 @@ tasklist_plugin_class_init (TasklistPluginClass *klass)
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = tasklist_plugin_construct;
-  plugin_class->free_data = tasklist_plugin_free_data;
   plugin_class->orientation_changed = tasklist_plugin_orientation_changed;
   plugin_class->size_changed = tasklist_plugin_size_changed;
   plugin_class->configure_plugin = tasklist_plugin_configure_plugin;
@@ -93,8 +90,8 @@ tasklist_plugin_init (TasklistPlugin *plugin)
 {
   GtkWidget *box;
 
-  /* initialize xfconf */
-  xfconf_init (NULL);
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
@@ -148,15 +145,6 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);
-}
-
-
-
-static void
-tasklist_plugin_free_data (XfcePanelPlugin *panel_plugin)
-{
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 }
 
 

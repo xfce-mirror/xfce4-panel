@@ -22,12 +22,29 @@
 
 #include <xfconf/xfconf.h>
 
+#define PANEL_PROPERTIES_INIT(panel_plugin) do { \
+  GError *__err = NULL; \
+  if (G_LIKELY (xfconf_init (&__err))) \
+    { \
+      g_object_weak_ref (G_OBJECT (panel_plugin), \
+          panel_properties_shutdown, NULL); \
+    } \
+  else \
+    { \
+      g_critical ("Failed to initialize Xfconf: %s", __err->message); \
+      g_error_free (__err); \
+    } } while (0)
+
+
+
 typedef struct _PanelProperty PanelProperty;
 struct _PanelProperty
 {
   const gchar *property;
   GType        type;
 };
+
+
 
 XfconfChannel *panel_properties_get_channel       (void);
 
@@ -40,5 +57,8 @@ void           panel_properties_bind              (XfconfChannel       *channel,
 void           panel_properties_unbind            (GObject             *object);
 
 void           panel_properties_shared_hash_table (GHashTable          *hash_table);
+
+void           panel_properties_shutdown          (gpointer             user_data,
+                                                   GObject             *where_the_object_was);
 
 #endif /* !__PANEL_XFCONF_H__ */

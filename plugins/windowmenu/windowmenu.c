@@ -21,7 +21,6 @@
 #include <config.h>
 #endif
 
-#include <xfconf/xfconf.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -202,8 +201,8 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->all_workspaces = TRUE;
   plugin->urgent_windows = 0;
 
-  /* initialize xfconf */
-  xfconf_init (NULL);
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));

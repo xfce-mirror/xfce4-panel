@@ -302,3 +302,13 @@ panel_properties_shared_hash_table (GHashTable *hash_table)
   else
     shared_hash_table = NULL;
 }
+
+
+
+void
+panel_properties_shutdown (gpointer  user_data,
+                           GObject  *where_the_object_was)
+{
+  /* delay this a bit to avoid warnings */
+  g_idle_add ((GSourceFunc) xfconf_shutdown, NULL);
+}

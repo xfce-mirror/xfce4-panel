@@ -26,7 +26,6 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
-#include <xfconf/xfconf.h>
 #include <exo/exo.h>
 
 #include "systray.h"
@@ -156,8 +155,8 @@ systray_plugin_init (SystrayPlugin *plugin)
   plugin->manager = NULL;
   plugin->show_frame = FALSE;
 
-  /* initialize xfconf */
-  xfconf_init (NULL);
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
@@ -329,9 +328,6 @@ systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* release the manager */
   if (G_LIKELY (plugin->manager))
     g_object_unref (G_OBJECT (plugin->manager));
-
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 }
 
 

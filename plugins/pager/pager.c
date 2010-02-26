@@ -27,7 +27,6 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
-#include <xfconf/xfconf.h>
 #include <libwnck/libwnck.h>
 #include <exo/exo.h>
 
@@ -150,11 +149,11 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->rows = 1;
   plugin->wnck_pager = NULL;
 
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
+
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
-  /* initialize xfconf */
-  xfconf_init (NULL);
 }
 
 
@@ -335,9 +334,6 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* disconnect screen changed signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       pager_plugin_screen_changed, NULL);
-
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 }
 
 

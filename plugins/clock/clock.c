@@ -30,6 +30,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <xfconf/xfconf.h>
+#include <common/panel-xfconf.h>
 
 #include "clock.h"
 #include "clock-analog.h"
@@ -161,8 +162,8 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_interval = 0;
   plugin->clock_timeout_id = 0;
 
-  /* initialize xfconf */
-  xfconf_init (NULL);
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
@@ -260,9 +261,6 @@ clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   /* free the tooltip string */
   g_free (plugin->tooltip_format);
-
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 }
 
 

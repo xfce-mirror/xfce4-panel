@@ -26,7 +26,6 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-xfconf.h>
-#include <xfconf/xfconf.h>
 #include <exo/exo.h>
 
 #include "separator.h"
@@ -49,7 +48,6 @@ static void     separator_plugin_set_property              (GObject             
 static gboolean separator_plugin_expose_event              (GtkWidget             *widget,
                                                             GdkEventExpose        *event);
 static void     separator_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
-static void     separator_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
 static gboolean separator_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
                                                             gint                   size);
 static void     separator_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
@@ -111,7 +109,6 @@ separator_plugin_class_init (SeparatorPluginClass *klass)
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = separator_plugin_construct;
-  plugin_class->free_data = separator_plugin_free_data;
   plugin_class->size_changed = separator_plugin_size_changed;
   plugin_class->configure_plugin = separator_plugin_configure_plugin;
   plugin_class->orientation_changed = separator_plugin_orientation_changed;
@@ -141,11 +138,11 @@ separator_plugin_init (SeparatorPlugin *plugin)
   /* initialize */
   plugin->style = SEPARATOR_PLUGIN_STYLE_SEPARATOR;
 
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
+
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
-  /* initialize xfconf */
-  xfconf_init (NULL);
 }
 
 
@@ -287,15 +284,6 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* make sure the plugin is drawn */
   gtk_widget_queue_draw (GTK_WIDGET (panel_plugin));
-}
-
-
-
-static void
-separator_plugin_free_data (XfcePanelPlugin *panel_plugin)
-{
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 }
 
 

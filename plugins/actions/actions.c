@@ -26,7 +26,6 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
-#include <xfconf/xfconf.h>
 #include <exo/exo.h>
 
 #include "actions.h"
@@ -43,7 +42,6 @@ static void     actions_plugin_set_property        (GObject               *objec
                                                     const GValue          *value,
                                                     GParamSpec            *pspec);
 static void     actions_plugin_construct           (XfcePanelPlugin       *panel_plugin);
-static void     actions_plugin_free_data           (XfcePanelPlugin       *panel_plugin);
 static gboolean actions_plugin_size_changed        (XfcePanelPlugin       *panel_plugin,
                                                     gint                   size);
 static void     actions_plugin_configure_plugin    (XfcePanelPlugin       *panel_plugin);
@@ -146,7 +144,6 @@ actions_plugin_class_init (ActionsPluginClass *klass)
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = actions_plugin_construct;
-  plugin_class->free_data = actions_plugin_free_data;
   plugin_class->size_changed = actions_plugin_size_changed;
   plugin_class->configure_plugin = actions_plugin_configure_plugin;
   plugin_class->orientation_changed = actions_plugin_orientation_changed;
@@ -182,11 +179,11 @@ actions_plugin_init (ActionsPlugin *plugin)
   plugin->first_action = ACTION_LOG_OUT_DIALOG;
   plugin->second_action = ACTION_DISABLED;
 
+  /* initialize properties */
+  PANEL_PROPERTIES_INIT (plugin);
+
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
-  /* initialize xfconf */
-  xfconf_init (NULL);
 
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, TRUE, 0);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
@@ -318,15 +315,6 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* show the plugin */
   gtk_widget_show (plugin->box);
-}
-
-
-
-static void
-actions_plugin_free_data (XfcePanelPlugin *panel_plugin)
-{
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 }
 
 
