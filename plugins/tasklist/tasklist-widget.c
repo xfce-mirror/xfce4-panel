@@ -1311,6 +1311,10 @@ tasklist_button_state_changed (WnckWindow        *window,
                                WnckWindowState    new_state,
                                XfceTasklistChild *child)
 {
+  gboolean blink;
+
+  panel_return_if_fail (child->window == window);
+
   /* update the button name */
   if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_SHADED | WNCK_WINDOW_STATE_MINIMIZED)
       && !child->tasklist->only_minimized)
@@ -1336,8 +1340,13 @@ tasklist_button_state_changed (WnckWindow        *window,
   /* update the blinking state */
   if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_DEMANDS_ATTENTION)
       || PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_URGENT))
-    xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button),
-        wnck_window_or_transient_needs_attention (child->window));
+    {
+      /* only start blinking if the window requesting urgentcy
+       * notification is not the active window */
+      blink = wnck_window_or_transient_needs_attention (window);
+      if (!blink || (blink && !wnck_window_is_active (window)))
+        xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
+    }
 }
 
 
