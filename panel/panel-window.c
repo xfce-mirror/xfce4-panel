@@ -1414,7 +1414,7 @@ panel_window_struts_update (PanelWindow *window,
       /* release the trap push */
       gdk_error_trap_pop ();
 
-#ifndef NDEBUG
+#if 0
       gint         n = -1;
       const gchar *names1[] = { "left", "right", "top", "bottom" };
       const gchar *names2[] = { "y",    "y",     "x",    "x" };

@@ -735,7 +735,7 @@ xfce_panel_plugin_register_types (XfcePanelModule *panel_module)
   xfce_clock_digital_register_type (panel_module);
   xfce_clock_lcd_register_type (panel_module);
 
-  g_message ("Clock types registered");
+  //g_message ("Clock types registered");
 }
 
 
