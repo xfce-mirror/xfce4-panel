@@ -127,6 +127,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-only-minimized", G_TYPE_BOOLEAN },
     { "show-wireframes", G_TYPE_BOOLEAN },
     { "show-handle", G_TYPE_BOOLEAN },
+    { "sort-order", G_TYPE_UINT },
     { NULL }
   };
 
@@ -209,6 +210,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
   TASKLIST_DIALOG_BIND ("show-wireframes", "active")
   TASKLIST_DIALOG_BIND ("show-handle", "active")
+  TASKLIST_DIALOG_BIND ("sort-order", "active")
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }

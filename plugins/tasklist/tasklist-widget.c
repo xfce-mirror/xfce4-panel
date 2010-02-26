@@ -52,7 +52,8 @@ enum
   PROP_SHOW_LABELS,
   PROP_SHOW_ONLY_MINIMIZED,
   PROP_SHOW_WIREFRAMES,
-  PROP_SHOW_HANDLE
+  PROP_SHOW_HANDLE,
+  PROP_SORT_ORDER
 };
 
 struct _XfceTasklistClass
@@ -106,6 +107,9 @@ struct _XfceTasklist
 
   /* button grouping mode */
   XfceTasklistGrouping  grouping;
+
+  /* sorting order of the buttons */
+  XfceTasklistSortOrder sort_order;
 
   /* dummy property */
   guint                 show_handle : 1;
@@ -167,6 +171,8 @@ static void xfce_tasklist_viewports_changed (WnckScreen *screen, XfceTasklist *t
 static void xfce_tasklist_wireframe_hide (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_destroy (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_update (XfceTasklist *tasklist, XfceTasklistChild *child);
+static void xfce_tasklist_sort (XfceTasklist *tasklist);
+static gint xfce_tasklist_button_compare (gconstpointer a, gconstpointer b, gpointer user_data);
 static void xfce_tasklist_button_new (XfceTasklistChild *child);
 static void xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist, gboolean all_workspaces);
 static void xfce_tasklist_set_button_relief (XfceTasklist *tasklist, GtkReliefStyle button_relief);
@@ -263,6 +269,15 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_SORT_ORDER,
+                                   g_param_spec_uint ("sort-order",
+                                                      NULL, NULL,
+                                                      XFCE_TASKLIST_SORT_ORDER_MIN,
+                                                      XFCE_TASKLIST_SORT_ORDER_MAX,
+                                                      XFCE_TASKLIST_SORT_ORDER_DEFAULT,
+                                                      EXO_PARAM_READWRITE));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
                                                              NULL,
@@ -314,6 +329,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
   tasklist->ellipsize_mode = PANGO_ELLIPSIZE_END;
   tasklist->grouping = XFCE_TASKLIST_GROUPING_DEFAULT;
+  tasklist->sort_order = XFCE_TASKLIST_SORT_ORDER_DEFAULT;
 }
 
 
@@ -360,6 +376,10 @@ xfce_tasklist_get_property (GObject    *object,
         g_value_set_boolean (value, tasklist->show_handle);
         break;
 
+      case PROP_SORT_ORDER:
+        g_value_set_uint (value, tasklist->sort_order);
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -374,7 +394,8 @@ xfce_tasklist_set_property (GObject      *object,
                             const GValue *value,
                             GParamSpec   *pspec)
 {
-  XfceTasklist *tasklist = XFCE_TASKLIST (object);
+  XfceTasklist          *tasklist = XFCE_TASKLIST (object);
+  XfceTasklistSortOrder  sort_order;
 
   switch (prop_id)
     {
@@ -416,6 +437,15 @@ xfce_tasklist_set_property (GObject      *object,
 
       case PROP_SHOW_HANDLE:
         tasklist->show_handle = g_value_get_boolean (value);
+        break;
+
+      case PROP_SORT_ORDER:
+        sort_order = g_value_get_uint (value);
+        if (tasklist->sort_order != sort_order)
+          {
+            tasklist->sort_order = sort_order;
+            xfce_tasklist_sort (tasklist);
+          }
         break;
 
       default:
@@ -940,7 +970,9 @@ xfce_tasklist_window_added (WnckScreen   *screen,
   xfce_tasklist_button_new (child);
 
   /* insert in the internal list */
-  tasklist->children = g_slist_append (tasklist->children, child);
+  tasklist->children = g_slist_insert_sorted_with_data (tasklist->children, child,
+                                                        xfce_tasklist_button_compare,
+                                                        tasklist);
 
   /* set the parent */
   gtk_widget_set_parent (child->button, GTK_WIDGET (tasklist));
@@ -1122,9 +1154,66 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
 
 
 
+static void
+xfce_tasklist_sort (XfceTasklist *tasklist)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  tasklist->children = g_slist_sort_with_data (tasklist->children,
+                                               xfce_tasklist_button_compare,
+                                               tasklist);
+
+  gtk_widget_queue_resize (GTK_WIDGET (tasklist));
+}
+
+
+
 /**************************************************************
  **************************************************************
  **************************************************************/
+static gint
+xfce_tasklist_button_compare (gconstpointer child_a,
+                              gconstpointer child_b,
+                              gpointer      user_data)
+{
+  const XfceTasklistChild *a = child_a, *b = child_b;
+  XfceTasklist            *tasklist = XFCE_TASKLIST (user_data);
+  gint                     retval;
+
+  panel_return_val_if_fail (WNCK_IS_WINDOW (a->window), 0);
+  panel_return_val_if_fail (WNCK_IS_WINDOW (b->window), 0);
+
+  if (tasklist->all_workspaces)
+    {
+      /* todo, keep workspaces together */
+    }
+
+  if (tasklist->sort_order == XFCE_TASKLIST_SORT_ORDER_GROUP_TITLE
+      || tasklist->sort_order == XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP)
+    {
+      panel_return_val_if_fail (WNCK_IS_CLASS_GROUP (a->class_group), 0);
+      panel_return_val_if_fail (WNCK_IS_CLASS_GROUP (b->class_group), 0);
+
+      retval = g_utf8_collate (wnck_class_group_get_name (a->class_group),
+                               wnck_class_group_get_name (b->class_group));
+      if (retval != 0)
+        return retval;
+    }
+
+  if (tasklist->sort_order == XFCE_TASKLIST_SORT_ORDER_TIMESTAMP
+      || tasklist->sort_order == XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP)
+    {
+      return a->unique_id - b->unique_id;
+    }
+  else
+    {
+      return g_utf8_collate (wnck_window_get_name (a->window),
+                             wnck_window_get_name (b->window));
+    }
+}
+
+
+
 static void
 tasklist_button_icon_changed (WnckWindow        *window,
                               XfceTasklistChild *child)
@@ -1194,6 +1283,9 @@ tasklist_button_name_changed (WnckWindow        *window,
 
   /* cleanup */
   g_free (label);
+
+  /* sort the tasklist */
+  xfce_tasklist_sort (child->tasklist);
 }
 
 
@@ -1241,10 +1333,15 @@ tasklist_button_workspace_changed (WnckWindow        *window,
 {
   /* leave when we show application from all workspaces */
   if (child->tasklist->all_workspaces)
-    return;
-
-  /* hide the button */
-  gtk_widget_hide (child->button);
+    {
+      /* sort the tasklist */
+      xfce_tasklist_sort (child->tasklist);
+    }
+  else
+    {
+      /* hide the button */
+      gtk_widget_hide (child->button);
+    }
 }
 
 

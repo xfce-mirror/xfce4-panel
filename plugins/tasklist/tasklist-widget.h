@@ -23,11 +23,12 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfceTasklistClass    XfceTasklistClass;
-typedef struct _XfceTasklist         XfceTasklist;
-typedef struct _XfceTasklistChild    XfceTasklistChild;
-typedef enum   _XfceTasklistStyle    XfceTasklistStyle;
-typedef enum   _XfceTasklistGrouping XfceTasklistGrouping;
+typedef struct _XfceTasklistClass     XfceTasklistClass;
+typedef struct _XfceTasklist          XfceTasklist;
+typedef struct _XfceTasklistChild     XfceTasklistChild;
+typedef enum   _XfceTasklistStyle     XfceTasklistStyle;
+typedef enum   _XfceTasklistGrouping  XfceTasklistGrouping;
+typedef enum   _XfceTasklistSortOrder XfceTasklistSortOrder;
 
 #define XFCE_TYPE_TASKLIST            (xfce_tasklist_get_type ())
 #define XFCE_TASKLIST(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TASKLIST, XfceTasklist))
@@ -41,12 +42,24 @@ typedef enum   _XfceTasklistGrouping XfceTasklistGrouping;
 enum _XfceTasklistGrouping
 {
   XFCE_TASKLIST_GROUPING_NEVER,
-  XFCE_TASKLIST_GROUPING_AUTO,
+  XFCE_TASKLIST_GROUPING_AUTO, /* when space is limited */
   XFCE_TASKLIST_GROUPING_ALWAYS,
 
   XFCE_TASKLIST_GROUPING_MIN = XFCE_TASKLIST_GROUPING_NEVER,
   XFCE_TASKLIST_GROUPING_MAX = XFCE_TASKLIST_GROUPING_ALWAYS,
   XFCE_TASKLIST_GROUPING_DEFAULT = XFCE_TASKLIST_GROUPING_AUTO
+};
+
+enum _XfceTasklistSortOrder
+{
+  XFCE_TASKLIST_SORT_ORDER_TIMESTAMP, /* sort by unique_id */
+  XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP, /* sort by group and then by timestamp */
+  XFCE_TASKLIST_SORT_ORDER_TITLE, /* sort by window title */
+  XFCE_TASKLIST_SORT_ORDER_GROUP_TITLE, /* sort by group and then by title */
+
+  XFCE_TASKLIST_SORT_ORDER_MIN = XFCE_TASKLIST_SORT_ORDER_TIMESTAMP,
+  XFCE_TASKLIST_SORT_ORDER_MAX = XFCE_TASKLIST_SORT_ORDER_GROUP_TITLE,
+  XFCE_TASKLIST_SORT_ORDER_DEFAULT = XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP
 };
 
 
