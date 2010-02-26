@@ -97,6 +97,8 @@ struct _PanelPreferencesDialog
 
   /* store for the items list */
   GtkListStore     *store;
+  
+  gulong            changed_handler_id;
 };
 
 
@@ -215,6 +217,14 @@ static void
 panel_preferences_dialog_finalize (GObject *object)
 {
   PanelPreferencesDialog *dialog = PANEL_PREFERENCES_DIALOG (object);
+  GtkWidget              *itembar;
+
+  /* disconnect changed signal */
+  if (dialog->changed_handler_id != 0)
+    {
+      itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
+      g_signal_handler_disconnect (G_OBJECT (itembar), dialog->changed_handler_id);
+    }
 
   /* thaw all autohide blocks */
   panel_application_windows_autohide (dialog->application, FALSE);
@@ -316,14 +326,28 @@ static void
 panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox,
                                                  PanelPreferencesDialog *dialog)
 {
-  gint nth;
+  gint       nth;
+  GtkWidget *itembar;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  
+  /* disconnect signal we used to monitor changes in the itembar */
+  if (dialog->changed_handler_id != 0)
+    {
+      itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
+      g_signal_handler_disconnect (G_OBJECT (itembar), dialog->changed_handler_id);
+    }
 
   /* set the selected window */
   nth = gtk_combo_box_get_active (combobox);
   dialog->active = panel_application_get_window (dialog->application, nth);
+  
+  
+  itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
+  dialog->changed_handler_id = g_signal_connect_swapped (G_OBJECT (itembar), "notify::changed", 
+                                                               G_CALLBACK (panel_preferences_dialog_item_store_rebuild), 
+                                                               dialog);
 
   /* rebind the dialog bindings */
   panel_preferences_dialog_bindings_update (dialog);
@@ -543,11 +567,16 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
 
       if (G_LIKELY (position != -1))
         {
+          /* block the changed signal */
+          g_signal_handler_block (G_OBJECT (itembar), dialog->changed_handler_id);
+          
           /* move the item on the panel */
           panel_itembar_reorder_child (PANEL_ITEMBAR (itembar),
                                        GTK_WIDGET (provider),
                                        position + direction);
 
+          /* unblock the changed signal */
+          g_signal_handler_unblock (G_OBJECT (itembar), dialog->changed_handler_id);
 
           /* most the item up or down in the list */
           if (direction == 1)
@@ -591,14 +620,13 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
                                       PanelPreferencesDialog *dialog)
 {
   XfcePanelPluginProvider *provider;
-  GtkTreeIter              iter;
   GtkWidget               *widget, *toplevel;
   PanelModule             *module;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   /* get the selected item in the treeview */
-  provider = panel_preferences_dialog_item_get_selected (dialog, &iter);
+  provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
   if (G_LIKELY (provider != NULL))
     {
       /* get the panel module of the provider */
@@ -617,12 +645,9 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
         {
           /* hide the dialog */
           gtk_widget_hide (widget);
-
+          
           /* send signal */
           xfce_panel_plugin_provider_emit_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
-
-          /* remove from treeview */
-          gtk_list_store_remove (dialog->store, &iter);
         }
 
       /* destroy */

@@ -238,12 +238,6 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
 
-  /**
-   * PanelWindow::orientation:
-   *
-   * The orientation of the panel window. This is used to sync the
-   * panel orientation with that of the itembar, using exo bindings.
-   **/
   g_object_class_install_property (gobject_class,
                                    PROP_HORIZONTAL,
                                    g_param_spec_boolean ("horizontal", NULL, NULL,
@@ -1698,6 +1692,8 @@ panel_window_struts_update (PanelWindow *window,
   panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (window)->window));
   panel_return_if_fail (N_STRUTS == 12);
   panel_return_if_fail (cardinal_atom != GDK_NONE);
+  panel_return_if_fail (net_wm_strut_atom != GDK_NONE);
+  panel_return_if_fail (net_wm_strut_partial_atom != GDK_NONE);
 
   if (G_UNLIKELY (window->struts_possible == -1))
     {
@@ -1720,8 +1716,6 @@ panel_window_struts_update (PanelWindow *window,
           struts[STRUT_TOP] = y + height;
           struts[STRUT_TOP_START_X] = x;
           struts[STRUT_TOP_END_X] = x + width;
-
-
         }
       else if (snap_edge_is_bottom (window->snap_edge))
         {
@@ -1770,9 +1764,10 @@ panel_window_struts_update (PanelWindow *window,
       gdk_property_change (GTK_WIDGET (window)->window, net_wm_strut_partial_atom,
                            cardinal_atom, 32, GDK_PROP_MODE_REPLACE, (guchar *) &struts, 12);
 
-      /* set the wm strut */
-      gdk_property_change (GTK_WIDGET (window)->window, net_wm_strut_atom,
-                           cardinal_atom, 32, GDK_PROP_MODE_REPLACE, (guchar *) &struts, 4);
+      /* set the wm strut (old window managers) */
+      /* gdk_property_change (GTK_WIDGET (window)->window, net_wm_strut_atom,
+       *                      cardinal_atom, 32, GDK_PROP_MODE_REPLACE, (guchar *) &struts, 4);
+       */
 
       /* release the trap push */
       gdk_error_trap_pop ();

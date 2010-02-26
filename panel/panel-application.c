@@ -83,6 +83,11 @@ static gboolean  panel_application_drag_drop          (GtkWidget              *i
                                                        PanelWindow            *window);
 
 
+enum
+{
+  PROP_0,
+  PROP_ITEMS_CHANGED
+};
 
 struct _PanelApplicationClass
 {
@@ -296,15 +301,15 @@ panel_application_load (PanelApplication *application)
 
 
 static void
-panel_application_plugin_move_end (GtkWidget        *item,
-                                   GdkDragContext   *context,
-                                   PanelApplication *application)
+panel_application_plugin_move_drag_end (GtkWidget        *item,
+                                        GdkDragContext   *context,
+                                        PanelApplication *application)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
   /* disconnect this signal */
-  g_signal_handlers_disconnect_by_func (G_OBJECT (item), G_CALLBACK (panel_application_plugin_move_end), application);
+  g_signal_handlers_disconnect_by_func (G_OBJECT (item), G_CALLBACK (panel_application_plugin_move_drag_end), application);
 
   /* make the window insensitive */
   panel_application_windows_sensitive (application, TRUE);
@@ -342,7 +347,7 @@ panel_application_plugin_move (GtkWidget        *item,
   gtk_target_list_unref (target_list);
 
   /* signal to make the window sensitive again on a drag end */
-  g_signal_connect (G_OBJECT (item), "drag-end", G_CALLBACK (panel_application_plugin_move_end), application);
+  g_signal_connect (G_OBJECT (item), "drag-end", G_CALLBACK (panel_application_plugin_move_drag_end), application);
 }
 
 

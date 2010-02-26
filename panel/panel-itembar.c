@@ -40,6 +40,10 @@ static void      panel_itembar_set_property     (GObject           *object,
                                                  guint              prop_id,
                                                  const GValue      *value,
                                                  GParamSpec        *pspec);
+static void      panel_itembar_get_property     (GObject           *object,
+                                                 guint              prop_id,
+                                                 GValue            *value,
+                                                 GParamSpec        *pspec);
 static void      panel_itembar_finalize         (GObject           *object);
 static void      panel_itembar_realize          (GtkWidget         *widget);
 static void      panel_itembar_unrealize        (GtkWidget         *widget);
@@ -105,7 +109,8 @@ struct _PanelItembarChild
 enum
 {
   PROP_0,
-  PROP_HORIZONTAL
+  PROP_HORIZONTAL,
+  PROP_CHANGED
 };
 
 
@@ -132,6 +137,7 @@ panel_itembar_class_init (PanelItembarClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = panel_itembar_set_property;
+  gobject_class->get_property = panel_itembar_get_property;
   gobject_class->finalize = panel_itembar_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
@@ -158,6 +164,12 @@ panel_itembar_class_init (PanelItembarClass *klass)
                                    g_param_spec_boolean ("horizontal", NULL, NULL,
                                                          TRUE,
                                                          EXO_PARAM_WRITABLE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_CHANGED,
+                                   g_param_spec_boolean ("changed", NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READABLE));
 }
 
 
@@ -199,6 +211,26 @@ panel_itembar_set_property (GObject      *object,
       case PROP_HORIZONTAL:
         itembar->horizontal = g_value_get_boolean (value);
         gtk_widget_queue_resize (GTK_WIDGET (itembar));
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+
+
+static void
+panel_itembar_get_property (GObject    *object,
+                            guint       prop_id,
+                            GValue     *value,
+                            GParamSpec *pspec)
+{
+  switch (prop_id)
+    {
+      case PROP_CHANGED:
+        g_value_set_boolean (value, TRUE);
         break;
 
       default:
@@ -661,6 +693,9 @@ panel_itembar_remove (GtkContainer *container,
           /* queue a resize if needed */
           if (G_LIKELY (was_visible))
             gtk_widget_queue_resize (GTK_WIDGET (container));
+            
+          /* tell the consumers that we have changed the items */
+          g_object_notify (G_OBJECT (itembar), "changed");
 
           /* done */
           break;
@@ -773,6 +808,9 @@ panel_itembar_insert (PanelItembar *itembar,
 
   /* resize the itembar */
   gtk_widget_queue_resize (GTK_WIDGET (itembar));
+  
+  /* tell the consumers that we have changed the items */
+  g_object_notify (G_OBJECT (itembar), "changed");
 }
 
 
@@ -804,6 +842,9 @@ panel_itembar_reorder_child (PanelItembar *itembar,
 
           /* reallocate the itembar */
           gtk_widget_queue_resize (GTK_WIDGET (itembar));
+          
+          /* tell the consumers that we have changed the items */
+          g_object_notify (G_OBJECT (itembar), "changed");
 
           /* we're done */
           break;
