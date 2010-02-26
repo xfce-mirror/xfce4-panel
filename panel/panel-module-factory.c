@@ -310,6 +310,10 @@ void
 panel_module_factory_force_all_external (void)
 {
   force_all_external = TRUE;
+
+#ifndef NDEBUG
+  g_message ("Forcing all plugins to run external.");
+#endif
 }
 
 
