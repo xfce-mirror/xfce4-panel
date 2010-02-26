@@ -1307,7 +1307,7 @@ panel_window_screen_changed (GtkWidget *widget,
   if (screen != previous_screen)
     {
       /* disconnect old screen changed handles */
-      g_signal_handlers_disconnect_by_func (G_OBJECT (previous_screen), G_CALLBACK (gtk_widget_queue_resize), widget);
+      g_signal_handlers_disconnect_by_func (G_OBJECT (previous_screen), G_CALLBACK (panel_window_screen_changed), widget);
 
       /* connect new screen update signals */
       g_signal_connect_swapped (G_OBJECT (screen), "size-changed", G_CALLBACK (panel_window_screen_changed), widget);

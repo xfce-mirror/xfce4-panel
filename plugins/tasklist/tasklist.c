@@ -507,7 +507,7 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
   GtkAllocation     *alloc;
   GSList            *li, *source = NULL, *sibling = NULL;
   
-  /* list when this is an unknow target (return false because it's not a drop zone) */
+  /* leave when this is an unknow target (return false because it's not a drop zone) */
   if (gtk_drag_dest_find_target (widget, context, NULL) == GDK_NONE)
     return FALSE;
 
