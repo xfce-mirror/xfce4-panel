@@ -121,14 +121,10 @@ window_menu_plugin_class_init (XfceWindowMenuPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
   GObjectClass         *gobject_class;
-  GtkWidgetClass       *gtkwidget_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = window_menu_plugin_get_property;
   gobject_class->set_property = window_menu_plugin_set_property;
-
-  gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->screen_changed = window_menu_plugin_screen_changed;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = window_menu_plugin_construct;
@@ -196,6 +192,10 @@ window_menu_plugin_init (XfceWindowMenuPlugin *plugin)
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+
+  /* monitor screen changes */
+  g_signal_connect (G_OBJECT (plugin), "screen-changed",
+                    G_CALLBACK (window_menu_plugin_screen_changed), NULL);
 
   /* create the widgets */
   plugin->button = xfce_arrow_button_new (GTK_ARROW_NONE);
@@ -315,6 +315,17 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
   GdkScreen            *screen;
+  WnckScreen           *wnck_screen;
+
+  /* get the wnck screen */
+  screen = gtk_widget_get_screen (widget);
+  panel_return_if_fail (GDK_IS_SCREEN (screen));
+  wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
+  panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
+
+  /* leave when we same wnck screen was picked */
+  if (plugin->screen == wnck_screen)
+    return;
 
   if (G_UNLIKELY (plugin->screen != NULL))
     {
@@ -327,11 +338,8 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
           window_menu_plugin_window_closed, plugin);
     }
 
-  /* get the wnck screen */
-  screen = gtk_widget_get_screen (widget);
-  panel_return_if_fail (GDK_IS_SCREEN (screen));
-  plugin->screen = wnck_screen_get (gdk_screen_get_number (screen));
-  panel_return_if_fail (WNCK_IS_SCREEN (plugin->screen));
+  /* set the new screen */
+  plugin->screen = wnck_screen;
 
   /* connect signal to monitor this screen */
   g_signal_connect (G_OBJECT (plugin->screen), "active-window-changed",
@@ -351,6 +359,9 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+
+  /* show the icon */
+  gtk_widget_show (plugin->icon);
 
   /* bind the properties */
   xfconf_g_property_bind (plugin->channel, "/style",
@@ -375,8 +386,12 @@ window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
 
+  /* disconnect screen changed signal */
+  g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
+          window_menu_plugin_screen_changed, NULL);
+
   /* disconnect from the screen */
-  if (G_UNLIKELY (plugin->screen != NULL))
+  if (G_LIKELY (plugin->screen != NULL))
     {
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
           window_menu_plugin_active_window_changed, plugin);
@@ -384,6 +399,9 @@ window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
           window_menu_plugin_window_opened, plugin);
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
           window_menu_plugin_window_closed, plugin);
+
+      /* unset the screen */
+      plugin->screen = NULL;
     }
 
   /* release the xfconf channel */
