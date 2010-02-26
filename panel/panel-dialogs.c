@@ -25,6 +25,7 @@
 
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 #include <panel/panel-private.h>
 #include <panel/panel-dialogs.h>
@@ -61,4 +62,64 @@ panel_dialogs_show_about (void)
                          "website", "http://www.xfce.org/",
                          "logo-icon-name", PACKAGE_NAME,
                          NULL);
+}
+
+
+
+gint
+panel_dialogs_choose_panel (GSList *windows)
+{
+  GtkWidget *dialog;
+  GtkWidget *vbox;
+  GtkWidget *label;
+  GtkWidget *combo;
+  gint       i, response = -1;
+  gchar     *name;
+  GSList    *li;
+
+  panel_return_val_if_fail (GTK_IS_WINDOW (windows->data), -1);
+
+  /* setup the dialog */
+  dialog = gtk_dialog_new_with_buttons (_("Add New Item"), GTK_WINDOW (windows->data),
+                                        GTK_DIALOG_NO_SEPARATOR,
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        GTK_STOCK_ADD, GTK_RESPONSE_OK, NULL);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+  gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_ADD);
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+
+  /* create widgets */
+  vbox = gtk_vbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+  gtk_widget_show (vbox);
+
+  label = gtk_label_new (_("Please choose a panel for the new plugin:"));
+  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+  gtk_widget_show (label);
+
+  combo = gtk_combo_box_new_text ();
+  gtk_box_pack_start (GTK_BOX (vbox), combo, FALSE, FALSE, 0);
+  gtk_widget_show (combo);
+
+  /* insert the panels */
+  for (li = windows, i = 1; li != NULL; li = li->next, i++)
+    {
+      /* add panel name to the combo box */
+      name = g_strdup_printf (_("Panel %d"), i);
+      gtk_combo_box_append_text (GTK_COMBO_BOX (combo), name);
+      g_free (name);
+    }
+
+  /* select first panel */
+  gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
+
+  /* run the dialog */
+  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
+    response = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
+
+  /* destroy the dialog */
+  gtk_widget_destroy (dialog);
+
+  return response;
 }

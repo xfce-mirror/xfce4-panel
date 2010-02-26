@@ -38,6 +38,7 @@
 #include <panel/panel-module-factory.h>
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-item-dialog.h>
+#include <panel/panel-dialogs.h>
 #include <panel/panel-glue.h>
 
 #define PANEL_CONFIG_PATH "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "panels.new.xml"
@@ -823,16 +824,31 @@ panel_application_add_new_item (PanelApplication  *application,
                                 gchar            **arguments)
 {
   PanelWindow *window;
+  gint         nth = 0;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (plugin_name != NULL);
+  panel_return_if_fail (g_slist_length (application->windows) > 0);
 
-  /* TODO fix this */
-  window = application->windows->data;
+  if (panel_module_factory_has_plugin (application->factory, plugin_name))
+    {
+      /* ask the user what panel to use if there is more then one */
+      if (g_slist_length (application->windows) > 1)
+        if ((nth = panel_dialogs_choose_panel (application->windows)) == -1)
+          return;
 
-  if (!panel_application_insert_plugin (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
-                                        plugin_name, NULL, arguments, FROM_DESKTOP_FILE, -1))
-    g_warning (_("The plugin you want to add is not recognized by the panel."), plugin_name);
+      /* get the window */
+      window = g_slist_nth_data (application->windows, nth);
+
+      /* add the panel to the end of the choosen window */
+      panel_application_insert_plugin (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
+                                       plugin_name, NULL, arguments, FROM_DESKTOP_FILE, -1);
+    }
+  else
+    {
+      /* print warning */
+      g_warning (_("The plugin (%s) you want to add is not recognized by the panel."), plugin_name);
+    }
 }
 
 

@@ -141,6 +141,9 @@ main (gint argc, gchar **argv)
     }
   else if (opt_add)
     {
+      /* stop any running startup notification */
+      gdk_notify_startup_complete ();
+
       /* send a add new item signal to the running instance */
       result = panel_dbus_client_add_new_item (opt_add, arguments, &error);
 

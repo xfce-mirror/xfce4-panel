@@ -47,6 +47,9 @@ void                     panel_module_factory_emit_unique_changed (PanelModule  
 
 GList                   *panel_module_factory_get_modules         (PanelModuleFactory  *factory);
 
+gboolean                 panel_module_factory_has_plugin          (PanelModuleFactory  *factory,
+                                                                   const gchar         *name);
+
 XfcePanelPluginProvider *panel_module_factory_create_plugin       (PanelModuleFactory  *factory,
                                                                    GdkScreen           *screen,
                                                                    const gchar         *name,

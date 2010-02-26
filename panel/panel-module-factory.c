@@ -342,6 +342,18 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
 
 
 
+gboolean
+panel_module_factory_has_plugin (PanelModuleFactory *factory,
+                                 const gchar        *name)
+{
+  panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), FALSE);
+  panel_return_val_if_fail (name != NULL, FALSE);
+
+  return !!(g_hash_table_lookup (factory->modules, name) != NULL);
+}
+
+
+
 XfcePanelPluginProvider *
 panel_module_factory_create_plugin (PanelModuleFactory  *factory,
                                     GdkScreen           *screen,

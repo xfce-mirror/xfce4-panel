@@ -22,7 +22,9 @@
 
 G_BEGIN_DECLS
 
-void panel_dialogs_show_about (void);
+void panel_dialogs_show_about   (void);
+
+gint panel_dialogs_choose_panel (GSList *windows);
 
 G_END_DECLS
 
