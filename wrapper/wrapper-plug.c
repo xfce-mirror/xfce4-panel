@@ -47,9 +47,6 @@ struct _WrapperPlug
   /* background alpha */
   gdouble background_alpha;
 
-  /* if the plugin background should be the selection color */
-  guint   is_selected : 1;
-
   /* whether the wrapper has a rgba colormap */
   guint   is_composited : 1;
 };
@@ -81,7 +78,6 @@ wrapper_plug_init (WrapperPlug *plug)
 {
   /* init vars */
   plug->background_alpha = 1.00;
-  plug->is_selected = FALSE;
   plug->is_composited = FALSE;
 
   /* allow painting, else compositing won't work */
@@ -108,15 +104,10 @@ wrapper_plug_expose_event (GtkWidget      *widget,
   GtkStateType   state = GTK_STATE_NORMAL;
   gdouble        alpha = plug->is_composited ? plug->background_alpha : 1.00;
 
-  if (GTK_WIDGET_DRAWABLE (widget) &&
-      (alpha < 1.00 || plug->is_selected))
+  if (GTK_WIDGET_DRAWABLE (widget) && alpha < 1.00)
     {
       /* create the cairo context */
       cr = gdk_cairo_create (widget->window);
-
-      /* change the state is this plugin is on an active panel */
-      if (G_UNLIKELY (plug->is_selected))
-        state = GTK_STATE_SELECTED;
 
       /* get the background gdk color */
       color = &(widget->style->bg[state]);
@@ -234,20 +225,4 @@ wrapper_plug_set_background_alpha (WrapperPlug *plug,
   /* redraw */
   if (plug->is_composited)
     gtk_widget_queue_draw (GTK_WIDGET (plug));
-}
-
-
-
-void
-wrapper_plug_set_selected (WrapperPlug *plug,
-                           gboolean     selected)
-{
-  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
-  panel_return_if_fail (GTK_IS_WIDGET (plug));
-
-  /* set value */
-  plug->is_selected = !!selected;
-
-  /* redraw */
-  gtk_widget_queue_draw (GTK_WIDGET (plug));
 }

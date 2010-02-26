@@ -74,7 +74,6 @@ static void panel_window_set_autohide (PanelWindow *window, gboolean autohide);
 static void panel_window_menu_quit (gpointer boolean);
 static void panel_window_menu_deactivate (GtkMenu *menu, PanelWindow *window);
 static void panel_window_menu_popup (PanelWindow *window);
-static void panel_window_set_plugin_active_panel (GtkWidget *widget, gpointer user_data);
 static void panel_window_set_plugin_background_alpha (GtkWidget *widget, gpointer user_data);
 static void panel_window_set_plugin_size (GtkWidget *widget, gpointer user_data);
 static void panel_window_set_plugin_orientation (GtkWidget *widget, gpointer user_data);
@@ -169,8 +168,8 @@ struct _PanelWindow
   /* whether the panel is locked */
   guint                locked : 1;
 
-  /* when this is the active panel */
-  guint                is_active_panel : 1;
+  /* active panel redraw timeout id */
+  guint                active_timeout_id;
 
   /* panel orientation */
   guint                horizontal : 1;
@@ -234,7 +233,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->size_request = panel_window_size_request;
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
-  
+
   g_object_class_install_property (gobject_class,
                                    PROP_HORIZONTAL,
                                    g_param_spec_boolean ("horizontal", NULL, NULL,
@@ -304,8 +303,8 @@ panel_window_class_init (PanelWindowClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_SNAP_EDGE,
                                    g_param_spec_uint ("snap-edge", NULL, NULL,
-                                                      PANEL_SNAP_EGDE_NONE, 
-                                                      PANEL_SNAP_EGDE_S, 
+                                                      PANEL_SNAP_EGDE_NONE,
+                                                      PANEL_SNAP_EGDE_S,
                                                       PANEL_SNAP_EGDE_NONE,
                                                       EXO_PARAM_READWRITE));
 
@@ -345,7 +344,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_status = DISABLED;
   window->autohide_block = 0;
   window->autohide_window = NULL;
-  window->is_active_panel = FALSE;
+  window->active_timeout_id = 0;
 
   /* set additional events we want to have */
   gtk_widget_add_events (GTK_WIDGET (window), GDK_BUTTON_PRESS_MASK);
@@ -571,6 +570,10 @@ panel_window_finalize (GObject *object)
 {
   PanelWindow *window = PANEL_WINDOW (object);
 
+  /* stop a running active timeout id */
+  if (window->active_timeout_id != 0)
+    g_source_remove (window->active_timeout_id);
+
   /* stop the autohide timeout */
   if (window->autohide_timer != 0)
     g_source_remove (window->autohide_timer);
@@ -615,11 +618,7 @@ panel_window_expose_event (GtkWidget      *widget,
       gdk_cairo_rectangle (cr, &event->area);
       cairo_clip (cr);
 
-      /* use another state when the panel is selected */
-      if (G_UNLIKELY (window->is_active_panel))
-        state = GTK_STATE_SELECTED;
-
-      if (alpha < 1.00 || window->is_active_panel)
+      if (alpha < 1.00 || window->active_timeout_id != 0)
         {
           /* get the background gdk color */
           color = &(widget->style->bg[state]);
@@ -1332,13 +1331,11 @@ panel_window_paint_handle (PanelWindow  *window,
   gint           x, y, width, height;
   guint          i, xx, yy;
   GdkColor      *color;
-  gdouble        alpha;
+  gdouble        alpha = 1.00;
 
   /* set the alpha (always show to handle for atleast 50%) */
-  if (window->is_composited)
+  if (window->active_timeout_id == 0 && window->is_composited)
     alpha = 0.50 + window->background_alpha / 2.00;
-  else
-    alpha = 1.00;
 
   /* set initial numbers */
   x = alloc->x + 2;
@@ -1399,16 +1396,26 @@ panel_window_paint_borders (PanelWindow  *window,
   GtkWidget     *widget = GTK_WIDGET (window);
   GtkAllocation *alloc = &(widget->allocation);
   GdkColor      *color;
-  gdouble        alpha = window->is_composited ? window->background_alpha : 1.00;
+  gdouble        alpha = 1.00;
+  const gdouble  dashes[] = {4.00, 4.00};
+  GTimeVal       timeval;
 
   /* 1px line (1.5 results in a sharp 1px line) */
   cairo_set_line_width (cr, 1.5);
+
+  if (G_UNLIKELY (window->active_timeout_id != 0))
+    g_get_current_time (&timeval);
+  else if (window->is_composited)
+    alpha = window->background_alpha;
 
   /* possibly save some time */
   if (PANEL_HAS_FLAG (window->borders, (PANEL_BORDER_BOTTOM | PANEL_BORDER_RIGHT)))
     {
       /* dark color */
-      color = &(widget->style->dark[state]);
+      if (G_UNLIKELY (window->active_timeout_id != 0))
+          color = &(widget->style->black);
+      else
+          color = &(widget->style->dark[state]);
       xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
       /* move the cursor the the bottom left */
@@ -1426,6 +1433,10 @@ panel_window_paint_borders (PanelWindow  *window,
       else
         cairo_rel_move_to (cr, 0, -alloc->height);
 
+      if (G_UNLIKELY (window->active_timeout_id != 0))
+        cairo_set_dash (cr, dashes, G_N_ELEMENTS (dashes),
+                        timeval.tv_sec % 2 ? 0.00 : 4.00);
+
       /* stroke this part */
       cairo_stroke (cr);
     }
@@ -1434,7 +1445,10 @@ panel_window_paint_borders (PanelWindow  *window,
   if (PANEL_HAS_FLAG (window->borders, (PANEL_BORDER_TOP | PANEL_BORDER_LEFT)))
     {
       /* light color */
-      color = &(widget->style->light[state]);
+      if (G_UNLIKELY (window->active_timeout_id != 0))
+          color = &(widget->style->black);
+      else
+          color = &(widget->style->light[state]);
       xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
       /* move the cursor the the bottom left */
@@ -1451,6 +1465,10 @@ panel_window_paint_borders (PanelWindow  *window,
         cairo_rel_line_to (cr, alloc->width, 0);
       else
         cairo_rel_move_to (cr, alloc->width, 0);
+
+      if (G_UNLIKELY (window->active_timeout_id != 0))
+        cairo_set_dash (cr, dashes, G_N_ELEMENTS (dashes),
+                        timeval.tv_sec % 2 ? 0.00 : -4.00);
 
       /* stroke the lines */
       cairo_stroke (cr);
@@ -2106,19 +2124,6 @@ panel_window_menu_popup (PanelWindow *window)
 
 
 static void
-panel_window_set_plugin_active_panel (GtkWidget *widget,
-                                      gpointer   user_data)
-{
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
-
-  if (PANEL_IS_PLUGIN_EXTERNAL (widget))
-    panel_plugin_external_set_active_panel (PANEL_PLUGIN_EXTERNAL (widget),
-                                            !!GPOINTER_TO_UINT (user_data));
-}
-
-
-
-static void
 panel_window_set_plugin_background_alpha (GtkWidget *widget,
                                           gpointer   user_data)
 {
@@ -2174,18 +2179,22 @@ panel_window_set_active_panel (PanelWindow *window,
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  if (G_UNLIKELY (window->is_active_panel != active))
+  if (G_UNLIKELY ((window->active_timeout_id != 0) != active))
     {
       /* set new value */
-      window->is_active_panel = !!active;
+      if (active)
+        {
+          window->active_timeout_id = g_timeout_add_seconds (1,
+              (GSourceFunc) gtk_widget_queue_draw, window);
+        }
+      else
+        {
+          g_source_remove (window->active_timeout_id);
+          window->active_timeout_id = 0;
+        }
 
       /* queue a redraw */
       gtk_widget_queue_draw (GTK_WIDGET (window));
-
-      /* poke all the plugins */
-      gtk_container_foreach (GTK_CONTAINER (gtk_bin_get_child (GTK_BIN (window))),
-                             panel_window_set_plugin_active_panel,
-                             GUINT_TO_POINTER (active));
     }
 }
 

@@ -731,26 +731,3 @@ panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
   /* unset */
   g_value_unset (&value);
 }
-
-
-
-void
-panel_plugin_external_set_active_panel (PanelPluginExternal *external,
-                                        gboolean             active)
-{
-  GValue value = { 0, };
-
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-
-  /* set the boolean */
-  g_value_init (&value, G_TYPE_BOOLEAN);
-  g_value_set_boolean (&value, active);
-
-  /* send message */
-  panel_plugin_external_set_property (external,
-                                      PROPERTY_CHANGED_WRAPPER_SET_SELECTED,
-                                      &value);
-
-  /* unset */
-  g_value_unset (&value);
-}

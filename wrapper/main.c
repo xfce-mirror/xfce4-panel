@@ -126,15 +126,8 @@ dbus_gproxy_property_changed (DBusGProxy              *dbus_gproxy,
         break;
 
       case PROPERTY_CHANGED_WRAPPER_BACKGROUND_ALPHA:
-      case PROPERTY_CHANGED_WRAPPER_SET_SELECTED:
-        /* get the plug */
         plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
-
-        /* set a plug value */
-        if (property == PROPERTY_CHANGED_WRAPPER_BACKGROUND_ALPHA)
-          wrapper_plug_set_background_alpha (plug, g_value_get_int (value) / 100.00);
-        else
-          wrapper_plug_set_selected (plug, g_value_get_boolean (value));
+        wrapper_plug_set_background_alpha (plug, g_value_get_int (value) / 100.00);
         break;
 
       default:

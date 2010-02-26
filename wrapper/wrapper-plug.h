@@ -45,9 +45,6 @@ WrapperPlug  *wrapper_plug_new                  (GdkNativeWindow  socket_id);
 void          wrapper_plug_set_background_alpha (WrapperPlug     *plug,
                                                  gdouble          alpha);
 
-void          wrapper_plug_set_selected         (WrapperPlug     *plug,
-                                                 gboolean         selected);
-
 G_END_DECLS
 
 #endif /* !__WRAPPER_PLUG_H__ */
