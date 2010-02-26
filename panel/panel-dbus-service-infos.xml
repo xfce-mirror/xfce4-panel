@@ -82,7 +82,12 @@
                 value="wrapper_dbus_client" />
 
     <!--
+      Emitted when a panel property changed, monitored by the wrapper. This
+      is emitted to all plugins but they will filter out their property
+      based on the @plugin-id. The @property is an enum from DBusPropertyChanged,
+      see common/panel-dbus.h.
 
+      Panel -> Wrapper -> XfcePanelPluginProvider
     -->
     <signal name="PropertyChanged">
       <arg name="plugin_id" type="i" />
@@ -91,7 +96,11 @@
     </signal>
 
     <!--
+      This method is called from the wrapper and notifies the panel about an
+      action that should be performed. the @signal is an enum from
+      XfcePanelPluginProviderSignal, see libxfce4panel/xfce-panel-plugin-provider.h.
 
+      XfcePanelPluginProvider -> Wrapper -> Panel
     -->
     <method name="ProviderSignal">
       <arg name="plugin_id" direction="in" type="i" />
