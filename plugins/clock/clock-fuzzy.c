@@ -95,38 +95,38 @@ static const gchar *i18n_hour_sectors[] =
 {
   /* I18N: %0 will be replaced with the preceding hour, %1 with
    * the comming hour */
-  N_("%0 o'clock"),
-  N_("five past %0"),
-  N_("ten past %0"),
-  N_("quarter past %0"),
-  N_("twenty past %0"),
-  N_("twenty five past %0"),
-  N_("half past %0"),
-  N_("twenty five to %1"),
-  N_("twenty to %1"),
-  N_("quarter to %1"),
-  N_("ten to %1"),
-  N_("five to %1"),
-  N_("%1 o'clock")
+  /* xgettext:no-c-format */ N_("%0 o'clock"),
+  /* xgettext:no-c-format */ N_("five past %0"),
+  /* xgettext:no-c-format */ N_("ten past %0"),
+  /* xgettext:no-c-format */ N_("quarter past %0"),
+  /* xgettext:no-c-format */ N_("twenty past %0"),
+  /* xgettext:no-c-format */ N_("twenty five past %0"),
+  /* xgettext:no-c-format */ N_("half past %0"),
+  /* xgettext:no-c-format */ N_("twenty five to %1"),
+  /* xgettext:no-c-format */ N_("twenty to %1"),
+  /* xgettext:no-c-format */ N_("quarter to %1"),
+  /* xgettext:no-c-format */ N_("ten to %1"),
+  /* xgettext:no-c-format */ N_("five to %1"),
+  /* xgettext:no-c-format */ N_("%1 o'clock")
 };
 
 static const gchar *i18n_hour_sectors_one[] =
 {
   /* I18N: some languages have a singular form for the first hour,
    * other languages should just use the same strings as above */
-  NC_("one", "%0 o'clock"),
-  NC_("one", "five past %0"),
-  NC_("one", "ten past %0"),
-  NC_("one", "quarter past %0"),
-  NC_("one", "twenty past %0"),
-  NC_("one", "twenty five past %0"),
-  NC_("one", "half past %0"),
-  NC_("one", "twenty five to %1"),
-  NC_("one", "twenty to %1"),
-  NC_("one", "quarter to %1"),
-  NC_("one", "ten to %1"),
-  NC_("one", "five to %1"),
-  NC_("one", "%1 o'clock")
+  /* xgettext:no-c-format */ NC_("one", "%0 o'clock"),
+  /* xgettext:no-c-format */ NC_("one", "five past %0"),
+  /* xgettext:no-c-format */ NC_("one", "ten past %0"),
+  /* xgettext:no-c-format */ NC_("one", "quarter past %0"),
+  /* xgettext:no-c-format */ NC_("one", "twenty past %0"),
+  /* xgettext:no-c-format */ NC_("one", "twenty five past %0"),
+  /* xgettext:no-c-format */ NC_("one", "half past %0"),
+  /* xgettext:no-c-format */ NC_("one", "twenty five to %1"),
+  /* xgettext:no-c-format */ NC_("one", "twenty to %1"),
+  /* xgettext:no-c-format */ NC_("one", "quarter to %1"),
+  /* xgettext:no-c-format */ NC_("one", "ten to %1"),
+  /* xgettext:no-c-format */ NC_("one", "five to %1"),
+  /* xgettext:no-c-format */ NC_("one", "%1 o'clock")
 };
 
 static const gchar *i18n_hour_names[] =
