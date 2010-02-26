@@ -1040,6 +1040,15 @@ launcher_plugin_remote_event (XfcePanelPlugin *panel_plugin,
       return TRUE;
     }
 
+  if (exo_str_is_equal (name, "disable-tooltips")
+      && value != NULL
+      && G_VALUE_HOLDS_BOOLEAN (value))
+    {
+      g_object_set_property (G_OBJECT (plugin), "disable-tooltips", value);
+
+      return FALSE;
+    }
+
   return FALSE;
 }
 
