@@ -87,6 +87,7 @@
                       <object class="GtkTreeView" id="item-treeview">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="model">item-store</property>
                         <property name="headers_visible">False</property>
                         <property name="rules_hint">True</property>
                         <property name="enable_search">False</property>
@@ -590,7 +591,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <child>
-                      <object class="GtkImage" id="image4">
+                      <object class="GtkImage" id="image5">
                         <property name="visible">True</property>
                         <property name="stock">gtk-open</property>
                         <property name="icon-size">1</property>
@@ -612,7 +613,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkAlignment" id="alignment1">
+              <object class="GtkAlignment" id="alignment2">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
                 <property name="xscale">0</property>
@@ -622,7 +623,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <child>
-                      <object class="GtkImage" id="image5">
+                      <object class="GtkImage" id="image6">
                         <property name="visible">True</property>
                         <property name="stock">gtk-missing-image</property>
                         <property name="icon-size">5</property>
@@ -705,16 +706,16 @@
         <property name="visible">True</property>
         <property name="spacing">2</property>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkVBox" id="vbox2">
             <property name="visible">True</property>
             <property name="border_width">6</property>
             <property name="spacing">6</property>
             <child>
-              <object class="GtkHBox" id="hbox1">
+              <object class="GtkHBox" id="hbox4">
                 <property name="visible">True</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkLabel" id="label1">
+                  <object class="GtkLabel" id="label4">
                     <property name="visible">True</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">_Search:</property>
@@ -751,6 +752,7 @@
                   <object class="GtkTreeView" id="add-treeview">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="model">add-store-filter</property>
                     <property name="headers_visible">False</property>
                     <property name="rules_hint">True</property>
                     <property name="enable_search">False</property>
