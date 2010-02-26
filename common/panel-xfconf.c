@@ -151,6 +151,21 @@ panel_properties_channel_destroyed (gpointer  user_data,
 
 
 
+XfconfChannel *
+panel_properties_get_channel (void)
+{
+  static XfconfChannel *channel = NULL;
+
+  if (G_UNLIKELY (channel == NULL))
+    channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
+  else
+    g_object_ref (G_OBJECT (channel));
+
+  return channel;
+}
+
+
+
 void
 panel_properties_bind (XfconfChannel       *channel,
                        GObject             *object,
