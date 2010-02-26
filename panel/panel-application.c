@@ -1040,7 +1040,7 @@ panel_application_save (PanelApplication *application,
       /* create property name */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
 
-      /* only cleanup and continue if there are not children */
+      /* only cleanup and continue if there are no children */
       if (G_UNLIKELY (children == NULL))
         {
           xfconf_channel_reset_property (channel, buf, FALSE);
@@ -1241,6 +1241,11 @@ panel_application_new_window (PanelApplication *application,
 
   /* add the xfconf bindings */
   panel_application_xfconf_window_bindings (application, PANEL_WINDOW (window), FALSE);
+
+  /* make sure the position of the panel is always saved else
+   * the new window won't be visible on restart */
+  if (new_window)
+    g_object_notify (G_OBJECT (window), "position");
 
   return PANEL_WINDOW (window);
 }
