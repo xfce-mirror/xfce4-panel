@@ -50,8 +50,7 @@
 
 
 static void      panel_application_finalize           (GObject                *object);
-static void      panel_application_load               (PanelApplication       *application,
-                                                       GHashTable             *hash_table);
+static void      panel_application_load               (PanelApplication       *application);
 static void      panel_application_plugin_move        (GtkWidget              *item,
                                                        PanelApplication       *application);
 static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
@@ -139,17 +138,17 @@ enum
 
 static const GtkTargetEntry drag_targets[] =
 {
-  { (gchar *) "xfce-panel/plugin-widget",
+  { "xfce-panel/plugin-widget",
     GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
 };
 
 static const GtkTargetEntry drop_targets[] =
 {
-  { (gchar *) "xfce-panel/plugin-name",
+  { "xfce-panel/plugin-name",
     GTK_TARGET_SAME_APP, TARGET_PLUGIN_NAME },
-  { (gchar *) "xfce-panel/plugin-widget",
+  { "xfce-panel/plugin-widget",
     GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET },
-  { (gchar *) "text/uri-list",
+  { "text/uri-list",
     GTK_TARGET_OTHER_APP, TARGET_TEXT_URI_LIST }
 };
 
@@ -173,9 +172,7 @@ panel_application_class_init (PanelApplicationClass *klass)
 static void
 panel_application_init (PanelApplication *application)
 {
-  PanelWindow  *window;
-  GHashTable   *hash_table;
-  const GValue *value;
+  PanelWindow *window;
 
   /* initialize */
   application->windows = NULL;
@@ -188,26 +185,15 @@ panel_application_init (PanelApplication *application)
   /* get the xfconf channel */
   application->xfconf = panel_properties_get_channel ();
 
-  /* get all the panel properties */
-  hash_table = xfconf_channel_get_properties (application->xfconf, NULL);
-
-  if (G_LIKELY (hash_table != NULL))
-    {
-      /* check if we need to force all plugins to run external */
-      value = g_hash_table_lookup (hash_table, "/force-all-external");
-      if (value != NULL && g_value_get_boolean (value))
-        panel_module_factory_force_all_external ();
-
-      /* set the shared hash table */
-      panel_properties_shared_hash_table (hash_table);
-    }
+  /* check if we need to force all plugins to run external */
+  if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
+    panel_module_factory_force_all_external ();
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
 
   /* load setup */
-  if (G_LIKELY (hash_table != NULL))
-    panel_application_load (application, hash_table);
+  panel_application_load (application);
 
   /* start the autosave timeout */
   panel_application_save_reschedule (application);
@@ -215,15 +201,6 @@ panel_application_init (PanelApplication *application)
   /* create empty window */
   if (G_UNLIKELY (application->windows == NULL))
     window = panel_application_new_window (application, NULL, TRUE);
-
-  if (G_LIKELY (hash_table != NULL))
-    {
-      /* unset the shared hash table */
-      panel_properties_shared_hash_table (NULL);
-
-      /* cleanup */
-      g_hash_table_destroy (hash_table);
-    }
 }
 
 
@@ -302,25 +279,22 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
 
 static void
-panel_application_load (PanelApplication *application,
-                        GHashTable       *hash_table)
+panel_application_load (PanelApplication *application)
 {
-  const GValue *value;
   PanelWindow  *window;
   guint         i, j, n_panels;
   gchar         buf[50];
-  const gchar  *name;
+  gchar        *name;
   gint          unique_id;
   GdkScreen    *screen;
   GPtrArray    *array;
+  const GValue *value;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
-  panel_return_if_fail (hash_table != NULL);
 
   /* walk all the panel in the configuration */
-  value = g_hash_table_lookup (hash_table, "/panels");
-  n_panels = value != NULL ? g_value_get_uint (value) : 0;
+  n_panels = xfconf_channel_get_uint (application->xfconf, "/panels", 0);
   for (i = 0; i < n_panels; i++)
     {
       /* create a new window */
@@ -328,30 +302,27 @@ panel_application_load (PanelApplication *application,
       screen = gtk_window_get_screen (GTK_WINDOW (window));
 
       /* walk all the plugins on the panel */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
-      value = g_hash_table_lookup (hash_table, buf);
-      array = value ? g_value_get_boxed (value) : NULL;
-      if (value == NULL || array->len % 2 != 0)
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
+      array = xfconf_channel_get_arrayv (application->xfconf, buf);
+      if (array == NULL)
         continue;
 
       /* walk the array in pairs of two */
-      for (j = 0; j < array->len; j += 2)
+      for (j = 0; j < array->len; j++)
         {
-          /* get the plugin module name */
-          value = g_ptr_array_index (array, j);
-          name = value != NULL ? g_value_get_string (value) : NULL;
-          if (G_UNLIKELY (name == NULL))
-            continue;
-
           /* get the plugin id */
-          value = g_ptr_array_index (array, j + 1);
-          unique_id = value != NULL ? g_value_get_int (value) : -1;
-          if (G_UNLIKELY (unique_id < 1))
-            continue;
+          value = g_ptr_array_index (array, j);
+          panel_assert (value != NULL);
+          unique_id = g_value_get_int (value);
+
+          /* get the plugin name */
+          g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", unique_id);
+          name = xfconf_channel_get_string (application->xfconf, buf, NULL);
 
           /* append the plugin to the panel */
-          if (!panel_application_plugin_insert (application, window, screen,
-                                                name, unique_id, NULL, -1))
+          if (unique_id < 1 || name == NULL
+              || !panel_application_plugin_insert (application, window, screen,
+                                                   name, unique_id, NULL, -1))
             {
               /* plugin could not be loaded, remove it from the channel */
               g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
@@ -361,6 +332,8 @@ panel_application_load (PanelApplication *application,
               g_critical (_("Plugin \"%s-%d\" was not found and has been "
                           "removed from the configuration"), name, unique_id);
             }
+
+          g_free (name);
         }
     }
 }
@@ -1037,12 +1010,10 @@ panel_application_save (PanelApplication *application,
       itembar = gtk_bin_get_child (GTK_BIN (li->data));
       children = gtk_container_get_children (GTK_CONTAINER (itembar));
 
-      /* create property name */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
-
       /* only cleanup and continue if there are no children */
       if (G_UNLIKELY (children == NULL))
         {
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
           xfconf_channel_reset_property (channel, buf, FALSE);
           continue;
         }
@@ -1055,13 +1026,6 @@ panel_application_save (PanelApplication *application,
         {
           provider = XFCE_PANEL_PLUGIN_PROVIDER (lp->data);
 
-          /* add plugin name to the array */
-          value = g_new0 (GValue, 1);
-          g_value_init (value, G_TYPE_STRING);
-          g_value_set_static_string (value,
-              xfce_panel_plugin_provider_get_name (provider));
-          g_ptr_array_add (array, value);
-
           /* add plugin id to the array */
           value = g_new0 (GValue, 1);
           g_value_init (value, G_TYPE_INT);
@@ -1069,12 +1033,17 @@ panel_application_save (PanelApplication *application,
               xfce_panel_plugin_provider_get_unique_id (provider));
           g_ptr_array_add (array, value);
 
+          /* make sure the plugin type is store in the plugin item */
+          g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", g_value_get_int (value));
+          xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_name (provider));
+
           /* ask the plugin to save */
           if (save_plugin_providers)
             xfce_panel_plugin_provider_save (provider);
         }
 
       /* store the plugins for this panel */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
       xfconf_channel_set_arrayv (channel, buf, array);
 
       /* cleanup */
