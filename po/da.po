@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 18:00+0100\n"
-"PO-Revision-Date: 2010-02-16 22:09+0100\n"
+"POT-Creation-Date: 2010-02-17 18:00+0100\n"
+"PO-Revision-Date: 2010-02-17 21:19+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "X-Poedit-Language: Danish\n"
 "X-Poedit-Country: DENMARK\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
@@ -226,7 +227,7 @@ msgstr "Udvicelsesmodul \"%s\" forlod uventet panelet. Vil du genstarte det?"
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
-msgid "The plugin restarted more then once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Udvidelsesmodulet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker 'Kør' vil panelet prøve at genstarte udvidelsesmodulet ellers vil det blive permanent fjernet fra panelet."
 
 #: ../panel/panel-item-dialog.c:173
@@ -320,67 +321,68 @@ msgstr "Ele_menter"
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
-msgid "Measurements"
-msgstr ""
-
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:12
+msgid "Measurements"
+msgstr "Dimensioner til panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "O_utput:"
 msgstr "Ud_data:"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Vælg denne indstilling for af brede panelet ud over flere skærme."
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Vælg denne indstilling for at skjule panelet når markøren ikke er over det. Dette virker kun, når panelet er hæftet til en skærmkant."
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Span mo_nitors"
 msgstr "Udbred på _skærme"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Transparency"
 msgstr "Gennemsigtighed"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr "Gennemsigtigt når markøren svæver over panelet."
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr "Gennemsigtigt når markøren ikke svæver over panelet."
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "_Enter:"
 msgstr "_Indtast:"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "_Leave:"
 msgstr "_Forlad:"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "_Lock panel"
 msgstr "_Lås panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "_Orientation:"
 msgstr "_Orientering:"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "_Size (pixels):"
 msgstr "_Størrelse (pixels):"
 
@@ -487,185 +489,249 @@ msgstr "Vis _sekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#: ../plugins/clock/clock-dialog.glade.h:10
-msgid "F_uzziness:"
-msgstr ""
-
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
+msgid "F_uzziness:"
+msgstr "I_ntervaller:"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time seperators"
 msgstr "B_linkende linjeskillere"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fuzzy"
-msgstr ""
-
 #: ../plugins/clock/clock-dialog.glade.h:13
+msgid "Fuzzy"
+msgstr "Interval"
+
+#: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
 msgstr "LCD"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
 msgstr "_Vis AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
 msgstr "Vis _ramme"
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:18
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr "Formatet beskriver dato- og tidsdele som skal indsættes i filnavnet. Som eksempel, %Y vil blive erstattet med året, %m med måneden og %d med dagen. Gennemlæs dokumentationen for datohjælpeprogrammet for yderligere information."
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "True _binary clock"
 msgstr "Ægte _binært ur"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid "_Layout:"
 msgstr "_Layout:"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "_Tooltip format:"
 msgstr "_Værktøjstipformat:"
 
-#: ../plugins/clock/clock-fuzzy.c:80
+#: ../plugins/clock/clock-fuzzy.c:84
 msgid "Night"
 msgstr "Nat"
 
-#: ../plugins/clock/clock-fuzzy.c:80
+#: ../plugins/clock/clock-fuzzy.c:85
 msgid "Early morning"
 msgstr "Tidlig morgen"
 
-#: ../plugins/clock/clock-fuzzy.c:81
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Morning"
 msgstr "Morgen"
 
-#: ../plugins/clock/clock-fuzzy.c:81
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Almost noon"
 msgstr "Før middag"
 
-#: ../plugins/clock/clock-fuzzy.c:82
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Noon"
 msgstr "Middag"
 
-#: ../plugins/clock/clock-fuzzy.c:82
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Afternoon"
 msgstr "Efter middag"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Evening"
 msgstr "Aften"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Late evening"
 msgstr "Sen aften"
 
-#: ../plugins/clock/clock-fuzzy.c:88
-#, c-format
-msgid "five past %s"
-msgstr "5 minutter over %s"
-
-#: ../plugins/clock/clock-fuzzy.c:88
-#, c-format
-msgid "ten past %s"
-msgstr "10 minutter over %s"
-
-#: ../plugins/clock/clock-fuzzy.c:89
-#, c-format
-msgid "quarter past %s"
-msgstr "et kvarter over %s"
-
-#: ../plugins/clock/clock-fuzzy.c:89
-#, c-format
-msgid "twenty past %s"
-msgstr "20 minutter over %s"
-
-#: ../plugins/clock/clock-fuzzy.c:90
-#, c-format
-msgid "twenty five past %s"
-msgstr "25 minutter over %s"
-
-#: ../plugins/clock/clock-fuzzy.c:90
-#, c-format
-msgid "half past %s"
-msgstr "halv time over %s"
-
-#: ../plugins/clock/clock-fuzzy.c:91
-#, c-format
-msgid "twenty five to %s"
-msgstr "25 minutter i %s"
-
-#: ../plugins/clock/clock-fuzzy.c:91
-#, c-format
-msgid "twenty to %s"
-msgstr "20 minutter i %s"
-
-#: ../plugins/clock/clock-fuzzy.c:92
-#, c-format
-msgid "quarter to %s"
-msgstr "et kvarter i %s"
-
-#: ../plugins/clock/clock-fuzzy.c:92
-#, c-format
-msgid "ten to %s"
-msgstr "10 minutter i %s"
-
-#: ../plugins/clock/clock-fuzzy.c:93
-#, c-format
-msgid "five to %s"
-msgstr "5 minutter i %s"
-
-#: ../plugins/clock/clock-fuzzy.c:93
-#, c-format
-msgid "%s o'clock"
-msgstr "klokken er %s"
-
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:98
+#, c-format
+msgid "%0 o'clock"
+msgstr "klokken er %0 o"
+
+#: ../plugins/clock/clock-fuzzy.c:99
+msgid "five past %0"
+msgstr "5 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:100
+msgid "ten past %0"
+msgstr "10 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:101
+msgid "quarter past %0"
+msgstr "et kvarter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:102
+msgid "twenty past %0"
+msgstr "20 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:103
+msgid "twenty five past %0"
+msgstr "25 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:104
+msgid "half past %0"
+msgstr "30 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:105
+msgid "twenty five to %1"
+msgstr "25 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:106
+msgid "twenty to %1"
+msgstr "20 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:107
+msgid "quarter to %1"
+msgstr "et kvarter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:108
+msgid "ten to %1"
+msgstr "10 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:109
+msgid "five to %1"
+msgstr "5 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:110
+msgid "%1 o'clock"
+msgstr "klokken er %1"
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: ../plugins/clock/clock-fuzzy.c:117
+#, c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr "klokken er %0 o"
+
+#: ../plugins/clock/clock-fuzzy.c:118
+msgctxt "one"
+msgid "five past %0"
+msgstr "5 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:119
+msgctxt "one"
+msgid "ten past %0"
+msgstr "10 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:120
+msgctxt "one"
+msgid "quarter past %0"
+msgstr "et kvarter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:121
+msgctxt "one"
+msgid "twenty past %0"
+msgstr "20 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:122
+msgctxt "one"
+msgid "twenty five past %0"
+msgstr "25 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:123
+msgctxt "one"
+msgid "half past %0"
+msgstr "30 minutter over %0"
+
+#: ../plugins/clock/clock-fuzzy.c:124
+msgctxt "one"
+msgid "twenty five to %1"
+msgstr "25 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:125
+msgctxt "one"
+msgid "twenty to %1"
+msgstr "20 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:126
+msgctxt "one"
+msgid "quarter to %1"
+msgstr "et kvarter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:127
+msgctxt "one"
+msgid "ten to %1"
+msgstr "10 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:128
+msgctxt "one"
+msgid "five to %1"
+msgstr "5 minutter i %1"
+
+#: ../plugins/clock/clock-fuzzy.c:129
+msgctxt "one"
+msgid "%1 o'clock"
+msgstr "klokken er %1"
+
+#: ../plugins/clock/clock-fuzzy.c:134
 msgid "one"
 msgstr "et"
 
-#: ../plugins/clock/clock-fuzzy.c:98
+#: ../plugins/clock/clock-fuzzy.c:135
 msgid "two"
 msgstr "to"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:136
 msgid "three"
 msgstr "tre"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:137
 msgid "four"
 msgstr "fire"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "five"
 msgstr "fem"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "six"
 msgstr "seks"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "seven"
 msgstr "syv"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "eight"
 msgstr "otte"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "nine"
 msgstr "ni"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "ten"
 msgstr "ti"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "eleven"
 msgstr "elleve"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "twelve"
 msgstr "tolv"
 
@@ -833,15 +899,15 @@ msgstr "Vest"
 msgid "_Arrow button position:"
 msgstr "Position af p_ilknap:"
 
-#: ../plugins/launcher/launcher.c:1424
+#: ../plugins/launcher/launcher.c:1445
 msgid "Unnamed Item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher.c:1564
+#: ../plugins/launcher/launcher.c:1585
 msgid "No items"
 msgstr "Ingen elementer"
 
-#: ../plugins/launcher/launcher.c:2078
+#: ../plugins/launcher/launcher.c:2099
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommando \"%s\"."
