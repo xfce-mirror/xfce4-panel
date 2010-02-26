@@ -1,122 +1,108 @@
-/*  $Id: launcher.h 26065 2007-09-10 12:04:49Z nick $
+/* $Id$ */
+/*
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
  *
- *  Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
- *  Copyright (c) 2006-2007 Nick Schermer <nick@xfce.org>
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __XFCE_PANEL_LAUNCHER_H__
-#define __XFCE_PANEL_LAUNCHER_H__
+#ifndef __XFCE_TEST_PLUGIN_H__
+#define __XFCE_TEST_PLUGIN_H__
 
 #include <gtk/gtk.h>
-#include <exo/exo.h>
 #include <libxfce4panel/libxfce4panel.h>
 
-#define BORDER                     (8)
-#define LAUNCHER_NEW_TOOLTIP_API   (GTK_CHECK_VERSION (2,11,6))
-#define LAUNCHER_ARROW_SIZE        (16)
-#define LAUNCHER_POPUP_DELAY       (225)
-#define LAUNCHER_TOOLTIP_SIZE      (32)
-#define LAUNCHER_MENU_SIZE	       (24)
-#define LAUNCHER_STARTUP_TIMEOUT   (30 * 1000)
-#define LAUNCHER_TREE_ICON_SIZE    (24)
-#define LAUNCHER_CHOOSER_ICON_SIZE (48)
+G_BEGIN_DECLS
 
-/* frequently used code */
-#define launcher_free_filenames(list) G_STMT_START{ \
-    g_slist_foreach (list, (GFunc) g_free, NULL); \
-    g_slist_free (list); \
-    }G_STMT_END
+typedef struct _XfceTestPluginClass    XfceTestPluginClass;
+typedef struct _XfceTestPlugin         XfceTestPlugin;
+typedef struct _XfceTestPluginEntry    XfceTestPluginEntry;
+typedef enum   _XfceTestPluginArrowPos XfceTestPluginArrowPos;
 
+#define XFCE_TYPE_TEST_PLUGIN            (xfce_test_plugin_get_type ())
+#define XFCE_TEST_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TEST_PLUGIN, XfceTestPlugin))
+#define XFCE_TEST_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_TEST_PLUGIN, XfceTestPluginClass))
+#define XFCE_IS_TEST_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_TEST_PLUGIN))
+#define XFCE_IS_TEST_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_TEST_PLUGIN))
+#define XFCE_TEST_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_TEST_PLUGIN, XfceTestPluginClass))
 
-typedef struct _LauncherEntry  LauncherEntry;
-typedef struct _LauncherPlugin LauncherPlugin;
+#define LIST_HAS_ONE_ENTRY(list)         ((list) != NULL && (list)->next == NULL)
+#define LIST_HAS_TWO_OR_MORE_ENTRIES     ((list) != NULL && (list)->next != NULL)
 
-struct _LauncherEntry
+struct _XfceTestPluginClass
 {
-    gchar    *name;
-    gchar    *comment;
-    gchar    *exec;
-    gchar    *path;
-    gchar    *icon;
+  XfcePanelPluginClass __parent__;
+};
 
-    guint     terminal : 1;
+struct _XfceTestPlugin
+{
+  XfcePanelPlugin __parent__;
+
+  /* settings */
+  guint                   move_clicked_to_button : 1;
+  guint                   disable_tooltips : 1;
+  guint                   show_labels : 1;
+  XfceTestPluginArrowPos  arrow_position;
+
+  /* list of entries in the launcher */
+  GList                  *entries;
+  
+  /* store the icon theme */
+  GtkIconTheme           *icon_theme;
+
+  /* plugin widgets */
+  GtkWidget              *box;
+  GtkWidget              *icon_button;
+  GtkWidget              *arrow_button;
+  GtkWidget              *image;
+  GtkWidget              *menu;
+
+  /* delayout menu popup */
+  guint                   popup_timeout_id;
+
+  /* whether the menu appends in revered order */
+  guint                   menu_reversed_order : 1;
+};
+
+struct _XfceTestPluginEntry
+{
+  gchar *name;
+  gchar *comment;
+  gchar *exec;
+  gchar *icon;
+  gchar *path;
+
+  guint  terminal : 1;
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    guint     startup : 1;
+  guint  startup_notify : 1;
 #endif
 };
 
-struct _LauncherPlugin
+enum _XfceTestPluginArrowPos
 {
-    /* panel plugin */
-    XfcePanelPlugin *panel_plugin;
-
-    /* whether saving is allowed */
-    guint            plugin_can_save : 1;
-
-    /* list of launcher entries */
-    GList           *entries;
-
-    /* panel widgets */
-    GtkWidget       *box;
-    GtkWidget       *icon_button;
-    GtkWidget       *arrow_button;
-    GtkWidget       *image;
-    GtkWidget       *menu;
-#if !LAUNCHER_NEW_TOOLTIP_API
-    GtkTooltips     *tips;
-#endif
-
-    /* event source ids */
-    guint            popup_timeout_id;
-    guint            theme_timeout_id;
-
-    /* settings */
-    guint            move_first : 1;
-    guint            arrow_position;
+  ARROW_POS_DEFAULT,
+  ARROW_POS_LEFT,
+  ARROW_POS_RIGHT,
+  ARROW_POS_TOP,
+  ARROW_POS_BOTTOM,
+  ARROW_POS_INSIDE_BUTTON  
 };
 
-enum
-{
-    LAUNCHER_ARROW_DEFAULT = 0,
-    LAUNCHER_ARROW_LEFT,
-    LAUNCHER_ARROW_RIGHT,
-    LAUNCHER_ARROW_TOP,
-    LAUNCHER_ARROW_BOTTOM,
-    LAUNCHER_ARROW_INSIDE_BUTTON
-};
+GType      xfce_test_plugin_get_type (void) G_GNUC_CONST;
 
-/* target types for dropping in the launcher plugin */
-static const GtkTargetEntry drop_targets[] =
-{
-    { "text/uri-list", 0, 0, },
-};
+void       xfce_test_plugin_rebuild  (XfceTestPlugin *plugin, gboolean update_icon);
 
+GdkPixbuf *xfce_test_plugin_load_pixbuf (const gchar *name, gint size, GtkIconTheme *icon_theme);
 
+G_END_DECLS
 
-GSList        *launcher_utility_filenames_from_selection_data (GtkSelectionData *selection_data) G_GNUC_MALLOC;
-GdkPixbuf     *launcher_utility_load_pixbuf                   (GdkScreen        *screen,
-                                                               const gchar      *name,
-                                                               guint             size) G_GNUC_MALLOC;
-LauncherEntry *launcher_entry_new                             (void) G_GNUC_MALLOC;
-void           launcher_entry_free                            (LauncherEntry    *entry,
-                                                               LauncherPlugin   *launcher);
-void           launcher_plugin_rebuild                        (LauncherPlugin   *launcher,
-                                                               gboolean          update_icon);
-void           launcher_plugin_read                           (LauncherPlugin   *launcher);
-void           launcher_plugin_save                           (LauncherPlugin   *launcher);
-
-#endif /* !__XFCE_PANEL_LAUNCHER_H__ */
+#endif /* !__XFCE_TEST_PLUGIN_H__ */
