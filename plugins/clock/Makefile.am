@@ -51,7 +51,8 @@ libclock_la_LIBADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(EXO_LIBS) \
-	$(XFCONF_LIBS)
+	$(XFCONF_LIBS) \
+	-lm
 
 libclock_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \

@@ -64,7 +64,8 @@ libxfce4panel_1_0_la_LDFLAGS = \
 
 libxfce4panel_1_0_la_LIBADD = \
 	$(GTK_LIBS) \
-	$(LIBXFCE4UTIL_LIBS)
+	$(LIBXFCE4UTIL_LIBS) \
+	-lm
 
 #
 # Pkg-config file

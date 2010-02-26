@@ -71,7 +71,8 @@ xfce4_panel_LDADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(XFCONF_LIBS) \
-	$(DBUS_LIBS)
+	$(DBUS_LIBS) \
+	-lm
 
 xfce4_panel_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
