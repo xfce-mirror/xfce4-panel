@@ -1329,7 +1329,7 @@ panel_window_paint_handle (PanelWindow  *window,
   GtkWidget     *widget = GTK_WIDGET (window);
   GtkAllocation *alloc  = &(widget->allocation);
   gint           x, y, width, height;
-  gint           i, xx, yy;
+  guint          i, xx, yy;
   GdkColor      *color;
   gdouble        alpha;
 
@@ -1379,8 +1379,8 @@ panel_window_paint_handle (PanelWindow  *window,
       xfce_panel_cairo_set_source_rgba (cr, color, alpha);
 
       /* draw the dots */
-      for (xx = 0; xx < width; xx += 3)
-        for (yy = 0; yy < height; yy += 3)
+      for (xx = 0; xx < (guint) width; xx += 3)
+        for (yy = 0; yy < (guint) height; yy += 3)
           cairo_rectangle (cr, x + xx, y + yy, i, i);
 
       /* fill the rectangles */
