@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include <gio/gio.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/libxfce4panel.h>

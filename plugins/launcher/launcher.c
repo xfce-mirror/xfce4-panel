@@ -24,6 +24,7 @@
 #include <string.h>
 #endif
 
+#include <gio/gio.h>
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
