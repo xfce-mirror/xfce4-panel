@@ -101,7 +101,7 @@ xfce_scaled_image_init (XfceScaledImage *image)
   image->pixbuf = NULL;
   image->icon_name = NULL;
   image->cache = NULL;
-  image->size = -1;
+  image->width = -1;
   image->height = -1;
 }
 
@@ -262,7 +262,7 @@ xfce_scaled_image_update_cache (XfceScaledImage *image)
       /* get a pixbuf from the icon name */
       pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_for_screen (screen),
                                          image->icon_name,
-                                         MIN (dest_width, dest_height),
+                                         MIN (image->width, image->height),
                                          0, NULL);
     }
     
