@@ -37,6 +37,7 @@
 
 #define SEPARATOR_OFFSET (0.15)
 #define SEPARATOR_SIZE   (8)
+#define DOTS_SIZE        (6)
 
 
 
@@ -93,6 +94,15 @@ enum
   PROP_0,
   PROP_STYLE,
   PROP_EXPAND
+};
+
+
+
+static const gchar bits[3][6] =
+{
+  { 0x00, 0x0e, 0x02, 0x02, 0x00, 0x00 }, /* dark */
+  { 0x00, 0x00, 0x10, 0x10, 0x1c, 0x00 }, /* light */
+  { 0x00, 0x00, 0x0c, 0x0c, 0x00, 0x00 }  /* mid */
 };
 
 
@@ -216,6 +226,12 @@ separator_plugin_expose_event (GtkWidget      *widget,
 {
   SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (widget);
   GtkAllocation   *alloc = &(widget->allocation);
+  GdkBitmap       *bmap;
+  GdkGC           *gc;
+  GtkStateType     state = GTK_WIDGET_STATE (widget);
+  gint             x, y, w, h;
+  gint             rows, cols;
+  guint            i;
 
   switch (plugin->style)
     {
@@ -230,7 +246,7 @@ separator_plugin_expose_event (GtkWidget      *widget,
           {
             gtk_paint_vline (widget->style,
                              widget->window,
-                             GTK_WIDGET_STATE (widget),
+                             state,
                              &(event->area),
                              widget, "separator",
                              alloc->y + alloc->height * SEPARATOR_OFFSET,
@@ -241,7 +257,7 @@ separator_plugin_expose_event (GtkWidget      *widget,
           {
             gtk_paint_hline (widget->style,
                              widget->window,
-                             GTK_WIDGET_STATE (widget),
+                             state,
                              &(event->area),
                              widget, "separator",
                              alloc->x + alloc->width * SEPARATOR_OFFSET,
@@ -253,7 +269,7 @@ separator_plugin_expose_event (GtkWidget      *widget,
       case SEPARATOR_PLUGIN_STYLE_HANDLE:
         gtk_paint_handle (widget->style,
                           widget->window,
-                          GTK_WIDGET_STATE (widget),
+                          state,
                           GTK_SHADOW_NONE,
                           &(event->area),
                           widget, "handlebox",
@@ -266,7 +282,51 @@ separator_plugin_expose_event (GtkWidget      *widget,
         break;
 
       case SEPARATOR_PLUGIN_STYLE_DOTS:
-        /* TODO */
+        if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+            GTK_ORIENTATION_HORIZONTAL)
+          {
+            rows = MAX (alloc->height / DOTS_SIZE, 1);
+            w = DOTS_SIZE;
+            h = rows * DOTS_SIZE;
+          }
+        else
+          {
+            cols = MAX (alloc->width / DOTS_SIZE, 1);
+            h = DOTS_SIZE;
+            w = cols * DOTS_SIZE;
+          }
+
+        x = alloc->x + (alloc->width - w) / 2;
+        y = alloc->y + (alloc->height - h) / 2;
+
+        for (i = 0; i < G_N_ELEMENTS (bits); i++)
+          {
+            /* pick color, but be same order as bits array */
+            if (i == 0)
+              gc = widget->style->dark_gc[state];
+            else if (i == 1)
+              gc = widget->style->light_gc[state];
+            else
+              gc = widget->style->mid_gc[state];
+
+            /* clip to drawing area */
+            gdk_gc_set_clip_rectangle (gc, &(event->area));
+
+            /* set the stipple for the gc */
+            bmap = gdk_bitmap_create_from_data (widget->window, bits[i],
+                                                DOTS_SIZE, DOTS_SIZE);
+            gdk_gc_set_stipple (gc, bmap);
+            gdk_gc_set_fill (gc, GDK_STIPPLED);
+            g_object_unref (G_OBJECT (bmap));
+
+            /* draw the dots */
+            gdk_gc_set_ts_origin (gc, x, y);
+            gdk_draw_rectangle (widget->window, gc, TRUE, x, y, w, h);
+            gdk_gc_set_fill (gc, GDK_SOLID);
+
+            /* unset the clip */
+            gdk_gc_set_clip_rectangle (gc, NULL);
+          }
         break;
     }
 
