@@ -698,17 +698,17 @@ window_menu_plugin_windows_connect (WindowMenuPlugin *plugin,
   g_signal_connect (G_OBJECT (plugin->screen), "window-closed",
       G_CALLBACK (window_menu_plugin_window_closed), plugin);
 
-  if (traverse_windows)
+  if (!traverse_windows)
+    return;
+
+  /* connect the state changed signal to all windows */
+  windows = wnck_screen_get_windows (plugin->screen);
+  for (li = windows; li != NULL; li = li->next)
     {
-      /* connect the state changed signal to all windows */
-      windows = wnck_screen_get_windows (plugin->screen);
-      for (li = windows; li != NULL; li = li->next)
-        {
-          panel_return_if_fail (WNCK_IS_WINDOW (li->data));
-          window_menu_plugin_window_opened (plugin->screen,
-                                            WNCK_WINDOW (li->data),
-                                            plugin);
-        }
+      panel_return_if_fail (WNCK_IS_WINDOW (li->data));
+      window_menu_plugin_window_opened (plugin->screen,
+                                        WNCK_WINDOW (li->data),
+                                        plugin);
     }
 }
 
