@@ -250,7 +250,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   icon_theme = gtk_icon_theme_get_default ();
   if (G_LIKELY (icon_theme != NULL))
     g_signal_connect (G_OBJECT (icon_theme), "changed",
-                      G_CALLBACK (launcher_plugin_icon_theme_changed), plugin);
+        G_CALLBACK (launcher_plugin_icon_theme_changed), plugin);
 
   /* create the panel widgets */
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
@@ -260,23 +260,24 @@ launcher_plugin_init (LauncherPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->button, TRUE, TRUE, 0);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_widget_set_has_tooltip (plugin->button, TRUE);
-  gtk_drag_dest_set (plugin->button, GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
+  gtk_drag_dest_set (plugin->button,
+                     GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
                      drop_targets, G_N_ELEMENTS (drop_targets),
                      GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
-                    G_CALLBACK (launcher_plugin_button_press_event), plugin);
+      G_CALLBACK (launcher_plugin_button_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "button-release-event",
-                    G_CALLBACK (launcher_plugin_button_release_event), plugin);
+      G_CALLBACK (launcher_plugin_button_release_event), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "query-tooltip",
-                    G_CALLBACK (launcher_plugin_button_query_tooltip), plugin);
+      G_CALLBACK (launcher_plugin_button_query_tooltip), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-data-received",
-                    G_CALLBACK (launcher_plugin_button_drag_data_received), plugin);
+      G_CALLBACK (launcher_plugin_button_drag_data_received), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-motion",
-                    G_CALLBACK (launcher_plugin_button_drag_motion), plugin);
+      G_CALLBACK (launcher_plugin_button_drag_motion), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-leave",
-                    G_CALLBACK (launcher_plugin_button_drag_leave), plugin);
+      G_CALLBACK (launcher_plugin_button_drag_leave), plugin);
   g_signal_connect_after (G_OBJECT (plugin->button), "expose-event",
-                          G_CALLBACK (launcher_plugin_button_expose_event), plugin);
+      G_CALLBACK (launcher_plugin_button_expose_event), plugin);
 
   plugin->child = xfce_scaled_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
@@ -289,19 +290,17 @@ launcher_plugin_init (LauncherPlugin *plugin)
                      drop_targets, G_N_ELEMENTS (drop_targets),
                      GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->arrow), "button-press-event",
-                    G_CALLBACK (launcher_plugin_arrow_press_event), plugin);
+      G_CALLBACK (launcher_plugin_arrow_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-motion",
-                    G_CALLBACK (launcher_plugin_arrow_drag_motion), plugin);
+      G_CALLBACK (launcher_plugin_arrow_drag_motion), plugin);
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-leave",
-                    G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
+      G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
 
   /* sync button states */
   g_signal_connect (G_OBJECT (plugin->button), "state-changed",
-                    G_CALLBACK (launcher_plugin_button_state_changed),
-                    plugin->arrow);
+      G_CALLBACK (launcher_plugin_button_state_changed), plugin->arrow);
   g_signal_connect (G_OBJECT (plugin->arrow), "state-changed",
-                    G_CALLBACK (launcher_plugin_button_state_changed),
-                    plugin->button);
+      G_CALLBACK (launcher_plugin_button_state_changed), plugin->button);
 }
 
 
@@ -343,7 +342,6 @@ launcher_plugin_get_property (GObject    *object,
 
       case PROP_SHOW_LABEL:
         g_value_set_boolean (value, plugin->show_label);
-
         break;
 
       case PROP_ARROW_POSITION:
@@ -416,7 +414,7 @@ launcher_plugin_set_property (GObject      *object,
                         menu = xfce_menu_new (SYSCONFDIR "/xdg/menus/launcher.menu", /* TODO */ NULL);
                       }
 
-                    /* lookup the (probably) desktop id in the pool */
+                    /* lookup the (hopefully) desktop id in the pool */
                     if (G_LIKELY (menu != NULL))
                       {
                         item = xfce_menu_item_pool_lookup (

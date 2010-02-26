@@ -665,7 +665,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
       window = gtk_builder_get_object (builder, "dialog");
       xfce_panel_plugin_take_window (XFCE_PANEL_PLUGIN (plugin), GTK_WINDOW (window));
       g_signal_connect (G_OBJECT (window), "response",
-                        G_CALLBACK (launcher_dialog_response), dialog);
+          G_CALLBACK (launcher_dialog_response), dialog);
 
       /* connect item buttons */
       for (i = 0; i < G_N_ELEMENTS (button_names); i++)
@@ -681,7 +681,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
       selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
       gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
       g_signal_connect (G_OBJECT (selection), "changed",
-                        G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
+          G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
       launcher_dialog_tree_selection_changed (selection, dialog);
 
       /* connect binding to the advanced properties */
@@ -696,15 +696,15 @@ launcher_dialog_show (LauncherPlugin *plugin)
       /* setup responses for the other dialogs */
       object = gtk_builder_get_object (builder, "dialog-editor");
       g_signal_connect (G_OBJECT (object), "response",
-                        G_CALLBACK (launcher_dialog_editor_response), dialog);
+          G_CALLBACK (launcher_dialog_editor_response), dialog);
       g_signal_connect (G_OBJECT (object), "delete-event",
-                        G_CALLBACK (exo_noop_true), NULL);
+          G_CALLBACK (exo_noop_true), NULL);
 
       object = gtk_builder_get_object (builder, "dialog-add");
       g_signal_connect (G_OBJECT (object), "response",
-                        G_CALLBACK (launcher_dialog_add_response), dialog);
+          G_CALLBACK (launcher_dialog_add_response), dialog);
       g_signal_connect (G_OBJECT (object), "delete-event",
-                        G_CALLBACK (exo_noop_true), NULL);
+          G_CALLBACK (exo_noop_true), NULL);
 
       /* enable sorting in the add dialog */
       object = gtk_builder_get_object (builder, "add-store");
@@ -716,7 +716,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
       selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
       gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
       g_signal_connect (G_OBJECT (selection), "changed",
-                        G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
+          G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
 
       /* setup search filter in the add dialog */
       object = gtk_builder_get_object (builder, "add-store-filter");
@@ -724,7 +724,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
       gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (object),
           launcher_dialog_add_visible_function, item, NULL);
       g_signal_connect_swapped (G_OBJECT (item), "changed",
-                                G_CALLBACK (gtk_tree_model_filter_refilter), object);
+          G_CALLBACK (gtk_tree_model_filter_refilter), object);
 
       /* setup the icon size in the icon renderers */
       object = gtk_builder_get_object (builder, "addrenderericon");
