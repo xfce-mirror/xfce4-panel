@@ -6,6 +6,7 @@ New features
 - Plugins can run both internal and external without recompiling.
   External plugins now run inside a wrapper program. As a result
   a lot of code has been removed from libxfce4panel.
+- Support for alpha transparent panels.
 
 
 Bugs Fixed
@@ -21,6 +22,6 @@ Bugs Fixed
        also properly allocated when the window is hidden.
 2955 : When opening the properties or add items dialog it
        appears on the correct screen.
-3748 : Panel desn't pick up changes made with XRandr. The
+3748 : Panel doesn't pick up changes made with XRandr. The
        monitor configuration is no longer stored and recalculated
        when the screen size or monitor number changes (GTK+ 2.13).
