@@ -265,7 +265,7 @@ main (gint argc, gchar **argv)
     }
 
   /* check for a plugin preinit function */
-  if (g_module_symbol (library, "__xpp_preinit", (gpointer) &preinit_func)
+  if (g_module_symbol (library, "xfce_panel_module_preinit", (gpointer) &preinit_func)
       && preinit_func != NULL
       && (*preinit_func) (argc, argv) == FALSE)
     {
