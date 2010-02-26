@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
  * Copyright (c) 2002      Anders Carlsson <andersca@gnu.org>
  * Copyright (c) 2003-2006 Vincent Untz

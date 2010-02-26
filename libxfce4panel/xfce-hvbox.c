@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
  * This file is partly based on OBox
  * Copyright (C) 2002      Red Hat Inc. based on GtkHBox

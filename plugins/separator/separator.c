@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
  * Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
  * Copyright (c) 2007-2009 Nick Schermer <nick@xfce.org>
