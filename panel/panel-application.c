@@ -149,8 +149,7 @@ static const GtkTargetEntry drop_targets[] =
     GTK_TARGET_SAME_APP, TARGET_PLUGIN_NAME },
   { "xfce-panel/plugin-widget",
     GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET },
-  { "text/uri-list",
-    GTK_TARGET_OTHER_APP, TARGET_TEXT_URI_LIST }
+  { "text/uri-list", 0, TARGET_TEXT_URI_LIST }
 };
 
 
