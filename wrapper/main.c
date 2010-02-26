@@ -94,15 +94,18 @@ dbus_gproxy_property_changed (DBusGProxy              *dbus_gproxy,
   switch (property)
     {
       case PROPERTY_CHANGED_PROVIDER_SIZE:
-        xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
+        xfce_panel_plugin_provider_set_size (provider, 
+                                             g_value_get_int (value));
         break;
 
       case PROPERTY_CHANGED_PROVIDER_ORIENTATION:
-        xfce_panel_plugin_provider_set_orientation (provider, g_value_get_uint (value));
+        xfce_panel_plugin_provider_set_orientation (provider, 
+                                                    g_value_get_uint (value));
         break;
 
       case PROPERTY_CHANGED_PROVIDER_SCREEN_POSITION:
-        xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_uint (value));
+        xfce_panel_plugin_provider_set_screen_position (provider,  
+                                                        g_value_get_uint (value));
         break;
 
       case PROPERTY_CHANGED_PROVIDER_EMIT_SAVE:
@@ -122,7 +125,8 @@ dbus_gproxy_property_changed (DBusGProxy              *dbus_gproxy,
         break;
 
       case PROPERTY_CHANGED_WRAPPER_SET_SENSITIVE:
-        gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
+        gtk_widget_set_sensitive (GTK_WIDGET (provider),  
+                                  g_value_get_boolean (value));
         break;
 
       case PROPERTY_CHANGED_WRAPPER_BACKGROUND_ALPHA:
@@ -131,7 +135,7 @@ dbus_gproxy_property_changed (DBusGProxy              *dbus_gproxy,
         break;
 
       default:
-        g_message ("External plugin '%s-%d' received unknown property '%d'.",
+        g_message ("External plugin \"%s-%d\" received unknown property \"%d\".",
                    wrapper_name, opt_unique_id, property);
         break;
     }
@@ -150,7 +154,8 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
   panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
   /* send the provider signal to the panel */
-  if (!wrapper_dbus_client_provider_signal (dbus_gproxy, opt_unique_id, provider_signal, &error))
+  if (!wrapper_dbus_client_provider_signal (dbus_gproxy, opt_unique_id, 
+                                            provider_signal, &error))
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
@@ -215,10 +220,12 @@ main (gint argc, gchar **argv)
     g_thread_init (NULL);
 
   /* initialize gtk */
-  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, (gchar *) GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), 
+                           option_entries, (gchar *) GETTEXT_PACKAGE, &error))
     {
       /* print error */
-      g_critical ("Failed to initialize GTK+: %s", error ? error->message : "Unable to open display");
+      g_critical ("Failed to initialize GTK+: %s", 
+                  error ? error->message : "Unable to open display");
 
       /* cleanup */
       if (G_LIKELY (error != NULL))
@@ -233,7 +240,7 @@ main (gint argc, gchar **argv)
       || g_file_test (opt_filename, G_FILE_TEST_EXISTS) == FALSE)
     {
       /* print error */
-      g_critical ("Unable to find plugin module '%s'.", opt_filename);
+      g_critical ("Unable to find plugin module \"%s\".", opt_filename);
 
       /* leave */
       return EXIT_FAILURE;
@@ -254,9 +261,10 @@ main (gint argc, gchar **argv)
 
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
   /* change the process name to something that makes sence */
-  g_snprintf (process_name, sizeof (process_name), "panel-%s-%d", wrapper_name, opt_unique_id);
+  g_snprintf (process_name, sizeof (process_name), "panel-%s-%d", 
+              wrapper_name, opt_unique_id);
   if (prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0) == -1)
-    g_critical ("Failed to set the process name to %s", process_name);
+    g_critical ("Failed to set the process name to \"%s\".", process_name);
 #endif
 
   /* try to connect to dbus */
@@ -285,8 +293,10 @@ main (gint argc, gchar **argv)
 			                  "',member='NameOwnerChanged'", NULL);
 
   /* get the dbus proxy for the plugin interface */
-  dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection, PANEL_DBUS_PLUGIN_INTERFACE,
-                                           PANEL_DBUS_PATH, PANEL_DBUS_PLUGIN_INTERFACE);
+  dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection, 
+                                           PANEL_DBUS_PLUGIN_INTERFACE,
+                                           PANEL_DBUS_PATH,
+                                           PANEL_DBUS_PLUGIN_INTERFACE);
   if (G_UNLIKELY (dbus_gproxy == NULL))
     {
       /* print error */
@@ -301,10 +311,11 @@ main (gint argc, gchar **argv)
     }
 
   /* setup signal for property changes */
-  dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_INT_BOXED, G_TYPE_NONE,
-                                     G_TYPE_INT, G_TYPE_INT, G_TYPE_VALUE, G_TYPE_INVALID);
-  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT, G_TYPE_INT,
-                           G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_INT_BOXED,
+                                     G_TYPE_NONE, G_TYPE_INT, G_TYPE_INT, 
+                                     G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT, 
+                           G_TYPE_INT, G_TYPE_VALUE, G_TYPE_INVALID);
 
   /* load the module and link the function */
   module = g_module_open (opt_filename, G_MODULE_BIND_LOCAL);
@@ -315,7 +326,8 @@ main (gint argc, gchar **argv)
           && !g_module_symbol (module, "__xpp_construct", (gpointer) &construct_func))
         {
           /* print error */
-          g_critical ("Plugin '%s-%d' lacks a plugin register function", wrapper_name, opt_unique_id);
+          g_critical ("Plugin \"%s-%d\" lacks a plugin register function", 
+                      wrapper_name, opt_unique_id);
 
           /* close the module */
           g_module_close (module);
@@ -327,7 +339,8 @@ main (gint argc, gchar **argv)
   else
     {
       /* print error */
-      g_critical ("Unable to load the plugin module '%s': %s.", wrapper_name, g_module_error ());
+      g_critical ("Unable to load the plugin module \"%s\": %s.", 
+                  wrapper_name, g_module_error ());
 
       /* leave */
       return EXIT_FAILURE;
@@ -346,11 +359,14 @@ main (gint argc, gchar **argv)
       g_object_set_qdata (G_OBJECT (provider), plug_quark, plug);
 
       /* connect provider signals, so we can send them to the panel through dbus */
-      g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
+      g_signal_connect (G_OBJECT (provider), "provider-signal", 
+                        G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
 
       /* connect dbus signal to set provider properties send from the panel */
-      dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_property_changed),
-                                   g_object_ref (provider), (GClosureNotify) g_object_unref);
+      dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged", 
+                                   G_CALLBACK (dbus_gproxy_property_changed),
+                                   g_object_ref (provider), 
+                                   (GClosureNotify) g_object_unref);
 
       /* show the plugin */
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
@@ -361,7 +377,8 @@ main (gint argc, gchar **argv)
       gtk_main ();
 
       /* disconnect signal */
-      dbus_g_proxy_disconnect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_property_changed), provider);
+      dbus_g_proxy_disconnect_signal (dbus_gproxy, "PropertyChanged", 
+          G_CALLBACK (dbus_gproxy_property_changed), provider);
 
       /* destroy the plug and provider */
       gtk_widget_destroy (GTK_WIDGET (plug));
@@ -369,7 +386,8 @@ main (gint argc, gchar **argv)
   else
     {
       /* print error */
-      g_critical ("Failed to contruct the plugin '%s-%d'.", wrapper_name, opt_unique_id);
+      g_critical ("Failed to contruct the plugin \"%s-%d\".", 
+                  wrapper_name, opt_unique_id);
 
       /* release the proxy */
       g_object_unref (G_OBJECT (dbus_gproxy));
