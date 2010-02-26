@@ -24,7 +24,9 @@
 
 G_BEGIN_DECLS
 
-#define XFCE_46_CONFIG "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "panels.xml"
+#define XFCE_46_CONFIG  "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "panels.xml"
+#define CHANNEL_NAME    "xfce4-panel-test"
+#define LAUNCHER_FOLDER "launcher-test"
 
 gboolean migrate_46 (const gchar *filename, XfconfChannel *channel, GError **error);
 

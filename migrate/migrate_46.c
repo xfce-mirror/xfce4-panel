@@ -106,6 +106,7 @@ typedef struct
   guint           panel_id_counter;
   XfconfChannel  *channel;
 
+  GPtrArray      *panel_plugin_ids;
   gint            panel_yoffset;
   gint            panel_xoffset;
   ScreenPosition  panel_screen_position;
@@ -223,11 +224,13 @@ migrate_46_panel_set_property (ConfigParser  *parser,
     }
   else if (strcmp (property_name, "xoffset") == 0)
     {
-      parser->panel_xoffset = MAX (0, atoi (value) / 2);
+      /* TODO test this */
+      parser->panel_xoffset = MAX (0, atoi (value));
     }
   else if (strcmp (property_name, "yoffset") == 0)
     {
-      parser->panel_yoffset = MAX (0, atoi (value) / 2);
+      /* TODO test this */
+      parser->panel_yoffset = MAX (0, atoi (value));
     }
   else if (strcmp (property_name, "monitor") == 0)
     {
@@ -261,17 +264,48 @@ migrate_46_panel_set_property (ConfigParser  *parser,
 
 
 
+#define migrate_46_plugin_string(old_name, new_name, fallback) \
+  if (xfce_rc_has_entry (rc, old_name)) \
+    xfconf_channel_set_string (channel, "/" new_name, \
+        xfce_rc_read_entry (rc, old_name, fallback))
+
+#define migrate_46_plugin_bool(old_name, new_name, fallback) \
+  if (xfce_rc_has_entry (rc, old_name)) \
+    xfconf_channel_set_bool (channel, "/" new_name, \
+        xfce_rc_read_bool_entry (rc, old_name, fallback))
+
+#define migrate_46_plugin_uint(old_name, new_name, fallback) \
+  if (xfce_rc_has_entry (rc, old_name)) \
+    xfconf_channel_set_uint (channel, "/" new_name, \
+        xfce_rc_read_int_entry (rc, old_name, fallback))
+
+
+
 static void
 migrate_46_plugin_actions (XfconfChannel *channel,
                            XfceRc        *rc)
 {
-  /* enum: ACTION_QUIT,
-   *       ACTION_LOCK,
-   *       ACTION_QUIT_LOCK
-   *
-   * xfce_rc_write_int_entry (rc, "type", action->type);
-   * xfce_rc_write_int_entry (rc, "orientation", action->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 1);
-   */
+  gint type;
+
+  if (!xfce_rc_has_entry (rc, "type"))
+    return;
+
+  type = xfce_rc_read_int_entry (rc, "types", 0);
+  switch (type)
+    {
+    case 0: /* ACTION_QUIT */
+      xfconf_channel_set_uint (channel, "/first-action", 0);
+      break;
+
+    case 1: /* ACTION_LOCK */
+      xfconf_channel_set_uint (channel, "/first-action", 2);
+      break;
+
+    default: /* ACTION_QUIT_LOCK */
+      xfconf_channel_set_uint (channel, "/first-action", 0);
+      xfconf_channel_set_uint (channel, "/second-action", 2);
+      break;
+    }
 }
 
 
@@ -280,21 +314,25 @@ static void
 migrate_46_plugin_clock (XfconfChannel *channel,
                          XfceRc        *rc)
 {
-  /* enum: XFCE_CLOCK_ANALOG,
-   *       XFCE_CLOCK_BINARY,
-   *       XFCE_CLOCK_DIGITAL,
-   *       XFCE_CLOCK_LCD
-   *
-   * xfce_rc_write_entry (rc, "DigitalFormat", plugin->digital_format);
-   * xfce_rc_write_entry (rc, "TooltipFormat", plugin->tooltip_format);
-   * xfce_rc_write_int_entry (rc, "ClockType", plugin->mode);
-   * xfce_rc_write_bool_entry (rc, "ShowFrame", plugin->show_frame);
-   * xfce_rc_write_bool_entry (rc, "ShowSeconds", plugin->show_seconds);
-   * xfce_rc_write_bool_entry (rc, "ShowMilitary", plugin->show_military);
-   * xfce_rc_write_bool_entry (rc, "ShowMeridiem", plugin->show_meridiem);
-   * xfce_rc_write_bool_entry (rc, "TrueBinary", plugin->true_binary);
-   * xfce_rc_write_bool_entry (rc, "FlashSeparators", plugin->flash_separators);
-   */
+  gint type;
+
+  if (xfce_rc_has_entry (rc, "ClockType"))
+    {
+      type = xfce_rc_read_int_entry (rc, "ClockType", 0);
+      if (type == 4) /* XFCE_CLOCK_LCD */
+        type++; /* Skip CLOCK_PLUGIN_MODE_FUZZY */
+      xfconf_channel_set_uint (channel, "/mode", type);
+    }
+
+  migrate_46_plugin_string ("DigitalFormat", "digital-format", "%R");
+  migrate_46_plugin_string ("TooltipFormat", "tooltip-format", "%A %d %B %Y");
+
+  migrate_46_plugin_bool ("ShowFrame", "show-frame", TRUE);
+  migrate_46_plugin_bool ("ShowSeconds", "show-seconds", FALSE);
+  migrate_46_plugin_bool ("ShowMilitary", "show-military", FALSE);
+  migrate_46_plugin_bool ("ShowMeridiem", "show-meridiem", TRUE);
+  migrate_46_plugin_bool ("FlashSeparators", "flash-separators", FALSE);
+  migrate_46_plugin_bool ("TrueBinary", "true-binary", FALSE);
 }
 
 
@@ -303,31 +341,119 @@ static void
 migrate_46_plugin_iconbox (XfconfChannel *channel,
                            XfceRc        *rc)
 {
-  /* xfce_rc_write_int_entry (rc, "only_hidden", iconbox->only_hidden);
-   * xfce_rc_write_int_entry (rc, "all_workspaces", iconbox->all_workspaces);
-   * xfce_rc_write_int_entry (rc, "expand", iconbox->expand);
-   */
+  /* tasklist in iconbox mode */
+  xfconf_channel_set_uint (channel, "/show-labels", FALSE);
+
+  migrate_46_plugin_bool ("only_hidden", "show-only-minimized", FALSE);
+  migrate_46_plugin_bool ("all_workspaces", "include-all-workspaces", TRUE);
+
+  /* TODO
+   * xfce_rc_write_int_entry (rc, "expand", iconbox->expand); */
 }
 
 
 
 static void
-migrate_46_plugin_launcher (XfconfChannel *channel,
-                            XfceRc        *rc)
+migrate_46_plugin_launcher (XfconfChannel  *channel,
+                            XfceRc         *rc,
+                            guint           plugin_id,
+                            GError        **error)
 {
-  /* xfce_rc_set_group (rc, "Global");
-   * xfce_rc_write_bool_entry (rc, "MoveFirst", launcher->move_first);
-   * xfce_rc_write_int_entry (rc, "ArrowPosition", launcher->arrow_position);
-   *
-   * xfce_rc_set_group (rc, Entry %d);
-   * xfce_rc_write_entry (rc, "Name", entry->name);
-   * xfce_rc_write_entry (rc, "Comment", entry->comment);
-   * xfce_rc_write_entry (rc, "Icon", entry->icon);
-   * xfce_rc_write_entry (rc, "Exec", entry->exec);
-   * xfce_rc_write_entry (rc, "Path", entry->path);
-   * xfce_rc_write_bool_entry (rc, "Terminal", entry->terminal);
-   * xfce_rc_write_bool_entry (rc, "StartupNotify", entry->startup);
-   */
+  guint      i;
+  gchar      buf[128];
+  XfceRc    *new_desktop;
+  gchar     *path;
+  GTimeVal   timeval;
+  GPtrArray *array;
+  GValue    *value;
+  gchar     *filename;
+
+  if (xfce_rc_has_group (rc, "Global"))
+    {
+      xfce_rc_set_group (rc, "Global");
+
+      migrate_46_plugin_bool ("MoveFirst", "move-first", FALSE);
+      migrate_46_plugin_bool ("ArrowPosition", "arrow-position", 0);
+    }
+
+  g_get_current_time (&timeval);
+  array = g_ptr_array_new ();
+
+  for (i = 0; i < 100 /* arbitrary */; i++)
+    {
+      g_snprintf (buf, sizeof (buf), "Entry %d", i);
+      if (!xfce_rc_has_group (rc, buf))
+        break;
+
+      xfce_rc_set_group (rc, buf);
+
+      g_snprintf (buf, sizeof (buf), "xfce4" G_DIR_SEPARATOR_S "panel"
+                  G_DIR_SEPARATOR_S LAUNCHER_FOLDER "-%d" G_DIR_SEPARATOR_S "%ld%d.desktop",
+                  plugin_id, timeval.tv_sec, i);
+      path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, buf, TRUE);
+      if (G_UNLIKELY (path == NULL))
+        {
+          g_set_error (error, G_FILE_ERROR_FAILED, G_FILE_ERROR,
+                       "Failed to create new launcher desktop file in \"%s\"", buf);
+          break;
+        }
+      else if (g_file_test (path, G_FILE_TEST_EXISTS))
+        {
+          g_set_error (error, G_FILE_ERROR_EXIST, G_FILE_ERROR,
+                       "Deasktop item \"%s\" already exists", path);
+          g_free (path);
+          break;
+        }
+
+      new_desktop = xfce_rc_simple_open (path, FALSE);
+      if (G_UNLIKELY (new_desktop == NULL))
+        {
+          g_set_error (error, G_FILE_ERROR_FAILED, G_FILE_ERROR,
+                       "Failed to create new desktop file \"%s\"", path);
+          g_free (path);
+          break;
+        }
+
+
+      xfce_rc_set_group (new_desktop, G_KEY_FILE_DESKTOP_GROUP);
+
+      xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_NAME,
+          xfce_rc_read_entry (rc, "Name", ""));
+      xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_COMMENT,
+          xfce_rc_read_entry (rc, "Comment", ""));
+      xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_ICON,
+          xfce_rc_read_entry (rc, "Icon", ""));
+      xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_EXEC,
+          xfce_rc_read_entry (rc, "Exec", ""));
+      xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_PATH,
+          xfce_rc_read_entry (rc, "Path", ""));
+      xfce_rc_write_bool_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_TERMINAL,
+          xfce_rc_read_bool_entry (rc, "Terminal", FALSE));
+      xfce_rc_write_bool_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY,
+          xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE));
+
+      xfce_rc_flush (new_desktop);
+      if (xfce_rc_is_dirty (new_desktop))
+        {
+          g_set_error (error, G_FILE_ERROR_FAILED, G_FILE_ERROR,
+                       "Failed to flush desktop file \"%s\"", path);
+          g_free (path);
+          xfce_rc_close (new_desktop);
+          break;
+        }
+
+      g_free (path);
+      xfce_rc_close (new_desktop);
+
+      value = g_new0 (GValue, 1);
+      g_value_init (value, G_TYPE_STRING);
+      filename = g_strdup_printf ("%ld%d.desktop", timeval.tv_sec, i);
+      g_value_take_string (value, filename);
+      g_ptr_array_add (array, value);
+    }
+
+  xfconf_channel_set_arrayv (channel, "/items", array);
+  xfconf_array_free (array);
 }
 
 
@@ -336,10 +462,9 @@ static void
 migrate_46_plugin_pager (XfconfChannel *channel,
                          XfceRc        *rc)
 {
-  /* xfce_rc_write_int_entry (rc, "rows", pager->rows);
-   * xfce_rc_write_bool_entry (rc, "scrolling", pager->scrolling);
-   * xfce_rc_write_bool_entry (rc, "show-names", pager->show_names);
-   */
+  migrate_46_plugin_uint ("rows", "rows", 1);
+  migrate_46_plugin_bool ("show-names", "show-names", FALSE);
+  migrate_46_plugin_bool ("scrolling", "workspace-scrolling", TRUE);
 }
 
 
@@ -348,13 +473,38 @@ static void
 migrate_46_plugin_separator (XfconfChannel *channel,
                              XfceRc        *rc)
 {
-  /* enum: SEP_SPACE,
-   *       SEP_EXPAND,
-   *       SEP_LINE,
-   *       SEP_HANDLE,
-   *       SEP_DOTS
-   * xfce_rc_write_int_entry (rc, "separator-type", sep->type);
-   */
+  gint  type;
+  guint style;
+
+  if (!xfce_rc_has_entry (rc, "separator-type"))
+    return;
+
+  type = xfce_rc_read_int_entry (rc, "separator-type", 0);
+  switch (type)
+    {
+    case 0: /* SEP_SPACE */
+      style = 0; /* SEPARATOR_PLUGIN_STYLE_TRANSPARENT */
+      break;
+
+    case 1: /* SEP_EXPAND */
+      style = 0; /* SEPARATOR_PLUGIN_STYLE_TRANSPARENT */
+      xfconf_channel_set_bool (channel, "/expand", TRUE);
+      break;
+
+    case 2: /* SEP_LINE */
+      style = 1; /* SEPARATOR_PLUGIN_STYLE_SEPARATOR */
+      break;
+
+    case 3: /* SEP_HANDLE */
+      style = 2; /* SEPARATOR_PLUGIN_STYLE_HANDLE */
+      break;
+
+    default: /* SEP_DOTS */
+      style = 3; /* SEPARATOR_PLUGIN_STYLE_DOTS */
+      break;
+    }
+
+  xfconf_channel_set_uint (channel, "/style", style);
 }
 
 
@@ -363,6 +513,7 @@ static void
 migrate_46_plugin_showdesktop (XfconfChannel *channel,
                                XfceRc        *rc)
 {
+  /* no settings */
 }
 
 
@@ -371,13 +522,21 @@ static void
 migrate_46_plugin_systray (XfconfChannel *channel,
                            XfceRc        *rc)
 {
-  /* xfce_rc_set_group (rc, "Global");
-   * xfce_rc_write_bool_entry (rc, "ShowFrame", plugin->show_frame);
-   * xfce_rc_write_int_entry (rc, "Rows", ...);
-   *
-   * xfce_rc_set_group (rc, "Applications");
-   * xfce_rc_write_bool_entry (rc, appname, hidden);
-   */
+  if (xfce_rc_has_group (rc, "Global"))
+    {
+      xfce_rc_set_group (rc, "Global");
+
+      migrate_46_plugin_bool ("ShowFrame", "show-frame", TRUE);
+      migrate_46_plugin_bool ("Rows", "rows", 1);
+    }
+
+  if (xfce_rc_has_group (rc, "Applications"))
+    {
+      xfce_rc_set_group (rc, "Applications");
+
+      /* TODO */
+      /* xfce_rc_read_bool_entry (rc, appname, hidden); */
+    }
 }
 
 
@@ -386,14 +545,15 @@ static void
 migrate_46_plugin_tasklist (XfconfChannel *channel,
                             XfceRc        *rc)
 {
-  /* xfce_rc_write_int_entry (rc, "grouping", tasklist->grouping);
+  migrate_46_plugin_uint ("grouping", "grouping", 0);
+  migrate_46_plugin_bool ("all_workspaces", "include-all-workspaces", TRUE);
+  migrate_46_plugin_bool ("flat_buttons", "flat-buttons", FALSE);
+  migrate_46_plugin_bool ("show_handles", "show-handle", TRUE);
+
+  /* TODO
    * xfce_rc_write_int_entry (rc, "width", tasklist->width);
-   * xfce_rc_write_bool_entry (rc, "all_workspaces", tasklist->all_workspaces);
-   * xfce_rc_write_bool_entry (rc, "expand", tasklist->expand);
-   * xfce_rc_write_bool_entry (rc, "flat_buttons", tasklist->flat_buttons);
-   * xfce_rc_write_bool_entry (rc, "show_handles", tasklist->show_handles);
    * xfce_rc_write_bool_entry (rc, "fixed_width", tasklist->fixed_width);
-   */
+   * xfce_rc_write_bool_entry (rc, "expand", tasklist->expand); */
 }
 
 
@@ -402,19 +562,16 @@ static void
 migrate_46_plugin_windowlist (XfconfChannel *channel,
                               XfceRc        *rc)
 {
-  /* enum: ICON_BUTTON
-   *       ARROW_BUTTON
-   * xfce_rc_write_int_entry (rc, "button_layout", ...);
-   *
-   * enum: DISABLED
-   *       OTHER_WORKSPACES
-   *       ALL_WORKSPACES
-   * xfce_rc_write_int_entry (rc, "urgency_notify", ...
-   *
-   * xfce_rc_write_bool_entry (rc, "show_all_workspaces", wl->show_all_workspaces);
-   * xfce_rc_write_bool_entry (rc, "show_window_icons", wl->show_window_icons);
-   * xfce_rc_write_bool_entry (rc, "show_workspace_actions", wl->show_workspace_actions);
-   */
+  if (xfce_rc_has_entry (rc, "urgency_notify"))
+    xfconf_channel_set_bool (channel, "/urgentcy-notification",
+      xfce_rc_read_int_entry (rc, "button_layout", 0) > 0);
+
+  migrate_46_plugin_uint ("button_layout", "style", 0);
+  migrate_46_plugin_bool ("show_all_workspaces", "all-workspaces", TRUE);
+  migrate_46_plugin_bool ("show_workspace_actions", "workspace-actions", FALSE);
+
+  /* TODO
+   * xfce_rc_read_bool_entry (rc, "show_window_icons", TRUE); */
 }
 
 
@@ -428,15 +585,18 @@ migrate_46_panel_add_plugin (ConfigParser  *parser,
   XfconfChannel *channel;
   gchar          base[256];
   XfceRc        *rc;
+  const gchar   *plugin_name = name;
 
-  /* open a panel with the propert base for the plugin */
-  g_snprintf (base, sizeof (base), "/plugins/plugin-%d", parser->plugin_id_counter);
-  channel = xfconf_channel_new_with_property_base ("panel-test", base);
+  g_return_if_fail (XFCONF_IS_CHANNEL (parser->channel));
 
   /* open the old rc file of the plugin */
   g_snprintf (base, sizeof (base), "xfce4" G_DIR_SEPARATOR_S
              "panel" G_DIR_SEPARATOR_S "%s-%s.rc", name, id);
   rc = xfce_rc_config_open (XFCE_RESOURCE_CONFIG, base, TRUE);
+
+  /* open a panel with the propert base for the plugin */
+  g_snprintf (base, sizeof (base), "/plugins/plugin-%d", parser->plugin_id_counter);
+  channel = xfconf_channel_new_with_property_base (CHANNEL_NAME, base);
 
   if (strcmp (name, "actions") == 0)
     {
@@ -450,13 +610,14 @@ migrate_46_panel_add_plugin (ConfigParser  *parser,
     }
   else if (strcmp (name, "iconbox") == 0)
     {
+      plugin_name = "tasklist";
       if (G_LIKELY (rc != NULL))
         migrate_46_plugin_iconbox (channel, rc);
     }
   else if (strcmp (name, "launcher") == 0)
     {
       if (G_LIKELY (rc != NULL))
-        migrate_46_plugin_launcher (channel, rc);
+        migrate_46_plugin_launcher (channel, rc, parser->plugin_id_counter, error);
     }
   else if (strcmp (name, "pager") == 0)
     {
@@ -485,6 +646,7 @@ migrate_46_panel_add_plugin (ConfigParser  *parser,
     }
   else if (strcmp (name, "windowlist") == 0)
     {
+      plugin_name = "windowmenu";
       if (G_LIKELY (rc != NULL))
         migrate_46_plugin_windowlist (channel, rc);
     }
@@ -493,10 +655,13 @@ migrate_46_panel_add_plugin (ConfigParser  *parser,
       /* handle other "external" plugins */
     }
 
+  /* close plugin configs */
+  g_object_unref (G_OBJECT (channel));
   if (G_LIKELY (rc != NULL))
     xfce_rc_close (rc);
 
-  g_object_unref (G_OBJECT (channel));
+  /* store the (new) plugin name */
+  xfconf_channel_set_string (parser->channel, base, plugin_name);
 }
 
 
@@ -512,6 +677,7 @@ migrate_46_start_element_handler (GMarkupParseContext  *context,
   ConfigParser *parser = user_data;
   guint         i;
   const gchar  *name, *id, *value;
+  GValue       *id_value;
 
   g_return_if_fail (XFCONF_IS_CHANNEL (parser->channel));
 
@@ -526,6 +692,9 @@ migrate_46_start_element_handler (GMarkupParseContext  *context,
       if (strcmp (element_name, "panel") == 0)
         {
           parser->state = PANEL;
+
+          /* intialize new ids array */
+          parser->panel_plugin_ids = g_ptr_array_new ();
 
           /* set defaults */
           parser->panel_screen_position = XFCE_SCREEN_POSITION_NONE;
@@ -587,6 +756,11 @@ migrate_46_start_element_handler (GMarkupParseContext  *context,
             {
               parser->plugin_id_counter++;
               migrate_46_panel_add_plugin (parser, name, id, error);
+
+              id_value = g_new0 (GValue, 1);
+              g_value_init (id_value, G_TYPE_INT);
+              g_value_set_int (id_value, parser->plugin_id_counter);
+              g_ptr_array_add (parser->panel_plugin_ids, id_value);
             }
           else
             {
@@ -631,6 +805,11 @@ migrate_46_end_element_handler (GMarkupParseContext  *context,
       if (strcmp ("panel", element_name) == 0)
         {
           parser->state = PANELS;
+
+          /* store ids array */
+          g_snprintf (prop, sizeof (prop), "/panels/panel-%u/plugin-ids", parser->panel_id_counter);
+          xfconf_channel_set_arrayv (parser->channel, prop, parser->panel_plugin_ids);
+          xfconf_array_free (parser->panel_plugin_ids);
 
           /* translate the old screen position to a snap position and orientation */
           migrate_46_panel_screen_position (parser->panel_screen_position,

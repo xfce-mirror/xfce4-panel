@@ -63,7 +63,7 @@ main (gint argc, gchar **argv)
       return EXIT_FAILURE;
     }
 
-  channel = xfconf_channel_get ("panel-test");
+  channel = xfconf_channel_get (CHANNEL_NAME);
 
   file = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, XFCE_46_CONFIG);
   if (file != NULL)
