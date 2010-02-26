@@ -53,21 +53,18 @@ static DBusGProxy *
 panel_dbus_client_get_proxy (GError **error)
 {
   DBusGConnection *dbus_connection;
-  DBusGProxy      *dbus_proxy;
 
-  /* try to open the dbus connection */
+  /* return null if no connection is found */
   dbus_connection = dbus_g_bus_get (DBUS_BUS_SESSION, error);
+  panel_return_val_if_fail (dbus_connection != NULL, NULL);
   if (G_UNLIKELY (dbus_connection == NULL))
     return NULL;
 
-  /* get the proxy */
-  dbus_proxy = dbus_g_proxy_new_for_name_owner (dbus_connection,
-                                                PANEL_DBUS_NAME,
-                                                PANEL_DBUS_PATH,
-                                                PANEL_DBUS_INTERFACE,
-                                                error);
-
-  return dbus_proxy;
+  return dbus_g_proxy_new_for_name_owner (dbus_connection,
+                                          PANEL_DBUS_NAME,
+                                          PANEL_DBUS_PATH,
+                                          PANEL_DBUS_INTERFACE,
+                                          error);
 }
 
 
@@ -77,12 +74,11 @@ panel_dbus_client_check_instance_running (void)
 {
   DBusGProxy *dbus_proxy;
 
-  /* get the proxy */
+  /* if no proxy is returned, there is no registered PanelDBusService */
   dbus_proxy = panel_dbus_client_get_proxy (NULL);
-  if (G_UNLIKELY (dbus_proxy == NULL))
+  if (dbus_proxy == NULL)
     return FALSE;
 
-  /* cleanup */
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return TRUE;
@@ -99,16 +95,13 @@ panel_dbus_client_display_preferences_dialog (guint    active,
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* get the proxy */
   dbus_proxy = panel_dbus_client_get_proxy (error);
-  if (G_UNLIKELY (dbus_proxy == NULL))
+  if (G_LIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  /* call */
   result = _panel_dbus_client_display_preferences_dialog (dbus_proxy,
                                                           active, error);
 
-  /* cleanup */
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;
@@ -125,16 +118,13 @@ panel_dbus_client_display_items_dialog (guint    active,
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* get the proxy */
   dbus_proxy = panel_dbus_client_get_proxy (error);
   if (G_UNLIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  /* call */
   result = _panel_dbus_client_display_items_dialog (dbus_proxy, active,
                                                     error);
 
-  /* cleanup */
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;
@@ -150,13 +140,12 @@ panel_dbus_client_save (GError **error)
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* get the proxy */
   dbus_proxy = panel_dbus_client_get_proxy (error);
   if (G_UNLIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  /* call */
   result = _panel_dbus_client_save (dbus_proxy, error);
+
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;
@@ -174,15 +163,14 @@ panel_dbus_client_add_new_item (const gchar  *plugin_name,
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* get the proxy */
   dbus_proxy = panel_dbus_client_get_proxy (error);
   if (G_UNLIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  /* call */
   result = _panel_dbus_client_add_new_item (dbus_proxy, plugin_name,
                                             (const gchar **) arguments,
                                             error);
+
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;
@@ -307,13 +295,12 @@ panel_dbus_client_terminate (gboolean   restart,
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* get the proxy */
   dbus_proxy = panel_dbus_client_get_proxy (error);
   if (G_UNLIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  /* call */
   result = _panel_dbus_client_terminate (dbus_proxy, restart, error);
+
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;
