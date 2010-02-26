@@ -1179,7 +1179,7 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
           if (horizontal)
             p_width += ARROW_BUTTON_SIZE;
           else
-            p_height -= ARROW_BUTTON_SIZE;
+            p_height += ARROW_BUTTON_SIZE;
           break;
         }
 
