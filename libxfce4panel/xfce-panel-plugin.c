@@ -882,8 +882,9 @@ xfce_panel_plugin_save (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
-  /* emit signal */
-  g_signal_emit (G_OBJECT (provider), plugin_signals[SAVE], 0);
+  /* only send the save signal if the plugin is not locked */
+  if (XFCE_PANEL_PLUGIN (provider)->priv->menu_blocked == 0)
+    g_signal_emit (G_OBJECT (provider), plugin_signals[SAVE], 0);
 }
 
 
