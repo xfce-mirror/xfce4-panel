@@ -114,7 +114,8 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
   gobject_class->finalize = panel_dbus_service_finalize;
 
   /**
-   * Emitted when an external plugin property should be updated.
+   * Emitted when an external plugin property should be updated. The
+   * wrapper connects to this dbus signal.
    **/
   dbus_service_signals[PROPERTY_CHANGED] =
     g_signal_new (g_intern_static_string ("property-changed"),
