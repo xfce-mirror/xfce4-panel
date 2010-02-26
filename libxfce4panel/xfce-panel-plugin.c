@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2008-2010 Nick Schermer <nick@xfce.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -153,13 +153,13 @@ struct _XfcePanelPluginPrivate
   GtkOrientation       orientation;
   XfceScreenPosition   screen_position;
 
-  /* flags */
+  /* flags for rembering states */
   PluginFlags          flags;
 
-  /* plugin menu */
+  /* plugin right-click menu */
   GtkMenu             *menu;
 
-  /* menu block counter */
+  /* menu block counter (configure insensitive) */
   gint                 menu_blocked;
 
   /* autohide block counter */
@@ -184,10 +184,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
 
-  /* add private data */
   g_type_class_add_private (klass, sizeof (XfcePanelPluginPrivate));
 
-  /* reset class contruct function */
   klass->construct = NULL;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -540,10 +538,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
 static void
 xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 {
-  /* set private pointer */
   plugin->priv = XFCE_PANEL_PLUGIN_GET_PRIVATE (plugin);
 
-  /* initialize plugin value */
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;
   plugin->priv->comment = NULL;
@@ -709,7 +705,6 @@ xfce_panel_plugin_finalize (GObject *object)
   if (plugin->priv->menu)
     gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
 
-  /* cleanup */
   g_free (plugin->priv->name);
   g_free (plugin->priv->display_name);
   g_free (plugin->priv->comment);
@@ -772,9 +767,6 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
       /* get the panel menu */
       menu = xfce_panel_plugin_menu_get (plugin);
 
-      /* set the menu screen */
-      gtk_menu_set_screen (menu, gtk_widget_get_screen (widget));
-
       /* if the menu is block, some items are insensitive */
       item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("properties-item"));
       gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
@@ -823,17 +815,14 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
       GTK_RESPONSE_NO, GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
 
-  /* run the dialog */
   if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
     {
-      /* hide the dialog */
       gtk_widget_hide (dialog);
 
       /* ask the panel or wrapper to remove the plugin */
       xfce_panel_plugin_remove (plugin);
     }
 
-  /* destroy window */
   gtk_widget_destroy (dialog);
 }
 
@@ -920,10 +909,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 
   if (G_UNLIKELY (plugin->priv->menu == NULL))
     {
-      /* create new menu */
       menu = gtk_menu_new ();
-
-      /* attach to the plugin */
       gtk_menu_attach_to_widget (GTK_MENU (menu), GTK_WIDGET (plugin), NULL);
 
       /* item with plugin name */
@@ -1108,18 +1094,15 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
   /* check if update is required */
   if (G_LIKELY (plugin->priv->size != size))
     {
-      /* store new size */
       plugin->priv->size = size;
 
-      /* emit signal */
       g_signal_emit (G_OBJECT (plugin),
                      plugin_signals[SIZE_CHANGED], 0, size, &handled);
 
       /* handle the size when not done by the plugin */
-      if (handled == FALSE)
+      if (!handled)
         gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
 
-      /* emit property */
       g_object_notify (G_OBJECT (plugin), "size");
     }
 }
@@ -1137,14 +1120,11 @@ xfce_panel_plugin_set_orientation (XfcePanelPluginProvider *provider,
   /* check if update is required */
   if (G_LIKELY (plugin->priv->orientation != orientation))
     {
-      /* store new size */
       plugin->priv->orientation = orientation;
 
-      /* emit signal */
       g_signal_emit (G_OBJECT (plugin),
                      plugin_signals[ORIENTATION_CHANGED], 0, orientation);
 
-      /* emit property */
       g_object_notify (G_OBJECT (plugin), "orientation");
     }
 }
@@ -1162,15 +1142,12 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
   /* check if update is required */
   if (G_LIKELY (plugin->priv->screen_position != screen_position))
     {
-      /* store new screen position */
       plugin->priv->screen_position = screen_position;
 
-      /* emit signal */
       g_signal_emit (G_OBJECT (plugin),
                      plugin_signals[SCREEN_POSITION_CHANGED], 0,
                      screen_position);
 
-      /* emit property */
       g_object_notify (G_OBJECT (plugin), "screen-position");
     }
 }
@@ -1236,7 +1213,6 @@ xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider)
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
-  /* emit about signal */
   if (G_LIKELY (plugin->priv->menu_blocked == 0))
     g_signal_emit (G_OBJECT (provider), plugin_signals[ABOUT], 0);
 }
@@ -1248,7 +1224,6 @@ xfce_panel_plugin_removed (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
-  /* emit removed signal */
   g_signal_emit (G_OBJECT (provider), plugin_signals[REMOVED], 0);
 }
 
@@ -1492,7 +1467,6 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
   /* check if update is required */
   if (G_LIKELY (xfce_panel_plugin_get_expand (plugin) != expand))
     {
-      /* store internal value */
       plugin->priv->expand = expand;
 
       /* emit signal (in provider) */
@@ -1500,7 +1474,6 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
                                               expand ? PROVIDER_SIGNAL_EXPAND_PLUGIN :
                                                   PROVIDER_SIGNAL_COLLAPSE_PLUGIN);
 
-      /* notify property */
       g_object_notify (G_OBJECT (plugin), "expand");
     }
 }
@@ -1589,7 +1562,6 @@ xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
-  /* connect button-press-event signal */
   g_signal_connect_swapped (G_OBJECT (widget), "button-press-event",
       G_CALLBACK (xfce_panel_plugin_button_press_event), plugin);
 }
@@ -1613,10 +1585,8 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_MENU_ITEM (item));
 
-  /* get the panel menu */
-  menu = xfce_panel_plugin_menu_get (plugin);
-
   /* insert the new item below the move entry */
+  menu = xfce_panel_plugin_menu_get (plugin);
   gtk_menu_shell_insert (GTK_MENU_SHELL (menu), GTK_WIDGET (item), 5);
 }
 
@@ -1638,7 +1608,6 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-  /* set the flag */
   PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_CONFIGURE);
 
   /* show the menu item if the menu is already generated */
@@ -1647,7 +1616,7 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
        /* get and show the properties item */
        menu = xfce_panel_plugin_menu_get (plugin);
        item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("properties-item"));
-       if (G_LIKELY (item))
+       if (G_LIKELY (item != NULL))
          gtk_widget_show (item);
     }
 
@@ -1674,7 +1643,6 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-  /* set the flag */
   PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_ABOUT);
 
   /* show the menu item if the menu is already generated */
@@ -1683,7 +1651,7 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
        /* get and show the about item */
        menu = xfce_panel_plugin_menu_get (plugin);
        item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("about-item"));
-       if (G_LIKELY (item))
+       if (G_LIKELY (item != NULL))
          gtk_widget_show (item);
     }
 
@@ -1997,10 +1965,8 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
   g_return_if_fail (GTK_IS_MENU (menu));
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (panel_plugin));
 
-  /* get the attach widget */
-  attach_widget = gtk_menu_get_attach_widget (menu);
-
   /* calculate the coordinates */
+  attach_widget = gtk_menu_get_attach_widget (menu);
   xfce_panel_plugin_position_widget (XFCE_PANEL_PLUGIN (panel_plugin),
                                      GTK_WIDGET (menu), attach_widget, x, y);
 
@@ -2063,7 +2029,6 @@ xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
       panel_return_if_fail (plugin->priv->panel_lock >= 0);
       plugin->priv->panel_lock++;
 
-      /* remember this function blocked the panel */
       PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE);
 
       /* tell panel it needs to lock */
@@ -2077,7 +2042,6 @@ xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
       panel_return_if_fail (plugin->priv->panel_lock > 0);
       plugin->priv->panel_lock--;
 
-      /* unset the flag */
       PANEL_UNSET_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE);
 
       /* tell panel it needs to unlock */
@@ -2111,13 +2075,8 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
   g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), NULL);
 
-  /* get the relative filename */
   filename = xfce_panel_plugin_relative_filename (plugin);
-
-  /* get the absolute path */
   path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
-
-  /* cleanup */
   g_free (filename);
 
   return path;
@@ -2147,13 +2106,8 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
 
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
-  /* get the relative filename */
   filename = xfce_panel_plugin_relative_filename (plugin);
-
-  /* get the absolute path */
   path = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, filename, create);
-
-  /* cleanup */
   g_free (filename);
 
   return path;
