@@ -281,7 +281,7 @@ msgstr "Вы действительно хотите удалить панель
 #: ../panel/panel-preferences-dialog.c:764
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Внутренее имя: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 #, fuzzy
@@ -289,9 +289,8 @@ msgid "Add a new panel"
 msgstr "Добавить новую панель "
 
 #: ../panel/panel-preferences-dialog.glade.h:2
-#, fuzzy
 msgid "Add new item to this panel"
-msgstr "Добавить новую панель "
+msgstr "Добавить новую элемент"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
@@ -300,6 +299,8 @@ msgstr ""
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "Automatically show and _hide the panel"
 msgstr ""
+" \t\r\n"
+"Автоматически с_крывать панель"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Background"
@@ -1061,7 +1062,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
+msgstr "Восток"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
@@ -1074,38 +1075,35 @@ msgstr "Запуск приложений "
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "Север"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr ""
+msgstr "Отключить всплывающие подсказки для кнопок панели и меню."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
 msgid "Show _label instead of icon"
-msgstr "Показывать значки _приложений "
+msgstr "Показывать _текст вместо значка"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
 msgid "South"
-msgstr "О панели "
+msgstr "Юг"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr ""
+msgstr "Запад"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#, fuzzy
 msgid "_Arrow button position:"
-msgstr "_Стрелка "
+msgstr "Положение кнопки со _стрелкой"
 
 #: ../plugins/launcher/launcher.c:1445
 #, fuzzy
@@ -1113,9 +1111,8 @@ msgid "Unnamed Item"
 msgstr "Без названия "
 
 #: ../plugins/launcher/launcher.c:1585
-#, fuzzy
 msgid "No items"
-msgstr "Новый элемент "
+msgstr "Нет элементов"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
@@ -1124,7 +1121,7 @@ msgstr "Кнопка запуска приложения с дополнител
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Поведение"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #, fuzzy
@@ -1146,9 +1143,8 @@ msgid "Workspace Switcher"
 msgstr "Переключатель рабочих мест "
 
 #: ../plugins/pager/pager-dialog.glade.h:7
-#, fuzzy
 msgid "Workspace _Settings..."
-msgstr "Переключатель рабочих мест "
+msgstr "_Настройки рабочего места"
 
 #: ../plugins/pager/pager.c:404
 msgid "Unable to open the Xfce workspace settings"
@@ -1193,12 +1189,10 @@ msgid "_Style:"
 msgstr "_Стиль:"
 
 #: ../plugins/separator/separator.desktop.in.h:1
-#, fuzzy
 msgid "Adds a separator or space between panel items"
 msgstr "Добавляет промежуток или разделитель между элементами панели "
 
 #: ../plugins/showdesktop/showdesktop.c:193
-#, fuzzy
 msgid "Restore the minimized windows"
 msgstr "Восстановить свёрнутые окна "
 
@@ -1215,9 +1209,8 @@ msgid "Show Desktop"
 msgstr "Показать рабочий стол "
 
 #: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
 msgid "C_lear Known Applications"
-msgstr "Выберите приложение "
+msgstr "О_чистить список приложений"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Known Applications"
@@ -1257,7 +1250,7 @@ msgstr "Область для отображения значков уведом
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "Всегда"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
@@ -1273,28 +1266,27 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "Никогда"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#, fuzzy
 msgid "Show _flat buttons"
 msgstr "П_лоские кнопки "
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _handle"
-msgstr "Показывать _рамку "
+msgstr "Показывать _ярлычок"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show button _labels"
-msgstr ""
+msgstr "_Текст на кнопках"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Только с_вернутые окна"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
@@ -1304,7 +1296,7 @@ msgstr "Показывать _окна со всех рабочих мест "
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Sorting _order:"
-msgstr ""
+msgstr "С_ортировать по:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
@@ -1312,7 +1304,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
-msgstr ""
+msgstr "При недостатке места"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
@@ -1360,7 +1352,7 @@ msgstr "_Стрелка: "
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Расположение кнопок:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 #, fuzzy
@@ -1384,9 +1376,8 @@ msgid "Window Menu"
 msgstr "Список окон "
 
 #: ../plugins/windowmenu/windowmenu.c:648
-#, fuzzy
 msgid "Desktop"
-msgstr "Показать рабочий стол "
+msgstr "Рабочий стол "
 
 #: ../plugins/windowmenu/windowmenu.c:881
 #, c-format
@@ -1394,13 +1385,12 @@ msgid "Workspace %d"
 msgstr "Рабочее место %d "
 
 #: ../plugins/windowmenu/windowmenu.c:1270
-#, fuzzy
 msgid "No Windows"
-msgstr "Список окон "
+msgstr "Без окон"
 
 #: ../plugins/windowmenu/windowmenu.c:1285
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Срочные окна"
 
 #: ../plugins/windowmenu/windowmenu.c:1327
 #, fuzzy
