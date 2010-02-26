@@ -122,7 +122,7 @@ separator_plugin_init (SeparatorPlugin *plugin)
   plugin->style = SEPARATOR_PLUGIN_STYLE_TRANSPARENT;
 
   /* show the properties dialog */
-  xfce_panel_plugin_menu_show_configure (panel_plugin);
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* initialize xfconf */
   xfconf_init (NULL);

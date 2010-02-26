@@ -72,12 +72,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-frame">
+                            <property name="label" translatable="yes">Show _frame</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Show _frame</property>
                           </object>
                           <packing>
                             <property name="right_attach">2</property>
@@ -128,13 +128,13 @@
                         <property name="border_width">6</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkCheckButton" id="display-seconds">
+                          <object class="GtkCheckButton" id="show-seconds">
+                            <property name="label" translatable="yes">Display _seconds</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Display _seconds</property>
                           </object>
                           <packing>
                             <property name="position">0</property>
@@ -142,12 +142,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="true-binary">
+                            <property name="label" translatable="yes">True _binary clock</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">True _binary clock</property>
                           </object>
                           <packing>
                             <property name="position">1</property>
@@ -155,12 +155,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-military">
+                            <property name="label" translatable="yes">24-_hour clock</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">24-_hour clock</property>
                           </object>
                           <packing>
                             <property name="position">2</property>
@@ -168,12 +168,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="flash-separators">
+                            <property name="label" translatable="yes">Fl_ash time seperators</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Fl_ash time seperators</property>
                           </object>
                           <packing>
                             <property name="position">3</property>
@@ -181,12 +181,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-meridiem">
+                            <property name="label" translatable="yes">Sho_w AM/PM</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Sho_w AM/PM</property>
                           </object>
                           <packing>
                             <property name="position">4</property>
@@ -242,10 +242,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="update_policy">delayed</property>
                                 <property name="adjustment">fuzziness</property>
-                                <property name="lower_stepper_sensitivity">off</property>
-                                <property name="upper_stepper_sensitivity">off</property>
                                 <property name="digits">0</property>
-                                <property name="draw_value">False</property>
                                 <property name="value_pos">right</property>
                               </object>
                               <packing>
@@ -285,12 +282,12 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="close-button">
+                <property name="label" translatable="yes">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">0</property>
-                <property name="label" translatable="yes">gtk-close</property>
               </object>
               <packing>
                 <property name="position">0</property>
