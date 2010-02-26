@@ -90,6 +90,7 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   button = plugin->button = xfce_panel_create_toggle_button ();
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
   gtk_container_add (GTK_CONTAINER (plugin), button);
+  gtk_widget_set_name (button, "showdesktop-button");
   g_signal_connect (G_OBJECT (button), "toggled",
       G_CALLBACK (show_desktop_plugin_toggled), plugin);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), button);
