@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-18 18:00+0100\n"
-"PO-Revision-Date: 2010-02-18 19:15+0100\n"
+"PO-Revision-Date: 2010-02-18 23:11+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Está seguro de que desexa eliminar \"%s\"?"
 #: ../libxfce4panel/xfce-panel-plugin.c:834
 #: ../panel/panel-preferences-dialog.c:884
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Se elimina o elemento do panel, perderase permanentemente."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:973
@@ -64,7 +64,7 @@ msgstr "Engadir _novos elementos..."
 #: ../libxfce4panel/xfce-panel-plugin.c:1022
 #: ../panel/panel-window.c:2077
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "Pr_eferencias do panel..."
 
 #. restart item
 #: ../libxfce4panel/xfce-panel-plugin.c:1046
@@ -173,7 +173,7 @@ msgstr "Non se atopou ningunha instancia en execución de %s"
 
 #: ../panel/panel-application.c:193
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Produciuse un erro ao iniciar o aplicativo de migración"
 
 #: ../panel/panel-dbus-client.c:227
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
@@ -225,7 +225,7 @@ msgstr "Non se permite a modificación do panel"
 #: ../panel/panel-dialogs.c:186
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "O engadido \"%s\" deixou inesperadamente o panel, desexa reinicialo?"
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
@@ -247,7 +247,7 @@ msgstr "_Buscar:"
 
 #: ../panel/panel-item-dialog.c:205
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Introduza aquí a frase a buscar"
 
 #: ../panel/panel-item-dialog.c:310
 #: ../panel/panel-preferences-dialog.c:281
@@ -256,7 +256,7 @@ msgstr "Produciuse un erro ao abrir o manual"
 
 #: ../panel/panel-preferences-dialog.c:395
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
 #. I18N: screen name in the output selector
 #: ../panel/panel-preferences-dialog.c:414
@@ -271,9 +271,8 @@ msgid "Monitor %d"
 msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:689
-#, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Eliminaranse o panel seleccionado e todos os seus elementos."
+msgstr "Eliminaranse de xeito permanente as configuracións do panel e do engadido"
 
 #: ../panel/panel-preferences-dialog.c:690
 #, c-format
@@ -284,33 +283,31 @@ msgstr "Está seguro de que desexa eliminar o panel %d?"
 #: ../panel/panel-preferences-dialog.c:764
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Nome interno: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "Add a new panel"
 msgstr "Engadir un novo panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
-#, fuzzy
 msgid "Add new item to this panel"
-msgstr "Engadir un novo panel"
+msgstr "Engadir un novo elemento a este panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
-msgstr ""
+msgstr "Valor alfa do fondo do panel, entre 0 (transparente) e 100 (opaco)."
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "Automatically show and _hide the panel"
-msgstr ""
+msgstr "Mostrar e _ocultar automaticamente o panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Background"
-msgstr ""
+msgstr "Fondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
-#, fuzzy
 msgid "C_ompositing"
-msgstr "Posición"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "D_isplay"
@@ -318,9 +315,8 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 #: ../plugins/launcher/launcher-dialog.glade.h:9
-#, fuzzy
 msgid "Edit the currently selected item"
-msgstr "Eliminar o panel seleccionado"
+msgstr "Editar o elemento seleccionado"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 #: ../plugins/launcher/launcher-dialog.glade.h:10
@@ -338,7 +334,7 @@ msgstr "Ele_mentos"
 #: ../panel/panel-preferences-dialog.glade.h:13
 #, no-c-format
 msgid "L_ength (%):"
-msgstr ""
+msgstr "L_onxitude (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:15
@@ -349,17 +345,17 @@ msgstr "Medidas"
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 #, fuzzy
 msgid "Move currently selected item down by one row"
-msgstr "Eliminar o panel seleccionado"
+msgstr "Move-la acción seleccionada unha ringleira cara a baixo."
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 #, fuzzy
 msgid "Move currently selected item up by one row"
-msgstr "Eliminar o panel seleccionado"
+msgstr "Move-la acción seleccionada unha ringleira cara a riba."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "O_utput:"
-msgstr ""
+msgstr "_Saída:"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Remove currently selected item"
@@ -371,7 +367,7 @@ msgstr "Eliminar o panel seleccionado"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Seleccione esta opción para estender o panel por varios monitores."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Select this option to hide the handles of the panel and lock its position."
@@ -382,14 +378,12 @@ msgid "Select this option to hide the panel when the pointer is not above it. Th
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-#, fuzzy
 msgid "Show about information of the currently selected item"
-msgstr "Eliminar o panel seleccionado"
+msgstr "Mostrar información sobre o elemento seleccionado"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
-#, fuzzy
 msgid "Span mo_nitors"
-msgstr "Expandir monitores"
+msgstr "Expandir os mo_nitores"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Transparency"
@@ -397,11 +391,11 @@ msgstr "Transparencia"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Transparency when the pointer is hovering over the panel."
-msgstr ""
+msgstr "Transparencia cando o punteiro está enriba do panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Transparency when the pointer is not hovering the panel."
-msgstr ""
+msgstr "Transparencia cando o punteiro non está enriba do panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Vertical"
@@ -420,13 +414,12 @@ msgid "_Enter:"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:33
-#, fuzzy
 msgid "_Leave:"
-msgstr "_Nome:"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Lock panel"
-msgstr ""
+msgstr "B_loquear o panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "_Orientation:"
@@ -437,23 +430,20 @@ msgid "_Size (pixels):"
 msgstr "_Tamaño (píxels):"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
 msgid "Action Button"
-msgstr "Botóns de acción"
+msgstr "Botón de acción"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Button Actions"
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "Botón de _frecha"
+msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "Botón de _icona"
+msgstr ""
 
 #: ../plugins/actions/actions.c:108
 msgid "Disabled"
@@ -461,11 +451,11 @@ msgstr "Desactivado"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr ""
+msgstr "Diálogo de saída de sesión"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr ""
+msgstr "Saír da sesión"
 
 #: ../plugins/actions/actions.c:111
 msgid "Lock Screen"
@@ -488,23 +478,21 @@ msgid "Hibernate"
 msgstr "Hibernar"
 
 #: ../plugins/actions/actions.c:409
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Produciuse un erro ao executar \"%s\""
+msgstr "Produciuse un erro ao executar o comando \"%s\""
 
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
 msgstr "Botóns de acción"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Pechar a sesión ou bloquear a pantalla"
+msgstr "Pechar a sesión ou bloquear a pantalla ou outras accións do sistema"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
 msgid "24-_hour clock"
-msgstr "Usar reloxo de 24 _horas"
+msgstr "Reloxo de 24 _horas"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -543,12 +531,12 @@ msgstr "Mostrar os _segundos"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr ""
+msgstr "F_ormato:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "E_xactitude:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 #, fuzzy
@@ -577,14 +565,13 @@ msgid "Show _inactive dots"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:18
-#, fuzzy
 msgid "Show gri_d"
-msgstr "Mostrar a _asa"
+msgstr "Mostrar re_de"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr ""
+msgstr "O formato describe as partes da data e da hora a inserir no nome de ficheiro. Por exemplo, %Y substituirase co ano, %m co mes e %d co día. Consulte a documentación da utilidade date para obter información adicional."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -592,7 +579,7 @@ msgstr "Reloxo _binario real"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr ""
+msgstr "_Disposición:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
@@ -604,7 +591,7 @@ msgstr "noite"
 
 #: ../plugins/clock/clock-fuzzy.c:85
 msgid "Early morning"
-msgstr ""
+msgstr "Mañanciña"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Morning"
@@ -615,9 +602,8 @@ msgid "Almost noon"
 msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:88
-#, fuzzy
 msgid "Noon"
-msgstr "Sen icona"
+msgstr "Mediodía"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Afternoon"
@@ -625,11 +611,11 @@ msgstr "Tarde"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Evening"
-msgstr ""
+msgstr "Tardiña"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Late evening"
-msgstr ""
+msgstr "Noitiña"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
@@ -641,57 +627,57 @@ msgstr "%0 en punto"
 #: ../plugins/clock/clock-fuzzy.c:99
 #, no-c-format
 msgid "five past %0"
-msgstr ""
+msgstr "%0 e cinco"
 
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "ten past %0"
-msgstr ""
+msgstr "%0 e dez"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "quarter past %0"
-msgstr ""
+msgstr "%0 e cuarto"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "twenty past %0"
-msgstr ""
+msgstr "%0 e vinte"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "twenty five past %0"
-msgstr ""
+msgstr "%0 e vintecinco"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "half past %0"
-msgstr ""
+msgstr "%0 e media"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "%1 menos vintecinco"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "%1 menos vinte"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "%1 menos cuarto"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "%1 menos dez"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "five to %1"
-msgstr ""
+msgstr "%1 menos cinco"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
@@ -710,67 +696,67 @@ msgstr "%0 en punto"
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "%0 e cinco"
 
 #: ../plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "%0 e dez"
 
 #: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "%0 e cuarto"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr ""
+msgstr "%0 e vinte"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr ""
+msgstr "%0 e vintecinco"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "%0 e media"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "%1 menos vintecinco"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "%1 menos vinte"
 
 #: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "%1 menos cuarto"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "%1 menos dez"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "%1 menos cinco"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
@@ -854,7 +840,7 @@ msgstr "Produciuse un erro ao iniciar o aplicativo \"%s\""
 #: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Produciuse un erro ao consultar o tipo do contido de \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:578
 #, c-format
@@ -862,32 +848,31 @@ msgid "No default application found for \"%s\""
 msgstr "Non se atopou o aplicativo predeterminado para \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:593
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Produciuse un erro ao executar \"%s\""
+msgstr "Produciuse un erro ao iniciar o aplicativo predeterminado para \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:684
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Produciuse un erro ao iniciar o aplicativo preferido da categoría \"%s\"."
 
 #: ../plugins/directorymenu/directorymenu.c:757
 msgid "Open Folder"
-msgstr ""
+msgstr "Abrir cartafol"
 
 #: ../plugins/directorymenu/directorymenu.c:768
-#, fuzzy
 msgid "Open in Terminal"
-msgstr "Executar nunha _terminal"
+msgstr "Abrir na terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr ""
+msgstr "Menú de directorios"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Mostrar unha árbore de directorios nun menú"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
@@ -900,77 +885,70 @@ msgid "Filtering"
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#, fuzzy
 msgid "Select A Directory"
-msgstr "Seleccione unha icona para \"%s\""
+msgstr "Seleccione un directorio"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-#, fuzzy
 msgid "Show _hidden files"
-msgstr "Mostrar a _asa"
+msgstr "Mostrar os ficheiros _ocultos"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
-msgstr ""
+msgstr "Directorio _base:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+#, fuzzy
 msgid "_File Pattern:"
-msgstr ""
+msgstr "Patrón de _ficheiro:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
 msgid "_Icon:"
 msgstr "_Icona:"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "Se elimina algún elemento, eliminarase de xeito permanente"
 
 #: ../plugins/launcher/launcher-dialog.c:667
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Está seguro de que desexa eliminar o espazo de traballo '%s'?"
+msgstr "Está seguro de que desexa eliminar \"%s\"?"
 
-# Innominado?
 #: ../plugins/launcher/launcher-dialog.c:668
-#, fuzzy
 msgid "Unnamed item"
-msgstr "Sen nome"
+msgstr "Elemento sen nome"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Failed to remove the desktop file from the config directory"
-msgstr ""
+msgstr "Produciuse un erro ao eliminar o ficheiro desktop do directorio de configuración"
 
 #: ../plugins/launcher/launcher-dialog.c:723
-#, fuzzy
 msgid "Failed to open desktop item editor"
-msgstr "Produciuse un erro ao abrir a pantalla"
+msgstr "Produciuse un erro ao abrir o editor de elementos do escritorio"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new empty item"
-msgstr "Engadir un novo panel"
+msgstr "Engadir un novo elemento baleiro"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
-msgstr ""
+msgstr "Engadir un ou máis elementos existentes ao iniciador"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "Avanzado"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
 msgstr "Predeterminado"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
-#, fuzzy
 msgid "Delete the currently selected item"
-msgstr "Eliminar o panel seleccionado"
+msgstr "Eliminar o elemento seleccionado"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "Desactivar as n_otificacións"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
@@ -991,34 +969,31 @@ msgstr "Norte"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr ""
+msgstr "Seleccione esta opción para desactivar as notificacións ao moverse por riba do botón do panel ou dos elementos do menú."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Seleccione esta opción para mover o elemento de menú premido ao panel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
 msgid "Show _label instead of icon"
-msgstr "Mostrar as iconas de a_plicativo"
+msgstr "Mostrar _etiquetas en vez de iconas"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Mostrar o último elemento _usado do panel"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
 msgid "South"
-msgstr "Acerca de"
+msgstr "Sur"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
 msgstr "Oeste"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#, fuzzy
 msgid "_Arrow button position:"
-msgstr "Botón de _frecha"
+msgstr "P_osición do botón de frecha:"
 
 #: ../plugins/launcher/launcher.c:1445
 msgid "Unnamed Item"
@@ -1061,13 +1036,12 @@ msgid "Workspace Switcher"
 msgstr "Selector de espazos de traballo"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
-#, fuzzy
 msgid "Workspace _Settings..."
-msgstr "Selector de espazos de traballo"
+msgstr "Opcións de e_spazo de traballo..."
 
 #: ../plugins/pager/pager.c:404
 msgid "Unable to open the Xfce workspace settings"
-msgstr ""
+msgstr "Non foi posible abrir as opcións do espazo de traballo de Xfce"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1103,19 +1077,16 @@ msgid "_Style:"
 msgstr "E_stilo:"
 
 #: ../plugins/separator/separator.desktop.in.h:1
-#, fuzzy
 msgid "Adds a separator or space between panel items"
-msgstr "Engadir un espazo ou unha liña entre os elementos do panel"
+msgstr "Engadir un separador ou un espazo entre os elementos do panel"
 
 #: ../plugins/showdesktop/showdesktop.c:193
-#, fuzzy
 msgid "Restore the minimized windows"
-msgstr "Restaurar as fiestras ocultas"
+msgstr "Restaurar as fiestras minimizadas"
 
 #: ../plugins/showdesktop/showdesktop.c:194
-#, fuzzy
 msgid "Minimize all open windows and show the desktop"
-msgstr "Ocultar todas as fiestras e mostrar o escritorio"
+msgstr "Minimizar todas as fiestras abertas e mostrar o escritorio"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
@@ -1126,14 +1097,12 @@ msgid "Show Desktop"
 msgstr "Mostrar o escritorio"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
 msgid "C_lear Known Applications"
-msgstr "Seleccionar un aplicativo"
+msgstr "_Limpar os aplicativos coñecidos"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
 msgid "Known Applications"
-msgstr "Aplicativos ocultos"
+msgstr "Aplicativos coñecidos"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
@@ -1155,9 +1124,8 @@ msgid "Most likely another widget took over the function of a notification area.
 msgstr ""
 
 #: ../plugins/systray/systray.c:554
-#, fuzzy
 msgid "The notification area lost selection"
-msgstr "O xestor da zona de notificación perdeu a selección"
+msgstr "A zona de notificación perdeu a selección"
 
 #: ../plugins/systray/systray.c:747
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1177,11 +1145,12 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Agrupar o título e a marca de tempo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#, fuzzy
 msgid "Group title and window title"
-msgstr ""
+msgstr "Agrupar o título e a marca de tempo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
@@ -1189,34 +1158,34 @@ msgstr "Nunca"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Restaurar as fiestras minimizadas no _espazo de traballo actual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#, fuzzy
 msgid "Show _flat buttons"
-msgstr "Usar botóns _planos"
+msgstr "Mostrar botóns _planos"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _handle"
 msgstr "Mostrar a _asa"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#, fuzzy
 msgid "Show button _labels"
-msgstr ""
+msgstr "Etiquetas dos botóns da barra de ferramentas:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Só mostrar as fiestras _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Show windows from _all workspaces"
 msgstr "Mostrar as _fiestras de todos os espazos de traballo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#, fuzzy
 msgid "Sorting _order:"
-msgstr ""
+msgstr "A orde de clasificación dos elementos mostrados"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
@@ -1224,17 +1193,16 @@ msgstr "Marca de tempo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
-msgstr ""
+msgstr "Cando o espazo é limitado"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
 msgid "Window Buttons"
-msgstr "Botóns de acción"
+msgstr "Botóns de fiestras"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr ""
+msgstr "A_grupamento de fiestras:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window title"
@@ -1242,7 +1210,7 @@ msgstr "Título da fiestra"
 
 #: ../plugins/tasklist/tasklist-widget.c:2278
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Mi_nimizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:2287
 msgid "Un_minimize All"
@@ -1250,7 +1218,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-widget.c:2293
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Ma_ximizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:2302
 msgid "_Unmaximize All"
@@ -1258,7 +1226,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-widget.c:2312
 msgid "_Close All"
-msgstr ""
+msgstr "_Pechar todo"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
@@ -1270,12 +1238,11 @@ msgstr "Frecha"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Disposición dos botóns:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
-#, fuzzy
 msgid "Enable _urgency notification"
-msgstr "Notificación urxente"
+msgstr "Activar a notificación _urxente"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
@@ -1305,7 +1272,7 @@ msgstr "Sen fiestras"
 
 #: ../plugins/windowmenu/windowmenu.c:1285
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Fiestras urxentes"
 
 #: ../plugins/windowmenu/windowmenu.c:1327
 msgid "Add Workspace"
