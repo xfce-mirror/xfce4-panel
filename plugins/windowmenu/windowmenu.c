@@ -26,6 +26,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libwnck/libwnck.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-builder.h>
 #include <gdk/gdkkeysyms.h>
 #include <common/panel-private.h>
 
@@ -493,38 +494,22 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                 "urgentcy-notification", "all-workspaces",
                                 "style" };
 
-  builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, windowmenu_dialog_ui,
-                                   windowmenu_dialog_ui_length, NULL))
+  /* setup the dialog */
+  builder = panel_builder_new (panel_plugin, windowmenu_dialog_ui,
+                               windowmenu_dialog_ui_length, &dialog);
+  if (G_UNLIKELY (builder == NULL))
+    return;
+
+  /* connect bindings */
+  for (i = 0; i < G_N_ELEMENTS (names); i++)
     {
-      dialog = gtk_builder_get_object (builder, "dialog");
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
-
-      xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify)
-                         xfce_panel_plugin_unblock_menu, panel_plugin);
-
-      object = gtk_builder_get_object (builder, "close-button");
-      g_signal_connect_swapped (G_OBJECT (object), "clicked",
-                                G_CALLBACK (gtk_widget_destroy), dialog);
-
-      /* connect bindings */
-      for (i = 0; i < G_N_ELEMENTS (names); i++)
-        {
-          object = gtk_builder_get_object (builder, names[i]);
-          panel_return_if_fail (GTK_IS_WIDGET (object));
-          exo_mutual_binding_new (G_OBJECT (plugin), names[i],
-                                  G_OBJECT (object), "active");
-        }
-
-      gtk_widget_show (GTK_WIDGET (dialog));
+      object = gtk_builder_get_object (builder, names[i]);
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      exo_mutual_binding_new (G_OBJECT (plugin), names[i],
+                              G_OBJECT (object), "active");
     }
-  else
-    {
-      /* release the builder */
-      g_object_unref (G_OBJECT (builder));
-    }
+
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 

@@ -27,6 +27,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-builder.h>
 #include <libwnck/libwnck.h>
 #include <exo/exo.h>
 
@@ -411,9 +412,6 @@ pager_plugin_configure_destroyed (gpointer  data,
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->wnck_screen),
                                         pager_plugin_configure_n_workspaces_changed,
                                         where_the_object_was);
-
-  /* unblock the menu */
-  xfce_panel_plugin_unblock_menu (XFCE_PANEL_PLUGIN (plugin));
 }
 
 
@@ -427,52 +425,37 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
 
-  /* load the dialog from the ui file */
-  builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, pager_dialog_ui,
-      pager_dialog_ui_length, NULL))
-    {
-      /* signals to monitor number of workspace changes */
-      g_signal_connect (G_OBJECT (plugin->wnck_screen), "workspace-created",
-          G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
-      g_signal_connect (G_OBJECT (plugin->wnck_screen), "workspace-destroyed",
-          G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
+  /* setup the dialog */
+  builder = panel_builder_new (panel_plugin, pager_dialog_ui,
+                               pager_dialog_ui_length, &dialog);
+  if (G_UNLIKELY (builder == NULL))
+    return;
 
-      xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (builder), pager_plugin_configure_destroyed, plugin);
+  /* signals to monitor number of workspace changes */
+  g_signal_connect (G_OBJECT (plugin->wnck_screen), "workspace-created",
+      G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
+  g_signal_connect (G_OBJECT (plugin->wnck_screen), "workspace-destroyed",
+      G_CALLBACK (pager_plugin_configure_n_workspaces_changed), builder);
+  g_object_weak_ref (G_OBJECT (builder), pager_plugin_configure_destroyed, plugin);
 
-      dialog = gtk_builder_get_object (builder, "dialog");
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
+  object = gtk_builder_get_object (builder, "settings-button");
+  g_signal_connect (G_OBJECT (object), "clicked",
+      G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
 
-      object = gtk_builder_get_object (builder, "close-button");
-      g_signal_connect_swapped (G_OBJECT (object), "clicked",
-          G_CALLBACK (gtk_widget_destroy), dialog);
+  object = gtk_builder_get_object (builder, "workspace-scrolling");
+  exo_mutual_binding_new (G_OBJECT (plugin), "workspace-scrolling",
+                          G_OBJECT (object), "active");
 
-      object = gtk_builder_get_object (builder, "settings-button");
-      g_signal_connect (G_OBJECT (object), "clicked",
-          G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
+  object = gtk_builder_get_object (builder, "show-names");
+  exo_mutual_binding_new (G_OBJECT (plugin), "show-names",
+                          G_OBJECT (object), "active");
 
-      object = gtk_builder_get_object (builder, "workspace-scrolling");
-      exo_mutual_binding_new (G_OBJECT (plugin), "workspace-scrolling",
-                              G_OBJECT (object), "active");
+  object = gtk_builder_get_object (builder, "rows");
+  exo_mutual_binding_new (G_OBJECT (plugin), "rows",
+                          G_OBJECT (object), "value");
 
-      object = gtk_builder_get_object (builder, "show-names");
-      exo_mutual_binding_new (G_OBJECT (plugin), "show-names",
-                              G_OBJECT (object), "active");
+  /* update the rows limit */
+  pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
 
-      object = gtk_builder_get_object (builder, "rows");
-      exo_mutual_binding_new (G_OBJECT (plugin), "rows",
-                              G_OBJECT (object), "value");
-
-      /* update the rows limit */
-      pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
-
-      gtk_widget_show (GTK_WIDGET (dialog));
-    }
-  else
-    {
-      /* release the builder */
-      g_object_unref (G_OBJECT (builder));
-    }
+  gtk_widget_show (GTK_WIDGET (dialog));
 }

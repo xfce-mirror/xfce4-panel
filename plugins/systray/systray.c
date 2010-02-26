@@ -26,6 +26,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-builder.h>
 #include <exo/exo.h>
 
 #include "systray.h"
@@ -451,44 +452,27 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (xfce_titled_dialog_get_type () == 0)
     return;
 
-  builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, systray_dialog_ui,
-                                   systray_dialog_ui_length, NULL))
-    {
-      dialog = gtk_builder_get_object (builder, "dialog");
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
+  /* setup the dialog */
+  builder = panel_builder_new (panel_plugin, systray_dialog_ui,
+                               systray_dialog_ui_length, &dialog);
+  if (G_UNLIKELY (builder == NULL))
+    return;
 
-      xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify)
-                         xfce_panel_plugin_unblock_menu, panel_plugin);
+  object = gtk_builder_get_object (builder, "rows");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  exo_mutual_binding_new (G_OBJECT (plugin), "rows",
+                          G_OBJECT (object), "value");
 
-      object = gtk_builder_get_object (builder, "close-button");
-      panel_return_if_fail (GTK_IS_WIDGET (object));
-      g_signal_connect_swapped (G_OBJECT (object), "clicked",
-                                G_CALLBACK (gtk_widget_destroy), dialog);
+  object = gtk_builder_get_object (builder, "show-frame");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  exo_mutual_binding_new (G_OBJECT (plugin), "show-frame",
+                          G_OBJECT (object), "active");
 
-      object = gtk_builder_get_object (builder, "rows");
-      panel_return_if_fail (GTK_IS_WIDGET (object));
-      exo_mutual_binding_new (G_OBJECT (plugin), "rows",
-                              G_OBJECT (object), "value");
+  object = gtk_builder_get_object (builder, "applications-store");
+  panel_return_if_fail (GTK_IS_LIST_STORE (object));
+  systray_plugin_dialog_add_application_names (plugin, GTK_LIST_STORE (object));
 
-      object = gtk_builder_get_object (builder, "show-frame");
-      panel_return_if_fail (GTK_IS_WIDGET (object));
-      exo_mutual_binding_new (G_OBJECT (plugin), "show-frame",
-                              G_OBJECT (object), "active");
-
-      object = gtk_builder_get_object (builder, "applications-store");
-      panel_return_if_fail (GTK_IS_LIST_STORE (object));
-      systray_plugin_dialog_add_application_names (plugin, GTK_LIST_STORE (object));
-
-      gtk_widget_show (GTK_WIDGET (dialog));
-    }
-  else
-    {
-      /* release the builder */
-      g_object_unref (G_OBJECT (builder));
-    }
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 

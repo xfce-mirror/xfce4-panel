@@ -26,6 +26,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-builder.h>
 #include <exo/exo.h>
 
 #include "separator.h"
@@ -313,35 +314,21 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   panel_return_if_fail (XFCE_IS_SEPARATOR_PLUGIN (plugin));
 
-  /* load the dialog from the ui file */
-  builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, separator_dialog_ui, separator_dialog_ui_length, NULL))
-    {
-      dialog = gtk_builder_get_object (builder, "dialog");
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
+  /* setup the dialog */
+  builder = panel_builder_new (panel_plugin, separator_dialog_ui,
+                               separator_dialog_ui_length, &dialog);
+  if (G_UNLIKELY (builder == NULL))
+    return;
 
-      xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) xfce_panel_plugin_unblock_menu, panel_plugin);
+  object = gtk_builder_get_object (builder, "style");
+  exo_mutual_binding_new (G_OBJECT (plugin), "style",
+                          G_OBJECT (object), "active");
 
-      object = gtk_builder_get_object (builder, "close-button");
-      g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
+  object = gtk_builder_get_object (builder, "expand");
+  exo_mutual_binding_new (G_OBJECT (plugin), "expand",
+                          G_OBJECT (object), "active");
 
-      object = gtk_builder_get_object (builder, "style");
-      exo_mutual_binding_new (G_OBJECT (plugin), "style",
-                              G_OBJECT (object), "active");
-
-      object = gtk_builder_get_object (builder, "expand");
-      exo_mutual_binding_new (G_OBJECT (plugin), "expand",
-                              G_OBJECT (object), "active");
-
-      gtk_widget_show (GTK_WIDGET (dialog));
-    }
-  else
-    {
-      /* release the builder */
-      g_object_unref (G_OBJECT (builder));
-    }
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 

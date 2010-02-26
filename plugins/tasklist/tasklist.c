@@ -24,6 +24,7 @@
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-builder.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include "tasklist-widget.h"
@@ -180,51 +181,35 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject        *dialog;
   GObject        *object;
 
-  builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, tasklist_dialog_ui,
-                                   tasklist_dialog_ui_length, NULL))
-    {
-      dialog = gtk_builder_get_object (builder, "dialog");
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
-
-      xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify)
-                         xfce_panel_plugin_unblock_menu, panel_plugin);
-
-      object = gtk_builder_get_object (builder, "close-button");
-      g_signal_connect_swapped (G_OBJECT (object), "clicked",
-                                G_CALLBACK (gtk_widget_destroy), dialog);
+  /* setup the dialog */
+  builder = panel_builder_new (panel_plugin, tasklist_dialog_ui,
+                               tasklist_dialog_ui_length, &dialog);
+  if (G_UNLIKELY (builder == NULL))
+    return;
 
 #define TASKLIST_DIALOG_BIND(name, property) \
-      object = gtk_builder_get_object (builder, (name)); \
-      panel_return_if_fail (G_IS_OBJECT (object)); \
-      exo_mutual_binding_new (G_OBJECT (plugin->tasklist), (name), \
-                              G_OBJECT (object), (property));
+  object = gtk_builder_get_object (builder, (name)); \
+  panel_return_if_fail (G_IS_OBJECT (object)); \
+  exo_mutual_binding_new (G_OBJECT (plugin->tasklist), (name), \
+                          G_OBJECT (object), (property));
 
 #define TASKLIST_DIALOG_BIND_INV(name, property) \
-      object = gtk_builder_get_object (builder, (name)); \
-      panel_return_if_fail (G_IS_OBJECT (object)); \
-      exo_mutual_binding_new_with_negation (G_OBJECT (plugin->tasklist), \
-                                            name,  G_OBJECT (object), \
-                                            property);
+  object = gtk_builder_get_object (builder, (name)); \
+  panel_return_if_fail (G_IS_OBJECT (object)); \
+  exo_mutual_binding_new_with_negation (G_OBJECT (plugin->tasklist), \
+                                        name,  G_OBJECT (object), \
+                                        property);
 
-      TASKLIST_DIALOG_BIND ("show-labels", "active")
-      TASKLIST_DIALOG_BIND ("grouping", "active")
-      TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
-      TASKLIST_DIALOG_BIND ("flat-buttons", "active")
-      TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
-      TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
-      TASKLIST_DIALOG_BIND ("show-wireframes", "active")
-      TASKLIST_DIALOG_BIND ("show-handle", "active")
+  TASKLIST_DIALOG_BIND ("show-labels", "active")
+  TASKLIST_DIALOG_BIND ("grouping", "active")
+  TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
+  TASKLIST_DIALOG_BIND ("flat-buttons", "active")
+  TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
+  TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
+  TASKLIST_DIALOG_BIND ("show-wireframes", "active")
+  TASKLIST_DIALOG_BIND ("show-handle", "active")
 
-      gtk_widget_show (GTK_WIDGET (dialog));
-  }
-  else
-    {
-      /* release the builder */
-      g_object_unref (G_OBJECT (builder));
-    }
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 

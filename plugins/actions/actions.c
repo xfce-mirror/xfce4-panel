@@ -26,6 +26,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-builder.h>
 #include <exo/exo.h>
 
 #include "actions.h"
@@ -355,50 +356,33 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
 
-  /* load the dialog from the ui file */
-  builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, actions_dialog_ui,
-                                   actions_dialog_ui_length, NULL))
-    {
-      dialog = gtk_builder_get_object (builder, "dialog");
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
+  /* setup the dialog */
+  builder = panel_builder_new (panel_plugin, actions_dialog_ui,
+                               actions_dialog_ui_length, &dialog);
+  if (G_UNLIKELY (builder == NULL))
+    return;
 
-      xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify)
-          xfce_panel_plugin_unblock_menu, panel_plugin);
+  /* populate the first store */
+  object = gtk_builder_get_object (builder, "first-action-model");
+  for (i = 1; i < G_N_ELEMENTS (action_entries); i++)
+    gtk_list_store_insert_with_values (GTK_LIST_STORE (object), NULL, i - 1,
+                                       0, _(action_entries[i].title), -1);
 
-      object = gtk_builder_get_object (builder, "close-button");
-      g_signal_connect_swapped (G_OBJECT (object), "clicked",
-          G_CALLBACK (gtk_widget_destroy), dialog);
+  object = gtk_builder_get_object (builder, "first-action");
+  exo_mutual_binding_new (G_OBJECT (plugin), "first-action",
+                          G_OBJECT (object), "active");
 
-      /* populate the first store */
-      object = gtk_builder_get_object (builder, "first-action-model");
-      for (i = 1; i < G_N_ELEMENTS (action_entries); i++)
-        gtk_list_store_insert_with_values (GTK_LIST_STORE (object), NULL, i - 1,
-                                           0, _(action_entries[i].title), -1);
+  /* populate the second store */
+  object = gtk_builder_get_object (builder, "second-action-model");
+  for (i = 0; i < G_N_ELEMENTS (action_entries); i++)
+    gtk_list_store_insert_with_values (GTK_LIST_STORE (object), NULL, i,
+                                       0, _(action_entries[i].title), -1);
 
-      object = gtk_builder_get_object (builder, "first-action");
-      exo_mutual_binding_new (G_OBJECT (plugin), "first-action",
-                              G_OBJECT (object), "active");
+  object = gtk_builder_get_object (builder, "second-action");
+  exo_mutual_binding_new (G_OBJECT (plugin), "second-action",
+                          G_OBJECT (object), "active");
 
-      /* populate the second store */
-      object = gtk_builder_get_object (builder, "second-action-model");
-      for (i = 0; i < G_N_ELEMENTS (action_entries); i++)
-        gtk_list_store_insert_with_values (GTK_LIST_STORE (object), NULL, i,
-                                           0, _(action_entries[i].title), -1);
-
-      object = gtk_builder_get_object (builder, "second-action");
-      exo_mutual_binding_new (G_OBJECT (plugin), "second-action",
-                              G_OBJECT (object), "active");
-
-      gtk_widget_show (GTK_WIDGET (dialog));
-    }
-  else
-    {
-      /* release the builder */
-      g_object_unref (G_OBJECT (builder));
-    }
+  gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 

@@ -32,6 +32,7 @@
 #include <xfconf/xfconf.h>
 
 #include <common/panel-private.h>
+#include <common/panel-builder.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -574,12 +575,8 @@ launcher_dialog_response (GtkWidget            *widget,
       /* disconnect from the menu items */
       launcher_dialog_items_unload (dialog);
 
-      /* destroy the dialog and release the builder */
+      /* destroy the dialog */
       gtk_widget_destroy (widget);
-      g_object_unref (G_OBJECT (dialog->builder));
-
-      /* unblock plugin menu */
-      xfce_panel_plugin_unblock_menu (XFCE_PANEL_PLUGIN (dialog->plugin));
 
       /* cleanup */
       g_slice_free (LauncherPluginDialog, dialog);
@@ -745,96 +742,85 @@ launcher_dialog_show (LauncherPlugin *plugin)
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
-  builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, launcher_dialog_ui,
-                                    launcher_dialog_ui_length, NULL))
+  /* setup the dialog */
+  builder = panel_builder_new (XFCE_PANEL_PLUGIN (plugin), launcher_dialog_ui,
+                               launcher_dialog_ui_length, &window);
+  if (G_UNLIKELY (builder == NULL))
+    return;
+
+  /* create structure */
+  dialog = g_slice_new0 (LauncherPluginDialog);
+  dialog->builder = builder;
+  dialog->plugin = plugin;
+  dialog->items = NULL;
+
+  g_signal_connect (G_OBJECT (window), "response",
+      G_CALLBACK (launcher_dialog_response), dialog);
+
+  /* connect item buttons */
+  for (i = 0; i < G_N_ELEMENTS (button_names); i++)
     {
-      /* create structure */
-      dialog = g_slice_new0 (LauncherPluginDialog);
-      dialog->builder = builder;
-      dialog->plugin = plugin;
-      dialog->items = NULL;
-
-      /* block plugin menu */
-      xfce_panel_plugin_block_menu (XFCE_PANEL_PLUGIN (plugin));
-
-      /* get dialog from builder, release builder when dialog is destroyed */
-      window = gtk_builder_get_object (builder, "dialog");
-      xfce_panel_plugin_take_window (XFCE_PANEL_PLUGIN (plugin), GTK_WINDOW (window));
-      g_signal_connect (G_OBJECT (window), "response",
-          G_CALLBACK (launcher_dialog_response), dialog);
-
-      /* connect item buttons */
-      for (i = 0; i < G_N_ELEMENTS (button_names); i++)
-        {
-          object = gtk_builder_get_object (builder, button_names[i]);
-          panel_return_if_fail (GTK_IS_WIDGET (object));
-          g_signal_connect (G_OBJECT (object), "clicked",
-              G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
-        }
-
-      /* setup treeview selection */
-      object = gtk_builder_get_object (builder, "item-treeview");
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
-      gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
-      g_signal_connect (G_OBJECT (selection), "changed",
-          G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
-      launcher_dialog_tree_selection_changed (selection, dialog);
-
-      /* connect bindings to the advanced properties */
-      for (i = 0; i < G_N_ELEMENTS (binding_names); i++)
-        {
-          object = gtk_builder_get_object (builder, binding_names[i]);
-          panel_return_if_fail (GTK_IS_WIDGET (object));
-          exo_mutual_binding_new (G_OBJECT (plugin), binding_names[i],
-                                  G_OBJECT (object), "active");
-        }
-
-      /* setup responses for the add dialog */
-      object = gtk_builder_get_object (builder, "dialog-add");
-      g_signal_connect (G_OBJECT (object), "response",
-          G_CALLBACK (launcher_dialog_add_response), dialog);
-      g_signal_connect (G_OBJECT (object), "delete-event",
-          G_CALLBACK (gtk_true), NULL);
-
-      /* setup sorting in the add dialog */
-      object = gtk_builder_get_object (builder, "add-store");
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (object),
-                                            COL_NAME, GTK_SORT_ASCENDING);
-
-      /* allow selecting multiple items in the add dialog */
-      object = gtk_builder_get_object (builder, "add-treeview");
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
-      gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
-      g_signal_connect (G_OBJECT (selection), "changed",
-          G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
-
-      /* setup search filter in the add dialog */
-      object = gtk_builder_get_object (builder, "add-store-filter");
-      item = gtk_builder_get_object (builder, "add-search");
-      gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (object),
-          launcher_dialog_add_visible_function, item, NULL);
-      g_signal_connect_swapped (G_OBJECT (item), "changed",
-          G_CALLBACK (gtk_tree_model_filter_refilter), object);
-
-      /* setup the icon size in the icon renderers */
-      object = gtk_builder_get_object (builder, "addrenderericon");
-      g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
-      object = gtk_builder_get_object (builder, "itemrenderericon");
-      g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
-
-      /* load the plugin items */
-      launcher_dialog_items_load (dialog);
-      g_signal_connect_swapped (G_OBJECT (plugin), "items-changed",
-          G_CALLBACK (launcher_dialog_items_load), dialog);
-
-      /* show the dialog */
-      gtk_widget_show (GTK_WIDGET (window));
+      object = gtk_builder_get_object (builder, button_names[i]);
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      g_signal_connect (G_OBJECT (object), "clicked",
+          G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
     }
-  else
+
+  /* setup treeview selection */
+  object = gtk_builder_get_object (builder, "item-treeview");
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+  g_signal_connect (G_OBJECT (selection), "changed",
+      G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
+  launcher_dialog_tree_selection_changed (selection, dialog);
+
+  /* connect bindings to the advanced properties */
+  for (i = 0; i < G_N_ELEMENTS (binding_names); i++)
     {
-      /* release the builder and fire error */
-      g_object_unref (G_OBJECT (builder));
-      panel_assert_not_reached ();
+      object = gtk_builder_get_object (builder, binding_names[i]);
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      exo_mutual_binding_new (G_OBJECT (plugin), binding_names[i],
+                              G_OBJECT (object), "active");
     }
+
+  /* setup responses for the add dialog */
+  object = gtk_builder_get_object (builder, "dialog-add");
+  g_signal_connect (G_OBJECT (object), "response",
+      G_CALLBACK (launcher_dialog_add_response), dialog);
+  g_signal_connect (G_OBJECT (object), "delete-event",
+      G_CALLBACK (gtk_true), NULL);
+
+  /* setup sorting in the add dialog */
+  object = gtk_builder_get_object (builder, "add-store");
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (object),
+                                        COL_NAME, GTK_SORT_ASCENDING);
+
+  /* allow selecting multiple items in the add dialog */
+  object = gtk_builder_get_object (builder, "add-treeview");
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+  g_signal_connect (G_OBJECT (selection), "changed",
+      G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
+
+  /* setup search filter in the add dialog */
+  object = gtk_builder_get_object (builder, "add-store-filter");
+  item = gtk_builder_get_object (builder, "add-search");
+  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (object),
+      launcher_dialog_add_visible_function, item, NULL);
+  g_signal_connect_swapped (G_OBJECT (item), "changed",
+      G_CALLBACK (gtk_tree_model_filter_refilter), object);
+
+  /* setup the icon size in the icon renderers */
+  object = gtk_builder_get_object (builder, "addrenderericon");
+  g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
+  object = gtk_builder_get_object (builder, "itemrenderericon");
+  g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
+
+  /* load the plugin items */
+  launcher_dialog_items_load (dialog);
+  g_signal_connect_swapped (G_OBJECT (plugin), "items-changed",
+      G_CALLBACK (launcher_dialog_items_load), dialog);
+
+  /* show the dialog */
+  gtk_widget_show (GTK_WIDGET (window));
 }
