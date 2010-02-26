@@ -37,7 +37,7 @@ typedef struct _PanelPluginExternal      PanelPluginExternal;
 
 GType panel_plugin_external_get_type (void) G_GNUC_CONST;
 
-XfcePanelPluginProvider *panel_plugin_external_new (PanelModule *module, const gchar *name, const gchar *id);
+XfcePanelPluginProvider *panel_plugin_external_new (PanelModule *module, const gchar *name, const gchar *id, gchar **arguments);
 
 G_END_DECLS
 

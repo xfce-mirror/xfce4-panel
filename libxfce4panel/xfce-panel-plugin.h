@@ -69,7 +69,7 @@ struct _XfcePanelPlugin
 {
   /*< private >*/
   GtkEventBox __parent__;
-  
+
   /*< private >*/
   XfcePanelPluginPrivate *priv;
 };
@@ -82,6 +82,9 @@ const gchar        *xfce_panel_plugin_get_name            (XfcePanelPlugin *plug
 const gchar        *xfce_panel_plugin_get_display_name    (XfcePanelPlugin *plugin);
 
 const gchar        *xfce_panel_plugin_get_id              (XfcePanelPlugin *plugin);
+
+gboolean            xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin,
+                                                           gchar           ***arguments);
 
 gint                xfce_panel_plugin_get_size            (XfcePanelPlugin *plugin);
 
@@ -113,7 +116,7 @@ void                xfce_panel_plugin_unblock_menu        (XfcePanelPlugin *plug
 
 void                xfce_panel_plugin_register_menu       (XfcePanelPlugin *plugin,
                                                            GtkMenu         *menu);
-                                                       
+
 GtkArrowType        xfce_panel_plugin_arrow_type          (XfcePanelPlugin *plugin);
 
 void                xfce_panel_plugin_position_widget     (XfcePanelPlugin *plugin,
@@ -121,7 +124,7 @@ void                xfce_panel_plugin_position_widget     (XfcePanelPlugin *plug
                                                            GtkWidget       *attach_widget,
                                                            gint            *x,
                                                            gint            *y);
-                                                       
+
 void                xfce_panel_plugin_position_menu       (GtkMenu         *menu,
                                                            gint            *x,
                                                            gint            *y,

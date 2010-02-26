@@ -74,6 +74,7 @@ enum
   PROP_0,
   PROP_NAME,
   PROP_DISPLAY_NAME,
+  PROP_ARGUMENTS,
   PROP_ID
 };
 
@@ -92,16 +93,17 @@ enum
 struct _XfcePanelPluginPrivate
 {
   /* plugin information */
-  gchar              *name;
-  gchar              *display_name;
-  gchar              *id;
-  gint                size;
-  guint               expand : 1;
-  GtkOrientation      orientation;
-  XfceScreenPosition  screen_position;
+  gchar               *name;
+  gchar               *display_name;
+  gchar               *id;
+  gchar              **arguments;
+  gint                 size;
+  guint                expand : 1;
+  GtkOrientation       orientation;
+  XfceScreenPosition   screen_position;
 
   /* plugin menu */
-  GtkWidget          *menu;
+  GtkWidget           *menu;
 };
 
 
@@ -111,9 +113,10 @@ static guint plugin_signals[LAST_SIGNAL];
 
 
 /* external plugin information for during plugin_init */
-const gchar *plugin_init_name = NULL;
-const gchar *plugin_init_id = NULL;
-const gchar *plugin_init_display_name = NULL;
+const gchar  *plugin_init_name = NULL;
+const gchar  *plugin_init_id = NULL;
+const gchar  *plugin_init_display_name = NULL;
+gchar       **plugin_init_arguments = NULL;
 
 
 
@@ -321,6 +324,18 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                         "Unique plugin ID",
                                                         NULL,
                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+  /**
+   * XfcePanelPlugin:arguments:
+   *
+   * TODO
+   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_ARGUMENTS,
+                                   g_param_spec_pointer ("arguments",
+                                                         "Arguemnts",
+                                                         "Startup arguments for the plugin",
+                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
 
@@ -335,6 +350,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;
   plugin->priv->id = NULL;
+  plugin->priv->arguments = NULL;
   plugin->priv->size = 0;
   plugin->priv->expand = FALSE;
   plugin->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
@@ -382,6 +398,10 @@ xfce_panel_plugin_get_property (GObject    *object,
         g_value_set_static_string (value, plugin->priv->id);
         break;
 
+      case PROP_ARGUMENTS:
+        g_value_set_pointer (value, plugin->priv->arguments);
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -424,6 +444,14 @@ xfce_panel_plugin_set_property (GObject      *object,
         plugin->priv->id = g_value_dup_string (value);
         break;
 
+      case PROP_ARGUMENTS:
+        /* cleanup previous arguments */
+        g_strfreev (plugin->priv->arguments);
+
+        /* set new values */
+        plugin->priv->arguments = g_strdupv (g_value_get_pointer (value));
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -459,6 +487,7 @@ xfce_panel_plugin_finalize (GObject *object)
   g_free (plugin->priv->name);
   g_free (plugin->priv->display_name);
   g_free (plugin->priv->id);
+  g_strfreev (plugin->priv->arguments);
 
   (*G_OBJECT_CLASS (xfce_panel_plugin_parent_class)->finalize) (object);
 }
@@ -750,6 +779,28 @@ xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
   return plugin->priv->id ? plugin->priv->id : plugin_init_id;
+}
+
+
+
+gboolean
+xfce_panel_plugin_get_arguments (XfcePanelPlugin   *plugin,
+                                 gchar           ***arguments)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
+
+  if (plugin->priv->arguments || plugin_init_arguments)
+    {
+      /* dupplicate the arguments */
+      if (arguments != NULL)
+        *arguments = g_strdupv (plugin->priv->arguments ? plugin->priv->arguments : plugin_init_arguments);
+
+      return TRUE;
+    }
+  else
+    {
+      return FALSE;
+    }
 }
 
 

@@ -41,17 +41,18 @@ GType                    panel_module_factory_get_type            (void) G_GNUC_
 
 PanelModuleFactory      *panel_module_factory_get                 (void);
 
-gboolean                 panel_module_factory_has_launcher        (PanelModuleFactory *factory);
+gboolean                 panel_module_factory_has_launcher        (PanelModuleFactory  *factory);
 
-void                     panel_module_factory_emit_unique_changed (PanelModule        *module);
+void                     panel_module_factory_emit_unique_changed (PanelModule         *module);
 
-GList                   *panel_module_factory_get_modules         (PanelModuleFactory *factory);
+GList                   *panel_module_factory_get_modules         (PanelModuleFactory  *factory);
 
-XfcePanelPluginProvider *panel_module_factory_create_plugin       (PanelModuleFactory *factory,
-                                                                   GdkScreen          *screen,
-                                                                   const gchar        *name,
-                                                                   const gchar        *id,
-                                                                   UseWrapper          use_wrapper);
+XfcePanelPluginProvider *panel_module_factory_create_plugin       (PanelModuleFactory  *factory,
+                                                                   GdkScreen           *screen,
+                                                                   const gchar         *name,
+                                                                   const gchar         *id,
+                                                                   gchar              **arguments,
+                                                                   UseWrapper           use_wrapper);
 
 G_END_DECLS
 

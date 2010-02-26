@@ -59,7 +59,7 @@ struct _PanelModuleFactory
 
   /* table of loaded modules */
   GHashTable *modules;
-  
+
   /* if the factory contains the launcher plugin */
   guint       has_launcher : 1;
 };
@@ -103,7 +103,7 @@ panel_module_factory_init (PanelModuleFactory *factory)
 {
   /* initialize */
   factory->has_launcher = FALSE;
-  
+
   /* create hash table */
   factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
 
@@ -187,7 +187,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
 
               /* get the new module internal name */
               internal_name = g_strndup (name, p - name);
-              
+
               /* check if the modules name is already loaded */
               if (G_UNLIKELY (g_hash_table_lookup (factory->modules, internal_name) != NULL))
                 goto already_loaded;
@@ -199,7 +199,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
                 {
                   /* add the module to the internal list */
                   g_hash_table_insert (factory->modules, internal_name, module);
-                  
+
                   /* check if this is the launcher */
                   if (factory->has_launcher == FALSE && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name))
                     factory->has_launcher = TRUE;
@@ -207,7 +207,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
               else
                 {
                   already_loaded:
-                  
+
                   /* cleanup */
                   g_free (internal_name);
                 }
@@ -215,7 +215,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
               /* cleanup */
               g_free (filename);
             }
-            
+
           /* close directory */
           g_dir_close (dir);
         }
@@ -238,17 +238,17 @@ panel_module_factory_modules_cleanup (gpointer key,
   PanelModuleFactory *factory = PANEL_MODULE_FACTORY (user_data);
   PanelModule        *module = PANEL_MODULE (value);
   gboolean            remove;
-  
+
   panel_return_val_if_fail (PANEL_IS_MODULE (module), TRUE);
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), TRUE);
-  
+
   /* get whether the module is valid */
   remove = !panel_module_is_valid (module);
-  
+
   /* if we're going to remove this item, check if it's the launcher */
   if (remove == TRUE && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_internal_name (module)))
     factory->has_launcher = FALSE;
-  
+
   return remove;
 }
 
@@ -280,7 +280,7 @@ gboolean
 panel_module_factory_has_launcher (PanelModuleFactory *factory)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), FALSE);
-  
+
   return factory->has_launcher;
 }
 
@@ -324,10 +324,10 @@ GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
-  
+
   /* make sure the hash table is clean */
   g_hash_table_foreach_remove (factory->modules, panel_module_factory_modules_cleanup, factory);
-  
+
 #if GLIB_CHECK_VERSION (2,14,0)
   return g_hash_table_get_values (factory->modules);
 #else
@@ -343,11 +343,12 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
 
 
 XfcePanelPluginProvider *
-panel_module_factory_create_plugin (PanelModuleFactory *factory,
-                                    GdkScreen          *screen,
-                                    const gchar        *name,
-                                    const gchar        *id,
-                                    UseWrapper          use_wrapper)
+panel_module_factory_create_plugin (PanelModuleFactory  *factory,
+                                    GdkScreen           *screen,
+                                    const gchar         *name,
+                                    const gchar         *id,
+                                    gchar              **arguments,
+                                    UseWrapper           use_wrapper)
 {
   PanelModule *module;
 
@@ -367,5 +368,5 @@ panel_module_factory_create_plugin (PanelModuleFactory *factory,
     }
 
   /* create the new module */
-  return panel_module_create_plugin (module, screen, name, id, use_wrapper);
+  return panel_module_create_plugin (module, screen, name, id, arguments, use_wrapper);
 }

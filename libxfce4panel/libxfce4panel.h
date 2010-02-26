@@ -106,15 +106,17 @@ typedef GTypeModule XfcePanelModule;
   const gchar *plugin_init_display_name = NULL; \
   \
   G_MODULE_EXPORT XfcePanelPlugin * \
-  xfce_panel_plugin_construct (const gchar *name, \
-                               const gchar *id, \
-                               const gchar *display_name, \
-                               GdkScreen   *screen) \
+  xfce_panel_plugin_construct (const gchar  *name, \
+                               const gchar  *id, \
+                               const gchar  *display_name, \
+                               gchar       **arguments, \
+                               GdkScreen    *screen) \
   { \
-    XfcePanelPlugin    *plugin; \
-    extern const gchar *plugin_init_name; \
-    extern const gchar *plugin_init_id; \
-    extern const gchar *plugin_init_display_name; \
+    XfcePanelPlugin     *plugin; \
+    extern const gchar  *plugin_init_name; \
+    extern const gchar  *plugin_init_id; \
+    extern const gchar  *plugin_init_display_name; \
+    extern gchar       **plugin_init_arguments; \
     \
     panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL); \
     panel_return_val_if_fail (name != NULL && id != NULL, NULL); \
@@ -124,13 +126,15 @@ typedef GTypeModule XfcePanelModule;
     plugin_init_name = name; \
     plugin_init_id = id; \
     plugin_init_display_name = display_name; \
+    plugin_init_arguments = arguments; \
     \
     CODE \
     \
     plugin = g_object_new (type, \
                            "name", name, \
                            "display-name", display_name, \
-                           "id", id, NULL); \
+                           "id", id, \
+                           "arguments", arguments, NULL); \
     \
     return plugin; \
   }
@@ -157,10 +161,11 @@ typedef GTypeModule XfcePanelModule;
   } \
   \
   G_MODULE_EXPORT XfcePanelPlugin * \
-  xfce_panel_plugin_construct (const gchar *name, \
-                               const gchar *id, \
-                               const gchar *display_name, \
-                               GdkScreen   *screen) \
+  xfce_panel_plugin_construct (const gchar  *name, \
+                               const gchar  *id, \
+                               const gchar  *display_name, \
+                               gchar       **arguments, \
+                               GdkScreen    *screen) \
   { \
     XfcePanelPlugin *plugin = NULL; \
     \
@@ -173,7 +178,8 @@ typedef GTypeModule XfcePanelModule;
         plugin = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
                                "name", name, \
                                "display-name", display_name, \
-                               "id", id, NULL); \
+                               "id", id, \
+                               "arguments", arguments, NULL); \
         \
         /* signal to realize the plugin */ \
         g_signal_connect_after (G_OBJECT (plugin), "realize", G_CALLBACK (xfce_panel_plugin_realize), NULL); \

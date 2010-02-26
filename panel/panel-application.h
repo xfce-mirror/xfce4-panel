@@ -41,29 +41,33 @@ void              panel_application_multihead_area    (GtkWidget *widget,
 
 PanelApplication *panel_application_get               (void);
 
-void              panel_application_save              (PanelApplication *application);
+void              panel_application_save              (PanelApplication  *application);
 
-void              panel_application_take_dialog       (PanelApplication *application,
-                                                       GtkWindow        *dialog);
+void              panel_application_take_dialog       (PanelApplication  *application,
+                                                       GtkWindow         *dialog);
 
-void              panel_application_destroy_dialogs   (PanelApplication *application);
+void              panel_application_destroy_dialogs   (PanelApplication  *application);
 
-PanelWindow      *panel_application_new_window        (PanelApplication *application,
-                                                       GdkScreen        *screen);
-                                                     
-gint              panel_application_get_n_windows     (PanelApplication *application);
+void              panel_application_add_new_item      (PanelApplication  *application,
+                                                       const gchar       *plugin_name,
+                                                       gchar            **arguments);
 
-gint              panel_application_get_window_index  (PanelApplication *application,
-                                                       PanelWindow      *window);
+PanelWindow      *panel_application_new_window        (PanelApplication  *application,
+                                                       GdkScreen         *screen);
 
-PanelWindow      *panel_application_get_window        (PanelApplication *application,
-                                                       guint             idx);
-                                                     
-void              panel_application_windows_sensitive (PanelApplication *application,
-                                                       gboolean          sensitive);
-                                                       
-void              panel_application_windows_autohide  (PanelApplication *application,
-                                                       gboolean          freeze);
+gint              panel_application_get_n_windows     (PanelApplication  *application);
+
+gint              panel_application_get_window_index  (PanelApplication  *application,
+                                                       PanelWindow       *window);
+
+PanelWindow      *panel_application_get_window        (PanelApplication  *application,
+                                                       guint              idx);
+
+void              panel_application_windows_sensitive (PanelApplication  *application,
+                                                       gboolean           sensitive);
+
+void              panel_application_windows_autohide  (PanelApplication  *application,
+                                                       gboolean           freeze);
 
 G_END_DECLS
 

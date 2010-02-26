@@ -21,16 +21,20 @@
 #include <glib.h>
 #include <gdk/gdk.h>
 
-gboolean  panel_dbus_client_display_preferences_dialog (GdkScreen  *screen,
-                                                        GError    **error);
+gboolean  panel_dbus_client_display_preferences_dialog (GdkScreen    *screen,
+                                                        GError      **error);
 
-gboolean  panel_dbus_client_display_items_dialog       (GdkScreen  *screen,
-                                                        GError    **error);
+gboolean  panel_dbus_client_display_items_dialog       (GdkScreen    *screen,
+                                                        GError      **error);
 
-gboolean  panel_dbus_client_save                       (GError    **error);
+gboolean  panel_dbus_client_save                       (GError      **error);
 
-gboolean  panel_dbus_client_terminate                  (gboolean    restart,
-                                                        GError    **error);
+gboolean  panel_dbus_client_add_new_item               (const gchar  *plugin_name,
+                                                        gchar       **arguments,
+                                                        GError      **error);
+
+gboolean  panel_dbus_client_terminate                  (gboolean      restart,
+                                                        GError      **error);
 
 G_END_DECLS
 

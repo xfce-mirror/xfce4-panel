@@ -170,6 +170,40 @@ panel_dbus_client_save (GError **error)
 
 
 gboolean
+panel_dbus_client_add_new_item (const gchar  *plugin_name,
+                                gchar       **arguments,
+                                GError      **error)
+{
+  DBusMessage *message;
+  gboolean     result;
+  guint        length;
+
+  panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+  /* arguments length */
+  length = arguments ? g_strv_length (arguments) : 0;
+
+  /* generate the message */
+  message = dbus_message_new_method_call (PANEL_DBUS_SERVICE_INTERFACE, PANEL_DBUS_SERVICE_PATH,
+                                          PANEL_DBUS_SERVICE_INTERFACE, "AddNewItem");
+  dbus_message_set_auto_start (message, FALSE);
+  dbus_message_append_args (message,
+                            DBUS_TYPE_STRING, &plugin_name,
+                            DBUS_TYPE_ARRAY, DBUS_TYPE_STRING, &arguments, length,
+                            DBUS_TYPE_INVALID);
+
+  /* send the message */
+  result = panel_dbus_client_send_message (message, error);
+
+  /* release the message */
+  dbus_message_unref (message);
+
+  return result;
+}
+
+
+
+gboolean
 panel_dbus_client_terminate (gboolean   restart,
                              GError   **error)
 {

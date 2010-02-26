@@ -243,7 +243,7 @@ panel_application_load (PanelApplication *application)
     {
       /* create empty panel window */
       window = panel_application_new_window (application, NULL);
-      
+
       /* TODO add some cruft here */
 
       /* show window */
@@ -302,7 +302,7 @@ panel_application_load_set_property (PanelWindow *window,
       /* 0: normal width, 1: full width and 2: span monitors */
       if (integer > 1)
         panel_window_set_length (window, 100);
-      
+
       if (integer == 2)
         panel_window_set_span_monitors (window, TRUE);
     }
@@ -349,23 +349,23 @@ move_handle (GtkWidget        *item,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  
+
   /* get a copy of the current event */
   event = gtk_get_current_event ();
   if (G_LIKELY (event))
     {
       /* make the window insensitive */
       panel_application_windows_sensitive (application, FALSE);
-      
+
       /* create a target list */
       target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
-      
+
       /* begin a drag */
       gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, event);
-      
+
       /* release the drag list */
       gtk_target_list_unref (target_list);
-      
+
       /* free the event */
       gdk_event_free (event);
     }
@@ -378,37 +378,38 @@ panel_application_get_unique_id (void)
 {
   static gint  counter = 0;
   static gchar id[30];
-  
+
   /* create a unique if of the current time and counter */
   g_snprintf (id, sizeof(id), "%ld%d", time (NULL), counter++);
-  
+
   return id;
 }
 
 static gboolean
-panel_application_insert_plugin (PanelApplication *application,
-                                 PanelWindow      *window,
-                                 GdkScreen        *screen,
-                                 const gchar      *name,
-                                 const gchar      *id,
-                                 UseWrapper        use_wrapper,
-                                 gint              position)
+panel_application_insert_plugin (PanelApplication  *application,
+                                 PanelWindow       *window,
+                                 GdkScreen         *screen,
+                                 const gchar       *name,
+                                 const gchar       *id,
+                                 gchar            **arguments,
+                                 UseWrapper         use_wrapper,
+                                 gint               position)
 {
   GtkWidget               *itembar;
   gboolean                 succeed = FALSE;
   XfcePanelPluginProvider *provider;
-  
+
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
   panel_return_val_if_fail (name != NULL, FALSE);
-  
+
   /* create a new unique id if needed */
   if (id == NULL)
     id = panel_application_get_unique_id ();
-  
+
   /* create a new panel plugin */
-  provider = panel_module_factory_create_plugin (application->factory, screen, name, id, use_wrapper);
+  provider = panel_module_factory_create_plugin (application->factory, screen, name, id, arguments, use_wrapper);
 
   if (G_LIKELY (provider != NULL))
     {
@@ -422,21 +423,21 @@ panel_application_insert_plugin (PanelApplication *application,
 
       /* add the item to the panel */
       panel_itembar_insert (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), position);
-      
+
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
-      
+
       xfce_panel_plugin_provider_set_orientation (provider, panel_window_get_orientation (window));
       xfce_panel_plugin_provider_set_screen_position (provider, panel_glue_get_screen_position (window));
       xfce_panel_plugin_provider_set_size (provider, panel_window_get_size (window));
-      
+
       /* we've succeeded */
       succeed = TRUE;
     }
-                  
+
   return succeed;
 }
-                               
+
 
 
 static void
@@ -520,7 +521,7 @@ panel_application_load_start_element (GMarkupParseContext  *context,
             if (G_LIKELY (name != NULL))
               panel_application_insert_plugin (parser->application, parser->window,
                                                gtk_window_get_screen (GTK_WINDOW (parser->window)),
-                                               name, id, use_wrapper, -1);
+                                               name, id, NULL, use_wrapper, -1);
           }
         break;
 
@@ -737,45 +738,6 @@ panel_application_get (void)
 
 
 void
-panel_application_take_dialog (PanelApplication *application,
-                               GtkWindow        *dialog)
-{
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  panel_return_if_fail (GTK_IS_WINDOW (dialog));
-
-  /* monitor window destruction */
-  g_signal_connect (G_OBJECT (dialog), "destroy", G_CALLBACK (panel_application_dialog_destroyed), application);
-
-  /* add the window to internal list */
-  application->dialogs = g_slist_prepend (application->dialogs, dialog);
-}
-
-
-
-void
-panel_application_destroy_dialogs (PanelApplication *application)
-{
-  GSList *li, *lnext;
-
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-
-  /* destroy all dialogs */
-  for (li = application->dialogs; li != NULL; li = lnext)
-    {
-      /* get next element */
-      lnext = li->next;
-
-      /* destroy the window */
-      gtk_widget_destroy (GTK_WIDGET (li->data));
-    }
-
-  /* check */
-  panel_return_if_fail (application->dialogs == NULL);
-}
-
-
-
-void
 panel_application_save (PanelApplication *application)
 {
   gchar    *filename;
@@ -816,6 +778,65 @@ panel_application_save (PanelApplication *application)
 
 
 
+void
+panel_application_take_dialog (PanelApplication *application,
+                               GtkWindow        *dialog)
+{
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (GTK_IS_WINDOW (dialog));
+
+  /* monitor window destruction */
+  g_signal_connect (G_OBJECT (dialog), "destroy", G_CALLBACK (panel_application_dialog_destroyed), application);
+
+  /* add the window to internal list */
+  application->dialogs = g_slist_prepend (application->dialogs, dialog);
+}
+
+
+
+void
+panel_application_destroy_dialogs (PanelApplication *application)
+{
+  GSList *li, *lnext;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+
+  /* destroy all dialogs */
+  for (li = application->dialogs; li != NULL; li = lnext)
+    {
+      /* get next element */
+      lnext = li->next;
+
+      /* destroy the window */
+      gtk_widget_destroy (GTK_WIDGET (li->data));
+    }
+
+  /* check */
+  panel_return_if_fail (application->dialogs == NULL);
+}
+
+
+
+void
+panel_application_add_new_item (PanelApplication  *application,
+                                const gchar       *plugin_name,
+                                gchar            **arguments)
+{
+  PanelWindow *window;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (plugin_name != NULL);
+
+  /* TODO fix this */
+  window = application->windows->data;
+
+  if (!panel_application_insert_plugin (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
+                                        plugin_name, NULL, arguments, FROM_DESKTOP_FILE, -1))
+    g_warning (_("The plugin you want to add is not recognized by the panel."), plugin_name);
+}
+
+
+
 static void
 panel_application_drag_data_received (GtkWidget        *itembar,
                                       GdkDragContext   *context,
@@ -833,59 +854,59 @@ panel_application_drag_data_received (GtkWidget        *itembar,
   GdkScreen        *screen;
   const gchar      *name;
   guint             old_position;
-  
+
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
   panel_return_if_fail (PANEL_IS_WINDOW (window));
-  
+
   /* get the application */
   application = panel_application_get ();
-  
+
   /* get the drop index on the itembar */
   position = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
-  
+
   /* get the widget screen */
   screen = gtk_widget_get_screen (itembar);
-  
+
   /* TODO replace with enums */
   switch (info)
     {
       case 0:
         /* uri */
         break;
-        
+
       case 1:
         if (G_LIKELY (selection_data->length > 0))
           {
             /* get the name from the selection data */
             name = (const gchar *) selection_data->data;
-            
+
             /* create a new item with a unique id */
-            succeed = panel_application_insert_plugin (application, window, screen, name, 
-                                                       NULL, FROM_DESKTOP_FILE, position);
+            succeed = panel_application_insert_plugin (application, window, screen, name,
+                                                       NULL, NULL, FROM_DESKTOP_FILE, position);
           }
         break;
-        
+
       case 2:
         /* make the itembar sensitive again */
         panel_application_windows_sensitive (application, TRUE);
-        
+
         /* get the source widget */
         provider = gtk_drag_get_source_widget (context);
-        
+
         /* debug check */
         panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-        
+
         /* check if we move to another itembar */
         if (gtk_widget_get_parent (provider) == itembar)
           {
             /* get the current position on the itembar */
             old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), provider);
-            
+
             /* decrease the counter if we drop after the current position */
             if (position > old_position)
               position--;
-            
+
             /* reorder the child if needed */
             if (old_position != position)
               panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
@@ -894,32 +915,32 @@ panel_application_drag_data_received (GtkWidget        *itembar,
           {
             /* reparent the widget, this will also call remove and add for the itembar */
             gtk_widget_reparent (provider, itembar);
-            
+
             /* move the item to the correct position on the itembar */
             panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
-            
+
             /* set new panel size */
             xfce_panel_plugin_provider_set_size (XFCE_PANEL_PLUGIN_PROVIDER (provider), panel_window_get_size (window));
-            
+
             /* TODO update more here */
           }
-          
+
         /* everything went fine */
         succeed = TRUE;
         break;
-        
+
       default:
         panel_assert_not_reached ();
         break;
     }
-    
+
   /* save the panel configuration if we succeeded */
   if (G_LIKELY (succeed))
     panel_application_save (application);
 
   /* release the application */
   g_object_unref (G_OBJECT (application));
-  
+
   /* tell the peer that we handled the drop */
   gtk_drag_finish (context, succeed, FALSE, time);
 }
@@ -935,20 +956,20 @@ panel_application_drag_drop (GtkWidget      *itembar,
                              PanelWindow    *window)
 {
   GdkAtom target;
-  
+
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), FALSE);
   panel_return_val_if_fail (GDK_IS_DRAG_CONTEXT (context), FALSE);
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
-  
+
   target = gtk_drag_dest_find_target (itembar, context, NULL);
-  
+
   /* we cannot handle the drag data */
   if (G_UNLIKELY (target == GDK_NONE))
     return FALSE;
-    
+
   /* request the drag data */
   gtk_drag_get_data (itembar, context, target, time);
-  
+
   /* we call gtk_drag_finish later */
   return TRUE;
 }
@@ -985,7 +1006,7 @@ panel_application_new_window (PanelApplication *application,
   exo_binding_new (G_OBJECT (window), "orientation", G_OBJECT (itembar), "orientation");
   gtk_container_add (GTK_CONTAINER (window), itembar);
   gtk_widget_show (itembar);
-  
+
   /* signals for drag and drop */
   g_signal_connect (G_OBJECT (itembar), "drag-data-received", G_CALLBACK (panel_application_drag_data_received), window);
   g_signal_connect (G_OBJECT (itembar), "drag-drop", G_CALLBACK (panel_application_drag_drop), window);
@@ -1021,7 +1042,7 @@ panel_application_get_window_index (PanelApplication *application,
 {
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), 0);
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), 0);
-  
+
   return g_slist_index (application->windows, window);
 }
 
@@ -1038,24 +1059,24 @@ panel_application_get_window (PanelApplication *application,
 
 
 
-void              
+void
 panel_application_windows_sensitive (PanelApplication *application,
                                      gboolean          sensitive)
 {
   GtkWidget *itembar;
   GSList    *li;
-  
+
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  
+
   /* walk the windows */
   for (li = application->windows; li != NULL; li = li->next)
     {
       /* get the window itembar */
       itembar = gtk_bin_get_child (GTK_BIN (li->data));
-      
+
       /* set sensitivity of the itembar (and the plugins) */
       panel_itembar_set_sensitive (PANEL_ITEMBAR (itembar), sensitive);
-      
+
       /* block autohide for all windows */
       if (sensitive)
         panel_window_thaw_autohide (PANEL_WINDOW (li->data));
@@ -1066,14 +1087,14 @@ panel_application_windows_sensitive (PanelApplication *application,
 
 
 
-void 
+void
 panel_application_windows_autohide (PanelApplication *application,
                                     gboolean          freeze)
 {
   GSList *li;
-  
+
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  
+
   for (li = application->windows; li != NULL; li = li->next)
     {
       if (freeze)

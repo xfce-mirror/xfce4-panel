@@ -616,7 +616,7 @@ launcher_menu_popup (gpointer user_data)
     /* popup menu */
     gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL,
                     xfce_panel_plugin_position_menu,
-                    launcher->panel_plugin, 
+                    launcher->panel_plugin,
                     1, gtk_get_current_event_time ());
 
     GDK_THREADS_LEAVE ();
@@ -878,9 +878,36 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     /* read the user settings */
     launcher_plugin_read (launcher);
 
-    /* add new entry if the list is empty */
+    /* create new launcher */
     if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
-        launcher->entries = g_list_prepend (launcher->entries, launcher_entry_new ());
+      {
+        gchar **filenames;
+        guint i;
+        LauncherEntry *entry;
+
+        /* check for startup arguments */
+        if (xfce_panel_plugin_get_arguments (plugin, &filenames))
+          {
+            /* try to add the entries to the new launcher */
+            for (i = 0; filenames[i] != NULL; i++)
+              {
+                /* create new entry */
+                entry = launcher_entry_new ();
+
+                if (launcher_dialog_read_desktop_file (filenames[i], entry))
+                  launcher->entries = g_list_append (launcher->entries, entry);
+                else
+                  launcher_entry_free (entry, NULL);
+              }
+
+            /* cleanup */
+            g_strfreev (filenames);
+          }
+
+        /* add new entry if the list is still empty */
+        if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
+          launcher->entries = g_list_prepend (launcher->entries, launcher_entry_new ());
+      }
 
     /* set the arrow direction */
     launcher_plugin_screen_position_changed (launcher);
@@ -1163,7 +1190,7 @@ launcher_plugin_orientation_changed (LauncherPlugin *launcher)
 
     /* reorder the boxes again */
     launcher_plugin_pack_buttons (launcher);
-    
+
     /* update size */
     launcher_plugin_set_size (launcher, xfce_panel_plugin_get_size (launcher->panel_plugin));
 }

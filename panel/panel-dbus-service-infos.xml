@@ -48,7 +48,18 @@
 
       Tells the panel to save its configuration, including all the plugins.
     -->
-    <method name="Save">
+    <method name="Save" />
+
+    <!--
+      AddNewItem (name : STRING, args : ARRAY OF STRING) : VOID
+
+      plugin-name : The internal name of the plugin the user wants to add.
+      arguments   : Optional arguments send with the command line. This
+                    could be files or anything else.
+    -->
+    <method name="AddNewItem">
+      <arg name="plugin-name" direction="in" type="s" />
+      <arg name="arguments" direction="in" type="as" />
     </method>
 
     <!--

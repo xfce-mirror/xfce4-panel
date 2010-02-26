@@ -319,11 +319,12 @@ panel_module_new_from_desktop_file (const gchar *filename,
 
 
 XfcePanelPluginProvider *
-panel_module_create_plugin (PanelModule *module,
-                            GdkScreen   *screen,
-                            const gchar *name,
-                            const gchar *id,
-                            UseWrapper   use_wrapper)
+panel_module_create_plugin (PanelModule  *module,
+                            GdkScreen    *screen,
+                            const gchar  *name,
+                            const gchar  *id,
+                            gchar       **arguments,
+                            UseWrapper    use_wrapper)
 {
   XfcePanelPluginProvider *plugin = NULL;
   gboolean                 external;
@@ -345,7 +346,7 @@ panel_module_create_plugin (PanelModule *module,
   if (external)
     {
       /* create external plugin */
-      plugin = panel_plugin_external_new (module, name, id);
+      plugin = panel_plugin_external_new (module, name, id, arguments);
     }
   else
     {
@@ -358,7 +359,7 @@ panel_module_create_plugin (PanelModule *module,
           panel_return_val_if_fail (module->construct_func != NULL, NULL);
 
           /* create a new panel plugin */
-          plugin = (*module->construct_func) (name, id, module->name, screen);
+          plugin = (*module->construct_func) (name, id, module->name, arguments, screen);
         }
       else
         {

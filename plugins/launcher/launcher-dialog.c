@@ -89,8 +89,6 @@ struct _LauncherDialog
  **/
 static void        launcher_dialog_g_list_swap               (GList                 *li_a,
                                                               GList                 *li_b);
-static gboolean    launcher_dialog_read_desktop_file         (const gchar           *file,
-                                                              LauncherEntry         *entry);
 static void        launcher_dialog_tree_drag_data_received   (GtkWidget             *widget,
                                                               GdkDragContext        *context,
                                                               gint                   x,
@@ -147,7 +145,7 @@ launcher_dialog_g_list_swap (GList *li_a,
 }
 
 
-static gboolean
+gboolean
 launcher_dialog_read_desktop_file (const gchar   *path,
                                    LauncherEntry *entry)
 {

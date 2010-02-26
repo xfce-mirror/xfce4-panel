@@ -36,26 +36,30 @@
 
 
 
-static gboolean  opt_customize = FALSE;
-static gboolean  opt_add = FALSE;
-static gboolean  opt_save = FALSE;
-static gboolean  opt_restart = FALSE;
-static gboolean  opt_quit = FALSE;
-static gboolean  opt_version = FALSE;
-static gchar    *opt_client_id = NULL;
+static gboolean   opt_preferences = FALSE;
+static gboolean   opt_add_items = FALSE;
+static gboolean   opt_save = FALSE;
+static gchar     *opt_add = NULL;
+static gboolean   opt_restart = FALSE;
+static gboolean   opt_quit = FALSE;
+static gboolean   opt_version = FALSE;
+static gchar     *opt_client_id = NULL;
+static gchar    **arguments = NULL;
 
 
 
 /* command line options */
 static const GOptionEntry option_entries[] =
 {
-  { "customize", 'c', 0, G_OPTION_ARG_NONE, &opt_customize, N_("Show the 'Customize Panel' dialog"), NULL },
-  { "add", 'a', 0, G_OPTION_ARG_NONE, &opt_add, N_("Show the 'Add New Items' dialog"), NULL },
+  { "preferences", 'p', 0, G_OPTION_ARG_NONE, &opt_preferences, N_("Show the 'Panel Preferences' dialog"), NULL },
+  { "add-items", 'a', 0, G_OPTION_ARG_NONE, &opt_add_items, N_("Show the 'Add New Items' dialog"), NULL },
   { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_("Save the panel configuration"), NULL },
+  { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_("Add a new plugin to the panel"), N_("PLUGIN NAME") },
   { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_("Restart the running panel instance"), NULL },
   { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_("Quit the running panel instance"), NULL },
   { "version", 'v', 0, G_OPTION_ARG_NONE, &opt_version, N_("Print version information and exit"), NULL },
   { "sm-client-id", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_client_id, NULL, NULL },
+  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &arguments, NULL, NULL },
   { NULL }
 };
 
@@ -81,7 +85,7 @@ main (gint argc, gchar **argv)
     g_thread_init (NULL);
 
   /* initialize gtk+ */
-  if (!gtk_init_with_args (&argc, &argv, "", (GOptionEntry *) option_entries, GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), (GOptionEntry *) option_entries, GETTEXT_PACKAGE, &error))
     {
       /* print an error message */
       if (error == NULL)
@@ -114,14 +118,14 @@ main (gint argc, gchar **argv)
 
       return EXIT_SUCCESS;
     }
-  else if (opt_customize)
+  else if (opt_preferences)
     {
       /* send a signal to the running instance to show the preferences dialog */
       result = panel_dbus_client_display_preferences_dialog (NULL, &error);
 
       goto dbus_return;
     }
-  else if (opt_add)
+  else if (opt_add_items)
     {
       /* send a signal to the running instance to show the add items dialog */
       result = panel_dbus_client_display_items_dialog (NULL, &error);
@@ -132,6 +136,13 @@ main (gint argc, gchar **argv)
     {
       /* send a save signal to the running instance */
       result = panel_dbus_client_save (&error);
+
+      goto dbus_return;
+    }
+  else if (opt_add)
+    {
+      /* send a add new item signal to the running instance */
+      result = panel_dbus_client_add_new_item (opt_add, arguments, &error);
 
       goto dbus_return;
     }

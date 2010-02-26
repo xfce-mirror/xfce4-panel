@@ -107,7 +107,7 @@ main (gint argc, gchar **argv)
       if (g_module_symbol (library, "xfce_panel_plugin_init", (gpointer) &construct_func))
         {
           /* create the panel plugin */
-          provider = (*construct_func) (opt_name, opt_id, NULL, gdk_screen_get_default ());
+          provider = (*construct_func) (opt_name, opt_id, NULL, NULL, gdk_screen_get_default ());
         }
       else
         {

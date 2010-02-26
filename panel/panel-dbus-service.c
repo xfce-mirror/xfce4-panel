@@ -181,6 +181,35 @@ panel_dbus_service_save (PanelDBusService  *service,
 
 
 static gboolean
+panel_dbus_service_add_new_item (PanelDBusService  *service,
+                                 const gchar       *plugin_name,
+                                 gchar            **arguments,
+                                 GError           **error)
+{
+  PanelApplication *application;
+
+  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
+  panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+  panel_return_val_if_fail (plugin_name != NULL, FALSE);
+
+  /* get the current application */
+  application = panel_application_get ();
+
+  /* save the configuration */
+  if (arguments && *arguments != NULL)
+    panel_application_add_new_item (application, plugin_name, arguments);
+  else
+    panel_application_add_new_item (application, plugin_name, NULL);
+
+  /* release the application */
+  g_object_unref (G_OBJECT (application));
+
+  return TRUE;
+}
+
+
+
+static gboolean
 panel_dbus_service_terminate (PanelDBusService  *service,
                               gboolean           restart,
                               GError           **error)

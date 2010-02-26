@@ -27,11 +27,12 @@ typedef struct _XfcePanelPluginProviderIface XfcePanelPluginProviderIface;
 typedef struct _XfcePanelPluginProvider      XfcePanelPluginProvider;
 typedef enum   _XfcePanelPluginMessage       XfcePanelPluginMessage;
 
-typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar *name,
-                                                         const gchar *id,
-                                                         const gchar *display_name,
-                                                         GdkScreen   *screen);
-                                                         
+typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
+                                                         const gchar  *id,
+                                                         const gchar  *display_name,
+                                                         gchar       **arguments,
+                                                         GdkScreen    *screen);
+
 typedef void (*PluginRegisterTypesFunc) (XfcePanelModule *module);
 
 #define XFCE_TYPE_PANEL_PLUGIN_PROVIDER           (xfce_panel_plugin_provider_get_type ())
@@ -58,7 +59,7 @@ struct _XfcePanelPluginProviderIface
 {
   /*< private >*/
   GTypeInterface __parent__;
-  
+
   /*< public >*/
   gboolean     (*is_external)         (void);
   const gchar *(*get_name)            (XfcePanelPluginProvider *provider);
@@ -83,13 +84,13 @@ const gchar *xfce_panel_plugin_provider_get_id              (XfcePanelPluginProv
 
 void         xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider *provider,
                                                              gint                     size);
-                                                     
+
 void         xfce_panel_plugin_provider_set_orientation     (XfcePanelPluginProvider *provider,
                                                              GtkOrientation           orientation);
-                                                            
+
 void         xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provider,
                                                              XfceScreenPosition       screen_position);
-                                                             
+
 void         xfce_panel_plugin_provider_set_opacity         (XfcePanelPluginProvider *provider,
                                                              gdouble                  opacity);
 
