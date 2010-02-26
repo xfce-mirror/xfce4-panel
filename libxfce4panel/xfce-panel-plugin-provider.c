@@ -71,7 +71,8 @@ xfce_panel_plugin_provider_class_init (gpointer klass)
     g_signal_new (I_("provider-signal"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
+                  G_STRUCT_OFFSET (XfcePanelPluginProviderIface, provider_signal),
+                  NULL, NULL,
                   g_cclosure_marshal_VOID__UINT,
                   G_TYPE_NONE, 1, G_TYPE_UINT);
 }
@@ -137,4 +138,16 @@ xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->save) (provider);
+}
+
+
+
+void
+xfce_panel_plugin_provider_send_signal (XfcePanelPluginProvider       *provider,
+                                        XfcePanelPluginProviderSignal  signal)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  
+  /* emit the signal */
+  g_signal_emit (G_OBJECT (provider), provider_signals[PROVIDER_SIGNAL], 0, signal);
 }

@@ -74,10 +74,10 @@ static GOptionEntry option_entries[] =
 
 static void
 dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
-                                      const gchar             *plugin_id,
-                                      const gchar             *property,
-                                      const GValue            *value,
-                                      XfcePanelPluginProvider *provider)
+                                       const gchar             *plugin_id,
+                                       const gchar             *property,
+                                       const GValue            *value,
+                                       XfcePanelPluginProvider *provider)
 {
   WrapperPlug *plug;
 

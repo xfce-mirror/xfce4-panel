@@ -55,6 +55,8 @@ static void         panel_plugin_external_realize             (GtkWidget        
 static void         panel_plugin_external_unrealize           (GtkWidget                     *widget);
 static gboolean     panel_plugin_external_plug_removed        (GtkSocket                     *socket);
 static void         panel_plugin_external_plug_added          (GtkSocket                     *socket);
+static void         panel_plugin_external_provider_signal     (XfcePanelPluginProvider       *provider,
+                                                               XfcePanelPluginProviderSignal  signal);
 static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider       *provider);
 static const gchar *panel_plugin_external_get_id              (XfcePanelPluginProvider       *provider);
 static void         panel_plugin_external_set_size            (XfcePanelPluginProvider       *provider,
@@ -65,8 +67,6 @@ static void         panel_plugin_external_set_screen_position (XfcePanelPluginPr
                                                                XfceScreenPosition             screen_position);
 static void         panel_plugin_external_save                (XfcePanelPluginProvider       *provider);
 static void         panel_plugin_external_set_sensitive       (PanelPluginExternal           *external);
-static void         panel_plugin_external_provider_signal     (PanelPluginExternal           *external,
-                                                               XfcePanelPluginProviderSignal  signal);
 static void         panel_plugin_external_set_property        (PanelPluginExternal           *external,
                                                                const gchar                   *property,
                                                                const GValue                  *value);
@@ -149,9 +149,6 @@ panel_plugin_external_init (PanelPluginExternal *external)
 
   /* signal to pass gtk_widget_set_sensitive() changes to the remote window */
   g_signal_connect (G_OBJECT (external), "notify::sensitive", G_CALLBACK (panel_plugin_external_set_sensitive), NULL);
-
-  /* connect signal to monitor the remove plugin signal */
-  g_signal_connect (G_OBJECT (external), "provider-signal", G_CALLBACK (panel_plugin_external_provider_signal), NULL);
 }
 
 
@@ -159,6 +156,7 @@ panel_plugin_external_init (PanelPluginExternal *external)
 static void
 panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
 {
+  iface->provider_signal = panel_plugin_external_provider_signal;
   iface->get_name = panel_plugin_external_get_name;
   iface->get_id = panel_plugin_external_get_id;
   iface->set_size = panel_plugin_external_set_size;
@@ -415,6 +413,29 @@ panel_plugin_external_plug_added (GtkSocket *socket)
 
 
 
+static void
+panel_plugin_external_provider_signal (XfcePanelPluginProvider       *provider,
+                                       XfcePanelPluginProviderSignal  signal)
+{
+  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (provider);
+  
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  /* only handle the remove signal, everything else is handles in panel-application */
+  if (signal == REMOVE_PLUGIN)
+    {
+      /* we're forced removing the plugin, don't ask for a restart */
+      external->plug_embedded = FALSE;
+
+      /* destroy ourselfs, unrealize will close the plugin */
+      gtk_widget_destroy (GTK_WIDGET (external));
+    }
+}
+
+
+
+
 static const gchar *
 panel_plugin_external_get_name (XfcePanelPluginProvider *provider)
 {
@@ -572,25 +593,6 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 
   /* unset */
   g_value_unset (&value);
-}
-
-
-
-static void
-panel_plugin_external_provider_signal (PanelPluginExternal           *external,
-                                       XfcePanelPluginProviderSignal  signal)
-{
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-
-  /* only handle the remove signal, everything else is handles in the panel-application */
-  if (signal == REMOVE_PLUGIN)
-    {
-      /* we're forced removing the plugin, don't ask for a restart */
-      external->plug_embedded = FALSE;
-
-      /* destroy ourselfs, unrealize will close the plugin */
-      gtk_widget_destroy (GTK_WIDGET (external));
-    }
 }
 
 

@@ -53,17 +53,21 @@ struct _XfcePanelPluginProviderIface
 {
   /*< private >*/
   GTypeInterface __parent__;
+  
+  /*< signals >*/
+  void         (*provider_signal)     (XfcePanelPluginProvider       *provider,
+                                       XfcePanelPluginProviderSignal  signal);
 
   /*< public >*/
-  const gchar *(*get_name)            (XfcePanelPluginProvider *provider);
-  const gchar *(*get_id)              (XfcePanelPluginProvider *provider);
-  void         (*set_size)            (XfcePanelPluginProvider *provider,
-                                       gint                     size);
-  void         (*set_orientation)     (XfcePanelPluginProvider *provider,
-                                       GtkOrientation           orientation);
-  void         (*set_screen_position) (XfcePanelPluginProvider *provider,
-                                       XfceScreenPosition       screen_position);
-  void         (*save)                (XfcePanelPluginProvider *provider);
+  const gchar *(*get_name)            (XfcePanelPluginProvider       *provider);
+  const gchar *(*get_id)              (XfcePanelPluginProvider       *provider);
+  void         (*set_size)            (XfcePanelPluginProvider       *provider,
+                                       gint                           size);
+  void         (*set_orientation)     (XfcePanelPluginProvider       *provider,
+                                       GtkOrientation                 orientation);
+  void         (*set_screen_position) (XfcePanelPluginProvider       *provider,
+                                       XfceScreenPosition             screen_position);
+  void         (*save)                (XfcePanelPluginProvider       *provider);
 };
 
 enum _XfcePanelPluginProviderSignal
@@ -82,20 +86,23 @@ enum _XfcePanelPluginProviderSignal
 
 GType        xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
 
-const gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider *provider);
+const gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);
 
-const gchar *xfce_panel_plugin_provider_get_id              (XfcePanelPluginProvider *provider);
+const gchar *xfce_panel_plugin_provider_get_id              (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider *provider,
-                                                             gint                     size);
+void         xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider       *provider,
+                                                             gint                           size);
 
-void         xfce_panel_plugin_provider_set_orientation     (XfcePanelPluginProvider *provider,
-                                                             GtkOrientation           orientation);
+void         xfce_panel_plugin_provider_set_orientation     (XfcePanelPluginProvider       *provider,
+                                                             GtkOrientation                 orientation);
 
-void         xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provider,
-                                                             XfceScreenPosition       screen_position);
+void         xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider       *provider,
+                                                             XfceScreenPosition             screen_position);
 
-void         xfce_panel_plugin_provider_save                (XfcePanelPluginProvider *provider);
+void         xfce_panel_plugin_provider_save                (XfcePanelPluginProvider       *provider);
+
+void         xfce_panel_plugin_provider_send_signal         (XfcePanelPluginProvider       *provider,
+                                                             XfcePanelPluginProviderSignal  signal);
 
 G_END_DECLS
 
