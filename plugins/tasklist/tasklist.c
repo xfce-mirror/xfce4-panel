@@ -108,7 +108,7 @@ tasklist_plugin_init (TasklistPlugin *plugin)
   gtk_widget_show (box);
 
   plugin->handle = gtk_alignment_new (0.00, 0.00, 0.00, 0.00);
-  gtk_box_pack_start (GTK_BOX (box), plugin->handle, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), plugin->handle, FALSE, FALSE, 0);
   g_signal_connect (G_OBJECT (plugin->handle), "expose-event",
       G_CALLBACK (tasklist_plugin_handle_expose_event), plugin);
   gtk_widget_set_size_request (plugin->handle, 8, 8);
@@ -143,6 +143,9 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   TASKLIST_XFCONF_BIND ("switch-workspace-on-unminimize", G_TYPE_BOOLEAN)
   TASKLIST_XFCONF_BIND ("show-only-minimized", G_TYPE_BOOLEAN)
   TASKLIST_XFCONF_BIND ("show-wireframes", G_TYPE_BOOLEAN)
+
+  xfconf_g_property_bind (plugin->channel, "/show-handle", G_TYPE_BOOLEAN,
+                          plugin->handle, "visible");
 
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);
@@ -217,11 +220,13 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 #define TASKLIST_DIALOG_BIND(name, property) \
       object = gtk_builder_get_object (builder, (name)); \
+      panel_return_if_fail (G_IS_OBJECT (object)); \
       exo_mutual_binding_new (G_OBJECT (plugin->tasklist), (name), \
                               G_OBJECT (object), (property));
 
 #define TASKLIST_DIALOG_BIND_INV(name, property) \
-      object = gtk_builder_get_object (builder, name); \
+      object = gtk_builder_get_object (builder, (name)); \
+      panel_return_if_fail (G_IS_OBJECT (object)); \
       exo_mutual_binding_new_with_negation (G_OBJECT (plugin->tasklist), \
                                             name,  G_OBJECT (object), \
                                             property);
@@ -233,6 +238,11 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
       TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
       TASKLIST_DIALOG_BIND ("show-wireframes", "active")
+
+      object = gtk_builder_get_object (builder, "show-handle");
+      panel_return_if_fail (G_IS_OBJECT (object));
+      exo_mutual_binding_new (G_OBJECT (plugin->handle), "visible",
+                              G_OBJECT (object), "active");
 
       gtk_widget_show (GTK_WIDGET (dialog));
 	}
