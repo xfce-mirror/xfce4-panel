@@ -1,0 +1,22 @@
+The Xfce Panel .gtkrc-2.0 hacks
+===============================
+
+XfceTasklist
+---------------
+
+style "xfce-tasklist-style"
+{
+  # The maximum length of a button before the label ellipsized. 
+  # When this value is set to -1 the button will expand to the 
+  # entire available space.
+  XfceTasklist::max-button-length = 200
+  
+  # Maximum size of a button. This is used to detect the number of
+  # rows of the task list plugin. When you increase the value less
+  # rows will be possible.
+  XfceTasklist::max-button-size = 20
+  
+  # Ellipsizing used in the task list button label.
+  XfceTasklist::ellipsize-mode = PANGO_ELLIPSIZE_END
+}
+class "XfceTasklist" style "xfce-tasklist-style"
