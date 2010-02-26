@@ -1223,6 +1223,10 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
        if (G_LIKELY (item))
          gtk_widget_show (item);
     }
+
+  /* emit signal, used by the external plugin */
+  xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_SHOW_CONFIGURE);
 }
 
 
@@ -1253,6 +1257,10 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
        if (G_LIKELY (item))
          gtk_widget_show (item);
     }
+
+  /* emit signal, used by the external plugin */
+  xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_SHOW_ABOUT);
 }
 
 

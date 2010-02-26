@@ -103,6 +103,10 @@ struct _PanelPluginExternal
 
   /* counter to count the number of restart */
   guint             n_restarts;
+
+  /* some info we store here */
+  guint             show_configure : 1;
+  guint             show_about : 1;
 };
 
 typedef struct
@@ -150,6 +154,8 @@ panel_plugin_external_init (PanelPluginExternal *external)
   external->dbus_queue = NULL;
   external->plug_embedded = FALSE;
   external->n_restarts = 0;
+  external->show_configure = FALSE;
+  external->show_about = FALSE;
 
   /* signal to pass gtk_widget_set_sensitive() changes to the remote window */
   g_signal_connect (G_OBJECT (external), "notify::sensitive", G_CALLBACK (panel_plugin_external_set_sensitive), NULL);
@@ -350,7 +356,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
       g_message ("Automatically restarting plugin %s-%d, try %d",
                  panel_module_get_internal_name (external->module),
                  external->unique_id, external->n_restarts);
-	}
+  }
 
   /* handle the response */
   if (response == GTK_RESPONSE_OK)
@@ -425,14 +431,28 @@ panel_plugin_external_provider_signal (XfcePanelPluginProvider       *provider,
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* only handle the remove signal, everything else is handles in panel-application */
-  if (signal == PROVIDER_SIGNAL_REMOVE_PLUGIN)
+  /* we handle some signals here, everything else is handled in
+   * panel-application */
+  switch (signal)
     {
-      /* we're forced removing the plugin, don't ask for a restart */
-      external->plug_embedded = FALSE;
+      case PROVIDER_SIGNAL_REMOVE_PLUGIN:
+        /* we're forced removing the plugin, don't ask for a restart */
+        external->plug_embedded = FALSE;
 
-      /* destroy ourselfs, unrealize will close the plugin */
-      gtk_widget_destroy (GTK_WIDGET (external));
+        /* destroy ourselfs, unrealize will close the plugin */
+        gtk_widget_destroy (GTK_WIDGET (external));
+        break;
+
+      case PROVIDER_SIGNAL_SHOW_CONFIGURE:
+        external->show_configure = TRUE;
+        break;
+
+      case PROVIDER_SIGNAL_SHOW_ABOUT:
+        external->show_about = TRUE;
+        break;
+
+      default:
+        break;
     }
 }
 
@@ -604,8 +624,7 @@ panel_plugin_external_get_show_configure (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), FALSE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
 
-  /* TODO */
-  return TRUE;
+  return PANEL_PLUGIN_EXTERNAL (provider)->show_configure;
 }
 
 
@@ -629,8 +648,7 @@ panel_plugin_external_get_show_about (XfcePanelPluginProvider *provider)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), FALSE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
 
-  /* TODO */
-  return TRUE;
+  return PANEL_PLUGIN_EXTERNAL (provider)->show_about;
 }
 
 
