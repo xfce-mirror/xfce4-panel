@@ -150,7 +150,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
       G_CALLBACK (panel_item_dialog_unique_changed), dialog);
 
   /* setup dialog */
-  gtk_window_set_title (GTK_WINDOW (dialog), _("Xfce Panel Item Browser"));
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Add New Items"));
   xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
       _("Add new plugins to your Xfce panels"));
   gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_ADD);
