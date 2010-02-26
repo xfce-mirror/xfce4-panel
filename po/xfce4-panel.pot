@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-06 17:50+0200\n"
+"POT-Creation-Date: 2009-10-24 14:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,34 +16,34 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:746
+#: ../libxfce4panel/xfce-panel-plugin.c:756
 #: ../panel/panel-preferences-dialog.c:664
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin.c:751
+#: ../libxfce4panel/xfce-panel-plugin.c:761
 #: ../panel/panel-preferences-dialog.c:665
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:890
+#: ../libxfce4panel/xfce-panel-plugin.c:900
 msgid "_Move"
 msgstr ""
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:925 ../panel/panel-window.c:1960
+#: ../libxfce4panel/xfce-panel-plugin.c:935 ../panel/panel-window.c:1960
 msgid "Add _New Items..."
 msgstr ""
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:936 ../panel/panel-window.c:1971
+#: ../libxfce4panel/xfce-panel-plugin.c:946 ../panel/panel-window.c:1971
 msgid "Panel Pr_eferences..."
 msgstr ""
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:959 ../panel/panel-window.c:1994
+#: ../libxfce4panel/xfce-panel-plugin.c:969 ../panel/panel-window.c:1994
 msgid "_Restart"
 msgstr ""
 
@@ -125,7 +125,7 @@ msgid ""
 msgstr ""
 
 #. print warning
-#: ../panel/panel-application.c:1164
+#: ../panel/panel-application.c:1166
 #, c-format
 msgid "The plugin (%s) you want to add is not recognized by the panel."
 msgstr ""
@@ -226,6 +226,14 @@ msgstr ""
 #: ../plugins/actions/actions.c:432
 #, c-format
 msgid "Failed to execute command \"%s\""
+msgstr ""
+
+#: ../plugins/actions/actions.desktop.in.h:1
+msgid "Action Buttons"
+msgstr ""
+
+#: ../plugins/actions/actions.desktop.in.h:2
+msgid "Log out, lock or other system actions"
 msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:81
@@ -368,34 +376,79 @@ msgstr ""
 msgid "twelve"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:495
+#: ../plugins/clock/clock.desktop.in.h:1
+msgid "Clock"
+msgstr ""
+
+#: ../plugins/clock/clock.desktop.in.h:2
+msgid "What time is it?"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:515
 msgid "If you delete an item, it will be permanently removed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:496
+#: ../plugins/launcher/launcher-dialog.c:516
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.c:517
+msgid "Unnamed item"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:532
+msgid "Failed to remove the desktop file from the config directory"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:572
 msgid "Failed to open desktop item editor"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1044
+#: ../plugins/launcher/launcher.c:876
+#, c-format
+msgid "Failed to cleanup the configuration of launcher %d"
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:1212
 msgid "Unnamed Item"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1185
+#: ../plugins/launcher/launcher.c:1353
 msgid "No items"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1701
+#: ../plugins/launcher/launcher.c:1869
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr ""
 
+#: ../plugins/launcher/launcher.desktop.in.h:1
+msgid "Launcher"
+msgstr ""
+
+#: ../plugins/launcher/launcher.desktop.in.h:2
+msgid "Program launcher with optional menu"
+msgstr ""
+
 #: ../plugins/pager/pager.c:374
 msgid "Unable to open the Xfce workspace settings"
+msgstr ""
+
+#: ../plugins/pager/pager.desktop.in.h:1
+msgid "Miniature view of all virtual desktops"
+msgstr ""
+
+#: ../plugins/pager/pager.desktop.in.h:2
+msgid "Pager"
+msgstr ""
+
+#: ../plugins/separator/separator.desktop.in.h:1
+msgid "Adds a separator or space between panel items"
+msgstr ""
+
+#: ../plugins/separator/separator.desktop.in.h:2
+msgid "Separator"
 msgstr ""
 
 #: ../plugins/showdesktop/showdesktop.c:196
@@ -404,6 +457,14 @@ msgstr ""
 
 #: ../plugins/showdesktop/showdesktop.c:197
 msgid "Minimize all open windows and show the desktop"
+msgstr ""
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+msgid "Show Desktop"
+msgstr ""
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Toggle button that hides all windows and shows the desktop"
 msgstr ""
 
 #: ../plugins/systray/systray-manager.c:403
@@ -425,6 +486,22 @@ msgstr ""
 
 #: ../plugins/systray/systray.c:537
 msgid "The notification area lost selection"
+msgstr ""
+
+#: ../plugins/systray/systray.desktop.in.h:1
+msgid "Area where notification icons appear"
+msgstr ""
+
+#: ../plugins/systray/systray.desktop.in.h:2
+msgid "Notification Area"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.desktop.in.h:1
+msgid "Show all running applications"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.desktop.in.h:2
+msgid "Task List"
 msgstr ""
 
 #: ../plugins/windowmenu/windowmenu.c:559
@@ -458,90 +535,10 @@ msgstr ""
 msgid "Remove Workspace %d"
 msgstr ""
 
-#: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
-msgstr ""
-
-#: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr ""
-
-#: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr ""
-
-#: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr ""
-
-#: ../plugins/actions/actions.desktop.in.h:1
-msgid "Action Buttons"
-msgstr ""
-
-#: ../plugins/actions/actions.desktop.in.h:2
-msgid "Log out, lock or other system actions"
-msgstr ""
-
-#: ../plugins/launcher/launcher.desktop.in.h:1
-msgid "Launcher"
-msgstr ""
-
-#: ../plugins/launcher/launcher.desktop.in.h:2
-msgid "Program launcher with optional menu"
-msgstr ""
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
-msgid "Show Desktop"
-msgstr ""
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Toggle button that hides all windows and shows the desktop"
-msgstr ""
-
-#: ../plugins/separator/separator.desktop.in.h:1
-msgid "Adds a separator or space between panel items"
-msgstr ""
-
-#: ../plugins/separator/separator.desktop.in.h:2
-msgid "Separator"
-msgstr ""
-
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr ""
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Window Menu"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
-msgid "Show all running applications"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
-msgid "Task List"
-msgstr ""
-
-#: ../plugins/pager/pager.desktop.in.h:1
-msgid "Miniature view of all virtual desktops"
-msgstr ""
-
-#: ../plugins/pager/pager.desktop.in.h:2
-msgid "Pager"
-msgstr ""
-
-#: ../plugins/clock/clock.desktop.in.h:1
-msgid "Clock"
-msgstr ""
-
-#: ../plugins/clock/clock.desktop.in.h:2
-msgid "What time is it?"
-msgstr ""
-
-#: ../plugins/systray/systray.desktop.in.h:1
-msgid "Area where notification icons appear"
-msgstr ""
-
-#: ../plugins/systray/systray.desktop.in.h:2
-msgid "Notification Area"
 msgstr ""
