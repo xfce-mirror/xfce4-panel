@@ -533,6 +533,29 @@ launcher_dialog_response (GtkWidget            *widget,
 
 
 static void
+launcher_dialog_editor_icon_chooser (GtkWidget            *button,
+                                     LauncherPluginDialog *dialog)
+{
+  GtkWidget *window;
+
+  /* create icon chooser dialog */
+  window = exo_icon_chooser_dialog_new (_("Select Icon"),
+      GTK_WINDOW (gtk_widget_get_toplevel (button)),
+      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+      GTK_STOCK_OK, GTK_RESPONSE_OK, NULL);
+
+  if (gtk_dialog_run (GTK_DIALOG (window)) == GTK_RESPONSE_OK)
+    {
+
+    }
+
+  /* destroy */
+  gtk_widget_destroy (window);
+}
+
+
+
+static void
 launcher_dialog_editor_write_value (XfceRc      *rc,
                                     GtkBuilder  *builder,
                                     const gchar *name,
@@ -920,6 +943,10 @@ launcher_dialog_show (LauncherPlugin *plugin)
           G_CALLBACK (launcher_dialog_add_response), dialog);
       g_signal_connect (G_OBJECT (object), "delete-event",
           G_CALLBACK (exo_noop_true), NULL);
+
+      object = gtk_builder_get_object (builder, "item-icon");
+      g_signal_connect (G_OBJECT (object), "clicked",
+          G_CALLBACK (launcher_dialog_editor_icon_chooser), dialog);
 
       /* enable sorting in the add dialog */
       object = gtk_builder_get_object (builder, "add-store");
