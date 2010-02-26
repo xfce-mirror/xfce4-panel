@@ -68,9 +68,10 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="show-workspace-actions">
+                          <object class="GtkCheckButton" id="workspace-actions">
                             <property name="label" translatable="yes">Show workspace a_ctions</property>
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
@@ -81,8 +82,8 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton1">
-                            <property name="label" translatable="yes">Enable _urgency notification</property>
+                          <object class="GtkCheckButton" id="workspace-names">
+                            <property name="label" translatable="yes">Show workspace _names</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -91,6 +92,20 @@
                           </object>
                           <packing>
                             <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="urgentcy-notification">
+                            <property name="label" translatable="yes">Enable _urgency notification</property>
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                       </object>
@@ -111,63 +126,21 @@
               </packing>
             </child>
             <child>
-              <object class="GtkFrame" id="frame4">
+              <object class="GtkFrame" id="frame1">
                 <property name="visible">True</property>
                 <property name="label_xalign">0</property>
                 <property name="shadow_type">none</property>
                 <child>
-                  <object class="GtkAlignment" id="alignment4">
+                  <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkVBox" id="vbox5">
-                        <property name="visible">True</property>
-                        <property name="border_width">6</property>
-                        <child>
-                          <object class="GtkCheckButton" id="switch-workspace-on-unminimize">
-                            <property name="label" translatable="yes">Restore minimized windows to current _workspace</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child type="label">
-                  <object class="GtkLabel" id="label4">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Behaviour&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkFrame" id="frame2">
-                <property name="visible">True</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow_type">none</property>
-                <child>
-                  <object class="GtkAlignment" id="alignment2">
-                    <property name="visible">True</property>
-                    <property name="left_padding">12</property>
-                    <child>
-                      <object class="GtkVBox" id="vbox4">
+                      <object class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="border_width">6</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkCheckButton" id="include-all-workspaces">
+                          <object class="GtkCheckButton" id="all-workspaces">
                             <property name="label" translatable="yes">Show windows from _all workspaces</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -184,7 +157,7 @@
                   </object>
                 </child>
                 <child type="label">
-                  <object class="GtkLabel" id="label2">
+                  <object class="GtkLabel" id="label3">
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">&lt;b&gt;Filtering&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
@@ -193,7 +166,7 @@
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="position">2</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>

@@ -56,14 +56,35 @@ struct _XfceWindowMenuPlugin
   GtkWidget     *icon;
 
   /* settings */
-  guint          show_all_workspaces : 1;
-  guint          enable_urgency_notify : 1;
+  guint          button_layout : 1;
+  guint          workspace_actions : 1;
+  guint          workspace_names : 1;
+  guint          urgentcy_notification : 1;
+  guint          all_workspaces : 1;
 
   /* urgent window counter */
   gint           urgent_windows;
 };
 
+enum
+{
+  PROP_0,
+  PROP_BUTTON_LAYOUT,
+  PROP_WORKSPACE_ACTIONS,
+  PROP_WORKSPACE_NAMES,
+  PROP_URGENTCY_NOTIFICATION,
+  PROP_ALL_WORKSPACES
+};
 
+enum
+{
+  BUTTON_LAYOUT_ICON = 0,
+  BUTTON_LAYOUT_ARROW
+};
+
+
+static void window_menu_plugin_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
+static void window_menu_plugin_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
 
 static void window_menu_plugin_screen_changed (GtkWidget *widget, GdkScreen *previous_screen);
 
@@ -101,7 +122,12 @@ static void
 window_menu_plugin_class_init (XfceWindowMenuPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
+  GObjectClass         *gobject_class;
   GtkWidgetClass       *gtkwidget_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->get_property = window_menu_plugin_get_property;
+  gobject_class->set_property = window_menu_plugin_set_property;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->screen_changed = window_menu_plugin_screen_changed;
@@ -113,6 +139,44 @@ window_menu_plugin_class_init (XfceWindowMenuPluginClass *klass)
   plugin_class->size_changed = window_menu_plugin_size_changed;
   plugin_class->configure_plugin = window_menu_plugin_configure_plugin;
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_BUTTON_LAYOUT,
+                                   g_param_spec_uint ("button-layout",
+                                                      NULL, NULL,
+                                                      BUTTON_LAYOUT_ICON,
+                                                      BUTTON_LAYOUT_ARROW,
+                                                      BUTTON_LAYOUT_ICON,
+                                                      EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_WORKSPACE_ACTIONS,
+                                   g_param_spec_boolean ("workspace-actions",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_WORKSPACE_NAMES,
+                                   g_param_spec_boolean ("workspace-names",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_URGENTCY_NOTIFICATION,
+                                   g_param_spec_boolean ("urgentcy-notification",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ALL_WORKSPACES,
+                                   g_param_spec_boolean ("all-workspaces",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
+
   window_quark = g_quark_from_static_string ("window-list-window-quark");
 }
 
@@ -121,9 +185,13 @@ window_menu_plugin_class_init (XfceWindowMenuPluginClass *klass)
 static void
 window_menu_plugin_init (XfceWindowMenuPlugin *plugin)
 {
+  /* initialize settings */
+  plugin->button_layout = BUTTON_LAYOUT_ICON;
+  plugin->workspace_actions = FALSE;
+  plugin->workspace_names = TRUE;
+  plugin->urgentcy_notification = TRUE;
+  plugin->all_workspaces = TRUE;
   plugin->urgent_windows = 0;
-  plugin->show_all_workspaces = FALSE;
-  plugin->enable_urgency_notify = TRUE;
 
   /* initialize xfconf */
   xfconf_init (NULL);
@@ -141,6 +209,104 @@ window_menu_plugin_init (XfceWindowMenuPlugin *plugin)
 
   plugin->icon = xfce_scaled_image_new_from_icon_name ("user-desktop");
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
+}
+
+
+
+static void
+window_menu_plugin_get_property (GObject    *object,
+                                 guint       prop_id,
+                                 GValue     *value,
+                                 GParamSpec *pspec)
+{
+  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
+
+  switch (prop_id)
+    {
+      case PROP_BUTTON_LAYOUT:
+        g_value_set_uint (value, plugin->button_layout);
+        break;
+
+      case PROP_WORKSPACE_ACTIONS:
+        g_value_set_boolean (value, plugin->workspace_actions);
+        break;
+
+      case PROP_WORKSPACE_NAMES:
+        g_value_set_boolean (value, plugin->workspace_names);
+        break;
+
+      case PROP_URGENTCY_NOTIFICATION:
+        g_value_set_boolean (value, plugin->urgentcy_notification);
+        break;
+
+      case PROP_ALL_WORKSPACES:
+        g_value_set_boolean (value, plugin->all_workspaces);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+
+
+static void
+window_menu_plugin_set_property (GObject      *object,
+                                 guint         prop_id,
+                                 const GValue *value,
+                                 GParamSpec   *pspec)
+{
+  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
+  XfcePanelPlugin      *panel_plugin = XFCE_PANEL_PLUGIN (object);
+  guint                 button_layout;
+
+  switch (prop_id)
+    {
+      case PROP_BUTTON_LAYOUT:
+        button_layout = g_value_get_uint (value);
+
+        /* show or hide the icon */
+        if (button_layout == BUTTON_LAYOUT_ICON)
+          gtk_widget_show (plugin->icon);
+        else
+          gtk_widget_hide (plugin->icon);
+
+        if (plugin->button_layout != button_layout)
+          {
+            /* set new value */
+            plugin->button_layout = button_layout;
+
+            /* update the plugin */
+            window_menu_plugin_size_changed (panel_plugin,
+                xfce_panel_plugin_get_size (panel_plugin));
+            window_menu_plugin_screen_position_changed (panel_plugin,
+                xfce_panel_plugin_get_screen_position (panel_plugin));
+            window_menu_plugin_active_window_changed (plugin->screen,
+                NULL, plugin);
+          }
+        break;
+
+      case PROP_WORKSPACE_ACTIONS:
+        plugin->workspace_actions = g_value_get_boolean (value);
+        break;
+
+      case PROP_WORKSPACE_NAMES:
+        plugin->workspace_names = g_value_get_boolean (value);
+        break;
+
+      case PROP_URGENTCY_NOTIFICATION:
+        plugin->urgentcy_notification = g_value_get_boolean (value);
+        break;
+
+      case PROP_ALL_WORKSPACES:
+        plugin->all_workspaces = g_value_get_boolean (value);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
 }
 
 
@@ -167,6 +333,7 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
   screen = gtk_widget_get_screen (widget);
   panel_return_if_fail (GDK_IS_SCREEN (screen));
   plugin->screen = wnck_screen_get (gdk_screen_get_number (screen));
+  panel_return_if_fail (WNCK_IS_SCREEN (plugin->screen));
 
   /* connect signal to monitor this screen */
   g_signal_connect (G_OBJECT (plugin->screen), "active-window-changed",
@@ -184,9 +351,23 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
 
+  /* open the xfconf channel */
+  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+
+  /* bind the properties */
+  xfconf_g_property_bind (plugin->channel, "/button-layout",
+                          G_TYPE_UINT, plugin, "button-layout");
+  xfconf_g_property_bind (plugin->channel, "/workspace-actions",
+                          G_TYPE_BOOLEAN, plugin, "workspace-actions");
+  xfconf_g_property_bind (plugin->channel, "/workspace-names",
+                          G_TYPE_BOOLEAN, plugin, "workspace-names");
+  xfconf_g_property_bind (plugin->channel, "/urgentcy-notification",
+                          G_TYPE_BOOLEAN, plugin, "urgentcy-notification");
+  xfconf_g_property_bind (plugin->channel, "/all-workspaces",
+                          G_TYPE_BOOLEAN, plugin, "all-workspaces");
+
   /* show the button */
   gtk_widget_show (plugin->button);
-  gtk_widget_show (plugin->icon);
 }
 
 
@@ -195,6 +376,17 @@ static void
 window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+
+  /* disconnect from the screen */
+  if (G_UNLIKELY (plugin->screen != NULL))
+    {
+      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
+          window_menu_plugin_active_window_changed, plugin);
+      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
+          window_menu_plugin_window_opened, plugin);
+      g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
+          window_menu_plugin_window_closed, plugin);
+    }
 
   /* release the xfconf channel */
   if (G_LIKELY (plugin->channel))
@@ -211,11 +403,13 @@ window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
                                             gint             position)
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  GtkArrowType          arrow_type = GTK_ARROW_NONE;
 
   /* set the arrow direction if the arrow is visible */
-  if (!GTK_WIDGET_VISIBLE (plugin->icon))
-    xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button),
-        xfce_panel_plugin_arrow_type (panel_plugin));
+  if (plugin->button_layout == BUTTON_LAYOUT_ARROW)
+    arrow_type = xfce_panel_plugin_arrow_type (panel_plugin);
+
+  xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button), arrow_type);
 }
 
 
@@ -226,16 +420,22 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
 
-  /* let the panel handle the plugin size if the icon is visible */
-  if (GTK_WIDGET_VISIBLE (plugin->icon))
-    return FALSE;
-
-  /* set the size of the arrow button */
-  if (xfce_panel_plugin_get_orientation (panel_plugin) ==
-          GTK_ORIENTATION_HORIZONTAL)
-    gtk_widget_set_size_request (GTK_WIDGET (plugin), ARROW_BUTTON_SIZE, -1);
+  if (plugin->button_layout == BUTTON_LAYOUT_ICON)
+    {
+      /* square the plugin */
+      gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
+    }
   else
-    gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, ARROW_BUTTON_SIZE);
+    {
+      /* set the size of the arrow button */
+      if (xfce_panel_plugin_get_orientation (panel_plugin) ==
+              GTK_ORIENTATION_HORIZONTAL)
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
+                                     ARROW_BUTTON_SIZE, -1);
+      else
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
+                                     -1, ARROW_BUTTON_SIZE);
+    }
 
   return TRUE;
 }
@@ -245,9 +445,13 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  //XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
   GtkBuilder           *builder;
   GObject              *dialog, *object;
+  guint                 i;
+  const gchar          *names[] = { "workspace-actions", "workspace-names",
+                                    "urgentcy-notification", "all-workspaces",
+                                    "button-layout" };
 
   builder = gtk_builder_new ();
   if (gtk_builder_add_from_string (builder, windowmenu_dialog_glade,
@@ -264,6 +468,15 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       object = gtk_builder_get_object (builder, "close-button");
       g_signal_connect_swapped (G_OBJECT (object), "clicked",
                                 G_CALLBACK (gtk_widget_destroy), dialog);
+
+      /* connect bindings */
+      for (i = 0; i < G_N_ELEMENTS (names); i++)
+        {
+          object = gtk_builder_get_object (builder, names[i]);
+          panel_return_if_fail (GTK_IS_WIDGET (object));
+          exo_mutual_binding_new (G_OBJECT (plugin), names[i],
+                                  G_OBJECT (object), "active");
+        }
 
       gtk_widget_show (GTK_WIDGET (dialog));
     }
@@ -291,7 +504,7 @@ window_menu_plugin_active_window_changed (WnckScreen           *screen,
   panel_return_if_fail (plugin->screen == screen);
 
   /* only do this when the icon is visible */
-  if (GTK_WIDGET_VISIBLE (icon))
+  if (plugin->button_layout == BUTTON_LAYOUT_ICON)
     {
       /* get the window icon and set the tooltip */
       window = wnck_screen_get_active_window (screen);
@@ -325,7 +538,7 @@ window_menu_plugin_window_state_changed (WnckWindow           *window,
 {
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_WINDOW (window));
-  panel_return_if_fail (plugin->enable_urgency_notify);
+  panel_return_if_fail (plugin->urgentcy_notification);
 
   /* only response to urgency changes and urgency notify is enabled */
   if (!PANEL_HAS_FLAG (changed_mask, URGENT_FLAGS))
@@ -358,7 +571,7 @@ window_menu_plugin_window_opened (WnckScreen           *screen,
   panel_return_if_fail (plugin->screen == screen);
 
   /* leave when urgency notify is disabled */
-  if (!plugin->enable_urgency_notify)
+  if (!plugin->urgentcy_notification)
     return;
 
   /* monitor the window's state */
@@ -384,7 +597,7 @@ window_menu_plugin_window_closed (WnckScreen           *screen,
   panel_return_if_fail (plugin->screen == screen);
 
   /* leave when urgency notify is disabled */
-  if (!plugin->enable_urgency_notify)
+  if (!plugin->urgentcy_notification)
     return;
 
   /* check if we need to update the urgency counter */
@@ -407,8 +620,7 @@ window_menu_plugin_button_press_event (GtkWidget            *button,
   panel_return_val_if_fail (GTK_IS_TOGGLE_BUTTON (button), FALSE);
 
   /* only respond to a normal button 1 press */
-  if (event->type != GDK_BUTTON_PRESS
-      || event->button != 1)
+  if (event->type != GDK_BUTTON_PRESS || event->button != 1)
     return FALSE;
 
   /* activate the toggle button */
@@ -707,14 +919,16 @@ window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
 static GtkWidget *
 window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
 {
-  GtkWidget            *menu, *mi = NULL;
-  GList                *workspaces, *lp;
+  GtkWidget            *menu, *mi = NULL, *image;
+  GList                *workspaces, *lp, fake;
   GList                *windows, *li;
   WnckWorkspace        *workspace;
   WnckWorkspace        *active_workspace, *window_workspace;
   WnckWindow           *window;
   PangoFontDescription *italic, *bold;
-  gboolean              has_items;
+  gint                  urgent_windows = 0;
+  gboolean              has_windows;
+  gboolean              is_empty = TRUE;
 
   panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->screen), NULL);
@@ -730,33 +944,44 @@ window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (menu), "key-press-event",
       G_CALLBACK (window_menu_plugin_menu_key_press_event), plugin);
 
-  /* get all the windows, workspaces and the active workspace */
+  /* get all the windows and the active workspace */
   windows = wnck_screen_get_windows_stacked (plugin->screen);
-  workspaces = wnck_screen_get_workspaces (plugin->screen);
   active_workspace = wnck_screen_get_active_workspace (plugin->screen);
+
+  if (plugin->all_workspaces)
+    {
+      /* get all the workspaces */
+      workspaces = wnck_screen_get_workspaces (plugin->screen);
+    }
+  else
+    {
+      /* create a fake list with only the active workspace */
+      fake.next = fake.prev = NULL;
+      fake.data = active_workspace;
+      workspaces = &fake;
+    }
 
   for (lp = workspaces; lp != NULL; lp = lp->next)
     {
       workspace = WNCK_WORKSPACE (lp->data);
 
-      /* skip this workspace if we only show the active workspace,
-       * there are no urgent windows and this is not the active ws */
-      if (plugin->show_all_workspaces == FALSE
-          && plugin->urgent_windows == 0
-          && workspace != active_workspace)
-        continue;
-
-      /* show the workspace menu item */
-      if (plugin->show_all_workspaces || workspace == active_workspace)
+      if (plugin->workspace_names)
         {
-          /* create the workspace menu item and separator */
+          /* create the workspace menu item */
           mi = window_menu_plugin_menu_workspace_item_new (workspace,
               workspace == active_workspace ? bold : italic);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
+
+          mi = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+          gtk_widget_show (mi);
+
+          /* not empty anymore */
+          is_empty = FALSE;
         }
 
-      for (li = windows, has_items = FALSE; li != NULL; li = li->next)
+      for (li = windows, has_windows = FALSE; li != NULL; li = li->next)
         {
           window = WNCK_WINDOW (li->data);
 
@@ -775,42 +1000,23 @@ window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
                    && workspace == active_workspace))
             continue;
 
-          /* filter out urgent windows on workspaces other then the
-           * current workspace */
-          if (plugin->show_all_workspaces == FALSE
-              && plugin->urgent_windows > 0
-              && window_workspace != active_workspace
-              && !wnck_window_needs_attention (window))
-            continue;
-
-          if (has_items == FALSE)
-            {
-              /* in the case of urgent windows we need to add the header
-               * if this workspace is not the active workspace */
-              if (!plugin->show_all_workspaces && workspace != active_workspace)
-                {
-                  mi = window_menu_plugin_menu_workspace_item_new (workspace,
-                      workspace == active_workspace ? bold : italic);
-                  gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-                  gtk_widget_show (mi);
-                }
-
-              /* add separator between the workspace and first window item */
-              mi = gtk_separator_menu_item_new ();
-              gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-              gtk_widget_show (mi);
-
-              has_items = TRUE;
-            }
-
           /* create the menu item */
           mi = window_menu_plugin_menu_window_item_new (window, italic, bold);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
+
+          /* this workspace is not empty */
+          has_windows = TRUE;
+
+          /* menu is not empty anymore */
+          is_empty = FALSE;
+
+          /* count the urgent windows */
+          if (wnck_window_needs_attention (window))
+            urgent_windows++;
         }
 
-      if (lp->next != NULL
-          && (has_items || plugin->show_all_workspaces))
+      if (has_windows)
         {
           mi = gtk_separator_menu_item_new ();
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -818,9 +1024,86 @@ window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
         }
     }
 
-  /* remove a remaining separator */
+  /* destroy the last menu item if it's a separator */
   if (mi != NULL && GTK_IS_SEPARATOR_MENU_ITEM (mi))
     gtk_widget_destroy (mi);
+
+  /* add a menu item if there are not windows found */
+  if (is_empty)
+    {
+      mi = gtk_menu_item_new_with_label (_("No Windows"));
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      gtk_widget_set_sensitive (mi, FALSE);
+      gtk_widget_show (mi);
+    }
+
+  /* check if we need to append the urgent windows on other workspaces */
+  if (!plugin->all_workspaces && plugin->urgent_windows > urgent_windows)
+    {
+      if (plugin->workspace_names)
+        {
+          mi = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+          gtk_widget_show (mi);
+
+          mi = gtk_menu_item_new_with_label (_("Urgent Windows"));
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+          gtk_widget_set_sensitive (mi, FALSE);
+          gtk_widget_show (mi);
+        }
+
+      mi = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      gtk_widget_show (mi);
+
+      for (li = windows; li != NULL; li = li->next)
+        {
+          window = WNCK_WINDOW (li->data);
+
+          /* always skip these windows */
+          if (wnck_window_is_skip_pager (window)
+              || wnck_window_is_skip_tasklist (window))
+            continue;
+
+          /* get the window's workspace */
+          window_workspace = wnck_window_get_workspace (window);
+
+          /* only acept windows that are not on the active workspace,
+           * not sticky and urgent */
+          if (window_workspace == active_workspace
+              || window_workspace == NULL
+              || !wnck_window_needs_attention (window))
+            continue;
+
+          /* create the menu item */
+          mi = window_menu_plugin_menu_window_item_new (window, italic, bold);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+          gtk_widget_show (mi);
+        }
+    }
+
+  if (plugin->workspace_actions)
+    {
+      mi = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      gtk_widget_show (mi);
+
+      mi = gtk_image_menu_item_new_with_label (_("Add Workspace"));
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      gtk_widget_show (mi);
+
+      image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+      gtk_widget_show (mi);
+
+      mi = gtk_image_menu_item_new_with_label (_("Remove Workspace \"TODO\""));
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      gtk_widget_show (mi);
+
+      image = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+      gtk_widget_show (mi);
+    }
 
   /* cleanup */
   pango_font_description_free (italic);
