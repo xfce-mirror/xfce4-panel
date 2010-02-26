@@ -31,7 +31,9 @@
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 
-#define XFCE_PANEL_PLUGIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate))
+#define XFCE_PANEL_PLUGIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
+                                            XFCE_TYPE_PANEL_PLUGIN, \
+                                            XfcePanelPluginPrivate))
 
 
 
