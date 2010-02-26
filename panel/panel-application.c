@@ -182,8 +182,8 @@ panel_application_init (PanelApplication *application)
   application->drop_data_ready = FALSE;
   application->drop_occurred = FALSE;
 
-  /* get the xfconf channel */
-  application->xfconf = panel_properties_get_channel ();
+  /* get the xfconf channel (singleton) */
+  application->xfconf = panel_properties_get_channel (G_OBJECT (application));
 
   /* check if we need to force all plugins to run external */
   if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
@@ -227,9 +227,6 @@ panel_application_finalize (GObject *object)
 
   /* cleanup the list of windows */
   g_slist_free (application->windows);
-
-  /* release the xfconf channel */
-  g_object_unref (G_OBJECT (application->xfconf));
 
   /* release the factory */
   g_object_unref (G_OBJECT (application->factory));
@@ -326,7 +323,8 @@ panel_application_load (PanelApplication *application)
             {
               /* plugin could not be loaded, remove it from the channel */
               g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
-              xfconf_channel_reset_property (application->xfconf, buf, TRUE);
+              if (xfconf_channel_has_property (application->xfconf, buf))
+                xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
               /* show warnings */
               g_critical (_("Plugin \"%s-%d\" was not found and has been "
@@ -408,7 +406,8 @@ panel_application_plugin_delete_config (PanelApplication *application,
 
   /* remove the xfconf property */
   property = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE, unique_id);
-  xfconf_channel_reset_property (application->xfconf, property, TRUE);
+  if (xfconf_channel_has_property (application->xfconf, property))
+    xfconf_channel_reset_property (application->xfconf, property, TRUE);
   g_free (property);
 
   /* lookup the rc file */
@@ -648,7 +647,8 @@ panel_application_window_destroyed (GtkWidget        *window,
 
       /* remove the properties of this panel */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u", n);
-      xfconf_channel_reset_property (application->xfconf, buf, TRUE);
+      if (xfconf_channel_has_property (application->xfconf, buf))
+        xfconf_channel_reset_property (application->xfconf, buf, TRUE);
 
       /* either remove the window or add the bindings */
       if (li->data == window)
@@ -1014,7 +1014,8 @@ panel_application_save (PanelApplication *application,
       if (G_UNLIKELY (children == NULL))
         {
           g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
-          xfconf_channel_reset_property (channel, buf, FALSE);
+          if (xfconf_channel_has_property (channel, buf))
+            xfconf_channel_reset_property (channel, buf, FALSE);
           continue;
         }
 
@@ -1180,7 +1181,8 @@ panel_application_new_window (PanelApplication *application,
     {
       /* remove the xfconf properties */
       property = g_strdup_printf ("/panels/panel-%d", g_slist_index (application->windows, window));
-      xfconf_channel_reset_property (application->xfconf, property, TRUE);
+      if (xfconf_channel_has_property (application->xfconf, property))
+        xfconf_channel_reset_property (application->xfconf, property, TRUE);
       g_free (property);
 
       /* set default position */

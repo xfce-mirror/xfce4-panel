@@ -33,7 +33,7 @@ struct _PanelProperty
 
 
 
-XfconfChannel *panel_properties_get_channel       (void);
+XfconfChannel *panel_properties_get_channel       (GObject             *object_for_weak_ref);
 
 void           panel_properties_bind              (XfconfChannel       *channel,
                                                    GObject             *object,

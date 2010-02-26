@@ -27,10 +27,12 @@
 
 
 XfconfChannel *
-panel_properties_get_channel (void)
+panel_properties_get_channel (GObject *object_for_weak_ref)
 {
   GError        *error = NULL;
   XfconfChannel *channel;
+
+  panel_return_val_if_fail (G_IS_OBJECT (object_for_weak_ref), NULL);
 
   if (!xfconf_init (&error))
     {
@@ -40,8 +42,7 @@ panel_properties_get_channel (void)
     }
 
   channel = xfconf_channel_get (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
-  /* TODO enable this again when Brian fixed his code
-   * g_object_weak_ref (G_OBJECT (channel), (GWeakNotify) xfconf_shutdown, NULL); */
+  g_object_weak_ref (object_for_weak_ref, xfconf_shutdown, NULL);
 
   return channel;
 }
@@ -64,13 +65,8 @@ panel_properties_bind (XfconfChannel       *channel,
   panel_return_if_fail (properties != NULL);
 
   if (G_LIKELY (channel == NULL))
-    {
-      channel = xfconf_channel_get (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
-      if (G_UNLIKELY (channel == NULL))
-        return;
-      /* TODO enable this again when Brian fixed his code
-       * g_object_weak_ref (G_OBJECT (object), (GWeakNotify) g_object_unref, channel); */
-    }
+    channel = panel_properties_get_channel (object);
+  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
 
   /* walk the properties array */
   for (prop = properties; prop->property != NULL; prop++)
