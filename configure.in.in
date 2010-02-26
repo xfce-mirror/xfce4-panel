@@ -109,14 +109,6 @@ XDT_CHECK_PACKAGE([DBUS], [dbus-glib-1], [0.34])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.12])
 
-dnl ***********************************
-dnl *** Check for optional packages ***
-dnl ***********************************
-XDT_CHECK_OPTIONAL_PACKAGE([LIBSTARTUP_NOTIFICATION],
-                           [libstartup-notification-1.0],
-                           [0.5], [startup-notification],
-                           [startup notification library], [yes])
-
 dnl *************************
 dnl *** Check for gtk-doc ***
 dnl *************************

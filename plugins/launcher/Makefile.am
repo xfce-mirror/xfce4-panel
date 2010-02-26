@@ -33,7 +33,6 @@ liblauncher_la_CFLAGS = \
 	$(LIBXFCE4MENU_CFLAGS) \
 	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
-	$(LIBSTARTUP_NOTIFICATION_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 liblauncher_la_LDFLAGS = \
@@ -49,8 +48,7 @@ liblauncher_la_LIBADD = \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBXFCE4MENU_LIBS) \
 	$(EXO_LIBS) \
-	$(XFCONF_LIBS) \
-	$(LIBSTARTUP_NOTIFICATION_LIBS)
+	$(XFCONF_LIBS)
 
 liblauncher_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
