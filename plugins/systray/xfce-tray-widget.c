@@ -91,9 +91,6 @@ struct _XfceTrayWidget
     /* hidden childeren counter */
     gint          n_hidden_childeren;
 
-    /* last allocated child size, used to prevent icon overflow */
-    gint          last_alloc_child_size;
-
     /* whether hidden icons are visible */
     guint         show_hidden : 1;
 
@@ -183,7 +180,6 @@ xfce_tray_widget_init (XfceTrayWidget *tray)
     tray->n_hidden_childeren = 0;
     tray->arrow_type = GTK_ARROW_LEFT;
     tray->show_hidden = FALSE;
-    tray->last_alloc_child_size = -1;
 
     /* create hash table */
     tray->names = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -229,7 +225,7 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
     GSList              *li;
     XfceTrayWidgetChild *child_info;
     gint                 n_columns;
-    gint                 child_size = tray->last_alloc_child_size;
+    gint                 child_size = -1;
     GtkRequisition       child_requisition;
     gint                 n_visible_childeren = 0;
 
@@ -273,12 +269,11 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
             /* count the number of visible childeren */
             if (child_info->hidden == FALSE || tray->show_hidden == TRUE)
             {
-                /* don't use the allocate child size if it's not set yet */
-                if (G_UNLIKELY (tray->last_alloc_child_size == -1))
-                {
-                    /* pick largest icon */
+                /* pick largest icon */
+                if (child_size == -1)
+                    child_size = MAX (child_requisition.width, child_requisition.height);
+                else
                     child_size = MAX (child_size, MAX (child_requisition.width, child_requisition.height));
-                }
 
                 /* increase number of visible childeren */
                 n_visible_childeren++;
@@ -357,17 +352,9 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
     child_size -= XFCE_TRAY_WIDGET_SPACING * (tray->rows - 1);
     child_size /= tray->rows;
 
-    /* store or fix the calculated child size */
-    if (child_size > 0)
-    {
-        /* set last allocated child size */
-        tray->last_alloc_child_size = child_size;
-    }
-    else
-    {
-        /* child size is invalid (hidden panel), fall-back on old size */
-        child_size = MAX (1, tray->last_alloc_child_size);
-    }
+    /* don't allocate a zero width icon */
+    if (child_size < 1)
+      child_size = 1;
 
     /* position arrow button */
     if (tray->n_hidden_childeren > 0)
