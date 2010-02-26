@@ -191,16 +191,19 @@ panel_application_init (PanelApplication *application)
   /* get all the panel properties */
   hash_table = xfconf_channel_get_properties (application->xfconf, NULL);
 
-  /* check if we need to force all plugins to run external */
-  value = g_hash_table_lookup (hash_table, "/force-all-external");
-  if (value != NULL && g_value_get_boolean (value))
-    panel_module_factory_force_all_external ();
+  if (G_LIKELY (hash_table != NULL))
+    {
+      /* check if we need to force all plugins to run external */
+      value = g_hash_table_lookup (hash_table, "/force-all-external");
+      if (value != NULL && g_value_get_boolean (value))
+        panel_module_factory_force_all_external ();
+
+      /* set the shared hash table */
+      panel_properties_shared_hash_table (hash_table);
+    }
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
-
-  /* set the shared hash table */
-  panel_properties_shared_hash_table (hash_table);
 
   /* load setup */
   if (G_LIKELY (hash_table != NULL))
@@ -213,11 +216,14 @@ panel_application_init (PanelApplication *application)
   if (G_UNLIKELY (application->windows == NULL))
     window = panel_application_new_window (application, NULL, TRUE);
 
-  /* unset the shared hash table */
-  panel_properties_shared_hash_table (NULL);
+  if (G_LIKELY (hash_table != NULL))
+    {
+      /* unset the shared hash table */
+      panel_properties_shared_hash_table (NULL);
 
-  /* cleanup */
-  g_hash_table_destroy (hash_table);
+      /* cleanup */
+      g_hash_table_destroy (hash_table);
+    }
 }
 
 
@@ -310,6 +316,7 @@ panel_application_load (PanelApplication *application,
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
+  panel_return_if_fail (hash_table != NULL);
 
   /* walk all the panel in the configuration */
   value = g_hash_table_lookup (hash_table, "/panels");
