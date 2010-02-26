@@ -15,8 +15,6 @@ bin_PROGRAMS = \
 xfce4_panel_built_sources = \
 	panel-dbus-service-infos.h \
 	panel-dbus-client-infos.h \
-	panel-marshal.h \
-	panel-marshal.c \
 	panel-plugin-external-infos.h \
 	panel-preferences-dialog-ui.h
 
@@ -93,12 +91,12 @@ panel-plugin-external-infos.h: $(srcdir)/panel-plugin-external-infos.xml Makefil
 panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.ui Makefile
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
 
-panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
-	$(AM_V_GEN) glib-genmarshal --header --prefix=panel_marshal $< > $@
-
-panel-marshal.c: $(srcdir)/panel-marshal.list Makefile
-	$(AM_V_GEN) echo "#include <panel/panel-marshal.h>" > $@ \
-	&& glib-genmarshal --body --prefix=panel_marshal $< >> $@
+#panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
+#	$(AM_V_GEN) glib-genmarshal --header --prefix=panel_marshal $< > $@
+#
+#panel-marshal.c: $(srcdir)/panel-marshal.list Makefile
+#	$(AM_V_GEN) echo "#include <panel/panel-marshal.h>" > $@ \
+#	&& glib-genmarshal --body --prefix=panel_marshal $< >> $@
 
 DISTCLEANFILES = \
 	$(xfce4_panel_built_sources)
@@ -110,7 +108,7 @@ endif
 
 EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
-	panel-marshal.list \
+	panel-plugin-external-infos.xml \
 	panel-preferences-dialog.ui
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

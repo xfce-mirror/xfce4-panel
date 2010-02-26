@@ -45,9 +45,7 @@
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 #include <wrapper/wrapper-plug.h>
-#include <wrapper/wrapper-marshal.h>
 #include <wrapper/wrapper-module.h>
-
 #include <wrapper/wrapper-dbus-client-infos.h>
 
 

@@ -38,7 +38,6 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
-#include <panel/panel-marshal.h>
 #include <panel/panel-module.h>
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-window.h>
@@ -136,7 +135,7 @@ struct _PanelPluginExternal
   /* dbus message queue */
   GPtrArray        *queue;
 
-  /* counter to count the number of restarts */
+  /* number of automatic restarts restarts */
   guint             n_restarts;
 
   /* some info we store here */

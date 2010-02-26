@@ -11,9 +11,7 @@ wrapper_PROGRAMS = \
 	wrapper
 
 wrapper_built_sources = \
-	wrapper-dbus-client-infos.h \
-	wrapper-marshal.h \
-	wrapper-marshal.c
+	wrapper-dbus-client-infos.h
 
 wrapper_SOURCES = \
 	$(wrapper_built_sources) \
@@ -49,12 +47,12 @@ if MAINTAINER_MODE
 wrapper-dbus-client-infos.h: $(top_builddir)/panel/panel-plugin-external-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
 
-wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile
-	$(AM_V_GEN)glib-genmarshal --header --prefix=wrapper_marshal $< > $@
-
-wrapper-marshal.c: $(top_builddir)/panel/panel-marshal.list Makefile
-	$(AM_V_GEN) echo "#include <wrapper/wrapper-marshal.h>" > $@ \
-	&& glib-genmarshal --body --prefix=wrapper_marshal $< >> $@
+#wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile
+#	$(AM_V_GEN)glib-genmarshal --header --prefix=wrapper_marshal $< > $@
+#
+#wrapper-marshal.c: $(top_builddir)/panel/panel-marshal.list Makefile
+#	$(AM_V_GEN) echo "#include <wrapper/wrapper-marshal.h>" > $@ \
+#	&& glib-genmarshal --body --prefix=wrapper_marshal $< >> $@
 
 BUILT_SOURCES = \
 	$(wrapper_built_sources)

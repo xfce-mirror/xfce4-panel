@@ -38,7 +38,6 @@
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-module-factory.h>
-#include <panel/panel-marshal.h>
 
 
 
