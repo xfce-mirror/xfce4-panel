@@ -78,6 +78,14 @@ static gboolean     panel_window_enter_notify_event         (GtkWidget        *w
                                                              GdkEventCrossing *event);
 static gboolean     panel_window_leave_notify_event         (GtkWidget        *widget,
                                                              GdkEventCrossing *event);
+static gboolean     panel_window_drag_motion                (GtkWidget        *widget,
+                                                             GdkDragContext   *context,
+                                                             gint              x,
+                                                             gint              y,
+                                                             guint             drag_time);
+static void         panel_window_drag_leave                 (GtkWidget        *widget,
+                                                             GdkDragContext   *context,
+                                                             guint             drag_time);
 static gboolean     panel_window_motion_notify_event        (GtkWidget        *widget,
                                                              GdkEventMotion   *event);
 static gboolean     panel_window_button_press_event         (GtkWidget        *widget,
@@ -277,6 +285,8 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->expose_event = panel_window_expose_event;
   gtkwidget_class->enter_notify_event = panel_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_window_leave_notify_event;
+  gtkwidget_class->drag_motion = panel_window_drag_motion;
+  gtkwidget_class->drag_leave = panel_window_drag_leave;
   gtkwidget_class->motion_notify_event = panel_window_motion_notify_event;
   gtkwidget_class->button_press_event = panel_window_button_press_event;
   gtkwidget_class->button_release_event = panel_window_button_release_event;
@@ -351,6 +361,9 @@ panel_window_init (PanelWindow *window)
 
   /* set additional events */
   gtk_widget_add_events (GTK_WIDGET (window), GDK_BUTTON_PRESS_MASK);
+
+  /* create a 'fake' drop zone for autohide drag motion */
+  gtk_drag_dest_set (GTK_WIDGET (window), 0, NULL, 0, 0);
 
   /* init vars */
   window->screen = NULL;
@@ -714,13 +727,39 @@ panel_window_leave_notify_event (GtkWidget        *widget,
 {
   PanelWindow *window = PANEL_WINDOW (widget);
 
-  /* queue a new autohide time if needed */
+   /* queue an autohide timeout if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && window->autohide_state != AUTOHIDE_DISABLED
       && window->autohide_state != AUTOHIDE_BLOCKED)
     panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->leave_notify_event) (widget, event);
+}
+
+
+
+static gboolean
+panel_window_drag_motion (GtkWidget      *widget,
+                          GdkDragContext *context,
+                          gint            x,
+                          gint            y,
+                          guint           drag_time)
+{
+  return TRUE;
+}
+
+
+
+static void
+panel_window_drag_leave (GtkWidget      *widget,
+                         GdkDragContext *context,
+                         guint           drag_time)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+
+  /* queue an autohide timeout if needed */
+  if (window->autohide_state == AUTOHIDE_VISIBLE)
+    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
 }
 
 
@@ -1707,30 +1746,57 @@ panel_window_autohide_queue (PanelWindow   *window,
 
 
 static gboolean
+panel_window_autohide_drag_motion (GtkWidget        *widget,
+                                   GdkDragContext   *context,
+                                   gint              x,
+                                   gint              y,
+                                   guint             drag_time,
+                                   PanelWindow      *window)
+{
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), TRUE);
+  panel_return_val_if_fail (window->autohide_window == widget, TRUE);
+
+  /* queue a popup is state is hidden */
+  if (window->autohide_state == AUTOHIDE_HIDDEN)
+    panel_window_autohide_queue (window, AUTOHIDE_POPUP);
+
+  return TRUE;
+}
+
+
+
+static void
+panel_window_autohide_drag_leave (GtkWidget      *widget,
+                                  GdkDragContext *drag_context,
+                                  guint           drag_time,
+                                  PanelWindow    *window)
+{
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (window->autohide_window == widget);
+
+  /* we left the window before it was hidden, stop the queue */
+  if (window->autohide_timeout_id != 0)
+    g_source_remove (window->autohide_timeout_id);
+
+  /* update the status */
+  if (window->autohide_state == AUTOHIDE_POPUP)
+    window->autohide_state = AUTOHIDE_HIDDEN;
+}
+
+
+
+static gboolean
 panel_window_autohide_event (GtkWidget        *widget,
                              GdkEventCrossing *event,
                              PanelWindow      *window)
 {
-  gboolean enter = !!(event->type == GDK_ENTER_NOTIFY);
-
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (window->autohide_window == widget, FALSE);
 
-  if (enter)
-    {
-      /* queue a popup */
-      panel_window_autohide_queue (window, AUTOHIDE_POPUP);
-    }
+  if (event->type == GDK_ENTER_NOTIFY)
+    panel_window_autohide_queue (window, AUTOHIDE_POPUP);
   else
-    {
-      /* we left the window before it was hidden, stop the queue */
-      if (window->autohide_timeout_id != 0)
-        g_source_remove (window->autohide_timeout_id);
-
-      /* update the status */
-      if (window->autohide_state == AUTOHIDE_POPUP)
-        window->autohide_state = AUTOHIDE_HIDDEN;
-    }
+    panel_window_autohide_drag_leave (widget, NULL, 0, window);
 
   return FALSE;
 }
@@ -1750,6 +1816,9 @@ panel_window_set_autohide (PanelWindow *window,
 
   if ((window->autohide_state != AUTOHIDE_DISABLED) == autohide)
     return;
+
+  /* respond to drag motion */
+  gtk_drag_dest_set_track_motion (GTK_WIDGET (window), autohide);
 
   if (autohide)
     {
@@ -1772,6 +1841,14 @@ panel_window_set_autohide (PanelWindow *window,
           G_CALLBACK (panel_window_autohide_event), window);
       g_signal_connect (G_OBJECT (popup), "leave-notify-event",
           G_CALLBACK (panel_window_autohide_event), window);
+
+      /* show/hide the panel on drag events */
+      gtk_drag_dest_set (popup, 0, NULL, 0, 0);
+      gtk_drag_dest_set_track_motion (popup, TRUE);
+      g_signal_connect (G_OBJECT (popup), "drag-motion",
+          G_CALLBACK (panel_window_autohide_drag_motion), window);
+      g_signal_connect (G_OBJECT (popup), "drag-leave",
+          G_CALLBACK (panel_window_autohide_drag_leave), window);
 
       /* show the window */
       window->autohide_window = popup;
