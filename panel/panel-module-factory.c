@@ -75,7 +75,8 @@ struct _PanelModuleFactory
 
 
 
-static guint factory_signals[LAST_SIGNAL];
+static guint    factory_signals[LAST_SIGNAL];
+static gboolean force_all_external = FALSE;
 
 
 
@@ -112,7 +113,7 @@ panel_module_factory_init (PanelModuleFactory *factory)
   factory->has_launcher = FALSE;
 
   /* create hash tables */
-  factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal, 
+  factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal,
                                             g_free, g_object_unref);
 
   /* load all the modules */
@@ -193,7 +194,8 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
               /* create the full .desktop filename */
               filename = g_build_filename (path, name, NULL);
 
-              /* find the dot in the name (cannot fail since it pasted the .desktop suffix check) */
+              /* find the dot in the name, this cannot
+               * fail since it pasted the .desktop suffix check */
               p = strrchr (name, '.');
 
               /* get the new module internal name */
@@ -204,7 +206,9 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
                 goto already_loaded;
 
               /* try to load the module */
-              module = panel_module_new_from_desktop_file (filename, internal_name);
+              module = panel_module_new_from_desktop_file (filename,
+                                                           internal_name,
+                                                           force_all_external);
 
               if (G_LIKELY (module != NULL))
                 {
@@ -258,8 +262,8 @@ panel_module_factory_modules_cleanup (gpointer key,
   remove_from_table = !panel_module_is_valid (module);
 
   /* if we're going to remove this item, check if it's the launcher */
-  if (remove_from_table 
-      && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, 
+  if (remove_from_table
+      && exo_str_is_equal (LAUNCHER_PLUGIN_NAME,
                            panel_module_get_name (module)))
     factory->has_launcher = FALSE;
 
@@ -298,6 +302,14 @@ panel_module_factory_get (void)
     }
 
   return factory;
+}
+
+
+
+void
+panel_module_factory_force_all_external (void)
+{
+  force_all_external = TRUE;
 }
 
 
@@ -350,18 +362,18 @@ GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
-  
+
   /* scan the resource directories again */
   panel_module_factory_load_modules (factory);
 
   /* make sure the hash table is clean */
-  g_hash_table_foreach_remove (factory->modules, 
+  g_hash_table_foreach_remove (factory->modules,
       panel_module_factory_modules_cleanup, factory);
 
 #if !GLIB_CHECK_VERSION (2,14,0)
   GList *value = NULL;
 
-  g_hash_table_foreach (factory->modules, 
+  g_hash_table_foreach (factory->modules,
       panel_module_factory_get_modules_foreach, &value);
 
   return value;

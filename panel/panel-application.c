@@ -181,11 +181,15 @@ panel_application_init (PanelApplication *application)
   application->drop_data_ready = FALSE;
   application->drop_occurred = FALSE;
 
-  /* get a factory reference so it never unloads */
-  application->factory = panel_module_factory_get ();
-
   /* get the xfconf channel */
   application->xfconf = xfconf_channel_new ("xfce4-panel");
+
+  /* check if we need to force all plugins to run external */
+  if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
+    panel_module_factory_force_all_external ();
+
+  /* get a factory reference so it never unloads */
+  application->factory = panel_module_factory_get ();
 
   /* load setup */
   panel_application_load (application);
