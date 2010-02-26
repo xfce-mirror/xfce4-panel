@@ -42,18 +42,18 @@
 
 
 
-#define SNAP_DISTANCE      (10)
-#define SET_OLD_WM_STRUTS  (FALSE)
-#define STRUTS_DEBUGGING   (FALSE)
-#define POPUP_DELAY        (225)
-#define POPDOWN_DELAY      (350)
-#define HANDLE_SPACING     (4)
-#define HANDLE_DOTS        (2)
-#define HANDLE_PIXELS      (2)
-#define HANDLE_PIXEL_SPACE (1)
-#define HANDLE_SIZE        (HANDLE_DOTS * (HANDLE_PIXELS + \
-                            HANDLE_PIXEL_SPACE) - HANDLE_PIXEL_SPACE)
-#define HANDLE_SIZE_TOTAL  (2 * HANDLE_SPACING + HANDLE_SIZE)
+#define SNAP_DISTANCE         (10)
+#define SET_OLD_WM_STRUTS     (FALSE)
+#define STRUTS_DEBUGGING      (FALSE)
+#define DEFAULT_POPUP_DELAY   (225)
+#define DEFAULT_POPDOWN_DELAY (350)
+#define HANDLE_SPACING        (4)
+#define HANDLE_DOTS           (2)
+#define HANDLE_PIXELS         (2)
+#define HANDLE_PIXEL_SPACE    (1)
+#define HANDLE_SIZE           (HANDLE_DOTS * (HANDLE_PIXELS + \
+                               HANDLE_PIXEL_SPACE) - HANDLE_PIXEL_SPACE)
+#define HANDLE_SIZE_TOTAL     (2 * HANDLE_SPACING + HANDLE_SIZE)
 
 
 
@@ -105,6 +105,8 @@ static void         panel_window_size_allocate_set_xy       (PanelWindow      *w
                                                              gint             *return_y);
 static void         panel_window_screen_changed             (GtkWidget        *widget,
                                                              GdkScreen        *previous_screen);
+static void         panel_window_style_set                  (GtkWidget        *widget,
+                                                             GtkStyle         *previous_style);
 static StrutsEgde   panel_window_screen_struts_edge         (PanelWindow      *window);
 static void         panel_window_screen_struts_set          (PanelWindow      *window);
 static void         panel_window_screen_force_update        (PanelWindow      *window);
@@ -245,6 +247,10 @@ struct _PanelWindow
   guint                autohide_timeout_id;
   gint                 autohide_block;
 
+  /* popup/down delay from gtk style */
+  gint                 popup_delay;
+  gint                 popdown_delay;
+
   /* whether the window is locked */
   guint                locked : 1;
 
@@ -258,6 +264,10 @@ struct _PanelWindow
   gint                 grab_y;
 };
 
+/* used for a full XfcePanelWindow name in the class, but not in the code */
+typedef PanelWindow      XfcePanelWindow;
+typedef PanelWindowClass XfcePanelWindowClass;
+
 
 
 static GdkAtom cardinal_atom = 0;
@@ -268,7 +278,7 @@ static GdkAtom net_wm_strut_partial_atom = 0;
 
 
 
-G_DEFINE_TYPE (PanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
+G_DEFINE_TYPE (XfcePanelWindow, panel_window, PANEL_TYPE_BASE_WINDOW)
 
 
 
@@ -296,6 +306,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->size_request = panel_window_size_request;
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
+  gtkwidget_class->style_set = panel_window_style_set;
 
   g_object_class_install_property (gobject_class,
                                    PROP_HORIZONTAL,
@@ -351,6 +362,22 @@ panel_window_class_init (PanelWindowClass *klass)
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
 
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("popup-delay",
+                                                             NULL,
+                                                             "Time before the panel will unhide on an enter event",
+                                                             1, G_MAXINT,
+                                                             DEFAULT_POPUP_DELAY,
+                                                             EXO_PARAM_READABLE));
+
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("popdown-delay",
+                                                             NULL,
+                                                             "Time before the panel will hide on a leave event",
+                                                             1, G_MAXINT,
+                                                             DEFAULT_POPDOWN_DELAY,
+                                                             EXO_PARAM_READABLE));
+
   /* initialize the atoms */
   cardinal_atom = gdk_atom_intern_static_string ("CARDINAL");
   net_wm_strut_partial_atom = gdk_atom_intern_static_string ("_NET_WM_STRUT_PARTIAL");
@@ -376,6 +403,8 @@ panel_window_init (PanelWindow *window)
   window->autohide_state = AUTOHIDE_DISABLED;
   window->autohide_timeout_id = 0;
   window->autohide_block = 0;
+  window->popup_delay = DEFAULT_POPUP_DELAY;
+  window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->base_x = -1;
   window->base_y = -1;
   window->grab_time = 0;
@@ -1220,6 +1249,23 @@ panel_window_screen_changed (GtkWidget *widget,
 
 
 
+static void
+panel_window_style_set (GtkWidget *widget,
+                        GtkStyle  *previous_style)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+
+  /* let gtk update the widget style */
+  (*GTK_WIDGET_CLASS (panel_window_parent_class)->style_set) (widget, previous_style);
+
+  gtk_widget_style_get (GTK_WIDGET (widget),
+                        "popup-delay", &window->popup_delay,
+                        "popdown-delay", &window->popdown_delay,
+                        NULL);
+}
+
+
+
 static StrutsEgde
 panel_window_screen_struts_edge (PanelWindow *window)
 {
@@ -1787,11 +1833,11 @@ panel_window_autohide_queue (PanelWindow   *window,
     {
       /* timeout delay */
       if (new_state == AUTOHIDE_POPDOWN)
-        delay = POPDOWN_DELAY;
+        delay = window->popdown_delay;
       else if (new_state == AUTOHIDE_POPDOWN_SLOW)
-        delay = POPDOWN_DELAY * 4;
+        delay = window->popdown_delay * 4;
       else
-        delay = POPUP_DELAY;
+        delay = window->popup_delay;
 
       /* start a new timeout to hide the panel */
       window->autohide_timeout_id =

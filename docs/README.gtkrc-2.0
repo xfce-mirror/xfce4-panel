@@ -1,6 +1,19 @@
 The Xfce Panel .gtkrc-2.0 hacks
 ===============================
 
+XfcePanelWindow
+style "xfce-panel-window-style"
+{
+  # Time in miliseconds before the panel will unhide on an enter event
+  XfcePanelWindow::popup-delay = 225
+
+  # Time in miliseconds before the panel will hide on a leave event
+  XfcePanelWindow::popdown-delay = 350
+}
+class "XfcePanelWindow" style "xfce-panel-window-style"
+
+
+
 XfceTasklist
 ---------------
 style "xfce-tasklist-style"
