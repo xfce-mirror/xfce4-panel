@@ -26,6 +26,7 @@
 /* #ifndef XFCE_DISABLE_DEPRECATED */
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <gdk/gdkx.h>
+#include <stdlib.h>
 /* #endif *//* !XFCE_DISABLE_DEPRECATED */
 
 G_BEGIN_DECLS
@@ -274,56 +275,47 @@ enum /*< skip >*/
   gint \
   main (gint argc, gchar **argv) \
   { \
-    GtkWidget     *plug; \
-    GdkScreen     *screen; \
-    GtkWidget     *xpp; \
-    GError        *error = NULL; \
-    gchar         *opt_name = NULL; \
-    gchar         *opt_display_name = NULL; \
-    gint           opt_unique_id = -1; \
-    gchar         *opt_comment = NULL; \
-    gint           opt_socket_id = 0; \
-    gchar        **opt_arguments = NULL; \
-    GOptionEntry   option_entries[] = \
-    { \
-      { "name", 'n', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_name, NULL, NULL }, \
-      { "display-name", 'd', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_display_name, NULL, NULL }, \
-      { "comment", 'c', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_comment, NULL, NULL }, \
-      { "unique-id", 'i', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_unique_id, NULL, NULL }, \
-      { "socket-id", 's', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL }, \
-      { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL }, \
-      { NULL } \
-    }; \
+    GtkWidget        *plug; \
+    GdkScreen        *screen; \
+    GtkWidget        *xpp; \
+    const gchar      *name; \
+    const gchar      *display_name; \
+    gint              unique_id; \
+    const gchar      *comment; \
+    GdkNativeWindow   socket_id; \
+    gchar           **arguments; \
     \
-    _xpp_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM); \
+    if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS)) \
+      { \
+        g_critical ("Not enough arguments are passed to the plugin"); \
+        return PLUGIN_EXIT_FAILURE; \
+      } \
     \
-    if (preinit_func != NULL) \
+    if (G_UNLIKELY (preinit_func != NULL)) \
       { \
         if (!((XfcePanelPluginPreInit) preinit_func) (argc, argv)) \
-          return 2; /* WRAPPER_EXIT_PREINIT */ \
+          return PLUGIN_EXIT_PREINIT_FAILED; \
       } \
     \
-    if (!gtk_init_with_args (&argc, &argv, "", option_entries, NULL, &error)) \
-      { \
-        g_critical ("Failed to initialize"); \
-        return 1 /* WRAPPER_EXIT_FAILURE */; \
-      } \
+    unique_id = strtol (argv[PLUGIN_ARGV_UNIQUE_ID], NULL, 0); \
+    socket_id = strtol (argv[PLUGIN_ARGV_SOCKET_ID], NULL, 0); \
+    name = argv[PLUGIN_ARGV_NAME]; \
+    display_name = argv[PLUGIN_ARGV_DISPLAY_NAME]; \
+    comment = argv[PLUGIN_ARGV_COMMENT]; \
+    arguments = argv + PLUGIN_ARGV_ARGUMENTS; \
     \
-    if (opt_unique_id == -1 || opt_name == NULL || opt_display_name == NULL \
-        || opt_comment == NULL || opt_socket_id == 0) \
-      { \
-        g_critical ("Missing argument(s)"); \
-        return 1 /* WRAPPER_EXIT_FAILURE */; \
-      } \
+    gtk_init (&argc, &argv); \
     \
     if (check_func != NULL) \
       { \
         screen = gdk_screen_get_default (); \
         if (!((XfcePanelPluginCheck) check_func) (screen)) \
-          return 3; /* WRAPPER_EXIT_NO_PROVIDER */ \
+          return PLUGIN_EXIT_CHECK_FAILED; \
       } \
     \
-    plug = gtk_plug_new (opt_socket_id); \
+    _xpp_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM); \
+    \
+    plug = gtk_plug_new (socket_id); \
     g_signal_connect (G_OBJECT (plug), "embedded", \
         G_CALLBACK (_xpp_plug_embedded), NULL); \
     g_signal_connect (G_OBJECT (plug), "expose-event", \
@@ -336,11 +328,11 @@ enum /*< skip >*/
       _xpp_set_colormap (plug); \
     \
     xpp = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
-                        "name", opt_name, \
-                        "unique-id", opt_unique_id, \
-                        "display-name", opt_display_name, \
-                        "comment", opt_comment,  \
-                        "arguments", opt_arguments, NULL); \
+                        "name", name, \
+                        "unique-id", unique_id, \
+                        "display-name", display_name, \
+                        "comment", comment,  \
+                        "arguments", arguments, NULL); \
     gtk_container_add (GTK_CONTAINER (plug), xpp); \
     g_signal_connect_after (G_OBJECT (xpp), "realize", \
         G_CALLBACK (_xpp_realize), NULL); \
@@ -359,7 +351,7 @@ enum /*< skip >*/
     if (GTK_IS_WIDGET (plug)) \
       gtk_widget_destroy (plug); \
     \
-    return 0 /* WRAPPER_EXIT_SUCCESS */; \
+    return PLUGIN_EXIT_SUCCESS; \
   }
 
 /* #endif *//* !XFCE_DISABLE_DEPRECATED */

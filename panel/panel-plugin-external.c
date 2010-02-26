@@ -397,8 +397,7 @@ panel_plugin_external_realize (GtkWidget *widget)
   gboolean              succeed;
   gchar                *socket_id, *unique_id;
   guint                 i;
-  guint                 argc = ARGV_ARGUMENTS + 1;
-  GdkScreen            *screen;
+  guint                 argc = PLUGIN_ARGV_ARGUMENTS;
   GPid                  pid;
 
   /* realize the socket first */
@@ -408,30 +407,28 @@ panel_plugin_external_realize (GtkWidget *widget)
   socket_id = g_strdup_printf ("%d", gtk_socket_get_id (GTK_SOCKET (widget)));
   unique_id = g_strdup_printf ("%d", external->unique_id);
 
-  /* add the number of arguments to the argv count */
+  /* add the number of arguments to the argc count */
   if (G_UNLIKELY (external->arguments != NULL))
     argc += g_strv_length (external->arguments);
 
   /* setup the basic argv */
-  argv = g_new0 (gchar *, argc);
-  argv[ARGV_0] = (gchar *) WRAPPER_BIN;
-  argv[ARGV_FILENAME] = (gchar *) panel_module_get_filename (external->module);
-  argv[ARGV_UNIQUE_ID] = (gchar *) unique_id;
-  argv[ARGV_SOCKET_ID] = (gchar *) socket_id;
-  argv[ARGV_NAME] = (gchar *) panel_module_get_name (external->module);
-  argv[ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
-  argv[ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
+  argv = g_new0 (gchar *, argc + 1);
+  argv[PLUGIN_ARGV_0] = (gchar *) WRAPPER_BIN;
+  argv[PLUGIN_ARGV_FILENAME] = (gchar *) panel_module_get_filename (external->module);
+  argv[PLUGIN_ARGV_UNIQUE_ID] = (gchar *) unique_id;
+  argv[PLUGIN_ARGV_SOCKET_ID] = (gchar *) socket_id;
+  argv[PLUGIN_ARGV_NAME] = (gchar *) panel_module_get_name (external->module);
+  argv[PLUGIN_ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
+  argv[PLUGIN_ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
 
   /* append the arguments */
   if (G_UNLIKELY (external->arguments != NULL))
     for (i = 0; external->arguments[i] != NULL; i++)
-      argv[i + ARGV_ARGUMENTS] = external->arguments[i];
-
-  /* get the widget screen */
-  screen = gtk_widget_get_screen (widget);
+      argv[i + PLUGIN_ARGV_ARGUMENTS] = external->arguments[i];
 
   /* spawn the proccess */
-  succeed = gdk_spawn_on_screen (screen, NULL, argv, NULL,
+  succeed = gdk_spawn_on_screen (gtk_widget_get_screen (widget),
+                                 NULL, argv, NULL,
                                  G_SPAWN_DO_NOT_REAP_CHILD, NULL,
                                  NULL, &pid, &error);
 
@@ -861,9 +858,11 @@ panel_plugin_external_child_watch (GPid     pid,
 
   switch (WEXITSTATUS (status))
     {
-      case WRAPPER_EXIT_FAILURE:
-      case WRAPPER_EXIT_NO_PROVIDER:
-      case WRAPPER_EXIT_PREINIT:
+      case PLUGIN_EXIT_SUCCESS:
+      case PLUGIN_EXIT_FAILURE:
+      case PLUGIN_EXIT_PREINIT_FAILED:
+      case PLUGIN_EXIT_CHECK_FAILED:
+      case PLUGIN_EXIT_NO_PROVIDER:
         /* wait until everything is settled, then destroy the
          * external plugin so it is removed from the configuration */
         exo_gtk_object_destroy_later (GTK_OBJECT (external));

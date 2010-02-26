@@ -67,8 +67,7 @@ struct _XfcePanelPluginProviderIface
                                        const GValue                  *value);
 };
 
-/* signals send from the plugin to the panel (possibly
- * through the wrapper) */
+/* signals send from the plugin to the panel (possibly through the wrapper) */
 typedef enum /*< skip >*/
 {
   PROVIDER_SIGNAL_MOVE_PLUGIN = 0,
@@ -89,6 +88,29 @@ typedef enum /*< skip >*/
   PROVIDER_SIGNAL_FOCUS_PLUGIN
 }
 XfcePanelPluginProviderSignal;
+
+/* plugin exit values */
+enum
+{
+  PLUGIN_EXIT_SUCCESS = 0,
+  PLUGIN_EXIT_FAILURE,
+  PLUGIN_EXIT_PREINIT_FAILED,
+  PLUGIN_EXIT_CHECK_FAILED,
+  PLUGIN_EXIT_NO_PROVIDER
+};
+
+/* argument handling in plugin and wrapper */
+enum
+{
+  PLUGIN_ARGV_0 = 0,
+  PLUGIN_ARGV_FILENAME,
+  PLUGIN_ARGV_UNIQUE_ID,
+  PLUGIN_ARGV_SOCKET_ID,
+  PLUGIN_ARGV_NAME,
+  PLUGIN_ARGV_DISPLAY_NAME,
+  PLUGIN_ARGV_COMMENT,
+  PLUGIN_ARGV_ARGUMENTS
+};
 
 
 

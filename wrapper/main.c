@@ -171,7 +171,7 @@ main (gint argc, gchar **argv)
   gchar                    process_name[16];
 #endif
   GModule                 *library = NULL;
-  gint                     retval = WRAPPER_EXIT_FAILURE;
+  gint                     retval = PLUGIN_EXIT_FAILURE;
   XfcePanelPluginPreInit   preinit_func;
   DBusGConnection         *dbus_gconnection;
   DBusGProxy              *dbus_gproxy = NULL;
@@ -198,20 +198,20 @@ main (gint argc, gchar **argv)
 #endif
 
   /* check if we have all the reuiqred arguments */
-  if (G_UNLIKELY (argc < ARGV_ARGUMENTS))
+  if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS))
     {
       g_critical ("Not enough arguments are passed to the wrapper");
-      return WRAPPER_EXIT_FAILURE;
+      return PLUGIN_EXIT_FAILURE;
     }
 
   /* put all arguments in understandable strings */
-  filename = argv[ARGV_FILENAME];
-  unique_id = strtol (argv[ARGV_UNIQUE_ID], NULL, 0);
-  socket_id = strtol (argv[ARGV_SOCKET_ID], NULL, 0);
-  name = argv[ARGV_NAME];
-  display_name = argv[ARGV_DISPLAY_NAME];
-  comment = argv[ARGV_COMMENT];
-  arguments = argv + ARGV_ARGUMENTS;
+  filename = argv[PLUGIN_ARGV_FILENAME];
+  unique_id = strtol (argv[PLUGIN_ARGV_UNIQUE_ID], NULL, 0);
+  socket_id = strtol (argv[PLUGIN_ARGV_SOCKET_ID], NULL, 0);
+  name = argv[PLUGIN_ARGV_NAME];
+  display_name = argv[PLUGIN_ARGV_DISPLAY_NAME];
+  comment = argv[PLUGIN_ARGV_COMMENT];
+  arguments = argv + PLUGIN_ARGV_ARGUMENTS;
 
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
   /* change the process name to something that makes sence */
@@ -235,7 +235,7 @@ main (gint argc, gchar **argv)
       && preinit_func != NULL
       && (*preinit_func) (argc, argv) == FALSE)
     {
-      retval = WRAPPER_EXIT_PREINIT;
+      retval = PLUGIN_EXIT_PREINIT_FAILED;
       goto leave;
     }
 
@@ -296,7 +296,7 @@ main (gint argc, gchar **argv)
       gtk_widget_show (GTK_WIDGET (provider));
 
       /* everything when fine */
-      retval = WRAPPER_EXIT_SUCCESS;
+      retval = PLUGIN_EXIT_SUCCESS;
 
       /* enter the main loop */
       gtk_main ();
@@ -312,7 +312,7 @@ main (gint argc, gchar **argv)
     }
   else
     {
-      retval = WRAPPER_EXIT_NO_PROVIDER;
+      retval = PLUGIN_EXIT_NO_PROVIDER;
     }
 
 leave:

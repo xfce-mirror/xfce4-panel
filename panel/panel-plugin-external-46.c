@@ -105,6 +105,9 @@ struct _PanelPluginExternal46
   /* plugin information */
   gint              unique_id;
 
+  /* startup arguments */
+  gchar           **arguments;
+
   /* the module */
   PanelModule      *module;
 
@@ -130,7 +133,8 @@ enum
 {
   PROP_0,
   PROP_MODULE,
-  PROP_UNIQUE_ID
+  PROP_UNIQUE_ID,
+  PROP_ARGUMENTS
 };
 
 typedef struct
@@ -187,6 +191,14 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
                                                         | G_PARAM_STATIC_STRINGS
                                                         | G_PARAM_CONSTRUCT_ONLY));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_ARGUMENTS,
+                                   g_param_spec_boxed ("arguments", NULL, NULL,
+                                                       G_TYPE_STRV,
+                                                       G_PARAM_READWRITE
+                                                       | G_PARAM_STATIC_STRINGS
+                                                       | G_PARAM_CONSTRUCT_ONLY));
+
   panel_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM);
 }
 
@@ -199,6 +211,7 @@ panel_plugin_external_46_init (PanelPluginExternal46 *external)
   external->unique_id = -1;
   external->module = NULL;
   external->queue = NULL;
+  external->arguments = NULL;
   external->plug_embedded = FALSE;
   external->n_restarts = 0;
   external->show_configure = FALSE;
@@ -235,7 +248,7 @@ panel_plugin_external_46_finalize (GObject *object)
 {
   PanelPluginExternal46 *external = PANEL_PLUGIN_EXTERNAL_46 (object);
   GSList                *li;
-
+g_message ("external-plugin-46 finalized");
   if (external->watch_id != 0)
     {
       /* remove the child watch and don't leave zomies */
@@ -249,6 +262,8 @@ panel_plugin_external_46_finalize (GObject *object)
         g_slice_free (QueueItem, li->data);
       g_slist_free (external->queue);
     }
+
+  g_strfreev (external->arguments);
 
   g_object_unref (G_OBJECT (external->module));
 
@@ -269,6 +284,10 @@ panel_plugin_external_46_get_property (GObject    *object,
     {
       case PROP_UNIQUE_ID:
         g_value_set_int (value, external->unique_id);
+        break;
+
+      case PROP_ARGUMENTS:
+        g_value_set_boxed (value, external->arguments);
         break;
 
       case PROP_MODULE:
@@ -297,6 +316,10 @@ panel_plugin_external_46_set_property (GObject      *object,
         external->unique_id = g_value_get_int (value);
         break;
 
+      case PROP_ARGUMENTS:
+        external->arguments = g_value_dup_boxed (value);
+        break;
+
       case PROP_MODULE:
         external->module = g_value_dup_object (value);
         break;
@@ -313,12 +336,13 @@ static void
 panel_plugin_external_46_realize (GtkWidget *widget)
 {
   PanelPluginExternal46  *external = PANEL_PLUGIN_EXTERNAL_46 (widget);
-  gchar               **argv;
-  GError               *error = NULL;
-  gboolean              succeed;
-  gchar                *socket_id, *unique_id;
-  GdkScreen            *screen;
-  GPid                  pid;
+  gchar                 **argv;
+  GError                 *error = NULL;
+  gboolean                succeed;
+  gchar                  *socket_id, *unique_id;
+  GPid                    pid;
+  guint                   argc = PLUGIN_ARGV_ARGUMENTS;
+  guint                   i;
 
   /* realize the socket first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_46_parent_class)->realize) (widget);
@@ -327,25 +351,28 @@ panel_plugin_external_46_realize (GtkWidget *widget)
   socket_id = g_strdup_printf ("%d", gtk_socket_get_id (GTK_SOCKET (widget)));
   unique_id = g_strdup_printf ("%d", external->unique_id);
 
-  /* setup the basic argv */
-  argv = g_new0 (gchar *, 12);
-  argv[0]  = (gchar *) panel_module_get_filename (external->module);
-  argv[1]  = (gchar *) "-n";
-  argv[2]  = (gchar *) panel_module_get_name (external->module);
-  argv[3]  = (gchar *) "-i";
-  argv[4]  = (gchar *) unique_id;
-  argv[5]  = (gchar *) "-d";
-  argv[6]  = (gchar *) panel_module_get_display_name (external->module);
-  argv[7]  = (gchar *) "-c";
-  argv[8]  = (gchar *) panel_module_get_comment (external->module);
-  argv[9] = (gchar *) "-s";
-  argv[10] = (gchar *) socket_id;
+  /* add the number of arguments to the argc count */
+  if (G_UNLIKELY (external->arguments != NULL))
+    argc += g_strv_length (external->arguments);
 
-  /* get the widget screen */
-  screen = gtk_widget_get_screen (widget);
+  /* setup the basic argv */
+  argv = g_new0 (gchar *, argc + 1);
+  argv[PLUGIN_ARGV_0] = (gchar *) panel_module_get_filename (external->module);
+  argv[PLUGIN_ARGV_FILENAME] = (gchar *) ""; /* unused, for wrapper only */
+  argv[PLUGIN_ARGV_UNIQUE_ID] = (gchar *) unique_id;
+  argv[PLUGIN_ARGV_SOCKET_ID] = (gchar *) socket_id;
+  argv[PLUGIN_ARGV_NAME] = (gchar *) panel_module_get_name (external->module);
+  argv[PLUGIN_ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
+  argv[PLUGIN_ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
+
+  /* append the arguments */
+  if (G_UNLIKELY (external->arguments != NULL))
+    for (i = 0; external->arguments[i] != NULL; i++)
+      argv[i + PLUGIN_ARGV_ARGUMENTS] = external->arguments[i];
 
   /* spawn the proccess */
-  succeed = gdk_spawn_on_screen (screen, NULL, argv, NULL,
+  succeed = gdk_spawn_on_screen (gtk_widget_get_screen (widget),
+                                 NULL, argv, NULL,
                                  G_SPAWN_DO_NOT_REAP_CHILD, NULL,
                                  NULL, &pid, &error);
 
@@ -743,9 +770,11 @@ panel_plugin_external_46_child_watch (GPid     pid,
 
   switch (WEXITSTATUS (status))
     {
-      case WRAPPER_EXIT_FAILURE:
-      case WRAPPER_EXIT_NO_PROVIDER:
-      case WRAPPER_EXIT_PREINIT:
+      case PLUGIN_EXIT_SUCCESS:
+      case PLUGIN_EXIT_FAILURE:
+      case PLUGIN_EXIT_PREINIT_FAILED:
+      case PLUGIN_EXIT_CHECK_FAILED:
+      case PLUGIN_EXIT_NO_PROVIDER:
         /* wait until everything is settled, then destroy the
          * external plugin so it is removed from the configuration */
         exo_gtk_object_destroy_later (GTK_OBJECT (external));
@@ -773,10 +802,11 @@ panel_plugin_external_46_new (PanelModule  *module,
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
-/* TODO arguments */
+
   return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_46,
                        "module", module,
-                       "unique-id", unique_id, NULL);
+                       "unique-id", unique_id,
+                       "arguments", arguments, NULL);
 }
 
 
