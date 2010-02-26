@@ -60,6 +60,7 @@
 typedef enum _StrutsEgde    StrutsEgde;
 typedef enum _AutohideState AutohideState;
 typedef enum _SnapPosition  SnapPosition;
+typedef enum _PluginProp    PluginProp;
 
 
 
@@ -120,6 +121,8 @@ static void         panel_window_set_autohide               (PanelWindow      *w
                                                              gboolean          autohide);
 static void         panel_window_menu_popup                 (PanelWindow      *window,
                                                              guint32           event_time);
+static void         panel_window_update_plugins             (PanelWindow      *window,
+                                                             PluginProp        prop);
 static void         panel_window_set_plugin_orientation     (GtkWidget        *widget,
                                                              gpointer          user_data);
 static void         panel_window_set_plugin_size            (GtkWidget        *widget,
@@ -141,6 +144,13 @@ enum
   PROP_OUTPUT_NAME,
   PROP_POSITION,
   PROP_DISABLE_STRUTS
+};
+
+enum _PluginProp
+{
+  PLUGIN_PROP_ORIENTATION,
+  PLUGIN_PROP_SCREEN_POSITION,
+  PLUGIN_PROP_SIZE
 };
 
 enum _AutohideState
@@ -507,7 +517,6 @@ panel_window_set_property (GObject      *object,
   const gchar *val_string;
   gboolean     update = FALSE;
   gint         x, y, snap_position;
-  GtkWidget   *itembar;
 
   switch (prop_id)
     {
@@ -519,16 +528,9 @@ panel_window_set_property (GObject      *object,
           panel_window_screen_layout_changed (window->screen, window);
         }
 
-      /* send the new orientation to the panel plugins */
-      itembar = gtk_bin_get_child (GTK_BIN (window));
-      if (G_LIKELY (itembar != NULL))
-        gtk_container_foreach (GTK_CONTAINER (itembar),
-            panel_window_set_plugin_orientation, window);
-
-      /* send the new screen position */
-      if (G_LIKELY (itembar != NULL))
-        gtk_container_foreach (GTK_CONTAINER (itembar),
-            panel_window_set_plugin_screen_position, window);
+      /* send the new orientation and screen position to the panel plugins */
+      panel_window_update_plugins (window, PLUGIN_PROP_ORIENTATION);
+      panel_window_update_plugins (window, PLUGIN_PROP_SCREEN_POSITION);
       break;
 
     case PROP_SIZE:
@@ -540,10 +542,7 @@ panel_window_set_property (GObject      *object,
         }
 
       /* send the new size to the panel plugins */
-      itembar = gtk_bin_get_child (GTK_BIN (window));
-      if (G_LIKELY (itembar != NULL))
-        gtk_container_foreach (GTK_CONTAINER (itembar),
-            panel_window_set_plugin_size, window);
+      panel_window_update_plugins (window, PLUGIN_PROP_SIZE);
       break;
 
     case PROP_LENGTH:
@@ -608,10 +607,7 @@ panel_window_set_property (GObject      *object,
           panel_window_screen_layout_changed (window->screen, window);
 
           /* send the new screen position to the panel plugins */
-          itembar = gtk_bin_get_child (GTK_BIN (window));
-          if (G_LIKELY (itembar != NULL))
-            gtk_container_foreach (GTK_CONTAINER (itembar),
-                panel_window_set_plugin_screen_position, window);
+          panel_window_update_plugins (window, PLUGIN_PROP_SCREEN_POSITION);
         }
       else
         {
@@ -953,6 +949,8 @@ panel_window_button_release_event (GtkWidget      *widget,
   PanelWindow *window = PANEL_WINDOW (widget);
   GdkDisplay  *display;
 
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
+
   if (window->grab_time != 0)
     {
       /* ungrab the pointer */
@@ -962,6 +960,9 @@ panel_window_button_release_event (GtkWidget      *widget,
 
       /* store the new position */
       g_object_notify (G_OBJECT (widget), "position");
+
+      /* send the new screen position to the panel plugins */
+      panel_window_update_plugins (window, PLUGIN_PROP_SCREEN_POSITION);
 
       return TRUE;
     }
@@ -2120,6 +2121,42 @@ panel_window_menu_popup (PanelWindow *window,
 
   gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
                   NULL, NULL, 0, event_time);
+}
+
+
+
+static void
+panel_window_update_plugins (PanelWindow *window,
+                             PluginProp   prop)
+{
+  GtkWidget   *itembar;
+  GtkCallback  func;
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  switch (prop)
+    {
+    case PLUGIN_PROP_ORIENTATION:
+      func = panel_window_set_plugin_orientation;
+      break;
+
+    case PLUGIN_PROP_SCREEN_POSITION:
+      func = panel_window_set_plugin_screen_position;
+      break;
+
+    case PLUGIN_PROP_SIZE:
+      func = panel_window_set_plugin_size;
+      break;
+
+    default:
+      panel_assert_not_reached ();
+      return;
+    }
+
+  itembar = gtk_bin_get_child (GTK_BIN (window));
+  panel_return_if_fail (GTK_IS_CONTAINER (itembar));
+  if (G_LIKELY (itembar != NULL))
+    gtk_container_foreach (GTK_CONTAINER (itembar), func, window);
 }
 
 
