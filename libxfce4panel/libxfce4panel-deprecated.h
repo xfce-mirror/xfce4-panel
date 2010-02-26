@@ -71,12 +71,6 @@ enum /*< skip >*/
 #define _panel_g_type_register_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init) \
     g_type_register_static_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init, 0)
 
-#if GTK_CHECK_VERSION (2, 14, 0)
-#define _panel_gtk_widget_get_window(w) gtk_widget_get_window (GTK_WIDGET (w))
-#else
-#define _panel_gtk_widget_get_window(w) (GTK_WIDGET (w)->window)
-#endif
-
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct_func)  \
     XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL (construct_func, NULL, NULL)
 
@@ -208,7 +202,7 @@ enum /*< skip >*/
         && GTK_WIDGET_DRAWABLE (plug) \
         && _xpp_alpha < 1.00) \
       { \
-        cr = gdk_cairo_create (_panel_gtk_widget_get_window (plug)); \
+        cr = gdk_cairo_create (gtk_widget_get_window (plug)); \
         cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE); \
         \
         color = &(gtk_widget_get_style (plug)->bg[GTK_STATE_NORMAL]); \
