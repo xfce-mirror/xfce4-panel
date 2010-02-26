@@ -28,6 +28,7 @@
 #include <glib/gstdio.h>
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
@@ -45,6 +46,7 @@
 #include <panel/panel-plugin-external.h>
 
 #define AUTOSAVE_INTERVAL (10 * 60)
+#define MIGRATE_COMMAND   LIBEXECDIR G_DIR_SEPARATOR_S "xfce4-panel-migrate"
 
 
 
@@ -172,6 +174,7 @@ static void
 panel_application_init (PanelApplication *application)
 {
   PanelWindow *window;
+  GError      *error = NULL;
 
   /* initialize */
   application->windows = NULL;
@@ -187,7 +190,11 @@ panel_application_init (PanelApplication *application)
   /* check for any configuration */
   if (!xfconf_channel_has_property (application->xfconf, "/panels"))
     {
-      /* here we're going to spawn the migration utility */
+      if (!g_spawn_command_line_sync (MIGRATE_COMMAND, NULL, NULL, NULL, &error))
+        {
+          xfce_dialog_show_error (NULL, error, _("Failed to launch the migration application"));
+          g_error_free (error);
+        }
     }
 
   /* check if we need to force all plugins to run external */
