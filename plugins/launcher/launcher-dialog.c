@@ -359,7 +359,6 @@ launcher_dialog_editor_populate (LauncherPluginDialog *dialog,
 {
   GObject     *object;
   const gchar *path;
-  gchar       *current_dir = NULL;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -383,10 +382,8 @@ launcher_dialog_editor_populate (LauncherPluginDialog *dialog,
   object = gtk_builder_get_object (dialog->builder, "item-working-directory");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   path = xfce_menu_item_get_path (item);
-  if (path == NULL || g_path_is_absolute (path) == FALSE)
-    path = current_dir = g_get_current_dir ();
-  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (object), path);
-  g_free (current_dir);
+  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (object),
+                                       path != NULL ? path : "");
 
   object = gtk_builder_get_object (dialog->builder, "item-terminal");
   panel_return_if_fail (GTK_IS_WIDGET (object));
@@ -571,6 +568,8 @@ launcher_dialog_editor_response (GtkWidget            *widget,
   GtkTreeModel *model;
   GtkTreeIter   iter;
   XfceRc       *rc;
+  const gchar  *origional_file = NULL;
+  gchar        *folder;
 
   panel_return_if_fail (GTK_IS_DIALOG (widget));
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
@@ -580,7 +579,7 @@ launcher_dialog_editor_response (GtkWidget            *widget,
     {
       /* get the user directory */
       user_dir = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
-                                              "/xfce4/xfce4-panel/", TRUE);
+          "xfce4" G_DIR_SEPARATOR_S "xfce4-panel" G_DIR_SEPARATOR_S, TRUE);
       if (G_UNLIKELY (user_dir == NULL))
         {
           g_critical ("Failed to create the panel config directory.");
@@ -619,6 +618,9 @@ launcher_dialog_editor_response (GtkWidget            *widget,
               g_free (new_file);
             }
 
+          /* remember the origional file for the forked desktop file */
+          origional_file = filename;
+
           /* set new filename */
           filename = new_file;
         }
@@ -635,6 +637,10 @@ launcher_dialog_editor_response (GtkWidget            *widget,
           xfce_rc_write_entry (rc, "Type", "Application");
           xfce_rc_write_entry (rc, "Encoding", "UTF-8");
 
+          /* remember the origional desktop file */
+          if (G_UNLIKELY (origional_file != NULL))
+            xfce_rc_write_entry (rc, "X-XFCE-Origional", origional_file);
+
           /* write text entries */
           launcher_dialog_editor_write_value (rc, dialog->builder,
                                               "item-name",
@@ -646,10 +652,11 @@ launcher_dialog_editor_response (GtkWidget            *widget,
                                               "item-command",
                                               "Exec");
 
-          /* TODO */
-          /*launcher_dialog_editor_write_value (rc, dialog->builder,
-                                              "item-working-directory",
-                                              "Path");*/
+          object = gtk_builder_get_object (dialog->builder, "item-working-directory");
+          panel_return_if_fail (GTK_IS_WIDGET (object));
+          folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (object));
+          xfce_rc_write_entry (rc, "Path", folder);
+          g_free (folder);
 
           object = gtk_builder_get_object (dialog->builder, "item-terminal");
           panel_return_if_fail (GTK_IS_WIDGET (object));
