@@ -1882,11 +1882,8 @@ panel_window_set_autohide (PanelWindow *window,
 static void
 panel_window_menu_quit (gpointer boolean)
 {
-  /* restart or quit */
-  dbus_quit_with_restart = !!(GPOINTER_TO_UINT (boolean));
-
-  /* quit main loop */
-  gtk_main_quit ();
+  panel_dbus_service_exit_panel (GPOINTER_TO_UINT (boolean) == 0 ?
+                                 PANEL_DBUS_EXIT_QUIT : PANEL_DBUS_EXIT_RESTART);
 }
 
 

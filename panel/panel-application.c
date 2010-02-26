@@ -508,11 +508,9 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 
       case PROVIDER_SIGNAL_PANEL_QUIT:
       case PROVIDER_SIGNAL_PANEL_RESTART:
-        /* set the restart boolean */
-        dbus_quit_with_restart = !!(provider_signal == PROVIDER_SIGNAL_PANEL_RESTART);
-
-        /* quit the main loop */
-        gtk_main_quit ();
+        /* quit of restart the entire panel */
+        panel_dbus_service_exit_panel (provider_signal == PROVIDER_SIGNAL_PANEL_QUIT ?
+                                       PANEL_DBUS_EXIT_QUIT : PANEL_DBUS_EXIT_RESTART);
         break;
 
       case PROVIDER_SIGNAL_PANEL_ABOUT:

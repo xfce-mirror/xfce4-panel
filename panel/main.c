@@ -65,7 +65,6 @@ static gboolean callback_handler (const gchar  *name,
                                   const gchar  *value,
                                   gpointer      user_data,
                                   GError      **error);
-static void     signal_handler   (gint          signum);
 
 
 
@@ -119,11 +118,17 @@ callback_handler (const gchar  *name,
 static void
 signal_handler (gint signum)
 {
-  /* don't try to restart */
-  dbus_quit_with_restart = FALSE;
+  panel_dbus_service_exit_panel (PANEL_DBUS_EXIT_QUIT);
+}
 
-  /* quit the main loop */
-  gtk_main_quit ();
+
+
+static void
+session_quit (XfceSMClient *sm_client)
+{
+  panel_return_if_fail (XFCE_IS_SM_CLIENT (sm_client));
+
+  panel_dbus_service_exit_panel (PANEL_DBUS_EXIT_SESSION);
 }
 
 
@@ -131,13 +136,16 @@ signal_handler (gint signum)
 gint
 main (gint argc, gchar **argv)
 {
-  PanelApplication *application;
-  GError           *error = NULL;
-  PanelDBusService *dbus_service;
-  gboolean          result;
-  guint             i;
-  const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
-  const gchar      *error_msg;
+  GOptionContext     *context;
+  PanelApplication   *application;
+  GError             *error = NULL;
+  PanelDBusService   *dbus_service;
+  gboolean            result;
+  guint               i;
+  const gint          signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
+  const gchar        *error_msg;
+  XfceSMClient       *sm_client;
+  PanelDBusExitStyle  exit_style;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -148,27 +156,24 @@ main (gint argc, gchar **argv)
   g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
 #endif
 
-  /* initialize gtk+ */
-  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, GETTEXT_PACKAGE, &error))
+  /* parse context options */
+  context = g_option_context_new (_("[ARGUMENTS...]"));
+  g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
+  g_option_context_add_group (context, gtk_get_option_group (TRUE));
+  g_option_context_add_group (context, xfce_sm_client_get_option_group (argc, argv));
+  if (!g_option_context_parse (context, &argc, &argv, &error))
     {
-      if (G_LIKELY (error))
-        {
-          /* print error */
-          g_print ("%s: %s.\n", PACKAGE_NAME, error->message);
-          g_print (_("Type '%s --help' for usage."), G_LOG_DOMAIN);
-          g_print ("\n");
+      g_print ("%s: %s.\n", PACKAGE_NAME, error->message);
+      g_print (_("Type '%s --help' for usage."), G_LOG_DOMAIN);
+      g_print ("\n");
+      g_error_free (error);
 
-          /* cleanup */
-          g_error_free (error);
-        }
-      else
-        {
-          g_error ("Unable to open display.");
-        }
-
-      /* leave */
       return EXIT_FAILURE;
     }
+  g_option_context_free (context);
+
+  /* initialize gtk */
+  gtk_init (&argc, &argv);
 
   /* handle option arguments */
   if (opt_version)
@@ -225,6 +230,17 @@ main (gint argc, gchar **argv)
       goto dbus_return;
     }
 
+  /* start session management */
+  sm_client = xfce_sm_client_get ();
+  xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
+  g_signal_connect (G_OBJECT (sm_client), "quit",
+      G_CALLBACK (session_quit), NULL);
+  if (!xfce_sm_client_connect (sm_client, &error))
+    {
+      g_warning ("Failed to connect to session manager: %s", error->message);
+      g_error_free (error);
+    }
+
   /* create dbus service */
   dbus_service = panel_dbus_service_get ();
 
@@ -250,8 +266,15 @@ main (gint argc, gchar **argv)
   /* release application reference */
   g_object_unref (G_OBJECT (application));
 
+  /* release session reference */
+  exit_style = panel_dbus_service_get_exit_style ();
+  if (exit_style == PANEL_DBUS_EXIT_QUIT
+      || exit_style == PANEL_DBUS_EXIT_RESTART)
+    xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_NORMAL);
+  g_object_unref (G_OBJECT (sm_client));
+
   /* whether we need to restart */
-  if (dbus_quit_with_restart)
+  if (exit_style == PANEL_DBUS_EXIT_RESTART)
     {
       /* message */
       g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting"));

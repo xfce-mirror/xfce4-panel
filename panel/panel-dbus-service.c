@@ -95,12 +95,8 @@ struct _PanelDBusService
 
 
 
-/* shared boolean with main.c */
-gboolean dbus_quit_with_restart = FALSE;
-
-
-
-static guint dbus_service_signals[LAST_SIGNAL];
+static PanelDBusExitStyle dbus_exit_style = PANEL_DBUS_EXIT_UNSET;
+static guint              dbus_service_signals[LAST_SIGNAL];
 
 
 
@@ -298,11 +294,8 @@ panel_dbus_service_terminate (PanelDBusService  *service,
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* set restart boolean */
-  dbus_quit_with_restart = restart;
-
-  /* quit */
-  gtk_main_quit ();
+  panel_dbus_service_exit_panel (restart ? PANEL_DBUS_EXIT_RESTART :
+                                 PANEL_DBUS_EXIT_QUIT);
 
   return TRUE;
 }
@@ -390,4 +383,21 @@ panel_dbus_service_plugin_property_changed (gint                 plugin_id,
 
   /* release */
   g_object_unref (G_OBJECT (service));
+}
+
+
+
+void
+panel_dbus_service_exit_panel (PanelDBusExitStyle exit_style)
+{
+  dbus_exit_style = exit_style;
+  gtk_main_quit ();
+}
+
+
+
+PanelDBusExitStyle
+panel_dbus_service_get_exit_style (void)
+{
+  return dbus_exit_style;
 }
