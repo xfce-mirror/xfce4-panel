@@ -32,13 +32,15 @@ typedef struct _XfceClockBinary      XfceClockBinary;
 #define XFCE_CLOCK_IS_BINARY_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_BINARY))
 #define XFCE_CLOCK_BINARY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_BINARY, XfceClockBinaryClass))
 
-GType      xfce_clock_binary_get_type (void) G_GNUC_CONST;
+GType      xfce_clock_binary_get_type      (void) G_GNUC_CONST;
 
-GtkWidget *xfce_clock_binary_new      (void) G_GNUC_MALLOC;
+void       xfce_clock_binary_register_type (GTypeModule     *type_module);
 
-gboolean   xfce_clock_binary_update   (gpointer         user_data);
+GtkWidget *xfce_clock_binary_new           (void) G_GNUC_MALLOC;
 
-guint      xfce_clock_binary_interval (XfceClockBinary *binary);
+gboolean   xfce_clock_binary_update        (gpointer         user_data);
+
+guint      xfce_clock_binary_interval      (XfceClockBinary *binary);
 
 G_END_DECLS
 

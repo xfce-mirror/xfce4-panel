@@ -51,7 +51,9 @@ typedef enum   _ClockPluginMode  ClockPluginMode;
 
 GType      clock_plugin_get_type             (void) G_GNUC_CONST;
 
-void       clock_plugin_get_localtime        (struct tm *tm);
+void       clock_plugin_register_type        (GTypeModule     *type_module);
+
+void       clock_plugin_get_localtime        (struct tm       *tm);
 
 gchar     *clock_plugin_strdup_strftime      (const gchar     *format,
                                               const struct tm *tm);

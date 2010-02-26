@@ -92,7 +92,7 @@ struct _XfceClockAnalog
 
 
 
-G_DEFINE_TYPE (XfceClockAnalog, xfce_clock_analog, GTK_TYPE_IMAGE);
+XFCE_PANEL_DEFINE_TYPE (XfceClockAnalog, xfce_clock_analog, GTK_TYPE_IMAGE)
 
 
 

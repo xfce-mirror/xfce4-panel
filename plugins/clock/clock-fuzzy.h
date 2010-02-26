@@ -32,13 +32,15 @@ typedef struct _XfceClockFuzzy      XfceClockFuzzy;
 #define XFCE_CLOCK_IS_FUZZY_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_FUZZY))
 #define XFCE_CLOCK_FUZZY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_FUZZY, XfceClockFuzzyClass))
 
-GType      xfce_clock_fuzzy_get_type (void) G_GNUC_CONST;
+GType      xfce_clock_fuzzy_get_type      (void) G_GNUC_CONST;
 
-GtkWidget *xfce_clock_fuzzy_new      (void) G_GNUC_MALLOC;
+void       xfce_clock_fuzzy_register_type (GTypeModule    *type_module);
 
-gboolean   xfce_clock_fuzzy_update   (gpointer        user_data);
+GtkWidget *xfce_clock_fuzzy_new           (void) G_GNUC_MALLOC;
 
-guint      xfce_clock_fuzzy_interval (XfceClockFuzzy *fuzzy);
+gboolean   xfce_clock_fuzzy_update        (gpointer        user_data);
+
+guint      xfce_clock_fuzzy_interval      (XfceClockFuzzy *fuzzy);
 
 G_END_DECLS
 

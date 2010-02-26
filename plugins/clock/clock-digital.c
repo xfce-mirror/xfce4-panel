@@ -65,7 +65,7 @@ struct _XfceClockDigital
 
 
 
-G_DEFINE_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_LABEL);
+XFCE_PANEL_DEFINE_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_LABEL)
 
 
 

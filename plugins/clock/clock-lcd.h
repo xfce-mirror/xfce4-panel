@@ -32,13 +32,15 @@ typedef struct _XfceClockLcd      XfceClockLcd;
 #define XFCE_CLOCK_IS_LCD_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_LCD))
 #define XFCE_CLOCK_LCD_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_LCD, XfceClockLcdClass))
 
-GType      xfce_clock_lcd_get_type (void) G_GNUC_CONST;
+GType      xfce_clock_lcd_get_type      (void) G_GNUC_CONST;
 
-GtkWidget *xfce_clock_lcd_new      (void) G_GNUC_MALLOC;
+void       xfce_clock_lcd_register_type (GTypeModule  *type_module);
 
-gboolean   xfce_clock_lcd_update   (gpointer      user_data);
+GtkWidget *xfce_clock_lcd_new           (void) G_GNUC_MALLOC;
 
-guint      xfce_clock_lcd_interval (XfceClockLcd *lcd);
+gboolean   xfce_clock_lcd_update        (gpointer      user_data);
+
+guint      xfce_clock_lcd_interval      (XfceClockLcd *lcd);
 
 G_END_DECLS
 

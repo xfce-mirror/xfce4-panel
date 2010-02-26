@@ -32,13 +32,15 @@ typedef struct _XfceClockDigital      XfceClockDigital;
 #define XFCE_CLOCK_IS_DIGITAL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_DIGITAL))
 #define XFCE_CLOCK_DIGITAL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_DIGITAL, XfceClockDigitalClass))
 
-GType      xfce_clock_digital_get_type (void) G_GNUC_CONST;
+GType      xfce_clock_digital_get_type      (void) G_GNUC_CONST;
 
-GtkWidget *xfce_clock_digital_new      (void) G_GNUC_MALLOC;
+void       xfce_clock_digital_register_type (GTypeModule      *type_module);
 
-gboolean   xfce_clock_digital_update   (gpointer          user_data);
+GtkWidget *xfce_clock_digital_new           (void) G_GNUC_MALLOC;
 
-guint      xfce_clock_digital_interval (XfceClockDigital *digital);
+gboolean   xfce_clock_digital_update        (gpointer          user_data);
+
+guint      xfce_clock_digital_interval      (XfceClockDigital *digital);
 
 G_END_DECLS
 
