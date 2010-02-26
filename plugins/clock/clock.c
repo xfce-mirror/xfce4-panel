@@ -469,6 +469,11 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
       case CLOCK_PLUGIN_MODE_LCD:
         active = 1 << 1 | 1 << 3 | 1 << 4 | 1 << 5;
         break;
+
+      default:
+        panel_assert_not_reached ();
+        active = 0;
+        break;
     }
 
   /* show or hide the dialog widgets */
