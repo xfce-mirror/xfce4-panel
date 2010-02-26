@@ -23,8 +23,12 @@
 #ifdef HAVE_MATH_H
 #include <math.h>
 #endif
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
 
 #include <gtk/gtk.h>
+#include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
 #include <libxfce4panel/xfce-panel-macros.h>
@@ -299,8 +303,11 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GdkPixbuf             *pixbuf = NULL;
   GdkScreen             *screen;
+  GtkIconTheme          *icon_theme;
   GError                *error = NULL;
   gint                   size;
+  gchar                 *p, *name;
+  gchar                 *filename;
 
   widget->allocation = *allocation;
 
@@ -323,12 +330,12 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
           /* use the pixbuf set by the user */
           pixbuf = g_object_ref (G_OBJECT (priv->pixbuf));
         }
-      else if (g_path_is_absolute (priv->source))
+      else if (G_UNLIKELY (g_path_is_absolute (priv->source)))
         {
           pixbuf = gdk_pixbuf_new_from_file (priv->source, &error);
           if (G_UNLIKELY (pixbuf == NULL))
             {
-              g_critical ("Failed to loading image \"%s\": %s",
+              g_critical ("Failed to load image \"%s\": %s",
                           priv->source, error->message);
               g_error_free (error);
               return;
@@ -349,12 +356,37 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
                 size = 24;
             }
 
-          /* get a pixbuf from the icon name */
           screen = gtk_widget_get_screen (widget);
-          pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_for_screen (screen),
-                                             priv->source, size, 0, NULL);
+          if (G_LIKELY (screen != NULL))
+            icon_theme = gtk_icon_theme_get_for_screen (screen);
+          else
+            icon_theme = gtk_icon_theme_get_default ();
 
-          /* TODO more loading modes: try without extension and lower case */
+          /* get a pixbuf from the theme */
+          pixbuf = gtk_icon_theme_load_icon (icon_theme, priv->source, size, 0, NULL);
+          if (G_UNLIKELY (pixbuf == NULL))
+            {
+              /* try to lookup names like application.png in the theme */
+              p = strrchr (priv->source, '.');
+              if (p != NULL)
+                {
+                  name = g_strndup (priv->source, p - priv->source);
+                  pixbuf = gtk_icon_theme_load_icon (icon_theme, name, size, 0, NULL);
+                  g_free (name);
+                }
+
+              /* maybe they point to a file in the pixbufs folder */
+              if (G_UNLIKELY (pixbuf == NULL))
+                {
+                  filename = g_build_filename ("pixmaps", priv->source, NULL);
+                  name = xfce_resource_lookup (XFCE_RESOURCE_DATA, filename);
+                  g_free (filename);
+
+                  if (name != NULL)
+                    pixbuf = gdk_pixbuf_new_from_file (name, NULL);
+                  g_free (name);
+                }
+            }
         }
 
       if (G_LIKELY (pixbuf != NULL))
@@ -540,13 +572,13 @@ xfce_panel_image_set_from_source (XfcePanelImage *image,
 
 
 
-void       
+void
 xfce_panel_image_set_size (XfcePanelImage *image,
                            gint            size)
 {
-  
+
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
-  
+
   if (G_LIKELY (image->priv->size != size))
     {
       image->priv->size = size;
@@ -556,7 +588,7 @@ xfce_panel_image_set_size (XfcePanelImage *image,
 
 
 
-gint       
+gint
 xfce_panel_image_get_size (XfcePanelImage *image)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_IMAGE (image), -1);
