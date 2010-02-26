@@ -53,8 +53,6 @@ static void          xfce_panel_plugin_finalize               (GObject          
 static void          xfce_panel_plugin_realize                (GtkWidget                    *widget);
 static gboolean      xfce_panel_plugin_button_press_event     (GtkWidget                    *widget,
                                                                GdkEventButton               *event);
-static void          xfce_panel_plugin_menu_properties        (XfcePanelPlugin              *plugin);
-static void          xfce_panel_plugin_menu_about             (XfcePanelPlugin              *plugin);
 static void          xfce_panel_plugin_menu_move              (XfcePanelPlugin              *plugin);
 static void          xfce_panel_plugin_menu_remove            (XfcePanelPlugin              *plugin);
 static void          xfce_panel_plugin_menu_add_items         (XfcePanelPlugin              *plugin);
@@ -70,8 +68,10 @@ static void          xfce_panel_plugin_set_orientation        (XfcePanelPluginPr
 static void          xfce_panel_plugin_set_screen_position    (XfcePanelPluginProvider      *provider,
                                                                XfceScreenPosition            screen_position);
 static void          xfce_panel_plugin_save                   (XfcePanelPluginProvider      *provider);
-static gboolean      xfce_panel_plugin_has_flag               (XfcePanelPluginProvider      *provider,
-                                                               XfcePanelPluginProviderFlags  flag);
+static gboolean      xfce_panel_plugin_get_show_configure     (XfcePanelPluginProvider      *provider);
+static void          xfce_panel_plugin_show_configure         (XfcePanelPluginProvider      *provider);
+static gboolean      xfce_panel_plugin_get_show_about         (XfcePanelPluginProvider      *provider);
+static void          xfce_panel_plugin_show_about             (XfcePanelPluginProvider      *provider);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                      data,
                                                                GObject                      *where_the_object_was);
 
@@ -98,30 +98,39 @@ enum
   LAST_SIGNAL
 };
 
+typedef enum
+{
+  PLUGIN_FLAG_DISPOSED       = 1 << 0,
+  PLUGIN_FLAG_CONSTRUCTED    = 1 << 1,
+  PLUGIN_FLAG_SHOW_CONFIGURE = 1 << 2,
+  PLUGIN_FLAG_SHOW_ABOUT     = 1 << 3
+}
+PluginFlags;
+
 struct _XfcePanelPluginPrivate
 {
   /* plugin information */
-  gchar                         *name;
-  gchar                         *display_name;
-  gint                           unique_id;
-  gchar                         *property_base;
-  gchar                        **arguments;
-  gint                           size;
-  guint                          expand : 1;
-  GtkOrientation                 orientation;
-  XfceScreenPosition             screen_position;
+  gchar               *name;
+  gchar               *display_name;
+  gint                 unique_id;
+  gchar               *property_base;
+  gchar              **arguments;
+  gint                 size;
+  guint                expand : 1;
+  GtkOrientation       orientation;
+  XfceScreenPosition   screen_position;
 
   /* flags */
-  XfcePanelPluginProviderFlags   flags;
+  PluginFlags          flags;
 
   /* plugin menu */
-  GtkMenu                       *menu;
+  GtkMenu             *menu;
 
   /* menu block counter */
-  guint                          menu_blocked;
+  guint                menu_blocked;
 
   /* registered menu counter */
-  guint                          registered_menus;
+  guint                registered_menus;
 };
 
 
@@ -402,7 +411,10 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
   iface->set_orientation = xfce_panel_plugin_set_orientation;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
   iface->save = xfce_panel_plugin_save;
-  iface->has_flag = xfce_panel_plugin_has_flag;
+  iface->get_show_configure = xfce_panel_plugin_get_show_configure;
+  iface->show_configure = xfce_panel_plugin_show_configure;
+  iface->get_show_about = xfce_panel_plugin_get_show_about;
+  iface->show_about = xfce_panel_plugin_show_about;
 }
 
 
@@ -480,13 +492,13 @@ xfce_panel_plugin_dispose (GObject *object)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (object);
 
-  if (!PANEL_HAS_FLAG (plugin->priv->flags, PROVIDER_FLAG_DISPOSED))
+  if (!PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_DISPOSED))
     {
       /* allow the plugin to cleanup */
       g_signal_emit (G_OBJECT (object), plugin_signals[FREE_DATA], 0);
 
       /* plugin disposed, don't try this again */
-      PANEL_SET_FLAG (plugin->priv->flags, PROVIDER_FLAG_DISPOSED);
+      PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_DISPOSED);
     }
 
   (*G_OBJECT_CLASS (xfce_panel_plugin_parent_class)->dispose) (object);
@@ -524,14 +536,14 @@ xfce_panel_plugin_realize (GtkWidget *widget)
   (*GTK_WIDGET_CLASS (xfce_panel_plugin_parent_class)->realize) (widget);
 
   /* check if there is a construct function attached to this plugin */
-  if (klass->construct != NULL 
-      && !PANEL_HAS_FLAG (plugin->priv->flags, PROVIDER_FLAG_CONSTRUCTED))
+  if (klass->construct != NULL
+      && !PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_CONSTRUCTED))
     {
       /* run the construct function */
       (*klass->construct) (XFCE_PANEL_PLUGIN (widget));
 
       /* don't run the construct function again on another realize */
-      PANEL_SET_FLAG (plugin->priv->flags, PROVIDER_FLAG_CONSTRUCTED);
+      PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_CONSTRUCTED);
     }
 }
 
@@ -570,28 +582,6 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
     }
 
   return FALSE;
-}
-
-
-
-static void
-xfce_panel_plugin_menu_properties (XfcePanelPlugin *plugin)
-{
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-
-  /* emit configure-plugin signal */
-  g_signal_emit (G_OBJECT (plugin), plugin_signals[CONFIGURE_PLUGIN], 0);
-}
-
-
-
-static void
-xfce_panel_plugin_menu_about (XfcePanelPlugin *plugin)
-{
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-
-  /* emit about signal */
-  g_signal_emit (G_OBJECT (plugin), plugin_signals[ABOUT], 0);
 }
 
 
@@ -705,18 +695,18 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 
       /* properties item */
       item = gtk_image_menu_item_new_from_stock (GTK_STOCK_PROPERTIES, NULL);
-      g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_menu_properties), plugin);
+      g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_show_configure), plugin);
       g_object_set_data (G_OBJECT (menu), I_("properties-item"), item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      if (PANEL_HAS_FLAG (plugin->priv->flags, PROVIDER_FLAG_SHOW_CONFIGURE))
+      if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_CONFIGURE))
         gtk_widget_show (item);
 
       /* about item */
       item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
-      g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_menu_about), plugin);
+      g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_show_about), plugin);
       g_object_set_data (G_OBJECT (menu), I_("about-item"), item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-      if (PANEL_HAS_FLAG (plugin->priv->flags, PROVIDER_FLAG_SHOW_ABOUT))
+      if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_ABOUT))
         gtk_widget_show (item);
 
       /* move item */
@@ -893,16 +883,56 @@ xfce_panel_plugin_save (XfcePanelPluginProvider *provider)
 
 
 
-static gboolean      
-xfce_panel_plugin_has_flag (XfcePanelPluginProvider      *provider,
-                            XfcePanelPluginProviderFlags  flag)
+static gboolean
+xfce_panel_plugin_get_show_configure (XfcePanelPluginProvider *provider)
 {
-  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
-
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (provider), FALSE);
 
-  /* check if we have the flag */
-  return PANEL_HAS_FLAG (plugin->priv->flags, flag);
+  /* TODO, not sure, but maybe return FALSE when menu_blocked > 0 */
+
+  return PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (provider)->priv->flags,
+                         PLUGIN_FLAG_SHOW_CONFIGURE);
+}
+
+
+
+static void
+xfce_panel_plugin_show_configure (XfcePanelPluginProvider *provider)
+{
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+  
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  /* emit configure-plugin signal */
+  if (G_LIKELY (plugin->priv->menu_blocked == 0))
+    g_signal_emit (G_OBJECT (plugin), plugin_signals[CONFIGURE_PLUGIN], 0);
+}
+
+
+
+static gboolean
+xfce_panel_plugin_get_show_about (XfcePanelPluginProvider *provider)
+{
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (provider), FALSE);
+
+  /* TODO, not sure, but maybe return FALSE when menu_blocked > 0 */
+
+  return PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (provider)->priv->flags,
+                         PLUGIN_FLAG_SHOW_ABOUT);
+}
+
+
+
+static void
+xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider)
+{
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+  
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  /* emit about signal */
+  if (G_LIKELY (plugin->priv->menu_blocked == 0))
+    g_signal_emit (G_OBJECT (provider), plugin_signals[ABOUT], 0);
 }
 
 
@@ -1176,18 +1206,18 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
 {
   GtkMenu   *menu;
   GtkWidget *item;
-  
+
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-  
+
   /* set the flag */
-  PANEL_SET_FLAG (plugin->priv->flags, PROVIDER_FLAG_SHOW_CONFIGURE);
-  
+  PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_CONFIGURE);
+
   /* show the menu item if the menu is already generated */
   if (G_UNLIKELY (plugin->priv->menu != NULL))
     {
        /* get the panel menu */
        menu = xfce_panel_plugin_menu_get (plugin);
-       
+
        /* get and show the properties item */
        item = g_object_get_data (G_OBJECT (menu), I_("properties-item"));
        if (G_LIKELY (item))
@@ -1206,18 +1236,18 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 {
   GtkMenu   *menu;
   GtkWidget *item;
-  
+
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-  
+
   /* set the flag */
-  PANEL_SET_FLAG (plugin->priv->flags, PROVIDER_FLAG_SHOW_ABOUT);
-  
+  PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_ABOUT);
+
   /* show the menu item if the menu is already generated */
   if (G_UNLIKELY (plugin->priv->menu != NULL))
     {
        /* get the panel menu */
        menu = xfce_panel_plugin_menu_get (plugin);
-       
+
        /* get and show the about item */
        item = g_object_get_data (G_OBJECT (menu), I_("about-item"));
        if (G_LIKELY (item))

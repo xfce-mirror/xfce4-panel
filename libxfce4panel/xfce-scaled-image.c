@@ -27,8 +27,9 @@
 
 #include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-plugin-provider.h>
 
+
+/* design limit for the panel, to reduce the uncached pixbuf size */
 #define MAX_PIXBUF_SIZE (128)
 
 

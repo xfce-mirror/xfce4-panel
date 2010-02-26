@@ -65,13 +65,16 @@ static void         panel_plugin_external_set_orientation     (XfcePanelPluginPr
 static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider         *provider,
                                                                XfceScreenPosition               screen_position);
 static void         panel_plugin_external_save                (XfcePanelPluginProvider         *provider);
-static gboolean     panel_plugin_external_has_flag            (XfcePanelPluginProvider         *provider,
-                                                               XfcePanelPluginProviderFlags     flag);
+static gboolean     panel_plugin_external_get_show_configure  (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_show_configure      (XfcePanelPluginProvider         *provider);
+static gboolean     panel_plugin_external_get_show_about      (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_show_about          (XfcePanelPluginProvider         *provider);
 static void         panel_plugin_external_set_sensitive       (PanelPluginExternal             *external);
 static void         panel_plugin_external_set_property        (PanelPluginExternal             *external,
                                                                DBusPropertyChanged              property,
                                                                const GValue                    *value);
-
+static void         panel_plugin_external_set_property_noop   (PanelPluginExternal             *external,
+                                                               DBusPropertyChanged              property);
 
 
 struct _PanelPluginExternalClass
@@ -164,7 +167,10 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
   iface->set_orientation = panel_plugin_external_set_orientation;
   iface->set_screen_position = panel_plugin_external_set_screen_position;
   iface->save = panel_plugin_external_save;
-  iface->has_flag = panel_plugin_external_has_flag;
+  iface->get_show_configure = panel_plugin_external_get_show_configure;
+  iface->show_configure = panel_plugin_external_show_configure;
+  iface->get_show_about = panel_plugin_external_get_show_about;
+  iface->show_about = panel_plugin_external_show_about;
 }
 
 
@@ -276,9 +282,10 @@ panel_plugin_external_unrealize (GtkWidget *widget)
   g_value_init (&value, G_TYPE_BOOLEAN);
   g_value_set_boolean (&value, FALSE);
 
-  /* send (don't queue here) */
-  panel_dbus_service_wrapper_set_property (external->unique_id, DBUS_PROPERTY_CHANGED_QUIT_WRAPPER,
-                                           &value);
+  /* send directly (don't queue here) */
+  panel_dbus_service_plugin_property_changed (external->unique_id,
+                                              PROPERTY_CHANGED_WRAPPER_QUIT,
+                                              &value);
 
   /* unset */
   g_value_unset (&value);
@@ -394,7 +401,9 @@ panel_plugin_external_plug_added (GtkSocket *socket)
       for (li = external->dbus_queue; li != NULL; li = li->next)
         {
           data = li->data;
-          panel_dbus_service_wrapper_set_property (external->unique_id, data->property, &data->value);
+          panel_dbus_service_plugin_property_changed (external->unique_id,
+                                                      data->property,
+                                                      &data->value);
           g_value_unset (&data->value);
           g_slice_free (QueuedData, data);
         }
@@ -465,7 +474,8 @@ panel_plugin_external_set_property (PanelPluginExternal *external,
   if (G_LIKELY (external->plug_embedded))
     {
       /* directly send the new property */
-      panel_dbus_service_wrapper_set_property (external->unique_id, property, value);
+      panel_dbus_service_plugin_property_changed (external->unique_id,
+                                                  property, value);
     }
   else
     {
@@ -480,6 +490,26 @@ panel_plugin_external_set_property (PanelPluginExternal *external,
     }
 }
 
+
+
+static void
+panel_plugin_external_set_property_noop (PanelPluginExternal *external,
+                                         DBusPropertyChanged  property)
+{
+  GValue value = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  /* create a noop value */
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  g_value_set_boolean (&value, FALSE);
+
+  /* send the value */
+  panel_plugin_external_set_property (external, property, &value);
+
+  /* unset */
+  g_value_unset (&value);
+}
 
 
 
@@ -498,7 +528,8 @@ panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
 
   /* send the value */
   panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
-                                      DBUS_PROPERTY_CHANGED_SIZE, &value);
+                                      PROPERTY_CHANGED_PROVIDER_SIZE,
+                                      &value);
 
   /* unset */
   g_value_unset (&value);
@@ -521,7 +552,8 @@ panel_plugin_external_set_orientation (XfcePanelPluginProvider *provider,
 
   /* send the value */
   panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
-                                      DBUS_PROPERTY_CHANGED_ORIENTATION, &value);
+                                      PROPERTY_CHANGED_PROVIDER_ORIENTATION,
+                                      &value);
 
   /* unset */
   g_value_unset (&value);
@@ -544,7 +576,8 @@ panel_plugin_external_set_screen_position (XfcePanelPluginProvider *provider,
 
   /* send the value */
   panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
-                                      DBUS_PROPERTY_CHANGED_SCREEN_POSITION, &value);
+                                      PROPERTY_CHANGED_PROVIDER_SCREEN_POSITION,
+                                      &value);
 
   /* unset */
   g_value_unset (&value);
@@ -555,33 +588,62 @@ panel_plugin_external_set_screen_position (XfcePanelPluginProvider *provider,
 static void
 panel_plugin_external_save (XfcePanelPluginProvider *provider)
 {
-  GValue value = { 0, };
-
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* create dummy value */
-  g_value_init (&value, G_TYPE_BOOLEAN);
-  g_value_set_boolean (&value, FALSE);
-
   /* send signal to wrapper */
-  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
-                                      DBUS_PROPERTY_CHANGED_EMIT_SAVE, &value);
-
-  /* unset */
-  g_value_unset (&value);
+  panel_plugin_external_set_property_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                           PROPERTY_CHANGED_PROVIDER_EMIT_SAVE);
 }
 
 
 
-static gboolean     
-panel_plugin_external_has_flag (XfcePanelPluginProvider      *provider,
-                                XfcePanelPluginProviderFlags  flag)
+static gboolean
+panel_plugin_external_get_show_configure (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), FALSE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
-  
-  return FALSE;
+
+  /* TODO */
+  return TRUE;
+}
+
+
+
+static void
+panel_plugin_external_show_configure (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  /* send signal to wrapper */
+  panel_plugin_external_set_property_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                           PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_CONFIGURE);
+}
+
+
+
+static gboolean
+panel_plugin_external_get_show_about (XfcePanelPluginProvider *provider)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), FALSE);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
+
+  /* TODO */
+  return TRUE;
+}
+
+
+
+static void
+panel_plugin_external_show_about (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  /* send signal to wrapper */
+  panel_plugin_external_set_property_noop (PANEL_PLUGIN_EXTERNAL (provider),
+                                           PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_ABOUT);
 }
 
 
@@ -598,7 +660,9 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
   g_value_set_boolean (&value, GTK_WIDGET_IS_SENSITIVE (external));
 
   /* send message */
-  panel_plugin_external_set_property (external, DBUS_PROPERTY_CHANGED_SENSITIVE, &value);
+  panel_plugin_external_set_property (external,
+                                      PROPERTY_CHANGED_WRAPPER_SET_SENSITIVE,
+                                      &value);
 
   /* unset */
   g_value_unset (&value);
@@ -644,7 +708,9 @@ panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
   g_value_set_int (&value, percentage);
 
   /* send message */
-  panel_plugin_external_set_property (external, DBUS_PROPERTY_CHANGED_BACKGROUND_ALPHA, &value);
+  panel_plugin_external_set_property (external,
+                                      PROPERTY_CHANGED_WRAPPER_BACKGROUND_ALPHA,
+                                      &value);
 
   /* unset */
   g_value_unset (&value);
@@ -665,7 +731,9 @@ panel_plugin_external_set_active_panel (PanelPluginExternal *external,
   g_value_set_boolean (&value, active);
 
   /* send message */
-  panel_plugin_external_set_property (external, DBUS_PROPERTY_CHANGED_ACTIVE_PANEL, &value);
+  panel_plugin_external_set_property (external,
+                                      PROPERTY_CHANGED_WRAPPER_SET_SELECTED,
+                                      &value);
 
   /* unset */
   g_value_unset (&value);

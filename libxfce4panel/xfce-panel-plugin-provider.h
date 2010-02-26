@@ -28,7 +28,6 @@ G_BEGIN_DECLS
 typedef struct _XfcePanelPluginProviderIface  XfcePanelPluginProviderIface;
 typedef struct _XfcePanelPluginProvider       XfcePanelPluginProvider;
 typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
-typedef enum   _XfcePanelPluginProviderFlags  XfcePanelPluginProviderFlags;
 
 #define XFCE_TYPE_PANEL_PLUGIN_PROVIDER           (xfce_panel_plugin_provider_get_type ())
 #define XFCE_PANEL_PLUGIN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProvider))
@@ -61,11 +60,13 @@ struct _XfcePanelPluginProviderIface
   void         (*set_screen_position) (XfcePanelPluginProvider       *provider,
                                        XfceScreenPosition             screen_position);
   void         (*save)                (XfcePanelPluginProvider       *provider);
-  gboolean     (*has_flag)            (XfcePanelPluginProvider       *provider,
-                                       XfcePanelPluginProviderFlags   flag);
+  gboolean     (*get_show_configure)  (XfcePanelPluginProvider       *provider);
+  void         (*show_configure)      (XfcePanelPluginProvider       *provider);
+  gboolean     (*get_show_about)      (XfcePanelPluginProvider       *provider);
+  void         (*show_about)          (XfcePanelPluginProvider       *provider);
 };
 
-/* signals send from the plugin to the panel (possibly 
+/* signals send from the plugin to the panel (possibly
  * through the wrapper) */
 enum _XfcePanelPluginProviderSignal
 {
@@ -77,16 +78,6 @@ enum _XfcePanelPluginProviderSignal
   PROVIDER_SIGNAL_REMOVE_PLUGIN,
   PROVIDER_SIGNAL_ADD_NEW_ITEMS,
   PROVIDER_SIGNAL_PANEL_PREFERENCES
-};
-
-/* flags used by the plugin, so the panel can easily 
- * query information about the plugin */
-enum _XfcePanelPluginProviderFlags
-{
-  PROVIDER_FLAG_DISPOSED       = 1 << 0,
-  PROVIDER_FLAG_CONSTRUCTED    = 1 << 1,
-  PROVIDER_FLAG_SHOW_CONFIGURE = 1 << 2,
-  PROVIDER_FLAG_SHOW_ABOUT     = 1 << 3
 };
 
 
@@ -111,9 +102,14 @@ void         xfce_panel_plugin_provider_save                (XfcePanelPluginProv
 
 void         xfce_panel_plugin_provider_send_signal         (XfcePanelPluginProvider       *provider,
                                                              XfcePanelPluginProviderSignal  signal);
-                                                             
-gboolean     xfce_panel_plugin_provider_has_flag            (XfcePanelPluginProvider       *provider,
-                                                             XfcePanelPluginProviderFlags   flag);
+
+gboolean     xfce_panel_plugin_provider_get_show_configure  (XfcePanelPluginProvider       *provider);
+
+void         xfce_panel_plugin_provider_show_configure      (XfcePanelPluginProvider       *provider);
+
+gboolean     xfce_panel_plugin_provider_get_show_about      (XfcePanelPluginProvider       *provider);
+
+void         xfce_panel_plugin_provider_show_about          (XfcePanelPluginProvider       *provider);
 
 G_END_DECLS
 

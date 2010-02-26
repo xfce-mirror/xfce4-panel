@@ -7,7 +7,7 @@
     <property name="title" translatable="yes">Xfce Panel Preferences</property>
     <property name="window_position">center-on-parent</property>
     <property name="icon_name">gtk-preferences</property>
-    <property name="type_hint">dialog</property>
+    <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
@@ -131,13 +131,13 @@
                                 </child>
                                 <child>
                                   <object class="GtkCheckButton" id="locked">
+                                    <property name="label" translatable="yes">_Lock panel</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text">Lock this panel so it can't be dragged with the mouse</property>
                                     <property name="use_underline">True</property>
                                     <property name="draw_indicator">True</property>
-                                    <property name="label" translatable="yes">_Lock panel</property>
                                   </object>
                                   <packing>
                                     <property name="position">1</property>
@@ -145,12 +145,12 @@
                                 </child>
                                 <child>
                                   <object class="GtkCheckButton" id="autohide">
+                                    <property name="label" translatable="yes">Automatically show and _hide the panel</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="draw_indicator">True</property>
-                                    <property name="label" translatable="yes">Automatically show and _hide the panel</property>
                                   </object>
                                   <packing>
                                     <property name="position">2</property>
@@ -617,12 +617,12 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button-close">
+                <property name="label" translatable="yes">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">0</property>
-                <property name="label" translatable="yes">gtk-close</property>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -630,12 +630,12 @@
             </child>
             <child>
               <object class="GtkButton" id="button-help">
+                <property name="label" translatable="yes">gtk-help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">0</property>
-                <property name="label" translatable="yes">gtk-help</property>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -707,9 +707,9 @@
   <object class="GtkListStore" id="item-liststore"/>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="label10"/>
-      <widget name="label9"/>
       <widget name="label7"/>
+      <widget name="label9"/>
+      <widget name="label10"/>
     </widgets>
   </object>
 </interface>

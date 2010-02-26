@@ -430,8 +430,6 @@ clock_plugin_set_child (ClockPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->clock);
   gtk_widget_show (plugin->clock);
   
-  g_message (g_type_name (G_OBJECT_TYPE (plugin->clock)));
-  
   /* update the clock once */
   (plugin->clock_func) (plugin->clock);
 }

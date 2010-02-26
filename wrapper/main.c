@@ -75,11 +75,11 @@ static GOptionEntry option_entries[] =
 
 
 static void
-dbus_gproxy_wrapper_set_property (DBusGProxy              *dbus_gproxy,
-                                  gint                     plugin_id,
-                                  DBusPropertyChanged      changed_property,
-                                  const GValue            *value,
-                                  XfcePanelPluginProvider *provider)
+dbus_gproxy_property_changed (DBusGProxy              *dbus_gproxy,
+                              gint                     plugin_id,
+                              DBusPropertyChanged      property,
+                              const GValue            *value,
+                              XfcePanelPluginProvider *provider)
 {
   WrapperPlug *plug;
 
@@ -92,39 +92,47 @@ dbus_gproxy_wrapper_set_property (DBusGProxy              *dbus_gproxy,
     return;
 
   /* handle the changed property send by the panel to the wrapper */
-  switch (changed_property)
+  switch (property)
     {
-      case DBUS_PROPERTY_CHANGED_SIZE:
+      case PROPERTY_CHANGED_PROVIDER_SIZE:
         xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
         break;
 
-      case DBUS_PROPERTY_CHANGED_ORIENTATION:
+      case PROPERTY_CHANGED_PROVIDER_ORIENTATION:
         xfce_panel_plugin_provider_set_orientation (provider, g_value_get_uint (value));
         break;
 
-      case DBUS_PROPERTY_CHANGED_SCREEN_POSITION:
+      case PROPERTY_CHANGED_PROVIDER_SCREEN_POSITION:
         xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_uint (value));
         break;
 
-      case DBUS_PROPERTY_CHANGED_EMIT_SAVE:
+      case PROPERTY_CHANGED_PROVIDER_EMIT_SAVE:
         xfce_panel_plugin_provider_save (provider);
         break;
+        
+      case PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_CONFIGURE:
+        xfce_panel_plugin_provider_show_configure (provider);
+        break;
+        
+      case PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_ABOUT:
+        xfce_panel_plugin_provider_show_about (provider);
+        break;
 
-      case DBUS_PROPERTY_CHANGED_QUIT_WRAPPER:
+      case PROPERTY_CHANGED_WRAPPER_QUIT:
         gtk_main_quit ();
         break;
 
-      case DBUS_PROPERTY_CHANGED_SENSITIVE:
+      case PROPERTY_CHANGED_WRAPPER_SET_SENSITIVE:
         gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
         break;
 
-      case DBUS_PROPERTY_CHANGED_BACKGROUND_ALPHA:
-      case DBUS_PROPERTY_CHANGED_ACTIVE_PANEL:
+      case PROPERTY_CHANGED_WRAPPER_BACKGROUND_ALPHA:
+      case PROPERTY_CHANGED_WRAPPER_SET_SELECTED:
         /* get the plug */
         plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
 
         /* set a plug value */
-        if (changed_property == DBUS_PROPERTY_CHANGED_BACKGROUND_ALPHA)
+        if (property == PROPERTY_CHANGED_WRAPPER_BACKGROUND_ALPHA)
           wrapper_plug_set_background_alpha (plug, g_value_get_int (value) / 100.00);
         else
           wrapper_plug_set_selected (plug, g_value_get_boolean (value));
@@ -132,7 +140,7 @@ dbus_gproxy_wrapper_set_property (DBusGProxy              *dbus_gproxy,
 
       default:
         g_message ("External plugin '%s-%d' received unknown property '%d'.",
-                   opt_name, opt_unique_id, changed_property);
+                   opt_name, opt_unique_id, property);
         break;
     }
 }
@@ -150,7 +158,7 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
   panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
   /* send the provider signal to the panel */
-  if (!wrapper_dbus_client_wrapper_provider_signal (dbus_gproxy, opt_unique_id, signal, &error))
+  if (!wrapper_dbus_client_provider_signal (dbus_gproxy, opt_unique_id, signal, &error))
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
@@ -279,9 +287,9 @@ main (gint argc, gchar **argv)
 			                  "',interface='" DBUS_INTERFACE_DBUS
 			                  "',member='NameOwnerChanged'", NULL);
 
-  /* get the dbus proxy */
-  dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection, PANEL_DBUS_SERVICE_NAME,
-                                           PANEL_DBUS_SERVICE_PATH, PANEL_DBUS_SERVICE_INTERFACE);
+  /* get the dbus proxy for the plugin interface */
+  dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection, PANEL_DBUS_PLUGIN_INTERFACE,
+                                           PANEL_DBUS_PATH, PANEL_DBUS_PLUGIN_INTERFACE);
   if (G_UNLIKELY (dbus_gproxy == NULL))
     {
       /* print error */
@@ -298,7 +306,7 @@ main (gint argc, gchar **argv)
   /* setup signal for property changes */
   dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_INT_BOXED, G_TYPE_NONE,
                                      G_TYPE_INT, G_TYPE_INT, G_TYPE_VALUE, G_TYPE_INVALID);
-  dbus_g_proxy_add_signal (dbus_gproxy, "WrapperSetProperty", G_TYPE_INT, G_TYPE_INT,
+  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT, G_TYPE_INT,
                            G_TYPE_VALUE, G_TYPE_INVALID);
 
   /* load the module and link the function */
@@ -344,7 +352,7 @@ main (gint argc, gchar **argv)
       g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
 
       /* connect dbus signal to set provider properties send from the panel */
-      dbus_g_proxy_connect_signal (dbus_gproxy, "WrapperSetProperty", G_CALLBACK (dbus_gproxy_wrapper_set_property),
+      dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_property_changed),
                                    g_object_ref (provider), (GClosureNotify) g_object_unref);
 
       /* show the plugin */
@@ -356,7 +364,7 @@ main (gint argc, gchar **argv)
       gtk_main ();
 
       /* disconnect signal */
-      dbus_g_proxy_disconnect_signal (dbus_gproxy, "WrapperSetProperty", G_CALLBACK (dbus_gproxy_wrapper_set_property), provider);
+      dbus_g_proxy_disconnect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_property_changed), provider);
 
       /* destroy the plug and provider */
       gtk_widget_destroy (GTK_WIDGET (plug));

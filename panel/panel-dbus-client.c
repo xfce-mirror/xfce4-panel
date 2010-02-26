@@ -45,8 +45,8 @@ panel_dbus_client_get_proxy (GError **error)
     return NULL;
 
   /* get the proxy */
-  dbus_proxy = dbus_g_proxy_new_for_name (dbus_connection, PANEL_DBUS_SERVICE_NAME,
-                                          PANEL_DBUS_SERVICE_PATH, PANEL_DBUS_SERVICE_INTERFACE);
+  dbus_proxy = dbus_g_proxy_new_for_name (dbus_connection, PANEL_DBUS_PANEL_INTERFACE,
+                                          PANEL_DBUS_PATH, PANEL_DBUS_PANEL_INTERFACE);
 
   return dbus_proxy;
 }
@@ -78,7 +78,7 @@ panel_dbus_client_display_preferences_dialog (guint    active,
     return FALSE;
 
   /* call */
-  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy, active, error);
+  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy, active, 0, error);
 
   /* cleanup */
   g_object_unref (G_OBJECT (dbus_proxy));

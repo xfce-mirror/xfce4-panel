@@ -153,10 +153,39 @@ xfce_panel_plugin_provider_send_signal (XfcePanelPluginProvider       *provider,
 
 
 PANEL_SYMBOL_EXPORT gboolean     
-xfce_panel_plugin_provider_has_flag (XfcePanelPluginProvider      *provider,
-                                     XfcePanelPluginProviderFlags  flag)
+xfce_panel_plugin_provider_get_show_configure (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
   
-  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->has_flag) (provider, flag);
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_show_configure) (provider);
+}
+
+
+
+PANEL_SYMBOL_EXPORT void     
+xfce_panel_plugin_provider_show_configure (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->show_configure) (provider);
+}
+
+
+
+PANEL_SYMBOL_EXPORT gboolean     
+xfce_panel_plugin_provider_get_show_about (XfcePanelPluginProvider *provider)
+{
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
+  
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_show_about) (provider);
+}
+
+
+
+PANEL_SYMBOL_EXPORT void     
+xfce_panel_plugin_provider_show_about (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->show_about) (provider);
 }

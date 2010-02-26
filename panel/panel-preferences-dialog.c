@@ -550,7 +550,7 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
 
   /* get the selected item in the treeview */
   provider = panel_preferences_dialog_item_get_selected (dialog);
-  
+
   /* TODO, question dialog */
 
   /* send signal */
@@ -579,7 +579,8 @@ panel_preferences_dialog_item_properties (GtkWidget              *button,
   /* get the selected item in the treeview */
   provider = panel_preferences_dialog_item_get_selected (dialog);
 
-  /* TODO */
+  /* emit configure-plugin signal */
+  xfce_panel_plugin_provider_show_configure (provider);
 }
 
 
@@ -595,7 +596,8 @@ panel_preferences_dialog_item_about (GtkWidget              *button,
   /* get the selected item in the treeview */
   provider = panel_preferences_dialog_item_get_selected (dialog);
 
-  /* TODO */
+  /* emit about signal */
+  xfce_panel_plugin_provider_show_about (provider);
 }
 
 
@@ -638,13 +640,13 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
 
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-remove");
       gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
-      
+
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-properties");
-      active = xfce_panel_plugin_provider_has_flag (provider, PROVIDER_FLAG_SHOW_CONFIGURE);
+      active = xfce_panel_plugin_provider_get_show_configure (provider);
       gtk_widget_set_sensitive (GTK_WIDGET (object), active);
-      
+
       object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-about");
-      active = xfce_panel_plugin_provider_has_flag (provider, PROVIDER_FLAG_SHOW_ABOUT);
+      active = xfce_panel_plugin_provider_get_show_about (provider);
       gtk_widget_set_sensitive (GTK_WIDGET (object), active);
     }
   else
