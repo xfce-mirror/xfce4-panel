@@ -261,7 +261,8 @@ panel_application_load (PanelApplication *application)
       /* create empty panel window */
       window = panel_application_new_window (application, NULL);
 
-      /* TODO add some cruft here */
+      /* TODO: create fallback panel layout instead of an empty window
+       *       not entritely sure if an empty window is that bad... */
 
       /* show window */
       gtk_widget_show (GTK_WIDGET (window));
@@ -325,12 +326,12 @@ panel_application_load_set_property (PanelWindow *window,
     }
   else if (exo_str_is_equal (name, "screen-position"))
     {
-      /* TODO */
+      /* TODO: convert to the old screen position enum */
     }
 }
 
 
-/* TODO */
+/* TODO: finish and rename function */
 static void
 expand_handle (GtkWidget *plugin,
                gboolean expand,
@@ -350,6 +351,7 @@ expand_handle (GtkWidget *plugin,
 
 
 
+/* TODO: move away from here */
 static const GtkTargetEntry drag_targets[] =
 {
     { "application/x-xfce-panel-plugin-widget", 0, 0 }
@@ -357,6 +359,7 @@ static const GtkTargetEntry drag_targets[] =
 
 
 
+/* TODO: finish and rename function */
 static void
 move_handle (GtkWidget        *item,
              PanelApplication *application)
@@ -397,10 +400,12 @@ panel_application_get_unique_id (void)
   static gchar id[30];
 
   /* create a unique if of the current time and counter */
-  g_snprintf (id, sizeof(id), "%ld%d", time (NULL), counter++);
+  g_snprintf (id, sizeof (id), "%ld%d", time (NULL), counter++);
 
   return id;
 }
+
+
 
 static gboolean
 panel_application_insert_plugin (PanelApplication  *application,
@@ -976,9 +981,8 @@ panel_application_drag_data_received (GtkWidget        *itembar,
             panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
 
             /* set new panel size */
+            /* TODO: update more panel-dependent settings after a move */
             xfce_panel_plugin_provider_set_size (XFCE_PANEL_PLUGIN_PROVIDER (provider), panel_window_get_size (window));
-
-            /* TODO update more here */
           }
 
         /* everything went fine */

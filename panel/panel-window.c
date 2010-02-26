@@ -227,9 +227,9 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       EXO_PARAM_READABLE));
 
   /* initialize the atoms */
-  cardinal_atom = panel_atom_intern ("CARDINAL");
-  net_wm_strut_atom = panel_atom_intern ("_NET_WM_STRUT");
-  net_wm_strut_partial_atom = panel_atom_intern ("_NET_WM_STRUT_PARTIAL");
+  cardinal_atom = gdk_atom_intern_static_string ("CARDINAL");
+  net_wm_strut_atom = gdk_atom_intern_static_string ("_NET_WM_STRUT");
+  net_wm_strut_partial_atom = gdk_atom_intern_static_string ("_NET_WM_STRUT_PARTIAL");
 }
 
 
@@ -1309,8 +1309,6 @@ panel_window_working_area (PanelWindow  *window,
       /* only try to extend when there are more then 2 monitors */
       if (G_LIKELY (n_monitors > 1))
         {
-          /* TODO: loop for > 2 monitors */
-
           for (i = 0; i < n_monitors; i++)
             {
               /* skip the origional monitor */

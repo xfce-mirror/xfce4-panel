@@ -117,44 +117,44 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_SECONDS,
-                                     g_param_spec_boolean ("show-seconds", 
-                                                           "show-seconds", 
+                                     g_param_spec_boolean ("show-seconds",
+                                                           "show-seconds",
                                                            "show-seconds",
                                                            FALSE,
-                                                           G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
     /**
      * Whether we show a 24h clock
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_MILITARY,
-                                     g_param_spec_boolean ("show-military", 
-                                                           "show-military", 
+                                     g_param_spec_boolean ("show-military",
+                                                           "show-military",
                                                            "show-military",
                                                            FALSE,
-                                                           G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
     /**
      * Whether we show am or pm
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_MERIDIEM,
-                                     g_param_spec_boolean ("show-meridiem", 
-                                                           "show-meridiem", 
+                                     g_param_spec_boolean ("show-meridiem",
+                                                           "show-meridiem",
                                                            "show-meridiem",
                                                            TRUE,
-                                                           G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
     /**
      * Whether to flash the time separators
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_FLASH_SEPARATORS,
-                                     g_param_spec_boolean ("flash-separators", 
-                                                           "flash-separators", 
+                                     g_param_spec_boolean ("flash-separators",
+                                                           "flash-separators",
                                                            "flash-separators",
                                                            FALSE,
-                                                           G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 

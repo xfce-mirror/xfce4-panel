@@ -156,6 +156,17 @@ main (gint argc, gchar **argv)
 
       goto dbus_return;
     }
+  else if (panel_dbus_client_check_client_running (&error))
+    {
+      /* quit without error if and instance is running */
+      result = !!(error == NULL);
+
+      /* print message */
+      if (G_LIKELY (result == TRUE))
+        g_message (_("There is already a running instance..."));
+
+      goto dbus_return;
+    }
 
   /* create a new application */
   application = panel_application_get ();

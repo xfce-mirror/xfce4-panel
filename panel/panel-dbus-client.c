@@ -39,6 +39,7 @@ panel_dbus_client_send_message (DBusMessage  *message,
   DBusMessage    *result;
   DBusError       derror;
 
+  /* initialize the dbus error */
   dbus_error_init (&derror);
 
   /* try to connect to the session bus */
@@ -62,7 +63,9 @@ panel_dbus_client_send_message (DBusMessage  *message,
       else
         dbus_set_g_error (error, &derror);
 
+      /* cleanup */
       dbus_error_free (&derror);
+
       return FALSE;
     }
 
@@ -115,6 +118,46 @@ panel_dbus_client_display_dialog (GdkScreen    *screen,
 
   /* cleanup */
   g_free (display_name);
+
+  return result;
+}
+
+
+
+gboolean
+panel_dbus_client_check_client_running (GError **error)
+{
+  DBusConnection *connection;
+  DBusError       derror;
+  gboolean        result;
+
+  panel_return_val_if_fail (error == NULL || *error == NULL, TRUE);
+
+  /* initialize the dbus error */
+  dbus_error_init (&derror);
+
+  /* try to connect to the session bus */
+  connection = dbus_bus_get (DBUS_BUS_SESSION, &derror);
+  if (G_UNLIKELY (connection == NULL))
+    {
+      dbus_set_g_error (error, &derror);
+      dbus_error_free (&derror);
+
+      return TRUE;
+    }
+
+  /* check if the name is already owned */
+  result = dbus_bus_name_has_owner (connection, PANEL_DBUS_SERVICE_INTERFACE, &derror);
+
+  /* handle the error is one is set */
+  if (result == FALSE && dbus_error_is_set (&derror))
+    {
+      dbus_set_g_error (error, &derror);
+      dbus_error_free (&derror);
+
+      /* return on true on error */
+      result = TRUE;
+    }
 
   return result;
 }

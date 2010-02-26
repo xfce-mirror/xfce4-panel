@@ -87,11 +87,11 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_DIGITAL_FORMAT,
-                                     g_param_spec_string ("digital-format", 
-                                                          "digital-format", 
+                                     g_param_spec_string ("digital-format",
                                                           "digital-format",
-                                                          NULL, 
-                                                          G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                          "digital-format",
+                                                          NULL,
+                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -188,7 +188,7 @@ xfce_clock_digital_update (gpointer user_data)
     struct tm         tm;
 
     panel_return_val_if_fail (XFCE_IS_CLOCK_DIGITAL (clock), FALSE);
-    
+
     if (clock->format != NULL)
       {
         /* get the local time */

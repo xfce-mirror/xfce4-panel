@@ -120,7 +120,7 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   gtksocket_class->plug_removed = panel_plugin_external_plug_removed;
 
   /* initialize the global message atom */
-  message_atom = panel_atom_intern ("XFCE_PANEL_PLUGIN");
+  message_atom = gdk_atom_intern_static_string ("XFCE_PANEL_PLUGIN");
 }
 
 

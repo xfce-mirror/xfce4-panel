@@ -105,22 +105,22 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_SECONDS,
-                                     g_param_spec_boolean ("show-seconds", 
-                                                           "show-seconds", 
+                                     g_param_spec_boolean ("show-seconds",
                                                            "show-seconds",
-                                                           FALSE, 
-                                                           G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                           "show-seconds",
+                                                           FALSE,
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
     /**
      * Whether this is a true binary clock
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_TRUE_BINARY,
-                                     g_param_spec_boolean ("true-binary", 
-                                                           "true-binary", 
+                                     g_param_spec_boolean ("true-binary",
                                                            "true-binary",
-                                                           FALSE, 
-                                                           G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                           "true-binary",
+                                                           FALSE,
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 

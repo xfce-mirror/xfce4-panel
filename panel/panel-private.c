@@ -53,7 +53,7 @@ _window_set_opacity (GtkWindow *window,
     {
       /* remove property */
       gdk_property_delete (GTK_WIDGET (window)->window,
-                           panel_atom_intern ("_NET_WM_WINDOW_OPACITY"));
+                           gdk_atom_intern_static_string ("_NET_WM_WINDOW_OPACITY"));
     }
   else
     {
@@ -62,8 +62,8 @@ _window_set_opacity (GtkWindow *window,
 
       /* set window property */
       gdk_property_change (GTK_WIDGET (window)->window,
-                           panel_atom_intern ("_NET_WM_WINDOW_OPACITY"),
-                           panel_atom_intern ("CARDINAL"), 32,
+                           gdk_atom_intern_static_string ("_NET_WM_WINDOW_OPACITY"),
+                           gdk_atom_intern_static_string ("CARDINAL"), 32,
                            GDK_PROP_MODE_REPLACE,
                            (guchar *) &cardinal, 1L);
     }

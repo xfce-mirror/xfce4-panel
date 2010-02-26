@@ -104,6 +104,9 @@ struct _XfcePanelPluginPrivate
 
   /* plugin menu */
   GtkWidget           *menu;
+
+  /* block the plugin menu */
+  guint                menu_blocked : 1;
 };
 
 
@@ -291,7 +294,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                         "Name",
                                                         "Plugin internal name",
                                                         NULL,
-                                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY));
 
   /**
    * XfcePanelPlugin:display-name:
@@ -307,7 +310,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                         "Display Name",
                                                         "Plugin display name",
                                                         NULL,
-                                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY));
 
   /**
    * XfcePanelPlugin:id:
@@ -323,7 +326,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                         "ID",
                                                         "Unique plugin ID",
                                                         NULL,
-                                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY));
 
   /**
    * XfcePanelPlugin:arguments:
@@ -335,7 +338,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                    g_param_spec_pointer ("arguments",
                                                          "Arguemnts",
                                                          "Startup arguments for the plugin",
-                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY));
 }
 
 
@@ -356,6 +359,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
   plugin->priv->screen_position = XFCE_SCREEN_POSITION_NONE;
   plugin->priv->menu = NULL;
+  plugin->priv->menu_blocked = FALSE;
 
   /* hide the event box window to make the plugin transparent */
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
@@ -503,7 +507,8 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
   /* get the default accelerator modifier mask */
   modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
 
-  if (event->button == 3 || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
+  if (plugin->priv->menu_blocked == FALSE
+      && (event->button == 3 || (event->button == 1 && modifiers == GDK_CONTROL_MASK)))
     {
       /* create the menu if needed */
       if (G_UNLIKELY (plugin->priv->menu == NULL))
@@ -725,9 +730,9 @@ xfce_panel_plugin_menu_new (XfcePanelPlugin *plugin)
 static gchar *
 xfce_panel_plugin_relative_filename (XfcePanelPlugin *plugin)
 {
-  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
-  g_return_val_if_fail (xfce_panel_plugin_get_name (plugin) != NULL, NULL);
-  g_return_val_if_fail (xfce_panel_plugin_get_id (plugin) != NULL, NULL);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
+  panel_return_val_if_fail (xfce_panel_plugin_get_name (plugin) != NULL, NULL);
+  panel_return_val_if_fail (xfce_panel_plugin_get_id (plugin) != NULL, NULL);
 
   /* return the relative configuration filename */
   return g_strdup_printf ("xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%s.rc",
@@ -1032,6 +1037,9 @@ void
 xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
 {
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+
+  /* block the menu */
+  plugin->priv->menu_blocked = TRUE;
 }
 
 
@@ -1040,6 +1048,9 @@ void
 xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
 {
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+
+  /* block the menu */
+  plugin->priv->menu_blocked = FALSE;
 }
 
 
@@ -1221,7 +1232,7 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
 {
   gchar *filename, *path;
 
-  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
   /* get the relative filename */
   filename = xfce_panel_plugin_relative_filename (plugin);
@@ -1257,7 +1268,7 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
 {
   gchar *filename, *path;
 
-  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
   /* get the relative filename */
   filename = xfce_panel_plugin_relative_filename (plugin);

@@ -103,7 +103,7 @@ wrapper_plug_init (WrapperPlug *plug)
 {
   /* init vars */
   plug->socket_id = 0;
-  plug->atom = panel_atom_intern ("XFCE_PANEL_PLUGIN");
+  plug->atom = gdk_atom_intern_static_string ("XFCE_PANEL_PLUGIN");
   plug->background_alpha = 1.00;
   plug->is_active_panel = FALSE;
   plug->is_composited = FALSE;

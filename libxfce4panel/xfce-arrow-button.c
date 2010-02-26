@@ -123,7 +123,7 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
                                                       "The arrow type of the menu button",
                                                       GTK_TYPE_ARROW_TYPE,
                                                       GTK_ARROW_UP,
-                                                      G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 

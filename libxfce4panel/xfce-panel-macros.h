@@ -26,39 +26,33 @@
 
 G_BEGIN_DECLS
 
-/* support macros for debugging */
+/* support macros for debugging (improved macro for better position indication) */
 #ifndef NDEBUG
-#define panel_assert(expr)                  g_assert (expr)
-#define panel_assert_not_reached()          g_assert_not_reached ()
-#define panel_return_if_fail(expr)          g_return_if_fail (expr)
-#define panel_return_val_if_fail(expr, val) g_return_val_if_fail (expr, (val))
+#define panel_assert(expr)                 g_assert (expr)
+#define panel_assert_not_reached()         g_assert_not_reached ()
+#define panel_return_if_fail(expr)         panel_return_val_if_fail(expr,{})
+#define panel_return_val_if_fail(expr,val) G_STMT_START { \
+  if (G_UNLIKELY (!(expr))) \
+    { \
+      g_log (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, \
+             "%s (%s): expression '%s' failed.", G_STRLOC, G_STRFUNC, \
+             #expr); \
+      return (val); \
+    }; }G_STMT_END
 #else
-#define panel_assert(expr)                  G_STMT_START{ (void)0; }G_STMT_END
-#define panel_assert_not_reached()          G_STMT_START{ (void)0; }G_STMT_END
-#define panel_return_if_fail(expr)          G_STMT_START{ (void)0; }G_STMT_END
-#define panel_return_val_if_fail(expr, val) G_STMT_START{ (void)0; }G_STMT_END
+#define panel_assert(expr)                 G_STMT_START{ (void)0; }G_STMT_END
+#define panel_assert_not_reached()         G_STMT_START{ (void)0; }G_STMT_END
+#define panel_return_if_fail(expr)         G_STMT_START{ (void)0; }G_STMT_END
+#define panel_return_val_if_fail(expr,val) G_STMT_START{ (void)0; }G_STMT_END
 #endif
 
 /* canonical representation for static strings */
 #define I_(string) (g_intern_static_string ((string)))
 
-/* static parameter strings */
-#if GLIB_CHECK_VERSION (2,13,0)
-#define PANEL_PARAM_STATIC_STRINGS (G_PARAM_STATIC_STRINGS)
-#else
-#define PANEL_PARAM_STATIC_STRINGS (G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB)
+/* this is defined in glib 2.13.0 */
+#ifndef G_PARAM_STATIC_STRINGS
+#define G_PARAM_STATIC_STRINGS (G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB)
 #endif
-
-/* gdk atoms */
-#if GTK_CHECK_VERSION (2,10,0)
-#define panel_atom_intern(string) gdk_atom_intern_static_string ((string))
-#else
-#define panel_atom_intern(string) gdk_atom_intern ((string), FALSE)
-#endif
-
-/* cairo context source color */
-#define panel_cairo_set_source_rgba (cr, color, alpha) \
-  if (
 
 /* make api compatible with 4.4 panel */
 #ifndef XFCE_DISABLE_DEPRECATED
@@ -80,12 +74,12 @@ G_BEGIN_DECLS
 #define PANEL_PARAM_WRITABLE  G_PARAM_WRITABLE | PANEL_PARAM_STATIC_STRINGS
 
 /* slice allocator (deprecated) */
-#define panel_slice_alloc(block_size)             (g_slice_alloc ((block_size)))
-#define panel_slice_alloc0(block_size)            (g_slice_alloc0 ((block_size)))
-#define panel_slice_free1(block_size, mem_block)  G_STMT_START{ g_slice_free1 ((block_size), (mem_block)); }G_STMT_END
-#define panel_slice_new(type)                     (g_slice_new (type))
-#define panel_slice_new0(type)                    (g_slice_new0 (type))
-#define panel_slice_free(type, ptr)               G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
+#define panel_slice_alloc(block_size)            (g_slice_alloc ((block_size)))
+#define panel_slice_alloc0(block_size)           (g_slice_alloc0 ((block_size)))
+#define panel_slice_free1(block_size, mem_block) G_STMT_START{ g_slice_free1 ((block_size), (mem_block)); }G_STMT_END
+#define panel_slice_new(type)                    (g_slice_new (type))
+#define panel_slice_new0(type)                   (g_slice_new0 (type))
+#define panel_slice_free(type, ptr)              G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
 
 /* debug macros (deprecated) */
 #define _panel_assert(expr)                  panel_assert (expr)
