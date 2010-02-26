@@ -80,7 +80,6 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
 {
   GtkWidget *button, *image;
 
-  /* init */
   plugin->wnck_screen = NULL;
 
   /* monitor screen changes */
@@ -96,7 +95,6 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), button);
   gtk_widget_show (button);
 
-  /* add an icon */
   image = xfce_panel_image_new_from_source ("user-desktop");
   gtk_container_add (GTK_CONTAINER (button), image);
   gtk_widget_show (image);
@@ -184,10 +182,8 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
 
-  /* get the button state */
-  active = gtk_toggle_button_get_active (button);
-
   /* toggle the desktop */
+  active = gtk_toggle_button_get_active (button);
   if (active != wnck_screen_get_showing_desktop (plugin->wnck_screen))
     wnck_screen_toggle_showing_desktop (plugin->wnck_screen, active);
 
@@ -207,7 +203,7 @@ show_desktop_plugin_showing_desktop_changed (WnckScreen        *wnck_screen,
   panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
   panel_return_if_fail (plugin->wnck_screen == wnck_screen);
 
-  /* toggle the button */
+  /* update button to user action */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button),
       wnck_screen_get_showing_desktop (wnck_screen));
 }
