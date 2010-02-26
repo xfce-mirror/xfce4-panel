@@ -87,7 +87,11 @@ enum
   PROP_DISPLAY_NAME,
   PROP_COMMENT,
   PROP_ARGUMENTS,
-  PROP_UNIQUE_ID
+  PROP_UNIQUE_ID,
+  PROP_ORIENTATION,
+  PROP_SIZE,
+  PROP_SCREEN_POSITION,
+  PROP_EXPAND
 };
 
 enum
@@ -391,7 +395,45 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                        | G_PARAM_STATIC_STRINGS
                                                        | G_PARAM_CONSTRUCT_ONLY));
 
-  /** TODO properties for size, expand, orientation, screen-position **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_ORIENTATION,
+                                   g_param_spec_enum ("orientation",
+                                                      "Orientation",
+                                                      "Orientation of the plugin's panel",
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_READABLE
+                                                      | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SIZE,
+                                   g_param_spec_int ("size",
+                                                     "Size",
+                                                     "Size of the plugin's panel",
+                                                     0, 128, 0,
+                                                     G_PARAM_READABLE
+                                                     | G_PARAM_STATIC_STRINGS));
+
+    /* TODO */
+  g_object_class_install_property (gobject_class,
+                                   PROP_SCREEN_POSITION,
+                                   g_param_spec_uint ("screen-position",
+                                                      "Screen Position",
+                                                      "Screen position of the plugin's panel",
+                                                      XFCE_SCREEN_POSITION_NONE,
+                                                      XFCE_SCREEN_POSITION_FLOATING_V,
+                                                      XFCE_SCREEN_POSITION_NONE,
+                                                      G_PARAM_READABLE
+                                                      | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_EXPAND,
+                                   g_param_spec_boolean ("expand",
+                                                         "Expand",
+                                                         "Whether this plugin is expanded",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE
+                                                         | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -471,6 +513,22 @@ xfce_panel_plugin_get_property (GObject    *object,
         g_value_set_boxed (value, private->arguments);
         break;
 
+      case PROP_ORIENTATION:
+        g_value_set_enum (value, private->orientation);
+        break;
+
+      case PROP_SIZE:
+        g_value_set_int (value, private->size);
+        break;
+
+      case PROP_SCREEN_POSITION:
+        g_value_set_enum (value, private->screen_position);
+        break;
+
+      case PROP_EXPAND:
+        g_value_set_boolean (value, private->expand);
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -507,6 +565,11 @@ xfce_panel_plugin_set_property (GObject      *object,
 
       case PROP_ARGUMENTS:
         private->arguments = g_value_dup_boxed (value);
+        break;
+
+      case PROP_EXPAND:
+        xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (object),
+                                      g_value_get_boolean (value));
         break;
 
       default:
@@ -890,7 +953,8 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
     if (G_LIKELY (plugin->priv->registered_menus > 0))
       {
         /* disconnect this signal */
-        g_signal_handlers_disconnect_by_func (G_OBJECT (menu), G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
+        g_signal_handlers_disconnect_by_func (G_OBJECT (menu),
+            G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
         /* decrease the counter */
         plugin->priv->registered_menus--;
@@ -925,6 +989,9 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
       /* handle the size when not done by the plugin */
       if (handled == FALSE)
         gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
+
+      /* emit property */
+      g_object_notify (G_OBJECT (plugin), "size");
     }
 }
 
@@ -946,6 +1013,9 @@ xfce_panel_plugin_set_orientation (XfcePanelPluginProvider *provider,
 
       /* emit signal */
       g_signal_emit (G_OBJECT (plugin), plugin_signals[ORIENTATION_CHANGED], 0, orientation);
+
+      /* emit property */
+      g_object_notify (G_OBJECT (plugin), "orientation");
     }
 }
 
@@ -967,6 +1037,9 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
 
       /* emit signal */
       g_signal_emit (G_OBJECT (plugin), plugin_signals[SCREEN_POSITION_CHANGED], 0, screen_position);
+
+      /* emit property */
+      g_object_notify (G_OBJECT (plugin), "screen-position");
     }
 }
 
@@ -1214,7 +1287,10 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
       /* emit signal (in provider) */
       xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
                                               expand ? PROVIDER_SIGNAL_EXPAND_PLUGIN :
-                                                PROVIDER_SIGNAL_COLLAPSE_PLUGIN);
+                                                  PROVIDER_SIGNAL_COLLAPSE_PLUGIN);
+
+      /* notify property */
+      g_object_notify (G_OBJECT (plugin), "expand");
     }
 }
 
