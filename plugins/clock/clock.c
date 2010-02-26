@@ -638,6 +638,7 @@ clock_plugin_timeout_sync (gpointer user_data)
 }
 
 
+
 ClockPluginTimeout *
 clock_plugin_timeout_new (guint       interval,
                           GSourceFunc function,
@@ -687,9 +688,7 @@ clock_plugin_timeout_set_interval (ClockPluginTimeout *timeout,
 
   /* get the seconds to the next internal (+ 1 second)*/
   g_get_current_time (&timeval);
-  if (interval == CLOCK_INTERVAL_HOUR)
-    next_interval = 3600 - timeval.tv_sec % 3600;
-  else if (interval == CLOCK_INTERVAL_MINUTE)
+  if (interval == CLOCK_INTERVAL_MINUTE)
     next_interval = 60 - timeval.tv_sec % 60;
   else
     next_interval = 0;
@@ -778,10 +777,9 @@ guint
 clock_plugin_interval_from_format (const gchar *format)
 {
   const gchar *p;
-  guint        interval = CLOCK_INTERVAL_HOUR;
 
   if (G_UNLIKELY (!IS_STRING (format)))
-      return 0;
+      return CLOCK_INTERVAL_MINUTE;
 
   for (p = format; *p != '\0'; ++p)
     {
@@ -797,14 +795,9 @@ clock_plugin_interval_from_format (const gchar *format)
               case 'T':
               case 'X':
                 return CLOCK_INTERVAL_SECOND;
-
-              case 'M':
-              case 'R':
-                interval = CLOCK_INTERVAL_MINUTE;
-                break;
             }
         }
     }
 
-  return interval;
+  return CLOCK_INTERVAL_MINUTE;
 }

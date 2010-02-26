@@ -28,7 +28,6 @@ G_BEGIN_DECLS
 
 #define CLOCK_INTERVAL_SECOND (1)
 #define CLOCK_INTERVAL_MINUTE (60)
-#define CLOCK_INTERVAL_HOUR   (3600)
 
 typedef struct _ClockPlugin        ClockPlugin;
 typedef struct _ClockPluginClass   ClockPluginClass;
