@@ -59,7 +59,7 @@ const gchar             *panel_module_get_comment               (PanelModule    
 
 const gchar             *panel_module_get_icon_name             (PanelModule             *module);
 
-const gchar             *panel_module_get_icon_name_from_plugin (XfcePanelPluginProvider *provider);
+PanelModule             *panel_module_get_from_plugin_provider  (XfcePanelPluginProvider *provider);
 
 gboolean                 panel_module_is_valid                  (PanelModule             *module);
 

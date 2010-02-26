@@ -319,6 +319,7 @@ panel_application_plugin_move (GtkWidget        *item,
   GtkTargetList  *target_list;
   const gchar    *icon_name;
   GdkDragContext *context;
+  PanelModule    *module;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
@@ -333,7 +334,8 @@ panel_application_plugin_move (GtkWidget        *item,
   context = gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
 
   /* set the drag context icon name */
-  icon_name = panel_module_get_icon_name_from_plugin (XFCE_PANEL_PLUGIN_PROVIDER (item));
+  module = panel_module_get_from_plugin_provider (XFCE_PANEL_PLUGIN_PROVIDER (item));
+  icon_name = panel_module_get_icon_name (module);
   gtk_drag_set_icon_name (context, icon_name ? icon_name : GTK_STOCK_DND, 0, 0);
 
   /* release the drag list */

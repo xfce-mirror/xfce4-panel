@@ -65,6 +65,8 @@ static void         panel_plugin_external_set_orientation     (XfcePanelPluginPr
 static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider         *provider,
                                                                XfceScreenPosition               screen_position);
 static void         panel_plugin_external_save                (XfcePanelPluginProvider         *provider);
+static gboolean     panel_plugin_external_has_flag            (XfcePanelPluginProvider         *provider,
+                                                               XfcePanelPluginProviderFlags     flag);
 static void         panel_plugin_external_set_sensitive       (PanelPluginExternal             *external);
 static void         panel_plugin_external_set_property        (PanelPluginExternal             *external,
                                                                DBusPropertyChanged              property,
@@ -162,6 +164,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
   iface->set_orientation = panel_plugin_external_set_orientation;
   iface->set_screen_position = panel_plugin_external_set_screen_position;
   iface->save = panel_plugin_external_save;
+  iface->has_flag = panel_plugin_external_has_flag;
 }
 
 
@@ -567,6 +570,18 @@ panel_plugin_external_save (XfcePanelPluginProvider *provider)
 
   /* unset */
   g_value_unset (&value);
+}
+
+
+
+static gboolean     
+panel_plugin_external_has_flag (XfcePanelPluginProvider      *provider,
+                                XfcePanelPluginProviderFlags  flag)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), FALSE);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
+  
+  return FALSE;
 }
 
 

@@ -149,3 +149,14 @@ xfce_panel_plugin_provider_send_signal (XfcePanelPluginProvider       *provider,
   /* emit the signal */
   g_signal_emit (G_OBJECT (provider), provider_signals[PROVIDER_SIGNAL], 0, signal);
 }
+
+
+
+PANEL_SYMBOL_EXPORT gboolean     
+xfce_panel_plugin_provider_has_flag (XfcePanelPluginProvider      *provider,
+                                     XfcePanelPluginProviderFlags  flag)
+{
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
+  
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->has_flag) (provider, flag);
+}

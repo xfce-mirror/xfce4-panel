@@ -2,7 +2,7 @@
 <interface>
   <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-requires xfce4 0.0 -->
-  <!-- interface-naming-policy toplevel-contextual -->
+  <!-- interface-naming-policy project-wide -->
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Xfce Panel Preferences</property>
     <property name="window_position">center-on-parent</property>
@@ -23,19 +23,20 @@
                 <property name="visible">True</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkComboBox" id="panels">
+                  <object class="GtkComboBox" id="panel-combobox">
                     <property name="visible">True</property>
-                    <property name="model">panels-store</property>
+                    <property name="model">panel-liststore</property>
                   </object>
                   <packing>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="add-panel">
+                  <object class="GtkButton" id="panel-add">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="tooltip_text">Add a new panel</property>
                     <child>
                       <object class="GtkImage" id="image1">
                         <property name="visible">True</property>
@@ -49,10 +50,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="remove-panel">
+                  <object class="GtkButton" id="panel-remove">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="tooltip_text">Remove the currently selected panel</property>
                     <child>
                       <object class="GtkImage" id="image2">
                         <property name="visible">True</property>
@@ -72,35 +74,35 @@
               </packing>
             </child>
             <child>
-              <object class="GtkNotebook" id="notebook3">
+              <object class="GtkNotebook" id="notebook1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkVBox" id="vbox5">
+                  <object class="GtkVBox" id="vbox2">
                     <property name="visible">True</property>
                     <property name="border_width">6</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkFrame" id="frame5">
+                      <object class="GtkFrame" id="frame1">
                         <property name="visible">True</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkAlignment" id="alignment5">
+                          <object class="GtkAlignment" id="alignment1">
                             <property name="visible">True</property>
                             <property name="bottom_padding">6</property>
                             <property name="left_padding">12</property>
                             <child>
-                              <object class="GtkVBox" id="vbox6">
+                              <object class="GtkVBox" id="vbox3">
                                 <property name="visible">True</property>
                                 <property name="border_width">6</property>
                                 <property name="spacing">6</property>
                                 <child>
-                                  <object class="GtkHBox" id="hbox4">
+                                  <object class="GtkHBox" id="hbox1">
                                     <property name="visible">True</property>
                                     <property name="spacing">12</property>
                                     <child>
-                                      <object class="GtkLabel" id="label17">
+                                      <object class="GtkLabel" id="label1">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_Orientation:</property>
                                         <property name="use_underline">True</property>
@@ -132,6 +134,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
+                                    <property name="tooltip_text">Lock this panel so it can't be dragged with the mouse</property>
                                     <property name="use_underline">True</property>
                                     <property name="draw_indicator">True</property>
                                     <property name="label" translatable="yes">_Lock panel</property>
@@ -147,7 +150,7 @@
                                     <property name="receives_default">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="draw_indicator">True</property>
-                                    <property name="label" translatable="yes">Automatically show and hi_de the panel</property>
+                                    <property name="label" translatable="yes">Automatically show and _hide the panel</property>
                                   </object>
                                   <packing>
                                     <property name="position">2</property>
@@ -158,7 +161,7 @@
                           </object>
                         </child>
                         <child type="label">
-                          <object class="GtkLabel" id="label18">
+                          <object class="GtkLabel" id="label2">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">&lt;b&gt;General&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
@@ -171,16 +174,16 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkFrame" id="frame6">
+                      <object class="GtkFrame" id="frame2">
                         <property name="visible">True</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkAlignment" id="alignment6">
+                          <object class="GtkAlignment" id="alignment2">
                             <property name="visible">True</property>
                             <property name="left_padding">12</property>
                             <child>
-                              <object class="GtkTable" id="table3">
+                              <object class="GtkTable" id="table1">
                                 <property name="visible">True</property>
                                 <property name="border_width">6</property>
                                 <property name="n_rows">2</property>
@@ -188,7 +191,7 @@
                                 <property name="column_spacing">12</property>
                                 <property name="row_spacing">6</property>
                                 <child>
-                                  <object class="GtkLabel" id="label19">
+                                  <object class="GtkLabel" id="label3">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">_Size (pixels):</property>
@@ -200,7 +203,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="label20">
+                                  <object class="GtkLabel" id="label4">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">L_ength (%):</property>
@@ -248,7 +251,7 @@
                           </object>
                         </child>
                         <child type="label">
-                          <object class="GtkLabel" id="label21">
+                          <object class="GtkLabel" id="label5">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">&lt;b&gt;Measurements&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
@@ -263,7 +266,7 @@
                   </object>
                 </child>
                 <child type="tab">
-                  <object class="GtkLabel" id="label22">
+                  <object class="GtkLabel" id="label6">
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">D_isplay</property>
                     <property name="use_underline">True</property>
@@ -273,27 +276,27 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox7">
+                  <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
                     <property name="border_width">6</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkFrame" id="frame7">
+                      <object class="GtkFrame" id="frame3">
                         <property name="visible">True</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkAlignment" id="alignment7">
+                          <object class="GtkAlignment" id="alignment3">
                             <property name="visible">True</property>
                             <property name="bottom_padding">6</property>
                             <property name="left_padding">12</property>
                             <child>
-                              <object class="GtkHBox" id="hbox5">
+                              <object class="GtkHBox" id="hbox2">
                                 <property name="visible">True</property>
                                 <property name="border_width">6</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="label23">
+                                  <object class="GtkLabel" id="label7">
                                     <property name="visible">True</property>
                                     <property name="label" translatable="yes">_Alpha:</property>
                                     <property name="use_underline">True</property>
@@ -321,7 +324,7 @@
                           </object>
                         </child>
                         <child type="label">
-                          <object class="GtkLabel" id="label24">
+                          <object class="GtkLabel" id="label8">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">&lt;b&gt;Background&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
@@ -334,17 +337,17 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkFrame" id="frame8">
+                      <object class="GtkFrame" id="frame4">
                         <property name="visible">True</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkAlignment" id="alignment8">
+                          <object class="GtkAlignment" id="alignment4">
                             <property name="visible">True</property>
                             <property name="bottom_padding">6</property>
                             <property name="left_padding">12</property>
                             <child>
-                              <object class="GtkTable" id="table4">
+                              <object class="GtkTable" id="table2">
                                 <property name="visible">True</property>
                                 <property name="border_width">6</property>
                                 <property name="n_rows">2</property>
@@ -352,7 +355,7 @@
                                 <property name="column_spacing">12</property>
                                 <property name="row_spacing">6</property>
                                 <child>
-                                  <object class="GtkLabel" id="label25">
+                                  <object class="GtkLabel" id="label9">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">_Enter:</property>
@@ -364,7 +367,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="label26">
+                                  <object class="GtkLabel" id="label10">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">_Leave:</property>
@@ -410,7 +413,7 @@
                           </object>
                         </child>
                         <child type="label">
-                          <object class="GtkLabel" id="label27">
+                          <object class="GtkLabel" id="label11">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">&lt;b&gt;Transparency&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
@@ -428,7 +431,7 @@
                   </packing>
                 </child>
                 <child type="tab">
-                  <object class="GtkLabel" id="label28">
+                  <object class="GtkLabel" id="label12">
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">C_ompositing</property>
                     <property name="use_underline">True</property>
@@ -439,17 +442,158 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label33">
+                  <object class="GtkHBox" id="hbox4">
                     <property name="visible">True</property>
+                    <property name="border_width">6</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkScrolledWindow" id="scrolledwindow3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">automatic</property>
+                        <property name="vscrollbar_policy">automatic</property>
+                        <property name="shadow_type">etched-in</property>
+                        <child>
+                          <object class="GtkTreeView" id="item-treeview">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="headers_visible">False</property>
+                            <property name="rules_hint">True</property>
+                            <property name="enable_search">False</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkVBox" id="vbox6">
+                        <property name="visible">True</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkButton" id="item-up">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text">Move currently selected item up by one row</property>
+                            <child>
+                              <object class="GtkImage" id="image3">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-go-up</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="item-down">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text">Move currently selected item down by one row</property>
+                            <child>
+                              <object class="GtkImage" id="image4">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-go-down</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="item-add">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text">Add new item to this panel</property>
+                            <child>
+                              <object class="GtkImage" id="image5">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-add</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="item-remove">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text">Remove currently selected item</property>
+                            <child>
+                              <object class="GtkImage" id="image6">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-remove</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="item-properties">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text">Edit the currently selected item</property>
+                            <child>
+                              <object class="GtkImage" id="image7">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-properties</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="item-about">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text">Show about information of the currently selected item</property>
+                            <child>
+                              <object class="GtkImage" id="image8">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-about</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">5</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="position">2</property>
                   </packing>
                 </child>
                 <child type="tab">
-                  <object class="GtkLabel" id="label32">
+                  <object class="GtkLabel" id="label14">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">_Multi Screen</property>
+                    <property name="label" translatable="yes">Ite_ms</property>
                     <property name="use_underline">True</property>
                   </object>
                   <packing>
@@ -472,7 +616,7 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="close-button">
+              <object class="GtkButton" id="button-close">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -485,7 +629,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="help-button">
+              <object class="GtkButton" id="button-help">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -522,7 +666,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="panels-store">
+  <object class="GtkListStore" id="panel-liststore">
     <columns>
       <!-- column-name title -->
       <column type="gchararray"/>
@@ -559,5 +703,13 @@
     <property name="upper">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+  </object>
+  <object class="GtkListStore" id="item-liststore"/>
+  <object class="GtkSizeGroup" id="sizegroup1">
+    <widgets>
+      <widget name="label10"/>
+      <widget name="label9"/>
+      <widget name="label7"/>
+    </widgets>
   </object>
 </interface>
