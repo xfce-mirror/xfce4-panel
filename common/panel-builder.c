@@ -152,7 +152,7 @@ panel_builder_show_help (GtkWindow   *parent,
 
   if (G_LIKELY (exists))
     uri = g_strconcat ("file://", filename, "#", offset, NULL);
-  else if (xfce_dialog_confirm (parent, GTK_STOCK_HELP, _("_Read Online"),
+  else if (xfce_dialog_confirm (parent, "web-browser", _("_Read Online"),
                _("You can read the user manual online. This manual may however "
                  "not exactly match your panel version."),
                _("The Xfce Panel user manual is not installed on your computer")))
