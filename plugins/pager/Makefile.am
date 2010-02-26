@@ -13,7 +13,11 @@ plugindir = \
 plugin_LTLIBRARIES = \
 	libpager.la
 
+libpager_built_sources = \
+	pager-dialog_glade.h
+
 libpager_la_SOURCES = \
+	$(libpager_built_sources) \
 	pager.c \
 	pager.h
 
@@ -42,6 +46,17 @@ libpager_la_LIBADD = \
 libpager_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
 
+if MAINTAINER_MODE
+BUILT_SOURCES = \
+	$(libpager_built_sources)
+
+DISTCLEANFILES = \
+	$(libpager_built_sources)
+
+pager-dialog_glade.h: pager-dialog.glade
+	exo-csource --static --strip-comments --strip-content --name=pager_dialog_glade $< >$@
+endif
+
 #
 # .desktop file
 #
@@ -54,6 +69,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
+	pager-dialog.glade \
 	$(desktop_in_in_files)
 
 DISTCLEANFILES = \
