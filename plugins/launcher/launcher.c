@@ -463,9 +463,9 @@ launcher_plugin_set_property (GObject      *object,
             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
         break;
 
-       default:
-         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-         break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
     }
 }
 
