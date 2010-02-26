@@ -22,6 +22,8 @@ xfce4_panel_wrapper_built_sources = \
 xfce4_panel_wrapper_SOURCES = \
 	$(xfce4_panel_wrapper_built_sources) \
 	main.c \
+	wrapper-module.c \
+	wrapper-module.h \
 	wrapper-plug.c \
 	wrapper-plug.h
 
