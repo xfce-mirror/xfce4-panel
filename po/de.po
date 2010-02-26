@@ -5,12 +5,12 @@
 # Fabian Nowak <timystery@arcor.de>, 2005-2009.
 # Enrico Tröger <enrico@xfce.org>, 2008.
 # Simon Schneider <simon@schneiderimtal.de>, 2009
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 17:06+0100\n"
+"POT-Creation-Date: 2010-02-16 18:00+0100\n"
 "PO-Revision-Date: 2009-04-05 13:44+0200\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -21,20 +21,20 @@ msgstr ""
 #: ../panel-desktop-handler.desktop.in.h:1
 #, fuzzy
 msgid "Create Launcher on Xfce Panel"
-msgstr "Über die Leiste"
+msgstr "Starter zur Leiste hinzufügen"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create a new launcher on the Xfce Panel"
-msgstr ""
+msgstr "Neuen Starter zur Leiste hinzufügen"
 
 #: ../panel-preferences.desktop.in.h:1
 #, fuzzy
 msgid "Customize the Xfce Panel"
-msgstr "Über die Leiste"
+msgstr "Leiste anpassen"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Leisteneinstellungen"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:829
@@ -45,8 +45,9 @@ msgstr "Soll die Arbeitsfläche »%s« wirklich entfernt werden?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:834
 #: ../panel/panel-preferences-dialog.c:884
+#, fuzzy
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Wenn Sie dieses Element von der Leiste entfernen ist es dauerhaft verloren."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:973
@@ -62,8 +63,9 @@ msgstr "Neue Elemente hinzufügen..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1022 ../panel/panel-window.c:2077
+#, fuzzy
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "Leisten_einstellungen"
 
 #. restart item
 #: ../libxfce4panel/xfce-panel-plugin.c:1046 ../panel/panel-window.c:2100
@@ -133,8 +135,7 @@ msgstr "Bitte senden Sie Fehlermeldungen an <%s>"
 #: ../panel/main.c:218
 #, fuzzy
 msgid "There is already a running instance"
-msgstr ""
-"Es ist bereits eine Benachrichtigungsfläche auf diesem Bildschirm vorhanden"
+msgstr "Es ist bereits eine Benachrichtigungsfläche auf diesem Bildschirm vorhanden"
 
 #. spawn ourselfs again
 #: ../panel/main.c:258
@@ -187,14 +188,12 @@ msgid "Failed to launch the migration application"
 msgstr ""
 
 #: ../panel/panel-dbus-client.c:227
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
 #: ../panel/panel-dbus-client.c:260
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:57
@@ -222,9 +221,7 @@ msgid "Panel %d"
 msgstr "Leiste %d"
 
 #: ../panel/panel-dialogs.c:163
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:165
@@ -238,10 +235,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
-msgid ""
-"The plugin restarted more then once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
+msgid "The plugin restarted more then once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr ""
 
 #: ../panel/panel-item-dialog.c:173
@@ -300,9 +294,7 @@ msgid "Internal name: %s-%d"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
+msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:2
@@ -354,9 +346,7 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:15
@@ -550,11 +540,7 @@ msgstr "Ra_hmen anzeigen"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:18
@@ -862,9 +848,7 @@ msgid "North"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -987,8 +971,7 @@ msgstr ""
 #: ../plugins/separator/separator.desktop.in.h:1
 #, fuzzy
 msgid "Adds a separator or space between panel items"
-msgstr ""
-"Fügt zusätzlichen Abstand oder eine Linie zwischen Leistenelementen ein"
+msgstr "Fügt zusätzlichen Abstand oder eine Linie zwischen Leistenelementen ein"
 
 #: ../plugins/showdesktop/showdesktop.c:193
 #, fuzzy
@@ -1034,9 +1017,7 @@ msgstr "Konnte Manager-Auswahl für Bildschirm %d nicht erhalten."
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:551
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This plugin will close."
+msgid "Most likely another widget took over the function of a notification area. This plugin will close."
 msgstr ""
 
 #: ../plugins/systray/systray.c:554
@@ -1046,8 +1027,7 @@ msgstr "Die Systemleiste hat die Verbindung unerwartet verloren"
 
 #: ../plugins/systray/systray.c:747
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
-"Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
+msgstr "Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
 
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
