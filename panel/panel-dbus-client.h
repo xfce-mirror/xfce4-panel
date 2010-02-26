@@ -36,6 +36,9 @@ gboolean  panel_dbus_client_add_new_item               (const gchar  *plugin_nam
                                                         gchar       **arguments,
                                                         GError      **error);
 
+gboolean  panel_dbus_client_plugin_event               (const gchar  *plugin_event,
+                                                        GError      **error);
+
 gboolean  panel_dbus_client_terminate                  (gboolean      restart,
                                                         GError      **error);
 

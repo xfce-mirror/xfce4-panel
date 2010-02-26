@@ -53,8 +53,8 @@ GList              *panel_module_factory_get_modules         (PanelModuleFactory
 gboolean            panel_module_factory_has_module          (PanelModuleFactory  *factory,
                                                               const gchar         *name);
 
-GtkWidget          *panel_module_factory_get_plugin          (PanelModuleFactory  *factory,
-                                                              gint                 unique_id);
+GSList             *panel_module_factory_get_plugins         (PanelModuleFactory  *factory,
+                                                              const gchar         *plugin_name);
 
 GtkWidget          *panel_module_factory_new_plugin          (PanelModuleFactory  *factory,
                                                               const gchar         *name,

@@ -79,6 +79,9 @@ static void          xfce_panel_plugin_show_configure         (XfcePanelPluginPr
 static gboolean      xfce_panel_plugin_get_show_about         (XfcePanelPluginProvider      *provider);
 static void          xfce_panel_plugin_show_about             (XfcePanelPluginProvider      *provider);
 static void          xfce_panel_plugin_remove                 (XfcePanelPluginProvider      *provider);
+static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginProvider      *provider,
+                                                               const gchar                  *name,
+                                                               const GValue                 *value);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                      data,
                                                                GObject                      *where_the_object_was);
 
@@ -104,6 +107,7 @@ enum
   CONFIGURE_PLUGIN,
   FREE_DATA,
   ORIENTATION_CHANGED,
+  REMOTE_EVENT,
   REMOVED,
   SAVE,
   SIZE_CHANGED,
@@ -259,6 +263,29 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                   NULL, NULL,
                   g_cclosure_marshal_VOID__ENUM,
                   G_TYPE_NONE, 1, GTK_TYPE_ORIENTATION);
+
+  /**
+   * XfcePanelPlugin::remote-event
+   * @plugin : an #XfcePanelPlugin.
+   * @name   : name of the signal.
+   * @value  : value of the signal.
+   *
+   * This signal is emmitted by the user by running
+   * xfce4-panel --plugin-event=plugin-name:name:type:value. It can be
+   * used for remote communication, like for example to popup a menu.
+   *
+   * Returns: %TRUE to stop signal emission to other plugins, %FALSE
+   *          to send the signal also to other plugins with the same
+   *          name.
+   **/
+  plugin_signals[REMOTE_EVENT] =
+    g_signal_new (g_intern_static_string ("remote-event"),
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (XfcePanelPluginClass, remote_event),
+                  NULL, NULL,
+                  _libxfce4panel_marshal_BOOLEAN__STRING_BOXED,
+                  G_TYPE_BOOLEAN, 2, G_TYPE_STRING, G_TYPE_VALUE);
 
   /**
    * XfcePanelPlugin::removed
@@ -517,6 +544,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
   iface->get_show_about = xfce_panel_plugin_get_show_about;
   iface->show_about = xfce_panel_plugin_show_about;
   iface->remove = xfce_panel_plugin_remove;
+  iface->remote_event = xfce_panel_plugin_remote_event;
 }
 
 
@@ -1188,6 +1216,25 @@ xfce_panel_plugin_remove (XfcePanelPluginProvider *provider)
 
   /* emit removed signal */
   g_signal_emit (G_OBJECT (provider), plugin_signals[REMOVED], 0);
+}
+
+
+
+static gboolean
+xfce_panel_plugin_remote_event (XfcePanelPluginProvider *provider,
+                                const gchar             *name,
+                                const GValue            *value)
+{
+  gboolean stop_emission;
+
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (provider), TRUE);
+  panel_return_val_if_fail (name != NULL, TRUE);
+  panel_return_val_if_fail (G_IS_VALUE (value), TRUE);
+
+  g_signal_emit (G_OBJECT (provider), plugin_signals[REMOTE_EVENT], 0,
+                 name, value, &stop_emission);
+
+  return stop_emission;
 }
 
 

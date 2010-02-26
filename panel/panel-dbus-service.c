@@ -42,22 +42,27 @@
 
 
 
-static void      panel_dbus_service_finalize                   (GObject           *object);
-static gboolean  panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
-                                                                guint              active,
-                                                                GError           **error);
-static gboolean  panel_dbus_service_display_items_dialog       (PanelDBusService  *service,
-                                                                guint              active,
-                                                                GError           **error);
-static gboolean  panel_dbus_service_save                       (PanelDBusService  *service,
-                                                                GError           **error);
-static gboolean  panel_dbus_service_add_new_item               (PanelDBusService  *service,
+static void      panel_dbus_service_finalize                   (GObject            *object);
+static gboolean  panel_dbus_service_display_preferences_dialog (PanelDBusService   *service,
+                                                                guint               active,
+                                                                GError            **error);
+static gboolean  panel_dbus_service_display_items_dialog       (PanelDBusService   *service,
+                                                                guint               active,
+                                                                GError            **error);
+static gboolean  panel_dbus_service_save                       (PanelDBusService   *service,
+                                                                GError            **error);
+static gboolean  panel_dbus_service_add_new_item               (PanelDBusService   *service,
+                                                                const gchar        *plugin_name,
+                                                                gchar             **arguments,
+                                                                GError            **error);
+static gboolean  panel_dbus_service_plugin_event               (PanelDBusService  *service,
                                                                 const gchar       *plugin_name,
-                                                                gchar           **arguments,
-                                                                GError          **error);
-static gboolean  panel_dbus_service_terminate                  (PanelDBusService  *service,
-                                                                gboolean           restart,
+                                                                const gchar       *name,
+                                                                const GValue      *value,
                                                                 GError           **error);
+static gboolean  panel_dbus_service_terminate                  (PanelDBusService   *service,
+                                                                gboolean            restart,
+                                                                GError            **error);
 
 
 
@@ -236,6 +241,42 @@ panel_dbus_service_add_new_item (PanelDBusService  *service,
     panel_application_add_new_item (application, plugin_name, NULL);
 
   g_object_unref (G_OBJECT (application));
+
+  return TRUE;
+}
+
+
+
+static gboolean
+panel_dbus_service_plugin_event (PanelDBusService  *service,
+                                 const gchar       *plugin_name,
+                                 const gchar       *name,
+                                 const GValue      *value,
+                                 GError           **error)
+{
+  GSList             *plugins, *li;
+  PanelModuleFactory *factory;
+
+  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
+  panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+  panel_return_val_if_fail (plugin_name != NULL, FALSE);
+  panel_return_val_if_fail (name != NULL, FALSE);
+  panel_return_val_if_fail (G_IS_VALUE (value), FALSE);
+
+  factory = panel_module_factory_get ();
+
+  plugins = panel_module_factory_get_plugins (factory, plugin_name);
+
+  for (li = plugins; li != NULL; li = li->next)
+    {
+      panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (li->data), FALSE);
+      if (xfce_panel_plugin_provider_remote_event (li->data, name, value))
+        break;
+    }
+
+  g_slist_free (plugins);
+
+  g_object_unref (G_OBJECT (factory));
 
   return TRUE;
 }

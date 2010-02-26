@@ -254,6 +254,22 @@ panel_module_factory_remove_plugin (gpointer  user_data,
 
 
 
+static gboolean
+panel_module_factory_unique_id_exists (PanelModuleFactory *factory,
+                                       gint                unique_id)
+{
+  GSList *li;
+
+  for (li = factory->plugins; li != NULL; li = li->next)
+    if (xfce_panel_plugin_provider_get_unique_id (
+        XFCE_PANEL_PLUGIN_PROVIDER (li->data)) == unique_id)
+      return TRUE;
+
+  return FALSE;
+}
+
+
+
 PanelModuleFactory *
 panel_module_factory_get (void)
 {
@@ -318,20 +334,6 @@ panel_module_factory_emit_unique_changed (PanelModule *module)
 
 
 
-#if !GLIB_CHECK_VERSION (2,14,0)
-static void
-panel_module_factory_get_modules_foreach (gpointer key,
-                                          gpointer value,
-                                          gpointer user_data)
-{
-    GList **keys = user_data;
-
-    *keys = g_list_prepend (*keys, key);
-}
-#endif
-
-
-
 GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
@@ -344,16 +346,7 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
   g_hash_table_foreach_remove (factory->modules,
       panel_module_factory_modules_cleanup, factory);
 
-#if !GLIB_CHECK_VERSION (2,14,0)
-  GList *value = NULL;
-
-  g_hash_table_foreach (factory->modules,
-      panel_module_factory_get_modules_foreach, &value);
-
-  return value;
-#else
   return g_hash_table_get_values (factory->modules);
-#endif
 }
 
 
@@ -370,22 +363,38 @@ panel_module_factory_has_module (PanelModuleFactory *factory,
 
 
 
-GtkWidget *
-panel_module_factory_get_plugin (PanelModuleFactory *factory,
-                                 gint                unique_id)
+GSList *
+panel_module_factory_get_plugins (PanelModuleFactory *factory,
+                                  const gchar        *plugin_name)
 {
-  GSList *li;
+  GSList *li, *plugins = NULL;
+  gchar  *unique_name;
 
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
-  panel_return_val_if_fail (unique_id != -1, NULL);
+  panel_return_val_if_fail (plugin_name != NULL, NULL);
 
-  /* traverse the list to find the plugin with this unique id */
+  /* first assume a global plugin name is provided */
   for (li = factory->plugins; li != NULL; li = li->next)
-    if (xfce_panel_plugin_provider_get_unique_id (
-        XFCE_PANEL_PLUGIN_PROVIDER (li->data)) == unique_id)
-      return GTK_WIDGET (li->data);
+    {
+      panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (li->data), NULL);
+      if (strcmp (xfce_panel_plugin_provider_get_name (li->data), plugin_name) == 0)
+        plugins = g_slist_prepend (plugins, li->data);
+    }
 
-  return NULL;
+  /* try the unique plugin name (with id) if nothing is found */
+  for (li = factory->plugins; plugins == NULL && li != NULL; li = li->next)
+    {
+      panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (li->data), NULL);
+      unique_name = g_strdup_printf ("%s-%d", xfce_panel_plugin_provider_get_name (li->data),
+                                     xfce_panel_plugin_provider_get_unique_id (li->data));
+
+      if (strcmp (unique_name, plugin_name) == 0)
+        plugins = g_slist_prepend (plugins, li->data);
+
+      g_free (unique_name);
+    }
+
+  return plugins;
 }
 
 
@@ -418,7 +427,7 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
 
   /* make sure this plugin has a unique id */
   while (unique_id == -1
-         || panel_module_factory_get_plugin (factory, unique_id) != NULL)
+         || panel_module_factory_unique_id_exists (factory, unique_id))
     unique_id = ++unique_id_counter;
 
   /* set the return value with an always valid unique id */

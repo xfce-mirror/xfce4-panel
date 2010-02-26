@@ -59,6 +59,9 @@ struct _XfcePanelPluginClass
   void     (*about)                   (XfcePanelPlugin    *plugin);
   void     (*configure_plugin)        (XfcePanelPlugin    *plugin);
   void     (*removed)                 (XfcePanelPlugin    *plugin);
+  gboolean (*remote_event)            (XfcePanelPlugin    *plugin,
+                                       const gchar        *name,
+                                       const GValue       *value);
 
   /*< private >*/
   void (*reserved1) (void);

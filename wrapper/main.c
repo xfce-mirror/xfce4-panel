@@ -122,7 +122,7 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
     }
   else
     {
-      /* external event */
+      xfce_panel_plugin_provider_remote_event (provider, property, value);
     }
 }
 

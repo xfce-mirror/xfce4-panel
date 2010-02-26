@@ -56,6 +56,7 @@ static gchar     *opt_add = NULL;
 static gboolean   opt_restart = FALSE;
 static gboolean   opt_quit = FALSE;
 static gboolean   opt_version = FALSE;
+static gchar     *opt_plugin_event = NULL;
 static gchar    **opt_arguments = NULL;
 
 
@@ -71,13 +72,14 @@ static gboolean callback_handler (const gchar  *name,
 #define PANEL_CALLBACK_OPTION G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, callback_handler
 static GOptionEntry option_entries[] =
 {
-  { "preferences", 'p', PANEL_CALLBACK_OPTION, N_("Show the 'Panel Preferences' dialog"), N_("PANEL NUMBER") },
-  { "add-items", 'a', PANEL_CALLBACK_OPTION, N_("Show the 'Add New Items' dialog"), N_("PANEL NUMBER") },
+  { "preferences", 'p', PANEL_CALLBACK_OPTION, N_("Show the 'Panel Preferences' dialog"), N_("PANEL-NUMBER") },
+  { "add-items", 'a', PANEL_CALLBACK_OPTION, N_("Show the 'Add New Items' dialog"), N_("PANEL-NUMBER") },
   { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_("Save the panel configuration"), NULL },
-  { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_("Add a new plugin to the panel"), N_("PLUGIN NAME") },
+  { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_("Add a new plugin to the panel"), N_("PLUGIN-NAME") },
   { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_("Restart the running panel instance"), NULL },
   { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_("Quit the running panel instance"), NULL },
   { "version", 'V', 0, G_OPTION_ARG_NONE, &opt_version, N_("Print version information and exit"), NULL },
+  { "plugin-event", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_plugin_event, NULL, NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
   { NULL }
 };
@@ -192,7 +194,7 @@ main (gint argc, gchar **argv)
       result = panel_dbus_client_save (&error);
       goto dbus_return;
     }
-  else if (opt_add)
+  else if (opt_add != NULL)
     {
       /* stop any running startup notification */
       gdk_notify_startup_complete ();
@@ -205,6 +207,12 @@ main (gint argc, gchar **argv)
     {
       /* send a terminate signal to the running instance */
       result = panel_dbus_client_terminate (opt_restart, &error);
+      goto dbus_return;
+    }
+  else if (opt_plugin_event != NULL)
+    {
+      /* send the plugin event to the running instance */
+      result = panel_dbus_client_plugin_event (opt_plugin_event, &error);
       goto dbus_return;
     }
   else if (panel_dbus_client_check_instance_running ())

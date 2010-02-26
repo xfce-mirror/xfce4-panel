@@ -206,5 +206,17 @@ xfce_panel_plugin_provider_remove (XfcePanelPluginProvider *provider)
 
 
 
+gboolean
+xfce_panel_plugin_provider_remote_event (XfcePanelPluginProvider *provider,
+                                         const gchar             *name,
+                                         const GValue            *value)
+{
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), TRUE);
+
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->remote_event) (provider, name, value);
+}
+
+
+
 #define __XFCE_PANEL_PLUGIN_PROVIDER_C__
 #include <libxfce4panel/libxfce4panel-aliasdef.c>

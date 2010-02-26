@@ -101,6 +101,9 @@ static void         panel_plugin_external_show_configure        (XfcePanelPlugin
 static gboolean     panel_plugin_external_get_show_about        (XfcePanelPluginProvider         *provider);
 static void         panel_plugin_external_show_about            (XfcePanelPluginProvider         *provider);
 static void         panel_plugin_external_remove                (XfcePanelPluginProvider         *provider);
+static gboolean     panel_plugin_external_remote_event          (XfcePanelPluginProvider         *provider,
+                                                                 const gchar                     *name,
+                                                                 const GValue                    *value);
 static void         panel_plugin_external_set_sensitive         (PanelPluginExternal             *external);
 static void         panel_plugin_external_child_watch           (GPid                             pid,
                                                                  gint                             status,
@@ -279,6 +282,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
   iface->get_show_about = panel_plugin_external_get_show_about;
   iface->show_about = panel_plugin_external_show_about;
   iface->remove = panel_plugin_external_remove;
+  iface->remote_event = panel_plugin_external_remote_event;
 }
 
 
@@ -897,6 +901,24 @@ panel_plugin_external_remove (XfcePanelPluginProvider *provider)
   /* send signal to wrapper */
   panel_plugin_external_dbus_set_noop (PANEL_PLUGIN_EXTERNAL (provider),
                                        SIGNAL_REMOVE);
+}
+
+
+
+static gboolean
+panel_plugin_external_remote_event (XfcePanelPluginProvider *provider,
+                                    const gchar             *name,
+                                    const GValue            *value)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), TRUE);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), TRUE);
+
+  /* TODO handle the return value */
+
+  panel_plugin_external_dbus_set (PANEL_PLUGIN_EXTERNAL (provider),
+                                  name, value);
+
+  return TRUE;
 }
 
 

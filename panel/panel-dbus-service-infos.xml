@@ -53,6 +53,22 @@
       <arg name="plugin_name" direction="in" type="s" />
       <arg name="arguments" direction="in" type="as" />
     </method>
+    
+    <!--
+      PluginEvent (plugin-name : STRING, name : STRING, value : VARIANT)
+      
+      plugin-name : Name of the panel plugins to send this event to.
+      name        : Event signal name.
+      value       : GValue holding the event data.
+      
+      Send a plugin to a group of plugins using the remote-event
+      XfcePanelPlugin signal.
+    -->
+    <method name="PluginEvent">
+      <arg name="plugin_name" direction="in" type="s" />
+      <arg name="name" direction="in" type="s" />
+      <arg name="value" direction="in" type="v" />
+     </method>
 
     <!--
       Terminate (restart : BOOL) : VOID
