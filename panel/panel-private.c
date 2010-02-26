@@ -21,6 +21,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 
 
+
 #if !GTK_CHECK_VERSION (2,12,0)
 void
 _widget_set_tooltip_text (GtkWidget   *widget,

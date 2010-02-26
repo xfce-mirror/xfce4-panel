@@ -344,24 +344,17 @@ panel_dbus_service_set_plugin_property (const gchar  *plugin_id,
                                         const GValue *value)
 {
   PanelDBusService *service;
-  GValue            dummy_value = { 0, };
   
-  /* create dummy value */
-  if (value == NULL)
-    g_value_init (&dummy_value, G_TYPE_INT);
+  panel_return_if_fail (plugin_id && *plugin_id != '\0');
+  panel_return_if_fail (property && *property != '\0');
+  panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
   
   /* get the dbus service */
   service = panel_dbus_service_get ();
-  
-  g_message ("Set plugin '%s' property '%s'", plugin_id, property);
 
   /* emit the signal */
   g_signal_emit (G_OBJECT (service), dbus_service_signals[PROPERTY_CHANGED],
-                 0, plugin_id, property, value ? value : &dummy_value);
-
-  /* unset dummy value */
-  if (value == NULL)
-    g_value_unset (&dummy_value);
+                 0, plugin_id, property, value);
 
   /* release */
   g_object_unref (G_OBJECT (service));

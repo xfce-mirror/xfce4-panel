@@ -24,9 +24,6 @@
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
-#ifdef HAVE_TIME_H
-#include <time.h>
-#endif
 
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
@@ -220,20 +217,6 @@ panel_application_finalize (GObject *object)
   g_object_unref (G_OBJECT (application->factory));
 
   (*G_OBJECT_CLASS (panel_application_parent_class)->finalize) (object);
-}
-
-
-
-static const gchar *
-panel_application_get_unique_id (void)
-{
-  static gint  counter = 0;
-  static gchar id[30];
-
-  /* create a unique if of the current time and counter */
-  g_snprintf (id, sizeof (id), "%ld%d", time (NULL), counter++);
-
-  return id;
 }
 
 
@@ -626,10 +609,6 @@ panel_application_plugin_insert (PanelApplication  *application,
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
   panel_return_val_if_fail (name != NULL, FALSE);
-
-  /* create a new unique id if needed */
-  if (id == NULL)
-    id = panel_application_get_unique_id ();
 
   /* create a new panel plugin */
   provider = panel_module_factory_create_plugin (application->factory, screen, name, id, arguments);

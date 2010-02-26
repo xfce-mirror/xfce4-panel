@@ -25,6 +25,10 @@
 #include <string.h>
 #endif
 
+#ifdef HAVE_TIME_H
+#include <time.h>
+#endif
+
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -61,7 +65,7 @@ struct _PanelModuleFactory
 
   /* hash table of loaded modules */
   GHashTable *modules;
-  
+
   /* table table with created panel plugins */
   GHashTable *plugins;
 
@@ -327,6 +331,21 @@ panel_module_factory_get_modules_foreach (gpointer key,
 #endif
 
 
+
+static const gchar *
+panel_module_factory_get_unique_id (void)
+{
+  static gint  counter = 0;
+  static gchar id[30];
+
+  /* create a unique if of the current time and counter */
+  g_snprintf (id, sizeof (id), "%ld%d", time (NULL), counter++);
+
+  return id;
+}
+
+
+
 GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
@@ -367,7 +386,7 @@ panel_module_factory_get_plugin (PanelModuleFactory *factory,
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (id != NULL, NULL);
-  
+
   return g_hash_table_lookup (factory->plugins, id);
 }
 
@@ -386,7 +405,6 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
   panel_return_val_if_fail (name != NULL, NULL);
-  panel_return_val_if_fail (id != NULL, NULL);
 
   /* find the module in the hash table */
   module = g_hash_table_lookup (factory->modules, name);
@@ -397,6 +415,10 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
 
       return NULL;
     }
+
+  /* make sure this plugin has a unique id */
+  while (id == NULL || g_hash_table_lookup (factory->plugins, id) != NULL)
+    id = panel_module_factory_get_unique_id ();
 
   /* create the new module */
   provider = panel_module_create_plugin (module, screen, name, id, arguments);

@@ -76,15 +76,14 @@ dbus_proxy_provider_property_changed (DBusGProxy              *dbus_proxy,
   WrapperPlug *plug;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+  panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
 
   /* check if the signal is for this panel */
-  if (strcmp (plugin_id, xfce_panel_plugin_provider_get_id (provider)) != 0)
+  if (!plugin_id || strcmp (plugin_id, xfce_panel_plugin_provider_get_id (provider)) != 0)
     return;
 
-  g_message ("Wrapper %s received property %s", plugin_id, property);
-
   /* handle the property */
-  if (G_UNLIKELY (property == NULL))
+  if (G_UNLIKELY (property == NULL || *property == '\0'))
     g_message ("External plugin '%s' received null property", plugin_id);
   else if (strcmp (property, "Size") == 0)
     xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
@@ -216,7 +215,6 @@ main (gint argc, gchar **argv)
   DBusGConnection         *dbus_connection;
   DBusGProxy              *dbus_proxy;
   WrapperPlug             *plug;
-  GValue                   value = { 0, };
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -337,7 +335,6 @@ main (gint argc, gchar **argv)
 
       /* create the wrapper plug (a gtk plug with transparency capabilities) */
       plug = wrapper_plug_new (opt_socket_id);
-      gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
       g_object_set_qdata (G_OBJECT (provider), plug_quark, plug);
 
       /* connect provider signals */
@@ -351,23 +348,12 @@ main (gint argc, gchar **argv)
       dbus_g_proxy_connect_signal (dbus_proxy, "PropertyChanged", G_CALLBACK (dbus_proxy_provider_property_changed), provider, NULL);
 
       /* show the plugin */
+      gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
       gtk_widget_show (GTK_WIDGET (plug));
       gtk_widget_show (GTK_WIDGET (provider));
 
-      /* register the plugin */
-      g_value_init (&value, G_TYPE_STRING);
-      g_value_set_static_string (&value, opt_id);
-      wrapper_dbus_client_set_property (dbus_proxy, "XfcePanel", "RegisterPlugin", &value, NULL);
-      g_value_unset (&value);
-
       /* enter the main loop */
       gtk_main ();
-
-      /* unregister the plugin */
-      g_value_init (&value, G_TYPE_STRING);
-      g_value_set_static_string (&value, opt_id);
-      wrapper_dbus_client_set_property (dbus_proxy, "XfcePanel", "UnregisterPlugin", &value, NULL);
-      g_value_unset (&value);
 
       /* destroy the plug and provider */
       gtk_widget_destroy (GTK_WIDGET (plug));
