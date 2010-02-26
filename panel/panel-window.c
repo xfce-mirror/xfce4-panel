@@ -708,7 +708,6 @@ panel_window_motion_notify (GtkWidget      *widget,
 {
   PanelWindow         *window = PANEL_WINDOW (widget);
   gint                 clamp_x, clamp_y;
-  GdkScreen           *screen;
   gint                 window_width, window_height;
   gint                 window_x, window_y;
   GdkRectangle         area;
@@ -719,11 +718,9 @@ panel_window_motion_notify (GtkWidget      *widget,
 
   if (window->drag_motion)
     {
-      /* get the pointer position and current screen */
-      gdk_display_get_pointer (gtk_widget_get_display (widget), &screen, &window_x, &window_y, NULL);
-
-      /* make sure the window is on the correct screen */
-      gtk_window_set_screen (GTK_WINDOW (widget), screen);
+      /* get the pointer position */
+      window_x = event->x_root;
+      window_y = event->y_root;
 
       /* get the maximum panel area on this coordinate */
       panel_window_working_area (window, window_x, window_y, &area);
