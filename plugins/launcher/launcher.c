@@ -198,9 +198,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->arrow = xfce_arrow_button_new (GTK_ARROW_UP);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->arrow, FALSE, FALSE, 0);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->arrow);
-  GTK_WIDGET_UNSET_FLAGS (plugin->arrow, GTK_CAN_DEFAULT | GTK_CAN_FOCUS);
   gtk_button_set_relief (GTK_BUTTON (plugin->arrow), GTK_RELIEF_NONE);
-  gtk_button_set_focus_on_click (GTK_BUTTON (plugin->arrow), FALSE);
 
   /* sync button states */
   g_signal_connect (G_OBJECT (plugin->button), "state-changed",
