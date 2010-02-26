@@ -39,6 +39,7 @@
 #include "launcher-dialog.h"
 
 #define ARROW_BUTTON_SIZE              (12)
+#define TOOLTIP_ICON_SIZE              (32)
 #define MENU_POPUP_DELAY               (225)
 #define NO_ARROW_INSIDE_BUTTON(plugin) ((plugin)->arrow_position != LAUNCHER_ARROW_INTERNAL \
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
@@ -170,10 +171,6 @@ static void       launcher_plugin_uri_list_free                 (GSList         
 
 
 
-static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
-
-
-
 struct _LauncherPluginClass
 {
   XfcePanelPluginClass __parent__;
@@ -192,6 +189,8 @@ struct _LauncherPlugin
   GSList            *items;
 
   GdkPixbuf         *tooltip_cache;
+
+  gulong             theme_change_id;
 
   guint              menu_timeout_id;
 
@@ -227,8 +226,10 @@ XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (LauncherPlugin, launcher_plugin)
 
 
 /* quark to attach the plugin to menu items */
-GQuark       launcher_plugin_quark = 0;
-static guint launcher_signals[LAST_SIGNAL];
+static GQuark      launcher_plugin_quark = 0;
+static guint       launcher_signals[LAST_SIGNAL];
+static GtkIconSize launcher_menu_icon_size = GTK_ICON_SIZE_INVALID;
+static GtkIconSize launcher_tooltip_icon_size = GTK_ICON_SIZE_INVALID;
 
 
 
@@ -312,9 +313,15 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
   /* initialize the quark */
   launcher_plugin_quark = g_quark_from_static_string ("xfce-launcher-plugin");
 
-  menu_icon_size = gtk_icon_size_from_name ("panel-launcher-menu");
-  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
-    menu_icon_size = gtk_icon_size_register ("panel-launcher-menu", 32, 32);
+  launcher_menu_icon_size = gtk_icon_size_from_name ("panel-launcher-menu");
+  if (launcher_menu_icon_size == GTK_ICON_SIZE_INVALID)
+    launcher_menu_icon_size = gtk_icon_size_register ("panel-launcher-menu", 32, 32);
+
+  launcher_tooltip_icon_size = gtk_icon_size_from_name ("panel-launcher-tooltip");
+  if (launcher_tooltip_icon_size == GTK_ICON_SIZE_INVALID)
+    launcher_tooltip_icon_size = gtk_icon_size_register ("panel-launcher-tooltip",
+                                                         TOOLTIP_ICON_SIZE,
+                                                         TOOLTIP_ICON_SIZE);
 }
 
 
@@ -336,9 +343,8 @@ launcher_plugin_init (LauncherPlugin *plugin)
 
   /* monitor the default icon theme for changes */
   icon_theme = gtk_icon_theme_get_default ();
-  if (G_LIKELY (icon_theme != NULL))
-    g_signal_connect (G_OBJECT (icon_theme), "changed",
-        G_CALLBACK (launcher_plugin_icon_theme_changed), plugin);
+  plugin->theme_change_id = g_signal_connect (G_OBJECT (icon_theme), "changed",
+      G_CALLBACK (launcher_plugin_icon_theme_changed), plugin);
 
   /* create the panel widgets */
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
@@ -991,6 +997,7 @@ static void
 launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
+  GtkIconTheme   *icon_theme;
 
   /* stop monitoring */
   if (plugin->config_monitor != NULL)
@@ -1007,6 +1014,13 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   /* free items */
   launcher_plugin_items_free (plugin->items);
+
+  /* stop watching the icon theme */
+  if (plugin->theme_change_id != 0)
+    {
+      icon_theme = gtk_icon_theme_get_default ();
+      g_signal_handler_disconnect (G_OBJECT (icon_theme), plugin->theme_change_id);
+    }
 
   /* release the cached tooltip */
   if (plugin->tooltip_cache != NULL)
@@ -1216,11 +1230,12 @@ launcher_plugin_icon_theme_changed (GtkIconTheme   *icon_theme,
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_ICON_THEME (icon_theme));
 
-  /* update the button icon */
-  launcher_plugin_button_update (plugin);
-
-  /* destroy the menu */
-  launcher_plugin_menu_destroy (plugin);
+  /* invalid the icon cache */
+  if (plugin->tooltip_cache != NULL)
+    {
+      g_object_unref (G_OBJECT (plugin->tooltip_cache));
+      plugin->tooltip_cache = NULL;
+    }
 }
 
 
@@ -1267,22 +1282,28 @@ launcher_plugin_tooltip_pixbuf (GdkScreen   *screen,
                                 const gchar *icon_name)
 {
   GtkIconTheme *theme;
+  gint          w, h, size;
 
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
 
   if (exo_str_is_empty (icon_name))
     return NULL;
 
+  if (gtk_icon_size_lookup (launcher_tooltip_icon_size, &w, &h))
+    size = MIN (w, h);
+  else
+    size = TOOLTIP_ICON_SIZE;
+
   /* load directly from a file */
   if (G_UNLIKELY (g_path_is_absolute (icon_name)))
-    return exo_gdk_pixbuf_new_from_file_at_max_size (icon_name, 32, 32, TRUE, NULL);
+    return exo_gdk_pixbuf_new_from_file_at_max_size (icon_name, size, size, TRUE, NULL);
 
   if (G_LIKELY (screen != NULL))
     theme = gtk_icon_theme_get_for_screen (screen);
   else
     theme = gtk_icon_theme_get_default ();
 
-  return gtk_icon_theme_load_icon (theme, icon_name, 32, 0, NULL);
+  return gtk_icon_theme_load_icon (theme, icon_name, size, 0, NULL);
 }
 
 
@@ -1451,7 +1472,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       icon_name = garcon_menu_item_get_icon_name (item);
       if (!exo_str_is_empty (icon_name))
         {
-          image = gtk_image_new_from_icon_name (icon_name, menu_icon_size);
+          image = gtk_image_new_from_icon_name (icon_name, launcher_menu_icon_size);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
           gtk_widget_show (image);
         }
