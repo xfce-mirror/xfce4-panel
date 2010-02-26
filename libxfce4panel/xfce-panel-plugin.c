@@ -651,11 +651,24 @@ xfce_panel_plugin_set_property (GObject      *object,
                                 GParamSpec   *pspec)
 {
   XfcePanelPluginPrivate *private = XFCE_PANEL_PLUGIN (object)->priv;
+  gchar                  *name;
 
   switch (prop_id)
     {
     case PROP_NAME:
-      private->name = g_value_dup_string (value);
+    case PROP_UNIQUE_ID:
+      if (prop_id == PROP_NAME)
+        private->name = g_value_dup_string (value);
+      else
+        private->unique_id = g_value_get_int (value);
+
+      if (private->unique_id != -1 && private->name != NULL)
+        {
+          /* give the widget a unique name for theming */
+          name = g_strdup_printf ("%s-%d", private->name, private->unique_id);
+          gtk_widget_set_name (GTK_WIDGET (object), name);
+          g_free (name);
+        }
       break;
 
     case PROP_DISPLAY_NAME:
@@ -664,10 +677,6 @@ xfce_panel_plugin_set_property (GObject      *object,
 
     case PROP_COMMENT:
       private->comment = g_value_dup_string (value);
-      break;
-
-    case PROP_UNIQUE_ID:
-      private->unique_id = g_value_get_int (value);
       break;
 
     case PROP_ARGUMENTS:
