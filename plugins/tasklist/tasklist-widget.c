@@ -1768,8 +1768,9 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
                                     WnckWindowState    new_state,
                                     XfceTasklistChild *child)
 {
-  gboolean    blink;
-  WnckScreen *screen;
+  gboolean      blink;
+  WnckScreen   *screen;
+  XfceTasklist *tasklist;
 
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (child->window == window);
@@ -1779,8 +1780,13 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
   if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_SKIP_TASKLIST))
     {
       screen = wnck_window_get_screen (window);
+      tasklist = child->tasklist;
+
+      /* remove button from tasklist */
       xfce_tasklist_window_removed (screen, window, child->tasklist);
-      xfce_tasklist_window_added (screen, window, child->tasklist);
+
+      /* add the window to the skipped_windows list */
+      xfce_tasklist_window_added (screen, window, tasklist);
 
       return;
     }
