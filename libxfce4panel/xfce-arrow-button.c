@@ -35,6 +35,22 @@
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/libxfce4panel-alias.h>
 
+
+
+/**
+ * SECTION: xfce-arrow-button
+ * @title: XfceArrowButton
+ * @short_description: Toggle button with arrow
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * Toggle button with (optional) arrow. The arrow direction will be
+ * inverted when the button is toggled.
+ * It is also possible to make the button blink and pack additional
+ * widgets in the button, using gtk_container_add().
+ **/
+
+
+
 #define XFCE_ARROW_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
                                             XFCE_TYPE_ARROW_BUTTON, \
                                             XfceArrowButtonPrivate))
@@ -475,7 +491,8 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
  * xfce_arrow_button_get_blinking:
  * @button : a #XfceArrowButton
  *
- * Whether the button is blinking.
+ * Whether the button is blinking. If the blink timeout is finished
+ * and the button is still highlighted, this functions returns %FALSE.
  *
  * Returns: %TRUE when @button is blinking.
  *

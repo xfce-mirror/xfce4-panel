@@ -44,6 +44,11 @@ typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 #define XFCE_IS_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PANEL_PLUGIN))
 #define XFCE_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginClass))
 
+/**
+ * XfcePanelPluginClass:
+ *
+ * TODO
+ **/
 struct _XfcePanelPluginClass
 {
   /*< private >*/
@@ -75,6 +80,12 @@ struct _XfcePanelPluginClass
   void (*reserved4) (void);
 };
 
+
+/**
+ * XfcePanelPlugin:
+ *
+ * TODO
+ **/
 struct _XfcePanelPlugin
 {
   /*< private >*/

@@ -26,6 +26,18 @@
 
 
 /**
+ * SECTION: libxfce4panel-config
+ * @title: Version Information
+ * @short_description: Information about the panel version in use.
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * The panel library provides version information, which could be used
+ * by plugins to handle new API.
+ **/
+
+
+
+/**
  * libxfce4panel_major_version:
  *
  * The major version number of the libxfce4panel library (e.g. in
@@ -112,7 +124,8 @@ libxfce4panel_check_version (guint required_major,
     return "Xfce Panel version too new (major mismatch)";
   if (required_minor > LIBXFCE4PANEL_MINOR_VERSION)
     return "Xfce Panel version too old (minor mismatch)";
-  if (required_minor == LIBXFCE4PANEL_MINOR_VERSION && required_micro > LIBXFCE4PANEL_MICRO_VERSION)
+  if (required_minor == LIBXFCE4PANEL_MINOR_VERSION
+      && required_micro > LIBXFCE4PANEL_MICRO_VERSION)
     return "Xfce Panel version too old (micro mismatch)";
   return NULL;
 }

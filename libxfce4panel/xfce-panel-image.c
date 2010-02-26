@@ -32,6 +32,22 @@
 #include <libxfce4panel/libxfce4panel-alias.h>
 
 
+
+/**
+ * SECTION: xfce-panel-image
+ * @title: XfcePanelImage
+ * @short_description: Scalable image suitable for panel plugins
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * The #XfcePanelImage is a widgets suitable for for example panel
+ * buttons where the developer does not exacly know the size of the
+ * image (due to theming and user setting).
+ *
+ * The #XfcePanelImage is a widget that will not
+ **/
+
+
+
 /* design limit for the panel, to reduce the uncached pixbuf size */
 #define MAX_PIXBUF_SIZE (128)
 

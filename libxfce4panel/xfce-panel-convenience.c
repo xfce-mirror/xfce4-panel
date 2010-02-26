@@ -1,4 +1,3 @@
-/* $Id */
 /*
  * Copyright (C) 2006-2007 Jasper Huijsmans <jasper@xfce.org>
  * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
@@ -28,6 +27,20 @@
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/libxfce4panel-alias.h>
+
+
+
+/**
+ * SECTION: xfce-panel-convenience
+ * @title: Convenience Functions
+ * @short_description: Special purpose widgets and utilities
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * This section describes a number of functions that were created
+ * to help developers of Xfce Panel plugins.
+ **/
+
+
 
 /**
  * xfce_panel_create_button:

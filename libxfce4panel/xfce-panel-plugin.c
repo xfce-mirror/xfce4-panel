@@ -31,6 +31,20 @@
 #include <libxfce4panel/libxfce4panel-marshal.h>
 #include <libxfce4panel/libxfce4panel-alias.h>
 
+
+
+/**
+ * SECTION: xfce-panel-plugin
+ * @title: XfcePanelPlugin
+ * @short_description: Interface for panel plugins
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * The interface plugin developers used to interact with the plugin and
+ * the panel.
+ **/
+
+
+
 #define XFCE_PANEL_PLUGIN_CONSTRUCTED(plugin) \
   PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (plugin)->priv->flags, \
                   PLUGIN_FLAG_CONSTRUCTED)
@@ -302,7 +316,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * returned by xfce_panel_plugin_save_location(), the panel will take
    * care of removing those settings.
    *
-   * Since: 4.8
+   * Since: 4.8.0
    **/
   plugin_signals[REMOVED] =
     g_signal_new (g_intern_static_string ("removed"),
@@ -380,8 +394,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    *
    * The internal, unstranslated, name of the #XfcePanelPlugin. Plugin
    * writer can use it to read the plugin name, but
-   * xfce_panel_plugin_get_name() is recommended since that
-   * returns a const string.
+   * xfce_panel_plugin_get_name() is recommended since that returns
+   * a const string.
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_NAME,
@@ -1300,6 +1314,9 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_display_name:
  * @plugin : an #XfcePanelPlugin.
  *
+ * This returns the translated name of the plugin set in the .desktop
+ * file of the plugin.
+ *
  * Returns: the (translated) display name of the plugin.
  **/
 const gchar *
@@ -1320,7 +1337,8 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_comment:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * This returns the translated comment of the plugin set in
+ * the .desktop file of the plugin.
  *
  * Returns: the (translated) comment of the plugin.
  **/
@@ -1339,7 +1357,9 @@ xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_unique_id:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * The internal unique id of the plugin. Each plugin in the panel has
+ * a unique number that is for example used for the config file name
+ * or property base in the xfconf channel.
  *
  * Returns: the unique id of the plugin.
  *
@@ -1360,7 +1380,8 @@ xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_property_base:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * The property base for this plugin in the xfce4-panel XfconfChannel,
+ * this name is something like /plugins/plugin-1.
  *
  * Returns: the property base for the xfconf channel userd by a plugin.
  *
@@ -1385,9 +1406,15 @@ xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_get_arguments:
- * @plugin    : an #XfcePanelPlugin.
+ * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Argument vector passed to the plugin when it was added. Most of the
+ * time the return value will be %NULL, but if could for example contain
+ * a list of filenames when the user added the plugin with
+ *
+ * xfce4-panel --add=launcher *.desktop
+ *
+ * see the code of the launcher plugin how to use this.
  *
  * Returns: the argument vector. The vector is owned by the plugin and
  *          should not be freed.
@@ -1409,7 +1436,7 @@ xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_size:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * The size of the panel in which the plugin is embedded.
  *
  * Returns: the current size of the panel.
  **/
@@ -1429,7 +1456,8 @@ xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_expand:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Whether the plugin is expanded or not. This set by the plugin using
+ * xfce_panel_plugin_set_expand().
  *
  * Returns: %TRUE when the plugin should expand,
  *          %FALSE otherwise.
@@ -1448,9 +1476,9 @@ xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_set_expand:
  * @plugin : an #XfcePanelPlugin.
- * @expand : TODO.
+ * @expand : whether to expand the plugin.
  *
- * TODO
+ * Wether the plugin should expand of not
  **/
 void
 xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
@@ -1484,7 +1512,7 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_get_orientation:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * The orientation of the panel in which the plugin is embedded.
  *
  * Returns: the current #GtkOrientation of the panel.
  **/
@@ -1503,7 +1531,7 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_get_screen_position:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * The screen position of the panel in which the plugin is embedded.
  *
  * Returns: the current #XfceScreenPosition of the panel.
  **/
@@ -1523,7 +1551,9 @@ xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
  * @plugin : an #XfcePanelPlugin.
  * @window : a #GtkWindow.
  *
- * TODO
+ * Connect a dialog to the plugin. When the panel is closed or the
+ * plugin is removed from the panel, the window will be closed by
+ * the panel.
  *
  * Since: 4.8.0
  **/
@@ -1546,9 +1576,12 @@ xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
 /**
  * xfce_panel_plugin_add_action_widget:
  * @plugin : an #XfcePanelPlugin.
- * @widget : a #GtkWidget.
+ * @widget : a #GtkWidget that receives mouse events.
  *
- * TODO
+ * Attach the plugin menu to this widget. Plugin writers should call this
+ * for every widget that can receive mouse events. If you forget to call this
+ * the plugin will not have a right-click menu and the user won't be able to
+ * remove it.
  **/
 void
 xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
@@ -1569,7 +1602,8 @@ xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
  * @plugin : an #XfcePanelPlugin.
  * @item   : a #GtkMenuItem.
  *
- * TODO
+ * Insert a custom menu item to the plugin's right click menu. This item
+ * is packed below the "Move" menu item.
  **/
 void
 xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
@@ -1593,7 +1627,8 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_menu_show_configure:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Show the "Properties" item in the menu. Clicking on the menu item
+ * will emit the "configure-plugin" signal.
  **/
 void
 xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
@@ -1628,7 +1663,8 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_menu_show_about:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Show the "About" item in the menu. Clicking on the menu item
+ * will emit the "about" signal.
  **/
 void
 xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
@@ -1661,9 +1697,10 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_block_menu:
- * plugin : an #XfcePanelPlugin.
+ * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Block configuring the plugin. This will make the "Properties" menu
+ * item insensitive.
  **/
 void
 xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
@@ -1678,9 +1715,10 @@ xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_unblock_menu:
- * plugin : an #XfcePanelPlugin.
+ * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Unblock configuring the plugin. This will make the "Properties" menu
+ * item sensitive.
  **/
 void
 xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
@@ -1698,9 +1736,18 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_register_menu:
  * @plugin : an #XfcePanelPlugin.
- * @menu   : a #GtkMenu.
+ * @menu   : a #GtkMenu that will be opened
  *
- * TODO
+ * Register a menu tha is about to popup. This will make sure the panel
+ * will properly handle its autohide behaviour. You have to call this
+ * function every time the menu is opened (e.g. using gtk_popup_menu()).
+ *
+ * If you want to open the menu aligned to the side of the panel (and the
+ * plugin), you should use xfce_panel_plugin_position_menu() as
+ * #GtkMenuPositionFunc. This callback function will take care of calling
+ * xfce_panel_plugin_register_menu() as well.
+ *
+ * See also: xfce_panel_plugin_position_menu().
  **/
 void
 xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
@@ -1729,11 +1776,10 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_arrow_type:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Determine the #GtkArrowType for a widget that opens a menu and uses
+ * xfce_panel_plugin_position_menu() to position the menu.
  *
  * Returns: the #GtkArrowType to use.
- *
- * Since: 4.6.0
  **/
 GtkArrowType
 xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
@@ -1787,9 +1833,15 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * @x             : return location for the x coordinate.
  * @y             : return location for the x coordinate.
  *
- * TODO
+ * The menu widget is positioned relative to @attach_widget.
+ * If @attach_widget is NULL, the menu widget is instead positioned
+ * relative to @panel_plugin.
  *
- * Since: 4.6.0
+ * This function is intended for custom menu widgets.
+ * For a regular #GtkMenu you should use xfce_panel_plugin_position_menu()
+ * instead (as callback argument to gtk_menu_popup()).
+ *
+ * See also: xfce_panel_plugin_position_menu().
  **/
 void
 xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
@@ -1881,9 +1933,32 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
  * @push_in      : keep inside the screen (see #GtkMenuPositionFunc)
  * @panel_plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * Function to be used as #GtkMenuPositionFunc in a call to gtk_menu_popup().
+ * As data argument it needs an #XfcePanelPlugin.
  *
- * Since: 4.6.0
+ * The menu is normally positioned relative to @panel_plugin. If you want the
+ * menu to be positioned relative to another widget, you can use
+ * gtk_menu_attach_to_widget() to explicitly set a 'parent' widget.
+ *
+ * As a convenience, xfce_panel_plugin_position_menu() calls
+ * xfce_panel_plugin_register_menu() for the menu.
+ *
+ * <example>
+ * void
+ * myplugin_popup_menu (XfcePanelPlugin *plugin,
+ *                      GtkMenu         *menu,
+ *                      GdkEventButton  *ev)
+ * {
+ *     gtk_menu_popup (menu, NULL, NULL,
+ *                     xfce_panel_plugin_position_menu, plugin,
+ *                     ev->button, ev->time );
+ * }
+ * </example>
+ *
+ * For a custom widget that will be used as a popup menu, use
+ * xfce_panel_plugin_position_widget() instead.
+ *
+ * See also: gtk_menu_popup().
  **/
 void
 xfce_panel_plugin_position_menu (GtkMenu  *menu,
@@ -1919,9 +1994,8 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
  * @plugin : an #XfcePanelPlugin.
  * @widget : a #GtkWidget inside the plugins that should be focussed.
  *
- * TODO
- *
- * Since: 4.6.0
+ * Grab the focus on @widget. Asks the panel to allow focus on its items
+ * and set the focus to the requested widget.
  **/
 void
 xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
@@ -1947,8 +2021,6 @@ xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
  * @blocked : TODO
  *
  * TODO
- *
- * Since: 4.6.0
  **/
 void
 xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,

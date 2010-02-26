@@ -29,24 +29,118 @@
 
 G_BEGIN_DECLS
 
+
+
+/**
+ * SECTION: xfce-panel-macros
+ * @title: Panel Plugin Macros
+ * @short_description: Various macros for registering panel plugin.
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * Convenient macros to register #XfcePanelPlugin. This can be done
+ * by using a construct function or registering a new GObject with
+ * #XFCE_TYPE_PANEL_PLUGIN is parent type.
+ **/
+
+
+
+/**
+ * XfcePanelTypeModule:
+ *
+ * TODO
+ *
+ * Since: 4.8.0
+ **/
 typedef GTypeModule XfcePanelTypeModule;
 
-/* xfconf channel for plugins */
+
+
+/**
+ * XFCE_PANEL_PLUGIN_CHANNEL_NAME:
+ *
+ * Macro for the name of the Xfconf channel used by the panel.
+ *
+ * See also: xfce_panel_plugin_xfconf_channel_new,
+ *           xfce_panel_plugin_get_property_base
+ *
+ * Since: 4.8.0
+ **/
 #define XFCE_PANEL_PLUGIN_CHANNEL_NAME ("xfce4-panel")
 
-/* macro for opening an XfconfChannel for plugins */
+
+
+/**
+ * xfce_panel_plugin_xfconf_channel_new:
+ * @plugin : An #XfcePanelPlugin.
+ *
+ * Convienient function for opening an XfconfChannel for a plugin. The
+ * channel's property base will be propery returned from
+ * xfce_panel_plugin_get_property_base().
+ *
+ * See also: xfce_panel_plugin_get_property_base,
+ *           XFCE_PANEL_PLUGIN_CHANNEL_NAME
+ *
+ * Since: 4.8.0
+ **/
 #define xfce_panel_plugin_xfconf_channel_new(plugin) \
   xfconf_channel_new_with_property_base (XFCE_PANEL_PLUGIN_CHANNEL_NAME, \
     xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)))
 
-/* register a resident panel plugin */
-#define XFCE_PANEL_DEFINE_PLUGIN_RESIDENT(TypeName, type_name, args...) \
-  _XPP_DEFINE_PLUGIN (TypeName, type_name, TRUE, args)
 
-/* register a panel plugin that can unload the module */
+
+/**
+ * XFCE_PANEL_DEFINE_PLUGIN:
+ * @TypeName  : The name of the new type, in Camel case.
+ * @type_name : The name of the new type, in lowercase, with words separated by '_'.
+ * @args...   : Optional list of *_register_type() function from other
+ *              objects in the plugin created with #XFCE_PANEL_DEFINE_TYPE.
+ *
+ * Define a new (resident) GObject panel plugin, the parent type of the object
+ * should be XFCE_TYPE_PANEL_PLUGIN.
+ *
+ * Since: 4.8.0
+ **/
 #define XFCE_PANEL_DEFINE_PLUGIN(TypeName, type_name, args...) \
   _XPP_DEFINE_PLUGIN (TypeName, type_name, FALSE, args)
 
+
+
+/**
+ * XFCE_PANEL_DEFINE_PLUGIN_RESIDENT:
+ * @TypeName  : The name of the new type, in Camel case.
+ * @type_name : The name of the new type, in lowercase, with words separated by '_'.
+ * @args...   : Optional list of *_register_type() function from other
+ *              objects in the plugin created with #XFCE_PANEL_DEFINE_TYPE.
+ *
+ * Same as #XFCE_PANEL_DEFINE_PLUGIN, but if you use special libraries or objects,
+ * it is possible the plugin will give problems when unloading the library,
+ * a resident plugin will never be unloaded after the first load, avoiding
+ * those issues.
+ *
+ * Since: 4.8.0
+ **/
+#define XFCE_PANEL_DEFINE_PLUGIN_RESIDENT(TypeName, type_name, args...) \
+  _XPP_DEFINE_PLUGIN (TypeName, type_name, TRUE, args)
+
+
+
+/**
+ * XFCE_PANEL_DEFINE_TYPE:
+ * @TypeName    : The name of the new type, in Camel case.
+ * @type_name   : The name of the new type, in lowercase, with words separated by '_'.
+ * @TYPE_PARENT : The GType of the parent type.
+ *
+ * A convenient macro of #G_DEFINE_DYNAMIC_TYPE for panel plugins. Only
+ * difference with #G_DEFINE_DYNAMIC_TYPE is that the type name send to
+ * g_type_module_register_type() is prefixed with "Xfce". This allows you
+ * use use shorted structure names in the code, while the real name of the
+ * object is a full "Xfce" name.
+ *
+ * The _register_type function should be added to the args in
+ * #XFCE_PANEL_DEFINE_PLUGIN.
+ *
+ * Since: 4.8.0
+ **/
 #define XFCE_PANEL_DEFINE_TYPE(TypeName, type_name, TYPE_PARENT) \
   static gpointer type_name##_parent_class = NULL; \
   static GType    type_name##_type = 0; \
@@ -90,6 +184,9 @@ typedef GTypeModule XfcePanelTypeModule;
     type_name##_type = plugin_define_type_id; \
   }
 
+
+
+/* <private> */
 #define _XPP_DEFINE_PLUGIN(TypeName, type_name, resident, args...) \
   GType xfce_panel_module_init (GTypeModule *type_module, gboolean *make_resident); \
   \
@@ -114,28 +211,38 @@ typedef GTypeModule XfcePanelTypeModule;
     return type_name##_get_type (); \
   }
 
+
+
 /**
  * XFCE_PANEL_PLUGIN_REGISTER:
- * construct_func : name of the function that points to an
- *                  #XfcePanelPluginFunc function.
+ * @construct_func : name of the function that points to an
+ *                   #XfcePanelPluginFunc function.
  *
- * TODO
+ * Register a panel plugin using a construct function. This is the
+ * simplest way to register a panel plugin.
+ * The @construct_func is called everytime a plugin is created.
  *
- * Since: 4.8
+ * Since: 4.8.0
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER(construct_func) \
   XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, /* foo */, /* foo */)
 
+
+
 /**
  * XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK:
- * construct_func : name of the function that points to an
- *                  #XfcePanelPluginFunc function.
- * check_func     : name of the function that points to an
- *                  #XfcePanelPluginCheck function.
+ * @construct_func : name of the function that points to an
+ *                   #XfcePanelPluginFunc function.
+ * @check_func     : name of the function that points to an
+ *                   #XfcePanelPluginCheck function.
  *
- * TODO
+ * Register a panel plugin using a construct function. The @check_func
+ * will be called before the plugin is created. If this function returns
+ * %FALSE, the plugin won't be added to the panel. For proper feedback,
+ * you are responsible for showing a dialog why the plugin is not added
+ * to the panel.
  *
- * Since: 4.8
+ * Since: 4.8.0
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK(construct_func, check_func) \
   XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, /* foo */, \
@@ -143,16 +250,23 @@ typedef GTypeModule XfcePanelTypeModule;
 
 /**
  * XFCE_PANEL_PLUGIN_REGISTER_FULL:
- * construct_func : name of the function that points to an
- *                  #XfcePanelPluginFunc function.
- * preinit_func   : name of the function that points to an
- *                  #XfcePanelPluginPreInit function.
- * check_func     : name of the function that points to an
- *                  #XfcePanelPluginCheck function.
+ * @construct_func : name of the function that points to an
+ *                   #XfcePanelPluginFunc function.
+ * @preinit_func   : name of the function that points to an
+ *                   #XfcePanelPluginPreInit function.
+ * @check_func     : name of the function that points to an
+ *                   #XfcePanelPluginCheck function.
  *
- * TODO
+ * Same as #XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK, but with a preinit
+ * function. This function is called before all the other functions and
+ * also before gtk_init(), so you can use this to enable threads or
+ * initialize other libraries/functions.
  *
- * Since: 4.8
+ * Downside of this that the plugin cannot run internal. Even if you set
+ * X-XFCE-Interal=TRUE in the desktop file, the panel will force the
+ * plugin to run inside a wrapper.
+ *
+ * Since: 4.8.0
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_FULL(construct_func, preinit_func, check_func) \
   XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, \
@@ -166,6 +280,8 @@ typedef GTypeModule XfcePanelTypeModule;
     }, \
     \
     if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
+
+
 
 /* <private> */
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTENDED(construct_func, PREINIT_CODE, CHECK_CODE) \

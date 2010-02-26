@@ -33,6 +33,24 @@
 
 
 
+/**
+ * SECTION: xfce-hvbox
+ * @title: XfceHVBox
+ * @short_description: Container widget with configurable orienation
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * #XfceHVBox is a #GtkBox widget that allows the user to change
+ * its orientation. It is in fact a combination of #GtkHBox and #GtkVBox.
+ *
+ * If your code depends on Gtk+ 2.16 or later, if it better to use
+ * the normal #GtkBox widgets in combination with
+ * gtk_orientable_set_orientation().
+ *
+ * See also: #GtkOrientable and #GtkBox.
+ **/
+
+
+
 #if !GTK_CHECK_VERSION (2, 16, 0)
 enum
 {
@@ -76,6 +94,12 @@ xfce_hvbox_class_init (XfceHVBoxClass *klass)
   gtkwidget_class->size_request  = xfce_hvbox_size_request;
   gtkwidget_class->size_allocate = xfce_hvbox_size_allocate;
 
+  /**
+   * XfceHVBox:orientation:
+   *
+   * The orientation of the #XfceHVBox. When compiled with Gtk+ 2.16,
+   * this is the orientation property of the #GtkOrientable.
+   **/
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
                                    g_param_spec_enum ("orientation",
@@ -259,6 +283,8 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
 /**
  * xfce_hvbox_get_orientation:
  * @hvbox       : #XfceHVBox
+ *
+ * TODO
  *
  * Returns: the current orientation of the #XfceHVBox.
  **/
