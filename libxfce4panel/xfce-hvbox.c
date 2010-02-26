@@ -31,11 +31,27 @@
 
 
 
+#if !GTK_CHECK_VERSION (2, 16, 0)
+enum
+{
+  PROP_0,
+  PROP_ORIENTATION
+};
+
+static void      xfce_hvbox_get_property (GObject        *object,
+                                          guint           prop_id,
+                                          GValue         *value,
+                                          GParamSpec     *pspec);
+static void      xfce_hvbox_set_property (GObject        *object,
+                                          guint           prop_id,
+                                          const GValue   *value,
+                                          GParamSpec     *pspec);
 static gpointer xfce_hvbox_get_class     (XfceHVBox      *hvbox);
 static void     xfce_hvbox_size_request  (GtkWidget      *widget,
                                           GtkRequisition *requisition);
 static void     xfce_hvbox_size_allocate (GtkWidget      *widget,
                                           GtkAllocation  *allocation);
+#endif
 
 
 
@@ -46,11 +62,28 @@ G_DEFINE_TYPE (XfceHVBox, xfce_hvbox, GTK_TYPE_BOX)
 static void
 xfce_hvbox_class_init (XfceHVBoxClass *klass)
 {
+#if !GTK_CHECK_VERSION (2, 16, 0)
+  GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
+  
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->get_property = xfce_hvbox_get_property;
+  gobject_class->set_property = xfce_hvbox_set_property;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request  = xfce_hvbox_size_request;
   gtkwidget_class->size_allocate = xfce_hvbox_size_allocate;
+  
+  g_object_class_install_property (gobject_class,
+                                   PROP_ORIENTATION,
+                                   g_param_spec_enum ("orientation", 
+                                                      "Orientation",
+                                                      "Orientation of the box",
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_READWRITE
+                                                      | G_PARAM_STATIC_STRINGS));
+#endif
 }
 
 
@@ -60,6 +93,51 @@ xfce_hvbox_init (XfceHVBox *hvbox)
 {
   /* initialize variables */
   hvbox->orientation = GTK_ORIENTATION_HORIZONTAL;
+}
+
+
+
+#if !GTK_CHECK_VERSION (2, 16, 0)
+static void      
+xfce_hvbox_get_property (GObject    *object,
+                         guint       prop_id,
+                         GValue     *value,
+                         GParamSpec *pspec)
+{
+  XfceHVBox *hvbox = XFCE_HVBOX (object);
+  
+  switch (prop_id)
+    {
+      case PROP_ORIENTATION:
+        g_value_set_enum (value, hvbox->orientation);
+        break;
+      
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+
+
+static void      
+xfce_hvbox_set_property (GObject      *object,
+                         guint         prop_id,
+                         const GValue *value,
+                         GParamSpec   *pspec)
+{
+  XfceHVBox *hvbox = XFCE_HVBOX (object);
+  
+  switch (prop_id)
+    {
+      case PROP_ORIENTATION:
+        xfce_hvbox_set_orientation (hvbox, g_value_get_enum (value));
+        break;
+      
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
 }
 
 
@@ -111,6 +189,7 @@ xfce_hvbox_size_allocate (GtkWidget     *widget,
   /* allocate the size */
   (*GTK_WIDGET_CLASS (klass)->size_allocate) (widget, allocation);
 }
+#endif
 
 
 
@@ -133,6 +212,9 @@ xfce_hvbox_new (GtkOrientation orientation,
 
   /* create new object */
   box = g_object_new (XFCE_TYPE_HVBOX,
+#if GTK_CHECK_VERSION (2, 16, 0)
+                      "orientation", orientation,
+#endif
                       "homogeneous", homogeneous,
                       "spacing", spacing, NULL);
 
@@ -162,8 +244,11 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
       /* store new orientation */
       hvbox->orientation = orientation;
 
-      /* queue a resize */
+#if GTK_CHECK_VERSION (2, 16, 0)
+      gtk_orientable_set_orientation (GTK_ORIENTABLE (hvbox), orientation);
+#else
       gtk_widget_queue_resize (GTK_WIDGET (hvbox));
+#endif
     }
 }
 
@@ -180,5 +265,9 @@ xfce_hvbox_get_orientation (XfceHVBox *hvbox)
 {
   g_return_val_if_fail (XFCE_IS_HVBOX (hvbox), GTK_ORIENTATION_HORIZONTAL);
 
+#if GTK_CHECK_VERSION (2, 16, 0)
+  return gtk_orientable_get_orientation (GTK_ORIENTABLE (hvbox));
+#else
   return hvbox->orientation;
+#endif
 }
