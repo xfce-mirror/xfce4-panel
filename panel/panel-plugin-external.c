@@ -22,6 +22,7 @@
 #include <exo/exo.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
+#include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -81,6 +82,9 @@ struct _PanelPluginExternal
 
   /* message queue */
   GSList           *queue;
+
+  /* process pid */
+  GPid              pid;
 };
 
 typedef struct
@@ -128,12 +132,15 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 static void
 panel_plugin_external_init (PanelPluginExternal *external)
 {
+  /* initialize */
   external->id = NULL;
   external->module = NULL;
   external->plug_window_id = 0;
   external->queue = NULL;
   external->arguments = NULL;
+  external->pid = 0;
 
+  /* signal to pass gtk_widget_set_sensitive() changes to the remote window */
   g_signal_connect (G_OBJECT (external), "notify::sensitive", G_CALLBACK (panel_plugin_external_set_sensitive), NULL);
 }
 
@@ -177,7 +184,6 @@ panel_plugin_external_realize (GtkWidget *widget)
 {
   PanelPluginExternal  *external = PANEL_PLUGIN_EXTERNAL (widget);
   gchar               **argv;
-  GPid                  pid;
   GError               *error = NULL;
   gboolean              succeed;
   gchar                *socket_id;
@@ -218,7 +224,7 @@ panel_plugin_external_realize (GtkWidget *widget)
   argv[argc - 1] = NULL;
 
   /* spawn the proccess */
-  succeed = gdk_spawn_on_screen (gdk_screen_get_default (), NULL, argv, NULL, 0, NULL, NULL, &pid, &error);
+  succeed = gdk_spawn_on_screen (gdk_screen_get_default (), NULL, argv, NULL, 0, NULL, NULL, &(external->pid), &error);
 
   /* cleanup */
   g_free (socket_id);
@@ -328,13 +334,74 @@ static gboolean
 panel_plugin_external_plug_removed (GtkSocket *socket)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
+  GtkWidget           *dialog;
+  gint                 response;
+  gchar               *filename, *path;
+
+  /* create dialog */
+  dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (socket))),
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+                                   _("Plugin '%s' unexpectedly left the building, do you want to restart it?"),
+                                   panel_module_get_name (external->module));
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("If you press Execute the panel will try"
+                                            " to restart the plugin. Remove will remove it from the panel permanently."));
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog), GTK_STOCK_EXECUTE, GTK_RESPONSE_OK,
+                          GTK_STOCK_REMOVE, GTK_RESPONSE_CLOSE, NULL);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   /* don't send or queue messages */
   external->plug_window_id = -1;
 
-  /* destroy the socket */
-  gtk_widget_destroy (GTK_WIDGET (socket));
+  /* reset the pid */
+  external->pid = 0;
 
+  /* unrealize and hide the socket */
+  gtk_widget_unrealize (GTK_WIDGET (socket));
+  gtk_widget_hide (GTK_WIDGET (socket));
+
+  /* run the dialog */
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+  /* destroy the dialog */
+  gtk_widget_destroy (dialog);
+
+  /* handle the response */
+  if (response == GTK_RESPONSE_OK)
+    {
+      /* show the socket again (realize will spawn the plugin) */
+      gtk_widget_show (GTK_WIDGET (socket));
+
+      /* TODO: The plugin needs an update from the panel status (size/orientation/...) here.
+       *       This should be handled from the application (signal to plugins for panel status
+       *       on realize/show?). */
+
+      /* don't process other events */
+      return TRUE;
+    }
+  else
+    {
+      /* build the plugin rc filename (from xfce_panel_plugin_relative_filename() in libxfce4panel) */
+      filename = g_strdup_printf ("xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%s.rc",
+                                  panel_module_get_internal_name (external->module), external->id);
+
+      /* get the path */
+      path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
+
+      /* remove the config file */
+      if (G_LIKELY (path))
+        g_unlink (path);
+
+      /* cleanup */
+      g_free (filename);
+      g_free (path);
+
+      /* destroy the socket */
+      gtk_widget_destroy (GTK_WIDGET (socket));
+    }
+
+  /* process other events */
   if (GTK_SOCKET_CLASS (panel_plugin_external_parent_class)->plug_removed)
     return (*GTK_SOCKET_CLASS (panel_plugin_external_parent_class)->plug_removed) (socket);
   return FALSE;
