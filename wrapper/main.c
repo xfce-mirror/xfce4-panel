@@ -302,9 +302,6 @@ main (gint argc, gchar **argv)
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
 
-      /* everything when fine */
-      retval = PLUGIN_EXIT_SUCCESS;
-
       /* enter the main loop */
       gtk_main ();
 
@@ -316,6 +313,9 @@ main (gint argc, gchar **argv)
       /* destroy the plug and provider */
       if (plug != NULL)
         gtk_widget_destroy (GTK_WIDGET (plug));
+
+      /* everything when fine */
+      retval = PLUGIN_EXIT_SUCCESS;
     }
   else
     {

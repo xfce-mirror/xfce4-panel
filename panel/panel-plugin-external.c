@@ -464,8 +464,6 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
   GtkWidget           *window;
 
-  panel_return_val_if_fail (PANEL_IS_MODULE (external->module), FALSE);
-
   /* leave when the plugin was already removed */
   if (!external->plug_embedded)
     return FALSE;
@@ -487,13 +485,10 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   window = gtk_widget_get_toplevel (GTK_WIDGET (socket));
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
 
-  /* create a restart timer if we don't have any */
-  if (external->restart_timer == NULL)
-    external->restart_timer = g_timer_new ();
-
-  if (g_timer_elapsed (external->restart_timer, NULL) > PANEL_PLUGIN_AUTO_RESTART)
+  if (external->restart_timer == NULL
+      || g_timer_elapsed (external->restart_timer, NULL) > PANEL_PLUGIN_AUTO_RESTART)
     {
-      g_message ("Plugin %s-%d: auto restart after crash.",
+      g_message ("Plugin %s-%d has been automatically restarted after crash.",
                  panel_module_get_name (external->module),
                  external->unique_id);
     }
@@ -510,8 +505,11 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
       return FALSE;
     }
 
-  /* reset the restart counter, user agreed to restart again */
-  g_timer_reset (external->restart_timer);
+  /* create or reset the retart timer */
+  if (external->restart_timer == NULL)
+    external->restart_timer = g_timer_new ();
+  else
+    g_timer_reset (external->restart_timer);
 
   /* send panel information to the plugin (queued until realize) */
   panel_window_set_povider_info (PANEL_WINDOW (window), GTK_WIDGET (external));
@@ -875,17 +873,22 @@ panel_plugin_external_child_watch (GPid     pid,
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (external->pid == pid);
 
-  switch (WEXITSTATUS (status))
+  /* only handle our exit status if the plugin exited normally */
+  if (WIFEXITED (status))
     {
-      case PLUGIN_EXIT_SUCCESS:
-      case PLUGIN_EXIT_FAILURE:
-      case PLUGIN_EXIT_PREINIT_FAILED:
-      case PLUGIN_EXIT_CHECK_FAILED:
-      case PLUGIN_EXIT_NO_PROVIDER:
-        /* wait until everything is settled, then destroy the
-         * external plugin so it is removed from the configuration */
-        exo_gtk_object_destroy_later (GTK_OBJECT (external));
-        break;
+      /* extract our return value from the status */
+      switch (WEXITSTATUS (status))
+        {
+          case PLUGIN_EXIT_SUCCESS:
+          case PLUGIN_EXIT_FAILURE:
+          case PLUGIN_EXIT_PREINIT_FAILED:
+          case PLUGIN_EXIT_CHECK_FAILED:
+          case PLUGIN_EXIT_NO_PROVIDER:
+            /* wait until everything is settled, then destroy the
+             * external plugin so it is removed from the configuration */
+            exo_gtk_object_destroy_later (GTK_OBJECT (external));
+            break;
+        }
     }
 
   g_spawn_close_pid (pid);
