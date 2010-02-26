@@ -1552,7 +1552,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
     }
   else
     {
-      if (window->output_name == NULL)
+      if (exo_str_is_empty (window->output_name))
         {
           normal_monitor_positioning:
 
@@ -1573,12 +1573,12 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
               if (G_UNLIKELY (name == NULL))
                 {
                   /* send a warnings why this went wrong */
-                  g_critical ("An output is set on the panel window (%s), "
-                              "but it looks  like the driver does not "
-                              "support output names. Falling back to normal "
-                              "monitor positioning, you have to set the output "
-                              "again in the preferences to activate this feature.",
-                              window->output_name);
+                  g_message ("An output is set on the panel window (%s), "
+                             "but it looks  like the driver does not "
+                             "support output names. Falling back to normal "
+                             "monitor positioning, you have to set the output "
+                             "again in the preferences to activate this feature.",
+                             window->output_name);
 
                   /* cleanup */
                   g_free (window->output_name);
