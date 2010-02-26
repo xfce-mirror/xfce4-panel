@@ -6,7 +6,7 @@ XfceTasklist
 
 style "xfce-tasklist-style"
 {
-  # The maximum length of a button before the label ellipsized. 
+  # The maximum length of a button before the label ellipsizes. 
   # When this value is set to -1 the button will expand to the 
   # entire available space.
   XfceTasklist::max-button-length = 200
@@ -20,3 +20,15 @@ style "xfce-tasklist-style"
   XfceTasklist::ellipsize-mode = PANGO_ELLIPSIZE_END
 }
 class "XfceTasklist" style "xfce-tasklist-style"
+
+
+
+XfceLauncherPlugin
+------------------
+
+style "xfce-launcher-style"
+{
+  # Size of the icons of the menu, in pixels.
+  XfceLauncherPlugin::menu-icon-size = 36
+}
+class "XfceLauncherPlugin" style "xfce-launcher-style"
