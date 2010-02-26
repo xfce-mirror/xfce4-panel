@@ -289,7 +289,7 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* connect all properties */
   panel_properties_bind (plugin->channel, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
-                         properties);
+                         properties, FALSE);
 
   /* make sure the plugin is drawn */
   gtk_widget_queue_draw (GTK_WIDGET (panel_plugin));

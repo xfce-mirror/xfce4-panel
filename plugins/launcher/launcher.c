@@ -519,7 +519,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* bind all properties */
   panel_properties_bind (plugin->channel, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
-                         properties);
+                         properties, FALSE);
 
   /* handle and empty plugin */
   if (G_UNLIKELY (plugin->items == NULL))

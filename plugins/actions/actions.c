@@ -316,7 +316,7 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* bind all properties */
   panel_properties_bind (plugin->channel, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
-                         properties);
+                         properties, FALSE);
 
   /* set orientation and size */
   actions_plugin_orientation_changed (panel_plugin,

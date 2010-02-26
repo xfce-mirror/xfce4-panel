@@ -193,7 +193,8 @@ void
 panel_properties_bind (XfconfChannel       *channel,
                        GObject             *object,
                        const gchar         *property_base,
-                       const PanelProperty *properties)
+                       const PanelProperty *properties,
+                       gboolean             save_properties)
 {
   const PanelProperty *prop;
   const GValue        *value;
@@ -207,7 +208,9 @@ panel_properties_bind (XfconfChannel       *channel,
   panel_return_if_fail (properties != NULL);
 
   /* get or ref the hash table */
-  if (shared_hash_table != NULL)
+  if (save_properties)
+    hash_table = NULL;
+  else if (shared_hash_table != NULL)
     hash_table = g_hash_table_ref (shared_hash_table);
   else
     hash_table = xfconf_channel_get_properties (channel, property_base);
@@ -243,6 +246,10 @@ panel_properties_bind (XfconfChannel       *channel,
       g_signal_connect_data (G_OBJECT (object), buf,
           G_CALLBACK (panel_properties_object_notify), binding,
           panel_properties_object_disconnect, 0);
+
+      /* emit the property so it gets saved */
+      if (save_properties)
+        g_object_notify (G_OBJECT (object), prop->property);
 
       /* monitor channel changes */
       g_snprintf (buf, sizeof (buf), "property-changed::%s", binding->channel_prop);

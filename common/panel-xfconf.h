@@ -34,7 +34,8 @@ XfconfChannel *panel_properties_get_channel       (void);
 void           panel_properties_bind              (XfconfChannel       *channel,
                                                    GObject             *object,
                                                    const gchar         *property_base,
-                                                   const PanelProperty *properties);
+                                                   const PanelProperty *properties,
+                                                   gboolean             save_properties);
 
 void           panel_properties_unbind            (GObject             *object);
 

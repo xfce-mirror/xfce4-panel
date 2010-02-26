@@ -265,7 +265,7 @@ panel_application_finalize (GObject *object)
 static void
 panel_application_xfconf_window_bindings (PanelApplication *application,
                                           PanelWindow      *window,
-                                          gboolean          store_settings)
+                                          gboolean          save_properties)
 {
   gchar               *property_base;
   const PanelProperty  properties[] =
@@ -293,7 +293,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
-                         property_base, properties);
+                         property_base, properties, save_properties);
 
   /* cleanup */
   g_free (property_base);

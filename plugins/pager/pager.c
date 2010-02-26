@@ -324,7 +324,7 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* bind all properties */
   panel_properties_bind (plugin->channel, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
-                         properties);
+                         properties, FALSE);
 
   /* create the pager */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
