@@ -67,11 +67,14 @@ enum
 
 
 
-static void launcher_dialog_items_set_item (GtkTreeModel *model, GtkTreeIter *iter, GarconMenuItem *item);
-static void launcher_dialog_tree_save (LauncherPluginDialog *dialog);
-static void launcher_dialog_tree_selection_changed (GtkTreeSelection *selection, LauncherPluginDialog *dialog);
-static void launcher_dialog_items_unload (LauncherPluginDialog *dialog);
-static void launcher_dialog_items_load (LauncherPluginDialog *dialog);
+static void launcher_dialog_items_set_item         (GtkTreeModel         *model,
+                                                    GtkTreeIter          *iter,
+                                                    GarconMenuItem       *item);
+static void launcher_dialog_tree_save              (LauncherPluginDialog *dialog);
+static void launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
+                                                    LauncherPluginDialog *dialog);
+static void launcher_dialog_items_unload           (LauncherPluginDialog *dialog);
+static void launcher_dialog_items_load             (LauncherPluginDialog *dialog);
 
 
 
@@ -132,12 +135,10 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
           gtk_list_store_set (GTK_LIST_STORE (model), iter, COL_SEARCH,
                               name_casefolded, -1);
 
-          /* cleanup */
           g_free (name_casefolded);
         }
     }
 
-  /* cleanup */
   g_free (text_casefolded);
   g_free (string);
 
@@ -340,7 +341,6 @@ launcher_dialog_add_response (GtkWidget            *widget,
                 gtk_tree_selection_select_iter (selection, &iter);
             }
 
-          /* cleanup */
           gtk_tree_path_free (li->data);
 
           if (g_list_next (li) != NULL)
@@ -352,7 +352,6 @@ launcher_dialog_add_response (GtkWidget            *widget,
             }
         }
 
-      /* cleanup */
       g_list_free (list);
 
       /* write the model to xfconf */
@@ -733,7 +732,6 @@ launcher_dialog_response (GtkWidget            *widget,
       /* destroy the dialog */
       gtk_widget_destroy (widget);
 
-      /* cleanup */
       g_slice_free (LauncherPluginDialog, dialog);
     }
 }
