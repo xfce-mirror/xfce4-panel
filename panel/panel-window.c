@@ -745,6 +745,9 @@ panel_window_drag_motion (GtkWidget      *widget,
                           gint            y,
                           guint           drag_time)
 {
+  if ((*GTK_WIDGET_CLASS (panel_window_parent_class)->drag_motion) != NULL)
+    (*GTK_WIDGET_CLASS (panel_window_parent_class)->drag_motion) (widget, context, x, y, drag_time);
+
   return TRUE;
 }
 
