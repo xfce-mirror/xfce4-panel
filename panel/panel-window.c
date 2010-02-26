@@ -2139,9 +2139,10 @@ panel_window_set_povider_info (PanelWindow *window,
   panel_window_set_plugin_orientation (provider, window);
   panel_window_set_plugin_screen_position (provider, window);
 
-  if (PANEL_IS_PLUGIN_EXTERNAL (provider))
+  if (PANEL_IS_PLUGIN_EXTERNAL (provider)
+      && PANEL_BASE_WINDOW (window)->background_alpha < 1.0)
     panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
-        rint (PANEL_BASE_WINDOW (window)->background_alpha * 100.00));
+        PANEL_BASE_WINDOW (window)->background_alpha);
 }
 
 

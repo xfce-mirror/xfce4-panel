@@ -117,7 +117,7 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
           else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_ALPHA) == 0)
             {
               plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
-              wrapper_plug_set_background_alpha (plug, g_value_get_int (value) / 100.00);
+              wrapper_plug_set_background_alpha (plug, g_value_get_double (value));
             }
           else if (strcmp (property, SIGNAL_SAVE) == 0)
             xfce_panel_plugin_provider_save (provider);

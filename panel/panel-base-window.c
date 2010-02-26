@@ -546,7 +546,7 @@ panel_base_window_set_plugin_background_alpha (GtkWidget *widget,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (widget),
-        rint (PANEL_BASE_WINDOW (user_data)->background_alpha * 100.00));
+        PANEL_BASE_WINDOW (user_data)->background_alpha);
 }
 
 

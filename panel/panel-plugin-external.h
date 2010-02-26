@@ -43,7 +43,7 @@ GtkWidget *panel_plugin_external_new                  (PanelModule          *mod
                                                        gchar               **arguments) G_GNUC_MALLOC;
 
 void       panel_plugin_external_set_background_alpha (PanelPluginExternal  *external,
-                                                       gint                  percentage);
+                                                       gdouble               alpha);
 
 G_END_DECLS
 

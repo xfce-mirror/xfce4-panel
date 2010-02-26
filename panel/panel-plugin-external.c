@@ -943,14 +943,14 @@ panel_plugin_external_new (PanelModule  *module,
 
 void
 panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
-                                            gint                 percentage)
+                                            gdouble              alpha)
 {
   GValue value = { 0, };
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  g_value_init (&value, G_TYPE_INT);
-  g_value_set_int (&value, percentage);
+  g_value_init (&value, G_TYPE_DOUBLE);
+  g_value_set_double (&value, alpha);
 
   panel_plugin_external_queue_add (external, FALSE,
                                    SIGNAL_WRAPPER_BACKGROUND_ALPHA,
