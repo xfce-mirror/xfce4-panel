@@ -66,7 +66,7 @@ G_BEGIN_DECLS
 #endif
 
 /* make api compatible with 4.4 panel */
-/* #ifndef XFCE_DISABLE_DEPRECATED */
+#ifndef XFCE_DISABLE_DEPRECATED
 
 /* panel plugin functio for the id, probably not used by anyone */
 #define xfce_panel_plugin_get_id(plugin) (g_strdup_printf ("%d", \
@@ -105,7 +105,7 @@ G_BEGIN_DECLS
 #define _panel_return_if_fail(expr)          panel_return_if_fail (expr)
 #define _panel_return_val_if_fail(expr, val) panel_return_val_if_fail (expr, (val))
 
-/* #endif *//* !XFCE_DISABLE_DEPRECATED */
+#endif /* !XFCE_DISABLE_DEPRECATED */
 
 G_END_DECLS
 
