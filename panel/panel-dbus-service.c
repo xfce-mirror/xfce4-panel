@@ -131,6 +131,7 @@ panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   /* TODO: open/move the dialog to the correct screen */
+  g_message ("open on screen %s", display);
 
   /* show the prefernces dialog */
   panel_preferences_dialog_show (NULL);

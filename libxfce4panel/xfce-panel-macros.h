@@ -58,9 +58,9 @@ G_BEGIN_DECLS
 #ifndef XFCE_DISABLE_DEPRECATED
 
 /* convenience functions (deprecated) */
-#define xfce_create_panel_button()        xfce_panel_create_button()
-#define xfce_create_panel_toggle_button() xfce_panel_create_toggle_button()
-#define xfce_allow_panel_customization()  xfce_panel_allow_customization()
+#define xfce_create_panel_button        xfce_panel_create_button
+#define xfce_create_panel_toggle_button xfce_panel_create_toggle_button
+#define xfce_allow_panel_customization  xfce_panel_allow_customization
 
 /* register definitions (deprecated) */
 #define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL             XFCE_PANEL_PLUGIN_REGISTER

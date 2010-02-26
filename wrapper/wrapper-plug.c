@@ -63,7 +63,7 @@ struct _WrapperPlug
 
   /* the panel plugin */
   XfcePanelPluginProvider *provider;
-
+  
   /* socket id of panel window */
   GdkNativeWindow          socket_id;
 
@@ -90,7 +90,7 @@ static void
 wrapper_plug_class_init (WrapperPlugClass *klass)
 {
   GtkWidgetClass *gtkwidget_class;
-
+  
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->client_event = wrapper_plug_client_event;
   gtkwidget_class->expose_event = wrapper_plug_expose_event;
@@ -107,7 +107,8 @@ wrapper_plug_init (WrapperPlug *plug)
   plug->background_alpha = 1.00;
   plug->is_active_panel = FALSE;
   plug->is_composited = FALSE;
-
+  
+  /* allow painting, else compositing won't work */                                        
   gtk_widget_set_app_paintable (GTK_WIDGET (plug), TRUE);
 
   /* connect signal to monitor the compositor changes */
@@ -123,11 +124,11 @@ static gboolean
 wrapper_plug_expose_event (GtkWidget      *widget,
                            GdkEventExpose *event)
 {
-  WrapperPlug    *plug = WRAPPER_PLUG (widget);
-  cairo_t        *cr;
-  GdkColor       *color;
-  GtkStateType    state = GTK_STATE_NORMAL;
-  gdouble         alpha = plug->is_composited ? plug->background_alpha : 1.00;
+  WrapperPlug   *plug = WRAPPER_PLUG (widget);
+  cairo_t       *cr;
+  GdkColor      *color;
+  GtkStateType   state = GTK_STATE_NORMAL;
+  gdouble        alpha = plug->is_composited ? plug->background_alpha : 1.00;
 
   if (GTK_WIDGET_DRAWABLE (widget) &&
       (alpha < 1.00 || plug->is_active_panel))
@@ -159,7 +160,7 @@ wrapper_plug_expose_event (GtkWidget      *widget,
       cairo_destroy (cr);
     }
 
-    return GTK_WIDGET_CLASS(wrapper_plug_parent_class)->expose_event(widget, event);
+  return GTK_WIDGET_CLASS (wrapper_plug_parent_class)->expose_event (widget, event);
 }
 
 

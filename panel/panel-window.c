@@ -1301,6 +1301,8 @@ panel_window_working_area (PanelWindow  *window,
   /* get the root monitor geometry */
   gdk_screen_get_monitor_geometry (screen, monitor_num, dest);
 
+  g_message ("%d screens and %d monitors found", gdk_display_get_n_screens (gdk_display_get_default ()), gdk_screen_get_n_monitors (screen));
+
   if (window->span_monitors)
     {
       /* get the number of monitors */
@@ -1317,6 +1319,8 @@ panel_window_working_area (PanelWindow  *window,
 
               /* get the monitor geometry */
               gdk_screen_get_monitor_geometry (screen, i, &geometry);
+
+              g_message ("monitor %d, x=%d, y=%d, w=%d, h=%d", i, geometry.x, geometry.y, geometry.width, geometry.height);
 
               /* try to extend the dest geometry from the root coordinate's point of view */
               if (window->horizontal
@@ -2181,8 +2185,13 @@ panel_window_set_span_monitors (PanelWindow *window,
 
   if (window->span_monitors != span_monitors)
     {
+      /* store new value */
       window->span_monitors = !!span_monitors;
 
+      /* update the working area */
+      panel_window_working_area (window, -1, -1, &window->working_area);
+
+      /* resize the panel */
       gtk_widget_queue_resize (GTK_WIDGET (window));
     }
 }

@@ -49,7 +49,7 @@ static gchar    **opt_arguments = NULL;
 
 
 /* command line options */
-static const GOptionEntry option_entries[] =
+static GOptionEntry option_entries[] =
 {
   { "preferences", 'p', 0, G_OPTION_ARG_NONE, &opt_preferences, N_("Show the 'Panel Preferences' dialog"), NULL },
   { "add-items", 'a', 0, G_OPTION_ARG_NONE, &opt_add_items, N_("Show the 'Add New Items' dialog"), NULL },
@@ -77,15 +77,17 @@ main (gint argc, gchar **argv)
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
+#ifndef NDEBUG
   /* terminate the program on warnings and critical messages */
   g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
+#endif
 
   /* initialize the gthread system */
-  if (!g_thread_supported ())
+  if (g_thread_supported () == FALSE)
     g_thread_init (NULL);
 
   /* initialize gtk+ */
-  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), (GOptionEntry *) option_entries, GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, GETTEXT_PACKAGE, &error))
     {
       /* print an error message */
       if (error == NULL)

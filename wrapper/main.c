@@ -45,7 +45,7 @@ static gchar **opt_arguments = NULL;
 
 
 
-static const GOptionEntry option_entries[] =
+static GOptionEntry option_entries[] =
 {
   { "name", 'n', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_name, NULL, NULL },
   { "display-name", 'd', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_display_name, NULL, NULL },
@@ -70,15 +70,17 @@ main (gint argc, gchar **argv)
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
+#ifndef NDEBUG
   /* terminate the program on warnings and critical messages */
   g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
+#endif
 
   /* initialize the gthread system */
-  if (!g_thread_supported ())
+  if (g_thread_supported () == FALSE)
     g_thread_init (NULL);
 
   /* initialize gtk */
-  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), (GOptionEntry *) option_entries, GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, GETTEXT_PACKAGE, &error))
     {
       /* print error */
       g_critical ("Failed to initialize GTK+: %s", error ? error->message : "Unable to open display");

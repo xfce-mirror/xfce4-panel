@@ -8,7 +8,7 @@ INCLUDES = 									\
 	-DLIBDIR=\"$(libdir)/xfce4\"						\
 	-DLIBEXECDIR=\"$(libexecdir)/xfce4\"					\
 	-DSYSCONFDIR=\"$(sysconfdir)\"						\
-	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"					\
 	$(PLATFORM_CPPFLAGS)
 
 libexec_PROGRAMS = 								\
@@ -25,7 +25,6 @@ xfce4_panel_wrapper_CFLAGS =							\
 	$(GTK_CFLAGS)								\
 	$(GMODULE_CFLAGS)							\
 	$(GTHREAD_CFLAGS)							\
-	$(DBUS_CFLAGS)								\
 	$(LIBXFCE4UTIL_CFLAGS)							\
 	$(PLATFORM_CFLAGS)
 
@@ -38,7 +37,6 @@ xfce4_panel_wrapper_LDADD =							\
 	$(GTK_LIBS)								\
 	$(GMODULE_LIBS)								\
 	$(GTHREAD_LIBS)								\
-	$(DBUS_LIBS)								\
 	$(LIBXFCE4UTIL_LIBS)
 
 xfce4_panel_wrapper_DEPENDENCIES =						\
