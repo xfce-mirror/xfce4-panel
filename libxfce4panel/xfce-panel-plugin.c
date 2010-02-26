@@ -1249,7 +1249,8 @@ xfce_panel_plugin_removed (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
-  g_signal_emit (G_OBJECT (provider), plugin_signals[REMOVED], 0);
+  if (!xfce_panel_plugin_get_locked (XFCE_PANEL_PLUGIN (provider)))
+    g_signal_emit (G_OBJECT (provider), plugin_signals[REMOVED], 0);
 }
 
 

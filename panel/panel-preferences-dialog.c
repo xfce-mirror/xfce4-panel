@@ -655,6 +655,10 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
   GObject   *combo;
   GtkWidget *toplevel;
 
+  /* leave if the window is locked */
+  if (panel_window_get_locked (dialog->active))
+    return;
+
   /* get active panel */
   nth = panel_application_get_window_index (dialog->application, dialog->active);
 

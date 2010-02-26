@@ -648,10 +648,18 @@ panel_application_window_destroyed (GtkWidget        *window,
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (g_slist_find (application->windows, window) != NULL);
 
+  /* leave if the application is locked */
+  if (panel_application_get_locked (application))
+    return;
+
   /* we need to update the bindings of all the panels... */
   for (li = application->windows, n = 0; li != NULL; li = lnext, n++)
     {
       lnext = li->next;
+
+      /* TODO, this might go wrong when only 1 window is locked */
+      if (panel_window_get_locked (li->data))
+        continue;
 
       if (passed_destroyed_window)
         {
