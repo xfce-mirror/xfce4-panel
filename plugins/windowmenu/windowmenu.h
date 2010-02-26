@@ -34,7 +34,9 @@ typedef struct _XfceWindowMenuPlugin      XfceWindowMenuPlugin;
 #define XFCE_IS_WINDOW_MENU_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_WINDOW_MENU_PLUGIN))
 #define XFCE_WINDOW_MENU_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_WINDOW_MENU_PLUGIN, XfceWindowMenuPluginClass))
 
-GType window_menu_plugin_get_type (void) G_GNUC_CONST;
+GType window_menu_plugin_get_type      (void) G_GNUC_CONST;
+
+void  window_menu_plugin_register_type (GTypeModule *type_module);
 
 G_END_DECLS
 

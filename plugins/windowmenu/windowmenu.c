@@ -105,10 +105,8 @@ static GtkWidget *window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin);
 
 
 
-/* define and register the plugin */
-G_DEFINE_TYPE (XfceWindowMenuPlugin, window_menu_plugin, XFCE_TYPE_PANEL_PLUGIN)
-
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_WINDOW_MENU_PLUGIN)
+/* define the plugin */
+XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (XfceWindowMenuPlugin, window_menu_plugin)
 
 
 
