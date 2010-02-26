@@ -610,6 +610,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
 }
 
 
+
 static void
 xfce_tasklist_style_set (GtkWidget *widget,
                          GtkStyle  *previous_style)

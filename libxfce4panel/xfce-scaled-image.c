@@ -93,8 +93,6 @@ xfce_scaled_image_class_init (XfceScaledImageClass *klass)
 static void
 xfce_scaled_image_init (XfceScaledImage *image)
 {
-  GTK_WIDGET_SET_FLAGS (GTK_WIDGET (image), GTK_NO_WINDOW);
-
   image->pixbuf = NULL;
   image->icon_name = NULL;
   image->width = -1;
@@ -120,14 +118,6 @@ static void
 xfce_scaled_image_size_request (GtkWidget      *widget,
                                 GtkRequisition *requisition)
 {
-  XfceScaledImage *image = XFCE_SCALED_IMAGE (widget);
-
-  if (image->pixbuf)
-    {
-      widget->requisition.width = gdk_pixbuf_get_width (image->pixbuf);
-      widget->requisition.height = gdk_pixbuf_get_height (image->pixbuf);
-    }
-
   GTK_WIDGET_CLASS (xfce_scaled_image_parent_class)->size_request (widget, requisition);
 }
 
@@ -141,11 +131,10 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
   GdkPixbuf       *pixbuf = NULL, *scaled;
   GdkScreen       *screen;
 
-  /* set the widget allocation */
   widget->allocation = *allocation;
 
   /* check if the available size changed */
-  if ((image->pixbuf || image->icon_name)
+  if ((image->pixbuf != NULL || image->icon_name != NULL)
       && allocation->width > 0
       && allocation->height > 0
       && (allocation->width != image->width
@@ -177,7 +166,7 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
           gtk_image_clear (GTK_IMAGE (image));
         }
 
-      if (G_LIKELY (pixbuf))
+      if (G_LIKELY (pixbuf != NULL))
         {
           /* scale the icon to the correct size */
           scaled = xfce_scaled_image_scale_pixbuf (pixbuf, image->width,
@@ -194,8 +183,6 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
             g_object_unref (G_OBJECT (scaled));
         }
     }
-
-  GTK_WIDGET_CLASS (xfce_scaled_image_parent_class)->size_allocate (widget, allocation);
 }
 
 
@@ -218,7 +205,7 @@ xfce_scaled_image_scale_pixbuf (GdkPixbuf *source,
   source_height = gdk_pixbuf_get_height (source);
 
   /* check if we need to scale */
-  if (G_UNLIKELY (source_width <= dest_width && source_height <= dest_height))
+  if (source_width <= dest_width && source_height <= dest_height)
     return g_object_ref (G_OBJECT (source));
 
   /* calculate the new dimensions */
@@ -333,10 +320,8 @@ xfce_scaled_image_set_from_pixbuf (XfceScaledImage *image,
   source_height = gdk_pixbuf_get_height (pixbuf);
 
   /* set the new pixbuf, scale it to the maximum size if needed */
-  if (G_LIKELY (source_width <= MAX_PIXBUF_SIZE && source_height <= MAX_PIXBUF_SIZE))
-    image->pixbuf = g_object_ref (G_OBJECT (pixbuf));
-  else
-    image->pixbuf = xfce_scaled_image_scale_pixbuf (pixbuf, MAX_PIXBUF_SIZE, MAX_PIXBUF_SIZE);
+  image->pixbuf = xfce_scaled_image_scale_pixbuf (pixbuf,
+      MAX_PIXBUF_SIZE, MAX_PIXBUF_SIZE);
 
   /* queue a resize */
   gtk_widget_queue_resize (GTK_WIDGET (image));
