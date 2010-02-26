@@ -291,7 +291,7 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
     {
       /* open the help url on this screen */
       screen = gtk_widget_get_screen (GTK_WIDGET (gtk_dialog));
-      if (!exo_url_show_on_screen (ITEMS_HELP_URL, NULL, screen, &error))
+      if (!gtk_show_uri (screen, ITEMS_HELP_URL, gtk_get_current_event_time (), &error))
         {
           /* show error and cleanup */
           g_warning ("Failed to open help: %s", error->message);

@@ -248,7 +248,7 @@ panel_preferences_dialog_response (GtkWidget              *window,
       screen = gtk_widget_get_screen (window);
 
       /* open the help url */
-      if (exo_url_show_on_screen (PREFERENCES_HELP_URL, NULL, screen, &error) == FALSE)
+      if (!gtk_show_uri (screen, PREFERENCES_HELP_URL, gtk_get_current_event_time (), &error))
         {
           /* show error and cleanup */
           g_warning ("Failed to open help: %s", error->message);

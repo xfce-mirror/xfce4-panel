@@ -32,6 +32,8 @@
 #include <panel/panel-dialogs.h>
 #include <panel/panel-application.h>
 
+
+
 void
 panel_dialogs_show_about (void)
 {
@@ -43,9 +45,11 @@ panel_dialogs_show_about (void)
     NULL
   };
 
+#if !GTK_CHECK_VERSION (2, 18, 0)
   /* set exo hooks for urls and email */
-  gtk_about_dialog_set_email_hook (exo_url_about_dialog_hook, NULL, NULL);
-  gtk_about_dialog_set_url_hook (exo_url_about_dialog_hook, NULL, NULL);
+  gtk_about_dialog_set_email_hook (exo_gtk_url_about_dialog_hook, NULL, NULL);
+  gtk_about_dialog_set_url_hook (exo_gtk_url_about_dialog_hook, NULL, NULL);
+#endif
 
   /* show the dialog */
   gtk_show_about_dialog (NULL,
