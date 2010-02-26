@@ -457,8 +457,18 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
       && GTK_WIDGET_VISIBLE (panel_plugin)
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))
     {
-      /* show the menu */
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
+      if (value != NULL
+          && G_VALUE_HOLDS_BOOLEAN (value)
+          && g_value_get_boolean (value))
+        {
+          /* popup the menu under the pointer */
+          directory_menu_plugin_menu (NULL, plugin);
+        }
+      else
+        {
+          /* show the menu */
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
+        }
 
       /* don't popup another menu */
       return TRUE;
@@ -473,10 +483,11 @@ static void
 directory_menu_plugin_selection_done (GtkWidget *menu,
                                       GtkWidget *button)
 {
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
+  panel_return_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
+  if (button != NULL)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
 
   /* delay destruction so we can handle the activate event first */
   exo_gtk_object_destroy_later (GTK_OBJECT (menu));
@@ -940,9 +951,10 @@ directory_menu_plugin_menu (GtkWidget           *button,
   GtkWidget *menu;
 
   panel_return_if_fail (XFCE_IS_DIRECTORY_MENU_PLUGIN (plugin));
-  panel_return_if_fail (plugin->button == button);
+  panel_return_if_fail (button == NULL || plugin->button == button);
 
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+  if (button != NULL
+      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
     return;
 
   menu = gtk_menu_new ();
@@ -955,6 +967,6 @@ directory_menu_plugin_menu (GtkWidget           *button,
   directory_menu_plugin_menu_load (menu, plugin);
 
   gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                  xfce_panel_plugin_position_menu, plugin,
-                  1, gtk_get_current_event_time ());
+                  button != NULL ? xfce_panel_plugin_position_menu : NULL,
+                  plugin, 1, gtk_get_current_event_time ());
 }
