@@ -29,7 +29,7 @@
 #include <exo/exo.h>
 #include <libwnck/libwnck.h>
 #include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/xfce-panel-button.h>
+#include <libxfce4panel/xfce-blink-button.h>
 #include <common/panel-private.h>
 
 #include "tasklist-widget.h"
@@ -1248,7 +1248,7 @@ tasklist_button_state_changed (WnckWindow        *window,
   /* update the blinking state */
   if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_DEMANDS_ATTENTION)
       || PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_URGENT))
-    xfce_panel_button_set_blinking (XFCE_PANEL_BUTTON (child->button),
+    xfce_blink_button_set_blinking (XFCE_BLINK_BUTTON (child->button),
         wnck_window_or_transient_needs_attention (child->window));
 }
 
@@ -1400,7 +1400,7 @@ tasklist_button_new (XfceTasklistChild *child)
   WnckWindow *window = child->window;
 
   /* create the application button */
-  child->button = xfce_panel_button_new ();
+  child->button = xfce_blink_button_new ();
   gtk_button_set_relief (GTK_BUTTON (child->button),
                          child->tasklist->button_relief);
   g_signal_connect (G_OBJECT (child->button), "toggled",

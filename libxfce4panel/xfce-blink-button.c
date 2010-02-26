@@ -22,22 +22,22 @@
 #endif
 
 #include <common/panel-private.h>
-#include <libxfce4panel/xfce-panel-button.h>
+#include <libxfce4panel/xfce-blink-button.h>
 
-#define XFCE_PANEL_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
-                                            XFCE_TYPE_PANEL_BUTTON, \
-                                            XfcePanelButtonPrivate))
+#define XFCE_BLINK_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
+                                            XFCE_TYPE_BLINK_BUTTON, \
+                                            XfceBlinkButtonPrivate))
 
 /* blink count, number should be even */
 #define MAX_BLINKING_COUNT 16
 
 
 
-static void xfce_panel_button_finalize (GObject *object);
+static void xfce_blink_button_finalize (GObject *object);
 
 
 
-struct _XfcePanelButtonPrivate
+struct _XfceBlinkButtonPrivate
 {
   /* blinking timeout id */
   guint          blinking_timeout_id;
@@ -52,28 +52,28 @@ struct _XfcePanelButtonPrivate
 
 
 
-G_DEFINE_TYPE (XfcePanelButton, xfce_panel_button, GTK_TYPE_TOGGLE_BUTTON)
+G_DEFINE_TYPE (XfceBlinkButton, xfce_blink_button, GTK_TYPE_TOGGLE_BUTTON)
 
 
 
 static void
-xfce_panel_button_class_init (XfcePanelButtonClass *klass)
+xfce_blink_button_class_init (XfceBlinkButtonClass *klass)
 {
   GObjectClass *gobject_class;
 
-  g_type_class_add_private (klass, sizeof (XfcePanelButtonPrivate));
+  g_type_class_add_private (klass, sizeof (XfceBlinkButtonPrivate));
 
   gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize = xfce_panel_button_finalize;
+  gobject_class->finalize = xfce_blink_button_finalize;
 }
 
 
 
 static void
-xfce_panel_button_init (XfcePanelButton *button)
+xfce_blink_button_init (XfceBlinkButton *button)
 {
   /* set private pointer */
-  button->priv = XFCE_PANEL_BUTTON_GET_PRIVATE (button);
+  button->priv = XFCE_BLINK_BUTTON_GET_PRIVATE (button);
 
   /* initialize button values */
   button->priv->blinking_timeout_id = 0;
@@ -88,22 +88,22 @@ xfce_panel_button_init (XfcePanelButton *button)
 
 
 static void
-xfce_panel_button_finalize (GObject *object)
+xfce_blink_button_finalize (GObject *object)
 {
-  XfcePanelButton *button = XFCE_PANEL_BUTTON (object);
+  XfceBlinkButton *button = XFCE_BLINK_BUTTON (object);
 
   if (button->priv->blinking_timeout_id != 0)
     g_source_remove (button->priv->blinking_timeout_id);
 
-  (*G_OBJECT_CLASS (xfce_panel_button_parent_class)->finalize) (object);
+  (*G_OBJECT_CLASS (xfce_blink_button_parent_class)->finalize) (object);
 }
 
 
 
 static gboolean
-xfce_panel_button_blinking_timeout (gpointer user_data)
+xfce_blink_button_blinking_timeout (gpointer user_data)
 {
-  XfcePanelButton *button = XFCE_PANEL_BUTTON (user_data);
+  XfceBlinkButton *button = XFCE_BLINK_BUTTON (user_data);
   GtkStyle        *style;
   GtkRcStyle      *rc;
 
@@ -130,9 +130,9 @@ xfce_panel_button_blinking_timeout (gpointer user_data)
 
 
 static void
-xfce_panel_button_blinking_timeout_destroyed (gpointer user_data)
+xfce_blink_button_blinking_timeout_destroyed (gpointer user_data)
 {
-  XfcePanelButton *button = XFCE_PANEL_BUTTON (user_data);
+  XfceBlinkButton *button = XFCE_BLINK_BUTTON (user_data);
 
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
@@ -141,27 +141,27 @@ xfce_panel_button_blinking_timeout_destroyed (gpointer user_data)
 
 
 PANEL_SYMBOL_EXPORT GtkWidget *
-xfce_panel_button_new (void)
+xfce_blink_button_new (void)
 {
-  return g_object_new (XFCE_TYPE_PANEL_BUTTON, NULL);
+  return g_object_new (XFCE_TYPE_BLINK_BUTTON, NULL);
 }
 
 
 
 PANEL_SYMBOL_EXPORT gboolean
-xfce_panel_button_get_blinking (XfcePanelButton *button)
+xfce_blink_button_get_blinking (XfceBlinkButton *button)
 {
-  g_return_val_if_fail (XFCE_IS_PANEL_BUTTON (button), FALSE);
+  g_return_val_if_fail (XFCE_IS_BLINK_BUTTON (button), FALSE);
   return !!(button->priv->blinking_timeout_id != 0);
 }
 
 
 
 PANEL_SYMBOL_EXPORT void
-xfce_panel_button_set_blinking (XfcePanelButton *button,
+xfce_blink_button_set_blinking (XfceBlinkButton *button,
                                 gboolean         blinking)
 {
-  g_return_if_fail (XFCE_IS_PANEL_BUTTON (button));
+  g_return_if_fail (XFCE_IS_BLINK_BUTTON (button));
 
   if (blinking)
     {
@@ -173,8 +173,8 @@ xfce_panel_button_set_blinking (XfcePanelButton *button,
           /* start blinking timeout */
           button->priv->blinking_timeout_id =
               g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, 500,
-                                  xfce_panel_button_blinking_timeout, button,
-                                  xfce_panel_button_blinking_timeout_destroyed);
+                                  xfce_blink_button_blinking_timeout, button,
+                                  xfce_blink_button_blinking_timeout_destroyed);
         }
     }
   else if (button->priv->blinking_timeout_id != 0)
@@ -184,5 +184,5 @@ xfce_panel_button_set_blinking (XfcePanelButton *button,
     }
 
   /* start with a blinking or make sure the button is normal */
-  xfce_panel_button_blinking_timeout (button);
+  xfce_blink_button_blinking_timeout (button);
 }
