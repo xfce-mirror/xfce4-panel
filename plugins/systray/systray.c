@@ -81,9 +81,6 @@ struct _SystrayPlugin
   /* systray manager */
   SystrayManager *manager;
 
-  /* xfconf channnel */
-  XfconfChannel  *channel;
-
   /* widgets */
   GtkWidget      *frame;
   GtkWidget      *box;
@@ -305,11 +302,8 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
     { NULL, G_TYPE_NONE }
   };
 
-  /* open the xfconf channel */
-  plugin->channel = panel_properties_get_channel ();
-
   /* bind all properties */
-  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+  panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
@@ -335,10 +329,6 @@ systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* release the manager */
   if (G_LIKELY (plugin->manager))
     g_object_unref (G_OBJECT (plugin->manager));
-
-  /* release the xfconf channel */
-  if (G_LIKELY (plugin->channel))
-    g_object_unref (G_OBJECT (plugin->channel));
 
   /* shutdown xfconf */
   xfconf_shutdown ();

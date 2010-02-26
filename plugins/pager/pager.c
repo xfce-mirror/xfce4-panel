@@ -70,9 +70,6 @@ struct _PagerPlugin
   /* the wnck pager */
   GtkWidget     *wnck_pager;
 
-  /* xfconf channel */
-  XfconfChannel *channel;
-
   /* the active wnck screen */
   WnckScreen    *wnck_screen;
 
@@ -152,7 +149,6 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->show_names = FALSE;
   plugin->rows = 1;
   plugin->wnck_pager = NULL;
-  plugin->channel = NULL;
 
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
@@ -318,11 +314,8 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
     { NULL, G_TYPE_NONE }
   };
 
-  /* open the xfconf channel */
-  plugin->channel = panel_properties_get_channel ();
-
   /* bind all properties */
-  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+  panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
@@ -339,15 +332,9 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
 
-  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
-
   /* disconnect screen changed signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       pager_plugin_screen_changed, NULL);
-
-  /* release the xfonf channel */
-  if (G_LIKELY (plugin->channel != NULL))
-    g_object_unref (G_OBJECT (plugin->channel));
 
   /* shutdown xfconf */
   xfconf_shutdown ();
@@ -444,7 +431,6 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject     *dialog, *object;
 
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
-  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
 
   /* load the dialog from the glade file */
   builder = gtk_builder_new ();

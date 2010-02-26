@@ -52,9 +52,6 @@ struct _TasklistPlugin
 {
   XfcePanelPlugin __parent__;
 
-  /* the xfconf channel */
-  XfconfChannel *channel;
-
   /* the tasklist widget */
   GtkWidget     *tasklist;
   GtkWidget     *handle;
@@ -144,11 +141,8 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* expand the plugin */
   xfce_panel_plugin_set_expand (panel_plugin, TRUE);
 
-  /* open the xfconf channel */
-  plugin->channel = panel_properties_get_channel ();
-
   /* bind all properties */
-  panel_properties_bind (plugin->channel, G_OBJECT (plugin->tasklist),
+  panel_properties_bind (NULL, G_OBJECT (plugin->tasklist),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
@@ -161,12 +155,6 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 tasklist_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
-
-  /* release the xfconf channel */
-  if (G_LIKELY (plugin->channel))
-    g_object_unref (G_OBJECT (plugin->channel));
-
   /* shutdown xfconf */
   xfconf_shutdown ();
 }

@@ -77,9 +77,6 @@ struct _SeparatorPlugin
   /* parent type */
   XfcePanelPlugin __parent__;
 
-  /* xfconf channel */
-  XfconfChannel        *channel;
-
   /* separator style */
   SeparatorPluginStyle  style;
 };
@@ -283,11 +280,8 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
     { NULL, G_TYPE_NONE }
   };
 
-  /* set the xfconf channel */
-  plugin->channel = panel_properties_get_channel ();
-
   /* connect all properties */
-  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+  panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
@@ -300,14 +294,6 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 separator_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
-
-  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
-
-  /* release the xfonf channel */
-  if (G_LIKELY (plugin->channel != NULL))
-    g_object_unref (G_OBJECT (plugin->channel));
-
   /* shutdown xfconf */
   xfconf_shutdown ();
 }
@@ -341,7 +327,6 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject         *object;
 
   panel_return_if_fail (XFCE_IS_SEPARATOR_PLUGIN (plugin));
-  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
 
   /* load the dialog from the glade file */
   builder = gtk_builder_new ();
