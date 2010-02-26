@@ -321,6 +321,9 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   /* shutdown xfconf */
   xfconf_shutdown ();
+  
+  /* shutdown the menu if needed */
+  launcher_dialog_menu_shutdown ();
 
   /* stop popup timeout */
   if (G_UNLIKELY (plugin->popup_timeout_id))
