@@ -357,6 +357,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->button, TRUE, TRUE, 0);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_widget_set_has_tooltip (plugin->button, TRUE);
+  gtk_widget_set_name (plugin->button, "launcher-button");
   gtk_drag_dest_set (plugin->button, GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
                      drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
@@ -381,6 +382,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->arrow, FALSE, FALSE, 0);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->arrow);
   gtk_button_set_relief (GTK_BUTTON (plugin->arrow), GTK_RELIEF_NONE);
+  gtk_widget_set_name (plugin->button, "launcher-arrow");
   gtk_drag_dest_set (plugin->arrow, GTK_DEST_DEFAULT_MOTION,
                      drop_targets, G_N_ELEMENTS (drop_targets),
                      GDK_ACTION_COPY);
