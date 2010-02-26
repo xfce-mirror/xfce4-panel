@@ -357,10 +357,11 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
                                           XfcePanelPluginProviderSignal  signal,
                                           PanelApplication              *application)
 {
-  GtkWidget   *itembar;
-  PanelWindow *window;
-  gchar       *property;
-  gchar       *path, *filename;
+  GtkWidget       *itembar;
+  PanelWindow     *window;
+  gchar           *property;
+  gchar           *path, *filename;
+  extern gboolean  dbus_quit_with_restart;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -431,6 +432,20 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
       case PROVIDER_SIGNAL_PANEL_PREFERENCES:
         /* open the panel preferences */
         panel_preferences_dialog_show (window);
+        break;
+
+      case PROVIDER_SIGNAL_PANEL_QUIT:
+      case PROVIDER_SIGNAL_PANEL_RESTART:
+        /* set the restart boolean */
+        dbus_quit_with_restart = !!(signal == PROVIDER_SIGNAL_PANEL_RESTART);
+
+        /* quit the main loop */
+        gtk_main_quit ();
+        break;
+
+      case PROVIDER_SIGNAL_PANEL_ABOUT:
+        /* show the panel about dialog */
+        panel_dialogs_show_about ();
         break;
 
       default:

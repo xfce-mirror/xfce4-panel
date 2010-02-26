@@ -657,10 +657,49 @@ xfce_panel_plugin_menu_panel_preferences (XfcePanelPlugin *plugin)
 
 
 
+static void
+xfce_panel_plugin_menu_panel_quit (XfcePanelPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
+
+  /* quit the panel/session */
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_PANEL_QUIT);
+}
+
+
+
+static void
+xfce_panel_plugin_menu_panel_restart (XfcePanelPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
+
+  /* restart the panel */
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_PANEL_RESTART);
+}
+
+
+
+static void
+xfce_panel_plugin_menu_panel_about (XfcePanelPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
+
+  /* open the about dialog of the panel */
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_PANEL_ABOUT);
+}
+
+
+
 static GtkMenu *
 xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 {
-  GtkWidget *menu;
+  GtkWidget *menu, *submenu;
   GtkWidget *item;
   GtkWidget *image;
 
@@ -727,10 +766,17 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
+      /* create a panel submenu item */
+      submenu = gtk_menu_new ();
+      item = gtk_image_menu_item_new_with_mnemonic (_("_Xfce Panel"));
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
+      gtk_widget_show (item);
+
       /* add new items */
       item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
       g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_menu_add_items), plugin);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
       image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
@@ -740,12 +786,44 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       /* customize panel */
       item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
       g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_menu_panel_preferences), plugin);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
       image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
       gtk_widget_show (image);
+
+      /* separator */
+      item = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+      gtk_widget_show (item);
+
+      /* quit item */
+      item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+      g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_menu_panel_quit), plugin);
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+      gtk_widget_show (item);
+
+      /* restart item */
+      item = gtk_image_menu_item_new_with_mnemonic (_("_Restart"));
+      g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_menu_panel_restart), plugin);
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+      gtk_widget_show (item);
+
+      image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+      gtk_widget_show (image);
+
+      /* separator */
+      item = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+      gtk_widget_show (item);
+
+      /* about item */
+      item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
+      g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (xfce_panel_plugin_menu_panel_about), plugin);
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+      gtk_widget_show (item);
 
       /* set panel menu */
       plugin->priv->menu = GTK_MENU (menu);
