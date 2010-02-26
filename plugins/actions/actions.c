@@ -173,6 +173,7 @@ actions_plugin_init (ActionsPlugin *plugin)
 
   plugin->first_button = widget = xfce_panel_create_button ();
   gtk_box_pack_start (GTK_BOX (plugin->box), widget, TRUE, TRUE, 0);
+  gtk_widget_set_name (widget, "actions-first-button");
   g_signal_connect (G_OBJECT (widget), "clicked",
       G_CALLBACK (actions_plugin_button_clicked), plugin);
   gtk_widget_set_tooltip_text (widget, _(entry->title));
@@ -185,6 +186,7 @@ actions_plugin_init (ActionsPlugin *plugin)
 
   plugin->second_button = widget = xfce_panel_create_button ();
   gtk_box_pack_start (GTK_BOX (plugin->box), widget, TRUE, TRUE, 0);
+  gtk_widget_set_name (widget, "actions-second-button");
   g_signal_connect (G_OBJECT (widget), "clicked",
       G_CALLBACK (actions_plugin_button_clicked), plugin);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), widget);
