@@ -344,8 +344,6 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
         }
       else
         {
-          screen = gtk_widget_get_screen (widget);
-
           size = MIN (priv->width, priv->height);
           if (G_UNLIKELY (priv->force_icon_sizes && size < 32))
             {
@@ -360,6 +358,7 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
             }
 
           /* get a pixbuf from the icon name */
+          screen = gtk_widget_get_screen (widget);
           pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_for_screen (screen),
                                              priv->source, size, 0, NULL);
 
@@ -432,6 +431,15 @@ xfce_panel_image_style_set (GtkWidget *widget,
       priv->force_icon_sizes = force;
       if (priv->size > 0)
         gtk_widget_queue_resize (widget);
+    }
+
+  /* update the icon if we have an icon-name source */
+  if (previous_style != NULL && priv->source != NULL
+      && !g_path_is_absolute (priv->source))
+    {
+      /* unset the size to force an update */
+      priv->width = priv->height = -1;
+      gtk_widget_queue_resize (widget);
     }
 }
 
