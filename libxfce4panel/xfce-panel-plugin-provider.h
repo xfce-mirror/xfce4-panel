@@ -35,14 +35,14 @@ typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 #define XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProviderIface))
 
 /* plugin module functions */
-typedef GtkWidget *(*PluginConstructFunc)   (const gchar  *name,
-                                             gint          unique_id,
-                                             const gchar  *display_name,
-                                             const gchar  *comment,
-                                             gchar       **arguments,
-                                             GdkScreen    *screen);
-typedef GType      (*PluginInitializeFunc)  (GTypeModule  *module,
-                                             gboolean     *make_resident);
+typedef GtkWidget *(*PluginConstructFunc) (const gchar  *name,
+                                           gint          unique_id,
+                                           const gchar  *display_name,
+                                           const gchar  *comment,
+                                           gchar       **arguments,
+                                           GdkScreen    *screen);
+typedef GType      (*PluginInitFunc)      (GTypeModule  *module,
+                                           gboolean     *make_resident);
 
 struct _XfcePanelPluginProviderIface
 {
