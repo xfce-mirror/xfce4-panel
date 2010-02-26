@@ -45,8 +45,11 @@ panel_dbus_client_get_proxy (GError **error)
     return NULL;
 
   /* get the proxy */
-  dbus_proxy = dbus_g_proxy_new_for_name (dbus_connection, PANEL_DBUS_PANEL_INTERFACE,
-                                          PANEL_DBUS_PATH, PANEL_DBUS_PANEL_INTERFACE);
+  dbus_proxy = dbus_g_proxy_new_for_name_owner (dbus_connection,
+                                                PANEL_DBUS_PANEL_INTERFACE,
+                                                PANEL_DBUS_PATH,
+                                                PANEL_DBUS_PANEL_INTERFACE,
+                                                error);
 
   return dbus_proxy;
 }
@@ -54,11 +57,19 @@ panel_dbus_client_get_proxy (GError **error)
 
 
 gboolean
-panel_dbus_client_check_client_running (GError **error)
+panel_dbus_client_check_instance_running (void)
 {
-  panel_return_val_if_fail (error == NULL || *error == NULL, TRUE);
+  DBusGProxy *dbus_proxy;
 
-  return FALSE;
+  /* get the proxy */
+  dbus_proxy = panel_dbus_client_get_proxy (NULL);
+  if (G_UNLIKELY (dbus_proxy == NULL))
+    return FALSE;
+
+  /* cleanup */
+  g_object_unref (G_OBJECT (dbus_proxy));
+
+  return TRUE;
 }
 
 
@@ -78,7 +89,8 @@ panel_dbus_client_display_preferences_dialog (guint    active,
     return FALSE;
 
   /* call */
-  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy, active, error);
+  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy,
+                                                          active, error);
 
   /* cleanup */
   g_object_unref (G_OBJECT (dbus_proxy));
@@ -103,7 +115,8 @@ panel_dbus_client_display_items_dialog (guint    active,
     return FALSE;
 
   /* call */
-  result = _panel_dbus_client_display_items_dialog (dbus_proxy, active, error);
+  result = _panel_dbus_client_display_items_dialog (dbus_proxy, active,
+                                                    error);
 
   /* cleanup */
   g_object_unref (G_OBJECT (dbus_proxy));
@@ -151,7 +164,9 @@ panel_dbus_client_add_new_item (const gchar  *plugin_name,
     return FALSE;
 
   /* call */
-  result = _panel_dbus_client_add_new_item (dbus_proxy, plugin_name, (const gchar **) arguments, error);
+  result = _panel_dbus_client_add_new_item (dbus_proxy, plugin_name,
+                                            (const gchar **) arguments,
+                                            error);
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;

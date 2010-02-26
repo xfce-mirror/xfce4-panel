@@ -37,6 +37,7 @@
 #include <glib.h>
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 #include <panel/panel-application.h>
 #include <panel/panel-dbus-service.h>
@@ -215,14 +216,13 @@ main (gint argc, gchar **argv)
 
       goto dbus_return;
     }
-  else if (panel_dbus_client_check_client_running (&error))
+  else if (panel_dbus_client_check_instance_running ())
     {
       /* quit without error if and instance is running */
-      result = !!(error == NULL);
+      result = TRUE;
 
       /* print message */
-      if (G_LIKELY (result == TRUE))
-        g_message (_("There is already a running instance..."));
+      g_message (_("There is already a running instance..."));
 
       goto dbus_return;
     }
@@ -284,8 +284,8 @@ main (gint argc, gchar **argv)
 
   if (G_UNLIKELY (error != NULL))
     {
-      /* print warning */
-      g_critical ("Failed to send D-BUS message: %s", error ? error->message : "No error message");
+      /* show error dialog */
+      xfce_dialog_show_error (NULL, error, _("Failed to send D-Bus message"));
 
       /* cleanup */
       g_error_free (error);

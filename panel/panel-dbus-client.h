@@ -23,7 +23,7 @@
 #include <glib.h>
 #include <gdk/gdk.h>
 
-gboolean  panel_dbus_client_check_client_running       (GError      **error);
+gboolean  panel_dbus_client_check_instance_running     (void);
 
 gboolean  panel_dbus_client_display_preferences_dialog (guint         active,
                                                         GError      **error);
