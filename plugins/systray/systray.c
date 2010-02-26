@@ -429,10 +429,17 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                              gint             size)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  GtkWidget     *frame = plugin->frame;
+  gint           border;
 
-  /* set border sizes */
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->frame),
-    (size > 26 && plugin->show_frame) ? 1 : 0);
+  /* set frame border */
+  border = (size > 26 && plugin->show_frame) ? 1 : 0;
+  gtk_container_set_border_width (GTK_CONTAINER (frame), border);
+
+  /* set the guess size this is used to get the initial icon size request
+   * correct to avoid flickering in the system tray for new applications */
+  border += MAX (frame->style->xthickness, frame->style->ythickness);
+  systray_box_set_guess_size (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border);
 
   return TRUE;
 }

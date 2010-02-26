@@ -36,13 +36,16 @@ void       systray_box_register_type   (GTypeModule  *module);
 
 GtkWidget *systray_box_new             (void) G_GNUC_MALLOC;
 
-void       systray_box_set_arrow_type  (SystrayBox   *tray,
+void       systray_box_set_guess_size  (SystrayBox   *box,
+                                        gint          guess_size);
+
+void       systray_box_set_arrow_type  (SystrayBox   *box,
                                         GtkArrowType  arrow_type);
 
-void       systray_box_set_rows        (SystrayBox   *tray,
+void       systray_box_set_rows        (SystrayBox   *box,
                                         gint          rows);
 
-gint       systray_box_get_rows        (SystrayBox   *tray);
+gint       systray_box_get_rows        (SystrayBox   *box);
 
 void       systray_box_add_with_name   (SystrayBox   *box,
                                         GtkWidget    *child,

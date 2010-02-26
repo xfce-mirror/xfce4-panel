@@ -92,6 +92,9 @@ struct _SystrayBox
 
   /* number of rows */
   gint          rows;
+
+  /* guess size, this is a value used to reduce the tray flickering */
+  gint          guess_size;
 };
 
 typedef struct
@@ -152,6 +155,7 @@ systray_box_init (SystrayBox *box)
   box->n_hidden_childeren = 0;
   box->arrow_type = GTK_ARROW_LEFT;
   box->show_hidden = FALSE;
+  box->guess_size = 128;
 
   /* create hash table */
   box->names = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -202,9 +206,14 @@ systray_box_size_request (GtkWidget      *widget,
   GtkRequisition   child_req;
   gint             n_visible_childeren = 0;
   gint             swap;
+  gint             guess_size, icon_size;
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (widget));
   panel_return_if_fail (requisition != NULL);
+
+  /* get the guess size */
+  guess_size = box->guess_size - (SPACING * (box->rows - 1));
+  guess_size /= box->rows;
 
   /* check if we need to hide or show any childeren */
   for (li = box->childeren; li != NULL; li = li->next)
@@ -243,11 +252,14 @@ systray_box_size_request (GtkWidget      *widget,
           /* count the number of visible childeren */
           if (child_info->auto_hide == FALSE || box->show_hidden == TRUE)
             {
+              /* get the icon size */
+              icon_size = MIN (guess_size, MAX (child_req.width, child_req.height));
+
               /* pick largest icon */
-              if (child_size == -1)
-                child_size = MAX (child_req.width, child_req.height);
+              if (G_UNLIKELY (child_size == -1))
+                child_size = icon_size;
               else
-                child_size = MAX (child_size, MAX (child_req.width, child_req.height));
+                child_size = MAX (child_size, icon_size);
 
               /* increase number of visible childeren */
               n_visible_childeren++;
@@ -600,6 +612,18 @@ GtkWidget *
 systray_box_new (void)
 {
   return g_object_new (XFCE_TYPE_SYSTRAY_BOX, NULL);
+}
+
+
+
+void
+systray_box_set_guess_size (SystrayBox *box,
+                            gint        guess_size)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
+
+  /* set the systray guess size */
+  box->guess_size = guess_size;
 }
 
 
