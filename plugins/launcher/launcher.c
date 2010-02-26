@@ -821,7 +821,7 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     gtk_container_add (GTK_CONTAINER (plugin), launcher->box);
     gtk_widget_show (launcher->box);
 
-    launcher->icon_button = xfce_create_panel_button ();
+    launcher->icon_button = xfce_panel_create_button ();
     gtk_box_pack_start (GTK_BOX (launcher->box), launcher->icon_button, TRUE, TRUE, 0);
     gtk_widget_show (launcher->icon_button);
 
