@@ -20,6 +20,13 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#ifdef HAVE_SYS_WAIT_H
+#include <sys/wait.h>
+#endif
+
 #include <exo/exo.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
@@ -47,34 +54,38 @@
 
 
 
-static void         panel_plugin_external_provider_init       (XfcePanelPluginProviderIface    *iface);
-static void         panel_plugin_external_finalize            (GObject                         *object);
-static void         panel_plugin_external_realize             (GtkWidget                       *widget);
-static void         panel_plugin_external_unrealize           (GtkWidget                       *widget);
-static gboolean     panel_plugin_external_plug_removed        (GtkSocket                       *socket);
-static void         panel_plugin_external_plug_added          (GtkSocket                       *socket);
-static void         panel_plugin_external_provider_signal     (XfcePanelPluginProvider         *provider,
-                                                               XfcePanelPluginProviderSignal    signal);
-static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider         *provider);
-static gint         panel_plugin_external_get_unique_id       (XfcePanelPluginProvider         *provider);
-static void         panel_plugin_external_set_size            (XfcePanelPluginProvider         *provider,
-                                                               gint                             size);
-static void         panel_plugin_external_set_orientation     (XfcePanelPluginProvider         *provider,
-                                                               GtkOrientation                   orientation);
-static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider         *provider,
-                                                               XfceScreenPosition               screen_position);
-static void         panel_plugin_external_save                (XfcePanelPluginProvider         *provider);
-static gboolean     panel_plugin_external_get_show_configure  (XfcePanelPluginProvider         *provider);
-static void         panel_plugin_external_show_configure      (XfcePanelPluginProvider         *provider);
-static gboolean     panel_plugin_external_get_show_about      (XfcePanelPluginProvider         *provider);
-static void         panel_plugin_external_show_about          (XfcePanelPluginProvider         *provider);
-static void         panel_plugin_external_remove              (XfcePanelPluginProvider         *provider);
-static void         panel_plugin_external_set_sensitive       (PanelPluginExternal             *external);
-static void         panel_plugin_external_set_property        (PanelPluginExternal             *external,
-                                                               DBusPropertyChanged              property,
-                                                               const GValue                    *value);
-static void         panel_plugin_external_set_property_noop   (PanelPluginExternal             *external,
-                                                               DBusPropertyChanged              property);
+static void         panel_plugin_external_provider_init         (XfcePanelPluginProviderIface    *iface);
+static void         panel_plugin_external_finalize              (GObject                         *object);
+static void         panel_plugin_external_realize               (GtkWidget                       *widget);
+static void         panel_plugin_external_unrealize             (GtkWidget                       *widget);
+static gboolean     panel_plugin_external_plug_removed          (GtkSocket                       *socket);
+static void         panel_plugin_external_plug_added            (GtkSocket                       *socket);
+static void         panel_plugin_external_provider_signal       (XfcePanelPluginProvider         *provider,
+                                                                 XfcePanelPluginProviderSignal    signal);
+static const gchar *panel_plugin_external_get_name              (XfcePanelPluginProvider         *provider);
+static gint         panel_plugin_external_get_unique_id         (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_set_size              (XfcePanelPluginProvider         *provider,
+                                                                 gint                             size);
+static void         panel_plugin_external_set_orientation       (XfcePanelPluginProvider         *provider,
+                                                                 GtkOrientation                   orientation);
+static void         panel_plugin_external_set_screen_position   (XfcePanelPluginProvider         *provider,
+                                                                 XfceScreenPosition               screen_position);
+static void         panel_plugin_external_save                  (XfcePanelPluginProvider         *provider);
+static gboolean     panel_plugin_external_get_show_configure    (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_show_configure        (XfcePanelPluginProvider         *provider);
+static gboolean     panel_plugin_external_get_show_about        (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_show_about            (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_remove                (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_set_sensitive         (PanelPluginExternal             *external);
+static void         panel_plugin_external_set_property          (PanelPluginExternal             *external,
+                                                                 DBusPropertyChanged              property,
+                                                                 const GValue                    *value);
+static void         panel_plugin_external_set_property_noop     (PanelPluginExternal             *external,
+                                                                 DBusPropertyChanged              property);
+static void         panel_plugin_external_child_watch           (GPid                             pid,
+                                                                 gint                             status,
+                                                                 gpointer                         user_data);
+static void         panel_plugin_external_child_watch_destroyed (gpointer                         user_data);
 
 
 struct _PanelPluginExternalClass
@@ -101,12 +112,16 @@ struct _PanelPluginExternal
   /* dbus message queue */
   GSList           *dbus_queue;
 
-  /* counter to count the number of restart */
+  /* counter to count the number of restarts */
   guint             n_restarts;
 
   /* some info we store here */
   guint             show_configure : 1;
   guint             show_about : 1;
+
+  /* child watch data */
+  GPid              pid;
+  guint             watch_id;
 };
 
 typedef struct
@@ -189,6 +204,13 @@ panel_plugin_external_finalize (GObject *object)
   GSList              *li;
   QueuedData          *data;
 
+  if (external->watch_id != 0)
+    {
+      /* remove the child watch and don't leave zomies */
+      g_source_remove (external->watch_id);
+      g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+    }
+
   /* cleanup */
   g_strfreev (external->arguments);
 
@@ -219,6 +241,7 @@ panel_plugin_external_realize (GtkWidget *widget)
   gchar                *socket_id, *unique_id;
   gint                  i, argc = 14;
   GdkScreen            *screen;
+  GPid                  pid;
 
   /* realize the socket first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->realize) (widget);
@@ -258,21 +281,27 @@ panel_plugin_external_realize (GtkWidget *widget)
   screen = gtk_widget_get_screen (widget);
 
   /* spawn the proccess */
-  succeed = gdk_spawn_on_screen (screen, NULL, argv, NULL, 0, NULL, NULL, NULL, &error);
+  succeed = gdk_spawn_on_screen (screen, NULL, argv, NULL,
+                                 G_SPAWN_DO_NOT_REAP_CHILD, NULL,
+                                 NULL, &pid, &error);
+
+  if (G_LIKELY (succeed))
+    {
+      /* watch the child */
+      external->pid = pid;
+      external->watch_id = g_child_watch_add_full (G_PRIORITY_LOW, pid,
+                                                   panel_plugin_external_child_watch, external,
+                                                   panel_plugin_external_child_watch_destroyed);
+    }
+  else
+    {
+      g_critical ("Failed to spawn the xfce4-panel-wrapper: %s", error->message);
+      g_error_free (error);
+    }
 
   /* cleanup */
   g_free (socket_id);
   g_free (unique_id);
-
-  /* handle problem */
-  if (G_UNLIKELY (succeed == FALSE))
-    {
-      /* show warnings */
-      g_critical ("Failed to spawn the xfce4-panel-wrapper: %s", error->message);
-
-      /* cleanup */
-      g_error_free (error);
-    }
 }
 
 
@@ -319,6 +348,13 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   gtk_widget_unrealize (GTK_WIDGET (socket));
   gtk_widget_hide (GTK_WIDGET (socket));
 
+  if (external->watch_id != 0)
+    {
+      /* remove the child watch and don't leave zomies */
+      g_source_remove (external->watch_id);
+      g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+    }
+
   /* increase the restart counter */
   external->n_restarts++;
 
@@ -362,6 +398,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
     {
       /* get the plugin panel */
       window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (socket)));
+      panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
 
       /* send panel information to the plugin */
       panel_window_set_povider_info (window, GTK_WIDGET (external));
@@ -696,6 +733,41 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 
   /* unset */
   g_value_unset (&value);
+}
+
+
+
+static void
+panel_plugin_external_child_watch (GPid     pid,
+                                   gint     status,
+                                   gpointer user_data)
+{
+  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (user_data);
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+  panel_return_if_fail (external->pid == pid);
+
+  switch (WEXITSTATUS (status))
+    {
+      case WRAPPER_EXIT_FAILURE:
+      case WRAPPER_EXIT_NO_PROVIDER:
+      case WRAPPER_EXIT_PREINIT:
+        /* wait until everything is settled, then destroy the
+         * external plugin so it is removed from the configuration */
+        exo_gtk_object_destroy_later (GTK_OBJECT (external));
+        break;
+    }
+
+  /* close the pid */
+  g_spawn_close_pid (pid);
+}
+
+
+
+static void
+panel_plugin_external_child_watch_destroyed (gpointer user_data)
+{
+  PANEL_PLUGIN_EXTERNAL (user_data)->watch_id = 0;
 }
 
 
