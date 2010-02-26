@@ -77,7 +77,7 @@ static GdkPixbuf *launcher_plugin_tooltip_pixbuf                (GdkScreen      
                                                                  const gchar          *icon_name);
 static void       launcher_plugin_menu_deactivate               (GtkWidget            *menu,
                                                                  LauncherPlugin       *plugin);
-static gboolean   launcher_plugin_menu_item_released            (GtkMenuItem          *widget,
+static gboolean   launcher_plugin_menu_item_pressed             (GtkMenuItem          *widget,
                                                                  GdkEventButton       *event,
                                                                  GarconMenuItem       *item);
 static void       launcher_plugin_menu_item_drag_data_received  (GtkWidget            *widget,
@@ -1318,9 +1318,9 @@ launcher_plugin_menu_deactivate (GtkWidget      *menu,
 
 
 static gboolean
-launcher_plugin_menu_item_released (GtkMenuItem      *widget,
-                                    GdkEventButton   *event,
-                                    GarconMenuItem   *item)
+launcher_plugin_menu_item_pressed (GtkMenuItem      *widget,
+                                   GdkEventButton   *event,
+                                   GarconMenuItem   *item)
 {
   LauncherPlugin *plugin;
   GdkScreen      *screen;
@@ -1443,8 +1443,8 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       gtk_widget_show (mi);
       gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets,
                          G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
-      g_signal_connect (G_OBJECT (mi), "button-release-event",
-          G_CALLBACK (launcher_plugin_menu_item_released), item);
+      g_signal_connect (G_OBJECT (mi), "button-press-event",
+          G_CALLBACK (launcher_plugin_menu_item_pressed), item);
       g_signal_connect (G_OBJECT (mi), "drag-data-received",
           G_CALLBACK (launcher_plugin_menu_item_drag_data_received), item);
       g_signal_connect (G_OBJECT (mi), "drag-leave",
