@@ -1442,6 +1442,7 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
 
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
+  panel_return_if_fail (child->button == NULL);
 
   /* create the application button */
   child->button = xfce_arrow_button_new (GTK_ARROW_NONE);
@@ -1453,7 +1454,8 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
                     G_CALLBACK (tasklist_button_button_press_event), child);
   gtk_widget_show (child->button);
 
-  child->box = gtk_hbox_new (FALSE, 6);
+  child->box = xfce_hvbox_new (child->tasklist->horizontal ?
+      GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, FALSE, 6);
   gtk_container_add (GTK_CONTAINER (child->button), child->box);
   gtk_widget_show (child->box);
 
@@ -1466,8 +1468,16 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
 
   child->label = gtk_label_new (NULL);
   gtk_box_pack_start (GTK_BOX (child->box), child->label, TRUE, TRUE, 0);
-  gtk_misc_set_alignment (GTK_MISC (child->label), 0.0, 0.5);
-  gtk_label_set_ellipsize (GTK_LABEL (child->label), child->tasklist->ellipsize_mode);
+  if (child->tasklist->horizontal)
+    {
+      gtk_misc_set_alignment (GTK_MISC (child->label), 0.0, 0.5);
+      gtk_label_set_ellipsize (GTK_LABEL (child->label), child->tasklist->ellipsize_mode);
+    }
+  else
+    {
+      gtk_label_set_angle (GTK_LABEL (child->label), 270);
+      gtk_misc_set_alignment (GTK_MISC (child->label), 0.50, 0.00);
+    }
 
   /* don't show the icon if we're in iconbox style */
   if (child->tasklist->show_labels)
@@ -1616,7 +1626,7 @@ xfce_tasklist_set_show_only_minimized (XfceTasklist *tasklist,
       /* set the new value */
       tasklist->only_minimized = !!only_minimized;
 
-      /* update the tray */
+      /* update the tasklist */
       for (li = tasklist->children; li != NULL; li = li->next)
         {
           child = li->data;
@@ -1668,7 +1678,9 @@ void
 xfce_tasklist_set_orientation (XfceTasklist   *tasklist,
                                GtkOrientation  orientation)
 {
-  gboolean horizontal;
+  gboolean           horizontal;
+  GSList            *li;
+  XfceTasklistChild *child;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
@@ -1677,6 +1689,31 @@ xfce_tasklist_set_orientation (XfceTasklist   *tasklist,
   if (tasklist->horizontal != horizontal)
     {
       tasklist->horizontal = horizontal;
+
+      /* update the tasklist */
+      for (li = tasklist->children; li != NULL; li = li->next)
+        {
+          child = li->data;
+
+          /* update task box */
+          xfce_hvbox_set_orientation (XFCE_HVBOX (child->box), orientation);
+
+          /* update the label */
+          if (horizontal)
+            {
+              gtk_misc_set_alignment (GTK_MISC (child->label), 0.0, 0.5);
+              gtk_label_set_angle (GTK_LABEL (child->label), 0);
+              gtk_label_set_ellipsize (GTK_LABEL (child->label),
+                                       child->tasklist->ellipsize_mode);
+            }
+          else
+            {
+              gtk_misc_set_alignment (GTK_MISC (child->label), 0.50, 0.00);
+              gtk_label_set_angle (GTK_LABEL (child->label), 270);
+              gtk_label_set_ellipsize (GTK_LABEL (child->label), PANGO_ELLIPSIZE_NONE);
+            }
+        }
+
       gtk_widget_queue_resize (GTK_WIDGET (tasklist));
     }
 }
