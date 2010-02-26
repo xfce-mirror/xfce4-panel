@@ -139,7 +139,8 @@ enum _AutohideState
   AUTOHIDE_POPDOWN,      /* visible, but hide timeout is running */
   AUTOHIDE_POPDOWN_SLOW, /* same as popdown, but timeout is 4x longer */
   AUTOHIDE_HIDDEN,       /* invisible */
-  AUTOHIDE_POPUP         /* invisible, but show timeout is running */
+  AUTOHIDE_POPUP,        /* invisible, but show timeout is running */
+  AUTOHIDE_BLOCKED       /* autohide is enabled, but blocked */
 };
 
 enum _SnapPosition
@@ -715,7 +716,8 @@ panel_window_leave_notify_event (GtkWidget        *widget,
 
   /* queue a new autohide time if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
-      && window->autohide_state != AUTOHIDE_DISABLED)
+      && window->autohide_state != AUTOHIDE_DISABLED
+      && window->autohide_state != AUTOHIDE_BLOCKED)
     panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->leave_notify_event) (widget, event);
@@ -797,7 +799,7 @@ panel_window_button_press_event (GtkWidget      *widget,
 
   /* leave if the event is not for this window */
   if (event->window != widget->window)
-    return FALSE;
+    goto end;
 
   /* get the modifiers */
   modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
@@ -842,7 +844,11 @@ panel_window_button_press_event (GtkWidget      *widget,
       return TRUE;
     }
 
-  return FALSE;
+end:
+  if (GTK_WIDGET_CLASS (panel_window_parent_class)->button_release_event != NULL)
+    return (*GTK_WIDGET_CLASS (panel_window_parent_class)->button_release_event) (widget, event);
+  else
+    return FALSE;
 }
 
 
@@ -867,7 +873,10 @@ panel_window_button_release_event (GtkWidget      *widget,
       return TRUE;
     }
 
-  return FALSE;
+  if (GTK_WIDGET_CLASS (panel_window_parent_class)->button_release_event != NULL)
+    return (*GTK_WIDGET_CLASS (panel_window_parent_class)->button_release_event) (widget, event);
+  else
+    return FALSE;
 }
 
 
@@ -876,7 +885,6 @@ static void
 panel_window_grab_notify (GtkWidget *widget,
                           gboolean   was_grabbed)
 {
-#if 0
   PanelWindow *window = PANEL_WINDOW (widget);
 
   /* avoid hiding the panel when the window is grabbed. this
@@ -886,7 +894,6 @@ panel_window_grab_notify (GtkWidget *widget,
     panel_window_thaw_autohide (window);
   else
     panel_window_freeze_autohide (window);
-#endif
 }
 
 
@@ -1629,6 +1636,7 @@ panel_window_autohide_timeout (gpointer user_data)
   PanelWindow *window = PANEL_WINDOW (user_data);
 
   panel_return_val_if_fail (window->autohide_state != AUTOHIDE_DISABLED, FALSE);
+  panel_return_val_if_fail (window->autohide_state != AUTOHIDE_BLOCKED, FALSE);
 
   /* update the status */
   if (window->autohide_state == AUTOHIDE_POPDOWN
@@ -1673,7 +1681,7 @@ panel_window_autohide_queue (PanelWindow   *window,
       || window->snap_position != SNAP_POSITION_NONE)
     panel_window_screen_layout_changed (window->screen, window);
 
-  if (new_state == AUTOHIDE_DISABLED)
+  if (new_state == AUTOHIDE_DISABLED || new_state == AUTOHIDE_BLOCKED)
     {
       /* queue a resize to make sure the panel is visible */
       gtk_widget_queue_resize (GTK_WIDGET (window));
@@ -1768,18 +1776,21 @@ panel_window_set_autohide (PanelWindow *window,
       /* show the window */
       window->autohide_window = popup;
       gtk_widget_show (popup);
+
+      /* start autohide */
+      panel_window_autohide_queue (window,
+          window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_BLOCKED);
     }
   else if (window->autohide_window != NULL)
     {
+      /* stop autohide */
+      panel_window_autohide_queue (window, AUTOHIDE_DISABLED);
+
       /* destroy the autohide window */
       panel_return_if_fail (GTK_IS_WINDOW (window->autohide_window));
       gtk_widget_destroy (window->autohide_window);
       window->autohide_window = NULL;
     }
-
-  /* start or stop autohiding */
-  panel_window_autohide_queue (window,
-      autohide ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_DISABLED);
 }
 
 
@@ -2038,6 +2049,14 @@ void
 panel_window_freeze_autohide (PanelWindow *window)
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (window->autohide_block >= 0);
+
+  /* increase autohide block counter */
+  window->autohide_block++;
+
+  if (window->autohide_block == 1
+      && window->autohide_state != AUTOHIDE_DISABLED)
+    panel_window_autohide_queue (window, AUTOHIDE_BLOCKED);
 }
 
 
@@ -2046,4 +2065,12 @@ void
 panel_window_thaw_autohide (PanelWindow *window)
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (window->autohide_block > 0);
+
+  /* decrease autohide block counter */
+  window->autohide_block--;
+
+  if (window->autohide_block == 0
+      && window->autohide_state != AUTOHIDE_DISABLED)
+    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
 }

@@ -145,6 +145,12 @@ void                 xfce_panel_plugin_position_menu       (GtkMenu           *m
                                                             gboolean          *push_in,
                                                             gpointer           panel_plugin);
 
+void                 xfce_panel_plugin_focus_widget        (XfcePanelPlugin   *plugin,
+                                                            GtkWidget         *widget);
+
+void                 xfce_panel_plugin_block_autohide      (XfcePanelPlugin   *plugin,
+                                                            gboolean           blocked);
+
 gchar               *xfce_panel_plugin_lookup_rc_file      (XfcePanelPlugin   *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
 gchar               *xfce_panel_plugin_save_location       (XfcePanelPlugin   *plugin,

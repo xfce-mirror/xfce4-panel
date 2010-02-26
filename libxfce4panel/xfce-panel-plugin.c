@@ -111,7 +111,8 @@ typedef enum
   PLUGIN_FLAG_DISPOSED       = 1 << 0,
   PLUGIN_FLAG_CONSTRUCTED    = 1 << 1,
   PLUGIN_FLAG_SHOW_CONFIGURE = 1 << 2,
-  PLUGIN_FLAG_SHOW_ABOUT     = 1 << 3
+  PLUGIN_FLAG_SHOW_ABOUT     = 1 << 3,
+  PLUGIN_FLAG_BLOCK_AUTOHIDE = 1 << 4
 }
 PluginFlags;
 
@@ -136,10 +137,10 @@ struct _XfcePanelPluginPrivate
   GtkMenu             *menu;
 
   /* menu block counter */
-  guint                menu_blocked;
+  gint                 menu_blocked;
 
-  /* registered menu counter */
-  guint                registered_menus;
+  /* autohide block counter */
+  gint                 panel_lock;
 };
 
 
@@ -457,7 +458,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->screen_position = XFCE_SCREEN_POSITION_NONE;
   plugin->priv->menu = NULL;
   plugin->priv->menu_blocked = 0;
-  plugin->priv->registered_menus = 0;
+  plugin->priv->panel_lock = 0;
   plugin->priv->flags = 0;
 
   /* hide the event box window to make the plugin transparent */
@@ -948,20 +949,20 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
                                    XfcePanelPlugin *plugin)
 {
     panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-    panel_return_if_fail (plugin->priv->registered_menus > 0);
+    panel_return_if_fail (plugin->priv->panel_lock > 0);
     panel_return_if_fail (GTK_IS_MENU (menu));
 
-    if (G_LIKELY (plugin->priv->registered_menus > 0))
+    if (G_LIKELY (plugin->priv->panel_lock > 0))
       {
         /* disconnect this signal */
         g_signal_handlers_disconnect_by_func (G_OBJECT (menu),
             G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
         /* decrease the counter */
-        plugin->priv->registered_menus--;
+        plugin->priv->panel_lock--;
 
         /* emit signal to unlock the panel */
-        if (G_LIKELY (plugin->priv->registered_menus == 0))
+        if (plugin->priv->panel_lock == 0)
           xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
                                                   PROVIDER_SIGNAL_UNLOCK_PANEL);
       }
@@ -1244,7 +1245,8 @@ xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), -1);
 
-  return plugin->priv->size;
+  /* always return a 'positive' size that makes sence */
+  return MAX (16, plugin->priv->size);
 }
 
 
@@ -1504,13 +1506,13 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
   g_return_if_fail (GTK_IS_MENU (menu));
 
   /* increase the counter */
-  plugin->priv->registered_menus++;
+  plugin->priv->panel_lock++;
 
   /* connect signal to menu to decrease counter */
   g_signal_connect (G_OBJECT (menu), "deactivate", G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
   /* tell panel it needs to lock */
-  if (G_LIKELY (plugin->priv->registered_menus == 1))
+  if (plugin->priv->panel_lock == 1)
     xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
                                             PROVIDER_SIGNAL_LOCK_PANEL);
 }
@@ -1695,6 +1697,65 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
 
   /* register the menu */
   xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (panel_plugin), menu);
+}
+
+
+
+PANEL_SYMBOL_EXPORT void
+xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
+                                GtkWidget       *widget)
+{
+  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
+  /* focus the panel window */
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_FOCUS_PLUGIN);
+
+  /* let the widget grab focus */
+  gtk_widget_grab_focus (widget);
+}
+
+
+
+PANEL_SYMBOL_EXPORT void
+xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
+                                  gboolean         blocked)
+{
+  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+
+  /* leave when requesting the same block state */
+  if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE) == blocked)
+    return;
+
+  if (blocked)
+    {
+      /* increase the counter */
+      panel_return_if_fail (plugin->priv->panel_lock >= 0);
+      plugin->priv->panel_lock++;
+
+      /* remember this function blocked the panel */
+      PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE);
+
+      /* tell panel it needs to lock */
+      if (plugin->priv->panel_lock == 1)
+        xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                                PROVIDER_SIGNAL_LOCK_PANEL);
+    }
+  else
+    {
+      /* decrease the counter */
+      panel_return_if_fail (plugin->priv->panel_lock > 0);
+      plugin->priv->panel_lock--;
+
+      /* unset the flag */
+      PANEL_UNSET_FLAG (plugin->priv->flags, PLUGIN_FLAG_BLOCK_AUTOHIDE);
+
+      /* tell panel it needs to unlock */
+      if (plugin->priv->panel_lock == 0)
+        xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                                PROVIDER_SIGNAL_UNLOCK_PANEL);
+    }
 }
 
 

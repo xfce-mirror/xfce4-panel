@@ -441,6 +441,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 
   /* get the panel of the plugin */
   window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   /* handle the signal emitted from the plugin provider */
   switch (provider_signal)
@@ -510,7 +511,18 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         panel_dialogs_show_about ();
         break;
 
+      case PROVIDER_SIGNAL_FOCUS_PLUGIN:
+         /* focus the panel window */
+         gtk_window_present_with_time (GTK_WINDOW (window), GDK_CURRENT_TIME);
+         break;
+
+      case PROVIDER_SIGNAL_SHOW_CONFIGURE:
+      case PROVIDER_SIGNAL_SHOW_ABOUT:
+        /* signals we can ignore, only for external plugins */
+        break;
+
       default:
+        g_critical ("Received unknown provider signal %d", provider_signal);
         break;
     }
 }
