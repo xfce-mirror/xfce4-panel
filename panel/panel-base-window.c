@@ -361,9 +361,8 @@ panel_base_window_expose_event (GtkWidget      *widget,
 
   if (G_UNLIKELY (priv->active_timeout_id != 0))
     {
-      /* set black color, no alpha */
-      color = &(widget->style->dark[GTK_STATE_SELECTED]);
-      panel_util_set_source_rgba (cr, color, 1.00);
+      /* red color, no alpha */
+      cairo_set_source_rgb (cr, 1.00, 0.00, 0.00);
 
       /* set dash based on time (odd/even) */
       g_get_current_time (&timeval);
