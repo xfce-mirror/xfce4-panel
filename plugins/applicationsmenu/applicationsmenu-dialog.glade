@@ -30,11 +30,13 @@
                     <property name="bottom_padding">6</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkVBox" id="vbox3">
+                      <object class="GtkTable" id="table1">
                         <property name="visible">True</property>
                         <property name="border_width">6</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">6</property>
+                        <property name="n_rows">5</property>
+                        <property name="n_columns">2</property>
+                        <property name="column_spacing">12</property>
+                        <property name="row_spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="show-generic-names">
                             <property name="label" translatable="yes">Show generic application n_ames</property>
@@ -46,7 +48,7 @@
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
-                            <property name="position">0</property>
+                            <property name="right_attach">2</property>
                           </packing>
                         </child>
                         <child>
@@ -59,7 +61,9 @@
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
-                            <property name="position">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
                           </packing>
                         </child>
                         <child>
@@ -72,88 +76,74 @@
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
-                            <property name="position">2</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="title-box">
+                          <object class="GtkLabel" id="label2">
                             <property name="visible">True</property>
-                            <property name="spacing">12</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Button _title:</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">button-title</property>
+                          </object>
+                          <packing>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                            <property name="x_options">GTK_FILL</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="button-title">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">&#x2022;</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label4">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">_Icon:</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">icon-button</property>
+                          </object>
+                          <packing>
+                            <property name="top_attach">4</property>
+                            <property name="bottom_attach">5</property>
+                            <property name="x_options">GTK_FILL</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkAlignment" id="alignment4">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="xscale">0</property>
+                            <property name="yscale">0</property>
                             <child>
-                              <object class="GtkAlignment" id="alignment4">
-                                <property name="visible">True</property>
-                                <property name="left_padding">22</property>
-                                <child>
-                                  <object class="GtkLabel" id="label2">
-                                    <property name="visible">True</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Button _title:</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">button-title</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkEntry" id="button-title">
+                              <object class="GtkButton" id="icon-button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x2022;</property>
-                              </object>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="position">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkHBox" id="hbox3">
-                            <property name="visible">True</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <object class="GtkLabel" id="label4">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Icon:</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">icon-button</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkAlignment" id="alignment2">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="xscale">0</property>
-                                <property name="yscale">0</property>
+                                <property name="receives_default">True</property>
                                 <child>
-                                  <object class="GtkButton" id="icon-button">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <child>
-                                      <placeholder/>
-                                    </child>
-                                  </object>
+                                  <placeholder/>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
                             </child>
                           </object>
                           <packing>
-                            <property name="position">4</property>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">4</property>
+                            <property name="bottom_attach">5</property>
                           </packing>
                         </child>
                       </object>
@@ -309,10 +299,5 @@
       <action-widget response="0">close-button</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkSizeGroup" id="sizegroup1">
-    <widgets>
-      <widget name="label4"/>
-      <widget name="alignment4"/>
-    </widgets>
-  </object>
+  <object class="GtkSizeGroup" id="sizegroup1"/>
 </interface>

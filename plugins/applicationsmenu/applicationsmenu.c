@@ -202,6 +202,7 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
   gtk_widget_set_name (plugin->button, "applicationmenu-button");
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
+  gtk_widget_set_tooltip_text (plugin->button, DEFAULT_TITLE);
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (applications_menu_plugin_menu), plugin);
 
@@ -301,6 +302,7 @@ applications_menu_plugin_set_property (GObject      *object,
       plugin->button_title = g_value_dup_string (value);
       gtk_label_set_text (GTK_LABEL (plugin->label),
           plugin->button_title != NULL ? plugin->button_title : "");
+      gtk_widget_set_tooltip_text (plugin->button, plugin->button_title);
       break;
 
     case PROP_BUTTON_ICON:
@@ -493,10 +495,6 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
   exo_mutual_binding_new (G_OBJECT (plugin), "show-button-title",
                           G_OBJECT (object), "active");
-
-  object2 = gtk_builder_get_object (builder, "title-box");
-  panel_return_if_fail (GTK_IS_WIDGET (object2));
-  exo_binding_new (G_OBJECT (object), "active", G_OBJECT (object2), "sensitive");
 
   object = gtk_builder_get_object (builder, "button-title");
   panel_return_if_fail (GTK_IS_ENTRY (object));
