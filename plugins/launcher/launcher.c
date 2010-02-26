@@ -37,7 +37,7 @@
 #include "launcher-dialog.h"
 
 #define ARROW_BUTTON_SIZE              (12)
-#define DEFAULT_MENU_ICON_SIZE         (24)
+#define DEFAULT_MENU_ICON_SIZE         (GTK_ICON_SIZE_DND)
 #define MENU_POPUP_DELAY               (225)
 #define NO_ARROW_INSIDE_BUTTON(plugin) ((plugin)->arrow_position != LAUNCHER_ARROW_INTERNAL \
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
@@ -116,7 +116,7 @@ struct _LauncherPlugin
   GSList            *items;
 
   guint              menu_timeout_id;
-  gint               menu_icon_size;
+  GtkIconSize        menu_icon_size;
 
   guint              disable_tooltips : 1;
   guint              move_first : 1;
@@ -209,10 +209,10 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
                                                       EXO_PARAM_READWRITE));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
-                                           g_param_spec_int ("menu-icon-size",
+                                           g_param_spec_enum ("menu-icon-size",
                                                              NULL,
-                                                             "Icon size (pixels) used in the menu",
-                                                             16, 128,
+                                                             "GtkIconSize used in the menu",
+                                                             GTK_TYPE_ICON_SIZE,
                                                              DEFAULT_MENU_ICON_SIZE,
                                                              EXO_PARAM_READABLE));
 
@@ -475,7 +475,7 @@ launcher_plugin_style_set (GtkWidget *widget,
                            GtkStyle  *previous_style)
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (widget);
-  gint            menu_icon_size;
+  GtkIconSize     menu_icon_size;
 
   /* let gtk update the widget style */
   (*GTK_WIDGET_CLASS (launcher_plugin_parent_class)->style_set) (widget, previous_style);
@@ -841,7 +841,6 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
   GtkWidget    *mi, *image;
   const gchar  *name, *icon_name;
   GSList       *li;
-  GdkPixbuf    *pixbuf;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
@@ -897,17 +896,9 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       icon_name = xfce_menu_item_get_icon_name (item);
       if (IS_STRING (icon_name))
         {
-          pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-                                             icon_name, plugin->menu_icon_size,
-                                             0, NULL);
-          if (G_LIKELY (pixbuf != NULL))
-            {
-              image = gtk_image_new_from_pixbuf (pixbuf);
-              gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-              gtk_widget_show (image);
-
-              g_object_unref (G_OBJECT (pixbuf));
-            }
+          image = gtk_image_new_from_icon_name (icon_name, plugin->menu_icon_size);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+          gtk_widget_show (image);
         }
     }
 }
