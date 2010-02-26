@@ -44,7 +44,7 @@ static gboolean separator_plugin_size_changed              (XfcePanelPlugin     
                                                             gint                   size);
 static void     separator_plugin_save                      (XfcePanelPlugin       *panel_plugin);
 static void     separator_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
-static void     tasklist_plugin_orientation_changed        (XfcePanelPlugin       *panel_plugin,
+static void     separator_plugin_orientation_changed       (XfcePanelPlugin       *panel_plugin,
                                                             GtkOrientation         orientation);
 static void     separator_plugin_property_changed          (XfconfChannel         *channel,
                                                             const gchar           *property_name,
@@ -111,7 +111,7 @@ separator_plugin_class_init (SeparatorPluginClass *klass)
   plugin_class->save = separator_plugin_save;
   plugin_class->size_changed = separator_plugin_size_changed;
   plugin_class->configure_plugin = separator_plugin_configure_plugin;
-  plugin_class->orientation_changed = tasklist_plugin_orientation_changed;
+  plugin_class->orientation_changed = separator_plugin_orientation_changed;
 }
 
 
@@ -316,8 +316,8 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static void
-tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                     GtkOrientation   orientation)
+separator_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
+                                      GtkOrientation   orientation)
 {
   /* for a size change to set the widget size request properly */
   separator_plugin_size_changed (panel_plugin, 
