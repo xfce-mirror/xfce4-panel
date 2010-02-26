@@ -56,16 +56,20 @@ typedef GTypeModule XfcePanelTypeModule;
 
 
 /**
- * XFCE_PANEL_PLUGIN_CHANNEL_NAME:
+ * XFCE_PANEL_CHANNEL_NAME:
  *
- * Macro for the name of the Xfconf channel used by the panel.
+ * Macro for the name of the Xfconf channel used by the panel. By default
+ * this returns "xfce4-panel", but you can override this value with the
+ * environment variable XFCE_PANEL_CHANNEL_NAME.
  *
  * See also: xfce_panel_plugin_xfconf_channel_new,
  *           xfce_panel_plugin_get_property_base
  *
  * Since: 4.8.0
  **/
-#define XFCE_PANEL_PLUGIN_CHANNEL_NAME ("xfce4-panel")
+#define XFCE_PANEL_CHANNEL_NAME \
+  (G_LIKELY (g_getenv ("XFCE_PANEL_CHANNEL_NAME") == NULL) ? \
+      "xfce4-panel" : g_getenv ("XFCE_PANEL_CHANNEL_NAME"))
 
 
 
@@ -83,7 +87,7 @@ typedef GTypeModule XfcePanelTypeModule;
  * Since: 4.8.0
  **/
 #define xfce_panel_plugin_xfconf_channel_new(plugin) \
-  xfconf_channel_new_with_property_base (XFCE_PANEL_PLUGIN_CHANNEL_NAME, \
+  xfconf_channel_new_with_property_base (XFCE_PANEL_CHANNEL_NAME, \
     xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)))
 
 
