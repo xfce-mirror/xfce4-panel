@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel-devel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 12:00+0100\n"
-"PO-Revision-Date: 2010-02-20 14:30-0000\n"
-"Last-Translator: Sergio Marques <smarquespt@gmail.com>\n"
+"POT-Creation-Date: 2010-02-23 12:00+0100\n"
+"PO-Revision-Date: 2010-02-23 14:11-0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,38 +35,55 @@ msgstr "Personalizar o Painel Xfce"
 msgid "Panel Preferences"
 msgstr "Preferências do Painel"
 
+#: ../common/panel-builder.c:155
+msgid "_Read Online"
+msgstr "_Ler Online"
+
+#: ../common/panel-builder.c:156
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Pode ler o manual de utilizador online. No entanto, este manual pode não concidir com a sua versão."
+
+#: ../common/panel-builder.c:158
+msgid "The Xfce Panel user manual is not installed on your computer"
+msgstr "O manual do Painel XFCE não está instalado no computador"
+
+#. display an error message to the user
+#: ../common/panel-builder.c:171
+msgid "Failed to open the documentation browser"
+msgstr "Falha ao abrir o navegador de documentação"
+
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:829
-#: ../panel/panel-preferences-dialog.c:881
+#: ../libxfce4panel/xfce-panel-plugin.c:841
+#: ../panel/panel-preferences-dialog.c:869
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Tem a certeza que quer remover \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:834
-#: ../panel/panel-preferences-dialog.c:884
+#: ../libxfce4panel/xfce-panel-plugin.c:846
+#: ../panel/panel-preferences-dialog.c:872
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se remover este item do painel, será perdido para sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:973
+#: ../libxfce4panel/xfce-panel-plugin.c:985
 msgid "_Move"
 msgstr "_Mover"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1011
-#: ../panel/panel-window.c:2066
+#: ../libxfce4panel/xfce-panel-plugin.c:1023
+#: ../panel/panel-window.c:2067
 msgid "Add _New Items..."
 msgstr "Adicionar _Novos Itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1022
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../panel/panel-window.c:2078
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do Pain_el..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1046
-#: ../panel/panel-window.c:2100
+#: ../libxfce4panel/xfce-panel-plugin.c:1058
+#: ../panel/panel-window.c:2101
 msgid "_Restart"
 msgstr "_Reiniciar"
 
@@ -202,7 +219,7 @@ msgstr "Por favor, escolha o painel para o novo plugin:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:628
+#: ../panel/panel-preferences-dialog.c:616
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
@@ -225,55 +242,50 @@ msgstr "O plugin \"%s\" desapareceu do painel. Deseja reinicia-lo?"
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "O plugin reiniciou mais que uma vez nos últimos %d segundos. Se premir Executar, o painel irá tentar reiniciar o plugin. Caso contrário o plugin será removido do painel para sempre."
 
-#: ../panel/panel-item-dialog.c:173
+#: ../panel/panel-item-dialog.c:174
 msgid "Add New Items"
 msgstr "Adicionar Novos Itens"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:176
 msgid "Add new plugins to the panel"
 msgstr "Adicionar novos itens ao painel"
 
-#: ../panel/panel-item-dialog.c:197
+#: ../panel/panel-item-dialog.c:198
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Procurar:"
 
-#: ../panel/panel-item-dialog.c:205
+#: ../panel/panel-item-dialog.c:206
 msgid "Enter search phrase here"
 msgstr "Indique aqui a frase a pesquisar"
 
-#: ../panel/panel-item-dialog.c:310
-#: ../panel/panel-preferences-dialog.c:281
-msgid "Failed to open manual"
-msgstr "Falha ao abrir o manual"
-
-#: ../panel/panel-preferences-dialog.c:395
+#: ../panel/panel-preferences-dialog.c:383
 msgid "Automatic"
 msgstr "Automtico"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:414
+#: ../panel/panel-preferences-dialog.c:402
 #, c-format
 msgid "Screen %d"
 msgstr "Ecrã %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:440
+#: ../panel/panel-preferences-dialog.c:428
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:689
+#: ../panel/panel-preferences-dialog.c:677
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "As configurações do painel e do plugin serão removidas permanentemente"
 
-#: ../panel/panel-preferences-dialog.c:690
+#: ../panel/panel-preferences-dialog.c:678
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Tem a certeza que quer remover o painel %d?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:764
+#: ../panel/panel-preferences-dialog.c:752
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
@@ -396,33 +408,81 @@ msgstr "Vertical"
 msgid "Xfce Panel"
 msgstr "Painel Xfce"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#. I18N: label for the background alha slider
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Enter:"
 msgstr "_Enter:"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "_Leave:"
 msgstr "_Sair:"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "_Lock panel"
 msgstr "_Bloquear painel"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_Orientation:"
 msgstr "_Orientação:"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Size (pixels):"
 msgstr "Ta_manho (pixeis):"
 
+#: ../migrate/main.c:78
+msgid "Welcome to the first start of the Xfce Panel"
+msgstr "Bem-vindo à iniciação do Painel XFCE"
+
+#: ../migrate/main.c:80
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh inital configuration."
+msgstr "Como o painel foi movido para um novo sistema para armazenar as definições, este tem que carregar a configuração inicial."
+
+#: ../migrate/main.c:83
+msgid "Choose below which setup you want for the first startup."
+msgstr "Escolha a configuração que deseja para o arranque inicial."
+
+#: ../migrate/main.c:89
+msgid "Migrate old config"
+msgstr "Migrar configuração antiga"
+
+#: ../migrate/main.c:90
+msgid "Migrate the old 4.6 configuration to Xfconf"
+msgstr "Migrar a antiga configuração 4.6 para XFconf"
+
+#: ../migrate/main.c:95
+msgid "Use default config"
+msgstr "Usar configuração por omissão"
+
+#: ../migrate/main.c:96
+msgid "Load the default configuration"
+msgstr "Carregar a configuração por omissão"
+
+#: ../migrate/main.c:102
+msgid "One empty panel"
+msgstr "Um painel vazio"
+
+#: ../migrate/main.c:103
+msgid "Start with one empty panel"
+msgstr "Iniciar com um painel vazio"
+
+#: ../migrate/main.c:115
+msgid "Failed to migrate the old panel configuration"
+msgstr "Falha ao migrar a antiga configuração do painel"
+
+#: ../migrate/main.c:125
+msgid "Failed to load the default configuration"
+msgstr "Falha ao carregar a configuração por omissão"
+
 #: ../plugins/actions/actions-dialog.glade.h:1
-msgid "Action Button"
-msgstr "Botão de Acção"
+#: ../plugins/actions/actions.desktop.in.h:1
+msgid "Action Buttons"
+msgstr "Botões de Acção"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Button Actions"
@@ -472,10 +532,6 @@ msgstr "Hibernar"
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Falha ao executar o comando \"%s\""
-
-#: ../plugins/actions/actions.desktop.in.h:1
-msgid "Action Buttons"
-msgstr "Botões de Acção"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -552,7 +608,7 @@ msgid "Select An Icon"
 msgstr "Seleccione Um Ícone"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:670
-#: ../plugins/launcher/launcher.c:2099
+#: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Falha ao exectar o comando \"%s\"."
@@ -653,242 +709,242 @@ msgstr "_Disposição:"
 msgid "_Tooltip format:"
 msgstr "Formato de _Dica:"
 
-#: ../plugins/clock/clock-fuzzy.c:84
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
 msgstr "Noite"
 
-#: ../plugins/clock/clock-fuzzy.c:85
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
 msgstr "Madrugada"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
 msgstr "Manhã"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
 msgstr "Quase meio-dia"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
 msgstr "Meio-dia"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
 msgstr "Tarde"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
 msgstr "Noite"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
 msgstr "Pela noite dentro"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:98
+#: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 horas"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 e cinco"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 e dez"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0 e um quarto"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 e vinte"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 e vinte e cinco"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
 msgstr "%0 e meia"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "vinte e cinco para as %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
 msgstr "vinte para as %1"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
 msgstr "um quarto para as %1"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
 msgstr "dez para as %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
 msgstr "cinco para as %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 horas"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:117
+#: ../plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 hora"
 
-#: ../plugins/clock/clock-fuzzy.c:118
+#: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 e cinco"
 
-#: ../plugins/clock/clock-fuzzy.c:119
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "ten past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0 e um quarto"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 e vinte"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 e vinte e cinco"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "half past %0"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "vinte e cinco para a %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "vinte para a %1"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "um quarto para a %1"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "dez para a %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "cinco para a %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 hora"
 
-#: ../plugins/clock/clock-fuzzy.c:134
+#: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
 msgstr "uma"
 
-#: ../plugins/clock/clock-fuzzy.c:135
+#: ../plugins/clock/clock-fuzzy.c:137
 msgid "two"
 msgstr "duas"
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
 msgstr "três"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
 msgstr "quatro"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "five"
 msgstr "cinco"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
 msgstr "seis"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
 msgstr "sete"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "eight"
 msgstr "oito"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "nine"
 msgstr "nove"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
 msgstr "dez"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
 msgstr "onze"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
 msgstr "doze"
 
-#: ../plugins/clock/clock.c:140
+#: ../plugins/clock/clock.c:144
 msgid "Week %V"
 msgstr "Semana %V"
 
-#: ../plugins/clock/clock.c:379
+#: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
 msgstr "Falha ao executar o comando do relógio"
 
-#: ../plugins/clock/clock.c:653
+#: ../plugins/clock/clock.c:677
 msgid "Custom Format"
 msgstr "Formato Personalizado"
 
@@ -1054,11 +1110,11 @@ msgstr "Oeste"
 msgid "_Arrow button position:"
 msgstr "Posição do botão s_eta:"
 
-#: ../plugins/launcher/launcher.c:1445
+#: ../plugins/launcher/launcher.c:1441
 msgid "Unnamed Item"
 msgstr "Item Sem Nome"
 
-#: ../plugins/launcher/launcher.c:1585
+#: ../plugins/launcher/launcher.c:1581
 msgid "No items"
 msgstr "Sem itens"
 
@@ -1259,23 +1315,23 @@ msgstr "A_grupamento de janelas:"
 msgid "Window title"
 msgstr "Título da janela"
 
-#: ../plugins/tasklist/tasklist-widget.c:2278
+#: ../plugins/tasklist/tasklist-widget.c:2282
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar Todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2287
+#: ../plugins/tasklist/tasklist-widget.c:2291
 msgid "Un_minimize All"
 msgstr "Reverter Mini_mização"
 
-#: ../plugins/tasklist/tasklist-widget.c:2293
+#: ../plugins/tasklist/tasklist-widget.c:2297
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar Todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2302
+#: ../plugins/tasklist/tasklist-widget.c:2306
 msgid "_Unmaximize All"
 msgstr "_Reverter Maximização"
 
-#: ../plugins/tasklist/tasklist-widget.c:2312
+#: ../plugins/tasklist/tasklist-widget.c:2316
 msgid "_Close All"
 msgstr "Fechar _Todas"
 
@@ -1342,4 +1398,9 @@ msgstr "Remover Área de Trabalho %d"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Trocar entre janelas abertas usando um menu"
+
+#~ msgid "Failed to open manual"
+#~ msgstr "Falha ao abrir o manual"
+#~ msgid "Action Button"
+#~ msgstr "Botão de Acção"
 
