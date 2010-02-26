@@ -119,7 +119,7 @@ enum /*< skip >*/
             break; \
             \
           case PANEL_CLIENT_EVENT_SET_LOCKED: \
-            xfce_panel_plugin_provider_set_locked (provider, !!value) \
+            xfce_panel_plugin_provider_set_locked (provider, !!value); \
             break; \
             \
           case PANEL_CLIENT_EVENT_SET_ORIENTATION: \
