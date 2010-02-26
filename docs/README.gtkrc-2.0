@@ -18,7 +18,8 @@ style "xfce-tasklist-style"
   # Ellipsizing used in the task list button label.
   XfceTasklist::ellipsize-mode = PANGO_ELLIPSIZE_END
   
-  # Lucency of minimized icons. Valid values are between 0 and 100.
+  # Lucency of minimized icons. Valid values are between 0 (completely
+  # hide the icon) and 100 (don't lighten the icon).
   XfceTasklist::minimized-icon-lucency = 50
 }
 class "XfceTasklist" style "xfce-tasklist-style"

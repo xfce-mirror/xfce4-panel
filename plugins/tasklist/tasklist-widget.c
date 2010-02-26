@@ -1248,6 +1248,10 @@ tasklist_button_icon_changed (WnckWindow        *window,
   GdkPixbuf *pixbuf;
   GdkPixbuf *lucent;
 
+  /* leave when lucency is set to 0 */
+  if (child->tasklist->minimized_icon_lucency == 0)
+    return;
+
   /* get the application icon */
   if (child->tasklist->show_labels)
     pixbuf = wnck_window_get_mini_icon (window);
@@ -1533,7 +1537,8 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, TRUE, 0);
   else
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, TRUE, TRUE, 0);
-  gtk_widget_show (child->icon);
+  if (child->tasklist->minimized_icon_lucency > 0)
+    gtk_widget_show (child->icon);
 
   child->label = gtk_label_new (NULL);
   gtk_box_pack_start (GTK_BOX (child->box), child->label, TRUE, TRUE, 0);
