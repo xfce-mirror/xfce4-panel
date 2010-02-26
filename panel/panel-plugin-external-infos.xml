@@ -1,0 +1,39 @@
+<node name="/org/xfce/Panel/Wrapper">
+  <!--
+    org.xfce.Panel.Wrapper
+  -->
+  <interface name="org.xfce.Panel.Wrapper">
+    <annotation name="org.freedesktop.DBus.GLib.CSymbol"
+                value="panel_plugin_external_dbus" />
+    <annotation name="org.freedesktop.DBus.GLib.ClientCSymbol"
+                value="wrapper_dbus" />
+
+    <!--
+      property : Name of the property to set on the wrapper. This is used
+                 for both panel values (no reply required) and plugin
+                 event (require a reply from the plugin).
+      value    : GValue with the value for the property.
+      reply_id : 0 if no reply is needed, if bigger then 0, the id to
+                 return together with the Reply method.
+    -->
+    <signal name="Set">
+      <arg name="values" type="a(svu)" />
+    </signal>
+
+    <!--
+      replay_id : The reply id given during the request.
+      value     : The return value for the reply.
+    -->
+    <method name="Reply">
+      <arg name="reply_id" type="u" />
+      <arg name="value" type="v" />
+    </method>
+
+    <!--
+      signal : A provider signal from XfcePanelPluginProviderSignal.
+    -->
+    <method name="ProviderSignal">
+      <arg name="signal" type="u" />
+    </method>
+  </interface>
+</node>

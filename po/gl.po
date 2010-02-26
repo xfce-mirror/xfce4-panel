@@ -1,0 +1,1288 @@
+# Galician translation of xfce4-panel
+# Copyright (C) 2008, 2009, 2010 Leandro Regueiro
+# This file is distributed under the same license as the xfce package.
+#
+# Ricardo Domínguez Rouco <riklaren@gmail.com>, 2006.
+# Leandro Regueiro <leandro.regueiro@gmail.com>, 2008, 2009, 2010.
+#
+# Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
+# colaborar connosco, podes atopar máis información en <http://trasno.net>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel 4.7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-18 18:00+0100\n"
+"PO-Revision-Date: 2010-02-21 19:12+0100\n"
+"Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: ../panel-desktop-handler.desktop.in.h:1
+msgid "Create Launcher on Xfce Panel"
+msgstr "Crear un iniciador no panel de Xfce"
+
+#: ../panel-desktop-handler.desktop.in.h:2
+msgid "Create a new launcher on the Xfce Panel"
+msgstr "Crear un novo iniciador no panel de Xfce"
+
+#: ../panel-preferences.desktop.in.h:1
+msgid "Customize the Xfce Panel"
+msgstr "Personalizar o panel de Xfce"
+
+#: ../panel-preferences.desktop.in.h:2
+msgid "Panel Preferences"
+msgstr "Preferencias de panel"
+
+#. I18N: %s is the name of the plugin
+#: ../libxfce4panel/xfce-panel-plugin.c:829
+#: ../panel/panel-preferences-dialog.c:881
+#, c-format
+msgid "Are you sure that you want to remove \"%s\"?"
+msgstr "Está seguro de que desexa eliminar \"%s\"?"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:834
+#: ../panel/panel-preferences-dialog.c:884
+msgid "If you remove the item from the panel, it is permanently lost."
+msgstr "Se elimina o elemento do panel, perderase permanentemente."
+
+#. move item
+#: ../libxfce4panel/xfce-panel-plugin.c:973
+msgid "_Move"
+msgstr "_Mover"
+
+#. add new items
+#: ../libxfce4panel/xfce-panel-plugin.c:1011
+#: ../panel/panel-window.c:2066
+msgid "Add _New Items..."
+msgstr "Engadir _novos elementos..."
+
+#. customize panel
+#: ../libxfce4panel/xfce-panel-plugin.c:1022
+#: ../panel/panel-window.c:2077
+msgid "Panel Pr_eferences..."
+msgstr "Pr_eferencias do panel..."
+
+#. restart item
+#: ../libxfce4panel/xfce-panel-plugin.c:1046
+#: ../panel/panel-window.c:2100
+msgid "_Restart"
+msgstr "_Reiniciar"
+
+#: ../panel/main.c:75
+msgid "Show the 'Panel Preferences' dialog"
+msgstr "Mostrar o diálogo \"Preferencias do panel\""
+
+#: ../panel/main.c:75
+#: ../panel/main.c:76
+msgid "PANEL-NUMBER"
+msgstr "NÚMERO-DE-PANEL"
+
+#: ../panel/main.c:76
+msgid "Show the 'Add New Items' dialog"
+msgstr "Mostrar o diálogo \"Engadir novos elementos\""
+
+#: ../panel/main.c:77
+msgid "Save the panel configuration"
+msgstr "Gardar a configuración do panel"
+
+#: ../panel/main.c:78
+msgid "Add a new plugin to the panel"
+msgstr "Engadir un novo engadido ao panel"
+
+#: ../panel/main.c:78
+msgid "PLUGIN-NAME"
+msgstr "NOME-DO-ENGADIDO"
+
+#: ../panel/main.c:79
+msgid "Restart the running panel instance"
+msgstr "Reiniciar a instancia en execución de panel"
+
+#: ../panel/main.c:80
+msgid "Quit the running panel instance"
+msgstr "Saír da instancia en execución de panel"
+
+#: ../panel/main.c:81
+msgid "Print version information and exit"
+msgstr "Mostrar a información da versión e saír"
+
+#. parse context options
+#: ../panel/main.c:149
+msgid "[ARGUMENTS...]"
+msgstr "[ARGUMENTOS...]"
+
+#: ../panel/main.c:156
+#, c-format
+msgid "Type \"%s --help\" for usage."
+msgstr "Introduza \"%s --help\" para obter información sobre o modo de uso."
+
+#: ../panel/main.c:171
+msgid "The Xfce development team. All rights reserved."
+msgstr "O equipo de desenvolvemento de Xfce. Todos os dereitos reservados."
+
+#: ../panel/main.c:172
+#, c-format
+msgid "Please report bugs to <%s>."
+msgstr "Por favor, comuníquelle os erros a <%s>."
+
+#: ../panel/main.c:218
+msgid "There is already a running instance"
+msgstr "Xa hai unha instancia en execución"
+
+#. spawn ourselfs again
+#: ../panel/main.c:258
+msgid "Restarting..."
+msgstr "Reiniciando..."
+
+#: ../panel/main.c:273
+msgid "Failed to show the preferences dialog"
+msgstr "Produciuse un erro ao mostrar o diálogo de preferencias"
+
+#: ../panel/main.c:275
+msgid "Failed to show the add new items dialog"
+msgstr "Produciuse un erro ao mostrar o diálogo \"Engadir novos elementos\""
+
+#: ../panel/main.c:277
+msgid "Failed to save the panel configuration"
+msgstr "Produciuse un erro ao gardar a configuración do panel"
+
+#: ../panel/main.c:279
+msgid "Failed to add a plugin to the panel"
+msgstr "Produciuse un erro ao engadir un engadido ao panel"
+
+#: ../panel/main.c:281
+msgid "Failed to restart the panel"
+msgstr "Produciuse un erro ao reiniciar o panel"
+
+#: ../panel/main.c:283
+msgid "Failed to quit the panel"
+msgstr "Produciuse un erro ao saír do panel"
+
+#: ../panel/main.c:285
+msgid "Failed to send D-Bus message"
+msgstr "Produciuse un erro ao enviar a mensaxe a D-Bus"
+
+#. I18N: %s is replaced with xfce4-panel
+#: ../panel/main.c:292
+#, c-format
+msgid "No running instance of %s was found"
+msgstr "Non se atopou ningunha instancia en execución de %s"
+
+#: ../panel/panel-application.c:193
+msgid "Failed to launch the migration application"
+msgstr "Produciuse un erro ao iniciar o aplicativo de migración"
+
+#: ../panel/panel-dbus-client.c:227
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Especificouse unha sintaxe de evento de engadido incorrecta. Use ENGADIDO-DO-ENGADIDO:NOME[:TIPO:VALOR]."
+
+#: ../panel/panel-dbus-client.c:260
+#, c-format
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+
+#: ../panel/panel-dialogs.c:57
+msgid "The panel of the Xfce Desktop Environment"
+msgstr "O panel do ambiente de escritorio Xfce"
+
+#: ../panel/panel-dialogs.c:62
+msgid "translator-credits"
+msgstr ""
+"Ricardo Domínguez Rouco <riklaren@gmail.com>, 2006.\n"
+"Leandro Regueiro <leandro.regueiro@gmail.com>, 2008, 2009, 2010.\n"
+"\n"
+"Proxecto Trasno http://trasno.net\n"
+"Axúdanos a traducir software libre ao galego."
+
+#. setup the dialog
+#: ../panel/panel-dialogs.c:102
+#: ../plugins/launcher/launcher-dialog.glade.h:1
+msgid "Add New Item"
+msgstr "Engadir un novo elemento"
+
+#: ../panel/panel-dialogs.c:116
+msgid "Please choose a panel for the new plugin:"
+msgstr "Escolla un panel para o novo engadido:"
+
+#. I18N: panel combo box in the preferences dialog
+#: ../panel/panel-dialogs.c:127
+#: ../panel/panel-preferences-dialog.c:628
+#, c-format
+msgid "Panel %d"
+msgstr "Panel %d"
+
+#: ../panel/panel-dialogs.c:163
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:165
+msgid "Modifying the panel is not allowed"
+msgstr "Non se permite a modificación do panel"
+
+#: ../panel/panel-dialogs.c:186
+#, c-format
+msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
+msgstr "O engadido \"%s\" deixou inesperadamente o panel, desexa reinicialo?"
+
+#: ../panel/panel-dialogs.c:188
+#, c-format
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "O engadido reiniciouse máis dunha vez nos últimos %d segundos. Se preme en Executar o panel intentará reiniciar o engadido e se non o consegue este eliminarase permanentemente do panel."
+
+#: ../panel/panel-item-dialog.c:173
+msgid "Add New Items"
+msgstr "Engadir novos elementos"
+
+#: ../panel/panel-item-dialog.c:175
+msgid "Add new plugins to the panel"
+msgstr "Engadir novos engadidos ao panel"
+
+#: ../panel/panel-item-dialog.c:197
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "_Search:"
+msgstr "_Buscar:"
+
+#: ../panel/panel-item-dialog.c:205
+msgid "Enter search phrase here"
+msgstr "Introduza aquí a frase a buscar"
+
+#: ../panel/panel-item-dialog.c:310
+#: ../panel/panel-preferences-dialog.c:281
+msgid "Failed to open manual"
+msgstr "Produciuse un erro ao abrir o manual"
+
+#: ../panel/panel-preferences-dialog.c:395
+msgid "Automatic"
+msgstr "Automático"
+
+#. I18N: screen name in the output selector
+#: ../panel/panel-preferences-dialog.c:414
+#, c-format
+msgid "Screen %d"
+msgstr "Pantalla %d"
+
+#. I18N: monitor name in the output selector
+#: ../panel/panel-preferences-dialog.c:440
+#, c-format
+msgid "Monitor %d"
+msgstr "Monitor %d"
+
+#: ../panel/panel-preferences-dialog.c:689
+msgid "The panel and plugin configurations will be permanently removed"
+msgstr "Eliminaranse de xeito permanente as configuracións do panel e do engadido"
+
+#: ../panel/panel-preferences-dialog.c:690
+#, c-format
+msgid "Are you sure you want to remove panel %d?"
+msgstr "Está seguro de que desexa eliminar o panel %d?"
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#: ../panel/panel-preferences-dialog.c:764
+#, c-format
+msgid "Internal name: %s-%d"
+msgstr "Nome interno: %s-%d"
+
+#: ../panel/panel-preferences-dialog.glade.h:1
+msgid "Add a new panel"
+msgstr "Engadir un novo panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Add new item to this panel"
+msgstr "Engadir un novo elemento a este panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
+msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
+msgstr "Valor alfa do fondo do panel, entre 0 (transparente) e 100 (opaco)."
+
+#: ../panel/panel-preferences-dialog.glade.h:4
+msgid "Automatically show and _hide the panel"
+msgstr "Mostrar e _ocultar automaticamente o panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Background"
+msgstr "Fondo"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "C_ompositing"
+msgstr "C_omposición"
+
+#: ../panel/panel-preferences-dialog.glade.h:7
+msgid "D_isplay"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Edit the currently selected item"
+msgstr "Editar o elemento seleccionado"
+
+#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:10
+msgid "General"
+msgstr "Xeral"
+
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: ../panel/panel-preferences-dialog.glade.h:11
+msgid "Ite_ms"
+msgstr "Ele_mentos"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "L_onxitude (%):"
+
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:15
+msgid "Measurements"
+msgstr "Medidas"
+
+#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item down by one row"
+msgstr "Mover o elemento seleccionado unha posición cara a abaixo"
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item up by one row"
+msgstr "Mover o elemento seleccionado unha posición cara a arriba"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "O_utput:"
+msgstr "_Saída:"
+
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid "Remove currently selected item"
+msgstr "Eliminar o elemento seleccionado"
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Remove the currently selected panel"
+msgstr "Eliminar o panel seleccionado"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "Seleccione esta opción para estender o panel por varios monitores."
+
+#: ../panel/panel-preferences-dialog.glade.h:22
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Seleccione esta opción para ocultar as asas do panel e bloquear a súa posición."
+
+#: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Seleccione esta opción para ocultar o panel cando o punteiro non está enriba del. Isto só funciona cando o panel está pegado a unha beira da pantalla."
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Show about information of the currently selected item"
+msgstr "Mostrar información sobre o elemento seleccionado"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "Span mo_nitors"
+msgstr "Expandir os mo_nitores"
+
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid "Transparency"
+msgstr "Transparencia"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
+msgid "Transparency when the pointer is hovering over the panel."
+msgstr "Transparencia cando o punteiro está enriba do panel."
+
+#: ../panel/panel-preferences-dialog.glade.h:28
+msgid "Transparency when the pointer is not hovering the panel."
+msgstr "Transparencia cando o punteiro non está enriba do panel."
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "Vertical"
+msgstr "Vertical"
+
+#: ../panel/panel-preferences-dialog.glade.h:30
+msgid "Xfce Panel"
+msgstr "Panel de Xfce"
+
+#: ../panel/panel-preferences-dialog.glade.h:31
+msgid "_Alpha:"
+msgstr "_Alfa:"
+
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "_Enter:"
+msgstr "_Entrar:"
+
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "_Leave:"
+msgstr "_Saír:"
+
+#: ../panel/panel-preferences-dialog.glade.h:34
+msgid "_Lock panel"
+msgstr "B_loquear o panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:35
+msgid "_Orientation:"
+msgstr "_Orientación:"
+
+#: ../panel/panel-preferences-dialog.glade.h:36
+msgid "_Size (pixels):"
+msgstr "_Tamaño (píxels):"
+
+#: ../plugins/actions/actions-dialog.glade.h:1
+msgid "Action Button"
+msgstr "Botón de acción"
+
+#: ../plugins/actions/actions-dialog.glade.h:2
+msgid "Button Actions"
+msgstr "Accións de botón"
+
+#: ../plugins/actions/actions-dialog.glade.h:3
+msgid "_First button:"
+msgstr "_Primeiro botón:"
+
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "_Second button:"
+msgstr "_Segundo botón:"
+
+#: ../plugins/actions/actions.c:108
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: ../plugins/actions/actions.c:109
+msgid "Log Out Dialog"
+msgstr "Diálogo de saída de sesión"
+
+#: ../plugins/actions/actions.c:110
+msgid "Log Out"
+msgstr "Saír da sesión"
+
+#: ../plugins/actions/actions.c:111
+msgid "Lock Screen"
+msgstr "Bloquear a pantalla"
+
+#: ../plugins/actions/actions.c:112
+msgid "Shut Down"
+msgstr "Apagar"
+
+#: ../plugins/actions/actions.c:113
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: ../plugins/actions/actions.c:114
+msgid "Suspend"
+msgstr "Suspender"
+
+#: ../plugins/actions/actions.c:115
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: ../plugins/actions/actions.c:409
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr "Produciuse un erro ao executar o comando \"%s\""
+
+#: ../plugins/actions/actions.desktop.in.h:1
+msgid "Action Buttons"
+msgstr "Botóns de acción"
+
+#: ../plugins/actions/actions.desktop.in.h:2
+msgid "Log out, lock or other system actions"
+msgstr "Pechar a sesión ou bloquear a pantalla ou outras accións do sistema"
+
+#: ../plugins/clock/clock-dialog.glade.h:1
+msgid "24-_hour clock"
+msgstr "Reloxo de 24 _horas"
+
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "Analog"
+msgstr "Analóxico"
+
+#: ../plugins/clock/clock-dialog.glade.h:3
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
+#: ../plugins/pager/pager-dialog.glade.h:1
+#: ../plugins/separator/separator-dialog.glade.h:1
+#: ../plugins/systray/systray-dialog.glade.h:1
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+msgid "Appearance"
+msgstr "Aparencia"
+
+#: ../plugins/clock/clock-dialog.glade.h:4
+msgid "Binary"
+msgstr "Binario"
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+#: ../plugins/clock/clock.desktop.in.h:1
+msgid "Clock"
+msgstr "Reloxo"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+msgid "Clock Options"
+msgstr "Opcións do reloxo"
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+msgid "Digital"
+msgstr "Dixital"
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Display _seconds"
+msgstr "Mostrar os _segundos"
+
+#: ../plugins/clock/clock-dialog.glade.h:9
+msgid "F_ormat:"
+msgstr "F_ormato:"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "F_uzziness:"
+msgstr "E_xactitude:"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+#, fuzzy
+msgid "Fl_ash time seperators"
+msgstr "Sep_aradores de hora escintilantes"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
+msgid "Fuzzy"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:14
+msgid "LCD"
+msgstr "LCD"
+
+#: ../plugins/clock/clock-dialog.glade.h:15
+msgid "Sho_w AM/PM"
+msgstr "_Mostrar AM/PM"
+
+#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "Show _frame"
+msgstr "Mostrar _marco"
+
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Show _inactive dots"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Show gri_d"
+msgstr "Mostrar re_de"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
+#, no-c-format
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "O formato describe as partes da data e da hora a inserir no nome de ficheiro. Por exemplo, %Y substituirase co ano, %m co mes e %d co día. Consulte a documentación da utilidade date para obter información adicional."
+
+#: ../plugins/clock/clock-dialog.glade.h:21
+msgid "True _binary clock"
+msgstr "Reloxo _binario real"
+
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "_Layout:"
+msgstr "_Disposición:"
+
+#: ../plugins/clock/clock-dialog.glade.h:23
+msgid "_Tooltip format:"
+msgstr "Formato da no_tificación:"
+
+#: ../plugins/clock/clock-fuzzy.c:84
+msgid "Night"
+msgstr "noite"
+
+#: ../plugins/clock/clock-fuzzy.c:85
+msgid "Early morning"
+msgstr "Mañanciña"
+
+#: ../plugins/clock/clock-fuzzy.c:86
+msgid "Morning"
+msgstr "Mañá"
+
+#: ../plugins/clock/clock-fuzzy.c:87
+msgid "Almost noon"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:88
+msgid "Noon"
+msgstr "Mediodía"
+
+#: ../plugins/clock/clock-fuzzy.c:89
+msgid "Afternoon"
+msgstr "Tarde"
+
+#: ../plugins/clock/clock-fuzzy.c:90
+msgid "Evening"
+msgstr "Tardiña"
+
+#: ../plugins/clock/clock-fuzzy.c:91
+msgid "Late evening"
+msgstr "Noitiña"
+
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
+#: ../plugins/clock/clock-fuzzy.c:98
+#, no-c-format
+msgid "%0 o'clock"
+msgstr "%0 en punto"
+
+#: ../plugins/clock/clock-fuzzy.c:99
+#, no-c-format
+msgid "five past %0"
+msgstr "%0 e cinco"
+
+#: ../plugins/clock/clock-fuzzy.c:100
+#, no-c-format
+msgid "ten past %0"
+msgstr "%0 e dez"
+
+#: ../plugins/clock/clock-fuzzy.c:101
+#, no-c-format
+msgid "quarter past %0"
+msgstr "%0 e cuarto"
+
+#: ../plugins/clock/clock-fuzzy.c:102
+#, no-c-format
+msgid "twenty past %0"
+msgstr "%0 e vinte"
+
+#: ../plugins/clock/clock-fuzzy.c:103
+#, no-c-format
+msgid "twenty five past %0"
+msgstr "%0 e vintecinco"
+
+#: ../plugins/clock/clock-fuzzy.c:104
+#, no-c-format
+msgid "half past %0"
+msgstr "%0 e media"
+
+#: ../plugins/clock/clock-fuzzy.c:105
+#, no-c-format
+msgid "twenty five to %1"
+msgstr "%1 menos vintecinco"
+
+#: ../plugins/clock/clock-fuzzy.c:106
+#, no-c-format
+msgid "twenty to %1"
+msgstr "%1 menos vinte"
+
+#: ../plugins/clock/clock-fuzzy.c:107
+#, no-c-format
+msgid "quarter to %1"
+msgstr "%1 menos cuarto"
+
+#: ../plugins/clock/clock-fuzzy.c:108
+#, no-c-format
+msgid "ten to %1"
+msgstr "%1 menos dez"
+
+#: ../plugins/clock/clock-fuzzy.c:109
+#, no-c-format
+msgid "five to %1"
+msgstr "%1 menos cinco"
+
+#: ../plugins/clock/clock-fuzzy.c:110
+#, no-c-format
+msgid "%1 o'clock"
+msgstr "%1 en punto"
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: ../plugins/clock/clock-fuzzy.c:117
+#, no-c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr "%0 en punto"
+
+#: ../plugins/clock/clock-fuzzy.c:118
+#, no-c-format
+msgctxt "one"
+msgid "five past %0"
+msgstr "%0 e cinco"
+
+#: ../plugins/clock/clock-fuzzy.c:119
+#, no-c-format
+msgctxt "one"
+msgid "ten past %0"
+msgstr "%0 e dez"
+
+#: ../plugins/clock/clock-fuzzy.c:120
+#, no-c-format
+msgctxt "one"
+msgid "quarter past %0"
+msgstr "%0 e cuarto"
+
+#: ../plugins/clock/clock-fuzzy.c:121
+#, no-c-format
+msgctxt "one"
+msgid "twenty past %0"
+msgstr "%0 e vinte"
+
+#: ../plugins/clock/clock-fuzzy.c:122
+#, no-c-format
+msgctxt "one"
+msgid "twenty five past %0"
+msgstr "%0 e vintecinco"
+
+#: ../plugins/clock/clock-fuzzy.c:123
+#, no-c-format
+msgctxt "one"
+msgid "half past %0"
+msgstr "%0 e media"
+
+#: ../plugins/clock/clock-fuzzy.c:124
+#, no-c-format
+msgctxt "one"
+msgid "twenty five to %1"
+msgstr "%1 menos vintecinco"
+
+#: ../plugins/clock/clock-fuzzy.c:125
+#, no-c-format
+msgctxt "one"
+msgid "twenty to %1"
+msgstr "%1 menos vinte"
+
+#: ../plugins/clock/clock-fuzzy.c:126
+#, no-c-format
+msgctxt "one"
+msgid "quarter to %1"
+msgstr "%1 menos cuarto"
+
+#: ../plugins/clock/clock-fuzzy.c:127
+#, no-c-format
+msgctxt "one"
+msgid "ten to %1"
+msgstr "%1 menos dez"
+
+#: ../plugins/clock/clock-fuzzy.c:128
+#, no-c-format
+msgctxt "one"
+msgid "five to %1"
+msgstr "%1 menos cinco"
+
+#: ../plugins/clock/clock-fuzzy.c:129
+#, no-c-format
+msgctxt "one"
+msgid "%1 o'clock"
+msgstr "%1 en punto"
+
+#: ../plugins/clock/clock-fuzzy.c:134
+msgid "one"
+msgstr "unha"
+
+#: ../plugins/clock/clock-fuzzy.c:135
+msgid "two"
+msgstr "dúas"
+
+#: ../plugins/clock/clock-fuzzy.c:136
+msgid "three"
+msgstr "tres"
+
+#: ../plugins/clock/clock-fuzzy.c:137
+msgid "four"
+msgstr "catro"
+
+#: ../plugins/clock/clock-fuzzy.c:138
+msgid "five"
+msgstr "cinco"
+
+#: ../plugins/clock/clock-fuzzy.c:139
+msgid "six"
+msgstr "seis"
+
+#: ../plugins/clock/clock-fuzzy.c:140
+msgid "seven"
+msgstr "sete"
+
+#: ../plugins/clock/clock-fuzzy.c:141
+msgid "eight"
+msgstr "oito"
+
+#: ../plugins/clock/clock-fuzzy.c:142
+msgid "nine"
+msgstr "nove"
+
+#: ../plugins/clock/clock-fuzzy.c:143
+msgid "ten"
+msgstr "dez"
+
+#: ../plugins/clock/clock-fuzzy.c:144
+msgid "eleven"
+msgstr "once"
+
+#: ../plugins/clock/clock-fuzzy.c:145
+msgid "twelve"
+msgstr "doce"
+
+#: ../plugins/clock/clock.c:140
+msgid "Week %V"
+msgstr "Seman %V"
+
+#: ../plugins/clock/clock.c:379
+msgid "Failed to execute clock command"
+msgstr "Produciuse un erro ao executar o comando do reloxo"
+
+#: ../plugins/clock/clock.c:653
+msgid "Custom Format"
+msgstr "Formato personalizado"
+
+#: ../plugins/clock/clock.desktop.in.h:2
+msgid "What time is it?"
+msgstr "Que hora é?"
+
+#: ../plugins/directorymenu/directorymenu.c:369
+msgid "Select An Icon"
+msgstr "Seleccione unha icona"
+
+#: ../plugins/directorymenu/directorymenu.c:538
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr "Produciuse un erro ao iniciar o aplicativo \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:569
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr "Produciuse un erro ao consultar o tipo do contido de \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:578
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr "Non se atopou o aplicativo predeterminado para \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:593
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr "Produciuse un erro ao iniciar o aplicativo predeterminado para \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:684
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr "Produciuse un erro ao iniciar o aplicativo preferido da categoría \"%s\"."
+
+#: ../plugins/directorymenu/directorymenu.c:757
+msgid "Open Folder"
+msgstr "Abrir cartafol"
+
+#: ../plugins/directorymenu/directorymenu.c:768
+msgid "Open in Terminal"
+msgstr "Abrir na terminal"
+
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Directory Menu"
+msgstr "Menú de directorios"
+
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
+msgid "Show a directory tree in a menu"
+msgstr "Mostrar unha árbore de directorios nun menú"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Introduza unha lista de patróns que se usarán para determinar que ficheiros son visibles nun directorio. Se especifica máis dun patrón, os elementos da lista deberán estar separados por punto e coma (p.ex. *.txt;*.doc)."
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+msgid "Filtering"
+msgstr "Filtrado"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+msgid "Select A Directory"
+msgstr "Seleccione un directorio"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+msgid "Show _hidden files"
+msgstr "Mostrar os ficheiros _ocultos"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "_Base Directory:"
+msgstr "Directorio _base:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "_File Pattern:"
+msgstr "Patrón de _ficheiro:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "_Icon:"
+msgstr "_Icona:"
+
+#: ../plugins/launcher/launcher-dialog.c:666
+msgid "If you delete an item, it will be permanently removed"
+msgstr "Se elimina algún elemento, eliminarase de xeito permanente"
+
+#: ../plugins/launcher/launcher-dialog.c:667
+#, c-format
+msgid "Are you sure you want to remove \"%s\"?"
+msgstr "Está seguro de que desexa eliminar \"%s\"?"
+
+#: ../plugins/launcher/launcher-dialog.c:668
+msgid "Unnamed item"
+msgstr "Elemento sen nome"
+
+#: ../plugins/launcher/launcher-dialog.c:683
+msgid "Failed to remove the desktop file from the config directory"
+msgstr "Produciuse un erro ao eliminar o ficheiro desktop do directorio de configuración"
+
+#: ../plugins/launcher/launcher-dialog.c:723
+msgid "Failed to open desktop item editor"
+msgstr "Produciuse un erro ao abrir o editor de elementos do escritorio"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "Add a new empty item"
+msgstr "Engadir un novo elemento baleiro"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:3
+msgid "Add one or more existing items to the launcher"
+msgstr "Engadir un ou máis elementos existentes ao iniciador"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:4
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:5
+msgid "Default"
+msgstr "Predeterminado"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:6
+msgid "Delete the currently selected item"
+msgstr "Eliminar o elemento seleccionado"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "Disable t_ooltips"
+msgstr "Desactivar as n_otificacións"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "East"
+msgstr "Leste"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:11
+msgid "Inside Button"
+msgstr "Dentro do botón"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher.desktop.in.h:1
+msgid "Launcher"
+msgstr "Iniciador"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:15
+msgid "North"
+msgstr "Norte"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgstr "Seleccione esta opción para desactivar as notificacións ao moverse por riba do botón do panel ou dos elementos do menú."
+
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "Seleccione esta opción para mover o elemento de menú premido ao panel."
+
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "Show _label instead of icon"
+msgstr "Mostrar _etiquetas en vez de iconas"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+msgid "Show last _used item in panel"
+msgstr "Mostrar o último elemento _usado do panel"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:20
+msgid "South"
+msgstr "Sur"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:21
+msgid "West"
+msgstr "Oeste"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:22
+msgid "_Arrow button position:"
+msgstr "P_osición do botón de frecha:"
+
+#: ../plugins/launcher/launcher.c:1445
+msgid "Unnamed Item"
+msgstr "Elemento sen nome"
+
+#: ../plugins/launcher/launcher.c:1585
+msgid "No items"
+msgstr "Sen elementos"
+
+#: ../plugins/launcher/launcher.c:2099
+#, c-format
+msgid "Failed to execute command \"%s\"."
+msgstr "Produciuse un erro ao executar o comando \"%s\"."
+
+#: ../plugins/launcher/launcher.desktop.in.h:2
+msgid "Program launcher with optional menu"
+msgstr "Iniciador de aplicativos con menú opcional"
+
+#: ../plugins/pager/pager-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "Behaviour"
+msgstr "Comportamento"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
+msgid "Number of _rows:"
+msgstr "Número de _filas:"
+
+#: ../plugins/pager/pager-dialog.glade.h:4
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "Mostrar os _nomes dos espazos de traballo"
+
+#: ../plugins/pager/pager-dialog.glade.h:5
+msgid "Switch workspaces using the mouse _wheel"
+msgstr "Cambiar de espazo de traballo usando a _roda do rato"
+
+#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager.desktop.in.h:2
+msgid "Workspace Switcher"
+msgstr "Selector de espazos de traballo"
+
+#: ../plugins/pager/pager-dialog.glade.h:7
+msgid "Workspace _Settings..."
+msgstr "Opcións de e_spazo de traballo..."
+
+#: ../plugins/pager/pager.c:404
+msgid "Unable to open the Xfce workspace settings"
+msgstr "Non foi posible abrir as opcións do espazo de traballo de Xfce"
+
+#: ../plugins/pager/pager.desktop.in.h:1
+msgid "Switch between virtual desktops"
+msgstr "Cambiar entre os escritorios virtuais"
+
+#: ../plugins/separator/separator-dialog.glade.h:2
+msgid "Dots"
+msgstr "Puntos"
+
+#: ../plugins/separator/separator-dialog.glade.h:3
+msgid "Handle"
+msgstr "Asa"
+
+#: ../plugins/separator/separator-dialog.glade.h:4
+msgid "New Line"
+msgstr "Nova liña"
+
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/separator/separator.desktop.in.h:2
+msgid "Separator"
+msgstr "Separador"
+
+#: ../plugins/separator/separator-dialog.glade.h:6
+msgid "Transparent"
+msgstr "Transparente"
+
+#: ../plugins/separator/separator-dialog.glade.h:7
+msgid "_Expand"
+msgstr "_Expandir"
+
+#: ../plugins/separator/separator-dialog.glade.h:8
+msgid "_Style:"
+msgstr "E_stilo:"
+
+#: ../plugins/separator/separator.desktop.in.h:1
+msgid "Adds a separator or space between panel items"
+msgstr "Engadir un separador ou un espazo entre os elementos do panel"
+
+#: ../plugins/showdesktop/showdesktop.c:193
+msgid "Restore the minimized windows"
+msgstr "Restaurar as fiestras minimizadas"
+
+#: ../plugins/showdesktop/showdesktop.c:194
+msgid "Minimize all open windows and show the desktop"
+msgstr "Minimizar todas as fiestras abertas e mostrar o escritorio"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+msgid "Hide all windows and show the desktop"
+msgstr "Ocultar todas as fiestras e mostrar o escritorio"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Mostrar o escritorio"
+
+#: ../plugins/systray/systray-dialog.glade.h:2
+msgid "C_lear Known Applications"
+msgstr "_Limpar os aplicativos coñecidos"
+
+#: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Known Applications"
+msgstr "Aplicativos coñecidos"
+
+#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/systray/systray.desktop.in.h:2
+msgid "Notification Area"
+msgstr "Zona de notificación"
+
+#: ../plugins/systray/systray-dialog.glade.h:6
+msgid "_Number of rows:"
+msgstr "_Número de filas:"
+
+#: ../plugins/systray/systray-manager.c:401
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr "Produciuse un erro ao adquirir a selección do xestor para a pantalla %d"
+
+#. create fake error and show it
+#: ../plugins/systray/systray.c:551
+msgid "Most likely another widget took over the function of a notification area. This plugin will close."
+msgstr "O máis probable é que outro widget teña o control da función da zona de notificación. Este engadido pecharase."
+
+#: ../plugins/systray/systray.c:554
+msgid "The notification area lost selection"
+msgstr "A zona de notificación perdeu a selección"
+
+#: ../plugins/systray/systray.c:747
+msgid "Are you sure you want to clear the list of known applications?"
+msgstr "Está seguro de que desexa limpar a lista dos aplicativos coñecidos?"
+
+#: ../plugins/systray/systray.desktop.in.h:1
+msgid "Area where notification icons appear"
+msgstr "Zona onde aparecen as iconas de notificación"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Always"
+msgstr "Sempre"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "D_raw window frame when hovering a button"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Group title and timestamp"
+msgstr "Agrupar o título e a marca de tempo"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "Group title and window title"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "Never"
+msgstr "Nunca"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "Restore minimized windows to current _workspace"
+msgstr "Restaurar as fiestras minimizadas no _espazo de traballo actual"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Show _flat buttons"
+msgstr "Mostrar botóns _planos"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+msgid "Show _handle"
+msgstr "Mostrar a _asa"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+msgid "Show button _labels"
+msgstr "Mostrar as e_tiquetas dos botóns"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "Show only _minimized windows"
+msgstr "Só mostrar as fiestras _minimizadas"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "Mostrar as _fiestras de todos os espazos de traballo"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+msgid "Sorting _order:"
+msgstr "_Orde de clasificación:"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Timestamp"
+msgstr "Marca de tempo"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+msgid "When space is limited"
+msgstr "Cando o espazo é limitado"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist.desktop.in.h:2
+msgid "Window Buttons"
+msgstr "Botóns de fiestras"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+msgid "Window _grouping:"
+msgstr "A_grupamento de fiestras:"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "Window title"
+msgstr "Título da fiestra"
+
+#: ../plugins/tasklist/tasklist-widget.c:2278
+msgid "Mi_nimize All"
+msgstr "Mi_nimizar todo"
+
+#: ../plugins/tasklist/tasklist-widget.c:2287
+msgid "Un_minimize All"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:2293
+msgid "Ma_ximize All"
+msgstr "Ma_ximizar todo"
+
+#: ../plugins/tasklist/tasklist-widget.c:2302
+msgid "_Unmaximize All"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:2312
+msgid "_Close All"
+msgstr "_Pechar todo"
+
+#: ../plugins/tasklist/tasklist.desktop.in.h:1
+msgid "Switch between open windows using buttons"
+msgstr "Cambiar entre as fiestras abertas usando botóns"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+msgid "Arrow"
+msgstr "Frecha"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+msgid "Button layout:"
+msgstr "Disposición dos botóns:"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+msgid "Enable _urgency notification"
+msgstr "Activar a notificación _urxente"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Icon"
+msgstr "Icona"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
+msgid "Show workspace a_ctions"
+msgstr "Mostrar as a_ccións do espazo de traballo"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+msgid "Window Menu"
+msgstr "Menú de fiestras"
+
+#: ../plugins/windowmenu/windowmenu.c:648
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: ../plugins/windowmenu/windowmenu.c:881
+#, c-format
+msgid "Workspace %d"
+msgstr "Espazo de traballo %d"
+
+#: ../plugins/windowmenu/windowmenu.c:1270
+msgid "No Windows"
+msgstr "Sen fiestras"
+
+#: ../plugins/windowmenu/windowmenu.c:1285
+msgid "Urgent Windows"
+msgstr "Fiestras urxentes"
+
+#: ../plugins/windowmenu/windowmenu.c:1327
+msgid "Add Workspace"
+msgstr "Engadir un espazo de traballo"
+
+#: ../plugins/windowmenu/windowmenu.c:1347
+#, c-format
+msgid "Remove Workspace \"%s\""
+msgstr "Eliminar o espazo de traballo \"%s\""
+
+#: ../plugins/windowmenu/windowmenu.c:1349
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Eliminar o espazo de traballo %d"
+
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+msgid "Switch between open windows using a menu"
+msgstr "Cambiar entre as fiestras abertas usando un menú"
+

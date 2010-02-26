@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+]>
+
+<book id="index" lang="en">
+  <bookinfo>
+    <title>Libxfce4panel Reference Manual</title>
+    <releaseinfo>Version <xi:include href="version.xml" parse="text"/></releaseinfo>
+    <pubdate>Februari 2010</pubdate>
+
+    <copyright>
+      <year>2006</year>
+      <year>2007</year>
+      <holder>Jasper Huijsmans</holder>
+    </copyright>
+
+    <copyright>
+      <year>2008</year>
+      <year>2010</year>
+      <holder>Nick Schermer</holder>
+    </copyright>
+
+
+    <legalnotice id="legalnotice">
+      <para>
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1 or
+        any later version published by the Free Software Foundation; with no
+        Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+        Texts. The complete license text is available from the <ulink
+        type="http" url="http://www.gnu.org/">Free Software Foundation</ulink>.
+      </para>
+    </legalnotice>
+
+    <authorgroup>
+      <author>
+        <firstname>Nick</firstname>
+        <surname>Schermer</surname>
+        <affiliation>
+          <address><email>nick@xfce.org</email></address>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </bookinfo>
+
+  <part id="libxfce4panel-fundamentals">
+    <title>Fundamentals</title>
+
+    <xi:include href="xml/config.xml"/>
+    <xi:include href="xml/enums.xml"/>
+    <xi:include href="xml/macros.xml"/>
+  </part>
+
+  <part id="libxfce4panel-plugins">
+    <title>Panel Plugins</title>
+
+    <sect1 id="libxfce4panel-register">
+      <title>Register plugins with the panel</title>
+
+      <para>Since 4.8 there are various ways to register a plugin with the panel. Which option you
+      choose depends on a couple of things: is the plugin compiled as a module or as an
+      executable and do you want to write a plugin as a GObject.</para>
+
+      <sect2>
+        <title>Internal or external</title>
+
+        <para>In 4.6 you had to choose to compile a plugin as an executable to run it external (with
+        the appropriate macro to register external plugins) and the same for internal plugins that
+        were compiled a modules. This worked quite good, but had a couple of disadvantages:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>To switch between internal and external you needed to change the build system and
+            registration macros, so this was not very flexible.</para>
+          </listitem>
+          <listitem>
+            <para>When changes were made in the registration macros (esp the ones for external plugins)
+            a plugin had to recompile. Also each plugin copied the same piece of code.</para>
+          </listitem>
+          <listitem>
+            <para>Improvements in the panel communication (D-Bus) and transparant backgrounds where
+            either avoided or hard to implement.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>To work around those disadvantages Xfce Panel 4.8 introduced a new way to run plugins
+        that are compiled as modules in a separate process: a plugin wrapper. The plugin wrapper is started
+        by the panel for each external plugin and embeds the plugin module. It provides the communication
+        between the panel and the module using D-Bus and still has the big advantage of the 'old' exectuable
+        external plugin: if it crashes it won't crash the panel.</para>
+
+        <para>Whether a plugin is started internal or external is defined by the boolean in the
+        <varname>X-XFCE-Internal</varname> key in the plugins desktop file. No need to change the macros
+        and the registration macro code can be kept to an absolute minimum.</para>
+
+        <para>This does not mean the 4.6 executable plugins are no supported anymore. However if you write
+        a new plugin or you plugin depends on libxfce4panel 4.8, it is recommended to switch to the new
+        registration functions and compile your plugin as a module. To make this move obvious the old
+        macros are all marked as deprecated in this API reference.</para>
+      </sect2>
+
+      <sect2>
+        <title>GObject plugins</title>
+
+        <para>To handle the difference in 4.6 between internal and external plugins, the plugin API contained
+        3 different types. There were two objects <structname>XfceInternalPanelPlugin</structname> and
+        <structname>XfceExternalPanelPlugin</structname> based on a different parents (resp.
+        <structname>GtkEventBox</structname> and <structname>GtkPlug</structname>) that both implemented the
+        <structname>XfcePanelPlugin</structname> interface.</para>
+
+        <para>Because internal and external is handled by the wrapper in 4.8, <structname>XfcePanelPlugin</structname>
+        is now a single object with <structname>GtkEventBox</structname> as parent. Apart from the fact that
+        this reduced a lot of code in libxfce4panel, it also has the advantage that it is easier to write
+        plugins as GObject with <varname>XFCE_TYPE_PANEL_PLUGIN</varname> as parent type. This brings a couple
+        of new advantages compared to plugins with register functions:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>You can easily cast you plugin to an <structname>XfcePanelPlugin</structname>, so
+            no need for custom structures. You also get all the GOBject features like type checking.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Downside is that you have to register all other types you create inside you plugin and that it
+        could be a bit difficult (when running internal) with special libraries. To work around the latter
+        you can make you plugin resident.</para>
+        
+        <para>All the plugins shipped with the panel are written as GObjects, so you can find enough examples
+        in the <filename>plugins/</filename> folder.</para>
+      </sect2>
+
+    </sect1>
+
+    <xi:include href="xml/xfce-panel-plugin.xml"/>
+    <xi:include href="xml/register-plugins.xml"/>
+    <xi:include href="xml/register-46-plugins.xml"/>
+    <xi:include href="xml/register-gobject-plugins.xml"/>
+  </part>
+
+  <part id="libxfce4panel-widgets">
+    <title>Additional Widgets</title>
+
+    <para>This section describes the additional widgets provided by the <application>xfce4-panel</application> library.</para>
+
+    <xi:include href="xml/xfce-arrow-button.xml"/>
+    <xi:include href="xml/xfce-hvbox.xml"/>
+    <xi:include href="xml/xfce-panel-image.xml"/>
+  </part>
+
+  <part id="libxfce4panel-miscelleanous">
+    <title>Miscelleanous</title>
+
+    <xi:include href="xml/convenience.xml"/>
+  </part>
+
+  <index id="api-index-full">
+    <title>Index of all symbols</title>
+    <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
+  </index>
+  <index id="api-index-deprecated" role="deprecated">
+    <title>Index of deprecated symbols</title>
+    <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
+  </index>
+  <index id="api-index-4-8" role="4.8">
+    <title>Index of new symbols in 4.8</title>
+    <xi:include href="xml/api-index-4.8.xml"><xi:fallback /></xi:include>
+  </index>
+  <index id="api-index-4-6" role="4.6">
+    <title>Index of new symbols in 4.6</title>
+    <xi:include href="xml/api-index-4.6.xml"><xi:fallback /></xi:include>
+  </index>
+</book>
+
+<!--
+  vi:set ts=2 sw=2 et ai:
+-->
