@@ -75,11 +75,11 @@ static GOptionEntry option_entries[] =
 
 
 static void
-dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
-                                       gint                     plugin_id,
-                                       DBusPropertyChanged      changed_property,
-                                       const GValue            *value,
-                                       XfcePanelPluginProvider *provider)
+dbus_gproxy_wrapper_set_property (DBusGProxy              *dbus_gproxy,
+                                  gint                     plugin_id,
+                                  DBusPropertyChanged      changed_property,
+                                  const GValue            *value,
+                                  XfcePanelPluginProvider *provider)
 {
   WrapperPlug *plug;
 
@@ -87,7 +87,7 @@ dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
   panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
   panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
-  /* check if the signal is for this panel */
+  /* check if the signal is for this plugin */
   if (plugin_id != opt_unique_id)
     return;
 
@@ -144,26 +144,17 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
                              XfcePanelPluginProviderSignal  signal,
                              DBusGProxy                    *dbus_gproxy)
 {
-  GValue  value = { 0, };
   GError *error = NULL;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
   panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
-  /* initialize the value */
-  g_value_init (&value, G_TYPE_INT);
-  g_value_set_int (&value, signal);
-
   /* send the provider signal to the panel */
-  if (!wrapper_dbus_client_set_property (dbus_gproxy, opt_unique_id,
-                                         "ProviderSignal", &value, &error))
+  if (!wrapper_dbus_client_wrapper_provider_signal (dbus_gproxy, opt_unique_id, signal, &error))
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
     }
-
-  /* unset */
-  g_value_unset (&value);
 }
 
 
@@ -305,9 +296,10 @@ main (gint argc, gchar **argv)
     }
 
   /* setup signal for property changes */
-  dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_UINT_BOXED, G_TYPE_NONE,
-                                     G_TYPE_INT, G_TYPE_UINT, G_TYPE_VALUE, G_TYPE_INVALID);
-  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT, G_TYPE_UINT, G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_INT_BOXED, G_TYPE_NONE,
+                                     G_TYPE_INT, G_TYPE_INT, G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_proxy_add_signal (dbus_gproxy, "WrapperSetProperty", G_TYPE_INT, G_TYPE_INT,
+                           G_TYPE_VALUE, G_TYPE_INVALID);
 
   /* load the module and link the function */
   module = g_module_open (opt_filename, G_MODULE_BIND_LOCAL);
@@ -348,11 +340,11 @@ main (gint argc, gchar **argv)
       plug = wrapper_plug_new (opt_socket_id);
       g_object_set_qdata (G_OBJECT (provider), plug_quark, plug);
 
-      /* connect provider signals */
+      /* connect provider signals, so we can send them to the panel through dbus */
       g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
 
-      /* connect dbus property change signal */
-      dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_provider_property_changed),
+      /* connect dbus signal to set provider properties send from the panel */
+      dbus_g_proxy_connect_signal (dbus_gproxy, "WrapperSetProperty", G_CALLBACK (dbus_gproxy_wrapper_set_property),
                                    g_object_ref (provider), (GClosureNotify) g_object_unref);
 
       /* show the plugin */
@@ -364,7 +356,7 @@ main (gint argc, gchar **argv)
       gtk_main ();
 
       /* disconnect signal */
-      dbus_g_proxy_disconnect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_provider_property_changed), provider);
+      dbus_g_proxy_disconnect_signal (dbus_gproxy, "WrapperSetProperty", G_CALLBACK (dbus_gproxy_wrapper_set_property), provider);
 
       /* destroy the plug and provider */
       gtk_widget_destroy (GTK_WIDGET (plug));

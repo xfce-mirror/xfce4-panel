@@ -49,7 +49,7 @@ static void      panel_dbus_service_finalize      (GObject                *objec
 
 enum
 {
-  PROPERTY_CHANGED,
+  WRAPPER_SET_PROPERTY,
   LAST_SIGNAL
 };
 
@@ -92,15 +92,15 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
    * Emited when a plugin property changes
    **/
   /* TODO implement this (update: no idea, what TODO here...) */
-  dbus_service_signals[PROPERTY_CHANGED] =
-    g_signal_new (I_("property-changed"),
+  dbus_service_signals[WRAPPER_SET_PROPERTY] =
+    g_signal_new (I_("wrapper-set-property"),
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,
-                  panel_marshal_VOID__INT_UINT_BOXED,
+                  panel_marshal_VOID__INT_INT_BOXED,
                   G_TYPE_NONE, 3,
                   G_TYPE_INT,
-                  G_TYPE_UINT,
+                  G_TYPE_INT,
                   G_TYPE_VALUE);
 
   /* install the d-bus info for our class */
@@ -258,91 +258,29 @@ panel_dbus_service_terminate (PanelDBusService  *service,
 
 
 static gboolean
-panel_dbus_service_get_property (PanelDBusService *service,
-                                 gint              plugin_id,
-                                 const gchar      *property,
-                                 GValue           *value,
-                                 GError           *error)
+panel_dbus_service_wrapper_provider_signal (PanelDBusService *service,
+                                            gint              plugin_id,
+                                            gint              signal,
+                                            GError           *error)
 {
   PanelModuleFactory      *factory;
-  PanelApplication        *application;
   XfcePanelPluginProvider *provider;
-  GtkWidget               *window;
-  gboolean                 succeed = FALSE;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (plugin_id != -1, FALSE);
-  panel_return_val_if_fail (property != NULL, FALSE);
 
   /* get the module factory */
   factory = panel_module_factory_get ();
 
-  /* get the plugin */
+  /* get the plugin from the factory */
   provider = panel_module_factory_get_plugin (factory, plugin_id);
+
+  /* emit the signal for the local plugin provider */
   if (G_LIKELY (provider))
-    {
-      if (strcmp ("PanelNumber", property) == 0)
-        {
-          /* get the plugin's panel window */
-          window = gtk_widget_get_toplevel (GTK_WIDGET (provider));
-
-          /* initialize the value */
-          g_value_init (value, G_TYPE_UINT);
-
-          /* get the panel number from the application */
-          application = panel_application_get ();
-          g_value_set_uint (value, panel_application_get_window_index (application, PANEL_WINDOW (window)));
-          g_object_unref (G_OBJECT (application));
-
-          succeed = TRUE;
-        }
-    }
+    xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (provider), signal);
 
   /* release the factory */
   g_object_unref (G_OBJECT (factory));
-
-  /* check if we return a good value */
-  panel_return_val_if_fail (!succeed || G_TYPE_CHECK_VALUE (value), FALSE);
-
-  return succeed;
-}
-
-
-
-static gboolean
-panel_dbus_service_set_property (PanelDBusService *service,
-                                 gint              plugin_id,
-                                 const gchar      *property,
-                                 const GValue     *value,
-                                 GError           *error)
-{
-  PanelModuleFactory      *factory;
-  XfcePanelPluginProvider *provider;
-
-  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
-  panel_return_val_if_fail (plugin_id != -1, FALSE);
-  panel_return_val_if_fail (property != NULL, FALSE);
-  panel_return_val_if_fail (value && G_TYPE_CHECK_VALUE (value), FALSE);
-
-  /* check if this is a plugin property change */
-  if (strcmp (property, "ProviderSignal") == 0)
-    {
-      /* check if this is an enum */
-       panel_return_val_if_fail (G_VALUE_HOLDS_INT (value), FALSE);
-
-      /* get the module factory */
-      factory = panel_module_factory_get ();
-
-      /* get the plugin from the factory */
-      provider = panel_module_factory_get_plugin (factory, plugin_id);
-
-      /* emit the signal for the local plugin provider */
-      if (G_LIKELY (provider))
-        xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (provider), g_value_get_int (value));
-
-      /* release the factory */
-      g_object_unref (G_OBJECT (factory));
-    }
 
   return TRUE;
 }
@@ -370,9 +308,9 @@ panel_dbus_service_get (void)
 
 
 void
-panel_dbus_service_set_plugin_property (gint                 plugin_id,
-                                        DBusPropertyChanged  property,
-                                        const GValue        *value)
+panel_dbus_service_wrapper_set_property (gint                 plugin_id,
+                                         DBusPropertyChanged  property,
+                                         const GValue        *value)
 {
   PanelDBusService *service;
 
@@ -383,7 +321,7 @@ panel_dbus_service_set_plugin_property (gint                 plugin_id,
   service = panel_dbus_service_get ();
 
   /* emit the signal */
-  g_signal_emit (G_OBJECT (service), dbus_service_signals[PROPERTY_CHANGED],
+  g_signal_emit (G_OBJECT (service), dbus_service_signals[WRAPPER_SET_PROPERTY],
                  0, plugin_id, property, value);
 
   /* release */

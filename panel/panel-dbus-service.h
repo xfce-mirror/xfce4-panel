@@ -33,13 +33,13 @@ typedef struct _PanelDBusService      PanelDBusService;
 #define PANEL_IS_DBUS_SERVICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_DBUS_SERVICE))
 #define PANEL_DBUS_SERVICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_DBUS_SERVICE, PanelDBusServiceClass))
 
-GType             panel_dbus_service_get_type            (void) G_GNUC_CONST;
+GType             panel_dbus_service_get_type             (void) G_GNUC_CONST;
 
-PanelDBusService *panel_dbus_service_get                 (void);
+PanelDBusService *panel_dbus_service_get                  (void);
 
-void              panel_dbus_service_set_plugin_property (gint                 plugin_id,
-                                                          DBusPropertyChanged  property,
-                                                          const GValue        *value);
+void              panel_dbus_service_wrapper_set_property (gint                 plugin_id,
+                                                           DBusPropertyChanged  property,
+                                                           const GValue        *value);
 
 G_END_DECLS
 

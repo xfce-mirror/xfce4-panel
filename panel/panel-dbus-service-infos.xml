@@ -75,42 +75,34 @@
     </method>
 
     <!--
-      GetProperty (plugin-id : INTEGER, property : STRING, value : VARIANT) : VOID
+      WrapperProviderSignal (id : INT, signal : INT) : VOID
 
-      plugin_name : Plugin id of the plugin requesting the property.
-      property    : Name of the property.
-      value       : GValue with the property value.
+      This method is used for wrappers to send provider signals to the panel.
+
+      plugin_id : Plugin ID of the plugin this signal is send to.
+      signal    : ID of the signal that should be processed by the panel
+                  (enum from XfcePanelPluginProviderSignal).
     -->
-    <method name="GetProperty">
-      <arg name="plugin_id" direction="in" type="i" />
-      <arg name="property" direction="in" type="s" />
-      <arg name="value" direction="out" type="v" />
-    </method>
-
-    <!--
-      SetProperty (plugin-id : INTEGER, property : STRING, value : VARIANT) : VOID
-
-      plugin_name : Plugin id of the plugin setting the property.
-      property    : Name of the property.
-      value       : GValue with the property value.
-    -->
-    <method name="SetProperty">
-      <arg name="plugin_id" direction="in" type="i" />
-      <arg name="property" direction="in" type="s" />
-      <arg name="value" direction="in" type="v" />
-    </method>
-
-    <!--
-      PropertyChanged (plugin-id : INTEGER, property : STRING, value : VARIANT) : VOID
-
-      plugin_name : Plugin id of the plugin this signal was send to.
-      property    : Name of the property that has been changed.
-      value       : GValue with the property value.
-    -->
-    <signal name="PropertyChanged">
+    <method name="WrapperProviderSignal">
       <arg name="plugin_id" type="i" />
-      <arg name="property" type="u" />
-      <arg name="value" type="v"/>
+      <arg name="signal" type="i" />
+    </method>
+
+    <!--
+      WrapperSetProperty (id : INT, property : INT, value : VARIANT) : VOID
+
+      This signal is emitted from the panel to one of the wrappers, to update
+      plugin properties like the plugin size, orientation, save etc...
+
+      plugin_id : Plugin ID of the plugin this signal was send from.
+      property  : ID of the property that has been changed (enum from
+                  DBusPropertyChanged).
+      value     : GValue with the property value.
+    -->
+    <signal name="WrapperSetProperty">
+      <arg name="plugin_id" type="i" />
+      <arg name="property" type="i" />
+      <arg name="value" type="v" />
     </signal>
   </interface>
 </node>

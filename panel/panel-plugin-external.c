@@ -274,8 +274,8 @@ panel_plugin_external_unrealize (GtkWidget *widget)
   g_value_set_boolean (&value, FALSE);
 
   /* send (don't queue here) */
-  panel_dbus_service_set_plugin_property (external->unique_id, DBUS_PROPERTY_CHANGED_QUIT_WRAPPER,
-                                          &value);
+  panel_dbus_service_wrapper_set_property (external->unique_id, DBUS_PROPERTY_CHANGED_QUIT_WRAPPER,
+                                           &value);
 
   /* unset */
   g_value_unset (&value);
@@ -391,7 +391,7 @@ panel_plugin_external_plug_added (GtkSocket *socket)
       for (li = external->dbus_queue; li != NULL; li = li->next)
         {
           data = li->data;
-          panel_dbus_service_set_plugin_property (external->unique_id, data->property, &data->value);
+          panel_dbus_service_wrapper_set_property (external->unique_id, data->property, &data->value);
           g_value_unset (&data->value);
           g_slice_free (QueuedData, data);
         }
@@ -462,7 +462,7 @@ panel_plugin_external_set_property (PanelPluginExternal *external,
   if (G_LIKELY (external->plug_embedded))
     {
       /* directly send the new property */
-      panel_dbus_service_set_plugin_property (external->unique_id, property, value);
+      panel_dbus_service_wrapper_set_property (external->unique_id, property, value);
     }
   else
     {
