@@ -487,7 +487,9 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
     { "flash-separators", "flash-separators", "active" },
     { "show-meridiem", "show-meridiem", "active" },
     { "digital-box", "digital-format", "text" },
-    { "fuzziness-box", "fuzziness", "value" }
+    { "fuzziness-box", "fuzziness", "value" },
+    { "show-inactive", "show-inactive", "active" },
+    { "show-grid", "show-grid", "active" },
   };
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
@@ -503,7 +505,7 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
       break;
 
     case CLOCK_PLUGIN_MODE_BINARY:
-      active = 1 << 1 | 1 << 2;
+      active = 1 << 1 | 1 << 2 | 1 << 8 | 1 << 9;
       break;
 
     case CLOCK_PLUGIN_MODE_DIGITAL:
@@ -736,6 +738,8 @@ clock_plugin_set_mode (ClockPlugin *plugin)
     { /* binary */
       { "show-seconds", G_TYPE_BOOLEAN },
       { "true-binary", G_TYPE_BOOLEAN },
+      { "show-inactive", G_TYPE_BOOLEAN },
+      { "show-grid", G_TYPE_BOOLEAN },
       { NULL },
     },
     { /* digital */

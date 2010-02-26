@@ -60,7 +60,9 @@ enum
 {
   PROP_0,
   PROP_SHOW_SECONDS,
-  PROP_TRUE_BINARY
+  PROP_TRUE_BINARY,
+  PROP_SHOW_INACTIVE,
+  PROP_SHOW_GRID
 };
 
 struct _XfceClockBinaryClass
@@ -76,6 +78,8 @@ struct _XfceClockBinary
 
   guint     show_seconds : 1;
   guint     true_binary : 1;
+  guint     show_inactive : 1;
+  guint     show_grid : 1;
 };
 
 
@@ -112,6 +116,20 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
                                                          FALSE,
                                                          G_PARAM_READWRITE
                                                          | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_INACTIVE,
+                                   g_param_spec_boolean ("show-inactive", NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE
+                                                         | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_GRID,
+                                   g_param_spec_boolean ("show-grid", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE
+                                                         | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -122,6 +140,9 @@ xfce_clock_binary_init (XfceClockBinary *binary)
   /* init */
   binary->show_seconds = FALSE;
   binary->true_binary = FALSE;
+  binary->show_inactive = TRUE;
+  binary->show_grid = FALSE;
+
   binary->timeout = clock_plugin_timeout_new (CLOCK_INTERVAL_MINUTE,
                                               xfce_clock_binary_update,
                                               binary);
@@ -145,6 +166,14 @@ xfce_clock_binary_set_property (GObject      *object,
 
     case PROP_TRUE_BINARY:
       binary->true_binary = g_value_get_boolean (value);
+      break;
+
+    case PROP_SHOW_INACTIVE:
+      binary->show_inactive = g_value_get_boolean (value);
+      break;
+
+    case PROP_SHOW_GRID:
+      binary->show_grid = g_value_get_boolean (value);
       break;
 
     default:
@@ -176,6 +205,14 @@ xfce_clock_binary_get_property (GObject    *object,
 
     case PROP_TRUE_BINARY:
       g_value_set_boolean (value, binary->true_binary);
+      break;
+
+    case PROP_SHOW_INACTIVE:
+      g_value_set_boolean (value, binary->show_inactive);
+      break;
+
+    case PROP_SHOW_GRID:
+      g_value_set_boolean (value, binary->show_grid);
       break;
 
     default:
@@ -229,126 +266,233 @@ xfce_clock_binary_size_request (GtkWidget      *widget,
 
 
 
+static void
+xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
+                                            cairo_t         *cr,
+                                            GtkAllocation   *alloc)
+{
+  GdkColor    *active, *inactive;
+  struct tm    tm;
+  gint         row, rows;
+  static gint  binary_table[] = { 32, 16, 8, 4, 2, 1 };
+  gint         col, cols = G_N_ELEMENTS (binary_table);
+  gint         remain_h, remain_w;
+  gint         offset_x, offset_y;
+  gint         w, h, x;
+  gint         ticks;
+  gint         pad_x, pad_y;
+
+  inactive = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
+  active = &(GTK_WIDGET (binary)->style->bg[GTK_STATE_SELECTED]);
+
+  clock_plugin_get_localtime (&tm);
+
+  gtk_misc_get_padding (GTK_MISC (binary), &pad_x, &pad_y);
+
+  /* init sizes */
+  remain_h = alloc->height - 1 - 2 * pad_y;
+  offset_y = alloc->y + 1 + pad_y;
+
+  rows = binary->show_seconds ? 3 : 2;
+  for (row = 0; row < rows; row++)
+    {
+      /* get the time this row represents */
+      if (row == 0)
+        ticks = tm.tm_hour;
+      else if (row == 1)
+        ticks = tm.tm_min;
+      else
+        ticks = tm.tm_sec;
+
+      /* reset sizes */
+      remain_w = alloc->width - 1 - 2 * pad_x;
+      offset_x = alloc->x + 1 + pad_x;
+      h = remain_h / (rows - row);
+      remain_h -= h;
+
+      for (col = 0; col < cols; col++)
+        {
+          /* update sizes */
+          w = remain_w / (cols - col);
+          x = offset_x;
+          remain_w -= w;
+          offset_x += w;
+
+          if (ticks >= binary_table[col])
+            {
+              gdk_cairo_set_source_color (cr, active);
+              ticks -= binary_table[col];
+            }
+          else if (binary->show_inactive)
+            {
+              gdk_cairo_set_source_color (cr, inactive);
+            }
+          else
+            {
+              continue;
+            }
+
+          /* draw the dot */
+          cairo_rectangle (cr, x, offset_y, w - 1, h - 1);
+          cairo_fill (cr);
+        }
+
+      /* advance offset */
+      offset_y += h;
+    }
+}
+
+
+
+static void
+xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
+                                       cairo_t         *cr,
+                                       GtkAllocation   *alloc)
+{
+  GdkColor    *active, *inactive;
+  static gint  binary_table[] = { 80, 40, 20, 10, 8, 4, 2, 1 };
+  struct tm    tm;
+  gint         row, rows = G_N_ELEMENTS (binary_table) / 2;
+  gint         col, cols;
+  gint         digit;
+  gint         remain_h, remain_w;
+  gint         offset_x, offset_y;
+  gint         w, h, y;
+  gint         ticks;
+  gint         pad_x, pad_y;
+
+  inactive = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
+  active = &(GTK_WIDGET (binary)->style->bg[GTK_STATE_SELECTED]);
+
+  clock_plugin_get_localtime (&tm);
+
+  gtk_misc_get_padding (GTK_MISC (binary), &pad_x, &pad_y);
+
+  remain_w = alloc->width - 1 - 2 * pad_x;
+  offset_x = alloc->x + 1 + pad_x;
+
+  cols = binary->show_seconds ? 6 : 4;
+  for (col = 0; col < cols; col++)
+    {
+      /* get the time this row represents */
+      if (col == 0)
+        ticks = tm.tm_hour;
+      else if (col == 2)
+        ticks = tm.tm_min;
+      else if (col == 4)
+        ticks = tm.tm_sec;
+
+      /* reset sizes */
+      remain_h = alloc->height - 1 -  2 * pad_y;
+      offset_y = alloc->y + 1 + pad_x;
+      w = remain_w / (cols - col);
+      remain_w -= w;
+
+      for (row = 0; row < rows; row++)
+        {
+          /* update sizes */
+          h = remain_h / (rows - row);
+          remain_h -= h;
+          y = offset_y;
+          offset_y += h;
+
+          digit = row + (4 * (col % 2));
+          if (ticks >= binary_table[digit])
+            {
+              gdk_cairo_set_source_color (cr, active);
+              ticks -= binary_table[digit];
+            }
+          else if (binary->show_inactive)
+            {
+              gdk_cairo_set_source_color (cr, inactive);
+            }
+          else
+            {
+              continue;
+            }
+
+          /* draw the dot */
+          cairo_rectangle (cr, offset_x, y, w - 1, h - 1);
+          cairo_fill (cr);
+        }
+
+      /* advance offset */
+      offset_x += w;
+    }
+}
+
+
+
 static gboolean
 xfce_clock_binary_expose_event (GtkWidget      *widget,
                                 GdkEventExpose *event)
 {
   XfceClockBinary *binary = XFCE_CLOCK_BINARY (widget);
-  gdouble          cw, ch, columns;
-  gint             ticks, cells, decimal;
-  gdouble          radius;
-  gdouble          x, y;
-  gint             i, j;
-  gint             decimal_tb[] = {32, 16, 8, 4, 2, 1};
-  gint             decimal_bcd[] = {80, 40, 20, 10, 8, 4, 2, 1};
   cairo_t         *cr;
-  GdkColor         active, inactive;
-  struct tm        tm;
+  GdkColor        *color;
+  gint             col, cols;
+  gint             row, rows;
+  GtkAllocation   *alloc;
+  gdouble          remain_w, x;
+  gdouble          remain_h, y;
+  gint             w, h;
+  gint             pad_x, pad_y;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), FALSE);
+  panel_return_val_if_fail (GDK_IS_WINDOW (widget->window), FALSE);
 
-  /* number of columns and cells */
-  columns = binary->show_seconds ? 3.0 : 2.0;
-  cells = binary->true_binary ? 6 : 8;
-
-  /* cell width and height */
-  if (binary->true_binary)
-    {
-      cw = widget->allocation.width / 6.0;
-      ch = widget->allocation.height / columns;
-    }
-  else /* bcd clock */
-    {
-      cw = widget->allocation.width / columns / 2.0;
-      ch = widget->allocation.height / 4.0;
-    }
-
-  /* arc radius */
-  radius = MIN (cw, ch) / 2.0 * 0.7;
-
-  /* get colors */
-  inactive = widget->style->fg[GTK_STATE_NORMAL];
-  active = widget->style->bg[GTK_STATE_SELECTED];
-
-  /* get the cairo context */
   cr = gdk_cairo_create (widget->window);
-
   if (G_LIKELY (cr != NULL))
     {
-        /* clip the drawing region */
-        gdk_cairo_rectangle (cr, &event->area);
-        cairo_clip (cr);
+      /* clip the drawing region */
+      gdk_cairo_rectangle (cr, &event->area);
+      cairo_clip (cr);
 
-        /* get the current time */
-        clock_plugin_get_localtime (&tm);
-
-        /* walk the three or two time parts */
-        for (i = 0; i < columns; i++)
+      if (binary->show_grid)
         {
-          /* get the time of this column */
-          if (i == 0)
-            ticks = tm.tm_hour;
-          else if (i == 1)
-            ticks = tm.tm_min;
-          else
-            ticks = tm.tm_sec;
+          color = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
+          gdk_cairo_set_source_color (cr, color);
+          cairo_set_line_width (cr, 1);
 
-          /* walk the binary columns */
-          for (j = 0; j < cells; j++)
+          cols = binary->true_binary ? 6 : (binary->show_seconds ? 6 : 4);
+          rows = binary->true_binary ? (binary->show_seconds ? 2 : 3) : 4;
+
+          alloc = &widget->allocation;
+
+          gtk_misc_get_padding (GTK_MISC (widget), &pad_x, &pad_y);
+
+          x = pad_x + alloc->x + 0.5;
+          y = pad_y + alloc->y + 0.5;
+          remain_w = alloc->width - 1 - 2 * pad_x;
+          remain_h = alloc->height - 1 - 2 * pad_y;
+
+          cairo_rectangle (cr, x, y, remain_w, remain_h);
+          cairo_stroke (cr);
+
+          for (col = 0; col < cols - 1; col++)
             {
-              if (binary->true_binary)
-                {
-                  /* skip the columns we don't draw */
-                  if (i == 0 && j == 0)
-                    continue;
+              w = remain_w / (cols - col);
+              x += w; remain_w -= w;
+              cairo_move_to (cr, x, alloc->y);
+              cairo_rel_line_to (cr, 0, alloc->height);
+              cairo_stroke (cr);
+            }
 
-                  /* decimal representation of this cell */
-                  decimal = decimal_tb[j];
-
-                  /* center of the arc */
-                  x = cw * (j + 0.5) + widget->allocation.x;
-                  y = ch * (i + 0.5) + widget->allocation.y;
-                }
-              else /* bcd clock */
-                {
-                  /* skip the columns we don't draw */
-                  if ((j == 0) || (i == 0 && j == 1))
-                    continue;
-
-                  /* decimal representation of this cell */
-                  decimal = decimal_bcd[j];
-
-                  /* center of the arc */
-                  x = cw * (i * 2 + (j < 4 ? 0 : 1) + 0.5) + widget->allocation.x;
-                  y = ch * ((j >= 4 ? j - 4 : j) + 0.5) + widget->allocation.y;
-                }
-
-              /* if this binary values 'fits' in the time */
-              if (ticks >= decimal)
-                {
-                  /* extract the decimal value from the time */
-                  ticks -= decimal;
-
-                  /* set the active color */
-                  gdk_cairo_set_source_color (cr, &active);
-                }
-              else
-                {
-                  /* set the inactive color */
-                  gdk_cairo_set_source_color (cr, &inactive);
-                }
-
-              /* draw the arc */
-              cairo_move_to (cr, x, y);
-              cairo_arc (cr, x, y, radius, 0, 2 * M_PI);
-              cairo_close_path (cr);
-
-              /* fill the arc */
-              cairo_fill (cr);
+          for (row = 0; row < rows - 1; row++)
+            {
+              h = remain_h / (rows - row);
+              y += h; remain_h -= h;
+              cairo_move_to (cr, alloc->x, y);
+              cairo_rel_line_to (cr, alloc->width, 0);
+              cairo_stroke (cr);
             }
         }
 
-      /* cleanup */
+      if (binary->true_binary)
+        xfce_clock_binary_expose_event_true_binary (binary, cr, &widget->allocation);
+      else
+        xfce_clock_binary_expose_event_binary (binary, cr, &widget->allocation);
+
       cairo_destroy (cr);
     }
 
