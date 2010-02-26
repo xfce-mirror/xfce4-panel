@@ -36,12 +36,12 @@
 
 
 
-static void      panel_module_dispose        (GObject          *object);
-static void      panel_module_finalize       (GObject          *object);
-static gboolean  panel_module_load           (GTypeModule      *type_module);
-static void      panel_module_unload         (GTypeModule      *type_module);
-static void      panel_module_item_finalized (gpointer          user_data,
-                                              GObject          *item);
+static void      panel_module_dispose          (GObject          *object);
+static void      panel_module_finalize         (GObject          *object);
+static gboolean  panel_module_load             (GTypeModule      *type_module);
+static void      panel_module_unload           (GTypeModule      *type_module);
+static void      panel_module_plugin_destroyed (gpointer          user_data,
+                                                GObject          *where_the_plugin_was);
 
 
 
