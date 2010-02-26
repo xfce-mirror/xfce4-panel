@@ -22,7 +22,7 @@
 #endif
 
 #include <common/panel-xfconf.h>
-#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 
 
 typedef struct
