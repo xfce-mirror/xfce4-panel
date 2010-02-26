@@ -134,8 +134,9 @@ struct _XfceTasklistChild
 
 static const GtkTargetEntry drop_targets[] =
 {
-  { (gchar *) "xfce-panel/plugin-task", GTK_TARGET_SAME_WIDGET, 0 }
+  { (gchar *) "xfce-panel/tasklist-task", GTK_TARGET_SAME_WIDGET, 0 }
 };
+
 
 
 static gint locked = 0;
@@ -164,7 +165,7 @@ static void xfce_tasklist_viewports_changed (WnckScreen *screen, XfceTasklist *t
 static void xfce_tasklist_wireframe_hide (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_destroy (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_update (XfceTasklist *tasklist, XfceTasklistChild *child);
-static void tasklist_button_new (XfceTasklistChild *child);
+static void xfce_tasklist_button_new (XfceTasklistChild *child);
 static void xfce_tasklist_set_style (XfceTasklist *tasklist, XfceTasklistStyle style);
 static void xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist, gboolean all_workspaces);
 static void xfce_tasklist_set_button_relief (XfceTasklist *tasklist, GtkReliefStyle button_relief);
@@ -391,7 +392,11 @@ xfce_tasklist_finalize (GObject *object)
   XfceTasklist *tasklist = XFCE_TASKLIST (object);
 
   panel_return_if_fail (tasklist->children == NULL);
-  /* panel_return_if_fail (tasklist->class_groups == NULL); */
+
+  /* free the class group list, this is not empty because the
+   * windows are still openened */
+  if (tasklist->class_groups != NULL)
+    g_slist_free (tasklist->class_groups);
 
   /* destroy the wireframe window */
   if (tasklist->wireframe_window != 0)
@@ -714,7 +719,7 @@ xfce_tasklist_remove (GtkContainer *container,
   XfceTasklist      *tasklist = XFCE_TASKLIST (container);
   gboolean           was_visible;
   XfceTasklistChild *child;
-  GSList *li;
+  GSList            *li;
 
   for (li = tasklist->children; li != NULL; li = li->next)
     {
@@ -924,7 +929,6 @@ xfce_tasklist_window_added (WnckScreen   *screen,
 {
   XfceTasklistChild *child;
   static guint       unique_id_counter = 0;
-  GSList            *li;
   WnckClassGroup    *class_group;
 
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
@@ -946,17 +950,13 @@ xfce_tasklist_window_added (WnckScreen   *screen,
 
   if (G_LIKELY (class_group))
     {
-      /* try to find the class group in the list */
-      for (li = tasklist->class_groups; li != NULL; li = li->next)
-        if (li->data == class_group)
-          break;
-
       /* prepend the class group if it's new */
-      if (li == NULL)
+      if (g_slist_find (tasklist->class_groups, class_group) == NULL)
         tasklist->class_groups = g_slist_prepend (tasklist->class_groups, class_group);
 
       /* set the class group */
       child->class_group = g_object_ref (G_OBJECT (class_group));
+
     }
   else
     {
@@ -964,7 +964,7 @@ xfce_tasklist_window_added (WnckScreen   *screen,
     }
 
   /* create the application button */
-  tasklist_button_new (child);
+  xfce_tasklist_button_new (child);
 
   /* insert in the internal list */
   tasklist->children = g_slist_append (tasklist->children, child);
@@ -1000,10 +1000,11 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
         {
           if (child->class_group)
             {
-              /* remove the class group from the internal list if this was the last
-               * window in the group */
-              if (g_list_length (wnck_class_group_get_windows (child->class_group)) == 1)
-                tasklist->class_groups = g_slist_remove (tasklist->class_groups, child->class_group);
+              /* remove the class group from the internal list if this
+               * was the last window in the group */
+              if (wnck_class_group_get_windows (child->class_group) == NULL)
+                tasklist->class_groups = g_slist_remove (tasklist->class_groups,
+                                                         child->class_group);
 
               /* release the class group */
               g_object_unref (G_OBJECT (child->class_group));
@@ -1267,51 +1268,6 @@ tasklist_button_workspace_changed (WnckWindow        *window,
 
 
 
-static gboolean
-tasklist_button_toggled (GtkToggleButton   *button,
-                         XfceTasklistChild *child)
-{
-  WnckWorkspace *workspace;
-  guint32        timestamp;
-
-  /* leave when the taskbar is locked */
-  if (xfce_taskbar_is_locked ())
-    return TRUE;
-
-  if (wnck_window_is_active (child->window))
-    {
-      /* minimize the window */
-      wnck_window_minimize (child->window);
-    }
-  else
-    {
-      /* current event time */
-      timestamp = gtk_get_current_event_time ();
-
-      /* only switch workspaces if we show application from other workspaces
-       * don't switch when switch on minimize is disabled and the window is minimized */
-      if (child->tasklist->all_workspaces
-          && (!wnck_window_is_minimized (child->window)
-              || child->tasklist->switch_workspace))
-        {
-          /* get the screen of this window and the workspaces */
-          workspace = wnck_window_get_workspace (child->window);
-
-          /* switch to the correct workspace */
-          if (workspace
-              && workspace != wnck_screen_get_active_workspace (child->tasklist->screen))
-            wnck_workspace_activate (workspace, timestamp - 1);
-        }
-
-      /* active the window */
-      wnck_window_activate_transient (child->window, timestamp);
-    }
-
-  return TRUE;
-}
-
-
-
 static void
 tasklist_button_geometry_changed (WnckWindow        *window,
                                   XfceTasklistChild *child)
@@ -1369,9 +1325,44 @@ tasklist_button_button_press_event (GtkWidget         *button,
                                     GdkEventButton    *event,
                                     XfceTasklistChild *child)
 {
-  GtkWidget *menu, *panel_plugin;
+  GtkWidget     *menu, *panel_plugin;
+  WnckWorkspace *workspace;
 
-  if (event->button == 3)
+  if (event->type == GDK_BUTTON_PRESS
+      && xfce_taskbar_is_locked ())
+    return FALSE;
+
+  if (event->button == 1)
+    {
+      if (wnck_window_is_active (child->window))
+        {
+          /* minimize the window */
+          wnck_window_minimize (child->window);
+        }
+      else
+        {
+          /* only switch workspaces if we show application from other workspaces
+           * don't switch when switch on minimize is disabled and the window is minimized */
+          if (child->tasklist->all_workspaces
+              && (!wnck_window_is_minimized (child->window)
+                  || child->tasklist->switch_workspace))
+            {
+              /* get the screen of this window and the workspaces */
+              workspace = wnck_window_get_workspace (child->window);
+
+              /* switch to the correct workspace */
+              if (workspace
+                  && workspace != wnck_screen_get_active_workspace (child->tasklist->screen))
+                wnck_workspace_activate (workspace, event->time - 1);
+            }
+
+          /* active the window */
+          wnck_window_activate_transient (child->window, event->time);
+        }
+
+      return TRUE;
+    }
+  else if (event->button == 3)
     {
       panel_plugin = gtk_widget_get_parent (GTK_WIDGET (child->tasklist));
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin), FALSE);
@@ -1394,16 +1385,17 @@ tasklist_button_button_press_event (GtkWidget         *button,
 
 
 static void
-tasklist_button_new (XfceTasklistChild *child)
+xfce_tasklist_button_new (XfceTasklistChild *child)
 {
   WnckWindow *window = child->window;
+
+  panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
+  panel_return_if_fail (WNCK_IS_WINDOW (child->window));
 
   /* create the application button */
   child->button = xfce_arrow_button_new (GTK_ARROW_NONE);
   gtk_button_set_relief (GTK_BUTTON (child->button),
                          child->tasklist->button_relief);
-  g_signal_connect (G_OBJECT (child->button), "toggled",
-                    G_CALLBACK (tasklist_button_toggled), child);
   g_signal_connect (G_OBJECT (child->button), "enter-notify-event",
                     G_CALLBACK (tasklist_button_enter_notify_event), child);
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
