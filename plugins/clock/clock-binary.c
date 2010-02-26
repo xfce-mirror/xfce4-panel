@@ -151,7 +151,6 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
 static void
 xfce_clock_binary_init (XfceClockBinary *binary)
 {
-  /* init */
   binary->show_seconds = FALSE;
   binary->true_binary = FALSE;
   binary->show_inactive = TRUE;
@@ -276,18 +275,15 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
   gint         offset_x, offset_y;
   gint         w, h, x;
   gint         ticks;
-  gint         pad_x, pad_y;
 
   inactive = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
   active = &(GTK_WIDGET (binary)->style->bg[GTK_STATE_SELECTED]);
 
   clock_plugin_get_localtime (&tm);
 
-  gtk_misc_get_padding (GTK_MISC (binary), &pad_x, &pad_y);
-
   /* init sizes */
-  remain_h = alloc->height - 1 - 2 * pad_y;
-  offset_y = alloc->y + 1 + pad_y;
+  remain_h = alloc->height;
+  offset_y = alloc->y;
 
   rows = binary->show_seconds ? 3 : 2;
   for (row = 0; row < rows; row++)
@@ -301,8 +297,8 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
         ticks = tm.tm_sec;
 
       /* reset sizes */
-      remain_w = alloc->width - 1 - 2 * pad_x;
-      offset_x = alloc->x + 1 + pad_x;
+      remain_w = alloc->width;
+      offset_x = alloc->x;
       h = remain_h / (rows - row);
       remain_h -= h;
 
@@ -355,25 +351,17 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
   gint         offset_x, offset_y;
   gint         w, h, y;
   gint         ticks;
-  gint         pad_x, pad_y;
-  gint         diff;
 
   inactive = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
   active = &(GTK_WIDGET (binary)->style->bg[GTK_STATE_SELECTED]);
 
   clock_plugin_get_localtime (&tm);
 
-  gtk_misc_get_padding (GTK_MISC (binary), &pad_x, &pad_y);
-
-  remain_w = alloc->width - 1 - 2 * pad_x;
-  offset_x = alloc->x + 1 + pad_x;
+  remain_w = alloc->width;
+  offset_x = alloc->x;
 
   /* make sure the cols are all equal */
   cols = binary->show_seconds ? 6 : 4;
-  diff = remain_w - (floor ((gdouble) remain_w / cols) * cols);
-  remain_w -= diff;
-  offset_x += diff / 2;
-
   for (col = 0; col < cols; col++)
     {
       /* get the time this row represents */
@@ -385,14 +373,8 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
         ticks = tm.tm_sec;
 
       /* reset sizes */
-      remain_h = alloc->height - 1 -  2 * pad_y;
-      offset_y = alloc->y + 1 + pad_x;
-
-      /* make sure the rows are all equal */
-      diff = remain_h - (floor ((gdouble) remain_h / rows) * rows);
-      remain_h -= diff;
-      offset_y += diff / 2;
-
+      remain_h = alloc->height;
+      offset_y = alloc->y;
       w = remain_w / (cols - col);
       remain_w -= w;
 
@@ -440,11 +422,12 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
   GdkColor        *color;
   gint             col, cols;
   gint             row, rows;
-  GtkAllocation   *alloc;
+  GtkAllocation    alloc;
   gdouble          remain_w, x;
   gdouble          remain_h, y;
   gint             w, h;
   gint             pad_x, pad_y;
+  gint             diff;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), FALSE);
   panel_return_val_if_fail (GDK_IS_WINDOW (widget->window), FALSE);
@@ -456,33 +439,46 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
       gdk_cairo_rectangle (cr, &event->area);
       cairo_clip (cr);
 
+      gtk_misc_get_padding (GTK_MISC (widget), &pad_x, &pad_y);
+
+      alloc = widget->allocation;
+      alloc.width -= 1 + 2 * pad_x;
+      alloc.height -= 1 + 2 * pad_y;
+      alloc.x += pad_x + 1;
+      alloc.y += pad_y + 1;
+
+      /* align columns and fix rounding */
+      cols = binary->true_binary ? 6 : (binary->show_seconds ? 6 : 4);
+      diff = alloc.width - (floor ((gdouble) alloc.width / cols) * cols);
+      alloc.width -= diff;
+      alloc.x += diff / 2;
+
+      /* align rows and fix rounding */
+      rows = binary->true_binary ? (binary->show_seconds ? 3 : 2) : 4;
+      diff = alloc.height - (floor ((gdouble) alloc.height / rows) * rows);
+      alloc.height -= diff;
+      alloc.y += diff / 2;
+
       if (binary->show_grid)
         {
           color = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
           gdk_cairo_set_source_color (cr, color);
           cairo_set_line_width (cr, 1);
 
-          cols = binary->true_binary ? 6 : (binary->show_seconds ? 6 : 4);
-          rows = binary->true_binary ? (binary->show_seconds ? 2 : 3) : 4;
+          remain_w = alloc.width;
+          remain_h = alloc.height;
+          x = alloc.x - 0.5;
+          y = alloc.y - 0.5;
 
-          alloc = &widget->allocation;
-
-          gtk_misc_get_padding (GTK_MISC (widget), &pad_x, &pad_y);
-
-          x = pad_x + alloc->x + 0.5;
-          y = pad_y + alloc->y + 0.5;
-          remain_w = alloc->width - 1 - 2 * pad_x;
-          remain_h = alloc->height - 1 - 2 * pad_y;
-
-          cairo_rectangle (cr, x, y, remain_w, remain_h);
+          cairo_rectangle (cr, x, y, alloc.width, alloc.height);
           cairo_stroke (cr);
 
           for (col = 0; col < cols - 1; col++)
             {
               w = remain_w / (cols - col);
               x += w; remain_w -= w;
-              cairo_move_to (cr, x, alloc->y);
-              cairo_rel_line_to (cr, 0, alloc->height);
+              cairo_move_to (cr, x, alloc.y);
+              cairo_rel_line_to (cr, 0, alloc.height);
               cairo_stroke (cr);
             }
 
@@ -490,16 +486,16 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
             {
               h = remain_h / (rows - row);
               y += h; remain_h -= h;
-              cairo_move_to (cr, alloc->x, y);
-              cairo_rel_line_to (cr, alloc->width, 0);
+              cairo_move_to (cr, alloc.x, y);
+              cairo_rel_line_to (cr, alloc.width, 0);
               cairo_stroke (cr);
             }
         }
 
       if (binary->true_binary)
-        xfce_clock_binary_expose_event_true_binary (binary, cr, &widget->allocation);
+        xfce_clock_binary_expose_event_true_binary (binary, cr, &alloc);
       else
-        xfce_clock_binary_expose_event_binary (binary, cr, &widget->allocation);
+        xfce_clock_binary_expose_event_binary (binary, cr, &alloc);
 
       cairo_destroy (cr);
     }
