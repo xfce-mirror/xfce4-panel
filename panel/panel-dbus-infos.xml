@@ -24,25 +24,36 @@
     <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="panel_dbus_service" />
 
     <!--
-      Methode to open the panel customize dialog
+      CustomizePanel (display : STRING) : VOID
+      
+      display           : The display on which to show the dialog or ""
+                          to use the default screen of the panel.
     -->
     <method name="CustomizePanel">
+      <arg direction="in" name="display" type="s" />
     </method>
     
     <!--
-      Methode to open the 'add new items' dialog
+      AddItems (display : STRING) : VOID
+      
+      display           : The display on which to show the dialog or ""
+                          to use the default screen of the panel.
     -->
-    <method name="AddItems">
+    <method name="AddItems" />
+      <arg direction="in" name="display" type="s" />
     </method>
     
     <!--
-      Methode to save the panel configuration
+      Save () : VOID
+      
+      Tells the panel to save its configuration, including all the plugins.
     -->
-    <method name="Save">
-    </method>
+    <method name="Save" />
     
     <!--
-      Methode to terminate the panel and optionally restart it
+      Terminate (restart : BOOLEAN) : VOID
+      
+      restart           : Whether the panel should restart after termination.
     -->
     <method name="Terminate">
       <arg direction="in" name="restart" type="b" />
@@ -50,28 +61,43 @@
   </interface>
   
   <interface name="org.xfce.Panel.Plugin">
-    <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="panel_plugin_dbus_service" />
+    <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="panel_dbus_service" />
     
     <!--
-      Signal for the plugin when one of the properties changes
+      RegisterPlugin (id : INT) : VOID
+      
+      id                : The window id of the GtkPlug. This is used to 
+                          embed the window in a GtkSocket.
     -->
-    <signal name="PropertiesChanged">
-      <arg name="size" type="i" />
-      <arg name="screen-position" type="u" />
-      <arg name="orientation" type="u" />
-    </signal>
-    
-    <!--
-      Signal to for the plugin when the sensitivity changes
-    -->
-    <signal name="SensitiveChanged">
-      <arg name="sensitive" type="b"/>
+    <method name="RegisterPlugin">
+      <arg direction="in" name="id" type="i" />
     </method>
     
     <!--
-      Property of the plugin to read if it should expand
+      PropertyChanged (size : INT, screen-position : UINT, orientation : UINT, sensitive : BOOLEAN, expand : BOOLEAN) : VOID
+      
+      size              : The size of the plugin.
+      screen-position   : The screen-position of the panel on which the
+                          plugin is embedded.
+      orientation       : The orientation of the panel on which the 
+                          plugin is embedded.
+      sensitive         : Whether the plugin should be sensitive. A plugin
+                          is insensitive during panel editing.
+      expand            : Whether the plugin expands on the panel.
     -->
-    <property name="ExpandPlugin" type="b" access="readwrite">
-    </property>
+    <signal name="PropertyChanged">
+      <arg direction="in" name="size" type="i" />
+      <arg direction="in" name="screen-position" type="u" />
+      <arg direction="in" name="orientation" type="u" />
+      <arg direction="in" name="sensitive" type="b" />
+      <arg direction="in" name="expand" type="b" />
+    </signal>
+    
+    <!--
+      Save () : VOID
+      
+      Tells the plugin to save its configuration.
+    -->
+    <method name="Save" />
   </interface>
 </node>
