@@ -416,8 +416,11 @@ xfce_panel_image_expose_event (GtkWidget      *widget,
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   gint                   source_width, source_height;
   gint                   dest_x, dest_y;
+  GtkIconSource         *source;
+  GdkPixbuf             *rendered = NULL;
+  GdkPixbuf             *pixbuf = priv->cache;
 
-  if (G_LIKELY (priv->cache != NULL))
+  if (G_LIKELY (pixbuf != NULL))
     {
       /* get the size of the cache pixbuf */
       source_width = gdk_pixbuf_get_width (priv->cache);
@@ -427,14 +430,32 @@ xfce_panel_image_expose_event (GtkWidget      *widget,
       dest_x = widget->allocation.x + (priv->width - source_width) / 2;
       dest_y = widget->allocation.y + (priv->height - source_height) / 2;
 
+      if (GTK_WIDGET_STATE (widget) == GTK_STATE_INSENSITIVE)
+        {
+          source = gtk_icon_source_new ();
+          gtk_icon_source_set_pixbuf (source, pixbuf);
+
+          rendered = gtk_style_render_icon (widget->style,
+                                            source,
+                                            gtk_widget_get_direction (widget),
+                                            GTK_WIDGET_STATE (widget),
+                                            -1, widget, "xfce-panel-image");
+          gtk_icon_source_free (source);
+
+          if (G_LIKELY (rendered != NULL))
+            pixbuf = rendered;
+        }
+
       /* draw the pixbuf */
       gdk_draw_pixbuf (widget->window,
                        widget->style->black_gc,
-                       priv->cache,
-                       0, 0,
+                       pixbuf, 0, 0,
                        dest_x, dest_y,
                        source_width, source_height,
                        GDK_RGB_DITHER_NORMAL, 0, 0);
+
+      if (rendered != NULL)
+        g_object_unref (G_OBJECT (rendered));
     }
 
   return FALSE;
