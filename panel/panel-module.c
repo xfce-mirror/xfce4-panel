@@ -399,7 +399,8 @@ panel_module_new_plugin (PanelModule  *module,
       module->use_count++;
 
       /* handle module use count and unloading */
-      g_object_weak_ref (G_OBJECT (plugin), panel_module_plugin_destroyed, module);
+      g_object_weak_ref (G_OBJECT (plugin), 
+          panel_module_plugin_destroyed, module);
 
       /* emit unique-changed if the plugin is unique */
       if (module->is_unique)

@@ -141,11 +141,13 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   dialog->factory = panel_module_factory_get ();
 
   /* signal for unique changes */
-  g_signal_connect (G_OBJECT (dialog->factory), "unique-changed", G_CALLBACK (panel_item_dialog_unique_changed), dialog);
+  g_signal_connect (G_OBJECT (dialog->factory), "unique-changed", 
+      G_CALLBACK (panel_item_dialog_unique_changed), dialog);
 
   /* setup dialog */
   gtk_window_set_title (GTK_WINDOW (dialog), _("Xfce Panel Item Browser"));
-  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog), _("Add new plugins to your Xfce panels"));
+  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog), 
+      _("Add new plugins to your Xfce panels"));
   gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_ADD);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_default_size (GTK_WINDOW (dialog), 350, 450);
@@ -242,7 +244,8 @@ panel_item_dialog_finalize (GObject *object)
   PanelItemDialog *dialog = PANEL_ITEM_DIALOG (object);
 
   /* disconnect unique-changed signal */
-  g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->factory), panel_item_dialog_unique_changed, dialog);
+  g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->factory), 
+      panel_item_dialog_unique_changed, dialog);
 
   /* make the windows sensitive again */
   panel_application_windows_sensitive (dialog->application, TRUE);
@@ -306,7 +309,8 @@ panel_item_dialog_unique_changed (PanelModuleFactory *factory,
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   /* search the module and update its sensitivity */
-  gtk_tree_model_foreach (GTK_TREE_MODEL (dialog->store), panel_item_dialog_unique_changed_foreach, module);
+  gtk_tree_model_foreach (GTK_TREE_MODEL (dialog->store), 
+      panel_item_dialog_unique_changed_foreach, module);
 }
 
 
@@ -473,7 +477,8 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
       internal_name = panel_module_get_name (module);
 
       /* set the selection data */
-      gtk_selection_data_set (selection_data, selection_data->target, 8, (guchar *) internal_name, strlen (internal_name));
+      gtk_selection_data_set (selection_data, selection_data->target, 8, 
+          (guchar *) internal_name, strlen (internal_name));
 
       /* release module */
       g_object_unref (G_OBJECT (module));
@@ -505,9 +510,9 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
 
       /* insert in the store */
       gtk_list_store_insert_with_values (dialog->store, &iter, n,
-                                         COLUMN_MODULE, module,
-                                         COLUMN_ICON_NAME, panel_module_get_icon_name (module),
-                                         COLUMN_SENSITIVE, panel_module_is_usable (module), -1);
+          COLUMN_MODULE, module,
+          COLUMN_ICON_NAME, panel_module_get_icon_name (module),
+          COLUMN_SENSITIVE, panel_module_is_usable (module), -1);
     }
 
   /* cleanup */
@@ -515,7 +520,8 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
 
   /* add an empty item for separator in 2nd position */
   if (panel_module_factory_has_launcher (dialog->factory))
-    gtk_list_store_insert_with_values (dialog->store, &iter, 1, COLUMN_MODULE, NULL, -1);
+    gtk_list_store_insert_with_values (dialog->store, &iter, 1, 
+                                       COLUMN_MODULE, NULL, -1);
 }
 
 
@@ -705,7 +711,8 @@ panel_item_dialog_show (PanelWindow *active)
     active = panel_application_get_window (dialog->application, 0);
 
   /* show the dialog on the same screen as the panel */
-  gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (active)));
+  gtk_window_set_screen (GTK_WINDOW (dialog), 
+      gtk_widget_get_screen (GTK_WIDGET (active)));
 
   /* show the dialog */
   gtk_widget_show (GTK_WIDGET (dialog));

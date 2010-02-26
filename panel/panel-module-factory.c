@@ -112,7 +112,8 @@ panel_module_factory_init (PanelModuleFactory *factory)
   factory->has_launcher = FALSE;
 
   /* create hash tables */
-  factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
+  factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal, 
+                                            g_free, g_object_unref);
 
   /* load all the modules */
   panel_module_factory_load_modules (factory);
@@ -257,7 +258,9 @@ panel_module_factory_modules_cleanup (gpointer key,
   remove_from_table = !panel_module_is_valid (module);
 
   /* if we're going to remove this item, check if it's the launcher */
-  if (remove_from_table && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_name (module)))
+  if (remove_from_table 
+      && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, 
+                           panel_module_get_name (module)))
     factory->has_launcher = FALSE;
 
   return remove_from_table;
@@ -347,14 +350,19 @@ GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
+  
+  /* scan the resource directories again */
+  panel_module_factory_load_modules (factory);
 
   /* make sure the hash table is clean */
-  g_hash_table_foreach_remove (factory->modules, panel_module_factory_modules_cleanup, factory);
+  g_hash_table_foreach_remove (factory->modules, 
+      panel_module_factory_modules_cleanup, factory);
 
 #if !GLIB_CHECK_VERSION (2,14,0)
   GList *value = NULL;
 
-  g_hash_table_foreach (factory->modules, panel_module_factory_get_modules_foreach, &value);
+  g_hash_table_foreach (factory->modules, 
+      panel_module_factory_get_modules_foreach, &value);
 
   return value;
 #else
@@ -387,7 +395,8 @@ panel_module_factory_get_plugin (PanelModuleFactory *factory,
 
   /* traverse the list to find the plugin with this unique id */
   for (li = factory->plugins; li != NULL; li = li->next)
-    if (xfce_panel_plugin_provider_get_unique_id (XFCE_PANEL_PLUGIN_PROVIDER (li->data)) == unique_id)
+    if (xfce_panel_plugin_provider_get_unique_id (
+        XFCE_PANEL_PLUGIN_PROVIDER (li->data)) == unique_id)
       return GTK_WIDGET (li->data);
 
   return NULL;
