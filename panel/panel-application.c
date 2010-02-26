@@ -873,8 +873,7 @@ panel_application_drag_motion (GtkWidget        *itembar,
         }
       else
         {
-          /* not a valid list of uris */
-          return TRUE;
+          goto invalid_drop;
         }
     }
   else if (target != GDK_NONE)
@@ -889,6 +888,8 @@ panel_application_drag_motion (GtkWidget        *itembar,
     }
   else
     {
+      invalid_drop:
+
       /* not a valid drop */
       gdk_drag_status (context, 0, drag_time);
 
