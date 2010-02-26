@@ -155,8 +155,11 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
 static void
 launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
-  GtkWidget      *widget;
+  LauncherPlugin      *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
+  GtkWidget           *widget;
+  const gchar * const *filenames;
+  guint                i;
+  XfceMenuItem        *item;
 
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
@@ -212,6 +215,22 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* load the items */
   launcher_plugin_items_load (plugin);
+
+  if (G_UNLIKELY (plugin->items == NULL))
+    {
+      /* get the plugin arguments list */
+      filenames = xfce_panel_plugin_get_arguments (panel_plugin);
+      if (G_LIKELY (filenames != NULL))
+        {
+          for (i = 0; filenames[i] != NULL; i++)
+            {
+              /* create a new item from the file */
+              item = xfce_menu_item_new (filenames[i]);
+              if (G_LIKELY (item != NULL))
+                plugin->items = g_slist_append (plugin->items, item);
+            }
+        }
+    }
 
   /* update the icon */
   launcher_plugin_button_set_icon (plugin);
