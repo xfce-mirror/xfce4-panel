@@ -144,7 +144,6 @@ separator_plugin_class_init (SeparatorPluginClass *klass)
 static void
 separator_plugin_init (SeparatorPlugin *plugin)
 {
-  /* initialize */
   plugin->style = SEPARATOR_PLUGIN_STYLE_DEFAULT;
 }
 
@@ -229,7 +228,6 @@ separator_plugin_expose_event (GtkWidget      *widget,
         if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
             GTK_ORIENTATION_HORIZONTAL)
           {
-            /* paint vertical separator */
             gtk_paint_vline (widget->style,
                              widget->window,
                              GTK_WIDGET_STATE (widget),
@@ -241,7 +239,6 @@ separator_plugin_expose_event (GtkWidget      *widget,
           }
         else
           {
-            /* paint horizontal separator */
             gtk_paint_hline (widget->style,
                              widget->window,
                              GTK_WIDGET_STATE (widget),
@@ -254,7 +251,6 @@ separator_plugin_expose_event (GtkWidget      *widget,
         break;
 
       case SEPARATOR_PLUGIN_STYLE_HANDLE:
-        /* paint handle box */
         gtk_paint_handle (widget->style,
                           widget->window,
                           GTK_WIDGET_STATE (widget),
