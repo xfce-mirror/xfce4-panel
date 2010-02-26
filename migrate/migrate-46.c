@@ -553,6 +553,23 @@ migrate_46_plugin_windowlist (XfconfChannel *channel,
 
 
 static void
+migrate_46_plugin_xfce4_menu (XfconfChannel *channel,
+                              XfceRc        *rc)
+{
+  migrate_46_plugin_bool ("show_menu_icons", "show-menu-icons", TRUE);
+  migrate_46_plugin_bool ("show_button_title", "show-button-title", TRUE);
+  migrate_46_plugin_string ("menu_file", "custom-menu-file", "");
+  migrate_46_plugin_string ("icon_file", "button-icon", "xfce4-panel-menu");
+  migrate_46_plugin_string ("button_title", "button-title", "");
+
+  if (xfce_rc_has_entry (rc, "use_default_menu"))
+    xfconf_channel_set_bool (channel, "/custom-menu",
+       !xfce_rc_read_bool_entry (rc, "use_default_menu", TRUE));
+}
+
+
+
+static void
 migrate_46_panel_add_plugin (ConfigParser  *parser,
                              const gchar   *name,
                              const gchar   *id,
@@ -625,6 +642,12 @@ migrate_46_panel_add_plugin (ConfigParser  *parser,
       plugin_name = "windowmenu";
       if (G_LIKELY (rc != NULL))
         migrate_46_plugin_windowlist (channel, rc);
+    }
+  else if (strcmp (name, "xfce4-menu") == 0)
+    {
+      plugin_name = "applicationsmenu";
+      if (G_LIKELY (rc != NULL))
+        migrate_46_plugin_xfce4_menu (channel, rc);
     }
   else
     {

@@ -2235,7 +2235,7 @@ launcher_plugin_exec_parse (GarconMenuItem   *item,
 
   for (p = command; *p != '\0'; ++p)
     {
-      if (p[0] == '%' && p[1] != '\0')
+      if (G_UNLIKELY (p[0] == '%' && p[1] != '\0'))
         {
           switch (*++p)
             {

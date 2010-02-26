@@ -1,6 +1,7 @@
 
 SUBDIRS = \
 	actions \
+	applicationsmenu \
 	clock \
 	directorymenu \
 	launcher \
