@@ -24,6 +24,7 @@
 #include <xfconf/xfconf.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <common/panel-xfconf.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include "tasklist-widget.h"
@@ -116,6 +117,9 @@ tasklist_plugin_init (TasklistPlugin *plugin)
 
   plugin->tasklist = g_object_new (XFCE_TYPE_TASKLIST, NULL);
   gtk_box_pack_start (GTK_BOX (box), plugin->tasklist, TRUE, TRUE, 0);
+
+  exo_binding_new (G_OBJECT (plugin->tasklist), "show-handle",
+                   G_OBJECT (plugin->handle), "visible");
 }
 
 
@@ -123,29 +127,30 @@ tasklist_plugin_init (TasklistPlugin *plugin)
 static void
 tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  TasklistPlugin      *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+  const PanelProperty  properties[] =
+  {
+    { "show-labels", G_TYPE_BOOLEAN },
+    { "grouping", G_TYPE_UINT },
+    { "include-all-workspaces", G_TYPE_BOOLEAN },
+    { "flat-buttons", G_TYPE_BOOLEAN },
+    { "switch-workspace-on-unminimize", G_TYPE_BOOLEAN },
+    { "show-only-minimized", G_TYPE_BOOLEAN },
+    { "show-wireframes", G_TYPE_BOOLEAN },
+    { "show-handle", G_TYPE_BOOLEAN },
+    { NULL, G_TYPE_NONE }
+  };
 
   /* expand the plugin */
   xfce_panel_plugin_set_expand (panel_plugin, TRUE);
 
   /* open the xfconf channel */
-  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
 
-#define TASKLIST_XFCONF_BIND(name, gtype) \
-  xfconf_g_property_bind (plugin->channel, "/" name, gtype, \
-                          plugin->tasklist, name);
-
-  /* create bindings */
-  TASKLIST_XFCONF_BIND ("show-labels", G_TYPE_BOOLEAN)
-  TASKLIST_XFCONF_BIND ("grouping", G_TYPE_UINT)
-  TASKLIST_XFCONF_BIND ("include-all-workspaces", G_TYPE_BOOLEAN)
-  TASKLIST_XFCONF_BIND ("flat-buttons", G_TYPE_BOOLEAN)
-  TASKLIST_XFCONF_BIND ("switch-workspace-on-unminimize", G_TYPE_BOOLEAN)
-  TASKLIST_XFCONF_BIND ("show-only-minimized", G_TYPE_BOOLEAN)
-  TASKLIST_XFCONF_BIND ("show-wireframes", G_TYPE_BOOLEAN)
-
-  xfconf_g_property_bind (plugin->channel, "/show-handle", G_TYPE_BOOLEAN,
-                          plugin->handle, "visible");
+  /* connect all properties */
+  panel_properties_bind (plugin->channel, G_OBJECT (plugin->tasklist),
+                         xfce_panel_plugin_get_property_base (panel_plugin),
+                         properties, NULL);
 
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);
@@ -238,11 +243,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
       TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
       TASKLIST_DIALOG_BIND ("show-wireframes", "active")
-
-      object = gtk_builder_get_object (builder, "show-handle");
-      panel_return_if_fail (G_IS_OBJECT (object));
-      exo_mutual_binding_new (G_OBJECT (plugin->handle), "visible",
-                              G_OBJECT (object), "active");
+      TASKLIST_DIALOG_BIND ("show-handle", "active")
 
       gtk_widget_show (GTK_WIDGET (dialog));
   }

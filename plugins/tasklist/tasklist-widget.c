@@ -52,7 +52,8 @@ enum
   PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
   PROP_SHOW_LABELS,
   PROP_SHOW_ONLY_MINIMIZED,
-  PROP_SHOW_WIREFRAMES
+  PROP_SHOW_WIREFRAMES,
+  PROP_SHOW_HANDLE
 };
 
 struct _XfceTasklistClass
@@ -103,6 +104,9 @@ struct _XfceTasklist
   /* whether we show wireframes when hovering a button in
    * the tasklist */
   guint               show_wireframes : 1;
+
+  /* dummy property */
+  guint               show_handle : 1;
 
   /* wireframe window */
   Window              wireframe_window;
@@ -257,6 +261,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_HANDLE,
+                                   g_param_spec_boolean ("show-handle",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
                                                              NULL,
@@ -302,6 +313,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_labels = TRUE;
   tasklist->class_groups = NULL;
   tasklist->show_wireframes = FALSE;
+  tasklist->show_handle = TRUE;
   tasklist->wireframe_window = 0;
   tasklist->max_button_length = DEFAULT_BUTTON_LENGTH;
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
@@ -349,6 +361,10 @@ xfce_tasklist_get_property (GObject    *object,
 
       case PROP_SHOW_WIREFRAMES:
         g_value_set_boolean (value, tasklist->show_wireframes);
+        break;
+
+      case PROP_SHOW_HANDLE:
+        g_value_set_boolean (value, tasklist->show_handle);
         break;
 
       default:
@@ -402,6 +418,10 @@ xfce_tasklist_set_property (GObject      *object,
       case PROP_SHOW_WIREFRAMES:
         /* set the new value */
         xfce_tasklist_set_show_wireframes (tasklist, g_value_get_boolean (value));
+        break;
+
+      case PROP_SHOW_HANDLE:
+        tasklist->show_handle = g_value_get_boolean (value);
         break;
 
       default:

@@ -38,6 +38,7 @@ libtasklist_la_LDFLAGS = \
 
 libtasklist_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la \
 	$(EXO_LIBS) \
 	$(GTK_LIBS) \
 	$(XFCONF_LIBS) \
@@ -46,7 +47,8 @@ libtasklist_la_LIBADD = \
 	$(LIBWNCK_LIBS)
 
 libtasklist_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la
+	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la
 
 #
 # .desktop file
