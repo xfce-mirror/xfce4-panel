@@ -39,7 +39,6 @@ typedef const gchar *(*ProviderToPlugin) (XfcePanelPluginProvider *provider);
 static void         xfce_panel_plugin_class_init             (XfcePanelPluginClass         *klass);
 static void         xfce_panel_plugin_init                   (XfcePanelPlugin              *plugin);
 static void         xfce_panel_plugin_provider_init          (XfcePanelPluginProviderIface *iface);
-static void         xfce_panel_plugin_constructed            (GObject                      *object);
 static void         xfce_panel_plugin_get_property           (GObject                      *object,
                                                               guint                         prop_id,
                                                               GValue                       *value,
@@ -50,6 +49,7 @@ static void         xfce_panel_plugin_set_property           (GObject           
                                                               GParamSpec                   *pspec);
 static void         xfce_panel_plugin_dispose                (GObject                      *object);
 static void         xfce_panel_plugin_finalize               (GObject                      *object);
+static void         xfce_panel_plugin_realize                (GtkWidget                    *widget);
 static gboolean     xfce_panel_plugin_button_press_event     (GtkWidget                    *widget,
                                                               GdkEventButton               *event);
 static void         xfce_panel_plugin_menu_properties        (XfcePanelPlugin              *plugin);
@@ -107,8 +107,9 @@ struct _XfcePanelPluginPrivate
   GtkOrientation       orientation;
   XfceScreenPosition   screen_position;
 
-  /* prevent free_data in dispose from running twice */
+  /* we only want to trigger these functions once */
   guint                disposed : 1;
+  guint                constructed : 1;
 
   /* plugin menu */
   GtkMenu             *menu;
@@ -144,13 +145,13 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   klass->construct = NULL;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->constructed = xfce_panel_plugin_constructed;
   gobject_class->get_property = xfce_panel_plugin_get_property;
   gobject_class->set_property = xfce_panel_plugin_set_property;
   gobject_class->dispose = xfce_panel_plugin_dispose;
   gobject_class->finalize = xfce_panel_plugin_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->realize = xfce_panel_plugin_realize;
   gtkwidget_class->button_press_event = xfce_panel_plugin_button_press_event;
 
   /**
@@ -382,6 +383,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->menu_blocked = 0;
   plugin->priv->registered_menus = 0;
   plugin->priv->disposed = FALSE;
+  plugin->priv->constructed = FALSE;
 
   /* hide the event box window to make the plugin transparent */
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
@@ -398,19 +400,6 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
   iface->set_orientation = xfce_panel_plugin_set_orientation;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
   iface->save = xfce_panel_plugin_save;
-}
-
-
-
-static void
-xfce_panel_plugin_constructed (GObject *object)
-{
-  XfcePanelPluginClass *klass = XFCE_PANEL_PLUGIN_GET_CLASS (object);
-
-  /* check if there is a construct class attached to this plugin,
-   * if there is, execute it */
-  if (klass->construct != NULL)
-    (*klass->construct) (XFCE_PANEL_PLUGIN (object));
 }
 
 
@@ -518,6 +507,28 @@ xfce_panel_plugin_finalize (GObject *object)
   g_strfreev (plugin->priv->arguments);
 
   (*G_OBJECT_CLASS (xfce_panel_plugin_parent_class)->finalize) (object);
+}
+
+
+
+static void
+xfce_panel_plugin_realize (GtkWidget *widget)
+{
+  XfcePanelPluginClass *klass = XFCE_PANEL_PLUGIN_GET_CLASS (widget);
+  XfcePanelPlugin      *plugin = XFCE_PANEL_PLUGIN (widget);
+  
+  /* allow gtk to realize the plugin */
+  (*GTK_WIDGET_CLASS (xfce_panel_plugin_parent_class)->realize) (widget);
+
+  /* check if there is a construct function attached to this plugin */
+  if (klass->construct != NULL && !plugin->priv->constructed)
+    {
+      /* run the construct function */
+      (*klass->construct) (XFCE_PANEL_PLUGIN (widget));
+      
+      /* don't run the construct function again on another realize */
+      plugin->priv->constructed = TRUE;
+    }
 }
 
 
