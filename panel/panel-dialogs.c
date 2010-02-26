@@ -38,7 +38,6 @@
 void
 panel_dialogs_show_about (void)
 {
-  /* our names */
   static const gchar *authors[] =
   {
     "Jasper Huijsmans <jasper@xfce.org>",
@@ -52,7 +51,6 @@ panel_dialogs_show_about (void)
   gtk_about_dialog_set_url_hook (exo_gtk_url_about_dialog_hook, NULL, NULL);
 #endif
 
-  /* show the dialog */
   gtk_show_about_dialog (NULL,
                          "authors", authors,
                          "comments", _("The panel of the Xfce Desktop Environment"),
@@ -73,16 +71,15 @@ static void
 panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
                                           PanelApplication *application)
 {
-  gint         idx;
-  PanelWindow *window;
+  gint idx;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
 
   /* select active panel */
   idx = gtk_combo_box_get_active (combo);
-  window = panel_application_get_nth_window (application, idx);
-  panel_application_window_select (application, window);
+  panel_application_window_select (application, 
+      panel_application_get_nth_window (application, idx));
 }
 
 
@@ -126,13 +123,12 @@ panel_dialogs_choose_panel (PanelApplication *application)
   /* insert the panels */
   for (i = 0; i < panel_application_get_n_windows (application); i++)
     {
-      /* add panel name to the combo box */
       name = g_strdup_printf (_("Panel %d"), i + 1);
       gtk_combo_box_append_text (GTK_COMBO_BOX (combo), name);
       g_free (name);
     }
 
-  /* select first panel */
+  /* select first panel (changed will start marching ants) */
   g_signal_connect (G_OBJECT (combo), "changed",
        G_CALLBACK (panel_dialogs_choose_panel_combo_changed), application);
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
@@ -140,11 +136,9 @@ panel_dialogs_choose_panel (PanelApplication *application)
   /* run the dialog */
   if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
     response = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
-
-  /* destroy the dialog */
   gtk_widget_destroy (dialog);
 
-  /* remove the panel selection */
+  /* unset panel selections */
   panel_application_window_select (application, NULL);
 
   return response;
