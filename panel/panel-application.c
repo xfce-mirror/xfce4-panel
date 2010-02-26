@@ -834,7 +834,7 @@ panel_application_add_new_item (PanelApplication  *application,
     {
       /* ask the user what panel to use if there is more then one */
       if (g_slist_length (application->windows) > 1)
-        if ((nth = panel_dialogs_choose_panel (application->windows)) == -1)
+        if ((nth = panel_dialogs_choose_panel (application)) == -1)
           return;
 
       /* get the window */
@@ -1071,6 +1071,22 @@ panel_application_get_window (PanelApplication *application,
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), 0);
 
   return g_slist_nth_data (application->windows, idx);
+}
+
+
+
+void
+panel_application_window_select (PanelApplication *application,
+                                 PanelWindow      *window)
+{
+  GSList *li;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (window == NULL || PANEL_IS_WINDOW (window));
+
+  /* update state for all windows */
+  for (li = application->windows; li != NULL; li = li->next)
+    panel_window_set_selected (PANEL_WINDOW (li->data), !!(li->data == window));
 }
 
 

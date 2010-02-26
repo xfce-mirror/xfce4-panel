@@ -56,17 +56,14 @@ static gboolean panel_window_leave_notify_event (GtkWidget *widget, GdkEventCros
 static void panel_window_size_request (GtkWidget *widget, GtkRequisition *requisition);
 static void panel_window_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
 static void panel_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen);
-static void panel_window_paint_handle (PanelWindow *window,  gboolean start, cairo_t *rc);
-static void panel_window_paint_border (PanelWindow *window, cairo_t *rc);
+static void panel_window_paint_handle (PanelWindow *window,  gboolean start, GtkStateType state, cairo_t *rc);
+static void panel_window_paint_border (PanelWindow *window, GtkStateType state, cairo_t *rc);
 static void panel_window_calculate_position (PanelWindow *window, gint width, gint height, gint *x, gint *y);
 static void panel_window_working_area (PanelWindow  *window, gint root_x, gint root_y, GdkRectangle *dest);
 static gboolean panel_window_struts_are_possible (PanelWindow *window, gint x, gint y, gint width, gint height);
 static void panel_window_struts_update (PanelWindow  *window, gint x, gint y, gint width, gint height);
 static void panel_window_set_colormap (PanelWindow *window);
-static void
-panel_window_get_position (PanelWindow *window,
-                           gint        *root_x,
-                           gint        *root_y);
+static void panel_window_get_position (PanelWindow *window, gint *root_x, gint *root_y);
 
 enum
 {
@@ -143,6 +140,9 @@ struct _PanelWindow
 
   /* whether the panel is locked */
   guint                locked : 1;
+
+  /* when the panel is 'selected' */
+  guint                selected : 1;
 
   /* panel orientation */
   guint                horizontal;
@@ -256,6 +256,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_status = DISABLED;
   window->autohide_block = 0;
   window->autohide_window = NULL;
+  window->selected = FALSE;
 
   /* set additional events we want to have */
   gtk_widget_add_events (GTK_WIDGET (window), GDK_BUTTON_PRESS_MASK);
@@ -334,23 +335,28 @@ static gboolean
 panel_window_expose_event (GtkWidget      *widget,
                            GdkEventExpose *event)
 {
-  PanelWindow *window = PANEL_WINDOW (widget);
-  cairo_t     *cr;
-  GdkColor    *color;
+  PanelWindow  *window = PANEL_WINDOW (widget);
+  cairo_t      *cr;
+  GdkColor     *color;
+  GtkStateType  state = GTK_STATE_NORMAL;
 
   if (GTK_WIDGET_DRAWABLE (widget))
     {
       /* create cairo context */
       cr = gdk_cairo_create (widget->window);
 
-      if (window->is_composited
-          && window->background_alpha < 1.00)
+      /* use another state when the panel is selected */
+      if (G_UNLIKELY (window->selected))
+        state = GTK_STATE_SELECTED;
+
+      if (window->selected ||
+          (window->is_composited && window->background_alpha < 1.00))
         {
           /* get the background gdk color */
-          color = &(widget->style->bg[GTK_WIDGET_STATE (widget)]);
+          color = &(widget->style->bg[state]);
 
           /* set the cairo source color */
-          _set_source_rgba (cr, color, window->background_alpha);
+          _set_source_rgba (cr, color, window->selected ? 1.00 : window->background_alpha);
 
           /* create retangle */
           cairo_rectangle (cr, event->area.x, event->area.y,
@@ -366,12 +372,12 @@ panel_window_expose_event (GtkWidget      *widget,
       /* paint handles */
       if (window->locked == FALSE)
         {
-          panel_window_paint_handle (window, TRUE, cr);
-          panel_window_paint_handle (window, FALSE, cr);
+          panel_window_paint_handle (window, TRUE, state, cr);
+          panel_window_paint_handle (window, FALSE, state, cr);
         }
 
       /* paint the panel border */
-      panel_window_paint_border (window, cr);
+      panel_window_paint_border (window, state, cr);
 
       /* destroy cairo context */
       cairo_destroy (cr);
@@ -998,6 +1004,7 @@ panel_window_screen_changed (GtkWidget *widget,
 static void
 panel_window_paint_handle (PanelWindow  *window,
                            gboolean      start,
+                           GtkStateType  state,
                            cairo_t      *cr)
 {
   GtkWidget     *widget = GTK_WIDGET (window);
@@ -1039,9 +1046,9 @@ panel_window_paint_handle (PanelWindow  *window,
     {
       /* get the color for the job */
       if (i == 2)
-        color = &(widget->style->light[GTK_WIDGET_STATE (widget)]);
+        color = &(widget->style->light[state]);
       else
-        color = &(widget->style->dark[GTK_WIDGET_STATE (widget)]);
+        color = &(widget->style->dark[state]);
 
       /* set source color */
       _set_source_rgba (cr, color, alpha);
@@ -1059,8 +1066,9 @@ panel_window_paint_handle (PanelWindow  *window,
 
 
 static void
-panel_window_paint_border (PanelWindow *window,
-                           cairo_t     *cr)
+panel_window_paint_border (PanelWindow  *window,
+                           GtkStateType  state,
+                           cairo_t      *cr)
 {
   GtkWidget     *widget = GTK_WIDGET (window);
   GtkAllocation *alloc = &(widget->allocation);
@@ -1071,7 +1079,7 @@ panel_window_paint_border (PanelWindow *window,
   cairo_set_line_width (cr, 1.0);
 
   /* dark color */
-  color = &(widget->style->dark[GTK_WIDGET_STATE (widget)]);
+  color = &(widget->style->dark[state]);
   _set_source_rgba (cr, color, alpha);
 
   /* set start position to bottom left */
@@ -1087,7 +1095,7 @@ panel_window_paint_border (PanelWindow *window,
   cairo_stroke (cr);
 
   /* light color */
-  color = &(widget->style->light[GTK_WIDGET_STATE (widget)]);
+  color = &(widget->style->light[state]);
   _set_source_rgba (cr, color, alpha);
 
   /* set start position to bottom left */
@@ -1538,6 +1546,24 @@ panel_window_is_composited (PanelWindow *window)
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
 
   return window->is_composited;
+}
+
+
+
+void
+panel_window_set_selected (PanelWindow *window,
+                           gboolean     selected)
+{
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  if (G_UNLIKELY (window->selected != selected))
+    {
+      /* set new value */
+      window->selected = selected;
+
+      /* queue a redraw */
+      gtk_widget_queue_draw (GTK_WIDGET (window));
+    }
 }
 
 

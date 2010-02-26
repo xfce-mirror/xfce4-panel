@@ -68,6 +68,9 @@ struct _PanelPreferencesDialog
   /* panel selector widget */
   GtkWidget        *selector;
 
+  /* remove button */
+  GtkWidget        *remove_button;
+
   /* save timeout id */
   guint             save_timeout_id;
 };
@@ -168,7 +171,7 @@ panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass)
                                    g_param_spec_int ("leave-opacity", "leave-opacity", "leave-opacity",
                                                      0, 100, 0,
                                                      EXO_PARAM_READWRITE));
-                                                     
+
   g_object_class_install_property (gobject_class,
                                    PROP_SPAN_MONITORS,
                                    g_param_spec_boolean ("span-monitors", "span-monitors", "span-monitors",
@@ -246,11 +249,12 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (panel_preferences_dialog_add_window), dialog);
   gtk_widget_show (button);
 
-  button = gtk_button_new ();
+  button = dialog->remove_button = gtk_button_new ();
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
   image = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_BUTTON);
   gtk_button_set_image (GTK_BUTTON (button), image);
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (panel_preferences_dialog_remove_window), dialog);
+  gtk_widget_set_sensitive (button, panel_application_get_n_windows (dialog->application) > 1);
   gtk_widget_show (button);
 
   notebook = gtk_notebook_new ();
@@ -453,7 +457,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   gtk_widget_show (scale);
 
   g_object_unref (G_OBJECT (sg));
-  
+
   /* multi screen tab */
   notebook_vbox = gtk_vbox_new (FALSE, BORDER);
   gtk_container_set_border_width (GTK_CONTAINER (notebook_vbox), BORDER);
@@ -461,7 +465,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   label = gtk_label_new (_("Multi Screen"));
   gtk_notebook_append_page (GTK_NOTEBOOK (notebook), notebook_vbox, label);
-  
+
   button = gtk_check_button_new_with_mnemonic (_("Span Monitors"));
   gtk_box_pack_start (GTK_BOX (notebook_vbox), button, FALSE, FALSE, 0);
   exo_mutual_binding_new (G_OBJECT (dialog), "span-monitors", G_OBJECT (button), "active");
@@ -526,7 +530,7 @@ panel_preferences_dialog_get_property (GObject    *object,
       case PROP_LEAVE_OPACITY:
         g_value_set_int (value, panel_window_get_leave_opacity (window));
         break;
-        
+
       case PROP_SPAN_MONITORS:
         g_value_set_boolean (value, panel_window_get_span_monitors (window));
         break;
@@ -588,7 +592,7 @@ panel_preferences_dialog_set_property (GObject      *object,
       case PROP_LEAVE_OPACITY:
         panel_window_set_leave_opacity (window, g_value_get_int (value));
         break;
-        
+
       case PROP_SPAN_MONITORS:
         panel_window_set_span_monitors (window, g_value_get_boolean (value));
         break;
@@ -602,7 +606,7 @@ panel_preferences_dialog_set_property (GObject      *object,
   dialog->save_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, 1000,
                                                 panel_preferences_dialog_save_timeout, dialog,
                                                 panel_preferences_dialog_save_timeout_destroyed);
-                                                
+
   /* don't leave the window */
   gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -623,7 +627,7 @@ panel_preferences_dialog_finalize (GObject *object)
       /* save */
       panel_application_save (dialog->application);
     }
-    
+
   /* thaw all autohide blocks */
   panel_application_windows_autohide (dialog->application, FALSE);
 
@@ -665,24 +669,27 @@ panel_preferences_dialog_response (GtkDialog *dialog,
 {
   GError    *error = NULL;
   GdkScreen *screen;
-  
+
   if (response_id == GTK_RESPONSE_HELP)
     {
       /* get the dialog screen */
       screen = gtk_widget_get_screen (GTK_WIDGET (dialog));
-      
+
       /* open the help url */
       if (exo_url_show_on_screen (PREFERENCES_HELP_URL, NULL, screen, &error) == FALSE)
         {
           /* show error */
           g_warning ("Failed to open help: %s", error->message);
-          
+
           /* cleanup */
           g_error_free (error);
         }
     }
   else
     {
+      /* deselect all windows */
+      panel_application_window_select (PANEL_PREFERENCES_DIALOG (dialog)->application, NULL);
+
       /* destroy the dialog */
       gtk_widget_destroy (GTK_WIDGET (dialog));
     }
@@ -693,16 +700,18 @@ panel_preferences_dialog_response (GtkDialog *dialog,
 static void
 panel_preferences_dialog_rebuild_selector (PanelPreferencesDialog *dialog)
 {
-  GtkComboBox *combo = GTK_COMBO_BOX (dialog->selector);
-  gint         n, n_items;
-  gchar       *name;
+  GtkComboBox  *combo = GTK_COMBO_BOX (dialog->selector);
+  gint          n, n_items;
+  gchar        *name;
+  GtkTreeModel *model;
 
   /* block signal */
   g_signal_handlers_block_by_func (G_OBJECT (combo), panel_preferences_dialog_set_window, dialog);
 
-  /* empty the xombo box */
-  while (gtk_combo_box_get_active (combo) != -1)
-    gtk_combo_box_remove_text (combo, 0);
+  /* empty the combo box */
+  model = gtk_combo_box_get_model (combo);
+  if (GTK_IS_LIST_STORE (model))
+    gtk_list_store_clear (GTK_LIST_STORE (model));
 
   /* add new names */
   n_items = panel_application_get_n_windows (dialog->application);
@@ -737,6 +746,9 @@ panel_preferences_dialog_set_window (PanelPreferencesDialog *dialog)
   for (n = 0; n < nspecs; n++)
     g_object_notify (G_OBJECT (dialog), specs[n]->name);
   g_free (specs);
+
+  /* update selection state */
+  panel_application_window_select (dialog->application, dialog->active);
 }
 
 
@@ -750,12 +762,15 @@ panel_preferences_dialog_add_window (GtkWidget              *widget,
 
   /* create new window */
   window = panel_application_new_window (dialog->application, gtk_widget_get_screen (widget));
-  
+
   /* block autohide */
   panel_window_freeze_autohide (window);
 
   /* rebuild the selector */
   panel_preferences_dialog_rebuild_selector (dialog);
+
+  /* set the sensitivity of the remove button */
+  gtk_widget_set_sensitive (dialog->remove_button, panel_application_get_n_windows (dialog->application) > 1);
 
   /* select new panel */
   active = panel_application_get_n_windows (dialog->application) - 1;
@@ -786,9 +801,11 @@ panel_preferences_dialog_remove_window (GtkWidget              *widget,
       /* rebuild the selector */
       panel_preferences_dialog_rebuild_selector (dialog);
 
-      /* select active if there are any windows */
-      if (panel_application_get_n_windows (dialog->application) > 0)
-        gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->selector), MAX (0, active - 1));
+      /* set the sensitivity of the remove button */
+      gtk_widget_set_sensitive (widget, panel_application_get_n_windows (dialog->application) > 1);
+
+      /* select new active window */
+      gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->selector), MAX (0, active - 1));
     }
 }
 
@@ -814,13 +831,13 @@ panel_preferences_dialog_show (PanelWindow *active)
       /* focus the window */
       gtk_window_present (GTK_WINDOW (dialog));
     }
-    
+
   /* get the active window index */
   if (G_LIKELY (active))
     idx = panel_application_get_window_index (dialog->application, active);
   else
     idx = 0;
-    
+
   /* select the active window in the dialog */
   gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->selector), idx);
 }

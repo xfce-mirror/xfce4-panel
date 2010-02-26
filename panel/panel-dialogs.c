@@ -29,6 +29,7 @@
 
 #include <panel/panel-private.h>
 #include <panel/panel-dialogs.h>
+#include <panel/panel-application.h>
 
 void
 panel_dialogs_show_about (void)
@@ -66,8 +67,33 @@ panel_dialogs_show_about (void)
 
 
 
+static void
+panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
+                                          PanelApplication *application)
+{
+  PanelWindow *window = NULL;
+  gint         active;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
+
+  /* get the selected item */
+  active = gtk_combo_box_get_active (combo);
+
+  if (G_LIKELY (active != -1))
+    {
+      /* get the window */
+      window = panel_application_get_window (application, active);
+
+      /* select the window */
+      panel_application_window_select (application, window);
+    }
+}
+
+
+
 gint
-panel_dialogs_choose_panel (GSList *windows)
+panel_dialogs_choose_panel (PanelApplication *application)
 {
   GtkWidget *dialog;
   GtkWidget *vbox;
@@ -75,12 +101,11 @@ panel_dialogs_choose_panel (GSList *windows)
   GtkWidget *combo;
   gint       i, response = -1;
   gchar     *name;
-  GSList    *li;
 
-  panel_return_val_if_fail (GTK_IS_WINDOW (windows->data), -1);
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), -1);
 
   /* setup the dialog */
-  dialog = gtk_dialog_new_with_buttons (_("Add New Item"), GTK_WINDOW (windows->data),
+  dialog = gtk_dialog_new_with_buttons (_("Add New Item"), NULL,
                                         GTK_DIALOG_NO_SEPARATOR,
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                         GTK_STOCK_ADD, GTK_RESPONSE_OK, NULL);
@@ -103,15 +128,16 @@ panel_dialogs_choose_panel (GSList *windows)
   gtk_widget_show (combo);
 
   /* insert the panels */
-  for (li = windows, i = 1; li != NULL; li = li->next, i++)
+  for (i = 0; i < panel_application_get_n_windows (application); i++)
     {
       /* add panel name to the combo box */
-      name = g_strdup_printf (_("Panel %d"), i);
+      name = g_strdup_printf (_("Panel %d"), i + 1);
       gtk_combo_box_append_text (GTK_COMBO_BOX (combo), name);
       g_free (name);
     }
 
   /* select first panel */
+  g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (panel_dialogs_choose_panel_combo_changed), application);
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
   /* run the dialog */
@@ -120,6 +146,9 @@ panel_dialogs_choose_panel (GSList *windows)
 
   /* destroy the dialog */
   gtk_widget_destroy (dialog);
+
+  /* remove the panel selection */
+  panel_application_window_select (application, NULL);
 
   return response;
 }

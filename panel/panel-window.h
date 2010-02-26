@@ -75,6 +75,9 @@ GtkWidget           *panel_window_new                   (void);
 
 gboolean             panel_window_is_composited         (PanelWindow         *window);
 
+void                 panel_window_set_selected          (PanelWindow         *window,
+                                                         gboolean             selected);
+
 PanelWindowSnapEdge  panel_window_get_snap_edge         (PanelWindow         *window);
 void                 panel_window_set_snap_edge         (PanelWindow         *window,
                                                          PanelWindowSnapEdge  snap_edge);
@@ -106,7 +109,7 @@ void                 panel_window_set_yoffset           (PanelWindow         *wi
 gboolean             panel_window_get_autohide          (PanelWindow         *window);
 void                 panel_window_set_autohide          (PanelWindow         *window,
                                                          gboolean             autohide);
-                                                         
+
 void                 panel_window_freeze_autohide       (PanelWindow         *window);
 void                 panel_window_thaw_autohide         (PanelWindow         *window);
 
@@ -121,7 +124,7 @@ void                 panel_window_set_enter_opacity     (PanelWindow         *wi
 gint                 panel_window_get_leave_opacity     (PanelWindow         *window);
 void                 panel_window_set_leave_opacity     (PanelWindow         *window,
                                                          gint                 opacity);
-                                                         
+
 gboolean             panel_window_get_span_monitors     (PanelWindow         *window);
 void                 panel_window_set_span_monitors     (PanelWindow         *window,
                                                          gboolean             span_monitors);

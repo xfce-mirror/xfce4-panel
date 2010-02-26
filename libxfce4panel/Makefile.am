@@ -49,4 +49,10 @@ libxfce4panel_la_LIBADD = 						\
 	$(GTK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)
 
+#
+# Pkg-config file
+#
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libxfce4panel-1.0.pc
+
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
