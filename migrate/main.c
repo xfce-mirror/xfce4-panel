@@ -49,6 +49,8 @@ main (gint argc, gchar **argv)
   GtkWidget *button;
   gint       result;
   gint       retval = EXIT_SUCCESS;
+  gboolean   default_config_exists;
+  gint       default_response = GTK_RESPONSE_CANCEL;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -76,19 +78,29 @@ main (gint argc, gchar **argv)
                                    _("Welcome to the first start of the Xfce Panel"));
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                    _("Click one of the options below for the "
-                                   "initial configuration of the Xfce Panel"));
+                                    "initial configuration of the Xfce Panel"));
   gtk_window_set_title (GTK_WINDOW (dialog), "Xfce Panel");
   gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PREFERENCES);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
+
   button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Migrate old config"), GTK_RESPONSE_OK);
   gtk_widget_set_tooltip_text (button, _("The panel will migrate your existing 4.6 panel configuration"));
   gtk_widget_set_sensitive (button, file != NULL);
+  if (file != NULL)
+    default_response = GTK_RESPONSE_OK;
+
   button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Use default config"), GTK_RESPONSE_YES);
   gtk_widget_set_tooltip_text (button, _("The default configuration will be loaded"));
-  gtk_widget_set_sensitive (button, g_file_test (DEFAULT_CONFIG, G_FILE_TEST_IS_REGULAR));
+  default_config_exists = g_file_test (DEFAULT_CONFIG, G_FILE_TEST_IS_REGULAR);
+  gtk_widget_set_sensitive (button, default_config_exists);
+  if (default_config_exists && file == NULL)
+    default_response = GTK_RESPONSE_YES;
+
   button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Cancel"), GTK_RESPONSE_CANCEL);
   gtk_widget_set_tooltip_text (button, _("Xfce Panel will start with one empty panel"));
+
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), default_response);
 
   result = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
@@ -103,7 +115,7 @@ main (gint argc, gchar **argv)
           retval = EXIT_FAILURE;
         }
     }
-  else if (result == GTK_RESPONSE_YES)
+  else if (result == GTK_RESPONSE_YES && default_config_exists)
     {
       /* apply default config */
       if (!migrate_default (DEFAULT_CONFIG, &error))
