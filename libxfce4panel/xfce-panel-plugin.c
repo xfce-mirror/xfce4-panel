@@ -1591,7 +1591,6 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GdkScreen      *screen;
   GdkRectangle    monitor;
   gint            monitor_num;
-  GtkWidget      *toplevel;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_WIDGET (menu_widget));
@@ -1612,10 +1611,9 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   /* get the menu/widget size request */
   gtk_widget_size_request (menu_widget, &requisition);
 
-  /* get the root position of the attach widget (the panel) */
-  toplevel = gtk_widget_get_toplevel (attach_widget);
-  gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
-
+  /* get the root position of the attach widget */
+  gdk_window_get_origin (GDK_WINDOW (attach_widget->window), x, y);
+  
   /* add the widgets allocation */
   *x += attach_widget->allocation.x;
   *y += attach_widget->allocation.y;
