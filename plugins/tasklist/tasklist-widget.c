@@ -443,7 +443,7 @@ xfce_tasklist_size_request (GtkWidget      *widget,
   XfceTasklistChild *child;
   gint               n;
   gint               rows, cols, length;
-
+  
   /* walk all the children */
   for (li = tasklist->children, n = 0; li != NULL; li = li->next)
     {
@@ -459,28 +459,35 @@ xfce_tasklist_size_request (GtkWidget      *widget,
       n++;
     }
 
-  /* calculate the number of rows */
-  rows = tasklist->size / tasklist->max_button_size;
-  rows = MIN (rows, n);
-  rows = MAX (rows, 1);
-
-  /* calculate the number of columns */
-  cols = n / rows;
-  cols = MAX (cols, 1);
-  if (cols * rows < n)
-    cols++;
-
-  /* get the requested length of the tasklist */
-  if (tasklist->show_labels)
+  if (G_UNLIKELY (n == 0))
     {
-      if (tasklist->max_button_length != -1)
-        length = cols * tasklist->max_button_length;
-      else
-        length = cols * DEFAULT_BUTTON_LENGTH;
+      /* don't request any size if there are no visible children */
+      length = 0;
     }
   else
     {
-      length = (tasklist->size / rows) * cols;
+      /* calculate the number of rows */
+      rows = tasklist->size / tasklist->max_button_size;
+      rows = CLAMP (rows, 1, n);
+
+      /* calculate the number of columns */
+      cols = n / rows;
+      cols = MAX (cols, 1);
+      if (cols * rows < n)
+        cols++;
+
+      /* get the requested length of the tasklist */
+      if (tasklist->show_labels)
+        {
+          if (tasklist->max_button_length != -1)
+            length = cols * tasklist->max_button_length;
+          else
+            length = cols * DEFAULT_BUTTON_LENGTH;
+        }
+      else
+        {
+          length = (tasklist->size / rows) * cols;
+        }
     }
 
   /* set the requested sizes */
