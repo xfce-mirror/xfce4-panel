@@ -243,6 +243,23 @@ launcher_dialog_add_populate_model (LauncherPluginDialog *dialog)
 
 
 
+static void
+launcher_dialog_add_selection_changed (GtkTreeSelection     *selection,
+                                       LauncherPluginDialog *dialog)
+{
+  GObject  *object;
+  gboolean  sensitive;
+
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  panel_return_if_fail (GTK_IS_TREE_SELECTION (selection));
+
+  object = gtk_builder_get_object (dialog->builder, "button-add");
+  sensitive = !!(gtk_tree_selection_count_selected_rows (selection) > 0);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
+}
+
+
+
 static gboolean
 launcher_dialog_tree_save_foreach (GtkTreeModel *model,
                                    GtkTreePath  *path,
@@ -500,7 +517,7 @@ launcher_dialog_add_response (GtkWidget            *widget,
       else
         gtk_list_store_append (GTK_LIST_STORE (entry_model), &iter);
 
-      for (li = list; li != NULL; li = li->next)
+      for (li = list; li != NULL; li = g_list_next (li))
         {
           /* get the selected file in the add dialog */
           gtk_tree_model_get_iter (add_model, &tmp, li->data);
@@ -514,9 +531,9 @@ launcher_dialog_add_response (GtkWidget            *widget,
           g_free (filename);
           gtk_tree_path_free (li->data);
 
-          /* append a new iter if needed */
-          if (li->next != NULL)
+          if (g_list_next (li) != NULL)
             {
+              /* insert a new iter after the new added item */
               sibling = iter;
               gtk_list_store_insert_after (GTK_LIST_STORE (entry_model),
                                            &iter, &sibling);
@@ -738,6 +755,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
       object = gtk_builder_get_object (builder, "add-treeview");
       selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
       gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+      g_signal_connect (G_OBJECT (selection), "changed",
+                        G_CALLBACK (launcher_dialog_add_selection_changed), dialog);
 
       /* setup search filter in the add dialog */
       object = gtk_builder_get_object (builder, "add-store-filter");
