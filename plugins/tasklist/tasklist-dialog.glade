@@ -104,19 +104,6 @@
                             <property name="position">2</property>
                           </packing>
                         </child>
-                        <child>
-                          <object class="GtkCheckButton" id="show-wireframes">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Show wi_reframes when hovering a button</property>
-                          </object>
-                          <packing>
-                            <property name="position">3</property>
-                          </packing>
-                        </child>
                       </object>
                     </child>
                   </object>
@@ -215,6 +202,19 @@
                           </object>
                           <packing>
                             <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="show-wireframes">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">D_raw window frame when hovering a button</property>
+                          </object>
+                          <packing>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </object>
