@@ -94,7 +94,7 @@ static gboolean     panel_plugin_external_get_show_configure    (XfcePanelPlugin
 static void         panel_plugin_external_show_configure        (XfcePanelPluginProvider           *provider);
 static gboolean     panel_plugin_external_get_show_about        (XfcePanelPluginProvider           *provider);
 static void         panel_plugin_external_show_about            (XfcePanelPluginProvider           *provider);
-static void         panel_plugin_external_remove                (XfcePanelPluginProvider           *provider);
+static void         panel_plugin_external_removed               (XfcePanelPluginProvider           *provider);
 static gboolean     panel_plugin_external_remote_event          (XfcePanelPluginProvider           *provider,
                                                                  const gchar                       *name,
                                                                  const GValue                      *value);
@@ -261,7 +261,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->show_configure = panel_plugin_external_show_configure;
   iface->get_show_about = panel_plugin_external_get_show_about;
   iface->show_about = panel_plugin_external_show_about;
-  iface->remove = panel_plugin_external_remove;
+  iface->removed = panel_plugin_external_removed;
   iface->remote_event = panel_plugin_external_remote_event;
 }
 
@@ -805,14 +805,14 @@ panel_plugin_external_show_about (XfcePanelPluginProvider *provider)
 
 
 static void
-panel_plugin_external_remove (XfcePanelPluginProvider *provider)
+panel_plugin_external_removed (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* send signal to wrapper */
   panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (provider),
-                                        FALSE, SIGNAL_REMOVE);
+                                        FALSE, SIGNAL_REMOVED);
 }
 
 

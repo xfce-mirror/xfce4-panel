@@ -35,7 +35,7 @@
 #define SIGNAL_SAVE                     SIGNAL_PREFIX_S "d"
 #define SIGNAL_SHOW_CONFIGURE           SIGNAL_PREFIX_S "e"
 #define SIGNAL_SHOW_ABOUT               SIGNAL_PREFIX_S "f"
-#define SIGNAL_REMOVE                   SIGNAL_PREFIX_S "g"
+#define SIGNAL_REMOVED                  SIGNAL_PREFIX_S "g"
 #define SIGNAL_WRAPPER_SET_SENSITIVE    SIGNAL_PREFIX_S "h"
 #define SIGNAL_WRAPPER_BACKGROUND_ALPHA SIGNAL_PREFIX_S "i"
 

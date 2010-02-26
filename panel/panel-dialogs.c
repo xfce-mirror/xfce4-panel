@@ -78,7 +78,7 @@ panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
 
   /* select active panel */
   idx = gtk_combo_box_get_active (combo);
-  panel_application_window_select (application, 
+  panel_application_window_select (application,
       panel_application_get_nth_window (application, idx));
 }
 

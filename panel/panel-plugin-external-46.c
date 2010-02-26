@@ -81,7 +81,7 @@ static gboolean     panel_plugin_external_46_get_show_configure    (XfcePanelPlu
 static void         panel_plugin_external_46_show_configure        (XfcePanelPluginProvider          *provider);
 static gboolean     panel_plugin_external_46_get_show_about        (XfcePanelPluginProvider          *provider);
 static void         panel_plugin_external_46_show_about            (XfcePanelPluginProvider          *provider);
-static void         panel_plugin_external_46_remove                (XfcePanelPluginProvider          *provider);
+static void         panel_plugin_external_46_removed               (XfcePanelPluginProvider          *provider);
 static gboolean     panel_plugin_external_46_remote_event          (XfcePanelPluginProvider          *provider,
                                                                     const gchar                      *name,
                                                                     const GValue                     *value);
@@ -174,7 +174,7 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
-                                   g_param_spec_int ("unique-id", 
+                                   g_param_spec_int ("unique-id",
                                                      NULL, NULL,
                                                      -1, G_MAXINT, -1,
                                                      EXO_PARAM_READWRITE
@@ -182,7 +182,7 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_MODULE,
-                                   g_param_spec_object ("module", 
+                                   g_param_spec_object ("module",
                                                         NULL, NULL,
                                                         PANEL_TYPE_MODULE,
                                                         EXO_PARAM_READWRITE
@@ -190,7 +190,7 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_ARGUMENTS,
-                                   g_param_spec_boxed ("arguments", 
+                                   g_param_spec_boxed ("arguments",
                                                        NULL, NULL,
                                                        G_TYPE_STRV,
                                                        EXO_PARAM_READWRITE
@@ -233,7 +233,7 @@ panel_plugin_external_46_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->show_configure = panel_plugin_external_46_show_configure;
   iface->get_show_about = panel_plugin_external_46_get_show_about;
   iface->show_about = panel_plugin_external_46_show_about;
-  iface->remove = panel_plugin_external_46_remove;
+  iface->removed = panel_plugin_external_46_removed;
   iface->remote_event = panel_plugin_external_46_remote_event;
 }
 
@@ -523,7 +523,7 @@ panel_plugin_external_46_plug_added (GtkSocket *socket)
       for (li = external->queue; li != NULL; li = li->next)
         {
           item = li->data;
-          panel_plugin_external_46_send_client_event (external, 
+          panel_plugin_external_46_send_client_event (external,
                                                       item->message,
                                                       item->value);
           g_slice_free (QueueItem, item);
@@ -719,13 +719,13 @@ panel_plugin_external_46_show_about (XfcePanelPluginProvider *provider)
 
 
 static void
-panel_plugin_external_46_remove (XfcePanelPluginProvider *provider)
+panel_plugin_external_46_removed (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   panel_plugin_external_46_queue_add (PANEL_PLUGIN_EXTERNAL_46 (provider),
-                                      PANEL_CLIENT_EVENT_REMOVE,
+                                      PANEL_CLIENT_EVENT_REMOVED,
                                       FALSE);
 }
 

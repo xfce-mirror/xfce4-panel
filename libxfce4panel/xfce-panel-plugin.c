@@ -92,7 +92,7 @@ static gboolean      xfce_panel_plugin_get_show_configure     (XfcePanelPluginPr
 static void          xfce_panel_plugin_show_configure         (XfcePanelPluginProvider          *provider);
 static gboolean      xfce_panel_plugin_get_show_about         (XfcePanelPluginProvider          *provider);
 static void          xfce_panel_plugin_show_about             (XfcePanelPluginProvider          *provider);
-static void          xfce_panel_plugin_remove                 (XfcePanelPluginProvider          *provider);
+static void          xfce_panel_plugin_removed                (XfcePanelPluginProvider          *provider);
 static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginProvider          *provider,
                                                                const gchar                      *name,
                                                                const GValue                     *value);
@@ -578,7 +578,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->show_configure = xfce_panel_plugin_show_configure;
   iface->get_show_about = xfce_panel_plugin_get_show_about;
   iface->show_about = xfce_panel_plugin_show_about;
-  iface->remove = xfce_panel_plugin_remove;
+  iface->removed = xfce_panel_plugin_removed;
   iface->remote_event = xfce_panel_plugin_remote_event;
 }
 
@@ -830,8 +830,7 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
       gtk_widget_hide (dialog);
 
       /* ask the panel or wrapper to remove the plugin */
-      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                              PROVIDER_SIGNAL_REMOVE_PLUGIN);
+      xfce_panel_plugin_remove (plugin);
     }
 
   /* destroy window */
@@ -1245,7 +1244,7 @@ xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider)
 
 
 static void
-xfce_panel_plugin_remove (XfcePanelPluginProvider *provider)
+xfce_panel_plugin_removed (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
@@ -1691,6 +1690,31 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
   /* emit signal, used by the external plugin */
   xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
                                           PROVIDER_SIGNAL_SHOW_ABOUT);
+}
+
+
+
+/**
+ * xfce_panel_plugin_remove:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * Remove this plugin from the panel and remove all its configuration.
+ *
+ * Plugins should not use this function to implement their own
+ * menu item or button to remove theirselfs from the panel, but only
+ * in case the there are problems with the plugin in the panel. Always
+ * try to inform the user why this occured.
+ *
+ * Since: 4.8.0
+ **/
+void
+xfce_panel_plugin_remove (XfcePanelPlugin *plugin)
+{
+  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+
+  /* ask the panel or wrapper to remove the plugin */
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_REMOVE_PLUGIN);
 }
 
 

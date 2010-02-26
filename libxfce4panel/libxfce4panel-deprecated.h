@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 
 enum /*< skip >*/
 {
-  PANEL_CLIENT_EVENT_REMOVE,
+  PANEL_CLIENT_EVENT_REMOVED,
   PANEL_CLIENT_EVENT_SAVE,
   PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA,
   PANEL_CLIENT_EVENT_SET_ORIENTATION,
@@ -103,8 +103,8 @@ enum /*< skip >*/
         \
         switch (message) \
           { \
-            case PANEL_CLIENT_EVENT_REMOVE: \
-              xfce_panel_plugin_provider_remove (provider); \
+            case PANEL_CLIENT_EVENT_REMOVED: \
+              xfce_panel_plugin_provider_removed (provider); \
               break; \
               \
             case PANEL_CLIENT_EVENT_SAVE: \

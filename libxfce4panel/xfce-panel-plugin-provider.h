@@ -61,7 +61,7 @@ struct _XfcePanelPluginProviderInterface
   void         (*show_configure)      (XfcePanelPluginProvider       *provider);
   gboolean     (*get_show_about)      (XfcePanelPluginProvider       *provider);
   void         (*show_about)          (XfcePanelPluginProvider       *provider);
-  void         (*remove)              (XfcePanelPluginProvider       *provider);
+  void         (*removed)             (XfcePanelPluginProvider       *provider);
   gboolean     (*remote_event)        (XfcePanelPluginProvider       *provider,
                                        const gchar                   *name,
                                        const GValue                  *value);
@@ -142,7 +142,7 @@ gboolean              xfce_panel_plugin_provider_get_show_about      (XfcePanelP
 
 void                  xfce_panel_plugin_provider_show_about          (XfcePanelPluginProvider       *provider);
 
-void                  xfce_panel_plugin_provider_remove              (XfcePanelPluginProvider       *provider);
+void                  xfce_panel_plugin_provider_removed             (XfcePanelPluginProvider       *provider);
 
 gboolean              xfce_panel_plugin_provider_remote_event        (XfcePanelPluginProvider       *provider,
                                                                       const gchar                   *name,

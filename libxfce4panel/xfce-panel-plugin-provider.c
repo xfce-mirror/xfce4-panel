@@ -199,11 +199,11 @@ xfce_panel_plugin_provider_show_about (XfcePanelPluginProvider *provider)
 
 
 void
-xfce_panel_plugin_provider_remove (XfcePanelPluginProvider *provider)
+xfce_panel_plugin_provider_removed (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->remove) (provider);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->removed) (provider);
 }
 
 

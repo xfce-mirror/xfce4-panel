@@ -501,7 +501,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 
       case PROVIDER_SIGNAL_REMOVE_PLUGIN:
         /* give plugin the opportunity to cleanup special configuration */
-        xfce_panel_plugin_provider_remove (provider);
+        xfce_panel_plugin_provider_removed (provider);
 
         /* store the provider's unique id and name (lost after destroy) */
         unique_id = xfce_panel_plugin_provider_get_unique_id (provider);

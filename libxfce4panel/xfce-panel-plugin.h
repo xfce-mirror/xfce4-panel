@@ -136,6 +136,8 @@ void                  xfce_panel_plugin_menu_show_configure (XfcePanelPlugin   *
 
 void                  xfce_panel_plugin_menu_show_about     (XfcePanelPlugin   *plugin);
 
+void                  xfce_panel_plugin_remove              (XfcePanelPlugin   *plugin);
+
 void                  xfce_panel_plugin_block_menu          (XfcePanelPlugin   *plugin);
 
 void                  xfce_panel_plugin_unblock_menu        (XfcePanelPlugin   *plugin);

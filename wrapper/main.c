@@ -104,8 +104,8 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
             xfce_panel_plugin_provider_show_configure (provider);
           else if (strcmp (property, SIGNAL_SHOW_ABOUT) == 0)
             xfce_panel_plugin_provider_show_about (provider);
-          else if (strcmp (property, SIGNAL_REMOVE) == 0)
-            xfce_panel_plugin_provider_remove (provider);
+          else if (strcmp (property, SIGNAL_REMOVED) == 0)
+            xfce_panel_plugin_provider_removed (provider);
           else if (strcmp (property, SIGNAL_WRAPPER_SET_SENSITIVE) == 0)
             gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
           else
