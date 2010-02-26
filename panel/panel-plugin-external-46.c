@@ -522,13 +522,12 @@ panel_plugin_external_46_plug_added (GtkSocket *socket)
       for (li = external->queue; li != NULL; li = li->next)
         {
           item = li->data;
-
           panel_plugin_external_46_send_client_event (external, item->message, item->value);
-
           g_slice_free (QueueItem, item);
         }
 
       g_slist_free (external->queue);
+      external->queue = NULL;
     }
 }
 
