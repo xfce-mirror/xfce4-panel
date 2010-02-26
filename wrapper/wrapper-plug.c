@@ -86,7 +86,7 @@ wrapper_plug_init (WrapperPlug *plug)
 
   /* connect signal to monitor the compositor changes */
   g_signal_connect (G_OBJECT (plug), "composited-changed",
-                    G_CALLBACK (wrapper_plug_set_colormap), NULL);
+      G_CALLBACK (wrapper_plug_set_colormap), NULL);
 
   /* old versions of gtk don't support transparent tray icons, if we
    * set an argb colormap on the tray, the icons won't be embedded because

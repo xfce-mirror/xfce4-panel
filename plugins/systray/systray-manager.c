@@ -680,21 +680,62 @@ static void
 systray_manager_handle_dock_request (SystrayManager      *manager,
                                      XClientMessageEvent *xevent)
 {
-  GtkWidget *socket;
-  Window    *xwindow;
+  GtkWidget         *socket;
+  Window            *xwindow;
+  XWindowAttributes  attr;
+  GdkVisual         *visual;
+  GdkColormap       *colormap;
+  gint               result;
+  GdkScreen         *screen;
+  GdkDisplay        *display;
+  gboolean           release_colormap = FALSE;
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
+  panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
 
   /* check if we already have this notification */
   if (g_hash_table_lookup (manager->sockets, GUINT_TO_POINTER (xevent->data.l[2])))
     return;
 
+  /* get the window attributes, leave if this fails */
+  display = gtk_widget_get_display (manager->invisible);
+  gdk_error_trap_push ();
+  result = XGetWindowAttributes (GDK_DISPLAY_XDISPLAY (display),
+                                 xevent->data.l[2], &attr);
+  if (gdk_error_trap_pop () != 0 || result == 0)
+    return;
+
+  /* get the windows visual */
+  screen = gtk_widget_get_screen (manager->invisible);
+  visual = gdk_x11_screen_lookup_visual (screen, attr.visual->visualid);
+  if (visual == NULL)
+    return;
+
+  /* get the correct colormap */
+  if (visual == gdk_screen_get_rgb_visual (screen))
+    colormap = gdk_screen_get_rgb_colormap (screen);
+  else if (visual == gdk_screen_get_rgba_visual (screen))
+    colormap = gdk_screen_get_rgba_colormap (screen);
+  else if (visual == gdk_screen_get_system_visual (screen))
+    colormap = gdk_screen_get_system_colormap (screen);
+  else
+    {
+      /* create custom colormap */
+      colormap = gdk_colormap_new (visual, FALSE);
+      release_colormap = TRUE;
+    }
+
   /* create a new socket */
   socket = gtk_socket_new ();
+  gtk_widget_set_colormap (GTK_WIDGET (socket), colormap);
 
   /* allocate and set the xwindow */
   xwindow = g_new (Window, 1);
   *xwindow = xevent->data.l[2];
+
+  /* release the custom colormap */
+  if (release_colormap)
+    g_object_unref (G_OBJECT (colormap));
 
   /* connect the xwindow data to the socket */
   g_object_set_qdata_full (G_OBJECT (socket), xwindow_quark, xwindow, g_free);
@@ -792,7 +833,6 @@ systray_manager_set_visual (SystrayManager *manager)
     }
 
   data[0] = XVisualIDFromVisual (xvisual);
-
   XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
                    GDK_WINDOW_XWINDOW (manager->invisible->window),
                    visual_atom,
