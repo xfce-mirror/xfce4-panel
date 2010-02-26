@@ -47,9 +47,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="button-layout">
+                              <object class="GtkComboBox" id="style">
                                 <property name="visible">True</property>
-                                <property name="model">layout-model</property>
+                                <property name="model">style-model</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext1"/>
                                   <attributes>
@@ -204,7 +204,7 @@
       <action-widget response="0">close-button</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkListStore" id="layout-model">
+  <object class="GtkListStore" id="style-model">
     <columns>
       <!-- column-name title -->
       <column type="gchararray"/>

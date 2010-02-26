@@ -56,7 +56,7 @@ struct _XfceWindowMenuPlugin
   GtkWidget     *icon;
 
   /* settings */
-  guint          button_layout : 1;
+  guint          button_style : 1;
   guint          workspace_actions : 1;
   guint          workspace_names : 1;
   guint          urgentcy_notification : 1;
@@ -69,7 +69,7 @@ struct _XfceWindowMenuPlugin
 enum
 {
   PROP_0,
-  PROP_BUTTON_LAYOUT,
+  PROP_STYLE,
   PROP_WORKSPACE_ACTIONS,
   PROP_WORKSPACE_NAMES,
   PROP_URGENTCY_NOTIFICATION,
@@ -78,8 +78,8 @@ enum
 
 enum
 {
-  BUTTON_LAYOUT_ICON = 0,
-  BUTTON_LAYOUT_ARROW
+  BUTTON_STYLE_ICON = 0,
+  BUTTON_STYLE_ARROW
 };
 
 
@@ -140,12 +140,12 @@ window_menu_plugin_class_init (XfceWindowMenuPluginClass *klass)
   plugin_class->configure_plugin = window_menu_plugin_configure_plugin;
 
   g_object_class_install_property (gobject_class,
-                                   PROP_BUTTON_LAYOUT,
-                                   g_param_spec_uint ("button-layout",
+                                   PROP_STYLE,
+                                   g_param_spec_uint ("style",
                                                       NULL, NULL,
-                                                      BUTTON_LAYOUT_ICON,
-                                                      BUTTON_LAYOUT_ARROW,
-                                                      BUTTON_LAYOUT_ICON,
+                                                      BUTTON_STYLE_ICON,
+                                                      BUTTON_STYLE_ARROW,
+                                                      BUTTON_STYLE_ICON,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -186,7 +186,7 @@ static void
 window_menu_plugin_init (XfceWindowMenuPlugin *plugin)
 {
   /* initialize settings */
-  plugin->button_layout = BUTTON_LAYOUT_ICON;
+  plugin->button_style = BUTTON_STYLE_ICON;
   plugin->workspace_actions = FALSE;
   plugin->workspace_names = TRUE;
   plugin->urgentcy_notification = TRUE;
@@ -223,8 +223,8 @@ window_menu_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_BUTTON_LAYOUT:
-        g_value_set_uint (value, plugin->button_layout);
+      case PROP_STYLE:
+        g_value_set_uint (value, plugin->button_style);
         break;
 
       case PROP_WORKSPACE_ACTIONS:
@@ -259,23 +259,23 @@ window_menu_plugin_set_property (GObject      *object,
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
   XfcePanelPlugin      *panel_plugin = XFCE_PANEL_PLUGIN (object);
-  guint                 button_layout;
+  guint                 button_style;
 
   switch (prop_id)
     {
-      case PROP_BUTTON_LAYOUT:
-        button_layout = g_value_get_uint (value);
+      case PROP_STYLE:
+        button_style = g_value_get_uint (value);
 
         /* show or hide the icon */
-        if (button_layout == BUTTON_LAYOUT_ICON)
+        if (button_style == BUTTON_STYLE_ICON)
           gtk_widget_show (plugin->icon);
         else
           gtk_widget_hide (plugin->icon);
 
-        if (plugin->button_layout != button_layout)
+        if (plugin->button_style != button_style)
           {
             /* set new value */
-            plugin->button_layout = button_layout;
+            plugin->button_style = button_style;
 
             /* update the plugin */
             window_menu_plugin_size_changed (panel_plugin,
@@ -355,8 +355,8 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
 
   /* bind the properties */
-  xfconf_g_property_bind (plugin->channel, "/button-layout",
-                          G_TYPE_UINT, plugin, "button-layout");
+  xfconf_g_property_bind (plugin->channel, "/style",
+                          G_TYPE_UINT, plugin, "style");
   xfconf_g_property_bind (plugin->channel, "/workspace-actions",
                           G_TYPE_BOOLEAN, plugin, "workspace-actions");
   xfconf_g_property_bind (plugin->channel, "/workspace-names",
@@ -406,7 +406,7 @@ window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
   GtkArrowType          arrow_type = GTK_ARROW_NONE;
 
   /* set the arrow direction if the arrow is visible */
-  if (plugin->button_layout == BUTTON_LAYOUT_ARROW)
+  if (plugin->button_style == BUTTON_STYLE_ARROW)
     arrow_type = xfce_panel_plugin_arrow_type (panel_plugin);
 
   xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button), arrow_type);
@@ -420,7 +420,7 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 {
   XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
 
-  if (plugin->button_layout == BUTTON_LAYOUT_ICON)
+  if (plugin->button_style == BUTTON_STYLE_ICON)
     {
       /* square the plugin */
       gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
@@ -451,7 +451,7 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   guint                 i;
   const gchar          *names[] = { "workspace-actions", "workspace-names",
                                     "urgentcy-notification", "all-workspaces",
-                                    "button-layout" };
+                                    "style" };
 
   builder = gtk_builder_new ();
   if (gtk_builder_add_from_string (builder, windowmenu_dialog_glade,
@@ -504,7 +504,7 @@ window_menu_plugin_active_window_changed (WnckScreen           *screen,
   panel_return_if_fail (plugin->screen == screen);
 
   /* only do this when the icon is visible */
-  if (plugin->button_layout == BUTTON_LAYOUT_ICON)
+  if (plugin->button_style == BUTTON_STYLE_ICON)
     {
       /* get the window icon and set the tooltip */
       window = wnck_screen_get_active_window (screen);
