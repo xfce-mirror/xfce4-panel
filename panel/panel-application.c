@@ -352,14 +352,44 @@ panel_application_plugin_move (GtkWidget        *item,
 
 
 static void
+panel_application_plugin_delete_config (PanelApplication *application,
+                                        const gchar      *name,
+                                        gint              unique_id)
+{
+  gchar *property;
+  gchar *filename, *path;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (IS_STRING (name));
+  panel_return_if_fail (unique_id != -1);
+
+  /* remove the xfconf property */
+  property = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE, unique_id);
+  xfconf_channel_reset_property (application->xfconf, property, TRUE);
+  g_free (property);
+
+  /* lookup the rc file */
+  filename = g_strdup_printf (PANEL_PLUGIN_RC_RELATIVE_PATH, name, unique_id);
+  path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
+  g_free (filename);
+
+  /* unlink the rc file */
+  if (G_LIKELY (path != NULL))
+    g_unlink (path);
+  g_free (path);
+}
+
+
+
+static void
 panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provider,
                                           XfcePanelPluginProviderSignal  provider_signal,
                                           PanelApplication              *application)
 {
   GtkWidget   *itembar;
   PanelWindow *window;
-  gchar       *property;
-  gchar       *path, *filename;
+  gint         unique_id;
+  gchar       *name;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -396,31 +426,17 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         break;
 
       case PROVIDER_SIGNAL_REMOVE_PLUGIN:
-        /* create the xfconf property base */
-        property = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE,
-                                    xfce_panel_plugin_provider_get_unique_id (provider));
-
-        /* build the plugin rc filename */
-        filename = g_strdup_printf (PANEL_PLUGIN_RC_RELATIVE_PATH,
-                                    xfce_panel_plugin_provider_get_name (provider),
-                                    xfce_panel_plugin_provider_get_unique_id (provider));
+        /* store the provider's unique id and name */
+        unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
+        name = g_strdup (xfce_panel_plugin_provider_get_name (provider));
 
         /* destroy the plugin if it's a panel plugin (ie. not external) */
         if (XFCE_IS_PANEL_PLUGIN (provider))
           gtk_widget_destroy (GTK_WIDGET (provider));
 
-        /* remove the xfconf properties */
-        xfconf_channel_reset_property (application->xfconf, property, TRUE);
-        g_free (property);
-
-        /* get the path of the config file */
-        path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
-        g_free (filename);
-
-        /* remove the config file */
-        if (G_LIKELY (path))
-          g_unlink (path);
-        g_free (path);
+        /* remove the plugin configuration */
+        panel_application_plugin_delete_config (application, name, unique_id);
+        g_free (name);
         break;
 
       case PROVIDER_SIGNAL_ADD_NEW_ITEMS:
@@ -464,7 +480,6 @@ panel_application_plugin_insert (PanelApplication  *application,
                                  gint               position)
 {
   GtkWidget               *itembar;
-  gboolean                 succeed = FALSE;
   XfcePanelPluginProvider *provider;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
@@ -473,30 +488,38 @@ panel_application_plugin_insert (PanelApplication  *application,
   panel_return_val_if_fail (name != NULL, FALSE);
 
   /* create a new panel plugin */
-  provider = panel_module_factory_create_plugin (application->factory, screen, name, unique_id, arguments);
+  provider = panel_module_factory_create_plugin (application->factory,
+                                                 screen, name, unique_id,
+                                                 arguments);
+  if (G_UNLIKELY (provider == NULL))
+    return FALSE;
 
-  if (G_LIKELY (provider != NULL))
+  /* make sure there is no panel configuration with this unique id when a
+   * new plugin is created */
+  if (G_UNLIKELY (unique_id == -1))
     {
-      /* get the panel itembar */
-      itembar = gtk_bin_get_child (GTK_BIN (window));
-
-      /* add signal to monitor provider signals */
-      g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (panel_application_plugin_provider_signal), application);
-
-      /* add the item to the panel */
-      panel_itembar_insert (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), position);
-
-      /* send all the needed info about the panel to the plugin */
-      panel_glue_set_provider_info (provider, window);
-
-      /* show the plugin */
-      gtk_widget_show (GTK_WIDGET (provider));
-
-      /* we've succeeded */
-      succeed = TRUE;
+      unique_id = xfce_panel_plugin_provider_get_unique_id (provider);
+      panel_application_plugin_delete_config (application, name, unique_id);
     }
 
-  return succeed;
+  /* get the panel itembar */
+  itembar = gtk_bin_get_child (GTK_BIN (window));
+
+  /* add signal to monitor provider signals */
+  g_signal_connect (G_OBJECT (provider), "provider-signal",
+                    G_CALLBACK (panel_application_plugin_provider_signal), application);
+
+  /* add the item to the panel */
+  panel_itembar_insert (PANEL_ITEMBAR (itembar),
+                        GTK_WIDGET (provider), position);
+
+  /* send all the needed info about the panel to the plugin */
+  panel_glue_set_provider_info (provider, window);
+
+  /* show the plugin */
+  gtk_widget_show (GTK_WIDGET (provider));
+
+  return TRUE;
 }
 
 
@@ -863,7 +886,8 @@ panel_application_add_new_item (PanelApplication  *application,
       window = g_slist_nth_data (application->windows, nth);
 
       /* add the plugin to the end of the choosen window */
-      panel_application_plugin_insert (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
+      panel_application_plugin_insert (application, window,
+                                       gtk_widget_get_screen (GTK_WIDGET (window)),
                                        plugin_name, -1, arguments, -1);
     }
   else
