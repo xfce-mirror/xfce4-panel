@@ -1,30 +1,129 @@
+4.7.0
+=====
+
+General
+-------
+- Almost a complete rewite of the code. Everything is now written
+  in GObjects. This makes each individual part easier to understand.
+- All plugins are ported to GObject-based plugins and use Xfconf for
+  storing their information (apart from desktop-files of launcher).
+- Interfaces are all created by GtkBuilder.
+- Ported to new Libxfce4ui (4.7.1) and Garcon (0.1.1) libraries.
+  Other dependencies include Gtk+ 2.14, Glib 2.18, Xfconf 4.7.2,
+  Exo 0.5.1, DBus-Glib 0.73 and Libwnck 2.22.
+- Documentation (will be) written in Mallard.
+- On first startup a dialog will appear to migrate old panel config,
+  start with the default setup or one empty panel.
 
 Panel
-=====
-- Almost complete rewrite of the code. Everything is now writtin in gobjects and a lot easier to understand (more comments, better function names, less code, smarter, faster, etc.).
-- Dragging a panel to snap to screen egdes (will work on a mouseless implementation later). Greatly improved the positioning code.
-- You can set the panel length (percentages).
-- Lock panels -> no dragging possible.
-- Alpha background (transparent panel).
-- Item/plugin editor in the panel preferences.
-- Xfconf, so you can change all panel properties externally except for adding and removing panels (yet).
+-----
+- Panels can be dragged around the screen and snapped to every panel
+  edge. Each panel also has a setting to control the window length (%).
+- Possibility to lock panels. This will fix the position and hides the
+  handles of the window.
+- Alpha backgrounds.
+- Item (plugin) editor in the preferences dialog, so you can easily
+  add, move, delete and edit plugins that are sometimes hard to reach.
+- Using Xfconf for storing the panel settings. Panels also watches the
+  Xfconf channel for changes, except for adding and removing panels.
+- New code for monitor/screen positioning. This should work a lot
+  better with randr.
+- DND of desktop-files on the panel to create new launchers.
+- Possibility to add new plugins from the command line, including
+  startup arguments.
+- External plugins are automatically restarted if they have not
+  crashed in the last 60 seconds. If they crash more then once in
+  this time window, the user is asked what to do (restart or remove).
+- Gtk style properties for popup/popdown delay.
+- Hidden option to disable struts for windows on a screen edge, so
+  the space is used by the window manager for other windows.
 
 Plugin Framework
-================
-- ALL PLUGINS ARE FROM NOW ON COMPILED AS LIBRARIES. So you need to change your Makefile.am (sorry). Will provide a script to do this before compiling a plugin.
-- DBus communication with external plugins.
-- Plugins API is still the same (pfew).
-- If you want to run an internal plugin you can define X-XFCE-Internal=TRUE in the desktop file.
-- Because of the changes above, the XfcePanelPlugin is now a single gobject, this drops a lot of complexity in the previous plugin framework and also allows developing plugins as gobjects (yay).
-- Various speedups here and there.
+----------------
+- Plugin API should still be the same, however the ABI changed so
+  you need to recompile plugins against this version of the panel.
+- New way to run plugins compiled as modules externally. Whether a
+  plugin runs internal or external is controlled by a boolean in the
+  desktop-file of the plugin. This does not affect the 'old' external
+  plugins that are compiled as binaries, it is however recommended to
+  port plugins to this new framework (only Makefile and macro change)
+  since it is more flexible.
+- Communication between the panel and wrapper (that embeds plugins to
+  run external) is handled through D-Bus.
+- XfcePanelPlugin is now a single object (not an interface for 2 other
+  objects). This drops a lot of code.
+- Some new API and a couple of deprecations. Some of the new
+  functionality is only available in the new plugin framework.
+- New way to build plugins as GObjects with XfcePanelPlugin as parent
+  type. This gives all advantages of GObject like type checking.
 
-Internal Plugins
-================
-- Xfconf support in all plugins.
-- All plugins use the gobject implementation.
-- Iconbox: Merged in the tasklist plugins.
-- Clock: Fuzzy clock mode. Still working on some other improvements.
-- Tasklist: Dropped the WnckTasklist, to make the iconbox merge. Also working on some other improvements (sorting, dnd, performance, accessibility).
-- Launcher: Improve desktop file support, not started yet. In the end it should be a lot easier to create launchers.
-- Launcher: Create new launchers from the command line.
+Actions Plugin
+--------------
+- New settings dialog that allows one or two actions in the plugin
+  in each order you want.
 
+Applications Menu Plugin (new)
+------------------------------
+- Plugin similar what Xfdesktop provided, but using Garcon.
+- Gtk icons size property to control the menu icon size.
+- Script to popup the menu, optionally under the cursor.
+
+Clock Plugin
+------------
+- New fuzzy clock mode.
+- Improved vertical orientation.
+
+Directory Menu Plugin (new)
+---------------------------
+- Menu that provides a directory tree in a menu. It allows to quickly
+  open a Terminal or File Manager for some directory.
+- Possible to set a file filter for files that should also be
+  visible in the menu. Files are opened by the default application
+  that provides the mime-type reported by GIO.
+- Gtk icons size property to control the menu icon size.
+- Script to popup the menu, optionally under the cursor.
+
+Launcher Plugin
+---------------
+- Support to create a launcher from the command line with a number of
+  desktop files as argument.
+- New dialogs, with an application finder like interface to add new
+  applications and using the Exo item editor for modifying launchers.
+- The desktop files are stored in the .config/xfce4/panel/launcher-$id
+  folder and monitored for changes.
+- Possibility to use desktop-id in the default configuration which are
+  read from a GarconItemsPool on first startup. This is a very useful
+  feature for distributions providing a custom default config.
+- Gtk icons size property to control the menu icon size.
+- Option to show labels instead of icons.
+
+Pager Plugin
+------------
+- Button to quickly access the Xfwm4 workspace settings.
+
+Separator Plugin
+----------------
+- Same drawing modes as previous panel, but a check button for expand
+  instead of a mode.
+
+Notification Area Plugin
+------------------------
+- Support for transparent tray icons (required at least Gtk 2.16).
+
+Window Buttons (tasklist) Plugin
+--------------------------------
+- Option to only show icons. This drops the icon box plugin.
+- Complete rewrite, not entirely finished yet (group buttons are not
+  working yet + some other less noticeable features).
+- If the list becomes too crowded windows will show up in an overflow
+  menu, similar to what a menu bar does.
+- Option to set the sort mode of the tasklist.
+- Draw wireframe of the window on mouse hover, similar to the Alt+Tab
+  wireframe in Xfwm4.
+- A lot of style properties to tune the behavior of the plugin.
+- Vertically orientated buttons for vertical panels.
+
+Window Menu Plugin
+------------------
+- Gtk icons size property to control the menu icons size and minimized
+  icon translucency.
