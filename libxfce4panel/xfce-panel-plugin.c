@@ -899,7 +899,7 @@ xfce_panel_plugin_take_window_notify (gpointer  data,
  *
  * Return value: the name of the panel plugin.
  **/
-PANEL_SYMBOL_EXPORT G_CONST_RETURN gchar *
+PANEL_SYMBOL_EXPORT const gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -915,7 +915,7 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
  *
  * Return value: the (translated) display name of the plugin.
  **/
-PANEL_SYMBOL_EXPORT G_CONST_RETURN gchar *
+PANEL_SYMBOL_EXPORT const gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 {
 
@@ -936,7 +936,7 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
  *
  * Return value: the unique id of the panel plugin.
  **/
-PANEL_SYMBOL_EXPORT G_CONST_RETURN gchar *
+PANEL_SYMBOL_EXPORT const gchar *
 xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -949,23 +949,18 @@ xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_get_arguments:
  * @plugin    : an #XfcePanelPlugin.
- * @arguments : return location for the argument vector.
  *
- * Return value: %TRUE @arguments was set, %FALSE otherwise.
+ * Return value: the argument vector. The vector is owned by the plugin and 
+ *               should not be freed.
  *
  * Since: 4.8.0
  **/
-PANEL_SYMBOL_EXPORT gboolean
-xfce_panel_plugin_get_arguments (XfcePanelPlugin   *plugin,
-                                 gchar           ***arguments)
+PANEL_SYMBOL_EXPORT const gchar * const *
+xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin)
 {
-  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
-  /* dupplicate the arguments */
-  if (G_LIKELY (arguments))
-    *arguments = g_strdupv (plugin->priv->arguments);
-
-  return !!(plugin->priv->arguments != NULL);
+  return (const gchar * const *) plugin->priv->arguments;
 }
 
 
