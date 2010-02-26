@@ -16,18 +16,17 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __MIGRATE_46_H__
-#define __MIGRATE_46_H__
+#ifndef __XFCE_DEFAULT_H__
+#define __XFCE_DEFAULT_H__
 
 #include <gtk/gtk.h>
+#include <xfconf/xfconf.h>
 
 G_BEGIN_DECLS
 
-#define XFCE_46_CONFIG  "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "panels.xml"
-
-gboolean migrate_46 (const gchar *filename, GError **error);
+gboolean migrate_default (const gchar *filename, GError **error);
 
 G_END_DECLS
 
-#endif /* !__MIGRATE_46_H__ */
+#endif /* !__XFCE_DEFAULT_H__ */
 

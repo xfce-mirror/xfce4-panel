@@ -33,6 +33,12 @@
 #include <migrate/migrate-46.h>
 
 
+
+#define CHANNEL_NAME    "xfce4-panel"
+#define LAUNCHER_FOLDER "launcher"
+
+
+
 typedef enum
 {
   START,
@@ -878,9 +884,8 @@ static GMarkupParser markup_parser =
 
 
 gboolean
-migrate_46 (const gchar    *filename,
-            XfconfChannel  *channel,
-            GError        **error)
+migrate_46 (const gchar  *filename,
+            GError      **error)
 {
   gsize                length;
   gchar               *contents;
@@ -889,7 +894,6 @@ migrate_46 (const gchar    *filename,
   gboolean             succeed = FALSE;
 
   g_return_val_if_fail (filename != NULL, FALSE);
-  g_return_val_if_fail (XFCONF_IS_CHANNEL (channel), FALSE);
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   if (!g_file_get_contents (filename, &contents, &length, error))
@@ -899,7 +903,7 @@ migrate_46 (const gchar    *filename,
   parser->state = START;
   parser->plugin_id_counter = 0;
   parser->panel_id_counter = 0;
-  parser->channel = channel;
+  parser->channel = xfconf_channel_new (CHANNEL_NAME);
 
   context = g_markup_parse_context_new (&markup_parser, 0, parser, NULL);
 
@@ -912,6 +916,7 @@ migrate_46 (const gchar    *filename,
 
   g_free (contents);
   g_markup_parse_context_free (context);
+  g_object_unref (G_OBJECT (parser->channel));
   g_slice_free (ConfigParser, parser);
 
   return succeed;
