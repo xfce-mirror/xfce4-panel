@@ -548,6 +548,7 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
   WnckWindow      *window;
   GdkPixbuf       *pixbuf;
   XfceScaledImage *icon = XFCE_SCALED_IMAGE (plugin->icon);
+  WnckWindowType   type;
 
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_SCALED_IMAGE (icon));
@@ -557,10 +558,15 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
   /* only do this when the icon is visible */
   if (plugin->button_style == BUTTON_STYLE_ICON)
     {
-      /* get the window icon and set the tooltip */
       window = wnck_screen_get_active_window (screen);
       if (G_LIKELY (window != NULL))
         {
+          /* skip 'fake' windows */
+          type = wnck_window_get_window_type (window);
+          if (type == WNCK_WINDOW_DESKTOP || type == WNCK_WINDOW_DOCK)
+            goto show_desktop_icon;
+
+          /* get the window icon and set the tooltip */
           pixbuf = wnck_window_get_icon (window);
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon),
                                        wnck_window_get_name (window));
@@ -572,6 +578,8 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
         }
       else
         {
+          show_desktop_icon:
+
           /* desktop is shown right now */
           xfce_scaled_image_set_from_icon_name (icon, "user-desktop");
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
