@@ -88,7 +88,7 @@ enum
 
 static const GtkTargetEntry drag_targets[] =
 {
-  { (gchar *) "application/x-xfce-panel-plugin-name", 0, 0 },
+  { (gchar *) "xfce-panel/plugin-name", 0, 0 },
 };
 
 

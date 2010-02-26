@@ -74,12 +74,23 @@ static void      panel_application_drag_data_received (GtkWidget              *i
                                                        guint                   info,
                                                        guint                   drag_time,
                                                        PanelWindow            *window);
+static gboolean  panel_application_drag_motion        (GtkWidget              *itembar,
+                                                       GdkDragContext         *context,
+                                                       gint                    x,
+                                                       gint                    y,
+                                                       guint                   drag_time,
+                                                       PanelApplication       *application);
 static gboolean  panel_application_drag_drop          (GtkWidget              *itembar,
                                                        GdkDragContext         *context,
                                                        gint                    x,
                                                        gint                    y,
                                                        guint                   drag_time,
-                                                       PanelWindow            *window);
+                                                       PanelApplication       *application);
+static void      panel_application_drag_leave         (GtkWidget              *itembar,
+                                                       GdkDragContext         *context,
+                                                       guint                   drag_time,
+                                                       PanelApplication       *application);
+
 
 
 enum
@@ -111,11 +122,34 @@ struct _PanelApplication
 
   /* autosave timeout */
   guint    autosave_timeout_id;
+
+  /* drag and drop data */
+  guint     drop_data_ready : 1;
+  guint     drop_occurred : 1;
+  gchar   **drop_uris;
+};
+
+enum
+{
+  TARGET_PLUGIN_NAME,
+  TARGET_PLUGIN_WIDGET,
+  TARGET_TEXT_URI_LIST
 };
 
 static const GtkTargetEntry drag_targets[] =
 {
-  { (gchar *) "application/x-xfce-panel-plugin-widget", 0, 0 }
+  { (gchar *) "xfce-panel/plugin-widget",
+    GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
+};
+
+static const GtkTargetEntry drop_targets[] =
+{
+  { (gchar *) "xfce-panel/plugin-name",
+    GTK_TARGET_SAME_APP, TARGET_PLUGIN_NAME },
+  { (gchar *) "xfce-panel/plugin-widget",
+    GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET },
+  { (gchar *) "text/uri-list",
+    GTK_TARGET_OTHER_APP, TARGET_TEXT_URI_LIST }
 };
 
 
@@ -142,6 +176,9 @@ panel_application_init (PanelApplication *application)
   application->windows = NULL;
   application->dialogs = NULL;
   application->autosave_timeout_id = 0;
+  application->drop_uris = NULL;
+  application->drop_data_ready = FALSE;
+  application->drop_occurred = FALSE;
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
@@ -165,6 +202,7 @@ panel_application_finalize (GObject *object)
   GSList           *li;
 
   panel_return_if_fail (application->dialogs == NULL);
+  panel_return_if_fail (application->drop_uris == NULL);
 
   /* stop the autosave timeout */
   g_source_remove (application->autosave_timeout_id);
@@ -646,13 +684,16 @@ panel_application_drag_data_received (GtkWidget        *itembar,
                                       guint             drag_time,
                                       PanelWindow      *window)
 {
-  guint             position;
-  PanelApplication *application;
-  GtkWidget        *provider;
-  gboolean          succeed = FALSE;
-  GdkScreen        *screen;
-  const gchar      *name;
-  guint             old_position;
+  guint              position;
+  PanelApplication  *application;
+  GtkWidget         *provider;
+  gboolean           succeed = FALSE;
+  GdkScreen         *screen;
+  const gchar       *name;
+  guint              old_position;
+  gchar            **uri_list, *tmp;
+  GSList            *uris, *li;
+  guint              i;
 
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
@@ -660,6 +701,51 @@ panel_application_drag_data_received (GtkWidget        *itembar,
 
   /* get the application */
   application = panel_application_get ();
+
+  if (!application->drop_data_ready)
+    {
+      panel_assert (application->drop_uris == NULL);
+
+      if (info == TARGET_TEXT_URI_LIST)
+        {
+          /* extract the URI list from the selection data */
+          uri_list = gtk_selection_data_get_uris (selection_data);
+          if (G_LIKELY (uri_list != NULL))
+            {
+              /* add the valid desktop items to a list */
+              for (i = 0, uris = NULL; uri_list[i] != NULL; i++)
+                if (g_str_has_suffix (uri_list[i], ".desktop")
+                    && (tmp = g_filename_from_uri (uri_list[i], NULL, NULL)) != NULL)
+                  uris = g_slist_append (uris, tmp);
+
+              /* cleanup */
+              g_strfreev (uri_list);
+
+              /* allocate a string for the valid uris */
+              if (uris != NULL)
+                {
+                  /* allocate a string and add the files */
+                  application->drop_uris = g_new0 (gchar *, g_slist_length (uris) + 1);
+                  for (li = uris, i = 0; li != NULL; li = li->next, i++)
+                    application->drop_uris[i] = li->data;
+                  g_slist_free (uris);
+                }
+            }
+        }
+
+      /* reset the state */
+      application->drop_data_ready = TRUE;
+    }
+
+  /* check if the data was droppped */
+  if (!application->drop_occurred)
+    {
+      gdk_drag_status (context, 0, drag_time);
+      goto bailout;
+    }
+
+  /* reset the state */
+  application->drop_occurred = FALSE;
 
   /* get the drop index on the itembar */
   position = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
@@ -669,7 +755,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
 
   switch (info)
     {
-      case PANEL_ITEMBAR_TARGET_PLUGIN_NAME:
+      case TARGET_PLUGIN_NAME:
         if (G_LIKELY (selection_data->length > 0))
           {
             /* get the name from the selection data */
@@ -682,7 +768,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
           }
         break;
 
-      case PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET:
+      case TARGET_PLUGIN_WIDGET:
         /* get the source widget */
         provider = gtk_drag_get_source_widget (context);
 
@@ -693,7 +779,8 @@ panel_application_drag_data_received (GtkWidget        *itembar,
         if (gtk_widget_get_parent (provider) == itembar)
           {
             /* get the current position on the itembar */
-            old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), provider);
+            old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
+                                                          provider);
 
             /* decrease the counter if we drop after the current position */
             if (position > old_position)
@@ -719,6 +806,18 @@ panel_application_drag_data_received (GtkWidget        *itembar,
         succeed = TRUE;
         break;
 
+      case TARGET_TEXT_URI_LIST:
+        /* get the uri list fo the selection data for the new launcher */
+        if (G_LIKELY (application->drop_uris))
+          {
+            /* create a new item with a unique id */
+            succeed = panel_application_plugin_insert (application, window,
+                                                       screen, LAUNCHER_PLUGIN_NAME,
+                                                       -1, application->drop_uris,
+                                                       position);
+          }
+        break;
+
       default:
         panel_assert_not_reached ();
         break;
@@ -728,28 +827,92 @@ panel_application_drag_data_received (GtkWidget        *itembar,
   if (G_LIKELY (succeed))
     panel_application_save (application, FALSE);
 
-  /* release the application */
-  g_object_unref (G_OBJECT (application));
-
   /* tell the peer that we handled the drop */
   gtk_drag_finish (context, succeed, FALSE, drag_time);
+
+bailout:
+  /* release the application */
+  g_object_unref (G_OBJECT (application));
 }
 
 
 
 static gboolean
-panel_application_drag_drop (GtkWidget      *itembar,
-                             GdkDragContext *context,
-                             gint            x,
-                             gint            y,
-                             guint           drag_time,
-                             PanelWindow    *window)
+panel_application_drag_motion (GtkWidget        *itembar,
+                               GdkDragContext   *context,
+                               gint              x,
+                               gint              y,
+                               guint             drag_time,
+                               PanelApplication *application)
+{
+  GdkAtom       target;
+  GdkDragAction action;
+
+  panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), FALSE);
+  panel_return_val_if_fail (GDK_IS_DRAG_CONTEXT (context), FALSE);
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
+  panel_return_val_if_fail (application->drop_occurred == FALSE, FALSE);
+
+  /* determine the drag target */
+  target = gtk_drag_dest_find_target (itembar, context, NULL);
+  if (target == gdk_atom_intern_static_string ("text/uri-list"))
+    {
+      /* request the drop data on-demand (if we don't have it already) */
+      if (!application->drop_data_ready)
+        {
+          /* request the drop data from the source */
+          gtk_drag_get_data (itembar, context, target, drag_time);
+
+          /* we cannot drop here (yet!) */
+          return TRUE;
+        }
+      else if (application->drop_uris != NULL)
+        {
+          /* there are valid uris in the drop data */
+          gdk_drag_status (context, GDK_ACTION_COPY, drag_time);
+        }
+      else
+        {
+          /* not a valid list of uris */
+          return TRUE;
+        }
+    }
+  else if (target != GDK_NONE)
+    {
+      if (target == gdk_atom_intern_static_string ("xfce-panel/plugin-name"))
+        action = GDK_ACTION_COPY;
+      else
+        action = GDK_ACTION_MOVE;
+
+      /* plugin-widget or -name */
+      gdk_drag_status (context, action, drag_time);
+    }
+  else
+    {
+      /* not a valid drop */
+      gdk_drag_status (context, 0, drag_time);
+
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static gboolean
+panel_application_drag_drop (GtkWidget        *itembar,
+                             GdkDragContext   *context,
+                             gint              x,
+                             gint              y,
+                             guint             drag_time,
+                             PanelApplication *application)
 {
   GdkAtom target;
 
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), FALSE);
   panel_return_val_if_fail (GDK_IS_DRAG_CONTEXT (context), FALSE);
-  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
 
   target = gtk_drag_dest_find_target (itembar, context, NULL);
 
@@ -757,11 +920,38 @@ panel_application_drag_drop (GtkWidget      *itembar,
   if (G_UNLIKELY (target == GDK_NONE))
     return FALSE;
 
-  /* request the drag data */
+  /* set state so the drag-data-received handler
+   * knows that this is really a drop this time. */
+  application->drop_occurred = TRUE;
+
+  /* request the drag data from the source. */
   gtk_drag_get_data (itembar, context, target, drag_time);
 
-  /* we call gtk_drag_finish later */
+  /* we call gtk_drag_finish() later */
   return TRUE;
+}
+
+
+
+static void
+panel_application_drag_leave (GtkWidget        *itembar,
+                              GdkDragContext   *context,
+                              guint             drag_time,
+                              PanelApplication *application)
+{
+  panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
+  panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+
+  /* cleanup the drop data */
+  if (application->drop_uris != NULL)
+    {
+      g_strfreev (application->drop_uris);
+      application->drop_uris = NULL;
+    }
+
+  /* reset the state */
+  application->drop_data_ready = FALSE;
 }
 
 
@@ -949,11 +1139,20 @@ panel_application_new_window (PanelApplication *application,
   gtk_container_add (GTK_CONTAINER (window), itembar);
   gtk_widget_show (itembar);
 
+  /* set the itembar drag destination targets */
+  gtk_drag_dest_set (GTK_WIDGET (itembar), 0,
+                     drop_targets, G_N_ELEMENTS (drop_targets),
+                     GDK_ACTION_COPY | GDK_ACTION_MOVE);
+
   /* signals for drag and drop */
   g_signal_connect (G_OBJECT (itembar), "drag-data-received",
                     G_CALLBACK (panel_application_drag_data_received), window);
+  g_signal_connect (G_OBJECT (itembar), "drag-motion",
+                    G_CALLBACK (panel_application_drag_motion), application);
   g_signal_connect (G_OBJECT (itembar), "drag-drop",
-                    G_CALLBACK (panel_application_drag_drop), window);
+                    G_CALLBACK (panel_application_drag_drop), application);
+  g_signal_connect (G_OBJECT (itembar), "drag-leave",
+                    G_CALLBACK (panel_application_drag_leave), application);
 
   /* add the xfconf bindings */
   panel_application_xfconf_window_bindings (application, PANEL_WINDOW (window), FALSE);

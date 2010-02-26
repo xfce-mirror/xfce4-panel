@@ -117,15 +117,6 @@ G_DEFINE_TYPE (PanelItembar, panel_itembar, GTK_TYPE_CONTAINER);
 
 
 
-/* drop targets */
-static const GtkTargetEntry drop_targets[] =
-{
-  { (gchar *) "application/x-xfce-panel-plugin-name", 0, PANEL_ITEMBAR_TARGET_PLUGIN_NAME },
-  { (gchar *) "application/x-xfce-panel-plugin-widget", 0, PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET },
-};
-
-
-
 static void
 panel_itembar_class_init (PanelItembarClass *klass)
 {
@@ -187,11 +178,6 @@ panel_itembar_init (PanelItembar *itembar)
 
   /* don't redraw on allocation */
   gtk_widget_set_redraw_on_allocate (GTK_WIDGET (itembar), FALSE);
-
-  /* set the itembar drag destination targets */
-  gtk_drag_dest_set (GTK_WIDGET (itembar), GTK_DEST_DEFAULT_MOTION,
-                     drop_targets, G_N_ELEMENTS (drop_targets),
-                     GDK_ACTION_COPY | GDK_ACTION_MOVE);
 }
 
 
@@ -691,7 +677,7 @@ panel_itembar_remove (GtkContainer *container,
           /* queue a resize if needed */
           if (G_LIKELY (was_visible))
             gtk_widget_queue_resize (GTK_WIDGET (container));
-            
+
           /* tell the consumers that we have changed the items */
           g_object_notify (G_OBJECT (itembar), "changed");
 
@@ -806,7 +792,7 @@ panel_itembar_insert (PanelItembar *itembar,
 
   /* resize the itembar */
   gtk_widget_queue_resize (GTK_WIDGET (itembar));
-  
+
   /* tell the consumers that we have changed the items */
   g_object_notify (G_OBJECT (itembar), "changed");
 }
@@ -840,7 +826,7 @@ panel_itembar_reorder_child (PanelItembar *itembar,
 
           /* reallocate the itembar */
           gtk_widget_queue_resize (GTK_WIDGET (itembar));
-          
+
           /* tell the consumers that we have changed the items */
           g_object_notify (G_OBJECT (itembar), "changed");
 

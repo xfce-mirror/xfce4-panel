@@ -28,12 +28,6 @@ typedef struct _PanelItembarClass PanelItembarClass;
 typedef struct _PanelItembar      PanelItembar;
 typedef struct _PanelItembarChild PanelItembarChild;
 
-enum
-{
-  PANEL_ITEMBAR_TARGET_PLUGIN_NAME,
-  PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET
-};
-
 #define PANEL_TYPE_ITEMBAR            (panel_itembar_get_type ())
 #define PANEL_ITEMBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_ITEMBAR, PanelItembar))
 #define PANEL_ITEMBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_ITEMBAR, PanelItembarClass))
