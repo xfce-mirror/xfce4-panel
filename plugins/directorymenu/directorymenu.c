@@ -158,6 +158,7 @@ directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
   plugin->button = xfce_panel_create_toggle_button ();
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
+  gtk_widget_set_name (plugin->button, "directorymenu-button");
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (directory_menu_plugin_menu), plugin);
