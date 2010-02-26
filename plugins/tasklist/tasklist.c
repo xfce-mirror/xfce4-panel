@@ -123,7 +123,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
                           plugin->tasklist, name);
 
   /* create bindings */
-  TASKLIST_XFCONF_BIND ("style", G_TYPE_UINT)
+  TASKLIST_XFCONF_BIND ("show-labels", G_TYPE_BOOLEAN)
   TASKLIST_XFCONF_BIND ("grouping", G_TYPE_UINT)
   TASKLIST_XFCONF_BIND ("include-all-workspaces", G_TYPE_BOOLEAN)
   TASKLIST_XFCONF_BIND ("flat-buttons", G_TYPE_BOOLEAN)
@@ -213,7 +213,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                             name,  G_OBJECT (object), \
                                             property);
 
-      TASKLIST_DIALOG_BIND ("style", "active")
+      TASKLIST_DIALOG_BIND ("show-labels", "active")
       TASKLIST_DIALOG_BIND ("grouping", "active")
       TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
       TASKLIST_DIALOG_BIND ("flat-buttons", "active")

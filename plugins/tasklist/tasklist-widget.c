@@ -46,11 +46,11 @@
 enum
 {
   PROP_0,
-  PROP_STYLE,
   PROP_GROUPING,
   PROP_INCLUDE_ALL_WORKSPACES,
   PROP_FLAT_BUTTONS,
   PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
+  PROP_SHOW_LABELS,
   PROP_SHOW_ONLY_MINIMIZED,
   PROP_SHOW_WIREFRAMES
 };
@@ -77,13 +77,13 @@ struct _XfceTasklist
   GSList             *class_groups;
 
   /* normal or iconbox style */
-  XfceTasklistStyle   style;
+  guint               show_labels : 1;
 
   /* size of the panel pluin */
   gint                size;
 
   /* orientation of the tasklist */
-  GtkOrientation      orientation;
+  guint               horizontal : 1;
 
   /* relief of the tasklist buttons */
   GtkReliefStyle      button_relief;
@@ -168,9 +168,9 @@ static void xfce_tasklist_wireframe_hide (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_destroy (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_update (XfceTasklist *tasklist, XfceTasklistChild *child);
 static void xfce_tasklist_button_new (XfceTasklistChild *child);
-static void xfce_tasklist_set_style (XfceTasklist *tasklist, XfceTasklistStyle style);
 static void xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist, gboolean all_workspaces);
 static void xfce_tasklist_set_button_relief (XfceTasklist *tasklist, GtkReliefStyle button_relief);
+static void xfce_tasklist_set_show_labels (XfceTasklist *tasklist, gboolean show_labels);
 static void xfce_tasklist_set_show_only_minimized (XfceTasklist *tasklist, gboolean only_minimized);
 static void xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist, gboolean show_wireframes);
 
@@ -207,15 +207,6 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   gtkcontainer_class->child_type = xfce_tasklist_child_type;
 
   g_object_class_install_property (gobject_class,
-                                   PROP_STYLE,
-                                   g_param_spec_uint ("style",
-                                                      NULL, NULL,
-                                                      XFCE_TASKLIST_STYLE_MIN,
-                                                      XFCE_TASKLIST_STYLE_MAX,
-                                                      XFCE_TASKLIST_STYLE_DEFAULT,
-                                                      EXO_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_GROUPING,
                                    g_param_spec_uint ("grouping",
                                                       NULL, NULL,
@@ -241,6 +232,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
                                    g_param_spec_boolean ("switch-workspace-on-unminimize",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_LABELS,
+                                   g_param_spec_boolean ("show-labels",
                                                          NULL, NULL,
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
@@ -295,13 +293,13 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   /* initialize */
   tasklist->screen = NULL;
   tasklist->children = NULL;
-  tasklist->orientation = GTK_ORIENTATION_HORIZONTAL;
+  tasklist->horizontal = TRUE;
   tasklist->all_workspaces = FALSE;
   tasklist->n_visible_children = 0;
   tasklist->button_relief = GTK_RELIEF_NORMAL;
   tasklist->switch_workspace = TRUE;
   tasklist->only_minimized = FALSE;
-  tasklist->style = XFCE_TASKLIST_STYLE_DEFAULT;
+  tasklist->show_labels = TRUE;
   tasklist->class_groups = NULL;
   tasklist->show_wireframes = FALSE;
   tasklist->wireframe_window = 0;
@@ -326,8 +324,7 @@ xfce_tasklist_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_STYLE:
-        g_value_set_uint (value, tasklist->style);
+      case PROP_GROUPING:
         break;
 
       case PROP_INCLUDE_ALL_WORKSPACES:
@@ -340,6 +337,10 @@ xfce_tasklist_get_property (GObject    *object,
 
       case PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE:
         g_value_set_boolean (value, tasklist->switch_workspace);
+        break;
+
+      case PROP_SHOW_LABELS:
+        g_value_set_boolean (value, tasklist->show_labels);
         break;
 
       case PROP_SHOW_ONLY_MINIMIZED:
@@ -368,9 +369,7 @@ xfce_tasklist_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_STYLE:
-        /* set the tasklist style */
-        xfce_tasklist_set_style (tasklist, g_value_get_uint (value));
+      case PROP_GROUPING:
         break;
 
       case PROP_INCLUDE_ALL_WORKSPACES:
@@ -383,6 +382,11 @@ xfce_tasklist_set_property (GObject      *object,
         xfce_tasklist_set_button_relief (tasklist,
                                          g_value_get_boolean (value) ?
                                            GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
+        break;
+
+      case PROP_SHOW_LABELS:
+        /* set the new value */
+        xfce_tasklist_set_show_labels (tasklist, g_value_get_boolean (value));
         break;
 
       case PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE:
@@ -437,12 +441,10 @@ xfce_tasklist_size_request (GtkWidget      *widget,
   GSList            *li;
   GtkRequisition     child_requisition;
   XfceTasklistChild *child;
-  guint              n;
+  gint               n;
+  gint               rows, cols, length;
 
-  /* initialize */
-  requisition->width = GTK_CONTAINER (widget)->border_width * 2;
-  requisition->height = requisition->width;
-
+  /* walk all the children */
   for (li = tasklist->children, n = 0; li != NULL; li = li->next)
     {
       child = li->data;
@@ -450,34 +452,47 @@ xfce_tasklist_size_request (GtkWidget      *widget,
       if (GTK_WIDGET_VISIBLE (child->button) == FALSE)
         continue;
 
+      /* we don't use the child requisition, but the button needs it
+       * to do proper allocation */
       gtk_widget_size_request (child->button, &child_requisition);
 
-      if (tasklist->orientation == GTK_ORIENTATION_HORIZONTAL)
-        {
-          if (tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
-            {
-              if (tasklist->max_button_length != -1)
-                requisition->width += tasklist->max_button_length;
-              else
-                requisition->width += DEFAULT_BUTTON_LENGTH;
-            }
-          else
-            requisition->width += tasklist->size;
-        }
-      else
-        {
-          if (tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
-            {
-              if (tasklist->max_button_length != -1)
-                requisition->height += tasklist->max_button_length;
-              else
-                requisition->height += DEFAULT_BUTTON_LENGTH;
-            }
-          else
-            requisition->height += tasklist->size;
-        }
-
       n++;
+    }
+
+  /* calculate the number of rows */
+  rows = tasklist->size / tasklist->max_button_size;
+  rows = MIN (rows, n);
+  rows = MAX (rows, 1);
+
+  /* calculate the number of columns */
+  cols = n / rows;
+  cols = MAX (cols, 1);
+  if (cols * rows < n)
+    cols++;
+
+  /* get the requested length of the tasklist */
+  if (tasklist->show_labels)
+    {
+      if (tasklist->max_button_length != -1)
+        length = cols * tasklist->max_button_length;
+      else
+        length = cols * DEFAULT_BUTTON_LENGTH;
+    }
+  else
+    {
+      length = (tasklist->size / rows) * cols;
+    }
+
+  /* set the requested sizes */
+  if (tasklist->horizontal)
+    {
+      requisition->width = length;
+      requisition->height = tasklist->size;
+    }
+  else
+    {
+      requisition->width = tasklist->size;
+      requisition->height = length;
     }
 
   /* update the count */
@@ -505,7 +520,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   if (tasklist->n_visible_children == 0)
     return;
 
-  if (tasklist->orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (tasklist->horizontal)
     {
       /* get the number of rows and columns */
       rows = MAX (allocation->height / tasklist->max_button_size, 1);
@@ -523,7 +538,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
         width = MIN (width, tasklist->max_button_length);
       height = allocation->height / rows;
 
-      if (tasklist->style == XFCE_TASKLIST_STYLE_ICONBOX && height < width)
+      if (tasklist->show_labels == FALSE && height < width)
         width = height;
     }
   else
@@ -544,7 +559,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
         height = MIN (height, tasklist->max_button_length);
       width = allocation->width / rows;
 
-      if (tasklist->style == XFCE_TASKLIST_STYLE_ICONBOX && width < height)
+      if (tasklist->show_labels == FALSE && width < height)
         height = width;
     }
 
@@ -562,7 +577,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
         continue;
 
       /* calculate the child position */
-      if (tasklist->orientation == GTK_ORIENTATION_HORIZONTAL)
+      if (tasklist->horizontal)
         {
           child_allocation.x = allocation->x + (i / rows) * width;
           child_allocation.y = allocation->y + (i % rows) * height;
@@ -1179,7 +1194,7 @@ tasklist_button_icon_changed (WnckWindow        *window,
   GdkPixbuf *lucent;
 
   /* get the application icon */
-  if (child->tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
+  if (child->tasklist->show_labels)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
@@ -1435,7 +1450,7 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
   gtk_widget_show (child->box);
 
   child->icon = xfce_scaled_image_new ();
-  if (child->tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
+  if (child->tasklist->show_labels)
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, TRUE, 0);
   else
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, TRUE, TRUE, 0);
@@ -1447,7 +1462,7 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
   gtk_label_set_ellipsize (GTK_LABEL (child->label), child->tasklist->ellipsize_mode);
 
   /* don't show the icon if we're in iconbox style */
-  if (child->tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
+  if (child->tasklist->show_labels)
     gtk_widget_show (child->label);
 
   /* set the button's drag source */
@@ -1467,51 +1482,6 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
   /* poke functions */
   tasklist_button_icon_changed (window, child);
   tasklist_button_name_changed (window, child);
-}
-
-
-
-static void
-xfce_tasklist_set_style (XfceTasklist      *tasklist,
-                         XfceTasklistStyle  style)
-{
-  GSList            *li;
-  XfceTasklistChild *child;
-
-  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-
-  if (tasklist->style != style)
-    {
-      /* set new value */
-      tasklist->style = style;
-
-      /* change the mode of all the buttons */
-      for (li = tasklist->children; li != NULL; li = li->next)
-        {
-          child = li->data;
-
-          /* show or hide the label */
-          if (style == XFCE_TASKLIST_STYLE_NORMAL)
-            {
-              gtk_widget_show (child->label);
-              gtk_box_set_child_packing (GTK_BOX (child->box),
-                                         child->icon,
-                                         FALSE, FALSE, 0,
-                                         GTK_PACK_START);
-            }
-          else /* XFCE_TASKLIST_STYLE_ICONBOX */
-            {
-              gtk_widget_hide (child->label);
-              gtk_box_set_child_packing (GTK_BOX (child->box),
-                                         child->icon,
-                                         TRUE, TRUE, 0,
-                                         GTK_PACK_START);
-            }
-
-          /* update the icon */
-          tasklist_button_icon_changed (child->window, child);
-        }
-    }
 }
 
 
@@ -1573,6 +1543,51 @@ xfce_tasklist_set_button_relief (XfceTasklist   *tasklist,
           child = li->data;
           gtk_button_set_relief (GTK_BUTTON (child->button),
                                  button_relief);
+        }
+    }
+}
+
+
+
+static void
+xfce_tasklist_set_show_labels (XfceTasklist *tasklist,
+                               gboolean      show_labels)
+{
+  GSList            *li;
+  XfceTasklistChild *child;
+
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  if (tasklist->show_labels != show_labels)
+    {
+      /* set new value */
+      tasklist->show_labels = show_labels;
+
+      /* change the mode of all the buttons */
+      for (li = tasklist->children; li != NULL; li = li->next)
+        {
+          child = li->data;
+
+          /* show or hide the label */
+          if (show_labels)
+            {
+              gtk_widget_show (child->label);
+              gtk_box_set_child_packing (GTK_BOX (child->box),
+                                         child->icon,
+                                         FALSE, FALSE, 0,
+                                         GTK_PACK_START);
+            }
+          else /* XFCE_TASKLIST_STYLE_ICONBOX */
+            {
+              gtk_widget_hide (child->label);
+              gtk_box_set_child_packing (GTK_BOX (child->box),
+                                         child->icon,
+                                         TRUE, TRUE, 0,
+                                         GTK_PACK_START);
+            }
+
+          /* update the icon */
+          tasklist_button_icon_changed (child->window, child);
         }
     }
 }
@@ -1645,11 +1660,15 @@ void
 xfce_tasklist_set_orientation (XfceTasklist   *tasklist,
                                GtkOrientation  orientation)
 {
+  gboolean horizontal;
+
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
-  if (tasklist->orientation != orientation)
+  horizontal = !!(orientation == GTK_ORIENTATION_HORIZONTAL);
+
+  if (tasklist->horizontal != horizontal)
     {
-      tasklist->orientation = orientation;
+      tasklist->horizontal = horizontal;
       gtk_widget_queue_resize (GTK_WIDGET (tasklist));
     }
 }
