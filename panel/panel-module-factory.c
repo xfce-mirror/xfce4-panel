@@ -43,7 +43,8 @@
 
 
 static void     panel_module_factory_finalize        (GObject                  *object);
-static void     panel_module_factory_load_modules    (PanelModuleFactory       *factory);
+static void     panel_module_factory_load_modules    (PanelModuleFactory       *factory,
+                                                      gboolean                  first_time);
 static gboolean panel_module_factory_modules_cleanup (gpointer                  key,
                                                       gpointer                  value,
                                                       gpointer                  user_data);
@@ -67,10 +68,10 @@ struct _PanelModuleFactory
 {
   GObject  __parent__;
 
-  /* hash table of loaded modules */
+  /* relation for name -> PanelModule */
   GHashTable *modules;
 
-  /* a list with all the plugins */
+  /* all plugins in all windows */
   GSList     *plugins;
 
   /* if the factory contains the launcher plugin */
@@ -113,15 +114,12 @@ panel_module_factory_class_init (PanelModuleFactoryClass *klass)
 static void
 panel_module_factory_init (PanelModuleFactory *factory)
 {
-  /* initialize */
   factory->has_launcher = FALSE;
-
-  /* create hash tables */
   factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal,
                                             g_free, g_object_unref);
 
   /* load all the modules */
-  panel_module_factory_load_modules (factory);
+  panel_module_factory_load_modules (factory, TRUE);
 }
 
 
@@ -131,10 +129,7 @@ panel_module_factory_finalize (GObject *object)
 {
   PanelModuleFactory *factory = PANEL_MODULE_FACTORY (object);
 
-  /* destroy the hash table */
   g_hash_table_destroy (factory->modules);
-
-  /* free all the plugins */
   g_slist_free (factory->plugins);
 
   (*G_OBJECT_CLASS (panel_module_factory_parent_class)->finalize) (object);
@@ -143,7 +138,8 @@ panel_module_factory_finalize (GObject *object)
 
 
 static void
-panel_module_factory_load_modules (PanelModuleFactory *factory)
+panel_module_factory_load_modules (PanelModuleFactory *factory,
+                                   gboolean            first_time)
 {
   GDir        *dir;
   const gchar *name, *p;
@@ -161,13 +157,11 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
     {
       /* get name of the next file */
       name = g_dir_read_name (dir);
-
-      /* break when we reached the last file */
       if (G_UNLIKELY (name == NULL))
         break;
 
       /* continue if it's not a desktop file */
-      if (G_UNLIKELY (g_str_has_suffix (name, ".desktop") == FALSE))
+      if (!g_str_has_suffix (name, ".desktop"))
         continue;
 
       /* create the full .desktop filename */
@@ -181,8 +175,16 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
       internal_name = g_strndup (name, p - name);
 
       /* check if the modules name is already loaded */
-      if (G_UNLIKELY (g_hash_table_lookup (factory->modules, internal_name) != NULL))
-        goto already_loaded;
+      if (g_hash_table_lookup (factory->modules, internal_name) != NULL)
+        {
+          if (first_time)
+            {
+              g_debug ("Another plugin already registered with "
+                       "the internal name \"%s\".", internal_name);
+            }
+
+          goto exists;
+        }
 
       /* try to load the module */
       module = panel_module_new_from_desktop_file (filename,
@@ -195,23 +197,18 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
           g_hash_table_insert (factory->modules, internal_name, module);
 
           /* check if this is the launcher */
-          if (factory->has_launcher == FALSE
-              && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name))
-            factory->has_launcher = TRUE;
+          if (!factory->has_launcher)
+            factory->has_launcher = exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name);
         }
       else
         {
-          already_loaded:
-
-          /* cleanup */
+          exists:
           g_free (internal_name);
         }
 
-      /* cleanup */
       g_free (filename);
     }
 
-  /* close directory */
   g_dir_close (dir);
 }
 
@@ -229,10 +226,10 @@ panel_module_factory_modules_cleanup (gpointer key,
   panel_return_val_if_fail (PANEL_IS_MODULE (module), TRUE);
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), TRUE);
 
-  /* get whether the module is valid */
+  /* check if the executable/library still exists */
   remove_from_table = !panel_module_is_valid (module);
 
-  /* if we're going to remove this item, check if it's the launcher */
+  /* if we're going to remove this item, check if it is the launcher */
   if (remove_from_table
       && exo_str_is_equal (LAUNCHER_PLUGIN_NAME,
                            panel_module_get_name (module)))
@@ -255,7 +252,7 @@ panel_module_factory_remove_plugin (gpointer  user_data,
 
 
 
-static gboolean
+static inline gboolean
 panel_module_factory_unique_id_exists (PanelModuleFactory *factory,
                                        gint                unique_id)
 {
@@ -278,7 +275,6 @@ panel_module_factory_get (void)
 
   if (G_LIKELY (factory))
     {
-      /* return with an extra reference */
       g_object_ref (G_OBJECT (factory));
     }
   else
@@ -322,13 +318,8 @@ panel_module_factory_emit_unique_changed (PanelModule *module)
 
   panel_return_if_fail (PANEL_IS_MODULE (module));
 
-  /* get the module factory */
   factory = panel_module_factory_get ();
-
-  /* emit the signal */
   g_signal_emit (G_OBJECT (factory), factory_signals[UNIQUE_CHANGED], 0, module);
-
-  /* release the factory */
   g_object_unref (G_OBJECT (factory));
 
 }
@@ -340,10 +331,10 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
 
-  /* scan the resource directories again */
-  panel_module_factory_load_modules (factory);
+  /* add new modules to the hash table */
+  panel_module_factory_load_modules (factory, FALSE);
 
-  /* make sure the hash table is clean */
+  /* remove modules that are not found on the harddisk */
   g_hash_table_foreach_remove (factory->modules,
       panel_module_factory_modules_cleanup, factory);
 
@@ -374,7 +365,7 @@ panel_module_factory_get_plugins (PanelModuleFactory *factory,
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (plugin_name != NULL, NULL);
 
-  /* first assume a global plugin name is provided */
+  /* first assume a global plugin name is provided (ie. no name with id) */
   for (li = factory->plugins; li != NULL; li = li->next)
     {
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (li->data), NULL);
@@ -420,9 +411,7 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
   module = g_hash_table_lookup (factory->modules, name);
   if (G_UNLIKELY (module == NULL))
     {
-      /* show warning */
       g_debug ("Module \"%s\" not found in the factory", name);
-
       return NULL;
     }
 
