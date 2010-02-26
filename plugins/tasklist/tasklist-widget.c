@@ -843,6 +843,9 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   area_x = area.x;
   area_width = area.width;
 
+  /* useless but hides compiler warning */
+  w = h = x = y = rows = cols = 0;
+
   /* allocate all the children */
   for (li = tasklist->windows, i = 0; li != NULL; li = li->next)
     {

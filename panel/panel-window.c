@@ -1460,7 +1460,7 @@ panel_window_screen_force_update (PanelWindow *window)
 static void
 panel_window_screen_update_borders (PanelWindow *window)
 {
-  PanelBorders borders;
+  PanelBorders borders = PANEL_BORDER_NONE;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
