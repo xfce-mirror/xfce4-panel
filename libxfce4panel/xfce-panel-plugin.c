@@ -334,7 +334,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin::screen-position-changed
    * @plugin   : an #XfcePanelPlugin.
-   * @position : the new screen position of the panel.
+   * @position : the new #XfceScreenPosition of the panel.
    *
    * This signal is emmitted whenever the screen position of the panel
    * the @plugin is on changes. Plugins writers can for example use
@@ -346,8 +346,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, screen_position_changed),
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__INT,
-                  G_TYPE_NONE, 1, G_TYPE_INT);
+                  g_cclosure_marshal_VOID__ENUM,
+                  G_TYPE_NONE, 1, XFCE_TYPE_SCREEN_POSITION);
 
   /**
    * XfcePanelPlugin:name:

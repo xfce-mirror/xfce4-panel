@@ -24,11 +24,12 @@ G_BEGIN_DECLS
 
 #define LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 
+#include <libxfce4panel/libxfce4panel-enums.h>
+#include <libxfce4panel/libxfce4panel-enum-types.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-hvbox.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
-#include <libxfce4panel/xfce-panel-enums.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-image.h>
 

@@ -25,7 +25,7 @@
 #define __XFCE_PANEL_PLUGIN_H__
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-enums.h>
+#include <libxfce4panel/libxfce4panel-enums.h>
 
 G_BEGIN_DECLS
 
@@ -46,20 +46,20 @@ struct _XfcePanelPluginClass
   GtkEventBoxClass __parent__;
 
   /*< object oriented plugins >*/
-  void     (*construct)               (XfcePanelPlugin *plugin);
+  void     (*construct)               (XfcePanelPlugin    *plugin);
 
   /*< signals >*/
-  void     (*screen_position_changed) (XfcePanelPlugin *plugin,
-                                       gint             position);
-  gboolean (*size_changed)            (XfcePanelPlugin *plugin,
-                                       gint             size);
-  void     (*orientation_changed)     (XfcePanelPlugin *plugin,
-                                       GtkOrientation   orientation);
-  void     (*free_data)               (XfcePanelPlugin *plugin);
-  void     (*save)                    (XfcePanelPlugin *plugin);
-  void     (*about)                   (XfcePanelPlugin *plugin);
-  void     (*configure_plugin)        (XfcePanelPlugin *plugin);
-  void     (*removed)                 (XfcePanelPlugin *plugin);
+  void     (*screen_position_changed) (XfcePanelPlugin    *plugin,
+                                       XfceScreenPosition  position);
+  gboolean (*size_changed)            (XfcePanelPlugin    *plugin,
+                                       gint                size);
+  void     (*orientation_changed)     (XfcePanelPlugin    *plugin,
+                                       GtkOrientation      orientation);
+  void     (*free_data)               (XfcePanelPlugin    *plugin);
+  void     (*save)                    (XfcePanelPlugin    *plugin);
+  void     (*about)                   (XfcePanelPlugin    *plugin);
+  void     (*configure_plugin)        (XfcePanelPlugin    *plugin);
+  void     (*removed)                 (XfcePanelPlugin    *plugin);
 
   /*< private >*/
   void (*reserved1) (void);

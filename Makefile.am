@@ -1,8 +1,8 @@
 # $Id$
 
 SUBDIRS = \
-	common \
 	libxfce4panel \
+	common \
 	panel \
 	plugins \
 	po \

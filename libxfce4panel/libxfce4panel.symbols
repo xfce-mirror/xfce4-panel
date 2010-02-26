@@ -31,6 +31,13 @@
 #define IN_SOURCE(x) 1
 #endif
 
+/* libxfce4panel-enum-types.h */
+#if IN_HEADER(__LIBXFCE4PANEL_ENUM_TYPES_H__)
+#if IN_SOURCE(__LIBXFCE4PANEL_ENUM_TYPES_C__)
+xfce_screen_position_get_type G_GNUC_CONST
+#endif
+#endif
+
 /* xfce-arrow-button.h */
 #if IN_HEADER(__XFCE_ARROW_BUTTON_H__)
 #if IN_SOURCE(__XFCE_ARROW_BUTTON_C__)

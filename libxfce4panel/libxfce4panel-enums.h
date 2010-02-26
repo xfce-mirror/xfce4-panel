@@ -22,8 +22,10 @@
 #error "Only <libxfce4panel/libxfce4panel.h> can be included directly, this file may disappear or change contents"
 #endif
 
-#ifndef __XFCE_PANEL_ENUMS_H__
-#define __XFCE_PANEL_ENUMS_H__
+#ifndef __LIBXFCE4PANEL_ENUMS_H__
+#define __LIBXFCE4PANEL_ENUMS_H__
+
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 /**
@@ -171,4 +173,4 @@ XfceScreenPosition;
 
 G_END_DECLS
 
-#endif /* !__XFCE_PANEL_ENUMS_H__ */
+#endif /* !__LIBXFCE4PANEL_ENUMS_H__ */
