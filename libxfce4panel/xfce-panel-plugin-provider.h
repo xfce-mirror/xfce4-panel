@@ -34,12 +34,14 @@ typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 #define XFCE_IS_PANEL_PLUGIN_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER))
 #define XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProviderIface))
 
-/* provider contruct function */
-typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
-                                                         gint          id,
-                                                         const gchar  *display_name,
-                                                         gchar       **arguments,
-                                                         GdkScreen    *screen);
+/* plugin module functions */
+typedef XfcePanelPluginProvider *(*PluginConstructFunc)   (const gchar  *name,
+                                                           gint          unique_id,
+                                                           const gchar  *display_name,
+                                                           gchar       **arguments,
+                                                           GdkScreen    *screen);
+typedef GType                     (*PluginInitializeFunc) (GTypeModule  *module,
+                                                           gboolean     *make_resident);
 
 struct _XfcePanelPluginProviderIface
 {
@@ -115,6 +117,9 @@ void         xfce_panel_plugin_provider_show_configure      (XfcePanelPluginProv
 gboolean     xfce_panel_plugin_provider_get_show_about      (XfcePanelPluginProvider       *provider);
 
 void         xfce_panel_plugin_provider_show_about          (XfcePanelPluginProvider       *provider);
+
+void         xfce_panel_plugin_provider_register_types      (XfcePanelPluginProvider       *provider,
+                                                             GTypeModule                   *module);
 
 G_END_DECLS
 
