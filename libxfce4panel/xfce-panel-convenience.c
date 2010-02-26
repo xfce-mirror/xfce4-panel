@@ -40,8 +40,6 @@
  * to help developers of Xfce Panel plugins.
  **/
 
-
-
 /**
  * xfce_panel_create_button:
  *
@@ -58,8 +56,7 @@ xfce_panel_create_button (void)
   GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_DEFAULT | GTK_CAN_FOCUS);
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
   gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
-
-  gtk_widget_set_name (button, "xfce_panel_button");
+  gtk_widget_set_name (button, "xfce-panel-button");
 
   return button;
 }
@@ -82,8 +79,7 @@ xfce_panel_create_toggle_button (void)
   GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_DEFAULT | GTK_CAN_FOCUS);
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
   gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
-
-  gtk_widget_set_name (button, "xfce_panel_toggle_button");
+  gtk_widget_set_name (button, "xfce-panel-toggle-button");
 
   return button;
 }
