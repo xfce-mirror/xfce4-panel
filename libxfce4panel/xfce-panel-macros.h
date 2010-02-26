@@ -53,6 +53,14 @@ G_BEGIN_DECLS
 #define I_(string) (g_intern_static_string ((string)))
 #endif
 
+/* xfconf channel for plugins */
+#define XFCE_PANEL_PLUGIN_CHANNEL_NAME ("xfce4-panel")
+
+/* macro for opening an XfconfChannel for plugin */
+#define xfce_panel_plugin_xfconf_channel_new(plugin) \
+  xfconf_channel_new_with_property_base (XFCE_PANEL_PLUGIN_CHANNEL_NAME, \
+    xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)));
+
 /* this is defined in glib 2.13.0 */
 #ifndef G_PARAM_STATIC_STRINGS
 #define G_PARAM_STATIC_STRINGS (G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB)
