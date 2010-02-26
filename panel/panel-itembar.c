@@ -793,7 +793,7 @@ panel_itembar_insert (PanelItembar *itembar,
   panel_return_if_fail (widget->parent == NULL);
 
   /* allocate new child */
-  child = g_slice_new0 (PanelItembarChild);
+  child = g_slice_new (PanelItembarChild);
 
   /* set properties */
   child->widget = widget;

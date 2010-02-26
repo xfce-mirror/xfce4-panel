@@ -217,7 +217,7 @@ panel_plugin_external_realize (GtkWidget *widget)
     argc += g_strv_length (external->arguments);
 
   /* allocate argv */
-  argv = g_new0 (gchar *, argc);
+  argv = g_new (gchar *, argc);
 
   /* setup the basic argv */
   argv[0]  = LIBEXECDIR "/xfce4-panel-wrapper";
@@ -477,7 +477,7 @@ panel_plugin_external_set_property (PanelPluginExternal *external,
   else
     {
       /* queue the property */
-      data = g_slice_new0 (QueuedData);
+      data = g_slice_new (QueuedData);
       data->property = property;
       g_value_init (&data->value, G_VALUE_TYPE (value));
       g_value_copy (value, &data->value);
