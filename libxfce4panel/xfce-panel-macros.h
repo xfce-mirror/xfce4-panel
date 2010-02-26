@@ -72,48 +72,6 @@ G_BEGIN_DECLS
 #define G_PARAM_STATIC_STRINGS (G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB)
 #endif
 
-/* make api compatible with 4.6 */
-#ifndef XFCE_DISABLE_DEPRECATED
-
-/* panel plugin functio for the id, probably not used by anyone */
-#define xfce_panel_plugin_get_id(plugin) (g_strdup_printf ("%d", \
-    xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin))))
-
-#define xfce_panel_plugin_set_panel_hidden(plugin,hidden) \
-    xfce_panel_plugin_block_autohide (plugin, !hidden)
-
-/* convenience functions (deprecated) */
-#define xfce_create_panel_button        xfce_panel_create_button
-#define xfce_create_panel_toggle_button xfce_panel_create_toggle_button
-#define xfce_allow_panel_customization  xfce_panel_allow_customization
-
-/* register definitions (deprecated) */
-#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL            XFCE_PANEL_PLUGIN_REGISTER
-#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL            XFCE_PANEL_PLUGIN_REGISTER
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
-
-/* parameter flags (deprecated) */
-#define PANEL_PARAM_READABLE  G_PARAM_READABLE | PANEL_PARAM_STATIC_STRINGS
-#define PANEL_PARAM_READWRITE G_PARAM_READWRITE | PANEL_PARAM_STATIC_STRINGS
-#define PANEL_PARAM_WRITABLE  G_PARAM_WRITABLE | PANEL_PARAM_STATIC_STRINGS
-
-/* slice allocator (deprecated) */
-#define panel_slice_alloc(block_size)            (g_slice_alloc ((block_size)))
-#define panel_slice_alloc0(block_size)           (g_slice_alloc0 ((block_size)))
-#define panel_slice_free1(block_size, mem_block) G_STMT_START{ g_slice_free1 ((block_size), (mem_block)); }G_STMT_END
-#define panel_slice_new(type)                    (g_slice_new (type))
-#define panel_slice_new0(type)                   (g_slice_new0 (type))
-#define panel_slice_free(type, ptr)              G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
-
-/* debug macros (deprecated) */
-#define _panel_assert(expr)                  panel_assert (expr)
-#define _panel_assert_not_reached()          panel_assert_not_reached ()
-#define _panel_return_if_fail(expr)          panel_return_if_fail (expr)
-#define _panel_return_val_if_fail(expr, val) panel_return_val_if_fail (expr, (val))
-
-#endif /* !XFCE_DISABLE_DEPRECATED */
-
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_MACROS_H__ */
