@@ -657,7 +657,8 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
   /* get the default accelerator modifier mask */
   modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
 
-  if (event->button == 3 || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
+  if (event->button == 3
+      || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
     {
       /* get the panel menu */
       menu = xfce_panel_plugin_menu_get (plugin);
@@ -978,7 +979,7 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
-  if (G_LIKELY (xfce_panel_plugin_get_size (plugin) != size))
+  if (G_LIKELY (plugin->priv->size != size))
     {
       /* store new size */
       plugin->priv->size = size;
@@ -1006,7 +1007,7 @@ xfce_panel_plugin_set_orientation (XfcePanelPluginProvider *provider,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
-  if (G_LIKELY (xfce_panel_plugin_get_orientation (plugin) != orientation))
+  if (G_LIKELY (plugin->priv->orientation != orientation))
     {
       /* store new size */
       plugin->priv->orientation = orientation;
@@ -1030,7 +1031,7 @@ xfce_panel_plugin_set_screen_position (XfcePanelPluginProvider *provider,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
-  if (G_LIKELY (xfce_panel_plugin_get_screen_position (plugin) != screen_position))
+  if (G_LIKELY (plugin->priv->screen_position != screen_position))
     {
       /* store new screen position */
       plugin->priv->screen_position = screen_position;
