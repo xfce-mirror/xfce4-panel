@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 23:29+0200\n"
-"PO-Revision-Date: 2010-02-17 23:31+0200\n"
+"POT-Creation-Date: 2010-02-18 19:06+0200\n"
+"PO-Revision-Date: 2010-02-18 19:15+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -284,6 +284,14 @@ msgid "Internal name: %s-%d"
 msgstr "Sisäinen nimi: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
+msgid "Add a new panel"
+msgstr "Lisää uusi paneeli"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Add new item to this panel"
+msgstr "Lisää uusi osa paneeliin"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
 msgid ""
 "Alpha value of the panel background, between 0 (transparent) and 100 "
 "(opaque)."
@@ -291,54 +299,82 @@ msgstr ""
 "Paneelin taustan läpinäkyvyys arvojen 0 (läpinäkyvä) ja 100 (läpinäkymätön) "
 "väliltä."
 
-#: ../panel/panel-preferences-dialog.glade.h:2
+#: ../panel/panel-preferences-dialog.glade.h:4
 msgid "Automatically show and _hide the panel"
 msgstr "Näytä ja _piilota paneeli automaattisesti"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
+#: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Background"
 msgstr "Tausta"
 
-#: ../panel/panel-preferences-dialog.glade.h:4
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "C_ompositing"
 msgstr "K_omposointi"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "D_isplay"
 msgstr "_Näyttö"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Edit the currently selected item"
+msgstr "Muokkaa valittua kohdetta"
+
+#: ../panel/panel-preferences-dialog.glade.h:9
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Yleiset"
 
-#: ../panel/panel-preferences-dialog.glade.h:7
+#: ../panel/panel-preferences-dialog.glade.h:10
 msgid "Horizontal"
 msgstr "Vaaka"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Ite_ms"
 msgstr "Os_at"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "Pit_uus (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Measurements"
 msgstr "Mittasuhteet"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item down by one row"
+msgstr "Siirrä valittu kohde rivin verran alaspäin"
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item up by one row"
+msgstr "Siirrä valittu kohde rivin verran ylöspäin"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "O_utput:"
 msgstr "_Tulostus:"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid "Remove currently selected item"
+msgstr "Poista valittu kohde"
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Remove the currently selected panel"
+msgstr "Poista valittu paneeli"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Levitä paneeli useille näytöille."
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:22
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "Piilota paneelin kahvat ja lukitse sen sijainti."
+
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
@@ -346,51 +382,55 @@ msgstr ""
 "Näytä paneeli vain, kun hiiren osoitin on sen yllä. Toimii ainoastaan, jos "
 "paneeli sijaitsee ruudun reunalla."
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Show about information of the currently selected item"
+msgstr "Näytä valitun kohteen tiedot"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Span mo_nitors"
 msgstr "Le_vitä näytöille"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Transparency"
 msgstr "Läpinäkyvyys"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr "Läpinäkyvyys, kun osoitin on paneelin yllä."
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr "Läpinäkyvyys, kun osoitin ei ole paneelin yllä."
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Vertical"
 msgstr "Pysty"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Xfce Panel"
 msgstr "Xfce paneeli"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "_Alpha:"
 msgstr "_Alpha:"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "_Enter:"
 msgstr "_Yllä:"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "_Leave:"
 msgstr "_Poistuessa:"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Lock panel"
 msgstr "Lu_kitse paneeli"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "_Orientation:"
 msgstr "_Suunta:"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "_Size (pixels):"
 msgstr "K_oko kuvapisteinä:"
 
@@ -464,6 +504,7 @@ msgid "Analog"
 msgstr "Analoginen"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 #: ../plugins/pager/pager-dialog.glade.h:1
 #: ../plugins/separator/separator-dialog.glade.h:1
 #: ../plugins/systray/systray-dialog.glade.h:1
@@ -836,12 +877,49 @@ msgid "Open in Terminal"
 msgstr "Suorita päätteessä"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Kansiovalikko"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Näytä kansiopuu valikossa"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+"Luettele kaavat, joiden perusteella kansioissa näytettävät tiedostot "
+"valitaan. Kaavat on erotettava toisistaan puolipisteillä (esim. "
+"*.txt;*.doc)."
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+msgid "Filtering"
+msgstr "Suodatus"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+msgid "Select A Directory"
+msgstr "Valitse kansio"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+msgid "Show _hidden files"
+msgstr "Näytä piil_otiedostot"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "_Base Directory:"
+msgstr "Po_hjakansio:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "_File Pattern:"
+msgstr "_Tiedostokaava:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "_Icon:"
+msgstr "_Kuvake:"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
@@ -892,10 +970,6 @@ msgstr "Älä näytä työkalu_vihjeitä"
 msgid "East"
 msgstr "Itä"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Edit the currently selected item"
-msgstr "Muokkaa valittua kohdetta"
-
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
 msgstr "Painikkeen sisällä"
@@ -904,14 +978,6 @@ msgstr "Painikkeen sisällä"
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
 msgstr "Käynnistin"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-msgid "Move currently selected item down by one row"
-msgstr "Siirrä valittu kohde rivin verran alaspäin"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-msgid "Move currently selected item up by one row"
-msgstr "Siirrä valittu kohde rivin verran ylöspäin"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
@@ -1100,11 +1166,6 @@ msgstr "Aina"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
 msgstr "Pii_rrä ikkunan kehys, kun osoitin on painikkeen yllä"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
-msgstr "Suodatus"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
