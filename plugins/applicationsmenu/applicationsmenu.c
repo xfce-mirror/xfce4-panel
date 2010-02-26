@@ -428,7 +428,7 @@ applications_menu_plugin_configure_plugin_file_set (GtkFileChooserButton   *butt
 
 
 static void
-applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button,
+applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *button,
                                                         ApplicationsMenuPlugin *plugin)
 {
   GtkWidget *chooser;
@@ -447,8 +447,8 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *but
                                            GTK_RESPONSE_ACCEPT,
                                            GTK_RESPONSE_CANCEL, -1);
 
-  if (!exo_str_is_empty (plugin->button_icon))
-    exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), plugin->button_icon);
+  exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser),
+      exo_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon);
 
   if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
     {
@@ -469,10 +469,6 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkBuilder             *builder;
   GObject                *dialog, *object, *object2;
-  const gchar            *button_icon = plugin->button_icon;
-
-  if (exo_str_is_empty (button_icon))
-    button_icon = DEFAULT_ICON_NAME;
 
   /* setup the dialog */
   PANEL_BUILDER_LINK_4UI
@@ -506,7 +502,8 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = xfce_panel_image_new_from_source (button_icon);
+  plugin->dialog_icon = xfce_panel_image_new_from_source (
+      exo_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon);
   xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->dialog_icon), 48);
   gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
