@@ -68,7 +68,28 @@ struct _XfceClockDigital
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_LABEL);
+static GObjectClass *xfce_clock_digital_parent_class;
+
+
+
+GType
+xfce_clock_digital_get_type (void)
+{
+    static GType type = G_TYPE_INVALID;
+
+    if (G_UNLIKELY (type == G_TYPE_INVALID))
+    {
+        type = g_type_register_static_simple (GTK_TYPE_LABEL,
+                                              I_("XfceClockDigital"),
+                                              sizeof (XfceClockDigitalClass),
+                                              (GClassInitFunc) xfce_clock_digital_class_init,
+                                              sizeof (XfceClockDigital),
+                                              (GInstanceInitFunc) xfce_clock_digital_init,
+                                              0);
+    }
+
+    return type;
+}
 
 
 
@@ -76,6 +97,8 @@ static void
 xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
 {
     GObjectClass *gobject_class;
+
+    xfce_clock_digital_parent_class = g_type_class_peek_parent (klass);
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_clock_digital_finalize;
@@ -87,11 +110,8 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_DIGITAL_FORMAT,
-                                     g_param_spec_string ("digital-format",
-                                                          "digital-format",
-                                                          "digital-format",
-                                                          NULL,
-                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                     g_param_spec_string ("digital-format", "digital-format", "digital-format",
+                                                          NULL, G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 }
 
 
@@ -175,7 +195,7 @@ xfce_clock_digital_get_property (GObject    *object,
 GtkWidget *
 xfce_clock_digital_new (void)
 {
-    return g_object_new (XFCE_TYPE_CLOCK_DIGITAL, NULL);
+    return g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
 }
 
 
@@ -187,27 +207,20 @@ xfce_clock_digital_update (gpointer user_data)
     gchar            *string;
     struct tm         tm;
 
-    panel_return_val_if_fail (XFCE_IS_CLOCK_DIGITAL (clock), FALSE);
+    g_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (clock), FALSE);
+    g_return_val_if_fail (clock->format != NULL, FALSE);
 
-    if (clock->format != NULL)
-      {
-        /* get the local time */
-        xfce_clock_util_get_localtime (&tm);
+    /* get the local time */
+    xfce_clock_util_get_localtime (&tm);
 
-        /* get the string */
-        string = xfce_clock_util_strdup_strftime (clock->format, &tm);
+    /* get the string */
+    string = xfce_clock_util_strdup_strftime (clock->format, &tm);
 
-        /* set the new label */
-        gtk_label_set_markup (GTK_LABEL (clock), string);
+    /* set the new label */
+    gtk_label_set_markup (GTK_LABEL (clock), string);
 
-        /* cleanup */
-        g_free (string);
-      }
-    else
-      {
-        /* clear label */
-        gtk_label_set_text (GTK_LABEL (clock), NULL);
-      }
+    /* cleanup */
+    g_free (string);
 
     return TRUE;
 }

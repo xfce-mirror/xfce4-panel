@@ -25,20 +25,18 @@ G_BEGIN_DECLS
 typedef struct _XfceClockDigitalClass XfceClockDigitalClass;
 typedef struct _XfceClockDigital      XfceClockDigital;
 
-#define XFCE_TYPE_CLOCK_DIGITAL            (xfce_clock_digital_get_type ())
-#define XFCE_CLOCK_DIGITAL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_CLOCK_DIGITAL, XfceClockDigital))
-#define XFCE_CLOCK_DIGITAL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK_DIGITAL, XfceClockDigitalClass))
-#define XFCE_IS_CLOCK_DIGITAL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_CLOCK_DIGITAL))
-#define XFCE_IS_CLOCK_DIGITAL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK_DIGITAL))
-#define XFCE_CLOCK_DIGITAL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_CLOCK_DIGITAL, XfceClockDigitalClass))
+#define XFCE_CLOCK_TYPE_DIGITAL            (xfce_clock_digital_get_type ())
+#define XFCE_CLOCK_DIGITAL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_CLOCK_TYPE_DIGITAL, XfceClockDigital))
+#define XFCE_CLOCK_DIGITAL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_DIGITAL, XfceClockDigitalClass))
+#define XFCE_CLOCK_IS_DIGITAL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_CLOCK_TYPE_DIGITAL))
+#define XFCE_CLOCK_IS_DIGITAL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_DIGITAL))
+#define XFCE_CLOCK_DIGITAL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_DIGITAL, XfceClockDigitalClass))
 
-GType      xfce_clock_digital_get_type      (void) G_GNUC_CONST  G_GNUC_INTERNAL;
+GType        xfce_clock_digital_get_type (void) G_GNUC_CONST  G_GNUC_INTERNAL;
 
-void       xfce_clock_digital_register_type (XfcePanelModule *panel_module) G_GNUC_INTERNAL;
+GtkWidget   *xfce_clock_digital_new      (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
 
-GtkWidget *xfce_clock_digital_new           (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
-
-gboolean   xfce_clock_digital_update        (gpointer user_data) G_GNUC_INTERNAL;
+gboolean     xfce_clock_digital_update   (gpointer user_data) G_GNUC_INTERNAL;
 
 G_END_DECLS
 

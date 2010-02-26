@@ -43,6 +43,7 @@
 /* class functions */
 static void      xfce_clock_binary_class_init    (XfceClockBinaryClass *klass);
 static void      xfce_clock_binary_init          (XfceClockBinary      *clock);
+static void      xfce_clock_binary_finalize      (GObject              *object);
 static void      xfce_clock_binary_set_property  (GObject              *object,
                                                   guint                 prop_id,
                                                   const GValue         *value,
@@ -52,7 +53,7 @@ static void      xfce_clock_binary_get_property  (GObject              *object,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
 static void      xfce_clock_binary_size_request  (GtkWidget            *widget,
-                                                  GtkRequisition       *requisition);
+			                                      GtkRequisition       *requisition);
 static gboolean  xfce_clock_binary_expose_event  (GtkWidget            *widget,
                                                   GdkEventExpose       *event);
 
@@ -82,7 +83,28 @@ struct _XfceClockBinary
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockBinary, xfce_clock_binary, GTK_TYPE_IMAGE);
+static GObjectClass *xfce_clock_binary_parent_class;
+
+
+
+GType
+xfce_clock_binary_get_type (void)
+{
+    static GType type = G_TYPE_INVALID;
+
+    if (G_UNLIKELY (type == G_TYPE_INVALID))
+    {
+        type = g_type_register_static_simple (GTK_TYPE_IMAGE,
+                                              I_("XfceClockBinary"),
+                                              sizeof (XfceClockBinaryClass),
+                                              (GClassInitFunc) xfce_clock_binary_class_init,
+                                              sizeof (XfceClockBinary),
+                                              (GInstanceInitFunc) xfce_clock_binary_init,
+                                              0);
+    }
+
+    return type;
+}
 
 
 
@@ -92,7 +114,10 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
     GObjectClass   *gobject_class;
     GtkWidgetClass *gtkwidget_class;
 
+    xfce_clock_binary_parent_class = g_type_class_peek_parent (klass);
+
     gobject_class = G_OBJECT_CLASS (klass);
+    gobject_class->finalize = xfce_clock_binary_finalize;
     gobject_class->set_property = xfce_clock_binary_set_property;
     gobject_class->get_property = xfce_clock_binary_get_property;
 
@@ -105,22 +130,16 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_SECONDS,
-                                     g_param_spec_boolean ("show-seconds",
-                                                           "show-seconds",
-                                                           "show-seconds",
-                                                           FALSE,
-                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                     g_param_spec_boolean ("show-seconds", "show-seconds", "show-seconds",
+                                                           FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 
     /**
      * Whether this is a true binary clock
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_TRUE_BINARY,
-                                     g_param_spec_boolean ("true-binary",
-                                                           "true-binary",
-                                                           "true-binary",
-                                                           FALSE,
-                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                     g_param_spec_boolean ("true-binary", "true-binary", "true-binary",
+                                                           FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 }
 
 
@@ -131,6 +150,14 @@ xfce_clock_binary_init (XfceClockBinary *clock)
     /* init */
     clock->show_seconds = FALSE;
     clock->true_binary = FALSE;
+}
+
+
+
+static void
+xfce_clock_binary_finalize (GObject *object)
+{
+    (*G_OBJECT_CLASS (xfce_clock_binary_parent_class)->finalize) (object);
 }
 
 
@@ -189,20 +216,24 @@ xfce_clock_binary_get_property (GObject    *object,
 
 static void
 xfce_clock_binary_size_request (GtkWidget      *widget,
-                                GtkRequisition *requisition)
+			                    GtkRequisition *requisition)
 {
-    XfceClockBinary *clock = XFCE_CLOCK_BINARY (widget);
     gint             width, height;
     gdouble          ratio;
+    XfceClockBinary *clock = XFCE_CLOCK_BINARY (widget);
 
     /* get the current widget size */
     gtk_widget_get_size_request (widget, &width, &height);
 
     /* ratio of the clock */
     if (clock->true_binary)
+    {
         ratio = clock->show_seconds ? 2.0 : 3.0;
+    }
     else
+    {
         ratio = clock->show_seconds ? 1.5 : 1.0;
+    }
 
     /* set requisition based on the plugin orientation */
     if (width == -1)
@@ -229,13 +260,13 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
     gdouble          radius;
     gdouble          x, y;
     gint             i, j;
-    gint             decimal_tb[] = { 32, 16, 8, 4, 2, 1 };
-    gint             decimal_bcd[] = { 80, 40, 20, 10, 8, 4, 2, 1 };
+    gint             decimal_tb[] = {32, 16, 8, 4, 2, 1};
+    gint             decimal_bcd[] = {80, 40, 20, 10, 8, 4, 2, 1};
     cairo_t         *cr;
     GdkColor         active, inactive;
     struct tm        tm;
 
-    panel_return_val_if_fail (XFCE_IS_CLOCK_BINARY (clock), FALSE);
+    g_return_val_if_fail (XFCE_CLOCK_IS_BINARY (clock), FALSE);
 
     /* number of columns and cells */
     columns = clock->show_seconds ? 3.0 : 2.0;
@@ -346,7 +377,7 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
 GtkWidget *
 xfce_clock_binary_new (void)
 {
-    return g_object_new (XFCE_TYPE_CLOCK_BINARY, NULL);
+    return g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
 }
 
 

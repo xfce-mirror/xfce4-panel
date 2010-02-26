@@ -27,7 +27,6 @@ G_BEGIN_DECLS
 
 typedef struct _XfcePanelPluginProviderIface XfcePanelPluginProviderIface;
 typedef struct _XfcePanelPluginProvider      XfcePanelPluginProvider;
-typedef enum   _XfcePanelPluginMessage       XfcePanelPluginMessage;
 
 typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
                                                          const gchar  *id,
@@ -35,25 +34,7 @@ typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
                                                          gchar       **arguments,
                                                          GdkScreen    *screen);
 
-typedef void (*PluginRegisterTypesFunc) (XfcePanelModule *module);
 
-enum _XfcePanelPluginMessage
-{
-  MESSAGE_EXPAND_CHANGED,
-  MESSAGE_MOVE_ITEM,
-  MESSAGE_ADD_NEW_ITEMS,
-  MESSAGE_PANEL_PREFERENCES,
-  MESSAGE_SET_SIZE,
-  MESSAGE_SET_ORIENTATION,
-  MESSAGE_SET_SCREEN_POSITION,
-  MESSAGE_SET_PLUG_ID,
-  MESSAGE_SET_SENSITIVE,
-  MESSAGE_SET_BACKGROUND_ALPHA,
-  MESSAGE_SET_ACTIVE_PANEL,
-  MESSAGE_SAVE,
-  MESSAGE_REMOVE,
-  MESSAGE_QUIT
-};
 
 #define XFCE_TYPE_PANEL_PLUGIN_PROVIDER           (xfce_panel_plugin_provider_get_type ())
 #define XFCE_PANEL_PLUGIN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_PANEL_PLUGIN_PROVIDER, XfcePanelPluginProvider))

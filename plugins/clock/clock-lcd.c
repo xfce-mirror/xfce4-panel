@@ -36,6 +36,7 @@
 /* prototypes */
 static void      xfce_clock_lcd_class_init   (XfceClockLcdClass *klass);
 static void      xfce_clock_lcd_init         (XfceClockLcd      *clock);
+static void      xfce_clock_lcd_finalize     (GObject           *object);
 static void      xfce_clock_lcd_set_property (GObject           *object,
                                               guint              prop_id,
                                               const GValue      *value,
@@ -94,7 +95,28 @@ struct _XfceClockLcd
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockLcd, xfce_clock_lcd, GTK_TYPE_IMAGE);
+static GObjectClass *xfce_clock_lcd_parent_class;
+
+
+
+GType
+xfce_clock_lcd_get_type (void)
+{
+    static GType type = G_TYPE_INVALID;
+
+    if (G_UNLIKELY (type == G_TYPE_INVALID))
+    {
+        type = g_type_register_static_simple (GTK_TYPE_IMAGE,
+                                              I_("XfceClockLcd"),
+                                              sizeof (XfceClockLcdClass),
+                                              (GClassInitFunc) xfce_clock_lcd_class_init,
+                                              sizeof (XfceClockLcd),
+                                              (GInstanceInitFunc) xfce_clock_lcd_init,
+                                              0);
+    }
+
+    return type;
+}
 
 
 
@@ -104,7 +126,10 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
     GObjectClass   *gobject_class;
     GtkWidgetClass *gtkwidget_class;
 
+    xfce_clock_lcd_parent_class = g_type_class_peek_parent (klass);
+
     gobject_class = G_OBJECT_CLASS (klass);
+    gobject_class->finalize = xfce_clock_lcd_finalize;
     gobject_class->set_property = xfce_clock_lcd_set_property;
     gobject_class->get_property = xfce_clock_lcd_get_property;
 
@@ -117,44 +142,36 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_SECONDS,
-                                     g_param_spec_boolean ("show-seconds",
-                                                           "show-seconds",
-                                                           "show-seconds",
+                                     g_param_spec_boolean ("show-seconds", "show-seconds", "show-seconds",
                                                            FALSE,
-                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 
     /**
      * Whether we show a 24h clock
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_MILITARY,
-                                     g_param_spec_boolean ("show-military",
-                                                           "show-military",
-                                                           "show-military",
+                                     g_param_spec_boolean ("show-military", "show-military", "show-military",
                                                            FALSE,
-                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 
     /**
      * Whether we show am or pm
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_MERIDIEM,
-                                     g_param_spec_boolean ("show-meridiem",
-                                                           "show-meridiem",
-                                                           "show-meridiem",
+                                     g_param_spec_boolean ("show-meridiem", "show-meridiem", "show-meridiem",
                                                            TRUE,
-                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 
     /**
      * Whether to flash the time separators
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_FLASH_SEPARATORS,
-                                     g_param_spec_boolean ("flash-separators",
-                                                           "flash-separators",
-                                                           "flash-separators",
+                                     g_param_spec_boolean ("flash-separators", "flash-separators", "flash-separators",
                                                            FALSE,
-                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                                           G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 }
 
 
@@ -167,6 +184,14 @@ xfce_clock_lcd_init (XfceClockLcd *clock)
     clock->show_meridiem = FALSE;
     clock->show_military = TRUE;
     clock->flash_separators = FALSE;
+}
+
+
+
+static void
+xfce_clock_lcd_finalize (GObject *object)
+{
+    (*G_OBJECT_CLASS (xfce_clock_lcd_parent_class)->finalize) (object);
 }
 
 
@@ -266,6 +291,9 @@ xfce_clock_lcd_size_request (GtkWidget      *widget,
         requisition->height = height;
         requisition->width = height * ratio;
     }
+    
+    /* increase the width with 1 px for rounding errors */
+    requisition->width++;
 }
 
 
@@ -282,7 +310,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
     gdouble       ratio;
     struct tm     tm;
 
-    panel_return_val_if_fail (XFCE_IS_CLOCK_LCD (clock), FALSE);
+    g_return_val_if_fail (XFCE_CLOCK_IS_LCD (clock), FALSE);
 
     /* size of a digit should be a fraction of 10 */
     size = widget->allocation.height - widget->allocation.height % 10;
@@ -315,7 +343,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 
         if (ticks >= 10)
         {
-            /* draw the number and increase the offset*/
+            /* draw the number and increase the offset */
             offset_x = xfce_clock_lcd_draw_digit (cr, ticks >= 20 ? 2 : 1, size, offset_x, offset_y);
         }
 
@@ -435,7 +463,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
     gint    segment;
     gdouble x, y;
 
-    panel_return_val_if_fail (number >= 0 || number <= 11, offset_x);
+    g_return_val_if_fail (number >= 0 || number <= 11, offset_x);
 
     /* coordicates to draw for each segment */
     gdouble segments_x[][6] = { { 0.02, 0.48, 0.38, 0.12, -1.0, 0.00 },
@@ -508,7 +536,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
 GtkWidget *
 xfce_clock_lcd_new (void)
 {
-    return g_object_new (XFCE_TYPE_CLOCK_LCD, NULL);
+    return g_object_new (XFCE_CLOCK_TYPE_LCD, NULL);
 }
 
 

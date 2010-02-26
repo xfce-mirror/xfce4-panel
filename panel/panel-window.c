@@ -1303,8 +1303,6 @@ panel_window_working_area (PanelWindow  *window,
   /* get the root monitor geometry */
   gdk_screen_get_monitor_geometry (screen, monitor_num, dest);
 
-  g_message ("%d screens and %d monitors found", gdk_display_get_n_screens (gdk_display_get_default ()), gdk_screen_get_n_monitors (screen));
-
   if (window->span_monitors)
     {
       /* get the number of monitors */

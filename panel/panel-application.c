@@ -688,16 +688,26 @@ panel_application_save_xml_contents (PanelApplication *application)
   GtkWidget               *itembar;
   GList                   *children, *lp;
   XfcePanelPluginProvider *provider;
+  gchar                   *date_string;
+  GTimeVal                 stamp;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
 
   /* create string with some size to avoid reallocations */
   contents = g_string_sized_new (3072);
 
+  /* create time string */
+  g_get_current_time (&stamp);
+  date_string = g_time_val_to_iso8601 (&stamp);
+
   /* start xml file */
-  contents = g_string_append (contents, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                        "<!DOCTYPE config SYSTEM \"config.dtd\">\n"
-                                        "<panels>\n");
+  g_string_append_printf (contents, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                          "<!DOCTYPE config SYSTEM \"config.dtd\">\n"
+                          "<!-- Generated on %s -->\n"
+                          "<panels>\n", date_string);
+
+  /* cleanup */
+  g_free (date_string);
 
   /* store each panel */
   for (li = application->windows; li != NULL; li = li->next)
@@ -1061,7 +1071,7 @@ panel_application_add_new_item (PanelApplication  *application,
   panel_return_if_fail (plugin_name != NULL);
   panel_return_if_fail (g_slist_length (application->windows) > 0);
 
-  if (panel_module_factory_has_plugin (application->factory, plugin_name))
+  if (panel_module_factory_has_module (application->factory, plugin_name))
     {
       /* ask the user what panel to use if there is more then one */
       if (g_slist_length (application->windows) > 1)

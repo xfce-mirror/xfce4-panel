@@ -21,6 +21,10 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
@@ -32,6 +36,8 @@
 #include <panel/panel-application.h>
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-item-dialog.h>
+#include <panel/panel-module-factory.h>
+#include <panel/panel-marshal.h>
 
 
 
@@ -40,6 +46,12 @@ static void      panel_dbus_service_init          (PanelDBusService       *servi
 static void      panel_dbus_service_finalize      (GObject                *object);
 
 
+
+enum
+{
+  PROPERTY_CHANGED,
+  LAST_SIGNAL
+};
 
 struct _PanelDBusServiceClass
 {
@@ -59,6 +71,8 @@ struct _PanelDBusService
 /* shared boolean with main.c */
 gboolean dbus_quit_with_restart = FALSE;
 
+static guint dbus_service_signals[LAST_SIGNAL];
+
 
 
 G_DEFINE_TYPE (PanelDBusService, panel_dbus_service, G_TYPE_OBJECT);
@@ -74,7 +88,21 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = panel_dbus_service_finalize;
 
-  /* install the D-BUS info for our class */
+  /**
+   * Emited when a plugin property changes
+   **/
+  dbus_service_signals[PROPERTY_CHANGED] = 
+    g_signal_new (I_("property-changed"),
+                  G_TYPE_FROM_CLASS (gobject_class),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  panel_marshal_VOID__STRING_STRING_BOXED,
+                  G_TYPE_NONE, 3,
+                  G_TYPE_STRING,
+                  G_TYPE_STRING,
+                  G_TYPE_VALUE);
+
+  /* install the d-bus info for our class */
   dbus_g_object_type_install_info (G_TYPE_FROM_CLASS (klass), &dbus_glib_panel_dbus_service_object_info);
 }
 
@@ -232,12 +260,113 @@ panel_dbus_service_terminate (PanelDBusService  *service,
 
 
 
-GObject *
-panel_dbus_service_new (void)
+static gboolean
+panel_dbus_service_get_property (PanelDBusService *service,
+                                 const gchar      *plugin_id,
+                                 const gchar      *property,
+                                 const GValue     *value,
+                                 GError           *error)
 {
-  return g_object_new (PANEL_TYPE_DBUS_SERVICE, NULL);
+  g_message ("Plugin '%s' requested property '%s'", plugin_id, property);
+  
+  return TRUE;
 }
 
+
+
+static gboolean
+panel_dbus_service_set_property (PanelDBusService *service,
+                                 const gchar      *plugin_id,
+                                 const gchar      *property,
+                                 GValue           *value,
+                                 GError           *error)
+{
+  PanelModuleFactory      *factory;
+  XfcePanelPluginProvider *provider;
+  
+  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
+  panel_return_val_if_fail (plugin_id != NULL, FALSE);
+  panel_return_val_if_fail (property != NULL, FALSE);
+  
+  if (strcmp (plugin_id, "XfcePanel") == 0)
+    {
+      g_message ("Panel message: %s", property);
+    }
+  else
+    {
+      /* get the module factory */
+      factory = panel_module_factory_get ();
+      
+      /* get the plugin */
+      provider = panel_module_factory_get_plugin (factory, plugin_id);
+      if (G_LIKELY (provider))
+        {
+          if (strcmp ("Expand", property) == 0)
+            g_signal_emit_by_name (G_OBJECT (provider), "expand-changed", g_value_get_boolean (value));
+          else if (strcmp ("MoveItem", property) == 0)
+            g_signal_emit_by_name (G_OBJECT (provider), "move-item", 0);
+          else if (strcmp ("Remove", property) == 0)
+            gtk_widget_destroy (GTK_WIDGET (provider));
+        }
+      
+      /* release the factory */
+      g_object_unref (G_OBJECT (factory));
+    }
+  
+  return TRUE;
+}
+
+
+
+PanelDBusService *
+panel_dbus_service_get (void)
+{
+  static PanelDBusService *service = NULL;
+
+  if (G_LIKELY (service))
+    {
+      g_object_ref (G_OBJECT (service));
+    }
+  else
+    {
+      service = g_object_new (PANEL_TYPE_DBUS_SERVICE, NULL);
+      g_object_add_weak_pointer (G_OBJECT (service), (gpointer) &service);
+    }
+
+  return service;
+}
+
+
+
+void
+panel_dbus_service_set_plugin_property (const gchar  *plugin_id,
+                                        const gchar  *property,
+                                        const GValue *value)
+{
+  PanelDBusService *service;
+  GValue            dummy_value = { 0, };
+  
+  /* create dummy value */
+  if (value == NULL)
+    g_value_init (&dummy_value, G_TYPE_INT);
+  
+  /* get the dbus service */
+  service = panel_dbus_service_get ();
+  
+  g_message ("Set plugin '%s' property '%s'", plugin_id, property);
+
+  /* emit the signal */
+  g_signal_emit (G_OBJECT (service), dbus_service_signals[PROPERTY_CHANGED],
+                 0, plugin_id, property, value ? value : &dummy_value);
+
+  /* unset dummy value */
+  if (value == NULL)
+    g_value_unset (&dummy_value);
+
+  /* release */
+  g_object_unref (G_OBJECT (service));
+}
+                                        
 
 
 /* include the dbus glue generated by dbus-binding-tool */

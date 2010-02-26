@@ -59,8 +59,11 @@ struct _PanelModuleFactory
 {
   GObject  __parent__;
 
-  /* table of loaded modules */
+  /* hash table of loaded modules */
   GHashTable *modules;
+  
+  /* table table with created panel plugins */
+  GHashTable *plugins;
 
   /* if the factory contains the launcher plugin */
   guint       has_launcher : 1;
@@ -106,8 +109,9 @@ panel_module_factory_init (PanelModuleFactory *factory)
   /* initialize */
   factory->has_launcher = FALSE;
 
-  /* create hash table */
+  /* create hash tables */
   factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
+  factory->plugins = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   /* load all the modules */
   panel_module_factory_load_modules (factory);
@@ -120,8 +124,9 @@ panel_module_factory_finalize (GObject *object)
 {
   PanelModuleFactory *factory = PANEL_MODULE_FACTORY (object);
 
-  /* destroy the hash table */
+  /* destroy the hash tables */
   g_hash_table_destroy (factory->modules);
+  g_hash_table_destroy (factory->plugins);
 
   (*G_OBJECT_CLASS (panel_module_factory_parent_class)->finalize) (object);
 }
@@ -345,7 +350,7 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
 
 
 gboolean
-panel_module_factory_has_plugin (PanelModuleFactory *factory,
+panel_module_factory_has_module (PanelModuleFactory *factory,
                                  const gchar        *name)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), FALSE);
@@ -357,13 +362,26 @@ panel_module_factory_has_plugin (PanelModuleFactory *factory,
 
 
 XfcePanelPluginProvider *
+panel_module_factory_get_plugin (PanelModuleFactory *factory,
+                                 const gchar        *id)
+{
+  panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
+  panel_return_val_if_fail (id != NULL, NULL);
+  
+  return g_hash_table_lookup (factory->plugins, id);
+}
+
+
+
+XfcePanelPluginProvider *
 panel_module_factory_create_plugin (PanelModuleFactory  *factory,
                                     GdkScreen           *screen,
                                     const gchar         *name,
                                     const gchar         *id,
                                     gchar              **arguments)
 {
-  PanelModule *module;
+  PanelModule             *module;
+  XfcePanelPluginProvider *provider;
 
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
@@ -381,5 +399,11 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
     }
 
   /* create the new module */
-  return panel_module_create_plugin (module, screen, name, id, arguments);
+  provider = panel_module_create_plugin (module, screen, name, id, arguments);
+
+  /* insert plugin in the hash table */
+  if (G_LIKELY (provider))
+    g_hash_table_insert (factory->plugins, g_strdup (id), provider);
+
+  return provider;
 }

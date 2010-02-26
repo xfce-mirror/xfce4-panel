@@ -25,20 +25,18 @@ G_BEGIN_DECLS
 typedef struct _XfceClockBinaryClass XfceClockBinaryClass;
 typedef struct _XfceClockBinary      XfceClockBinary;
 
-#define XFCE_TYPE_CLOCK_BINARY            (xfce_clock_binary_get_type ())
-#define XFCE_CLOCK_BINARY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_CLOCK_BINARY, XfceClockBinary))
-#define XFCE_CLOCK_BINARY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK_BINARY, XfceClockBinaryClass))
-#define XFCE_IS_CLOCK_BINARY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_CLOCK_BINARY))
-#define XFCE_IS_CLOCK_BINARY_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK_BINARY))
-#define XFCE_CLOCK_BINARY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_CLOCK_BINARY, XfceClockBinaryClass))
+#define XFCE_CLOCK_TYPE_BINARY            (xfce_clock_binary_get_type ())
+#define XFCE_CLOCK_BINARY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_CLOCK_TYPE_BINARY, XfceClockBinary))
+#define XFCE_CLOCK_BINARY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_BINARY, XfceClockBinaryClass))
+#define XFCE_CLOCK_IS_BINARY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_CLOCK_TYPE_BINARY))
+#define XFCE_CLOCK_IS_BINARY_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_BINARY))
+#define XFCE_CLOCK_BINARY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_BINARY, XfceClockBinaryClass))
 
-GType      xfce_clock_binary_get_type      (void) G_GNUC_CONST  G_GNUC_INTERNAL;
+GType      xfce_clock_binary_get_type (void) G_GNUC_CONST  G_GNUC_INTERNAL;
 
-void       xfce_clock_binary_register_type (XfcePanelModule *panel_module) G_GNUC_INTERNAL;
+GtkWidget *xfce_clock_binary_new      (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
 
-GtkWidget *xfce_clock_binary_new           (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
-
-gboolean   xfce_clock_binary_update        (gpointer user_data) G_GNUC_INTERNAL;
+gboolean   xfce_clock_binary_update   (gpointer user_data) G_GNUC_INTERNAL;
 
 G_END_DECLS
 

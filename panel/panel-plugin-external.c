@@ -34,6 +34,7 @@
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-window.h>
 #include <panel/panel-glue.h>
+#include <panel/panel-dbus-service.h>
 
 
 
@@ -43,14 +44,7 @@ static void         panel_plugin_external_provider_init       (XfcePanelPluginPr
 static void         panel_plugin_external_finalize            (GObject                      *object);
 static void         panel_plugin_external_realize             (GtkWidget                    *widget);
 static void         panel_plugin_external_unrealize           (GtkWidget                    *widget);
-static gboolean     panel_plugin_external_client_event        (GtkWidget                    *widget,
-                                                               GdkEventClient               *event);
 static gboolean     panel_plugin_external_plug_removed        (GtkSocket                    *socket);
-static void         panel_plugin_external_send_message        (PanelPluginExternal          *external,
-                                                               XfcePanelPluginMessage        message,
-                                                               glong                         value);
-static void         panel_plugin_external_free_queue          (PanelPluginExternal          *external);
-static void         panel_plugin_external_flush_queue         (PanelPluginExternal          *external);
 static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider      *provider);
 static const gchar *panel_plugin_external_get_id              (XfcePanelPluginProvider      *provider);
 static void         panel_plugin_external_set_size            (XfcePanelPluginProvider      *provider,
@@ -81,22 +75,9 @@ struct _PanelPluginExternal
   /* the module */
   PanelModule      *module;
 
-  /* the plug window id */
-  GdkNativeWindow   plug_window_id;
-
-  /* message queue */
-  GSList           *queue;
-
   /* process pid */
   GPid              pid;
 };
-
-typedef struct
-{
-  XfcePanelPluginMessage message;
-  glong                  value;
-}
-QueueData;
 
 
 
@@ -122,7 +103,6 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->realize = panel_plugin_external_realize;
   gtkwidget_class->unrealize = panel_plugin_external_unrealize;
-  gtkwidget_class->client_event = panel_plugin_external_client_event;
 
   gtksocket_class = GTK_SOCKET_CLASS (klass);
   gtksocket_class->plug_removed = panel_plugin_external_plug_removed;
@@ -139,8 +119,6 @@ panel_plugin_external_init (PanelPluginExternal *external)
   /* initialize */
   external->id = NULL;
   external->module = NULL;
-  external->plug_window_id = 0;
-  external->queue = NULL;
   external->arguments = NULL;
   external->pid = 0;
 
@@ -172,9 +150,6 @@ panel_plugin_external_finalize (GObject *object)
   g_free (external->id);
   g_strfreev (external->arguments);
 
-  /* free the queue if needed */
-  panel_plugin_external_free_queue (external);
-
   /* release the module */
   g_object_unref (G_OBJECT (external->module));
 
@@ -192,6 +167,7 @@ panel_plugin_external_realize (GtkWidget *widget)
   gboolean              succeed;
   gchar                *socket_id;
   gint                  i, argc = 12;
+  GdkScreen            *screen;
 
   /* realize the socket first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->realize) (widget);
@@ -226,9 +202,12 @@ panel_plugin_external_realize (GtkWidget *widget)
 
   /* close the argv */
   argv[argc - 1] = NULL;
+  
+  /* get the widget screen */
+  screen = gtk_widget_get_screen (widget);
 
   /* spawn the proccess */
-  succeed = gdk_spawn_on_screen (gdk_screen_get_default (), NULL, argv, NULL, 0, NULL, NULL, &(external->pid), &error);
+  succeed = gdk_spawn_on_screen (screen, NULL, argv, NULL, 0, NULL, NULL, &external->pid, &error);
 
   /* cleanup */
   g_free (socket_id);
@@ -250,86 +229,12 @@ panel_plugin_external_realize (GtkWidget *widget)
 static void
 panel_plugin_external_unrealize (GtkWidget *widget)
 {
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
+  //PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
 
   /* send message to quit the wrapper */
-  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (external), MESSAGE_QUIT, 0);
-
-  /* don't send or queue messages */
-  external->plug_window_id = -1;
+  /* TODO quit */
 
   return (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->unrealize) (widget);
-}
-
-
-
-static gboolean
-panel_plugin_external_client_event (GtkWidget      *widget,
-                                    GdkEventClient *event)
-{
-  PanelPluginExternal    *external = PANEL_PLUGIN_EXTERNAL (widget);
-  XfcePanelPluginMessage  message;
-  glong                   value;
-
-  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget), FALSE);
-
-  /* check if this even is for us */
-  if (G_LIKELY (event->message_type == message_atom))
-    {
-      /* get the event message and value */
-      message = event->data.l[0];
-      value = event->data.l[1];
-
-      /* handle the message */
-      switch (message)
-        {
-          case MESSAGE_EXPAND_CHANGED:
-            /* emit the expand changed signal */
-            g_signal_emit_by_name (G_OBJECT (external), "expand-changed", !!(value == 1));
-            break;
-
-          case MESSAGE_MOVE_ITEM:
-            /* start a plugin dnd */
-            g_signal_emit_by_name (G_OBJECT (external), "move-item", 0);
-            break;
-
-          case MESSAGE_ADD_NEW_ITEMS:
-            /* show the add new items dialog */
-            g_signal_emit_by_name (G_OBJECT (external), "add-new-items", 0);
-            break;
-
-          case MESSAGE_PANEL_PREFERENCES:
-            /* show the panel preferences dialog */
-            g_signal_emit_by_name (G_OBJECT (external), "panel-preferences", 0, gtk_widget_get_toplevel (widget));
-            break;
-
-          case MESSAGE_REMOVE:
-            /* plugin properly removed, destroy the socket */
-            gtk_widget_destroy (widget);
-            break;
-
-          case MESSAGE_SET_PLUG_ID:
-            /* set the plug window id */
-            external->plug_window_id = value;
-
-            /* flush the message queue */
-            panel_plugin_external_flush_queue (external);
-            break;
-
-          default:
-            g_message ("The panel received an unkown message: %d", message);
-            break;
-        }
-
-      /* we handled the event */
-      return TRUE;
-    }
-
-  /* propagate event */
-  if (GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->client_event)
-    return (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->client_event) (widget, event);
-  else
-    return FALSE;
 }
 
 
@@ -357,9 +262,6 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
-  /* don't queue messages */
-  external->plug_window_id = -1;
-
   /* reset the pid */
   external->pid = 0;
 
@@ -381,9 +283,6 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
       /* debug check */
       panel_return_val_if_fail (PANEL_IS_WINDOW (window), TRUE);
-
-      /* queue messages again */
-      external->plug_window_id = 0;
 
       /* send panel information to the plugin */
       panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (external));
@@ -423,102 +322,6 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
 
 
-static void
-panel_plugin_external_send_message (PanelPluginExternal    *external,
-                                    XfcePanelPluginMessage  message,
-                                    glong                   value)
-{
-  GdkEventClient  event;
-  QueueData      *data;
-
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-
-  if (G_LIKELY (external->plug_window_id > 0))
-    {
-      /* setup the event */
-      event.type = GDK_CLIENT_EVENT;
-      event.window = GTK_WIDGET (external)->window;
-      event.send_event = TRUE;
-      event.message_type = message_atom;
-      event.data_format = 32;
-      event.data.l[0] = message;
-      event.data.l[1] = value;
-      event.data.l[2] = 0;
-
-      /* don't crash on x errors */
-      gdk_error_trap_push ();
-
-      /* send the event to the wrapper */
-      gdk_event_send_client_message_for_display (gdk_display_get_default (), (GdkEvent *) &event, external->plug_window_id);
-
-      /* flush the x output buffer */
-      gdk_flush ();
-
-      /* pop the push */
-      gdk_error_trap_pop ();
-    }
-  else if (external->plug_window_id == 0)
-    {
-      /* setup queue data */
-      data = g_slice_new0 (QueueData);
-      data->message = message;
-      data->value = value;
-
-      /* add the message to the list */
-      external->queue = g_slist_append (external->queue, data);
-    }
-}
-
-
-
-static void
-panel_plugin_external_free_queue (PanelPluginExternal *external)
-{
-  GSList *li;
-
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-
-  if (external->queue != NULL)
-    {
-      /* cleanup all the queue data */
-      for (li = external->queue; li != NULL; li = li->next)
-        g_slice_free (QueueData, li->data);
-
-      /* free the list */
-      g_slist_free (external->queue);
-
-      /* set to null */
-      external->queue = NULL;
-    }
-}
-
-
-
-static void
-panel_plugin_external_flush_queue (PanelPluginExternal *external)
-{
-  GSList    *li;
-  QueueData *data;
-
-  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-  panel_return_if_fail (external->plug_window_id != 0);
-
-  if (G_LIKELY (external->queue != NULL))
-    {
-      /* send all messages in the queue */
-      for (li = external->queue; li != NULL; li = li->next)
-        {
-          data = li->data;
-          panel_plugin_external_send_message (external, data->message, data->value);
-        }
-
-      /* free the queue */
-      panel_plugin_external_free_queue (external);
-    }
-}
-
-
-
 static const gchar *
 panel_plugin_external_get_name (XfcePanelPluginProvider *provider)
 {
@@ -545,11 +348,20 @@ static void
 panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
                                 gint                     size)
 {
+  GValue value = { 0, };
+  
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  /* send the signal to the wrapper */
-  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SET_SIZE, size);
+  
+  /* set the size */
+  g_value_init (&value, G_TYPE_INT);
+  g_value_set_int (&value, size);
+  
+  /* send the value */
+  panel_dbus_service_set_plugin_property (PANEL_PLUGIN_EXTERNAL (provider)->id, "Size", &value);
+  
+  /* unset */
+  g_value_unset (&value);
 }
 
 
@@ -558,11 +370,20 @@ static void
 panel_plugin_external_set_orientation (XfcePanelPluginProvider *provider,
                                        GtkOrientation           orientation)
 {
+  GValue value = { 0, };
+  
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* send the signal to the wrapper */
-  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SET_ORIENTATION, orientation);
+  /* set the orientation */
+  g_value_init (&value, G_TYPE_UINT);
+  g_value_set_uint (&value, orientation);
+
+  /* send the value */
+  panel_dbus_service_set_plugin_property (PANEL_PLUGIN_EXTERNAL (provider)->id, "Orientation", &value);
+
+  /* unset */
+  g_value_unset (&value);
 }
 
 
@@ -571,11 +392,20 @@ static void
 panel_plugin_external_set_screen_position (XfcePanelPluginProvider *provider,
                                            XfceScreenPosition       screen_position)
 {
+  GValue value = { 0, };
+  
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* send the signal to the wrapper */
-  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SET_SCREEN_POSITION, screen_position);
+  /* set the orientation */
+  g_value_init (&value, G_TYPE_UINT);
+  g_value_set_uint (&value, screen_position);
+
+  /* send the value */
+  panel_dbus_service_set_plugin_property (PANEL_PLUGIN_EXTERNAL (provider)->id, "ScreenPosition", &value);
+
+  /* unset */
+  g_value_unset (&value);
 }
 
 
@@ -586,8 +416,8 @@ panel_plugin_external_save (XfcePanelPluginProvider *provider)
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* send the signal to the wrapper */
-  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (provider), MESSAGE_SAVE, 0);
+  /* send signal to wrapper */
+  panel_dbus_service_set_plugin_property (PANEL_PLUGIN_EXTERNAL (provider)->id, "Save", NULL);
 }
 
 
@@ -595,10 +425,19 @@ panel_plugin_external_save (XfcePanelPluginProvider *provider)
 static void
 panel_plugin_external_set_sensitive (PanelPluginExternal *external)
 {
+  GValue value = { 0, };
+  
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+  
+  /* set the boolean */
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  g_value_set_boolean (&value, GTK_WIDGET_IS_SENSITIVE (external));
 
   /* send message */
-  panel_plugin_external_send_message (external, MESSAGE_SET_SENSITIVE, GTK_WIDGET_IS_SENSITIVE (external) ? 1 : 0);
+  panel_dbus_service_set_plugin_property (external->id, "Sensitive", &value);
+  
+  /* unset */
+  g_value_unset (&value);
 }
 
 
@@ -632,11 +471,19 @@ void
 panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
                                             gint                 percentage)
 {
+  GValue value = { 0, };
+  
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (external));
 
-  /* send the signal to the wrapper */
-  panel_plugin_external_send_message (external, MESSAGE_SET_BACKGROUND_ALPHA, percentage);
+  /* set the boolean */
+  g_value_init (&value, G_TYPE_INT);
+  g_value_set_int (&value, percentage);
+
+  /* send message */
+  panel_dbus_service_set_plugin_property (external->id, "BackgroundAlpha", &value);
+  
+  /* unset */
+  g_value_unset (&value);
 }
 
 
@@ -645,9 +492,17 @@ void
 panel_plugin_external_set_active_panel (PanelPluginExternal *external,
                                         gboolean             active)
 {
+  GValue value = { 0, };
+  
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (external));
 
-  /* send the signal to the wrapper */
-  panel_plugin_external_send_message (external, MESSAGE_SET_ACTIVE_PANEL, active ? 1 : 0);
+  /* set the boolean */
+  g_value_init (&value, G_TYPE_BOOLEAN);
+  g_value_set_boolean (&value, active);
+
+  /* send message */
+  panel_dbus_service_set_plugin_property (external->id, "ActivePanel", &value);
+  
+  /* unset */
+  g_value_unset (&value);
 }

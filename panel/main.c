@@ -92,7 +92,7 @@ main (gint argc, gchar **argv)
 {
   PanelApplication *application;
   GError           *error = NULL;
-  GObject          *dbus_service;
+  PanelDBusService *dbus_service;
   extern gboolean   dbus_quit_with_restart;
   gboolean          result;
   guint             i;
@@ -198,7 +198,7 @@ main (gint argc, gchar **argv)
   application = panel_application_get ();
 
   /* create dbus service */
-  dbus_service = panel_dbus_service_new ();
+  dbus_service = panel_dbus_service_get ();
 
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
@@ -223,7 +223,7 @@ main (gint argc, gchar **argv)
   if (dbus_quit_with_restart)
     {
       /* message */
-      g_message (_("Restarting..."));
+      g_print ("%s\n\n", _("Restarting the Xfce Panel..."));
 
       /* spawn ourselfs again */
       g_spawn_command_line_async (argv[0], NULL);

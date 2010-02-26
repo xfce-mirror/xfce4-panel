@@ -47,6 +47,7 @@
 /* prototypes */
 static void      xfce_clock_analog_class_init    (XfceClockAnalogClass *klass);
 static void      xfce_clock_analog_init          (XfceClockAnalog      *clock);
+static void      xfce_clock_analog_finalize      (GObject              *object);
 static void      xfce_clock_analog_set_property  (GObject              *object,
                                                   guint                 prop_id,
                                                   const GValue         *value,
@@ -56,7 +57,7 @@ static void      xfce_clock_analog_get_property  (GObject              *object,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
 static void      xfce_clock_analog_size_request  (GtkWidget            *widget,
-                                                  GtkRequisition       *requisition);
+			                                      GtkRequisition       *requisition);
 static gboolean  xfce_clock_analog_expose_event  (GtkWidget            *widget,
                                                   GdkEventExpose       *event);
 static void      xfce_clock_analog_draw_ticks    (cairo_t              *cr,
@@ -94,7 +95,28 @@ struct _XfceClockAnalog
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceClockAnalog, xfce_clock_analog, GTK_TYPE_IMAGE);
+static GObjectClass *xfce_clock_analog_parent_class;
+
+
+
+GType
+xfce_clock_analog_get_type (void)
+{
+    static GType type = G_TYPE_INVALID;
+
+    if (G_UNLIKELY (type == G_TYPE_INVALID))
+    {
+        type = g_type_register_static_simple (GTK_TYPE_IMAGE,
+                                              I_("XfceClockAnalog"),
+                                              sizeof (XfceClockAnalogClass),
+                                              (GClassInitFunc) xfce_clock_analog_class_init,
+                                              sizeof (XfceClockAnalog),
+                                              (GInstanceInitFunc) xfce_clock_analog_init,
+                                              0);
+    }
+
+    return type;
+}
 
 
 
@@ -104,7 +126,10 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
     GObjectClass   *gobject_class;
     GtkWidgetClass *gtkwidget_class;
 
+    xfce_clock_analog_parent_class = g_type_class_peek_parent (klass);
+
     gobject_class = G_OBJECT_CLASS (klass);
+    gobject_class->finalize = xfce_clock_analog_finalize;
     gobject_class->set_property = xfce_clock_analog_set_property;
     gobject_class->get_property = xfce_clock_analog_get_property;
 
@@ -117,11 +142,8 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
      **/
     g_object_class_install_property (gobject_class,
                                      PROP_SHOW_SECONDS,
-                                     g_param_spec_boolean ("show-seconds",
-                                                           "show-seconds",
-                                                           "show-seconds",
-                                                           FALSE,
-                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                     g_param_spec_boolean ("show-seconds", "show-seconds", "show-seconds",
+                                                           FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
 }
 
 
@@ -131,6 +153,14 @@ xfce_clock_analog_init (XfceClockAnalog *clock)
 {
     /* init */
     clock->show_seconds = FALSE;
+}
+
+
+
+static void
+xfce_clock_analog_finalize (GObject *object)
+{
+    (*G_OBJECT_CLASS (xfce_clock_analog_parent_class)->finalize) (object);
 }
 
 
@@ -181,7 +211,7 @@ xfce_clock_analog_get_property (GObject    *object,
 
 static void
 xfce_clock_analog_size_request  (GtkWidget      *widget,
-                                 GtkRequisition *requisition)
+			                     GtkRequisition *requisition)
 {
     gint width, height;
 
@@ -204,7 +234,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
     cairo_t         *cr;
     struct tm        tm;
 
-    panel_return_val_if_fail (XFCE_IS_CLOCK_ANALOG (clock), FALSE);
+    g_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (clock), FALSE);
 
     /* get center of the widget and the radius */
     xc = (widget->allocation.width / 2.0);
@@ -329,7 +359,7 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
 GtkWidget *
 xfce_clock_analog_new (void)
 {
-    return g_object_new (XFCE_TYPE_CLOCK_ANALOG, NULL);
+    return g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
 }
 
 

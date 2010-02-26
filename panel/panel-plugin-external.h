@@ -37,13 +37,18 @@ typedef struct _PanelPluginExternal      PanelPluginExternal;
 #define PANEL_IS_PLUGIN_EXTERNAL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_PLUGIN_EXTERNAL))
 #define PANEL_PLUGIN_EXTERNAL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternalClass))
 
-GType panel_plugin_external_get_type (void) G_GNUC_CONST;
+GType                    panel_plugin_external_get_type             (void) G_GNUC_CONST;
 
-XfcePanelPluginProvider *panel_plugin_external_new (PanelModule *module, const gchar *name, const gchar *id, gchar **arguments);
+XfcePanelPluginProvider *panel_plugin_external_new                  (PanelModule          *module, 
+                                                                     const gchar          *name, 
+                                                                     const gchar          *id, 
+                                                                     gchar               **arguments);
 
-void panel_plugin_external_set_background_alpha (PanelPluginExternal *external, gint percentage);
+void                     panel_plugin_external_set_background_alpha (PanelPluginExternal  *external, 
+                                                                     gint                  percentage);
 
-void panel_plugin_external_set_active_panel (PanelPluginExternal *external, gboolean active);
+void                     panel_plugin_external_set_active_panel     (PanelPluginExternal  *external,  
+                                                                     gboolean              active);
 
 G_END_DECLS
 

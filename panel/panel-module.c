@@ -153,8 +153,7 @@ panel_module_finalize (GObject *object)
 static gboolean
 panel_module_load (GTypeModule *type_module)
 {
-  PanelModule             *module = PANEL_MODULE (type_module);
-  PluginRegisterTypesFunc  register_func;
+  PanelModule *module = PANEL_MODULE (type_module);
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), FALSE);
@@ -178,10 +177,6 @@ panel_module_load (GTypeModule *type_module)
 
       return FALSE;
     }
-
-  /* run the type register function if available */
-  if (g_module_symbol (module->library, "xfce_panel_plugin_register_types", (gpointer) &register_func))
-    (*register_func) (type_module);
 
   return TRUE;
 }
@@ -303,7 +298,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
       else if (xfce_rc_has_entry (rc, "X-XFCE-Exec"))
         {
           /* old external plugin, not usable anymore */
-          //g_message ("The plugin from desktop file \"%s\" should be ported to an internal plugin", filename);
+          g_message ("The plugin from desktop file \"%s\" should be ported to an internal plugin", filename);
         }
       else
         {

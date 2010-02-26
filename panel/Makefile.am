@@ -16,7 +16,10 @@ bin_PROGRAMS = 									\
 	xfce4-panel
 	
 xfce4_panel_built_sources =							\
-	panel-dbus-service-infos.h
+	panel-dbus-service-infos.h						\
+	panel-dbus-client-infos.h \
+	panel-marshal.h								\
+	panel-marshal.c
 
 xfce4_panel_SOURCES =								\
 	$(xfce4_panel_built_sources)						\
@@ -76,17 +79,28 @@ xfce4_panel_DEPENDENCIES =							\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
 
 if MAINTAINER_MODE
+
+panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
+	dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $< > $@
+
+panel-dbus-client-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
+	dbus-binding-tool --mode=glib-client $< > $@
+
+panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
+	glib-genmarshal --header --prefix=panel_marshal $< > $@
+
+panel-marshal.c: $(srcdir)/panel-marshal.list Makefile
+	glib-genmarshal --body --prefix=panel_marshal $< > $@
+
 DISTCLEANFILES =								\
 	$(xfce4_panel_built_sources)
 
 BUILT_SOURCES =									\
 	$(xfce4_panel_built_sources)
-	
-panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
-	dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $(srcdir)/panel-dbus-service-infos.xml > panel-dbus-service-infos.h
 endif
 
 EXTRA_DIST =									\
-	panel-dbus-service-infos.xml
+	panel-dbus-service-infos.xml						\
+	panel-marshal.list
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

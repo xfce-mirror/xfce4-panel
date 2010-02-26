@@ -692,32 +692,6 @@ xfce_tray_manager_handle_cancel_message (XfceTrayManager     *manager,
 }
 #endif
 
-void
-_set_source_rgba (cairo_t  *cr,
-                  GdkColor *color,
-                  gdouble   alpha)
-{
-  panel_return_if_fail (alpha >= 0.00 && alpha <= 1.00);
-
-  if (alpha == 1.00)
-    {
-      /* set normal source color */
-      cairo_set_source_rgb (cr,
-                            color->red / 65535.00,
-                            color->green / 65535.00,
-                            color->blue / 65535.00);
-    }
-  else
-    {
-      /* set source color with alpha */
-      cairo_set_source_rgba (cr,
-                             color->red / 65535.00,
-                             color->green / 65535.00,
-                             color->blue / 65535.00,
-                             alpha);
-    }
-}
-
 
 
 static void
@@ -736,7 +710,6 @@ xfce_tray_manager_handle_dock_request (XfceTrayManager     *manager,
 
     /* allow applications to draw on this widget */
     gtk_widget_set_app_paintable (socket, TRUE);
-    gtk_widget_set_double_buffered (socket, FALSE);
 
     /* allocate and set the xwindow */
     xwindow = g_new (Window, 1);

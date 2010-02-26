@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2007-2008 Nick Schermer <nick@xfce.org>
+ * Copyright (c) 2007 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -26,100 +26,79 @@
 
 G_BEGIN_DECLS
 
-/* clock intervals in ms */
 #define CLOCK_INTERVAL_SECOND (1000)
-#define CLOCK_INTERVAL_MINUTE (60 * CLOCK_INTERVAL_SECOND)
-#define CLOCK_INTERVAL_HOUR   (60 * CLOCK_INTERVAL_MINUTE)
+#define CLOCK_INTERVAL_MINUTE (60 * 1000)
+#define CLOCK_INTERVAL_HOUR   (3600 * 1000)
 
-/* default values */
 #define BUFFER_SIZE            256
 #define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
 #define DEFAULT_DIGITAL_FORMAT "%R"
 
-/* allow timer grouping to save resources */
-#if GLIB_CHECK_VERSION (2,14,0)
-#define clock_timeout_add(interval, function, data) \
-    g_timeout_add_seconds ((interval) / 1000, function, data)
-#else
-#define clock_timeout_add(interval, function, data) \
-    g_timeout_add (interval, function, data)
-#endif
 
 
-typedef struct _XfceClockClass XfceClockClass;
-typedef struct _XfceClock      XfceClock;
-typedef enum   _XfceClockMode  XfceClockMode;
+typedef struct _ClockPlugin     ClockPlugin;
+typedef enum   _ClockPluginMode ClockPluginMode;
 
-#define XFCE_TYPE_CLOCK            (xfce_clock_get_type ())
-#define XFCE_CLOCK(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_CLOCK, XfceClock))
-#define XFCE_CLOCK_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK, XfceClockClass))
-#define XFCE_IS_CLOCK(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_CLOCK))
-#define XFCE_IS_CLOCK_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_CLOCK))
-#define XFCE_CLOCK_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_CLOCK, XfceClockClass))
-
-enum _XfceClockMode
+enum _ClockPluginMode
 {
-    XFCE_CLOCK_MODE_ANALOG = 0,
-    XFCE_CLOCK_MODE_BINARY,
-    XFCE_CLOCK_MODE_DIGITAL,
-    XFCE_CLOCK_MODE_LCD
+    XFCE_CLOCK_ANALOG = 0,
+    XFCE_CLOCK_BINARY,
+    XFCE_CLOCK_DIGITAL,
+    XFCE_CLOCK_LCD
 };
 
-struct _XfceClockClass
+struct _ClockPlugin
 {
-  XfcePanelPluginClass __parent__;
-};
+    /* plugin */
+    XfcePanelPlugin *plugin;
 
-struct _XfceClock
-{
-  XfcePanelPlugin __parent__;
+    /* widgets */
+    GtkWidget       *ebox;
+    GtkWidget       *frame;
+    GtkWidget       *widget;
 
-  GtkWidget     *frame;
-  GtkWidget     *widget;
+    /* clock update function and timeout */
+    GSourceFunc      update;
+    guint            interval;
 
-  /* active clock */
-  XfceClockMode  mode;
+    /* tooltip interval */
+    guint            tooltip_interval;
 
-  /* widget timer update */
-  GSourceFunc    update_func;
-  guint          widget_interval;
-  guint          widget_timer_id;
+    /* clock type */
+    ClockPluginMode  mode;
 
-  /* tooltip timer update */
-  guint          tooltip_interval;
-  guint          tooltip_timer_id;
+    /* timeouts */
+    guint            clock_timeout_id;
+    guint            tooltip_timeout_id;
 
-  /* settings */
-  gchar         *tooltip_format;
-  gchar         *digital_format;
-  guint          show_frame : 1;
-  guint          show_seconds : 1;
-  guint          show_military : 1;
-  guint          show_meridiem : 1;
-  guint          true_binary : 1;
-  guint          flash_separators : 1;
+    /* settings */
+    gchar           *tooltip_format;
+    gchar           *digital_format;
+    guint            show_frame : 1;
+    guint            show_seconds : 1;
+    guint            show_military : 1;
+    guint            show_meridiem : 1;
+    guint            true_binary : 1;
+    guint            flash_separators : 1;
 };
 
 
 
-GType  xfce_clock_get_type                 (void) G_GNUC_CONST G_GNUC_INTERNAL;
+void      xfce_clock_util_get_localtime     (struct tm       *tm)    G_GNUC_INTERNAL;
 
-void   xfce_clock_register_type            (XfcePanelModule *panel_module) G_GNUC_INTERNAL;
+gchar    *xfce_clock_util_strdup_strftime   (const gchar     *format,
+                                             const struct tm *tm)    G_GNUC_MALLOC G_GNUC_INTERNAL;
 
-void   xfce_clock_save                     (XfcePanelPlugin *plugin);
+void      xfce_clock_tooltip_sync           (ClockPlugin     *clock) G_GNUC_INTERNAL;
 
-void   xfce_clock_util_get_localtime       (struct tm       *tm) G_GNUC_INTERNAL;
+void      xfce_clock_widget_sync            (ClockPlugin     *clock) G_GNUC_INTERNAL;
 
-gchar *xfce_clock_util_strdup_strftime     (const gchar     *format,
-                                            const struct tm *tm) G_GNUC_MALLOC G_GNUC_INTERNAL;
+void      xfce_clock_widget_update_settings (ClockPlugin     *clock) G_GNUC_INTERNAL;
 
-void   xfce_clock_tooltip_timer            (XfceClock       *clock) G_GNUC_INTERNAL;
+void      xfce_clock_widget_set_mode        (ClockPlugin     *clock) G_GNUC_INTERNAL;
 
-void   xfce_clock_widget_timer             (XfceClock       *clock) G_GNUC_INTERNAL;
-
-void   xfce_clock_widget_update_properties (XfceClock       *clock) G_GNUC_INTERNAL;
-
-void   xfce_clock_widget_update_mode       (XfceClock       *clock) G_GNUC_INTERNAL;
+gboolean  xfce_clock_plugin_set_size        (ClockPlugin     *clock,
+                                             guint            size)  G_GNUC_INTERNAL;
 
 G_END_DECLS
 

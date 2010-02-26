@@ -24,6 +24,7 @@
 
   <interface name="org.xfce.Panel">
     <annotation name="org.freedesktop.DBus.GLib.CSymbol" value="panel_dbus_service" />
+    <annotation name="org.freedesktop.DBus.GLib.ClientCSymbol" value="_panel_dbus_client" />
 
     <!--
       DisplayPreferencesDialog (display : STRING) : VOID
@@ -55,12 +56,12 @@
     <!--
       AddNewItem (name : STRING, args : ARRAY OF STRING) : VOID
 
-      plugin-name : The internal name of the plugin the user wants to add.
+      plugin_name : The internal name of the plugin the user wants to add.
       arguments   : Optional arguments send with the command line. This
                     could be files or anything else.
     -->
     <method name="AddNewItem">
-      <arg name="plugin-name" direction="in" type="s" />
+      <arg name="plugin_name" direction="in" type="s" />
       <arg name="arguments" direction="in" type="as" />
     </method>
 
@@ -72,6 +73,45 @@
     <method name="Terminate">
       <arg name="restart" direction="in" type="b" />
     </method>
+
+    <!--
+      GetProperty (plugin-name : STRING, property : STRING, value : VARIANT) : VOID
+
+      plugin_name : Plugin id of the plugin requesting the property.
+      property    : Name of the property.
+      value       : GValue with the property value.
+    -->
+    <method name="GetProperty">
+      <arg name="plugin_id" direction="in" type="s" />
+      <arg name="property" direction="in" type="s" />
+      <arg name="value" direction="out" type="v" />
+    </method>
+
+    <!--
+      SetProperty (plugin-name : STRING, property : STRING, value : VARIANT) : VOID
+
+      plugin_name : Plugin id of the plugin setting the property.
+      property    : Name of the property.
+      value       : GValue with the property value.
+    -->
+    <method name="SetProperty">
+      <arg name="plugin_id" direction="in" type="s" />
+      <arg name="property" direction="in" type="s" />
+      <arg name="value" direction="in" type="v" />
+    </method>
+
+    <!--
+      PropertyChanged (plugin-name : STRING, property : STRING, value : VARIANT) : VOID
+
+      plugin_name : Plugin id of the plugin this signal was send to.
+      property    : Name of the property that has been changed.
+      value       : GValue with the property value.
+    -->
+    <signal name="PropertyChanged">
+      <arg name="plugin_id" type="s" />
+      <arg name="property" type="s" />
+      <arg name="value" type="v"/>
+    </signal>
 
   </interface>
 
