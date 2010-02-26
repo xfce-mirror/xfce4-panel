@@ -68,7 +68,7 @@ struct _PanelModule
   PanelModuleRunMode   mode;
 
   /* filename to the library or executable
-   * for an old 4.6 executable */
+   * for an old 4.6 plugin */
   gchar               *filename;
 
   /* plugin information from the desktop file */
@@ -80,11 +80,16 @@ struct _PanelModule
   guint                use_count;
   guint                is_unique : 1;
 
-  /* settings for an internal plugin */
+  /* module location (null for 4.6 plugins) */
   GModule             *library;
-  PluginConstructFunc  construct_func; /* for non-gobject plugin */
-  GType                plugin_type; /* for gobject plugin */
+
+  /* for non-gobject plugin */
+  PluginConstructFunc  construct_func;
+
+  /* for gobject plugins */
+  GType                plugin_type;
 };
+
 
 
 static GQuark module_quark = 0;
@@ -178,8 +183,8 @@ panel_module_load (GTypeModule *type_module)
   module->library = g_module_open (module->filename, G_MODULE_BIND_LOCAL);
   if (G_UNLIKELY (module->library == NULL))
     {
-      /* print error and leave */
-      g_critical ("Failed to load module \"%s\": %s.", module->filename,
+      g_critical ("Failed to load module \"%s\": %s.",
+                  module->filename,
                   g_module_error ());
       return FALSE;
     }
@@ -187,13 +192,12 @@ panel_module_load (GTypeModule *type_module)
     /* check if there is a preinit function */
   if (g_module_symbol (module->library, "xfce_panel_module_preinit", &foo))
     {
-      /* show warning */
+      /* large message, but technically never shown to normal users */
       g_warning ("The plugin \"%s\" is marked as internal in the desktop file, "
                  "but the developer has defined an pre-init function, which is "
                  "not supported for internal plugins. " PACKAGE_NAME " will force "
                  "the plugin to run external.", module->filename);
 
-      /* unload */
       panel_module_unload (type_module);
 
       /* from now on, run this plugin in a wrapper */
@@ -215,11 +219,9 @@ panel_module_load (GTypeModule *type_module)
   else if (!g_module_symbol (module->library, "xfce_panel_module_construct",
                              (gpointer) &module->construct_func))
     {
-      /* print critical warning */
       g_critical ("Module \"%s\" lacks a plugin register function.",
                   module->filename);
 
-      /* unload */
       panel_module_unload (type_module);
 
       return FALSE;
@@ -293,13 +295,15 @@ panel_module_new_from_desktop_file (const gchar *filename,
   rc = xfce_rc_simple_open (filename, TRUE);
   if (G_UNLIKELY (rc == NULL))
     {
-      g_critical ("Plugin %s: Unable to read from desktop file \"%s\"", name, filename);
+      g_critical ("Plugin %s: Unable to read from desktop file \"%s\"",
+                  name, filename);
       return NULL;
     }
 
   if (!xfce_rc_has_group (rc, "Xfce Panel"))
     {
-      g_critical ("Plugin %s: Desktop file \"%s\" has no \"Xfce Panel\" group", name, filename);
+      g_critical ("Plugin %s: Desktop file \"%s\" has no "
+                  "\"Xfce Panel\" group", name, filename);
       xfce_rc_close (rc);
       return NULL;
     }
@@ -314,9 +318,10 @@ panel_module_new_from_desktop_file (const gchar *filename,
       if (xfce_rc_has_entry (rc, "X-XFCE-Module-Path"))
         {
           /* show a messsage if the old module path key still exists */
-          g_message ("Plugin %s: The \"X-XFCE-Module-Path\" key is ignored in \"%s\", "
-                     "the panel will look for the module in " PANEL_PLUGINS_LIB_DIR
-                     ", see bug #5455 why this decision was made", name, filename);
+          g_message ("Plugin %s: The \"X-XFCE-Module-Path\" key is "
+                     "ignored in \"%s\", the panel will look for the "
+                     "module in " PANEL_PLUGINS_LIB_DIR ". See bug "
+                     "#5455 why this decision was made", name, filename);
         }
 #endif
 
@@ -360,12 +365,12 @@ panel_module_new_from_desktop_file (const gchar *filename,
         }
     }
 
-  /* read the remaining information */
   if (G_LIKELY (module != NULL))
     {
       g_type_module_set_name (G_TYPE_MODULE (module), name);
       panel_assert (module->mode != UNKNOWN);
 
+      /* read the remaining information */
       module->display_name = g_strdup (xfce_rc_read_entry (rc, "Name", name));
       module->comment = g_strdup (xfce_rc_read_entry (rc, "Comment", NULL));
       module->icon_name = g_strdup (xfce_rc_read_entry_untranslated (rc, "Icon", NULL));
