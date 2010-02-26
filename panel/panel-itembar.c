@@ -165,25 +165,29 @@ panel_itembar_class_init (PanelItembarClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_HORIZONTAL,
-                                   g_param_spec_boolean ("horizontal", NULL, NULL,
+                                   g_param_spec_boolean ("horizontal",
+                                                         NULL, NULL,
                                                          TRUE,
                                                          EXO_PARAM_WRITABLE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
-                                   g_param_spec_uint ("size", NULL, NULL,
+                                   g_param_spec_uint ("size",
+                                                      NULL, NULL,
                                                       16, 128, 48,
                                                       EXO_PARAM_WRITABLE));
 
   gtk_container_class_install_child_property (gtkcontainer_class,
                                               CHILD_PROP_EXPAND,
-                                              g_param_spec_boolean ("expand", NULL, NULL,
+                                              g_param_spec_boolean ("expand",
+                                                                    NULL, NULL,
                                                                     FALSE,
                                                                     EXO_PARAM_READWRITE));
 
   gtk_container_class_install_child_property (gtkcontainer_class,
                                               CHILD_PROP_WRAP,
-                                              g_param_spec_boolean ("wrap", NULL, NULL,
+                                              g_param_spec_boolean ("wrap",
+                                                                    NULL, NULL,
                                                                     FALSE,
                                                                     EXO_PARAM_READWRITE));
 }
@@ -193,16 +197,13 @@ panel_itembar_class_init (PanelItembarClass *klass)
 static void
 panel_itembar_init (PanelItembar *itembar)
 {
-  /* initialize */
   itembar->children = NULL;
   itembar->horizontal = TRUE;
   itembar->size = 30;
   itembar->highlight_index = -1;
 
-  /* setup */
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (itembar), GTK_NO_WINDOW);
 
-  /* don't redraw on allocation */
   gtk_widget_set_redraw_on_allocate (GTK_WIDGET (itembar), FALSE);
 }
 
@@ -306,6 +307,7 @@ panel_itembar_size_request (GtkWidget      *widget,
             }
           else
             {
+              /* add to size for new wrap element */
               if (itembar->horizontal)
                 {
                   requisition->height += itembar->size;
@@ -328,7 +330,7 @@ panel_itembar_size_request (GtkWidget      *widget,
         }
     }
 
-  /* use the last row length */
+  /* also take the last row_length into account */
   if (itembar->horizontal)
     requisition->width = MAX (requisition->width, row_length);
   else
@@ -361,7 +363,6 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   gint               x, y;
   gboolean           expand_children_fit;
 
-  /* set widget allocation */
   widget->allocation = *allocation;
 
   border_width = GTK_CONTAINER (widget)->border_width;
@@ -371,7 +372,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   else
     expand_length = allocation->height - 2 * border_width;
 
-  /* traverse the children to handle the wrap items */
+  /* loop for wrap items */
   for (row = 0, li = itembar->children; li != NULL; li = g_slist_next (li), row++)
     {
       expand_length_avail = expand_length;
@@ -387,7 +388,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               if (!GTK_WIDGET_VISIBLE (child->widget))
                 continue;
 
-              /* continue allocating if we hit a wrap child */
+              /* continue allocating until we hit a wrap child */
               if (G_UNLIKELY (child->wrap))
                 break;
 
@@ -694,7 +695,7 @@ panel_itembar_get_child_property (GtkContainer *container,
 
 
 
-static PanelItembarChild *
+static inline PanelItembarChild *
 panel_itembar_get_child (PanelItembar *itembar,
                          GtkWidget    *widget)
 {
