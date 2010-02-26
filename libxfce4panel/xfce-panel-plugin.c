@@ -311,6 +311,12 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * This signal is emmitted whenever the size of the panel
    * the @plugin is on changes. Plugins writers can for example use
    * this signal to update their icon size.
+   *
+   * If the function returns %FALSE or is not used, the panel will force
+   * a square size to the plugin. If you want non-square plugins and you
+   * don't need this signal you can use something like this:
+   *
+   * g_signal_connect (plugin, "size-changed", G_CALLBACK (gtk_true), NULL);
    **/
   plugin_signals[SIZE_CHANGED] =
     g_signal_new (I_("size-changed"),
