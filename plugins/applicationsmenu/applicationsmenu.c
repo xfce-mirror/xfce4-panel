@@ -26,7 +26,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-xfconf.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 #include <common/panel-private.h>
 
 #include "applicationsmenu.h"
@@ -471,9 +471,9 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject                *dialog, *object, *object2;
 
   /* setup the dialog */
-  PANEL_BUILDER_LINK_4UI
-  builder = panel_builder_new (panel_plugin, applicationsmenu_dialog_ui,
-                               applicationsmenu_dialog_ui_length, &dialog);
+  PANEL_UTILS_LINK_4UI
+  builder = panel_utils_builder_new (panel_plugin, applicationsmenu_dialog_ui,
+                                     applicationsmenu_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2009-2010 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,13 +28,13 @@
 #include <exo/exo.h>
 
 #include <common/panel-private.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 
 
 
 static void
-panel_builder_help_button_clicked (GtkWidget       *button,
-                                   XfcePanelPlugin *panel_plugin)
+panel_utils_help_button_clicked (GtkWidget       *button,
+                                 XfcePanelPlugin *panel_plugin)
 {
   GtkWidget *toplevel;
 
@@ -42,7 +42,7 @@ panel_builder_help_button_clicked (GtkWidget       *button,
   panel_return_if_fail (GTK_IS_WIDGET (button));
 
   toplevel = gtk_widget_get_toplevel (button);
-  panel_builder_show_help (GTK_WINDOW (toplevel),
+  panel_utils_show_help (GTK_WINDOW (toplevel),
       xfce_panel_plugin_get_name (panel_plugin),
       "properties");
 }
@@ -50,10 +50,10 @@ panel_builder_help_button_clicked (GtkWidget       *button,
 
 
 GtkBuilder *
-panel_builder_new (XfcePanelPlugin  *panel_plugin,
-                   const gchar      *buffer,
-                   gsize             length,
-                   GObject         **dialog_return)
+panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
+                         const gchar      *buffer,
+                         gsize             length,
+                         GObject         **dialog_return)
 {
   GError     *error = NULL;
   GtkBuilder *builder;
@@ -84,7 +84,7 @@ panel_builder_new (XfcePanelPlugin  *panel_plugin,
           button = gtk_builder_get_object (builder, "help-button");
           if (G_LIKELY (button != NULL))
             g_signal_connect (G_OBJECT (button), "clicked",
-                G_CALLBACK (panel_builder_help_button_clicked), panel_plugin);
+                G_CALLBACK (panel_utils_help_button_clicked), panel_plugin);
 
           if (G_LIKELY (dialog_return != NULL))
             *dialog_return = dialog;
@@ -110,9 +110,9 @@ panel_builder_new (XfcePanelPlugin  *panel_plugin,
 
 
 void
-panel_builder_show_help (GtkWindow   *parent,
-                         const gchar *page,
-                         const gchar *offset)
+panel_utils_show_help (GtkWindow   *parent,
+                       const gchar *page,
+                       const gchar *offset)
 {
   GdkScreen *screen;
   gchar     *filename;

@@ -29,7 +29,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include <panel/panel-application.h>
@@ -301,7 +301,7 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
 
   if (response_id == GTK_RESPONSE_HELP)
     {
-      panel_builder_show_help (GTK_WINDOW (gtk_dialog), "add-new-items", NULL);
+      panel_utils_show_help (GTK_WINDOW (gtk_dialog), "add-new-items", NULL);
     }
   else if (response_id == GTK_RESPONSE_OK)
     {

@@ -25,7 +25,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <common/panel-private.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -268,7 +268,7 @@ panel_preferences_dialog_response (GtkWidget              *window,
 
   if (G_UNLIKELY (response_id == 1))
     {
-      panel_builder_show_help (GTK_WINDOW (window), "preferences", NULL);
+      panel_utils_show_help (GTK_WINDOW (window), "preferences", NULL);
     }
   else
     {

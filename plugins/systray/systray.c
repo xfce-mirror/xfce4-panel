@@ -25,7 +25,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 #include <exo/exo.h>
 
 #include "systray.h"
@@ -464,9 +464,9 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject       *dialog, *object, *store;
 
   /* setup the dialog */
-  PANEL_BUILDER_LINK_4UI
-  builder = panel_builder_new (panel_plugin, systray_dialog_ui,
-                               systray_dialog_ui_length, &dialog);
+  PANEL_UTILS_LINK_4UI
+  builder = panel_utils_builder_new (panel_plugin, systray_dialog_ui,
+                                     systray_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

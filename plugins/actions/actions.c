@@ -28,7 +28,7 @@
 
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 
 #include "actions.h"
 #include "actions-dialog_ui.h"
@@ -345,9 +345,9 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
 
   /* setup the dialog */
-  PANEL_BUILDER_LINK_4UI
-  builder = panel_builder_new (panel_plugin, actions_dialog_ui,
-                               actions_dialog_ui_length, &dialog);
+  PANEL_UTILS_LINK_4UI
+  builder = panel_utils_builder_new (panel_plugin, actions_dialog_ui,
+                                     actions_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

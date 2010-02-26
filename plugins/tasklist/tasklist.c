@@ -23,7 +23,7 @@
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 #include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
 
@@ -187,9 +187,9 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject        *object;
 
   /* setup the dialog */
-  PANEL_BUILDER_LINK_4UI
-  builder = panel_builder_new (panel_plugin, tasklist_dialog_ui,
-                               tasklist_dialog_ui_length, &dialog);
+  PANEL_UTILS_LINK_4UI
+  builder = panel_utils_builder_new (panel_plugin, tasklist_dialog_ui,
+                                     tasklist_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

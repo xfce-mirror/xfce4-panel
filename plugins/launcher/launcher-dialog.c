@@ -32,7 +32,7 @@
 #include <gio/gio.h>
 
 #include <common/panel-private.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -954,9 +954,9 @@ launcher_dialog_show (LauncherPlugin *plugin)
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
   /* setup the dialog */
-  PANEL_BUILDER_LINK_4UI
-  builder = panel_builder_new (XFCE_PANEL_PLUGIN (plugin), launcher_dialog_ui,
-                               launcher_dialog_ui_length, &window);
+  PANEL_UTILS_LINK_4UI
+  builder = panel_utils_builder_new (XFCE_PANEL_PLUGIN (plugin), launcher_dialog_ui,
+                                     launcher_dialog_ui_length, &window);
   if (G_UNLIKELY (builder == NULL))
     return;
 

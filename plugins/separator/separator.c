@@ -28,7 +28,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 #include <exo/exo.h>
 
 #include "separator.h"
@@ -350,7 +350,7 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* connect all properties */
-  PANEL_BUILDER_LINK_4UI
+  PANEL_UTILS_LINK_4UI
   panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
@@ -401,8 +401,8 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (XFCE_IS_SEPARATOR_PLUGIN (plugin));
 
   /* setup the dialog */
-  builder = panel_builder_new (panel_plugin, separator_dialog_ui,
-                               separator_dialog_ui_length, &dialog);
+  builder = panel_utils_builder_new (panel_plugin, separator_dialog_ui,
+                                     separator_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
 

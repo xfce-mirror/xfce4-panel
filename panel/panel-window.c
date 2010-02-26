@@ -30,7 +30,7 @@
 #include <exo/exo.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
-#include <common/panel-builder.h>
+#include <common/panel-utils.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-base-window.h>
@@ -2022,7 +2022,7 @@ panel_window_menu_quit (gpointer boolean)
 static void
 panel_window_menu_help (void)
 {
-  panel_builder_show_help (NULL, NULL, NULL);
+  panel_utils_show_help (NULL, NULL, NULL);
 }
 
 

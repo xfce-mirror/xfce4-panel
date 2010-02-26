@@ -23,16 +23,16 @@
 #include <libxfce4panel/libxfce4panel.h>
 
 /* Hook to make sure GtkBuilder knows are the XfceTitledDialog object */
-#define PANEL_BUILDER_LINK_4UI \
+#define PANEL_UTILS_LINK_4UI \
   if (xfce_titled_dialog_get_type () == 0) \
     return;
 
-GtkBuilder *panel_builder_new       (XfcePanelPlugin  *panel_plugin,
+GtkBuilder *panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
                                      const gchar      *buffer,
                                      gsize             length,
                                      GObject         **dialog_return) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-void        panel_builder_show_help (GtkWindow        *parent,
+void        panel_utils_show_help   (GtkWindow        *parent,
                                      const gchar      *page,
                                      const gchar      *offset);
 
