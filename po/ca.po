@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 06:00+0100\n"
+"POT-Creation-Date: 2010-02-18 12:00+0100\n"
 "PO-Revision-Date: 2009-10-11 16:38+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: catalan <xfce-i18n@xfce.org>\n"
@@ -371,7 +371,7 @@ msgstr "_Nom:"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "_Lock panel"
-msgstr ""
+msgstr "_Bloquejar el panell"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "_Orientation:"
@@ -382,9 +382,8 @@ msgid "_Size (pixels):"
 msgstr "_Mida (píxels):"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
 msgid "Action Button"
-msgstr "Botons d'accions"
+msgstr "Botó d'acció"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 #, fuzzy
@@ -392,14 +391,12 @@ msgid "Button Actions"
 msgstr "Accions del quadre"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "Botó de _fletxa"
+msgstr "_Primer botó:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "Botó d'_icona"
+msgstr "_Segon botó:"
 
 #: ../plugins/actions/actions.c:108
 #, fuzzy
@@ -408,51 +405,48 @@ msgstr "_Desactivat"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr ""
+msgstr "Diàleg de sortida"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr ""
+msgstr "Sortir"
 
 #: ../plugins/actions/actions.c:111
-#, fuzzy
 msgid "Lock Screen"
-msgstr "Bloca la pantalla"
+msgstr "Blocar la pantalla"
 
 #: ../plugins/actions/actions.c:112
 msgid "Shut Down"
-msgstr ""
+msgstr "Apagar"
 
 #: ../plugins/actions/actions.c:113
 msgid "Restart"
-msgstr "Reinicia"
+msgstr "Reiniciar"
 
 #: ../plugins/actions/actions.c:114
 msgid "Suspend"
-msgstr ""
+msgstr "Suspendre"
 
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
-msgstr ""
+msgstr "Hivernar"
 
 #: ../plugins/actions/actions.c:409
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "No s'ha pogut llançar «%s»"
+msgstr "No s'ha pogut llançar la comanda «%s»"
 
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
 msgstr "Botons d'accions"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Surt o bloca la pantalla"
+msgstr "Surt, bloca o altres accions del sistema"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
 msgid "24-_hour clock"
-msgstr "Utilitza estil de 24 _hores"
+msgstr "Utilitza rellotge de 24 _hores"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -490,7 +484,7 @@ msgstr "Mostra _segons"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr ""
+msgstr "F_ormat:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
@@ -520,167 +514,257 @@ msgstr "_Mostra AM/PM"
 msgid "Show _frame"
 msgstr "Mostra _marc"
 
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Show _inactive dots"
+msgstr ""
+
 #: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Show gri_d"
+msgstr "Mostra _graella"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr "Rellotge _binari real"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr ""
+msgstr "_Distribució:"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
-#, fuzzy
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
-msgstr "Format del rètol emergent"
+msgstr "Format del rètol _emergent:"
 
-#: ../plugins/clock/clock-fuzzy.c:80
-#, fuzzy
+#: ../plugins/clock/clock-fuzzy.c:84
 msgid "Night"
-msgstr "Dreta"
+msgstr "Nit"
 
-#: ../plugins/clock/clock-fuzzy.c:80
+#: ../plugins/clock/clock-fuzzy.c:85
 msgid "Early morning"
-msgstr ""
+msgstr "Matinada"
 
-#: ../plugins/clock/clock-fuzzy.c:81
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Morning"
-msgstr ""
+msgstr "Matí"
 
-#: ../plugins/clock/clock-fuzzy.c:81
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Almost noon"
-msgstr ""
+msgstr "Migdia"
 
-#: ../plugins/clock/clock-fuzzy.c:82
-#, fuzzy
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Noon"
-msgstr "Sense icones"
+msgstr "Migdia"
 
-#: ../plugins/clock/clock-fuzzy.c:82
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Afternoon"
-msgstr ""
+msgstr "Tarda"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Evening"
-msgstr ""
+msgstr "Vespre"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Late evening"
-msgstr ""
+msgstr "Vespre"
 
-#: ../plugins/clock/clock-fuzzy.c:88
-#, c-format
-msgid "five past %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:88
-#, c-format
-msgid "ten past %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:89
-#, c-format
-msgid "quarter past %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:89
-#, c-format
-msgid "twenty past %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:90
-#, c-format
-msgid "twenty five past %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:90
-#, c-format
-msgid "half past %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:91
-#, c-format
-msgid "twenty five to %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:91
-#, c-format
-msgid "twenty to %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:92
-#, c-format
-msgid "quarter to %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:92
-#, c-format
-msgid "ten to %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:93
-#, c-format
-msgid "five to %s"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:93
-#, c-format
-msgid "%s o'clock"
-msgstr ""
-
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:98
+#, no-c-format
+msgid "%0 o'clock"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:99
+#, no-c-format
+msgid "five past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:100
+#, no-c-format
+msgid "ten past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:101
+#, no-c-format
+msgid "quarter past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:102
+#, no-c-format
+msgid "twenty past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:103
+#, no-c-format
+msgid "twenty five past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:104
+#, no-c-format
+msgid "half past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:105
+#, no-c-format
+msgid "twenty five to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:106
+#, no-c-format
+msgid "twenty to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:107
+#, no-c-format
+msgid "quarter to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:108
+#, no-c-format
+msgid "ten to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:109
+#, no-c-format
+msgid "five to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:110
+#, no-c-format
+msgid "%1 o'clock"
+msgstr ""
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: ../plugins/clock/clock-fuzzy.c:117
+#, no-c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:118
+#, no-c-format
+msgctxt "one"
+msgid "five past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:119
+#, no-c-format
+msgctxt "one"
+msgid "ten past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:120
+#, no-c-format
+msgctxt "one"
+msgid "quarter past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:121
+#, no-c-format
+msgctxt "one"
+msgid "twenty past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:122
+#, no-c-format
+msgctxt "one"
+msgid "twenty five past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:123
+#, no-c-format
+msgctxt "one"
+msgid "half past %0"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:124
+#, no-c-format
+msgctxt "one"
+msgid "twenty five to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:125
+#, no-c-format
+msgctxt "one"
+msgid "twenty to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:126
+#, no-c-format
+msgctxt "one"
+msgid "quarter to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:127
+#, no-c-format
+msgctxt "one"
+msgid "ten to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:128
+#, no-c-format
+msgctxt "one"
+msgid "five to %1"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:129
+#, no-c-format
+msgctxt "one"
+msgid "%1 o'clock"
+msgstr ""
+
+#: ../plugins/clock/clock-fuzzy.c:134
 msgid "one"
-msgstr ""
+msgstr "una"
 
-#: ../plugins/clock/clock-fuzzy.c:98
+#: ../plugins/clock/clock-fuzzy.c:135
 msgid "two"
-msgstr ""
+msgstr "dues"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:136
 msgid "three"
-msgstr ""
+msgstr "tres"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:137
 msgid "four"
-msgstr ""
+msgstr "quatre"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "five"
-msgstr ""
+msgstr "cinc"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "six"
-msgstr ""
+msgstr "sis"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "seven"
-msgstr ""
+msgstr "set"
 
-#: ../plugins/clock/clock-fuzzy.c:101
-#, fuzzy
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "eight"
-msgstr "Dreta"
+msgstr "vuit"
 
-#: ../plugins/clock/clock-fuzzy.c:102
-#, fuzzy
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "nine"
-msgstr "_Línea"
+msgstr "nou"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "ten"
-msgstr ""
+msgstr "deu"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "eleven"
-msgstr ""
+msgstr "onze"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "twelve"
-msgstr ""
+msgstr "dotze"
 
 #: ../plugins/clock/clock.c:140
 msgid "Week %V"
@@ -690,7 +774,7 @@ msgstr ""
 msgid "Failed to execute clock command"
 msgstr ""
 
-#: ../plugins/clock/clock.c:651
+#: ../plugins/clock/clock.c:653
 #, fuzzy
 msgid "Custom Format"
 msgstr "Personalitza"
@@ -731,12 +815,11 @@ msgstr ""
 
 #: ../plugins/directorymenu/directorymenu.c:757
 msgid "Open Folder"
-msgstr ""
+msgstr "Obrir carpeta"
 
 #: ../plugins/directorymenu/directorymenu.c:768
-#, fuzzy
 msgid "Open in Terminal"
-msgstr "Executa en un _terminal"
+msgstr "Obrir en un Terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 msgid "Directory Menu"
@@ -780,7 +863,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "Avançat"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
@@ -797,7 +880,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
+msgstr "Est"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 #, fuzzy
@@ -825,7 +908,7 @@ msgstr "Suprimeix el quadre seleccionat"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "Nord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
@@ -845,30 +928,29 @@ msgid "Show last _used item in panel"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
 msgid "South"
-msgstr "Quant a"
+msgstr "Sud"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr ""
+msgstr "Oest"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 #, fuzzy
 msgid "_Arrow button position:"
 msgstr "Botó de _fletxa"
 
-#: ../plugins/launcher/launcher.c:1424
+#: ../plugins/launcher/launcher.c:1445
 #, fuzzy
 msgid "Unnamed Item"
 msgstr "Sense nom"
 
-#: ../plugins/launcher/launcher.c:1564
+#: ../plugins/launcher/launcher.c:1585
 #, fuzzy
 msgid "No items"
 msgstr "Element nou"
 
-#: ../plugins/launcher/launcher.c:2078
+#: ../plugins/launcher/launcher.c:2099
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "No s'ha pogut llançar «%s»"
@@ -880,12 +962,11 @@ msgstr "Llançadora de programa amb menu opcional"
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Comportament"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
 msgid "Number of _rows:"
-msgstr "Nombre _de files:"
+msgstr "Nombre de _files:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
@@ -915,43 +996,37 @@ msgid "Switch between virtual desktops"
 msgstr "Canvia entre escriptoris virtuals"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
-#, fuzzy
 msgid "Dots"
-msgstr "_Punts"
+msgstr "Punts"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
-#, fuzzy
 msgid "Handle"
-msgstr "Gestor:"
+msgstr "Gestor"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
-#, fuzzy
 msgid "New Line"
-msgstr "Quadre nou"
+msgstr "Nova línia"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/separator/separator.desktop.in.h:2
-#, fuzzy
 msgid "Separator"
-msgstr "Estil del separador"
+msgstr "Separador"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
 msgid "Transparent"
-msgstr "_Transparència (%):"
+msgstr "Transparent"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
-msgstr ""
+msgstr "_Expandir"
 
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
-msgstr ""
+msgstr "_Estil:"
 
 #: ../plugins/separator/separator.desktop.in.h:1
-#, fuzzy
 msgid "Adds a separator or space between panel items"
-msgstr "Afegix un espai o una línia entre els elements del quadre"
+msgstr "Afegeix un espai o separador entre els elements del panell"
 
 #: ../plugins/showdesktop/showdesktop.c:193
 #, fuzzy
@@ -1015,7 +1090,7 @@ msgstr "Espai on es mostraran las icones de notificació"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "Sempre"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
@@ -1024,28 +1099,27 @@ msgstr ""
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr ""
+msgstr "Filtrant"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Agrupar títol i marca de temps"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "Agrupar títol i títol de la finestra"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "Mai"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Restaura finestres minimitzades a l'espai de treball actual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#, fuzzy
 msgid "Show _flat buttons"
-msgstr "Empra botons _plans"
+msgstr "Mostra botons _plans"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _handle"
@@ -1068,63 +1142,60 @@ msgstr "Mostr_a les finestres de tots els espais de treball"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Sorting _order:"
-msgstr ""
+msgstr "Ordre:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
-msgstr ""
+msgstr "Marca de temps"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
-msgstr ""
+msgstr "Quan l'espai és limitat"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
 msgid "Window Buttons"
-msgstr "Botons d'accions"
+msgstr "Botons de la finestra"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr ""
+msgstr "Agrupament de finestres:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#, fuzzy
 msgid "Window title"
-msgstr "Llista de finestres"
+msgstr "Títol de la finestra"
 
 #: ../plugins/tasklist/tasklist-widget.c:2278
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Mi_nimitzar-ho tot"
 
 #: ../plugins/tasklist/tasklist-widget.c:2287
 msgid "Un_minimize All"
-msgstr ""
+msgstr "De_sminimitzar-ho tot"
 
 #: ../plugins/tasklist/tasklist-widget.c:2293
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Ma_ximitzar-ho tot"
 
 #: ../plugins/tasklist/tasklist-widget.c:2302
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "Des_maximitzar-ho tot"
 
 #: ../plugins/tasklist/tasklist-widget.c:2312
 msgid "_Close All"
-msgstr ""
+msgstr "_Tancar-ho tot"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
 msgstr "Canvia entre les finestres obertes emprant botons"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-#, fuzzy
 msgid "Arrow"
-msgstr "_Fletxa:"
+msgstr "Fletxa:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Distribució dels botons:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 #, fuzzy
@@ -1132,9 +1203,8 @@ msgid "Enable _urgency notification"
 msgstr "Notificació urgent"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Icon"
-msgstr "_Icona:"
+msgstr "_Icona"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 #, fuzzy
@@ -1164,7 +1234,7 @@ msgstr "Llista de finestres"
 
 #: ../plugins/windowmenu/windowmenu.c:1285
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Finestres urgents"
 
 #: ../plugins/windowmenu/windowmenu.c:1327
 #, fuzzy
