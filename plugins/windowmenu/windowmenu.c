@@ -249,6 +249,7 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
+  gtk_widget_set_name (plugin->button, "windowmenu-button");
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
                     G_CALLBACK (window_menu_plugin_button_press_event), plugin);
 
