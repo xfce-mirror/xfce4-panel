@@ -267,6 +267,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * the panel configuration by the user. Developers can use this signal
    * to cleanup custom setting locations that for example store passwords.
    *
+   * The free-data signal is emitted after this signal!
+   *
    * Note that if you use the xfconf channel and base property provided
    * by xfce_panel_plugin_get_property_base() or the rc file location
    * returned by xfce_panel_plugin_save_location(), the panel will take
