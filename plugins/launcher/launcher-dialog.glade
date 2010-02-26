@@ -3,7 +3,7 @@
   <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-requires libxfce4ui 0.0 -->
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="arrow-position-store">
+  <object class="GtkListStore" id="arrow-position-model">
     <columns>
       <!-- column-name title -->
       <column type="gchararray"/>
@@ -13,16 +13,16 @@
         <col id="0" translatable="yes">Default</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Left</col>
+        <col id="0" translatable="yes">North</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Right</col>
+        <col id="0" translatable="yes">West</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Top</col>
+        <col id="0" translatable="yes">East</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Bottom</col>
+        <col id="0" translatable="yes">South</col>
       </row>
       <row>
         <col id="0" translatable="yes">Inside Button</col>
@@ -323,8 +323,7 @@
                     <child>
                       <object class="GtkComboBox" id="arrow-position">
                         <property name="visible">True</property>
-                        <property name="active">0</property>
-                        <property name="button_sensitivity">on</property>
+                        <property name="model">arrow-position-model</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>

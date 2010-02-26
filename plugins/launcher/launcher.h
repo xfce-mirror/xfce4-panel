@@ -1,7 +1,7 @@
 /* $Id$ */
 /*
  * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2 of the License, or (at your option)
@@ -27,22 +27,34 @@
 
 G_BEGIN_DECLS
 
-typedef struct _LauncherPluginClass    LauncherPluginClass;
-typedef struct _LauncherPlugin         LauncherPlugin;
-typedef struct _LauncherEntry          LauncherEntry;
+typedef struct _XfceLauncherPluginClass XfceLauncherPluginClass;
+typedef struct _XfceLauncherPlugin      XfceLauncherPlugin;
+typedef enum   _LauncherArrowType       LauncherArrowType;
 
 #define XFCE_TYPE_LAUNCHER_PLUGIN            (launcher_plugin_get_type ())
-#define XFCE_LAUNCHER_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPlugin))
-#define XFCE_LAUNCHER_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPluginClass))
+#define XFCE_LAUNCHER_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, XfceLauncherPlugin))
+#define XFCE_LAUNCHER_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_LAUNCHER_PLUGIN, XfceLauncherPluginClass))
 #define XFCE_IS_LAUNCHER_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_LAUNCHER_PLUGIN))
 #define XFCE_IS_LAUNCHER_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_LAUNCHER_PLUGIN))
-#define XFCE_LAUNCHER_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPluginClass))
+#define XFCE_LAUNCHER_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, XfceLauncherPluginClass))
+
+enum _LauncherArrowType
+{
+  LAUNCHER_ARROW_DEFAULT = 0,
+  LAUNCHER_ARROW_NORTH,
+  LAUNCHER_ARROW_WEST,
+  LAUNCHER_ARROW_EAST,
+  LAUNCHER_ARROW_SOUTH,
+  LAUNCHER_ARROW_INTERNAL,
+
+  LAUNCHER_ARROW_MAX = LAUNCHER_ARROW_INTERNAL
+};
 
 GType             launcher_plugin_get_type    (void) G_GNUC_CONST;
 
-XfconfChannel    *launcher_plugin_get_channel (LauncherPlugin *plugin);
+XfconfChannel    *launcher_plugin_get_channel (XfceLauncherPlugin *plugin);
 
-GSList           *launcher_plugin_get_items   (LauncherPlugin *plugin);
+GSList           *launcher_plugin_get_items   (XfceLauncherPlugin *plugin);
 
 G_END_DECLS
 

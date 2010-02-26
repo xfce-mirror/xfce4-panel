@@ -1,7 +1,7 @@
 /* $Id$ */
 /*
  * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2 of the License, or (at your option)
@@ -38,10 +38,10 @@
 
 typedef struct
 {
-  LauncherPlugin *plugin;
-  GtkBuilder     *builder;
-  guint           idle_populate_id;
-  XfconfChannel  *channel;
+  XfceLauncherPlugin *plugin;
+  GtkBuilder         *builder;
+  guint               idle_populate_id;
+  XfconfChannel      *channel;
 }
 LauncherPluginDialog;
 
@@ -175,7 +175,7 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
 
   GDK_THREADS_ENTER ();
-  
+
   /* initialize the menu library */
   xfce_menu_init (NULL);
 
@@ -199,7 +199,7 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
       /* TODO */
       g_error_free (error);
     }
-      
+
   /* shutdown menu library */
   xfce_menu_shutdown ();
 
@@ -656,8 +656,9 @@ launcher_dialog_items_changed (XfconfChannel        *channel,
 
 
 void
-launcher_dialog_show (LauncherPlugin *plugin)
+launcher_dialog_show (XfceLauncherPlugin *plugin)
 {
+  LauncherPluginDialog *dialog;
   GtkBuilder           *builder;
   GObject              *window, *object, *item;
   guint                 i;
@@ -665,7 +666,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   const gchar          *button_names[] = { "item-add", "item-delete",
                                            "item-move-up", "item-move-down",
                                            "item-edit", "item-new" };
-  LauncherPluginDialog *dialog;
+
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
