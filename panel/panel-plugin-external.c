@@ -317,7 +317,10 @@ panel_plugin_external_finalize (GObject *object)
     }
 
   if (external->queue != NULL)
-    g_ptr_array_free (external->queue, TRUE);
+    {
+      g_ptr_array_foreach (external->queue, (GFunc) g_value_array_free, NULL);
+      g_ptr_array_free (external->queue, TRUE);
+    }
 
   g_strfreev (external->arguments);
 
@@ -595,6 +598,7 @@ panel_plugin_external_dbus_set (PanelPluginExternal *external,
       g_signal_emit (G_OBJECT (external), external_signals[SET], 0,
                      external->queue);
 
+      g_ptr_array_foreach (external->queue, (GFunc) g_value_array_free, NULL);
       g_ptr_array_free (external->queue, TRUE);
       external->queue = NULL;
     }

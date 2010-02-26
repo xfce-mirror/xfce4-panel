@@ -344,6 +344,8 @@ panel_application_load (PanelApplication *application)
 
           g_free (name);
         }
+
+      xfconf_array_free (array);
     }
 }
 
