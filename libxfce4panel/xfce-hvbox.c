@@ -65,7 +65,7 @@ xfce_hvbox_class_init (XfceHVBoxClass *klass)
 #if !GTK_CHECK_VERSION (2, 16, 0)
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
-  
+
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = xfce_hvbox_get_property;
   gobject_class->set_property = xfce_hvbox_set_property;
@@ -73,10 +73,10 @@ xfce_hvbox_class_init (XfceHVBoxClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request  = xfce_hvbox_size_request;
   gtkwidget_class->size_allocate = xfce_hvbox_size_allocate;
-  
+
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
-                                   g_param_spec_enum ("orientation", 
+                                   g_param_spec_enum ("orientation",
                                                       "Orientation",
                                                       "Orientation of the box",
                                                       GTK_TYPE_ORIENTATION,
@@ -98,20 +98,20 @@ xfce_hvbox_init (XfceHVBox *hvbox)
 
 
 #if !GTK_CHECK_VERSION (2, 16, 0)
-static void      
+static void
 xfce_hvbox_get_property (GObject    *object,
                          guint       prop_id,
                          GValue     *value,
                          GParamSpec *pspec)
 {
   XfceHVBox *hvbox = XFCE_HVBOX (object);
-  
+
   switch (prop_id)
     {
       case PROP_ORIENTATION:
         g_value_set_enum (value, hvbox->orientation);
         break;
-      
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -120,20 +120,20 @@ xfce_hvbox_get_property (GObject    *object,
 
 
 
-static void      
+static void
 xfce_hvbox_set_property (GObject      *object,
                          guint         prop_id,
                          const GValue *value,
                          GParamSpec   *pspec)
 {
   XfceHVBox *hvbox = XFCE_HVBOX (object);
-  
+
   switch (prop_id)
     {
       case PROP_ORIENTATION:
         xfce_hvbox_set_orientation (hvbox, g_value_get_enum (value));
         break;
-      
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
