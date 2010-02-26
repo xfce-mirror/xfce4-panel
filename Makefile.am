@@ -1,12 +1,12 @@
 
 SUBDIRS = \
 	libxfce4panel \
-	docs \
 	common \
 	panel \
 	plugins \
 	wrapper \
 	migrate \
+	docs \
 	po
 
 distclean-local:

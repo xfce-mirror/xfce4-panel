@@ -51,6 +51,8 @@ INCLUDES = \
 	$(GTK_DOC_EXTRA_CFLAGS)
 
 GTKDOC_LIBS = \
+	$(GTK_LIBS) \
+	$(LIBXFCE4UTIL_LIBS) \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
 
 include $(top_srcdir)/gtk-doc.make
@@ -58,9 +60,6 @@ include $(top_srcdir)/gtk-doc.make
 # Other files to distribute
 EXTRA_DIST += \
 	version.xml.in
-
-# manual pages
-man_MANS =
 
 if MAINTAINER_MODE
 %.1: %.xml
