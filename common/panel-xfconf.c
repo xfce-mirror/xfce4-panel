@@ -38,22 +38,22 @@ typedef struct
 
 static void panel_properties_object_notify     (GObject       *object,
                                                 GParamSpec    *pspec,
-				                gpointer       user_data);
+                                                gpointer       user_data);
 static void panel_properties_object_destroyed  (gpointer       user_data,
-				                GObject       *where_the_object_was);
+                                                GObject       *where_the_object_was);
 static void panel_properties_channel_notify    (XfconfChannel *channel,
                                                 const gchar   *property,
                                                 const GValue  *value,
                                                 gpointer       user_data);
 static void panel_properties_channel_destroyed (gpointer       user_data,
-				                GObject       *where_the_channel_was);
+                                                GObject       *where_the_channel_was);
 
 
 
 static void
 panel_properties_object_notify (GObject    *object,
                                 GParamSpec *pspec,
-				gpointer    user_data)
+                                gpointer    user_data)
 {
   GValue           value = { 0, };
   PropertyBinding *binding = user_data;
@@ -66,7 +66,9 @@ panel_properties_object_notify (GObject    *object,
   g_value_init (&value, G_PARAM_SPEC_VALUE_TYPE (pspec));
   g_object_get_property (object, g_param_spec_get_name (pspec), &value);
 
-  /* set the xfconf property */
+  /* set the xfconf property, unfortunately function blocking is
+   * pointless there because dbus is async. so we will receive 
+   * a property-changed from the channel. */
   xfconf_channel_set_property (binding->channel, binding->channel_prop,
                                &value);
 
@@ -78,14 +80,14 @@ panel_properties_object_notify (GObject    *object,
 
 static void
 panel_properties_object_destroyed (gpointer  user_data,
-				   GObject  *where_the_object_was)
+                                   GObject  *where_the_object_was)
 {
   PropertyBinding *binding = user_data;
 
   panel_return_if_fail (binding->object == where_the_object_was);
   panel_return_if_fail (XFCONF_IS_CHANNEL (binding->channel));
 
-  /* disconnect from the object */
+  /* disconnect from the channel */
   g_signal_handlers_disconnect_by_func (G_OBJECT (binding->channel),
       panel_properties_channel_notify, binding);
   g_object_weak_unref (G_OBJECT (binding->channel),
@@ -125,7 +127,7 @@ panel_properties_channel_notify (XfconfChannel *channel,
 
 static void
 panel_properties_channel_destroyed (gpointer  user_data,
-				    GObject  *where_the_channel_was)
+                                    GObject  *where_the_channel_was)
 {
   PropertyBinding *binding = user_data;
 
@@ -147,9 +149,9 @@ panel_properties_channel_destroyed (gpointer  user_data,
 void
 panel_properties_bind (XfconfChannel       *channel,
                        GObject             *object,
-		       const gchar         *property_base,
-		       const PanelProperty *properties,
-		       GHashTable          *hash_table)
+                       const gchar         *property_base,
+                       const PanelProperty *properties,
+                       GHashTable          *hash_table)
 {
   const PanelProperty *prop;
   const GValue        *value;
@@ -180,18 +182,18 @@ panel_properties_bind (XfconfChannel       *channel,
       /* lookup the property value */
       if (hash_table != NULL)
         {
-	  value = g_hash_table_lookup (hash_table, binding->channel_prop);
-	  if (value != NULL)
-	    {
-	      if (G_LIKELY (G_VALUE_TYPE (value) == prop->type))
-	        g_object_set_property (object, prop->property, value);
-	      else
-	        g_message ("Value types of property \"%s\" do not "
-		           "match: channel = %s, property = %s", buf,
-			   G_VALUE_TYPE_NAME (value),
-			   g_type_name (prop->type));
-	    }
-	}
+          value = g_hash_table_lookup (hash_table, binding->channel_prop);
+          if (value != NULL)
+            {
+              if (G_LIKELY (G_VALUE_TYPE (value) == prop->type))
+                g_object_set_property (object, prop->property, value);
+              else
+                g_message ("Value types of property \"%s\" do not "
+                           "match: channel = %s, property = %s", buf,
+                           G_VALUE_TYPE_NAME (value),
+                           g_type_name (prop->type));
+            }
+        }
 
       /* monitor object property changes */
       g_snprintf (buf, sizeof (buf), "notify::%s", prop->property);
