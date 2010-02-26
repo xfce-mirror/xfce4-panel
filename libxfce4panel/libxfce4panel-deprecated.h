@@ -25,6 +25,7 @@
 
 /* #ifndef XFCE_DISABLE_DEPRECATED */
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
+#include <gdk/gdkx.h>
 /* #endif *//* !XFCE_DISABLE_DEPRECATED */
 
 G_BEGIN_DECLS
