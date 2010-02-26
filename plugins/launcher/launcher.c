@@ -471,7 +471,7 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
 {
   GFile          *src_file, *dst_file;
   gchar          *src_path, *dst_path;
-  GSList         *li;
+  GSList         *li, *lnext;
   GarconMenuItem *item = NULL;
   GError         *error = NULL;
 
@@ -541,8 +541,9 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
 
   /* maybe we have this file in the launcher configuration, then we don't
    * have to load it again from the harddisk */
-  for (li = plugin->items; item == NULL && li != NULL; li = li->next)
+  for (li = plugin->items; item == NULL && li != NULL; li = lnext)
     {
+      lnext = li->next;
       dst_file = garcon_menu_item_get_file (GARCON_MENU_ITEM (li->data));
       if (g_file_equal (src_file, dst_file))
         {
