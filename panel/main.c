@@ -42,10 +42,12 @@
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-dbus-client.h>
 
+#define PANEL_CALLBACK_OPTION G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, callback_handler
 
 
-static gboolean   opt_preferences = FALSE;
-static gboolean   opt_add_items = FALSE;
+
+static gint       opt_preferences = -1;
+static gint       opt_add_items = -1;
 static gboolean   opt_save = FALSE;
 static gchar     *opt_add = NULL;
 static gboolean   opt_restart = FALSE;
@@ -56,11 +58,19 @@ static gchar    **opt_arguments = NULL;
 
 
 
+static gboolean callback_handler (const gchar  *name,
+                                  const gchar  *value,
+                                  gpointer      user_data,
+                                  GError      **error);
+static void     signal_handler   (gint          signum);
+
+
+
 /* command line options */
 static GOptionEntry option_entries[] =
 {
-  { "preferences", 'p', 0, G_OPTION_ARG_NONE, &opt_preferences, N_("Show the 'Panel Preferences' dialog"), NULL },
-  { "add-items", 'a', 0, G_OPTION_ARG_NONE, &opt_add_items, N_("Show the 'Add New Items' dialog"), NULL },
+  { "preferences", 'p', PANEL_CALLBACK_OPTION, N_("Show the 'Panel Preferences' dialog"), N_("Panel Number") },
+  { "add-items", 'a', PANEL_CALLBACK_OPTION, N_("Show the 'Add New Items' dialog"), N_("Panel Number") },
   { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_("Save the panel configuration"), NULL },
   { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_("Add a new plugin to the panel"), N_("PLUGIN NAME") },
   { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_("Restart the running panel instance"), NULL },
@@ -70,6 +80,37 @@ static GOptionEntry option_entries[] =
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
   { NULL }
 };
+
+
+
+static gboolean
+callback_handler (const gchar  *name,
+                  const gchar  *value,
+                  gpointer      user_data,
+                  GError      **error)
+{
+  /* this should actually never happen */
+  if (G_UNLIKELY (name == NULL))
+    return FALSE;
+
+  switch (*(name + 1))
+    {
+      case 'p':
+        /* set the option */
+        opt_preferences = value ? MAX (0, atoi (value)) : 0;
+        break;
+      
+      case 'a':
+        /* set the option */
+        opt_add_items = value ? MAX (0, atoi (value)) : 0;
+        break;
+
+      default:
+        return FALSE;
+    }
+    
+  return TRUE;
+}
 
 
 
@@ -113,20 +154,22 @@ main (gint argc, gchar **argv)
   /* initialize gtk+ */
   if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, GETTEXT_PACKAGE, &error))
     {
-      /* print an error message */
-      if (error == NULL)
+      if (G_LIKELY (error))
         {
-          /* print warning */
-          g_critical ("Failed to open display: %s", gdk_get_display_arg_name ());
-        }
-      else
-        {
-          /* print warning */
-          g_critical (error->message);
+          /* print error */
+          g_print ("%s: %s.\n", G_LOG_DOMAIN, error->message);
+          g_print (_("Type '%s --help' for usage."), G_LOG_DOMAIN);
+          g_print ("\n");
 
           /* cleanup */
           g_error_free (error);
-        }
+          }
+        else
+          {
+            g_error ("Unable to open display.");
+          }
+
+        return EXIT_FAILURE;
 
       /* leave */
       return EXIT_FAILURE;
@@ -144,17 +187,17 @@ main (gint argc, gchar **argv)
 
       return EXIT_SUCCESS;
     }
-  else if (opt_preferences)
+  else if (opt_preferences >= 0)
     {
       /* send a signal to the running instance to show the preferences dialog */
-      result = panel_dbus_client_display_preferences_dialog (NULL, &error);
+      result = panel_dbus_client_display_preferences_dialog (NULL, opt_preferences, &error);
 
       goto dbus_return;
     }
-  else if (opt_add_items)
+  else if (opt_add_items >= 0)
     {
       /* send a signal to the running instance to show the add items dialog */
-      result = panel_dbus_client_display_items_dialog (NULL, &error);
+      result = panel_dbus_client_display_items_dialog (NULL, opt_add_items, &error);
 
       goto dbus_return;
     }

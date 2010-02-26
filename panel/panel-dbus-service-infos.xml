@@ -31,9 +31,12 @@
 
       display : The display on which to show the dialog or ""
                 to use the default screen of the panel.
+      active  : The active panel number in the dialog, starting
+                at zero.
     -->
     <method name="DisplayPreferencesDialog">
-      <arg name="display"  direction="in" type="s" />
+      <arg name="display" direction="in" type="s" />
+      <arg name="active" direction="in" type="u" />
     </method>
 
     <!--
@@ -43,7 +46,8 @@
                 to use the default screen of the panel.
     -->
     <method name="DisplayItemsDialog">
-      <arg name="display"  direction="in" type="s" />
+      <arg name="display" direction="in" type="s" />
+      <arg name="active" direction="in" type="u" />
     </method>
 
     <!--

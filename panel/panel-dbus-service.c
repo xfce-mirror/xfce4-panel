@@ -154,16 +154,22 @@ panel_dbus_service_finalize (GObject *object)
 static gboolean
 panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
                                                const gchar       *display,
+                                               guint              active,
                                                GError           **error)
 {
+  PanelApplication *application;
+  
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* TODO: open/move the dialog to the correct screen */
-  g_message ("open on screen %s", display);
+  /* get the current application */
+  application = panel_application_get ();
 
   /* show the prefernces dialog */
-  panel_preferences_dialog_show (NULL);
+  panel_preferences_dialog_show (panel_application_get_window (application, active));
+
+  /* release the application */
+  g_object_unref (G_OBJECT (application));
 
   return TRUE;
 }
@@ -173,12 +179,14 @@ panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
 static gboolean
 panel_dbus_service_display_items_dialog (PanelDBusService  *service,
                                          const gchar       *display,
+                                         guint              active,
                                          GError           **error)
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   /* TODO: open/move the dialog to the correct screen */
+  /* TODO: active window */
 
   /* show the items dialog */
   panel_item_dialog_show ();

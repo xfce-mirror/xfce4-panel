@@ -151,7 +151,7 @@ dbus_proxy_provider_move_item (XfcePanelPluginProvider *provider,
 
   /* call */
   if (!wrapper_dbus_client_set_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
-                                         "MoveItem", NULL, NULL))
+                                         "MoveItem", NULL, &error))
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
@@ -173,7 +173,7 @@ dbus_proxy_provider_add_new_items (XfcePanelPluginProvider *provider,
   name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
 
   /* call */
-  if (!wrapper_dbus_client_display_items_dialog (dbus_proxy, name, NULL))
+  if (!wrapper_dbus_client_display_items_dialog (dbus_proxy, name, 0, &error))
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
@@ -198,7 +198,8 @@ dbus_proxy_provider_panel_preferences (XfcePanelPluginProvider *provider,
   name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
 
   /* call */
-  if (!wrapper_dbus_client_display_preferences_dialog (dbus_proxy, name, &error))
+  /* TODO implement active panel */
+  if (!wrapper_dbus_client_display_preferences_dialog (dbus_proxy, name, 0, &error))
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
@@ -214,12 +215,18 @@ static void
 dbus_proxy_provider_remove (XfcePanelPluginProvider *provider,
                             DBusGProxy              *dbus_proxy)
 {
+  GError *error = NULL;
+  
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* call */
-  wrapper_dbus_client_set_property (dbus_proxy,
-                                    xfce_panel_plugin_provider_get_id (provider),
-                                    "Remove", NULL, NULL);
+  if (!wrapper_dbus_client_set_property (dbus_proxy,
+                                         xfce_panel_plugin_provider_get_id (provider),
+                                         "Remove", NULL, &error))
+    {
+      g_critical ("DBus error: %s", error->message);
+      g_error_free (error);
+    }
 }
 
 
