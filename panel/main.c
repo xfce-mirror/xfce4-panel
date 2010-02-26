@@ -25,6 +25,12 @@
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#ifdef HAVE_SIGNAL_H
+#include <signal.h>
+#endif
 
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
@@ -65,6 +71,20 @@ static GOptionEntry option_entries[] =
 
 
 
+static void
+signal_handler (gint signum)
+{
+  extern gboolean dbus_quit_with_restart;
+  
+  /* don't try to restart */
+  dbus_quit_with_restart = FALSE;
+  
+  /* quit the main loop */
+  gtk_main_quit ();
+}
+
+
+
 gint
 main (gint argc, gchar **argv)
 {
@@ -73,6 +93,8 @@ main (gint argc, gchar **argv)
   GObject          *dbus_service;
   extern gboolean   dbus_quit_with_restart;
   gboolean          result;
+  guint             i;
+  const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -175,6 +197,10 @@ main (gint argc, gchar **argv)
 
   /* create dbus service */
   dbus_service = panel_dbus_service_new ();
+  
+  /* setup signal handlers to properly quit the main loop */
+  for (i = 0; i < G_N_ELEMENTS (signums); i++)
+    signal (signums[i], signal_handler);
 
   /* enter the main loop */
   gtk_main ();
