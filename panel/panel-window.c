@@ -137,7 +137,8 @@ enum
   PROP_AUTOHIDE,
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
-  PROP_POSITION
+  PROP_POSITION,
+  PROP_DISABLE_STRUTS
 };
 
 enum _AutohideState
@@ -225,6 +226,7 @@ struct _PanelWindow
   /* struts information */
   StrutsEgde           struts_edge;
   gulong               struts[N_STRUTS];
+  guint                struts_disabled : 1;
 
   /* window positioning */
   guint                size;
@@ -343,6 +345,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                         NULL,
                                                         EXO_PARAM_READWRITE));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_DISABLE_STRUTS,
+                                   g_param_spec_boolean ("disable-struts", NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
   /* initialize the atoms */
   cardinal_atom = gdk_atom_intern_static_string ("CARDINAL");
   net_wm_strut_partial_atom = gdk_atom_intern_static_string ("_NET_WM_STRUT_PARTIAL");
@@ -368,6 +376,7 @@ panel_window_init (PanelWindow *window)
   /* init vars */
   window->screen = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
+  window->struts_disabled = FALSE;
 
   window->horizontal = TRUE;
   window->size = 30;
@@ -443,6 +452,10 @@ panel_window_get_property (GObject    *object,
                                     window->base_x,
                                     window->base_y);
         g_value_take_string (value, position);
+        break;
+
+      case PROP_DISABLE_STRUTS:
+        g_value_set_boolean (value, window->struts_disabled);
         break;
 
       default:
@@ -569,6 +582,15 @@ panel_window_set_property (GObject      *object,
         else
           {
             g_message ("no valid position defined");
+          }
+        break;
+
+      case PROP_DISABLE_STRUTS:
+        val_bool = g_value_get_boolean (value);
+        if (val_bool != window->struts_disabled)
+          {
+            window->struts_disabled = val_bool;
+            panel_window_screen_layout_changed (window->screen, window);
           }
         break;
 
@@ -1211,8 +1233,9 @@ panel_window_screen_struts_edge (PanelWindow *window)
 {
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), STRUTS_EDGE_NONE);
 
-  /* no struts when autohide is active */
-  if (window->autohide_state != AUTOHIDE_DISABLED)
+  /* no struts when autohide is active or they are disabled by the user */
+  if (window->autohide_state != AUTOHIDE_DISABLED
+      || window->struts_disabled)
     return STRUTS_EDGE_NONE;
 
   /* return the screen edge on which the window is

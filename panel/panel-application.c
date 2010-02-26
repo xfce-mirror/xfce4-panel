@@ -266,6 +266,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "background-alpha", G_TYPE_UINT },
     { "output-name", G_TYPE_STRING },
     { "position", G_TYPE_STRING },
+    { "disable-struts", G_TYPE_BOOLEAN },
     { NULL }
   };
 
