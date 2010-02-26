@@ -35,6 +35,7 @@ GtkWidget *xfce_panel_create_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_UNU
 
 gboolean   xfce_panel_allow_customization   (void);
 
+/* TODO this one should be removed... */
 void       xfce_panel_cairo_set_source_rgba (cairo_t  *cr,
                                              GdkColor *color,
                                              gdouble   alpha);

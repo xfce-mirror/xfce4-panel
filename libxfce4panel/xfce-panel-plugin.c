@@ -26,6 +26,7 @@
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
 
+#include <libxfce4panel/libxfce4panel-marshal.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-enums.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
@@ -257,9 +258,9 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, size_changed),
-                  NULL, NULL,
-                  g_cclosure_marshal_VOID__INT,
-                  G_TYPE_NONE, 1, G_TYPE_INT);
+                  g_signal_accumulator_true_handled, NULL,
+                  _libxfce4panel_marshal_BOOLEAN__INT,
+                  G_TYPE_BOOLEAN, 1, G_TYPE_INT);
 
   /**
    * XfcePanelPlugin::screen-position-changed
@@ -768,6 +769,7 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
                             gint                     size)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+  gboolean         handled = FALSE;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
@@ -778,7 +780,11 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
       plugin->priv->size = size;
 
       /* emit signal */
-      g_signal_emit (G_OBJECT (plugin), plugin_signals[SIZE_CHANGED], 0, size);
+      g_signal_emit (G_OBJECT (plugin), plugin_signals[SIZE_CHANGED], 0, size, &handled);
+
+      /* handle the size when not done by the plugin */
+      if (handled == FALSE)
+        gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
     }
 }
 

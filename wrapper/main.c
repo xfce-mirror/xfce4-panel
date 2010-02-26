@@ -146,7 +146,7 @@ dbus_proxy_provider_move_item (XfcePanelPluginProvider *provider,
                                DBusGProxy              *dbus_proxy)
 {
   GError *error = NULL;
-  
+
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* call */
@@ -166,8 +166,21 @@ dbus_proxy_provider_add_new_items (XfcePanelPluginProvider *provider,
 {
   gchar  *name;
   GError *error = NULL;
-
+  guint   active_panel = 0;
+  GValue  value = { 0, };
+  
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  /* try to get the panel number of this plugin */
+  if (wrapper_dbus_client_get_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
+                                        "PanelNumber", &value, NULL))
+    {
+      /* set the panel number */
+      active_panel = g_value_get_uint (&value);
+
+      /* unset */
+      g_value_unset (&value);
+    }
 
   /* create a screen name */
   name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
@@ -191,14 +204,26 @@ dbus_proxy_provider_panel_preferences (XfcePanelPluginProvider *provider,
 {
   gchar  *name;
   GError *error = NULL;
-
+  guint   active_panel = 0;
+  GValue  value = { 0, };
+  
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  /* try to get the panel number of this plugin */
+  if (wrapper_dbus_client_get_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
+                                        "PanelNumber", &value, NULL))
+    {
+      /* set the panel number */
+      active_panel = g_value_get_uint (&value);
+
+      /* unset */
+      g_value_unset (&value);
+    }
 
   /* create a screen name */
   name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
 
   /* call */
-  /* TODO implement active panel */
   if (!wrapper_dbus_client_display_preferences_dialog (dbus_proxy, name, 0, &error))
     {
       g_critical ("DBus error: %s", error->message);
@@ -216,7 +241,7 @@ dbus_proxy_provider_remove (XfcePanelPluginProvider *provider,
                             DBusGProxy              *dbus_proxy)
 {
   GError *error = NULL;
-  
+
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* call */

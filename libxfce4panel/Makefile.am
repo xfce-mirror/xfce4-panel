@@ -10,6 +10,10 @@ INCLUDES = 								\
 lib_LTLIBRARIES =							\
 	libxfce4panel.la
 
+libxfce4panel_built_sources =						\
+	libxfce4panel-marshal.c						\
+	libxfce4panel-marshal.h
+
 libxfce4panel_headers =							\
 	libxfce4panel.h							\
 	xfce-arrow-button.h						\
@@ -25,6 +29,7 @@ libxfce4panel_include_HEADERS =						\
 	$(libxfce4panel_headers)
 
 libxfce4panel_la_SOURCES =						\
+	$(libxfce4panel_built_sources)					\
 	$(libxfce4panel_headers)					\
 	xfce-arrow-button.c						\
 	xfce-hvbox.c							\
@@ -54,5 +59,25 @@ libxfce4panel_la_LIBADD = 						\
 #
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libxfce4panel-1.0.pc
+
+EXTRA_DIST =								\
+	libxfce4panel-marshal.list
+
+#
+# Build sources
+#
+if MAINTAINER_MODE
+libxfce4panel-marshal.h: libxfce4panel-marshal.list Makefile
+	glib-genmarshal --prefix=_libxfce4panel_marshal --internal --header $< > $@
+
+libxfce4panel-marshal.c: libxfce4panel-marshal.list Makefile
+	glib-genmarshal --prefix=_libxfce4panel_marshal --body $< > $@
+
+DISTCLEANFILES =							\
+	$(libxfce4panel_built_sources)
+
+BUILT_SOURCES =								\
+	$(libxfce4panel_built_sources)
+endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

@@ -85,7 +85,7 @@ xfce_panel_create_toggle_button (void)
  *          otherwise.
  **/
 gboolean
-xfce_panel_allow_customization (void )
+xfce_panel_allow_customization (void)
 {
   static gboolean  allow_customization = FALSE;
   static gboolean  checked = FALSE;

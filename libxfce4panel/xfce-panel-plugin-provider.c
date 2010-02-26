@@ -117,7 +117,7 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
                       0, NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
-      
+
       provider_signals[LOCK_PANEL] =
         g_signal_new (I_("lock-panel"),
                       G_TYPE_FROM_CLASS (klass),

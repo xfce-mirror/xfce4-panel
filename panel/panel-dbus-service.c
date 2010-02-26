@@ -91,6 +91,7 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
   /**
    * Emited when a plugin property changes
    **/
+  /* TODO implement this */
   dbus_service_signals[PROPERTY_CHANGED] =
     g_signal_new (I_("property-changed"),
                   G_TYPE_FROM_CLASS (gobject_class),
@@ -158,7 +159,7 @@ panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
                                                GError           **error)
 {
   PanelApplication *application;
-  
+
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -274,9 +275,47 @@ panel_dbus_service_get_property (PanelDBusService *service,
                                  GValue           *value,
                                  GError           *error)
 {
-  g_message ("Plugin '%s' requested property '%s'", plugin_id, property);
+  PanelModuleFactory      *factory;
+  PanelApplication        *application;
+  XfcePanelPluginProvider *provider;
+  GtkWidget               *window;
+  gboolean                 succeed = FALSE;
 
-  return TRUE;
+  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
+  panel_return_val_if_fail (plugin_id != NULL, FALSE);
+  panel_return_val_if_fail (property != NULL, FALSE);
+
+  /* get the module factory */
+  factory = panel_module_factory_get ();
+
+  /* get the plugin */
+  provider = panel_module_factory_get_plugin (factory, plugin_id);
+  if (G_LIKELY (provider))
+    {
+      if (strcmp ("PanelNumber", property) == 0)
+        {
+          /* get the plugin's panel window */
+          window = gtk_widget_get_toplevel (GTK_WIDGET (provider));
+
+          /* initialize the value */
+          g_value_init (value, G_TYPE_UINT);
+
+          /* get the panel number from the application */
+          application = panel_application_get ();
+          g_value_set_uint (value, panel_application_get_window_index (application, PANEL_WINDOW (window)));
+          g_object_unref (G_OBJECT (application));
+
+          succeed = TRUE;
+        }
+    }
+
+  /* release the factory */
+  g_object_unref (G_OBJECT (factory));
+
+  /* check if we return a good value */
+  panel_return_val_if_fail (!succeed || G_TYPE_CHECK_VALUE (value), FALSE);
+
+  return succeed;
 }
 
 
