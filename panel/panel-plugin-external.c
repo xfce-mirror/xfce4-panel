@@ -56,6 +56,9 @@ static void         panel_plugin_external_set_screen_position (XfcePanelPluginPr
                                                                XfceScreenPosition            screen_position);
 static void         panel_plugin_external_save                (XfcePanelPluginProvider      *provider);
 static void         panel_plugin_external_set_sensitive       (PanelPluginExternal          *external);
+static void         panel_plugin_external_set_property        (PanelPluginExternal          *external,
+                                                               const gchar                  *property,
+                                                               const GValue                 *value);
 
 
 
@@ -403,7 +406,7 @@ panel_plugin_external_get_id (XfcePanelPluginProvider *provider)
 static void
 panel_plugin_external_set_property (PanelPluginExternal *external,
                                     const gchar         *property,
-                                    GValue              *value)
+                                    const GValue        *value)
 {
   QueuedData *data;
   

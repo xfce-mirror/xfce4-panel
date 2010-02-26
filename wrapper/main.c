@@ -43,7 +43,7 @@
 
 
 
-static gchar   *opt_name = NULL;
+gchar          *opt_name = NULL;
 static gchar   *opt_display_name = NULL;
 static gchar   *opt_id = NULL;
 static gchar   *opt_filename = NULL;

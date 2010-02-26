@@ -21,6 +21,10 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+
 #include <wrapper/wrapper-plug.h>
 
 
@@ -72,6 +76,8 @@ wrapper_plug_class_init (WrapperPlugClass *klass)
 static void
 wrapper_plug_init (WrapperPlug *plug)
 {
+  extern gchar *opt_name;
+  
   /* init vars */
   plug->background_alpha = 1.00;
   plug->is_selected = FALSE;
@@ -84,7 +90,9 @@ wrapper_plug_init (WrapperPlug *plug)
   g_signal_connect (G_OBJECT (plug), "composited-changed", G_CALLBACK (wrapper_plug_set_colormap), NULL);
 
   /* set the colormap */
-  wrapper_plug_set_colormap (plug);
+  /* HACK: the systray can't handle composited windows! */
+  if (strcmp (opt_name, "systray") != 0)
+    wrapper_plug_set_colormap (plug);
 }
 
 
