@@ -4,8 +4,9 @@ SUBDIRS = \
 	common \
 	panel \
 	plugins \
-	po \
-	wrapper
+	wrapper \
+	migrate \
+	po
 
 distclean-local:
 	rm -rf *.spec *.cache *~

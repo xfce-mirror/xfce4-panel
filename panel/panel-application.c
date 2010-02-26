@@ -184,6 +184,12 @@ panel_application_init (PanelApplication *application)
   /* get the xfconf channel (singleton) */
   application->xfconf = panel_properties_get_channel (G_OBJECT (application));
 
+  /* check for any configuration */
+  if (!xfconf_channel_has_property (application->xfconf, "/panels"))
+    {
+      /* here we're going to spawn the migration utility */
+    }
+
   /* check if we need to force all plugins to run external */
   if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
     panel_module_factory_force_all_external ();
