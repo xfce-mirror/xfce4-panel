@@ -80,7 +80,7 @@ xfce_panel_plugin_provider_class_init (gpointer klass,
 
 
 
-const gchar *
+G_CONST_RETURN gchar *
 xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);

@@ -113,7 +113,7 @@ const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
  *          string is owned by the library and must not be freed or
  *          modified by the caller.
  **/
-const gchar *
+G_CONST_RETURN gchar *
 libxfce4panel_check_version (guint required_major,
                              guint required_minor,
                              guint required_micro)

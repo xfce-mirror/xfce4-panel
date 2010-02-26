@@ -97,75 +97,76 @@ struct _XfcePanelPlugin
 
 
 
-GType                xfce_panel_plugin_get_type            (void) G_GNUC_CONST;
+GType                 xfce_panel_plugin_get_type            (void) G_GNUC_CONST;
 
-const gchar         *xfce_panel_plugin_get_name            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+G_CONST_RETURN gchar *xfce_panel_plugin_get_name            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar         *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+G_CONST_RETURN gchar *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar         *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+G_CONST_RETURN gchar *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-gint                 xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gint                  xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar         *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+G_CONST_RETURN gchar *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar * const *xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+G_CONST_RETURN gchar * G_CONST_RETURN *
+                      xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-gint                 xfce_panel_plugin_get_size            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gint                  xfce_panel_plugin_get_size            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-gboolean             xfce_panel_plugin_get_expand          (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+gboolean              xfce_panel_plugin_get_expand          (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-void                 xfce_panel_plugin_set_expand          (XfcePanelPlugin   *plugin,
-                                                            gboolean           expand);
+void                  xfce_panel_plugin_set_expand          (XfcePanelPlugin   *plugin,
+                                                             gboolean           expand);
 
-GtkOrientation       xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+GtkOrientation        xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-XfceScreenPosition   xfce_panel_plugin_get_screen_position (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+XfceScreenPosition    xfce_panel_plugin_get_screen_position (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-void                 xfce_panel_plugin_take_window         (XfcePanelPlugin   *plugin,
-                                                            GtkWindow         *window);
+void                  xfce_panel_plugin_take_window         (XfcePanelPlugin   *plugin,
+                                                             GtkWindow         *window);
 
-void                 xfce_panel_plugin_add_action_widget   (XfcePanelPlugin   *plugin,
-                                                            GtkWidget         *widget);
+void                  xfce_panel_plugin_add_action_widget   (XfcePanelPlugin   *plugin,
+                                                             GtkWidget         *widget);
 
-void                 xfce_panel_plugin_menu_insert_item    (XfcePanelPlugin   *plugin,
-                                                            GtkMenuItem       *item);
+void                  xfce_panel_plugin_menu_insert_item    (XfcePanelPlugin   *plugin,
+                                                             GtkMenuItem       *item);
 
-void                 xfce_panel_plugin_menu_show_configure (XfcePanelPlugin   *plugin);
+void                  xfce_panel_plugin_menu_show_configure (XfcePanelPlugin   *plugin);
 
-void                 xfce_panel_plugin_menu_show_about     (XfcePanelPlugin   *plugin);
+void                  xfce_panel_plugin_menu_show_about     (XfcePanelPlugin   *plugin);
 
-void                 xfce_panel_plugin_block_menu          (XfcePanelPlugin   *plugin);
+void                  xfce_panel_plugin_block_menu          (XfcePanelPlugin   *plugin);
 
-void                 xfce_panel_plugin_unblock_menu        (XfcePanelPlugin   *plugin);
+void                  xfce_panel_plugin_unblock_menu        (XfcePanelPlugin   *plugin);
 
-void                 xfce_panel_plugin_register_menu       (XfcePanelPlugin   *plugin,
-                                                            GtkMenu           *menu);
+void                  xfce_panel_plugin_register_menu       (XfcePanelPlugin   *plugin,
+                                                             GtkMenu           *menu);
 
-GtkArrowType         xfce_panel_plugin_arrow_type          (XfcePanelPlugin   *plugin);
+GtkArrowType          xfce_panel_plugin_arrow_type          (XfcePanelPlugin   *plugin);
 
-void                 xfce_panel_plugin_position_widget     (XfcePanelPlugin   *plugin,
-                                                            GtkWidget         *menu_widget,
-                                                            GtkWidget         *attach_widget,
-                                                            gint              *x,
-                                                            gint              *y);
+void                  xfce_panel_plugin_position_widget     (XfcePanelPlugin   *plugin,
+                                                             GtkWidget         *menu_widget,
+                                                             GtkWidget         *attach_widget,
+                                                             gint              *x,
+                                                             gint              *y);
 
-void                 xfce_panel_plugin_position_menu       (GtkMenu           *menu,
-                                                            gint              *x,
-                                                            gint              *y,
-                                                            gboolean          *push_in,
-                                                            gpointer           panel_plugin);
+void                  xfce_panel_plugin_position_menu       (GtkMenu           *menu,
+                                                             gint              *x,
+                                                             gint              *y,
+                                                             gboolean          *push_in,
+                                                             gpointer           panel_plugin);
 
-void                 xfce_panel_plugin_focus_widget        (XfcePanelPlugin   *plugin,
-                                                            GtkWidget         *widget);
+void                  xfce_panel_plugin_focus_widget        (XfcePanelPlugin   *plugin,
+                                                             GtkWidget         *widget);
 
-void                 xfce_panel_plugin_block_autohide      (XfcePanelPlugin   *plugin,
-                                                            gboolean           blocked);
+void                  xfce_panel_plugin_block_autohide      (XfcePanelPlugin   *plugin,
+                                                             gboolean           blocked);
 
-gchar               *xfce_panel_plugin_lookup_rc_file      (XfcePanelPlugin   *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+gchar                *xfce_panel_plugin_lookup_rc_file      (XfcePanelPlugin   *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-gchar               *xfce_panel_plugin_save_location       (XfcePanelPlugin   *plugin,
-                                                            gboolean           create) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+gchar                *xfce_panel_plugin_save_location       (XfcePanelPlugin   *plugin,
+                                                             gboolean           create) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
 G_END_DECLS
 

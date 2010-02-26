@@ -1299,7 +1299,7 @@ xfce_panel_plugin_take_window_notify (gpointer  data,
  *
  * Returns: the name of the panel plugin.
  **/
-const gchar *
+G_CONST_RETURN gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1319,7 +1319,7 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
  *
  * Returns: the (translated) display name of the plugin.
  **/
-const gchar *
+G_CONST_RETURN gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1342,7 +1342,7 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
  *
  * Returns: the (translated) comment of the plugin.
  **/
-const gchar *
+G_CONST_RETURN gchar *
 xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1388,7 +1388,7 @@ xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
  * See also: xfconf_channel_new_with_property_base() and
  *           XFCE_PANEL_PLUGIN_CHANNEL_NAME.
  **/
-const gchar *
+G_CONST_RETURN gchar *
 xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1421,7 +1421,7 @@ xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
  *
  * Since: 4.8.0
  **/
-const gchar * const *
+G_CONST_RETURN gchar * G_CONST_RETURN *
 xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);

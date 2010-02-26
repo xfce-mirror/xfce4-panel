@@ -114,39 +114,39 @@ enum
 
 
 
-GType        xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
+GType                 xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
 
-const gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);
+G_CONST_RETURN gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);
 
-gint         xfce_panel_plugin_provider_get_unique_id       (XfcePanelPluginProvider       *provider);
+gint                  xfce_panel_plugin_provider_get_unique_id       (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider       *provider,
-                                                             gint                           size);
+void                  xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider       *provider,
+                                                                      gint                           size);
 
-void         xfce_panel_plugin_provider_set_orientation     (XfcePanelPluginProvider       *provider,
-                                                             GtkOrientation                 orientation);
+void                  xfce_panel_plugin_provider_set_orientation     (XfcePanelPluginProvider       *provider,
+                                                                      GtkOrientation                 orientation);
 
-void         xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider       *provider,
-                                                             XfceScreenPosition             screen_position);
+void                  xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider       *provider,
+                                                                      XfceScreenPosition             screen_position);
 
-void         xfce_panel_plugin_provider_save                (XfcePanelPluginProvider       *provider);
+void                  xfce_panel_plugin_provider_save                (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_emit_signal         (XfcePanelPluginProvider       *provider,
-                                                             XfcePanelPluginProviderSignal  provider_signal);
+void                  xfce_panel_plugin_provider_emit_signal         (XfcePanelPluginProvider       *provider,
+                                                                      XfcePanelPluginProviderSignal  provider_signal);
 
-gboolean     xfce_panel_plugin_provider_get_show_configure  (XfcePanelPluginProvider       *provider);
+gboolean              xfce_panel_plugin_provider_get_show_configure  (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_show_configure      (XfcePanelPluginProvider       *provider);
+void                  xfce_panel_plugin_provider_show_configure      (XfcePanelPluginProvider       *provider);
 
-gboolean     xfce_panel_plugin_provider_get_show_about      (XfcePanelPluginProvider       *provider);
+gboolean              xfce_panel_plugin_provider_get_show_about      (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_show_about          (XfcePanelPluginProvider       *provider);
+void                  xfce_panel_plugin_provider_show_about          (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_remove              (XfcePanelPluginProvider       *provider);
+void                  xfce_panel_plugin_provider_remove              (XfcePanelPluginProvider       *provider);
 
-gboolean     xfce_panel_plugin_provider_remote_event        (XfcePanelPluginProvider       *provider,
-                                                             const gchar                   *name,
-                                                             const GValue                  *value);
+gboolean              xfce_panel_plugin_provider_remote_event        (XfcePanelPluginProvider       *provider,
+                                                                      const gchar                   *name,
+                                                                      const GValue                  *value);
 
 G_END_DECLS
 
