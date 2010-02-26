@@ -644,6 +644,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
   const gchar          *button_names[] = { "item-add", "item-delete",
                                            "item-move-up", "item-move-down",
                                            "item-edit", "item-new" };
+  const gchar          *binding_names[] = { "disable-tooltips", /* "show-labels", */
+                                            "move-first", "arrow-position" };
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
@@ -669,8 +671,9 @@ launcher_dialog_show (LauncherPlugin *plugin)
       for (i = 0; i < G_N_ELEMENTS (button_names); i++)
         {
           object = gtk_builder_get_object (builder, button_names[i]);
+          panel_return_if_fail (GTK_IS_WIDGET (object));
           g_signal_connect (G_OBJECT (object), "clicked",
-                            G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
+              G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
         }
 
       /* setup treeview selection */
@@ -682,22 +685,13 @@ launcher_dialog_show (LauncherPlugin *plugin)
       launcher_dialog_tree_selection_changed (selection, dialog);
 
       /* connect binding to the advanced properties */
-      object = gtk_builder_get_object (builder, "disable-tooltips");
-      exo_mutual_binding_new (G_OBJECT (plugin), "disable-tooltips",
-                              G_OBJECT (object), "active");
-#if 0
-      /* TODO */
-      object = gtk_builder_get_object (builder, "show-labels");
-      exo_mutual_binding_new (G_OBJECT (plugin), "show-labels",
-                              G_OBJECT (object), "active");
-#endif
-      object = gtk_builder_get_object (builder, "move-first");
-      exo_mutual_binding_new (G_OBJECT (plugin), "move-first",
-                              G_OBJECT (object), "active");
-
-      object = gtk_builder_get_object (builder, "arrow-position");
-      exo_mutual_binding_new (G_OBJECT (plugin), "arrow-position",
-                              G_OBJECT (object), "active");
+      for (i = 0; i < G_N_ELEMENTS (binding_names); i++)
+        {
+          object = gtk_builder_get_object (builder, binding_names[i]);
+          panel_return_if_fail (GTK_IS_WIDGET (object));
+          exo_mutual_binding_new (G_OBJECT (plugin), binding_names[i],
+                                  G_OBJECT (object), "active");
+        }
 
       /* setup responses for the other dialogs */
       object = gtk_builder_get_object (builder, "dialog-editor");
