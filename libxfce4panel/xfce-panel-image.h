@@ -71,6 +71,11 @@ void       xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
 void       xfce_panel_image_set_from_source (XfcePanelImage *image,
                                              const gchar    *source);
 
+void       xfce_panel_image_set_size        (XfcePanelImage *image,
+                                             gint            size);
+
+gint       xfce_panel_image_get_size        (XfcePanelImage *image);
+
 void       xfce_panel_image_clear           (XfcePanelImage *image);
 
 G_END_DECLS

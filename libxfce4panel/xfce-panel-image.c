@@ -232,9 +232,6 @@ xfce_panel_image_set_property (GObject      *object,
                                const GValue *value,
                                GParamSpec   *pspec)
 {
-  XfcePanelImagePrivate *priv;
-  gint                   size;
-
   switch (prop_id)
     {
     case PROP_SOURCE:
@@ -248,13 +245,8 @@ xfce_panel_image_set_property (GObject      *object,
       break;
 
     case PROP_SIZE:
-      priv = XFCE_PANEL_IMAGE (object)->priv;
-      size = g_value_get_int (value);
-      if (G_LIKELY (priv->size != size))
-        {
-          priv->size = size;
-          gtk_widget_queue_resize (GTK_WIDGET (object));
-        }
+      xfce_panel_image_set_size (XFCE_PANEL_IMAGE (object),
+                                 g_value_get_int (value));
       break;
 
     default:
@@ -544,6 +536,31 @@ xfce_panel_image_set_from_source (XfcePanelImage *image,
   image->priv->source = g_strdup (source);
 
   gtk_widget_queue_resize (GTK_WIDGET (image));
+}
+
+
+
+void       
+xfce_panel_image_set_size (XfcePanelImage *image,
+                           gint            size)
+{
+  
+  g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
+  
+  if (G_LIKELY (image->priv->size != size))
+    {
+      image->priv->size = size;
+      gtk_widget_queue_resize (GTK_WIDGET (image));
+    }
+}
+
+
+
+gint       
+xfce_panel_image_get_size (XfcePanelImage *image)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_IMAGE (image), -1);
+  return image->priv->size;
 }
 
 
