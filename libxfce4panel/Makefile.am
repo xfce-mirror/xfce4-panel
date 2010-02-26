@@ -35,6 +35,8 @@ libxfce4panel_la_SOURCES = \
 	$(libxfce4panel_headers) \
 	xfce-arrow-button.c \
 	xfce-hvbox.c \
+	xfce-panel-button.c \
+	xfce-panel-button.h \
 	xfce-panel-convenience.c \
 	xfce-panel-plugin.c \
 	xfce-panel-plugin-provider.c \
