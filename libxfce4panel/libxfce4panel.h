@@ -113,52 +113,52 @@ G_BEGIN_DECLS
   XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (init_func, {})
 
 #define XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK(construct_func, check_func) \
-  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, if (G_LIKELY ((*check_func) (screen) == TRUE)))
+  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
 
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTENDED(construct_func, CODE) \
   static void \
-  __xpp_realize (XfcePanelPlugin *plugin) \
+  __xpp_realize (XfcePanelPlugin *xpp) \
   { \
-    panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin)); \
+    panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     \
-    g_signal_handlers_disconnect_by_func (G_OBJECT (plugin), G_CALLBACK (__xpp_realize), NULL); \
+    g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), G_CALLBACK (__xpp_realize), NULL); \
     \
-    (*construct_func) (plugin); \
+    (*construct_func) (xpp); \
   } \
   \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
-  __xpp_construct (const gchar  *name, \
-                   gint          unique_id, \
-                   const gchar  *display_name, \
-                   const gchar  *comment, \
-                   gchar       **arguments, \
-                   GdkScreen    *screen); \
+  __xpp_construct (const gchar  *xpp_name, \
+                   gint          xpp_unique_id, \
+                   const gchar  *xpp_display_name, \
+                   const gchar  *xpp_comment, \
+                   gchar       **xpp_arguments, \
+                   GdkScreen    *xpp_screen); \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
-  __xpp_construct (const gchar  *name, \
-                   gint          unique_id, \
-                   const gchar  *display_name, \
-                   const gchar  *comment, \
-                   gchar       **arguments, \
-                   GdkScreen    *screen) \
+  __xpp_construct (const gchar  *xpp_name, \
+                   gint          xpp_unique_id, \
+                   const gchar  *xpp_display_name, \
+                   const gchar  *xpp_comment, \
+                   gchar       **xpp_arguments, \
+                   GdkScreen    *xpp_screen) \
   { \
-    XfcePanelPlugin *plugin = NULL; \
+    XfcePanelPlugin *xpp = NULL; \
     \
-    panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL); \
-    panel_return_val_if_fail (name != NULL && unique_id != -1, NULL); \
+    panel_return_val_if_fail (GDK_IS_SCREEN (xpp_screen), NULL); \
+    panel_return_val_if_fail (xpp_name != NULL && xpp_unique_id != -1, NULL); \
     \
     CODE \
       { \
-        plugin = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
-                               "name", name, \
-                               "unique-id", unique_id, \
-                               "display-name", display_name, \
-                               "comment", comment, \
-                               "arguments", arguments, NULL); \
+        xpp = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
+                            "name", xpp_name, \
+                            "unique-id", xpp_unique_id, \
+                            "display-name", xpp_display_name, \
+                            "comment", xpp_comment, \
+                            "arguments", xpp_arguments, NULL); \
         \
-        g_signal_connect_after (G_OBJECT (plugin), "realize", G_CALLBACK (__xpp_realize), NULL); \
+        g_signal_connect_after (G_OBJECT (xpp), "realize", G_CALLBACK (__xpp_realize), NULL); \
       } \
     \
-    return plugin; \
+    return xpp; \
   }
 
 G_END_DECLS
