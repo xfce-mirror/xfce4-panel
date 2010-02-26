@@ -45,14 +45,10 @@ enum _LauncherArrowType
   LAUNCHER_ARROW_WEST,
   LAUNCHER_ARROW_EAST,
   LAUNCHER_ARROW_SOUTH,
-  LAUNCHER_ARROW_INTERNAL,
-
-  LAUNCHER_ARROW_MAX = LAUNCHER_ARROW_INTERNAL
+  LAUNCHER_ARROW_INTERNAL
 };
 
 GType             launcher_plugin_get_type    (void) G_GNUC_CONST;
-
-XfconfChannel    *launcher_plugin_get_channel (XfceLauncherPlugin *plugin);
 
 GSList           *launcher_plugin_get_items   (XfceLauncherPlugin *plugin);
 

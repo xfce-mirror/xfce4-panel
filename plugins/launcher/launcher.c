@@ -27,6 +27,7 @@
 
 #include <exo/exo.h>
 
+#include <dbus/dbus-glib.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
@@ -40,7 +41,12 @@
 #define NO_ARROW_INSIDE_BUTTON(plugin) ((plugin)->arrow_position != LAUNCHER_ARROW_INTERNAL \
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
 #define ARROW_INSIDE_BUTTON(plugin)    (!NO_ARROW_INSIDE_BUTTON (plugin))
+#define LAUNCHER_TYPE_PTR_ARRAY        (dbus_g_type_get_collection("GPtrArray", G_TYPE_VALUE))
 
+
+
+static void launcher_plugin_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
+static void launcher_plugin_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
 
 static void launcher_plugin_style_set (GtkWidget *widget, GtkStyle *previous_style);
 
@@ -48,11 +54,9 @@ static void launcher_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
 static gboolean launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
-static void launcher_plugin_save (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin, gint position);
 
-static void launcher_plugin_property_changed (XfconfChannel *channel, const gchar *property_name, const GValue *value, XfceLauncherPlugin *plugin);
 static void launcher_plugin_icon_theme_changed (GtkIconTheme *icon_theme, XfceLauncherPlugin *plugin);
 
 static void launcher_plugin_pack_widgets (XfceLauncherPlugin *plugin);
@@ -80,7 +84,6 @@ static gboolean launcher_plugin_arrow_press_event (GtkWidget *button, GdkEventBu
 static gboolean launcher_plugin_arrow_drag_motion(GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint drag_time, XfceLauncherPlugin *plugin);
 static void launcher_plugin_arrow_drag_leave (GtkWidget *widget, GdkDragContext *context, guint drag_time, XfceLauncherPlugin *plugin);
 
-static void launcher_plugin_items_load (XfceLauncherPlugin *plugin);
 static gboolean launcher_plugin_item_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, XfceMenuItem *item);
 
 static gboolean launcher_plugin_item_exec_on_screen (XfceMenuItem *item, guint32 event_time, GdkScreen *screen, GSList *uri_list);
@@ -120,6 +123,15 @@ struct _XfceLauncherPlugin
   LauncherArrowType  arrow_position;
 };
 
+enum
+{
+  PROP_0,
+  PROP_ITEMS,
+  PROP_DISABLE_TOOLTIPS,
+  PROP_MOVE_FIRST,
+  PROP_ARROW_POSITION
+};
+
 
 
 /* define and register the plugin */
@@ -149,7 +161,12 @@ static void
 launcher_plugin_class_init (XfceLauncherPluginClass *klass)
 {
   GtkWidgetClass       *gtkwidget_class;
+  GObjectClass         *gobject_class;
   XfcePanelPluginClass *plugin_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->get_property = launcher_plugin_get_property;
+  gobject_class->set_property = launcher_plugin_set_property;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->style_set = launcher_plugin_style_set;
@@ -159,9 +176,38 @@ launcher_plugin_class_init (XfceLauncherPluginClass *klass)
   plugin_class->free_data = launcher_plugin_free_data;
   plugin_class->orientation_changed = launcher_plugin_orientation_changed;
   plugin_class->size_changed = launcher_plugin_size_changed;
-  plugin_class->save = launcher_plugin_save;
   plugin_class->configure_plugin = launcher_plugin_configure_plugin;
   plugin_class->screen_position_changed = launcher_plugin_screen_position_changed;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ITEMS,
+                                   g_param_spec_boxed ("items",
+                                                       NULL, NULL,
+                                                       LAUNCHER_TYPE_PTR_ARRAY,
+                                                       EXO_PARAM_WRITABLE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_DISABLE_TOOLTIPS,
+                                   g_param_spec_boolean ("disable-tooltips",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_MOVE_FIRST,
+                                   g_param_spec_boolean ("move-first",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ARROW_POSITION,
+                                   g_param_spec_uint ("arrow-position",
+                                                      NULL, NULL,
+                                                      LAUNCHER_ARROW_DEFAULT,
+                                                      LAUNCHER_ARROW_INTERNAL,
+                                                      LAUNCHER_ARROW_DEFAULT,
+                                                      EXO_PARAM_READWRITE));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("menu-icon-size",
@@ -186,6 +232,7 @@ launcher_plugin_init (XfceLauncherPlugin *plugin)
   plugin->move_first = FALSE;
   plugin->arrow_position = LAUNCHER_ARROW_DEFAULT;
   plugin->menu = NULL;
+  plugin->items = NULL;
   plugin->menu_timeout_id = 0;
   plugin->menu_icon_size = DEFAULT_MENU_ICON_SIZE;
 
@@ -259,6 +306,123 @@ launcher_plugin_init (XfceLauncherPlugin *plugin)
 
 
 static void
+launcher_plugin_get_property (GObject    *object,
+                              guint       prop_id,
+                              GValue     *value,
+                              GParamSpec *pspec)
+{
+  XfceLauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (object);
+
+  switch (prop_id)
+    {
+      case PROP_ITEMS:
+        /* property is write-only */
+        panel_assert_not_reached ();
+        break;
+
+      case PROP_DISABLE_TOOLTIPS:
+        g_value_set_boolean (value, plugin->disable_tooltips);
+        break;
+
+      case PROP_MOVE_FIRST:
+        g_value_set_boolean (value, plugin->move_first);
+        break;
+
+      case PROP_ARROW_POSITION:
+        g_value_set_uint (value, plugin->arrow_position);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+
+
+static void
+launcher_plugin_set_property (GObject      *object,
+                              guint         prop_id,
+                              const GValue *value,
+                              GParamSpec   *pspec)
+{
+  XfceLauncherPlugin  *plugin = XFCE_LAUNCHER_PLUGIN (object);
+  GPtrArray           *array;
+  guint                i;
+  XfceMenuItem        *item;
+  const GValue        *file;
+
+  /* destroy the menu, all the setting changes need this */
+  launcher_plugin_menu_destroy (plugin);
+
+  switch (prop_id)
+    {
+      case PROP_ITEMS:
+        /* free items */
+        if (plugin->items != NULL)
+          {
+            g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
+            g_slist_free (plugin->items);
+            plugin->items = NULL;
+          }
+
+        /* load new items fromt the filenames */
+        array = g_value_get_boxed (value);
+        if (G_LIKELY (array != NULL))
+          {
+            for (i = 0; i < array->len; i++)
+             {
+               /* create a new item from the file */
+               file = g_ptr_array_index (array, i);
+               panel_return_if_fail (G_VALUE_HOLDS_STRING (file));
+               item = xfce_menu_item_new (g_value_get_string (file));
+               if (G_LIKELY (item != NULL))
+                 plugin->items = g_slist_append (plugin->items, item);
+               else
+                 /* TODO */
+                 g_message ("Lookup the item in the pool...");
+             }
+          }
+
+        /* update the icon */
+        launcher_plugin_button_set_icon (plugin);
+
+        /* update the widget packing */
+        goto update_arrow;
+        break;
+
+      case PROP_DISABLE_TOOLTIPS:
+        plugin->disable_tooltips = g_value_get_boolean (value);
+        break;
+
+      case PROP_MOVE_FIRST:
+        plugin->move_first = g_value_get_boolean (value);
+        break;
+
+      case PROP_ARROW_POSITION:
+        plugin->arrow_position = g_value_get_uint (value);
+
+        update_arrow:
+        /* update the arrow button visibility */
+        launcher_plugin_arrow_visibility (plugin);
+
+        /* repack the widgets */
+        launcher_plugin_pack_widgets (plugin);
+
+        /* update the plugin size */
+        launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+        break;
+
+       default:
+         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+         break;
+    }
+}
+
+
+
+static void
 launcher_plugin_style_set (GtkWidget *widget,
                            GtkStyle  *previous_style)
 {
@@ -288,25 +452,21 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   XfceLauncherPlugin  *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   const gchar * const *filenames;
   guint                i;
-  XfceMenuItem        *item;
-  guint                value;
+  GPtrArray           *array;
+  GValue              *value;
 
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
-  g_signal_connect (G_OBJECT (plugin->channel), "property-changed",
-                    G_CALLBACK (launcher_plugin_property_changed), plugin);
 
-  /* load global settings */
-  plugin->disable_tooltips =
-      xfconf_channel_get_bool (plugin->channel, "/disable-tooltips", FALSE);
-  plugin->move_first =
-      xfconf_channel_get_bool (plugin->channel, "/move-first", FALSE);
-  value = xfconf_channel_get_uint (plugin->channel, "/arrow-position",
-                                   LAUNCHER_ARROW_DEFAULT);
-  plugin->arrow_position = MIN (value, LAUNCHER_ARROW_MAX);
-
-  /* load the items */
-  launcher_plugin_items_load (plugin);
+  /* bind properties */
+  xfconf_g_property_bind (plugin->channel, "/items",
+                          LAUNCHER_TYPE_PTR_ARRAY, plugin, "items");
+  xfconf_g_property_bind (plugin->channel, "/disable-tooltips",
+                          G_TYPE_BOOLEAN, plugin, "disable-tooltips");
+  xfconf_g_property_bind (plugin->channel, "/move-first",
+                          G_TYPE_BOOLEAN, plugin, "move-first");
+  xfconf_g_property_bind (plugin->channel, "/arrow-position",
+                          G_TYPE_UINT, plugin, "arrow-position");
 
   /* handle and empty plugin */
   if (G_UNLIKELY (plugin->items == NULL))
@@ -315,24 +475,28 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
       filenames = xfce_panel_plugin_get_arguments (panel_plugin);
       if (G_LIKELY (filenames != NULL))
         {
+          /* create array with all the filenames */
+          array = g_ptr_array_new ();
           for (i = 0; filenames[i] != NULL; i++)
             {
-              /* create a new item from the file */
-              item = xfce_menu_item_new (filenames[i]);
-              if (G_LIKELY (item != NULL))
-                plugin->items = g_slist_append (plugin->items, item);
+              value = g_new0 (GValue, 1);
+              g_value_init (value, G_TYPE_STRING);
+              g_value_set_static_string (value, filenames[i]);
+              g_ptr_array_add (array, value);
             }
+          
+          /* set items */
+          g_object_set (G_OBJECT (plugin), "items", array, NULL);
+          
+          /* cleanup */
+          xfconf_array_free (array);
+        }
+      else
+        {
+          /* update the icon */
+          launcher_plugin_button_set_icon (plugin);
         }
     }
-
-  /* update the icon */
-  launcher_plugin_button_set_icon (plugin);
-
-  /* update the arrow visibility */
-  launcher_plugin_arrow_visibility (plugin);
-
-  /* repack the widgets */
-  launcher_plugin_pack_widgets (plugin);
 }
 
 
@@ -437,43 +601,6 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-launcher_plugin_save (XfcePanelPlugin *panel_plugin)
-{
-  XfceLauncherPlugin  *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
-  gchar              **filenames;
-  guint                i, length;
-  GSList              *li;
-  XfceMenuItem        *item;
-
-  /* save the global settings */
-  xfconf_channel_set_bool (plugin->channel, "/disable-tooltips",
-                           plugin->disable_tooltips);
-  xfconf_channel_set_bool (plugin->channel, "/move-first",
-                           plugin->move_first);
-  xfconf_channel_set_uint (plugin->channel, "/arrow-position",
-                           plugin->arrow_position);
-
-  length = g_slist_length (plugin->items);
-  if (G_LIKELY (length > 0))
-    {
-      /* create the array with the desktop ids */
-      filenames = g_new0 (gchar *, length + 1);
-      for (li = plugin->items, i = 0; li != NULL; li = li->next)
-        if (G_LIKELY ((item = li->data) != NULL))
-          filenames[i++] = (gchar *) xfce_menu_item_get_filename (item);
-
-      /* store the list of filenames */
-      xfconf_channel_set_string_list (plugin->channel, "/items",
-                                      (const gchar **) filenames);
-
-      /* cleanup */
-      g_free (filenames);
-    }
-}
-
-
-
-static void
 launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   /* run the configure dialog */
@@ -494,64 +621,6 @@ launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 
   /* destroy the menu */
   launcher_plugin_menu_destroy (plugin);
-}
-
-
-
-static void
-launcher_plugin_property_changed (XfconfChannel      *channel,
-                                  const gchar        *property_name,
-                                  const GValue       *value,
-                                  XfceLauncherPlugin *plugin)
-{
-  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
-  panel_return_if_fail (plugin->channel == channel);
-
-  /* destroy the menu, all the setting changes need this */
-  launcher_plugin_menu_destroy (plugin);
-
-  if (exo_str_is_equal (property_name, "/disable-tooltips"))
-    {
-      plugin->disable_tooltips = g_value_get_boolean (value);
-    }
-  else if (exo_str_is_equal (property_name, "/move-first"))
-    {
-      plugin->move_first = g_value_get_boolean (value);
-    }
-  else if (exo_str_is_equal (property_name, "/arrow-position"))
-    {
-      plugin->arrow_position = MIN (g_value_get_uint (value),
-                                    LAUNCHER_ARROW_MAX);
-
-      goto update_arrow;
-
-    }
-  else if (exo_str_is_equal (property_name, "/items"))
-    {
-      /* free items */
-      g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
-      g_slist_free (plugin->items);
-      plugin->items = NULL;
-
-      /* load the new items */
-      launcher_plugin_items_load (plugin);
-
-      /* update the icon */
-      launcher_plugin_button_set_icon (plugin);
-
-      update_arrow:
-
-      /* update the arrow button visibility */
-      launcher_plugin_arrow_visibility (plugin);
-
-      /* repack the widgets */
-      launcher_plugin_pack_widgets (plugin);
-
-      /* update the plugin size */
-      launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-    }
 }
 
 
@@ -1296,39 +1365,6 @@ launcher_plugin_arrow_drag_leave (GtkWidget          *widget,
 
 
 
-static void
-launcher_plugin_items_load (XfceLauncherPlugin *plugin)
-{
-  gchar        **filenames;
-  guint          i;
-  XfceMenuItem  *item;
-
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
-  panel_return_if_fail (plugin->items == NULL);
-
-  /* get the list of launcher filenames */
-  filenames = xfconf_channel_get_string_list (plugin->channel, "/items");
-  if (G_LIKELY (filenames != NULL))
-    {
-      /* try to load all the items */
-      for (i = 0; filenames[i] != NULL; i++)
-        {
-          /* create a new item from the file */
-          item = xfce_menu_item_new (filenames[i]);
-          if (G_LIKELY (item != NULL))
-            plugin->items = g_slist_append (plugin->items, item);
-          else
-            /* TODO */
-            g_message ("Lookup the item in the pool...");
-        }
-
-      /* cleanup */
-      g_strfreev (filenames);
-    }
-}
-
-
-
 static gboolean
 launcher_plugin_item_query_tooltip (GtkWidget    *widget,
                                     gint          x,
@@ -1708,15 +1744,6 @@ launcher_plugin_uri_list_free (GSList *uri_list)
       g_slist_foreach (uri_list, (GFunc) g_free, NULL);
       g_slist_free (uri_list);
     }
-}
-
-
-
-XfconfChannel *
-launcher_plugin_get_channel (XfceLauncherPlugin *plugin)
-{
-  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
-  return plugin->channel;
 }
 
 

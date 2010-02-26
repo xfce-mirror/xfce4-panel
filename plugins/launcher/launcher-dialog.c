@@ -41,7 +41,6 @@ typedef struct
   XfceLauncherPlugin *plugin;
   GtkBuilder         *builder;
   guint               idle_populate_id;
-  XfconfChannel      *channel;
 }
 LauncherPluginDialog;
 
@@ -56,7 +55,6 @@ enum
 
 
 static void launcher_dialog_items_insert_item (GtkListStore *store, GtkTreeIter *iter, XfceMenuItem *item);
-static void launcher_dialog_items_changed (XfconfChannel *channel, const gchar *property_name, const GValue *value, LauncherPluginDialog *dialog);
 
 
 
@@ -296,7 +294,7 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
   array = g_ptr_array_new ();
   gtk_tree_model_foreach (GTK_TREE_MODEL (store),
                           launcher_dialog_tree_save_foreach, array);
-  xfconf_channel_set_arrayv (dialog->channel, "/items", array);
+  g_object_set (dialog->plugin, "items", array, NULL);
   xfconf_array_free (array);
 }
 
@@ -340,8 +338,17 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
   gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
   object = gtk_builder_get_object (dialog->builder, "item-edit");
-  sensitive = !!(position >= 0 && n_children > 0); /* TODO custom items only */
+  sensitive = !!(position >= 0 && n_children > 0); /* TODO custom items only (??) */
   gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
+
+  object = gtk_builder_get_object (dialog->builder, "arrow-position");
+  gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
+
+  object = gtk_builder_get_object (dialog->builder, "move-first");
+  gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
+
+  object = gtk_builder_get_object (dialog->builder, "arrow-position-label");
+  gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
 }
 
 
@@ -455,11 +462,6 @@ launcher_dialog_response (GtkWidget            *widget,
       gtk_widget_destroy (widget);
       g_object_unref (G_OBJECT (dialog->builder));
 
-      /* disconnect signal */
-      g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->channel),
-                                            launcher_dialog_items_changed,
-                                            dialog);
-
       /* unblock plugin menu */
       xfce_panel_plugin_unblock_menu (XFCE_PANEL_PLUGIN (dialog->plugin));
 
@@ -528,6 +530,10 @@ launcher_dialog_add_response (GtkWidget            *widget,
               launcher_dialog_items_insert_item (GTK_LIST_STORE (item_model),
                                                  &iter, item);
               g_object_unref (G_OBJECT (item));
+
+              /* select the first item */
+              if (li == list)
+                gtk_tree_selection_select_iter (selection, &iter);
             }
 
           /* cleanup */
@@ -593,76 +599,35 @@ launcher_dialog_items_insert_item (GtkListStore *store,
 
 
 static void
-launcher_dialog_items_changed (XfconfChannel        *channel,
-                               const gchar          *property_name,
-                               const GValue         *value,
-                               LauncherPluginDialog *dialog)
+launcher_dialog_items_load (LauncherPluginDialog *dialog)
 {
-  XfceMenuItem *item;
-  GObject      *store, *object;
-  GSList       *items, *li;
-  gboolean      update = TRUE;
-  GtkTreeIter   iter;
-  gboolean      multiple_items;
-  guint         i;
-  const gchar  *widget_names[] = {"arrow-position", "move-first",
-                                  "arrow-position-label" };
+  GObject          *treeview;
+  GtkTreeSelection *selection;
+  GtkTreeModel     *model;
+  GSList           *items, *li;
+  GtkTreeIter       iter;
 
-  /* only do something when the items changed */
-  if (!exo_str_is_equal (property_name, "/items"))
-    return;
+  /* get the treeview */
+  treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
 
-  /* get the store and clear it */
-  store = gtk_builder_get_object (dialog->builder, "item-store");
+  /* get the model and clear it */
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+  gtk_list_store_clear (GTK_LIST_STORE (model));
 
+  /* insert the launcher items */
   items = launcher_plugin_get_items (dialog->plugin);
-  if (G_LIKELY (items != NULL))
+  for (li = items; li != NULL; li = li->next)
     {
-      if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
-        {
-          for (li = items; li != NULL; li = li->next)
-            {
-              gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, COL_ITEM, &item, -1);
-              if (G_UNLIKELY (item == NULL))
-                break;
-
-              update = !exo_str_is_equal (xfce_menu_item_get_desktop_id (li->data),
-                                          xfce_menu_item_get_desktop_id (item));
-
-              g_object_unref (G_OBJECT (item));
-
-              if (G_UNLIKELY (update))
-                break;
-
-              if (!gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter))
-                break;
-            }
-        }
-
-      if (update == TRUE)
-        {
-          gtk_list_store_clear (GTK_LIST_STORE (store));
-          for (li = items; li != NULL; li = li->next)
-            {
-              gtk_list_store_append (GTK_LIST_STORE (store), &iter);
-              launcher_dialog_items_insert_item (GTK_LIST_STORE (store),
-                                                 &iter, XFCE_MENU_ITEM (li->data));
-            }
-        }
-    }
-  else if (gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL) > 0)
-    {
-      /* model is not empty but the channel is */
-      gtk_list_store_clear (GTK_LIST_STORE (store));
+      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      launcher_dialog_items_insert_item (GTK_LIST_STORE (model),
+                                         &iter, XFCE_MENU_ITEM (li->data));
     }
 
-  /* set the sensitivity of some dialog widgets */
-  multiple_items = LIST_HAS_TWO_OR_MORE_ENTRIES (items);
-  for (i = 0; i < G_N_ELEMENTS (widget_names); i++)
+  /* select the first item */
+  if (gtk_tree_model_get_iter_first (model, &iter))
     {
-      object = gtk_builder_get_object (dialog->builder, widget_names[i]);
-      panel_return_if_fail (GTK_IS_WIDGET (object));
-      gtk_widget_set_sensitive (GTK_WIDGET (object), multiple_items);
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+      gtk_tree_selection_select_iter (selection, &iter);
     }
 }
 
@@ -690,11 +655,6 @@ launcher_dialog_show (XfceLauncherPlugin *plugin)
       dialog = g_slice_new0 (LauncherPluginDialog);
       dialog->builder = builder;
       dialog->plugin = plugin;
-      dialog->channel = launcher_plugin_get_channel (plugin);
-
-      /* monitor the channel for any changes */
-      g_signal_connect (G_OBJECT (dialog->channel), "property-changed",
-                        G_CALLBACK (launcher_dialog_items_changed), dialog);
 
       /* block plugin menu */
       xfce_panel_plugin_block_menu (XFCE_PANEL_PLUGIN (plugin));
@@ -716,27 +676,28 @@ launcher_dialog_show (XfceLauncherPlugin *plugin)
       /* setup treeview selection */
       object = gtk_builder_get_object (builder, "item-treeview");
       selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
-      gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+      gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
       g_signal_connect (G_OBJECT (selection), "changed",
                         G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
       launcher_dialog_tree_selection_changed (selection, dialog);
 
       /* connect binding to the advanced properties */
       object = gtk_builder_get_object (builder, "disable-tooltips");
-      xfconf_g_property_bind (dialog->channel, "/disable-tooltips",
-                              G_TYPE_BOOLEAN, object, "active");
-
+      exo_mutual_binding_new (G_OBJECT (plugin), "disable-tooltips",
+                              G_OBJECT (object), "active");
+#if 0
+      /* TODO */
       object = gtk_builder_get_object (builder, "show-labels");
-      xfconf_g_property_bind (dialog->channel, "/show-labels",
-                              G_TYPE_BOOLEAN, object, "active");
-
+      exo_mutual_binding_new (G_OBJECT (plugin), "show-labels",
+                              G_OBJECT (object), "active");
+#endif
       object = gtk_builder_get_object (builder, "move-first");
-      xfconf_g_property_bind (dialog->channel, "/move-first",
-                              G_TYPE_BOOLEAN, object, "active");
+      exo_mutual_binding_new (G_OBJECT (plugin), "move-first",
+                              G_OBJECT (object), "active");
 
       object = gtk_builder_get_object (builder, "arrow-position");
-      xfconf_g_property_bind (dialog->channel, "/arrow-position",
-                              G_TYPE_UINT, object, "active");
+      exo_mutual_binding_new (G_OBJECT (plugin), "arrow-position",
+                              G_OBJECT (object), "active");
 
       /* setup responses for the other dialogs */
       object = gtk_builder_get_object (builder, "dialog-editor");
@@ -777,8 +738,8 @@ launcher_dialog_show (XfceLauncherPlugin *plugin)
       object = gtk_builder_get_object (builder, "itemrenderericon");
       g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
 
-      /* load the launchers */
-      launcher_dialog_items_changed (dialog->channel, "/items", NULL, dialog);
+      /* load the plugin items */
+      launcher_dialog_items_load (dialog);
 
       /* show the dialog */
       gtk_widget_show (GTK_WIDGET (window));
