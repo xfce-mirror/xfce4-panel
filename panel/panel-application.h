@@ -56,7 +56,8 @@ void              panel_application_add_new_item      (PanelApplication  *applic
                                                        gchar            **arguments);
 
 PanelWindow      *panel_application_new_window        (PanelApplication  *application,
-                                                       GdkScreen         *screen);
+                                                       GdkScreen         *screen,
+                                                       gboolean           reset_properties);
 
 guint             panel_application_get_n_windows     (PanelApplication  *application);
 

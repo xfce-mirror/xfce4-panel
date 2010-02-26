@@ -171,7 +171,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 
   /* setup tree selection */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-  gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
   g_signal_connect (G_OBJECT (selection), "changed",
       G_CALLBACK (panel_preferences_dialog_item_selection_changed), dialog);
 
@@ -204,7 +204,7 @@ panel_preferences_dialog_finalize (GObject *object)
   GtkWidget              *itembar;
 
   /* disconnect changed signal */
-  if (dialog->changed_handler_id != 0)
+  if (dialog->active != NULL && dialog->changed_handler_id != 0)
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       g_signal_handler_disconnect (G_OBJECT (itembar), dialog->changed_handler_id);
@@ -335,7 +335,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   /* disconnect signal we used to monitor changes in the itembar */
-  if (dialog->changed_handler_id != 0)
+  if (dialog->active != NULL && dialog->changed_handler_id != 0)
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       g_signal_handler_disconnect (G_OBJECT (itembar), dialog->changed_handler_id);
@@ -345,20 +345,23 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   nth = gtk_combo_box_get_active (combobox);
   dialog->active = panel_application_get_window (dialog->application, nth);
 
+  if (G_LIKELY (dialog->active != NULL))
+    {
+      itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
+      dialog->changed_handler_id =
+          g_signal_connect_swapped (G_OBJECT (itembar), "notify::changed",
+                                    G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
+                                    dialog);
 
-  itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-  dialog->changed_handler_id = g_signal_connect_swapped (G_OBJECT (itembar), "notify::changed",
-                                                               G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
-                                                               dialog);
+      /* rebind the dialog bindings */
+      panel_preferences_dialog_bindings_update (dialog);
 
-  /* rebind the dialog bindings */
-  panel_preferences_dialog_bindings_update (dialog);
+      /* update selection state */
+      panel_application_window_select (dialog->application, dialog->active);
 
-  /* update selection state */
-  panel_application_window_select (dialog->application, dialog->active);
-
-  /* update the items treeview */
-  panel_preferences_dialog_item_store_rebuild (dialog);
+      /* update the items treeview */
+      panel_preferences_dialog_item_store_rebuild (dialog);
+    }
 }
 
 
@@ -366,15 +369,14 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 static void
 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
 {
-  GObject *store, *combo;
+  GObject *store, *combo, *object;
   gint     n, n_items;
   gchar   *name;
 
   /* get the combo box and model */
   store = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-liststore");
-  combo = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
-
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
+  combo = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
 
   /* block signal */
@@ -392,6 +394,15 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
       g_free (name);
     }
 
+  /* set sensitivity of some widgets */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "notebook");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_items > 0));
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-remove");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_items > 1));
+
   /* unblock signal */
   g_signal_handlers_unblock_by_func (combo, panel_preferences_dialog_panel_combobox_changed, dialog);
 }
@@ -408,7 +419,7 @@ panel_preferences_dialog_panel_add (GtkWidget              *widget,
 
   /* create new window */
   window = panel_application_new_window (dialog->application,
-      gtk_widget_get_screen (widget));
+      gtk_widget_get_screen (widget), TRUE);
 
   /* block autohide */
   panel_window_freeze_autohide (window);
@@ -416,20 +427,14 @@ panel_preferences_dialog_panel_add (GtkWidget              *widget,
   /* rebuild the selector */
   panel_preferences_dialog_panel_combobox_rebuild (dialog);
 
-  /* set the sensitivity of the remove button */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-remove");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_widget_set_sensitive (GTK_WIDGET (object),
-      panel_application_get_n_windows (dialog->application) > 1);
+  /* show window */
+  gtk_widget_show (GTK_WIDGET (window));
 
   /* select new panel (new window is appended) */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   active = panel_application_get_n_windows (dialog->application) - 1;
   gtk_combo_box_set_active (GTK_COMBO_BOX (object), active);
-
-  /* show window */
-  gtk_widget_show (GTK_WIDGET (window));
 }
 
 
@@ -453,9 +458,7 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
 
       /* destroy the panel */
       gtk_widget_destroy (GTK_WIDGET (dialog->active));
-
-      /* set the sensitivity of the remove button */
-      gtk_widget_set_sensitive (widget, panel_application_get_n_windows (dialog->application) > 1);
+      dialog->active = NULL;
 
       /* rebuild the selector */
       panel_preferences_dialog_panel_combobox_rebuild (dialog);
@@ -787,6 +790,7 @@ panel_preferences_dialog_show (PanelWindow *active)
   static PanelPreferencesDialog *dialog = NULL;
   gint                           idx = 0;
   GObject                       *window, *combo;
+  GdkScreen                     *screen;
 
   panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
 
@@ -803,10 +807,16 @@ panel_preferences_dialog_show (PanelWindow *active)
   else
     active = panel_application_get_window (dialog->application, idx);
 
+  /* get the active screen */
+  if (active != NULL)
+    screen = gtk_widget_get_screen (GTK_WIDGET (active));
+  else
+    screen = gdk_screen_get_default ();
+
   /* show the dialog on the same screen as the panel */
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
   panel_return_if_fail (GTK_IS_WIDGET (window));
-  gtk_window_set_screen (GTK_WINDOW (window), gtk_widget_get_screen (GTK_WIDGET (active)));
+  gtk_window_set_screen (GTK_WINDOW (window), screen);
   gtk_window_present (GTK_WINDOW (window));
 
   /* select the active window in the dialog */

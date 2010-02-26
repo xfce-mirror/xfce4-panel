@@ -172,6 +172,8 @@ panel_application_class_init (PanelApplicationClass *klass)
 static void
 panel_application_init (PanelApplication *application)
 {
+  PanelWindow *window;
+
   /* initialize */
   application->windows = NULL;
   application->dialogs = NULL;
@@ -191,6 +193,13 @@ panel_application_init (PanelApplication *application)
 
   /* start the autosave timeout */
   panel_application_save_reschedule (application);
+
+  /* create empty window */
+  if (G_UNLIKELY (application->windows == NULL))
+    {
+      window = panel_application_new_window (application, NULL, TRUE);
+      gtk_widget_show (GTK_WIDGET (window));
+    }
 }
 
 
@@ -313,7 +322,7 @@ panel_application_load (PanelApplication *application)
   for (i = 0; i < n_panels; i++)
     {
       /* create a new window */
-      window = panel_application_new_window (application, NULL);
+      window = panel_application_new_window (application, NULL, FALSE);
 
       /* walk all the plugins on the panel */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
@@ -1110,13 +1119,16 @@ panel_application_add_new_item (PanelApplication  *application,
 
 PanelWindow *
 panel_application_new_window (PanelApplication *application,
-                              GdkScreen        *screen)
+                              GdkScreen        *screen,
+                              gboolean          reset_properties)
 {
   GtkWidget *window;
   GtkWidget *itembar;
+  gchar     *property;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
+  panel_return_val_if_fail (XFCONF_IS_CHANNEL (application->xfconf), NULL);
 
   /* create panel window */
   window = g_object_new (PANEL_TYPE_WINDOW, NULL);
@@ -1133,6 +1145,15 @@ panel_application_new_window (PanelApplication *application,
 
   /* add the window to internal list */
   application->windows = g_slist_append (application->windows, window);
+
+  /* flush the window properties */
+  if (reset_properties)
+    {
+      /* remove the xfconf properties */
+      property = g_strdup_printf ("/panels/panel-%d", g_slist_index (application->windows, window));
+      xfconf_channel_reset_property (application->xfconf, property, TRUE);
+      g_free (property);
+    }
 
   /* add the itembar */
   itembar = panel_itembar_new ();
