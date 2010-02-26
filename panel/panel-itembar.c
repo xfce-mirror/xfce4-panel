@@ -25,7 +25,6 @@
 #include <exo/exo.h>
 #include <libxfce4panel/libxfce4panel.h>
 
-#include <panel/panel-private.h>
 #include <panel/panel-itembar.h>
 
 

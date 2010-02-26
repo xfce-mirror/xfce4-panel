@@ -33,7 +33,6 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 
-#include <panel/panel-private.h>
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 

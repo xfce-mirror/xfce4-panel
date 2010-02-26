@@ -20,15 +20,18 @@
 #ifndef __PANEL_PRIVATE_H__
 #define __PANEL_PRIVATE_H__
 
-#include <gtk/gtk.h>
-
-G_BEGIN_DECLS
-
 /* handling flags */
 #define PANEL_SET_FLAG(flags,flag)   G_STMT_START{ ((flags) |= (flag)); }G_STMT_END
 #define PANEL_UNSET_FLAG(flags,flag) G_STMT_START{ ((flags) &= ~(flag)); }G_STMT_END
 #define PANEL_HAS_FLAG(flags,flag)   (((flags) & (flag)) != 0)
 
-G_END_DECLS
+/* check if the string is not empty */
+#define IS_STRING(string)            ((string) != NULL && *(string) != '\0')
+
+/* relative plugin filename (printf format) */
+#define PANEL_PLUGIN_RELATIVE_PATH   "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%d.rc"
+
+/* xfconf property base (printf format) */
+#define PANEL_PLUGIN_PROPERTY_BASE   "/plugins/plugin-%d"
 
 #endif /* !__PANEL_PRIVATE_H__ */

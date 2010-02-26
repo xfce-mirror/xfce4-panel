@@ -25,6 +25,7 @@
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
 
+#include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/libxfce4panel-marshal.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>

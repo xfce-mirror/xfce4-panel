@@ -25,10 +25,11 @@
 #include <exo/exo.h>
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
+
+#include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
-#include <panel/panel-private.h>
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 #include <panel/panel-plugin-external.h>

@@ -39,6 +39,7 @@
 #include <dbus/dbus-glib-lowlevel.h>
 
 #include <gtk/gtk.h>
+#include <common/panel-private.h>
 #include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -57,6 +58,7 @@ static gchar   *opt_filename = NULL;
 static gint     opt_socket_id = 0;
 static gchar  **opt_arguments = NULL;
 static GQuark   plug_quark = 0;
+
 
 
 static GOptionEntry option_entries[] =

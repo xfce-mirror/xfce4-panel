@@ -48,12 +48,6 @@ G_BEGIN_DECLS
 #define panel_return_val_if_fail(expr,val) G_STMT_START{ (void)0; }G_STMT_END
 #endif
 
-/* xfconf channel for plugins */
-#define XFCE_PANEL_PLUGIN_CHANNEL_NAME ("xfce4-panel")
-#define xfce_panel_plugin_xfconf_channel_new(plugin) \
-  xfconf_channel_new_with_property_base (XFCE_PANEL_PLUGIN_CHANNEL_NAME, \
-    xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)));
-
 /* canonical representation for static strings */
 #ifndef I_
 #define I_(string) (g_intern_static_string ((string)))

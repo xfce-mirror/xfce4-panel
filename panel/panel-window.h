@@ -21,7 +21,6 @@
 #define __PANEL_WINDOW_H__
 
 #include <gtk/gtk.h>
-#include <panel/panel-private.h>
 
 G_BEGIN_DECLS
 

@@ -27,8 +27,7 @@
 
 #include <exo/exo.h>
 #include <libxfce4panel/libxfce4panel.h>
-
-#include <panel/panel-private.h>
+#include <common/panel-private.h>
 #include <panel/panel-window.h>
 #include <panel/panel-glue.h>
 #include <panel/panel-application.h>

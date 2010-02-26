@@ -26,7 +26,6 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/libxfce4panel.h>
 
-#include <panel/panel-private.h>
 #include <panel/panel-window.h>
 #include <panel/panel-glue.h>
 #include <panel/panel-application.h>

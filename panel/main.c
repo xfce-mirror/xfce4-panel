@@ -38,7 +38,6 @@
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 
-#include <panel/panel-private.h>
 #include <panel/panel-application.h>
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-dbus-client.h>

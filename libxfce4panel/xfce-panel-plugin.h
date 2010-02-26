@@ -39,6 +39,14 @@ typedef struct _XfcePanelPlugin        XfcePanelPlugin;
 #define XFCE_IS_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PANEL_PLUGIN))
 #define XFCE_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginClass))
 
+/* xfconf channel for plugins */
+#define XFCE_PANEL_PLUGIN_CHANNEL_NAME ("xfce4-panel")
+
+/* macro for opening an XfconfChannel for plugin */
+#define xfce_panel_plugin_xfconf_channel_new(plugin) \
+  xfconf_channel_new_with_property_base (XFCE_PANEL_PLUGIN_CHANNEL_NAME, \
+    xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)));
+
 struct _XfcePanelPluginClass
 {
   /*< private >*/
