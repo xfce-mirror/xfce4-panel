@@ -155,9 +155,6 @@ systray_plugin_init (SystrayPlugin *plugin)
   plugin->manager = NULL;
   plugin->show_frame = FALSE;
 
-  /* initialize properties */
-  PANEL_PROPERTIES_INIT (plugin);
-
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 

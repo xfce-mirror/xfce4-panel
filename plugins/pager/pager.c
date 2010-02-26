@@ -149,9 +149,6 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->rows = 1;
   plugin->wnck_pager = NULL;
 
-  /* initialize properties */
-  PANEL_PROPERTIES_INIT (plugin);
-
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 }

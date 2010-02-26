@@ -162,9 +162,6 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_interval = 0;
   plugin->clock_timeout_id = 0;
 
-  /* initialize properties */
-  PANEL_PROPERTIES_INIT (plugin);
-
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 

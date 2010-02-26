@@ -179,9 +179,6 @@ actions_plugin_init (ActionsPlugin *plugin)
   plugin->first_action = ACTION_LOG_OUT_DIALOG;
   plugin->second_action = ACTION_DISABLED;
 
-  /* initialize properties */
-  PANEL_PROPERTIES_INIT (plugin);
-
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 

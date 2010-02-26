@@ -173,11 +173,20 @@ XfconfChannel *
 panel_properties_get_channel (void)
 {
   static XfconfChannel *channel = NULL;
+  GError *error = NULL;
 
   if (G_UNLIKELY (channel == NULL))
     {
+      if (!xfconf_init (&error))
+        {
+          g_critical ("Failed to initialize Xfconf: %s", error->message);
+          g_error_free (error);
+        }
+
       channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
       g_object_add_weak_pointer (G_OBJECT (channel), (gpointer) &channel);
+
+      g_object_weak_ref (G_OBJECT (channel), (GWeakNotify) xfconf_shutdown, NULL);
     }
   else
     {
@@ -301,14 +310,4 @@ panel_properties_shared_hash_table (GHashTable *hash_table)
     shared_hash_table = g_hash_table_ref (hash_table);
   else
     shared_hash_table = NULL;
-}
-
-
-
-void
-panel_properties_shutdown (gpointer  user_data,
-                           GObject  *where_the_object_was)
-{
-  /* delay this a bit to avoid warnings */
-  g_idle_add ((GSourceFunc) xfconf_shutdown, NULL);
 }

@@ -223,16 +223,6 @@ main (gint argc, gchar **argv)
       goto dbus_return;
     }
 
-  /* initialize xfconf */
-  if (!xfconf_init (&error))
-    {
-      /* print error and exit */
-      g_error ("Failed to connect to xfconf daemon: %s.", error->message);
-      g_error_free (error);
-
-      return EXIT_FAILURE;
-    }
-
   /* create dbus service */
   dbus_service = panel_dbus_service_get ();
 
@@ -257,9 +247,6 @@ main (gint argc, gchar **argv)
 
   /* release application reference */
   g_object_unref (G_OBJECT (application));
-
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 
   /* whether we need to restart */
   if (dbus_quit_with_restart)

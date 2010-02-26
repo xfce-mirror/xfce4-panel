@@ -138,9 +138,6 @@ separator_plugin_init (SeparatorPlugin *plugin)
   /* initialize */
   plugin->style = SEPARATOR_PLUGIN_STYLE_SEPARATOR;
 
-  /* initialize properties */
-  PANEL_PROPERTIES_INIT (plugin);
-
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 }

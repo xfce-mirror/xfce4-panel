@@ -201,9 +201,6 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->all_workspaces = TRUE;
   plugin->urgent_windows = 0;
 
-  /* initialize properties */
-  PANEL_PROPERTIES_INIT (plugin);
-
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
