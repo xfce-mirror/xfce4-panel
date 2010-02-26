@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-18 18:00+0100\n"
-"PO-Revision-Date: 2010-02-18 18:17+0100\n"
+"POT-Creation-Date: 2010-02-20 00:00+0100\n"
+"PO-Revision-Date: 2010-02-20 00:31+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -486,14 +486,7 @@ msgstr "Hændelsesknapper"
 msgid "Log out, lock or other system actions"
 msgstr "Log ud, lås skærmen eller andre systemhandlinger"
 
-#: ../plugins/clock/clock-dialog.glade.h:1
-msgid "24-_hour clock"
-msgstr "24-_timers ur"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Analog"
-msgstr "Analog"
-
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 #: ../plugins/pager/pager-dialog.glade.h:1
@@ -503,6 +496,91 @@ msgstr "Analog"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 msgid "Appearance"
 msgstr "Udseende"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+msgid "Applications Menu"
+msgstr "Programmenu"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+msgid "Button _title:"
+msgstr "Knap_titel:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Menu File"
+msgstr "Menufil"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "Menu _file:"
+msgstr "Menu_fil:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Select A Menu File"
+msgstr "Vælg en menufil"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Vælg denne indstilling for at vise det generiske navn i menuen, eksempelvis \"Filhåndtering\" i stedet for \"Thunar\""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show generic application n_ames"
+msgstr "Vis generiske programn_avne"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+msgid "Show ic_ons in menu"
+msgstr "Vis ik_oner i menu"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+msgid "Use _default menu file"
+msgstr "Brug _standardmenufil"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+msgid "Use c_ustom menu file"
+msgstr "Brug t_ilpasset menufil"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "_Icon:"
+msgstr "_Ikon:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+msgid "_Show button title"
+msgstr "_Vis knaptitel"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
+msgid "Xfce Menu"
+msgstr "Xfce's menu"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:440
+#: ../plugins/directorymenu/directorymenu.c:369
+msgid "Select An Icon"
+msgstr "Vælg et ikon"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:670
+#: ../plugins/launcher/launcher.c:2099
+#, c-format
+msgid "Failed to execute command \"%s\"."
+msgstr "Kunne ikke køre kommando \"%s\"."
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:823
+msgid "No applications found"
+msgstr "Ingen programmer blev fundet"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:835
+msgid "Failed to load the applications menu"
+msgstr "Kunne ikke starte programmenu"
+
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+msgid "Show a menu containing categories of installed applications"
+msgstr "Vis en menu indeholdende kategorier over installerede programmer"
+
+#: ../plugins/clock/clock-dialog.glade.h:1
+msgid "24-_hour clock"
+msgstr "24-_timers ur"
+
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "Analog"
+msgstr "Analog"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Binary"
@@ -823,10 +901,6 @@ msgstr "Tilpasset format"
 msgid "What time is it?"
 msgstr "Hvad er klokken?"
 
-#: ../plugins/directorymenu/directorymenu.c:369
-msgid "Select An Icon"
-msgstr "Vælg et ikon"
-
 #: ../plugins/directorymenu/directorymenu.c:538
 #, c-format
 msgid "Failed to launch application \"%s\""
@@ -894,10 +968,6 @@ msgstr "_Basismappe:"
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
 msgstr "_Filmønster:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-msgid "_Icon:"
-msgstr "_Ikon:"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
@@ -997,11 +1067,6 @@ msgstr "Ikke navngivet element"
 #: ../plugins/launcher/launcher.c:1585
 msgid "No items"
 msgstr "Ingen elementer"
-
-#: ../plugins/launcher/launcher.c:2099
-#, c-format
-msgid "Failed to execute command \"%s\"."
-msgstr "Kunne ikke køre kommando \"%s\"."
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
