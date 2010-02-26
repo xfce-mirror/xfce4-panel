@@ -123,6 +123,31 @@ dnl **********************************
 XDT_CHECK_OPTIONAL_PACKAGE([GIO_UNIX], [gio-unix-2.0],
                            [2.18.0], [gio-unix], [GIO UNIX features])
 
+dnl ***************************************************
+dnl *** Check if we need to build the documentation ***
+dnl ***************************************************
+AC_ARG_ENABLE([gen-doc], [AC_HELP_STRING([--enable-gen-doc], 
+              [Generate HTML documentation (requires gnome-doc-utils) [default=no]])],,
+              [enable_gen_doc=no])
+if test x"$enable_gen_doc" = x"yes"; then
+  XDT_CHECK_PACKAGE([GNOME_DOC_UTILS], [gnome-doc-utils], [0.19.1],
+  [
+    AC_PATH_PROG([XML2PO], [xml2po], [no])
+    if test x"$XML2PO" = x"no"; then
+        enable_gen_doc=no
+    fi
+
+    AC_PATH_PROG([GNOME_DOC_TOOL], [gnome-doc-tool], [no])
+    if test x"$GNOME_DOC_TOOL" = x"no"; then
+        enable_gen_doc=no
+    fi
+  ],
+  [
+    enable_gen_doc=no
+  ])
+fi
+AM_CONDITIONAL([GENERATE_DOCUMENTATION], [test x"$enable_gen_doc" = x"yes"])
+
 dnl *************************
 dnl *** Check for gtk-doc ***
 dnl *************************
@@ -195,6 +220,9 @@ AC_OUTPUT([
 Makefile
 common/Makefile
 docs/Makefile
+docs/manual/Makefile
+docs/manual/figures/Makefile
+docs/manual/po/Makefile
 docs/references/Makefile
 docs/references/version.xml
 icons/Makefile
@@ -231,6 +259,7 @@ dnl ***************************
 echo
 echo "Build Configuration:"
 echo
-echo "* Debug Support:        $enable_debug"
-echo "* GNU Visibility:       $have_gnuc_visibility"
+echo "* Debug Support:          $enable_debug"
+echo "* GNU Visibility:         $have_gnuc_visibility"
+echo "* Generate Documentation: $enable_gen_doc"
 echo

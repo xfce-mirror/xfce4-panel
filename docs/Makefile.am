@@ -1,9 +1,9 @@
 SUBDIRS = \
+	manual \
 	references
 
 doc_DATA = \
-	README.gtkrc-2.0 \
-	README.libxfce4panel
+	README.gtkrc-2.0
 
 EXTRA_DIST = \
 	$(doc_DATA)
