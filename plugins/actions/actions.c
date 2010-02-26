@@ -77,14 +77,11 @@ ActionEntry;
 
 struct _ActionsPluginClass
 {
-  /* parent class */
   XfcePanelPluginClass __parent__;
-
 };
 
 struct _ActionsPlugin
 {
-  /* parent type */
   XfcePanelPlugin __parent__;
 
   /* widgets */
@@ -168,7 +165,6 @@ actions_plugin_init (ActionsPlugin *plugin)
   GtkWidget   *widget;
   ActionEntry *entry = &action_entries[ACTION_LOG_OUT_DIALOG];
 
-  /* initialize */
   plugin->first_action = ACTION_LOG_OUT_DIALOG;
   plugin->second_action = ACTION_DISABLED;
 
@@ -314,10 +310,8 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                              gint             size)
 {
   ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
-  gint           width, height;
-
-  /* init size */
-  width = height = size;
+  gint           width = size;
+  gint           height = size;
 
   if (plugin->second_action != ACTION_DISABLED)
     {
