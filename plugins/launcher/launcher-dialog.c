@@ -26,6 +26,16 @@
 #include "launcher-dialog.h"
 #include "launcher-dialog_glade.h"
 
+
+static void
+launcher_dialog_add_button_clicked (GtkWidget *button,
+                                    GtkWidget *menu)
+{
+  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 1, 
+                  gtk_get_current_event_time());
+}
+
+
 static void
 launcher_dialog_builder_died (gpointer user_data, GObject *where_object_was)
 {
@@ -34,25 +44,12 @@ launcher_dialog_builder_died (gpointer user_data, GObject *where_object_was)
 
 
 
-static void
-test_binding (GObject *object,
-              const gchar *property,
-              GType property_type,
-              gpointer struct_p,
-              glong struct_offset)
-{
-    
-}
-
-
-
-
 void
 launcher_dialog_show (LauncherPlugin *plugin)
 {
   GtkBuilder *builder;
   GObject    *dialog;
-  GObject    *object;
+  GObject    *object, *menu;
   
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   
@@ -64,14 +61,11 @@ launcher_dialog_show (LauncherPlugin *plugin)
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
       gtk_widget_show (GTK_WIDGET (dialog));
       
-      
       object = gtk_builder_get_object (builder, "close-button");
       g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
       
-      plugin->test = "blaat";
-      
-      guint offset = G_STRUCT_OFFSET (LauncherPlugin, test);
-      
-      g_message ("%d %s", offset, G_STRUCT_MEMBER (gchar *, plugin, offset));
+      object = gtk_builder_get_object (builder, "entry-add");
+      menu = gtk_builder_get_object (builder, "add-menu");
+      g_signal_connect (G_OBJECT (object), "clicked", G_CALLBACK (launcher_dialog_add_button_clicked), GTK_MENU (menu));
     }
 }
