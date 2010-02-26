@@ -547,7 +547,8 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
           && g_value_get_boolean (value))
         {
           /* show menu under cursor */
-          applications_menu_plugin_menu (NULL, plugin);
+          if (panel_utils_grab_available ())
+            applications_menu_plugin_menu (NULL, plugin);
         }
       else
         {

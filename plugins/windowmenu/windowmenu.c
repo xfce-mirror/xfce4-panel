@@ -589,7 +589,8 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
           && g_value_get_boolean (value))
         {
           /* popup the menu under the pointer */
-          window_menu_plugin_menu (NULL, plugin);
+          if (panel_utils_grab_available ())
+            window_menu_plugin_menu (NULL, plugin);
         }
       else
         {
