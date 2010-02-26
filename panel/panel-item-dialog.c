@@ -172,7 +172,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 
   gtk_window_set_title (GTK_WINDOW (dialog), _("Add New Items"));
   xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
-      _("Add new plugins to your Xfce panels"));
+      _("Add new plugins to the panel"));
   gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_ADD);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_default_size (GTK_WINDOW (dialog), 350, 450);

@@ -825,6 +825,7 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
   /* create question dialog (same code is also in panel-preferences-dialog.c) */
   dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
       GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+      /* I18N: %s is the name of the plugin */
       _("Are you sure that you want to remove \"%s\"?"),
       xfce_panel_plugin_get_display_name (plugin));
   gtk_window_set_screen (GTK_WINDOW (dialog),

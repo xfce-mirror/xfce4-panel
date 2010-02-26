@@ -681,7 +681,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
                                                        gtk_widget_get_screen (mi), &error))
     {
       xfce_dialog_show_error (NULL, error,
-          _("Failed to open preferred application category \"%s\""), category);
+          _("Failed to execute the preferred application for category \"%s\""), category);
       g_error_free (error);
     }
 

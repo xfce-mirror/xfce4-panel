@@ -255,7 +255,7 @@ main (gint argc, gchar **argv)
   if (panel_dbus_service_get_restart ())
     {
       /* spawn ourselfs again */
-      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting"));
+      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting..."));
       g_spawn_command_line_async (argv[0], NULL);
     }
 
@@ -276,7 +276,7 @@ dbus_return:
       else if (opt_save)
         error_msg = _("Failed to save the panel configuration");
       else if (opt_add)
-        error_msg = _("Failed to remote add a plugin to the panel");
+        error_msg = _("Failed to add a plugin to the panel");
       else if (opt_restart)
         error_msg = _("Failed to restart the panel");
       else if (opt_quit)
@@ -288,6 +288,7 @@ dbus_return:
       if (error->code == DBUS_GERROR_NAME_HAS_NO_OWNER)
         {
           g_clear_error (&error);
+          /* I18N: %s is replaced with xfce4-panel */
           g_set_error (&error, 0, 0, _("No running instance of %s was found"), G_LOG_DOMAIN);
         }
 
