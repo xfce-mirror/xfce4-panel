@@ -32,7 +32,14 @@ G_BEGIN_DECLS
 #ifndef NDEBUG
 #define panel_assert(expr)                 g_assert (expr)
 #define panel_assert_not_reached()         g_assert_not_reached ()
-#define panel_return_if_fail(expr)         panel_return_val_if_fail(expr,{})
+#define panel_return_if_fail(expr)         G_STMT_START { \
+  if (G_UNLIKELY (!(expr))) \
+    { \
+      g_log (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, \
+             "%s (%s): expression '%s' failed.", G_STRLOC, G_STRFUNC, \
+             #expr); \
+      return; \
+    }; }G_STMT_END
 #define panel_return_val_if_fail(expr,val) G_STMT_START { \
   if (G_UNLIKELY (!(expr))) \
     { \
