@@ -140,10 +140,6 @@ main (gint argc, gchar **argv)
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-  /* initialize the gthread system */
-  if (g_thread_supported () == FALSE)
-    g_thread_init (NULL);
-
   /* initialize gtk+ */
   if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, (gchar *) GETTEXT_PACKAGE, &error))
     {
