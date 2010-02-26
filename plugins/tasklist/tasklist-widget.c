@@ -24,15 +24,17 @@
 #include <string.h>
 #endif
 
-#include <X11/Xlib.h>
-#include <gdk/gdkx.h>
-#include <X11/extensions/shape.h>
-
 #include <gtk/gtk.h>
 #include <exo/exo.h>
 #include <libwnck/libwnck.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
+
+#ifdef GDK_WINDOWING_X11
+#include <X11/Xlib.h>
+#include <gdk/gdkx.h>
+#include <X11/extensions/shape.h>
+#endif
 
 #include "tasklist-widget.h"
 
@@ -118,8 +120,10 @@ struct _XfceTasklist
   /* dummy property */
   guint                 show_handle : 1;
 
+#ifdef GDK_WINDOWING_X11
   /* wireframe window */
   Window                wireframe_window;
+#endif
 
   /* gtk style properties */
   gint                  max_button_length;
@@ -172,9 +176,11 @@ static void xfce_tasklist_active_workspace_changed (WnckScreen *screen, WnckWork
 static void xfce_tasklist_window_added (WnckScreen *screen, WnckWindow *window, XfceTasklist *tasklist);
 static void xfce_tasklist_window_removed (WnckScreen *screen, WnckWindow *window, XfceTasklist *tasklist);
 static void xfce_tasklist_viewports_changed (WnckScreen *screen, XfceTasklist *tasklist);
+#ifdef GDK_WINDOWING_X11
 static void xfce_tasklist_wireframe_hide (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_destroy (XfceTasklist *tasklist);
 static void xfce_tasklist_wireframe_update (XfceTasklist *tasklist, XfceTasklistChild *child);
+#endif
 static void xfce_tasklist_sort (XfceTasklist *tasklist);
 static gint xfce_tasklist_button_compare (gconstpointer a, gconstpointer b, gpointer user_data);
 static void xfce_tasklist_button_new (XfceTasklistChild *child);
@@ -328,7 +334,9 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->class_groups = NULL;
   tasklist->show_wireframes = FALSE;
   tasklist->show_handle = TRUE;
+#ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
+#endif
   tasklist->max_button_length = DEFAULT_BUTTON_LENGTH;
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
   tasklist->ellipsize_mode = PANGO_ELLIPSIZE_END;
@@ -472,9 +480,11 @@ xfce_tasklist_finalize (GObject *object)
   if (tasklist->class_groups != NULL)
     g_slist_free (tasklist->class_groups);
 
+#ifdef GDK_WINDOWING_X11
   /* destroy the wireframe window */
   if (tasklist->wireframe_window != 0)
     xfce_tasklist_wireframe_destroy (tasklist);
+#endif
 
   (*G_OBJECT_CLASS (xfce_tasklist_parent_class)->finalize) (object);
 }
@@ -1048,6 +1058,7 @@ xfce_tasklist_viewports_changed (WnckScreen   *screen,
 
 
 
+#ifdef GDK_WINDOWING_X11
 static void
 xfce_tasklist_wireframe_hide (XfceTasklist *tasklist)
 {
@@ -1155,7 +1166,7 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
   /* free the gc */
   XFreeGC (dpy, gc);
 }
-
+#endif
 
 
 static void
@@ -1349,7 +1360,7 @@ tasklist_button_workspace_changed (WnckWindow        *window,
 }
 
 
-
+#ifdef GDK_WINDOWING_X11
 static void
 tasklist_button_geometry_changed (WnckWindow        *window,
                                   XfceTasklistChild *child)
@@ -1376,6 +1387,7 @@ tasklist_button_leave_notify_event (GtkWidget *button,
 
   return FALSE;
 }
+#endif
 
 
 
@@ -1384,6 +1396,7 @@ tasklist_button_enter_notify_event (GtkWidget         *button,
                                     GdkEventCrossing  *event,
                                     XfceTasklistChild *child)
 {
+#ifdef GDK_WINDOWING_X11
   /* leave when there is nothing to do */
   if (child->tasklist->show_wireframes == FALSE)
     return FALSE;
@@ -1398,6 +1411,7 @@ tasklist_button_enter_notify_event (GtkWidget         *button,
   /* monitor geometry changes */
   g_signal_connect (G_OBJECT (child->window), "geometry-changed",
       G_CALLBACK (tasklist_button_geometry_changed), child);
+#endif
 
   return FALSE;
 }
@@ -1697,9 +1711,11 @@ xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist,
   /* set new value */
   tasklist->show_wireframes = !!show_wireframes;
 
+#ifdef GDK_WINDOWING_X11
   /* destroy the window if needed */
   if (show_wireframes == FALSE && tasklist->wireframe_window != 0)
     xfce_tasklist_wireframe_destroy (tasklist);
+#endif
 }
 
 
