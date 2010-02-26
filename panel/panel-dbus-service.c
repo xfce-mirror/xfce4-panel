@@ -85,6 +85,7 @@ struct _PanelDBusService
 
 
 
+/* shared boolean for restart or quit */
 static gboolean dbus_exit_restart = FALSE;
 
 
@@ -127,10 +128,7 @@ panel_dbus_service_init (PanelDBusService *service)
     }
   else
     {
-      /* print warning */
       g_warning ("Failed to connect to the D-BUS session bus: %s", error->message);
-
-      /* cleanup */
       g_error_free (error);
     }
 }
@@ -150,7 +148,6 @@ panel_dbus_service_finalize (GObject *object)
       dbus_bus_release_name (connection, PANEL_DBUS_NAME, NULL);
       dbus_g_connection_flush (service->connection);
 
-      /* release the connection */
       dbus_g_connection_unref (service->connection);
     }
 
@@ -232,7 +229,7 @@ panel_dbus_service_add_new_item (PanelDBusService  *service,
 
   application = panel_application_get ();
 
-  /* save the configuration */
+  /* add new plugin (with or without arguments) */
   if (arguments && *arguments != NULL)
     panel_application_add_new_item (application, plugin_name, arguments);
   else
@@ -264,24 +261,21 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
 
   /* if no type and value is send with the signal we send a char type
    * with nul value */
-  g_message ("%s", G_VALUE_TYPE_NAME (value));
   if (G_VALUE_HOLDS_UCHAR (value)
       && g_value_get_uchar (value) == '\0')
     real_value = NULL;
 
+  /* send the event to all matching plugins, break if one of the
+   * plugins return TRUE in this remote-event handler */
   factory = panel_module_factory_get ();
-
   plugins = panel_module_factory_get_plugins (factory, plugin_name);
-
   for (li = plugins; li != NULL; li = li->next)
     {
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (li->data), FALSE);
       if (xfce_panel_plugin_provider_remote_event (li->data, name, real_value))
         break;
     }
-
   g_slist_free (plugins);
-
   g_object_unref (G_OBJECT (factory));
 
   return TRUE;
@@ -309,7 +303,7 @@ panel_dbus_service_get (void)
 {
   static PanelDBusService *service = NULL;
 
-  if (G_LIKELY (service))
+  if (G_LIKELY (service != NULL))
     {
       g_object_ref (G_OBJECT (service));
     }
