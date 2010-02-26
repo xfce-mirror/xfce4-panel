@@ -39,6 +39,7 @@
 
 /* quick GList and GSList counting without traversing */
 #define LIST_HAS_ONE_ENTRY(l)           ((l) != NULL && (l)->next == NULL)
+#define LIST_HAS_ONE_OR_NO_ENTRIES(l)   ((l) == NULL || (l)->next == NULL)
 #define LIST_HAS_TWO_OR_MORE_ENTRIES(l) ((l) != NULL && (l)->next != NULL)
 
 #endif /* !__PANEL_PRIVATE_H__ */
