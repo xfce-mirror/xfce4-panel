@@ -1399,11 +1399,11 @@ tasklist_button_enter_notify_event (GtkWidget         *button,
 
   /* connect signal to destroy the window when the user leaves the button */
   g_signal_connect (G_OBJECT (button), "leave-notify-event",
-                    G_CALLBACK (tasklist_button_leave_notify_event), child);
+      G_CALLBACK (tasklist_button_leave_notify_event), child);
 
   /* monitor geometry changes */
   g_signal_connect (G_OBJECT (child->window), "geometry-changed",
-                    G_CALLBACK (tasklist_button_geometry_changed), child);
+      G_CALLBACK (tasklist_button_geometry_changed), child);
 
   return FALSE;
 }
@@ -1490,9 +1490,9 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
   gtk_button_set_relief (GTK_BUTTON (child->button),
                          child->tasklist->button_relief);
   g_signal_connect (G_OBJECT (child->button), "enter-notify-event",
-                    G_CALLBACK (tasklist_button_enter_notify_event), child);
+      G_CALLBACK (tasklist_button_enter_notify_event), child);
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
-                    G_CALLBACK (tasklist_button_button_press_event), child);
+      G_CALLBACK (tasklist_button_button_press_event), child);
 
   child->box = xfce_hvbox_new (child->tasklist->horizontal ?
       GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, FALSE, 6);
@@ -1529,13 +1529,13 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
 
   /* monitor window changes */
   g_signal_connect (G_OBJECT (window), "icon-changed",
-                    G_CALLBACK (tasklist_button_icon_changed), child);
+      G_CALLBACK (tasklist_button_icon_changed), child);
   g_signal_connect (G_OBJECT (window), "name-changed",
-                    G_CALLBACK (tasklist_button_name_changed), child);
+      G_CALLBACK (tasklist_button_name_changed), child);
   g_signal_connect (G_OBJECT (window), "state-changed",
-                    G_CALLBACK (tasklist_button_state_changed), child);
+      G_CALLBACK (tasklist_button_state_changed), child);
   g_signal_connect (G_OBJECT (window), "workspace-changed",
-                    G_CALLBACK (tasklist_button_workspace_changed), child);
+      G_CALLBACK (tasklist_button_workspace_changed), child);
 
   /* poke functions */
   tasklist_button_icon_changed (window, child);

@@ -238,6 +238,8 @@ systray_manager_finalize (GObject *object)
 {
   SystrayManager *manager = XFCE_SYSTRAY_MANAGER (object);
 
+  panel_return_if_fail (manager->invisible == NULL);
+
   /* destroy the hash table */
   g_hash_table_destroy (manager->sockets);
 
@@ -295,8 +297,8 @@ systray_manager_check_running (GdkScreen *screen)
 
 gboolean
 systray_manager_register (SystrayManager  *manager,
-                          GdkScreen        *screen,
-                          GError          **error)
+                          GdkScreen       *screen,
+                          GError         **error)
 {
   GdkDisplay          *display;
   gchar               *selection_name;
@@ -434,7 +436,7 @@ systray_manager_unregister (SystrayManager *manager)
   panel_return_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager));
 
   /* leave when there is no invisible window */
-  if (invisible == NULL)
+  if (G_UNLIKELY (invisible == NULL))
     return;
 
   panel_return_if_fail (GTK_IS_INVISIBLE (invisible));
@@ -446,21 +448,21 @@ systray_manager_unregister (SystrayManager *manager)
 
   /* remove our handling of the selection if we're the owner */
   owner = gdk_selection_owner_get_for_display (display, manager->selection_atom);
-  if (owner == invisible->window)
-    {
-      /* reset the selection owner */
-      gdk_selection_owner_set_for_display (display,
-                                           NULL,
-                                           manager->selection_atom,
-                                           gdk_x11_get_server_time (invisible->window),
-                                           TRUE);
-    }
+  if (owner != invisible->window
+      || !gdk_selection_owner_set_for_display (display,
+                                               NULL,
+                                               manager->selection_atom,
+                                               gdk_x11_get_server_time (invisible->window),
+                                               TRUE))
+    panel_assert_not_reached ();
 
   /* remove window filter */
-  gdk_window_remove_filter (invisible->window, systray_manager_window_filter, manager);
+  gdk_window_remove_filter (invisible->window,
+      systray_manager_window_filter, manager);
 
   /* remove all sockets from the hash table */
-  g_hash_table_foreach (manager->sockets, systray_manager_remove_socket, manager);
+  g_hash_table_foreach (manager->sockets,
+      systray_manager_remove_socket, manager);
 
   /* destroy and unref the invisible window */
   manager->invisible = NULL;
@@ -684,7 +686,7 @@ systray_manager_handle_dock_request (SystrayManager      *manager,
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
 
   /* check if we already have this window */
-  if (g_hash_table_lookup (manager->sockets, GUINT_TO_POINTER (window)))
+  if (g_hash_table_lookup (manager->sockets, GUINT_TO_POINTER (window)) != NULL)
     return;
 
   /* create the socket */

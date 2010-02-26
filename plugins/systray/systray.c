@@ -323,8 +323,11 @@ systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
       systray_plugin_screen_changed, NULL);
 
   /* release the manager */
-  if (G_LIKELY (plugin->manager))
-    g_object_unref (G_OBJECT (plugin->manager));
+  if (G_LIKELY (plugin->manager != NULL))
+    {
+      systray_manager_unregister (plugin->manager);
+      g_object_unref (G_OBJECT (plugin->manager));
+    }
 }
 
 
