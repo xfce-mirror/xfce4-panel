@@ -102,16 +102,13 @@ struct _PanelPluginExternal46
 {
   GtkSocket  __parent__;
 
-  /* plugin information */
   gint              unique_id;
 
   /* startup arguments */
   gchar           **arguments;
 
-  /* the module */
   PanelModule      *module;
 
-  /* whether the plug is embedded */
   guint             plug_embedded : 1;
 
   /* client-event queue */
@@ -120,7 +117,7 @@ struct _PanelPluginExternal46
   /* auto restart timer */
   GTimer           *restart_timer;
 
-  /* some info we store here */
+  /* some info we receive on startup */
   guint             show_configure : 1;
   guint             show_about : 1;
 
@@ -177,26 +174,26 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
-                                   g_param_spec_int ("unique-id", NULL, NULL,
+                                   g_param_spec_int ("unique-id", 
+                                                     NULL, NULL,
                                                      -1, G_MAXINT, -1,
-                                                     G_PARAM_READWRITE
-                                                     | G_PARAM_STATIC_STRINGS
+                                                     EXO_PARAM_READWRITE
                                                      | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
                                    PROP_MODULE,
-                                   g_param_spec_object ("module", NULL, NULL,
+                                   g_param_spec_object ("module", 
+                                                        NULL, NULL,
                                                         PANEL_TYPE_MODULE,
-                                                        G_PARAM_READWRITE
-                                                        | G_PARAM_STATIC_STRINGS
+                                                        EXO_PARAM_READWRITE
                                                         | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ARGUMENTS,
-                                   g_param_spec_boxed ("arguments", NULL, NULL,
+                                   g_param_spec_boxed ("arguments", 
+                                                       NULL, NULL,
                                                        G_TYPE_STRV,
-                                                       G_PARAM_READWRITE
-                                                       | G_PARAM_STATIC_STRINGS
+                                                       EXO_PARAM_READWRITE
                                                        | G_PARAM_CONSTRUCT_ONLY));
 
   panel_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM);
@@ -207,7 +204,6 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
 static void
 panel_plugin_external_46_init (PanelPluginExternal46 *external)
 {
-  /* initialize */
   external->unique_id = -1;
   external->module = NULL;
   external->queue = NULL;
@@ -453,7 +449,7 @@ panel_plugin_external_46_plug_removed (GtkSocket *socket)
   panel_return_val_if_fail (PANEL_IS_MODULE (external->module), FALSE);
 
   /* leave when the plugin was already removed */
-  if (external->plug_embedded == FALSE)
+  if (!external->plug_embedded)
     return FALSE;
 
   /* plug has been removed */
@@ -479,7 +475,7 @@ panel_plugin_external_46_plug_removed (GtkSocket *socket)
 
   if (g_timer_elapsed (external->restart_timer, NULL) > PANEL_PLUGIN_AUTO_RESTART)
     {
-      g_message ("Automatically restarting plugin %s-%d",
+      g_message ("Plugin %s-%d: auto restart after crash.",
                  panel_module_get_name (external->module),
                  external->unique_id);
     }
@@ -520,14 +516,16 @@ panel_plugin_external_46_plug_added (GtkSocket *socket)
   /* plug has been added */
   external->plug_embedded = TRUE;
 
+  /* send all the messages in the queue */
   if (external->queue != NULL)
     {
       external->queue = g_slist_reverse (external->queue);
-
       for (li = external->queue; li != NULL; li = li->next)
         {
           item = li->data;
-          panel_plugin_external_46_send_client_event (external, item->message, item->value);
+          panel_plugin_external_46_send_client_event (external, 
+                                                      item->message,
+                                                      item->value);
           g_slice_free (QueueItem, item);
         }
 
@@ -785,7 +783,6 @@ panel_plugin_external_46_child_watch (GPid     pid,
         break;
     }
 
-  /* close the pid */
   g_spawn_close_pid (pid);
 }
 
