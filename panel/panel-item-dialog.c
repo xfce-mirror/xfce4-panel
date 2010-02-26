@@ -443,8 +443,9 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
                               GdkDragContext  *context,
                               PanelItemDialog *dialog)
 {
-  PanelModule      *module;
-  const gchar      *icon_name;
+  PanelModule  *module;
+  const gchar  *icon_name;
+  GtkIconTheme *theme;
 
   panel_return_if_fail (GTK_IS_TREE_VIEW (treeview));
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
@@ -457,7 +458,9 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
         {
           /* set the drag icon */
           icon_name = panel_module_get_icon_name (module);
-          if (!exo_str_is_empty (icon_name))
+          theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (treeview));
+          if (!exo_str_is_empty (icon_name)
+              && gtk_icon_theme_has_icon (theme, icon_name))
             gtk_drag_set_icon_name (context, icon_name, 0, 0);
           else
             gtk_drag_set_icon_default (context);
