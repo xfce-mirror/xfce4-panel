@@ -88,7 +88,7 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
       G_CALLBACK (show_desktop_plugin_screen_changed), NULL);
 
   /* create the toggle button */
-  button = plugin->button = xfce_create_panel_toggle_button ();
+  button = plugin->button = xfce_panel_create_toggle_button ();
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
   gtk_container_add (GTK_CONTAINER (plugin), button);
   g_signal_connect (G_OBJECT (button), "toggled",

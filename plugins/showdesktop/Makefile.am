@@ -27,6 +27,7 @@ libshowdesktop_la_LDFLAGS = \
 	-avoid-version \
 	-module \
 	-no-undefined \
+	-export-symbols-regex '^xfce_panel_module_(preinit|init|construct)' \
 	$(PLATFORM_LDFLAGS)
 
 libshowdesktop_la_LIBADD = \
