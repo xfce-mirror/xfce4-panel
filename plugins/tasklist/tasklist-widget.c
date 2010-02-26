@@ -95,6 +95,9 @@ struct _XfceTasklist
   /* whether we show wireframes when hovering a button in
    * the tasklist */
   guint              show_wireframes : 1;
+  
+  /* wireframe window */
+  Window             wireframe_window;
 };
 
 struct _XfceTasklistChild
@@ -116,8 +119,6 @@ struct _XfceTasklistChild
 
   /* unique is for sorting by insert time */
   guint              unique_id;
-
-  Window             wireframe;
 };
 
 static const GtkTargetEntry drop_targets[] =
@@ -149,11 +150,15 @@ static void xfce_tasklist_active_workspace_changed (WnckScreen *screen, WnckWork
 static void xfce_tasklist_window_added (WnckScreen *screen, WnckWindow *window, XfceTasklist *tasklist);
 static void xfce_tasklist_window_removed (WnckScreen *screen, WnckWindow *window, XfceTasklist *tasklist);
 static void xfce_tasklist_viewports_changed (WnckScreen *screen, XfceTasklist *tasklist);
+static void xfce_tasklist_wireframe_hide (XfceTasklist *tasklist);
+static void xfce_tasklist_wireframe_destroy (XfceTasklist *tasklist);
+static void xfce_tasklist_wireframe_update (XfceTasklist *tasklist, XfceTasklistChild *child);
 static void tasklist_button_new (XfceTasklistChild *child);
 static void xfce_tasklist_set_style (XfceTasklist *tasklist, XfceTasklistStyle style);
 static void xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist, gboolean all_workspaces);
 static void xfce_tasklist_set_button_relief (XfceTasklist *tasklist, GtkReliefStyle button_relief);
 static void xfce_tasklist_set_show_only_minimized (XfceTasklist *tasklist, gboolean only_minimized);
+static void xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist, gboolean show_wireframes);
 
 
 
@@ -245,6 +250,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->style = XFCE_TASKLIST_STYLE_DEFAULT;
   tasklist->class_groups = NULL;
   tasklist->show_wireframes = FALSE;
+  tasklist->wireframe_window = 0;
 
   /* set the itembar drag destination targets */
   gtk_drag_dest_set (GTK_WIDGET (tasklist), 0, drop_targets,
@@ -334,7 +340,7 @@ xfce_tasklist_set_property (GObject      *object,
 
       case PROP_SHOW_WIREFRAMES:
         /* set the new value */
-        tasklist->show_wireframes = g_value_get_boolean (value);
+        xfce_tasklist_set_show_wireframes (tasklist, g_value_get_boolean (value));
         break;
 
       default:
@@ -350,8 +356,12 @@ xfce_tasklist_finalize (GObject *object)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (object);
 
-  g_return_if_fail (tasklist->children == NULL);
-  /* g_return_if_fail (tasklist->class_groups == NULL); */
+  panel_return_if_fail (tasklist->children == NULL);
+  /* panel_return_if_fail (tasklist->class_groups == NULL); */
+  
+  /* destroy the wireframe window */
+  if (tasklist->wireframe_window != 0)
+    xfce_tasklist_wireframe_destroy (tasklist);
 
   (*G_OBJECT_CLASS (xfce_tasklist_parent_class)->finalize) (object);
 }
@@ -690,8 +700,8 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
 {
   GdkScreen *screen;
 
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  g_return_if_fail (tasklist->screen == NULL);
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->screen == NULL);
 
   /* get the widget screen */
   screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
@@ -715,8 +725,8 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
   GSList            *li, *lnext;
   XfceTasklistChild *child;
 
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  g_return_if_fail (WNCK_IS_SCREEN (tasklist->screen));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (WNCK_IS_SCREEN (tasklist->screen));
 
   /* disconnect monitor signals */
   g_signal_handlers_disconnect_by_func (G_OBJECT (tasklist->screen), G_CALLBACK (xfce_tasklist_active_window_changed), tasklist);
@@ -750,10 +760,10 @@ xfce_tasklist_active_window_changed (WnckScreen   *screen,
   GSList            *li;
   XfceTasklistChild *child;
 
-  g_return_if_fail (WNCK_IS_SCREEN (screen));
-  g_return_if_fail (previous_window == NULL || WNCK_IS_WINDOW (previous_window));
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  g_return_if_fail (tasklist->screen == screen);
+  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (previous_window == NULL || WNCK_IS_WINDOW (previous_window));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->screen == screen);
 
   /* get the new active window */
   active_window = wnck_screen_get_active_window (screen);
@@ -790,10 +800,10 @@ xfce_tasklist_active_workspace_changed (WnckScreen    *screen,
   WnckWorkspace     *active_ws;
   XfceTasklistChild *child;
 
-  g_return_if_fail (WNCK_IS_SCREEN (screen));
-  g_return_if_fail (previous_workspace == NULL || WNCK_IS_WORKSPACE (previous_workspace));
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  g_return_if_fail (tasklist->screen == screen);
+  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (previous_workspace == NULL || WNCK_IS_WORKSPACE (previous_workspace));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->screen == screen);
 
   /* leave when we show tasks from all workspaces or are locked */
   if (xfce_taskbar_is_locked () || tasklist->all_workspaces == TRUE)
@@ -827,10 +837,10 @@ xfce_tasklist_window_added (WnckScreen   *screen,
   GSList            *li;
   WnckClassGroup    *class_group;
 
-  g_return_if_fail (WNCK_IS_SCREEN (screen));
-  g_return_if_fail (WNCK_IS_WINDOW (window));
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  g_return_if_fail (tasklist->screen == screen);
+  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (WNCK_IS_WINDOW (window));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->screen == screen);
 
   if (wnck_window_is_skip_tasklist (window))
     return;
@@ -886,10 +896,10 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
   GSList            *li;
   XfceTasklistChild *child;
 
-  g_return_if_fail (WNCK_IS_SCREEN (screen));
-  g_return_if_fail (WNCK_IS_WINDOW (window));
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  g_return_if_fail (tasklist->screen == screen);
+  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (WNCK_IS_WINDOW (window));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->screen == screen);
 
   /* remove the child from the taskbar */
   for (li = tasklist->children; li != NULL; li = li->next)
@@ -923,9 +933,119 @@ static void
 xfce_tasklist_viewports_changed (WnckScreen   *screen,
                                  XfceTasklist *tasklist)
 {
-  g_return_if_fail (WNCK_IS_SCREEN (screen));
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  g_return_if_fail (tasklist->screen == screen);
+  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->screen == screen);
+}
+
+
+
+static void
+xfce_tasklist_wireframe_hide (XfceTasklist *tasklist)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->wireframe_window != 0);
+  
+  /* unmap the window */
+  XUnmapWindow (GDK_DISPLAY (), tasklist->wireframe_window);
+}
+
+
+
+static void
+xfce_tasklist_wireframe_destroy (XfceTasklist *tasklist)
+{
+  Display *dpy = GDK_DISPLAY ();
+  
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->wireframe_window != 0);
+  
+  /* unmap and destroy the window */
+  XUnmapWindow (dpy, tasklist->wireframe_window);
+  XDestroyWindow (dpy, tasklist->wireframe_window);
+  
+  /* set to nul */
+  tasklist->wireframe_window = 0;
+}
+
+
+
+static void
+xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
+                                XfceTasklistChild *child)
+{
+  Display              *dpy = GDK_DISPLAY ();
+  gint                  x, y, width, height;
+  XSetWindowAttributes  attrs;
+  GC                    gc;
+  XRectangle            xrect;
+  
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (tasklist->show_wireframes == TRUE);
+  panel_return_if_fail (WNCK_IS_WINDOW (child->window));
+
+  /* get the window geometry */
+  wnck_window_get_geometry (child->window, &x, &y, &width, &height);
+
+  if (G_LIKELY (tasklist->wireframe_window))
+    {
+      /* reposition the wireframe */
+      XMoveResizeWindow (dpy, tasklist->wireframe_window, x, y, width, height);
+      
+      /* full window rectangle */
+      xrect.x = 0;
+      xrect.y = 0;
+      xrect.width = width;
+      xrect.height = height;
+  
+      /* we need to restore the window first */
+      XShapeCombineRectangles (dpy, tasklist->wireframe_window, ShapeBounding,
+                               0, 0, &xrect, 1, ShapeSet, Unsorted);
+    }
+  else
+    {
+      /* set window attributes */
+      attrs.override_redirect = True;
+      attrs.background_pixel = 0x000000;
+
+      /* create new window */
+      tasklist->wireframe_window = XCreateWindow (dpy, DefaultRootWindow (dpy),
+                                                  x, y, width, height, 0,
+                                                  CopyFromParent, InputOutput,
+                                                  CopyFromParent,
+                                                  CWOverrideRedirect | CWBackPixel,
+                                                  &attrs);
+    }
+  
+  /* create rectangle what will be 'transparent' in the window */
+  xrect.x = WIREFRAME_SIZE;
+  xrect.y = WIREFRAME_SIZE;
+  xrect.width = width - WIREFRAME_SIZE * 2;
+  xrect.height = height - WIREFRAME_SIZE * 2;
+
+  /* substruct rectangle from the window */
+  XShapeCombineRectangles (dpy, tasklist->wireframe_window, ShapeBounding,
+                           0, 0, &xrect, 1, ShapeSubtract, Unsorted);
+
+  /* map the window */
+  XMapWindow (dpy, tasklist->wireframe_window);
+
+  /* create a white gc */
+  gc = XCreateGC (dpy, tasklist->wireframe_window, 0, NULL);
+  XSetForeground (dpy, gc, 0xffffff);
+
+  /* draw the outer white rectangle */
+  XDrawRectangle (dpy, tasklist->wireframe_window, gc,
+                  0, 0, width - 1, height - 1);
+
+  /* draw the inner white rectangle */
+  XDrawRectangle (dpy, tasklist->wireframe_window, gc,
+                  WIREFRAME_SIZE - 1, WIREFRAME_SIZE - 1,
+                  width - 2 * (WIREFRAME_SIZE - 1) - 1,
+                  height - 2 * (WIREFRAME_SIZE - 1) - 1);
+
+  /* free the gc */
+  XFreeGC (dpy, gc);
 }
 
 
@@ -982,7 +1102,7 @@ tasklist_button_name_changed (WnckWindow        *window,
   const gchar *name;
   gchar       *label = NULL;
 
-  g_return_if_fail (child->window == window);
+  panel_return_if_fail (child->window == window);
 
   /* get the window name */
   name = wnck_window_get_name (window);
@@ -1094,19 +1214,27 @@ tasklist_button_toggled (GtkToggleButton   *button,
 
 
 
+static void
+tasklist_button_geometry_changed (WnckWindow        *window,
+                                  XfceTasklistChild *child)
+{
+  /* update the wireframe */
+  xfce_tasklist_wireframe_update (child->tasklist, child);
+}
+
+
+
 static gboolean
 tasklist_button_leave_notify_event (GtkWidget *button,
                                     GdkEventCrossing *event,
                                     XfceTasklistChild *child)
 {
-  Display *dpy = GDK_DISPLAY ();
-
-  /* disconnect this signal */
+  /* disconnect signals */
   g_signal_handlers_disconnect_by_func (button, tasklist_button_leave_notify_event, child);
+  g_signal_handlers_disconnect_by_func (child->window, tasklist_button_geometry_changed, child);
 
   /* unmap and destroy the wireframe window */
-  XUnmapWindow (dpy, child->wireframe);
-  XDestroyWindow (dpy, child->wireframe);
+  xfce_tasklist_wireframe_hide (child->tasklist);
 
   return FALSE;
 }
@@ -1118,72 +1246,20 @@ tasklist_button_enter_notify_event (GtkWidget         *button,
                                     GdkEventCrossing  *event,
                                     XfceTasklistChild *child)
 {
-  Display              *dpy = GDK_DISPLAY ();
-  gint                  x, y, w, h;
-  XSetWindowAttributes  attrs;
-  GC                    gc;
-  XRectangle            xrect;
-
-  /* leave when wireframes are disabled */
+  /* leave when there is nothing to do */
   if (child->tasklist->show_wireframes == FALSE)
     return FALSE;
-
-  /* don't abort on x errors */
-  gdk_error_trap_push ();
-
-  /* get the window geometryr size */
-  wnck_window_get_geometry (child->window, &x, &y, &w, &h);
-
-  /* set window attributes */
-  attrs.override_redirect = True;
-  attrs.background_pixel = 0x000000;
-
-  /* create new window */
-  child->wireframe = XCreateWindow (dpy, DefaultRootWindow (dpy),
-				                            x, y, w, h, 0,
-				                            CopyFromParent,
-				                            InputOutput,
-                                    CopyFromParent,
-				                            CWOverrideRedirect | CWBackPixel,
-				                            &attrs);
-
-  /* create rectangle what will be 'transparent' in the window */
-  xrect.x = WIREFRAME_SIZE;
-  xrect.y = WIREFRAME_SIZE;
-  xrect.width = w - WIREFRAME_SIZE * 2;
-  xrect.height = h - WIREFRAME_SIZE * 2;
-
-  /* substruct rectangle from the window */
-  XShapeCombineRectangles (dpy, child->wireframe, ShapeBounding,
-                           0, 0, &xrect, 1, ShapeSubtract, 0);
-
-  /* map the window */
-  XMapWindow (dpy, child->wireframe);
-
-  /* create a white gc */
-  gc = XCreateGC (dpy, child->wireframe, 0, NULL);
-  XSetForeground (dpy, gc, 0xFFFFFF);
-
-  /* draw the outer white rectangle */
-  XDrawRectangle (dpy, child->wireframe, gc,
-                        0, 0, w - 1, h - 1);
-
-  /* draw the inner white rectangle */
-  XDrawRectangle (dpy, child->wireframe, gc,
-                  WIREFRAME_SIZE - 1, WIREFRAME_SIZE - 1,
-                  w - 2 * (WIREFRAME_SIZE - 1) - 1,
-                  h - 2 * (WIREFRAME_SIZE - 1) - 1);
-
-  /* free the white gc */
-  XFreeGC (dpy, gc);
-
-  /* flush x error and pop the trap */
-  gdk_flush ();
-  gdk_error_trap_pop ();
+  
+  /* create wireframe */
+  xfce_tasklist_wireframe_update (child->tasklist, child);
 
   /* connect signal to destroy the window when the user leaves the button */
   g_signal_connect (G_OBJECT (button), "leave-notify-event",
                     G_CALLBACK (tasklist_button_leave_notify_event), child);
+                    
+  /* monitor geometry changes */
+  g_signal_connect (G_OBJECT (child->window), "geometry-changed",
+                    G_CALLBACK (tasklist_button_geometry_changed), child);
 
   return FALSE;
 }
@@ -1245,7 +1321,7 @@ xfce_tasklist_set_style (XfceTasklist      *tasklist,
   GSList            *li;
   XfceTasklistChild *child;
 
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
   if (tasklist->style != style)
     {
@@ -1286,7 +1362,7 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
   GSList            *li;
   XfceTasklistChild *child;
 
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
   /* normalize the value */
   all_workspaces = !!all_workspaces;
@@ -1322,7 +1398,7 @@ xfce_tasklist_set_button_relief (XfceTasklist   *tasklist,
   GSList            *li;
   XfceTasklistChild *child;
 
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
   if (tasklist->button_relief != button_relief)
     {
@@ -1347,7 +1423,7 @@ xfce_tasklist_set_show_only_minimized (XfceTasklist *tasklist,
   GSList            *li;
   XfceTasklistChild *child;
 
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
   if (tasklist->only_minimized != only_minimized)
     {
@@ -1385,9 +1461,25 @@ xfce_tasklist_set_show_only_minimized (XfceTasklist *tasklist,
 
 
 
+static void
+xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist,
+                                   gboolean      show_wireframes)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  
+  /* set new value */
+  tasklist->show_wireframes = !!show_wireframes;
+  
+  /* destroy the window if needed */
+  if (show_wireframes == FALSE && tasklist->wireframe_window != 0)
+    xfce_tasklist_wireframe_destroy (tasklist);
+}
+
+
+
 void
 xfce_tasklist_set_orientation (XfceTasklist   *tasklist,
                                GtkOrientation  orientation)
 {
-  g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 }
