@@ -76,7 +76,7 @@ static void launcher_dialog_items_load (LauncherPluginDialog *dialog);
 
 
 /* dnd for items in and from the treeviews */
-static const GtkTargetEntry drop_targets[] =
+static const GtkTargetEntry dnd_targets[] =
 {
   { "text/uri-list", 0, 0, },
 };
@@ -225,6 +225,51 @@ launcher_dialog_add_populate_model (LauncherPluginDialog *dialog)
         G_PRIORITY_DEFAULT_IDLE,
         launcher_dialog_add_populate_model_idle,
         dialog, launcher_dialog_add_populate_model_idle_destroyed);
+}
+
+
+
+static void
+launcher_dialog_add_drag_data_get (GtkWidget            *treeview,
+                                   GdkDragContext       *drag_context,
+                                   GtkSelectionData     *data,
+                                   guint                 info,
+                                   guint                 timestamp,
+                                   LauncherPluginDialog *dialog)
+{
+  GtkTreeSelection  *selection;
+  GList             *rows, *li;
+  GtkTreeModel      *model;
+  gchar            **uris;
+  GarconMenuItem    *item;
+  guint              i;
+  GtkTreeIter        iter;
+
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  panel_return_if_fail (GTK_IS_TREE_VIEW (treeview));
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+  rows = gtk_tree_selection_get_selected_rows (selection, &model);
+  if (G_UNLIKELY (rows == NULL))
+    return;
+
+  uris = g_new0 (gchar *, g_list_length (rows) + 1);
+  for (li = rows, i = 0; li != NULL; li = li->next)
+    {
+      if (!gtk_tree_model_get_iter (model, &iter, li->data))
+        continue;
+
+      gtk_tree_model_get (model, &iter, COL_ITEM, &item, -1);
+      if (G_UNLIKELY (item == NULL))
+        continue;
+
+      uris[i++] = garcon_menu_item_get_uri (item);
+      g_object_unref (G_OBJECT (item));
+    }
+
+  gtk_selection_data_set_uris (data, uris);
+  g_list_free (rows);
+  g_strfreev (uris);
 }
 
 
@@ -657,6 +702,8 @@ launcher_dialog_response (GtkWidget            *widget,
                           gint                  response_id,
                           LauncherPluginDialog *dialog)
 {
+  GObject *add_dialog;
+
   panel_return_if_fail (GTK_IS_DIALOG (widget));
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -677,6 +724,10 @@ launcher_dialog_response (GtkWidget            *widget,
 
       /* disconnect from the menu items */
       launcher_dialog_items_unload (dialog);
+
+      /* also destroy the add dialog */
+      add_dialog = gtk_builder_get_object (dialog->builder, "dialog-add");
+      gtk_widget_destroy (GTK_WIDGET (add_dialog));
 
       /* destroy the dialog */
       gtk_widget_destroy (widget);
@@ -874,7 +925,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   object = gtk_builder_get_object (builder, "item-treeview");
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
   gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (object),
-      drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
+      dnd_targets, G_N_ELEMENTS (dnd_targets), GDK_ACTION_COPY);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
   g_signal_connect (G_OBJECT (object), "drag-data-received",
       G_CALLBACK (launcher_dialog_tree_drag_data_received), dialog);
@@ -905,6 +956,10 @@ launcher_dialog_show (LauncherPlugin *plugin)
 
   /* allow selecting multiple items in the add dialog */
   object = gtk_builder_get_object (builder, "add-treeview");
+  gtk_drag_source_set (GTK_WIDGET (object), GDK_BUTTON1_MASK,
+      dnd_targets, G_N_ELEMENTS (dnd_targets), GDK_ACTION_COPY);
+  g_signal_connect (G_OBJECT (object), "drag-data-get",
+      G_CALLBACK (launcher_dialog_add_drag_data_get), dialog);
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
   g_signal_connect (G_OBJECT (selection), "changed",
