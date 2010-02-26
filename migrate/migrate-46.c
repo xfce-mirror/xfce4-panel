@@ -31,10 +31,10 @@
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 #include <migrate/migrate-46.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 
 
 
-#define CHANNEL_NAME    "xfce4-panel"
 #define LAUNCHER_FOLDER "launcher"
 
 
@@ -75,58 +75,28 @@ typedef enum
 }
 SnapPosition;
 
-typedef enum
-{
-  XFCE_SCREEN_POSITION_NONE,
-
-  /* top */
-  XFCE_SCREEN_POSITION_NW_H,       /* North West Horizontal */
-  XFCE_SCREEN_POSITION_N,          /* North                 */
-  XFCE_SCREEN_POSITION_NE_H,       /* North East Horizontal */
-
-  /* left */
-  XFCE_SCREEN_POSITION_NW_V,       /* North West Vertical   */
-  XFCE_SCREEN_POSITION_W,          /* West                  */
-  XFCE_SCREEN_POSITION_SW_V,       /* South West Vertical   */
-
-  /* right */
-  XFCE_SCREEN_POSITION_NE_V,       /* North East Vertical   */
-  XFCE_SCREEN_POSITION_E,          /* East                  */
-  XFCE_SCREEN_POSITION_SE_V,       /* South East Vertical   */
-
-  /* bottom */
-  XFCE_SCREEN_POSITION_SW_H,       /* South West Horizontal */
-  XFCE_SCREEN_POSITION_S,          /* South                 */
-  XFCE_SCREEN_POSITION_SE_H,       /* South East Horizontal */
-
-  /* floating */
-  XFCE_SCREEN_POSITION_FLOATING_H, /* Floating Horizontal */
-  XFCE_SCREEN_POSITION_FLOATING_V  /* Floating Vertical */
-}
-ScreenPosition;
-
 typedef struct
 {
-  ParserState     state;
-  guint           plugin_id_counter;
-  guint           panel_id_counter;
-  XfconfChannel  *channel;
+  ParserState         state;
+  guint               plugin_id_counter;
+  guint               panel_id_counter;
+  XfconfChannel      *channel;
 
-  GPtrArray      *panel_plugin_ids;
-  gint            panel_yoffset;
-  gint            panel_xoffset;
-  ScreenPosition  panel_screen_position;
-  guint           panel_transparency;
-  gboolean        panel_activetrans;
+  GPtrArray          *panel_plugin_ids;
+  gint                panel_yoffset;
+  gint                panel_xoffset;
+  XfceScreenPosition  panel_screen_position;
+  guint               panel_transparency;
+  gboolean            panel_activetrans;
 }
 ConfigParser;
 
 
 
 static void
-migrate_46_panel_screen_position (ScreenPosition  screen_position,
-                                  SnapPosition   *snap_position,
-                                  gboolean       *horizontal)
+migrate_46_panel_screen_position (XfceScreenPosition  screen_position,
+                                  SnapPosition       *snap_position,
+                                  gboolean           *horizontal)
 {
   /* defaults */
   *horizontal = FALSE;
@@ -602,7 +572,7 @@ migrate_46_panel_add_plugin (ConfigParser  *parser,
 
   /* open a panel with the propert base for the plugin */
   g_snprintf (base, sizeof (base), "/plugins/plugin-%d", parser->plugin_id_counter);
-  channel = xfconf_channel_new_with_property_base (CHANNEL_NAME, base);
+  channel = xfconf_channel_new_with_property_base (XFCE_PANEL_CHANNEL_NAME, base);
 
   if (strcmp (name, "actions") == 0)
     {
@@ -903,7 +873,7 @@ migrate_46 (const gchar  *filename,
   parser->state = START;
   parser->plugin_id_counter = 0;
   parser->panel_id_counter = 0;
-  parser->channel = xfconf_channel_new (CHANNEL_NAME);
+  parser->channel = xfconf_channel_new (XFCE_PANEL_CHANNEL_NAME);
 
   context = g_markup_parse_context_new (&markup_parser, 0, parser, NULL);
 

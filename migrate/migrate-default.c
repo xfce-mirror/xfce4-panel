@@ -31,6 +31,8 @@
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 #include <migrate/migrate-default.h>
+#include <libxfce4panel/xfce-panel-macros.h>
+
 
 
 typedef struct
@@ -143,7 +145,13 @@ migrate_default_start_element_handler (GMarkupParseContext  *context,
           for (i = 0; attribute_names[i] != NULL; i++)
             {
               if (strcmp (attribute_names[i], "name") == 0)
-                channel_name = attribute_values[i];
+                {
+                  channel_name = attribute_values[i];
+
+                  /* this is an xfce4-panel workaround to make it work
+                   * with the custom channel names */
+                  channel_name = XFCE_PANEL_CHANNEL_NAME;
+                }
             }
         }
 
