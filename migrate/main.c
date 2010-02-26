@@ -34,7 +34,7 @@
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 
-#include <migrate/migrate_46.h>
+#include <migrate/migrate-46.h>
 
 
 

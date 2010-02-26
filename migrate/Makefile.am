@@ -15,8 +15,8 @@ libexec_PROGRAMS = \
 
 xfce4_panel_migrate_SOURCES = \
 	main.c \
-	migrate_46.c \
-	migrate_46.h
+	migrate-46.c \
+	migrate-46.h
 
 xfce4_panel_migrate_CFLAGS = \
 	$(GTK_CFLAGS) \

@@ -16,8 +16,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __XFCE_46_PARSER_H__
-#define __XFCE_46_PARSER_H__
+#ifndef __MIGRATE_46_H__
+#define __MIGRATE_46_H__
 
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
@@ -32,5 +32,5 @@ gboolean migrate_46 (const gchar *filename, XfconfChannel *channel, GError **err
 
 G_END_DECLS
 
-#endif /* !__XFCE_46_PARSER_H__ */
+#endif /* !__MIGRATE_46_H__ */
 
