@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 00:00+0100\n"
-"PO-Revision-Date: 2010-02-20 00:31+0100\n"
+"POT-Creation-Date: 2010-02-22 18:00+0100\n"
+"PO-Revision-Date: 2010-02-22 23:54+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -37,37 +37,37 @@ msgid "Panel Preferences"
 msgstr "Panelindstillinger"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:829
+#: ../libxfce4panel/xfce-panel-plugin.c:841
 #: ../panel/panel-preferences-dialog.c:881
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Er du sikker på at du vil fjerne \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:834
+#: ../libxfce4panel/xfce-panel-plugin.c:846
 #: ../panel/panel-preferences-dialog.c:884
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Hvis du fjerner elementet fra panelet vil det være tabt."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:973
+#: ../libxfce4panel/xfce-panel-plugin.c:985
 msgid "_Move"
 msgstr "_Flyt"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1011
-#: ../panel/panel-window.c:2066
+#: ../libxfce4panel/xfce-panel-plugin.c:1023
+#: ../panel/panel-window.c:2067
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1022
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../panel/panel-window.c:2078
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1046
-#: ../panel/panel-window.c:2100
+#: ../libxfce4panel/xfce-panel-plugin.c:1058
+#: ../panel/panel-window.c:2101
 msgid "_Restart"
 msgstr "_Genstart"
 
@@ -425,6 +425,50 @@ msgstr "_Orientering:"
 msgid "_Size (pixels):"
 msgstr "_Størrelse (pixels):"
 
+#: ../migrate/main.c:78
+msgid "Welcome to the first start of the Xfce Panel"
+msgstr "Velkommen til den første opstart af panelet til Xfce"
+
+#: ../migrate/main.c:80
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh inital configuration."
+msgstr "Fordi panelet er flyttet til et nyt system for gemme indstillingerne, er det nødt til at indlæse en frisk basisindstilling."
+
+#: ../migrate/main.c:83
+msgid "Choose below which setup you want for the first startup."
+msgstr "Vælg forneden hvilken opsætning du ønsker for den første opstart."
+
+#: ../migrate/main.c:89
+msgid "Migrate old config"
+msgstr "Migrér gamle config"
+
+#: ../migrate/main.c:90
+msgid "Migrate the old 4.6 configuration to Xfconf"
+msgstr "Migrér den gamle indstilling 4.6 til Xfconf"
+
+#: ../migrate/main.c:95
+msgid "Use default config"
+msgstr "Brug standard config"
+
+#: ../migrate/main.c:96
+msgid "Load the default configuration"
+msgstr "Indlæs standardindstillingen"
+
+#: ../migrate/main.c:102
+msgid "One empty panel"
+msgstr "Et tomt panel"
+
+#: ../migrate/main.c:103
+msgid "Start with one empty panel"
+msgstr "Begynd med et tomt panel"
+
+#: ../migrate/main.c:115
+msgid "Failed to migrate the old panel configuration"
+msgstr "Kunne ikke migrere den gamle panelindstilling"
+
+#: ../migrate/main.c:125
+msgid "Failed to load the default configuration"
+msgstr "Kunne ikke indlæse standardindstillingen"
+
 #: ../plugins/actions/actions-dialog.glade.h:1
 msgid "Action Button"
 msgstr "Hændelsesknap"
@@ -557,7 +601,7 @@ msgid "Select An Icon"
 msgstr "Vælg et ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:670
-#: ../plugins/launcher/launcher.c:2099
+#: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommando \"%s\"."
@@ -658,242 +702,242 @@ msgstr "_Layout:"
 msgid "_Tooltip format:"
 msgstr "_Værktøjstipformat:"
 
-#: ../plugins/clock/clock-fuzzy.c:84
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
 msgstr "Nat"
 
-#: ../plugins/clock/clock-fuzzy.c:85
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
 msgstr "Tidlig morgen"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
 msgstr "Morgen"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
 msgstr "Før middag"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
 msgstr "Middag"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
 msgstr "Efter middag"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
 msgstr "Aften"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
 msgstr "Sen aften"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:98
+#: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "klokken er %0"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
 msgstr "5 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
 msgstr "10 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
 msgstr "et kvarter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
 msgstr "20 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "25 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
 msgstr "30 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "25 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
 msgstr "20 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
 msgstr "et kvarter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
 msgstr "10 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
 msgstr "5 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "klokken er %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:117
+#: ../plugins/clock/clock-fuzzy.c:119
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "klokken er %0"
 
-#: ../plugins/clock/clock-fuzzy.c:118
+#: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "5 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:119
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "10 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "et kvarter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "20 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "25 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "30 minutter over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "25 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "20 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "et kvarter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "10 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "5 minutter i %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "klokken er %1"
 
-#: ../plugins/clock/clock-fuzzy.c:134
+#: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
 msgstr "et"
 
-#: ../plugins/clock/clock-fuzzy.c:135
+#: ../plugins/clock/clock-fuzzy.c:137
 msgid "two"
 msgstr "to"
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
 msgstr "tre"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
 msgstr "fire"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "five"
 msgstr "fem"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
 msgstr "seks"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
 msgstr "syv"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "eight"
 msgstr "otte"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "nine"
 msgstr "ni"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
 msgstr "ti"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
 msgstr "elleve"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
 msgstr "tolv"
 
-#: ../plugins/clock/clock.c:140
+#: ../plugins/clock/clock.c:144
 msgid "Week %V"
 msgstr "Uge %V"
 
-#: ../plugins/clock/clock.c:379
+#: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
 msgstr "Kunne ikke udføre klokkommando"
 
-#: ../plugins/clock/clock.c:653
+#: ../plugins/clock/clock.c:677
 msgid "Custom Format"
 msgstr "Tilpasset format"
 
@@ -1060,11 +1104,11 @@ msgstr "Vest"
 msgid "_Arrow button position:"
 msgstr "Position af p_ilknap:"
 
-#: ../plugins/launcher/launcher.c:1445
+#: ../plugins/launcher/launcher.c:1441
 msgid "Unnamed Item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher.c:1585
+#: ../plugins/launcher/launcher.c:1581
 msgid "No items"
 msgstr "Ingen elementer"
 
@@ -1265,23 +1309,23 @@ msgstr "Vindue_gruppering:"
 msgid "Window title"
 msgstr "Vinduestitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2278
+#: ../plugins/tasklist/tasklist-widget.c:2281
 msgid "Mi_nimize All"
 msgstr "Mi_nimér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2287
+#: ../plugins/tasklist/tasklist-widget.c:2290
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2293
+#: ../plugins/tasklist/tasklist-widget.c:2296
 msgid "Ma_ximize All"
 msgstr "Maksi_mér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2302
+#: ../plugins/tasklist/tasklist-widget.c:2305
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2312
+#: ../plugins/tasklist/tasklist-widget.c:2315
 msgid "_Close All"
 msgstr "_Luk alle"
 
