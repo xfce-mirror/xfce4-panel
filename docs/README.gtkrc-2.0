@@ -5,19 +5,19 @@ XfceTasklist
 ---------------
 style "xfce-tasklist-style"
 {
-  # The maximum length of a button before the label ellipsizes. 
-  # When this value is set to -1 the button will expand to the 
+  # The maximum length of a button before the label ellipsizes.
+  # When this value is set to -1 the button will expand to the
   # entire available space.
   XfceTasklist::max-button-length = 200
-  
+
   # Maximum size of a button. This is used to detect the number of
   # rows of the task list plugin. When you increase the value less
   # rows will be possible.
   XfceTasklist::max-button-size = 20
-  
+
   # Ellipsizing used in the task list button label.
   XfceTasklist::ellipsize-mode = PANGO_ELLIPSIZE_END
-  
+
   # Lucency of minimized icons. Valid values are between 0 (completely
   # hide the icon) and 100 (don't lighten the icon).
   XfceTasklist::minimized-icon-lucency = 50
@@ -47,3 +47,22 @@ style "xfce-panel-image-style"
   XfcePanelImage::force-gtk-icon-sizes = true
 }
 class "XfcePanelImage" style "xfce-panel-image-style"
+
+
+
+XfceWindowMenuPlugin
+--------------------
+style "xfce-window-menu-plugin-style"
+{
+  # Ellipsizing used in the menu label.
+  XfceWindowMenuPlugin::ellipsize-mode = PANGO_ELLIPSIZE_MIDDLE
+
+  # Maximum number of characters in the menu label before it will
+  # be ellipsized.
+  XfceWindowMenuPlugin::max-width-chars = 24
+
+  # Lucency of minimized icons. Valid values are between 0 (completely
+  # hide the icon) and 100 (don't lighten the icon).
+  XfceWindowMenuPlugin::minimized-icon-lucency = 50
+}
+class "XfceWindowMenuPlugin" style "xfce-window-menu-plugin-style"

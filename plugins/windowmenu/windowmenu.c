@@ -32,9 +32,12 @@
 #include "windowmenu.h"
 #include "windowmenu-dialog_ui.h"
 
-#define ARROW_BUTTON_SIZE (12)
-#define URGENT_FLAGS      (WNCK_WINDOW_STATE_DEMANDS_ATTENTION | \
-                           WNCK_WINDOW_STATE_URGENT)
+#define ARROW_BUTTON_SIZE       (12)
+#define DEFAULT_ICON_LUCENCY    (50)
+#define DEFAULT_MAX_WIDTH_CHARS (24)
+#define DEFAULT_ELLIPSIZE_MODE  (PANGO_ELLIPSIZE_MIDDLE)
+#define URGENT_FLAGS            (WNCK_WINDOW_STATE_DEMANDS_ATTENTION | \
+                                 WNCK_WINDOW_STATE_URGENT)
 
 struct _WindowMenuPluginClass
 {
@@ -46,21 +49,26 @@ struct _WindowMenuPlugin
   XfcePanelPlugin __parent__;
 
   /* the screen we're showing */
-  WnckScreen    *screen;
+  WnckScreen         *screen;
 
   /* panel widgets */
-  GtkWidget     *button;
-  GtkWidget     *icon;
+  GtkWidget          *button;
+  GtkWidget          *icon;
 
   /* settings */
-  guint          button_style : 1;
-  guint          workspace_actions : 1;
-  guint          workspace_names : 1;
-  guint          urgentcy_notification : 1;
-  guint          all_workspaces : 1;
+  guint               button_style : 1;
+  guint               workspace_actions : 1;
+  guint               workspace_names : 1;
+  guint               urgentcy_notification : 1;
+  guint               all_workspaces : 1;
 
   /* urgent window counter */
-  gint           urgent_windows;
+  gint                urgent_windows;
+
+  /* gtk style properties */
+  gint                minimized_icon_lucency;
+  PangoEllipsizeMode  ellipsize_mode;
+  gint                max_width_chars;
 };
 
 enum
@@ -89,6 +97,8 @@ static void      window_menu_plugin_set_property            (GObject            
                                                              guint               prop_id,
                                                              const GValue       *value,
                                                              GParamSpec         *pspec);
+static void      window_menu_plugin_style_set               (GtkWidget          *widget,
+                                                             GtkStyle           *previous_style);
 static void      window_menu_plugin_screen_changed          (GtkWidget          *widget,
                                                              GdkScreen          *previous_screen);
 static void      window_menu_plugin_construct               (XfcePanelPlugin    *panel_plugin);
@@ -138,10 +148,14 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
   GObjectClass         *gobject_class;
+  GtkWidgetClass       *gtkwidget_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = window_menu_plugin_get_property;
   gobject_class->set_property = window_menu_plugin_set_property;
+
+  gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->style_set = window_menu_plugin_style_set;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = window_menu_plugin_construct;
@@ -188,6 +202,29 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
 
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("minimized-icon-lucency",
+                                                             NULL,
+                                                             "Lucent percentage of minimized icons",
+                                                             0, 100,
+                                                             DEFAULT_ICON_LUCENCY,
+                                                             EXO_PARAM_READABLE));
+
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_enum ("ellipsize-mode",
+                                                              NULL,
+                                                              "The ellipsize mode used for the menu label",
+                                                              PANGO_TYPE_ELLIPSIZE_MODE,
+                                                              DEFAULT_ELLIPSIZE_MODE,
+                                                              EXO_PARAM_READABLE));
+
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("max-width-chars",
+                                                             NULL,
+                                                             "Maximum length of window/workspace name",
+                                                             1, G_MAXINT,
+                                                             DEFAULT_MAX_WIDTH_CHARS,
+                                                             EXO_PARAM_READABLE));
 
   window_quark = g_quark_from_static_string ("window-list-window-quark");
 }
@@ -203,6 +240,9 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   plugin->urgentcy_notification = TRUE;
   plugin->all_workspaces = TRUE;
   plugin->urgent_windows = 0;
+  plugin->minimized_icon_lucency = DEFAULT_ICON_LUCENCY;
+  plugin->ellipsize_mode = DEFAULT_ELLIPSIZE_MODE;
+  plugin->max_width_chars = DEFAULT_MAX_WIDTH_CHARS;
 
   /* create the widgets */
   plugin->button = xfce_arrow_button_new (GTK_ARROW_NONE);
@@ -327,6 +367,25 @@ window_menu_plugin_set_property (GObject      *object,
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
     }
+}
+
+
+
+static void
+window_menu_plugin_style_set (GtkWidget *widget,
+                              GtkStyle  *previous_style)
+{
+   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
+
+  /* let gtk update the widget style */
+  (*GTK_WIDGET_CLASS (window_menu_plugin_parent_class)->style_set) (widget, previous_style);
+
+  /* read the style properties */
+  gtk_widget_style_get (GTK_WIDGET (plugin),
+                        "minimized-icon-lucency", &plugin->minimized_icon_lucency,
+                        "ellipsize-mode", &plugin->ellipsize_mode,
+                        "max-width-chars", &plugin->max_width_chars,
+                        NULL);
 }
 
 
@@ -796,6 +855,7 @@ window_menu_plugin_menu_workspace_item_active (GtkWidget     *mi,
 
 static GtkWidget *
 window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
+                                            WindowMenuPlugin     *plugin,
                                             PangoFontDescription *bold)
 {
   const gchar *name;
@@ -803,6 +863,7 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
   GtkWidget   *mi, *label;
 
   panel_return_val_if_fail (WNCK_IS_WORKSPACE (workspace), NULL);
+  panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), NULL);
 
   /* try to get an utf-8 valid name */
   name = wnck_workspace_get_name (workspace);
@@ -821,8 +882,8 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
   /* make the label pretty on long workspace names */
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
-  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
-  gtk_label_set_max_width_chars (GTK_LABEL (label), 24);
+  gtk_label_set_ellipsize (GTK_LABEL (label), plugin->ellipsize_mode);
+  gtk_label_set_max_width_chars (GTK_LABEL (label), plugin->max_width_chars);
 
   /* modify the label font if needed */
   if (bold != NULL)
@@ -900,6 +961,7 @@ window_menu_plugin_menu_window_item_activate (GtkWidget      *mi,
 
 static GtkWidget *
 window_menu_plugin_menu_window_item_new (WnckWindow           *window,
+                                         WindowMenuPlugin     *plugin,
                                          PangoFontDescription *italic,
                                          PangoFontDescription *bold)
 {
@@ -941,8 +1003,8 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
   /* make the label pretty on long window names */
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
-  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
-  gtk_label_set_max_width_chars (GTK_LABEL (label), 24);
+  gtk_label_set_ellipsize (GTK_LABEL (label), plugin->ellipsize_mode);
+  gtk_label_set_max_width_chars (GTK_LABEL (label), plugin->max_width_chars);
 
   /* modify the label font if needed */
   if (wnck_window_is_active (window))
@@ -950,21 +1012,26 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
   else if (wnck_window_or_transient_needs_attention (window))
     gtk_widget_modify_font (label, bold);
 
-  /* get the window mini icon */
-  pixbuf = wnck_window_get_mini_icon (window);
-  if (pixbuf != NULL)
+  if (plugin->minimized_icon_lucency > 0)
     {
-      /* dimm the icon if the window is minimized */
-      if (wnck_window_is_minimized (window))
-        pixbuf = lucent = exo_gdk_pixbuf_lucent (pixbuf, 50);
+      /* get the window mini icon */
+      pixbuf = wnck_window_get_mini_icon (window);
+      if (pixbuf != NULL)
+        {
+          /* dimm the icon if the window is minimized */
+          if (wnck_window_is_minimized (window)
+              && plugin->minimized_icon_lucency < 100)
+            pixbuf = lucent = exo_gdk_pixbuf_lucent (pixbuf,
+                plugin->minimized_icon_lucency);
 
-      /* set the menu item label */
-      image = gtk_image_new_from_pixbuf (pixbuf);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-      gtk_widget_show (image);
+          /* set the menu item label */
+          image = gtk_image_new_from_pixbuf (pixbuf);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+          gtk_widget_show (image);
 
-      if (lucent != NULL)
-        g_object_unref (G_OBJECT (lucent));
+          if (lucent != NULL)
+            g_object_unref (G_OBJECT (lucent));
+        }
     }
 
   return mi;
@@ -1106,7 +1173,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
       if (plugin->workspace_names)
         {
           /* create the workspace menu item */
-          mi = window_menu_plugin_menu_workspace_item_new (workspace,
+          mi = window_menu_plugin_menu_workspace_item_new (workspace, plugin,
               workspace == active_workspace ? bold : italic);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
@@ -1139,7 +1206,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
             continue;
 
           /* create the menu item */
-          mi = window_menu_plugin_menu_window_item_new (window, italic, bold);
+          mi = window_menu_plugin_menu_window_item_new (window, plugin, italic, bold);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
 
@@ -1214,7 +1281,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
             continue;
 
           /* create the menu item */
-          mi = window_menu_plugin_menu_window_item_new (window, italic, bold);
+          mi = window_menu_plugin_menu_window_item_new (window, plugin, italic, bold);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
         }
