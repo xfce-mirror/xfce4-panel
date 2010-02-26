@@ -60,6 +60,7 @@ struct _TasklistPlugin
 static void tasklist_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void tasklist_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static void tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
+static gboolean tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
 static void tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 
 
@@ -82,6 +83,7 @@ tasklist_plugin_class_init (TasklistPluginClass *klass)
   plugin_class->construct = tasklist_plugin_construct;
   plugin_class->free_data = tasklist_plugin_free_data;
   plugin_class->orientation_changed = tasklist_plugin_orientation_changed;
+  plugin_class->size_changed = tasklist_plugin_size_changed;
   plugin_class->configure_plugin = tasklist_plugin_configure_plugin;
 }
 
@@ -157,6 +159,20 @@ tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
 
   /* set the new tasklist orientation */
   xfce_tasklist_set_orientation (XFCE_TASKLIST (plugin->tasklist), orientation);
+}
+
+
+
+static gboolean
+tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                              gint             size)
+{
+  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+
+  /* set the tasklist size */
+  xfce_tasklist_set_size (XFCE_TASKLIST (plugin->tasklist), size);
+
+  return TRUE;
 }
 
 

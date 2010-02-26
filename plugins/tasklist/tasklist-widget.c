@@ -74,6 +74,9 @@ struct _XfceTasklist
   /* normal or iconbox style */
   XfceTasklistStyle  style;
 
+  /* size of the panel pluin */
+  gint               size;
+
   /* orientation of the tasklist */
   GtkOrientation     orientation;
 
@@ -376,15 +379,10 @@ xfce_tasklist_size_request (GtkWidget      *widget,
   GtkRequisition     child_requisition;
   XfceTasklistChild *child;
   guint              n;
-  gint               max_length = MAX_BUTTON_LENGTH;
 
   /* initialize */
   requisition->width = GTK_CONTAINER (widget)->border_width * 2;
   requisition->height = requisition->width;
-
-  /* keep the buttons small when we're in iconbox mode */
-  if (tasklist->style == XFCE_TASKLIST_STYLE_ICONBOX)
-    max_length = 0;
 
   for (li = tasklist->children, n = 0; li != NULL; li = li->next)
     {
@@ -397,13 +395,17 @@ xfce_tasklist_size_request (GtkWidget      *widget,
 
       if (tasklist->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
-          requisition->width += MIN (child_requisition.width, max_length);
-          //requisition->height = MAX (requisition->height, child_requisition.height);
+          if (tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
+            requisition->width += MAX_BUTTON_LENGTH;
+          else
+            requisition->width += tasklist->size;
         }
       else
         {
-          requisition->height += MIN (child_requisition.height, max_length);
-          //requisition->width = MAX (requisition->width, child_requisition.width);
+          if (tasklist->style == XFCE_TASKLIST_STYLE_NORMAL)
+            requisition->height += MAX_BUTTON_LENGTH;
+          else
+            requisition->height += tasklist->size;
         }
 
       n++;
@@ -1552,6 +1554,21 @@ xfce_tasklist_set_orientation (XfceTasklist   *tasklist,
   if (tasklist->orientation != orientation)
     {
       tasklist->orientation = orientation;
+      gtk_widget_queue_resize (GTK_WIDGET (tasklist));
+    }
+}
+
+
+
+void
+xfce_tasklist_set_size (XfceTasklist *tasklist,
+                        gint          size)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  if (tasklist->size != size)
+    {
+      tasklist->size = size;
       gtk_widget_queue_resize (GTK_WIDGET (tasklist));
     }
 }
