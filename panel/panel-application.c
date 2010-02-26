@@ -185,10 +185,6 @@ panel_application_init (PanelApplication *application)
   /* get the xfconf channel */
   application->xfconf = xfconf_channel_new ("xfce4-panel");
 
-  /* check if we need to force all plugins to run external */
-  if (xfconf_channel_get_bool (application->xfconf, "/force-all-external", FALSE))
-    panel_module_factory_force_all_external ();
-
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
 
@@ -298,6 +294,11 @@ panel_application_load (PanelApplication *application)
   hash_table = xfconf_channel_get_properties (application->xfconf, NULL);
   if (G_UNLIKELY (hash_table == NULL))
     return;
+
+  /* check if we need to force all plugins to run external */
+  value = g_hash_table_lookup (hash_table, "/force-all-external");
+  if (value != NULL && g_value_get_boolean (value))
+    panel_module_factory_force_all_external ();
 
   /* set the shared hash table */
   panel_properties_shared_hash_table (hash_table);
