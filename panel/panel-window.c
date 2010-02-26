@@ -367,8 +367,8 @@ panel_window_init (PanelWindow *window)
   window->autohide_timeout_id = 0;
   window->autohide_block = 0;
 
-  window->base_x = 100;
-  window->base_y = 100;
+  window->base_x = -1;
+  window->base_y = -1;
 
   window->grab_time = 0;
   window->grab_x = 0;
@@ -466,12 +466,14 @@ panel_window_set_property (GObject      *object,
 
         /* send the new orientation to the panel plugins */
         itembar = gtk_bin_get_child (GTK_BIN (window));
-        gtk_container_foreach (GTK_CONTAINER (itembar),
-            panel_window_set_plugin_orientation, window);
+        if (G_LIKELY (itembar != NULL))
+          gtk_container_foreach (GTK_CONTAINER (itembar),
+              panel_window_set_plugin_orientation, window);
 
         /* send the new screen position */
-        gtk_container_foreach (GTK_CONTAINER (itembar),
-            panel_window_set_plugin_screen_position, window);
+        if (G_LIKELY (itembar != NULL))
+          gtk_container_foreach (GTK_CONTAINER (itembar),
+              panel_window_set_plugin_screen_position, window);
         break;
 
       case PROP_SIZE:
@@ -484,8 +486,9 @@ panel_window_set_property (GObject      *object,
 
         /* send the new size to the panel plugins */
         itembar = gtk_bin_get_child (GTK_BIN (window));
-        gtk_container_foreach (GTK_CONTAINER (itembar),
-            panel_window_set_plugin_size, window);
+        if (G_LIKELY (itembar != NULL))
+          gtk_container_foreach (GTK_CONTAINER (itembar),
+              panel_window_set_plugin_size, window);
         break;
 
       case PROP_LENGTH:
@@ -544,8 +547,9 @@ panel_window_set_property (GObject      *object,
 
             /* send the new screen position to the panel plugins */
             itembar = gtk_bin_get_child (GTK_BIN (window));
-            gtk_container_foreach (GTK_CONTAINER (itembar),
-                panel_window_set_plugin_screen_position, window);
+            if (G_LIKELY (itembar != NULL))
+              gtk_container_foreach (GTK_CONTAINER (itembar),
+                  panel_window_set_plugin_screen_position, window);
           }
         else
           {
@@ -1475,6 +1479,10 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   panel_return_if_fail (GDK_IS_SCREEN (screen));
   panel_return_if_fail (window->screen == screen);
 
+  /* leave when the screen position if not set */
+  if (window->base_x == -1 && window->base_y == -1)
+    return;
+
   /* update the struts edge of this window and check if we need to force
    * a struts update (ie. remove struts that are currently set) */
   struts_edge = panel_window_screen_struts_edge (window);
@@ -1553,10 +1561,6 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                 gtk_widget_hide (GTK_WIDGET (window));
               return;
             }
-          else if (!GTK_WIDGET_VISIBLE (window))
-            {
-              gtk_widget_show (GTK_WIDGET (window));
-            }
         }
 
       /* don't do the check if we're not setting struts anyways */
@@ -1612,6 +1616,9 @@ done:
   /* update the struts if needed, ie. we need to reset the struts */
   if (force_struts_update)
     panel_window_screen_struts_set (window);
+
+  if (!GTK_WIDGET_VISIBLE (window))
+    gtk_widget_show (GTK_WIDGET (window));
 }
 
 

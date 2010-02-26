@@ -195,10 +195,7 @@ panel_application_init (PanelApplication *application)
 
   /* create empty window */
   if (G_UNLIKELY (application->windows == NULL))
-    {
-      window = panel_application_new_window (application, NULL, TRUE);
-      gtk_widget_show (GTK_WIDGET (window));
-    }
+    window = panel_application_new_window (application, NULL, TRUE);
 }
 
 
@@ -338,7 +335,7 @@ panel_application_load (PanelApplication *application)
         }
 
       /* show the window */
-      gtk_widget_show (GTK_WIDGET (window));
+      //gtk_widget_show (GTK_WIDGET (window));
     }
 }
 
@@ -1109,7 +1106,7 @@ panel_application_add_new_item (PanelApplication  *application,
 PanelWindow *
 panel_application_new_window (PanelApplication *application,
                               GdkScreen        *screen,
-                              gboolean          reset_properties)
+                              gboolean          new_window)
 {
   GtkWidget *window;
   GtkWidget *itembar;
@@ -1136,12 +1133,15 @@ panel_application_new_window (PanelApplication *application,
   application->windows = g_slist_append (application->windows, window);
 
   /* flush the window properties */
-  if (reset_properties)
+  if (new_window)
     {
       /* remove the xfconf properties */
       property = g_strdup_printf ("/panels/panel-%d", g_slist_index (application->windows, window));
       xfconf_channel_reset_property (application->xfconf, property, TRUE);
       g_free (property);
+
+      /* set default position */
+      g_object_set (G_OBJECT (window), "position", "p=0;x=100;y=100", NULL);
     }
 
   /* add the itembar */
