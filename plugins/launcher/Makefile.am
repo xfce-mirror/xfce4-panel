@@ -29,7 +29,7 @@ liblauncher_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(LIBXFCE4MENU_CFLAGS) \
+	$(GARCON_CFLAGS) \
 	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(DBUS_CFLAGS) \
@@ -47,7 +47,7 @@ liblauncher_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(LIBXFCE4MENU_LIBS) \
+	$(GARCON_LIBS) \
 	$(EXO_LIBS) \
 	$(DBUS_LIBS) \
 	$(XFCONF_LIBS)
@@ -63,12 +63,6 @@ desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_files = launcher.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
-
-#
-# .menu file
-#
-menudir = $(sysconfdir)/xdg/menus
-menu_DATA = launcher.menu
 
 EXTRA_DIST = \
 	launcher-dialog.glade \

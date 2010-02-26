@@ -28,11 +28,21 @@
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
+#include <garcon/garcon.h>
+#include <xfconf/xfconf.h>
+
 #include <common/panel-private.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
 #include "launcher-dialog_glade.h"
+
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#define LAUNCHER_WIDGET_XID(widget) ((gint) GDK_WINDOW_XID (GDK_WINDOW ((widget)->window)))
+#else
+#define LAUNCHER_WIDGET_XID(widget) (0)
+#endif
 
 
 
@@ -41,6 +51,7 @@ typedef struct
   LauncherPlugin *plugin;
   GtkBuilder     *builder;
   guint           idle_populate_id;
+  GSList         *items;
 }
 LauncherPluginDialog;
 
@@ -54,7 +65,11 @@ enum
 
 
 
-static void launcher_dialog_items_insert_item (GtkListStore *store, GtkTreeIter *iter, XfceMenuItem *item);
+static void launcher_dialog_items_set_item (GtkTreeModel *model, GtkTreeIter *iter, GarconMenuItem *item);
+static void launcher_dialog_tree_save (LauncherPluginDialog *dialog);
+static void launcher_dialog_tree_selection_changed (GtkTreeSelection *selection, LauncherPluginDialog *dialog);
+static void launcher_dialog_items_unload (LauncherPluginDialog *dialog);
+static void launcher_dialog_items_load (LauncherPluginDialog *dialog);
 
 
 
@@ -72,7 +87,7 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
 
   /* get the search string from the item */
   text = gtk_entry_get_text (GTK_ENTRY (user_data));
-  if (G_UNLIKELY (!IS_STRING (text)))
+  if (G_UNLIKELY (exo_str_is_empty (text)))
     return TRUE;
 
   /* casefold the search text */
@@ -82,7 +97,7 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
 
   /* try the pre-build search string first */
   gtk_tree_model_get (model, iter, COL_SEARCH, &string, -1);
-  if (IS_STRING (string))
+  if (!exo_str_is_empty (string))
     {
       /* search */
       visible = (strstr (string, text_casefolded) != NULL);
@@ -91,7 +106,7 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
     {
       /* get the name */
       gtk_tree_model_get (model, iter, COL_NAME, &string, -1);
-      if (IS_STRING (string))
+      if (!exo_str_is_empty (string))
         {
           /* escape and casefold the name */
           escaped = g_markup_escape_text (string, -1);
@@ -122,42 +137,33 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
 
 
 static void
-launcher_dialog_add_store_insert (gpointer filename,
-                                  gpointer item,
-                                  gpointer user_data)
+launcher_dialog_add_store_insert_menu (GarconMenu   *menu,
+                                       GtkTreeModel *model)
 {
-  GtkListStore *store = GTK_LIST_STORE (user_data);
-  GtkTreeIter   iter;
-  const gchar  *icon_name, *name, *comment;
-  gchar        *markup;
+  GList       *li, *items;
+  GList       *menus;
+  GtkTreeIter  iter;
 
-  panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
-  panel_return_if_fail (GTK_IS_LIST_STORE (user_data));
+  panel_return_if_fail (GARCON_IS_MENU (menu));
+  panel_return_if_fail (GTK_IS_LIST_STORE (model));
 
-  /* TODO get rid of this and support absolute paths too */
-  icon_name = xfce_menu_item_get_icon_name (item);
-  if (icon_name != NULL
-      && (g_path_is_absolute (icon_name)
-          || !gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), icon_name)))
-    icon_name = NULL;
+  /* insert all the items */
+  items = garcon_menu_get_items (menu);
+  for (li = items; li != NULL; li = li->next)
+    {
+      if (!garcon_menu_element_get_visible (GARCON_MENU_ELEMENT (li->data)))
+        continue;
 
-  /* create a good looking name */
-  comment = xfce_menu_item_get_comment (item);
-  name = xfce_menu_item_get_name (item);
-  if (IS_STRING (comment))
-    markup = g_strdup_printf ("<b>%s</b>\n%s", name, comment);
-  else
-    markup = g_strdup_printf ("<b>%s</b>", name);
+      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      launcher_dialog_items_set_item (model, &iter, li->data);
+    }
+  g_list_free (items);
 
-  /* insert the item */
-  gtk_list_store_append (store, &iter);
-  gtk_list_store_set (store, &iter,
-                      COL_ICON, icon_name,
-                      COL_NAME, markup,
-                      COL_ITEM, item,
-                      -1);
-
-  g_free (markup);
+  /* add the submenus */
+  menus = garcon_menu_get_menus (menu);
+  for (li = menus; li != NULL; li = li->next)
+    launcher_dialog_add_store_insert_menu (li->data, model);
+  g_list_free (menus);
 }
 
 
@@ -167,39 +173,35 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
 {
   LauncherPluginDialog *dialog = user_data;
   GObject              *store;
-  XfceMenu             *menu;
+  GarconMenu           *menu;
   GError               *error = NULL;
 
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
 
   GDK_THREADS_ENTER ();
 
-  /* initialize the menu library */
-  xfce_menu_init (NULL);
-
   /* load our menu file */
-  menu = xfce_menu_new (SYSCONFDIR "/xdg/menus/launcher.menu", &error);
-  if (G_UNLIKELY (menu != NULL))
+  menu = garcon_menu_new_applications ();
+  if (G_UNLIKELY (menu == NULL))
+    {
+      g_message ("Failed to load the applications menu.");
+    }
+  else if (G_LIKELY (garcon_menu_load (menu, NULL, &error)))
     {
       /* start appending items in the store */
       store = gtk_builder_get_object (dialog->builder, "add-store");
 
-      /* get the item pool and insert everything in the store */
-      xfce_menu_item_pool_foreach (xfce_menu_get_item_pool (menu),
-                                   launcher_dialog_add_store_insert,
-                                   store);
-
-      /* release the menu */
-      g_object_unref (G_OBJECT (menu));
+      /* add the menu */
+      launcher_dialog_add_store_insert_menu (menu, GTK_TREE_MODEL (store));
     }
   else
     {
-      /* TODO */
+      g_message ("Failed to load the applications menu: %s.", error->message);
       g_error_free (error);
     }
 
-  /* shutdown menu library */
-  xfce_menu_shutdown ();
+  if (G_LIKELY (menu != NULL))
+    g_object_unref (G_OBJECT (menu));
 
   GDK_THREADS_LEAVE ();
 
@@ -254,15 +256,96 @@ launcher_dialog_add_selection_changed (GtkTreeSelection     *selection,
 
 
 
+static void
+launcher_dialog_add_response (GtkWidget            *widget,
+                              gint                  response_id,
+                              LauncherPluginDialog *dialog)
+{
+  GObject          *treeview, *store;
+  GtkTreeSelection *selection;
+  GtkTreeModel     *item_model, *add_model;
+  GtkTreeIter       iter, sibling, tmp;
+  GarconMenuItem   *item;
+  GList            *list, *li;
+
+  panel_return_if_fail (GTK_IS_DIALOG (widget));
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
+
+  if (response_id != 0)
+    {
+      /* add all the selected rows in the add dialog */
+      treeview = gtk_builder_get_object (dialog->builder, "add-treeview");
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+      list = gtk_tree_selection_get_selected_rows (selection, &add_model);
+
+      /* append after the selected item in the item dialog */
+      treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+      item_model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+      if (gtk_tree_selection_get_selected (selection, NULL, &sibling))
+        gtk_list_store_insert_after (GTK_LIST_STORE (item_model),
+                                     &iter, &sibling);
+      else
+        gtk_list_store_append (GTK_LIST_STORE (item_model), &iter);
+
+      for (li = list; li != NULL; li = g_list_next (li))
+        {
+          /* get the selected file in the add dialog */
+          gtk_tree_model_get_iter (add_model, &tmp, li->data);
+          gtk_tree_model_get (add_model, &tmp, COL_ITEM, &item, -1);
+
+          /* insert the item in the item store */
+          if (G_LIKELY (item != NULL))
+            {
+              launcher_dialog_items_set_item (item_model, &iter, item);
+              g_object_unref (G_OBJECT (item));
+
+              /* select the first item */
+              if (li == list)
+                gtk_tree_selection_select_iter (selection, &iter);
+            }
+
+          /* cleanup */
+          gtk_tree_path_free (li->data);
+
+          if (g_list_next (li) != NULL)
+            {
+              /* insert a new iter after the new added item */
+              sibling = iter;
+              gtk_list_store_insert_after (GTK_LIST_STORE (item_model),
+                                           &iter, &sibling);
+            }
+        }
+
+      /* cleanup */
+      g_list_free (list);
+
+      /* write the model to xfconf */
+      launcher_dialog_tree_save (dialog);
+
+      /* update the selection */
+      launcher_dialog_tree_selection_changed (selection, dialog);
+    }
+
+  /* empty the store */
+  store = gtk_builder_get_object (dialog->builder, "add-store");
+  gtk_list_store_clear (GTK_LIST_STORE (store));
+
+  /* hide the dialog, since it's owned by gtkbuilder */
+  gtk_widget_hide (widget);
+}
+
+
+
 static gboolean
 launcher_dialog_tree_save_foreach (GtkTreeModel *model,
                                    GtkTreePath  *path,
                                    GtkTreeIter  *iter,
                                    gpointer      user_data)
 {
-  GPtrArray    *array = user_data;
-  GValue       *value;
-  XfceMenuItem *item;
+  GPtrArray      *array = user_data;
+  GValue         *value;
+  GarconMenuItem *item;
 
   /* get the desktop id of the item from the store */
   gtk_tree_model_get (model, iter, COL_ITEM, &item, -1);
@@ -271,7 +354,7 @@ launcher_dialog_tree_save_foreach (GtkTreeModel *model,
       /* create a value with the filename */
       value = g_new0 (GValue, 1);
       g_value_init (value, G_TYPE_STRING);
-      g_value_set_static_string (value, xfce_menu_item_get_filename (item));
+      g_value_take_string (value, garcon_menu_item_get_uri (item));
 
       /* put it in the array and release */
       g_ptr_array_add (array, value);
@@ -294,6 +377,7 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
   array = g_ptr_array_new ();
   gtk_tree_model_foreach (GTK_TREE_MODEL (store),
                           launcher_dialog_tree_save_foreach, array);
+
   g_object_set (dialog->plugin, "items", array, NULL);
   xfconf_array_free (array);
 }
@@ -307,7 +391,8 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
   GObject      *object;
   GtkTreeModel *model;
   GtkTreeIter   iter;
-  gint          n_children = -1, position = 0;
+  gint          n_children = -1;
+  gint          position = 0;
   GtkTreePath  *path;
   gboolean      sensitive;
 
@@ -354,70 +439,32 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
 
 
 static void
-launcher_dialog_editor_populate (LauncherPluginDialog *dialog,
-                                 XfceMenuItem         *item)
-{
-  GObject     *object;
-  const gchar *path;
-
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
-  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
-  panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
-
-  object = gtk_builder_get_object (dialog->builder, "item-name");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_entry_set_text (GTK_ENTRY (object),
-      xfce_menu_item_get_name (item));
-
-  object = gtk_builder_get_object (dialog->builder, "item-description");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_entry_set_text (GTK_ENTRY (object),
-      xfce_menu_item_get_comment (item));
-
-  object = gtk_builder_get_object (dialog->builder, "item-command");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_entry_set_text (GTK_ENTRY (object),
-      xfce_menu_item_get_command (item));
-
-  object = gtk_builder_get_object (dialog->builder, "item-working-directory");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  path = xfce_menu_item_get_path (item);
-  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (object),
-                                       path != NULL ? path : "");
-
-  object = gtk_builder_get_object (dialog->builder, "item-terminal");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (object),
-      xfce_menu_item_requires_terminal (item));
-
-  object = gtk_builder_get_object (dialog->builder, "item-startup-notify");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (object),
-      xfce_menu_item_supports_startup_notification (item));
-}
-
-
-
-static void
 launcher_dialog_item_button_clicked (GtkWidget            *button,
                                      LauncherPluginDialog *dialog)
 {
   const gchar      *name;
+  const gchar      *display_name = NULL;
   GObject          *object;
-  GtkWidget        *window;
   GObject          *treeview;
   GtkTreeSelection *selection;
   GtkTreeModel     *model;
   GtkTreeIter       iter_a, iter_b;
   GtkTreePath      *path;
-  XfceMenuItem     *item = NULL;
+  gchar            *command, *uri;
+  GdkScreen        *screen;
+  GError           *error = NULL;
+  GarconMenuItem   *item;
+  GtkWidget        *toplevel;
 
   panel_return_if_fail (GTK_IS_BUILDABLE (button));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
 
   /* name of the button */
   name = gtk_buildable_get_name (GTK_BUILDABLE (button));
-  if (exo_str_is_equal (name, "item-add"))
+  if (G_UNLIKELY (name == NULL))
+    return;
+
+  if (strcmp (name, "item-add") == 0)
     {
       object = gtk_builder_get_object (dialog->builder, "dialog-add");
       launcher_dialog_add_populate_model (dialog);
@@ -431,49 +478,48 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
       if (!gtk_tree_selection_get_selected (selection, &model, &iter_a))
         return;
 
-      if (exo_str_is_equal (name, "item-delete"))
+      if (strcmp (name, "item-delete") == 0)
         {
-          /* create question dialog */
-          window = gtk_message_dialog_new (
-              GTK_WINDOW (gtk_widget_get_toplevel (button)),
-              GTK_DIALOG_DESTROY_WITH_PARENT,
-              GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-              _("Are you sure you want to remove the selected item?"));
-          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (window),
-              _("If you delete an item, it is permanently removed from the launcher."));
-          gtk_dialog_add_buttons (GTK_DIALOG (window),
-                                  GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT,
-                                  GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                  NULL);
-          gtk_dialog_set_default_response (GTK_DIALOG (window), GTK_RESPONSE_ACCEPT);
+          /* get item name */
+          gtk_tree_model_get (model, &iter_a, COL_ITEM, &item, -1);
+          if (G_LIKELY (item != NULL))
+            {
+              display_name = garcon_menu_item_get_name (item);
+              g_object_unref (G_OBJECT (item));
+            }
 
-          /* run the dialog */
-          if (gtk_dialog_run (GTK_DIALOG (window)) == GTK_RESPONSE_ACCEPT)
+          /* ask the user */
+          toplevel = gtk_widget_get_toplevel (button);
+          if (xfce_dialog_confirm (GTK_WINDOW (toplevel), GTK_STOCK_DELETE, NULL,
+                  _("If you delete an item, it will be permanently removed"),
+                  _("Are you sure you want to remove \"%s\"?"), display_name))
             gtk_list_store_remove (GTK_LIST_STORE (model), &iter_a);
-
-          /* destroy */
-          gtk_widget_destroy (window);
         }
-      else if (exo_str_is_equal (name, "item-edit"))
+      else if (strcmp (name, "item-new") == 0)
         {
-          /* polulate the dialog */
+          /* TODO */
+        }
+      else if (strcmp (name, "item-edit") == 0)
+        {
           gtk_tree_model_get (model, &iter_a, COL_ITEM, &item, -1);
           if (G_UNLIKELY (item == NULL))
             return;
-          launcher_dialog_editor_populate (dialog, item);
 
-          /* show the dialog */
-          object = gtk_builder_get_object (dialog->builder, "dialog-editor");
-          panel_return_if_fail (GTK_IS_WIDGET (object));
-          gtk_widget_show (GTK_WIDGET (object));
-
-          /* create a tree path of the selected item, we use this to
-           * replace the menu item after saving */
-          path = gtk_tree_model_get_path (model, &iter_a);
-          g_object_set_data_full (G_OBJECT (object), "item-path", path,
-              (GDestroyNotify) gtk_tree_path_free);
+          screen = gtk_widget_get_screen (button);
+          uri = garcon_menu_item_get_uri (item);
+          command = g_strdup_printf ("exo-desktop-item-edit --xid=%d '%s'",
+                                     LAUNCHER_WIDGET_XID (button), uri);
+          if (!gdk_spawn_command_line_on_screen (screen, command, &error))
+            {
+              toplevel = gtk_widget_get_toplevel (button);
+              xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
+                  _("Failed to open desktop item editor"));
+              g_error_free (error);
+            }
+          g_free (uri);
+          g_free (command);
         }
-      else if (exo_str_is_equal (name, "item-move-up"))
+      else if (strcmp (name, "item-move-up") == 0)
         {
           path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter_a);
           if (gtk_tree_path_prev (path)
@@ -481,12 +527,15 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
             gtk_list_store_swap (GTK_LIST_STORE (model), &iter_a, &iter_b);
           gtk_tree_path_free (path);
         }
-      else
+      else if (strcmp (name, "item-move-down") == 0)
         {
-          panel_return_if_fail (exo_str_is_equal (name, "item-move-down"));
           iter_b = iter_a;
           if (gtk_tree_model_iter_next (GTK_TREE_MODEL (model), &iter_b))
             gtk_list_store_swap (GTK_LIST_STORE (model), &iter_a, &iter_b);
+        }
+      else
+        {
+          panel_assert_not_reached ();
         }
 
       /* store the new settings */
@@ -518,6 +567,13 @@ launcher_dialog_response (GtkWidget            *widget,
       if (G_UNLIKELY (dialog->idle_populate_id != 0))
         g_source_remove (dialog->idle_populate_id);
 
+      /* disconnect from items-changed signal */
+      g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->plugin),
+          G_CALLBACK (launcher_dialog_items_load), dialog);
+
+      /* disconnect from the menu items */
+      launcher_dialog_items_unload (dialog);
+
       /* destroy the dialog and release the builder */
       gtk_widget_destroy (widget);
       g_object_unref (G_OBJECT (dialog->builder));
@@ -532,301 +588,70 @@ launcher_dialog_response (GtkWidget            *widget,
 
 
 
-static void
-launcher_dialog_editor_icon_chooser (GtkWidget            *button,
-                                     LauncherPluginDialog *dialog)
+static gboolean
+launcher_dialog_item_changed_foreach (GtkTreeModel *model,
+                                      GtkTreePath  *path,
+                                      GtkTreeIter  *iter,
+                                      gpointer      user_data)
 {
-  GtkWidget *window;
+  GarconMenuItem *item;
+  gboolean        found;
 
-  /* create icon chooser dialog */
-  window = exo_icon_chooser_dialog_new (_("Select Icon"),
-      GTK_WINDOW (gtk_widget_get_toplevel (button)),
-      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-      GTK_STOCK_OK, GTK_RESPONSE_OK, NULL);
+  panel_return_val_if_fail (GARCON_IS_MENU_ITEM (user_data), TRUE);
 
-  if (gtk_dialog_run (GTK_DIALOG (window)) == GTK_RESPONSE_OK)
-    {
+  /* check if this is the item in the model */
+  gtk_tree_model_get (model, iter, COL_ITEM, &item, -1);
+  found = item == user_data;
 
-    }
+  if (G_UNLIKELY (found))
+    launcher_dialog_items_set_item (model, iter, item);
 
-  /* destroy */
-  gtk_widget_destroy (window);
+  g_object_unref (G_OBJECT (item));
+
+  return found;
 }
 
 
 
 static void
-launcher_dialog_editor_write_value (XfceRc      *rc,
-                                    GtkBuilder  *builder,
-                                    const gchar *name,
-                                    const gchar *key)
-{
-  GObject     *object;
-  const gchar *text;
-
-  panel_return_if_fail (GTK_IS_BUILDER (builder));
-
-  object = gtk_builder_get_object (builder, name);
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  text = gtk_entry_get_text (GTK_ENTRY (object));
-  if (IS_STRING (text))
-    xfce_rc_write_entry (rc, key, text);
-  else
-    xfce_rc_delete_entry (rc, key, FALSE);
-}
-
-
-
-static void
-launcher_dialog_editor_response (GtkWidget            *widget,
-                                 gint                  response_id,
-                                 LauncherPluginDialog *dialog)
-{
-  GObject      *object;
-  GtkTreePath  *path;
-  XfceMenuItem *item = NULL;
-  gchar        *user_dir, *new_file = NULL;
-  const gchar  *filename;
-  guint         i;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  XfceRc       *rc;
-  const gchar  *origional_file = NULL;
-  gchar        *folder;
-
-  panel_return_if_fail (GTK_IS_DIALOG (widget));
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
-  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
-
-  if (response_id == 2)
-    {
-      /* get the user directory */
-      user_dir = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
-          "xfce4" G_DIR_SEPARATOR_S "xfce4-panel" G_DIR_SEPARATOR_S, TRUE);
-      if (G_UNLIKELY (user_dir == NULL))
-        {
-          g_critical ("Failed to create the panel config directory.");
-          goto leave;
-        }
-
-      object = gtk_builder_get_object (dialog->builder, "item-treeview");
-      panel_return_if_fail (GTK_IS_WIDGET (object));
-      model = gtk_tree_view_get_model (GTK_TREE_VIEW (object));
-
-      /* get the menu item attached to the dialog */
-      path = g_object_get_data (G_OBJECT (widget), "item-path");
-      if (!gtk_tree_model_get_iter (model, &iter, path))
-        goto leave;
-      gtk_tree_model_get (model, &iter, COL_ITEM, &item, -1);
-      panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
-
-      /* check if the item is already in the users directory */
-      filename = xfce_menu_item_get_filename (item);
-      if (!g_str_has_prefix (filename, user_dir))
-        {
-          /* create a unique filename for the copy */
-          for (i = 1; i < 100 /* arbitairy limit */; i++)
-            {
-              /* create the new filename */
-              new_file = g_strdup_printf ("%slauncher-%d-%d.desktop",
-                  user_dir,
-                  xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (dialog->plugin)),
-                  i++);
-
-              /* we're done if the file does not exist yet */
-              if (!g_file_test (new_file, G_FILE_TEST_IS_REGULAR))
-                break;
-
-              /* cleanup before we try again */
-              g_free (new_file);
-            }
-
-          /* remember the origional file for the forked desktop file */
-          origional_file = filename;
-
-          /* set new filename */
-          filename = new_file;
-        }
-
-      /* cleanup */
-      g_free (user_dir);
-
-      /* store the new item data */
-      rc = xfce_rc_simple_open (filename, FALSE);
-      if (G_LIKELY (rc != NULL))
-        {
-          /* write some default stuff */
-          xfce_rc_set_group (rc, "Desktop Entry");
-          xfce_rc_write_entry (rc, "Type", "Application");
-          xfce_rc_write_entry (rc, "Encoding", "UTF-8");
-
-          /* remember the origional desktop file */
-          if (G_UNLIKELY (origional_file != NULL))
-            xfce_rc_write_entry (rc, "X-XFCE-Origional", origional_file);
-
-          /* write text entries */
-          launcher_dialog_editor_write_value (rc, dialog->builder,
-                                              "item-name",
-                                              "Name");
-          launcher_dialog_editor_write_value (rc, dialog->builder,
-                                              "item-description",
-                                              "Comment");
-          launcher_dialog_editor_write_value (rc, dialog->builder,
-                                              "item-command",
-                                              "Exec");
-
-          object = gtk_builder_get_object (dialog->builder, "item-working-directory");
-          panel_return_if_fail (GTK_IS_WIDGET (object));
-          folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (object));
-          xfce_rc_write_entry (rc, "Path", folder);
-          g_free (folder);
-
-          object = gtk_builder_get_object (dialog->builder, "item-terminal");
-          panel_return_if_fail (GTK_IS_WIDGET (object));
-          xfce_rc_write_bool_entry (rc, "Terminal",
-              gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (object)));
-
-          object = gtk_builder_get_object (dialog->builder, "item-startup-notify");
-          panel_return_if_fail (GTK_IS_WIDGET (object));
-          xfce_rc_write_bool_entry (rc, "StartupNotify",
-              gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (object)));
-
-          xfce_rc_close (rc);
-        }
-
-      /* release the menu item */
-      if (G_LIKELY (item != NULL))
-        g_object_unref (G_OBJECT (item));
-
-      /* update the model */
-      item = xfce_menu_item_new (filename);
-      if (G_LIKELY (item != NULL))
-        {
-          launcher_dialog_items_insert_item (GTK_LIST_STORE (model),
-                                             &iter, item);
-          g_object_unref (G_OBJECT (item));
-        }
-
-      /* cleanup */
-      g_free (new_file);
-
-      /* write the model to xfconf */
-      launcher_dialog_tree_save (dialog);
-    }
-
-leave:
-  /* hide the dialog, since it's owned by gtkbuilder */
-  gtk_widget_hide (widget);
-
-  /* unset the item path */
-  g_object_set_data (G_OBJECT (widget), "item-path", NULL);
-}
-
-
-
-static void
-launcher_dialog_add_response (GtkWidget            *widget,
-                              gint                  response_id,
+launcher_dialog_item_changed (GarconMenuItem       *item,
                               LauncherPluginDialog *dialog)
 {
-  GObject          *treeview, *store;
-  GtkTreeSelection *selection;
-  GtkTreeModel     *item_model, *add_model;
-  GtkTreeIter       iter, sibling, tmp;
-  XfceMenuItem     *item;
-  GList            *list, *li;
+  GObject      *treeview;
+  GtkTreeModel *model;
 
-  panel_return_if_fail (GTK_IS_DIALOG (widget));
-  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
+  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
 
-  if (response_id != 0)
-    {
-      /* add all the selected rows in the add dialog */
-      treeview = gtk_builder_get_object (dialog->builder, "add-treeview");
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-      list = gtk_tree_selection_get_selected_rows (selection, &add_model);
+  treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
 
-      /* append after the selected item in the item dialog */
-      treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-      item_model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
-      if (gtk_tree_selection_get_selected (selection, NULL, &sibling))
-        gtk_list_store_insert_after (GTK_LIST_STORE (item_model),
-                                     &iter, &sibling);
-      else
-        gtk_list_store_append (GTK_LIST_STORE (item_model), &iter);
-
-      for (li = list; li != NULL; li = g_list_next (li))
-        {
-          /* get the selected file in the add dialog */
-          gtk_tree_model_get_iter (add_model, &tmp, li->data);
-          gtk_tree_model_get (add_model, &tmp, COL_ITEM, &item, -1);
-
-          /* insert the item in the item store */
-          if (G_LIKELY (item != NULL))
-            {
-              launcher_dialog_items_insert_item (GTK_LIST_STORE (item_model),
-                                                 &iter, item);
-              g_object_unref (G_OBJECT (item));
-
-              /* select the first item */
-              if (li == list)
-                gtk_tree_selection_select_iter (selection, &iter);
-            }
-
-          /* cleanup */
-          gtk_tree_path_free (li->data);
-
-          if (g_list_next (li) != NULL)
-            {
-              /* insert a new iter after the new added item */
-              sibling = iter;
-              gtk_list_store_insert_after (GTK_LIST_STORE (item_model),
-                                           &iter, &sibling);
-            }
-        }
-
-      /* cleanup */
-      g_list_free (list);
-
-      /* write the model to xfconf */
-      launcher_dialog_tree_save (dialog);
-
-      /* update the selection */
-      launcher_dialog_tree_selection_changed (selection, dialog);
-    }
-
-  /* empty the store */
-  store = gtk_builder_get_object (dialog->builder, "add-store");
-  gtk_list_store_clear (GTK_LIST_STORE (store));
-
-  /* hide the dialog, since it's owned by gtkbuilder */
-  gtk_widget_hide (widget);
+  /* find the item in the model and update it */
+  gtk_tree_model_foreach (model, launcher_dialog_item_changed_foreach, item);
 }
 
 
 
 static void
-launcher_dialog_items_insert_item (GtkListStore *store,
-                                   GtkTreeIter  *iter,
-                                   XfceMenuItem *item)
+launcher_dialog_items_set_item (GtkTreeModel   *model,
+                                GtkTreeIter    *iter,
+                                GarconMenuItem *item)
 {
   const gchar *name, *comment;
   gchar       *markup;
 
-  panel_return_if_fail (GTK_IS_LIST_STORE (store));
-  panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
+  panel_return_if_fail (GTK_IS_LIST_STORE (model));
+  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
 
-  name = xfce_menu_item_get_name (item);
-  comment = xfce_menu_item_get_comment (item);
+  name = garcon_menu_item_get_name (item);
+  comment = garcon_menu_item_get_comment (item);
 
-  if (IS_STRING (comment))
+  if (!exo_str_is_empty (comment))
     markup = g_strdup_printf ("<b>%s</b>\n%s", name, comment);
   else
     markup = g_strdup_printf ("<b>%s</b>", name);
 
-  gtk_list_store_set (GTK_LIST_STORE (store), iter,
-                      COL_ICON, xfce_menu_item_get_icon_name (item),
+  gtk_list_store_set (GTK_LIST_STORE (model), iter,
+                      COL_ICON, garcon_menu_item_get_icon_name (item),
                       COL_NAME, markup,
                       COL_ITEM, item,
                       -1);
@@ -837,34 +662,67 @@ launcher_dialog_items_insert_item (GtkListStore *store,
 
 
 static void
+launcher_dialog_items_unload (LauncherPluginDialog *dialog)
+{
+  GSList *li;
+
+  for (li = dialog->items; li != NULL; li = li->next)
+    {
+      panel_return_if_fail (GARCON_IS_MENU_ITEM (li->data));
+      g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
+          G_CALLBACK (launcher_dialog_item_changed), dialog);
+      g_object_unref (G_OBJECT (li->data));
+    }
+
+  g_slist_free (dialog->items);
+  dialog->items = NULL;
+}
+
+
+
+static void
 launcher_dialog_items_load (LauncherPluginDialog *dialog)
 {
   GObject          *treeview;
   GtkTreeSelection *selection;
   GtkTreeModel     *model;
-  GSList           *items, *li;
+  GSList           *li;
   GtkTreeIter       iter;
+  GtkTreePath      *path;
 
   /* get the treeview */
   treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 
-  /* get the model and clear it */
-  model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+  /* we try to preserve the current selection */
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    path = gtk_tree_model_get_path (model, &iter);
+  else
+    path = NULL;
+
+  /* clear the old items */
+  launcher_dialog_items_unload (dialog);
   gtk_list_store_clear (GTK_LIST_STORE (model));
 
   /* insert the launcher items */
-  items = launcher_plugin_get_items (dialog->plugin);
-  for (li = items; li != NULL; li = li->next)
+  dialog->items = launcher_plugin_get_items (dialog->plugin);
+  for (li = dialog->items; li != NULL; li = li->next)
     {
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      launcher_dialog_items_insert_item (GTK_LIST_STORE (model),
-                                         &iter, XFCE_MENU_ITEM (li->data));
+      launcher_dialog_items_set_item (model, &iter, GARCON_MENU_ITEM (li->data));
+      g_signal_connect (G_OBJECT (li->data), "changed",
+          G_CALLBACK (launcher_dialog_item_changed), dialog);
     }
 
-  /* select the first item */
-  if (gtk_tree_model_get_iter_first (model, &iter))
+  if (G_LIKELY (path != NULL))
     {
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+      /* restore the old selection */
+      gtk_tree_selection_select_path (selection, path);
+      gtk_tree_path_free (path);
+    }
+  else if (gtk_tree_model_get_iter_first (model, &iter))
+    {
+      /* select the first item */
       gtk_tree_selection_select_iter (selection, &iter);
     }
 }
@@ -889,12 +747,13 @@ launcher_dialog_show (LauncherPlugin *plugin)
 
   builder = gtk_builder_new ();
   if (gtk_builder_add_from_string (builder, launcher_dialog_glade,
-                                   launcher_dialog_glade_length, NULL))
+                                    launcher_dialog_glade_length, NULL))
     {
       /* create structure */
       dialog = g_slice_new0 (LauncherPluginDialog);
       dialog->builder = builder;
       dialog->plugin = plugin;
+      dialog->items = NULL;
 
       /* block plugin menu */
       xfce_panel_plugin_block_menu (XFCE_PANEL_PLUGIN (plugin));
@@ -922,7 +781,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
           G_CALLBACK (launcher_dialog_tree_selection_changed), dialog);
       launcher_dialog_tree_selection_changed (selection, dialog);
 
-      /* connect binding to the advanced properties */
+      /* connect bindings to the advanced properties */
       for (i = 0; i < G_N_ELEMENTS (binding_names); i++)
         {
           object = gtk_builder_get_object (builder, binding_names[i]);
@@ -931,24 +790,14 @@ launcher_dialog_show (LauncherPlugin *plugin)
                                   G_OBJECT (object), "active");
         }
 
-      /* setup responses for the other dialogs */
-      object = gtk_builder_get_object (builder, "dialog-editor");
-      g_signal_connect (G_OBJECT (object), "response",
-          G_CALLBACK (launcher_dialog_editor_response), dialog);
-      g_signal_connect (G_OBJECT (object), "delete-event",
-          G_CALLBACK (exo_noop_true), NULL);
-
+      /* setup responses for the add dialog */
       object = gtk_builder_get_object (builder, "dialog-add");
       g_signal_connect (G_OBJECT (object), "response",
           G_CALLBACK (launcher_dialog_add_response), dialog);
       g_signal_connect (G_OBJECT (object), "delete-event",
-          G_CALLBACK (exo_noop_true), NULL);
+          G_CALLBACK (gtk_true), NULL);
 
-      object = gtk_builder_get_object (builder, "item-icon");
-      g_signal_connect (G_OBJECT (object), "clicked",
-          G_CALLBACK (launcher_dialog_editor_icon_chooser), dialog);
-
-      /* enable sorting in the add dialog */
+      /* setup sorting in the add dialog */
       object = gtk_builder_get_object (builder, "add-store");
       gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (object),
                                             COL_NAME, GTK_SORT_ASCENDING);
@@ -976,6 +825,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
 
       /* load the plugin items */
       launcher_dialog_items_load (dialog);
+      g_signal_connect_swapped (G_OBJECT (plugin), "items-changed",
+          G_CALLBACK (launcher_dialog_items_load), dialog);
 
       /* show the dialog */
       gtk_widget_show (GTK_WIDGET (window));

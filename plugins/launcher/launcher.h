@@ -21,9 +21,7 @@
 #define __LAUNCHER_H__
 
 #include <gtk/gtk.h>
-#include <xfconf/xfconf.h>
 #include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4menu/libxfce4menu.h>
 
 G_BEGIN_DECLS
 
