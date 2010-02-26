@@ -135,10 +135,8 @@ enum
 
 
 
-/* define and register the plugin */
-G_DEFINE_TYPE (XfceLauncherPlugin, launcher_plugin, XFCE_TYPE_PANEL_PLUGIN)
-
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_LAUNCHER_PLUGIN)
+/* define the plugin */
+XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (XfceLauncherPlugin, launcher_plugin)
 
 
 

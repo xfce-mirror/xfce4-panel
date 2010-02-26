@@ -48,9 +48,11 @@ enum _LauncherArrowType
   LAUNCHER_ARROW_INTERNAL
 };
 
-GType             launcher_plugin_get_type    (void) G_GNUC_CONST;
+GType             launcher_plugin_get_type      (void) G_GNUC_CONST;
 
-GSList           *launcher_plugin_get_items   (XfceLauncherPlugin *plugin);
+void              launcher_plugin_register_type (GTypeModule *type_module);
+
+GSList           *launcher_plugin_get_items     (XfceLauncherPlugin *plugin);
 
 G_END_DECLS
 
