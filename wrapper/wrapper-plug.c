@@ -87,10 +87,15 @@ wrapper_plug_init (WrapperPlug *plug)
   g_signal_connect (G_OBJECT (plug), "composited-changed",
                     G_CALLBACK (wrapper_plug_set_colormap), NULL);
 
+  /* old versions of gtk don't support transparent tray icons, if we
+   * set an argb colormap on the tray, the icons won't be embedded because
+   * the socket-plugin implementation requires identical colormaps */
+  if (gtk_check_version (2, 16, 0) != NULL
+      && strcmp (wrapper_name, "systray") == 0)
+    return;
+
   /* set the colormap */
-  /* HACK: the systray can't handle composited windows! */
-  if (strcmp (wrapper_name, "systray") != 0)
-    wrapper_plug_set_colormap (plug);
+  wrapper_plug_set_colormap (plug);
 }
 
 
