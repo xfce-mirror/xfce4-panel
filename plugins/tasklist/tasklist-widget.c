@@ -47,6 +47,7 @@ enum
 {
   PROP_0,
   PROP_STYLE,
+  PROP_GROUPING,
   PROP_INCLUDE_ALL_WORKSPACES,
   PROP_FLAT_BUTTONS,
   PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
@@ -211,6 +212,15 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       XFCE_TASKLIST_STYLE_MIN,
                                                       XFCE_TASKLIST_STYLE_MAX,
                                                       XFCE_TASKLIST_STYLE_DEFAULT,
+                                                      EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_GROUPING,
+                                   g_param_spec_uint ("grouping",
+                                                      NULL, NULL,
+                                                      XFCE_TASKLIST_GROUPING_MIN,
+                                                      XFCE_TASKLIST_GROUPING_MAX,
+                                                      XFCE_TASKLIST_GROUPING_DEFAULT,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -1341,8 +1351,9 @@ tasklist_button_button_press_event (GtkWidget         *button,
         }
       else
         {
-          /* only switch workspaces if we show application from other workspaces
-           * don't switch when switch on minimize is disabled and the window is minimized */
+          /* only switch workspaces if we show windows from other
+           * workspaces don't switch when switch on minimize is disabled
+           * and the window is minimized */
           if (child->tasklist->all_workspaces
               && (!wnck_window_is_minimized (child->window)
                   || child->tasklist->switch_workspace))

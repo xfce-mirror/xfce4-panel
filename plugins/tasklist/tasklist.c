@@ -1,7 +1,7 @@
 /* $Id$ */
 /*
  * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2 of the License, or (at your option)
@@ -118,19 +118,18 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
 
+#define TASKLIST_XFCONF_BIND(name, gtype) \
+  xfconf_g_property_bind (plugin->channel, "/" name, gtype, \
+                          plugin->tasklist, name);
+
   /* create bindings */
-  xfconf_g_property_bind (plugin->channel, "/style", G_TYPE_UINT,
-                          plugin->tasklist, "style");
-  xfconf_g_property_bind (plugin->channel, "/include-all-workspaces", G_TYPE_BOOLEAN,
-                          plugin->tasklist, "include-all-workspaces");
-  xfconf_g_property_bind (plugin->channel, "/flat-buttons", G_TYPE_BOOLEAN,
-                          plugin->tasklist, "flat-buttons");
-  xfconf_g_property_bind (plugin->channel, "/switch-workspace-on-unminimize", G_TYPE_BOOLEAN,
-                          plugin->tasklist, "switch-workspace-on-unminimize");
-  xfconf_g_property_bind (plugin->channel, "/show-only-minimized", G_TYPE_BOOLEAN,
-                          plugin->tasklist, "show-only-minimized");
-  xfconf_g_property_bind (plugin->channel, "/show-wireframes", G_TYPE_BOOLEAN,
-                          plugin->tasklist, "show-wireframes");
+  TASKLIST_XFCONF_BIND ("style", G_TYPE_UINT)
+  TASKLIST_XFCONF_BIND ("grouping", G_TYPE_UINT)
+  TASKLIST_XFCONF_BIND ("include-all-workspaces", G_TYPE_BOOLEAN)
+  TASKLIST_XFCONF_BIND ("flat-buttons", G_TYPE_BOOLEAN)
+  TASKLIST_XFCONF_BIND ("switch-workspace-on-unminimize", G_TYPE_BOOLEAN)
+  TASKLIST_XFCONF_BIND ("show-only-minimized", G_TYPE_BOOLEAN)
+  TASKLIST_XFCONF_BIND ("show-wireframes", G_TYPE_BOOLEAN)
 
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);
@@ -188,35 +187,39 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject        *object;
 
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, tasklist_dialog_glade, tasklist_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, tasklist_dialog_glade,
+                                   tasklist_dialog_glade_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
       xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
 
       xfce_panel_plugin_block_menu (panel_plugin);
-      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) xfce_panel_plugin_unblock_menu, panel_plugin);
+      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify)
+                         xfce_panel_plugin_unblock_menu, panel_plugin);
 
       object = gtk_builder_get_object (builder, "close-button");
-      g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
+      g_signal_connect_swapped (G_OBJECT (object), "clicked",
+                                G_CALLBACK (gtk_widget_destroy), dialog);
 
-      object = gtk_builder_get_object (builder, "style");
-      exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "style", object, "active");
+#define TASKLIST_DIALOG_BIND(name, property) \
+      object = gtk_builder_get_object (builder, (name)); \
+      exo_mutual_binding_new (G_OBJECT (plugin->tasklist), (name), \
+                              G_OBJECT (object), (property));
 
-      object = gtk_builder_get_object (builder, "include-all-workspaces");
-      exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "include-all-workspaces", object, "active");
+#define TASKLIST_DIALOG_BIND_INV(name, property) \
+      object = gtk_builder_get_object (builder, name); \
+      exo_mutual_binding_new_with_negation (G_OBJECT (plugin->tasklist), \
+                                            name,  G_OBJECT (object), \
+                                            property);
 
-      object = gtk_builder_get_object (builder, "flat-buttons");
-      exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "flat-buttons", object, "active");
-
-      object = gtk_builder_get_object (builder, "switch-workspace-on-unminimize");
-      exo_mutual_binding_new_with_negation (G_OBJECT (plugin->tasklist), "switch-workspace-on-unminimize", object, "active");
-
-      object = gtk_builder_get_object (builder, "show-only-minimized");
-      exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "show-only-minimized", object, "active");
-
-      object = gtk_builder_get_object (builder, "show-wireframes");
-      exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "show-wireframes", object, "active");
+      TASKLIST_DIALOG_BIND ("style", "active")
+      TASKLIST_DIALOG_BIND ("grouping", "active")
+      TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
+      TASKLIST_DIALOG_BIND ("flat-buttons", "active")
+      TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
+      TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
+      TASKLIST_DIALOG_BIND ("show-wireframes", "active")
 
       gtk_widget_show (GTK_WIDGET (dialog));
 	}

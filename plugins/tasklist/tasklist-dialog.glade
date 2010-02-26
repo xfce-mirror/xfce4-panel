@@ -149,8 +149,9 @@
                               <object class="GtkLabel" id="label4">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Grouping:</property>
+                                <property name="label" translatable="yes">Window _grouping:</property>
                                 <property name="use_underline">True</property>
+                                <property name="mnemonic_widget">grouping</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -158,10 +159,14 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="combobox2">
+                              <object class="GtkComboBox" id="grouping">
                                 <property name="visible">True</property>
+                                <property name="model">grouping-model</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
                                 </child>
                               </object>
                               <packing>
@@ -277,5 +282,22 @@
     <action-widgets>
       <action-widget response="0">close-button</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkListStore" id="grouping-model">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Never</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">When space is limited</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Always</col>
+      </row>
+    </data>
   </object>
 </interface>

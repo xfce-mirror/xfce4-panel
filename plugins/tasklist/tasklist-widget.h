@@ -1,7 +1,7 @@
 /* $Id$ */
 /*
  * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2 of the License, or (at your option)
@@ -24,10 +24,11 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfceTasklistClass XfceTasklistClass;
-typedef struct _XfceTasklist      XfceTasklist;
-typedef struct _XfceTasklistChild XfceTasklistChild;
-typedef enum   _XfceTasklistStyle XfceTasklistStyle;
+typedef struct _XfceTasklistClass    XfceTasklistClass;
+typedef struct _XfceTasklist         XfceTasklist;
+typedef struct _XfceTasklistChild    XfceTasklistChild;
+typedef enum   _XfceTasklistStyle    XfceTasklistStyle;
+typedef enum   _XfceTasklistGrouping XfceTasklistGrouping;
 
 #define XFCE_TYPE_TASKLIST            (xfce_tasklist_get_type ())
 #define XFCE_TASKLIST(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TASKLIST, XfceTasklist))
@@ -46,6 +47,17 @@ enum _XfceTasklistStyle
   XFCE_TASKLIST_STYLE_MIN = XFCE_TASKLIST_STYLE_NORMAL,
   XFCE_TASKLIST_STYLE_MAX = XFCE_TASKLIST_STYLE_ICONBOX,
   XFCE_TASKLIST_STYLE_DEFAULT = XFCE_TASKLIST_STYLE_NORMAL
+};
+
+enum _XfceTasklistGrouping
+{
+  XFCE_TASKLIST_GROUPING_NEVER,
+  XFCE_TASKLIST_GROUPING_AUTO,
+  XFCE_TASKLIST_GROUPING_ALWAYS,
+
+  XFCE_TASKLIST_GROUPING_MIN = XFCE_TASKLIST_GROUPING_NEVER,
+  XFCE_TASKLIST_GROUPING_MAX = XFCE_TASKLIST_GROUPING_ALWAYS,
+  XFCE_TASKLIST_GROUPING_DEFAULT = XFCE_TASKLIST_GROUPING_AUTO
 };
 
 
