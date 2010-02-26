@@ -681,13 +681,14 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
                                    GarconMenu             *menu,
                                    ApplicationsMenuPlugin *plugin)
 {
-  GList       *elements, *li;
-  GtkWidget   *mi, *image;
-  const gchar *name, *icon_name;
-  GtkWidget   *submenu;
-  gboolean     has_children = FALSE;
-  gint         size = DEFAULT_ICON_SIZE, w, h;
-  const gchar *command;
+  GList               *elements, *li;
+  GtkWidget           *mi, *image;
+  const gchar         *name, *icon_name;
+  GtkWidget           *submenu;
+  gboolean             has_children = FALSE;
+  gint                 size = DEFAULT_ICON_SIZE, w, h;
+  const gchar         *command;
+  GarconMenuDirectory *directory;
 
   panel_return_val_if_fail (GTK_IS_MENU (gtk_menu), FALSE);
   panel_return_val_if_fail (GARCON_IS_MENU (menu), FALSE);
@@ -746,6 +747,14 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
         }
       else if (GARCON_IS_MENU (li->data))
         {
+          /* the element check for menu also copies the item list to
+           * check if all the elements are visible, we do that with the
+           * return value of this function, so avoid that and only check
+           * the visibility of the menu directory */
+          directory = garcon_menu_get_directory (li->data);
+          if (!garcon_menu_directory_get_visible (directory))
+            continue;
+
           submenu = gtk_menu_new ();
           if (applications_menu_plugin_menu_add (submenu, li->data, plugin))
             {
