@@ -424,7 +424,7 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
      G_CALLBACK (directory_menu_plugin_configure_plugin_icon_chooser), plugin);
 
   plugin->dialog_icon = xfce_panel_image_new_from_source (icon_name);
-  g_object_set (G_OBJECT (plugin->dialog_icon), "size", 48, NULL);
+  xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->dialog_icon), 48);
   gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
   gtk_widget_show (plugin->dialog_icon);

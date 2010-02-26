@@ -2031,7 +2031,7 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child)
     {
       image = xfce_panel_image_new ();
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-      g_object_set (G_OBJECT (image), "size", tasklist->menu_icon_size, NULL);
+      xfce_panel_image_set_size (XFCE_PANEL_IMAGE (image), tasklist->menu_icon_size);
       exo_binding_new (G_OBJECT (child->icon), "pixbuf", G_OBJECT (image), "pixbuf");
       gtk_widget_show (image);
     }
