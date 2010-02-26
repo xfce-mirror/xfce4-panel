@@ -365,7 +365,6 @@ launcher_plugin_get_property (GObject    *object,
 
       case PROP_DISABLE_TOOLTIPS:
         g_value_set_boolean (value, plugin->disable_tooltips);
-        gtk_widget_set_has_tooltip (plugin->button, !plugin->disable_tooltips);
         break;
 
       case PROP_MOVE_FIRST:
@@ -691,6 +690,7 @@ launcher_plugin_set_property (GObject      *object,
 
       case PROP_DISABLE_TOOLTIPS:
         plugin->disable_tooltips = g_value_get_boolean (value);
+        gtk_widget_set_has_tooltip (plugin->button, !plugin->disable_tooltips);
         break;
 
       case PROP_MOVE_FIRST:
