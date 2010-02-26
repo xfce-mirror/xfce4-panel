@@ -248,7 +248,7 @@ panel_plugin_external_46_finalize (GObject *object)
 {
   PanelPluginExternal46 *external = PANEL_PLUGIN_EXTERNAL_46 (object);
   GSList                *li;
-g_message ("external-plugin-46 finalized");
+
   if (external->watch_id != 0)
     {
       /* remove the child watch and don't leave zomies */
