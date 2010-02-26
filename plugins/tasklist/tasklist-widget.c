@@ -66,12 +66,6 @@
                                          } G_STMT_END
 #define xfce_taskbar_is_locked(tasklist) (XFCE_TASKLIST (tasklist)->locked > 0)
 
-#define xfce_tasklist_button_visible(child,tasklist,active_ws) \
-  ((!tasklist->only_minimized || wnck_window_is_minimized (child->window)) \
-   && (tasklist->all_workspaces \
-       || wnck_window_is_pinned (child->window) \
-       || wnck_window_get_workspace (child->window) == active_ws))
-
 
 
 enum
@@ -240,6 +234,7 @@ static void xfce_tasklist_wireframe_update (XfceTasklist *tasklist, XfceTasklist
 #endif
 
 /* tasklist buttons */
+static gboolean xfce_tasklist_button_visible (XfceTasklistChild *child, WnckWorkspace *active_ws);
 static gint xfce_tasklist_button_compare (gconstpointer child_a, gconstpointer child_b, gpointer user_data);
 static GtkWidget *xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child);
 static XfceTasklistChild *xfce_tasklist_button_new (WnckWindow *window, XfceTasklist *tasklist);
@@ -1243,19 +1238,24 @@ xfce_tasklist_active_workspace_changed (WnckScreen    *screen,
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->screen == screen);
 
-  /* leave when we show tasks from all workspaces or are locked */
+  /* leave when we are locked or show all workspaces. the null
+   * check for @previous_workspace is used to update the tasklist
+   * on setting changes */
   if (xfce_taskbar_is_locked (tasklist)
-      || tasklist->all_workspaces)
+      || (previous_workspace != NULL
+          && tasklist->all_workspaces))
     return;
 
-  /* walk all the children and hide buttons on other workspaces */
+  /* walk all the children and update their visibility */
   active_ws = wnck_screen_get_active_workspace (screen);
   for (li = tasklist->windows; li != NULL; li = li->next)
     {
       child = li->data;
 
-      if (child->type == XFCE_TASKLIST_BUTTON_TYPE_GROUP
-          || xfce_tasklist_button_visible (child, tasklist, active_ws))
+      /* TODO, not supported yet */
+      panel_assert (child->type != XFCE_TASKLIST_BUTTON_TYPE_GROUP);
+
+      if (xfce_tasklist_button_visible (child, active_ws))
         gtk_widget_show (child->button);
       else
         gtk_widget_hide (child->button);
@@ -1291,7 +1291,7 @@ xfce_tasklist_window_added (WnckScreen   *screen,
   child = xfce_tasklist_button_new (window, tasklist);
 
   /* initial visibility of the function */
-  if (xfce_tasklist_button_visible (child, tasklist, wnck_screen_get_active_workspace (screen)))
+  if (xfce_tasklist_button_visible (child, wnck_screen_get_active_workspace (screen)))
     gtk_widget_show (child->button);
 
   if (G_LIKELY (child->class_group != NULL))
@@ -1581,6 +1581,25 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
 /**
  * Tasklist Buttons
  **/
+static inline gboolean
+xfce_tasklist_button_visible (XfceTasklistChild *child,
+                              WnckWorkspace     *active_ws)
+{
+  panel_return_val_if_fail (active_ws == NULL || WNCK_IS_WORKSPACE (active_ws), FALSE);
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
+  panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
+
+  if (child->tasklist->all_workspaces
+      || (active_ws != NULL ? wnck_window_is_in_viewport (child->window, active_ws)
+           : wnck_window_is_pinned (child->window)))
+    return (!child->tasklist->only_minimized
+            || wnck_window_is_minimized (child->window));
+
+  return FALSE;
+}
+
+
+
 static gint
 xfce_tasklist_button_compare (gconstpointer child_a,
                               gconstpointer child_b,
@@ -2578,9 +2597,6 @@ static void
 xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
                                           gboolean      all_workspaces)
 {
-  GSList            *li;
-  XfceTasklistChild *child;
-
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
   all_workspaces = !!all_workspaces;
@@ -2588,21 +2604,10 @@ xfce_tasklist_set_include_all_workspaces (XfceTasklist *tasklist,
     {
       tasklist->all_workspaces = all_workspaces;
 
-      if (all_workspaces)
-        {
-          /* make sure all buttons are visible */
-          for (li = tasklist->windows; li != NULL; li = li->next)
-            {
-              child = li->data;
-              gtk_widget_show (child->button);
-            }
-        }
-      else
-        {
-          /* trigger signal */
-          xfce_tasklist_active_workspace_changed (tasklist->screen,
-                                                  NULL, tasklist);
-        }
+      /* update all windows */
+      if (tasklist->screen != NULL)
+        xfce_tasklist_active_workspace_changed (tasklist->screen,
+                                                NULL, tasklist);
     }
 }
 
@@ -2686,40 +2691,14 @@ static void
 xfce_tasklist_set_show_only_minimized (XfceTasklist *tasklist,
                                        gboolean      only_minimized)
 {
-  GSList            *li;
-  XfceTasklistChild *child;
-
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
   if (tasklist->only_minimized != only_minimized)
     {
       tasklist->only_minimized = !!only_minimized;
 
-      /* update the tasklist */
-      for (li = tasklist->windows; li != NULL; li = li->next)
-        {
-          child = li->data;
-
-          /* update the icons of the minimized windows */
-          if (wnck_window_is_minimized (child->window))
-            {
-              xfce_tasklist_button_icon_changed (child->window, child);
-              xfce_tasklist_button_name_changed (child->window, child);
-            }
-
-          /* if we show all workspaces, update the visibility here */
-          if (tasklist->all_workspaces
-              && !wnck_window_is_minimized (child->window))
-            {
-              if (only_minimized)
-                gtk_widget_hide (child->button);
-              else
-                gtk_widget_show (child->button);
-            }
-        }
-
-      /* update the buttons when we show only the active workspace */
-      if (!tasklist->all_workspaces)
+      /* update all windows */
+      if (tasklist->screen != NULL)
         xfce_tasklist_active_workspace_changed (tasklist->screen,
                                                 NULL, tasklist);
     }
