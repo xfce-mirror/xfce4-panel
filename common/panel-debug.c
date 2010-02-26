@@ -66,17 +66,11 @@ panel_debug (const gchar *domain,
       else if (strcmp (value, "1") == 0)
         {
           level = DEBUG_LEVEL_ALL_DOMAINS;
-
-          g_printerr (PACKAGE_NAME "(debug): showing all domains\n");
         }
       else
         {
           level = DEBUG_LEVEL_FILTER_DOMAINS;
           domains = g_strsplit (value, ":", -1);
-
-          string = g_strjoinv (", ", domains);
-          g_printerr (PACKAGE_NAME "(debug): filter domains (%s)\n", string);
-          g_free (string);
         }
 
       g_once_init_leave (&level__volatile, level);
