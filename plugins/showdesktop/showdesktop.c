@@ -54,9 +54,6 @@ struct _ShowDesktopPlugin
 
 	/* the wnck screen */
 	WnckScreen *wnck_screen;
-
-	/* wnck signal */
-	gulong      showing_desktop_changed_id;
 };
 
 
@@ -71,11 +68,7 @@ XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_SHOW_DESKTOP_PLUGIN)
 static void
 show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
 {
-  GtkWidgetClass       *gtkwidget_class;
   XfcePanelPluginClass *plugin_class;
-
-  gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->screen_changed = show_desktop_plugin_screen_changed;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->free_data = show_desktop_plugin_free_data;
@@ -91,13 +84,17 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
 
   /* init */
   plugin->wnck_screen = NULL;
-  plugin->showing_desktop_changed_id = 0;
+
+  /* monitor screen changes */
+  g_signal_connect (G_OBJECT (plugin), "screen-changed",
+      G_CALLBACK (show_desktop_plugin_screen_changed), NULL);
 
   /* create the toggle button */
   button = plugin->button = xfce_create_panel_toggle_button ();
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
   gtk_container_add (GTK_CONTAINER (plugin), button);
-  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (show_desktop_plugin_toggled), plugin);
+  g_signal_connect (G_OBJECT (button), "toggled",
+      G_CALLBACK (show_desktop_plugin_toggled), plugin);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), button);
   gtk_widget_show (button);
 
@@ -114,27 +111,34 @@ show_desktop_plugin_screen_changed (GtkWidget *widget,
                                     GdkScreen *previous_screen)
 {
   ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (widget);
+  WnckScreen        *wnck_screen;
+  GdkScreen         *screen;
 
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (widget));
 
+  /* get the new wnck screen */
+  screen = gtk_widget_get_screen (widget);
+  wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
+  panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
+
+  /* leave when the wnck screen did not change */
+  if (plugin->wnck_screen == wnck_screen)
+    return;
+
   /* disconnect signals from an existing wnck screen */
-  if (plugin->showing_desktop_changed_id != 0)
-    {
-      g_signal_handler_disconnect (plugin->wnck_screen, plugin->showing_desktop_changed_id);
-      plugin->showing_desktop_changed_id = 0;
-    }
+  if (plugin->wnck_screen != NULL)
+    g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->wnck_screen),
+        show_desktop_plugin_showing_desktop_changed, plugin);
 
   /* set the new wnck screen */
-  plugin->wnck_screen = wnck_screen_get (gdk_screen_get_number (gtk_widget_get_screen (widget)));
-  plugin->showing_desktop_changed_id = g_signal_connect (G_OBJECT (plugin->wnck_screen),
-                                                         "showing-desktop-changed",
-                                                         G_CALLBACK (show_desktop_plugin_showing_desktop_changed),
-                                                         plugin);
+  plugin->wnck_screen = wnck_screen;
+  g_signal_connect (G_OBJECT (wnck_screen), "showing-desktop-changed",
+      G_CALLBACK (show_desktop_plugin_showing_desktop_changed), plugin);
 
   /* toggle the button to the current state or update the tooltip */
   if (G_UNLIKELY (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)) !=
-        wnck_screen_get_showing_desktop (plugin->wnck_screen)))
-    show_desktop_plugin_showing_desktop_changed (plugin->wnck_screen, plugin);
+        wnck_screen_get_showing_desktop (wnck_screen)))
+    show_desktop_plugin_showing_desktop_changed (wnck_screen, plugin);
   else
     show_desktop_plugin_toggled (GTK_TOGGLE_BUTTON (plugin->button), plugin);
 }
@@ -146,12 +150,14 @@ show_desktop_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (panel_plugin);
 
+  /* disconnect screen changed signal */
+  g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
+     show_desktop_plugin_screen_changed, NULL);
+
   /* disconnect handle */
-  if (plugin->showing_desktop_changed_id != 0)
-    {
-      g_signal_handler_disconnect (plugin->wnck_screen, plugin->showing_desktop_changed_id);
-      plugin->showing_desktop_changed_id = 0;
-    }
+  if (plugin->wnck_screen != NULL)
+    g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->wnck_screen),
+        show_desktop_plugin_showing_desktop_changed, plugin);
 }
 
 
@@ -189,8 +195,8 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
 
   /* update the tooltip */
   gtk_widget_set_tooltip_text (GTK_WIDGET (button),
-                               active ? _("Restore the minimized windows") :
-                                 _("Minimize all open windows and show the desktop"));
+      active ? _("Restore the minimized windows") :
+      _("Minimize all open windows and show the desktop"));
 }
 
 
@@ -205,5 +211,5 @@ show_desktop_plugin_showing_desktop_changed (WnckScreen        *wnck_screen,
 
   /* toggle the button */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button),
-                                wnck_screen_get_showing_desktop (wnck_screen));
+      wnck_screen_get_showing_desktop (wnck_screen));
 }
