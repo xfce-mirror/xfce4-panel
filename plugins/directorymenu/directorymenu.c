@@ -859,6 +859,16 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
                 {
                   display_name = g_app_info_get_name (G_APP_INFO (desktopinfo));
                   icon = g_app_info_get_icon (G_APP_INFO (desktopinfo));
+
+                  /* ignore invalid or hidden files */
+                  if (exo_str_is_empty (display_name)
+                      || g_desktop_app_info_get_is_hidden (desktopinfo))
+                    {
+                      g_object_unref (G_OBJECT (desktopinfo));
+                      g_object_unref (G_OBJECT (info));
+                      g_object_unref (G_OBJECT (file));
+                      continue;
+                    }
                 }
             }
 #endif
