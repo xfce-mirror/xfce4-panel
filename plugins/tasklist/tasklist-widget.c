@@ -1259,7 +1259,7 @@ tasklist_button_icon_changed (WnckWindow        *window,
       if (G_LIKELY (lucent != NULL))
         {
           /* set the button icon */
-          xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (child->icon), lucent);
+          xfce_panel_image_set_from_pixbuf (XFCE_PANEL_IMAGE (child->icon), lucent);
 
           /* release the pixbuf */
           g_object_unref (G_OBJECT (lucent));
@@ -1268,7 +1268,7 @@ tasklist_button_icon_changed (WnckWindow        *window,
   else
     {
       /* set the button icon */
-      xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (child->icon), pixbuf);
+      xfce_panel_image_set_from_pixbuf (XFCE_PANEL_IMAGE (child->icon), pixbuf);
     }
 }
 
@@ -1499,7 +1499,7 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
   gtk_container_add (GTK_CONTAINER (child->button), child->box);
   gtk_widget_show (child->box);
 
-  child->icon = xfce_scaled_image_new ();
+  child->icon = xfce_panel_image_new ();
   if (child->tasklist->show_labels)
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, TRUE, 0);
   else

@@ -190,7 +190,7 @@ actions_plugin_init (ActionsPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), widget);
   gtk_widget_show (widget);
 
-  plugin->first_image = xfce_scaled_image_new_from_icon_name (entry->icon_name);
+  plugin->first_image = xfce_panel_image_new_from_source (entry->icon_name);
   gtk_container_add (GTK_CONTAINER (widget), plugin->first_image);
   gtk_widget_show (plugin->first_image);
 
@@ -200,7 +200,7 @@ actions_plugin_init (ActionsPlugin *plugin)
       G_CALLBACK (actions_plugin_button_clicked), plugin);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), widget);
 
-  plugin->second_image = xfce_scaled_image_new ();
+  plugin->second_image = xfce_panel_image_new ();
   gtk_container_add (GTK_CONTAINER (widget), plugin->second_image);
   gtk_widget_show (plugin->second_image);
 }
@@ -249,8 +249,8 @@ actions_plugin_set_property (GObject      *object,
         action = plugin->first_action = g_value_get_uint (value) + 1;
         gtk_widget_set_tooltip_text (plugin->first_button,
             _(action_entries[action].title));
-        xfce_scaled_image_set_from_icon_name (
-            XFCE_SCALED_IMAGE (plugin->first_image),
+        xfce_panel_image_set_from_source (
+            XFCE_PANEL_IMAGE (plugin->first_image),
             action_entries[action].icon_name);
         break;
 
@@ -268,8 +268,8 @@ actions_plugin_set_property (GObject      *object,
             gtk_widget_show (plugin->second_button);
             gtk_widget_set_tooltip_text (plugin->second_button,
                 _(action_entries[action].title));
-            xfce_scaled_image_set_from_icon_name (
-                XFCE_SCALED_IMAGE (plugin->second_image),
+            xfce_panel_image_set_from_source (
+                XFCE_PANEL_IMAGE (plugin->second_image),
                 action_entries[action].icon_name);
           }
 

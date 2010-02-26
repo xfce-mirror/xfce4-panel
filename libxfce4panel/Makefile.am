@@ -22,7 +22,7 @@ libxfce4panel_headers = \
 	xfce-panel-enums.h \
 	xfce-panel-macros.h \
 	xfce-panel-plugin.h \
-	xfce-scaled-image.h
+	xfce-panel-image.h
 
 libxfce4panel_includedir = \
 	$(includedir)/xfce4/libxfce4panel
@@ -39,7 +39,7 @@ libxfce4panel_la_SOURCES = \
 	xfce-panel-plugin.c \
 	xfce-panel-plugin-provider.c \
 	xfce-panel-plugin-provider.h \
-	xfce-scaled-image.c
+	xfce-panel-image.c
 
 libxfce4panel_la_CFLAGS =	 \
 	$(GTK_CFLAGS) \

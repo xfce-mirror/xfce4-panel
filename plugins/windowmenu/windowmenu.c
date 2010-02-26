@@ -209,7 +209,7 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
                     G_CALLBACK (window_menu_plugin_button_press_event), plugin);
 
-  plugin->icon = xfce_scaled_image_new_from_icon_name ("user-desktop");
+  plugin->icon = xfce_panel_image_new_from_source ("user-desktop");
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
 }
 
@@ -534,13 +534,13 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
                                           WnckWindow       *previous_window,
                                           WindowMenuPlugin *plugin)
 {
-  WnckWindow      *window;
-  GdkPixbuf       *pixbuf;
-  XfceScaledImage *icon = XFCE_SCALED_IMAGE (plugin->icon);
-  WnckWindowType   type;
+  WnckWindow     *window;
+  GdkPixbuf      *pixbuf;
+  XfcePanelImage *icon = XFCE_PANEL_IMAGE (plugin->icon);
+  WnckWindowType  type;
 
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_SCALED_IMAGE (icon));
+  panel_return_if_fail (XFCE_IS_PANEL_IMAGE (icon));
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
 
@@ -561,16 +561,16 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
                                        wnck_window_get_name (window));
 
           if (G_LIKELY (pixbuf != NULL))
-            xfce_scaled_image_set_from_pixbuf (icon, pixbuf);
+            xfce_panel_image_set_from_pixbuf (icon, pixbuf);
           else
-            xfce_scaled_image_set_from_icon_name (icon, GTK_STOCK_MISSING_IMAGE);
+            xfce_panel_image_set_from_source (icon, GTK_STOCK_MISSING_IMAGE);
         }
       else
         {
           show_desktop_icon:
 
           /* desktop is shown right now */
-          xfce_scaled_image_set_from_icon_name (icon, "user-desktop");
+          xfce_panel_image_set_from_source (icon, "user-desktop");
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
         }
     }

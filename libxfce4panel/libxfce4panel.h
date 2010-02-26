@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 #include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/xfce-panel-enums.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
-#include <libxfce4panel/xfce-scaled-image.h>
+#include <libxfce4panel/xfce-panel-image.h>
 
 #undef LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 

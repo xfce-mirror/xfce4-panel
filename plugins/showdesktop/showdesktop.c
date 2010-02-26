@@ -97,7 +97,7 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   gtk_widget_show (button);
 
   /* add an icon */
-  image = xfce_scaled_image_new_from_icon_name ("user-desktop");
+  image = xfce_panel_image_new_from_source ("user-desktop");
   gtk_container_add (GTK_CONTAINER (button), image);
   gtk_widget_show (image);
 }

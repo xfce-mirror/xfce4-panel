@@ -279,7 +279,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   g_signal_connect_after (G_OBJECT (plugin->button), "expose-event",
       G_CALLBACK (launcher_plugin_button_expose_event), plugin);
 
-  plugin->child = xfce_scaled_image_new ();
+  plugin->child = xfce_panel_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
 
   plugin->arrow = xfce_arrow_button_new (GTK_ARROW_UP);
@@ -463,7 +463,7 @@ launcher_plugin_set_property (GObject      *object,
         if (G_UNLIKELY (plugin->show_label))
           plugin->child = gtk_label_new (NULL);
         else
-          plugin->child = xfce_scaled_image_new ();
+          plugin->child = xfce_panel_image_new ();
         gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
         gtk_widget_show (plugin->child);
 
@@ -1041,26 +1041,22 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
     }
   else if (G_LIKELY (item != NULL))
     {
-      panel_return_if_fail (XFCE_IS_SCALED_IMAGE (plugin->child));
+      panel_return_if_fail (XFCE_IS_PANEL_IMAGE (plugin->child));
 
       icon_name = xfce_menu_item_get_icon_name (item);
       if (!IS_STRING (icon_name))
-        goto fallback_image;
-
-      if (g_path_is_absolute (icon_name))
-        xfce_scaled_image_set_from_file (XFCE_SCALED_IMAGE (plugin->child),
-                                         icon_name);
-      else
-        xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->child),
-                                              icon_name);
+        {
+fallback_image:
+          icon_name = GTK_STOCK_MISSING_IMAGE;
+        }
+      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->child),
+                                        icon_name);
     }
   else
     {
-fallback_image:
       /* set missing image icon */
-      panel_return_if_fail (XFCE_IS_SCALED_IMAGE (plugin->child));
-      xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->child),
-                                            GTK_STOCK_MISSING_IMAGE);
+      panel_return_if_fail (XFCE_IS_PANEL_IMAGE (plugin->child));
+      goto fallback_image;
     }
 }
 
