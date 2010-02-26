@@ -26,6 +26,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <common/panel-xfconf.h>
 #include <xfconf/xfconf.h>
 #include <libwnck/libwnck.h>
 #include <exo/exo.h>
@@ -309,17 +310,21 @@ static void
 pager_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  const PanelProperty  properties[] =
+  {
+    { "workspace-scrolling", G_TYPE_BOOLEAN },
+    { "show-names", G_TYPE_BOOLEAN },
+    { "rows", G_TYPE_UINT },
+    { NULL, G_TYPE_NONE }
+  };
 
-  /* set the xfconf channel */
-  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  /* open the xfconf channel */
+  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
 
-  /* bind properties */
-  xfconf_g_property_bind (plugin->channel, "/workspace-scrolling",
-                          G_TYPE_BOOLEAN, plugin, "workspace-scrolling");
-  xfconf_g_property_bind (plugin->channel, "/show-names",
-                          G_TYPE_BOOLEAN, plugin, "show-names");
-  xfconf_g_property_bind (plugin->channel, "/rows",
-                          G_TYPE_UINT, plugin, "rows");
+  /* bind all properties */
+  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+                         xfce_panel_plugin_get_property_base (panel_plugin),
+                         properties, NULL);
 
   /* create the pager */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",

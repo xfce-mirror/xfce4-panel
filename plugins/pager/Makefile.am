@@ -37,6 +37,7 @@ libpager_la_LDFLAGS = \
 
 libpager_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBWNCK_LIBS) \
@@ -45,7 +46,8 @@ libpager_la_LIBADD = \
 	$(LIBXFCE4UI_LIBS)
 
 libpager_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la
+	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la
 
 #
 # .desktop file
