@@ -599,10 +599,14 @@ launcher_dialog_items_changed (XfconfChannel        *channel,
                                LauncherPluginDialog *dialog)
 {
   XfceMenuItem *item;
-  GObject      *store;
+  GObject      *store, *object;
   GSList       *items, *li;
   gboolean      update = TRUE;
   GtkTreeIter   iter;
+  gboolean      multiple_items;
+  guint         i;
+  const gchar  *widget_names[] = {"arrow-position", "move-first",
+                                  "arrow-position-label" };
 
   /* only do something when the items changed */
   if (!exo_str_is_equal (property_name, "/items"))
@@ -651,6 +655,15 @@ launcher_dialog_items_changed (XfconfChannel        *channel,
       /* model is not empty but the channel is */
       gtk_list_store_clear (GTK_LIST_STORE (store));
     }
+
+  /* set the sensitivity of some dialog widgets */
+  multiple_items = LIST_HAS_TWO_OR_MORE_ENTRIES (items);
+  for (i = 0; i < G_N_ELEMENTS (widget_names); i++)
+    {
+      object = gtk_builder_get_object (dialog->builder, widget_names[i]);
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      gtk_widget_set_sensitive (GTK_WIDGET (object), multiple_items);
+    }
 }
 
 
@@ -666,7 +679,6 @@ launcher_dialog_show (XfceLauncherPlugin *plugin)
   const gchar          *button_names[] = { "item-add", "item-delete",
                                            "item-move-up", "item-move-down",
                                            "item-edit", "item-new" };
-
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
