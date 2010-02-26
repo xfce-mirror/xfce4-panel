@@ -382,7 +382,7 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "workspace-names", G_TYPE_BOOLEAN },
     { "urgentcy-notification", G_TYPE_BOOLEAN },
     { "all-workspaces", G_TYPE_BOOLEAN },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   /* show configure */

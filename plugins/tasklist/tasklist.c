@@ -127,7 +127,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-only-minimized", G_TYPE_BOOLEAN },
     { "show-wireframes", G_TYPE_BOOLEAN },
     { "show-handle", G_TYPE_BOOLEAN },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   /* show configure */

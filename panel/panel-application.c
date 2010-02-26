@@ -255,7 +255,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "background-alpha", G_TYPE_UINT },
     { "output-name", G_TYPE_STRING },
     { "position", G_TYPE_STRING },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));

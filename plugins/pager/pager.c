@@ -305,7 +305,7 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "workspace-scrolling", G_TYPE_BOOLEAN },
     { "show-names", G_TYPE_BOOLEAN },
     { "rows", G_TYPE_UINT },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   /* show the properties dialog */

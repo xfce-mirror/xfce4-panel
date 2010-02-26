@@ -296,7 +296,7 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "first-action", G_TYPE_UINT },
     { "second-action", G_TYPE_UINT },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   /* show the properties dialog */

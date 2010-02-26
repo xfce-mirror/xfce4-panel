@@ -293,7 +293,7 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "rows", G_TYPE_UINT },
     { "show-frame", G_TYPE_BOOLEAN },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   /* show configure */

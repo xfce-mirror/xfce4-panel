@@ -645,7 +645,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "disable-tooltips", G_TYPE_BOOLEAN },
     { "move-first", G_TYPE_BOOLEAN },
     { "arrow-position", G_TYPE_UINT },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   /* show the configure menu item */

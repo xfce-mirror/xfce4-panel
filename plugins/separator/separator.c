@@ -283,7 +283,7 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "style", G_TYPE_UINT },
     { "expand", G_TYPE_BOOLEAN },
-    { NULL, G_TYPE_NONE }
+    { NULL }
   };
 
   /* show the properties dialog */
