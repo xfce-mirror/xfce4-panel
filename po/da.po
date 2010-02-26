@@ -15,10 +15,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Danish\n"
-"X-Poedit-Country: DENMARK\n"
-"X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: DENMARK\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
@@ -26,7 +26,7 @@ msgstr "Opret opstarter på panelet til Xfce"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create a new launcher on the Xfce Panel"
-msgstr "Opret en ny opstarter på panelet Xfce"
+msgstr "Opret en ny opstarter på panelet til Xfce"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid "Customize the Xfce Panel"
@@ -54,20 +54,17 @@ msgid "_Move"
 msgstr "_Flyt"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1011
-#: ../panel/panel-window.c:2066
+#: ../libxfce4panel/xfce-panel-plugin.c:1011 ../panel/panel-window.c:2066
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1022
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1022 ../panel/panel-window.c:2077
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1046
-#: ../panel/panel-window.c:2100
+#: ../libxfce4panel/xfce-panel-plugin.c:1046 ../panel/panel-window.c:2100
 msgid "_Restart"
 msgstr "_Genstart"
 
@@ -75,8 +72,7 @@ msgstr "_Genstart"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Vis dialogen 'Panelindstillinger'"
 
-#: ../panel/main.c:75
-#: ../panel/main.c:76
+#: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
@@ -196,8 +192,7 @@ msgstr ""
 "Mere info: http://www.dansk-gruppen.dk"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:102 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Tilføj nyt element"
 
@@ -206,8 +201,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Vælg venligst et panel for det nye udvidelsesmodul:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:628
+#: ../panel/panel-dialogs.c:127 ../panel/panel-preferences-dialog.c:628
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -247,8 +241,7 @@ msgstr "_Søg:"
 msgid "Enter search phrase here"
 msgstr "Indtasts søgeudtryk her"
 
-#: ../panel/panel-item-dialog.c:310
-#: ../panel/panel-preferences-dialog.c:281
+#: ../panel/panel-item-dialog.c:310 ../panel/panel-preferences-dialog.c:281
 msgid "Failed to open manual"
 msgstr "Kunne ikke åbne manual"
 
@@ -321,7 +314,8 @@ msgstr "Ele_menter"
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Measurements"
 msgstr "Dimensioner til panel"
@@ -489,7 +483,8 @@ msgstr "Vis _sekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "I_ntervaller:"
@@ -1197,4 +1192,3 @@ msgstr "Fjern arbejdsområde %d"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Skift mellem åbne vinduer ved brug afen menu"
-
