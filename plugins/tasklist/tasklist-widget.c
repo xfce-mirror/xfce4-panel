@@ -20,6 +20,10 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+
 #include <X11/Xlib.h>
 #include <gdk/gdkx.h>
 #include <X11/extensions/shape.h>
@@ -1194,8 +1198,8 @@ xfce_tasklist_button_compare (gconstpointer child_a,
       panel_return_val_if_fail (WNCK_IS_CLASS_GROUP (a->class_group), 0);
       panel_return_val_if_fail (WNCK_IS_CLASS_GROUP (b->class_group), 0);
 
-      retval = g_utf8_collate (wnck_class_group_get_name (a->class_group),
-                               wnck_class_group_get_name (b->class_group));
+      retval = strcasecmp (wnck_class_group_get_name (a->class_group),
+                           wnck_class_group_get_name (b->class_group));
       if (retval != 0)
         return retval;
     }
@@ -1207,8 +1211,8 @@ xfce_tasklist_button_compare (gconstpointer child_a,
     }
   else
     {
-      return g_utf8_collate (wnck_window_get_name (a->window),
-                             wnck_window_get_name (b->window));
+      return strcasecmp (wnck_window_get_name (a->window),
+                         wnck_window_get_name (b->window));
     }
 }
 
