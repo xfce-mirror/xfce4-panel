@@ -7,6 +7,7 @@ SUBDIRS = \
 	wrapper \
 	migrate \
 	docs \
+	icons \
 	po
 
 distclean-local:
