@@ -24,6 +24,7 @@
 #define PANEL_DEBUG_DOMAIN_APPLICATION "application"
 #define PANEL_DEBUG_DOMAIN_EXTERNAL    "external"
 #define PANEL_DEBUG_DOMAIN_EXTERNAL46  "external46"
+#define PANEL_DEBUG_DOMAIN_TASKLIST    "tasklist"
 
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 

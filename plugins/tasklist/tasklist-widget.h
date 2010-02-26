@@ -25,8 +25,6 @@ G_BEGIN_DECLS
 
 typedef struct _XfceTasklistClass     XfceTasklistClass;
 typedef struct _XfceTasklist          XfceTasklist;
-typedef struct _XfceTasklistChild     XfceTasklistChild;
-typedef enum   _XfceTasklistStyle     XfceTasklistStyle;
 typedef enum   _XfceTasklistGrouping  XfceTasklistGrouping;
 typedef enum   _XfceTasklistSortOrder XfceTasklistSortOrder;
 

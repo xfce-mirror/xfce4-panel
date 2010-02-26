@@ -64,6 +64,11 @@
  * without asking the user what to do */
 #define PANEL_PLUGIN_AUTO_RESTART (60)
 
+/* integer swap functions */
+#define SWAP_INTEGER(a,b) G_STMT_START { gint swp = a; a = b; b = swp; } G_STMT_END
+#define TRANSPOSE_AREA(area) G_STMT_START { SWAP_INTEGER (area.width, area.height); \
+                                            SWAP_INTEGER (area.x, area.y); } G_STMT_END
+
 /* quick GList and GSList counting without traversing */
 #define LIST_HAS_ONE_ENTRY(l)           ((l) != NULL && (l)->next == NULL)
 #define LIST_HAS_ONE_OR_NO_ENTRIES(l)   ((l) == NULL || (l)->next == NULL)

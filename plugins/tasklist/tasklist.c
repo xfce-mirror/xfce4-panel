@@ -59,11 +59,15 @@ struct _TasklistPlugin
 
 
 
-static void tasklist_plugin_construct (XfcePanelPlugin *panel_plugin);
-static void tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
-static gboolean tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
-static void tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
-static gboolean tasklist_plugin_handle_expose_event (GtkWidget *widget, GdkEventExpose *event, TasklistPlugin *plugin);
+static void     tasklist_plugin_construct           (XfcePanelPlugin *panel_plugin);
+static void     tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
+                                                     GtkOrientation   orientation);
+static gboolean tasklist_plugin_size_changed        (XfcePanelPlugin *panel_plugin,
+                                                     gint             size);
+static void     tasklist_plugin_configure_plugin    (XfcePanelPlugin *panel_plugin);
+static gboolean tasklist_plugin_handle_expose_event (GtkWidget       *widget,
+                                                     GdkEventExpose  *event,
+                                                     TasklistPlugin  *plugin);
 
 
 
@@ -211,6 +215,12 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-wireframes", "active")
   TASKLIST_DIALOG_BIND ("show-handle", "active")
   TASKLIST_DIALOG_BIND ("sort-order", "active")
+
+#ifndef GDK_WINDOWING_X11
+  /* not functional in x11, so avoid confusion */
+  object = gtk_builder_get_object (builder, "show-wireframes");
+  gtk_widget_hide (GTK_WIDGET (object));
+#endif
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }

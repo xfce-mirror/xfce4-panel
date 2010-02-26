@@ -36,6 +36,9 @@ Special widget name in this plugin is showdesktop-button.
 
 XfceTasklist
 ------------
+You can set a custom icon size in gtk-icon-sizes with the name
+panel-tasklist-menu. The default icon size is 16px.
+
 style "xfce-tasklist-style"
 {
   # The maximum length of a button before the label ellipsizes.
@@ -48,12 +51,16 @@ style "xfce-tasklist-style"
   # rows will be possible.
   XfceTasklist::max-button-size = 20
 
-  # Ellipsizing used in the task list button label.
+  # Ellipsizing used in the task list and overflow menu labels.
   XfceTasklist::ellipsize-mode = PANGO_ELLIPSIZE_END
 
   # Lucency of minimized icons. Valid values are between 0 (completely
   # hide the icon) and 100 (don't lighten the icon).
   XfceTasklist::minimized-icon-lucency = 50
+
+  # Maximum number of characters in the menu label before it will
+  # be ellipsized.
+  XfceTasklist::menu-max-width-chars = 24
 }
 class "XfceTasklist" style "xfce-tasklist-style"
 
