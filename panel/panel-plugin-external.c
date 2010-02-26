@@ -42,15 +42,9 @@
 #include <panel/panel-module.h>
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-window.h>
+#include <panel/panel-dialogs.h>
 
-/* Number of automatic plugin restarts before the
- * panel asks the users what to do. This code is
- * disabled when debugging is enabled. */
-#ifndef NDEBUG
-#define N_RESTART_TRIES (0)
-#else
-#define N_RESTART_TRIES (2)
-#endif
+
 
 #define WRAPPER_BIN LIBEXECDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "wrapper"
 
@@ -472,9 +466,9 @@ static gboolean
 panel_plugin_external_plug_removed (GtkSocket *socket)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
-  GtkWidget           *dialog;
-  gint                 response;
-  PanelWindow         *window;
+  GtkWidget           *window;
+
+  panel_return_val_if_fail (PANEL_IS_MODULE (external->module), FALSE);
 
   /* leave when the plugin was already removed */
   if (external->plug_embedded == FALSE)
@@ -489,76 +483,45 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
   if (external->watch_id != 0)
     {
-      /* remove the child watch and don't leave zomies */
+      /* remove the child watch so we don't leave zomies */
       g_source_remove (external->watch_id);
       g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
     }
 
-  /* increase the restart counter */
-  external->n_restarts++;
+  window = gtk_widget_get_toplevel (GTK_WIDGET (socket));
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
 
-  /* check if we ask the user what to do */
-  if (external->n_restarts > N_RESTART_TRIES)
+  if (external->n_restarts++ <= PANEL_PLUGIN_AUTOMATIC_RESTARTS)
     {
-      /* create dialog */
-      dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (socket))),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                       _("Plugin \"%s\" unexpectedly left the building, do you want to restart it?"),
-                                       panel_module_get_display_name (external->module));
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("If you press Execute "
-                                                "the panel will try to restart the plugin otherwise it "
-                                                "will be permanently removed from the panel."));
-      gtk_dialog_add_buttons (GTK_DIALOG (dialog), GTK_STOCK_EXECUTE, GTK_RESPONSE_OK,
-                              GTK_STOCK_REMOVE, GTK_RESPONSE_CLOSE, NULL);
-      gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-      gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-
-      /* wait for the user's choise */
-      response = gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
+      g_message ("Automatically restarting plugin %s-%d, try %d",
+                 panel_module_get_name (external->module),
+                 external->unique_id, external->n_restarts);
+    }
+  else if (panel_dialogs_restart_plugin (GTK_WINDOW (window),
+               panel_module_get_display_name (external->module)))
+    {
       /* reset the restart counter */
       external->n_restarts = 0;
     }
   else
     {
-      /* pretend the user clicked the yes button */
-      response = GTK_RESPONSE_OK;
-
-      /* print a message we did an autorestart */
-      g_message ("Automatically restarting plugin %s-%d, try %d",
-                 panel_module_get_name (external->module),
-                 external->unique_id, external->n_restarts);
-  }
-
-  /* handle the response */
-  if (response == GTK_RESPONSE_OK)
-    {
-      /* get the plugin panel */
-      window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (socket)));
-      panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
-
-      /* send panel information to the plugin */
-      panel_window_set_povider_info (window, GTK_WIDGET (external));
-
-      /* show the socket again (realize will spawn the plugin) */
-      gtk_widget_show (GTK_WIDGET (socket));
-
-      /* don't process other events */
-      return TRUE;
-    }
-  else
-    {
-      /* emit a remove signal, so we can cleanup the plugin configuration (in panel-application) */
+      /* cleanup the plugin configuration (in panel-application) */
       xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
                                               PROVIDER_SIGNAL_REMOVE_PLUGIN);
 
-      /* destroy the socket */
+      /* self destruction */
       gtk_widget_destroy (GTK_WIDGET (socket));
+
+      return FALSE;
     }
 
-  return FALSE;
+  /* send panel information to the plugin (queued until realize) */
+  panel_window_set_povider_info (PANEL_WINDOW (window), GTK_WIDGET (external));
+
+  /* show the socket again (realize will spawn the plugin) */
+  gtk_widget_show (GTK_WIDGET (socket));
+
+  return TRUE;
 }
 
 

@@ -24,9 +24,12 @@
 
 G_BEGIN_DECLS
 
-void panel_dialogs_show_about   (void);
+void     panel_dialogs_show_about     (void);
 
-gint panel_dialogs_choose_panel (PanelApplication *application);
+gint     panel_dialogs_choose_panel   (PanelApplication *application);
+
+gboolean panel_dialogs_restart_plugin (GtkWindow        *parent,
+                                       const gchar      *plugin_name);
 
 G_END_DECLS
 

@@ -147,3 +147,34 @@ panel_dialogs_choose_panel (PanelApplication *application)
 
   return response;
 }
+
+
+
+gboolean
+panel_dialogs_restart_plugin (GtkWindow   *parent,
+                              const gchar *plugin_name)
+{
+  GtkWidget *dialog;
+  gint       response;
+
+  panel_return_val_if_fail (parent == NULL || GTK_IS_WINDOW (parent), FALSE);
+  panel_return_val_if_fail (plugin_name != NULL, FALSE);
+
+  dialog = gtk_message_dialog_new (parent,
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+                                   _("Plugin \"%s\" unexpectedly left the building, do you want to restart it?"),
+                                   plugin_name);
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("If you press Execute "
+                                            "the panel will try to restart the plugin otherwise it "
+                                            "will be permanently removed from the panel."));
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog), GTK_STOCK_EXECUTE, GTK_RESPONSE_OK,
+                          GTK_STOCK_REMOVE, GTK_RESPONSE_CLOSE, NULL);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+
+  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+
+  return (response == GTK_RESPONSE_OK);
+}
