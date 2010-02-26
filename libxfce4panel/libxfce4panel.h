@@ -78,8 +78,9 @@ G_BEGIN_DECLS
       NULL, \
     }; \
     \
-    g_type_module_register_type (type_module, TYPE_PARENT, \
-                                 #TypeName, &plugin_define_type_info, 0); \
+    plugin_define_type_id = \
+        g_type_module_register_type (type_module, TYPE_PARENT, \
+                                     #TypeName, &plugin_define_type_info, 0); \
     \
     type_name##_type = plugin_define_type_id; \
   }
