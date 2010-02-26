@@ -100,7 +100,7 @@ XFCE_PANEL_DEFINE_PLUGIN (DirectoryMenuPlugin, directory_menu_plugin)
 
 
 static GQuark menu_file = 0;
-
+static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
 
 
 static void
@@ -148,6 +148,7 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
                                                          EXO_PARAM_READWRITE));
 
   menu_file = g_quark_from_static_string ("dir-menu-file");
+  menu_icon_size = gtk_icon_size_register ("panel-directory-menu", 16, 16);
 }
 
 
@@ -757,7 +758,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
       g_object_ref (dir), (GClosureNotify) g_object_unref, 0);
   gtk_widget_show (mi);
 
-  image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_stock (GTK_STOCK_OPEN, menu_icon_size);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
   gtk_widget_show (image);
 
@@ -768,7 +769,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
       g_object_ref (dir), (GClosureNotify) g_object_unref, 0);
   gtk_widget_show (mi);
 
-  image = gtk_image_new_from_icon_name ("terminal", GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("terminal", menu_icon_size);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
   gtk_widget_show (image);
 
@@ -882,7 +883,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
             icon = g_file_info_get_icon (info);
           if (G_LIKELY (icon != NULL))
             {
-              image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_MENU);
+              image = gtk_image_new_from_gicon (icon, menu_icon_size);
               gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
               gtk_widget_show (image);
             }

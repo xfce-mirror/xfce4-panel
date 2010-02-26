@@ -140,6 +140,7 @@ XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (WindowMenuPlugin, window_menu_plugin)
 
 
 static GQuark window_quark = 0;
+static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
 
 
 
@@ -227,6 +228,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                                              EXO_PARAM_READABLE));
 
   window_quark = g_quark_from_static_string ("window-list-window-quark");
+  menu_icon_size = gtk_icon_size_register ("panel-window-menu", 16, 16);
 }
 
 
@@ -625,10 +627,10 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
             goto show_desktop_icon;
 
           /* get the window icon and set the tooltip */
-          pixbuf = wnck_window_get_icon (window);
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon),
                                        wnck_window_get_name (window));
 
+          pixbuf = wnck_window_get_icon (window);
           if (G_LIKELY (pixbuf != NULL))
             xfce_panel_image_set_from_pixbuf (icon, pixbuf);
           else
@@ -964,13 +966,15 @@ static GtkWidget *
 window_menu_plugin_menu_window_item_new (WnckWindow           *window,
                                          WindowMenuPlugin     *plugin,
                                          PangoFontDescription *italic,
-                                         PangoFontDescription *bold)
+                                         PangoFontDescription *bold,
+                                         gint                  icon_w,
+                                         gint                  icon_h)
 {
   const gchar *name, *tooltip;
   gchar       *utf8 = NULL;
   gchar       *decorated = NULL;
   GtkWidget   *mi, *label, *image;
-  GdkPixbuf   *pixbuf, *lucent = NULL;
+  GdkPixbuf   *pixbuf, *lucent = NULL, *scaled = NULL;
 
   panel_return_val_if_fail (WNCK_IS_WINDOW (window), NULL);
 
@@ -1015,15 +1019,32 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
 
   if (plugin->minimized_icon_lucency > 0)
     {
-      /* get the window mini icon */
+      /* get the window icon */
       pixbuf = wnck_window_get_mini_icon (window);
+      if (pixbuf != NULL
+          && (gdk_pixbuf_get_width (pixbuf) < icon_w
+              || gdk_pixbuf_get_height (pixbuf) < icon_h))
+        pixbuf = wnck_window_get_icon (window);
+
       if (pixbuf != NULL)
         {
+          /* scle the icon if needed */
+          if (gdk_pixbuf_get_width (pixbuf) > icon_w
+              || gdk_pixbuf_get_height (pixbuf) > icon_h)
+            {
+              scaled = gdk_pixbuf_scale_simple (pixbuf, icon_w, icon_h, GDK_INTERP_BILINEAR);
+              if (G_LIKELY (scaled != NULL))
+                pixbuf = scaled;
+            }
+
           /* dimm the icon if the window is minimized */
           if (wnck_window_is_minimized (window)
               && plugin->minimized_icon_lucency < 100)
-            pixbuf = lucent = exo_gdk_pixbuf_lucent (pixbuf,
-                plugin->minimized_icon_lucency);
+            {
+              lucent = exo_gdk_pixbuf_lucent (pixbuf, plugin->minimized_icon_lucency);
+              if (G_LIKELY (lucent != NULL))
+                pixbuf = lucent;
+            }
 
           /* set the menu item label */
           image = gtk_image_new_from_pixbuf (pixbuf);
@@ -1032,6 +1053,8 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
 
           if (lucent != NULL)
             g_object_unref (G_OBJECT (lucent));
+          if (scaled != NULL)
+            g_object_unref (G_OBJECT (scaled));
         }
     }
 
@@ -1137,12 +1160,16 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   guint                 n_workspaces = 0;
   const gchar          *name = NULL;
   gchar                *utf8 = NULL, *label;
+  gint                  w, h;
 
   panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->screen), NULL);
 
   italic = pango_font_description_from_string ("italic");
   bold = pango_font_description_from_string ("bold");
+
+  if (!gtk_icon_size_lookup (menu_icon_size, &w, &h))
+    w = h = 16;
 
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "selection-done",
@@ -1207,7 +1234,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
             continue;
 
           /* create the menu item */
-          mi = window_menu_plugin_menu_window_item_new (window, plugin, italic, bold);
+          mi = window_menu_plugin_menu_window_item_new (window, plugin, italic, bold, w, h);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
 
@@ -1282,7 +1309,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
             continue;
 
           /* create the menu item */
-          mi = window_menu_plugin_menu_window_item_new (window, plugin, italic, bold);
+          mi = window_menu_plugin_menu_window_item_new (window, plugin, italic, bold, w, h);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
           gtk_widget_show (mi);
         }
@@ -1300,7 +1327,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
           G_CALLBACK (window_menu_plugin_workspace_add), plugin);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_stock (GTK_STOCK_ADD, menu_icon_size);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (mi);
 
@@ -1328,7 +1355,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
       g_free (label);
       g_free (utf8);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_stock (GTK_STOCK_REMOVE, menu_icon_size);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (mi);
     }

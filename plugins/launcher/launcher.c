@@ -39,7 +39,6 @@
 #include "launcher-dialog.h"
 
 #define ARROW_BUTTON_SIZE              (12)
-#define DEFAULT_MENU_ICON_SIZE         (GTK_ICON_SIZE_DND)
 #define MENU_POPUP_DELAY               (225)
 #define NO_ARROW_INSIDE_BUTTON(plugin) ((plugin)->arrow_position != LAUNCHER_ARROW_INTERNAL \
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
@@ -56,8 +55,6 @@ static void       launcher_plugin_set_property                  (GObject        
                                                                  guint                 prop_id,
                                                                  const GValue         *value,
                                                                  GParamSpec           *pspec);
-static void       launcher_plugin_style_set                     (GtkWidget            *widget,
-                                                                 GtkStyle             *previous_style);
 static void       launcher_plugin_construct                     (XfcePanelPlugin      *panel_plugin);
 static void       launcher_plugin_free_data                     (XfcePanelPlugin      *panel_plugin);
 static void       launcher_plugin_removed                       (XfcePanelPlugin      *panel_plugin);
@@ -173,6 +170,10 @@ static void       launcher_plugin_uri_list_free                 (GSList         
 
 
 
+static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
+
+
+
 struct _LauncherPluginClass
 {
   XfcePanelPluginClass __parent__;
@@ -193,7 +194,6 @@ struct _LauncherPlugin
   GdkPixbuf         *tooltip_cache;
 
   guint              menu_timeout_id;
-  GtkIconSize        menu_icon_size;
 
   guint              disable_tooltips : 1;
   guint              move_first : 1;
@@ -246,16 +246,12 @@ static const GtkTargetEntry drop_targets[] =
 static void
 launcher_plugin_class_init (LauncherPluginClass *klass)
 {
-  GtkWidgetClass       *gtkwidget_class;
   GObjectClass         *gobject_class;
   XfcePanelPluginClass *plugin_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = launcher_plugin_get_property;
   gobject_class->set_property = launcher_plugin_set_property;
-
-  gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->style_set = launcher_plugin_style_set;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = launcher_plugin_construct;
@@ -305,14 +301,6 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
                                                       LAUNCHER_ARROW_DEFAULT,
                                                       EXO_PARAM_READWRITE));
 
-  gtk_widget_class_install_style_property (gtkwidget_class,
-                                           g_param_spec_enum ("menu-icon-size",
-                                                             NULL,
-                                                             "GtkIconSize used in the menu",
-                                                             GTK_TYPE_ICON_SIZE,
-                                                             DEFAULT_MENU_ICON_SIZE,
-                                                             EXO_PARAM_READABLE));
-
   launcher_signals[ITEMS_CHANGED] =
     g_signal_new (g_intern_static_string ("items-changed"),
                   G_TYPE_FROM_CLASS (klass),
@@ -323,6 +311,7 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 
   /* initialize the quark */
   launcher_plugin_quark = g_quark_from_static_string ("xfce-launcher-plugin");
+  menu_icon_size = gtk_icon_size_register ("panel-launcher-menu", 32, 32);
 }
 
 
@@ -341,7 +330,6 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->child = NULL;
   plugin->tooltip_cache = NULL;
   plugin->menu_timeout_id = 0;
-  plugin->menu_icon_size = DEFAULT_MENU_ICON_SIZE;
 
   /* monitor the default icon theme for changes */
   icon_theme = gtk_icon_theme_get_default ();
@@ -811,27 +799,6 @@ update_arrow:
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-    }
-}
-
-
-
-static void
-launcher_plugin_style_set (GtkWidget *widget,
-                           GtkStyle  *previous_style)
-{
-  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (widget);
-  GtkIconSize     menu_icon_size;
-
-  /* let gtk update the widget style */
-  (*GTK_WIDGET_CLASS (launcher_plugin_parent_class)->style_set) (widget, previous_style);
-
-  /* read the style properties */
-  gtk_widget_style_get (widget, "menu-icon-size", &menu_icon_size, NULL);
-  if (plugin->menu_icon_size != menu_icon_size)
-    {
-      plugin->menu_icon_size = menu_icon_size;
-      launcher_plugin_menu_destroy (plugin);
     }
 }
 
@@ -1479,10 +1446,9 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
       /* set the icon if one is set */
       icon_name = garcon_menu_item_get_icon_name (item);
-      if (!exo_str_is_empty (icon_name)
-          && plugin->menu_icon_size != GTK_ICON_SIZE_INVALID)
+      if (!exo_str_is_empty (icon_name))
         {
-          image = gtk_image_new_from_icon_name (icon_name, plugin->menu_icon_size);
+          image = gtk_image_new_from_icon_name (icon_name, menu_icon_size);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
           gtk_widget_show (image);
         }
