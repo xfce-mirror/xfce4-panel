@@ -161,12 +161,14 @@ panel_module_finalize (GObject *object)
 static gboolean
 panel_module_load (GTypeModule *type_module)
 {
-  PanelModule          *module = PANEL_MODULE (type_module);
-  PluginInitializeFunc  init_func;
-  gboolean              make_resident = TRUE;
+  PanelModule    *module = PANEL_MODULE (type_module);
+  PluginInitFunc  init_func;
+  gboolean        make_resident = TRUE;
+  gpointer        foo;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), FALSE);
+  panel_return_val_if_fail (module->run_in_wrapper == FALSE, FALSE);
 
   /* open the module */
   module->library = g_module_open (module->filename, G_MODULE_BIND_LOCAL);
@@ -178,8 +180,26 @@ panel_module_load (GTypeModule *type_module)
       return FALSE;
     }
 
+    /* check if there is a preinit function */
+  if (g_module_symbol (module->library, "__xpp_preinit", &foo))
+    {
+      /* show warning */
+      g_warning ("The plugin \"%s\" is marked as internal in the desktop file, "
+                 "but the developer has defined an pre-init function, which is "
+                 "not supported for internal plugins. %s will force "
+                 "the plugin to run external.", module->filename, PACKAGE_NAME);
+
+      /* unload */
+      panel_module_unload (type_module);
+
+      /* from now on, run this plugin in a wrapper */
+      module->run_in_wrapper = TRUE;
+
+      return FALSE;
+    }
+
   /* try to link the contruct function */
-  if (g_module_symbol (module->library, "__xpp_initialize", (gpointer) &init_func))
+  if (g_module_symbol (module->library, "__xpp_init", (gpointer) &init_func))
     {
       /* initialize the plugin */
       module->type = init_func (type_module, &make_resident);
@@ -363,6 +383,7 @@ panel_module_new_plugin (PanelModule  *module,
   if (module->run_in_wrapper)
     {
       /* create external plugin */
+      force_in_wrapper:
       plugin = panel_plugin_external_new (module, unique_id, arguments);
     }
   else
@@ -391,6 +412,11 @@ panel_module_new_plugin (PanelModule  *module,
                                                   screen);
             }
         }
+      else if (module->run_in_wrapper)
+        {
+          /* pre-init function found during plugin use */
+          goto force_in_wrapper;
+        }
     }
 
   if (G_LIKELY (plugin != NULL))
@@ -399,7 +425,7 @@ panel_module_new_plugin (PanelModule  *module,
       module->use_count++;
 
       /* handle module use count and unloading */
-      g_object_weak_ref (G_OBJECT (plugin), 
+      g_object_weak_ref (G_OBJECT (plugin),
           panel_module_plugin_destroyed, module);
 
       /* emit unique-changed if the plugin is unique */
