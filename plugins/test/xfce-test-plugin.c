@@ -51,7 +51,7 @@ xfce_test_plugin_class_init (XfceTestPluginClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = xfce_test_plugin_finalize;
-  
+
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = xfce_test_plugin_construct;
   plugin_class->free_data = xfce_test_plugin_free_data;
@@ -72,11 +72,11 @@ xfce_test_plugin_init (XfceTestPlugin *plugin)
 
 
 
-static void 
+static void
 xfce_test_plugin_finalize (GObject *object)
 {
   g_message ("plugin %s finalized", xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (object)));
-  
+
   (*G_OBJECT_CLASS (xfce_test_plugin_parent_class)->finalize) (object);
 }
 

@@ -42,6 +42,9 @@ typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 /* relative plugin filename */
 #define PANEL_PLUGIN_RELATIVE_PATH   "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%s.rc"
 
+/* xfconf property base */
+#define PANEL_PLUGIN_PROPERTY_BASE   "/plugins/plugin-%s"
+
 /* provider contruct function */
 typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
                                                          const gchar  *id,
@@ -53,7 +56,7 @@ struct _XfcePanelPluginProviderIface
 {
   /*< private >*/
   GTypeInterface __parent__;
-  
+
   /*< signals >*/
   void         (*provider_signal)     (XfcePanelPluginProvider       *provider,
                                        XfcePanelPluginProviderSignal  signal);

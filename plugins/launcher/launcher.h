@@ -19,6 +19,7 @@
 #define __XFCE_LAUNCHER_PLUGIN_H__
 
 #include <gtk/gtk.h>
+#include <xfconf/xfconf.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
@@ -61,8 +62,11 @@ struct _LauncherPlugin
 {
   XfcePanelPlugin __parent__;
 
+  /* xfconf channel */
+  XfconfChannel          *channel;
+
   /* settings */
-  guint                   move_clicked_to_button : 1;
+  guint                   move_first : 1;
   guint                   disable_tooltips : 1;
   guint                   show_labels : 1;
   LauncherPluginArrowPos  arrow_position;
@@ -82,9 +86,6 @@ struct _LauncherPlugin
 
   /* delayout menu popup */
   guint                   popup_timeout_id;
-
-  /* whether the menu appends in revered order */
-  guint                   menu_reversed_order : 1;
 };
 
 struct _LauncherPluginEntry

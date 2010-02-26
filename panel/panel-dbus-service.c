@@ -203,7 +203,7 @@ panel_dbus_service_save (PanelDBusService  *service,
 
   /* save the configuration */
   application = panel_application_get ();
-  panel_application_save (application);
+  panel_application_save (application, TRUE);
   g_object_unref (G_OBJECT (application));
 
   return TRUE;

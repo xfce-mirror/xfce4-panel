@@ -19,6 +19,13 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+#ifdef HAVE_STDIO_H
+#include <stdio.h>
+#endif
+
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -49,7 +56,6 @@ static void launcher_plugin_execute_from_clipboard (GdkScreen *screen, LauncherP
 static void launcher_plugin_icon_theme_changed (GtkIconTheme *icon_theme, LauncherPlugin *plugin);
 static void launcher_plugin_update_icon (LauncherPlugin *plugin);
 static void launcher_plugin_reorder_buttons (LauncherPlugin *plugin);
-static inline gchar *launcher_plugin_read_entry (XfceRc *rc, const gchar *name);
 static gboolean launcher_plugin_read (LauncherPlugin *plugin);
 static void launcher_plugin_button_state_changed (GtkWidget *button_a, GtkStateType state, GtkWidget *button_b);
 static gboolean launcher_plugin_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPluginEntry *entry);
@@ -97,7 +103,7 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
   plugin_class->screen_position_changed = launcher_plugin_screen_position_changed;
 
   /* initialize the quark */
-  launcher_plugin_quark = g_quark_from_static_string ("xfce-test-plugin");
+  launcher_plugin_quark = g_quark_from_static_string ("xfce-launcher-plugin");
 }
 
 
@@ -111,9 +117,8 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->entries = NULL;
   plugin->menu = NULL;
   plugin->popup_timeout_id = 0;
-  plugin->move_clicked_to_button = FALSE;
+  plugin->move_first = FALSE;
   plugin->disable_tooltips = FALSE;
-  plugin->menu_reversed_order = FALSE;
   plugin->show_labels = FALSE; /* TODO */
   plugin->arrow_position = ARROW_POS_DEFAULT;
 
@@ -169,6 +174,86 @@ launcher_plugin_init (LauncherPlugin *plugin)
 }
 
 
+static void
+launcher_plugin_property_changed (XfconfChannel  *channel,
+                                  const gchar    *property_name,
+                                  const GValue   *value,
+                                  LauncherPlugin *plugin)
+{
+  guint                nth;
+  gchar               *property;
+  LauncherPluginEntry *entry;
+
+  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (plugin->channel == channel);
+
+  if (strcmp (property_name, "/disable-tooltips") == 0)
+    {
+      plugin->disable_tooltips = g_value_get_boolean (value);
+    }
+  else if (strcmp (property_name, "/move-first") == 0)
+    {
+      plugin->move_first = g_value_get_boolean (value);
+    }
+  else if (strcmp (property_name, "/show-labels") == 0)
+    {
+      plugin->show_labels = g_value_get_boolean (value);
+    }
+  else if (strcmp (property_name, "/arrow-position") == 0)
+    {
+      plugin->arrow_position = CLAMP (g_value_get_uint (value),
+                                      ARROW_POS_DEFAULT, ARROW_POS_INSIDE_BUTTON);
+    }
+  else if (sscanf (property_name, "/entries/entry-%u/%a[a-z]", &nth, &property) == 2)
+    {
+      /* lookup the launcher entry */
+      entry = g_list_nth_data (plugin->entries, nth);
+      if (G_LIKELY (entry))
+        {
+          if (strcmp (property, "name") == 0)
+            {
+              g_free (entry->name);
+              entry->name = g_value_dup_string (value);
+
+              if (nth > 0 || plugin->show_labels)
+                launcher_plugin_rebuild (plugin, FALSE);
+            }
+          else if (strcmp (property, "comment") == 0)
+            {
+              g_free (entry->comment);
+              entry->comment = g_value_dup_string (value);
+            }
+          else if (strcmp (property, "icon") == 0)
+            {
+              g_free (entry->icon);
+              entry->icon = g_value_dup_string (value);
+
+              launcher_plugin_rebuild (plugin, (nth == 0));
+            }
+          else if (strcmp (property, "command") == 0)
+            {
+              g_free (entry->exec);
+              entry->exec = g_value_dup_string (value);
+            }
+          else if (strcmp (property, "working-directory") == 0)
+            {
+              g_free (entry->path);
+              entry->path = g_value_dup_string (value);
+            }
+          else if (strcmp (property, "terminal") == 0)
+            entry->terminal = g_value_get_boolean (value);
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+          else if (strcmp (property, "startup-notify") == 0)
+            entry->startup_notify = g_value_get_boolean (value);
+#endif
+        }
+
+      g_free (property);
+    }
+}
+
+
 
 static void
 launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
@@ -176,10 +261,13 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   LauncherPlugin      *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   const gchar * const *filenames;
   guint                i;
-  
+
+  /* open the xfconf channel */
+  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  g_signal_connect (G_OBJECT (plugin->channel), "property-changed", G_CALLBACK (launcher_plugin_property_changed), plugin);
+
   /* show the configure menu item */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-  
 
   /* read the plugin configuration */
   if (launcher_plugin_read (plugin) == FALSE)
@@ -209,7 +297,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* change the visiblity of the arrow button */
   launcher_plugin_menu_destroy (plugin);
-  
+
   /* update the icon */
   launcher_plugin_update_icon (plugin);
 }
@@ -220,6 +308,9 @@ static void
 launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
+
+  /* release the xfconf channel */
+  g_object_unref (G_OBJECT (plugin->channel));
 
   /* stop popup timeout */
   if (G_UNLIKELY (plugin->popup_timeout_id))
@@ -306,72 +397,63 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static void
 launcher_plugin_save (XfcePanelPlugin *panel_plugin)
 {
-  LauncherPlugin       *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
-  gchar                *file;
-  gchar               **groups;
-  gchar                 group[10];
-  XfceRc               *rc;
-  GList                *li;
-  guint                 i;
-  LauncherPluginEntry  *entry;
+  LauncherPlugin      *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
+  gchar                buf[100];
+  GList               *li;
+  guint                i;
+  LauncherPluginEntry *entry;
 
-  /* get rc file name, create it if needed */
-  file = xfce_panel_plugin_save_location (panel_plugin, TRUE);
-  if (G_LIKELY (file))
+  /* save the global settings */
+  xfconf_channel_set_bool (plugin->channel, "/move-first", plugin->move_first);
+  xfconf_channel_set_bool (plugin->channel, "/disable-tooltips", plugin->disable_tooltips);
+  xfconf_channel_set_bool (plugin->channel, "/show-labels", plugin->show_labels);
+  xfconf_channel_set_uint (plugin->channel, "/arrow-position", plugin->arrow_position);
+
+  for (li = plugin->entries, i = 0; li != NULL; li = li->next, i++)
     {
-      /* open the config file, writable */
-      rc = xfce_rc_simple_open (file, FALSE);
-      g_free (file);
+      entry = li->data;
 
-      if (G_LIKELY (rc))
-        {
-          /* delete all the existing groups */
-          groups = xfce_rc_get_groups (rc);
-          if (G_LIKELY (groups))
-            {
-              for (i = 0; groups[i] != NULL; i++)
-                xfce_rc_delete_group (rc, groups[i], TRUE);
-              g_strfreev (groups);
-            }
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/name", i);
+      if (entry->name)
+        xfconf_channel_set_string (plugin->channel, buf, entry->name);
+      else
+        xfconf_channel_reset_property (plugin->channel, buf, FALSE);
 
-          /* save global launcher settings */
-          xfce_rc_set_group (rc, "Global");
-          xfce_rc_write_bool_entry (rc, "MoveFirst", plugin->move_clicked_to_button);
-          xfce_rc_write_bool_entry (rc, "DisableTooltips", plugin->disable_tooltips);
-          xfce_rc_write_bool_entry (rc, "ShowLabels", plugin->show_labels);
-          xfce_rc_write_int_entry (rc, "ArrowPosition", plugin->arrow_position);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/comment", i);
+      if (entry->comment)
+        xfconf_channel_set_string (plugin->channel, buf, entry->comment);
+      else
+        xfconf_channel_reset_property (plugin->channel, buf, FALSE);
 
-          /* save all the entries */
-          for (li = plugin->entries, i = 0; li != NULL; li = li->next, i++)
-            {
-              entry = li->data;
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/icon", i);
+      if (entry->icon)
+        xfconf_channel_set_string (plugin->channel, buf, entry->icon);
+      else
+        xfconf_channel_reset_property (plugin->channel, buf, FALSE);
 
-              /* set group */
-              g_snprintf (group, sizeof (group), "Entry %d", i);
-              xfce_rc_set_group (rc, group);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/command", i);
+      if (entry->exec)
+        xfconf_channel_set_string (plugin->channel, buf, entry->exec);
+      else
+        xfconf_channel_reset_property (plugin->channel, buf, FALSE);
 
-              /* write entry settings */
-              if (G_LIKELY (entry->name))
-                xfce_rc_write_entry (rc, "Name", entry->name);
-              if (G_LIKELY (entry->comment))
-                xfce_rc_write_entry (rc, "Comment", entry->comment);
-              if (G_LIKELY (entry->icon))
-                xfce_rc_write_entry (rc, "Icon", entry->icon);
-              if (G_LIKELY (entry->exec))
-                xfce_rc_write_entry (rc, "Exec", entry->exec);
-              if (G_LIKELY (entry->path))
-                xfce_rc_write_entry (rc, "Path", entry->path);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/working-directory", i);
+      if (entry->path)
+        xfconf_channel_set_string (plugin->channel, buf, entry->path);
+      else
+        xfconf_channel_reset_property (plugin->channel, buf, FALSE);
 
-              xfce_rc_write_bool_entry (rc, "Terminal", entry->terminal);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/terminal", i);
+      xfconf_channel_set_bool (plugin->channel, buf, entry->terminal);
+
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
-              xfce_rc_write_bool_entry (rc, "StartupNotify", entry->startup_notify);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/startup-notify", i);
+      xfconf_channel_set_bool (plugin->channel, buf, entry->startup_notify);
 #endif
-            }
-
-          /* close the rc file */
-          xfce_rc_close (rc);
-        }
     }
+
+  /* store the number of launchers */
+  xfconf_channel_set_uint (plugin->channel, "/entries", i);
 }
 
 
@@ -397,6 +479,9 @@ launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 
   /* set the arrow direction */
   xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow_button), arrow_type);
+
+  /* destroy the menu to update the popup menu order */
+  launcher_plugin_menu_destroy (plugin);
 }
 
 
@@ -422,7 +507,7 @@ launcher_plugin_execute_parse_command (LauncherPluginEntry *entry,
   const gchar *p;
   gchar       *tmp;
   GSList      *li;
-  
+
   /* parse the execute command */
   for (p = entry->exec; *p != '\0'; ++p)
     {
@@ -444,11 +529,11 @@ launcher_plugin_execute_parse_command (LauncherPluginEntry *entry,
                   {
                     if (G_LIKELY (li != file_list))
                       g_string_append_c (cmd, ' ');
-                    
+
                     launcher_plugin_execute_string_append_quoted (cmd, (gchar *) li->data);
                   }
                 break;
-                
+
               /* directory containing the file that would be passed in a %f field */
               case 'd':
                 if (file_list != NULL)
@@ -461,7 +546,7 @@ launcher_plugin_execute_parse_command (LauncherPluginEntry *entry,
                       }
                   }
                 break;
-                
+
               /* list of directories containing the files that would be passed in to a %F field */
               case 'D':
                 for (li = file_list; li != NULL; li = li->next)
@@ -477,7 +562,7 @@ launcher_plugin_execute_parse_command (LauncherPluginEntry *entry,
                       }
                   }
                 break;
-                
+
               /* a single filename (without path) */
               case 'n':
                 if (file_list != NULL)
@@ -506,7 +591,7 @@ launcher_plugin_execute_parse_command (LauncherPluginEntry *entry,
                       }
                   }
                 break;
-                
+
               /* the icon name used in the panel */
               case 'i':
                 if (G_LIKELY (entry->icon != NULL))
@@ -515,13 +600,13 @@ launcher_plugin_execute_parse_command (LauncherPluginEntry *entry,
                     launcher_plugin_execute_string_append_quoted (cmd, entry->icon);
                   }
                 break;
-                
+
               /* the 'translated' name of the application */
               case 'c':
                 if (G_LIKELY (entry->name != NULL))
                   launcher_plugin_execute_string_append_quoted (cmd, entry->name);
                 break;
-                
+
               /* percentage character */
               case '%':
                 g_string_append_c (cmd, '%');
@@ -557,11 +642,11 @@ launcher_plugin_execute (GdkScreen           *screen,
 #else
   startup_notify = FALSE;
 #endif
-  
+
   /* leave when no command has been set */
   if (G_UNLIKELY (entry->exec == NULL || *entry->exec == '\0'))
     return;
-  
+
   /* make sure we've set a screen */
   if (G_UNLIKELY (screen == NULL))
     screen = gdk_screen_get_default ();
@@ -572,13 +657,13 @@ launcher_plugin_execute (GdkScreen           *screen,
     {
       /* fake an empty list */
       fake.next = NULL;
-          
+
       /* run a new instance for each file in the list */
       for (li = file_list; li != NULL && succeed; li = li->next)
         {
           /* point to data */
           fake.data = li->data;
-              
+
           /* parse the command and execute the command */
           command_line = launcher_plugin_execute_parse_command (entry, &fake);
           succeed = xfce_execute_on_screen (screen, command_line, entry->terminal, startup_notify, &error);
@@ -592,7 +677,7 @@ launcher_plugin_execute (GdkScreen           *screen,
       succeed = xfce_execute_on_screen (screen, command_line, entry->terminal, startup_notify, &error);
       g_free (command_line);
     }
-    
+
   if (G_UNLIKELY (succeed == FALSE))
     {
       g_message ("Failed to execute: %s", error->message);
@@ -610,12 +695,12 @@ launcher_plugin_execute_from_clipboard (GdkScreen           *screen,
   gchar            *text = NULL;
   GSList           *filenames;
   GtkSelectionData  selection_data;
-  
+
   /* get the primary clipboard text */
   clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
   if (G_LIKELY (clipboard))
     text = gtk_clipboard_wait_for_text (clipboard);
-    
+
   /* try other clipboard if this one was empty */
   if (text == NULL)
     {
@@ -624,13 +709,13 @@ launcher_plugin_execute_from_clipboard (GdkScreen           *screen,
       if (G_LIKELY (clipboard))
         text = gtk_clipboard_wait_for_text (clipboard);
     }
-    
+
   if (G_LIKELY (text))
     {
       /* create some fake selection data */
       selection_data.data = (guchar *) text;
       selection_data.length = 1;
-      
+
       /* parse the filelist, this way we can handle 'copied' file from thunar */
       filenames = launcher_plugin_filenames_from_selection_data (&selection_data);
       if (G_LIKELY (filenames))
@@ -750,83 +835,58 @@ launcher_plugin_reorder_buttons (LauncherPlugin *plugin)
 
 
 
-static inline gchar *
-launcher_plugin_read_entry (XfceRc      *rc,
-                             const gchar *name)
-{
-    const gchar *temp;
-    gchar       *value = NULL;
-
-    temp = xfce_rc_read_entry (rc, name, NULL);
-    if (G_LIKELY (temp != NULL && *temp != '\0'))
-        value = g_strdup (temp);
-
-    return value;
-}
-
-
-
 static gboolean
 launcher_plugin_read (LauncherPlugin *plugin)
 {
-  gchar               *file;
-  XfceRc              *rc;
-  guint                i;
-  gchar                group[10];
+  guint                i, n_entries;
+  gchar                buf[100];
   LauncherPluginEntry *entry;
 
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (XFCONF_IS_CHANNEL (plugin->channel), FALSE);
 
-  /* get rc file name, create it if needed */
-  file = xfce_panel_plugin_lookup_rc_file (XFCE_PANEL_PLUGIN (plugin));
-  if (G_LIKELY (file))
+  /* read global settings */
+  plugin->move_first = xfconf_channel_get_bool (plugin->channel, "/move-first", FALSE);
+  plugin->disable_tooltips = xfconf_channel_get_bool (plugin->channel, "/disable-tooltips", FALSE);
+  plugin->show_labels = xfconf_channel_get_bool (plugin->channel, "/show-labels", FALSE);
+  plugin->arrow_position = CLAMP (xfconf_channel_get_uint (plugin->channel, "/arrow-position", ARROW_POS_DEFAULT),
+                                  ARROW_POS_DEFAULT, ARROW_POS_INSIDE_BUTTON);
+
+  /* number of launcher entries */
+  n_entries = xfconf_channel_get_uint (plugin->channel, "/entries", 0);
+  for (i = 0; i < n_entries; i++)
     {
-      /* open config file, read-only, and cleanup */
-      rc = xfce_rc_simple_open (file, TRUE);
-      g_free (file);
+      entry = g_slice_new (LauncherPluginEntry);
 
-      if (G_LIKELY (rc))
-        {
-          /* read the global settings */
-          xfce_rc_set_group (rc, "Global");
-          plugin->move_clicked_to_button = xfce_rc_read_bool_entry (rc, "MoveFirst", FALSE);
-          plugin->disable_tooltips = xfce_rc_read_bool_entry (rc, "DisableTooltips", FALSE);
-          plugin->show_labels = xfce_rc_read_bool_entry (rc, "ShowLabels", FALSE);
-          plugin->arrow_position = CLAMP (xfce_rc_read_int_entry (rc, "ArrowPosition", ARROW_POS_DEFAULT),
-                                          ARROW_POS_DEFAULT, ARROW_POS_INSIDE_BUTTON);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/name", i);
+      entry->name = xfconf_channel_get_string (plugin->channel, buf, NULL);
 
-          /* read all the entries */
-          for (i = 0; i < 100 /* arbitrary */; i++)
-            {
-              /* set group, leave if we reached the last entry */
-              g_snprintf (group, sizeof (group), "Entry %d", i);
-              if (xfce_rc_has_group (rc, group) == FALSE)
-                break;
-              xfce_rc_set_group (rc, group);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/comment", i);
+      entry->comment = xfconf_channel_get_string (plugin->channel, buf, NULL);
 
-              /* create entry */
-              entry = g_slice_new (LauncherPluginEntry);
-              entry->name = launcher_plugin_read_entry (rc, "Name");
-              entry->comment = launcher_plugin_read_entry (rc, "Comment");
-              entry->icon = launcher_plugin_read_entry (rc, "Icon");
-              entry->exec = launcher_plugin_read_entry (rc, "Exec");
-              entry->path = launcher_plugin_read_entry (rc, "Path");
-              entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/icon", i);
+      entry->icon = xfconf_channel_get_string (plugin->channel, buf, NULL);
+
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/command", i);
+      entry->exec = xfconf_channel_get_string (plugin->channel, buf, NULL);
+
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/working-directory", i);
+      entry->path = xfconf_channel_get_string (plugin->channel, buf, NULL);
+
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/terminal", i);
+      entry->terminal = xfconf_channel_get_bool (plugin->channel, buf, FALSE);
+
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
-              entry->startup_notify = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
+      g_snprintf (buf, sizeof (buf), "/entries/entry-%d/startup-notify", i);
+      entry->startup_notify = xfconf_channel_get_bool (plugin->channel, buf, FALSE);
 #endif
 
-              /* prepend to the list */
-              plugin->entries = g_list_prepend (plugin->entries, entry);
-            }
-
-          /* close the rc file */
-          xfce_rc_close (rc);
-
-          /* reverse the order of the list */
-          plugin->entries = g_list_reverse (plugin->entries);
-        }
+      /* prepend the entry */
+      plugin->entries = g_list_prepend (plugin->entries, entry);
     }
+
+  /* reverse the order of the list */
+  plugin->entries = g_list_reverse (plugin->entries);
 
   return (plugin->entries != NULL);
 }
@@ -1194,6 +1254,7 @@ launcher_plugin_menu_build (LauncherPlugin *plugin)
   GtkWidget           *mi, *image;
   GdkScreen           *screen;
   GdkPixbuf           *pixbuf;
+  GtkArrowType         arrow_type;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
@@ -1203,6 +1264,9 @@ launcher_plugin_menu_build (LauncherPlugin *plugin)
   screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
   gtk_menu_set_screen (GTK_MENU (plugin->menu), screen);
   g_signal_connect (G_OBJECT (plugin->menu), "deactivate", G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
+
+  /* get the arrow type from the button for the menu direction */
+  arrow_type = xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow_button));
 
   /* walk through the entries */
   for (li = plugin->entries, n = 0; li != NULL; li = li->next, n++)
@@ -1220,7 +1284,7 @@ launcher_plugin_menu_build (LauncherPlugin *plugin)
       gtk_widget_show (mi);
 
       /* depending on the menu position we append or prepend */
-      if (plugin->menu_reversed_order)
+      if (arrow_type == GTK_ARROW_DOWN)
         gtk_menu_shell_append (GTK_MENU_SHELL (plugin->menu), mi);
       else
         gtk_menu_shell_prepend (GTK_MENU_SHELL (plugin->menu), mi);
@@ -1273,7 +1337,7 @@ launcher_plugin_menu_item_released (GtkMenuItem         *menu_item,
     launcher_plugin_execute_from_clipboard (screen, entry);
 
   /* move the item to the first position if enabled */
-  if (G_UNLIKELY (plugin->move_clicked_to_button))
+  if (G_UNLIKELY (plugin->move_first))
     {
       /* remove the item to the first place */
       plugin->entries = g_list_remove (plugin->entries, entry);
@@ -1298,10 +1362,6 @@ launcher_plugin_entry_new_default (void)
   entry = g_slice_new0 (LauncherPluginEntry);
   entry->name = g_strdup (_("New Item"));
   entry->icon = g_strdup ("applications-other");
-
-  /* TODO remove after test */
-  if (entry->comment)
-    g_critical ("while crearing the default entry, vars were not null");
 
   return entry;
 }

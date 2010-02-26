@@ -66,8 +66,6 @@ void            panel_itembar_set_child_expand      (PanelItembar   *itembar,
                                                      GtkWidget      *widget,
                                                      gboolean        expand);
 
-GSList         *panel_itembar_get_children          (PanelItembar   *itembar);
-
 gint            panel_itembar_get_child_index       (PanelItembar   *itembar,
                                                      GtkWidget      *widget);
 

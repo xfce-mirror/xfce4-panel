@@ -26,6 +26,8 @@
 #endif
 
 #include <exo/exo.h>
+#include <glib/gstdio.h>
+#include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -41,7 +43,6 @@
 #include <panel/panel-glue.h>
 #include <panel/panel-plugin-external.h>
 
-#define PANEL_CONFIG_PATH "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "panels.new.xml"
 #define AUTOSAVE_INTERVAL (10 * 60)
 
 
@@ -50,19 +51,6 @@ static void      panel_application_class_init         (PanelApplicationClass  *k
 static void      panel_application_init               (PanelApplication       *application);
 static void      panel_application_finalize           (GObject                *object);
 static void      panel_application_load               (PanelApplication       *application);
-static void      panel_application_load_set_property  (PanelWindow            *window,
-                                                       const gchar            *name,
-                                                       const gchar            *value);
-static void      panel_application_load_start_element (GMarkupParseContext    *context,
-                                                       const gchar            *element_name,
-                                                       const gchar           **attribute_names,
-                                                       const gchar           **attribute_values,
-                                                       gpointer                user_data,
-                                                       GError                **error);
-static void      panel_application_load_end_element   (GMarkupParseContext    *context,
-                                                       const gchar            *element_name,
-                                                       gpointer                user_data,
-                                                       GError                **error);
 static void      panel_application_plugin_move        (GtkWidget              *item,
                                                        PanelApplication       *application);
 static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
@@ -73,7 +61,7 @@ static gboolean  panel_application_plugin_insert      (PanelApplication       *a
                                                        gchar                 **arguments,
                                                        gint                    position);
 static gboolean  panel_application_save_timeout       (gpointer                user_data);
-static gchar    *panel_application_save_xml_contents  (PanelApplication       *application);
+static void      panel_application_save_reschedule    (PanelApplication       *application);
 static void      panel_application_window_destroyed   (GtkWidget              *window,
                                                        PanelApplication       *application);
 static void      panel_application_dialog_destroyed   (GtkWindow              *dialog,
@@ -107,6 +95,9 @@ struct _PanelApplication
   /* the plugin factory */
   PanelModuleFactory *factory;
 
+  /* xfconf channel */
+  XfconfChannel      *xfconf;
+
   /* internal list of all the panel windows */
   GSList  *windows;
 
@@ -115,33 +106,6 @@ struct _PanelApplication
 
   /* autosave timeout */
   guint    autosave_timeout_id;
-};
-
-typedef enum
-{
-  PARSER_START,
-  PARSER_PANELS,
-  PARSER_PANEL,
-  PARSER_PROPERTIES,
-  PARSER_ITEMS
-}
-ParserState;
-
-typedef struct
-{
-  ParserState       state;
-  PanelApplication *application;
-  PanelWindow      *window;
-}
-Parser;
-
-static GMarkupParser markup_parser =
-{
-  panel_application_load_start_element,
-  panel_application_load_end_element,
-  NULL,
-  NULL,
-  NULL
 };
 
 static const GtkTargetEntry drag_targets[] =
@@ -172,19 +136,19 @@ panel_application_init (PanelApplication *application)
   /* initialize */
   application->windows = NULL;
   application->dialogs = NULL;
+  application->autosave_timeout_id = 0;
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
+
+  /* get the xfconf channel */
+  application->xfconf = xfconf_channel_new ("xfce4-panel");
 
   /* load setup */
   panel_application_load (application);
 
   /* start the autosave timeout */
-#if GLIB_CHECK_VERSION (2, 14, 0)
-  application->autosave_timeout_id = g_timeout_add_seconds (AUTOSAVE_INTERVAL, panel_application_save_timeout, application);
-#else
-  application->autosave_timeout_id = g_timeout_add (AUTOSAVE_INTERVAL * 1000, panel_application_save_timeout, application);
-#endif
+  panel_application_save_reschedule (application);
 }
 
 
@@ -210,6 +174,9 @@ panel_application_finalize (GObject *object)
   /* cleanup the list of windows */
   g_slist_free (application->windows);
 
+  /* release the xfconf channel */
+  g_object_unref (G_OBJECT (application->xfconf));
+
   /* release the factory */
   g_object_unref (G_OBJECT (application->factory));
 
@@ -219,299 +186,109 @@ panel_application_finalize (GObject *object)
 
 
 static void
+panel_application_xfconf_window_bindings (PanelApplication *application,
+                                          PanelWindow      *window,
+                                          gboolean          store_settings)
+{
+  XfconfChannel *channel = application->xfconf;
+  gchar          buf[100];
+  guint          i;
+  guint          index = g_slist_index (application->windows, window);
+  GValue         value = { 0, };
+  const gchar   *bool_properties[] = { "locked", "autohide", "span-monitors", "horizontal" };
+  const gchar   *uint_properties[] = { "size", "length", "x-offset", "y-offset",
+                                       "enter-opacity", "leave-opacity", "snap-edge",
+                                       "background-alpha" };
+
+  /* connect the boolean properties */
+  for (i = 0; i < G_N_ELEMENTS (bool_properties); i++)
+    {
+      /* create xfconf property name */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s", index, bool_properties[i]);
+
+      /* store the window settings in the channel before we create the binding,
+       * so we don't loose the panel settings */
+      if (store_settings)
+        {
+          g_value_init(&value, G_TYPE_BOOLEAN);
+          g_object_get_property (G_OBJECT (window), bool_properties[i], &value);
+          xfconf_channel_set_property (channel, buf, &value);
+          g_value_unset (&value);
+        }
+
+      /* create binding */
+      xfconf_g_property_bind (channel, buf, G_TYPE_BOOLEAN, window, bool_properties[i]);
+    }
+
+  /* connect the unsigned intergets */
+  for (i = 0; i < G_N_ELEMENTS (uint_properties); i++)
+    {
+      /* create xfconf property name */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s", index, uint_properties[i]);
+
+      /* store the window settings in the channel before we create the binding,
+       * so we don't loose the panel settings */
+      if (store_settings)
+        {
+          g_value_init(&value, G_TYPE_UINT);
+          g_object_get_property (G_OBJECT (window), uint_properties[i], &value);
+          xfconf_channel_set_property (channel, buf, &value);
+          g_value_unset (&value);
+        }
+
+      /* create binding */
+      xfconf_g_property_bind (channel, buf, G_TYPE_UINT, window, uint_properties[i]);
+    }
+}
+
+
+
+static void
 panel_application_load (PanelApplication *application)
 {
-  gchar               *filename;
-  gchar               *contents;
-  gboolean             succeed = FALSE;
-  gsize                length;
-  GError              *error = NULL;
-  GMarkupParseContext *context;
-  Parser               parser;
-  PanelWindow         *window;
+  XfconfChannel *channel = application->xfconf;
+  PanelWindow   *window;
+  guint          i, n_panels;
+  guint          j, n_plugins;
+  gchar          buf[100];
+  gchar         *name, *id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
 
-  if (G_LIKELY (TRUE))
+  /* walk all the panel in the configuration */
+  n_panels = xfconf_channel_get_uint (channel, "/panels", 0);
+  for (i = 0; i < n_panels; i++)
     {
-      /* get filename from user config */
-      filename = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, PANEL_CONFIG_PATH);
-    }
-  else
-    {
-      /* get config from xdg directory (kiosk mode) */
-      filename = g_build_filename (SYSCONFDIR, PANEL_CONFIG_PATH, NULL);
-    }
-
-  /* test config file */
-  if (G_LIKELY (filename && g_file_test (filename, G_FILE_TEST_IS_REGULAR)))
-    {
-      /* load the file contents */
-      succeed = g_file_get_contents (filename, &contents, &length, &error);
-      if (G_LIKELY (succeed))
-        {
-          /* initialize the parser */
-          parser.state = PARSER_START;
-          parser.application = application;
-          parser.window = NULL;
-
-          /* create parse context */
-          context = g_markup_parse_context_new (&markup_parser, 0, &parser, NULL);
-
-          /* parse the content */
-          succeed = g_markup_parse_context_parse (context, contents, length, &error);
-          if (G_UNLIKELY (succeed == FALSE))
-            goto done;
-
-          /* finish parsing */
-          succeed = g_markup_parse_context_end_parse (context, &error);
-
-          /* goto label */
-          done:
-
-          /* cleanup */
-          g_markup_parse_context_free (context);
-          g_free (contents);
-
-          /* show error */
-          if (G_UNLIKELY (succeed == FALSE))
-            {
-              /* print warning */
-              g_critical ("Failed to parse configuration from \"%s\": %s", filename, error->message);
-
-              /* cleanup */
-              g_error_free (error);
-            }
-        }
-      else
-        {
-          /* print warning */
-          g_critical ("Failed to load configuration from \"%s\": %s", filename, error->message);
-
-          /* cleanup */
-          g_error_free (error);
-        }
-    }
-
-  /* cleanup */
-  g_free (filename);
-
-  /* loading failed, create fallback panel */
-  if (G_UNLIKELY (succeed == FALSE || application->windows == NULL))
-    {
-      /* create empty panel window */
+      /* create a new window */
       window = panel_application_new_window (application, NULL);
 
-      /* TODO: create fallback panel layout instead of an empty window
-       *       not entritely sure if an empty window is that bad... */
+      /* walk all the plugins on the panel */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
+      n_plugins = xfconf_channel_get_uint (channel, buf, 0);
+      for (j = 0; j < n_plugins; j++)
+        {
+          /* get the plugin module name */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/module", i, j);
+          name = xfconf_channel_get_string (channel, buf, NULL);
+          if (G_LIKELY (name))
+            {
+              /* read the plugin id */
+              g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
+              id = xfconf_channel_get_string (channel, buf, NULL);
 
-      /* show window */
-      gtk_widget_show (GTK_WIDGET (window));
-    }
-}
-
-
-
-static void
-panel_application_load_set_property (PanelWindow *window,
-                                     const gchar *name,
-                                     const gchar *value)
-{
-  gint integer;
-
-  panel_return_if_fail (name != NULL && value != NULL);
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  /* get the integer */
-  integer = atoi (value);
-
-  /* set the property */
-  if (exo_str_is_equal (name, "locked"))
-    panel_window_set_locked (window, !!integer);
-  else if (exo_str_is_equal (name, "orientation"))
-    panel_window_set_orientation (window, integer == 1 ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
-  else if (exo_str_is_equal (name, "size"))
-    panel_window_set_size (window, integer);
-  else if (exo_str_is_equal (name, "snap-edge"))
-    panel_window_set_snap_edge (window, CLAMP (integer, PANEL_SNAP_EGDE_NONE, PANEL_SNAP_EGDE_S));
-  else if (exo_str_is_equal (name, "length"))
-    panel_window_set_length (window, integer);
-  else if (exo_str_is_equal (name, "autohide"))
-    panel_window_set_autohide (window, !!integer);
-  else if (exo_str_is_equal (name, "xoffset"))
-    panel_window_set_xoffset (window, integer);
-  else if (exo_str_is_equal (name, "yoffset"))
-    panel_window_set_yoffset (window, integer);
-  else if (exo_str_is_equal (name, "background-alpha"))
-    panel_window_set_background_alpha (window, integer);
-  else if (exo_str_is_equal (name, "enter-opacity"))
-    panel_window_set_enter_opacity (window, integer);
-  else if (exo_str_is_equal (name, "leave-opacity"))
-    panel_window_set_leave_opacity (window, integer);
-  else if (exo_str_is_equal (name, "span-monitors"))
-    panel_window_set_span_monitors (window, !!integer);
-
-  /* xfce 4.4 panel compatibility */
-  else if (exo_str_is_equal (name, "transparency"))
-    panel_window_set_leave_opacity (window, integer);
-  else if (exo_str_is_equal (name, "activetrans"))
-    panel_window_set_enter_opacity (window, integer == 1 ? 100 : panel_window_get_leave_opacity (window));
-  else if (exo_str_is_equal (name, "fullwidth"))
-    {
-      /* 0: normal width, 1: full width and 2: span monitors */
-      if (integer > 1)
-        panel_window_set_length (window, 100);
-
-      if (integer == 2)
-        panel_window_set_span_monitors (window, TRUE);
-    }
-  else if (exo_str_is_equal (name, "screen-position"))
-    {
-      /* TODO: convert to the old screen position enum */
-    }
-}
-
-
-
-static void
-panel_application_load_start_element (GMarkupParseContext  *context,
-                                      const gchar          *element_name,
-                                      const gchar         **attribute_names,
-                                      const gchar         **attribute_values,
-                                      gpointer              user_data,
-                                      GError              **error)
-{
-  Parser      *parser = user_data;
-  gint         n;
-  const gchar *name = NULL;
-  const gchar *value = NULL;
-  const gchar *id = NULL;
-
-  switch (parser->state)
-    {
-      case PARSER_START:
-        /* update parser state */
-        if (exo_str_is_equal (element_name, "panels"))
-          parser->state = PARSER_PANELS;
-        break;
-
-      case PARSER_PANELS:
-        if (exo_str_is_equal (element_name, "panel"))
-          {
-            /* update parser state */
-            parser->state = PARSER_PANEL;
-
-            /* create new window */
-            parser->window = panel_application_new_window (parser->application, NULL);
-          }
-        break;
-
-      case PARSER_PANEL:
-        /* update parser state */
-        if (exo_str_is_equal (element_name, "properties"))
-          parser->state = PARSER_PROPERTIES;
-        else if (exo_str_is_equal (element_name, "items"))
-          parser->state = PARSER_ITEMS;
-        break;
-
-      case PARSER_PROPERTIES:
-        if (exo_str_is_equal (element_name, "property"))
-          {
-            /* walk attributes */
-            for (n = 0; attribute_names[n] != NULL; n++)
-              {
-                if (exo_str_is_equal (attribute_names[n], "name"))
-                  name = attribute_values[n];
-                else if (exo_str_is_equal (attribute_names[n], "value"))
-                  value = attribute_values[n];
-              }
-
-            /* set panel property */
-            if (G_LIKELY (name != NULL && value != NULL))
-              panel_application_load_set_property (parser->window, name, value);
-          }
-        break;
-
-      case PARSER_ITEMS:
-        if (exo_str_is_equal (element_name, "item"))
-          {
-            panel_return_if_fail (PANEL_IS_WINDOW (parser->window));
-
-            /* walk attributes */
-            for (n = 0; attribute_names[n] != NULL; n++)
-              {
-                /* get plugin name and id */
-                if (exo_str_is_equal (attribute_names[n], "name"))
-                  name = attribute_values[n];
-                else if (exo_str_is_equal (attribute_names[n], "id"))
-                  id = attribute_values[n];
-              }
-
-            /* append the new plugin */
-            if (G_LIKELY (name != NULL))
-              panel_application_plugin_insert (parser->application, parser->window,
-                                               gtk_window_get_screen (GTK_WINDOW (parser->window)),
+              panel_application_plugin_insert (application, window,
+                                               gtk_window_get_screen (GTK_WINDOW (window)),
                                                name, id, NULL, -1);
-          }
-        break;
 
-      default:
-        /* set an error */
-        g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_UNKNOWN_ELEMENT,
-                     "Unknown element <%s>", element_name);
-        break;
-    }
-}
+              /* cleanup */
+              g_free (name);
+              g_free (id);
+            }
+        }
 
-
-
-static void
-panel_application_load_end_element (GMarkupParseContext  *context,
-                                    const gchar          *element_name,
-                                    gpointer              user_data,
-                                    GError              **error)
-{
-  Parser *parser = user_data;
-
-  switch (parser->state)
-    {
-      case PARSER_PANELS:
-        /* update state */
-        if (exo_str_is_equal (element_name, "panels"))
-          parser->state = PARSER_START;
-        break;
-
-      case PARSER_PANEL:
-        if (exo_str_is_equal (element_name, "panel"))
-          {
-            panel_return_if_fail (PANEL_IS_WINDOW (parser->window));
-
-            /* show panel */
-            gtk_widget_show (GTK_WIDGET (parser->window));
-
-            /* update parser state */
-            parser->state = PARSER_PANELS;
-            parser->window = NULL;
-          }
-        break;
-
-      case PARSER_PROPERTIES:
-        /* update state */
-        if (exo_str_is_equal (element_name, "properties"))
-          parser->state = PARSER_PANEL;
-        break;
-
-      case PARSER_ITEMS:
-        /* update state */
-        if (exo_str_is_equal (element_name, "items"))
-          parser->state = PARSER_PANEL;
-        break;
-
-      default:
-        /* set an error */
-        g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_UNKNOWN_ELEMENT,
-                     "Unknown element <%s>", element_name);
-        break;
+      /* show the window */
+      gtk_widget_show (GTK_WIDGET (window));
     }
 }
 
@@ -574,6 +351,8 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 {
   GtkWidget   *itembar;
   PanelWindow *window;
+  gchar       *property;
+  gchar       *path, *filename;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -608,9 +387,31 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         break;
 
       case REMOVE_PLUGIN:
+        /* create the xfconf property base */
+        property = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE,
+                                    xfce_panel_plugin_provider_get_id (provider));
+
+        /* build the plugin rc filename */
+        filename = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH,
+                                    xfce_panel_plugin_provider_get_name (provider),
+                                    xfce_panel_plugin_provider_get_id (provider));
+
         /* destroy the plugin if it's a panel plugin (ie. not external) */
         if (XFCE_IS_PANEL_PLUGIN (provider))
           gtk_widget_destroy (GTK_WIDGET (provider));
+
+        /* remove the xfconf properties */
+        xfconf_channel_reset_property (application->xfconf, property, TRUE);
+        g_free (property);
+
+        /* get the path of the config file */
+        path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
+        g_free (filename);
+
+        /* remove the config file */
+        if (G_LIKELY (path))
+          g_unlink (path);
+        g_free (path);
         break;
 
       case ADD_NEW_ITEMS:
@@ -686,7 +487,7 @@ panel_application_save_timeout (gpointer user_data)
   GDK_THREADS_ENTER ();
 
   /* save */
-  panel_application_save (PANEL_APPLICATION (user_data));
+  panel_application_save (PANEL_APPLICATION (user_data), TRUE);
 
   GDK_THREADS_LEAVE ();
 
@@ -695,109 +496,19 @@ panel_application_save_timeout (gpointer user_data)
 
 
 
-static gchar *
-panel_application_save_xml_contents (PanelApplication *application)
+static void
+panel_application_save_reschedule (PanelApplication *application)
 {
-  GString                 *contents;
-  GSList                  *li;
-  PanelWindow             *window;
-  GtkWidget               *itembar;
-  GList                   *children, *lp;
-  XfcePanelPluginProvider *provider;
-  gchar                   *date_string;
-  GTimeVal                 stamp;
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
-  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
+  /* stop a running timeout */
+  if (G_UNLIKELY (application->autosave_timeout_id != 0))
+    g_source_remove (application->autosave_timeout_id);
 
-  /* create string with some size to avoid reallocations */
-  contents = g_string_sized_new (3072);
-
-  /* create time string */
-  g_get_current_time (&stamp);
-  date_string = g_time_val_to_iso8601 (&stamp);
-
-  /* start xml file */
-  g_string_append_printf (contents, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                          "<!DOCTYPE config SYSTEM \"config.dtd\">\n"
-                          "<!-- Generated on %s -->\n"
-                          "<panels>\n", date_string);
-
-  /* cleanup */
-  g_free (date_string);
-
-  /* store each panel */
-  for (li = application->windows; li != NULL; li = li->next)
-    {
-      /* get window */
-      window = PANEL_WINDOW (li->data);
-
-      /* panel grouping */
-      contents = g_string_append (contents, "\t<panel>\n"
-                                            "\t\t<properties>\n");
-
-      /* store panel properties */
-      g_string_append_printf (contents, "\t\t\t<property name=\"locked\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"orientation\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"size\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"snap-edge\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"length\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"autohide\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"xoffset\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"yoffset\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"background-alpha\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"enter-opacity\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"leave-opacity\" value=\"%d\" />\n"
-                                        "\t\t\t<property name=\"span-monitors\" value=\"%d\" />\n",
-                                        panel_window_get_locked (window),
-                                        panel_window_get_orientation (window),
-                                        panel_window_get_size (window),
-                                        panel_window_get_snap_edge (window),
-                                        panel_window_get_length (window),
-                                        panel_window_get_autohide (window),
-                                        panel_window_get_xoffset (window),
-                                        panel_window_get_yoffset (window),
-                                        panel_window_get_background_alpha (window),
-                                        panel_window_get_enter_opacity (window),
-                                        panel_window_get_leave_opacity (window),
-                                        panel_window_get_span_monitors (window));
-
-      /* item grouping */
-      contents = g_string_append (contents, "\t\t</properties>\n"
-                                            "\t\t<items>\n");
-
-      /* get the itembar */
-      itembar = gtk_bin_get_child (GTK_BIN (window));
-
-      /* debug check */
-      panel_assert (PANEL_IS_ITEMBAR (itembar));
-
-      /* get the itembar children */
-      children = gtk_container_get_children (GTK_CONTAINER (itembar));
-
-      /* store the plugin properties */
-      for (lp = children; lp != NULL; lp = lp->next)
-        {
-          /* cast to a plugin provider */
-          provider = XFCE_PANEL_PLUGIN_PROVIDER (lp->data);
-
-          /* store plugin name and id */
-          g_string_append_printf (contents, "\t\t\t<item name=\"%s\" id=\"%s\" />\n",
-                                  xfce_panel_plugin_provider_get_name (provider),
-                                  xfce_panel_plugin_provider_get_id (provider));
-        }
-
-      /* cleanup */
-      g_list_free (children);
-
-      /* close grouping */
-      contents = g_string_append (contents, "\t\t</items>\n"
-                                            "\t</panel>\n");
-    }
-
-  /* close xml file */
-  contents = g_string_append (contents, "</panels>\n");
-
-  return g_string_free (contents, FALSE);
+  /* start a new timeout */
+  application->autosave_timeout_id = g_timeout_add_seconds (AUTOSAVE_INTERVAL,
+                                                            panel_application_save_timeout,
+                                                            application);
 }
 
 
@@ -806,12 +517,43 @@ static void
 panel_application_window_destroyed (GtkWidget        *window,
                                     PanelApplication *application)
 {
+  guint     n;
+  gchar     buf[100];
+  GSList   *li, *lnext;
+  gboolean  passed_destroyed_window = FALSE;
+
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (g_slist_find (application->windows, window) != NULL);
 
-  /* remove the window from the list */
-  application->windows = g_slist_remove (application->windows, window);
+  /* we need to update the bindings of all the panels... */
+  for (li = application->windows, n = 0; li != NULL; li = lnext, n++)
+    {
+      lnext = li->next;
+
+      /* skip window if we're not passed the active window */
+      if (!passed_destroyed_window && li->data != window)
+        continue;
+
+      /* keep updating from now on */
+      passed_destroyed_window = TRUE;
+
+      /* disconnect bindings from this panel */
+      xfconf_g_property_unbind_all (G_OBJECT (li->data));
+
+      /* remove the properties of this panel */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u", n);
+      xfconf_channel_reset_property (application->xfconf, buf, TRUE);
+
+      /* either remove the window or add the bindings */
+      if (li->data == window)
+        application->windows = g_slist_delete_link (application->windows, li);
+      else
+        panel_application_xfconf_window_bindings (application, PANEL_WINDOW (li->data), TRUE);
+    }
+
+  /* force a panel save to store plugins and panel count */
+  panel_application_save (application, FALSE);
 
   /* quit if there are no windows opened */
   if (application->windows == NULL)
@@ -923,7 +665,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
 
   /* save the panel configuration if we succeeded */
   if (G_LIKELY (succeed))
-    panel_application_save (application);
+    panel_application_save (application, FALSE);
 
   /* release the application */
   g_object_unref (G_OBJECT (application));
@@ -984,54 +726,55 @@ panel_application_get (void)
 
 
 void
-panel_application_save (PanelApplication *application)
+panel_application_save (PanelApplication *application,
+                        gboolean          save_plugin_providers)
 {
-  gchar     *filename;
-  gchar     *contents;
-  gboolean   succeed;
-  GError    *error = NULL;
-  GSList    *li;
-  GtkWidget *itembar;
+  GSList                  *li;
+  GList                   *children, *lp;
+  GtkWidget               *itembar;
+  XfcePanelPluginProvider *provider;
+  guint                    i, j;
+  gchar                    buf[100];
+  XfconfChannel           *channel = application->xfconf;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
 
-  /* get save location */
-  filename = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, PANEL_CONFIG_PATH, TRUE);
-  if (G_LIKELY (filename))
+  /* save the settings of all plugins */
+  for (li = application->windows, i = 0; li != NULL; li = li->next, i++)
     {
-      /* get the file xml data */
-      contents = panel_application_save_xml_contents (application);
+      /* get the itembar children */
+      itembar = gtk_bin_get_child (GTK_BIN (li->data));
+      children = gtk_container_get_children (GTK_CONTAINER (itembar));
 
-      /* write the data to the file */
-      succeed = g_file_set_contents (filename, contents, -1, &error);
-      if (G_UNLIKELY (succeed == FALSE))
+      /* walk all the plugin children */
+      for (lp = children, j = 0; lp != NULL; lp = lp->next, j++)
         {
-          /* writing failed, print warning */
-          g_critical ("Failed to write panel configuration to \"%s\": %s", filename, error->message);
+          provider = XFCE_PANEL_PLUGIN_PROVIDER (lp->data);
 
-          /* cleanup */
-          g_error_free (error);
+          /* save the plugin name */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/module", i, j);
+          xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_name (provider));
+
+          /* save the plugin id */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
+          xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_id (provider));
+
+          /* ask the plugin to save */
+          if (save_plugin_providers)
+            xfce_panel_plugin_provider_save (provider);
         }
 
       /* cleanup */
-      g_free (contents);
-      g_free (filename);
-    }
-  else
-    {
-      /* print warning */
-      g_critical ("Failed to create panel configuration file");
+      g_list_free (children);
+
+      /* store the number of plugins in this panel */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins", i);
+      xfconf_channel_set_uint (channel, buf, j);
     }
 
-  /* save the settings of all plugins */
-  for (li = application->windows; li != NULL; li = li->next)
-    {
-      /* get the itembar */
-      itembar = gtk_bin_get_child (GTK_BIN (li->data));
-
-      /* save all the plugins on the itembar */
-      gtk_container_foreach (GTK_CONTAINER (itembar), (GtkCallback) xfce_panel_plugin_provider_save, NULL);
-    }
+  /* store the number of panels */
+  xfconf_channel_set_uint (channel, "/panels", i);
 }
 
 
@@ -1121,7 +864,7 @@ panel_application_new_window (PanelApplication *application,
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
 
   /* create panel window */
-  window = panel_window_new ();
+  window = g_object_new (PANEL_TYPE_WINDOW, NULL);
 
   /* realize */
   gtk_widget_realize (window);
@@ -1137,13 +880,16 @@ panel_application_new_window (PanelApplication *application,
 
   /* add the itembar */
   itembar = panel_itembar_new ();
-  exo_binding_new (G_OBJECT (window), "orientation", G_OBJECT (itembar), "orientation");
+  exo_binding_new (G_OBJECT (window), "horizontal", G_OBJECT (itembar), "horizontal");
   gtk_container_add (GTK_CONTAINER (window), itembar);
   gtk_widget_show (itembar);
 
   /* signals for drag and drop */
   g_signal_connect (G_OBJECT (itembar), "drag-data-received", G_CALLBACK (panel_application_drag_data_received), window);
   g_signal_connect (G_OBJECT (itembar), "drag-drop", G_CALLBACK (panel_application_drag_drop), window);
+
+  /* add the xfconf bindings */
+  panel_application_xfconf_window_bindings (application, PANEL_WINDOW (window), FALSE);
 
   return PANEL_WINDOW (window);
 }
@@ -1160,7 +906,7 @@ panel_application_get_windows (PanelApplication *application)
 
 
 
-gint
+guint
 panel_application_get_n_windows (PanelApplication *application)
 {
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), 0);

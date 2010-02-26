@@ -371,7 +371,8 @@ main (gint argc, gchar **argv)
       g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
 
       /* connect dbus property change signal */
-      dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_provider_property_changed), provider, NULL);
+      dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_provider_property_changed),
+                                   g_object_ref (provider), (GClosureNotify) g_object_unref);
 
       /* show the plugin */
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));

@@ -35,6 +35,7 @@
 #endif
 
 #include <glib.h>
+#include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
 
 #include <panel/panel-private.h>
@@ -142,11 +143,6 @@ main (gint argc, gchar **argv)
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-//#ifndef NDEBUG
-//  /* terminate the program on warnings and critical messages */
-//  g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
-//#endif
-
   /* initialize the gthread system */
   if (g_thread_supported () == FALSE)
     g_thread_init (NULL);
@@ -237,6 +233,10 @@ main (gint argc, gchar **argv)
       goto dbus_return;
     }
 
+  /* initialize xfconf */
+  /* TODO */
+  xfconf_init (NULL);
+
   /* create dbus service */
   dbus_service = panel_dbus_service_get ();
 
@@ -257,10 +257,13 @@ main (gint argc, gchar **argv)
   panel_application_destroy_dialogs (application);
 
   /* save the configuration */
-  panel_application_save (application);
+  panel_application_save (application, TRUE);
 
   /* release application reference */
   g_object_unref (G_OBJECT (application));
+
+  /* shutdown xfconf */
+  xfconf_shutdown ();
 
   /* whether we need to restart */
   if (dbus_quit_with_restart)

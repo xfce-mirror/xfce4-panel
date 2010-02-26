@@ -24,7 +24,6 @@
 #include <exo/exo.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
-#include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -42,7 +41,7 @@
 #ifndef NDEBUG
 #define N_RESTART_TRIES (0)
 #else
-#define N_RESTART_TRIES (3)
+#define N_RESTART_TRIES (2)
 #endif
 
 
@@ -96,7 +95,7 @@ struct _PanelPluginExternal
 
   /* dbus message queue */
   GSList           *dbus_queue;
-  
+
   /* counter to count the number of restart */
   guint             n_restarts;
 };
@@ -290,7 +289,6 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (socket);
   GtkWidget           *dialog;
   gint                 response;
-  gchar               *filename, *path;
   PanelWindow         *window;
 
   /* leave when the plugin was already removed */
@@ -299,14 +297,14 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
   /* plug has been removed */
   external->plug_embedded = FALSE;
-  
+
   /* unrealize and hide the socket */
   gtk_widget_unrealize (GTK_WIDGET (socket));
   gtk_widget_hide (GTK_WIDGET (socket));
 
   /* increase the restart counter */
   external->n_restarts++;
-  
+
   /* check if we ask the user what to do */
   if (external->n_restarts > N_RESTART_TRIES)
     {
@@ -323,11 +321,11 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
                               GTK_STOCK_REMOVE, GTK_RESPONSE_CLOSE, NULL);
       gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
       gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-      
+
       /* wait for the user's choise */
       response = gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
-      
+
       /* reset the restart counter */
       external->n_restarts = 0;
     }
@@ -335,13 +333,13 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
     {
       /* pretend the user clicked the yes button */
       response = GTK_RESPONSE_OK;
-      
+
       /* print a message we did an autorestart */
       g_message ("Automatically restarting plugin %s-%s, try %d",
                  panel_module_get_internal_name (external->module),
                  external->id, external->n_restarts);
 	}
-	
+
   /* handle the response */
   if (response == GTK_RESPONSE_OK)
     {
@@ -359,21 +357,8 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
     }
   else
     {
-      /* build the plugin rc filename */
-      filename = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH,
-                                  panel_module_get_internal_name (external->module),
-                                  external->id);
-
-      /* get the path */
-      path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
-
-      /* remove the plugin's config file */
-      if (G_LIKELY (path))
-        g_unlink (path);
-
-      /* cleanup */
-      g_free (filename);
-      g_free (path);
+      /* emit a remove signal, so we can cleanup the plugin configuration (in panel-application) */
+      xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (external), REMOVE_PLUGIN);
 
       /* destroy the socket */
       gtk_widget_destroy (GTK_WIDGET (socket));
@@ -418,7 +403,7 @@ panel_plugin_external_provider_signal (XfcePanelPluginProvider       *provider,
                                        XfcePanelPluginProviderSignal  signal)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (provider);
-  
+
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 

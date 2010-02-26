@@ -52,9 +52,9 @@ xfce_panel_plugin_provider_get_type (void)
   if (G_UNLIKELY (type == 0))
     {
       type = g_type_register_static_simple (G_TYPE_INTERFACE, I_("XfcePanelPluginProvider"),
-						                                sizeof (XfcePanelPluginProviderIface),
-						                                (GClassInitFunc) xfce_panel_plugin_provider_class_init,
-						                                0, NULL, 0);
+                                            sizeof (XfcePanelPluginProviderIface),
+                                            (GClassInitFunc) xfce_panel_plugin_provider_class_init,
+                                            0, NULL, 0);
     }
 
   return type;
@@ -145,7 +145,7 @@ xfce_panel_plugin_provider_send_signal (XfcePanelPluginProvider       *provider,
                                         XfcePanelPluginProviderSignal  signal)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-  
+
   /* emit the signal */
   g_signal_emit (G_OBJECT (provider), provider_signals[PROVIDER_SIGNAL], 0, signal);
 }

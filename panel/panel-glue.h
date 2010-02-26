@@ -26,21 +26,8 @@
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 G_BEGIN_DECLS
-
-void               panel_glue_popup_menu          (PanelWindow             *window);
-
-XfceScreenPosition panel_glue_get_screen_position (PanelWindow             *window);
-
-void               panel_glue_set_size            (PanelWindow             *window,
-                                                   gint                     size);
-
-void               panel_glue_set_orientation     (PanelWindow             *window,
-                                                   GtkOrientation           orientation);
-
-void               panel_glue_set_screen_position (PanelWindow             *window);
-
-void               panel_glue_set_provider_info   (XfcePanelPluginProvider *provider,
-                                                   PanelWindow             *window);
+void               panel_glue_set_provider_info (XfcePanelPluginProvider *provider,
+                                                 PanelWindow             *window);
 
 G_END_DECLS
 

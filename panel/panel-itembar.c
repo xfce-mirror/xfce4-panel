@@ -69,8 +69,6 @@ static void      panel_itembar_forall           (GtkContainer      *container,
                                                  GtkCallback        callback,
                                                  gpointer           callback_data);
 static GType     panel_itembar_child_type       (GtkContainer      *container);
-static void      panel_itembar_set_orientation  (PanelItembar      *itembar,
-                                                 GtkOrientation     orientation);
 
 
 
@@ -89,8 +87,8 @@ struct _PanelItembar
   /* dnd highlight line */
   GdkWindow      *highlight_window;
 
-  /* orientation of the itembar */
-  GtkOrientation  orientation;
+  /* whether the itembar is horizontal */
+  guint           horizontal : 1;
 
   /* internal list of children */
   GSList         *children;
@@ -108,7 +106,7 @@ struct _PanelItembarChild
 enum
 {
   PROP_0,
-  PROP_ORIENTATION
+  PROP_HORIZONTAL
 };
 
 
@@ -156,20 +154,11 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtkcontainer_class->get_child_property = NULL;
   gtkcontainer_class->set_child_property = NULL;
 
-  /**
-   * PanelItembar::orientation:
-   *
-   * The orientation of the itembar. This property is synced with the
-   * orientation property of the PanelWindow. That's also the reason
-   * the itembar has no public panel_itembar_[sg]et_orientation
-   * functions: it should be read from the panel window.
-   **/
   g_object_class_install_property (gobject_class,
-                                   PROP_ORIENTATION,
-                                   g_param_spec_enum ("orientation", "orientation", "orientation",
-                                                      GTK_TYPE_ORIENTATION,
-                                                      GTK_ORIENTATION_HORIZONTAL,
-                                                      EXO_PARAM_WRITABLE));
+                                   PROP_HORIZONTAL,
+                                   g_param_spec_boolean ("horizontal", NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_WRITABLE));
 }
 
 
@@ -182,7 +171,7 @@ panel_itembar_init (PanelItembar *itembar)
   itembar->event_window = NULL;
   itembar->highlight_window = NULL;
   itembar->sensitive = TRUE;
-  itembar->orientation = GTK_ORIENTATION_HORIZONTAL;
+  itembar->horizontal = TRUE;
 
   /* setup */
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (itembar), GTK_NO_WINDOW);
@@ -208,8 +197,9 @@ panel_itembar_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_ORIENTATION:
-        panel_itembar_set_orientation (itembar, g_value_get_enum (value));
+      case PROP_HORIZONTAL:
+        itembar->horizontal = g_value_get_boolean (value);
+        gtk_widget_queue_resize (GTK_WIDGET (itembar));
         break;
 
       default:
@@ -348,7 +338,7 @@ panel_itembar_size_request (GtkWidget      *widget,
           gtk_widget_size_request (child->widget, &child_requisition);
 
           /* update the itembar requisition */
-          if (itembar->orientation == GTK_ORIENTATION_HORIZONTAL)
+          if (itembar->horizontal)
             {
               requisition->width += child_requisition.width;
               requisition->height = MAX (requisition->height, child_requisition.height);
@@ -378,7 +368,6 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   gint               req_expandable_size = 0;
   gint               x, y;
   gint               border_width;
-  gboolean           horizontal;
   gint               alloc_size, req_size;
   gboolean           expandable_children_fit;
 
@@ -393,11 +382,8 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   /* get the border width */
   border_width = GTK_CONTAINER (widget)->border_width;
 
-  /* boolean for orientation */
-  horizontal = (itembar->orientation == GTK_ORIENTATION_HORIZONTAL);
-
   /* get the itembar size */
-  if (horizontal)
+  if (itembar->horizontal)
     alloc_expandable_size = allocation->width - 2 * border_width;
   else
     alloc_expandable_size = allocation->height - 2 * border_width;
@@ -420,7 +406,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
           n_expand_children++;
 
           /* update the size requested by the expanding children */
-          if (horizontal)
+          if (itembar->horizontal)
             req_expandable_size += child_requisition.width;
           else
             req_expandable_size += child_requisition.height;
@@ -428,7 +414,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       else
         {
           /* update the size avaible for allocation */
-          if (horizontal)
+          if (itembar->horizontal)
             alloc_expandable_size -= child_requisition.width;
           else
             alloc_expandable_size -= child_requisition.height;
@@ -465,13 +451,13 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       if (G_UNLIKELY (child->expand && expandable_children_fit == FALSE))
         {
           /* get requested size */
-          req_size = horizontal ? child_requisition.width : child_requisition.height;
+          req_size = itembar->horizontal ? child_requisition.width : child_requisition.height;
 
           /* calculate allocated size */
           alloc_size = alloc_expandable_size * req_size / req_expandable_size;
 
           /* set the calculated expanding size */
-          if (horizontal)
+          if (itembar->horizontal)
             child_allocation.width = alloc_size;
           else
             child_allocation.height = alloc_size;
@@ -483,14 +469,14 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       else
         {
           /* set the requested size in the allocation */
-          if (horizontal)
+          if (itembar->horizontal)
             child_allocation.width = child_requisition.width;
           else
             child_allocation.height = child_requisition.height;
         }
 
       /* update the coordinates and set the allocated (user defined) panel size */
-      if (horizontal)
+      if (itembar->horizontal)
         {
           x += child_allocation.width;
           child_allocation.height = allocation->height;
@@ -541,7 +527,6 @@ panel_itembar_drag_motion (GtkWidget      *widget,
   GtkWidget     *child = NULL;
   gint           x = 0, y = 0;
   gint           width, height;
-  gboolean       is_horizontal;
 
   if (G_UNLIKELY (itembar->highlight_window == NULL))
     {
@@ -565,9 +550,6 @@ panel_itembar_drag_motion (GtkWidget      *widget,
       gdk_window_set_background (itembar->highlight_window, &widget->style->fg[widget->state]);
     }
 
-  /* get orientaion */
-  is_horizontal = !!(itembar->orientation == GTK_ORIENTATION_HORIZONTAL);
-
   /* get the drop index */
   drop_index = panel_itembar_get_drop_index (itembar, drag_x, drag_y);
 
@@ -576,7 +558,7 @@ panel_itembar_drag_motion (GtkWidget      *widget,
   if (G_LIKELY (child))
     {
       /* get child start coordinate */
-      if (is_horizontal)
+      if (itembar->horizontal)
         x = child->allocation.x;
       else
         y = child->allocation.y;
@@ -587,15 +569,15 @@ panel_itembar_drag_motion (GtkWidget      *widget,
       child = panel_itembar_get_nth_child (itembar, g_slist_length (itembar->children) - 1);
 
       /* get coordinate at end of the child */
-      if (is_horizontal)
+      if (itembar->horizontal)
         x = child->allocation.x + child->allocation.width;
       else
         y = child->allocation.y + child->allocation.height;
     }
 
   /* get size of the hightlight */
-  width = is_horizontal ? HIGHLIGHT_THINKNESS : widget->allocation.width;
-  height = is_horizontal ? widget->allocation.height : HIGHLIGHT_THINKNESS;
+  width = itembar->horizontal ? HIGHLIGHT_THINKNESS : widget->allocation.width;
+  height = itembar->horizontal ? widget->allocation.height : HIGHLIGHT_THINKNESS;
 
   /* show line between the two children */
   x += HIGHLIGHT_THINKNESS / 2;
@@ -716,24 +698,6 @@ static GType
 panel_itembar_child_type (GtkContainer *container)
 {
   return GTK_TYPE_WIDGET;
-}
-
-
-
-static void
-panel_itembar_set_orientation (PanelItembar   *itembar,
-                               GtkOrientation  orientation)
-{
-  panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
-
-  if (itembar->orientation != orientation)
-    {
-      /* set new orientation */
-      itembar->orientation = orientation;
-
-      /* queue a resize */
-      gtk_widget_queue_resize (GTK_WIDGET (itembar));
-    }
 }
 
 
@@ -913,16 +877,6 @@ panel_itembar_set_child_expand (PanelItembar *itembar,
 
 
 
-guint
-panel_itembar_get_n_children (PanelItembar *itembar)
-{
-  panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), 0);
-
-  return g_slist_length (itembar->children);
-}
-
-
-
 gint
 panel_itembar_get_child_index (PanelItembar *itembar,
                                GtkWidget    *widget)
@@ -976,7 +930,6 @@ panel_itembar_get_drop_index (PanelItembar  *itembar,
   PanelItembarChild *child;
   GSList            *li;
   GtkAllocation     *allocation;
-  gboolean           is_horizontal;
   guint              idx;
 
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), 0);
@@ -984,9 +937,6 @@ panel_itembar_get_drop_index (PanelItembar  *itembar,
   /* add the itembar position */
   x += GTK_WIDGET (itembar)->allocation.x;
   y += GTK_WIDGET (itembar)->allocation.y;
-
-  /* whether the itembar is horizontal */
-  is_horizontal = !!(itembar->orientation == GTK_ORIENTATION_HORIZONTAL);
 
   for (li = itembar->children, idx = 0; li != NULL; li = li->next, idx++)
     {
@@ -996,8 +946,8 @@ panel_itembar_get_drop_index (PanelItembar  *itembar,
       allocation = &(child->widget->allocation);
 
       /* check if the drop index is before the half of the allocation */
-      if ((is_horizontal && x < (allocation->x + allocation->width / 2))
-          || (!is_horizontal && y < (allocation->y + allocation->height / 2)))
+      if ((itembar->horizontal && x < (allocation->x + allocation->width / 2))
+          || (!itembar->horizontal && y < (allocation->y + allocation->height / 2)))
         break;
     }
 

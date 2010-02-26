@@ -43,7 +43,8 @@ void              panel_application_multihead_area    (GtkWidget *widget,
 
 PanelApplication *panel_application_get               (void);
 
-void              panel_application_save              (PanelApplication  *application);
+void              panel_application_save              (PanelApplication  *application,
+                                                       gboolean           save_plugin_providers);
 
 void              panel_application_take_dialog       (PanelApplication  *application,
                                                        GtkWindow         *dialog);
@@ -57,7 +58,7 @@ void              panel_application_add_new_item      (PanelApplication  *applic
 PanelWindow      *panel_application_new_window        (PanelApplication  *application,
                                                        GdkScreen         *screen);
 
-gint              panel_application_get_n_windows     (PanelApplication  *application);
+guint             panel_application_get_n_windows     (PanelApplication  *application);
 
 gint              panel_application_get_window_index  (PanelApplication  *application,
                                                        PanelWindow       *window);

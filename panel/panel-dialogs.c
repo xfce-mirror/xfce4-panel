@@ -101,7 +101,8 @@ panel_dialogs_choose_panel (PanelApplication *application)
   GtkWidget *vbox;
   GtkWidget *label;
   GtkWidget *combo;
-  gint       i, response = -1;
+  guint      i;
+  gint       response = -1;
   gchar     *name;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), -1);

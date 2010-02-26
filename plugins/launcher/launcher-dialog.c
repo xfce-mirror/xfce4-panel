@@ -31,15 +31,8 @@ static void
 launcher_dialog_add_button_clicked (GtkWidget *button,
                                     GtkWidget *menu)
 {
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 1, 
+  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 1,
                   gtk_get_current_event_time());
-}
-
-
-static void
-launcher_dialog_builder_died (gpointer user_data, GObject *where_object_was)
-{
-  g_message ("builder destroyed");
 }
 
 
@@ -50,22 +43,41 @@ launcher_dialog_show (LauncherPlugin *plugin)
   GtkBuilder *builder;
   GObject    *dialog;
   GObject    *object, *menu;
-  
+
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
-  
+
   builder = gtk_builder_new ();
-  g_object_weak_ref (G_OBJECT (builder), launcher_dialog_builder_died, NULL);
   if (gtk_builder_add_from_string (builder, launcher_dialog_glade, launcher_dialog_glade_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      gtk_widget_show (GTK_WIDGET (dialog));
-      
+
       object = gtk_builder_get_object (builder, "close-button");
       g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
-      
+
       object = gtk_builder_get_object (builder, "entry-add");
       menu = gtk_builder_get_object (builder, "add-menu");
       g_signal_connect (G_OBJECT (object), "clicked", G_CALLBACK (launcher_dialog_add_button_clicked), GTK_MENU (menu));
+
+      /* connect binding to the advanced properties */
+      object = gtk_builder_get_object (builder, "disable-tooltips");
+      xfconf_g_property_bind (plugin->channel, "/disable-tooltips", G_TYPE_BOOLEAN, object, "active");
+
+      object = gtk_builder_get_object (builder, "show-labels");
+      xfconf_g_property_bind (plugin->channel, "/show-labels", G_TYPE_BOOLEAN, object, "active");
+
+      object = gtk_builder_get_object (builder, "move-first");
+      xfconf_g_property_bind (plugin->channel, "/move-first", G_TYPE_BOOLEAN, object, "active");
+
+      object = gtk_builder_get_object (builder, "arrow-position");
+      xfconf_g_property_bind (plugin->channel, "/arrow-position", G_TYPE_UINT, object, "active");
+
+      /* TODO remove when implemented by glade */
+      GtkCellRenderer *cell1 = gtk_cell_renderer_text_new ();
+      object = gtk_builder_get_object (builder, "arrow-position");
+      gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (object), cell1, TRUE);
+      gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (object), cell1, "text", 0, NULL);
+
+      gtk_widget_show (GTK_WIDGET (dialog));
     }
 }

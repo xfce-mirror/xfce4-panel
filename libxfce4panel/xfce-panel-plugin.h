@@ -89,6 +89,8 @@ const gchar         *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *p
 
 const gchar         *xfce_panel_plugin_get_id              (XfcePanelPlugin   *plugin);
 
+const gchar         *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin);
+
 const gchar * const *xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin);
 
 gint                 xfce_panel_plugin_get_size            (XfcePanelPlugin   *plugin);

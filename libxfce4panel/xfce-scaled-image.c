@@ -265,12 +265,12 @@ xfce_scaled_image_update_cache (XfceScaledImage *image)
                                          MIN (image->width, image->height),
                                          0, NULL);
     }
-    
+
   if (G_LIKELY (pixbuf))
     {
       /* create a cache icon that fits in the available size */
       image->cache = xfce_scaled_image_scale_pixbuf (pixbuf, image->width, image->height);
-      
+
       /* release the pixbuf */
       g_object_unref (G_OBJECT (pixbuf));
     }
@@ -284,14 +284,14 @@ xfce_scaled_image_cleanup (XfceScaledImage *image)
   /* release the pixbuf reference */
   if (G_LIKELY (image->pixbuf))
     g_object_unref (G_OBJECT (image->pixbuf));
-  
+
   /* release the cached pixbuf */
   if (G_LIKELY (image->cache))
     g_object_unref (G_OBJECT (image->cache));
 
   /* free the icon name */
   g_free (image->icon_name);
-  
+
   /* reset varaibles */
   image->pixbuf = NULL;
   image->cache = NULL;
@@ -366,17 +366,17 @@ xfce_scaled_image_set_from_pixbuf (XfceScaledImage *image,
 {
   gint source_width;
   gint source_height;
-  
+
   g_return_if_fail (XFCE_IS_SCALED_IMAGE (image));
   g_return_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf));
 
   /* cleanup */
   xfce_scaled_image_cleanup (image);
-  
+
   /* get the new pixbuf sizes */
   source_width = gdk_pixbuf_get_width (pixbuf);
   source_height = gdk_pixbuf_get_height (pixbuf);
-  
+
   /* set the new pixbuf, scale it to the maximum size if needed */
   if (G_LIKELY (source_width <= MAX_PIXBUF_SIZE && source_height <= MAX_PIXBUF_SIZE))
     image->pixbuf = g_object_ref (G_OBJECT (pixbuf));
@@ -418,7 +418,7 @@ xfce_scaled_image_set_from_file (XfceScaledImage *image,
 
   g_return_if_fail (XFCE_IS_SCALED_IMAGE (image));
   panel_return_if_fail (filename == NULL || g_path_is_absolute (filename));
-  
+
   /* cleanup */
   xfce_scaled_image_cleanup (image);
 
@@ -431,7 +431,7 @@ xfce_scaled_image_set_from_file (XfceScaledImage *image,
         {
           /* set the new pixbuf */
           xfce_scaled_image_set_from_pixbuf (image, pixbuf);
-          
+
           /* release the pixbuf */
           g_object_unref (G_OBJECT (pixbuf));
         }
