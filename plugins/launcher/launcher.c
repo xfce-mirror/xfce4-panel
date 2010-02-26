@@ -19,10 +19,15 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+
 #include <exo/exo.h>
-#include <xfconf/xfconf.h>
+
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <common/panel-private.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -37,10 +42,11 @@ static void launcher_plugin_save (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin, gint position);
 
+static void launcher_plugin_button_set_icon (LauncherPlugin *plugin);
 static void launcher_plugin_button_state_changed (GtkWidget *button_a, GtkStateType state, GtkWidget *button_b);
 static gboolean launcher_plugin_button_press_event (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
 static gboolean launcher_plugin_button_release_event (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
-static gboolean launcher_plugin_icon_button_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPlugin *plugin);
+static gboolean launcher_plugin_button_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPlugin *plugin);
 static void launcher_plugin_button_drag_data_received (GtkWidget *widget,GdkDragContext *context, gint x,gint y,GtkSelectionData *selection_data, guint info, guint drag_time, LauncherPlugin *plugin);
 
 static void launcher_plugin_entries_load (LauncherPlugin *plugin);
@@ -48,9 +54,9 @@ static gboolean launcher_plugin_entry_query_tooltip (GtkWidget *widget, gint x, 
 static LauncherEntry *launcher_plugin_entry_new_from_filename (const gchar *filename);
 static void launcher_plugin_entry_free (LauncherEntry *entry);
 
-static gboolean launcher_plugin_entry_exec_on_screen (LauncherEntry *entry, GdkScreen *screen, GSList *uri_list);
-static void launcher_plugin_entry_exec (LauncherEntry *entry, GdkScreen *screen, GSList *uri_list);
-static void launcher_plugin_entry_exec_from_clipboard (LauncherEntry *entry, GdkScreen *screen);
+static gboolean launcher_plugin_entry_exec_on_screen (LauncherEntry *entry, guint32 event_time, GdkScreen *screen, GSList *uri_list);
+static void launcher_plugin_entry_exec (LauncherEntry *entry, guint32 event_time, GdkScreen *screen, GSList *uri_list);
+static void launcher_plugin_entry_exec_from_clipboard (LauncherEntry *entry, guint32 event_time, GdkScreen *screen);
 static void launcher_plugin_exec_append_quoted (GString *string, const gchar *unquoted);
 static gboolean launcher_plugin_exec_parse (LauncherEntry *entry, GSList *uri_list, gboolean terminal, gint *argc, gchar ***argv, GError **error);
 
@@ -72,7 +78,7 @@ struct _LauncherPlugin
   GtkWidget *arrow;
   GtkWidget *image;
 
-  GSList *items;
+  GSList *entries;
 
   guint disable_tooltips : 1;
 };
@@ -152,6 +158,9 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
 
       /* load the new entries */
       launcher_plugin_entries_load (plugin);
+
+      /* update the icon */
+      launcher_plugin_button_set_icon (plugin);
     }
 }
 
@@ -188,7 +197,7 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
                     G_CALLBACK (launcher_plugin_button_drag_data_received), plugin);
 
   plugin->image = xfce_scaled_image_new ();
-  gtk_container_add (GTK_CONTAINER (plugin->icon_button), plugin->image);
+  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->image);
   gtk_widget_show (plugin->image);
 
   plugin->arrow = xfce_arrow_button_new (GTK_ARROW_UP);
@@ -209,6 +218,9 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* load the entries */
   launcher_plugin_entries_load (plugin);
+
+  /* update the icon */
+  launcher_plugin_button_set_icon (plugin);
 }
 
 
@@ -244,6 +256,8 @@ static gboolean
 launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                               gint             size)
 {
+  gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
+
   return TRUE;
 }
 
@@ -271,7 +285,8 @@ launcher_plugin_save (XfcePanelPlugin *panel_plugin)
           filenames[i++] = entry->filename;
 
       /* store the list of filenames */
-      xfconf_channel_set_string_list (plugin->channel, "/entries", filenames);
+      xfconf_channel_set_string_list (plugin->channel, "/entries",
+                                      (const gchar **) filenames);
 
       /* cleanup */
       g_free (filenames);
@@ -299,6 +314,39 @@ launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
+launcher_plugin_button_set_icon (LauncherPlugin *plugin)
+{
+  LauncherEntry *entry;
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_SCALED_IMAGE (plugin->image));
+
+  if (G_LIKELY (plugin->entries != NULL))
+    {
+      entry = plugin->entries->data;
+
+      if (IS_STRING (entry->icon))
+        {
+          if (g_path_is_absolute (entry->icon))
+            xfce_scaled_image_set_from_file (XFCE_SCALED_IMAGE (plugin->image),
+                                             entry->icon);
+          else
+            xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->image),
+                                                  entry->icon);
+          /* TODO some more name checking */
+        }
+    }
+  else
+    {
+      /* set missing image icon */
+      xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->image),
+                                            GTK_STOCK_MISSING_IMAGE);
+    }
+}
+
+
+
+static void
 launcher_plugin_button_state_changed (GtkWidget    *button_a,
                                       GtkStateType  state,
                                       GtkWidget    *button_b)
@@ -316,13 +364,12 @@ launcher_plugin_button_press_event (GtkWidget      *button,
                                     LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
-  panel_return_val_if_fail (plugin->entries != NULL, FALSE);
-  
+
   /* do nothing on anything else then a single click */
   if (event->type != GDK_BUTTON_PRESS)
     return FALSE;
-    
-    
+
+  return FALSE;
 }
 
 
@@ -332,31 +379,38 @@ launcher_plugin_button_release_event (GtkWidget      *button,
                                       GdkEventButton *event,
                                       LauncherPlugin *plugin)
 {
+  LauncherEntry *entry;
+  GdkScreen     *screen;
+
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
-  panel_return_val_if_fail (plugin->entries != NULL, FALSE);
-  
+
+  if (G_UNLIKELY (plugin->entries == NULL))
+    return FALSE;
+
+  entry = plugin->entries->data;
+  screen = gtk_widget_get_screen (button);
+
   if (event->button == 1)
-    launcher_plugin_entry_exec (entry, gtk_widget_get_screen (button), NULL);
+    launcher_plugin_entry_exec (entry, event->time, screen, NULL);
   else if (event->button == 2)
-    launcher_plugin_entry_exec_from_clipboard (entry, gtk_widget_get_screen (button));
+    launcher_plugin_entry_exec_from_clipboard (entry, event->time, screen);
   else
     return TRUE;
-    
+
   return FALSE;
 }
 
 
 
 static gboolean
-launcher_plugin_icon_button_query_tooltip (GtkWidget      *widget,
-                                           gint            x,
-                                           gint            y,
-                                           gboolean        keyboard_mode,
-                                           GtkTooltip     *tooltip,
-                                           LauncherPlugin *plugin)
+launcher_plugin_button_query_tooltip (GtkWidget      *widget,
+                                      gint            x,
+                                      gint            y,
+                                      gboolean        keyboard_mode,
+                                      GtkTooltip     *tooltip,
+                                      LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
-  panel_return_val_if_fail (plugin->entries != NULL, FALSE);
 
   /* check if we show tooltips */
   if (plugin->entries == NULL || plugin->entries->data == NULL
@@ -369,18 +423,17 @@ launcher_plugin_icon_button_query_tooltip (GtkWidget      *widget,
 
 
 
-static void 
+static void
 launcher_plugin_button_drag_data_received (GtkWidget        *widget,
-                                           GdkDragContext   *context, 
+                                           GdkDragContext   *context,
                                            gint              x,
                                            gint              y,
-                                           GtkSelectionData *selection_data, 
-                                           guint             info, 
-                                           guint             drag_time, 
+                                           GtkSelectionData *selection_data,
+                                           guint             info,
+                                           guint             drag_time,
                                            LauncherPlugin   *plugin)
 {
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
-  panel_return_if_fail (plugin->entries != NULL);
 
   gtk_drag_finish (context, TRUE, FALSE, drag_time);
 }
@@ -403,9 +456,9 @@ launcher_plugin_entries_load (LauncherPlugin *plugin)
       /* try to load all the entries */
       for (i = 0; filenames[i] != NULL; i++)
         {
-          entry = launcher_plugin_entry_from_filename (filenames[i]);
+          entry = launcher_plugin_entry_new_from_filename (filenames[i]);
           if (G_LIKELY (entry != NULL))
-            launcher->entries = g_slist_append (launcher->entries, entry);
+            plugin->entries = g_slist_append (plugin->entries, entry);
         }
 
       /* cleanup */
@@ -508,13 +561,14 @@ launcher_plugin_entry_free (LauncherEntry *entry)
 
 static gboolean
 launcher_plugin_entry_exec_on_screen (LauncherEntry *entry,
+                                      guint32        event_time,
                                       GdkScreen     *screen,
                                       GSList        *uri_list)
 {
   GError    *error = NULL;
   gchar    **argv;
   gboolean   succeed = FALSE;
-  
+
   /* parse the execute command */
   if (launcher_plugin_exec_parse (entry, uri_list, entry->terminal,
                                   NULL, &argv, &error))
@@ -522,19 +576,19 @@ launcher_plugin_entry_exec_on_screen (LauncherEntry *entry,
       /* launch the command on the screen */
       succeed = xfce_execute_argv_on_screen (screen, entry->path, argv, NULL,
                                              G_SPAWN_SEARCH_PATH, entry->startup_notify,
-                                             entry->icon, &error);
-                                             
+                                             event_time, entry->icon, &error);
+
       /* cleanup */
       g_strfreev (argv);
     }
-    
+
   if (G_UNLIKELY (succeed == FALSE))
     {
       /* TODO */
       g_message ("Failed to launch.... (%s)", error->message);
       g_error_free (error);
     }
-    
+
   return succeed;
 }
 
@@ -542,34 +596,35 @@ launcher_plugin_entry_exec_on_screen (LauncherEntry *entry,
 
 static void
 launcher_plugin_entry_exec (LauncherEntry *entry,
+                            guint32        event_time,
                             GdkScreen     *screen,
                             GSList        *uri_list)
 {
   GSList   *li, fake;
   gboolean  proceed = TRUE;
-  
+
   panel_return_if_fail (entry != NULL);
-  
+
   /* leave when there is nothing to execute */
   if (!IS_STRING (entry->exec))
     return;
-  
+
   if (G_UNLIKELY (uri_list != NULL
-      && g_strstr (entry->exec, "%F") == NULL
-      && g_strstr (entry->exec, "%U") == NULL))
+      && strstr (entry->exec, "%F") == NULL
+      && strstr (entry->exec, "%U") == NULL))
     {
       fake.next = NULL;
-      
+
       /* run an instance for each file, break on the first error */
       for (li = uri_list; li != NULL && proceed; li = li->next)
         {
           fake.data = li->data;
-          proceed = launcher_plugin_entry_exec_on_screen (entry, screen, &fake);
+          proceed = launcher_plugin_entry_exec_on_screen (entry, event_time, screen, &fake);
         }
     }
   else
     {
-      launcher_plugin_entry_exec_on_screen (entry, screen, uri_list);
+      launcher_plugin_entry_exec_on_screen (entry, event_time, screen, uri_list);
     }
 }
 
@@ -577,10 +632,11 @@ launcher_plugin_entry_exec (LauncherEntry *entry,
 
 static void
 launcher_plugin_entry_exec_from_clipboard (LauncherEntry *entry,
+                                           guint32        event_time,
                                            GdkScreen     *screen)
 {
   panel_return_if_fail (entry != NULL);
-  
+
   /* TODO */
 }
 
@@ -623,7 +679,7 @@ launcher_plugin_exec_parse (LauncherEntry   *entry,
   if (G_UNLIKELY (terminal))
     g_string_append (string, "exo-open --launch TerminalEmulator ");
 
-  for (p = exec; *p != '\0'; ++p)
+  for (p = entry->exec; *p != '\0'; ++p)
     {
       if (p[0] == '%' && p[1] != '\0')
         {
@@ -691,4 +747,13 @@ launcher_plugin_exec_parse (LauncherEntry   *entry,
   g_string_free (string, TRUE);
 
   return result;
+}
+
+
+
+XfconfChannel *
+launcher_plugin_get_channel (LauncherPlugin *plugin)
+{
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
+  return plugin->channel;
 }

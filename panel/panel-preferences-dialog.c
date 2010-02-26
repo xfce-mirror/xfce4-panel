@@ -94,7 +94,7 @@ struct _PanelPreferencesDialog
 
   /* store for the items list */
   GtkListStore     *store;
-  
+
   gulong            changed_handler_id;
 };
 
@@ -140,7 +140,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
   panel_application_take_dialog (dialog->application, GTK_WINDOW (window));
   g_signal_connect (G_OBJECT (window), "response", G_CALLBACK (panel_preferences_dialog_response), dialog);
-  
+
 #define connect_signal(name,detail_signal,c_handler) \
   object = gtk_builder_get_object (GTK_BUILDER (dialog), name); \
   panel_return_if_fail (G_IS_OBJECT (object)); \
@@ -225,8 +225,8 @@ panel_preferences_dialog_finalize (GObject *object)
 
 
 static void
-panel_preferences_dialog_response (GtkWidget              *window, 
-                                   gint                    response_id, 
+panel_preferences_dialog_response (GtkWidget              *window,
+                                   gint                    response_id,
                                    PanelPreferencesDialog *dialog)
 {
   GError    *error = NULL;
@@ -326,7 +326,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
-  
+
   /* disconnect signal we used to monitor changes in the itembar */
   if (dialog->changed_handler_id != 0)
     {
@@ -337,11 +337,11 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   /* set the selected window */
   nth = gtk_combo_box_get_active (combobox);
   dialog->active = panel_application_get_window (dialog->application, nth);
-  
-  
+
+
   itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-  dialog->changed_handler_id = g_signal_connect_swapped (G_OBJECT (itembar), "notify::changed", 
-                                                               G_CALLBACK (panel_preferences_dialog_item_store_rebuild), 
+  dialog->changed_handler_id = g_signal_connect_swapped (G_OBJECT (itembar), "notify::changed",
+                                                               G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
                                                                dialog);
 
   /* rebind the dialog bindings */
@@ -564,7 +564,7 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
         {
           /* block the changed signal */
           g_signal_handler_block (G_OBJECT (itembar), dialog->changed_handler_id);
-          
+
           /* move the item on the panel */
           panel_itembar_reorder_child (PANEL_ITEMBAR (itembar),
                                        GTK_WIDGET (provider),
@@ -640,7 +640,7 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
         {
           /* hide the dialog */
           gtk_widget_hide (widget);
-          
+
           /* send signal */
           xfce_panel_plugin_provider_emit_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
         }
