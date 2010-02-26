@@ -893,7 +893,6 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
     {
       launcher_plugin_button_update (plugin);
       launcher_plugin_menu_destroy (plugin);
-      launcher_plugin_menu_destroy (plugin);
 
       /* save the new config */
       g_object_notify (G_OBJECT (plugin), "items");
@@ -1216,9 +1215,6 @@ launcher_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
   /* set the new arrow direction */
   xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow),
       xfce_panel_plugin_arrow_type (panel_plugin));
-
-  /* destroy the menu */
-  launcher_plugin_menu_destroy (plugin);
 }
 
 
