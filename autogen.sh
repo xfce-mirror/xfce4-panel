@@ -31,6 +31,8 @@ EOF
 linguas=`sed -e '/^#/d' po/LINGUAS`
 if test -d .git/svn; then
  revision=`LC_ALL=C git-svn find-rev HEAD`
+elif test -d .git; then
+ revision=`LC_ALL=C git rev-parse --short HEAD`
 else
  revision=`LC_ALL=C svn info $0 | awk '/^Revision: / {printf "%05d\n",
 $2}'`
