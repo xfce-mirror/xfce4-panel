@@ -210,7 +210,6 @@ systray_manager_class_init (SystrayManagerClass *klass)
 static void
 systray_manager_init (SystrayManager *manager)
 {
-  /* initialize */
   manager->invisible = NULL;
   manager->orientation = GTK_ORIENTATION_HORIZONTAL;
   manager->messages = NULL;
@@ -287,7 +286,6 @@ systray_manager_check_running (GdkScreen *screen)
   selection_atom = gdk_x11_get_xatom_by_name_for_display (display,
                                                           selection_name);
 
-  /* cleanup */
   g_free (selection_name);
 
   /* return result */
@@ -331,7 +329,6 @@ systray_manager_register (SystrayManager  *manager,
   /* get the selection atom */
   manager->selection_atom = gdk_atom_intern (selection_name, FALSE);
 
-  /* cleanup */
   g_free (selection_name);
 
   /* get the display */
@@ -523,20 +520,20 @@ systray_manager_handle_client_message_opcode (GdkXEvent *xevent,
 
   switch (xev->data.l[1])
     {
-      case XFCE_SYSTRAY_MANAGER_REQUEST_DOCK:
-          /* handled in systray_manager_window_filter () */
-          break;
+    case XFCE_SYSTRAY_MANAGER_REQUEST_DOCK:
+        /* handled in systray_manager_window_filter () */
+        break;
 
-      case XFCE_SYSTRAY_MANAGER_BEGIN_MESSAGE:
-          systray_manager_handle_begin_message (manager, xev);
-          return GDK_FILTER_REMOVE;
+    case XFCE_SYSTRAY_MANAGER_BEGIN_MESSAGE:
+        systray_manager_handle_begin_message (manager, xev);
+        return GDK_FILTER_REMOVE;
 
-      case XFCE_SYSTRAY_MANAGER_CANCEL_MESSAGE:
-          systray_manager_handle_cancel_message (manager, xev);
-          return GDK_FILTER_REMOVE;
+    case XFCE_SYSTRAY_MANAGER_CANCEL_MESSAGE:
+        systray_manager_handle_cancel_message (manager, xev);
+        return GDK_FILTER_REMOVE;
 
-      default:
-          break;
+    default:
+        break;
     }
 
   return GDK_FILTER_CONTINUE;
@@ -840,10 +837,7 @@ systray_manager_set_orientation (SystrayManager *manager,
 static void
 systray_manager_message_free (SystrayMessage *message)
 {
-  /* cleanup */
   g_free (message->string);
-
-  /* remove slice */
   g_slice_free (SystrayMessage, message);
 }
 
