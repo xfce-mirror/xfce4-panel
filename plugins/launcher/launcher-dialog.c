@@ -80,4 +80,9 @@ launcher_dialog_show (LauncherPlugin *plugin)
 
       gtk_widget_show (GTK_WIDGET (dialog));
     }
+  else
+    {
+      /* release the builder */
+      g_object_unref (G_OBJECT (builder));
+    }
 }

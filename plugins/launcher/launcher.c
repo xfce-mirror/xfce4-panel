@@ -112,6 +112,9 @@ static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
   GdkScreen *screen;
+  
+  /* initialize xfconf */
+  xfconf_init (NULL);
 
   /* initialize variables */
   plugin->entries = NULL;
@@ -311,6 +314,9 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   /* release the xfconf channel */
   g_object_unref (G_OBJECT (plugin->channel));
+  
+  /* shutdown xfconf */
+  xfconf_shutdown ();
 
   /* stop popup timeout */
   if (G_UNLIKELY (plugin->popup_timeout_id))

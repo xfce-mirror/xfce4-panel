@@ -1,14 +1,29 @@
 <?xml version="1.0"?>
 <interface>
-  <!--interface-requires gtk+ 2.12-->
-  <object class="GtkDialog" id="xfce-tasklist-dialog">
-    <property name="title" translatable="yes">Tasklist Preferences</property>
-    <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
-    <property name="icon_name">gtk-preferences</property>
-    <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+  <requires lib="gtk+" version="2.14"/>
+  <!-- interface-requires xfce4 0.0 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkListStore" id="style-model">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Tasklist</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Iconbox</col>
+      </row>
+    </data>
+  </object>
+  <object class="XfceTitledDialog" id="dialog">
+    <property name="title" translatable="yes">Tasklist Properties</property>
+    <property name="icon_name">gtk-properties</property>
+    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
         <property name="spacing">2</property>
         <child>
@@ -48,8 +63,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="combobox1">
+                              <object class="GtkComboBox" id="style">
                                 <property name="visible">True</property>
+                                <property name="model">style-model</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -63,7 +79,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton1">
+                          <object class="GtkCheckButton" id="flat-buttons">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="label" translatable="yes">Show _flat buttons</property>
@@ -75,7 +91,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton2">
+                          <object class="GtkCheckButton" id="show-handle">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="label" translatable="yes">Show _handle</property>
@@ -148,7 +164,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton3">
+                          <object class="GtkCheckButton" id="include-all-workspaces">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="label" translatable="yes">Show windows from _all workspaces</property>
@@ -160,7 +176,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton4">
+                          <object class="GtkCheckButton" id="show-only-minimized">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="label" translatable="yes">Show only _minimized windows</property>
@@ -172,7 +188,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="checkbutton5">
+                          <object class="GtkCheckButton" id="switch-workspace-on-unminimize">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="label" translatable="yes">Restore minimized windows to current _workspace</property>
@@ -207,17 +223,16 @@
           </packing>
         </child>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
+          <object class="GtkHButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
             <property name="layout_style">GTK_BUTTONBOX_END</property>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="close-button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="label" translatable="yes">gtk-close</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
               </object>
               <packing>
                 <property name="position">0</property>
