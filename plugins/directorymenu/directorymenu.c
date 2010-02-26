@@ -484,6 +484,7 @@ directory_menu_plugin_menu_sort (gconstpointer a,
 {
   GFileType type_a = g_file_info_get_file_type (G_FILE_INFO (a));
   GFileType type_b = g_file_info_get_file_type (G_FILE_INFO (b));
+  gboolean  hidden_a, hidden_b;
 
   if (type_a != type_b)
     {
@@ -493,6 +494,13 @@ directory_menu_plugin_menu_sort (gconstpointer a,
       else if (type_b == G_FILE_TYPE_DIRECTORY)
         return 1;
     }
+
+  hidden_a = g_file_info_get_is_hidden (G_FILE_INFO (a));
+  hidden_b = g_file_info_get_is_hidden (G_FILE_INFO (b));
+
+  /* sort hidden files above 'normal' files */
+  if (hidden_a != hidden_b)
+    return hidden_a ? -1 : 1;
 
   return g_utf8_collate (g_file_info_get_display_name (G_FILE_INFO (a)),
                          g_file_info_get_display_name (G_FILE_INFO (b)));
