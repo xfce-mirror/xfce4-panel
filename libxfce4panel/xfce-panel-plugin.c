@@ -45,6 +45,7 @@ static void         xfce_panel_plugin_set_property         (GObject             
                                                             guint                         prop_id,
                                                             const GValue                 *value,
                                                             GParamSpec                   *pspec);
+static void         xfce_panel_plugin_dispose              (GObject                      *object);
 static void         xfce_panel_plugin_finalize             (GObject                      *object);
 static gboolean     xfce_panel_plugin_button_press_event   (GtkWidget                    *widget,
                                                             GdkEventButton               *event);
@@ -133,6 +134,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = xfce_panel_plugin_get_property;
   gobject_class->set_property = xfce_panel_plugin_set_property;
+  gobject_class->dispose = xfce_panel_plugin_dispose;
   gobject_class->finalize = xfce_panel_plugin_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
@@ -431,12 +433,23 @@ xfce_panel_plugin_set_property (GObject      *object,
 
 
 static void
+xfce_panel_plugin_dispose (GObject *object)
+{
+  /* let the plugin save its configuration */
+  g_signal_emit (G_OBJECT (object), plugin_signals[SAVE], 0);
+
+  /* allow the plugin to cleanup */
+  g_signal_emit (G_OBJECT (object), plugin_signals[FREE_DATA], 0);
+
+  (*G_OBJECT_CLASS (xfce_panel_plugin_parent_class)->dispose) (object);
+}
+
+
+
+static void
 xfce_panel_plugin_finalize (GObject *object)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (object);
-
-  /* allow the plugin to cleanup */
-  g_signal_emit (G_OBJECT (plugin), plugin_signals[FREE_DATA], 0);
 
   /* destroy the menu */
   if (plugin->priv->menu)

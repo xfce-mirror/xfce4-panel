@@ -238,6 +238,7 @@ panel_window_init (PanelWindow *window)
   gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
   gtk_window_set_decorated (GTK_WINDOW (window), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
+  gtk_window_set_gravity (GTK_WINDOW (window), GDK_GRAVITY_STATIC);
 
   /* init vars */
   window->is_composited = FALSE;
@@ -689,6 +690,7 @@ panel_window_autohide_window (PanelWindow *window)
 
   /* create window */
   popup = gtk_window_new (GTK_WINDOW_POPUP);
+  gtk_window_set_gravity (GTK_WINDOW (popup), GDK_GRAVITY_STATIC);
 
   /* connect signals to monitor enter/leave events */
   g_signal_connect (G_OBJECT (popup), "enter-notify-event", G_CALLBACK (panel_window_autohide_enter_notify_event), window);
@@ -1512,13 +1514,12 @@ panel_window_get_position (PanelWindow *window,
                            gint        *root_x,
                            gint        *root_y)
 {
-  /* get the window position */
-  gtk_window_get_position (GTK_WINDOW (window), root_x, root_y);
-
-  /* check if the coordinates of the hidden window should be used */
-  if (window->autohide_window
-      && ((root_x && *root_x == OFFSCREEN) || (root_y && *root_y == OFFSCREEN)))
+  /* get the window position of the visible window */
+  if (G_UNLIKELY (window->autohide_window
+      && (window->autohide_status == HIDDEN || window->autohide_status == POPUP_QUEUED)))
     gtk_window_get_position (GTK_WINDOW (window->autohide_window), root_x, root_y);
+  else
+    gtk_window_get_position (GTK_WINDOW (window), root_x, root_y);
 }
 
 
