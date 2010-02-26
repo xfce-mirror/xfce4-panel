@@ -179,10 +179,10 @@ dbus_gproxy_dbus_filter (DBusConnection *connection,
     {
       /* get the information of the changed service */
       if (dbus_message_get_args (message, NULL,
-									               DBUS_TYPE_STRING, &service,
-									               DBUS_TYPE_STRING, &old_owner,
-									               DBUS_TYPE_STRING, &new_owner,
-									               DBUS_TYPE_INVALID))
+                                 DBUS_TYPE_STRING, &service,
+                                 DBUS_TYPE_STRING, &old_owner,
+                                 DBUS_TYPE_STRING, &new_owner,
+                                 DBUS_TYPE_INVALID))
         {
           /* check if the panel service lost the owner, if so, leave the mainloop */
           if (strcmp (service, "org.xfce.Panel") == 0 && !IS_STRING (new_owner))
@@ -198,17 +198,22 @@ dbus_gproxy_dbus_filter (DBusConnection *connection,
 gint
 main (gint argc, gchar **argv)
 {
-  GError           *error = NULL;
-  GtkWidget        *provider;
-  WrapperModule    *module = NULL;
-  gboolean          succeed = FALSE;
-  DBusGConnection *dbus_gconnection;
-  DBusConnection  *dbus_connection;
-  DBusGProxy      *dbus_gproxy = NULL;
-  WrapperPlug     *plug;
+  GOptionContext         *context;
+  GOptionGroup           *option_group;
+  GError                 *error = NULL;
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
-  gchar            process_name[16];
+  gchar                   process_name[16];
 #endif
+  GModule                *library = NULL;
+  gint                    retval = WRAPPER_EXIT_FAILURE;
+  XfcePanelPluginPreInit  preinit_func;
+  gboolean                result;
+  DBusGConnection        *dbus_gconnection;
+  DBusConnection         *dbus_connection;
+  DBusGProxy             *dbus_gproxy = NULL;
+  WrapperModule          *module = NULL;
+  WrapperPlug            *plug;
+  GtkWidget              *provider;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -218,40 +223,23 @@ main (gint argc, gchar **argv)
   g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
 #endif
 
-  /* initialize the gthread system */
-  if (g_thread_supported () == FALSE)
-    g_thread_init (NULL);
+  /* parse the wrapper options */
+  context = g_option_context_new ("[ARGUMENTS...]");
+  g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
+  option_group = gtk_get_option_group (FALSE);
+  g_option_context_add_group (context, option_group);
+  result = g_option_context_parse (context, &argc, &argv, &error);
+  g_option_context_free (context);
+  if (G_UNLIKELY (result == FALSE))
+    goto leave;
 
-  /* initialize gtk */
-  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"),
-                           option_entries, (gchar *) GETTEXT_PACKAGE, &error))
+  /* check if we have all required arguments */
+  if (opt_socket_id == 0 || wrapper_name == NULL
+      || opt_unique_id == -1 || opt_display_name == NULL
+      || opt_filename == NULL)
     {
-      /* set error if not set by gtk */
-      if (error == NULL)
-        g_set_error (&error, 0, 0, "Unable to open display \"%s\"",
-                     gdk_get_display_arg_name ());
-      goto error;
-    }
-
-  /* check if the module exists */
-  if (!IS_STRING (opt_filename) || !g_file_test (opt_filename, G_FILE_TEST_EXISTS))
-    {
-      /* set error and leave */
-      g_set_error (&error, 0, 0,
-                   "Unable to find plugin module \"%s\"", opt_filename);
-      goto error;
-    }
-
-  /* check if all the other arguments are defined */
-  if (opt_socket_id == 0
-      || !IS_STRING (wrapper_name)
-      || opt_unique_id == -1
-      || !IS_STRING (opt_display_name))
-    {
-      /* set error and leave */
-      g_set_error (&error, G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                   "One of the required argument for the wrapper is missing");
-      goto error;
+      g_set_error (&error, 0, 0, "One of the required arguments is missing");
+      goto leave;
     }
 
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
@@ -259,13 +247,34 @@ main (gint argc, gchar **argv)
   g_snprintf (process_name, sizeof (process_name), "panel-%d-%s",
               opt_unique_id, wrapper_name);
   if (prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0) == -1)
-    g_warning ("Failed to set the process name to \"%s\".", process_name);
+    g_warning ("Failed to change the process name to \"%s\".", process_name);
 #endif
+
+  /* open the plugin module */
+  library = g_module_open (opt_filename, G_MODULE_BIND_LOCAL);
+  if (G_UNLIKELY (library == NULL))
+    {
+      g_set_error (&error, 0, 0, "Failed to open plugin module \"%s\": %s",
+                   opt_filename, g_module_error ());
+      goto leave;
+    }
+
+  /* check for a plugin preinit function */
+  if (g_module_symbol (library, "__xpp_preinit", (gpointer) &preinit_func)
+      && preinit_func != NULL
+      && (*preinit_func) (argc, argv) == FALSE)
+    {
+      retval = WRAPPER_EXIT_PREINIT;
+      goto leave;
+    }
+
+  /* initialize gtk */
+  gtk_init (&argc, &argv);
 
   /* try to connect to dbus */
   dbus_gconnection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
   if (G_UNLIKELY (dbus_gconnection == NULL))
-    goto error;
+    goto leave;
 
   /* get the dbus connection from the gconnection */
   dbus_connection = dbus_g_connection_get_connection (dbus_gconnection);
@@ -274,9 +283,9 @@ main (gint argc, gchar **argv)
   if (dbus_connection_add_filter (dbus_connection, dbus_gproxy_dbus_filter, NULL, NULL))
     dbus_bus_add_match (dbus_connection,
                         "type='signal',sender='" DBUS_SERVICE_DBUS
-			                  "',path='" DBUS_PATH_DBUS
-			                  "',interface='" DBUS_INTERFACE_DBUS
-			                  "',member='NameOwnerChanged'", NULL);
+                        "',path='" DBUS_PATH_DBUS
+                        "',interface='" DBUS_INTERFACE_DBUS
+                        "',member='NameOwnerChanged'", NULL);
 
   /* get the dbus proxy for the plugin interface */
   dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection,
@@ -289,7 +298,7 @@ main (gint argc, gchar **argv)
       g_set_error (&error, 0, 0,
                    "Failed to create the dbus proxy for interface \"%s\"",
                    PANEL_DBUS_PLUGIN_INTERFACE);
-      goto error;
+      goto leave;
     }
 
   /* setup signal for property changes */
@@ -299,42 +308,41 @@ main (gint argc, gchar **argv)
   dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT,
                            G_TYPE_INT, G_TYPE_VALUE, G_TYPE_INVALID);
 
-  /* create a new wrapper module */
-  module = wrapper_module_new (opt_filename);
+  /* create the type module */
+  module = wrapper_module_new (library);
 
   /* create the plugin provider */
   provider = wrapper_module_new_provider (module,
                                           gdk_screen_get_default (),
                                           wrapper_name, opt_unique_id,
-                                          opt_display_name,
-                                          opt_comment,
+                                          opt_display_name, opt_comment,
                                           opt_arguments);
+
   if (G_LIKELY (provider != NULL))
     {
-      /* create quark */
-      plug_quark = g_quark_from_static_string ("plug-quark");
-
-      /* create the wrapper plug (a gtk plug with transparency capabilities) */
+      /* create the wrapper plug */
       plug = wrapper_plug_new (opt_socket_id);
+      gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
+      gtk_widget_show (GTK_WIDGET (plug));
+
+      /* set plug data to provider */
+      plug_quark = g_quark_from_static_string ("plug-quark");
       g_object_set_qdata (G_OBJECT (provider), plug_quark, plug);
 
-      /* connect provider signals, so we can send them to the panel through dbus */
+      /* monitor provider signals */
       g_signal_connect (G_OBJECT (provider), "provider-signal",
-                        G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
+          G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
 
       /* connect dbus signal to set provider properties send from the panel */
       dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged",
-                                   G_CALLBACK (dbus_gproxy_property_changed),
-                                   g_object_ref (provider),
-                                   (GClosureNotify) g_object_unref);
+          G_CALLBACK (dbus_gproxy_property_changed), g_object_ref (provider),
+          (GClosureNotify) g_object_unref);
 
       /* show the plugin */
-      gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
-      gtk_widget_show (GTK_WIDGET (plug));
       gtk_widget_show (GTK_WIDGET (provider));
 
-      /* everything went fine */
-      succeed = TRUE;
+      /* everything when fine */
+      retval = WRAPPER_EXIT_SUCCESS;
 
       /* enter the main loop */
       gtk_main ();
@@ -348,27 +356,31 @@ main (gint argc, gchar **argv)
     }
   else
     {
-      /* set error */
-      g_set_error (&error, 0, 0, "Failed to construct the provider object");
+      retval = WRAPPER_EXIT_NO_PROVIDER;
     }
 
-error:
+leave:
   /* release the proxy */
   if (G_LIKELY (dbus_gproxy != NULL))
     g_object_unref (G_OBJECT (dbus_gproxy));
 
-  /* close the module */
+  /* close the type module */
   if (G_LIKELY (module != NULL))
     g_object_unref (G_OBJECT (module));
+
+  /* close plugin module */
+  if (G_LIKELY (library != NULL))
+    g_module_close (library);
 
   if (G_UNLIKELY (error != NULL))
     {
       /* print the critical error */
-      g_critical ("Wrapper %s-%d: %s.", wrapper_name, opt_unique_id, error->message);
+      g_critical ("Wrapper %s-%d: %s.", wrapper_name,
+                  opt_unique_id, error->message);
 
       /* cleanup */
       g_error_free (error);
     }
 
-  return succeed ? EXIT_SUCCESS : EXIT_FAILURE;
+  return retval;
 }

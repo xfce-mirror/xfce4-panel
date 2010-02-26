@@ -37,7 +37,7 @@ typedef struct _WrapperModule      WrapperModule;
 
 GType          wrapper_module_get_type     (void) G_GNUC_CONST;
 
-WrapperModule *wrapper_module_new          (const gchar *filename) G_GNUC_MALLOC;
+WrapperModule *wrapper_module_new          (GModule        *library) G_GNUC_MALLOC;
 
 GtkWidget     *wrapper_module_new_provider (WrapperModule  *module,
                                             GdkScreen      *screen,

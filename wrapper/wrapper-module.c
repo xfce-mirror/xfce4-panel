@@ -29,10 +29,10 @@
 
 
 
-static void     wrapper_module_dispose  (GObject     *object);
-static void     wrapper_module_finalize (GObject     *object);
-static gboolean wrapper_module_load     (GTypeModule *type_module);
-static void     wrapper_module_unload   (GTypeModule *type_module);
+static void     wrapper_module_dispose (GObject     *object);
+static gboolean wrapper_module_load    (GTypeModule *type_module);
+static void     wrapper_module_unload  (GTypeModule *type_module);
+
 
 
 
@@ -45,17 +45,8 @@ struct _WrapperModule
 {
   GTypeModule __parent__;
 
-  /* module filename */
-  gchar               *filename;
-
   /* module library */
-  GModule             *library;
-
-  /* construct function */
-  PluginConstructFunc  construct_func;
-
-  /* module type */
-  GType                type;
+  GModule *library;
 };
 
 
@@ -67,12 +58,11 @@ G_DEFINE_TYPE (WrapperModule, wrapper_module, G_TYPE_TYPE_MODULE)
 static void
 wrapper_module_class_init (WrapperModuleClass *klass)
 {
-  GObjectClass     *gobject_class;
+  GObjectClass *gobject_class;
   GTypeModuleClass *gtype_module_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->dispose = wrapper_module_dispose;
-  gobject_class->finalize = wrapper_module_finalize;
 
   gtype_module_class = G_TYPE_MODULE_CLASS (klass);
   gtype_module_class->load = wrapper_module_load;
@@ -84,10 +74,7 @@ wrapper_module_class_init (WrapperModuleClass *klass)
 static void
 wrapper_module_init (WrapperModule *module)
 {
-  module->filename = NULL;
-  module->library = NULL;
-  module->construct_func = NULL;
-  module->type = G_TYPE_NONE;
+  /* foo */
 }
 
 
@@ -100,58 +87,9 @@ wrapper_module_dispose (GObject *object)
 
 
 
-static void
-wrapper_module_finalize (GObject *object)
-{
-  WrapperModule *module = WRAPPER_MODULE (object);
-
-  /* cleanup */
-  g_free (module->filename);
-
-  (*G_OBJECT_CLASS (wrapper_module_parent_class)->finalize) (object);
-}
-
-
-
 static gboolean
 wrapper_module_load (GTypeModule *type_module)
 {
-  WrapperModule        *module = WRAPPER_MODULE (type_module);
-  PluginInitializeFunc  init_func;
-
-  /* open the module */
-  module->library = g_module_open (module->filename, G_MODULE_BIND_LOCAL);
-  if (G_UNLIKELY (module->library == NULL))
-    {
-      /* print error and leave */
-      g_critical ("Failed to load module \"%s\": %s.", module->filename,
-                  g_module_error ());
-      return FALSE;
-    }
-
-  /* try to link the contruct function */
-  if (g_module_symbol (module->library, "__xpp_initialize",
-                       (gpointer) &init_func))
-    {
-      /* initialize the plugin */
-      module->type = init_func (type_module, NULL);
-    }
-  else if (!g_module_symbol (module->library, "__xpp_construct",
-                             (gpointer) &module->construct_func))
-    {
-      /* print critical warning */
-      g_critical ("Module \"%s\" lacks a plugin register function.",
-                  module->filename);
-
-      /* unload */
-      wrapper_module_unload (type_module);
-
-      return FALSE;
-    }
-
-  /* no need to unload modules in the wrapper, can only cause problems */
-  g_module_make_resident (module->library);
-
   return TRUE;
 }
 
@@ -160,36 +98,18 @@ wrapper_module_load (GTypeModule *type_module)
 static void
 wrapper_module_unload (GTypeModule *type_module)
 {
-  WrapperModule *module = WRAPPER_MODULE (type_module);
-
-  /* close the module */
-  g_module_close (module->library);
-
-  /* reset plugin state */
-  module->library = NULL;
-  module->construct_func = NULL;
-  module->type = G_TYPE_NONE;
-}
-
-
-
-static void
-wrapper_module_plugin_destroyed (gpointer  user_data,
-                                 GObject  *where_the_plugin_was)
-{
-  /* unused the module */
-  g_type_module_unuse (G_TYPE_MODULE (user_data));
+  /* foo */
 }
 
 
 
 WrapperModule *
-wrapper_module_new (const gchar *filename)
+wrapper_module_new (GModule *library)
 {
   WrapperModule *module;
 
   module = g_object_new (WRAPPER_TYPE_MODULE, NULL);
-  module->filename = g_strdup (filename);
+  module->library = library;
 
   return module;
 }
@@ -205,44 +125,43 @@ wrapper_module_new_provider (WrapperModule  *module,
                              const gchar    *comment,
                              gchar         **arguments)
 {
-  GtkWidget *plugin = NULL;
+  GtkWidget           *plugin = NULL;
+  PluginConstructFunc  construct_func;
+  PluginInitFunc       init_func;
+  GType                type;
 
-  /* increase the module use count */
-  if (g_type_module_use (G_TYPE_MODULE (module)))
+  panel_return_val_if_fail (WRAPPER_IS_MODULE (module), NULL);
+  panel_return_val_if_fail (module->library != NULL, NULL);
+
+  g_type_module_use (G_TYPE_MODULE (module));
+
+  /* try to link the contruct or init function */
+  if (g_module_symbol (module->library, "__xpp_init",
+      (gpointer) &init_func) && init_func != NULL)
     {
-      if (module->type != G_TYPE_NONE)
-        {
-          /* create the object */
-          plugin = g_object_new (module->type,
-                                 "name", name,
-                                 "unique-id", unique_id,
-                                 "display-name", display_name,
-                                 "comment", comment,
-                                 "arguments", arguments, NULL);
-        }
-      else if (module->construct_func != NULL)
-        {
-          /* create a new panel plugin */
-          plugin = (*module->construct_func) (name,
-                                              unique_id,
-                                              display_name,
-                                              comment,
-                                              arguments,
-                                              screen);
-        }
+      /* initialize the plugin */
+      type = (init_func) (G_TYPE_MODULE (module), NULL);
 
-      if (G_LIKELY (plugin != NULL))
-        {
-          /* weak ref the plugin to unload the module */
-          g_object_weak_ref (G_OBJECT (plugin),
-                             wrapper_module_plugin_destroyed,
-                             module);
-        }
-      else
-        {
-          /* unuse the module */
-          g_type_module_unuse (G_TYPE_MODULE (module));
-        }
+      /* create the object */
+      plugin = g_object_new (type,
+                             "name", name,
+                             "unique-id", unique_id,
+                             "display-name", display_name,
+                             "comment", comment,
+                             "arguments", arguments, NULL);
+    }
+  else if (g_module_symbol (module->library, "__xpp_construct",
+           (gpointer) &construct_func) && construct_func != NULL)
+    {
+      /* create a new panel plugin */
+      plugin = (*construct_func) (name, unique_id,
+                                  display_name, comment,
+                                  arguments, screen);
+    }
+  else
+    {
+      /* print critical warning */
+      g_critical ("Plugin \"%s\" lacks a plugin register function.", name);
     }
 
   return plugin;
