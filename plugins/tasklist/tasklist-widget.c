@@ -140,11 +140,6 @@ struct _XfceTasklistChild
   guint              unique_id;
 };
 
-static const GtkTargetEntry drop_targets[] =
-{
-  { (gchar *) "xfce-panel/tasklist-task", GTK_TARGET_SAME_WIDGET, 0 }
-};
-
 
 
 static gint locked = 0;
@@ -159,7 +154,6 @@ static void xfce_tasklist_size_allocate (GtkWidget *widget, GtkAllocation *alloc
 static void xfce_tasklist_style_set (GtkWidget *widget, GtkStyle *previous_style);
 static void xfce_tasklist_realize (GtkWidget *widget);
 static void xfce_tasklist_unrealize (GtkWidget *widget);
-static gboolean xfce_tasklist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint drag_time);
 static void xfce_tasklist_remove (GtkContainer *container, GtkWidget *widget);
 static void xfce_tasklist_forall (GtkContainer *container, gboolean include_internals, GtkCallback callback, gpointer callback_data);
 static GType xfce_tasklist_child_type (GtkContainer *container);
@@ -182,7 +176,7 @@ static void xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist, gboolean 
 
 
 
-G_DEFINE_TYPE (XfceTasklist, xfce_tasklist, GTK_TYPE_CONTAINER);
+G_DEFINE_TYPE (XfceTasklist, xfce_tasklist, GTK_TYPE_CONTAINER)
 
 
 
@@ -204,7 +198,6 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   gtkwidget_class->style_set = xfce_tasklist_style_set;
   gtkwidget_class->realize = xfce_tasklist_realize;
   gtkwidget_class->unrealize = xfce_tasklist_unrealize;
-  gtkwidget_class->drag_motion = xfce_tasklist_drag_motion;
 
   gtkcontainer_class = GTK_CONTAINER_CLASS (klass);
   gtkcontainer_class->add = NULL;
@@ -321,10 +314,6 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
   tasklist->ellipsize_mode = PANGO_ELLIPSIZE_END;
   tasklist->grouping = XFCE_TASKLIST_GROUPING_DEFAULT;
-
-  /* set the itembar drag destination targets */
-  gtk_drag_dest_set (GTK_WIDGET (tasklist), 0, drop_targets,
-                     G_N_ELEMENTS (drop_targets), GDK_ACTION_MOVE);
 }
 
 
@@ -666,6 +655,7 @@ xfce_tasklist_style_set (GtkWidget *widget,
 }
 
 
+
 static void
 xfce_tasklist_realize (GtkWidget *widget)
 {
@@ -690,102 +680,6 @@ xfce_tasklist_unrealize (GtkWidget *widget)
 
   /* let gtk unrealize the widget */
   (*GTK_WIDGET_CLASS (xfce_tasklist_parent_class)->unrealize) (widget);
-}
-
-
-
-static gboolean
-xfce_tasklist_drag_motion (GtkWidget      *widget,
-                           GdkDragContext *context,
-                           gint            x,
-                           gint            y,
-                           guint           drag_time)
-{
-  XfceTasklist      *tasklist = XFCE_TASKLIST (widget);
-  XfceTasklistChild *child;
-  GtkWidget         *button;
-  GtkAllocation     *alloc;
-  GSList            *li, *source = NULL, *sibling = NULL;
-
-  /* leave when this is an unknow target (return false because it's not a drop zone) */
-  if (gtk_drag_dest_find_target (widget, context, NULL) == GDK_NONE)
-    return FALSE;
-
-  /* get de button we're dragging */
-  button = gtk_drag_get_source_widget (context);
-
-  /* add the widget coordinates to the drag */
-  x += widget->allocation.x;
-  y += widget->allocation.y;
-
-  /* get the button allocation */
-  alloc = &button->allocation;
-
-  /* check if we're not dragging inside this button (and half the size around it) */
-  if (alloc->x - alloc->width / 2 >= x || alloc->x + alloc->width * 1.5 <= x
-      || alloc->y - alloc->height / 2 >= y || alloc->y + alloc->height * 1.5 <= y)
-    {
-      /* walk the children in the box */
-      for (li = tasklist->children; li != NULL; li = li->next)
-        {
-          child = li->data;
-
-          if (child->button == button)
-            {
-              /* we've found the drag source */
-              source = li;
-
-              /* break if we already found a sibling */
-              if (sibling != NULL)
-                break;
-            }
-          else if (sibling == NULL)
-            {
-              /* get the allocation of the button in the list */
-              alloc = &child->button->allocation;
-
-              /* check if we hover this button */
-              if (x >= alloc->x && x <= alloc->x + alloc->width
-                  && y >= alloc->y && y <= alloc->y + alloc->height)
-                {
-                  if (source == NULL)
-                    {
-                      /* there is no source yet, so insert before this child */
-                      sibling = li;
-                    }
-                  else
-                    {
-                      /* there is a source, so insert after this child */
-                      sibling = li->next;
-
-                      break;
-                    }
-                }
-            }
-        }
-
-      if (G_LIKELY (source != NULL))
-        {
-          /* get the child data */
-          child = source->data;
-
-          /* remove the link in the list */
-          tasklist->children = g_slist_delete_link (tasklist->children, source);
-
-          /* insert in the new position */
-          tasklist->children = g_slist_insert_before (tasklist->children,
-                                                      sibling, child);
-
-          /* update the tasklist */
-          gtk_widget_queue_resize (widget);
-        }
-    }
-
-  /* update the drag status so we keep receiving the drag motions */
-  gdk_drag_status (context, 0, drag_time);
-
-  /* this is a valid drop zone */
-  return TRUE;
 }
 
 
@@ -1521,10 +1415,6 @@ xfce_tasklist_button_new (XfceTasklistChild *child)
   /* don't show the icon if we're in iconbox style */
   if (child->tasklist->show_labels)
     gtk_widget_show (child->label);
-
-  /* set the button's drag source */
-  gtk_drag_source_set (child->button, GDK_BUTTON1_MASK, drop_targets,
-                       G_N_ELEMENTS (drop_targets), GDK_ACTION_MOVE);
 
   /* monitor window changes */
   g_signal_connect (G_OBJECT (window), "icon-changed",
