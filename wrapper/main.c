@@ -50,28 +50,8 @@
 
 
 
-static gchar     *opt_display_name = NULL;
-static gint       opt_unique_id = -1;
-static gchar     *opt_comment = NULL;
-static gchar     *opt_filename = NULL;
-static gint       opt_socket_id = 0;
-static gchar    **opt_arguments = NULL;
-static GQuark     plug_quark = 0;
-static gboolean   gproxy_destroyed = FALSE;
-
-
-
-static GOptionEntry option_entries[] =
-{
-  { "name", 'n', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &wrapper_name, NULL, NULL },
-  { "display-name", 'd', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_display_name, NULL, NULL },
-  { "comment", 'c', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_comment, NULL, NULL },
-  { "unique-id", 'i', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_unique_id, NULL, NULL },
-  { "filename", 'f', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_filename, NULL, NULL },
-  { "socket-id", 's', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL },
-  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
-  { NULL }
-};
+static GQuark   plug_quark = 0;
+static gboolean gproxy_destroyed = FALSE;
 
 
 
@@ -164,7 +144,6 @@ wrapper_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
                                 DBusGProxy                    *dbus_gproxy)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-  panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
   /* send the provider signal to the panel */
   wrapper_dbus_provider_signal_async (dbus_gproxy, provider_signal,
@@ -175,11 +154,8 @@ wrapper_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
 
 
 static void
-wrapper_gproxy_destroyed (DBusGProxy  *dbus_gproxy,
-                          GError     **error)
+wrapper_gproxy_destroyed (DBusGProxy *dbus_gproxy)
 {
-  panel_return_if_fail (error == NULL || *error == NULL);
-
   /* we lost communication with the panel, silently close the wrapper */
   gproxy_destroyed = TRUE;
 
@@ -191,23 +167,27 @@ wrapper_gproxy_destroyed (DBusGProxy  *dbus_gproxy,
 gint
 main (gint argc, gchar **argv)
 {
-  GOptionContext         *context;
-  GOptionGroup           *option_group;
-  GError                 *error = NULL;
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
-  gchar                   process_name[16];
+  gchar                    process_name[16];
 #endif
-  GModule                *library = NULL;
-  gint                    retval = WRAPPER_EXIT_FAILURE;
-  XfcePanelPluginPreInit  preinit_func;
-  gboolean                result;
-  DBusGConnection        *dbus_gconnection;
-  DBusGProxy             *dbus_gproxy = NULL;
-  WrapperModule          *module = NULL;
-  WrapperPlug            *plug;
-  GtkWidget              *provider;
-  gchar                  *path;
-  guint                   gproxy_destroy_id = 0;
+  GModule                 *library = NULL;
+  gint                     retval = WRAPPER_EXIT_FAILURE;
+  XfcePanelPluginPreInit   preinit_func;
+  DBusGConnection         *dbus_gconnection;
+  DBusGProxy              *dbus_gproxy = NULL;
+  WrapperModule           *module = NULL;
+  WrapperPlug             *plug;
+  GtkWidget               *provider;
+  gchar                   *path;
+  guint                    gproxy_destroy_id = 0;
+  GError                  *error = NULL;
+  const gchar             *filename;
+  gint                     unique_id;
+  GdkNativeWindow          socket_id;
+  const gchar             *name;
+  const gchar             *display_name;
+  const gchar             *comment;
+  gchar                  **arguments;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -217,39 +197,36 @@ main (gint argc, gchar **argv)
   g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
 #endif
 
-  /* parse the wrapper options */
-  context = g_option_context_new ("[ARGUMENTS...]");
-  g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
-  option_group = gtk_get_option_group (FALSE);
-  g_option_context_add_group (context, option_group);
-  result = g_option_context_parse (context, &argc, &argv, &error);
-  g_option_context_free (context);
-  if (G_UNLIKELY (result == FALSE))
-    goto leave;
-
-  /* check if we have all required arguments */
-  if (opt_socket_id == 0 || wrapper_name == NULL
-      || opt_unique_id == -1 || opt_display_name == NULL
-      || opt_filename == NULL)
+  /* check if we have all the reuiqred arguments */
+  if (G_UNLIKELY (argc < ARGV_ARGUMENTS))
     {
-      g_set_error (&error, 0, 0, "One of the required arguments is missing");
-      goto leave;
+      g_critical ("Not enough arguments are passed to the wrapper");
+      return WRAPPER_EXIT_FAILURE;
     }
+
+  /* put all arguments in understandable strings */
+  filename = argv[ARGV_FILENAME];
+  unique_id = strtol (argv[ARGV_UNIQUE_ID], NULL, 0);
+  socket_id = strtol (argv[ARGV_SOCKET_ID], NULL, 0);
+  name = argv[ARGV_NAME];
+  display_name = argv[ARGV_DISPLAY_NAME];
+  comment = argv[ARGV_COMMENT];
+  arguments = argv + ARGV_ARGUMENTS;
 
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
   /* change the process name to something that makes sence */
   g_snprintf (process_name, sizeof (process_name), "panel-%d-%s",
-              opt_unique_id, wrapper_name);
+              unique_id, name);
   if (prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0) == -1)
     g_warning ("Failed to change the process name to \"%s\".", process_name);
 #endif
 
   /* open the plugin module */
-  library = g_module_open (opt_filename, G_MODULE_BIND_LOCAL);
+  library = g_module_open (filename, G_MODULE_BIND_LOCAL);
   if (G_UNLIKELY (library == NULL))
     {
       g_set_error (&error, 0, 0, "Failed to open plugin module \"%s\": %s",
-                   opt_filename, g_module_error ());
+                   filename, g_module_error ());
       goto leave;
     }
 
@@ -269,7 +246,7 @@ main (gint argc, gchar **argv)
   if (G_UNLIKELY (dbus_gconnection == NULL))
     goto leave;
 
-  path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, opt_unique_id);
+  path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, unique_id);
   dbus_gproxy = dbus_g_proxy_new_for_name_owner (dbus_gconnection,
                                                  PANEL_DBUS_NAME,
                                                  path,
@@ -281,7 +258,7 @@ main (gint argc, gchar **argv)
 
   /* quit when the proxy is destroyed (panel segfault for example) */
   gproxy_destroy_id = g_signal_connect (G_OBJECT (dbus_gproxy), "destroy",
-      G_CALLBACK (wrapper_gproxy_destroyed), &error);
+      G_CALLBACK (wrapper_gproxy_destroyed), NULL);
 
   /* create the type module */
   module = wrapper_module_new (library);
@@ -289,14 +266,14 @@ main (gint argc, gchar **argv)
   /* create the plugin provider */
   provider = wrapper_module_new_provider (module,
                                           gdk_screen_get_default (),
-                                          wrapper_name, opt_unique_id,
-                                          opt_display_name, opt_comment,
-                                          opt_arguments);
+                                          name, unique_id,
+                                          display_name, comment,
+                                          arguments);
 
   if (G_LIKELY (provider != NULL))
     {
       /* create the wrapper plug */
-      plug = wrapper_plug_new (opt_socket_id);
+      plug = wrapper_plug_new (socket_id);
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
       g_object_add_weak_pointer (G_OBJECT (plug), (gpointer *) &plug);
       gtk_widget_show (GTK_WIDGET (plug));
@@ -359,8 +336,8 @@ leave:
   if (G_UNLIKELY (error != NULL))
     {
       /* print the critical error */
-      g_critical ("Wrapper %s-%d: %s.", wrapper_name,
-                  opt_unique_id, error->message);
+      g_critical ("Wrapper %s-%d: %s.", name,
+                  unique_id, error->message);
 
       /* cleanup */
       g_error_free (error);

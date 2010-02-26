@@ -396,7 +396,8 @@ panel_plugin_external_realize (GtkWidget *widget)
   GError               *error = NULL;
   gboolean              succeed;
   gchar                *socket_id, *unique_id;
-  gint                  i, argc = 14;
+  guint                 i;
+  guint                 argc = ARGV_ARGUMENTS + 1;
   GdkScreen            *screen;
   GPid                  pid;
 
@@ -413,24 +414,18 @@ panel_plugin_external_realize (GtkWidget *widget)
 
   /* setup the basic argv */
   argv = g_new0 (gchar *, argc);
-  argv[0]  = (gchar *) WRAPPER_BIN;
-  argv[1]  = (gchar *) "-n";
-  argv[2]  = (gchar *) panel_module_get_name (external->module);
-  argv[3]  = (gchar *) "-i";
-  argv[4]  = (gchar *) unique_id;
-  argv[5]  = (gchar *) "-d";
-  argv[6]  = (gchar *) panel_module_get_display_name (external->module);
-  argv[7]  = (gchar *) "-c";
-  argv[8]  = (gchar *) panel_module_get_comment (external->module);
-  argv[9]  = (gchar *) "-f";
-  argv[10] = (gchar *) panel_module_get_filename (external->module);
-  argv[11] = (gchar *) "-s";
-  argv[12] = (gchar *) socket_id;
+  argv[ARGV_0] = (gchar *) WRAPPER_BIN;
+  argv[ARGV_FILENAME] = (gchar *) panel_module_get_filename (external->module);
+  argv[ARGV_UNIQUE_ID] = (gchar *) unique_id;
+  argv[ARGV_SOCKET_ID] = (gchar *) socket_id;
+  argv[ARGV_NAME] = (gchar *) panel_module_get_name (external->module);
+  argv[ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
+  argv[ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
 
   /* append the arguments */
   if (G_UNLIKELY (external->arguments != NULL))
     for (i = 0; external->arguments[i] != NULL; i++)
-      argv[i + 13] = external->arguments[i];
+      argv[i + ARGV_ARGUMENTS] = external->arguments[i];
 
   /* get the widget screen */
   screen = gtk_widget_get_screen (widget);
@@ -454,7 +449,7 @@ panel_plugin_external_realize (GtkWidget *widget)
       g_error_free (error);
     }
 
-  /* cleanup */
+  g_free (argv);
   g_free (socket_id);
   g_free (unique_id);
 }

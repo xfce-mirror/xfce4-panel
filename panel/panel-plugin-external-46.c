@@ -363,7 +363,7 @@ panel_plugin_external_46_realize (GtkWidget *widget)
       g_error_free (error);
     }
 
-  /* cleanup */
+  g_free (argv);
   g_free (socket_id);
   g_free (unique_id);
 }
