@@ -29,16 +29,18 @@
 #include <exo/exo.h>
 #include <libwnck/libwnck.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-button.h>
+#include <common/panel-private.h>
 
 #include "tasklist-widget.h"
 
 
-#define MIN_BUTTON_SIZE                      (25)
-#define DEFAULT_BUTTON_LENGTH                (200)
-#define WIREFRAME_SIZE                       (5)
-#define xfce_taskbar_lock()                  G_BEGIN_DECLS { locked++; } G_END_DECLS;
-#define xfce_taskbar_unlock()                G_BEGIN_DECLS { if (locked > 0) locked--; else g_assert_not_reached (); } G_END_DECLS;
-#define xfce_taskbar_is_locked()             (locked > 0)
+#define MIN_BUTTON_SIZE          (25)
+#define DEFAULT_BUTTON_LENGTH    (200)
+#define WIREFRAME_SIZE           (5)
+#define xfce_taskbar_lock()      G_BEGIN_DECLS { locked++; } G_END_DECLS;
+#define xfce_taskbar_unlock()    G_BEGIN_DECLS { if (locked > 0) locked--; else g_assert_not_reached (); } G_END_DECLS;
+#define xfce_taskbar_is_locked() (locked > 0)
 
 
 
@@ -1222,16 +1224,16 @@ tasklist_button_state_changed (WnckWindow        *window,
                                XfceTasklistChild *child)
 {
   /* update the button name */
-  if ((changed_state & (WNCK_WINDOW_STATE_SHADED | WNCK_WINDOW_STATE_MINIMIZED)) != 0
+  if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_SHADED | WNCK_WINDOW_STATE_MINIMIZED)
       && !child->tasklist->only_minimized)
     tasklist_button_name_changed (window, child);
 
   /* update the button icon if needed */
-  if ((changed_state & WNCK_WINDOW_STATE_MINIMIZED) != 0)
+  if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_MINIMIZED))
     {
       if (G_UNLIKELY (child->tasklist->only_minimized))
         {
-          if ((new_state & WNCK_WINDOW_STATE_MINIMIZED) != 0)
+          if (PANEL_HAS_FLAG (new_state, WNCK_WINDOW_STATE_MINIMIZED))
             gtk_widget_show (child->button);
           else
             gtk_widget_hide (child->button);
@@ -1242,6 +1244,12 @@ tasklist_button_state_changed (WnckWindow        *window,
           tasklist_button_icon_changed (window, child);
         }
     }
+
+  /* update the blinking state */
+  if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_DEMANDS_ATTENTION)
+      || PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_URGENT))
+    xfce_panel_button_set_blinking (XFCE_PANEL_BUTTON (child->button),
+        wnck_window_or_transient_needs_attention (child->window));
 }
 
 
@@ -1392,7 +1400,7 @@ tasklist_button_new (XfceTasklistChild *child)
   WnckWindow *window = child->window;
 
   /* create the application button */
-  child->button = gtk_toggle_button_new ();
+  child->button = xfce_panel_button_new ();
   gtk_button_set_relief (GTK_BUTTON (child->button),
                          child->tasklist->button_relief);
   g_signal_connect (G_OBJECT (child->button), "toggled",
