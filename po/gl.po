@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-18 18:00+0100\n"
-"PO-Revision-Date: 2010-02-18 23:11+0100\n"
+"PO-Revision-Date: 2010-02-21 19:12+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -177,7 +177,7 @@ msgstr "Produciuse un erro ao iniciar o aplicativo de migración"
 
 #: ../panel/panel-dbus-client.c:227
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Especificouse unha sintaxe de evento de engadido incorrecta. Use ENGADIDO-DO-ENGADIDO:NOME[:TIPO:VALOR]."
 
 #: ../panel/panel-dbus-client.c:260
 #, c-format
@@ -230,7 +230,7 @@ msgstr "O engadido \"%s\" deixou inesperadamente o panel, desexa reinicialo?"
 #: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr ""
+msgstr "O engadido reiniciouse máis dunha vez nos últimos %d segundos. Se preme en Executar o panel intentará reiniciar o engadido e se non o consegue este eliminarase permanentemente do panel."
 
 #: ../panel/panel-item-dialog.c:173
 msgid "Add New Items"
@@ -307,7 +307,7 @@ msgstr "Fondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "C_ompositing"
-msgstr ""
+msgstr "C_omposición"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "D_isplay"
@@ -343,15 +343,13 @@ msgstr "Medidas"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 #: ../plugins/launcher/launcher-dialog.glade.h:13
-#, fuzzy
 msgid "Move currently selected item down by one row"
-msgstr "Move-la acción seleccionada unha ringleira cara a baixo."
+msgstr "Mover o elemento seleccionado unha posición cara a abaixo"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 #: ../plugins/launcher/launcher-dialog.glade.h:14
-#, fuzzy
 msgid "Move currently selected item up by one row"
-msgstr "Move-la acción seleccionada unha ringleira cara a riba."
+msgstr "Mover o elemento seleccionado unha posición cara a arriba"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "O_utput:"
@@ -371,11 +369,11 @@ msgstr "Seleccione esta opción para estender o panel por varios monitores."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
+msgstr "Seleccione esta opción para ocultar as asas do panel e bloquear a súa posición."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Seleccione esta opción para ocultar o panel cando o punteiro non está enriba del. Isto só funciona cando o panel está pegado a unha beira da pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Show about information of the currently selected item"
@@ -411,11 +409,11 @@ msgstr "_Alfa:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "_Enter:"
-msgstr ""
+msgstr "_Entrar:"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "_Leave:"
-msgstr ""
+msgstr "_Saír:"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Lock panel"
@@ -435,15 +433,15 @@ msgstr "Botón de acción"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Button Actions"
-msgstr ""
+msgstr "Accións de botón"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "_First button:"
-msgstr ""
+msgstr "_Primeiro botón:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Second button:"
-msgstr ""
+msgstr "_Segundo botón:"
 
 #: ../plugins/actions/actions.c:108
 msgid "Disabled"
@@ -818,7 +816,7 @@ msgstr "Seman %V"
 
 #: ../plugins/clock/clock.c:379
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Produciuse un erro ao executar o comando do reloxo"
 
 #: ../plugins/clock/clock.c:653
 msgid "Custom Format"
@@ -876,13 +874,13 @@ msgstr "Mostrar unha árbore de directorios nun menú"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Introduza unha lista de patróns que se usarán para determinar que ficheiros son visibles nun directorio. Se especifica máis dun patrón, os elementos da lista deberán estar separados por punto e coma (p.ex. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr ""
+msgstr "Filtrado"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 msgid "Select A Directory"
@@ -897,7 +895,6 @@ msgid "_Base Directory:"
 msgstr "Directorio _base:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-#, fuzzy
 msgid "_File Pattern:"
 msgstr "Patrón de _ficheiro:"
 
@@ -1070,7 +1067,7 @@ msgstr "Transparente"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
-msgstr ""
+msgstr "_Expandir"
 
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
@@ -1121,7 +1118,7 @@ msgstr "Produciuse un erro ao adquirir a selección do xestor para a pantalla %d
 #. create fake error and show it
 #: ../plugins/systray/systray.c:551
 msgid "Most likely another widget took over the function of a notification area. This plugin will close."
-msgstr ""
+msgstr "O máis probable é que outro widget teña o control da función da zona de notificación. Este engadido pecharase."
 
 #: ../plugins/systray/systray.c:554
 msgid "The notification area lost selection"
@@ -1148,9 +1145,8 @@ msgid "Group title and timestamp"
 msgstr "Agrupar o título e a marca de tempo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
-#, fuzzy
 msgid "Group title and window title"
-msgstr "Agrupar o título e a marca de tempo"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
@@ -1169,9 +1165,8 @@ msgid "Show _handle"
 msgstr "Mostrar a _asa"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#, fuzzy
 msgid "Show button _labels"
-msgstr "Etiquetas dos botóns da barra de ferramentas:"
+msgstr "Mostrar as e_tiquetas dos botóns"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
@@ -1183,9 +1178,8 @@ msgid "Show windows from _all workspaces"
 msgstr "Mostrar as _fiestras de todos os espazos de traballo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#, fuzzy
 msgid "Sorting _order:"
-msgstr "A orde de clasificación dos elementos mostrados"
+msgstr "_Orde de clasificación:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
