@@ -20,7 +20,6 @@
 #endif
 
 #include <gdk/gdk.h>
-#include <panel/panel-private.c>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -29,10 +28,27 @@
 
 
 
-static void wrapper_plug_class_init (WrapperPlugClass *klass);
-static void wrapper_plug_init (WrapperPlug *plug);
-static void wrapper_plug_finalize (GObject *object);
-static gboolean wrapper_plug_client_event (GtkWidget *widget, GdkEventClient *event);
+static void     wrapper_plug_class_init                (WrapperPlugClass        *klass);
+static void     wrapper_plug_init                      (WrapperPlug             *plug);
+static gboolean wrapper_plug_expose_event              (GtkWidget               *widget,
+                                                        GdkEventExpose          *event);
+static gboolean wrapper_plug_client_event              (GtkWidget               *widget,
+                                                        GdkEventClient          *event);
+static void     wrapper_plug_set_colormap              (WrapperPlug             *plug);
+static void     wrapper_plug_send_message              (WrapperPlug             *plug,
+                                                        XfcePanelPluginMessage   message,
+                                                        glong                    value);
+static void     wrapper_plug_message_expand_changed    (XfcePanelPluginProvider *provider,
+                                                        gboolean                 expand,
+                                                        WrapperPlug             *plug);
+static void     wrapper_plug_message_move_item         (XfcePanelPluginProvider *provider,
+                                                        WrapperPlug             *plug);
+static void     wrapper_plug_message_add_new_items     (XfcePanelPluginProvider *provider,
+                                                        WrapperPlug             *plug);
+static void     wrapper_plug_message_panel_preferences (XfcePanelPluginProvider *provider,
+                                                        WrapperPlug             *plug);
+static void     wrapper_plug_message_remove            (XfcePanelPluginProvider *provider,
+                                                        WrapperPlug             *plug);
 
 
 
@@ -59,6 +75,9 @@ struct _WrapperPlug
 
   /* if this plugin is on an active panel */
   guint                    is_active_panel : 1;
+
+  /* whether the wrapper has a rgba colormap */
+  guint                    is_composited : 1;
 };
 
 
@@ -67,101 +86,10 @@ G_DEFINE_TYPE (WrapperPlug, wrapper_plug, GTK_TYPE_PLUG);
 
 
 
-static gboolean
-wrapper_plug_expose_event (GtkWidget      *widget,
-                           GdkEventExpose *event)
-{
-  WrapperPlug    *plug = WRAPPER_PLUG (widget);
-  cairo_t        *cr;
-  GdkColor       *color;
-  GtkStateType    state = GTK_STATE_NORMAL;
-  GtkOrientation  orientation;
-  GtkAllocation  *alloc = &(widget->allocation);
-  gdouble         alpha = plug->background_alpha;
-
-  if (GTK_WIDGET_DRAWABLE (widget))
-    {
-      /* create the cairo context */
-      cr = gdk_cairo_create (widget->window);
-
-      if (alpha < 1.00 || plug->is_active_panel)
-        {
-          /* change the state is this plugin is on an active panel */
-          if (G_UNLIKELY (plug->is_active_panel))
-            state = GTK_STATE_SELECTED;
-
-          /* get the background gdk color */
-          color = &(widget->style->bg[state]);
-
-          /* set the cairo source color */
-          _set_source_rgba (cr, color, alpha);
-
-          /* create retangle */
-          cairo_rectangle (cr, event->area.x, event->area.y,
-                           event->area.width, event->area.height);
-
-          /* draw on source */
-          cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-
-          /* paint rectangle */
-          cairo_fill (cr);
-        }
-
-      /* 1px line */
-      cairo_set_line_width (cr, 2.0);
-
-      /* get the plugin orientation */
-      orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plug->provider));
-
-      /* dark color */
-      color = &(widget->style->light[state]);
-      _set_source_rgba (cr, color, alpha);
-
-      /* move the cursor to the top left corner */
-      cairo_move_to (cr, alloc->x, alloc->y);
-
-      /* draw the light line */
-      if (orientation == GTK_ORIENTATION_HORIZONTAL)
-        cairo_rel_line_to (cr, alloc->width, 0);
-      else
-        cairo_rel_line_to (cr, 0, alloc->height);
-
-      /* stroke the lines */
-      cairo_stroke (cr);
-
-      /* light color */
-      color = &(widget->style->dark[state]);
-      _set_source_rgba (cr, color, alpha);
-
-      /* set start position to bottom right */
-      cairo_move_to (cr, alloc->x + alloc->width, alloc->y + alloc->height);
-
-      /* draw the dark line */
-      if (orientation == GTK_ORIENTATION_HORIZONTAL)
-        cairo_rel_line_to (cr, -alloc->width, 0);
-      else
-        cairo_rel_line_to (cr, 0, -alloc->height);
-
-      /* stroke the lines */
-      cairo_stroke (cr);
-
-      /* destroy cairo context */
-      cairo_destroy (cr);
-    }
-
-    return GTK_WIDGET_CLASS(wrapper_plug_parent_class)->expose_event(widget, event);
-}
-
-
-
 static void
 wrapper_plug_class_init (WrapperPlugClass *klass)
 {
-  GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
-
-  gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize = wrapper_plug_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->client_event = wrapper_plug_client_event;
@@ -173,40 +101,65 @@ wrapper_plug_class_init (WrapperPlugClass *klass)
 static void
 wrapper_plug_init (WrapperPlug *plug)
 {
+  /* init vars */
   plug->socket_id = 0;
   plug->atom = panel_atom_intern ("XFCE_PANEL_PLUGIN");
   plug->background_alpha = 1.00;
   plug->is_active_panel = FALSE;
-
-  GdkScreen   *screen;
-  GdkColormap *colormap;
-  GtkWidget   *widget = GTK_WIDGET (plug);
-
-  /* try to set the rgba colormap */
-  screen = gtk_window_get_screen (GTK_WINDOW (plug));
-  if (gdk_screen_is_composited (screen))
-    {
-      /* try to get the rgba colormap */
-      colormap = gdk_screen_get_rgba_colormap (screen);
-
-      if (G_LIKELY (colormap))
-        {
-          /* set the colormap */
-          gtk_widget_set_colormap (widget, colormap);
-        }
-    }
+  plug->is_composited = FALSE;
 
   gtk_widget_set_app_paintable (GTK_WIDGET (plug), TRUE);
+
+  /* connect signal to monitor the compositor changes */
+  g_signal_connect (G_OBJECT (plug), "composited-changed", G_CALLBACK (wrapper_plug_set_colormap), NULL);
+
+  /* set the colormap */
+  wrapper_plug_set_colormap (plug);
 }
 
 
 
-static void
-wrapper_plug_finalize (GObject *object)
+static gboolean
+wrapper_plug_expose_event (GtkWidget      *widget,
+                           GdkEventExpose *event)
 {
-  //WrapperPlug *plug = WRAPPER_PLUG (object);
+  WrapperPlug    *plug = WRAPPER_PLUG (widget);
+  cairo_t        *cr;
+  GdkColor       *color;
+  GtkStateType    state = GTK_STATE_NORMAL;
+  gdouble         alpha = plug->is_composited ? plug->background_alpha : 1.00;
 
-  (*G_OBJECT_CLASS (wrapper_plug_parent_class)->finalize) (object);
+  if (GTK_WIDGET_DRAWABLE (widget) &&
+      (alpha < 1.00 || plug->is_active_panel))
+    {
+      /* create the cairo context */
+      cr = gdk_cairo_create (widget->window);
+
+      /* change the state is this plugin is on an active panel */
+      if (G_UNLIKELY (plug->is_active_panel))
+        state = GTK_STATE_SELECTED;
+
+      /* get the background gdk color */
+      color = &(widget->style->bg[state]);
+
+      /* set the cairo source color */
+      xfce_panel_cairo_set_source_rgba (cr, color, alpha);
+
+      /* create retangle */
+      cairo_rectangle (cr, event->area.x, event->area.y,
+                       event->area.width, event->area.height);
+
+      /* draw on source */
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+      /* paint rectangle */
+      cairo_fill (cr);
+
+      /* destroy cairo context */
+      cairo_destroy (cr);
+    }
+
+    return GTK_WIDGET_CLASS(wrapper_plug_parent_class)->expose_event(widget, event);
 }
 
 
@@ -291,6 +244,68 @@ wrapper_plug_client_event (GtkWidget      *widget,
     return (*GTK_WIDGET_CLASS (wrapper_plug_parent_class)->client_event) (widget, event);
   else
     return FALSE;
+}
+
+
+
+static void
+wrapper_plug_set_colormap (WrapperPlug *plug)
+{
+  GdkColormap *colormap = NULL;
+  GdkScreen   *screen;
+  gboolean     restore;
+  GtkWidget   *widget = GTK_WIDGET (plug);
+  gint         root_x, root_y;
+
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  /* whether the widget was previously visible */
+  restore = GTK_WIDGET_REALIZED (widget);
+
+  /* unrealize the window if needed */
+  if (restore)
+    {
+      /* store the window position */
+      gtk_window_get_position (GTK_WINDOW (plug), &root_x, &root_y);
+
+      /* hide the widget */
+      gtk_widget_hide (widget);
+      gtk_widget_unrealize (widget);
+    }
+
+  /* set bool */
+  plug->is_composited = gtk_widget_is_composited (widget);
+
+  /* get the screen */
+  screen = gtk_window_get_screen (GTK_WINDOW (plug));
+
+  /* try to get the rgba colormap */
+  if (plug->is_composited)
+    colormap = gdk_screen_get_rgba_colormap (screen);
+
+  /* get the default colormap */
+  if (colormap == NULL)
+    {
+      colormap = gdk_screen_get_rgb_colormap (screen);
+      plug->is_composited = FALSE;
+    }
+
+  /* set the colormap */
+  if (colormap)
+    gtk_widget_set_colormap (widget, colormap);
+
+  /* restore the window */
+  if (restore)
+    {
+      /* restore the position */
+      gtk_window_move (GTK_WINDOW (plug), root_x, root_y);
+
+      /* show the widget again */
+      gtk_widget_realize (widget);
+      gtk_widget_show (widget);
+    }
+
+  gtk_widget_queue_draw (widget);
 }
 
 
