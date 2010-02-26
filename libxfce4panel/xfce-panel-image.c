@@ -448,8 +448,10 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
   gint    source_height;
 
   panel_return_val_if_fail (GDK_IS_PIXBUF (source), NULL);
-  panel_return_val_if_fail (dest_width > 0, NULL);
-  panel_return_val_if_fail (dest_height > 0, NULL);
+
+  /* we fail on invalid sizes */
+  if (G_UNLIKELY (dest_width <= 0 || dest_height <= 0))
+    return NULL;
 
   source_width = gdk_pixbuf_get_width (source);
   source_height = gdk_pixbuf_get_height (source);
