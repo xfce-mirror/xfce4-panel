@@ -894,7 +894,8 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
       /* set the icon if one is set */
       icon_name = xfce_menu_item_get_icon_name (item);
-      if (IS_STRING (icon_name))
+      if (IS_STRING (icon_name)
+          && plugin->menu_icon_size != GTK_ICON_SIZE_INVALID)
         {
           image = gtk_image_new_from_icon_name (icon_name, plugin->menu_icon_size);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
