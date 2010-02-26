@@ -33,8 +33,6 @@ GtkWidget *xfce_panel_create_button         (void) G_GNUC_MALLOC G_GNUC_WARN_UNU
 
 GtkWidget *xfce_panel_create_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-gboolean   xfce_panel_allow_customization   (void);
-
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_CONVENIENCE_H__ */

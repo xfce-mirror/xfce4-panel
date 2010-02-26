@@ -90,34 +90,5 @@ xfce_panel_create_toggle_button (void)
 
 
 
-/**
- * xfce_panel_allow_customization:
- *
- * Check if the user is allowed to customize the panel. Uses the kiosk mode
- * implementation from libxfce4util.
- *
- * Returns: %TRUE if the user is allowed to customize the panel, %FALSE
- *          otherwise.
- **/
-gboolean
-xfce_panel_allow_customization (void)
-{
-  static gboolean  allow_customization = FALSE;
-  static gboolean  checked = FALSE;
-  XfceKiosk       *kiosk;
-
-  if (G_UNLIKELY (!checked))
-    {
-      kiosk = xfce_kiosk_new ("xfce4-panel");
-      allow_customization = xfce_kiosk_query (kiosk, "CustomizePanel");
-      xfce_kiosk_free (kiosk);
-      checked = TRUE;
-    }
-
-  return allow_customization;
-}
-
-
-
 #define __XFCE_PANEL_CONVENIENCE_C__
 #include <libxfce4panel/libxfce4panel-aliasdef.c>

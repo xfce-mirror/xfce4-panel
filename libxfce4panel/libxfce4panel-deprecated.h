@@ -67,7 +67,7 @@ enum /*< skip >*/
 
 #define xfce_create_panel_button        xfce_panel_create_button
 #define xfce_create_panel_toggle_button xfce_panel_create_toggle_button
-#define xfce_allow_panel_customization  xfce_panel_allow_customization
+#define xfce_allow_panel_customization  (FALSE)
 
 #define _panel_g_type_register_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init) \
     g_type_register_static_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init, 0)
