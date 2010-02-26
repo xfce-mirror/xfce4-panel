@@ -7,8 +7,7 @@ INCLUDES = \
 	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = \
-	$(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel-plugins
 
 plugin_LTLIBRARIES = \
 	libtasklist.la
@@ -56,7 +55,7 @@ desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_in_files = tasklist.desktop.in.in
 desktop_in_files =  $(desktop_in_in_files:.desktop.in.in=.desktop.in)
 tasklist.desktop.in: $(desktop_in_in_files)
-	sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
+	sed -e "s,\@plugindir\@,$(plugindir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
