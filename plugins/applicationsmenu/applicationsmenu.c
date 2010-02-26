@@ -699,12 +699,16 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
   elements = garcon_menu_get_elements (menu);
   for (li = elements; li != NULL; li = li->next)
     {
+      panel_return_val_if_fail (GARCON_IS_MENU_ELEMENT (li->data), FALSE);
       if (GARCON_IS_MENU_ITEM (li->data))
         {
+          if (!garcon_menu_element_get_visible (li->data))
+            continue;
+
           name = NULL;
           if (plugin->show_generic_names)
             name = garcon_menu_item_get_generic_name (li->data);
-          if (G_UNLIKELY (name == NULL))
+          if (name == NULL)
             name = garcon_menu_item_get_name (li->data);
           if (G_UNLIKELY (name == NULL))
             continue;
