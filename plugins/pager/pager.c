@@ -34,8 +34,6 @@
 
 
 
-static void     pager_plugin_class_init                (PagerPluginClass  *klass);
-static void     pager_plugin_init                      (PagerPlugin       *pager);
 static gboolean pager_plugin_scroll_event              (GtkWidget         *widget,
                                                         GdkEventScroll    *event);
 static void     pager_plugin_screen_changed            (GtkWidget         *widget,

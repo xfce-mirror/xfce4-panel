@@ -38,7 +38,7 @@ GtkWidget *xfce_clock_fuzzy_new      (void) G_GNUC_MALLOC;
 
 gboolean   xfce_clock_fuzzy_update   (gpointer        user_data);
 
-guint      xfce_clock_fuzzy_interval (XfceClockFuzzy *clock);
+guint      xfce_clock_fuzzy_interval (XfceClockFuzzy *fuzzy);
 
 G_END_DECLS
 

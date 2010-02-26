@@ -41,8 +41,6 @@
 
 
 /* prototypes */
-static void     xfce_tray_widget_class_init         (XfceTrayWidgetClass *klass);
-static void     xfce_tray_widget_init               (XfceTrayWidget      *tray);
 static void     xfce_tray_widget_finalize           (GObject             *object);
 static void     xfce_tray_widget_size_request       (GtkWidget           *widget,
                                                      GtkRequisition      *requisition);
@@ -115,28 +113,7 @@ struct _XfceTrayWidgetChild
 
 
 
-static GObjectClass *xfce_tray_widget_parent_class;
-
-
-
-GType
-xfce_tray_widget_get_type (void)
-{
-    static GType type = G_TYPE_INVALID;
-
-    if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-        type = g_type_register_static_simple (GTK_TYPE_CONTAINER,
-                                              I_("XfceTrayWidget"),
-                                              sizeof (XfceTrayWidgetClass),
-                                              (GClassInitFunc) xfce_tray_widget_class_init,
-                                              sizeof (XfceTrayWidget),
-                                              (GInstanceInitFunc) xfce_tray_widget_init,
-                                              0);
-    }
-
-    return type;
-}
+G_DEFINE_TYPE (XfceTrayWidget, xfce_tray_widget, GTK_TYPE_CONTAINER);
 
 
 
@@ -146,9 +123,6 @@ xfce_tray_widget_class_init (XfceTrayWidgetClass *klass)
     GObjectClass      *gobject_class;
     GtkWidgetClass    *gtkwidget_class;
     GtkContainerClass *gtkcontainer_class;
-
-    /* determine the parent type class */
-    xfce_tray_widget_parent_class = g_type_class_peek_parent (klass);
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_tray_widget_finalize;

@@ -73,34 +73,18 @@ DISTCLEANFILES = \
 # Rules to auto-generate built sources
 #
 if MAINTAINER_MODE
-CLEANFILES = \
-	xgen-xtmc \
-	xgen-xtmh
-
 BUILT_SOURCES = \
 	$(libsystray_built_sources)
 
 DISTCLEANFILES +=	\
-	$(libsystray_built_sources) \
-	stamp-xfce-tray-marshal.h
+	$(libsystray_built_sources)
 
-xfce-tray-marshal.h: stamp-xfce-tray-marshal.h
-	@true
-stamp-xfce-tray-marshal.h: $(srcdir)/xfce-tray-marshal.list Makefile
-	( cd $(srcdir) && glib-genmarshal \
-		--prefix=_xfce_tray_marshal \
-		--header xfce-tray-marshal.list \
-		| sed -e 's/marshal_data);$$/marshal_data);/' ) >> xgen-xtmh \
-	&& ( cmp -s xgen-xtmh xfce-tray-marshal.h || cp xgen-xtmh xfce-tray-marshal.h ) \
-	&& rm -f xgen-xtmh \
-	&& echo timestamp > $(@F)
+xfce-tray-marshal.h: xfce-tray-marshal.list Makefile
+	glib-genmarshal --header --internal --prefix=_xfce_tray_marshal $< > $@
 
-xfce-tray-marshal.c: xfce-tray-marshal.h Makefile
-	( cd $(srcdir) && glib-genmarshal \
-		--prefix=_xfce_tray_marshal \
-		--body xfce-tray-marshal.list ) >> xgen-xtmc \
-	&& cp xgen-xtmc xfce-tray-marshal.c \
-	&& rm -f xgen-xtmc
+xfce-tray-marshal.c: xfce-tray-marshal.list Makefile
+	echo "#include \"xfce-tray-marshal.h\"" > $@ \
+	&& glib-genmarshal --prefix=_xfce_tray_marshal --body $< >> $@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

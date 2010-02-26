@@ -23,8 +23,8 @@
 
 #include "showdesktop.h"
 
-static void     show_desktop_plugin_class_init              (ShowDesktopPluginClass *klass);
-static void     show_desktop_plugin_init                    (ShowDesktopPlugin      *plugin);
+
+
 static void     show_desktop_plugin_screen_changed          (GtkWidget              *widget,
                                                              GdkScreen              *previous_screen);
 static void     show_desktop_plugin_free_data               (XfcePanelPlugin        *panel_plugin);

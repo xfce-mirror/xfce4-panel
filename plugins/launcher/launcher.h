@@ -50,7 +50,10 @@ enum _LauncherPluginArrowPos
   ARROW_POS_RIGHT,
   ARROW_POS_TOP,
   ARROW_POS_BOTTOM,
-  ARROW_POS_INSIDE_BUTTON
+  ARROW_POS_INSIDE_BUTTON,
+  
+  ARROW_POS_MIN = ARROW_POS_DEFAULT,
+  ARROW_POS_MAX = ARROW_POS_INSIDE_BUTTON
 };
 
 struct _LauncherPluginClass
@@ -105,10 +108,10 @@ struct _LauncherPluginEntry
 /* target types for dropping in the launcher plugin */
 static const GtkTargetEntry drop_targets[] =
 {
-    { "text/uri-list", 0, 0, },
-    { "STRING",	       0, 0 },
-    { "UTF8_STRING",   0, 0 },
-    { "text/plain",    0, 0 },
+  { (gchar *) "text/uri-list", 0, 0, },
+  { (gchar *) "STRING",	       0, 0 },
+  { (gchar *) "UTF8_STRING",   0, 0 },
+  { (gchar *) "text/plain",    0, 0 },
 };
 
 GType      launcher_plugin_get_type (void) G_GNUC_CONST;

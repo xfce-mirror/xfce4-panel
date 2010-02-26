@@ -36,13 +36,10 @@
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-preferences-dialog-glade.h>
 
-#define BORDER               (6)
 #define PREFERENCES_HELP_URL "http://www.xfce.org"
 
 
 
-static void panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass);
-static void panel_preferences_dialog_init (PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_finalize (GObject *object);
 static void panel_preferences_dialog_response (GtkWidget *window, gint response_id, PanelPreferencesDialog *dialog);
 

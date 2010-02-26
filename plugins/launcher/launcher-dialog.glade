@@ -85,6 +85,7 @@
                               <object class="GtkImage" id="image1">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-go-up</property>
+                                <property name="icon-size">4</property>
                               </object>
                             </child>
                           </object>
@@ -102,6 +103,7 @@
                               <object class="GtkImage" id="image2">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-go-down</property>
+                                <property name="icon-size">4</property>
                               </object>
                             </child>
                           </object>
@@ -122,6 +124,7 @@
                               <object class="GtkImage" id="image4">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-remove</property>
+                                <property name="icon-size">4</property>
                               </object>
                             </child>
                           </object>
@@ -142,6 +145,7 @@
                                   <object class="GtkImage" id="image3">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-add</property>
+                                    <property name="icon-size">4</property>
                                   </object>
                                   <packing>
                                     <property name="position">0</property>
@@ -185,7 +189,7 @@
                         <property name="visible">True</property>
                         <property name="border_width">6</property>
                         <property name="n_rows">7</property>
-                        <property name="n_columns">3</property>
+                        <property name="n_columns">2</property>
                         <property name="column_spacing">12</property>
                         <property name="row_spacing">6</property>
                         <child>
@@ -194,6 +198,7 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">_Name:</property>
                             <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">entry-name</property>
                           </object>
                           <packing>
                             <property name="x_options">GTK_FILL</property>
@@ -206,6 +211,7 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">_Description:</property>
                             <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">entry-description</property>
                           </object>
                           <packing>
                             <property name="top_attach">1</property>
@@ -220,6 +226,7 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">_Icon:</property>
                             <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">entry-icon</property>
                           </object>
                           <packing>
                             <property name="top_attach">2</property>
@@ -234,6 +241,7 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Co_mmand:</property>
                             <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">entry-command</property>
                           </object>
                           <packing>
                             <property name="top_attach">3</property>
@@ -248,6 +256,7 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">_Working Directory:</property>
                             <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">entry-working-directory</property>
                           </object>
                           <packing>
                             <property name="top_attach">4</property>
@@ -268,58 +277,45 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkEntry" id="entry-name2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">3</property>
-                            <property name="y_options">GTK_FILL</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="entry-description2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">3</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="y_options">GTK_FILL</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="entry-command2">
+                          <object class="GtkEntry" id="entry-name">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
-                            <property name="top_attach">3</property>
-                            <property name="bottom_attach">4</property>
                             <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkFileChooserButton" id="entry-working-directory2">
+                          <object class="GtkEntry" id="entry-description">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                            <property name="y_options">GTK_FILL</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkFileChooserButton" id="entry-working-directory">
                             <property name="visible">True</property>
                             <property name="action">select-folder</property>
                             <property name="title" translatable="yes">Select A Working Directory</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">3</property>
+                            <property name="right_attach">2</property>
                             <property name="top_attach">4</property>
                             <property name="bottom_attach">5</property>
                             <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="entry-terminal2">
+                          <object class="GtkCheckButton" id="entry-terminal">
                             <property name="label" translatable="yes">Run in _terminal</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -329,14 +325,14 @@
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">3</property>
+                            <property name="right_attach">2</property>
                             <property name="top_attach">5</property>
                             <property name="bottom_attach">6</property>
                             <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="entry-startup-notify2">
+                          <object class="GtkCheckButton" id="entry-startup-notify">
                             <property name="label" translatable="yes">Use _statup notification</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -346,7 +342,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">3</property>
+                            <property name="right_attach">2</property>
                             <property name="top_attach">6</property>
                             <property name="bottom_attach">7</property>
                             <property name="y_options">GTK_FILL</property>
@@ -358,7 +354,7 @@
                             <property name="xalign">0</property>
                             <property name="xscale">0</property>
                             <child>
-                              <object class="GtkButton" id="button5">
+                              <object class="GtkButton" id="entry-icon">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -374,28 +370,46 @@
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">3</property>
+                            <property name="right_attach">2</property>
                             <property name="top_attach">2</property>
                             <property name="bottom_attach">3</property>
                             <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="button6">
+                          <object class="GtkHBox" id="hbox4">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="spacing">6</property>
                             <child>
-                              <object class="GtkImage" id="image10">
+                              <object class="GtkEntry" id="entry-command">
                                 <property name="visible">True</property>
-                                <property name="stock">gtk-open</property>
-                                <property name="icon-size">1</property>
+                                <property name="can_focus">True</property>
                               </object>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="entry-open">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <child>
+                                  <object class="GtkImage" id="image6">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-open</property>
+                                    <property name="icon-size">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
                             </child>
                           </object>
                           <packing>
-                            <property name="left_attach">2</property>
-                            <property name="right_attach">3</property>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
                             <property name="top_attach">3</property>
                             <property name="bottom_attach">4</property>
                           </packing>

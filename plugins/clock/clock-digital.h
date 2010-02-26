@@ -38,7 +38,7 @@ GtkWidget *xfce_clock_digital_new      (void) G_GNUC_MALLOC;
 
 gboolean   xfce_clock_digital_update   (gpointer          user_data);
 
-guint      xfce_clock_digital_interval (XfceClockDigital *clock);
+guint      xfce_clock_digital_interval (XfceClockDigital *digital);
 
 G_END_DECLS
 

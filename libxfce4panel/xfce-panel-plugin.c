@@ -33,12 +33,13 @@
 
 #define XFCE_PANEL_PLUGIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate))
 
+
+
 typedef const gchar *(*ProviderToPluginChar) (XfcePanelPluginProvider *provider);
 typedef gint         (*ProviderToPluginInt)  (XfcePanelPluginProvider *provider);
 
 
-static void          xfce_panel_plugin_class_init             (XfcePanelPluginClass         *klass);
-static void          xfce_panel_plugin_init                   (XfcePanelPlugin              *plugin);
+
 static void          xfce_panel_plugin_provider_init          (XfcePanelPluginProviderIface *iface);
 static void          xfce_panel_plugin_get_property           (GObject                      *object,
                                                                guint                         prop_id,

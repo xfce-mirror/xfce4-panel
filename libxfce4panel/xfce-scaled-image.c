@@ -59,8 +59,6 @@ struct _XfceScaledImage
 
 
 
-static void       xfce_scaled_image_class_init    (XfceScaledImageClass *klass);
-static void       xfce_scaled_image_init          (XfceScaledImage      *tasklist);
 static void       xfce_scaled_image_finalize      (GObject              *object);
 static void       xfce_scaled_image_size_request  (GtkWidget            *widget,
                                                    GtkRequisition       *requisition);

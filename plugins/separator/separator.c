@@ -36,8 +36,6 @@
 
 
 
-static void     separator_plugin_class_init                (SeparatorPluginClass  *klass);
-static void     separator_plugin_init                      (SeparatorPlugin       *separator);
 static gboolean separator_plugin_expose_event              (GtkWidget             *widget,
                                                             GdkEventExpose        *event);
 static void     separator_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
@@ -208,7 +206,7 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* read the style */
   style = xfconf_channel_get_uint (plugin->channel, "/style", SEPARATOR_PLUGIN_STYLE_DEFAULT);
-  plugin->style = CLAMP (style, SEPARATOR_PLUGIN_STYLE_MIN, SEPARATOR_PLUGIN_STYLE_MAX);
+  plugin->style = MIN (style, SEPARATOR_PLUGIN_STYLE_MAX);
 
   /* expand the plugin if requested */
   expand = xfconf_channel_get_bool (plugin->channel, "/expand", FALSE);
@@ -326,12 +324,9 @@ separator_plugin_property_changed (XfconfChannel   *channel,
 
   /* update the changed property */
   if (strcmp (property_name, "/style") == 0)
-    plugin->style = CLAMP (g_value_get_uint (value),
-                           SEPARATOR_PLUGIN_STYLE_MIN,
-                           SEPARATOR_PLUGIN_STYLE_MAX);
+    plugin->style = MIN (g_value_get_uint (value), SEPARATOR_PLUGIN_STYLE_MAX);
   else if (strcmp (property_name, "/expand") == 0)
-    xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin),
-                                  g_value_get_boolean (value));
+    xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin), g_value_get_boolean (value));
 
   /* redraw */
   gtk_widget_queue_draw (GTK_WIDGET (plugin));

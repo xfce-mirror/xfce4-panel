@@ -32,8 +32,6 @@
 
 
 
-static void xfce_clock_digital_class_init   (XfceClockDigitalClass *klass);
-static void xfce_clock_digital_init         (XfceClockDigital      *clock);
 static void xfce_clock_digital_finalize     (GObject               *object);
 static void xfce_clock_digital_set_property (GObject               *object,
                                              guint                  prop_id,
@@ -92,13 +90,13 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
 
 
 static void
-xfce_clock_digital_init (XfceClockDigital *clock)
+xfce_clock_digital_init (XfceClockDigital *digital)
 {
   /* init */
-  clock->format = NULL;
+  digital->format = NULL;
 
   /* center text */
-  gtk_label_set_justify (GTK_LABEL (clock), GTK_JUSTIFY_CENTER);
+  gtk_label_set_justify (GTK_LABEL (digital), GTK_JUSTIFY_CENTER);
 }
 
 
@@ -106,10 +104,10 @@ xfce_clock_digital_init (XfceClockDigital *clock)
 static void
 xfce_clock_digital_finalize (GObject *object)
 {
-  XfceClockDigital *clock = XFCE_CLOCK_DIGITAL (object);
+  XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (object);
 
   /* cleanup */
-  g_free (clock->format);
+  g_free (digital->format);
 
   (*G_OBJECT_CLASS (xfce_clock_digital_parent_class)->finalize) (object);
 }
@@ -122,19 +120,19 @@ xfce_clock_digital_set_property (GObject      *object,
                                  const GValue *value,
                                  GParamSpec   *pspec)
 {
-  XfceClockDigital *clock = XFCE_CLOCK_DIGITAL (object);
+  XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (object);
 
   switch (prop_id)
     {
       case PROP_DIGITAL_FORMAT:
         /* cleanup */
-        g_free (clock->format);
+        g_free (digital->format);
 
         /* set new format */
-        clock->format = g_value_dup_string (value);
+        digital->format = g_value_dup_string (value);
 
         /* update the widget */
-        xfce_clock_digital_update (clock);
+        xfce_clock_digital_update (digital);
         break;
 
       default:
@@ -151,12 +149,12 @@ xfce_clock_digital_get_property (GObject    *object,
                                  GValue     *value,
                                  GParamSpec *pspec)
 {
-  XfceClockDigital *clock = XFCE_CLOCK_DIGITAL (object);
+  XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (object);
 
   switch (prop_id)
     {
       case PROP_DIGITAL_FORMAT:
-        g_value_set_string (value, clock->format);
+        g_value_set_string (value, digital->format);
         break;
 
       default:
@@ -178,21 +176,21 @@ xfce_clock_digital_new (void)
 gboolean
 xfce_clock_digital_update (gpointer user_data)
 {
-  XfceClockDigital *clock = XFCE_CLOCK_DIGITAL (user_data);
+  XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (user_data);
   gchar            *string;
   struct tm         tm;
 
-  panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (user_data), FALSE);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (digital), FALSE);
 
   /* get the local time */
   clock_plugin_get_localtime (&tm);
 
   /* get the string */
-  string = clock_plugin_strdup_strftime (clock->format ? clock->format :
+  string = clock_plugin_strdup_strftime (digital->format ? digital->format :
                                          DEFAULT_DIGITAL_FORMAT, &tm);
 
   /* set the new label */
-  gtk_label_set_markup (GTK_LABEL (clock), string);
+  gtk_label_set_markup (GTK_LABEL (digital), string);
 
   /* cleanup */
   g_free (string);
@@ -203,10 +201,10 @@ xfce_clock_digital_update (gpointer user_data)
 
 
 guint
-xfce_clock_digital_interval (XfceClockDigital *clock)
+xfce_clock_digital_interval (XfceClockDigital *digital)
 {
-  panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (clock), CLOCK_INTERVAL_SECOND);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (digital), CLOCK_INTERVAL_SECOND);
 
-  return clock_plugin_interval_from_format (clock->format ? clock->format :
+  return clock_plugin_interval_from_format (digital->format ? digital->format :
                                             DEFAULT_DIGITAL_FORMAT);
 }

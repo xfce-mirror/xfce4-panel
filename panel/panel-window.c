@@ -48,8 +48,6 @@
 
 
 
-static void panel_window_class_init (PanelWindowClass *klass);
-static void panel_window_init (PanelWindow *window);
 static void panel_window_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
 static void panel_window_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
 static void panel_window_finalize (GObject *object);
@@ -1992,8 +1990,6 @@ panel_window_set_autohide (PanelWindow *window,
 static void
 panel_window_menu_quit (gpointer boolean)
 {
-  extern gboolean dbus_quit_with_restart;
-
   /* restart or quit */
   dbus_quit_with_restart = !!(GPOINTER_TO_UINT (boolean));
 

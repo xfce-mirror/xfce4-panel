@@ -73,7 +73,8 @@ libxfce4panel-marshal.h: libxfce4panel-marshal.list Makefile
 	glib-genmarshal --prefix=_libxfce4panel_marshal --internal --header $< > $@
 
 libxfce4panel-marshal.c: libxfce4panel-marshal.list Makefile
-	glib-genmarshal --prefix=_libxfce4panel_marshal --body $< > $@
+	echo "#include <libxfce4panel/libxfce4panel-marshal.h>" > $@ \
+	&& glib-genmarshal --prefix=_libxfce4panel_marshal --body $< >> $@
 
 DISTCLEANFILES = \
 	$(libxfce4panel_built_sources)

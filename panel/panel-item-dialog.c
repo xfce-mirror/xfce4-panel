@@ -44,8 +44,6 @@
 
 
 
-static void panel_item_dialog_class_init (PanelItemDialogClass *klass);
-static void panel_item_dialog_init (PanelItemDialog *dialog);
 static void panel_item_dialog_finalize (GObject *object);
 static void panel_item_dialog_response (GtkDialog *dialog, gint response_id);
 static void panel_item_dialog_unique_changed (PanelModuleFactory *factory, PanelModule *module, PanelItemDialog *dialog);
@@ -53,7 +51,7 @@ static gboolean panel_item_dialog_unique_changed_foreach (GtkTreeModel *model, G
 static gboolean panel_item_dialog_separator_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data);
 static PanelModule *panel_item_dialog_get_selected_module (GtkTreeView *treeview);
 static void panel_item_dialog_drag_begin (GtkWidget *treeview, GdkDragContext *context, PanelItemDialog *dialog);
-static void panel_item_dialog_drag_data_get (GtkWidget *treeview, GdkDragContext *context, GtkSelectionData *selection_data, guint info, guint time, PanelItemDialog *dialog);
+static void panel_item_dialog_drag_data_get (GtkWidget *treeview, GdkDragContext *context, GtkSelectionData *selection_data, guint info, guint drag_time, PanelItemDialog *dialog);
 static void panel_item_dialog_populate_store (PanelItemDialog *dialog);
 static gint panel_item_dialog_compare_func (GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer user_data);
 static gboolean panel_item_dialog_visible_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data);
@@ -90,7 +88,7 @@ enum
 
 static const GtkTargetEntry drag_targets[] =
 {
-  { "application/x-xfce-panel-plugin-name", 0, 0 },
+  { (gchar *) "application/x-xfce-panel-plugin-name", 0, 0 },
 };
 
 
@@ -456,8 +454,8 @@ static void
 panel_item_dialog_drag_data_get (GtkWidget        *treeview,
                                  GdkDragContext   *context,
                                  GtkSelectionData *selection_data,
-                                 guint             info,
-                                 guint             time,
+                                 guint             drag_info,
+                                 guint             drag_time,
                                  PanelItemDialog  *dialog)
 {
   PanelModule *module;

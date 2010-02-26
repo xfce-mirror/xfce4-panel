@@ -38,8 +38,6 @@
 
 
 
-static void     panel_module_factory_class_init      (PanelModuleFactoryClass  *klass);
-static void     panel_module_factory_init            (PanelModuleFactory       *plugin_factory);
 static void     panel_module_factory_finalize        (GObject                  *object);
 static void     panel_module_factory_load_modules    (PanelModuleFactory       *factory);
 static gboolean panel_module_factory_modules_cleanup (gpointer                  key,
@@ -250,19 +248,19 @@ panel_module_factory_modules_cleanup (gpointer key,
 {
   PanelModuleFactory *factory = PANEL_MODULE_FACTORY (user_data);
   PanelModule        *module = PANEL_MODULE (value);
-  gboolean            remove;
+  gboolean            remove_from_table;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), TRUE);
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), TRUE);
 
   /* get whether the module is valid */
-  remove = !panel_module_is_valid (module);
+  remove_from_table = !panel_module_is_valid (module);
 
   /* if we're going to remove this item, check if it's the launcher */
-  if (remove == TRUE && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_internal_name (module)))
+  if (remove_from_table && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, panel_module_get_internal_name (module)))
     factory->has_launcher = FALSE;
 
-  return remove;
+  return remove_from_table;
 }
 
 

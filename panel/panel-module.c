@@ -36,8 +36,6 @@
 
 
 
-static void      panel_module_class_init     (PanelModuleClass *klass);
-static void      panel_module_init           (PanelModule      *plugin);
 static void      panel_module_dispose        (GObject          *object);
 static void      panel_module_finalize       (GObject          *object);
 static gboolean  panel_module_load           (GTypeModule      *type_module);

@@ -56,8 +56,6 @@
 
 
 /* prototypes */
-static void                 xfce_tray_manager_class_init                         (XfceTrayManagerClass *klass);
-static void                 xfce_tray_manager_init                               (XfceTrayManager      *manager);
 static void                 xfce_tray_manager_finalize                           (GObject              *object);
 static void                 xfce_tray_manager_remove_socket                      (gpointer              key,
                                                                                   gpointer              value,
@@ -151,29 +149,11 @@ struct _XfceTrayMessage
 
 
 
-static guint         xfce_tray_manager_signals[LAST_SIGNAL];
-static GObjectClass *xfce_tray_manager_parent_class;
+static guint xfce_tray_manager_signals[LAST_SIGNAL];
 
 
 
-GType
-xfce_tray_manager_get_type (void)
-{
-    static GType type = G_TYPE_INVALID;
-
-    if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-        type = g_type_register_static_simple (G_TYPE_OBJECT,
-                                              I_("XfceTrayManager"),
-                                              sizeof (XfceTrayManagerClass),
-                                              (GClassInitFunc) xfce_tray_manager_class_init,
-                                              sizeof (XfceTrayManager),
-                                              (GInstanceInitFunc) xfce_tray_manager_init,
-                                              0);
-    }
-
-    return type;
-}
+G_DEFINE_TYPE (XfceTrayManager, xfce_tray_manager, G_TYPE_OBJECT);
 
 
 
@@ -182,10 +162,7 @@ xfce_tray_manager_class_init (XfceTrayManagerClass *klass)
 {
     GObjectClass *gobject_class;
 
-    /* determine the parent type class */
-    xfce_tray_manager_parent_class = g_type_class_peek_parent (klass);
-
-    gobject_class = (GObjectClass *)klass;
+    gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_tray_manager_finalize;
 
     xfce_tray_manager_signals[TRAY_ICON_ADDED] =

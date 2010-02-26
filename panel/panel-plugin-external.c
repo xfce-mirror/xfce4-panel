@@ -46,8 +46,6 @@
 
 
 
-static void         panel_plugin_external_class_init          (PanelPluginExternalClass        *klass);
-static void         panel_plugin_external_init                (PanelPluginExternal             *external);
 static void         panel_plugin_external_provider_init       (XfcePanelPluginProviderIface    *iface);
 static void         panel_plugin_external_finalize            (GObject                         *object);
 static void         panel_plugin_external_realize             (GtkWidget                       *widget);
@@ -234,17 +232,17 @@ panel_plugin_external_realize (GtkWidget *widget)
   argv = g_new (gchar *, argc);
 
   /* setup the basic argv */
-  argv[0]  = LIBEXECDIR "/xfce4-panel-wrapper";
-  argv[1]  = "-n";
+  argv[0]  = (gchar *) LIBEXECDIR "/xfce4-panel-wrapper";
+  argv[1]  = (gchar *) "-n";
   argv[2]  = (gchar *) panel_module_get_internal_name (external->module);
-  argv[3]  = "-i";
-  argv[4]  = unique_id;
-  argv[5]  = "-d";
+  argv[3]  = (gchar *) "-i";
+  argv[4]  = (gchar *) unique_id;
+  argv[5]  = (gchar *) "-d";
   argv[6]  = (gchar *) panel_module_get_name (external->module);
-  argv[7]  = "-f";
+  argv[7]  = (gchar *) "-f";
   argv[8]  = (gchar *) panel_module_get_library_filename (external->module);
-  argv[9]  = "-s";
-  argv[10] = socket_id;
+  argv[9]  = (gchar *) "-s";
+  argv[10] = (gchar *) socket_id;
 
   /* append the arguments */
   if (G_UNLIKELY (external->arguments != NULL))
@@ -424,7 +422,7 @@ panel_plugin_external_plug_added (GtkSocket *socket)
 
 static void
 panel_plugin_external_provider_signal (XfcePanelPluginProvider       *provider,
-                                       XfcePanelPluginProviderSignal  signal)
+                                       XfcePanelPluginProviderSignal  provider_signal)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (provider);
 
@@ -433,7 +431,7 @@ panel_plugin_external_provider_signal (XfcePanelPluginProvider       *provider,
 
   /* we handle some signals here, everything else is handled in
    * panel-application */
-  switch (signal)
+  switch (provider_signal)
     {
       case PROVIDER_SIGNAL_REMOVE_PLUGIN:
         /* we're forced removing the plugin, don't ask for a restart */

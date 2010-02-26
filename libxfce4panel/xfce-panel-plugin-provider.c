@@ -142,12 +142,12 @@ xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 
 PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_provider_emit_signal (XfcePanelPluginProvider       *provider,
-                                        XfcePanelPluginProviderSignal  signal)
+                                        XfcePanelPluginProviderSignal  provider_signal)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* emit the signal */
-  g_signal_emit (G_OBJECT (provider), provider_signals[PROVIDER_SIGNAL], 0, signal);
+  g_signal_emit (G_OBJECT (provider), provider_signals[PROVIDER_SIGNAL], 0, provider_signal);
 }
 
 

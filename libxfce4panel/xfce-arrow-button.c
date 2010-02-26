@@ -47,8 +47,6 @@ enum
   PROP_ARROW_TYPE
 };
 
-static void     xfce_arrow_button_class_init    (XfceArrowButtonClass  *klass);
-static void     xfce_arrow_button_init          (XfceArrowButton       *button);
 static void     xfce_arrow_button_set_property  (GObject               *object,
                                                  guint                  prop_id,
                                                  const GValue          *value,

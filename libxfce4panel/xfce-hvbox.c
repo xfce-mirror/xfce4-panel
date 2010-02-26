@@ -31,8 +31,6 @@
 
 
 
-static void     xfce_hvbox_class_init    (XfceHVBoxClass *klass);
-static void     xfce_hvbox_init          (XfceHVBox      *hvbox);
 static gpointer xfce_hvbox_get_class     (XfceHVBox      *hvbox);
 static void     xfce_hvbox_size_request  (GtkWidget      *widget,
                                           GtkRequisition *requisition);

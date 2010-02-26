@@ -37,8 +37,6 @@
 
 
 /* prototypes */
-static void      xfce_clock_lcd_class_init   (XfceClockLcdClass *klass);
-static void      xfce_clock_lcd_init         (XfceClockLcd      *clock);
 static void      xfce_clock_lcd_set_property (GObject           *object,
                                               guint              prop_id,
                                               const GValue      *value,
@@ -51,7 +49,7 @@ static void      xfce_clock_lcd_size_request (GtkWidget         *widget,
                                               GtkRequisition    *requisition);
 static gboolean  xfce_clock_lcd_expose_event (GtkWidget         *widget,
                                               GdkEventExpose    *event);
-static gdouble   xfce_clock_lcd_get_ratio    (XfceClockLcd      *clock);
+static gdouble   xfce_clock_lcd_get_ratio    (XfceClockLcd      *lcd);
 static gdouble   xfce_clock_lcd_draw_dots    (cairo_t           *cr,
                                               gdouble            size,
                                               gdouble            offset_x,
@@ -159,13 +157,13 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
 
 
 static void
-xfce_clock_lcd_init (XfceClockLcd *clock)
+xfce_clock_lcd_init (XfceClockLcd *lcd)
 {
   /* init */
-  clock->show_seconds = FALSE;
-  clock->show_meridiem = FALSE;
-  clock->show_military = TRUE;
-  clock->flash_separators = FALSE;
+  lcd->show_seconds = FALSE;
+  lcd->show_meridiem = FALSE;
+  lcd->show_military = TRUE;
+  lcd->flash_separators = FALSE;
 }
 
 
@@ -176,24 +174,24 @@ xfce_clock_lcd_set_property (GObject      *object,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
-  XfceClockLcd *clock = XFCE_CLOCK_LCD (object);
+  XfceClockLcd *lcd = XFCE_CLOCK_LCD (object);
 
   switch (prop_id)
     {
       case PROP_SHOW_SECONDS:
-        clock->show_seconds = g_value_get_boolean (value);
+        lcd->show_seconds = g_value_get_boolean (value);
         break;
 
       case PROP_SHOW_MILITARY:
-        clock->show_military = g_value_get_boolean (value);
+        lcd->show_military = g_value_get_boolean (value);
         break;
 
       case PROP_SHOW_MERIDIEM:
-        clock->show_meridiem = g_value_get_boolean (value);
+        lcd->show_meridiem = g_value_get_boolean (value);
         break;
 
       case PROP_FLASH_SEPARATORS:
-        clock->flash_separators = g_value_get_boolean (value);
+        lcd->flash_separators = g_value_get_boolean (value);
         break;
 
       default:
@@ -210,24 +208,24 @@ xfce_clock_lcd_get_property (GObject    *object,
                              GValue     *value,
                              GParamSpec *pspec)
 {
-  XfceClockLcd *clock = XFCE_CLOCK_LCD (object);
+  XfceClockLcd *lcd = XFCE_CLOCK_LCD (object);
 
   switch (prop_id)
     {
       case PROP_SHOW_SECONDS:
-        g_value_set_boolean (value, clock->show_seconds);
+        g_value_set_boolean (value, lcd->show_seconds);
         break;
 
       case PROP_SHOW_MILITARY:
-        g_value_set_boolean (value, clock->show_military);
+        g_value_set_boolean (value, lcd->show_military);
         break;
 
       case PROP_SHOW_MERIDIEM:
-        g_value_set_boolean (value, clock->show_meridiem);
+        g_value_set_boolean (value, lcd->show_meridiem);
         break;
 
       case PROP_FLASH_SEPARATORS:
-        g_value_set_boolean (value, clock->flash_separators);
+        g_value_set_boolean (value, lcd->flash_separators);
         break;
 
       default:
@@ -273,7 +271,7 @@ static gboolean
 xfce_clock_lcd_expose_event (GtkWidget      *widget,
                              GdkEventExpose *event)
 {
-  XfceClockLcd *clock = XFCE_CLOCK_LCD (widget);
+  XfceClockLcd *lcd = XFCE_CLOCK_LCD (widget);
   cairo_t      *cr;
   gdouble       offset_x, offset_y;
   gint          ticks, i;
@@ -281,7 +279,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
   gdouble       ratio;
   struct tm     tm;
 
-  panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (clock), FALSE);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), FALSE);
 
   /* get the width:height ratio */
   ratio = xfce_clock_lcd_get_ratio (XFCE_CLOCK_LCD (widget));
@@ -316,7 +314,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
       ticks = tm.tm_hour;
 
       /* convert 24h clock to 12h clock */
-      if (!clock->show_military && ticks > 12)
+      if (!lcd->show_military && ticks > 12)
         ticks -= 12;
 
       /* queue a resize when the number of hour digits changed */
@@ -343,7 +341,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
           else
             {
               /* leave when we don't want seconds */
-              if (!clock->show_seconds)
+              if (!lcd->show_seconds)
                 break;
 
               /* get the seconds */
@@ -351,7 +349,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
             }
 
           /* draw the dots */
-          if (clock->flash_separators && (tm.tm_sec % 2) == 1)
+          if (lcd->flash_separators && (tm.tm_sec % 2) == 1)
             offset_x += size * RELATIVE_SPACE * 2;
           else
             offset_x = xfce_clock_lcd_draw_dots (cr, size, offset_x, offset_y);
@@ -363,7 +361,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
           offset_x = xfce_clock_lcd_draw_digit (cr, ticks % 10, size, offset_x, offset_y);
         }
 
-      if (clock->show_meridiem)
+      if (lcd->show_meridiem)
         {
           /* am or pm? */
           ticks = tm.tm_hour >= 12 ? 11 : 10;
@@ -382,7 +380,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 
 
 static gdouble
-xfce_clock_lcd_get_ratio (XfceClockLcd *clock)
+xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
 {
   gdouble   ratio;
   gint      ticks;
@@ -396,16 +394,16 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *clock)
 
   ticks = tm.tm_hour;
 
-  if (!clock->show_military && ticks > 12)
+  if (!lcd->show_military && ticks > 12)
     ticks -= 12;
 
   if (ticks >= 10)
     ratio += RELATIVE_DIGIT + RELATIVE_SPACE;
 
-  if (clock->show_seconds)
+  if (lcd->show_seconds)
     ratio += (2 * RELATIVE_DIGIT) + RELATIVE_SPACE + RELATIVE_DOTS;
 
-  if (clock->show_meridiem)
+  if (lcd->show_meridiem)
     ratio += RELATIVE_DIGIT + RELATIVE_SPACE;
 
   return ratio;
@@ -456,7 +454,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
   gdouble x, y;
   gdouble rel_x, rel_y;
 
-  panel_return_val_if_fail (number >= 0 || number <= 11, offset_x);
+  panel_return_val_if_fail (number <= 11, offset_x);
 
   /* ##1##
    * 6   2
@@ -569,11 +567,11 @@ xfce_clock_lcd_update (gpointer user_data)
 
 
 guint
-xfce_clock_lcd_interval (XfceClockLcd *clock)
+xfce_clock_lcd_interval (XfceClockLcd *lcd)
 {
-  panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (clock), CLOCK_INTERVAL_SECOND);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), CLOCK_INTERVAL_SECOND);
 
-  if (clock->show_seconds || clock->flash_separators)
+  if (lcd->show_seconds || lcd->flash_separators)
     return CLOCK_INTERVAL_SECOND;
   else
     return CLOCK_INTERVAL_MINUTE;

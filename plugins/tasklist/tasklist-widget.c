@@ -123,15 +123,14 @@ struct _XfceTasklistChild
 
 static const GtkTargetEntry drop_targets[] =
 {
-  { "application/x-xfce-panel-plugin-task", GTK_TARGET_SAME_WIDGET, 0 }
+  { (gchar *) "application/x-xfce-panel-plugin-task", GTK_TARGET_SAME_WIDGET, 0 }
 };
 
 
 static gint locked = 0;
 
 
-static void xfce_tasklist_class_init (XfceTasklistClass *klass);
-static void xfce_tasklist_init (XfceTasklist      *tasklist);
+
 static void xfce_tasklist_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
 static void xfce_tasklist_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
 static void xfce_tasklist_finalize (GObject          *object);
@@ -139,7 +138,7 @@ static void xfce_tasklist_size_request (GtkWidget *widget, GtkRequisition *requi
 static void xfce_tasklist_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
 static void xfce_tasklist_realize (GtkWidget *widget);
 static void xfce_tasklist_unrealize (GtkWidget *widget);
-static gboolean xfce_tasklist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint time);
+static gboolean xfce_tasklist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint drag_time);
 static void xfce_tasklist_remove (GtkContainer *container, GtkWidget *widget);
 static void xfce_tasklist_forall (GtkContainer *container, gboolean include_internals, GtkCallback callback, gpointer callback_data);
 static GType xfce_tasklist_child_type (GtkContainer *container);
@@ -537,7 +536,7 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
                            GdkDragContext *context,
                            gint            x,
                            gint            y,
-                           guint           time)
+                           guint           drag_time)
 {
   XfceTasklist      *tasklist = XFCE_TASKLIST (widget);
   XfceTasklistChild *child;
@@ -619,7 +618,7 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
     }
 
   /* update the drag status so we keep receiving the drag motions */
-  gdk_drag_status (context, 0, time);
+  gdk_drag_status (context, 0, drag_time);
 
   /* this is a valid drop zone */
   return TRUE;

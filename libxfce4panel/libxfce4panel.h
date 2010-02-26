@@ -40,6 +40,12 @@ G_BEGIN_DECLS
                        gint          unique_id, \
                        const gchar  *display_name, \
                        gchar       **arguments, \
+                       GdkScreen    *screen); \
+  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
+  __xpp_construct_obj (const gchar  *name, \
+                       gint          unique_id, \
+                       const gchar  *display_name, \
+                       gchar       **arguments, \
                        GdkScreen    *screen) \
   { \
     panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL); \
@@ -70,6 +76,12 @@ G_BEGIN_DECLS
     (*construct_func) (plugin); \
   } \
   \
+  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
+  __xpp_construct (const gchar  *name, \
+                   gint          unique_id, \
+                   const gchar  *display_name, \
+                   gchar       **arguments, \
+                   GdkScreen    *screen); \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
   __xpp_construct (const gchar  *name, \
                    gint          unique_id, \

@@ -56,7 +56,8 @@ wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile
 	glib-genmarshal --header --prefix=wrapper_marshal $< > $@
 
 wrapper-marshal.c: $(top_builddir)/panel/panel-marshal.list Makefile
-	glib-genmarshal --body --prefix=wrapper_marshal $< > $@
+	echo "#include <wrapper/wrapper-marshal.h>" > $@ \
+	&& glib-genmarshal --body --prefix=wrapper_marshal $< >> $@
 
 BUILT_SOURCES = \
 	$(xfce4_panel_wrapper_built_sources)

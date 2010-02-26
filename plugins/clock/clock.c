@@ -41,8 +41,6 @@
 
 
 
-static void     clock_plugin_class_init                (ClockPluginClass      *klass);
-static void     clock_plugin_init                      (ClockPlugin           *separator);
 static gboolean clock_plugin_leave_notify_event        (GtkWidget             *widget,
                                                         GdkEventCrossing      *event);
 static gboolean clock_plugin_enter_notify_event        (GtkWidget             *widget,
@@ -226,7 +224,7 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* load properties */
   mode = xfconf_channel_get_uint (plugin->channel, "/mode", CLOCK_PLUGIN_MODE_DEFAULT);
-  plugin->mode = CLAMP (mode, CLOCK_PLUGIN_MODE_MIN, CLOCK_PLUGIN_MODE_MAX);
+  plugin->mode = MIN (mode, CLOCK_PLUGIN_MODE_MAX);
 
   show_frame = xfconf_channel_get_bool (plugin->channel, "/show-frame", FALSE);
   gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), show_frame ? GTK_SHADOW_IN :
@@ -446,9 +444,7 @@ clock_plugin_property_changed (XfconfChannel *channel,
   if (strcmp (property_name, "/mode") == 0)
     {
       /* set new clock mode */
-      plugin->mode = CLAMP (g_value_get_uint (value),
-                            CLOCK_PLUGIN_MODE_MIN,
-                            CLOCK_PLUGIN_MODE_MAX);
+      plugin->mode = MIN (g_value_get_uint (value), CLOCK_PLUGIN_MODE_MAX);
 
       /* update the child widget */
       clock_plugin_set_child (plugin);

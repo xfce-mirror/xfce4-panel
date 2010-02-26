@@ -27,7 +27,8 @@
 #include "tasklist-widget.h"
 #include "tasklist-dialog_glade.h"
 
-
+/* TODO move to header */
+GType tasklist_plugin_get_type (void) G_GNUC_CONST;
 #define XFCE_TYPE_TASKLIST_PLUGIN            (tasklist_plugin_get_type ())
 #define XFCE_TASKLIST_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TASKLIST_PLUGIN, TasklistPlugin))
 #define XFCE_TASKLIST_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_TASKLIST_PLUGIN, TasklistPluginClass))
@@ -56,8 +57,6 @@ struct _TasklistPlugin
 
 
 
-static void tasklist_plugin_class_init (TasklistPluginClass *klass);
-static void tasklist_plugin_init (TasklistPlugin *plugin);
 static void tasklist_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void tasklist_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static void tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);

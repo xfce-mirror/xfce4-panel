@@ -34,8 +34,6 @@
 
 
 
-static void      panel_itembar_class_init       (PanelItembarClass *klass);
-static void      panel_itembar_init             (PanelItembar      *itembar);
 static void      panel_itembar_set_property     (GObject           *object,
                                                  guint              prop_id,
                                                  const GValue      *value,
@@ -59,10 +57,10 @@ static gboolean  panel_itembar_drag_motion      (GtkWidget         *widget,
                                                  GdkDragContext    *drag_context,
                                                  gint               drag_x,
                                                  gint               drag_y,
-                                                 guint              time);
+                                                 guint              drag_time);
 static void      panel_itembar_drag_leave       (GtkWidget         *widget,
                                                  GdkDragContext    *drag_context,
-                                                 guint              time);
+                                                 guint              drag_time);
 static void      panel_itembar_add              (GtkContainer      *container,
                                                  GtkWidget         *child);
 static void      panel_itembar_remove           (GtkContainer      *container,
@@ -122,8 +120,8 @@ G_DEFINE_TYPE (PanelItembar, panel_itembar, GTK_TYPE_CONTAINER);
 /* drop targets */
 static const GtkTargetEntry drop_targets[] =
 {
-  { "application/x-xfce-panel-plugin-name", 0, PANEL_ITEMBAR_TARGET_PLUGIN_NAME },
-  { "application/x-xfce-panel-plugin-widget", 0, PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET },
+  { (gchar *) "application/x-xfce-panel-plugin-name", 0, PANEL_ITEMBAR_TARGET_PLUGIN_NAME },
+  { (gchar *) "application/x-xfce-panel-plugin-widget", 0, PANEL_ITEMBAR_TARGET_PLUGIN_WIDGET },
 };
 
 
@@ -550,7 +548,7 @@ panel_itembar_drag_motion (GtkWidget      *widget,
                            GdkDragContext *drag_context,
                            gint            drag_x,
                            gint            drag_y,
-                           guint           time)
+                           guint           drag_time)
 {
   PanelItembar  *itembar = PANEL_ITEMBAR (widget);
   GdkWindowAttr  attributes;
@@ -632,7 +630,7 @@ panel_itembar_drag_motion (GtkWidget      *widget,
 static void
 panel_itembar_drag_leave (GtkWidget      *widget,
                           GdkDragContext *drag_context,
-                          guint           time)
+                          guint           drag_time)
 {
   PanelItembar *itembar = PANEL_ITEMBAR (widget);
 

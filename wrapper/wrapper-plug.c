@@ -29,8 +29,6 @@
 
 
 
-static void     wrapper_plug_class_init                (WrapperPlugClass        *klass);
-static void     wrapper_plug_init                      (WrapperPlug             *plug);
 static gboolean wrapper_plug_expose_event              (GtkWidget               *widget,
                                                         GdkEventExpose          *event);
 static void     wrapper_plug_set_colormap              (WrapperPlug             *plug);
@@ -58,6 +56,11 @@ struct _WrapperPlug
 
 
 
+/* shared internal plugin name */
+gchar *wrapper_name = NULL;
+
+
+
 G_DEFINE_TYPE (WrapperPlug, wrapper_plug, GTK_TYPE_PLUG);
 
 
@@ -76,8 +79,6 @@ wrapper_plug_class_init (WrapperPlugClass *klass)
 static void
 wrapper_plug_init (WrapperPlug *plug)
 {
-  extern gchar *opt_name;
-
   /* init vars */
   plug->background_alpha = 1.00;
   plug->is_selected = FALSE;
@@ -91,7 +92,7 @@ wrapper_plug_init (WrapperPlug *plug)
 
   /* set the colormap */
   /* HACK: the systray can't handle composited windows! */
-  if (strcmp (opt_name, "systray") != 0)
+  if (strcmp (wrapper_name, "systray") != 0)
     wrapper_plug_set_colormap (plug);
 }
 

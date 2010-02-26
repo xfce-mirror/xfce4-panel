@@ -94,7 +94,8 @@ panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
 	glib-genmarshal --header --prefix=panel_marshal $< > $@
 
 panel-marshal.c: $(srcdir)/panel-marshal.list Makefile
-	glib-genmarshal --body --prefix=panel_marshal $< > $@
+	echo "#include <panel/panel-marshal.h>" > $@ \
+	&& glib-genmarshal --body --prefix=panel_marshal $< >> $@
 
 DISTCLEANFILES = \
 	$(xfce4_panel_built_sources)

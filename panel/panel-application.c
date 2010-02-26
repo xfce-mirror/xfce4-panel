@@ -34,6 +34,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
+#include <panel/panel-dbus-service.h>
 #include <panel/panel-window.h>
 #include <panel/panel-application.h>
 #include <panel/panel-itembar.h>
@@ -48,8 +49,6 @@
 
 
 
-static void      panel_application_class_init         (PanelApplicationClass  *klass);
-static void      panel_application_init               (PanelApplication       *application);
 static void      panel_application_finalize           (GObject                *object);
 static void      panel_application_load               (PanelApplication       *application);
 static void      panel_application_plugin_move        (GtkWidget              *item,
@@ -73,13 +72,13 @@ static void      panel_application_drag_data_received (GtkWidget              *i
                                                        gint                    y,
                                                        GtkSelectionData       *selection_data,
                                                        guint                   info,
-                                                       guint                   time,
+                                                       guint                   drag_time,
                                                        PanelWindow            *window);
 static gboolean  panel_application_drag_drop          (GtkWidget              *itembar,
                                                        GdkDragContext         *context,
                                                        gint                    x,
                                                        gint                    y,
-                                                       guint                   time,
+                                                       guint                   drag_time,
                                                        PanelWindow            *window);
 
 
@@ -116,7 +115,7 @@ struct _PanelApplication
 
 static const GtkTargetEntry drag_targets[] =
 {
-    { "application/x-xfce-panel-plugin-widget", 0, 0 }
+  { (gchar *) "application/x-xfce-panel-plugin-widget", 0, 0 }
 };
 
 
@@ -199,7 +198,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   XfconfChannel *channel = application->xfconf;
   gchar          buf[100];
   guint          i;
-  guint          index = g_slist_index (application->windows, window);
+  guint          panel_n = g_slist_index (application->windows, window);
   GValue         value = { 0, };
   const gchar   *bool_properties[] = { "locked", "autohide", "span-monitors", "horizontal" };
   const gchar   *uint_properties[] = { "size", "length", "x-offset", "y-offset",
@@ -210,13 +209,13 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   for (i = 0; i < G_N_ELEMENTS (bool_properties); i++)
     {
       /* create xfconf property name */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s", index, bool_properties[i]);
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s", panel_n, bool_properties[i]);
 
       /* store the window settings in the channel before we create the binding,
        * so we don't loose the panel settings */
       if (store_settings)
         {
-          g_value_init(&value, G_TYPE_BOOLEAN);
+          g_value_init (&value, G_TYPE_BOOLEAN);
           g_object_get_property (G_OBJECT (window), bool_properties[i], &value);
           xfconf_channel_set_property (channel, buf, &value);
           g_value_unset (&value);
@@ -230,7 +229,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   for (i = 0; i < G_N_ELEMENTS (uint_properties); i++)
     {
       /* create xfconf property name */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s", index, uint_properties[i]);
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s", panel_n, uint_properties[i]);
 
       /* store the window settings in the channel before we create the binding,
        * so we don't loose the panel settings */
@@ -354,14 +353,13 @@ panel_application_plugin_move (GtkWidget        *item,
 
 static void
 panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provider,
-                                          XfcePanelPluginProviderSignal  signal,
+                                          XfcePanelPluginProviderSignal  provider_signal,
                                           PanelApplication              *application)
 {
-  GtkWidget       *itembar;
-  PanelWindow     *window;
-  gchar           *property;
-  gchar           *path, *filename;
-  extern gboolean  dbus_quit_with_restart;
+  GtkWidget   *itembar;
+  PanelWindow *window;
+  gchar       *property;
+  gchar       *path, *filename;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -370,7 +368,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
   window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
 
   /* handle the signal emitted from the plugin provider */
-  switch (signal)
+  switch (provider_signal)
     {
       case PROVIDER_SIGNAL_MOVE_PLUGIN:
         /* invoke the move function */
@@ -383,7 +381,8 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         itembar = gtk_bin_get_child (GTK_BIN (window));
 
         /* set new expand mode */
-        panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), !!(signal == PROVIDER_SIGNAL_EXPAND_PLUGIN));
+        panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider),
+                                        !!(provider_signal == PROVIDER_SIGNAL_EXPAND_PLUGIN));
         break;
 
       case PROVIDER_SIGNAL_LOCK_PANEL:
@@ -437,7 +436,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
       case PROVIDER_SIGNAL_PANEL_QUIT:
       case PROVIDER_SIGNAL_PANEL_RESTART:
         /* set the restart boolean */
-        dbus_quit_with_restart = !!(signal == PROVIDER_SIGNAL_PANEL_RESTART);
+        dbus_quit_with_restart = !!(provider_signal == PROVIDER_SIGNAL_PANEL_RESTART);
 
         /* quit the main loop */
         gtk_main_quit ();
@@ -606,7 +605,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
                                       gint              y,
                                       GtkSelectionData *selection_data,
                                       guint             info,
-                                      guint             time,
+                                      guint             drag_time,
                                       PanelWindow      *window)
 {
   guint             position;
@@ -694,7 +693,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
   g_object_unref (G_OBJECT (application));
 
   /* tell the peer that we handled the drop */
-  gtk_drag_finish (context, succeed, FALSE, time);
+  gtk_drag_finish (context, succeed, FALSE, drag_time);
 }
 
 
@@ -704,7 +703,7 @@ panel_application_drag_drop (GtkWidget      *itembar,
                              GdkDragContext *context,
                              gint            x,
                              gint            y,
-                             guint           time,
+                             guint           drag_time,
                              PanelWindow    *window)
 {
   GdkAtom target;
@@ -720,7 +719,7 @@ panel_application_drag_drop (GtkWidget      *itembar,
     return FALSE;
 
   /* request the drag data */
-  gtk_drag_get_data (itembar, context, target, time);
+  gtk_drag_get_data (itembar, context, target, drag_time);
 
   /* we call gtk_drag_finish later */
   return TRUE;
@@ -915,16 +914,6 @@ panel_application_new_window (PanelApplication *application,
   panel_application_xfconf_window_bindings (application, PANEL_WINDOW (window), FALSE);
 
   return PANEL_WINDOW (window);
-}
-
-
-
-GSList *
-panel_application_get_windows (PanelApplication *application)
-{
-  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
-
-  return application->windows;
 }
 
 

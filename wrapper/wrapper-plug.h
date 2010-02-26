@@ -36,15 +36,17 @@ typedef struct _WrapperPlug      WrapperPlug;
 #define WRAPPER_IS_PLUG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), WRAPPER_TYPE_PLUG))
 #define WRAPPER_PLUG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), WRAPPER_TYPE_PLUG, WrapperPlugClass))
 
-GType        wrapper_plug_get_type             (void) G_GNUC_CONST;
+extern gchar *wrapper_name;
 
-WrapperPlug *wrapper_plug_new                  (GdkNativeWindow  socket_id);
+GType         wrapper_plug_get_type             (void) G_GNUC_CONST;
 
-void         wrapper_plug_set_background_alpha (WrapperPlug     *plug,
-                                                gdouble          alpha);
+WrapperPlug  *wrapper_plug_new                  (GdkNativeWindow  socket_id);
 
-void         wrapper_plug_set_selected         (WrapperPlug     *plug,
-                                                gboolean         selected);
+void          wrapper_plug_set_background_alpha (WrapperPlug     *plug,
+                                                 gdouble          alpha);
+
+void          wrapper_plug_set_selected         (WrapperPlug     *plug,
+                                                 gboolean         selected);
 
 G_END_DECLS
 

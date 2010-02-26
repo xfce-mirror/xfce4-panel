@@ -40,8 +40,6 @@
 
 
 
-static void launcher_plugin_class_init (LauncherPluginClass *klass);
-static void launcher_plugin_init (LauncherPlugin *plugin);
 static void launcher_plugin_construct (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_free_data (XfcePanelPlugin *panel_plugin);
 static void launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
@@ -61,7 +59,7 @@ static void launcher_plugin_button_state_changed (GtkWidget *button_a, GtkStateT
 static gboolean launcher_plugin_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPluginEntry *entry);
 static gboolean launcher_plugin_icon_button_pressed (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
 static gboolean launcher_plugin_icon_button_released (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
-static void launcher_plugin_icon_button_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y, GtkSelectionData *selection_data, guint info, guint time, LauncherPlugin *plugin);
+static void launcher_plugin_icon_button_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y, GtkSelectionData *selection_data, guint info, guint drag_time, LauncherPlugin *plugin);
 static gboolean launcher_plugin_icon_button_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPlugin *plugin);
 static gboolean launcher_plugin_arrow_button_pressed (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
 static gboolean launcher_plugin_menu_popup (gpointer user_data);
@@ -208,8 +206,7 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
     }
   else if (strcmp (property_name, "/arrow-position") == 0)
     {
-      plugin->arrow_position = CLAMP (g_value_get_uint (value),
-                                      ARROW_POS_DEFAULT, ARROW_POS_INSIDE_BUTTON);
+      plugin->arrow_position = MIN (g_value_get_uint (value), ARROW_POS_MAX);
     }
   else if (sscanf (property_name, "/entries/entry-%u/%a[a-z]", &nth, &property) == 2)
     {
@@ -856,8 +853,8 @@ launcher_plugin_read (LauncherPlugin *plugin)
   plugin->move_first = xfconf_channel_get_bool (plugin->channel, "/move-first", FALSE);
   plugin->disable_tooltips = xfconf_channel_get_bool (plugin->channel, "/disable-tooltips", FALSE);
   plugin->show_labels = xfconf_channel_get_bool (plugin->channel, "/show-labels", FALSE);
-  plugin->arrow_position = CLAMP (xfconf_channel_get_uint (plugin->channel, "/arrow-position", ARROW_POS_DEFAULT),
-                                  ARROW_POS_DEFAULT, ARROW_POS_INSIDE_BUTTON);
+  plugin->arrow_position = MIN (xfconf_channel_get_uint (plugin->channel, "/arrow-position", ARROW_POS_DEFAULT),
+                                ARROW_POS_MAX);
 
   /* number of launcher entries */
   n_entries = xfconf_channel_get_uint (plugin->channel, "/entries", 0);
@@ -1112,7 +1109,7 @@ launcher_plugin_icon_button_drag_data_received (GtkWidget        *widget,
                                                 gint              y,
                                                 GtkSelectionData *selection_data,
                                                 guint             info,
-                                                guint             time,
+                                                guint             drag_time,
                                                 LauncherPlugin   *plugin)
 {
   GSList *filenames;
@@ -1136,7 +1133,7 @@ launcher_plugin_icon_button_drag_data_received (GtkWidget        *widget,
     }
 
   /* finish the drag */
-  gtk_drag_finish (context, TRUE, FALSE, time);
+  gtk_drag_finish (context, TRUE, FALSE, drag_time);
 }
 
 

@@ -32,8 +32,6 @@
 
 
 
-static void xfce_clock_fuzzy_class_init   (XfceClockFuzzyClass *klass);
-static void xfce_clock_fuzzy_init         (XfceClockFuzzy      *clock);
 static void xfce_clock_fuzzy_set_property (GObject               *object,
                                              guint                  prop_id,
                                              const GValue          *value,
@@ -129,13 +127,13 @@ xfce_clock_fuzzy_class_init (XfceClockFuzzyClass *klass)
 
 
 static void
-xfce_clock_fuzzy_init (XfceClockFuzzy *clock)
+xfce_clock_fuzzy_init (XfceClockFuzzy *fuzzy)
 {
   /* init */
-  clock->fuzziness = FUZZINESS_DEFAULT;
+  fuzzy->fuzziness = FUZZINESS_DEFAULT;
 
   /* center text */
-  gtk_label_set_justify (GTK_LABEL (clock), GTK_JUSTIFY_CENTER);
+  gtk_label_set_justify (GTK_LABEL (fuzzy), GTK_JUSTIFY_CENTER);
 }
 
 
@@ -146,13 +144,12 @@ xfce_clock_fuzzy_set_property (GObject      *object,
                                const GValue *value,
                                GParamSpec   *pspec)
 {
-  XfceClockFuzzy *clock = XFCE_CLOCK_FUZZY (object);
+  XfceClockFuzzy *fuzzy = XFCE_CLOCK_FUZZY (object);
 
   switch (prop_id)
     {
       case PROP_FUZZINESS:
-        clock->fuzziness = CLAMP (g_value_get_uint (value),
-                                  FUZZINESS_MIN, FUZZINESS_MAX);
+        fuzzy->fuzziness = MIN (g_value_get_uint (value), FUZZINESS_MAX);
         break;
 
       default:
@@ -169,12 +166,12 @@ xfce_clock_fuzzy_get_property (GObject    *object,
                                GValue     *value,
                                GParamSpec *pspec)
 {
-  XfceClockFuzzy *clock = XFCE_CLOCK_FUZZY (object);
+  XfceClockFuzzy *fuzzy = XFCE_CLOCK_FUZZY (object);
 
   switch (prop_id)
     {
       case PROP_FUZZINESS:
-        g_value_set_uint (value, clock->fuzziness);
+        g_value_set_uint (value, fuzzy->fuzziness);
         break;
 
       default:
@@ -196,26 +193,26 @@ xfce_clock_fuzzy_new (void)
 gboolean
 xfce_clock_fuzzy_update (gpointer user_data)
 {
-  XfceClockFuzzy *clock = XFCE_CLOCK_FUZZY (user_data);
+  XfceClockFuzzy *fuzzy = XFCE_CLOCK_FUZZY (user_data);
   struct tm       tm;
   gint            hour_sector;
   gint            minutes, hour;
   gchar          *string;
 
-  panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (clock), FALSE);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (fuzzy), FALSE);
 
   /* get the local time */
   clock_plugin_get_localtime (&tm);
 
-  if (clock->fuzziness == FUZZINESS_5_MINS
-      || clock->fuzziness == FUZZINESS_15_MINS)
+  if (fuzzy->fuzziness == FUZZINESS_5_MINS
+      || fuzzy->fuzziness == FUZZINESS_15_MINS)
     {
       /* set the time */
       minutes = tm.tm_min;
       hour = tm.tm_hour > 12 ? tm.tm_hour - 12 : tm.tm_hour;
 
       /* get the hour sector */
-      if (clock->fuzziness == FUZZINESS_5_MINS)
+      if (fuzzy->fuzziness == FUZZINESS_5_MINS)
         hour_sector = minutes >= 3 ? (minutes - 3) / 5 : 11;
       else
         hour_sector = minutes > 7 ? ((minutes - 7) / 15 + 1) * 3 - 1 : 11;
@@ -226,12 +223,12 @@ xfce_clock_fuzzy_update (gpointer user_data)
 
       /* set the time string */
       string = g_strdup_printf (_(i18n_hour_sectors[hour_sector]), _(i18n_hour_names[hour]));
-      gtk_label_set_text (GTK_LABEL (clock), string);
+      gtk_label_set_text (GTK_LABEL (fuzzy), string);
       g_free (string);
     }
   else /* FUZZINESS_DAY */
     {
-      gtk_label_set_text (GTK_LABEL (clock), _(i18n_day_sectors[tm.tm_hour / 3]));
+      gtk_label_set_text (GTK_LABEL (fuzzy), _(i18n_day_sectors[tm.tm_hour / 3]));
     }
 
   return TRUE;
@@ -240,9 +237,9 @@ xfce_clock_fuzzy_update (gpointer user_data)
 
 
 guint
-xfce_clock_fuzzy_interval (XfceClockFuzzy *clock)
+xfce_clock_fuzzy_interval (XfceClockFuzzy *fuzzy)
 {
-  panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (clock), CLOCK_INTERVAL_MINUTE);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (fuzzy), CLOCK_INTERVAL_MINUTE);
 
   return CLOCK_INTERVAL_MINUTE;
 }

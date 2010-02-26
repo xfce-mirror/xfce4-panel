@@ -117,8 +117,6 @@ callback_handler (const gchar  *name,
 static void
 signal_handler (gint signum)
 {
-  extern gboolean dbus_quit_with_restart;
-
   /* don't try to restart */
   dbus_quit_with_restart = FALSE;
 
@@ -134,7 +132,6 @@ main (gint argc, gchar **argv)
   PanelApplication *application;
   GError           *error = NULL;
   PanelDBusService *dbus_service;
-  extern gboolean   dbus_quit_with_restart;
   gboolean          result;
   guint             i;
   const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
@@ -147,7 +144,7 @@ main (gint argc, gchar **argv)
     g_thread_init (NULL);
 
   /* initialize gtk+ */
-  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, _("[ARGUMENTS...]"), option_entries, (gchar *) GETTEXT_PACKAGE, &error))
     {
       if (G_LIKELY (error))
         {
