@@ -338,7 +338,7 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
   gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
   object = gtk_builder_get_object (dialog->builder, "item-edit");
-  sensitive = !!(position >= 0 && n_children > 0); /* TODO custom items only (??) */
+  sensitive = !!(position >= 0 && n_children > 0);
   gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
   object = gtk_builder_get_object (dialog->builder, "arrow-position");
@@ -349,6 +349,54 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
 
   object = gtk_builder_get_object (dialog->builder, "arrow-position-label");
   gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
+}
+
+
+
+static void
+launcher_dialog_editor_populate (LauncherPluginDialog *dialog,
+                                 XfceMenuItem         *item)
+{
+  GObject     *object;
+  const gchar *path;
+  gchar       *current_dir = NULL;
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
+
+  object = gtk_builder_get_object (dialog->builder, "item-name");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_entry_set_text (GTK_ENTRY (object),
+      xfce_menu_item_get_name (item));
+
+  object = gtk_builder_get_object (dialog->builder, "item-description");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_entry_set_text (GTK_ENTRY (object),
+      xfce_menu_item_get_comment (item));
+
+  object = gtk_builder_get_object (dialog->builder, "item-command");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_entry_set_text (GTK_ENTRY (object),
+      xfce_menu_item_get_command (item));
+
+  object = gtk_builder_get_object (dialog->builder, "item-working-directory");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  path = xfce_menu_item_get_path (item);
+  if (path == NULL || g_path_is_absolute (path) == FALSE)
+    path = current_dir = g_get_current_dir ();
+  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (object), path);
+  g_free (current_dir);
+
+  object = gtk_builder_get_object (dialog->builder, "item-terminal");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (object),
+      xfce_menu_item_requires_terminal (item));
+
+  object = gtk_builder_get_object (dialog->builder, "item-startup-notify");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (object),
+      xfce_menu_item_supports_startup_notification (item));
 }
 
 
@@ -365,6 +413,7 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
   GtkTreeModel     *model;
   GtkTreeIter       iter_a, iter_b;
   GtkTreePath      *path;
+  XfceMenuItem     *item = NULL;
 
   panel_return_if_fail (GTK_IS_BUILDABLE (button));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
@@ -410,8 +459,22 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
         }
       else if (exo_str_is_equal (name, "item-edit"))
         {
+          /* polulate the dialog */
+          gtk_tree_model_get (model, &iter_a, COL_ITEM, &item, -1);
+          if (G_UNLIKELY (item == NULL))
+            return;
+          launcher_dialog_editor_populate (dialog, item);
+
+          /* show the dialog */
           object = gtk_builder_get_object (dialog->builder, "dialog-editor");
+          panel_return_if_fail (GTK_IS_WIDGET (object));
           gtk_widget_show (GTK_WIDGET (object));
+
+          /* create a tree path of the selected item, we use this to
+           * replace the menu item after saving */
+          path = gtk_tree_model_get_path (model, &iter_a);
+          g_object_set_data_full (G_OBJECT (object), "item-path", path,
+              (GDestroyNotify) gtk_tree_path_free);
         }
       else if (exo_str_is_equal (name, "item-move-up"))
         {
@@ -473,15 +536,160 @@ launcher_dialog_response (GtkWidget            *widget,
 
 
 static void
+launcher_dialog_editor_write_value (XfceRc      *rc,
+                                    GtkBuilder  *builder,
+                                    const gchar *name,
+                                    const gchar *key)
+{
+  GObject     *object;
+  const gchar *text;
+
+  panel_return_if_fail (GTK_IS_BUILDER (builder));
+
+  object = gtk_builder_get_object (builder, name);
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  text = gtk_entry_get_text (GTK_ENTRY (object));
+  if (IS_STRING (text))
+    xfce_rc_write_entry (rc, key, text);
+  else
+    xfce_rc_delete_entry (rc, key, FALSE);
+}
+
+
+
+static void
 launcher_dialog_editor_response (GtkWidget            *widget,
                                  gint                  response_id,
                                  LauncherPluginDialog *dialog)
 {
+  GObject      *object;
+  GtkTreePath  *path;
+  XfceMenuItem *item = NULL;
+  gchar        *user_dir, *new_file = NULL;
+  const gchar  *filename;
+  guint         i;
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  XfceRc       *rc;
+
   panel_return_if_fail (GTK_IS_DIALOG (widget));
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
 
+  if (response_id == 2)
+    {
+      /* get the user directory */
+      user_dir = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
+                                              "/xfce4/xfce4-panel/", TRUE);
+      if (G_UNLIKELY (user_dir == NULL))
+        {
+          g_critical ("Failed to create the panel config directory.");
+          goto leave;
+        }
+
+      object = gtk_builder_get_object (dialog->builder, "item-treeview");
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      model = gtk_tree_view_get_model (GTK_TREE_VIEW (object));
+
+      /* get the menu item attached to the dialog */
+      path = g_object_get_data (G_OBJECT (widget), "item-path");
+      if (!gtk_tree_model_get_iter (model, &iter, path))
+        goto leave;
+      gtk_tree_model_get (model, &iter, COL_ITEM, &item, -1);
+      panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
+
+      /* check if the item is already in the users directory */
+      filename = xfce_menu_item_get_filename (item);
+      if (!g_str_has_prefix (filename, user_dir))
+        {
+          /* create a unique filename for the copy */
+          for (i = 1; i < 100 /* arbitairy limit */; i++)
+            {
+              /* create the new filename */
+              new_file = g_strdup_printf ("%slauncher-%d-%d.desktop",
+                  user_dir,
+                  xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (dialog->plugin)),
+                  i++);
+
+              /* we're done if the file does not exist yet */
+              if (!g_file_test (new_file, G_FILE_TEST_IS_REGULAR))
+                break;
+
+              /* cleanup before we try again */
+              g_free (new_file);
+            }
+
+          /* set new filename */
+          filename = new_file;
+        }
+
+      /* cleanup */
+      g_free (user_dir);
+
+      /* store the new item data */
+      rc = xfce_rc_simple_open (filename, FALSE);
+      if (G_LIKELY (rc != NULL))
+        {
+          /* write some default stuff */
+          xfce_rc_set_group (rc, "Desktop Entry");
+          xfce_rc_write_entry (rc, "Type", "Application");
+          xfce_rc_write_entry (rc, "Encoding", "UTF-8");
+
+          /* write text entries */
+          launcher_dialog_editor_write_value (rc, dialog->builder,
+                                              "item-name",
+                                              "Name");
+          launcher_dialog_editor_write_value (rc, dialog->builder,
+                                              "item-description",
+                                              "Comment");
+          launcher_dialog_editor_write_value (rc, dialog->builder,
+                                              "item-command",
+                                              "Exec");
+
+          /* TODO */
+          /*launcher_dialog_editor_write_value (rc, dialog->builder,
+                                              "item-working-directory",
+                                              "Path");*/
+
+          object = gtk_builder_get_object (dialog->builder, "item-terminal");
+          panel_return_if_fail (GTK_IS_WIDGET (object));
+          xfce_rc_write_bool_entry (rc, "Terminal",
+              gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (object)));
+
+          object = gtk_builder_get_object (dialog->builder, "item-startup-notify");
+          panel_return_if_fail (GTK_IS_WIDGET (object));
+          xfce_rc_write_bool_entry (rc, "StartupNotify",
+              gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (object)));
+
+          xfce_rc_close (rc);
+        }
+
+      /* release the menu item */
+      if (G_LIKELY (item != NULL))
+        g_object_unref (G_OBJECT (item));
+
+      /* update the model */
+      item = xfce_menu_item_new (filename);
+      if (G_LIKELY (item != NULL))
+        {
+          launcher_dialog_items_insert_item (GTK_LIST_STORE (model),
+                                             &iter, item);
+          g_object_unref (G_OBJECT (item));
+        }
+
+      /* cleanup */
+      g_free (new_file);
+
+      /* write the model to xfconf */
+      launcher_dialog_tree_save (dialog);
+    }
+
+leave:
   /* hide the dialog, since it's owned by gtkbuilder */
   gtk_widget_hide (widget);
+
+  /* unset the item path */
+  g_object_set_data (G_OBJECT (widget), "item-path", NULL);
 }
 
 
