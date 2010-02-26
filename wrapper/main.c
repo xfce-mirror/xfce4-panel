@@ -198,7 +198,9 @@ main (gint argc, gchar **argv)
   DBusConnection          *dbus_connection;
   DBusGProxy              *dbus_gproxy;
   WrapperPlug             *plug;
+#if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
   gchar                    process_name[16];
+#endif
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -250,9 +252,12 @@ main (gint argc, gchar **argv)
       return EXIT_FAILURE;
     }
 
+#if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
   /* change the process name to something that makes sence */
   g_snprintf (process_name, sizeof (process_name), "panel-%s-%d", wrapper_name, opt_unique_id);
-  prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0);
+  if (prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0) == -1)
+    g_critical ("Failed to set the process name to %s", process_name);
+#endif
 
   /* try to connect to dbus */
   dbus_gconnection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
