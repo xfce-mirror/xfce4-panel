@@ -815,31 +815,28 @@ systray_manager_set_orientation (SystrayManager *manager,
   panel_return_if_fail (GTK_IS_INVISIBLE (manager->invisible));
   panel_return_if_fail (GDK_IS_WINDOW (manager->invisible->window));
 
-  if (G_LIKELY (manager->orientation != orientation))
-    {
-      /* set the new orientation */
-      manager->orientation = orientation;
+  /* set the new orientation */
+  manager->orientation = orientation;
 
-      /* get invisible display */
-      display = gtk_widget_get_display (manager->invisible);
+  /* get invisible display */
+  display = gtk_widget_get_display (manager->invisible);
 
-      /* get the xatom for the orientation property */
-      orientation_atom = gdk_x11_get_xatom_by_name_for_display (display,
-          "_NET_XFCE_SYSTRAY_MANAGER_ORIENTATION");
+  /* get the xatom for the orientation property */
+  orientation_atom = gdk_x11_get_xatom_by_name_for_display (display,
+      "_NET_SYSTEM_TRAY_ORIENTATION");
 
-      /* set the data we're going to send to x */
-      data[0] = (manager->orientation == GTK_ORIENTATION_HORIZONTAL ?
-                 XFCE_SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL
-                 : XFCE_SYSTRAY_MANAGER_ORIENTATION_VERTICAL);
+  /* set the data we're going to send to x */
+  data[0] = (manager->orientation == GTK_ORIENTATION_HORIZONTAL ?
+             XFCE_SYSTRAY_MANAGER_ORIENTATION_HORIZONTAL
+             : XFCE_SYSTRAY_MANAGER_ORIENTATION_VERTICAL);
 
-      /* change the x property */
-      XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
-                       GDK_WINDOW_XWINDOW (manager->invisible->window),
-                       orientation_atom,
-                       XA_CARDINAL, 32,
-                       PropModeReplace,
-                       (guchar *) &data, 1);
-    }
+  /* change the x property */
+  XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
+                   GDK_WINDOW_XWINDOW (manager->invisible->window),
+                   orientation_atom,
+                   XA_CARDINAL, 32,
+                   PropModeReplace,
+                   (guchar *) &data, 1);
 }
 
 
