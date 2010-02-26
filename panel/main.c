@@ -30,19 +30,22 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
 #ifdef HAVE_SIGNAL_H
 #include <signal.h>
 #endif
 
 #include <glib.h>
+#include <dbus/dbus-glib.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 
+#include <libxfce4panel/libxfce4panel.h>
 #include <panel/panel-application.h>
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-dbus-client.h>
-
-#define PANEL_CALLBACK_OPTION G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, callback_handler
 
 
 
@@ -67,10 +70,11 @@ static void     signal_handler   (gint          signum);
 
 
 /* command line options */
+#define PANEL_CALLBACK_OPTION G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, callback_handler
 static GOptionEntry option_entries[] =
 {
-  { "preferences", 'p', PANEL_CALLBACK_OPTION, N_("Show the 'Panel Preferences' dialog"), N_("Panel Number") },
-  { "add-items", 'a', PANEL_CALLBACK_OPTION, N_("Show the 'Add New Items' dialog"), N_("Panel Number") },
+  { "preferences", 'p', PANEL_CALLBACK_OPTION, N_("Show the 'Panel Preferences' dialog"), N_("PANEL NUMBER") },
+  { "add-items", 'a', PANEL_CALLBACK_OPTION, N_("Show the 'Add New Items' dialog"), N_("PANEL NUMBER") },
   { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_("Save the panel configuration"), NULL },
   { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_("Add a new plugin to the panel"), N_("PLUGIN NAME") },
   { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_("Restart the running panel instance"), NULL },
@@ -89,24 +93,22 @@ callback_handler (const gchar  *name,
                   gpointer      user_data,
                   GError      **error)
 {
-  /* this should actually never happen */
-  if (G_UNLIKELY (name == NULL))
-    return FALSE;
+  panel_return_val_if_fail (name != NULL, FALSE);
 
-  switch (*(name + 1))
+  if (strcmp (name, "--preferences") == 0
+      || strcmp (name, "-p") == 0)
     {
-      case 'p':
-        /* set the option */
-        opt_preferences = value ? MAX (0, atoi (value)) : 0;
-        break;
-
-      case 'a':
-        /* set the option */
-        opt_add_items = value ? MAX (0, atoi (value)) : 0;
-        break;
-
-      default:
-        return FALSE;
+      opt_preferences = value != NULL ? MAX (0, atoi (value)) : 0;
+    }
+  else if (strcmp (name, "--add-items") == 0
+           || strcmp (name, "-a") == 0)
+    {
+      opt_add_items = value != NULL ? MAX (0, atoi (value)) : 0;
+    }
+  else
+    {
+      panel_assert_not_reached ();
+      return FALSE;
     }
 
   return TRUE;
@@ -135,6 +137,7 @@ main (gint argc, gchar **argv)
   gboolean          result;
   guint             i;
   const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
+  const gchar      *error_msg;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -183,21 +186,18 @@ main (gint argc, gchar **argv)
     {
       /* send a signal to the running instance to show the preferences dialog */
       result = panel_dbus_client_display_preferences_dialog (opt_preferences, &error);
-
       goto dbus_return;
     }
   else if (opt_add_items >= 0)
     {
       /* send a signal to the running instance to show the add items dialog */
       result = panel_dbus_client_display_items_dialog (opt_add_items, &error);
-
       goto dbus_return;
     }
   else if (opt_save)
     {
       /* send a save signal to the running instance */
       result = panel_dbus_client_save (&error);
-
       goto dbus_return;
     }
   else if (opt_add)
@@ -207,14 +207,12 @@ main (gint argc, gchar **argv)
 
       /* send a add new item signal to the running instance */
       result = panel_dbus_client_add_new_item (opt_add, opt_arguments, &error);
-
       goto dbus_return;
     }
   else if (opt_restart || opt_quit)
     {
       /* send a terminate signal to the running instance */
       result = panel_dbus_client_terminate (opt_restart, &error);
-
       goto dbus_return;
     }
   else if (panel_dbus_client_check_instance_running ())
@@ -223,8 +221,7 @@ main (gint argc, gchar **argv)
       result = TRUE;
 
       /* print message */
-      g_message (_("There is already a running instance..."));
-
+      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("There is already a running instance"));
       goto dbus_return;
     }
 
@@ -257,7 +254,7 @@ main (gint argc, gchar **argv)
   if (dbus_quit_with_restart)
     {
       /* message */
-      g_print ("%s\n\n", _("Restarting the Xfce Panel..."));
+      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting"));
 
       /* spawn ourselfs again */
       g_spawn_command_line_async (argv[0], NULL);
@@ -265,17 +262,38 @@ main (gint argc, gchar **argv)
 
   return EXIT_SUCCESS;
 
-  dbus_return:
+dbus_return:
 
   /* stop any running startup notification */
   gdk_notify_startup_complete ();
 
   if (G_UNLIKELY (error != NULL))
     {
-      /* show error dialog */
-      xfce_dialog_show_error (NULL, error, _("Failed to send D-Bus message"));
+      /* get suitable error message */
+      if (opt_preferences >= 0)
+        error_msg = _("Failed to show the preferences dialog");
+      else if (opt_add_items >= 0)
+        error_msg = _("Failed to show the add new items dialog");
+      else if (opt_save)
+        error_msg = _("Failed to save the panel configuration");
+      else if (opt_add)
+        error_msg = _("Failed to remote add a plugin to the panel");
+      else if (opt_restart)
+        error_msg = _("Failed to restart the panel");
+      else if (opt_quit)
+        error_msg = _("Failed to quit the panel");
+      else
+        error_msg = _("Failed to send D-Bus message");
 
-      /* cleanup */
+      /* show understandable message for this common error */
+      if (error->code == DBUS_GERROR_NAME_HAS_NO_OWNER)
+        {
+          g_clear_error (&error);
+          g_set_error (&error, 0, 0, _("No running instance of %s found"), G_LOG_DOMAIN);
+        }
+
+      /* show error dialog */
+      xfce_dialog_show_error (NULL, error, "%s", error_msg);
       g_error_free (error);
     }
 
