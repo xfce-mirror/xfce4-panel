@@ -946,7 +946,7 @@ panel_window_size_request (GtkWidget      *widget,
 {
   PanelWindow    *window = PANEL_WINDOW (widget);
   GtkRequisition  child_requisition = { 0, 0 };
-  gint            value, length;
+  gint            length;
   gint            extra_width = 0, extra_height = 0;
   PanelBorders    borders;
 
@@ -974,20 +974,19 @@ panel_window_size_request (GtkWidget      *widget,
   if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
     extra_height++;
 
-  /* set the window requisition */
+  requisition->height = child_requisition.height + extra_height;
+  requisition->width = child_requisition.width + extra_width;
+
+  /* respect the length and monitor/screen size */
   if (window->horizontal)
     {
-      requisition->height = window->size + extra_height;
       length = window->area.width * window->length;
-      value = child_requisition.width + extra_width;
-      requisition->width = CLAMP (value, length, window->area.width);
+      requisition->width = CLAMP (requisition->width, length, window->area.width);
     }
   else
     {
-      requisition->width = window->size + extra_width;
       length = window->area.height * window->length;
-      value = child_requisition.height + extra_height;
-      requisition->height = CLAMP (value, length, window->area.height);
+      requisition->height = CLAMP (requisition->height, length, window->area.height);
     }
 }
 

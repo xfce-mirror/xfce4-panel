@@ -99,7 +99,7 @@ struct _PanelPreferencesDialog
 
 
 
-G_DEFINE_TYPE (PanelPreferencesDialog, panel_preferences_dialog, GTK_TYPE_BUILDER);
+G_DEFINE_TYPE (PanelPreferencesDialog, panel_preferences_dialog, GTK_TYPE_BUILDER)
 
 
 
@@ -355,7 +355,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       dialog->changed_handler_id =
-          g_signal_connect_swapped (G_OBJECT (itembar), "notify::changed",
+          g_signal_connect_swapped (G_OBJECT (itembar), "changed",
                                     G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
                                     dialog);
 

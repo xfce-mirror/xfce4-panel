@@ -221,8 +221,8 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 
   /* signals for treeview dnd */
   gtk_drag_source_set (treeview, GDK_BUTTON1_MASK, drag_targets, G_N_ELEMENTS (drag_targets), GDK_ACTION_COPY);
-  g_signal_connect_after (G_OBJECT (treeview), "drag-begin", G_CALLBACK (panel_item_dialog_drag_begin), dialog);
-  g_signal_connect_after (G_OBJECT (treeview), "drag-data-get", G_CALLBACK (panel_item_dialog_drag_data_get), dialog);
+  g_signal_connect (G_OBJECT (treeview), "drag-begin", G_CALLBACK (panel_item_dialog_drag_begin), dialog);
+  g_signal_connect (G_OBJECT (treeview), "drag-data-get", G_CALLBACK (panel_item_dialog_drag_data_get), dialog);
 
   /* icon renderer */
   renderer = gtk_cell_renderer_pixbuf_new ();
@@ -457,7 +457,7 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
           icon_name = panel_module_get_icon_name (module);
 
           /* set the drag icon */
-          if (G_LIKELY (icon_name))
+          if (G_LIKELY (icon_name != NULL))
             gtk_drag_set_icon_name (context, icon_name, 0, 0);
           else
             gtk_drag_set_icon_default (context);
@@ -494,14 +494,10 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
   module = panel_item_dialog_get_selected_module (GTK_TREE_VIEW (treeview));
   if (G_LIKELY (module != NULL))
     {
-      /* get the internal module name */
+      /* set the internal module name as selection data */
       internal_name = panel_module_get_name (module);
-
-      /* set the selection data */
       gtk_selection_data_set (selection_data, selection_data->target, 8,
           (guchar *) internal_name, strlen (internal_name));
-
-      /* release module */
       g_object_unref (G_OBJECT (module));
     }
 }
