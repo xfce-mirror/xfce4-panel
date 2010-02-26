@@ -25,6 +25,37 @@
 
 
 
+static void
+panel_properties_store_value (XfconfChannel *channel,
+                              const gchar   *xfconf_property,
+                              GType          xfconf_property_type,
+                              GObject       *object,
+                              const gchar   *object_property)
+{
+  GValue      value = { 0, };
+#ifndef NDEBUG
+  GParamSpec *pspec;
+#endif
+
+  panel_return_if_fail (G_IS_OBJECT (object));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
+
+#ifndef NDEBUG
+  /* check if the types match */
+  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (object), object_property);
+  panel_assert (pspec != NULL);
+  panel_assert (G_PARAM_SPEC_VALUE_TYPE (pspec) == xfconf_property_type);
+#endif
+
+  /* write the property to the xfconf channel */
+  g_value_init (&value, xfconf_property_type);
+  g_object_get_property (G_OBJECT (object), object_property, &value);
+  xfconf_channel_set_property (channel, xfconf_property, &value);
+  g_value_unset (&value);
+}
+
+
+
 XfconfChannel *
 panel_properties_get_channel (GObject *object_for_weak_ref)
 {
@@ -71,12 +102,13 @@ panel_properties_bind (XfconfChannel       *channel,
   for (prop = properties; prop->property != NULL; prop++)
     {
       property = g_strconcat (property_base, "/", prop->property, NULL);
-      xfconf_g_property_bind (channel, property, prop->type, object, prop->property);
-      g_free (property);
 
-      /* notify the property to it gets saved */
       if (save_properties)
-        g_object_notify (G_OBJECT (object), prop->property);
+        panel_properties_store_value (channel, property, prop->type, object, prop->property);
+
+      xfconf_g_property_bind (channel, property, prop->type, object, prop->property);
+
+      g_free (property);
     }
 }
 

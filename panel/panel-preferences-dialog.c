@@ -54,7 +54,7 @@ static void panel_preferences_dialog_panel_remove (GtkWidget *widget, PanelPrefe
 
 
 static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog, GtkTreeIter *return_iter);
-static void panel_preferences_dialog_item_store_rebuild (PanelPreferencesDialog *dialog);
+static void panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar, PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_item_move (GtkWidget *button, PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_item_remove (GtkWidget *button, PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_item_add (GtkWidget *button, PanelPreferencesDialog *dialog);
@@ -354,15 +354,15 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
     {
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       dialog->changed_handler_id =
-          g_signal_connect_swapped (G_OBJECT (itembar), "changed",
-                                    G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
-                                    dialog);
+          g_signal_connect (G_OBJECT (itembar), "changed",
+                            G_CALLBACK (panel_preferences_dialog_item_store_rebuild),
+                            dialog);
 
       /* rebind the dialog bindings */
       panel_preferences_dialog_bindings_update (dialog);
 
       /* update the items treeview */
-      panel_preferences_dialog_item_store_rebuild (dialog);
+      panel_preferences_dialog_item_store_rebuild (itembar, dialog);
     }
 
   /* sensitivity of the add button in item tab */
@@ -518,21 +518,21 @@ panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
 
 
 static void
-panel_preferences_dialog_item_store_rebuild (PanelPreferencesDialog *dialog)
+panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
+                                             PanelPreferencesDialog *dialog)
 {
-  GtkWidget   *itembar;
   GList       *items, *li;
   guint        i;
   PanelModule *module;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
+  panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
 
   /* clear the store */
   gtk_list_store_clear (dialog->store);
 
   /* get the panel items */
-  itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
   items = gtk_container_get_children (GTK_CONTAINER (itembar));
 
   /* add items to the store */

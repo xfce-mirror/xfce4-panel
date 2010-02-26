@@ -550,7 +550,8 @@ panel_window_set_property (GObject      *object,
 
       case PROP_POSITION:
         val_string = g_value_get_string (value);
-        if (sscanf (val_string, "p=%d;x=%d;y=%d", &snap_position, &x, &y) == 3)
+        if (!exo_str_is_empty (val_string)
+            && sscanf (val_string, "p=%d;x=%d;y=%d", &snap_position, &x, &y) == 3)
           {
             window->snap_position = CLAMP (snap_position, SNAP_POSITION_NONE, SNAP_POSITION_S);
             window->base_x = x;

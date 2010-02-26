@@ -437,6 +437,18 @@ panel_application_plugin_delete_config (PanelApplication *application,
 
 
 static void
+panel_application_plugin_remove (GtkWidget *widget,
+                                 gpointer   user_data)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (widget),
+                                          PROVIDER_SIGNAL_REMOVE_PLUGIN);
+}
+
+
+
+static void
 panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provider,
                                           XfcePanelPluginProviderSignal  provider_signal,
                                           PanelApplication              *application)
@@ -635,10 +647,11 @@ static void
 panel_application_window_destroyed (GtkWidget        *window,
                                     PanelApplication *application)
 {
-  guint     n;
-  gchar     buf[100];
-  GSList   *li, *lnext;
-  gboolean  passed_destroyed_window = FALSE;
+  guint      n;
+  gchar     *property;
+  GSList    *li, *lnext;
+  gboolean   passed_destroyed_window = FALSE;
+  GtkWidget *itembar;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
@@ -649,31 +662,39 @@ panel_application_window_destroyed (GtkWidget        *window,
     {
       lnext = li->next;
 
-      /* skip window if we're not passed the active window */
-      if (!passed_destroyed_window && li->data != window)
-        continue;
+      if (passed_destroyed_window)
+        {
+          /* save this panel again at it's new position */
+          panel_properties_unbind (G_OBJECT (li->data));
+          panel_application_xfconf_window_bindings (application,
+                                                    PANEL_WINDOW (li->data),
+                                                    TRUE);
+        }
+      else if (li->data == window)
+        {
+          /* disconnect bindings from this panel */
+          panel_properties_unbind (G_OBJECT (window));
 
-      /* keep updating from now on */
-      passed_destroyed_window = TRUE;
+          /* remove all the plugins from the itembar */
+          itembar = gtk_bin_get_child (GTK_BIN (window));
+          gtk_container_foreach (GTK_CONTAINER (itembar),
+              panel_application_plugin_remove, NULL);
 
-      /* disconnect bindings from this panel */
-      panel_properties_unbind (G_OBJECT (li->data));
+          /* remove from the internal list */
+          application->windows = g_slist_delete_link (application->windows, li);
 
-      /* remove the properties of this panel */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u", n);
-      if (xfconf_channel_has_property (application->xfconf, buf))
-        xfconf_channel_reset_property (application->xfconf, buf, TRUE);
-
-      /* either remove the window or add the bindings */
-      if (li->data == window)
-        application->windows = g_slist_delete_link (application->windows, li);
-      else
-        panel_application_xfconf_window_bindings (application,
-                                                  PANEL_WINDOW (li->data),
-                                                  TRUE);
+          /* keep updating the bindings for the remaining windows */
+          passed_destroyed_window = TRUE;
+        }
     }
 
-  /* force a panel save to store plugins and panel count */
+  /* remove the last property from the channel */
+  property = g_strdup_printf ("/panels/panel-%u", n - 1);
+  panel_assert (n - 1 == g_slist_length (application->windows));
+  xfconf_channel_reset_property (application->xfconf, property, TRUE);
+  g_free (property);
+
+  /* schedule a save to store the new number of panels */
   panel_application_save (application, FALSE);
 
   /* quit if there are no windows opened */
@@ -1160,6 +1181,7 @@ panel_application_new_window (PanelApplication *application,
   GtkWidget *window;
   GtkWidget *itembar;
   gchar     *property;
+  gint       idx;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
@@ -1185,9 +1207,9 @@ panel_application_new_window (PanelApplication *application,
   if (new_window)
     {
       /* remove the xfconf properties */
-      property = g_strdup_printf ("/panels/panel-%d", g_slist_index (application->windows, window));
-      if (xfconf_channel_has_property (application->xfconf, property))
-        xfconf_channel_reset_property (application->xfconf, property, TRUE);
+      idx = g_slist_index (application->windows, window);
+      property = g_strdup_printf ("/panels/panel-%d", idx);
+      xfconf_channel_reset_property (application->xfconf, property, TRUE);
       g_free (property);
 
       /* set default position */
