@@ -94,18 +94,17 @@ dnl *******************************
 dnl *** Check for X11 installed ***
 dnl *******************************
 XDT_CHECK_LIBX11_REQUIRE()
-XDT_CHECK_LIBSM()
 
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.4.0])
-XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.10.0])
-XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.12.0])
-XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.12.0])
-XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.12.0])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.5.90])
+XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.12.0])
+XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.14.0])
+XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.14.0])
+XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.14.0])
 XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.5.0])
-XDT_CHECK_PACKAGE([EXO], [exo-0.3], [0.3.1.11])
+XDT_CHECK_PACKAGE([EXO], [exo-0.3], [0.3.90])
 XDT_CHECK_PACKAGE([DBUS], [dbus-glib-1], [0.34])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.12])
@@ -126,11 +125,11 @@ GTK_DOC_CHECK([1.0])
 dnl *********************************************************
 dnl *** Disable deprecated components and single includes ***
 dnl *********************************************************
-PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DXFCE_DISABLE_DEPRECATED"
-PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DG_DISABLE_DEPRECATED -DG_DISABLE_SINGLE_INCLUDES"
-PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DGTK_DISABLE_DEPRECATED -DGTK_DISABLE_SINGLE_INCLUDES"
-PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES"
-PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DPANGO_DISABLE_DEPRECATED -DPANGO_DISABLE_SINGLE_INCLUDES"
+dnl #PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DXFCE_DISABLE_DEPRECATED"
+dnl #PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DG_DISABLE_DEPRECATED -DG_DISABLE_SINGLE_INCLUDES"
+dnl #PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DGTK_DISABLE_DEPRECATED -DGTK_DISABLE_SINGLE_INCLUDES"
+dnl #PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES"
+dnl #PLATFORM_CPPFLAGS="$PLATFORM_CPPFLAGS -DPANGO_DISABLE_DEPRECATED -DPANGO_DISABLE_SINGLE_INCLUDES"
 
 dnl ***********************************
 dnl *** Check for debugging support ***
@@ -243,5 +242,6 @@ plugins/clock/Makefile
 plugins/launcher/Makefile
 plugins/systray/Makefile
 plugins/tasklist/Makefile
+plugins/test/Makefile
 po/Makefile.in
 ])
