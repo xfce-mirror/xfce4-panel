@@ -214,6 +214,37 @@ typedef GTypeModule XfcePanelTypeModule;
 
 
 /**
+ * XFCE_PANEL_DEFINE_PREINIT_FUNC:
+ * @preinit_func: name of the function that points to an
+ *                #XfcePanelPluginPreInit function.
+ *
+ * Registers a pre-init function in the plugin module. This function
+ * is called before gtk_init() and can be used to initialize
+ * special libaries.
+ * Downside of this that the plugin cannot run internal. Even if you
+ * set X-XFCE-Interal=TRUE in the desktop file, the panel will force
+ * the plugin to run inside a wrapper (this because the panel called
+ * gtk_init() long before it starts to load the plugins).
+ *
+ * Note that you can only use this once and it only works in
+ * combination with the plugins register/define functions added
+ * in 4.8.
+ *
+ * Since: 4.8.0
+ **/
+#define XFCE_PANEL_DEFINE_PREINIT_FUNC(preinit_func) \
+  G_MODULE_EXPORT gboolean xfce_panel_module_preinit (gint argc, gchar **argv); \
+  \
+  G_MODULE_EXPORT gboolean \
+  xfce_panel_module_preinit (gint    argc, \
+                             gchar **argv) \
+  { \
+    return (*preinit_func) (argc, argv); \
+  }
+
+
+
+/**
  * XFCE_PANEL_PLUGIN_REGISTER:
  * @construct_func : name of the function that points to an
  *                   #XfcePanelPluginFunc function.
@@ -248,6 +279,8 @@ typedef GTypeModule XfcePanelTypeModule;
   XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, /* foo */, \
     if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
 
+
+
 /**
  * XFCE_PANEL_PLUGIN_REGISTER_FULL:
  * @construct_func : name of the function that points to an
@@ -257,29 +290,15 @@ typedef GTypeModule XfcePanelTypeModule;
  * @check_func     : name of the function that points to an
  *                   #XfcePanelPluginCheck function.
  *
- * Same as #XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK, but with a preinit
- * function. This function is called before all the other functions and
- * also before gtk_init(), so you can use this to enable threads or
- * initialize other libraries/functions.
- *
- * Downside of this that the plugin cannot run internal. Even if you set
- * X-XFCE-Interal=TRUE in the desktop file, the panel will force the
- * plugin to run inside a wrapper.
+ * Same as calling #XFCE_PANEL_DEFINE_PREINIT_FUNC and
+ * #XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK. See those macros
+ * for more information.
  *
  * Since: 4.8.0
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_FULL(construct_func, preinit_func, check_func) \
-  XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, \
-    G_MODULE_EXPORT gboolean xfce_panel_module_preinit (gint argc, gchar **argv); \
-    \
-    G_MODULE_EXPORT gboolean \
-    xfce_panel_module_preinit (gint    argc, \
-                               gchar **argv) \
-    { \
-      return (*preinit_func) (argc, argv); \
-    }, \
-    \
-    if (G_LIKELY ((*check_func) (xpp_screen) == TRUE)))
+  XFCE_PANEL_DEFINE_PREINIT_FUNC (preinit_func) \
+  XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK (construct_func, check_func)
 
 
 
