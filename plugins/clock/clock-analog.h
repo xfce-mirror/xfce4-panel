@@ -36,7 +36,9 @@ GType      xfce_clock_analog_get_type (void) G_GNUC_CONST;
 
 GtkWidget *xfce_clock_analog_new      (void) G_GNUC_MALLOC;
 
-gboolean   xfce_clock_analog_update   (gpointer user_data);
+gboolean   xfce_clock_analog_update   (gpointer         user_data);
+
+guint      xfce_clock_analog_interval (XfceClockAnalog *clock);
 
 G_END_DECLS
 

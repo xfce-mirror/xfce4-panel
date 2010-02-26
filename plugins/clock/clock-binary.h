@@ -36,7 +36,9 @@ GType      xfce_clock_binary_get_type (void) G_GNUC_CONST;
 
 GtkWidget *xfce_clock_binary_new      (void) G_GNUC_MALLOC;
 
-gboolean   xfce_clock_binary_update   (gpointer user_data);
+gboolean   xfce_clock_binary_update   (gpointer         user_data);
+
+guint      xfce_clock_binary_interval (XfceClockBinary *clock);
 
 G_END_DECLS
 

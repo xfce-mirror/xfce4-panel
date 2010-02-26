@@ -160,7 +160,7 @@ show_desktop_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                   gint             size)
 {
   panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (panel_plugin), FALSE);
-  
+
   /* keep the button squared */
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
 

@@ -41,15 +41,16 @@
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">_Layout:</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">layout</property>
+                            <property name="mnemonic_widget">mode</property>
                           </object>
                           <packing>
                             <property name="x_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="layout">
+                          <object class="GtkComboBox" id="mode">
                             <property name="visible">True</property>
+                            <property name="model">mode-model</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -60,9 +61,8 @@
                           <object class="GtkLabel" id="label4">
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">_Tooltip Format:</property>
+                            <property name="label" translatable="yes">_Tooltip format:</property>
                             <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">tooltip-format</property>
                           </object>
                           <packing>
                             <property name="top_attach">1</property>
@@ -71,18 +71,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="tooltip-format">
-                            <property name="visible">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="checkbutton1">
+                          <object class="GtkCheckButton" id="show-frame">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -94,6 +83,17 @@
                             <property name="right_attach">2</property>
                             <property name="top_attach">2</property>
                             <property name="bottom_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="combobox1">
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
                           </packing>
                         </child>
                       </object>
@@ -109,6 +109,7 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -124,83 +125,78 @@
                     <child>
                       <object class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
+                        <property name="border_width">6</property>
+                        <property name="spacing">6</property>
                         <child>
-                          <object class="GtkVBox" id="analog-box">
-                            <property name="border_width">6</property>
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="GtkCheckButton" id="checkbutton3">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="label" translatable="yes">Display _seconds</property>
-                              </object>
-                              <packing>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
+                          <object class="GtkCheckButton" id="display-seconds">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">Display _seconds</property>
                           </object>
                           <packing>
                             <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHSeparator" id="hseparator1"/>
+                          <object class="GtkCheckButton" id="true-binary">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">True _binary clock</property>
+                          </object>
                           <packing>
-                            <property name="expand">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="binary-box">
-                            <property name="border_width">6</property>
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="GtkCheckButton" id="checkbutton2">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="label" translatable="yes">Display _seconds</property>
-                              </object>
-                              <packing>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkCheckButton" id="checkbutton4">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="label" translatable="yes">True _binary clock</property>
-                              </object>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
+                          <object class="GtkCheckButton" id="show-military">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">24-_hour clock</property>
                           </object>
                           <packing>
                             <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHSeparator" id="hseparator2"/>
+                          <object class="GtkCheckButton" id="flash-separators">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">Fl_ash time seperators</property>
+                          </object>
                           <packing>
-                            <property name="expand">False</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="digital-box">
-                            <property name="border_width">6</property>
+                          <object class="GtkCheckButton" id="show-meridiem">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">Sho_w AM/PM</property>
+                          </object>
+                          <packing>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkHBox" id="format-box">
                             <property name="spacing">12</property>
                             <child>
-                              <object class="GtkLabel" id="label5">
+                              <object class="GtkLabel" id="label8">
                                 <property name="visible">True</property>
                                 <property name="label" translatable="yes">F_ormat:</property>
                                 <property name="use_underline">True</property>
@@ -221,70 +217,39 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="position">4</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkHSeparator" id="hseparator3"/>
-                          <packing>
-                            <property name="expand">False</property>
                             <property name="position">5</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkVBox" id="lcd-box">
-                            <property name="border_width">6</property>
-                            <property name="spacing">6</property>
+                          <object class="GtkHBox" id="fuzziness-box">
+                            <property name="visible">True</property>
+                            <property name="spacing">12</property>
                             <child>
-                              <object class="GtkCheckButton" id="checkbutton5">
+                              <object class="GtkLabel" id="label5">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
+                                <property name="label" translatable="yes">F_uzziness:</property>
                                 <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="label" translatable="yes">Display _seconds</property>
+                                <property name="mnemonic_widget">hscale1</property>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="checkbutton6">
+                              <object class="GtkHScale" id="hscale1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="label" translatable="yes">24-_hour clock</property>
+                                <property name="update_policy">delayed</property>
+                                <property name="adjustment">fuzziness</property>
+                                <property name="lower_stepper_sensitivity">off</property>
+                                <property name="upper_stepper_sensitivity">off</property>
+                                <property name="digits">0</property>
+                                <property name="draw_value">False</property>
+                                <property name="value_pos">right</property>
                               </object>
                               <packing>
                                 <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkCheckButton" id="checkbutton7">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="label" translatable="yes">Fl_ash time seperators</property>
-                              </object>
-                              <packing>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkCheckButton" id="checkbutton8">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <property name="label" translatable="yes">Sho_w AM/PM</property>
-                              </object>
-                              <packing>
-                                <property name="position">3</property>
                               </packing>
                             </child>
                           </object>
@@ -305,6 +270,7 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -339,5 +305,35 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="mode-model">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Analog</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Binary</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Digital</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Fuzzy</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">LCD</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkAdjustment" id="fuzziness">
+    <property name="value">1</property>
+    <property name="upper">4</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">1</property>
+    <property name="page_size">1</property>
   </object>
 </interface>

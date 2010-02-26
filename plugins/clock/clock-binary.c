@@ -43,7 +43,6 @@
 /* class functions */
 static void      xfce_clock_binary_class_init    (XfceClockBinaryClass *klass);
 static void      xfce_clock_binary_init          (XfceClockBinary      *clock);
-static void      xfce_clock_binary_finalize      (GObject              *object);
 static void      xfce_clock_binary_set_property  (GObject              *object,
                                                   guint                 prop_id,
                                                   const GValue         *value,
@@ -53,32 +52,32 @@ static void      xfce_clock_binary_get_property  (GObject              *object,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
 static void      xfce_clock_binary_size_request  (GtkWidget            *widget,
-			                                      GtkRequisition       *requisition);
+                                            GtkRequisition       *requisition);
 static gboolean  xfce_clock_binary_expose_event  (GtkWidget            *widget,
                                                   GdkEventExpose       *event);
 
 
 enum
 {
-    PROP_0,
-    PROP_SHOW_SECONDS,
-    PROP_TRUE_BINARY
+  PROP_0,
+  PROP_SHOW_SECONDS,
+  PROP_TRUE_BINARY
 };
 
 struct _XfceClockBinaryClass
 {
-    GtkImageClass __parent__;
+  GtkImageClass __parent__;
 };
 
 struct _XfceClockBinary
 {
-    GtkImage  __parent__;
+  GtkImage  __parent__;
 
-    /* whether we draw seconds */
-    guint     show_seconds : 1;
+  /* whether we draw seconds */
+  guint     show_seconds : 1;
 
-    /* if this is a true binary clock */
-    guint     true_binary : 1;
+  /* if this is a true binary clock */
+  guint     true_binary : 1;
 };
 
 
@@ -90,33 +89,30 @@ G_DEFINE_TYPE (XfceClockBinary, xfce_clock_binary, GTK_TYPE_IMAGE);
 static void
 xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
 {
-    GObjectClass   *gobject_class;
-    GtkWidgetClass *gtkwidget_class;
+  GObjectClass   *gobject_class;
+  GtkWidgetClass *gtkwidget_class;
 
-    gobject_class = G_OBJECT_CLASS (klass);
-    gobject_class->finalize = xfce_clock_binary_finalize;
-    gobject_class->set_property = xfce_clock_binary_set_property;
-    gobject_class->get_property = xfce_clock_binary_get_property;
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->set_property = xfce_clock_binary_set_property;
+  gobject_class->get_property = xfce_clock_binary_get_property;
 
-    gtkwidget_class = GTK_WIDGET_CLASS (klass);
-    gtkwidget_class->size_request = xfce_clock_binary_size_request;
-    gtkwidget_class->expose_event = xfce_clock_binary_expose_event;
+  gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->size_request = xfce_clock_binary_size_request;
+  gtkwidget_class->expose_event = xfce_clock_binary_expose_event;
 
-    /**
-     * Whether we display seconds
-     **/
-    g_object_class_install_property (gobject_class,
-                                     PROP_SHOW_SECONDS,
-                                     g_param_spec_boolean ("show-seconds", "show-seconds", "show-seconds",
-                                                           FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_SECONDS,
+                                   g_param_spec_boolean ("show-seconds", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE
+                                                         | G_PARAM_STATIC_BLURB));
 
-    /**
-     * Whether this is a true binary clock
-     **/
-    g_object_class_install_property (gobject_class,
-                                     PROP_TRUE_BINARY,
-                                     g_param_spec_boolean ("true-binary", "true-binary", "true-binary",
-                                                           FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_BLURB));
+  g_object_class_install_property (gobject_class,
+                                   PROP_TRUE_BINARY,
+                                   g_param_spec_boolean ("true-binary", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE
+                                                         | G_PARAM_STATIC_BLURB));
 }
 
 
@@ -124,17 +120,9 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
 static void
 xfce_clock_binary_init (XfceClockBinary *clock)
 {
-    /* init */
-    clock->show_seconds = FALSE;
-    clock->true_binary = FALSE;
-}
-
-
-
-static void
-xfce_clock_binary_finalize (GObject *object)
-{
-    (*G_OBJECT_CLASS (xfce_clock_binary_parent_class)->finalize) (object);
+  /* init */
+  clock->show_seconds = FALSE;
+  clock->true_binary = FALSE;
 }
 
 
@@ -145,21 +133,21 @@ xfce_clock_binary_set_property (GObject      *object,
                                 const GValue *value,
                                 GParamSpec   *pspec)
 {
-    XfceClockBinary *clock = XFCE_CLOCK_BINARY (object);
+  XfceClockBinary *clock = XFCE_CLOCK_BINARY (object);
 
-    switch (prop_id)
+  switch (prop_id)
     {
-        case PROP_SHOW_SECONDS:
-            clock->show_seconds = g_value_get_boolean (value);
-            break;
+      case PROP_SHOW_SECONDS:
+        clock->show_seconds = g_value_get_boolean (value);
+        break;
 
-        case PROP_TRUE_BINARY:
-            clock->true_binary = g_value_get_boolean (value);
-            break;
+      case PROP_TRUE_BINARY:
+        clock->true_binary = g_value_get_boolean (value);
+        break;
 
-        default:
-            G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-            break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
     }
 }
 
@@ -171,21 +159,21 @@ xfce_clock_binary_get_property (GObject    *object,
                                 GValue     *value,
                                 GParamSpec *pspec)
 {
-    XfceClockBinary *clock = XFCE_CLOCK_BINARY (object);
+  XfceClockBinary *clock = XFCE_CLOCK_BINARY (object);
 
-    switch (prop_id)
+  switch (prop_id)
     {
-        case PROP_SHOW_SECONDS:
-            g_value_set_boolean (value, clock->show_seconds);
-            break;
+      case PROP_SHOW_SECONDS:
+        g_value_set_boolean (value, clock->show_seconds);
+        break;
 
-        case PROP_TRUE_BINARY:
-            g_value_set_boolean (value, clock->true_binary);
-            break;
+      case PROP_TRUE_BINARY:
+        g_value_set_boolean (value, clock->true_binary);
+        break;
 
-        default:
-            G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-            break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
     }
 }
 
@@ -193,35 +181,31 @@ xfce_clock_binary_get_property (GObject    *object,
 
 static void
 xfce_clock_binary_size_request (GtkWidget      *widget,
-			                    GtkRequisition *requisition)
+                          GtkRequisition *requisition)
 {
-    gint             width, height;
-    gdouble          ratio;
-    XfceClockBinary *clock = XFCE_CLOCK_BINARY (widget);
+  gint             width, height;
+  gdouble          ratio;
+  XfceClockBinary *clock = XFCE_CLOCK_BINARY (widget);
 
-    /* get the current widget size */
-    gtk_widget_get_size_request (widget, &width, &height);
+  /* get the current widget size */
+  gtk_widget_get_size_request (widget, &width, &height);
 
-    /* ratio of the clock */
-    if (clock->true_binary)
-    {
-        ratio = clock->show_seconds ? 2.0 : 3.0;
-    }
-    else
-    {
-        ratio = clock->show_seconds ? 1.5 : 1.0;
-    }
+  /* ratio of the clock */
+  if (clock->true_binary)
+    ratio = clock->show_seconds ? 2.0 : 3.0;
+  else
+    ratio = clock->show_seconds ? 1.5 : 1.0;
 
-    /* set requisition based on the plugin orientation */
-    if (width == -1)
+  /* set requisition based on the plugin orientation */
+  if (width == -1)
     {
-        requisition->height = height;
-        requisition->width = height * ratio;
+      requisition->height = height;
+      requisition->width = height * ratio;
     }
-    else
+  else
     {
-        requisition->height = width / ratio;
-        requisition->width = width;
+      requisition->height = width / ratio;
+      requisition->width = width;
     }
 }
 
@@ -231,126 +215,126 @@ static gboolean
 xfce_clock_binary_expose_event (GtkWidget      *widget,
                                 GdkEventExpose *event)
 {
-    XfceClockBinary *clock = XFCE_CLOCK_BINARY (widget);
-    gdouble          cw, ch, columns;
-    gint             ticks, cells, decimal;
-    gdouble          radius;
-    gdouble          x, y;
-    gint             i, j;
-    gint             decimal_tb[] = {32, 16, 8, 4, 2, 1};
-    gint             decimal_bcd[] = {80, 40, 20, 10, 8, 4, 2, 1};
-    cairo_t         *cr;
-    GdkColor         active, inactive;
-    struct tm        tm;
+  XfceClockBinary *clock = XFCE_CLOCK_BINARY (widget);
+  gdouble          cw, ch, columns;
+  gint             ticks, cells, decimal;
+  gdouble          radius;
+  gdouble          x, y;
+  gint             i, j;
+  gint             decimal_tb[] = {32, 16, 8, 4, 2, 1};
+  gint             decimal_bcd[] = {80, 40, 20, 10, 8, 4, 2, 1};
+  cairo_t         *cr;
+  GdkColor         active, inactive;
+  struct tm        tm;
 
-    g_return_val_if_fail (XFCE_CLOCK_IS_BINARY (clock), FALSE);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (clock), FALSE);
 
-    /* number of columns and cells */
-    columns = clock->show_seconds ? 3.0 : 2.0;
-    cells = clock->true_binary ? 6 : 8;
+  /* number of columns and cells */
+  columns = clock->show_seconds ? 3.0 : 2.0;
+  cells = clock->true_binary ? 6 : 8;
 
-    /* cell width and height */
-    if (clock->true_binary)
+  /* cell width and height */
+  if (clock->true_binary)
     {
-        cw = widget->allocation.width / 6.0;
-        ch = widget->allocation.height / columns;
+      cw = widget->allocation.width / 6.0;
+      ch = widget->allocation.height / columns;
     }
-    else /* bcd clock */
+  else /* bcd clock */
     {
-        cw = widget->allocation.width / columns / 2.0;
-        ch = widget->allocation.height / 4.0;
+      cw = widget->allocation.width / columns / 2.0;
+      ch = widget->allocation.height / 4.0;
     }
 
-    /* arc radius */
-    radius = MIN (cw, ch) / 2.0 * 0.7;
+  /* arc radius */
+  radius = MIN (cw, ch) / 2.0 * 0.7;
 
-    /* get colors */
-    inactive = widget->style->fg[GTK_STATE_NORMAL];
-    active = widget->style->bg[GTK_STATE_SELECTED];
+  /* get colors */
+  inactive = widget->style->fg[GTK_STATE_NORMAL];
+  active = widget->style->bg[GTK_STATE_SELECTED];
 
-    /* get the cairo context */
-    cr = gdk_cairo_create (widget->window);
+  /* get the cairo context */
+  cr = gdk_cairo_create (widget->window);
 
-    if (G_LIKELY (cr != NULL))
+  if (G_LIKELY (cr != NULL))
     {
         /* clip the drawing region */
         gdk_cairo_rectangle (cr, &event->area);
         cairo_clip (cr);
 
         /* get the current time */
-        xfce_clock_util_get_localtime (&tm);
+        clock_plugin_get_localtime (&tm);
 
         /* walk the three or two time parts */
         for (i = 0; i < columns; i++)
         {
-            /* get the time of this column */
-            if (i == 0)
-                ticks = tm.tm_hour;
-            else if (i == 1)
-                ticks = tm.tm_min;
-            else
-                ticks = tm.tm_sec;
+          /* get the time of this column */
+          if (i == 0)
+            ticks = tm.tm_hour;
+          else if (i == 1)
+            ticks = tm.tm_min;
+          else
+            ticks = tm.tm_sec;
 
-            /* walk the binary columns */
-            for (j = 0; j < cells; j++)
+          /* walk the binary columns */
+          for (j = 0; j < cells; j++)
             {
-                if (clock->true_binary)
+              if (clock->true_binary)
                 {
-                    /* skip the columns we don't draw */
-                    if (i == 0 && j == 0)
-                        continue;
+                  /* skip the columns we don't draw */
+                  if (i == 0 && j == 0)
+                    continue;
 
-                    /* decimal representation of this cell */
-                    decimal = decimal_tb[j];
+                  /* decimal representation of this cell */
+                  decimal = decimal_tb[j];
 
-                    /* center of the arc */
-                    x = cw * (j + 0.5) + widget->allocation.x;
-                    y = ch * (i + 0.5) + widget->allocation.y;
+                  /* center of the arc */
+                  x = cw * (j + 0.5) + widget->allocation.x;
+                  y = ch * (i + 0.5) + widget->allocation.y;
                 }
-                else /* bcd clock */
+              else /* bcd clock */
                 {
-                    /* skip the columns we don't draw */
-                    if ((j == 0) || (i == 0 && j == 1))
-                        continue;
+                  /* skip the columns we don't draw */
+                  if ((j == 0) || (i == 0 && j == 1))
+                    continue;
 
-                    /* decimal representation of this cell */
-                    decimal = decimal_bcd[j];
+                  /* decimal representation of this cell */
+                  decimal = decimal_bcd[j];
 
-                    /* center of the arc */
-                    x = cw * (i * 2 + (j < 4 ? 0 : 1) + 0.5) + widget->allocation.x;
-                    y = ch * ((j >= 4 ? j - 4 : j) + 0.5) + widget->allocation.y;
-                }
-
-                /* if this binary values 'fits' in the time */
-                if (ticks >= decimal)
-                {
-                    /* extract the decimal value from the time */
-                    ticks -= decimal;
-
-                    /* set the active color */
-                    gdk_cairo_set_source_color (cr, &active);
-                }
-                else
-                {
-                    /* set the inactive color */
-                    gdk_cairo_set_source_color (cr, &inactive);
+                  /* center of the arc */
+                  x = cw * (i * 2 + (j < 4 ? 0 : 1) + 0.5) + widget->allocation.x;
+                  y = ch * ((j >= 4 ? j - 4 : j) + 0.5) + widget->allocation.y;
                 }
 
-                /* draw the arc */
-                cairo_move_to (cr, x, y);
-                cairo_arc (cr, x, y, radius, 0, 2 * M_PI);
-                cairo_close_path (cr);
+              /* if this binary values 'fits' in the time */
+              if (ticks >= decimal)
+                {
+                  /* extract the decimal value from the time */
+                  ticks -= decimal;
 
-                /* fill the arc */
-                cairo_fill (cr);
+                  /* set the active color */
+                  gdk_cairo_set_source_color (cr, &active);
+                }
+              else
+                {
+                  /* set the inactive color */
+                  gdk_cairo_set_source_color (cr, &inactive);
+                }
+
+              /* draw the arc */
+              cairo_move_to (cr, x, y);
+              cairo_arc (cr, x, y, radius, 0, 2 * M_PI);
+              cairo_close_path (cr);
+
+              /* fill the arc */
+              cairo_fill (cr);
             }
         }
 
-        /* cleanup */
-        cairo_destroy (cr);
+      /* cleanup */
+      cairo_destroy (cr);
     }
 
-    return FALSE;
+  return FALSE;
 }
 
 
@@ -358,7 +342,7 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
 GtkWidget *
 xfce_clock_binary_new (void)
 {
-    return g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
+  return g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
 }
 
 
@@ -366,11 +350,23 @@ xfce_clock_binary_new (void)
 gboolean
 xfce_clock_binary_update (gpointer user_data)
 {
-    GtkWidget *widget = GTK_WIDGET (user_data);
+  GtkWidget *widget = GTK_WIDGET (user_data);
 
-    /* update if the widget if visible */
-    if (G_LIKELY (GTK_WIDGET_VISIBLE (widget)))
-        gtk_widget_queue_draw (widget);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (user_data), FALSE);
 
-    return TRUE;
+  /* update if the widget if visible */
+  if (G_LIKELY (GTK_WIDGET_VISIBLE (widget)))
+    gtk_widget_queue_draw (widget);
+
+  return TRUE;
+}
+
+
+
+guint
+xfce_clock_binary_interval (XfceClockBinary *clock)
+{
+  panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (clock), CLOCK_INTERVAL_SECOND);
+
+  return clock->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
 }

@@ -24,7 +24,7 @@ G_BEGIN_DECLS
 
 typedef struct _SeparatorPluginClass SeparatorPluginClass;
 typedef struct _SeparatorPlugin      SeparatorPlugin;
-typedef enum   _SeparatorPluginMode  SeparatorPluginStyle;
+typedef enum   _SeparatorPluginStyle  SeparatorPluginStyle;
 
 #define XFCE_TYPE_SEPARATOR_PLUGIN            (separator_plugin_get_type ())
 #define XFCE_SEPARATOR_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SEPARATOR_PLUGIN, SeparatorPlugin))

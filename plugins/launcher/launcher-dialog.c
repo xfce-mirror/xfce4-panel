@@ -50,6 +50,10 @@ launcher_dialog_show (LauncherPlugin *plugin)
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
+      xfce_panel_plugin_take_window (XFCE_PANEL_PLUGIN (plugin), GTK_WINDOW (dialog));
+
+      xfce_panel_plugin_block_menu (XFCE_PANEL_PLUGIN (plugin));
+      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) xfce_panel_plugin_unblock_menu, plugin);
 
       object = gtk_builder_get_object (builder, "close-button");
       g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);

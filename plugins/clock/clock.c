@@ -1,4 +1,4 @@
-/* $Id: clock.c 26625 2008-02-18 07:59:29Z nick $ */
+/* $Id$ */
 /*
  * Copyright (c) 2007 Nick Schermer <nick@xfce.org>
  *
@@ -25,649 +25,501 @@
 #include <time.h>
 #endif
 
+#include <gtk/gtk.h>
+#include <common/panel-private.h>
+#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4ui/libxfce4ui.h>
+#include <xfconf/xfconf.h>
+
 #include "clock.h"
 #include "clock-analog.h"
 #include "clock-binary.h"
-#include "clock-dialog.h"
 #include "clock-digital.h"
+#include "clock-fuzzy.h"
 #include "clock-lcd.h"
-
-
-#define USE_DEBUG_TIME (0)
-
-
-
-/** prototypes **/
-#if USE_DEBUG_TIME
-static void         xfce_clock_util_get_debug_localtime  (struct tm       *tm);
-#endif
-static guint        xfce_clock_util_interval_from_format (const gchar     *format);
-static guint        xfce_clock_util_next_interval        (guint            timeout_interval);
-static gboolean     xfce_clock_tooltip_update            (gpointer         user_data);
-static gboolean     xfce_clock_tooltip_sync_timeout      (gpointer         user_data);
-static gboolean     xfce_clock_widget_sync_timeout       (gpointer         user_data);
-static ClockPlugin *xfce_clock_plugin_init               (XfcePanelPlugin *plugin);
-static void         xfce_clock_plugin_read               (ClockPlugin     *clock);
-static void         xfce_clock_plugin_write              (ClockPlugin     *clock);
-static void         xfce_clock_plugin_free               (ClockPlugin     *clock);
-static void         xfce_clock_plugin_construct          (XfcePanelPlugin *plugin);
+#include "clock-dialog_glade.h"
 
 
 
-/** register the plugin **/
-XFCE_PANEL_PLUGIN_REGISTER (xfce_clock_plugin_construct);
+static void     clock_plugin_class_init                (ClockPluginClass      *klass);
+static void     clock_plugin_init                      (ClockPlugin           *separator);
+static void     clock_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
+static void     clock_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
+static gboolean clock_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
+                                                        gint                   size);
+static void     clock_plugin_save                      (XfcePanelPlugin       *panel_plugin);
+static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
+static void     clock_plugin_property_changed          (XfconfChannel         *channel,
+                                                        const gchar           *property_name,
+                                                        const GValue          *value,
+                                                        ClockPlugin           *plugin);
+static void     clock_plugin_set_child                 (ClockPlugin           *plugin);
 
 
 
-/** utilities **/
-void
-xfce_clock_util_get_localtime (struct tm *tm)
+enum _ClockPluginMode
 {
-    time_t now = time (0);
+  /* modes */
+  CLOCK_PLUGIN_MODE_ANALOG = 0,
+  CLOCK_PLUGIN_MODE_BINARY,
+  CLOCK_PLUGIN_MODE_DIGITAL,
+  CLOCK_PLUGIN_MODE_FUZZY,
+  CLOCK_PLUGIN_MODE_LCD,
+
+  /* defines */
+  CLOCK_PLUGIN_MODE_MIN = CLOCK_PLUGIN_MODE_ANALOG,
+  CLOCK_PLUGIN_MODE_MAX = CLOCK_PLUGIN_MODE_LCD,
+  CLOCK_PLUGIN_MODE_DEFAULT = CLOCK_PLUGIN_MODE_DIGITAL
+};
+
+struct _ClockPluginClass
+{
+  /* parent class */
+  XfcePanelPluginClass __parent__;
+};
+
+struct _ClockPlugin
+{
+  /* parent type */
+  XfcePanelPlugin __parent__;
+
+  /* xfconf channel */
+  XfconfChannel   *channel;
+
+  /* internal child widget */
+  GtkWidget       *clock;
+  GtkWidget       *frame;
+
+  /* clock widget update function and interval */
+  GSourceFunc      clock_func;
+  guint            clock_interval;
+
+  /* clock mode */
+  ClockPluginMode  mode;
+
+  /* tooltip format */
+  gchar           *tooltip_format;
+};
+
+
+
+G_DEFINE_TYPE (ClockPlugin, clock_plugin, XFCE_TYPE_PANEL_PLUGIN);
+
+
+
+/* register the panel plugin */
+XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_CLOCK_PLUGIN);
+
+
+
+static void
+clock_plugin_class_init (ClockPluginClass *klass)
+{
+  XfcePanelPluginClass *plugin_class;
+
+  plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
+  plugin_class->construct = clock_plugin_construct;
+  plugin_class->free_data = clock_plugin_free_data;
+  plugin_class->save = clock_plugin_save;
+  plugin_class->size_changed = clock_plugin_size_changed;
+  plugin_class->configure_plugin = clock_plugin_configure_plugin;
+}
+
+
+
+static void
+clock_plugin_init (ClockPlugin *plugin)
+{
+  /* init */
+  plugin->mode = CLOCK_PLUGIN_MODE_DEFAULT;
+  plugin->clock = NULL;
+  plugin->tooltip_format = NULL;
+
+  /* initialize xfconf */
+  xfconf_init (NULL);
+
+  /* create frame widget */
+  plugin->frame = gtk_frame_new (NULL);
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
+  gtk_widget_show (plugin->frame);
+}
+
+
+
+static void
+clock_plugin_construct (XfcePanelPlugin *panel_plugin)
+{
+  ClockPlugin   *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
+  gboolean       show_frame;
+  guint          mode;
+
+  /* show configure */
+  xfce_panel_plugin_menu_show_configure (panel_plugin);
+
+  /* set the xfconf channel */
+  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  g_signal_connect (G_OBJECT (plugin->channel), "property-changed",
+                    G_CALLBACK (clock_plugin_property_changed), plugin);
+
+  /* load properties */
+  mode = xfconf_channel_get_uint (plugin->channel, "/mode", CLOCK_PLUGIN_MODE_DEFAULT);
+  plugin->mode = CLAMP (mode, CLOCK_PLUGIN_MODE_MIN, CLOCK_PLUGIN_MODE_MAX);
+
+  show_frame = xfconf_channel_get_bool (plugin->channel, "/show-frame", FALSE);
+  gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), show_frame ? GTK_SHADOW_IN :
+                             GTK_SHADOW_NONE);
+
+  plugin->tooltip_format = xfconf_channel_get_string (plugin->channel, "/tooltip-format", NULL);
+
+  /* create the clock widget */
+  clock_plugin_set_child (plugin);
+}
+
+
+
+static void
+clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
+{
+  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
+
+  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
+
+  /* release the xfonf channel */
+  g_object_unref (G_OBJECT (plugin->channel));
+
+  /* free the tooltip string */
+  g_free (plugin->tooltip_format);
+
+  /* shutdown xfconf */
+  xfconf_shutdown ();
+}
+
+
+
+static gboolean
+clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                           gint             size)
+{
+  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
+  gint         clock_size = size;
+
+  /* set the clock size */
+  if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
+    gtk_widget_set_size_request (plugin->clock, -1, clock_size);
+  else
+    gtk_widget_set_size_request (plugin->clock, clock_size, -1);
+
+  return TRUE;
+}
+
+
+
+static void
+clock_plugin_save (XfcePanelPlugin *panel_plugin)
+{
+  ClockPlugin   *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
+  GtkShadowType  shadow_type;
+
+  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
+
+  /* shadow type */
+  shadow_type = gtk_frame_get_shadow_type (GTK_FRAME (plugin->frame));
+
+  /* save the properties */
+  xfconf_channel_set_uint (plugin->channel, "/mode", plugin->mode);
+  xfconf_channel_set_bool (plugin->channel, "/show-frame", !!(shadow_type == GTK_SHADOW_IN));
+
+  if (IS_STRING (plugin->tooltip_format))
+    xfconf_channel_set_string (plugin->channel, "/tooltip-format", plugin->tooltip_format);
+  else
+    xfconf_channel_reset_property (plugin->channel, "/tooltip-format", FALSE);
+}
+
+
+
+#define create_binding(property, type) \
+  object = gtk_builder_get_object (builder, property); \
+  xfconf_g_property_bind (plugin->channel, "/" property, type, object, "active")
+
+
+
+static void
+clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
+{
+  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
+  GtkBuilder  *builder;
+  GObject     *dialog;
+  GObject     *object;
+
+  panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
+
+  /* save before we opend the dialog, so all properties exist in xfonf */
+  clock_plugin_save (panel_plugin);
+
+  /* load the dialog from the glade file */
+  builder = gtk_builder_new ();
+  if (gtk_builder_add_from_string (builder, clock_dialog_glade, clock_dialog_glade_length, NULL))
+    {
+      dialog = gtk_builder_get_object (builder, "dialog");
+      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
+      xfce_panel_plugin_take_window (panel_plugin, GTK_WINDOW (dialog));
+
+      xfce_panel_plugin_block_menu (panel_plugin);
+      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) xfce_panel_plugin_unblock_menu, panel_plugin);
+
+      object = gtk_builder_get_object (builder, "close-button");
+      g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
+
+      /* create simple bindings */
+      create_binding ("mode", G_TYPE_UINT);
+      create_binding ("show-frame", G_TYPE_BOOLEAN);
+      create_binding ("display-seconds", G_TYPE_BOOLEAN);
+      create_binding ("true-binary", G_TYPE_BOOLEAN);
+      create_binding ("show-military", G_TYPE_BOOLEAN);
+      create_binding ("flash-separators", G_TYPE_BOOLEAN);
+      create_binding ("show-meridiem", G_TYPE_BOOLEAN);
+
+      /* TODO remove when implemented by glade */
+      GtkCellRenderer *cell1 = gtk_cell_renderer_text_new ();
+      object = gtk_builder_get_object (builder, "mode");
+      gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (object), cell1, TRUE);
+      gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (object), cell1, "text", 0, NULL);
+
+      gtk_widget_show (GTK_WIDGET (dialog));
+    }
+  else
+    {
+      /* release the builder */
+      g_object_unref (G_OBJECT (builder));
+    }
+}
+
+
+
+static void
+clock_plugin_property_changed (XfconfChannel *channel,
+                               const gchar   *property_name,
+                               const GValue  *value,
+                               ClockPlugin   *plugin)
+{
+  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
+  panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
+  panel_return_if_fail (plugin->channel == channel);
+
+  if (strcmp (property_name, "/mode") == 0)
+    {
+      /* set new clock mode */
+      plugin->mode = CLAMP (g_value_get_uint (value),
+                            CLOCK_PLUGIN_MODE_MIN,
+                            CLOCK_PLUGIN_MODE_MAX);
+
+      /* update the child widget */
+      clock_plugin_set_child (plugin);
+    }
+  else if (strcmp (property_name, "/tooltip-format") == 0)
+    {
+      /* cleanup */
+      g_free (plugin->tooltip_format);
+
+      /* set new tooltip */
+      plugin->tooltip_format = g_value_dup_string (value);
+    }
+  else if (strcmp (property_name, "/show-frame") == 0)
+    {
+      /* update frame shadow */
+      gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
+                                 g_value_get_boolean (value) ? GTK_SHADOW_IN :
+                                 GTK_SHADOW_NONE);
+    }
+}
+
+
+
+static void
+clock_plugin_set_child (ClockPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (plugin->channel));
+
+  /* destroy the child */
+  if (plugin->clock)
+    {
+      gtk_widget_destroy (GTK_WIDGET (plugin->clock));
+      plugin->clock = NULL;
+    }
+
+  /* create a new clock */
+  switch (plugin->mode)
+    {
+      case CLOCK_PLUGIN_MODE_ANALOG:
+        /* create widget */
+        plugin->clock = xfce_clock_analog_new ();
+        plugin->clock_func = xfce_clock_analog_update;
+
+        /* connect binding */
+        xfconf_g_property_bind (plugin->channel, "/show-seconds",
+                                G_TYPE_BOOLEAN, plugin->clock, "show-seconds");
+
+        /* get update interval */
+        plugin->clock_interval = xfce_clock_analog_interval (XFCE_CLOCK_ANALOG (plugin->clock));
+        break;
+
+      case CLOCK_PLUGIN_MODE_BINARY:
+        /* create widget */
+        plugin->clock = xfce_clock_binary_new ();
+        plugin->clock_func = xfce_clock_binary_update;
+
+        /* connect bindings */
+        xfconf_g_property_bind (plugin->channel, "/show-seconds",
+                                G_TYPE_BOOLEAN, plugin->clock, "show-seconds");
+        xfconf_g_property_bind (plugin->channel, "/true-binary",
+                                G_TYPE_BOOLEAN, plugin->clock, "true-binary");
+
+        /* get update interval */
+        plugin->clock_interval = xfce_clock_binary_interval (XFCE_CLOCK_BINARY (plugin->clock));
+        break;
+
+      case CLOCK_PLUGIN_MODE_DIGITAL:
+        /* create widget */
+        plugin->clock = xfce_clock_digital_new ();
+        plugin->clock_func = xfce_clock_digital_update;
+
+        /* connect binding */
+        xfconf_g_property_bind (plugin->channel, "/digital-format",
+                                G_TYPE_STRING, plugin->clock, "digital-format");
+
+        /* get update interval */
+        plugin->clock_interval = xfce_clock_digital_interval (XFCE_CLOCK_DIGITAL (plugin->clock));
+        break;
+        
+      case CLOCK_PLUGIN_MODE_FUZZY:
+        /* create widget */
+        plugin->clock = xfce_clock_fuzzy_new ();
+        plugin->clock_func = xfce_clock_fuzzy_update;
+        
+        /* connect binding */
+        xfconf_g_property_bind (plugin->channel, "/fuzziness",
+                                G_TYPE_UINT, plugin->clock, "fuzziness");
+
+        /* get update interval */
+        plugin->clock_interval = xfce_clock_fuzzy_interval (XFCE_CLOCK_FUZZY (plugin->clock));
+        break;
+
+      case CLOCK_PLUGIN_MODE_LCD:
+        /* create widget */
+        plugin->clock = xfce_clock_lcd_new ();
+        plugin->clock_func = xfce_clock_lcd_update;
+
+        /* connect bindings */
+        xfconf_g_property_bind (plugin->channel, "/show-seconds",
+                                G_TYPE_BOOLEAN, plugin->clock, "show-seconds");
+        xfconf_g_property_bind (plugin->channel, "/show-military",
+                                G_TYPE_BOOLEAN, plugin->clock, "show-military");
+        xfconf_g_property_bind (plugin->channel, "/show-meridiem",
+                                G_TYPE_BOOLEAN, plugin->clock, "show-meridiem");
+        xfconf_g_property_bind (plugin->channel, "/flash-separators",
+                                G_TYPE_BOOLEAN, plugin->clock, "flash-separators");
+
+        /* get update interval */
+        plugin->clock_interval = xfce_clock_lcd_interval (XFCE_CLOCK_LCD (plugin->clock));
+        break;
+    }
+
+  /* add the widget to the plugin frame */
+  gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->clock);
+  gtk_widget_show (plugin->clock);
+  
+  g_message (g_type_name (G_OBJECT_TYPE (plugin->clock)));
+  
+  /* update the clock once */
+  (plugin->clock_func) (plugin->clock);
+}
+
+
+
+void
+clock_plugin_get_localtime (struct tm *tm)
+{
+  time_t now = time (0);
 
 #ifndef HAVE_LOCALTIME_R
-    struct tm *tmbuf;
+  struct tm *tmbuf;
 
-    tmbuf = localtime (&now);
-    *tm = *tmbuf;
+  tmbuf = localtime (&now);
+  *tm = *tmbuf;
 #else
-    localtime_r (&now, tm);
+  localtime_r (&now, tm);
 #endif
 
-#if USE_DEBUG_TIME
-    xfce_clock_util_get_debug_localtime (tm);
+#ifdef USE_DEBUG_TIME
+  xfce_clock_util_get_debug_localtime (tm);
 #endif
-}
-
-
-
-#if USE_DEBUG_TIME
-static void
-xfce_clock_util_get_debug_localtime (struct tm *tm)
-{
-    static gint hour = 23;
-    static gint min = 59;
-    static gint sec = 45;
-
-    /* add 1 seconds */
-    sec++;
-
-    /* update times */
-    if (sec > 59)
-    {
-        sec = 0;
-        min++;
-    }
-    if (min > 59)
-    {
-        min = 0;
-        hour++;
-    }
-    if (hour > 23)
-    {
-        hour = 0;
-    }
-
-    /* set time structure */
-    tm->tm_sec = sec;
-    tm->tm_min = min;
-    tm->tm_hour = hour;
-}
-#endif
-
-
-
-static guint
-xfce_clock_util_interval_from_format (const gchar *format)
-{
-    const gchar *p;
-    guint        interval = CLOCK_INTERVAL_HOUR;
-
-    if (G_UNLIKELY (format == NULL))
-        return CLOCK_INTERVAL_HOUR;
-
-    for (p = format; *p != '\0'; ++p)
-    {
-        if (p[0] == '%' && p[1] != '\0')
-        {
-            switch (*++p)
-            {
-                case 'c':
-                case 'N':
-                case 'r':
-                case 's':
-                case 'S':
-                case 'T':
-                case 'X':
-                    return CLOCK_INTERVAL_SECOND;
-
-                case 'M':
-                case 'R':
-                    interval = CLOCK_INTERVAL_MINUTE;
-                    break;
-            }
-        }
-    }
-
-    return interval;
-}
-
-
-
-static guint
-xfce_clock_util_next_interval (guint timeout_interval)
-{
-    struct tm tm;
-    GTimeVal  timeval;
-    guint     interval;
-
-    /* get the precise time */
-    g_get_current_time (&timeval);
-
-    /* ms to next second */
-    interval = 1000 - (timeval.tv_usec / 1000);
-
-    /* get current time */
-    xfce_clock_util_get_localtime (&tm);
-
-    /* add the interval time to the next update */
-    switch (timeout_interval)
-    {
-        case CLOCK_INTERVAL_HOUR:
-            /* ms to next hour */
-            interval += (60 - tm.tm_min) * CLOCK_INTERVAL_MINUTE;
-
-            /* fall-through to add the minutes */
-
-        case CLOCK_INTERVAL_MINUTE:
-            /* ms to next minute */
-            interval += (60 - tm.tm_sec) * CLOCK_INTERVAL_SECOND;
-            break;
-
-        default:
-            break;
-    }
-
-    return interval;
 }
 
 
 
 gchar *
-xfce_clock_util_strdup_strftime (const gchar *format,
-                                 const struct tm *tm)
+clock_plugin_strdup_strftime (const gchar     *format,
+                              const struct tm *tm)
 {
-    gchar *converted, *result;
-    gsize  length;
-    gchar  buffer[BUFFER_SIZE];
+  gchar *converted, *result;
+  gsize  length;
+  gchar  buffer[512];
 
-    /* convert to locale, because that's what strftime uses */
-    converted = g_locale_from_utf8 (format, -1, NULL, NULL, NULL);
-    if (G_UNLIKELY (converted == NULL))
-        return NULL;
+  /* convert to locale, because that's what strftime uses */
+  converted = g_locale_from_utf8 (format, -1, NULL, NULL, NULL);
+  if (G_UNLIKELY (converted == NULL))
+    return NULL;
 
-    /* parse the time string */
-    length = strftime (buffer, sizeof (buffer), converted, tm);
-    if (G_UNLIKELY (length == 0))
-        buffer[0] = '\0';
+  /* parse the time string */
+  length = strftime (buffer, sizeof (buffer), converted, tm);
+  if (G_UNLIKELY (length == 0))
+    buffer[0] = '\0';
 
-    /* convert the string back to utf-8 */
-    result = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
+  /* convert the string back to utf-8 */
+  result = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
 
-    /* cleanup */
-    g_free (converted);
+  /* cleanup */
+  g_free (converted);
 
-    return result;
+  return result;
 }
 
 
 
-/** tooltip functions **/
-static gboolean
-xfce_clock_tooltip_update (gpointer user_data)
+guint
+clock_plugin_interval_from_format (const gchar *format)
 {
-    ClockPlugin *clock = (ClockPlugin *) user_data;
-    gchar       *string;
-    struct tm    tm;
+  const gchar *p;
+  guint        interval = CLOCK_INTERVAL_HOUR;
 
-    if (G_UNLIKELY (clock->tooltip_format == NULL))
-        return TRUE;
+  if (G_UNLIKELY (format == NULL))
+      return CLOCK_INTERVAL_HOUR;
 
-    /* get the local time */
-    xfce_clock_util_get_localtime (&tm);
-
-    /* get the string */
-    string = xfce_clock_util_strdup_strftime (clock->tooltip_format, &tm);
-
-    /* set the tooltip */
-    gtk_widget_set_tooltip_text (clock->ebox, string);
-
-    /* cleanup */
-    g_free (string);
-
-    return TRUE;
-}
-
-
-
-static gboolean
-xfce_clock_tooltip_sync_timeout (gpointer user_data)
-{
-    ClockPlugin *clock = (ClockPlugin *) user_data;
-
-    /* start the tooltip update interval */
-    clock->clock_timeout_id = g_timeout_add (clock->tooltip_interval, xfce_clock_tooltip_update, clock);
-
-    /* manual update for this timeout */
-    xfce_clock_tooltip_update (clock);
-
-    /* stop the sync timeout */
-    return FALSE;
-}
-
-
-
-void
-xfce_clock_tooltip_sync (ClockPlugin *clock)
-{
-    guint interval;
-
-    if (clock->tooltip_timeout_id)
+  for (p = format; *p != '\0'; ++p)
     {
-        /* stop old and reset timeout */
-        g_source_remove (clock->tooltip_timeout_id);
-        clock->tooltip_timeout_id = 0;
-    }
-
-    /* detect the tooltip interval from the string */
-    clock->tooltip_interval = xfce_clock_util_interval_from_format (clock->tooltip_format);
-
-    /* get the interval to the next update */
-    interval = xfce_clock_util_next_interval (clock->tooltip_interval);
-
-    /* start the sync timeout */
-    clock->tooltip_timeout_id = g_timeout_add (interval, xfce_clock_tooltip_sync_timeout, clock);
-
-    /* update the tooltip */
-    xfce_clock_tooltip_update (clock);
-}
-
-
-
-/** clock widget functions **/
-static gboolean
-xfce_clock_widget_sync_timeout (gpointer user_data)
-{
-    ClockPlugin *clock = (ClockPlugin *) user_data;
-
-    if (G_LIKELY (clock->widget))
-    {
-        /* start the clock update timeout */
-        clock->clock_timeout_id = g_timeout_add (clock->interval, clock->update, clock->widget);
-
-        /* manual update for this interval */
-        (clock->update) (clock->widget);
-    }
-    else
-    {
-        /* remove timer id */
-        clock->clock_timeout_id = 0;
-    }
-
-    /* stop the sync timeout */
-    return FALSE;
-}
-
-
-
-void
-xfce_clock_widget_sync (ClockPlugin *clock)
-{
-    guint interval;
-
-    if (clock->clock_timeout_id)
-    {
-        /* stop old and reset timeout */
-        g_source_remove (clock->clock_timeout_id);
-        clock->clock_timeout_id = 0;
-    }
-
-    if (G_LIKELY (clock->widget))
-    {
-        /* get the interval to the next update */
-        interval = xfce_clock_util_next_interval (clock->interval);
-
-        /* start the sync timeout */
-        clock->clock_timeout_id = g_timeout_add (interval, xfce_clock_widget_sync_timeout, clock);
-    }
-}
-
-
-
-void
-xfce_clock_widget_update_settings (ClockPlugin *clock)
-{
-    g_return_if_fail (clock->widget != NULL);
-
-    /* send the settings based on the clock mode */
-    switch (clock->mode)
-    {
-        case XFCE_CLOCK_ANALOG:
-            /* set settings */
-            g_object_set (G_OBJECT (clock->widget),
-                          "show-seconds", clock->show_seconds, NULL);
-            break;
-
-        case XFCE_CLOCK_BINARY:
-            /* set settings */
-            g_object_set (G_OBJECT (clock->widget),
-                          "show-seconds", clock->show_seconds,
-                          "true-binary", clock->true_binary, NULL);
-            break;
-
-        case XFCE_CLOCK_DIGITAL:
-            /* set settings */
-            g_object_set (G_OBJECT (clock->widget),
-                          "digital-format", clock->digital_format, NULL);
-            break;
-
-        case XFCE_CLOCK_LCD:
-            /* set settings */
-            g_object_set (G_OBJECT (clock->widget),
-                          "show-seconds", clock->show_seconds,
-                          "show-military", clock->show_military,
-                          "show-meridiem", clock->show_meridiem,
-                          "flash-separators", clock->flash_separators, NULL);
-            break;
-    }
-
-    /* get update interval */
-    if (clock->mode == XFCE_CLOCK_DIGITAL)
-    {
-        /* get interval from string */
-        clock->interval = xfce_clock_util_interval_from_format (clock->digital_format);
-    }
-    else
-    {
-        /* interval from setting */
-        if (clock->mode == XFCE_CLOCK_LCD)
-            clock->interval = (clock->show_seconds || clock->flash_separators) ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
-        else
-            clock->interval = clock->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
-    }
-}
-
-
-
-void
-xfce_clock_widget_set_mode (ClockPlugin *clock)
-{
-    GtkWidget *widget;
-
-    /* stop runing timeout */
-    if (clock->clock_timeout_id)
-    {
-        g_source_remove (clock->clock_timeout_id);
-        clock->clock_timeout_id = 0;
-    }
-
-    /* destroy the old widget */
-    if (clock->widget)
-    {
-        gtk_widget_destroy (clock->widget);
-        clock->widget = NULL;
-    }
-
-    switch (clock->mode)
-    {
-        case XFCE_CLOCK_ANALOG:
-            widget = xfce_clock_analog_new ();
-            clock->update = xfce_clock_analog_update;
-            break;
-
-        case XFCE_CLOCK_BINARY:
-            widget = xfce_clock_binary_new ();
-            clock->update = xfce_clock_binary_update;
-            break;
-
-        case XFCE_CLOCK_DIGITAL:
-            widget = xfce_clock_digital_new ();
-            clock->update = xfce_clock_digital_update;
-            break;
-
-        case XFCE_CLOCK_LCD:
-            widget = xfce_clock_lcd_new ();
-            clock->update = xfce_clock_lcd_update;
-            break;
-
-        default:
-            g_error ("Unknown clock type");
-            return;
-    }
-
-    /* set the clock */
-    clock->widget = widget;
-
-    /* add and show the clock */
-    gtk_container_add (GTK_CONTAINER (clock->frame), widget);
-    gtk_widget_show (widget);
-}
-
-
-
-/** plugin functions **/
-static ClockPlugin *
-xfce_clock_plugin_init (XfcePanelPlugin *plugin)
-{
-    ClockPlugin *clock;
-
-    /* create structure */
-    clock = g_slice_new0 (ClockPlugin);
-
-    /* set plugin */
-    clock->plugin = plugin;
-
-    /* initialize */
-    clock->clock_timeout_id = 0;
-    clock->tooltip_timeout_id = 0;
-    clock->widget = NULL;
-    clock->tooltip_format = NULL;
-    clock->digital_format = NULL;
-
-    /* read the user settings */
-    xfce_clock_plugin_read (clock);
-
-    /* build widgets */
-    clock->ebox = gtk_event_box_new ();
-    gtk_container_add (GTK_CONTAINER (plugin), clock->ebox);
-    gtk_event_box_set_visible_window (GTK_EVENT_BOX (clock->ebox), FALSE);
-    gtk_widget_show (clock->ebox);
-
-    clock->frame = gtk_frame_new (NULL);
-    gtk_container_add (GTK_CONTAINER (clock->ebox), clock->frame);
-    gtk_frame_set_shadow_type (GTK_FRAME (clock->frame), clock->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-    gtk_widget_show (clock->frame);
-
-    /* set the clock */
-    xfce_clock_widget_set_mode (clock);
-
-    /* set the clock settings */
-    xfce_clock_widget_update_settings (clock);
-
-    /* start the timeout */
-    xfce_clock_widget_sync (clock);
-
-    /* start the tooltip sync */
-    xfce_clock_tooltip_sync (clock);
-
-    return clock;
-}
-
-
-
-gboolean
-xfce_clock_plugin_set_size (ClockPlugin *clock,
-                            guint        size)
-{
-    GtkOrientation orientation;
-    gint           clock_size;
-
-    /* set the frame border */
-    gtk_container_set_border_width (GTK_CONTAINER (clock->frame), size > 26 ? 1 : 0);
-
-    /* get the clock size */
-    clock_size = CLAMP (size - (size > 26 ? 6 : 4), 1, G_MAXINT);
-
-    /* get plugin orientation */
-    orientation = xfce_panel_plugin_get_orientation (clock->plugin);
-
-    /* set the clock size */
-    if (orientation == GTK_ORIENTATION_HORIZONTAL)
-        gtk_widget_set_size_request (clock->widget, -1, size);
-    else
-        gtk_widget_set_size_request (clock->widget, size, -1);
-
-    return TRUE;
-}
-
-
-
-static void
-xfce_clock_plugin_set_orientation (ClockPlugin *clock)
-{
-    /* do a size request */
-    xfce_clock_plugin_set_size (clock, xfce_panel_plugin_get_size (clock->plugin));
-}
-
-
-
-static void
-xfce_clock_plugin_read (ClockPlugin *clock)
-{
-    gchar       *filename;
-    const gchar *value;
-    XfceRc      *rc;
-
-    /* config filename */
-    filename = xfce_panel_plugin_lookup_rc_file (clock->plugin);
-
-    if (G_LIKELY (filename))
-    {
-        /* open rc file (readonly) and cleanup */
-        rc = xfce_rc_simple_open (filename, TRUE);
-        g_free (filename);
-
-        if (G_LIKELY (rc))
+      if (p[0] == '%' && p[1] != '\0')
         {
-            /* read strings */
-            value = xfce_rc_read_entry (rc, "DigitalFormat", DEFAULT_DIGITAL_FORMAT);
-            if (G_LIKELY (value != NULL && *value != '\0'))
-                clock->digital_format = g_strdup (value);
+          switch (*++p)
+            {
+              case 'c':
+              case 'N':
+              case 'r':
+              case 's':
+              case 'S':
+              case 'T':
+              case 'X':
+                return CLOCK_INTERVAL_SECOND;
 
-            value = xfce_rc_read_entry (rc, "TooltipFormat", DEFAULT_TOOLTIP_FORMAT);
-            if (G_LIKELY (value != NULL && *value != '\0'))
-                clock->tooltip_format = g_strdup (value);
-
-            /* read clock type */
-            clock->mode = xfce_rc_read_int_entry (rc, "ClockType", XFCE_CLOCK_DIGITAL);
-
-            /* read boolean settings */
-            clock->show_frame       = xfce_rc_read_bool_entry (rc, "ShowFrame", TRUE);
-            clock->show_seconds     = xfce_rc_read_bool_entry (rc, "ShowSeconds", FALSE);
-            clock->show_military    = xfce_rc_read_bool_entry (rc, "ShowMilitary", TRUE);
-            clock->show_meridiem    = xfce_rc_read_bool_entry (rc, "ShowMeridiem", FALSE);
-            clock->true_binary      = xfce_rc_read_bool_entry (rc, "TrueBinary", FALSE);
-            clock->flash_separators = xfce_rc_read_bool_entry (rc, "FlashSeparators", FALSE);
-
-            /* close the rc file */
-            xfce_rc_close (rc);
+              case 'M':
+              case 'R':
+                interval = CLOCK_INTERVAL_MINUTE;
+                break;
+            }
         }
     }
-}
 
-
-
-static void
-xfce_clock_plugin_write (ClockPlugin *clock)
-{
-    gchar  *filename;
-    XfceRc *rc;
-
-    /* config filename */
-    filename = xfce_panel_plugin_save_location (clock->plugin, TRUE);
-
-    if (G_LIKELY (filename))
-    {
-        /* open rc file and cleanup */
-        rc = xfce_rc_simple_open (filename, FALSE);
-        g_free (filename);
-
-        if (G_LIKELY (rc))
-        {
-            /* write settings */
-            if (G_LIKELY (clock->digital_format && *clock->digital_format != '\0'))
-                xfce_rc_write_entry (rc, "DigitalFormat", clock->digital_format);
-
-            if (G_LIKELY (clock->tooltip_format && *clock->tooltip_format != '\0'))
-                xfce_rc_write_entry (rc, "TooltipFormat", clock->tooltip_format);
-
-            xfce_rc_write_int_entry (rc, "ClockType", clock->mode);
-            xfce_rc_write_bool_entry (rc, "ShowFrame", clock->show_frame);
-            xfce_rc_write_bool_entry (rc, "ShowSeconds", clock->show_seconds);
-            xfce_rc_write_bool_entry (rc, "ShowMilitary", clock->show_military);
-            xfce_rc_write_bool_entry (rc, "ShowMeridiem", clock->show_meridiem);
-            xfce_rc_write_bool_entry (rc, "TrueBinary", clock->true_binary);
-            xfce_rc_write_bool_entry (rc, "FlashSeparators", clock->flash_separators);
-
-            /* close the rc file */
-            xfce_rc_close (rc);
-        }
-    }
-}
-
-
-
-static void
-xfce_clock_plugin_free (ClockPlugin *clock)
-{
-    GtkWidget *dialog;
-
-    /* stop timeouts */
-    if (G_LIKELY (clock->clock_timeout_id))
-        g_source_remove (clock->clock_timeout_id);
-
-    if (G_LIKELY (clock->tooltip_timeout_id))
-        g_source_remove (clock->tooltip_timeout_id);
-
-    /* destroy the configure dialog if it's still open */
-    dialog = g_object_get_data (G_OBJECT (clock->plugin), I_("configure-dialog"));
-    if (G_UNLIKELY (dialog != NULL))
-        gtk_widget_destroy (dialog);
-
-    /* cleanup */
-    g_free (clock->tooltip_format);
-    g_free (clock->digital_format);
-
-    /* free structure */
-    g_slice_free (ClockPlugin, clock);
-}
-
-
-
-static void
-xfce_clock_plugin_construct (XfcePanelPlugin *plugin)
-{
-    ClockPlugin *clock = xfce_clock_plugin_init (plugin);
-
-    /* plugin settings */
-    xfce_panel_plugin_add_action_widget (plugin, clock->ebox);
-    xfce_panel_plugin_menu_show_configure (plugin);
-
-    /* connect signals */
-    g_signal_connect_swapped (G_OBJECT (plugin), "size-changed", G_CALLBACK (xfce_clock_plugin_set_size), clock);
-    g_signal_connect_swapped (G_OBJECT (plugin), "save", G_CALLBACK (xfce_clock_plugin_write), clock);
-    g_signal_connect_swapped (G_OBJECT (plugin), "free-data", G_CALLBACK (xfce_clock_plugin_free), clock);
-    g_signal_connect_swapped (G_OBJECT (plugin), "configure-plugin", G_CALLBACK (xfce_clock_dialog_show), clock);
-    g_signal_connect_swapped (G_OBJECT (plugin), "orientation-changed", G_CALLBACK (xfce_clock_plugin_set_orientation), clock);
+  return interval;
 }
 

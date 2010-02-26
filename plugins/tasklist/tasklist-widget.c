@@ -19,6 +19,10 @@
 #include <config.h>
 #endif
 
+#include <X11/Xlib.h>
+#include <gdk/gdkx.h>
+#include <X11/extensions/shape.h>
+
 #include <gtk/gtk.h>
 #include <exo/exo.h>
 #include <libwnck/libwnck.h>
@@ -28,6 +32,7 @@
 
 #define MIN_BUTTON_SIZE                      (25)
 #define MAX_BUTTON_LENGTH                    (200)
+#define WIREFRAME_SIZE                       (5)
 #define xfce_taskbar_lock()                  G_BEGIN_DECLS { locked++; } G_END_DECLS;
 #define xfce_taskbar_unlock()                G_BEGIN_DECLS { if (locked > 0) locked--; else g_assert_not_reached (); } G_END_DECLS;
 #define xfce_taskbar_is_locked()             (locked > 0)
@@ -41,7 +46,8 @@ enum
   PROP_INCLUDE_ALL_WORKSPACES,
   PROP_FLAT_BUTTONS,
   PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
-  PROP_SHOW_ONLY_MINIMIZED
+  PROP_SHOW_ONLY_MINIMIZED,
+  PROP_SHOW_WIREFRAMES
 };
 
 struct _XfceTasklistClass
@@ -85,6 +91,10 @@ struct _XfceTasklist
   /* whether we only show monimized applications in the
    * tasklist */
   guint              only_minimized : 1;
+
+  /* whether we show wireframes when hovering a button in
+   * the tasklist */
+  guint              show_wireframes : 1;
 };
 
 struct _XfceTasklistChild
@@ -106,6 +116,8 @@ struct _XfceTasklistChild
 
   /* unique is for sorting by insert time */
   guint              unique_id;
+
+  Window             wireframe;
 };
 
 static const GtkTargetEntry drop_targets[] =
@@ -177,9 +189,9 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_STYLE,
                                    g_param_spec_uint ("style", NULL, NULL,
-                                                      XFCE_TASKLIST_STYLE_NORMAL,
-                                                      XFCE_TASKLIST_STYLE_ICONBOX,
-                                                      XFCE_TASKLIST_STYLE_NORMAL,
+                                                      XFCE_TASKLIST_STYLE_MIN,
+                                                      XFCE_TASKLIST_STYLE_MAX,
+                                                      XFCE_TASKLIST_STYLE_DEFAULT,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -205,6 +217,12 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                    g_param_spec_boolean ("show-only-minimized", NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_WIREFRAMES,
+                                   g_param_spec_boolean ("show-wireframes", NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
 }
 
 
@@ -224,8 +242,9 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->button_relief = GTK_RELIEF_NORMAL;
   tasklist->switch_workspace = TRUE;
   tasklist->only_minimized = FALSE;
-  tasklist->style = XFCE_TASKLIST_STYLE_NORMAL;
+  tasklist->style = XFCE_TASKLIST_STYLE_DEFAULT;
   tasklist->class_groups = NULL;
+  tasklist->show_wireframes = FALSE;
 
   /* set the itembar drag destination targets */
   gtk_drag_dest_set (GTK_WIDGET (tasklist), 0, drop_targets,
@@ -262,6 +281,10 @@ xfce_tasklist_get_property (GObject    *object,
 
       case PROP_SHOW_ONLY_MINIMIZED:
         g_value_set_boolean (value, tasklist->only_minimized);
+        break;
+
+      case PROP_SHOW_WIREFRAMES:
+        g_value_set_boolean (value, tasklist->show_wireframes);
         break;
 
       default:
@@ -309,6 +332,11 @@ xfce_tasklist_set_property (GObject      *object,
         xfce_tasklist_set_show_only_minimized (tasklist, g_value_get_boolean (value));
         break;
 
+      case PROP_SHOW_WIREFRAMES:
+        /* set the new value */
+        tasklist->show_wireframes = g_value_get_boolean (value);
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -323,7 +351,7 @@ xfce_tasklist_finalize (GObject *object)
   XfceTasklist *tasklist = XFCE_TASKLIST (object);
 
   g_return_if_fail (tasklist->children == NULL);
-  g_return_if_fail (tasklist->class_groups == NULL);
+  /* g_return_if_fail (tasklist->class_groups == NULL); */
 
   (*G_OBJECT_CLASS (xfce_tasklist_parent_class)->finalize) (object);
 }
@@ -506,7 +534,7 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
   GtkWidget         *button;
   GtkAllocation     *alloc;
   GSList            *li, *source = NULL, *sibling = NULL;
-  
+
   /* leave when this is an unknow target (return false because it's not a drop zone) */
   if (gtk_drag_dest_find_target (widget, context, NULL) == GDK_NONE)
     return FALSE;
@@ -1066,6 +1094,102 @@ tasklist_button_toggled (GtkToggleButton   *button,
 
 
 
+static gboolean
+tasklist_button_leave_notify_event (GtkWidget *button,
+                                    GdkEventCrossing *event,
+                                    XfceTasklistChild *child)
+{
+  Display *dpy = GDK_DISPLAY ();
+
+  /* disconnect this signal */
+  g_signal_handlers_disconnect_by_func (button, tasklist_button_leave_notify_event, child);
+
+  /* unmap and destroy the wireframe window */
+  XUnmapWindow (dpy, child->wireframe);
+  XDestroyWindow (dpy, child->wireframe);
+
+  return FALSE;
+}
+
+
+
+static gboolean
+tasklist_button_enter_notify_event (GtkWidget         *button,
+                                    GdkEventCrossing  *event,
+                                    XfceTasklistChild *child)
+{
+  Display              *dpy = GDK_DISPLAY ();
+  gint                  x, y, w, h;
+  XSetWindowAttributes  attrs;
+  GC                    gc;
+  XRectangle            xrect;
+
+  /* leave when wireframes are disabled */
+  if (child->tasklist->show_wireframes == FALSE)
+    return FALSE;
+
+  /* don't abort on x errors */
+  gdk_error_trap_push ();
+
+  /* get the window geometryr size */
+  wnck_window_get_geometry (child->window, &x, &y, &w, &h);
+
+  /* set window attributes */
+  attrs.override_redirect = True;
+  attrs.background_pixel = 0x000000;
+
+  /* create new window */
+  child->wireframe = XCreateWindow (dpy, DefaultRootWindow (dpy),
+				                            x, y, w, h, 0,
+				                            CopyFromParent,
+				                            InputOutput,
+                                    CopyFromParent,
+				                            CWOverrideRedirect | CWBackPixel,
+				                            &attrs);
+
+  /* create rectangle what will be 'transparent' in the window */
+  xrect.x = WIREFRAME_SIZE;
+  xrect.y = WIREFRAME_SIZE;
+  xrect.width = w - WIREFRAME_SIZE * 2;
+  xrect.height = h - WIREFRAME_SIZE * 2;
+
+  /* substruct rectangle from the window */
+  XShapeCombineRectangles (dpy, child->wireframe, ShapeBounding,
+                           0, 0, &xrect, 1, ShapeSubtract, 0);
+
+  /* map the window */
+  XMapWindow (dpy, child->wireframe);
+
+  /* create a white gc */
+  gc = XCreateGC (dpy, child->wireframe, 0, NULL);
+  XSetForeground (dpy, gc, 0xFFFFFF);
+
+  /* draw the outer white rectangle */
+  XDrawRectangle (dpy, child->wireframe, gc,
+                        0, 0, w - 1, h - 1);
+
+  /* draw the inner white rectangle */
+  XDrawRectangle (dpy, child->wireframe, gc,
+                  WIREFRAME_SIZE - 1, WIREFRAME_SIZE - 1,
+                  w - 2 * (WIREFRAME_SIZE - 1) - 1,
+                  h - 2 * (WIREFRAME_SIZE - 1) - 1);
+
+  /* free the white gc */
+  XFreeGC (dpy, gc);
+
+  /* flush x error and pop the trap */
+  gdk_flush ();
+  gdk_error_trap_pop ();
+
+  /* connect signal to destroy the window when the user leaves the button */
+  g_signal_connect (G_OBJECT (button), "leave-notify-event",
+                    G_CALLBACK (tasklist_button_leave_notify_event), child);
+
+  return FALSE;
+}
+
+
+
 static void
 tasklist_button_new (XfceTasklistChild *child)
 {
@@ -1075,6 +1199,7 @@ tasklist_button_new (XfceTasklistChild *child)
   child->button = gtk_toggle_button_new ();
   gtk_button_set_relief (GTK_BUTTON (child->button), child->tasklist->button_relief);
   g_signal_connect (G_OBJECT (child->button), "toggled", G_CALLBACK (tasklist_button_toggled), child);
+  g_signal_connect (G_OBJECT (child->button), "enter-notify-event", G_CALLBACK (tasklist_button_enter_notify_event), child);
   gtk_widget_show (child->button);
 
   child->box = gtk_hbox_new (FALSE, 6);

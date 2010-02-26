@@ -542,20 +542,24 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (widget);
   guint            modifiers;
   GtkMenu         *menu;
+  GtkWidget       *item;
 
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (widget), FALSE);
 
   /* get the default accelerator modifier mask */
   modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
 
-  if (plugin->priv->menu_blocked == 0
-      && (event->button == 3 || (event->button == 1 && modifiers == GDK_CONTROL_MASK)))
+  if (event->button == 3 || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
     {
       /* get the panel menu */
       menu = xfce_panel_plugin_menu_get (plugin);
 
       /* set the menu screen */
       gtk_menu_set_screen (menu, gtk_widget_get_screen (widget));
+
+      /* if the menu is block, some items are insensitive */
+      item = g_object_get_data (G_OBJECT (menu), I_("properties-item"));
+      gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
       gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button, event->time);

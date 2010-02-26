@@ -349,15 +349,15 @@ GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
-  
+
   /* make sure the hash table is clean */
   g_hash_table_foreach_remove (factory->modules, panel_module_factory_modules_cleanup, factory);
 
 #if !GLIB_CHECK_VERSION (2,14,0)
   GList *value = NULL;
-  
+
   g_hash_table_foreach (factory->modules, panel_module_factory_get_modules_foreach, &value);
-  
+
   return value;
 #else
   return g_hash_table_get_values (factory->modules);
