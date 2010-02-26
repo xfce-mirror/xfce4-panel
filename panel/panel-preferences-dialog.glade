@@ -198,8 +198,10 @@
                         <child type="label">
                           <object class="GtkLabel" id="label2">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">&lt;b&gt;General&lt;/b&gt;</property>
-                            <property name="use_markup">True</property>
+                            <property name="label" translatable="yes">General</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
                           </object>
                         </child>
                       </object>
@@ -288,8 +290,10 @@
                         <child type="label">
                           <object class="GtkLabel" id="label5">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Measurements&lt;/b&gt;</property>
-                            <property name="use_markup">True</property>
+                            <property name="label" translatable="yes">Measurements</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
                           </object>
                         </child>
                       </object>
@@ -361,8 +365,10 @@
                         <child type="label">
                           <object class="GtkLabel" id="label8">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Background&lt;/b&gt;</property>
-                            <property name="use_markup">True</property>
+                            <property name="label" translatable="yes">Background</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
                           </object>
                         </child>
                       </object>
@@ -450,8 +456,10 @@
                         <child type="label">
                           <object class="GtkLabel" id="label11">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Transparency&lt;/b&gt;</property>
-                            <property name="use_markup">True</property>
+                            <property name="label" translatable="yes">Transparency</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
                           </object>
                         </child>
                       </object>
@@ -666,6 +674,8 @@
                 <property name="use_stock">True</property>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -678,6 +688,8 @@
                 <property name="use_stock">True</property>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
                 <property name="secondary">True</property>
               </packing>
@@ -730,9 +742,9 @@
   </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="label7"/>
-      <widget name="label9"/>
       <widget name="label10"/>
+      <widget name="label9"/>
+      <widget name="label7"/>
     </widgets>
   </object>
 </interface>

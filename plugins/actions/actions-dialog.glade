@@ -99,8 +99,10 @@
             <child type="label">
               <object class="GtkLabel" id="label7">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">&lt;b&gt;Button Actions&lt;/b&gt;</property>
-                <property name="use_markup">True</property>
+                <property name="label" translatable="yes">Button Actions</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
               </object>
             </child>
           </object>
@@ -122,6 +124,8 @@
                 <property name="use_stock">True</property>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>

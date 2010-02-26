@@ -77,8 +77,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Appearance&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Appearance</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -171,8 +173,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label3">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Behaviour&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Behaviour</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -228,8 +232,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label2">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Filtering&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Filtering</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -256,6 +262,8 @@
                 <property name="use_stock">True</property>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
