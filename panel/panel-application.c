@@ -664,7 +664,7 @@ panel_application_plugin_insert (PanelApplication  *application,
       panel_itembar_insert (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), position);
 
       /* send all the needed info about the panel to the plugin */
-      panel_glue_set_provider_info (provider);
+      panel_glue_set_provider_info (provider, window);
 
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
@@ -909,7 +909,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
             panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
 
             /* send all the needed panel information to the plugin */
-            panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (provider));
+            panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (provider), window);
           }
 
         /* everything went fine */

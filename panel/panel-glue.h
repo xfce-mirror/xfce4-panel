@@ -39,7 +39,8 @@ void               panel_glue_set_orientation     (PanelWindow             *wind
 
 void               panel_glue_set_screen_position (PanelWindow             *window);
 
-void               panel_glue_set_provider_info   (XfcePanelPluginProvider *provider);
+void               panel_glue_set_provider_info   (XfcePanelPluginProvider *provider,
+                                                   PanelWindow             *window);
 
 G_END_DECLS
 

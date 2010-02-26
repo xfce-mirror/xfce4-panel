@@ -738,7 +738,7 @@ xfce_panel_plugin_relative_filename (XfcePanelPlugin *plugin)
   panel_return_val_if_fail (xfce_panel_plugin_get_id (plugin) != NULL, NULL);
 
   /* return the relative configuration filename */
-  return g_strdup_printf ("xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%s.rc",
+  return g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH,
                           xfce_panel_plugin_get_name (plugin),
                           xfce_panel_plugin_get_id (plugin));
 }

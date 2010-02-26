@@ -321,15 +321,11 @@ panel_glue_set_screen_position (PanelWindow *window)
 
 
 void
-panel_glue_set_provider_info (XfcePanelPluginProvider *provider)
+panel_glue_set_provider_info (XfcePanelPluginProvider *provider,
+                              PanelWindow             *window)
 {
-  PanelWindow *window;
-
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-  panel_return_if_fail (PANEL_IS_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider))));
-
-  /* get the plugins panel window */
-  window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
 
   /* set the background alpha if the plugin is external */
   if (PANEL_IS_PLUGIN_EXTERNAL (provider))

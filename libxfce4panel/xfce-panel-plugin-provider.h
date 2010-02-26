@@ -39,6 +39,9 @@ typedef enum   _XfcePanelPluginProviderSignal XfcePanelPluginProviderSignal;
 #define PANEL_DBUS_SERVICE_PATH      "/org/xfce/Panel"
 #define PANEL_DBUS_SERVICE_NAME      PANEL_DBUS_SERVICE_INTERFACE
 
+/* relative plugin filename */
+#define PANEL_PLUGIN_RELATIVE_PATH   "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%s.rc"
+
 /* provider contruct function */
 typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
                                                          const gchar  *id,
