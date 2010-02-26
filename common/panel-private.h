@@ -47,4 +47,10 @@
                                             gdk_color->green / 65535.00, \
                                             gdk_color->blue / 65535.00
 
+/* wrapper exit values */
+#define WRAPPER_EXIT_SUCCESS     (0)
+#define WRAPPER_EXIT_FAILURE     (1)
+#define WRAPPER_EXIT_PREINIT     (2)
+#define WRAPPER_EXIT_NO_PROVIDER (3)
+
 #endif /* !__PANEL_PRIVATE_H__ */
