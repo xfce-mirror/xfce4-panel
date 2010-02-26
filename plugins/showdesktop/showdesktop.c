@@ -42,18 +42,18 @@ static void     show_desktop_plugin_showing_desktop_changed (WnckScreen         
 
 struct _ShowDesktopPluginClass
 {
-	XfcePanelPluginClass __parent__;
+  XfcePanelPluginClass __parent__;
 };
 
 struct _ShowDesktopPlugin
 {
-	XfcePanelPlugin __parent__;
+  XfcePanelPlugin __parent__;
 
-	/* the toggle button */
-	GtkWidget  *button;
+  /* the toggle button */
+  GtkWidget  *button;
 
-	/* the wnck screen */
-	WnckScreen *wnck_screen;
+  /* the wnck screen */
+  WnckScreen *wnck_screen;
 };
 
 
