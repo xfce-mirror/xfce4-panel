@@ -247,11 +247,11 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   guint          i;
   guint          panel_n = g_slist_index (application->windows, window);
   GValue         value = { 0, };
-  const struct 
+  const struct
   {
     const gchar *name;
     GType        type;
-  } properties[] = 
+  } properties[] =
   {
     { "locked", G_TYPE_BOOLEAN },
     { "autohide", G_TYPE_BOOLEAN },

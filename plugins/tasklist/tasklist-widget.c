@@ -443,7 +443,7 @@ xfce_tasklist_size_request (GtkWidget      *widget,
   XfceTasklistChild *child;
   gint               n;
   gint               rows, cols, length;
-  
+
   /* walk all the children */
   for (li = tasklist->children, n = 0; li != NULL; li = li->next)
     {

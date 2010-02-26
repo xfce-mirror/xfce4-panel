@@ -571,7 +571,7 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 
-static void 
+static void
 launcher_plugin_save (XfcePanelPlugin *panel_plugin)
 {
   /* make sure the items are stored */

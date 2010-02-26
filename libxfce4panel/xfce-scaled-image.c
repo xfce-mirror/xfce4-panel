@@ -180,15 +180,15 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
       if (G_LIKELY (pixbuf))
         {
           /* scale the icon to the correct size */
-          scaled = xfce_scaled_image_scale_pixbuf (pixbuf, image->width, 
+          scaled = xfce_scaled_image_scale_pixbuf (pixbuf, image->width,
                                                    image->height);
 
           /* release the pixbuf */
           g_object_unref (G_OBJECT (pixbuf));
-          
+
           /* set the image pixbuf */
           gtk_image_set_from_pixbuf (GTK_IMAGE (image), scaled);
-          
+
           /* release the scaled image */
           if (G_LIKELY (scaled != NULL))
             g_object_unref (G_OBJECT (scaled));
@@ -244,7 +244,7 @@ xfce_scaled_image_cleanup (XfceScaledImage *image)
 
   /* free the icon name */
   g_free (image->icon_name);
-  
+
   /* clear the image */
   gtk_image_clear (GTK_IMAGE (image));
 

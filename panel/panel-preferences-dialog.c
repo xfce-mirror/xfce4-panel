@@ -379,7 +379,7 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
 
   /* block signal */
-  g_signal_handlers_block_by_func (combo, 
+  g_signal_handlers_block_by_func (combo,
       panel_preferences_dialog_panel_combobox_changed, dialog);
 
   /* empty the combo box */
@@ -404,7 +404,7 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
   gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_items > 1));
 
   /* unblock signal */
-  g_signal_handlers_unblock_by_func (combo, 
+  g_signal_handlers_unblock_by_func (combo,
       panel_preferences_dialog_panel_combobox_changed, dialog);
 }
 
