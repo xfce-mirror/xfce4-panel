@@ -47,6 +47,8 @@
 #include <wrapper/wrapper-plug.h>
 #include <wrapper/wrapper-marshal.h>
 #include <wrapper/wrapper-module.h>
+
+#define DBUS_GLIB_CLIENT_WRAPPERS_org_xfce_Panel /* hack to exclude the panel client code */
 #include <wrapper/wrapper-dbus-client-infos.h>
 
 

@@ -29,6 +29,8 @@
 
 #include <panel/panel-dbus-client.h>
 #include <panel/panel-dbus-service.h>
+
+#define DBUS_GLIB_CLIENT_WRAPPERS_org_xfce_PanelPlugin /* hack to exclude the wrapper client code */
 #include <panel/panel-dbus-client-infos.h>
 
 
