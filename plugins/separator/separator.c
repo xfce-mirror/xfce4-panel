@@ -64,7 +64,12 @@ enum _SeparatorPluginStyle
   SEPARATOR_PLUGIN_STYLE_SEPARATOR,
   SEPARATOR_PLUGIN_STYLE_HANDLE,
   SEPARATOR_PLUGIN_STYLE_DOTS,
-  SEPARATOR_PLUGIN_STYLE_WRAP
+  SEPARATOR_PLUGIN_STYLE_WRAP,
+
+  /* defines */
+  SEPARATOR_PLUGIN_STYLE_MIN = SEPARATOR_PLUGIN_STYLE_TRANSPARENT,
+  SEPARATOR_PLUGIN_STYLE_MAX = SEPARATOR_PLUGIN_STYLE_WRAP,
+  SEPARATOR_PLUGIN_STYLE_DEFAULT = SEPARATOR_PLUGIN_STYLE_SEPARATOR
 };
 
 struct _SeparatorPluginClass
@@ -120,9 +125,9 @@ separator_plugin_class_init (SeparatorPluginClass *klass)
                                    PROP_STYLE,
                                    g_param_spec_uint ("style",
                                                       NULL, NULL,
-                                                      SEPARATOR_PLUGIN_STYLE_TRANSPARENT,
-                                                      SEPARATOR_PLUGIN_STYLE_WRAP,
-                                                      SEPARATOR_PLUGIN_STYLE_SEPARATOR,
+                                                      SEPARATOR_PLUGIN_STYLE_MIN,
+                                                      SEPARATOR_PLUGIN_STYLE_MAX,
+                                                      SEPARATOR_PLUGIN_STYLE_DEFAULT,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -139,7 +144,7 @@ static void
 separator_plugin_init (SeparatorPlugin *plugin)
 {
   /* initialize */
-  plugin->style = SEPARATOR_PLUGIN_STYLE_SEPARATOR;
+  plugin->style = SEPARATOR_PLUGIN_STYLE_DEFAULT;
 }
 
 
