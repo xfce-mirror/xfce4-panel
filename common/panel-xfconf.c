@@ -41,7 +41,7 @@ panel_properties_get_channel (void)
 
   channel = xfconf_channel_get (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
   /* TODO enable this again when Brian fixed his code
-   * _object_weak_ref (G_OBJECT (channel), (GWeakNotify) xfconf_shutdown, NULL); */
+   * g_object_weak_ref (G_OBJECT (channel), (GWeakNotify) xfconf_shutdown, NULL); */
 
   return channel;
 }
@@ -68,7 +68,8 @@ panel_properties_bind (XfconfChannel       *channel,
       channel = xfconf_channel_get (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
       if (G_UNLIKELY (channel == NULL))
         return;
-      g_object_weak_ref (G_OBJECT (object), (GWeakNotify) g_object_unref, channel);
+      /* TODO enable this again when Brian fixed his code
+       * g_object_weak_ref (G_OBJECT (object), (GWeakNotify) g_object_unref, channel); */
     }
 
   /* walk the properties array */
