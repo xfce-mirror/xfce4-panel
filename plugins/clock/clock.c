@@ -162,9 +162,6 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_interval = 0;
   plugin->clock_timeout_id = 0;
 
-  /* show configure */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
   /* create frame widget */
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
@@ -215,6 +212,9 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
   ClockPlugin   *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
   gboolean       show_frame;
   guint          mode;
+
+  /* show configure */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* set the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
