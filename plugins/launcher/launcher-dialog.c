@@ -473,51 +473,64 @@ launcher_dialog_add_response (GtkWidget            *widget,
                               gint                  response_id,
                               LauncherPluginDialog *dialog)
 {
-  GObject           *treeview, *store;
-  GtkTreeSelection  *selection;
-  GtkTreeModel      *model;
-  GtkTreeIter        iter, sibling;
-  gchar             *filename;
+  GObject          *treeview, *store;
+  GtkTreeSelection *selection;
+  GtkTreeModel     *entry_model, *add_model;
+  GtkTreeIter       iter, sibling, tmp;
+  gchar            *filename;
+  GList            *list, *li;
 
   panel_return_if_fail (GTK_IS_DIALOG (widget));
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
 
   if (response_id != 0)
     {
-      /* set the selected item in the treeview */
+      /* add all the selected rows in the add dialog */
       treeview = gtk_builder_get_object (dialog->builder, "add-treeview");
       selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-      if (gtk_tree_selection_get_selected (selection, &model, &iter))
+      list = gtk_tree_selection_get_selected_rows (selection, &add_model);
+
+      /* append after the selected item in the entry dialog */
+      treeview = gtk_builder_get_object (dialog->builder, "entry-treeview");
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+      entry_model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+      if (gtk_tree_selection_get_selected (selection, NULL, &sibling))
+        gtk_list_store_insert_after (GTK_LIST_STORE (entry_model),
+                                     &iter, &sibling);
+      else
+        gtk_list_store_append (GTK_LIST_STORE (entry_model), &iter);
+
+      for (li = list; li != NULL; li = li->next)
         {
           /* get the selected file in the add dialog */
-          gtk_tree_model_get (model, &iter, COL_FILENAME, &filename, -1);
+          gtk_tree_model_get_iter (add_model, &tmp, li->data);
+          gtk_tree_model_get (add_model, &tmp, COL_FILENAME, &filename, -1);
 
-          /* get the selected item in the entry treeview */
-          treeview = gtk_builder_get_object (dialog->builder, "entry-treeview");
-          selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-          if (gtk_tree_selection_get_selected (selection, &model, &sibling))
-            {
-              gtk_list_store_insert_after (GTK_LIST_STORE (model), &iter, &sibling);
-            }
-          else
-            {
-              model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
-              gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-            }
-
-          /* insert the item */
-          launcher_dialog_entries_insert_item (GTK_LIST_STORE (model),
+          /* insert the item in the item store */
+          launcher_dialog_entries_insert_item (GTK_LIST_STORE (entry_model),
                                                &iter, filename);
 
           /* cleanup */
           g_free (filename);
+          gtk_tree_path_free (li->data);
 
-          /* write the model to xfconf */
-          launcher_dialog_tree_save (dialog);
-
-          /* update the selection */
-          launcher_dialog_tree_selection_changed (selection, dialog);
+          /* append a new iter if needed */
+          if (li->next != NULL)
+            {
+              sibling = iter;
+              gtk_list_store_insert_after (GTK_LIST_STORE (entry_model),
+                                           &iter, &sibling);
+            }
         }
+
+      /* cleanup */
+      g_list_free (list);
+
+      /* write the model to xfconf */
+      launcher_dialog_tree_save (dialog);
+
+      /* update the selection */
+      launcher_dialog_tree_selection_changed (selection, dialog);
     }
 
   /* empty the store */
@@ -716,9 +729,15 @@ launcher_dialog_show (LauncherPlugin *plugin)
       g_signal_connect (G_OBJECT (object), "delete-event",
                         G_CALLBACK (exo_noop_true), NULL);
 
+      /* enable sorting in the add dialog */
       object = gtk_builder_get_object (builder, "add-store");
       gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (object),
                                             COL_NAME, GTK_SORT_ASCENDING);
+
+      /* allow selecting multiple items in the add dialog */
+      object = gtk_builder_get_object (builder, "add-treeview");
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
+      gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
       /* setup search filter in the add dialog */
       object = gtk_builder_get_object (builder, "add-store-filter");
