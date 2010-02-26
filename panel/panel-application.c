@@ -42,7 +42,6 @@
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-dialogs.h>
-#include <panel/panel-glue.h>
 #include <panel/panel-plugin-external.h>
 
 #define AUTOSAVE_INTERVAL (10 * 60)
@@ -248,55 +247,46 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   guint          i;
   guint          panel_n = g_slist_index (application->windows, window);
   GValue         value = { 0, };
-  const gchar   *bool_properties[] = { "locked", "autohide", "span-monitors",
-                                       "horizontal" };
-  const gchar   *uint_properties[] = { "size", "length", "x-offset",
-                                       "y-offset", "enter-opacity",
-                                       "leave-opacity", "snap-edge",
-                                       "background-alpha" };
+  const struct 
+  {
+    const gchar *name;
+    GType        type;
+  } properties[] = 
+  {
+    { "locked", G_TYPE_BOOLEAN },
+    { "autohide", G_TYPE_BOOLEAN },
+    { "span-monitors", G_TYPE_BOOLEAN },
+    { "horizontal", G_TYPE_BOOLEAN },
+    { "horizontal", G_TYPE_BOOLEAN },
+    { "size", G_TYPE_UINT },
+    { "length", G_TYPE_UINT },
+    { "enter-opacity", G_TYPE_UINT },
+    { "leave-opacity", G_TYPE_UINT },
+    { "background-alpha", G_TYPE_UINT },
+    { "output-name", G_TYPE_STRING },
+    { "position", G_TYPE_STRING }
+  };
 
   /* connect the boolean properties */
-  for (i = 0; i < G_N_ELEMENTS (bool_properties); i++)
+  for (i = 0; i < G_N_ELEMENTS (properties); i++)
     {
       /* create xfconf property name */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s",
-                  panel_n, bool_properties[i]);
+                  panel_n, properties[i].name);
 
       /* store the window settings in the channel before we create the binding,
        * so we don't loose the panel settings */
       if (store_settings)
         {
-          g_value_init (&value, G_TYPE_BOOLEAN);
-          g_object_get_property (G_OBJECT (window), bool_properties[i], &value);
+          g_value_init (&value, properties[i].type);
+          g_object_get_property (G_OBJECT (window), properties[i].name, &value);
           xfconf_channel_set_property (channel, buf, &value);
           g_value_unset (&value);
         }
 
       /* create binding */
-      xfconf_g_property_bind (channel, buf, G_TYPE_BOOLEAN,
-                              window, bool_properties[i]);
-    }
-
-  /* connect the unsigned intergets */
-  for (i = 0; i < G_N_ELEMENTS (uint_properties); i++)
-    {
-      /* create xfconf property name */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s",
-                  panel_n, uint_properties[i]);
-
-      /* store the window settings in the channel before we create the binding,
-       * so we don't loose the panel settings */
-      if (store_settings)
-        {
-          g_value_init(&value, G_TYPE_UINT);
-          g_object_get_property (G_OBJECT (window), uint_properties[i], &value);
-          xfconf_channel_set_property (channel, buf, &value);
-          g_value_unset (&value);
-        }
-
-      /* create binding */
-      xfconf_g_property_bind (channel, buf, G_TYPE_UINT,
-                              window, uint_properties[i]);
+      xfconf_g_property_bind (channel, buf, properties[i].type,
+                              window, properties[i].name);
     }
 }
 
@@ -332,7 +322,7 @@ panel_application_load (PanelApplication *application)
           /* get the plugin module name */
           g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/module", i, j);
           name = xfconf_channel_get_string (channel, buf, NULL);
-          if (G_LIKELY (name))
+          if (IS_STRING (name))
             {
               /* read the plugin id */
               g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u/id", i, j);
@@ -573,7 +563,7 @@ panel_application_plugin_insert (PanelApplication  *application,
                         GTK_WIDGET (provider), position);
 
   /* send all the needed info about the panel to the plugin */
-  panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (provider), window);
+  panel_window_set_povider_info (window, provider);
 
   /* show the plugin */
   gtk_widget_show (provider);
@@ -807,7 +797,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
             panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
 
             /* send all the needed panel information to the plugin */
-            panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (provider), window);
+            panel_window_set_povider_info (window, provider);
           }
 
         /* everything went fine */
@@ -1130,7 +1120,7 @@ panel_application_new_window (PanelApplication *application,
   panel_return_val_if_fail (XFCONF_IS_CHANNEL (application->xfconf), NULL);
 
   /* create panel window */
-  window = g_object_new (PANEL_TYPE_WINDOW, NULL);
+  window = panel_window_new ();
 
   /* realize */
   gtk_widget_realize (window);
@@ -1227,7 +1217,7 @@ panel_application_window_select (PanelApplication *application,
 
   /* update state for all windows */
   for (li = application->windows; li != NULL; li = li->next)
-    panel_window_set_active_panel (PANEL_WINDOW (li->data), !!(li->data == window));
+    g_object_set (G_OBJECT (li->data), "active", li->data == window, NULL);
 }
 
 

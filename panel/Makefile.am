@@ -27,14 +27,14 @@ xfce4_panel_SOURCES = \
 	main.c \
 	panel-application.c \
 	panel-application.h \
+	panel-base-window.c \
+	panel-base-window.h \
 	panel-dbus-client.c \
 	panel-dbus-client.h \
 	panel-dbus-service.c \
 	panel-dbus-service.h \
 	panel-dialogs.c \
 	panel-dialogs.h \
-	panel-glue.c \
-	panel-glue.h \
 	panel-item-dialog.c \
 	panel-item-dialog.h \
 	panel-itembar.c \

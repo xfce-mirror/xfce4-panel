@@ -32,7 +32,6 @@
 #include <panel/panel-module.h>
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-window.h>
-#include <panel/panel-glue.h>
 #include <panel/panel-dbus-service.h>
 
 /* Number of automatic plugin restarts before the
@@ -361,7 +360,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
       window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (socket)));
 
       /* send panel information to the plugin */
-      panel_glue_set_provider_info (XFCE_PANEL_PLUGIN_PROVIDER (external), window);
+      panel_window_set_povider_info (window, GTK_WIDGET (external));
 
       /* show the socket again (realize will spawn the plugin) */
       gtk_widget_show (GTK_WIDGET (socket));

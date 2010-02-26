@@ -28,7 +28,6 @@
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 #include <panel/panel-window.h>
-#include <panel/panel-glue.h>
 #include <panel/panel-application.h>
 #include <panel/panel-module.h>
 #include <panel/panel-itembar.h>
@@ -302,12 +301,11 @@ panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog,
 static void
 panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 {
-  panel_return_if_fail (G_IS_OBJECT (dialog->active));
-
   /* remove all the active bindings */
   panel_preferences_dialog_bindings_unbind (dialog);
 
   /* leave when there is no active panel */
+  panel_return_if_fail (G_IS_OBJECT (dialog->active));
   if (dialog->active == NULL)
     return;
 
@@ -320,6 +318,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "background-alpha", "value");
   panel_preferences_dialog_bindings_add (dialog, "enter-opacity", "value");
   panel_preferences_dialog_bindings_add (dialog, "leave-opacity", "value");
+  panel_preferences_dialog_bindings_add (dialog, "composited", "visible");
 }
 
 
@@ -380,7 +379,8 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
 
   /* block signal */
-  g_signal_handlers_block_by_func (combo, panel_preferences_dialog_panel_combobox_changed, dialog);
+  g_signal_handlers_block_by_func (combo, 
+      panel_preferences_dialog_panel_combobox_changed, dialog);
 
   /* empty the combo box */
   gtk_list_store_clear (GTK_LIST_STORE (store));
@@ -404,7 +404,8 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
   gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_items > 1));
 
   /* unblock signal */
-  g_signal_handlers_unblock_by_func (combo, panel_preferences_dialog_panel_combobox_changed, dialog);
+  g_signal_handlers_unblock_by_func (combo, 
+      panel_preferences_dialog_panel_combobox_changed, dialog);
 }
 
 
