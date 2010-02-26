@@ -142,8 +142,8 @@ separator_plugin_class_init (SeparatorPluginClass *klass)
 static void
 separator_plugin_init (SeparatorPlugin *plugin)
 {
-  /* init, draw nothing */
-  plugin->style = SEPARATOR_PLUGIN_STYLE_TRANSPARENT;
+  /* initialize */
+  plugin->style = SEPARATOR_PLUGIN_STYLE_SEPARATOR;
 
   /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
