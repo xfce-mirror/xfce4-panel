@@ -232,7 +232,7 @@ panel_plugin_external_realize (GtkWidget *widget)
   argv = g_new0 (gchar *, argc);
 
   /* setup the basic argv */
-  argv[0]  = (gchar *) LIBEXECDIR "/xfce4-panel-wrapper";
+  argv[0]  = (gchar *) LIBEXECDIR G_DIR_SEPARATOR_S "wrapper";
   argv[1]  = (gchar *) "-n";
   argv[2]  = (gchar *) panel_module_get_name (external->module);
   argv[3]  = (gchar *) "-i";

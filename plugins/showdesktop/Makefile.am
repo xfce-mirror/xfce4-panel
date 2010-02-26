@@ -1,13 +1,11 @@
 
 INCLUDES = \
 	-I$(top_srcdir) \
-	-DBINDIR=\"$(bindir)\" \
 	-DG_LOG_DOMAIN=\"libshowdesktop\" \
 	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
-	-DLOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel
 
 plugin_LTLIBRARIES = \
 	libshowdesktop.la
@@ -30,18 +28,18 @@ libshowdesktop_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 libshowdesktop_la_LIBADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBWNCK_LIBS)
 
 libshowdesktop_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
 
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel-plugins
+desktopdir = $(datadir)/xfce4/panel
 desktop_in_files = showdesktop.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

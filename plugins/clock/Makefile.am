@@ -2,10 +2,9 @@
 INCLUDES = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libclock\" \
-	-DLOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel
 
 plugin_LTLIBRARIES = \
 	libclock.la
@@ -45,7 +44,7 @@ libclock_la_LDFLAGS =	 \
 	$(PLATFORM_LDFLAGS)
 
 libclock_la_LIBADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(CAIRO_LIBS) \
@@ -55,13 +54,13 @@ libclock_la_LIBADD = \
 	$(XFCONF_LIBS)
 
 libclock_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel-plugins
+desktopdir = $(datadir)/xfce4/panel
 desktop_in_files =	clock.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

@@ -2,12 +2,11 @@
 INCLUDES = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libxfce4panel\" \
-	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DLIBXFCE4PANEL_COMPILATION \
 	$(PLATFORM_CPPFLAGS)
 
 lib_LTLIBRARIES = \
-	libxfce4panel.la
+	libxfce4panel-2.la
 
 libxfce4panel_public_built_sources = \
 	libxfce4panel-enum-types.h
@@ -31,13 +30,13 @@ libxfce4panel_headers = \
 	xfce-panel-image.h
 
 libxfce4panel_includedir = \
-	$(includedir)/xfce4/libxfce4panel
+	$(includedir)/xfce4/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API)/libxfce4panel
 
 libxfce4panel_include_HEADERS = \
 	$(libxfce4panel_public_built_sources) \
 	$(libxfce4panel_headers)
 
-libxfce4panel_la_SOURCES = \
+libxfce4panel_2_la_SOURCES = \
 	$(libxfce4panel_built_sources) \
 	$(libxfce4panel_headers) \
 	xfce-arrow-button.c \
@@ -48,19 +47,19 @@ libxfce4panel_la_SOURCES = \
 	xfce-panel-plugin-provider.h \
 	xfce-panel-image.c
 
-libxfce4panel_la_CFLAGS =	 \
+libxfce4panel_2_la_CFLAGS =	 \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
-libxfce4panel_la_LDFLAGS = \
+libxfce4panel_2_la_LDFLAGS = \
 	-no-undefined \
 	-export-dynamic \
 	-version-info $(LIBXFCE4PANEL_VERINFO) \
 	-export-symbols-regex '^[^_].*' \
 	$(PLATFORM_LDFLAGS)
 
-libxfce4panel_la_LIBADD = \
+libxfce4panel_2_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS)
 
@@ -68,7 +67,7 @@ libxfce4panel_la_LIBADD = \
 # Pkg-config file
 #
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libxfce4panel-1.0.pc
+pkgconfig_DATA = libxfce4panel-2.pc
 
 #
 # Build sources

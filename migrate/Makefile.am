@@ -1,7 +1,6 @@
 
 INCLUDES = \
 	-I$(top_srcdir) \
-	-I$(top_builddir) \
 	-DG_LOG_DOMAIN=\"xfce4-panel-migrate\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DDEFAULT_CONFIG=\"$(sysconfdir)/xdg/xfce4/panel/default.xml\" \
@@ -11,28 +10,30 @@ confdir = $(sysconfdir)/xdg/xfce4/panel
 conf_DATA = \
 	default.xml
 
-libexec_PROGRAMS = \
-	xfce4-panel-migrate
+migratedir = $(libexecdir)/xfce4/panel
 
-xfce4_panel_migrate_SOURCES = \
+migrate_PROGRAMS = \
+	migrate
+
+migrate_SOURCES = \
 	main.c \
 	migrate-46.c \
 	migrate-46.h \
 	migrate-default.c \
 	migrate-default.h
 
-xfce4_panel_migrate_CFLAGS = \
+migrate_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
-xfce4_panel_migrate_LDFLAGS = \
+migrate_LDFLAGS = \
 	-no-undefined \
 	$(PLATFORM_LDFLAGS)
 
-xfce4_panel_migrate_LDADD = \
+migrate_LDADD = \
 	$(GTK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \

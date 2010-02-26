@@ -2,11 +2,10 @@
 INCLUDES = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libtasklist\" \
-	-DLOCALEDIR=\"$(localedir)\" \
 	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel
 
 plugin_LTLIBRARIES = \
 	libtasklist.la
@@ -37,7 +36,7 @@ libtasklist_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 libtasklist_la_LIBADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(EXO_LIBS) \
 	$(GTK_LIBS) \
@@ -47,13 +46,13 @@ libtasklist_la_LIBADD = \
 	$(XFCONF_LIBS)
 
 libtasklist_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel-plugins
+desktopdir = $(datadir)/xfce4/panel
 desktop_in_files = tasklist.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

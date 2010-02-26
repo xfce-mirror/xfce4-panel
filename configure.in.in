@@ -8,7 +8,8 @@ dnl
 dnl ***************************
 dnl *** Version information ***
 dnl ***************************
-m4_define([libxfce4panel_verinfo], [3:0:1])
+m4_define([libxfce4panel_verinfo], [0:0:0])
+m4_define([libxfce4panel_version_api], [2])
 m4_define([xfce4_panel_version_major], [4])
 m4_define([xfce4_panel_version_minor], [7])
 m4_define([xfce4_panel_version_micro], [0])
@@ -70,6 +71,18 @@ dnl **************************************
 LIBXFCE4PANEL_VERINFO=libxfce4panel_verinfo()
 AC_SUBST([LIBXFCE4PANEL_VERINFO])
 
+dnl **************************
+dnl *** Substitute version ***
+dnl **************************
+LIBXFCE4PANEL_VERSION_API=libxfce4panel_version_api()
+LIBXFCE4PANEL_VERSION_MAJOR=xfce4_panel_version_major()
+LIBXFCE4PANEL_VERSION_MINOR=xfce4_panel_version_minor()
+LIBXFCE4PANEL_VERSION_MICRO=xfce4_panel_version_micro()
+AC_SUBST([LIBXFCE4PANEL_VERSION_API])
+AC_SUBST([LIBXFCE4PANEL_VERSION_MAJOR])
+AC_SUBST([LIBXFCE4PANEL_VERSION_MINOR])
+AC_SUBST([LIBXFCE4PANEL_VERSION_MICRO])
+
 dnl **********************************
 dnl *** Check for standard headers ***
 dnl **********************************
@@ -97,7 +110,6 @@ XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.6.0])
 XDT_CHECK_PACKAGE([EXO], [exo-1], [0.5.1])
 XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.14.0])
 XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.18.0])
-XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.18.0])
 XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.18.0])
 XDT_CHECK_PACKAGE([DBUS], [dbus-glib-1], [0.73])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
@@ -169,7 +181,7 @@ AC_OUTPUT([
 Makefile
 common/Makefile
 libxfce4panel/Makefile
-libxfce4panel/libxfce4panel-1.0.pc
+libxfce4panel/libxfce4panel-2.pc
 migrate/Makefile
 panel/Makefile
 wrapper/Makefile

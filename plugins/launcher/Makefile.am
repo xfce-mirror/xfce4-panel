@@ -1,15 +1,11 @@
 
 INCLUDES = \
 	-I$(top_srcdir) \
-	-DBINDIR=\"$(bindir)\" \
-	-DSYSCONFDIR=\"$(sysconfdir)\" \
 	-DG_LOG_DOMAIN=\"liblauncher\" \
 	-DSN_API_NOT_YET_FROZEN \
-	-DEXO_API_SUBJECT_TO_CHANGE \
-	-DLOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel
 
 plugin_LTLIBRARIES = \
 	liblauncher.la
@@ -42,7 +38,7 @@ liblauncher_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 liblauncher_la_LIBADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
@@ -53,13 +49,13 @@ liblauncher_la_LIBADD = \
 	$(XFCONF_LIBS)
 
 liblauncher_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel-plugins
+desktopdir = $(datadir)/xfce4/panel
 desktop_in_files = launcher.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

@@ -2,10 +2,9 @@
 INCLUDES = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libactions\" \
-	-DLOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel
 
 plugin_LTLIBRARIES = \
 	libactions.la
@@ -34,7 +33,7 @@ libactions_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 libactions_la_LIBADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
@@ -43,13 +42,13 @@ libactions_la_LIBADD = \
 	$(XFCONF_LIBS)
 
 libactions_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel-plugins
+desktopdir = $(datadir)/xfce4/panel
 desktop_in_files = actions.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@

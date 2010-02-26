@@ -1,12 +1,10 @@
 
 INCLUDES = \
 	-I$(top_srcdir) \
-	-I$(top_builddir) \
 	-DG_LOG_DOMAIN=\"xfce4-panel\" \
-	-DDATADIR=\"$(datadir)\" \
-	-DLIBDIR=\"$(libdir)\" \
-	-DLIBEXECDIR=\"$(libexecdir)\" \
-	-DSYSCONFDIR=\"$(sysconfdir)\" \
+	-DDATADIR=\"$(datadir)/xfce4/panel\" \
+	-DLIBDIR=\"$(libdir)/xfce4/panel\" \
+	-DLIBEXECDIR=\"$(libexecdir)/xfce4/panel\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DDBUS_API_SUBJECT_TO_CHANGE \
 	$(PLATFORM_CPPFLAGS)
@@ -52,7 +50,6 @@ xfce4_panel_SOURCES = \
 xfce4_panel_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(GMODULE_CFLAGS) \
-	$(GTHREAD_CFLAGS) \
 	$(EXO_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
@@ -65,19 +62,18 @@ xfce4_panel_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 xfce4_panel_LDADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(EXO_LIBS) \
 	$(GMODULE_LIBS) \
-	$(GTHREAD_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(XFCONF_LIBS) \
 	$(DBUS_LIBS)
 
 xfce4_panel_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la
 
 if MAINTAINER_MODE

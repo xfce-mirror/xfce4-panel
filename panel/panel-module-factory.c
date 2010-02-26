@@ -35,9 +35,6 @@
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 
-#define DESKTOP_FILES_DIR (DATADIR G_DIR_SEPARATOR_S "xfce4" G_DIR_SEPARATOR_S "panel-plugins")
-#define LIBRARY_FILES_DIR (LIBDIR  G_DIR_SEPARATOR_S "xfce4" G_DIR_SEPARATOR_S "panel-plugins")
-
 
 
 static void     panel_module_factory_finalize        (GObject                  *object);
@@ -150,7 +147,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
   gchar       *internal_name;
 
   /* try to open the directory */
-  dir = g_dir_open (DESKTOP_FILES_DIR, 0, NULL);
+  dir = g_dir_open (DATADIR, 0, NULL);
   if (G_UNLIKELY (dir == NULL))
     return;
 
@@ -169,7 +166,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
         continue;
 
       /* create the full .desktop filename */
-      filename = g_build_filename (DESKTOP_FILES_DIR, name, NULL);
+      filename = g_build_filename (DATADIR, name, NULL);
 
       /* find the dot in the name, this cannot
        * fail since it pasted the .desktop suffix check */
@@ -185,7 +182,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
       /* try to load the module */
       module = panel_module_new_from_desktop_file (filename,
                                                    internal_name,
-                                                   LIBRARY_FILES_DIR,
+                                                   LIBDIR,
                                                    force_all_external);
 
       if (G_LIKELY (module != NULL))
