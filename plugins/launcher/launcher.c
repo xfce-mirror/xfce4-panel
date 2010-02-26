@@ -1080,9 +1080,9 @@ launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
 
   if (!result)
     {
-      xfce_dialog_show_error (NULL, error,
-          _("Failed to cleanup the configuration of launcher %d"),
-          xfce_panel_plugin_get_unique_id (panel_plugin));
+      g_message ("launcher-%d: Failed to cleanup the configuration: %s",
+                 xfce_panel_plugin_get_unique_id (panel_plugin),
+                 error->message);
       g_error_free (error);
     }
 }
