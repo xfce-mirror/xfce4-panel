@@ -652,6 +652,38 @@ window_menu_plugin_button_press_event (GtkWidget            *button,
 }
 
 
+
+static void
+window_menu_plugin_workspace_add (GtkWidget            *mi,
+                                  XfceWindowMenuPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WNCK_IS_SCREEN (plugin->screen));
+
+  /* increase the number of workspaces */
+  wnck_screen_change_workspace_count (plugin->screen,
+      wnck_screen_get_workspace_count (plugin->screen) + 1);
+}
+
+
+
+static void
+window_menu_plugin_workspace_remove (GtkWidget            *mi,
+                                     XfceWindowMenuPlugin *plugin)
+{
+  gint n_workspaces;
+
+  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (WNCK_IS_SCREEN (plugin->screen));
+
+  /* decrease the number of workspaces */
+  n_workspaces = wnck_screen_get_workspace_count (plugin->screen);
+  if (G_LIKELY (n_workspaces > 1))
+    wnck_screen_change_workspace_count (plugin->screen, n_workspaces - 1);
+}
+
+
+
 static void
 window_menu_plugin_menu_workspace_item_active (GtkWidget     *mi,
                                                WnckWorkspace *workspace)
@@ -679,7 +711,7 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
   if (IS_STRING (name) && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  /* generate a workspace name */
+  /* create fallback name if no name is set */
   if (!IS_STRING (name))
     name = name_num = g_strdup_printf (_("Workspace %d"),
                                        wnck_workspace_get_number (workspace) + 1);
@@ -936,13 +968,16 @@ window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
   GtkWidget            *menu, *mi = NULL, *image;
   GList                *workspaces, *lp, fake;
   GList                *windows, *li;
-  WnckWorkspace        *workspace;
+  WnckWorkspace        *workspace = NULL;
   WnckWorkspace        *active_workspace, *window_workspace;
   WnckWindow           *window;
   PangoFontDescription *italic, *bold;
   gint                  urgent_windows = 0;
   gboolean              has_windows;
   gboolean              is_empty = TRUE;
+  guint                 n_workspaces;
+  const gchar          *name = NULL;
+  gchar                *utf8 = NULL, *label;
 
   panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->screen), NULL);
@@ -975,7 +1010,7 @@ window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
       workspaces = &fake;
     }
 
-  for (lp = workspaces; lp != NULL; lp = lp->next)
+  for (lp = workspaces, n_workspaces = 0; lp != NULL; lp = lp->next, n_workspaces++)
     {
       workspace = WNCK_WORKSPACE (lp->data);
 
@@ -1104,15 +1139,38 @@ window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
 
       mi = gtk_image_menu_item_new_with_label (_("Add Workspace"));
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      g_signal_connect (G_OBJECT (mi), "activate",
+          G_CALLBACK (window_menu_plugin_workspace_add), plugin);
       gtk_widget_show (mi);
 
       image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (mi);
 
-      mi = gtk_image_menu_item_new_with_label (_("Remove Workspace \"TODO\""));
+      if (G_LIKELY (workspace != NULL))
+        {
+          /* try to get an utf-8 valid name */
+          name = wnck_workspace_get_name (workspace);
+          if (IS_STRING (name) && !g_utf8_validate (name, -1, NULL))
+            name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
+        }
+
+      /* create label */
+      if (IS_STRING (name))
+        label = g_strdup_printf (_("Remove Workspace \"%s\""), name);
+      else
+        label = g_strdup_printf (_("Remove Workspace %d"), n_workspaces);
+
+      mi = gtk_image_menu_item_new_with_label (label);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+      gtk_widget_set_sensitive (mi, !!(n_workspaces > 1));
+      g_signal_connect (G_OBJECT (mi), "activate",
+          G_CALLBACK (window_menu_plugin_workspace_remove), plugin);
       gtk_widget_show (mi);
+
+      /* cleanup */
+      g_free (label);
+      g_free (utf8);
 
       image = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
