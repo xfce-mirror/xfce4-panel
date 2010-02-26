@@ -163,7 +163,7 @@ panel_dialogs_restart_plugin (GtkWindow   *parent,
   dialog = gtk_message_dialog_new (parent,
                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                    GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                   _("Plugin \"%s\" unexpectedly left the building, do you want to restart it?"),
+                                   _("Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"),
                                    plugin_name);
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("If you press Execute "
                                             "the panel will try to restart the plugin otherwise it "

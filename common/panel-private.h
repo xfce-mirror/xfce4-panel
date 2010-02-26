@@ -63,13 +63,9 @@
 /* xfconf property base (printf format) */
 #define PANEL_PLUGIN_PROPERTY_BASE "/plugins/plugin-%d"
 
-/* Number of automatic plugin restarts before the panel
- * asks the users what to do  */
-#ifndef NDEBUG
-#define PANEL_PLUGIN_AUTOMATIC_RESTARTS (0)
-#else
-#define PANEL_PLUGIN_AUTOMATIC_RESTARTS (2)
-#endif
+/* minimum time in seconds between automatic restarts of panel plugins
+ * without asking the user what to do */
+#define PANEL_PLUGIN_AUTO_RESTART (60)
 
 /* quick GList and GSList counting without traversing */
 #define LIST_HAS_ONE_ENTRY(l)           ((l) != NULL && (l)->next == NULL)

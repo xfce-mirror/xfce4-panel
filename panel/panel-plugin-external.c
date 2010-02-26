@@ -135,8 +135,8 @@ struct _PanelPluginExternal
   /* dbus message queue */
   GPtrArray        *queue;
 
-  /* number of automatic restarts restarts */
-  guint             n_restarts;
+  /* auto restart timer */
+  GTimer           *restart_timer;
 
   /* some info we store here */
   guint             show_configure : 1;
@@ -239,8 +239,8 @@ panel_plugin_external_init (PanelPluginExternal *external)
   external->module = NULL;
   external->arguments = NULL;
   external->queue = NULL;
+  external->restart_timer = NULL;
   external->plug_embedded = FALSE;
-  external->n_restarts = 0;
   external->show_configure = FALSE;
   external->show_about = FALSE;
 
@@ -323,6 +323,9 @@ panel_plugin_external_finalize (GObject *object)
     }
 
   g_strfreev (external->arguments);
+
+  if (external->restart_timer != NULL)
+    g_timer_destroy (external->restart_timer);
 
   g_object_unref (G_OBJECT (external->module));
 
@@ -485,19 +488,18 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   window = gtk_widget_get_toplevel (GTK_WIDGET (socket));
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
 
-  if (external->n_restarts++ <= PANEL_PLUGIN_AUTOMATIC_RESTARTS)
+  /* create a restart timer if we don't have any */
+  if (external->restart_timer == NULL)
+    external->restart_timer = g_timer_new ();
+
+  if (g_timer_elapsed (external->restart_timer, NULL) > PANEL_PLUGIN_AUTO_RESTART)
     {
-      g_message ("Automatically restarting plugin %s-%d, try %d",
+      g_message ("Automatically restarting plugin %s-%d",
                  panel_module_get_name (external->module),
-                 external->unique_id, external->n_restarts);
+                 external->unique_id);
     }
-  else if (panel_dialogs_restart_plugin (GTK_WINDOW (window),
+  else if (!panel_dialogs_restart_plugin (GTK_WINDOW (window),
                panel_module_get_display_name (external->module)))
-    {
-      /* reset the restart counter */
-      external->n_restarts = 0;
-    }
-  else
     {
       /* cleanup the plugin configuration (in panel-application) */
       xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
@@ -508,6 +510,9 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
       return FALSE;
     }
+
+  /* reset the restart counter, user agreed to restart again */
+  g_timer_reset (external->restart_timer);
 
   /* send panel information to the plugin (queued until realize) */
   panel_window_set_povider_info (PANEL_WINDOW (window), GTK_WIDGET (external));
