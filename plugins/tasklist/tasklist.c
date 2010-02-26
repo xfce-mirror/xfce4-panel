@@ -506,6 +506,10 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
   GtkWidget         *button;
   GtkAllocation     *alloc;
   GSList            *li, *source = NULL, *sibling = NULL;
+  
+  /* list when this is an unknow target (return false because it's not a drop zone) */
+  if (gtk_drag_dest_find_target (widget, context, NULL) == GDK_NONE)
+    return FALSE;
 
   /* get de button we're dragging */
   button = gtk_drag_get_source_widget (context);
@@ -579,6 +583,7 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
   /* update the drag status so we keep receiving the drag motions */
   gdk_drag_status (context, 0, time);
 
+  /* this is a valid drop zone */
   return TRUE;
 }
 
