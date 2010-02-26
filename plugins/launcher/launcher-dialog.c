@@ -592,7 +592,8 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
       /* get the selected item in the tree, leave if none is found */
       treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
       selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-      if (!gtk_tree_selection_get_selected (selection, &model, &iter_a))
+      if (!gtk_tree_selection_get_selected (selection, &model, &iter_a)
+          && strcmp (name, "item-new") != 0)
         return;
 
       if (strcmp (name, "item-delete") == 0)
