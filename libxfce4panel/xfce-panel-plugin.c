@@ -453,17 +453,15 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                      G_PARAM_READABLE
                                                      | G_PARAM_STATIC_STRINGS));
 
-    /* TODO */
   g_object_class_install_property (gobject_class,
                                    PROP_SCREEN_POSITION,
-                                   g_param_spec_uint ("screen-position",
-                                                      "Screen Position",
-                                                      "Screen position of the plugin's panel",
-                                                      XFCE_SCREEN_POSITION_NONE,
-                                                      XFCE_SCREEN_POSITION_FLOATING_V,
-                                                      XFCE_SCREEN_POSITION_NONE,
-                                                      G_PARAM_READABLE
-                                                      | G_PARAM_STATIC_STRINGS));
+                                   g_param_spec_enum  ("screen-position",
+                                                       "Screen Position",
+                                                       "Screen position of the plugin's panel",
+                                                       XFCE_TYPE_SCREEN_POSITION,
+                                                       XFCE_SCREEN_POSITION_NONE,
+                                                       G_PARAM_READABLE
+                                                       | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_EXPAND,
