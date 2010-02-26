@@ -404,9 +404,11 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                              DEFAULT_MENU_MAX_WIDTH_CHARS,
                                                              EXO_PARAM_READABLE));
 
-  menu_icon_size = gtk_icon_size_register ("panel-tasklist-menu",
-                                           DEFAULT_MENU_ICON_SIZE,
-                                           DEFAULT_MENU_ICON_SIZE);
+  menu_icon_size = gtk_icon_size_from_name ("panel-tasklist-menu");
+  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
+    menu_icon_size = gtk_icon_size_register ("panel-tasklist-menu",
+                                             DEFAULT_MENU_ICON_SIZE,
+                                             DEFAULT_MENU_ICON_SIZE);
 }
 
 

@@ -311,7 +311,10 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 
   /* initialize the quark */
   launcher_plugin_quark = g_quark_from_static_string ("xfce-launcher-plugin");
-  menu_icon_size = gtk_icon_size_register ("panel-launcher-menu", 32, 32);
+
+  menu_icon_size = gtk_icon_size_from_name ("panel-launcher-menu");
+  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
+    menu_icon_size = gtk_icon_size_register ("panel-launcher-menu", 32, 32);
 }
 
 

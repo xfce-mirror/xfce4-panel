@@ -148,7 +148,10 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
                                                          EXO_PARAM_READWRITE));
 
   menu_file = g_quark_from_static_string ("dir-menu-file");
-  menu_icon_size = gtk_icon_size_register ("panel-directory-menu", 16, 16);
+
+  menu_icon_size = gtk_icon_size_from_name ("panel-directory-menu");
+  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
+    menu_icon_size = gtk_icon_size_register ("panel-directory-menu", 16, 16);
 }
 
 

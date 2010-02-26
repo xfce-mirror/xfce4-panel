@@ -228,7 +228,10 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                                              EXO_PARAM_READABLE));
 
   window_quark = g_quark_from_static_string ("window-list-window-quark");
-  menu_icon_size = gtk_icon_size_register ("panel-window-menu", 16, 16);
+
+  menu_icon_size = gtk_icon_size_from_name ("panel-window-menu");
+  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
+    menu_icon_size = gtk_icon_size_register ("panel-window-menu", 16, 16);
 }
 
 
