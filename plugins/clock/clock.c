@@ -131,6 +131,31 @@ typedef struct
 }
 ClockPluginDialog;
 
+static const gchar *tooltip_formats[] =
+{
+  DEFAULT_TOOLTIP_FORMAT,
+  "%x",
+  N_("Week %V"),
+  NULL
+};
+
+static const gchar *digital_formats[] =
+{
+  DEFAULT_DIGITAL_FORMAT,
+  "%T",
+  "%r",
+  "%R %p",
+  NULL
+};
+
+enum
+{
+  COLUMN_FORMAT,
+  COLUMN_SEPARATOR,
+  COLUMN_TEXT,
+  N_COLUMNS
+};
+
 
 
 /* define the plugin */
@@ -401,7 +426,7 @@ static void
 clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
                                             ClockPluginDialog *dialog)
 {
-  guint     i, active, mode;
+  guint    i, active, mode;
   GObject *object;
   struct {
     const gchar *widget;
@@ -413,7 +438,7 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
     { "show-military", "show-military", "active" },
     { "flash-separators", "flash-separators", "active" },
     { "show-meridiem", "show-meridiem", "active" },
-    { "format-box", "digital-format", "active" },
+    { "digital-box", "digital-format", "text" },
     { "fuzziness-box", "fuzziness", "value" }
   };
 
@@ -450,7 +475,7 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
   for (i = 0; i < G_N_ELEMENTS (names); i++)
     {
       object = gtk_builder_get_object (dialog->builder, names[i].widget);
-      panel_return_if_fail (G_IS_OBJECT (object));
+      panel_return_if_fail (GTK_IS_WIDGET (object));
       if (PANEL_HAS_FLAG (active, 1 << (i + 1)))
         gtk_widget_show (GTK_WIDGET (object));
       else
@@ -478,8 +503,115 @@ clock_plugin_configure_plugin_mode_changed (GtkComboBox       *combo,
 
 
 static void
-clock_plugin_configure_plugin_free (gpointer  user_data,
-                                    GObject  *where_the_object_was)
+clock_plugin_configure_plugin_chooser_changed (GtkComboBox *combo,
+                                               GtkEntry    *entry)
+{
+  GtkTreeIter   iter;
+  GtkTreeModel *model;
+  gchar        *format;
+
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
+  panel_return_if_fail (GTK_IS_ENTRY (entry));
+
+  if (gtk_combo_box_get_active_iter (combo, &iter))
+    {
+      model = gtk_combo_box_get_model (combo);
+      gtk_tree_model_get (model, &iter, COLUMN_FORMAT, &format, -1);
+
+      if (format != NULL)
+        {
+          gtk_entry_set_text (entry, format);
+          gtk_widget_hide (GTK_WIDGET (entry));
+          g_free (format);
+        }
+      else
+        {
+          gtk_widget_show (GTK_WIDGET (entry));
+        }
+    }
+}
+
+
+
+static gboolean
+clock_plugin_configure_plugin_chooser_separator (GtkTreeModel *model,
+                                                 GtkTreeIter  *iter,
+                                                 gpointer      user_data)
+{
+  gboolean separator;
+
+  gtk_tree_model_get (model, iter, COLUMN_SEPARATOR, &separator, -1);
+
+  return separator;
+}
+
+
+
+static void
+clock_plugin_configure_plugin_chooser_fill (GtkComboBox *combo,
+                                            GtkEntry    *entry,
+                                            const gchar *formats[])
+{
+  guint         i;
+  GtkListStore *store;
+  gchar        *preview;
+  struct tm     now;
+  GtkTreeIter   iter;
+  const gchar  *active_format;
+  gboolean      has_active = FALSE;
+
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
+  panel_return_if_fail (GTK_IS_ENTRY (entry));
+
+  gtk_combo_box_set_row_separator_func (combo,
+      clock_plugin_configure_plugin_chooser_separator, NULL, NULL);
+
+  store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_STRING);
+  gtk_combo_box_set_model (combo, GTK_TREE_MODEL (store));
+
+  clock_plugin_get_localtime (&now);
+
+  active_format = gtk_entry_get_text (entry);
+
+  for (i = 0; formats[i] != NULL; i++)
+    {
+      preview = clock_plugin_strdup_strftime (_(formats[i]), &now);
+      gtk_list_store_insert_with_values (store, &iter, i,
+                                         COLUMN_FORMAT, _(formats[i]),
+                                         COLUMN_TEXT, preview, -1);
+      g_free (preview);
+
+      if (has_active == FALSE
+          && IS_STRING (active_format)
+          && strcmp (active_format, formats[i]) == 0)
+        {
+          gtk_combo_box_set_active_iter (combo, &iter);
+          gtk_widget_hide (GTK_WIDGET (entry));
+          has_active = TRUE;
+        }
+    }
+
+  gtk_list_store_insert_with_values (store, NULL, i++,
+                                     COLUMN_SEPARATOR, TRUE, -1);
+
+  gtk_list_store_insert_with_values (store, &iter, i++,
+                                     COLUMN_TEXT, _("Custom Format"), -1);
+  if (!has_active)
+    {
+      gtk_combo_box_set_active_iter (combo, &iter);
+      gtk_widget_show (GTK_WIDGET (entry));
+    }
+
+  g_signal_connect (G_OBJECT (combo), "changed",
+      G_CALLBACK (clock_plugin_configure_plugin_chooser_changed), entry);
+
+  g_object_unref (G_OBJECT (store));
+}
+
+
+
+static void
+clock_plugin_configure_plugin_free (gpointer user_data)
 {
   g_slice_free (ClockPluginDialog, user_data);
 }
@@ -494,6 +626,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GtkBuilder        *builder;
   GObject           *window;
   GObject           *object;
+  GObject           *combo;
 
   panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
 
@@ -506,17 +639,31 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   dialog = g_slice_new0 (ClockPluginDialog);
   dialog->plugin = plugin;
   dialog->builder = builder;
-  g_object_weak_ref (G_OBJECT (builder), clock_plugin_configure_plugin_free, dialog);
 
   object = gtk_builder_get_object (builder, "mode");
-  g_signal_connect (G_OBJECT (object), "changed",
-      G_CALLBACK (clock_plugin_configure_plugin_mode_changed), dialog);
+  g_signal_connect_data (G_OBJECT (object), "changed",
+      G_CALLBACK (clock_plugin_configure_plugin_mode_changed), dialog,
+      (GClosureNotify) clock_plugin_configure_plugin_free, 0);
   exo_mutual_binding_new (G_OBJECT (plugin), "mode",
                           G_OBJECT (object), "active");
 
   object = gtk_builder_get_object (builder, "show-frame");
   exo_mutual_binding_new (G_OBJECT (plugin), "show-frame",
                           G_OBJECT (object), "active");
+
+  object = gtk_builder_get_object (builder, "tooltip-format");
+  exo_mutual_binding_new (G_OBJECT (plugin), "tooltip-format",
+                          G_OBJECT (object), "text");
+  combo = gtk_builder_get_object (builder, "tooltip-chooser");
+  clock_plugin_configure_plugin_chooser_fill (GTK_COMBO_BOX (combo),
+                                              GTK_ENTRY (object),
+                                              tooltip_formats);
+
+  object = gtk_builder_get_object (builder, "digital-format");
+  combo = gtk_builder_get_object (builder, "digital-chooser");
+  clock_plugin_configure_plugin_chooser_fill (GTK_COMBO_BOX (combo),
+                                              GTK_ENTRY (object),
+                                              digital_formats);
 
   gtk_widget_show (GTK_WIDGET (window));
 }
@@ -595,7 +742,7 @@ clock_plugin_tooltip (gpointer user_data)
 
   /* set the tooltip */
   string = clock_plugin_strdup_strftime (plugin->tooltip_format, &tm);
-  gtk_widget_set_tooltip_text (GTK_WIDGET (plugin), string);
+  gtk_widget_set_tooltip_markup (GTK_WIDGET (plugin), string);
   g_free (string);
 
   /* make sure the tooltip is up2date */
@@ -781,7 +928,7 @@ clock_plugin_strdup_strftime (const gchar     *format,
 {
   gchar *converted, *result;
   gsize  length;
-  gchar  buffer[512];
+  gchar  buffer[1024];
 
   /* leave when format is null */
   if (G_UNLIKELY (!IS_STRING (format)))

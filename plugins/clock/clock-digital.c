@@ -29,8 +29,6 @@
 #include "clock.h"
 #include "clock-digital.h"
 
-#define DEFAULT_DIGITAL_FORMAT "%R"
-
 
 
 static void     xfce_clock_digital_set_property (GObject               *object,
