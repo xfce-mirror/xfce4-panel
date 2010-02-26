@@ -525,13 +525,45 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
 
 
 static void
+panel_preferences_dialog_panel_sensitive (PanelPreferencesDialog *dialog)
+{
+
+  GObject   *object;
+  gboolean   locked = TRUE;
+  gint       n_windows;
+
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+
+  if (G_LIKELY (dialog->active != NULL))
+    locked = panel_window_get_locked (dialog->active);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-remove");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  n_windows = panel_application_get_n_windows (dialog->application);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !locked && n_windows > 1);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-add");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object),
+      !panel_application_get_locked (dialog->application));
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "notebook");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-add");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
+}
+
+
+
+static void
 panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox,
                                                  PanelPreferencesDialog *dialog)
 {
   gint       nth;
   GtkWidget *itembar;
-  GObject   *object;
-  gboolean   locked = TRUE;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -561,23 +593,9 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 
       /* update the items treeview */
       panel_preferences_dialog_item_store_rebuild (itembar, dialog);
-
-      /* make the entire notebook insensitive when the window is locked */
-      locked = panel_window_get_locked (dialog->active);
-      object = gtk_builder_get_object (GTK_BUILDER (dialog), "notebook");
-      panel_return_if_fail (GTK_IS_WIDGET (object));
-      gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
     }
 
-  /* sensitivity of the remove button */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-remove");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_widget_set_sensitive (GTK_WIDGET (object), !locked);
-
-  /* sensitivity of the add button in item tab */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-add");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_widget_set_sensitive (GTK_WIDGET (object), !!(dialog->active != NULL));
+  panel_preferences_dialog_panel_sensitive (dialog);
 }
 
 
@@ -585,7 +603,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 static void
 panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
 {
-  GObject *store, *combo, *object;
+  GObject *store, *combo;
   gint     n, n_items;
   gchar   *name;
 
@@ -612,18 +630,11 @@ panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog)
       g_free (name);
     }
 
-  /* set sensitivity of some widgets */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "notebook");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_items > 0));
-
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-remove");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_items > 1));
-
   /* unblock signal */
   g_signal_handlers_unblock_by_func (combo,
       panel_preferences_dialog_panel_combobox_changed, dialog);
+
+  panel_preferences_dialog_panel_sensitive (dialog);
 }
 
 
