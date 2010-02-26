@@ -114,9 +114,6 @@ struct _PanelApplication
   /* xfconf channel */
   XfconfChannel      *xfconf;
 
-  /* hash table with xfconf properties */
-  GHashTable         *xfconf_properties;
-
   /* internal list of all the panel windows */
   GSList  *windows;
 
@@ -184,7 +181,6 @@ panel_application_init (PanelApplication *application)
   application->drop_uris = NULL;
   application->drop_data_ready = FALSE;
   application->drop_occurred = FALSE;
-  application->xfconf_properties = NULL;
 
   /* get the xfconf channel */
   application->xfconf = xfconf_channel_new ("xfce4-panel");
@@ -275,8 +271,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
-                         property_base, properties,
-                         application->xfconf_properties);
+                         property_base, properties, NULL);
 
   /* cleanup */
   g_free (property_base);
@@ -301,13 +296,12 @@ panel_application_load (PanelApplication *application)
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
 
   /* get all the panel properties */
-  hash_table = xfconf_channel_get_properties (application->xfconf, "/panels");
+  hash_table = xfconf_channel_get_properties (application->xfconf, NULL);
   if (G_UNLIKELY (hash_table == NULL))
     return;
 
-  /* set the global hash table, so we can quickly read
-   * settings during startup */
-  application->xfconf_properties = hash_table;
+  /* set the shared hash table */
+  panel_properties_shared_hash_table (hash_table);
 
   /* walk all the panel in the configuration */
   value = g_hash_table_lookup (hash_table, "/panels");
@@ -353,9 +347,11 @@ panel_application_load (PanelApplication *application)
         }
     }
 
+  /* unset the shared hash table */
+  panel_properties_shared_hash_table (NULL);
+
   /* cleanup */
   g_hash_table_destroy (hash_table);
-  application->xfconf_properties = NULL;
 }
 
 

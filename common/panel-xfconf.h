@@ -29,12 +29,14 @@ struct _PanelProperty
   GType        type;
 };
 
-void panel_properties_bind   (XfconfChannel       *channel,
-                              GObject             *object,
-                              const gchar         *property_base,
-                              const PanelProperty *properties,
-                              GHashTable          *hash_table);
+void panel_properties_bind              (XfconfChannel       *channel,
+                                         GObject             *object,
+                                         const gchar         *property_base,
+                                         const PanelProperty *properties,
+                                         GHashTable          *hash_table);
 
-void panel_properties_unbind (GObject             *object);
+void panel_properties_unbind            (GObject             *object);
+
+void panel_properties_shared_hash_table (GHashTable          *hash_table);
 
 #endif /* !__PANEL_XFCONF_H__ */

@@ -50,6 +50,11 @@ static void panel_properties_channel_destroyed (gpointer       user_data,
 
 
 
+/* shared table which is used to speed up the panel startup */
+static GHashTable *shared_hash_table = NULL;
+
+
+
 static void
 panel_properties_object_notify (GObject    *object,
                                 GParamSpec *pspec,
@@ -166,6 +171,8 @@ panel_properties_bind (XfconfChannel       *channel,
   /* get or ref the hash table */
   if (G_LIKELY (hash_table != NULL))
     g_hash_table_ref (hash_table);
+  else if (shared_hash_table != NULL)
+    hash_table = g_hash_table_ref (shared_hash_table);
   else
     hash_table = xfconf_channel_get_properties (channel, property_base);
 
@@ -209,6 +216,22 @@ panel_properties_bind (XfconfChannel       *channel,
     }
 
   /* cleanup */
-  if (hash_table != NULL)
+  if (G_LIKELY (hash_table != NULL))
     g_hash_table_unref (hash_table);
+}
+
+
+
+void
+panel_properties_shared_hash_table (GHashTable *hash_table)
+{
+  /* release previous table */
+  if (shared_hash_table != NULL)
+    g_hash_table_unref (shared_hash_table);
+
+  /* set new table */
+  if (hash_table != NULL)
+    shared_hash_table = g_hash_table_ref (hash_table);
+  else
+    shared_hash_table = NULL;
 }
