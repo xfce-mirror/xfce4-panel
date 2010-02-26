@@ -102,7 +102,7 @@ void         xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProv
 
 void         xfce_panel_plugin_provider_save                (XfcePanelPluginProvider       *provider);
 
-void         xfce_panel_plugin_provider_send_signal         (XfcePanelPluginProvider       *provider,
+void         xfce_panel_plugin_provider_emit_signal         (XfcePanelPluginProvider       *provider,
                                                              XfcePanelPluginProviderSignal  signal);
 
 gboolean     xfce_panel_plugin_provider_get_show_configure  (XfcePanelPluginProvider       *provider);

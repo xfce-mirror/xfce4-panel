@@ -600,7 +600,7 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
   /* TODO, question dialog */
 
   /* send signal */
-  xfce_panel_plugin_provider_send_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
+  xfce_panel_plugin_provider_emit_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
 
   /* remove from treeview */
   gtk_list_store_remove (dialog->store, &iter);

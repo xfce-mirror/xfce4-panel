@@ -141,7 +141,7 @@ xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 
 
 PANEL_SYMBOL_EXPORT void
-xfce_panel_plugin_provider_send_signal (XfcePanelPluginProvider       *provider,
+xfce_panel_plugin_provider_emit_signal (XfcePanelPluginProvider       *provider,
                                         XfcePanelPluginProviderSignal  signal)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));

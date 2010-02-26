@@ -376,7 +376,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   else
     {
       /* emit a remove signal, so we can cleanup the plugin configuration (in panel-application) */
-      xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
+      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
                                               PROVIDER_SIGNAL_REMOVE_PLUGIN);
 
       /* destroy the socket */

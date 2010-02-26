@@ -285,7 +285,7 @@ panel_dbus_service_plugin_provider_signal (PanelDBusService *service,
 
   /* emit the signal for the local plugin provider */
   if (G_LIKELY (provider))
-    xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (provider), signal);
+    xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (provider), signal);
 
   /* release the factory */
   g_object_unref (G_OBJECT (factory));
