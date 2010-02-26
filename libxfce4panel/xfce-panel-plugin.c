@@ -933,6 +933,20 @@ xfce_panel_plugin_menu_panel_about (XfcePanelPlugin *plugin)
 
 
 
+static void
+xfce_panel_plugin_menu_panel_help (XfcePanelPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
+  panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
+
+  /* open the manual of the panel */
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_PANEL_HELP);
+}
+
+
+
 static GtkMenu *
 xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 {
@@ -1067,6 +1081,13 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 
       /* separator */
       item = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
+      gtk_widget_show (item);
+
+      /* help item */
+      item = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
+      g_signal_connect_swapped (G_OBJECT (item), "activate",
+          G_CALLBACK (xfce_panel_plugin_menu_panel_help), plugin);
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 

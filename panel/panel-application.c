@@ -33,6 +33,7 @@
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-debug.h>
+#include <common/panel-builder.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
@@ -551,6 +552,11 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
     case PROVIDER_SIGNAL_PANEL_ABOUT:
       /* show the about dialog */
       panel_dialogs_show_about ();
+      break;
+
+    case PROVIDER_SIGNAL_PANEL_HELP:
+      /* try to launch help browser */
+      panel_builder_show_help (NULL, NULL, NULL);
       break;
 
     case PROVIDER_SIGNAL_FOCUS_PLUGIN:

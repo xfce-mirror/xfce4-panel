@@ -30,6 +30,7 @@
 #include <exo/exo.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
+#include <common/panel-builder.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-base-window.h>
@@ -2019,6 +2020,14 @@ panel_window_menu_quit (gpointer boolean)
 
 
 static void
+panel_window_menu_help (void)
+{
+  panel_builder_show_help (NULL, NULL, NULL);
+}
+
+
+
+static void
 panel_window_menu_deactivate (GtkMenu     *menu,
                               PanelWindow *window)
 {
@@ -2109,6 +2118,13 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_widget_show (image);
 
   item = gtk_separator_menu_item_new ();
+  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+  gtk_widget_show (item);
+
+  /* help item */
+  item = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
+  g_signal_connect (G_OBJECT (item), "activate",
+      G_CALLBACK (panel_window_menu_help), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
