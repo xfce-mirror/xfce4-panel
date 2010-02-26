@@ -59,45 +59,45 @@ typedef gint         (*ProviderToPluginInt)  (XfcePanelPluginProvider *provider)
 
 
 
-static void          xfce_panel_plugin_provider_init          (XfcePanelPluginProviderIface *iface);
-static void          xfce_panel_plugin_get_property           (GObject                      *object,
-                                                               guint                         prop_id,
-                                                               GValue                       *value,
-                                                               GParamSpec                   *pspec);
-static void          xfce_panel_plugin_set_property           (GObject                      *object,
-                                                               guint                         prop_id,
-                                                               const GValue                 *value,
-                                                               GParamSpec                   *pspec);
-static void          xfce_panel_plugin_dispose                (GObject                      *object);
-static void          xfce_panel_plugin_finalize               (GObject                      *object);
-static void          xfce_panel_plugin_realize                (GtkWidget                    *widget);
-static gboolean      xfce_panel_plugin_button_press_event     (GtkWidget                    *widget,
-                                                               GdkEventButton               *event);
-static void          xfce_panel_plugin_menu_move              (XfcePanelPlugin              *plugin);
-static void          xfce_panel_plugin_menu_remove            (XfcePanelPlugin              *plugin);
-static void          xfce_panel_plugin_menu_add_items         (XfcePanelPlugin              *plugin);
-static void          xfce_panel_plugin_menu_panel_preferences (XfcePanelPlugin              *plugin);
-static GtkMenu      *xfce_panel_plugin_menu_get               (XfcePanelPlugin              *plugin);
-static inline gchar *xfce_panel_plugin_relative_filename      (XfcePanelPlugin              *plugin);
-static void          xfce_panel_plugin_unregister_menu        (GtkMenu                      *menu,
-                                                               XfcePanelPlugin              *plugin);
-static void          xfce_panel_plugin_set_size               (XfcePanelPluginProvider      *provider,
-                                                               gint                          size);
-static void          xfce_panel_plugin_set_orientation        (XfcePanelPluginProvider      *provider,
-                                                               GtkOrientation                orientation);
-static void          xfce_panel_plugin_set_screen_position    (XfcePanelPluginProvider      *provider,
-                                                               XfceScreenPosition            screen_position);
-static void          xfce_panel_plugin_save                   (XfcePanelPluginProvider      *provider);
-static gboolean      xfce_panel_plugin_get_show_configure     (XfcePanelPluginProvider      *provider);
-static void          xfce_panel_plugin_show_configure         (XfcePanelPluginProvider      *provider);
-static gboolean      xfce_panel_plugin_get_show_about         (XfcePanelPluginProvider      *provider);
-static void          xfce_panel_plugin_show_about             (XfcePanelPluginProvider      *provider);
-static void          xfce_panel_plugin_remove                 (XfcePanelPluginProvider      *provider);
-static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginProvider      *provider,
-                                                               const gchar                  *name,
-                                                               const GValue                 *value);
-static void          xfce_panel_plugin_take_window_notify     (gpointer                      data,
-                                                               GObject                      *where_the_object_was);
+static void          xfce_panel_plugin_provider_init          (XfcePanelPluginProviderInterface *iface);
+static void          xfce_panel_plugin_get_property           (GObject                          *object,
+                                                               guint                             prop_id,
+                                                               GValue                           *value,
+                                                               GParamSpec                       *pspec);
+static void          xfce_panel_plugin_set_property           (GObject                          *object,
+                                                               guint                             prop_id,
+                                                               const GValue                     *value,
+                                                               GParamSpec                       *pspec);
+static void          xfce_panel_plugin_dispose                (GObject                          *object);
+static void          xfce_panel_plugin_finalize               (GObject                          *object);
+static void          xfce_panel_plugin_realize                (GtkWidget                        *widget);
+static gboolean      xfce_panel_plugin_button_press_event     (GtkWidget                        *widget,
+                                                               GdkEventButton                   *event);
+static void          xfce_panel_plugin_menu_move              (XfcePanelPlugin                  *plugin);
+static void          xfce_panel_plugin_menu_remove            (XfcePanelPlugin                  *plugin);
+static void          xfce_panel_plugin_menu_add_items         (XfcePanelPlugin                  *plugin);
+static void          xfce_panel_plugin_menu_panel_preferences (XfcePanelPlugin                  *plugin);
+static GtkMenu      *xfce_panel_plugin_menu_get               (XfcePanelPlugin                  *plugin);
+static inline gchar *xfce_panel_plugin_relative_filename      (XfcePanelPlugin                  *plugin);
+static void          xfce_panel_plugin_unregister_menu        (GtkMenu                          *menu,
+                                                               XfcePanelPlugin                  *plugin);
+static void          xfce_panel_plugin_set_size               (XfcePanelPluginProvider          *provider,
+                                                               gint                              size);
+static void          xfce_panel_plugin_set_orientation        (XfcePanelPluginProvider          *provider,
+                                                               GtkOrientation                    orientation);
+static void          xfce_panel_plugin_set_screen_position    (XfcePanelPluginProvider          *provider,
+                                                               XfceScreenPosition                screen_position);
+static void          xfce_panel_plugin_save                   (XfcePanelPluginProvider          *provider);
+static gboolean      xfce_panel_plugin_get_show_configure     (XfcePanelPluginProvider          *provider);
+static void          xfce_panel_plugin_show_configure         (XfcePanelPluginProvider          *provider);
+static gboolean      xfce_panel_plugin_get_show_about         (XfcePanelPluginProvider          *provider);
+static void          xfce_panel_plugin_show_about             (XfcePanelPluginProvider          *provider);
+static void          xfce_panel_plugin_remove                 (XfcePanelPluginProvider          *provider);
+static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginProvider          *provider,
+                                                               const gchar                      *name,
+                                                               const GValue                     *value);
+static void          xfce_panel_plugin_take_window_notify     (gpointer                          data,
+                                                               GObject                          *where_the_object_was);
 
 
 
@@ -566,7 +566,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 
 
 static void
-xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
+xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
 {
   iface->get_name = (ProviderToPluginChar) xfce_panel_plugin_get_name;
   iface->get_unique_id = (ProviderToPluginInt) xfce_panel_plugin_get_unique_id;

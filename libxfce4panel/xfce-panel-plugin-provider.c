@@ -37,8 +37,7 @@ enum
 
 
 
-static void xfce_panel_plugin_provider_class_init (gpointer klass,
-                                                   gpointer klass_data);
+static void xfce_panel_plugin_provider_default_init (XfcePanelPluginProviderInterface *klass);
 
 
 
@@ -49,25 +48,29 @@ static guint provider_signals[LAST_SIGNAL];
 GType
 xfce_panel_plugin_provider_get_type (void)
 {
-  static GType type = 0;
+  static volatile gsize type__volatile = 0;
+  GType                 type;
 
-  if (G_UNLIKELY (type == 0))
+  if (g_once_init_enter (&type__volatile))
     {
       type = g_type_register_static_simple (G_TYPE_INTERFACE,
                                             g_intern_static_string ("XfcePanelPluginProvider"),
-                                            sizeof (XfcePanelPluginProviderIface),
-                                            xfce_panel_plugin_provider_class_init,
-                                            0, NULL, 0);
+                                            sizeof (XfcePanelPluginProviderInterface),
+                                            (GClassInitFunc) xfce_panel_plugin_provider_default_init,
+                                            0,
+                                            NULL,
+                                            0);
+
+      g_once_init_leave (&type__volatile, type);
     }
 
-  return type;
+  return type__volatile;
 }
 
 
 
 static void
-xfce_panel_plugin_provider_class_init (gpointer klass,
-                                       gpointer klass_data)
+xfce_panel_plugin_provider_default_init (XfcePanelPluginProviderInterface *klass)
 {
   provider_signals[PROVIDER_SIGNAL] =
     g_signal_new (g_intern_static_string ("provider-signal"),
@@ -85,7 +88,7 @@ xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
 
-  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_name) (provider);
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->get_name) (provider);
 }
 
 
@@ -95,7 +98,7 @@ xfce_panel_plugin_provider_get_unique_id (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), -1);
 
-  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_unique_id) (provider);
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->get_unique_id) (provider);
 }
 
 
@@ -106,7 +109,7 @@ xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_size) (provider, size);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_size) (provider, size);
 }
 
 
@@ -117,7 +120,7 @@ xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_orientation) (provider, orientation);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_orientation) (provider, orientation);
 }
 
 
@@ -128,7 +131,7 @@ xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provide
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->set_screen_position) (provider, screen_position);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_screen_position) (provider, screen_position);
 }
 
 
@@ -138,7 +141,7 @@ xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->save) (provider);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->save) (provider);
 }
 
 
@@ -160,7 +163,7 @@ xfce_panel_plugin_provider_get_show_configure (XfcePanelPluginProvider *provider
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
 
-  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_show_configure) (provider);
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->get_show_configure) (provider);
 }
 
 
@@ -170,7 +173,7 @@ xfce_panel_plugin_provider_show_configure (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->show_configure) (provider);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->show_configure) (provider);
 }
 
 
@@ -180,7 +183,7 @@ xfce_panel_plugin_provider_get_show_about (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
 
-  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_show_about) (provider);
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->get_show_about) (provider);
 }
 
 
@@ -190,7 +193,7 @@ xfce_panel_plugin_provider_show_about (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->show_about) (provider);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->show_about) (provider);
 }
 
 
@@ -200,7 +203,7 @@ xfce_panel_plugin_provider_remove (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->remove) (provider);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->remove) (provider);
 }
 
 
@@ -214,7 +217,7 @@ xfce_panel_plugin_provider_remote_event (XfcePanelPluginProvider *provider,
   panel_return_val_if_fail (name != NULL, TRUE);
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), TRUE);
 
-  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->remote_event) (provider, name, value);
+  return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->remote_event) (provider, name, value);
 }
 
 
