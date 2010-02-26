@@ -13,7 +13,7 @@ plugin_LTLIBRARIES = \
 	libpager.la
 
 libpager_built_sources = \
-	pager-dialog_glade.h
+	pager-dialog_ui.h
 
 libpager_la_SOURCES = \
 	$(libpager_built_sources) \
@@ -58,7 +58,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	pager-dialog.glade \
+	pager-dialog.ui \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -71,8 +71,8 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libpager_built_sources)
 
-pager-dialog_glade.h: pager-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=pager_dialog_glade $< >$@
+pager-dialog_ui.h: pager-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=pager_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

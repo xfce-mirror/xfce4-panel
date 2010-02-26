@@ -16,7 +16,7 @@ plugin_LTLIBRARIES = \
 	liblauncher.la
 
 liblauncher_built_sources = \
-	launcher-dialog_glade.h
+	launcher-dialog_ui.h
 
 liblauncher_la_SOURCES = \
 	$(liblauncher_built_sources) \
@@ -65,8 +65,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	launcher-dialog.glade \
-	$(menu_DATA) \
+	launcher-dialog.ui \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -79,8 +78,8 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libclock_built_sources)
 
-launcher-dialog_glade.h: launcher-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=launcher_dialog_glade $< >$@
+launcher-dialog_ui.h: launcher-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=launcher_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

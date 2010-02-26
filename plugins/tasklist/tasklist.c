@@ -27,7 +27,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 
 #include "tasklist-widget.h"
-#include "tasklist-dialog_glade.h"
+#include "tasklist-dialog_ui.h"
 
 /* TODO move to header */
 GType tasklist_plugin_get_type (void) G_GNUC_CONST;
@@ -181,8 +181,8 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject        *object;
 
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, tasklist_dialog_glade,
-                                   tasklist_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, tasklist_dialog_ui,
+                                   tasklist_dialog_ui_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);

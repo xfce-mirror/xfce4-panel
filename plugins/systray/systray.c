@@ -32,7 +32,7 @@
 #include "systray-box.h"
 #include "systray-socket.h"
 #include "systray-manager.h"
-#include "systray-dialog_glade.h"
+#include "systray-dialog_ui.h"
 
 #define ICON_SIZE (22)
 
@@ -452,8 +452,8 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     return;
 
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, systray_dialog_glade,
-                                   systray_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, systray_dialog_ui,
+                                   systray_dialog_ui_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);

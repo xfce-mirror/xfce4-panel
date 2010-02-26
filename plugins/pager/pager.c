@@ -31,7 +31,7 @@
 #include <exo/exo.h>
 
 #include "pager.h"
-#include "pager-dialog_glade.h"
+#include "pager-dialog_ui.h"
 
 
 
@@ -427,10 +427,10 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
 
-  /* load the dialog from the glade file */
+  /* load the dialog from the ui file */
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, pager_dialog_glade,
-      pager_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, pager_dialog_ui,
+      pager_dialog_ui_length, NULL))
     {
       /* signals to monitor number of workspace changes */
       g_signal_connect (G_OBJECT (plugin->wnck_screen), "workspace-created",

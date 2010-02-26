@@ -33,7 +33,7 @@
 #include <panel/panel-itembar.h>
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-preferences-dialog.h>
-#include <panel/panel-preferences-dialog-glade.h>
+#include <panel/panel-preferences-dialog-ui.h>
 
 #define PREFERENCES_HELP_URL "http://www.xfce.org"
 
@@ -136,8 +136,8 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   panel_application_windows_autohide (dialog->application, TRUE);
 
   /* load the builder data into the object */
-  gtk_builder_add_from_string (GTK_BUILDER (dialog), panel_preferences_dialog_glade,
-                               panel_preferences_dialog_glade_length, NULL);
+  gtk_builder_add_from_string (GTK_BUILDER (dialog), panel_preferences_dialog_ui,
+                               panel_preferences_dialog_ui_length, NULL);
 
   /* get the dialog */
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");

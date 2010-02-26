@@ -12,7 +12,7 @@ plugin_LTLIBRARIES = \
 	libclock.la
 
 libclock_built_sources = \
-	clock-dialog_glade.h
+	clock-dialog_ui.h
 
 libclock_la_SOURCES = \
 	$(libclock_built_sources) \
@@ -65,7 +65,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	clock-dialog.glade \
+	clock-dialog.ui \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -78,8 +78,8 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libclock_built_sources)
 
-clock-dialog_glade.h: clock-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=clock_dialog_glade $< >$@
+clock-dialog_ui.h: clock-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=clock_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

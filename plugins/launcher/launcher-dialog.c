@@ -35,7 +35,7 @@
 
 #include "launcher.h"
 #include "launcher-dialog.h"
-#include "launcher-dialog_glade.h"
+#include "launcher-dialog_ui.h"
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
@@ -746,8 +746,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, launcher_dialog_glade,
-                                    launcher_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, launcher_dialog_ui,
+                                    launcher_dialog_ui_length, NULL))
     {
       /* create structure */
       dialog = g_slice_new0 (LauncherPluginDialog);

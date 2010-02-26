@@ -29,7 +29,7 @@
 #include <exo/exo.h>
 
 #include "actions.h"
-#include "actions-dialog_glade.h"
+#include "actions-dialog_ui.h"
 
 
 
@@ -355,10 +355,10 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
 
-  /* load the dialog from the glade file */
+  /* load the dialog from the ui file */
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, actions_dialog_glade,
-                                   actions_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, actions_dialog_ui,
+                                   actions_dialog_ui_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);

@@ -38,7 +38,7 @@
 #include "clock-digital.h"
 #include "clock-fuzzy.h"
 #include "clock-lcd.h"
-#include "clock-dialog_glade.h"
+#include "clock-dialog_ui.h"
 
 
 
@@ -384,9 +384,9 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   /* save before we opend the dialog, so all properties exist in xfonf */
   clock_plugin_save (panel_plugin);
 
-  /* load the dialog from the glade file */
+  /* load the dialog from the ui file */
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, clock_dialog_glade, clock_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, clock_dialog_ui, clock_dialog_ui_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);

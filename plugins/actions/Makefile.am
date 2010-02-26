@@ -12,7 +12,7 @@ plugin_LTLIBRARIES = \
 	libactions.la
 
 libactions_built_sources = \
-	actions-dialog_glade.h
+	actions-dialog_ui.h
 
 libactions_la_SOURCES = \
 	$(libactions_built_sources) \
@@ -55,7 +55,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	actions-dialog.glade \
+	actions-dialog.ui \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -68,8 +68,8 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libactions_built_sources)
 
-actions-dialog_glade.h: actions-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=actions_dialog_glade $< >$@
+actions-dialog_ui.h: actions-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=actions_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

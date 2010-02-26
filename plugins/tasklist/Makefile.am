@@ -13,7 +13,7 @@ plugin_LTLIBRARIES = \
 	libtasklist.la
 
 libtasklist_built_sources = \
-	tasklist-dialog_glade.h
+	tasklist-dialog_ui.h
 
 libtasklist_la_SOURCES = \
 	$(libtasklist_built_sources) \
@@ -59,7 +59,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	tasklist-dialog.glade \
+	tasklist-dialog.ui \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -72,8 +72,8 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libtasklist_built_sources)
 
-tasklist-dialog_glade.h: tasklist-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=tasklist_dialog_glade $< >$@
+tasklist-dialog_ui.h: tasklist-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=tasklist_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

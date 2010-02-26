@@ -12,7 +12,7 @@ plugin_LTLIBRARIES = \
 	libsystray.la
 
 libsystray_built_sources = \
-	systray-dialog_glade.h \
+	systray-dialog_ui.h \
 	systray-marshal.c \
 	systray-marshal.h
 
@@ -66,7 +66,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	$(desktop_in_files) \
-	systray-dialog.glade \
+	systray-dialog.ui \
 	systray-marshal.list
 
 DISTCLEANFILES = \
@@ -89,8 +89,8 @@ systray-marshal.c: systray-marshal.list Makefile
 	echo "#include \"systray-marshal.h\"" > $@ \
 	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
 
-systray-dialog_glade.h: systray-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=systray_dialog_glade $< >$@
+systray-dialog_ui.h: systray-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

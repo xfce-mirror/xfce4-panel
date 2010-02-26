@@ -12,7 +12,7 @@ plugin_LTLIBRARIES = \
 	libseparator.la
 
 libseparator_built_sources = \
-	separator-dialog_glade.h
+	separator-dialog_ui.h
 
 libseparator_la_SOURCES = \
 	$(libseparator_built_sources) \
@@ -57,7 +57,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	separator-dialog.glade \
+	separator-dialog.ui \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -70,8 +70,8 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libseparator_built_sources)
 
-separator-dialog_glade.h: separator-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=separator_dialog_glade $< >$@
+separator-dialog_ui.h: separator-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=separator_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

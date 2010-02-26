@@ -30,7 +30,7 @@
 #include <common/panel-private.h>
 
 #include "windowmenu.h"
-#include "windowmenu-dialog_glade.h"
+#include "windowmenu-dialog_ui.h"
 
 #define ARROW_BUTTON_SIZE (12)
 #define URGENT_FLAGS      (WNCK_WINDOW_STATE_DEMANDS_ATTENTION | \
@@ -494,8 +494,8 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                 "style" };
 
   builder = gtk_builder_new ();
-  if (gtk_builder_add_from_string (builder, windowmenu_dialog_glade,
-                                   windowmenu_dialog_glade_length, NULL))
+  if (gtk_builder_add_from_string (builder, windowmenu_dialog_ui,
+                                   windowmenu_dialog_ui_length, NULL))
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);

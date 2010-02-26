@@ -13,7 +13,7 @@ plugin_LTLIBRARIES = \
 	libwindowmenu.la
 
 libwindowmenu_built_sources = \
-	windowmenu-dialog_glade.h
+	windowmenu-dialog_ui.h
 
 libwindowmenu_la_SOURCES = \
 	$(libwindowmenu_built_sources) \
@@ -58,7 +58,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	windowmenu-dialog.glade \
+	windowmenu-dialog.ui \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
@@ -71,8 +71,8 @@ BUILT_SOURCES = \
 DISTCLEANFILES += \
 	$(libwindowmenu_built_sources)
 
-windowmenu-dialog_glade.h: windowmenu-dialog.glade
-	exo-csource --static --strip-comments --strip-content --name=windowmenu_dialog_glade $< >$@
+windowmenu-dialog_ui.h: windowmenu-dialog.ui
+	exo-csource --static --strip-comments --strip-content --name=windowmenu_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

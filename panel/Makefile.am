@@ -20,7 +20,7 @@ xfce4_panel_built_sources = \
 	panel-dbus-client-infos.h \
 	panel-marshal.h \
 	panel-marshal.c \
-	panel-preferences-dialog-glade.h
+	panel-preferences-dialog-ui.h
 
 xfce4_panel_SOURCES = \
 	$(xfce4_panel_built_sources) \
@@ -89,8 +89,8 @@ panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 panel-dbus-client-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 	dbus-binding-tool --mode=glib-client $< > $@
 
-panel-preferences-dialog-glade.h: $(srcdir)/panel-preferences-dialog.glade Makefile
-	exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_glade $< >$@
+panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.ui Makefile
+	exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
 
 panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
 	glib-genmarshal --header --prefix=panel_marshal $< > $@
@@ -110,6 +110,6 @@ endif
 EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
 	panel-marshal.list \
-	panel-preferences-dialog.glade
+	panel-preferences-dialog.ui
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
