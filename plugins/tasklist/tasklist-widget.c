@@ -1328,7 +1328,7 @@ tasklist_button_state_changed (WnckWindow        *window,
         }
       else
         {
-          /* update the icon (lucient) */
+          /* update the icon (lucent) */
           tasklist_button_icon_changed (window, child);
         }
     }
