@@ -9,6 +9,8 @@ noinst_LTLIBRARIES = \
 	libpanel-common.la
 
 libpanel_common_la_SOURCES = \
+	panel-debug.c \
+	panel-debug.h \
 	panel-builder.c \
 	panel-builder.h \
 	panel-xfconf.c \
