@@ -219,9 +219,8 @@ panel_module_item_finalized (gpointer  user_data,
   module->use_count--;
 
   /* unuse the library if the plugin runs internal */
-  /* TODO this needs to be fixed */
-  //if (!xfce_panel_plugin_provider_is_external (XFCE_PANEL_PLUGIN_PROVIDER (item)))
-  //  g_type_module_unuse (G_TYPE_MODULE (module));
+  if (module->run_in_wrapper == FALSE)
+    g_type_module_unuse (G_TYPE_MODULE (module));
 
   /* emit signal unique signal in the factory */
   if (module->is_unique)
@@ -324,11 +323,9 @@ panel_module_create_plugin (PanelModule  *module,
                             GdkScreen    *screen,
                             const gchar  *name,
                             const gchar  *id,
-                            gchar       **arguments,
-                            UseWrapper    use_wrapper)
+                            gchar       **arguments)
 {
   XfcePanelPluginProvider *plugin = NULL;
-  gboolean                 external;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
@@ -341,10 +338,7 @@ panel_module_create_plugin (PanelModule  *module,
   if (G_UNLIKELY (panel_module_is_usable (module) == FALSE))
     return NULL;
 
-  /* whether we're going to start the module external */
-  external = !!(use_wrapper == FORCE_EXTERNAL || (use_wrapper == FROM_DESKTOP_FILE && module->run_in_wrapper));
-
-  if (external)
+  if (module->run_in_wrapper)
     {
       /* create external plugin */
       plugin = panel_plugin_external_new (module, name, id, arguments);
@@ -381,7 +375,7 @@ panel_module_create_plugin (PanelModule  *module,
       if (module->is_unique)
         panel_module_factory_emit_unique_changed (module);
     }
-  else if (external == FALSE)
+  else if (module->run_in_wrapper == FALSE)
     {
       /* decrease the use count since loading failed somehow */
       g_type_module_unuse (G_TYPE_MODULE (module));

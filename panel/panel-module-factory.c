@@ -359,8 +359,7 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
                                     GdkScreen           *screen,
                                     const gchar         *name,
                                     const gchar         *id,
-                                    gchar              **arguments,
-                                    UseWrapper           use_wrapper)
+                                    gchar              **arguments)
 {
   PanelModule *module;
 
@@ -380,5 +379,5 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
     }
 
   /* create the new module */
-  return panel_module_create_plugin (module, screen, name, id, arguments, use_wrapper);
+  return panel_module_create_plugin (module, screen, name, id, arguments);
 }

@@ -61,7 +61,6 @@ struct _XfcePanelPluginProviderIface
   GTypeInterface __parent__;
 
   /*< public >*/
-  gboolean     (*is_external)         (void);
   const gchar *(*get_name)            (XfcePanelPluginProvider *provider);
   const gchar *(*get_id)              (XfcePanelPluginProvider *provider);
   void         (*set_size)            (XfcePanelPluginProvider *provider,
@@ -75,8 +74,6 @@ struct _XfcePanelPluginProviderIface
 };
 
 GType        xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
-
-gboolean     xfce_panel_plugin_provider_is_external         (XfcePanelPluginProvider *provider);
 
 const gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider *provider);
 

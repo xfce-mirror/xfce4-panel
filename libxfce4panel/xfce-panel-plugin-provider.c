@@ -90,7 +90,7 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
                       0, NULL, NULL,
                       g_cclosure_marshal_VOID__BOOLEAN,
                       G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
-                      
+
       provider_signals[MOVE] =
         g_signal_new (I_("move-item"),
                       G_TYPE_FROM_CLASS (klass),
@@ -98,7 +98,7 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
                       0, NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
-                      
+
       provider_signals[ADD_NEW_ITEMS] =
         g_signal_new (I_("add-new-items"),
                       G_TYPE_FROM_CLASS (klass),
@@ -106,7 +106,7 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
                       0, NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
-                      
+
       provider_signals[CUSTOMIZE_PANEL] =
         g_signal_new (I_("customize-panel"),
                       G_TYPE_FROM_CLASS (klass),
@@ -122,21 +122,11 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
 
 
 
-gboolean
-xfce_panel_plugin_provider_is_external (XfcePanelPluginProvider *provider)
-{
-  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), TRUE);
-  
-  return (XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->is_external) ();
-}
-
-
-
 const gchar *
 xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
-  
+
   return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_name) (provider);
 }
 
@@ -146,7 +136,7 @@ const gchar *
 xfce_panel_plugin_provider_get_id (XfcePanelPluginProvider *provider)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
-  
+
   return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->get_id) (provider);
 }
 
@@ -174,7 +164,7 @@ xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
 
 
 
-void            
+void
 xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provider,
                                                 XfceScreenPosition       screen_position)
 {

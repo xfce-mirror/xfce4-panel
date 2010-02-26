@@ -393,7 +393,6 @@ panel_application_insert_plugin (PanelApplication  *application,
                                  const gchar       *name,
                                  const gchar       *id,
                                  gchar            **arguments,
-                                 UseWrapper         use_wrapper,
                                  gint               position)
 {
   GtkWidget               *itembar;
@@ -410,7 +409,7 @@ panel_application_insert_plugin (PanelApplication  *application,
     id = panel_application_get_unique_id ();
 
   /* create a new panel plugin */
-  provider = panel_module_factory_create_plugin (application->factory, screen, name, id, arguments, use_wrapper);
+  provider = panel_module_factory_create_plugin (application->factory, screen, name, id, arguments);
 
   if (G_LIKELY (provider != NULL))
     {
@@ -454,7 +453,6 @@ panel_application_load_start_element (GMarkupParseContext  *context,
   const gchar *name = NULL;
   const gchar *value = NULL;
   const gchar *id = NULL;
-  UseWrapper   use_wrapper = FROM_DESKTOP_FILE;
 
   switch (parser->state)
     {
@@ -514,15 +512,13 @@ panel_application_load_start_element (GMarkupParseContext  *context,
                   name = attribute_values[n];
                 else if (exo_str_is_equal (attribute_names[n], "id"))
                   id = attribute_values[n];
-                else if (exo_str_is_equal (attribute_names[n], "external"))
-                  use_wrapper = exo_str_is_equal (attribute_values[n], "1") ? FORCE_EXTERNAL : FORCE_INTERNAL;
               }
 
             /* append the new plugin */
             if (G_LIKELY (name != NULL))
               panel_application_insert_plugin (parser->application, parser->window,
                                                gtk_window_get_screen (GTK_WINDOW (parser->window)),
-                                               name, id, NULL, use_wrapper, -1);
+                                               name, id, NULL, -1);
           }
         break;
 
@@ -664,10 +660,9 @@ panel_application_save_xml_contents (PanelApplication *application)
           provider = XFCE_PANEL_PLUGIN_PROVIDER (lp->data);
 
           /* store plugin name and id */
-          g_string_append_printf (contents, "\t\t\t<item name=\"%s\" id=\"%s\" external=\"%d\" />\n",
+          g_string_append_printf (contents, "\t\t\t<item name=\"%s\" id=\"%s\" />\n",
                                   xfce_panel_plugin_provider_get_name (provider),
-                                  xfce_panel_plugin_provider_get_id (provider),
-                                  xfce_panel_plugin_provider_is_external (provider));
+                                  xfce_panel_plugin_provider_get_id (provider));
         }
 
       /* cleanup */
@@ -842,7 +837,7 @@ panel_application_add_new_item (PanelApplication  *application,
 
       /* add the panel to the end of the choosen window */
       panel_application_insert_plugin (application, window, gtk_widget_get_screen (GTK_WIDGET (window)),
-                                       plugin_name, NULL, arguments, /* FROM_DESKTOP_FILE */ FORCE_EXTERNAL, -1);
+                                       plugin_name, NULL, arguments, -1);
     }
   else
     {
@@ -899,7 +894,7 @@ panel_application_drag_data_received (GtkWidget        *itembar,
 
             /* create a new item with a unique id */
             succeed = panel_application_insert_plugin (application, window, screen, name,
-                                                       NULL, NULL, FROM_DESKTOP_FILE, position);
+                                                       NULL, NULL, position);
           }
         break;
 

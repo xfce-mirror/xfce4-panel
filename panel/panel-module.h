@@ -26,7 +26,6 @@ G_BEGIN_DECLS
 
 typedef struct _PanelModuleClass PanelModuleClass;
 typedef struct _PanelModule      PanelModule;
-typedef enum   _UseWrapper       UseWrapper;
 
 #define PANEL_TYPE_MODULE            (panel_module_get_type ())
 #define PANEL_MODULE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_MODULE, PanelModule))
@@ -35,12 +34,7 @@ typedef enum   _UseWrapper       UseWrapper;
 #define PANEL_IS_MODULE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_MODULE))
 #define PANEL_MODULE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_MODULE, PanelModuleClass))
 
-enum _UseWrapper
-{
-  FROM_DESKTOP_FILE,
-  FORCE_INTERNAL,
-  FORCE_EXTERNAL
-};
+
 
 GType                    panel_module_get_type              (void) G_GNUC_CONST;
 
@@ -51,8 +45,7 @@ XfcePanelPluginProvider *panel_module_create_plugin         (PanelModule  *modul
                                                              GdkScreen    *screen,
                                                              const gchar  *name,
                                                              const gchar  *id,
-                                                             gchar       **arguments,
-                                                             UseWrapper    use_wrapper);
+                                                             gchar       **arguments);
 
 const gchar             *panel_module_get_internal_name     (PanelModule  *module);
 

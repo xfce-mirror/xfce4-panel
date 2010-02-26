@@ -56,7 +56,6 @@ static void         xfce_panel_plugin_menu_remove          (XfcePanelPlugin     
 static void         xfce_panel_plugin_menu_add_items       (XfcePanelPlugin              *plugin);
 static void         xfce_panel_plugin_menu_customize_panel (XfcePanelPlugin              *plugin);
 static GtkWidget   *xfce_panel_plugin_menu_new             (XfcePanelPlugin              *plugin);
-static gboolean     xfce_panel_plugin_is_external          (void);
 static gchar       *xfce_panel_plugin_relative_filename    (XfcePanelPlugin              *plugin);
 static void         xfce_panel_plugin_set_size             (XfcePanelPluginProvider      *provider,
                                                             gint                          size);
@@ -366,7 +365,6 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 static void
 xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
 {
-  iface->is_external = xfce_panel_plugin_is_external;
   iface->get_name = (ProviderToPlugin) xfce_panel_plugin_get_name;
   iface->get_id = (ProviderToPlugin) xfce_panel_plugin_get_id;
   iface->set_size = xfce_panel_plugin_set_size;
@@ -736,14 +734,6 @@ xfce_panel_plugin_relative_filename (XfcePanelPlugin *plugin)
   return g_strdup_printf ("xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%s.rc",
                           xfce_panel_plugin_get_name (plugin),
                           xfce_panel_plugin_get_id (plugin));
-}
-
-
-
-static gboolean
-xfce_panel_plugin_is_external (void)
-{
-  return FALSE;
 }
 
 

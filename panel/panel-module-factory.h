@@ -54,8 +54,7 @@ XfcePanelPluginProvider *panel_module_factory_create_plugin       (PanelModuleFa
                                                                    GdkScreen           *screen,
                                                                    const gchar         *name,
                                                                    const gchar         *id,
-                                                                   gchar              **arguments,
-                                                                   UseWrapper           use_wrapper);
+                                                                   gchar              **arguments);
 
 G_END_DECLS
 
