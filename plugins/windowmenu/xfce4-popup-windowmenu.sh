@@ -20,12 +20,15 @@
 export TEXTDOMAIN="xfce4-panel"
 export TEXTDOMAINDIR="@localedir@"
 
+ATPOINTER="false"
+
 case "$1" in
   -h|--help)
     echo "$(gettext "Usage:")"
     echo "  $(basename $0) [$(gettext "OPTION")...]"
     echo
     echo "$(gettext "Options:")"
+    echo "  -p, --pointer   $(gettext "Popup menu at current mouse position")"
     echo "  -h, --help      $(gettext "Show help options")"
     echo "  -V, --version   $(gettext "Print version information and exit")"
     exit 0
@@ -34,8 +37,11 @@ case "$1" in
     exec @bindir@/xfce4-panel -V "$(basename $0)"
     exit 0
     ;;
+  -p|--pointer)
+    ATPOINTER="true"
+    ;;
 esac
 
-exec @bindir@/xfce4-panel --plugin-event=windowmenu:popup
+exec @bindir@/xfce4-panel --plugin-event=windowmenu:popup:bool:$ATPOINTER
 
 # vim:set ts=2 sw=2 et ai:

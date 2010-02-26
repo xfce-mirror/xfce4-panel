@@ -127,10 +127,8 @@ static void      window_menu_plugin_window_closed           (WnckScreen         
 static void      window_menu_plugin_windows_disconnect      (WindowMenuPlugin   *plugin);
 static void      window_menu_plugin_windows_connect         (WindowMenuPlugin   *plugin,
                                                              gboolean            traverse_windows);
-static gboolean  window_menu_plugin_button_press_event      (GtkWidget          *button,
-                                                             GdkEventButton     *event,
+static void      window_menu_plugin_menu                    (GtkWidget          *button,
                                                              WindowMenuPlugin   *plugin);
-static GtkWidget *window_menu_plugin_menu_new               (WindowMenuPlugin   *plugin);
 
 
 
@@ -255,8 +253,8 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
   gtk_widget_set_name (plugin->button, "windowmenu-button");
-  g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
-                    G_CALLBACK (window_menu_plugin_button_press_event), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "toggled",
+      G_CALLBACK (window_menu_plugin_menu), plugin);
 
   plugin->icon = xfce_panel_image_new_from_source ("user-desktop");
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
@@ -579,7 +577,6 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
                                  const GValue    *value)
 {
   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
-  GdkEventButton    event;
 
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
 
@@ -587,12 +584,18 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
       && GTK_WIDGET_VISIBLE (panel_plugin)
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))
     {
-      /* create fake event */
-      event.type = GDK_BUTTON_PRESS;
-      event.button = 1;
-      event.time = gtk_get_current_event_time ();
-
-      window_menu_plugin_button_press_event (plugin->button, &event, plugin);
+      if (value != NULL
+          && G_VALUE_HOLDS_BOOLEAN (value)
+          && g_value_get_boolean (value))
+        {
+          /* popup the menu under the pointer */
+          window_menu_plugin_menu (NULL, plugin);
+        }
+      else
+        {
+          /* show the menu */
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
+        }
 
       /* don't popup another menu */
       return TRUE;
@@ -781,37 +784,6 @@ window_menu_plugin_windows_connect (WindowMenuPlugin *plugin,
                                         WNCK_WINDOW (li->data),
                                         plugin);
     }
-}
-
-
-
-static gboolean
-window_menu_plugin_button_press_event (GtkWidget        *button,
-                                       GdkEventButton   *event,
-                                       WindowMenuPlugin *plugin)
-{
-  GtkWidget *menu;
-
-  panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), FALSE);
-  panel_return_val_if_fail (XFCE_IS_ARROW_BUTTON (button), FALSE);
-  panel_return_val_if_fail (GTK_IS_TOGGLE_BUTTON (button), FALSE);
-
-  /* only respond to a normal button 1 press */
-  if (event->type != GDK_BUTTON_PRESS || event->button != 1)
-    return FALSE;
-
-  /* activate the toggle button */
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
-
-  /* popup the menu */
-  menu = window_menu_plugin_menu_new (plugin);
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                  xfce_panel_plugin_position_menu, plugin,
-                  event->button, event->time);
-
-
-
-  return TRUE;
 }
 
 
@@ -1070,12 +1042,14 @@ static void
 window_menu_plugin_menu_selection_done (GtkWidget *menu,
                                         GtkWidget *button)
 {
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
+  panel_return_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  gtk_widget_destroy (menu);
+  if (button != NULL)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
+  /* delay destruction so we can handle the activate event first */
+  exo_gtk_object_destroy_later (GTK_OBJECT (menu));
 }
 
 
@@ -1175,8 +1149,6 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
     w = h = 16;
 
   menu = gtk_menu_new ();
-  g_signal_connect (G_OBJECT (menu), "selection-done",
-      G_CALLBACK (window_menu_plugin_menu_selection_done), plugin->button);
   g_signal_connect (G_OBJECT (menu), "key-press-event",
       G_CALLBACK (window_menu_plugin_menu_key_press_event), plugin);
 
@@ -1367,4 +1339,29 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   pango_font_description_free (bold);
 
   return menu;
+}
+
+
+
+static void
+window_menu_plugin_menu (GtkWidget        *button,
+                         WindowMenuPlugin *plugin)
+{
+  GtkWidget *menu;
+
+  panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
+  panel_return_if_fail (button == NULL || plugin->button == button);
+
+  if (button != NULL
+      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+    return;
+
+  /* popup the menu */
+  menu = window_menu_plugin_menu_new (plugin);
+  g_signal_connect (G_OBJECT (menu), "deactivate",
+      G_CALLBACK (window_menu_plugin_menu_selection_done), button);
+
+  gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
+                  button != NULL ? xfce_panel_plugin_position_menu : NULL,
+                  plugin, 1, gtk_get_current_event_time ());
 }
