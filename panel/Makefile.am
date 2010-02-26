@@ -5,7 +5,7 @@ INCLUDES = \
 	-I$(top_builddir) \
 	-DG_LOG_DOMAIN=\"xfce4-panel\" \
 	-DDATADIR=\"$(datadir)\" \
-	-DLIBDIR=\"$(libdir)/xfce4\" \
+	-DLIBDIR=\"$(libdir)\" \
 	-DLIBEXECDIR=\"$(libexecdir)\" \
 	-DSYSCONFDIR=\"$(sysconfdir)\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \

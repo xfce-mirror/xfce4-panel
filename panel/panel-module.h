@@ -42,6 +42,7 @@ GType        panel_module_get_type                 (void) G_GNUC_CONST;
 
 PanelModule *panel_module_new_from_desktop_file    (const gchar             *filename,
                                                     const gchar             *name,
+                                                    const gchar             *lib_directory,
                                                     gboolean                 force_external) G_GNUC_MALLOC;
 
 GtkWidget   *panel_module_new_plugin               (PanelModule             *module,

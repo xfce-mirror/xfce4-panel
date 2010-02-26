@@ -272,12 +272,12 @@ panel_module_plugin_destroyed (gpointer  user_data,
 PanelModule *
 panel_module_new_from_desktop_file (const gchar *filename,
                                     const gchar *name,
+                                    const gchar *lib_directory,
                                     gboolean     force_external)
 {
   PanelModule *module = NULL;
   XfceRc      *rc;
   const gchar *module_name;
-  const gchar *directory;
   const gchar *value;
   gchar       *path;
 
@@ -292,12 +292,11 @@ panel_module_new_from_desktop_file (const gchar *filename,
 
       /* read library location from the desktop file */
       module_name = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL);
-      directory = xfce_rc_read_entry (rc, "X-XFCE-Module-Path", NULL);
 
-      if (G_LIKELY (module_name != NULL && directory != NULL))
+      if (G_LIKELY (module_name != NULL))
         {
           /* build the module path */
-          path = g_module_build_path (directory, module_name);
+          path = g_module_build_path (lib_directory, module_name);
 
           /* test if the library exists */
           if (G_LIKELY (g_file_test (path, G_FILE_TEST_EXISTS)))

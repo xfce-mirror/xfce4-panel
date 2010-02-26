@@ -36,6 +36,9 @@
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 
+#define DESKTOP_FILES_DIR (DATADIR G_DIR_SEPARATOR_S "xfce4" G_DIR_SEPARATOR_S "panel-plugins")
+#define LIBRARY_FILES_DIR (LIBDIR  G_DIR_SEPARATOR_S "xfce4" G_DIR_SEPARATOR_S "panel-plugins")
+
 
 
 static void     panel_module_factory_finalize        (GObject                  *object);
@@ -141,107 +144,75 @@ panel_module_factory_finalize (GObject *object)
 static void
 panel_module_factory_load_modules (PanelModuleFactory *factory)
 {
-  gchar       **dirs;
-  gint          n;
-  gchar        *path;
-  GDir         *dir;
-  const gchar  *name, *p;
-  gchar        *filename;
-  PanelModule  *module;
-  gchar        *internal_name;
+  GDir        *dir;
+  const gchar *name, *p;
+  gchar       *filename;
+  PanelModule *module;
+  gchar       *internal_name;
 
-  /* get all resource directories */
-  dirs = xfce_resource_dirs (XFCE_RESOURCE_DATA);
+  /* try to open the directory */
+  dir = g_dir_open (DESKTOP_FILES_DIR, 0, NULL);
+  if (G_UNLIKELY (dir == NULL))
+    return;
 
-  /* check if the installation datadir is part of this list */
-  for (n = 0; dirs[n] != NULL; n++)
-    if (exo_str_is_equal (dirs[n], DATADIR))
-      break;
-
-  if (G_UNLIKELY (dirs[n] == NULL))
+  /* walk the directory */
+  for (;;)
     {
-      /* add the installation datadir */
-      dirs = g_realloc (dirs, (n + 2) * sizeof (gchar *));
-      dirs[n] = g_strdup (DATADIR);
-      dirs[n+1] = NULL;
-    }
+      /* get name of the next file */
+      name = g_dir_read_name (dir);
 
-  /* search the directories for plugin .desktop files */
-  for (n = 0; dirs[n] != NULL; n++)
-    {
-      /* build path */
-      path = g_build_filename (dirs[n], "xfce4", "panel-plugins", NULL);
+      /* break when we reached the last file */
+      if (G_UNLIKELY (name == NULL))
+        break;
 
-      /* try to open the directory */
-      dir = g_dir_open (path, 0, NULL);
+      /* continue if it's not a desktop file */
+      if (G_UNLIKELY (g_str_has_suffix (name, ".desktop") == FALSE))
+        continue;
 
-      if (G_LIKELY (dir))
+      /* create the full .desktop filename */
+      filename = g_build_filename (DESKTOP_FILES_DIR, name, NULL);
+
+      /* find the dot in the name, this cannot
+       * fail since it pasted the .desktop suffix check */
+      p = strrchr (name, '.');
+
+      /* get the new module internal name */
+      internal_name = g_strndup (name, p - name);
+
+      /* check if the modules name is already loaded */
+      if (G_UNLIKELY (g_hash_table_lookup (factory->modules, internal_name) != NULL))
+        goto already_loaded;
+
+      /* try to load the module */
+      module = panel_module_new_from_desktop_file (filename,
+                                                   internal_name,
+                                                   LIBRARY_FILES_DIR,
+                                                   force_all_external);
+
+      if (G_LIKELY (module != NULL))
         {
-          /* walk the directory */
-          for (;;)
-            {
-              /* get name of the next file */
-              name = g_dir_read_name (dir);
+          /* add the module to the internal list */
+          g_hash_table_insert (factory->modules, internal_name, module);
 
-              /* break when we reached the last file */
-              if (G_UNLIKELY (name == NULL))
-                break;
+          /* check if this is the launcher */
+          if (factory->has_launcher == FALSE
+              && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name))
+            factory->has_launcher = TRUE;
+        }
+      else
+        {
+          already_loaded:
 
-              /* continue if it's not a desktop file */
-              if (G_UNLIKELY (g_str_has_suffix (name, ".desktop") == FALSE))
-                continue;
-
-              /* create the full .desktop filename */
-              filename = g_build_filename (path, name, NULL);
-
-              /* find the dot in the name, this cannot
-               * fail since it pasted the .desktop suffix check */
-              p = strrchr (name, '.');
-
-              /* get the new module internal name */
-              internal_name = g_strndup (name, p - name);
-
-              /* check if the modules name is already loaded */
-              if (G_UNLIKELY (g_hash_table_lookup (factory->modules, internal_name) != NULL))
-                goto already_loaded;
-
-              /* try to load the module */
-              module = panel_module_new_from_desktop_file (filename,
-                                                           internal_name,
-                                                           force_all_external);
-
-              if (G_LIKELY (module != NULL))
-                {
-                  /* add the module to the internal list */
-                  g_hash_table_insert (factory->modules, internal_name, module);
-
-                  /* check if this is the launcher */
-                  if (factory->has_launcher == FALSE
-                      && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name))
-                    factory->has_launcher = TRUE;
-                }
-              else
-                {
-                  already_loaded:
-
-                  /* cleanup */
-                  g_free (internal_name);
-                }
-
-              /* cleanup */
-              g_free (filename);
-            }
-
-          /* close directory */
-          g_dir_close (dir);
+          /* cleanup */
+          g_free (internal_name);
         }
 
       /* cleanup */
-      g_free (path);
+      g_free (filename);
     }
 
-  /* cleanup */
-  g_strfreev (dirs);
+  /* close directory */
+  g_dir_close (dir);
 }
 
 
