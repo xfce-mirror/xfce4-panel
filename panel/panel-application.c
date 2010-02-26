@@ -32,6 +32,7 @@
 
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-debug.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
@@ -239,6 +240,9 @@ panel_application_finalize (GObject *object)
   g_slist_free (application->windows);
 
   g_object_unref (G_OBJECT (application->factory));
+
+  /* this is a good reference if all the objects are released */
+  panel_debug (PANEL_DEBUG_DOMAIN_APPLICATION, "finalized");
 
   (*G_OBJECT_CLASS (panel_application_parent_class)->finalize) (object);
 }
@@ -1045,6 +1049,10 @@ panel_application_save (PanelApplication *application,
       /* skip this window if it is locked */
       if (panel_window_get_locked (li->data))
         continue;
+
+      panel_debug (PANEL_DEBUG_DOMAIN_APPLICATION,
+                   "saving /panels/panel-%u, save-plugins=%s",
+                   i, PANEL_DEBUG_BOOL (save_plugin_providers));
 
       /* get the itembar children */
       itembar = gtk_bin_get_child (GTK_BIN (li->data));

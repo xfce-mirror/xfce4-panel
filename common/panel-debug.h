@@ -21,6 +21,7 @@
 
 #define PANEL_DEBUG_DOMAIN_POSITIONING "positioning"
 #define PANEL_DEBUG_DOMAIN_STRUTS      "struts"
+#define PANEL_DEBUG_DOMAIN_APPLICATION "application"
 
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 
