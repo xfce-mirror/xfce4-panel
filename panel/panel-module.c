@@ -316,7 +316,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
           module->is_unique = xfce_rc_read_bool_entry (rc, "X-XFCE-Unique", FALSE);
 
           /* whether to run the plugin external */
-          module->run_in_wrapper = xfce_rc_read_bool_entry (rc, "X-XFCE-External", TRUE);
+          module->run_in_wrapper = !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE);
         }
       else if (xfce_rc_has_entry (rc, "X-XFCE-Exec"))
         {

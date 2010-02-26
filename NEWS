@@ -14,7 +14,7 @@ Plugin Framework
 - ALL PLUGINS ARE FROM NOW ON COMPILED AS LIBRARIES. So you need to change your Makefile.am (sorry). Will provide a script to do this before compiling a plugin.
 - DBus communication with external plugins.
 - Plugins API is still the same (pfew).
-- If you want to run an external plugin you can define X-XFCE-External=TRUE in the desktop file. The panel will then start a plugin wrapper that embeds the plugin, so you have all the advanatages of the previous external plugin implementation (and I get something that is easy to maintain).
+- If you want to run an internal plugin you can define X-XFCE-Internal=TRUE in the desktop file.
 - Because of the changes above, the XfcePanelPlugin is now a single gobject, this drops a lot of complexity in the previous plugin framework and also allows developing plugins as gobjects (yay).
 - Various speedups here and there.
 
