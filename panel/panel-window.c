@@ -1595,7 +1595,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
               /* move window to the correct screen */
               screen = gdk_display_get_screen (display, screen_num);
               gtk_window_set_screen (GTK_WINDOW (window), screen);
-              
+
               /* we will invoke this function again when the screen
                * changes, so bail out */
               return;
@@ -1610,7 +1610,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                && window->output_name == NULL))
     {
       get_screen_geometry:
-      
+
       /* get the screen geometry we also use this if there is only
        * one monitor and no output is choosen, as a fast-path */
       a.x = a.y = 0;
