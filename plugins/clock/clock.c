@@ -510,12 +510,13 @@ xfce_clock_plugin_set_size (ClockPlugin *clock,
                             guint        size)
 {
     GtkOrientation orientation;
+    gint           clock_size;
 
     /* set the frame border */
     gtk_container_set_border_width (GTK_CONTAINER (clock->frame), size > 26 ? 1 : 0);
 
     /* get the clock size */
-    size -= size > 26 ? 6 : 4;
+    clock_size = CLAMP (size - (size > 26 ? 6 : 4), 1, G_MAXINT);
 
     /* get plugin orientation */
     orientation = xfce_panel_plugin_get_orientation (clock->plugin);
@@ -527,6 +528,15 @@ xfce_clock_plugin_set_size (ClockPlugin *clock,
         gtk_widget_set_size_request (clock->widget, size, -1);
 
     return TRUE;
+}
+
+
+
+static void
+xfce_clock_plugin_set_orientation (ClockPlugin *clock)
+{
+    /* do a size request */
+    xfce_clock_plugin_set_size (clock, xfce_panel_plugin_get_size (clock->plugin));
 }
 
 
@@ -658,5 +668,6 @@ xfce_clock_plugin_construct (XfcePanelPlugin *plugin)
     g_signal_connect_swapped (G_OBJECT (plugin), "save", G_CALLBACK (xfce_clock_plugin_write), clock);
     g_signal_connect_swapped (G_OBJECT (plugin), "free-data", G_CALLBACK (xfce_clock_plugin_free), clock);
     g_signal_connect_swapped (G_OBJECT (plugin), "configure-plugin", G_CALLBACK (xfce_clock_dialog_show), clock);
+    g_signal_connect_swapped (G_OBJECT (plugin), "orientation-changed", G_CALLBACK (xfce_clock_plugin_set_orientation), clock);
 }
 

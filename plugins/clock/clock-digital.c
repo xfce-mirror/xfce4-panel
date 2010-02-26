@@ -68,28 +68,7 @@ struct _XfceClockDigital
 
 
 
-static GObjectClass *xfce_clock_digital_parent_class;
-
-
-
-GType
-xfce_clock_digital_get_type (void)
-{
-    static GType type = G_TYPE_INVALID;
-
-    if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-        type = g_type_register_static_simple (GTK_TYPE_LABEL,
-                                              I_("XfceClockDigital"),
-                                              sizeof (XfceClockDigitalClass),
-                                              (GClassInitFunc) xfce_clock_digital_class_init,
-                                              sizeof (XfceClockDigital),
-                                              (GInstanceInitFunc) xfce_clock_digital_init,
-                                              0);
-    }
-
-    return type;
-}
+G_DEFINE_TYPE (XfceClockDigital, xfce_clock_digital, GTK_TYPE_LABEL);
 
 
 
@@ -97,8 +76,6 @@ static void
 xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
 {
     GObjectClass *gobject_class;
-
-    xfce_clock_digital_parent_class = g_type_class_peek_parent (klass);
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_clock_digital_finalize;

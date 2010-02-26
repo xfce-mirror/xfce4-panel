@@ -83,28 +83,7 @@ struct _XfceClockBinary
 
 
 
-static GObjectClass *xfce_clock_binary_parent_class;
-
-
-
-GType
-xfce_clock_binary_get_type (void)
-{
-    static GType type = G_TYPE_INVALID;
-
-    if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-        type = g_type_register_static_simple (GTK_TYPE_IMAGE,
-                                              I_("XfceClockBinary"),
-                                              sizeof (XfceClockBinaryClass),
-                                              (GClassInitFunc) xfce_clock_binary_class_init,
-                                              sizeof (XfceClockBinary),
-                                              (GInstanceInitFunc) xfce_clock_binary_init,
-                                              0);
-    }
-
-    return type;
-}
+G_DEFINE_TYPE (XfceClockBinary, xfce_clock_binary, GTK_TYPE_IMAGE);
 
 
 
@@ -113,8 +92,6 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
 {
     GObjectClass   *gobject_class;
     GtkWidgetClass *gtkwidget_class;
-
-    xfce_clock_binary_parent_class = g_type_class_peek_parent (klass);
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_clock_binary_finalize;

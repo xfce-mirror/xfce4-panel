@@ -21,7 +21,9 @@
 #include <config.h>
 #endif
 
-
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 #include <gtk/gtk.h>
 #include <cairo/cairo.h>
@@ -29,8 +31,9 @@
 #include "clock.h"
 #include "clock-lcd.h"
 
-#define RELATIVE_SPACE 0.10
-
+#define RELATIVE_SPACE (0.10)
+#define RELATIVE_DIGIT (0.50)
+#define RELATIVE_DOTS  (3 * RELATIVE_SPACE)
 
 
 /* prototypes */
@@ -95,28 +98,7 @@ struct _XfceClockLcd
 
 
 
-static GObjectClass *xfce_clock_lcd_parent_class;
-
-
-
-GType
-xfce_clock_lcd_get_type (void)
-{
-    static GType type = G_TYPE_INVALID;
-
-    if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-        type = g_type_register_static_simple (GTK_TYPE_IMAGE,
-                                              I_("XfceClockLcd"),
-                                              sizeof (XfceClockLcdClass),
-                                              (GClassInitFunc) xfce_clock_lcd_class_init,
-                                              sizeof (XfceClockLcd),
-                                              (GInstanceInitFunc) xfce_clock_lcd_init,
-                                              0);
-    }
-
-    return type;
-}
+G_DEFINE_TYPE (XfceClockLcd, xfce_clock_lcd, GTK_TYPE_IMAGE);
 
 
 
@@ -125,8 +107,6 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
 {
     GObjectClass   *gobject_class;
     GtkWidgetClass *gtkwidget_class;
-
-    xfce_clock_lcd_parent_class = g_type_class_peek_parent (klass);
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_clock_lcd_finalize;
@@ -291,9 +271,6 @@ xfce_clock_lcd_size_request (GtkWidget      *widget,
         requisition->height = height;
         requisition->width = height * ratio;
     }
-    
-    /* increase the width with 1 px for rounding errors */
-    requisition->width++;
 }
 
 
@@ -312,15 +289,22 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 
     g_return_val_if_fail (XFCE_CLOCK_IS_LCD (clock), FALSE);
 
-    /* size of a digit should be a fraction of 10 */
-    size = widget->allocation.height - widget->allocation.height % 10;
-
     /* get the width:height ratio */
     ratio = xfce_clock_lcd_get_ratio (XFCE_CLOCK_LCD (widget));
 
+    /* size of a digit should be a fraction of 10 */
+    size = widget->allocation.height - widget->allocation.height % 10;
+
+    /* make sure we also fit on small vertical panels */
+    size = MIN (rint ((gdouble) widget->allocation.width / ratio), size);
+
     /* begin offsets */
-    offset_x = widget->allocation.x + (widget->allocation.width - (size * ratio)) / 2;
-    offset_y = widget->allocation.y + (widget->allocation.height - size) / 2;
+    offset_x = rint ((widget->allocation.width - (size * ratio)) / 2.00);
+    offset_y = rint ((widget->allocation.height - size) / 2.00);
+
+    /* only allow positive values from the base point */
+    offset_x = widget->allocation.x + MAX (0.00, offset_x);
+    offset_y = widget->allocation.y + MAX (0.00, offset_y);
 
     /* get the cairo context */
     cr = gdk_cairo_create (widget->window);
@@ -409,8 +393,8 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *clock)
     /* get the local time */
     xfce_clock_util_get_localtime (&tm);
 
-    /* hour + minutes */
-    ratio = (3 * 0.5 + 6 * RELATIVE_SPACE);
+    /* 8:88 */
+    ratio = (3 * RELATIVE_DIGIT) + RELATIVE_DOTS + RELATIVE_SPACE;
 
     ticks = tm.tm_hour;
 
@@ -418,13 +402,13 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *clock)
         ticks -= 12;
 
     if (ticks >= 10)
-        ratio += (0.5 + RELATIVE_SPACE);
+        ratio += RELATIVE_DIGIT + RELATIVE_SPACE;
 
     if (clock->show_seconds)
-        ratio += (2 * 0.5 + 4 * RELATIVE_SPACE);
+        ratio += (2 * RELATIVE_DIGIT) + RELATIVE_SPACE + RELATIVE_DOTS;
 
     if (clock->show_meridiem)
-        ratio += (0.5 + RELATIVE_SPACE);
+        ratio += RELATIVE_DIGIT + RELATIVE_SPACE;
 
     return ratio;
 }
@@ -439,10 +423,20 @@ xfce_clock_lcd_draw_dots (cairo_t *cr,
 {
     gint i;
 
-    /* draw the dots */
-    for (i = 1; i < 3; i++)
-        cairo_rectangle (cr, offset_x, offset_y + size * 0.30 * i,
-                         size * 0.10, size * 0.10);
+    if (size >= 10)
+    {
+        /* draw the dots (with rounding) */
+        for (i = 1; i < 3; i++)
+            cairo_rectangle (cr, rint (offset_x), rint (offset_y + size * RELATIVE_DOTS * i),
+                             rint (size * RELATIVE_SPACE), rint (size * RELATIVE_SPACE));
+    }
+    else
+    {
+        /* draw the dots */
+        for (i = 1; i < 3; i++)
+            cairo_rectangle (cr, offset_x, offset_y + size * RELATIVE_DOTS * i,
+                             size * RELATIVE_SPACE, size * RELATIVE_SPACE);
+    }
 
     /* fill the dots */
     cairo_fill (cr);
@@ -462,24 +456,32 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
     gint    i, j;
     gint    segment;
     gdouble x, y;
+    gdouble rel_x, rel_y;
 
     g_return_val_if_fail (number >= 0 || number <= 11, offset_x);
 
+    /* ##1##
+     * 6   2
+     * ##7##
+     * 5   3
+     * ##4##
+     */
+
     /* coordicates to draw for each segment */
-    gdouble segments_x[][6] = { { 0.02, 0.48, 0.38, 0.12, -1.0, 0.00 },
-                                { 0.40, 0.50, 0.50, 0.40, -1.0, 0.00 },
-                                { 0.40, 0.50, 0.50, 0.40, -1.0, 0.00 },
-                                { 0.12, 0.38, 0.48, 0.02, -1.0, 0.00 },
-                                { 0.00, 0.10, 0.10, 0.00, -1.0, 0.00 },
-                                { 0.00, 0.10, 0.10, 0.00, -1.0, 0.00 },
-                                { 0.00, 0.10, 0.40, 0.50, 0.40, 0.10 } };
-    gdouble segments_y[][6] = { { 0.00, 0.00, 0.10, 0.10, -1.0, 0.00 },
-                                { 0.12, 0.02, 0.48, 0.43, -1.0, 0.00 },
-                                { 0.57, 0.52, 0.98, 0.88, -1.0, 0.00 },
-                                { 0.90, 0.90, 1.00, 1.00, -1.0, 0.00 },
-                                { 0.52, 0.57, 0.88, 0.98, -1.0, 0.00 },
-                                { 0.02, 0.12, 0.43, 0.48, -1.0, 0.00 },
-                                { 0.50, 0.45, 0.45, 0.50, 0.55, 0.55 } };
+    gdouble segments_x[][6] = { { 0.02, 0.48, 0.38, 0.12, -1.0, 0.00 },     /* 1x */
+                                { 0.40, 0.505, 0.505, 0.40, -1.0, 0.00 },   /* 2x */
+                                { 0.40, 0.505, 0.505, 0.40, -1.0, 0.00 },   /* 3x */
+                                { 0.12, 0.38, 0.48, 0.02, -1.0, 0.00 },     /* 4x */
+                                { 0.00, 0.105, 0.105, 0.00, -1.0, 0.00 },   /* 5x */
+                                { 0.00, 0.105, 0.105, 0.00, -1.0, 0.00 },   /* 6x */
+                                { 0.00, 0.10, 0.40, 0.50, 0.40, 0.10 } };   /* 7x */
+    gdouble segments_y[][6] = { { 0.00, 0.00, 0.105, 0.105, -1.0, 0.00 },   /* 1y */
+                                { 0.12, 0.02, 0.48, 0.43, -1.0, 0.00 },     /* 2y */
+                                { 0.57, 0.52, 0.98, 0.88, -1.0, 0.00 },     /* 3y */
+                                { 0.90, 0.90, 1.00, 1.00, -1.0, 0.00 },     /* 4y */
+                                { 0.52, 0.57, 0.88, 0.98, -1.0, 0.00 },     /* 5y */
+                                { 0.02, 0.12, 0.43, 0.48, -1.0, 0.00 },     /* 6y */
+                                { 0.50, 0.445, 0.445, 0.50, 0.55, 0.55 } }; /* 7y */
 
     /* segment to draw for each number: 0, 1, ..., 9, A, P */
     gint    numbers[][8] = { { 0, 1, 2, 3, 4, 5, -1 },
@@ -507,15 +509,26 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
         /* walk through the coordinate points */
         for (j = 0; j < 6; j++)
         {
-            /* get x and y coordinates for this point */
-            x = segments_x[segment][j] * size + offset_x;
-            y = segments_y[segment][j] * size + offset_y;
+            /* get the relative sizes */
+            rel_x = segments_x[segment][j];
+            rel_y = segments_y[segment][j];
 
             /* leave when there are no valid coordinates */
-            if (x < 0 || y < 0)
+            if (rel_x == -1.00 || rel_y == -1.00)
                 break;
 
-            if (j == 0)
+            /* get x and y coordinates for this point */
+            x = rel_x * size + offset_x;
+            y = rel_y * size + offset_y;
+
+            /* when 0.01 * size is larger then 1, round the numbers */
+            if (size >= 10)
+            {
+                x = rint (x);
+                y = rint (y);
+            }
+
+            if (G_UNLIKELY (j == 0))
                 cairo_move_to (cr, x, y);
             else
                 cairo_line_to (cr, x, y);
@@ -528,7 +541,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
     /* fill the segments */
     cairo_fill (cr);
 
-    return (offset_x + size * (0.50 + RELATIVE_SPACE));
+    return (offset_x + size * (RELATIVE_DIGIT + RELATIVE_SPACE));
 }
 
 
