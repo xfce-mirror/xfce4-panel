@@ -3,7 +3,6 @@ The Xfce Panel .gtkrc-2.0 hacks
 
 XfceTasklist
 ---------------
-
 style "xfce-tasklist-style"
 {
   # The maximum length of a button before the label ellipsizes. 
@@ -25,10 +24,22 @@ class "XfceTasklist" style "xfce-tasklist-style"
 
 XfceLauncherPlugin
 ------------------
-
-style "xfce-launcher-style"
+style "xfce-launcher-plugin-style"
 {
   # Size of the icons of the menu, in pixels.
   XfceLauncherPlugin::menu-icon-size = 36
 }
-class "XfceLauncherPlugin" style "xfce-launcher-style"
+class "XfceLauncherPlugin" style "xfce-launcher-plugin-style"
+
+
+
+XfcePanelImage
+--------------
+style "xfce-panel-image-style"
+{
+  # Fix the panel images to a default gtk icon size, is only works for
+  # images below 32 pixels. You can for example use this when you have
+  # fuzzy launcher icons.
+  XfcePanelImage::force-gtk-icon-sizes = true
+}
+class "XfcePanelImage" style "xfce-panel-image-style"

@@ -82,16 +82,16 @@ static void       xfce_panel_image_set_property  (GObject         *object,
                                                   GParamSpec      *pspec);
 static void       xfce_panel_image_finalize      (GObject         *object);
 static void       xfce_panel_image_size_request  (GtkWidget       *widget,
-                                                   GtkRequisition  *requisition);
+                                                  GtkRequisition  *requisition);
 static void       xfce_panel_image_size_allocate (GtkWidget       *widget,
-                                                   GtkAllocation   *allocation);
+                                                  GtkAllocation   *allocation);
 static gboolean   xfce_panel_image_expose_event  (GtkWidget       *widget,
-                                                   GdkEventExpose  *event);
-static void       xfce_panel_image_style_set     (GtkWidget *widget,
-                                                  GtkStyle  *previous_style);
+                                                  GdkEventExpose  *event);
+static void       xfce_panel_image_style_set     (GtkWidget       *widget,
+                                                  GtkStyle        *previous_style);
 static GdkPixbuf *xfce_panel_image_scale_pixbuf  (GdkPixbuf       *source,
-                                                   gint             dest_width,
-                                                   gint             dest_height);
+                                                  gint             dest_width,
+                                                  gint             dest_height);
 
 
 
@@ -290,6 +290,7 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
   GdkPixbuf             *pixbuf = NULL;
   GdkScreen             *screen;
   GError                *error = NULL;
+  gint                   size;
 
   widget->allocation = *allocation;
 
@@ -327,14 +328,24 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
         }
       else
         {
-          /* get the screen */
           screen = gtk_widget_get_screen (widget);
+
+          size = MIN (priv->width, priv->height);
+          if (G_UNLIKELY (priv->force_icon_sizes && size < 32))
+            {
+              /* we use some hardcoded values here for convienence,
+               * above 32 pixels svg icons will kick in */
+              if (size > 16 && size < 22)
+                size = 16;
+              else if (size > 22 && size < 24)
+                size = 22;
+              else if (size > 24 && size < 32)
+                size = 24;
+            }
 
           /* get a pixbuf from the icon name */
           pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_for_screen (screen),
-                                             priv->source,
-                                             MIN (priv->width, priv->height),
-                                             0, NULL);
+                                             priv->source, size, 0, NULL);
 
           /* TODO more loading modes: try without extension and lower case */
         }
