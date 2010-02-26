@@ -538,34 +538,27 @@ static void
 panel_application_plugin_move (GtkWidget        *item,
                                PanelApplication *application)
 {
-  GdkEvent      *event;
   GtkTargetList *target_list;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
-  /* get a copy of the current event */
-  event = gtk_get_current_event ();
-  if (G_LIKELY (event))
-    {
-      /* make the window insensitive */
-      panel_application_windows_sensitive (application, FALSE);
+  /* make the window insensitive */
+  panel_application_windows_sensitive (application, FALSE);
 
-      /* create a target list */
-      target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
+  /* create a target list */
+  target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
 
-      /* begin a drag */
-      gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, event);
+  /* begin a drag */
+  gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
+  
+  /* TODO set something fancy here. A snapshot of the plugin or the icon name... */
 
-      /* release the drag list */
-      gtk_target_list_unref (target_list);
+  /* release the drag list */
+  gtk_target_list_unref (target_list);
 
-      /* free the event */
-      gdk_event_free (event);
-
-      /* signal to make the window sensitive again on a drag end */
-      g_signal_connect (G_OBJECT (item), "drag-end", G_CALLBACK (panel_application_plugin_move_end), application);
-    }
+  /* signal to make the window sensitive again on a drag end */
+  g_signal_connect (G_OBJECT (item), "drag-end", G_CALLBACK (panel_application_plugin_move_end), application);
 }
 
 
