@@ -588,6 +588,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   XfceTasklistChild *child = NULL;
   guint              i;
   GtkAllocation      child_allocation;
+  gboolean           direction_rtl;
 
   /* set widget allocation */
   widget->allocation = *allocation;
@@ -643,6 +644,9 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   child_allocation.width = width;
   child_allocation.height = height;
 
+  /* check if this is a rtl widget */
+  direction_rtl = gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL;
+
   /* allocate all the children */
   for (li = tasklist->children, i = 0; li != NULL; li = li->next)
     {
@@ -655,17 +659,19 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
       /* calculate the child position */
       if (tasklist->horizontal)
         {
-          child_allocation.x = (i / rows) * width;
-          child_allocation.y = (i % rows) * height;
+          child_allocation.x = (i / rows) * width + allocation->x;
+          child_allocation.y = (i % rows) * height + allocation->y;
+
+          /* move to the other end of the panel if the direction is rtl */
+          if (G_UNLIKELY (direction_rtl))
+            child_allocation.x = allocation->x + allocation->width
+                - (child_allocation.x - allocation->x) - child_allocation.width;
         }
       else
         {
-          child_allocation.x = (i % rows) * width;
-          child_allocation.y = (i / rows) * height;
+          child_allocation.x = (i % rows) * width + allocation->x;
+          child_allocation.y = (i / rows) * height + allocation->y;
         }
-
-      child_allocation.x += allocation->x;
-      child_allocation.y += allocation->y;
 
       /* allocate the child */
       gtk_widget_size_allocate (child->button, &child_allocation);
