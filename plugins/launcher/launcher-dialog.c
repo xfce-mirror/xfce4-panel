@@ -139,43 +139,28 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
 
 
 static void
-launcher_dialog_add_store_insert_menu (GarconMenu   *menu,
-                                       GtkTreeModel *model)
+launcher_dialog_add_store_insert (gpointer key,
+                                  gpointer value,
+                                  gpointer user_data)
 {
-  GList       *li, *items;
-  GList       *menus;
-  GtkTreeIter  iter;
-  gchar       *tooltip;
-  GFile       *item_file;
+  GtkTreeIter     iter;
+  gchar          *tooltip;
+  GFile          *gfile;
+  GarconMenuItem *item = GARCON_MENU_ITEM (value);
+  GtkTreeModel   *model = GTK_TREE_MODEL (user_data);
 
-  panel_return_if_fail (GARCON_IS_MENU (menu));
+  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
 
-  /* insert all the items */
-  items = garcon_menu_get_items (menu);
-  for (li = items; li != NULL; li = li->next)
-    {
-      panel_return_if_fail (GARCON_IS_MENU_ITEM (li->data));
-      if (!garcon_menu_element_get_visible (GARCON_MENU_ELEMENT (li->data)))
-        continue;
+  gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+  launcher_dialog_items_set_item (model, &iter, item);
 
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      launcher_dialog_items_set_item (model, &iter, li->data);
-
-      item_file = garcon_menu_item_get_file (li->data);
-      tooltip = g_file_get_parse_name (item_file);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-                          COL_TOOLTIP, tooltip, -1);
-      g_object_unref (G_OBJECT (item_file));
-      g_free (tooltip);
-    }
-  g_list_free (items);
-
-  /* add the submenus */
-  menus = garcon_menu_get_menus (menu);
-  for (li = menus; li != NULL; li = li->next)
-    launcher_dialog_add_store_insert_menu (li->data, model);
-  g_list_free (menus);
+  gfile = garcon_menu_item_get_file (item);
+  tooltip = g_file_get_parse_name (gfile);
+  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+                      COL_TOOLTIP, tooltip, -1);
+  g_object_unref (G_OBJECT (gfile));
+  g_free (tooltip);
 }
 
 
@@ -185,35 +170,20 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
 {
   LauncherPluginDialog *dialog = user_data;
   GObject              *store;
-  GarconMenu           *menu;
-  GError               *error = NULL;
+  GHashTable           *pool;
 
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
 
   GDK_THREADS_ENTER ();
 
-  /* load our menu file */
-  menu = garcon_menu_new_applications ();
-  if (G_UNLIKELY (menu == NULL))
-    {
-      g_message ("Failed to load the applications menu.");
-    }
-  else if (G_LIKELY (garcon_menu_load (menu, NULL, &error)))
-    {
-      /* start appending items in the store */
-      store = gtk_builder_get_object (dialog->builder, "add-store");
+  /* load the item pool */
+  pool = launcher_plugin_garcon_menu_pool ();
 
-      /* add the menu */
-      launcher_dialog_add_store_insert_menu (menu, GTK_TREE_MODEL (store));
-    }
-  else
-    {
-      g_message ("Failed to load the applications menu: %s.", error->message);
-      g_error_free (error);
-    }
+  /* insert the items in the store */
+  store = gtk_builder_get_object (dialog->builder, "add-store");
+  g_hash_table_foreach (pool, launcher_dialog_add_store_insert, store);
 
-  if (G_LIKELY (menu != NULL))
-    g_object_unref (G_OBJECT (menu));
+  g_hash_table_destroy (pool);
 
   GDK_THREADS_LEAVE ();
 

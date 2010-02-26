@@ -100,7 +100,6 @@ static void launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item, guin
 static void launcher_plugin_exec_append_quoted (GString *string, const gchar *unquoted);
 static gboolean launcher_plugin_exec_parse (GarconMenuItem *item, GSList *uri_list, gchar ***argv, GError **error);
 static GSList *launcher_plugin_uri_list_extract (GtkSelectionData *data);
-static gboolean launcher_plugin_dup_desktop_file (GFile *src_file, GFile *dst_file, GError **error);
 static void launcher_plugin_uri_list_free (GSList *uri_list);
 
 
@@ -416,6 +415,246 @@ launcher_plugin_item_changed (GarconMenuItem *item,
 
 
 
+static gboolean
+launcher_plugin_item_dupplicate (GFile   *src_file,
+                                 GFile   *dst_file,
+                                 GError **error)
+{
+  GKeyFile *key_file;
+  gchar    *contents = NULL;
+  gsize     length;
+  gboolean  result = FALSE;
+  gchar    *uri;
+
+  panel_return_val_if_fail (G_IS_FILE (src_file), FALSE);
+  panel_return_val_if_fail (G_IS_FILE (dst_file), FALSE);
+  panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+  if (!g_file_load_contents (src_file, NULL, &contents, &length, NULL, error))
+    return FALSE;
+
+  /* note that we don't load the key file with preserving the translations
+   * and comments, this way we save a small desktop file in the user's language */
+  key_file = g_key_file_new ();
+  if (!g_key_file_load_from_data (key_file, contents, length, 0, error))
+    goto err1;
+
+  /* store the source uri in the desktop file for resore purposes */
+  uri = g_file_get_uri (src_file);
+  g_key_file_set_string (key_file, G_KEY_FILE_DESKTOP_GROUP, "X-XFCE-Source", uri);
+  g_free (uri);
+
+  contents = g_key_file_to_data (key_file, &length, error);
+  if (contents == NULL)
+    goto err1;
+
+  result = g_file_replace_contents (dst_file, contents, length, NULL, FALSE,
+#if GLIB_CHECK_VERSION (2, 20, 0)
+                                    G_FILE_CREATE_REPLACE_DESTINATION,
+#else
+                                    G_FILE_CREATE_NONE,
+#endif
+                                    NULL, NULL, error);
+
+err1:
+  g_free (contents);
+  g_key_file_free (key_file);
+
+  return result;
+}
+
+
+
+static GarconMenuItem *
+launcher_plugin_item_load (LauncherPlugin *plugin,
+                           const gchar    *str,
+                           gboolean       *desktop_id_return)
+{
+  GFile          *src_file, *dst_file;
+  gchar          *src_path, *dst_path;
+  GSList         *li;
+  GarconMenuItem *item = NULL;
+  GError         *error = NULL;
+
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
+  panel_return_val_if_fail (str != NULL, NULL);
+  panel_return_val_if_fail (G_IS_FILE (plugin->config_directory), NULL);
+
+  if (G_UNLIKELY (g_path_is_absolute (str) || exo_str_looks_like_an_uri (str)))
+    {
+      src_file = g_file_new_for_commandline_arg (str);
+      if (g_file_has_prefix (src_file, plugin->config_directory))
+        {
+          /* nothing, we use the file below */
+        }
+      else if (g_file_query_exists (src_file, NULL))
+        {
+          /* create a unique file in the config directory */
+          dst_path = launcher_plugin_unique_filename (plugin);
+          dst_file = g_file_new_for_path (dst_path);
+
+          /* create a dupplicate in the config directory */
+          if (launcher_plugin_item_dupplicate (src_file, dst_file, &error))
+            {
+              /* use the new file */
+              g_object_unref (G_OBJECT (src_file));
+              src_file = dst_file;
+            }
+          else
+            {
+              src_path = g_file_get_parse_name (src_file);
+              g_warning ("Failed to create dupplicate of desktop file \"%s\" "
+                          "to \"%s\": %s", src_path, dst_path, error->message);
+              g_error_free (error);
+              g_free (src_path);
+
+              /* continue using the source file, the user won't be able to
+               * edit the item, but atleast we have something that works in
+               * the panel */
+              g_object_unref (G_OBJECT (dst_path));
+            }
+
+          g_free (dst_path);
+        }
+      else
+        {
+          /* nothing we can do with this file */
+          src_path = g_file_get_parse_name (src_file);
+          g_warning ("Failed to load desktop file \"%s\". It will be removed "
+                     "from the configuration", src_path);
+          g_free (src_path);
+          g_object_unref (G_OBJECT (src_file));
+
+          return NULL;
+        }
+    }
+  else
+    {
+      /* assume the file is a child in the config directory */
+      src_file = g_file_get_child (plugin->config_directory, str);
+
+      /* str might also be a global desktop id */
+      if (G_LIKELY (desktop_id_return != NULL))
+        *desktop_id_return = TRUE;
+    }
+
+  panel_assert (G_IS_FILE (src_file));
+
+  /* maybe we have this file in the launcher configuration, then we don't
+   * have to load it again from the harddisk */
+  for (li = plugin->items; item == NULL && li != NULL; li = li->next)
+    {
+      dst_file = garcon_menu_item_get_file (GARCON_MENU_ITEM (li->data));
+      if (g_file_equal (src_file, dst_file))
+        {
+          item = GARCON_MENU_ITEM (li->data);
+          plugin->items = g_slist_delete_link (plugin->items, li);
+        }
+      g_object_unref (G_OBJECT (dst_file));
+    }
+
+  /* load the file from the disk */
+  if (item == NULL)
+    item = garcon_menu_item_new (src_file);
+
+  g_object_unref (G_OBJECT (src_file));
+
+  return item;
+}
+
+
+
+static void
+launcher_plugin_items_free (GSList *items)
+{
+  if (items != NULL)
+    {
+      g_slist_foreach (items, (GFunc) g_object_unref, NULL);
+      g_slist_free (items);
+      items = NULL;
+    }
+}
+
+
+
+static void
+launcher_plugin_items_load (LauncherPlugin *plugin,
+                            GPtrArray      *array)
+{
+  guint           i;
+  const GValue   *value;
+  const gchar    *str;
+  GarconMenuItem *item;
+  GarconMenuItem *pool_item;
+  GSList         *items = NULL;
+  GHashTable     *pool = NULL;
+  gboolean        desktop_id;
+  gchar          *uri;
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (array != NULL);
+
+  for (i = 0; i < array->len; i++)
+    {
+      value = g_ptr_array_index (array, i);
+      panel_assert (G_VALUE_HOLDS_STRING (value));
+      str = g_value_get_string (value);
+
+      /* only accept desktop files */
+      if (str == NULL || !g_str_has_suffix (str, ".desktop"))
+        continue;
+
+      /* try to load the item */
+      desktop_id = FALSE;
+      item = launcher_plugin_item_load (plugin, str, &desktop_id);
+      if (G_LIKELY (item == NULL))
+        {
+          /* str did not look like a desktop-id, so no need to look
+           * for it in the application pool */
+          if (!desktop_id)
+            continue;
+
+          /* load the pool with desktop items */
+          if (pool == NULL)
+            pool = launcher_plugin_garcon_menu_pool ();
+
+          /* lookup the item in the item pool */
+          pool_item = g_hash_table_lookup (pool, str);
+          if (pool_item != NULL)
+            {
+              /* we want an editable file, so try to make a copy */
+              uri = garcon_menu_item_get_uri (pool_item);
+              item = launcher_plugin_item_load (plugin, uri, NULL);
+              g_free (uri);
+
+              /* if something failed, use the pool item, but this one
+               * won't be editable in the dialog */
+              if (G_UNLIKELY (item == NULL))
+                item = g_object_ref (G_OBJECT (pool_item));
+            }
+
+          /* skip this item if still not found */
+          if (item == NULL)
+            continue;
+        }
+
+      /* add the item to the list */
+      panel_assert (GARCON_IS_MENU_ITEM (item));
+      items = g_slist_append (items, item);
+      g_signal_connect (G_OBJECT (item), "changed",
+          G_CALLBACK (launcher_plugin_item_changed), plugin);
+    }
+
+  if (G_UNLIKELY (pool != NULL))
+    g_hash_table_destroy (pool);
+
+  /* release the old menu items and set new one */
+  launcher_plugin_items_free (plugin->items);
+  plugin->items = items;
+}
+
+
+
 static void
 launcher_plugin_set_property (GObject      *object,
                               guint         prop_id,
@@ -424,14 +663,6 @@ launcher_plugin_set_property (GObject      *object,
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (object);
   GPtrArray      *array;
-  guint           i;
-  GarconMenuItem *item;
-  const GValue   *tmp;
-  const gchar    *str;
-  GSList         *li, *items = NULL;
-  GFile          *item_file, *other_file;
-  gchar          *path;
-  GError         *error;
 
   panel_return_if_fail (G_IS_FILE (plugin->config_directory));
 
@@ -441,103 +672,12 @@ launcher_plugin_set_property (GObject      *object,
   switch (prop_id)
     {
       case PROP_ITEMS:
-        /* load new items from the uris */
+        /* load new items from the array */
         array = g_value_get_boxed (value);
         if (G_LIKELY (array != NULL))
-          {
-            for (i = 0; i < array->len; i++)
-              {
-                /* get the string from the array */
-                tmp = g_ptr_array_index (array, i);
-                panel_return_if_fail (G_VALUE_HOLDS_STRING (tmp));
-                str = g_value_get_string (tmp);
-                if (G_UNLIKELY (exo_str_is_empty (str)))
-                  continue;
-                item = NULL;
-
-                if (G_UNLIKELY (g_path_is_absolute (str)
-                    || exo_str_looks_like_an_uri (str)))
-                  {
-                    item_file = g_file_new_for_commandline_arg (str);
-                    if (!g_file_has_prefix (item_file, plugin->config_directory))
-                      {
-                        if (g_file_query_exists (item_file, NULL))
-                          {
-                            path = launcher_plugin_unique_filename (plugin);
-                            other_file = g_file_new_for_path (path);
-                            g_free (path);
-
-                            error = NULL;
-                            if (launcher_plugin_dup_desktop_file (item_file, other_file, &error))
-                              {
-                                g_object_unref (G_OBJECT (item_file));
-                                item_file = other_file;
-                              }
-                            else
-                              {
-                                g_critical ("Failed to copy desktop file to config directory: %s", error->message);
-                                g_error_free (error);
-
-                                g_object_unref (G_OBJECT (other_file));
-                              }
-                          }
-                        else
-                          {
-                            /* file does not exist */
-                            g_object_unref (G_OBJECT (item_file));
-                            continue;
-                          }
-                      }
-                  }
-                else
-                  {
-                    /* assume the file is in our config directory */
-                    item_file = g_file_get_child (plugin->config_directory, str);
-                  }
-
-                /* maybe we can find the item in the existing list */
-                panel_assert (item_file != NULL);
-                panel_assert (item == NULL);
-                for (li = plugin->items; item == NULL && li != NULL; li = li->next)
-                  {
-                    other_file = garcon_menu_item_get_file (GARCON_MENU_ITEM (li->data));
-                    if (g_file_equal (item_file, other_file))
-                      {
-                        item = GARCON_MENU_ITEM (li->data);
-                        plugin->items = g_slist_delete_link (plugin->items, li);
-                      }
-                    g_object_unref (G_OBJECT (other_file));
-                  }
-
-                /* no existing item found, create a new menu item */
-                if (item == NULL)
-                  {
-                    item = garcon_menu_item_new (item_file);
-                    if (G_UNLIKELY (item == NULL))
-                      {
-                        /* still nothing found, try the pool... */
-
-                        continue;
-                      }
-                  }
-
-                /* add the item to the list */
-                panel_assert (item != NULL);
-                items = g_slist_append (items, item);
-                g_signal_connect (G_OBJECT (item), "changed",
-                    G_CALLBACK (launcher_plugin_item_changed), plugin);
-              }
-          }
-
-        /* release the old items */
-        if (plugin->items != NULL)
-          {
-            g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
-            g_slist_free (plugin->items);
-          }
-
-        /* set new list */
-        plugin->items = items;
+          launcher_plugin_items_load (plugin, array);
+        else
+          launcher_plugin_items_free (plugin->items);
 
         /* emit signal */
         g_signal_emit (G_OBJECT (plugin), launcher_signals[ITEMS_CHANGED], 0);
@@ -759,13 +899,10 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
       uris = xfce_panel_plugin_get_arguments (panel_plugin);
       if (G_LIKELY (uris != NULL))
         {
-          /* create array with all the filenames */
+          /* create array with all the uris */
           array = g_ptr_array_new ();
           for (i = 0; uris[i] != NULL; i++)
             {
-              if (!g_str_has_suffix (uris[i], ".desktop"))
-                continue;
-
               value = g_new0 (GValue, 1);
               g_value_init (value, G_TYPE_STRING);
               g_value_set_static_string (value, uris[i]);
@@ -825,8 +962,7 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   launcher_plugin_menu_destroy (plugin);
 
   /* free items */
-  g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
-  g_slist_free (plugin->items);
+  launcher_plugin_items_free (plugin->items);
 
   /* release the cached tooltip */
   if (plugin->tooltip_cache != NULL)
@@ -2093,7 +2229,6 @@ launcher_plugin_uri_list_extract (GtkSelectionData *data)
   gchar  **array;
   guint    i;
   gchar   *uri;
-  gint     j;
 
   /* leave if there is no data */
   if (data->length <= 0)
@@ -2136,17 +2271,9 @@ launcher_plugin_uri_list_extract (GtkSelectionData *data)
           uri = NULL;
 
           if (g_path_is_absolute (array[i]))
-            {
-              /* convert the filename to an uri */
-              uri = g_filename_to_uri (array[i], NULL, NULL);
-            }
-          else if (data->length > 6)
-            {
-              /* check if this looks like an other uri, if it does, use it */
-              for (j = 3; uri == NULL && j <= 5; j++)
-                if (g_str_has_prefix (array[i] + j, "://"))
-                  uri = g_strdup (array[i]);
-            }
+            uri = g_filename_to_uri (array[i], NULL, NULL);
+          else if (exo_str_looks_like_an_uri (array[i]))
+            uri = g_strdup (array[i]);
 
           /* append the uri if we extracted one */
           if (G_LIKELY (uri != NULL))
@@ -2170,53 +2297,6 @@ launcher_plugin_uri_list_free (GSList *uri_list)
       g_slist_foreach (uri_list, (GFunc) g_free, NULL);
       g_slist_free (uri_list);
     }
-}
-
-
-
-static gboolean
-launcher_plugin_dup_desktop_file (GFile   *src_file,
-                                  GFile   *dst_file,
-                                  GError **error)
-{
-  GKeyFile *key_file;
-  gchar    *contents;
-  gsize     length;
-  gboolean  result;
-  gchar    *uri;
-
-  panel_return_val_if_fail (G_IS_FILE (src_file), FALSE);
-  panel_return_val_if_fail (G_IS_FILE (dst_file), FALSE);
-  panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-
-  if (!g_file_load_contents (src_file, NULL, &contents, &length, NULL, error))
-    return FALSE;
-
-  key_file = g_key_file_new ();
-  result = g_key_file_load_from_data (key_file, contents, length, G_KEY_FILE_NONE, error);
-  if (G_UNLIKELY (!result))
-    goto err1;
-  g_free (contents);
-
-  uri = g_file_get_uri (src_file);
-  g_key_file_set_string (key_file, G_KEY_FILE_DESKTOP_GROUP, "X-XFCE-Source", uri);
-  g_free (uri);
-
-  contents = g_key_file_to_data (key_file, &length, error);
-  if (G_UNLIKELY (contents == NULL))
-    {
-      result = FALSE;
-      goto err1;
-    }
-
-  result = g_file_replace_contents (dst_file, contents, length, NULL, FALSE,
-                                    G_FILE_CREATE_NONE, NULL, NULL, error);
-
-err1:
-  g_free (contents);
-  g_key_file_free (key_file);
-
-  return result;
 }
 
 
@@ -2252,6 +2332,83 @@ launcher_plugin_unique_filename (LauncherPlugin *plugin)
 
   return path;
 
+}
+
+
+
+static void
+launcher_plugin_garcon_menu_pool_add (GarconMenu *menu,
+                                      GHashTable *pool)
+{
+  GList          *li, *items;
+  GList          *menus;
+  GarconMenuItem *item;
+  const gchar    *desktop_id;
+
+  panel_return_if_fail (GARCON_IS_MENU (menu));
+
+  items = garcon_menu_get_items (menu);
+  for (li = items; li != NULL; li = li->next)
+    {
+      item = GARCON_MENU_ITEM (li->data);
+      panel_assert (GARCON_IS_MENU_ITEM (item));
+
+      /* skip invisible items */
+      if (!garcon_menu_element_get_visible (GARCON_MENU_ELEMENT (item)))
+        continue;
+
+      /* skip dupplicates */
+      desktop_id = garcon_menu_item_get_desktop_id (item);
+      if (g_hash_table_lookup (pool, desktop_id) != NULL)
+        continue;
+
+      /* insert the item */
+      g_hash_table_insert (pool, g_strdup (desktop_id),
+                           g_object_ref (G_OBJECT (item)));
+    }
+  g_list_free (items);
+
+  menus = garcon_menu_get_menus (menu);
+  for (li = menus; li != NULL; li = li->next)
+    launcher_plugin_garcon_menu_pool_add (li->data, pool);
+  g_list_free (menus);
+}
+
+
+
+GHashTable *
+launcher_plugin_garcon_menu_pool (void)
+{
+  GHashTable *pool;
+  GarconMenu *menu;
+  GError     *error = NULL;
+
+  /* always return a hash table, even if it's empty */
+  pool = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                (GDestroyNotify) g_free,
+                                (GDestroyNotify) g_object_unref);
+
+  menu = garcon_menu_new_applications ();
+  if (G_LIKELY (menu != NULL))
+    {
+      if (garcon_menu_load (menu, NULL, &error))
+        {
+          launcher_plugin_garcon_menu_pool_add (menu, pool);
+        }
+      else
+        {
+          g_warning ("Failed to load the applications menu: %s.", error->message);
+          g_error_free (error);
+        }
+
+      g_object_unref (G_OBJECT (menu));
+    }
+  else
+    {
+      g_warning ("Failed to create the applications menu");
+    }
+
+  return pool;
 }
 
 
