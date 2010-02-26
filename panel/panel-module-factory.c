@@ -88,8 +88,6 @@ panel_module_factory_class_init (PanelModuleFactoryClass *klass)
 {
   GObjectClass *gobject_class;
 
-  panel_module_factory_parent_class = g_type_class_peek_parent (klass);
-
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = panel_module_factory_finalize;
 
