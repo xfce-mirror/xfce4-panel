@@ -128,6 +128,17 @@ GQuark launcher_plugin_quark = 0;
 
 
 
+/* target types for dropping in the launcher plugin */
+static const GtkTargetEntry drop_targets[] =
+{
+    { (gchar *) "text/uri-list", 0, 0, },
+    { (gchar *) "STRING", 0, 0 },
+    { (gchar *) "UTF8_STRING", 0, 0 },
+    { (gchar *) "text/plain", 0, 0 },
+};
+
+
+
 static void
 launcher_plugin_class_init (XfceLauncherPluginClass *klass)
 {
@@ -194,6 +205,9 @@ launcher_plugin_init (XfceLauncherPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_widget_set_has_tooltip (plugin->button, TRUE);
   gtk_widget_show (plugin->button);
+  gtk_drag_dest_set (plugin->button, GTK_DEST_DEFAULT_ALL,
+                     drop_targets, G_N_ELEMENTS (drop_targets),
+                     GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
                     G_CALLBACK (launcher_plugin_button_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "button-release-event",
@@ -213,6 +227,9 @@ launcher_plugin_init (XfceLauncherPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->arrow, FALSE, FALSE, 0);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->arrow);
   gtk_button_set_relief (GTK_BUTTON (plugin->arrow), GTK_RELIEF_NONE);
+  gtk_drag_dest_set (plugin->arrow, GTK_DEST_DEFAULT_ALL,
+                     drop_targets, G_N_ELEMENTS (drop_targets),
+                     GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->arrow), "button-press-event",
                     G_CALLBACK (launcher_plugin_arrow_press_event), plugin);
 
