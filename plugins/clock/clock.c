@@ -56,6 +56,8 @@ static gboolean clock_plugin_leave_notify_event        (GtkWidget             *w
                                                         GdkEventCrossing      *event);
 static gboolean clock_plugin_enter_notify_event        (GtkWidget             *widget,
                                                         GdkEventCrossing      *event);
+static gboolean clock_plugin_button_press_event        (GtkWidget             *widget,
+                                                        GdkEventButton        *event);
 static void     clock_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
 static gboolean clock_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
@@ -63,7 +65,6 @@ static gboolean clock_plugin_size_changed              (XfcePanelPlugin       *p
 static void     clock_plugin_orientation_changed       (XfcePanelPlugin       *panel_plugin,
                                                         GtkOrientation         orientation);
 static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
-
 static void     clock_plugin_set_mode                  (ClockPlugin           *plugin);
 static gboolean clock_plugin_tooltip                   (gpointer               user_data);
 static gboolean clock_plugin_timeout_running           (gpointer               user_data);
@@ -77,7 +78,8 @@ enum
   PROP_0,
   PROP_MODE,
   PROP_SHOW_FRAME,
-  PROP_TOOLTIP_FORMAT
+  PROP_TOOLTIP_FORMAT,
+  PROP_COMMAND
 };
 
 typedef enum
@@ -108,7 +110,7 @@ struct _ClockPlugin
   GtkWidget          *frame;
 
   guint               show_frame : 1;
-
+  gchar              *command;
   ClockPluginMode     mode;
 
   gchar              *tooltip_format;
@@ -182,6 +184,7 @@ clock_plugin_class_init (ClockPluginClass *klass)
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->leave_notify_event = clock_plugin_leave_notify_event;
   widget_class->enter_notify_event = clock_plugin_enter_notify_event;
+  widget_class->button_press_event = clock_plugin_button_press_event;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = clock_plugin_construct;
@@ -212,6 +215,12 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                                         NULL, NULL,
                                                         DEFAULT_TOOLTIP_FORMAT,
                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_COMMAND,
+                                   g_param_spec_string ("command",
+                                                        NULL, NULL, NULL,
+                                                        EXO_PARAM_READWRITE));
 }
 
 
@@ -224,6 +233,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->show_frame = TRUE;
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
+  plugin->command = NULL;
 
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
@@ -253,6 +263,10 @@ clock_plugin_get_property (GObject    *object,
 
     case PROP_TOOLTIP_FORMAT:
       g_value_set_string (value, plugin->tooltip_format);
+      break;
+
+    case PROP_COMMAND:
+      g_value_set_string (value, plugin->command);
       break;
 
     default:
@@ -295,6 +309,11 @@ clock_plugin_set_property (GObject      *object,
     case PROP_TOOLTIP_FORMAT:
       g_free (plugin->tooltip_format);
       plugin->tooltip_format = g_value_dup_string (value);
+      break;
+
+    case PROP_COMMAND:
+      g_free (plugin->command);
+      plugin->command = g_value_dup_string (value);
       break;
 
     default:
@@ -342,6 +361,33 @@ clock_plugin_enter_notify_event (GtkWidget        *widget,
 
 
 
+static gboolean
+clock_plugin_button_press_event (GtkWidget      *widget,
+                                 GdkEventButton *event)
+{
+  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (widget);
+  GError      *error = NULL;
+
+  if (event->button == 1
+      && event->type == GDK_2BUTTON_PRESS
+      && !exo_str_is_empty (plugin->command))
+    {
+      /* launch command */
+      if (!gdk_spawn_command_line_on_screen (gtk_widget_get_screen (widget),
+                                             plugin->command, &error))
+        {
+          xfce_dialog_show_error (NULL, error, _("Failed to execute clock command"));
+          g_error_free (error);
+        }
+
+      return TRUE;
+    }
+
+  return (*GTK_WIDGET_CLASS (clock_plugin_parent_class)->button_press_event) (widget, event);
+}
+
+
+
 static void
 clock_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
@@ -351,6 +397,7 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "mode", G_TYPE_UINT },
     { "show-frame", G_TYPE_BOOLEAN },
     { "tooltip-format", G_TYPE_STRING },
+    { "command", G_TYPE_STRING },
     { NULL }
   };
 
@@ -378,6 +425,7 @@ clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
     clock_plugin_timeout_free (plugin->tooltip_timeout);
 
   g_free (plugin->tooltip_format);
+  g_free (plugin->command);
 }
 
 
