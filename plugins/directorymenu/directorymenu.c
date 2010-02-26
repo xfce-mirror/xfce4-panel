@@ -23,6 +23,7 @@
 #include <gio/gio.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-builder.h>
@@ -604,19 +605,82 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
                                  GFile       *dir,
                                  const gchar *category)
 {
-  GError *error = NULL;
-  gchar  *path;
+  GError       *error = NULL;
+  gchar        *working_dir;
+  XfceRc       *rc, *helperrc;
+  const gchar  *value;
+  gchar        *filename;
+  gchar       **binaries = NULL;
+  guint         i;
+  gboolean      result = FALSE;
+  gchar        *argv[2];
 
-  path = g_file_get_path (dir);
-  if (!exo_execute_preferred_application_on_screen (category, NULL, path, NULL,
-                                                    gtk_widget_get_screen (mi),
-                                                    &error))
+  /* try to work around the exo code and get the direct command */
+  rc = xfce_rc_config_open (XFCE_RESOURCE_CONFIG, "xfce4/helpers.rc", TRUE);
+  if (G_LIKELY (rc != NULL))
+    {
+      value = xfce_rc_read_entry_untranslated (rc, category, NULL);
+      if (G_LIKELY (value != NULL))
+        {
+          filename = g_strconcat ("xfce4/helpers/", value, ".desktop", NULL);
+          helperrc = xfce_rc_config_open (XFCE_RESOURCE_DATA, filename, TRUE);
+          g_free (filename);
+
+          if (G_LIKELY (helperrc != NULL))
+            {
+              /* only try our custom stuff if startup notify is supported */
+              if (xfce_rc_read_bool_entry (helperrc, "StartupNotify", FALSE))
+                {
+                  value = xfce_rc_read_entry_untranslated (helperrc, "X-XFCE-Binaries", NULL);
+                  if (value != NULL)
+                    binaries = g_strsplit (value, ";", -1);
+                }
+
+              xfce_rc_close (helperrc);
+            }
+        }
+
+      xfce_rc_close (rc);
+    }
+
+  working_dir = g_file_get_path (dir);
+
+  /* if there are binaries, there is a helper that
+   * supports startup notification, try to spawn one */
+  if (binaries != NULL)
+    {
+      for (i = 0; binaries[i] != NULL; i++)
+        {
+          filename = g_find_program_in_path (binaries[i]);
+          if (filename == NULL)
+            continue;
+
+          argv[0] = filename;
+          argv[1] = NULL;
+
+          /* try to spawn the program, if this fails we try exo for
+           * a decent error message */
+          result = xfce_spawn_on_screen (gtk_widget_get_screen (mi),
+                                         working_dir, argv, NULL, 0, TRUE,
+                                         gtk_get_current_event_time (),
+                                         NULL, NULL);
+          g_free (filename);
+          break;
+        }
+
+      g_strfreev (binaries);
+    }
+
+  if (!result
+      && !exo_execute_preferred_application_on_screen (category, NULL, working_dir, NULL,
+                                                       gtk_widget_get_screen (mi), &error))
     {
       xfce_dialog_show_error (NULL, error,
           _("Failed to open preferred application category \"%s\""), category);
       g_error_free (error);
     }
-  g_free (path);
+
+  g_free (working_dir);
 }
 
 
