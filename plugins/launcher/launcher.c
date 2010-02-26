@@ -24,6 +24,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 
 #include "launcher.h"
+#include "launcher-dialog.h"
 
 #define MENU_POPUP_DELAY  (225)
 #define ARROW_BUTTON_SIZE (16)
@@ -378,7 +379,8 @@ launcher_plugin_save (XfcePanelPlugin *panel_plugin)
 static void
 launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-
+  /* run the configure dialog */
+  launcher_dialog_show (XFCE_LAUNCHER_PLUGIN (panel_plugin));
 }
 
 

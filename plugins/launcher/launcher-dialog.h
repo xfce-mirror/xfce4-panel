@@ -18,5 +18,8 @@
 #ifndef __XFCE_LAUNCHER_DIALOG_H__
 #define __XFCE_LAUNCHER_DIALOG_H__
 
+#include "launcher.h"
+
+void launcher_dialog_show (LauncherPlugin *plugin);
 
 #endif /* !__XFCE_LAUNCHER_DIALOG_H__ */

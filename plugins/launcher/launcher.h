@@ -85,6 +85,7 @@ struct _LauncherPlugin
 
   /* whether the menu appends in revered order */
   guint                   menu_reversed_order : 1;
+  gchar *test;
 };
 
 struct _LauncherPluginEntry
@@ -112,9 +113,9 @@ static const GtkTargetEntry drop_targets[] =
 
 GType      launcher_plugin_get_type (void) G_GNUC_CONST;
 
-void       launcher_plugin_rebuild  (LauncherPlugin *plugin, gboolean update_icon);
+void       launcher_plugin_rebuild (LauncherPlugin *plugin, gboolean update_icon);
 
-GSList *launcher_plugin_filenames_from_selection_data (GtkSelectionData *selection_data);
+GSList    *launcher_plugin_filenames_from_selection_data (GtkSelectionData *selection_data);
 
 GdkPixbuf *launcher_plugin_load_pixbuf (const gchar *name, gint size, GtkIconTheme *icon_theme);
 

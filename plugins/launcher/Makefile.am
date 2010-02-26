@@ -19,7 +19,8 @@ liblauncher_la_SOURCES = \
 	launcher.c \
 	launcher.h \
 	launcher-dialog.c \
-	launcher-dialog.h
+	launcher-dialog.h \
+	launcher-dialog_glade.h
 
 liblauncher_la_CFLAGS = \
 	$(GTK_CFLAGS) \
@@ -32,12 +33,8 @@ liblauncher_la_CFLAGS = \
 liblauncher_la_LDFLAGS = \
 	-avoid-version \
 	-module \
+	-no-undefined \
 	$(PLATFORM_LDFLAGS)
-
-if HAVE_CYGWIN
-liblauncher_la_LDFLAGS += \
-	-no-undefined
-endif
 
 liblauncher_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
@@ -49,6 +46,14 @@ liblauncher_la_LIBADD = \
 
 liblauncher_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
+
+if MAINTAINER_MODE
+BUILT_SOURCES = \
+	launcher-dialog_glade.h
+
+launcher-dialog_glade.h: launcher-dialog.glade
+	exo-csource --static --strip-comments --strip-content --name=launcher_dialog_glade $< >$@
+endif
 
 #
 # .desktop file
@@ -69,6 +74,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
+	launcher-dialog.glade \
 	$(desktop_in_in_files)
 
 DISTCLEANFILES = \

@@ -15,3 +15,63 @@
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <exo/exo.h>
+#include <libxfce4ui/libxfce4ui.h>
+
+#include "launcher.h"
+#include "launcher-dialog.h"
+#include "launcher-dialog_glade.h"
+
+static void
+launcher_dialog_builder_died (gpointer user_data, GObject *where_object_was)
+{
+  g_message ("builder destroyed");
+}
+
+
+
+static void
+test_binding (GObject *object,
+              const gchar *property,
+              GType property_type,
+              gpointer struct_p,
+              glong struct_offset)
+{
+    
+}
+
+
+
+
+void
+launcher_dialog_show (LauncherPlugin *plugin)
+{
+  GtkBuilder *builder;
+  GObject    *dialog;
+  GObject    *object;
+  
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  
+  builder = gtk_builder_new ();
+  g_object_weak_ref (G_OBJECT (builder), launcher_dialog_builder_died, NULL);
+  if (gtk_builder_add_from_string (builder, launcher_dialog_glade, launcher_dialog_glade_length, NULL))
+    {
+      dialog = gtk_builder_get_object (builder, "dialog");
+      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
+      gtk_widget_show (GTK_WIDGET (dialog));
+      
+      
+      object = gtk_builder_get_object (builder, "close-button");
+      g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
+      
+      plugin->test = "blaat";
+      
+      guint offset = G_STRUCT_OFFSET (LauncherPlugin, test);
+      
+      g_message ("%d %s", offset, G_STRUCT_MEMBER (gchar *, plugin, offset));
+    }
+}
