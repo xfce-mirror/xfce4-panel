@@ -207,21 +207,24 @@ panel_properties_bind (XfconfChannel       *channel,
   panel_return_if_fail (property_base != NULL && *property_base == '/');
   panel_return_if_fail (properties != NULL);
 
-  /* get or ref the hash table */
-  if (save_properties)
-    hash_table = NULL;
-  else if (shared_hash_table != NULL)
-    hash_table = g_hash_table_ref (shared_hash_table);
-  else
-    hash_table = xfconf_channel_get_properties (channel, property_base);
-
   if (G_LIKELY (channel == NULL))
     {
       /* use the default channel if none is set by the user and take
        * care of refcounting */
       channel = panel_properties_get_channel ();
+      panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
       g_object_weak_ref (G_OBJECT (object), (GWeakNotify) g_object_unref, channel);
     }
+
+  /* get or ref the hash table */
+  if (save_properties)
+    hash_table = NULL;
+  else if (shared_hash_table != NULL)
+    hash_table = g_hash_table_ref (shared_hash_table);
+  else if (channel != NULL)
+    hash_table = xfconf_channel_get_properties (channel, property_base);
+  else
+    panel_assert_not_reached ();
 
   /* walk the properties array */
   for (prop = properties; prop->property != NULL; prop++)
