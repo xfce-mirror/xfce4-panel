@@ -54,7 +54,7 @@ BUILT_SOURCES = \
 	$(libtasklist_built_sources)
 
 DISTCLEANFILES = \
-	$(libclock_built_sources)
+	$(libtasklist_built_sources)
 
 tasklist-dialog_glade.h: tasklist-dialog.glade
 	exo-csource --static --strip-comments --strip-content --name=tasklist_dialog_glade $< >$@
