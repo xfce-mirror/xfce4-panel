@@ -334,10 +334,11 @@ main (gint argc, gchar **argv)
   if (G_LIKELY (module))
     {
       /* get the contruct symbol */
-      if (!g_module_symbol (module, "xfce_panel_plugin_construct", (gpointer) &construct_func))
+      if (!g_module_symbol (module, "__xpp_construct_obj", (gpointer) &construct_func)
+          && !g_module_symbol (module, "__xpp_construct", (gpointer) &construct_func))
         {
           /* print error */
-          g_critical ("Plugin '%s' lacks a required symbol: %s.", opt_name, g_module_error ());
+          g_critical ("Plugin '%s' lacks a plugin register function", opt_name);
 
           /* close the module */
           g_module_close (module);

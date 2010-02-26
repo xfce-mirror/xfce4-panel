@@ -173,10 +173,15 @@ panel_module_load (GTypeModule *type_module)
       return FALSE;
     }
 
-  /* link the required construct function */
-  if (!g_module_symbol (module->library, "xfce_panel_plugin_construct", (gpointer) &module->construct_func))
+  /* try to link the contruct function */
+  if (g_module_symbol (module->library, "__xpp_construct_obj", (gpointer) &module->construct_func))
     {
-      g_critical ("Plugin '%s' lacks required symbol: %s", panel_module_get_name (module), g_module_error ());
+      /* don't unload the module because it contains gtypes */
+      g_module_make_resident (module->library);
+    }
+  else if (!g_module_symbol (module->library, "__xpp_construct", (gpointer) &module->construct_func))
+    {
+      g_critical ("Plugin '%s' lacks a plugin register function", panel_module_get_name (module));
 
       /* unload */
       panel_module_unload (type_module);
