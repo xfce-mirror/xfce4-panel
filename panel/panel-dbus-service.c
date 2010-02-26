@@ -154,7 +154,6 @@ panel_dbus_service_finalize (GObject *object)
 
 static gboolean
 panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
-                                               const gchar       *display,
                                                guint              active,
                                                GError           **error)
 {
@@ -179,15 +178,13 @@ panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
 
 static gboolean
 panel_dbus_service_display_items_dialog (PanelDBusService  *service,
-                                         const gchar       *display,
                                          guint              active,
                                          GError           **error)
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  /* TODO: open/move the dialog to the correct screen */
-  /* TODO: active window */
+  /* TODO: active window, set screen too */
 
   /* show the items dialog */
   panel_item_dialog_show ();
@@ -335,23 +332,22 @@ panel_dbus_service_set_property (PanelDBusService *service,
   panel_return_val_if_fail (property != NULL, FALSE);
   panel_return_val_if_fail (value && G_TYPE_CHECK_VALUE (value), FALSE);
 
-  /* get the module factory */
-  factory = panel_module_factory_get ();
-
-  /* get the plugin */
-  provider = panel_module_factory_get_plugin (factory, plugin_id);
-  if (G_LIKELY (provider))
+  /* check if this is a plugin property change */
+  if (strcmp (property, "ProviderSignal") == 0)
     {
-      if (strcmp ("Expand", property) == 0)
-        g_signal_emit_by_name (G_OBJECT (provider), "expand-changed", g_value_get_boolean (value));
-      else if (strcmp ("MoveItem", property) == 0)
-        g_signal_emit_by_name (G_OBJECT (provider), "move-item", 0);
-      else if (strcmp ("Remove", property) == 0)
-        gtk_widget_destroy (GTK_WIDGET (provider));
-    }
+      /* get the module factory */
+      factory = panel_module_factory_get ();
 
-  /* release the factory */
-  g_object_unref (G_OBJECT (factory));
+      /* get the plugin from the factory */
+      provider = panel_module_factory_get_plugin (factory, plugin_id);
+
+      /* emit the signal for the local plugin provider */
+      if (G_LIKELY (provider))
+        g_signal_emit_by_name (G_OBJECT (provider), "provider-signal", g_value_get_uint (value));
+
+      /* release the factory */
+      g_object_unref (G_OBJECT (factory));
+    }
 
   return TRUE;
 }

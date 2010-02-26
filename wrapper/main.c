@@ -114,140 +114,65 @@ dbus_proxy_provider_property_changed (DBusGProxy              *dbus_proxy,
 
 
 static void
-dbus_proxy_provider_expand_changed (XfcePanelPluginProvider *provider,
-                                    gboolean                 expand,
-                                    DBusGProxy              *dbus_proxy)
-{
-  GValue  value = { 0, };
-  GError *error = NULL;
-
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  /* init the value */
-  g_value_init (&value, G_TYPE_BOOLEAN);
-  g_value_set_boolean (&value, expand);
-
-  /* call */
-  if (!wrapper_dbus_client_set_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
-                                         "Expand", &value, &error))
-    {
-      g_critical ("DBus error: %s", error->message);
-      g_error_free (error);
-    }
-
-  /* unset */
-  g_value_unset (&value);
-}
-
-
-
-static void
-dbus_proxy_provider_move_item (XfcePanelPluginProvider *provider,
-                               DBusGProxy              *dbus_proxy)
-{
-  GError *error = NULL;
-
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  /* call */
-  if (!wrapper_dbus_client_set_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
-                                         "MoveItem", NULL, &error))
-    {
-      g_critical ("DBus error: %s", error->message);
-      g_error_free (error);
-    }
-}
-
-
-
-static void
-dbus_proxy_provider_add_new_items (XfcePanelPluginProvider *provider,
-                                   DBusGProxy              *dbus_proxy)
-{
-  gchar  *name;
-  GError *error = NULL;
-  guint   active_panel = 0;
-  GValue  value = { 0, };
-  
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  /* try to get the panel number of this plugin */
-  if (wrapper_dbus_client_get_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
-                                        "PanelNumber", &value, NULL))
-    {
-      /* set the panel number */
-      active_panel = g_value_get_uint (&value);
-
-      /* unset */
-      g_value_unset (&value);
-    }
-
-  /* create a screen name */
-  name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
-
-  /* call */
-  if (!wrapper_dbus_client_display_items_dialog (dbus_proxy, name, 0, &error))
-    {
-      g_critical ("DBus error: %s", error->message);
-      g_error_free (error);
-    }
-
-  /* cleanup */
-  g_free (name);
-}
-
-
-
-static void
-dbus_proxy_provider_panel_preferences (XfcePanelPluginProvider *provider,
-                                       DBusGProxy              *dbus_proxy)
-{
-  gchar  *name;
-  GError *error = NULL;
-  guint   active_panel = 0;
-  GValue  value = { 0, };
-  
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-
-  /* try to get the panel number of this plugin */
-  if (wrapper_dbus_client_get_property (dbus_proxy, xfce_panel_plugin_provider_get_id (provider),
-                                        "PanelNumber", &value, NULL))
-    {
-      /* set the panel number */
-      active_panel = g_value_get_uint (&value);
-
-      /* unset */
-      g_value_unset (&value);
-    }
-
-  /* create a screen name */
-  name = gdk_screen_make_display_name (gtk_widget_get_screen (GTK_WIDGET (provider)));
-
-  /* call */
-  if (!wrapper_dbus_client_display_preferences_dialog (dbus_proxy, name, 0, &error))
-    {
-      g_critical ("DBus error: %s", error->message);
-      g_error_free (error);
-    }
-
-  /* cleanup */
-  g_free (name);
-}
-
-
-
-static void
-dbus_proxy_provider_remove (XfcePanelPluginProvider *provider,
+dbus_proxy_provider_signal (XfcePanelPluginProvider *provider,
+                            ProviderSignal           signal,
                             DBusGProxy              *dbus_proxy)
 {
-  GError *error = NULL;
+  GValue       value = { 0, };
+  GError      *error = NULL;
+  const gchar *id;
+  guint        active_panel = 0;
+  gboolean     result = FALSE;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  /* call */
-  if (!wrapper_dbus_client_set_property (dbus_proxy,
-                                         xfce_panel_plugin_provider_get_id (provider),
-                                         "Remove", NULL, &error))
+  /* get the plugin id */
+  id = xfce_panel_plugin_provider_get_id (provider);
+
+  /* handle the signal */
+  switch (signal)
+    {
+      case MOVE_PLUGIN:
+      case REMOVE_PLUGIN:
+      case EXPAND_PLUGIN:
+      case COLLAPSE_PLUGIN:
+      case LOCK_PANEL:
+      case UNLOCK_PANEL:
+        /* initialize the value */
+        g_value_init (&value, G_TYPE_UINT);
+        g_value_set_uint (&value, signal);
+
+        /* invoke the method */
+        result = wrapper_dbus_client_set_property (dbus_proxy, id, "ProviderSignal", &value, &error);
+
+        /* unset */
+        g_value_unset (&value);
+        break;
+
+      case ADD_NEW_ITEMS:
+      case PANEL_PREFERENCES:
+        /* try to get the panel number of this plugin */
+        if (wrapper_dbus_client_get_property (dbus_proxy, id, "PanelNumber", &value, NULL))
+          {
+            /* set the panel number */
+            active_panel = g_value_get_uint (&value);
+            g_value_unset (&value);
+          }
+
+        /* invoke the methode */
+        if (signal == ADD_NEW_ITEMS)
+          result = wrapper_dbus_client_display_items_dialog (dbus_proxy, active_panel, &error);
+        else
+          result = wrapper_dbus_client_display_preferences_dialog (dbus_proxy, active_panel, &error);
+        break;
+
+      default:
+        g_critical ("Plugin '%s' received an unknown provider signal %d.", id, signal);
+        return;
+    }
+
+  /* handle errors */
+  if (result == FALSE)
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
@@ -389,11 +314,7 @@ main (gint argc, gchar **argv)
       g_object_set_qdata (G_OBJECT (provider), plug_quark, plug);
 
       /* connect provider signals */
-      g_signal_connect (G_OBJECT (provider), "expand-changed", G_CALLBACK (dbus_proxy_provider_expand_changed), dbus_proxy);
-      g_signal_connect (G_OBJECT (provider), "move-item", G_CALLBACK (dbus_proxy_provider_move_item), dbus_proxy);
-      g_signal_connect (G_OBJECT (provider), "add-new-items", G_CALLBACK (dbus_proxy_provider_add_new_items), dbus_proxy);
-      g_signal_connect (G_OBJECT (provider), "panel-preferences", G_CALLBACK (dbus_proxy_provider_panel_preferences), dbus_proxy);
-      g_signal_connect (G_OBJECT (provider), "destroy", G_CALLBACK (dbus_proxy_provider_remove), dbus_proxy);
+      g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (dbus_proxy_provider_signal), dbus_proxy);
 
       /* connect dbus property change signal */
       dbus_g_proxy_connect_signal (dbus_proxy, "PropertyChanged", G_CALLBACK (dbus_proxy_provider_property_changed), provider, NULL);
@@ -418,9 +339,8 @@ main (gint argc, gchar **argv)
   /* close the module */
   g_module_close (module);
 
-  /* release dbus */
+  /* release dbus proxy, connection is shared, so no need to unref it */
   g_object_unref (G_OBJECT (dbus_proxy));
-  g_object_unref (G_OBJECT (dbus_connection));
 
   return EXIT_SUCCESS;
 }

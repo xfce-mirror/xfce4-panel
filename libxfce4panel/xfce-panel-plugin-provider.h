@@ -27,12 +27,27 @@ G_BEGIN_DECLS
 
 typedef struct _XfcePanelPluginProviderIface XfcePanelPluginProviderIface;
 typedef struct _XfcePanelPluginProvider      XfcePanelPluginProvider;
+typedef enum   _ProviderSignal               ProviderSignal;
 
 typedef XfcePanelPluginProvider *(*PluginConstructFunc) (const gchar  *name,
                                                          const gchar  *id,
                                                          const gchar  *display_name,
                                                          gchar       **arguments,
                                                          GdkScreen    *screen);
+
+
+
+enum _ProviderSignal
+{
+  MOVE_PLUGIN,
+  EXPAND_PLUGIN,
+  COLLAPSE_PLUGIN,
+  LOCK_PANEL,
+  UNLOCK_PANEL,
+  REMOVE_PLUGIN,
+  ADD_NEW_ITEMS,
+  PANEL_PREFERENCES,
+};
 
 
 

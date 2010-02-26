@@ -32,11 +32,7 @@
 
 enum
 {
-  EXPAND_CHANGED,
-  MOVE,
-  ADD_NEW_ITEMS,
-  PANEL_PREFERENCES,
-  LOCK_PANEL,
+  PROVIDER_SIGNAL,
   LAST_SIGNAL
 };
 
@@ -86,45 +82,13 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
 
   if (G_UNLIKELY (!initialized))
     {
-      provider_signals[EXPAND_CHANGED] =
-        g_signal_new (I_("expand-changed"),
+      provider_signals[PROVIDER_SIGNAL] =
+        g_signal_new (I_("provider-signal"),
                       G_TYPE_FROM_CLASS (klass),
                       G_SIGNAL_RUN_LAST,
                       0, NULL, NULL,
-                      g_cclosure_marshal_VOID__BOOLEAN,
-                      G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
-
-      provider_signals[MOVE] =
-        g_signal_new (I_("move-item"),
-                      G_TYPE_FROM_CLASS (klass),
-                      G_SIGNAL_RUN_LAST,
-                      0, NULL, NULL,
-                      g_cclosure_marshal_VOID__VOID,
-                      G_TYPE_NONE, 0);
-
-      provider_signals[ADD_NEW_ITEMS] =
-        g_signal_new (I_("add-new-items"),
-                      G_TYPE_FROM_CLASS (klass),
-                      G_SIGNAL_RUN_LAST,
-                      0, NULL, NULL,
-                      g_cclosure_marshal_VOID__VOID,
-                      G_TYPE_NONE, 0);
-
-      provider_signals[PANEL_PREFERENCES] =
-        g_signal_new (I_("panel-preferences"),
-                      G_TYPE_FROM_CLASS (klass),
-                      G_SIGNAL_RUN_LAST,
-                      0, NULL, NULL,
-                      g_cclosure_marshal_VOID__VOID,
-                      G_TYPE_NONE, 0);
-
-      provider_signals[LOCK_PANEL] =
-        g_signal_new (I_("lock-panel"),
-                      G_TYPE_FROM_CLASS (klass),
-                      G_SIGNAL_RUN_LAST,
-                      0, NULL, NULL,
-                      g_cclosure_marshal_VOID__BOOLEAN,
-                      G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+                      g_cclosure_marshal_VOID__UINT,
+                      G_TYPE_NONE, 1, G_TYPE_UINT);
 
       /* initialization finished */
       initialized = TRUE;

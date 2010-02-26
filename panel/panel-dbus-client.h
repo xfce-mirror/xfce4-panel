@@ -25,12 +25,10 @@
 
 gboolean  panel_dbus_client_check_client_running       (GError      **error);
 
-gboolean  panel_dbus_client_display_preferences_dialog (GdkScreen    *screen,
-                                                        guint         active,
+gboolean  panel_dbus_client_display_preferences_dialog (guint         active,
                                                         GError      **error);
 
-gboolean  panel_dbus_client_display_items_dialog       (GdkScreen    *screen,
-                                                        guint         active,
+gboolean  panel_dbus_client_display_items_dialog       (guint         active,
                                                         GError      **error);
 
 gboolean  panel_dbus_client_save                       (GError      **error);

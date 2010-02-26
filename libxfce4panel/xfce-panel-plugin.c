@@ -554,8 +554,8 @@ xfce_panel_plugin_menu_move (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
 
-  /* move the plugin (provider signal) */
-  g_signal_emit_by_name (G_OBJECT (plugin), "move-item", 0);
+  /* move the plugin */
+  g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", MOVE_PLUGIN);
 }
 
 
@@ -601,8 +601,8 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
           g_free (filename);
         }
 
-      /* destroy the plugin */
-      gtk_widget_destroy (GTK_WIDGET (plugin));
+      /* ask the panel or wrapper to remove the plugin */
+      g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", REMOVE_PLUGIN);
     }
 
   /* destroy */
@@ -617,8 +617,8 @@ xfce_panel_plugin_menu_add_items (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
 
-  /* open items dialog (provider signal) */
-  g_signal_emit_by_name (G_OBJECT (plugin), "add-new-items", 0);
+  /* open items dialog */
+  g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", ADD_NEW_ITEMS);
 }
 
 
@@ -629,8 +629,8 @@ xfce_panel_plugin_menu_panel_preferences (XfcePanelPlugin *plugin)
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
 
-  /* open preferences dialog (provider signal) */
-  g_signal_emit_by_name (G_OBJECT (plugin), "panel-preferences", 0);
+  /* open preferences dialog */
+  g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", PANEL_PREFERENCES);
 }
 
 
@@ -758,9 +758,9 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
         /* decrease the counter */
         plugin->priv->registered_menus--;
 
-        /* emit signal to unlock the panel (provider signal) */
+        /* emit signal to unlock the panel */
         if (G_LIKELY (plugin->priv->registered_menus == 0))
-          g_signal_emit_by_name (G_OBJECT (plugin), "lock-panel", FALSE);
+          g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", UNLOCK_PANEL);
       }
 }
 
@@ -991,7 +991,7 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
       plugin->priv->expand = expand;
 
       /* emit signal (in provider) */
-      g_signal_emit_by_name (G_OBJECT (plugin), "expand-changed", expand);
+      g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", expand ? EXPAND_PLUGIN : COLLAPSE_PLUGIN);
     }
 }
 
@@ -1187,9 +1187,9 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
   /* connect signal to menu to decrease counter */
   g_signal_connect (G_OBJECT (menu), "deactivate", G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
-  /* tell panel it needs to lock (provider signal) */
+  /* tell panel it needs to lock */
   if (G_LIKELY (plugin->priv->registered_menus == 1))
-    g_signal_emit_by_name (G_OBJECT (plugin), "lock-panel", TRUE);
+    g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", LOCK_PANEL);
 }
 
 

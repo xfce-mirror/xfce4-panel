@@ -63,9 +63,6 @@ static void      panel_application_load_end_element   (GMarkupParseContext    *c
                                                        const gchar            *element_name,
                                                        gpointer                user_data,
                                                        GError                **error);
-static void      panel_application_plugin_expand      (GtkWidget              *plugin,
-                                                       gboolean                expand,
-                                                       PanelWindow            *window);
 static void      panel_application_plugin_move        (GtkWidget              *item,
                                                        PanelApplication       *application);
 static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
@@ -521,25 +518,6 @@ panel_application_load_end_element (GMarkupParseContext  *context,
 
 
 static void
-panel_application_plugin_expand (GtkWidget   *plugin,
-                                 gboolean     expand,
-                                 PanelWindow *window)
-{
-  GtkWidget *itembar;
-
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  /* get the itembar */
-  itembar = gtk_bin_get_child (GTK_BIN (window));
-
-  /* set new expand mode */
-  panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), plugin, expand);
-}
-
-
-
-static void
 panel_application_plugin_move_end (GtkWidget        *item,
                                    GdkDragContext   *context,
                                    PanelApplication *application)
@@ -592,6 +570,65 @@ panel_application_plugin_move (GtkWidget        *item,
 
 
 
+static void
+panel_application_plugin_provider_signal (XfcePanelPluginProvider *provider,
+                                          ProviderSignal           signal,
+                                          PanelApplication        *application)
+{
+  GtkWidget *toplevel, *itembar;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  switch (signal)
+    {
+      case MOVE_PLUGIN:
+        /* invoke the move function */
+        panel_application_plugin_move (GTK_WIDGET (provider), application);
+        break;
+
+      case EXPAND_PLUGIN:
+      case COLLAPSE_PLUGIN:
+        /* get the itembar */
+        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (provider));
+        itembar = gtk_bin_get_child (GTK_BIN (toplevel));
+
+        /* set new expand mode */
+        panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), !!(signal == EXPAND_PLUGIN));
+        break;
+
+      case LOCK_PANEL:
+      case UNLOCK_PANEL:
+        /* TODO: implement */
+        break;
+
+      case REMOVE_PLUGIN:
+        /* destroy the plugin if it's a panel plugin (ie. not external) */
+        if (XFCE_IS_PANEL_PLUGIN (provider))
+          gtk_widget_destroy (GTK_WIDGET (provider));
+        break;
+
+      case ADD_NEW_ITEMS:
+        /* open the items dialog */
+        panel_item_dialog_show ();
+        break;
+
+      case PANEL_PREFERENCES:
+        /* get the panel window widget */
+        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (provider));
+
+        /* open the panel preferences */
+        panel_preferences_dialog_show (PANEL_WINDOW (toplevel));
+        break;
+
+      default:
+        g_critical ("Reveived unknown signal %d", signal);
+        break;
+    }
+}
+
+
+
 static gboolean
 panel_application_plugin_insert (PanelApplication  *application,
                                  PanelWindow       *window,
@@ -618,10 +655,8 @@ panel_application_plugin_insert (PanelApplication  *application,
       /* get the panel itembar */
       itembar = gtk_bin_get_child (GTK_BIN (window));
 
-      g_signal_connect (G_OBJECT (provider), "expand-changed", G_CALLBACK (panel_application_plugin_expand), window);
-      g_signal_connect (G_OBJECT (provider), "move-item", G_CALLBACK (panel_application_plugin_move), application);
-      g_signal_connect (G_OBJECT (provider), "add-new-items", G_CALLBACK (panel_item_dialog_show), NULL);
-      g_signal_connect_swapped (G_OBJECT (provider), "panel-preferences", G_CALLBACK (panel_preferences_dialog_show), window);
+      /* add signal to monitor provider signals */
+      g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (panel_application_plugin_provider_signal), application);
 
       /* add the item to the panel */
       panel_itembar_insert (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), position);

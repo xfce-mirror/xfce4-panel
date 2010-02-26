@@ -64,34 +64,23 @@ panel_dbus_client_check_client_running (GError **error)
 
 
 gboolean
-panel_dbus_client_display_preferences_dialog (GdkScreen  *screen,
-                                              guint       active,
-                                              GError    **error)
+panel_dbus_client_display_preferences_dialog (guint    active,
+                                              GError **error)
 {
-  gchar      *name;
   gboolean    result;
   DBusGProxy *dbus_proxy;
 
-  panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-
-  /* use default screen if none is defined */
-  if (screen == NULL)
-    screen = gdk_screen_get_default ();
 
   /* get the proxy */
   dbus_proxy = panel_dbus_client_get_proxy (error);
   if (G_UNLIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  /* get the display name */
-  name = gdk_screen_make_display_name (screen);
-
   /* call */
-  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy, name, active, error);
+  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy, active, error);
 
   /* cleanup */
-  g_free (name);
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;
@@ -100,34 +89,23 @@ panel_dbus_client_display_preferences_dialog (GdkScreen  *screen,
 
 
 gboolean
-panel_dbus_client_display_items_dialog (GdkScreen  *screen,
-                                        guint       active,
-                                        GError    **error)
+panel_dbus_client_display_items_dialog (guint    active,
+                                        GError **error)
 {
-  gchar      *name;
   gboolean    result;
   DBusGProxy *dbus_proxy;
 
-  panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-
-  /* use default screen if none is defined */
-  if (screen == NULL)
-    screen = gdk_screen_get_default ();
 
   /* get the proxy */
   dbus_proxy = panel_dbus_client_get_proxy (error);
   if (G_UNLIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  /* get the display name */
-  name = gdk_screen_make_display_name (screen);
-
   /* call */
-  result = _panel_dbus_client_display_items_dialog (dbus_proxy, name, active, error);
+  result = _panel_dbus_client_display_items_dialog (dbus_proxy, active, error);
 
   /* cleanup */
-  g_free (name);
   g_object_unref (G_OBJECT (dbus_proxy));
 
   return result;
