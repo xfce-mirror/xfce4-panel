@@ -34,8 +34,6 @@ libxfce4panel_la_SOURCES = \
 	$(libxfce4panel_built_sources) \
 	$(libxfce4panel_headers) \
 	xfce-arrow-button.c \
-	xfce-blink-button.c \
-	xfce-blink-button.h \
 	xfce-hvbox.c \
 	xfce-panel-convenience.c \
 	xfce-panel-plugin.c \
