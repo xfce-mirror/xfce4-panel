@@ -355,7 +355,7 @@
                         <child type="label">
                           <object class="GtkLabel" id="label5">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Measurements</property>
+                            <property name="label" translatable="yes" comments="I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel">Measurements</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                             </attributes>
@@ -811,15 +811,15 @@
   </object>
   <object class="GtkSizeGroup" id="composing-sizegroup">
     <widgets>
-      <widget name="label10"/>
-      <widget name="label9"/>
       <widget name="label7"/>
+      <widget name="label9"/>
+      <widget name="label10"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="display-sizegroup">
     <widgets>
-      <widget name="label13"/>
       <widget name="label1"/>
+      <widget name="label13"/>
     </widgets>
   </object>
 </interface>

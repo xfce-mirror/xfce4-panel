@@ -185,7 +185,7 @@ panel_dialogs_restart_plugin (GtkWindow   *parent,
                                    GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
                                    _("Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"),
                                    plugin_name);
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("The plugin restarted more then once in "
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), _("The plugin restarted more than once in "
                                             "the last %d seconds. If you press Execute the panel will try to restart "
                                             "the plugin otherwise it will be permanently removed from the panel."),
                                             PANEL_PLUGIN_AUTO_RESTART);
