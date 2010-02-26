@@ -587,7 +587,13 @@ panel_window_set_property (GObject      *object,
 
     case PROP_OUTPUT_NAME:
       g_free (window->output_name);
-      window->output_name = g_value_dup_string (value);
+
+      val_string = g_value_get_string (value);
+      if (exo_str_is_empty (val_string))
+        window->output_name = NULL;
+      else
+        window->output_name = g_strdup (val_string);
+
       panel_window_screen_layout_changed (window->screen, window);
       break;
 
@@ -1615,9 +1621,21 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                n_monitors, window->output_name,
                PANEL_DEBUG_BOOL (window->span_monitors));
 
-  if (window->output_name != NULL
-      && strncmp (window->output_name, "screen-", 7) == 0
-      && sscanf (window->output_name, "screen-%d", &screen_num) == 1)
+  if (window->output_name == NULL
+      && (window->span_monitors || n_monitors == 1))
+    {
+      get_screen_geometry:
+
+      /* get the screen geometry we also use this if there is only
+       * one monitor and no output is choosen, as a fast-path */
+      a.x = a.y = 0;
+      a.width = gdk_screen_get_width (screen);
+      a.height = gdk_screen_get_height (screen);
+      panel_return_if_fail (a.width > 0 && a.height > 0);
+    }
+  else if (window->output_name != NULL
+           && strncmp (window->output_name, "screen-", 7) == 0
+           && sscanf (window->output_name, "screen-%d", &screen_num) == 1)
     {
       /* check if the panel is on the correct screen */
       if (gdk_screen_get_number (screen) != screen_num)
@@ -1644,19 +1662,6 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 
       /* screen is correct, get geometry and continue */
       goto get_screen_geometry;
-    }
-  else if (window->span_monitors
-           || (n_monitors == 1
-               && window->output_name == NULL))
-    {
-      get_screen_geometry:
-
-      /* get the screen geometry we also use this if there is only
-       * one monitor and no output is choosen, as a fast-path */
-      a.x = a.y = 0;
-      a.width = gdk_screen_get_width (screen);
-      a.height = gdk_screen_get_height (screen);
-      panel_return_if_fail (a.width > 0 && a.height > 0);
     }
   else
     {

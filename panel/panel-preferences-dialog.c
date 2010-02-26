@@ -342,6 +342,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   gboolean     output_selected = FALSE;
   gint         n = 0, i;
   gchar       *name, *title;
+  gboolean     span_monitors_sensitive = FALSE;
 
   /* remove all the active bindings */
   panel_preferences_dialog_bindings_unbind (dialog);
@@ -373,11 +374,6 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
       n_monitors = gdk_screen_get_n_monitors (screen);
     }
 
-  /* show or hide the span-monitors option */
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
-  panel_return_if_fail (GTK_IS_WIDGET (object));
-  g_object_set (G_OBJECT (object), "visible", n_monitors > 1, NULL);
-
   /* update the output selector */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-name");
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
@@ -401,6 +397,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
         {
           gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
           output_selected = TRUE;
+          span_monitors_sensitive = TRUE;
         }
 
       if (n_screens > 1)
@@ -476,9 +473,8 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
     {
       /* hide the selector */
       selector_visible = FALSE;
+      span_monitors_sensitive = TRUE;
     }
-
-  g_free (output_name);
 
   g_signal_handler_unblock (G_OBJECT (object), dialog->output_changed_handler_id);
 
@@ -486,6 +482,14 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-box");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_set (G_OBJECT (object), "visible", selector_visible, NULL);
+
+  /* monitor spanning is only active when no output is selected */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), span_monitors_sensitive);
+  g_object_set (G_OBJECT (object), "visible", n_monitors > 1, NULL);
+
+  g_free (output_name);
 }
 
 
@@ -497,6 +501,7 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
   GtkTreeIter   iter;
   GtkTreeModel *model;
   gchar        *output_name = NULL;
+  GObject      *object;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -507,6 +512,12 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
       model = gtk_combo_box_get_model (combobox);
       gtk_tree_model_get (model, &iter, OUTPUT_NAME, &output_name, -1);
       g_object_set (G_OBJECT (dialog->active), "output-name", output_name, NULL);
+
+      /* monitor spanning does not work when an output is selected */
+      object = gtk_builder_get_object (GTK_BUILDER (dialog), "span-monitors");
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      gtk_widget_set_sensitive (GTK_WIDGET (object), output_name == NULL);
+
       g_free (output_name);
     }
 }
