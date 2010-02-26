@@ -31,7 +31,7 @@
 
 
 /**
- * SECTION: xfce-panel-convenience
+ * SECTION: convenience
  * @title: Convenience Functions
  * @short_description: Special purpose widgets and utilities
  * @include: libxfce4panel/libxfce4panel.h

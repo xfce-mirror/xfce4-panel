@@ -199,7 +199,7 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
                                                        EXO_PARAM_READWRITE
                                                        | G_PARAM_CONSTRUCT_ONLY));
 
-  panel_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM);
+  panel_atom = gdk_atom_intern_static_string (_PANEL_CLIENT_EVENT_ATOM);
 }
 
 

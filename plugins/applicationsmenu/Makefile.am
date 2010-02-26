@@ -66,10 +66,12 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	applicationsmenu-dialog.glade \
+	xfce4-popup-applicationsmenu.in \
 	$(desktop_in_files)
 
 DISTCLEANFILES = \
-	$(desktop_DATA)
+	$(desktop_DATA) \
+	xfce4-popup-applicationsmenu
 
 if MAINTAINER_MODE
 BUILT_SOURCES = \

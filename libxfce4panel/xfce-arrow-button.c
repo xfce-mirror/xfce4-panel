@@ -45,7 +45,7 @@
  *
  * Toggle button with (optional) arrow. The arrow direction will be
  * inverted when the button is toggled.
- * It is also possible to make the button blink and pack additional
+ * Since 4.8 it is also possible to make the button blink and pack additional
  * widgets in the button, using gtk_container_add().
  **/
 
@@ -496,7 +496,7 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
  *
  * Returns: %TRUE when @button is blinking.
  *
- * Since: 4.8.0
+ * Since: 4.8
  **/
 gboolean
 xfce_arrow_button_get_blinking (XfceArrowButton *button)
@@ -515,7 +515,7 @@ xfce_arrow_button_get_blinking (XfceArrowButton *button)
  *
  * Make the button blink.
  *
- * Since: 4.8.0
+ * Since: 4.8
  **/
 void
 xfce_arrow_button_set_blinking (XfceArrowButton *button,

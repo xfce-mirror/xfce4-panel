@@ -1,6 +1,5 @@
 <SECTION>
-<FILE>libxfce4panel-config</FILE>
-<TITLE>Version Information</TITLE>
+<FILE>config</FILE>
 libxfce4panel_major_version
 libxfce4panel_minor_version
 libxfce4panel_micro_version
@@ -14,16 +13,16 @@ LIBXFCE4PANEL_CHECK_VERSION
 
 <SECTION>
 <FILE>xfce-arrow-button</FILE>
-<TITLE>XfceArrowButton</TITLE>
 XfceArrowButton
-XfceArrowButtonClass
 xfce_arrow_button_new
 xfce_arrow_button_get_arrow_type
 xfce_arrow_button_set_arrow_type
 xfce_arrow_button_get_blinking
 xfce_arrow_button_set_blinking
 <SUBSECTION Standard>
+XfceArrowButtonClass
 XfceArrowButtonPrivate
+XFCE_TYPE_ARROW_BUTTON
 XFCE_ARROW_BUTTON
 XFCE_IS_ARROW_BUTTON
 XFCE_ARROW_BUTTON_CLASS
@@ -35,7 +34,6 @@ xfce_arrow_button_get_type
 
 <SECTION>
 <FILE>xfce-hvbox</FILE>
-<TITLE>XfceHVBox</TITLE>
 XfceHVBox
 xfce_hvbox_new
 xfce_hvbox_set_orientation
@@ -53,15 +51,16 @@ xfce_hvbox_get_type
 </SECTION>
 
 <SECTION>
-<FILE>xfce-panel-convenience</FILE>
-<TITLE>Convenience Functions</TITLE>
+<FILE>convenience</FILE>
 xfce_panel_create_button
 xfce_panel_create_toggle_button
+xfce_allow_panel_customization
+xfce_create_panel_button
+xfce_create_panel_toggle_button
 </SECTION>
 
 <SECTION>
 <FILE>xfce-panel-image</FILE>
-<TITLE>XfcePanelImage</TITLE>
 XfcePanelImage
 xfce_panel_image_new
 xfce_panel_image_new_from_pixbuf
@@ -85,22 +84,38 @@ xfce_panel_image_get_type
 </SECTION>
 
 <SECTION>
-<FILE>xfce-panel-macros</FILE>
-<TITLE>Panel Plugin Macros</TITLE>
+<FILE>enums</FILE>
+XfceScreenPosition
+xfce_screen_position_get_orientation
+xfce_screen_position_is_bottom
+xfce_screen_position_is_floating
+xfce_screen_position_is_horizontal
+xfce_screen_position_is_left
+xfce_screen_position_is_right
+xfce_screen_position_is_top
+<SUBSECTION Standard>
+XFCE_TYPE_SCREEN_POSITION
+xfce_screen_position_get_type
+</SECTION>
+
+<SECTION>
+<FILE>macros</FILE>
 XFCE_PANEL_CHANNEL_NAME
-xfce_panel_plugin_xfconf_channel_new
-XFCE_PANEL_DEFINE_PLUGIN
-XFCE_PANEL_DEFINE_PLUGIN_RESIDENT
-XFCE_PANEL_DEFINE_TYPE
-XFCE_PANEL_DEFINE_PREINIT_FUNC
-XFCE_PANEL_PLUGIN_REGISTER
-XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
-XFCE_PANEL_PLUGIN_REGISTER_FULL
+<SUBSECTION>
+panel_slice_alloc
+panel_slice_alloc0
+panel_slice_free
+panel_slice_free1
+panel_slice_new
+panel_slice_new0
+<SUBSECTION>
+PANEL_PARAM_READABLE
+PANEL_PARAM_READWRITE
+PANEL_PARAM_WRITABLE
 </SECTION>
 
 <SECTION>
 <FILE>xfce-panel-plugin</FILE>
-<TITLE>XfcePanelPlugin</TITLE>
 XfcePanelPlugin
 XfcePanelPluginClass
 xfce_panel_plugin_get_name
@@ -131,6 +146,8 @@ xfce_panel_plugin_focus_widget
 xfce_panel_plugin_block_autohide
 xfce_panel_plugin_lookup_rc_file
 xfce_panel_plugin_save_location
+xfce_panel_plugin_xfconf_channel_new
+xfce_panel_plugin_set_panel_hidden
 <SUBSECTION Standard>
 XfcePanelPluginPrivate
 XFCE_TYPE_PANEL_PLUGIN
@@ -141,4 +158,33 @@ XFCE_IS_PANEL_PLUGIN_CLASS
 XFCE_PANEL_PLUGIN_GET_CLASS
 <SUBSECTION Private>
 xfce_panel_plugin_get_type
+</SECTION>
+
+<SECTION>
+<FILE>register-plugins</FILE>
+XfcePanelPluginCheck
+XfcePanelPluginFunc
+XfcePanelPluginPreInit
+XFCE_PANEL_PLUGIN_REGISTER
+XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK
+XFCE_PANEL_PLUGIN_REGISTER_FULL
+</SECTION>
+
+<SECTION>
+<FILE>register-46-plugins</FILE>
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
+<SUBSECTION>
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK
+</SECTION>
+
+<SECTION>
+<FILE>register-gobject-plugins</FILE>
+XfcePanelTypeModule
+XFCE_PANEL_DEFINE_PLUGIN
+XFCE_PANEL_DEFINE_PLUGIN_RESIDENT
+XFCE_PANEL_DEFINE_TYPE
+XFCE_PANEL_DEFINE_PREINIT_FUNC
 </SECTION>

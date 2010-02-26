@@ -319,7 +319,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * returned by xfce_panel_plugin_save_location(), the panel will take
    * care of removing those settings.
    *
-   * Since: 4.8.0
+   * Since: 4.8
    **/
   plugin_signals[REMOVED] =
     g_signal_new (g_intern_static_string ("removed"),
@@ -413,10 +413,10 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:display-name:
    *
-   * The display name of the #XfcePanelPlugin. This property is used during plugin
-   * construction and can't be set twice. Plugin writer can use it to read the
-   * plugin display name, but xfce_panel_plugin_get_display_name() is recommended
-   * since that returns a const string.
+   * The translated display name of the #XfcePanelPlugin. This property is set
+   * during plugin construction and can't be set twice. Plugin writer can use
+   * it to read the plugin display name, but xfce_panel_plugin_get_display_name()
+   * is recommended.
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_DISPLAY_NAME,
@@ -431,9 +431,12 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:comment:
    *
-   * TODO
+   * The translated description of the #XfcePanelPlugin. This property is set
+   * during plugin construction and can't be set twice. Plugin writer can use
+   * it to read the plugin description, but xfce_panel_plugin_get_comment()
+   * is recommended.
    *
-   * Since 4.8.0
+   * Since: 4.8
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_COMMENT,
@@ -448,8 +451,11 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:id:
    *
-   * The unique id of the #XfcePanelPlugin. Plugin writer can use it to
-   * read the unique id, but xfce_panel_plugin_get_unique_id() is recommended.
+   * The unique id of the #XfcePanelPlugin. This property is set during plugin
+   * construction and can't be set twice. Plugin writer can use it to read the
+   * plugin display name, but xfce_panel_plugin_get_unique_id() is recommended.
+   *
+   * Since: 4.8
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
@@ -482,7 +488,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:orientation:
    *
-   * TODO
+   * The #GtkOrientation of the #XfcePanelPlugin. Plugin writer can use it to read the
+   * plugin orientation, but xfce_panel_plugin_get_orientation() is recommended.
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
@@ -497,7 +504,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:size:
    *
-   * TODO
+   * The size in pixels of the #XfcePanelPlugin. Plugin writer can use it to read the
+   * plugin size, but xfce_panel_plugin_get_size() is recommended.
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
@@ -511,7 +519,9 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:screen-position:
    *
-   * TODO
+   * The #XfceScreenPosition of the #XfcePanelPlugin. Plugin writer can use it
+   * to read the plugin's screen position, but xfce_panel_plugin_get_screen_psotion()
+   * is recommended.
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_SCREEN_POSITION,
@@ -526,7 +536,9 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:expand:
    *
-   * TODO
+   * Wether the #XfcePanelPlugin expands on the panel. Plugin writes can use it
+   * to read or set this property, but xfce_panel_plugin_set_expand()
+   * is recommended.
    **/
   g_object_class_install_property (gobject_class,
                                    PROP_EXPAND,
@@ -1328,7 +1340,7 @@ xfce_panel_plugin_take_window_notify (gpointer  data,
  * xfce_panel_plugin_get_name:
  * @plugin : an #XfcePanelPlugin.
  *
- * TODO
+ * The internal name of the panel plugin.
  *
  * Returns: the name of the panel plugin.
  **/
@@ -1374,6 +1386,8 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
  * the .desktop file of the plugin.
  *
  * Returns: the (translated) comment of the plugin.
+ *
+ * Since: 4.8
  **/
 G_CONST_RETURN gchar *
 xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
@@ -1452,7 +1466,7 @@ xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
  * Returns: the argument vector. The vector is owned by the plugin and
  *          should not be freed.
  *
- * Since: 4.8.0
+ * Since: 4.8
  **/
 G_CONST_RETURN gchar * G_CONST_RETURN *
 xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin)
@@ -1582,11 +1596,10 @@ xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
  * @plugin : an #XfcePanelPlugin.
  * @window : a #GtkWindow.
  *
- * Connect a dialog to the plugin. When the panel is closed or the
- * plugin is removed from the panel, the window will be closed by
- * the panel.
+ * Connect a dialog to a plugin. When the @plugin is closed, it will
+ * destroy the @window.
  *
- * Since: 4.8.0
+ * Since: 4.8
  **/
 void
 xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
@@ -1722,7 +1735,7 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_remove:
+ * xfce_panel_plugin_get_locked:
  * @plugin : an #XfcePanelPlugin.
  *
  * Whether the plugin is locked (not allowing customization). This
@@ -1738,7 +1751,7 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
  * Returns: %TRUE if the user is not allowed to modify the plugin,
  *          %FALSE is customization is allowed.
  *
- * Since: 4.8.0
+ * Since: 4.8
  **/
 gboolean
 xfce_panel_plugin_get_locked (XfcePanelPlugin *plugin)
@@ -1761,7 +1774,7 @@ xfce_panel_plugin_get_locked (XfcePanelPlugin *plugin)
  * in case the there are problems with the plugin in the panel. Always
  * try to inform the user why this occured.
  *
- * Since: 4.8.0
+ * Since: 4.8
  **/
 void
 xfce_panel_plugin_remove (XfcePanelPlugin *plugin)
@@ -1818,7 +1831,7 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  * @plugin : an #XfcePanelPlugin.
  * @menu   : a #GtkMenu that will be opened
  *
- * Register a menu tha is about to popup. This will make sure the panel
+ * Register a menu that is about to popup. This will make sure the panel
  * will properly handle its autohide behaviour. You have to call this
  * function every time the menu is opened (e.g. using gtk_popup_menu()).
  *
@@ -1827,7 +1840,7 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  * #GtkMenuPositionFunc. This callback function will take care of calling
  * xfce_panel_plugin_register_menu() as well.
  *
- * See also: xfce_panel_plugin_position_menu().
+ * See also: xfce_panel_plugin_position_menu() and xfce_panel_plugin_block_autohide().
  **/
 void
 xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
@@ -2098,9 +2111,15 @@ xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
 /**
  * xfce_panel_plugin_block_autohide:
  * @plugin  : an #XfcePanelPlugin.
- * @blocked : TODO
+ * @blocked : new blocking state of this plugin.
  *
- * TODO
+ * Wether this plugin blocks the autohide functality of the panel. Use
+ * this when you 'popup' something that is visually attached to the
+ * plugin at it will look weird for a user if the panel will hide while
+ * he/she is working in the popup.
+ *
+ * For menus it there is xfce_panel_plugin_register_menu() which will
+ * take care of this.
  **/
 void
 xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,

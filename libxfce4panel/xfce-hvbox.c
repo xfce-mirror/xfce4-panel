@@ -284,7 +284,7 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
  * xfce_hvbox_get_orientation:
  * @hvbox       : #XfceHVBox
  *
- * TODO
+ * Get the current orientation of the @hvbox.
  *
  * Returns: the current orientation of the #XfceHVBox.
  **/

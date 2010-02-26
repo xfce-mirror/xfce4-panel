@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel-enums.h>
-#include <libxfce4panel/libxfce4panel-deprecated.h>
+#include <libxfce4panel/xfce-panel-macros-46.h>
 
 G_BEGIN_DECLS
 
@@ -33,8 +33,44 @@ typedef struct _XfcePanelPluginPrivate XfcePanelPluginPrivate;
 typedef struct _XfcePanelPluginClass   XfcePanelPluginClass;
 typedef struct _XfcePanelPlugin        XfcePanelPlugin;
 
+/**
+ * XfcePanelPluginFunc:
+ * @plugin : an #XfcePanelPlugin
+ *
+ * Callback function to create the plugin contents. It should be given as
+ * the argument to the registration macros.
+ **/
 typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
-typedef gboolean (*XfcePanelPluginPreInit) (gint argc, gchar **argv);
+
+/**
+ * XfcePanelPluginPreInit:
+ * @argc: number of arguments to the plugin
+ * @argv: argument array
+ *
+ * Callback function that is run in an external plugin before gtk_init(). It
+ * should return %FALSE if the plugin is not available for whatever reason.
+ * The function can be given as argument to one of the registration macros.
+ *
+ * The main purpose of this callback is to allow multithreaded plugins to call
+ * g_thread_init().
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ *
+ * Since: 4.6
+ **/
+typedef gboolean (*XfcePanelPluginPreInit) (gint    argc,
+                                            gchar **argv);
+
+/**
+ * XfcePanelPluginCheck:
+ * @screen : the #GdkScreen the panel is running on
+ *
+ * Callback function that is run before creating a plugin. It should return
+ * %FALSE if the plugin is not available for whatever reason. The function
+ * can be given as argument to one of the registration macros.
+ *
+ * Returns: %TRUE if the plugin can be started, %FALSE otherwise.
+ **/
 typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 
 #define XFCE_TYPE_PANEL_PLUGIN            (xfce_panel_plugin_get_type ())
@@ -46,18 +82,36 @@ typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 
 /**
  * XfcePanelPluginClass:
+ * @construct :               This function is for object orientated plugins and
+ *                            triggered after the init function of the object.
+ *                            When this function is triggered, the plugin
+ *                            information like name, display name, comment and unique
+ *                            id are available. This is also the place where you would
+ *                            call functions like xfce_panel_plugin_menu_show_configure().
+ *                            You can see this as the replacement of #XfcePanelPluginFunc
+ *                            for object based plugins. Since 4.8.
+ * @screen_position_changed : See #XfcePanelPlugin::screen-position-changed for more information.
+ * @size_changed :            See #XfcePanelPlugin::size-changed for more information.
+ * @orientation_changed :     See #XfcePanelPlugin::orientation-changed for more information.
+ * @free_data :               See #XfcePanelPlugin::free-data for more information.
+ * @save :                    See #XfcePanelPlugin::save for more information.
+ * @about :                   See #XfcePanelPlugin::about for more information.
+ * @configure_plugin :        See #XfcePanelPlugin::configure-plugin for more information.
+ * @removed :                 See #XfcePanelPlugin::removed for more information.
+ * @remote_event :            See #XfcePanelPlugin::remote-event for more information.
  *
- * TODO
+ * Class of an #XfcePanelPlugin. The interface can be used to create GObject based plugin.
  **/
 struct _XfcePanelPluginClass
 {
   /*< private >*/
   GtkEventBoxClass __parent__;
 
-  /*< object oriented plugins >*/
+  /*< public >*/
+  /* for object oriented plugins only */
   void     (*construct)               (XfcePanelPlugin    *plugin);
 
-  /*< signals >*/
+  /* signals */
   void     (*screen_position_changed) (XfcePanelPlugin    *plugin,
                                        XfceScreenPosition  position);
   gboolean (*size_changed)            (XfcePanelPlugin    *plugin,
@@ -84,7 +138,8 @@ struct _XfcePanelPluginClass
 /**
  * XfcePanelPlugin:
  *
- * TODO
+ * This struct contain private data only and should be accessed by
+ * the functions below.
  **/
 struct _XfcePanelPlugin
 {

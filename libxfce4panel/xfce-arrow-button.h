@@ -49,6 +49,12 @@ struct _XfceArrowButtonClass
                               GtkArrowType     type);
 };
 
+/**
+ * XfceArrowButton:
+ *
+ * This struct contain private data only and should be accessed by
+ * the functions below.
+ **/
 struct _XfceArrowButton
 {
   /*< private >*/

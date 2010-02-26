@@ -22,12 +22,12 @@ libxfce4panel_built_sources = \
 libxfce4panel_headers = \
 	libxfce4panel.h \
 	libxfce4panel-config.h \
-	libxfce4panel-deprecated.h \
 	libxfce4panel-enums.h \
 	xfce-arrow-button.h \
 	xfce-hvbox.h \
 	xfce-panel-convenience.h \
 	xfce-panel-macros.h \
+	xfce-panel-macros-46.h \
 	xfce-panel-plugin.h \
 	xfce-panel-plugin-provider.h \
 	xfce-panel-image.h
@@ -129,5 +129,8 @@ EXTRA_DIST = \
 if HAVE_GNUC_VISIBILITY
 TESTS =	abicheck.sh
 endif
+
+# required for gtk-doc
+dist-hook: all
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

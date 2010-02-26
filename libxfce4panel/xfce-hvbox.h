@@ -48,6 +48,12 @@ struct _XfceHVBoxClass
   GtkBoxClass __parent__;
 };
 
+/**
+ * XfceHVBox:
+ *
+ * This struct contain private data only and should be accessed by
+ * the functions below.
+ **/
 struct _XfceHVBox
 {
   /*< private >*/

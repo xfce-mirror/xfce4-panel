@@ -39,8 +39,16 @@ struct _XfcePanelImageClass
   /*< private >*/
   void (*reserved1) (void);
   void (*reserved2) (void);
+  void (*reserved3) (void);
+  void (*reserved4) (void);
 };
 
+/**
+ * XfcePanelImage:
+ *
+ * This struct contain private data only and should be accessed by
+ * the functions below.
+ **/
 struct _XfcePanelImage
 {
   /*< private >*/

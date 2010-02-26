@@ -31,6 +31,16 @@
 #define IN_SOURCE(x) 1
 #endif
 
+/* libxfce4panel-condif.h */
+#if IN_HEADER(__LIBXFCE4PANEL_CONFIG_H__)
+#if IN_SOURCE(__LIBXFCE4PANEL_CONFIG_C__)
+libxfce4panel_check_version
+libxfce4panel_major_version
+libxfce4panel_micro_version
+libxfce4panel_minor_version
+#endif
+#endif
+
 /* libxfce4panel-enum-types.h */
 #if IN_HEADER(__LIBXFCE4PANEL_ENUM_TYPES_H__)
 #if IN_SOURCE(__LIBXFCE4PANEL_ENUM_TYPES_C__)
@@ -108,6 +118,7 @@ xfce_panel_plugin_block_menu
 xfce_panel_plugin_unblock_menu
 xfce_panel_plugin_register_menu
 xfce_panel_plugin_arrow_type
+xfce_panel_plugin_remove
 xfce_panel_plugin_position_widget
 xfce_panel_plugin_position_menu
 xfce_panel_plugin_focus_widget
@@ -134,5 +145,6 @@ xfce_panel_plugin_provider_get_show_about
 xfce_panel_plugin_provider_show_about
 xfce_panel_plugin_provider_removed
 xfce_panel_plugin_provider_remote_event
+xfce_panel_plugin_provider_set_locked
 #endif
 #endif

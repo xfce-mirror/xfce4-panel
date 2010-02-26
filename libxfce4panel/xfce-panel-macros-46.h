@@ -23,13 +23,20 @@
 #ifndef __LIBXFCE4PANEL_DEPRECATED_H__
 #define __LIBXFCE4PANEL_DEPRECATED_H__
 
-/* #ifndef XFCE_DISABLE_DEPRECATED */
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <gdk/gdkx.h>
 #include <stdlib.h>
-/* #endif *//* !XFCE_DISABLE_DEPRECATED */
 
 G_BEGIN_DECLS
+
+/**
+ * SECTION: register-46-plugins
+ * @title: Panel Plugin Register Macros (4.6 Style)
+ * @short_description: The 4.6 way of registering plugins that compiled as executables
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * Macros to register old external panel plugins that are compiled as executables.
+ **/
 
 enum /*< skip >*/
 {
@@ -45,19 +52,119 @@ enum /*< skip >*/
   PANEL_CLIENT_EVENT_SHOW_CONFIGURE
 };
 
-#define PANEL_CLIENT_EVENT_ATOM "XFCE4_PANEL_PLUGIN_46"
+/*< private >*/
+#define _PANEL_CLIENT_EVENT_ATOM "XFCE4_PANEL_PLUGIN_46"
 
-/* #ifndef XFCE_DISABLE_DEPRECATED */
 
-#define panel_slice_alloc(block_size)            (g_slice_alloc ((block_size)))
-#define panel_slice_alloc0(block_size)           (g_slice_alloc0 ((block_size)))
+/**
+ * panel_slice_alloc:
+ * @block_size : the number of bytes to allocate
+ *
+ * See g_slice_alloc() for more information.
+ *
+ * Returns: a pointer to the allocated memory block
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use g_slice_alloc() instead.
+ **/
+#define panel_slice_alloc(block_size) (g_slice_alloc ((block_size)))
+
+/**
+ * panel_slice_alloc0:
+ * @block_size : the number of bytes to allocate
+ *
+ * See g_slice_alloc0() for more information.
+ *
+ * Returns: a pointer to the allocated memory block
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use g_slice_alloc0() instead.
+ **/
+#define panel_slice_alloc0(block_size) (g_slice_alloc0 ((block_size)))
+
+/**
+ * panel_slice_free1:
+ * @block_size : the size of the block
+ * @mem_block  : a pointer to the block to free
+ *
+ * See g_slice_free1() for more information.
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use g_slice_free1() instead.
+ **/
 #define panel_slice_free1(block_size, mem_block) G_STMT_START{ g_slice_free1 ((block_size), (mem_block)); }G_STMT_END
-#define panel_slice_new(type)                    (g_slice_new (type))
-#define panel_slice_new0(type)                   (g_slice_new0 (type))
-#define panel_slice_free(type, ptr)              G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
 
-#define PANEL_PARAM_READABLE  (G_PARAM_READABLE | G_PARAM_STATIC_STRINGS)
-#define PANEL_PARAM_WRITABLE  (G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS)
+/**
+ * panel_slice_new:
+ * @type : the type to allocate, typically a structure name
+ *
+ * See g_slice_new() for more information.
+ *
+ * Returns: a pointer to the allocated memory block
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use g_slice_new() instead.
+ **/
+#define panel_slice_new(type) (g_slice_new (type))
+
+/**
+ * panel_slice_new0:
+ * @type : the type to allocate, typically a structure name
+ *
+ * See g_slice_new0() for more information.
+ *
+ * Returns: a pointer to the allocated memory block
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use g_slice_new0() instead.
+ **/
+#define panel_slice_new0(type) (g_slice_new0 (type))
+
+/**
+ * panel_slice_free:
+ * @type : the type to allocate, typically a structure name
+ * @ptr  : a pointer to the block to free
+ *
+ * See g_slice_free() for more information.
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use g_slice_free() instead.
+ **/
+#define panel_slice_free(type, ptr) G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
+
+
+
+/**
+ * PANEL_PARAM_READABLE:
+ *
+ * Macro for #G_PARAM_READABLE with static strings.
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use #G_PARAM_READABLE
+ *                  | #G_PARAM_STATIC_STRINGS instead.
+ **/
+#define PANEL_PARAM_READABLE (G_PARAM_READABLE | G_PARAM_STATIC_STRINGS)
+
+/**
+ * PANEL_PARAM_WRITABLE:
+ *
+ * Macro for #PANEL_PARAM_WRITABLE with static strings.
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use #G_PARAM_WRITABLE
+ *                  | #G_PARAM_STATIC_STRINGS instead.
+ **/
+#define PANEL_PARAM_WRITABLE (G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS)
+
+/**
+ * PANEL_PARAM_READWRITE:
+ *
+ * Macro for #G_PARAM_READWRITE with static strings.
+ *
+ * Deprecated: 4.8: Deprecated because panel depends on recent enough
+ *                  version of glib. Use #G_PARAM_READWRITE
+ *                  | #G_PARAM_STATIC_STRINGS instead.
+ **/
 #define PANEL_PARAM_READWRITE (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS)
 
 #define _panel_assert(expr)                  g_assert (expr)
@@ -65,19 +172,106 @@ enum /*< skip >*/
 #define _panel_return_if_fail(expr)          g_return_if_fail (expr)
 #define _panel_return_val_if_fail(expr, val) g_return_val_if_fail (expr, (val))
 
-#define xfce_create_panel_button        xfce_panel_create_button
+
+/**
+ * xfce_create_panel_button:
+ *
+ * See xfce_panel_create_button() for more information.
+ *
+ * Deprecated: 4.8: Use xfce_panel_create_button() instead.
+ **/
+#define xfce_create_panel_button xfce_panel_create_button
+
+/**
+ * xfce_create_panel_toggle_button:
+ *
+ * See xfce_panel_create_toggle_button() for more information.
+ *
+ * Deprecated: 4.8: Use xfce_panel_create_toggle_button() instead.
+ **/
 #define xfce_create_panel_toggle_button xfce_panel_create_toggle_button
+
+/**
+ * xfce_panel_plugin_set_panel_hidden:
+ * @plugin  : an #XfcePanelPlugin.
+ * @hidden  : new blocking state of this plugin.
+ *
+ * See xfce_panel_plugin_block_autohide() for more information.
+ *
+ * Deprecated: 4.8: Use xfce_panel_plugin_block_autohide() instead.
+ **/
+#define xfce_panel_plugin_set_panel_hidden(plugin, hidden) \
+    xfce_panel_plugin_block_autohide(plugin,hidden)
+
+/**
+ * xfce_allow_panel_customization:
+ *
+ * Always returns %FALSE. Plugins can be locked on a plugin basis
+ * level in the future, so this function is useless.
+ *
+ * Deprecated: 4.8: Look at xfce_panel_plugin_get_locked().
+ **/
 #define xfce_allow_panel_customization  (FALSE)
 
+/* <private >*/
 #define _panel_g_type_register_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init) \
     g_type_register_static_simple(type_parent,type_name_static,class_size,class_init,instance_size,instance_init, 0)
 
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL:
+ * @construct_func : name of a function that can be cast to an
+ *                   #XfcePanelPluginFunc
+ *
+ * Registers and initializes the plugin. This is the only thing that is
+ * required to create a panel plugin.
+ *
+ * Deprecated: 4.8: Deprecation is not entirely true, but it should be made
+ *                  clear that it is recommended to use XFCE_PANEL_PLUGIN_REGISTER().
+ *                  See the <link linkend="libxfce4panel-register">Registering Plugins</link>
+ *                  for more information.
+ **/
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct_func)  \
     XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL (construct_func, NULL, NULL)
 
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK:
+ * @construct_func : name of a function that can be cast to an
+ *                   #XfcePanelPluginFunc
+ * @check_func :     name of a function that can be cast to an
+ *                   #XfcePanelPluginCheck or %NULL
+ *
+ * Registers and initializes the plugin. This is the only thing that is
+ * required to create a panel plugin. The @check functions is run before
+ * creating the plugin, and should return FALSE if plugin creation is not
+ * possible.
+ *
+ * Deprecated: 4.8: Deprecation is not entirely true, but it should be made
+ *                  clear that it is recommended to use XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK().
+ *                  See the <link linkend="libxfce4panel-register">Registering Plugins</link>
+ *                  for more information.
+ **/
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct_func ,check_func) \
     XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL (construct_func, NULL, check_func)
 
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL:
+ * @construct_func : name of a function that can be cast to an
+ *                   #XfcePanelPluginFunc
+ * @preinit_func :   name of a function that can be case to #XfcePanelPluginPreInit
+ *                   or %NULL
+ * @check_func :     name of a function that can be cast to an
+ *                   #XfcePanelPluginCheck or %NULL
+ *
+ * Same as XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(), but with a
+ * preinit function that is called before gtk_init(). This allows plugins
+ * to initialize libraries or threads.
+ *
+ * Since: 4.6
+ * Deprecated: 4.8: Deprecation is not entirely true, but it should be made
+ *                  clear that it is recommended to use XFCE_PANEL_PLUGIN_REGISTER_FULL().
+ *                  See the <link linkend="libxfce4panel-register">Registering Plugins</link>
+ *                  for more information.
+ **/
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct_func, preinit_func, check_func) \
   static GdkAtom  _xpp_atom = GDK_NONE; \
   static gdouble  _xpp_alpha = 1.00; \
@@ -307,7 +501,7 @@ enum /*< skip >*/
           return PLUGIN_EXIT_CHECK_FAILED; \
       } \
     \
-    _xpp_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM); \
+    _xpp_atom = gdk_atom_intern_static_string (_PANEL_CLIENT_EVENT_ATOM); \
     \
     socket_id = strtol (argv[PLUGIN_ARGV_SOCKET_ID], NULL, 0); \
     plug = gtk_plug_new (socket_id); \
@@ -350,7 +544,33 @@ enum /*< skip >*/
     return PLUGIN_EXIT_SUCCESS; \
   }
 
-/* #endif *//* !XFCE_DISABLE_DEPRECATED */
+
+
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_INTERNAL:
+ * @construct_func : name of a function that can be cast to an
+ *                   #XfcePanelPluginFunc
+ *
+ * See XFCE_PANEL_PLUGIN_REGISTER() for more information.
+ *
+ * Deprecated: 4.8: Use XFCE_PANEL_PLUGIN_REGISTER() instead.
+ **/
+#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct_func)  \
+    XFCE_PANEL_PLUGIN_REGISTER (construct_func)
+
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK:
+ * @construct_func : name of a function that can be cast to an
+ *                   #XfcePanelPluginFunc
+ * @check_func :     name of a function that can be cast to an
+ *                   #XfcePanelPluginCheck or %NULL
+ *
+ * See XFCE_PANEL_PLUGIN_REGISTER() for more information.
+ *
+ * Deprecated: 4.8: use XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK() instead.
+ **/
+#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK(construct_func ,check_func) \
+    XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK (construct_func, check_func)
 
 G_END_DECLS
 

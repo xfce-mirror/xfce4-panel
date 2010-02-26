@@ -29,6 +29,17 @@
 G_BEGIN_DECLS
 
 /**
+ * SECTION: enums
+ * @title: Standard Enumerations
+ * @short_description: Standard enumerations used by the Xfce Panel.
+ * @include: libxfce4panel/libxfce4panel.h
+ *
+ * Currently only contains the definition of #XfceScreenPosition.
+ **/
+
+
+
+/**
  * XfceScreenPosition
  * @XFCE_SCREEN_POSITION_NONE       : No position has been set.
  * @XFCE_SCREEN_POSITION_NW_H       : North West Horizontal

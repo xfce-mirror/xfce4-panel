@@ -25,7 +25,7 @@
 #define __XFCE_PANEL_CONVENIENCE_H__
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel-deprecated.h>
+#include <libxfce4panel/xfce-panel-macros-46.h>
 
 G_BEGIN_DECLS
 

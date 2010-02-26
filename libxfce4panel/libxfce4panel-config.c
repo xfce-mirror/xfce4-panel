@@ -26,7 +26,7 @@
 
 
 /**
- * SECTION: libxfce4panel-config
+ * SECTION: config
  * @title: Version Information
  * @short_description: Information about the panel version in use.
  * @include: libxfce4panel/libxfce4panel.h
@@ -47,6 +47,8 @@
  * libxfce4panel library you have linked against. Contrast with the
  * #LIBXFCE4PANEL_MAJOR_VERSION macro, which represents the major
  * version of the libxfce4panel headers you have included.
+ *
+ * Since: 4.8
  **/
 const guint libxfce4panel_major_version = LIBXFCE4PANEL_MAJOR_VERSION;
 
@@ -62,6 +64,8 @@ const guint libxfce4panel_major_version = LIBXFCE4PANEL_MAJOR_VERSION;
  * libxfce4panel library you have linked against. Contrast with the
  * #LIBXFCE4PANEL_MINOR_VERSION macro, which represents the minor
  * version of the libxfce4panel headers you have included.
+ *
+ * Since: 4.8
  **/
 const guint libxfce4panel_minor_version = LIBXFCE4PANEL_MINOR_VERSION;
 
@@ -77,6 +81,8 @@ const guint libxfce4panel_minor_version = LIBXFCE4PANEL_MINOR_VERSION;
  * libxfce4panel library you have linked against. Contrast with the
  * #LIBXFCE4PANEL_MICRO_VERSION macro, which represents the micro
  * version of the libxfce4panel headers you have included.
+ *
+ * Since: 4.8
  **/
 const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
 
@@ -112,6 +118,8 @@ const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
  *          or a string describing the version mismatch. The returned
  *          string is owned by the library and must not be freed or
  *          modified by the caller.
+ *
+ * Since: 4.8
  **/
 G_CONST_RETURN gchar *
 libxfce4panel_check_version (guint required_major,

@@ -10,7 +10,7 @@ DOC_MODULE_VERSION=$(LIBXFCE4PANEL_VERSION_API)
 DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.xml
 
 # Extra options to supply to gtkdoc-scan
-SCAN_OPTIONS=--deprecated-guards="XFCE_DISABLE_DEPRECATED"
+SCAN_OPTIONS=
 
 # The directory containing the source code. Relative to $(srcdir)
 DOC_SOURCE_DIR=../../libxfce4panel
@@ -18,7 +18,7 @@ DOC_SOURCE_DIR=../../libxfce4panel
 # Extra options to supply to gtkdoc-mkdb
 MKDB_OPTIONS=--output-format=xml --sgml-mode --name-space=xfce
 
-# Extra options to supply to gtkdoc-fixref
+# Extra options to supply to gtkdoc-fixxref
 FIXXREF_OPTIONS=
 
 # Used for dependencies

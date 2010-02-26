@@ -47,7 +47,13 @@
  * buttons where the developer does not exacly know the size of the
  * image (due to theming and user setting).
  *
- * The #XfcePanelImage is a widget that will not
+ * The #XfcePanelImage widget automatically scales to the allocated
+ * size of the widget. Because of that nature it never requests a size,
+ * so this will only work if you pack the image in another widget
+ * that will expand it.
+ * If you want to force an image size you can use xfce_panel_image_set_size()
+ * to set a pixel size, in that case the widget will request an fixed size
+ * which makes it usefull for usage in dialogs.
  **/
 
 
@@ -508,6 +514,15 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
 
 
 
+/**
+ * xfce_panel_image_new:
+ *
+ * Creates a new empty #XfcePanelImage widget.
+ *
+ * returns: a newly created XfcePanelImage widget.
+ *
+ * Since: 4.8
+ **/
 GtkWidget *
 xfce_panel_image_new (void)
 {
@@ -516,10 +531,24 @@ xfce_panel_image_new (void)
 
 
 
+/**
+ * xfce_panel_image_new_from_pixbuf:
+ * @pixbuf : a #GdkPixbuf, or %NULL.
+ *
+ * Creates a new #XfcePanelImage displaying @pixbuf. #XfcePanelImage
+ * will add its own reference rather than adopting yours. You don't
+ * need to scale the pixbuf to the correct size, the #XfcePanelImage
+ * will take care of that based on the allocation of the widget or
+ * the size set with xfce_panel_image_set_size().
+ *
+ * returns: a newly created XfcePanelImage widget.
+ *
+ * Since: 4.8
+ **/
 GtkWidget *
 xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
 {
-  g_return_val_if_fail (GDK_IS_PIXBUF (pixbuf), NULL);
+  g_return_val_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf), NULL);
 
   return g_object_new (XFCE_TYPE_PANEL_IMAGE,
                        "pixbuf", pixbuf, NULL);
@@ -527,10 +556,25 @@ xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
 
 
 
+/**
+ * xfce_panel_image_new_from_source:
+ * @source : source of the image. This can be an absolute path or
+ *           an icon-name or %NULL.
+ *
+ * Creates a new #XfcePanelImage displaying @source. #XfcePanelImage
+ * will detect if @source points to an absolute file or it and icon-name.
+ * For icon-names it will also look for files in the pixbuf folder or
+ * strip the extensions, which makes it suitable for usage with icon
+ * keys in .desktop files.
+ *
+ * returns: a newly created XfcePanelImage widget.
+ *
+ * Since: 4.8
+ **/
 GtkWidget *
 xfce_panel_image_new_from_source (const gchar *source)
 {
-  g_return_val_if_fail (source != NULL && *source != '\0', NULL);
+  g_return_val_if_fail (source == NULL || *source != '\0', NULL);
 
   return g_object_new (XFCE_TYPE_PANEL_IMAGE,
                        "source", source, NULL);
@@ -538,12 +582,21 @@ xfce_panel_image_new_from_source (const gchar *source)
 
 
 
+/**
+ * xfce_panel_image_set_from_pixbuf:
+ * @image  : an #XfcePanelImage.
+ * @pixbuf : a #GdkPixbuf, or %NULL.
+ *
+ * See xfce_panel_image_new_from_pixbuf() for details.
+ *
+ * Since: 4.8
+ **/
 void
 xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
                                   GdkPixbuf      *pixbuf)
 {
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
-  g_return_if_fail (GDK_IS_PIXBUF (pixbuf));
+  g_return_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf));
 
   xfce_panel_image_clear (image);
 
@@ -556,12 +609,22 @@ xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
 
 
 
+/**
+ * xfce_panel_image_set_from_source:
+ * @image  : an #XfcePanelImage.
+ * @source : source of the image. This can be an absolute path or
+ *           an icon-name or %NULL.
+ *
+ * See xfce_panel_image_new_from_source() for details.
+ *
+ * Since: 4.8
+ **/
 void
 xfce_panel_image_set_from_source (XfcePanelImage *image,
                                   const gchar    *source)
 {
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
-  g_return_if_fail (source != NULL && *source != '\0');
+  g_return_if_fail (source == NULL || *source != '\0');
 
   xfce_panel_image_clear (image);
 
@@ -572,6 +635,17 @@ xfce_panel_image_set_from_source (XfcePanelImage *image,
 
 
 
+/**
+ * xfce_panel_image_set_size:
+ * @image : an #XfcePanelImage.
+ * @size  : a new size in pixels.
+ *
+ * This will force an image size, instead of looking at the allocation
+ * size, see introduction for more details. You can set a @size of
+ * -1 to turn this off.
+ *
+ * Since: 4.8
+ **/
 void
 xfce_panel_image_set_size (XfcePanelImage *image,
                            gint            size)
@@ -588,6 +662,17 @@ xfce_panel_image_set_size (XfcePanelImage *image,
 
 
 
+/**
+ * xfce_panel_image_get_size:
+ * @image : an #XfcePanelImage.
+ *
+ * The size of the image, set by xfce_panel_image_set_size() or -1
+ * if no size is forced and the image is scaled to the allocation size.
+ *
+ * Returns: icon size in pixels of the image or -1.
+ *
+ * Since: 4.8
+ **/
 gint
 xfce_panel_image_get_size (XfcePanelImage *image)
 {
@@ -597,6 +682,14 @@ xfce_panel_image_get_size (XfcePanelImage *image)
 
 
 
+/**
+ * xfce_panel_image_clear:
+ * @image : an #XfcePanelImage.
+ *
+ * Resets the image to be empty.
+ *
+ * Since: 4.8
+ **/
 void
 xfce_panel_image_clear (XfcePanelImage *image)
 {
