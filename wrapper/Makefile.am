@@ -45,7 +45,8 @@ wrapper_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
 
 if MAINTAINER_MODE
-wrapper-dbus-client-infos.h: $(top_builddir)/panel/panel-dbus-service-infos.xml Makefile
+
+wrapper-dbus-client-infos.h: $(top_builddir)/panel/panel-plugin-external-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
 
 wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile
@@ -60,6 +61,7 @@ BUILT_SOURCES = \
 
 DISTCLEANFILES = \
 	$(wrapper_built_sources)
+
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

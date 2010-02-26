@@ -63,47 +63,4 @@
       <arg name="restart" direction="in" type="b" />
     </method>
   </interface>
-
-  <!--
-    org.xfce.PanelPlugin
-
-    The panel plugin specific interface, used for communication
-    between the panel and the wrapper. This interface should not
-    be implemented by any other application.
-
-    This interface is also subject to change. So, unless you know
-    what you are doing, don't use it.
-  -->
-  <interface name="org.xfce.PanelPlugin">
-    <annotation name="org.freedesktop.DBus.GLib.CSymbol"
-                value="panel_dbus_service_plugin" />
-    <annotation name="org.freedesktop.DBus.GLib.ClientCSymbol"
-                value="wrapper_dbus_client" />
-
-    <!--
-      Emitted when a panel property changed, monitored by the wrapper. This
-      is emitted to all plugins but they will filter out their property
-      based on the @plugin-id. The @property is an enum from DBusPropertyChanged,
-      see common/panel-dbus.h.
-
-      Panel -> Wrapper -> XfcePanelPluginProvider
-    -->
-    <signal name="PropertyChanged">
-      <arg name="plugin_id" type="i" />
-      <arg name="property" type="i" />
-      <arg name="value" type="v" />
-    </signal>
-
-    <!--
-      This method is called from the wrapper and notifies the panel about an
-      action that should be performed. the @signal is an enum from
-      XfcePanelPluginProviderSignal, see libxfce4panel/xfce-panel-plugin-provider.h.
-
-      XfcePanelPluginProvider -> Wrapper -> Panel
-    -->
-    <method name="ProviderSignal">
-      <arg name="plugin_id" direction="in" type="i" />
-      <arg name="signal" direction="in" type="i" />
-    </method>
-  </interface>
 </node>

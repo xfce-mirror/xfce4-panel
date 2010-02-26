@@ -25,6 +25,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-builder.h>
@@ -290,6 +291,7 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* connect all properties */
+  PANEL_BUILDER_LINK_4UI
   panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);

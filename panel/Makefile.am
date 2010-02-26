@@ -17,6 +17,7 @@ xfce4_panel_built_sources = \
 	panel-dbus-client-infos.h \
 	panel-marshal.h \
 	panel-marshal.c \
+	panel-plugin-external-infos.h \
 	panel-preferences-dialog-ui.h
 
 xfce4_panel_SOURCES = \
@@ -83,6 +84,9 @@ panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 
 panel-dbus-client-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
+
+panel-plugin-external-infos.h: $(srcdir)/panel-plugin-external-infos.xml Makefile
+	$(AM_V_GEN) dbus-binding-tool --prefix=panel_plugin_external --mode=glib-server $< > $@
 
 panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.ui Makefile
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@

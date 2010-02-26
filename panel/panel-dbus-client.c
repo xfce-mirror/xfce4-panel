@@ -30,7 +30,6 @@
 #include <panel/panel-dbus-client.h>
 #include <panel/panel-dbus-service.h>
 
-#define DBUS_GLIB_CLIENT_WRAPPERS_org_xfce_PanelPlugin /* hack to exclude the wrapper client code */
 #include <panel/panel-dbus-client-infos.h>
 
 
@@ -48,9 +47,9 @@ panel_dbus_client_get_proxy (GError **error)
 
   /* get the proxy */
   dbus_proxy = dbus_g_proxy_new_for_name_owner (dbus_connection,
-                                                PANEL_DBUS_PANEL_INTERFACE,
+                                                PANEL_DBUS_NAME,
                                                 PANEL_DBUS_PATH,
-                                                PANEL_DBUS_PANEL_INTERFACE,
+                                                PANEL_DBUS_INTERFACE,
                                                 error);
 
   return dbus_proxy;

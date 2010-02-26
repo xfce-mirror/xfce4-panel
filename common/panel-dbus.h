@@ -19,28 +19,25 @@
 #ifndef __PANEL_DBUS_H__
 #define __PANEL_DBUS_H__
 
-typedef enum _DBusPropertyChanged DBusPropertyChanged;
-
 /* panel dbus names */
-#define PANEL_DBUS_PATH             "/org/xfce/Panel"
-#define PANEL_DBUS_PANEL_INTERFACE  "org.xfce.Panel"
-#define PANEL_DBUS_PLUGIN_INTERFACE "org.xfce.PanelPlugin"
+#define PANEL_DBUS_NAME              "org.xfce.Panel"
+#define PANEL_DBUS_PATH              "/org/xfce/Panel"
+#define PANEL_DBUS_INTERFACE         PANEL_DBUS_NAME
+#define PANEL_DBUS_WRAPPER_PATH      PANEL_DBUS_PATH "/Wrapper/%d"
+#define PANEL_DBUS_WRAPPER_INTERFACE PANEL_DBUS_INTERFACE ".Wrapper"
 
-enum _DBusPropertyChanged
-{
-  /* provider iface */
-  PROPERTY_CHANGED_PROVIDER_SIZE = 0,
-  PROPERTY_CHANGED_PROVIDER_ORIENTATION,
-  PROPERTY_CHANGED_PROVIDER_SCREEN_POSITION,
-  PROPERTY_CHANGED_PROVIDER_EMIT_SAVE,
-  PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_CONFIGURE,
-  PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_ABOUT,
-  PROPERTY_CHANGED_PROVIDER_REMOVE,
-
-  /* wrapper plug */
-  PROPERTY_CHANGED_WRAPPER_BACKGROUND_ALPHA,
-  PROPERTY_CHANGED_WRAPPER_SET_SENSITIVE,
-  PROPERTY_CHANGED_WRAPPER_QUIT
-};
+/* internal signals send over dbus */
+#define SIGNAL_PREFIX                   '_'
+#define SIGNAL_PREFIX_S                 "_"
+#define SIGNAL_SET_SIZE                 SIGNAL_PREFIX_S "a"
+#define SIGNAL_SET_ORIENTATION          SIGNAL_PREFIX_S "b"
+#define SIGNAL_SET_SCREEN_POSITION      SIGNAL_PREFIX_S "c"
+#define SIGNAL_SAVE                     SIGNAL_PREFIX_S "d"
+#define SIGNAL_SHOW_CONFIGURE           SIGNAL_PREFIX_S "e"
+#define SIGNAL_SHOW_ABOUT               SIGNAL_PREFIX_S "f"
+#define SIGNAL_REMOVE                   SIGNAL_PREFIX_S "g"
+#define SIGNAL_WRAPPER_QUIT             SIGNAL_PREFIX_S "h"
+#define SIGNAL_WRAPPER_SET_SENSITIVE    SIGNAL_PREFIX_S "i"
+#define SIGNAL_WRAPPER_BACKGROUND_ALPHA SIGNAL_PREFIX_S "j"
 
 #endif /* !__PANEL_DBUS_H__ */

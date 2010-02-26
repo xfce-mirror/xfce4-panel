@@ -58,10 +58,6 @@ static gboolean  panel_dbus_service_add_new_item               (PanelDBusService
 static gboolean  panel_dbus_service_terminate                  (PanelDBusService  *service,
                                                                 gboolean           restart,
                                                                 GError           **error);
-static gboolean  panel_dbus_service_plugin_provider_signal     (PanelDBusService  *service,
-                                                                gint               plugin_id,
-                                                                gint               provider_signal,
-                                                                GError            *error);
 
 
 
@@ -69,12 +65,6 @@ static gboolean  panel_dbus_service_plugin_provider_signal     (PanelDBusService
 #include <panel/panel-dbus-service-infos.h>
 
 
-
-enum
-{
-  PROPERTY_CHANGED,
-  LAST_SIGNAL
-};
 
 struct _PanelDBusServiceClass
 {
@@ -92,7 +82,6 @@ struct _PanelDBusService
 
 
 static gboolean dbus_exit_restart = FALSE;
-static guint    dbus_service_signals[LAST_SIGNAL];
 
 
 
@@ -108,23 +97,8 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = panel_dbus_service_finalize;
 
-  /**
-   * Emitted when an external plugin property should be updated. The
-   * wrapper connects to this dbus signal.
-   **/
-  dbus_service_signals[PROPERTY_CHANGED] =
-    g_signal_new (g_intern_static_string ("property-changed"),
-                  G_TYPE_FROM_CLASS (gobject_class),
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL,
-                  panel_marshal_VOID__INT_INT_BOXED,
-                  G_TYPE_NONE, 3,
-                  G_TYPE_INT,
-                  G_TYPE_INT,
-                  G_TYPE_VALUE);
-
-  /* install the d-bus info for our class */
-  dbus_g_object_type_install_info (G_TYPE_FROM_CLASS (klass), &dbus_glib_panel_dbus_service_object_info);
+  dbus_g_object_type_install_info (G_TYPE_FROM_CLASS (klass),
+      &dbus_glib_panel_dbus_service_object_info);
 }
 
 
@@ -135,24 +109,16 @@ panel_dbus_service_init (PanelDBusService *service)
   GError         *error = NULL;
   DBusConnection *connection;
 
-  /* TODO implement derror handing in the dbus_bus_request_name functions */
-
-  /* try to connect to the session bus */
   service->connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-
   if (G_LIKELY (service->connection != NULL))
     {
-      /* get the connection */
+      /* TODO handle error */
       connection = dbus_g_connection_get_connection (service->connection);
+      dbus_bus_request_name (connection, PANEL_DBUS_NAME, 0, NULL);
 
-      /* request the org.xfce.Panel name */
-      dbus_bus_request_name (connection, PANEL_DBUS_PANEL_INTERFACE, 0, NULL);
-
-      /* request the org.xfce.PanelPlugin name */
-      dbus_bus_request_name (connection, PANEL_DBUS_PLUGIN_INTERFACE, 0, NULL);
-
-      /* register the /org/xfce/Panel object */
-      dbus_g_connection_register_g_object (service->connection, PANEL_DBUS_PATH,
+      /* register this object */
+      dbus_g_connection_register_g_object (service->connection,
+                                           PANEL_DBUS_PATH,
                                            G_OBJECT (service));
     }
   else
@@ -175,16 +141,9 @@ panel_dbus_service_finalize (GObject *object)
 
   if (G_LIKELY (service->connection != NULL))
     {
-      /* get the connection */
-      connection = dbus_g_connection_get_connection (service->connection);
-
       /* release the org.xfce.Panel name */
-      dbus_bus_release_name (connection, PANEL_DBUS_PANEL_INTERFACE, NULL);
-
-      /* release the org.xfce.PanelPlugin name */
-      dbus_bus_release_name (connection, PANEL_DBUS_PLUGIN_INTERFACE, NULL);
-
-      /* flush the connection */
+      connection = dbus_g_connection_get_connection (service->connection);
+      dbus_bus_release_name (connection, PANEL_DBUS_NAME, NULL);
       dbus_g_connection_flush (service->connection);
 
       /* release the connection */
@@ -298,36 +257,6 @@ panel_dbus_service_terminate (PanelDBusService  *service,
 
 
 
-static gboolean
-panel_dbus_service_plugin_provider_signal (PanelDBusService *service,
-                                           gint              plugin_id,
-                                           gint              provider_signal,
-                                           GError           *error)
-{
-  PanelModuleFactory *factory;
-  GtkWidget          *provider;
-
-  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
-  panel_return_val_if_fail (plugin_id != -1, FALSE);
-
-  /* get the module factory */
-  factory = panel_module_factory_get ();
-
-  /* get the plugin from the factory */
-  provider = panel_module_factory_get_plugin (factory, plugin_id);
-
-  /* emit the signal for the local plugin provider */
-  if (G_LIKELY (provider))
-    xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (provider), provider_signal);
-
-  /* release the factory */
-  g_object_unref (G_OBJECT (factory));
-
-  return TRUE;
-}
-
-
-
 PanelDBusService *
 panel_dbus_service_get (void)
 {
@@ -344,29 +273,6 @@ panel_dbus_service_get (void)
     }
 
   return service;
-}
-
-
-
-void
-panel_dbus_service_plugin_property_changed (gint                 plugin_id,
-                                            DBusPropertyChanged  property,
-                                            const GValue        *value)
-{
-  PanelDBusService *service;
-
-  panel_return_if_fail (plugin_id != -1);
-  panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
-
-  /* get the dbus service */
-  service = panel_dbus_service_get ();
-
-  /* emit the signal */
-  g_signal_emit (G_OBJECT (service), dbus_service_signals[PROPERTY_CHANGED],
-                 0, plugin_id, property, value);
-
-  /* release */
-  g_object_unref (G_OBJECT (service));
 }
 
 

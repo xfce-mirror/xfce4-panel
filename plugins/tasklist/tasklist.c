@@ -182,6 +182,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GObject        *object;
 
   /* setup the dialog */
+  PANEL_BUILDER_LINK_4UI
   builder = panel_builder_new (panel_plugin, tasklist_dialog_ui,
                                tasklist_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))

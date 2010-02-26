@@ -34,16 +34,13 @@ typedef struct _PanelDBusService      PanelDBusService;
 
 
 
-GType               panel_dbus_service_get_type                (void) G_GNUC_CONST;
+GType               panel_dbus_service_get_type    (void) G_GNUC_CONST;
 
-PanelDBusService   *panel_dbus_service_get                     (void);
+PanelDBusService   *panel_dbus_service_get         (void);
 
-void                panel_dbus_service_plugin_property_changed (gint                 plugin_id,
-                                                                DBusPropertyChanged  property,
-                                                                const GValue        *value);
+void                panel_dbus_service_exit_panel  (gboolean restart);
 
-void                panel_dbus_service_exit_panel              (gboolean             restart);
-gboolean            panel_dbus_service_get_restart             (void);
+gboolean            panel_dbus_service_get_restart (void);
 
 G_END_DECLS
 

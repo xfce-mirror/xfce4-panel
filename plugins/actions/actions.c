@@ -349,6 +349,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
 
   /* setup the dialog */
+  PANEL_BUILDER_LINK_4UI
   builder = panel_builder_new (panel_plugin, actions_dialog_ui,
                                actions_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))

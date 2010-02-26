@@ -767,6 +767,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
   /* setup the dialog */
+  PANEL_BUILDER_LINK_4UI
   builder = panel_builder_new (XFCE_PANEL_PLUGIN (plugin), launcher_dialog_ui,
                                launcher_dialog_ui_length, &window);
   if (G_UNLIKELY (builder == NULL))

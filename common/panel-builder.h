@@ -22,6 +22,11 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 
+/* Hook to make sure GtkBuilder knows are the XfceTitledDialog object */
+#define PANEL_BUILDER_LINK_4UI \
+  if (xfce_titled_dialog_get_type () == 0) \
+    return;
+
 GtkBuilder *panel_builder_new (XfcePanelPlugin  *panel_plugin,
                                const gchar      *buffer,
                                gsize             length,

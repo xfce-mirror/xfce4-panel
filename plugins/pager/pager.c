@@ -426,6 +426,7 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
 
   /* setup the dialog */
+  PANEL_BUILDER_LINK_4UI
   builder = panel_builder_new (panel_plugin, pager_dialog_ui,
                                pager_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))

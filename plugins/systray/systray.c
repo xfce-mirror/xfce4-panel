@@ -447,11 +447,8 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GtkBuilder    *builder;
   GObject       *dialog, *object;
 
-  /* fix gtk builder problem: "Invalid object type XfceTitledDialog" */
-  if (xfce_titled_dialog_get_type () == 0)
-    return;
-
   /* setup the dialog */
+  PANEL_BUILDER_LINK_4UI
   builder = panel_builder_new (panel_plugin, systray_dialog_ui,
                                systray_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
