@@ -147,7 +147,10 @@ show_desktop_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   /* disconnect handle */
   if (plugin->showing_desktop_changed_id != 0)
-    g_signal_handler_disconnect (plugin->wnck_screen, plugin->showing_desktop_changed_id);
+    {
+      g_signal_handler_disconnect (plugin->wnck_screen, plugin->showing_desktop_changed_id);
+      plugin->showing_desktop_changed_id = 0;
+    }
 }
 
 
