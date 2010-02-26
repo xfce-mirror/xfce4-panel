@@ -180,9 +180,9 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
                                                         NULL,
                                                         EXO_PARAM_READWRITE));
 
-  menu_icon_size = gtk_icon_size_from_name ("panel-application-menu");
+  menu_icon_size = gtk_icon_size_from_name ("panel-applications-menu");
   if (menu_icon_size == GTK_ICON_SIZE_INVALID)
-    menu_icon_size = gtk_icon_size_register ("panel-application-menu",
+    menu_icon_size = gtk_icon_size_register ("panel-applications-menu",
                                              DEFAULT_ICON_SIZE,
                                              DEFAULT_ICON_SIZE);
 }
