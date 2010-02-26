@@ -42,7 +42,7 @@ panel_properties_get_channel (GObject *object_for_weak_ref)
     }
 
   channel = xfconf_channel_get (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
-  g_object_weak_ref (object_for_weak_ref, xfconf_shutdown, NULL);
+  g_object_weak_ref (object_for_weak_ref, (GWeakNotify) xfconf_shutdown, NULL);
 
   return channel;
 }
