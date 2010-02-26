@@ -275,15 +275,11 @@ enum /*< skip >*/
   gint \
   main (gint argc, gchar **argv) \
   { \
-    GtkWidget        *plug; \
-    GdkScreen        *screen; \
-    GtkWidget        *xpp; \
-    const gchar      *name; \
-    const gchar      *display_name; \
-    gint              unique_id; \
-    const gchar      *comment; \
-    GdkNativeWindow   socket_id; \
-    gchar           **arguments; \
+    GtkWidget       *plug; \
+    GdkScreen       *screen; \
+    GtkWidget       *xpp; \
+    gint             unique_id; \
+    GdkNativeWindow  socket_id; \
     \
     if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS)) \
       { \
@@ -297,13 +293,6 @@ enum /*< skip >*/
           return PLUGIN_EXIT_PREINIT_FAILED; \
       } \
     \
-    unique_id = strtol (argv[PLUGIN_ARGV_UNIQUE_ID], NULL, 0); \
-    socket_id = strtol (argv[PLUGIN_ARGV_SOCKET_ID], NULL, 0); \
-    name = argv[PLUGIN_ARGV_NAME]; \
-    display_name = argv[PLUGIN_ARGV_DISPLAY_NAME]; \
-    comment = argv[PLUGIN_ARGV_COMMENT]; \
-    arguments = argv + PLUGIN_ARGV_ARGUMENTS; \
-    \
     gtk_init (&argc, &argv); \
     \
     if (check_func != NULL) \
@@ -315,6 +304,7 @@ enum /*< skip >*/
     \
     _xpp_atom = gdk_atom_intern_static_string (PANEL_CLIENT_EVENT_ATOM); \
     \
+    socket_id = strtol (argv[PLUGIN_ARGV_SOCKET_ID], NULL, 0); \
     plug = gtk_plug_new (socket_id); \
     g_signal_connect (G_OBJECT (plug), "embedded", \
         G_CALLBACK (_xpp_plug_embedded), NULL); \
@@ -327,12 +317,13 @@ enum /*< skip >*/
     if (gtk_widget_is_composited (plug)) \
       _xpp_set_colormap (plug); \
     \
+    unique_id = strtol (argv[PLUGIN_ARGV_UNIQUE_ID], NULL, 0); \
     xpp = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
-                        "name", name, \
+                        "name", argv[PLUGIN_ARGV_NAME], \
                         "unique-id", unique_id, \
-                        "display-name", display_name, \
-                        "comment", comment,  \
-                        "arguments", arguments, NULL); \
+                        "display-name", argv[PLUGIN_ARGV_DISPLAY_NAME], \
+                        "comment", argv[PLUGIN_ARGV_COMMENT],  \
+                        "arguments", argv + PLUGIN_ARGV_ARGUMENTS, NULL); \
     gtk_container_add (GTK_CONTAINER (plug), xpp); \
     g_signal_connect_after (G_OBJECT (xpp), "realize", \
         G_CALLBACK (_xpp_realize), NULL); \
