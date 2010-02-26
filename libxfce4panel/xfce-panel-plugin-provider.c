@@ -23,9 +23,9 @@
 
 #include <gtk/gtk.h>
 
-#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
-
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 enum
@@ -201,3 +201,8 @@ xfce_panel_plugin_provider_remove (XfcePanelPluginProvider *provider)
 
   (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->remove) (provider);
 }
+
+
+
+#define __XFCE_PANEL_PLUGIN_PROVIDER_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

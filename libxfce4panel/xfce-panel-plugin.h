@@ -25,6 +25,7 @@
 #define __XFCE_PANEL_PLUGIN_H__
 
 #include <gtk/gtk.h>
+#include <libxfce4panel/xfce-panel-enums.h>
 
 G_BEGIN_DECLS
 

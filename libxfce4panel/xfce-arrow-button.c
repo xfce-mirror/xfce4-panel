@@ -30,8 +30,11 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
+
 #include <common/panel-private.h>
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/xfce-arrow-button.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 #define XFCE_ARROW_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
                                             XFCE_TYPE_ARROW_BUTTON, \
@@ -523,3 +526,8 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
   /* start with a blinking or make sure the button is normal */
   xfce_arrow_button_blinking_timeout (button);
 }
+
+
+
+#define __XFCE_ARROW_BUTTON_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

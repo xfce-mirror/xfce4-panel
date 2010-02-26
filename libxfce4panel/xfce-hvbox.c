@@ -27,7 +27,10 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/libxfce4panel.h>
+
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/xfce-hvbox.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 
@@ -271,3 +274,8 @@ xfce_hvbox_get_orientation (XfceHVBox *hvbox)
   return hvbox->orientation;
 #endif
 }
+
+
+
+#define __XFCE_HVBOX_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

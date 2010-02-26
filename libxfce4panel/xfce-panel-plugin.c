@@ -26,9 +26,11 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4panel/libxfce4panel-marshal.h>
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
+#include <libxfce4panel/libxfce4panel-marshal.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 #define XFCE_PANEL_PLUGIN_CONSTRUCTED(plugin) \
   PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (plugin)->priv->flags, \
@@ -1928,3 +1930,8 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
 
   return path;
 }
+
+
+
+#define __XFCE_PANEL_PLUGIN_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

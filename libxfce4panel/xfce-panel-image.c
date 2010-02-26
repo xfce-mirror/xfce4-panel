@@ -28,7 +28,9 @@
 #include <gtk/gtk.h>
 
 #include <common/panel-private.h>
-#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/xfce-panel-image.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 /* design limit for the panel, to reduce the uncached pixbuf size */
@@ -556,3 +558,8 @@ xfce_panel_image_clear (XfcePanelImage *image)
   priv->width = -1;
   priv->height = -1;
 }
+
+
+
+#define __XFCE_PANEL_IMAGE_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

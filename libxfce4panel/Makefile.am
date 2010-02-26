@@ -11,6 +11,8 @@ lib_LTLIBRARIES = \
 	libxfce4panel.la
 
 libxfce4panel_built_sources = \
+	libxfce4panel-alias.h \
+	libxfce4panel-aliasdef.c \
 	libxfce4panel-marshal.c \
 	libxfce4panel-marshal.h
 
@@ -63,9 +65,6 @@ libxfce4panel_la_LIBADD = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libxfce4panel-1.0.pc
 
-EXTRA_DIST = \
-	libxfce4panel-marshal.list
-
 #
 # Build sources
 #
@@ -77,11 +76,33 @@ libxfce4panel-marshal.c: libxfce4panel-marshal.list Makefile
 	$(AM_V_GEN) echo "#include <libxfce4panel/libxfce4panel-marshal.h>" > $@ \
 	&& glib-genmarshal --prefix=_libxfce4panel_marshal --body $< >> $@
 
+libxfce4panel-alias.h: make-libxfce4panel-alias.pl libxfce4panel.symbols
+	$(AM_V_GEN) $(PERL) $(srcdir)/make-libxfce4panel-alias.pl $(srcdir)/libxfce4panel.symbols > $@
+
+libxfce4panel-aliasdef.c: make-libxfce4panel-alias.pl libxfce4panel.symbols
+	$(AM_V_GEN) $(PERL) $(srcdir)/make-libxfce4panel-alias.pl -def < $(srcdir)/libxfce4panel.symbols > $@
+
 DISTCLEANFILES = \
 	$(libxfce4panel_built_sources)
 
 BUILT_SOURCES = \
 	$(libxfce4panel_built_sources)
+
+CLEANFILES = \
+	actual-abi \
+	expected-abi
+endif
+
+EXTRA_DIST = \
+	abicheck.sh \
+	libxfce4panel.symbols \
+	libxfce4panel-alias.h \
+	libxfce4panel-aliasdef.c \
+	libxfce4panel-marshal.list \
+	make-libxfce4panel-alias.pl
+
+if HAVE_GNUC_VISIBILITY
+TESTS =	abicheck.sh
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
