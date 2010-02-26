@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <interface>
   <!-- interface-requires gtk+ 2.12 -->
-  <!-- interface-requires xfce4 0.0 -->
+  <!-- interface-requires libxfce4ui 0.0 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="orientation-store">
     <columns>
@@ -721,9 +721,9 @@
   </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="label7"/>
-      <widget name="label9"/>
       <widget name="label10"/>
+      <widget name="label9"/>
+      <widget name="label7"/>
     </widgets>
   </object>
 </interface>
