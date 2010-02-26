@@ -38,15 +38,18 @@
 
 struct _XfceScaledImageClass
 {
-  GtkImageClass __parent__;
+  GtkWidgetClass __parent__;
 };
 
 struct _XfceScaledImage
 {
-  GtkImage __parent__;
+  GtkWidget __parent__;
 
   /* pixbuf set by the user */
   GdkPixbuf *pixbuf;
+
+  /* internal cached pixbuf (resized) */
+  GdkPixbuf *cache;
 
   /* icon name */
   gchar     *icon_name;
@@ -58,19 +61,21 @@ struct _XfceScaledImage
 
 
 
-static void       xfce_scaled_image_finalize      (GObject              *object);
-static void       xfce_scaled_image_size_request  (GtkWidget            *widget,
-                                                   GtkRequisition       *requisition);
-static void       xfce_scaled_image_size_allocate (GtkWidget            *widget,
-                                                   GtkAllocation        *allocation);
-static GdkPixbuf *xfce_scaled_image_scale_pixbuf  (GdkPixbuf            *source,
-                                                   gint                  dest_width,
-                                                   gint                  dest_height);
-static void       xfce_scaled_image_cleanup       (XfceScaledImage      *image);
+static void       xfce_scaled_image_finalize      (GObject         *object);
+static void       xfce_scaled_image_size_request  (GtkWidget       *widget,
+                                                   GtkRequisition  *requisition);
+static void       xfce_scaled_image_size_allocate (GtkWidget       *widget,
+                                                   GtkAllocation   *allocation);
+static gboolean   xfce_scaled_image_expose_event  (GtkWidget       *widget,
+                                                   GdkEventExpose  *event);
+static GdkPixbuf *xfce_scaled_image_scale_pixbuf  (GdkPixbuf       *source,
+                                                   gint             dest_width,
+                                                   gint             dest_height);
+static void       xfce_scaled_image_cleanup       (XfceScaledImage *image);
 
 
 
-G_DEFINE_TYPE (XfceScaledImage, xfce_scaled_image, GTK_TYPE_IMAGE);
+G_DEFINE_TYPE (XfceScaledImage, xfce_scaled_image, GTK_TYPE_WIDGET);
 
 
 
@@ -86,6 +91,7 @@ xfce_scaled_image_class_init (XfceScaledImageClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request = xfce_scaled_image_size_request;
   gtkwidget_class->size_allocate = xfce_scaled_image_size_allocate;
+  gtkwidget_class->expose_event = xfce_scaled_image_expose_event;
 }
 
 
@@ -93,7 +99,10 @@ xfce_scaled_image_class_init (XfceScaledImageClass *klass)
 static void
 xfce_scaled_image_init (XfceScaledImage *image)
 {
+  GTK_WIDGET_SET_FLAGS (image, GTK_NO_WINDOW);
+
   image->pixbuf = NULL;
+  image->cache = NULL;
   image->icon_name = NULL;
   image->width = -1;
   image->height = -1;
@@ -118,7 +127,18 @@ static void
 xfce_scaled_image_size_request (GtkWidget      *widget,
                                 GtkRequisition *requisition)
 {
-  GTK_WIDGET_CLASS (xfce_scaled_image_parent_class)->size_request (widget, requisition);
+  XfceScaledImage *image = XFCE_SCALED_IMAGE (widget);
+
+  if (image->pixbuf)
+    {
+      requisition->width = gdk_pixbuf_get_width (image->pixbuf);
+      requisition->height = gdk_pixbuf_get_height (image->pixbuf);
+    }
+  else
+    {
+      requisition->width = widget->allocation.width;
+      requisition->height = widget->allocation.height;
+    }
 }
 
 
@@ -128,7 +148,7 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
                                  GtkAllocation *allocation)
 {
   XfceScaledImage *image = XFCE_SCALED_IMAGE (widget);
-  GdkPixbuf       *pixbuf = NULL, *scaled;
+  GdkPixbuf       *pixbuf = NULL;
   GdkScreen       *screen;
 
   widget->allocation = *allocation;
@@ -143,6 +163,11 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
       /* store the new size */
       image->width = allocation->width;
       image->height = allocation->height;
+
+      /* free cache */
+      if (image->cache != NULL)
+        g_object_unref (G_OBJECT (image->cache));
+      image->cache = NULL;
 
       if (image->pixbuf != NULL)
         {
@@ -160,29 +185,50 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
                                              MIN (image->width, image->height),
                                              0, NULL);
         }
-      else
-        {
-          /* clear the image */
-          gtk_image_clear (GTK_IMAGE (image));
-        }
 
       if (G_LIKELY (pixbuf != NULL))
         {
           /* scale the icon to the correct size */
-          scaled = xfce_scaled_image_scale_pixbuf (pixbuf, image->width,
-                                                   image->height);
+          image->cache = xfce_scaled_image_scale_pixbuf (pixbuf, image->width,
+                                                         image->height);
 
           /* release the pixbuf */
           g_object_unref (G_OBJECT (pixbuf));
-
-          /* set the image pixbuf */
-          gtk_image_set_from_pixbuf (GTK_IMAGE (image), scaled);
-
-          /* release the scaled image */
-          if (G_LIKELY (scaled != NULL))
-            g_object_unref (G_OBJECT (scaled));
         }
     }
+}
+
+
+
+static gboolean
+xfce_scaled_image_expose_event (GtkWidget      *widget,
+                                GdkEventExpose *event)
+{
+  XfceScaledImage *image = XFCE_SCALED_IMAGE (widget);
+  gint             source_width, source_height;
+  gint             dest_x, dest_y;
+
+  if (G_LIKELY (image->cache != NULL))
+    {
+      /* get the size of the cache pixbuf */
+      source_width = gdk_pixbuf_get_width (image->cache);
+      source_height = gdk_pixbuf_get_height (image->cache);
+
+      /* position */
+      dest_x = widget->allocation.x + (image->width - source_width) / 2;
+      dest_y = widget->allocation.y + (image->height - source_height) / 2;
+
+      /* draw the pixbuf */
+      gdk_draw_pixbuf (widget->window,
+                       widget->style->black_gc,
+                       image->cache,
+                       0, 0,
+                       dest_x, dest_y,
+                       source_width, source_height,
+                       GDK_RGB_DITHER_NORMAL, 0, 0);
+    }
+
+  return FALSE;
 }
 
 
@@ -233,7 +279,9 @@ xfce_scaled_image_cleanup (XfceScaledImage *image)
   g_free (image->icon_name);
 
   /* clear the image */
-  gtk_image_clear (GTK_IMAGE (image));
+  if (G_LIKELY (image->cache != NULL))
+    g_object_unref (G_OBJECT (image->cache));
+  image->cache = NULL;
 
   /* reset varaibles */
   image->pixbuf = NULL;
