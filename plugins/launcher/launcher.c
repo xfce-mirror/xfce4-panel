@@ -49,16 +49,14 @@ static gboolean launcher_plugin_button_release_event (GtkWidget *button, GdkEven
 static gboolean launcher_plugin_button_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPlugin *plugin);
 static void launcher_plugin_button_drag_data_received (GtkWidget *widget,GdkDragContext *context, gint x,gint y,GtkSelectionData *selection_data, guint info, guint drag_time, LauncherPlugin *plugin);
 
-static void launcher_plugin_entries_load (LauncherPlugin *plugin);
-static gboolean launcher_plugin_entry_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherEntry *entry);
-static LauncherEntry *launcher_plugin_entry_new_from_filename (const gchar *filename);
-static void launcher_plugin_entry_free (LauncherEntry *entry);
+static void launcher_plugin_items_load (LauncherPlugin *plugin);
+static gboolean launcher_plugin_item_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, XfceMenuItem *item);
 
-static gboolean launcher_plugin_entry_exec_on_screen (LauncherEntry *entry, guint32 event_time, GdkScreen *screen, GSList *uri_list);
-static void launcher_plugin_entry_exec (LauncherEntry *entry, guint32 event_time, GdkScreen *screen, GSList *uri_list);
-static void launcher_plugin_entry_exec_from_clipboard (LauncherEntry *entry, guint32 event_time, GdkScreen *screen);
+static gboolean launcher_plugin_item_exec_on_screen (XfceMenuItem *item, guint32 event_time, GdkScreen *screen, GSList *uri_list);
+static void launcher_plugin_item_exec (XfceMenuItem *item, guint32 event_time, GdkScreen *screen, GSList *uri_list);
+static void launcher_plugin_item_exec_from_clipboard (XfceMenuItem *item, guint32 event_time, GdkScreen *screen);
 static void launcher_plugin_exec_append_quoted (GString *string, const gchar *unquoted);
-static gboolean launcher_plugin_exec_parse (LauncherEntry *entry, GSList *uri_list, gboolean terminal, gint *argc, gchar ***argv, GError **error);
+static gboolean launcher_plugin_exec_parse (XfceMenuItem *item, GSList *uri_list, gint *argc, gchar ***argv, GError **error);
 
 
 
@@ -78,22 +76,13 @@ struct _LauncherPlugin
   GtkWidget *arrow;
   GtkWidget *image;
 
-  GSList *entries;
+  GSList    *items;
 
-  guint disable_tooltips : 1;
+  guint      disable_tooltips : 1;
 };
 
-struct _LauncherEntry
-{
-  gchar *filename;
-  gchar *name;
-  gchar *comment;
-  gchar *exec;
-  gchar *path;
-  gchar *icon;
-  guint terminal : 1;
-  guint startup_notify : 1;
-};
+/* shared root menu for all the launchers */
+static XfceMenu *root_menu = NULL;
 
 
 
@@ -126,11 +115,37 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
+  GError *error;
+
   /* initialize xfconf */
   xfconf_init (NULL);
 
   /* show the configure menu item */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+
+  /* initialize the menu library */
+  xfce_menu_init (NULL);
+
+  if (root_menu == NULL)
+    {
+      /* get the launcher menu */
+      root_menu = xfce_menu_new (SYSCONFDIR "/xdg/menus/launcher.menu", &error);
+      if (G_UNLIKELY (root_menu != NULL))
+        {
+          g_object_add_weak_pointer (G_OBJECT (root_menu), (gpointer) &root_menu);
+          g_message ("Loaded root menu");
+        }
+      else
+        {
+          g_critical ("Failed to load the root menu....");
+          g_error_free (error);
+        }
+    }
+  else
+    {
+      /* take a reference */
+      g_object_ref (G_OBJECT (root_menu));
+    }
 }
 
 
@@ -149,16 +164,15 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
     {
       plugin->disable_tooltips = g_value_get_boolean (value);
     }
-  else if (exo_str_is_equal (property_name, "/entries"))
+  else if (exo_str_is_equal (property_name, "/items"))
     {
-      /* free entries */
-      g_slist_foreach (plugin->entries, (GFunc)
-                       launcher_plugin_entry_free, NULL);
-      g_slist_free (plugin->entries);
-      plugin->entries = NULL;
+      /* free items */
+      g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
+      g_slist_free (plugin->items);
+      plugin->items = NULL;
 
-      /* load the new entries */
-      launcher_plugin_entries_load (plugin);
+      /* load the new items */
+      launcher_plugin_items_load (plugin);
 
       /* update the icon */
       launcher_plugin_button_set_icon (plugin);
@@ -225,8 +239,8 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
                                                       "/disable-tooltips",
                                                       FALSE);
 
-  /* load the entries */
-  launcher_plugin_entries_load (plugin);
+  /* load the items */
+  launcher_plugin_items_load (plugin);
 
   /* update the icon */
   launcher_plugin_button_set_icon (plugin);
@@ -245,10 +259,15 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* shutdown xfconf */
   xfconf_shutdown ();
 
-  /* free entries */
-  g_slist_foreach (plugin->entries, (GFunc)
-                   launcher_plugin_entry_free, NULL);
-  g_slist_free (plugin->entries);
+  /* free items */
+  g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
+  g_slist_free (plugin->items);
+
+  /* release the root menu */
+  g_object_unref (G_OBJECT (root_menu));
+
+  /* shutdown menu library */
+  xfce_menu_shutdown ();
 }
 
 
@@ -277,30 +296,30 @@ static void
 launcher_plugin_save (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin  *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
-  gchar         **filenames;
-  guint           i, length;
+  gchar          **desktop_ids;
+  guint            i, length;
   GSList          *li;
-  LauncherEntry  *entry;
+  XfceMenuItem    *item;
 
   /* save the global settings */
   xfconf_channel_set_bool (plugin->channel, "/disable-tooltips",
                            plugin->disable_tooltips);
 
-  length = g_slist_length (plugin->entries);
+  length = g_slist_length (plugin->items);
   if (G_LIKELY (length > 0))
     {
-      /* create the array with filenames */
-      filenames = g_new0 (gchar *, length + 1);
-      for (li = plugin->entries, i = 0; li != NULL; li = li->next)
-        if (G_LIKELY ((entry = li->data) != NULL))
-          filenames[i++] = entry->filename;
+      /* create the array with the desktop ids */
+      desktop_ids = g_new0 (gchar *, length + 1);
+      for (li = plugin->items, i = 0; li != NULL; li = li->next)
+        if (G_LIKELY ((item = li->data) != NULL))
+          desktop_ids[i++] = (gchar *) xfce_menu_item_get_desktop_id (item);
 
       /* store the list of filenames */
-      xfconf_channel_set_string_list (plugin->channel, "/entries",
-                                      (const gchar **) filenames);
+      xfconf_channel_set_string_list (plugin->channel, "/items",
+                                      (const gchar **) desktop_ids);
 
       /* cleanup */
-      g_free (filenames);
+      g_free (desktop_ids);
     }
 }
 
@@ -327,32 +346,33 @@ launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 static void
 launcher_plugin_button_set_icon (LauncherPlugin *plugin)
 {
-  LauncherEntry *entry;
+  XfceMenuItem *item;
+  const gchar  *icon_name;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_SCALED_IMAGE (plugin->image));
 
-  if (G_LIKELY (plugin->entries != NULL))
+  if (G_LIKELY (plugin->items != NULL))
     {
-      entry = plugin->entries->data;
+      item = XFCE_MENU_ITEM (plugin->items->data);
 
-      if (IS_STRING (entry->icon))
+      icon_name = xfce_menu_item_get_icon_name (item);
+      if (IS_STRING (icon_name))
         {
-          if (g_path_is_absolute (entry->icon))
+          if (g_path_is_absolute (icon_name))
             xfce_scaled_image_set_from_file (XFCE_SCALED_IMAGE (plugin->image),
-                                             entry->icon);
+                                             icon_name);
           else
             xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->image),
-                                                  entry->icon);
+                                                  icon_name);
           /* TODO some more name checking */
+          return;
         }
     }
-  else
-    {
-      /* set missing image icon */
-      xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->image),
-                                            GTK_STOCK_MISSING_IMAGE);
-    }
+
+  /* set missing image icon */
+  xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (plugin->image),
+                                        GTK_STOCK_MISSING_IMAGE);
 }
 
 
@@ -390,21 +410,21 @@ launcher_plugin_button_release_event (GtkWidget      *button,
                                       GdkEventButton *event,
                                       LauncherPlugin *plugin)
 {
-  LauncherEntry *entry;
-  GdkScreen     *screen;
+  XfceMenuItem *item;
+  GdkScreen    *screen;
 
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
-  if (G_UNLIKELY (plugin->entries == NULL))
+  if (G_UNLIKELY (plugin->items == NULL))
     return FALSE;
 
-  entry = plugin->entries->data;
+  item = XFCE_MENU_ITEM (plugin->items->data);
   screen = gtk_widget_get_screen (button);
 
   if (event->button == 1)
-    launcher_plugin_entry_exec (entry, event->time, screen, NULL);
+    launcher_plugin_item_exec (item, event->time, screen, NULL);
   else if (event->button == 2)
-    launcher_plugin_entry_exec_from_clipboard (entry, event->time, screen);
+    launcher_plugin_item_exec_from_clipboard (item, event->time, screen);
   else
     return TRUE;
 
@@ -424,12 +444,13 @@ launcher_plugin_button_query_tooltip (GtkWidget      *widget,
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
   /* check if we show tooltips */
-  if (plugin->entries == NULL || plugin->entries->data == NULL
-      || plugin->disable_tooltips)
+  if (plugin->disable_tooltips ||
+      plugin->items == NULL || plugin->items->data == NULL)
     return FALSE;
 
-  return launcher_plugin_entry_query_tooltip (widget, x, y, keyboard_mode,
-                                              tooltip, plugin->entries->data);
+  return launcher_plugin_item_query_tooltip (widget, x, y, keyboard_mode,
+                                             tooltip,
+                                             XFCE_MENU_ITEM (plugin->items->data));
 }
 
 
@@ -452,61 +473,71 @@ launcher_plugin_button_drag_data_received (GtkWidget        *widget,
 
 
 static void
-launcher_plugin_entries_load (LauncherPlugin *plugin)
+launcher_plugin_items_load (LauncherPlugin *plugin)
 {
-  gchar        **filenames;
-  guint          i;
-  LauncherEntry *entry;
+  gchar            **desktop_ids;
+  guint              i;
+  XfceMenuItem      *item;
+  XfceMenuItemPool  *pool;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (plugin->items == NULL);
 
   /* get the list of launcher filenames */
-  filenames = xfconf_channel_get_string_list (plugin->channel, "/entries");
-  if (G_LIKELY (filenames != NULL))
+  desktop_ids = xfconf_channel_get_string_list (plugin->channel, "/items");
+  if (G_LIKELY (desktop_ids != NULL))
     {
-      /* try to load all the entries */
-      for (i = 0; filenames[i] != NULL; i++)
+      /* get the menu item pool */
+      pool = launcher_plugin_get_item_pool (plugin);
+
+      /* try to load all the items */
+      for (i = 0; desktop_ids[i] != NULL; i++)
         {
-          entry = launcher_plugin_entry_new_from_filename (filenames[i]);
-          if (G_LIKELY (entry != NULL))
-            plugin->entries = g_slist_append (plugin->entries, entry);
+          item = xfce_menu_item_pool_lookup (pool, desktop_ids[i]);
+          if (G_LIKELY (item != NULL))
+            plugin->items = g_slist_append (plugin->items,
+                                            g_object_ref (G_OBJECT (item)));
         }
 
       /* cleanup */
-      g_strfreev (filenames);
+      g_strfreev (desktop_ids);
     }
 }
 
 
 
 static gboolean
-launcher_plugin_entry_query_tooltip (GtkWidget     *widget,
-                                     gint           x,
-                                     gint           y,
-                                     gboolean       keyboard_mode,
-                                     GtkTooltip    *tooltip,
-                                     LauncherEntry *entry)
+launcher_plugin_item_query_tooltip (GtkWidget    *widget,
+                                    gint          x,
+                                    gint          y,
+                                    gboolean      keyboard_mode,
+                                    GtkTooltip   *tooltip,
+                                    XfceMenuItem *item)
 {
-  gchar *markup;
+  gchar       *markup;
+  const gchar *name, *comment, *icon_name;
 
-  panel_return_val_if_fail (entry != NULL, FALSE);
+  panel_return_val_if_fail (XFCE_IS_MENU_ITEM (item), FALSE);
 
-  /* require atleast an entry name */
-  if (!IS_STRING (entry->name))
+  /* require atleast an item name */
+  name = xfce_menu_item_get_name (item);
+  if (!IS_STRING (name))
     return FALSE;
 
-  if (IS_STRING (entry->comment))
+  comment = xfce_menu_item_get_comment (item);
+  if (IS_STRING (comment))
     {
-      markup = g_strdup_printf ("<b>%s</b>\n%s", entry->name, entry->comment);
+      markup = g_strdup_printf ("<b>%s</b>\n%s", name, comment);
       gtk_tooltip_set_markup (tooltip, markup);
       g_free (markup);
     }
   else
     {
-      gtk_tooltip_set_text (tooltip, entry->name);
+      gtk_tooltip_set_text (tooltip, name);
     }
 
-  if (G_LIKELY (entry->icon))
+  icon_name = xfce_menu_item_get_icon_name (item);
+  if (G_LIKELY (icon_name))
     {
       /* TODO pixbuf with cache */
     }
@@ -516,79 +547,29 @@ launcher_plugin_entry_query_tooltip (GtkWidget     *widget,
 
 
 
-static LauncherEntry *
-launcher_plugin_entry_new_from_filename (const gchar *filename)
-{
-  LauncherEntry *entry = NULL;
-  XfceRc        *rc;
-
-  panel_return_val_if_fail (filename != NULL, NULL);
-  panel_return_val_if_fail (g_path_is_absolute (filename), NULL);
-
-  rc = xfce_rc_simple_open (filename, TRUE);
-  if (G_LIKELY (rc != NULL))
-    {
-      /* allocate a new entry */
-      entry = g_slice_new0 (LauncherEntry);
-
-      /* set group */
-      xfce_rc_set_group (rc, "Desktop Entry");
-
-      /* set entry values */
-      entry->filename = g_strdup (filename);
-      entry->name = g_strdup (xfce_rc_read_entry (rc, "Name", NULL));
-      entry->comment = g_strdup (xfce_rc_read_entry (rc, "Comment", NULL));
-      entry->exec = g_strdup (xfce_rc_read_entry_untranslated (rc, "Exec", NULL));
-      entry->icon = g_strdup (xfce_rc_read_entry_untranslated (rc, "Icon", NULL));
-      entry->path = g_strdup (xfce_rc_read_entry_untranslated (rc, "Path", NULL));
-      entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
-      entry->startup_notify = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
-
-      /* close */
-      xfce_rc_close (rc);
-    }
-
-  return entry;
-}
-
-
-
-static void
-launcher_plugin_entry_free (LauncherEntry *entry)
-{
-  panel_return_if_fail (entry != NULL);
-
-  g_free (entry->filename);
-  g_free (entry->name);
-  g_free (entry->comment);
-  g_free (entry->exec);
-  g_free (entry->icon);
-  g_free (entry->path);
-
-  g_slice_free (LauncherEntry, entry);
-}
-
-
-
 static gboolean
-launcher_plugin_entry_exec_on_screen (LauncherEntry *entry,
-                                      guint32        event_time,
-                                      GdkScreen     *screen,
-                                      GSList        *uri_list)
+launcher_plugin_item_exec_on_screen (XfceMenuItem *item,
+                                     guint32       event_time,
+                                     GdkScreen    *screen,
+                                     GSList       *uri_list)
 {
   GError    *error = NULL;
   gchar    **argv;
   gboolean   succeed = FALSE;
 
+  panel_return_val_if_fail (XFCE_IS_MENU_ITEM (item), FALSE);
+
   /* parse the execute command */
-  if (launcher_plugin_exec_parse (entry, uri_list, entry->terminal,
-                                  NULL, &argv, &error))
+  if (launcher_plugin_exec_parse (item, uri_list, NULL, &argv, &error))
     {
       /* launch the command on the screen */
-      succeed = xfce_execute_argv_on_screen (screen, entry->path, argv,
-                                             NULL, G_SPAWN_SEARCH_PATH,
-                                             entry->startup_notify,
-                                             event_time, entry->icon, &error);
+      succeed = xfce_execute_argv_on_screen (screen,
+                                             xfce_menu_item_get_path (item),
+                                             argv, NULL, G_SPAWN_SEARCH_PATH,
+                                             xfce_menu_item_supports_startup_notification (item),
+                                             event_time,
+                                             xfce_menu_item_get_icon_name (item),
+                                             &error);
 
       /* cleanup */
       g_strfreev (argv);
@@ -607,23 +588,25 @@ launcher_plugin_entry_exec_on_screen (LauncherEntry *entry,
 
 
 static void
-launcher_plugin_entry_exec (LauncherEntry *entry,
-                            guint32        event_time,
-                            GdkScreen     *screen,
-                            GSList        *uri_list)
+launcher_plugin_item_exec (XfceMenuItem *item,
+                           guint32       event_time,
+                           GdkScreen    *screen,
+                           GSList       *uri_list)
 {
-  GSList   *li, fake;
-  gboolean  proceed = TRUE;
+  GSList      *li, fake;
+  gboolean     proceed = TRUE;
+  const gchar *command;
 
-  panel_return_if_fail (entry != NULL);
+  panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
 
   /* leave when there is nothing to execute */
-  if (!IS_STRING (entry->exec))
+  command = xfce_menu_item_get_command (item);
+  if (!IS_STRING (command))
     return;
 
   if (G_UNLIKELY (uri_list != NULL
-      && strstr (entry->exec, "%F") == NULL
-      && strstr (entry->exec, "%U") == NULL))
+      && strstr (command, "%F") == NULL
+      && strstr (command, "%U") == NULL))
     {
       fake.next = NULL;
 
@@ -631,26 +614,26 @@ launcher_plugin_entry_exec (LauncherEntry *entry,
       for (li = uri_list; li != NULL && proceed; li = li->next)
         {
           fake.data = li->data;
-          proceed = launcher_plugin_entry_exec_on_screen (entry,
-                                                          event_time,
-                                                          screen, &fake);
+          proceed = launcher_plugin_item_exec_on_screen (item,
+                                                         event_time,
+                                                         screen, &fake);
         }
     }
   else
     {
-      launcher_plugin_entry_exec_on_screen (entry, event_time, screen,
-                                            uri_list);
+      launcher_plugin_item_exec_on_screen (item, event_time, screen,
+                                           uri_list);
     }
 }
 
 
 
 static void
-launcher_plugin_entry_exec_from_clipboard (LauncherEntry *entry,
-                                           guint32        event_time,
-                                           GdkScreen     *screen)
+launcher_plugin_item_exec_from_clipboard (XfceMenuItem *item,
+                                          guint32        event_time,
+                                          GdkScreen     *screen)
 {
-  panel_return_if_fail (entry != NULL);
+  panel_return_if_fail (XFCE_IS_MENU_ITEM (item));
 
   /* TODO */
 }
@@ -671,30 +654,33 @@ launcher_plugin_exec_append_quoted (GString     *string,
 
 
 static gboolean
-launcher_plugin_exec_parse (LauncherEntry   *entry,
-                            GSList          *uri_list,
-                            gboolean         terminal,
-                            gint            *argc,
-                            gchar         ***argv,
-                            GError         **error)
+launcher_plugin_exec_parse (XfceMenuItem   *item,
+                            GSList         *uri_list,
+                            gint           *argc,
+                            gchar        ***argv,
+                            GError        **error)
 {
   GString     *string;
   const gchar *p;
   gboolean     result;
   GSList      *li;
   gchar       *filename;
+  const gchar *command, *tmp;
 
-  panel_return_val_if_fail (entry != NULL, FALSE);
-  panel_return_val_if_fail (IS_STRING (entry->exec), FALSE);
+  panel_return_val_if_fail (XFCE_IS_MENU_ITEM (item), FALSE);
+
+  /* get the command */
+  command = xfce_menu_item_get_command (item);
+  panel_return_val_if_fail (IS_STRING (command), FALSE);
 
   /* allocate an empty string */
   string = g_string_sized_new (100);
 
   /* prepend terminal command if required */
-  if (G_UNLIKELY (terminal))
+  if (xfce_menu_item_requires_terminal (item))
     g_string_append (string, "exo-open --launch TerminalEmulator ");
 
-  for (p = entry->exec; *p != '\0'; ++p)
+  for (p = command; *p != '\0'; ++p)
     {
       if (p[0] == '%' && p[1] != '\0')
         {
@@ -732,21 +718,24 @@ launcher_plugin_exec_parse (LauncherEntry   *entry,
                 break;
 
               case 'i':
-                if (IS_STRING (entry->icon))
+                tmp = xfce_menu_item_get_icon_name (item);
+                if (IS_STRING (tmp))
                   {
                     g_string_append (string, "--icon ");
-                    launcher_plugin_exec_append_quoted (string, entry->icon);
+                    launcher_plugin_exec_append_quoted (string, tmp);
                   }
                 break;
 
               case 'c':
-                if (IS_STRING (entry->name))
-                  launcher_plugin_exec_append_quoted (string, entry->name);
+                tmp = xfce_menu_item_get_name (item);
+                if (IS_STRING (tmp))
+                  launcher_plugin_exec_append_quoted (string, tmp);
                 break;
 
               case 'k':
-                if (IS_STRING (entry->filename))
-                  launcher_plugin_exec_append_quoted (string, entry->filename);
+                tmp = xfce_menu_item_get_filename (item);
+                if (IS_STRING (tmp))
+                  launcher_plugin_exec_append_quoted (string, tmp);
                 break;
 
               case '%':
@@ -773,4 +762,22 @@ launcher_plugin_get_channel (LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
   return plugin->channel;
+}
+
+
+XfceMenuItemPool *
+launcher_plugin_get_item_pool (LauncherPlugin *plugin)
+{
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
+  panel_return_val_if_fail (XFCE_IS_MENU (root_menu), NULL);
+  return xfce_menu_get_item_pool (root_menu);
+}
+
+
+
+GSList *
+launcher_plugin_get_items (LauncherPlugin *plugin)
+{
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
+  return plugin->items;
 }

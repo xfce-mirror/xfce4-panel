@@ -3,6 +3,7 @@
 INCLUDES = \
 	-I$(top_srcdir) \
 	-DBINDIR=\"$(bindir)\" \
+	-DSYSCONFDIR=\"$(sysconfdir)\" \
 	-DG_LOG_DOMAIN=\"liblauncher\" \
 	-DSN_API_NOT_YET_FROZEN \
 	-DEXO_API_SUBJECT_TO_CHANGE \
@@ -76,8 +77,15 @@ launcher.desktop.in: $(desktop_in_in_files)
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
+#
+# .menu file
+#
+menudir = $(sysconfdir)/xdg/menus
+menu_DATA = launcher.menu
+
 EXTRA_DIST = \
 	launcher-dialog.glade \
+	$(menu_DATA) \
 	$(desktop_in_in_files)
 
 DISTCLEANFILES = \
