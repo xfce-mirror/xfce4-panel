@@ -163,7 +163,6 @@ panel_dbus_service_finalize (GObject *object)
 static gboolean
 panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
                                                guint              active,
-                                               gint               socked_id,
                                                GError           **error)
 {
   PanelApplication *application;

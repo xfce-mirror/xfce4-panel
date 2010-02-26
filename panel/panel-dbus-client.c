@@ -78,7 +78,7 @@ panel_dbus_client_display_preferences_dialog (guint    active,
     return FALSE;
 
   /* call */
-  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy, active, 0, error);
+  result = _panel_dbus_client_display_preferences_dialog (dbus_proxy, active, error);
 
   /* cleanup */
   g_object_unref (G_OBJECT (dbus_proxy));
