@@ -218,6 +218,7 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
   gchar      **tokens;
   GType        type;
   GValue       value = { 0, };
+  guint        n_tokens;
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -226,10 +227,25 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
     return FALSE;
 
   tokens = g_strsplit (plugin_event, ":", -1);
-  if (G_LIKELY (g_strv_length (tokens) == N_TOKENS
-                && IS_STRING (tokens[VALUE])
-                && IS_STRING (tokens[NAME])
-                && *tokens[NAME] != SIGNAL_PREFIX))
+  n_tokens = g_strv_length (tokens);
+
+  if (!(n_tokens == 2 || n_tokens == N_TOKENS)
+      || !IS_STRING (tokens[PLUGIN_NAME])
+      || !IS_STRING (tokens[NAME])
+      || *tokens[NAME] == SIGNAL_PREFIX)
+    {
+      g_set_error_literal (error, G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
+                           _("Invalid plugin event syntax specified. "
+                             "Use PLUGIN-NAME:NAME[:TYPE:VALUE]."));
+      goto out;
+    }
+  else if (n_tokens == 2)
+    {
+      /* set noop value, recognized by the dbus service as %NULL value */
+      g_value_init (&value, G_TYPE_UCHAR);
+      g_value_set_uchar (&value, '\0');
+    }
+  else if (n_tokens == N_TOKENS)
     {
       type = panel_dbus_client_gtype_from_string (tokens[TYPE]);
       if (G_LIKELY (type != G_TYPE_NONE))
@@ -248,14 +264,6 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
             g_value_set_uint (&value, strtol (tokens[VALUE], NULL, 0));
           else
             panel_assert_not_reached ();
-
-          result = _panel_dbus_client_plugin_event (dbus_proxy,
-                                                    tokens[PLUGIN_NAME],
-                                                    tokens[NAME],
-                                                    &value,
-                                                    error);
-
-          g_value_unset (&value);
         }
       else
         {
@@ -263,15 +271,25 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
                        _("Invalid hint type \"%s\". Valid types "
                          "are bool, double, int, string and uint."),
                        tokens[TYPE]);
+          goto out;
         }
     }
   else
     {
-      g_set_error_literal (error, G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-                           _("Invalid plugin event syntax specified. "
-                             "Use PLUGIN-NAME:NAME:TYPE:VALUE."));
+      panel_assert_not_reached ();
+      goto out;
     }
 
+  /* send value over dbus */
+  panel_return_val_if_fail (G_IS_VALUE (&value), FALSE);
+  result = _panel_dbus_client_plugin_event (dbus_proxy,
+                                            tokens[PLUGIN_NAME],
+                                            tokens[NAME],
+                                            &value,
+                                            error);
+  g_value_unset (&value);
+
+out:
   g_strfreev (tokens);
   g_object_unref (G_OBJECT (dbus_proxy));
 

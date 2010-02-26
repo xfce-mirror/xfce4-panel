@@ -1250,7 +1250,7 @@ xfce_panel_plugin_remote_event (XfcePanelPluginProvider *provider,
 
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (provider), TRUE);
   panel_return_val_if_fail (name != NULL, TRUE);
-  panel_return_val_if_fail (G_IS_VALUE (value), TRUE);
+  panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), TRUE);
 
   g_signal_emit (G_OBJECT (provider), plugin_signals[REMOTE_EVENT], 0,
                  name, value, &stop_emission);

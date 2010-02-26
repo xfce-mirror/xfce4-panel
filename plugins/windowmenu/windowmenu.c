@@ -526,6 +526,8 @@ window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
   GdkEventButton    event;
 
+  panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
+
   if (strcmp (name, "popup") == 0
       && GTK_WIDGET_VISIBLE (panel_plugin)
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))

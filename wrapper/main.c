@@ -60,12 +60,13 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
                     const GPtrArray         *array,
                     XfcePanelPluginProvider *provider)
 {
-  WrapperPlug *plug;
-  guint        i;
-  GValue      *value;
-  gchar       *property;
-  guint        reply_id;
-  GValue       msg = { 0, };
+  WrapperPlug  *plug;
+  guint         i;
+  GValue       *value;
+  gchar        *property;
+  guint         reply_id;
+  GValue        msg = { 0, };
+  const GValue *real_value;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
@@ -112,7 +113,13 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
         }
       else
         {
-          xfce_panel_plugin_provider_remote_event (provider, property, value);
+          if (G_VALUE_HOLDS_UCHAR (value)
+              && g_value_get_uchar (value) == '\0')
+            real_value = NULL;
+          else
+            real_value = value;
+
+          xfce_panel_plugin_provider_remote_event (provider, property, real_value);
         }
 
       g_free (property);

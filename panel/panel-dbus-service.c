@@ -255,12 +255,20 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
 {
   GSList             *plugins, *li;
   PanelModuleFactory *factory;
+  const GValue       *real_value = value;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
   panel_return_val_if_fail (plugin_name != NULL, FALSE);
   panel_return_val_if_fail (name != NULL, FALSE);
   panel_return_val_if_fail (G_IS_VALUE (value), FALSE);
+
+  /* if no type and value is send with the signal we send a char type
+   * with nul value */
+  g_message ("%s", G_VALUE_TYPE_NAME (value));
+  if (G_VALUE_HOLDS_UCHAR (value)
+      && g_value_get_uchar (value) == '\0')
+    real_value = NULL;
 
   factory = panel_module_factory_get ();
 
@@ -269,7 +277,7 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
   for (li = plugins; li != NULL; li = li->next)
     {
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (li->data), FALSE);
-      if (xfce_panel_plugin_provider_remote_event (li->data, name, value))
+      if (xfce_panel_plugin_provider_remote_event (li->data, name, real_value))
         break;
     }
 

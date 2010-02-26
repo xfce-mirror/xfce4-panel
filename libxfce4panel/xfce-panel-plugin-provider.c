@@ -211,6 +211,8 @@ xfce_panel_plugin_provider_remote_event (XfcePanelPluginProvider *provider,
                                          const GValue            *value)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), TRUE);
+  panel_return_val_if_fail (name != NULL, TRUE);
+  panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), TRUE);
 
   return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_IFACE (provider)->remote_event) (provider, name, value);
 }

@@ -818,13 +818,24 @@ panel_plugin_external_remote_event (XfcePanelPluginProvider *provider,
                                     const gchar             *name,
                                     const GValue            *value)
 {
+  GValue        noop_value = { 0, };
+  const GValue *real_value = value;
+
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), TRUE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), TRUE);
+  panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
 
   /* TODO handle the return value */
 
+  if (value == NULL)
+    {
+      g_value_init (&noop_value, G_TYPE_UCHAR);
+      g_value_set_uchar (&noop_value, '\0');
+      real_value = &noop_value;
+    }
+
   panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
-                                   FALSE, name, value);
+                                   FALSE, name, real_value);
 
   return TRUE;
 }

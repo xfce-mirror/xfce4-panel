@@ -1029,6 +1029,8 @@ launcher_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
 
+  panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
+
   if (exo_str_is_equal (name, "popup")
       && LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->items)
       && (plugin->menu == NULL || !GTK_WIDGET_VISIBLE (plugin->menu)))
