@@ -143,7 +143,7 @@ systray_plugin_class_init (SystrayPluginClass *klass)
                                    PROP_SHOW_FRAME,
                                    g_param_spec_boolean ("show-frame",
                                                          NULL, NULL,
-                                                         FALSE,
+                                                         TRUE,
                                                          EXO_PARAM_READWRITE));
 }
 
@@ -153,12 +153,12 @@ static void
 systray_plugin_init (SystrayPlugin *plugin)
 {
   plugin->manager = NULL;
-  plugin->show_frame = FALSE;
+  plugin->show_frame = TRUE;
 
   /* plugin widgets */
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
-  gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_NONE);
+  gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
   gtk_widget_show (plugin->frame);
 
   plugin->box = systray_box_new ();
@@ -205,6 +205,7 @@ systray_plugin_set_property (GObject      *object,
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
   gint           rows;
+  gboolean       show_frame;
 
   switch (prop_id)
     {
@@ -214,11 +215,13 @@ systray_plugin_set_property (GObject      *object,
         break;
 
       case PROP_SHOW_FRAME:
-        plugin->show_frame = g_value_get_boolean (value);
-
-        /* set the frame shadow */
-        gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
-            plugin->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
+        show_frame = g_value_get_boolean (value);
+        if (plugin->show_frame != show_frame)
+          {
+            plugin->show_frame = show_frame;
+            gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
+                show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
+          }
         break;
 
       default:
@@ -420,10 +423,11 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
   GtkWidget     *frame = plugin->frame;
-  gint           border;
+  gint           border = 0;
 
-  /* set frame border */
-  border = (size > 26 && plugin->show_frame) ? 1 : 0;
+  /* set the frame border */
+  if (plugin->show_frame && size > 26)
+    border = 1;
   gtk_container_set_border_width (GTK_CONTAINER (frame), border);
 
   /* set the guess size this is used to get the initial icon size request

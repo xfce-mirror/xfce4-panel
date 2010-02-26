@@ -107,6 +107,8 @@ struct _ClockPlugin
   GtkWidget          *clock;
   GtkWidget          *frame;
 
+  guint               show_frame : 1;
+
   ClockPluginMode     mode;
 
   gchar              *tooltip_format;
@@ -176,7 +178,7 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                    PROP_SHOW_FRAME,
                                    g_param_spec_boolean ("show-frame",
                                                          NULL, NULL,
-                                                         FALSE,
+                                                         TRUE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -194,11 +196,13 @@ clock_plugin_init (ClockPlugin *plugin)
 {
   plugin->mode = CLOCK_PLUGIN_MODE_DEFAULT;
   plugin->clock = NULL;
+  plugin->show_frame = TRUE;
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
 
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
+  gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
   gtk_widget_show (plugin->frame);
 }
 
@@ -210,8 +214,7 @@ clock_plugin_get_property (GObject    *object,
                            GValue     *value,
                            GParamSpec *pspec)
 {
-  ClockPlugin   *plugin = XFCE_CLOCK_PLUGIN (object);
-  GtkShadowType  shadow_type;
+  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -220,8 +223,7 @@ clock_plugin_get_property (GObject    *object,
         break;
 
       case PROP_SHOW_FRAME:
-        shadow_type = gtk_frame_get_shadow_type (GTK_FRAME (plugin->frame));
-        g_value_set_boolean (value, shadow_type == GTK_SHADOW_IN);
+        g_value_set_boolean (value, plugin->show_frame);
         break;
 
       case PROP_TOOLTIP_FORMAT:
@@ -243,6 +245,7 @@ clock_plugin_set_property (GObject      *object,
                            GParamSpec   *pspec)
 {
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (object);
+  gboolean     show_frame;
 
   switch (prop_id)
     {
@@ -255,8 +258,13 @@ clock_plugin_set_property (GObject      *object,
         break;
 
       case PROP_SHOW_FRAME:
-        gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
-            g_value_get_boolean (value) ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
+        show_frame = g_value_get_boolean (value);
+        if (plugin->show_frame != show_frame)
+          {
+            plugin->show_frame = show_frame;
+            gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
+                show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
+          }
         break;
 
       case PROP_TOOLTIP_FORMAT:
@@ -355,12 +363,15 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 {
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
   gint         clock_size;
+  gint         border = 0;
 
   if (plugin->clock == NULL)
     return TRUE;
 
   /* set the frame border */
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), size > 26 ? 1 : 0);
+  if (plugin->show_frame && size > 26)
+    border = 1;
+  gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), border);
 
   /* get the clock size */
   clock_size = CLAMP (size - (size > 26 ? 6 : 4), 1, 128);
