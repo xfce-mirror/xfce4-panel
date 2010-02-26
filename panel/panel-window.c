@@ -29,6 +29,7 @@
 
 #include <exo/exo.h>
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-base-window.h>
@@ -1609,6 +1610,11 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   n_monitors = gdk_screen_get_n_monitors (screen);
   panel_return_if_fail (n_monitors > 0);
 
+  panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
+               "monitors=%d, output-name=%s, span-monitors=%s",
+               n_monitors, window->output_name,
+               PANEL_DEBUG_BOOL (window->span_monitors));
+
   if (window->output_name != NULL
       && strncmp (window->output_name, "screen-", 7) == 0
       && sscanf (window->output_name, "screen-%d", &screen_num) == 1)
@@ -1672,12 +1678,12 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
               && sscanf (window->output_name, "monitor-%d", &monitor_num) == 1)
             {
               /* check if extracted monitor number is out of range */
-              if (gdk_screen_get_n_monitors (screen) - 1 > monitor_num)
+              if (n_monitors - 1 < monitor_num)
                 monitor_num = -1;
             }
           else
             {
-              /* check if the monitor of this panel is present */
+              /* detect the monitor number by output name */
               for (n = 0, monitor_num = -1; n < n_monitors && monitor_num == -1; n++)
                 {
                   name = gdk_screen_get_monitor_plug_name (screen, n);
@@ -1703,23 +1709,27 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 
                   /* check if this is the monitor we're looking for */
                   if (strcmp (window->output_name, name) == 0)
-                    {
-                      /* store the monitor number, get the geometry */
-                      monitor_num = n;
-                      gdk_screen_get_monitor_geometry (screen, n, &a);
-                      panel_return_if_fail (a.width > 0 && a.height > 0);
-                    }
+                    monitor_num = n;
 
                   g_free (name);
                 }
             }
 
-          /* hide the panel if the monitor was not found */
-          if (monitor_num == -1)
+          panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
+                       "monitor-num=%d", monitor_num);
+
+          if (G_UNLIKELY (monitor_num == -1))
             {
+              /* hide the panel if the monitor was not found */
               if (GTK_WIDGET_VISIBLE (window))
                 gtk_widget_hide (GTK_WIDGET (window));
               return;
+            }
+          else
+            {
+              /* get the monitor geometry */
+              gdk_screen_get_monitor_geometry (screen, monitor_num, &a);
+              panel_return_if_fail (a.width > 0 && a.height > 0);
             }
         }
 
@@ -1759,10 +1769,16 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                 window->struts_edge = STRUTS_EDGE_NONE;
             }
         }
+
+      panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
+                   "struts edge: %d", window->struts_edge);
     }
 
   /* set the new working area of the panel */
   window->area = a;
+  panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
+               "working-area: x=%d, y=%d, w=%d, h=%d",
+               a.x, a.y, a.width, a.height);
 
   panel_window_screen_update_borders (window);
 
