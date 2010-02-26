@@ -459,7 +459,7 @@ panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog,
       /* get the selected provider */
       gtk_tree_model_get (model, &iter, COLUMN_PROVIDER, &provider, -1);
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
-      
+
       if (return_iter)
         *return_iter = iter;
     }
@@ -522,11 +522,11 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
   GtkTreePath             *path;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
-  
+
   /* direction */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-up");
   direction = G_OBJECT (button) == object ? -1 : 1;
-  
+
   /* get the selected item */
   provider = panel_preferences_dialog_item_get_selected (dialog, &iter_a);
 
@@ -535,25 +535,25 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
     {
       /* get the itembar */
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      
+
       /* get the provider position on the panel */
-      position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar), 
+      position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
                                                 GTK_WIDGET (provider));
-      
+
       if (G_LIKELY (position != -1))
         {
           /* move the item on the panel */
           panel_itembar_reorder_child (PANEL_ITEMBAR (itembar),
                                        GTK_WIDGET (provider),
                                        position + direction);
-                                       
-          
+
+
           /* most the item up or down in the list */
           if (direction == 1)
             {
               /* init the 2nd iter */
               iter_b = iter_a;
-              
+
               /* swap the items in the list */
               if (gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->store), &iter_b))
                 gtk_list_store_swap (dialog->store, &iter_a, &iter_b);
@@ -566,15 +566,15 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
                 {
                   /* determine the iter for the previous item */
                   gtk_tree_model_get_iter (GTK_TREE_MODEL (dialog->store), &iter_b, path);
-                  
+
                   /* swap the items in the list */
                   gtk_list_store_swap (dialog->store, &iter_a, &iter_b);
                 }
-                
+
               /* release the path */
               gtk_tree_path_free (path);
             }
-            
+
           /* fake update the selection */
           treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
           selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -601,7 +601,7 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
 
   /* send signal */
   xfce_panel_plugin_provider_send_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
-  
+
   /* remove from treeview */
   gtk_list_store_remove (dialog->store, &iter);
 }
@@ -613,7 +613,7 @@ panel_preferences_dialog_item_add (GtkWidget              *button,
                                    PanelPreferencesDialog *dialog)
 {
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
-  
+
   /* TODO */
 }
 

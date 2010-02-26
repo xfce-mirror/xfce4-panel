@@ -114,7 +114,7 @@ static void
 panel_dbus_service_init (PanelDBusService *service)
 {
   GError *error = NULL;
-  
+
   /* TODO implement derror handing in the dbus_bus_request_name functions */
 
   /* try to connect to the session bus */
@@ -125,13 +125,13 @@ panel_dbus_service_init (PanelDBusService *service)
       /* request the org.xfce.Panel name */
       dbus_bus_request_name (dbus_g_connection_get_connection (service->connection),
                              PANEL_DBUS_PANEL_INTERFACE, 0, NULL);
-                             
+
       /* request the org.xfce.PanelPlugin name */
       dbus_bus_request_name (dbus_g_connection_get_connection (service->connection),
                              PANEL_DBUS_PLUGIN_INTERFACE, 0, NULL);
 
       /* register the /org/xfce/Panel object */
-      dbus_g_connection_register_g_object (service->connection, PANEL_DBUS_PATH, 
+      dbus_g_connection_register_g_object (service->connection, PANEL_DBUS_PATH,
                                            G_OBJECT (service));
     }
   else

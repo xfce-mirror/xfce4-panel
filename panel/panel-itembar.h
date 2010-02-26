@@ -71,7 +71,7 @@ gint            panel_itembar_get_child_index       (PanelItembar   *itembar,
 
 GtkWidget      *panel_itembar_get_nth_child         (PanelItembar   *itembar,
                                                      guint           idx);
-                                                     
+
 guint           panel_itembar_get_n_children        (PanelItembar   *itembar);
 
 guint           panel_itembar_get_drop_index        (PanelItembar   *itembar,

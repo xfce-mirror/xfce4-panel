@@ -50,7 +50,7 @@ enum
   FUZZINESS_15_MINS,
   FUZZINESS_DAY,
   FUZZINESS_WEEK,
-  
+
   FUZZINESS_MIN = FUZZINESS_5_MINS,
   FUZZINESS_MAX = FUZZINESS_WEEK,
   FUZZINESS_DEFAULT = FUZZINESS_15_MINS
@@ -180,7 +180,7 @@ xfce_clock_fuzzy_update (gpointer user_data)
 
   /* get the local time */
   clock_plugin_get_localtime (&tm);
-  
+
   switch (clock->fuzziness)
     {
       case FUZZINESS_5_MINS:
@@ -189,7 +189,7 @@ xfce_clock_fuzzy_update (gpointer user_data)
       case FUZZINESS_WEEK:
         gtk_label_set_text (GTK_LABEL (clock), _(strings_day[tm.tm_hour / 3]));
         break;
-    }; 
+    };
 
   return TRUE;
 }

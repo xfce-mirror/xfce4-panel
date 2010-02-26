@@ -109,11 +109,11 @@ dbus_gproxy_property_changed (DBusGProxy              *dbus_gproxy,
       case PROPERTY_CHANGED_PROVIDER_EMIT_SAVE:
         xfce_panel_plugin_provider_save (provider);
         break;
-        
+
       case PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_CONFIGURE:
         xfce_panel_plugin_provider_show_configure (provider);
         break;
-        
+
       case PROPERTY_CHANGED_PROVIDER_EMIT_SHOW_ABOUT:
         xfce_panel_plugin_provider_show_about (provider);
         break;

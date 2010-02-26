@@ -121,6 +121,9 @@ separator_plugin_init (SeparatorPlugin *plugin)
   /* init, draw nothing */
   plugin->style = SEPARATOR_PLUGIN_STYLE_TRANSPARENT;
 
+  /* show the properties dialog */
+  xfce_panel_plugin_menu_show_configure (panel_plugin);
+
   /* initialize xfconf */
   xfconf_init (NULL);
 }
@@ -202,9 +205,6 @@ separator_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
   g_signal_connect (G_OBJECT (plugin->channel), "property-changed",
                     G_CALLBACK (separator_plugin_property_changed), plugin);
-
-  /* show the properties dialog */
-  xfce_panel_plugin_menu_show_configure (panel_plugin);
 
   /* read the style */
   style = xfconf_channel_get_uint (plugin->channel, "/style", SEPARATOR_PLUGIN_STYLE_DEFAULT);

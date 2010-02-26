@@ -94,6 +94,10 @@ tasklist_plugin_init (TasklistPlugin *plugin)
   /* initialize xfconf */
   xfconf_init (NULL);
 
+  /* show configure */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+
+  /* create the tasklist */
   plugin->tasklist = g_object_new (XFCE_TYPE_TASKLIST, NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->tasklist);
 }
@@ -106,8 +110,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
 
   /* expand the plugin */
-  xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin), TRUE);
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+  xfce_panel_plugin_set_expand (panel_plugin, TRUE);
 
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);

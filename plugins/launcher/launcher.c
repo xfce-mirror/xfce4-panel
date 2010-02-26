@@ -125,6 +125,9 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->show_labels = FALSE; /* TODO */
   plugin->arrow_position = ARROW_POS_DEFAULT;
 
+  /* show the configure menu item */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+
   /* create the dialog widgets */
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->box);
@@ -269,9 +272,6 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
   g_signal_connect (G_OBJECT (plugin->channel), "property-changed",
                     G_CALLBACK (launcher_plugin_property_changed), plugin);
-
-  /* show the configure menu item */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* read the plugin configuration */
   if (launcher_plugin_read (plugin) == FALSE)

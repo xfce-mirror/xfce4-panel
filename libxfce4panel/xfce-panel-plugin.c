@@ -900,7 +900,7 @@ static void
 xfce_panel_plugin_show_configure (XfcePanelPluginProvider *provider)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
-  
+
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* emit configure-plugin signal */
@@ -927,7 +927,7 @@ static void
 xfce_panel_plugin_show_about (XfcePanelPluginProvider *provider)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
-  
+
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* emit about signal */

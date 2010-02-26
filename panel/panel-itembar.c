@@ -921,11 +921,11 @@ panel_itembar_get_nth_child (PanelItembar *itembar,
 
 
 
-guint           
+guint
 panel_itembar_get_n_children (PanelItembar *itembar)
 {
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), 0);
-  
+
   return g_slist_length (itembar->children);
 }
 

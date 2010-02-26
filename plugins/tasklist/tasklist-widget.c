@@ -95,7 +95,7 @@ struct _XfceTasklist
   /* whether we show wireframes when hovering a button in
    * the tasklist */
   guint              show_wireframes : 1;
-  
+
   /* wireframe window */
   Window             wireframe_window;
 };
@@ -358,7 +358,7 @@ xfce_tasklist_finalize (GObject *object)
 
   panel_return_if_fail (tasklist->children == NULL);
   /* panel_return_if_fail (tasklist->class_groups == NULL); */
-  
+
   /* destroy the wireframe window */
   if (tasklist->wireframe_window != 0)
     xfce_tasklist_wireframe_destroy (tasklist);
@@ -945,7 +945,7 @@ xfce_tasklist_wireframe_hide (XfceTasklist *tasklist)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->wireframe_window != 0);
-  
+
   /* unmap the window */
   XUnmapWindow (GDK_DISPLAY (), tasklist->wireframe_window);
 }
@@ -956,14 +956,14 @@ static void
 xfce_tasklist_wireframe_destroy (XfceTasklist *tasklist)
 {
   Display *dpy = GDK_DISPLAY ();
-  
+
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->wireframe_window != 0);
-  
+
   /* unmap and destroy the window */
   XUnmapWindow (dpy, tasklist->wireframe_window);
   XDestroyWindow (dpy, tasklist->wireframe_window);
-  
+
   /* set to nul */
   tasklist->wireframe_window = 0;
 }
@@ -979,7 +979,7 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
   XSetWindowAttributes  attrs;
   GC                    gc;
   XRectangle            xrect;
-  
+
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->show_wireframes == TRUE);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
@@ -991,13 +991,13 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
     {
       /* reposition the wireframe */
       XMoveResizeWindow (dpy, tasklist->wireframe_window, x, y, width, height);
-      
+
       /* full window rectangle */
       xrect.x = 0;
       xrect.y = 0;
       xrect.width = width;
       xrect.height = height;
-  
+
       /* we need to restore the window first */
       XShapeCombineRectangles (dpy, tasklist->wireframe_window, ShapeBounding,
                                0, 0, &xrect, 1, ShapeSet, Unsorted);
@@ -1016,7 +1016,7 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
                                                   CWOverrideRedirect | CWBackPixel,
                                                   &attrs);
     }
-  
+
   /* create rectangle what will be 'transparent' in the window */
   xrect.x = WIREFRAME_SIZE;
   xrect.y = WIREFRAME_SIZE;
@@ -1249,14 +1249,14 @@ tasklist_button_enter_notify_event (GtkWidget         *button,
   /* leave when there is nothing to do */
   if (child->tasklist->show_wireframes == FALSE)
     return FALSE;
-  
+
   /* create wireframe */
   xfce_tasklist_wireframe_update (child->tasklist, child);
 
   /* connect signal to destroy the window when the user leaves the button */
   g_signal_connect (G_OBJECT (button), "leave-notify-event",
                     G_CALLBACK (tasklist_button_leave_notify_event), child);
-                    
+
   /* monitor geometry changes */
   g_signal_connect (G_OBJECT (child->window), "geometry-changed",
                     G_CALLBACK (tasklist_button_geometry_changed), child);
@@ -1466,10 +1466,10 @@ xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist,
                                    gboolean      show_wireframes)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  
+
   /* set new value */
   tasklist->show_wireframes = !!show_wireframes;
-  
+
   /* destroy the window if needed */
   if (show_wireframes == FALSE && tasklist->wireframe_window != 0)
     xfce_tasklist_wireframe_destroy (tasklist);

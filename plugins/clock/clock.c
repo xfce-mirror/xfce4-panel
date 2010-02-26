@@ -138,6 +138,9 @@ clock_plugin_init (ClockPlugin *plugin)
   /* initialize xfconf */
   xfconf_init (NULL);
 
+  /* show configure */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+
   /* create frame widget */
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
@@ -152,9 +155,6 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
   ClockPlugin   *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
   gboolean       show_frame;
   guint          mode;
-
-  /* show configure */
-  xfce_panel_plugin_menu_show_configure (panel_plugin);
 
   /* set the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
@@ -392,12 +392,12 @@ clock_plugin_set_child (ClockPlugin *plugin)
         /* get update interval */
         plugin->clock_interval = xfce_clock_digital_interval (XFCE_CLOCK_DIGITAL (plugin->clock));
         break;
-        
+
       case CLOCK_PLUGIN_MODE_FUZZY:
         /* create widget */
         plugin->clock = xfce_clock_fuzzy_new ();
         plugin->clock_func = xfce_clock_fuzzy_update;
-        
+
         /* connect binding */
         xfconf_g_property_bind (plugin->channel, "/fuzziness",
                                 G_TYPE_UINT, plugin->clock, "fuzziness");
@@ -429,7 +429,7 @@ clock_plugin_set_child (ClockPlugin *plugin)
   /* add the widget to the plugin frame */
   gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->clock);
   gtk_widget_show (plugin->clock);
-  
+
   /* update the clock once */
   (plugin->clock_func) (plugin->clock);
 }
