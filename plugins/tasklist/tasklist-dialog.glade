@@ -4,7 +4,7 @@
   <!-- interface-requires libxfce4ui 0.0 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="XfceTitledDialog" id="dialog">
-    <property name="title" translatable="yes">Task List Properties</property>
+    <property name="title" translatable="yes">Window List Properties</property>
     <property name="icon_name">gtk-properties</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
@@ -25,7 +25,6 @@
                 <child>
                   <object class="GtkAlignment" id="alignment3">
                     <property name="visible">True</property>
-                    <property name="bottom_padding">6</property>
                     <property name="left_padding">12</property>
                     <child>
                       <object class="GtkVBox" id="vbox3">
@@ -112,7 +111,6 @@
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Window _grouping:</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">grouping</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -141,32 +139,6 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="include-all-workspaces">
-                            <property name="label" translatable="yes">Show windows from _all workspaces</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="show-only-minimized">
-                            <property name="label" translatable="yes">Show only _minimized windows</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkCheckButton" id="switch-workspace-on-unminimize">
                             <property name="label" translatable="yes">Restore minimized windows to current _workspace</property>
                             <property name="visible">True</property>
@@ -176,7 +148,7 @@
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
-                            <property name="position">3</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -189,7 +161,7 @@
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
-                            <property name="position">4</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
@@ -207,6 +179,62 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFrame" id="frame2">
+                <property name="visible">True</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <object class="GtkAlignment" id="alignment2">
+                    <property name="visible">True</property>
+                    <property name="left_padding">12</property>
+                    <child>
+                      <object class="GtkVBox" id="vbox4">
+                        <property name="visible">True</property>
+                        <property name="border_width">6</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkCheckButton" id="include-all-workspaces">
+                            <property name="label" translatable="yes">Show windows from _all workspaces</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="show-only-minimized">
+                            <property name="label" translatable="yes">Show only _minimized windows</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child type="label">
+                  <object class="GtkLabel" id="label2">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">&lt;b&gt;Filtering&lt;/b&gt;</property>
+                    <property name="use_markup">True</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
