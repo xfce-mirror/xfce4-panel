@@ -737,7 +737,7 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
               source = li;
 
               /* break if we already found a sibling */
-              if (sibling)
+              if (sibling != NULL)
                 break;
             }
           else if (sibling == NULL)
@@ -765,7 +765,7 @@ xfce_tasklist_drag_motion (GtkWidget      *widget,
             }
         }
 
-      if (G_LIKELY (source))
+      if (G_LIKELY (source != NULL))
         {
           /* get the child data */
           child = source->data;
@@ -1016,6 +1016,7 @@ xfce_tasklist_window_added (WnckScreen   *screen,
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->screen == screen);
 
+  /* TODO we should monitor those windows too, for state changes */
   if (wnck_window_is_skip_tasklist (window))
     return;
 
