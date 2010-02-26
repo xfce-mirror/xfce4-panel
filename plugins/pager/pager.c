@@ -266,6 +266,36 @@ pager_plugin_scroll_event (GtkWidget      *widget,
 
 
 static void
+pager_plugin_screen_layout_changed (PagerPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
+  panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
+
+  if (G_UNLIKELY (plugin->wnck_pager != NULL))
+    {
+      /* destroy the existing pager */
+      gtk_widget_destroy (GTK_WIDGET (plugin->wnck_pager));
+
+      /* force a screen update */
+      wnck_screen_force_update (plugin->wnck_screen);
+    }
+
+  /* create the wnck pager */
+  plugin->wnck_pager = wnck_pager_new (plugin->wnck_screen);
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->wnck_pager);
+  gtk_widget_show (plugin->wnck_pager);
+
+  /* set the pager properties */
+  wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
+                               plugin->show_names ?
+                                   WNCK_PAGER_DISPLAY_NAME :
+                                   WNCK_PAGER_DISPLAY_CONTENT);
+  wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
+}
+
+
+
+static void
 pager_plugin_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
@@ -280,24 +310,17 @@ pager_plugin_screen_changed (GtkWidget *widget,
   /* only update if the screen changed */
   if (plugin->wnck_screen != wnck_screen)
     {
-      /* destroy the existing pager */
-      if (G_UNLIKELY (plugin->wnck_pager != NULL))
-        gtk_widget_destroy (GTK_WIDGET (plugin->wnck_pager));
-
       /* set the new screen */
       plugin->wnck_screen = wnck_screen;
 
-      /* create the wnck pager */
-      plugin->wnck_pager = wnck_pager_new (wnck_screen);
-      gtk_container_add (GTK_CONTAINER (widget), plugin->wnck_pager);
-      gtk_widget_show (plugin->wnck_pager);
+      /* rebuild the pager */
+      pager_plugin_screen_layout_changed (plugin);
 
-      /* set the pager properties */
-      wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
-                                   plugin->show_names ?
-                                       WNCK_PAGER_DISPLAY_NAME :
-                                       WNCK_PAGER_DISPLAY_CONTENT);
-      wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
+      /* watch the screen for changes */
+      g_signal_connect_swapped (G_OBJECT (screen), "monitors-changed",
+         G_CALLBACK (pager_plugin_screen_layout_changed), plugin);
+      g_signal_connect_swapped (G_OBJECT (screen), "size-changed",
+         G_CALLBACK (pager_plugin_screen_layout_changed), plugin);
     }
 }
 
