@@ -24,15 +24,15 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfceWindowMenuPluginClass XfceWindowMenuPluginClass;
-typedef struct _XfceWindowMenuPlugin      XfceWindowMenuPlugin;
+typedef struct _WindowMenuPluginClass WindowMenuPluginClass;
+typedef struct _WindowMenuPlugin      WindowMenuPlugin;
 
 #define XFCE_TYPE_WINDOW_MENU_PLUGIN            (window_menu_plugin_get_type ())
-#define XFCE_WINDOW_MENU_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_WINDOW_MENU_PLUGIN, XfceWindowMenuPlugin))
-#define XFCE_WINDOW_MENU_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_WINDOW_MENU_PLUGIN, XfceWindowMenuPluginClass))
+#define XFCE_WINDOW_MENU_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_WINDOW_MENU_PLUGIN, WindowMenuPlugin))
+#define XFCE_WINDOW_MENU_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_WINDOW_MENU_PLUGIN, WindowMenuPluginClass))
 #define XFCE_IS_WINDOW_MENU_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_WINDOW_MENU_PLUGIN))
 #define XFCE_IS_WINDOW_MENU_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_WINDOW_MENU_PLUGIN))
-#define XFCE_WINDOW_MENU_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_WINDOW_MENU_PLUGIN, XfceWindowMenuPluginClass))
+#define XFCE_WINDOW_MENU_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_WINDOW_MENU_PLUGIN, WindowMenuPluginClass))
 
 GType window_menu_plugin_get_type      (void) G_GNUC_CONST;
 

@@ -1,7 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
- * Copyright (c) 2007-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (c) 2009 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -34,23 +33,23 @@
 
 
 
-static void     actions_plugin_get_property              (GObject               *object,
-                                                          guint                  prop_id,
-                                                          GValue                *value,
-                                                          GParamSpec            *pspec);
-static void     actions_plugin_set_property              (GObject               *object,
-                                                          guint                  prop_id,
-                                                          const GValue          *value,
-                                                          GParamSpec            *pspec);
-static void     actions_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
-static void     actions_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
-static gboolean actions_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
-                                                          gint                   size);
-static void     actions_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
-static void     actions_plugin_orientation_changed       (XfcePanelPlugin       *panel_plugin,
-                                                          GtkOrientation         orientation);
-static void     actions_plugin_button_clicked            (GtkWidget             *button,
-                                                          ActionsPlugin         *plugin);
+static void     actions_plugin_get_property        (GObject               *object,
+                                                    guint                  prop_id,
+                                                    GValue                *value,
+                                                    GParamSpec            *pspec);
+static void     actions_plugin_set_property        (GObject               *object,
+                                                    guint                  prop_id,
+                                                    const GValue          *value,
+                                                    GParamSpec            *pspec);
+static void     actions_plugin_construct           (XfcePanelPlugin       *panel_plugin);
+static void     actions_plugin_free_data           (XfcePanelPlugin       *panel_plugin);
+static gboolean actions_plugin_size_changed        (XfcePanelPlugin       *panel_plugin,
+                                                    gint                   size);
+static void     actions_plugin_configure_plugin    (XfcePanelPlugin       *panel_plugin);
+static void     actions_plugin_orientation_changed (XfcePanelPlugin       *panel_plugin,
+                                                    GtkOrientation         orientation);
+static void     actions_plugin_button_clicked      (GtkWidget             *button,
+                                                    ActionsPlugin         *plugin);
 
 
 

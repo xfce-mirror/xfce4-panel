@@ -36,12 +36,12 @@
 #define URGENT_FLAGS      (WNCK_WINDOW_STATE_DEMANDS_ATTENTION | \
                            WNCK_WINDOW_STATE_URGENT)
 
-struct _XfceWindowMenuPluginClass
+struct _WindowMenuPluginClass
 {
   XfcePanelPluginClass __parent__;
 };
 
-struct _XfceWindowMenuPlugin
+struct _WindowMenuPlugin
 {
   XfcePanelPlugin __parent__;
 
@@ -83,30 +83,46 @@ enum
 };
 
 
-static void window_menu_plugin_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
-static void window_menu_plugin_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
 
-static void window_menu_plugin_screen_changed (GtkWidget *widget, GdkScreen *previous_screen);
-
-static void window_menu_plugin_construct (XfcePanelPlugin *panel_plugin);
-static void window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin);
-static void window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin, gint position);
-static gboolean window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
-static void window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
-
-static void window_menu_plugin_active_window_changed (WnckScreen *screen, WnckWindow *previous_window, XfceWindowMenuPlugin *plugin);
-static void window_menu_plugin_window_state_changed (WnckWindow *window, WnckWindowState changed_mask, WnckWindowState new_state, XfceWindowMenuPlugin *plugin);
-static void window_menu_plugin_window_opened (WnckScreen *screen, WnckWindow *window, XfceWindowMenuPlugin *plugin);
-static void window_menu_plugin_window_closed (WnckScreen *screen, WnckWindow *window, XfceWindowMenuPlugin *plugin);
-
-static gboolean window_menu_plugin_button_press_event (GtkWidget *button, GdkEventButton *event, XfceWindowMenuPlugin *plugin);
-
-static GtkWidget *window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin);
+static void      window_menu_plugin_get_property            (GObject          *object,
+                                                             guint             prop_id,
+                                                             GValue           *value,
+                                                             GParamSpec       *pspec);
+static void      window_menu_plugin_set_property            (GObject          *object,
+                                                             guint             prop_id,
+                                                             const GValue     *value,
+                                                             GParamSpec       *pspec);
+static void      window_menu_plugin_screen_changed          (GtkWidget        *widget,
+                                                             GdkScreen        *previous_screen);
+static void      window_menu_plugin_construct               (XfcePanelPlugin  *panel_plugin);
+static void      window_menu_plugin_free_data               (XfcePanelPlugin  *panel_plugin);
+static void      window_menu_plugin_screen_position_changed (XfcePanelPlugin  *panel_plugin,
+                                                             gint             position);
+static gboolean  window_menu_plugin_size_changed            (XfcePanelPlugin  *panel_plugin,
+                                                             gint              size);
+static void      window_menu_plugin_configure_plugin        (XfcePanelPlugin  *panel_plugin);
+static void      window_menu_plugin_active_window_changed   (WnckScreen       *screen,
+                                                             WnckWindow       *previous_window,
+                                                             WindowMenuPlugin *plugin);
+static void      window_menu_plugin_window_state_changed    (WnckWindow       *window,
+                                                             WnckWindowState   changed_mask,
+                                                             WnckWindowState   new_state,
+                                                             WindowMenuPlugin *plugin);
+static void      window_menu_plugin_window_opened           (WnckScreen       *screen,
+                                                             WnckWindow       *window,
+                                                             WindowMenuPlugin *plugin);
+static void      window_menu_plugin_window_closed           (WnckScreen       *screen,
+                                                             WnckWindow       *window,
+                                                             WindowMenuPlugin *plugin);
+static gboolean  window_menu_plugin_button_press_event      (GtkWidget        *button,
+                                                             GdkEventButton   *event,
+                                                             WindowMenuPlugin *plugin);
+static GtkWidget *window_menu_plugin_menu_new               (WindowMenuPlugin *plugin);
 
 
 
 /* define the plugin */
-XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (XfceWindowMenuPlugin, window_menu_plugin)
+XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (WindowMenuPlugin, window_menu_plugin)
 
 
 
@@ -115,7 +131,7 @@ static GQuark window_quark = 0;
 
 
 static void
-window_menu_plugin_class_init (XfceWindowMenuPluginClass *klass)
+window_menu_plugin_class_init (WindowMenuPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
   GObjectClass         *gobject_class;
@@ -175,7 +191,7 @@ window_menu_plugin_class_init (XfceWindowMenuPluginClass *klass)
 
 
 static void
-window_menu_plugin_init (XfceWindowMenuPlugin *plugin)
+window_menu_plugin_init (WindowMenuPlugin *plugin)
 {
   /* initialize settings */
   plugin->button_style = BUTTON_STYLE_ICON;
@@ -215,7 +231,7 @@ window_menu_plugin_get_property (GObject    *object,
                                  GValue     *value,
                                  GParamSpec *pspec)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
 
   switch (prop_id)
     {
@@ -253,9 +269,9 @@ window_menu_plugin_set_property (GObject      *object,
                                  const GValue *value,
                                  GParamSpec   *pspec)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
-  XfcePanelPlugin      *panel_plugin = XFCE_PANEL_PLUGIN (object);
-  guint                 button_style;
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (object);
+  XfcePanelPlugin  *panel_plugin = XFCE_PANEL_PLUGIN (object);
+  guint             button_style;
 
   switch (prop_id)
     {
@@ -311,9 +327,9 @@ static void
 window_menu_plugin_screen_changed (GtkWidget *widget,
                                    GdkScreen *previous_screen)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
-  GdkScreen            *screen;
-  WnckScreen           *wnck_screen;
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
+  GdkScreen        *screen;
+  WnckScreen       *wnck_screen;
 
   /* get the wnck screen */
   screen = gtk_widget_get_screen (widget);
@@ -353,7 +369,7 @@ window_menu_plugin_screen_changed (GtkWidget *widget,
 static void
 window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
 
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
@@ -382,7 +398,7 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 static void
 window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
 
   /* disconnect screen changed signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
@@ -416,8 +432,8 @@ static void
 window_menu_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
                                             gint             position)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
-  GtkArrowType          arrow_type = GTK_ARROW_NONE;
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  GtkArrowType      arrow_type = GTK_ARROW_NONE;
 
   /* set the arrow direction if the arrow is visible */
   if (plugin->button_style == BUTTON_STYLE_ARROW)
@@ -432,7 +448,7 @@ static gboolean
 window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                  gint             size)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
 
   if (plugin->button_style == BUTTON_STYLE_ICON)
     {
@@ -459,13 +475,13 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static void
 window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  XfceWindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
-  GtkBuilder           *builder;
-  GObject              *dialog, *object;
-  guint                 i;
-  const gchar          *names[] = { "workspace-actions", "workspace-names",
-                                    "urgentcy-notification", "all-workspaces",
-                                    "style" };
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  GtkBuilder       *builder;
+  GObject          *dialog, *object;
+  guint             i;
+  const gchar      *names[] = { "workspace-actions", "workspace-names",
+                                "urgentcy-notification", "all-workspaces",
+                                "style" };
 
   builder = gtk_builder_new ();
   if (gtk_builder_add_from_string (builder, windowmenu_dialog_glade,
@@ -504,9 +520,9 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static void
-window_menu_plugin_active_window_changed (WnckScreen           *screen,
-                                          WnckWindow           *previous_window,
-                                          XfceWindowMenuPlugin *plugin)
+window_menu_plugin_active_window_changed (WnckScreen       *screen,
+                                          WnckWindow       *previous_window,
+                                          WindowMenuPlugin *plugin)
 {
   WnckWindow      *window;
   GdkPixbuf       *pixbuf;
@@ -545,10 +561,10 @@ window_menu_plugin_active_window_changed (WnckScreen           *screen,
 
 
 static void
-window_menu_plugin_window_state_changed (WnckWindow           *window,
-                                         WnckWindowState       changed_mask,
-                                         WnckWindowState       new_state,
-                                         XfceWindowMenuPlugin *plugin)
+window_menu_plugin_window_state_changed (WnckWindow       *window,
+                                         WnckWindowState   changed_mask,
+                                         WnckWindowState   new_state,
+                                         WindowMenuPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_WINDOW (window));
@@ -575,9 +591,9 @@ window_menu_plugin_window_state_changed (WnckWindow           *window,
 
 
 static void
-window_menu_plugin_window_opened (WnckScreen           *screen,
-                                  WnckWindow           *window,
-                                  XfceWindowMenuPlugin *plugin)
+window_menu_plugin_window_opened (WnckScreen       *screen,
+                                  WnckWindow       *window,
+                                  WindowMenuPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_WINDOW (window));
@@ -601,9 +617,9 @@ window_menu_plugin_window_opened (WnckScreen           *screen,
 
 
 static void
-window_menu_plugin_window_closed (WnckScreen           *screen,
-                                  WnckWindow           *window,
-                                  XfceWindowMenuPlugin *plugin)
+window_menu_plugin_window_closed (WnckScreen       *screen,
+                                  WnckWindow       *window,
+                                  WindowMenuPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_WINDOW (window));
@@ -623,9 +639,9 @@ window_menu_plugin_window_closed (WnckScreen           *screen,
 
 
 static gboolean
-window_menu_plugin_button_press_event (GtkWidget            *button,
-                                       GdkEventButton       *event,
-                                       XfceWindowMenuPlugin *plugin)
+window_menu_plugin_button_press_event (GtkWidget        *button,
+                                       GdkEventButton   *event,
+                                       WindowMenuPlugin *plugin)
 {
   GtkWidget *menu;
 
@@ -654,8 +670,8 @@ window_menu_plugin_button_press_event (GtkWidget            *button,
 
 
 static void
-window_menu_plugin_workspace_add (GtkWidget            *mi,
-                                  XfceWindowMenuPlugin *plugin)
+window_menu_plugin_workspace_add (GtkWidget        *mi,
+                                  WindowMenuPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_SCREEN (plugin->screen));
@@ -668,8 +684,8 @@ window_menu_plugin_workspace_add (GtkWidget            *mi,
 
 
 static void
-window_menu_plugin_workspace_remove (GtkWidget            *mi,
-                                     XfceWindowMenuPlugin *plugin)
+window_menu_plugin_workspace_remove (GtkWidget        *mi,
+                                     WindowMenuPlugin *plugin)
 {
   gint n_workspaces;
 
@@ -879,6 +895,7 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
 }
 
 
+
 static void
 window_menu_plugin_menu_selection_done (GtkWidget *menu,
                                         GtkWidget *button)
@@ -963,7 +980,7 @@ window_menu_plugin_menu_key_press_event (GtkWidget   *menu,
 
 
 static GtkWidget *
-window_menu_plugin_menu_new (XfceWindowMenuPlugin *plugin)
+window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
 {
   GtkWidget            *menu, *mi = NULL, *image;
   GList                *workspaces, *lp, fake;
