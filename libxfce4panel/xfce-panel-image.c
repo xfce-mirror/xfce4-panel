@@ -54,6 +54,11 @@
 #define XFCE_PANEL_IMAGE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
                                            XFCE_TYPE_PANEL_IMAGE, \
                                            XfcePanelImagePrivate))
+#define xfce_panel_image_unref_null(obj)   G_STMT_START { if ((obj) != NULL) \
+                                             { \
+                                               g_object_unref (G_OBJECT (obj)); \
+                                               (obj) = NULL; \
+                                             } } G_STMT_END
 
 
 
@@ -122,7 +127,6 @@ xfce_panel_image_class_init (XfcePanelImageClass *klass)
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
 
-  /* add private data */
   g_type_class_add_private (klass, sizeof (XfcePanelImagePrivate));
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -179,10 +183,8 @@ xfce_panel_image_init (XfcePanelImage *image)
 {
   GTK_WIDGET_SET_FLAGS (image, GTK_NO_WINDOW);
 
-  /* set private pointer */
   image->priv = XFCE_PANEL_IMAGE_GET_PRIVATE (image);
 
-  /* initialize */
   image->priv->pixbuf = NULL;
   image->priv->cache = NULL;
   image->priv->source = NULL;
@@ -266,7 +268,6 @@ xfce_panel_image_set_property (GObject      *object,
 static void
 xfce_panel_image_finalize (GObject *object)
 {
-  /* cleanup */
   xfce_panel_image_clear (XFCE_PANEL_IMAGE (object));
 
   (*G_OBJECT_CLASS (xfce_panel_image_parent_class)->finalize) (object);
@@ -323,9 +324,7 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
       priv->height = allocation->height;
 
       /* free cache */
-      if (G_LIKELY (priv->cache != NULL))
-        g_object_unref (G_OBJECT (priv->cache));
-      priv->cache = NULL;
+      xfce_panel_image_unref_null (priv->cache);
 
       if (priv->pixbuf != NULL)
         {
@@ -512,14 +511,12 @@ xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
   g_return_if_fail (GDK_IS_PIXBUF (pixbuf));
 
-  /* cleanup */
   xfce_panel_image_clear (image);
 
   /* set the new pixbuf, scale it to the maximum size if needed */
   image->priv->pixbuf = xfce_panel_image_scale_pixbuf (pixbuf,
       MAX_PIXBUF_SIZE, MAX_PIXBUF_SIZE);
 
-  /* queue a resize */
   gtk_widget_queue_resize (GTK_WIDGET (image));
 }
 
@@ -532,13 +529,10 @@ xfce_panel_image_set_from_source (XfcePanelImage *image,
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
   g_return_if_fail (IS_STRING (source));
 
-  /* cleanup */
   xfce_panel_image_clear (image);
 
-  /* set new value */
   image->priv->source = g_strdup (source);
 
-  /* queue a resize */
   gtk_widget_queue_resize (GTK_WIDGET (image));
 }
 
@@ -557,17 +551,8 @@ xfce_panel_image_clear (XfcePanelImage *image)
      priv->source = NULL;
     }
 
-  if (priv->pixbuf != NULL)
-    {
-     g_object_unref (G_OBJECT (priv->pixbuf));
-     priv->pixbuf = NULL;
-    }
-
-  if (priv->cache != NULL)
-    {
-     g_object_unref (G_OBJECT (priv->cache));
-     priv->cache = NULL;
-    }
+  xfce_panel_image_unref_null (priv->pixbuf);
+  xfce_panel_image_unref_null (priv->cache);
 
   /* reset values */
   priv->width = -1;
