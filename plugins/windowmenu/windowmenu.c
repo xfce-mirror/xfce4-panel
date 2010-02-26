@@ -975,7 +975,7 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
 
   /* try to get an utf-8 valid name */
   name = wnck_window_get_name (window);
-  if (IS_STRING (name) && !g_utf8_validate (name, -1, NULL))
+  if (!exo_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
   if (exo_str_is_empty (name))
@@ -1307,12 +1307,12 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
         {
           /* try to get an utf-8 valid name */
           name = wnck_workspace_get_name (workspace);
-          if (IS_STRING (name) && !g_utf8_validate (name, -1, NULL))
+          if (!exo_str_is_empty (name) && !g_utf8_validate (name, -1, NULL))
             name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
         }
 
       /* create label */
-      if (IS_STRING (name))
+      if (!exo_str_is_empty (name))
         label = g_strdup_printf (_("Remove Workspace \"%s\""), name);
       else
         label = g_strdup_printf (_("Remove Workspace %d"), n_workspaces);

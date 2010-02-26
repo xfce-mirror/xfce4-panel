@@ -541,7 +541,7 @@ systray_plugin_dialog_camel_case (const gchar *text)
   gunichar     c;
   GString     *result;
 
-  panel_return_val_if_fail (IS_STRING (text), NULL);
+  panel_return_val_if_fail (!exo_str_is_empty (text), NULL);
 
   /* allocate a new string for the result */
   result = g_string_sized_new (32);
@@ -582,7 +582,7 @@ systray_plugin_dialog_icon (GtkIconTheme *icon_theme,
   gchar       *first_occ;
   const gchar *p;
 
-  panel_return_val_if_fail (IS_STRING (icon_name), NULL);
+  panel_return_val_if_fail (!exo_str_is_empty (icon_name), NULL);
   panel_return_val_if_fail (GTK_IS_ICON_THEME (icon_theme), NULL);
 
   /* try to load the icon from the theme */
@@ -637,7 +637,7 @@ systray_plugin_dialog_add_application_names (SystrayPlugin *plugin,
       name = li->data;
 
       /* skip invalid names */
-      if (!IS_STRING (name))
+      if (exo_str_is_empty (name))
         continue;
 
       /* init */

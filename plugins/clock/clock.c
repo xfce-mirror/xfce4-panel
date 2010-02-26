@@ -587,7 +587,7 @@ clock_plugin_configure_plugin_chooser_fill (GtkComboBox *combo,
       g_free (preview);
 
       if (has_active == FALSE
-          && IS_STRING (active_format)
+          && !exo_str_is_empty (active_format)
           && strcmp (active_format, formats[i]) == 0)
         {
           gtk_combo_box_set_active_iter (combo, &iter);
@@ -937,7 +937,7 @@ clock_plugin_strdup_strftime (const gchar     *format,
   gchar  buffer[1024];
 
   /* leave when format is null */
-  if (G_UNLIKELY (!IS_STRING (format)))
+  if (G_UNLIKELY (exo_str_is_empty (format)))
     return NULL;
 
   /* convert to locale, because that's what strftime uses */
@@ -966,7 +966,7 @@ clock_plugin_interval_from_format (const gchar *format)
 {
   const gchar *p;
 
-  if (G_UNLIKELY (!IS_STRING (format)))
+  if (G_UNLIKELY (exo_str_is_empty (format)))
       return CLOCK_INTERVAL_MINUTE;
 
   for (p = format; *p != '\0'; ++p)

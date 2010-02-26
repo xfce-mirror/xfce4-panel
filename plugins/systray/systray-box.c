@@ -24,6 +24,7 @@
 #include <string.h>
 #endif
 
+#include <exo/exo.h>
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
@@ -640,12 +641,12 @@ systray_box_compare_function (gconstpointer a,
     return (child_a->auto_hide ? -1 : 1);
 
   /* put icons without name after the hidden icons */
-  if (!IS_STRING (child_a->name) || !IS_STRING (child_b->name))
+  if (exo_str_is_empty (child_a->name) || exo_str_is_empty (child_b->name))
     {
-      if (IS_STRING (child_a->name) == IS_STRING (child_b->name))
+      if (!exo_str_is_empty (child_a->name) == !exo_str_is_empty (child_b->name))
         return 0;
       else
-        return !IS_STRING (child_a->name) ? -1 : 1;
+        return exo_str_is_empty (child_a->name) ? -1 : 1;
     }
 
   /* sort by name */
@@ -764,7 +765,7 @@ systray_box_name_add (SystrayBox  *box,
                       gboolean     hidden)
 {
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
-  panel_return_if_fail (IS_STRING (name));
+  panel_return_if_fail (!exo_str_is_empty (name));
 
   /* insert the application */
   g_hash_table_insert (box->names, g_strdup (name),
@@ -783,7 +784,7 @@ systray_box_name_set_hidden (SystrayBox  *box,
   gint             n_hidden_childeren;
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
-  panel_return_if_fail (IS_STRING (name));
+  panel_return_if_fail (!exo_str_is_empty (name));
 
   /* replace the old name */
   g_hash_table_replace (box->names, g_strdup (name),

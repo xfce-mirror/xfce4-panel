@@ -411,7 +411,7 @@ panel_application_plugin_delete_config (PanelApplication *application,
   gchar *filename, *path;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  panel_return_if_fail (IS_STRING (name));
+  panel_return_if_fail (!exo_str_is_empty (name));
   panel_return_if_fail (unique_id != -1);
 
   /* remove the xfconf property */

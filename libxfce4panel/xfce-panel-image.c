@@ -496,7 +496,7 @@ xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
 GtkWidget *
 xfce_panel_image_new_from_source (const gchar *source)
 {
-  g_return_val_if_fail (IS_STRING (source), NULL);
+  g_return_val_if_fail (source != NULL && *source != '\0', NULL);
 
   return g_object_new (XFCE_TYPE_PANEL_IMAGE,
                        "source", source, NULL);
@@ -527,7 +527,7 @@ xfce_panel_image_set_from_source (XfcePanelImage *image,
                                   const gchar    *source)
 {
   g_return_if_fail (XFCE_IS_PANEL_IMAGE (image));
-  g_return_if_fail (IS_STRING (source));
+  g_return_if_fail (source != NULL && *source != '\0');
 
   xfce_panel_image_clear (image);
 

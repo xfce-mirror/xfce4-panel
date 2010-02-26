@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #endif
 
+#include <exo/exo.h>
 #include <dbus/dbus-glib.h>
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-private.h>
@@ -218,8 +219,8 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
   n_tokens = g_strv_length (tokens);
 
   if (!(n_tokens == 2 || n_tokens == N_TOKENS)
-      || !IS_STRING (tokens[PLUGIN_NAME])
-      || !IS_STRING (tokens[NAME])
+      || exo_str_is_empty (tokens[PLUGIN_NAME])
+      || exo_str_is_empty (tokens[NAME])
       || *tokens[NAME] == SIGNAL_PREFIX)
     {
       g_set_error_literal (error, G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,

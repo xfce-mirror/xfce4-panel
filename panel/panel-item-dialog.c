@@ -610,7 +610,7 @@ panel_item_dialog_visible_func (GtkTreeModel *model,
 
   /* search string from dialog */
   text = gtk_entry_get_text (entry);
-  if (G_UNLIKELY (!IS_STRING (text)))
+  if (G_UNLIKELY (exo_str_is_empty (text)))
     return TRUE;
 
   gtk_tree_model_get (model, iter, COLUMN_MODULE, &module, -1);

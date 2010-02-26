@@ -289,8 +289,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
   gchar       *path;
   const gchar *module_exec;
 
-  panel_return_val_if_fail (IS_STRING (filename), NULL);
-  panel_return_val_if_fail (IS_STRING (name), NULL);
+  panel_return_val_if_fail (!exo_str_is_empty (filename), NULL);
+  panel_return_val_if_fail (!exo_str_is_empty (name), NULL);
 
   rc = xfce_rc_simple_open (filename, TRUE);
   if (G_UNLIKELY (rc == NULL))

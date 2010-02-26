@@ -51,9 +51,6 @@
 #define PANEL_UNSET_FLAG(flags,flag) G_STMT_START{ ((flags) &= ~(flag)); }G_STMT_END
 #define PANEL_HAS_FLAG(flags,flag) (((flags) & (flag)) != 0)
 
-/* check if the string is not empty */
-#define IS_STRING(string) ((string) != NULL && *(string) != '\0')
-
 /* relative path to the plugin directory */
 #define PANEL_PLUGIN_RELATIVE_PATH "xfce4" G_DIR_SEPARATOR_S "panel"
 
