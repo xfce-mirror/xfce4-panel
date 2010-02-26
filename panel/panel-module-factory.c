@@ -424,7 +424,7 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
   if (G_UNLIKELY (module == NULL))
     {
       /* show warning */
-      g_warning ("Module \"%s\" not found in the factory", name);
+      g_debug ("Module \"%s\" not found in the factory", name);
 
       return NULL;
     }

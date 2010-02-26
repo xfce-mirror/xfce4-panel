@@ -326,8 +326,20 @@ panel_application_load (PanelApplication *application)
               unique_id = xfconf_channel_get_int (channel, buf, -1);
 
               screen = gtk_window_get_screen (GTK_WINDOW (window));
-              panel_application_plugin_insert (application, window, screen,
-                                               name, unique_id, NULL, -1);
+              if (!panel_application_plugin_insert (application, window, screen,
+                                                    name, unique_id, NULL, -1))
+                {
+                  /* plugin could not be loaded, remove it from the channel */
+                  g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugins/plugin-%u", i, j);
+                  xfconf_channel_reset_property (channel, buf, TRUE);
+
+                  g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
+                  xfconf_channel_reset_property (channel, buf, TRUE);
+
+                  /* show warnings */
+                  g_critical (_("Plugin \"%s-%d\" was not found and has been "
+                              "removed from the configuration"), name, unique_id);
+                }
 
               /* cleanup */
               g_free (name);
