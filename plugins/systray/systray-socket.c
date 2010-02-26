@@ -186,9 +186,9 @@ systray_socket_expose_event (GtkWidget      *widget,
       /* clear to parent-relative pixmap */
       gdk_window_clear_area (widget->window,
                              event->area.x,
-			     event->area.y,
+           event->area.y,
                              event->area.width,
-			     event->area.height);
+           event->area.height);
     }
 
   return FALSE;
@@ -331,14 +331,14 @@ systray_socket_get_title  (SystraySocket *socket)
     {
       /* check the xprop content */
       if (G_LIKELY (xprop.value && xprop.nitems > 0))
-	{
-	  /* get the lowercase name if it's utf-8 valid */
-	  if (g_utf8_validate ((const gchar *) xprop.value, xprop.nitems, NULL))
-	    name = g_utf8_strdown ((const gchar *) xprop.value, xprop.nitems);
+  {
+    /* get the lowercase name if it's utf-8 valid */
+    if (g_utf8_validate ((const gchar *) xprop.value, xprop.nitems, NULL))
+      name = g_utf8_strdown ((const gchar *) xprop.value, xprop.nitems);
 
-	  /* cleanup */
-	  XFree (xprop.value);
-	}
+    /* cleanup */
+    XFree (xprop.value);
+  }
     }
 
   return name;

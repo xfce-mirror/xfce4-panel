@@ -471,8 +471,8 @@ systray_box_expose_event (GtkWidget      *widget,
 
           /* paint the child */
           gdk_cairo_set_source_pixmap (cr, child_info->widget->window,
-				                               child_info->widget->allocation.x,
-				                               child_info->widget->allocation.y);
+                                       child_info->widget->allocation.x,
+                                       child_info->widget->allocation.y);
           cairo_paint (cr);
         }
 

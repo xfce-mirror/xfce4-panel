@@ -245,7 +245,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                               G_OBJECT (object), "active");
 
       gtk_widget_show (GTK_WIDGET (dialog));
-	}
+  }
   else
     {
       /* release the builder */

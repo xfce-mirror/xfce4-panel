@@ -141,12 +141,12 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   dialog->factory = panel_module_factory_get ();
 
   /* signal for unique changes */
-  g_signal_connect (G_OBJECT (dialog->factory), "unique-changed", 
+  g_signal_connect (G_OBJECT (dialog->factory), "unique-changed",
       G_CALLBACK (panel_item_dialog_unique_changed), dialog);
 
   /* setup dialog */
   gtk_window_set_title (GTK_WINDOW (dialog), _("Xfce Panel Item Browser"));
-  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog), 
+  xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
       _("Add new plugins to your Xfce panels"));
   gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_ADD);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
@@ -244,7 +244,7 @@ panel_item_dialog_finalize (GObject *object)
   PanelItemDialog *dialog = PANEL_ITEM_DIALOG (object);
 
   /* disconnect unique-changed signal */
-  g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->factory), 
+  g_signal_handlers_disconnect_by_func (G_OBJECT (dialog->factory),
       panel_item_dialog_unique_changed, dialog);
 
   /* make the windows sensitive again */
@@ -309,7 +309,7 @@ panel_item_dialog_unique_changed (PanelModuleFactory *factory,
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   /* search the module and update its sensitivity */
-  gtk_tree_model_foreach (GTK_TREE_MODEL (dialog->store), 
+  gtk_tree_model_foreach (GTK_TREE_MODEL (dialog->store),
       panel_item_dialog_unique_changed_foreach, module);
 }
 
@@ -477,7 +477,7 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
       internal_name = panel_module_get_name (module);
 
       /* set the selection data */
-      gtk_selection_data_set (selection_data, selection_data->target, 8, 
+      gtk_selection_data_set (selection_data, selection_data->target, 8,
           (guchar *) internal_name, strlen (internal_name));
 
       /* release module */
@@ -520,7 +520,7 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
 
   /* add an empty item for separator in 2nd position */
   if (panel_module_factory_has_launcher (dialog->factory))
-    gtk_list_store_insert_with_values (dialog->store, &iter, 1, 
+    gtk_list_store_insert_with_values (dialog->store, &iter, 1,
                                        COLUMN_MODULE, NULL, -1);
 }
 
@@ -711,7 +711,7 @@ panel_item_dialog_show (PanelWindow *active)
     active = panel_application_get_window (dialog->application, 0);
 
   /* show the dialog on the same screen as the panel */
-  gtk_window_set_screen (GTK_WINDOW (dialog), 
+  gtk_window_set_screen (GTK_WINDOW (dialog),
       gtk_widget_get_screen (GTK_WIDGET (active)));
 
   /* show the dialog */

@@ -1613,7 +1613,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the root position of the attach widget */
   gdk_window_get_origin (GDK_WINDOW (attach_widget->window), x, y);
-  
+
   /* add the widgets allocation */
   *x += attach_widget->allocation.x;
   *y += attach_widget->allocation.y;

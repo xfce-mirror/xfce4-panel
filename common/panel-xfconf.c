@@ -67,7 +67,7 @@ panel_properties_object_notify (GObject    *object,
   g_object_get_property (object, g_param_spec_get_name (pspec), &value);
 
   /* set the xfconf property, unfortunately function blocking is
-   * pointless there because dbus is async. so we will receive 
+   * pointless there because dbus is async. so we will receive
    * a property-changed from the channel. */
   xfconf_channel_set_property (binding->channel, binding->channel_prop,
                                &value);
