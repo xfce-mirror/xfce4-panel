@@ -772,7 +772,7 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
                               GFileMonitorEvent  event_type,
                               LauncherPlugin    *plugin)
 {
-  GSList         *li;
+  GSList         *li, *lnext;
   GarconMenuItem *item;
   GFile          *item_file;
   gboolean        found;
@@ -800,8 +800,9 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
   exists = g_file_query_exists (changed_file, NULL);
 
   /* lookup the file in the menu items */
-  for (li = plugin->items, found = FALSE; !found && li != NULL; li = li->next)
+  for (li = plugin->items, found = FALSE; !found && li != NULL; li = lnext)
     {
+      lnext = li->next;
       item = GARCON_MENU_ITEM (li->data);
       item_file = garcon_menu_item_get_file (item);
       found = g_file_equal (changed_file, item_file);
