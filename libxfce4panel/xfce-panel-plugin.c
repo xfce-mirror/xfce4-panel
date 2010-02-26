@@ -602,31 +602,23 @@ xfce_panel_plugin_menu_move (XfcePanelPlugin *plugin)
 static void
 xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
 {
-  GtkWidget *dialog;
+  GtkWidget *widget;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
-  /* create question dialog */
-  dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
-                                   GTK_BUTTONS_NONE, _("Do you want to remove \"%s\"?"),
-                                   xfce_panel_plugin_get_display_name (plugin));
-
-  /* setup */
-  gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (plugin)));
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                            _("The item will be removed from the panel and "
-                                              "its configuration will be lost."));
-
-  /* add hig buttons */
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_NO,
-                          GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
+  /* create question dialog (same code is also in panel-preferences-dialog.c) */
+  widget = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+                                   _("Are you sure that you want to remove \"%s\"?"), xfce_panel_plugin_get_display_name (plugin));
+  gtk_window_set_screen (GTK_WINDOW (widget), gtk_widget_get_screen (GTK_WIDGET (plugin)));
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget), _("If you remove the item from the panel, it is permanently lost."));
+  gtk_dialog_add_buttons (GTK_DIALOG (widget), GTK_STOCK_CANCEL, GTK_RESPONSE_NO, GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
+  gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);
 
   /* run the dialog */
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+  if (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_YES)
     {
       /* hide the dialog */
-      gtk_widget_hide (dialog);
+      gtk_widget_hide (widget);
 
       /* ask the panel or wrapper to remove the plugin */
       xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
@@ -634,7 +626,7 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
     }
 
   /* destroy */
-  gtk_widget_destroy (dialog);
+  gtk_widget_destroy (widget);
 }
 
 

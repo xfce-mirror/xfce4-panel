@@ -32,6 +32,7 @@
 #include <panel/panel-application.h>
 #include <panel/panel-module.h>
 #include <panel/panel-itembar.h>
+#include <panel/panel-item-dialog.h>
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-preferences-dialog-glade.h>
 
@@ -531,7 +532,7 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
   provider = panel_preferences_dialog_item_get_selected (dialog, &iter_a);
 
   /* get the selection item */
-  if (G_LIKELY (provider))
+  if (G_LIKELY (provider != NULL))
     {
       /* get the itembar */
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
@@ -591,19 +592,42 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
 {
   XfcePanelPluginProvider *provider;
   GtkTreeIter              iter;
+  GtkWidget               *widget, *toplevel;
+  PanelModule             *module;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   /* get the selected item in the treeview */
   provider = panel_preferences_dialog_item_get_selected (dialog, &iter);
+  if (G_LIKELY (provider != NULL))
+    {
+      /* get the panel module of the provider */
+      module = panel_module_get_from_plugin_provider (provider);
 
-  /* TODO, question dialog */
+      /* create question dialog (same code is also in xfce-panel-plugin.c) */
+      toplevel = gtk_widget_get_toplevel (button);
+      widget = gtk_message_dialog_new (GTK_WINDOW (toplevel), GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+                                       _("Are you sure that you want to remove \"%s\"?"), panel_module_get_name (module));
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget), _("If you remove the item from the panel, it is permanently lost."));
+      gtk_dialog_add_buttons (GTK_DIALOG (widget), GTK_STOCK_CANCEL, GTK_RESPONSE_NO, GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
+      gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);
 
-  /* send signal */
-  xfce_panel_plugin_provider_emit_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
+      /* run the dialog */
+      if (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_YES)
+        {
+          /* hide the dialog */
+          gtk_widget_hide (widget);
 
-  /* remove from treeview */
-  gtk_list_store_remove (dialog->store, &iter);
+          /* send signal */
+          xfce_panel_plugin_provider_emit_signal (provider, PROVIDER_SIGNAL_REMOVE_PLUGIN);
+
+          /* remove from treeview */
+          gtk_list_store_remove (dialog->store, &iter);
+        }
+
+      /* destroy */
+      gtk_widget_destroy (widget);
+    }
 }
 
 
@@ -614,7 +638,8 @@ panel_preferences_dialog_item_add (GtkWidget              *button,
 {
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
-  /* TODO */
+  /* show the items dialog */
+  panel_item_dialog_show (dialog->active);
 }
 
 
@@ -631,7 +656,8 @@ panel_preferences_dialog_item_properties (GtkWidget              *button,
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
 
   /* emit configure-plugin signal */
-  xfce_panel_plugin_provider_show_configure (provider);
+  if (G_LIKELY (provider != NULL))
+    xfce_panel_plugin_provider_show_configure (provider);
 }
 
 
@@ -648,7 +674,8 @@ panel_preferences_dialog_item_about (GtkWidget              *button,
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
 
   /* emit about signal */
-  xfce_panel_plugin_provider_show_about (provider);
+  if (G_LIKELY (provider != NULL))
+    xfce_panel_plugin_provider_show_about (provider);
 }
 
 
@@ -673,7 +700,7 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
   /* get the selected item */
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
 
-  if (provider)
+  if (G_LIKELY (provider != NULL))
     {
       /* get the itembar */
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));

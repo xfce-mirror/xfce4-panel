@@ -1,0 +1,30 @@
+
+Panel
+=====
+- Almost complete rewrite of the code. Everything is now writtin in gobjects and a lot easier to understand (more comments, better function names, less code, smarter, faster, etc.).
+- Dragging a panel to snap to screen egdes (will work on a mouseless implementation later). Greatly improved the positioning code.
+- You can set the panel length (percentages).
+- Lock panels -> no dragging possible.
+- Alpha background (transparent panel).
+- Item/plugin editor in the panel preferences.
+- Xfconf, so you can change all panel properties externally except for adding and removing panels (yet).
+
+Plugin Framework
+================
+- ALL PLUGINS ARE FROM NOW ON COMPILED AS LIBRARIES. So you need to change your Makefile.am (sorry). Will provide a script to do this before compiling a plugin.
+- DBus communication with external plugins.
+- Plugins API is still the same (pfew).
+- If you want to run an external plugin you can define X-XFCE-External=TRUE in the desktop file. The panel will then start a plugin wrapper that embeds the plugin, so you have all the advanatages of the previous external plugin implementation (and I get something that is easy to maintain).
+- Because of the changes above, the XfcePanelPlugin is now a single gobject, this drops a lot of complexity in the previous plugin framework and also allows developing plugins as gobjects (yay).
+- Various speedups here and there.
+
+Internal Plugins
+================
+- Xfconf support in all plugins.
+- All plugins use the gobject implementation.
+- Iconbox: Merged in the tasklist plugins.
+- Clock: Fuzzy clock mode. Still working on some other improvements.
+- Tasklist: Dropped the WnckTasklist, to make the iconbox merge. Also working on some other improvements (sorting, dnd, performance, accessibility).
+- Launcher: Improve desktop file support, not started yet. In the end it should be a lot easier to create launchers.
+- Launcher: Create new launchers from the command line.
+

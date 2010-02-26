@@ -153,8 +153,11 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_window_set_default_size (GTK_WINDOW (dialog), 350, 450);
 
   /* add buttons */
-  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                          GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+                          GTK_STOCK_ADD, GTK_RESPONSE_OK,
+                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+                          NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
   /* create main box */

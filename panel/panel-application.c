@@ -429,7 +429,6 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         break;
 
       default:
-        g_critical ("Reveived unknown signal %d", signal);
         break;
     }
 }
