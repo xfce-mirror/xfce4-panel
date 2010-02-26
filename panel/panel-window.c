@@ -142,8 +142,8 @@ struct _PanelWindow
   /* whether the panel is locked */
   guint                locked : 1;
 
-  /* when the panel is 'selected' */
-  guint                selected : 1;
+  /* when this is the active panel */
+  guint                is_active_panel : 1;
 
   /* panel orientation */
   guint                horizontal;
@@ -257,7 +257,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_status = DISABLED;
   window->autohide_block = 0;
   window->autohide_window = NULL;
-  window->selected = FALSE;
+  window->is_active_panel = FALSE;
 
   /* set additional events we want to have */
   gtk_widget_add_events (GTK_WIDGET (window), GDK_BUTTON_PRESS_MASK);
@@ -347,17 +347,17 @@ panel_window_expose_event (GtkWidget      *widget,
       cr = gdk_cairo_create (widget->window);
 
       /* use another state when the panel is selected */
-      if (G_UNLIKELY (window->selected))
+      if (G_UNLIKELY (window->is_active_panel))
         state = GTK_STATE_SELECTED;
 
-      if (window->selected ||
+      if (window->is_active_panel ||
           (window->is_composited && window->background_alpha < 1.00))
         {
           /* get the background gdk color */
           color = &(widget->style->bg[state]);
 
           /* set the cairo source color */
-          _set_source_rgba (cr, color, window->selected ? 1.00 : window->background_alpha);
+          _set_source_rgba (cr, color, window->background_alpha);
 
           /* create retangle */
           cairo_rectangle (cr, event->area.x, event->area.y,
@@ -1013,7 +1013,13 @@ panel_window_paint_handle (PanelWindow  *window,
   gint           x, y, width, height;
   gint           i, xx, yy;
   GdkColor      *color;
-  gdouble        alpha = window->is_composited ? window->background_alpha : 1.00;
+  gdouble        alpha;
+
+  /* set the alpha (always show to handle for atleast 50%) */
+  if (window->is_composited)
+    alpha = 0.50 + window->background_alpha / 2.00;
+  else
+    alpha = 1.00;
 
   /* set initial numbers */
   x = alloc->x + 2;
@@ -1077,7 +1083,7 @@ panel_window_paint_border (PanelWindow  *window,
   gdouble        alpha = window->is_composited ? window->background_alpha : 1.00;
 
   /* 1px line */
-  cairo_set_line_width (cr, 1.0);
+  cairo_set_line_width (cr, 2.0);
 
   /* dark color */
   color = &(widget->style->dark[state]);
@@ -1108,7 +1114,7 @@ panel_window_paint_border (PanelWindow  *window,
   /* top line */
   cairo_rel_line_to (cr, alloc->width, 0);
 
-  /* stroke this part */
+  /* stroke the lines */
   cairo_stroke (cr);
 }
 
@@ -1551,19 +1557,40 @@ panel_window_is_composited (PanelWindow *window)
 
 
 
-void
-panel_window_set_selected (PanelWindow *window,
-                           gboolean     selected)
+static void
+panel_window_plugin_set_active_panel (GtkWidget *widget,
+                                      gpointer   user_data)
 {
+  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+
+  if (PANEL_IS_PLUGIN_EXTERNAL (widget))
+    panel_plugin_external_set_active_panel (PANEL_PLUGIN_EXTERNAL (widget), PANEL_WINDOW (user_data)->is_active_panel);
+}
+
+
+
+void
+panel_window_set_active_panel (PanelWindow *window,
+                               gboolean     active)
+{
+  GtkWidget *itembar;
+
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  if (G_UNLIKELY (window->selected != selected))
+  if (G_UNLIKELY (window->is_active_panel != active))
     {
       /* set new value */
-      window->selected = selected;
+      window->is_active_panel = !!active;
 
       /* queue a redraw */
       gtk_widget_queue_draw (GTK_WIDGET (window));
+
+      /* get the itembar */
+      itembar = gtk_bin_get_child (GTK_BIN (window));
+
+      /* poke all the plugins */
+      gtk_container_foreach (GTK_CONTAINER (itembar), panel_window_plugin_set_active_panel, window);
     }
 }
 
@@ -2010,7 +2037,7 @@ panel_window_set_span_monitors (PanelWindow *window,
 
   if (window->span_monitors != span_monitors)
     {
-      window->span_monitors = span_monitors;
+      window->span_monitors = !!span_monitors;
 
       gtk_widget_queue_resize (GTK_WIDGET (window));
     }

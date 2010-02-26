@@ -41,6 +41,8 @@ XfcePanelPluginProvider *panel_plugin_external_new (PanelModule *module, const g
 
 void panel_plugin_external_set_background_alpha (PanelPluginExternal *external, gint percentage);
 
+void panel_plugin_external_set_active_panel (PanelPluginExternal *external, gboolean active);
+
 G_END_DECLS
 
 #endif /* !__PANEL_PLUGIN_EXTERNAL_H__ */

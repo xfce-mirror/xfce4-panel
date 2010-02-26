@@ -33,7 +33,7 @@ enum
   EXPAND_CHANGED,
   MOVE,
   ADD_NEW_ITEMS,
-  CUSTOMIZE_PANEL,
+  PANEL_PREFERENCES,
   LAST_SIGNAL
 };
 
@@ -107,8 +107,8 @@ xfce_panel_plugin_provider_base_init (gpointer klass)
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
 
-      provider_signals[CUSTOMIZE_PANEL] =
-        g_signal_new (I_("customize-panel"),
+      provider_signals[PANEL_PREFERENCES] =
+        g_signal_new (I_("panel-preferences"),
                       G_TYPE_FROM_CLASS (klass),
                       G_SIGNAL_RUN_LAST,
                       0, NULL, NULL,

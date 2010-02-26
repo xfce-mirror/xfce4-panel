@@ -56,6 +56,9 @@ struct _WrapperPlug
 
   /* background alpha */
   gdouble                  background_alpha;
+
+  /* if this plugin is on an active panel */
+  guint                    is_active_panel : 1;
 };
 
 
@@ -68,53 +71,83 @@ static gboolean
 wrapper_plug_expose_event (GtkWidget      *widget,
                            GdkEventExpose *event)
 {
-  WrapperPlug *plug = WRAPPER_PLUG (widget);
-  cairo_t     *cr;
-  GdkColor    *color;
+  WrapperPlug    *plug = WRAPPER_PLUG (widget);
+  cairo_t        *cr;
+  GdkColor       *color;
+  GtkStateType    state = GTK_STATE_NORMAL;
+  GtkOrientation  orientation;
+  GtkAllocation  *alloc = &(widget->allocation);
+  gdouble         alpha = plug->background_alpha;
 
-  if (GTK_WIDGET_DRAWABLE (widget) && plug->background_alpha < 1.00)
+  if (GTK_WIDGET_DRAWABLE (widget))
     {
       /* create the cairo context */
       cr = gdk_cairo_create (widget->window);
 
-      /* get the background gdk color */
-      color = &(widget->style->bg[GTK_STATE_NORMAL]);
+      if (alpha < 1.00 || plug->is_active_panel)
+        {
+          /* change the state is this plugin is on an active panel */
+          if (G_UNLIKELY (plug->is_active_panel))
+            state = GTK_STATE_SELECTED;
 
-      /* set the cairo source color */
-      _set_source_rgba (cr, color, plug->background_alpha);
+          /* get the background gdk color */
+          color = &(widget->style->bg[state]);
 
-      /* create retangle */
-      cairo_rectangle (cr, event->area.x, event->area.y,
-                       event->area.width, event->area.height);
+          /* set the cairo source color */
+          _set_source_rgba (cr, color, alpha);
 
-      /* draw on source */
-      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+          /* create retangle */
+          cairo_rectangle (cr, event->area.x, event->area.y,
+                           event->area.width, event->area.height);
 
-      /* paint rectangle */
-      cairo_fill (cr);
+          /* draw on source */
+          cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+          /* paint rectangle */
+          cairo_fill (cr);
+        }
+
+      /* 1px line */
+      cairo_set_line_width (cr, 2.0);
+
+      /* get the plugin orientation */
+      orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plug->provider));
+
+      /* dark color */
+      color = &(widget->style->light[state]);
+      _set_source_rgba (cr, color, alpha);
+
+      /* move the cursor to the top left corner */
+      cairo_move_to (cr, alloc->x, alloc->y);
+
+      /* draw the light line */
+      if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        cairo_rel_line_to (cr, alloc->width, 0);
+      else
+        cairo_rel_line_to (cr, 0, alloc->height);
+
+      /* stroke the lines */
+      cairo_stroke (cr);
+
+      /* light color */
+      color = &(widget->style->dark[state]);
+      _set_source_rgba (cr, color, alpha);
+
+      /* set start position to bottom right */
+      cairo_move_to (cr, alloc->x + alloc->width, alloc->y + alloc->height);
+
+      /* draw the dark line */
+      if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        cairo_rel_line_to (cr, -alloc->width, 0);
+      else
+        cairo_rel_line_to (cr, 0, -alloc->height);
+
+      /* stroke the lines */
+      cairo_stroke (cr);
 
       /* destroy cairo context */
       cairo_destroy (cr);
     }
-
-
-  //~ cairo_rectangle (cr, event->area.x,
-                   //~ event->area.y,
-                   //~ event->area.width,
-                   //~ event->area.height);
-  //~ cairo_clip (cr);
-//~
-  //~ cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-//~
-  //~ style = gtk_widget_get_style (widget);
-  //~ r = (double) style->bg[widget->state].red / (double) 65535;
-  //~ g = (double) style->bg[widget->state].green / (double) 65535;
-  //~ b = (double) style->bg[widget->state].blue / (double) 65535;
-  //~ cairo_set_source_rgba (cr, r, g, b, 0.50);
-  //~ cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-  //~ cairo_paint (cr);
-//~
-  //~ cairo_destroy (cr);
 
     return GTK_WIDGET_CLASS(wrapper_plug_parent_class)->expose_event(widget, event);
 }
@@ -143,6 +176,7 @@ wrapper_plug_init (WrapperPlug *plug)
   plug->socket_id = 0;
   plug->atom = panel_atom_intern ("XFCE_PANEL_PLUGIN");
   plug->background_alpha = 1.00;
+  plug->is_active_panel = FALSE;
 
   GdkScreen   *screen;
   GdkColormap *colormap;
@@ -217,6 +251,14 @@ wrapper_plug_client_event (GtkWidget      *widget,
           case MESSAGE_SET_BACKGROUND_ALPHA:
             /* set the background alpha */
             plug->background_alpha = CLAMP (value, 0, 100) / 100.00;
+
+            /* redraw the window */
+            gtk_widget_queue_draw (widget);
+            break;
+
+          case MESSAGE_SET_ACTIVE_PANEL:
+            /* set if this plugin is on an active panel */
+            plug->is_active_panel = !!(value == 1);
 
             /* redraw the window */
             gtk_widget_queue_draw (widget);
@@ -331,14 +373,14 @@ wrapper_plug_message_add_new_items (XfcePanelPluginProvider *provider,
 
 
 static void
-wrapper_plug_message_customize_panel (XfcePanelPluginProvider *provider,
-                                      WrapperPlug             *plug)
+wrapper_plug_message_panel_preferences (XfcePanelPluginProvider *provider,
+                                        WrapperPlug             *plug)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
   /* send signal */
-  wrapper_plug_send_message (plug, MESSAGE_CUSTOMIZE_PANEL, 0);
+  wrapper_plug_send_message (plug, MESSAGE_PANEL_PREFERENCES, 0);
 }
 
 
@@ -379,7 +421,7 @@ wrapper_plug_new (GdkNativeWindow          socket_id,
   g_signal_connect (G_OBJECT (provider), "expand-changed", G_CALLBACK (wrapper_plug_message_expand_changed), plug);
   g_signal_connect (G_OBJECT (provider), "move-item", G_CALLBACK (wrapper_plug_message_move_item), plug);
   g_signal_connect (G_OBJECT (provider), "add-new-items", G_CALLBACK (wrapper_plug_message_add_new_items), plug);
-  g_signal_connect (G_OBJECT (provider), "customize-panel", G_CALLBACK (wrapper_plug_message_customize_panel), plug);
+  g_signal_connect (G_OBJECT (provider), "panel-preferences", G_CALLBACK (wrapper_plug_message_panel_preferences), plug);
   g_signal_connect (G_OBJECT (provider), "destroy", G_CALLBACK (wrapper_plug_message_remove), plug);
 
   /* contruct the plug */

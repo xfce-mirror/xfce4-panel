@@ -274,19 +274,23 @@ panel_plugin_external_client_event (GtkWidget      *widget,
       switch (message)
         {
           case MESSAGE_EXPAND_CHANGED:
+            /* emit the expand changed signal */
             g_signal_emit_by_name (G_OBJECT (external), "expand-changed", !!(value == 1));
             break;
 
           case MESSAGE_MOVE_ITEM:
+            /* start a plugin dnd */
             g_signal_emit_by_name (G_OBJECT (external), "move-item", 0);
             break;
 
           case MESSAGE_ADD_NEW_ITEMS:
+            /* show the add new items dialog */
             g_signal_emit_by_name (G_OBJECT (external), "add-new-items", 0);
             break;
 
-          case MESSAGE_CUSTOMIZE_PANEL:
-            g_signal_emit_by_name (G_OBJECT (external), "customize-panel", 0);
+          case MESSAGE_PANEL_PREFERENCES:
+            /* show the panel preferences dialog */
+            g_signal_emit_by_name (G_OBJECT (external), "panel-preferences", 0, gtk_widget_get_toplevel (widget));
             break;
 
           case MESSAGE_REMOVE:
@@ -551,5 +555,18 @@ panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (external));
 
   /* send the signal to the wrapper */
-  panel_plugin_external_send_message (PANEL_PLUGIN_EXTERNAL (external), MESSAGE_SET_BACKGROUND_ALPHA, percentage);
+  panel_plugin_external_send_message (external, MESSAGE_SET_BACKGROUND_ALPHA, percentage);
+}
+
+
+
+void
+panel_plugin_external_set_active_panel (PanelPluginExternal *external,
+                                        gboolean             active)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (external));
+
+  /* send the signal to the wrapper */
+  panel_plugin_external_send_message (external, MESSAGE_SET_ACTIVE_PANEL, active ? 1 : 0);
 }

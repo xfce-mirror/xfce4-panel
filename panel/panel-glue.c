@@ -98,7 +98,7 @@ panel_glue_popup_menu (PanelWindow *window)
   gtk_widget_show (item);
 
   /* add new items */
-  item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items"));
+  item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
   g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (panel_item_dialog_show), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
@@ -108,7 +108,7 @@ panel_glue_popup_menu (PanelWindow *window)
   gtk_widget_show (image);
 
   /* customize panel */
-  item = gtk_image_menu_item_new_with_mnemonic (_("_Customize Panels"));
+  item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
   g_signal_connect_swapped (G_OBJECT (item), "activate", G_CALLBACK (panel_preferences_dialog_show), window);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);

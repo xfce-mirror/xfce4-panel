@@ -433,7 +433,7 @@ panel_application_insert_plugin (PanelApplication  *application,
       itembar = gtk_bin_get_child (GTK_BIN (window));
 
       g_signal_connect (G_OBJECT (provider), "expand-changed", G_CALLBACK (expand_handle), window);
-      g_signal_connect_swapped (G_OBJECT (provider), "customize-panel", G_CALLBACK (panel_preferences_dialog_show), window);
+      g_signal_connect_swapped (G_OBJECT (provider), "panel-preferences", G_CALLBACK (panel_preferences_dialog_show), window);
       g_signal_connect (G_OBJECT (provider), "add-new-items", G_CALLBACK (panel_item_dialog_show), NULL);
       g_signal_connect (G_OBJECT (provider), "move-item", G_CALLBACK (move_handle), application);
 
@@ -1131,7 +1131,7 @@ panel_application_window_select (PanelApplication *application,
 
   /* update state for all windows */
   for (li = application->windows; li != NULL; li = li->next)
-    panel_window_set_selected (PANEL_WINDOW (li->data), !!(li->data == window));
+    panel_window_set_active_panel (PANEL_WINDOW (li->data), !!(li->data == window));
 }
 
 

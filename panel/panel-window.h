@@ -75,7 +75,7 @@ GtkWidget           *panel_window_new                   (void);
 
 gboolean             panel_window_is_composited         (PanelWindow         *window);
 
-void                 panel_window_set_selected          (PanelWindow         *window,
+void                 panel_window_set_active_panel      (PanelWindow         *window,
                                                          gboolean             selected);
 
 PanelWindowSnapEdge  panel_window_get_snap_edge         (PanelWindow         *window);
