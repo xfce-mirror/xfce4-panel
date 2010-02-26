@@ -104,7 +104,7 @@ static guint dbus_service_signals[LAST_SIGNAL];
 
 
 
-G_DEFINE_TYPE (PanelDBusService, panel_dbus_service, G_TYPE_OBJECT);
+G_DEFINE_TYPE (PanelDBusService, panel_dbus_service, G_TYPE_OBJECT)
 
 
 

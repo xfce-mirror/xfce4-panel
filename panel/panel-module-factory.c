@@ -83,7 +83,7 @@ static gboolean force_all_external = FALSE;
 
 
 
-G_DEFINE_TYPE (PanelModuleFactory, panel_module_factory, G_TYPE_OBJECT);
+G_DEFINE_TYPE (PanelModuleFactory, panel_module_factory, G_TYPE_OBJECT)
 
 
 

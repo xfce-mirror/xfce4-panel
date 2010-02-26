@@ -90,12 +90,12 @@ enum
 
 static const GtkTargetEntry drag_targets[] =
 {
-  { (gchar *) "xfce-panel/plugin-name", 0, 0 },
+  { "xfce-panel/plugin-name", 0, 0 },
 };
 
 
 
-G_DEFINE_TYPE (PanelItemDialog, panel_item_dialog, XFCE_TYPE_TITLED_DIALOG);
+G_DEFINE_TYPE (PanelItemDialog, panel_item_dialog, XFCE_TYPE_TITLED_DIALOG)
 
 
 
@@ -302,8 +302,11 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
     {
       module = panel_item_dialog_get_selected_module (dialog->treeview);
       if (G_LIKELY (module != NULL))
-        panel_application_add_new_item (dialog->application,
-            panel_module_get_name (module), NULL);
+        {
+          panel_application_add_new_item (dialog->application,
+              panel_module_get_name (module), NULL);
+          g_object_unref (G_OBJECT (module));
+        }
     }
   else
     {
@@ -446,7 +449,7 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
 
   /* get the selected panel module */
   module = panel_item_dialog_get_selected_module (GTK_TREE_VIEW (treeview));
-  if (G_LIKELY (module))
+  if (G_LIKELY (module != NULL))
     {
       if (panel_module_is_usable (module))
         {
@@ -489,7 +492,7 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
 
   /* get the selected module */
   module = panel_item_dialog_get_selected_module (GTK_TREE_VIEW (treeview));
-  if (G_LIKELY (module))
+  if (G_LIKELY (module != NULL))
     {
       /* get the internal module name */
       internal_name = panel_module_get_name (module);
