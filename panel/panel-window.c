@@ -364,7 +364,25 @@ panel_window_class_init (PanelWindowClass *klass)
 static void
 panel_window_init (PanelWindow *window)
 {
-  /* no resizable, so allocation will follow size request */
+  window->screen = NULL;
+  window->struts_edge = STRUTS_EDGE_NONE;
+  window->struts_disabled = FALSE;
+  window->horizontal = TRUE;
+  window->size = 30;
+  window->length = 0.10;
+  window->snap_position = SNAP_POSITION_NONE;
+  window->span_monitors = FALSE;
+  window->locked = FALSE;
+  window->autohide_state = AUTOHIDE_DISABLED;
+  window->autohide_timeout_id = 0;
+  window->autohide_block = 0;
+  window->base_x = -1;
+  window->base_y = -1;
+  window->grab_time = 0;
+  window->grab_x = 0;
+  window->grab_y = 0;
+
+  /* not resizable, so allocation will follow size request */
   gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
 
   /* set additional events */
@@ -372,30 +390,6 @@ panel_window_init (PanelWindow *window)
 
   /* create a 'fake' drop zone for autohide drag motion */
   gtk_drag_dest_set (GTK_WIDGET (window), 0, NULL, 0, 0);
-
-  /* init vars */
-  window->screen = NULL;
-  window->struts_edge = STRUTS_EDGE_NONE;
-  window->struts_disabled = FALSE;
-
-  window->horizontal = TRUE;
-  window->size = 30;
-  window->length = 0.10;
-  window->snap_position = SNAP_POSITION_NONE;
-  window->span_monitors = FALSE;
-
-  window->locked = FALSE;
-
-  window->autohide_state = AUTOHIDE_DISABLED;
-  window->autohide_timeout_id = 0;
-  window->autohide_block = 0;
-
-  window->base_x = -1;
-  window->base_y = -1;
-
-  window->grab_time = 0;
-  window->grab_x = 0;
-  window->grab_y = 0;
 
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
@@ -615,7 +609,6 @@ panel_window_finalize (GObject *object)
   if (window->autohide_window != NULL)
     gtk_widget_destroy (window->autohide_window);
 
-  /* cleanup */
   g_free (window->output_name);
 
   (*G_OBJECT_CLASS (panel_window_parent_class)->finalize) (object);
@@ -636,7 +629,7 @@ panel_window_expose_event (GtkWidget      *widget,
   gdouble       alpha = 1.00;
   GtkWidget    *child;
 
-  /* expose the background and borders */
+  /* expose the background and borders handled in PanelBaseWindow */
   (*GTK_WIDGET_CLASS (panel_window_parent_class)->expose_event) (widget, event);
 
   if (window->locked || !GTK_WIDGET_DRAWABLE (widget))
@@ -706,7 +699,6 @@ panel_window_expose_event (GtkWidget      *widget,
       cairo_fill (cr);
     }
 
-  /* destroy cairo context */
   cairo_destroy (cr);
 
 end:
@@ -808,7 +800,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   pointer_y = event->y_root;
 
   /* check if the pointer moved to another monitor */
-  if (window->span_monitors == FALSE
+  if (!window->span_monitors
       && (pointer_x < window->area.x
           || pointer_y < window->area.y
           || pointer_x > window->area.x + window->area.width
@@ -866,15 +858,13 @@ panel_window_button_press_event (GtkWidget      *widget,
   if (event->window != widget->window)
     goto end;
 
-  /* get the modifiers */
   modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
 
   if (event->button == 1
       && event->type == GDK_BUTTON_PRESS
-      && window->locked == FALSE
+      && !window->locked
       && modifiers == 0)
     {
-      /* debug check */
       panel_return_val_if_fail (window->grab_time == 0, FALSE);
 
       /* create a cursor */
@@ -887,7 +877,6 @@ panel_window_button_press_event (GtkWidget      *widget,
                                  | GDK_BUTTON_RELEASE_MASK,
                                  NULL, cursor, event->time);
 
-      /* release the cursor */
       gdk_cursor_unref (cursor);
 
       /* set the grab info if the grab was successfully made */
@@ -903,7 +892,6 @@ panel_window_button_press_event (GtkWidget      *widget,
   else if (event->button == 3
            || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
     {
-      /* popup the panel menu */
       panel_window_menu_popup (window, event->time);
 
       return TRUE;
@@ -932,7 +920,7 @@ panel_window_button_release_event (GtkWidget      *widget,
       gdk_display_pointer_ungrab (display, window->grab_time);
       window->grab_time = 0;
 
-      /* update the position property */
+      /* store the new position */
       g_object_notify (G_OBJECT (widget), "position");
 
       return TRUE;
@@ -1063,14 +1051,11 @@ panel_window_size_allocate (GtkWidget     *widget,
                                        -9999, -9999, -1, -1);
     }
 
-  /* move the window */
   gtk_window_move (GTK_WINDOW (window), window->alloc.x, window->alloc.y);
 
-  /* position the child */
   child = gtk_bin_get_child (GTK_BIN (widget));
   if (G_LIKELY (child != NULL))
     {
-      /* init child allocation */
       child_alloc.x = 0;
       child_alloc.y = 0;
       child_alloc.width = alloc->width;
@@ -1348,7 +1333,7 @@ panel_window_screen_struts_set (PanelWindow *window)
     }
 
   /* leave when there is nothing to update */
-  if (update_struts == FALSE)
+  if (!update_struts)
     return;
 
   /* don't crash on x errors */
@@ -1499,10 +1484,8 @@ panel_window_snap_edge_gravity (gint value,
   if (value <= end && value >= end - SNAP_DISTANCE)
     return EDGE_GRAVITY_END;
 
-  /* calculate the center of start and end */
-  center = start + (end - start) / 2;
-
   /* snap at the center */
+  center = start + (end - start) / 2;
   if (value >= center - 10 && value <= center + SNAP_DISTANCE)
     return EDGE_GRAVITY_CENTER;
 
@@ -1651,7 +1634,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                   /* check if this driver supports output names */
                   if (G_UNLIKELY (name == NULL))
                     {
-                      /* send a warnings why this went wrong */
+                      /* print a warnings why this went wrong */
                       g_message ("An output is set on the panel window (%s), "
                                  "but it looks  like the driver does not "
                                  "support output names. Falling back to normal "
@@ -1676,7 +1659,6 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                       panel_return_if_fail (a.width > 0 && a.height > 0);
                     }
 
-                  /* cleanup */
                   g_free (name);
                 }
             }
@@ -1731,13 +1713,11 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   /* set the new working area of the panel */
   window->area = a;
 
-  /* update panel borders */
   panel_window_screen_update_borders (window);
 
-  /* queue a resize */
   gtk_widget_queue_resize (GTK_WIDGET (window));
 
-  /* update the struts if needed, ie. we need to reset the struts */
+  /* update the struts if needed (ie. we need to reset the struts) */
   if (force_struts_update)
     panel_window_screen_struts_set (window);
 
@@ -1762,7 +1742,7 @@ panel_window_autohide_timeout (gpointer user_data)
   else if (window->autohide_state == AUTOHIDE_POPUP)
     window->autohide_state = AUTOHIDE_VISIBLE;
 
-  /* resize the panel */
+  /* move the windows around */
   gtk_widget_queue_resize (GTK_WIDGET (window));
 
   return FALSE;
@@ -1973,7 +1953,6 @@ panel_window_menu_deactivate (GtkMenu     *menu,
   /* thaw autohide block */
   panel_window_thaw_autohide (window);
 
-  /* destroy the menu */
   g_object_unref (G_OBJECT (menu));
 }
 
@@ -1984,7 +1963,6 @@ panel_window_menu_add_items (PanelWindow *window)
 {
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  /* show the item dialog */
   panel_item_dialog_show (window);
 }
 
@@ -2005,19 +1983,15 @@ panel_window_menu_popup (PanelWindow *window,
 
   /* create menu */
   menu = gtk_menu_new ();
-
-  /* sink the menu and add unref on deactivate */
   g_object_ref_sink (G_OBJECT (menu));
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (panel_window_menu_deactivate), window);
 
-  /* label */
   item = gtk_image_menu_item_new_with_label ("Xfce Panel");
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_set_sensitive (item, FALSE);
   gtk_widget_show (item);
 
-  /* separator */
   item = gtk_separator_menu_item_new ();
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
@@ -2044,7 +2018,6 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
   gtk_widget_show (image);
 
-  /* separator */
   item = gtk_separator_menu_item_new ();
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
@@ -2067,7 +2040,6 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
   gtk_widget_show (image);
 
-  /* separator */
   item = gtk_separator_menu_item_new ();
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
@@ -2079,8 +2051,8 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
-  /* popup the menu */
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 0, event_time);
+  gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
+                  NULL, NULL, 0, event_time);
 }
 
 
