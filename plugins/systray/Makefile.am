@@ -11,25 +11,24 @@ plugindir = \
 
 plugin_LTLIBRARIES = \
 	libsystray.la
-	
+
 libsystray_built_sources = \
-	xfce-tray-marshal.c \
-	xfce-tray-marshal.h
+	systray-dialog_glade.h \
+	systray-marshal.c \
+	systray-marshal.h
 
 libsystray_la_SOURCES = \
 	$(libsystray_built_sources) \
-	xfce-tray-dialogs.c \
-	xfce-tray-dialogs.h \
-	xfce-tray-manager.c \
-	xfce-tray-manager.h \
-	xfce-tray-plugin.c \
-	xfce-tray-plugin.h \
-	xfce-tray-widget.c \
-	xfce-tray-widget.h
+	systray.c \
+	systray.h \
+	systray-manager.c \
+	systray-manager.h
 
 libsystray_la_CFLAGS = \
 	$(LIBX11_CFLAGS) \
 	$(GTK_CFLAGS) \
+	$(EXO_CFLAGS) \
+	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(PLATFORM_CFLAGS)
@@ -44,6 +43,8 @@ libsystray_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
 	$(LIBX11_LIBS) \
 	$(GTK_LIBS) \
+	$(EXO_LIBS) \
+	$(XFCONF_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS)
 
@@ -63,12 +64,13 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	$(desktop_in_in_files) \
-	xfce-tray-marshal.list
-	
+	systray-dialog.glade \
+	systray-marshal.list
+
 DISTCLEANFILES = \
 	$(desktop_DATA) \
 	$(desktop_in_files)
-	
+
 #
 # Rules to auto-generate built sources
 #
@@ -79,12 +81,15 @@ BUILT_SOURCES = \
 DISTCLEANFILES +=	\
 	$(libsystray_built_sources)
 
-xfce-tray-marshal.h: xfce-tray-marshal.list Makefile
-	glib-genmarshal --header --internal --prefix=_xfce_tray_marshal $< > $@
+systray-marshal.h: systray-marshal.list Makefile
+	glib-genmarshal --header --internal --prefix=_systray_marshal $< > $@
 
-xfce-tray-marshal.c: xfce-tray-marshal.list Makefile
-	echo "#include \"xfce-tray-marshal.h\"" > $@ \
-	&& glib-genmarshal --prefix=_xfce_tray_marshal --body $< >> $@
+systray-marshal.c: systray-marshal.list Makefile
+	echo "#include \"systray-marshal.h\"" > $@ \
+	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
+
+systray-dialog_glade.h: systray-dialog.glade
+	exo-csource --static --strip-comments --strip-content --name=systray_dialog_glade $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
