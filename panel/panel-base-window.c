@@ -156,12 +156,6 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 static void
 panel_base_window_init (PanelBaseWindow *window)
 {
-  /* set window properties */
-  gtk_window_set_resizable (GTK_WINDOW (window), TRUE);
-  gtk_window_set_decorated (GTK_WINDOW (window), FALSE);
-  gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DOCK);
-  gtk_window_set_gravity (GTK_WINDOW (window), GDK_GRAVITY_STATIC);
-
   /* set private pointer */
   window->priv = PANEL_BASE_WINDOW_GET_PRIVATE (window);
 

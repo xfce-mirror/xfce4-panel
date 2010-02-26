@@ -1824,8 +1824,13 @@ panel_window_set_autohide (PanelWindow *window,
     {
       /* create the window */
       panel_return_if_fail (window->autohide_window == NULL);
-      popup = g_object_new (PANEL_TYPE_BASE_WINDOW, "type",
-                            GTK_WINDOW_POPUP, NULL);
+      popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
+                            "type", GTK_WINDOW_POPUP,
+                            "decorated", FALSE,
+                            "resizable", TRUE,
+                            "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
+                            "gravity", GDK_GRAVITY_STATIC,
+                            NULL);
 
       /* move the window offscreen */
       panel_base_window_move_resize (PANEL_BASE_WINDOW (popup),
@@ -2116,6 +2121,10 @@ panel_window_new (void)
 {
   return g_object_new (PANEL_TYPE_WINDOW,
                        "type", GTK_WINDOW_TOPLEVEL,
+                       "decorated", FALSE,
+                       "resizable", FALSE,
+                       "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
+                       "gravity", GDK_GRAVITY_STATIC,
                        NULL);
 }
 
