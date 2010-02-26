@@ -181,7 +181,7 @@ panel_module_load (GTypeModule *type_module)
     }
 
     /* check if there is a preinit function */
-  if (g_module_symbol (module->library, "__xpp_preinit", &foo))
+  if (g_module_symbol (module->library, "xfce_panel_module_preinit", &foo))
     {
       /* show warning */
       g_warning ("The plugin \"%s\" is marked as internal in the desktop file, "
@@ -199,7 +199,7 @@ panel_module_load (GTypeModule *type_module)
     }
 
   /* try to link the contruct function */
-  if (g_module_symbol (module->library, "__xpp_init", (gpointer) &init_func))
+  if (g_module_symbol (module->library, "xfce_panel_module_init", (gpointer) &init_func))
     {
       /* initialize the plugin */
       module->type = init_func (type_module, &make_resident);
@@ -208,7 +208,7 @@ panel_module_load (GTypeModule *type_module)
       if (make_resident)
         g_module_make_resident (module->library);
     }
-  else if (!g_module_symbol (module->library, "__xpp_construct",
+  else if (!g_module_symbol (module->library, "xfce_panel_module_construct",
                              (gpointer) &module->construct_func))
     {
       /* print critical warning */
