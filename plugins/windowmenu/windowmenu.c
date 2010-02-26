@@ -98,6 +98,9 @@ static void      window_menu_plugin_screen_position_changed (XfcePanelPlugin    
 static gboolean  window_menu_plugin_size_changed            (XfcePanelPlugin    *panel_plugin,
                                                              gint                size);
 static void      window_menu_plugin_configure_plugin        (XfcePanelPlugin    *panel_plugin);
+static gboolean  window_menu_plugin_remote_event            (XfcePanelPlugin    *panel_plugin,
+                                                             const gchar        *name,
+                                                             const GValue       *value);
 static void      window_menu_plugin_active_window_changed   (WnckScreen         *screen,
                                                              WnckWindow         *previous_window,
                                                              WindowMenuPlugin   *plugin);
@@ -146,6 +149,7 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
   plugin_class->screen_position_changed = window_menu_plugin_screen_position_changed;
   plugin_class->size_changed = window_menu_plugin_size_changed;
   plugin_class->configure_plugin = window_menu_plugin_configure_plugin;
+  plugin_class->remote_event = window_menu_plugin_remote_event;
 
   g_object_class_install_property (gobject_class,
                                    PROP_STYLE,
@@ -510,6 +514,34 @@ window_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     }
 
   gtk_widget_show (GTK_WIDGET (dialog));
+}
+
+
+
+static gboolean
+window_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
+                                 const gchar     *name,
+                                 const GValue    *value)
+{
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (panel_plugin);
+  GdkEventButton    event;
+
+  if (strcmp (name, "popup") == 0
+      && GTK_WIDGET_VISIBLE (panel_plugin)
+      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))
+    {
+      /* create fake event */
+      event.type = GDK_BUTTON_PRESS;
+      event.button = 1;
+      event.time = gtk_get_current_event_time ();
+
+      window_menu_plugin_button_press_event (plugin->button, &event, plugin);
+
+      /* don't popup another menu */
+      return TRUE;
+    }
+
+  return FALSE;
 }
 
 

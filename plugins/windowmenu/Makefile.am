@@ -49,6 +49,15 @@ libwindowmenu_la_DEPENDENCIES = \
 	$(top_builddir)/common/libpanel-common.la
 
 #
+# xfce4-popup-windowmenu script
+#
+bin_SCRIPTS = \
+	xfce4-popup-windowmenu
+
+xfce4-popup-windowmenu: xfce4-popup-windowmenu.in Makefile
+	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" $< >$@
+
+#
 # .desktop file
 #
 desktopdir = $(datadir)/xfce4/panel
