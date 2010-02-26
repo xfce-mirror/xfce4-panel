@@ -41,7 +41,9 @@
                             <child>
                               <object class="GtkLabel" id="label4">
                                 <property name="visible">True</property>
-                                <property name="label" translatable="yes">Number of rows:</property>
+                                <property name="label" translatable="yes">Number of _rows:</property>
+                                <property name="use_underline">True</property>
+                                <property name="mnemonic_widget">spin1</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -69,10 +71,11 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-names">
-                            <property name="label" translatable="yes">Show workspace names</property>
+                            <property name="label" translatable="yes">Show workspace _names</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
@@ -86,11 +89,12 @@
                             <property name="xscale">0</property>
                             <child>
                               <object class="GtkButton" id="settings-button">
-                                <property name="label" translatable="yes">Workspace Settings...</property>
+                                <property name="label" translatable="yes">Workspace _Settings...</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="image">image1</property>
+                                <property name="use_underline">True</property>
                               </object>
                             </child>
                           </object>
@@ -130,10 +134,11 @@
                     <property name="right_padding">6</property>
                     <child>
                       <object class="GtkCheckButton" id="workspace-scrolling">
-                        <property name="label" translatable="yes">Switch workspaces using the mouse wheel</property>
+                        <property name="label" translatable="yes">Switch workspaces using the mouse _wheel</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
                     </child>
