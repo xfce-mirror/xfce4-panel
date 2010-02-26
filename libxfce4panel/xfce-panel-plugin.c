@@ -283,8 +283,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:name:
    *
-   * The internal, unstranslated, name of the #XfcePanelPlugin. Plugin 
-   * writer can use it to read the plugin name, but 
+   * The internal, unstranslated, name of the #XfcePanelPlugin. Plugin
+   * writer can use it to read the plugin name, but
    * xfce_panel_plugin_get_name() is recommended since that
    * returns a const string.
    **/
@@ -336,9 +336,9 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /**
    * XfcePanelPlugin:arguments:
    *
-   * The arguments the plugin was started with. If the plugin was not 
-   * started with any arguments this value is %NULL. Plugin writer can 
-   * use it to read the arguments array, but 
+   * The arguments the plugin was started with. If the plugin was not
+   * started with any arguments this value is %NULL. Plugin writer can
+   * use it to read the arguments array, but
    * xfce_panel_plugin_get_arguments() is recommended.
    **/
   g_object_class_install_property (gobject_class,
@@ -350,7 +350,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                        G_PARAM_READWRITE
                                                        | G_PARAM_STATIC_STRINGS
                                                        | G_PARAM_CONSTRUCT_ONLY));
-                                                       
+
   /** TODO properties for size, expand, orientation, screen-position **/
 }
 
@@ -757,7 +757,7 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
       {
         /* disconnect this signal */
         g_signal_handlers_disconnect_by_func (G_OBJECT (menu), G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
-        
+
         /* decrease the counter */
         plugin->priv->registered_menus--;
 
@@ -1289,11 +1289,11 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the menu/widget size request */
   gtk_widget_size_request (menu_widget, &requisition);
-  
+
   /* get the root position of the attach widget (the panel) */
   toplevel = gtk_widget_get_toplevel (attach_widget);
   gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
-  
+
   /* add the widgets allocation */
   *x += attach_widget->allocation.x;
   *y += attach_widget->allocation.y;

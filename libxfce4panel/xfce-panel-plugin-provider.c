@@ -52,7 +52,7 @@ xfce_panel_plugin_provider_get_type (void)
   static GType type = 0;
 
   if (G_UNLIKELY (type == 0))
-    {      
+    {
       type = g_type_register_static_simple (G_TYPE_INTERFACE, I_("XfcePanelPluginProvider"),
 						                                sizeof (XfcePanelPluginProviderIface),
 						                                (GClassInitFunc) xfce_panel_plugin_provider_class_init,

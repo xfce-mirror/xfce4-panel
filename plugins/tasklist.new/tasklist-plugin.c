@@ -11,7 +11,7 @@
  * more details.
  *
  * You should have received a copy of the GNU Library General Public License
- * along with this library; if not, write to the Free Software Foundation, 
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
@@ -59,9 +59,9 @@ tasklist_plugin_class_init (TasklistPluginClass *klass)
 {
   GObjectClass         *gobject_class;
   XfcePanelPluginClass *plugin_class;
-  
+
   gobject_class = G_OBJECT_CLASS (klass);
-  
+
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->orientation_changed = tasklist_plugin_orientation_changed;
   plugin_class->size_changed = tasklist_plugin_size_changed;
@@ -77,7 +77,7 @@ static void
 tasklist_plugin_init (TasklistPlugin *plugin)
 {
   GtkWidget *button;
-  
+
   button = gtk_button_new_from_stock (GTK_STOCK_FLOPPY);
   gtk_container_add (GTK_CONTAINER (plugin), button);
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);

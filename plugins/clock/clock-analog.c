@@ -230,7 +230,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
         /* clip the drawing region */
         gdk_cairo_rectangle (cr, &event->area);
         cairo_clip (cr);
-        
+
         /* get the local time */
         xfce_clock_util_get_localtime (&tm);
 

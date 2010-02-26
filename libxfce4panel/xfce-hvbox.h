@@ -2,7 +2,7 @@
 /*
  * This file is partly based on OBox
  * Copyright (C) 2002      Red Hat Inc. based on GtkHBox
- * 
+ *
  * Copyright (C) 2006-2007 Jasper Huijsmans <jasper@xfce.org>
  * Copyright (C) 2006      Jani Monoses <jani@ubuntu.com>
  * Copyright (C) 2007-2008 Nick Schermer <nick@xfce.org>

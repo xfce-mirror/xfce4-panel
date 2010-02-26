@@ -99,7 +99,7 @@ callback_handler (const gchar  *name,
         /* set the option */
         opt_preferences = value ? MAX (0, atoi (value)) : 0;
         break;
-      
+
       case 'a':
         /* set the option */
         opt_add_items = value ? MAX (0, atoi (value)) : 0;
@@ -108,7 +108,7 @@ callback_handler (const gchar  *name,
       default:
         return FALSE;
     }
-    
+
   return TRUE;
 }
 
@@ -236,7 +236,7 @@ main (gint argc, gchar **argv)
 
       goto dbus_return;
     }
-  
+
   /* create dbus service */
   dbus_service = panel_dbus_service_get ();
 
@@ -249,7 +249,7 @@ main (gint argc, gchar **argv)
 
   /* enter the main loop */
   gtk_main ();
-  
+
   /* release dbus service */
   g_object_unref (G_OBJECT (dbus_service));
 

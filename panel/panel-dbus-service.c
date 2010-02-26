@@ -158,7 +158,7 @@ panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
                                                GError           **error)
 {
   PanelApplication *application;
-  
+
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -166,7 +166,7 @@ panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
   application = panel_application_get ();
   panel_preferences_dialog_show (panel_application_get_window (application, active));
   g_object_unref (G_OBJECT (application));
-  
+
   return TRUE;
 }
 
@@ -178,7 +178,7 @@ panel_dbus_service_display_items_dialog (PanelDBusService  *service,
                                          GError           **error)
 {
   PanelApplication *application;
-  
+
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -197,7 +197,7 @@ panel_dbus_service_save (PanelDBusService  *service,
                          GError           **error)
 {
   PanelApplication *application;
-  
+
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -218,11 +218,11 @@ panel_dbus_service_add_new_item (PanelDBusService  *service,
                                  GError           **error)
 {
   PanelApplication *application;
-  
+
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
   panel_return_val_if_fail (plugin_name != NULL, FALSE);
-  
+
   application = panel_application_get ();
 
   /* save the configuration */
@@ -230,7 +230,7 @@ panel_dbus_service_add_new_item (PanelDBusService  *service,
     panel_application_add_new_item (application, plugin_name, arguments);
   else
     panel_application_add_new_item (application, plugin_name, NULL);
-    
+
   g_object_unref (G_OBJECT (application));
 
   return TRUE;

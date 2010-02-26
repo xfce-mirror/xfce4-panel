@@ -53,7 +53,7 @@ struct _XfceArrowButton
 {
   /*< private >*/
   GtkToggleButton __parent__;
-    
+
   GtkArrowType arrow_type;
 };
 

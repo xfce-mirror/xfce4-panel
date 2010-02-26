@@ -827,7 +827,7 @@ panel_preferences_dialog_show (PanelWindow *active)
       dialog = g_object_new (PANEL_TYPE_PREFERENCES_DIALOG, NULL);
       g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer) &dialog);
     }
-  
+
   /* get the active window index */
   if (G_LIKELY (active))
     idx = panel_application_get_window_index (dialog->application, active);

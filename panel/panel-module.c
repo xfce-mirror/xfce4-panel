@@ -103,7 +103,7 @@ panel_module_class_init (PanelModuleClass *klass)
   gtype_module_class = G_TYPE_MODULE_CLASS (klass);
   gtype_module_class->load = panel_module_load;
   gtype_module_class->unload = panel_module_unload;
-  
+
   /* initialize the quark */
   module_quark = g_quark_from_static_string ("panel-module");
 }
@@ -377,7 +377,7 @@ panel_module_create_plugin (PanelModule  *module,
       /* emit unique-changed if the plugin is unique */
       if (module->is_unique)
         panel_module_factory_emit_unique_changed (module);
-      
+
       /* add link to the module */
       g_object_set_qdata (G_OBJECT (plugin), module_quark, module);
     }
@@ -453,12 +453,12 @@ const gchar *
 panel_module_get_icon_name_from_plugin (XfcePanelPluginProvider *provider)
 {
   PanelModule *module;
-  
+
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
-  
+
   /* get the module */
   module = g_object_get_qdata (G_OBJECT (provider), module_quark);
-  
+
   /* return the icon name */
   return panel_module_get_icon_name (module);
 }

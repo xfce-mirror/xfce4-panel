@@ -553,10 +553,10 @@ panel_application_plugin_move (GtkWidget        *item,
 
   /* begin a drag */
   context = gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
-  
+
   /* set the drag context icon name */
   icon_name = panel_module_get_icon_name_from_plugin (XFCE_PANEL_PLUGIN_PROVIDER (item));
-  gtk_drag_set_icon_name (context, icon_name ? icon_name : GTK_STOCK_DND, 0, 0); 
+  gtk_drag_set_icon_name (context, icon_name ? icon_name : GTK_STOCK_DND, 0, 0);
 
   /* release the drag list */
   gtk_target_list_unref (target_list);
@@ -577,7 +577,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-  
+
   /* get the panel of the plugin */
   window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
 
@@ -601,7 +601,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         /* block autohide */
         panel_window_freeze_autohide (window);
         break;
-        
+
       case UNLOCK_PANEL:
         /* unblock autohide */
         panel_window_thaw_autohide (window);

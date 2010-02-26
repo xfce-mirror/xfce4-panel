@@ -51,7 +51,7 @@ GList                   *panel_module_factory_get_modules         (PanelModuleFa
 
 gboolean                 panel_module_factory_has_module          (PanelModuleFactory  *factory,
                                                                    const gchar         *name);
-                                                                   
+
 XfcePanelPluginProvider *panel_module_factory_get_plugin          (PanelModuleFactory  *factory,
                                                                    const gchar         *id);
 

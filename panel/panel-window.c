@@ -353,7 +353,7 @@ panel_window_expose_event (GtkWidget      *widget,
     {
       /* create cairo context */
       cr = gdk_cairo_create (widget->window);
-      
+
       /* clip the drawing area */
       gdk_cairo_rectangle (cr, &event->area);
       cairo_clip (cr);

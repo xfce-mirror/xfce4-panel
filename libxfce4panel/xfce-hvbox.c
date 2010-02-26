@@ -2,7 +2,7 @@
 /*
  * This file is partly based on OBox
  * Copyright (C) 2002      Red Hat Inc. based on GtkHBox
- * 
+ *
  * Copyright (C) 2006-2007 Jasper Huijsmans <jasper@xfce.org>
  * Copyright (C) 2006      Jani Monoses <jani@ubuntu.com>
  * Copyright (C) 2007-2008 Nick Schermer <nick@xfce.org>
@@ -80,7 +80,7 @@ xfce_hvbox_get_class (XfceHVBox *hvbox)
 
   /* peek the class, this only works if the class already exists */
   klass = g_type_class_peek (type);
-  
+
   /* return the type or create the class */
   return klass ? klass : g_type_class_ref (type);
 }
@@ -95,7 +95,7 @@ xfce_hvbox_size_request (GtkWidget      *widget,
 
   /* get the widget class */
   klass = xfce_hvbox_get_class (XFCE_HVBOX (widget));
-  
+
   /* request the size */
   (*GTK_WIDGET_CLASS (klass)->size_request) (widget, requisition);
 }

@@ -77,7 +77,7 @@ static void
 wrapper_plug_init (WrapperPlug *plug)
 {
   extern gchar *opt_name;
-  
+
   /* init vars */
   plug->background_alpha = 1.00;
   plug->is_selected = FALSE;
