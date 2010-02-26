@@ -1,30 +1,39 @@
-Things to do for Xfce Panel
-===========================
+Things to do and ideas for Xfce Panel
+=====================================
 
 Pick From Trunk
 ---------------
  - DND to launcher, bug 3958.
+ - Merge translation changes (r29176, r29084, r29082).
+ - Add the new panel icons from trunk.
 
 General
 -------
  - Fix all the code with TODO in the comment.
  - Add some lines in README.
+ - Xfconf locking for kiosk (insensitive/hidden widget if locked).
 
 Libxfce4panel
 -------------
- - Plugin visibility support (duno if this is possible tho).
+ - Add style property to the scaled image to fix to a default size
+   or use all the available area.
+ - Launcher and iconbox buttons with only icons so it looks nice with
+   a transparant panel.
 
 Panel
 -----
  - Stack panels on screen edges.
  - Support for remote plugins.
+ - Block on grabbed (r29412).
+ - Implement settings manager as socket to integrate with xfce4-settings.
 
-Plugins
---------
- - Merge the tasklist and the iconbox into one plugin.
- - Possible support for a 'desktop file only' launcher, on plugin
-   changes we edit the origional launcher (copy in
-   ~/.local/share/applications/).
+Systray
+-------
  - Transparent tray icons (Fixed in Gtk+?).
  - Option to 'disable' tray icons instead of hiding them.
- - Use libnotify (dbus api?) for systray notifications, currently the code is disabled.
+ - Use libnotify (dbus api?) for systray notifications, currently the 
+   code is disabled.
+
+Tasklist
+--------
+ - Option to span tasklist buttons across the entire available space.
