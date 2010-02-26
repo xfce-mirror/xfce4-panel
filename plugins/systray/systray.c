@@ -306,7 +306,7 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   };
 
   /* open the xfconf channel */
-  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
+  plugin->channel = panel_properties_get_channel ();
 
   /* bind all properties */
   panel_properties_bind (plugin->channel, G_OBJECT (plugin),

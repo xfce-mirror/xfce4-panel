@@ -145,7 +145,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   xfce_panel_plugin_set_expand (panel_plugin, TRUE);
 
   /* open the xfconf channel */
-  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
+  plugin->channel = panel_properties_get_channel ();
 
   /* bind all properties */
   panel_properties_bind (plugin->channel, G_OBJECT (plugin->tasklist),

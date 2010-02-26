@@ -186,7 +186,7 @@ panel_application_init (PanelApplication *application)
   application->drop_occurred = FALSE;
 
   /* get the xfconf channel */
-  application->xfconf = xfconf_channel_new ("xfce4-panel");
+  application->xfconf = panel_properties_get_channel ();
 
   /* get all the panel properties */
   hash_table = xfconf_channel_get_properties (application->xfconf, NULL);
