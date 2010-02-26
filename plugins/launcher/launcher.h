@@ -35,7 +35,6 @@
 #define LAUNCHER_TREE_ICON_SIZE    (24)
 #define LAUNCHER_CHOOSER_ICON_SIZE (48)
 
-
 /* frequently used code */
 #define launcher_free_filenames(list) G_STMT_START{ \
     g_slist_foreach (list, (GFunc) g_free, NULL); \
@@ -67,7 +66,6 @@ struct _LauncherPlugin
 
     /* whether saving is allowed */
     guint            plugin_can_save : 1;
-    gint             image_size;
 
     /* list of launcher entries */
     GList           *entries;

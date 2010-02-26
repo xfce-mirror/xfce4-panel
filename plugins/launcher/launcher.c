@@ -319,30 +319,15 @@ launcher_icon_button_expose_event (GtkWidget      *widget,
 static void
 launcher_icon_button_set_icon (LauncherPlugin *launcher)
 {
-    GdkPixbuf     *pixbuf;
     LauncherEntry *entry;
-    GdkScreen     *screen;
 
     /* get the first entry in the list */
     entry = g_list_first (launcher->entries)->data;
-
-    /* get widget screen */
-    screen = gtk_widget_get_screen (launcher->image);
-
-    /* try to load the file */
-    pixbuf = launcher_utility_load_pixbuf (screen, entry->icon, launcher->image_size);
-
-    if (G_LIKELY (pixbuf))
-    {
-        /* set the image and release the pixbuf */
-        gtk_image_set_from_pixbuf (GTK_IMAGE (launcher->image), pixbuf);
-        g_object_unref (G_OBJECT (pixbuf));
-    }
+    
+    if (g_path_is_absolute (entry->icon))
+      xfce_scaled_image_set_from_file (XFCE_SCALED_IMAGE (launcher->image), entry->icon);
     else
-    {
-        /* clear the image */
-        gtk_image_clear (GTK_IMAGE (launcher->image));
-    }
+      xfce_scaled_image_set_from_icon_name (XFCE_SCALED_IMAGE (launcher->image), entry->icon);
 }
 
 
@@ -821,7 +806,7 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     gtk_box_pack_start (GTK_BOX (launcher->box), launcher->icon_button, TRUE, TRUE, 0);
     gtk_widget_show (launcher->icon_button);
 
-    launcher->image = gtk_image_new ();
+    launcher->image = xfce_scaled_image_new ();
     gtk_container_add (GTK_CONTAINER (launcher->icon_button), launcher->image);
     gtk_widget_show (launcher->image);
 
@@ -1199,7 +1184,6 @@ launcher_plugin_set_size (LauncherPlugin  *launcher,
 {
     gint            width = size, height = size;
     GtkOrientation  orientation;
-    GtkWidget      *widget = launcher->icon_button;
 
     if (g_list_length (launcher->entries) > 1)
     {
@@ -1240,15 +1224,8 @@ launcher_plugin_set_size (LauncherPlugin  *launcher,
         }
     }
 
-    /* calculate the image size inside the button */
-    launcher->image_size = MIN (width, height);
-    launcher->image_size -= 2 + 2 * MAX (widget->style->xthickness, widget->style->ythickness);
-
     /* set the plugin size */
     gtk_widget_set_size_request (GTK_WIDGET (launcher->panel_plugin), width, height);
-
-    /* update the icon button */
-    launcher_icon_button_set_icon (launcher);
 
     /* we handled the size */
     return TRUE;
@@ -1319,4 +1296,7 @@ launcher_plugin_construct (XfcePanelPlugin *plugin)
                               G_CALLBACK (launcher_plugin_free), launcher);
     g_signal_connect_swapped (G_OBJECT (plugin), "configure-plugin",
                               G_CALLBACK (launcher_dialog_show), launcher);
+                              
+    /* init the icon */
+    launcher_icon_button_set_icon (launcher);
 }

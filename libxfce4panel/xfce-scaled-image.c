@@ -186,6 +186,7 @@ xfce_scaled_image_size_allocate (GtkWidget     *widget,
       image->width = allocation->width;
       image->height = allocation->height;
 
+      /* clear the cache if there is one */
       if (image->cache)
         {
           g_object_unref (G_OBJECT (image->cache));
@@ -206,7 +207,7 @@ xfce_scaled_image_update_cache (XfceScaledImage *image)
   gint       source_width, source_height;
   gint       dest_width, dest_height;
   gdouble    wratio, hratio;
-  GdkPixbuf *pixbuf;
+  GdkPixbuf *pixbuf = NULL;
   GdkScreen *screen;
 
   panel_return_if_fail (image->cache == NULL);
@@ -219,7 +220,7 @@ xfce_scaled_image_update_cache (XfceScaledImage *image)
   if (image->pixbuf)
     {
       /* use the pixbuf set by the user */
-      pixbuf = image->pixbuf;
+      pixbuf = g_object_ref (G_OBJECT (image->pixbuf));
     }
   else if (image->icon_name)
     {
@@ -232,30 +233,36 @@ xfce_scaled_image_update_cache (XfceScaledImage *image)
                                          MIN (dest_width, dest_height),
                                          0, NULL);
     }
-
-  /* get the pixbuf size */
-  source_width = gdk_pixbuf_get_width (pixbuf);
-  source_height = gdk_pixbuf_get_height (pixbuf);
-
-  if (dest_width >= source_width && dest_height >= source_height)
+    
+  if (G_LIKELY (pixbuf))
     {
-      /* use the origional pixmap */
-      image->cache = g_object_ref (G_OBJECT (pixbuf));
-    }
-  else
-    {
-      /* calculate the new dimensions */
-      wratio = (gdouble) source_width  / (gdouble) dest_width;
-      hratio = (gdouble) source_height / (gdouble) dest_height;
+      /* get the pixbuf size */
+      source_width = gdk_pixbuf_get_width (pixbuf);
+      source_height = gdk_pixbuf_get_height (pixbuf);
 
-      if (hratio > wratio)
-        dest_width  = rint (source_width / hratio);
+      if (dest_width >= source_width && dest_height >= source_height)
+        {
+          /* use the origional pixmap (we already increased the reference) */
+          image->cache = pixbuf;
+        }
       else
-        dest_height = rint (source_height / wratio);
+        {
+          /* calculate the new dimensions */
+          wratio = (gdouble) source_width  / (gdouble) dest_width;
+          hratio = (gdouble) source_height / (gdouble) dest_height;
 
-      /* scale the pixbuf */
-      if (dest_width > 1 && dest_height > 1)
-        image->cache = gdk_pixbuf_scale_simple (pixbuf, dest_width, dest_height, GDK_INTERP_BILINEAR);
+          if (hratio > wratio)
+            dest_width  = rint (source_width / hratio);
+          else
+            dest_height = rint (source_height / wratio);
+
+          /* scale the pixbuf */
+          if (dest_width > 1 && dest_height > 1)
+            image->cache = gdk_pixbuf_scale_simple (pixbuf, dest_width, dest_height, GDK_INTERP_BILINEAR);
+            
+          /* release the pixbuf */
+          g_object_unref (G_OBJECT (pixbuf));
+        }
     }
 }
 
@@ -266,23 +273,19 @@ xfce_scaled_image_cleanup (XfceScaledImage *image)
 {
   /* release the pixbuf reference */
   if (G_LIKELY (image->pixbuf))
-    {
-      g_object_unref (G_OBJECT (image->pixbuf));
-      image->pixbuf = NULL;
-    }
-
+    g_object_unref (G_OBJECT (image->pixbuf));
+  
   /* release the cached pixbuf */
   if (G_LIKELY (image->cache))
-    {
-      g_object_unref (G_OBJECT (image->cache));
-      image->cache = NULL;
-    }
+    g_object_unref (G_OBJECT (image->cache));
 
   /* free the icon name */
   g_free (image->icon_name);
+  
+  /* reset varaibles */
+  image->pixbuf = NULL;
+  image->cache = NULL;
   image->icon_name = NULL;
-
-  /* reset the cached width and height */
   image->width = -1;
   image->height = -1;
 }
@@ -357,14 +360,11 @@ xfce_scaled_image_set_from_pixbuf (XfceScaledImage *image,
   /* cleanup */
   xfce_scaled_image_cleanup (image);
 
-  if (G_LIKELY (pixbuf))
-    {
-      /* set the new pixbuf */
-      image->pixbuf = g_object_ref (G_OBJECT (pixbuf));
+  /* set the new pixbuf */
+  image->pixbuf = g_object_ref (G_OBJECT (pixbuf));
 
-      /* queue a resize */
-      gtk_widget_queue_resize (GTK_WIDGET (image));
-    }
+  /* queue a resize */
+  gtk_widget_queue_resize (GTK_WIDGET (image));
 }
 
 
@@ -374,18 +374,17 @@ xfce_scaled_image_set_from_icon_name (XfceScaledImage *image,
                                       const gchar     *icon_name)
 {
   g_return_if_fail (XFCE_IS_SCALED_IMAGE (image));
+  panel_return_if_fail (icon_name == NULL || !g_path_is_absolute (icon_name));
 
   /* cleanup */
   xfce_scaled_image_cleanup (image);
 
+  /* set the new icon name */
   if (G_LIKELY (icon_name && *icon_name != '\0'))
-    {
-      /* set the new icon name */
-      image->icon_name = g_strdup (icon_name);
+    image->icon_name = g_strdup (icon_name);
 
-      /* queue a resize */
-      gtk_widget_queue_resize (GTK_WIDGET (image));
-    }
+  /* queue a resize */
+  gtk_widget_queue_resize (GTK_WIDGET (image));
 }
 
 
@@ -394,30 +393,29 @@ PANEL_SYMBOL_EXPORT void
 xfce_scaled_image_set_from_file (XfceScaledImage *image,
                                  const gchar     *filename)
 {
-  GdkPixbuf *pixbuf = NULL;
-  GError    *error = NULL;
+  GError *error = NULL;
 
   g_return_if_fail (XFCE_IS_SCALED_IMAGE (image));
+  panel_return_if_fail (filename == NULL || g_path_is_absolute (filename));
+  
+  /* cleanup */
+  xfce_scaled_image_cleanup (image);
 
   if (G_LIKELY (filename && *filename != '\0'))
     {
       /* try to load the image from the file */
-      pixbuf = gdk_pixbuf_new_from_file (filename, &error);
+      image->pixbuf = gdk_pixbuf_new_from_file (filename, &error);
 
-      if (G_UNLIKELY (error != NULL))
+      if (G_LIKELY (error != NULL))
         {
           /* print a warning what went wrong */
-          g_critical ("Failed to loading image from filesname: %s", error->message);
+          g_critical ("Failed to loading image from filename: %s", error->message);
 
           /* cleanup */
           g_error_free (error);
         }
     }
-
-  /* set the pixbuf */
-  xfce_scaled_image_set_from_pixbuf (image, pixbuf);
-
-  /* release the pixbuf */
-  if (G_LIKELY (pixbuf))
-    g_object_unref (G_OBJECT (pixbuf));
+    
+  /* queue a resize */
+  gtk_widget_queue_resize (GTK_WIDGET (image));
 }
