@@ -29,6 +29,7 @@
 #include <dbus/dbus-glib-lowlevel.h>
 #include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include <panel/panel-dbus-service.h>
@@ -94,8 +95,8 @@ struct _PanelDBusService
 
 
 
-static PanelDBusExitStyle dbus_exit_style = PANEL_DBUS_EXIT_UNSET;
-static guint              dbus_service_signals[LAST_SIGNAL];
+static gboolean dbus_exit_restart = FALSE;
+static guint    dbus_service_signals[LAST_SIGNAL];
 
 
 
@@ -293,8 +294,7 @@ panel_dbus_service_terminate (PanelDBusService  *service,
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  panel_dbus_service_exit_panel (restart ? PANEL_DBUS_EXIT_RESTART :
-                                 PANEL_DBUS_EXIT_QUIT);
+  panel_dbus_service_exit_panel (restart);
 
   return TRUE;
 }
@@ -387,16 +387,22 @@ panel_dbus_service_plugin_property_changed (gint                 plugin_id,
 
 
 void
-panel_dbus_service_exit_panel (PanelDBusExitStyle exit_style)
+panel_dbus_service_exit_panel (gboolean restart)
 {
-  dbus_exit_style = exit_style;
+  XfceSMClient *sm_client;
+
+  sm_client = xfce_sm_client_get ();
+  xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_NORMAL);
+
+  dbus_exit_restart = !!restart;
+
   gtk_main_quit ();
 }
 
 
 
-PanelDBusExitStyle
-panel_dbus_service_get_exit_style (void)
+gboolean
+panel_dbus_service_get_restart (void)
 {
-  return dbus_exit_style;
+  return dbus_exit_restart;
 }

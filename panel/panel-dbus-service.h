@@ -32,15 +32,6 @@ typedef struct _PanelDBusService      PanelDBusService;
 #define PANEL_IS_DBUS_SERVICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_DBUS_SERVICE))
 #define PANEL_DBUS_SERVICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_DBUS_SERVICE, PanelDBusServiceClass))
 
-typedef enum
-{
-  PANEL_DBUS_EXIT_UNSET,
-  PANEL_DBUS_EXIT_QUIT,
-  PANEL_DBUS_EXIT_RESTART,
-  PANEL_DBUS_EXIT_SESSION
-}
-PanelDBusExitStyle;
-
 
 
 GType               panel_dbus_service_get_type                (void) G_GNUC_CONST;
@@ -51,8 +42,8 @@ void                panel_dbus_service_plugin_property_changed (gint            
                                                                 DBusPropertyChanged  property,
                                                                 const GValue        *value);
 
-void                panel_dbus_service_exit_panel              (PanelDBusExitStyle   exit_style);
-PanelDBusExitStyle  panel_dbus_service_get_exit_style          (void);
+void                panel_dbus_service_exit_panel              (gboolean             restart);
+gboolean            panel_dbus_service_get_restart             (void);
 
 G_END_DECLS
 

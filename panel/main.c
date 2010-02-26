@@ -115,19 +115,9 @@ callback_handler (const gchar  *name,
 
 
 static void
-signal_handler (gint signum)
+signal_handler_quit (gint signum)
 {
-  panel_dbus_service_exit_panel (PANEL_DBUS_EXIT_QUIT);
-}
-
-
-
-static void
-session_quit (XfceSMClient *sm_client)
-{
-  panel_return_if_fail (XFCE_IS_SM_CLIENT (sm_client));
-
-  panel_dbus_service_exit_panel (PANEL_DBUS_EXIT_SESSION);
+  panel_dbus_service_exit_panel (FALSE);
 }
 
 
@@ -135,16 +125,15 @@ session_quit (XfceSMClient *sm_client)
 gint
 main (gint argc, gchar **argv)
 {
-  GOptionContext     *context;
-  PanelApplication   *application;
-  GError             *error = NULL;
-  PanelDBusService   *dbus_service;
-  gboolean            result;
-  guint               i;
-  const gint          signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
-  const gchar        *error_msg;
-  XfceSMClient       *sm_client;
-  PanelDBusExitStyle  exit_style;
+  GOptionContext   *context;
+  PanelApplication *application;
+  GError           *error = NULL;
+  PanelDBusService *dbus_service;
+  gboolean          result;
+  guint             i;
+  const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
+  const gchar      *error_msg;
+  XfceSMClient     *sm_client;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -233,7 +222,7 @@ main (gint argc, gchar **argv)
   sm_client = xfce_sm_client_get ();
   xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
   g_signal_connect (G_OBJECT (sm_client), "quit",
-      G_CALLBACK (session_quit), NULL);
+      G_CALLBACK (signal_handler_quit), NULL);
   if (!xfce_sm_client_connect (sm_client, &error))
     {
       g_warning ("Failed to connect to session manager: %s", error->message);
@@ -248,17 +237,10 @@ main (gint argc, gchar **argv)
 
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
-    signal (signums[i], signal_handler);
+    signal (signums[i], signal_handler_quit);
 
   /* enter the main loop */
   gtk_main ();
-
-  /* release session reference */
-  exit_style = panel_dbus_service_get_exit_style ();
-  if (exit_style == PANEL_DBUS_EXIT_QUIT
-      || exit_style == PANEL_DBUS_EXIT_RESTART)
-    xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_NORMAL);
-  g_object_unref (G_OBJECT (sm_client));
 
   /* release dbus service */
   g_object_unref (G_OBJECT (dbus_service));
@@ -272,8 +254,11 @@ main (gint argc, gchar **argv)
   /* release application reference */
   g_object_unref (G_OBJECT (application));
 
+  /* release session reference */
+  g_object_unref (G_OBJECT (sm_client));
+
   /* whether we need to restart */
-  if (exit_style == PANEL_DBUS_EXIT_RESTART)
+  if (panel_dbus_service_get_restart ())
     {
       /* message */
       g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting"));
