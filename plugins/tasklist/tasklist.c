@@ -67,12 +67,10 @@ static void tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
 
 
 
-G_DEFINE_TYPE (TasklistPlugin, tasklist_plugin, XFCE_TYPE_PANEL_PLUGIN);
+/* define and register the plugin */
+G_DEFINE_TYPE (TasklistPlugin, tasklist_plugin, XFCE_TYPE_PANEL_PLUGIN)
 
-
-
-/* register the panel plugin */
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_TASKLIST_PLUGIN);
+XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_TASKLIST_PLUGIN)
 
 
 

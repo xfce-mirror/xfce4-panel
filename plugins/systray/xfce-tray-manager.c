@@ -153,7 +153,7 @@ static guint xfce_tray_manager_signals[LAST_SIGNAL];
 
 
 
-G_DEFINE_TYPE (XfceTrayManager, xfce_tray_manager, G_TYPE_OBJECT);
+G_DEFINE_TYPE (XfceTrayManager, xfce_tray_manager, G_TYPE_OBJECT)
 
 
 

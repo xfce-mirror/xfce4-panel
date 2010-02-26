@@ -55,7 +55,7 @@ static void            xfce_tray_plugin_construct               (XfcePanelPlugin
 
 
 /* register the plugin */
-XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK (xfce_tray_plugin_construct, xfce_tray_plugin_check);
+XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK (xfce_tray_plugin_construct, xfce_tray_plugin_check)
 
 
 

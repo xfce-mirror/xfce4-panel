@@ -119,11 +119,9 @@ struct _ClockPlugin
 
 
 
+/* define and register the plugin */
 G_DEFINE_TYPE (ClockPlugin, clock_plugin, XFCE_TYPE_PANEL_PLUGIN);
 
-
-
-/* register the panel plugin */
 XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_CLOCK_PLUGIN);
 
 

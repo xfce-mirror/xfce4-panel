@@ -122,12 +122,10 @@ struct _XfceLauncherPlugin
 
 
 
-G_DEFINE_TYPE (XfceLauncherPlugin, launcher_plugin, XFCE_TYPE_PANEL_PLUGIN);
+/* define and register the plugin */
+G_DEFINE_TYPE (XfceLauncherPlugin, launcher_plugin, XFCE_TYPE_PANEL_PLUGIN)
 
-
-
-/* register the panel plugin */
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_LAUNCHER_PLUGIN);
+XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_LAUNCHER_PLUGIN)
 
 
 

@@ -113,7 +113,7 @@ struct _XfceTrayWidgetChild
 
 
 
-G_DEFINE_TYPE (XfceTrayWidget, xfce_tray_widget, GTK_TYPE_CONTAINER);
+G_DEFINE_TYPE (XfceTrayWidget, xfce_tray_widget, GTK_TYPE_CONTAINER)
 
 
 
