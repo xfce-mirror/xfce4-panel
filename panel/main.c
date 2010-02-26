@@ -142,10 +142,10 @@ main (gint argc, gchar **argv)
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-#ifndef NDEBUG
-  /* terminate the program on warnings and critical messages */
-  g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
-#endif
+//#ifndef NDEBUG
+//  /* terminate the program on warnings and critical messages */
+//  g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
+//#endif
 
   /* initialize the gthread system */
   if (g_thread_supported () == FALSE)
