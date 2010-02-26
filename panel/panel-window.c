@@ -63,59 +63,59 @@ typedef enum _SnapPosition  SnapPosition;
 
 
 
-static void         panel_window_get_property           (GObject          *object,
-                                                         guint             prop_id,
-                                                         GValue           *value,
-                                                         GParamSpec       *pspec);
-static void         panel_window_set_property           (GObject          *object,
-                                                         guint             prop_id,
-                                                         const GValue     *value,
-                                                         GParamSpec       *pspec);
-static void         panel_window_finalize               (GObject          *object);
-static gboolean     panel_window_expose_event           (GtkWidget        *widget,
-                                                         GdkEventExpose   *event);
-static gboolean     panel_window_enter_notify_event     (GtkWidget        *widget,
-                                                         GdkEventCrossing *event);
-static gboolean     panel_window_leave_notify_event     (GtkWidget        *widget,
-                                                         GdkEventCrossing *event);
-static gboolean     panel_window_motion_notify_event    (GtkWidget        *widget,
-                                                         GdkEventMotion   *event);
-static gboolean     panel_window_button_press_event     (GtkWidget        *widget,
-                                                         GdkEventButton   *event);
-static gboolean     panel_window_button_release_event   (GtkWidget        *widget,
-                                                         GdkEventButton   *event);
-static void         panel_window_grab_notify            (GtkWidget        *widget,
-                                                         gboolean         was_grabbed);
-static void         panel_window_size_request           (GtkWidget        *widget,
-                                                         GtkRequisition   *requisition);
-static void         panel_window_size_allocate          (GtkWidget        *widget,
-                                                         GtkAllocation    *alloc);
-static void         panel_window_size_allocate_set_xy   (PanelWindow      *window,
-                                                         gint              window_width,
-                                                         gint              window_height,
-                                                         gint             *return_x,
-                                                         gint             *return_y);
-static void         panel_window_screen_changed         (GtkWidget        *widget,
-                                                         GdkScreen        *previous_screen);
-static StrutsEgde   panel_window_screen_struts_edge     (PanelWindow      *window);
-static void         panel_window_screen_struts_set      (PanelWindow      *window);
-static void         panel_window_screen_force_update    (PanelWindow      *window);
-static void         panel_window_screen_update_borders  (PanelWindow      *window);
-static SnapPosition panel_window_snap_position          (PanelWindow      *window);
-static void         panel_window_screen_layout_changed  (GdkScreen        *screen,
-                                                         PanelWindow      *window);
-static void         panel_window_autohide_queue         (PanelWindow      *window,
-                                                         AutohideState     new_state);
-static void         panel_window_set_autohide           (PanelWindow      *window,
-                                                         gboolean          autohide);
-static void         panel_window_menu_popup             (PanelWindow      *window,
-                                                         guint32           event_time);
-static void         panel_window_set_plugin_orientation (GtkWidget        *widget,
-                                                         gpointer          user_data);
-static void         panel_window_set_plugin_size        (GtkWidget        *widget,
-                                                         gpointer          user_data);
-static void         panel_window_set_screen_position    (GtkWidget        *widget,
-                                                         gpointer          user_data);
+static void         panel_window_get_property               (GObject          *object,
+                                                             guint             prop_id,
+                                                             GValue           *value,
+                                                             GParamSpec       *pspec);
+static void         panel_window_set_property               (GObject          *object,
+                                                             guint             prop_id,
+                                                             const GValue     *value,
+                                                             GParamSpec       *pspec);
+static void         panel_window_finalize                   (GObject          *object);
+static gboolean     panel_window_expose_event               (GtkWidget        *widget,
+                                                             GdkEventExpose   *event);
+static gboolean     panel_window_enter_notify_event         (GtkWidget        *widget,
+                                                             GdkEventCrossing *event);
+static gboolean     panel_window_leave_notify_event         (GtkWidget        *widget,
+                                                             GdkEventCrossing *event);
+static gboolean     panel_window_motion_notify_event        (GtkWidget        *widget,
+                                                             GdkEventMotion   *event);
+static gboolean     panel_window_button_press_event         (GtkWidget        *widget,
+                                                             GdkEventButton   *event);
+static gboolean     panel_window_button_release_event       (GtkWidget        *widget,
+                                                             GdkEventButton   *event);
+static void         panel_window_grab_notify                (GtkWidget        *widget,
+                                                             gboolean         was_grabbed);
+static void         panel_window_size_request               (GtkWidget        *widget,
+                                                             GtkRequisition   *requisition);
+static void         panel_window_size_allocate              (GtkWidget        *widget,
+                                                             GtkAllocation    *alloc);
+static void         panel_window_size_allocate_set_xy       (PanelWindow      *window,
+                                                             gint              window_width,
+                                                             gint              window_height,
+                                                             gint             *return_x,
+                                                             gint             *return_y);
+static void         panel_window_screen_changed             (GtkWidget        *widget,
+                                                             GdkScreen        *previous_screen);
+static StrutsEgde   panel_window_screen_struts_edge         (PanelWindow      *window);
+static void         panel_window_screen_struts_set          (PanelWindow      *window);
+static void         panel_window_screen_force_update        (PanelWindow      *window);
+static void         panel_window_screen_update_borders      (PanelWindow      *window);
+static SnapPosition panel_window_snap_position              (PanelWindow      *window);
+static void         panel_window_screen_layout_changed      (GdkScreen        *screen,
+                                                             PanelWindow      *window);
+static void         panel_window_autohide_queue             (PanelWindow      *window,
+                                                             AutohideState     new_state);
+static void         panel_window_set_autohide               (PanelWindow      *window,
+                                                             gboolean          autohide);
+static void         panel_window_menu_popup                 (PanelWindow      *window,
+                                                             guint32           event_time);
+static void         panel_window_set_plugin_orientation     (GtkWidget        *widget,
+                                                             gpointer          user_data);
+static void         panel_window_set_plugin_size            (GtkWidget        *widget,
+                                                             gpointer          user_data);
+static void         panel_window_set_plugin_screen_position (GtkWidget        *widget,
+                                                             gpointer          user_data);
 
 
 
@@ -468,6 +468,10 @@ panel_window_set_property (GObject      *object,
         itembar = gtk_bin_get_child (GTK_BIN (window));
         gtk_container_foreach (GTK_CONTAINER (itembar),
             panel_window_set_plugin_orientation, window);
+
+        /* send the new screen position */
+        gtk_container_foreach (GTK_CONTAINER (itembar),
+            panel_window_set_plugin_screen_position, window);
         break;
 
       case PROP_SIZE:
@@ -541,7 +545,7 @@ panel_window_set_property (GObject      *object,
             /* send the new screen position to the panel plugins */
             itembar = gtk_bin_get_child (GTK_BIN (window));
             gtk_container_foreach (GTK_CONTAINER (itembar),
-                panel_window_set_screen_position, window);
+                panel_window_set_plugin_screen_position, window);
           }
         else
           {
@@ -1924,8 +1928,8 @@ panel_window_set_plugin_size (GtkWidget *widget,
 
 
 static void
-panel_window_set_screen_position (GtkWidget *widget,
-                                  gpointer   user_data)
+panel_window_set_plugin_screen_position (GtkWidget *widget,
+                                         gpointer   user_data)
 {
   PanelWindow        *window = PANEL_WINDOW (user_data);
   XfceScreenPosition  position;
@@ -2014,7 +2018,7 @@ panel_window_set_povider_info (PanelWindow *window,
 
   panel_window_set_plugin_size (provider, window);
   panel_window_set_plugin_orientation (provider, window);
-  panel_window_set_screen_position (provider, window);
+  panel_window_set_plugin_screen_position (provider, window);
 
   if (PANEL_IS_PLUGIN_EXTERNAL (provider))
     panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
