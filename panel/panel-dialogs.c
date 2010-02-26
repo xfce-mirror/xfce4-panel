@@ -68,23 +68,14 @@ static void
 panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
                                           PanelApplication *application)
 {
-  PanelWindow *window = NULL;
-  gint         active;
+  gint active;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
 
-  /* get the selected item */
+  /* select active panel */
   active = gtk_combo_box_get_active (combo);
-
-  if (G_LIKELY (active != -1))
-    {
-      /* get the window */
-      window = panel_application_get_window (application, active);
-
-      /* select the window */
-      panel_application_window_select (application, window);
-    }
+  panel_application_window_select (application, active);
 }
 
 
@@ -135,7 +126,8 @@ panel_dialogs_choose_panel (PanelApplication *application)
     }
 
   /* select first panel */
-  g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (panel_dialogs_choose_panel_combo_changed), application);
+  g_signal_connect (G_OBJECT (combo), "changed",
+       G_CALLBACK (panel_dialogs_choose_panel_combo_changed), application);
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
   /* run the dialog */
@@ -146,7 +138,7 @@ panel_dialogs_choose_panel (PanelApplication *application)
   gtk_widget_destroy (dialog);
 
   /* remove the panel selection */
-  panel_application_window_select (application, NULL);
+  panel_application_window_select (application, -1);
 
   return response;
 }

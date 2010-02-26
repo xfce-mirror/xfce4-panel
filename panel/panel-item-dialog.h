@@ -21,7 +21,6 @@
 #define __PANEL_ITEM_DIALOG_H__
 
 #include <gtk/gtk.h>
-#include <panel/panel-window.h>
 
 G_BEGIN_DECLS
 
@@ -37,7 +36,9 @@ typedef struct _PanelItemDialog      PanelItemDialog;
 
 GType      panel_item_dialog_get_type (void) G_GNUC_CONST;
 
-void       panel_item_dialog_show     (PanelWindow *active);
+void       panel_item_dialog_show     (GdkScreen *screen);
+
+gboolean   panel_item_dialog_visible  (void);
 
 G_END_DECLS
 

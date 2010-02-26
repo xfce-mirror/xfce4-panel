@@ -235,7 +235,8 @@ panel_dbus_service_display_items_dialog (PanelDBusService  *service,
 
   /* show the items dialog */
   application = panel_application_get ();
-  panel_item_dialog_show (panel_application_get_window (application, active));
+  panel_application_window_select (application, (gint) active);
+  panel_item_dialog_show (NULL);
   g_object_unref (G_OBJECT (application));
 
   return TRUE;

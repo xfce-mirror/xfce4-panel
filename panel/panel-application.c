@@ -459,6 +459,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
   gint         unique_id;
   gchar       *name;
   gboolean     expand;
+  gint         nth;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -512,8 +513,12 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         break;
 
       case PROVIDER_SIGNAL_ADD_NEW_ITEMS:
+        /* select active window */
+        nth = panel_application_get_window_index (application, window);
+        panel_application_window_select (application, nth);
+
         /* open the items dialog */
-        panel_item_dialog_show (window);
+        panel_item_dialog_show (gtk_widget_get_screen (GTK_WIDGET (window)));
         break;
 
       case PROVIDER_SIGNAL_PANEL_PREFERENCES:
@@ -1109,6 +1114,8 @@ panel_application_add_new_item (PanelApplication  *application,
 {
   PanelWindow *window;
   gint         nth = 0;
+  GSList      *li;
+  gboolean     active;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (plugin_name != NULL);
@@ -1116,10 +1123,20 @@ panel_application_add_new_item (PanelApplication  *application,
 
   if (panel_module_factory_has_module (application->factory, plugin_name))
     {
-      /* ask the user what panel to use if there is more then one */
-      if (g_slist_length (application->windows) > 1)
-        if ((nth = panel_dialogs_choose_panel (application)) == -1)
-          return;
+      /* look for an active panel or ask the user */
+      if (LIST_HAS_TWO_OR_MORE_ENTRIES (application->windows))
+        {
+          for (li = application->windows, nth = 0; li != NULL; li = li->next, nth++)
+            {
+              g_object_get (G_OBJECT (li->data), "active", &active, NULL);
+              if (active)
+                break;
+            }
+
+          if (li == NULL
+              && (nth = panel_dialogs_choose_panel (application)) == -1)
+            return;
+        }
 
       /* get the window */
       window = g_slist_nth_data (application->windows, nth);
@@ -1244,16 +1261,16 @@ panel_application_get_window (PanelApplication *application,
 
 void
 panel_application_window_select (PanelApplication *application,
-                                 PanelWindow      *window)
+                                 gint              nth)
 {
   GSList *li;
+  gint    n;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  panel_return_if_fail (window == NULL || PANEL_IS_WINDOW (window));
 
   /* update state for all windows */
-  for (li = application->windows; li != NULL; li = li->next)
-    g_object_set (G_OBJECT (li->data), "active", li->data == window, NULL);
+  for (li = application->windows, n = 0; li != NULL; li = li->next, n++)
+    g_object_set (G_OBJECT (li->data), "active", !!(n == nth), NULL);
 }
 
 

@@ -1824,6 +1824,23 @@ panel_window_menu_deactivate (GtkMenu     *menu,
 
 
 static void
+panel_window_menu_add_items (PanelWindow *window)
+{
+  gint              nth;
+  PanelApplication *application;
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  application = panel_application_get ();
+  nth = panel_application_get_window_index (application, window);
+  panel_application_window_select (application, nth);
+  g_object_unref (G_OBJECT (application));
+  panel_item_dialog_show (gtk_widget_get_screen (GTK_WIDGET (window)));
+}
+
+
+
+static void
 panel_window_menu_popup (PanelWindow *window,
                          guint32      event_time)
 {
@@ -1858,7 +1875,7 @@ panel_window_menu_popup (PanelWindow *window,
   /* add new items */
   item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
   g_signal_connect_swapped (G_OBJECT (item), "activate",
-      G_CALLBACK (panel_item_dialog_show), window);
+      G_CALLBACK (panel_window_menu_add_items), window);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 

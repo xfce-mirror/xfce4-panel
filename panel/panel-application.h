@@ -68,7 +68,7 @@ PanelWindow      *panel_application_get_window        (PanelApplication  *applic
                                                        guint              idx);
 
 void              panel_application_window_select     (PanelApplication  *application,
-                                                       PanelWindow       *window);
+                                                       gint               nth);
 
 void              panel_application_windows_sensitive (PanelApplication  *application,
                                                        gboolean           sensitive);

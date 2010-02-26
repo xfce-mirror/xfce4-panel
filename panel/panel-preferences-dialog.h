@@ -40,6 +40,8 @@ GType      panel_preferences_dialog_get_type (void) G_GNUC_CONST;
 
 void       panel_preferences_dialog_show     (PanelWindow *active);
 
+gboolean   panel_preferences_dialog_visible  (void);
+
 G_END_DECLS
 
 #endif /* !__PANEL_PREFERENCES_DIALOG_H__ */

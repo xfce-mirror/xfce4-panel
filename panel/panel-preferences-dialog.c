@@ -103,6 +103,10 @@ G_DEFINE_TYPE (PanelPreferencesDialog, panel_preferences_dialog, GTK_TYPE_BUILDE
 
 
 
+static PanelPreferencesDialog *dialog_singleton = NULL;
+
+
+
 static void
 panel_preferences_dialog_class_init (PanelPreferencesDialogClass *klass)
 {
@@ -213,7 +217,8 @@ panel_preferences_dialog_finalize (GObject *object)
   panel_application_windows_autohide (dialog->application, FALSE);
 
   /* deselect all windows */
-  panel_application_window_select (dialog->application, NULL);
+  if (!panel_item_dialog_visible ())
+    panel_application_window_select (dialog->application, -1);
 
   /* release the application */
   g_object_unref (G_OBJECT (dialog->application));
@@ -329,6 +334,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
 {
   gint       nth;
   GtkWidget *itembar;
+  GObject   *object;
 
   panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
@@ -343,6 +349,7 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
   /* set the selected window */
   nth = gtk_combo_box_get_active (combobox);
   dialog->active = panel_application_get_window (dialog->application, nth);
+  panel_application_window_select (dialog->application, nth);
 
   if (G_LIKELY (dialog->active != NULL))
     {
@@ -355,12 +362,14 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
       /* rebind the dialog bindings */
       panel_preferences_dialog_bindings_update (dialog);
 
-      /* update selection state */
-      panel_application_window_select (dialog->application, dialog->active);
-
       /* update the items treeview */
       panel_preferences_dialog_item_store_rebuild (dialog);
     }
+
+  /* sensitivity of the add button in item tab */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "item-add");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  gtk_widget_set_sensitive (GTK_WIDGET (object), !!(dialog->active != NULL));
 }
 
 
@@ -452,7 +461,7 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
 
   /* destroy the window */
   if (xfce_dialog_confirm (dialog, GTK_STOCK_REMOVE, NULL,
-                           "Are you sure you want to remove panel %d?", nth + 1))
+          _("Are you sure you want to remove panel %d?"), nth + 1))
     {
       /* release the bindings */
       panel_preferences_dialog_bindings_unbind (dialog);
@@ -678,7 +687,7 @@ panel_preferences_dialog_item_add (GtkWidget              *button,
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
 
   /* show the items dialog */
-  panel_item_dialog_show (dialog->active);
+  panel_item_dialog_show (gtk_widget_get_screen (button));
 }
 
 
@@ -788,25 +797,24 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
 void
 panel_preferences_dialog_show (PanelWindow *active)
 {
-  static PanelPreferencesDialog *dialog = NULL;
-  gint                           idx = 0;
-  GObject                       *window, *combo;
-  GdkScreen                     *screen;
+  gint       idx = 0;
+  GObject   *window, *combo;
+  GdkScreen *screen;
 
   panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
 
-  if (G_LIKELY (dialog == NULL))
+  if (G_LIKELY (dialog_singleton == NULL))
     {
       /* create new dialog singleton */
-      dialog = g_object_new (PANEL_TYPE_PREFERENCES_DIALOG, NULL);
-      g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer) &dialog);
+      dialog_singleton = g_object_new (PANEL_TYPE_PREFERENCES_DIALOG, NULL);
+      g_object_add_weak_pointer (G_OBJECT (dialog_singleton), (gpointer) &dialog_singleton);
     }
 
   /* get the active window index */
   if (G_LIKELY (active))
-    idx = panel_application_get_window_index (dialog->application, active);
+    idx = panel_application_get_window_index (dialog_singleton->application, active);
   else
-    active = panel_application_get_window (dialog->application, idx);
+    active = panel_application_get_window (dialog_singleton->application, idx);
 
   /* get the active screen */
   if (active != NULL)
@@ -815,13 +823,21 @@ panel_preferences_dialog_show (PanelWindow *active)
     screen = gdk_screen_get_default ();
 
   /* show the dialog on the same screen as the panel */
-  window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
+  window = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "dialog");
   panel_return_if_fail (GTK_IS_WIDGET (window));
   gtk_window_set_screen (GTK_WINDOW (window), screen);
   gtk_window_present (GTK_WINDOW (window));
 
   /* select the active window in the dialog */
-  combo = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
+  combo = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "panel-combobox");
   panel_return_if_fail (GTK_IS_WIDGET (combo));
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), idx);
+}
+
+
+
+gboolean
+panel_preferences_dialog_visible (void)
+{
+  return !!(dialog_singleton != NULL);
 }

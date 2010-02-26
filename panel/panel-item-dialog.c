@@ -36,6 +36,7 @@
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
+#include <panel/panel-preferences-dialog.h>
 
 
 
@@ -76,6 +77,7 @@ struct _PanelItemDialog
 
   /* list store */
   GtkListStore       *store;
+  GtkTreeView        *treeview;
 };
 
 enum
@@ -94,6 +96,10 @@ static const GtkTargetEntry drag_targets[] =
 
 
 G_DEFINE_TYPE (PanelItemDialog, panel_item_dialog, XFCE_TYPE_TITLED_DIALOG);
+
+
+
+static PanelItemDialog *dialog_singleton = NULL;
 
 
 
@@ -201,6 +207,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 
   /* treeview */
   treeview = gtk_tree_view_new_with_model (filter);
+  dialog->treeview = GTK_TREE_VIEW (treeview);
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
   gtk_tree_view_set_reorderable (GTK_TREE_VIEW (treeview), FALSE);
   gtk_tree_view_set_enable_search (GTK_TREE_VIEW (treeview), FALSE);
@@ -268,31 +275,42 @@ panel_item_dialog_finalize (GObject *object)
 
 
 static void
-panel_item_dialog_response (GtkDialog *dialog,
+panel_item_dialog_response (GtkDialog *gtk_dialog,
                             gint       response_id)
 {
-  GError    *error = NULL;
-  GdkScreen *screen;
+  GError          *error = NULL;
+  PanelItemDialog *dialog = PANEL_ITEM_DIALOG (gtk_dialog);
+  GdkScreen       *screen;
+  PanelModule     *module;
+
+  panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
+  panel_return_if_fail (GTK_IS_TREE_VIEW (dialog->treeview));
+  panel_return_if_fail (PANEL_IS_APPLICATION (dialog->application));
 
   if (response_id == GTK_RESPONSE_HELP)
     {
-      /* get the dialog screen */
-      screen = gtk_widget_get_screen (GTK_WIDGET (dialog));
-
-      /* open the help url */
-      if (exo_url_show_on_screen (ITEMS_HELP_URL, NULL, screen, &error) == FALSE)
+      /* open the help url on this screen */
+      screen = gtk_widget_get_screen (GTK_WIDGET (gtk_dialog));
+      if (!exo_url_show_on_screen (ITEMS_HELP_URL, NULL, screen, &error))
         {
-          /* show error */
+          /* show error and cleanup */
           g_warning ("Failed to open help: %s", error->message);
-
-          /* cleanup */
           g_error_free (error);
         }
     }
+  else if (response_id == GTK_RESPONSE_OK)
+    {
+      module = panel_item_dialog_get_selected_module (dialog->treeview);
+      if (G_LIKELY (module != NULL))
+        panel_application_add_new_item (dialog->application,
+            panel_module_get_name (module), NULL);
+    }
   else
     {
-      /* destroy the dialog */
-      gtk_widget_destroy (GTK_WIDGET (dialog));
+      if (!panel_preferences_dialog_visible ())
+        panel_application_window_select (dialog->application, -1);
+
+      gtk_widget_destroy (GTK_WIDGET (gtk_dialog));
     }
 }
 
@@ -696,27 +714,33 @@ panel_item_dialog_text_renderer (GtkTreeViewColumn *column,
 
 
 void
-panel_item_dialog_show (PanelWindow *active)
+panel_item_dialog_show (GdkScreen *screen)
 {
-  static PanelItemDialog *dialog = NULL;
+  panel_return_if_fail (screen == NULL || GDK_IS_SCREEN (screen));
 
-  if (G_LIKELY (dialog == NULL))
+  if (G_LIKELY (dialog_singleton == NULL))
     {
       /* create new dialog singleton */
-      dialog = g_object_new (PANEL_TYPE_ITEM_DIALOG, NULL);
-      g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer) &dialog);
+      dialog_singleton = g_object_new (PANEL_TYPE_ITEM_DIALOG, NULL);
+      g_object_add_weak_pointer (G_OBJECT (dialog_singleton), (gpointer) &dialog_singleton);
     }
 
-  if (G_UNLIKELY (active == NULL))
-    active = panel_application_get_window (dialog->application, 0);
-
   /* show the dialog on the same screen as the panel */
-  gtk_window_set_screen (GTK_WINDOW (dialog),
-      gtk_widget_get_screen (GTK_WIDGET (active)));
+  if (G_UNLIKELY (screen == NULL))
+    screen = gdk_screen_get_default ();
+  gtk_window_set_screen (GTK_WINDOW (dialog_singleton), screen);
 
   /* show the dialog */
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_show (GTK_WIDGET (dialog_singleton));
 
   /* focus the window */
-  gtk_window_present (GTK_WINDOW (dialog));
+  gtk_window_present (GTK_WINDOW (dialog_singleton));
+}
+
+
+
+gboolean
+panel_item_dialog_visible (void)
+{
+  return !!(dialog_singleton != NULL);
 }
