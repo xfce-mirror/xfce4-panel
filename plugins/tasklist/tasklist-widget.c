@@ -41,6 +41,7 @@
 
 #define DEFAULT_BUTTON_SIZE      (25)
 #define DEFAULT_BUTTON_LENGTH    (200)
+#define DEFAULT_ICON_LUCENCY     (50)
 #define WIREFRAME_SIZE           (5)
 #define xfce_taskbar_lock()      G_BEGIN_DECLS { locked++; } G_END_DECLS;
 #define xfce_taskbar_unlock()    G_BEGIN_DECLS { if (locked > 0) locked--; else g_assert_not_reached (); } G_END_DECLS;
@@ -129,6 +130,7 @@ struct _XfceTasklist
   gint                  max_button_length;
   gint                  max_button_size;
   PangoEllipsizeMode    ellipsize_mode;
+  gint                  minimized_icon_lucency;
 };
 
 struct _XfceTasklistChild
@@ -311,6 +313,14 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                               PANGO_TYPE_ELLIPSIZE_MODE,
                                                               PANGO_ELLIPSIZE_END,
                                                               EXO_PARAM_READABLE));
+
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("minimized-icon-lucency",
+                                                             NULL,
+                                                             "Lucent percentage of minimized icons",
+                                                             0, 100,
+                                                             DEFAULT_ICON_LUCENCY,
+                                                             EXO_PARAM_READABLE));
 }
 
 
@@ -339,6 +349,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
 #endif
   tasklist->max_button_length = DEFAULT_BUTTON_LENGTH;
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
+  tasklist->minimized_icon_lucency = DEFAULT_ICON_LUCENCY;
   tasklist->ellipsize_mode = PANGO_ELLIPSIZE_END;
   tasklist->grouping = XFCE_TASKLIST_GROUPING_DEFAULT;
   tasklist->sort_order = XFCE_TASKLIST_SORT_ORDER_DEFAULT;
@@ -685,6 +696,7 @@ xfce_tasklist_style_set (GtkWidget *widget,
                         "max-button-length", &max_button_length,
                         "ellipsize-mode", &tasklist->ellipsize_mode,
                         "max-button-size", &max_button_size,
+                        "minimized-icon-lucency", &tasklist->minimized_icon_lucency,
                         NULL);
 
   /* update the widget */
@@ -1248,11 +1260,11 @@ tasklist_button_icon_changed (WnckWindow        *window,
 
   /* create a spotlight version of the icon when minimized */
   if (child->tasklist->only_minimized == FALSE
+      && child->tasklist->minimized_icon_lucency < 100
       && wnck_window_is_minimized (window))
     {
       /* create lightened version */
-      lucent = exo_gdk_pixbuf_lucent (pixbuf, 50);
-
+      lucent = exo_gdk_pixbuf_lucent (pixbuf, child->tasklist->minimized_icon_lucency);
       if (G_LIKELY (lucent != NULL))
         {
           /* set the button icon */
