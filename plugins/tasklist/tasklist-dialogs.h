@@ -20,6 +20,6 @@
 #ifndef __TASKLIST_DIALOGS_H__
 #define __TASKLIST_DIALOGS_H__
 
-void tasklist_dialogs_configure (TasklistPlugin *tasklist) G_GNUC_INTERNAL;
+void tasklist_dialogs_configure (TasklistPlugin *tasklist);
 
 #endif /* !__TASKLIST_DIALOGS_H__ */

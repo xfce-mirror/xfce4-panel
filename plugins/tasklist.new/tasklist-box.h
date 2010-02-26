@@ -32,7 +32,7 @@ typedef struct _TasklistBox      TasklistBox;
 #define TASKLIST_IS_BOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), TASKLIST_TYPE_BOX))
 #define TASKLIST_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), TASKLIST_TYPE_BOX, TasklistBoxClass))
 
-GType tasklist_box_get_type (void) G_GNUC_CONST G_GNUC_INTERNAL;
+GType tasklist_box_get_type (void) G_GNUC_CONST;
 
 G_END_DECLS
 

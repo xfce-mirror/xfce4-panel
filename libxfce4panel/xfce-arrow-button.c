@@ -30,8 +30,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-arrow-button.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 #define ARROW_WIDTH   (8)
 #define ARROW_PADDING (2)
@@ -252,7 +251,7 @@ xfce_arrow_button_child_type (GtkContainer *container)
  *
  * Returns: The newly created #XfceArrowButton widget.
  **/
-GtkWidget *
+PANEL_SYMBOL_EXPORT GtkWidget *
 xfce_arrow_button_new (GtkArrowType arrow_type)
 {
   return g_object_new (XFCE_TYPE_ARROW_BUTTON, "arrow-type", arrow_type, NULL);
@@ -267,7 +266,7 @@ xfce_arrow_button_new (GtkArrowType arrow_type)
  *
  * Sets the arrow type for @button.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
                                   GtkArrowType     arrow_type)
 {
@@ -299,7 +298,7 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
  *
  * Returns: the #GtkArrowType of @button.
  **/
-GtkArrowType
+PANEL_SYMBOL_EXPORT GtkArrowType
 xfce_arrow_button_get_arrow_type (XfceArrowButton *button)
 {
   g_return_val_if_fail (XFCE_IS_ARROW_BUTTON (button), GTK_ARROW_UP);

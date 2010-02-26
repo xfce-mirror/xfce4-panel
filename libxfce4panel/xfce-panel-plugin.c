@@ -26,11 +26,10 @@
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
 
+#include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/libxfce4panel-marshal.h>
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-panel-enums.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
+
 
 #define XFCE_PANEL_PLUGIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate))
 
@@ -870,7 +869,7 @@ xfce_panel_plugin_take_window_notify (gpointer  data,
  *
  * Return value: the name of the panel plugin.
  **/
-G_CONST_RETURN gchar *
+PANEL_SYMBOL_EXPORT G_CONST_RETURN gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -886,7 +885,7 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
  *
  * Return value: the (translated) display name of the plugin.
  **/
-G_CONST_RETURN gchar *
+PANEL_SYMBOL_EXPORT G_CONST_RETURN gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 {
 
@@ -907,7 +906,7 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
  *
  * Return value: the unique id of the panel plugin.
  **/
-G_CONST_RETURN gchar *
+PANEL_SYMBOL_EXPORT G_CONST_RETURN gchar *
 xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -926,7 +925,7 @@ xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
  *
  * Since: 4.8.0
  **/
-gboolean
+PANEL_SYMBOL_EXPORT gboolean
 xfce_panel_plugin_get_arguments (XfcePanelPlugin   *plugin,
                                  gchar           ***arguments)
 {
@@ -947,7 +946,7 @@ xfce_panel_plugin_get_arguments (XfcePanelPlugin   *plugin,
  *
  * Return value: the current size of the panel.
  **/
-gint
+PANEL_SYMBOL_EXPORT gint
 xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), -1);
@@ -964,7 +963,7 @@ xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
  * Return value: %TRUE when the plugin should expand,
  *               %FALSE otherwise.
  **/
-gboolean
+PANEL_SYMBOL_EXPORT gboolean
 xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
@@ -978,7 +977,7 @@ xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_set_expand:
  * @plugin : an #XfcePanelPlugin.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
                               gboolean         expand)
 {
@@ -1007,7 +1006,7 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
  *
  * Return value: the current #GtkOrientation of the panel.
  **/
-GtkOrientation
+PANEL_SYMBOL_EXPORT GtkOrientation
 xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), GTK_ORIENTATION_HORIZONTAL);
@@ -1023,7 +1022,7 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
  *
  * Return value: the current #XfceScreenPosition of the panel.
  **/
-XfceScreenPosition
+PANEL_SYMBOL_EXPORT XfceScreenPosition
 xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), XFCE_SCREEN_POSITION_NONE);
@@ -1040,7 +1039,7 @@ xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
  *
  * Since: 4.8.0
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
                                GtkWindow       *window)
 {
@@ -1059,7 +1058,7 @@ xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
  * @plugin : an #XfcePanelPlugin.
  * @widget : a #GtkWidget.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
                                      GtkWidget       *widget)
 {
@@ -1077,7 +1076,7 @@ xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
  * @plugin : an #XfcePanelPlugin.
  * @item   : a #GtkMenuItem.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
                                     GtkMenuItem     *item)
 {
@@ -1099,7 +1098,7 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_menu_show_configure:
  * @plugin : an #XfcePanelPlugin.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
 {
   GtkWidget *item;
@@ -1122,7 +1121,7 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_menu_show_about:
  * @plugin : an #XfcePanelPlugin.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 {
   GtkWidget *item;
@@ -1145,7 +1144,7 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_block_menu:
  * plugin : an #XfcePanelPlugin.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
 {
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -1160,7 +1159,7 @@ xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_unblock_menu:
  * plugin : an #XfcePanelPlugin.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
 {
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -1178,7 +1177,7 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  * @plugin : an #XfcePanelPlugin.
  * @menu   : a #GtkMenu.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
                                  GtkMenu         *menu)
 {
@@ -1206,7 +1205,7 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
  *
  * Since: 4.6.0
  **/
-GtkArrowType
+PANEL_SYMBOL_EXPORT GtkArrowType
 xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 {
   XfceScreenPosition  screen_position;
@@ -1259,7 +1258,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  *
  * Since: 4.6.0
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
                                    GtkWidget       *menu_widget,
                                    GtkWidget       *attach_widget,
@@ -1352,7 +1351,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
  *
  * Since: 4.6.0
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_position_menu (GtkMenu  *menu,
                                  gint     *x,
                                  gint     *y,
@@ -1394,7 +1393,7 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
  * Returns: The path to a config file or %NULL if no file was found.
  *          The returned string must be freed using g_free()
  **/
-gchar *
+PANEL_SYMBOL_EXPORT gchar *
 xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
 {
   gchar *filename, *path;
@@ -1429,7 +1428,7 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
  * Returns: The path to a config file or %NULL if no file was found.
  *          The returned string must be freed u sing g_free().
  **/
-gchar *
+PANEL_SYMBOL_EXPORT gchar *
 xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
                                  gboolean         create)
 {

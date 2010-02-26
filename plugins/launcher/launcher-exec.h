@@ -22,8 +22,8 @@
 
 void launcher_execute                (GdkScreen     *screen,
                                       LauncherEntry *entry,
-                                      GSList        *file_list) G_GNUC_INTERNAL;
+                                      GSList        *file_list);
 void launcher_execute_from_clipboard (GdkScreen     *screen,
-                                      LauncherEntry *entry)     G_GNUC_INTERNAL;
+                                      LauncherEntry *entry);
 
 #endif /* !__XFCE_PANEL_EXEC_H__ */

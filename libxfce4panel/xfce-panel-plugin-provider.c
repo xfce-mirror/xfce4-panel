@@ -23,9 +23,7 @@
 
 #include <gtk/gtk.h>
 
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-panel-enums.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
 
@@ -79,7 +77,7 @@ xfce_panel_plugin_provider_class_init (gpointer klass)
 
 
 
-const gchar *
+PANEL_SYMBOL_EXPORT const gchar *
 xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
@@ -89,7 +87,7 @@ xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 
 
 
-const gchar *
+PANEL_SYMBOL_EXPORT const gchar *
 xfce_panel_plugin_provider_get_id (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
@@ -99,7 +97,7 @@ xfce_panel_plugin_provider_get_id (XfcePanelPluginProvider *provider)
 
 
 
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
                                      gint                     size)
 {
@@ -110,7 +108,7 @@ xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
 
 
 
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
                                             GtkOrientation           orientation)
 {
@@ -121,7 +119,7 @@ xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
 
 
 
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provider,
                                                 XfceScreenPosition       screen_position)
 {
@@ -132,7 +130,7 @@ xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provide
 
 
 
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -142,7 +140,7 @@ xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 
 
 
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_plugin_provider_send_signal (XfcePanelPluginProvider       *provider,
                                         XfcePanelPluginProviderSignal  signal)
 {

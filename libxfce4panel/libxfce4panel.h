@@ -24,12 +24,12 @@ G_BEGIN_DECLS
 
 #define LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 
+#include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-hvbox.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/xfce-panel-enums.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
-#include <libxfce4panel/xfce-panel-macros.h>
 
 #undef LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 
@@ -50,7 +50,7 @@ G_BEGIN_DECLS
     (*construct_func) (plugin); \
   } \
   \
-  G_MODULE_EXPORT XfcePanelPlugin * \
+  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
   xfce_panel_plugin_construct (const gchar  *name, \
                                const gchar  *id, \
                                const gchar  *display_name, \

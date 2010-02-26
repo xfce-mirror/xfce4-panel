@@ -24,7 +24,7 @@
 
 G_BEGIN_DECLS
 
-void xfce_clock_dialog_show (ClockPlugin *clock) G_GNUC_INTERNAL;
+void xfce_clock_dialog_show (ClockPlugin *clock);
 
 G_END_DECLS
 

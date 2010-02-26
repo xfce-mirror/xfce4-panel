@@ -58,7 +58,7 @@ struct _TasklistPlugin
 };
 
 
-void     tasklist_plugin_write   (TasklistPlugin  *tasklist) G_GNUC_INTERNAL;
-gboolean tasklist_using_xinerama (XfcePanelPlugin *panel_plugin) G_GNUC_INTERNAL;
+void     tasklist_plugin_write   (TasklistPlugin  *tasklist);
+gboolean tasklist_using_xinerama (XfcePanelPlugin *panel_plugin);
 
 #endif /* !__TASKLIST_H__ */

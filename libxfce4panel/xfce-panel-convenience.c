@@ -25,7 +25,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <gtk/gtk.h>
 
-#include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 /**
  * xfce_panel_create_button:
@@ -35,7 +35,7 @@
  *
  * Returns: newly created #GtkButton.
  **/
-GtkWidget *
+PANEL_SYMBOL_EXPORT GtkWidget *
 xfce_panel_create_button (void)
 {
   GtkWidget *button = gtk_button_new ();
@@ -59,7 +59,7 @@ xfce_panel_create_button (void)
  *
  * Returns: newly created #GtkToggleButton.
  **/
-GtkWidget *
+PANEL_SYMBOL_EXPORT GtkWidget *
 xfce_panel_create_toggle_button (void)
 {
   GtkWidget *button = gtk_toggle_button_new ();
@@ -84,7 +84,7 @@ xfce_panel_create_toggle_button (void)
  * Returns: %TRUE if the user is allowed to customize the panel, %FALSE
  *          otherwise.
  **/
-gboolean
+PANEL_SYMBOL_EXPORT gboolean
 xfce_panel_allow_customization (void)
 {
   static gboolean  allow_customization = FALSE;
@@ -104,7 +104,7 @@ xfce_panel_allow_customization (void)
 
 
 
-void
+PANEL_SYMBOL_EXPORT void
 xfce_panel_cairo_set_source_rgba (cairo_t  *cr,
                                   GdkColor *color,
                                   gdouble   alpha)

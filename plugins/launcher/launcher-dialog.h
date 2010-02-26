@@ -21,8 +21,8 @@
 #ifndef __XFCE_PANEL_LAUNCHER_DIALOG_H__
 #define __XFCE_PANEL_LAUNCHER_DIALOG_H__
 
-gboolean launcher_dialog_read_desktop_file (const gchar *path, LauncherEntry *entry) G_GNUC_INTERNAL;
+gboolean launcher_dialog_read_desktop_file (const gchar *path, LauncherEntry *entry);
 
-void launcher_dialog_show (LauncherPlugin *launcher) G_GNUC_INTERNAL;
+void launcher_dialog_show (LauncherPlugin *launcher);
 
 #endif /* !__XFCE_PANEL_LAUNCHER_DIALOG_H__ */

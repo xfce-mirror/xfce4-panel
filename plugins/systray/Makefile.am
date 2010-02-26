@@ -101,7 +101,7 @@ stamp-xfce-tray-marshal.h: $(srcdir)/xfce-tray-marshal.list Makefile
 	( cd $(srcdir) && glib-genmarshal \
 		--prefix=_xfce_tray_marshal \
 		--header xfce-tray-marshal.list \
-		| sed -e 's/marshal_data);$$/marshal_data) G_GNUC_INTERNAL;/' ) >> xgen-xtmh \
+		| sed -e 's/marshal_data);$$/marshal_data);/' ) >> xgen-xtmh \
 	&& ( cmp -s xgen-xtmh xfce-tray-marshal.h || cp xgen-xtmh xfce-tray-marshal.h ) \
 	&& rm -f xgen-xtmh \
 	&& echo timestamp > $(@F)

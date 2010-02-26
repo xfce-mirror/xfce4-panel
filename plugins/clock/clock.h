@@ -84,21 +84,21 @@ struct _ClockPlugin
 
 
 
-void      xfce_clock_util_get_localtime     (struct tm       *tm)    G_GNUC_INTERNAL;
+void      xfce_clock_util_get_localtime     (struct tm       *tm);
 
 gchar    *xfce_clock_util_strdup_strftime   (const gchar     *format,
-                                             const struct tm *tm)    G_GNUC_MALLOC G_GNUC_INTERNAL;
+                                             const struct tm *tm) G_GNUC_MALLOC;
 
-void      xfce_clock_tooltip_sync           (ClockPlugin     *clock) G_GNUC_INTERNAL;
+void      xfce_clock_tooltip_sync           (ClockPlugin     *clock);
 
-void      xfce_clock_widget_sync            (ClockPlugin     *clock) G_GNUC_INTERNAL;
+void      xfce_clock_widget_sync            (ClockPlugin     *clock);
 
-void      xfce_clock_widget_update_settings (ClockPlugin     *clock) G_GNUC_INTERNAL;
+void      xfce_clock_widget_update_settings (ClockPlugin     *clock);
 
-void      xfce_clock_widget_set_mode        (ClockPlugin     *clock) G_GNUC_INTERNAL;
+void      xfce_clock_widget_set_mode        (ClockPlugin     *clock);
 
 gboolean  xfce_clock_plugin_set_size        (ClockPlugin     *clock,
-                                             guint            size)  G_GNUC_INTERNAL;
+                                             guint            size);
 
 G_END_DECLS
 

@@ -32,11 +32,11 @@ typedef struct _XfceClockAnalog      XfceClockAnalog;
 #define XFCE_CLOCK_IS_ANALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_CLOCK_TYPE_ANALOG))
 #define XFCE_CLOCK_ANALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_CLOCK_TYPE_ANALOG, XfceClockAnalogClass))
 
-GType      xfce_clock_analog_get_type (void) G_GNUC_CONST  G_GNUC_INTERNAL;
+GType      xfce_clock_analog_get_type (void) G_GNUC_CONST;
 
-GtkWidget *xfce_clock_analog_new      (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
+GtkWidget *xfce_clock_analog_new      (void) G_GNUC_MALLOC;
 
-gboolean   xfce_clock_analog_update   (gpointer user_data) G_GNUC_INTERNAL;
+gboolean   xfce_clock_analog_update   (gpointer user_data);
 
 G_END_DECLS
 

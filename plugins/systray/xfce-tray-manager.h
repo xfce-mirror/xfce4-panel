@@ -51,26 +51,26 @@ enum
 
 
 
-GType                xfce_tray_manager_get_type               (void) G_GNUC_CONST G_GNUC_INTERNAL;
+GType                xfce_tray_manager_get_type               (void) G_GNUC_CONST;
 
-GQuark               xfce_tray_manager_error_quark            (void) G_GNUC_INTERNAL;
+GQuark               xfce_tray_manager_error_quark            (void);
 
-XfceTrayManager     *xfce_tray_manager_new                    (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
+XfceTrayManager     *xfce_tray_manager_new                    (void) G_GNUC_MALLOC;
 
-gboolean             xfce_tray_manager_check_running          (GdkScreen        *screen) G_GNUC_INTERNAL;
+gboolean             xfce_tray_manager_check_running          (GdkScreen        *screen);
 
 gboolean             xfce_tray_manager_register               (XfceTrayManager  *manager,
                                                                GdkScreen        *screen,
-                                                               GError          **error) G_GNUC_INTERNAL;
+                                                               GError          **error);
 
-void                 xfce_tray_manager_unregister             (XfceTrayManager  *manager) G_GNUC_INTERNAL;
+void                 xfce_tray_manager_unregister             (XfceTrayManager  *manager);
 
-GtkOrientation       xfce_tray_manager_get_orientation        (XfceTrayManager  *manager) G_GNUC_INTERNAL;
+GtkOrientation       xfce_tray_manager_get_orientation        (XfceTrayManager  *manager);
 
 void                 xfce_tray_manager_set_orientation        (XfceTrayManager  *manager,
-                                                               GtkOrientation    orientation) G_GNUC_INTERNAL;
+                                                               GtkOrientation    orientation);
 
-gchar               *xfce_tray_manager_get_application_name   (GtkWidget        *socket) G_GNUC_MALLOC G_GNUC_INTERNAL;
+gchar               *xfce_tray_manager_get_application_name   (GtkWidget        *socket) G_GNUC_MALLOC;
 
 
 #endif /* !__XFCE_TRAY_MANAGER_H__ */

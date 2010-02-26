@@ -27,8 +27,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <libxfce4panel/xfce-panel-macros.h>
-#include <libxfce4panel/xfce-hvbox.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 
 
@@ -127,7 +126,7 @@ xfce_hvbox_size_allocate (GtkWidget     *widget,
  *
  * Return value: the newly allocated #XfceHVBox container widget.
  **/
-GtkWidget *
+PANEL_SYMBOL_EXPORT GtkWidget *
 xfce_hvbox_new (GtkOrientation orientation,
                 gboolean       homogeneous,
                 gint           spacing)
@@ -154,7 +153,7 @@ xfce_hvbox_new (GtkOrientation orientation,
  *
  * Set the new orientation of the #XfceHVBox container widget.
  **/
-void
+PANEL_SYMBOL_EXPORT void
 xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
                             GtkOrientation  orientation)
 {
@@ -178,7 +177,7 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
  *
  * Returns the current orientation of the #XfceHVBox.
  **/
-GtkOrientation
+PANEL_SYMBOL_EXPORT GtkOrientation
 xfce_hvbox_get_orientation (XfceHVBox *hvbox)
 {
   g_return_val_if_fail (XFCE_IS_HVBOX (hvbox), GTK_ORIENTATION_HORIZONTAL);

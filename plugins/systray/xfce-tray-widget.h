@@ -33,37 +33,37 @@ typedef struct _XfceTrayWidgetChild XfceTrayWidgetChild;
 #define XFCE_IS_TRAY_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_TRAY_WIDGET))
 #define XFCE_TRAY_WIDGET_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_TRAY_WIDGET, XfceTrayWidgetClass))
 
-GType            xfce_tray_widget_get_type           (void) G_GNUC_CONST G_GNUC_INTERNAL;
+GType            xfce_tray_widget_get_type           (void) G_GNUC_CONST;
 
-GtkWidget       *xfce_tray_widget_new                (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
+GtkWidget       *xfce_tray_widget_new                (void) G_GNUC_MALLOC;
 
 void             xfce_tray_widget_add_with_name      (XfceTrayWidget *tray,
                                                       GtkWidget      *child,
-                                                      const gchar    *name) G_GNUC_INTERNAL;
+                                                      const gchar    *name);
 
 void             xfce_tray_widget_set_arrow_type     (XfceTrayWidget *tray,
-                                                      GtkArrowType    arrow_type) G_GNUC_INTERNAL;
+                                                      GtkArrowType    arrow_type);
 
-GtkArrowType     xfce_tray_widget_get_arrow_type     (XfceTrayWidget *tray) G_GNUC_INTERNAL;
+GtkArrowType     xfce_tray_widget_get_arrow_type     (XfceTrayWidget *tray);
 
 void             xfce_tray_widget_set_rows           (XfceTrayWidget *tray,
-                                                      gint            rows) G_GNUC_INTERNAL;
+                                                      gint            rows);
 
-gint             xfce_tray_widget_get_rows           (XfceTrayWidget *tray) G_GNUC_INTERNAL;
+gint             xfce_tray_widget_get_rows           (XfceTrayWidget *tray);
 
 void             xfce_tray_widget_name_add           (XfceTrayWidget *tray,
                                                       const gchar    *name,
-                                                      gboolean        hidden) G_GNUC_INTERNAL;
+                                                      gboolean        hidden);
 
 void             xfce_tray_widget_name_update        (XfceTrayWidget *tray,
                                                       const gchar    *name,
-                                                      gboolean        hidden) G_GNUC_INTERNAL;
+                                                      gboolean        hidden);
 
 gboolean         xfce_tray_widget_name_hidden        (XfceTrayWidget *tray,
-                                                      const gchar    *name) G_GNUC_INTERNAL;
+                                                      const gchar    *name);
 
-GList           *xfce_tray_widget_name_list          (XfceTrayWidget *tray) G_GNUC_MALLOC G_GNUC_INTERNAL;
+GList           *xfce_tray_widget_name_list          (XfceTrayWidget *tray) G_GNUC_MALLOC;
 
-void             xfce_tray_widget_clear_name_list    (XfceTrayWidget *tray) G_GNUC_INTERNAL;
+void             xfce_tray_widget_clear_name_list    (XfceTrayWidget *tray);
 
 #endif /* !__XFCE_TRAY_WIDGET_H__ */

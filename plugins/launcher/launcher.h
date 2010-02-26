@@ -109,16 +109,16 @@ static const GtkTargetEntry drop_targets[] =
 
 
 
-GSList        *launcher_utility_filenames_from_selection_data (GtkSelectionData *selection_data) G_GNUC_MALLOC G_GNUC_INTERNAL;
+GSList        *launcher_utility_filenames_from_selection_data (GtkSelectionData *selection_data) G_GNUC_MALLOC;
 GdkPixbuf     *launcher_utility_load_pixbuf                   (GdkScreen        *screen,
                                                                const gchar      *name,
-                                                               guint             size) G_GNUC_MALLOC G_GNUC_INTERNAL;
-LauncherEntry *launcher_entry_new                             (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
+                                                               guint             size) G_GNUC_MALLOC;
+LauncherEntry *launcher_entry_new                             (void) G_GNUC_MALLOC;
 void           launcher_entry_free                            (LauncherEntry    *entry,
-                                                               LauncherPlugin   *launcher) G_GNUC_INTERNAL;
+                                                               LauncherPlugin   *launcher);
 void           launcher_plugin_rebuild                        (LauncherPlugin   *launcher,
-                                                               gboolean          update_icon) G_GNUC_INTERNAL;
-void           launcher_plugin_read                           (LauncherPlugin   *launcher) G_GNUC_INTERNAL;
-void           launcher_plugin_save                           (LauncherPlugin   *launcher) G_GNUC_INTERNAL;
+                                                               gboolean          update_icon);
+void           launcher_plugin_read                           (LauncherPlugin   *launcher);
+void           launcher_plugin_save                           (LauncherPlugin   *launcher);
 
 #endif /* !__XFCE_PANEL_LAUNCHER_H__ */
