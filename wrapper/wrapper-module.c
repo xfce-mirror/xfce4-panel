@@ -136,7 +136,7 @@ wrapper_module_new_provider (WrapperModule  *module,
   g_type_module_use (G_TYPE_MODULE (module));
 
   /* try to link the contruct or init function */
-  if (g_module_symbol (module->library, "__xpp_init",
+  if (g_module_symbol (module->library, "xfce_panel_module_init",
       (gpointer) &init_func) && init_func != NULL)
     {
       /* initialize the plugin */
@@ -150,7 +150,7 @@ wrapper_module_new_provider (WrapperModule  *module,
                              "comment", comment,
                              "arguments", arguments, NULL);
     }
-  else if (g_module_symbol (module->library, "__xpp_construct",
+  else if (g_module_symbol (module->library, "xfce_panel_module_construct",
            (gpointer) &construct_func) && construct_func != NULL)
     {
       /* create a new panel plugin */
