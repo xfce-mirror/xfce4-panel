@@ -24,6 +24,7 @@
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-builder.h>
@@ -63,6 +64,7 @@ enum _SeparatorPluginStyle
   SEPARATOR_PLUGIN_STYLE_SEPARATOR,
   SEPARATOR_PLUGIN_STYLE_HANDLE,
   SEPARATOR_PLUGIN_STYLE_DOTS,
+  SEPARATOR_PLUGIN_STYLE_WRAP
 };
 
 struct _SeparatorPluginClass
@@ -119,7 +121,7 @@ separator_plugin_class_init (SeparatorPluginClass *klass)
                                    g_param_spec_uint ("style",
                                                       NULL, NULL,
                                                       SEPARATOR_PLUGIN_STYLE_TRANSPARENT,
-                                                      SEPARATOR_PLUGIN_STYLE_DOTS,
+                                                      SEPARATOR_PLUGIN_STYLE_WRAP,
                                                       SEPARATOR_PLUGIN_STYLE_SEPARATOR,
                                                       EXO_PARAM_READWRITE));
 
@@ -149,6 +151,7 @@ separator_plugin_get_property (GObject    *object,
                                GParamSpec *pspec)
 {
   SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (object);
+  gboolean         expand;
 
   switch (prop_id)
     {
@@ -157,8 +160,8 @@ separator_plugin_get_property (GObject    *object,
         break;
 
       case PROP_EXPAND:
-        g_value_set_boolean (value,
-            xfce_panel_plugin_get_expand (XFCE_PANEL_PLUGIN (plugin)));
+        expand = xfce_panel_plugin_get_expand (XFCE_PANEL_PLUGIN (plugin));
+        g_value_set_boolean (value, expand);
         break;
 
       default:
@@ -176,12 +179,17 @@ separator_plugin_set_property (GObject      *object,
                                GParamSpec   *pspec)
 {
   SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (object);
+  gboolean         wrap;
 
   switch (prop_id)
     {
       case PROP_STYLE:
         plugin->style = g_value_get_uint (value);
         gtk_widget_queue_draw (GTK_WIDGET (object));
+
+        wrap = plugin->style == SEPARATOR_PLUGIN_STYLE_WRAP;
+        xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (object),
+             wrap ? PROVIDER_SIGNAL_WRAP_PLUGIN : PROVIDER_SIGNAL_UNWRAP_PLUGIN);
         break;
 
       case PROP_EXPAND:
@@ -207,6 +215,7 @@ separator_plugin_expose_event (GtkWidget      *widget,
   switch (plugin->style)
     {
       case SEPARATOR_PLUGIN_STYLE_TRANSPARENT:
+      case SEPARATOR_PLUGIN_STYLE_WRAP:
         /* do nothing */
         break;
 
@@ -305,12 +314,23 @@ separator_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
+separator_plugin_configure_style_changed (GtkComboBox *combo_box,
+                                          GtkWidget   *expand)
+{
+  /* expand is not functional when the wrap function is enabled */
+  gtk_widget_set_sensitive (expand,
+      gtk_combo_box_get_active (combo_box) != SEPARATOR_PLUGIN_STYLE_WRAP);
+}
+
+
+
+static void
 separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
   GtkBuilder      *builder;
   GObject         *dialog;
-  GObject         *object;
+  GObject         *style, *expand;
 
   panel_return_if_fail (XFCE_IS_SEPARATOR_PLUGIN (plugin));
 
@@ -320,13 +340,15 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (G_UNLIKELY (builder == NULL))
     return;
 
-  object = gtk_builder_get_object (builder, "style");
-  exo_mutual_binding_new (G_OBJECT (plugin), "style",
-                          G_OBJECT (object), "active");
+  style = gtk_builder_get_object (builder, "style");
+  expand = gtk_builder_get_object (builder, "expand");
+  g_signal_connect (G_OBJECT (style), "changed",
+      G_CALLBACK (separator_plugin_configure_style_changed), expand);
 
-  object = gtk_builder_get_object (builder, "expand");
+  exo_mutual_binding_new (G_OBJECT (plugin), "style",
+                          G_OBJECT (style), "active");
   exo_mutual_binding_new (G_OBJECT (plugin), "expand",
-                          G_OBJECT (object), "active");
+                          G_OBJECT (expand), "active");
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
