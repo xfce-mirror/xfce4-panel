@@ -67,7 +67,7 @@ static void     xfce_arrow_button_size_request  (GtkWidget             *widget,
                                                  GtkRequisition        *requisition);
 static void     xfce_arrow_button_size_allocate (GtkWidget             *widget,
                                                  GtkAllocation         *allocation);
-                                                 
+
 
 
 struct _XfceArrowButtonPrivate
@@ -144,7 +144,7 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
                                                       "The arrow type of the menu button",
                                                       GTK_TYPE_ARROW_TYPE,
                                                       GTK_ARROW_UP,
-                                                      G_PARAM_READWRITE 
+                                                      G_PARAM_READWRITE
                                                       | G_PARAM_STATIC_STRINGS));
 }
 
@@ -234,7 +234,7 @@ xfce_arrow_button_expose_event (GtkWidget      *widget,
   XfceArrowButton *button = XFCE_ARROW_BUTTON (widget);
   GtkWidget       *child;
   gint             x, y, width;
-  
+
   /* draw the button */
   (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->expose_event) (widget, event);
 
@@ -263,11 +263,11 @@ xfce_arrow_button_expose_event (GtkWidget      *widget,
           width = MIN (widget->allocation.height - 2 * widget->style->ythickness,
                        widget->allocation.width  - 2 * widget->style->xthickness);
           width = CLAMP (width, 1, ARROW_WIDTH);
-          
+
           x = widget->allocation.x + (widget->allocation.width - width) / 2;
           y = widget->allocation.y + (widget->allocation.height - width) / 2;
         }
-      
+
       gtk_paint_arrow (widget->style, widget->window,
                        GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
                        &(event->area), widget, "xfce_arrow_button",
@@ -292,7 +292,7 @@ xfce_arrow_button_size_request (GtkWidget      *widget,
     {
       /* use gtk for the widget size */
       (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->size_request) (widget, requisition);
-      
+
       /* reserve space for the arrow */
       switch (button->priv->arrow_type)
         {
@@ -300,12 +300,12 @@ xfce_arrow_button_size_request (GtkWidget      *widget,
           case GTK_ARROW_DOWN:
             requisition->width += ARROW_WIDTH;
             break;
-            
+
           case GTK_ARROW_LEFT:
           case GTK_ARROW_RIGHT:
             requisition->height += ARROW_WIDTH;
             break;
-            
+
           default:
             break;
         }
@@ -329,7 +329,7 @@ xfce_arrow_button_size_allocate (GtkWidget     *widget,
 
   /* allocate the button */
   (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->size_allocate) (widget, allocation);
-  
+
   if (button->priv->arrow_type != GTK_ARROW_NONE)
     {
       child = gtk_bin_get_child (GTK_BIN (widget));
@@ -337,7 +337,7 @@ xfce_arrow_button_size_allocate (GtkWidget     *widget,
         {
           /* copy the child allocation */
           child_allocation = child->allocation;
-          
+
           /* update the allocation to make space for the arrow */
           switch (button->priv->arrow_type)
             {
@@ -346,13 +346,13 @@ xfce_arrow_button_size_allocate (GtkWidget     *widget,
                 child_allocation.height -= ARROW_WIDTH;
                 child_allocation.y += ARROW_WIDTH;
                 break;
-              
+
               default:
                 child_allocation.width -= ARROW_WIDTH;
                 child_allocation.x += ARROW_WIDTH;
                 break;
             }
-          
+
           /* set the child allocation again */
           gtk_widget_size_allocate (child, &child_allocation);
         }
@@ -450,13 +450,13 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
   g_return_if_fail (XFCE_IS_ARROW_BUTTON (button));
 
   if (G_LIKELY (button->priv->arrow_type != arrow_type))
-    {    
+    {
       /* store the new arrow type */
       button->priv->arrow_type = arrow_type;
 
       /* emit signal */
-      g_signal_emit (G_OBJECT (button), 
-                     arrow_button_signals[ARROW_TYPE_CHANGED], 
+      g_signal_emit (G_OBJECT (button),
+                     arrow_button_signals[ARROW_TYPE_CHANGED],
                      0, arrow_type);
 
       /* notify property change */

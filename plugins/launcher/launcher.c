@@ -484,10 +484,10 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
               g_value_set_static_string (value, filenames[i]);
               g_ptr_array_add (array, value);
             }
-          
+
           /* set items */
           g_object_set (G_OBJECT (plugin), "items", array, NULL);
-          
+
           /* cleanup */
           xfconf_array_free (array);
         }
