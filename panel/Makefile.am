@@ -24,6 +24,8 @@ xfce4_panel_built_sources = \
 
 xfce4_panel_SOURCES = \
 	$(xfce4_panel_built_sources) \
+	$(top_srcdir)/common/panel-xfconf.c \
+	$(top_srcdir)/common/panel-xfconf.h \
 	main.c \
 	panel-application.c \
 	panel-application.h \

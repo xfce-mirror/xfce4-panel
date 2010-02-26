@@ -31,6 +31,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
+#include <common/panel-xfconf.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
@@ -113,6 +114,9 @@ struct _PanelApplication
   /* xfconf channel */
   XfconfChannel      *xfconf;
 
+  /* hash table with xfconf properties */
+  GHashTable         *xfconf_properties;
+
   /* internal list of all the panel windows */
   GSList  *windows;
 
@@ -180,6 +184,7 @@ panel_application_init (PanelApplication *application)
   application->drop_uris = NULL;
   application->drop_data_ready = FALSE;
   application->drop_occurred = FALSE;
+  application->xfconf_properties = NULL;
 
   /* get the xfconf channel */
   application->xfconf = xfconf_channel_new ("xfce4-panel");
@@ -243,16 +248,8 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
                                           PanelWindow      *window,
                                           gboolean          store_settings)
 {
-  XfconfChannel *channel = application->xfconf;
-  gchar          buf[100];
-  guint          i;
-  guint          panel_n = g_slist_index (application->windows, window);
-  GValue         value = { 0, };
-  const struct
-  {
-    const gchar *name;
-    GType        type;
-  } properties[] =
+  gchar               *property_base;
+  const PanelProperty  properties[] =
   {
     { "locked", G_TYPE_BOOLEAN },
     { "autohide", G_TYPE_BOOLEAN },
@@ -265,30 +262,24 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "leave-opacity", G_TYPE_UINT },
     { "background-alpha", G_TYPE_UINT },
     { "output-name", G_TYPE_STRING },
-    { "position", G_TYPE_STRING }
+    { "position", G_TYPE_STRING },
+    { NULL, G_TYPE_NONE }
   };
 
-  /* connect the boolean properties */
-  for (i = 0; i < G_N_ELEMENTS (properties); i++)
-    {
-      /* create xfconf property name */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/%s",
-                  panel_n, properties[i].name);
+  panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
+  panel_return_if_fail (g_slist_index (application->windows, window) > -1);
 
-      /* store the window settings in the channel before we create the binding,
-       * so we don't loose the panel settings */
-      if (store_settings)
-        {
-          g_value_init (&value, properties[i].type);
-          g_object_get_property (G_OBJECT (window), properties[i].name, &value);
-          xfconf_channel_set_property (channel, buf, &value);
-          g_value_unset (&value);
-        }
+  /* create the property base */
+  property_base = g_strdup_printf ("/panels/panel-%d",
+      g_slist_index (application->windows, window));
 
-      /* create binding */
-      xfconf_g_property_bind (channel, buf, properties[i].type,
-                              window, properties[i].name);
-    }
+  /* bind all the properties */
+  panel_properties_bind (application->xfconf, G_OBJECT (window),
+                         property_base, properties,
+                         application->xfconf_properties);
+
+  /* cleanup */
+  g_free (property_base);
 }
 
 
@@ -313,6 +304,10 @@ panel_application_load (PanelApplication *application)
   hash_table = xfconf_channel_get_properties (application->xfconf, "/panels");
   if (G_UNLIKELY (hash_table == NULL))
     return;
+
+  /* set the global hash table, so we can quickly read
+   * settings during startup */
+  application->xfconf_properties = hash_table;
 
   /* walk all the panel in the configuration */
   value = g_hash_table_lookup (hash_table, "/panels");
@@ -360,6 +355,7 @@ panel_application_load (PanelApplication *application)
 
   /* cleanup */
   g_hash_table_destroy (hash_table);
+  application->xfconf_properties = NULL;
 }
 
 
