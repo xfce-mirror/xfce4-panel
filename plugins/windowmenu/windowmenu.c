@@ -197,7 +197,6 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
 static void
 window_menu_plugin_init (WindowMenuPlugin *plugin)
 {
-  /* initialize settings */
   plugin->button_style = BUTTON_STYLE_ICON;
   plugin->workspace_actions = FALSE;
   plugin->workspace_names = TRUE;
@@ -215,6 +214,7 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
 
   plugin->icon = xfce_panel_image_new_from_source ("user-desktop");
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
+  gtk_widget_show (plugin->icon);
 }
 
 
@@ -276,7 +276,6 @@ window_menu_plugin_set_property (GObject      *object,
         button_style = g_value_get_uint (value);
         if (plugin->button_style != button_style)
           {
-            /* set new value */
             plugin->button_style = button_style;
 
             /* show or hide the icon */
@@ -307,7 +306,6 @@ window_menu_plugin_set_property (GObject      *object,
         urgentcy_notification = g_value_get_boolean (value);
         if (plugin->urgentcy_notification != urgentcy_notification)
           {
-            /* set new value */
             plugin->urgentcy_notification = urgentcy_notification;
 
             if (plugin->screen != NULL)
@@ -391,9 +389,6 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
-  /* show the icon */
-  gtk_widget_show (plugin->icon);
-
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
@@ -406,7 +401,6 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
   /* initialize the screen */
   window_menu_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
 
-  /* show the button */
   gtk_widget_show (plugin->button);
 }
 
@@ -431,12 +425,8 @@ window_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
       g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->screen),
           window_menu_plugin_active_window_changed, plugin);
 
-      /* unset the screen */
       plugin->screen = NULL;
     }
-
-  /* shutdown xfconf */
-  xfconf_shutdown ();
 }
 
 
@@ -816,20 +806,19 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
 
   /* try to get an utf-8 valid name */
   name = wnck_workspace_get_name (workspace);
-  if (IS_STRING (name) && !g_utf8_validate (name, -1, NULL))
+  if (!exo_str_is_empty (name)
+      && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  /* create fallback name if no name is set */
-  if (!IS_STRING (name))
+  if (exo_str_is_empty (name))
     name = name_num = g_strdup_printf (_("Workspace %d"),
         wnck_workspace_get_number (workspace) + 1);
 
-  /* create the menu item */
   mi = gtk_menu_item_new_with_label (name);
   g_signal_connect (G_OBJECT (mi), "activate",
       G_CALLBACK (window_menu_plugin_menu_workspace_item_active), workspace);
 
-  /* modify the label */
+  /* make the label pretty on long workspace names */
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
   gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
@@ -839,7 +828,6 @@ window_menu_plugin_menu_workspace_item_new (WnckWorkspace        *workspace,
   if (bold != NULL)
     gtk_widget_modify_font (label, bold);
 
-  /* cleanup */
   g_free (utf8);
   g_free (name_num);
 
@@ -855,7 +843,6 @@ window_menu_plugin_menu_actions_selection_done (GtkWidget    *action_menu,
   panel_return_if_fail (GTK_IS_MENU_SHELL (menu));
   panel_return_if_fail (WNCK_IS_ACTION_MENU (action_menu));
 
-  /* destroy the action menu */
   gtk_widget_destroy (action_menu);
 
   /* deactive the window list menu */
@@ -876,7 +863,7 @@ window_menu_plugin_menu_window_item_activate (GtkWidget      *mi,
   panel_return_val_if_fail (GTK_IS_MENU_ITEM (mi), FALSE);
   panel_return_val_if_fail (GTK_IS_MENU_SHELL (mi->parent), FALSE);
 
-  /* onyl respond to a button releases */
+  /* only respond to a button releases */
   if (event->type != GDK_BUTTON_RELEASE)
     return FALSE;
 
@@ -929,8 +916,7 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
   if (IS_STRING (name) && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  /* make sure we have atleast something in the name */
-  if (!IS_STRING (name))
+  if (exo_str_is_empty (name))
     name = "?";
 
   /* store the tooltip text */
@@ -949,11 +935,10 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
   g_signal_connect (G_OBJECT (mi), "button-release-event",
       G_CALLBACK (window_menu_plugin_menu_window_item_activate), window);
 
-  /* cleanup */
   g_free (utf8);
   g_free (decorated);
 
-  /* modify the label */
+  /* make the label pretty on long window names */
   label = gtk_bin_get_child (GTK_BIN (mi));
   panel_return_val_if_fail (GTK_IS_LABEL (label), NULL);
   gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
@@ -978,7 +963,6 @@ window_menu_plugin_menu_window_item_new (WnckWindow           *window,
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (image);
 
-      /* release */
       if (lucent != NULL)
         g_object_unref (G_OBJECT (lucent));
     }
@@ -995,10 +979,8 @@ window_menu_plugin_menu_selection_done (GtkWidget *menu,
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
-  /* destroy the menu */
   gtk_widget_destroy (menu);
 
-  /* deactivate the toggle button */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
 }
 
@@ -1091,11 +1073,9 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   panel_return_val_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin), NULL);
   panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->screen), NULL);
 
-  /* allocate pango styles */
   italic = pango_font_description_from_string ("italic");
   bold = pango_font_description_from_string ("bold");
 
-  /* create empty menu */
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "selection-done",
       G_CALLBACK (window_menu_plugin_menu_selection_done), plugin->button);
@@ -1277,7 +1257,6 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
           G_CALLBACK (window_menu_plugin_workspace_remove), plugin);
       gtk_widget_show (mi);
 
-      /* cleanup */
       g_free (label);
       g_free (utf8);
 
@@ -1286,7 +1265,6 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
       gtk_widget_show (mi);
     }
 
-  /* cleanup */
   pango_font_description_free (italic);
   pango_font_description_free (bold);
 
