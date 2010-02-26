@@ -15,8 +15,8 @@
  * Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __XFCE_LAUNCHER_PLUGIN_H__
-#define __XFCE_LAUNCHER_PLUGIN_H__
+#ifndef __LAUNCHER_H__
+#define __LAUNCHER_H__
 
 #include <gtk/gtk.h>
 #include <xfconf/xfconf.h>
@@ -121,4 +121,4 @@ GdkPixbuf *launcher_plugin_load_pixbuf (const gchar *name, gint size, GtkIconThe
 
 G_END_DECLS
 
-#endif /* !__XFCE_LAUNCHER_PLUGIN_H__ */
+#endif /* !__LAUNCHER_H__ */

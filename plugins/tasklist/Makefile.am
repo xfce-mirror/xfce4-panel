@@ -14,9 +14,9 @@ plugin_LTLIBRARIES = \
 	libtasklist.la
 
 libtasklist_la_SOURCES = \
-	plugin.c \
 	tasklist.c \
-	tasklist.h \
+	tasklist-widget.c \
+	tasklist-widget.h \
 	tasklist-dialog_glade.h
 
 libtasklist_la_CFLAGS = \

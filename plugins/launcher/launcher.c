@@ -267,7 +267,8 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
-  g_signal_connect (G_OBJECT (plugin->channel), "property-changed", G_CALLBACK (launcher_plugin_property_changed), plugin);
+  g_signal_connect (G_OBJECT (plugin->channel), "property-changed",
+                    G_CALLBACK (launcher_plugin_property_changed), plugin);
 
   /* show the configure menu item */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));

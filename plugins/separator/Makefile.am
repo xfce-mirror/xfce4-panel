@@ -1,57 +1,69 @@
 # $Id$
 
-INCLUDES = 								\
-	-I$(top_srcdir)							\
-	-DG_LOG_DOMAIN=\"libseparator\"					\
-	-DLOCALEDIR=\"$(localedir)\"					\
+INCLUDES = \
+	-I$(top_srcdir) \
+	-DG_LOG_DOMAIN=\"libseparator\" \
+	-DLOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir =								\
+plugindir = \
 	$(libdir)/xfce4/panel-plugins
 
-plugin_LTLIBRARIES =							\
+plugin_LTLIBRARIES = \
 	libseparator.la
 
-libseparator_la_SOURCES = 						\
-	separator.c
+libseparator_la_SOURCES = \
+	separator.c \
+	separator.h \
+	separator-dialog_glade.h
 
-libseparator_la_CFLAGS =						\
-	$(GTK_CFLAGS)							\
-	$(LIBXFCE4UTIL_CFLAGS)						\
-	$(CAIRO_CFLAGS)							\
-	$(LIBXFCE4UI_CFLAGS)						\
-	$(PLATFORM_CFLAGS)
+libseparator_la_CFLAGS = \
+	$(GTK_CFLAGS) \
+	$(LIBXFCE4UTIL_CFLAGS) \
+	$(CAIRO_CFLAGS) \
+	$(LIBXFCE4UI_CFLAGS) \
+	$(PLATFORM_CFLAGS) \
+	$(XFCONF_CFLAGS)
 
-libseparator_la_LDFLAGS =						\
-	-avoid-version							\
-	-module								\
+libseparator_la_LDFLAGS = \
+	-avoid-version \
+	-module \
 	$(PLATFORM_LDFLAGS)
 
 if HAVE_CYGWIN
-libseparator_la_LDFLAGS += 						\
+libseparator_la_LDFLAGS += \
 	-no-undefined
 endif
 
-libseparator_la_LIBADD =						\
-	$(top_builddir)/libxfce4panel/libxfce4panel.la			\
-	$(GTK_LIBS)							\
-	$(CAIRO_LIBS)							\
-	$(LIBXFCE4UTIL_LIBS)						\
-	$(LIBXFCE4UI_LIBS)
+libseparator_la_LIBADD = \
+	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(GTK_LIBS) \
+	$(CAIRO_LIBS) \
+	$(LIBXFCE4UTIL_LIBS) \
+	$(LIBXFCE4UI_LIBS) \
+	$(XFCONF_LIBS)
 
-libseparator_la_DEPENDENCIES =						\
+libseparator_la_DEPENDENCIES = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
+
+if MAINTAINER_MODE
+BUILT_SOURCES = \
+	separator-dialog_glade.h
+
+separator-dialog_glade.h: separator-dialog.glade
+	exo-csource --static --strip-comments --strip-content --name=separator_dialog_glade $< >$@
+endif
 
 #
 # .desktop file
 #
-desktopdir =								\
+desktopdir = \
 	$(datadir)/xfce4/panel-plugins
 
-desktop_in_in_files =							\
+desktop_in_in_files = \
 	separator.desktop.in.in
 
-desktop_in_files = 							\
+desktop_in_files = \
 	$(desktop_in_in_files:.desktop.in.in=.desktop.in)
 
 %.desktop.in: %.desktop.in.in
@@ -60,11 +72,12 @@ desktop_in_files = 							\
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = 								\
+EXTRA_DIST = \
+	separator-dialog.glade \
 	$(desktop_in_in_files)
 
-DISTCLEANFILES =							\
-	$(desktop_DATA)							\
+DISTCLEANFILES = \
+	$(desktop_DATA) \
 	$(desktop_in_files)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

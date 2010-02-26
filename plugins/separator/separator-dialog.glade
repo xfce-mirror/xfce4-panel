@@ -4,7 +4,7 @@
   <!-- interface-requires xfce4 0.0 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="XfceTitledDialog" id="dialog">
-    <property name="title" translatable="yes">Seperator Properties</property>
+    <property name="title" translatable="yes">Separator Properties</property>
     <property name="icon_name">gtk-properties</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
@@ -21,80 +21,55 @@
             <child>
               <object class="GtkAlignment" id="alignment1">
                 <property name="visible">True</property>
-                <property name="left_padding">12</property>
+                <property name="top_padding">6</property>
+                <property name="bottom_padding">12</property>
+                <property name="left_padding">18</property>
+                <property name="right_padding">6</property>
                 <child>
-                  <object class="GtkVBox" id="vbox1">
+                  <object class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
-                    <property name="border_width">6</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkRadioButton" id="style-empty">
+                      <object class="GtkHBox" id="hbox1">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="active">True</property>
-                        <property name="draw_indicator">True</property>
-                        <property name="label" translatable="yes">_Empty space</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkLabel" id="label2">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">_Style:</property>
+                            <property name="use_underline">True</property>
+                            <property name="mnemonic_widget">style</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="style">
+                            <property name="visible">True</property>
+                            <property name="model">style-model</property>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRadioButton" id="style-empty-expand">
+                      <object class="GtkCheckButton" id="expand">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
-                        <property name="group">style-empty</property>
-                        <property name="label" translatable="yes">E_xpanding empty space</property>
+                        <property name="label" translatable="yes">_Expand</property>
                       </object>
                       <packing>
                         <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioButton" id="style-line">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="draw_indicator">True</property>
-                        <property name="group">style-empty</property>
-                        <property name="label" translatable="yes">_Line</property>
-                      </object>
-                      <packing>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioButton" id="style-handle">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="draw_indicator">True</property>
-                        <property name="group">style-empty</property>
-                        <property name="label" translatable="yes">_Handle</property>
-                      </object>
-                      <packing>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioButton" id="style-dots">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="draw_indicator">True</property>
-                        <property name="group">style-empty</property>
-                        <property name="label" translatable="yes">_Dots</property>
-                      </object>
-                      <packing>
-                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>
@@ -140,5 +115,25 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="style-model">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Transparent</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Separator</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Handle</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Dots</col>
+      </row>
+    </data>
   </object>
 </interface>

@@ -22,160 +22,314 @@
 #include <config.h>
 #endif
 
+#include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4util/libxfce4util.h>
+#include <xfconf/xfconf.h>
+
+#include "separator.h"
+#include "separator-dialog_glade.h"
 
 
-typedef struct _XfceSeparatorClass XfceSeparatorClass;
-typedef struct _XfceSeparator      XfceSeparator;
-typedef enum   _XfceSeparatorMode  XfceSeparatorStyle;
-
-
-
-static void     xfce_separator_class_init                (XfceSeparatorClass  *klass);
-static void     xfce_separator_init                      (XfceSeparator       *separator);
-static void     xfce_separator_finalize                  (GObject             *object);
-static void     xfce_separator_configure_plugin          (XfcePanelPlugin     *plugin);
-static void     xfce_separator_load                      (XfceSeparator       *separator);
+#define SEPARATOR_OFFSET (0.15)
+#define SEPARATOR_SIZE   (8)
 
 
 
-struct _XfceSeparatorClass
+static void     separator_plugin_class_init                (SeparatorPluginClass  *klass);
+static void     separator_plugin_init                      (SeparatorPlugin       *separator);
+static gboolean separator_plugin_expose_event              (GtkWidget             *widget,
+                                                            GdkEventExpose        *event);
+static void     separator_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
+static void     separator_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
+static gboolean separator_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
+                                                            gint                   size);
+static void     separator_plugin_save                      (XfcePanelPlugin       *panel_plugin);
+static void     separator_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
+static void     separator_plugin_property_changed          (XfconfChannel         *channel,
+                                                            const gchar           *property_name,
+                                                            const GValue          *value,
+                                                            SeparatorPlugin       *plugin);
+
+
+
+enum _SeparatorPluginMode
+{
+  /* modes */
+  SEPARATOR_PLUGIN_MODE_TRANSPARENT = 0,
+  SEPARATOR_PLUGIN_MODE_SEPARATOR,
+  SEPARATOR_PLUGIN_MODE_HANDLE,
+  SEPARATOR_PLUGIN_MODE_DOTS,
+
+  /* defines */
+  SEPARATOR_PLUGIN_MODE_MIN = SEPARATOR_PLUGIN_MODE_TRANSPARENT,
+  SEPARATOR_PLUGIN_MODE_MAX = SEPARATOR_PLUGIN_MODE_DOTS,
+  SEPARATOR_PLUGIN_MODE_DEFAULT = SEPARATOR_PLUGIN_MODE_SEPARATOR
+};
+
+struct _SeparatorPluginClass
 {
   /* parent class */
   XfcePanelPluginClass __parent__;
 };
 
-struct _XfceSeparator
+struct _SeparatorPlugin
 {
   /* parent type */
   XfcePanelPlugin __parent__;
 
+  /* xfconf channel */
+  XfconfChannel        *channel;
+
   /* separator style */
-  XfceSeparatorStyle style;
-
-  /* if the separator should expand */
-  guint              expand : 1;
-};
-
-enum _XfceSeparatorMode
-{
-  XFCE_SEPARATOR_MODE_TRANSPARENT,
-  XFCE_SEPARATOR_MODE_SEPARATOR,
-  XFCE_SEPARATOR_MODE_HANDLE,
-  XFCE_SEPARATOR_MODE_DOTS
+  SeparatorPluginStyle  style;
 };
 
 
 
-XFCE_PANEL_DEFINE_TYPE (XfceSeparator, xfce_separator, XFCE_TYPE_PANEL_PLUGIN);
+G_DEFINE_TYPE (SeparatorPlugin, separator_plugin, XFCE_TYPE_PANEL_PLUGIN);
+
+
+
+/* register the panel plugin */
+XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_SEPARATOR_PLUGIN);
 
 
 
 static void
-xfce_separator_class_init (XfceSeparatorClass *klass)
+separator_plugin_class_init (SeparatorPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
+  GtkWidgetClass       *widget_class;
+
+  widget_class = GTK_WIDGET_CLASS (klass);
+  widget_class->expose_event = separator_plugin_expose_event;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
-  plugin_class->save = xfce_separator_save;
-  plugin_class->configure_plugin = xfce_separator_configure_plugin;
+  plugin_class->construct = separator_plugin_construct;
+  plugin_class->free_data = separator_plugin_free_data;
+  plugin_class->save = separator_plugin_save;
+  plugin_class->size_changed = separator_plugin_size_changed;
+  plugin_class->configure_plugin = separator_plugin_configure_plugin;
 }
 
 
 
 static void
-xfce_separator_init (XfceSeparator *separator)
+separator_plugin_init (SeparatorPlugin *plugin)
 {
-  /* initialize the default values */
-  separator->style = XFCE_SEPARATOR_MODE_SEPARATOR;
-  separator->expand = FALSE;
+  /* init, draw nothing */
+  plugin->style = SEPARATOR_PLUGIN_MODE_TRANSPARENT;
+
+  /* initialize xfconf */
+  xfconf_init (NULL);
+}
+
+
+
+static gboolean
+separator_plugin_expose_event (GtkWidget      *widget,
+                               GdkEventExpose *event)
+{
+  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (widget);
+  GtkAllocation   *alloc = &(widget->allocation);
+
+  switch (plugin->style)
+    {
+      case SEPARATOR_PLUGIN_MODE_TRANSPARENT:
+        /* do nothing */
+        break;
+
+      case SEPARATOR_PLUGIN_MODE_SEPARATOR:
+        if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+            GTK_ORIENTATION_HORIZONTAL)
+          {
+            /* paint vertical separator */
+            gtk_paint_vline (widget->style,
+                             widget->window,
+                             GTK_WIDGET_STATE (widget),
+                             &(event->area),
+                             widget, "separator",
+                             alloc->y + alloc->height * SEPARATOR_OFFSET,
+                             alloc->y + alloc->height * (1.00 - SEPARATOR_OFFSET),
+                             alloc->x + alloc->width / 2 - 1);
+          }
+        else
+          {
+            /* paint horizontal separator */
+            gtk_paint_hline (widget->style,
+                             widget->window,
+                             GTK_WIDGET_STATE (widget),
+                             &(event->area),
+                             widget, "separator",
+                             alloc->x + alloc->width * SEPARATOR_OFFSET,
+                             alloc->x + alloc->width * (1.00 - SEPARATOR_OFFSET),
+                             alloc->y + alloc->height / 2 - 1);
+          }
+        break;
+
+      case SEPARATOR_PLUGIN_MODE_HANDLE:
+        /* paint handle box */
+        gtk_paint_handle (widget->style,
+                          widget->window,
+                          GTK_WIDGET_STATE (widget),
+                          GTK_SHADOW_NONE,
+                          &(event->area),
+                          widget, "handlebox",
+                          alloc->x, alloc->y,
+                          alloc->width, alloc->height,
+                          xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)));
+        break;
+
+      case SEPARATOR_PLUGIN_MODE_DOTS:
+        /* TODO */
+        break;
+    }
+
+  return FALSE;
+}
+
+
+
+static void
+separator_plugin_construct (XfcePanelPlugin *panel_plugin)
+{
+  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
+  gboolean         expand;
+  guint            style;
+
+  /* set the xfconf channel */
+  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  g_signal_connect (G_OBJECT (plugin->channel), "property-changed",
+                    G_CALLBACK (separator_plugin_property_changed), plugin);
 
   /* show the properties dialog */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (clock));
+  xfce_panel_plugin_menu_show_configure (panel_plugin);
 
-  /* read the user settings */
-  xfce_separator_load (separator);
+  /* read the style */
+  style = xfconf_channel_get_uint (plugin->channel, "/style", SEPARATOR_PLUGIN_MODE_DEFAULT);
+  plugin->style = CLAMP (style, SEPARATOR_PLUGIN_MODE_MIN, SEPARATOR_PLUGIN_MODE_MAX);
 
+  /* expand the plugin if requested */
+  expand = xfconf_channel_get_bool (plugin->channel, "/expand", FALSE);
+  xfce_panel_plugin_set_expand (panel_plugin, expand);
 
+  /* now we draw the plugin */
+  gtk_widget_queue_draw (GTK_WIDGET (panel_plugin));
 }
 
 
 
 static void
-xfce_separator_save (XfcePanelPlugin *plugin)
+separator_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  XfceSeparator *separator = XFCE_SEPARATOR (plugin);
-  gchar         *filename;
-  XfceRc        *rc;
+  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
 
-  /* get the config file */
-  filename = xfce_panel_plugin_save_location (plugin, TRUE);
-  if (G_LIKELY (filename))
+  /* release the xfonf channel */
+  g_object_unref (G_OBJECT (plugin->channel));
+
+  /* shutdown xfconf */
+  xfconf_shutdown ();
+}
+
+
+
+static gboolean
+separator_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                               gint             size)
+{
+  /* set the minimum separator size */
+  if (xfce_panel_plugin_get_orientation (panel_plugin) ==
+      GTK_ORIENTATION_HORIZONTAL)
+    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
+                                 SEPARATOR_SIZE, size);
+  else
+    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin),
+                                 size, SEPARATOR_SIZE);
+
+  return TRUE;
+}
+
+
+
+static void
+separator_plugin_save (XfcePanelPlugin *panel_plugin)
+{
+  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
+
+  /* store settings */
+  xfconf_channel_set_uint (plugin->channel, "/style", plugin->style);
+  xfconf_channel_set_bool (plugin->channel, "/expand",
+                           xfce_panel_plugin_get_expand (panel_plugin));
+}
+
+
+
+static void
+separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
+{
+  SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
+  GtkBuilder      *builder;
+  GObject         *dialog;
+  GObject         *object;
+
+  panel_return_if_fail (XFCE_IS_SEPARATOR_PLUGIN (plugin));
+
+  /* load the dialog from the glade file */
+  builder = gtk_builder_new ();
+  if (gtk_builder_add_from_string (builder, separator_dialog_glade, separator_dialog_glade_length, NULL))
     {
-      /* open rc file */
-      rc = xfce_rc_simple_open (filename, FALSE);
+      dialog = gtk_builder_get_object (builder, "dialog");
+      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
 
-      /* cleanup */
-      g_free (filename);
+      xfce_panel_plugin_block_menu (panel_plugin);
+      g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) xfce_panel_plugin_unblock_menu, panel_plugin);
 
-      if (G_LIKELY (rc))
-        {
-          /* save the settings */
-          xfce_rc_write_int_entry (rc, "Expand", separator->expand);
-          xfce_rc_write_bool_entry (rc, "Style", separator->style);
+      object = gtk_builder_get_object (builder, "close-button");
+      g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
 
-          /* close the rc file */
-          xfce_rc_close (rc);
-        }
+      object = gtk_builder_get_object (builder, "expand");
+      xfconf_g_property_bind (plugin->channel, "/expand", G_TYPE_BOOLEAN, object, "active");
+
+      object = gtk_builder_get_object (builder, "style");
+      xfconf_g_property_bind (plugin->channel, "/style", G_TYPE_UINT, object, "active");
+
+      /* TODO remove when implemented by glade */
+      GtkCellRenderer *cell1 = gtk_cell_renderer_text_new ();
+      object = gtk_builder_get_object (builder, "style");
+      gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (object), cell1, TRUE);
+      gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (object), cell1, "text", 0, NULL);
+
+      gtk_widget_show (GTK_WIDGET (dialog));
+    }
+  else
+    {
+      /* release the builder */
+      g_object_unref (G_OBJECT (builder));
     }
 }
 
 
 
 static void
-xfce_separator_configure_plugin (XfcePanelPlugin *plugin)
+separator_plugin_property_changed (XfconfChannel   *channel,
+                                   const gchar     *property_name,
+                                   const GValue    *value,
+                                   SeparatorPlugin *plugin)
 {
+  panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
+  panel_return_if_fail (XFCE_IS_SEPARATOR_PLUGIN (plugin));
+  panel_return_if_fail (plugin->channel == channel);
 
+  /* update the changed property */
+  if (strcmp (property_name, "/style") == 0)
+    plugin->style = CLAMP (g_value_get_uint (value),
+                           SEPARATOR_PLUGIN_MODE_MIN,
+                           SEPARATOR_PLUGIN_MODE_MAX);
+  else if (strcmp (property_name, "/expand") == 0)
+    xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin),
+                                  g_value_get_boolean (value));
+
+  /* redraw */
+  gtk_widget_queue_draw (GTK_WIDGET (plugin));
 }
-
-
-
-static void
-xfce_separator_load (XfceSeparator *separator)
-{
-  gchar  *filename;
-  XfceRc *rc;
-
-  /* config filename */
-  filename = xfce_panel_plugin_lookup_rc_file (XFCE_PANEL_PLUGIN (separator));
-  if (G_LIKELY (filename))
-    {
-      /* open rc file (readonly) */
-      rc = xfce_rc_simple_open (filename, TRUE);
-
-      /* cleanup */
-      g_free (filename);
-
-      if (G_LIKELY (rc))
-        {
-          /* read the settings */
-          separator->expand = xfce_rc_read_bool_entry (rc, "Expand", FALSE);
-          separator->style = xfce_rc_read_int_entry (rc, "Style", XFCE_SEPARATOR_MODE_SEPARATOR);
-
-          /* close the rc file */
-          xfce_rc_close (rc);
-        }
-    }
-}
-
-
-
-G_MODULE_EXPORT void
-xfce_panel_plugin_register_types (XfcePanelModule *panel_module)
-{
-  /* register the separator type */
-  xfce_separator_register_type (panel_module);
-}
-
-
-
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_SEPARATOR)

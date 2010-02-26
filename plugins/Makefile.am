@@ -3,6 +3,7 @@
 SUBDIRS = \
 	clock \
 	launcher \
+	separator \
 	showdesktop \
 	systray \
 	tasklist
