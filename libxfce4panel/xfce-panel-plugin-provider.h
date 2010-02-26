@@ -48,10 +48,6 @@ struct _XfcePanelPluginProviderIface
   /*< private >*/
   GTypeInterface __parent__;
 
-  /*< signals >*/
-  void         (*provider_signal)     (XfcePanelPluginProvider       *provider,
-                                       XfcePanelPluginProviderSignal  signal);
-
   /*< public >*/
   const gchar *(*get_name)            (XfcePanelPluginProvider       *provider);
   gint         (*get_unique_id)       (XfcePanelPluginProvider       *provider);

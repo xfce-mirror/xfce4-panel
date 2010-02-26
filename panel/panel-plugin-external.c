@@ -259,7 +259,6 @@ panel_plugin_external_init (PanelPluginExternal *external)
 static void
 panel_plugin_external_provider_init (XfcePanelPluginProviderIface *iface)
 {
-  iface->provider_signal = NULL;
   iface->get_name = panel_plugin_external_get_name;
   iface->get_unique_id = panel_plugin_external_get_unique_id;
   iface->set_size = panel_plugin_external_set_size;

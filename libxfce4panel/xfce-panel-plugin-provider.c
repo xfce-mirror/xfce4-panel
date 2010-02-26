@@ -73,8 +73,7 @@ xfce_panel_plugin_provider_class_init (gpointer klass,
     g_signal_new (g_intern_static_string ("provider-signal"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (XfcePanelPluginProviderIface, provider_signal),
-                  NULL, NULL,
+                  0, NULL, NULL,
                   g_cclosure_marshal_VOID__UINT,
                   G_TYPE_NONE, 1, G_TYPE_UINT);
 }
