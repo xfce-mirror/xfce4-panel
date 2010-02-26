@@ -369,7 +369,7 @@ panel_item_dialog_unique_changed_foreach (GtkTreeModel *model,
   /* check if this is the module we're looking for */
   result = !!(module == PANEL_MODULE (user_data));
 
-  if (result == TRUE)
+  if (result)
     {
       /* update the module unique status */
       gtk_list_store_set (GTK_LIST_STORE (model), iter,

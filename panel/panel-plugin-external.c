@@ -120,16 +120,13 @@ struct _PanelPluginExternal
 {
   GtkSocket  __parent__;
 
-  /* plugin information */
   gint              unique_id;
 
   /* startup arguments */
   gchar           **arguments;
 
-  /* the module */
   PanelModule      *module;
 
-  /* whether the plug is embedded */
   guint             plug_embedded : 1;
 
   /* dbus message queue */
@@ -138,7 +135,7 @@ struct _PanelPluginExternal
   /* auto restart timer */
   GTimer           *restart_timer;
 
-  /* some info we store here */
+  /* some info received over dbus on startup */
   guint             show_configure : 1;
   guint             show_about : 1;
 
@@ -203,28 +200,29 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
-                                   g_param_spec_int ("unique-id", NULL, NULL,
+                                   g_param_spec_int ("unique-id",
+                                                     NULL, NULL,
                                                      -1, G_MAXINT, -1,
-                                                     G_PARAM_READWRITE
-                                                     | G_PARAM_STATIC_STRINGS
+                                                     EXO_PARAM_READWRITE
                                                      | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
                                    PROP_MODULE,
-                                   g_param_spec_object ("module", NULL, NULL,
+                                   g_param_spec_object ("module",
+                                                        NULL, NULL,
                                                         PANEL_TYPE_MODULE,
-                                                        G_PARAM_READWRITE
-                                                        | G_PARAM_STATIC_STRINGS
+                                                        EXO_PARAM_READWRITE
                                                         | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ARGUMENTS,
-                                   g_param_spec_boxed ("arguments", NULL, NULL,
+                                   g_param_spec_boxed ("arguments",
+                                                       NULL, NULL,
                                                        G_TYPE_STRV,
-                                                       G_PARAM_READWRITE
-                                                       | G_PARAM_STATIC_STRINGS
+                                                       EXO_PARAM_READWRITE
                                                        | G_PARAM_CONSTRUCT_ONLY));
 
+  /* add dbus type info for plugins */
   dbus_g_object_type_install_info (G_TYPE_FROM_CLASS (klass),
       &dbus_glib_panel_plugin_external_object_info);
 }
@@ -234,7 +232,6 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 static void
 panel_plugin_external_init (PanelPluginExternal *external)
 {
-  /* initialize */
   external->unique_id = -1;
   external->module = NULL;
   external->arguments = NULL;
@@ -280,12 +277,14 @@ panel_plugin_external_constructor (GType                  type,
   DBusGConnection *connection;
   GError          *error = NULL;
 
-  object = G_OBJECT_CLASS (panel_plugin_external_parent_class)->constructor (type, n_construct_params, construct_params);
+  object = G_OBJECT_CLASS (panel_plugin_external_parent_class)->constructor (type,
+                                                                             n_construct_params,
+                                                                             construct_params);
 
-  /* register the object */
   connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
   if (G_LIKELY (connection != NULL))
     {
+      /* register the object in dbus, the wrapper will monitor this object */
       panel_return_val_if_fail (PANEL_PLUGIN_EXTERNAL (object)->unique_id != -1, NULL);
       path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, PANEL_PLUGIN_EXTERNAL (object)->unique_id);
       dbus_g_connection_register_g_object (connection, path, object);
@@ -468,7 +467,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   panel_return_val_if_fail (PANEL_IS_MODULE (external->module), FALSE);
 
   /* leave when the plugin was already removed */
-  if (external->plug_embedded == FALSE)
+  if (!external->plug_embedded)
     return FALSE;
 
   /* plug has been removed */
@@ -494,7 +493,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
   if (g_timer_elapsed (external->restart_timer, NULL) > PANEL_PLUGIN_AUTO_RESTART)
     {
-      g_message ("Automatically restarting plugin %s-%d",
+      g_message ("Plugin %s-%d: auto restart after crash.",
                  panel_module_get_name (external->module),
                  external->unique_id);
     }
@@ -651,7 +650,7 @@ panel_plugin_external_queue_add_noop (PanelPluginExternal *external,
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
-  /* send the value */
+  /* add to queue with noop boolean */
   g_value_init (&value, G_TYPE_BOOLEAN);
   panel_plugin_external_queue_add (external, force, property, &value);
   g_value_unset (&value);
@@ -889,7 +888,6 @@ panel_plugin_external_child_watch (GPid     pid,
         break;
     }
 
-  /* close the pid */
   g_spawn_close_pid (pid);
 }
 
