@@ -82,7 +82,7 @@ DISTCLEANFILES += \
 	$(libclock_built_sources)
 
 clock-dialog_ui.h: clock-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=clock_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=clock_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

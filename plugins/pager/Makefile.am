@@ -73,7 +73,7 @@ DISTCLEANFILES += \
 	$(libpager_built_sources)
 
 pager-dialog_ui.h: pager-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=pager_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=pager_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

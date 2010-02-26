@@ -70,7 +70,7 @@ DISTCLEANFILES += \
 	$(libactions_built_sources)
 
 actions-dialog_ui.h: actions-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=actions_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=actions_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

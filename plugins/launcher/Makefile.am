@@ -80,7 +80,7 @@ DISTCLEANFILES += \
 	$(libclock_built_sources)
 
 launcher-dialog_ui.h: launcher-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=launcher_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=launcher_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

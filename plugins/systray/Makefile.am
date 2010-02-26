@@ -84,14 +84,14 @@ DISTCLEANFILES +=	\
 	$(libsystray_built_sources)
 
 systray-marshal.h: systray-marshal.list Makefile
-	glib-genmarshal --header --internal --prefix=_systray_marshal $< > $@
+	$(AM_V_GEN) glib-genmarshal --header --internal --prefix=_systray_marshal $< > $@
 
 systray-marshal.c: systray-marshal.list Makefile
-	echo "#include \"systray-marshal.h\"" > $@ \
+	$(AM_V_GEN) echo "#include \"systray-marshal.h\"" > $@ \
 	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
 
 systray-dialog_ui.h: systray-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

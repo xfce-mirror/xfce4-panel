@@ -72,7 +72,7 @@ DISTCLEANFILES += \
 	$(libseparator_built_sources)
 
 separator-dialog_ui.h: separator-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=separator_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=separator_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

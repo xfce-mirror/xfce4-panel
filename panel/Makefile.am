@@ -84,19 +84,19 @@ xfce4_panel_DEPENDENCIES = \
 if MAINTAINER_MODE
 
 panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
-	dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $< > $@
+	$(AM_V_GEN) dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $< > $@
 
 panel-dbus-client-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
-	dbus-binding-tool --mode=glib-client $< > $@
+	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
 
 panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.ui Makefile
-	exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
 
 panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
-	glib-genmarshal --header --prefix=panel_marshal $< > $@
+	$(AM_V_GEN) glib-genmarshal --header --prefix=panel_marshal $< > $@
 
 panel-marshal.c: $(srcdir)/panel-marshal.list Makefile
-	echo "#include <panel/panel-marshal.h>" > $@ \
+	$(AM_V_GEN) echo "#include <panel/panel-marshal.h>" > $@ \
 	&& glib-genmarshal --body --prefix=panel_marshal $< >> $@
 
 DISTCLEANFILES = \

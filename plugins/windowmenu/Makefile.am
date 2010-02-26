@@ -73,7 +73,7 @@ DISTCLEANFILES += \
 	$(libwindowmenu_built_sources)
 
 windowmenu-dialog_ui.h: windowmenu-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=windowmenu_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=windowmenu_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

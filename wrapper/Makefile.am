@@ -52,13 +52,13 @@ xfce4_panel_wrapper_DEPENDENCIES = \
 
 if MAINTAINER_MODE
 wrapper-dbus-client-infos.h: $(top_builddir)/panel/panel-dbus-service-infos.xml Makefile
-	dbus-binding-tool --mode=glib-client $< > $@
+	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
 
 wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile
-	glib-genmarshal --header --prefix=wrapper_marshal $< > $@
+	$(AM_V_GEN)glib-genmarshal --header --prefix=wrapper_marshal $< > $@
 
 wrapper-marshal.c: $(top_builddir)/panel/panel-marshal.list Makefile
-	echo "#include <wrapper/wrapper-marshal.h>" > $@ \
+	$(AM_V_GEN) echo "#include <wrapper/wrapper-marshal.h>" > $@ \
 	&& glib-genmarshal --body --prefix=wrapper_marshal $< >> $@
 
 BUILT_SOURCES = \

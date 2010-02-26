@@ -41,6 +41,7 @@ dnl ***************************
 AM_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([1.8 dist-bzip2 tar-ustar])
 AM_MAINTAINER_MODE()
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 dnl *******************************
 dnl *** Check for UNIX variants ***
@@ -62,13 +63,6 @@ dnl *** Initialize libtool ***
 dnl **************************
 AC_DISABLE_STATIC()
 AC_PROG_LIBTOOL()
-
-dnl ****************************
-dnl *** Intltool-update hack ***
-dnl ****************************
-AC_CONFIG_COMMANDS([intltool-update],
-    [(sed -e 's/^\("desktop.*".*\)/\1\n"rc(?:\\\\.in)+|"\./' intltool-update > intltool-update-tmp &&
-      mv intltool-update-tmp intltool-update && chmod 755 intltool-update)])
 
 dnl **************************************
 dnl *** Substitute version information ***

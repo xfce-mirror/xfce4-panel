@@ -74,7 +74,7 @@ DISTCLEANFILES += \
 	$(libtasklist_built_sources)
 
 tasklist-dialog_ui.h: tasklist-dialog.ui
-	exo-csource --static --strip-comments --strip-content --name=tasklist_dialog_ui $< >$@
+	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=tasklist_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
