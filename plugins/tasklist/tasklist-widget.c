@@ -447,6 +447,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   /* widgets for the overflow menu */
   tasklist->arrow_button = xfce_arrow_button_new (GTK_ARROW_DOWN);
   gtk_widget_set_parent (tasklist->arrow_button, GTK_WIDGET (tasklist));
+  gtk_widget_set_name (tasklist->arrow_button, "panel-tasklist-arrow");
   gtk_button_set_relief (GTK_BUTTON (tasklist->arrow_button), tasklist->button_relief);
   g_signal_connect (G_OBJECT (tasklist->arrow_button), "toggled",
       G_CALLBACK (xfce_tasklist_arrow_button_toggled), tasklist);
