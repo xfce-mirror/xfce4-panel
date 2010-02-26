@@ -29,9 +29,9 @@
 
 
 
-static gboolean wrapper_plug_expose_event              (GtkWidget               *widget,
-                                                        GdkEventExpose          *event);
-static void     wrapper_plug_set_colormap              (WrapperPlug             *plug);
+static gboolean wrapper_plug_expose_event (GtkWidget      *widget,
+                                           GdkEventExpose *event);
+static void     wrapper_plug_set_colormap  (WrapperPlug   *plug);
 
 
 
@@ -84,7 +84,8 @@ wrapper_plug_init (WrapperPlug *plug)
   gtk_widget_set_app_paintable (GTK_WIDGET (plug), TRUE);
 
   /* connect signal to monitor the compositor changes */
-  g_signal_connect (G_OBJECT (plug), "composited-changed", G_CALLBACK (wrapper_plug_set_colormap), NULL);
+  g_signal_connect (G_OBJECT (plug), "composited-changed",
+                    G_CALLBACK (wrapper_plug_set_colormap), NULL);
 
   /* set the colormap */
   /* HACK: the systray can't handle composited windows! */
