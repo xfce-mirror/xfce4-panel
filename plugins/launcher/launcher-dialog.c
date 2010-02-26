@@ -167,19 +167,39 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
 {
   LauncherPluginDialog *dialog = user_data;
   GObject              *store;
-  XfceMenuItemPool     *pool;
+  XfceMenu             *menu;
+  GError               *error = NULL;
 
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
 
   GDK_THREADS_ENTER ();
+  
+  /* initialize the menu library */
+  xfce_menu_init (NULL);
+  
+  /* load our menu file */
+  menu = xfce_menu_new (SYSCONFDIR "/xdg/menus/launcher.menu", &error);
+  if (G_UNLIKELY (menu != NULL))
+    {
+      /* start appending items in the store */
+      store = gtk_builder_get_object (dialog->builder, "add-store");
 
-  /* start appending items in the store */
-  store = gtk_builder_get_object (dialog->builder, "add-store");
-
-  /* get the item cache and insert everything in the store */
-  pool = launcher_plugin_get_item_pool (dialog->plugin);
-  xfce_menu_item_pool_foreach (pool,
-      launcher_dialog_add_store_insert, store);
+      /* get the item pool and insert everything in the store */
+      xfce_menu_item_pool_foreach (xfce_menu_get_item_pool (menu),
+                                   launcher_dialog_add_store_insert,
+                                   store);
+          
+      /* release the menu */
+      g_object_unref (G_OBJECT (menu));
+    }
+  else
+    {
+      /* TODO */
+      g_error_free (error);
+    }
+      
+  /* shutdown menu library */
+  xfce_menu_shutdown ();
 
   GDK_THREADS_LEAVE ();
 
@@ -251,7 +271,7 @@ launcher_dialog_tree_save_foreach (GtkTreeModel *model,
       /* create a value with the filename */
       value = g_new0 (GValue, 1);
       g_value_init (value, G_TYPE_STRING);
-      g_value_set_static_string (value, xfce_menu_item_get_desktop_id (item));
+      g_value_set_static_string (value, xfce_menu_item_get_filename (item));
 
       /* put it in the array and release */
       g_ptr_array_add (array, value);
@@ -306,7 +326,7 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
     }
 
   /* update the sensitivity of the buttons */
-  object = gtk_builder_get_object (dialog->builder, "item-remove");
+  object = gtk_builder_get_object (dialog->builder, "item-delete");
   gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_children > 0));
 
   object = gtk_builder_get_object (dialog->builder, "item-move-up");
@@ -356,14 +376,14 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
       if (!gtk_tree_selection_get_selected (selection, &model, &iter_a))
         return;
 
-      if (exo_str_is_equal (name, "item-remove"))
+      if (exo_str_is_equal (name, "item-delete"))
         {
           /* create question dialog */
           window = gtk_message_dialog_new (
               GTK_WINDOW (gtk_widget_get_toplevel (button)),
               GTK_DIALOG_DESTROY_WITH_PARENT,
               GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-              _("Are you sure you want to remove\nthe selected item?"));
+              _("Are you sure you want to remove the selected item?"));
           gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (window),
               _("If you delete an item, it is permanently removed from the launcher."));
           gtk_dialog_add_buttons (GTK_DIALOG (window),
@@ -640,9 +660,9 @@ launcher_dialog_show (LauncherPlugin *plugin)
   GObject              *window, *object, *item;
   guint                 i;
   GtkTreeSelection     *selection;
-  const gchar          *button_names[] = { "item-add", "item-remove",
+  const gchar          *button_names[] = { "item-add", "item-delete",
                                            "item-move-up", "item-move-down",
-                                           "item-edit" };
+                                           "item-edit", "item-new" };
   LauncherPluginDialog *dialog;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));

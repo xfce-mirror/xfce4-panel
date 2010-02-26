@@ -81,9 +81,6 @@ struct _LauncherPlugin
   guint      disable_tooltips : 1;
 };
 
-/* shared root menu for all the launchers */
-static XfceMenu *root_menu = NULL;
-
 
 
 G_DEFINE_TYPE (LauncherPlugin, launcher_plugin, XFCE_TYPE_PANEL_PLUGIN);
@@ -115,37 +112,11 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
-  GError *error;
-
   /* initialize xfconf */
   xfconf_init (NULL);
 
   /* show the configure menu item */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
-  /* initialize the menu library */
-  xfce_menu_init (NULL);
-
-  if (root_menu == NULL)
-    {
-      /* get the launcher menu */
-      root_menu = xfce_menu_new (SYSCONFDIR "/xdg/menus/launcher.menu", &error);
-      if (G_UNLIKELY (root_menu != NULL))
-        {
-          g_object_add_weak_pointer (G_OBJECT (root_menu), (gpointer) &root_menu);
-          g_message ("Loaded root menu");
-        }
-      else
-        {
-          g_critical ("Failed to load the root menu....");
-          g_error_free (error);
-        }
-    }
-  else
-    {
-      /* take a reference */
-      g_object_ref (G_OBJECT (root_menu));
-    }
 }
 
 
@@ -185,7 +156,7 @@ static void
 launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
-  GtkWidget     *widget;
+  GtkWidget      *widget;
 
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
@@ -262,12 +233,6 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* free items */
   g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
   g_slist_free (plugin->items);
-
-  /* release the root menu */
-  g_object_unref (G_OBJECT (root_menu));
-
-  /* shutdown menu library */
-  xfce_menu_shutdown ();
 }
 
 
@@ -296,7 +261,7 @@ static void
 launcher_plugin_save (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin  *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
-  gchar          **desktop_ids;
+  gchar          **filenames;
   guint            i, length;
   GSList          *li;
   XfceMenuItem    *item;
@@ -309,17 +274,17 @@ launcher_plugin_save (XfcePanelPlugin *panel_plugin)
   if (G_LIKELY (length > 0))
     {
       /* create the array with the desktop ids */
-      desktop_ids = g_new0 (gchar *, length + 1);
+      filenames = g_new0 (gchar *, length + 1);
       for (li = plugin->items, i = 0; li != NULL; li = li->next)
         if (G_LIKELY ((item = li->data) != NULL))
-          desktop_ids[i++] = (gchar *) xfce_menu_item_get_desktop_id (item);
+          filenames[i++] = (gchar *) xfce_menu_item_get_filename (item);
 
       /* store the list of filenames */
       xfconf_channel_set_string_list (plugin->channel, "/items",
-                                      (const gchar **) desktop_ids);
+                                      (const gchar **) filenames);
 
       /* cleanup */
-      g_free (desktop_ids);
+      g_free (filenames);
     }
 }
 
@@ -444,8 +409,9 @@ launcher_plugin_button_query_tooltip (GtkWidget      *widget,
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
   /* check if we show tooltips */
-  if (plugin->disable_tooltips ||
-      plugin->items == NULL || plugin->items->data == NULL)
+  if (plugin->disable_tooltips
+      || plugin->items == NULL
+      || plugin->items->data == NULL)
     return FALSE;
 
   return launcher_plugin_item_query_tooltip (widget, x, y, keyboard_mode,
@@ -475,32 +441,30 @@ launcher_plugin_button_drag_data_received (GtkWidget        *widget,
 static void
 launcher_plugin_items_load (LauncherPlugin *plugin)
 {
-  gchar            **desktop_ids;
-  guint              i;
-  XfceMenuItem      *item;
-  XfceMenuItemPool  *pool;
+  gchar        **filenames;
+  guint          i;
+  XfceMenuItem  *item;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->items == NULL);
 
   /* get the list of launcher filenames */
-  desktop_ids = xfconf_channel_get_string_list (plugin->channel, "/items");
-  if (G_LIKELY (desktop_ids != NULL))
+  filenames = xfconf_channel_get_string_list (plugin->channel, "/items");
+  if (G_LIKELY (filenames != NULL))
     {
-      /* get the menu item pool */
-      pool = launcher_plugin_get_item_pool (plugin);
-
       /* try to load all the items */
-      for (i = 0; desktop_ids[i] != NULL; i++)
+      for (i = 0; filenames[i] != NULL; i++)
         {
-          item = xfce_menu_item_pool_lookup (pool, desktop_ids[i]);
+          /* create a new item from the file */
+          item = xfce_menu_item_new (filenames[i]);
           if (G_LIKELY (item != NULL))
-            plugin->items = g_slist_append (plugin->items,
-                                            g_object_ref (G_OBJECT (item)));
+            plugin->items = g_slist_append (plugin->items, item);
+          else
+            g_message ("Lookup the item in the pool...");
         }
 
       /* cleanup */
-      g_strfreev (desktop_ids);
+      g_strfreev (filenames);
     }
 }
 
@@ -577,7 +541,7 @@ launcher_plugin_item_exec_on_screen (XfceMenuItem *item,
 
   if (G_UNLIKELY (succeed == FALSE))
     {
-      /* TODO */
+      /* TODO make this some nice error dialog */
       g_message ("Failed to launch.... (%s)", error->message);
       g_error_free (error);
     }
@@ -699,7 +663,7 @@ launcher_plugin_exec_parse (XfceMenuItem   *item,
                     if (*p == 'f')
                       break;
                     if (li->next != NULL)
-                      g_string_insert_c (string, -1, ' ');
+                      g_string_append_c (string, ' ');
                   }
                 break;
 
@@ -713,7 +677,7 @@ launcher_plugin_exec_parse (XfceMenuItem   *item,
                     if (*p == 'u')
                       break;
                     if (li->next != NULL)
-                      g_string_insert_c (string, -1, ' ');
+                      g_string_append_c (string, ' ');
                   }
                 break;
 
@@ -739,13 +703,13 @@ launcher_plugin_exec_parse (XfceMenuItem   *item,
                 break;
 
               case '%':
-                g_string_insert_c (string, -1, '%');
+                g_string_append_c (string, '%');
                 break;
             }
         }
       else
         {
-          g_string_insert_c (string, -1, *p);
+          g_string_append_c (string, *p);
         }
     }
 
@@ -762,15 +726,6 @@ launcher_plugin_get_channel (LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
   return plugin->channel;
-}
-
-
-XfceMenuItemPool *
-launcher_plugin_get_item_pool (LauncherPlugin *plugin)
-{
-  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), NULL);
-  panel_return_val_if_fail (XFCE_IS_MENU (root_menu), NULL);
-  return xfce_menu_get_item_pool (root_menu);
 }
 
 

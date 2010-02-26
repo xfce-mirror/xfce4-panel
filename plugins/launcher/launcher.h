@@ -40,9 +40,8 @@ GType             launcher_plugin_get_type    (void) G_GNUC_CONST;
 
 XfconfChannel    *launcher_plugin_get_channel (LauncherPlugin *plugin);
 
-XfceMenuItemPool *launcher_plugin_get_item_pool (LauncherPlugin *plugin);
+GSList           *launcher_plugin_get_items   (LauncherPlugin *plugin);
 
-GSList           *launcher_plugin_get_items (LauncherPlugin *plugin);
 G_END_DECLS
 
 #endif /* !__LAUNCHER_H__ */

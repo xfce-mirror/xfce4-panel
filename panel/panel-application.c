@@ -401,7 +401,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
                                     xfce_panel_plugin_provider_get_unique_id (provider));
 
         /* build the plugin rc filename */
-        filename = g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH,
+        filename = g_strdup_printf (PANEL_PLUGIN_RC_RELATIVE_PATH,
                                     xfce_panel_plugin_provider_get_name (provider),
                                     xfce_panel_plugin_provider_get_unique_id (provider));
 

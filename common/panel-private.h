@@ -21,17 +21,20 @@
 #define __PANEL_PRIVATE_H__
 
 /* handling flags */
-#define PANEL_SET_FLAG(flags,flag)   G_STMT_START{ ((flags) |= (flag)); }G_STMT_END
+#define PANEL_SET_FLAG(flags,flag) G_STMT_START{ ((flags) |= (flag)); }G_STMT_END
 #define PANEL_UNSET_FLAG(flags,flag) G_STMT_START{ ((flags) &= ~(flag)); }G_STMT_END
-#define PANEL_HAS_FLAG(flags,flag)   (((flags) & (flag)) != 0)
+#define PANEL_HAS_FLAG(flags,flag) (((flags) & (flag)) != 0)
 
 /* check if the string is not empty */
-#define IS_STRING(string)            ((string) != NULL && *(string) != '\0')
+#define IS_STRING(string) ((string) != NULL && *(string) != '\0')
 
-/* relative plugin filename (printf format) */
-#define PANEL_PLUGIN_RELATIVE_PATH   "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "%s-%d.rc"
+/* relative path to the plugin directory */
+#define PANEL_PLUGIN_RELATIVE_PATH "xfce4" G_DIR_SEPARATOR_S "panel"
+
+/* relative plugin's rc filename (printf format) */
+#define PANEL_PLUGIN_RC_RELATIVE_PATH PANEL_PLUGIN_RELATIVE_PATH G_DIR_SEPARATOR_S "%s-%d.rc"
 
 /* xfconf property base (printf format) */
-#define PANEL_PLUGIN_PROPERTY_BASE   "/plugins/plugin-%d"
+#define PANEL_PLUGIN_PROPERTY_BASE "/plugins/plugin-%d"
 
 #endif /* !__PANEL_PRIVATE_H__ */

@@ -843,7 +843,7 @@ xfce_panel_plugin_relative_filename (XfcePanelPlugin *plugin)
   panel_return_val_if_fail (xfce_panel_plugin_get_unique_id (plugin) != -1, NULL);
 
   /* return the relative configuration filename */
-  return g_strdup_printf (PANEL_PLUGIN_RELATIVE_PATH,
+  return g_strdup_printf (PANEL_PLUGIN_RC_RELATIVE_PATH,
                           plugin->priv->name, plugin->priv->unique_id);
 }
 
