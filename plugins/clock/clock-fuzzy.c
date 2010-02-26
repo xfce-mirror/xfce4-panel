@@ -62,7 +62,9 @@ enum
 enum
 {
  PROP_0,
- PROP_FUZZINESS
+ PROP_FUZZINESS,
+ PROP_SIZE_RATIO,
+  PROP_ORIENTATION
 };
 
 struct _XfceClockFuzzyClass
@@ -162,6 +164,21 @@ xfce_clock_fuzzy_class_init (XfceClockFuzzyClass *klass)
   gobject_class->finalize = xfce_clock_fuzzy_finalize;
 
   g_object_class_install_property (gobject_class,
+                                   PROP_SIZE_RATIO,
+                                   g_param_spec_double ("size-ratio", NULL, NULL,
+                                                        -1, G_MAXDOUBLE, -1.00,
+                                                        G_PARAM_READABLE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ORIENTATION,
+                                   g_param_spec_enum ("orientation", NULL, NULL,
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_WRITABLE
+                                                      | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_FUZZINESS,
                                    g_param_spec_uint ("fuzziness", NULL, NULL,
                                                       FUZZINESS_MIN,
@@ -197,6 +214,12 @@ xfce_clock_fuzzy_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_ORIENTATION:
+      gtk_label_set_angle (GTK_LABEL (object),
+          g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
+          0 : 270);
+      break;
+
     case PROP_FUZZINESS:
       fuzziness = g_value_get_uint (value);
       if (G_LIKELY (fuzzy->fuzziness != fuzziness))
@@ -226,6 +249,10 @@ xfce_clock_fuzzy_get_property (GObject    *object,
     {
     case PROP_FUZZINESS:
       g_value_set_uint (value, fuzzy->fuzziness);
+      break;
+
+    case PROP_SIZE_RATIO:
+      g_value_set_double (value, -1.0);
       break;
 
     default:

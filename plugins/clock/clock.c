@@ -23,6 +23,9 @@
 #ifdef HAVE_TIME_H
 #include <time.h>
 #endif
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 #include <gtk/gtk.h>
 #include <exo/exo.h>
@@ -62,6 +65,7 @@ static void     clock_plugin_construct                 (XfcePanelPlugin       *p
 static void     clock_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
 static gboolean clock_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
                                                         gint                   size);
+static void     clock_plugin_size_ratio_changed        (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_orientation_changed       (XfcePanelPlugin       *panel_plugin,
                                                         GtkOrientation         orientation);
 static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
@@ -435,7 +439,8 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint             size)
 {
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
-  gint         clock_size;
+  gdouble      ratio;
+  gint         ratio_size;
   gint         border = 0;
 
   if (plugin->clock == NULL)
@@ -446,16 +451,35 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     border = 1;
   gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), border);
 
-  /* get the clock size */
-  clock_size = CLAMP (size - (size > 26 ? 6 : 4), 1, 128);
+  /* get the width:height ratio */
+  g_object_get (G_OBJECT (plugin->clock), "size-ratio", &ratio, NULL);
+  ratio_size = ratio > 0 ? size : -1;
 
   /* set the clock size */
   if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
-    gtk_widget_set_size_request (plugin->clock, -1, clock_size);
+    {
+      if (ratio > 0 && ratio != 1.0)
+        ratio_size = ceil (size * ratio);
+
+      gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), ratio_size, size);
+    }
   else
-    gtk_widget_set_size_request (plugin->clock, clock_size, -1);
+    {
+      if (ratio > 0 && ratio != 1.0)
+        ratio_size = ceil (size / ratio);
+
+      gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, ratio_size);
+    }
 
   return TRUE;
+}
+
+
+
+static void
+clock_plugin_size_ratio_changed (XfcePanelPlugin *panel_plugin)
+{
+  clock_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
 }
 
 
@@ -781,9 +805,14 @@ clock_plugin_set_mode (ClockPlugin *plugin)
                          properties[plugin->mode], FALSE);
 
   gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->clock);
+  exo_binding_new (G_OBJECT (plugin), "orientation", G_OBJECT (plugin->clock), "orientation");
   clock_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
       xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
   gtk_widget_show (plugin->clock);
+
+  /* watch width/height changes */
+  g_signal_connect_swapped (G_OBJECT (plugin->clock), "notify::size-ratio",
+      G_CALLBACK (clock_plugin_size_ratio_changed), plugin);
 }
 
 

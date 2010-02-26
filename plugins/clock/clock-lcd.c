@@ -45,8 +45,6 @@ static void      xfce_clock_lcd_get_property (GObject           *object,
                                               GValue            *value,
                                               GParamSpec        *pspec);
 static void      xfce_clock_lcd_finalize     (GObject           *object);
-static void      xfce_clock_lcd_size_request (GtkWidget         *widget,
-                                              GtkRequisition    *requisition);
 static gboolean  xfce_clock_lcd_expose_event (GtkWidget         *widget,
                                               GdkEventExpose    *event);
 static gdouble   xfce_clock_lcd_get_ratio    (XfceClockLcd      *lcd);
@@ -62,6 +60,7 @@ static gdouble   xfce_clock_lcd_draw_digit   (cairo_t           *cr,
 static gboolean  xfce_clock_lcd_update       (gpointer           user_data);
 
 
+
 enum
 {
   PROP_0,
@@ -69,6 +68,8 @@ enum
   PROP_SHOW_MILITARY,
   PROP_SHOW_MERIDIEM,
   PROP_FLASH_SEPARATORS,
+  PROP_SIZE_RATIO,
+  PROP_ORIENTATION
 };
 
 struct _XfceClockLcdClass
@@ -83,8 +84,8 @@ struct _XfceClockLcd
   ClockPluginTimeout *timeout;
 
   guint               show_seconds : 1;
-  guint               show_military : 1;
-  guint               show_meridiem : 1;
+  guint               show_military : 1; /* 24-hour clock */
+  guint               show_meridiem : 1; /* am/pm */
   guint               flash_separators : 1;
 };
 
@@ -106,12 +107,23 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
   gobject_class->finalize = xfce_clock_lcd_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->size_request = xfce_clock_lcd_size_request;
   gtkwidget_class->expose_event = xfce_clock_lcd_expose_event;
 
-  /**
-   * Whether we display seconds
-   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_SIZE_RATIO,
+                                   g_param_spec_double ("size-ratio", NULL, NULL,
+                                                        -1, G_MAXDOUBLE, -1.0,
+                                                        G_PARAM_READABLE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ORIENTATION,
+                                   g_param_spec_enum ("orientation", NULL, NULL,
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_WRITABLE
+                                                      | G_PARAM_STATIC_STRINGS));
+
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_SECONDS,
                                    g_param_spec_boolean ("show-seconds", NULL, NULL,
@@ -119,9 +131,6 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                                          G_PARAM_READWRITE
                                                          | G_PARAM_STATIC_STRINGS));
 
-  /**
-   * Whether we show a 24h clock
-   **/
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_MILITARY,
                                    g_param_spec_boolean ("show-military", NULL, NULL,
@@ -129,9 +138,6 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                                          G_PARAM_READWRITE
                                                          | G_PARAM_STATIC_STRINGS));
 
-  /**
-   * Whether we show am or pm
-   **/
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_MERIDIEM,
                                    g_param_spec_boolean ("show-meridiem", NULL, NULL,
@@ -139,9 +145,6 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
                                                          G_PARAM_READWRITE
                                                          | G_PARAM_STATIC_STRINGS));
 
-  /**
-   * Whether to flash the time separators
-   **/
   g_object_class_install_property (gobject_class,
                                    PROP_FLASH_SEPARATORS,
                                    g_param_spec_boolean ("flash-separators", NULL, NULL,
@@ -177,6 +180,9 @@ xfce_clock_lcd_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_ORIENTATION:
+      break;
+
     case PROP_SHOW_SECONDS:
       lcd->show_seconds = g_value_get_boolean (value);
       break;
@@ -198,6 +204,8 @@ xfce_clock_lcd_set_property (GObject      *object,
       break;
     }
 
+  g_object_notify (object, "size-ratio");
+
   /* reschedule the timeout and resize */
   show_seconds = lcd->show_seconds || lcd->flash_separators;
   clock_plugin_timeout_set_interval (lcd->timeout,
@@ -214,6 +222,7 @@ xfce_clock_lcd_get_property (GObject    *object,
                              GParamSpec *pspec)
 {
   XfceClockLcd *lcd = XFCE_CLOCK_LCD (object);
+  gdouble       ratio;
 
   switch (prop_id)
     {
@@ -233,6 +242,11 @@ xfce_clock_lcd_get_property (GObject    *object,
       g_value_set_boolean (value, lcd->flash_separators);
       break;
 
+    case PROP_SIZE_RATIO:
+      ratio = xfce_clock_lcd_get_ratio (lcd);
+      g_value_set_double (value, ratio);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -248,37 +262,6 @@ xfce_clock_lcd_finalize (GObject *object)
   clock_plugin_timeout_free (XFCE_CLOCK_LCD (object)->timeout);
 
   (*G_OBJECT_CLASS (xfce_clock_lcd_parent_class)->finalize) (object);
-}
-
-
-
-static void
-xfce_clock_lcd_size_request (GtkWidget      *widget,
-                             GtkRequisition *requisition)
-{
-  gint    width, height;
-  gdouble ratio;
-
-  /* get the current widget size */
-  gtk_widget_get_size_request (widget, &width, &height);
-
-  /* get the width:height ratio */
-  ratio = xfce_clock_lcd_get_ratio (XFCE_CLOCK_LCD (widget));
-
-  if (width == -1)
-    {
-      requisition->height = MAX (10, height - height % 10);
-      requisition->width = requisition->height * ratio;
-    }
-  else
-    {
-      /* calc height */
-      height = width / ratio;
-      height = MAX (10, height - height % 10);
-
-      requisition->height = height;
-      requisition->width = height * ratio;
-    }
 }
 
 
@@ -339,7 +322,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
        * the first minute */
       if ((ticks == 10 || ticks == 0) && tm.tm_min == 0
           && (!lcd->show_seconds || tm.tm_sec < 3))
-        gtk_widget_queue_resize (widget);
+        g_object_notify (G_OBJECT (lcd), "size-ratio");
 
       if (ticks >= 10)
         {

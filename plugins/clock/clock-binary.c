@@ -48,8 +48,6 @@ static void      xfce_clock_binary_get_property  (GObject              *object,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
 static void      xfce_clock_binary_finalize      (GObject              *object);
-static void      xfce_clock_binary_size_request  (GtkWidget            *widget,
-                                                  GtkRequisition       *requisition);
 static gboolean  xfce_clock_binary_expose_event  (GtkWidget            *widget,
                                                   GdkEventExpose       *event);
 static gboolean  xfce_clock_binary_update        (gpointer              user_data);
@@ -62,7 +60,9 @@ enum
   PROP_SHOW_SECONDS,
   PROP_TRUE_BINARY,
   PROP_SHOW_INACTIVE,
-  PROP_SHOW_GRID
+  PROP_SHOW_GRID,
+  PROP_SIZE_RATIO,
+  PROP_ORIENTATION
 };
 
 struct _XfceClockBinaryClass
@@ -100,8 +100,22 @@ xfce_clock_binary_class_init (XfceClockBinaryClass *klass)
   gobject_class->finalize = xfce_clock_binary_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->size_request = xfce_clock_binary_size_request;
   gtkwidget_class->expose_event = xfce_clock_binary_expose_event;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SIZE_RATIO,
+                                   g_param_spec_double ("size-ratio", NULL, NULL,
+                                                        -1, G_MAXDOUBLE, 1.0,
+                                                        G_PARAM_READABLE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ORIENTATION,
+                                   g_param_spec_enum ("orientation", NULL, NULL,
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_WRITABLE
+                                                      | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_SECONDS,
@@ -160,12 +174,17 @@ xfce_clock_binary_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_ORIENTATION:
+      break;
+
     case PROP_SHOW_SECONDS:
       binary->show_seconds = g_value_get_boolean (value);
+      g_object_notify (object, "size-ratio");
       break;
 
     case PROP_TRUE_BINARY:
       binary->true_binary = g_value_get_boolean (value);
+      g_object_notify (object, "size-ratio");
       break;
 
     case PROP_SHOW_INACTIVE:
@@ -196,6 +215,7 @@ xfce_clock_binary_get_property (GObject    *object,
                                 GParamSpec *pspec)
 {
   XfceClockBinary *binary = XFCE_CLOCK_BINARY (object);
+  gdouble          ratio;
 
   switch (prop_id)
     {
@@ -215,6 +235,14 @@ xfce_clock_binary_get_property (GObject    *object,
       g_value_set_boolean (value, binary->show_grid);
       break;
 
+    case PROP_SIZE_RATIO:
+      if (binary->true_binary)
+        ratio = binary->show_seconds ? 2.0 : 3.0;
+      else
+        ratio = binary->show_seconds ? 1.5 : 1.0;
+      g_value_set_double (value, ratio);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -230,38 +258,6 @@ xfce_clock_binary_finalize (GObject *object)
   clock_plugin_timeout_free (XFCE_CLOCK_BINARY (object)->timeout);
 
   (*G_OBJECT_CLASS (xfce_clock_binary_parent_class)->finalize) (object);
-}
-
-
-
-static void
-xfce_clock_binary_size_request (GtkWidget      *widget,
-                                GtkRequisition *requisition)
-{
-  gint             width, height;
-  gdouble          ratio;
-  XfceClockBinary *binary = XFCE_CLOCK_BINARY (widget);
-
-  /* get the current widget size */
-  gtk_widget_get_size_request (widget, &width, &height);
-
-  /* ratio of the clock */
-  if (binary->true_binary)
-    ratio = binary->show_seconds ? 2.0 : 3.0;
-  else
-    ratio = binary->show_seconds ? 1.5 : 1.0;
-
-  /* set requisition based on the plugin orientation */
-  if (width == -1)
-    {
-      requisition->height = height;
-      requisition->width = height * ratio;
-    }
-  else
-    {
-      requisition->height = width / ratio;
-      requisition->width = width;
-    }
 }
 
 
@@ -360,6 +356,7 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
   gint         w, h, y;
   gint         ticks;
   gint         pad_x, pad_y;
+  gint         diff;
 
   inactive = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
   active = &(GTK_WIDGET (binary)->style->bg[GTK_STATE_SELECTED]);
@@ -371,7 +368,12 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
   remain_w = alloc->width - 1 - 2 * pad_x;
   offset_x = alloc->x + 1 + pad_x;
 
+  /* make sure the cols are all equal */
   cols = binary->show_seconds ? 6 : 4;
+  diff = remain_w - (floor ((gdouble) remain_w / cols) * cols);
+  remain_w -= diff;
+  offset_x += diff / 2;
+
   for (col = 0; col < cols; col++)
     {
       /* get the time this row represents */
@@ -385,6 +387,12 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
       /* reset sizes */
       remain_h = alloc->height - 1 -  2 * pad_y;
       offset_y = alloc->y + 1 + pad_x;
+
+      /* make sure the rows are all equal */
+      diff = remain_h - (floor ((gdouble) remain_h / rows) * rows);
+      remain_h -= diff;
+      offset_y += diff / 2;
+
       w = remain_w / (cols - col);
       remain_w -= w;
 

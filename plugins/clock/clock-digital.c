@@ -47,7 +47,9 @@ static gboolean xfce_clock_digital_update       (gpointer               user_dat
 enum
 {
  PROP_0,
- PROP_DIGITAL_FORMAT
+ PROP_DIGITAL_FORMAT,
+ PROP_SIZE_RATIO,
+  PROP_ORIENTATION
 };
 
 struct _XfceClockDigitalClass
@@ -79,6 +81,21 @@ xfce_clock_digital_class_init (XfceClockDigitalClass *klass)
   gobject_class->finalize = xfce_clock_digital_finalize;
   gobject_class->set_property = xfce_clock_digital_set_property;
   gobject_class->get_property = xfce_clock_digital_get_property;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SIZE_RATIO,
+                                   g_param_spec_double ("size-ratio", NULL, NULL,
+                                                        -1, G_MAXDOUBLE, 0.0,
+                                                        G_PARAM_READABLE
+                                                        | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ORIENTATION,
+                                   g_param_spec_enum ("orientation", NULL, NULL,
+                                                      GTK_TYPE_ORIENTATION,
+                                                      GTK_ORIENTATION_HORIZONTAL,
+                                                      G_PARAM_WRITABLE
+                                                      | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_DIGITAL_FORMAT,
@@ -113,6 +130,12 @@ xfce_clock_digital_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_ORIENTATION:
+      gtk_label_set_angle (GTK_LABEL (object),
+          g_value_get_enum (value) == GTK_ORIENTATION_HORIZONTAL ?
+          0 : 270);
+      break;
+
     case PROP_DIGITAL_FORMAT:
       g_free (digital->format);
       digital->format = g_value_dup_string (value);
@@ -143,6 +166,10 @@ xfce_clock_digital_get_property (GObject    *object,
     {
     case PROP_DIGITAL_FORMAT:
       g_value_set_string (value, digital->format);
+      break;
+
+    case PROP_SIZE_RATIO:
+      g_value_set_double (value, -1.0);
       break;
 
     default:
