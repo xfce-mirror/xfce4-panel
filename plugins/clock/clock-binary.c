@@ -276,8 +276,8 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
   gint         w, h, x;
   gint         ticks;
 
-  inactive = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
-  active = &(GTK_WIDGET (binary)->style->bg[GTK_STATE_SELECTED]);
+  inactive = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_NORMAL]);
+  active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
 
   clock_plugin_get_localtime (&tm);
 
@@ -352,8 +352,8 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
   gint         w, h, y;
   gint         ticks;
 
-  inactive = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
-  active = &(GTK_WIDGET (binary)->style->bg[GTK_STATE_SELECTED]);
+  inactive = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_NORMAL]);
+  active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
 
   clock_plugin_get_localtime (&tm);
 
@@ -461,7 +461,7 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
 
       if (binary->show_grid)
         {
-          color = &(GTK_WIDGET (binary)->style->fg[GTK_STATE_NORMAL]);
+          color = &(GTK_WIDGET (binary)->style->light[GTK_STATE_SELECTED]);
           gdk_cairo_set_source_color (cr, color);
           cairo_set_line_width (cr, 1);
 
