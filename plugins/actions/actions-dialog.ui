@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <!-- interface-requires gtk+ 2.14 -->
+  <requires lib="gtk+" version="2.14"/>
   <!-- interface-requires libxfce4ui 4.5 -->
   <!-- interface-naming-policy project-wide -->
   <object class="XfceTitledDialog" id="dialog">
@@ -11,6 +11,7 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkFrame" id="frame5">

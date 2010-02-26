@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <!-- interface-requires gtk+ 2.14 -->
+  <requires lib="gtk+" version="2.14"/>
   <!-- interface-requires libxfce4ui 0.0 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="XfceTitledDialog" id="dialog">
@@ -11,11 +11,13 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkVBox" id="vbox1">
             <property name="visible">True</property>
             <property name="border_width">6</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkFrame" id="frame3">
@@ -30,6 +32,7 @@
                       <object class="GtkVBox" id="vbox3">
                         <property name="visible">True</property>
                         <property name="border_width">6</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="show-labels">
@@ -102,6 +105,7 @@
                       <object class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="border_width">6</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkHBox" id="hbox1">
@@ -198,6 +202,7 @@
                       <object class="GtkVBox" id="vbox4">
                         <property name="visible">True</property>
                         <property name="border_width">6</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="include-all-workspaces">
