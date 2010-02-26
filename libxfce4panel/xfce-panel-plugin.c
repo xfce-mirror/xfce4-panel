@@ -1086,12 +1086,12 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
   panel_return_if_fail (plugin->priv->panel_lock > 0);
   panel_return_if_fail (GTK_IS_MENU (menu));
 
+  /* disconnect this signal */
+  g_signal_handlers_disconnect_by_func (G_OBJECT (menu),
+      G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
+
   if (G_LIKELY (plugin->priv->panel_lock > 0))
     {
-      /* disconnect this signal */
-      g_signal_handlers_disconnect_by_func (G_OBJECT (menu),
-          G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
-
       /* decrease the counter */
       plugin->priv->panel_lock--;
 
@@ -1832,6 +1832,8 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
 
   /* connect signal to menu to decrease counter */
   g_signal_connect (G_OBJECT (menu), "deactivate",
+      G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
+  g_signal_connect (G_OBJECT (menu), "destroy",
       G_CALLBACK (xfce_panel_plugin_unregister_menu), plugin);
 
   /* tell panel it needs to lock */
