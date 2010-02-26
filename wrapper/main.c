@@ -31,8 +31,11 @@
 #include <string.h>
 #endif
 
-#include <gtk/gtk.h>
+#include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
+#include <dbus/dbus-glib-lowlevel.h>
+
+#include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -67,7 +70,7 @@ static GOptionEntry option_entries[] =
 
 
 static void
-dbus_proxy_provider_property_changed (DBusGProxy              *dbus_proxy,
+dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
                                       const gchar             *plugin_id,
                                       const gchar             *property,
                                       const GValue            *value,
@@ -114,9 +117,9 @@ dbus_proxy_provider_property_changed (DBusGProxy              *dbus_proxy,
 
 
 static void
-dbus_proxy_provider_signal (XfcePanelPluginProvider *provider,
+dbus_gproxy_provider_signal (XfcePanelPluginProvider *provider,
                             ProviderSignal           signal,
-                            DBusGProxy              *dbus_proxy)
+                            DBusGProxy              *dbus_gproxy)
 {
   GValue       value = { 0, };
   GError      *error = NULL;
@@ -143,7 +146,7 @@ dbus_proxy_provider_signal (XfcePanelPluginProvider *provider,
         g_value_set_uint (&value, signal);
 
         /* invoke the method */
-        result = wrapper_dbus_client_set_property (dbus_proxy, id, "ProviderSignal", &value, &error);
+        result = wrapper_dbus_client_set_property (dbus_gproxy, id, "ProviderSignal", &value, &error);
 
         /* unset */
         g_value_unset (&value);
@@ -152,7 +155,7 @@ dbus_proxy_provider_signal (XfcePanelPluginProvider *provider,
       case ADD_NEW_ITEMS:
       case PANEL_PREFERENCES:
         /* try to get the panel number of this plugin */
-        if (wrapper_dbus_client_get_property (dbus_proxy, id, "PanelNumber", &value, NULL))
+        if (wrapper_dbus_client_get_property (dbus_gproxy, id, "PanelNumber", &value, NULL))
           {
             /* set the panel number */
             active_panel = g_value_get_uint (&value);
@@ -161,9 +164,9 @@ dbus_proxy_provider_signal (XfcePanelPluginProvider *provider,
 
         /* invoke the methode */
         if (signal == ADD_NEW_ITEMS)
-          result = wrapper_dbus_client_display_items_dialog (dbus_proxy, active_panel, &error);
+          result = wrapper_dbus_client_display_items_dialog (dbus_gproxy, active_panel, &error);
         else
-          result = wrapper_dbus_client_display_preferences_dialog (dbus_proxy, active_panel, &error);
+          result = wrapper_dbus_client_display_preferences_dialog (dbus_gproxy, active_panel, &error);
         break;
 
       default:
@@ -181,6 +184,35 @@ dbus_proxy_provider_signal (XfcePanelPluginProvider *provider,
 
 
 
+static DBusHandlerResult
+dbus_gproxy_dbus_filter (DBusConnection *connection,
+                         DBusMessage    *message,
+                         gpointer        user_data)
+{
+  gchar *service, *old_owner, *new_owner;
+
+  /* make sure this is a name-owner-changed signal */
+  if (dbus_message_is_signal (message, DBUS_INTERFACE_DBUS, "NameOwnerChanged"))
+    {
+      /* get the information of the changed service */
+      if (dbus_message_get_args (message, NULL,
+									               DBUS_TYPE_STRING, &service,
+									               DBUS_TYPE_STRING, &old_owner,
+									               DBUS_TYPE_STRING, &new_owner,
+									               DBUS_TYPE_INVALID))
+        {
+          /* check if the panel service lost the owner, if so, leave the mainloop */
+          if (strcmp (service, "org.xfce.Panel") == 0
+              && (new_owner == NULL || *new_owner == '\0'))
+            gtk_main_quit ();
+        }
+    }
+
+  return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+}
+
+
+
 gint
 main (gint argc, gchar **argv)
 {
@@ -188,8 +220,9 @@ main (gint argc, gchar **argv)
   XfcePanelPluginProvider *provider;
   GModule                 *module;
   PluginConstructFunc      construct_func;
-  DBusGConnection         *dbus_connection;
-  DBusGProxy              *dbus_proxy;
+  DBusGConnection         *dbus_gconnection;
+  DBusConnection          *dbus_connection;
+  DBusGProxy              *dbus_gproxy;
   WrapperPlug             *plug;
 
   /* set translation domain */
@@ -243,8 +276,8 @@ main (gint argc, gchar **argv)
     }
 
   /* try to connect to dbus */
-  dbus_connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-  if (G_UNLIKELY (dbus_connection == NULL))
+  dbus_gconnection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
+  if (G_UNLIKELY (dbus_gconnection == NULL))
     {
       /* print error */
       g_critical ("Failed to connect to dbus: %s", error->message);
@@ -256,15 +289,26 @@ main (gint argc, gchar **argv)
       return EXIT_FAILURE;
     }
 
+  /* get the dbus connection from the gconnection */
+  dbus_connection = dbus_g_connection_get_connection (dbus_gconnection);
+
+  /* hookup a filter to monitor panel craches */
+  if (dbus_connection_add_filter (dbus_connection, dbus_gproxy_dbus_filter, NULL, NULL))
+    dbus_bus_add_match (dbus_connection,
+                        "type='signal',sender='" DBUS_SERVICE_DBUS
+			                  "',path='" DBUS_PATH_DBUS
+			                  "',interface='" DBUS_INTERFACE_DBUS
+			                  "',member='NameOwnerChanged'", NULL);
+
   /* get the dbus proxy */
-  dbus_proxy = dbus_g_proxy_new_for_name (dbus_connection, "org.xfce.Panel", "/org/xfce/Panel", "org.xfce.Panel");
-  if (G_UNLIKELY (dbus_proxy == NULL))
+  dbus_gproxy = dbus_g_proxy_new_for_name (dbus_gconnection, "org.xfce.Panel", "/org/xfce/Panel", "org.xfce.Panel");
+  if (G_UNLIKELY (dbus_gproxy == NULL))
     {
       /* print error */
       g_critical ("Failed to create the dbus proxy: %s", error->message);
 
       /* cleanup */
-      g_object_unref (G_OBJECT (dbus_connection));
+      g_object_unref (G_OBJECT (dbus_gconnection));
       g_error_free (error);
 
       /* leave */
@@ -274,7 +318,7 @@ main (gint argc, gchar **argv)
   /* setup signal for property changes */
   dbus_g_object_register_marshaller (wrapper_marshal_VOID__STRING_STRING_BOXED, G_TYPE_NONE,
                                      G_TYPE_STRING, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
-  dbus_g_proxy_add_signal (dbus_proxy, "PropertyChanged", G_TYPE_STRING, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_STRING, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
 
   /* load the module and link the function */
   module = g_module_open (opt_filename, 0);
@@ -314,10 +358,10 @@ main (gint argc, gchar **argv)
       g_object_set_qdata (G_OBJECT (provider), plug_quark, plug);
 
       /* connect provider signals */
-      g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (dbus_proxy_provider_signal), dbus_proxy);
+      g_signal_connect (G_OBJECT (provider), "provider-signal", G_CALLBACK (dbus_gproxy_provider_signal), dbus_gproxy);
 
       /* connect dbus property change signal */
-      dbus_g_proxy_connect_signal (dbus_proxy, "PropertyChanged", G_CALLBACK (dbus_proxy_provider_property_changed), provider, NULL);
+      dbus_g_proxy_connect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_provider_property_changed), provider, NULL);
 
       /* show the plugin */
       gtk_container_add (GTK_CONTAINER (plug), GTK_WIDGET (provider));
@@ -327,6 +371,9 @@ main (gint argc, gchar **argv)
       /* enter the main loop */
       gtk_main ();
 
+      /* disconnect signal */
+      dbus_g_proxy_disconnect_signal (dbus_gproxy, "PropertyChanged", G_CALLBACK (dbus_gproxy_provider_property_changed), provider);
+
       /* destroy the plug and provider */
       gtk_widget_destroy (GTK_WIDGET (plug));
     }
@@ -334,13 +381,16 @@ main (gint argc, gchar **argv)
     {
       /* print error */
       g_critical ("Failed to contruct the plugin '%s'.", opt_name);
+
+      /* release the proxy */
+      g_object_unref (G_OBJECT (dbus_gproxy));
     }
+
+  /* release the proxy */
+  g_object_unref (G_OBJECT (dbus_gproxy));
 
   /* close the module */
   g_module_close (module);
-
-  /* release dbus proxy, connection is shared, so no need to unref it */
-  g_object_unref (G_OBJECT (dbus_proxy));
 
   return EXIT_SUCCESS;
 }

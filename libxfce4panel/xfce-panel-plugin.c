@@ -751,7 +751,6 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
 {
     panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
     panel_return_if_fail (GTK_IS_MENU (menu));
-    panel_return_if_fail (plugin->priv->registered_menus > 0);
 
     if (G_LIKELY (plugin->priv->registered_menus > 0))
       {
@@ -761,6 +760,11 @@ xfce_panel_plugin_unregister_menu (GtkMenu         *menu,
         /* emit signal to unlock the panel */
         if (G_LIKELY (plugin->priv->registered_menus == 0))
           g_signal_emit_by_name (G_OBJECT (plugin), "provider-signal", UNLOCK_PANEL);
+      }
+    else
+      {
+        /* show a warning */
+        g_message ("Plugin %s-%s unregistered a menu without registering it.", plugin->priv->name, plugin->priv->id);
       }
 }
 
@@ -1266,6 +1270,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GdkScreen      *screen;
   GdkRectangle    monitor;
   gint            monitor_num;
+  GtkWidget      *toplevel;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_WIDGET (menu_widget));
@@ -1285,9 +1290,14 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the menu/widget size request */
   gtk_widget_size_request (menu_widget, &requisition);
-
-  /* get the attach widget root coordiantes */
-  gdk_window_get_origin (GDK_WINDOW (attach_widget->window), x, y);
+  
+  /* get the root position of the attach widget (the panel) */
+  toplevel = gtk_widget_get_toplevel (attach_widget);
+  gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
+  
+  /* add the widgets allocation */
+  *x += attach_widget->allocation.x;
+  *y += attach_widget->allocation.y;
 
   switch (xfce_panel_plugin_arrow_type (plugin))
     {

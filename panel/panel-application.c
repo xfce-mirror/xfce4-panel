@@ -552,7 +552,7 @@ panel_application_plugin_move (GtkWidget        *item,
   /* begin a drag */
   gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
   
-  /* TODO set something fancy here. A snapshot of the plugin or the icon name... */
+  /* TODO do something fancy here. A snapshot of the plugin or the icon name... */
 
   /* release the drag list */
   gtk_target_list_unref (target_list);
