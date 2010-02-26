@@ -44,6 +44,7 @@ libsystray_la_LDFLAGS = \
 
 libsystray_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la \
 	$(LIBX11_LIBS) \
 	$(GTK_LIBS) \
 	$(EXO_LIBS) \
@@ -52,7 +53,8 @@ libsystray_la_LIBADD = \
 	$(LIBXFCE4UI_LIBS)
 
 libsystray_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel.la
+	$(top_builddir)/libxfce4panel/libxfce4panel.la \
+	$(top_builddir)/common/libpanel-xfconf.la
 
 #
 # .desktop file

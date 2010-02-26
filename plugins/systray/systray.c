@@ -25,6 +25,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
+#include <common/panel-xfconf.h>
 #include <xfconf/xfconf.h>
 #include <exo/exo.h>
 
@@ -296,16 +297,21 @@ systray_plugin_screen_changed (GtkWidget *widget,
 static void
 systray_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  SystrayPlugin       *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  const PanelProperty  properties[] =
+  {
+    { "rows", G_TYPE_UINT },
+    { "show-frame", G_TYPE_BOOLEAN },
+    { NULL, G_TYPE_NONE }
+  };
 
   /* open the xfconf channel */
-  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
 
-  /* bind the properties */
-  xfconf_g_property_bind (plugin->channel, "/rows",
-                          G_TYPE_UINT, plugin, "rows");
-  xfconf_g_property_bind (plugin->channel, "/show-frame",
-                          G_TYPE_BOOLEAN, plugin, "show-frame");
+  /* bind all properties */
+  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+                         xfce_panel_plugin_get_property_base (panel_plugin),
+                         properties, NULL);
 
   /* monitor screen changes */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
