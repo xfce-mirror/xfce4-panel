@@ -31,6 +31,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-private.h>
+#include <common/panel-xfconf.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -503,19 +504,22 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   guint                i;
   GPtrArray           *array;
   GValue              *value;
+  const PanelProperty  properties[] =
+  {
+    { "items", LAUNCHER_TYPE_PTR_ARRAY },
+    { "disable-tooltips", G_TYPE_BOOLEAN },
+    { "move-first", G_TYPE_BOOLEAN },
+    { "arrow-position", G_TYPE_UINT },
+    { NULL, G_TYPE_NONE }
+  };
 
   /* open the xfconf channel */
-  plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
+  plugin->channel = xfconf_channel_new (XFCE_PANEL_PLUGIN_CHANNEL_NAME);
 
-  /* bind properties */
-  xfconf_g_property_bind (plugin->channel, "/items",
-                          LAUNCHER_TYPE_PTR_ARRAY, plugin, "items");
-  xfconf_g_property_bind (plugin->channel, "/disable-tooltips",
-                          G_TYPE_BOOLEAN, plugin, "disable-tooltips");
-  xfconf_g_property_bind (plugin->channel, "/move-first",
-                          G_TYPE_BOOLEAN, plugin, "move-first");
-  xfconf_g_property_bind (plugin->channel, "/arrow-position",
-                          G_TYPE_UINT, plugin, "arrow-position");
+  /* bind all properties */
+  panel_properties_bind (plugin->channel, G_OBJECT (plugin),
+                         xfce_panel_plugin_get_property_base (panel_plugin),
+                         properties, NULL);
 
   /* handle and empty plugin */
   if (G_UNLIKELY (plugin->items == NULL))
