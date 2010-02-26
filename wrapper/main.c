@@ -39,6 +39,7 @@
 #include <dbus/dbus-glib-lowlevel.h>
 
 #include <gtk/gtk.h>
+#include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -74,7 +75,7 @@ static GOptionEntry option_entries[] =
 static void
 dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
                                        gint                     plugin_id,
-                                       const gchar             *property,
+                                       DBusPropertyChanged      changed_property,
                                        const GValue            *value,
                                        XfcePanelPluginProvider *provider)
 {
@@ -88,32 +89,49 @@ dbus_gproxy_provider_property_changed (DBusGProxy              *dbus_gproxy,
   if (plugin_id != opt_unique_id)
     return;
 
-  /* handle the property */
-  if (G_UNLIKELY (!IS_STRING (property)))
-    g_message ("External plugin '%s-%d' received null property.", opt_name, opt_unique_id);
-  else if (strcmp (property, "Size") == 0)
-    xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
-  else if (strcmp (property, "Orientation") == 0)
-    xfce_panel_plugin_provider_set_orientation (provider, g_value_get_uint (value));
-  else if (strcmp (property, "ScreenPosition") == 0)
-    xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_uint (value));
-  else if (strcmp (property, "Save") == 0)
-    xfce_panel_plugin_provider_save (provider);
-  else if (strcmp (property, "Quit") == 0)
-    gtk_main_quit ();
-  else if (strcmp (property, "Sensitive") == 0)
-    gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
-  else
+  /* handle the changed property send by the panel to the wrapper */
+  switch (changed_property)
     {
-      /* get the plug */
-      plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
+      case DBUS_PROPERTY_CHANGED_SIZE:
+        xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
+        break;
 
-      if (strcmp (property, "BackgroundAlpha") == 0)
-        wrapper_plug_set_background_alpha (plug, g_value_get_int (value) / 100.00);
-      else if (strcmp (property, "ActivePanel") == 0)
-        wrapper_plug_set_selected (plug, g_value_get_boolean (value));
-      else
-        g_message ("External plugin '%s-%d' received unknown property '%s'.", opt_name, opt_unique_id, property);
+      case DBUS_PROPERTY_CHANGED_ORIENTATION:
+        xfce_panel_plugin_provider_set_orientation (provider, g_value_get_uint (value));
+        break;
+
+      case DBUS_PROPERTY_CHANGED_SCREEN_POSITION:
+        xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_uint (value));
+        break;
+
+      case DBUS_PROPERTY_CHANGED_EMIT_SAVE:
+        xfce_panel_plugin_provider_save (provider);
+        break;
+
+      case DBUS_PROPERTY_CHANGED_QUIT_WRAPPER:
+        gtk_main_quit ();
+        break;
+
+      case DBUS_PROPERTY_CHANGED_SENSITIVE:
+        gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
+        break;
+
+      case DBUS_PROPERTY_CHANGED_BACKGROUND_ALPHA:
+      case DBUS_PROPERTY_CHANGED_ACTIVE_PANEL:
+        /* get the plug */
+        plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
+
+        /* set a plug value */
+        if (changed_property == DBUS_PROPERTY_CHANGED_BACKGROUND_ALPHA)
+          wrapper_plug_set_background_alpha (plug, g_value_get_int (value) / 100.00);
+        else
+          wrapper_plug_set_selected (plug, g_value_get_boolean (value));
+        break;
+
+      default:
+        g_message ("External plugin '%s-%d' received unknown property '%d'.",
+                   opt_name, opt_unique_id, changed_property);
+        break;
     }
 }
 
@@ -124,64 +142,26 @@ dbus_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
                              XfcePanelPluginProviderSignal  signal,
                              DBusGProxy                    *dbus_gproxy)
 {
-  GValue    value = { 0, };
-  GError   *error = NULL;
-  guint     active_panel = 0;
-  gboolean  result = FALSE;
+  GValue  value = { 0, };
+  GError *error = NULL;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
   panel_return_if_fail (opt_unique_id == xfce_panel_plugin_provider_get_unique_id (provider));
 
-  /* handle the signal */
-  switch (signal)
-    {
-      case MOVE_PLUGIN:
-      case REMOVE_PLUGIN:
-      case EXPAND_PLUGIN:
-      case COLLAPSE_PLUGIN:
-      case LOCK_PANEL:
-      case UNLOCK_PANEL:
-        /* initialize the value */
-        g_value_init (&value, G_TYPE_UINT);
-        g_value_set_uint (&value, signal);
+  /* initialize the value */
+  g_value_init (&value, G_TYPE_INT);
+  g_value_set_int (&value, signal);
 
-        /* invoke the method */
-        result = wrapper_dbus_client_set_property (dbus_gproxy, opt_unique_id, 
-                                                   "ProviderSignal", &value, &error);
-
-        /* unset */
-        g_value_unset (&value);
-        break;
-
-      case ADD_NEW_ITEMS:
-      case PANEL_PREFERENCES:
-        /* try to get the panel number of this plugin */
-        if (wrapper_dbus_client_get_property (dbus_gproxy, opt_unique_id, 
-                                              "PanelNumber", &value, NULL))
-          {
-            /* set the panel number */
-            active_panel = g_value_get_uint (&value);
-            g_value_unset (&value);
-          }
-
-        /* invoke the methode */
-        if (signal == ADD_NEW_ITEMS)
-          result = wrapper_dbus_client_display_items_dialog (dbus_gproxy, active_panel, &error);
-        else
-          result = wrapper_dbus_client_display_preferences_dialog (dbus_gproxy, active_panel, &error);
-        break;
-
-      default:
-        g_critical ("Plugin '%s-%d' received an unknown provider signal '%d'.", opt_name, opt_unique_id, signal);
-        return;
-    }
-
-  /* handle errors */
-  if (result == FALSE)
+  /* send the provider signal to the panel */
+  if (!wrapper_dbus_client_set_property (dbus_gproxy, opt_unique_id,
+                                         "ProviderSignal", &value, &error))
     {
       g_critical ("DBus error: %s", error->message);
       g_error_free (error);
     }
+
+  /* unset */
+  g_value_unset (&value);
 }
 
 
@@ -323,9 +303,9 @@ main (gint argc, gchar **argv)
     }
 
   /* setup signal for property changes */
-  dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_STRING_BOXED, G_TYPE_NONE,
-                                     G_TYPE_INT, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
-  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT, G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_object_register_marshaller (wrapper_marshal_VOID__INT_UINT_BOXED, G_TYPE_NONE,
+                                     G_TYPE_INT, G_TYPE_UINT, G_TYPE_VALUE, G_TYPE_INVALID);
+  dbus_g_proxy_add_signal (dbus_gproxy, "PropertyChanged", G_TYPE_INT, G_TYPE_UINT, G_TYPE_VALUE, G_TYPE_INVALID);
 
   /* load the module and link the function */
   module = g_module_open (opt_filename, G_MODULE_BIND_LOCAL);
@@ -355,7 +335,7 @@ main (gint argc, gchar **argv)
     }
 
   /* contruct the panel plugin */
-  provider = (*construct_func) (opt_name, opt_unique_id, opt_display_name, 
+  provider = (*construct_func) (opt_name, opt_unique_id, opt_display_name,
                                 opt_arguments, gdk_screen_get_default ());
   if (G_LIKELY (provider))
     {

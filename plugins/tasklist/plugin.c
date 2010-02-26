@@ -14,7 +14,7 @@
  * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
- 
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -49,7 +49,7 @@ struct _TasklistPlugin
 
   /* the xfconf channel */
   XfconfChannel *channel;
-  
+
   /* the tasklist widget */
   GtkWidget     *tasklist;
 };
@@ -93,7 +93,7 @@ tasklist_plugin_init (TasklistPlugin *plugin)
 {
   /* initialize xfconf */
   xfconf_init (NULL);
-  
+
   plugin->tasklist = g_object_new (XFCE_TYPE_TASKLIST, NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->tasklist);
 }
@@ -104,26 +104,26 @@ static void
 tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
   TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
-  
+
   /* expand the plugin */
   xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (plugin), TRUE);
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-  
+
   /* open the xfconf channel */
   plugin->channel = xfce_panel_plugin_xfconf_channel_new (panel_plugin);
-  
+
   /* create bindings */
-  xfconf_g_property_bind (plugin->channel, "/style", G_TYPE_UINT, 
+  xfconf_g_property_bind (plugin->channel, "/style", G_TYPE_UINT,
                           plugin->tasklist, "style");
-  xfconf_g_property_bind (plugin->channel, "/include-all-workspaces", G_TYPE_BOOLEAN, 
+  xfconf_g_property_bind (plugin->channel, "/include-all-workspaces", G_TYPE_BOOLEAN,
                           plugin->tasklist, "include-all-workspaces");
-  xfconf_g_property_bind (plugin->channel, "/flat-buttons", G_TYPE_BOOLEAN, 
+  xfconf_g_property_bind (plugin->channel, "/flat-buttons", G_TYPE_BOOLEAN,
                           plugin->tasklist, "flat-buttons");
-  xfconf_g_property_bind (plugin->channel, "/switch-workspace-on-unminimize", G_TYPE_BOOLEAN, 
+  xfconf_g_property_bind (plugin->channel, "/switch-workspace-on-unminimize", G_TYPE_BOOLEAN,
                           plugin->tasklist, "switch-workspace-on-unminimize");
-  xfconf_g_property_bind (plugin->channel, "/show-only-minimized", G_TYPE_BOOLEAN, 
+  xfconf_g_property_bind (plugin->channel, "/show-only-minimized", G_TYPE_BOOLEAN,
                           plugin->tasklist, "show-only-minimized");
-  
+
   /* show the tasklist */
   gtk_widget_show (plugin->tasklist);
 }
@@ -134,11 +134,11 @@ static void
 tasklist_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
-  
+
   /* release the xfconf channel */
   if (G_LIKELY (plugin->channel))
     g_object_unref (G_OBJECT (plugin->channel));
-    
+
   /* shutdown xfconf */
   xfconf_shutdown ();
 }
@@ -150,7 +150,7 @@ tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
                                      GtkOrientation   orientation)
 {
   TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
-  
+
   /* set the new tasklist orientation */
   xfce_tasklist_set_orientation (XFCE_TASKLIST (plugin->tasklist), orientation);
 }
@@ -170,31 +170,31 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     {
       dialog = gtk_builder_get_object (builder, "dialog");
       g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, builder);
-      
+
       object = gtk_builder_get_object (builder, "close-button");
       g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
-      
+
       object = gtk_builder_get_object (builder, "style");
       exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "style", object, "active");
-      
+
       object = gtk_builder_get_object (builder, "include-all-workspaces");
       exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "include-all-workspaces", object, "active");
-      
+
       object = gtk_builder_get_object (builder, "flat-buttons");
       exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "flat-buttons", object, "active");
-      
+
       object = gtk_builder_get_object (builder, "switch-workspace-on-unminimize");
       exo_mutual_binding_new_with_negation (G_OBJECT (plugin->tasklist), "switch-workspace-on-unminimize", object, "active");
-      
+
       object = gtk_builder_get_object (builder, "show-only-minimized");
       exo_mutual_binding_new (G_OBJECT (plugin->tasklist), "show-only-minimized", object, "active");
-      
+
       /* TODO remove when implemented by glade */
       GtkCellRenderer *cell1 = gtk_cell_renderer_text_new ();
       object = gtk_builder_get_object (builder, "style");
       gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (object), cell1, TRUE);
       gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (object), cell1, "text", 0, NULL);
-      
+
       gtk_widget_show (GTK_WIDGET (dialog));
 	}
   else

@@ -360,33 +360,34 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
   /* get the panel of the plugin */
   window = PANEL_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (provider)));
 
+  /* handle the signal emitted from the plugin provider */
   switch (signal)
     {
-      case MOVE_PLUGIN:
+      case PROVIDER_SIGNAL_MOVE_PLUGIN:
         /* invoke the move function */
         panel_application_plugin_move (GTK_WIDGET (provider), application);
         break;
 
-      case EXPAND_PLUGIN:
-      case COLLAPSE_PLUGIN:
+      case PROVIDER_SIGNAL_EXPAND_PLUGIN:
+      case PROVIDER_SIGNAL_COLLAPSE_PLUGIN:
         /* get the itembar */
         itembar = gtk_bin_get_child (GTK_BIN (window));
 
         /* set new expand mode */
-        panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), !!(signal == EXPAND_PLUGIN));
+        panel_itembar_set_child_expand (PANEL_ITEMBAR (itembar), GTK_WIDGET (provider), !!(signal == PROVIDER_SIGNAL_EXPAND_PLUGIN));
         break;
 
-      case LOCK_PANEL:
+      case PROVIDER_SIGNAL_LOCK_PANEL:
         /* block autohide */
         panel_window_freeze_autohide (window);
         break;
 
-      case UNLOCK_PANEL:
+      case PROVIDER_SIGNAL_UNLOCK_PANEL:
         /* unblock autohide */
         panel_window_thaw_autohide (window);
         break;
 
-      case REMOVE_PLUGIN:
+      case PROVIDER_SIGNAL_REMOVE_PLUGIN:
         /* create the xfconf property base */
         property = g_strdup_printf (PANEL_PLUGIN_PROPERTY_BASE,
                                     xfce_panel_plugin_provider_get_unique_id (provider));
@@ -414,12 +415,12 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
         g_free (path);
         break;
 
-      case ADD_NEW_ITEMS:
+      case PROVIDER_SIGNAL_ADD_NEW_ITEMS:
         /* open the items dialog */
         panel_item_dialog_show (window);
         break;
 
-      case PANEL_PREFERENCES:
+      case PROVIDER_SIGNAL_PANEL_PREFERENCES:
         /* open the panel preferences */
         panel_preferences_dialog_show (window);
         break;

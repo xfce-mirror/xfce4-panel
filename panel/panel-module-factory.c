@@ -46,6 +46,9 @@ static void     panel_module_factory_load_modules    (PanelModuleFactory       *
 static gboolean panel_module_factory_modules_cleanup (gpointer                  key,
                                                       gpointer                  value,
                                                       gpointer                  user_data);
+static void     panel_module_factory_remove_plugin   (gpointer                  user_data,
+                                                      GObject                  *where_the_object_was);
+
 
 
 enum
@@ -66,8 +69,8 @@ struct _PanelModuleFactory
   /* hash table of loaded modules */
   GHashTable *modules;
 
-  /* table table with created panel plugins */
-  GHashTable *plugins;
+  /* a list with all the plugins */
+  GSList     *plugins;
 
   /* if the factory contains the launcher plugin */
   guint       has_launcher : 1;
@@ -113,7 +116,6 @@ panel_module_factory_init (PanelModuleFactory *factory)
 
   /* create hash tables */
   factory->modules = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
-  factory->plugins = g_hash_table_new_full (g_int_hash, g_int_equal, NULL, NULL);
 
   /* load all the modules */
   panel_module_factory_load_modules (factory);
@@ -126,9 +128,11 @@ panel_module_factory_finalize (GObject *object)
 {
   PanelModuleFactory *factory = PANEL_MODULE_FACTORY (object);
 
-  /* destroy the hash tables */
+  /* destroy the hash table */
   g_hash_table_destroy (factory->modules);
-  g_hash_table_destroy (factory->plugins);
+
+  /* free all the plugins */
+  g_slist_free (factory->plugins);
 
   (*G_OBJECT_CLASS (panel_module_factory_parent_class)->finalize) (object);
 }
@@ -210,7 +214,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory)
                   g_hash_table_insert (factory->modules, internal_name, module);
 
                   /* check if this is the launcher */
-                  if (factory->has_launcher == FALSE 
+                  if (factory->has_launcher == FALSE
                       && exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name))
                     factory->has_launcher = TRUE;
                 }
@@ -260,6 +264,18 @@ panel_module_factory_modules_cleanup (gpointer key,
     factory->has_launcher = FALSE;
 
   return remove;
+}
+
+
+
+static void
+panel_module_factory_remove_plugin (gpointer  user_data,
+                                    GObject  *where_the_object_was)
+{
+  PanelModuleFactory *factory = PANEL_MODULE_FACTORY (user_data);
+
+  /* remove the plugin from the internal list */
+  factory->plugins = g_slist_remove (factory->plugins, where_the_object_was);
 }
 
 
@@ -316,21 +332,6 @@ panel_module_factory_emit_unique_changed (PanelModule *module)
 
 
 
-#if !GLIB_CHECK_VERSION (2,14,0)
-static void
-panel_module_factory_get_modules_foreach (gpointer key,
-                                          gpointer value,
-                                          gpointer user_data)
-{
-  GList **list = user_data;
-
-  /* insert in the list */
-  *list = g_list_prepend (*list, value);
-}
-#endif
-
-
-
 GList *
 panel_module_factory_get_modules (PanelModuleFactory *factory)
 {
@@ -339,16 +340,7 @@ panel_module_factory_get_modules (PanelModuleFactory *factory)
   /* make sure the hash table is clean */
   g_hash_table_foreach_remove (factory->modules, panel_module_factory_modules_cleanup, factory);
 
-#if GLIB_CHECK_VERSION (2,14,0)
   return g_hash_table_get_values (factory->modules);
-#else
-  GList *list = NULL;
-
-  /* insert all modules in the list */
-  g_hash_table_foreach (factory->modules, panel_module_factory_get_modules_foreach, &list);
-
-  return list;
-#endif
 }
 
 
@@ -369,10 +361,17 @@ XfcePanelPluginProvider *
 panel_module_factory_get_plugin (PanelModuleFactory *factory,
                                  gint                unique_id)
 {
+  GSList *li;
+
   panel_return_val_if_fail (PANEL_IS_MODULE_FACTORY (factory), NULL);
   panel_return_val_if_fail (unique_id != -1, NULL);
 
-  return g_hash_table_lookup (factory->plugins, &unique_id);
+  /* traverse the list to find the plugin with this unique id */
+  for (li = factory->plugins; li != NULL; li = li->next)
+    if (xfce_panel_plugin_provider_get_unique_id (XFCE_PANEL_PLUGIN_PROVIDER (li->data)) == unique_id)
+      return XFCE_PANEL_PLUGIN_PROVIDER (li->data);
+
+  return NULL;
 }
 
 
@@ -404,15 +403,18 @@ panel_module_factory_create_plugin (PanelModuleFactory  *factory,
 
   /* make sure this plugin has a unique id */
   while (unique_id == -1
-         || g_hash_table_lookup (factory->plugins, &unique_id) != NULL)
+         || panel_module_factory_get_plugin (factory, unique_id) != NULL)
     unique_id = ++unique_id_counter;
 
   /* create the new module */
   provider = panel_module_create_plugin (module, screen, name, unique_id, arguments);
 
-  /* insert plugin in the hash table */
+  /* insert plugin in the list */
   if (G_LIKELY (provider))
-    g_hash_table_insert (factory->plugins, &unique_id, provider);
+    {
+      factory->plugins = g_slist_prepend (factory->plugins, provider);
+      g_object_weak_ref (G_OBJECT (provider), panel_module_factory_remove_plugin, factory);
+  }
 
   return provider;
 }

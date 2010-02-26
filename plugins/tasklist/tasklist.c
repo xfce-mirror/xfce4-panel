@@ -61,7 +61,7 @@ struct _XfceTasklist
 
   /* number of visible buttons, we cache this to avoid a loop */
   guint              n_visible_children;
-  
+
   /* classgroups of all the windows in the taskbar */
   GSList            *class_groups;
 
@@ -100,7 +100,7 @@ struct _XfceTasklistChild
 
   /* this window of this button */
   WnckWindow        *window;
-  
+
   /* class group of this window */
   WnckClassGroup    *class_group;
 
@@ -173,7 +173,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   gtkcontainer_class->remove = xfce_tasklist_remove;
   gtkcontainer_class->forall = xfce_tasklist_forall;
   gtkcontainer_class->child_type = xfce_tasklist_child_type;
-  
+
   g_object_class_install_property (gobject_class,
                                    PROP_STYLE,
                                    g_param_spec_uint ("style", NULL, NULL,
@@ -181,25 +181,25 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       XFCE_TASKLIST_STYLE_ICONBOX,
                                                       XFCE_TASKLIST_STYLE_NORMAL,
                                                       EXO_PARAM_READWRITE));
-                                   
+
   g_object_class_install_property (gobject_class,
                                    PROP_INCLUDE_ALL_WORKSPACES,
                                    g_param_spec_boolean ("include-all-workspaces", NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
-                                   
+
   g_object_class_install_property (gobject_class,
                                    PROP_FLAT_BUTTONS,
                                    g_param_spec_boolean ("flat-buttons", NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
-                                   
+
   g_object_class_install_property (gobject_class,
                                    PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE,
                                    g_param_spec_boolean ("switch-workspace-on-unminimize", NULL, NULL,
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
-                                   
+
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_ONLY_MINIMIZED,
                                    g_param_spec_boolean ("show-only-minimized", NULL, NULL,
@@ -234,36 +234,36 @@ xfce_tasklist_init (XfceTasklist *tasklist)
 
 
 
-static void 
-xfce_tasklist_get_property (GObject    *object, 
-                            guint       prop_id, 
-                            GValue     *value, 
+static void
+xfce_tasklist_get_property (GObject    *object,
+                            guint       prop_id,
+                            GValue     *value,
                             GParamSpec *pspec)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (object);
-  
+
   switch (prop_id)
     {
       case PROP_STYLE:
         g_value_set_uint (value, tasklist->style);
         break;
-        
+
       case PROP_INCLUDE_ALL_WORKSPACES:
         g_value_set_boolean (value, tasklist->all_workspaces);
         break;
-        
+
       case PROP_FLAT_BUTTONS:
         g_value_set_boolean (value, !!(tasklist->button_relief == GTK_RELIEF_NONE));
         break;
-        
+
       case PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE:
         g_value_set_boolean (value, tasklist->switch_workspace);
         break;
-        
+
       case PROP_SHOW_ONLY_MINIMIZED:
         g_value_set_boolean (value, tasklist->only_minimized);
         break;
-    
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -272,43 +272,43 @@ xfce_tasklist_get_property (GObject    *object,
 
 
 
-static void 
-xfce_tasklist_set_property (GObject      *object, 
-                            guint         prop_id, 
-                            const GValue *value, 
+static void
+xfce_tasklist_set_property (GObject      *object,
+                            guint         prop_id,
+                            const GValue *value,
                             GParamSpec   *pspec)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (object);
-  
+
   switch (prop_id)
     {
       case PROP_STYLE:
         /* set the tasklist style */
         xfce_tasklist_set_style (tasklist, g_value_get_uint (value));
         break;
-        
+
       case PROP_INCLUDE_ALL_WORKSPACES:
         /* set include all workspaces */
         xfce_tasklist_set_include_all_workspaces (tasklist, g_value_get_boolean (value));
         break;
-        
+
       case PROP_FLAT_BUTTONS:
         /* set the tasklist relief */
         xfce_tasklist_set_button_relief (tasklist,
-                                         g_value_get_boolean (value) ? 
+                                         g_value_get_boolean (value) ?
                                            GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
         break;
-        
+
       case PROP_SWITCH_WORKSPACE_ON_UNMINIMIZE:
         /* set the new value */
         tasklist->switch_workspace = g_value_get_boolean (value);
         break;
-        
+
       case PROP_SHOW_ONLY_MINIMIZED:
         /* whether the tasklist shows only minimized applications */
         xfce_tasklist_set_show_only_minimized (tasklist, g_value_get_boolean (value));
         break;
-    
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -321,7 +321,7 @@ static void
 xfce_tasklist_finalize (GObject *object)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (object);
-  
+
   g_return_if_fail (tasklist->children == NULL);
   g_return_if_fail (tasklist->class_groups == NULL);
 
@@ -681,7 +681,7 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
 {
   GSList            *li, *lnext;
   XfceTasklistChild *child;
-  
+
   g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   g_return_if_fail (WNCK_IS_SCREEN (tasklist->screen));
 
@@ -691,13 +691,13 @@ xfce_tasklist_disconnect_screen (XfceTasklist *tasklist)
   g_signal_handlers_disconnect_by_func (G_OBJECT (tasklist->screen), G_CALLBACK (xfce_tasklist_window_added), tasklist);
   g_signal_handlers_disconnect_by_func (G_OBJECT (tasklist->screen), G_CALLBACK (xfce_tasklist_window_removed), tasklist);
   g_signal_handlers_disconnect_by_func (G_OBJECT (tasklist->screen), G_CALLBACK (xfce_tasklist_viewports_changed), tasklist);
-  
+
   /* remove all the windows */
   for (li = tasklist->children; li != NULL; li = lnext)
     {
       lnext = li->next;
       child = li->data;
-      
+
       /* do a fake window remove */
       xfce_tasklist_window_removed (tasklist->screen, child->window, tasklist);
     }
@@ -807,10 +807,10 @@ xfce_tasklist_window_added (WnckScreen   *screen,
   child->tasklist = tasklist;
   child->window = window;
   child->unique_id = unique_id_counter++;
-  
+
   /* get the class group of the new window */
   class_group = wnck_window_get_class_group (window);
-  
+
   if (G_LIKELY (class_group))
     {
       /* try to find the class group in the list */
@@ -821,7 +821,7 @@ xfce_tasklist_window_added (WnckScreen   *screen,
       /* prepend the class group if it's new */
       if (li == NULL)
         tasklist->class_groups = g_slist_prepend (tasklist->class_groups, class_group);
-        
+
       /* set the class group */
       child->class_group = g_object_ref (G_OBJECT (class_group));
     }
@@ -857,7 +857,7 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
   g_return_if_fail (WNCK_IS_WINDOW (window));
   g_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   g_return_if_fail (tasklist->screen == screen);
-    
+
   /* remove the child from the taskbar */
   for (li = tasklist->children; li != NULL; li = li->next)
     {
@@ -871,11 +871,11 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
                * window in the group */
               if (g_list_length (wnck_class_group_get_windows (child->class_group)) == 1)
                 tasklist->class_groups = g_slist_remove (tasklist->class_groups, child->class_group);
-              
+
               /* release the class group */
               g_object_unref (G_OBJECT (child->class_group));
             }
-          
+
           /* destroy the button */
           gtk_widget_destroy (child->button);
 

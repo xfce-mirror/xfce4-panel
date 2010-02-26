@@ -28,6 +28,7 @@
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
+#include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 
@@ -97,10 +98,10 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,
-                  panel_marshal_VOID__INT_STRING_BOXED,
+                  panel_marshal_VOID__INT_UINT_BOXED,
                   G_TYPE_NONE, 3,
                   G_TYPE_INT,
-                  G_TYPE_STRING,
+                  G_TYPE_UINT,
                   G_TYPE_VALUE);
 
   /* install the d-bus info for our class */
@@ -327,6 +328,9 @@ panel_dbus_service_set_property (PanelDBusService *service,
   /* check if this is a plugin property change */
   if (strcmp (property, "ProviderSignal") == 0)
     {
+      /* check if this is an enum */
+       panel_return_val_if_fail (G_VALUE_HOLDS_INT (value), FALSE);
+
       /* get the module factory */
       factory = panel_module_factory_get ();
 
@@ -335,7 +339,7 @@ panel_dbus_service_set_property (PanelDBusService *service,
 
       /* emit the signal for the local plugin provider */
       if (G_LIKELY (provider))
-        xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (provider), g_value_get_uint (value));
+        xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (provider), g_value_get_int (value));
 
       /* release the factory */
       g_object_unref (G_OBJECT (factory));
@@ -367,14 +371,13 @@ panel_dbus_service_get (void)
 
 
 void
-panel_dbus_service_set_plugin_property (gint          plugin_id,
-                                        const gchar  *property,
-                                        const GValue *value)
+panel_dbus_service_set_plugin_property (gint                 plugin_id,
+                                        DBusPropertyChanged  property,
+                                        const GValue        *value)
 {
   PanelDBusService *service;
 
   panel_return_if_fail (plugin_id != -1);
-  panel_return_if_fail (IS_STRING (property));
   panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
 
   /* get the dbus service */

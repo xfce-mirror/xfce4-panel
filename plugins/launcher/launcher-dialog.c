@@ -31,8 +31,7 @@ static void
 launcher_dialog_add_button_clicked (GtkWidget *button,
                                     GtkWidget *menu)
 {
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 1,
-                  gtk_get_current_event_time());
+
 }
 
 
@@ -42,7 +41,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
 {
   GtkBuilder *builder;
   GObject    *dialog;
-  GObject    *object, *menu;
+  GObject    *object;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
@@ -56,8 +55,7 @@ launcher_dialog_show (LauncherPlugin *plugin)
       g_signal_connect_swapped (G_OBJECT (object), "clicked", G_CALLBACK (gtk_widget_destroy), dialog);
 
       object = gtk_builder_get_object (builder, "entry-add");
-      menu = gtk_builder_get_object (builder, "add-menu");
-      g_signal_connect (G_OBJECT (object), "clicked", G_CALLBACK (launcher_dialog_add_button_clicked), GTK_MENU (menu));
+      g_signal_connect (G_OBJECT (object), "clicked", G_CALLBACK (launcher_dialog_add_button_clicked), NULL);
 
       /* connect binding to the advanced properties */
       object = gtk_builder_get_object (builder, "disable-tooltips");

@@ -21,6 +21,7 @@
 #define __PANEL_DBUS_SERVICE_H__
 
 #include <glib.h>
+#include <common/panel-dbus.h>
 
 typedef struct _PanelDBusServiceClass PanelDBusServiceClass;
 typedef struct _PanelDBusService      PanelDBusService;
@@ -36,9 +37,9 @@ GType             panel_dbus_service_get_type            (void) G_GNUC_CONST;
 
 PanelDBusService *panel_dbus_service_get                 (void);
 
-void              panel_dbus_service_set_plugin_property (gint          plugin_id,
-                                                          const gchar  *property,
-                                                          const GValue *value);
+void              panel_dbus_service_set_plugin_property (gint                 plugin_id,
+                                                          DBusPropertyChanged  property,
+                                                          const GValue        *value);
 
 G_END_DECLS
 

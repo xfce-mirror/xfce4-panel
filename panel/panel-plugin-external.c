@@ -24,6 +24,7 @@
 #include <exo/exo.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
+#include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -46,29 +47,29 @@
 
 
 
-static void         panel_plugin_external_class_init          (PanelPluginExternalClass      *klass);
-static void         panel_plugin_external_init                (PanelPluginExternal           *external);
-static void         panel_plugin_external_provider_init       (XfcePanelPluginProviderIface  *iface);
-static void         panel_plugin_external_finalize            (GObject                       *object);
-static void         panel_plugin_external_realize             (GtkWidget                     *widget);
-static void         panel_plugin_external_unrealize           (GtkWidget                     *widget);
-static gboolean     panel_plugin_external_plug_removed        (GtkSocket                     *socket);
-static void         panel_plugin_external_plug_added          (GtkSocket                     *socket);
-static void         panel_plugin_external_provider_signal     (XfcePanelPluginProvider       *provider,
-                                                               XfcePanelPluginProviderSignal  signal);
-static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider       *provider);
-static gint         panel_plugin_external_get_unique_id       (XfcePanelPluginProvider       *provider);
-static void         panel_plugin_external_set_size            (XfcePanelPluginProvider       *provider,
-                                                               gint                           size);
-static void         panel_plugin_external_set_orientation     (XfcePanelPluginProvider       *provider,
-                                                               GtkOrientation                 orientation);
-static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider       *provider,
-                                                               XfceScreenPosition             screen_position);
-static void         panel_plugin_external_save                (XfcePanelPluginProvider       *provider);
-static void         panel_plugin_external_set_sensitive       (PanelPluginExternal           *external);
-static void         panel_plugin_external_set_property        (PanelPluginExternal           *external,
-                                                               const gchar                   *property,
-                                                               const GValue                  *value);
+static void         panel_plugin_external_class_init          (PanelPluginExternalClass        *klass);
+static void         panel_plugin_external_init                (PanelPluginExternal             *external);
+static void         panel_plugin_external_provider_init       (XfcePanelPluginProviderIface    *iface);
+static void         panel_plugin_external_finalize            (GObject                         *object);
+static void         panel_plugin_external_realize             (GtkWidget                       *widget);
+static void         panel_plugin_external_unrealize           (GtkWidget                       *widget);
+static gboolean     panel_plugin_external_plug_removed        (GtkSocket                       *socket);
+static void         panel_plugin_external_plug_added          (GtkSocket                       *socket);
+static void         panel_plugin_external_provider_signal     (XfcePanelPluginProvider         *provider,
+                                                               XfcePanelPluginProviderSignal    signal);
+static const gchar *panel_plugin_external_get_name            (XfcePanelPluginProvider         *provider);
+static gint         panel_plugin_external_get_unique_id       (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_set_size            (XfcePanelPluginProvider         *provider,
+                                                               gint                             size);
+static void         panel_plugin_external_set_orientation     (XfcePanelPluginProvider         *provider,
+                                                               GtkOrientation                   orientation);
+static void         panel_plugin_external_set_screen_position (XfcePanelPluginProvider         *provider,
+                                                               XfceScreenPosition               screen_position);
+static void         panel_plugin_external_save                (XfcePanelPluginProvider         *provider);
+static void         panel_plugin_external_set_sensitive       (PanelPluginExternal             *external);
+static void         panel_plugin_external_set_property        (PanelPluginExternal             *external,
+                                                               DBusPropertyChanged              property,
+                                                               const GValue                    *value);
 
 
 
@@ -102,8 +103,8 @@ struct _PanelPluginExternal
 
 typedef struct
 {
-  const gchar *property;
-  GValue       value;
+  DBusPropertyChanged property;
+  GValue              value;
 }
 QueuedData;
 
@@ -274,7 +275,8 @@ panel_plugin_external_unrealize (GtkWidget *widget)
   g_value_set_boolean (&value, FALSE);
 
   /* send (don't queue here) */
-  panel_dbus_service_set_plugin_property (external->unique_id, "Quit", &value);
+  panel_dbus_service_set_plugin_property (external->unique_id, DBUS_PROPERTY_CHANGED_QUIT_WRAPPER,
+                                          &value);
 
   /* unset */
   g_value_unset (&value);
@@ -359,7 +361,8 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
   else
     {
       /* emit a remove signal, so we can cleanup the plugin configuration (in panel-application) */
-      xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (external), REMOVE_PLUGIN);
+      xfce_panel_plugin_provider_send_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
+                                              PROVIDER_SIGNAL_REMOVE_PLUGIN);
 
       /* destroy the socket */
       gtk_widget_destroy (GTK_WIDGET (socket));
@@ -384,7 +387,7 @@ panel_plugin_external_plug_added (GtkSocket *socket)
     {
       /* reverse the order fo the queue, since we prepended all the time */
       external->dbus_queue = g_slist_reverse (external->dbus_queue);
-      
+
       /* flush the queue */
       for (li = external->dbus_queue; li != NULL; li = li->next)
         {
@@ -412,7 +415,7 @@ panel_plugin_external_provider_signal (XfcePanelPluginProvider       *provider,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   /* only handle the remove signal, everything else is handles in panel-application */
-  if (signal == REMOVE_PLUGIN)
+  if (signal == PROVIDER_SIGNAL_REMOVE_PLUGIN)
     {
       /* we're forced removing the plugin, don't ask for a restart */
       external->plug_embedded = FALSE;
@@ -449,14 +452,13 @@ panel_plugin_external_get_unique_id (XfcePanelPluginProvider *provider)
 
 static void
 panel_plugin_external_set_property (PanelPluginExternal *external,
-                                    const gchar         *property,
+                                    DBusPropertyChanged  property,
                                     const GValue        *value)
 {
   QueuedData *data;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (value && G_TYPE_CHECK_VALUE (value));
-  panel_return_if_fail (IS_STRING (property));
 
   if (G_LIKELY (external->plug_embedded))
     {
@@ -493,7 +495,8 @@ panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
   g_value_set_int (&value, size);
 
   /* send the value */
-  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider), "Size", &value);
+  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
+                                      DBUS_PROPERTY_CHANGED_SIZE, &value);
 
   /* unset */
   g_value_unset (&value);
@@ -515,7 +518,8 @@ panel_plugin_external_set_orientation (XfcePanelPluginProvider *provider,
   g_value_set_uint (&value, orientation);
 
   /* send the value */
-  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider), "Orientation", &value);
+  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
+                                      DBUS_PROPERTY_CHANGED_ORIENTATION, &value);
 
   /* unset */
   g_value_unset (&value);
@@ -537,7 +541,8 @@ panel_plugin_external_set_screen_position (XfcePanelPluginProvider *provider,
   g_value_set_uint (&value, screen_position);
 
   /* send the value */
-  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider), "ScreenPosition", &value);
+  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
+                                      DBUS_PROPERTY_CHANGED_SCREEN_POSITION, &value);
 
   /* unset */
   g_value_unset (&value);
@@ -558,7 +563,8 @@ panel_plugin_external_save (XfcePanelPluginProvider *provider)
   g_value_set_boolean (&value, FALSE);
 
   /* send signal to wrapper */
-  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider), "Save", &value);
+  panel_plugin_external_set_property (PANEL_PLUGIN_EXTERNAL (provider),
+                                      DBUS_PROPERTY_CHANGED_EMIT_SAVE, &value);
 
   /* unset */
   g_value_unset (&value);
@@ -578,7 +584,7 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
   g_value_set_boolean (&value, GTK_WIDGET_IS_SENSITIVE (external));
 
   /* send message */
-  panel_plugin_external_set_property (external, "Sensitive", &value);
+  panel_plugin_external_set_property (external, DBUS_PROPERTY_CHANGED_SENSITIVE, &value);
 
   /* unset */
   g_value_unset (&value);
@@ -624,7 +630,7 @@ panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
   g_value_set_int (&value, percentage);
 
   /* send message */
-  panel_plugin_external_set_property (external, "BackgroundAlpha", &value);
+  panel_plugin_external_set_property (external, DBUS_PROPERTY_CHANGED_BACKGROUND_ALPHA, &value);
 
   /* unset */
   g_value_unset (&value);
@@ -645,7 +651,7 @@ panel_plugin_external_set_active_panel (PanelPluginExternal *external,
   g_value_set_boolean (&value, active);
 
   /* send message */
-  panel_plugin_external_set_property (external, "ActivePanel", &value);
+  panel_plugin_external_set_property (external, DBUS_PROPERTY_CHANGED_ACTIVE_PANEL, &value);
 
   /* unset */
   g_value_unset (&value);
