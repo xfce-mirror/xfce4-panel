@@ -32,38 +32,38 @@ typedef struct _SystrayBox      SystrayBox;
 
 GType      systray_box_get_type        (void) G_GNUC_CONST;
 
-void       systray_box_register_type   (GTypeModule  *module);
+void       systray_box_register_type   (XfcePanelTypeModule *module);
 
 GtkWidget *systray_box_new             (void) G_GNUC_MALLOC;
 
-void       systray_box_set_guess_size  (SystrayBox   *box,
-                                        gint          guess_size);
+void       systray_box_set_guess_size  (SystrayBox          *box,
+                                        gint                 guess_size);
 
-void       systray_box_set_arrow_type  (SystrayBox   *box,
-                                        GtkArrowType  arrow_type);
+void       systray_box_set_arrow_type  (SystrayBox          *box,
+                                        GtkArrowType         arrow_type);
 
-void       systray_box_set_rows        (SystrayBox   *box,
-                                        gint          rows);
+void       systray_box_set_rows        (SystrayBox          *box,
+                                        gint                 rows);
 
-gint       systray_box_get_rows        (SystrayBox   *box);
+gint       systray_box_get_rows        (SystrayBox          *box);
 
-void       systray_box_add_with_name   (SystrayBox   *box,
-                                        GtkWidget    *child,
-                                        const gchar  *name);
+void       systray_box_add_with_name   (SystrayBox          *box,
+                                        GtkWidget           *child,
+                                        const gchar         *name);
 
-void       systray_box_name_add        (SystrayBox   *box,
-                                        const gchar  *name,
-                                        gboolean      hidden);
+void       systray_box_name_add        (SystrayBox          *box,
+                                        const gchar         *name,
+                                        gboolean             hidden);
 
-void       systray_box_name_set_hidden (SystrayBox   *box,
-                                        const gchar  *name,
-                                        gboolean      hidden);
+void       systray_box_name_set_hidden (SystrayBox          *box,
+                                        const gchar         *name,
+                                        gboolean             hidden);
 
-gboolean   systray_box_name_get_hidden (SystrayBox   *box,
-                                        const gchar  *name);
+gboolean   systray_box_name_get_hidden (SystrayBox          *box,
+                                        const gchar         *name);
 
-GList     *systray_box_name_list       (SystrayBox   *box);
+GList     *systray_box_name_list       (SystrayBox          *box);
 
-void       systray_box_name_clear      (SystrayBox   *box);
+void       systray_box_name_clear      (SystrayBox          *box);
 
 #endif /* !__SYSTRAY_BOX_H__ */

@@ -49,24 +49,24 @@ enum
 
 GType           systray_manager_get_type             (void) G_GNUC_CONST;
 
-void            systray_manager_register_type        (GTypeModule     *type_module);
+void            systray_manager_register_type        (XfcePanelTypeModule *type_module);
 
 GQuark          systray_manager_error_quark          (void);
 
 SystrayManager *systray_manager_new                  (void) G_GNUC_MALLOC;
 
-gboolean        systray_manager_check_running        (GdkScreen       *screen);
+gboolean        systray_manager_check_running        (GdkScreen           *screen);
 
-gboolean        systray_manager_register             (SystrayManager  *manager,
-                                                      GdkScreen        *screen,
-                                                      GError          **error);
+gboolean        systray_manager_register             (SystrayManager      *manager,
+                                                      GdkScreen            *screen,
+                                                      GError              **error);
 
-void            systray_manager_unregister           (SystrayManager  *manager);
+void            systray_manager_unregister           (SystrayManager      *manager);
 
-void            systray_manager_set_orientation      (SystrayManager  *manager,
-                                                      GtkOrientation   orientation);
+void            systray_manager_set_orientation      (SystrayManager      *manager,
+                                                      GtkOrientation       orientation);
 
-gchar          *systray_manager_get_application_name (GtkWidget        *socket) G_GNUC_MALLOC;
+gchar          *systray_manager_get_application_name (GtkWidget            *socket) G_GNUC_MALLOC;
 
 
 #endif /* !__SYSTRAY_MANAGER_H__ */

@@ -36,7 +36,7 @@ typedef struct _ShowDesktopPlugin      ShowDesktopPlugin;
 
 GType show_desktop_plugin_get_type      (void) G_GNUC_CONST;
 
-void  show_desktop_plugin_register_type (GTypeModule *type_module);
+void  show_desktop_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

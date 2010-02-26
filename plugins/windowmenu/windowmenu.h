@@ -36,7 +36,7 @@ typedef struct _WindowMenuPlugin      WindowMenuPlugin;
 
 GType window_menu_plugin_get_type      (void) G_GNUC_CONST;
 
-void  window_menu_plugin_register_type (GTypeModule *type_module);
+void  window_menu_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

@@ -34,7 +34,7 @@ typedef struct _PagerPlugin      PagerPlugin;
 
 GType pager_plugin_get_type      (void) G_GNUC_CONST;
 
-void  pager_plugin_register_type (GTypeModule *type_module);
+void  pager_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 

@@ -34,7 +34,7 @@ typedef struct _XfceClockBinary      XfceClockBinary;
 
 GType      xfce_clock_binary_get_type      (void) G_GNUC_CONST;
 
-void       xfce_clock_binary_register_type (GTypeModule *type_module);
+void       xfce_clock_binary_register_type (XfcePanelTypeModule *type_module);
 
 GtkWidget *xfce_clock_binary_new           (void) G_GNUC_MALLOC;
 

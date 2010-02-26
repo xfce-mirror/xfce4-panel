@@ -32,7 +32,7 @@
 
 /* TODO move to header */
 GType tasklist_plugin_get_type (void) G_GNUC_CONST;
-void tasklist_plugin_register_type (GTypeModule *type_module);
+void tasklist_plugin_register_type (XfcePanelTypeModule *type_module);
 #define XFCE_TYPE_TASKLIST_PLUGIN            (tasklist_plugin_get_type ())
 #define XFCE_TASKLIST_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TASKLIST_PLUGIN, TasklistPlugin))
 #define XFCE_TASKLIST_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_TASKLIST_PLUGIN, TasklistPluginClass))

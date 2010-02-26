@@ -61,7 +61,7 @@ G_BEGIN_DECLS
   } \
   \
   void \
-  type_name##_register_type (GTypeModule *type_module) \
+  type_name##_register_type (XfcePanelTypeModule *type_module) \
   { \
     GType plugin_define_type_id; \
     static const GTypeInfo plugin_define_type_info = \
@@ -79,7 +79,7 @@ G_BEGIN_DECLS
     }; \
     \
     plugin_define_type_id = \
-        g_type_module_register_type (type_module, TYPE_PARENT, \
+        g_type_module_register_type (G_TYPE_MODULE (type_module), TYPE_PARENT, \
                                      "Xfce" #TypeName, &plugin_define_type_info, 0); \
     \
     type_name##_type = plugin_define_type_id; \
@@ -114,6 +114,8 @@ typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
 typedef gboolean (*XfcePanelPluginPreInit) (gint argc, gchar **argv);
 
 typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
+
+typedef GTypeModule XfcePanelTypeModule;
 
 /**
  * XFCE_PANEL_PLUGIN_REGISTER:

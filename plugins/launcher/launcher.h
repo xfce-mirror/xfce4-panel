@@ -48,9 +48,9 @@ enum _LauncherArrowType
 
 GType   launcher_plugin_get_type      (void) G_GNUC_CONST;
 
-void    launcher_plugin_register_type (GTypeModule    *type_module);
+void    launcher_plugin_register_type (XfcePanelTypeModule *type_module);
 
-GSList *launcher_plugin_get_items     (LauncherPlugin *plugin);
+GSList *launcher_plugin_get_items     (LauncherPlugin      *plugin);
 
 G_END_DECLS
 

@@ -36,7 +36,7 @@ typedef struct _ActionsPlugin      ActionsPlugin;
 
 GType actions_plugin_get_type      (void) G_GNUC_CONST;
 
-void  actions_plugin_register_type (GTypeModule *type_module);
+void  actions_plugin_register_type (XfcePanelTypeModule *type_module);
 
 G_END_DECLS
 
