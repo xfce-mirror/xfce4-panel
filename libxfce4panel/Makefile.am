@@ -50,6 +50,7 @@ libxfce4panel_la_LDFLAGS = \
 	-no-undefined \
 	-export-dynamic \
 	-version-info $(LIBXFCE4PANEL_VERINFO) \
+	-export-symbols-regex '^[^_].*' \
 	$(PLATFORM_LDFLAGS)
 
 libxfce4panel_la_LIBADD = \

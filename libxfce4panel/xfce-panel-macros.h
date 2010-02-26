@@ -73,13 +73,6 @@ G_BEGIN_DECLS
 #define G_PARAM_STATIC_STRINGS (G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB)
 #endif
 
-/* visibility support */
-#ifdef HAVE_GNUC_VISIBILITY
-#define PANEL_SYMBOL_EXPORT __attribute__ ((visibility("default")))
-#else
-#define PANEL_SYMBOL_EXPORT
-#endif
-
 /* make api compatible with 4.6 */
 #ifndef XFCE_DISABLE_DEPRECATED
 

@@ -35,7 +35,7 @@
  *
  * Returns: newly created #GtkButton.
  **/
-PANEL_SYMBOL_EXPORT GtkWidget *
+GtkWidget *
 xfce_panel_create_button (void)
 {
   GtkWidget *button = gtk_button_new ();
@@ -59,7 +59,7 @@ xfce_panel_create_button (void)
  *
  * Returns: newly created #GtkToggleButton.
  **/
-PANEL_SYMBOL_EXPORT GtkWidget *
+GtkWidget *
 xfce_panel_create_toggle_button (void)
 {
   GtkWidget *button = gtk_toggle_button_new ();
@@ -84,7 +84,7 @@ xfce_panel_create_toggle_button (void)
  * Returns: %TRUE if the user is allowed to customize the panel, %FALSE
  *          otherwise.
  **/
-PANEL_SYMBOL_EXPORT gboolean
+gboolean
 xfce_panel_allow_customization (void)
 {
   static gboolean  allow_customization = FALSE;

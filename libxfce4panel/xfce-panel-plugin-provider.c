@@ -77,7 +77,7 @@ xfce_panel_plugin_provider_class_init (gpointer klass)
 
 
 
-PANEL_SYMBOL_EXPORT const gchar *
+const gchar *
 xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);
@@ -87,7 +87,7 @@ xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 
 
 
-PANEL_SYMBOL_EXPORT gint
+gint
 xfce_panel_plugin_provider_get_unique_id (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), -1);
@@ -97,7 +97,7 @@ xfce_panel_plugin_provider_get_unique_id (XfcePanelPluginProvider *provider)
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
                                      gint                     size)
 {
@@ -108,7 +108,7 @@ xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
                                             GtkOrientation           orientation)
 {
@@ -119,7 +119,7 @@ xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provider,
                                                 XfceScreenPosition       screen_position)
 {
@@ -130,7 +130,7 @@ xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider *provide
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -140,7 +140,7 @@ xfce_panel_plugin_provider_save (XfcePanelPluginProvider *provider)
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_plugin_provider_emit_signal (XfcePanelPluginProvider       *provider,
                                         XfcePanelPluginProviderSignal  provider_signal)
 {
@@ -152,7 +152,7 @@ xfce_panel_plugin_provider_emit_signal (XfcePanelPluginProvider       *provider,
 
 
 
-PANEL_SYMBOL_EXPORT gboolean
+gboolean
 xfce_panel_plugin_provider_get_show_configure (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
@@ -162,7 +162,7 @@ xfce_panel_plugin_provider_get_show_configure (XfcePanelPluginProvider *provider
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_plugin_provider_show_configure (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
@@ -172,7 +172,7 @@ xfce_panel_plugin_provider_show_configure (XfcePanelPluginProvider *provider)
 
 
 
-PANEL_SYMBOL_EXPORT gboolean
+gboolean
 xfce_panel_plugin_provider_get_show_about (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), FALSE);
@@ -182,7 +182,7 @@ xfce_panel_plugin_provider_get_show_about (XfcePanelPluginProvider *provider)
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_plugin_provider_show_about (XfcePanelPluginProvider *provider)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));

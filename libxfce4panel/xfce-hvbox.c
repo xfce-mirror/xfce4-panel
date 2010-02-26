@@ -203,7 +203,7 @@ xfce_hvbox_size_allocate (GtkWidget     *widget,
  *
  * Return value: the newly allocated #XfceHVBox container widget.
  **/
-PANEL_SYMBOL_EXPORT GtkWidget *
+GtkWidget *
 xfce_hvbox_new (GtkOrientation orientation,
                 gboolean       homogeneous,
                 gint           spacing)
@@ -233,7 +233,7 @@ xfce_hvbox_new (GtkOrientation orientation,
  *
  * Set the new orientation of the #XfceHVBox container widget.
  **/
-PANEL_SYMBOL_EXPORT void
+void
 xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
                             GtkOrientation  orientation)
 {
@@ -260,7 +260,7 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
  *
  * Returns the current orientation of the #XfceHVBox.
  **/
-PANEL_SYMBOL_EXPORT GtkOrientation
+GtkOrientation
 xfce_hvbox_get_orientation (XfceHVBox *hvbox)
 {
   g_return_val_if_fail (XFCE_IS_HVBOX (hvbox), GTK_ORIENTATION_HORIZONTAL);

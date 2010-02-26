@@ -458,7 +458,7 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
 
 
 
-PANEL_SYMBOL_EXPORT GtkWidget *
+GtkWidget *
 xfce_panel_image_new (void)
 {
   return g_object_new (XFCE_TYPE_PANEL_IMAGE, NULL);
@@ -466,7 +466,7 @@ xfce_panel_image_new (void)
 
 
 
-PANEL_SYMBOL_EXPORT GtkWidget *
+GtkWidget *
 xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
 {
   g_return_val_if_fail (GDK_IS_PIXBUF (pixbuf), NULL);
@@ -477,7 +477,7 @@ xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
 
 
 
-PANEL_SYMBOL_EXPORT GtkWidget *
+GtkWidget *
 xfce_panel_image_new_from_source (const gchar *source)
 {
   g_return_val_if_fail (IS_STRING (source), NULL);
@@ -488,7 +488,7 @@ xfce_panel_image_new_from_source (const gchar *source)
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
                                   GdkPixbuf      *pixbuf)
 {
@@ -508,7 +508,7 @@ xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
 
 
 
-PANEL_SYMBOL_EXPORT void
+void
 xfce_panel_image_set_from_source (XfcePanelImage *image,
                                   const gchar    *source)
 {

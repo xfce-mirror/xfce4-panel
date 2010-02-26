@@ -86,13 +86,13 @@ G_BEGIN_DECLS
   }
 
 #define _XPP_DEFINE_PLUGIN(TypeName, type_name, resident, args...) \
-  GType __xpp_init (GTypeModule *type_module, gboolean *make_resident); \
+  GType xfce_panel_module_init (GTypeModule *type_module, gboolean *make_resident); \
   \
   XFCE_PANEL_DEFINE_TYPE (TypeName, type_name, XFCE_TYPE_PANEL_PLUGIN) \
   \
-  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT GType \
-  __xpp_init (GTypeModule *type_module, \
-              gboolean    *make_resident) \
+  G_MODULE_EXPORT GType \
+  xfce_panel_module_init (GTypeModule *type_module, \
+                          gboolean    *make_resident) \
   { \
     typedef void (*XppRegFunc) (GTypeModule *module); \
     XppRegFunc reg_funcs[] = { type_name##_register_type, args }; \
@@ -151,12 +151,11 @@ typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_FULL(construct_func, preinit_func, check_func) \
   XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (construct_func, \
-    PANEL_SYMBOL_EXPORT G_MODULE_EXPORT gboolean \
-    __xpp_preinit (gint    argc, \
-                   gchar **argv); \
-    PANEL_SYMBOL_EXPORT G_MODULE_EXPORT gboolean \
-    __xpp_preinit (gint    argc, \
-                   gchar **argv) \
+    G_MODULE_EXPORT gboolean xfce_panel_module_preinit (gint argc, gchar **argv); \
+    \
+    G_MODULE_EXPORT gboolean \
+    xfce_panel_module_preinit (gint    argc, \
+                               gchar **argv) \
     { \
       return (*preinit_func) (argc, argv); \
     }, \
@@ -166,32 +165,32 @@ typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 /* <private> */
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTENDED(construct_func, PREINIT_CODE, CHECK_CODE) \
   static void \
-  __xpp_realize (XfcePanelPlugin *xpp) \
+  xfce_panel_module_realize (XfcePanelPlugin *xpp) \
   { \
     panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     \
     g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), \
-        G_CALLBACK (__xpp_realize), NULL); \
+        G_CALLBACK (xfce_panel_module_realize), NULL); \
     \
     (*construct_func) (xpp); \
   } \
   \
   PREINIT_CODE \
   \
-  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
-  __xpp_construct (const gchar  *xpp_name, \
-                   gint          xpp_unique_id, \
-                   const gchar  *xpp_display_name, \
-                   const gchar  *xpp_comment, \
-                   gchar       **xpp_arguments, \
-                   GdkScreen    *xpp_screen); \
-  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
-  __xpp_construct (const gchar  *xpp_name, \
-                   gint          xpp_unique_id, \
-                   const gchar  *xpp_display_name, \
-                   const gchar  *xpp_comment, \
-                   gchar       **xpp_arguments, \
-                   GdkScreen    *xpp_screen) \
+  G_MODULE_EXPORT XfcePanelPlugin * \
+  xfce_panel_module_construct (const gchar  *xpp_name, \
+                               gint          xpp_unique_id, \
+                               const gchar  *xpp_display_name, \
+                               const gchar  *xpp_comment, \
+                               gchar       **xpp_arguments, \
+                               GdkScreen    *xpp_screen); \
+  G_MODULE_EXPORT XfcePanelPlugin * \
+  xfce_panel_module_construct (const gchar  *xpp_name, \
+                               gint          xpp_unique_id, \
+                               const gchar  *xpp_display_name, \
+                               const gchar  *xpp_comment, \
+                               gchar       **xpp_arguments, \
+                               GdkScreen    *xpp_screen) \
   { \
     XfcePanelPlugin *xpp = NULL; \
     \
@@ -208,7 +207,7 @@ typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
                             "arguments", xpp_arguments, NULL); \
         \
         g_signal_connect_after (G_OBJECT (xpp), "realize", \
-            G_CALLBACK (__xpp_realize), NULL); \
+            G_CALLBACK (xfce_panel_module_realize), NULL); \
       } \
     \
     return xpp; \

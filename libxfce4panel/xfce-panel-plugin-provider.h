@@ -93,7 +93,6 @@ enum _XfcePanelPluginProviderSignal
 
 
 
-PANEL_SYMBOL_EXPORT
 GType        xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
 
 const gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);

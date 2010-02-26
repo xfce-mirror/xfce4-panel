@@ -58,7 +58,6 @@ struct _XfcePanelImage
 #define XFCE_IS_PANEL_IMAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_PANEL_IMAGE))
 #define XFCE_PANEL_IMAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_PANEL_IMAGE, XfcePanelImageClass))
 
-PANEL_SYMBOL_EXPORT
 GType      xfce_panel_image_get_type        (void) G_GNUC_CONST;
 
 GtkWidget *xfce_panel_image_new             (void) G_GNUC_MALLOC;

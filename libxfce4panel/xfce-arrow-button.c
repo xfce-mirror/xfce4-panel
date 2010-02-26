@@ -409,7 +409,7 @@ xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
  *
  * Returns: The newly created #XfceArrowButton widget.
  **/
-PANEL_SYMBOL_EXPORT GtkWidget *
+GtkWidget *
 xfce_arrow_button_new (GtkArrowType arrow_type)
 {
   return g_object_new (XFCE_TYPE_ARROW_BUTTON,
@@ -427,7 +427,7 @@ xfce_arrow_button_new (GtkArrowType arrow_type)
  *
  * Returns: the #GtkArrowType of @button.
  **/
-PANEL_SYMBOL_EXPORT GtkArrowType
+GtkArrowType
 xfce_arrow_button_get_arrow_type (XfceArrowButton *button)
 {
   g_return_val_if_fail (XFCE_IS_ARROW_BUTTON (button), GTK_ARROW_UP);
@@ -443,7 +443,7 @@ xfce_arrow_button_get_arrow_type (XfceArrowButton *button)
  *
  * Sets the arrow type for @button.
  **/
-PANEL_SYMBOL_EXPORT void
+void
 xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
                                   GtkArrowType     arrow_type)
 {
@@ -477,7 +477,7 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
  *
  * Returns: %TRUE when @button is blinking.
  **/
-PANEL_SYMBOL_EXPORT gboolean
+gboolean
 xfce_arrow_button_get_blinking (XfceArrowButton *button)
 {
   g_return_val_if_fail (XFCE_IS_ARROW_BUTTON (button), FALSE);
@@ -494,7 +494,7 @@ xfce_arrow_button_get_blinking (XfceArrowButton *button)
  *
  * Make the button blink.
  **/
-PANEL_SYMBOL_EXPORT void
+void
 xfce_arrow_button_set_blinking (XfceArrowButton *button,
                                 gboolean         blinking)
 {
