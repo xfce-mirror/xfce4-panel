@@ -382,6 +382,7 @@ panel_application_plugin_move (GtkWidget        *item,
   const gchar    *icon_name;
   GdkDragContext *context;
   PanelModule    *module;
+  GtkIconTheme   *theme;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
@@ -397,7 +398,9 @@ panel_application_plugin_move (GtkWidget        *item,
   /* set the drag context icon name */
   module = panel_module_get_from_plugin_provider (XFCE_PANEL_PLUGIN_PROVIDER (item));
   icon_name = panel_module_get_icon_name (module);
-  if (G_LIKELY (icon_name != NULL))
+  theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (item));
+  if (!exo_str_is_empty (icon_name)
+      && gtk_icon_theme_has_icon (theme, icon_name))
     gtk_drag_set_icon_name (context, icon_name, 0, 0);
   else
     gtk_drag_set_icon_default (context);
