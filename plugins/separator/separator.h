@@ -36,7 +36,9 @@ typedef enum   _SeparatorPluginStyle  SeparatorPluginStyle;
 #define XFCE_IS_SEPARATOR_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SEPARATOR_PLUGIN))
 #define XFCE_SEPARATOR_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SEPARATOR_PLUGIN, SeparatorPluginClass))
 
-GType separator_plugin_get_type (void) G_GNUC_CONST;
+GType separator_plugin_get_type      (void) G_GNUC_CONST;
+
+void  separator_plugin_register_type (GTypeModule *type_module);
 
 G_END_DECLS
 

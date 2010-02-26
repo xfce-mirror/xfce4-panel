@@ -92,10 +92,8 @@ enum
 
 
 
-/* define and register the plugin */
-G_DEFINE_TYPE (SeparatorPlugin, separator_plugin, XFCE_TYPE_PANEL_PLUGIN)
-
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_SEPARATOR_PLUGIN)
+/* define the plugin */
+XFCE_PANEL_DEFINE_PLUGIN (SeparatorPlugin, separator_plugin)
 
 
 
