@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include <common/panel-private.h>
 #include <common/panel-builder.h>
 
 

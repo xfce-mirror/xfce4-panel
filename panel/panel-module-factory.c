@@ -30,6 +30,9 @@
 
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
+
+#include <common/panel-private.h>
+
 #include <libxfce4panel/libxfce4panel.h>
 
 #include <panel/panel-module.h>
@@ -95,7 +98,7 @@ panel_module_factory_class_init (PanelModuleFactoryClass *klass)
    * Emitted when the unique status of one of the modules changed.
    **/
   factory_signals[UNIQUE_CHANGED] =
-    g_signal_new (I_("unique-changed"),
+    g_signal_new (g_intern_static_string ("unique-changed"),
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,

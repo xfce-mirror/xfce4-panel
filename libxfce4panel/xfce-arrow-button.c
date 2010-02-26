@@ -125,7 +125,7 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
    * This value also determines the direction of the popup menu.
    **/
   arrow_button_signals[ARROW_TYPE_CHANGED] =
-      g_signal_new (I_("arrow-type-changed"),
+      g_signal_new (g_intern_static_string ("arrow-type-changed"),
                     G_OBJECT_CLASS_TYPE (klass),
                     G_SIGNAL_RUN_LAST,
                     G_STRUCT_OFFSET (XfceArrowButtonClass, arrow_type_changed),

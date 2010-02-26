@@ -22,6 +22,8 @@
 
 #include <gtk/gtk.h>
 
+#include <common/panel-private.h>
+
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <libxfce4panel/libxfce4panel-alias.h>
@@ -51,7 +53,8 @@ xfce_panel_plugin_provider_get_type (void)
 
   if (G_UNLIKELY (type == 0))
     {
-      type = g_type_register_static_simple (G_TYPE_INTERFACE, I_("XfcePanelPluginProvider"),
+      type = g_type_register_static_simple (G_TYPE_INTERFACE,
+                                            g_intern_static_string ("XfcePanelPluginProvider"),
                                             sizeof (XfcePanelPluginProviderIface),
                                             xfce_panel_plugin_provider_class_init,
                                             0, NULL, 0);
@@ -67,7 +70,7 @@ xfce_panel_plugin_provider_class_init (gpointer klass,
                                        gpointer klass_data)
 {
   provider_signals[PROVIDER_SIGNAL] =
-    g_signal_new (I_("provider-signal"),
+    g_signal_new (g_intern_static_string ("provider-signal"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginProviderIface, provider_signal),

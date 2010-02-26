@@ -35,6 +35,7 @@
 #include <gtk/gtk.h>
 
 #include <libxfce4panel/libxfce4panel.h>
+#include <common/panel-private.h>
 #include "systray-socket.h"
 
 

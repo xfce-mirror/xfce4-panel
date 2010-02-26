@@ -194,7 +194,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * See also: xfce_panel_plugin_menu_show_about().
    **/
   plugin_signals[ABOUT] =
-    g_signal_new (I_("about"),
+    g_signal_new (g_intern_static_string ("about"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, about),
@@ -214,7 +214,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    *           xfce_titled_dialog_new ().
    **/
   plugin_signals[CONFIGURE_PLUGIN] =
-    g_signal_new (I_("configure-plugin"),
+    g_signal_new (g_intern_static_string ("configure-plugin"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, configure_plugin),
@@ -232,7 +232,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * See also #XfceHVBox.
    **/
   plugin_signals[FREE_DATA] =
-    g_signal_new (I_("free-data"),
+    g_signal_new (g_intern_static_string ("free-data"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, free_data),
@@ -252,7 +252,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * See also: #XfceHVBox.
    **/
   plugin_signals[ORIENTATION_CHANGED] =
-    g_signal_new (I_("orientation-changed"),
+    g_signal_new (g_intern_static_string ("orientation-changed"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, orientation_changed),
@@ -278,7 +278,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * Since: 4.8
    **/
   plugin_signals[REMOVED] =
-    g_signal_new (I_("removed"),
+    g_signal_new (g_intern_static_string ("removed"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, removed),
@@ -298,7 +298,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * See also: xfce_panel_plugin_save_location().
    **/
   plugin_signals[SAVE] =
-    g_signal_new (I_("save"),
+    g_signal_new (g_intern_static_string ("save"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, save),
@@ -322,7 +322,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * g_signal_connect (plugin, "size-changed", G_CALLBACK (gtk_true), NULL);
    **/
   plugin_signals[SIZE_CHANGED] =
-    g_signal_new (I_("size-changed"),
+    g_signal_new (g_intern_static_string ("size-changed"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, size_changed),
@@ -340,7 +340,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * this signal to change the arrow direction of buttons.
    **/
   plugin_signals[SCREEN_POSITION_CHANGED] =
-    g_signal_new (I_("screen-position-changed"),
+    g_signal_new (g_intern_static_string ("screen-position-changed"),
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (XfcePanelPluginClass, screen_position_changed),
@@ -715,7 +715,7 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
       gtk_menu_set_screen (menu, gtk_widget_get_screen (widget));
 
       /* if the menu is block, some items are insensitive */
-      item = g_object_get_data (G_OBJECT (menu), I_("properties-item"));
+      item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("properties-item"));
       gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
@@ -881,7 +881,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       item = gtk_image_menu_item_new_from_stock (GTK_STOCK_PROPERTIES, NULL);
       g_signal_connect_swapped (G_OBJECT (item), "activate",
           G_CALLBACK (xfce_panel_plugin_show_configure), plugin);
-      g_object_set_data (G_OBJECT (menu), I_("properties-item"), item);
+      g_object_set_data (G_OBJECT (menu), g_intern_static_string ("properties-item"), item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_CONFIGURE))
         gtk_widget_show (item);
@@ -890,7 +890,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
       g_signal_connect_swapped (G_OBJECT (item), "activate",
           G_CALLBACK (xfce_panel_plugin_show_about), plugin);
-      g_object_set_data (G_OBJECT (menu), I_("about-item"), item);
+      g_object_set_data (G_OBJECT (menu), g_intern_static_string ("about-item"), item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       if (PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_SHOW_ABOUT))
         gtk_widget_show (item);
@@ -1511,7 +1511,7 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
     {
        /* get and show the properties item */
        menu = xfce_panel_plugin_menu_get (plugin);
-       item = g_object_get_data (G_OBJECT (menu), I_("properties-item"));
+       item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("properties-item"));
        if (G_LIKELY (item))
          gtk_widget_show (item);
     }
@@ -1544,7 +1544,7 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
     {
        /* get and show the about item */
        menu = xfce_panel_plugin_menu_get (plugin);
-       item = g_object_get_data (G_OBJECT (menu), I_("about-item"));
+       item = g_object_get_data (G_OBJECT (menu), g_intern_static_string ("about-item"));
        if (G_LIKELY (item))
          gtk_widget_show (item);
     }

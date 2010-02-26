@@ -27,6 +27,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-builder.h>
+#include <common/panel-private.h>
 #include <libwnck/libwnck.h>
 #include <exo/exo.h>
 

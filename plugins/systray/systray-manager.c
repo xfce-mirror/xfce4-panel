@@ -35,6 +35,8 @@
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 
+#include <common/panel-private.h>
+
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -155,7 +157,7 @@ systray_manager_class_init (SystrayManagerClass *klass)
   gobject_class->finalize = systray_manager_finalize;
 
   systray_manager_signals[ICON_ADDED] =
-      g_signal_new (I_("icon-added"),
+      g_signal_new (g_intern_static_string ("icon-added"),
                     G_OBJECT_CLASS_TYPE (klass),
                     G_SIGNAL_RUN_LAST,
                     0, NULL, NULL,
@@ -164,7 +166,7 @@ systray_manager_class_init (SystrayManagerClass *klass)
                     GTK_TYPE_SOCKET);
 
   systray_manager_signals[ICON_REMOVED] =
-      g_signal_new (I_("icon-removed"),
+      g_signal_new (g_intern_static_string ("icon-removed"),
                     G_OBJECT_CLASS_TYPE (klass),
                     G_SIGNAL_RUN_LAST,
                     0, NULL, NULL,
@@ -173,7 +175,7 @@ systray_manager_class_init (SystrayManagerClass *klass)
                     GTK_TYPE_SOCKET);
 
   systray_manager_signals[MESSAGE_SENT] =
-      g_signal_new (I_("message-sent"),
+      g_signal_new (g_intern_static_string ("message-sent"),
                     G_OBJECT_CLASS_TYPE (klass),
                     G_SIGNAL_RUN_LAST,
                     0, NULL, NULL,
@@ -185,7 +187,7 @@ systray_manager_class_init (SystrayManagerClass *klass)
                     G_TYPE_LONG);
 
   systray_manager_signals[MESSAGE_CANCELLED] =
-      g_signal_new (I_("message-cancelled"),
+      g_signal_new (g_intern_static_string ("message-cancelled"),
                     G_OBJECT_CLASS_TYPE (klass),
                     G_SIGNAL_RUN_LAST,
                     0, NULL, NULL,
@@ -195,7 +197,7 @@ systray_manager_class_init (SystrayManagerClass *klass)
                     G_TYPE_LONG);
 
   systray_manager_signals[LOST_SELECTION] =
-      g_signal_new (I_("lost-selection"),
+      g_signal_new (g_intern_static_string ("lost-selection"),
                     G_OBJECT_CLASS_TYPE (klass),
                     G_SIGNAL_RUN_LAST,
                     0, NULL, NULL,

@@ -26,6 +26,8 @@
 
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
+
+#include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include <panel/panel-dialogs.h>

@@ -24,6 +24,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-builder.h>
+#include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include "tasklist-widget.h"

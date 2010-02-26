@@ -24,9 +24,11 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <exo/exo.h>
+
+#include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-builder.h>
-#include <exo/exo.h>
 
 #include "actions.h"
 #include "actions-dialog_ui.h"

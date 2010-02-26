@@ -27,6 +27,7 @@
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
+#include <common/panel-private.h>
 #include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -116,7 +117,7 @@ panel_dbus_service_class_init (PanelDBusServiceClass *klass)
    * Emitted when an external plugin property should be updated.
    **/
   dbus_service_signals[PROPERTY_CHANGED] =
-    g_signal_new (I_("property-changed"),
+    g_signal_new (g_intern_static_string ("property-changed"),
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,

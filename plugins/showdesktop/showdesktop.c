@@ -22,6 +22,7 @@
 #endif
 
 #include <libxfce4util/libxfce4util.h>
+#include <common/panel-private.h>
 
 #include "showdesktop.h"
 

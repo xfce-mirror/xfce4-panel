@@ -22,6 +22,8 @@
 
 #include <gtk/gtk.h>
 #include <exo/exo.h>
+
+#include <common/panel-private.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 #include <panel/panel-itembar.h>
@@ -154,7 +156,7 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtkcontainer_class->set_child_property = panel_itembar_set_child_property;
 
   itembar_signals[CHANGED] =
-    g_signal_new (I_("changed"),
+    g_signal_new (g_intern_static_string ("changed"),
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,

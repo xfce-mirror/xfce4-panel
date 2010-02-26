@@ -24,6 +24,7 @@
 #include <string.h>
 #endif
 
+#include <common/panel-private.h>
 #include <wrapper/wrapper-module.h>
 
 

@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 
