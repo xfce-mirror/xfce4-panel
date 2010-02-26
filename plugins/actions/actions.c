@@ -71,7 +71,6 @@ typedef struct
   ActionType   type;
   const gchar *title;
   const gchar *icon_name;
-  const gchar *command;
 }
 ActionEntry;
 
@@ -108,22 +107,14 @@ enum
 
 static ActionEntry action_entries[] =
 {
-  { ACTION_DISABLED, N_("Disabled"),
-    NULL, NULL },
-  { ACTION_LOG_OUT_DIALOG, N_("Log Out Dialog"),
-    "system-log-out", "xfce4-session-logout" },
-  { ACTION_LOG_OUT, N_("Log Out"),
-    "system-log-out", "xfce4-session-logout --logout" },
-  { ACTION_LOCK_SCREEN, N_("Lock Screen"),
-    "system-lock-screen", "xflock4" },
-  { ACTION_SHUT_DOWN, N_("Shut Down"),
-    "system-shutdown", "xfce4-session-logout --halt" },
-  { ACTION_RESTART, N_("Restart"),
-    "xfsm-reboot", "xfce4-session-logout --reboot" },
-  { ACTION_SUSPEND, N_("Suspend"),
-    "system-suspend", "xfce4-session-logout --suspend" },
-  { ACTION_HIBERNATE, N_("Hibernate"),
-    "system-hibernate", "xfce4-session-logout --hibernate" }
+  { ACTION_DISABLED, N_("Disabled"), NULL },
+  { ACTION_LOG_OUT_DIALOG, N_("Log Out Dialog"), "system-log-out" },
+  { ACTION_LOG_OUT, N_("Log Out"), "system-log-out" },
+  { ACTION_LOCK_SCREEN, N_("Lock Screen"), "system-lock-screen" },
+  { ACTION_SHUT_DOWN, N_("Shut Down"), "system-shutdown"},
+  { ACTION_RESTART, N_("Restart"), "xfsm-reboot" },
+  { ACTION_SUSPEND, N_("Suspend"), "system-suspend" },
+  { ACTION_HIBERNATE, N_("Hibernate"), "system-hibernate" }
 };
 
 
@@ -411,11 +402,25 @@ actions_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
+actions_plugin_button_spawn_command (const gchar *command)
+{
+  GError *error = NULL;
+
+  if (!g_spawn_command_line_async (command, &error))
+    {
+      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\""), command);
+      g_error_free (error);
+    }
+}
+
+
+
+static void
 actions_plugin_button_clicked (GtkWidget     *button,
                                ActionsPlugin *plugin)
 {
-  ActionType  action;
-  GError     *error = NULL;
+  ActionType    action;
+  XfceSMClient *sm_client;
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
 
@@ -425,13 +430,56 @@ actions_plugin_button_clicked (GtkWidget     *button,
   else
     action = plugin->second_action;
 
-  /* spawn the command */
-  if (!g_spawn_command_line_async (action_entries[action].command, &error))
+  /* get the active session */
+  sm_client = xfce_sm_client_get ();
+  if (!xfce_sm_client_is_connected (sm_client))
+    sm_client = NULL;
+
+  switch (action)
     {
-      /* show error */
-      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\""),
-                              action_entries[action].command);
-      g_error_free (error);
+    case ACTION_DISABLED:
+      /* foo */
+      break;
+
+    case ACTION_LOG_OUT_DIALOG:
+      if (G_LIKELY (sm_client != NULL))
+        xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_ASK);
+      else
+        actions_plugin_button_spawn_command ("xfce4-session-logout");
+      break;
+
+    case ACTION_LOG_OUT:
+      if (G_LIKELY (sm_client != NULL))
+        xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_LOGOUT);
+      else
+        actions_plugin_button_spawn_command ("xfce4-session-logout --logout");
+      break;
+
+    case ACTION_SHUT_DOWN:
+      if (G_LIKELY (sm_client != NULL))
+        xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_HALT);
+      else
+        actions_plugin_button_spawn_command ("xfce4-session-logout --halt");
+      break;
+
+    case ACTION_RESTART:
+      if (G_LIKELY (sm_client != NULL))
+        xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_REBOOT);
+      else
+        actions_plugin_button_spawn_command ("xfce4-session-logout --reboot");
+      break;
+
+    case ACTION_LOCK_SCREEN:
+      actions_plugin_button_spawn_command ("xflock4");
+      break;
+
+    case ACTION_SUSPEND:
+      actions_plugin_button_spawn_command ("xfce4-session-logout --suspend");
+      break;
+
+    case ACTION_HIBERNATE:
+      actions_plugin_button_spawn_command ("xfce4-session-logout --hibernate");
+      break;
     }
 }
 
