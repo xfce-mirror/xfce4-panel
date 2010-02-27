@@ -1,13 +1,13 @@
 # Hungarian translation of xfce4-panel
 # Copyright (C) 2009. Free Software Foundation, Inc.
 # This file is distributed under the same license as the xfce4-panel package.
-# 
+#
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: untitled\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 00:04+0100\n"
+"POT-Creation-Date: 2010-02-27 15:41+0100\n"
 "PO-Revision-Date: 2009-06-26 01:41+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at gnome dot hu>\n"
@@ -30,7 +30,8 @@ msgid "Remove \"%s\"?"
 msgstr "Eltávolítja ezt: „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
 msgstr "Az elem el lesz távolítva a panelről, beállításai elvesznek."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -164,8 +165,7 @@ msgstr "A modul („%s”) nem nyitható meg"
 msgid "Add New Items"
 msgstr "Új elemek felvétele"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items
-#. dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
@@ -409,7 +409,7 @@ msgstr "_Teljes rendelkezésre álló terület használata"
 msgid "New Item"
 msgstr "Új elem"
 
-#: ../plugins/launcher/launcher-exec.c:563
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "„%s” indítása meghiúsult"
@@ -597,8 +597,7 @@ msgstr "_Sorok száma:"
 msgid "Hidden Applications"
 msgstr "Rejtett alkalmazások"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This
-#. won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -639,33 +638,33 @@ msgstr "Automatikusan csoportosítsa a feladatokat"
 msgid "Always group tasks"
 msgstr "Mindig csoportosítsa a feladatokat"
 
-#: ../plugins/windowlist/windowlist.c:263
+#: ../plugins/windowlist/windowlist.c:272
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr "Biztos, hogy el kívánja távolítani a(z) %d. munkaterületet?"
 
-#: ../plugins/windowlist/windowlist.c:264
+#: ../plugins/windowlist/windowlist.c:273
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Biztos, hogy el kívánja távolítani a(z) „%s” munkaterületet?"
 
 #. TRANSLATORS: Fallback name in the windowlist when the workspace has no name
-#: ../plugins/windowlist/windowlist.c:476
+#: ../plugins/windowlist/windowlist.c:485
 #, c-format
 msgid "Workspace %d"
 msgstr "%d. munkaterület"
 
-#: ../plugins/windowlist/windowlist.c:591
-#: ../plugins/windowlist/windowlist.c:597
+#: ../plugins/windowlist/windowlist.c:600
+#: ../plugins/windowlist/windowlist.c:606
 msgid "Add workspace"
 msgstr "Munkaterület hozzáadása"
 
-#: ../plugins/windowlist/windowlist.c:616
+#: ../plugins/windowlist/windowlist.c:625
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d. munkaterület eltávolítása"
 
-#: ../plugins/windowlist/windowlist.c:617
+#: ../plugins/windowlist/windowlist.c:626
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "„%s” munkaterület eltávolítása"
@@ -677,8 +676,12 @@ msgid "Window List"
 msgstr "Ablaklista"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
-msgstr "A <i>Sürgősségi értesítés</i> villogtatni fogja a gombot, ha az alkalmazás a figyelmét igényli."
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"A <i>Sürgősségi értesítés</i> villogtatni fogja a gombot, ha az alkalmazás a "
+"figyelmét igényli."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155

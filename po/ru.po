@@ -6,12 +6,12 @@
 # Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006.
 # Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006-2008.
 # Denis Koryavov <dkoryavov@yandex.ru>, 2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-26 18:04+0100\n"
+"POT-Creation-Date: 2010-02-27 15:41+0100\n"
 "PO-Revision-Date: 2009-05-09 17:16+0400\n"
 "Last-Translator: Denis Koryavov <dkoryavov@yandex.ru>\n"
 "Language-Team: Russian\n"
@@ -33,7 +33,8 @@ msgid "Remove \"%s\"?"
 msgstr "Удалить \"%s\"? "
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
 msgstr "Элемент будет удалён с панели, и его конфигурация будет потеряна. "
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -89,7 +90,8 @@ msgstr "Панель Xfce "
 
 #: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr "Вы не можете удалить последнюю панель. Вы хотите завершить работу программы? "
+msgstr ""
+"Вы не можете удалить последнюю панель. Вы хотите завершить работу программы? "
 
 #: ../panel/panel-app.c:934
 #, c-format
@@ -167,14 +169,15 @@ msgstr "Не удалось открыть модуль \"%s\" "
 msgid "Add New Items"
 msgstr "Добавить новый элемент"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items
-#. dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
-msgstr "Перетаскивайте элементы из списка на панель или удаляйте их, перетаскивая обратно в список."
+msgstr ""
+"Перетаскивайте элементы из списка на панель или удаляйте их, перетаскивая "
+"обратно в список."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
@@ -410,7 +413,7 @@ msgstr "Использовать всё доступное _пространст
 msgid "New Item"
 msgstr "Новый элемент "
 
-#: ../plugins/launcher/launcher-exec.c:563
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Не удалось запустить \"%s\" "
@@ -598,8 +601,7 @@ msgstr "_Количество строк: "
 msgid "Hidden Applications"
 msgstr "Скрытые приложения "
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This
-#. won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -640,33 +642,33 @@ msgstr "Автоматически группировать задачи "
 msgid "Always group tasks"
 msgstr "Всегда группировать задачи "
 
-#: ../plugins/windowlist/windowlist.c:263
+#: ../plugins/windowlist/windowlist.c:272
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr "Вы действительно хотите удалить рабочее место %d? "
 
-#: ../plugins/windowlist/windowlist.c:264
+#: ../plugins/windowlist/windowlist.c:273
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Вы действительно хотите удалить рабочее место '%s'? "
 
 #. TRANSLATORS: Fallback name in the windowlist when the workspace has no name
-#: ../plugins/windowlist/windowlist.c:476
+#: ../plugins/windowlist/windowlist.c:485
 #, c-format
 msgid "Workspace %d"
 msgstr "Рабочее место %d "
 
-#: ../plugins/windowlist/windowlist.c:591
-#: ../plugins/windowlist/windowlist.c:597
+#: ../plugins/windowlist/windowlist.c:600
+#: ../plugins/windowlist/windowlist.c:606
 msgid "Add workspace"
 msgstr "Добавить рабочее место "
 
-#: ../plugins/windowlist/windowlist.c:616
+#: ../plugins/windowlist/windowlist.c:625
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Удалить рабочее место %d "
 
-#: ../plugins/windowlist/windowlist.c:617
+#: ../plugins/windowlist/windowlist.c:626
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Удалить рабочее место '%s' "
@@ -678,8 +680,12 @@ msgid "Window List"
 msgstr "Список окон "
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
-msgstr "<i>Уведомление о срочности:</i> кнопка будет мигать, когда приложение будет  нуждаться в вашем внимании. "
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"<i>Уведомление о срочности:</i> кнопка будет мигать, когда приложение будет  "
+"нуждаться в вашем внимании. "
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155

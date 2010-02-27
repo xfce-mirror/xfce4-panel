@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Ilkka Ollakka <ilkka.ollakka@iki.fi>, 2003.
 # Jari Rahkonen <jari.rahkonen@pp1.inet.fi>, 2005-2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-20 18:04+0100\n"
+"POT-Creation-Date: 2010-02-27 15:41+0100\n"
 "PO-Revision-Date: 2009-01-25 13:05+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -29,7 +29,8 @@ msgid "Remove \"%s\"?"
 msgstr "Poistetaanko \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
 msgstr "Tämä osa poistetaan paneelista ja sen asetukset menetetään."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -163,8 +164,7 @@ msgstr "Moduulin \"%s\" avaaminen epäonnistui"
 msgid "Add New Items"
 msgstr "Lisää osia"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items
-#. dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
@@ -408,7 +408,7 @@ msgstr "_Täytä käytettävissä oleva tila"
 msgid "New Item"
 msgstr "Uusi osa"
 
-#: ../plugins/launcher/launcher-exec.c:563
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Kohteen \"%s\" suoritus epäonnistui"
@@ -596,8 +596,7 @@ msgstr "Rivien luku_määrä:"
 msgid "Hidden Applications"
 msgstr "Piilotetut sovellukset"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This
-#. won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -638,33 +637,33 @@ msgstr "Ryhmitä tehtävät automaattisesti"
 msgid "Always group tasks"
 msgstr "Ryhmitä tehtävät aina"
 
-#: ../plugins/windowlist/windowlist.c:263
+#: ../plugins/windowlist/windowlist.c:272
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr "Haluatko varmasti poistaa työtilan %d?"
 
-#: ../plugins/windowlist/windowlist.c:264
+#: ../plugins/windowlist/windowlist.c:273
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Haluatko varmasti poistaa työtilan \"%s\"?"
 
 #. TRANSLATORS: Fallback name in the windowlist when the workspace has no name
-#: ../plugins/windowlist/windowlist.c:476
+#: ../plugins/windowlist/windowlist.c:485
 #, c-format
 msgid "Workspace %d"
 msgstr "Työtila %d"
 
-#: ../plugins/windowlist/windowlist.c:591
-#: ../plugins/windowlist/windowlist.c:597
+#: ../plugins/windowlist/windowlist.c:600
+#: ../plugins/windowlist/windowlist.c:606
 msgid "Add workspace"
 msgstr "Lisää työtila"
 
-#: ../plugins/windowlist/windowlist.c:616
+#: ../plugins/windowlist/windowlist.c:625
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Poista työtila %d"
 
-#: ../plugins/windowlist/windowlist.c:617
+#: ../plugins/windowlist/windowlist.c:626
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Poista työtila \"%s\""
@@ -676,8 +675,12 @@ msgid "Window List"
 msgstr "Ikkunalista"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
-msgstr "<i>Kiireellisyyshuomautus</i> vilkuttaa painiketta, kun sovellus vaatii huomiota."
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"<i>Kiireellisyyshuomautus</i> vilkuttaa painiketta, kun sovellus vaatii "
+"huomiota."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
