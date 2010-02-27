@@ -6,12 +6,12 @@
 # Og Maciel <ogmaciel@gnome.org>, 2008.
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2008.
 # Henrique P. Machado <zehrique@gmail.com>, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-30 12:40+0100\n"
+"POT-Creation-Date: 2010-01-13 12:04+0100\n"
 "PO-Revision-Date: 2009-01-19 17:26-0200\n"
 "Last-Translator: Henrique P. Machado <zehrique@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <xfce-i18n@xfce.org>\n"
@@ -32,8 +32,7 @@ msgid "Remove \"%s\"?"
 msgstr "Remover \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "O item será removido do painel e sua configuração será perdida."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -89,8 +88,7 @@ msgstr "Painel Xfce"
 
 #: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"Você não pode remover o último painel. Você gostaria de sair do programa?"
+msgstr "Você não pode remover o último painel. Você gostaria de sair do programa?"
 
 #: ../panel/panel-app.c:934
 #, c-format
@@ -168,7 +166,8 @@ msgstr "Não foi possível abrir o módulo \"%s\""
 msgid "Add New Items"
 msgstr "Adicionar novos itens"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items
+#. dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
@@ -412,7 +411,7 @@ msgstr "Usar todo o e_spaço disponível"
 msgid "New Item"
 msgstr "Novo item"
 
-#: ../plugins/launcher/launcher-exec.c:564
+#: ../plugins/launcher/launcher-exec.c:563
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Não foi possível executar \"%s\""
@@ -600,7 +599,8 @@ msgstr "_Número de filas:"
 msgid "Hidden Applications"
 msgstr "Aplicativos ocultos"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This
+#. won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -614,9 +614,8 @@ msgid "Task List"
 msgstr "Lista de tarefas"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:192
-#, fuzzy
 msgid "Fi_xed length (pixels):"
-msgstr "_Tamanho (pixels):"
+msgstr "Tamanho fi_xo (pixels):"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:217
 msgid "Use _flat buttons"
@@ -680,12 +679,8 @@ msgid "Window List"
 msgstr "Lista de janelas"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Notificação de urgência</i> irá piscar o botão quando um aplicativo "
-"necessita de atenção."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Notificação de urgência</i> irá piscar o botão quando um aplicativo necessita de atenção."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -778,7 +773,6 @@ msgstr "Gerenciador do painel"
 #~ msgid "Unknown"
 #~ msgstr "Desconhecido"
 
-#, fuzzy
 #~ msgid "Copyright (c) 2004-2009"
 #~ msgstr "Copyright (c) 2004-2007"
 
@@ -869,7 +863,6 @@ msgstr "Gerenciador do painel"
 #~ msgid "Xfce 4 Panel Manager"
 #~ msgstr "Gerenciador do painel do Xfce 4"
 
-#, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"
 #~ msgstr "Não foi possível registrar a bandeja de sitema: %s"
 
@@ -988,12 +981,8 @@ msgstr "Gerenciador do painel"
 #~ msgid "Other..."
 #~ msgstr "Outro..."
 
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "O primeiro item na lista é mostrado no painel. Itens adicionais serão "
-#~ "mostrados em um menu."
+#~ msgid "The first item in the list is shown on the panel. Additional items will appear in a menu."
+#~ msgstr "O primeiro item na lista é mostrado no painel. Itens adicionais serão mostrados em um menu."
 
 #~ msgid ""
 #~ "Failed to run 0launch:\n"
@@ -1006,14 +995,8 @@ msgstr "Gerenciador do painel"
 #~ "\n"
 #~ "Para auxílio na utilização do Zero Install, veja http://0install.net"
 
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "O Zero Install terminou, mas o diálogo do lançador desapareceu durante "
-#~ "este tempo. O lançador não será adicionado (mas quaisquer arquivos "
-#~ "abaixados não foram perdidos)."
+#~ msgid "The Zero Install GUI has finished, but the launcher dialog has disappeared in the meantime. Not adding launcher (but any files downloaded have not been lost)."
+#~ msgstr "O Zero Install terminou, mas o diálogo do lançador desapareceu durante este tempo. O lançador não será adicionado (mas quaisquer arquivos abaixados não foram perdidos)."
 
 #~ msgid "Select file"
 #~ msgstr "Selecionar arquivo"
