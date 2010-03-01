@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-27 18:06+0100\n"
+"POT-Creation-Date: 2010-03-01 06:06+0100\n"
 "PO-Revision-Date: 2009-05-09 17:16+0400\n"
 "Last-Translator: Denis Koryavov <dkoryavov@yandex.ru>\n"
 "Language-Team: Russian\n"
@@ -188,9 +188,9 @@ msgstr "Не удалось послать сообщение D-bus"
 
 #. I18N: %s is replaced with xfce4-panel
 #: ../panel/main.c:296
-#, c-format
+#, c-format, fuzzy
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "%s не запущен."
 
 #: ../panel/panel-application.c:194
 msgid "Failed to launch the migration application"
@@ -788,34 +788,36 @@ msgid "_Tooltip format:"
 msgstr "Формат всплывающей подсказки "
 
 #: ../plugins/clock/clock-fuzzy.c:86
-#, fuzzy
 msgid "Night"
-msgstr "Справа "
+msgstr "Ночь"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
-msgstr ""
+msgstr "Раннее утро."
 
 #: ../plugins/clock/clock-fuzzy.c:88
+#, fuzzy
 msgid "Morning"
-msgstr ""
+msgstr "Утро"
 
 #: ../plugins/clock/clock-fuzzy.c:89
+#, fuzzy
 msgid "Almost noon"
-msgstr ""
+msgstr "Полдень"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 #, fuzzy
 msgid "Noon"
-msgstr "Нет значка "
+msgstr "День"
 
 #: ../plugins/clock/clock-fuzzy.c:91
+#, fuzzy
 msgid "Afternoon"
-msgstr ""
+msgstr "Вечер"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
-msgstr ""
+msgstr "Поздний вечер"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
@@ -997,14 +999,12 @@ msgid "seven"
 msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:143
-#, fuzzy
 msgid "eight"
-msgstr "Справа "
+msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:144
-#, fuzzy
 msgid "nine"
-msgstr "_Линия "
+msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
@@ -1081,9 +1081,8 @@ msgid "Select A Directory"
 msgstr "Выберите значок для \"%s\" "
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-#, fuzzy
 msgid "Show _hidden files"
-msgstr "Показывать _рамку "
+msgstr "Показать _скрытые файлы"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
@@ -1399,9 +1398,8 @@ msgid "Window _grouping:"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#, fuzzy
 msgid "Window title"
-msgstr "Список окон "
+msgstr "Заголовок окна"
 
 #: ../plugins/tasklist/tasklist-widget.c:2301
 msgid "Mi_nimize All"
