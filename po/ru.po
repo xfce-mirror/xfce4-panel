@@ -240,12 +240,12 @@ msgstr "Изменение панели не разрешено"
 #: ../panel/panel-dialogs.c:186
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "Модуль \"%s\" неожиданно пропал с панели. Хотите его перезапустить?"
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr ""
+msgstr "Модуль был несколько раз перезапущен в течение %d секунд. Если вы нажмёте \"Выполнить\", панель попробует запустить его снова, в противном случае он будет окончательно удалён."
 
 #: ../panel/panel-item-dialog.c:174
 msgid "Add New Items"
@@ -361,12 +361,12 @@ msgstr "Ед. измерения"
 #: ../panel/panel-preferences-dialog.glade.h:16
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
-msgstr ""
+msgstr "Переместить выбранный элемент на одну строку вниз"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
-msgstr ""
+msgstr "Переместить выбранный элемент на одну строку вверх"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "O_utput:"
@@ -454,8 +454,9 @@ msgid "Welcome to the first start of the Xfce Panel"
 msgstr ""
 
 #: ../migrate/main.c:80
+#, fuzzy
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh inital configuration."
-msgstr ""
+msgstr "Поскольку панель теперь использует новую систему хранения настроек, будут загружены свежие начальные установки"
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -796,22 +797,18 @@ msgid "Early morning"
 msgstr "Раннее утро."
 
 #: ../plugins/clock/clock-fuzzy.c:88
-#, fuzzy
 msgid "Morning"
 msgstr "Утро"
 
 #: ../plugins/clock/clock-fuzzy.c:89
-#, fuzzy
 msgid "Almost noon"
 msgstr "Полдень"
 
 #: ../plugins/clock/clock-fuzzy.c:90
-#, fuzzy
 msgid "Noon"
 msgstr "День"
 
 #: ../plugins/clock/clock-fuzzy.c:91
-#, fuzzy
 msgid "Afternoon"
 msgstr "Вечер"
 
