@@ -393,6 +393,8 @@ migrate_46_plugin_launcher (XfconfChannel  *channel,
 
       xfce_rc_set_group (new_desktop, G_KEY_FILE_DESKTOP_GROUP);
 
+      xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_TYPE,
+          G_KEY_FILE_DESKTOP_TYPE_APPLICATION);
       xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_NAME,
           xfce_rc_read_entry (rc, "Name", ""));
       xfce_rc_write_entry (new_desktop, G_KEY_FILE_DESKTOP_KEY_COMMENT,
