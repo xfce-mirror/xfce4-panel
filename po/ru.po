@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-01 12:06+0100\n"
+"POT-Creation-Date: 2010-03-02 12:06+0100\n"
 "PO-Revision-Date: 2009-05-09 17:16+0400\n"
 "Last-Translator: Denis Koryavov <dkoryavov@yandex.ru>\n"
 "Language-Team: Russian\n"
@@ -65,7 +65,7 @@ msgstr "Вы действительно хотите удалить рабоче
 #: ../libxfce4panel/xfce-panel-plugin.c:846
 #: ../panel/panel-preferences-dialog.c:872
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Если вы удалите этот элемент с панели, он будет потерян навсегда."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:999
@@ -409,12 +409,14 @@ msgid "Transparency"
 msgstr "Прозрачность (%): "
 
 #: ../panel/panel-preferences-dialog.glade.h:27
+#, fuzzy
 msgid "Transparency when the pointer is hovering over the panel."
-msgstr ""
+msgstr "Прозрачность при наведении указателя на панель."
 
 #: ../panel/panel-preferences-dialog.glade.h:28
+#, fuzzy
 msgid "Transparency when the pointer is not hovering the panel."
-msgstr ""
+msgstr "Прозрачность при покидании указателем панели."
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Vertical"
@@ -654,19 +656,19 @@ msgstr "Не удалось запустить \"%s\" "
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "Показать меню, содержащее категории установленных приложений"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "Использование:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "ПАРАМЕТР"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
@@ -678,8 +680,9 @@ msgstr "Параметры часов "
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+#, fuzzy
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Показать меню рядом с указателем"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
@@ -1378,8 +1381,9 @@ msgid "Sorting _order:"
 msgstr "С_ортировать по:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#, fuzzy
 msgid "Timestamp"
-msgstr ""
+msgstr "Временная метка"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
