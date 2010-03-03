@@ -855,12 +855,12 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
         {
           row = (i % rows);
 
-          x = area_x;
-          y = area.y;
-          h = area.height;
-
           if (row == 0)
             {
+              x = area_x;
+              y = area.y;
+              h = area.height;
+
               if (tasklist->show_labels)
                 {
                   w = area_width / cols--;
