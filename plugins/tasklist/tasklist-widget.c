@@ -854,19 +854,26 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
       if (G_LIKELY (child->type == XFCE_TASKLIST_BUTTON_TYPE_WINDOW))
         {
           row = (i % rows);
+
+          x = area_x;
+          y = area.y;
+          h = area.height;
+
           if (row == 0)
             {
-              w = area_width / cols--;
-              if (tasklist->max_button_length > 0
-                  && w > tasklist->max_button_length)
-               w = tasklist->max_button_length;
-              x = area_x;
-
+              if (tasklist->show_labels)
+                {
+                  w = area_width / cols--;
+                  if (tasklist->max_button_length > 0
+                      && w > tasklist->max_button_length)
+                    w = tasklist->max_button_length;
+                }
+              else
+                {
+                  w = h / (rows - row);
+                }
               area_width -= w;
               area_x += w;
-
-              y = area.y;
-              h = area.height;
             }
 
           child_alloc.y = y;
