@@ -56,6 +56,7 @@ struct _ApplicationsMenuPlugin
 
   guint            show_generic_names : 1;
   guint            show_menu_icons : 1;
+  guint            show_tooltips : 1;
   guint            show_button_title : 1;
   gchar           *button_title;
   gchar           *button_icon;
@@ -72,6 +73,7 @@ enum
   PROP_0,
   PROP_SHOW_GENERIC_NAMES,
   PROP_SHOW_MENU_ICONS,
+  PROP_SHOW_TOOLTIPS,
   PROP_SHOW_BUTTON_TITLE,
   PROP_BUTTON_TITLE,
   PROP_BUTTON_ICON,
@@ -143,6 +145,12 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
                                    g_param_spec_boolean ("show-menu-icons",
                                                          NULL, NULL,
                                                          TRUE,
+                                                         EXO_PARAM_READWRITE));
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHOW_TOOLTIPS,
+                                   g_param_spec_boolean ("show-tooltips",
+                                                         NULL, NULL,
+                                                         FALSE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -239,6 +247,10 @@ applications_menu_plugin_get_property (GObject    *object,
       g_value_set_boolean (value, plugin->show_menu_icons);
       break;
 
+    case PROP_SHOW_TOOLTIPS:
+      g_value_set_boolean (value, plugin->show_tooltips);
+      break;
+
     case PROP_SHOW_BUTTON_TITLE:
       g_value_set_boolean (value, plugin->show_button_title);
       break;
@@ -285,6 +297,10 @@ applications_menu_plugin_set_property (GObject      *object,
 
     case PROP_SHOW_MENU_ICONS:
       plugin->show_menu_icons = g_value_get_boolean (value);
+      break;
+
+    case PROP_SHOW_TOOLTIPS:
+      plugin->show_tooltips = g_value_get_boolean (value);
       break;
 
     case PROP_SHOW_BUTTON_TITLE:
@@ -338,6 +354,7 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-generic-names", G_TYPE_BOOLEAN },
     { "show-menu-icons", G_TYPE_BOOLEAN },
     { "show-button-title", G_TYPE_BOOLEAN },
+    { "show-tooltips", G_TYPE_BOOLEAN },
     { "button-title", G_TYPE_STRING },
     { "button-icon", G_TYPE_STRING },
     { "custom-menu", G_TYPE_BOOLEAN },
@@ -469,6 +486,9 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
   GtkBuilder             *builder;
   GObject                *dialog, *object, *object2;
+  guint                   i;
+  const gchar            *check_names[] = { "show-generic-names", "show-menu-icons",
+                                            "show-tooltips", "show-button-title" };
 
   /* setup the dialog */
   PANEL_UTILS_LINK_4UI
@@ -477,25 +497,13 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (G_UNLIKELY (builder == NULL))
     return;
 
-  object = gtk_builder_get_object (builder, "show-generic-names");
-  panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "show-generic-names",
-                          G_OBJECT (object), "active");
-
-  object = gtk_builder_get_object (builder, "show-menu-icons");
-  panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "show-menu-icons",
-                          G_OBJECT (object), "active");
-
-  object = gtk_builder_get_object (builder, "show-button-title");
-  panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "show-button-title",
-                          G_OBJECT (object), "active");
-
-  object = gtk_builder_get_object (builder, "button-title");
-  panel_return_if_fail (GTK_IS_ENTRY (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "button-title",
-                          G_OBJECT (object), "text");
+  for (i = 0; i < G_N_ELEMENTS (check_names); ++i)
+    {
+      object = gtk_builder_get_object (builder, check_names[i]);
+      panel_return_if_fail (GTK_IS_CHECK_BUTTON (object));
+      exo_mutual_binding_new (G_OBJECT (plugin), check_names[i],
+                              G_OBJECT (object), "active");
+    }
 
   object = gtk_builder_get_object (builder, "icon-button");
   panel_return_if_fail (GTK_IS_BUTTON (object));
@@ -697,6 +705,7 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
   GList               *elements, *li;
   GtkWidget           *mi, *image;
   const gchar         *name, *icon_name;
+  const gchar         *comment;
   GtkWidget           *submenu;
   gboolean             has_children = FALSE;
   gint                 size = DEFAULT_ICON_SIZE, w, h;
@@ -730,13 +739,21 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
           mi = gtk_image_menu_item_new_with_label (name);
           gtk_menu_shell_append (GTK_MENU_SHELL (gtk_menu), mi);
 
+          if (plugin->show_tooltips)
+            {
+              comment = garcon_menu_item_get_comment (li->data);
+              if (!exo_str_is_empty (comment))
+                gtk_widget_set_tooltip_text (mi, comment);
+            }
+
           g_signal_connect_data (G_OBJECT (mi), "activate",
               G_CALLBACK (applications_menu_plugin_menu_item_activate),
               g_object_ref (li->data), (GClosureNotify) g_object_unref, 0);
           gtk_widget_show (mi);
 
           command = garcon_menu_item_get_command (li->data);
-          gtk_widget_set_sensitive (mi, !exo_str_is_empty (command));
+          if (G_UNLIKELY (exo_str_is_empty (command)))
+            gtk_widget_set_sensitive (mi, FALSE);
 
           if (plugin->show_menu_icons)
             {
