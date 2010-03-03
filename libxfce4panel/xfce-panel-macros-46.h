@@ -505,6 +505,7 @@ enum /*< skip >*/
     \
     socket_id = strtol (argv[PLUGIN_ARGV_SOCKET_ID], NULL, 0); \
     plug = gtk_plug_new (socket_id); \
+    gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelExternal"); \
     g_signal_connect (G_OBJECT (plug), "embedded", \
         G_CALLBACK (_xpp_plug_embedded), NULL); \
     g_signal_connect (G_OBJECT (plug), "expose-event", \
