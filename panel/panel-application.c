@@ -129,6 +129,7 @@ struct _PanelApplication
   guint               drop_data_ready : 1;
   guint               drop_occurred : 1;
   guint               drop_desktop_files : 1;
+  guint               drop_index;
 };
 
 enum
@@ -740,7 +741,6 @@ panel_application_drag_data_received (PanelWindow      *window,
                                       guint             drag_time,
                                       GtkWidget        *itembar)
 {
-  guint              position;
   PanelApplication  *application;
   GtkWidget         *provider;
   gboolean           succeed = FALSE;
@@ -792,9 +792,6 @@ panel_application_drag_data_received (PanelWindow      *window,
       /* reset the state */
       application->drop_occurred = FALSE;
 
-      /* get the drop index on the itembar */
-      position = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
-
       /* get the widget screen */
       screen = gtk_window_get_screen (GTK_WINDOW (window));
 
@@ -807,7 +804,7 @@ panel_application_drag_data_received (PanelWindow      *window,
               name = (const gchar *) selection_data->data;
               succeed = panel_application_plugin_insert (application, window,
                                                          screen, name,
-                                                         -1, NULL, position);
+                                                         -1, NULL, application->drop_index);
             }
           break;
 
@@ -826,12 +823,12 @@ panel_application_drag_data_received (PanelWindow      *window,
                                                             provider);
 
               /* decrease the counter if we drop after the current position */
-              if (position > old_position)
-                position--;
+              if (application->drop_index > old_position)
+                application->drop_index--;
 
               /* reorder the child if needed */
-              if (old_position != position)
-                panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
+              if (old_position != application->drop_index)
+                panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, application->drop_index);
             }
           else
             {
@@ -839,7 +836,7 @@ panel_application_drag_data_received (PanelWindow      *window,
               gtk_widget_reparent (provider, itembar);
 
               /* move the item to the correct position on the itembar */
-              panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, position);
+              panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, application->drop_index);
 
               /* send all the needed panel information to the plugin */
               panel_window_set_povider_info (window, provider);
@@ -860,7 +857,7 @@ panel_application_drag_data_received (PanelWindow      *window,
                   /* create a new item with a unique id */
                   succeed = panel_application_plugin_insert (application, window,
                                                              screen, LAUNCHER_PLUGIN_NAME,
-                                                             -1, uris, position);
+                                                             -1, uris, application->drop_index);
                   g_strfreev (uris);
                 }
 
@@ -946,8 +943,8 @@ panel_application_drag_motion (GtkWidget        *window,
     {
       /* highlight the drop zone */
       itembar = gtk_bin_get_child (GTK_BIN (window));
-      panel_itembar_set_drop_highlight_item (PANEL_ITEMBAR (itembar),
-          panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y));
+      application->drop_index = panel_itembar_get_drop_index (PANEL_ITEMBAR (itembar), x, y);
+      panel_itembar_set_drop_highlight_item (PANEL_ITEMBAR (itembar), application->drop_index);
     }
 
 not_a_drop_zone:
