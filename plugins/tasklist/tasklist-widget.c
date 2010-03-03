@@ -1111,6 +1111,7 @@ static void
 xfce_tasklist_connect_screen (XfceTasklist *tasklist)
 {
   GdkScreen *screen;
+  GList     *windows, *li;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->screen == NULL);
@@ -1118,6 +1119,11 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
   /* set the new screen */
   screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
   tasklist->screen = wnck_screen_get (gdk_screen_get_number (screen));
+
+  /* add all existing windows on this screen */
+  windows = wnck_screen_get_windows (tasklist->screen);
+  for (li = windows; li != NULL; li = li->next)
+    xfce_tasklist_window_added (tasklist->screen, li->data, tasklist);
 
   /* monitor screen changes */
   g_signal_connect (G_OBJECT (tasklist->screen), "active-window-changed",
