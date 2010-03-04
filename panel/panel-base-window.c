@@ -29,6 +29,7 @@
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <common/panel-private.h>
 #include <panel/panel-base-window.h>
+#include <panel/panel-window.h>
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-plugin-external-46.h>
 
@@ -56,6 +57,8 @@ static gboolean panel_base_window_enter_notify_event          (GtkWidget        
 static gboolean panel_base_window_leave_notify_event          (GtkWidget            *widget,
                                                                GdkEventCrossing     *event);
 static void     panel_base_window_composited_changed          (GtkWidget            *widget);
+static void     panel_base_window_update_provider_info        (GtkWidget            *widget,
+                                                               gpointer              user_data);
 static gboolean panel_base_window_active_timeout              (gpointer              user_data);
 static void     panel_base_window_active_timeout_destroyed    (gpointer              user_data);
 static void     panel_base_window_set_plugin_background_alpha (GtkWidget            *widget,
@@ -467,6 +470,7 @@ panel_base_window_composited_changed (GtkWidget *widget)
   GdkColormap     *colormap = NULL;
   gboolean         was_composited = window->is_composited;
   gboolean         was_visible;
+  GtkWidget       *itembar;
   GdkScreen       *screen;
 
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (widget));
@@ -505,6 +509,18 @@ panel_base_window_composited_changed (GtkWidget *widget)
 
   if (was_visible)
     {
+      /* we destroyed all external plugin during unrealize, so queue
+       * new provider information for the panel window (not the
+       * autohide window) */
+      if (PANEL_IS_WINDOW (widget))
+        {
+          itembar = gtk_bin_get_child (GTK_BIN (window));
+          panel_return_if_fail (GTK_IS_CONTAINER (itembar));
+          if (G_LIKELY (itembar != NULL))
+            gtk_container_foreach (GTK_CONTAINER (itembar),
+                panel_base_window_update_provider_info, window);
+        }
+
       /* restore the window */
       gtk_widget_realize (widget);
       gtk_widget_show (widget);
@@ -513,6 +529,20 @@ panel_base_window_composited_changed (GtkWidget *widget)
   /* emit the property if it changed */
   if (window->is_composited != was_composited)
     g_object_notify (G_OBJECT (widget), "composited");
+}
+
+
+
+static void
+panel_base_window_update_provider_info (GtkWidget *widget,
+                                        gpointer   user_data)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
+
+  if (PANEL_IS_PLUGIN_EXTERNAL (widget)
+      || PANEL_IS_PLUGIN_EXTERNAL_46 (widget))
+    panel_window_set_povider_info (user_data, widget);
 }
 
 

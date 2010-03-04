@@ -802,7 +802,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   /* swap integers with vertical orientation */
   if (!tasklist->horizontal)
     TRANSPOSE_AREA (area);
-  panel_return_if_fail (area.height == tasklist->size);
+  /*panel_return_if_fail (area.height == tasklist->size);*/
 
   /* TODO if we compare the allocation with the requisition we can
    * do a fast path to the child allocation, i think */

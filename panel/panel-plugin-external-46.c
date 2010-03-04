@@ -59,6 +59,7 @@ static void         panel_plugin_external_46_set_property          (GObject     
                                                                     const GValue                     *value,
                                                                     GParamSpec                       *pspec);
 static void         panel_plugin_external_46_realize               (GtkWidget                        *widget);
+static void         panel_plugin_external_46_unrealize             (GtkWidget                        *widget);
 static gboolean     panel_plugin_external_46_client_event          (GtkWidget                        *widget,
                                                                     GdkEventClient                   *event);
 static gboolean     panel_plugin_external_46_plug_removed          (GtkSocket                        *socket);
@@ -169,6 +170,7 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->realize = panel_plugin_external_46_realize;
+  gtkwidget_class->unrealize = panel_plugin_external_46_unrealize;
   gtkwidget_class->client_event = panel_plugin_external_46_client_event;
 
   gtksocket_class = GTK_SOCKET_CLASS (klass);
@@ -401,6 +403,26 @@ panel_plugin_external_46_realize (GtkWidget *widget)
   g_free (argv);
   g_free (socket_id);
   g_free (unique_id);
+}
+
+
+
+static void
+panel_plugin_external_46_unrealize (GtkWidget *widget)
+{
+  PanelPluginExternal46  *external = PANEL_PLUGIN_EXTERNAL_46 (widget);
+
+  /* the plug is not embedded anymore */
+  external->plug_embedded = FALSE;
+
+  if (external->watch_id != 0)
+    {
+      /* remove the child watch so we don't leave zomies */
+      g_source_remove (external->watch_id);
+      g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+    }
+
+  (*GTK_WIDGET_CLASS (panel_plugin_external_46_parent_class)->unrealize) (widget);
 }
 
 

@@ -63,8 +63,8 @@ static void         panel_plugin_external_set_property          (GObject        
                                                                  guint                              prop_id,
                                                                  const GValue                      *value,
                                                                  GParamSpec                        *pspec);
-static void         panel_plugin_external_destroy               (GtkObject                         *object);
 static void         panel_plugin_external_realize               (GtkWidget                         *widget);
+static void         panel_plugin_external_unrealize             (GtkWidget                         *widget);
 static gboolean     panel_plugin_external_plug_removed          (GtkSocket                         *socket);
 static void         panel_plugin_external_plug_added            (GtkSocket                         *socket);
 static gboolean     panel_plugin_external_dbus_reply            (PanelPluginExternal               *external,
@@ -177,7 +177,6 @@ static void
 panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 {
   GObjectClass   *gobject_class;
-  GtkObjectClass *gtkobject_class;
   GtkWidgetClass *gtkwidget_class;
   GtkSocketClass *gtksocket_class;
 
@@ -187,11 +186,9 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
   gobject_class->set_property = panel_plugin_external_set_property;
   gobject_class->get_property = panel_plugin_external_get_property;
 
-  gtkobject_class = GTK_OBJECT_CLASS (klass);
-  gtkobject_class->destroy = panel_plugin_external_destroy;
-
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->realize = panel_plugin_external_realize;
+  gtkwidget_class->unrealize = panel_plugin_external_unrealize;
 
   gtksocket_class = GTK_SOCKET_CLASS (klass);
   gtksocket_class->plug_removed = panel_plugin_external_plug_removed;
@@ -404,17 +401,6 @@ panel_plugin_external_set_property (GObject      *object,
 
 
 static void
-panel_plugin_external_destroy (GtkObject *object)
-{
-  panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (object),
-                                        TRUE, SIGNAL_WRAPPER_QUIT);
-
-  (*GTK_OBJECT_CLASS (panel_plugin_external_parent_class)->destroy) (object);
-}
-
-
-
-static void
 panel_plugin_external_realize (GtkWidget *widget)
 {
   PanelPluginExternal  *external = PANEL_PLUGIN_EXTERNAL (widget);
@@ -480,6 +466,30 @@ panel_plugin_external_realize (GtkWidget *widget)
   g_free (argv);
   g_free (socket_id);
   g_free (unique_id);
+}
+
+
+
+static void
+panel_plugin_external_unrealize (GtkWidget *widget)
+{
+  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
+
+  /* the plug is not embedded anymore */
+  external->plug_embedded = FALSE;
+
+  if (external->watch_id != 0)
+    {
+      /* remove the child watch so we don't leave zomies */
+      g_source_remove (external->watch_id);
+      g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+    }
+
+  /* quit the plugin */
+  panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (widget),
+                                        TRUE, SIGNAL_WRAPPER_QUIT);
+
+  (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->unrealize) (widget);
 }
 
 

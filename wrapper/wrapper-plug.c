@@ -31,7 +31,6 @@
 
 static gboolean wrapper_plug_expose_event (GtkWidget      *widget,
                                            GdkEventExpose *event);
-static void     wrapper_plug_set_colormap (WrapperPlug    *plug);
 
 
 
@@ -76,18 +75,15 @@ wrapper_plug_class_init (WrapperPlugClass *klass)
 static void
 wrapper_plug_init (WrapperPlug *plug)
 {
-  /* init vars */
+  GdkColormap *colormap = NULL;
+  GdkScreen   *screen;
+
   plug->background_alpha = 1.00;
-  plug->is_composited = FALSE;
 
   gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWrapper");
 
   /* allow painting, else compositing won't work */
   gtk_widget_set_app_paintable (GTK_WIDGET (plug), TRUE);
-
-  /* connect signal to monitor the compositor changes */
-  g_signal_connect (G_OBJECT (plug), "composited-changed",
-      G_CALLBACK (wrapper_plug_set_colormap), NULL);
 
   /* old versions of gtk don't support transparent tray icons, if we
    * set an argb colormap on the tray, the icons won't be embedded because
@@ -97,7 +93,19 @@ wrapper_plug_init (WrapperPlug *plug)
     return;
 
   /* set the colormap */
-  wrapper_plug_set_colormap (plug);
+  screen = gtk_window_get_screen (GTK_WINDOW (plug));
+  plug->is_composited = gtk_widget_is_composited (GTK_WIDGET (plug));
+
+  if (plug->is_composited)
+    colormap = gdk_screen_get_rgba_colormap (screen);
+  if (colormap == NULL)
+    {
+      colormap = gdk_screen_get_rgb_colormap (screen);
+      plug->is_composited = FALSE;
+    }
+
+  if (colormap != NULL)
+    gtk_widget_set_colormap (GTK_WIDGET (plug), colormap);
 }
 
 
@@ -139,68 +147,6 @@ wrapper_plug_expose_event (GtkWidget      *widget,
     }
 
   return GTK_WIDGET_CLASS (wrapper_plug_parent_class)->expose_event (widget, event);
-}
-
-
-
-static void
-wrapper_plug_set_colormap (WrapperPlug *plug)
-{
-  GdkColormap *colormap = NULL;
-  GdkScreen   *screen;
-  gboolean     restore;
-  GtkWidget   *widget = GTK_WIDGET (plug);
-  gint         root_x, root_y;
-
-  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
-
-  /* whether the widget was previously visible */
-  restore = GTK_WIDGET_REALIZED (widget);
-
-  /* unrealize the window if needed */
-  if (restore)
-    {
-      /* store the window position */
-      gtk_window_get_position (GTK_WINDOW (plug), &root_x, &root_y);
-
-      /* hide the widget */
-      gtk_widget_hide (widget);
-      gtk_widget_unrealize (widget);
-    }
-
-  /* set bool */
-  plug->is_composited = gtk_widget_is_composited (widget);
-
-  /* get the screen */
-  screen = gtk_window_get_screen (GTK_WINDOW (plug));
-
-  /* try to get the rgba colormap */
-  if (plug->is_composited)
-    colormap = gdk_screen_get_rgba_colormap (screen);
-
-  /* get the default colormap */
-  if (colormap == NULL)
-    {
-      colormap = gdk_screen_get_rgb_colormap (screen);
-      plug->is_composited = FALSE;
-    }
-
-  /* set the colormap */
-  if (colormap)
-    gtk_widget_set_colormap (widget, colormap);
-
-  /* restore the window */
-  if (restore)
-    {
-      /* restore the position */
-      gtk_window_move (GTK_WINDOW (plug), root_x, root_y);
-
-      /* show the widget again */
-      gtk_widget_realize (widget);
-      gtk_widget_show (widget);
-    }
-
-  gtk_widget_queue_draw (widget);
 }
 
 

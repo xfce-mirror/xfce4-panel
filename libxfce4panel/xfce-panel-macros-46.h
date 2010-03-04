@@ -430,47 +430,6 @@ enum /*< skip >*/
       gtk_main_quit (); \
   } \
   \
-  static void \
-  _xpp_set_colormap (GtkWidget *plug) \
-  { \
-    GdkColormap *colormap = NULL; \
-    GdkScreen   *screen; \
-    gboolean     restore; \
-    \
-    g_return_if_fail (GTK_IS_WIDGET (plug)); \
-    \
-    restore = GTK_WIDGET_REALIZED (plug); \
-    if (restore) \
-      { \
-        gtk_widget_hide (plug); \
-        gtk_widget_unrealize (plug); \
-      } \
-    \
-    screen = gtk_widget_get_screen (plug); \
-    \
-    _xpp_composited = gtk_widget_is_composited (plug); \
-    \
-    if (_xpp_composited) \
-      colormap = gdk_screen_get_rgba_colormap (screen); \
-    \
-    if (colormap == NULL) \
-      { \
-        colormap = gdk_screen_get_rgb_colormap (screen); \
-        _xpp_composited = FALSE; \
-      } \
-    \
-    if (colormap != NULL) \
-      gtk_widget_set_colormap (plug, colormap); \
-    \
-    if (restore) \
-      { \
-        gtk_widget_realize (plug); \
-        gtk_widget_show (plug); \
-      } \
-    \
-    gtk_widget_queue_draw (plug); \
-  } \
-  \
   gint \
   main (gint argc, gchar **argv) \
   { \
@@ -479,6 +438,7 @@ enum /*< skip >*/
     GtkWidget       *xpp; \
     gint             unique_id; \
     GdkNativeWindow  socket_id; \
+    GdkColormap     *colormap = NULL; \
     \
     if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS)) \
       { \
@@ -510,12 +470,20 @@ enum /*< skip >*/
         G_CALLBACK (_xpp_plug_embedded), NULL); \
     g_signal_connect (G_OBJECT (plug), "expose-event", \
         G_CALLBACK (_xpp_expose_event), NULL); \
-    g_signal_connect (G_OBJECT (plug), "composited-changed", \
-        G_CALLBACK (_xpp_set_colormap), NULL); \
     \
     gtk_widget_set_app_paintable (plug, TRUE); \
-    if (gtk_widget_is_composited (plug)) \
-      _xpp_set_colormap (plug); \
+    \
+    screen = gtk_widget_get_screen (plug); \
+    _xpp_composited = gtk_widget_is_composited (plug); \
+    if (_xpp_composited) \
+      colormap = gdk_screen_get_rgba_colormap (screen); \
+    if (colormap == NULL) \
+      { \
+        colormap = gdk_screen_get_rgb_colormap (screen); \
+        _xpp_composited = FALSE; \
+      } \
+    if (colormap != NULL) \
+      gtk_widget_set_colormap (plug, colormap); \
     \
     unique_id = strtol (argv[PLUGIN_ARGV_UNIQUE_ID], NULL, 0); \
     xpp = g_object_new (XFCE_TYPE_PANEL_PLUGIN, \
