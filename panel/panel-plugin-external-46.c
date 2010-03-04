@@ -792,14 +792,24 @@ panel_plugin_external_46_child_watch (GPid     pid,
       switch (WEXITSTATUS (status))
         {
         case PLUGIN_EXIT_SUCCESS:
+          break;
+
         case PLUGIN_EXIT_FAILURE:
         case PLUGIN_EXIT_PREINIT_FAILED:
         case PLUGIN_EXIT_CHECK_FAILED:
         case PLUGIN_EXIT_NO_PROVIDER:
-          /* wait until everything is settled, then destroy the
-           * external plugin so it is removed from the configuration */
+          panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
+                       "Plugin exited with status %d. Removing from "
+                       "configuration.", WEXITSTATUS (status));
+
+          /* cleanup the plugin configuration (in panel-application) */
+          xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (external),
+                                                  PROVIDER_SIGNAL_REMOVE_PLUGIN);
+
+          /* wait until everything is settled */
           exo_gtk_object_destroy_later (GTK_OBJECT (external));
           break;
+
         }
     }
 
