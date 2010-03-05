@@ -1964,6 +1964,7 @@ panel_window_set_autohide (PanelWindow *window,
                             "resizable", TRUE,
                             "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
                             "gravity", GDK_GRAVITY_STATIC,
+                            "name", "XfcePanelWindowHidden",
                             NULL);
 
       /* move the window offscreen */
@@ -2285,6 +2286,7 @@ panel_window_new (void)
                        "resizable", FALSE,
                        "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
                        "gravity", GDK_GRAVITY_STATIC,
+                       "name", "XfcePanelWindow",
                        NULL);
 }
 
