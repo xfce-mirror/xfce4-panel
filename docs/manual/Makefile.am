@@ -18,6 +18,7 @@ MALLARD_PAGES = \
 	showdesktop.page \
 	systray.page \
 	tasklist.page \
+	theming.page \
 	windowmenu.page
 
 LINGUAS = $(shell cd $(srcdir)/po && echo `/bin/ls *.po | sed 's,[.]po,,g'`)
