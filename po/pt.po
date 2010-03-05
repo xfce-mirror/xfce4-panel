@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel-devel\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-24 11:54+0100\n"
-"PO-Revision-Date: 2010-02-24 12:14-0000\n"
+"POT-Creation-Date: 2010-03-04 12:06+0100\n"
+"PO-Revision-Date: 2010-03-04 16:59-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -189,7 +189,7 @@ msgstr "Falha ao enviar a mensagem D-BUS"
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância de %s foi encontrada"
 
-#: ../panel/panel-application.c:194
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "Falha ao lançar a aplicação de migração"
 
@@ -577,27 +577,31 @@ msgid "Select this option to show the generic application name in the menu, for 
 msgstr "Seleccione esta opção para mostrar o nome da aplicação no menu, por exemplo \"Gestor de Ficheiros\" ao invés de \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show application description in t_ooltip"
+msgstr "M_ostrar descrição da aplicação nas dicas"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
 msgstr "Mostrar o nome genérico das _aplicações"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show ic_ons in menu"
 msgstr "Mostrar íc_ones no painel"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Use _default menu file"
 msgstr "Usar ficheiro _de menu omisso"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file"
 msgstr "Usar ficheiro de men_u personalizado"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "Í_cone:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "_Show button title"
 msgstr "_Mostrar título do botão"
 
@@ -605,22 +609,22 @@ msgstr "_Mostrar título do botão"
 msgid "Xfce Menu"
 msgstr "Menu Xfce"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:440
+#: ../plugins/applicationsmenu/applicationsmenu.c:457
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Seleccione Um Ícone"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:683
+#: ../plugins/applicationsmenu/applicationsmenu.c:691
 #: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Falha ao exectar o comando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:837
+#: ../plugins/applicationsmenu/applicationsmenu.c:854
 msgid "No applications found"
 msgstr "Nenhuma aplicação encontrada"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:849
+#: ../plugins/applicationsmenu/applicationsmenu.c:866
 msgid "Failed to load the applications menu"
 msgstr "Falha ao carregar o menu das aplicações"
 
@@ -1155,7 +1159,7 @@ msgstr "Posição do botão s_eta:"
 msgid "Program launcher with optional menu"
 msgstr "Lançador de programas com menu opcional"
 
-#: ../plugins/pager/pager.c:404
+#: ../plugins/pager/pager.c:408
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Incapaz de abrir as definições da área de trabalho"
 
@@ -1348,23 +1352,23 @@ msgstr "A_grupamento de janelas:"
 msgid "Window title"
 msgstr "Título da janela"
 
-#: ../plugins/tasklist/tasklist-widget.c:2282
+#: ../plugins/tasklist/tasklist-widget.c:2314
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar Todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2291
+#: ../plugins/tasklist/tasklist-widget.c:2323
 msgid "Un_minimize All"
 msgstr "Reverter Mini_mização"
 
-#: ../plugins/tasklist/tasklist-widget.c:2297
+#: ../plugins/tasklist/tasklist-widget.c:2329
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar Todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2306
+#: ../plugins/tasklist/tasklist-widget.c:2338
 msgid "_Unmaximize All"
 msgstr "_Reverter Maximização"
 
-#: ../plugins/tasklist/tasklist-widget.c:2316
+#: ../plugins/tasklist/tasklist-widget.c:2348
 msgid "_Close All"
 msgstr "Fechar _Todas"
 
