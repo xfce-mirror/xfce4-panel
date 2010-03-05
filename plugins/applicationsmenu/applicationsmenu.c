@@ -505,6 +505,11 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                               G_OBJECT (object), "active");
     }
 
+  object = gtk_builder_get_object (builder, "button-title");
+  panel_return_if_fail (GTK_IS_ENTRY (object));
+  exo_mutual_binding_new (G_OBJECT (plugin), "button-title",
+                          G_OBJECT (object), "text");
+
   object = gtk_builder_get_object (builder, "icon-button");
   panel_return_if_fail (GTK_IS_BUTTON (object));
   g_signal_connect (G_OBJECT (object), "clicked",
