@@ -256,7 +256,7 @@ applications_menu_plugin_get_property (GObject    *object,
       break;
 
     case PROP_BUTTON_TITLE:
-      g_value_set_string (value, exo_str_is_empty (plugin->button_title) ?
+      g_value_set_string (value, plugin->button_title == NULL ?
           DEFAULT_TITLE : plugin->button_title);
       break;
 
@@ -318,7 +318,8 @@ applications_menu_plugin_set_property (GObject      *object,
       plugin->button_title = g_value_dup_string (value);
       gtk_label_set_text (GTK_LABEL (plugin->label),
           plugin->button_title != NULL ? plugin->button_title : "");
-      gtk_widget_set_tooltip_text (plugin->button, plugin->button_title);
+      gtk_widget_set_tooltip_text (plugin->button,
+          exo_str_is_empty (plugin->button_title) ? NULL : plugin->button_title);
       break;
 
     case PROP_BUTTON_ICON:
