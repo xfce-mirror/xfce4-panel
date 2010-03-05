@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-23 19:41+0100\n"
+"POT-Creation-Date: 2010-03-05 18:04+0100\n"
 "PO-Revision-Date: 2010-02-23 21:14+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -36,20 +36,20 @@ msgstr "Tilpas panelet til Xfce"
 msgid "Panel Preferences"
 msgstr "Panelindstillinger"
 
-#: ../common/panel-builder.c:155
+#: ../common/panel-utils.c:155
 msgid "_Read Online"
 msgstr "_Læs på internet"
 
-#: ../common/panel-builder.c:156
+#: ../common/panel-utils.c:156
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr "Du kan læse brugermanualen på internettet. Den manual kan være ikke helt i overenstemmelse med din panelversion."
 
-#: ../common/panel-builder.c:158
+#: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
 msgstr "Manualen til panelet til Xfce er ikke installeret på din computer"
 
 #. display an error message to the user
-#: ../common/panel-builder.c:171
+#: ../common/panel-utils.c:171
 msgid "Failed to open the documentation browser"
 msgstr "Kunne ikke åbne dokumentationsbrowseren"
 
@@ -71,20 +71,17 @@ msgid "_Move"
 msgstr "_Flyt"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-window.c:2076
+#: ../libxfce4panel/xfce-panel-plugin.c:1037 ../panel/panel-window.c:2076
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1048
-#: ../panel/panel-window.c:2087
+#: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-window.c:2087
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1072
-#: ../panel/panel-window.c:2110
+#: ../libxfce4panel/xfce-panel-plugin.c:1072 ../panel/panel-window.c:2110
 msgid "_Restart"
 msgstr "_Genstart"
 
@@ -92,8 +89,7 @@ msgstr "_Genstart"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Vis dialogen 'Panelindstillinger'"
 
-#: ../panel/main.c:75
-#: ../panel/main.c:76
+#: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
@@ -190,7 +186,7 @@ msgstr "Kunne ikke sende D-bus-besked"
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
 
-#: ../panel/panel-application.c:194
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "Kunne ikke starte migrationsprogrammet"
 
@@ -216,8 +212,7 @@ msgstr ""
 "Mere info: http://www.dansk-gruppen.dk"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:102 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Tilføj nyt element"
 
@@ -226,8 +221,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Vælg venligst et panel for det nye udvidelsesmodul:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:616
+#: ../panel/panel-dialogs.c:127 ../panel/panel-preferences-dialog.c:616
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -349,7 +343,8 @@ msgstr "Ele_menter"
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Measurements"
 msgstr "Dimensioner til panel"
@@ -582,27 +577,31 @@ msgid "Select this option to show the generic application name in the menu, for 
 msgstr "Vælg denne indstilling for at vise det generiske navn i menuen, eksempelvis \"Filhåndtering\" i stedet for \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show application description in t_ooltip"
+msgstr "Vis programbeskrivelse i værktøjs_tips"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
 msgstr "Vis generiske programn_avne"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show ic_ons in menu"
 msgstr "Vis ik_oner i menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Use _default menu file"
 msgstr "Brug _standardmenufil"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file"
 msgstr "Brug t_ilpasset menufil"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "_Ikon:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "_Show button title"
 msgstr "_Vis knaptitel"
 
@@ -610,22 +609,22 @@ msgstr "_Vis knaptitel"
 msgid "Xfce Menu"
 msgstr "Xfce's menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:440
+#: ../plugins/applicationsmenu/applicationsmenu.c:457
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Vælg et ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:682
+#: ../plugins/applicationsmenu/applicationsmenu.c:691
 #: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:836
+#: ../plugins/applicationsmenu/applicationsmenu.c:854
 msgid "No applications found"
 msgstr "Ingen programmer blev fundet"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:848
+#: ../plugins/applicationsmenu/applicationsmenu.c:866
 msgid "Failed to load the applications menu"
 msgstr "Kunne ikke starte programmenu"
 
@@ -708,7 +707,8 @@ msgstr "Vis _sekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "I_ntervaller:"
@@ -990,36 +990,36 @@ msgstr "tolv"
 msgid "What time is it?"
 msgstr "Hvad er klokken?"
 
-#: ../plugins/directorymenu/directorymenu.c:549
+#: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Kunne ikke starte program \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:580
+#: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Kunne ikke forespørge om indholdstype for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:589
+#: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Standardprogram for \"%s\" blev ikke fundet"
 
-#: ../plugins/directorymenu/directorymenu.c:604
+#: ../plugins/directorymenu/directorymenu.c:605
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Kunne ikke starte standardprogram for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:695
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Kunne ikke køre det foretrukne program for kategori \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:768
+#: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
 msgstr "Åbn mappe"
 
-#: ../plugins/directorymenu/directorymenu.c:779
+#: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
 msgstr "Åbn i terminal"
 
@@ -1161,7 +1161,7 @@ msgstr "Position af p_ilknap:"
 msgid "Program launcher with optional menu"
 msgstr "Program afvikler med valgfri menu"
 
-#: ../plugins/pager/pager.c:404
+#: ../plugins/pager/pager.c:408
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Kunne ikke åbne arbejdsområdeindstillingerne til Xfce"
 
@@ -1354,23 +1354,23 @@ msgstr "Vindue_gruppering:"
 msgid "Window title"
 msgstr "Vinduestitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2282
+#: ../plugins/tasklist/tasklist-widget.c:2314
 msgid "Mi_nimize All"
 msgstr "Mi_nimér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2291
+#: ../plugins/tasklist/tasklist-widget.c:2323
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2297
+#: ../plugins/tasklist/tasklist-widget.c:2329
 msgid "Ma_ximize All"
 msgstr "Maksi_mér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2306
+#: ../plugins/tasklist/tasklist-widget.c:2338
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2316
+#: ../plugins/tasklist/tasklist-widget.c:2348
 msgid "_Close All"
 msgstr "_Luk alle"
 
@@ -1378,33 +1378,33 @@ msgstr "_Luk alle"
 msgid "Switch between open windows using buttons"
 msgstr "Skift mellem åbne vinduer ved brug af knapper"
 
-#: ../plugins/windowmenu/windowmenu.c:651
+#: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: ../plugins/windowmenu/windowmenu.c:853
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbejdsområde %d"
 
-#: ../plugins/windowmenu/windowmenu.c:1242
+#: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
 msgstr "Ingen vinduer"
 
-#: ../plugins/windowmenu/windowmenu.c:1257
+#: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
 msgstr "Presserende vinduer"
 
-#: ../plugins/windowmenu/windowmenu.c:1299
+#: ../plugins/windowmenu/windowmenu.c:1300
 msgid "Add Workspace"
 msgstr "Tilføj arbejdsområde"
 
-#: ../plugins/windowmenu/windowmenu.c:1319
+#: ../plugins/windowmenu/windowmenu.c:1320
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Fjern arbejdsområde \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1321
+#: ../plugins/windowmenu/windowmenu.c:1322
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Fjern arbejdsområde %d"
@@ -1440,6 +1440,6 @@ msgstr "Skift mellem åbne vinduer ved brug afen menu"
 
 #~ msgid "Failed to open manual"
 #~ msgstr "Kunne ikke åbne manual"
+
 #~ msgid "Action Button"
 #~ msgstr "Hændelsesknap"
-
