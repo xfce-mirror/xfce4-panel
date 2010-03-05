@@ -80,7 +80,7 @@ wrapper_plug_init (WrapperPlug *plug)
 
   plug->background_alpha = 1.00;
 
-  gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWrapper");
+  gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWindowWrapper");
 
   /* allow painting, else compositing won't work */
   gtk_widget_set_app_paintable (GTK_WIDGET (plug), TRUE);
