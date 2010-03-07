@@ -145,6 +145,10 @@ if test x"$enable_gen_doc" = x"yes"; then
   [
     enable_gen_doc=no
   ])
+
+  if test x"$enable_gen_doc" = x"no"; then
+    AC_MSG_ERROR([Compiling with --enable-gen-doc but no suitable gnome-doc-utils found.])
+  fi
 fi
 AM_CONDITIONAL([GENERATE_DOCUMENTATION], [test x"$enable_gen_doc" = x"yes"])
 
@@ -261,5 +265,11 @@ echo "Build Configuration:"
 echo
 echo "* Debug Support:          $enable_debug"
 echo "* GNU Visibility:         $have_gnuc_visibility"
-echo "* Generate Documentation: $enable_gen_doc"
+if test x"$enable_gen_doc" = x"yes"; then
+echo "* Documentation:          yes (generate)"
+elif test -d "${srcdir}/docs/manual/html"; then
+echo "* Documentation:          yes (in tarball)"
+else
+echo "* Documentation:          no"
+fi
 echo
