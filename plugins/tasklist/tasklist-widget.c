@@ -1951,13 +1951,15 @@ static void
 xfce_tasklist_button_workspace_changed (WnckWindow        *window,
                                         XfceTasklistChild *child)
 {
+  XfceTasklist *tasklist = XFCE_TASKLIST (child->tasklist);
+
   panel_return_if_fail (child->window == window);
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
 
-  if (child->tasklist->all_workspaces)
-    xfce_tasklist_sort (child->tasklist);
-  else if (!wnck_window_is_pinned (child->window))
-    gtk_widget_hide (child->button);
+  if (tasklist->all_workspaces)
+    xfce_tasklist_sort (tasklist);
+  else
+    xfce_tasklist_active_workspace_changed (tasklist->screen, NULL, tasklist);
 }
 
 
