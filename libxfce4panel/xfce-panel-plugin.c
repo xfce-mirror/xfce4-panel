@@ -100,6 +100,8 @@ static void          xfce_panel_plugin_set_locked             (XfcePanelPluginPr
                                                                gboolean                          locked);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                          data,
                                                                GObject                          *where_the_object_was);
+static void          xfce_panel_plugin_menu_item_destroy      (GtkWidget                        *item,
+                                                               XfcePanelPlugin                  *plugin);
 
 
 
@@ -155,6 +157,7 @@ struct _XfcePanelPluginPrivate
   GtkOrientation       orientation;
   XfceScreenPosition   screen_position;
   guint                locked : 1;
+  GSList              *menu_items;
 
   /* flags for rembering states */
   PluginFlags          flags;
@@ -575,6 +578,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->panel_lock = 0;
   plugin->priv->flags = 0;
   plugin->priv->locked = TRUE;
+  plugin->priv->menu_items = NULL;
 
   /* hide the event box window to make the plugin transparent */
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
@@ -731,10 +735,25 @@ static void
 xfce_panel_plugin_finalize (GObject *object)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (object);
+  GSList          *li;
 
   /* destroy the menu */
-  if (plugin->priv->menu)
-    gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
+  if (plugin->priv->menu != NULL)
+    {
+      gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
+      panel_assert (plugin->priv->menu_items == NULL);
+    }
+  else
+    {
+      /* release custom menu items */
+      for (li = plugin->priv->menu_items; li != NULL; li = li->next)
+        {
+          g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
+              G_CALLBACK (xfce_panel_plugin_menu_item_destroy), plugin);
+          g_object_unref (G_OBJECT (li->data));
+        }
+      g_slist_free (plugin->priv->menu_items);
+    }
 
   g_free (plugin->priv->name);
   g_free (plugin->priv->display_name);
@@ -947,6 +966,26 @@ xfce_panel_plugin_menu_panel_help (XfcePanelPlugin *plugin)
 
 
 
+static void
+xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
+{
+  GSList *li;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+
+  if (plugin->priv->menu != NULL)
+    {
+      /* remove custom items before they get destroyed */
+      for (li = plugin->priv->menu_items; li != NULL; li = li->next)
+        gtk_container_remove (GTK_CONTAINER (plugin->priv->menu), GTK_WIDGET (li->data));
+
+      gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
+      plugin->priv->menu = NULL;
+    }
+}
+
+
+
 static GtkMenu *
 xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 {
@@ -954,6 +993,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
   GtkWidget *item;
   GtkWidget *image;
   gboolean   locked;
+  GSList    *li;
 
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
@@ -1005,6 +1045,10 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
           image = gtk_image_new_from_stock (GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_MENU);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
           gtk_widget_show (image);
+
+          /* add custom menu items */
+          for (li = plugin->priv->menu_items; li != NULL; li = li->next)
+            gtk_menu_shell_append (GTK_MENU_SHELL (menu), GTK_WIDGET (li->data));
 
           /* separator */
           item = gtk_separator_menu_item_new ();
@@ -1331,11 +1375,7 @@ xfce_panel_plugin_set_locked (XfcePanelPluginProvider *provider,
       plugin->priv->locked = locked;
 
       /* destroy the menu if it exists */
-      if (plugin->priv->menu != NULL)
-        {
-          gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
-          plugin->priv->menu = NULL;
-        }
+      xfce_panel_plugin_menu_destroy (plugin);
     }
 }
 
@@ -1354,6 +1394,21 @@ xfce_panel_plugin_take_window_notify (gpointer  data,
   /* destroy the dialog if the plugin was finalized */
   if (GTK_IS_WINDOW (data))
     gtk_widget_destroy (GTK_WIDGET (data));
+}
+
+
+
+static void
+xfce_panel_plugin_menu_item_destroy (GtkWidget       *item,
+                                     XfcePanelPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_MENU_ITEM (item));
+  panel_return_if_fail (g_slist_find (plugin->priv->menu_items, item) != NULL);
+
+  /* remote the item from the list and release it */
+  plugin->priv->menu_items = g_slist_remove (plugin->priv->menu_items, item);
+  g_object_unref (G_OBJECT (item));
 }
 
 
@@ -1674,14 +1729,17 @@ void
 xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
                                     GtkMenuItem     *item)
 {
-  GtkMenu *menu;
-
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_MENU_ITEM (item));
 
-  /* insert the new item below the move entry */
-  menu = xfce_panel_plugin_menu_get (plugin);
-  gtk_menu_shell_insert (GTK_MENU_SHELL (menu), GTK_WIDGET (item), 5);
+  /* take the item and add to internal list */
+  plugin->priv->menu_items = g_slist_prepend (plugin->priv->menu_items,
+                                              g_object_ref_sink (item));
+  g_signal_connect (G_OBJECT (item), "destroy",
+      G_CALLBACK (xfce_panel_plugin_menu_item_destroy), plugin);
+
+  /* destroy the menu */
+  xfce_panel_plugin_menu_destroy (plugin);
 }
 
 
