@@ -287,7 +287,6 @@ msgid "Internal name: %s-%d"
 msgstr "Внутрішня назва: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "Add a new panel"
 msgstr "Додати нову панель"
 
@@ -423,7 +422,7 @@ msgstr "_Залишити:"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "_Lock panel"
-msgstr ""
+msgstr "_Заблокувати панель"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_Orientation:"
@@ -435,51 +434,47 @@ msgstr "Розм_ір (пікселів):"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
-msgstr ""
+msgstr "Запрошуємо до першого старту панелі Xfce"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh inital configuration."
-msgstr ""
+msgstr "Через переміщення панелі на нову систему збереження властивостей, вона завантажує свіжу початкову конфігурацію."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Виберіть нижче, з яким налаштуванням Ви хочете розпочати перший старт."
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
-msgstr ""
+msgstr "Міграція старої конфігурації"
 
 #: ../migrate/main.c:90
-#, fuzzy
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Зберегти конфігурацію панелі"
+msgstr "Міграція старої конфігурації 4.6 на Xfconf"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
-msgstr ""
+msgstr "Використовувати типову конфігурацію"
 
 #: ../migrate/main.c:96
-#, fuzzy
 msgid "Load the default configuration"
-msgstr "Зберегти конфігурацію панелі"
+msgstr "Завантажити типову конфігурацію"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
-msgstr ""
+msgstr "Одна порожня панель"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Стартувати з однією порожньою панеллю"
 
 #: ../migrate/main.c:115
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Зберегти конфігурацію панелі"
+msgstr "Не вдалось провести міграцію старої конфігурації панелі"
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Зберегти конфігурацію панелі"
+msgstr "Не вдалось завантажити типову конфігурацію"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -488,33 +483,29 @@ msgstr "Кнопки дій"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Button Actions"
-msgstr ""
+msgstr "Дії кнопок"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "Кнопка зі _стрілкою"
+msgstr "Перш_а кнопка:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "Кнопка зі _значком"
+msgstr "_Друга кнопка:"
 
 #: ../plugins/actions/actions.c:108
-#, fuzzy
 msgid "Disabled"
-msgstr "Ви_мкнено"
+msgstr "Вимкнуто"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr ""
+msgstr "Діалог виходу з сеансу"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr ""
+msgstr "Вийти з сеансу"
 
 #: ../plugins/actions/actions.c:111
-#, fuzzy
 msgid "Lock Screen"
 msgstr "Блокувати екран"
 
@@ -1082,48 +1073,44 @@ msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Дійсно бажаєте видалити робочу область '%s'?"
 
 #: ../plugins/launcher/launcher-dialog.c:668
-#, fuzzy
 msgid "Unnamed item"
-msgstr "Неназваний"
+msgstr "Неназваний елемент"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Failed to remove the desktop file from the config directory"
-msgstr ""
+msgstr "Не вдалось видалити файл стільниці з теки конфігурації"
 
 #: ../plugins/launcher/launcher-dialog.c:723
-#, fuzzy
 msgid "Failed to open desktop item editor"
-msgstr "Помилка відкривання дисплею"
+msgstr "Не вдалось відкрити редактор елементів стільниці"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new empty item"
-msgstr "Додати нову панель"
+msgstr "Додати нову порожню панель"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
-msgstr ""
+msgstr "Додати одну або більше наявних елементів до запускача"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "Розширений"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
 msgstr "Типова"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
-#, fuzzy
 msgid "Delete the currently selected item"
-msgstr "Видалити поточну виділену панель"
+msgstr "Видалити поточну виділений елемент"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "Вимкнути с_пливаючі повідомлення"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
+msgstr "Схід"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
@@ -1136,20 +1123,19 @@ msgstr "Запуск програм"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "Північ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr ""
+msgstr "Виберіть цю опцію щоб вимкнути спливаючі повідомлення над кнопками панелі чи елементами меню."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Виберіть цю опцію для переміщення натиснутого елементу меню на панель."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
 msgid "Show _label instead of icon"
-msgstr "Показувати значки _програм"
+msgstr "Показувати _мітки замість значків"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
@@ -1370,28 +1356,27 @@ msgstr "Мінімізува_ти всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:2390
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Д_емінімізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:2396
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Ма_ксимінімізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:2405
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "Демаксимі_німізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:2415
 msgid "_Close All"
-msgstr ""
+msgstr "Закрити в_сі"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
 msgstr "Перемикатись між відкритими вікнами використовуючи кнопки"
 
 #: ../plugins/windowmenu/windowmenu.c:652
-#, fuzzy
 msgid "Desktop"
-msgstr "Показати Стільницю"
+msgstr "Стільниця"
 
 #: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
@@ -1399,13 +1384,12 @@ msgid "Workspace %d"
 msgstr "Робоча область %d"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
-#, fuzzy
 msgid "No Windows"
-msgstr "Список вікон"
+msgstr "Без вікон"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Важливі вікна"
 
 #: ../plugins/windowmenu/windowmenu.c:1300
 #, fuzzy
