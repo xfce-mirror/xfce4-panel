@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
@@ -113,7 +113,7 @@ msgstr "Перезапустити діючі екземпляри панелі"
 
 #: ../panel/main.c:80
 msgid "Quit the running panel instance"
-msgstr ""
+msgstr "Завершення запущених екземплярів панелі"
 
 #: ../panel/main.c:81
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -125,12 +125,12 @@ msgstr "Надрукувати інформацію про версію і ви�
 #. parse context options
 #: ../panel/main.c:149
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[АРГУМЕНТИ...]"
 
 #: ../panel/main.c:156
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Наберіть \"%s --help\" для використання."
 
 #: ../panel/main.c:175
 msgid "The Xfce development team. All rights reserved."
@@ -142,85 +142,77 @@ msgid "Please report bugs to <%s>."
 msgstr "Сповістіть про помилку на <%s>."
 
 #: ../panel/main.c:222
-#, fuzzy
 msgid "There is already a running instance"
-msgstr "Область повідомлень вже запущена на цьому екрані"
+msgstr "Вже існує запущений екземпляр"
 
 #. spawn ourselfs again
 #: ../panel/main.c:262
-#, fuzzy
 msgid "Restarting..."
-msgstr "Перезапустити"
+msgstr "Перезапустити..."
 
 #: ../panel/main.c:277
-#, fuzzy
 msgid "Failed to show the preferences dialog"
-msgstr "Помилка відкривання дисплею"
+msgstr "Не вдалось відобразити діалог налаштування"
 
 #: ../panel/main.c:279
-#, fuzzy
 msgid "Failed to show the add new items dialog"
-msgstr "Показати діалог 'Додати нові елементи'"
+msgstr "Не вдалось відобразити діалог додавання нових елементів"
 
 #: ../panel/main.c:281
-#, fuzzy
 msgid "Failed to save the panel configuration"
-msgstr "Зберегти конфігурацію панелі"
+msgstr "Не вдалось зберегти конфігурацію панелі"
 
 #: ../panel/main.c:283
 msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgstr "Не вдалось додати розширення до панелі"
 
 #: ../panel/main.c:285
 msgid "Failed to restart the panel"
-msgstr ""
+msgstr "Не вдалось перезапустити панель"
 
 #: ../panel/main.c:287
-#, fuzzy
 msgid "Failed to quit the panel"
-msgstr "Помилка відкривання дисплею"
+msgstr "Не вдалось вийти з панелі"
 
 #: ../panel/main.c:289
-#, fuzzy
 msgid "Failed to send D-Bus message"
-msgstr "Помилка відкривання дисплею"
+msgstr "Не вдалось відіслати повідомлення D-Bus"
 
 #. I18N: %s is replaced with xfce4-panel
 #: ../panel/main.c:296
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Не знайдено запущених екземплярів %s"
 
 #: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Не вдалось запустити програму міграції"
 
 #: ../panel/panel-dbus-client.c:227
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Присвоєно неправильну подію плагіну. Використовуйте ПЛАГІН-НАЗВА:НАЗВА[:ТИП:ЗНАЧЕННЯ]."
 
 #: ../panel/panel-dbus-client.c:260
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
+msgstr "Неправильний тип виклику \"%s\". Правильними типами є bool, double, int, string та uint."
 
 #: ../panel/panel-dialogs.c:57
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Панель для середовища стільниці Xfce"
 
 #: ../panel/panel-dialogs.c:62
 msgid "translator-credits"
-msgstr ""
+msgstr "переклад Дмитра Нікітіна"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:102 ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
 msgid "Add New Item"
-msgstr "Додати нові елементи"
+msgstr "Додати новий елемент"
 
 #: ../panel/panel-dialogs.c:116
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Будь-ласка виберіть панель для нового розширення:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:127 ../panel/panel-preferences-dialog.c:616
@@ -627,73 +619,67 @@ msgstr "Вибрати значок"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:697
 #: ../plugins/launcher/launcher.c:2095
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Не вдається запустити \"%s\""
+msgstr "Не вдається виконати команду \"%s\"."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:860
-#, fuzzy
 msgid "No applications found"
-msgstr "Вибрати значок для \"%s\""
+msgstr "Не знайдено програми"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:872
-#, fuzzy
 msgid "Failed to load the applications menu"
-msgstr "Не вдається запустити \"%s\""
+msgstr "Не вдалось завантажити меню програм"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "Показати меню, що включає категорії встановлених програм"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "Використання:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "ОПЦІЯ"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
-#, fuzzy
 msgid "Options:"
-msgstr "Параметри годинника"
+msgstr "Опції:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Спливаюче меню в позиції вказівника миші"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "Використовувати пл_аскі кнопки"
+msgstr "Показати опції допомоги"
 
 #: ../plugins/clock/clock.c:144
 msgid "Week %V"
-msgstr ""
+msgstr "Тиждень %V"
 
 #: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Не вдалось виконати команду годинника"
 
 #: ../plugins/clock/clock.c:677
-#, fuzzy
 msgid "Custom Format"
-msgstr "Довільне"
+msgstr "Довільний формат"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
 msgid "24-_hour clock"
-msgstr "Використовувати 24-_годинний формат"
+msgstr "24-годинний фо_рмат годинника"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -722,22 +708,21 @@ msgstr "Відображати _секунди"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr ""
+msgstr "Ф_ормат:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Прибли_зність:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-#, fuzzy
 msgid "Fl_ash time seperators"
-msgstr "Б_лимання роздільників годинника"
+msgstr "Розділювачі часу _Флеш"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
-msgstr ""
+msgstr "Приблизно"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
@@ -754,17 +739,16 @@ msgstr "Відображати _рамку"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Показати _неактивні крапки"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
-#, fuzzy
 msgid "Show gri_d"
-msgstr "Відображати _заголовок"
+msgstr "_Відображати розділювач"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr ""
+msgstr "Формат, що описує частину дати і часу, який вставляється в назву файла. Наприклад, %Y буде замінятись роком, %m - місяцем і %d - днем. Дивіться документацію утиліти дати для додаткової інформації."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -820,27 +804,27 @@ msgstr "о %0 годині"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "п'ять хвилин на %0"
+msgstr "п'ять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "десять хвилин на %0"
+msgstr "десять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "п'ятнадцять хвилин на %0"
+msgstr "п'ятнадцять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "двадцять хвилин на %0"
+msgstr "двадцять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "двадцять п'ять хвилин на %0"
+msgstr "двадцять п'ять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
@@ -850,32 +834,32 @@ msgstr "половина %0"
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "за двадцять п'ять хвилин %1"
+msgstr "за двадцять п'ять %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr "за двадцять хвилин %1"
+msgstr "за двадцять %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr "за п'ятнадцять хвилин %1"
+msgstr "за п'ятнадцять %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "за десять %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr ""
+msgstr "за п'ять %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1 годині"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -959,19 +943,19 @@ msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
-msgstr ""
+msgstr "одна"
 
 #: ../plugins/clock/clock-fuzzy.c:137
 msgid "two"
-msgstr ""
+msgstr "дві"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
-msgstr ""
+msgstr "три"
 
 #: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
-msgstr ""
+msgstr "чотири"
 
 #: ../plugins/clock/clock-fuzzy.c:140
 msgid "five"
@@ -1197,9 +1181,8 @@ msgid "Behaviour"
 msgstr "Заголовок"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
 msgid "Number of _rows:"
-msgstr "Кількість _рядків:"
+msgstr "Кількість ряд_ків:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
@@ -1286,14 +1269,12 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ви впевнені, що бажаєте очистити список відомих програм?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
 msgid "C_lear Known Applications"
-msgstr "Вибрати програму"
+msgstr "Очистити ві_домі програми"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
 msgid "Known Applications"
-msgstr "Приховані програми"
+msgstr "Відомі програми"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
@@ -1315,32 +1296,31 @@ msgstr "Область де відображаються значки спові
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "Завжди"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "Малювати ві_кно фрейму, коли кнопка статична"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Групувати назву і штамп часу"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "Групувати назву і назву вікна"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "Ніколи"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Відновити мінімізовані вікна для поточної _робочої області"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#, fuzzy
 msgid "Show _flat buttons"
-msgstr "Використовувати пл_аскі кнопки"
+msgstr "Відображати пл_аскі кнопки"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _handle"
@@ -1348,48 +1328,45 @@ msgstr "Відображати _заголовок"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show button _labels"
-msgstr ""
+msgstr "Ві_дображати мітки кнопки"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Показувати тіл_ьки мінімізовані вікна"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Show windows from _all workspaces"
-msgstr "Показувати _вікна з усіх робочих областей"
+msgstr "Показувати вікна з _усіх робочих областей"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Sorting _order:"
-msgstr ""
+msgstr "Порядок _сортування:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
-msgstr ""
+msgstr "Відображення часу"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
-msgstr ""
+msgstr "Коли мало місця"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
 msgid "Window Buttons"
-msgstr "Кнопки дій"
+msgstr "Кнопки вікна"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr ""
+msgstr "Гру_пування вікон:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#, fuzzy
 msgid "Window title"
-msgstr "Список вікон"
+msgstr "Заголовок вікна"
 
 #: ../plugins/tasklist/tasklist-widget.c:2381
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Мінімізува_ти всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:2390
 msgid "Un_minimize All"
