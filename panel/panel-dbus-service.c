@@ -54,6 +54,7 @@ static gboolean  panel_dbus_service_add_new_item               (PanelDBusService
                                                                 const gchar        *plugin_name,
                                                                 gchar             **arguments,
                                                                 GError            **error);
+static void      panel_dbus_service_plugin_event_free          (gpointer            data);
 static gboolean  panel_dbus_service_plugin_event               (PanelDBusService  *service,
                                                                 const gchar       *plugin_name,
                                                                 const gchar       *name,
@@ -81,7 +82,19 @@ struct _PanelDBusService
 
   /* the dbus connection */
   DBusGConnection *connection;
+
+  /* queue for remote-events */
+  GHashTable      *remote_events;
 };
+
+typedef struct
+{
+  guint   handle;
+  gchar  *name;
+  GValue  value;
+  GSList *plugins;
+}
+PluginEvent;
 
 
 
@@ -114,6 +127,9 @@ panel_dbus_service_init (PanelDBusService *service)
   GError         *error = NULL;
   DBusConnection *connection;
 
+  service->remote_events = g_hash_table_new_full (g_int_hash, g_int_equal, NULL,
+                                                  panel_dbus_service_plugin_event_free);
+
   service->connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
   if (G_LIKELY (service->connection != NULL))
     {
@@ -141,6 +157,8 @@ panel_dbus_service_finalize (GObject *object)
   PanelDBusService *service = PANEL_DBUS_SERVICE (object);
   DBusConnection   *connection;
 
+  panel_return_if_fail (g_hash_table_size (service->remote_events) == 0);
+
   if (G_LIKELY (service->connection != NULL))
     {
       /* release the org.xfce.Panel name */
@@ -150,6 +168,8 @@ panel_dbus_service_finalize (GObject *object)
 
       dbus_g_connection_unref (service->connection);
     }
+
+  g_hash_table_destroy (service->remote_events);
 
   (*G_OBJECT_CLASS (panel_dbus_service_parent_class)->finalize) (object);
 }
@@ -242,6 +262,82 @@ panel_dbus_service_add_new_item (PanelDBusService  *service,
 
 
 
+static void
+panel_dbus_service_plugin_event_free (gpointer data)
+{
+  PluginEvent *event = data;
+
+  g_value_unset (&event->value);
+  g_free (event->name);
+  g_slist_free (event->plugins);
+  g_slice_free (PluginEvent, event);
+}
+
+
+
+static void
+panel_dbus_service_plugin_event_result (XfcePanelPluginProvider *prev_provider,
+                                        guint                    handle,
+                                        gboolean                 result,
+                                        PanelDBusService        *service)
+{
+  PluginEvent             *event;
+  GSList                  *li, *lnext;
+  XfcePanelPluginProvider *provider;
+  guint                    new_handle;
+  gboolean                 new_result;
+
+  g_signal_handlers_disconnect_by_func (G_OBJECT (prev_provider),
+      G_CALLBACK (panel_dbus_service_plugin_event_result), service);
+
+  event = g_hash_table_lookup (service->remote_events, &handle);
+  if (G_LIKELY (event != NULL))
+    {
+      panel_assert (event->handle == handle);
+      if (!result)
+        {
+          for (li = event->plugins, new_handle = 0; li != NULL; li = lnext, new_handle = 0)
+            {
+              lnext = li->next;
+              provider = li->data;
+              event->plugins = g_slist_delete_link (event->plugins, li);
+
+              /* maybe the plugin has been destroyed */
+              if (!XFCE_PANEL_PLUGIN_PROVIDER (provider))
+                continue;
+
+              new_result = xfce_panel_plugin_provider_remote_event (provider, event->name,
+                                                                    &event->value, &new_handle);
+
+              if (new_handle > 0 && lnext != NULL)
+                {
+                  /* steal the old value */
+                  g_hash_table_steal (service->remote_events, &handle);
+
+                  /* update handle and insert again */
+                  event->handle = new_handle;
+                  g_hash_table_insert (service->remote_events, &event->handle, event);
+                  g_signal_connect (G_OBJECT (provider), "remote-event-result",
+                      G_CALLBACK (panel_dbus_service_plugin_event_result), service);
+
+                  /* leave and wait for reply */
+                  return;
+                }
+              else if (new_result)
+                {
+                  /* we're done, remove from hash table below */
+                  break;
+                }
+            }
+        }
+
+      /* handle can be removed */
+      g_hash_table_remove (service->remote_events, &handle);
+    }
+}
+
+
+
 static gboolean
 panel_dbus_service_plugin_event (PanelDBusService  *service,
                                  const gchar       *plugin_name,
@@ -249,9 +345,11 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
                                  const GValue      *value,
                                  GError           **error)
 {
-  GSList             *plugins, *li;
+  GSList             *plugins, *li, *lnext;
   PanelModuleFactory *factory;
-  const GValue       *real_value = value;
+  PluginEvent        *event;
+  guint               handle;
+  gboolean            result;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -259,22 +357,41 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
   panel_return_val_if_fail (name != NULL, FALSE);
   panel_return_val_if_fail (G_IS_VALUE (value), FALSE);
 
-  /* if no type and value is send with the signal we send a char type
-   * with nul value */
-  if (G_VALUE_HOLDS_UCHAR (value)
-      && g_value_get_uchar (value) == '\0')
-    real_value = NULL;
-
   /* send the event to all matching plugins, break if one of the
-   * plugins return TRUE in this remote-event handler */
+   * plugins returns TRUE in this remote-event handler */
   factory = panel_module_factory_get ();
   plugins = panel_module_factory_get_plugins (factory, plugin_name);
-  for (li = plugins; li != NULL; li = li->next)
+
+  for (li = plugins, handle = 0; li != NULL; li = lnext, handle = 0)
     {
+      lnext = li->next;
+
       panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (li->data), FALSE);
-      if (xfce_panel_plugin_provider_remote_event (li->data, name, real_value))
-        break;
+      result = xfce_panel_plugin_provider_remote_event (li->data, name, value, &handle);
+
+      if (handle > 0 && lnext != NULL)
+        {
+          event = g_slice_new0 (PluginEvent);
+          event->handle = handle;
+          event->name = g_strdup (name);
+          event->plugins = g_slist_copy (lnext);
+          g_value_init (&event->value, G_VALUE_TYPE (value));
+          g_value_copy (value, &event->value);
+
+          g_hash_table_insert (service->remote_events, &event->handle, event);
+          g_signal_connect (G_OBJECT (li->data), "remote-event-result",
+              G_CALLBACK (panel_dbus_service_plugin_event_result), service);
+
+          /* we're going to wait until the plugin replied */
+          break;
+        }
+      else if (result)
+        {
+          /* plugin returned %TRUE, so abort the event notification */
+          break;
+        }
     }
+
   g_slist_free (plugins);
   g_object_unref (G_OBJECT (factory));
 

@@ -15,6 +15,8 @@ bin_PROGRAMS = \
 xfce4_panel_built_sources = \
 	panel-dbus-service-infos.h \
 	panel-dbus-client-infos.h \
+	panel-marshal.c \
+	panel-marshal.h \
 	panel-plugin-external-infos.h \
 	panel-preferences-dialog-ui.h
 
@@ -80,6 +82,13 @@ xfce4_panel_DEPENDENCIES = \
 
 if MAINTAINER_MODE
 
+panel-marshal.h: panel-marshal.list Makefile
+	$(AM_V_GEN) glib-genmarshal --prefix=_panel_marshal --internal --header $< > $@
+
+panel-marshal.c: panel-marshal.list Makefile
+	$(AM_V_GEN) echo "#include <panel/panel-marshal.h>" > $@ \
+	&& glib-genmarshal --prefix=_panel_marshal --body $< >> $@
+
 panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $< > $@
 
@@ -110,6 +119,7 @@ endif
 EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
 	panel-plugin-external-infos.xml \
-	panel-preferences-dialog.glade
+	panel-preferences-dialog.glade \
+	panel-marshal.list
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

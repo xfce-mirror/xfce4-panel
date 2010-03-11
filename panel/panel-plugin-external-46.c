@@ -86,7 +86,8 @@ static void         panel_plugin_external_46_show_about            (XfcePanelPlu
 static void         panel_plugin_external_46_removed               (XfcePanelPluginProvider          *provider);
 static gboolean     panel_plugin_external_46_remote_event          (XfcePanelPluginProvider          *provider,
                                                                     const gchar                      *name,
-                                                                    const GValue                     *value);
+                                                                    const GValue                     *value,
+                                                                    guint                            *handler_id);
 static void         panel_plugin_external_46_set_locked            (XfcePanelPluginProvider          *provider,
                                                                     gboolean                          locked);
 static void         panel_plugin_external_46_set_sensitive         (PanelPluginExternal46            *external);
@@ -757,7 +758,8 @@ panel_plugin_external_46_removed (XfcePanelPluginProvider *provider)
 static gboolean
 panel_plugin_external_46_remote_event (XfcePanelPluginProvider *provider,
                                        const gchar             *name,
-                                       const GValue            *value)
+                                       const GValue            *value,
+                                       guint                   *handle)
 {
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (provider), TRUE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), TRUE);

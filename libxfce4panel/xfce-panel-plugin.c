@@ -95,7 +95,8 @@ static void          xfce_panel_plugin_show_about             (XfcePanelPluginPr
 static void          xfce_panel_plugin_removed                (XfcePanelPluginProvider          *provider);
 static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginProvider          *provider,
                                                                const gchar                      *name,
-                                                               const GValue                     *value);
+                                                               const GValue                     *value,
+                                                               guint                            *handle);
 static void          xfce_panel_plugin_set_locked             (XfcePanelPluginProvider          *provider,
                                                                gboolean                          locked);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                          data,
@@ -1346,7 +1347,8 @@ xfce_panel_plugin_removed (XfcePanelPluginProvider *provider)
 static gboolean
 xfce_panel_plugin_remote_event (XfcePanelPluginProvider *provider,
                                 const gchar             *name,
-                                const GValue            *value)
+                                const GValue            *value,
+                                guint                   *handle)
 {
   gboolean stop_emission;
 

@@ -77,6 +77,7 @@ pkgconfig_DATA = libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).pc
 # Build sources
 #
 if MAINTAINER_MODE
+
 libxfce4panel-marshal.h: libxfce4panel-marshal.list Makefile
 	$(AM_V_GEN) glib-genmarshal --prefix=_libxfce4panel_marshal --internal --header $< > $@
 
@@ -117,6 +118,7 @@ BUILT_SOURCES = \
 CLEANFILES = \
 	actual-abi \
 	expected-abi
+
 endif
 
 EXTRA_DIST = \

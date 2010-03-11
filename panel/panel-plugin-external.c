@@ -43,6 +43,7 @@
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-window.h>
 #include <panel/panel-dialogs.h>
+#include <panel/panel-marshal.h>
 
 
 
@@ -50,63 +51,64 @@
 
 
 
-static void         panel_plugin_external_provider_init         (XfcePanelPluginProviderInterface  *iface);
-static GObject     *panel_plugin_external_constructor           (GType                              type,
-                                                                 guint                              n_construct_params,
-                                                                 GObjectConstructParam             *construct_params);
-static void         panel_plugin_external_finalize              (GObject                           *object);
-static void         panel_plugin_external_get_property          (GObject                           *object,
-                                                                 guint                              prop_id,
-                                                                 GValue                            *value,
-                                                                 GParamSpec                        *pspec);
-static void         panel_plugin_external_set_property          (GObject                           *object,
-                                                                 guint                              prop_id,
-                                                                 const GValue                      *value,
-                                                                 GParamSpec                        *pspec);
-static void         panel_plugin_external_realize               (GtkWidget                         *widget);
-static void         panel_plugin_external_unrealize             (GtkWidget                         *widget);
-static gboolean     panel_plugin_external_plug_removed          (GtkSocket                         *socket);
-static void         panel_plugin_external_plug_added            (GtkSocket                         *socket);
-static gboolean     panel_plugin_external_dbus_reply            (PanelPluginExternal               *external,
-                                                                 guint                              reply_id,
-                                                                 const GValue                      *value,
-                                                                 GError                           **error);
-static gboolean     panel_plugin_external_dbus_provider_signal  (PanelPluginExternal               *external,
-                                                                 XfcePanelPluginProviderSignal      provider_signal,
-                                                                 GError                           **error);
-static void         panel_plugin_external_dbus_set              (PanelPluginExternal               *external,
-                                                                 gboolean                           force);
-static void         panel_plugin_external_queue_add             (PanelPluginExternal               *external,
-                                                                 gboolean                           force,
-                                                                 const gchar                       *property,
-                                                                 const GValue                      *value);
-static void         panel_plugin_external_queue_add_noop        (PanelPluginExternal               *external,
-                                                                 gboolean                           force,
-                                                                 const gchar                       *property);
-static const gchar *panel_plugin_external_get_name              (XfcePanelPluginProvider           *provider);
-static gint         panel_plugin_external_get_unique_id         (XfcePanelPluginProvider           *provider);
-static void         panel_plugin_external_set_size              (XfcePanelPluginProvider           *provider,
-                                                                 gint                               size);
-static void         panel_plugin_external_set_orientation       (XfcePanelPluginProvider           *provider,
-                                                                 GtkOrientation                     orientation);
-static void         panel_plugin_external_set_screen_position   (XfcePanelPluginProvider           *provider,
-                                                                 XfceScreenPosition                 screen_position);
-static void         panel_plugin_external_save                  (XfcePanelPluginProvider           *provider);
-static gboolean     panel_plugin_external_get_show_configure    (XfcePanelPluginProvider           *provider);
-static void         panel_plugin_external_show_configure        (XfcePanelPluginProvider           *provider);
-static gboolean     panel_plugin_external_get_show_about        (XfcePanelPluginProvider           *provider);
-static void         panel_plugin_external_show_about            (XfcePanelPluginProvider           *provider);
-static void         panel_plugin_external_removed               (XfcePanelPluginProvider           *provider);
-static gboolean     panel_plugin_external_remote_event          (XfcePanelPluginProvider           *provider,
-                                                                 const gchar                       *name,
-                                                                 const GValue                      *value);
-static void         panel_plugin_external_set_locked            (XfcePanelPluginProvider           *provider,
-                                                                 gboolean                           locked);
-static void         panel_plugin_external_set_sensitive         (PanelPluginExternal               *external);
-static void         panel_plugin_external_child_watch           (GPid                               pid,
-                                                                 gint                               status,
-                                                                 gpointer                           user_data);
-static void         panel_plugin_external_child_watch_destroyed (gpointer                           user_data);
+static void         panel_plugin_external_provider_init            (XfcePanelPluginProviderInterface  *iface);
+static GObject     *panel_plugin_external_constructor              (GType                              type,
+                                                                    guint                              n_construct_params,
+                                                                    GObjectConstructParam             *construct_params);
+static void         panel_plugin_external_finalize                 (GObject                           *object);
+static void         panel_plugin_external_get_property             (GObject                           *object,
+                                                                    guint                              prop_id,
+                                                                    GValue                            *value,
+                                                                    GParamSpec                        *pspec);
+static void         panel_plugin_external_set_property             (GObject                           *object,
+                                                                    guint                              prop_id,
+                                                                    const GValue                      *value,
+                                                                    GParamSpec                        *pspec);
+static void         panel_plugin_external_realize                  (GtkWidget                         *widget);
+static void         panel_plugin_external_unrealize                (GtkWidget                         *widget);
+static gboolean     panel_plugin_external_plug_removed             (GtkSocket                         *socket);
+static void         panel_plugin_external_plug_added               (GtkSocket                         *socket);
+static gboolean     panel_plugin_external_dbus_provider_signal     (PanelPluginExternal               *external,
+                                                                    XfcePanelPluginProviderSignal      provider_signal,
+                                                                    GError                           **error);
+static gboolean     panel_plugin_external_dbus_remote_event_result (PanelPluginExternal               *external,
+                                                                    guint                              handle,
+                                                                    gboolean                           result,
+                                                                    GError                           **error);
+static void         panel_plugin_external_dbus_set                 (PanelPluginExternal               *external,
+                                                                    gboolean                           force);
+static void         panel_plugin_external_queue_add                (PanelPluginExternal               *external,
+                                                                    gboolean                           force,
+                                                                    const gchar                       *property,
+                                                                    const GValue                      *value);
+static void         panel_plugin_external_queue_add_noop           (PanelPluginExternal               *external,
+                                                                    gboolean                           force,
+                                                                    const gchar                       *property);
+static const gchar *panel_plugin_external_get_name                 (XfcePanelPluginProvider           *provider);
+static gint         panel_plugin_external_get_unique_id            (XfcePanelPluginProvider           *provider);
+static void         panel_plugin_external_set_size                 (XfcePanelPluginProvider           *provider,
+                                                                    gint                               size);
+static void         panel_plugin_external_set_orientation          (XfcePanelPluginProvider           *provider,
+                                                                    GtkOrientation                     orientation);
+static void         panel_plugin_external_set_screen_position      (XfcePanelPluginProvider           *provider,
+                                                                    XfceScreenPosition                 screen_position);
+static void         panel_plugin_external_save                     (XfcePanelPluginProvider           *provider);
+static gboolean     panel_plugin_external_get_show_configure       (XfcePanelPluginProvider           *provider);
+static void         panel_plugin_external_show_configure           (XfcePanelPluginProvider           *provider);
+static gboolean     panel_plugin_external_get_show_about           (XfcePanelPluginProvider           *provider);
+static void         panel_plugin_external_show_about               (XfcePanelPluginProvider           *provider);
+static void         panel_plugin_external_removed                  (XfcePanelPluginProvider           *provider);
+static gboolean     panel_plugin_external_remote_event             (XfcePanelPluginProvider           *provider,
+                                                                    const gchar                       *name,
+                                                                    const GValue                      *value,
+                                                                    guint                             *handler_id);
+static void         panel_plugin_external_set_locked               (XfcePanelPluginProvider           *provider,
+                                                                    gboolean                           locked);
+static void         panel_plugin_external_set_sensitive            (PanelPluginExternal               *external);
+static void         panel_plugin_external_child_watch              (GPid                               pid,
+                                                                    gint                               status,
+                                                                    gpointer                           user_data);
+static void         panel_plugin_external_child_watch_destroyed    (gpointer                           user_data);
 
 
 
@@ -159,6 +161,8 @@ enum
 enum
 {
   SET,
+  REMOTE_EVENT,
+  REMOTE_EVENT_RESULT,
   LAST_SIGNAL
 };
 
@@ -202,6 +206,24 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
                   g_cclosure_marshal_VOID__BOXED,
                   G_TYPE_NONE, 1,
                   PANEL_TYPE_DBUS_SET_SIGNAL);
+
+  external_signals[REMOTE_EVENT] =
+    g_signal_new (g_intern_static_string ("remote-event"),
+                  G_TYPE_FROM_CLASS (gobject_class),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  _panel_marshal_VOID__STRING_BOXED_UINT,
+                  G_TYPE_NONE, 3,
+                  G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_UINT);
+
+  external_signals[REMOTE_EVENT_RESULT] =
+    g_signal_new (g_intern_static_string ("remote-event-result"),
+                  G_TYPE_FROM_CLASS (gobject_class),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  _panel_marshal_VOID__UINT_BOOLEAN,
+                  G_TYPE_NONE, 2,
+                  G_TYPE_UINT, G_TYPE_BOOLEAN);
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNIQUE_ID,
@@ -573,20 +595,6 @@ panel_plugin_external_plug_added (GtkSocket *socket)
 
 
 static gboolean
-panel_plugin_external_dbus_reply (PanelPluginExternal  *external,
-                                  guint                 reply_id,
-                                  const GValue         *value,
-                                  GError              **error)
-{
-  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external), FALSE);
-  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (external), FALSE);
-
-  return TRUE;
-}
-
-
-
-static gboolean
 panel_plugin_external_dbus_provider_signal (PanelPluginExternal            *external,
                                             XfcePanelPluginProviderSignal   provider_signal,
                                             GError                        **error)
@@ -610,6 +618,22 @@ panel_plugin_external_dbus_provider_signal (PanelPluginExternal            *exte
                                               provider_signal);
       break;
     }
+
+  return TRUE;
+}
+
+
+
+static gboolean
+panel_plugin_external_dbus_remote_event_result (PanelPluginExternal  *external,
+                                                guint                 handle,
+                                                gboolean              result,
+                                                GError              **error)
+{
+  panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external), FALSE);
+
+  g_signal_emit (G_OBJECT (external), external_signals[REMOTE_EVENT_RESULT], 0,
+                 handle, result);
 
   return TRUE;
 }
@@ -657,7 +681,6 @@ panel_plugin_external_queue_add (PanelPluginExternal *external,
   dbus_g_type_struct_set (&message,
                           DBUS_SET_PROPERTY, property,
                           DBUS_SET_VALUE, value,
-                          DBUS_SET_REPLY_ID, 0,
                           G_MAXUINT);
 
   g_ptr_array_add (external->queue, g_value_get_boxed (&message));
@@ -846,26 +869,34 @@ panel_plugin_external_removed (XfcePanelPluginProvider *provider)
 static gboolean
 panel_plugin_external_remote_event (XfcePanelPluginProvider *provider,
                                     const gchar             *name,
-                                    const GValue            *value)
+                                    const GValue            *value,
+                                    guint                   *handle)
 {
-  GValue        noop_value = { 0, };
+  static guint  handle_counter = 0;
+  GValue        dummy_value = { 0, };
   const GValue *real_value = value;
 
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider), TRUE);
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), TRUE);
   panel_return_val_if_fail (value == NULL || G_IS_VALUE (value), FALSE);
 
-  /* TODO handle the return value */
+  if (G_UNLIKELY (handle_counter > G_MAXUINT - 2))
+    handle_counter = 0;
+  *handle = ++handle_counter;
 
   if (value == NULL)
     {
-      g_value_init (&noop_value, G_TYPE_UCHAR);
-      g_value_set_uchar (&noop_value, '\0');
-      real_value = &noop_value;
+      /* we send a dummy value over dbus */
+      g_value_init (&dummy_value, G_TYPE_UCHAR);
+      g_value_set_uchar (&dummy_value, '\0');
+      real_value = &dummy_value;
     }
 
-  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
-                                   FALSE, name, real_value);
+  g_signal_emit (G_OBJECT (provider), external_signals[REMOTE_EVENT], 0,
+                 name, real_value, *handle);
+
+  if (real_value != value)
+    g_value_unset (&dummy_value);
 
   return TRUE;
 }

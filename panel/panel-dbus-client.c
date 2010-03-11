@@ -220,8 +220,7 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
 
   if (!(n_tokens == 2 || n_tokens == N_TOKENS)
       || exo_str_is_empty (tokens[PLUGIN_NAME])
-      || exo_str_is_empty (tokens[NAME])
-      || *tokens[NAME] == SIGNAL_PREFIX)
+      || exo_str_is_empty (tokens[NAME]))
     {
       g_set_error_literal (error, G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
                            _("Invalid plugin event syntax specified. "

@@ -9,31 +9,42 @@
                 value="wrapper_dbus" />
 
     <!--
-      property : Name of the property to set on the wrapper. This is used
-                 for both panel values (no reply required) and plugin
-                 event (require a reply from the plugin).
-      value    : GValue with the value for the property.
-      reply_id : 0 if no reply is needed, if bigger then 0, the id to
-                 return together with the Reply method.
+      s : property : Name of the property to set on the wrapper. This is used
+                     for both panel values (no reply required) and plugin
+                     event (require a reply from the plugin).
+      v : value    : GValue with the value for the property.
     -->
     <signal name="Set">
-      <arg name="values" type="a(svu)" />
+      <arg name="values" type="a(sv)" />
     </signal>
 
     <!--
-      replay_id : The reply id given during the request.
-      value     : The return value for the reply.
+      name   : name of the event.
+      value  : GValue with the value of the name.
+      handle : unique id for the RemoteEventResult method.
     -->
-    <method name="Reply">
-      <arg name="reply_id" type="u" />
+    <signal name="RemoteEvent">
+      <arg name="name" type="s" />
       <arg name="value" type="v" />
-    </method>
+      <arg name="handle" type="u" />
+    </signal>
 
     <!--
       signal : A provider signal from XfcePanelPluginProviderSignal.
     -->
     <method name="ProviderSignal">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true" />
       <arg name="signal" type="u" />
+    </method>
+
+    <!--
+      handle : the id send to the RemoteEvent signal.
+      result : result of the call.
+    -->
+    <method name="RemoteEventResult">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true" />
+      <arg name="handle" type="u" />
+      <arg name="result" type="b" />
     </method>
   </interface>
 </node>

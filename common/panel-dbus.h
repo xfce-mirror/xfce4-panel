@@ -27,34 +27,33 @@
 #define PANEL_DBUS_WRAPPER_INTERFACE PANEL_DBUS_INTERFACE ".Wrapper"
 
 /* internal signals send over dbus */
-#define SIGNAL_PREFIX                   '_'
-#define SIGNAL_PREFIX_S                 "_"
-#define SIGNAL_SET_SIZE                 SIGNAL_PREFIX_S "a"
-#define SIGNAL_SET_ORIENTATION          SIGNAL_PREFIX_S "b"
-#define SIGNAL_SET_SCREEN_POSITION      SIGNAL_PREFIX_S "c"
-#define SIGNAL_SET_LOCKED               SIGNAL_PREFIX_S "d"
-#define SIGNAL_SAVE                     SIGNAL_PREFIX_S "e"
-#define SIGNAL_SHOW_CONFIGURE           SIGNAL_PREFIX_S "f"
-#define SIGNAL_SHOW_ABOUT               SIGNAL_PREFIX_S "g"
-#define SIGNAL_REMOVED                  SIGNAL_PREFIX_S "h"
-#define SIGNAL_WRAPPER_SET_SENSITIVE    SIGNAL_PREFIX_S "i"
-#define SIGNAL_WRAPPER_BACKGROUND_ALPHA SIGNAL_PREFIX_S "j"
-#define SIGNAL_WRAPPER_QUIT             SIGNAL_PREFIX_S "k"
+#define SIGNAL_SET_SIZE                 "a"
+#define SIGNAL_SET_ORIENTATION          "b"
+#define SIGNAL_SET_SCREEN_POSITION      "c"
+#define SIGNAL_SET_LOCKED               "d"
+#define SIGNAL_SAVE                     "e"
+#define SIGNAL_SHOW_CONFIGURE           "f"
+#define SIGNAL_SHOW_ABOUT               "g"
+#define SIGNAL_REMOVED                  "h"
+#define SIGNAL_WRAPPER_SET_SENSITIVE    "i"
+#define SIGNAL_WRAPPER_BACKGROUND_ALPHA "j"
+#define SIGNAL_WRAPPER_QUIT             "k"
 
 /* special types for dbus communication */
-#define PANEL_TYPE_DBUS_SET_MESSAGE dbus_g_type_get_struct ("GValueArray", \
-                                                            G_TYPE_STRING, \
-                                                            G_TYPE_VALUE, \
-                                                            G_TYPE_UINT, \
-                                                            G_TYPE_INVALID)
-#define PANEL_TYPE_DBUS_SET_SIGNAL  dbus_g_type_get_collection ("GPtrArray", \
-                                                                PANEL_TYPE_DBUS_SET_MESSAGE)
+#define PANEL_TYPE_DBUS_SET_MESSAGE \
+  dbus_g_type_get_struct ("GValueArray", \
+                          G_TYPE_STRING, \
+                          G_TYPE_VALUE, \
+                          G_TYPE_INVALID)
+
+#define PANEL_TYPE_DBUS_SET_SIGNAL \
+  dbus_g_type_get_collection ("GPtrArray", \
+                              PANEL_TYPE_DBUS_SET_MESSAGE)
 
 enum
 {
   DBUS_SET_PROPERTY,
-  DBUS_SET_VALUE,
-  DBUS_SET_REPLY_ID
+  DBUS_SET_VALUE
 };
 
 #endif /* !__PANEL_DBUS_H__ */
