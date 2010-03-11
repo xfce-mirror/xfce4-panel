@@ -6,12 +6,12 @@
 # Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006.
 # Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006-2008.
 # Denis Koryavov <dkoryavov@yandex.ru>, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-07 10:10+0100\n"
+"POT-Creation-Date: 2010-03-11 06:04+0100\n"
 "PO-Revision-Date: 2010-03-07 11:49+0300\n"
 "Last-Translator: Dima Smirnov <arch@cnc-parts.info>\n"
 "Language-Team: Russian\n"
@@ -55,37 +55,34 @@ msgid "Failed to open the documentation browser"
 msgstr "Не удалось запустить \"%s\" "
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:841
+#: ../libxfce4panel/xfce-panel-plugin.c:860
 #: ../panel/panel-preferences-dialog.c:869
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Вы действительно хотите \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:846
+#: ../libxfce4panel/xfce-panel-plugin.c:865
 #: ../panel/panel-preferences-dialog.c:872
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Если вы удалите этот элемент с панели, он будет потерян навсегда."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:999
+#: ../libxfce4panel/xfce-panel-plugin.c:1039
 msgid "_Move"
 msgstr "Пере_местить "
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1081 ../panel/panel-window.c:2077
 msgid "Add _New Items..."
 msgstr "_Добавить новый элемент... "
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1048
-#: ../panel/panel-window.c:2088
+#: ../libxfce4panel/xfce-panel-plugin.c:1092 ../panel/panel-window.c:2088
 msgid "Panel Pr_eferences..."
 msgstr "_Настройки панели"
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1072
-#: ../panel/panel-window.c:2111
+#: ../libxfce4panel/xfce-panel-plugin.c:1116 ../panel/panel-window.c:2111
 msgid "_Restart"
 msgstr "Пе_резапустить "
 
@@ -94,8 +91,7 @@ msgstr "Пе_резапустить "
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Настроить панель "
 
-#: ../panel/main.c:75
-#: ../panel/main.c:76
+#: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "НОМЕР-ПАНЕЛИ"
 
@@ -217,8 +213,7 @@ msgstr ""
 "Alexander Matveyev, 2010"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:102 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Добавить новый элемент"
 
@@ -227,8 +222,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Выберите панель для нового модуля:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:616
+#: ../panel/panel-dialogs.c:127 ../panel/panel-preferences-dialog.c:616
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d "
@@ -354,7 +348,8 @@ msgstr "_Элементы"
 msgid "L_ength (%):"
 msgstr "_Длина (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Measurements"
 msgstr "Ед. измерения"
@@ -462,12 +457,14 @@ msgid "Because the panel moved to a new system for storing the settings, it has 
 msgstr "Поскольку панель теперь использует новую систему хранения настроек, будут загружены свежие начальные установки"
 
 #: ../migrate/main.c:83
+#, fuzzy
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Выберите, какие из перечисленных ниже предустановленных настроек, вы хотите использовать для первого запуска"
 
 #: ../migrate/main.c:89
+#, fuzzy
 msgid "Migrate old config"
-msgstr ""
+msgstr "Перенести старые настройки"
 
 #: ../migrate/main.c:90
 msgid "Migrate the old 4.6 configuration to Xfconf"
@@ -595,7 +592,7 @@ msgstr "Выберите файл меню"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "Выберите эту опцию, если вы хотите, чтобы в меню отображалось название класса, к которому принадлежит приложение, например, \"Файловый менеджер\" вместо \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
@@ -730,7 +727,8 @@ msgstr "Показывать _секунды "
 msgid "F_ormat:"
 msgstr "Ф_ормат:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr ""
@@ -855,22 +853,22 @@ msgstr "%0:30"
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "без двадцати пяти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "без двадцати %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "без пятнадцати %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "без десяти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
@@ -1384,23 +1382,23 @@ msgstr "Группировать _окна:"
 msgid "Window title"
 msgstr "Заголовок окна"
 
-#: ../plugins/tasklist/tasklist-widget.c:2314
+#: ../plugins/tasklist/tasklist-widget.c:2381
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:2323
+#: ../plugins/tasklist/tasklist-widget.c:2390
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2329
+#: ../plugins/tasklist/tasklist-widget.c:2396
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:2338
+#: ../plugins/tasklist/tasklist-widget.c:2405
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2348
+#: ../plugins/tasklist/tasklist-widget.c:2415
 msgid "_Close All"
 msgstr "_Закрыть все"
 
@@ -1473,6 +1471,6 @@ msgstr "Переключаться между открытыми окнами и
 
 #~ msgid "Failed to open manual"
 #~ msgstr "Не удалось открыть руководство"
+
 #~ msgid "Action Button"
 #~ msgstr "Системные действия "
-
