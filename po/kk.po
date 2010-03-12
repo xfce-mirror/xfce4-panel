@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-11 06:04+0100\n"
-"PO-Revision-Date: 2010-03-12 10:28+0600\n"
+"PO-Revision-Date: 2010-03-12 12:58+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -435,9 +435,8 @@ msgstr "_Енгізу:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:36
-#, fuzzy
 msgid "_Leave:"
-msgstr "_Аты:"
+msgstr "Қа_лдыру:"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "_Lock panel"
@@ -468,18 +467,16 @@ msgid "Migrate old config"
 msgstr ""
 
 #: ../migrate/main.c:90
-#, fuzzy
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Панель баптауларын сақтау"
+msgstr "Ескі 4.6 баптауларын Xfconf ішіне апару"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
 msgstr ""
 
 #: ../migrate/main.c:96
-#, fuzzy
 msgid "Load the default configuration"
-msgstr "Панель баптауларын сақтау"
+msgstr "Негізгі баптауларды жүктеп алу"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
@@ -490,14 +487,12 @@ msgid "Start with one empty panel"
 msgstr ""
 
 #: ../migrate/main.c:115
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Панель баптауларын сақтау"
+msgstr "Ескі панель баптауларды жүктеп алу сәтсіз аяқталды"
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Панель баптауларын сақтау"
+msgstr "Негізгі баптауларды жүктеп алу сәтсіз аяқталды"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -509,14 +504,12 @@ msgid "Button Actions"
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "Мәзі_р батырмасы"
+msgstr "_Бірінші батырма:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "_Таңбаша батырмасы"
+msgstr "_Екінші батырма:"
 
 #: ../plugins/actions/actions.c:108
 msgid "Disabled"
@@ -551,14 +544,13 @@ msgid "Hibernate"
 msgstr "Гибернация"
 
 #: ../plugins/actions/actions.c:409
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "\"%s\" жіберу сәтсіз аяқталды"
+msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Шығу не экранды бұғаттау"
+msgstr "Шығу, экранды бұғаттау не басқа жүйелік әрекеттер"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -573,9 +565,8 @@ msgstr "Сыртқы түрі"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "Жасырын қолданбалар"
+msgstr "Қолданбалар мәзірі"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
@@ -586,9 +577,8 @@ msgid "Menu File"
 msgstr "Мәзір файлы"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-#, fuzzy
 msgid "Menu _file:"
-msgstr "Мәзір файлы"
+msgstr "Мәзір _файлы"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Select A Menu File"
@@ -603,9 +593,8 @@ msgid "Show application description in t_ooltip"
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show generic application n_ames"
-msgstr "Жасырын қолданбалар"
+msgstr "Қолданбалардың негізгі а_тауларын көрсету"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show ic_ons in menu"
@@ -625,9 +614,8 @@ msgid "_Icon:"
 msgstr "Таңба_ша:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#, fuzzy
 msgid "_Show button title"
-msgstr "Мәзі_р батырмасы"
+msgstr "Бат_ырма атауын көрсету"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 msgid "Xfce Menu"
@@ -640,19 +628,17 @@ msgstr "Таңбашаны таңдаңыз"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:697
 #: ../plugins/launcher/launcher.c:2095
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "\"%s\" жіберу сәтсіз аяқталды"
+msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:860
-#, fuzzy
 msgid "No applications found"
-msgstr "\"%s\" үшін таңбашаны таңдаңыз"
+msgstr "Қолданбалар табылмады"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:872
-#, fuzzy
 msgid "Failed to load the applications menu"
-msgstr "\"%s\" жіберу сәтсіз аяқталды"
+msgstr "Қолданбалар мәзірін жүктеп алу сәтсіз аяқталды"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -685,9 +671,8 @@ msgstr ""
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "Жал_пақ батырмаларды қолдану"
+msgstr "Көмек опцияларын көрсету"
 
 #: ../plugins/clock/clock.c:144
 msgid "Week %V"
@@ -740,7 +725,6 @@ msgid "F_uzziness:"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-#, fuzzy
 msgid "Fl_ash time seperators"
 msgstr "У_ақыт ажырағыштардың жыпылықтауы"
 
@@ -766,9 +750,8 @@ msgid "Show _inactive dots"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:18
-#, fuzzy
 msgid "Show gri_d"
-msgstr "_Тұтқасын көрсету"
+msgstr "_Торды көрсету"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, fuzzy, no-c-format
