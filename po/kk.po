@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-11 06:04+0100\n"
-"PO-Revision-Date: 2010-03-12 12:58+0600\n"
+"PO-Revision-Date: 2010-03-13 16:36+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -372,12 +372,10 @@ msgid "O_utput:"
 msgstr "_Шығыс:"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
-#, fuzzy
 msgid "Remove currently selected item"
-msgstr "Ағымдағы таңдаулы тұрған панельді өшіру"
+msgstr "Ағымдағы таңдаулы тұрған элементті өшіру"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
-#, fuzzy
 msgid "Remove the currently selected panel"
 msgstr "Ағымдағы таңдаулы тұрған панельді өшіру"
 
@@ -464,7 +462,7 @@ msgstr ""
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
-msgstr ""
+msgstr "Ескі баптауларды көшіру"
 
 #: ../migrate/main.c:90
 msgid "Migrate the old 4.6 configuration to Xfconf"
@@ -472,7 +470,7 @@ msgstr "Ескі 4.6 баптауларын Xfconf ішіне апару"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
-msgstr ""
+msgstr "Негізгі баптауларды қолдану"
 
 #: ../migrate/main.c:96
 msgid "Load the default configuration"
@@ -480,11 +478,11 @@ msgstr "Негізгі баптауларды жүктеп алу"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
-msgstr ""
+msgstr "Бір бос панель"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Бір бос панельден бастау"
 
 #: ../migrate/main.c:115
 msgid "Failed to migrate the old panel configuration"
@@ -501,7 +499,7 @@ msgstr "Әрекеттер батырмалары"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Button Actions"
-msgstr ""
+msgstr "Батырма әрекеттері"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "_First button:"
@@ -676,7 +674,7 @@ msgstr "Көмек опцияларын көрсету"
 
 #: ../plugins/clock/clock.c:144
 msgid "Week %V"
-msgstr ""
+msgstr "Апта %V"
 
 #: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
@@ -754,7 +752,7 @@ msgid "Show gri_d"
 msgstr "_Торды көрсету"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr "Бұл пішім файл атына қойылатын уақыт пен күнді сипаттайды. Мысалы, %Y ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Көбірек білу үшін, date утилитасының құжаттамасын оқыңыз."
 
@@ -763,14 +761,12 @@ msgid "True _binary clock"
 msgstr "Шын _бинарлы сағат"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
-#, fuzzy
 msgid "_Layout:"
-msgstr "Жайма"
+msgstr "_Жайма:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
-#, fuzzy
 msgid "_Tooltip format:"
-msgstr "Хабарлама пішімі"
+msgstr "_Хабарлама пішімі:"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
@@ -1005,9 +1001,9 @@ msgid "What time is it?"
 msgstr "Сағат қанша?"
 
 #: ../plugins/directorymenu/directorymenu.c:550
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "\"%s\" жіберу сәтсіз аяқталды"
+msgstr "\"%s\" қолданбасын жөнелту сәтсіз аяқталды"
 
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
@@ -1015,14 +1011,14 @@ msgid "Failed to query content type for \"%s\""
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu.c:590
-#, fuzzy, c-format
+#, c-format
 msgid "No default application found for \"%s\""
-msgstr "\"%s\" үшін таңбашаны таңдаңыз"
+msgstr "\"%s\" үшін негізгі қолданба табылмады"
 
 #: ../plugins/directorymenu/directorymenu.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "\"%s\" жіберу сәтсіз аяқталды"
+msgstr "\"%s\" үшін негізгі қолданбаны жөнелту сәтсіз аяқталды"
 
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
@@ -1034,9 +1030,8 @@ msgid "Open Folder"
 msgstr "Буманы ашу"
 
 #: ../plugins/directorymenu/directorymenu.c:780
-#, fuzzy
 msgid "Open in Terminal"
-msgstr "_Терминалда орындау"
+msgstr "Терминалда ашу"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
@@ -1074,14 +1069,12 @@ msgid "_File Pattern:"
 msgstr "_Файл шаблоны:"
 
 #: ../plugins/launcher/launcher.c:1441
-#, fuzzy
 msgid "Unnamed Item"
-msgstr "Атаусыз"
+msgstr "Атаусыз элемент"
 
 #: ../plugins/launcher/launcher.c:1581
-#, fuzzy
 msgid "No items"
-msgstr "Жаңа элемент"
+msgstr "Элементтер жоқ"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
@@ -1093,9 +1086,8 @@ msgid "Are you sure you want to remove \"%s\"?"
 msgstr "\"%s\" өшіруді шынымен қалайсыз ба?"
 
 #: ../plugins/launcher/launcher-dialog.c:668
-#, fuzzy
 msgid "Unnamed item"
-msgstr "Атаусыз"
+msgstr "Атаусыз элемент"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Failed to remove the desktop file from the config directory"
@@ -1107,9 +1099,8 @@ msgid "Failed to open desktop item editor"
 msgstr "Дисплейді ашу сәтсіз аяқталды"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new empty item"
-msgstr "Жаңа панельді қосу"
+msgstr "Жаңа бос элементті қосу"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
@@ -1124,9 +1115,8 @@ msgid "Default"
 msgstr "Бастапқысы"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
-#, fuzzy
 msgid "Delete the currently selected item"
-msgstr "Ағымдағы таңдаулы тұрған панельді өшіру"
+msgstr "Ағымдағы таңдаулы тұрған элементті өшіру"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
@@ -1242,24 +1232,21 @@ msgstr "Мөлдір"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
-msgstr ""
+msgstr "Жа_ю"
 
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
 msgstr "_Стиль"
 
 #: ../plugins/separator/separator.desktop.in.h:1
-#, fuzzy
 msgid "Adds a separator or space between panel items"
-msgstr "Панель элементтері арасында орын не сызықты қояды"
+msgstr "Панель элементтері арасында орын не ажыратқышты қояды"
 
 #: ../plugins/showdesktop/showdesktop.c:193
-#, fuzzy
 msgid "Restore the minimized windows"
 msgstr "Жасырын терезелерді қалпына келтіру"
 
 #: ../plugins/showdesktop/showdesktop.c:194
-#, fuzzy
 msgid "Minimize all open windows and show the desktop"
 msgstr "Терезелерді жасырып, жұмыс үстелін көрсету"
 
@@ -1277,7 +1264,6 @@ msgid "Most likely another widget took over the function of a notification area.
 msgstr ""
 
 #: ../plugins/systray/systray.c:554
-#, fuzzy
 msgid "The notification area lost selection"
 msgstr "Трей менеджері таңдауды жоғалтқан"
 
@@ -1455,7 +1441,6 @@ msgid "Icon"
 msgstr "Таңбаша"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show workspace a_ctions"
 msgstr "Жұмыс орны әре_кеттерін көрсету"
 
@@ -1475,3 +1460,4 @@ msgstr "Ашық терезелер арасында мәзір арқылы а�
 #, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "Әрекеттер батырмалары"
+
