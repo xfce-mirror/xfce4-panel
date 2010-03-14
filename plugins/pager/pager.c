@@ -56,6 +56,8 @@ static void     pager_plugin_construct                 (XfcePanelPlugin   *panel
 static void     pager_plugin_free_data                 (XfcePanelPlugin   *panel_plugin);
 static gboolean pager_plugin_size_changed              (XfcePanelPlugin   *panel_plugin,
                                                         gint               size);
+static void     pager_plugin_orientation_changed       (XfcePanelPlugin   *panel_plugin,
+                                                        GtkOrientation     orientation);
 static void     pager_plugin_configure_plugin          (XfcePanelPlugin   *panel_plugin);
 
 
@@ -112,6 +114,7 @@ pager_plugin_class_init (PagerPluginClass *klass)
   plugin_class->construct = pager_plugin_construct;
   plugin_class->free_data = pager_plugin_free_data;
   plugin_class->size_changed = pager_plugin_size_changed;
+  plugin_class->orientation_changed = pager_plugin_orientation_changed;
   plugin_class->configure_plugin = pager_plugin_configure_plugin;
 
   g_object_class_install_property (gobject_class,
@@ -368,13 +371,19 @@ static gboolean
 pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint             size)
 {
-  if (xfce_panel_plugin_get_orientation (panel_plugin) ==
-      GTK_ORIENTATION_HORIZONTAL)
-    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, size);
-  else
-    gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, -1);
-
+  /* do not set fixed size */
   return TRUE;
+}
+
+
+
+static void
+pager_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
+                                  GtkOrientation   orientation)
+{
+  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+
+  wnck_pager_set_orientation (WNCK_PAGER (plugin->wnck_pager), orientation);
 }
 
 
