@@ -500,7 +500,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
                 child_alloc.height = alloc_length;
 
               n_expand_children--;
-              expand_length_req -= alloc_length;
+              expand_length_req -= length_req;
               expand_length_avail -= alloc_length;
             }
           else
