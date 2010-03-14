@@ -226,9 +226,11 @@ static gboolean
 pager_plugin_scroll_event (GtkWidget      *widget,
                            GdkEventScroll *event)
 {
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
-  WnckWorkspace       *active, *neighbor;
-  WnckMotionDirection  direction;
+  PagerPlugin   *plugin = XFCE_PAGER_PLUGIN (widget);
+  WnckWorkspace *active_ws;
+  WnckWorkspace *new_ws;
+  gint           active_n;
+  gint           n_workspaces;
 
   panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen), FALSE);
 
@@ -236,33 +238,25 @@ pager_plugin_scroll_event (GtkWidget      *widget,
   if (plugin->scrolling == FALSE)
     return TRUE;
 
-  /* translate the gdk scroll direction into a wnck motion direction */
-  switch (event->direction)
-    {
-    case GDK_SCROLL_UP:
-      direction = WNCK_MOTION_UP;
-      break;
+  active_ws = wnck_screen_get_active_workspace (plugin->wnck_screen);
+  active_n = wnck_workspace_get_number (active_ws);
 
-    case GDK_SCROLL_DOWN:
-      direction = WNCK_MOTION_DOWN;
-      break;
+  if (event->direction == GDK_SCROLL_UP
+      || event->direction == GDK_SCROLL_LEFT)
+    active_n--;
+  else
+    active_n++;
 
-    case GDK_SCROLL_LEFT:
-      direction = WNCK_MOTION_LEFT;
-      break;
+  /* wrap around */
+  n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen) - 1;
+  if (active_n < 0)
+    active_n = n_workspaces;
+  else if (active_n > n_workspaces)
+    active_n = 0;
 
-    default:
-      direction = WNCK_MOTION_RIGHT;
-      break;
-    }
-
-  /* get the active workspace's neighbor */
-  active = wnck_screen_get_active_workspace (plugin->wnck_screen);
-  neighbor = wnck_workspace_get_neighbor (active, direction);
-
-  /* if there is a neighbor, move to it */
-  if (neighbor != NULL)
-    wnck_workspace_activate (neighbor, event->time);
+  new_ws = wnck_screen_get_workspace (plugin->wnck_screen, active_n);
+  if (new_ws != NULL && active_ws != new_ws)
+    wnck_workspace_activate (new_ws, event->time);
 
   return TRUE;
 }
