@@ -309,7 +309,7 @@ launcher_dialog_add_button_press_event (GtkTreeView          *treeview,
     {
       object = gtk_builder_get_object (dialog->builder, "button-add");
       panel_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
-      if (gtk_widget_get_sensitive (GTK_WIDGET (object)))
+      if (GTK_WIDGET_SENSITIVE (object))
         {
           gtk_button_clicked (GTK_BUTTON (object));
           return TRUE;
@@ -597,7 +597,7 @@ launcher_dialog_tree_button_press_event (GtkTreeView          *treeview,
     {
       object = gtk_builder_get_object (dialog->builder, "item-edit");
       panel_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
-      if (gtk_widget_get_sensitive (GTK_WIDGET (object)))
+      if (GTK_WIDGET_SENSITIVE (object))
         {
           gtk_button_clicked (GTK_BUTTON (object));
           return TRUE;
