@@ -224,7 +224,7 @@ xfce_panel_plugin_provider_remote_event (XfcePanelPluginProvider *provider,
     {
       if (real_value != NULL
           && G_VALUE_HOLDS_UCHAR (real_value)
-          && g_value_get_uchar == '\0')
+          && g_value_get_uchar (real_value) == '\0')
         real_value = NULL;
 
       return (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->remote_event) (provider, name, real_value, handle);
