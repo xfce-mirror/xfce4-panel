@@ -356,12 +356,15 @@ enum /*< skip >*/
                         guint      message, \
                         GtkWidget *plug) \
   { \
-    GdkEventClient event; \
+    GdkEventClient  event; \
+    GdkWindow      *window; \
+    gint            result; \
     \
     g_return_if_fail (GTK_IS_PLUG (plug)); \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     g_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (plug))); \
     g_return_if_fail (_xpp_atom != GDK_NONE); \
+    g_return_if_fail (GTK_WIDGET_REALIZED (xpp)); \
     \
     event.type = GDK_CLIENT_EVENT; \
     event.window = gtk_widget_get_window (plug); \
@@ -371,12 +374,15 @@ enum /*< skip >*/
     event.data.s[0] = message; \
     event.data.s[1] = 0; \
     \
+    window = gtk_plug_get_socket_window (GTK_PLUG (plug)); \
+    g_return_if_fail (GDK_IS_WINDOW (window)); \
+    \
     gdk_error_trap_push (); \
-    gdk_event_send_client_message ((GdkEvent *) &event,  \
-        GDK_WINDOW_XID (gtk_plug_get_socket_window (GTK_PLUG (plug)))); \
+    gdk_event_send_client_message ((GdkEvent *) &event, GDK_WINDOW_XID (window)); \
     gdk_flush (); \
-    if (gdk_error_trap_pop () != 0) \
-      g_warning ("Failed to send provider-signal %d", message); \
+    result = gdk_error_trap_pop (); \
+    if (G_UNLIKELY (result != 0)) \
+      g_warning ("Failed to send provider-signal %d: X error code %d", message, result); \
   } \
   \
   static void \
