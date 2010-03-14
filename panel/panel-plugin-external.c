@@ -434,11 +434,14 @@ panel_plugin_external_realize (GtkWidget *widget)
   guint                 argc = PLUGIN_ARGV_ARGUMENTS;
   GPid                  pid;
 
+  panel_return_if_fail (external->pid == 0);
+  panel_return_if_fail (!external->plug_embedded);
+
   /* realize the socket first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->realize) (widget);
 
   /* get the socket id and unique id in a string */
-  socket_id = g_strdup_printf ("%d", gtk_socket_get_id (GTK_SOCKET (widget)));
+  socket_id = g_strdup_printf ("%u", gtk_socket_get_id (GTK_SOCKET (widget)));
   unique_id = g_strdup_printf ("%d", external->unique_id);
 
   /* add the number of arguments to the argc count */
@@ -505,6 +508,7 @@ panel_plugin_external_unrealize (GtkWidget *widget)
       /* remove the child watch so we don't leave zomies */
       g_source_remove (external->watch_id);
       g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+      external->pid = 0;
     }
 
   /* quit the plugin */
@@ -538,6 +542,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
       /* remove the child watch so we don't leave zomies */
       g_source_remove (external->watch_id);
       g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+      external->pid = 0;
     }
 
   window = gtk_widget_get_toplevel (GTK_WIDGET (socket));
@@ -587,6 +592,11 @@ panel_plugin_external_plug_added (GtkSocket *socket)
 
   /* plug has been added */
   external->plug_embedded = TRUE;
+
+  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+               "%d has been embedded, %d values in queue",
+               external->unique_id,
+               external->queue != NULL ? external->queue->len : 0);
 
   if (external->queue != NULL)
     panel_plugin_external_dbus_set (external, FALSE);
@@ -670,7 +680,6 @@ panel_plugin_external_queue_add (PanelPluginExternal *external,
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (G_TYPE_CHECK_VALUE (value));
-  panel_return_if_fail (!force || external->queue == NULL);
 
   if (external->queue == NULL)
     external->queue = g_ptr_array_sized_new (1);

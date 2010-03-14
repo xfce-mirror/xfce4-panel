@@ -350,11 +350,14 @@ panel_plugin_external_46_realize (GtkWidget *widget)
   guint                   argc = PLUGIN_ARGV_ARGUMENTS;
   guint                   i;
 
+  panel_return_if_fail (external->pid == 0);
+  panel_return_if_fail (!external->plug_embedded);
+
   /* realize the socket first */
   (*GTK_WIDGET_CLASS (panel_plugin_external_46_parent_class)->realize) (widget);
 
   /* get the socket id and unique id in a string */
-  socket_id = g_strdup_printf ("%d", gtk_socket_get_id (GTK_SOCKET (widget)));
+  socket_id = g_strdup_printf ("%u", gtk_socket_get_id (GTK_SOCKET (widget)));
   unique_id = g_strdup_printf ("%d", external->unique_id);
 
   /* add the number of arguments to the argc count */
@@ -539,6 +542,10 @@ panel_plugin_external_46_plug_added (GtkSocket *socket)
 
   /* plug has been added */
   external->plug_embedded = TRUE;
+
+  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
+               "plugin  %d has been embedded, %d values in queue",
+               external->unique_id, g_slist_length (external->queue));
 
   /* send all the messages in the queue */
   if (external->queue != NULL)
