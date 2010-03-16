@@ -1,13 +1,13 @@
 # translation of si.po to Sinhalese
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Rashan Anushka <rashan.uoc@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-27 15:41+0100\n"
+"POT-Creation-Date: 2010-03-16 06:12+0100\n"
 "PO-Revision-Date: 2008-10-06 18:04+0530\n"
 "Last-Translator: Rashan Anushka <rashan.uoc@gmail.com>\n"
 "Language-Team: Sinhalese <en@li.org>\n"
@@ -29,8 +29,7 @@ msgid "Remove \"%s\"?"
 msgstr "\"%s\" ඉවත් කරන්නද?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "අයිතමය පුවරුවෙන් ඉවත් කරනු ඇති අතර එහි වින්‍යාසයන් නැතිවනු ඇත."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -55,15 +54,13 @@ msgstr "ඉවත් කරන්න"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "නව අයිතමයක් එක් කරන්න"
+msgstr "නව අයිතමයක් එක් කරන්න..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "පුවරුව සකසන්න"
+msgstr "පුවරුව සකසන්න..."
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:283
 #: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
@@ -106,36 +103,31 @@ msgstr "වැඩිදියුණුකරන්නා"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "අනුවාදන තොරතුරු මුද්‍රණය කරන්න සහ පිටවෙන්න"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "පුවරුව සකසන්න"
+msgstr "\"පුවරුව සකසන්න\" කවුලුව පෙන්වන්න"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "වින්‍යාසයන් සුරකින්න"
+msgstr "පැනල වින්‍යාසයන් සුරකින්න"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "xfce4-panel යළි ආරම්භවේ..."
+msgstr "xfce4-panel හි ධාවන සිද්ධි යළි ආරම්භවේ..."
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "ලොගවුට් වන්න හෝ තිරය අඟුළුලන්න"
+msgstr "වත්මන් සැනියෙන් ඉවත්වන්න "
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "සියළුම කවුළු වසා දමා යෙදුම අවසන් කරන්න"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "නව අයිතමයක් එක් කරන්න"
+msgstr "\"නව අයිතමයක් එක් කරන්න\" කවුලුව පෙන්වන්න"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -154,7 +146,6 @@ msgid "Please report bugs to <%s>."
 msgstr "කරුණාකර දෝෂයන් <%s> වෙත වාර්ථා කරන්න."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
 msgstr "xfce4-panel දැනටමත් ක්‍රියාත්මක වේ"
 
@@ -169,11 +160,11 @@ msgid "Could not open \"%s\" module"
 msgstr "\"%s\" මොඩියුලය විවෘත කළ නොහැක"
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "නව අයිතමයක් එක් කරන්න"
+msgstr "නව අයිතම එක් කරන්න"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items
+#. dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 #, fuzzy
@@ -184,7 +175,7 @@ msgstr "ලැයිස්තුවෙන් අයිතම පුවරුව�
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "සොයන්න (_S):"
 
 #: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
@@ -232,14 +223,12 @@ msgid "Position"
 msgstr "ස්ථානය"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "අචල ස්ථානය"
+msgstr "අචල ස්ථානය (_F)"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "නිදහසේ චලනය කළ හැකි"
+msgstr "නිදහසේ චලනය කළ හැකි (_m)"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -277,19 +266,16 @@ msgid "Appearance"
 msgstr "පෙනුම"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "තරම (පික්සල):"
+msgstr "තරම (පික්සල) (_S):"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
 msgstr "පාරදෘශ්‍යතාව (%):"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "සක්‍රිය පුවරු පාරාන්ධ කරන්න"
+msgstr "සක්‍රිය පුවරු පාරාන්ධ කරන්න (_o)"
 
 #: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
@@ -300,13 +286,12 @@ msgstr "%d පුවරුව"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "දැනට තෝරා ඇති පැනලය ඉවත් කරන්න"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "නව අයිතම් එක් කරන්න"
+msgstr "නව පැනලයක් එක් කරන්න"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -317,7 +302,7 @@ msgstr "පුවරුව"
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
-msgstr "පුවරුව සකසන්න"
+msgstr "පුවරු සිටුවම් සකසන්න"
 
 #: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
 #: ../plugins/actions/actions.c:455
@@ -601,16 +586,14 @@ msgstr "කවුළු සඟවා වැඩතලය පෙන්වන්න
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "හදිසි නිවේදන"
+msgstr "නිවේදන ප්‍රදේශය"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "මෙම තිරයේ දැනටමත් පද්ධති බන්දේසියක් ක්‍රියාත්මක වේ"
+msgstr "මෙම තිරයේ දැනටමත් නිවේදන ප්‍රදේශයක් ක්‍රියාත්මක වෙමින් පවතී"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
@@ -631,7 +614,8 @@ msgstr "පේළි ගණන(_N):"
 msgid "Hidden Applications"
 msgstr "සැඟවුනු යෙදුම්"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This
+#. won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -645,19 +629,16 @@ msgid "Task List"
 msgstr "කාර්ය ලැයිස්තුව"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:192
-#, fuzzy
 msgid "Fi_xed length (pixels):"
-msgstr "තරම (පික්සල):"
+msgstr "නිශ්චිත දිග (පික්සල) (_x):"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:217
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "සමතල බොත්තම් භාවිතා කරන්න"
+msgstr "සමතල බොත්තම් භාවිතා කරන්න (_f)"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:223
-#, fuzzy
 msgid "Show _handle"
-msgstr "හසුරුව පෙන්වන්න"
+msgstr "හසුරුව පෙන්වන්න (_h)"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
@@ -713,9 +694,7 @@ msgid "Window List"
 msgstr "කවුළු ලැයිස්තුව"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
 msgstr "<i>හදිසි නිවේදන</i>මඟින් යෙදුමකට අවධානය අවශ්‍ය විටදී බොත්තම බබළවනු ඇත."
 
 #. Button Urgency Notification
@@ -772,16 +751,14 @@ msgid "Program launcher with optional menu"
 msgstr "විකල්ප මෙනුවක් සහිත යෙදුම් පුරනය"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "සියළු  අතාතවික වැඩතලයන්හි සිඟිති දසුනක"
+msgstr "අතාතවික වැඩතලයන් අතර මාරු වෙන්න"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "පුවරු අයිතම අතර රේඛාවක් හෝ හිඩැසක් එක් කරයි"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
 msgstr "කවුළු සඟවා වැඩතලය පෙන්වන්න"
 
@@ -790,30 +767,27 @@ msgid "Show Desktop"
 msgstr "වැඩතලය පෙන්වන්න"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "නිවේදන නිරූපක පෙන්වන්න"
+msgstr "නිවේදන අයිකන පෙන්වන ප්‍රදේශය"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "විවෘතව ඇති කවුළු අතර බොත්තම් භාවිතයෙන් මාරු‍ වෙන්න"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "විවෘතව ඇති කවුළු අතර මෙනුවක් භාවිතයෙන් මාරු‍ වෙන්න"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "පුවරු කළමණාකරු"
 
-#, fuzzy
 #~ msgid "_Minimum width:"
 #~ msgstr "අවම පළල:"
 
 #~ msgid "Unknown"
 #~ msgstr "නොදන්නා"
 
-#, fuzzy
 #~ msgid "Copyright (c) 2004-2009"
 #~ msgstr "කතුහිමිකම (c) 2004-2007"
 
