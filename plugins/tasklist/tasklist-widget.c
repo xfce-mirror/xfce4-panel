@@ -53,6 +53,7 @@
 #define DEFAULT_MENU_MAX_WIDTH_CHARS (24)
 #define ARROW_BUTTON_SIZE            (20)
 #define WIREFRAME_SIZE               (5) /* same as xfwm4 */
+#define DRAG_ACTIVATE_TIMEOUT        (500)
 
 
 
@@ -186,6 +187,10 @@ struct _XfceTasklistChild
   GtkWidget              *box;
   GtkWidget              *icon;
   GtkWidget              *label;
+
+  /* drag motion window activate */
+  guint                   motion_timeout;
+  guint                   motion_timestamp;
 
   /* unique id for sorting by insert time,
    * simply increased for each new button */
@@ -1016,6 +1021,9 @@ xfce_tasklist_remove (GtkContainer *container,
 
           gtk_widget_unparent (child->button);
 
+          if (child->motion_timeout != 0)
+            g_source_remove (child->motion_timeout);
+
           g_slice_free (XfceTasklistChild, child);
 
           /* queue a resize if needed */
@@ -1498,6 +1506,90 @@ xfce_tasklist_get_panel_plugin (XfceTasklist *tasklist)
 
 
 
+static gboolean
+xfce_tasklist_child_drag_motion_timeout (gpointer data)
+{
+  XfceTasklistChild *child = data;
+  WnckWorkspace     *workspace;
+
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
+  panel_return_val_if_fail (WNCK_IS_SCREEN (child->tasklist->screen), FALSE);
+
+  if (child->type == CHILD_TYPE_WINDOW)
+    {
+      panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
+
+      /* only switch workspaces if we show windows from other
+       * workspaces don't switch when switch on minimize is disabled
+       * and the window is minimized */
+      if (child->tasklist->all_workspaces
+          && child->tasklist->switch_workspace)
+        {
+          workspace = wnck_window_get_workspace (child->window);
+
+          if (workspace != NULL
+              && workspace != wnck_screen_get_active_workspace (child->tasklist->screen))
+            wnck_workspace_activate (workspace, child->motion_timestamp - 1);
+        }
+
+      wnck_window_activate_transient (child->window, child->motion_timestamp);
+    }
+
+  return FALSE;
+}
+
+
+
+static void
+xfce_tasklist_child_drag_motion_timeout_destroyed (gpointer data)
+{
+  XfceTasklistChild *child = data;
+
+  child->motion_timeout = 0;
+  child->motion_timestamp = 0;
+}
+
+
+
+static gboolean
+xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
+                                 GdkDragContext    *context,
+                                 gint               x,
+                                 gint               y,
+                                 guint              timestamp)
+{
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
+
+  child->motion_timestamp = timestamp;
+  if (child->motion_timeout == 0
+      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (child->button)))
+    {
+      child->motion_timeout = g_timeout_add_full (G_PRIORITY_LOW, DRAG_ACTIVATE_TIMEOUT,
+                                                  xfce_tasklist_child_drag_motion_timeout, child,
+                                                  xfce_tasklist_child_drag_motion_timeout_destroyed);
+    }
+
+  /* keep emitting the signal */
+  gdk_drag_status (context, 0, timestamp);
+
+  return TRUE;
+}
+
+
+
+static void
+xfce_tasklist_child_drag_leave (XfceTasklistChild *child,
+                                GdkDragContext    *context,
+                                GtkDragResult      result)
+{
+  panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
+
+  if (child->motion_timeout != 0)
+    g_source_remove (child->motion_timeout);
+}
+
+
+
 static XfceTasklistChild *
 xfce_tasklist_child_new (XfceTasklist *tasklist)
 {
@@ -1544,6 +1636,13 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   /* don't show the label if we're in iconbox style */
   if (tasklist->show_labels)
     gtk_widget_show (child->label);
+
+  gtk_drag_dest_set (GTK_WIDGET (child->button), 0,
+                     NULL, 0, GDK_ACTION_DEFAULT);
+  g_signal_connect_swapped (G_OBJECT (child->button), "drag-motion",
+     G_CALLBACK (xfce_tasklist_child_drag_motion), child);
+  g_signal_connect_swapped (G_OBJECT (child->button), "drag-leave",
+     G_CALLBACK (xfce_tasklist_child_drag_leave), child);
 
   return child;
 }
