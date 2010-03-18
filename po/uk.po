@@ -1,23 +1,22 @@
 # Ukrainian translation of xfce4-panel.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-#
+# 
 # Maxim Dziumanenko <dziumanenko@gmail.com>, 2003-2007.
 # Dmitry Nikitin <luckas_fb@mail.ru>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-27 15:41+0100\n"
+"POT-Creation-Date: 2010-03-18 06:12+0100\n"
 "PO-Revision-Date: 2009-01-26 15:54+0200\n"
 "Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
 "Language-Team: Ukrainian <xfce4-dev@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. TRANSLATORS: This warning is printed to the commandline when
 #. an external plugin crashed
@@ -32,8 +31,7 @@ msgid "Remove \"%s\"?"
 msgstr "Видалити \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "Об'єкт буде видалений з панелі та його конфігурація буде втрачена."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -167,7 +165,8 @@ msgstr "Не вдається відкрити модуль \"%s\""
 msgid "Add New Items"
 msgstr "Додати нові елементи"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items
+#. dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
@@ -599,7 +598,8 @@ msgstr "Кількі_сть рядків:"
 msgid "Hidden Applications"
 msgstr "Приховані програми"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This
+#. won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -613,9 +613,8 @@ msgid "Task List"
 msgstr "Список задач"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:192
-#, fuzzy
 msgid "Fi_xed length (pixels):"
-msgstr "Розм_ір (пікселів):"
+msgstr "Фіксований розм_ір (пікселів):"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:217
 msgid "Use _flat buttons"
@@ -679,12 +678,8 @@ msgid "Window List"
 msgstr "Список вікон"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Термінове сповіщення</i> буде блимаюча кнопка, коли програма "
-"потребуватиме уваги."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Термінове сповіщення</i> буде блимаюча кнопка, коли програма потребуватиме уваги."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
