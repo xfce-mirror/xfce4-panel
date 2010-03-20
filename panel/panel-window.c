@@ -2171,9 +2171,11 @@ panel_window_update_plugins (PanelWindow *window,
     }
 
   itembar = gtk_bin_get_child (GTK_BIN (window));
-  panel_return_if_fail (GTK_IS_CONTAINER (itembar));
   if (G_LIKELY (itembar != NULL))
-    gtk_container_foreach (GTK_CONTAINER (itembar), func, window);
+    {
+      panel_return_if_fail (GTK_IS_CONTAINER (itembar));
+      gtk_container_foreach (GTK_CONTAINER (itembar), func, window);
+    }
 }
 
 

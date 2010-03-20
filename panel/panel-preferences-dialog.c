@@ -146,9 +146,6 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   dialog->bindings = NULL;
   dialog->application = panel_application_get ();
 
-  /* block all autohides */
-  panel_application_windows_autohide (dialog->application, TRUE);
-
   /* load the builder data into the object */
   gtk_builder_add_from_string (GTK_BUILDER (dialog), panel_preferences_dialog_ui,
                                panel_preferences_dialog_ui_length, NULL);
@@ -242,9 +239,6 @@ panel_preferences_dialog_finalize (GObject *object)
       g_signal_handler_disconnect (G_OBJECT (itembar),
           dialog->items_changed_handler_id);
     }
-
-  /* thaw all autohide blocks */
-  panel_application_windows_autohide (dialog->application, FALSE);
 
   /* deselect all windows */
   if (!panel_item_dialog_visible ())

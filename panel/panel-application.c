@@ -718,6 +718,25 @@ panel_application_window_destroyed (GtkWidget        *window,
 
 
 static void
+panel_application_windows_block_autohide (PanelApplication *application,
+                                          gboolean          blocked)
+{
+  GSList *li;
+
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+
+  for (li = application->windows; li != NULL; li = li->next)
+    {
+      if (blocked)
+        panel_window_freeze_autohide (PANEL_WINDOW (li->data));
+      else
+        panel_window_thaw_autohide (PANEL_WINDOW (li->data));
+    }
+}
+
+
+
+static void
 panel_application_dialog_destroyed (GtkWindow        *dialog,
                                     PanelApplication *application)
 {
@@ -727,6 +746,10 @@ panel_application_dialog_destroyed (GtkWindow        *dialog,
 
   /* remove the window from the list */
   application->dialogs = g_slist_remove (application->dialogs, dialog);
+
+  /* unblock autohide if there are no open windows anymore */
+  if (application->dialogs == NULL)
+    panel_application_windows_block_autohide (application, FALSE);
 }
 
 
@@ -1118,11 +1141,13 @@ panel_application_take_dialog (PanelApplication *application,
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (GTK_IS_WINDOW (dialog));
 
+  /* block autohide if this will be the first dialog */
+  if (application->dialogs == NULL)
+    panel_application_windows_block_autohide (application, TRUE);
+
   /* monitor window destruction */
   g_signal_connect (G_OBJECT (dialog), "destroy",
       G_CALLBACK (panel_application_dialog_destroyed), application);
-
-  /* add the window to internal list */
   application->dialogs = g_slist_prepend (application->dialogs, dialog);
 }
 
@@ -1343,25 +1368,6 @@ panel_application_windows_sensitive (PanelApplication *application,
         panel_window_thaw_autohide (PANEL_WINDOW (li->data));
       else
         panel_window_freeze_autohide (PANEL_WINDOW (li->data));
-    }
-}
-
-
-
-void
-panel_application_windows_autohide (PanelApplication *application,
-                                    gboolean          freeze)
-{
-  GSList *li;
-
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-
-  for (li = application->windows; li != NULL; li = li->next)
-    {
-      if (freeze)
-        panel_window_freeze_autohide (PANEL_WINDOW (li->data));
-      else
-        panel_window_thaw_autohide (PANEL_WINDOW (li->data));
     }
 }
 

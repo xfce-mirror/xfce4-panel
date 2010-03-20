@@ -162,9 +162,6 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   /* make the application windows insensitive */
   panel_application_windows_sensitive (dialog->application, FALSE);
 
-  /* block autohide */
-  panel_application_windows_autohide (dialog->application, TRUE);
-
   dialog->factory = panel_module_factory_get ();
 
   /* monitor unique changes */
@@ -275,9 +272,6 @@ panel_item_dialog_finalize (GObject *object)
 
   /* make the windows sensitive again */
   panel_application_windows_sensitive (dialog->application, TRUE);
-
-  /* free autohide block */
-  panel_application_windows_autohide (dialog->application, FALSE);
 
   g_object_unref (G_OBJECT (dialog->store));
   g_object_unref (G_OBJECT (dialog->factory));
