@@ -53,6 +53,7 @@ struct _ApplicationsMenuPlugin
   GtkWidget       *box;
   GtkWidget       *icon;
   GtkWidget       *label;
+  GtkWidget       *menu;
 
   guint            show_generic_names : 1;
   guint            show_menu_icons : 1;
@@ -79,6 +80,10 @@ enum
   PROP_BUTTON_ICON,
   PROP_CUSTOM_MENU,
   PROP_CUSTOM_MENU_FILE
+};
+
+static const GtkTargetEntry dnd_target_list[] = {
+  { "text/uri-list", 0, 0 }
 };
 
 
@@ -586,6 +591,7 @@ applications_menu_plugin_menu_deactivate (GtkWidget *menu,
   panel_return_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button));
   panel_return_if_fail (GTK_IS_MENU (menu));
 
+  /* button is NULL when we popup the menu under the cursor position */
   if (button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
 
@@ -703,6 +709,55 @@ applications_menu_plugin_menu_item_activate (GtkWidget      *mi,
 
 
 
+static void
+applications_menu_plugin_menu_item_drag_begin (GarconMenuItem   *item,
+                                               GdkDragContext   *drag_context)
+{
+  const gchar *icon_name;
+
+  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
+
+  icon_name = garcon_menu_item_get_icon_name (item);
+  if (!exo_str_is_empty (icon_name))
+    gtk_drag_set_icon_name (drag_context, icon_name, 0, 0);
+}
+
+
+
+static void
+applications_menu_plugin_menu_item_drag_data_get (GarconMenuItem   *item,
+                                                  GdkDragContext   *drag_context,
+                                                  GtkSelectionData *selection_data,
+                                                  guint             info,
+                                                  guint             drag_time)
+{
+  gchar *uris[2] = { NULL, NULL };
+
+  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
+
+  uris[0] = garcon_menu_item_get_uri (item);
+  if (G_LIKELY (uris[0] != NULL))
+    {
+      gtk_selection_data_set_uris (selection_data, uris);
+      g_free (uris[0]);
+    }
+}
+
+
+
+static void
+applications_menu_plugin_menu_item_drag_end (ApplicationsMenuPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (plugin->button));
+  panel_return_if_fail (GTK_IS_MENU (plugin->menu));
+
+  /* selection-done is never called, so handle that manually */
+  applications_menu_plugin_menu_deactivate (plugin->menu, plugin->button);
+}
+
+
+
 static gboolean
 applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
                                    GarconMenu             *menu,
@@ -744,6 +799,10 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
 
           mi = gtk_image_menu_item_new_with_label (name);
           gtk_menu_shell_append (GTK_MENU_SHELL (gtk_menu), mi);
+          g_signal_connect_data (G_OBJECT (mi), "activate",
+              G_CALLBACK (applications_menu_plugin_menu_item_activate),
+              g_object_ref (li->data), (GClosureNotify) g_object_unref, 0);
+          gtk_widget_show (mi);
 
           if (plugin->show_tooltips)
             {
@@ -752,10 +811,17 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
                 gtk_widget_set_tooltip_text (mi, comment);
             }
 
-          g_signal_connect_data (G_OBJECT (mi), "activate",
-              G_CALLBACK (applications_menu_plugin_menu_item_activate),
-              g_object_ref (li->data), (GClosureNotify) g_object_unref, 0);
-          gtk_widget_show (mi);
+          /* dragging items from the menu to the panel */
+          gtk_drag_source_set (mi, GDK_BUTTON1_MASK, dnd_target_list,
+              G_N_ELEMENTS (dnd_target_list), GDK_ACTION_COPY);
+          g_signal_connect_data (G_OBJECT (mi), "drag-begin",
+              G_CALLBACK (applications_menu_plugin_menu_item_drag_begin),
+              g_object_ref (li->data), (GClosureNotify) g_object_unref, G_CONNECT_SWAPPED);
+          g_signal_connect_data (G_OBJECT (mi), "drag-data-get",
+              G_CALLBACK (applications_menu_plugin_menu_item_drag_data_get),
+              g_object_ref (li->data), (GClosureNotify) g_object_unref, G_CONNECT_SWAPPED);
+          g_signal_connect_swapped (G_OBJECT (mi), "drag-end",
+              G_CALLBACK (applications_menu_plugin_menu_item_drag_end), plugin);
 
           command = garcon_menu_item_get_command (li->data);
           if (G_UNLIKELY (exo_str_is_empty (command)))
@@ -832,7 +898,7 @@ static void
 applications_menu_plugin_menu (GtkWidget              *button,
                                ApplicationsMenuPlugin *plugin)
 {
-  GtkWidget  *gtk_menu, *mi;
+  GtkWidget  *mi;
   GarconMenu *menu;
   GError     *error = NULL;
 
@@ -851,19 +917,20 @@ applications_menu_plugin_menu (GtkWidget              *button,
 
   if (garcon_menu_load (menu, NULL, &error))
     {
-      gtk_menu = gtk_menu_new ();
-      g_signal_connect (G_OBJECT (gtk_menu), "deactivate",
+      plugin->menu = gtk_menu_new ();
+      g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
            G_CALLBACK (applications_menu_plugin_menu_deactivate), button);
+      g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
-      if (!applications_menu_plugin_menu_add (gtk_menu, menu, plugin))
+      if (!applications_menu_plugin_menu_add (plugin->menu, menu, plugin))
         {
           mi = gtk_menu_item_new_with_label (_("No applications found"));
-          gtk_menu_shell_append (GTK_MENU_SHELL (gtk_menu), mi);
+          gtk_menu_shell_append (GTK_MENU_SHELL (plugin->menu), mi);
           gtk_widget_set_sensitive (mi, FALSE);
           gtk_widget_show (mi);
         }
 
-      gtk_menu_popup (GTK_MENU (gtk_menu), NULL, NULL,
+      gtk_menu_popup (GTK_MENU (plugin->menu), NULL, NULL,
                       button != NULL ? xfce_panel_plugin_position_menu : NULL,
                       plugin, 1, gtk_get_current_event_time ());
     }
