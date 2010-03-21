@@ -2301,10 +2301,6 @@ panel_window_set_povider_info (PanelWindow *window,
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  panel_window_set_plugin_size (provider, window);
-  panel_window_set_plugin_orientation (provider, window);
-  panel_window_set_plugin_screen_position (provider, window);
-
   xfce_panel_plugin_provider_set_locked (XFCE_PANEL_PLUGIN_PROVIDER (provider),
                                          panel_window_get_locked (window));
 
@@ -2317,6 +2313,10 @@ panel_window_set_povider_info (PanelWindow *window,
         panel_plugin_external_46_set_background_alpha (PANEL_PLUGIN_EXTERNAL_46 (provider),
             PANEL_BASE_WINDOW (window)->background_alpha);
     }
+
+  panel_window_set_plugin_orientation (provider, window);
+  panel_window_set_plugin_screen_position (provider, window);
+  panel_window_set_plugin_size (provider, window);
 }
 
 
