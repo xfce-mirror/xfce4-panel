@@ -854,7 +854,7 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
            * return value of this function, so avoid that and only check
            * the visibility of the menu directory */
           directory = garcon_menu_get_directory (li->data);
-          if (!garcon_menu_directory_get_visible (directory))
+          if (directory != NULL && !garcon_menu_directory_get_visible (directory))
             continue;
 
           submenu = gtk_menu_new ();
