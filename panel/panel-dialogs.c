@@ -33,6 +33,28 @@
 
 #include <panel/panel-dialogs.h>
 #include <panel/panel-application.h>
+#include <panel/panel-tic-tac-toe.h>
+
+
+
+static void
+panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
+                                     const gchar    *uri,
+                                     gpointer        data)
+{
+  if (g_strcmp0 ("tictactoe@xfce.org", uri) == 0)
+    {
+      /* gtk needs to finish some stuff before the dialog can be closed */
+      exo_gtk_object_destroy_later (GTK_OBJECT (dialog));
+
+      /* open tic-tac-toe */
+      panel_tic_tac_toe_show ();
+    }
+  else
+    {
+      exo_gtk_url_about_dialog_hook (dialog, uri, data);
+    }
+}
 
 
 
@@ -43,12 +65,12 @@ panel_dialogs_show_about (void)
   {
     "Jasper Huijsmans <jasper@xfce.org>",
     "Nick Schermer <nick@xfce.org>",
+    "Tic-tac-toe <tictactoe@xfce.org>",
     NULL
   };
 
+  gtk_about_dialog_set_email_hook (panel_dialogs_show_about_email_hook, NULL, NULL);
 #if !GTK_CHECK_VERSION (2, 18, 0)
-  /* set exo hooks for urls and email */
-  gtk_about_dialog_set_email_hook (exo_gtk_url_about_dialog_hook, NULL, NULL);
   gtk_about_dialog_set_url_hook (exo_gtk_url_about_dialog_hook, NULL, NULL);
 #endif
 
@@ -64,6 +86,7 @@ panel_dialogs_show_about (void)
                          "website", "http://www.xfce.org/",
                          "logo-icon-name", PACKAGE_NAME,
                          NULL);
+
 }
 
 

@@ -47,6 +47,8 @@ xfce4_panel_SOURCES = \
 	panel-plugin-external-46.h \
 	panel-preferences-dialog.c \
 	panel-preferences-dialog.h \
+	panel-tic-tac-toe.c \
+	panel-tic-tac-toe.h \
 	panel-window.c \
 	panel-window.h
 
