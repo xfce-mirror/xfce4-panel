@@ -165,7 +165,7 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
       button = dialog->buttons[i] = gtk_button_new ();
       gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
       gtk_widget_set_size_request (button, 70, 70);
-      gtk_widget_set_can_focus (button, FALSE);
+      GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_DEFAULT | GTK_CAN_FOCUS);
       g_signal_connect (G_OBJECT (button), "clicked",
           G_CALLBACK (panel_tic_tac_toe_button_clicked), dialog);
 
