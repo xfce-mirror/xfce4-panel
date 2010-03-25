@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel dev version\n"
+"Project-Id-Version: xfce4-panel git version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-22 18:00+0100\n"
-"PO-Revision-Date: 2010-02-22 20:27+0200\n"
+"POT-Creation-Date: 2010-03-25 18:04+0100\n"
+"PO-Revision-Date: 2010-03-25 23:53+0200\n"
 "Last-Translator: Evaggelos Balaskas <ebalaskas@ebalaskas.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -36,38 +36,56 @@ msgstr "Προσαρμογή του ταμπλό xfce"
 msgid "Panel Preferences"
 msgstr "Προτιμήσεις ταμπλό"
 
+#: ../common/panel-utils.c:155
+msgid "_Read Online"
+msgstr "_Διάβαστε διαδικτυακά"
+
+#: ../common/panel-utils.c:156
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr ""
+
+#: ../common/panel-utils.c:158
+msgid "The Xfce Panel user manual is not installed on your computer"
+msgstr ""
+
+#. display an error message to the user
+#: ../common/panel-utils.c:171
+#, fuzzy
+msgid "Failed to open the documentation browser"
+msgstr "Το άνοιγμα του αναγνώστη τεκμηρίωσης απέτυχε"
+
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:841
-#: ../panel/panel-preferences-dialog.c:881
+#: ../libxfce4panel/xfce-panel-plugin.c:861
+#: ../panel/panel-preferences-dialog.c:863
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το \"%s\";"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:846
-#: ../panel/panel-preferences-dialog.c:884
+#: ../libxfce4panel/xfce-panel-plugin.c:866
+#: ../panel/panel-preferences-dialog.c:866
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Εάν αφαιρέσετε αυτό το αντικείμενο από το ταμπλό, θα χαθεί για πάντα."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:985
+#: ../libxfce4panel/xfce-panel-plugin.c:1040
 msgid "_Move"
 msgstr "_Μετακίνηση"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1023
-#: ../panel/panel-window.c:2067
+#: ../libxfce4panel/xfce-panel-plugin.c:1082
+#: ../panel/panel-window.c:2077
 msgid "Add _New Items..."
 msgstr "Προσθήκη _νέων αντικειμένων..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
-#: ../panel/panel-window.c:2078
+#: ../libxfce4panel/xfce-panel-plugin.c:1093
+#: ../panel/panel-window.c:2088
 msgid "Panel Pr_eferences..."
 msgstr "Π_ροτιμήσεις ταμπλό..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1058
-#: ../panel/panel-window.c:2101
+#: ../libxfce4panel/xfce-panel-plugin.c:1117
+#: ../panel/panel-window.c:2111
 msgid "_Restart"
 msgstr "_Επανεκκίνηση"
 
@@ -105,6 +123,9 @@ msgid "Quit the running panel instance"
 msgstr "Τερματισμός της εκτελέσιμης διεργασίας του ταμπλό"
 
 #: ../panel/main.c:81
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Εμφάνιση πληροφοριών έκδοσης"
 
@@ -118,85 +139,85 @@ msgstr "[ΟΡΙΣΜΑΤΑ...]"
 msgid "Type \"%s --help\" for usage."
 msgstr "Πληκτρολόγησε  \"%s --help\"  για χρήση."
 
-#: ../panel/main.c:171
+#: ../panel/main.c:175
 msgid "The Xfce development team. All rights reserved."
 msgstr "Η ομάδα ανάπτυξης του Xfce. All rights reserved."
 
-#: ../panel/main.c:172
+#: ../panel/main.c:176
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Παρακαλώ αναφέρετε τυχόν σφάλματα στο <%s>"
 
-#: ../panel/main.c:218
+#: ../panel/main.c:222
 msgid "There is already a running instance"
 msgstr "Υπάρχει ήδη μια εκτελούμενη διεργασία"
 
 #. spawn ourselfs again
-#: ../panel/main.c:258
+#: ../panel/main.c:262
 msgid "Restarting..."
 msgstr "Επανεκκίνηση ..."
 
-#: ../panel/main.c:273
+#: ../panel/main.c:277
 #, fuzzy
 msgid "Failed to show the preferences dialog"
 msgstr "Δεν ήταν δυνατό το άνοιγμα της οθόνης"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:279
 #, fuzzy
 msgid "Failed to show the add new items dialog"
 msgstr "Εμφάνιση του διαλόγου 'Προσθήκη νέων αντικειμένων'"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:281
 #, fuzzy
 msgid "Failed to save the panel configuration"
 msgstr "Αποτυχία πρόσβασης στην πηγή ή τις πηγές ρυθμίσεων: %s\n"
 
-#: ../panel/main.c:279
-#, fuzzy
-msgid "Failed to add a plugin to the panel"
-msgstr "Η προσθήκη της εφαρμογής \"%s\" απέτυχε"
-
-#: ../panel/main.c:281
-#, fuzzy
-msgid "Failed to restart the panel"
-msgstr "Εάν θα φαίνεται το πλαίσιο"
-
 #: ../panel/main.c:283
 #, fuzzy
-msgid "Failed to quit the panel"
-msgstr "Εάν θα φαίνεται το πλαίσιο"
+msgid "Failed to add a plugin to the panel"
+msgstr "Προσθήκη ενός νέου αρθρώματος στο ταμπλό"
 
 #: ../panel/main.c:285
+#, fuzzy
+msgid "Failed to restart the panel"
+msgstr "Επανεκκίνηση της εκτελέσιμης διεργασίας του ταμπλό"
+
+#: ../panel/main.c:287
+#, fuzzy
+msgid "Failed to quit the panel"
+msgstr "Τερματισμός της εκτελέσιμης διεργασίας του ταμπλό"
+
+#: ../panel/main.c:289
 #, fuzzy
 msgid "Failed to send D-Bus message"
 msgstr "Αποτυχία δημιουργίας νέου μηνύματος D-BUS"
 
 #. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:292
+#: ../panel/main.c:296
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Δεν βρέθηκε να τρέχει διεργασία του %s"
 
-#: ../panel/panel-application.c:193
+#: ../panel/panel-application.c:195
 #, fuzzy
 msgid "Failed to launch the migration application"
 msgstr "Απέτυχε η εκτέλεση της προτιμώμενης εφαρμογής για την κατηγορία \"%s\"."
 
-#: ../panel/panel-dbus-client.c:227
+#: ../panel/panel-dbus-client.c:226
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Μη έγκυρο άρθρωμα, δεν προσδιορίστηκε η σύνταξη του γεγονότος: Χρήση ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
 
-#: ../panel/panel-dbus-client.c:260
+#: ../panel/panel-dbus-client.c:259
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Μη έγκυρος τύπος \"%s\". Έγκυροι τύπο είναι οι εξής: διακριτοί, διπλοί, ακέραιοι, αλφαριθμητικά και μονάδες."
 
-#: ../panel/panel-dialogs.c:57
+#: ../panel/panel-dialogs.c:79
 #, fuzzy
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Πληροφορίες σχετικά με το περιβάλλον εργασίας Xfce"
 
-#: ../panel/panel-dialogs.c:62
+#: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr ""
 "Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\n"
@@ -204,102 +225,95 @@ msgstr ""
 "Στάθης Καμπέρης <ekamperi@auth.gr>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102
+#: ../panel/panel-dialogs.c:125
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Προσθήκη νέου αντικειμένου"
 
-#: ../panel/panel-dialogs.c:116
+#: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "Παρακαλώ επιλέξτε ένα ταμπλό για το νέο άρθρωμα:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:628
+#: ../panel/panel-dialogs.c:150
+#: ../panel/panel-preferences-dialog.c:610
 #, c-format
 msgid "Panel %d"
 msgstr "Ταμπλό %d"
 
-#: ../panel/panel-dialogs.c:163
+#: ../panel/panel-dialogs.c:186
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "Επειδή το ταμπλό που εκτελείτε είναι σε κατάσταση κιόσκι, δεν επιτρέπεται να γίνουν αλλαγές στις ρυθμίσεις του ταμπλό ως απλός χρήστης."
 
-#: ../panel/panel-dialogs.c:165
+#: ../panel/panel-dialogs.c:188
 #, fuzzy
 msgid "Modifying the panel is not allowed"
 msgstr "Το στοιχείο <%s> δεν επιτρέπεται κάτω από <%s>"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Το άρθρωμα \"%s\" απροσδόκητα έφυγε από το ταμπλό, θέλετε να το επανεκκινήσετε;"
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:211
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Το άρθρωμα επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d δευτερόλεπτα. Εάν πατήσετε εκτέλεση το ταμπλό θα προσπαθήσει να επανεκκινήσει το άρθρωμα αλλιώς θα απομακρυνθεί μόνιμα από το ταμπλό."
 
-#: ../panel/panel-item-dialog.c:173
+#: ../panel/panel-item-dialog.c:171
 msgid "Add New Items"
 msgstr "Προσθήκη νέων αντικειμένων"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:173
 #, fuzzy
 msgid "Add new plugins to the panel"
-msgstr "Η προσθήκη της εφαρμογής \"%s\" απέτυχε"
+msgstr "Προσθήκη ενός νέου αρθρώματος στο ταμπλό"
 
-#: ../panel/panel-item-dialog.c:197
+#: ../panel/panel-item-dialog.c:195
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "Ανα_ζήτηση:"
 
-#: ../panel/panel-item-dialog.c:205
+#: ../panel/panel-item-dialog.c:203
 #, fuzzy
 msgid "Enter search phrase here"
 msgstr "Αριθμός κομματιού"
 
-#: ../panel/panel-item-dialog.c:310
-#: ../panel/panel-preferences-dialog.c:281
-#, fuzzy
-msgid "Failed to open manual"
-msgstr "Αποτυχία κατά το άνοιγμα της τεκμηρίωσης."
-
-#: ../panel/panel-preferences-dialog.c:395
+#: ../panel/panel-preferences-dialog.c:377
 msgid "Automatic"
 msgstr "Αυτόματο"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:414
+#: ../panel/panel-preferences-dialog.c:396
 #, c-format
 msgid "Screen %d"
 msgstr "Οθόνη %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:440
+#: ../panel/panel-preferences-dialog.c:422
 #, fuzzy, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:689
+#: ../panel/panel-preferences-dialog.c:671
 #, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Το επιλεγμένο ταμπλό και όλα τα αντικείμενά του θα διαγραφούν."
 
-#: ../panel/panel-preferences-dialog.c:690
+#: ../panel/panel-preferences-dialog.c:672
 #, fuzzy, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Είστε σίγουρος/η ότι θέλετε να διαγράψετε το \"%s\";"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:764
+#: ../panel/panel-preferences-dialog.c:746
 #, fuzzy, c-format
 msgid "Internal name: %s-%d"
 msgstr "ΌΝΟΜΑ ΣΥΣΚΕΥΗΣ"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Προσθήκη νέου ταμπλό"
+msgstr "Προσθήκη ενός νέου ταμπλού"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 #, fuzzy
@@ -427,33 +441,62 @@ msgstr "Κάθετο"
 msgid "Xfce Panel"
 msgstr "Ταμπλό του Xfce"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#. I18N: label for the background alha slider
+#: ../panel/panel-preferences-dialog.glade.h:32
 #, fuzzy
 msgid "_Alpha:"
 msgstr "Άλφα"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:34
 #, fuzzy
 msgid "_Enter:"
 msgstr "Εισαγωγή κωδικού"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:36
 #, fuzzy
 msgid "_Leave:"
 msgstr "Επαναφορά πλ_ήρης οθόνη"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:37
 #, fuzzy
 msgid "_Lock panel"
 msgstr "Εκκινείται το Ταμπλό"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_Orientation:"
 msgstr "Προ_σανατολισμός:"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Size (pixels):"
 msgstr "Μέγεθος (pixel_s):"
+
+#: ../panel/panel-tic-tac-toe.c:123
+#, fuzzy
+msgid "_New Game"
+msgstr "Παίζει ένα παιχνίδι"
+
+#: ../panel/panel-tic-tac-toe.c:134
+#, fuzzy
+msgid "_Level:"
+msgstr "Επίπεδο"
+
+#: ../panel/panel-tic-tac-toe.c:140
+msgid "Novice"
+msgstr "Αρχάριος"
+
+#: ../panel/panel-tic-tac-toe.c:141
+msgid "Intermidiate"
+msgstr "Ενδιάμεσος"
+
+#: ../panel/panel-tic-tac-toe.c:142
+msgid "Experienced"
+msgstr "Ππεπειραμένος"
+
+#: ../panel/panel-tic-tac-toe.c:143
+msgid "Expert"
+msgstr "Έμπειρος"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
@@ -490,7 +533,7 @@ msgstr "Αποθήκευση ρυθμίσεων"
 #: ../migrate/main.c:102
 #, fuzzy
 msgid "One empty panel"
-msgstr "Περί Ταμπλό του Xfce"
+msgstr "Εκκίνηση με ένα κενό ταμπλό"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
@@ -507,9 +550,9 @@ msgid "Failed to load the default configuration"
 msgstr "Αποτυχία πρόσβασης στην πηγή ή τις πηγές ρυθμίσεων: %s\n"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
-msgid "Action Button"
-msgstr "Τίτλος _κουμπιού:"
+#: ../plugins/actions/actions.desktop.in.h:1
+msgid "Action Buttons"
+msgstr "Κουμπιά ενεργειών "
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 #, fuzzy
@@ -537,7 +580,6 @@ msgid "Log Out Dialog"
 msgstr "Αποσυνδεθείτε από το Xfce"
 
 #: ../plugins/actions/actions.c:110
-#, fuzzy
 msgid "Log Out"
 msgstr "Αποσύνδεση"
 
@@ -556,12 +598,10 @@ msgid "Restart"
 msgstr "Επανεκκίνηση"
 
 #: ../plugins/actions/actions.c:114
-#, fuzzy
 msgid "Suspend"
 msgstr "Αναστολή"
 
 #: ../plugins/actions/actions.c:115
-#, fuzzy
 msgid "Hibernate"
 msgstr "Αδρανοποίηση"
 
@@ -572,10 +612,6 @@ msgstr ""
 "Αδυναμία εκτέλεσης της εντολής \"%s\"\n"
 "\n"
 "%s"
-
-#: ../plugins/actions/actions.desktop.in.h:1
-msgid "Action Buttons"
-msgstr "Κουμπιά ενεργειών "
 
 #: ../plugins/actions/actions.desktop.in.h:2
 #, fuzzy
@@ -625,31 +661,36 @@ msgstr "Επιλέξτε αυτή την επιλογή για να δείτε �
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 #, fuzzy
-msgid "Show generic application n_ames"
+msgid "Show application description in t_ooltip"
 msgstr "Εμφάνιση εικον_ιδίων στο μενού"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 #, fuzzy
-msgid "Show ic_ons in menu"
+msgid "Show generic application n_ames"
 msgstr "Εμφάνιση εικον_ιδίων στο μενού"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 #, fuzzy
+msgid "Show ic_ons in menu"
+msgstr "Εμφάνιση εικον_ιδίων στο μενού"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#, fuzzy
 msgid "Use _default menu file"
 msgstr "Χρήση προκαθορισμένου αρχείου _μενού"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 #, fuzzy
 msgid "Use c_ustom menu file"
 msgstr "Χρήση _προσαρμοσμένου αρχείου μενού"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #, fuzzy
 msgid "_Icon:"
 msgstr "Ε_ικονίδιο:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #, fuzzy
 msgid "_Show button title"
 msgstr "_Προβολή τίτλου στο κουμπί"
@@ -659,13 +700,13 @@ msgstr "_Προβολή τίτλου στο κουμπί"
 msgid "Xfce Menu"
 msgstr "Μενού του Xfce"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:440
+#: ../plugins/applicationsmenu/applicationsmenu.c:463
 #: ../plugins/directorymenu/directorymenu.c:369
 #, fuzzy
 msgid "Select An Icon"
 msgstr "Επιλογή εικονιδίου"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:670
+#: ../plugins/applicationsmenu/applicationsmenu.c:703
 #: ../plugins/launcher/launcher.c:2095
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\"."
@@ -674,12 +715,12 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:823
+#: ../plugins/applicationsmenu/applicationsmenu.c:927
 #, fuzzy
 msgid "No applications found"
 msgstr "Δε βρέθηκαν αισθητήρες!"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:835
+#: ../plugins/applicationsmenu/applicationsmenu.c:939
 #, fuzzy
 msgid "Failed to load the applications menu"
 msgstr "Ο εντοπισμός του μενού συστήματος απέτυχε"
@@ -688,6 +729,56 @@ msgstr "Ο εντοπισμός του μενού συστήματος απέτ�
 #, fuzzy
 msgid "Show a menu containing categories of installed applications"
 msgstr "Εμφανίζει ένα μενού που περιέχει τις κατηγορίες των εγκατεστημένων εφαρμογών"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+#, fuzzy
+msgid "Usage:"
+msgstr "Χρήση:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+#, fuzzy
+msgid "OPTION"
+msgstr "ΕΠΙΛΟΓΗ"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+#, fuzzy
+msgid "Options:"
+msgstr "Επιλογές:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+#, fuzzy
+msgid "Popup menu at current mouse position"
+msgstr "    --menu       Εμφάνιση του μενού (στην τρέχουσα θέση του κέρσορα)\n"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+#, fuzzy
+msgid "Show help options"
+msgstr "Εμφάνιση επιλογών βοήθειας"
+
+#: ../plugins/clock/clock.c:144
+#, fuzzy
+msgid "Week %V"
+msgstr "Μια βδομάδα πριν"
+
+#: ../plugins/clock/clock.c:383
+#, fuzzy
+msgid "Failed to execute clock command"
+msgstr "Αποτυχία κατά την εκτέλεση της δήλωσης στην βάση: %s\n"
+
+#: ../plugins/clock/clock.c:677
+#, fuzzy
+msgid "Custom Format"
+msgstr "Προσαρμοσμένη Διάταξη Ημερομηνίας"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 #, fuzzy
@@ -734,7 +825,6 @@ msgid "Fl_ash time seperators"
 msgstr "Ο διαχωριστής ώρας αναβοσβήνει"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
-#, fuzzy
 msgid "Fuzzy"
 msgstr "Ασαφές"
 
@@ -825,7 +915,7 @@ msgstr "Î¡Î¿Î»ÏÎ³Î¹Î±"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, fuzzy, no-c-format
 msgid "five past %0"
-msgstr "Παρελθόντες μεταφραστές"
+msgstr "είκοσι πέντε παρά %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, fuzzy, no-c-format
@@ -840,7 +930,7 @@ msgstr "Παρελθόντες μεταφραστές"
 #: ../plugins/clock/clock-fuzzy.c:104
 #, fuzzy, no-c-format
 msgid "twenty past %0"
-msgstr "Παρελθόντες μεταφραστές"
+msgstr "είκοσι πέντε παρά %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
@@ -855,7 +945,7 @@ msgstr "Παρελθόντες μεταφραστές"
 #: ../plugins/clock/clock-fuzzy.c:107
 #, fuzzy, no-c-format
 msgid "twenty five to %1"
-msgstr "Επαναφορά στις προεπιλογές"
+msgstr "είκοσι πέντε παρά %0"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, fuzzy, no-c-format
@@ -894,7 +984,7 @@ msgstr "Î¡Î¿Î»ÏÎ³Î¹Î±"
 #, fuzzy, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr "Παρελθόντες μεταφραστές"
+msgstr "είκοσι πέντε παρά %0"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, fuzzy, no-c-format
@@ -912,7 +1002,7 @@ msgstr "Παρελθόντες μεταφραστές"
 #, fuzzy, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr "Παρελθόντες μεταφραστές"
+msgstr "είκοσι πέντε παρά %0"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
@@ -930,7 +1020,7 @@ msgstr "Παρελθόντες μεταφραστές"
 #, fuzzy, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr "Επαναφορά στις προεπιλογές"
+msgstr "είκοσι πέντε παρά %0"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, fuzzy, no-c-format
@@ -963,14 +1053,12 @@ msgid "%1 o'clock"
 msgstr "Î¡Î¿Î»ÏÎ³Î¹Î±"
 
 #: ../plugins/clock/clock-fuzzy.c:136
-#, fuzzy
 msgid "one"
-msgstr "Ένα λεπτό"
+msgstr "ένα"
 
 #: ../plugins/clock/clock-fuzzy.c:137
-#, fuzzy
 msgid "two"
-msgstr "Διπλής όψης"
+msgstr "δύο"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
@@ -981,9 +1069,8 @@ msgid "four"
 msgstr "τέσσερα"
 
 #: ../plugins/clock/clock-fuzzy.c:140
-#, fuzzy
 msgid "five"
-msgstr "Δώσε πέντε"
+msgstr "πέντε"
 
 #: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
@@ -994,14 +1081,12 @@ msgid "seven"
 msgstr "επτά"
 
 #: ../plugins/clock/clock-fuzzy.c:143
-#, fuzzy
 msgid "eight"
-msgstr "_Ύψος:"
+msgstr "οχτώ"
 
 #: ../plugins/clock/clock-fuzzy.c:144
-#, fuzzy
 msgid "nine"
-msgstr "_Γραμμή"
+msgstr "εννιά"
 
 #: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
@@ -1015,56 +1100,41 @@ msgstr "έντεκα"
 msgid "twelve"
 msgstr "δώδεκα"
 
-#: ../plugins/clock/clock.c:144
-#, fuzzy
-msgid "Week %V"
-msgstr "Μια βδομάδα πριν"
-
-#: ../plugins/clock/clock.c:383
-#, fuzzy
-msgid "Failed to execute clock command"
-msgstr "Αποτυχία κατά την εκτέλεση της δήλωσης στην βάση: %s\n"
-
-#: ../plugins/clock/clock.c:677
-#, fuzzy
-msgid "Custom Format"
-msgstr "Προσαρμοσμένη Διάταξη Ημερομηνίας"
-
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
 msgstr "Τι ώρα είναι;"
 
-#: ../plugins/directorymenu/directorymenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:550
 #, fuzzy, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Απέτυχε η εκκίνηση της εφαρμογής."
 
-#: ../plugins/directorymenu/directorymenu.c:569
+#: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Αποτυχία αναζήτησης τύπου περιεχομένου για το \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:578
+#: ../plugins/directorymenu/directorymenu.c:590
 #, fuzzy, c-format
 msgid "No default application found for \"%s\""
 msgstr "Δεν βρέθηκε σελιδοδείκτης για το URI '%s'"
 
-#: ../plugins/directorymenu/directorymenu.c:593
+#: ../plugins/directorymenu/directorymenu.c:605
 #, fuzzy, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Ο ορισμός της προκαθορισμένης εφαρμογής για το \"%s\" απέτυχε"
 
-#: ../plugins/directorymenu/directorymenu.c:684
+#: ../plugins/directorymenu/directorymenu.c:696
 #, fuzzy, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Απέτυχε η εκτέλεση της προτιμώμενης εφαρμογής για την κατηγορία \"%s\"."
 
-#: ../plugins/directorymenu/directorymenu.c:757
+#: ../plugins/directorymenu/directorymenu.c:769
 #, fuzzy
 msgid "Open Folder"
 msgstr "Άνοιγμα φακέλου"
 
-#: ../plugins/directorymenu/directorymenu.c:768
+#: ../plugins/directorymenu/directorymenu.c:780
 #, fuzzy
 msgid "Open in Terminal"
 msgstr "Εκτέλεση σε τερματι_κό"
@@ -1110,6 +1180,16 @@ msgstr "_Κατάλογος εργασίας:"
 #, fuzzy
 msgid "_File Pattern:"
 msgstr "_Μοτίβο:"
+
+#: ../plugins/launcher/launcher.c:1441
+#, fuzzy
+msgid "Unnamed Item"
+msgstr "%d επιλεγμένο αντικείμενο (%s)"
+
+#: ../plugins/launcher/launcher.c:1581
+#, fuzzy
+msgid "No items"
+msgstr "Δε βρέθηκαν καταχωρήσεις"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
@@ -1213,19 +1293,13 @@ msgstr "_Δυτικής Ευρώπης"
 msgid "_Arrow button position:"
 msgstr "Να εμφανίζεται το κλασσικό προς τα πίσω κουμπί βέλους"
 
-#: ../plugins/launcher/launcher.c:1441
-#, fuzzy
-msgid "Unnamed Item"
-msgstr "%d επιλεγμένο αντικείμενο (%s)"
-
-#: ../plugins/launcher/launcher.c:1581
-#, fuzzy
-msgid "No items"
-msgstr "Δε βρέθηκαν καταχωρήσεις"
-
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Εκκινητής προγραμμάτων με προαιρετικό μενού"
+
+#: ../plugins/pager/pager.c:411
+msgid "Unable to open the Xfce workspace settings"
+msgstr "Αδυναμία ανοίγματος των ρυθμίσεων των χώρων εργασίας του xfce"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1256,10 +1330,6 @@ msgstr "Εναλλάκτης χώρων εργασίας"
 #, fuzzy
 msgid "Workspace _Settings..."
 msgstr "Επεξεργαστής ρυθμίσεων"
-
-#: ../plugins/pager/pager.c:404
-msgid "Unable to open the Xfce workspace settings"
-msgstr "Αδυναμία ανοίγματος των ρυθμίσεων των χώρων εργασίας του xfce"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1324,6 +1394,20 @@ msgstr "Απόκρυψη των παραθύρων και εμφάνιση τη�
 msgid "Show Desktop"
 msgstr "Εμφάνιση επιφάνειας εργασίας"
 
+#. create fake error and show it
+#: ../plugins/systray/systray.c:551
+msgid "Most likely another widget took over the function of a notification area. This plugin will close."
+msgstr "Το πιο πιθανό ένα άλλο widget να δέσμευσε την λειτουργικότητα της περιοχής ειδοποιήσεων. Αυτό το άρθρωμα θα κλείσει."
+
+#: ../plugins/systray/systray.c:554
+#, fuzzy
+msgid "The notification area lost selection"
+msgstr "Ο διαχειριστής πλαισίου συστήματος έχασε την επιλογή"
+
+#: ../plugins/systray/systray.c:747
+msgid "Are you sure you want to clear the list of known applications?"
+msgstr "Σίγουρα θέλετε να καθαρίσετε τη λίστα γνωστών εφαρμογών;"
+
 #: ../plugins/systray/systray-dialog.glade.h:2
 #, fuzzy
 msgid "C_lear Known Applications"
@@ -1348,26 +1432,11 @@ msgstr "_Αριθμός γραμμών:"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Η λήψη επιλογής διαχειριστή απέτυχε για την οθόνη %d"
 
-#. create fake error and show it
-#: ../plugins/systray/systray.c:551
-msgid "Most likely another widget took over the function of a notification area. This plugin will close."
-msgstr "Το πιο πιθανό ένα άλλο widget να δέσμευσε την λειτουργικότητα της περιοχής ειδοποιήσεων. Αυτό το άρθρωμα θα κλείσει."
-
-#: ../plugins/systray/systray.c:554
-#, fuzzy
-msgid "The notification area lost selection"
-msgstr "Ο διαχειριστής πλαισίου συστήματος έχασε την επιλογή"
-
-#: ../plugins/systray/systray.c:747
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Σίγουρα θέλετε να καθαρίσετε τη λίστα γνωστών εφαρμογών;"
-
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
 msgstr "Περιοχή που εμφανίζονται τα εικονίδια ειδοποίησης"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
-#, fuzzy
 msgid "Always"
 msgstr "Πάντα"
 
@@ -1386,7 +1455,6 @@ msgid "Group title and window title"
 msgstr "Ρύθμιση συμπεριφοράς παραθύρων και συντομεύσεων"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
-#, fuzzy
 msgid "Never"
 msgstr "Ποτέ"
 
@@ -1425,7 +1493,6 @@ msgid "Sorting _order:"
 msgstr "Σειρά τ_αξινόμησης:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
 msgid "Timestamp"
 msgstr "Χρονοσήμανση"
 
@@ -1450,28 +1517,27 @@ msgstr "Ομ_αδοποίηση παραθύρων:"
 msgid "Window title"
 msgstr "Τίτλος παραθύρου"
 
-#: ../plugins/tasklist/tasklist-widget.c:2281
+#: ../plugins/tasklist/tasklist-widget.c:2550
 #, fuzzy
 msgid "Mi_nimize All"
 msgstr "Ελα_χιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2290
+#: ../plugins/tasklist/tasklist-widget.c:2559
 #, fuzzy
 msgid "Un_minimize All"
 msgstr "Μεγιστο_ποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2296
+#: ../plugins/tasklist/tasklist-widget.c:2565
 #, fuzzy
 msgid "Ma_ximize All"
 msgstr "Με_γιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2305
+#: ../plugins/tasklist/tasklist-widget.c:2574
 #, fuzzy
 msgid "_Unmaximize All"
 msgstr "Α_πομεγιστοποίηση Όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2315
-#, fuzzy
+#: ../plugins/tasklist/tasklist-widget.c:2584
 msgid "_Close All"
 msgstr "_Κλείσιμο Όλων"
 
@@ -1479,8 +1545,42 @@ msgstr "_Κλείσιμο Όλων"
 msgid "Switch between open windows using buttons"
 msgstr "Χρήση πλήκτρων για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+#: ../plugins/windowmenu/windowmenu.c:652
 #, fuzzy
+msgid "Desktop"
+msgstr "Επιφάνεια εργασίας"
+
+#: ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "Χώρος εργασίας %d"
+
+#: ../plugins/windowmenu/windowmenu.c:1243
+#, fuzzy
+msgid "No Windows"
+msgstr "Δεν υπάρχουν παράθυρα"
+
+#: ../plugins/windowmenu/windowmenu.c:1258
+#, fuzzy
+msgid "Urgent Windows"
+msgstr "Επείγοντα παράθυρα"
+
+#: ../plugins/windowmenu/windowmenu.c:1300
+#, fuzzy
+msgid "Add Workspace"
+msgstr "Προσθήκη χώρου εργασίας"
+
+#: ../plugins/windowmenu/windowmenu.c:1320
+#, fuzzy, c-format
+msgid "Remove Workspace \"%s\""
+msgstr "Αφαίρεση χώρου εργασίας \"%s\""
+
+#: ../plugins/windowmenu/windowmenu.c:1322
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Διαγραφή χώρου εργασίας %d"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
 msgstr "Βέλος"
 
@@ -1495,7 +1595,6 @@ msgid "Enable _urgency notification"
 msgstr "Ενεργοποίηση επ_είγουσας ειδοποίησης"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Icon"
 msgstr "Εικονίδιο"
 
@@ -1509,41 +1608,6 @@ msgstr "Προβολή εν_εργειών στους χώρους εργασί�
 #, fuzzy
 msgid "Window Menu"
 msgstr "Μενού λίστας παραθύρων"
-
-#: ../plugins/windowmenu/windowmenu.c:648
-#, fuzzy
-msgid "Desktop"
-msgstr "Επιφάνεια εργασίας"
-
-#: ../plugins/windowmenu/windowmenu.c:881
-#, c-format
-msgid "Workspace %d"
-msgstr "Χώρος εργασίας %d"
-
-#: ../plugins/windowmenu/windowmenu.c:1270
-#, fuzzy
-msgid "No Windows"
-msgstr "Δεν υπάρχουν παράθυρα"
-
-#: ../plugins/windowmenu/windowmenu.c:1285
-#, fuzzy
-msgid "Urgent Windows"
-msgstr "Επείγοντα παράθυρα"
-
-#: ../plugins/windowmenu/windowmenu.c:1327
-#, fuzzy
-msgid "Add Workspace"
-msgstr "Προσθήκη χώρου εργασίας"
-
-#: ../plugins/windowmenu/windowmenu.c:1347
-#, fuzzy, c-format
-msgid "Remove Workspace \"%s\""
-msgstr "Αφαίρεση χώρου εργασίας \"%s\""
-
-#: ../plugins/windowmenu/windowmenu.c:1349
-#, c-format
-msgid "Remove Workspace %d"
-msgstr "Διαγραφή χώρου εργασίας %d"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
