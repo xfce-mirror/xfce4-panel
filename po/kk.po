@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-11 06:04+0100\n"
+"POT-Creation-Date: 2010-03-25 00:04+0100\n"
 "PO-Revision-Date: 2010-03-14 15:38+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -50,37 +50,34 @@ msgid "Failed to open the documentation browser"
 msgstr "Құжаттама шолушысын ашу сәтсіз аяқталды"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:860
-#: ../panel/panel-preferences-dialog.c:869
+#: ../libxfce4panel/xfce-panel-plugin.c:861
+#: ../panel/panel-preferences-dialog.c:863
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" өшіруді шынымен қалайсыз ба?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:865
-#: ../panel/panel-preferences-dialog.c:872
+#: ../libxfce4panel/xfce-panel-plugin.c:866
+#: ../panel/panel-preferences-dialog.c:866
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Элементті панелден өшірсеңіз, ол толығымен жойылады."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1039
+#: ../libxfce4panel/xfce-panel-plugin.c:1040
 msgid "_Move"
 msgstr "Ж_ылжыту"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1081
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2077
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1092
-#: ../panel/panel-window.c:2088
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2088
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1116
-#: ../panel/panel-window.c:2111
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2111
 msgid "_Restart"
 msgstr "Қа_йта қосу"
 
@@ -88,8 +85,7 @@ msgstr "Қа_йта қосу"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Панельді баптаулары' сұхбар терезесін көрсету"
 
-#: ../panel/main.c:75
-#: ../panel/main.c:76
+#: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
@@ -190,102 +186,100 @@ msgstr "%s үшін қосулы тұрған нұсқалары табылма�
 msgid "Failed to launch the migration application"
 msgstr "Көшу қолданбасын жөнелту сәтсіз аяқталды"
 
-#: ../panel/panel-dbus-client.c:227
+#: ../panel/panel-dbus-client.c:226
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Плагин оқиға синтаксисі қате. PLUGIN-NAME:NAME[:TYPE:VALUE] түрінде болуы керек."
 
-#: ../panel/panel-dbus-client.c:260
+#: ../panel/panel-dbus-client.c:259
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Қате көмексөз түрі \"%s\". Дұрыс түрлері bool, double, int, string және uint."
 
-#: ../panel/panel-dialogs.c:57
+#: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce жұмыс үстел ортасының панелі"
 
-#: ../panel/panel-dialogs.c:62
+#: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Жаңа элементті қосу"
 
-#: ../panel/panel-dialogs.c:116
+#: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "Жаңа плагин үшін панельді тандаңыз:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:616
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:610
 #, c-format
 msgid "Panel %d"
 msgstr "%d панель"
 
-#: ../panel/panel-dialogs.c:163
+#: ../panel/panel-dialogs.c:186
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "Панель киоск түрінде қосулы тұр, қалыпты пайдаланушы ретінде оның баптауларын өзгерте алмайсыз"
 
-#: ../panel/panel-dialogs.c:165
+#: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
 msgstr "Бұл панельді түзетуге рұқсат жоқ"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "\"%s\" плагині күтпегенде панельден кетті, оны қайта қосу керек пе?"
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:211
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Плагин соңғы %d секундта бірден көп рет қайта қосылған. Орындау батырмасын бассаңыз, панель ол плагинді қайта қосып көреді, олай болмаса, ол плагин панельден өшіріледі."
 
-#: ../panel/panel-item-dialog.c:174
+#: ../panel/panel-item-dialog.c:171
 msgid "Add New Items"
 msgstr "Жаңа элементтерді қосу"
 
-#: ../panel/panel-item-dialog.c:176
+#: ../panel/panel-item-dialog.c:173
 msgid "Add new plugins to the panel"
 msgstr "Панельге жаңа плагиндерді қосу"
 
-#: ../panel/panel-item-dialog.c:198
+#: ../panel/panel-item-dialog.c:195
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "І_здеу:"
 
-#: ../panel/panel-item-dialog.c:206
+#: ../panel/panel-item-dialog.c:203
 msgid "Enter search phrase here"
 msgstr "Іздеу мәтінін осында енгізіңіз"
 
-#: ../panel/panel-preferences-dialog.c:383
+#: ../panel/panel-preferences-dialog.c:377
 msgid "Automatic"
 msgstr "Авто"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:402
+#: ../panel/panel-preferences-dialog.c:396
 #, c-format
 msgid "Screen %d"
 msgstr "Экран %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:428
+#: ../panel/panel-preferences-dialog.c:422
 #, c-format
 msgid "Monitor %d"
 msgstr "Монитор %d"
 
-#: ../panel/panel-preferences-dialog.c:677
+#: ../panel/panel-preferences-dialog.c:671
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Панель мен плагиндер баптаулары толығымен өшіріледі."
 
-#: ../panel/panel-preferences-dialog.c:678
+#: ../panel/panel-preferences-dialog.c:672
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d панелін өшіруді шынымен қалайсыз ба?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:752
+#: ../panel/panel-preferences-dialog.c:746
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Ішкі аты: %s-%d"
@@ -341,7 +335,8 @@ msgstr "Эле_менттер"
 msgid "L_ength (%):"
 msgstr "Ұ_зындығы (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Measurements"
 msgstr "Өлшем бірліктері"
@@ -434,6 +429,30 @@ msgstr "_Бағдары:"
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Size (pixels):"
 msgstr "Ө_лшемі (пиксельмен):"
+
+#: ../panel/panel-tic-tac-toe.c:123
+msgid "_New Game"
+msgstr "Ж_аңа ойын"
+
+#: ../panel/panel-tic-tac-toe.c:134
+msgid "_Level:"
+msgstr "Д_еңгейі:"
+
+#: ../panel/panel-tic-tac-toe.c:140
+msgid "Novice"
+msgstr "Жаңа түскен"
+
+#: ../panel/panel-tic-tac-toe.c:141
+msgid "Intermidiate"
+msgstr "Бастауыш"
+
+#: ../panel/panel-tic-tac-toe.c:142
+msgid "Experienced"
+msgstr "Орташа"
+
+#: ../panel/panel-tic-tac-toe.c:143
+msgid "Expert"
+msgstr "Тәжірибелі"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
@@ -606,22 +625,22 @@ msgstr "Бат_ырма атауын көрсету"
 msgid "Xfce Menu"
 msgstr "Xfce мәзірі"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:458
+#: ../plugins/applicationsmenu/applicationsmenu.c:463
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Таңбашаны таңдаңыз"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:697
+#: ../plugins/applicationsmenu/applicationsmenu.c:703
 #: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:860
+#: ../plugins/applicationsmenu/applicationsmenu.c:927
 msgid "No applications found"
 msgstr "Қолданбалар табылмады"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:872
+#: ../plugins/applicationsmenu/applicationsmenu.c:939
 msgid "Failed to load the applications menu"
 msgstr "Қолданбалар мәзірін жүктеп алу сәтсіз аяқталды"
 
@@ -704,7 +723,8 @@ msgstr "_Секундтарды көрсету"
 msgid "F_ormat:"
 msgstr "Пі_шім:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Қыз_ықтылығы:"
@@ -1156,7 +1176,7 @@ msgstr "Сызық_ша батырма орналасуы:"
 msgid "Program launcher with optional menu"
 msgstr "Қосымша мәзірі бар бағдарлама жіберуші"
 
-#: ../plugins/pager/pager.c:408
+#: ../plugins/pager/pager.c:411
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Xfce жұмыс орын баптауларын ашу мүмкін емес"
 
@@ -1349,23 +1369,23 @@ msgstr "Терезелерді _топтау:"
 msgid "Window title"
 msgstr "Терезе атауы"
 
-#: ../plugins/tasklist/tasklist-widget.c:2381
+#: ../plugins/tasklist/tasklist-widget.c:2550
 msgid "Mi_nimize All"
 msgstr "Барл_ығын қайыру"
 
-#: ../plugins/tasklist/tasklist-widget.c:2390
+#: ../plugins/tasklist/tasklist-widget.c:2559
 msgid "Un_minimize All"
 msgstr "Барлығы_н қайырудан қайтару"
 
-#: ../plugins/tasklist/tasklist-widget.c:2396
+#: ../plugins/tasklist/tasklist-widget.c:2565
 msgid "Ma_ximize All"
 msgstr "Бар_лығын жазық қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:2405
+#: ../plugins/tasklist/tasklist-widget.c:2574
 msgid "_Unmaximize All"
 msgstr "Барлығын _жазық емес қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:2415
+#: ../plugins/tasklist/tasklist-widget.c:2584
 msgid "_Close All"
 msgstr "Ба_рлығын жабу"
 
@@ -1433,11 +1453,8 @@ msgstr "Терезеле мәзірі"
 msgid "Switch between open windows using a menu"
 msgstr "Ашық терезелер арасында мәзір арқылы ауысу"
 
-#, fuzzy
 #~ msgid "Failed to open manual"
 #~ msgstr "Дисплейді ашу сәтсіз аяқталды"
 
-#, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "Әрекеттер батырмалары"
-
