@@ -341,6 +341,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "autohide", "active");
   panel_preferences_dialog_bindings_add (dialog, "size", "value");
   panel_preferences_dialog_bindings_add (dialog, "length", "value");
+  panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active");
   panel_preferences_dialog_bindings_add (dialog, "background-alpha", "value");
   panel_preferences_dialog_bindings_add (dialog, "enter-opacity", "value");
   panel_preferences_dialog_bindings_add (dialog, "leave-opacity", "value");

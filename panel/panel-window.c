@@ -139,6 +139,7 @@ enum
   PROP_HORIZONTAL,
   PROP_SIZE,
   PROP_LENGTH,
+  PROP_LENGTH_ADJUST,
   PROP_POSITION_LOCKED,
   PROP_AUTOHIDE,
   PROP_SPAN_MONITORS,
@@ -248,6 +249,7 @@ struct _PanelWindow
   /* window positioning */
   guint                size;
   gdouble              length;
+  guint                length_adjust : 1;
   guint                horizontal : 1;
   SnapPosition         snap_position;
   guint                span_monitors : 1;
@@ -342,6 +344,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_LENGTH_ADJUST,
+                                   g_param_spec_boolean ("length-adjust", NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_POSITION_LOCKED,
                                    g_param_spec_boolean ("position-locked", NULL, NULL,
                                                          FALSE,
@@ -413,6 +421,7 @@ panel_window_init (PanelWindow *window)
   window->horizontal = TRUE;
   window->size = 30;
   window->length = 0.10;
+  window->length_adjust = TRUE;
   window->snap_position = SNAP_POSITION_NONE;
   window->span_monitors = FALSE;
   window->position_locked = FALSE;
@@ -467,6 +476,10 @@ panel_window_get_property (GObject    *object,
 
     case PROP_LENGTH:
       g_value_set_uint (value,  rint (window->length * 100.00));
+      break;
+
+    case PROP_LENGTH_ADJUST:
+      g_value_set_boolean (value, window->length_adjust);
       break;
 
     case PROP_POSITION_LOCKED:
@@ -558,6 +571,15 @@ panel_window_set_property (GObject      *object,
           if (update)
             panel_window_screen_update_borders (window);
 
+          gtk_widget_queue_resize (GTK_WIDGET (window));
+        }
+      break;
+
+    case PROP_LENGTH_ADJUST:
+      val_bool = g_value_get_boolean (value);
+      if (window->length_adjust != val_bool)
+        {
+          window->length_adjust = !!val_bool;
           gtk_widget_queue_resize (GTK_WIDGET (window));
         }
       break;
@@ -1033,11 +1055,17 @@ panel_window_size_request (GtkWidget      *widget,
   /* respect the length and monitor/screen size */
   if (window->horizontal)
     {
+      if (!window->length_adjust)
+        requisition->width = extra_width;
+
       length = window->area.width * window->length;
       requisition->width = CLAMP (requisition->width, length, window->area.width);
     }
   else
     {
+      if (!window->length_adjust)
+        requisition->height = extra_height;
+
       length = window->area.height * window->length;
       requisition->height = CLAMP (requisition->height, length, window->area.height);
     }
