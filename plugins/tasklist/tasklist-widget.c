@@ -138,6 +138,9 @@ struct _XfceTasklist
    * the tasklist */
   guint                 show_wireframes : 1;
 
+  /* icon geometries update timeout */
+  guint                 update_icon_geometries_id;
+
   /* button grouping mode */
   XfceTasklistGrouping  grouping;
 
@@ -232,6 +235,8 @@ static void xfce_tasklist_viewports_changed (WnckScreen *screen, XfceTasklist *t
 static void xfce_tasklist_skipped_windows_state_changed (WnckWindow *window, WnckWindowState changed_state, WnckWindowState new_state, XfceTasklist *tasklist);
 static void xfce_tasklist_sort (XfceTasklist *tasklist);
 static GtkWidget *xfce_tasklist_get_panel_plugin (XfceTasklist *tasklist);
+static gboolean xfce_tasklist_update_icon_geometries (gpointer data);
+static void xfce_tasklist_update_icon_geometries_destroyed (gpointer data);
 
 /* wireframe */
 #ifdef GDK_WINDOWING_X11
@@ -439,6 +444,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
 #endif
+  tasklist->update_icon_geometries_id = 0;
   tasklist->max_button_length = DEFAULT_MAX_BUTTON_LENGTH;
   tasklist->min_button_length = DEFAULT_MIN_BUTTON_LENGTH;
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
@@ -589,6 +595,10 @@ xfce_tasklist_finalize (GObject *object)
   panel_return_if_fail (tasklist->windows == NULL);
   panel_return_if_fail (tasklist->skipped_windows == NULL);
   panel_return_if_fail (tasklist->screen == NULL);
+
+  /* stop icon geometry update timeout */
+  if (tasklist->update_icon_geometries_id != 0)
+    g_source_remove (tasklist->update_icon_geometries_id);
 
   /* free the class group hash table */
   g_hash_table_destroy (tasklist->class_groups);
@@ -923,6 +933,11 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
 
       gtk_widget_size_allocate (child->button, &child_alloc);
     }
+
+  /* update icon geometries */
+  if (tasklist->update_icon_geometries_id == 0)
+    tasklist->update_icon_geometries_id = g_idle_add_full (G_PRIORITY_LOW, xfce_tasklist_update_icon_geometries,
+                                                           tasklist, xfce_tasklist_update_icon_geometries_destroyed);
 }
 
 
@@ -1569,6 +1584,74 @@ xfce_tasklist_get_panel_plugin (XfceTasklist *tasklist)
       return p;
 
   return NULL;
+}
+
+
+
+static gboolean
+xfce_tasklist_update_icon_geometries (gpointer data)
+{
+
+  XfceTasklist      *tasklist = XFCE_TASKLIST (data);
+  GList             *li;
+  XfceTasklistChild *child, *child2;
+  GtkAllocation     *alloc;
+  GSList            *lp;
+  gint               root_x, root_y;
+  GtkWidget         *toplevel;
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (tasklist));
+  gtk_window_get_position (GTK_WINDOW (toplevel), &root_x, &root_y);
+
+  for (li = tasklist->windows; li != NULL; li = li->next)
+    {
+      child = li->data;
+
+      switch (child->type)
+        {
+        case CHILD_TYPE_WINDOW:
+          alloc = &child->button->allocation;
+          panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
+          wnck_window_set_icon_geometry (child->window, alloc->x + root_x,
+                                         alloc->y + root_y, alloc->width,
+                                         alloc->height);
+          break;
+
+        case CHILD_TYPE_GROUP:
+          alloc = &child->button->allocation;
+          for (lp = child->windows; li != NULL; li = li->next)
+            {
+              child2 = lp->data;
+              panel_return_val_if_fail (WNCK_IS_WINDOW (child2->window), FALSE);
+              wnck_window_set_icon_geometry (child2->window, alloc->x + root_x,
+                                             alloc->y + root_y, alloc->width,
+                                             alloc->height);
+            }
+          break;
+
+        case CHILD_TYPE_OVERFLOW_MENU:
+          alloc = &tasklist->arrow_button->allocation;
+          panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), FALSE);
+          wnck_window_set_icon_geometry (child->window, alloc->x + root_x,
+                                         alloc->y + root_y, alloc->width,
+                                         alloc->height);
+          break;
+
+        case CHILD_TYPE_GROUP_MENU:
+          /* we already handled those in the group button */
+          break;
+        };
+    }
+
+  return FALSE;
+}
+
+
+
+static void
+xfce_tasklist_update_icon_geometries_destroyed (gpointer data)
+{
+  XFCE_TASKLIST (data)->update_icon_geometries_id = 0;
 }
 
 
