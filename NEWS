@@ -1,3 +1,41 @@
+4.7.1
+=====
+- Support for dragging menu items to create launchers (bug #2896).
+- Fix segfault when directory is NULL (bug #6336).
+- Restore button label binding in applications menu (bug #6277).
+- Give the wrapper a widget name for theming (bug #6268).
+- Add existing windows in the tasklist (bug #6273).
+- Store the drop highlight position (bug #6270).
+- Add option to application menu to show tooltips.
+- Use exo desktop file names in default config.
+- Set desktop type when migrating 4.6 launchers.
+- Fix icon button allocation in tasklist (bug #6269).
+- Properly handle exit status.
+- Restart external plugins on compositing changes.
+- Give panel windows good theming names (bug #6268).
+- Only return default title in applications menu is NULL.
+- Add Mallard page for theming (only reminder for now).
+- Fix handling of custom menu items.
+- Fail when compiling with --enable-gen-doc, but checks failed.
+- Make the always group functionality work.
+- Properly rebuild tasklist if a windows' workspace changed.
+- Support remote event replies from the wrapper.
+- Improve manual Makefile.
+- Restore old workspace scroll behaviour (bug #6271).
+- Handle pager orientation.
+- Improve debugging in external plugins.
+- Add some more checks in the 4.6 macro.
+- Fix expand overflow (bug #6312).
+- Add drag activate for window buttons in the tasklist.
+- Add scroll support to switch between windows in tasklist.
+- Handle window autohide blocking in application.
+- Change order of plugin signals on startup.
+- Add option to fix the length of the panel.
+- Set icon geometries for the tasklist buttons.
+- Use gtk_widget_get_ancestor() instead of custom function.
+- Translation updates (ru, kk, it, uk, el, bn, fi, si, da, eu, sk, pt).
+
+
 4.7.0
 =====
 
