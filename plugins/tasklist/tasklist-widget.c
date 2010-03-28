@@ -67,6 +67,8 @@
                                          } G_STMT_END
 #define xfce_taskbar_is_locked(tasklist) (XFCE_TASKLIST (tasklist)->locked > 0)
 
+#define xfce_tasklist_get_panel_plugin(tasklist) gtk_widget_get_ancestor (GTK_WIDGET (tasklist), XFCE_TYPE_PANEL_PLUGIN)
+
 
 
 enum
@@ -234,7 +236,6 @@ static void xfce_tasklist_window_removed (WnckScreen *screen, WnckWindow *window
 static void xfce_tasklist_viewports_changed (WnckScreen *screen, XfceTasklist *tasklist);
 static void xfce_tasklist_skipped_windows_state_changed (WnckWindow *window, WnckWindowState changed_state, WnckWindowState new_state, XfceTasklist *tasklist);
 static void xfce_tasklist_sort (XfceTasklist *tasklist);
-static GtkWidget *xfce_tasklist_get_panel_plugin (XfceTasklist *tasklist);
 static gboolean xfce_tasklist_update_icon_geometries (gpointer data);
 static void xfce_tasklist_update_icon_geometries_destroyed (gpointer data);
 
@@ -1567,23 +1568,6 @@ xfce_tasklist_sort (XfceTasklist *tasklist)
                                              tasklist);
 
   gtk_widget_queue_resize (GTK_WIDGET (tasklist));
-}
-
-
-
-static GtkWidget *
-xfce_tasklist_get_panel_plugin (XfceTasklist *tasklist)
-{
-  GtkWidget *p;
-
-  panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), NULL);
-
-  /* look in the parents for the panel plugin */
-  for (p = GTK_WIDGET (tasklist); p != NULL; p = gtk_widget_get_parent (p))
-    if (g_type_is_a (G_OBJECT_TYPE (p), XFCE_TYPE_PANEL_PLUGIN))
-      return p;
-
-  return NULL;
 }
 
 
