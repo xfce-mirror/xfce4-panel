@@ -4,7 +4,7 @@
 # Edscott Wilson García <edscott@xfce.org>, 2003-2004.
 # Rudy Godoy <rudy@stone-head.org>, 2005, 2006.
 # Abel Martín <abel.martin.ruiz@gmail.com>, 2008-2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
@@ -68,20 +68,17 @@ msgid "_Move"
 msgstr "_Mover"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2077
 msgid "Add _New Items..."
 msgstr "Añadir _nuevos elementos..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093
-#: ../panel/panel-window.c:2088
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2088
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias del panel..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117
-#: ../panel/panel-window.c:2111
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2111
 msgid "_Restart"
 msgstr "_Reiniciar"
 
@@ -89,8 +86,7 @@ msgstr "_Reiniciar"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar el diálogo 'Preferencias del panel'"
 
-#: ../panel/main.c:75
-#: ../panel/main.c:76
+#: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-PANEL"
 
@@ -209,8 +205,7 @@ msgid "translator-credits"
 msgstr "Abel Martín, abel.martin.ruiz@gmail.com"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Añadir nuevo elemento"
 
@@ -219,8 +214,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Por favor, elija un panel para el nuevo complemento:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150
-#: ../panel/panel-preferences-dialog.c:610
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:610
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -342,7 +336,8 @@ msgstr "Ele_mentos"
 msgid "L_ength (%):"
 msgstr "L_ongitud (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Measurements"
 msgstr "Dimensiones"
@@ -421,7 +416,6 @@ msgstr "_Enter:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:36
-#, fuzzy
 msgid "_Leave:"
 msgstr "_Rastro:"
 
@@ -730,7 +724,8 @@ msgstr "Mostrar _segundos"
 msgid "F_ormat:"
 msgstr "F_ormato:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "P_recisión"
@@ -1459,11 +1454,8 @@ msgstr "Ventana de menú"
 msgid "Switch between open windows using a menu"
 msgstr "Intercambiar ventanas abiertas usando un menú"
 
-#, fuzzy
 #~ msgid "Failed to open manual"
 #~ msgstr "Fallo al abrir el display"
 
-#, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "Botones de acción"
-
