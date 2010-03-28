@@ -189,7 +189,7 @@ struct _XfceTasklistChild
   GtkWidget              *label;
 
   /* drag motion window activate */
-  guint                   motion_timeout;
+  guint                   motion_timeout_id;
   guint                   motion_timestamp;
 
   /* unique id for sorting by insert time,
@@ -1086,8 +1086,8 @@ xfce_tasklist_remove (GtkContainer *container,
 
           gtk_widget_unparent (child->button);
 
-          if (child->motion_timeout != 0)
-            g_source_remove (child->motion_timeout);
+          if (child->motion_timeout_id != 0)
+            g_source_remove (child->motion_timeout_id);
 
           g_slice_free (XfceTasklistChild, child);
 
@@ -1600,7 +1600,7 @@ xfce_tasklist_child_drag_motion_timeout_destroyed (gpointer data)
 {
   XfceTasklistChild *child = data;
 
-  child->motion_timeout = 0;
+  child->motion_timeout_id = 0;
   child->motion_timestamp = 0;
 }
 
@@ -1616,12 +1616,12 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
 
   child->motion_timestamp = timestamp;
-  if (child->motion_timeout == 0
+  if (child->motion_timeout_id == 0
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (child->button)))
     {
-      child->motion_timeout = g_timeout_add_full (G_PRIORITY_LOW, DRAG_ACTIVATE_TIMEOUT,
-                                                  xfce_tasklist_child_drag_motion_timeout, child,
-                                                  xfce_tasklist_child_drag_motion_timeout_destroyed);
+      child->motion_timeout_id = g_timeout_add_full (G_PRIORITY_LOW, DRAG_ACTIVATE_TIMEOUT,
+                                                     xfce_tasklist_child_drag_motion_timeout, child,
+                                                     xfce_tasklist_child_drag_motion_timeout_destroyed);
     }
 
   /* keep emitting the signal */
@@ -1639,8 +1639,8 @@ xfce_tasklist_child_drag_leave (XfceTasklistChild *child,
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
 
-  if (child->motion_timeout != 0)
-    g_source_remove (child->motion_timeout);
+  if (child->motion_timeout_id != 0)
+    g_source_remove (child->motion_timeout_id);
 }
 
 
