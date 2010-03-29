@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-24 06:04+0100\n"
-"PO-Revision-Date: 2010-03-24 12:38+0200\n"
+"POT-Creation-Date: 2010-03-29 06:04+0200\n"
+"PO-Revision-Date: 2010-03-29 11:55+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -55,13 +55,13 @@ msgstr "Dokumentaatioselaimen avaaminen epäonnistui"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:861
-#: ../panel/panel-preferences-dialog.c:863
+#: ../panel/panel-preferences-dialog.c:864
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Haluatko varmasti poistaa osan \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:866
-#: ../panel/panel-preferences-dialog.c:866
+#: ../panel/panel-preferences-dialog.c:867
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Jos poistast osan paneelista, sitä ei voi palauttaa."
 
@@ -71,17 +71,17 @@ msgid "_Move"
 msgstr "Sii_rrä"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2105
 msgid "Add _New Items..."
 msgstr "_Lisää osia..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2088
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2116
 msgid "Panel Pr_eferences..."
 msgstr "Paneelin _asetukset"
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2111
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2139
 msgid "_Restart"
 msgstr "_Käynnistä uudelleen"
 
@@ -223,7 +223,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Valitse paneeli uudelle liitännäiselle:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:610
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:611
 #, c-format
 msgid "Panel %d"
 msgstr "Paneeli %d"
@@ -272,33 +272,33 @@ msgstr "_Hae:"
 msgid "Enter search phrase here"
 msgstr "Syötä haettava teksti tähän"
 
-#: ../panel/panel-preferences-dialog.c:377
+#: ../panel/panel-preferences-dialog.c:378
 msgid "Automatic"
 msgstr "Automaattinen"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:396
+#: ../panel/panel-preferences-dialog.c:397
 #, c-format
 msgid "Screen %d"
 msgstr "Ruutu %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:422
+#: ../panel/panel-preferences-dialog.c:423
 #, c-format
 msgid "Monitor %d"
 msgstr "Näyttö %d"
 
-#: ../panel/panel-preferences-dialog.c:671
+#: ../panel/panel-preferences-dialog.c:672
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Paneelin ja osien asetukset poistetaan lopullisesti"
 
-#: ../panel/panel-preferences-dialog.c:672
+#: ../panel/panel-preferences-dialog.c:673
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Haluatko varmasti poistaa paneelin %d?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:746
+#: ../panel/panel-preferences-dialog.c:747
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Sisäinen nimi: %s-%d"
@@ -320,81 +320,92 @@ msgstr ""
 "väliltä."
 
 #: ../panel/panel-preferences-dialog.glade.h:4
+msgid "Automatically increase the length"
+msgstr "Pidennä automaattisesti"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Automatically show and _hide the panel"
 msgstr "Näytä ja _piilota paneeli automaattisesti"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Background"
 msgstr "Tausta"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "C_ompositing"
 msgstr "K_omposointi"
 
-#: ../panel/panel-preferences-dialog.glade.h:7
+#: ../panel/panel-preferences-dialog.glade.h:8
 msgid "D_isplay"
 msgstr "_Näyttö"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:9
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
 msgstr "Muokkaa valittua kohdetta"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:10
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Yleiset"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Horizontal"
 msgstr "Vaaka"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Ite_ms"
 msgstr "Os_at"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "Pit_uus (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Measurements"
 msgstr "Mittasuhteet"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
 msgstr "Siirrä valittu kohde rivin verran alaspäin"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:18
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
 msgstr "Siirrä valittu kohde rivin verran ylöspäin"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "O_utput:"
 msgstr "_Tulostus:"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Remove currently selected item"
 msgstr "Poista valittu kohde"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Remove the currently selected panel"
 msgstr "Poista valittu paneeli"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+"Pidennä paneelia automaattisesti, jos liitännäiset pyytävät lisätilaa."
+
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Levitä paneeli useille näytöille."
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Piilota paneelin kahvat ja lukitse sen sijainti."
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
@@ -402,58 +413,58 @@ msgstr ""
 "Näytä paneeli vain, kun hiiren osoitin on sen yllä. Toimii ainoastaan, jos "
 "paneeli on ruudun reunalla."
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Show about information of the currently selected item"
 msgstr "Näytä valitun kohteen tiedot"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Span mo_nitors"
 msgstr "Le_vitä näytöille"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Transparency"
 msgstr "Läpinäkyvyys"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr "Läpinäkyvyys, kun osoitin on paneelin yllä."
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr "Läpinäkyvyys, kun osoitin ei ole paneelin yllä."
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Vertical"
 msgstr "Pysty"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Xfce Panel"
 msgstr "Xfce paneeli"
 
 #. I18N: label for the background alha slider
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Alpha:"
 msgstr "_Alpha:"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "_Enter:"
 msgstr "_Yllä:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_Leave:"
 msgstr "_Poistuessa:"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Lock panel"
 msgstr "Lu_kitse paneeli"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "_Orientation:"
 msgstr "_Suunta:"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Size (pixels):"
 msgstr "K_oko kuvapisteinä:"
 
@@ -1423,23 +1434,23 @@ msgstr "Ikkunoiden _ryhmitys"
 msgid "Window title"
 msgstr "Ikkunan otsikko"
 
-#: ../plugins/tasklist/tasklist-widget.c:2550
+#: ../plugins/tasklist/tasklist-widget.c:2617
 msgid "Mi_nimize All"
 msgstr "P_ienennä kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:2559
+#: ../plugins/tasklist/tasklist-widget.c:2626
 msgid "Un_minimize All"
 msgstr "Pa_lauta kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:2565
+#: ../plugins/tasklist/tasklist-widget.c:2632
 msgid "Ma_ximize All"
 msgstr "Suu_renna kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:2574
+#: ../plugins/tasklist/tasklist-widget.c:2641
 msgid "_Unmaximize All"
 msgstr "Palau_ta suurennetut"
 
-#: ../plugins/tasklist/tasklist-widget.c:2584
+#: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
 msgstr "Sulj_e kaikki"
 
@@ -1506,9 +1517,3 @@ msgstr "Ikkunavalikko"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Käytä valikkoa ikkunoiden välillä siirtymiseen"
-
-#~ msgid "Failed to open manual"
-#~ msgstr "Käyttöoppaan avaaminen epäonnistui"
-
-#~ msgid "Action Button"
-#~ msgstr "Toimintopainike"
