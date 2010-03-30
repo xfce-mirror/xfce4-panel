@@ -138,7 +138,7 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
   gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Novice"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Intermidiate"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Intermediate"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Experienced"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Expert"));
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), LEVEL_EXPERIENCED);

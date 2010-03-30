@@ -78,7 +78,7 @@ main (gint argc, gchar **argv)
                                    _("Welcome to the first start of the Xfce Panel"));
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s%s%s",
       file != NULL ? _("Because the panel moved to a new system for storing the "
-                       "settings, it has to load a fresh inital configuration.") : "",
+                       "settings, it has to load a fresh initial configuration.") : "",
       file != NULL ? " " : "",
                      _("Choose below which setup you want for the first startup."));
   gtk_window_set_title (GTK_WINDOW (dialog), "Xfce Panel");
