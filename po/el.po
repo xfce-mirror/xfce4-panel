@@ -3,22 +3,22 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Stavros Giannouris <StavrosG2002@freemail.gr>, 2005, 2006, 2008, 2009.
 # Stathis Kamperis <ekamperi@auth.gr>, 2006.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel git version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-25 18:04+0100\n"
+"POT-Creation-Date: 2010-04-01 16:04+0000\n"
 "PO-Revision-Date: 2010-03-25 23:53+0200\n"
 "Last-Translator: Evaggelos Balaskas <ebalaskas@ebalaskas.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Greek\n"
-"X-Poedit-Country: GREECE\n"
-"X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Greek\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: GREECE\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
@@ -50,19 +50,18 @@ msgstr ""
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
-#, fuzzy
 msgid "Failed to open the documentation browser"
 msgstr "Το άνοιγμα του αναγνώστη τεκμηρίωσης απέτυχε"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:861
-#: ../panel/panel-preferences-dialog.c:863
+#: ../panel/panel-preferences-dialog.c:864
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το \"%s\";"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:866
-#: ../panel/panel-preferences-dialog.c:866
+#: ../panel/panel-preferences-dialog.c:867
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Εάν αφαιρέσετε αυτό το αντικείμενο από το ταμπλό, θα χαθεί για πάντα."
 
@@ -72,20 +71,17 @@ msgid "_Move"
 msgstr "_Μετακίνηση"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2105
 msgid "Add _New Items..."
 msgstr "Προσθήκη _νέων αντικειμένων..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093
-#: ../panel/panel-window.c:2088
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2116
 msgid "Panel Pr_eferences..."
 msgstr "Π_ροτιμήσεις ταμπλό..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117
-#: ../panel/panel-window.c:2111
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2139
 msgid "_Restart"
 msgstr "_Επανεκκίνηση"
 
@@ -93,8 +89,7 @@ msgstr "_Επανεκκίνηση"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Εμφάνιση του διαλόγου 'Ρυθμίσεις ταμπλό´"
 
-#: ../panel/main.c:75
-#: ../panel/main.c:76
+#: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "ΤΑΜΠΛΟ-ΑΡΙΘΜΟΣ"
 
@@ -158,39 +153,32 @@ msgid "Restarting..."
 msgstr "Επανεκκίνηση ..."
 
 #: ../panel/main.c:277
-#, fuzzy
 msgid "Failed to show the preferences dialog"
-msgstr "Δεν ήταν δυνατό το άνοιγμα της οθόνης"
+msgstr "Δεν ήταν δυνατή η εμφάνιση του διαλόγου προτιμήσεων"
 
 #: ../panel/main.c:279
-#, fuzzy
 msgid "Failed to show the add new items dialog"
-msgstr "Εμφάνιση του διαλόγου 'Προσθήκη νέων αντικειμένων'"
+msgstr "Δεν ήταν δυνατή η εμφάνιση του διαλόγου 'Προσθήκη νέων αντικειμένων'"
 
 #: ../panel/main.c:281
-#, fuzzy
 msgid "Failed to save the panel configuration"
-msgstr "Αποτυχία πρόσβασης στην πηγή ή τις πηγές ρυθμίσεων: %s\n"
+msgstr "Αποτυχία αποθήκευσης των ρυθμίσεων του ταμπλό"
 
 #: ../panel/main.c:283
-#, fuzzy
 msgid "Failed to add a plugin to the panel"
-msgstr "Προσθήκη ενός νέου αρθρώματος στο ταμπλό"
+msgstr "Αποτυχία προσθήκης ενός νέου αρθρώματος στο ταμπλό"
 
 #: ../panel/main.c:285
-#, fuzzy
 msgid "Failed to restart the panel"
-msgstr "Επανεκκίνηση της εκτελέσιμης διεργασίας του ταμπλό"
+msgstr "Αποτυχία επανεκκίνησης του ταμπλό"
 
 #: ../panel/main.c:287
-#, fuzzy
 msgid "Failed to quit the panel"
-msgstr "Τερματισμός της εκτελέσιμης διεργασίας του ταμπλό"
+msgstr "Αποτυχία τερματισμού του ταμπλό"
 
 #: ../panel/main.c:289
-#, fuzzy
 msgid "Failed to send D-Bus message"
-msgstr "Αποτυχία δημιουργίας νέου μηνύματος D-BUS"
+msgstr "Αποτυχία αποστολής μηνύματος D-BUS"
 
 #. I18N: %s is replaced with xfce4-panel
 #: ../panel/main.c:296
@@ -225,8 +213,7 @@ msgstr ""
 "Στάθης Καμπέρης <ekamperi@auth.gr>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Προσθήκη νέου αντικειμένου"
 
@@ -235,8 +222,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Παρακαλώ επιλέξτε ένα ταμπλό για το νέο άρθρωμα:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150
-#: ../panel/panel-preferences-dialog.c:610
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:611
 #, c-format
 msgid "Panel %d"
 msgstr "Ταμπλό %d"
@@ -279,34 +265,34 @@ msgstr "Ανα_ζήτηση:"
 msgid "Enter search phrase here"
 msgstr "Αριθμός κομματιού"
 
-#: ../panel/panel-preferences-dialog.c:377
+#: ../panel/panel-preferences-dialog.c:378
 msgid "Automatic"
 msgstr "Αυτόματο"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:396
+#: ../panel/panel-preferences-dialog.c:397
 #, c-format
 msgid "Screen %d"
 msgstr "Οθόνη %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:422
+#: ../panel/panel-preferences-dialog.c:423
 #, fuzzy, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:671
+#: ../panel/panel-preferences-dialog.c:672
 #, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Το επιλεγμένο ταμπλό και όλα τα αντικείμενά του θα διαγραφούν."
 
-#: ../panel/panel-preferences-dialog.c:672
+#: ../panel/panel-preferences-dialog.c:673
 #, fuzzy, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Είστε σίγουρος/η ότι θέλετε να διαγράψετε το \"%s\";"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:746
+#: ../panel/panel-preferences-dialog.c:747
 #, fuzzy, c-format
 msgid "Internal name: %s-%d"
 msgstr "ΌΝΟΜΑ ΣΥΣΚΕΥΗΣ"
@@ -326,149 +312,158 @@ msgstr "Τιμή άλφα του ταμπλό παρασκηνίου, μεταξ
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 #, fuzzy
-msgid "Automatically show and _hide the panel"
+msgid "Automatically increase the length"
 msgstr "Απόκρυψη των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 #, fuzzy
+msgid "Automatically show and _hide the panel"
+msgstr "Απόκρυψη των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Background"
 msgstr "Παρασκηνίο"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:7
 #, fuzzy
 msgid "C_ompositing"
 msgstr "Θέση"
 
-#: ../panel/panel-preferences-dialog.glade.h:7
+#: ../panel/panel-preferences-dialog.glade.h:8
 msgid "D_isplay"
 msgstr "Πρ_οβολή"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-#, fuzzy
-msgid "Edit the currently selected item"
-msgstr "Το τρέχον επιλεγμένο αντικείμενο μενού"
-
 #: ../panel/panel-preferences-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Edit the currently selected item"
+msgstr "Επεξεργασία του επιλεγμένου αντικείμενο μενού"
+
+#: ../panel/panel-preferences-dialog.glade.h:10
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Γενικά"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Horizontal"
 msgstr "Οριζόντιο"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:12
 #, fuzzy
 msgid "Ite_ms"
 msgstr "Διάρκεια σε μικροδευτερόλεπτα"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 #, fuzzy, no-c-format
 msgid "L_ength (%):"
 msgstr "_Μήκος:"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:15
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Measurements"
 msgstr "Μετρήσεις"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 #, fuzzy
 msgid "Move currently selected item down by one row"
 msgstr "Μετακίνηση της επιλεγμένης ενέργειας μια γραμμή κάτω."
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:18
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 #, fuzzy
 msgid "Move currently selected item up by one row"
 msgstr "Μετακίνηση της επιλεγμένης ενέργειας μια γραμμή επάνω."
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "O_utput:"
 msgstr "Έ_ξοδος:"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 #, fuzzy
 msgid "Remove currently selected item"
 msgstr "Το τρέχον επιλεγμένο αντικείμενο μενού"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 #, fuzzy
 msgid "Remove the currently selected panel"
 msgstr "Διαγραφή του επιλεγμένου ταμπλό"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
-msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Επιλέξτε αυτή την επιλογή για να επεκτείνεται το ταμπλό σε πολλαπλές οθόνες."
-
 #: ../panel/panel-preferences-dialog.glade.h:22
-msgid "Select this option to hide the handles of the panel and lock its position."
+#, fuzzy
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Επιλέξτε αυτή την επιλογή για να αποκυψετε τους χειριστές του ταμπλό και να το κλειδώσετε στην θέση του."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "Επιλέξτε αυτή την επιλογή για να επεκτείνεται το ταμπλό σε πολλαπλές οθόνες."
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Επιλέξτε αυτή την επιλογή για να αποκυψετε τους χειριστές του ταμπλό και να το κλειδώσετε στην θέση του."
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Επιλέξτε αυτή την επιλογή για να αποκρύψετε το ταμπλό όταν ο κέρσορας δεν είναι από πάνω του. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο στην άκρη της οθόνης."
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 #, fuzzy
 msgid "Show about information of the currently selected item"
 msgstr "Διαγραφή του επιλεγμένου ταμπλό"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 #, fuzzy
 msgid "Span mo_nitors"
 msgstr "Κενός δίσκος ΜΟ"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Transparency"
 msgstr "Διαφάνεια"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr "Διαφανές όταν ο κέρσορας περνάει από πάνω από το ταμπλό"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr "Διαφανές όταν ο κέρσορας δεν περνάει πάνω από το ταμπλό."
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Vertical"
 msgstr "Κάθετο"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Xfce Panel"
 msgstr "Ταμπλό του Xfce"
 
 #. I18N: label for the background alha slider
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 #, fuzzy
 msgid "_Alpha:"
 msgstr "Άλφα"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:36
 #, fuzzy
 msgid "_Enter:"
 msgstr "Εισαγωγή κωδικού"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:38
 #, fuzzy
 msgid "_Leave:"
 msgstr "Επαναφορά πλ_ήρης οθόνη"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:39
 #, fuzzy
 msgid "_Lock panel"
 msgstr "Εκκινείται το Ταμπλό"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "_Orientation:"
 msgstr "Προ_σανατολισμός:"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Size (pixels):"
 msgstr "Μέγεθος (pixel_s):"
 
@@ -487,7 +482,8 @@ msgid "Novice"
 msgstr "Αρχάριος"
 
 #: ../panel/panel-tic-tac-toe.c:141
-msgid "Intermidiate"
+#, fuzzy
+msgid "Intermediate"
 msgstr "Ενδιάμεσος"
 
 #: ../panel/panel-tic-tac-toe.c:142
@@ -503,7 +499,8 @@ msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Καλώς ήλθατε στην πρώτη φορά εκκίνησης του xfce panel"
 
 #: ../migrate/main.c:80
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh inital configuration."
+#, fuzzy
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr "Επειδή το ταμπλό μετακινήθηκε σε ένα νέο σύστημα αποθήκευσης ρυθμίσεων, πρέπει να φορτώσει μία καθαρή αρχική ρύθμιση."
 
 #: ../migrate/main.c:83
@@ -814,14 +811,15 @@ msgstr "Προβολή _δεπτερολέπτων"
 msgid "F_ormat:"
 msgstr "Μ_ορφοποίηση:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Α_σάφεια:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 #, fuzzy
-msgid "Fl_ash time seperators"
+msgid "Fl_ash time separators"
 msgstr "Ο διαχωριστής ώρας αναβοσβήνει"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
@@ -1517,27 +1515,27 @@ msgstr "Ομ_αδοποίηση παραθύρων:"
 msgid "Window title"
 msgstr "Τίτλος παραθύρου"
 
-#: ../plugins/tasklist/tasklist-widget.c:2550
+#: ../plugins/tasklist/tasklist-widget.c:2617
 #, fuzzy
 msgid "Mi_nimize All"
 msgstr "Ελα_χιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2559
+#: ../plugins/tasklist/tasklist-widget.c:2626
 #, fuzzy
 msgid "Un_minimize All"
 msgstr "Μεγιστο_ποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2565
+#: ../plugins/tasklist/tasklist-widget.c:2632
 #, fuzzy
 msgid "Ma_ximize All"
 msgstr "Με_γιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2574
+#: ../plugins/tasklist/tasklist-widget.c:2641
 #, fuzzy
 msgid "_Unmaximize All"
 msgstr "Α_πομεγιστοποίηση Όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:2584
+#: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
 msgstr "_Κλείσιμο Όλων"
 
@@ -1612,4 +1610,3 @@ msgstr "Μενού λίστας παραθύρων"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Χρήση μενού για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
-
