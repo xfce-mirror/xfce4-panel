@@ -5,495 +5,610 @@
 #
 # Amanpreet Singh Alam <aalam@redhat.com>, 2004.
 # A S Alam <apbrar@gmail.com>, 2006.
-# A S Alam <aalam@users.sf.net>, 2007.
+# A S Alam <aalam@users.sf.net>, 2007, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 17:06+0100\n"
-"PO-Revision-Date: 2007-07-05 07:24+0530\n"
+"POT-Creation-Date: 2010-04-04 22:04+0000\n"
+"PO-Revision-Date: 2010-04-05 07:44+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
-"Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-#, fuzzy
 msgid "Create Launcher on Xfce Panel"
-msgstr "Xfce ਪੈਨਲ ਬਾਰੇ"
+msgstr "Xfce ਪੈਨਲ ਉੱਤੇ ਲਾਂਚਰ ਬਣਾਓ"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create a new launcher on the Xfce Panel"
-msgstr ""
+msgstr "Xfce ਪੈਨਲ ਉੱਤੇ ਨਵਾਂ ਲਾਂਚਰ ਬਣਾਓ"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the Xfce Panel"
-msgstr "Xfce ਪੈਨਲ ਬਾਰੇ"
+msgstr "Xfce ਪੈਨਲ ਕਸਟਮਾਈਜ਼ ਕਰੋ"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Panel Preferences"
+msgstr "ਪੈਨਲ ਪਸੰਦ"
+
+#: ../common/panel-utils.c:155
+msgid "_Read Online"
+msgstr "ਆਨਲਾਈਨ ਪੜ੍ਹੋ(_R)"
+
+#: ../common/panel-utils.c:156
+msgid ""
+"You can read the user manual online. This manual may however not exactly "
+"match your panel version."
 msgstr ""
+"ਤੁਸੀਂ ਯੂਜ਼ਰ ਮੈਨੁਅਲ ਆਨਲਾਈਨ ਪੜ੍ਹ ਸਕਦੇ ਹੋ। ਇਹ ਮੈਨੁਅਲ ਤੁਹਾਡੇ ਪੈਨਲ ਵਰਜਨ ਨਾਲ ਪੂਰੀ "
+"ਤਰ੍ਹਾਂ ਰਲਦਾ "
+"ਨਹੀਂ ਹੋ ਸਕਦਾ ਹੈ।"
+
+#: ../common/panel-utils.c:158
+msgid "The Xfce Panel user manual is not installed on your computer"
+msgstr "Xfce ਪੈਨਲ ਯੂਜ਼ਰ ਮੈਨੁਅਲ ਤੁਹਾਡੇ ਕੰਪਿਊਟਰ ਉੱਤੇ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ"
+
+#. display an error message to the user
+#: ../common/panel-utils.c:171
+msgid "Failed to open the documentation browser"
+msgstr "ਡੌਕੂਮੈਂਟੇਸ਼ਨ ਬਰਾਊਜ਼ਰ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:829
-#: ../panel/panel-preferences-dialog.c:881
-#, fuzzy, c-format
+#: ../libxfce4panel/xfce-panel-plugin.c:861
+#: ../panel/panel-preferences-dialog.c:864
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "ਕੀ ਤੁਸੀਂ ਵਰਕਸਪੇਸ '%s' ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr "ਕੀ ਤੁਸੀਂ \"%s\" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:834
-#: ../panel/panel-preferences-dialog.c:884
+#: ../libxfce4panel/xfce-panel-plugin.c:866
+#: ../panel/panel-preferences-dialog.c:867
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "ਜੇ ਤੁਸੀਂ ਪੈਨਲ ਤੋਂ ਆਈਟਮ ਨੂੰ ਹਟਾਇਆ ਤਾਂ ਇਹ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਖਤਮ ਹੋ ਜਾਵੇਗੀ।"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:973
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1040
 msgid "_Move"
-msgstr "ਭੇਜੋ"
+msgstr "ਏਧਰ-ਓਧਰ(_M)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1011 ../panel/panel-window.c:2066
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2105
 msgid "Add _New Items..."
-msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਿਲ"
+msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1022 ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2116
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "ਪੈਨਲ ਪਸੰਦ(_e)..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1046 ../panel/panel-window.c:2100
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2139
 msgid "_Restart"
-msgstr "ਰੀਸਟਾਰਟ"
+msgstr "ਰੀ-ਸਟਾਰਟ(_R)"
 
 #: ../panel/main.c:75
-#, fuzzy
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "ਪਸੰਦੀਦਾ ਪੈਨਲ"
+msgstr "'ਪੈਨਲ ਪਸੰਦ' ਡਾਈਲਾਗ ਵੇਖੋ"
 
 #: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "PANEL-NUMBER"
 
 #: ../panel/main.c:76
-#, fuzzy
 msgid "Show the 'Add New Items' dialog"
-msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਿਲ"
+msgstr "'ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ' ਡਾਈਲਾਗ ਵੇਖੋ"
 
 #: ../panel/main.c:77
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "ਕੰਨਫੀਗਰੇਸ਼ਨ ਸੰਭਾਲੋ"
+msgstr "ਪੈਨਲ ਸੰਰਚਨਾ ਸੰਭਾਲੋ"
 
 #: ../panel/main.c:78
-#, fuzzy
 msgid "Add a new plugin to the panel"
-msgstr "ਨਵੀਂਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਿਲ"
+msgstr "ਨਵੀਂ ਪਲੱਗਇਨ ਪੈਨਲ ਵਿੱਚ ਜੋੜੋ"
 
 #: ../panel/main.c:78
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "PLUGIN-NAME"
 
 #: ../panel/main.c:79
-#, fuzzy
 msgid "Restart the running panel instance"
-msgstr "xfce4-panel ਰੀਸਟਾਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+msgstr "ਚੱਲਦਾ ਪੈਨਲ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
 
 #: ../panel/main.c:80
 msgid "Quit the running panel instance"
-msgstr ""
+msgstr "ਚੱਲਦਾ ਪੈਨਲ ਬੰਦ ਕਰੋ"
 
 #: ../panel/main.c:81
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr ""
+msgstr "ਵਰਜਨ ਪਰਿੰਟ ਕਰੋ ਅਤੇ ਬੰਦ ਕਰੋ"
 
 #. parse context options
 #: ../panel/main.c:149
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ARGUMENTS...]"
 
 #: ../panel/main.c:156
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "ਮੱਦਦ ਲਈ '\"%s --help' ਲਿਖੋ।"
 
-#: ../panel/main.c:171
+#: ../panel/main.c:175
 msgid "The Xfce development team. All rights reserved."
-msgstr "Xfce ਡਿਵੈਲਪਮਿੰਟ ਟੀਮ। ਸਭ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।"
+msgstr "Xfce ਡਿਵੈਲਪਮੈਂਟ ਟੀਮ। ਸਭ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।"
 
-#: ../panel/main.c:172
+#: ../panel/main.c:176
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "ਬੱਗ ਦੀ ਜਾਣਕਾਰੀ <%s> ਉੱਤੇ ਦਿਓ ਜੀ।"
 
-#: ../panel/main.c:218
-#, fuzzy
+#: ../panel/main.c:222
 msgid "There is already a running instance"
-msgstr "ਇਸ ਟਰੇ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਸਿਸਟਮ ਟਰੇ ਚੱਲ ਰਹੀ ਹੈ"
+msgstr "ਪਹਿਲਾਂ ਹੀ ਇੱਕ ਇੰਸਟਾਂਸ ਚੱਲ ਰਿਹਾ ਹੈ"
 
 #. spawn ourselfs again
-#: ../panel/main.c:258
-#, fuzzy
+#: ../panel/main.c:262
 msgid "Restarting..."
-msgstr "ਰੀਸਟਾਰਟ"
-
-#: ../panel/main.c:273
-#, fuzzy
-msgid "Failed to show the preferences dialog"
-msgstr "ਡਿਸਪਲੇਅ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ"
-
-#: ../panel/main.c:275
-#, fuzzy
-msgid "Failed to show the add new items dialog"
-msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਿਲ"
+msgstr "ਰੀ-ਸਟਾਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
 
 #: ../panel/main.c:277
-#, fuzzy
-msgid "Failed to save the panel configuration"
-msgstr "ਕੰਨਫੀਗਰੇਸ਼ਨ ਸੰਭਾਲੋ"
+msgid "Failed to show the preferences dialog"
+msgstr "ਪਸੰਦ ਡਾਈਲਾਗ ਵੇਖਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #: ../panel/main.c:279
-msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgid "Failed to show the add new items dialog"
+msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ ਡਾਈਲਾਗ ਵੇਖਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #: ../panel/main.c:281
-#, fuzzy
-msgid "Failed to restart the panel"
-msgstr "ਪੈਨਲ 'ਚ ਆਈਟਮ ਜੋੜ੍ਹੋ"
+msgid "Failed to save the panel configuration"
+msgstr "ਪੈਨਲ ਸੰਰਚਨਾ ਸੰਭਾਲਣ ਲਈ ਫੇਲ੍ਹ"
 
 #: ../panel/main.c:283
-#, fuzzy
-msgid "Failed to quit the panel"
-msgstr "'xfce4-panel -c' ਲਾਂਚ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
+msgid "Failed to add a plugin to the panel"
+msgstr "ਪਲੱਗਇਨ ਪੈਨਲ ਵਿੱਚ ਜੋੜਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #: ../panel/main.c:285
-#, fuzzy
+msgid "Failed to restart the panel"
+msgstr "ਪੈਨਲ ਰੀ-ਸਟਾਰਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
+
+#: ../panel/main.c:287
+msgid "Failed to quit the panel"
+msgstr "ਪੈਨਲ ਬੰਦ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
+
+#: ../panel/main.c:289
 msgid "Failed to send D-Bus message"
-msgstr "ਡਿਸਪਲੇਅ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ"
+msgstr "ਡੀ-ਬੱਸ ਸੁਨੇਹਾ ਭੇਜਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:292
+#: ../panel/main.c:296
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "%s ਦਾ ਕੋਈ ਵੀ ਚੱਲਦਾ ਮੌਕਾ ਨਹੀਂ ਲੱਭਿਆ"
 
-#: ../panel/panel-application.c:193
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "ਮਾਈਗਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../panel/panel-dbus-client.c:227
+#: ../panel/panel-dbus-client.c:226
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
+"ਅਢੁੱਕਵਾਂ ਪਲੱਗਇਨ ਈਵੈਂਟ ਸੰਟੈਕਸ ਦਿੱਤਾ। ਵਰਤੋਂ PLUGIN-NAME:NAME[:TYPE:VALUE]"
 
-#: ../panel/panel-dbus-client.c:260
+#: ../panel/panel-dbus-client.c:259
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:57
+#: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Xfce ਡੈਸਕਟਾਪ ਇੰਵਾਇਰਨਮੈਂਟ ਦਾ ਪੈਨਲ"
 
-#: ../panel/panel-dialogs.c:62
+#: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr ""
+"ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ\n"
+"ਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)\n"
+"http://www.satuj.com"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102 ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
-msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਿਲ"
+msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਲ"
 
-#: ../panel/panel-dialogs.c:116
+#: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "ਨਵੀਂ ਪਲੱਗਇਨ ਲਈ ਪੈਨਲ ਚੁਣੋ ਜੀ:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127 ../panel/panel-preferences-dialog.c:628
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:611
 #, c-format
 msgid "Panel %d"
 msgstr "ਪੈਨਲ %d"
 
-#: ../panel/panel-dialogs.c:163
+#: ../panel/panel-dialogs.c:186
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
+"ਕਿਉਂਕਿ ਪੈਨਲ kiosk ਮੋਡ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ, ਤੁਹਾਨੂੰ ਪੈਨਲ ਸੰਰਚਨਾ ਵਿੱਚ ਰੈਗੂਲਰ "
+"ਯੂਜ਼ਰ ਵਜੋਂ ਬਦਲਾਅ "
+"ਕਰਨ ਦੀ ਮਨਜ਼ੂਰੀ ਨਹੀਂ ਹੈ।"
 
-#: ../panel/panel-dialogs.c:165
+#: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "ਪੈਨਲ 'ਚ ਸੋਧ ਕਰਨ ਦੀ ਮਨਜ਼ੂਰੀ ਨਹੀਂ ਹੈ"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
+"ਪਲੱਗਇਨ \"%s\" ਨੇ ਅਚਾਨਕ ਪੈਨਲ ਛੱਡ ਦਿੱਤਾ, ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ "
+"ਹੋ?"
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:211
 #, c-format
 msgid ""
-"The plugin restarted more then once in the last %d seconds. If you press "
+"The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr ""
+"ਪਲੱਗਇਨ ਪਿਛਲੇ %d ਸਕਿੰਟਾਂ ਵਿੱਚ ਇੱਕ ਤੋਂ ਵੱਧ ਵਾਰ ਰੀ-ਸਟਾਰਟ ਹੋ ਗਈ ਹੈ। ਜੇ ਤੁਸੀਂ "
+"ਚਲਾਉ ਨੂੰ "
+"ਦਬਾਇਆ ਤਾਂ ਪੈਨਲ ਪਲੱਗਇਨ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰੇਗਾ, ਨਹੀਂ ਤਾਂ ਇਸ ਨੂੰ ਪੈਨਲ ਵਿੱਚੋਂ ਪੱਕੇ "
+"ਤੌਰ "
+"ਉੱਤੇ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
+
+#: ../panel/panel-item-dialog.c:171
+msgid "Add New Items"
+msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ"
 
 #: ../panel/panel-item-dialog.c:173
-#, fuzzy
-msgid "Add New Items"
-msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਿਲ"
-
-#: ../panel/panel-item-dialog.c:175
-#, fuzzy
 msgid "Add new plugins to the panel"
-msgstr "ਪੈਨਲ 'ਚ ਆਈਟਮ ਜੋੜ੍ਹੋ"
+msgstr "ਨਵੀਂ ਪਲੱਗਇਨ ਪੈਨਲ 'ਚ ਜੋੜ੍ਹੋ"
 
-#: ../panel/panel-item-dialog.c:197
+#: ../panel/panel-item-dialog.c:195
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
-msgstr ""
+msgstr "ਖੋਜ(_S):"
 
-#: ../panel/panel-item-dialog.c:205
+#: ../panel/panel-item-dialog.c:203
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "ਖੋਜ ਸ਼ਬਦ ਇੱਥੇ ਦਿਓ"
 
-#: ../panel/panel-item-dialog.c:310 ../panel/panel-preferences-dialog.c:281
-#, fuzzy
-msgid "Failed to open manual"
-msgstr "ਡਿਸਪਲੇਅ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ"
-
-#: ../panel/panel-preferences-dialog.c:395
+#: ../panel/panel-preferences-dialog.c:378
 msgid "Automatic"
 msgstr "ਆਟੋਮੈਟਿਕ"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:414
+#: ../panel/panel-preferences-dialog.c:397
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "%d ਖੋਜ"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:440
-#, fuzzy, c-format
+#: ../panel/panel-preferences-dialog.c:423
+#, c-format
 msgid "Monitor %d"
-msgstr "ਸਪੈਨ ਮਾਨੀਟਰ"
+msgstr "%d ਮਾਨੀਟਰ"
 
-#: ../panel/panel-preferences-dialog.c:689
-#, fuzzy
+#: ../panel/panel-preferences-dialog.c:672
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "ਚੁਣਿਆ ਪੈਨਲ ਅਤੇ ਇਸ ਦੀਆਂ ਸਭ ਆਈਟਮਾਂ ਹਟਾਈਆਂ ਜਾਣਗੀਆਂ।"
+msgstr "ਪੈਨਲ ਅਤੇ ਪਲੱਗਇਨ ਸੰਰਚਨਾ ਨੂੰ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾਇਆ ਜਾਵੇਗਾ"
 
-#: ../panel/panel-preferences-dialog.c:690
-#, fuzzy, c-format
+#: ../panel/panel-preferences-dialog.c:673
+#, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "ਕੀ ਤੁਸੀਂ ਵਰਕਸਪੇਸ %d ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr "ਕੀ ਤੁਸੀਂ ਪੈਨਲ %d ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:764
+#: ../panel/panel-preferences-dialog.c:747
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "ਅੰਦਰੂਨੀ ਨਾਂ: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
+msgid "Add a new panel"
+msgstr "ਨਵਾਂ ਪੈਨਲ ਜੋੜ੍ਹੋ"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Add new item to this panel"
+msgstr "ਨਵੀਂ ਆਈਟਮ ਇਸ ਪੈਨਲ 'ਚ ਸ਼ਾਮਲ"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
 msgid ""
 "Alpha value of the panel background, between 0 (transparent) and 100 "
 "(opaque)."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:2
-msgid "Automatically show and _hide the panel"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Background"
-msgstr ""
+msgstr "ਪੈਨਲ ਬੈਕਗਰਾਊਂਡ ਲਈ ਐਲਫ਼ਾ, 0 (ਟਰਾਂਸਪੇਰੈਂਟ) ਤੋਂ ੧੦੦ (ਧੁੰਦਲਾ) ਵਿੱਚ"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
-msgid "C_ompositing"
-msgstr "ਸਥਿਤੀ"
+msgid "Automatically increase the length"
+msgstr "ਲੰਬਾਈ ਆਟੋਮੈਟਿਕ ਵਧਾਓ"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-msgid "D_isplay"
-msgstr ""
+msgid "Automatically show and _hide the panel"
+msgstr "ਆਟੋਮੈਟਿਕ ਹੀ ਪੈਨਲ ਵੇਖੋ ਅਤੇ ਓਹਲੇ ਕਰੋ(_h)"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
-#: ../plugins/launcher/launcher-dialog.glade.h:10
-msgid "General"
-msgstr ""
+msgid "Background"
+msgstr "ਬੈਕਗਰਾਊਂਡ"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
-msgid "Horizontal"
-msgstr "ਖਿਤਿਜੀ"
+msgid "C_ompositing"
+msgstr "ਕੰਪੋਜਿਸ਼ਨਿੰਗ(_o)"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
-msgid "Ite_ms"
-msgstr "ਆਈਟਮ ਸ਼ਾਮਲ"
+msgid "D_isplay"
+msgstr "ਡਿਸਪਲੇਅ(_i)"
+
+#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Edit the currently selected item"
+msgstr "ਮੌਜੂਦਾ ਚੁਣੀ ਆਈਟਮ ਸੋਧੋ"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
-#, no-c-format
-msgid "L_ength (%):"
-msgstr ""
+#: ../plugins/launcher/launcher-dialog.glade.h:10
+msgid "General"
+msgstr "ਆਮ"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
-msgid "Measurements"
-msgstr ""
+msgid "Horizontal"
+msgstr "ਹਰੀਜੱਟਲ"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
+msgid "Ite_ms"
+msgstr "ਆਈਟਮਾਂ(_m)"
+
+#: ../panel/panel-preferences-dialog.glade.h:14
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "ਲੰਬਾਈ(_e) (%):"
+
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Measurements"
+msgstr "ਮਾਪ"
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item down by one row"
+msgstr "ਇਸ ਸਮੇਂ ਚੁਣੀ ਆਈਟਮ ਨੂੰ ਇੱਕ ਕਤਾਰ ਹੇਠਾਂ ਭੇਜੋ"
+
+#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item up by one row"
+msgstr "ਇਸ ਸਮੇਂ ਚੁਣੀ ਆਈਟਮ ਨੂੰ ਇੱਕ ਕਤਾਰ ਉੱਤੇ ਭੇਜੋ"
+
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "O_utput:"
+msgstr "ਆਉਟਪੁੱਟ(_u):"
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Remove currently selected item"
+msgstr "ਮੌਜੂਦਾ ਚੁਣੀ ਆਈਟਮ ਹਟਾਓ"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "Remove the currently selected panel"
+msgstr "ਮੌਜੂਦਾ ਚੁਣਿਆ ਪੈਨਲ ਹਟਾਓ"
+
+#: ../panel/panel-preferences-dialog.glade.h:22
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:15
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid "Show about information of the currently selected item"
+msgstr "ਮੌਜੂਦਾ ਚੁਣੀ ਆਈਟਮ ਬਾਰੇ ਜਾਣਕਾਰੀ ਵੇਖੋ"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Span mo_nitors"
-msgstr "ਸਪੈਨ ਮਾਨੀਟਰ"
+msgstr "ਮਾਨੀਟਰ ਸਪੈਨ(_n)"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Transparency"
-msgstr "ਪਾਰਦਰਸ਼ਤਾ (%):"
+msgstr "ਟਰਾਂਸਪਰੇਸੀ"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Vertical"
-msgstr "ਲੰਬਕਾਰੀ"
+msgstr "ਵਰਟੀਕਲ"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Xfce Panel"
 msgstr "Xfce ਪੈਨਲ"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#. I18N: label for the background alha slider
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Alpha:"
-msgstr ""
+msgstr "ਐਲਫਾ(_A):"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "_Enter:"
-msgstr ""
+msgstr "ਦਾਖਲ(_E):"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
-#, fuzzy
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_Leave:"
-msgstr "ਨਾਂ(_N)"
+msgstr "ਛੱਡੋ(_L):"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Lock panel"
-msgstr ""
+msgstr "ਪੈਨਲ ਲਾਕ ਕਰੋ(_L)"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "_Orientation:"
-msgstr "ਸਥਿਤੀ:"
+msgstr "ਸਥਿਤੀ(_O):"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Size (pixels):"
-msgstr "ਆਕਾਰ (ਪਿਕਸਲ):"
+msgstr "ਸਾਈਜ਼ (ਪਿਕਸਲ)(_S):"
+
+#: ../panel/panel-tic-tac-toe.c:123
+msgid "_New Game"
+msgstr "ਨਵੀਂ ਖੇਡ(_N)"
+
+#: ../panel/panel-tic-tac-toe.c:134
+msgid "_Level:"
+msgstr "ਲੈਵਲ(_L):"
+
+#: ../panel/panel-tic-tac-toe.c:140
+msgid "Novice"
+msgstr "ਨੋਵਾਇਸ"
+
+#: ../panel/panel-tic-tac-toe.c:141
+msgid "Intermediate"
+msgstr "ਇੰਟਰਮੀਡੀਏਟ"
+
+#: ../panel/panel-tic-tac-toe.c:142
+msgid "Experienced"
+msgstr "ਤਜਰਬੇਕਾਰ"
+
+#: ../panel/panel-tic-tac-toe.c:143
+msgid "Expert"
+msgstr "ਮਾਹਰ"
+
+#: ../migrate/main.c:78
+msgid "Welcome to the first start of the Xfce Panel"
+msgstr "Xfce ਪੈਨਲ ਨੂੰ ਪਹਿਲੀ ਵਾਰ ਚਲਾਉਣ ਸਮੇਂ ਜੀ ਆਇਆਂ ਨੂੰ"
+
+#: ../migrate/main.c:80
+msgid ""
+"Because the panel moved to a new system for storing the settings, it has to "
+"load a fresh initial configuration."
+msgstr ""
+"ਕਿਉਂਕਿ ਸੈਟਿੰਗ ਨੂੰ ਲੜੀਬੱਧ ਕਰਨ ਲਈ ਪੈਨਲ ਨੇ ਨਵੇਂ ਸਿਸਟਮ ਬਦਲਿਆ ਹੈ, ਇਸ ਲਈ ਤਾਜ਼ਾ "
+"ਸ਼ੁਰੂਆਤੀ ਸੰਰਚਨਾ "
+"ਲੋਡ ਕੀਤੀ ਜਾ ਚੁੱਕੀ ਹੈ।"
+
+#: ../migrate/main.c:83
+msgid "Choose below which setup you want for the first startup."
+msgstr "ਪਹਿਲੀ ਸ਼ੁਰੂਆਤੀ ਲਈ ਸੈੱਟਅੱਪ ਦੀ ਚੋਣ ਕਰੋ, ਜੋ ਤੁਸੀਂ ਚਾਹੁੰਦੇ ਹੋ।"
+
+#: ../migrate/main.c:89
+msgid "Migrate old config"
+msgstr "ਪੁਰਾਣੀ ਸੰਰਚਨਾ ਮਾਈਗਰੇਟ"
+
+#: ../migrate/main.c:90
+msgid "Migrate the old 4.6 configuration to Xfconf"
+msgstr "ਪੁਰਾਣੀ 4.6 ਸੰਰਚਨਾ Xfconf ਲਈ ਮਾਈਗਰੇਟ"
+
+#: ../migrate/main.c:95
+msgid "Use default config"
+msgstr "ਡਿਫਾਲਟ ਸੰਰਚਨਾ ਵਰਤੋਂ"
+
+#: ../migrate/main.c:96
+msgid "Load the default configuration"
+msgstr "ਡਿਫਾਲਟ ਸੰਰਚਨਾ ਲੋਡ ਕਰੋ"
+
+#: ../migrate/main.c:102
+msgid "One empty panel"
+msgstr "ਖਾਲੀ ਪੈਨਲ"
+
+#: ../migrate/main.c:103
+msgid "Start with one empty panel"
+msgstr "ਖਾਲੀ ਪੈਨਲ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ"
+
+#: ../migrate/main.c:115
+msgid "Failed to migrate the old panel configuration"
+msgstr "ਪੁਰਾਣੀ ਪੈਨਲ ਸੰਰਚਨਾ ਮਾਈਗਰੇਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
+
+#: ../migrate/main.c:125
+msgid "Failed to load the default configuration"
+msgstr "ਡਿਫਾਲਟ ਸੰਰਚਨਾ ਲੋਡ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
-msgid "Action Button"
-msgstr "ਕਾਰਵਾਈ ਬਟਨ"
+#: ../plugins/actions/actions.desktop.in.h:1
+msgid "Action Buttons"
+msgstr "ਐਕਸ਼ਨ ਬਟਨ"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
 msgid "Button Actions"
-msgstr "ਪੈਨਲ ਕਾਰਵਾਈ"
+msgstr "ਬਟਨ ਐਕਸ਼ਨ"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "ਤੀਰ ਬਟਨ(_r)"
+msgstr "ਪਹਿਲਾਂ ਬਟਨ(_F):"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "ਆਈਕਾਨ ਬਟਨ(_I)"
+msgstr "ਦੂਜਾ ਬਟਨ(_S):"
 
 #: ../plugins/actions/actions.c:108
-#, fuzzy
 msgid "Disabled"
-msgstr "ਆਯੋਗ ਕੀਤਾ(_D)"
+msgstr "ਆਯੋਗ"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr ""
+msgstr "ਲਾਗ ਆਉਟ ਡਾਈਲਾਗ"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr ""
+msgstr "ਲਾਗ ਆਉਟ"
 
 #: ../plugins/actions/actions.c:111
-#, fuzzy
 msgid "Lock Screen"
 msgstr "ਸਕਰੀਨ ਲਾਕ"
 
 #: ../plugins/actions/actions.c:112
 msgid "Shut Down"
-msgstr ""
+msgstr "ਬੰਦ ਕਰੋ"
 
 #: ../plugins/actions/actions.c:113
 msgid "Restart"
-msgstr "ਰੀਸਟਾਰਟ"
+msgstr "ਰੀ-ਸਟਾਰਟ"
 
 #: ../plugins/actions/actions.c:114
 msgid "Suspend"
-msgstr ""
+msgstr "ਸਸਪੈਂਡ"
 
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
-msgstr ""
+msgstr "ਹਾਈਬਰਨੇਟ"
 
 #: ../plugins/actions/actions.c:409
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "\"%s\" ਲਾਂਚ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
-
-#: ../plugins/actions/actions.desktop.in.h:1
-msgid "Action Buttons"
-msgstr "ਕਾਰਵਾਈ ਬਟਨ"
+msgstr "\"%s\" ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "ਲਾਗਆਉਟ ਜਾਂ ਸਕਰੀਨ ਲਾਕ"
+msgstr "ਲਾਗ ਆਉਟ, ਲਾਕ ਜਾਂ ਹੋਰ ਸਿਸਟਮ ਐਕਸ਼ਨ"
 
-#: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
-msgid "24-_hour clock"
-msgstr "24-ਘੰਟੇ ਘੜੀ ਵੇਖਾਓ(_h)"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Analog"
-msgstr "ਐਨਾਲਾਗ"
-
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 #: ../plugins/pager/pager-dialog.glade.h:1
 #: ../plugins/separator/separator-dialog.glade.h:1
 #: ../plugins/systray/systray-dialog.glade.h:1
@@ -502,60 +617,199 @@ msgstr "ਐਨਾਲਾਗ"
 msgid "Appearance"
 msgstr "ਦਿੱਖ"
 
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+msgid "Applications Menu"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਮੇਨੂ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+msgid "Button _title:"
+msgstr "ਬਟਨ ਟਾਈਟਲ(_t):"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Menu File"
+msgstr "ਮੇਨੂ ਫਾਇਲ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "Menu _file:"
+msgstr "ਮੇਨੂ ਫਾਇਲ(_f):"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Select A Menu File"
+msgstr "ਮੇਨੂ ਫਾਇਲ ਚੁਣੋ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show application description in t_ooltip"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਵੇਰਵਾ ਟੂਲ-ਟਿੱਪ ਵਿੱਚ ਵੇਖੋ(_o)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+msgid "Show generic application n_ames"
+msgstr "ਆਮ ਐਪਲੀਕੇਸ਼ਨ ਨਾਂ ਵੇਖੋ(_a)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+msgid "Show ic_ons in menu"
+msgstr "ਮੇਨੂ ਵਿੱਚ ਆਈਕਾਨ ਵੇਖੋ(_o)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+msgid "Use _default menu file"
+msgstr "ਡਿਫਾਲਟ ਮੇਨੂ ਫਾਇਲ ਵਰਤੋਂ(_d)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+msgid "Use c_ustom menu file"
+msgstr "ਕਸਟਮ ਮੇਨੂ ਫਾਇਲ ਵਰਤੋਂ(_u)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+msgid "_Icon:"
+msgstr "ਆਈਕਾਨ(_I):"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+msgid "_Show button title"
+msgstr "ਬਟਨ ਟਾਈਟਲ ਵੇਖੋ(_S)"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
+msgid "Xfce Menu"
+msgstr "Xfce ਮੇਨੂ"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/directorymenu/directorymenu.c:369
+msgid "Select An Icon"
+msgstr "ਆਈਕਾਨ ਚੁਣੋ"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:703
+#: ../plugins/launcher/launcher.c:2095
+#, c-format
+msgid "Failed to execute command \"%s\"."
+msgstr "\"%s\" ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ।"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:927
+msgid "No applications found"
+msgstr "ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਨਹੀਂ ਲੱਭੀ"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:939
+msgid "Failed to load the applications menu"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਮੇਨੂ ਲੋਡ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
+
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+msgid "Show a menu containing categories of installed applications"
+msgstr "ਇੰਸਟਾਲ ਐਪਲੀਕੇਸ਼ਨ ਦੀਆਂ ਕੈਟਾਗਰੀ ਰੱਖਣ ਵਾਲਾ ਮੇਨੂ ਵੇਖੋ"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
+msgid "Usage:"
+msgstr "ਵਰਤੋਂ:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+msgid "OPTION"
+msgstr "ਚੋਣ"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+msgid "Options:"
+msgstr "ਚੋਣਾਂ:"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+msgid "Popup menu at current mouse position"
+msgstr "ਮੌਜੂਦਾ ਮਾਊਂਸ ਸਥਿਤੀ ਉਤੇ ਪੋਪਅੱਪ ਮੇਨੂ"
+
+#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
+#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
+#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
+msgid "Show help options"
+msgstr "ਮੱਦਦ ਚੋਣਾਂ ਵੇਖੋ"
+
+#: ../plugins/clock/clock.c:144
+msgid "Week %V"
+msgstr "ਹਫ਼ਤਾ %V"
+
+#: ../plugins/clock/clock.c:383
+msgid "Failed to execute clock command"
+msgstr "ਘੜੀ ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ"
+
+#: ../plugins/clock/clock.c:677
+msgid "Custom Format"
+msgstr "ਕਸਟਮ ਫਾਰਮੈਟ"
+
+#: ../plugins/clock/clock-dialog.glade.h:1
+msgid "24-_hour clock"
+msgstr "੨੪-ਘੰਟੇ ਕਲਾਕ(_h)"
+
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "Analog"
+msgstr "ਐਨਾਲਾਗ"
+
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Binary"
-msgstr ""
+msgstr "ਬਾਈਨਰੀ"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
 msgid "Clock"
-msgstr "ਘੜੀ"
+msgstr "ਕਲਾਕ"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Clock Options"
-msgstr "ਘੜੀ ਚੋਣਾਂ"
+msgstr "ਕਲਾਕ ਚੋਣਾਂ"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Digital"
 msgstr "ਡਿਜ਼ੀਟਲ"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
-#, fuzzy
 msgid "Display _seconds"
-msgstr "ਸਕਿੰਟ ਵੇਖਾਓ"
+msgstr "ਸਕਿੰਟ ਵੇਖੋ(_s)"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr ""
+msgstr "ਫਾਰਮੈਟ(_o):"
 
-#: ../plugins/clock/clock-dialog.glade.h:10
-msgid "F_uzziness:"
-msgstr ""
-
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
-msgid "Fl_ash time seperators"
-msgstr ""
+msgid "F_uzziness:"
+msgstr "ਫਜ਼ੀਨਸ(_u):"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fuzzy"
-msgstr ""
+msgid "Fl_ash time separators"
+msgstr "ਟਾਈਮ ਸਪਰੇਟਰ ਝਲਕਾਓ(_a)"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
-#, fuzzy
-msgid "LCD"
-msgstr "LED"
+msgid "Fuzzy"
+msgstr "ਫਜ਼ੀ"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
-#, fuzzy
-msgid "Sho_w AM/PM"
-msgstr "AM/PM ਵੇਖਾਓ"
+msgid "LCD"
+msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
+msgid "Sho_w AM/PM"
+msgstr "AM/PM ਵੇਖੋ(_w)"
+
+#: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
-msgstr "ਫਰੇਮ ਵੇਖਾਓ(_f)"
+msgstr "ਫਰੇਮ ਵੇਖੋ(_f)"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Show _inactive dots"
+msgstr "ਇਨ-ਐਕਟਿਵ ਡਾਟ ਵੇਖੋ(_i)"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Show gri_d"
+msgstr "ਗਰਿੱਡ ਵੇਖੋ(_d)"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the file name. "
@@ -564,250 +818,352 @@ msgid ""
 "information."
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
-msgstr ""
+msgstr "ਟਰੂ ਬਾਈਨਰੀ ਕਲਾਕ(_b)"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr ""
+msgstr "ਲੇਆਉਟ(_L):"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
-msgstr ""
+msgstr "ਟੂਲਟਿੱਪ ਫਾਰਮੈਟ(_T):"
 
-#: ../plugins/clock/clock-fuzzy.c:80
-#, fuzzy
+#: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
-msgstr "ਸੱਜੇ"
+msgstr "ਰਾਤ"
 
-#: ../plugins/clock/clock-fuzzy.c:80
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
-msgstr ""
+msgstr "ਛੇਤੀ ਸਵੇਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:81
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
-msgstr ""
+msgstr "ਸਵੇਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:81
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
-msgstr ""
+msgstr "ਲਗਭਗ ਦੁਪੈਹਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:82
-#, fuzzy
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
-msgstr "ਆਈਕਾਨ ਨਹੀਂ"
+msgstr "ਦੁਪੈਹਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:82
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
-msgstr ""
+msgstr "ਬਾਅਦ ਦੁਪੈਹਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
-msgstr ""
+msgstr "ਆਥਣ"
 
-#: ../plugins/clock/clock-fuzzy.c:83
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
+msgstr "ਦੇਰ ਆਥਣ"
+
+#. I18N: %0 will be replaced with the preceding hour, %1 with
+#. * the comming hour
+#: ../plugins/clock/clock-fuzzy.c:100
+#, no-c-format
+msgid "%0 o'clock"
+msgstr "%0 ਵਜੇ"
+
+#: ../plugins/clock/clock-fuzzy.c:101
+#, no-c-format
+msgid "five past %0"
+msgstr "%0 ਵੱਜ ਕੇ ਪੰਜ"
+
+#: ../plugins/clock/clock-fuzzy.c:102
+#, no-c-format
+msgid "ten past %0"
+msgstr "%0 ਵੱਜ ਕੇ ਦਸ"
+
+#: ../plugins/clock/clock-fuzzy.c:103
+#, no-c-format
+msgid "quarter past %0"
+msgstr "ਸਵਾ %0"
+
+#: ../plugins/clock/clock-fuzzy.c:104
+#, no-c-format
+msgid "twenty past %0"
+msgstr "%0 ਵੱਜ ਕੇ ਵੀਹ"
+
+#: ../plugins/clock/clock-fuzzy.c:105
+#, no-c-format
+msgid "twenty five past %0"
+msgstr "%0 ਵੱਜ ਕੇ ਪੰਚੀ"
+
+#: ../plugins/clock/clock-fuzzy.c:106
+#, no-c-format
+msgid "half past %0"
+msgstr "ਸਾਢੇ %0"
+
+#: ../plugins/clock/clock-fuzzy.c:107
+#, no-c-format
+msgid "twenty five to %1"
+msgstr "%1 ਵੱਜਣ 'ਚ ਪੰਚੀ"
+
+#: ../plugins/clock/clock-fuzzy.c:108
+#, no-c-format
+msgid "twenty to %1"
+msgstr "%1 ਵੱਜਣ 'ਚ ਵੀਹ"
+
+#: ../plugins/clock/clock-fuzzy.c:109
+#, no-c-format
+msgid "quarter to %1"
+msgstr "ਪੌਣੇ %1"
+
+#: ../plugins/clock/clock-fuzzy.c:110
+#, no-c-format
+msgid "ten to %1"
+msgstr "%1 ਵੱਜਣ 'ਚ ਦੱਸ"
+
+#: ../plugins/clock/clock-fuzzy.c:111
+#, no-c-format
+msgid "five to %1"
+msgstr "%1 ਵੱਜਣ 'ਚ ਪੰਜ"
+
+#: ../plugins/clock/clock-fuzzy.c:112
+#, no-c-format
+msgid "%1 o'clock"
+msgstr "%1 ਵਜੇ"
+
+#. I18N: some languages have a singular form for the first hour,
+#. * other languages should just use the same strings as above
+#: ../plugins/clock/clock-fuzzy.c:119
+#, no-c-format
+msgctxt "one"
+msgid "%0 o'clock"
+msgstr "%0 o'clock"
+
+#: ../plugins/clock/clock-fuzzy.c:120
+#, no-c-format
+msgctxt "one"
+msgid "five past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:88
-#, c-format
-msgid "five past %s"
+#: ../plugins/clock/clock-fuzzy.c:121
+#, no-c-format
+msgctxt "one"
+msgid "ten past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:88
-#, c-format
-msgid "ten past %s"
+#: ../plugins/clock/clock-fuzzy.c:122
+#, no-c-format
+msgctxt "one"
+msgid "quarter past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:89
-#, c-format
-msgid "quarter past %s"
+#: ../plugins/clock/clock-fuzzy.c:123
+#, no-c-format
+msgctxt "one"
+msgid "twenty past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:89
-#, c-format
-msgid "twenty past %s"
+#: ../plugins/clock/clock-fuzzy.c:124
+#, no-c-format
+msgctxt "one"
+msgid "twenty five past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:90
-#, c-format
-msgid "twenty five past %s"
+#: ../plugins/clock/clock-fuzzy.c:125
+#, no-c-format
+msgctxt "one"
+msgid "half past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:90
-#, c-format
-msgid "half past %s"
+#: ../plugins/clock/clock-fuzzy.c:126
+#, no-c-format
+msgctxt "one"
+msgid "twenty five to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:91
-#, c-format
-msgid "twenty five to %s"
+#: ../plugins/clock/clock-fuzzy.c:127
+#, no-c-format
+msgctxt "one"
+msgid "twenty to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:91
-#, c-format
-msgid "twenty to %s"
+#: ../plugins/clock/clock-fuzzy.c:128
+#, no-c-format
+msgctxt "one"
+msgid "quarter to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:92
-#, c-format
-msgid "quarter to %s"
+#: ../plugins/clock/clock-fuzzy.c:129
+#, no-c-format
+msgctxt "one"
+msgid "ten to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:92
-#, c-format
-msgid "ten to %s"
+#: ../plugins/clock/clock-fuzzy.c:130
+#, no-c-format
+msgctxt "one"
+msgid "five to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:93
-#, c-format
-msgid "five to %s"
+#: ../plugins/clock/clock-fuzzy.c:131
+#, no-c-format
+msgctxt "one"
+msgid "%1 o'clock"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:93
-#, c-format
-msgid "%s o'clock"
-msgstr ""
-
-#: ../plugins/clock/clock-fuzzy.c:98
+#: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
-msgstr ""
+msgstr "ਇੱਕ"
 
-#: ../plugins/clock/clock-fuzzy.c:98
+#: ../plugins/clock/clock-fuzzy.c:137
 msgid "two"
-msgstr ""
+msgstr "ਦੋ"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
-msgstr ""
+msgstr "ਤਿੰਨ"
 
-#: ../plugins/clock/clock-fuzzy.c:99
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
-msgstr ""
+msgstr "ਚਾਰ"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "five"
-msgstr ""
+msgstr "ਪੰਜ"
 
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
-msgstr ""
+msgstr "ਛੇ"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
-msgstr ""
+msgstr "ਸੱਤ"
 
-#: ../plugins/clock/clock-fuzzy.c:101
-#, fuzzy
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "eight"
-msgstr "ਸੱਜੇ"
+msgstr "ਅੱਠ"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "nine"
-msgstr ""
+msgstr "ਨੌਂ"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
-msgstr ""
+msgstr "ਦੱਸ"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
-msgstr ""
+msgstr "ਗਿਆਰਾਂ"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
-msgstr ""
-
-#: ../plugins/clock/clock.c:140
-msgid "Week %V"
-msgstr ""
-
-#: ../plugins/clock/clock.c:379
-msgid "Failed to execute clock command"
-msgstr ""
-
-#: ../plugins/clock/clock.c:651
-msgid "Custom Format"
-msgstr ""
+msgstr "ਬਾਰਾਂ"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
-msgstr "ਇਹ ਕਿਹੜਾ ਸਮਾਂ ਹੈ?"
+msgstr "ਕੀ ਟਾਈਮ ਹੈ?"
 
-#: ../plugins/directorymenu/directorymenu.c:369
-#, fuzzy
-msgid "Select An Icon"
-msgstr "\"%s\" ਲਈ ਆਈਕਾਨ ਚੁਣੋ"
-
-#: ../plugins/directorymenu/directorymenu.c:538
-#, fuzzy, c-format
+#: ../plugins/directorymenu/directorymenu.c:550
+#, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "\"%s\" ਲਾਂਚ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
+msgstr "\"%s\" ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../plugins/directorymenu/directorymenu.c:569
+#: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "\"%s\" ਲਈ ਸਮੱਗਰੀ ਕਿਸਮ ਕਿਊਰੀ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../plugins/directorymenu/directorymenu.c:578
-#, fuzzy, c-format
+#: ../plugins/directorymenu/directorymenu.c:590
+#, c-format
 msgid "No default application found for \"%s\""
-msgstr "\"%s\" ਲਈ ਆਈਕਾਨ ਚੁਣੋ"
+msgstr "\"%s\" ਲਈ ਕੋਈ ਡਿਫਾਲਟ ਐਪਲੀਕੇਸ਼ਨ ਨਹੀਂ ਲੱਭੀ"
 
-#: ../plugins/directorymenu/directorymenu.c:593
-#, fuzzy, c-format
+#: ../plugins/directorymenu/directorymenu.c:605
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "\"%s\" ਲਾਂਚ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
+msgstr "\"%s\" ਲਈ ਡਿਫਾਲਟ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../plugins/directorymenu/directorymenu.c:684
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "\"%s\" ਕੈਟਾਗਰੀ ਲਈ ਪਸੰਦੀਦਾ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../plugins/directorymenu/directorymenu.c:757
+#: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
-msgstr ""
+msgstr "ਫੋਲਡਰ ਖੋਲ੍ਹੋ"
 
-#: ../plugins/directorymenu/directorymenu.c:768
-#, fuzzy
+#: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
-msgstr "ਟਰਮੀਨਲ 'ਚ ਚਲਾਓ(_t)"
+msgstr "ਟਰਮੀਨਲ 'ਚ ਖੋਲ੍ਹੋ"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr ""
+msgstr "ਡਾਇਰੈਕਟਰੀ ਮੇਨੂ"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
+msgstr "ਮੇਨੂ ਵਿੱਚ ਡਾਇਰੈਕਟਰੀ ਟਰੀ ਵੇਖੋ"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+msgid "Filtering"
+msgstr "ਫਿਲਟਰਿੰਗ"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+msgid "Select A Directory"
+msgstr "ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+msgid "Show _hidden files"
+msgstr "ਲੁਕਵੀਆਂ ਫਾਇਲਾਂ ਵੇਖੋ(_h)"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "_Base Directory:"
+msgstr "ਬੇਸ ਡਾਇਰੈਕਟਰੀ(_B):"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+msgid "_File Pattern:"
+msgstr "ਫਾਇਲ ਪੈਟਰਨ(_F):"
+
+#: ../plugins/launcher/launcher.c:1441
+msgid "Unnamed Item"
+msgstr "ਬਿਨ-ਨਾਂ ਆਈਟਮ"
+
+#: ../plugins/launcher/launcher.c:1581
+msgid "No items"
+msgstr "ਆਈਟਮਾਂ ਨਹੀਂ"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "ਜੇ ਤੁਸੀਂ ਆਈਟਮ ਹਟਾਈ ਤਾਂ ਇਹ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾ ਦਿੱਤੀ ਜਾਵੇਗੀ।"
 
 #: ../plugins/launcher/launcher-dialog.c:667
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "ਕੀ ਤੁਸੀਂ ਵਰਕਸਪੇਸ '%s' ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr "ਕੀ ਤੁਸੀਂ \"%s\" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: ../plugins/launcher/launcher-dialog.c:668
 msgid "Unnamed item"
-msgstr ""
+msgstr "ਬਿਨ-ਨਾਂ ਆਈਟਮ"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Failed to remove the desktop file from the config directory"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.c:723
-#, fuzzy
 msgid "Failed to open desktop item editor"
-msgstr "ਡਿਸਪਲੇਅ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ"
+msgstr "ਡੈਸਕਟਾਪ ਆਈਟਮ ਐਡੀਟਰ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new empty item"
-msgstr "ਨਵੀਂਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਿਲ"
+msgstr "ਨਵੀਂ ਖਾਲੀ ਆਈਟਮ ਸ਼ਾਮਲ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
@@ -815,11 +1171,11 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "ਤਕਨੀਕੀ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
-msgstr ""
+msgstr "ਡਿਫਾਲਟ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Delete the currently selected item"
@@ -827,37 +1183,24 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "ਟੂਲ-ਟਿੱਪ ਬੰਦ ਕਰੋ(_o)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Edit the currently selected item"
-msgstr ""
+msgstr "ਪੂਰਬ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
-#, fuzzy
 msgid "Inside Button"
-msgstr "ਆਈਕਾਨ ਬਟਨ(_I)"
+msgstr "ਬਟਨ ਵਿੱਚ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
-msgstr "ਸ਼ੁਰੂਆਤੀ"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-msgid "Move currently selected item down by one row"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-msgid "Move currently selected item up by one row"
-msgstr ""
+msgstr "ਲਾਂਚਰ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "ਉੱਤਰ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid ""
@@ -870,112 +1213,84 @@ msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
 msgid "Show _label instead of icon"
-msgstr "ਕਾਰਜ ਆਈਕਾਨ ਵੇਖਾਓ(_p)"
+msgstr "ਆਈਕਾਨ ਦੀ ਬਜਾਏ ਲੇਬਲ ਵੇਖੋ(_l)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "ਪੈਨਲ ਵਿੱਚ ਆਖਰੀ ਵਰਤੋਂ ਆਈਟਮ ਵੇਖੋ(_u)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
 msgid "South"
-msgstr "ਇਸ ਬਾਰੇ"
+msgstr "ਦੱਖਣ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr ""
+msgstr "ਪੱਛਮ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#, fuzzy
 msgid "_Arrow button position:"
-msgstr "ਤੀਰ ਬਟਨ(_r)"
-
-#: ../plugins/launcher/launcher.c:1424
-#, fuzzy
-msgid "Unnamed Item"
-msgstr "ਨਵੀਂ ਆਈਟਮ"
-
-#: ../plugins/launcher/launcher.c:1564
-#, fuzzy
-msgid "No items"
-msgstr "ਨਵੀਂ ਆਈਟਮ"
-
-#: ../plugins/launcher/launcher.c:2078
-#, fuzzy, c-format
-msgid "Failed to execute command \"%s\"."
-msgstr "\"%s\" ਲਾਂਚ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
+msgstr "ਤੀਰ ਬਟਨ ਸਥਿਤੀ(_A):"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "ਚੋਣਵੇਂ ਮੇਨੂ ਨਾਲ ਪ੍ਰੋਗਰਾਮ ਲਾਂਚਰ"
+msgstr "ਚੋਣਵੇਂ ਮੇਨੂ ਨਾਲ ਪਰੋਗਰਾਮ ਲਾਂਚਰ"
+
+#: ../plugins/pager/pager.c:411
+msgid "Unable to open the Xfce workspace settings"
+msgstr "Xfce ਵਰਕਸਪੇਸ ਸੈਟਿੰਗ ਖੋਲ੍ਹਣ ਅਸਮਰੱਥ"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "ਰਵੱਈਆ"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
 msgid "Number of _rows:"
-msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ:"
+msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ(_r):"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "ਵਰਕਸਪੇਸ ਕਾਰਵਾਈਆਂ ਵੇਖਾਓ(_k)"
+msgstr "ਵਰਕਸਪੇਸ ਨਾਂ ਵੇਖੋ(_n)"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "ਮਾਊਸ ਵੀਲ ਨਾਲ ਵਰਕਸਪੇਸ ਬਦਲੋ"
+msgstr "ਮਾਊਂਸ ਵ੍ਹੀਲ ਦੀ ਵਰਤੋਂ ਨਾਲ ਵਰਕਸਪੇਸ ਸਵਿੱਚ ਕਰੋ(_w)"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/pager/pager.desktop.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "ਵਰਕਸਪੇਸ %d"
+msgstr "ਵਰਕਸਪੇਸ ਸਵਿੱਚਰ"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
-#, fuzzy
 msgid "Workspace _Settings..."
-msgstr "ਵਰਕਸਪੇਸ %d"
-
-#: ../plugins/pager/pager.c:404
-msgid "Unable to open the Xfce workspace settings"
-msgstr ""
+msgstr "ਵਰਕਸਪੇਸ ਸੈਟਿੰਗ(_S)..."
 
 #: ../plugins/pager/pager.desktop.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "ਸਭ ਵੁਰਚੁਅਲ ਡਿਸਕਟਾਪਾਂ ਦੀ ਸਾਂਝੀ ਝਲਕ"
+msgstr "ਵੁਰਚੁਅਲ ਡੈਸਕਟਾਪ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "Dots"
-msgstr ""
+msgstr "ਡਾਟ"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
-#, fuzzy
 msgid "Handle"
-msgstr "ਹੈਂਡਲ:"
+msgstr "ਹੈਂਡਲ"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
-#, fuzzy
 msgid "New Line"
-msgstr "ਨਵਾਂ ਪੈਨਲ"
+msgstr "ਨਵੀਂ ਲਾਈਨ"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/separator/separator.desktop.in.h:2
-#, fuzzy
 msgid "Separator"
-msgstr "ਸੈਪਰੇਟਰ ਜਾਂ ਸਪੇਸ"
+msgstr "ਸੈਪਰੇਟਰ"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
 msgid "Transparent"
-msgstr "ਪਾਰਦਰਸ਼ਤਾ (%):"
+msgstr "ਟਰਾਂਸਪੇਰੈਂਟ"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
@@ -983,57 +1298,27 @@ msgstr "ਫੈਲਾਓ(_E)"
 
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
-msgstr ""
+msgstr "ਸਟਾਈਲ(_S):"
 
 #: ../plugins/separator/separator.desktop.in.h:1
-#, fuzzy
 msgid "Adds a separator or space between panel items"
-msgstr "ਪੈਨਲ ਆਈਟਮਾਂ 'ਚ ਇੱਕ ਸਪੇਸ ਜਾਂ ਇੱਕ ਲਾਈਨ ਸ਼ਾਮਲ ਕਰੋ"
+msgstr "ਪੈਨਲ ਆਈਟਮਾਂ 'ਚ ਇੱਕ ਸਪਰੇਟਰ ਜਾਂ ਸਪੇਸ ਸ਼ਾਮਲ ਕਰੋ"
 
 #: ../plugins/showdesktop/showdesktop.c:193
-#, fuzzy
 msgid "Restore the minimized windows"
-msgstr "ਲੁਕਵੀਂ ਵਿੰਡੋ ਮੁੜ-ਪ੍ਰਾਪਤ ਕਰੋ"
+msgstr "ਮਿੰਨੀਮਾਈਜ਼ ਕੀਤੀਆਂ ਵਿਡੋਜ਼ ਰੀ-ਸਟੋਰ ਕਰੋ"
 
 #: ../plugins/showdesktop/showdesktop.c:194
-#, fuzzy
 msgid "Minimize all open windows and show the desktop"
-msgstr "ਵਿੰਡੋ ਓਹਲੇ ਕਰੋ ਅਤੇ ਡਿਸਕਟਾਪ ਵੇਖਾਓ"
+msgstr "ਸਭ ਵਿੰਡੋਜ਼ ਮਿੰਨੀਮਾਈਜ਼ ਕਰੋ ਅਤੇ ਡੈਸਕਟਾਪ ਵੇਖੋ"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "ਵਿੰਡੋ ਓਹਲੇ ਕਰੋ ਅਤੇ ਡਿਸਕਟਾਪ ਵੇਖਾਓ"
+msgstr "ਸਭ ਵਿੰਡੋਜ਼ ਓਹਲੇ ਅਤੇ ਡੈਸਕਟਾਪ ਵੇਖੋ"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
-msgstr "ਡਿਸਕਟਾਪ ਵੇਖਾਓ"
-
-#: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
-msgid "C_lear Known Applications"
-msgstr "ਇੱਕ ਕਾਰਜ ਚੁਣੋ"
-
-#: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
-msgid "Known Applications"
-msgstr "ਇੱਕ ਕਾਰਜ ਚੁਣੋ"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/systray/systray.desktop.in.h:2
-#, fuzzy
-msgid "Notification Area"
-msgstr "ਜ਼ਰੂਰੀ ਸੂਚਨਾ"
-
-#: ../plugins/systray/systray-dialog.glade.h:6
-#, fuzzy
-msgid "_Number of rows:"
-msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ:"
-
-#: ../plugins/systray/systray-manager.c:401
-#, c-format
-msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "ਡੈਸਕਟਾਪ ਵੇਖੋ"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:551
@@ -1043,189 +1328,197 @@ msgid ""
 msgstr ""
 
 #: ../plugins/systray/systray.c:554
-#, fuzzy
 msgid "The notification area lost selection"
-msgstr "ਇਸ ਟਰੇ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਸਿਸਟਮ ਟਰੇ ਚੱਲ ਰਹੀ ਹੈ"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਏਰੀਏ ਨੇ ਚੋਣ ਗੁਆਈ"
 
 #: ../plugins/systray/systray.c:747
-#, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "ਕੀ ਤੁਸੀਂ ਵਰਕਸਪੇਸ '%s' ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr "ਕੀ ਤੁਸੀਂ ਜਾਣੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ ਲਿਸਟ ਸਾਫ਼ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../plugins/systray/systray-dialog.glade.h:2
+msgid "C_lear Known Applications"
+msgstr "ਜਾਣੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾ ਸਾਫ਼ ਕਰੋ(_l)"
+
+#: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Known Applications"
+msgstr "ਜਾਣੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ"
+
+#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/systray/systray.desktop.in.h:2
+msgid "Notification Area"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਏਰੀਆ"
+
+#: ../plugins/systray/systray-dialog.glade.h:6
+msgid "_Number of rows:"
+msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ(_N):"
+
+#: ../plugins/systray/systray-manager.c:401
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr "ਸਕਰੀਨ %d ਲਈ ਮੈਨੇਜਰ ਚੋਣ ਲੈਣ ਲਈ ਫੇਲ੍ਹ"
 
 #: ../plugins/systray/systray.desktop.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਆਈਕਾਨ ਵੇਖਾਓ"
+msgstr "ਏਰੀਆ, ਜਿੱਥੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਆਈਕਾਨ ਵੇਖਾਈ ਦੇਣਗੇ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "ਹਮੇਸ਼ਾ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
-msgstr ""
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "ਗਰੁੱਪ ਟਾਈਟਲ ਅਤੇ ਟਾਈਮ-ਸਟੈਂਪ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "ਗਰੁੱਪ ਟਾਈਟਲ ਅਤੇ ਵਿੰਡੋ ਟਾਈਟਲ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "ਕਦੇ ਨਹੀਂ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "ਮੌਜੂਦਾ ਵਰਕਸਪੇਸ ਵਿੱਚ ਮਿੰਨੀਮਾਈਜ਼ ਕੀਤੀਆਂ ਵਿੰਡੋਜ਼ ਰੀ-ਸਟੋਰ ਕਰੋ(_w)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#, fuzzy
 msgid "Show _flat buttons"
-msgstr "ਸਮਤਲ ਬਟਨ ਵਰਤੋਂ"
+msgstr "ਫਲੈਟ ਬਟਨ ਵੇਖੋ(_f)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
-#, fuzzy
 msgid "Show _handle"
-msgstr "ਹੈਂਡਲ ਵੇਖਾਓ"
+msgstr "ਹੈਂਡਲ ਵੇਖੋ(_h)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#, fuzzy
 msgid "Show button _labels"
-msgstr "ਕਾਰਜ ਨਾਂ ਵੇਖਾਓ(_N)"
+msgstr "ਬਟਨ ਲੇਬਲ ਵੇਖੋ(_l)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "ਕੇਵਲ ਮਿੰਨੀਮਾਈਜ਼ ਕੀਤੀਆਂ ਵਿੰਡੋਜ਼ ਵੇਖੋ(_m)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Show windows from _all workspaces"
-msgstr "ਸਭ ਵਰਕਸਪੇਸਾਂ ਤੋਂ ਝਰੋਖੇ ਵੇਖਾਓ(_w)"
+msgstr "ਸਭ ਵਰਕਸਪੇਸਾਂ ਤੋਂ  ਵਿੰਡੋਜ਼ ਵੇਖੋ(_a)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Sorting _order:"
-msgstr ""
+msgstr "ਲੜੀਬੱਧ ਆਰਡਰ(_o):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
-msgstr ""
+msgstr "ਟਾਈਮ-ਸਟੈਂਪ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
-msgstr ""
+msgstr "ਜਦੋਂ ਥਾਂ ਲਿਮਟਡ ਹੋਵੇ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
 msgid "Window Buttons"
-msgstr "ਕਾਰਵਾਈ ਬਟਨ"
+msgstr "ਵਿੰਡੋ ਬਟਨ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr ""
+msgstr "ਵਿੰਡੋ ਗਰੁੱਪ(_g):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#, fuzzy
 msgid "Window title"
-msgstr "ਵਿੰਡੋ ਸੂਚੀ"
+msgstr "ਵਿੰਡੋ ਟਾਈਟਲ"
 
-#: ../plugins/tasklist/tasklist-widget.c:2278
+#: ../plugins/tasklist/tasklist-widget.c:2617
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "ਸਭ ਮਿੰਨੀਮਾਈਜ਼(_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2287
+#: ../plugins/tasklist/tasklist-widget.c:2626
 msgid "Un_minimize All"
-msgstr ""
+msgstr "ਸਭ ਅਣ-ਮਿੰਨੀਮਾਈਜ਼(_m)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2293
+#: ../plugins/tasklist/tasklist-widget.c:2632
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "ਸਭ ਮੈਕਸੀਮਮ(_x)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2302
+#: ../plugins/tasklist/tasklist-widget.c:2641
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "ਸਭ ਅਣ-ਮੈਕਸੀਮਮ(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2312
+#: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
-msgstr ""
+msgstr "ਸਭ ਬੰਦ ਕਰੋ(_C)"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਖੁੱਲ੍ਹੀਆਂ ਵਿੰਡੋਜ਼ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-#, fuzzy
-msgid "Arrow"
-msgstr "ਤੀਰ ਬਟਨ(_r)"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
-msgid "Button layout:"
-msgstr ""
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
-#, fuzzy
-msgid "Enable _urgency notification"
-msgstr "ਜ਼ਰੂਰੀ ਸੂਚਨਾ"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
-msgid "Icon"
-msgstr "ਆਈਕਾਨ(_I)"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-#, fuzzy
-msgid "Show workspace a_ctions"
-msgstr "ਵਰਕਸਪੇਸ ਕਾਰਵਾਈਆਂ ਵੇਖਾਓ(_k)"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-#, fuzzy
-msgid "Window Menu"
-msgstr "ਵਿੰਡੋ ਸੂਚੀ"
-
-#: ../plugins/windowmenu/windowmenu.c:648
-#, fuzzy
+#: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
-msgstr "ਡਿਸਕਟਾਪ ਵੇਖਾਓ"
+msgstr "ਡੈਸਕਟਾਪ"
 
-#: ../plugins/windowmenu/windowmenu.c:881
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "ਵਰਕਸਪੇਸ %d"
 
-#: ../plugins/windowmenu/windowmenu.c:1270
-#, fuzzy
+#: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
-msgstr "ਵਿੰਡੋ ਸੂਚੀ"
+msgstr "ਕੋਈ ਵਿੰਡੋ ਨਹੀਂ"
 
-#: ../plugins/windowmenu/windowmenu.c:1285
+#: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
-msgstr ""
+msgstr "ਜ਼ਰੂਰੀ ਵਿੰਡੋਜ਼"
 
-#: ../plugins/windowmenu/windowmenu.c:1327
-#, fuzzy
+#: ../plugins/windowmenu/windowmenu.c:1300
 msgid "Add Workspace"
 msgstr "ਵਰਕਸਪੇਸ ਸ਼ਾਮਲ"
 
-#: ../plugins/windowmenu/windowmenu.c:1347
-#, fuzzy, c-format
+#: ../plugins/windowmenu/windowmenu.c:1320
+#, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "ਵਰਕਸਪੇਸ '%s' ਹਟਾਓ"
+msgstr "ਵਰਕਸਪੇਸ \"%s\" ਹਟਾਓ"
 
-#: ../plugins/windowmenu/windowmenu.c:1349
+#: ../plugins/windowmenu/windowmenu.c:1322
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ਵਰਕਸਪੇਸ %d ਹਟਾਓ"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+msgid "Arrow"
+msgstr "ਤੀਰ"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+msgid "Button layout:"
+msgstr "ਬਟਨ ਲੇਆਉਟ:"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+msgid "Enable _urgency notification"
+msgstr "ਜ਼ਰੂਰੀ ਨੋਟੀਫਿਕੇਸ਼ਨ ਚਾਲੂ(_u)"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Icon"
+msgstr "ਆਈਕਾਨ"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
+msgid "Show workspace a_ctions"
+msgstr "ਵਰਕਸਪੇਸ ਐਕਸ਼ਨ ਵੇਖੋ(_c)"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+msgid "Window Menu"
+msgstr "ਵਿੰਡੋ ਮੇਨੂ"
+
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "ਮੇਨੂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਖੁੱਲ੍ਹੀਆਂ ਵਿੰਡੋਜ਼ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ"
+
+#, fuzzy
+#~ msgid "Failed to open manual"
+#~ msgstr "ਡਿਸਪਲੇਅ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ"
+
+#, fuzzy
+#~ msgid "Action Button"
+#~ msgstr "ਕਾਰਵਾਈ ਬਟਨ"
