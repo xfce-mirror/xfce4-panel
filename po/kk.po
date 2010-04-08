@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-30 22:04+0000\n"
-"PO-Revision-Date: 2010-03-14 15:38+0600\n"
+"POT-Creation-Date: 2010-04-08 10:04+0000\n"
+"PO-Revision-Date: 2010-04-08 19:35+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -67,17 +67,20 @@ msgid "_Move"
 msgstr "Ж_ылжыту"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2105
+#: ../libxfce4panel/xfce-panel-plugin.c:1082
+#: ../panel/panel-window.c:2105
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2116
+#: ../libxfce4panel/xfce-panel-plugin.c:1093
+#: ../panel/panel-window.c:2116
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2139
+#: ../libxfce4panel/xfce-panel-plugin.c:1117
+#: ../panel/panel-window.c:2139
 msgid "_Restart"
 msgstr "Қа_йта қосу"
 
@@ -85,7 +88,8 @@ msgstr "Қа_йта қосу"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Панельді баптаулары' сұхбар терезесін көрсету"
 
-#: ../panel/main.c:75 ../panel/main.c:76
+#: ../panel/main.c:75
+#: ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
@@ -204,7 +208,8 @@ msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Жаңа элементті қосу"
 
@@ -213,7 +218,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Жаңа плагин үшін панельді тандаңыз:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:611
+#: ../panel/panel-dialogs.c:150
+#: ../panel/panel-preferences-dialog.c:611
 #, c-format
 msgid "Panel %d"
 msgstr "%d панель"
@@ -339,8 +345,7 @@ msgstr "Эле_менттер"
 msgid "L_ength (%):"
 msgstr "Ұ_зындығы (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Measurements"
 msgstr "Өлшем бірліктері"
@@ -731,8 +736,7 @@ msgstr "_Секундтарды көрсету"
 msgid "F_ormat:"
 msgstr "Пі_шім:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Қыз_ықтылығы:"
@@ -825,27 +829,27 @@ msgstr "%0 сағат"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "%0-н бес кетті"
+msgstr "%0 нөл бес"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "%0-н он кетті"
+msgstr "%0 он"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "%0-н он бес кетті"
+msgstr "%0 он бес"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "%0-н жиырма кетті"
+msgstr "%0 жиырма"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "%0-н жиырма бес кетті"
+msgstr "%0 жиырма бес"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
@@ -855,32 +859,32 @@ msgstr "%0 жарым"
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "%1-а(е) жиырма бес қалды"
+msgstr "жиырма бес минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr "%1-а(е) жиырма қалды"
+msgstr "жиырма минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr "%1-а(е) он бес қалды"
+msgstr "он бес минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr "%1-а(е) он қалды"
+msgstr "он минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr "%1-а(е) бес қалды"
+msgstr "бес минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr "%1 сағат"
+msgstr "сағат %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -894,31 +898,31 @@ msgstr "%0 сағат"
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr "%0-н бес кетті"
+msgstr "%0 нөл бес"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr "%0-н он кетті"
+msgstr "%0 он"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr "%0-н он бес кетті"
+msgstr "%0 он бес"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr "%0-н жиырма кетті"
+msgstr "%0 жиырма"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr "%0-н жиырма бес кетті"
+msgstr "%0 жиырма бес"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
@@ -930,37 +934,37 @@ msgstr "%0 жарым"
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr "%1-а(е) жиырма бес қалды"
+msgstr "жиырма бес минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr "%1-а(е) жиырма қалды"
+msgstr "жиырма минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr "%1-а(е) он бес қалды"
+msgstr "он бес минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr "%1-а(е) он қалды"
+msgstr "он минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr "%1-а(е) бес қалды"
+msgstr "бес минутсыз %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr "%1 сағат"
+msgstr "сағат %1"
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
