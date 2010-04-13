@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-07 04:04+0000\n"
+"POT-Creation-Date: 2010-04-13 04:04+0000\n"
 "PO-Revision-Date: 2010-03-07 11:49+0300\n"
 "Last-Translator: Dima Smirnov <arch@cnc-parts.info>\n"
 "Language-Team: Russian\n"
@@ -86,7 +86,6 @@ msgid "_Restart"
 msgstr "Пе_резапустить "
 
 #: ../panel/main.c:75
-#, fuzzy
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Настроить панель "
 
@@ -95,7 +94,6 @@ msgid "PANEL-NUMBER"
 msgstr "НОМЕР-ПАНЕЛИ"
 
 #: ../panel/main.c:76
-#, fuzzy
 msgid "Show the 'Add New Items' dialog"
 msgstr "Добавить новый элемент "
 
@@ -522,9 +520,8 @@ msgid "Failed to migrate the old panel configuration"
 msgstr "Не удалось перенести конфигурацию старой панели"
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Сохранить конфигурацию "
+msgstr "Не удалось загрузить умалчиваемую конфигурацию"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -569,11 +566,11 @@ msgstr "Перезагрузка"
 
 #: ../plugins/actions/actions.c:114
 msgid "Suspend"
-msgstr ""
+msgstr "Ждущий режим"
 
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
-msgstr ""
+msgstr "Спящий режим"
 
 #: ../plugins/actions/actions.c:409
 #, c-format
@@ -581,9 +578,8 @@ msgid "Failed to execute command \"%s\""
 msgstr "Не удалось запустить \"%s\" "
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Завершение сеанса и/или блокировка экрана "
+msgstr "Завершение сеанса, блокировка экрана или другие системные действия"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -623,7 +619,7 @@ msgstr "Выберите эту опцию, если вы хотите, чтоб
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
-msgstr ""
+msgstr "Показывать описания приложений во _всплывающих подсказсках"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 #, fuzzy
@@ -714,7 +710,7 @@ msgstr "Неделя %V"
 
 #: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Не удалось запустить часы"
 
 #: ../plugins/clock/clock.c:677
 msgid "Custom Format"
