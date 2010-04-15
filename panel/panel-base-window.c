@@ -372,7 +372,7 @@ panel_base_window_expose_event (GtkWidget      *widget,
                       (timeval.tv_sec % 4) * 2);
 
       /* draw rectangle */
-      cairo_rectangle (cr, 0.5, 0.5, width - 0.50, height - 0.50);
+      cairo_rectangle (cr, 0.5, 0.5, width - 1, height - 1);
       cairo_stroke (cr);
     }
   else
@@ -385,13 +385,13 @@ panel_base_window_expose_event (GtkWidget      *widget,
 
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_BOTTOM))
             {
-              cairo_move_to (cr, 0.50, height - 0.50);
+              cairo_move_to (cr, 0.50, height - 1);
               cairo_rel_line_to (cr, width, 0.50);
             }
 
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_RIGHT))
             {
-              cairo_move_to (cr, width - 0.50, 0.50);
+              cairo_move_to (cr, width - 1, 0.50);
               cairo_rel_line_to (cr, 0.50, height);
             }
 
