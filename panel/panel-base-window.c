@@ -372,7 +372,7 @@ panel_base_window_expose_event (GtkWidget      *widget,
                       (timeval.tv_sec % 4) * 2);
 
       /* draw rectangle */
-      cairo_rectangle (cr, 0, 0, width - 1.00, height - 1.00);
+      cairo_rectangle (cr, 0.5, 0.5, width - 0.50, height - 0.50);
       cairo_stroke (cr);
     }
   else
@@ -385,14 +385,14 @@ panel_base_window_expose_event (GtkWidget      *widget,
 
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_BOTTOM))
             {
-              cairo_move_to (cr, 0.00, height - 1.00);
-              cairo_rel_line_to (cr, width, 0.00);
+              cairo_move_to (cr, 0.50, height - 0.50);
+              cairo_rel_line_to (cr, width, 0.50);
             }
 
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_RIGHT))
             {
-              cairo_move_to (cr, width - 1.00, 0.00);
-              cairo_rel_line_to (cr, 0.00, height);
+              cairo_move_to (cr, width - 0.50, 0.50);
+              cairo_rel_line_to (cr, 0.50, height);
             }
 
           cairo_stroke (cr);
@@ -406,14 +406,14 @@ panel_base_window_expose_event (GtkWidget      *widget,
 
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_LEFT))
             {
-              cairo_move_to (cr, 0.00, 0.00);
-              cairo_rel_line_to (cr, 0.00, height);
+              cairo_move_to (cr, 0.50, 0.50);
+              cairo_rel_line_to (cr, 0.50, height);
             }
 
           if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP))
             {
-              cairo_move_to (cr, 0.00, 0.00);
-              cairo_rel_line_to (cr, width, 0.00);
+              cairo_move_to (cr, 0.50, 0.50);
+              cairo_rel_line_to (cr, width, 0.50);
             }
 
           cairo_stroke (cr);
