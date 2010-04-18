@@ -909,6 +909,10 @@ migrate_46 (const gchar  *filename,
         succeed = TRUE;
     }
 
+  /* if parsing failed somehow, empty the channel so no broken config is left */
+  if (!succeed)
+    xfconf_channel_reset_property (parser->channel, "/", TRUE);
+
   g_free (contents);
   g_markup_parse_context_free (context);
   g_object_unref (G_OBJECT (parser->channel));
