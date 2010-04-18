@@ -515,6 +515,11 @@ panel_plugin_external_unrealize (GtkWidget *widget)
   panel_plugin_external_queue_add_noop (PANEL_PLUGIN_EXTERNAL (widget),
                                         TRUE, SIGNAL_WRAPPER_QUIT);
 
+  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+               "Plugin %s-%d unrealized, quiting wrapper",
+               panel_module_get_name (external->module),
+               external->unique_id);
+
   (*GTK_WIDGET_CLASS (panel_plugin_external_parent_class)->unrealize) (widget);
 }
 

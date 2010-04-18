@@ -414,17 +414,26 @@ panel_plugin_external_46_realize (GtkWidget *widget)
 static void
 panel_plugin_external_46_unrealize (GtkWidget *widget)
 {
-  PanelPluginExternal46  *external = PANEL_PLUGIN_EXTERNAL_46 (widget);
+  PanelPluginExternal46 *external = PANEL_PLUGIN_EXTERNAL_46 (widget);
 
   /* the plug is not embedded anymore */
   external->plug_embedded = FALSE;
+
+  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
+               "Plugin %s-%d unrealized, quiting GtkPlug",
+               panel_module_get_name (external->module),
+               external->unique_id);
 
   if (external->watch_id != 0)
     {
       /* remove the child watch so we don't leave zomies */
       g_source_remove (external->watch_id);
       g_child_watch_add (external->pid, (GChildWatchFunc) g_spawn_close_pid, NULL);
+      external->pid = 0;
     }
+
+  /* quit the plugin */
+  panel_plugin_external_46_send_client_event (external, PANEL_CLIENT_EVENT_QUIT, FALSE);
 
   (*GTK_WIDGET_CLASS (panel_plugin_external_46_parent_class)->unrealize) (widget);
 }

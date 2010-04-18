@@ -49,7 +49,8 @@ enum /*< skip >*/
   PANEL_CLIENT_EVENT_SET_SENSITIVE,
   PANEL_CLIENT_EVENT_SET_SIZE,
   PANEL_CLIENT_EVENT_SHOW_ABOUT,
-  PANEL_CLIENT_EVENT_SHOW_CONFIGURE
+  PANEL_CLIENT_EVENT_SHOW_CONFIGURE,
+  PANEL_CLIENT_EVENT_QUIT
 };
 
 /*< private >*/
@@ -277,6 +278,18 @@ enum /*< skip >*/
   static gdouble  _xpp_alpha = 1.00; \
   static gboolean _xpp_composited = FALSE; \
   \
+  static void \
+  _xpp_quit_main_loop (void) \
+  { \
+     static gboolean quiting = FALSE; \
+     \
+     if (!quiting) \
+       { \
+         quiting = TRUE; \
+         gtk_main_quit (); \
+       } \
+  } \
+  \
   static gboolean \
   _xpp_client_event (GtkWidget       *plug, \
                      GdkEventClient  *event, \
@@ -338,6 +351,10 @@ enum /*< skip >*/
             \
           case PANEL_CLIENT_EVENT_SHOW_CONFIGURE: \
             xfce_panel_plugin_provider_show_configure (provider); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_QUIT: \
+            _xpp_quit_main_loop (); \
             break; \
             \
           default: \
@@ -433,7 +450,7 @@ enum /*< skip >*/
     g_return_if_fail (GTK_IS_PLUG (plug)); \
     \
     if (!gtk_plug_get_embedded (plug)) \
-      gtk_main_quit (); \
+      _xpp_quit_main_loop (); \
   } \
   \
   gint \
@@ -502,7 +519,7 @@ enum /*< skip >*/
     g_signal_connect_after (G_OBJECT (xpp), "realize", \
         G_CALLBACK (_xpp_realize), NULL); \
     g_signal_connect_after (G_OBJECT (xpp), "destroy", \
-        G_CALLBACK (gtk_main_quit), NULL); \
+        G_CALLBACK (_xpp_quit_main_loop), NULL); \
     g_signal_connect (G_OBJECT (xpp), "provider-signal", \
         G_CALLBACK (_xpp_provider_signal), plug); \
     gtk_widget_show (xpp); \
