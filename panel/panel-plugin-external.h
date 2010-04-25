@@ -45,6 +45,12 @@ GtkWidget *panel_plugin_external_new                  (PanelModule          *mod
 void       panel_plugin_external_set_background_alpha (PanelPluginExternal  *external,
                                                        gdouble               alpha);
 
+void       panel_plugin_external_set_background_color (PanelPluginExternal  *external,
+                                                       const GdkColor       *color);
+
+void       panel_plugin_external_set_background_image (PanelPluginExternal  *external,
+                                                       const gchar          *image);
+
 G_END_DECLS
 
 #endif /* !__PANEL_PLUGIN_EXTERNAL_H__ */

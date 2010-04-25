@@ -27,6 +27,7 @@ typedef struct _PanelBaseWindowClass   PanelBaseWindowClass;
 typedef struct _PanelBaseWindow        PanelBaseWindow;
 typedef struct _PanelBaseWindowPrivate PanelBaseWindowPrivate;
 typedef enum   _PanelBorders           PanelBorders;
+typedef enum   _PanelBgStyle           PanelBgStyle;
 
 #define PANEL_TYPE_BASE_WINDOW            (panel_base_window_get_type ())
 #define PANEL_BASE_WINDOW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_BASE_WINDOW, PanelBaseWindow))
@@ -44,6 +45,13 @@ enum _PanelBorders
   PANEL_BORDER_BOTTOM = 1 << 3
 };
 
+enum _PanelBgStyle
+{
+  PANEL_BG_STYLE_NONE,
+  PANEL_BG_STYLE_COLOR,
+  PANEL_BG_STYLE_IMAGE
+};
+
 struct _PanelBaseWindowClass
 {
   GtkWindowClass __parent__;
@@ -56,9 +64,12 @@ struct _PanelBaseWindow
   /*< private >*/
   PanelBaseWindowPrivate *priv;
 
-  /*< private >*/
   guint                   is_composited : 1;
+
   gdouble                 background_alpha;
+  PanelBgStyle            background_style;
+  GdkColor               *background_color;
+  gchar                  *background_image;
 };
 
 GType        panel_base_window_get_type    (void) G_GNUC_CONST;
@@ -77,7 +88,7 @@ void         panel_base_window_set_active  (PanelBaseWindow *window,
                                             gboolean         active);
 
 void         panel_util_set_source_rgba    (cairo_t         *cr,
-                                            GdkColor        *color,
+                                            const GdkColor  *color,
                                             gdouble          alpha);
 
 G_END_DECLS

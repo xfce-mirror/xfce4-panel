@@ -50,7 +50,9 @@ enum /*< skip >*/
   PANEL_CLIENT_EVENT_SET_SIZE,
   PANEL_CLIENT_EVENT_SHOW_ABOUT,
   PANEL_CLIENT_EVENT_SHOW_CONFIGURE,
-  PANEL_CLIENT_EVENT_QUIT
+  PANEL_CLIENT_EVENT_QUIT,
+  PANEL_CLIENT_EVENT_SET_BG_COLOR,
+  PANEL_CLIENT_EVENT_UNSET_BG
 };
 
 /*< private >*/
@@ -274,9 +276,13 @@ enum /*< skip >*/
  *                  for more information.
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct_func, preinit_func, check_func) \
-  static GdkAtom  _xpp_atom = GDK_NONE; \
-  static gdouble  _xpp_alpha = 1.00; \
-  static gboolean _xpp_composited = FALSE; \
+  static GdkAtom          _xpp_atom = GDK_NONE; \
+  static gdouble          _xpp_alpha = 1.00; \
+  static gboolean         _xpp_composited = FALSE; \
+  static guint            _xpp_bg_style = 0; \
+  static GdkColor         _xpp_bg_color = { 0, }; \
+  static const gchar     *_xpp_bg_image = NULL; \
+  static cairo_pattern_t *_xpp_bg_image_cache = NULL; \
   \
   static void \
   _xpp_quit_main_loop (void) \
@@ -357,6 +363,19 @@ enum /*< skip >*/
             _xpp_quit_main_loop (); \
             break; \
             \
+          case PANEL_CLIENT_EVENT_SET_BG_COLOR: \
+            _xpp_bg_color.red = event->data.s[1]; \
+            _xpp_bg_color.green = event->data.s[2]; \
+            _xpp_bg_color.blue = event->data.s[3]; \
+            _xpp_bg_style = 1; \
+            gtk_widget_queue_draw (plug); \
+            break; \
+            \
+          case PANEL_CLIENT_EVENT_UNSET_BG: \
+            _xpp_bg_style = 0; \
+            gtk_widget_queue_draw (plug); \
+            break; \
+            \
           default: \
             g_warning ("Received unknow client event %d", message); \
             break; \
@@ -417,28 +436,77 @@ enum /*< skip >*/
   _xpp_expose_event (GtkWidget      *plug, \
                      GdkEventExpose *event) \
   { \
-    cairo_t  *cr; \
-    GdkColor *color; \
+    cairo_t        *cr; \
+    const GdkColor *color; \
+    gdouble         real_alpha; \
+    GdkPixbuf      *pixbuf; \
+    GError         *error = NULL; \
     \
-    if (_xpp_composited \
-        && GTK_WIDGET_DRAWABLE (plug) \
-        && _xpp_alpha < 1.00) \
+    if (!GTK_WIDGET_DRAWABLE (plug)) \
+      return FALSE; \
+    \
+    if (G_UNLIKELY (_xpp_bg_style == 2)) \
       { \
         cr = gdk_cairo_create (gtk_widget_get_window (plug)); \
         cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE); \
+        gdk_cairo_rectangle (cr, &event->area); \
+        cairo_clip (cr); \
         \
-        color = &(gtk_widget_get_style (plug)->bg[GTK_STATE_NORMAL]); \
-        cairo_set_source_rgba (cr, \
-                               color->red / 65535.00, \
-                               color->green / 65535.00, \
-                               color->blue / 65535.00, \
-                               _xpp_alpha); \
+        if (G_LIKELY (_xpp_bg_image_cache != NULL)) \
+          { \
+            cairo_set_source (cr, _xpp_bg_image_cache); \
+            cairo_paint (cr); \
+          } \
+        else \
+          { \
+            /* load the image in a pixbuf */ \
+            pixbuf = gdk_pixbuf_new_from_file (_xpp_bg_image, &error); \
+            if (G_LIKELY (pixbuf != NULL)) \
+              { \
+                gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0); \
+                g_object_unref (G_OBJECT (pixbuf)); \
+                \
+                _xpp_bg_image_cache = cairo_get_source (cr); \
+                cairo_pattern_reference (_xpp_bg_image_cache); \
+                cairo_pattern_set_extend (_xpp_bg_image_cache, CAIRO_EXTEND_REPEAT); \
+                cairo_paint (cr); \
+              } \
+            else \
+              { \
+                /* print error message */ \
+                g_warning ("Background image disabled, \"%s\" could not be loaded: %s", \
+                           _xpp_bg_image, error != NULL ? error->message : "No error"); \
+                g_error_free (error); \
+                \
+                /* disable background image */ \
+                _xpp_bg_style = 0; \
+              } \
+          } \
         \
-        cairo_rectangle (cr, event->area.x, event->area.y, \
-                         event->area.width, event->area.height); \
-        \
-        cairo_fill (cr); \
         cairo_destroy (cr); \
+      } \
+    else \
+      { \
+        real_alpha = _xpp_composited ? _xpp_alpha : 1.00; \
+        \
+        if (_xpp_bg_style == 1 || real_alpha < 1.00) \
+          { \
+            if (G_LIKELY (_xpp_bg_style == 0)) \
+              color = &(gtk_widget_get_style (plug)->bg[GTK_STATE_NORMAL]); \
+            else \
+              color = &_xpp_bg_color; \
+            \
+            cr = gdk_cairo_create (gtk_widget_get_window (plug)); \
+            cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE); \
+            cairo_set_source_rgba (cr, \
+                                   color->red / 65535.00, \
+                                   color->green / 65535.00, \
+                                   color->blue / 65535.00, \
+                                   real_alpha); \
+            gdk_cairo_rectangle (cr, &event->area); \
+            cairo_fill (cr); \
+            cairo_destroy (cr); \
+          } \
       } \
     \
     return FALSE; \
@@ -524,11 +592,20 @@ enum /*< skip >*/
         G_CALLBACK (_xpp_provider_signal), plug); \
     gtk_widget_show (xpp); \
     \
+    if (*argv[PLUGIN_ARGV_BACKGROUND_IMAGE] != '\0') \
+      { \
+        _xpp_bg_image = argv[PLUGIN_ARGV_BACKGROUND_IMAGE]; \
+        _xpp_bg_style = 2; \
+      } \
+    \
     g_signal_connect (G_OBJECT (plug), "client-event", \
        G_CALLBACK (_xpp_client_event), xpp); \
     gtk_widget_show (plug); \
     \
     gtk_main (); \
+    \
+    if (_xpp_bg_image_cache != NULL) \
+      cairo_pattern_destroy (_xpp_bg_image_cache); \
     \
     if (GTK_IS_WIDGET (plug)) \
       gtk_widget_destroy (plug); \

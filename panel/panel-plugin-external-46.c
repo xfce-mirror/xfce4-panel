@@ -48,53 +48,55 @@
 
 
 
-static void         panel_plugin_external_46_provider_init         (XfcePanelPluginProviderInterface *iface);
-static void         panel_plugin_external_46_finalize              (GObject                          *object);
-static void         panel_plugin_external_46_get_property          (GObject                          *object,
-                                                                    guint                             prop_id,
-                                                                    GValue                           *value,
-                                                                    GParamSpec                       *pspec);
-static void         panel_plugin_external_46_set_property          (GObject                          *object,
-                                                                    guint                             prop_id,
-                                                                    const GValue                     *value,
-                                                                    GParamSpec                       *pspec);
-static void         panel_plugin_external_46_realize               (GtkWidget                        *widget);
-static void         panel_plugin_external_46_unrealize             (GtkWidget                        *widget);
-static gboolean     panel_plugin_external_46_client_event          (GtkWidget                        *widget,
-                                                                    GdkEventClient                   *event);
-static gboolean     panel_plugin_external_46_plug_removed          (GtkSocket                        *socket);
-static void         panel_plugin_external_46_plug_added            (GtkSocket                        *socket);
-static void         panel_plugin_external_46_send_client_event     (PanelPluginExternal46            *external,
-                                                                    gint                              message,
-                                                                    gint                              value);
-static void         panel_plugin_external_46_queue_add             (PanelPluginExternal46            *external,
-                                                                    gint                              message,
-                                                                    gint                              value);
-static const gchar *panel_plugin_external_46_get_name              (XfcePanelPluginProvider          *provider);
-static gint         panel_plugin_external_46_get_unique_id         (XfcePanelPluginProvider          *provider);
-static void         panel_plugin_external_46_set_size              (XfcePanelPluginProvider          *provider,
-                                                                    gint                              size);
-static void         panel_plugin_external_46_set_orientation       (XfcePanelPluginProvider          *provider,
-                                                                    GtkOrientation                    orientation);
-static void         panel_plugin_external_46_set_screen_position   (XfcePanelPluginProvider          *provider,
-                                                                    XfceScreenPosition                screen_position);
-static void         panel_plugin_external_46_save                  (XfcePanelPluginProvider          *provider);
-static gboolean     panel_plugin_external_46_get_show_configure    (XfcePanelPluginProvider          *provider);
-static void         panel_plugin_external_46_show_configure        (XfcePanelPluginProvider          *provider);
-static gboolean     panel_plugin_external_46_get_show_about        (XfcePanelPluginProvider          *provider);
-static void         panel_plugin_external_46_show_about            (XfcePanelPluginProvider          *provider);
-static void         panel_plugin_external_46_removed               (XfcePanelPluginProvider          *provider);
-static gboolean     panel_plugin_external_46_remote_event          (XfcePanelPluginProvider          *provider,
-                                                                    const gchar                      *name,
-                                                                    const GValue                     *value,
-                                                                    guint                            *handler_id);
-static void         panel_plugin_external_46_set_locked            (XfcePanelPluginProvider          *provider,
-                                                                    gboolean                          locked);
-static void         panel_plugin_external_46_set_sensitive         (PanelPluginExternal46            *external);
-static void         panel_plugin_external_46_child_watch           (GPid                              pid,
-                                                                    gint                              status,
-                                                                    gpointer                          user_data);
-static void         panel_plugin_external_46_child_watch_destroyed (gpointer                          user_data);
+static void         panel_plugin_external_46_provider_init            (XfcePanelPluginProviderInterface *iface);
+static void         panel_plugin_external_46_finalize                 (GObject                          *object);
+static void         panel_plugin_external_46_get_property             (GObject                          *object,
+                                                                       guint                             prop_id,
+                                                                       GValue                           *value,
+                                                                       GParamSpec                       *pspec);
+static void         panel_plugin_external_46_set_property             (GObject                          *object,
+                                                                       guint                             prop_id,
+                                                                       const GValue                     *value,
+                                                                       GParamSpec                       *pspec);
+static void         panel_plugin_external_46_realize                  (GtkWidget                        *widget);
+static void         panel_plugin_external_46_unrealize                (GtkWidget                        *widget);
+static gboolean     panel_plugin_external_46_client_event             (GtkWidget                        *widget,
+                                                                       GdkEventClient                   *event);
+static gboolean     panel_plugin_external_46_plug_removed             (GtkSocket                        *socket);
+static void         panel_plugin_external_46_plug_added               (GtkSocket                        *socket);
+static void         panel_plugin_external_46_send_client_event        (PanelPluginExternal46            *external,
+                                                                       GdkEventClient                   *event);
+static void         panel_plugin_external_46_send_client_event_simple (PanelPluginExternal46            *external,
+                                                                       gint                              message,
+                                                                       gint                              value);
+static void         panel_plugin_external_46_queue_add                (PanelPluginExternal46            *external,
+                                                                       gint                              message,
+                                                                       gint                              value);
+static const gchar *panel_plugin_external_46_get_name                 (XfcePanelPluginProvider          *provider);
+static gint         panel_plugin_external_46_get_unique_id            (XfcePanelPluginProvider          *provider);
+static void         panel_plugin_external_46_set_size                 (XfcePanelPluginProvider          *provider,
+                                                                       gint                              size);
+static void         panel_plugin_external_46_set_orientation          (XfcePanelPluginProvider          *provider,
+                                                                       GtkOrientation                    orientation);
+static void         panel_plugin_external_46_set_screen_position      (XfcePanelPluginProvider          *provider,
+                                                                       XfceScreenPosition                screen_position);
+static void         panel_plugin_external_46_save                     (XfcePanelPluginProvider          *provider);
+static gboolean     panel_plugin_external_46_get_show_configure       (XfcePanelPluginProvider          *provider);
+static void         panel_plugin_external_46_show_configure           (XfcePanelPluginProvider          *provider);
+static gboolean     panel_plugin_external_46_get_show_about           (XfcePanelPluginProvider          *provider);
+static void         panel_plugin_external_46_show_about               (XfcePanelPluginProvider          *provider);
+static void         panel_plugin_external_46_removed                  (XfcePanelPluginProvider          *provider);
+static gboolean     panel_plugin_external_46_remote_event             (XfcePanelPluginProvider          *provider,
+                                                                       const gchar                      *name,
+                                                                       const GValue                     *value,
+                                                                       guint                            *handler_id);
+static void         panel_plugin_external_46_set_locked               (XfcePanelPluginProvider          *provider,
+                                                                       gboolean                          locked);
+static void         panel_plugin_external_46_set_sensitive            (PanelPluginExternal46            *external);
+static void         panel_plugin_external_46_child_watch              (GPid                              pid,
+                                                                       gint                              status,
+                                                                       gpointer                          user_data);
+static void         panel_plugin_external_46_child_watch_destroyed    (gpointer                          user_data);
 
 
 
@@ -126,6 +128,9 @@ struct _PanelPluginExternal46
   guint             show_configure : 1;
   guint             show_about : 1;
 
+  /* background image location */
+  gchar            *background_image;
+
   /* child watch data */
   GPid              pid;
   guint             watch_id;
@@ -138,13 +143,6 @@ enum
   PROP_UNIQUE_ID,
   PROP_ARGUMENTS
 };
-
-typedef struct
-{
-  gint message;
-  gint value;
-}
-QueueItem;
 
 
 
@@ -218,6 +216,7 @@ panel_plugin_external_46_init (PanelPluginExternal46 *external)
   external->restart_timer = NULL;
   external->show_configure = FALSE;
   external->show_about = FALSE;
+  external->background_image = NULL;
 
   /* signal to pass gtk_widget_set_sensitive() changes to the remote window */
   g_signal_connect (G_OBJECT (external), "notify::sensitive",
@@ -262,11 +261,12 @@ panel_plugin_external_46_finalize (GObject *object)
   if (external->queue != NULL)
     {
       for (li = external->queue; li != NULL; li = li->next)
-        g_slice_free (QueueItem, li->data);
+        g_slice_free (GdkEventClient, li->data);
       g_slist_free (external->queue);
     }
 
   g_strfreev (external->arguments);
+  g_free (external->background_image);
 
   if (external->restart_timer != NULL)
     g_timer_destroy (external->restart_timer);
@@ -374,6 +374,11 @@ panel_plugin_external_46_realize (GtkWidget *widget)
   argv[PLUGIN_ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
   argv[PLUGIN_ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
 
+  if (external->background_image != NULL)
+    argv[PLUGIN_ARGV_BACKGROUND_IMAGE] = (gchar *) external->background_image;
+  else
+    argv[PLUGIN_ARGV_BACKGROUND_IMAGE] = (gchar *) "";
+
   /* append the arguments */
   if (G_UNLIKELY (external->arguments != NULL))
     for (i = 0; external->arguments[i] != NULL; i++)
@@ -420,7 +425,7 @@ panel_plugin_external_46_unrealize (GtkWidget *widget)
   external->plug_embedded = FALSE;
 
   panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
-               "Plugin %s-%d unrealized, quiting GtkPlug",
+               "plugin %s-%d unrealized, quiting GtkPlug",
                panel_module_get_name (external->module),
                external->unique_id);
 
@@ -433,7 +438,7 @@ panel_plugin_external_46_unrealize (GtkWidget *widget)
     }
 
   /* quit the plugin */
-  panel_plugin_external_46_send_client_event (external, PANEL_CLIENT_EVENT_QUIT, FALSE);
+  panel_plugin_external_46_send_client_event_simple (external, PANEL_CLIENT_EVENT_QUIT, FALSE);
 
   (*GTK_WIDGET_CLASS (panel_plugin_external_46_parent_class)->unrealize) (widget);
 }
@@ -547,13 +552,13 @@ panel_plugin_external_46_plug_added (GtkSocket *socket)
 {
   PanelPluginExternal46 *external = PANEL_PLUGIN_EXTERNAL_46 (socket);
   GSList                *li;
-  QueueItem             *item;
+  GdkEventClient        *event;
 
   /* plug has been added */
   external->plug_embedded = TRUE;
 
   panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
-               "plugin  %d has been embedded, %d values in queue",
+               "plugin %d has been embedded, %d events in queue",
                external->unique_id, g_slist_length (external->queue));
 
   /* send all the messages in the queue */
@@ -562,11 +567,9 @@ panel_plugin_external_46_plug_added (GtkSocket *socket)
       external->queue = g_slist_reverse (external->queue);
       for (li = external->queue; li != NULL; li = li->next)
         {
-          item = li->data;
-          panel_plugin_external_46_send_client_event (external,
-                                                      item->message,
-                                                      item->value);
-          g_slice_free (QueueItem, item);
+          event = li->data;
+          panel_plugin_external_46_send_client_event (external, event);
+          g_slice_free (GdkEventClient, event);
         }
 
       g_slist_free (external->queue);
@@ -578,30 +581,44 @@ panel_plugin_external_46_plug_added (GtkSocket *socket)
 
 static void
 panel_plugin_external_46_send_client_event (PanelPluginExternal46 *external,
-                                            gint                   message,
-                                            gint                   value)
+                                            GdkEventClient        *event)
 {
-  GdkEventClient event;
-
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
   panel_return_if_fail (panel_atom != GDK_NONE);
   panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (external)->window));
 
-  event.type = GDK_CLIENT_EVENT;
-  event.window = GTK_WIDGET (external)->window;
-  event.send_event = TRUE;
-  event.message_type = panel_atom;
+  /* complete event information */
+  event->type = GDK_CLIENT_EVENT;
+  event->window = GTK_WIDGET (external)->window;
+  event->send_event = TRUE;
+  event->message_type = panel_atom;
+
+  gdk_error_trap_push ();
+  gdk_event_send_client_message ((GdkEvent *) event,
+      GDK_WINDOW_XID (gtk_socket_get_plug_window (GTK_SOCKET (external))));
+  gdk_flush ();
+  if (gdk_error_trap_pop () != 0)
+    g_warning ("Failed to send client event %d", event->data.s[0]);
+}
+
+
+
+static void
+panel_plugin_external_46_send_client_event_simple (PanelPluginExternal46 *external,
+                                                   gint                   message,
+                                                   gint                   value)
+{
+  GdkEventClient event;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
+
+  /* set event data */
   event.data_format = 16;
   event.data.s[0] = message;
   event.data.s[1] = value;
   event.data.s[2] = 0;
 
-  gdk_error_trap_push ();
-  gdk_event_send_client_message ((GdkEvent *) &event,
-      GDK_WINDOW_XID (gtk_socket_get_plug_window (GTK_SOCKET (external))));
-  gdk_flush ();
-  if (gdk_error_trap_pop () != 0)
-    g_warning ("Failed to send client event %d", message);
+  panel_plugin_external_46_send_client_event (external, &event);
 }
 
 
@@ -611,23 +628,24 @@ panel_plugin_external_46_queue_add (PanelPluginExternal46 *external,
                                     gint                   message,
                                     gint                   value)
 {
-  QueueItem *item;
+  GdkEventClient *event;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
 
   if (external->plug_embedded)
     {
       /* directly send the message */
-      panel_plugin_external_46_send_client_event (external, message, value);
+      panel_plugin_external_46_send_client_event_simple (external, message, value);
     }
   else
     {
       /* queue the message until the plug is embedded */
-      item = g_slice_new0 (QueueItem);
-      item->message = message;
-      item->value = value;
+      event = g_slice_new0 (GdkEventClient);
+      event->data_format = 16;
+      event->data.s[0] = message;
+      event->data.s[1] = value;
 
-      external->queue = g_slist_prepend (external->queue, item);
+      external->queue = g_slist_prepend (external->queue, event);
     }
 }
 
@@ -839,7 +857,7 @@ panel_plugin_external_46_child_watch (GPid     pid,
         case PLUGIN_EXIT_CHECK_FAILED:
         case PLUGIN_EXIT_NO_PROVIDER:
           panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
-                       "Plugin exited with status %d. Removing from "
+                       "plugin exited with status %d. Removing from "
                        "configuration.", WEXITSTATUS (status));
 
           /* cleanup the plugin configuration (in panel-application) */
@@ -891,4 +909,75 @@ panel_plugin_external_46_set_background_alpha (PanelPluginExternal46 *external,
   panel_plugin_external_46_queue_add (external,
                                       PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA,
                                       rint (alpha * 100.0));
+}
+
+
+
+void
+panel_plugin_external_46_set_background_color (PanelPluginExternal46 *external,
+                                               const GdkColor        *color)
+{
+  GdkEventClient *event;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
+
+  event = g_slice_new0 (GdkEventClient);
+
+  if (color != NULL)
+    {
+      event->data_format = 16;
+      event->data.s[0] = PANEL_CLIENT_EVENT_SET_BG_COLOR;
+      event->data.s[1] = color->red;
+      event->data.s[2] = color->green;
+      event->data.s[3] = color->blue;
+      event->data.s[4] = 0;
+    }
+  else
+    {
+      event->data_format = 16;
+      event->data.s[0] = PANEL_CLIENT_EVENT_UNSET_BG;
+    }
+
+  if (external->plug_embedded)
+    {
+      /* directly send the event */
+      panel_plugin_external_46_send_client_event (external, event);
+      g_slice_free (GdkEventClient, event);
+    }
+  else
+    {
+      /* queue the event until the plug is embedded */
+      external->queue = g_slist_prepend (external->queue, event);
+    }
+}
+
+
+void
+panel_plugin_external_46_set_background_image (PanelPluginExternal46 *external,
+                                               const gchar           *image)
+{
+  GtkWidget *window;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
+
+  /* store new file location */
+  g_free (external->background_image);
+  external->background_image = g_strdup (image);
+
+  /* restart the plugin if a process is already running */
+  if (external->plug_embedded)
+    {
+      panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL46,
+                   "going to restart plugin %d for background image change",
+                   external->unique_id);
+
+      gtk_widget_unrealize (GTK_WIDGET (external));
+      gtk_widget_hide (GTK_WIDGET (external));
+
+      window = gtk_widget_get_toplevel (GTK_WIDGET (external));
+      panel_return_if_fail (PANEL_IS_WINDOW (window));
+      panel_window_set_povider_info (PANEL_WINDOW (window), GTK_WIDGET (external));
+
+      gtk_widget_show (GTK_WIDGET (external));
+    }
 }

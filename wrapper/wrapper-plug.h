@@ -44,6 +44,12 @@ WrapperPlug  *wrapper_plug_new                  (GdkNativeWindow  socket_id);
 void          wrapper_plug_set_background_alpha (WrapperPlug     *plug,
                                                  gdouble          alpha);
 
+void          wrapper_plug_set_background_color (WrapperPlug     *plug,
+                                                 const gchar     *color_string);
+
+void          wrapper_plug_set_background_image (WrapperPlug     *plug,
+                                                 const gchar     *image);
+
 G_END_DECLS
 
 #endif /* !__WRAPPER_PLUG_H__ */

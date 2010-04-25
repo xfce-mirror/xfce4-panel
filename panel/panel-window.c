@@ -1972,7 +1972,8 @@ panel_window_set_autohide (PanelWindow *window,
   GtkWidget   *popup;
   guint        i;
   const gchar *properties[] = { "enter-opacity", "leave-opacity",
-                                "background-alpha", "borders" };
+                                "background-alpha", "borders",
+                                "background-style", "background-color" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
@@ -2326,20 +2327,41 @@ void
 panel_window_set_povider_info (PanelWindow *window,
                                GtkWidget   *provider)
 {
+  PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
+
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   xfce_panel_plugin_provider_set_locked (XFCE_PANEL_PLUGIN_PROVIDER (provider),
                                          panel_window_get_locked (window));
 
-  if (PANEL_BASE_WINDOW (window)->background_alpha < 1.0)
+  if (base_window->background_alpha < 1.0)
     {
       if (PANEL_IS_PLUGIN_EXTERNAL (provider))
         panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
-            PANEL_BASE_WINDOW (window)->background_alpha);
+            base_window->background_alpha);
       else if (PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
         panel_plugin_external_46_set_background_alpha (PANEL_PLUGIN_EXTERNAL_46 (provider),
-            PANEL_BASE_WINDOW (window)->background_alpha);
+            base_window->background_alpha);
+    }
+
+  if (base_window->background_style == PANEL_BG_STYLE_COLOR)
+    {
+      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
+        panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
+            base_window->background_color);
+      else if (PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
+        panel_plugin_external_46_set_background_color (PANEL_PLUGIN_EXTERNAL_46 (provider),
+            base_window->background_color);
+    }
+  else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
+    {
+      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
+        panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
+            base_window->background_image);
+      else if (PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
+        panel_plugin_external_46_set_background_image (PANEL_PLUGIN_EXTERNAL_46 (provider),
+            base_window->background_image);
     }
 
   panel_window_set_plugin_orientation (provider, window);

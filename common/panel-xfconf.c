@@ -109,7 +109,10 @@ panel_properties_bind (XfconfChannel       *channel,
       if (save_properties)
         panel_properties_store_value (channel, property, prop->type, object, prop->property);
 
-      xfconf_g_property_bind (channel, property, prop->type, object, prop->property);
+      if (G_LIKELY (prop->type != GDK_TYPE_COLOR))
+        xfconf_g_property_bind (channel, property, prop->type, object, prop->property);
+      else
+        xfconf_g_property_bind_gdkcolor (channel, property, object, prop->property);
 
       g_free (property);
     }

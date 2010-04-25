@@ -29,8 +29,10 @@
 
 
 
-static gboolean wrapper_plug_expose_event (GtkWidget      *widget,
-                                           GdkEventExpose *event);
+static void     wrapper_plug_finalize         (GObject        *object);
+static gboolean wrapper_plug_expose_event     (GtkWidget      *widget,
+                                               GdkEventExpose *event);
+static void     wrapper_plug_background_reset (WrapperPlug    *plug);
 
 
 
@@ -43,11 +45,14 @@ struct _WrapperPlug
 {
   GtkPlug __parent__;
 
-  /* background alpha */
-  gdouble background_alpha;
-
   /* whether the wrapper has a rgba colormap */
-  guint   is_composited : 1;
+  guint            is_composited : 1;
+
+  /* background information */
+  gdouble          background_alpha;
+  GdkColor        *background_color;
+  gchar           *background_image;
+  cairo_pattern_t *background_image_cache;
 };
 
 
@@ -64,7 +69,11 @@ G_DEFINE_TYPE (WrapperPlug, wrapper_plug, GTK_TYPE_PLUG)
 static void
 wrapper_plug_class_init (WrapperPlugClass *klass)
 {
+  GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->finalize = wrapper_plug_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->expose_event = wrapper_plug_expose_event;
@@ -79,6 +88,9 @@ wrapper_plug_init (WrapperPlug *plug)
   GdkScreen   *screen;
 
   plug->background_alpha = 1.00;
+  plug->background_color = NULL;
+  plug->background_image = NULL;
+  plug->background_image_cache = NULL;
 
   gtk_widget_set_name (GTK_WIDGET (plug), "XfcePanelWindowWrapper");
 
@@ -110,43 +122,113 @@ wrapper_plug_init (WrapperPlug *plug)
 
 
 
+static void
+wrapper_plug_finalize (GObject *object)
+{
+  wrapper_plug_background_reset (WRAPPER_PLUG (object));
+
+  G_OBJECT_CLASS (wrapper_plug_parent_class)->finalize (object);
+}
+
+
+
 static gboolean
 wrapper_plug_expose_event (GtkWidget      *widget,
                            GdkEventExpose *event)
 {
-  WrapperPlug   *plug = WRAPPER_PLUG (widget);
-  cairo_t       *cr;
-  GdkColor      *color;
-  GtkStateType   state = GTK_STATE_NORMAL;
-  gdouble        alpha = plug->is_composited ? plug->background_alpha : 1.00;
+  WrapperPlug    *plug = WRAPPER_PLUG (widget);
+  cairo_t        *cr;
+  const GdkColor *color;
+  gdouble         alpha;
+  GdkPixbuf      *pixbuf;
+  GError         *error = NULL;
 
-  if (GTK_WIDGET_DRAWABLE (widget) && alpha < 1.00)
+  if (GTK_WIDGET_DRAWABLE (widget))
     {
-      /* create the cairo context */
-      cr = gdk_cairo_create (widget->window);
+      if (G_UNLIKELY (plug->background_image != NULL))
+        {
+          cr = gdk_cairo_create (widget->window);
+          cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+          gdk_cairo_rectangle (cr, &event->area);
+          cairo_clip (cr);
 
-      /* get the background gdk color */
-      color = &(widget->style->bg[state]);
+          if (G_LIKELY (plug->background_image_cache != NULL))
+            {
+              cairo_set_source (cr, plug->background_image_cache);
+              cairo_paint (cr);
+            }
+          else
+            {
+              /* load the image in a pixbuf */
+              pixbuf = gdk_pixbuf_new_from_file (plug->background_image, &error);
 
-      /* set the cairo source color */
-      cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color),
-                             plug->background_alpha);
+              if (G_LIKELY (pixbuf != NULL))
+                {
+                  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+                  g_object_unref (G_OBJECT (pixbuf));
 
-      /* create retangle */
-      cairo_rectangle (cr, event->area.x, event->area.y,
-                       event->area.width, event->area.height);
+                  plug->background_image_cache = cairo_get_source (cr);
+                  cairo_pattern_reference (plug->background_image_cache);
+                  cairo_pattern_set_extend (plug->background_image_cache, CAIRO_EXTEND_REPEAT);
+                  cairo_paint (cr);
+                }
+              else
+                {
+                  /* print error message */
+                  g_warning ("Background image disabled, \"%s\" could not be loaded: %s",
+                             plug->background_image, error != NULL ? error->message : "No error");
+                  g_error_free (error);
 
-      /* draw on source */
-      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+                  /* disable background image */
+                  wrapper_plug_background_reset (plug);
+                }
+            }
 
-      /* paint rectangle */
-      cairo_fill (cr);
+          cairo_destroy (cr);
+        }
+      else
+        {
+          alpha = plug->is_composited ? plug->background_alpha : 1.00;
 
-      /* destroy cairo context */
-      cairo_destroy (cr);
+          if (alpha < 1.00 || plug->background_color != NULL)
+            {
+              /* get the background gdk color */
+              if (plug->background_color != NULL)
+                color = plug->background_color;
+              else
+                color = &(widget->style->bg[GTK_STATE_NORMAL]);
+
+              /* draw the background color */
+              cr = gdk_cairo_create (widget->window);
+              cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+              cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color), alpha);
+              gdk_cairo_rectangle (cr, &event->area);
+              cairo_fill (cr);
+              cairo_destroy (cr);
+            }
+        }
     }
 
   return GTK_WIDGET_CLASS (wrapper_plug_parent_class)->expose_event (widget, event);
+}
+
+
+
+static void
+wrapper_plug_background_reset (WrapperPlug *plug)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  if (plug->background_color != NULL)
+    gdk_color_free (plug->background_color);
+  plug->background_color = NULL;
+
+  if (plug->background_image_cache != NULL)
+    cairo_pattern_destroy (plug->background_image_cache);
+  plug->background_image_cache = NULL;
+
+  g_free (plug->background_image);
+  plug->background_image = NULL;
 }
 
 
@@ -180,4 +262,39 @@ wrapper_plug_set_background_alpha (WrapperPlug *plug,
   /* redraw */
   if (plug->is_composited)
     gtk_widget_queue_draw (GTK_WIDGET (plug));
+}
+
+
+
+
+void
+wrapper_plug_set_background_color (WrapperPlug *plug,
+                                   const gchar *color_string)
+{
+  GdkColor color = { 0, };
+
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  wrapper_plug_background_reset (plug);
+
+  if (color_string != NULL
+      && gdk_color_parse (color_string, &color))
+    plug->background_color = gdk_color_copy (&color);
+
+  gtk_widget_queue_draw (GTK_WIDGET (plug));
+}
+
+
+
+void
+wrapper_plug_set_background_image (WrapperPlug *plug,
+                                   const gchar *image)
+{
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  wrapper_plug_background_reset (plug);
+
+  plug->background_image = g_strdup (image);
+
+  gtk_widget_queue_draw (GTK_WIDGET (plug));
 }

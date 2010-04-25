@@ -457,6 +457,7 @@ panel_plugin_external_realize (GtkWidget *widget)
   argv[PLUGIN_ARGV_NAME] = (gchar *) panel_module_get_name (external->module);
   argv[PLUGIN_ARGV_DISPLAY_NAME] = (gchar *) panel_module_get_display_name (external->module);
   argv[PLUGIN_ARGV_COMMENT] = (gchar *) panel_module_get_comment (external->module);
+  argv[PLUGIN_ARGV_BACKGROUND_IMAGE] = (gchar *) ""; /* unused, for 4.6 plugins only */
 
   /* append the arguments */
   if (G_UNLIKELY (external->arguments != NULL))
@@ -1039,4 +1040,62 @@ panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
                                    &value);
 
   g_value_unset (&value);
+}
+
+
+
+void
+panel_plugin_external_set_background_color (PanelPluginExternal *external,
+                                            const GdkColor      *color)
+{
+  GValue       value = { 0, };
+  const gchar *prop;
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  if (G_LIKELY (color != NULL))
+    {
+      prop = SIGNAL_WRAPPER_BACKGROUND_COLOR;
+
+      g_value_init (&value, G_TYPE_STRING);
+      g_value_take_string (&value, gdk_color_to_string (color));
+    }
+  else
+    {
+      prop = SIGNAL_WRAPPER_BACKGROUND_UNSET;
+
+      g_value_init (&value, G_TYPE_BOOLEAN);
+    }
+
+  panel_plugin_external_queue_add (external, FALSE, prop, &value);
+
+  g_value_unset (&value);
+}
+
+
+
+void
+panel_plugin_external_set_background_image (PanelPluginExternal *external,
+                                            const gchar         *image)
+{
+  GValue value = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  if (G_UNLIKELY (image != NULL))
+    {
+      g_value_init (&value, G_TYPE_STRING);
+      g_value_set_string (&value, image);
+
+      panel_plugin_external_queue_add (external, FALSE,
+                                       SIGNAL_WRAPPER_BACKGROUND_IMAGE,
+                                       &value);
+
+      g_value_unset (&value);
+    }
+  else
+    {
+      /* unset the bg */
+      panel_plugin_external_set_background_color (external, NULL);
+    }
 }

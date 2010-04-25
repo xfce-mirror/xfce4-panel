@@ -90,11 +90,6 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
         xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_uint (value));
       else if (strcmp (property, SIGNAL_SET_LOCKED) == 0)
         xfce_panel_plugin_provider_set_locked (provider, g_value_get_boolean (value));
-      else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_ALPHA) == 0)
-        {
-          plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
-          wrapper_plug_set_background_alpha (plug, g_value_get_double (value));
-        }
       else if (strcmp (property, SIGNAL_SAVE) == 0)
         xfce_panel_plugin_provider_save (provider);
       else if (strcmp (property, SIGNAL_SHOW_CONFIGURE) == 0)
@@ -108,7 +103,20 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
       else if (strcmp (property, SIGNAL_WRAPPER_QUIT) == 0)
         gtk_main_quit ();
       else
-        panel_assert_not_reached ();
+        {
+          plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
+
+          if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_ALPHA) == 0)
+            wrapper_plug_set_background_alpha (plug, g_value_get_double (value));
+          else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_COLOR) == 0)
+            wrapper_plug_set_background_color (plug, g_value_get_string (value));
+          else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_IMAGE) == 0)
+            wrapper_plug_set_background_image (plug, g_value_get_string (value));
+          else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_UNSET) == 0)
+            wrapper_plug_set_background_color (plug, NULL);
+          else
+            panel_assert_not_reached ();
+        }
 
       g_free (property);
       g_value_unset (value);

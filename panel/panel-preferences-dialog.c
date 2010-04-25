@@ -53,6 +53,10 @@ static void panel_preferences_dialog_bindings_update (PanelPreferencesDialog *di
 
 static void panel_preferences_dialog_output_changed (GtkComboBox *combobox, PanelPreferencesDialog *dialog);
 
+static void panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog);
+static void panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton *button, PanelPreferencesDialog *dialog);
+static void panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog);
+
 static void panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox, PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog);
 static void panel_preferences_dialog_panel_add (GtkWidget *widget, PanelPreferencesDialog *dialog);
@@ -107,6 +111,9 @@ struct _PanelPreferencesDialog
 
   /* changed signal for the active panel's itembar */
   gulong            items_changed_handler_id;
+
+  /* background image watch */
+  gulong            bg_image_notify_handler_id;
 
   /* changed signal for the output selector */
   gulong            output_changed_handler_id;
@@ -166,6 +173,22 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
+
+  /* style tab */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  g_signal_connect_swapped (G_OBJECT (object), "changed",
+      G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "composited");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  g_signal_connect_swapped (G_OBJECT (object), "notify::visible",
+      G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
+  panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (object));
+  g_signal_connect (G_OBJECT (object), "file-set",
+    G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
 
   /* items treeview and buttons */
   connect_signal ("item-up", "clicked", panel_preferences_dialog_item_move);
@@ -232,12 +255,24 @@ panel_preferences_dialog_finalize (GObject *object)
   PanelPreferencesDialog *dialog = PANEL_PREFERENCES_DIALOG (object);
   GtkWidget              *itembar;
 
-  /* disconnect changed signal */
-  if (dialog->active != NULL && dialog->items_changed_handler_id != 0)
+  /* free bindings list */
+  g_slist_free (dialog->bindings);
+
+  if (dialog->active != NULL)
     {
-      itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
-      g_signal_handler_disconnect (G_OBJECT (itembar),
-          dialog->items_changed_handler_id);
+      if (dialog->items_changed_handler_id != 0)
+        {
+          /* disconnect changed signal */
+          itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
+          g_signal_handler_disconnect (G_OBJECT (itembar),
+              dialog->items_changed_handler_id);
+        }
+
+      if (dialog->bg_image_notify_handler_id != 0)
+        {
+          g_signal_handler_disconnect (G_OBJECT (dialog->active),
+              dialog->bg_image_notify_handler_id);
+        }
     }
 
   /* deselect all windows */
@@ -278,7 +313,7 @@ panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog)
 {
   GSList *li;
 
-  if (dialog->bindings)
+  if (dialog->bindings != NULL)
     {
       /* remove all bindings */
       for (li = dialog->bindings; li != NULL; li = li->next)
@@ -286,6 +321,18 @@ panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog)
 
       g_slist_free (dialog->bindings);
       dialog->bindings = NULL;
+    }
+
+  /* disconnect image watch */
+  if (dialog->bg_image_notify_handler_id != 0)
+    {
+      if (dialog->active != NULL)
+        {
+          g_signal_handler_disconnect (G_OBJECT (dialog->active),
+              dialog->bg_image_notify_handler_id);
+        }
+
+      dialog->bg_image_notify_handler_id = 0;
     }
 }
 
@@ -346,6 +393,13 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "enter-opacity", "value");
   panel_preferences_dialog_bindings_add (dialog, "leave-opacity", "value");
   panel_preferences_dialog_bindings_add (dialog, "composited", "visible");
+  panel_preferences_dialog_bindings_add (dialog, "background-style", "active");
+  panel_preferences_dialog_bindings_add (dialog, "background-color", "color");
+
+  /* watch image changes from the panel */
+  dialog->bg_image_notify_handler_id = g_signal_connect_swapped (G_OBJECT (dialog->active),
+      "notify::background-image", G_CALLBACK (panel_preferences_dialog_bg_image_notified), dialog);
+  panel_preferences_dialog_bg_image_notified (dialog);
 
   /* get run mode of the driver (multiple screens or randr) */
   display = gtk_widget_get_display (GTK_WIDGET (dialog->active));
@@ -503,6 +557,84 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
 
       g_free (output_name);
     }
+}
+
+
+
+static void
+panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog)
+{
+  gint      active;
+  GObject  *object;
+  gboolean  composited;
+
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  panel_return_if_fail (PANEL_WINDOW (dialog->active));
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (object));
+  active = gtk_combo_box_get_active (GTK_COMBO_BOX (object));
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-alpha-box");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_get (G_OBJECT (dialog->active), "composited", &composited, NULL);
+  g_object_set (G_OBJECT (object), "visible", composited && active < 2, NULL);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-color-box");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_set (G_OBJECT (object), "visible", active == 1, NULL);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-image-box");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_set (G_OBJECT (object), "visible", active == 2, NULL);
+}
+
+
+
+static void
+panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton   *button,
+                                            PanelPreferencesDialog *dialog)
+{
+  gchar *filename;
+
+  panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (button));
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  panel_return_if_fail (PANEL_IS_WINDOW (dialog->active));
+
+  g_signal_handler_block (G_OBJECT (dialog->active),
+      dialog->bg_image_notify_handler_id);
+
+  filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (button));
+  g_object_set (G_OBJECT (dialog->active), "background-image", filename, NULL);
+  g_free (filename);
+
+  g_signal_handler_unblock (G_OBJECT (dialog->active),
+      dialog->bg_image_notify_handler_id);
+}
+
+
+
+static void
+panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog)
+{
+  gchar   *filename;
+  GObject *button;
+
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  panel_return_if_fail (PANEL_IS_WINDOW (dialog->active));
+
+  button = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
+  panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (button));
+
+  g_signal_handlers_block_by_func (G_OBJECT (button),
+      G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
+
+  g_object_get (G_OBJECT (dialog->active), "background-image", &filename, NULL);
+  gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (button), filename != NULL ? filename : "");
+  g_free (filename);
+
+  g_signal_handlers_unblock_by_func (G_OBJECT (button),
+      G_CALLBACK (panel_preferences_dialog_bg_image_file_set), dialog);
 }
 
 

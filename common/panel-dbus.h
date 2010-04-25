@@ -38,6 +38,9 @@
 #define SIGNAL_WRAPPER_SET_SENSITIVE    "i"
 #define SIGNAL_WRAPPER_BACKGROUND_ALPHA "j"
 #define SIGNAL_WRAPPER_QUIT             "k"
+#define SIGNAL_WRAPPER_BACKGROUND_COLOR "l"
+#define SIGNAL_WRAPPER_BACKGROUND_IMAGE "m"
+#define SIGNAL_WRAPPER_BACKGROUND_UNSET "n"
 
 /* special types for dbus communication */
 #define PANEL_TYPE_DBUS_SET_MESSAGE \
