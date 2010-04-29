@@ -37,7 +37,7 @@
 #define DEFAULT_ICON_NAME "xfce4-panel-menu"
 #define DEFAULT_TITLE     _("Xfce Menu")
 #define DEFAULT_ICON_SIZE (16)
-
+#define DEFAULT_MENU      "menus" G_DIR_SEPARATOR_S "xfce-applications.menu"
 
 
 struct _ApplicationsMenuPluginClass
@@ -899,8 +899,9 @@ applications_menu_plugin_menu (GtkWidget              *button,
                                ApplicationsMenuPlugin *plugin)
 {
   GtkWidget  *mi;
-  GarconMenu *menu;
+  GarconMenu *menu = NULL;
   GError     *error = NULL;
+  gchar      *filename;
 
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
   panel_return_if_fail (button == NULL || plugin->button == button);
@@ -911,11 +912,23 @@ applications_menu_plugin_menu (GtkWidget              *button,
 
   if (G_UNLIKELY (plugin->custom_menu
       && plugin->custom_menu_file != NULL))
-    menu = garcon_menu_new_for_path (plugin->custom_menu_file);
+    {
+      menu = garcon_menu_new_for_path (plugin->custom_menu_file);
+    }
   else
-    menu = garcon_menu_new_applications ();
+    {
+      /* lookup the xfce-applications.menu file */
+      filename = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, DEFAULT_MENU);
+      if (G_LIKELY (filename != NULL))
+        menu = garcon_menu_new_for_path (filename);
+      g_free (filename);
 
-  if (garcon_menu_load (menu, NULL, &error))
+      /* fallback to the default menu */
+      if (G_UNLIKELY (menu == NULL))
+        menu = garcon_menu_new_applications ();
+    }
+
+  if (menu != NULL && garcon_menu_load (menu, NULL, &error))
     {
       plugin->menu = gtk_menu_new ();
       g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
@@ -940,5 +953,6 @@ applications_menu_plugin_menu (GtkWidget              *button,
       g_error_free (error);
     }
 
-  g_object_unref (G_OBJECT (menu));
+  if (G_LIKELY (menu != NULL))
+    g_object_unref (G_OBJECT (menu));
 }
