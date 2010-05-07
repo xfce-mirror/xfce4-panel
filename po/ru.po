@@ -195,9 +195,9 @@ msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE].
 msgstr "Неверный синтаксис события модуля. Используйте ИМЯ-МОДУЛЯ:НАЗВАНИЕ[:ТИП:ЗНАЧЕНИЕ]"
 
 #: ../panel/panel-dbus-client.c:259
-#, c-format
+#, c-format, fuzzy
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
+msgstr "Некорректный тип подсказки \"%s\". Корректные типы: логический, двоичный, целый, символьный и целочисленный."
 
 #: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
@@ -769,8 +769,9 @@ msgid "Show _frame"
 msgstr "_Показывать рамку "
 
 #: ../plugins/clock/clock-dialog.glade.h:17
+#, fuzzy
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Отображать неактивные точки"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
@@ -1327,7 +1328,7 @@ msgstr "Отображать рамку окна под курсором мыш�
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr "Сгрупировать название и отметку времени"
+msgstr "Сгруппировать название и отметку времени"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
@@ -1392,16 +1393,18 @@ msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
 #: ../plugins/tasklist/tasklist-widget.c:2626
+#, fuzzy
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Убрать разворот"
 
 #: ../plugins/tasklist/tasklist-widget.c:2632
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
 #: ../plugins/tasklist/tasklist-widget.c:2641
+#, fuzzy
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "_Убрать разворот"
 
 #: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
