@@ -319,7 +319,7 @@ msgstr "Фон"
 #: ../panel/panel-preferences-dialog.glade.h:7
 #, fuzzy
 msgid "C_ompositing"
-msgstr "Положение "
+msgstr "Композитинг"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "D_isplay"
@@ -377,9 +377,8 @@ msgid "Remove the currently selected panel"
 msgstr "Удалить выбранную панель "
 
 #: ../panel/panel-preferences-dialog.glade.h:22
-#, fuzzy
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "Выберите этот параметр, чтобы скрыть области изменения размера панели и сделать её неподвижной."
+msgstr "Выберите этот параметр, чтобы сделать длину панели изменяющейся, если для модулей не будет хватать места"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Select this option to extend the panel over multiple monitors."
@@ -477,12 +476,10 @@ msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Добро пожаловать! Это первый запуск панели Xfce"
 
 #: ../migrate/main.c:80
-#, fuzzy
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr "Поскольку панель теперь использует новую систему хранения настроек, будут загружены свежие начальные установки"
 
 #: ../migrate/main.c:83
-#, fuzzy
 msgid "Choose below which setup you want for the first startup."
 msgstr "Выберите, какие из перечисленных ниже предустановленных настроек, вы хотите использовать для первого запуска"
 
@@ -748,12 +745,11 @@ msgstr "Ф_ормат:"
 #. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Чёткость"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-#, fuzzy
 msgid "Fl_ash time separators"
-msgstr "_Мигающий разделитель "
+msgstr "Мигающий разделитель"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
@@ -827,7 +823,7 @@ msgstr "Поздний вечер"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr ""
+msgstr "Поздний вечер"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
@@ -839,57 +835,57 @@ msgstr "%0 часов"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "%0:05"
+msgstr "%0 часов 5 минут"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "%0:10"
+msgstr "%0 часов 10 минут"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "%0:15"
+msgstr "%0 с четвертью"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "%0:20"
+msgstr "%0 часов 20 минут"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "%0:25"
+msgstr "%0 часов 25 минут"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
-msgstr "%0:30"
+msgstr "%0 с половиной"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "двадцать пять к %1"
+msgstr "Без 25 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr "двадцать к %1"
+msgstr "Без 20 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr "четыре к %1"
+msgstr "Без четверти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr "десять к %1"
+msgstr "Без 10 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr "пять к %1"
+msgstr "Без 5 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
