@@ -1,14 +1,14 @@
 # translation of si.po to Sinhalese
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Rashan Anushka <rashan.uoc@gmail.com>, 2008.
 # W.H. Kalpa Pathum <callkalpa@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 06:04+0100\n"
+"POT-Creation-Date: 2010-05-09 22:27+0200\n"
 "PO-Revision-Date: 2010-03-14 21:45+0530\n"
 "Last-Translator: W.H. Kalpa Pathum <callkalpa@gmail.com>\n"
 "Language-Team: Sinhala <kde-i18n-doc@kde.org>\n"
@@ -39,8 +39,12 @@ msgid "_Read Online"
 msgstr "සබැඳිව කියවන්න (_R)"
 
 #: ../common/panel-utils.c:156
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "ඔබට පරිශීලක අත් පොත සබැඳිව කියවිය හැක. එසේ වුවත් මෙම අත් පොත ඔබගේ පුවරු අනුවාදයට හරියටම නොගැළපිය හැක."
+msgid ""
+"You can read the user manual online. This manual may however not exactly "
+"match your panel version."
+msgstr ""
+"ඔබට පරිශීලක අත් පොත සබැඳිව කියවිය හැක. එසේ වුවත් මෙම අත් පොත ඔබගේ පුවරු අනුවාදයට හරියටම "
+"නොගැළපිය හැක."
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
@@ -53,13 +57,13 @@ msgstr "සුලේඛන ගවේශකය විවෘත කිරීමට
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:861
-#: ../panel/panel-preferences-dialog.c:869
+#: ../panel/panel-preferences-dialog.c:996
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" ඉවත් කිරීමට අවශ්‍ය බව ඔබට සහතිකද?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:866
-#: ../panel/panel-preferences-dialog.c:872
+#: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ඔබ පුවරුවෙන් අයිතමය මැකුවොත් එය ස්ථිරවම නැතිවෙයි."
 
@@ -69,17 +73,17 @@ msgid "_Move"
 msgstr "ගමන් කරවන්න (_M)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
 msgid "Add _New Items..."
 msgstr "නව අයිතම එක් කරන්න... (_N)"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2088
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
 msgid "Panel Pr_eferences..."
 msgstr "පුවරු අභිප්‍රේත... (_e)"
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2111
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
 msgid "_Restart"
 msgstr "ප්‍රතිපණගන්වන්න (_R)"
 
@@ -184,261 +188,360 @@ msgstr "D-Bus පණිවිඩය යැවීමට අපොහොසත් 
 msgid "No running instance of %s was found"
 msgstr "%s හි ධාවනය වන සිද්ධියක් හමු නොවුණි"
 
-#: ../panel/panel-application.c:195
+#: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr "සංක්‍රමණ යෙදුම දියත් කිරීමට අපොහොසත් විය"
 
 #: ../panel/panel-dbus-client.c:226
-msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "අවලංගු ප්ලගින සිදුවීම් කාරක රිතී දෝෂයක් විශේෂණය කර ඇත. PLUGIN-NAME:NAME[:TYPE:VALUE] භාවිතා කරන්න."
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"අවලංගු ප්ලගින සිදුවීම් කාරක රිතී දෝෂයක් විශේෂණය කර ඇත. PLUGIN-NAME:NAME[:TYPE:VALUE] "
+"භාවිතා කරන්න."
 
 #: ../panel/panel-dbus-client.c:259
 #, c-format
-msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "\"%s\" අවලංගු ඉඟි වර්ගය. වලංගු වර්ග වන්නේ bool, double, int, string සහ uint."
 
-#: ../panel/panel-dialogs.c:57
+#: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce වැඩපත් පාරිසරිකයේ පුවරුව"
 
-#: ../panel/panel-dialogs.c:62
+#: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr "පරිවර්තක-කීර්තිය"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "නව අයිතමයක් එක් කරන්න"
 
-#: ../panel/panel-dialogs.c:116
+#: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "කරුණාකර නව ප්ලගිනය සඳහා පුවරුවක් තෝරන්න:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127 ../panel/panel-preferences-dialog.c:616
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:743
 #, c-format
 msgid "Panel %d"
 msgstr "%d පුවරුව"
 
-#: ../panel/panel-dialogs.c:163
-msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "පුවරුව kiosk ප්‍රකාරයෙන් ධාවනය වන නිසා ක්‍රමවත් පරිශීලකයෙක් ලෙස පුවරු වින්‍යාසයට වෙනස්කම් කිරීමට ඔබට අවසර නැත"
+#: ../panel/panel-dialogs.c:186
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+"පුවරුව kiosk ප්‍රකාරයෙන් ධාවනය වන නිසා ක්‍රමවත් පරිශීලකයෙක් ලෙස පුවරු වින්‍යාසයට වෙනස්කම් කිරීමට "
+"ඔබට අවසර නැත"
 
-#: ../panel/panel-dialogs.c:165
+#: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
 msgstr "පුවරුව විකරණය කිරීමට අවසර නැත"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "\"%s\" ප්ලගිනය බලාපොරොත්තු නොවූ ලෙස පුවරුව හැරයන ලදි, ඔබට එය ප්‍රතිපණගැන්වීමට අවශ්‍යද?"
+msgstr ""
+"\"%s\" ප්ලගිනය බලාපොරොත්තු නොවූ ලෙස පුවරුව හැරයන ලදි, ඔබට එය ප්‍රතිපණගැන්වීමට අවශ්‍යද?"
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:211
 #, c-format
-msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "අවසාන තත්පර %d තුළදී ප්ලගිනය එක් වරකට වඩා ප්‍රතිපණගැන්වෙන ලදි. ඔබ ක්‍රියාත්මක කරන්න ක්ලික් කලහොත් පුවරුව ප්ලගිනය ප්‍රතිපණගැන්වීමට උත්සහ කරයි නැත්නම් එය ස්ථිරවම පුවරුවෙන් ඉවත් වෙයි."
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+"අවසාන තත්පර %d තුළදී ප්ලගිනය එක් වරකට වඩා ප්‍රතිපණගැන්වෙන ලදි. ඔබ ක්‍රියාත්මක කරන්න ක්ලික් "
+"කලහොත් පුවරුව ප්ලගිනය ප්‍රතිපණගැන්වීමට උත්සහ කරයි නැත්නම් එය ස්ථිරවම පුවරුවෙන් ඉවත් වෙයි."
 
-#: ../panel/panel-item-dialog.c:174
+#: ../panel/panel-item-dialog.c:171
 msgid "Add New Items"
 msgstr "නව අයිතම එක් කරන්න"
 
-#: ../panel/panel-item-dialog.c:176
+#: ../panel/panel-item-dialog.c:173
 msgid "Add new plugins to the panel"
 msgstr "පුවරුවට නව ප්ලගින එක් කරන්න"
 
-#: ../panel/panel-item-dialog.c:198
+#: ../panel/panel-item-dialog.c:195
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "සොයන්න: (_S)"
 
-#: ../panel/panel-item-dialog.c:206
+#: ../panel/panel-item-dialog.c:203
 msgid "Enter search phrase here"
 msgstr "මෙහි සෙවුම් වැකිය ඇතුල් කරනන්"
 
-#: ../panel/panel-preferences-dialog.c:383
+#: ../panel/panel-preferences-dialog.c:432
 msgid "Automatic"
 msgstr "ස්වයංක්‍රීය"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:402
+#: ../panel/panel-preferences-dialog.c:451
 #, c-format
 msgid "Screen %d"
 msgstr "%d තිරය"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:428
+#: ../panel/panel-preferences-dialog.c:477
 #, c-format
 msgid "Monitor %d"
 msgstr "%d මොනිටරය"
 
-#: ../panel/panel-preferences-dialog.c:677
+#: ../panel/panel-preferences-dialog.c:804
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "පුවරු සහ ප්ලගින වින්‍යාස ස්ථිරවම ඉවත් කෙරෙනු ඇත"
 
-#: ../panel/panel-preferences-dialog.c:678
+#: ../panel/panel-preferences-dialog.c:805
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d පුවරුව ඉවත් කිරීමට අවශ්‍ය බව ඔබට සහතිකද?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:752
+#: ../panel/panel-preferences-dialog.c:879
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "අභ්‍යන්තර නාමය: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
+#, fuzzy
+msgid "A_utomatically increase the length"
+msgstr "පුවරුව ස්වයංව පෙන්නන්න සහ සඟවන්න (_h)"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
 msgstr "නව පුවරුවක් එක් කරන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:2
+#: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Add new item to this panel"
 msgstr "මෙම පුවරුවට නව අයිතම එක් කරන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
+#: ../panel/panel-preferences-dialog.glade.h:4
+#, fuzzy
+msgid ""
+"Alpha value of the panel background, between 0 (transparent) and 100 "
+"(opaque)."
 msgstr "පුවරු පසුබිමේ ඇල්ෆා අගය, 0 (පාරදෘෂ්‍ය) සහ 100 (පාරාන්ධ) අතර"
 
-#: ../panel/panel-preferences-dialog.glade.h:4
+#: ../panel/panel-preferences-dialog.glade.h:5
+#, fuzzy
+msgid "Appeara_nce"
+msgstr "පෙනුම"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
 msgstr "පුවරුව ස්වයංව පෙන්නන්න සහ සඟවන්න (_h)"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
 msgstr "පසුබිම"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "C_ompositing"
-msgstr "නිබන්ධය (_o)"
+#: ../panel/panel-preferences-dialog.glade.h:8
+#, fuzzy
+msgid "Background image"
+msgstr "පසුබිම"
 
-#: ../panel/panel-preferences-dialog.glade.h:7
+#: ../panel/panel-preferences-dialog.glade.h:9
+msgid "C_olor:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
 msgstr "ප්‍රදර්ශනය කරන්න (_i)"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
 msgstr "දැනට තේරූ අයිතමය සංස්කරණය කරන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "සාමාන්‍ය"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Horizontal"
 msgstr "තිරස්"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Ite_ms"
 msgstr "අයිතම (_m)"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "දිග (%): (_e)"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:15
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "මිනුම්"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
 msgstr "දැනට තේරූ අයිතමය එක් පේළියකින් පහළට ගෙනියන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
 msgstr "දැනට තේරූ අයිතමය එක් පේළියකින් ඉහළට ගෙනියන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "None (use system style)"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
 msgstr "ප්‍රතිදානය: (_u)"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Pick a Panel Color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Remove currently selected item"
 msgstr "දැනට තේරූ අයිතමය ඉවත් කරන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Remove the currently selected panel"
 msgstr "දැනට තේරූ පුවරුව ඉවත් කරන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:26
+#, fuzzy
+msgid "Select A Background Image"
+msgstr "අයිකනයක් තෝරන්න"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
+#, fuzzy
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "පුවරුවේ අල්ලු සඟවා එහි පිහිටීම අඟුලු දැමීමට මෙම අභිරුචිය තෝරන්න."
+
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "බහු මොනිටර මත පැනලය ප්‍රසාරණය කිරීමට මෙම අභිරුචිය තෝරන්න."
 
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "Select this option to hide the handles of the panel and lock its position."
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
 msgstr "පුවරුවේ අල්ලු සඟවා එහි පිහිටීම අඟුලු දැමීමට මෙම අභිරුචිය තෝරන්න."
 
-#: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr "දර්ශකය පුවරුව මත නැති විට පුවරුව සැඟවීමට මෙම අභිරුචිය තෝරන්න. පුවරුව තිර දාරයකට බැඳී ඇති විට පමණක් මෙය වැඩ කරයි."
+#: ../panel/panel-preferences-dialog.glade.h:30
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
+msgstr ""
+"දර්ශකය පුවරුව මත නැති විට පුවරුව සැඟවීමට මෙම අභිරුචිය තෝරන්න. පුවරුව තිර දාරයකට බැඳී ඇති විට "
+"පමණක් මෙය වැඩ කරයි."
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Show about information of the currently selected item"
 msgstr "වත්මන් තේරූ අයිතමයේ පිළිබඳ තොරතුරු පෙන්නන්න"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "Solid color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Span mo_nitors"
 msgstr "මොනිටර පරායනය"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Transparency"
 msgstr "පාරදෘශ්‍යතාව"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr "දර්ශකය පුවරුව මතින් යන විට පාරදෘශ්‍ය කරන්න."
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr "දර්ශකය පුවරුව මතින් නොයන විට පාරදෘශ්‍ය කරන්න."
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Vertical"
 msgstr "සිරස්"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Xfce Panel"
 msgstr "Xfce පුවරුව"
 
-#. I18N: label for the background alha slider
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
 msgstr "ඇල්ෆා: (_A)"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
 msgstr "ඇතුල් කරන්න: (_E)"
 
+#: ../panel/panel-preferences-dialog.glade.h:42
+#, fuzzy
+msgid "_File:"
+msgstr "විලාසය: (_S)"
+
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
 msgstr "හැර යන්න: (_L)"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
 msgstr "පුවරුව අඟුල් දමන්න (_L)"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Orientation:"
 msgstr "දිශානතිය: (_O)"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Size (pixels):"
 msgstr "ප්‍රමාණය (පික්සල): (_S)"
+
+#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../plugins/separator/separator-dialog.glade.h:8
+msgid "_Style:"
+msgstr "විලාසය: (_S)"
+
+#: ../panel/panel-tic-tac-toe.c:123
+msgid "_New Game"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:134
+#, fuzzy
+msgid "_Level:"
+msgstr "හැර යන්න: (_L)"
+
+#: ../panel/panel-tic-tac-toe.c:140
+msgid "Novice"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:141
+msgid "Intermediate"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:142
+msgid "Experienced"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:143
+msgid "Expert"
+msgstr ""
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Xfce පුවරුවේ පළමු ආරම්භයට සාදරයෙන් පිළිගනිමු"
 
 #: ../migrate/main.c:80
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh inital configuration."
-msgstr "සිටුවම් ගබඩා කිරීමට පුවරුව නව පද්ධතියකට ගමන් කරවූ නිසා, එයට නැවුම් මුල් වින්‍යාසයක් ප්‍රවේශනත කල යුතුය."
+#, fuzzy
+msgid ""
+"Because the panel moved to a new system for storing the settings, it has to "
+"load a fresh initial configuration."
+msgstr ""
+"සිටුවම් ගබඩා කිරීමට පුවරුව නව පද්ධතියකට ගමන් කරවූ නිසා, එයට නැවුම් මුල් වින්‍යාසයක් ප්‍රවේශනත කල "
+"යුතුය."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -567,8 +670,12 @@ msgid "Select A Menu File"
 msgstr "මෙනු ගොනුවක් තෝරන්න"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr "මෙනුවේ සාමාන්‍ය යෙදුම් නම පෙන්වීමට මෙම අභිරුචිය තෝරන්න, උදාහරණයක් ලෙස \"Thunar\" වෙනුවට \"ගොනු කළමනාකරු\""
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"මෙනුවේ සාමාන්‍ය යෙදුම් නම පෙන්වීමට මෙම අභිරුචිය තෝරන්න, උදාහරණයක් ලෙස \"Thunar\" වෙනුවට "
+"\"ගොනු කළමනාකරු\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
@@ -603,22 +710,22 @@ msgstr "බොත්තම් මාතෘකාව පෙන්නන්න (_S
 msgid "Xfce Menu"
 msgstr "Xfce පුවරුව"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:458
+#: ../plugins/applicationsmenu/applicationsmenu.c:463
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "අයිකනයක් තෝරන්න"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:697
+#: ../plugins/applicationsmenu/applicationsmenu.c:703
 #: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" විධානය ක්‍රියාත්මක කිරීමට අපොහොසත් විය."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:860
+#: ../plugins/applicationsmenu/applicationsmenu.c:940
 msgid "No applications found"
 msgstr "යෙදුම් හමු නොවුණි"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:872
+#: ../plugins/applicationsmenu/applicationsmenu.c:952
 msgid "Failed to load the applications menu"
 msgstr "යෙදුම් මෙනුව ප්‍රවේශනය කිරීමට අපොහොසත් විය"
 
@@ -701,14 +808,14 @@ msgstr "තත්පර පෙන්වන්න(_s)"
 msgid "F_ormat:"
 msgstr "හැඩතලය: (_o)"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "‍ෆසිරහිත(_u):"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fl_ash time seperators"
+#, fuzzy
+msgid "Fl_ash time separators"
 msgstr "කාල විභේදක බබළවන්න (_a)"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
@@ -738,8 +845,14 @@ msgstr "ජාලකය පෙන්වන්න (_d)"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "ගොනු නාමයට ඇතුල් කිරීමට දින සහ වේලා කොටස් හැඩතලය විස්තර කරයි. උදාහරණයක් ලෙස, %Y වර්ෂයෙන් ආදේශ වනු ඇත, %m මාසයෙන් සහ %d දිනයෙන්. අමතර තොරතුරු සඳහා දින උපයෝගීතා සුලේඛනය බලන්න."
+msgid ""
+"The format describes the date and time parts to insert into the file name. "
+"For example, %Y will be substituted with the year, %m with the month and %d "
+"with the day. See the documentation of the date utility for additional "
+"information."
+msgstr ""
+"ගොනු නාමයට ඇතුල් කිරීමට දින සහ වේලා කොටස් හැඩතලය විස්තර කරයි. උදාහරණයක් ලෙස, %Y වර්ෂයෙන් "
+"ආදේශ වනු ඇත, %m මාසයෙන් සහ %d දිනයෙන්. අමතර තොරතුරු සඳහා දින උපයෝගීතා සුලේඛනය බලන්න."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1027,8 +1140,14 @@ msgid "Show a directory tree in a menu"
 msgstr "මෙනුවක බහලුම් වෘක්ෂයක් පෙන්නන්න"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "බහලුමක දෘෂ්‍ය ගොනු මොනවාදැයි තීරණය කිරීමට භාවිතා වන විලාස ලැයිස්තුවක් ඇතුල් කරන්න. ඔබ මෙහි විලාස එකකට වඩා විශේෂණය කලොත්, ලැයිස්තු අයිතම තිත් කොමාවෙන් වෙන් කල යුතුය (උදා. *.txt;*.doc)."
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+"බහලුමක දෘෂ්‍ය ගොනු මොනවාදැයි තීරණය කිරීමට භාවිතා වන විලාස ලැයිස්තුවක් ඇතුල් කරන්න. ඔබ මෙහි "
+"විලාස එකකට වඩා විශේෂණය කලොත්, ලැයිස්තු අයිතම තිත් කොමාවෙන් වෙන් කල යුතුය (උදා. *.txt;*."
+"doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1123,8 +1242,11 @@ msgid "North"
 msgstr "උතුර"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr "පුවරු බොත්තම් හෝ මෙනු අයිතම මතින් ගමන් කිරීමේදී මෙවලම් ඉඟි අක්‍රිය කිරීමට මෙම අභිරුචිය තෝරන්න."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"පුවරු බොත්තම් හෝ මෙනු අයිතම මතින් ගමන් කිරීමේදී මෙවලම් ඉඟි අක්‍රිය කිරීමට මෙම අභිරුචිය තෝරන්න."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1214,10 +1336,6 @@ msgstr "පාරදෘශ්‍ය"
 msgid "_Expand"
 msgstr "ප්‍රසාරණය කරන්න (_E)"
 
-#: ../plugins/separator/separator-dialog.glade.h:8
-msgid "_Style:"
-msgstr "විලාසය: (_S)"
-
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
 msgstr "පුවරු අයිතම අතරට විභේදයක් හෝ ඉඩක් එක් කරන්න"
@@ -1240,8 +1358,12 @@ msgstr "වැඩතලය පෙන්වන්න"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:551
-msgid "Most likely another widget took over the function of a notification area. This plugin will close."
-msgstr "පෙනෙන හැටියට වෙනත් විජට්ටුවක් දැනුම්දීමේ ප්‍රදේශයේ ක්‍රියාව භාර ගන්නා ලදි. මෙම ප්ලගිනය වැසෙනු අත."
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This plugin will close."
+msgstr ""
+"පෙනෙන හැටියට වෙනත් විජට්ටුවක් දැනුම්දීමේ ප්‍රදේශයේ ක්‍රියාව භාර ගන්නා ලදි. මෙම ප්ලගිනය වැසෙනු "
+"අත."
 
 #: ../plugins/systray/systray.c:554
 msgid "The notification area lost selection"
@@ -1347,23 +1469,23 @@ msgstr "කවුළු සමූහනය: (_g)"
 msgid "Window title"
 msgstr "කවුළු මාතෘකාව"
 
-#: ../plugins/tasklist/tasklist-widget.c:2381
+#: ../plugins/tasklist/tasklist-widget.c:2617
 msgid "Mi_nimize All"
 msgstr "සියල්ල හකුලන්න (_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2390
+#: ../plugins/tasklist/tasklist-widget.c:2626
 msgid "Un_minimize All"
 msgstr "සියල්ල දිග හරින්න (_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2396
+#: ../plugins/tasklist/tasklist-widget.c:2632
 msgid "Ma_ximize All"
 msgstr "සියල්ල විහිදන්න (_x)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2405
+#: ../plugins/tasklist/tasklist-widget.c:2641
 msgid "_Unmaximize All"
 msgstr "සියල්ල කුඩා කරන්න (_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2415
+#: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
 msgstr "සියල්ල වසන්න (_C)"
 
@@ -1430,6 +1552,9 @@ msgstr "කවුළු මෙනුව"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "මෙනුවක් භාවිතයෙන් විවෘත කවුළු අතර මාරු වෙන්න"
+
+#~ msgid "C_ompositing"
+#~ msgstr "නිබන්ධය (_o)"
 
 #~ msgid "Failed to open manual"
 #~ msgstr "සංදර්ශකය විවෘත කිරීම අසමත් විය"

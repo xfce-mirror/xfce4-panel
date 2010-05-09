@@ -9,10 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-09 12:04+0100\n"
+"POT-Creation-Date: 2010-05-09 22:27+0200\n"
 "PO-Revision-Date: 2010-03-10 19:33+0100\n"
 "Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
-"Language-Team: Italian Translation Team <xfce-it-translators@googlegroups.com>\n"
+"Language-Team: Italian Translation Team <xfce-it-translators@googlegroups."
+"com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,12 +51,17 @@ msgid "_Read Online"
 msgstr "_Leggi online"
 
 #: ../common/panel-utils.c:156
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "È possibile leggere il manuale utente online. Questo manuale potrebbe comunque non corrispondere alla propria versione del pannello."
+msgid ""
+"You can read the user manual online. This manual may however not exactly "
+"match your panel version."
+msgstr ""
+"È possibile leggere il manuale utente online. Questo manuale potrebbe "
+"comunque non corrispondere alla propria versione del pannello."
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr "Il manuale utente del pannello di Xfce non è installato su questo computer"
+msgstr ""
+"Il manuale utente del pannello di Xfce non è installato su questo computer"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -63,37 +69,34 @@ msgid "Failed to open the documentation browser"
 msgstr "Impossibile aprire il browser della documentazione"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:860
-#: ../panel/panel-preferences-dialog.c:869
+#: ../libxfce4panel/xfce-panel-plugin.c:861
+#: ../panel/panel-preferences-dialog.c:996
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Rimuovere davvero \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:865
-#: ../panel/panel-preferences-dialog.c:872
+#: ../libxfce4panel/xfce-panel-plugin.c:866
+#: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se si rimuove l'elemento dal pannello, verrà perso per sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1039
+#: ../libxfce4panel/xfce-panel-plugin.c:1040
 msgid "_Move"
 msgstr "_Sposta"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1081
-#: ../panel/panel-window.c:2077
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1092
-#: ../panel/panel-window.c:2088
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1116
-#: ../panel/panel-window.c:2111
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
 msgid "_Restart"
 msgstr "_Riavvia"
 
@@ -101,8 +104,7 @@ msgstr "_Riavvia"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostra la finestra di personalizzazione del pannello"
 
-#: ../panel/main.c:75
-#: ../panel/main.c:76
+#: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
 msgstr "NUMERO-PANNELLO"
 
@@ -199,262 +201,372 @@ msgstr "Impossibile inviare il messaggio D-Bus"
 msgid "No running instance of %s was found"
 msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
 
-#: ../panel/panel-application.c:195
+#: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr "Avvio dell'applicazione di migrazione non riuscito"
 
-#: ../panel/panel-dbus-client.c:227
-msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "È stata specificata una sintassi dell'evento del plugin non valida. Usare NOME-PLUGIN:NOME[:TIPO:VALORE]."
+#: ../panel/panel-dbus-client.c:226
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"È stata specificata una sintassi dell'evento del plugin non valida. Usare "
+"NOME-PLUGIN:NOME[:TIPO:VALORE]."
 
-#: ../panel/panel-dbus-client.c:260
+#: ../panel/panel-dbus-client.c:259
 #, c-format
-msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Tipo di suggerimento \"%s\" non valido. Sono accettati i tipo bool, double, int, string e uint."
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+"Tipo di suggerimento \"%s\" non valido. Sono accettati i tipo bool, double, "
+"int, string e uint."
 
-#: ../panel/panel-dialogs.c:57
+#: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Il pannello dell'ambiente Xfce"
 
-#: ../panel/panel-dialogs.c:62
+#: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr "Cristian Marchi <cri.penta@gmail.com>,  2010."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:102
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Aggiungi un nuovo elemento"
 
-#: ../panel/panel-dialogs.c:116
+#: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "Selezionare un pannello per il nuovo plugin:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:616
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:743
 #, c-format
 msgid "Panel %d"
 msgstr "Pannello %d"
 
-#: ../panel/panel-dialogs.c:163
-msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "Dato che il pannello è in esecuzione in modalità protetta (kiosk), non è permesso effettuare delle modifiche alla sua configurazione come utente regolare"
+#: ../panel/panel-dialogs.c:186
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+"Dato che il pannello è in esecuzione in modalità protetta (kiosk), non è "
+"permesso effettuare delle modifiche alla sua configurazione come utente "
+"regolare"
 
-#: ../panel/panel-dialogs.c:165
+#: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
 msgstr "La modifica del pannello non è permessa"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Il plugin \"%s\" ha inaspettatamente abbandonato il pannello; riavviarlo?"
+msgstr ""
+"Il plugin \"%s\" ha inaspettatamente abbandonato il pannello; riavviarlo?"
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:211
 #, c-format
-msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "Il plugin è stato riavviato più di una volta negli ultimi %d secondi. Premendo «Esegui» il pannello tenterà di riavviare il plugin altrimenti verrà rimosso definitivamente dal pannello."
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+"Il plugin è stato riavviato più di una volta negli ultimi %d secondi. "
+"Premendo «Esegui» il pannello tenterà di riavviare il plugin altrimenti verrà "
+"rimosso definitivamente dal pannello."
 
-#: ../panel/panel-item-dialog.c:174
+#: ../panel/panel-item-dialog.c:171
 msgid "Add New Items"
 msgstr "Aggiunge nuovi elementi"
 
-#: ../panel/panel-item-dialog.c:176
+#: ../panel/panel-item-dialog.c:173
 msgid "Add new plugins to the panel"
 msgstr "Aggiunge un nuovo plugin al pannello"
 
-#: ../panel/panel-item-dialog.c:198
+#: ../panel/panel-item-dialog.c:195
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "C_erca:"
 
-#: ../panel/panel-item-dialog.c:206
+#: ../panel/panel-item-dialog.c:203
 msgid "Enter search phrase here"
 msgstr "Inserire qui la frase da cercare"
 
-#: ../panel/panel-preferences-dialog.c:383
+#: ../panel/panel-preferences-dialog.c:432
 msgid "Automatic"
 msgstr "Automatico"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:402
+#: ../panel/panel-preferences-dialog.c:451
 #, c-format
 msgid "Screen %d"
 msgstr "Schermo %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:428
+#: ../panel/panel-preferences-dialog.c:477
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:677
+#: ../panel/panel-preferences-dialog.c:804
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Le configurazioni del pannello e del plugin saranno rimosse in modo permanente"
+msgstr ""
+"Le configurazioni del pannello e del plugin saranno rimosse in modo "
+"permanente"
 
-#: ../panel/panel-preferences-dialog.c:678
+#: ../panel/panel-preferences-dialog.c:805
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Rimuovere davvero il pannello \"%d\"?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:752
+#: ../panel/panel-preferences-dialog.c:879
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
+#, fuzzy
+msgid "A_utomatically increase the length"
+msgstr "Mostra e _nascondi automaticamente il pannello"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
 msgstr "Aggiunge un nuovo pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:2
+#: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Add new item to this panel"
 msgstr "Aggiunge un nuovo elemento a questo pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
-msgstr "Imposta l'opacità dello sfondo del pannello: 0 (trasparente), 100 (opaco)"
-
 #: ../panel/panel-preferences-dialog.glade.h:4
+#, fuzzy
+msgid ""
+"Alpha value of the panel background, between 0 (transparent) and 100 "
+"(opaque)."
+msgstr ""
+"Imposta l'opacità dello sfondo del pannello: 0 (trasparente), 100 (opaco)"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+#, fuzzy
+msgid "Appeara_nce"
+msgstr "Aspetto"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
 msgstr "Mostra e _nascondi automaticamente il pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
 msgstr "Sfondo"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "C_ompositing"
-msgstr "_Decorazione"
+#: ../panel/panel-preferences-dialog.glade.h:8
+#, fuzzy
+msgid "Background image"
+msgstr "Sfondo"
 
-#: ../panel/panel-preferences-dialog.glade.h:7
+#: ../panel/panel-preferences-dialog.glade.h:9
+msgid "C_olor:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
 msgstr "_Visualizzazione"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
 msgstr "Modifica l'elemento selezionato"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Generale"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Horizontal"
 msgstr "Orizzontale"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Ite_ms"
 msgstr "_Elementi"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "Lunghe_zza (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Dimensioni"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
 msgstr "Sposta alla riga inferiore l'elemento selezionato "
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
 msgstr "Sposta alla riga superiore l'elemento selezionato "
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "None (use system style)"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
 msgstr "O_utput:"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Pick a Panel Color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Remove currently selected item"
 msgstr "Rimuove l'elemento selezionato"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Remove the currently selected panel"
 msgstr "Rimuove il pannello selezionato"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:26
+#, fuzzy
+msgid "Select A Background Image"
+msgstr "Selezionare un'icona"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
+#, fuzzy
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+"Selezionare questa opzione per nascondere le maniglie del pannello e "
+"bloccarne la posizione"
+
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Selezionare questa opzione per estendere il pannello su più monitor"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr "Selezionare questa opzione per nascondere le maniglie del pannello e bloccarne la posizione"
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr ""
+"Selezionare questa opzione per nascondere le maniglie del pannello e "
+"bloccarne la posizione"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr "Selezionare questa opzione per nascondere il pannello quando il puntatore non si trova su di esso. Questa impostazione funziona solamente quando il pannello è attaccato al bordo dello schermo"
+#: ../panel/panel-preferences-dialog.glade.h:30
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
+msgstr ""
+"Selezionare questa opzione per nascondere il pannello quando il puntatore "
+"non si trova su di esso. Questa impostazione funziona solamente quando il "
+"pannello è attaccato al bordo dello schermo"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Show about information of the currently selected item"
 msgstr "Mostra le informazioni dell'elemento selezionato"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "Solid color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Span mo_nitors"
 msgstr "Estendi su più sc_hermi"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Transparency"
 msgstr "Trasparenza"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr "Trasparenza quando il puntatore è sul pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr "Trasparenza quando il puntatore non è sul pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Vertical"
 msgstr "Verticale"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Xfce Panel"
 msgstr "Pannello di Xfce"
 
-#. I18N: label for the background alha slider
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
 msgstr "O_pacità"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
 msgstr "_A fuoco:"
 
+#: ../panel/panel-preferences-dialog.glade.h:42
+#, fuzzy
+msgid "_File:"
+msgstr "_Stile:"
+
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
 msgstr "_Non a fuoco:"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
 msgstr "_Blocca il pannello"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Orientation:"
 msgstr "O_rientamento:"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Size (pixels):"
 msgstr "Di_mensione (pixel):"
+
+#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../plugins/separator/separator-dialog.glade.h:8
+msgid "_Style:"
+msgstr "_Stile:"
+
+#: ../panel/panel-tic-tac-toe.c:123
+msgid "_New Game"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:134
+#, fuzzy
+msgid "_Level:"
+msgstr "_Non a fuoco:"
+
+#: ../panel/panel-tic-tac-toe.c:140
+msgid "Novice"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:141
+msgid "Intermediate"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:142
+msgid "Experienced"
+msgstr ""
+
+#: ../panel/panel-tic-tac-toe.c:143
+msgid "Expert"
+msgstr ""
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Benvenuti al primo avvio del pannello di Xfce"
 
 #: ../migrate/main.c:80
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh inital configuration."
-msgstr "Poiché il pannello adotta un nuovo sistema per l'immagazzinamento delle impostazioni, è necessario caricare una configurazione iniziale pulita."
+#, fuzzy
+msgid ""
+"Because the panel moved to a new system for storing the settings, it has to "
+"load a fresh initial configuration."
+msgstr ""
+"Poiché il pannello adotta un nuovo sistema per l'immagazzinamento delle "
+"impostazioni, è necessario caricare una configurazione iniziale pulita."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -554,7 +666,8 @@ msgstr "Impossibile eseguire il comando \"%s\""
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
-msgstr "Disconnette l'utente, blocca lo schermo o esegue altre azioni di sistema"
+msgstr ""
+"Disconnette l'utente, blocca lo schermo o esegue altre azioni di sistema"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -589,8 +702,12 @@ msgid "Select A Menu File"
 msgstr "Selezionare un file del menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr "Selezionare questa opzione per mostrare il nome generico dell'applicazione nel menu, per esempio \"Gestore dei file\" in luogo di \"Thunar\""
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"Selezionare questa opzione per mostrare il nome generico dell'applicazione "
+"nel menu, per esempio \"Gestore dei file\" in luogo di \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
@@ -625,22 +742,22 @@ msgstr "Mostra il titolo del _pulsante"
 msgid "Xfce Menu"
 msgstr "Menu di Xfce"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:458
+#: ../plugins/applicationsmenu/applicationsmenu.c:463
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Selezionare un'icona"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:697
+#: ../plugins/applicationsmenu/applicationsmenu.c:703
 #: ../plugins/launcher/launcher.c:2095
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossibile eseguire il comando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:860
+#: ../plugins/applicationsmenu/applicationsmenu.c:940
 msgid "No applications found"
 msgstr "Nessuna applicazione trovata"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:872
+#: ../plugins/applicationsmenu/applicationsmenu.c:952
 msgid "Failed to load the applications menu"
 msgstr "Impossibile avviare il menu delle applicazioni"
 
@@ -729,7 +846,8 @@ msgid "F_uzziness:"
 msgstr "Im_precisione:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fl_ash time seperators"
+#, fuzzy
+msgid "Fl_ash time separators"
 msgstr "Separatori dell'ora _lampeggianti"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
@@ -759,8 +877,16 @@ msgstr "Mostra g_riglia"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "Il formato descrive la date e l'ora da inserire nel nome del file. Per esempio, %Y verrà sostituito con l'anno, %m con il mese e %d con il giorno. Consultare la documentazione dell'utility della data per maggiori informazioni."
+msgid ""
+"The format describes the date and time parts to insert into the file name. "
+"For example, %Y will be substituted with the year, %m with the month and %d "
+"with the day. See the documentation of the date utility for additional "
+"information."
+msgstr ""
+"Il formato descrive la date e l'ora da inserire nel nome del file. Per "
+"esempio, %Y verrà sostituito con l'anno, %m con il mese e %d con il giorno. "
+"Consultare la documentazione dell'utility della data per maggiori "
+"informazioni."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1048,8 +1174,15 @@ msgid "Show a directory tree in a menu"
 msgstr "Mostra l'albero delle cartelle in un menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Inserire una lista di schemi che determineranno quali file dovranno essere visibili nella cartella. Se si specifica più di uno schema, gli elementi della lista dovranno essere separati con il punto e virgola (es. *.txt;*.doc)."
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+"Inserire una lista di schemi che determineranno quali file dovranno essere "
+"visibili nella cartella. Se si specifica più di uno schema, gli elementi "
+"della lista dovranno essere separati con il punto e virgola (es. *.txt;*."
+"doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1144,12 +1277,17 @@ msgid "North"
 msgstr "Nord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr "Selezionare questa opzione per disabilitare i suggerimenti quando il puntatore è su un pulsante del pannello o su un elemento del menu"
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"Selezionare questa opzione per disabilitare i suggerimenti quando il "
+"puntatore è su un pulsante del pannello o su un elemento del menu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Selezionare questa opzione per spostare l'elemento selezionato sul pannello"
+msgstr ""
+"Selezionare questa opzione per spostare l'elemento selezionato sul pannello"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Show _label instead of icon"
@@ -1175,7 +1313,7 @@ msgstr "Posizione del pulsante della f_reccia"
 msgid "Program launcher with optional menu"
 msgstr "Avviatore di programmi con menu opzionale"
 
-#: ../plugins/pager/pager.c:408
+#: ../plugins/pager/pager.c:411
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Impossibile aprire le impostazioni dello spazio di lavoro di Xfce"
 
@@ -1235,10 +1373,6 @@ msgstr "Trasparente"
 msgid "_Expand"
 msgstr "_Espandi"
 
-#: ../plugins/separator/separator-dialog.glade.h:8
-msgid "_Style:"
-msgstr "_Stile:"
-
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
 msgstr "Aggiunge un separatore o uno spazio tra gli elementi del pannello"
@@ -1261,8 +1395,12 @@ msgstr "Mostra scrivania"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:551
-msgid "Most likely another widget took over the function of a notification area. This plugin will close."
-msgstr "Probabilmente un altro widget ha preso il controllo dell'area di notifica. Questo plugin verrà chiuso."
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This plugin will close."
+msgstr ""
+"Probabilmente un altro widget ha preso il controllo dell'area di notifica. "
+"Questo plugin verrà chiuso."
 
 #: ../plugins/systray/systray.c:554
 msgid "The notification area lost selection"
@@ -1304,7 +1442,8 @@ msgstr "Sempre"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr "Di_segna la cornice della finestra quando il puntatore è sul suo pulsante"
+msgstr ""
+"Di_segna la cornice della finestra quando il puntatore è sul suo pulsante"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
@@ -1369,23 +1508,23 @@ msgstr "Ra_ggruppa finestre:"
 msgid "Window title"
 msgstr "Titolo della finestra"
 
-#: ../plugins/tasklist/tasklist-widget.c:2381
+#: ../plugins/tasklist/tasklist-widget.c:2617
 msgid "Mi_nimize All"
 msgstr "Mi_nimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2390
+#: ../plugins/tasklist/tasklist-widget.c:2626
 msgid "Un_minimize All"
 msgstr "_Deminimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2396
+#: ../plugins/tasklist/tasklist-widget.c:2632
 msgid "Ma_ximize All"
 msgstr "Ma_ssimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2405
+#: ../plugins/tasklist/tasklist-widget.c:2641
 msgid "_Unmaximize All"
 msgstr "D_emassimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2415
+#: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
 msgstr "_Chiudi tutte"
 
@@ -1453,8 +1592,11 @@ msgstr "Menu delle finestre"
 msgid "Switch between open windows using a menu"
 msgstr "Scorre tra le finestre aperte utilizzando un menu"
 
+#~ msgid "C_ompositing"
+#~ msgstr "_Decorazione"
+
 #~ msgid "Failed to open manual"
 #~ msgstr "Impossibile aprire il manuale"
+
 #~ msgid "Action Button"
 #~ msgstr "Pulsanti delle azioni"
-

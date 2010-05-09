@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-04 22:04+0000\n"
+"POT-Creation-Date: 2010-05-09 22:27+0200\n"
 "PO-Revision-Date: 2010-04-05 07:44+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -46,9 +46,8 @@ msgid ""
 "You can read the user manual online. This manual may however not exactly "
 "match your panel version."
 msgstr ""
-"ਤੁਸੀਂ ਯੂਜ਼ਰ ਮੈਨੁਅਲ ਆਨਲਾਈਨ ਪੜ੍ਹ ਸਕਦੇ ਹੋ। ਇਹ ਮੈਨੁਅਲ ਤੁਹਾਡੇ ਪੈਨਲ ਵਰਜਨ ਨਾਲ ਪੂਰੀ "
-"ਤਰ੍ਹਾਂ ਰਲਦਾ "
-"ਨਹੀਂ ਹੋ ਸਕਦਾ ਹੈ।"
+"ਤੁਸੀਂ ਯੂਜ਼ਰ ਮੈਨੁਅਲ ਆਨਲਾਈਨ ਪੜ੍ਹ ਸਕਦੇ ਹੋ। ਇਹ ਮੈਨੁਅਲ ਤੁਹਾਡੇ ਪੈਨਲ ਵਰਜਨ ਨਾਲ ਪੂਰੀ ਤਰ੍ਹਾਂ ਰਲਦਾ ਨਹੀਂ ਹੋ "
+"ਸਕਦਾ ਹੈ।"
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
@@ -61,13 +60,13 @@ msgstr "ਡੌਕੂਮੈਂਟੇਸ਼ਨ ਬਰਾਊਜ਼ਰ ਖੋਲ੍�
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:861
-#: ../panel/panel-preferences-dialog.c:864
+#: ../panel/panel-preferences-dialog.c:996
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "ਕੀ ਤੁਸੀਂ \"%s\" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:866
-#: ../panel/panel-preferences-dialog.c:867
+#: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ਜੇ ਤੁਸੀਂ ਪੈਨਲ ਤੋਂ ਆਈਟਮ ਨੂੰ ਹਟਾਇਆ ਤਾਂ ਇਹ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਖਤਮ ਹੋ ਜਾਵੇਗੀ।"
 
@@ -77,17 +76,17 @@ msgid "_Move"
 msgstr "ਏਧਰ-ਓਧਰ(_M)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2105
+#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
 msgid "Add _New Items..."
 msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2116
+#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
 msgid "Panel Pr_eferences..."
 msgstr "ਪੈਨਲ ਪਸੰਦ(_e)..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2139
+#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
 msgid "_Restart"
 msgstr "ਰੀ-ਸਟਾਰਟ(_R)"
 
@@ -192,15 +191,14 @@ msgstr "ਡੀ-ਬੱਸ ਸੁਨੇਹਾ ਭੇਜਣ ਲਈ ਫੇਲ੍ਹ 
 msgid "No running instance of %s was found"
 msgstr "%s ਦਾ ਕੋਈ ਵੀ ਚੱਲਦਾ ਮੌਕਾ ਨਹੀਂ ਲੱਭਿਆ"
 
-#: ../panel/panel-application.c:195
+#: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr "ਮਾਈਗਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #: ../panel/panel-dbus-client.c:226
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"ਅਢੁੱਕਵਾਂ ਪਲੱਗਇਨ ਈਵੈਂਟ ਸੰਟੈਕਸ ਦਿੱਤਾ। ਵਰਤੋਂ PLUGIN-NAME:NAME[:TYPE:VALUE]"
+msgstr "ਅਢੁੱਕਵਾਂ ਪਲੱਗਇਨ ਈਵੈਂਟ ਸੰਟੈਕਸ ਦਿੱਤਾ। ਵਰਤੋਂ PLUGIN-NAME:NAME[:TYPE:VALUE]"
 
 #: ../panel/panel-dbus-client.c:259
 #, c-format
@@ -229,7 +227,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "ਨਵੀਂ ਪਲੱਗਇਨ ਲਈ ਪੈਨਲ ਚੁਣੋ ਜੀ:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:611
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:743
 #, c-format
 msgid "Panel %d"
 msgstr "ਪੈਨਲ %d"
@@ -239,9 +237,8 @@ msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
-"ਕਿਉਂਕਿ ਪੈਨਲ kiosk ਮੋਡ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ, ਤੁਹਾਨੂੰ ਪੈਨਲ ਸੰਰਚਨਾ ਵਿੱਚ ਰੈਗੂਲਰ "
-"ਯੂਜ਼ਰ ਵਜੋਂ ਬਦਲਾਅ "
-"ਕਰਨ ਦੀ ਮਨਜ਼ੂਰੀ ਨਹੀਂ ਹੈ।"
+"ਕਿਉਂਕਿ ਪੈਨਲ kiosk ਮੋਡ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ, ਤੁਹਾਨੂੰ ਪੈਨਲ ਸੰਰਚਨਾ ਵਿੱਚ ਰੈਗੂਲਰ ਯੂਜ਼ਰ ਵਜੋਂ ਬਦਲਾਅ ਕਰਨ "
+"ਦੀ ਮਨਜ਼ੂਰੀ ਨਹੀਂ ਹੈ।"
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
@@ -250,9 +247,7 @@ msgstr "ਪੈਨਲ 'ਚ ਸੋਧ ਕਰਨ ਦੀ ਮਨਜ਼ੂਰੀ ਨ�
 #: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"ਪਲੱਗਇਨ \"%s\" ਨੇ ਅਚਾਨਕ ਪੈਨਲ ਛੱਡ ਦਿੱਤਾ, ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ "
-"ਹੋ?"
+msgstr "ਪਲੱਗਇਨ \"%s\" ਨੇ ਅਚਾਨਕ ਪੈਨਲ ਛੱਡ ਦਿੱਤਾ, ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: ../panel/panel-dialogs.c:211
 #, c-format
@@ -261,11 +256,8 @@ msgid ""
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr ""
-"ਪਲੱਗਇਨ ਪਿਛਲੇ %d ਸਕਿੰਟਾਂ ਵਿੱਚ ਇੱਕ ਤੋਂ ਵੱਧ ਵਾਰ ਰੀ-ਸਟਾਰਟ ਹੋ ਗਈ ਹੈ। ਜੇ ਤੁਸੀਂ "
-"ਚਲਾਉ ਨੂੰ "
-"ਦਬਾਇਆ ਤਾਂ ਪੈਨਲ ਪਲੱਗਇਨ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰੇਗਾ, ਨਹੀਂ ਤਾਂ ਇਸ ਨੂੰ ਪੈਨਲ ਵਿੱਚੋਂ ਪੱਕੇ "
-"ਤੌਰ "
-"ਉੱਤੇ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
+"ਪਲੱਗਇਨ ਪਿਛਲੇ %d ਸਕਿੰਟਾਂ ਵਿੱਚ ਇੱਕ ਤੋਂ ਵੱਧ ਵਾਰ ਰੀ-ਸਟਾਰਟ ਹੋ ਗਈ ਹੈ। ਜੇ ਤੁਸੀਂ ਚਲਾਉ ਨੂੰ ਦਬਾਇਆ ਤਾਂ "
+"ਪੈਨਲ ਪਲੱਗਇਨ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰੇਗਾ, ਨਹੀਂ ਤਾਂ ਇਸ ਨੂੰ ਪੈਨਲ ਵਿੱਚੋਂ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
 
 #: ../panel/panel-item-dialog.c:171
 msgid "Add New Items"
@@ -284,196 +276,234 @@ msgstr "ਖੋਜ(_S):"
 msgid "Enter search phrase here"
 msgstr "ਖੋਜ ਸ਼ਬਦ ਇੱਥੇ ਦਿਓ"
 
-#: ../panel/panel-preferences-dialog.c:378
+#: ../panel/panel-preferences-dialog.c:432
 msgid "Automatic"
 msgstr "ਆਟੋਮੈਟਿਕ"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:397
+#: ../panel/panel-preferences-dialog.c:451
 #, c-format
 msgid "Screen %d"
 msgstr "%d ਖੋਜ"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:423
+#: ../panel/panel-preferences-dialog.c:477
 #, c-format
 msgid "Monitor %d"
 msgstr "%d ਮਾਨੀਟਰ"
 
-#: ../panel/panel-preferences-dialog.c:672
+#: ../panel/panel-preferences-dialog.c:804
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "ਪੈਨਲ ਅਤੇ ਪਲੱਗਇਨ ਸੰਰਚਨਾ ਨੂੰ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾਇਆ ਜਾਵੇਗਾ"
 
-#: ../panel/panel-preferences-dialog.c:673
+#: ../panel/panel-preferences-dialog.c:805
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "ਕੀ ਤੁਸੀਂ ਪੈਨਲ %d ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:747
+#: ../panel/panel-preferences-dialog.c:879
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "ਅੰਦਰੂਨੀ ਨਾਂ: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
+#, fuzzy
+msgid "A_utomatically increase the length"
+msgstr "ਲੰਬਾਈ ਆਟੋਮੈਟਿਕ ਵਧਾਓ"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
 msgstr "ਨਵਾਂ ਪੈਨਲ ਜੋੜ੍ਹੋ"
 
-#: ../panel/panel-preferences-dialog.glade.h:2
+#: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Add new item to this panel"
 msgstr "ਨਵੀਂ ਆਈਟਮ ਇਸ ਪੈਨਲ 'ਚ ਸ਼ਾਮਲ"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
+#: ../panel/panel-preferences-dialog.glade.h:4
+#, fuzzy
 msgid ""
 "Alpha value of the panel background, between 0 (transparent) and 100 "
 "(opaque)."
 msgstr "ਪੈਨਲ ਬੈਕਗਰਾਊਂਡ ਲਈ ਐਲਫ਼ਾ, 0 (ਟਰਾਂਸਪੇਰੈਂਟ) ਤੋਂ ੧੦੦ (ਧੁੰਦਲਾ) ਵਿੱਚ"
 
-#: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Automatically increase the length"
-msgstr "ਲੰਬਾਈ ਆਟੋਮੈਟਿਕ ਵਧਾਓ"
-
 #: ../panel/panel-preferences-dialog.glade.h:5
+#, fuzzy
+msgid "Appeara_nce"
+msgstr "ਦਿੱਖ"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
 msgstr "ਆਟੋਮੈਟਿਕ ਹੀ ਪੈਨਲ ਵੇਖੋ ਅਤੇ ਓਹਲੇ ਕਰੋ(_h)"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
 msgstr "ਬੈਕਗਰਾਊਂਡ"
 
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "C_ompositing"
-msgstr "ਕੰਪੋਜਿਸ਼ਨਿੰਗ(_o)"
-
 #: ../panel/panel-preferences-dialog.glade.h:8
+#, fuzzy
+msgid "Background image"
+msgstr "ਬੈਕਗਰਾਊਂਡ"
+
+#: ../panel/panel-preferences-dialog.glade.h:9
+msgid "C_olor:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
 msgstr "ਡਿਸਪਲੇਅ(_i)"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
 msgstr "ਮੌਜੂਦਾ ਚੁਣੀ ਆਈਟਮ ਸੋਧੋ"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "ਆਮ"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Horizontal"
 msgstr "ਹਰੀਜੱਟਲ"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Ite_ms"
 msgstr "ਆਈਟਮਾਂ(_m)"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "ਲੰਬਾਈ(_e) (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "ਮਾਪ"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
 msgstr "ਇਸ ਸਮੇਂ ਚੁਣੀ ਆਈਟਮ ਨੂੰ ਇੱਕ ਕਤਾਰ ਹੇਠਾਂ ਭੇਜੋ"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
 msgstr "ਇਸ ਸਮੇਂ ਚੁਣੀ ਆਈਟਮ ਨੂੰ ਇੱਕ ਕਤਾਰ ਉੱਤੇ ਭੇਜੋ"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "None (use system style)"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
 msgstr "ਆਉਟਪੁੱਟ(_u):"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Pick a Panel Color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Remove currently selected item"
 msgstr "ਮੌਜੂਦਾ ਚੁਣੀ ਆਈਟਮ ਹਟਾਓ"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Remove the currently selected panel"
 msgstr "ਮੌਜੂਦਾ ਚੁਣਿਆ ਪੈਨਲ ਹਟਾਓ"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:26
+#, fuzzy
+msgid "Select A Background Image"
+msgstr "ਆਈਕਾਨ ਚੁਣੋ"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Show about information of the currently selected item"
 msgstr "ਮੌਜੂਦਾ ਚੁਣੀ ਆਈਟਮ ਬਾਰੇ ਜਾਣਕਾਰੀ ਵੇਖੋ"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid "Solid color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Span mo_nitors"
 msgstr "ਮਾਨੀਟਰ ਸਪੈਨ(_n)"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Transparency"
 msgstr "ਟਰਾਂਸਪਰੇਸੀ"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Transparency when the pointer is hovering over the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is not hovering the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Vertical"
 msgstr "ਵਰਟੀਕਲ"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Xfce Panel"
 msgstr "Xfce ਪੈਨਲ"
 
-#. I18N: label for the background alha slider
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
 msgstr "ਐਲਫਾ(_A):"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
 msgstr "ਦਾਖਲ(_E):"
 
+#: ../panel/panel-preferences-dialog.glade.h:42
+#, fuzzy
+msgid "_File:"
+msgstr "ਸਟਾਈਲ(_S):"
+
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
 msgstr "ਛੱਡੋ(_L):"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
 msgstr "ਪੈਨਲ ਲਾਕ ਕਰੋ(_L)"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Orientation:"
 msgstr "ਸਥਿਤੀ(_O):"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Size (pixels):"
 msgstr "ਸਾਈਜ਼ (ਪਿਕਸਲ)(_S):"
+
+#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../plugins/separator/separator-dialog.glade.h:8
+msgid "_Style:"
+msgstr "ਸਟਾਈਲ(_S):"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
@@ -508,9 +538,8 @@ msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
-"ਕਿਉਂਕਿ ਸੈਟਿੰਗ ਨੂੰ ਲੜੀਬੱਧ ਕਰਨ ਲਈ ਪੈਨਲ ਨੇ ਨਵੇਂ ਸਿਸਟਮ ਬਦਲਿਆ ਹੈ, ਇਸ ਲਈ ਤਾਜ਼ਾ "
-"ਸ਼ੁਰੂਆਤੀ ਸੰਰਚਨਾ "
-"ਲੋਡ ਕੀਤੀ ਜਾ ਚੁੱਕੀ ਹੈ।"
+"ਕਿਉਂਕਿ ਸੈਟਿੰਗ ਨੂੰ ਲੜੀਬੱਧ ਕਰਨ ਲਈ ਪੈਨਲ ਨੇ ਨਵੇਂ ਸਿਸਟਮ ਬਦਲਿਆ ਹੈ, ਇਸ ਲਈ ਤਾਜ਼ਾ ਸ਼ੁਰੂਆਤੀ ਸੰਰਚਨਾ ਲੋਡ "
+"ਕੀਤੀ ਜਾ ਚੁੱਕੀ ਹੈ।"
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -688,11 +717,11 @@ msgstr "ਆਈਕਾਨ ਚੁਣੋ"
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" ਕਮਾਂਡ ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ।"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:927
+#: ../plugins/applicationsmenu/applicationsmenu.c:940
 msgid "No applications found"
 msgstr "ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਨਹੀਂ ਲੱਭੀ"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:939
+#: ../plugins/applicationsmenu/applicationsmenu.c:952
 msgid "Failed to load the applications menu"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ ਮੇਨੂ ਲੋਡ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
@@ -1296,10 +1325,6 @@ msgstr "ਟਰਾਂਸਪੇਰੈਂਟ"
 msgid "_Expand"
 msgstr "ਫੈਲਾਓ(_E)"
 
-#: ../plugins/separator/separator-dialog.glade.h:8
-msgid "_Style:"
-msgstr "ਸਟਾਈਲ(_S):"
-
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
 msgstr "ਪੈਨਲ ਆਈਟਮਾਂ 'ਚ ਇੱਕ ਸਪਰੇਟਰ ਜਾਂ ਸਪੇਸ ਸ਼ਾਮਲ ਕਰੋ"
@@ -1514,6 +1539,9 @@ msgstr "ਵਿੰਡੋ ਮੇਨੂ"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "ਮੇਨੂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਖੁੱਲ੍ਹੀਆਂ ਵਿੰਡੋਜ਼ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ"
+
+#~ msgid "C_ompositing"
+#~ msgstr "ਕੰਪੋਜਿਸ਼ਨਿੰਗ(_o)"
 
 #, fuzzy
 #~ msgid "Failed to open manual"
