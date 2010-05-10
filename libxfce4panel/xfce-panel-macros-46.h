@@ -422,12 +422,17 @@ enum /*< skip >*/
   } \
   \
   static void \
-  _xpp_realize (XfcePanelPlugin *xpp) \
+  _xpp_realize (XfcePanelPlugin *xpp, \
+                GtkPlug         *plug) \
   { \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
+    g_return_if_fail (GTK_IS_PLUG (plug)); \
     \
     g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), \
         G_CALLBACK (_xpp_realize), NULL); \
+    \
+    g_signal_connect (G_OBJECT (xpp), "provider-signal", \
+        G_CALLBACK (_xpp_provider_signal), plug); \
     \
     ((XfcePanelPluginFunc) construct_func) (xpp); \
   } \
@@ -585,11 +590,9 @@ enum /*< skip >*/
                         "arguments", argv + PLUGIN_ARGV_ARGUMENTS, NULL); \
     gtk_container_add (GTK_CONTAINER (plug), xpp); \
     g_signal_connect_after (G_OBJECT (xpp), "realize", \
-        G_CALLBACK (_xpp_realize), NULL); \
+        G_CALLBACK (_xpp_realize), plug); \
     g_signal_connect_after (G_OBJECT (xpp), "destroy", \
         G_CALLBACK (_xpp_quit_main_loop), NULL); \
-    g_signal_connect (G_OBJECT (xpp), "provider-signal", \
-        G_CALLBACK (_xpp_provider_signal), plug); \
     gtk_widget_show (xpp); \
     \
     if (*argv[PLUGIN_ARGV_BACKGROUND_IMAGE] != '\0') \
