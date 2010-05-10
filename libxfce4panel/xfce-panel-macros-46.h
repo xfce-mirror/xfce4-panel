@@ -283,6 +283,7 @@ enum /*< skip >*/
   static GdkColor         _xpp_bg_color = { 0, }; \
   static const gchar     *_xpp_bg_image = NULL; \
   static cairo_pattern_t *_xpp_bg_image_cache = NULL; \
+  static gboolean         _xpp_debug = FALSE; \
   \
   static void \
   _xpp_quit_main_loop (void) \
@@ -398,9 +399,13 @@ enum /*< skip >*/
     \
     g_return_if_fail (GTK_IS_PLUG (plug)); \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
-    g_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (plug))); \
+    g_return_if_fail (GTK_WIDGET_REALIZED (plug)); \
     g_return_if_fail (_xpp_atom != GDK_NONE); \
     g_return_if_fail (GTK_WIDGET_REALIZED (xpp)); \
+    \
+    if (_xpp_debug) \
+      g_printerr ("xfce4-panel(%s): send provider signal %d\n", \
+                  xfce_panel_plugin_get_name (xpp), message); \
     \
     event.type = GDK_CLIENT_EVENT; \
     event.window = gtk_widget_get_window (plug); \
@@ -427,6 +432,11 @@ enum /*< skip >*/
   { \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     g_return_if_fail (GTK_IS_PLUG (plug)); \
+    g_return_if_fail (GTK_WIDGET_REALIZED (plug)); \
+    \
+    if (_xpp_debug) \
+      g_printerr ("xfce4-panel(%s): calling plugin construct function\n", \
+                  xfce_panel_plugin_get_name (xpp)); \
     \
     g_signal_handlers_disconnect_by_func (G_OBJECT (xpp), \
         G_CALLBACK (_xpp_realize), NULL); \
@@ -535,12 +545,17 @@ enum /*< skip >*/
     gint             unique_id; \
     GdkNativeWindow  socket_id; \
     GdkColormap     *colormap = NULL; \
+    const gchar     *value; \
     \
     if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS)) \
       { \
         g_critical ("Not enough arguments are passed to the plugin"); \
         return PLUGIN_EXIT_FAILURE; \
       } \
+    \
+    value = g_getenv ("PANEL_DEBUG"); \
+    if (value != NULL && value[0] == '1' && value[1] == '\0') \
+      _xpp_debug = TRUE; \
     \
     if (G_UNLIKELY (preinit_func != NULL)) \
       { \
