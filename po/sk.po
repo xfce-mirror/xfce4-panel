@@ -3,17 +3,17 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Juraj Brosz <juro@jurajbrosz.info>, 2004.
 # Roman Moravcik <roman.moravcik@gmail.com>, 2006.
-# Robert Hartl <hartl.robert@gmail.com>, 2009, 2010.
+# Robert Hartl <hartl.robert@gmail.com>, 2009, 2010., 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 22:27+0200\n"
-"PO-Revision-Date: 2010-03-02 10:01Centra\n"
+"POT-Creation-Date: 2010-05-10 04:04+0000\n"
+"PO-Revision-Date: 2010-05-10 12:12+0200\n"
 "Last-Translator: Robert Hartl <hartl.robert@gmail.com>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Language-Team: Slovak <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -25,9 +25,8 @@ msgid "Create a new launcher on the Xfce Panel"
 msgstr ""
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the Xfce Panel"
-msgstr "O Xfce panely"
+msgstr "Prispôsobenie Panelu Xfce"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Panel Preferences"
@@ -46,23 +45,24 @@ msgstr ""
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
 msgstr ""
+"Užívateľská príručka pre Panel Xfce nie je nainštalovaná na vašom počítači"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
 msgid "Failed to open the documentation browser"
-msgstr ""
+msgstr "Nepodarilo sa otvoriť prehliadač dokumentácie"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:861
 #: ../panel/panel-preferences-dialog.c:996
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Naozaj chcete odobrať pracovnú plochu '%s'?"
+msgstr "Ste si istí, že chcete odstrániť „%s“?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:866
 #: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Ak odstránite položku z panela, bude navždy stratená."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1040
@@ -106,7 +106,7 @@ msgstr "Pridá nový zásuvný modul na panale"
 
 #: ../panel/main.c:78
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "NÁZOV-ZÁSUVNÉHO-MODULU"
 
 #: ../panel/main.c:79
 msgid "Restart the running panel instance"
@@ -131,7 +131,7 @@ msgstr "[PARAMETRE...]"
 #: ../panel/main.c:156
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Informácie pre použitie získate príkazom „%s --help“."
 
 #: ../panel/main.c:175
 msgid "The Xfce development team. All rights reserved."
@@ -149,22 +149,19 @@ msgstr ""
 #. spawn ourselfs again
 #: ../panel/main.c:262
 msgid "Restarting..."
-msgstr "Reštartuje sa..."
+msgstr "Reštartuje sa…"
 
 #: ../panel/main.c:277
-#, fuzzy
 msgid "Failed to show the preferences dialog"
-msgstr "Nepodarilo sa otvoriť displej"
+msgstr "Nepodarilo sa zobraziť dialógové okno nastavení"
 
 #: ../panel/main.c:279
-#, fuzzy
 msgid "Failed to show the add new items dialog"
-msgstr "Zobraziť dialógové okno \"Pridať nové položky\""
+msgstr "Nepodarilo sa zobraziť dialógové okno pre pridanie novej položky"
 
 #: ../panel/main.c:281
-#, fuzzy
 msgid "Failed to save the panel configuration"
-msgstr "Uloží konfiguráciu panela"
+msgstr "Nepodarilo sa uložiť konfiguráciu panela"
 
 #: ../panel/main.c:283
 msgid "Failed to add a plugin to the panel"
@@ -190,7 +187,7 @@ msgstr ""
 
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Nepodarilo sa spustiť aplikáciu pre migráciu"
 
 #: ../panel/panel-dbus-client.c:226
 msgid ""
@@ -234,7 +231,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Úprava panelu nie je povolená"
 
 #: ../panel/panel-dialogs.c:209
 #, c-format
@@ -317,9 +314,8 @@ msgid ""
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Vzhľad"
+msgstr "_Vzhľad"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -330,13 +326,12 @@ msgid "Background"
 msgstr "Pozadie"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
 msgid "Background image"
-msgstr "Pozadie"
+msgstr "Obrázok na pozadí"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "_Farba:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -401,9 +396,8 @@ msgid "Remove the currently selected panel"
 msgstr "Odstrániť práve vybraný panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "Vybrať príkaz"
+msgstr "Vybrať obrázok na pozadí"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid ""
@@ -470,9 +464,8 @@ msgid "_Enter:"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-#, fuzzy
 msgid "_File:"
-msgstr "Š_týl:"
+msgstr "_Súbor:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
@@ -498,27 +491,27 @@ msgstr "Š_týl:"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "_Nová hra"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr ""
+msgstr "_Úroveň:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "Začiatočník"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Stredne pokročilý"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Skúsený"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Expert"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
@@ -560,14 +553,12 @@ msgid "Start with one empty panel"
 msgstr ""
 
 #: ../migrate/main.c:115
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Uloží konfiguráciu panela"
+msgstr ""
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Uloží konfiguráciu panela"
+msgstr "Nepodarilo sa načítať predvolenú konfiguráciu"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -704,9 +695,8 @@ msgstr "Ponuka Xfce"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:463
 #: ../plugins/directorymenu/directorymenu.c:369
-#, fuzzy
 msgid "Select An Icon"
-msgstr "Vybrať príkaz"
+msgstr "Vybrať ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:703
 #: ../plugins/launcher/launcher.c:2095
@@ -763,7 +753,7 @@ msgstr "Týždeň %V"
 
 #: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Nepodarilo sa spustiť príkaz hodín"
 
 #: ../plugins/clock/clock.c:677
 msgid "Custom Format"
@@ -1113,7 +1103,7 @@ msgstr "Nepodarilo sa spustiť predovlenú aplikáciu pre „%s“"
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Nepodarilo sa spustiť uprednostňovanú aplikáciu pre kategóriu „%s“"
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
@@ -1322,9 +1312,8 @@ msgid "Separator"
 msgstr "Oddeľovač"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
 msgid "Transparent"
-msgstr "P_riesvitnosť (%):"
+msgstr "Priesvitnosť"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
@@ -1445,7 +1434,7 @@ msgstr "_Zoradenie"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
-msgstr ""
+msgstr "Časová značka"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
@@ -1520,13 +1509,12 @@ msgid "Remove Workspace %d"
 msgstr "Odstrániť pracovnú plochu %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-#, fuzzy
 msgid "Arrow"
-msgstr "Š_ípka:"
+msgstr "Šípka"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Rozloženie tlačidiel:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 #, fuzzy
