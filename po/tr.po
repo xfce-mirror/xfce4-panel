@@ -6,40 +6,40 @@
 # Erçin EKER <ercin.eker@linux.org.tr>, 2004.
 # Eren Türkay <turkay.eren@gmail.com>, 2007, 2008.
 # Gökmen görgen <gkmngrgn@gmail.com>, 2009.
+# Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 22:27+0200\n"
-"PO-Revision-Date: 2009-10-14 14:51+0200\n"
-"Last-Translator: Ertuğrul HAZAR <ertugrulhazar@gmail.com>\n"
-"Language-Team: Turkish <turkce@pardus.org.tr>\n"
+"POT-Creation-Date: 2010-05-13 16:05+0000\n"
+"PO-Revision-Date: 2010-05-15 00:16+0300\n"
+"Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
+"Language-Team: Turkish <kde-i18n-doc@kde.org,xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-#, fuzzy
 msgid "Create Launcher on Xfce Panel"
-msgstr "Xfce Paneli Hakkında"
+msgstr "Xfce Panelinde Başlatıcı oluştur"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create a new launcher on the Xfce Panel"
-msgstr ""
+msgstr "Xfce Panelinde yeni bir başlatıcı oluştur"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the Xfce Panel"
-msgstr "Xfce Paneli Hakkında"
+msgstr "Xfce Panelini özelleştir"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Panel Tercihleri"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
-msgstr ""
+msgstr "Çevrimiçi _Oku"
 
 #: ../common/panel-utils.c:156
 msgid ""
@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr ""
+msgstr "Xfce Panel kullanıcı kılavuzu bilgisayarınıza yüklenmiş değil"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -59,46 +59,42 @@ msgstr ""
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:861
 #: ../panel/panel-preferences-dialog.c:996
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "'%s' çalışma alanını silmek istediğinizden emin misiniz?"
+msgstr "'%s' ögesini silmek istediğinizden emin misiniz?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:866
 #: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Panelden bir ögeyi kaldırdığınızda, tamamen kaybolur."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1040
-#, fuzzy
 msgid "_Move"
-msgstr "Taşı"
+msgstr "_Taşı"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
-#, fuzzy
 msgid "Add _New Items..."
-msgstr "Yeni Öğeler Ekle..."
+msgstr "_Yeni Ögeler Ekle..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "Panel T_ercihleri..."
 
 #. restart item
 #: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
-#, fuzzy
 msgid "_Restart"
-msgstr "Yeniden Başlat"
+msgstr "_Yeniden Başlat"
 
 #: ../panel/main.c:75
-#, fuzzy
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "'Panel Özelleştirme' penceresini göster"
+msgstr "'Panel Tercihleri' penceresini göster"
 
 #: ../panel/main.c:75 ../panel/main.c:76
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "PANEL-NUMARASI"
 
 #: ../panel/main.c:76
 #, fuzzy
@@ -1001,7 +997,7 @@ msgstr ""
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1 saat"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1009,129 +1005,127 @@ msgstr ""
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0 saat"
 
 #: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "%0 beş geçiyor"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "%0 10 geçiyor"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "%0 çeyrek geçiyor"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr ""
+msgstr "%0 yirmi geçiyor"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr ""
+msgstr "%0 yirmi beş geçiyor"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "%0 yarım saat geçiyor"
 
 #: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "%1 yirmi beş var"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "%1 yirmi var"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "%1 çeyrek var"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "%1 on var"
 
 #: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "%1 beş var"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1 saat"
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
-msgstr ""
+msgstr "bir"
 
 #: ../plugins/clock/clock-fuzzy.c:137
 msgid "two"
-msgstr ""
+msgstr "iki"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
-msgstr ""
+msgstr "üç"
 
 #: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
-msgstr ""
+msgstr "dört"
 
 #: ../plugins/clock/clock-fuzzy.c:140
 msgid "five"
-msgstr ""
+msgstr "beş"
 
 #: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
-msgstr ""
+msgstr "altı"
 
 #: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
-msgstr ""
+msgstr "yedi"
 
 #: ../plugins/clock/clock-fuzzy.c:143
-#, fuzzy
 msgid "eight"
-msgstr "Sağ"
+msgstr "sekiz"
 
 #: ../plugins/clock/clock-fuzzy.c:144
-#, fuzzy
 msgid "nine"
-msgstr "Sa_tır"
+msgstr "dokuz"
 
 #: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
-msgstr ""
+msgstr "on"
 
 #: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
-msgstr ""
+msgstr "onbir"
 
 #: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
-msgstr ""
+msgstr "oniki"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
@@ -1164,21 +1158,20 @@ msgstr ""
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
-msgstr ""
+msgstr "Dizini Aç"
 
 #: ../plugins/directorymenu/directorymenu.c:780
-#, fuzzy
 msgid "Open in Terminal"
-msgstr "_Uçbirimde çalıştır"
+msgstr "Uçbirimde aç"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr ""
+msgstr "Dizin  Menüsü"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Menüde bir dizin ağacı göster"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid ""
@@ -1191,7 +1184,7 @@ msgstr ""
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr ""
+msgstr "Filtre"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 #, fuzzy
@@ -1255,7 +1248,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "Gelişmiş"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
@@ -1272,7 +1265,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
+msgstr "Doğu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
@@ -1285,7 +1278,7 @@ msgstr "Başlatıcı"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "Kuzey"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid ""
@@ -1304,7 +1297,7 @@ msgstr "Uygulama _simgelerini göster"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Panelde son _kullanılan ögeyi göster"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 #, fuzzy
@@ -1313,7 +1306,7 @@ msgstr "Hakkında"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr ""
+msgstr "Batı"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 #, fuzzy
@@ -1326,12 +1319,12 @@ msgstr "Uygulama çalıştırıcısı"
 
 #: ../plugins/pager/pager.c:411
 msgid "Unable to open the Xfce workspace settings"
-msgstr ""
+msgstr "Xfce çalışma alanı ayarlarını açmak olanaksız"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Davranış"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 #, fuzzy
@@ -1389,7 +1382,7 @@ msgstr "Şeffaflı_k (%):"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
-msgstr ""
+msgstr "_Genişlet"
 
 #: ../plugins/separator/separator.desktop.in.h:1
 #, fuzzy
@@ -1460,7 +1453,7 @@ msgstr "Bildirim simgelerinin göründüğü alan"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "Daima"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
@@ -1476,11 +1469,11 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "Asla"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Küçültülmüş pencereyi mevcut _çalışma alanına geri yükle"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 #, fuzzy
@@ -1493,7 +1486,7 @@ msgstr "Çerçeve gös_ter"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show button _labels"
-msgstr ""
+msgstr "Düğme _etiketlerini göster"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
@@ -1525,7 +1518,7 @@ msgstr "Hareket Düğmeleri"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr ""
+msgstr "Pencere _gruplama:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #, fuzzy
@@ -1550,7 +1543,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
-msgstr ""
+msgstr "Hepsini _Kapat"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
@@ -1597,7 +1590,7 @@ msgstr "O_k:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Düğme düzenleme:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 #, fuzzy
