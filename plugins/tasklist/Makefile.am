@@ -26,6 +26,7 @@ libtasklist_la_CFLAGS = \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(LIBWNCK_CFLAGS) \
+	$(LIBX11_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libtasklist_la_LDFLAGS = \
@@ -43,6 +44,7 @@ libtasklist_la_LIBADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBWNCK_LIBS) \
+	$(LIBX11_LIBS) \
 	$(XFCONF_LIBS)
 
 libtasklist_la_DEPENDENCIES = \
