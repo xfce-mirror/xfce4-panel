@@ -75,10 +75,12 @@ AC_SUBST([LIBXFCE4PANEL_VERINFO])
 dnl **************************
 dnl *** Substitute version ***
 dnl **************************
+LIBXFCE4PANEL_VERSION=xfce4_panel_version()
 LIBXFCE4PANEL_VERSION_API=libxfce4panel_version_api()
 LIBXFCE4PANEL_VERSION_MAJOR=xfce4_panel_version_major()
 LIBXFCE4PANEL_VERSION_MINOR=xfce4_panel_version_minor()
 LIBXFCE4PANEL_VERSION_MICRO=xfce4_panel_version_micro()
+AC_SUBST([LIBXFCE4PANEL_VERSION])
 AC_SUBST([LIBXFCE4PANEL_VERSION_API])
 AC_SUBST([LIBXFCE4PANEL_VERSION_MAJOR])
 AC_SUBST([LIBXFCE4PANEL_VERSION_MINOR])
