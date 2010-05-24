@@ -546,16 +546,24 @@ enum /*< skip >*/
     GdkNativeWindow  socket_id; \
     GdkColormap     *colormap = NULL; \
     const gchar     *value; \
+    gchar           *base_name; \
+    \
+    value = g_getenv ("PANEL_DEBUG"); \
+    if (value != NULL && *value == '1') \
+      { \
+        _xpp_debug = TRUE; \
+        \
+        base_name = g_filename_display_basename (argv[0]);\
+        g_printerr ("xfce4-panel(%s): compiled against libxfce4panel %s", \
+                    base_name, LIBXFCE4PANEL_VERSION); \
+        g_free (base_name); \
+      } \
     \
     if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS)) \
       { \
         g_critical ("Not enough arguments are passed to the plugin"); \
         return PLUGIN_EXIT_FAILURE; \
       } \
-    \
-    value = g_getenv ("PANEL_DEBUG"); \
-    if (value != NULL && value[0] == '1' && value[1] == '\0') \
-      _xpp_debug = TRUE; \
     \
     if (G_UNLIKELY (preinit_func != NULL)) \
       { \

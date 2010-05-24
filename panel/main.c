@@ -42,6 +42,7 @@
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <panel/panel-application.h>
 #include <panel/panel-dbus-service.h>
@@ -135,6 +136,9 @@ main (gint argc, gchar **argv)
   const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
   const gchar      *error_msg;
   XfceSMClient     *sm_client;
+
+  panel_debug (PANEL_DEBUG_DOMAIN_MAIN, "panel version %s with Xfce %s",
+               LIBXFCE4PANEL_VERSION, xfce_version_string ());
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");

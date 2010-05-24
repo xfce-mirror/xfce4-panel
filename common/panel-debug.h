@@ -19,6 +19,7 @@
 #ifndef __PANEL_DEBUG_H__
 #define __PANEL_DEBUG_H__
 
+#define PANEL_DEBUG_DOMAIN_MAIN        "main"
 #define PANEL_DEBUG_DOMAIN_POSITIONING "positioning"
 #define PANEL_DEBUG_DOMAIN_STRUTS      "struts"
 #define PANEL_DEBUG_DOMAIN_APPLICATION "application"
