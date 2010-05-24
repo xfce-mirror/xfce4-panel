@@ -554,7 +554,7 @@ enum /*< skip >*/
         _xpp_debug = TRUE; \
         \
         base_name = g_filename_display_basename (argv[0]);\
-        g_printerr ("xfce4-panel(%s): compiled against libxfce4panel %s", \
+        g_printerr ("xfce4-panel(%s): compiled against libxfce4panel %s\n", \
                     base_name, LIBXFCE4PANEL_VERSION); \
         g_free (base_name); \
       } \
