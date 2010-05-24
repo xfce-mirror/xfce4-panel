@@ -30,10 +30,9 @@
 
 enum
 {
-  DEBUG_LEVEL_UNKNOWN,
+  DEBUG_LEVEL_UNKNOWN = 0,
   DEBUG_LEVEL_NONE,
-  DEBUG_LEVEL_ALL_DOMAINS,
-  DEBUG_LEVEL_FILTER_DOMAINS
+  DEBUG_LEVEL_ENABLED
 };
 
 
@@ -49,12 +48,9 @@ panel_debug (const gchar *domain,
 {
   static volatile gsize   level__volatile = DEBUG_LEVEL_UNKNOWN;
   gsize                   level;
-  static gchar          **domains = NULL;
   const gchar            *value;
-  guint                   i;
   gchar                  *string;
   va_list                 args;
-  gboolean                found;
 
   panel_return_if_fail (domain != NULL);
   panel_return_if_fail (message != NULL);
@@ -63,21 +59,10 @@ panel_debug (const gchar *domain,
   if (g_once_init_enter (&level__volatile))
     {
       value = g_getenv ("PANEL_DEBUG");
-      if (G_LIKELY (value == NULL))
-        {
-          level = DEBUG_LEVEL_NONE;
-        }
-      else if (strcmp (value, "1") == 0)
-        {
-          level = DEBUG_LEVEL_ALL_DOMAINS;
-        }
+      if (G_UNLIKELY (value != NULL && *value == '1'))
+        level = DEBUG_LEVEL_ENABLED;
       else
-        {
-          level = DEBUG_LEVEL_FILTER_DOMAINS;
-          domains = g_strsplit (value, ":", -1);
-        }
-
-      panel_debug_enabled = (level != DEBUG_LEVEL_NONE);
+        level = DEBUG_LEVEL_NONE;
 
       g_once_init_leave (&level__volatile, level);
     }
@@ -85,15 +70,6 @@ panel_debug (const gchar *domain,
   /* leave when debug is disabled */
   if (level__volatile == DEBUG_LEVEL_NONE)
     return;
-
-  if (level__volatile == DEBUG_LEVEL_FILTER_DOMAINS)
-    {
-      for (i = 0, found = FALSE; domains[i] != NULL && !found; i++)
-        if (strcmp (domains[i], domain) == 0)
-          found = TRUE;
-      if (!found)
-        return;
-    }
 
   va_start (args, message);
   string = g_strdup_vprintf (message, args);
