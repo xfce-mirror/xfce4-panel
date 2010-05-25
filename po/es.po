@@ -4,12 +4,12 @@
 # Edscott Wilson García <edscott@xfce.org>, 2003-2004.
 # Rudy Godoy <rudy@stone-head.org>, 2005, 2006.
 # Abel Martín <abel.martin.ruiz@gmail.com>, 2008-2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 22:27+0200\n"
+"POT-Creation-Date: 2010-05-25 10:05+0000\n"
 "PO-Revision-Date: 2010-03-28 20:52+0100\n"
 "Last-Translator: Abel Martín <abel.martin.ruiz@gmail.com>\n"
 "Language-Team: Spanish/ES <xfce-i18n@xfce.org>\n"
@@ -38,12 +38,8 @@ msgid "_Read Online"
 msgstr "_Leer en línea"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Puede leer el manual de usuario en línea. Puede que este manual no se "
-"corresponda exactamente con la versión del panel instalada."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Puede leer el manual de usuario en línea. Puede que este manual no se corresponda exactamente con la versión del panel instalada."
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
@@ -86,39 +82,39 @@ msgstr "Pr_eferencias del panel..."
 msgid "_Restart"
 msgstr "_Reiniciar"
 
-#: ../panel/main.c:75
+#: ../panel/main.c:76
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar el diálogo 'Preferencias del panel'"
 
-#: ../panel/main.c:75 ../panel/main.c:76
+#: ../panel/main.c:76 ../panel/main.c:77
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-PANEL"
 
-#: ../panel/main.c:76
+#: ../panel/main.c:77
 msgid "Show the 'Add New Items' dialog"
 msgstr "Mostrar el diálogo 'Añadir nuevos elementos'"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Save the panel configuration"
 msgstr "Guardar la configuración del panel"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Add a new plugin to the panel"
 msgstr "Añadir un nuevo complemento al panel"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "PLUGIN-NAME"
 msgstr "NOMBRE-COMPLEMENTO"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Restart the running panel instance"
 msgstr "Reiniciar la instancia en ejecución del panel"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Quit the running panel instance"
 msgstr "Terminar la instancia del panel en ejecución"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -126,63 +122,63 @@ msgid "Print version information and exit"
 msgstr "Mostrar información de versión y salir"
 
 #. parse context options
-#: ../panel/main.c:149
+#: ../panel/main.c:153
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTOS...]"
 
-#: ../panel/main.c:156
+#: ../panel/main.c:160
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Escriba \"%s --help\" para ver opciones de uso."
 
-#: ../panel/main.c:175
+#: ../panel/main.c:179
 msgid "The Xfce development team. All rights reserved."
 msgstr "El equipo de desarrollo de Xfce. Todos los derechos reservados."
 
-#: ../panel/main.c:176
+#: ../panel/main.c:180
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Por favor, informe de fallos a <%s>."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:226
 msgid "There is already a running instance"
 msgstr "Ya existe una instancia en ejecución"
 
 #. spawn ourselfs again
-#: ../panel/main.c:262
+#: ../panel/main.c:266
 msgid "Restarting..."
 msgstr "Reiniciando..."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:281
 msgid "Failed to show the preferences dialog"
 msgstr "Fallo al mostrar el diálogo de preferencias"
 
-#: ../panel/main.c:279
+#: ../panel/main.c:283
 msgid "Failed to show the add new items dialog"
 msgstr "Fallo al mostrar el diálogo para añadir nuevos complementos"
 
-#: ../panel/main.c:281
+#: ../panel/main.c:285
 msgid "Failed to save the panel configuration"
 msgstr "Fallo al guardar la configuración del panel"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:287
 msgid "Failed to add a plugin to the panel"
 msgstr "Fallo al añadir un complemento al panel"
 
-#: ../panel/main.c:285
+#: ../panel/main.c:289
 msgid "Failed to restart the panel"
 msgstr "Fallo al reiniciar el panel"
 
-#: ../panel/main.c:287
+#: ../panel/main.c:291
 msgid "Failed to quit the panel"
 msgstr "Fallo al cerrar el panel"
 
-#: ../panel/main.c:289
+#: ../panel/main.c:293
 msgid "Failed to send D-Bus message"
 msgstr "Fallo al enviar un mensaje D-Bus"
 
 #. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:296
+#: ../panel/main.c:300
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No se encontró ninguna instancia de %s en ejecución"
@@ -192,19 +188,13 @@ msgid "Failed to launch the migration application"
 msgstr "Fallo al lanzar la aplicación de migración"
 
 #: ../panel/panel-dbus-client.c:226
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Sintaxis de evento de complemento inválida. Use NOMBRE-COMPLEMENTO:NOMBRE[:"
-"TIPO:VALOR]."
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Sintaxis de evento de complemento inválida. Use NOMBRE-COMPLEMENTO:NOMBRE[:TIPO:VALOR]."
 
 #: ../panel/panel-dbus-client.c:259
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Tipo de pista inválido \"%s\". Los tipos válidos son bool, double, int, "
-"string y uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "Tipo de pista inválido \"%s\". Los tipos válidos son bool, double, int, string y uint."
 
 #: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
@@ -230,12 +220,8 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:186
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"Debido a que el panel está funcionando en modo kiosko no se le permiten "
-"hacer cambios a la configuración del panel como un usuario normal"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "Debido a que el panel está funcionando en modo kiosko no se le permiten hacer cambios a la configuración del panel como un usuario normal"
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
@@ -244,20 +230,12 @@ msgstr "No se permite la modificación del panel"
 #: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"El complemento \"%s\" abandonó el panel de forma inesperada, ¿desea "
-"reiniciarlo?"
+msgstr "El complemento \"%s\" abandonó el panel de forma inesperada, ¿desea reiniciarlo?"
 
 #: ../panel/panel-dialogs.c:211
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"El complemento se reinició más de una vez en los últimos %d segundos. Si "
-"pulsa Ejecutar, el panel intentará reiniciar el plugin; de lo contrario, se "
-"borrará permanentemente del panel"
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "El complemento se reinició más de una vez en los últimos %d segundos. Si pulsa Ejecutar, el panel intentará reiniciar el plugin; de lo contrario, se borrará permanentemente del panel"
 
 #: ../panel/panel-item-dialog.c:171
 msgid "Add New Items"
@@ -294,8 +272,7 @@ msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:804
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr ""
-"Las configuraciones de panel y complementos se borrarán permanentemente"
+msgstr "Las configuraciones de panel y complementos se borrarán permanentemente"
 
 #: ../panel/panel-preferences-dialog.c:805
 #, c-format
@@ -309,9 +286,8 @@ msgid "Internal name: %s-%d"
 msgstr "Nombre interno: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "A_utomatically increase the length"
-msgstr "Aumentar automáticamente la longitud"
+msgstr "Aumentar a_utomáticamente la longitud"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -322,17 +298,12 @@ msgid "Add new item to this panel"
 msgstr "Añadir nuevo elemento a este panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
-msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
-msgstr ""
-"Valor de alfa para el fondo del panel: entre 0 (transparente) y 100 (opaco)."
+msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
+msgstr "Valor de alfa para el fondo del panel: entre 0 (transparente) y 100 (opaco)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Apariencia"
+msgstr "Aparie_ncia"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -343,13 +314,12 @@ msgid "Background"
 msgstr "Fondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
 msgid "Background image"
-msgstr "Fondo"
+msgstr "Imagen de fondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "C_olor:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -378,7 +348,8 @@ msgstr "Ele_mentos"
 msgid "L_ength (%):"
 msgstr "L_ongitud (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Dimensiones"
@@ -395,7 +366,7 @@ msgstr "Mover el elemento seleccionado actualmente una fila por encima"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr ""
+msgstr "Ninguno (usar estilo del sistema)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
@@ -403,7 +374,7 @@ msgstr "S_alida:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Elegir el color del panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Remove currently selected item"
@@ -414,36 +385,24 @@ msgid "Remove the currently selected panel"
 msgstr "Eliminar el panel seleccionado actualmente"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "Seleccionar un icono"
+msgstr "Seleccionar una imagen de fondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-"Seleccione esta opción aumentar automáticamente la longitud del panel si los "
-"complementos necesitan más espacio."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgstr "Seleccione esta opción aumentar automáticamente la longitud del panel si los complementos necesitan más espacio."
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Seleccione esta opción para extender el panel a múltiples monitores."
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Seleccione esta opción para ocultar los tiradores del panel y bloquear esta "
-"posición."
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Seleccione esta opción para ocultar los tiradores del panel y bloquear esta posición."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Seleccione esta opción para ocultar el panel cuando el puntero no está sobre "
-"él. Esto solo funciona cuando el panel está adosado al borde de la pantalla."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Seleccione esta opción para ocultar el panel cuando el puntero no está sobre él. Esto solo funciona cuando el panel está adosado al borde de la pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Show about information of the currently selected item"
@@ -451,7 +410,7 @@ msgstr "Mostrar información sobre el elemento seleccionado actualmente"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Solid color"
-msgstr ""
+msgstr "Color sólido"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Span mo_nitors"
@@ -487,9 +446,8 @@ msgid "_Enter:"
 msgstr "_Enter:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-#, fuzzy
 msgid "_File:"
-msgstr "_Estilo:"
+msgstr "_Archivo:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
@@ -542,12 +500,8 @@ msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Bienvenido al primer inicio del panel de Xfce"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"Debido a que el panel ha cambiado la forma de almacenar la configuración, se "
-"debe cargar una configuración inicial totalmente nueva"
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Debido a que el panel ha cambiado la forma de almacenar la configuración, se debe cargar una configuración inicial totalmente nueva"
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -676,12 +630,8 @@ msgid "Select A Menu File"
 msgstr "Seleccionar un archivo de menú"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Seleccione esta opción para mostrar el nombre genérico de la aplicación en "
-"el menú. Por ejemplo, \"Administrador de archivos\" en lugar de \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Seleccione esta opción para mostrar el nombre genérico de la aplicación en el menú. Por ejemplo, \"Administrador de archivos\" en lugar de \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
@@ -814,7 +764,8 @@ msgstr "Mostrar _segundos"
 msgid "F_ormat:"
 msgstr "F_ormato:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "P_recisión"
@@ -850,15 +801,8 @@ msgstr "Mostrar re_jilla"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"El formato describe la fecha y partes de la hora a insertar en el nombre de "
-"un archivo. Por ejemplo, %Y se sustituirá por el año, %m por el mes y %d por "
-"el día. Ver la documentación de la utilidad de fecha para más información."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "El formato describe la fecha y partes de la hora a insertar en el nombre de un archivo. Por ejemplo, %Y se sustituirá por el año, %m por el mes y %d por el día. Ver la documentación de la utilidad de fecha para más información."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1146,15 +1090,8 @@ msgid "Show a directory tree in a menu"
 msgstr "Muestra el arbol de directorios en un menú"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Introduzca una lista de patrones que se utilizarán para determinar qué "
-"archivos serán visibles en un directorio. Si especifica más de un patrón "
-"aquí, los elementos de la lista deberán estar separados por punto y coma (p."
-"e. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Introduzca una lista de patrones que se utilizarán para determinar qué archivos serán visibles en un directorio. Si especifica más de un patrón aquí, los elementos de la lista deberán estar separados por punto y coma (p.e. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1201,8 +1138,7 @@ msgstr "Elemento sin nombre"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Failed to remove the desktop file from the config directory"
-msgstr ""
-"Fallo al borrar el archivo de escritorio del directorio de configuración"
+msgstr "Fallo al borrar el archivo de escritorio del directorio de configuración"
 
 #: ../plugins/launcher/launcher-dialog.c:723
 msgid "Failed to open desktop item editor"
@@ -1250,12 +1186,8 @@ msgid "North"
 msgstr "Norte"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Seleccione esta opción para desactivar los cuadros de texto emergente al "
-"desplazarse sobre el botón del panel o los elementos del menú"
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgstr "Seleccione esta opción para desactivar los cuadros de texto emergente al desplazarse sobre el botón del panel o los elementos del menú"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1367,12 +1299,8 @@ msgstr "Mostrar escritorio"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:551
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This plugin will close."
-msgstr ""
-"Posiblemente otro componente gráfico tomó la función del área de "
-"notificación. Este complemento se cerrará."
+msgid "Most likely another widget took over the function of a notification area. This plugin will close."
+msgstr "Posiblemente otro componente gráfico tomó la función del área de notificación. Este complemento se cerrará."
 
 #: ../plugins/systray/systray.c:554
 msgid "The notification area lost selection"
