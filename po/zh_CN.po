@@ -5,16 +5,18 @@
 # Huang Huan <unicon221@gmail.com>, 2006.
 # Jick Nan <jick.nan@gmail.com>, 2006.
 # wuli <wurisky@gmail.com>, 2007, 2008.
-# Hunt Xu <huntxu@live.cn>, 2008, 2009.
+# Hunt Xu <huntxu@live.cn>, 2008, 2009, 2010.
 # Chris K. Zhang <plutino@gmail.com>, 2009.
 # Aron Xu <aronmalache@163.com>, 2009.
+# 微尘 <squeeze@189.cn>, 2010.
+
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 22:27+0200\n"
-"PO-Revision-Date: 2010-05-04 10:08+0800\n"
-"Last-Translator: 微尘 <squeeze@189.cn>\n"
+"POT-Creation-Date: 2010-05-24 04:05+0000\n"
+"PO-Revision-Date: 2010-05-25 09:57+0800\n"
+"Last-Translator: Hunt Xu <huntxu@live.cn>\n"
 "Language-Team: Simplified Chinese <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,12 +94,10 @@ msgid "Show the 'Panel Preferences' dialog"
 msgstr "显示“面板属性”对话框"
 
 #: ../panel/main.c:75 ../panel/main.c:76
-#, fuzzy
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
 #: ../panel/main.c:76
-#, fuzzy
 msgid "Show the 'Add New Items' dialog"
 msgstr "显示“添加新项目”对话框"
 
@@ -110,7 +110,6 @@ msgid "Add a new plugin to the panel"
 msgstr "添加新插件到面板"
 
 #: ../panel/main.c:78
-#, fuzzy
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
@@ -132,7 +131,7 @@ msgstr "显示版本信息然后退出"
 #. parse context options
 #: ../panel/main.c:149
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[参数...]"
 
 #: ../panel/main.c:156
 #, c-format
@@ -213,6 +212,14 @@ msgstr "Xfce 桌面环境面板"
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr ""
+"Yongtao Yang <yongtao.yang@telia.com>, 2004.\n"
+"Huang Huan <unicon221@gmail.com>, 2006.\n"
+"Jick Nan <jick.nan@gmail.com>, 2006.\n"
+"wuli <wurisky@gmail.com>, 2007, 2008.\n"
+"Hunt Xu <huntxu@live.cn>, 2008, 2009, 2010.\n"
+"Chris K. Zhang <plutino@gmail.com>, 2009.\n"
+"Aron Xu <aronmalache@163.com>, 2009.\n"
+"微尘 <squeeze@189.cn>, 2010."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -230,11 +237,11 @@ msgid "Panel %d"
 msgstr "面板 %d"
 
 #: ../panel/panel-dialogs.c:186
-#, fuzzy
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "因为面板处于 kiosk 模式下，您不能使用普通用户的权限去修改面板配置"
+msgstr ""
+"因为面板运行于安全模式下，作为普通用户，您不被允许修改面板配置。"
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
@@ -302,9 +309,8 @@ msgid "Internal name: %s-%d"
 msgstr "内部名称: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "A_utomatically increase the length"
-msgstr "自动延伸长度"
+msgstr "自动延伸长度(_U)"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -315,16 +321,15 @@ msgid "Add new item to this panel"
 msgstr "添加新项目到面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
 msgid ""
 "Alpha value of the panel background, between 0 (transparent) and 100 "
 "(opaque)."
-msgstr "面板背景的阿尔法值，介于 0 (透明）和 100 (不透明）之间。"
+msgstr ""
+"面板背景的阿尔法值，介于 0 (透明）和 100 (不透明）之间。"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "外观"
+msgstr "外观(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -335,13 +340,12 @@ msgid "Background"
 msgstr "背景"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
 msgid "Background image"
-msgstr "背景"
+msgstr "背景图片"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "颜色(_O):"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -387,7 +391,7 @@ msgstr "将当前项目上移一排"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr ""
+msgstr "无 (使用系统默认值)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
@@ -395,7 +399,7 @@ msgstr "输出(_O)"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "选择面板颜色"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Remove currently selected item"
@@ -406,9 +410,8 @@ msgid "Remove the currently selected panel"
 msgstr "移除选中的面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "选择图标"
+msgstr "选择一幅背景图片"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid ""
@@ -418,7 +421,7 @@ msgstr "选择该项，当插件需要更多空间时，自动扩展面板长度
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "选择此项允许在多显示器中延伸面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
@@ -426,11 +429,12 @@ msgid ""
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-#, fuzzy
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "选择该项，当指针不在面板上时，隐藏面板。"
+msgstr ""
+"选择该项允许在当鼠标指针不在面板上时隐藏面板。此选项只在面板被停靠在屏幕边缘"
+"时有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Show about information of the currently selected item"
@@ -438,7 +442,7 @@ msgstr "显示选中项目的相关信息"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Solid color"
-msgstr ""
+msgstr "固定颜色"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Span mo_nitors"
@@ -449,14 +453,12 @@ msgid "Transparency"
 msgstr "透明度"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
-#, fuzzy
 msgid "Transparency when the pointer is hovering over the panel."
-msgstr "当指针停留在面板上时透明。"
+msgstr "当鼠标指针在面板上时透明。"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-#, fuzzy
 msgid "Transparency when the pointer is not hovering the panel."
-msgstr "当指针未停留在面板上时透明。"
+msgstr "当鼠标指针不在面板上时透明。"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Vertical"
@@ -473,17 +475,16 @@ msgstr "阿尔法(_A):"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr ""
+msgstr "直接输入数值:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-#, fuzzy
 msgid "_File:"
-msgstr "样式(_S)"
+msgstr "文件(_F):"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
-msgstr "离开(_L)"
+msgstr "离开(_L):"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
@@ -672,7 +673,7 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
-msgstr ""
+msgstr "在工具提示中显示应用程序描述(_O)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
@@ -723,9 +724,8 @@ msgid "Failed to load the applications menu"
 msgstr "引导应用程序菜单失败"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
-#, fuzzy
 msgid "Show a menu containing categories of installed applications"
-msgstr "显示一个菜单，里面包含安装的应用程序类别"
+msgstr "显示一个包含已安装的应用程序类别的菜单"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -804,9 +804,8 @@ msgstr "格式(_O)"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
-#, fuzzy
 msgid "F_uzziness:"
-msgstr "模糊(_U):"
+msgstr "模糊度(_U):"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
@@ -814,7 +813,7 @@ msgstr "闪烁时间的分隔符(_A)"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
-msgstr ""
+msgstr "模糊时钟(不精确的)"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
@@ -822,7 +821,7 @@ msgstr "液晶式"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr "显示 AM/PM (_W)"
+msgstr "显示 AM/PM(_W)"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
@@ -845,6 +844,8 @@ msgid ""
 "with the day. See the documentation of the date utility for additional "
 "information."
 msgstr ""
+"描述要加入文件名中的日期和时间部分的格式字符串。例如，%Y 将被实际年份替换，"
+"%m 将被实际月份替换而 %d 将被实际日期替换。请查看日期工具的文档获取更多的信息。"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1092,12 +1093,12 @@ msgstr "现在几点？"
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "无法启动应用程序 \"%s\""
+msgstr "启动应用程序 \"%s\" 失败"
 
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "查询 \"%s\" 的内容类型失败"
 
 #: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
@@ -1112,7 +1113,7 @@ msgstr "无法为 \"%s\" 使用默认应用程序"
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "为类别 \"%s\" 执行首选应用程序失败"
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
@@ -1137,6 +1138,8 @@ msgid ""
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
+"输入一些用以决定某些文件是否在目录中可见的匹配模式。如果您需要指定多于一个"
+"匹配模式，各项之间需要用分号隔开 (例如 *.txt;*.doc)。"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1350,11 +1353,11 @@ msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This plugin will close."
 msgstr ""
+"很可能同时有其它插件取代了通知区域的功能。本插件将会关闭。"
 
 #: ../plugins/systray/systray.c:554
-#, fuzzy
 msgid "The notification area lost selection"
-msgstr "提示区管理失效"
+msgstr "通知区域未被选择"
 
 #: ../plugins/systray/systray.c:747
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1392,7 +1395,7 @@ msgstr "总是"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "当鼠标悬浮于按钮之上时显示窗口边框(_R)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
@@ -1450,7 +1453,7 @@ msgstr "窗口按钮"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr ""
+msgstr "窗口分组(_G):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window title"
@@ -1462,7 +1465,7 @@ msgstr "全部最小化(_N)"
 
 #: ../plugins/tasklist/tasklist-widget.c:2626
 msgid "Un_minimize All"
-msgstr ""
+msgstr "取消全部最小化(_M)"
 
 #: ../plugins/tasklist/tasklist-widget.c:2632
 msgid "Ma_ximize All"
@@ -1470,7 +1473,7 @@ msgstr "全部最大化(_X)"
 
 #: ../plugins/tasklist/tasklist-widget.c:2641
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "取消全部最大化(_U)"
 
 #: ../plugins/tasklist/tasklist-widget.c:2651
 msgid "_Close All"
@@ -1495,7 +1498,7 @@ msgstr "无窗口"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
-msgstr ""
+msgstr "紧急窗口"
 
 #: ../plugins/windowmenu/windowmenu.c:1300
 msgid "Add Workspace"
