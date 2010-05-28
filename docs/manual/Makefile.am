@@ -33,7 +33,7 @@ install-data-local:
 		$(INSTALL_DATA) "$$file" "$$dest/"; \
 	fi; \
 	for lang in $(ALL_LINGUAS); do \
-		if test -d "$(srcdir)/html/$$lang"; then \
+		if test -d "$(srcdir)/html/$$lang/index.html"; then \
 			dest="$(DESTDIR)$(docdir)/html/$$lang"; \
 			$(mkinstalldirs) "$$dest"; \
 			installfiles=`echo "$(srcdir)/html/$$lang/*"`; \
