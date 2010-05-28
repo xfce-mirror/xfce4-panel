@@ -140,7 +140,7 @@ dist-hook: dist-check-doc doc-build.stamp
 		cp "$$file" "$(distdir)/html/"; \
 	fi; \
 	for lang in $(ALL_LINGUAS); do \
-		if test -d "$(srcdir)/html/$$lang"; then \
+		if test -d "$(srcdir)/html/$$lang/index.html"; then \
 			mkdir -p "$(distdir)/html/$$lang"; \
 			cp -t "$(distdir)/html/$$lang/" $(srcdir)/html/$$lang/*; \
 		fi \
