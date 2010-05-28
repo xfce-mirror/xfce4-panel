@@ -77,7 +77,7 @@ doc-build.stamp:
 	rm -rf "$(srcdir)/html $(srcdir)/.pages"; \
 	echo; \
 	echo "Creating CSS file for documentation"; \
-	$(GNOME_DOC_TOOL) css -o "$(srcdir)/html/$(PACKAGE).css"; \
+	$(GNOME_DOC_TOOL) css -o "$(srcdir)/html/$(PACKAGE).css" "$(srcdir)/index.page"; \
 	echo; \
 	for lang in $(ALL_LINGUAS); do \
 		echo "Generating $$lang documentation"; \
