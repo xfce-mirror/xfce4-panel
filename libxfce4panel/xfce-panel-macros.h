@@ -24,6 +24,7 @@
 #define __XFCE_PANEL_MACROS_H__
 
 #include <glib.h>
+#include <glib-object.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-macros-46.h>
 
