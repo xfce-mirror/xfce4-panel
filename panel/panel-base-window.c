@@ -464,6 +464,9 @@ panel_base_window_expose_event (GtkWidget      *widget,
   /* set rectangle to clip the drawing area */
   gdk_cairo_rectangle (cr, &event->area);
 
+  /* get background alpha */
+  alpha = window->is_composited ? window->background_alpha : 1.00;
+
   if (window->background_style == PANEL_BG_STYLE_IMAGE)
     {
       /* clip the drawing area */
@@ -507,9 +510,6 @@ panel_base_window_expose_event (GtkWidget      *widget,
     }
   else
     {
-      /* get background alpha */
-      alpha = window->is_composited ? window->background_alpha : 1.00;
-
       /* get the background color */
       if (window->background_style == PANEL_BG_STYLE_COLOR)
         color = window->background_color;
