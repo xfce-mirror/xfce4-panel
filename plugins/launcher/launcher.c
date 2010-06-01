@@ -1330,7 +1330,7 @@ launcher_plugin_menu_item_activate (GtkMenuItem      *widget,
 
   /* get a copy of the event causing the menu item to activate */
   event = gtk_get_current_event ();
-  event_time = event != NULL ? gdk_event_get_time (event) : GDK_CURRENT_TIME;
+  event_time = gdk_event_get_time (event);
 
   /* get the widget screen */
   screen = gtk_widget_get_screen (GTK_WIDGET (widget));
