@@ -2179,6 +2179,9 @@ xfce_tasklist_button_workspace_changed (WnckWindow        *window,
 
   xfce_tasklist_sort (tasklist);
 
+  /* make sure we don't have two active windows (bug #6474) */
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
+
   if (!tasklist->all_workspaces)
     xfce_tasklist_active_workspace_changed (tasklist->screen, NULL, tasklist);
 }
