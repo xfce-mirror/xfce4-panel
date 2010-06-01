@@ -77,8 +77,7 @@ static GdkPixbuf *launcher_plugin_tooltip_pixbuf                (GdkScreen      
                                                                  const gchar          *icon_name);
 static void       launcher_plugin_menu_deactivate               (GtkWidget            *menu,
                                                                  LauncherPlugin       *plugin);
-static gboolean   launcher_plugin_menu_item_pressed             (GtkMenuItem          *widget,
-                                                                 GdkEventButton       *event,
+static void       launcher_plugin_menu_item_activate            (GtkMenuItem          *widget,
                                                                  GarconMenuItem       *item);
 static void       launcher_plugin_menu_item_drag_data_received  (GtkWidget            *widget,
                                                                  GdkDragContext       *context,
@@ -1317,29 +1316,39 @@ launcher_plugin_menu_deactivate (GtkWidget      *menu,
 
 
 
-static gboolean
-launcher_plugin_menu_item_pressed (GtkMenuItem      *widget,
-                                   GdkEventButton   *event,
-                                   GarconMenuItem   *item)
+static void
+launcher_plugin_menu_item_activate (GtkMenuItem      *widget,
+                                    GarconMenuItem   *item)
 {
   LauncherPlugin *plugin;
   GdkScreen      *screen;
+  GdkEvent       *event;
+  guint32         event_time;
 
-  panel_return_val_if_fail (GTK_IS_MENU_ITEM (widget), FALSE);
-  panel_return_val_if_fail (GARCON_IS_MENU_ITEM (item), FALSE);
+  panel_return_if_fail (GTK_IS_MENU_ITEM (widget));
+  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
+
+  /* get a copy of the event causing the menu item to activate */
+  event = gtk_get_current_event ();
+  event_time = event != NULL ? gdk_event_get_time (event) : GDK_CURRENT_TIME;
 
   /* get the widget screen */
   screen = gtk_widget_get_screen (GTK_WIDGET (widget));
 
   /* launch the command */
-  if (G_UNLIKELY (event->button == 2))
-    launcher_plugin_item_exec_from_clipboard (item, event->time, screen);
+  if (event != NULL
+      && event->type == GDK_BUTTON_RELEASE
+      && event->button.button == 2)
+    launcher_plugin_item_exec_from_clipboard (item, event_time, screen);
   else
-    launcher_plugin_item_exec (item, event->time, screen, NULL);
+    launcher_plugin_item_exec (item, event_time, screen, NULL);
+
+  if (event != NULL)
+    gdk_event_free (event);
 
   /* get the plugin */
   plugin = g_object_get_qdata (G_OBJECT (widget), launcher_plugin_quark);
-  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
   /* move the item to the first position if enabled */
   if (G_UNLIKELY (plugin->move_first))
@@ -1352,8 +1361,6 @@ launcher_plugin_menu_item_pressed (GtkMenuItem      *widget,
       launcher_plugin_menu_destroy (plugin);
       launcher_plugin_button_update (plugin);
     }
-
-  return FALSE;
 }
 
 
@@ -1443,8 +1450,8 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       gtk_widget_show (mi);
       gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets,
                          G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
-      g_signal_connect (G_OBJECT (mi), "button-press-event",
-          G_CALLBACK (launcher_plugin_menu_item_pressed), item);
+      g_signal_connect (G_OBJECT (mi), "activate",
+          G_CALLBACK (launcher_plugin_menu_item_activate), item);
       g_signal_connect (G_OBJECT (mi), "drag-data-received",
           G_CALLBACK (launcher_plugin_menu_item_drag_data_received), item);
       g_signal_connect (G_OBJECT (mi), "drag-leave",
