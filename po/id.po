@@ -2,12 +2,12 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Andhika Padmawan <andhika.padmawan@gmail.com>, 2008.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 22:27+0200\n"
+"POT-Creation-Date: 2010-06-01 04:06+0000\n"
 "PO-Revision-Date: 2009-01-27 22:49+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -16,114 +16,105 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-#, fuzzy
 msgid "Create Launcher on Xfce Panel"
-msgstr "Tentang Panel Xfce"
+msgstr "Tambahkan Menu Utama pada panel Xfce"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create a new launcher on the Xfce Panel"
-msgstr ""
+msgstr "Tambahkan Menu Utama baru pada panel Xfce"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the Xfce Panel"
-msgstr "Tentang Panel Xfce"
+msgstr "Kustomisasi Panel Xfce"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Konfigurasi Panel"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
-msgstr ""
+msgstr "_Baca secara Daring"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Anda dapat membaca buku petunjuk secara daring, namun begitu mungkin saja terdapat perbedaan versi dengan panel yang anda gunakan."
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr ""
+msgstr "Buku petunjuk Panel Xfce tidak terpasang pada komputer anda"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
 msgid "Failed to open the documentation browser"
-msgstr ""
+msgstr "Gagal membuka peramban dokumentasi"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:861
 #: ../panel/panel-preferences-dialog.c:996
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Anda yakin ingin menghapus ruang kerja '%s'?"
+msgstr "Anda yakin ingin menghapus '%s'?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:866
 #: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Item yang anda hapus dari panel akan dibuang secara permanen."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1040
-#, fuzzy
 msgid "_Move"
-msgstr "Pindah"
+msgstr "_Pindah"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
-#, fuzzy
 msgid "Add _New Items..."
-msgstr "Tambah Item Baru..."
+msgstr "_Tambah Item Baru..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "_Konfigurasi Panel"
 
 #. restart item
 #: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
-#, fuzzy
 msgid "_Restart"
-msgstr "Start Ulang"
-
-#: ../panel/main.c:75
-#, fuzzy
-msgid "Show the 'Panel Preferences' dialog"
-msgstr "Tampilkan dialog 'Kustomisasi Panel'"
-
-#: ../panel/main.c:75 ../panel/main.c:76
-msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "Start _Ulang"
 
 #: ../panel/main.c:76
+msgid "Show the 'Panel Preferences' dialog"
+msgstr "Tampilkan dialog 'Konfigurasi Panel'"
+
+#: ../panel/main.c:76 ../panel/main.c:77
 #, fuzzy
+msgid "PANEL-NUMBER"
+msgstr "Nomor-Panel"
+
+#: ../panel/main.c:77
 msgid "Show the 'Add New Items' dialog"
 msgstr "Tampilkan dialog 'Tambah Item Baru'"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Save the panel configuration"
 msgstr "Simpan konfigurasi panel"
 
-#: ../panel/main.c:78
-#, fuzzy
+#: ../panel/main.c:79
 msgid "Add a new plugin to the panel"
 msgstr "Tambah panel baru"
 
-#: ../panel/main.c:78
-msgid "PLUGIN-NAME"
-msgstr ""
-
 #: ../panel/main.c:79
 #, fuzzy
-msgid "Restart the running panel instance"
-msgstr "Start ulang instansi dari xfce4-panel"
+msgid "PLUGIN-NAME"
+msgstr "Nama-Plugin"
 
 #: ../panel/main.c:80
-msgid "Quit the running panel instance"
-msgstr ""
+msgid "Restart the running panel instance"
+msgstr "Start ulang instansiasi panel"
 
 #: ../panel/main.c:81
+msgid "Quit the running panel instance"
+msgstr "Keluar dari proses instansiasi panel"
+
+#: ../panel/main.c:82
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -131,97 +122,88 @@ msgid "Print version information and exit"
 msgstr "Cetak informasi versi lalu keluar"
 
 #. parse context options
-#: ../panel/main.c:149
+#: ../panel/main.c:153
+#, fuzzy
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ARGUMEN...]"
 
-#: ../panel/main.c:156
+#: ../panel/main.c:160
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Ketik \\ \"%s --help\" untuk bantuan penggunaan."
 
-#: ../panel/main.c:175
+#: ../panel/main.c:179
 msgid "The Xfce development team. All rights reserved."
 msgstr "Tim pengembang Xfce. Hak cipta dilindungi undang-undang."
 
-#: ../panel/main.c:176
+#: ../panel/main.c:180
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Silakan laporkan kutu ke <%s>."
 
-#: ../panel/main.c:222
-#, fuzzy
+#: ../panel/main.c:226
 msgid "There is already a running instance"
 msgstr "Telah ada baki area notifikasi yang berjalan di layar ini"
 
 #. spawn ourselfs again
-#: ../panel/main.c:262
-#, fuzzy
+#: ../panel/main.c:266
 msgid "Restarting..."
-msgstr "Start Ulang"
-
-#: ../panel/main.c:277
-#, fuzzy
-msgid "Failed to show the preferences dialog"
-msgstr "Gagal membuka tampilan"
-
-#: ../panel/main.c:279
-#, fuzzy
-msgid "Failed to show the add new items dialog"
-msgstr "Tampilkan dialog 'Tambah Item Baru'"
+msgstr "Sedang memulai ulang..."
 
 #: ../panel/main.c:281
-#, fuzzy
-msgid "Failed to save the panel configuration"
-msgstr "Simpan konfigurasi panel"
+msgid "Failed to show the preferences dialog"
+msgstr "Gagal menampilkan jendela dialog 'Konfigurasi...'"
 
 #: ../panel/main.c:283
-msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgid "Failed to show the add new items dialog"
+msgstr "Gagal menampilkan jendela dialog 'Tambah Item Baru'"
 
 #: ../panel/main.c:285
-#, fuzzy
-msgid "Failed to restart the panel"
-msgstr "Tambah Item ke Panel"
+msgid "Failed to save the panel configuration"
+msgstr "Gagal menyimpan konfigurasi panel"
 
 #: ../panel/main.c:287
-#, fuzzy
-msgid "Failed to quit the panel"
-msgstr "Gagal menjalankan 'xfce4-panel -c'"
+msgid "Failed to add a plugin to the panel"
+msgstr "Gagal menambahkan plugin ke panel"
 
 #: ../panel/main.c:289
-#, fuzzy
+msgid "Failed to restart the panel"
+msgstr "Gagal memulai ulang panel"
+
+#: ../panel/main.c:291
+msgid "Failed to quit the panel"
+msgstr "Gagal mematikan panel"
+
+#: ../panel/main.c:293
 msgid "Failed to send D-Bus message"
-msgstr "Gagal membuka tampilan"
+msgstr "Gagal mengirim pesan D-Bus"
 
 #. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:296
+#: ../panel/main.c:300
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Tidak ada instansiasi panel yang sedang berjalan"
 
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Gagal meluncurkan aplikasi migrasi"
 
 #: ../panel/panel-dbus-client.c:226
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Sintaks yang diberikan pada plugin tidak valid. Gunakan: PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:259
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "Tipe \"%s\" tidak valid. Gunakan salah satu tipe berikut: bool, double, int, string, dan uint."
 
 #: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Panel Desktop Xfce "
 
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
-msgstr ""
+msgstr "Para penerjemah"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -231,7 +213,7 @@ msgstr "Tambah Item Baru"
 
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Mohon pilih sebuah panel untuk menempatkan plugin baru:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:743
@@ -240,36 +222,30 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:186
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "Anda tidak diizinkan untuk mengubah konfigurasi panel dengan akun pengguna biasa dikarenakan panel sedang berjalan pada mode kiosk"
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Perubahan pada panel tidak diizinkan"
 
 #: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "Plugin \"%s\" secara tidak didugaberhenti bekerja. Apakah anda ingin menjalankan ulang plugin tersebut?"
 
 #: ../panel/panel-dialogs.c:211
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "Plugin dijalankan ulang lebih dari satu kali dalam %d detik terakhir. Jika anda menekan tombol Eksekusi, maka panel akan mencoba untuk menjalankan ulang plugin tersebut. Jika tidak, plugin akan dihilangkan dari panel."
 
 #: ../panel/panel-item-dialog.c:171
 msgid "Add New Items"
 msgstr "Tambah Item Baru"
 
 #: ../panel/panel-item-dialog.c:173
-#, fuzzy
 msgid "Add new plugins to the panel"
-msgstr "Tambah Item ke Panel"
+msgstr "Tambah plugin baru ke panel"
 
 #: ../panel/panel-item-dialog.c:195
 #: ../plugins/launcher/launcher-dialog.glade.h:23
@@ -278,7 +254,7 @@ msgstr "Te_lusuri:"
 
 #: ../panel/panel-item-dialog.c:203
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Masukkan kata pencarian di sini"
 
 #: ../panel/panel-preferences-dialog.c:432
 msgid "Automatic"
@@ -288,191 +264,171 @@ msgstr "Otomatis"
 #: ../panel/panel-preferences-dialog.c:451
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "Layar %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:477
-#, fuzzy, c-format
+#, c-format
 msgid "Monitor %d"
-msgstr "Rentangkan Monitor"
+msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:804
-#, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Panel terpilih dan seluruh itemnya akan dihapus."
+msgstr "Panel terpilih dan seluruh item serta konfigurasinya akan dihapus"
 
 #: ../panel/panel-preferences-dialog.c:805
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Anda yakin ingin menghapus ruang kerja %d?"
+msgstr "Anda yakin ingin menghapus panel %d?"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #: ../panel/panel-preferences-dialog.c:879
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Nama internal: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "A_utomatically increase the length"
-msgstr ""
+msgstr "Per_lebar otomatis"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Tambah item baru"
+msgstr "Tambah panel baru"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
-#, fuzzy
 msgid "Add new item to this panel"
-msgstr "Tambah Item ke Panel"
+msgstr "Tambah item baru ke panel ini"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
-msgstr ""
+msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
+msgstr "Nilai alfa untuk latar panel. Nilai diisi antara 0 (transparan) hingga 100 (solid)"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Tampilan"
+msgstr "_Tampilan"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
-msgstr ""
+msgstr "Tampilkan dan _sembunyikan otomatis panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
-msgstr ""
+msgstr "Latar"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
-msgstr ""
+msgstr "Gambar latar"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "_Warna:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
-msgstr ""
+msgstr "Pe_nampil"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
-#, fuzzy
 msgid "Edit the currently selected item"
-msgstr "Hapus panel terpilih saat ini"
+msgstr "Sunting panel terpilih saat ini"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Horizontal"
 msgstr "Horizontal"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-#, fuzzy
 msgid "Ite_ms"
-msgstr "Tambah Item"
+msgstr "_Item"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
 msgid "L_ength (%):"
-msgstr ""
+msgstr "Pan_jang"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
-msgstr ""
+msgstr "Ukuran"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
-#, fuzzy
 msgid "Move currently selected item down by one row"
-msgstr "Hapus panel terpilih saat ini"
+msgstr "Pindahkan item terpilih ke bawah sebanyak satu baris"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:14
-#, fuzzy
 msgid "Move currently selected item up by one row"
-msgstr "Hapus panel terpilih saat ini"
+msgstr "Pindahkan item terpilih ke atas sebanyak satu baris"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr ""
+msgstr "Tiadakan (gunakan gaya sistem)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
-msgstr ""
+msgstr "_Keluaran"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Pilih Warna Panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-#, fuzzy
 msgid "Remove currently selected item"
-msgstr "Hapus panel terpilih saat ini"
+msgstr "Hapus item terpilih"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
-#, fuzzy
 msgid "Remove the currently selected panel"
-msgstr "Hapus panel terpilih saat ini"
+msgstr "Hapus panel terpilih"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "Pilih Ikon untuk \"%s\""
+msgstr "Pilih gambar latar"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgstr "Pilih opsi ini untuk menotomatisasi penyesuaian ukuran panel (jika diperlukan)."
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Pilih opsi ini untuk memperluas panel pada multi monitor."
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Pilih opsi ini untuk menyembunyikan handel dan mengunci posisi panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Pilih opsi ini untuk menyembunyikan panel saat pointer tidak di atasnya. Opsi ini hanya bekerja ketika panel tertaut pada pinggir layar."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-#, fuzzy
 msgid "Show about information of the currently selected item"
-msgstr "Hapus panel terpilih saat ini"
+msgstr "Tampilan informasi tentang item terpilih"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Solid color"
-msgstr ""
+msgstr "Warna solid"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
-#, fuzzy
 msgid "Span mo_nitors"
-msgstr "Rentangkan Monitor"
+msgstr "_Rentangkan Monitor"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
-#, fuzzy
 msgid "Transparency"
-msgstr "_Transparansi (%):"
+msgstr "Transparansi"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Transparency when the pointer is hovering over the panel."
-msgstr ""
+msgstr "Jadikan transparan saat pointer berada di atas panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is not hovering the panel."
-msgstr ""
+msgstr "Jadikan transparan saat pointer tidak berada di atas panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Vertical"
@@ -484,26 +440,25 @@ msgstr "Panel Xfce"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
-msgstr ""
+msgstr "_Alfa:"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr ""
+msgstr "Mun_cul:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
-msgstr ""
+msgstr "_Berkas"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
-#, fuzzy
 msgid "_Leave:"
-msgstr "_Nama:"
+msgstr "_Hilang:"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
-msgstr ""
+msgstr "_Kunci panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Orientation:"
@@ -516,82 +471,75 @@ msgstr "_Ukuran (piksel):"
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
-msgstr ""
+msgstr "_Gaya:"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "Permainan _Baru"
 
 #: ../panel/panel-tic-tac-toe.c:134
-#, fuzzy
 msgid "_Level:"
-msgstr "_Nama:"
+msgstr "_Level:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "Pemula"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Menengah"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Berpengalaman"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Mahir"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
-msgstr ""
+msgstr "Selamat datang dalam pengaturan awal Panel Xfce"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Panel harus memuat konfigurasi standar karena telah dipindahkan ke sistem baru sehingga dapat menyimpan setelan."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Pilihlah jenis pengaturan yang anda kehendaki sebagai setelan awal."
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
-msgstr ""
+msgstr "Migrasikan konfigurasi lama"
 
 #: ../migrate/main.c:90
-#, fuzzy
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Simpan konfigurasi panel"
+msgstr "Migrasikan konfigurasi lama 4.6 ke Xfconf"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
-msgstr ""
+msgstr "Gunakan konfigurasi standar"
 
 #: ../migrate/main.c:96
-#, fuzzy
 msgid "Load the default configuration"
-msgstr "Simpan konfigurasi panel"
+msgstr "Muat konfigurasi standar"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
-msgstr ""
+msgstr "Satu panel kosong"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Awali dengan satu panel kosong"
 
 #: ../migrate/main.c:115
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Simpan konfigurasi panel"
+msgstr "Gagal memigrasi konfigurasi panel lama"
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Simpan konfigurasi panel"
+msgstr "Gagal memuat konfigurasi standar"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -599,63 +547,57 @@ msgid "Action Buttons"
 msgstr "Tombol Aksi"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
 msgid "Button Actions"
-msgstr "Aksi Panel"
+msgstr "Aksi Tombol"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "Tombol _panah"
+msgstr "Tombol Per_tama:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "Tombol _ikon"
+msgstr "Tombol Ke_dua:"
 
 #: ../plugins/actions/actions.c:108
-#, fuzzy
 msgid "Disabled"
-msgstr "_Non aktifkan"
+msgstr "_Non-aktifkan"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr ""
+msgstr "Dialog Log Keluar"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr ""
+msgstr "Log Keluar"
 
 #: ../plugins/actions/actions.c:111
-#, fuzzy
 msgid "Lock Screen"
-msgstr "Kunci layar"
+msgstr "Kunci Layar"
 
 #: ../plugins/actions/actions.c:112
 msgid "Shut Down"
-msgstr ""
+msgstr "Matikan"
 
 #: ../plugins/actions/actions.c:113
 msgid "Restart"
-msgstr "Start Ulang"
+msgstr "Mulai Kembali"
 
 #: ../plugins/actions/actions.c:114
 msgid "Suspend"
-msgstr ""
+msgstr "Siaga"
 
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernasi"
 
 #: ../plugins/actions/actions.c:409
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Gagal menjalankan \"%s\""
+msgstr "Gagal menjalankan perintah \"%s\""
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Log keluar atau kunci layar"
+msgstr "Log keluar, kunci layar, atau aksi sistem lainnya"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -670,76 +612,66 @@ msgstr "Tampilan"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "Aplikasi Tersembunyi"
+msgstr "Menu Aplikasi"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#, fuzzy
 msgid "Button _title:"
-msgstr "Aksi Panel"
+msgstr "_Judul tombol:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Menu File"
-msgstr ""
+msgstr "Berkas Menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu _file:"
-msgstr ""
+msgstr "Berkas _menu:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Select A Menu File"
-msgstr "Pilih Ikon untuk \"%s\""
+msgstr "Pilih Sebuah Berkas Menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Pilih opsi ini untuk menampilkan nama aplikasi generik pada menu, seperti: \"Thunar\" yang akan menjadi \"Manajer Berkas\" "
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
-msgstr ""
+msgstr "Tampilkan deskripsi aplikasi dalam t_ooltip"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show generic application n_ames"
-msgstr "Aplikasi Tersembunyi"
+msgstr "Tampilkan n_ama aplikasi generik"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show ic_ons in menu"
-msgstr ""
+msgstr "Tampilkan _ikon dalam menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Use _default menu file"
-msgstr ""
+msgstr "Gunakan berkas menu _standar"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file"
-msgstr ""
+msgstr "Gunakan berkas menu _kustom"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
 msgid "_Icon:"
 msgstr "_Ikon:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#, fuzzy
 msgid "_Show button title"
-msgstr "Tombol _panah"
+msgstr "Tampilkan judul _tombol"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
-#, fuzzy
 msgid "Xfce Menu"
-msgstr "Panel Xfce"
+msgstr "Menu Xfce"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:463
 #: ../plugins/directorymenu/directorymenu.c:369
-#, fuzzy
 msgid "Select An Icon"
-msgstr "Pilih Ikon untuk \"%s\""
+msgstr "Pilih Ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:703
 #: ../plugins/launcher/launcher.c:2095
@@ -840,7 +772,8 @@ msgstr "Tampilkan _detik"
 msgid "F_ormat:"
 msgstr ""
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr ""
@@ -878,11 +811,7 @@ msgstr "Tampilkan _penanganan"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1177,10 +1106,7 @@ msgid "Show a directory tree in a menu"
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1284,9 +1210,7 @@ msgid "North"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1412,9 +1336,7 @@ msgstr "Tampilkan Destop"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:551
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This plugin will close."
+msgid "Most likely another widget took over the function of a notification area. This plugin will close."
 msgstr ""
 
 #: ../plugins/systray/systray.c:554
@@ -1620,14 +1542,11 @@ msgstr "Senarai Jendela"
 msgid "Switch between open windows using a menu"
 msgstr "Tukar diantara jendela yang terbuka dengan menggunakan menu"
 
-#, fuzzy
 #~ msgid "Failed to open manual"
 #~ msgstr "Gagal membuka tampilan"
 
-#, fuzzy
 #~ msgid "C_ompositing"
 #~ msgstr "Posisi"
 
-#, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "Tombol Aksi"
