@@ -2167,7 +2167,7 @@ launcher_plugin_item_exec_from_clipboard (GarconMenuItem *item,
     text = gtk_clipboard_wait_for_text (clipboard);
 
   /* try the secondary keayboard if the text is empty */
-  if (!exo_str_is_empty (text))
+  if (exo_str_is_empty (text))
     {
       /* get the secondary clipboard text */
       clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
