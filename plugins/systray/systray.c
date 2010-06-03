@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
- * Copyright (c) 2007-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (c) 2007-2010 Nick Schermer <nick@xfce.org>
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -260,38 +260,27 @@ systray_plugin_screen_changed (GtkWidget *widget,
       plugin->manager = NULL;
     }
 
-  /* check if not another systray is running on this screen */
+  /* create a new manager and register this screen */
+  plugin->manager = systray_manager_new ();
+  g_signal_connect (G_OBJECT (plugin->manager), "icon-added",
+      G_CALLBACK (systray_plugin_icon_added), plugin);
+  g_signal_connect (G_OBJECT (plugin->manager), "icon-removed",
+      G_CALLBACK (systray_plugin_icon_removed), plugin);
+  g_signal_connect (G_OBJECT (plugin->manager), "lost-selection",
+      G_CALLBACK (systray_plugin_lost_selection), plugin);
+
+  /* try to register the systray */
   screen = gtk_widget_get_screen (widget);
-  if (G_LIKELY (!systray_manager_check_running (screen)))
+  if (systray_manager_register (plugin->manager, screen, &error))
     {
-      /* create a new manager and register this screen */
-      plugin->manager = systray_manager_new ();
-
-      /* hookup signals */
-      g_signal_connect (G_OBJECT (plugin->manager), "icon-added",
-          G_CALLBACK (systray_plugin_icon_added), plugin);
-      g_signal_connect (G_OBJECT (plugin->manager), "icon-removed",
-          G_CALLBACK (systray_plugin_icon_removed), plugin);
-      g_signal_connect (G_OBJECT (plugin->manager), "lost-selection",
-          G_CALLBACK (systray_plugin_lost_selection), plugin);
-
-      if (systray_manager_register (plugin->manager, screen, &error))
-        {
-          /* send the plugin orientation */
-          systray_plugin_orientation_changed (XFCE_PANEL_PLUGIN (plugin),
-              xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)));
-        }
-      else
-        {
-          /* TODO handle error and leave the plugin */
-          g_message ("Failed to register the systray manager %s", error->message);
-          g_error_free (error);
-        }
+      /* send the plugin orientation */
+      systray_plugin_orientation_changed (XFCE_PANEL_PLUGIN (plugin),
+         xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)));
     }
   else
     {
-      /* TODO, error and leave the plugin */
-      g_message ("already a notification area running");
+      xfce_dialog_show_error (NULL, error, _("Unable the start the notification area"));
+      g_error_free (error);
     }
 }
 
@@ -549,9 +538,8 @@ systray_plugin_lost_selection (SystrayManager *manager,
 
   /* create fake error and show it */
   error.message = _("Most likely another widget took over the function "
-                    "of a notification area. This plugin will close.");
-  xfce_dialog_show_error (NULL, &error,
-                          _("The notification area lost selection"));
+                    "of a notification area. This area will be unused.");
+  xfce_dialog_show_error (NULL, &error, _("The notification area lost selection"));
 }
 
 

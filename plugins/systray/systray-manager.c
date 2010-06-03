@@ -266,6 +266,7 @@ systray_manager_new (void)
 
 
 
+#if 0
 gboolean
 systray_manager_check_running (GdkScreen *screen)
 {
@@ -291,6 +292,7 @@ systray_manager_check_running (GdkScreen *screen)
   /* return result */
   return (XGetSelectionOwner (GDK_DISPLAY_XDISPLAY (display), selection_atom) != None);
 }
+#endif
 
 
 

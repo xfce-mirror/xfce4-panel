@@ -54,7 +54,9 @@ GQuark          systray_manager_error_quark          (void);
 
 SystrayManager *systray_manager_new                  (void) G_GNUC_MALLOC;
 
+#if 0
 gboolean        systray_manager_check_running        (GdkScreen           *screen);
+#endif
 
 gboolean        systray_manager_register             (SystrayManager      *manager,
                                                       GdkScreen            *screen,
