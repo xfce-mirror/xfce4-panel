@@ -59,6 +59,8 @@ static gboolean     panel_item_dialog_unique_changed_foreach (GtkTreeModel      
 static gboolean     panel_item_dialog_separator_func         (GtkTreeModel       *model,
                                                               GtkTreeIter        *iter,
                                                               gpointer            user_data);
+static void         panel_item_dialog_selection_changed      (GtkTreeSelection   *selection,
+                                                              PanelItemDialog    *dialog);
 static PanelModule *panel_item_dialog_get_selected_module    (GtkTreeView        *treeview);
 static void         panel_item_dialog_drag_begin             (GtkWidget          *treeview,
                                                               GdkDragContext     *context,
@@ -101,6 +103,7 @@ struct _PanelItemDialog
   /* pointers to list */
   GtkListStore       *store;
   GtkTreeView        *treeview;
+  GtkWidget          *add_button;
 };
 
 enum
@@ -153,6 +156,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   GtkTreeModel      *filter;
   GtkTreeViewColumn *column;
   GtkCellRenderer   *renderer;
+  GtkTreeSelection  *selection;
 
   dialog->application = panel_application_get ();
 
@@ -175,11 +179,12 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_default_size (GTK_WINDOW (dialog), 350, 450);
 
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                          GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-                          GTK_STOCK_ADD, GTK_RESPONSE_OK,
-                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-                          NULL);
+  dialog->add_button = gtk_button_new_from_stock (GTK_STOCK_ADD);
+  gtk_widget_show (dialog->add_button);
+
+  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog), dialog->add_button, GTK_RESPONSE_OK);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
   main_vbox = gtk_vbox_new (FALSE, BORDER * 2);
@@ -233,6 +238,9 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   g_signal_connect_swapped (G_OBJECT (treeview), "start-interactive-search", G_CALLBACK (gtk_widget_grab_focus), entry);
   gtk_container_add (GTK_CONTAINER (scroll), treeview);
   gtk_widget_show (treeview);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+  g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (panel_item_dialog_selection_changed), dialog);
 
   g_object_unref (G_OBJECT (filter));
 
@@ -329,8 +337,13 @@ panel_item_dialog_unique_changed (PanelModuleFactory *factory,
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
 
   /* search the module and update its sensitivity */
+  g_object_set_data (G_OBJECT (dialog->store), "dialog", dialog);
   gtk_tree_model_foreach (GTK_TREE_MODEL (dialog->store),
       panel_item_dialog_unique_changed_foreach, module);
+  g_object_set_data (G_OBJECT (dialog->store), "dialog", NULL);
+
+  /* update button sensitivity */
+  panel_item_dialog_selection_changed (gtk_tree_view_get_selection (dialog->treeview), dialog);
 }
 
 
@@ -343,6 +356,7 @@ panel_item_dialog_unique_changed_foreach (GtkTreeModel *model,
 {
   PanelModule *module;
   gboolean     result;
+  GtkWidget   *dialog;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (user_data), FALSE);
 
@@ -358,9 +372,13 @@ panel_item_dialog_unique_changed_foreach (GtkTreeModel *model,
 
   if (result)
     {
+      dialog = g_object_get_data (G_OBJECT (model), "dialog");
+      panel_return_val_if_fail (PANEL_IS_ITEM_DIALOG (dialog), FALSE);
+
       /* update the module unique status */
       gtk_list_store_set (GTK_LIST_STORE (model), iter,
-                          COLUMN_SENSITIVE, panel_module_is_usable (module), -1);
+                          COLUMN_SENSITIVE, panel_module_is_usable (module,
+                              gtk_widget_get_screen (dialog)), -1);
     }
 
   g_object_unref (G_OBJECT (module));
@@ -385,6 +403,28 @@ panel_item_dialog_separator_func (GtkTreeModel *model,
   g_object_unref (G_OBJECT (module));
 
   return FALSE;
+}
+
+
+
+static void
+panel_item_dialog_selection_changed (GtkTreeSelection *selection,
+                                     PanelItemDialog  *dialog)
+{
+  PanelModule *module;
+  gboolean     sensitive = FALSE;
+
+  panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
+  panel_return_if_fail (GTK_IS_TREE_SELECTION (selection));
+
+  module = panel_item_dialog_get_selected_module (dialog->treeview);
+  if (module != NULL)
+    {
+      sensitive = panel_module_is_usable (module, gtk_widget_get_screen (GTK_WIDGET (dialog)));
+      g_object_unref (G_OBJECT (module));
+    }
+
+  gtk_widget_set_sensitive (dialog->add_button, sensitive);
 }
 
 
@@ -440,7 +480,7 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
   module = panel_item_dialog_get_selected_module (GTK_TREE_VIEW (treeview));
   if (G_LIKELY (module != NULL))
     {
-      if (panel_module_is_usable (module))
+      if (panel_module_is_usable (module, gtk_widget_get_screen (GTK_WIDGET (dialog))))
         {
           /* set the drag icon */
           icon_name = panel_module_get_icon_name (module);
@@ -512,7 +552,8 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
       gtk_list_store_insert_with_values (dialog->store, &iter, n,
           COLUMN_MODULE, module,
           COLUMN_ICON_NAME, panel_module_get_icon_name (module),
-          COLUMN_SENSITIVE, panel_module_is_usable (module), -1);
+          COLUMN_SENSITIVE, panel_module_is_usable (module,
+              gtk_widget_get_screen (GTK_WIDGET (dialog))), -1);
     }
 
   g_list_free (modules);

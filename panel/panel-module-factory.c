@@ -434,5 +434,9 @@ panel_module_factory_new_plugin (PanelModuleFactory  *factory,
       g_object_weak_ref (G_OBJECT (provider), panel_module_factory_remove_plugin, factory);
     }
 
+  /* emit unique-changed if the plugin is unique */
+  if (panel_module_is_unique (module))
+    panel_module_factory_emit_unique_changed (module);
+
   return provider;
 }

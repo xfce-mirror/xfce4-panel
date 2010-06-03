@@ -27,7 +27,6 @@ G_BEGIN_DECLS
 
 typedef struct _PanelModuleClass  PanelModuleClass;
 typedef struct _PanelModule       PanelModule;
-typedef enum   _PanelModuleRunMode PanelModuleRunMode;
 
 #define PANEL_TYPE_MODULE            (panel_module_get_type ())
 #define PANEL_MODULE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_MODULE, PanelModule))
@@ -63,7 +62,10 @@ PanelModule *panel_module_get_from_plugin_provider (XfcePanelPluginProvider *pro
 
 gboolean     panel_module_is_valid                 (PanelModule             *module);
 
-gboolean     panel_module_is_usable                (PanelModule             *module) G_GNUC_PURE;
+gboolean     panel_module_is_unique                (PanelModule             *module) G_GNUC_PURE;
+
+gboolean     panel_module_is_usable                (PanelModule             *module,
+                                                    GdkScreen               *screen);
 
 G_END_DECLS
 

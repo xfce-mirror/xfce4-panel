@@ -38,6 +38,11 @@
 
 
 
+typedef enum _PanelModuleRunMode PanelModuleRunMode;
+typedef enum _PanelModuleUnique  PanelModuleUnique;
+
+
+
 static void      panel_module_dispose          (GObject          *object);
 static void      panel_module_finalize         (GObject          *object);
 static gboolean  panel_module_load             (GTypeModule      *type_module);
@@ -60,6 +65,13 @@ enum _PanelModuleRunMode
   EXTERNAL_46 /* external executable with comunication through PanelPluginExternal46 */
 };
 
+enum _PanelModuleUnique
+{
+  UNIQUE_FALSE,
+  UNIQUE_TRUE,
+  UNIQUE_SCREEN
+};
+
 struct _PanelModule
 {
   GTypeModule __parent__;
@@ -78,7 +90,7 @@ struct _PanelModule
 
   /* unique handling */
   guint                use_count;
-  guint                is_unique : 1;
+  PanelModuleUnique    unique_mode;
 
   /* module location (null for 4.6 plugins) */
   GModule             *library;
@@ -128,7 +140,7 @@ panel_module_init (PanelModule *module)
   module->comment = NULL;
   module->icon_name = NULL;
   module->use_count = 0;
-  module->is_unique = FALSE;
+  module->unique_mode = UNIQUE_FALSE;
   module->library = NULL;
   module->construct_func = NULL;
   module->plugin_type = G_TYPE_NONE;
@@ -272,7 +284,7 @@ panel_module_plugin_destroyed (gpointer  user_data,
     g_type_module_unuse (G_TYPE_MODULE (module));
 
   /* emit signal unique signal in the factory */
-  if (module->is_unique)
+  if (module->unique_mode != UNIQUE_FALSE)
     panel_module_factory_emit_unique_changed (module);
 }
 
@@ -288,6 +300,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
   const gchar *module_name;
   gchar       *path;
   const gchar *module_exec;
+  const gchar *module_unique;
 
   panel_return_val_if_fail (!exo_str_is_empty (filename), NULL);
   panel_return_val_if_fail (!exo_str_is_empty (name), NULL);
@@ -374,7 +387,16 @@ panel_module_new_from_desktop_file (const gchar *filename,
       module->display_name = g_strdup (xfce_rc_read_entry (rc, "Name", name));
       module->comment = g_strdup (xfce_rc_read_entry (rc, "Comment", NULL));
       module->icon_name = g_strdup (xfce_rc_read_entry_untranslated (rc, "Icon", NULL));
-      module->is_unique = xfce_rc_read_bool_entry (rc, "X-XFCE-Unique", FALSE);
+
+      module_unique = xfce_rc_read_entry (rc, "X-XFCE-Unique", NULL);
+      if (G_LIKELY (module_unique == NULL))
+        module->unique_mode = UNIQUE_FALSE;
+      else if (strcasecmp (module_unique, "screen") == 0)
+        module->unique_mode = UNIQUE_SCREEN;
+      else if (strcasecmp (module_unique, "true") == 0)
+        module->unique_mode = UNIQUE_TRUE;
+      else
+        module->unique_mode = UNIQUE_FALSE;
     }
 
   xfce_rc_close (rc);
@@ -399,7 +421,7 @@ panel_module_new_plugin (PanelModule  *module,
   panel_return_val_if_fail (module->mode != UNKNOWN, NULL);
 
   /* return null if the module is not usable (unique and already used) */
-  if (G_UNLIKELY (!panel_module_is_usable (module)))
+  if (G_UNLIKELY (!panel_module_is_usable (module, screen)))
     return NULL;
 
   switch (module->mode)
@@ -459,10 +481,6 @@ panel_module_new_plugin (PanelModule  *module,
       /* handle module use count and unloading */
       g_object_weak_ref (G_OBJECT (plugin),
           panel_module_plugin_destroyed, module);
-
-      /* emit unique-changed if the plugin is unique */
-      if (module->is_unique)
-        panel_module_factory_emit_unique_changed (module);
 
       /* add link to the module */
       g_object_set_qdata (G_OBJECT (plugin), module_quark, module);
@@ -554,10 +572,44 @@ panel_module_is_valid (PanelModule *module)
 
 
 gboolean
-panel_module_is_usable (PanelModule *module)
+panel_module_is_unique (PanelModule *module)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
 
-  /* whether the module is usable */
-  return module->is_unique ? module->use_count == 0 : TRUE;
+  return module->unique_mode != UNIQUE_FALSE;
+}
+
+
+
+gboolean
+panel_module_is_usable (PanelModule *module,
+                        GdkScreen   *screen)
+{
+  PanelModuleFactory *factory;
+  GSList             *plugins, *li;
+  gboolean            usable = TRUE;
+
+  panel_return_val_if_fail (PANEL_IS_MODULE (module), FALSE);
+  panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
+
+  if (module->use_count > 0
+      && module->unique_mode == UNIQUE_TRUE)
+    return FALSE;
+
+  if (module->use_count > 0
+      && module->unique_mode == UNIQUE_SCREEN)
+    {
+      factory = panel_module_factory_get ();
+      plugins = panel_module_factory_get_plugins (factory, panel_module_get_name (module));
+
+      /* search existing plugins if one of them runs on this screen */
+      for (li = plugins; usable && li != NULL; li = li->next)
+        if (screen == gtk_widget_get_screen (GTK_WIDGET (li->data)))
+          usable = FALSE;
+
+      g_slist_free (plugins);
+      g_object_unref (G_OBJECT (factory));
+    }
+
+  return usable;
 }
