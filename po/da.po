@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-10 04:04+0000\n"
+"POT-Creation-Date: 2010-06-04 16:06+0000\n"
 "PO-Revision-Date: 2010-02-23 21:14+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -85,39 +85,39 @@ msgstr "Paneli_ndstillinger..."
 msgid "_Restart"
 msgstr "_Genstart"
 
-#: ../panel/main.c:75
+#: ../panel/main.c:76
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Vis dialogen 'Panelindstillinger'"
 
-#: ../panel/main.c:75 ../panel/main.c:76
+#: ../panel/main.c:76 ../panel/main.c:77
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
-#: ../panel/main.c:76
+#: ../panel/main.c:77
 msgid "Show the 'Add New Items' dialog"
 msgstr "Vis dialogen 'Tilføj nye elementer'"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Save the panel configuration"
 msgstr "Gem indstilling til panelet"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Add a new plugin to the panel"
 msgstr "Tilføj et nyt udvidelsesmodul til panelet"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "PLUGIN-NAME"
 msgstr "UDVIDELSESMODULNAVN"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Restart the running panel instance"
 msgstr "Genstart den kørende panelinstans"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Quit the running panel instance"
 msgstr "Afslut den kørende panelinstans"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -125,63 +125,63 @@ msgid "Print version information and exit"
 msgstr "Udskriv versionsinformation og afslut"
 
 #. parse context options
-#: ../panel/main.c:149
+#: ../panel/main.c:153
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTER...]"
 
-#: ../panel/main.c:156
+#: ../panel/main.c:160
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Tast \"%s --help\" for brugervejledning."
 
-#: ../panel/main.c:175
+#: ../panel/main.c:179
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce udviklingsholdet. Alle rettigheder forbeholdes."
 
-#: ../panel/main.c:176
+#: ../panel/main.c:180
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Rapporter venligst fejl til <%s>."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:226
 msgid "There is already a running instance"
 msgstr "Der findes allerede en kørende instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:262
+#: ../panel/main.c:266
 msgid "Restarting..."
 msgstr "Genstarter..."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:281
 msgid "Failed to show the preferences dialog"
 msgstr "Kunne ikke vise dialogen indstillinger"
 
-#: ../panel/main.c:279
+#: ../panel/main.c:283
 msgid "Failed to show the add new items dialog"
 msgstr "Kunne ikke vise dialogen tilføj nye elementer"
 
-#: ../panel/main.c:281
+#: ../panel/main.c:285
 msgid "Failed to save the panel configuration"
 msgstr "Kunne ikke gemme indstillingen til panelet"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:287
 msgid "Failed to add a plugin to the panel"
 msgstr "Kunne ikke føje et udvidelsesmodul til panelet"
 
-#: ../panel/main.c:285
+#: ../panel/main.c:289
 msgid "Failed to restart the panel"
 msgstr "Kunne ikke genstarte panelet"
 
-#: ../panel/main.c:287
+#: ../panel/main.c:291
 msgid "Failed to quit the panel"
 msgstr "Kunne ikke afslutte panelet"
 
-#: ../panel/main.c:289
+#: ../panel/main.c:293
 msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-besked"
 
 #. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:296
+#: ../panel/main.c:300
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
@@ -244,20 +244,20 @@ msgstr "Udvicelsesmodul \"%s\" forlod uventet panelet. Vil du genstarte det?"
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Udvidelsesmodulet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker 'Kør' vil panelet prøve at genstarte udvidelsesmodulet ellers vil det blive permanent fjernet fra panelet."
 
-#: ../panel/panel-item-dialog.c:171
+#: ../panel/panel-item-dialog.c:175
 msgid "Add New Items"
 msgstr "Tilføj nye elementer"
 
-#: ../panel/panel-item-dialog.c:173
+#: ../panel/panel-item-dialog.c:177
 msgid "Add new plugins to the panel"
 msgstr "Tilføj nye udvidelsesmoduler til panelet"
 
-#: ../panel/panel-item-dialog.c:195
+#: ../panel/panel-item-dialog.c:200
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Søg:"
 
-#: ../panel/panel-item-dialog.c:203
+#: ../panel/panel-item-dialog.c:208
 msgid "Enter search phrase here"
 msgstr "Indtasts søgeudtryk her"
 
@@ -679,7 +679,7 @@ msgid "Select An Icon"
 msgstr "Vælg et ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:703
-#: ../plugins/launcher/launcher.c:2095
+#: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommando \"%s\"."
@@ -1122,11 +1122,11 @@ msgstr "_Basismappe:"
 msgid "_File Pattern:"
 msgstr "_Filmønster:"
 
-#: ../plugins/launcher/launcher.c:1441
+#: ../plugins/launcher/launcher.c:1448
 msgid "Unnamed Item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher.c:1581
+#: ../plugins/launcher/launcher.c:1588
 msgid "No items"
 msgstr "Ingen elementer"
 
@@ -1305,16 +1305,21 @@ msgstr "Skjul alle vinduer og vis skrivebordet"
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
 
-#. create fake error and show it
-#: ../plugins/systray/systray.c:551
-msgid "Most likely another widget took over the function of a notification area. This plugin will close."
-msgstr "Mest sandsynligt et andet widget har overtaget funktionen af et beskedsområde. Udvidelsesmodulet vil afslutte."
+#: ../plugins/systray/systray.c:282
+#, fuzzy
+msgid "Unable the start the notification area"
+msgstr "Slå _vigtige beskeder til"
 
-#: ../plugins/systray/systray.c:554
+#. create fake error and show it
+#: ../plugins/systray/systray.c:540
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et beskedsområde. Dette område vil være ubenyttet"
+
+#: ../plugins/systray/systray.c:542
 msgid "The notification area lost selection"
 msgstr "Beskedsområdet mistede valget"
 
-#: ../plugins/systray/systray.c:747
+#: ../plugins/systray/systray.c:735
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Er du sikker på at du vil slette listen over kendte programmer?"
 
@@ -1335,7 +1340,7 @@ msgstr "Påmindelsesområde"
 msgid "_Number of rows:"
 msgstr "A_ntal rækker:"
 
-#: ../plugins/systray/systray-manager.c:401
+#: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Kunne ikke allokere håndteringsvalg for skærm %d"
@@ -1414,23 +1419,23 @@ msgstr "Vindue_gruppering:"
 msgid "Window title"
 msgstr "Vinduestitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2617
+#: ../plugins/tasklist/tasklist-widget.c:2620
 msgid "Mi_nimize All"
 msgstr "Mi_nimér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2626
+#: ../plugins/tasklist/tasklist-widget.c:2629
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2632
+#: ../plugins/tasklist/tasklist-widget.c:2635
 msgid "Ma_ximize All"
 msgstr "Maksi_mér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2641
+#: ../plugins/tasklist/tasklist-widget.c:2644
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2651
+#: ../plugins/tasklist/tasklist-widget.c:2654
 msgid "_Close All"
 msgstr "_Luk alle"
 
