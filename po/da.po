@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-04 16:06+0000\n"
-"PO-Revision-Date: 2010-02-23 21:14+0100\n"
+"POT-Creation-Date: 2010-06-06 11:54+0000\n"
+"PO-Revision-Date: 2010-06-06 16:34+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -71,17 +71,20 @@ msgid "_Move"
 msgstr "_Flyt"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
+#: ../libxfce4panel/xfce-panel-plugin.c:1082
+#: ../panel/panel-window.c:2106
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1093
+#: ../panel/panel-window.c:2117
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1117
+#: ../panel/panel-window.c:2140
 msgid "_Restart"
 msgstr "_Genstart"
 
@@ -89,7 +92,8 @@ msgstr "_Genstart"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Vis dialogen 'Panelindstillinger'"
 
-#: ../panel/main.c:76 ../panel/main.c:77
+#: ../panel/main.c:76
+#: ../panel/main.c:77
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
@@ -212,7 +216,8 @@ msgstr ""
 "Mere info: http://www.dansk-gruppen.dk"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Tilføj nyt element"
 
@@ -221,7 +226,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Vælg venligst et panel for det nye udvidelsesmodul:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:743
+#: ../panel/panel-dialogs.c:150
+#: ../panel/panel-preferences-dialog.c:743
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -355,8 +361,7 @@ msgstr "Ele_menter"
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Dimensioner til panel"
@@ -771,8 +776,7 @@ msgstr "Vis _sekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "I_ntervaller:"
@@ -1306,14 +1310,13 @@ msgid "Show Desktop"
 msgstr "Vis skrivebord"
 
 #: ../plugins/systray/systray.c:282
-#, fuzzy
-msgid "Unable the start the notification area"
-msgstr "Slå _vigtige beskeder til"
+msgid "Unable to start the notification area"
+msgstr "Kunne ikke starte beskedsområdet"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:540
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et beskedsområde. Dette område vil være ubenyttet"
+msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et beskedsområde. Dette område vil være ubenyttet."
 
 #: ../plugins/systray/systray.c:542
 msgid "The notification area lost selection"
@@ -1505,9 +1508,8 @@ msgstr "Skift mellem åbne vinduer ved brug afen menu"
 
 #~ msgid "C_ompositing"
 #~ msgstr "Red_igering"
-
 #~ msgid "Failed to open manual"
 #~ msgstr "Kunne ikke åbne manual"
-
 #~ msgid "Action Button"
 #~ msgstr "Hændelsesknap"
+
