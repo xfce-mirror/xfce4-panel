@@ -279,7 +279,7 @@ systray_plugin_screen_changed (GtkWidget *widget,
     }
   else
     {
-      xfce_dialog_show_error (NULL, error, _("Unable the start the notification area"));
+      xfce_dialog_show_error (NULL, error, _("Unable to start the notification area"));
       g_error_free (error);
     }
 }
