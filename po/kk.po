@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-11 04:04+0000\n"
+"POT-Creation-Date: 2010-06-06 22:06+0000\n"
 "PO-Revision-Date: 2010-04-08 19:35+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -81,39 +81,39 @@ msgstr "Панель ба_птаулары..."
 msgid "_Restart"
 msgstr "Қа_йта қосу"
 
-#: ../panel/main.c:75
+#: ../panel/main.c:76
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Панельді баптаулары' сұхбар терезесін көрсету"
 
-#: ../panel/main.c:75 ../panel/main.c:76
+#: ../panel/main.c:76 ../panel/main.c:77
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-#: ../panel/main.c:76
+#: ../panel/main.c:77
 msgid "Show the 'Add New Items' dialog"
 msgstr "'Жаңа элементтерді қосу' сұхбат терезесін көрсету"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Save the panel configuration"
 msgstr "Панель баптауларын сақтау"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Add a new plugin to the panel"
 msgstr "Панельге жаңа плагинді қосу"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Restart the running panel instance"
 msgstr "Қосулы тұрған панель нұсқасын қайта қосу"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Quit the running panel instance"
 msgstr "Қосулы тұрған панельді сөндіру"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -121,63 +121,63 @@ msgid "Print version information and exit"
 msgstr "Нұсқа ақпаратын шығару мен шығу"
 
 #. parse context options
-#: ../panel/main.c:149
+#: ../panel/main.c:153
 msgid "[ARGUMENTS...]"
 msgstr "[АРГУМЕНТТЕР...]"
 
-#: ../panel/main.c:156
+#: ../panel/main.c:160
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Қолдану ақпараты үшін \"%s --help\" теріңіз."
 
-#: ../panel/main.c:175
+#: ../panel/main.c:179
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce өндіру тобы. Барлық құқықтары қорғалған."
 
-#: ../panel/main.c:176
+#: ../panel/main.c:180
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Қателер жөнінде осында хабарласыңыз: <%s>."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:226
 msgid "There is already a running instance"
 msgstr "Қосулы тұрған нұсқасы бар болып тұр"
 
 #. spawn ourselfs again
-#: ../panel/main.c:262
+#: ../panel/main.c:266
 msgid "Restarting..."
 msgstr "Қайта қосу..."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:281
 msgid "Failed to show the preferences dialog"
 msgstr "Баптаулар терезесін көрсету сәтсіз аяқталды"
 
-#: ../panel/main.c:279
+#: ../panel/main.c:283
 msgid "Failed to show the add new items dialog"
 msgstr "Жаңа элементтерді қосу сұхбат терезесін көрсету сәтсіз аяқталды"
 
-#: ../panel/main.c:281
+#: ../panel/main.c:285
 msgid "Failed to save the panel configuration"
 msgstr "Панель баптауларын сақтау сәтсіз аяқталды"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:287
 msgid "Failed to add a plugin to the panel"
 msgstr "Панельге плагинді қосу сәтсіз аяқталды"
 
-#: ../panel/main.c:285
+#: ../panel/main.c:289
 msgid "Failed to restart the panel"
 msgstr "Панельді қайта қосу сәтсіз аяқталды"
 
-#: ../panel/main.c:287
+#: ../panel/main.c:291
 msgid "Failed to quit the panel"
 msgstr "Панельді жабу сәтсіз аяқталды"
 
-#: ../panel/main.c:289
+#: ../panel/main.c:293
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus хабарламасын жіберу сәтсіз аяқталды"
 
 #. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:296
+#: ../panel/main.c:300
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s үшін қосулы тұрған нұсқалары табылмады"
@@ -236,20 +236,20 @@ msgstr "\"%s\" плагині күтпегенде панельден кетті
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Плагин соңғы %d секундта бірден көп рет қайта қосылған. Орындау батырмасын бассаңыз, панель ол плагинді қайта қосып көреді, олай болмаса, ол плагин панельден өшіріледі."
 
-#: ../panel/panel-item-dialog.c:171
+#: ../panel/panel-item-dialog.c:175
 msgid "Add New Items"
 msgstr "Жаңа элементтерді қосу"
 
-#: ../panel/panel-item-dialog.c:173
+#: ../panel/panel-item-dialog.c:177
 msgid "Add new plugins to the panel"
 msgstr "Панельге жаңа плагиндерді қосу"
 
-#: ../panel/panel-item-dialog.c:195
+#: ../panel/panel-item-dialog.c:200
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "І_здеу:"
 
-#: ../panel/panel-item-dialog.c:203
+#: ../panel/panel-item-dialog.c:208
 msgid "Enter search phrase here"
 msgstr "Іздеу мәтінін осында енгізіңіз"
 
@@ -671,7 +671,7 @@ msgid "Select An Icon"
 msgstr "Таңбашаны таңдаңыз"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:703
-#: ../plugins/launcher/launcher.c:2095
+#: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -1114,11 +1114,11 @@ msgstr "_Бас бумасы:"
 msgid "_File Pattern:"
 msgstr "_Файл шаблоны:"
 
-#: ../plugins/launcher/launcher.c:1441
+#: ../plugins/launcher/launcher.c:1448
 msgid "Unnamed Item"
 msgstr "Атаусыз элемент"
 
-#: ../plugins/launcher/launcher.c:1581
+#: ../plugins/launcher/launcher.c:1588
 msgid "No items"
 msgstr "Элементтер жоқ"
 
@@ -1296,16 +1296,20 @@ msgstr "Терезелерді жасырып, жұмыс үстелін көр�
 msgid "Show Desktop"
 msgstr "Жұмыс үстелін көрсету"
 
-#. create fake error and show it
-#: ../plugins/systray/systray.c:551
-msgid "Most likely another widget took over the function of a notification area. This plugin will close."
-msgstr "Басқа виджет хабарламалар сөре ролін алып отырған сияқты. Бұл плагин жабылады."
+#: ../plugins/systray/systray.c:282
+msgid "Unable to start the notification area"
+msgstr "Хабарламалар орнын іске қосу мүмкін емес"
 
-#: ../plugins/systray/systray.c:554
+#. create fake error and show it
+#: ../plugins/systray/systray.c:540
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Басқа виджет хабарламалар орны ролін алып отырған сияқты. Бұл орын қолданылмайды."
+
+#: ../plugins/systray/systray.c:542
 msgid "The notification area lost selection"
 msgstr "Трей менеджері таңдауды жоғалтқан"
 
-#: ../plugins/systray/systray.c:747
+#: ../plugins/systray/systray.c:735
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Белгілі қолданбалар тізімін тазартуды шынымен қалайсыз ба?"
 
@@ -1326,7 +1330,7 @@ msgstr "Хабарламалар орны"
 msgid "_Number of rows:"
 msgstr "Жолдар са_ны:"
 
-#: ../plugins/systray/systray-manager.c:401
+#: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "%d экраны үшін таңдау менеджерін орындау қатесі"
@@ -1405,23 +1409,23 @@ msgstr "Терезелерді _топтау:"
 msgid "Window title"
 msgstr "Терезе атауы"
 
-#: ../plugins/tasklist/tasklist-widget.c:2617
+#: ../plugins/tasklist/tasklist-widget.c:2620
 msgid "Mi_nimize All"
 msgstr "Барл_ығын қайыру"
 
-#: ../plugins/tasklist/tasklist-widget.c:2626
+#: ../plugins/tasklist/tasklist-widget.c:2629
 msgid "Un_minimize All"
 msgstr "Барлығы_н қайырудан қайтару"
 
-#: ../plugins/tasklist/tasklist-widget.c:2632
+#: ../plugins/tasklist/tasklist-widget.c:2635
 msgid "Ma_ximize All"
 msgstr "Бар_лығын жазық қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:2641
+#: ../plugins/tasklist/tasklist-widget.c:2644
 msgid "_Unmaximize All"
 msgstr "Барлығын _жазық емес қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:2651
+#: ../plugins/tasklist/tasklist-widget.c:2654
 msgid "_Close All"
 msgstr "Ба_рлығын жабу"
 
