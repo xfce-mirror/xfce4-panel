@@ -448,13 +448,13 @@ systray_manager_unregister (SystrayManager *manager)
 
   /* remove our handling of the selection if we're the owner */
   owner = gdk_selection_owner_get_for_display (display, manager->selection_atom);
-  if (owner != invisible->window
-      || !gdk_selection_owner_set_for_display (display,
-                                               NULL,
-                                               manager->selection_atom,
-                                               gdk_x11_get_server_time (invisible->window),
-                                               TRUE))
-    panel_assert_not_reached ();
+  if (owner == invisible->window)
+    {
+      gdk_selection_owner_set_for_display (display, NULL,
+                                           manager->selection_atom,
+                                           gdk_x11_get_server_time (invisible->window),
+                                           TRUE);
+    }
 
   /* remove window filter */
   gdk_window_remove_filter (invisible->window,
