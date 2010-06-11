@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-04 10:06+0000\n"
-"PO-Revision-Date: 2010-06-03 11:01+0200\n"
+"POT-Creation-Date: 2010-06-11 16:06+0000\n"
+"PO-Revision-Date: 2010-06-11 23:34+0200\n"
 "Last-Translator: Ivica Kolić<ikoli@yahoo.com> <>\n"
 "Language-Team: Croatian <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; p xfce4-panellural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; p xfce4-panellural=(n%10==1 && n%100!=11 ? 0 : n%"
+"10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
@@ -37,8 +38,12 @@ msgid "_Read Online"
 msgstr "_Čitaj online"
 
 #: ../common/panel-utils.c:156
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Možete čitati korisnički priručnik online.Ovaj priručnik možda ne odgovara vašoj veriji ploče."
+msgid ""
+"You can read the user manual online. This manual may however not exactly "
+"match your panel version."
+msgstr ""
+"Možete čitati korisnički priručnik online.Ovaj priručnik možda ne odgovara "
+"vašoj veriji ploče."
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
@@ -87,7 +92,7 @@ msgstr "Pokaži dijalog 'Osobitosti ploče'"
 
 #: ../panel/main.c:76 ../panel/main.c:77
 msgid "PANEL-NUMBER"
-msgstr "BROJ PLOČE"
+msgstr "BROJ-PLOČE"
 
 #: ../panel/main.c:77
 msgid "Show the 'Add New Items' dialog"
@@ -158,7 +163,7 @@ msgstr "Neuspjelo pokazivanje dijaloga dodaj nove stavke"
 
 #: ../panel/main.c:285
 msgid "Failed to save the panel configuration"
-msgstr ""
+msgstr "Neuspjelo spremanje konfiguracije ploče"
 
 #: ../panel/main.c:287
 msgid "Failed to add a plugin to the panel"
@@ -187,12 +192,14 @@ msgid "Failed to launch the migration application"
 msgstr ""
 
 #: ../panel/panel-dbus-client.c:226
-msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
 #: ../panel/panel-dbus-client.c:259
 #, c-format
-msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:79
@@ -201,7 +208,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
-msgstr "Ivica Kolić <ikoli@yahoo.com>"
+msgstr "Ivica Kolić (zvacet)<ikoli@yahoo.com>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -219,8 +226,12 @@ msgid "Panel %d"
 msgstr "Ploča %d"
 
 #: ../panel/panel-dialogs.c:186
-msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "Ploča je pokrenuta u kiosk mudu,pa ne možete napraviti promjene konfiguraciji ploče kao običan korisnik."
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+"Ploča je pokrenuta u kiosk mudu,pa ne možete napraviti promjene "
+"konfiguraciji ploče kao običan korisnik."
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
@@ -229,11 +240,15 @@ msgstr "Izmjene ploče nisu dozvoljene"
 #: ../panel/panel-dialogs.c:209
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Priključak \"%s je neočekivano napustio ploču.želite li ga ponovno pokrenuti?"
+msgstr ""
+"Priključak \"%s je neočekivano napustio ploču.želite li ga ponovno pokrenuti?"
 
 #: ../panel/panel-dialogs.c:211
 #, c-format
-msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
 msgstr ""
 
 #: ../panel/panel-item-dialog.c:175
@@ -297,7 +312,9 @@ msgid "Add new item to this panel"
 msgstr "Dodaj novu stavku na ovu ploču"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
+msgid ""
+"Alpha value of the panel background, between 0 (transparent) and 100 "
+"(opaque)."
 msgstr "Alfa vrijednost pozadine ploče između 0 (prozirno) i 100 (neprozirno)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -347,8 +364,7 @@ msgstr "Sta_vke"
 msgid "L_ength (%):"
 msgstr "D_užina (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Mjerenja"
@@ -388,19 +404,26 @@ msgid "Select A Background Image"
 msgstr "Odaberi pozadinsku sliku"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "Odaberi ovu opciju za automatsko povećanje dužine ploče ako priključak zahtjeva više prostora"
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+"Odaberi ovu opciju za automatsko povećanje dužine ploče ako priključak "
+"zahtjeva više prostora"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Select this option to hide the handles of the panel and lock its position."
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:31
@@ -499,8 +522,12 @@ msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Dobrodošli na prvo pokretanje Xfce Panel"
 
 #: ../migrate/main.c:80
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
-msgstr "Zbog pomicanja ploče u novi sustav za pohranu postavki,mora biti učitana svježa početna konfiguracija"
+msgid ""
+"Because the panel moved to a new system for storing the settings, it has to "
+"load a fresh initial configuration."
+msgstr ""
+"Zbog pomicanja ploče u novi sustav za pohranu postavki,mora biti učitana "
+"svježa početna konfiguracija"
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -629,8 +656,12 @@ msgid "Select A Menu File"
 msgstr "Odaberi datoteku izbornika"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr "Odaberi ovu opciju za prikaz generičkog imena programa u izborniku,npr.\"Upravitelj datotekama\" umjesto \"Thunar\""
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"Odaberi ovu opciju za prikaz generičkog imena programa u izborniku,npr."
+"\"Upravitelj datotekama\" umjesto \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
@@ -763,8 +794,7 @@ msgstr "Prikaži _sekunde"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr ""
@@ -800,7 +830,11 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgid ""
+"The format describes the date and time parts to insert into the file name. "
+"For example, %Y will be substituted with the year, %m with the month and %d "
+"with the day. See the documentation of the date utility for additional "
+"information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1089,7 +1123,10 @@ msgid "Show a directory tree in a menu"
 msgstr "Pokaži stablo direktorija u izborniku"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1137,7 +1174,8 @@ msgstr "Neimenovana stavka"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Failed to remove the desktop file from the config directory"
-msgstr "Neuspjelo uklanjanje datoteke radne površine iz konfiguracijskog direktorija"
+msgstr ""
+"Neuspjelo uklanjanje datoteke radne površine iz konfiguracijskog direktorija"
 
 #: ../plugins/launcher/launcher-dialog.c:723
 msgid "Failed to open desktop item editor"
@@ -1185,7 +1223,9 @@ msgid "North"
 msgstr "Sjever"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1297,12 +1337,15 @@ msgid "Show Desktop"
 msgstr "Pokaži radnu površinu"
 
 #: ../plugins/systray/systray.c:282
-msgid "Unable the start the notification area"
-msgstr ""
+#, fuzzy
+msgid "Unable to start the notification area"
+msgstr "Nespjelo ponovno pokretanje ploče"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:540
-msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
 msgstr ""
 
 #: ../plugins/systray/systray.c:542
