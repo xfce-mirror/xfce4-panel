@@ -47,6 +47,7 @@
 #include <panel/panel-application.h>
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-dbus-client.h>
+#include <panel/panel-preferences-dialog.h>
 
 
 
@@ -227,6 +228,8 @@ main (gint argc, gchar **argv)
       goto dbus_return;
     }
 
+  launch_panel:
+
   /* start session management */
   sm_client = xfce_sm_client_get ();
   xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
@@ -245,6 +248,10 @@ main (gint argc, gchar **argv)
   dbus_service = panel_dbus_service_get ();
 
   application = panel_application_get ();
+
+  /* open dialog if we started from launch_panel */
+  if (opt_preferences >= 0)
+    panel_preferences_dialog_show (panel_application_get_nth_window (application, opt_preferences));
 
   gtk_main ();
 
@@ -295,9 +302,31 @@ dbus_return:
       /* show understandable message for this common error */
       if (error->code == DBUS_GERROR_NAME_HAS_NO_OWNER)
         {
-          g_clear_error (&error);
-          /* I18N: %s is replaced with xfce4-panel */
-          g_set_error (&error, 0, 0, _("No running instance of %s was found"), G_LOG_DOMAIN);
+          /* normally start the panel */
+          if (opt_preferences >= 0)
+            {
+              g_clear_error (&error);
+
+              if (xfce_dialog_confirm (NULL, GTK_STOCK_EXECUTE, NULL,
+                                       _("Do you want to start the Xfce panel? If you do, make sure "
+                                         "you save the session on logout, so the panel is "
+                                         "automatically started the next time you login."),
+                                       _("No running instance of %s was found"), G_LOG_DOMAIN))
+                {
+                  panel_debug (PANEL_DEBUG_DOMAIN_MAIN, "start panel of asking user");
+                  goto launch_panel;
+                }
+              else
+                {
+                  return EXIT_FAILURE;
+                }
+            }
+          else
+            {
+              /* I18N: %s is replaced with xfce4-panel */
+              g_clear_error (&error);
+              g_set_error (&error, 0, 0, _("No running instance of %s was found."), G_LOG_DOMAIN);
+            }
         }
 
       /* show error dialog */
