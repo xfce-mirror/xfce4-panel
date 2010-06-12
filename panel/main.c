@@ -325,7 +325,7 @@ dbus_return:
             {
               /* I18N: %s is replaced with xfce4-panel */
               g_clear_error (&error);
-              g_set_error (&error, 0, 0, _("No running instance of %s was found."), G_LOG_DOMAIN);
+              g_set_error (&error, 0, 0, _("No running instance of %s was found"), G_LOG_DOMAIN);
             }
         }
 
