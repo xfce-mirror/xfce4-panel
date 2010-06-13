@@ -2132,6 +2132,10 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
   gtk_widget_show (image);
 
+  item = gtk_separator_menu_item_new ();
+  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+  gtk_widget_show (item);
+
   /* help item */
   item = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
   g_signal_connect (G_OBJECT (item), "activate",
