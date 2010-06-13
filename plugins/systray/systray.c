@@ -85,6 +85,8 @@ struct _SystrayPlugin
   /* systray manager */
   SystrayManager *manager;
 
+  guint           idle_startup;
+
   /* widgets */
   GtkWidget      *frame;
   GtkWidget      *box;
@@ -168,6 +170,7 @@ systray_plugin_init (SystrayPlugin *plugin)
 {
   plugin->manager = NULL;
   plugin->show_frame = TRUE;
+  plugin->idle_startup = 0;
 
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
@@ -244,21 +247,12 @@ systray_plugin_set_property (GObject      *object,
 
 
 
-static void
-systray_plugin_screen_changed (GtkWidget *widget,
-                               GdkScreen *previous_screen)
+static gboolean
+systray_plugin_screen_changed_idle (gpointer user_data)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (widget);
+  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
   GdkScreen     *screen;
   GError        *error = NULL;
-
-  if (G_UNLIKELY (plugin->manager != NULL))
-    {
-      /* unregister from this screen */
-      systray_manager_unregister (plugin->manager);
-      g_object_unref (G_OBJECT (plugin->manager));
-      plugin->manager = NULL;
-    }
 
   /* create a new manager and register this screen */
   plugin->manager = systray_manager_new ();
@@ -270,7 +264,7 @@ systray_plugin_screen_changed (GtkWidget *widget,
       G_CALLBACK (systray_plugin_lost_selection), plugin);
 
   /* try to register the systray */
-  screen = gtk_widget_get_screen (widget);
+  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
   if (systray_manager_register (plugin->manager, screen, &error))
     {
       /* send the plugin orientation */
@@ -282,10 +276,41 @@ systray_plugin_screen_changed (GtkWidget *widget,
       xfce_dialog_show_error (NULL, error, _("Unable to start the notification area"));
       g_error_free (error);
     }
+
+  return FALSE;
 }
 
 
-#define LAUNCHER_TYPE_PTR_ARRAY        (dbus_g_type_get_collection("GPtrArray", G_TYPE_VALUE))
+
+static void
+systray_plugin_screen_changed_idle_destroyed (gpointer user_data)
+{
+  XFCE_SYSTRAY_PLUGIN (user_data)->idle_startup = 0;
+}
+
+
+
+static void
+systray_plugin_screen_changed (GtkWidget *widget,
+                               GdkScreen *previous_screen)
+{
+  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (widget);
+
+  if (G_UNLIKELY (plugin->manager != NULL))
+    {
+      /* unregister this screen screen */
+      systray_manager_unregister (plugin->manager);
+      g_object_unref (G_OBJECT (plugin->manager));
+      plugin->manager = NULL;
+    }
+
+  /* schedule a delayed startup */
+  if (plugin->idle_startup == 0)
+    plugin->idle_startup = g_idle_add_full (G_PRIORITY_LOW, systray_plugin_screen_changed_idle,
+                                            plugin, systray_plugin_screen_changed_idle_destroyed);
+}
+
+
 
 static void
 systray_plugin_construct (XfcePanelPlugin *panel_plugin)
@@ -326,6 +351,10 @@ static void
 systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+
+  /* stop pending idle startup */
+  if (plugin->idle_startup != 0)
+    g_source_remove (plugin->idle_startup);
 
   /* disconnect screen changed signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
