@@ -70,6 +70,8 @@ void              panel_application_windows_sensitive (PanelApplication  *applic
 
 gboolean          panel_application_get_locked        (PanelApplication  *application);
 
+void              panel_application_logout            (void);
+
 G_END_DECLS
 
 #endif /* !__PANEL_APPLICATION_H__ */

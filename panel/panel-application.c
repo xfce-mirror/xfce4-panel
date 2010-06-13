@@ -550,10 +550,9 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
       panel_preferences_dialog_show (window);
       break;
 
-    case PROVIDER_SIGNAL_PANEL_QUIT:
-    case PROVIDER_SIGNAL_PANEL_RESTART:
-      /* quit or restart */
-      panel_dbus_service_exit_panel (provider_signal == PROVIDER_SIGNAL_PANEL_RESTART);
+    case PROVIDER_SIGNAL_PANEL_LOGOUT:
+      /* logout */
+      panel_application_logout ();
       break;
 
     case PROVIDER_SIGNAL_PANEL_ABOUT:
@@ -1408,4 +1407,26 @@ panel_application_get_locked (PanelApplication *application)
   /* TODO we could extend this to a plugin basis (ie. panels are
    * locked but maybe not all the plugins) */
   return TRUE;
+}
+
+
+
+void
+panel_application_logout (void)
+{
+  XfceSMClient *sm_client;
+  GError       *error = NULL;
+
+  /* first try to session client to logout else fallback and spawn xfce4-session-logout */
+  sm_client = xfce_sm_client_get ();
+  if (xfce_sm_client_is_connected (sm_client))
+    {
+      xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_ASK);
+    }
+  else if (!g_spawn_command_line_async ("xfce4-session-logout", &error))
+    {
+      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\""),
+                              "xfce4-session-logout");
+      g_error_free (error);
+    }
 }

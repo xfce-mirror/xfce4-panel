@@ -2042,14 +2042,6 @@ panel_window_set_autohide (PanelWindow *window,
 
 
 static void
-panel_window_menu_quit (gpointer boolean)
-{
-  panel_dbus_service_exit_panel (GPOINTER_TO_UINT (boolean) == 1);
-}
-
-
-
-static void
 panel_window_menu_help (void)
 {
   panel_utils_show_help (NULL, NULL, NULL);
@@ -2129,27 +2121,16 @@ panel_window_menu_popup (PanelWindow *window,
       gtk_widget_show (item);
     }
 
-  /* quit item */
-  item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+  /* logout item */
+  item = gtk_image_menu_item_new_with_mnemonic (_("Log _Out"));
   g_signal_connect_swapped (G_OBJECT (item), "activate",
-      G_CALLBACK (panel_window_menu_quit), GUINT_TO_POINTER (0));
+      G_CALLBACK (panel_application_logout), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
-  /* restart item */
-  item = gtk_image_menu_item_new_with_mnemonic (_("_Restart"));
-  g_signal_connect_swapped (G_OBJECT (item), "activate",
-      G_CALLBACK (panel_window_menu_quit), GUINT_TO_POINTER (1));
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-  gtk_widget_show (item);
-
-  image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("system-log-out", GTK_ICON_SIZE_MENU);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
   gtk_widget_show (image);
-
-  item = gtk_separator_menu_item_new ();
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-  gtk_widget_show (item);
 
   /* help item */
   item = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);

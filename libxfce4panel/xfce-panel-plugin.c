@@ -912,29 +912,15 @@ xfce_panel_plugin_menu_panel_preferences (XfcePanelPlugin *plugin)
 
 
 static void
-xfce_panel_plugin_menu_panel_quit (XfcePanelPlugin *plugin)
+xfce_panel_plugin_menu_panel_logout (XfcePanelPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
   panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
 
-  /* quit the panel/session */
+  /* logout the session */
   xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                          PROVIDER_SIGNAL_PANEL_QUIT);
-}
-
-
-
-static void
-xfce_panel_plugin_menu_panel_restart (XfcePanelPlugin *plugin)
-{
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
-  panel_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
-
-  /* restart the panel */
-  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                          PROVIDER_SIGNAL_PANEL_RESTART);
+                                          PROVIDER_SIGNAL_PANEL_LOGOUT);
 }
 
 
@@ -1106,21 +1092,14 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
           gtk_widget_show (item);
         }
 
-      /* quit item */
-      item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+      /* logout item */
+      item = gtk_image_menu_item_new_with_mnemonic (_("Log _Out"));
       g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_menu_panel_quit), plugin);
+          G_CALLBACK (xfce_panel_plugin_menu_panel_logout), plugin);
       gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
       gtk_widget_show (item);
 
-      /* restart item */
-      item = gtk_image_menu_item_new_with_mnemonic (_("_Restart"));
-      g_signal_connect_swapped (G_OBJECT (item), "activate",
-          G_CALLBACK (xfce_panel_plugin_menu_panel_restart), plugin);
-      gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
-      gtk_widget_show (item);
-
-      image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("system-log-out", GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
       gtk_widget_show (image);
 
