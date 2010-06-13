@@ -109,6 +109,7 @@ static void         panel_window_screen_changed             (GtkWidget        *w
                                                              GdkScreen        *previous_screen);
 static void         panel_window_style_set                  (GtkWidget        *widget,
                                                              GtkStyle         *previous_style);
+static void         panel_window_realize                    (GtkWidget        *widget);
 static StrutsEgde   panel_window_screen_struts_edge         (PanelWindow      *window);
 static void         panel_window_screen_struts_set          (PanelWindow      *window);
 static void         panel_window_screen_force_update        (PanelWindow      *window);
@@ -324,6 +325,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
   gtkwidget_class->style_set = panel_window_style_set;
+  gtkwidget_class->realize = panel_window_realize;
 
   g_object_class_install_property (gobject_class,
                                    PROP_HORIZONTAL,
@@ -1307,6 +1309,20 @@ panel_window_style_set (GtkWidget *widget,
 
 
 
+static void
+panel_window_realize (GtkWidget *widget)
+{
+  PanelWindow *window = PANEL_WINDOW (widget);
+
+  (*GTK_WIDGET_CLASS (panel_window_parent_class)->realize) (widget);
+
+  /* set struts if we snap to an edge */
+  if (window->struts_edge != STRUTS_EDGE_NONE)
+    panel_window_screen_struts_set (window);
+}
+
+
+
 static StrutsEgde
 panel_window_screen_struts_edge (PanelWindow *window)
 {
@@ -1370,9 +1386,11 @@ panel_window_screen_struts_set (PanelWindow *window)
   const gchar   *strut_xy[] = { "y", "y", "x", "x" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (window)->window));
   panel_return_if_fail (cardinal_atom != 0 && net_wm_strut_partial_atom != 0);
   panel_return_if_fail (GDK_IS_SCREEN (window->screen));
+
+  if (!GTK_WIDGET_REALIZED (window))
+    return;
 
   /* set the struts */
   /* note that struts are relative to the screen edge! */
@@ -1425,6 +1443,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   gdk_error_trap_push ();
 
   /* set the wm strut partial */
+  panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (window)->window));
   gdk_property_change (GTK_WIDGET (window)->window,
                        net_wm_strut_partial_atom,
                        cardinal_atom, 32, GDK_PROP_MODE_REPLACE,

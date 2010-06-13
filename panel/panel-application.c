@@ -1250,9 +1250,6 @@ panel_application_new_window (PanelApplication *application,
   /* create panel window */
   window = panel_window_new ();
 
-  /* realize, else some properties do not apply */
-  gtk_widget_realize (window);
-
   /* monitor window destruction */
   g_signal_connect (G_OBJECT (window), "destroy",
       G_CALLBACK (panel_application_window_destroyed), application);
