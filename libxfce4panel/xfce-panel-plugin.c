@@ -60,6 +60,9 @@ typedef gint         (*ProviderToPluginInt)  (XfcePanelPluginProvider *provider)
 
 
 static void          xfce_panel_plugin_provider_init          (XfcePanelPluginProviderInterface *iface);
+static GObject      *xfce_panel_plugin_constructor            (GType                             type,
+                                                               guint                             n_props,
+                                                               GObjectConstructParam            *props);
 static void          xfce_panel_plugin_get_property           (GObject                          *object,
                                                                guint                             prop_id,
                                                                GValue                           *value,
@@ -138,9 +141,10 @@ typedef enum
 {
   PLUGIN_FLAG_DISPOSED       = 1 << 0,
   PLUGIN_FLAG_CONSTRUCTED    = 1 << 1,
-  PLUGIN_FLAG_SHOW_CONFIGURE = 1 << 2,
-  PLUGIN_FLAG_SHOW_ABOUT     = 1 << 3,
-  PLUGIN_FLAG_BLOCK_AUTOHIDE = 1 << 4
+  PLUGIN_FLAG_REALIZED       = 1 << 2,
+  PLUGIN_FLAG_SHOW_CONFIGURE = 1 << 3,
+  PLUGIN_FLAG_SHOW_ABOUT     = 1 << 4,
+  PLUGIN_FLAG_BLOCK_AUTOHIDE = 1 << 5
 }
 PluginFlags;
 
@@ -198,6 +202,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   klass->construct = NULL;
 
   gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->constructor = xfce_panel_plugin_constructor;
   gobject_class->get_property = xfce_panel_plugin_get_property;
   gobject_class->set_property = xfce_panel_plugin_set_property;
   gobject_class->dispose = xfce_panel_plugin_dispose;
@@ -607,6 +612,23 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
 
 
 
+static GObject *
+xfce_panel_plugin_constructor (GType                  type,
+                               guint                  n_props,
+                               GObjectConstructParam *props)
+{
+  GObject *plugin;
+
+  plugin = G_OBJECT_CLASS (xfce_panel_plugin_parent_class)->constructor (type, n_props, props);
+
+  /* all the properties are set and can be used in public */
+  PANEL_SET_FLAG (XFCE_PANEL_PLUGIN (plugin)->priv->flags, PLUGIN_FLAG_CONSTRUCTED);
+
+  return plugin;
+}
+
+
+
 static void
 xfce_panel_plugin_get_property (GObject    *object,
                                 guint       prop_id,
@@ -770,30 +792,23 @@ xfce_panel_plugin_finalize (GObject *object)
 static void
 xfce_panel_plugin_realize (GtkWidget *widget)
 {
-  XfcePanelPluginClass *klass = NULL;
+  XfcePanelPluginClass *klass;
   XfcePanelPlugin      *plugin = XFCE_PANEL_PLUGIN (widget);
 
-  if (!PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_CONSTRUCTED))
-    {
-      /* we use this flag to check plugin developers with gobject
-       * plugins, that they do not use plugin functions in the init
-       * stage. the properties are not set at that point an the
-       * panel is not aware of the signals and stuff */
-      PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_CONSTRUCTED);
-
-      /* wether this is an object plugin */
-      klass = XFCE_PANEL_PLUGIN_GET_CLASS (widget);
-      if (klass->construct == NULL)
-        klass = NULL;
-    }
-
-  /* let gtk to realize the plugin */
+  /* let gtk realize the plugin */
   (*GTK_WIDGET_CLASS (xfce_panel_plugin_parent_class)->realize) (widget);
 
-  /* check if there is a construct function attached to this plugin if
-   * so, run it */
-  if (klass != NULL)
-    (*klass->construct) (XFCE_PANEL_PLUGIN (widget));
+  /* launch the construct function for object oriented plugins, but
+   * do this only once */
+  if (!PANEL_HAS_FLAG (plugin->priv->flags, PLUGIN_FLAG_REALIZED))
+    {
+      PANEL_SET_FLAG (plugin->priv->flags, PLUGIN_FLAG_REALIZED);
+
+      /* whether this is an object plugin */
+      klass = XFCE_PANEL_PLUGIN_GET_CLASS (widget);
+      if (klass->construct != NULL)
+        (*klass->construct) (XFCE_PANEL_PLUGIN (widget));
+    }
 }
 
 
