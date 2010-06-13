@@ -227,6 +227,7 @@ panel_base_window_get_property (GObject    *object,
 {
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (object);
   PanelBaseWindowPrivate *priv = window->priv;
+  GdkColor               *color;
 
   switch (prop_id)
     {
@@ -247,7 +248,11 @@ panel_base_window_get_property (GObject    *object,
       break;
 
     case PROP_BACKGROUND_COLOR:
-      g_value_set_boxed (value, window->background_color);
+      if (window->background_color != NULL)
+        color = window->background_color;
+      else
+        color = &(GTK_WIDGET (window)->style->bg[GTK_STATE_NORMAL]);
+      g_value_set_boxed (value, color);
       break;
 
     case PROP_BACKGROUND_IMAGE:
@@ -512,7 +517,8 @@ panel_base_window_expose_event (GtkWidget      *widget,
   else
     {
       /* get the background color */
-      if (window->background_style == PANEL_BG_STYLE_COLOR)
+      if (window->background_style == PANEL_BG_STYLE_COLOR
+          && window->background_color != NULL)
         color = window->background_color;
       else
         color = &(widget->style->bg[GTK_STATE_NORMAL]);
@@ -880,6 +886,7 @@ panel_util_set_source_rgba (cairo_t        *cr,
                             gdouble         alpha)
 {
   panel_return_if_fail (alpha >= 0.00 && alpha <= 1.00);
+  panel_return_if_fail (color != NULL);
 
   if (G_LIKELY (alpha == 1.00))
     cairo_set_source_rgb (cr, color->red / 65535.00,
