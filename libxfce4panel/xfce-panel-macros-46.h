@@ -549,7 +549,7 @@ enum /*< skip >*/
     gchar           *base_name; \
     \
     value = g_getenv ("PANEL_DEBUG"); \
-    if (value != NULL && *value == '1') \
+    if (G_UNLIKELY (value != NULL)) \
       { \
         _xpp_debug = TRUE; \
         \

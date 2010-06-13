@@ -59,7 +59,7 @@ panel_debug (const gchar *domain,
   if (g_once_init_enter (&level__volatile))
     {
       value = g_getenv ("PANEL_DEBUG");
-      if (G_UNLIKELY (value != NULL && *value == '1'))
+      if (G_UNLIKELY (value != NULL))
         level = DEBUG_LEVEL_ENABLED;
       else
         level = DEBUG_LEVEL_NONE;
