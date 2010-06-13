@@ -373,9 +373,6 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   gchar       *name, *title;
   gboolean     span_monitors_sensitive = FALSE;
 
-  /* remove all the active bindings */
-  panel_preferences_dialog_bindings_unbind (dialog);
-
   /* leave when there is no active panel */
   panel_return_if_fail (G_IS_OBJECT (dialog->active));
   if (dialog->active == NULL)
@@ -689,6 +686,9 @@ panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobo
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       g_signal_handler_disconnect (G_OBJECT (itembar), dialog->items_changed_handler_id);
     }
+
+  /* remove all the active bindings */
+  panel_preferences_dialog_bindings_unbind (dialog);
 
   /* set the selected window */
   nth = gtk_combo_box_get_active (combobox);
