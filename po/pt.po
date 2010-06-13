@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-07 16:06+0000\n"
+"POT-Creation-Date: 2010-06-13 16:06+0000\n"
 "PO-Revision-Date: 2010-03-04 16:59-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
@@ -65,58 +65,58 @@ msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se remover este item do painel, será perdido para sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1040
+#: ../libxfce4panel/xfce-panel-plugin.c:1026
 msgid "_Move"
 msgstr "_Mover"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
+#: ../libxfce4panel/xfce-panel-plugin.c:1068 ../panel/panel-window.c:2098
 msgid "Add _New Items..."
 msgstr "Adicionar _Novos Itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1079 ../panel/panel-window.c:2109
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do Pain_el..."
 
-#. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
-msgid "_Restart"
-msgstr "_Reiniciar"
+#. logout item
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2125
+msgid "Log _Out"
+msgstr "_Sair"
 
-#: ../panel/main.c:76
+#: ../panel/main.c:77
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar diálogo 'Preferências do Painel'"
 
-#: ../panel/main.c:76 ../panel/main.c:77
+#: ../panel/main.c:77 ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-PAINEL"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Add New Items' dialog"
 msgstr "Mostrar diálogo 'Adicionar Novos Itens'"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Save the panel configuration"
 msgstr "Gravar configuração do painel"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Add a new plugin to the panel"
 msgstr "Adicionar um novo plugin ao painel"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "PLUGIN-NAME"
 msgstr "NOME-PLUGIN"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Restart the running panel instance"
 msgstr "Reiniciar o painel em execução"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Quit the running panel instance"
 msgstr "Fechar o painel em execução"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -124,63 +124,66 @@ msgid "Print version information and exit"
 msgstr "Imprimir informação de versão e sair"
 
 #. parse context options
-#: ../panel/main.c:153
+#: ../panel/main.c:154
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTOS...]"
 
-#: ../panel/main.c:160
+#: ../panel/main.c:161
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Digite \"%s --help\" para utilização."
 
-#: ../panel/main.c:179
+#: ../panel/main.c:180
 msgid "The Xfce development team. All rights reserved."
 msgstr "A equipa de desenvolvimento Xfce. Todos os direitos reservados."
 
-#: ../panel/main.c:180
+#: ../panel/main.c:181
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Por favor, reporte erros para <%s>."
 
-#: ../panel/main.c:226
+#: ../panel/main.c:227
 msgid "There is already a running instance"
 msgstr "Já existe uma instância em execução"
 
 #. spawn ourselfs again
-#: ../panel/main.c:266
+#: ../panel/main.c:273
 msgid "Restarting..."
 msgstr "Reiniciando..."
 
-#: ../panel/main.c:281
+#: ../panel/main.c:288
 msgid "Failed to show the preferences dialog"
 msgstr "Falha ao mostrar o diálogo de preferências"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:290
 msgid "Failed to show the add new items dialog"
 msgstr "Falha ao mostrar o diálogo adicionar novos itens"
 
-#: ../panel/main.c:285
+#: ../panel/main.c:292
 msgid "Failed to save the panel configuration"
 msgstr "Falha ao gravar a configuração do painel"
 
-#: ../panel/main.c:287
+#: ../panel/main.c:294
 msgid "Failed to add a plugin to the panel"
 msgstr "Falha ao adicionar plugin ao painel"
 
-#: ../panel/main.c:289
+#: ../panel/main.c:296
 msgid "Failed to restart the panel"
 msgstr "Falha ao reiniciar o painel"
 
-#: ../panel/main.c:291
+#: ../panel/main.c:298
 msgid "Failed to quit the panel"
 msgstr "Falha ao fechar o painel"
 
-#: ../panel/main.c:293
+#: ../panel/main.c:300
 msgid "Failed to send D-Bus message"
 msgstr "Falha ao enviar a mensagem D-BUS"
 
-#. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:300
+#: ../panel/main.c:311
+msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Pretende iniciar o painel Xfce? Se sim, certifique-se que grava a sessão ao sair para que o painel seja iniciado automaticamente na próxima vez que iniciar a sessão."
+
+#: ../panel/main.c:314 ../panel/main.c:328
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância de %s foi encontrada"
@@ -188,6 +191,11 @@ msgstr "Nenhuma instância de %s foi encontrada"
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr "Falha ao lançar a aplicação de migração"
+
+#: ../panel/panel-application.c:1428 ../plugins/actions/actions.c:409
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr "Falha ao executar o comando \"%s\""
 
 #: ../panel/panel-dbus-client.c:226
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
@@ -589,11 +597,6 @@ msgstr "Suspender"
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
 msgstr "Hibernar"
-
-#: ../plugins/actions/actions.c:409
-#, c-format
-msgid "Failed to execute command \"%s\""
-msgstr "Falha ao executar o comando \"%s\""
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1299,20 +1302,20 @@ msgstr "Ocultar todas as janelas e mostrar ambiente de trabalho"
 msgid "Show Desktop"
 msgstr "Mostrar Ambiente de Trabalho"
 
-#: ../plugins/systray/systray.c:282
+#: ../plugins/systray/systray.c:276
 msgid "Unable to start the notification area"
 msgstr "Incapaz de iniciar a área de notificação"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:540
+#: ../plugins/systray/systray.c:569
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Provavelmente, já existe um widget que se apoderou da função da área de notificação. Esta área será inutilizada.  "
 
-#: ../plugins/systray/systray.c:542
+#: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
 msgstr "A área de notificação perdeu a selecção"
 
-#: ../plugins/systray/systray.c:735
+#: ../plugins/systray/systray.c:764
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Tem a certeza que quer limpar a lista de aplicações conhecidas?"
 
@@ -1495,6 +1498,9 @@ msgstr "Menu da Janela"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Trocar entre janelas abertas usando um menu"
+
+#~ msgid "_Restart"
+#~ msgstr "_Reiniciar"
 
 #~ msgid "C_ompositing"
 #~ msgstr "C_omposição"
