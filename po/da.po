@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-06 11:54+0000\n"
-"PO-Revision-Date: 2010-06-06 16:34+0100\n"
+"POT-Creation-Date: 2010-06-14 04:06+0000\n"
+"PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -54,74 +54,74 @@ msgid "Failed to open the documentation browser"
 msgstr "Kunne ikke åbne dokumentationsbrowseren"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:861
+#: ../libxfce4panel/xfce-panel-plugin.c:876
 #: ../panel/panel-preferences-dialog.c:996
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Er du sikker på at du vil fjerne \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:866
+#: ../libxfce4panel/xfce-panel-plugin.c:881
 #: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Hvis du fjerner elementet fra panelet vil det være tabt."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1040
+#: ../libxfce4panel/xfce-panel-plugin.c:1041
 msgid "_Move"
 msgstr "_Flyt"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082
-#: ../panel/panel-window.c:2106
+#: ../libxfce4panel/xfce-panel-plugin.c:1083
+#: ../panel/panel-window.c:2117
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093
-#: ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1094
+#: ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
-#. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117
-#: ../panel/panel-window.c:2140
-msgid "_Restart"
-msgstr "_Genstart"
+#. logout item
+#: ../libxfce4panel/xfce-panel-plugin.c:1111
+#: ../panel/panel-window.c:2144
+msgid "Log _Out"
+msgstr "_Logud"
 
-#: ../panel/main.c:76
+#: ../panel/main.c:77
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Vis dialogen 'Panelindstillinger'"
 
-#: ../panel/main.c:76
 #: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Add New Items' dialog"
 msgstr "Vis dialogen 'Tilføj nye elementer'"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Save the panel configuration"
 msgstr "Gem indstilling til panelet"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Add a new plugin to the panel"
 msgstr "Tilføj et nyt udvidelsesmodul til panelet"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "PLUGIN-NAME"
 msgstr "UDVIDELSESMODULNAVN"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Restart the running panel instance"
 msgstr "Genstart den kørende panelinstans"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Quit the running panel instance"
 msgstr "Afslut den kørende panelinstans"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -129,63 +129,67 @@ msgid "Print version information and exit"
 msgstr "Udskriv versionsinformation og afslut"
 
 #. parse context options
-#: ../panel/main.c:153
+#: ../panel/main.c:154
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTER...]"
 
-#: ../panel/main.c:160
+#: ../panel/main.c:161
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Tast \"%s --help\" for brugervejledning."
 
-#: ../panel/main.c:179
+#: ../panel/main.c:180
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce udviklingsholdet. Alle rettigheder forbeholdes."
 
-#: ../panel/main.c:180
+#: ../panel/main.c:181
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Rapporter venligst fejl til <%s>."
 
-#: ../panel/main.c:226
+#: ../panel/main.c:227
 msgid "There is already a running instance"
 msgstr "Der findes allerede en kørende instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:266
+#: ../panel/main.c:273
 msgid "Restarting..."
 msgstr "Genstarter..."
 
-#: ../panel/main.c:281
+#: ../panel/main.c:288
 msgid "Failed to show the preferences dialog"
 msgstr "Kunne ikke vise dialogen indstillinger"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:290
 msgid "Failed to show the add new items dialog"
 msgstr "Kunne ikke vise dialogen tilføj nye elementer"
 
-#: ../panel/main.c:285
+#: ../panel/main.c:292
 msgid "Failed to save the panel configuration"
 msgstr "Kunne ikke gemme indstillingen til panelet"
 
-#: ../panel/main.c:287
+#: ../panel/main.c:294
 msgid "Failed to add a plugin to the panel"
 msgstr "Kunne ikke føje et udvidelsesmodul til panelet"
 
-#: ../panel/main.c:289
+#: ../panel/main.c:296
 msgid "Failed to restart the panel"
 msgstr "Kunne ikke genstarte panelet"
 
-#: ../panel/main.c:291
+#: ../panel/main.c:298
 msgid "Failed to quit the panel"
 msgstr "Kunne ikke afslutte panelet"
 
-#: ../panel/main.c:293
+#: ../panel/main.c:300
 msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-besked"
 
-#. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:300
+#: ../panel/main.c:311
+msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Ønsker du at starte panelet til Xfce? Hvis du vil det skal du huske at gemme sessionen ved logud. Det vil sikre dig at panelet vil blive startet automatisk næste gang ved logind."
+
+#: ../panel/main.c:314
+#: ../panel/main.c:328
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
@@ -193,6 +197,12 @@ msgstr "Ingen kørende instans af %s blev fundet"
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr "Kunne ikke starte migrationsprogrammet"
+
+#: ../panel/panel-application.c:1425
+#: ../plugins/actions/actions.c:409
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr "Kunne ikke køre kommando \"%s\""
 
 #: ../panel/panel-dbus-client.c:226
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
@@ -267,18 +277,18 @@ msgstr "_Søg:"
 msgid "Enter search phrase here"
 msgstr "Indtasts søgeudtryk her"
 
-#: ../panel/panel-preferences-dialog.c:432
+#: ../panel/panel-preferences-dialog.c:429
 msgid "Automatic"
 msgstr "Automatisk"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:451
+#: ../panel/panel-preferences-dialog.c:448
 #, c-format
 msgid "Screen %d"
 msgstr "Skærm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:477
+#: ../panel/panel-preferences-dialog.c:474
 #, c-format
 msgid "Monitor %d"
 msgstr "Overvåg %d"
@@ -599,11 +609,6 @@ msgstr "Hviletilstand"
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
 msgstr "Dvaletilstand"
-
-#: ../plugins/actions/actions.c:409
-#, c-format
-msgid "Failed to execute command \"%s\""
-msgstr "Kunne ikke køre kommando \"%s\""
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1309,20 +1314,20 @@ msgstr "Skjul alle vinduer og vis skrivebordet"
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
 
-#: ../plugins/systray/systray.c:282
+#: ../plugins/systray/systray.c:276
 msgid "Unable to start the notification area"
 msgstr "Kunne ikke starte beskedsområdet"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:540
+#: ../plugins/systray/systray.c:569
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et beskedsområde. Dette område vil være ubenyttet."
 
-#: ../plugins/systray/systray.c:542
+#: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
 msgstr "Beskedsområdet mistede valget"
 
-#: ../plugins/systray/systray.c:735
+#: ../plugins/systray/systray.c:764
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Er du sikker på at du vil slette listen over kendte programmer?"
 
@@ -1506,6 +1511,8 @@ msgstr "Vinduesliste"
 msgid "Switch between open windows using a menu"
 msgstr "Skift mellem åbne vinduer ved brug afen menu"
 
+#~ msgid "_Restart"
+#~ msgstr "_Genstart"
 #~ msgid "C_ompositing"
 #~ msgstr "Red_igering"
 #~ msgid "Failed to open manual"
