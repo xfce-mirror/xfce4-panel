@@ -1,0 +1,765 @@
+# Croatian translations for  xfce4-panel package.
+# Copyright (C) 2010 The Xfce development team.
+# This file is distributed under the same license as the xfce4-panel package.
+#  Ivica Kolić<ikoli@yahoo.com>, 2010.
+#  Ivica Kolić<ikoli@yahoo.com> <>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-15 16:15+0000\n"
+"PO-Revision-Date: 2010-06-15 20:14+0200\n"
+"Last-Translator:  Ivica Kolić<ikoli@yahoo.com> <>\n"
+"Language-Team: Croatian <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. TRANSLATORS: This warning is printed to the commandline when
+#. an external plugin crashed
+#: ../libxfce4panel/xfce-panel-external-item.c:170
+#, c-format
+msgid "An item was unexpectedly removed: \"%s\"."
+msgstr "Stavka je neočekivano uklonjena: \"%s\"."
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:606
+#, c-format
+msgid "Remove \"%s\"?"
+msgstr "Ukloni \"%s\"?"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:620
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr ""
+
+#. TRANSLATORS: Properties menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:836
+msgid "Properties"
+msgstr "Svojstva"
+
+#. TRANSLATORS: About menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:853
+msgid "About"
+msgstr "O programu"
+
+#. TRANSLATORS: Move menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:865
+msgid "Move"
+msgstr "Pomakni"
+
+#. TRANSLATORS: Remove menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:885
+msgid "Remove"
+msgstr "Ukloni"
+
+#. TRANSLATORS: Add menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
+msgid "Add New Items..."
+msgstr "Dodaj nove stavke"
+
+#. TRANSLATORS: Customize menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
+msgid "Customize Panel..."
+msgstr "Prilagodi ploču"
+
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
+msgid "Quit"
+msgstr "Isključi"
+
+#: ../panel/panel.c:631
+msgid "Restart"
+msgstr "Ponovno pokreni"
+
+#: ../panel/panel.c:646
+msgid "About the Xfce Panel"
+msgstr "O Xfce Panel"
+
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
+msgid "Exit Xfce Panel?"
+msgstr "Izađi iz Xfce Panel?"
+
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
+msgid "Xfce Panel"
+msgstr "Xfce Panel"
+
+#: ../panel/panel-app.c:907
+msgid "You can't remove the last panel. Would you like to exit the program?"
+msgstr "Ne možete ukloniti zadnju ploču.Želite li izaći  iz programa?"
+
+#: ../panel/panel-app.c:934
+#, c-format
+msgid "Remove Panel \"%d\"?"
+msgstr "Ukloni ploču \"%d\"?"
+
+#: ../panel/panel-app.c:938
+msgid "The selected panel and all its items will be removed."
+msgstr "Odabrana ploča i sve njene stavke će biti uklonjene."
+
+#. TRANSLATORS: Used in the credits tab in the panel's about dialog
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
+msgid "Developer"
+msgstr ""
+
+#: ../panel/main.c:60
+msgid "Print version information and exit"
+msgstr "Ispis informacije o verziji i izađi"
+
+#: ../panel/main.c:61
+msgid "Show 'Customize Panel' dialog"
+msgstr "Pokaži \"Prilagodi ploču\" dijalog"
+
+#: ../panel/main.c:62
+msgid "Save the panel configuration"
+msgstr "Spremi konfiguraciju ploče"
+
+#: ../panel/main.c:63
+msgid "Restart the running instance of xfce4-panel"
+msgstr ""
+
+#: ../panel/main.c:64
+msgid "Log out the active session"
+msgstr "Odjavi aktivnu sesiju"
+
+#: ../panel/main.c:65
+msgid "Close all panels and end the program"
+msgstr "Zatvori sve poče i isključi program"
+
+#: ../panel/main.c:66
+msgid "Show 'Add New Items' dialog"
+msgstr "Pokaži \"Dodaj nove stavke\" dijalog"
+
+#. TRANSLATORS: Errors when gtk_init failed, probably the command
+#. executed without xserver running
+#: ../panel/main.c:91
+msgid "Failed to open display"
+msgstr "Neuspjeh u otvaranju zaslona"
+
+#: ../panel/main.c:104
+msgid "The Xfce development team. All rights reserved."
+msgstr "Xfce razvojni tim.Sva prava pridržana."
+
+#. TRANSLATORS: Bug report website, %s points to bugzilla.xfce.org
+#: ../panel/main.c:107
+#, c-format
+msgid "Please report bugs to <%s>."
+msgstr "Prijavite probleme u <%s>."
+
+#: ../panel/main.c:151
+msgid "Xfce4-panel already running"
+msgstr "Xfce4-panel je već pokrenut"
+
+#: ../panel/main.c:162
+msgid "Restarting xfce4-panel..."
+msgstr "Ponovno pokreni xfce4-panel..."
+
+#. TRANSLATORS: Warning when adding an item to the panel failed.
+#: ../panel/panel-dialogs.c:197
+#, c-format
+msgid "Could not open \"%s\" module"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:611
+msgid "Add New Items"
+msgstr "Dodaj nove stavke"
+
+#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. since gtk labels do not update text wrapping on a dialog resize.
+#: ../panel/panel-dialogs.c:642
+msgid ""
+"Drag items from the list to a panel or remove\n"
+"them by dragging them back to the list."
+msgstr ""
+
+#: ../panel/panel-dialogs.c:653
+msgid "_Search:"
+msgstr "_Traži:"
+
+#: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
+msgid "Normal Width"
+msgstr "Normalna dužina"
+
+#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
+msgid "Full Width"
+msgstr "Puna dužina"
+
+#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
+msgid "Normal Height"
+msgstr "Normalna visina"
+
+#: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
+msgid "Full Height"
+msgstr "Puna visina"
+
+#: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
+msgid "Span Monitors"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
+#: ../plugins/launcher/launcher-dialog.c:1555
+msgid "Left"
+msgstr "Lijevo"
+
+#: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
+#: ../plugins/launcher/launcher-dialog.c:1556
+msgid "Right"
+msgstr "Desno"
+
+#: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1557
+msgid "Top"
+msgstr "Vrh"
+
+#: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
+#: ../plugins/launcher/launcher-dialog.c:1558
+msgid "Bottom"
+msgstr "Dno"
+
+#. position
+#: ../panel/panel-dialogs.c:997
+msgid "Position"
+msgstr "Pozicija"
+
+#: ../panel/panel-dialogs.c:1011
+msgid "_Fixed position"
+msgstr "_Fiksirana pozicija"
+
+#: ../panel/panel-dialogs.c:1017
+msgid "Freely _moveable"
+msgstr "Slobodno _kretajuća"
+
+#: ../panel/panel-dialogs.c:1140
+msgid "Auto_hide"
+msgstr "Samo_skrivanje"
+
+#: ../panel/panel-dialogs.c:1158
+msgid "Orientation:"
+msgstr "Orijentacija:"
+
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
+msgid "Horizontal"
+msgstr "Vodoravno"
+
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
+msgid "Vertical"
+msgstr "Okomito"
+
+#: ../panel/panel-dialogs.c:1181
+msgid "Handle:"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:1193
+msgid "At both sides"
+msgstr "Sa obje strane"
+
+#: ../panel/panel-dialogs.c:1273
+msgid "Select Monitor"
+msgstr "Odaberi monitor"
+
+#: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
+#: ../plugins/systray/xfce-tray-dialogs.c:350
+#: ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/windowlist/windowlist-dialog.c:187
+msgid "Appearance"
+msgstr "Izgled"
+
+#: ../panel/panel-dialogs.c:1414
+msgid "_Size (pixels):"
+msgstr "_Veličina (pikseli):"
+
+#: ../panel/panel-dialogs.c:1445
+msgid "_Transparency (%):"
+msgstr "_Prozirnost (%):"
+
+#: ../panel/panel-dialogs.c:1471
+msgid "Make active panel _opaque"
+msgstr "Učini aktivnu ploču _neprozirnom"
+
+#: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
+#: ../panel/panel-dialogs.c:1574
+#, c-format
+msgid "Panel %d"
+msgstr "Ploča %d"
+
+#. TRANSLATORS: Tooltip for the add button in the customize panel dialog
+#: ../panel/panel-dialogs.c:1594
+msgid "Remove the currently selected panel"
+msgstr "Ukloni trenutno odabranu ploču"
+
+#. TRANSLATORS: Tooltip for the add button in the customize panel dialog
+#: ../panel/panel-dialogs.c:1608
+msgid "Add a new panel"
+msgstr "Dodaj novu ploču"
+
+#: ../panel/panel-dialogs.c:1668
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel"
+msgstr "Ploča"
+
+#: ../panel/panel-dialogs.c:1675
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
+msgid "Customize the panel settings"
+msgstr "Prilagodi postavke ploče"
+
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
+msgid "Lock screen"
+msgstr "Zaključaj ekran"
+
+#: ../plugins/actions/actions.c:416
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr ""
+
+#: ../plugins/actions/actions.c:444
+msgid "_Select action type:"
+msgstr "_Odaberi tip radnje:"
+
+#: ../plugins/actions/actions.c:456
+msgid "Quit + Lock screen"
+msgstr "Isključi + zaključaj ekran"
+
+#: ../plugins/actions/actions.c:467
+msgid "_Orientation:"
+msgstr "_Orijentacija:"
+
+#: ../plugins/clock/clock-dialog.c:357
+msgid "Custom"
+msgstr "Prilagođeno"
+
+#: ../plugins/clock/clock-dialog.c:411
+msgid "Display _seconds"
+msgstr "Prikaži _sekunde"
+
+#: ../plugins/clock/clock-dialog.c:420
+msgid "Use 24-_hour clock"
+msgstr "Koristi 24-_satni sat"
+
+#: ../plugins/clock/clock-dialog.c:426
+msgid "Fl_ash time separators"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.c:432
+msgid "Sho_w AM/PM"
+msgstr "Pokaž_i AM/PM"
+
+#: ../plugins/clock/clock-dialog.c:441
+msgid "True _binary clock"
+msgstr "Pravi _binarni sat"
+
+#: ../plugins/clock/clock-dialog.c:483
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Sat"
+
+#: ../plugins/clock/clock-dialog.c:510
+msgid "Analog"
+msgstr "Analogni"
+
+#: ../plugins/clock/clock-dialog.c:511
+msgid "Binary"
+msgstr "Binarni"
+
+#: ../plugins/clock/clock-dialog.c:512
+msgid "Digital"
+msgstr "Digitalni"
+
+#: ../plugins/clock/clock-dialog.c:513
+msgid "LCD"
+msgstr "LCD"
+
+#: ../plugins/clock/clock-dialog.c:518
+#: ../plugins/systray/xfce-tray-dialogs.c:360
+msgid "Show _frame"
+msgstr ""
+
+#. tooltip settings
+#: ../plugins/clock/clock-dialog.c:525
+msgid "Tooltip Format"
+msgstr ""
+
+#. clock settings
+#: ../plugins/clock/clock-dialog.c:552
+msgid "Clock Options"
+msgstr "Opcije sata"
+
+#: ../plugins/iconbox/iconbox.c:906
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+msgid "Icon Box"
+msgstr ""
+
+#: ../plugins/iconbox/iconbox.c:929
+msgid "Only show _minimized applications"
+msgstr "Pokaži samo _smanjene programe"
+
+#: ../plugins/iconbox/iconbox.c:938
+msgid "Show applications of _all workspaces"
+msgstr "Pokaži programe _svih radnih prostora"
+
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
+msgid "Use all available _space"
+msgstr "Koristi sav dostupan _prostor"
+
+#. TRANSLATORS: Name of a newly created launcher
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
+msgid "New Item"
+msgstr "Nova stavka"
+
+#: ../plugins/launcher/launcher-exec.c:564
+#, c-format
+msgid "Failed to launch \"%s\""
+msgstr "Neuspjeh u pokretanju \"%s\""
+
+#: ../plugins/launcher/launcher-dialog.c:606
+msgid "No icon"
+msgstr "Bez ikona"
+
+#: ../plugins/launcher/launcher-dialog.c:628
+msgid "Select an Application"
+msgstr "Odaberite program"
+
+#: ../plugins/launcher/launcher-dialog.c:638
+msgid "All Files"
+msgstr "Sve datoteke"
+
+#: ../plugins/launcher/launcher-dialog.c:643
+msgid "Executable Files"
+msgstr "Izvršne datoteke"
+
+#: ../plugins/launcher/launcher-dialog.c:658
+msgid "Perl Scripts"
+msgstr "Perl Scripte"
+
+#: ../plugins/launcher/launcher-dialog.c:664
+msgid "Python Scripts"
+msgstr "Python Scripte"
+
+#: ../plugins/launcher/launcher-dialog.c:670
+msgid "Ruby Scripts"
+msgstr "Ruby Scripte"
+
+#: ../plugins/launcher/launcher-dialog.c:676
+msgid "Shell Scripts"
+msgstr "Skripte ljuske"
+
+#. TRANSLATORS: Fallback name for a launcher item without a name
+#: ../plugins/launcher/launcher-dialog.c:752
+#: ../plugins/launcher/launcher-dialog.c:841
+#: ../plugins/launcher/launcher-dialog.c:1334
+msgid "Unnamed"
+msgstr "Neimenovano"
+
+#: ../plugins/launcher/launcher-dialog.c:754
+#, c-format
+msgid "Select an Icon for \"%s\""
+msgstr "Odaberi ikonu za \"%s\""
+
+#: ../plugins/launcher/launcher-dialog.c:1119
+msgid "_Name:"
+msgstr "_Ime:"
+
+#: ../plugins/launcher/launcher-dialog.c:1137
+msgid "_Description:"
+msgstr "_Opis:"
+
+#: ../plugins/launcher/launcher-dialog.c:1156
+msgid "_Icon:"
+msgstr "_Ikona:"
+
+#: ../plugins/launcher/launcher-dialog.c:1174
+msgid "Co_mmand:"
+msgstr "Na_redba"
+
+#: ../plugins/launcher/launcher-dialog.c:1201
+msgid "_Working Directory:"
+msgstr "_Radni direktorij"
+
+#: ../plugins/launcher/launcher-dialog.c:1207
+msgid "Select a Working Directory"
+msgstr "Odaberi radni direktorij"
+
+#: ../plugins/launcher/launcher-dialog.c:1228
+msgid "Run in _terminal"
+msgstr "Pokreni u _terminalu"
+
+#: ../plugins/launcher/launcher-dialog.c:1244
+msgid "Use _startup notification"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1518
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Pokretač"
+
+#. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
+#. string as short as possible.
+#: ../plugins/launcher/launcher-dialog.c:1548
+msgid "A_rrow:"
+msgstr "S_trela:"
+
+#: ../plugins/launcher/launcher-dialog.c:1554
+msgid "Default"
+msgstr "Zadano"
+
+#: ../plugins/launcher/launcher-dialog.c:1559
+msgid "Inside Button"
+msgstr ""
+
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Workspace Switcher"
+msgstr "Prebacivač radnih prodtora"
+
+#: ../plugins/pager/pager.c:397
+msgid "Number _of rows:"
+msgstr "Broj _redova"
+
+#: ../plugins/pager/pager.c:401
+msgid "Number _of columns:"
+msgstr "Broj _stupaca"
+
+#: ../plugins/pager/pager.c:418
+msgid "Switch workspaces using the mouse _wheel"
+msgstr ""
+
+#: ../plugins/pager/pager.c:426
+msgid "Show workspace _names"
+msgstr "Pokaži imena _radnih prostora"
+
+#: ../plugins/separator/separator.c:409
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator or Spacing"
+msgstr "razdjelnik ili prostor"
+
+#: ../plugins/separator/separator.c:428
+msgid "Separator Style"
+msgstr "Stil razdjelnika"
+
+#: ../plugins/separator/separator.c:436
+msgid "_Empty space"
+msgstr "_Prazan prostor"
+
+#: ../plugins/separator/separator.c:445
+msgid "E_xpanding empty space"
+msgstr "_Proširivanje praznog prostora"
+
+#: ../plugins/separator/separator.c:454
+msgid "_Line"
+msgstr "_Redak"
+
+#: ../plugins/separator/separator.c:463
+msgid "_Handle"
+msgstr ""
+
+#: ../plugins/separator/separator.c:472
+msgid "_Dots"
+msgstr "_Točke"
+
+#: ../plugins/showdesktop/showdesktop.c:32
+msgid "Restore hidden windows"
+msgstr "Obnovi skrivene prozore"
+
+#: ../plugins/showdesktop/showdesktop.c:33
+msgid "Hide windows and show desktop"
+msgstr "Sakrij prozore i pokaži radnu površinu"
+
+#: ../plugins/systray/xfce-tray-plugin.c:70
+#: ../plugins/systray/xfce-tray-dialogs.c:333
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid "Notification Area"
+msgstr ""
+
+#. TRANSLATORS: This message is shown in an info dialog when the users
+#. add a notification area to a screen with a running systray manager.
+#: ../plugins/systray/xfce-tray-plugin.c:98
+msgid "There is already a notification area running on this screen"
+msgstr ""
+
+#. TRANSLATORS: Bit of a weird text, but this is shown when for some
+#. reason another tray takes the ownership of the tray icons and this
+#. tray becomes unusable.
+#: ../plugins/systray/xfce-tray-plugin.c:221
+msgid "The tray manager lost selection"
+msgstr ""
+
+#: ../plugins/systray/xfce-tray-dialogs.c:281
+msgid "Are you sure you want to clear the list of known applications?"
+msgstr "Jeste li sigurni da želite očistiti listu poznatih programa?"
+
+#: ../plugins/systray/xfce-tray-dialogs.c:371
+msgid "_Number of rows:"
+msgstr "_Broj redova"
+
+#: ../plugins/systray/xfce-tray-dialogs.c:385
+msgid "Hidden Applications"
+msgstr "Skriveni programi"
+
+#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. show up normally since this is already checked when the plugin is added.
+#: ../plugins/systray/xfce-tray-manager.c:433
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:232
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+msgid "Task List"
+msgstr "Lista zadataka"
+
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+msgid "Fi_xed length (pixels):"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialogs.c:217
+msgid "Use _flat buttons"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialogs.c:223
+msgid "Show _handle"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialogs.c:235
+msgid "Show tasks from _all workspaces"
+msgstr "Pokaži zadatke sa _svih radnih prostora"
+
+#: ../plugins/tasklist/tasklist-dialogs.c:244
+msgid "Never group tasks"
+msgstr "Nikada ne grupiraj zadatke"
+
+#: ../plugins/tasklist/tasklist-dialogs.c:245
+msgid "Automatically group tasks"
+msgstr "Automatski grupiraj zadatke"
+
+#: ../plugins/tasklist/tasklist-dialogs.c:246
+msgid "Always group tasks"
+msgstr "Uvijek grupiraj zadatke"
+
+#: ../plugins/windowlist/windowlist.c:272
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr "Jeste li sigurni da želite ukloniti radni prostor %d?"
+
+#: ../plugins/windowlist/windowlist.c:273
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr "Jeste li sigurni da želite ukloniti radni prostor '%s'?"
+
+#. TRANSLATORS: Fallback name in the windowlist when the workspace has no name
+#: ../plugins/windowlist/windowlist.c:485
+#, c-format
+msgid "Workspace %d"
+msgstr "Radni prostor %d"
+
+#: ../plugins/windowlist/windowlist.c:600
+#: ../plugins/windowlist/windowlist.c:606
+msgid "Add workspace"
+msgstr "Dodaj radni prostor"
+
+#: ../plugins/windowlist/windowlist.c:625
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Ukloni radni prostor %d"
+
+#: ../plugins/windowlist/windowlist.c:626
+#, c-format
+msgid "Remove Workspace '%s'"
+msgstr "Ukloni radni prostor '%s'"
+
+#: ../plugins/windowlist/windowlist-dialog.c:121
+#: ../plugins/windowlist/windowlist-dialog.c:208
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:2
+msgid "Window List"
+msgstr "Lista prozora"
+
+#: ../plugins/windowlist/windowlist-dialog.c:148
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:155
+msgid "Urgency Notification"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:162
+msgid "_Disabled"
+msgstr "_Onemogućeno"
+
+#: ../plugins/windowlist/windowlist-dialog.c:171
+msgid "For _other workspaces"
+msgstr "Za _druge radne prostore"
+
+#: ../plugins/windowlist/windowlist-dialog.c:180
+msgid "For _all workspaces"
+msgstr "Za _sve radne prostore"
+
+#: ../plugins/windowlist/windowlist-dialog.c:193
+msgid "_Icon button"
+msgstr "_Dugme ikone"
+
+#: ../plugins/windowlist/windowlist-dialog.c:200
+msgid "A_rrow button"
+msgstr "D_ugme strelice"
+
+#: ../plugins/windowlist/windowlist-dialog.c:217
+msgid "Show _windows from all workspaces"
+msgstr "Pokaži _prozore sa svih radnih prostora"
+
+#: ../plugins/windowlist/windowlist-dialog.c:226
+msgid "Show a_pplication icons"
+msgstr "Pokaži I_kone programa"
+
+#: ../plugins/windowlist/windowlist-dialog.c:235
+msgid "Show wor_kspace actions"
+msgstr "Pokaži rad_ne radnog prostora"
+
+#: ../plugins/actions/actions.desktop.in.in.h:2
+msgid "Log out or lock the screen"
+msgstr "Odjava ili zaključavanje ekrana"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "Koliko je sati?"
+
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+msgid "Show icons of all running applications"
+msgstr "Pokaži ikone svih pokrenutih programa"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr ""
+
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Switch between virtual desktops"
+msgstr ""
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr "Dodaj prostor ili redak između stavki ploče"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Hide all windows and show the desktop"
+msgstr "Sakrij sve prozore i pokaži radnu površinu"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Show Desktop"
+msgstr "Pokaži radnu površinu"
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Area where notification icons appear"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Switch between open windows using buttons"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:1
+msgid "Switch between open windows using a menu"
+msgstr ""
+
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
+msgid "Panel Manager"
+msgstr "Upravitelj pločom"
