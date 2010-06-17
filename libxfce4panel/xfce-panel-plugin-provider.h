@@ -92,14 +92,37 @@ typedef enum /*< skip >*/
 }
 XfcePanelPluginProviderSignal;
 
+/* properties to the plugin; with a value or as an action */
+typedef enum /*< skip >*/
+{
+  PROVIDER_PROP_TYPE_SET_SIZE,                /* gint */
+  PROVIDER_PROP_TYPE_SET_ORIENTATION,         /* GtkOrientation (as gint) */
+  PROVIDER_PROP_TYPE_SET_SCREEN_POSITION,     /* XfceScreenPosition (as gint) */
+  PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA,    /* gdouble */
+  PROVIDER_PROP_TYPE_SET_LOCKED,              /* gboolean */
+  PROVIDER_PROP_TYPE_SET_SENSITIVE,           /* gboolean */
+  PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string, wrapper only */
+  PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,    /* string, wrapper only */
+  PROVIDER_PROP_TYPE_ACTION_REMOVED,          /* none */
+  PROVIDER_PROP_TYPE_ACTION_SAVE,             /* none */
+  PROVIDER_PROP_TYPE_ACTION_QUIT,             /* none */
+  PROVIDER_PROP_TYPE_ACTION_QUIT_FOR_RESTART, /* none */
+  PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET, /* none */
+  PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE,   /* none */
+  PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT        /* none */
+}
+XfcePanelPluginProviderPropType;
+
 /* plugin exit values */
 enum
 {
   PLUGIN_EXIT_SUCCESS = 0,
   PLUGIN_EXIT_FAILURE,
+  PLUGIN_EXIT_ARGUMENTS_FAILED,
   PLUGIN_EXIT_PREINIT_FAILED,
   PLUGIN_EXIT_CHECK_FAILED,
-  PLUGIN_EXIT_NO_PROVIDER
+  PLUGIN_EXIT_NO_PROVIDER,
+  PLUGIN_EXIT_SUCCESS_AND_RESTART
 };
 
 /* argument handling in plugin and wrapper */

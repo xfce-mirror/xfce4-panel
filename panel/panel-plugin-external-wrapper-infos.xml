@@ -4,18 +4,16 @@
   -->
   <interface name="org.xfce.Panel.Wrapper">
     <annotation name="org.freedesktop.DBus.GLib.CSymbol"
-                value="panel_plugin_external_dbus" />
+                value="panel_plugin_external_wrapper_dbus" />
     <annotation name="org.freedesktop.DBus.GLib.ClientCSymbol"
                 value="wrapper_dbus" />
 
     <!--
-      s : property : Name of the property to set on the wrapper. This is used
-                     for both panel values (no reply required) and plugin
-                     event (require a reply from the plugin).
-      v : value    : GValue with the value for the property.
+      i : unsigned integer : enum from XfcePanelPluginProviderPropType.
+      v : value            : GValue with the value for the property.
     -->
     <signal name="Set">
-      <arg name="values" type="a(sv)" />
+      <arg name="values" type="a(uv)" />
     </signal>
 
     <!--

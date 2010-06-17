@@ -52,6 +52,7 @@
 
 static GQuark   plug_quark = 0;
 static gboolean gproxy_destroyed = FALSE;
+static gint     retval = PLUGIN_EXIT_FAILURE;
 
 
 
@@ -60,21 +61,21 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
                     const GPtrArray         *array,
                     XfcePanelPluginProvider *provider)
 {
-  WrapperPlug *plug;
-  guint        i;
-  GValue      *value;
-  gchar       *property;
-  GValue       msg = { 0, };
+  WrapperPlug                    *plug;
+  guint                           i;
+  GValue                         *value;
+  XfcePanelPluginProviderPropType type;
+  GValue                          msg = { 0, };
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  g_value_init (&msg, PANEL_TYPE_DBUS_SET_MESSAGE);
+  g_value_init (&msg, PANEL_TYPE_DBUS_SET_PROPERTY);
 
   for (i = 0; i < array->len; i++)
     {
       g_value_set_static_boxed (&msg, g_ptr_array_index (array, i));
       if (!dbus_g_type_struct_get (&msg,
-                                   DBUS_SET_PROPERTY, &property,
+                                   DBUS_SET_TYPE, &type,
                                    DBUS_SET_VALUE, &value,
                                    G_MAXUINT))
         {
@@ -82,43 +83,71 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
           continue;
         }
 
-      if (strcmp (property, SIGNAL_SET_SIZE) == 0)
-        xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
-      else if (strcmp (property, SIGNAL_SET_ORIENTATION) == 0)
-        xfce_panel_plugin_provider_set_orientation (provider, g_value_get_uint (value));
-      else if (strcmp (property, SIGNAL_SET_SCREEN_POSITION) == 0)
-        xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_uint (value));
-      else if (strcmp (property, SIGNAL_SET_LOCKED) == 0)
-        xfce_panel_plugin_provider_set_locked (provider, g_value_get_boolean (value));
-      else if (strcmp (property, SIGNAL_SAVE) == 0)
-        xfce_panel_plugin_provider_save (provider);
-      else if (strcmp (property, SIGNAL_SHOW_CONFIGURE) == 0)
-        xfce_panel_plugin_provider_show_configure (provider);
-      else if (strcmp (property, SIGNAL_SHOW_ABOUT) == 0)
-        xfce_panel_plugin_provider_show_about (provider);
-      else if (strcmp (property, SIGNAL_REMOVED) == 0)
-        xfce_panel_plugin_provider_removed (provider);
-      else if (strcmp (property, SIGNAL_WRAPPER_SET_SENSITIVE) == 0)
-        gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
-      else if (strcmp (property, SIGNAL_WRAPPER_QUIT) == 0)
-        gtk_main_quit ();
-      else
+      switch (type)
         {
+        case PROVIDER_PROP_TYPE_SET_SIZE:
+          xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_ORIENTATION:
+          xfce_panel_plugin_provider_set_orientation (provider, g_value_get_int (value));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_SCREEN_POSITION:
+          xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_int (value));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_LOCKED:
+          xfce_panel_plugin_provider_set_locked (provider, g_value_get_boolean (value));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_SENSITIVE:
+          gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA:
+        case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR:
+        case PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE:
+        case PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET:
           plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
 
-          if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_ALPHA) == 0)
+          if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA)
             wrapper_plug_set_background_alpha (plug, g_value_get_double (value));
-          else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_COLOR) == 0)
+          else if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR)
             wrapper_plug_set_background_color (plug, g_value_get_string (value));
-          else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_IMAGE) == 0)
+          else if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE)
             wrapper_plug_set_background_image (plug, g_value_get_string (value));
-          else if (strcmp (property, SIGNAL_WRAPPER_BACKGROUND_UNSET) == 0)
+          else /* PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET */
             wrapper_plug_set_background_color (plug, NULL);
-          else
-            panel_assert_not_reached ();
+          break;
+
+        case PROVIDER_PROP_TYPE_ACTION_REMOVED:
+          xfce_panel_plugin_provider_removed (provider);
+          break;
+
+        case PROVIDER_PROP_TYPE_ACTION_SAVE:
+          xfce_panel_plugin_provider_save (provider);
+          break;
+
+        case PROVIDER_PROP_TYPE_ACTION_QUIT_FOR_RESTART:
+          retval = PLUGIN_EXIT_SUCCESS_AND_RESTART;
+        case PROVIDER_PROP_TYPE_ACTION_QUIT:
+          gtk_main_quit ();
+          break;
+
+        case PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE:
+          xfce_panel_plugin_provider_show_configure (provider);
+          break;
+
+        case PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT:
+          xfce_panel_plugin_provider_show_about (provider);
+          break;
+
+        default:
+          panel_assert_not_reached ();
+          break;
         }
 
-      g_free (property);
       g_value_unset (value);
       g_free (value);
     }
@@ -168,7 +197,7 @@ wrapper_marshal_VOID__STRING_BOXED_UINT (GClosure     *closure,
   register GCClosure *cc = (GCClosure*) closure;
   register gpointer data1, data2;
 
-  g_return_if_fail (n_param_values == 4);
+  panel_return_if_fail (n_param_values == 4);
 
   if (G_CCLOSURE_SWAP_DATA (closure))
     {
@@ -180,6 +209,7 @@ wrapper_marshal_VOID__STRING_BOXED_UINT (GClosure     *closure,
       data1 = g_value_peek_pointer (param_values + 0);
       data2 = closure->data;
     }
+
   callback = (GMarshalFunc_VOID__STRING_BOXED_UINT) (marshal_data ? marshal_data : cc->callback);
 
   callback (data1,
@@ -222,7 +252,6 @@ main (gint argc, gchar **argv)
   gchar                    process_name[16];
 #endif
   GModule                 *library = NULL;
-  gint                     retval = PLUGIN_EXIT_FAILURE;
   XfcePanelPluginPreInit   preinit_func;
   DBusGConnection         *dbus_gconnection;
   DBusGProxy              *dbus_gproxy = NULL;
@@ -252,7 +281,7 @@ main (gint argc, gchar **argv)
   if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS))
     {
       g_critical ("Not enough arguments are passed to the wrapper");
-      return PLUGIN_EXIT_FAILURE;
+      return PLUGIN_EXIT_ARGUMENTS_FAILED;
     }
 
   /* put all arguments in understandable strings */
@@ -355,7 +384,6 @@ main (gint argc, gchar **argv)
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
 
-      /* enter the main loop */
       gtk_main ();
 
       /* disconnect signals */
@@ -371,8 +399,8 @@ main (gint argc, gchar **argv)
       if (plug != NULL)
         gtk_widget_destroy (GTK_WIDGET (plug));
 
-      /* everything when fine */
-      retval = PLUGIN_EXIT_SUCCESS;
+      if (retval != PLUGIN_EXIT_SUCCESS_AND_RESTART)
+        retval = PLUGIN_EXIT_SUCCESS;
     }
   else
     {
@@ -380,7 +408,6 @@ main (gint argc, gchar **argv)
     }
 
 leave:
-  /* release the proxy */
   if (G_LIKELY (dbus_gproxy != NULL))
     {
       if (G_LIKELY (gproxy_destroy_id != 0 && !gproxy_destroyed))
@@ -389,21 +416,16 @@ leave:
       g_object_unref (G_OBJECT (dbus_gproxy));
     }
 
-  /* close the type module */
   if (G_LIKELY (module != NULL))
     g_object_unref (G_OBJECT (module));
 
-  /* close plugin module */
   if (G_LIKELY (library != NULL))
     g_module_close (library);
 
   if (G_UNLIKELY (error != NULL))
     {
-      /* print the critical error */
       g_critical ("Wrapper %s-%d: %s.", name,
                   unique_id, error->message);
-
-      /* cleanup */
       g_error_free (error);
     }
 

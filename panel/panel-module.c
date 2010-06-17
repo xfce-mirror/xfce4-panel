@@ -31,7 +31,7 @@
 
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
-#include <panel/panel-plugin-external.h>
+#include <panel/panel-plugin-external-wrapper.h>
 #include <panel/panel-plugin-external-46.h>
 
 #define PANEL_PLUGINS_LIB_DIR LIBDIR G_DIR_SEPARATOR_S "panel-plugins"
@@ -461,7 +461,7 @@ panel_module_new_plugin (PanelModule  *module,
        * preinit_func which is not supported for internal plugins */
 
     case WRAPPER:
-      plugin = panel_plugin_external_new (module, unique_id, arguments);
+      plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);
       break;
 
     case EXTERNAL_46:

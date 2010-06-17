@@ -30,9 +30,6 @@ gint     panel_dialogs_choose_panel   (PanelApplication *application);
 
 gboolean panel_dialogs_kiosk_warning  (void);
 
-gboolean panel_dialogs_restart_plugin (GtkWindow        *parent,
-                                       const gchar      *plugin_name);
-
 G_END_DECLS
 
 #endif /* !__PANEL_DIALOGS_H__ */

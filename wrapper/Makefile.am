@@ -44,7 +44,7 @@ wrapper_DEPENDENCIES = \
 
 if MAINTAINER_MODE
 
-wrapper-dbus-client-infos.h: $(top_builddir)/panel/panel-plugin-external-infos.xml Makefile
+wrapper-dbus-client-infos.h: $(top_builddir)/panel/panel-plugin-external-wrapper-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
 
 #wrapper-marshal.h: $(top_builddir)/panel/panel-marshal.list Makefile

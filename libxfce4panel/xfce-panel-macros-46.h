@@ -38,22 +38,6 @@ G_BEGIN_DECLS
  * Macros to register old external panel plugins that are compiled as executables.
  **/
 
-enum /*< skip >*/
-{
-  PANEL_CLIENT_EVENT_REMOVED,
-  PANEL_CLIENT_EVENT_SAVE,
-  PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA,
-  PANEL_CLIENT_EVENT_SET_LOCKED,
-  PANEL_CLIENT_EVENT_SET_ORIENTATION,
-  PANEL_CLIENT_EVENT_SET_SCREEN_POSITION,
-  PANEL_CLIENT_EVENT_SET_SENSITIVE,
-  PANEL_CLIENT_EVENT_SET_SIZE,
-  PANEL_CLIENT_EVENT_SHOW_ABOUT,
-  PANEL_CLIENT_EVENT_SHOW_CONFIGURE,
-  PANEL_CLIENT_EVENT_QUIT,
-  PANEL_CLIENT_EVENT_SET_BG_COLOR,
-  PANEL_CLIENT_EVENT_UNSET_BG
-};
 
 /*< private >*/
 #define _PANEL_CLIENT_EVENT_ATOM "XFCE4_PANEL_PLUGIN_46"
@@ -284,6 +268,7 @@ enum /*< skip >*/
   static const gchar     *_xpp_bg_image = NULL; \
   static cairo_pattern_t *_xpp_bg_image_cache = NULL; \
   static gboolean         _xpp_debug = FALSE; \
+  static gint             _xpp_retval = PLUGIN_EXIT_FAILURE; \
   \
   static void \
   _xpp_quit_main_loop (void) \
@@ -302,9 +287,9 @@ enum /*< skip >*/
                      GdkEventClient  *event, \
                      XfcePanelPlugin *xpp) \
   { \
-    XfcePanelPluginProvider *provider = XFCE_PANEL_PLUGIN_PROVIDER (xpp); \
-    gint                     value; \
-    gint                     message; \
+    XfcePanelPluginProvider          *provider = XFCE_PANEL_PLUGIN_PROVIDER (xpp); \
+    gint                              value; \
+    XfcePanelPluginProviderPropType   type; \
     \
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (xpp), TRUE); \
     g_return_val_if_fail (GTK_IS_PLUG (plug), TRUE); \
@@ -313,58 +298,60 @@ enum /*< skip >*/
     \
     if (event->message_type == _xpp_atom) \
       { \
-        message = event->data.s[0]; \
+        type = event->data.s[0]; \
         value = event->data.s[1]; \
         \
-        switch (message) \
+        switch (type) \
           { \
-          case PANEL_CLIENT_EVENT_REMOVED: \
+          case PROVIDER_PROP_TYPE_ACTION_REMOVED: \
             xfce_panel_plugin_provider_removed (provider); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SAVE: \
+          case PROVIDER_PROP_TYPE_ACTION_SAVE: \
             xfce_panel_plugin_provider_save (provider); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SET_BACKGROUND_ALPHA: \
+          case PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA: \
             _xpp_alpha = value / 100.00; \
             if (_xpp_composited) \
               gtk_widget_queue_draw (plug); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SET_LOCKED: \
+          case PROVIDER_PROP_TYPE_SET_LOCKED: \
             xfce_panel_plugin_provider_set_locked (provider, !!value); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SET_ORIENTATION: \
+          case PROVIDER_PROP_TYPE_SET_ORIENTATION: \
             xfce_panel_plugin_provider_set_orientation (provider, value); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SET_SCREEN_POSITION: \
+          case PROVIDER_PROP_TYPE_SET_SCREEN_POSITION: \
             xfce_panel_plugin_provider_set_screen_position (provider, value); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SET_SENSITIVE: \
+          case PROVIDER_PROP_TYPE_SET_SENSITIVE: \
             gtk_widget_set_sensitive (plug, !!value); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SET_SIZE: \
+          case PROVIDER_PROP_TYPE_SET_SIZE: \
             xfce_panel_plugin_provider_set_size (provider, value); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SHOW_ABOUT: \
+          case PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT: \
             xfce_panel_plugin_provider_show_about (provider); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SHOW_CONFIGURE: \
+          case PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE: \
             xfce_panel_plugin_provider_show_configure (provider); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_QUIT: \
+          case PROVIDER_PROP_TYPE_ACTION_QUIT_FOR_RESTART: \
+            _xpp_retval = PLUGIN_EXIT_SUCCESS_AND_RESTART; \
+          case PROVIDER_PROP_TYPE_ACTION_QUIT: \
             _xpp_quit_main_loop (); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_SET_BG_COLOR: \
+          case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR: \
             _xpp_bg_color.red = event->data.s[1]; \
             _xpp_bg_color.green = event->data.s[2]; \
             _xpp_bg_color.blue = event->data.s[3]; \
@@ -372,13 +359,13 @@ enum /*< skip >*/
             gtk_widget_queue_draw (plug); \
             break; \
             \
-          case PANEL_CLIENT_EVENT_UNSET_BG: \
+          case PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET: \
             _xpp_bg_style = 0; \
             gtk_widget_queue_draw (plug); \
             break; \
             \
           default: \
-            g_warning ("Received unknow client event %d", message); \
+            g_warning ("Received unknow client event %u", type); \
             break; \
           } \
         \
@@ -562,7 +549,7 @@ enum /*< skip >*/
     if (G_UNLIKELY (argc < PLUGIN_ARGV_ARGUMENTS)) \
       { \
         g_critical ("Not enough arguments are passed to the plugin"); \
-        return PLUGIN_EXIT_FAILURE; \
+        return PLUGIN_EXIT_ARGUMENTS_FAILED; \
       } \
     \
     if (G_UNLIKELY (preinit_func != NULL)) \
@@ -630,13 +617,16 @@ enum /*< skip >*/
     \
     gtk_main (); \
     \
+    if (_xpp_retval != PLUGIN_EXIT_SUCCESS_AND_RESTART) \
+      _xpp_retval = PLUGIN_EXIT_SUCCESS; \
+    \
     if (_xpp_bg_image_cache != NULL) \
       cairo_pattern_destroy (_xpp_bg_image_cache); \
     \
     if (GTK_IS_WIDGET (plug)) \
       gtk_widget_destroy (plug); \
     \
-    return PLUGIN_EXIT_SUCCESS; \
+    return _xpp_retval; \
   }
 
 

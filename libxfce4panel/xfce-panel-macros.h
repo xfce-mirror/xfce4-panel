@@ -61,8 +61,6 @@ G_BEGIN_DECLS
  * Macros to register panel plugin types and custom types inside panel plugins.
  **/
 
-
-
 /**
  * XfcePanelTypeModule:
  *

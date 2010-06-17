@@ -42,12 +42,6 @@ GtkWidget *panel_plugin_external_46_new                  (PanelModule           
                                                           gint                    unique_id,
                                                           gchar                 **arguments) G_GNUC_MALLOC;
 
-void       panel_plugin_external_46_set_background_alpha (PanelPluginExternal46  *external,
-                                                          gdouble                 alpha);
-
-void       panel_plugin_external_46_set_background_color (PanelPluginExternal46  *external,
-                                                          const GdkColor         *color);
-
 void       panel_plugin_external_46_set_background_image (PanelPluginExternal46  *external,
                                                           const gchar            *image);
 

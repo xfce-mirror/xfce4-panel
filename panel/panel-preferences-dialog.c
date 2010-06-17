@@ -38,39 +38,50 @@
 #include <panel/panel-item-dialog.h>
 #include <panel/panel-preferences-dialog.h>
 #include <panel/panel-preferences-dialog-ui.h>
+#include <panel/panel-plugin-external.h>
 
 #define PREFERENCES_HELP_URL "http://www.xfce.org"
 
 
 
-static void panel_preferences_dialog_finalize (GObject *object);
-static void panel_preferences_dialog_response (GtkWidget *window, gint response_id, PanelPreferencesDialog *dialog);
-
-
-static void panel_preferences_dialog_bindings_unbind (PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog, const gchar *property1, const gchar *property2);
-static void panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog);
-
-static void panel_preferences_dialog_output_changed (GtkComboBox *combobox, PanelPreferencesDialog *dialog);
-
-static void panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_bg_image_file_set (GtkFileChooserButton *button, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_bg_image_notified (PanelPreferencesDialog *dialog);
-
-static void panel_preferences_dialog_panel_combobox_changed (GtkComboBox *combobox, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_panel_add (GtkWidget *widget, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_panel_remove (GtkWidget *widget, PanelPreferencesDialog *dialog);
-
-
-static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected (PanelPreferencesDialog *dialog, GtkTreeIter *return_iter);
-static void panel_preferences_dialog_item_store_rebuild (GtkWidget *itembar, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_item_move (GtkWidget *button, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_item_remove (GtkWidget *button, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_item_add (GtkWidget *button, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_item_properties (GtkWidget *button, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_item_about (GtkWidget *button, PanelPreferencesDialog *dialog);
-static void panel_preferences_dialog_item_selection_changed (GtkTreeSelection *selection, PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_finalize               (GObject                *object);
+static void                     panel_preferences_dialog_response               (GtkWidget              *window, 
+                                                                                 gint                    response_id, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_bindings_unbind        (PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_bindings_add           (PanelPreferencesDialog *dialog, 
+                                                                                 const gchar            *property1, 
+                                                                                 const gchar            *property2);
+static void                     panel_preferences_dialog_bindings_update        (PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_output_changed         (GtkComboBox            *combobox, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_bg_style_changed       (PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_bg_image_file_set      (GtkFileChooserButton   *button, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_bg_image_notified      (PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_panel_add              (GtkWidget              *widget, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_panel_remove           (GtkWidget              *widget, 
+                                                                                 PanelPreferencesDialog *dialog);
+static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected      (PanelPreferencesDialog *dialog, 
+                                                                                 GtkTreeIter            *return_iter);
+static void                     panel_preferences_dialog_item_store_rebuild     (GtkWidget              *itembar, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_item_move              (GtkWidget              *button, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_item_remove            (GtkWidget              *button, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_item_add               (GtkWidget              *button, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_item_properties        (GtkWidget              *button, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_item_about             (GtkWidget              *button, 
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selection, 
+                                                                                 PanelPreferencesDialog *dialog);
 
 
 
@@ -228,7 +239,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, renderer, TRUE);
-  gtk_tree_view_column_set_attributes (column, renderer, "text",
+  gtk_tree_view_column_set_attributes (column, renderer, "markup",
                                        ITEM_COLUMN_DISPLAY_NAME, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
@@ -863,7 +874,7 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
   GList       *items, *li;
   guint        i;
   PanelModule *module;
-  gchar       *tooltip;
+  gchar       *tooltip, *display_name;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
@@ -875,24 +886,46 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
   items = gtk_container_get_children (GTK_CONTAINER (itembar));
   for (li = items, i = 0; li != NULL; li = li->next, i++)
     {
-      /* I18N: tooltip in preferences dialog when hovering an item in the list */
-      tooltip = g_strdup_printf (_("Internal name: %s-%d"),
-                                 xfce_panel_plugin_provider_get_name (li->data),
-                                 xfce_panel_plugin_provider_get_unique_id (li->data));
-
       /* get the panel module from the plugin */
       module = panel_module_get_from_plugin_provider (li->data);
+
+      if (PANEL_IS_PLUGIN_EXTERNAL (li->data))
+        {
+          /* I18N: append (external) in the preferences dialog if the plugin
+           * runs external */
+          display_name = g_strdup_printf (_("%s <span color=\"grey\" size=\"small\">(external)</span>"),
+                                          panel_module_get_display_name (module));
+
+          /* I18N: tooltip in preferences dialog when hovering an item in the list
+           * for external plugins */
+          tooltip = g_strdup_printf (_("Internal name: %s-%d\n"
+                                       "PID: %d"),
+                                     xfce_panel_plugin_provider_get_name (li->data),
+                                     xfce_panel_plugin_provider_get_unique_id (li->data),
+                                     panel_plugin_external_get_pid (PANEL_PLUGIN_EXTERNAL (li->data)));
+        }
+      else
+        {
+          display_name = g_strdup (panel_module_get_display_name (module));
+
+          /* I18N: tooltip in preferences dialog when hovering an item in the list
+           * for internal plugins */
+          tooltip = g_strdup_printf (_("Internal name: %s-%d"),
+                                     xfce_panel_plugin_provider_get_name (li->data),
+                                     xfce_panel_plugin_provider_get_unique_id (li->data));
+        }
 
       gtk_list_store_insert_with_values (dialog->store, NULL, i,
                                          ITEM_COLUMN_ICON_NAME,
                                          panel_module_get_icon_name (module),
                                          ITEM_COLUMN_DISPLAY_NAME,
-                                         panel_module_get_display_name (module),
+                                         display_name,
                                          ITEM_COLUMN_TOOLTIP,
                                          tooltip,
                                          ITEM_COLUMN_PROVIDER, li->data, -1);
 
       g_free (tooltip);
+      g_free (display_name);
     }
 
   g_list_free (items);

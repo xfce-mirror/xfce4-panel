@@ -17,7 +17,7 @@ xfce4_panel_built_sources = \
 	panel-dbus-client-infos.h \
 	panel-marshal.c \
 	panel-marshal.h \
-	panel-plugin-external-infos.h \
+	panel-plugin-external-wrapper-infos.h \
 	panel-preferences-dialog-ui.h
 
 xfce4_panel_SOURCES = \
@@ -43,6 +43,8 @@ xfce4_panel_SOURCES = \
 	panel-module-factory.h \
 	panel-plugin-external.c \
 	panel-plugin-external.h \
+	panel-plugin-external-wrapper.c \
+	panel-plugin-external-wrapper.h \
 	panel-plugin-external-46.c \
 	panel-plugin-external-46.h \
 	panel-preferences-dialog.c \
@@ -97,8 +99,8 @@ panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 panel-dbus-client-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
 
-panel-plugin-external-infos.h: $(srcdir)/panel-plugin-external-infos.xml Makefile
-	$(AM_V_GEN) dbus-binding-tool --prefix=panel_plugin_external --mode=glib-server $< > $@
+panel-plugin-external-wrapper-infos.h: $(srcdir)/panel-plugin-external-wrapper-infos.xml Makefile
+	$(AM_V_GEN) dbus-binding-tool --prefix=panel_plugin_external_wrapper --mode=glib-server $< > $@
 
 panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.glade Makefile
 	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
@@ -120,7 +122,7 @@ endif
 
 EXTRA_DIST = \
 	panel-dbus-service-infos.xml \
-	panel-plugin-external-infos.xml \
+	panel-plugin-external-wrapper-infos.xml \
 	panel-preferences-dialog.glade \
 	panel-marshal.list
 

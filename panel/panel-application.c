@@ -624,7 +624,7 @@ panel_application_plugin_insert (PanelApplication  *application,
    * realizing for 4.6 panel plugins */
   if (PANEL_BASE_WINDOW (window)->background_style == PANEL_BG_STYLE_IMAGE
       && PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
-    panel_plugin_external_46_set_background_image (PANEL_PLUGIN_EXTERNAL_46 (provider),
+    panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
         PANEL_BASE_WINDOW (window)->background_image);
 
   /* add the item to the panel */

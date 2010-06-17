@@ -2344,9 +2344,6 @@ panel_window_set_povider_info (PanelWindow *window,
       if (PANEL_IS_PLUGIN_EXTERNAL (provider))
         panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
             base_window->background_alpha);
-      else if (PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
-        panel_plugin_external_46_set_background_alpha (PANEL_PLUGIN_EXTERNAL_46 (provider),
-            base_window->background_alpha);
     }
 
   if (base_window->background_style == PANEL_BG_STYLE_COLOR)
@@ -2354,17 +2351,11 @@ panel_window_set_povider_info (PanelWindow *window,
       if (PANEL_IS_PLUGIN_EXTERNAL (provider))
         panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
             base_window->background_color);
-      else if (PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
-        panel_plugin_external_46_set_background_color (PANEL_PLUGIN_EXTERNAL_46 (provider),
-            base_window->background_color);
     }
   else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
     {
       if (PANEL_IS_PLUGIN_EXTERNAL (provider))
         panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
-            base_window->background_image);
-      else if (PANEL_IS_PLUGIN_EXTERNAL_46 (provider))
-        panel_plugin_external_46_set_background_image (PANEL_PLUGIN_EXTERNAL_46 (provider),
             base_window->background_image);
     }
 

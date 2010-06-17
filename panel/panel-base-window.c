@@ -782,9 +782,6 @@ panel_base_window_set_plugin_background_alpha (GtkWidget *widget,
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (widget),
         PANEL_BASE_WINDOW (user_data)->background_alpha);
-  else if (PANEL_IS_PLUGIN_EXTERNAL_46 (widget))
-    panel_plugin_external_46_set_background_alpha (PANEL_PLUGIN_EXTERNAL_46 (widget),
-        PANEL_BASE_WINDOW (user_data)->background_alpha);
 }
 
 
@@ -804,8 +801,6 @@ panel_base_window_set_plugin_background_color (GtkWidget *widget,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (widget), color);
-  else if (PANEL_IS_PLUGIN_EXTERNAL_46 (widget))
-    panel_plugin_external_46_set_background_color (PANEL_PLUGIN_EXTERNAL_46 (widget), color);
 }
 
 
@@ -819,9 +814,6 @@ panel_base_window_set_plugin_background_image (GtkWidget *widget,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (widget))
     panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (widget),
-        PANEL_BASE_WINDOW (user_data)->background_image);
-  else if (PANEL_IS_PLUGIN_EXTERNAL_46 (widget))
-    panel_plugin_external_46_set_background_image (PANEL_PLUGIN_EXTERNAL_46 (widget),
         PANEL_BASE_WINDOW (user_data)->background_image);
 }
 

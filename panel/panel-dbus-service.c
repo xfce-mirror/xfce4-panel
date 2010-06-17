@@ -301,6 +301,7 @@ panel_dbus_service_plugin_event_result (XfcePanelPluginProvider *prev_provider,
               lnext = li->next;
               provider = li->data;
               event->plugins = g_slist_delete_link (event->plugins, li);
+              new_handle = 0;
 
               /* maybe the plugin has been destroyed */
               if (!XFCE_PANEL_PLUGIN_PROVIDER (provider))
