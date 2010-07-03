@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 22:27+0200\n"
-"PO-Revision-Date: 2010-03-10 19:33+0100\n"
+"POT-Creation-Date: 2010-07-03 04:06+0000\n"
+"PO-Revision-Date: 2010-07-03 11:07+0100\n"
 "Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
 "Language-Team: Italian Translation Team <xfce-it-translators@googlegroups."
 "com>\n"
@@ -69,70 +69,70 @@ msgid "Failed to open the documentation browser"
 msgstr "Impossibile aprire il browser della documentazione"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:861
+#: ../libxfce4panel/xfce-panel-plugin.c:876
 #: ../panel/panel-preferences-dialog.c:996
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Rimuovere davvero \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:866
+#: ../libxfce4panel/xfce-panel-plugin.c:881
 #: ../panel/panel-preferences-dialog.c:999
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se si rimuove l'elemento dal pannello, verrà perso per sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1040
+#: ../libxfce4panel/xfce-panel-plugin.c:1041
 msgid "_Move"
 msgstr "_Sposta"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
+#: ../libxfce4panel/xfce-panel-plugin.c:1083 ../panel/panel-window.c:2117
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello..."
 
-#. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
-msgid "_Restart"
-msgstr "_Riavvia"
+#. logout item
+#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-window.c:2144
+msgid "Log _Out"
+msgstr "_Esci"
 
-#: ../panel/main.c:75
+#: ../panel/main.c:77
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostra la finestra di personalizzazione del pannello"
 
-#: ../panel/main.c:75 ../panel/main.c:76
+#: ../panel/main.c:77 ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "NUMERO-PANNELLO"
 
-#: ../panel/main.c:76
+#: ../panel/main.c:78
 msgid "Show the 'Add New Items' dialog"
 msgstr "Mostra la finestra per aggiungere nuovi elementi"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:79
 msgid "Save the panel configuration"
 msgstr "Salva la configurazione del pannello"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:80
 msgid "Add a new plugin to the panel"
 msgstr "Aggiunge un nuovo plugin al pannello"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:80
 msgid "PLUGIN-NAME"
 msgstr "NOME-PLUGIN"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:81
 msgid "Restart the running panel instance"
 msgstr "Riavvia l'istanza del pannello in esecuzione"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:82
 msgid "Quit the running panel instance"
 msgstr "Esce dall'istanza del pannello in esecuzione"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:83
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -140,63 +140,72 @@ msgid "Print version information and exit"
 msgstr "Stampa le informazioni di versione ed esce"
 
 #. parse context options
-#: ../panel/main.c:149
+#: ../panel/main.c:154
 msgid "[ARGUMENTS...]"
 msgstr "[ARGOMENTI...]"
 
-#: ../panel/main.c:156
+#: ../panel/main.c:161
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Digitare \"%s --help\" per le modalità d'uso"
 
-#: ../panel/main.c:175
+#: ../panel/main.c:180
 msgid "The Xfce development team. All rights reserved."
 msgstr "Il team di sviluppo di Xfce. Tutti i diritti riservati."
 
-#: ../panel/main.c:176
+#: ../panel/main.c:181
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Segnalare i problemi a <%s>."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:227
 msgid "There is already a running instance"
 msgstr "Un'altra istanza è già in esecuzione"
 
 #. spawn ourselfs again
-#: ../panel/main.c:262
+#: ../panel/main.c:273
 msgid "Restarting..."
 msgstr "Riavvio in corso..."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:288
 msgid "Failed to show the preferences dialog"
 msgstr "Impossibile mostrare la finestra delle preferenze"
 
-#: ../panel/main.c:279
+#: ../panel/main.c:290
 msgid "Failed to show the add new items dialog"
 msgstr "Impossibile mostrare la finestra per aggiungere nuovi elementi"
 
-#: ../panel/main.c:281
+#: ../panel/main.c:292
 msgid "Failed to save the panel configuration"
 msgstr "Impossibile salvare la configurazione del pannello"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:294
 msgid "Failed to add a plugin to the panel"
 msgstr "Impossibile aggiungere il plugin al pannello"
 
-#: ../panel/main.c:285
+#: ../panel/main.c:296
 msgid "Failed to restart the panel"
 msgstr "Impossibile riavviare il pannello"
 
-#: ../panel/main.c:287
+#: ../panel/main.c:298
 msgid "Failed to quit the panel"
 msgstr "Impossibile uscire dal pannello"
 
-#: ../panel/main.c:289
+#: ../panel/main.c:300
 msgid "Failed to send D-Bus message"
 msgstr "Impossibile inviare il messaggio D-Bus"
 
-#. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:296
+#: ../panel/main.c:311
+msgid ""
+"Do you want to start the Xfce panel? If you do, make sure you save the "
+"session on logout, so the panel is automatically started the next time you "
+"login."
+msgstr ""
+"Avviare il pannello di Xfce? se sì, salvare la sessione all'uscita, in modo "
+"che il pannello venga avviatao automaticamente al prossimo riavvio della "
+"sessione."
+
+#: ../panel/main.c:314 ../panel/main.c:328
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
@@ -204,6 +213,11 @@ msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr "Avvio dell'applicazione di migrazione non riuscito"
+
+#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#, c-format
+msgid "Failed to execute command \"%s\""
+msgstr "Impossibile eseguire il comando \"%s\""
 
 #: ../panel/panel-dbus-client.c:226
 msgid ""
@@ -226,7 +240,7 @@ msgstr "Il pannello dell'ambiente Xfce"
 
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
-msgstr "Cristian Marchi <cri.penta@gmail.com>,  2010."
+msgstr "Alex Dupre <ale@FreeBSD.org>, 2004\nLuca Marrocco <buildup@libero.it>, 2005\nCristian Marchi <cri.penta@gmail.com>, 2010"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -273,35 +287,35 @@ msgstr ""
 "Premendo «Esegui» il pannello tenterà di riavviare il plugin altrimenti verrà "
 "rimosso definitivamente dal pannello."
 
-#: ../panel/panel-item-dialog.c:171
+#: ../panel/panel-item-dialog.c:175
 msgid "Add New Items"
 msgstr "Aggiunge nuovi elementi"
 
-#: ../panel/panel-item-dialog.c:173
+#: ../panel/panel-item-dialog.c:177
 msgid "Add new plugins to the panel"
 msgstr "Aggiunge un nuovo plugin al pannello"
 
-#: ../panel/panel-item-dialog.c:195
+#: ../panel/panel-item-dialog.c:200
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "C_erca:"
 
-#: ../panel/panel-item-dialog.c:203
+#: ../panel/panel-item-dialog.c:208
 msgid "Enter search phrase here"
 msgstr "Inserire qui la frase da cercare"
 
-#: ../panel/panel-preferences-dialog.c:432
+#: ../panel/panel-preferences-dialog.c:429
 msgid "Automatic"
 msgstr "Automatico"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:451
+#: ../panel/panel-preferences-dialog.c:448
 #, c-format
 msgid "Screen %d"
 msgstr "Schermo %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:477
+#: ../panel/panel-preferences-dialog.c:474
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
@@ -324,9 +338,8 @@ msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "A_utomatically increase the length"
-msgstr "Mostra e _nascondi automaticamente il pannello"
+msgstr "Aumenta la lunghezza a_utomaticamente"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -337,7 +350,6 @@ msgid "Add new item to this panel"
 msgstr "Aggiunge un nuovo elemento a questo pannello"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
 msgid ""
 "Alpha value of the panel background, between 0 (transparent) and 100 "
 "(opaque)."
@@ -345,9 +357,8 @@ msgstr ""
 "Imposta l'opacità dello sfondo del pannello: 0 (trasparente), 100 (opaco)"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Aspetto"
+msgstr "_Aspetto"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -358,13 +369,12 @@ msgid "Background"
 msgstr "Sfondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
 msgid "Background image"
-msgstr "Sfondo"
+msgstr "Immagine di sfondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "C_olore"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -408,9 +418,10 @@ msgstr "Sposta alla riga inferiore l'elemento selezionato "
 msgid "Move currently selected item up by one row"
 msgstr "Sposta alla riga superiore l'elemento selezionato "
 
+# Si riferisce allo stile di visualizzazione dello sfondo
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr ""
+msgstr "Nessuno (utilizza quello del sistema)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
@@ -418,7 +429,7 @@ msgstr "O_utput:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Selezionare un colore per il pannello"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Remove currently selected item"
@@ -429,18 +440,16 @@ msgid "Remove the currently selected panel"
 msgstr "Rimuove il pannello selezionato"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "Selezionare un'icona"
+msgstr "Selezionare un'immagine di sfondo"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-#, fuzzy
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
-"Selezionare questa opzione per nascondere le maniglie del pannello e "
-"bloccarne la posizione"
+"Selezionare questa opzione per aumentare automaticamente la lunghezza del "
+"pannello se i plugin richiedono più spazio"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
@@ -468,7 +477,7 @@ msgstr "Mostra le informazioni dell'elemento selezionato"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Solid color"
-msgstr ""
+msgstr "Tinta unita"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Span mo_nitors"
@@ -504,9 +513,8 @@ msgid "_Enter:"
 msgstr "_A fuoco:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-#, fuzzy
 msgid "_File:"
-msgstr "_Stile:"
+msgstr "_File:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
@@ -532,41 +540,39 @@ msgstr "_Stile:"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "_Nuovo gioco"
 
 #: ../panel/panel-tic-tac-toe.c:134
-#, fuzzy
 msgid "_Level:"
-msgstr "_Non a fuoco:"
+msgstr "_Livello:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "Principiante"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Intermedio"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Esperto"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Veterano"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Benvenuti al primo avvio del pannello di Xfce"
 
 #: ../migrate/main.c:80
-#, fuzzy
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
-"Poiché il pannello adotta un nuovo sistema per l'immagazzinamento delle "
-"impostazioni, è necessario caricare una configurazione iniziale pulita."
+"Poiché il pannello è migrato verso un nuovo sistema per l'immagazzinamento "
+"delle impostazioni, è necessario caricare una configurazione iniziale pulita."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -659,11 +665,6 @@ msgstr "Sospende"
 msgid "Hibernate"
 msgstr "Iberna"
 
-#: ../plugins/actions/actions.c:409
-#, c-format
-msgid "Failed to execute command \"%s\""
-msgstr "Impossibile eseguire il comando \"%s\""
-
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
 msgstr ""
@@ -748,7 +749,7 @@ msgid "Select An Icon"
 msgstr "Selezionare un'icona"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:703
-#: ../plugins/launcher/launcher.c:2095
+#: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossibile eseguire il comando \"%s\"."
@@ -846,7 +847,6 @@ msgid "F_uzziness:"
 msgstr "Im_precisione:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-#, fuzzy
 msgid "Fl_ash time separators"
 msgstr "Separatori dell'ora _lampeggianti"
 
@@ -1206,11 +1206,11 @@ msgstr "Cartella _principale:"
 msgid "_File Pattern:"
 msgstr "Schema del _file:"
 
-#: ../plugins/launcher/launcher.c:1441
+#: ../plugins/launcher/launcher.c:1448
 msgid "Unnamed Item"
 msgstr "Elemento senza nome"
 
-#: ../plugins/launcher/launcher.c:1581
+#: ../plugins/launcher/launcher.c:1588
 msgid "No items"
 msgstr "Nessun elemento"
 
@@ -1393,20 +1393,24 @@ msgstr "Nasconde tutte le finestre e mostra la scrivania"
 msgid "Show Desktop"
 msgstr "Mostra scrivania"
 
+#: ../plugins/systray/systray.c:276
+msgid "Unable to start the notification area"
+msgstr "Impossibile avviare l'area di notifica"
+
 #. create fake error and show it
-#: ../plugins/systray/systray.c:551
+#: ../plugins/systray/systray.c:569
 msgid ""
 "Most likely another widget took over the function of a notification area. "
-"This plugin will close."
+"This area will be unused."
 msgstr ""
 "Probabilmente un altro widget ha preso il controllo dell'area di notifica. "
-"Questo plugin verrà chiuso."
+"Quest'area non verrà utilizzata."
 
-#: ../plugins/systray/systray.c:554
+#: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
 msgstr "L'area di notifica ha perso la selezione"
 
-#: ../plugins/systray/systray.c:747
+#: ../plugins/systray/systray.c:764
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ripulire davvero la lista delle applicazioni conosciute?"
 
@@ -1427,7 +1431,7 @@ msgstr "Area di notifica"
 msgid "_Number of rows:"
 msgstr "N_umero di righe:"
 
-#: ../plugins/systray/systray-manager.c:401
+#: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Impossibile acquisire il gestore della selezione per lo schermo %d"
@@ -1508,23 +1512,23 @@ msgstr "Ra_ggruppa finestre:"
 msgid "Window title"
 msgstr "Titolo della finestra"
 
-#: ../plugins/tasklist/tasklist-widget.c:2617
+#: ../plugins/tasklist/tasklist-widget.c:2620
 msgid "Mi_nimize All"
 msgstr "Mi_nimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2626
+#: ../plugins/tasklist/tasklist-widget.c:2629
 msgid "Un_minimize All"
 msgstr "_Deminimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2632
+#: ../plugins/tasklist/tasklist-widget.c:2635
 msgid "Ma_ximize All"
-msgstr "Ma_ssimizza tutte"
+msgstr "_Massimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2641
+#: ../plugins/tasklist/tasklist-widget.c:2644
 msgid "_Unmaximize All"
 msgstr "D_emassimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2651
+#: ../plugins/tasklist/tasklist-widget.c:2654
 msgid "_Close All"
 msgstr "_Chiudi tutte"
 
@@ -1591,6 +1595,9 @@ msgstr "Menu delle finestre"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Scorre tra le finestre aperte utilizzando un menu"
+
+#~ msgid "_Restart"
+#~ msgstr "_Riavvia"
 
 #~ msgid "C_ompositing"
 #~ msgstr "_Decorazione"
