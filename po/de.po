@@ -5,12 +5,12 @@
 # Fabian Nowak <timystery@arcor.de>, 2005-2009.
 # Enrico Tröger <enrico@xfce.org>, 2008.
 # Simon Schneider <simon@schneiderimtal.de>, 2009
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-27 15:41+0100\n"
+"POT-Creation-Date: 2010-07-04 22:15+0000\n"
 "PO-Revision-Date: 2009-04-05 13:44+0200\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -28,14 +28,11 @@ msgstr "Ein Element wurde unerwartet entfernt: »%s«."
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:606
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "Entferne »%s«?"
+msgstr "»%s« entfernen?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
-msgstr ""
-"Das Element wird aus der Leiste entfernt und seine Einstellungen gehen "
-"verloren."
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Das Element wird aus der Leiste entfernt und seine Einstellungen gehen verloren."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:836
@@ -60,12 +57,12 @@ msgstr "Entfernen"
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
 msgid "Add New Items..."
-msgstr "Neue Elemente hinzufügen..."
+msgstr "Neue Elemente hinzufügen…"
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
 msgid "Customize Panel..."
-msgstr "Leiste einrichten..."
+msgstr "Leiste einrichten…"
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:283
 #: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
@@ -90,9 +87,7 @@ msgstr "Leiste"
 
 #: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"Die letzte Leiste kann nicht entfernt werden. Soll das Programm beendet "
-"werden?"
+msgstr "Die letzte Leiste kann nicht entfernt werden. Soll das Programm beendet werden?"
 
 #: ../panel/panel-app.c:934
 #, c-format
@@ -126,7 +121,7 @@ msgstr "Laufende Instanz von xfce4-panel neustarten"
 
 #: ../panel/main.c:64
 msgid "Log out the active session"
-msgstr "Abmelden von der aktuellen Sitzung"
+msgstr "Von der aktuellen Sitzung abmelden"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
@@ -134,7 +129,7 @@ msgstr "Alle Leisten schließen und beenden"
 
 #: ../panel/main.c:66
 msgid "Show 'Add New Items' dialog"
-msgstr "Dialog »Neue Objekte hinzufügen« zeigen"
+msgstr "Dialog »Neue Objekte hinzufügen« anzeigen"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -150,15 +145,15 @@ msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
 #: ../panel/main.c:107
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Bitte senden Sie Fehlermeldungen an <%s>"
+msgstr "Bitte senden Sie Fehlermeldungen an <%s>."
 
 #: ../panel/main.c:151
 msgid "Xfce4-panel already running"
-msgstr "xfce4-panel läuft bereits"
+msgstr "xfce4-panel wird bereits ausgeführt"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
-msgstr "Starte xfce4-panel neu..."
+msgstr "Starte xfce4-panel neu…"
 
 #. TRANSLATORS: Warning when adding an item to the panel failed.
 #: ../panel/panel-dialogs.c:197
@@ -170,15 +165,14 @@ msgstr "Konnte Modul »%s« nicht öffnen"
 msgid "Add New Items"
 msgstr "Neue Elemente hinzufügen"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items
+#. dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
-msgstr ""
-"Einträge von der Liste auf die Leiste ziehen oder von der Leiste zurück in "
-"die Liste."
+msgstr "Einträge von der Liste auf die Leiste ziehen oder von der Leiste zurück in die Liste."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
@@ -235,11 +229,11 @@ msgstr "_Feste Position"
 
 #: ../panel/panel-dialogs.c:1017
 msgid "Freely _moveable"
-msgstr "Frei _bewegbar"
+msgstr "Frei _beweglich"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
-msgstr "Automatisch aus_blenden"
+msgstr "Automatisch _ausblenden"
 
 #: ../panel/panel-dialogs.c:1158
 msgid "Orientation:"
@@ -278,7 +272,7 @@ msgstr "_Größe (in Pixel):"
 
 #: ../panel/panel-dialogs.c:1445
 msgid "_Transparency (%):"
-msgstr "_Durchsichtigkeit (%):"
+msgstr "_Transparenz (%):"
 
 #: ../panel/panel-dialogs.c:1471
 msgid "Make active panel _opaque"
@@ -385,7 +379,7 @@ msgstr "Ra_hmen anzeigen"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:525
 msgid "Tooltip Format"
-msgstr "Format der Kuirzhilfen"
+msgstr "Format der Kurzhilfen"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:552
@@ -403,7 +397,7 @@ msgstr "Nur _minimierte Anwendungen anzeigen"
 
 #: ../plugins/iconbox/iconbox.c:938
 msgid "Show applications of _all workspaces"
-msgstr "Anwendungen aus allen Arbeitsflächen _anzeigen"
+msgstr "Anwendungen aus _allen Arbeitsflächen anzeigen"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 msgid "Use all available _space"
@@ -581,8 +575,7 @@ msgstr "Fläche für Benachrichtigungen"
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
 msgid "There is already a notification area running on this screen"
-msgstr ""
-"Es ist bereits eine Benachrichtigungsfläche auf diesem Bildschirm vorhanden"
+msgstr "Es ist bereits eine Fläche für Benachrichtigungen auf diesem Bildschirm vorhanden"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
@@ -593,8 +586,7 @@ msgstr "Die Systemleiste hat die Verbindung unerwartet verloren"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:281
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
-"Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
+msgstr "Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:371
 msgid "_Number of rows:"
@@ -604,7 +596,8 @@ msgstr "_Anzahl der Zeilen:"
 msgid "Hidden Applications"
 msgstr "Versteckte Anwendungen"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This
+#. won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -684,12 +677,8 @@ msgid "Window List"
 msgstr "Fensterliste"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"Die <i>Dringlichkeitsbenachrichtigung<i> lässt den Knopf blinken, wenn eine "
-"Anwendung Aufmerksamkeit benötigt."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "Die <i>Dringlichkeitsbenachrichtigung<i> lässt den Knopf blinken, wenn eine Anwendung Aufmerksamkeit benötigt."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -750,8 +739,7 @@ msgstr "Zwischen virtuellen Schreibtischen umschalten"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr ""
-"Fügt zusätzlichen Abstand oder eine Linie zwischen Leistenelementen ein"
+msgstr "Fügt zusätzlichen Abstand oder eine Linie zwischen Leistenelementen ein"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Hide all windows and show the desktop"
@@ -783,7 +771,6 @@ msgstr "Leistenverwaltung"
 #~ msgid "Unknown"
 #~ msgstr "Unbekannt"
 
-#, fuzzy
 #~ msgid "Copyright (c) 2004-2009"
 #~ msgstr "Copyright (C) 2004-2007"
 
@@ -889,7 +876,6 @@ msgstr "Leistenverwaltung"
 #~ msgid "Failed to launch 'xfce4-panel -c'"
 #~ msgstr "Konnte »xfce4-panel -c« nicht ausführen"
 
-#, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"
 #~ msgstr "Konnte Systemleiste nicht registrieren: %s"
 
@@ -1008,12 +994,8 @@ msgstr "Leistenverwaltung"
 #~ msgid "Other..."
 #~ msgstr "Anderes...."
 
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "Der erste Eintrag der Liste wird in der Leiste angezeigt. Zusätzliche "
-#~ "Einträge erscheinen in einem Menü."
+#~ msgid "The first item in the list is shown on the panel. Additional items will appear in a menu."
+#~ msgstr "Der erste Eintrag der Liste wird in der Leiste angezeigt. Zusätzliche Einträge erscheinen in einem Menü."
 
 #~ msgid ""
 #~ "Failed to run 0launch:\n"
@@ -1024,17 +1006,10 @@ msgstr "Leistenverwaltung"
 #~ "Konnte 0launch nicht ausführe:\n"
 #~ "%s\n"
 #~ "\n"
-#~ "Für Hilfe zur Verwendung von »Zero Install«, besuchen sie http://0install."
-#~ "net"
+#~ "Für Hilfe zur Verwendung von »Zero Install«, besuchen sie http://0install.net"
 
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "Die Oberfläche »Zero Install« wurde beendet, aber der Starterdialog ist in "
-#~ "der Zwischenzeit verschwunden. Füge den Starter daher nicht hinzu (aber "
-#~ "sämtliche gespeicherte Dateien bleiben erhalten)."
+#~ msgid "The Zero Install GUI has finished, but the launcher dialog has disappeared in the meantime. Not adding launcher (but any files downloaded have not been lost)."
+#~ msgstr "Die Oberfläche »Zero Install« wurde beendet, aber der Starterdialog ist in der Zwischenzeit verschwunden. Füge den Starter daher nicht hinzu (aber sämtliche gespeicherte Dateien bleiben erhalten)."
 
 #~ msgid "Select file"
 #~ msgstr "Datei auswählen"
