@@ -262,7 +262,6 @@ G_BEGIN_DECLS
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct_func, preinit_func, check_func) \
   static GdkAtom          _xpp_atom = GDK_NONE; \
   static gdouble          _xpp_alpha = 1.00; \
-  static gboolean         _xpp_composited = FALSE; \
   static guint            _xpp_bg_style = 0; \
   static GdkColor         _xpp_bg_color = { 0, }; \
   static const gchar     *_xpp_bg_image = NULL; \
@@ -313,7 +312,7 @@ G_BEGIN_DECLS
             \
           case PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA: \
             _xpp_alpha = value / 100.00; \
-            if (_xpp_composited) \
+            if (gtk_widget_is_composited (plug)) \
               gtk_widget_queue_draw (plug); \
             break; \
             \
@@ -489,7 +488,7 @@ G_BEGIN_DECLS
       } \
     else \
       { \
-        real_alpha = _xpp_composited ? _xpp_alpha : 1.00; \
+        real_alpha = gtk_widget_is_composited (plug) ? _xpp_alpha : 1.00; \
         \
         if (_xpp_bg_style == 1 || real_alpha < 1.00) \
           { \
@@ -580,14 +579,10 @@ G_BEGIN_DECLS
     gtk_widget_set_app_paintable (plug, TRUE); \
     \
     screen = gtk_widget_get_screen (plug); \
-    _xpp_composited = gtk_widget_is_composited (plug); \
-    if (_xpp_composited) \
-      colormap = gdk_screen_get_rgba_colormap (screen); \
+    \
+    colormap = gdk_screen_get_rgba_colormap (screen); \
     if (colormap == NULL) \
-      { \
-        colormap = gdk_screen_get_rgb_colormap (screen); \
-        _xpp_composited = FALSE; \
-      } \
+      colormap = gdk_screen_get_rgb_colormap (screen); \
     if (colormap != NULL) \
       gtk_widget_set_colormap (plug, colormap); \
     \

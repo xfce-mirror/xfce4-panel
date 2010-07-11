@@ -58,8 +58,6 @@ static gboolean panel_base_window_enter_notify_event          (GtkWidget        
 static gboolean panel_base_window_leave_notify_event          (GtkWidget            *widget,
                                                                GdkEventCrossing     *event);
 static void     panel_base_window_composited_changed          (GtkWidget            *widget);
-static void     panel_base_window_update_provider_info        (GtkWidget            *widget,
-                                                               gpointer              user_data);
 static gboolean panel_base_window_active_timeout              (gpointer              user_data);
 static void     panel_base_window_active_timeout_destroyed    (gpointer              user_data);
 static void     panel_base_window_set_plugin_data             (PanelBaseWindow      *window,
@@ -651,22 +649,47 @@ panel_base_window_composited_changed (GtkWidget *widget)
   GdkColormap     *colormap = NULL;
   gboolean         was_composited = window->is_composited;
   gboolean         was_visible;
-  GtkWidget       *itembar;
   GdkScreen       *screen;
+  gboolean         colormap_changed;
+  gboolean         colormap_rgba = FALSE;
 
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (widget));
 
-  /* check if the window is visible, if so, hide and unrealize it */
+  /* get the widget screen */
+  screen = gtk_window_get_screen (GTK_WINDOW (widget));
+  panel_return_if_fail (GDK_IS_SCREEN (screen));
+
+  /* get the rgba colormap */
+  colormap = gdk_screen_get_rgba_colormap (screen);
+  if (G_UNLIKELY (colormap == NULL))
+    {
+      window->is_composited = FALSE;
+      colormap = gdk_screen_get_rgb_colormap (screen);
+    }
+  else
+    {
+      colormap_rgba = TRUE;
+      window->is_composited = gtk_widget_is_composited (widget);
+      gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->leave_opacity);
+    }
+
+  panel_return_if_fail (GDK_IS_COLORMAP (colormap));
+  colormap_changed = gtk_widget_get_colormap (widget) != colormap;
+
+  panel_debug (PANEL_DEBUG_DOMAIN_BASE_WINDOW,
+               "set new colormap; composited=%s, rgba=%s, visible=%s",
+               PANEL_DEBUG_BOOL (gtk_widget_is_composited (widget)),
+               PANEL_DEBUG_BOOL (colormap_rgba),
+               PANEL_DEBUG_BOOL (GTK_WIDGET_VISIBLE (widget)));
+
   was_visible = GTK_WIDGET_VISIBLE (widget);
   if (was_visible)
     {
       gtk_widget_hide (widget);
-      gtk_widget_unrealize (widget);
-    }
 
-  panel_debug (PANEL_DEBUG_DOMAIN_BASE_WINDOW, "set compositing=%s, was visible=%s",
-               PANEL_DEBUG_BOOL (gtk_widget_is_composited (widget)),
-               PANEL_DEBUG_BOOL (was_visible));
+      if (colormap_changed)
+        gtk_widget_unrealize (widget);
+    }
 
   /* clear cairo image cache */
   if (window->priv->bg_image_cache != NULL)
@@ -675,66 +698,20 @@ panel_base_window_composited_changed (GtkWidget *widget)
       window->priv->bg_image_cache = NULL;
     }
 
-  /* get the widget screen */
-  screen = gtk_window_get_screen (GTK_WINDOW (widget));
-  panel_return_if_fail (GDK_IS_SCREEN (screen));
-
-  /* get the rgba colormap if compositing is supported */
-  if (gtk_widget_is_composited (widget))
-    colormap = gdk_screen_get_rgba_colormap (screen);
-
-  /* fallback to the old colormap */
-  if (colormap == NULL)
-    {
-      window->is_composited = FALSE;
-      colormap = gdk_screen_get_rgb_colormap (screen);
-    }
-  else
-    {
-      window->is_composited = TRUE;
-      gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->leave_opacity);
-    }
-
-  /* set the new colormap */
-  panel_return_if_fail (GDK_IS_COLORMAP (colormap));
-  gtk_widget_set_colormap (widget, colormap);
+  if (colormap_changed)
+    gtk_widget_set_colormap (widget, colormap);
 
   if (was_visible)
     {
-      /* we destroyed all external plugin during unrealize, so queue
-       * new provider information for the panel window (not the
-       * autohide window) */
-      if (PANEL_IS_WINDOW (widget))
-        {
-          itembar = gtk_bin_get_child (GTK_BIN (window));
-          panel_return_if_fail (GTK_IS_CONTAINER (itembar));
-          if (G_LIKELY (itembar != NULL))
-            gtk_container_foreach (GTK_CONTAINER (itembar),
-                panel_base_window_update_provider_info, window);
-        }
-
       /* restore the window */
-      gtk_widget_realize (widget);
+      if (colormap_changed)
+        gtk_widget_realize (widget);
       gtk_widget_show (widget);
     }
 
   /* emit the property if it changed */
   if (window->is_composited != was_composited)
     g_object_notify (G_OBJECT (widget), "composited");
-}
-
-
-
-static void
-panel_base_window_update_provider_info (GtkWidget *widget,
-                                        gpointer   user_data)
-{
-  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
-  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
-
-  if (PANEL_IS_PLUGIN_EXTERNAL (widget)
-      || PANEL_IS_PLUGIN_EXTERNAL_46 (widget))
-    panel_window_set_povider_info (user_data, widget);
 }
 
 

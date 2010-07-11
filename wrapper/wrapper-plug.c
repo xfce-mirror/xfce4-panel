@@ -45,9 +45,6 @@ struct _WrapperPlug
 {
   GtkPlug __parent__;
 
-  /* whether the wrapper has a rgba colormap */
-  guint            is_composited : 1;
-
   /* background information */
   gdouble          background_alpha;
   GdkColor        *background_color;
@@ -106,16 +103,11 @@ wrapper_plug_init (WrapperPlug *plug)
 
   /* set the colormap */
   screen = gtk_window_get_screen (GTK_WINDOW (plug));
-  plug->is_composited = gtk_widget_is_composited (GTK_WIDGET (plug));
+  
 
-  if (plug->is_composited)
-    colormap = gdk_screen_get_rgba_colormap (screen);
+  colormap = gdk_screen_get_rgba_colormap (screen);
   if (colormap == NULL)
-    {
-      colormap = gdk_screen_get_rgb_colormap (screen);
-      plug->is_composited = FALSE;
-    }
-
+    colormap = gdk_screen_get_rgb_colormap (screen);
   if (colormap != NULL)
     gtk_widget_set_colormap (GTK_WIDGET (plug), colormap);
 }
@@ -188,7 +180,7 @@ wrapper_plug_expose_event (GtkWidget      *widget,
         }
       else
         {
-          alpha = plug->is_composited ? plug->background_alpha : 1.00;
+          alpha = gtk_widget_is_composited (GTK_WIDGET (plug)) ? plug->background_alpha : 1.00;
 
           if (alpha < 1.00 || plug->background_color != NULL)
             {
@@ -260,7 +252,7 @@ wrapper_plug_set_background_alpha (WrapperPlug *plug,
   plug->background_alpha = CLAMP (alpha, 0.00, 1.00);
 
   /* redraw */
-  if (plug->is_composited)
+  if (gtk_widget_is_composited (GTK_WIDGET (plug)))
     gtk_widget_queue_draw (GTK_WIDGET (plug));
 }
 
