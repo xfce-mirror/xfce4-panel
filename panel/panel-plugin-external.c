@@ -338,7 +338,7 @@ panel_plugin_external_realize (GtkWidget *widget)
     {
       if (external->priv->spawn_timeout_id != 0)
         g_source_remove (external->priv->spawn_timeout_id);
-      
+
       panel_plugin_external_child_spawn (external);
     }
 }
@@ -542,7 +542,13 @@ panel_plugin_external_child_respawn (gpointer user_data)
 
   /* delay startup if the old child is still embedded */
   if (external->priv->embedded)
-    return TRUE;
+    {
+      panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+                   "%s-%s: still a child embedded, respawn delayed",
+                   panel_module_get_name (external->module), external->unique_id);
+
+      return TRUE;
+    }
 
   panel_plugin_external_queue_free (external);
 
