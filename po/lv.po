@@ -10,10 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 22:27+0200\n"
+"POT-Creation-Date: 2010-07-11 16:54+0200\n"
 "PO-Revision-Date: 2009-10-16 14:32+0100\n"
 "Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
 "Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,77 +62,76 @@ msgid "Failed to open the documentation browser"
 msgstr ""
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:861
-#: ../panel/panel-preferences-dialog.c:996
+#: ../libxfce4panel/xfce-panel-plugin.c:876
+#: ../panel/panel-preferences-dialog.c:1029
 #, fuzzy, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Esat drošs, ka vēlaties noņemt darbavietu '%s'?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:866
-#: ../panel/panel-preferences-dialog.c:999
+#: ../libxfce4panel/xfce-panel-plugin.c:881
+#: ../panel/panel-preferences-dialog.c:1032
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1040
+#: ../libxfce4panel/xfce-panel-plugin.c:1041
 #, fuzzy
 msgid "_Move"
 msgstr "Pārvietot"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1082 ../panel/panel-window.c:2106
+#: ../libxfce4panel/xfce-panel-plugin.c:1083 ../panel/panel-window.c:2117
 #, fuzzy
 msgid "Add _New Items..."
 msgstr "Pievienot jaunus vienumus..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1093 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr ""
 
-#. restart item
-#: ../libxfce4panel/xfce-panel-plugin.c:1117 ../panel/panel-window.c:2140
-#, fuzzy
-msgid "_Restart"
-msgstr "Atiestate"
+#. logout item
+#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-window.c:2144
+msgid "Log _Out"
+msgstr ""
 
-#: ../panel/main.c:75
+#: ../panel/main.c:77
 #, fuzzy
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Rādīt \"Pielāgot paneli\" dialogu"
 
-#: ../panel/main.c:75 ../panel/main.c:76
+#: ../panel/main.c:77 ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr ""
 
-#: ../panel/main.c:76
+#: ../panel/main.c:78
 #, fuzzy
 msgid "Show the 'Add New Items' dialog"
 msgstr "Rādīt \"Pievienot jaunus vienumus\" dialogu"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:79
 msgid "Save the panel configuration"
 msgstr "Saglabāt paneļa konfigurāciju"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:80
 #, fuzzy
 msgid "Add a new plugin to the panel"
 msgstr "Pievienot jaunu paneli"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:80
 msgid "PLUGIN-NAME"
 msgstr ""
 
-#: ../panel/main.c:79
+#: ../panel/main.c:81
 #, fuzzy
 msgid "Restart the running panel instance"
 msgstr "Atiestata skrejošo xfce4-panel instanci"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:82
 msgid "Quit the running panel instance"
 msgstr ""
 
-#: ../panel/main.c:81
+#: ../panel/main.c:83
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -139,71 +139,77 @@ msgid "Print version information and exit"
 msgstr "Izdrukāt versijas informāciju un iziet"
 
 #. parse context options
-#: ../panel/main.c:149
+#: ../panel/main.c:154
 msgid "[ARGUMENTS...]"
 msgstr ""
 
-#: ../panel/main.c:156
+#: ../panel/main.c:161
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr ""
 
-#: ../panel/main.c:175
+#: ../panel/main.c:180
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce izstrādātāju komanda. Visas tiesības paturētas."
 
-#: ../panel/main.c:176
+#: ../panel/main.c:181
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Lūdzu ziņojiet pa kļūdām uz <%s>."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:227
 #, fuzzy
 msgid "There is already a running instance"
 msgstr "Paziņošanas ikonas laukums, jau skrien šai ekrānā"
 
 #. spawn ourselfs again
-#: ../panel/main.c:262
+#: ../panel/main.c:273
 #, fuzzy
 msgid "Restarting..."
 msgstr "Atiestate"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:288
 #, fuzzy
 msgid "Failed to show the preferences dialog"
 msgstr "Neizdevās atvērt displeju"
 
-#: ../panel/main.c:279
+#: ../panel/main.c:290
 #, fuzzy
 msgid "Failed to show the add new items dialog"
 msgstr "Rādīt \"Pievienot jaunus vienumus\" dialogu"
 
-#: ../panel/main.c:281
+#: ../panel/main.c:292
 #, fuzzy
 msgid "Failed to save the panel configuration"
 msgstr "Saglabāt paneļa konfigurāciju"
 
-#: ../panel/main.c:283
+#: ../panel/main.c:294
 msgid "Failed to add a plugin to the panel"
 msgstr ""
 
-#: ../panel/main.c:285
+#: ../panel/main.c:296
 #, fuzzy
 msgid "Failed to restart the panel"
 msgstr "Pievienot vienumus panelim"
 
-#: ../panel/main.c:287
+#: ../panel/main.c:298
 #, fuzzy
 msgid "Failed to quit the panel"
 msgstr "Neizdevāsa izpildīt 'xfce4-panel -c'"
 
-#: ../panel/main.c:289
+#: ../panel/main.c:300
 #, fuzzy
 msgid "Failed to send D-Bus message"
 msgstr "Neizdevās atvērt displeju"
 
-#. I18N: %s is replaced with xfce4-panel
-#: ../panel/main.c:296
+#: ../panel/main.c:311
+msgid ""
+"Do you want to start the Xfce panel? If you do, make sure you save the "
+"session on logout, so the panel is automatically started the next time you "
+"login."
+msgstr ""
+
+#: ../panel/main.c:314 ../panel/main.c:328
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
@@ -211,6 +217,11 @@ msgstr ""
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr ""
+
+#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#, fuzzy, c-format
+msgid "Failed to execute command \"%s\""
+msgstr "Neizdevās palaist \"%s\""
 
 #: ../panel/panel-dbus-client.c:226
 msgid ""
@@ -242,7 +253,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr ""
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:743
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Panelis %d"
@@ -257,12 +268,30 @@ msgstr ""
 msgid "Modifying the panel is not allowed"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:209
+#: ../panel/panel-item-dialog.c:175
+msgid "Add New Items"
+msgstr "Pievienot jaunus vienumus"
+
+#: ../panel/panel-item-dialog.c:177
+#, fuzzy
+msgid "Add new plugins to the panel"
+msgstr "Pievienot vienumus panelim"
+
+#: ../panel/panel-item-dialog.c:200
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "_Search:"
+msgstr "_Meklēt:"
+
+#: ../panel/panel-item-dialog.c:208
+msgid "Enter search phrase here"
+msgstr ""
+
+#: ../panel/panel-plugin-external.c:421
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:211
+#: ../panel/panel-plugin-external.c:423
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -270,52 +299,51 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 
-#: ../panel/panel-item-dialog.c:171
-msgid "Add New Items"
-msgstr "Pievienot jaunus vienumus"
-
-#: ../panel/panel-item-dialog.c:173
-#, fuzzy
-msgid "Add new plugins to the panel"
-msgstr "Pievienot vienumus panelim"
-
-#: ../panel/panel-item-dialog.c:195
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "_Search:"
-msgstr "_Meklēt:"
-
-#: ../panel/panel-item-dialog.c:203
-msgid "Enter search phrase here"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.c:432
+#: ../panel/panel-preferences-dialog.c:440
 msgid "Automatic"
 msgstr "Automātiska"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:451
+#: ../panel/panel-preferences-dialog.c:459
 #, c-format
 msgid "Screen %d"
 msgstr ""
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:477
+#: ../panel/panel-preferences-dialog.c:485
 #, fuzzy, c-format
 msgid "Monitor %d"
 msgstr "Savienot monitorus"
 
-#: ../panel/panel-preferences-dialog.c:804
+#: ../panel/panel-preferences-dialog.c:815
 #, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Izvēlētais panelis un visi tā vienumi tiks noņemti."
 
-#: ../panel/panel-preferences-dialog.c:805
+#: ../panel/panel-preferences-dialog.c:816
 #, fuzzy, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Esat drošs, ka vēlaties noņemt darbavietu %d?"
 
+#. I18N: append (external) in the preferences dialog if the plugin
+#. * runs external
+#: ../panel/panel-preferences-dialog.c:896
+#, c-format
+msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
+msgstr ""
+
 #. I18N: tooltip in preferences dialog when hovering an item in the list
-#: ../panel/panel-preferences-dialog.c:879
+#. * for external plugins
+#: ../panel/panel-preferences-dialog.c:901
+#, c-format
+msgid ""
+"Internal name: %s-%d\n"
+"PID: %d"
+msgstr ""
+
+#. I18N: tooltip in preferences dialog when hovering an item in the list
+#. * for internal plugins
+#: ../panel/panel-preferences-dialog.c:913
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr ""
@@ -655,11 +683,6 @@ msgstr ""
 msgid "Hibernate"
 msgstr ""
 
-#: ../plugins/actions/actions.c:409
-#, fuzzy, c-format
-msgid "Failed to execute command \"%s\""
-msgstr "Neizdevās palaist \"%s\""
-
 #: ../plugins/actions/actions.desktop.in.h:2
 #, fuzzy
 msgid "Log out, lock or other system actions"
@@ -750,7 +773,7 @@ msgid "Select An Icon"
 msgstr "Norādiet ikonu priekš \"%s\""
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:703
-#: ../plugins/launcher/launcher.c:2095
+#: ../plugins/launcher/launcher.c:2102
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Neizdevās palaist \"%s\""
@@ -1215,12 +1238,12 @@ msgstr ""
 msgid "_File Pattern:"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1441
+#: ../plugins/launcher/launcher.c:1448
 #, fuzzy
 msgid "Unnamed Item"
 msgstr "Nenosaukts"
 
-#: ../plugins/launcher/launcher.c:1581
+#: ../plugins/launcher/launcher.c:1588
 #, fuzzy
 msgid "No items"
 msgstr "Jauns vienums"
@@ -1418,19 +1441,24 @@ msgstr "Slēpt visus logus un rādīt darbvirsmu"
 msgid "Show Desktop"
 msgstr "Rādīt darbvirsmu"
 
+#: ../plugins/systray/systray.c:276
+#, fuzzy
+msgid "Unable to start the notification area"
+msgstr "Steidzamā paziņošana"
+
 #. create fake error and show it
-#: ../plugins/systray/systray.c:551
+#: ../plugins/systray/systray.c:569
 msgid ""
 "Most likely another widget took over the function of a notification area. "
-"This plugin will close."
+"This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:554
+#: ../plugins/systray/systray.c:571
 #, fuzzy
 msgid "The notification area lost selection"
 msgstr "Sistēmas joslas pārvaldnieks zaudēja atlasi"
 
-#: ../plugins/systray/systray.c:747
+#: ../plugins/systray/systray.c:764
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Esat drošs, ka vēlaties notīrīt zināmo lietotņu sarakstu?"
 
@@ -1453,7 +1481,7 @@ msgstr "Paziņošanas ikonu laukums"
 msgid "_Number of rows:"
 msgstr "_Rindu skaits:"
 
-#: ../plugins/systray/systray-manager.c:401
+#: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Neizdevās iegūt atlases pārvaldnieku ekrānam %d"
@@ -1536,23 +1564,23 @@ msgstr ""
 msgid "Window title"
 msgstr "Logu saraksts"
 
-#: ../plugins/tasklist/tasklist-widget.c:2617
+#: ../plugins/tasklist/tasklist-widget.c:2620
 msgid "Mi_nimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2626
+#: ../plugins/tasklist/tasklist-widget.c:2629
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2632
+#: ../plugins/tasklist/tasklist-widget.c:2635
 msgid "Ma_ximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2641
+#: ../plugins/tasklist/tasklist-widget.c:2644
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2651
+#: ../plugins/tasklist/tasklist-widget.c:2654
 msgid "_Close All"
 msgstr ""
 
@@ -1627,6 +1655,10 @@ msgstr "Logu saraksts"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Pārslēgties starp atvērtiem logiem izmantojot izvēlnes"
+
+#, fuzzy
+#~ msgid "_Restart"
+#~ msgstr "Atiestate"
 
 #, fuzzy
 #~ msgid "Failed to open manual"
