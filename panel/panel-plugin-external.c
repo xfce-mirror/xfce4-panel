@@ -544,7 +544,7 @@ panel_plugin_external_child_respawn (gpointer user_data)
   if (external->priv->embedded)
     {
       panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
-                   "%s-%s: still a child embedded, respawn delayed",
+                   "%s-%d: still a child embedded, respawn delayed",
                    panel_module_get_name (external->module), external->unique_id);
 
       return TRUE;
