@@ -28,16 +28,17 @@
 #include <common/panel-debug.h>
 #include <common/panel-private.h>
 
-enum
+
+
+PanelDebugFlag panel_debug_flags = 0;
+
+
+
+/* additional debug levels */
+static const GDebugKey panel_debug_keys[] =
 {
-  DEBUG_LEVEL_UNKNOWN = 0,
-  DEBUG_LEVEL_NONE,
-  DEBUG_LEVEL_ENABLED
+  { "gdb", PANEL_DEBUG_GDB }
 };
-
-
-
-gboolean panel_debug_enabled = FALSE;
 
 
 
@@ -46,10 +47,9 @@ panel_debug (const gchar *domain,
              const gchar *message,
              ...)
 {
-  static volatile gsize   level__volatile = DEBUG_LEVEL_UNKNOWN;
-  gsize                   level;
+  static volatile gsize   level__volatile = 0;
   const gchar            *value;
-  gchar                  *string;
+  gchar                  *string, *path;
   va_list                 args;
 
   panel_return_if_fail (domain != NULL);
@@ -60,15 +60,37 @@ panel_debug (const gchar *domain,
     {
       value = g_getenv ("PANEL_DEBUG");
       if (G_UNLIKELY (value != NULL))
-        level = DEBUG_LEVEL_ENABLED;
-      else
-        level = DEBUG_LEVEL_NONE;
+        {
+          panel_debug_flags = g_parse_debug_string (value, panel_debug_keys,
+                                                    G_N_ELEMENTS (panel_debug_keys));
 
-      g_once_init_leave (&level__volatile, level);
+          /* always enable debug logging */
+          PANEL_SET_FLAG (panel_debug_flags, PANEL_DEBUG_YES);
+
+          /* TODO: only print this in the main application */
+          if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
+            {
+              path = g_find_program_in_path ("gdb");
+              if (G_LIKELY (path != NULL))
+                {
+                  g_printerr (PACKAGE_NAME "(debug): running plugins with %s; "
+                              "log files stored in '%s'\n", path, g_get_tmp_dir ());
+                  g_free (path);
+                }
+              else
+                {
+                  PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_GDB);
+
+                  g_printerr (PACKAGE_NAME "(debug): gdb not found in PATH; mode disabled\n");
+                }
+            }
+        }
+
+      g_once_init_leave (&level__volatile, 1);
     }
 
   /* leave when debug is disabled */
-  if (level__volatile == DEBUG_LEVEL_NONE)
+  if (panel_debug_flags == 0)
     return;
 
   va_start (args, message);

@@ -30,7 +30,14 @@
 
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 
-extern gboolean panel_debug_enabled;
+typedef enum
+{
+  PANEL_DEBUG_YES = 1 << 0, /* always enabled if PANEL_DEBUG is not %NULL */
+  PANEL_DEBUG_GDB = 1 << 1  /* run plugin through gdb */
+}
+PanelDebugFlag;
+
+extern PanelDebugFlag panel_debug_flags;
 
 void panel_debug (const gchar *domain,
                   const gchar *message,

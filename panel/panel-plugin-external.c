@@ -487,16 +487,71 @@ panel_plugin_external_child_ask_restart (PanelPluginExternal *external)
 static void
 panel_plugin_external_child_spawn (PanelPluginExternal *external)
 {
-  gchar    **argv;
-  GError    *error = NULL;
-  gboolean   succeed;
-  GPid       pid;
+  gchar        **argv, **dbg_argv, **tmp_argv;
+  GError        *error = NULL;
+  gboolean       succeed;
+  GPid           pid;
+  gchar         *gdb, *cmd_line;
+  guint          i;
+  gint           tmp_argc;
+  GTimeVal       timestamp;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (GTK_WIDGET_REALIZED (external));
 
   /* set plugin specific arguments */
   argv = (*PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->get_argv) (external, external->priv->arguments);
+  panel_return_if_fail (argv != NULL);
+
+  /* check debugging state */
+  if (G_UNLIKELY (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB)))
+    {
+      gdb = g_find_program_in_path ("gdb");
+      if (G_LIKELY (gdb != NULL))
+        {
+          g_get_current_time (&timestamp);
+          cmd_line = g_strdup_printf ("%s -batch "
+                                      "-ex 'set logging file %s" G_DIR_SEPARATOR_S "%li-%s-%s.txt' "
+                                      "-ex 'set logging on' "
+                                      "-ex 'set pagination off' "
+                                      "-ex 'set logging redirect on' "
+                                      "-ex 'run' "
+                                      "-ex 'backtrace full' "
+                                      "-ex 'info registers' "
+                                      "-args",
+                                      gdb, g_get_tmp_dir (), timestamp.tv_sec,
+                                      panel_module_get_name (external->module),
+                                      argv[PLUGIN_ARGV_UNIQUE_ID]);
+
+          if (g_shell_parse_argv (cmd_line, &tmp_argc, &tmp_argv, &error))
+            {
+              dbg_argv = g_new0 (gchar *, tmp_argc + g_strv_length (argv) + 1);
+
+              for (i = 0; tmp_argv[i] != NULL; i++)
+                dbg_argv[i] = tmp_argv[i];
+              g_free (tmp_argv);
+
+              for (i = 0; argv[i] != NULL; i++)
+                dbg_argv[i + tmp_argc] = argv[i];
+              g_free (argv);
+
+              argv = dbg_argv;
+            }
+          else
+            {
+              panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+                           "%s-%d: Failed to parse the gdb command line: %s",
+                           panel_module_get_name (external->module),
+                           external->unique_id, error->message);
+              g_error_free (error);
+
+              return;
+            }
+
+          g_free (gdb);
+          g_free (cmd_line);
+        }
+    }
 
   /* spawn the proccess */
   succeed = gdk_spawn_on_screen (gtk_widget_get_screen (GTK_WIDGET (external)),
@@ -505,9 +560,9 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
                                  NULL, &pid, &error);
 
   panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
-               "%s-%s: child spawned; pid=%d, socket-id=%s",
+               "%s-%d: child spawned; pid=%d, argc=%d",
                panel_module_get_name (external->module),
-               argv[PLUGIN_ARGV_UNIQUE_ID], pid, argv[PLUGIN_ARGV_SOCKET_ID]);
+               external->unique_id, pid, g_strv_length (argv));
 
   if (G_LIKELY (succeed))
     {

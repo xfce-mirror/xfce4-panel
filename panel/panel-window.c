@@ -1461,7 +1461,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (gdk_error_trap_pop () != 0)
     g_critical ("Failed to set the struts");
 
-  if (panel_debug_enabled)
+  if (G_UNLIKELY (panel_debug_flags != 0))
     {
       if (struts[STRUT_LEFT] != 0)
         n = STRUT_LEFT;
