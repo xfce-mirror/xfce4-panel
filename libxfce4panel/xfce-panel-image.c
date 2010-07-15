@@ -61,9 +61,6 @@
 /* design limit for the panel, to reduce the uncached pixbuf size */
 #define MAX_PIXBUF_SIZE (128)
 
-#define XFCE_PANEL_IMAGE_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
-                                           XFCE_TYPE_PANEL_IMAGE, \
-                                           XfcePanelImagePrivate))
 #define xfce_panel_image_unref_null(obj)   G_STMT_START { if ((obj) != NULL) \
                                              { \
                                                g_object_unref (G_OBJECT (obj)); \
@@ -193,7 +190,7 @@ xfce_panel_image_init (XfcePanelImage *image)
 {
   GTK_WIDGET_SET_FLAGS (image, GTK_NO_WINDOW);
 
-  image->priv = XFCE_PANEL_IMAGE_GET_PRIVATE (image);
+  image->priv = G_TYPE_INSTANCE_GET_PRIVATE (image, XFCE_TYPE_PANEL_IMAGE, XfcePanelImagePrivate);
 
   image->priv->pixbuf = NULL;
   image->priv->cache = NULL;

@@ -105,10 +105,6 @@ static void         panel_plugin_external_set_sensitive           (PanelPluginEx
 
 
 
-#define PANEL_PLUGIN_EXTERNAL_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternalPrivate))
-
-
-
 struct _PanelPluginExternalPrivate
 {
   /* startup arguments */
@@ -197,7 +193,8 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
 static void
 panel_plugin_external_init (PanelPluginExternal *external)
 {
-  external->priv = PANEL_PLUGIN_EXTERNAL_GET_PRIVATE (external);
+  external->priv = G_TYPE_INSTANCE_GET_PRIVATE (external, PANEL_TYPE_PLUGIN_EXTERNAL, PanelPluginExternalPrivate);
+
   external->module = NULL;
   external->show_configure = FALSE;
   external->show_about = FALSE;

@@ -36,12 +36,6 @@
 
 
 
-#define PANEL_BASE_WINDOW_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
-                                            PANEL_TYPE_BASE_WINDOW, \
-                                            PanelBaseWindowPrivate))
-
-
-
 static void     panel_base_window_get_property                (GObject              *object,
                                                                guint                 prop_id,
                                                                GValue               *value,
@@ -198,15 +192,15 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 static void
 panel_base_window_init (PanelBaseWindow *window)
 {
-  window->priv = PANEL_BASE_WINDOW_GET_PRIVATE (window);
+  window->priv = G_TYPE_INSTANCE_GET_PRIVATE (window, PANEL_TYPE_BASE_WINDOW, PanelBaseWindowPrivate);
+
   window->is_composited = FALSE;
   window->background_alpha = 1.00;
-
   window->background_style = PANEL_BG_STYLE_NONE;
   window->background_image = NULL;
   window->background_color = NULL;
-  window->priv->bg_image_cache = NULL;
 
+  window->priv->bg_image_cache = NULL;
   window->priv->enter_opacity = 1.00;
   window->priv->leave_opacity = 1.00;
   window->priv->borders = PANEL_BORDER_NONE;

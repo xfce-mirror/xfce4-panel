@@ -45,42 +45,42 @@
 
 
 static void                     panel_preferences_dialog_finalize               (GObject                *object);
-static void                     panel_preferences_dialog_response               (GtkWidget              *window, 
-                                                                                 gint                    response_id, 
+static void                     panel_preferences_dialog_response               (GtkWidget              *window,
+                                                                                 gint                    response_id,
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_bindings_unbind        (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_bindings_add           (PanelPreferencesDialog *dialog, 
-                                                                                 const gchar            *property1, 
+static void                     panel_preferences_dialog_bindings_add           (PanelPreferencesDialog *dialog,
+                                                                                 const gchar            *property1,
                                                                                  const gchar            *property2);
 static void                     panel_preferences_dialog_bindings_update        (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_output_changed         (GtkComboBox            *combobox, 
+static void                     panel_preferences_dialog_output_changed         (GtkComboBox            *combobox,
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_bg_style_changed       (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_bg_image_file_set      (GtkFileChooserButton   *button, 
+static void                     panel_preferences_dialog_bg_image_file_set      (GtkFileChooserButton   *button,
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_bg_image_notified      (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox, 
+static void                     panel_preferences_dialog_panel_combobox_changed (GtkComboBox            *combobox,
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_panel_combobox_rebuild (PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_panel_add              (GtkWidget              *widget, 
+static void                     panel_preferences_dialog_panel_add              (GtkWidget              *widget,
                                                                                  PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_panel_remove           (GtkWidget              *widget, 
+static void                     panel_preferences_dialog_panel_remove           (GtkWidget              *widget,
                                                                                  PanelPreferencesDialog *dialog);
-static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected      (PanelPreferencesDialog *dialog, 
+static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected      (PanelPreferencesDialog *dialog,
                                                                                  GtkTreeIter            *return_iter);
-static void                     panel_preferences_dialog_item_store_rebuild     (GtkWidget              *itembar, 
+static void                     panel_preferences_dialog_item_store_rebuild     (GtkWidget              *itembar,
                                                                                  PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_move              (GtkWidget              *button, 
+static void                     panel_preferences_dialog_item_move              (GtkWidget              *button,
                                                                                  PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_remove            (GtkWidget              *button, 
+static void                     panel_preferences_dialog_item_remove            (GtkWidget              *button,
                                                                                  PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_add               (GtkWidget              *button, 
+static void                     panel_preferences_dialog_item_add               (GtkWidget              *button,
                                                                                  PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_properties        (GtkWidget              *button, 
+static void                     panel_preferences_dialog_item_properties        (GtkWidget              *button,
                                                                                  PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_about             (GtkWidget              *button, 
+static void                     panel_preferences_dialog_item_about             (GtkWidget              *button,
                                                                                  PanelPreferencesDialog *dialog);
-static void                     panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selection, 
+static void                     panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selection,
                                                                                  PanelPreferencesDialog *dialog);
 
 

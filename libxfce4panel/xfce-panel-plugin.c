@@ -48,9 +48,6 @@
 #define XFCE_PANEL_PLUGIN_CONSTRUCTED(plugin) \
   PANEL_HAS_FLAG (XFCE_PANEL_PLUGIN (plugin)->priv->flags, \
                   PLUGIN_FLAG_CONSTRUCTED)
-#define XFCE_PANEL_PLUGIN_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
-                                            XFCE_TYPE_PANEL_PLUGIN, \
-                                            XfcePanelPluginPrivate))
 
 
 
@@ -567,7 +564,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
 static void
 xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 {
-  plugin->priv = XFCE_PANEL_PLUGIN_GET_PRIVATE (plugin);
+  plugin->priv = G_TYPE_INSTANCE_GET_PRIVATE (plugin, XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate);
 
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;

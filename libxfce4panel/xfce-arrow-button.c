@@ -51,10 +51,6 @@
 
 
 
-#define XFCE_ARROW_BUTTON_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
-                                            XFCE_TYPE_ARROW_BUTTON, \
-                                            XfceArrowButtonPrivate))
-
 #define ARROW_WIDTH        (8)
 #define MAX_BLINKING_COUNT (16)
 
@@ -171,8 +167,7 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
 static void
 xfce_arrow_button_init (XfceArrowButton *button)
 {
-  /* set private pointer */
-  button->priv = XFCE_ARROW_BUTTON_GET_PRIVATE (button);
+  button->priv = G_TYPE_INSTANCE_GET_PRIVATE (button, XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonPrivate);
 
   /* initialize button values */
   button->priv->arrow_type = GTK_ARROW_UP;
