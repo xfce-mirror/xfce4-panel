@@ -32,8 +32,9 @@
 
 typedef enum
 {
-  PANEL_DEBUG_YES = 1 << 0, /* always enabled if PANEL_DEBUG is not %NULL */
-  PANEL_DEBUG_GDB = 1 << 1  /* run plugin through gdb */
+  PANEL_DEBUG_YES      = 1 << 0,  /* always enabled if PANEL_DEBUG is not %NULL */
+  PANEL_DEBUG_GDB      = 1 << 1,  /* run plugin in gdb */
+  PANEL_DEBUG_VALGRIND = 1 << 2   /* run plugin in valgrind */
 }
 PanelDebugFlag;
 

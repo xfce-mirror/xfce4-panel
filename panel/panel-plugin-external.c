@@ -488,7 +488,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
   GError        *error = NULL;
   gboolean       succeed;
   GPid           pid;
-  gchar         *gdb, *cmd_line;
+  gchar         *program, *cmd_line;
   guint          i;
   gint           tmp_argc;
   GTimeVal       timestamp;
@@ -501,53 +501,75 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
   panel_return_if_fail (argv != NULL);
 
   /* check debugging state */
-  if (G_UNLIKELY (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB)))
+  if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB)
+      || PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
     {
-      gdb = g_find_program_in_path ("gdb");
-      if (G_LIKELY (gdb != NULL))
+      g_get_current_time (&timestamp);
+      cmd_line = NULL;
+      program = NULL;
+
+      if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
         {
-          g_get_current_time (&timestamp);
-          cmd_line = g_strdup_printf ("%s -batch "
-                                      "-ex 'set logging file %s" G_DIR_SEPARATOR_S "%li-%s-%s.txt' "
-                                      "-ex 'set logging on' "
-                                      "-ex 'set pagination off' "
-                                      "-ex 'set logging redirect on' "
-                                      "-ex 'run' "
-                                      "-ex 'backtrace full' "
-                                      "-ex 'info registers' "
-                                      "-args",
-                                      gdb, g_get_tmp_dir (), timestamp.tv_sec,
-                                      panel_module_get_name (external->module),
-                                      argv[PLUGIN_ARGV_UNIQUE_ID]);
-
-          if (g_shell_parse_argv (cmd_line, &tmp_argc, &tmp_argv, &error))
+          program = g_find_program_in_path ("gdb");
+          if (G_LIKELY (program != NULL))
             {
-              dbg_argv = g_new0 (gchar *, tmp_argc + g_strv_length (argv) + 1);
-
-              for (i = 0; tmp_argv[i] != NULL; i++)
-                dbg_argv[i] = tmp_argv[i];
-              g_free (tmp_argv);
-
-              for (i = 0; argv[i] != NULL; i++)
-                dbg_argv[i + tmp_argc] = argv[i];
-              g_free (argv);
-
-              argv = dbg_argv;
+              cmd_line = g_strdup_printf ("%s -batch "
+                                          "-ex 'set logging file %s" G_DIR_SEPARATOR_S "%li_gdb_%s_%s.log' "
+                                          "-ex 'set logging on' "
+                                          "-ex 'set pagination off' "
+                                          "-ex 'set logging redirect on' "
+                                          "-ex 'run' "
+                                          "-ex 'backtrace full' "
+                                          "-ex 'info registers' "
+                                          "-args",
+                                          program, g_get_tmp_dir (), timestamp.tv_sec,
+                                          panel_module_get_name (external->module),
+                                          argv[PLUGIN_ARGV_UNIQUE_ID]);
             }
-          else
-            {
-              panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
-                           "%s-%d: Failed to parse the gdb command line: %s",
-                           panel_module_get_name (external->module),
-                           external->unique_id, error->message);
-              g_error_free (error);
-
-              return;
-            }
-
-          g_free (gdb);
-          g_free (cmd_line);
         }
+      else if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
+        {
+          program = g_find_program_in_path ("valgrind");
+          if (G_LIKELY (program != NULL))
+            {
+              cmd_line = g_strdup_printf ("%s "
+                                          "--log-file='%s" G_DIR_SEPARATOR_S "%li_valgrind_%s_%s.log' "
+                                          "--leak-check=full --show-reachable=yes -v ",
+                                          program, g_get_tmp_dir (), timestamp.tv_sec,
+                                          panel_module_get_name (external->module),
+                                          argv[PLUGIN_ARGV_UNIQUE_ID]);
+            }
+        }
+
+      if (cmd_line != NULL
+          && g_shell_parse_argv (cmd_line, &tmp_argc, &tmp_argv, &error))
+        {
+          dbg_argv = g_new0 (gchar *, tmp_argc + g_strv_length (argv) + 1);
+
+          for (i = 0; tmp_argv[i] != NULL; i++)
+            dbg_argv[i] = tmp_argv[i];
+          g_free (tmp_argv);
+
+          for (i = 0; argv[i] != NULL; i++)
+            dbg_argv[i + tmp_argc] = argv[i];
+          g_free (argv);
+
+          argv = dbg_argv;
+        }
+      else
+        {
+          panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+                       "%s-%d: Failed to run the plugin in %s: %s",
+                       panel_module_get_name (external->module),
+                       external->unique_id, program,
+                       cmd_line != NULL ? error->message : "debugger not found");
+          g_error_free (error);
+
+          return;
+        }
+
+      g_free (program);
+      g_free (cmd_line);
     }
 
   /* spawn the proccess */

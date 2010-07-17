@@ -37,7 +37,8 @@ PanelDebugFlag panel_debug_flags = 0;
 /* additional debug levels */
 static const GDebugKey panel_debug_keys[] =
 {
-  { "gdb", PANEL_DEBUG_GDB }
+  { "gdb", PANEL_DEBUG_GDB },
+  { "valgrind", PANEL_DEBUG_VALGRIND }
 };
 
 
@@ -51,6 +52,7 @@ panel_debug (const gchar *domain,
   const gchar            *value;
   gchar                  *string, *path;
   va_list                 args;
+  const gchar            *proxy_application;
 
   panel_return_if_fail (domain != NULL);
   panel_return_if_fail (message != NULL);
@@ -59,7 +61,7 @@ panel_debug (const gchar *domain,
   if (g_once_init_enter (&level__volatile))
     {
       value = g_getenv ("PANEL_DEBUG");
-      if (G_UNLIKELY (value != NULL))
+      if (value != NULL && *value != '\0')
         {
           panel_debug_flags = g_parse_debug_string (value, panel_debug_keys,
                                                     G_N_ELEMENTS (panel_debug_keys));
@@ -67,21 +69,42 @@ panel_debug (const gchar *domain,
           /* always enable debug logging */
           PANEL_SET_FLAG (panel_debug_flags, PANEL_DEBUG_YES);
 
-          /* TODO: only print this in the main application */
           if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
             {
-              path = g_find_program_in_path ("gdb");
+              proxy_application = "gdb";
+
+              /* performs sanity checks on the released memory slices */
+              g_setenv ("G_SLICE", "debug-blocks", TRUE);
+            }
+          else if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
+            {
+              proxy_application = "valgrind";
+
+              /* use g_malloc() and g_free() instead of slices */
+              g_setenv ("G_SLICE", "always-malloc", TRUE);
+              g_setenv ("G_DEBUG", "gc-friendly", TRUE);
+            }
+          else
+            {
+              proxy_application = NULL;
+            }
+
+          if (proxy_application != NULL)
+            {
+              path = g_find_program_in_path (proxy_application);
               if (G_LIKELY (path != NULL))
                 {
+                  /* TODO: only print those messages in the main application */
                   g_printerr (PACKAGE_NAME "(debug): running plugins with %s; "
-                              "log files stored in '%s'\n", path, g_get_tmp_dir ());
+                              "log files stored in %s\n", path, g_get_tmp_dir ());
                   g_free (path);
                 }
               else
                 {
-                  PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_GDB);
+                  PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_GDB | PANEL_DEBUG_VALGRIND);
 
-                  g_printerr (PACKAGE_NAME "(debug): gdb not found in PATH; mode disabled\n");
+                  g_printerr (PACKAGE_NAME "(debug): %s not found in PATH\n",
+                              proxy_application);
                 }
             }
         }
