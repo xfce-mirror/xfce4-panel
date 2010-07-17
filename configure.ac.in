@@ -12,10 +12,10 @@ m4_define([libxfce4panel_verinfo], [3:0:0]) dnl current:revision:age
 m4_define([libxfce4panel_version_api], [1.0])
 m4_define([xfce4_panel_version_major], [4])
 m4_define([xfce4_panel_version_minor], [7])
-m4_define([xfce4_panel_version_micro], [1])
+m4_define([xfce4_panel_version_micro], [2])
 m4_define([xfce4_panel_version_nano],  []) dnl leave this empty to have no nano version
 m4_define([xfce4_panel_version_build], [@REVISION@])
-m4_define([xfce4_panel_version_tag],   [git])
+m4_define([xfce4_panel_version_tag],   [])
 m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_version_minor().xfce4_panel_version_micro()ifelse(xfce4_panel_version_nano(), [], [], [.xfce4_panel_version_nano()])ifelse(xfce4_panel_version_tag(), [git], [xfce4_panel_version_tag()-xfce4_panel_version_build()], [xfce4_panel_version_tag()])])
 
 dnl *******************************************
@@ -39,7 +39,7 @@ dnl ***************************
 dnl *** Initialize automake ***
 dnl ***************************
 AM_CONFIG_HEADER([config.h])
-AM_INIT_AUTOMAKE([1.8 dist-bzip2 tar-ustar])
+AM_INIT_AUTOMAKE([1.8 no-dist-gzip dist-bzip2 tar-ustar])
 AM_MAINTAINER_MODE()
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 

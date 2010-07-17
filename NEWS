@@ -1,3 +1,30 @@
+4.7.2
+=====
+- Fix typos in translated strings (bug #6350).
+- Fix rounding issues in panel borders.
+- Empty channel if 4.6 migration failed.
+- Load the xfce-applications.menu as default.
+- Add support for more background options (bug #1731).
+- Improved debugging support using the PANEL_DEBUG environ variable.
+- Add LIBXFCE4PANEL_VERSION.
+- Link tasklist plugin to x11 (bug #6471).
+- Fix some (possible) problems when building documentation.
+- Add support for X-XFCE-Unique=SCREEN.
+- Make sure there are not 2 active windows on ws-changes (bug #6474).
+- Make the systray takeover selection.
+- Ask to start panel when opening preferences without instance.
+- Add logout to plugin menu and drop quit and restart.
+- Add separator between help and logout in window menu.
+- Improve and cleanup code for external plugins (bug #6358).
+- Change colormap handling (bug #6358).
+- Add debug mode to run plugins in gdb (export PANEL_DEBUG=gdb,
+  logs in /tmp directory).
+- Use activate signal for launcher menu items (bug #6485).
+- Fix launching from primary clipboard (bug #6488).
+- Translation updates (pa, es, id, ru, tr, kk, ca, it, uk, ug, hr,
+  bn, fi, gl, pt_BR, de, da, eu, sk, pt, el, zh_CN, el).
+
+
 4.7.1
 =====
 - Support for dragging menu items to create launchers (bug #2896).
