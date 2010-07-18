@@ -44,7 +44,7 @@ libtasklist_la_LIBADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBWNCK_LIBS) \
-	$(LIBX11_LIBS) \
+	$(LIBX11_LIBS) -lXext \
 	$(XFCONF_LIBS)
 
 libtasklist_la_DEPENDENCIES = \
