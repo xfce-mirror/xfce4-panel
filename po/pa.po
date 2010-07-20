@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-11 16:54+0200\n"
+"POT-Creation-Date: 2010-07-20 22:18+0200\n"
 "PO-Revision-Date: 2010-04-05 07:44+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -60,34 +60,34 @@ msgid "Failed to open the documentation browser"
 msgstr "ਡੌਕੂਮੈਂਟੇਸ਼ਨ ਬਰਾਊਜ਼ਰ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:876
+#: ../libxfce4panel/xfce-panel-plugin.c:873
 #: ../panel/panel-preferences-dialog.c:1029
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "ਕੀ ਤੁਸੀਂ \"%s\" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:881
+#: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ਜੇ ਤੁਸੀਂ ਪੈਨਲ ਤੋਂ ਆਈਟਮ ਨੂੰ ਹਟਾਇਆ ਤਾਂ ਇਹ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਖਤਮ ਹੋ ਜਾਵੇਗੀ।"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1041
+#: ../libxfce4panel/xfce-panel-plugin.c:1038
 msgid "_Move"
 msgstr "ਏਧਰ-ਓਧਰ(_M)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1083 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
 msgid "Add _New Items..."
 msgstr "ਨਵੀਆਂ ਆਈਟਮਾਂ ਸ਼ਾਮਲ(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr "ਪੈਨਲ ਪਸੰਦ(_e)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
 #, fuzzy
 msgid "Log _Out"
 msgstr "ਲਾਗ ਆਉਟ"
@@ -274,12 +274,12 @@ msgstr "ਖੋਜ(_S):"
 msgid "Enter search phrase here"
 msgstr "ਖੋਜ ਸ਼ਬਦ ਇੱਥੇ ਦਿਓ"
 
-#: ../panel/panel-plugin-external.c:421
+#: ../panel/panel-plugin-external.c:418
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "ਪਲੱਗਇਨ \"%s\" ਨੇ ਅਚਾਨਕ ਪੈਨਲ ਛੱਡ ਦਿੱਤਾ, ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਰੀ-ਸਟਾਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../panel/panel-plugin-external.c:423
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -1290,7 +1290,7 @@ msgstr "ਤੀਰ ਬਟਨ ਸਥਿਤੀ(_A):"
 msgid "Program launcher with optional menu"
 msgstr "ਚੋਣਵੇਂ ਮੇਨੂ ਨਾਲ ਪਰੋਗਰਾਮ ਲਾਂਚਰ"
 
-#: ../plugins/pager/pager.c:411
+#: ../plugins/pager/pager.c:413
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Xfce ਵਰਕਸਪੇਸ ਸੈਟਿੰਗ ਖੋਲ੍ਹਣ ਅਸਮਰੱਥ"
 
@@ -1304,20 +1304,25 @@ msgid "Number of _rows:"
 msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ(_r):"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "ਵਰਕਸਪੇਸ ਨਾਂ ਵੇਖੋ(_n)"
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
+msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
+msgid "Show mi_niature view"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "ਮਾਊਂਸ ਵ੍ਹੀਲ ਦੀ ਵਰਤੋਂ ਨਾਲ ਵਰਕਸਪੇਸ ਸਵਿੱਚ ਕਰੋ(_w)"
 
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "ਵਰਕਸਪੇਸ ਸਵਿੱਚਰ"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "ਵਰਕਸਪੇਸ ਸੈਟਿੰਗ(_S)..."
 
@@ -1556,6 +1561,10 @@ msgstr "ਜ਼ਰੂਰੀ ਨੋਟੀਫਿਕੇਸ਼ਨ ਚਾਲੂ(_u)"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
 msgstr "ਆਈਕਾਨ"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "ਵਰਕਸਪੇਸ ਨਾਂ ਵੇਖੋ(_n)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"

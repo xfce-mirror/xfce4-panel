@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-18 10:06+0000\n"
+"POT-Creation-Date: 2010-07-20 22:18+0200\n"
 "PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Danish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -42,8 +42,12 @@ msgid "_Read Online"
 msgstr "_Læs på internet"
 
 #: ../common/panel-utils.c:156
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Du kan læse brugermanualen på internettet. Den manual kan være ikke helt i overenstemmelse med din panelversion."
+msgid ""
+"You can read the user manual online. This manual may however not exactly "
+"match your panel version."
+msgstr ""
+"Du kan læse brugermanualen på internettet. Den manual kan være ikke helt i "
+"overenstemmelse med din panelversion."
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
@@ -182,8 +186,14 @@ msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-besked"
 
 #: ../panel/main.c:311
-msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Ønsker du at starte panelet til Xfce? Hvis du vil det skal du huske at gemme sessionen ved logud. Det vil sikre dig at panelet vil blive startet automatisk næste gang ved logind."
+msgid ""
+"Do you want to start the Xfce panel? If you do, make sure you save the "
+"session on logout, so the panel is automatically started the next time you "
+"login."
+msgstr ""
+"Ønsker du at starte panelet til Xfce? Hvis du vil det skal du huske at gemme "
+"sessionen ved logud. Det vil sikre dig at panelet vil blive startet "
+"automatisk næste gang ved logind."
 
 #: ../panel/main.c:314 ../panel/main.c:328
 #, c-format
@@ -200,13 +210,19 @@ msgid "Failed to execute command \"%s\""
 msgstr "Kunne ikke køre kommando \"%s\""
 
 #: ../panel/panel-dbus-client.c:226
-msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ugyldigt udvidelsesmodul syntaks angivet. Brug UDVIDELSESMODULNAVN:NAVN[:TYPE:VÆRDI]."
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"Ugyldigt udvidelsesmodul syntaks angivet. Brug UDVIDELSESMODULNAVN:NAVN[:"
+"TYPE:VÆRDI]."
 
 #: ../panel/panel-dbus-client.c:259
 #, c-format
-msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Ugyldig hentydningstype  \"%s\". Valide typer er boolesk, heltal , strenge og heltal uden fortegn."
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+"Ugyldig hentydningstype  \"%s\". Valide typer er boolesk, heltal , strenge "
+"og heltal uden fortegn."
 
 #: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
@@ -236,8 +252,12 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:186
-msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "Fordi panelet kører i kiosktilstand, er du ikke tilladt at lave ændringer til panelindstillingen som en normal bruger"
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+"Fordi panelet kører i kiosktilstand, er du ikke tilladt at lave ændringer "
+"til panelindstillingen som en normal bruger"
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
@@ -267,8 +287,14 @@ msgstr "Udvicelsesmodul \"%s\" forlod uventet panelet. Vil du genstarte det?"
 
 #: ../panel/panel-plugin-external.c:420
 #, c-format
-msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "Udvidelsesmodulet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker 'Kør' vil panelet prøve at genstarte udvidelsesmodulet ellers vil det blive permanent fjernet fra panelet."
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+"Udvidelsesmodulet genstartede mere end én gang i de sidste %d sekunder. Hvis "
+"du trykker 'Kør' vil panelet prøve at genstarte udvidelsesmodulet ellers vil "
+"det blive permanent fjernet fra panelet."
 
 #: ../panel/panel-preferences-dialog.c:440
 msgid "Automatic"
@@ -288,7 +314,8 @@ msgstr "Overvåg %d"
 
 #: ../panel/panel-preferences-dialog.c:815
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Indstillingerne til panel og udvidelsesmoduler vil blive fjernet for altid"
+msgstr ""
+"Indstillingerne til panel og udvidelsesmoduler vil blive fjernet for altid"
 
 #: ../panel/panel-preferences-dialog.c:816
 #, c-format
@@ -333,8 +360,12 @@ msgid "Add new item to this panel"
 msgstr "Tilføj nye elementer til dette panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
-msgstr "Alfaværdi af panelbaggrunden mellem 0 (gennemsigtig) eller 100 (ugennemsigtig)."
+msgid ""
+"Alpha value of the panel background, between 0 (transparent) and 100 "
+"(opaque)."
+msgstr ""
+"Alfaværdi af panelbaggrunden mellem 0 (gennemsigtig) eller 100 "
+"(ugennemsigtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -383,8 +414,7 @@ msgstr "Ele_menter"
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Dimensioner til panel"
@@ -424,20 +454,31 @@ msgid "Select A Background Image"
 msgstr "Vælg et baggrundsbillede"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "Vælg denne indstilling for automatisk udvidelse af panelets længde hvis udvidelsesmodulerne behøver mere plads."
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+"Vælg denne indstilling for automatisk udvidelse af panelets længde hvis "
+"udvidelsesmodulerne behøver mere plads."
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Vælg denne indstilling for af brede panelet ud over flere skærme."
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr "Vælg denne indstilling for at skjule håndtagene til panelet og fastlåse positionen."
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr ""
+"Vælg denne indstilling for at skjule håndtagene til panelet og fastlåse "
+"positionen."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr "Vælg denne indstilling for at skjule panelet når markøren ikke er over det. Dette virker kun, når panelet er hæftet til en skærmkant."
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
+msgstr ""
+"Vælg denne indstilling for at skjule panelet når markøren ikke er over det. "
+"Dette virker kun, når panelet er hæftet til en skærmkant."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Show about information of the currently selected item"
@@ -535,8 +576,12 @@ msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Velkommen til den første opstart af panelet til Xfce"
 
 #: ../migrate/main.c:80
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
-msgstr "Fordi panelet er flyttet til et nyt system for gemme indstillingerne, er det nødt til at indlæse en frisk basisindstilling."
+msgid ""
+"Because the panel moved to a new system for storing the settings, it has to "
+"load a fresh initial configuration."
+msgstr ""
+"Fordi panelet er flyttet til et nyt system for gemme indstillingerne, er det "
+"nødt til at indlæse en frisk basisindstilling."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -660,8 +705,12 @@ msgid "Select A Menu File"
 msgstr "Vælg en menufil"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr "Vælg denne indstilling for at vise det generiske navn i menuen, eksempelvis \"Filhåndtering\" i stedet for \"Thunar\""
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"Vælg denne indstilling for at vise det generiske navn i menuen, eksempelvis "
+"\"Filhåndtering\" i stedet for \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
@@ -794,8 +843,7 @@ msgstr "Vis _sekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "I_ntervaller:"
@@ -831,8 +879,16 @@ msgstr "Vis _gitter"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "Formatet beskriver dato- og tidsdele som skal indsættes i filnavnet. Som eksempel, %Y vil blive erstattet med året, %m med måneden og %d med dagen. Gennemlæs dokumentationen for datohjælpeprogrammet for yderligere information."
+msgid ""
+"The format describes the date and time parts to insert into the file name. "
+"For example, %Y will be substituted with the year, %m with the month and %d "
+"with the day. See the documentation of the date utility for additional "
+"information."
+msgstr ""
+"Formatet beskriver dato- og tidsdele som skal indsættes i filnavnet. Som "
+"eksempel, %Y vil blive erstattet med året, %m med måneden og %d med dagen. "
+"Gennemlæs dokumentationen for datohjælpeprogrammet for yderligere "
+"information."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1120,8 +1176,14 @@ msgid "Show a directory tree in a menu"
 msgstr "Vis en mappestruktur i en menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Indtast en liste over mønstre som bruges til at bestemme hvilke filer som der er synlige i en mappe. Hvis du angiver mere end ét mønster her skal listeelementerne adskilles med et semikolon (eks. *.txt;*.doc)."
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+"Indtast en liste over mønstre som bruges til at bestemme hvilke filer som "
+"der er synlige i en mappe. Hvis du angiver mere end ét mønster her skal "
+"listeelementerne adskilles med et semikolon (eks. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1217,8 +1279,12 @@ msgid "North"
 msgstr "Nord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr "Vælg denne indstilling for at slå værkstøjtips fra når du svæver over panelknappen eller menuelementer."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"Vælg denne indstilling for at slå værkstøjtips fra når du svæver over "
+"panelknappen eller menuelementer."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1248,7 +1314,7 @@ msgstr "Position af p_ilknap:"
 msgid "Program launcher with optional menu"
 msgstr "Program afvikler med valgfri menu"
 
-#: ../plugins/pager/pager.c:411
+#: ../plugins/pager/pager.c:413
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Kunne ikke åbne arbejdsområdeindstillingerne til Xfce"
 
@@ -1262,20 +1328,25 @@ msgid "Number of _rows:"
 msgstr "Antal ræ_kker:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "Vis arbejdsom_rådenavne"
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
+msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
+msgid "Show mi_niature view"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Skift arbejdsområde med muse_hjulet"
 
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Skifter til arbejdsområde"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Arbejdsområde_indstillinger..."
 
@@ -1334,8 +1405,12 @@ msgstr "Kunne ikke starte beskedsområdet"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:569
-msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et beskedsområde. Dette område vil være ubenyttet."
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
+msgstr ""
+"Mest sandsynligt en anden widget har overtaget funktionen af et "
+"beskedsområde. Dette område vil være ubenyttet."
 
 #: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
@@ -1511,6 +1586,10 @@ msgstr "Slå _vigtige beskeder til"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
 msgstr "Ikon"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "Vis arbejdsom_rådenavne"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"

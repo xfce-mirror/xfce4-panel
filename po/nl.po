@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-11 16:54+0200\n"
+"POT-Creation-Date: 2010-07-20 22:18+0200\n"
 "PO-Revision-Date: 2010-02-22 20:43+0100\n"
 "Last-Translator: Vincent Tunru <projects@vinnl.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -53,13 +53,13 @@ msgid "Failed to open the documentation browser"
 msgstr "Kon het toepassingen-menu niet laden"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:876
+#: ../libxfce4panel/xfce-panel-plugin.c:873
 #: ../panel/panel-preferences-dialog.c:1029
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:881
+#: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
@@ -67,22 +67,22 @@ msgstr ""
 "worden."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1041
+#: ../libxfce4panel/xfce-panel-plugin.c:1038
 msgid "_Move"
 msgstr "_Verplaatsen"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1083 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
 msgid "Add _New Items..."
 msgstr "_Nieuwe items toevoegen..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr "Paneelvoork_euren..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
 #, fuzzy
 msgid "Log _Out"
 msgstr "Afmelden"
@@ -270,14 +270,14 @@ msgstr "_Zoeken:"
 msgid "Enter search phrase here"
 msgstr "Geef hier een zoekterm op"
 
-#: ../panel/panel-plugin-external.c:421
+#: ../panel/panel-plugin-external.c:418
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 "De plugin \"%s\" is onverwacht opgehouden, wilt u deze plugin opnieuw "
 "starten?"
 
-#: ../panel/panel-plugin-external.c:423
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -1321,7 +1321,7 @@ msgstr "Positie van _pijlknop:"
 msgid "Program launcher with optional menu"
 msgstr "Programma-starter met optioneel menu"
 
-#: ../plugins/pager/pager.c:411
+#: ../plugins/pager/pager.c:413
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Kon de werkbladinstellingen van Xfce niet openen"
 
@@ -1335,20 +1335,25 @@ msgid "Number of _rows:"
 msgstr "Aantal _rijen:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "Laat bureaublad _namen zien"
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
+msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
+msgid "Show mi_niature view"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Bureaublad _wisselen met muis-wiel"
 
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Bureabladwisselaar"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Werkbladinstellingen"
 
@@ -1590,6 +1595,10 @@ msgstr "Urgentie-notificatie inschakelen"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
 msgstr "Pictogram"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "Laat bureaublad _namen zien"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"

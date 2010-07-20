@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-11 16:54+0200\n"
+"POT-Creation-Date: 2010-07-20 22:18+0200\n"
 "PO-Revision-Date: 2010-05-10 12:12+0200\n"
 "Last-Translator: Robert Hartl <hartl.robert@gmail.com>\n"
 "Language-Team: Slovak <xfce-i18n@xfce.org>\n"
@@ -54,34 +54,34 @@ msgid "Failed to open the documentation browser"
 msgstr "Nepodarilo sa otvoriť prehliadač dokumentácie"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:876
+#: ../libxfce4panel/xfce-panel-plugin.c:873
 #: ../panel/panel-preferences-dialog.c:1029
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ste si istí, že chcete odstrániť „%s“?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:881
+#: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ak odstránite položku z panela, bude navždy stratená."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1041
+#: ../libxfce4panel/xfce-panel-plugin.c:1038
 msgid "_Move"
 msgstr "_Presunúť"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1083 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
 msgid "Add _New Items..."
 msgstr "Pridať _nové položky..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr "_Nastavenia panela..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
 #, fuzzy
 msgid "Log _Out"
 msgstr "Odhlásiť"
@@ -263,12 +263,12 @@ msgstr "_Hľadať:"
 msgid "Enter search phrase here"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:421
+#: ../panel/panel-plugin-external.c:418
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:423
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -1284,7 +1284,7 @@ msgstr "Tlačilo so _šípkou"
 msgid "Program launcher with optional menu"
 msgstr "Programový spúšťač s nastaviteľnou ponukou"
 
-#: ../plugins/pager/pager.c:411
+#: ../plugins/pager/pager.c:413
 msgid "Unable to open the Xfce workspace settings"
 msgstr ""
 
@@ -1298,20 +1298,25 @@ msgid "Number of _rows:"
 msgstr "Počet _riadkov:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "Zobraziť _názvy pracovných plôch"
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
+msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
+msgid "Show mi_niature view"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Prepínať pracovné plochy _kolieskom myši"
 
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Prepínač pracovných plôch"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Nastavenia pracovnej plochy"
 
@@ -1554,6 +1559,10 @@ msgstr "Urgentné oznámenie"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
 msgstr "Ikona"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "Zobraziť _názvy pracovných plôch"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 #, fuzzy

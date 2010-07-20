@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-11 16:54+0200\n"
+"POT-Creation-Date: 2010-07-20 22:18+0200\n"
 "PO-Revision-Date: 2010-03-14 21:45+0530\n"
 "Last-Translator: W.H. Kalpa Pathum <callkalpa@gmail.com>\n"
 "Language-Team: Sinhala <kde-i18n-doc@kde.org>\n"
@@ -57,34 +57,34 @@ msgid "Failed to open the documentation browser"
 msgstr "සුලේඛන ගවේශකය විවෘත කිරීමට අපොහොසත් විය"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:876
+#: ../libxfce4panel/xfce-panel-plugin.c:873
 #: ../panel/panel-preferences-dialog.c:1029
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" ඉවත් කිරීමට අවශ්‍ය බව ඔබට සහතිකද?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:881
+#: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ඔබ පුවරුවෙන් අයිතමය මැකුවොත් එය ස්ථිරවම නැතිවෙයි."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1041
+#: ../libxfce4panel/xfce-panel-plugin.c:1038
 msgid "_Move"
 msgstr "ගමන් කරවන්න (_M)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1083 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
 msgid "Add _New Items..."
 msgstr "නව අයිතම එක් කරන්න... (_N)"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr "පුවරු අභිප්‍රේත... (_e)"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
 #, fuzzy
 msgid "Log _Out"
 msgstr "ඉවත් වෙන්න"
@@ -270,13 +270,13 @@ msgstr "සොයන්න: (_S)"
 msgid "Enter search phrase here"
 msgstr "මෙහි සෙවුම් වැකිය ඇතුල් කරනන්"
 
-#: ../panel/panel-plugin-external.c:421
+#: ../panel/panel-plugin-external.c:418
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 "\"%s\" ප්ලගිනය බලාපොරොත්තු නොවූ ලෙස පුවරුව හැරයන ලදි, ඔබට එය ප්‍රතිපණගැන්වීමට අවශ්‍යද?"
 
-#: ../panel/panel-plugin-external.c:423
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -1301,7 +1301,7 @@ msgstr "ඊතල බොත්තම් පිහිටීම: (_A)"
 msgid "Program launcher with optional menu"
 msgstr "විකල්ප මෙනුවක් සහිත යෙදුම් පුරනය"
 
-#: ../plugins/pager/pager.c:411
+#: ../plugins/pager/pager.c:413
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Xfce වැඩ තල සිටුවම් විවෘත කිරීමට නොහැක"
 
@@ -1315,20 +1315,25 @@ msgid "Number of _rows:"
 msgstr "පේළි ගණන: (_r)"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "වැඩතල නාමයන් පෙන්වන්න (_n)"
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
+msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
+msgid "Show mi_niature view"
+msgstr ""
+
+#: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "මූසික රෝදය භාවිතයෙන් වැඩතල මාරු කරන්න (_w)"
 
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "වැඩතලය මං මාරුව"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "වැඩතලය සිටුවම්... (_S)"
 
@@ -1570,6 +1575,10 @@ msgstr "හදිසි දැනුම්දීම් සක්‍රිය ක
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
 msgstr "අයිකනය"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Show workspace _names"
+msgstr "වැඩතල නාමයන් පෙන්වන්න (_n)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"
