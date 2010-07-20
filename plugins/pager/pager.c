@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
- * Copyright (c) 2007-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (c) 2007-2010 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -32,6 +32,7 @@
 #include <exo/exo.h>
 
 #include "pager.h"
+#include "pager-buttons.h"
 #include "pager-dialog_ui.h"
 
 
@@ -59,6 +60,7 @@ static gboolean pager_plugin_size_changed              (XfcePanelPlugin   *panel
 static void     pager_plugin_orientation_changed       (XfcePanelPlugin   *panel_plugin,
                                                         GtkOrientation     orientation);
 static void     pager_plugin_configure_plugin          (XfcePanelPlugin   *panel_plugin);
+static void     pager_plugin_screen_layout_changed     (PagerPlugin       *plugin);
 
 
 
@@ -71,13 +73,13 @@ struct _PagerPlugin
 {
   XfcePanelPlugin __parent__;
 
-  GtkWidget     *wnck_pager;
+  GtkWidget     *pager;
 
   WnckScreen    *wnck_screen;
 
   /* settings */
   guint          scrolling : 1;
-  guint          show_names : 1;
+  guint          miniature_view : 1;
   gint           rows;
 };
 
@@ -85,14 +87,15 @@ enum
 {
   PROP_0,
   PROP_WORKSPACE_SCROLLING,
-  PROP_SHOW_NAMES,
+  PROP_MINIATURE_VIEW,
   PROP_ROWS
 };
 
 
 
 /* define the plugin */
-XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (PagerPlugin, pager_plugin)
+XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (PagerPlugin, pager_plugin,
+    pager_buttons_register_type)
 
 
 
@@ -125,8 +128,8 @@ pager_plugin_class_init (PagerPluginClass *klass)
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_SHOW_NAMES,
-                                   g_param_spec_boolean ("show-names",
+                                   PROP_MINIATURE_VIEW,
+                                   g_param_spec_boolean ("miniature-view",
                                                          NULL, NULL,
                                                          FALSE,
                                                          EXO_PARAM_READWRITE));
@@ -146,12 +149,11 @@ pager_plugin_class_init (PagerPluginClass *klass)
 static void
 pager_plugin_init (PagerPlugin *plugin)
 {
-  /* init, draw nothing */
   plugin->wnck_screen = NULL;
   plugin->scrolling = TRUE;
-  plugin->show_names = FALSE;
+  plugin->miniature_view = FALSE;
   plugin->rows = 1;
-  plugin->wnck_pager = NULL;
+  plugin->pager = NULL;
 }
 
 
@@ -170,8 +172,10 @@ pager_plugin_get_property (GObject    *object,
       g_value_set_boolean (value, plugin->scrolling);
       break;
 
-    case PROP_SHOW_NAMES:
-      g_value_set_boolean (value, plugin->show_names);
+    case PROP_MINIATURE_VIEW:
+      g_value_set_boolean (value, plugin->miniature_view);
+
+      pager_plugin_screen_layout_changed (plugin);
       break;
 
     case PROP_ROWS:
@@ -200,21 +204,20 @@ pager_plugin_set_property (GObject      *object,
       plugin->scrolling = g_value_get_boolean (value);
       break;
 
-    case PROP_SHOW_NAMES:
-      plugin->show_names = g_value_get_boolean (value);
-
-      if (plugin->wnck_pager != NULL)
-        wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
-                                     plugin->show_names ?
-                                         WNCK_PAGER_DISPLAY_NAME :
-                                         WNCK_PAGER_DISPLAY_CONTENT);
+    case PROP_MINIATURE_VIEW:
+      plugin->miniature_view = g_value_get_boolean (value);
       break;
 
     case PROP_ROWS:
       plugin->rows = g_value_get_uint (value);
 
-      if (plugin->wnck_pager != NULL)
-        wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
+      if (plugin->pager != NULL)
+        {
+          if (plugin->miniature_view)
+            wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
+          else
+            pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
+        }
       break;
 
     default:
@@ -269,29 +272,35 @@ pager_plugin_scroll_event (GtkWidget      *widget,
 static void
 pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 {
+  GtkOrientation orientation;
+
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
 
-  if (G_UNLIKELY (plugin->wnck_pager != NULL))
+  if (G_UNLIKELY (plugin->pager != NULL))
     {
-      /* destroy the existing pager */
-      gtk_widget_destroy (GTK_WIDGET (plugin->wnck_pager));
-
-      /* force a screen update */
+      gtk_widget_destroy (GTK_WIDGET (plugin->pager));
       wnck_screen_force_update (plugin->wnck_screen);
     }
 
-  /* create the wnck pager */
-  plugin->wnck_pager = wnck_pager_new (plugin->wnck_screen);
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->wnck_pager);
-  gtk_widget_show (plugin->wnck_pager);
+  orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
 
-  /* set the pager properties */
-  wnck_pager_set_display_mode (WNCK_PAGER (plugin->wnck_pager),
-                               plugin->show_names ?
-                                   WNCK_PAGER_DISPLAY_NAME :
-                                   WNCK_PAGER_DISPLAY_CONTENT);
-  wnck_pager_set_n_rows (WNCK_PAGER (plugin->wnck_pager), plugin->rows);
+  if (plugin->miniature_view)
+    {
+      plugin->pager = wnck_pager_new (plugin->wnck_screen);
+      wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
+      wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
+      wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+    }
+  else
+    {
+      plugin->pager = pager_buttons_new (plugin->wnck_screen);
+      pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
+      pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
+    }
+
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->pager);
+  gtk_widget_show (plugin->pager);
 }
 
 
@@ -304,20 +313,15 @@ pager_plugin_screen_changed (GtkWidget *widget,
   GdkScreen   *screen;
   WnckScreen  *wnck_screen;
 
-  /* get the active screen */
   screen = gtk_widget_get_screen (widget);
   wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
 
-  /* only update if the screen changed */
   if (plugin->wnck_screen != wnck_screen)
     {
-      /* set the new screen */
       plugin->wnck_screen = wnck_screen;
 
-      /* rebuild the pager */
       pager_plugin_screen_layout_changed (plugin);
 
-      /* watch the screen for changes */
       g_signal_connect_swapped (G_OBJECT (screen), "monitors-changed",
          G_CALLBACK (pager_plugin_screen_layout_changed), plugin);
       g_signal_connect_swapped (G_OBJECT (screen), "size-changed",
@@ -334,20 +338,17 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty  properties[] =
   {
     { "workspace-scrolling", G_TYPE_BOOLEAN },
-    { "show-names", G_TYPE_BOOLEAN },
+    { "miniature-view", G_TYPE_BOOLEAN },
     { "rows", G_TYPE_UINT },
     { NULL }
   };
 
-  /* show the properties dialog */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
-  /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
-  /* create the pager */
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
       G_CALLBACK (pager_plugin_screen_changed), NULL);
   pager_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
@@ -360,7 +361,6 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
   PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
 
-  /* disconnect screen changed signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       pager_plugin_screen_changed, NULL);
 }
@@ -383,7 +383,10 @@ pager_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
 {
   PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
 
-  wnck_pager_set_orientation (WNCK_PAGER (plugin->wnck_pager), orientation);
+  if (plugin->miniature_view)
+    wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+  else
+    pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
 }
 
 
@@ -397,7 +400,6 @@ pager_plugin_configure_workspace_settings (GtkWidget *button)
 
   panel_return_if_fail (GTK_IS_WIDGET (button));
 
-  /* get the screen */
   screen = gtk_widget_get_screen (button);
   if (G_UNLIKELY (screen == NULL))
     screen = gdk_screen_get_default ();
@@ -426,14 +428,11 @@ pager_plugin_configure_n_workspaces_changed (WnckScreen    *wnck_screen,
   panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
   panel_return_if_fail (GTK_IS_BUILDER (builder));
 
-  /* get the rows adjustment */
   object = gtk_builder_get_object (builder, "rows");
 
-  /* get the number of workspaces and clamp the current value */
   n_worspaces = wnck_screen_get_workspace_count (wnck_screen);
   value = MIN (gtk_adjustment_get_value (GTK_ADJUSTMENT (object)), n_worspaces);
 
-  /* update the adjustment */
   g_object_set (G_OBJECT (object), "upper", n_worspaces, "value", value, NULL);
 }
 
@@ -445,7 +444,6 @@ pager_plugin_configure_destroyed (gpointer  data,
 {
   PagerPlugin *plugin = XFCE_PAGER_PLUGIN (data);
 
-  /* disconnect signals */
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin->wnck_screen),
                                         pager_plugin_configure_n_workspaces_changed,
                                         where_the_object_was);
@@ -492,9 +490,9 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   exo_mutual_binding_new (G_OBJECT (plugin), "workspace-scrolling",
                           G_OBJECT (object), "active");
 
-  object = gtk_builder_get_object (builder, "show-names");
+  object = gtk_builder_get_object (builder, "miniature-view");
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "show-names",
+  exo_mutual_binding_new (G_OBJECT (plugin), "miniature-view",
                           G_OBJECT (object), "active");
 
   object = gtk_builder_get_object (builder, "rows");

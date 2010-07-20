@@ -16,7 +16,9 @@ libpager_built_sources = \
 libpager_la_SOURCES = \
 	$(libpager_built_sources) \
 	pager.c \
-	pager.h
+	pager.h \
+	pager-buttons.h \
+	pager-buttons.c
 
 libpager_la_CFLAGS = \
 	$(GTK_CFLAGS) \
