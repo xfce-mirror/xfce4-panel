@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-13 10:06+0000\n"
+"POT-Creation-Date: 2010-07-20 10:06+0000\n"
 "PO-Revision-Date: 2010-03-04 16:59-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
@@ -54,34 +54,34 @@ msgid "Failed to open the documentation browser"
 msgstr "Falha ao abrir o navegador de documentação"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:876
+#: ../libxfce4panel/xfce-panel-plugin.c:873
 #: ../panel/panel-preferences-dialog.c:1029
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Tem a certeza que quer remover \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:881
+#: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se remover este item do painel, será perdido para sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1041
+#: ../libxfce4panel/xfce-panel-plugin.c:1038
 msgid "_Move"
 msgstr "_Mover"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1083 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
 msgid "Add _New Items..."
 msgstr "Adicionar _Novos Itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do Pain_el..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1111 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
 msgid "Log _Out"
 msgstr "_Sair"
 
@@ -255,12 +255,12 @@ msgstr "_Procurar:"
 msgid "Enter search phrase here"
 msgstr "Indique aqui a frase a pesquisar"
 
-#: ../panel/panel-plugin-external.c:421
+#: ../panel/panel-plugin-external.c:418
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "O plugin \"%s\" desapareceu do painel. Deseja reinicia-lo?"
 
-#: ../panel/panel-plugin-external.c:423
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "O plugin reiniciou mais que uma vez nos últimos %d segundos. Se premir Executar, o painel irá tentar reiniciar o plugin. Caso contrário o plugin será removido do painel para sempre."
@@ -295,7 +295,7 @@ msgstr "Tem a certeza que quer remover o painel %d?"
 #: ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(externo)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
