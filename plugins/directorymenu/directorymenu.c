@@ -455,15 +455,15 @@ directory_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
 
   if (strcmp (name, "popup") == 0
       && GTK_WIDGET_VISIBLE (panel_plugin)
-      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)))
+      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button))
+      && panel_utils_grab_available ())
     {
       if (value != NULL
           && G_VALUE_HOLDS_BOOLEAN (value)
           && g_value_get_boolean (value))
         {
           /* popup the menu under the pointer */
-          if (panel_utils_grab_available ())
-            directory_menu_plugin_menu (NULL, plugin);
+          directory_menu_plugin_menu (NULL, plugin);
         }
       else
         {
