@@ -2022,6 +2022,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GdkScreen      *screen;
   GdkRectangle    monitor;
   gint            monitor_num;
+  GTimeVal        now_t, end_t;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_WIDGET (menu_widget));
@@ -2044,7 +2045,31 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   gtk_widget_size_request (menu_widget, &requisition);
 
   /* get the root position of the attach widget */
-  gdk_window_get_origin (GDK_WINDOW (attach_widget->window), x, y);
+  gdk_window_get_position (GDK_WINDOW (attach_widget->window), x, y);
+
+  /* if the panel is hidden (auto hide is enabled) and we requested a
+   * panel lock, wait for gtk to position the panel before we actually
+   * use the coordinates */
+  if (plugin->priv->panel_lock > 0)
+    {
+      g_get_current_time (&end_t);
+      g_time_val_add (&end_t, G_USEC_PER_SEC / 2);
+
+      while (*x == -9999 && *y == -9999)
+        {
+          while (gtk_events_pending ())
+            gtk_main_iteration ();
+
+          gdk_window_get_position (GDK_WINDOW (attach_widget->window), x, y);
+
+          /* don't try longer then 1/2 a second */
+          g_get_current_time (&now_t);
+          if (now_t.tv_sec > end_t.tv_sec
+              || (now_t.tv_sec == end_t.tv_sec
+                  && now_t.tv_usec > end_t.tv_usec))
+            break;
+        }
+    }
 
   /* add the widgets allocation */
   *x += attach_widget->allocation.x;
@@ -2141,6 +2166,9 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
   g_return_if_fail (GTK_IS_MENU (menu));
   g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (panel_plugin));
 
+  /* register the menu */
+  xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (panel_plugin), menu);
+
   /* calculate the coordinates */
   attach_widget = gtk_menu_get_attach_widget (menu);
   xfce_panel_plugin_position_widget (XFCE_PANEL_PLUGIN (panel_plugin),
@@ -2148,9 +2176,6 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
 
   /* keep the menu inside screen */
   *push_in = TRUE;
-
-  /* register the menu */
-  xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (panel_plugin), menu);
 }
 
 
