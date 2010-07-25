@@ -1138,6 +1138,9 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
       plugin->priv->menu = GTK_MENU (menu);
     }
 
+  /* block autohide when this menu is shown */
+  xfce_panel_plugin_register_menu (plugin, GTK_MENU (plugin->priv->menu));
+
   return plugin->priv->menu;
 }
 
