@@ -95,7 +95,7 @@ static gboolean     panel_window_button_press_event         (GtkWidget        *w
 static gboolean     panel_window_button_release_event       (GtkWidget        *widget,
                                                              GdkEventButton   *event);
 static void         panel_window_grab_notify                (GtkWidget        *widget,
-                                                             gboolean         was_grabbed);
+                                                             gboolean          was_grabbed);
 static void         panel_window_size_request               (GtkWidget        *widget,
                                                              GtkRequisition   *requisition);
 static void         panel_window_size_allocate              (GtkWidget        *widget,
@@ -264,6 +264,7 @@ struct _PanelWindow
   AutohideState        autohide_state;
   guint                autohide_timeout_id;
   gint                 autohide_block;
+  gint                 autohide_grab_block;
 
   /* popup/down delay from gtk style */
   gint                 popup_delay;
@@ -430,6 +431,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_state = AUTOHIDE_DISABLED;
   window->autohide_timeout_id = 0;
   window->autohide_block = 0;
+  window->autohide_grab_block = 0;
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->base_x = -1;
@@ -1005,14 +1007,30 @@ panel_window_grab_notify (GtkWidget *widget,
                           gboolean   was_grabbed)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
+  GtkWidget   *current;
 
-  /* avoid hiding the panel when the window is grabbed. this
-   * (for example) happens when the user drags in the pager plugin
-   * see bug #4597 */
-  if (was_grabbed)
-    panel_window_thaw_autohide (window);
-  else
-    panel_window_freeze_autohide (window);
+  current = gtk_grab_get_current ();
+  if (GTK_IS_MENU_SHELL (current))
+    {
+      /* don't act on menu grabs, they should be registered through the
+       * plugin if they should block autohide */
+      window->autohide_grab_block++;
+    }
+  else if (window->autohide_grab_block > 0)
+    {
+      /* drop previous menu block */
+      window->autohide_grab_block--;
+    }
+  else if (window->autohide_grab_block == 0)
+    {
+      /* avoid hiding the panel when the window is grabbed. this
+       * (for example) happens when the user drags in the pager plugin
+       * see bug #4597 */
+      if (was_grabbed)
+        panel_window_thaw_autohide (window);
+      else
+        panel_window_freeze_autohide (window);
+    }
 }
 
 
