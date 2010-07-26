@@ -237,7 +237,8 @@ main (gint argc, gchar **argv)
       G_CALLBACK (signal_handler_quit), NULL);
   if (!xfce_sm_client_connect (sm_client, &error))
     {
-      g_warning ("Failed to connect to session manager: %s", error->message);
+      g_printerr ("%s: Failed to connect to session manager: %s\n",
+                  G_LOG_DOMAIN, error->message);
       g_error_free (error);
     }
 
