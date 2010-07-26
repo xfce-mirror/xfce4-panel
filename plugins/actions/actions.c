@@ -404,6 +404,19 @@ actions_plugin_button_spawn_command (const gchar *command)
 {
   GError *error = NULL;
 
+  if (g_getenv ("SESSION_MANAGER") == NULL)
+    {
+      /* TRANSLATORS: no session manager is launched, so avoid any
+       * problems and ask the user to quit the panel so users without
+       * xfce4-session can still close the xserver */
+      if (xfce_dialog_confirm (NULL, GTK_STOCK_QUIT, NULL,
+          _("If you have started Xfce without session manager, this will close the X server."),
+          _("Are you sure you want to quit the panel?")))
+         command = "xfce4-panel --quit";
+       else
+         return;
+    }
+
   if (!g_spawn_command_line_async (command, &error))
     {
       xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\""), command);

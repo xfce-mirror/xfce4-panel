@@ -1413,17 +1413,30 @@ panel_application_logout (void)
 {
   XfceSMClient *sm_client;
   GError       *error = NULL;
+  const gchar  *command = "xfce4-session-logout";
 
   /* first try to session client to logout else fallback and spawn xfce4-session-logout */
   sm_client = xfce_sm_client_get ();
   if (xfce_sm_client_is_connected (sm_client))
     {
       xfce_sm_client_request_shutdown (sm_client, XFCE_SM_CLIENT_SHUTDOWN_HINT_ASK);
+
+      return;
     }
-  else if (!g_spawn_command_line_async ("xfce4-session-logout", &error))
+  else if (g_getenv ("SESSION_MANAGER") == NULL)
+    {
+      if (xfce_dialog_confirm (NULL, GTK_STOCK_QUIT, NULL,
+          _("If you have started Xfce without session manager, this will close the X server."),
+          _("Are you sure you want to quit the panel?")))
+        command = "xfce4-panel --quit";
+      else
+        return;
+    }
+
+  if (!g_spawn_command_line_async (command, &error))
     {
       xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\""),
-                              "xfce4-session-logout");
+                              command);
       g_error_free (error);
     }
 }
