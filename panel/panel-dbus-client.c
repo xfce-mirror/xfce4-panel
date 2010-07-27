@@ -71,23 +71,6 @@ panel_dbus_client_get_proxy (GError **error)
 
 
 gboolean
-panel_dbus_client_check_instance_running (void)
-{
-  DBusGProxy *dbus_proxy;
-
-  /* if no proxy is returned, there is no registered PanelDBusService */
-  dbus_proxy = panel_dbus_client_get_proxy (NULL);
-  if (dbus_proxy == NULL)
-    return FALSE;
-
-  g_object_unref (G_OBJECT (dbus_proxy));
-
-  return TRUE;
-}
-
-
-
-gboolean
 panel_dbus_client_display_preferences_dialog (guint    active,
                                               GError **error)
 {

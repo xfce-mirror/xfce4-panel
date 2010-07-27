@@ -85,6 +85,9 @@ struct _PanelDBusService
 
   /* queue for remote-events */
   GHashTable      *remote_events;
+
+  /* whether the service is owner of the name */
+  guint            is_owner : 1;
 };
 
 typedef struct
@@ -126,7 +129,9 @@ panel_dbus_service_init (PanelDBusService *service)
 {
   GError         *error = NULL;
   DBusConnection *connection;
+  gint            result;
 
+  service->is_owner = FALSE;
   service->remote_events = g_hash_table_new_full (g_int_hash, g_int_equal, NULL,
                                                   panel_dbus_service_plugin_event_free);
 
@@ -135,12 +140,17 @@ panel_dbus_service_init (PanelDBusService *service)
     {
       /* TODO handle error */
       connection = dbus_g_connection_get_connection (service->connection);
-      dbus_bus_request_name (connection, PANEL_DBUS_NAME, 0, NULL);
+      result = dbus_bus_request_name (connection, PANEL_DBUS_NAME, DBUS_NAME_FLAG_DO_NOT_QUEUE, NULL);
+      if (result == DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER)
+        {
+          /* yes we own the name */
+          service->is_owner = TRUE;
 
-      /* register this object */
-      dbus_g_connection_register_g_object (service->connection,
-                                           PANEL_DBUS_PATH,
-                                           G_OBJECT (service));
+          /* register this object */
+          dbus_g_connection_register_g_object (service->connection,
+                                               PANEL_DBUS_PATH,
+                                               G_OBJECT (service));
+        }
     }
   else
     {
@@ -432,6 +442,15 @@ panel_dbus_service_get (void)
     }
 
   return service;
+}
+
+
+
+gboolean
+panel_dbus_service_is_owner (PanelDBusService *service)
+{
+  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
+  return service->is_owner;
 }
 
 

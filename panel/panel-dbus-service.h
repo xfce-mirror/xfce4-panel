@@ -38,7 +38,9 @@ GType               panel_dbus_service_get_type    (void) G_GNUC_CONST;
 
 PanelDBusService   *panel_dbus_service_get         (void);
 
-void                panel_dbus_service_exit_panel  (gboolean restart);
+gboolean            panel_dbus_service_is_owner    (PanelDBusService *service);
+
+void                panel_dbus_service_exit_panel  (gboolean          restart);
 
 gboolean            panel_dbus_service_get_restart (void);
 

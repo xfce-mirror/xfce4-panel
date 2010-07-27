@@ -219,16 +219,19 @@ main (gint argc, gchar **argv)
       succeed = panel_dbus_client_plugin_event (opt_plugin_event, &error);
       goto dbus_return;
     }
-  else if (panel_dbus_client_check_instance_running ())
+
+  launch_panel:
+
+  /* start dbus service */
+  dbus_service = panel_dbus_service_get ();
+  if (!panel_dbus_service_is_owner (dbus_service))
     {
-      /* quit without error if and instance is running */
+      /* quit without error if an instance is running */
       succeed = TRUE;
 
       g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("There is already a running instance"));
       goto dbus_return;
     }
-
-  launch_panel:
 
   /* start session management */
   sm_client = xfce_sm_client_get ();
@@ -245,8 +248,6 @@ main (gint argc, gchar **argv)
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
     signal (signums[i], signal_handler_quit);
-
-  dbus_service = panel_dbus_service_get ();
 
   application = panel_application_get ();
 
