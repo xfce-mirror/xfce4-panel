@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-26 16:06+0000\n"
+"POT-Creation-Date: 2010-07-27 22:05+0000\n"
 "PO-Revision-Date: 2010-03-04 16:59-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
@@ -143,48 +143,48 @@ msgstr "A equipa de desenvolvimento Xfce. Todos os direitos reservados."
 msgid "Please report bugs to <%s>."
 msgstr "Por favor, reporte erros para <%s>."
 
-#: ../panel/main.c:227
+#: ../panel/main.c:232
 msgid "There is already a running instance"
 msgstr "Já existe uma instância em execução"
 
 #. spawn ourselfs again
-#: ../panel/main.c:273
+#: ../panel/main.c:275
 msgid "Restarting..."
 msgstr "Reiniciando..."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:290
 msgid "Failed to show the preferences dialog"
 msgstr "Falha ao mostrar o diálogo de preferências"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:292
 msgid "Failed to show the add new items dialog"
 msgstr "Falha ao mostrar o diálogo adicionar novos itens"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:294
 msgid "Failed to save the panel configuration"
 msgstr "Falha ao gravar a configuração do painel"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "Failed to add a plugin to the panel"
 msgstr "Falha ao adicionar plugin ao painel"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:298
 msgid "Failed to restart the panel"
 msgstr "Falha ao reiniciar o painel"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:300
 msgid "Failed to quit the panel"
 msgstr "Falha ao fechar o painel"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:302
 msgid "Failed to send D-Bus message"
 msgstr "Falha ao enviar a mensagem D-BUS"
 
-#: ../panel/main.c:311
+#: ../panel/main.c:313
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Pretende iniciar o painel Xfce? Se sim, certifique-se que grava a sessão ao sair para que o painel seja iniciado automaticamente na próxima vez que iniciar a sessão."
 
-#: ../panel/main.c:314 ../panel/main.c:328
+#: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância de %s foi encontrada"
@@ -193,16 +193,24 @@ msgstr "Nenhuma instância de %s foi encontrada"
 msgid "Failed to launch the migration application"
 msgstr "Falha ao lançar a aplicação de migração"
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+msgid "If you have started Xfce without session manager, this will close the X server."
+msgstr "Se iniciou o Xfce sem o gestor de sessões, isto irá fechar o servidor X."
+
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+msgid "Are you sure you want to quit the panel?"
+msgstr "Tem a certeza que quer sair do painel?"
+
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Falha ao executar o comando \"%s\""
 
-#: ../panel/panel-dbus-client.c:226
+#: ../panel/panel-dbus-client.c:209
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Especificou uma sintaxe de plugin inválida. Use NOME-PLUGIN:NOME[:TIPO:VALOR]."
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-dbus-client.c:242
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "O tipo \"%s\" é inválido. Os tipos válidos são bool, double, int, string and uint."
@@ -1262,11 +1270,11 @@ msgstr "Número _de linhas:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Show a miniature view of the workspace with rectangles for the visible windows"
-msgstr ""
+msgstr "Mostrar miniaturas da área de trabalho com rectângulos para as janelas visíveis"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "Mostrar vista de mi_niaturas"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
