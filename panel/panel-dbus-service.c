@@ -132,8 +132,7 @@ panel_dbus_service_init (PanelDBusService *service)
   gint            result;
 
   service->is_owner = FALSE;
-  service->remote_events = g_hash_table_new_full (g_int_hash, g_int_equal, NULL,
-                                                  panel_dbus_service_plugin_event_free);
+  service->remote_events = NULL;
 
   service->connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
   if (G_LIKELY (service->connection != NULL))
@@ -167,8 +166,6 @@ panel_dbus_service_finalize (GObject *object)
   PanelDBusService *service = PANEL_DBUS_SERVICE (object);
   DBusConnection   *connection;
 
-  panel_return_if_fail (g_hash_table_size (service->remote_events) == 0);
-
   if (G_LIKELY (service->connection != NULL))
     {
       /* release the org.xfce.Panel name */
@@ -179,7 +176,11 @@ panel_dbus_service_finalize (GObject *object)
       dbus_g_connection_unref (service->connection);
     }
 
-  g_hash_table_destroy (service->remote_events);
+  if (service->remote_events != NULL)
+    {
+      panel_return_if_fail (g_hash_table_size (service->remote_events) == 0);
+      g_hash_table_destroy (service->remote_events);
+    }
 
   (*G_OBJECT_CLASS (panel_dbus_service_parent_class)->finalize) (object);
 }
@@ -388,6 +389,11 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
           event->plugins = g_slist_copy (lnext);
           g_value_init (&event->value, G_VALUE_TYPE (value));
           g_value_copy (value, &event->value);
+
+          /* create hash table if needed */
+          if (service->remote_events == NULL)
+            service->remote_events = g_hash_table_new_full (g_int_hash, g_int_equal, NULL,
+                                                            panel_dbus_service_plugin_event_free);
 
           g_hash_table_insert (service->remote_events, &event->handle, event);
           g_signal_connect (G_OBJECT (li->data), "remote-event-result",
