@@ -41,26 +41,27 @@
 
 
 
-static void     pager_plugin_get_property              (GObject           *object,
-                                                        guint              prop_id,
-                                                        GValue            *value,
-                                                        GParamSpec        *pspec);
-static void     pager_plugin_set_property              (GObject           *object,
-                                                        guint              prop_id,
-                                                        const GValue      *value,
-                                                        GParamSpec        *pspec);
-static gboolean pager_plugin_scroll_event              (GtkWidget         *widget,
-                                                        GdkEventScroll    *event);
-static void     pager_plugin_screen_changed            (GtkWidget         *widget,
-                                                        GdkScreen         *previous_screen);
-static void     pager_plugin_construct                 (XfcePanelPlugin   *panel_plugin);
-static void     pager_plugin_free_data                 (XfcePanelPlugin   *panel_plugin);
-static gboolean pager_plugin_size_changed              (XfcePanelPlugin   *panel_plugin,
-                                                        gint               size);
-static void     pager_plugin_orientation_changed       (XfcePanelPlugin   *panel_plugin,
-                                                        GtkOrientation     orientation);
-static void     pager_plugin_configure_plugin          (XfcePanelPlugin   *panel_plugin);
-static void     pager_plugin_screen_layout_changed     (PagerPlugin       *plugin);
+static void     pager_plugin_get_property                 (GObject           *object,
+                                                           guint              prop_id,
+                                                           GValue            *value,
+                                                           GParamSpec        *pspec);
+static void     pager_plugin_set_property                 (GObject           *object,
+                                                           guint              prop_id,
+                                                           const GValue      *value,
+                                                           GParamSpec        *pspec);
+static gboolean pager_plugin_scroll_event                 (GtkWidget         *widget,
+                                                           GdkEventScroll    *event);
+static void     pager_plugin_screen_changed               (GtkWidget         *widget,
+                                                           GdkScreen         *previous_screen);
+static void     pager_plugin_construct                    (XfcePanelPlugin   *panel_plugin);
+static void     pager_plugin_free_data                    (XfcePanelPlugin   *panel_plugin);
+static gboolean pager_plugin_size_changed                 (XfcePanelPlugin   *panel_plugin,
+                                                           gint               size);
+static void     pager_plugin_orientation_changed          (XfcePanelPlugin   *panel_plugin,
+                                                           GtkOrientation     orientation);
+static void     pager_plugin_configure_workspace_settings (GtkWidget         *button);
+static void     pager_plugin_configure_plugin             (XfcePanelPlugin   *panel_plugin);
+static void     pager_plugin_screen_layout_changed        (PagerPlugin       *plugin);
 
 
 
@@ -334,7 +335,8 @@ pager_plugin_screen_changed (GtkWidget *widget,
 static void
 pager_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  GtkWidget           *mi, *image;
   const PanelProperty  properties[] =
   {
     { "workspace-scrolling", G_TYPE_BOOLEAN },
@@ -343,7 +345,17 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
     { NULL }
   };
 
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+  xfce_panel_plugin_menu_show_configure (panel_plugin);
+
+  mi = gtk_image_menu_item_new_with_mnemonic (_("Workspace _Settings..."));
+  xfce_panel_plugin_menu_insert_item (panel_plugin, GTK_MENU_ITEM (mi));
+  g_signal_connect (G_OBJECT (mi), "activate",
+      G_CALLBACK (pager_plugin_configure_workspace_settings), NULL);
+  gtk_widget_show (mi);
+
+  image = gtk_image_new_from_icon_name ("xfce4-workspaces", GTK_ICON_SIZE_MENU);
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+  gtk_widget_show (image);
 
   panel_properties_bind (NULL, G_OBJECT (plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
@@ -457,7 +469,6 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
   GtkBuilder  *builder;
   GObject     *dialog, *object;
-  gchar       *path;
 
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
 
@@ -479,11 +490,6 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (GTK_IS_BUTTON (object));
   g_signal_connect (G_OBJECT (object), "clicked",
       G_CALLBACK (pager_plugin_configure_workspace_settings), dialog);
-
-  /* don't show button if xfwm4 is not installed */
-  path = g_find_program_in_path (WORKSPACE_SETTINGS_COMMAND);
-  g_object_set (G_OBJECT (object), "visible", path != NULL, NULL);
-  g_free (path);
 
   object = gtk_builder_get_object (builder, "workspace-scrolling");
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
