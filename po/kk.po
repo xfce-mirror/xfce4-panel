@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-07-27 22:05+0000\n"
-"PO-Revision-Date: 2010-04-08 19:35+0600\n"
+"PO-Revision-Date: 2010-08-03 09:46+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr "\"%s\" өшіруді шынымен қалайсыз ба?"
 #: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Элементті панелден өшірсеңіз, ол толығымен жойылады."
+msgstr "Элементті панельден өшірсеңіз, ол толығымен жойылады."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1038
@@ -68,25 +68,29 @@ msgid "_Move"
 msgstr "Ж_ылжыту"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
+#: ../panel/panel-window.c:2135
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
+#: ../libxfce4panel/xfce-panel-plugin.c:1091
+#: ../panel/panel-window.c:2146
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
+#: ../libxfce4panel/xfce-panel-plugin.c:1108
+#: ../panel/panel-window.c:2162
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
 #: ../panel/main.c:77
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "'Панельді баптаулары' сұхбар терезесін көрсету"
+msgstr "'Панель баптаулары' сұхбат терезесін көрсету"
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
@@ -108,11 +112,11 @@ msgstr "PLUGIN-NAME"
 
 #: ../panel/main.c:81
 msgid "Restart the running panel instance"
-msgstr "Қосулы тұрған панель нұсқасын қайта қосу"
+msgstr "Қосулы тұрған панельді қайта қосу"
 
 #: ../panel/main.c:82
 msgid "Quit the running panel instance"
-msgstr "Қосулы тұрған панельді сөндіру"
+msgstr "Қосулы тұрған панельдің жұмысын аяқтау"
 
 #: ../panel/main.c:83
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -129,7 +133,7 @@ msgstr "[АРГУМЕНТТЕР...]"
 #: ../panel/main.c:161
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Қолдану ақпараты үшін \"%s --help\" теріңіз."
+msgstr "Қолдану ақпараты үшін \"%s --help\" енгізіңіз."
 
 #: ../panel/main.c:180
 msgid "The Xfce development team. All rights reserved."
@@ -147,7 +151,7 @@ msgstr "Қосулы тұрған нұсқасы бар болып тұр"
 #. spawn ourselfs again
 #: ../panel/main.c:275
 msgid "Restarting..."
-msgstr "Қайта қосу..."
+msgstr "Қайта қосылуда..."
 
 #: ../panel/main.c:290
 msgid "Failed to show the preferences dialog"
@@ -181,7 +185,8 @@ msgstr "D-Bus хабарламасын жіберу сәтсіз аяқталд�
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Xfce панелін іске қосуды қалайсыз ба? Олай болса, шыққан кезде сессияны сақтағаныңызға көз жеткізіңіз, одан кейін келесі кіргенде панель автоматты түрде іске қосылады."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:316
+#: ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s үшін қосулы тұрған нұсқалары табылмады"
@@ -190,15 +195,18 @@ msgstr "%s үшін қосулы тұрған нұсқалары табылма�
 msgid "Failed to launch the migration application"
 msgstr "Көшу қолданбасын жөнелту сәтсіз аяқталды"
 
-#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1429
+#: ../plugins/actions/actions.c:413
 msgid "If you have started Xfce without session manager, this will close the X server."
-msgstr "Xfce-ні сессия басқарушысыз бастасаңыз, бұл X сервердің жұмысын аяқтайды."
+msgstr "Xfce ортасын сессия басқарушысыз бастасаңыз, бұл X сервердің жұмысын аяқтайды."
 
-#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1430
+#: ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Панельдің жұмысын аяқтауды шынымен қалайсыз ба?"
 
-#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1438
+#: ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -218,10 +226,11 @@ msgstr "Xfce жұмыс үстел ортасының панелі"
 
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
-msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
+msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009-2010"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Жаңа элементті қосу"
 
@@ -230,10 +239,11 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Жаңа плагин үшін панельді тандаңыз:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:150
+#: ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
-msgstr "%d панель"
+msgstr "Панель %d"
 
 #: ../panel/panel-dialogs.c:186
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
@@ -334,7 +344,7 @@ msgstr "Бұл панельге жаңа элементті қосу"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
-msgstr "Панель фонының мөлдірлілігі, 0 (мөлдір) мен 100 (мөлдір емес) арасында болуы керек."
+msgstr "Панель фонның мөлдірлілігі, 0 (мөлдір) мен 100 (мөлдір емес) арасында болуы керек."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -425,11 +435,11 @@ msgstr "Фон суретін таңдаңыз"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "Таңдаулы болса, панель ені плагиндер талап ететін еніне дейін  автоөзгертіледі."
+msgstr "Таңдалған болса, панель ені плагиндер талап ететін еніне дейін автоөзгертіледі."
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Панельді бірнеше мониторға созу үшін бұр опцияны таңдаңыз."
+msgstr "Панельді бірнеше мониторға созу үшін бұл опцияны таңдаңыз."
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to hide the handles of the panel and lock its position."
@@ -512,7 +522,7 @@ msgstr "Ж_аңа ойын"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr "Д_еңгейі:"
+msgstr "Д_еңгей:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
@@ -520,7 +530,7 @@ msgstr "Жаңа түскен"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr "Орташа"
+msgstr "Бастауыш"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
@@ -536,7 +546,7 @@ msgstr "Xfce панелін бірінші рет қостыңыз, қош ке�
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
-msgstr "Панель жаңа жүйеге баптауларды сақтау үшін ауыстырылған соң жаңа баптаулар жүктеледі."
+msgstr "Панель жаңа жүйеге баптауларды сақтау үшін ауыстырылған соң, жаңа баптаулар жүктеледі."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -564,15 +574,15 @@ msgstr "Бір бос панель"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
-msgstr "Бір бос панельден бастау"
+msgstr "Бір бос панельмен бастау"
 
 #: ../migrate/main.c:115
 msgid "Failed to migrate the old panel configuration"
-msgstr "Ескі панель баптауларды жүктеп алу сәтсіз аяқталды"
+msgstr "Ескі панель баптауларын көшіру сәтсіз аяқталды"
 
 #: ../migrate/main.c:125
 msgid "Failed to load the default configuration"
-msgstr "Негізгі баптауларды жүктеп алу сәтсіз аяқталды"
+msgstr "Негізгі баптауларды жүктеу сәтсіз аяқталды"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -653,7 +663,7 @@ msgstr "Мәзір файлы"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu _file:"
-msgstr "Мәзір _файлы"
+msgstr "Мәзір _файлы:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Select A Menu File"
@@ -713,7 +723,7 @@ msgstr "Қолданбалар табылмады"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:952
 msgid "Failed to load the applications menu"
-msgstr "Қолданбалар мәзірін жүктеп алу сәтсіз аяқталды"
+msgstr "Қолданбалар мәзірін жүктеу сәтсіз аяқталды"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -735,7 +745,7 @@ msgstr "ОПЦИЯ"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
 msgid "Options:"
-msgstr "Баптаулары:"
+msgstr "Опциялар:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
@@ -1127,7 +1137,7 @@ msgstr "Бумада көрінетін файлдарды анықтайтын 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr "Сұрыптау"
+msgstr "Сүзгілеу"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 msgid "Select A Directory"
@@ -1139,11 +1149,11 @@ msgstr "Жас_ырын файлдарды көрсету"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
-msgstr "_Бас бумасы:"
+msgstr "_Негізгі бума:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr "_Файл шаблоны:"
+msgstr "_Файл үлгісі:"
 
 #: ../plugins/launcher/launcher.c:1448
 msgid "Unnamed Item"
@@ -1209,7 +1219,7 @@ msgstr "Батырма ішінде"
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
-msgstr "Жіберуші"
+msgstr "Жөнелткіш"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
@@ -1251,10 +1261,11 @@ msgstr "Қосымша мәзірі бар бағдарлама жіберуші
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Xfce жұмыс орын баптауларын ашу мүмкін емес"
 
-#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:412
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
-msgstr "%d жұмыс орны"
+msgstr "Жұмыс орны %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1271,16 +1282,16 @@ msgstr "Жұмыс орнын ондағы көрінетін терезелер
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr "Кі_ші көріністі іске қосу"
+msgstr "Кі_ші көріністерді іске қосу"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Жұмыс орындар арасында _тышқан дөнгелегі арқылы ауысу"
+msgstr "Жұмыс орындар арасында _тышқан дөңгелегі арқылы ауысу"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
-msgstr "Жұмыс орын ауыстырғышы"
+msgstr "Жұмыс орындар ауыстырғышы"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
@@ -1296,7 +1307,7 @@ msgstr "Нүктелер"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
-msgstr "Тұтқа:"
+msgstr "Тұтқа"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
 msgid "New Line"
@@ -1325,11 +1336,11 @@ msgstr "Жасырын терезелерді қалпына келтіру"
 
 #: ../plugins/showdesktop/showdesktop.c:194
 msgid "Minimize all open windows and show the desktop"
-msgstr "Терезелерді жасырып, жұмыс үстелін көрсету"
+msgstr "Барлық ашық терезелерді қайырып, жұмыс үстелін көрсету"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
-msgstr "Терезелерді жасырып, жұмыс үстелін көрсету"
+msgstr "Барлық терезелерді жасырып, жұмыс үстелін көрсету"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
@@ -1346,7 +1357,7 @@ msgstr "Басқа виджет хабарламалар орны ролін а�
 
 #: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
-msgstr "Трей менеджері таңдауды жоғалтқан"
+msgstr "Хабарламалар орны таңдауды жоғалтқан"
 
 #: ../plugins/systray/systray.c:764
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1354,7 +1365,7 @@ msgstr "Белгілі қолданбалар тізімін тазартуды 
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
-msgstr "Белгілі қолданбалар тізімін тазарту"
+msgstr "Бел_гілі қолданбалар тізімін тазарту"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Known Applications"
@@ -1384,7 +1395,7 @@ msgstr "Әрқашан"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr "Б_атырмалан өткен кезде терезе шетін көрсету"
+msgstr "Б_атырмадан тышқан өткен кезде терезе шетін көрсету"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
@@ -1400,7 +1411,7 @@ msgstr "Ешқашан"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr "Қайырылған тезелерді ағы_мдағы үстелге қайтару"
+msgstr "Қайырылған тезелерді ағы_мдағы үстелге қалпына келтіру"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show _flat buttons"
@@ -1508,7 +1519,7 @@ msgstr "Батырмалардың орналасуы:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Enable _urgency notification"
-msgstr "Шұғыл _хабарламаны қосу"
+msgstr "Шұғыл _хабарлауды іске қосу"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
@@ -1525,7 +1536,7 @@ msgstr "Жұмыс орны әре_кеттерін көрсету"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Window Menu"
-msgstr "Терезеле мәзірі"
+msgstr "Терезелер мәзірі"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
