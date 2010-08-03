@@ -6,16 +6,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.7.0\n"
+"Project-Id-Version: xfce4-panel 4.7.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-20 22:18+0200\n"
-"PO-Revision-Date: 2010-03-31 10:50+0200\n"
+"POT-Creation-Date: 2010-08-03 04:06+0000\n"
+"PO-Revision-Date: 2010-08-03 11:11+0300\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
-"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
@@ -72,20 +72,19 @@ msgid "_Move"
 msgstr "Sii_rrä"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
 msgid "Add _New Items..."
 msgstr "_Lisää osia..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
 msgid "Panel Pr_eferences..."
 msgstr "Paneelin _asetukset"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
 msgid "Log _Out"
-msgstr "Kirjaudu ulos"
+msgstr "Kirjaudu _ulos"
 
 #: ../panel/main.c:77
 msgid "Show the 'Panel Preferences' dialog"
@@ -145,51 +144,54 @@ msgstr "Xfce:n kehitystiimi. Kaikki oikeudet pidätetään."
 msgid "Please report bugs to <%s>."
 msgstr "Ilmoita virheistä osoitteeseen <%s>."
 
-#: ../panel/main.c:227
+#: ../panel/main.c:232
 msgid "There is already a running instance"
 msgstr "Paneeli on jo käynnissä"
 
 #. spawn ourselfs again
-#: ../panel/main.c:273
+#: ../panel/main.c:275
 msgid "Restarting..."
 msgstr "Käynnistetään uudelleen..."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:290
 msgid "Failed to show the preferences dialog"
 msgstr "Asetusikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:292
 msgid "Failed to show the add new items dialog"
 msgstr "Osien lisäysikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:294
 msgid "Failed to save the panel configuration"
 msgstr "Paneelin asetusten tallennus epäonnistui"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "Failed to add a plugin to the panel"
 msgstr "Osan lisääminen paneeliin epäonnistui"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:298
 msgid "Failed to restart the panel"
 msgstr "Paneelin uudelleenkäynnistys epäonnistui"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:300
 msgid "Failed to quit the panel"
 msgstr "Paneelin sulkeminen epäonnistui"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:302
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus -viestin lähetys epäonnistui"
 
-#: ../panel/main.c:311
+#: ../panel/main.c:313
 msgid ""
 "Do you want to start the Xfce panel? If you do, make sure you save the "
 "session on logout, so the panel is automatically started the next time you "
 "login."
 msgstr ""
+"Haluatko käynnistää Xfce-paneelin? Jos haluat, muista tallentaa istunto "
+"kirjautuessasi ulos, jotta paneeli käynnistetään myös seuraavan "
+"kirjautumisen yhteydessä."
 
-#: ../panel/main.c:314 ../panel/main.c:328
+#: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s ei ole käynnissä"
@@ -198,19 +200,30 @@ msgstr "%s ei ole käynnissä"
 msgid "Failed to launch the migration application"
 msgstr "Asetusten siirto-ohjelman käynnistys epäonnistui"
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+msgid ""
+"If you have started Xfce without session manager, this will close the X "
+"server."
+msgstr ""
+"Jos käynnistit Xfce:n ilman istunnonhallintaa, myös X-palvelin suljetaan."
+
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+msgid "Are you sure you want to quit the panel?"
+msgstr "Haluatko varmasti sulkea paneelin?"
+
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Komennon \"%s\" suoritus epäonnistui"
 
-#: ../panel/panel-dbus-client.c:226
+#: ../panel/panel-dbus-client.c:209
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "Liitännäisen tapahtumasyntaksi ei kelpaa. Muoto on LIITÄNNÄISEN-NIMI:NIMI[:"
 "TYYPPI:ARVO]."
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-dbus-client.c:242
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -315,16 +328,18 @@ msgstr "Haluatko varmasti poistaa paneelin %d?"
 #: ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(ulkoinen)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
 #: ../panel/panel-preferences-dialog.c:901
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Sisäinen nimi: %s-%d"
+msgstr ""
+"Sisäinen nimi: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -334,9 +349,8 @@ msgid "Internal name: %s-%d"
 msgstr "Sisäinen nimi: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "A_utomatically increase the length"
-msgstr "Pidennä automaattisesti"
+msgstr "L_aajenna automaattisesti"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -347,18 +361,15 @@ msgid "Add new item to this panel"
 msgstr "Lisää uusi osa paneeliin"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
 msgid ""
 "Alpha value of the panel background, between 0 (transparent) and 100 "
 "(opaque)."
 msgstr ""
-"Paneelin taustan läpinäkyvyys arvojen 0 (läpinäkyvä) ja 100 (läpinäkymätön) "
-"väliltä."
+"Paneelin taustan läpinäkyvyys väliltä 0 (läpinäkyvä) ja 100 (läpinäkymätön)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Ulkonäkö"
+msgstr "_Ulkoasu"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -369,13 +380,12 @@ msgid "Background"
 msgstr "Tausta"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
 msgid "Background image"
-msgstr "Tausta"
+msgstr "Taustakuva"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "_Väri:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -421,7 +431,7 @@ msgstr "Siirrä valittu kohde rivin verran ylöspäin"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr ""
+msgstr "Ei mitään (järjestemän tyyli)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
@@ -429,7 +439,7 @@ msgstr "_Tulostus:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Valitse paneelin väri"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Remove currently selected item"
@@ -440,9 +450,8 @@ msgid "Remove the currently selected panel"
 msgstr "Poista valittu paneeli"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "Valitse kuvake"
+msgstr "Valitse taustakuva"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid ""
@@ -473,7 +482,7 @@ msgstr "Näytä valitun kohteen tiedot"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Solid color"
-msgstr ""
+msgstr "Yksivärinen"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Span mo_nitors"
@@ -509,9 +518,8 @@ msgid "_Enter:"
 msgstr "_Yllä:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-#, fuzzy
 msgid "_File:"
-msgstr "_Tyyli:"
+msgstr "_Tiedosto:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
@@ -1299,9 +1307,18 @@ msgstr "_Nuolipainikkeen sijainti:"
 msgid "Program launcher with optional menu"
 msgstr "Sovelluskäynnistin, johon voi liittää valikon"
 
-#: ../plugins/pager/pager.c:413
+#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "Työtila-_asetukset..."
+
+#: ../plugins/pager/pager.c:425
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Xfce:n työtilojen asetusikkunan käynnistys ei onnistu"
+
+#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "Työtila %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1317,10 +1334,11 @@ msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
 msgstr ""
+"Näytä työtila pienoiskoossa ja sen näkyvät ikkunat suorakulmioina"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "Näytä pi_enoiskuva"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
@@ -1330,10 +1348,6 @@ msgstr "_Hiiren rulla vaihtaa työtilaa"
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Työtilanvaihtaja"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "Työtila-_asetukset..."
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1385,19 +1399,16 @@ msgid "Show Desktop"
 msgstr "Näytä työpöytä"
 
 #: ../plugins/systray/systray.c:276
-#, fuzzy
 msgid "Unable to start the notification area"
-msgstr "_Kiireellisyyshuomautus"
+msgstr "Ilmoitusalueen käynnistys epäonnistui"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:569
-#, fuzzy
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
-"Todennäköisesti jokin toinen elementti otti ilmoitusalueen hallintaansa. "
-"Liitännäinen suljetaan."
+"Jokin toinen elementti toimii ilmoitusalueena. Tätä aluetta ei käytetä."
 
 #: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
@@ -1530,11 +1541,6 @@ msgstr "Käytä painikkeita ikkunoiden välillä siirtymiseen"
 #: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
 msgstr "Työpöytä"
-
-#: ../plugins/windowmenu/windowmenu.c:854
-#, c-format
-msgid "Workspace %d"
-msgstr "Työtila %d"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
