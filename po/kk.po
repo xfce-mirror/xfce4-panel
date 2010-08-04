@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-27 22:05+0000\n"
+"POT-Creation-Date: 2010-08-04 04:06+0000\n"
 "PO-Revision-Date: 2010-08-03 09:46+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -68,20 +68,17 @@ msgid "_Move"
 msgstr "Ж_ылжыту"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-window.c:2135
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091
-#: ../panel/panel-window.c:2146
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108
-#: ../panel/panel-window.c:2162
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
@@ -89,8 +86,7 @@ msgstr "Жүйеден ш_ығу"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Панель баптаулары' сұхбат терезесін көрсету"
 
-#: ../panel/main.c:77
-#: ../panel/main.c:78
+#: ../panel/main.c:77 ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
@@ -185,8 +181,7 @@ msgstr "D-Bus хабарламасын жіберу сәтсіз аяқталд�
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Xfce панелін іске қосуды қалайсыз ба? Олай болса, шыққан кезде сессияны сақтағаныңызға көз жеткізіңіз, одан кейін келесі кіргенде панель автоматты түрде іске қосылады."
 
-#: ../panel/main.c:316
-#: ../panel/main.c:330
+#: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s үшін қосулы тұрған нұсқалары табылмады"
@@ -195,18 +190,15 @@ msgstr "%s үшін қосулы тұрған нұсқалары табылма�
 msgid "Failed to launch the migration application"
 msgstr "Көшу қолданбасын жөнелту сәтсіз аяқталды"
 
-#: ../panel/panel-application.c:1429
-#: ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
 msgid "If you have started Xfce without session manager, this will close the X server."
 msgstr "Xfce ортасын сессия басқарушысыз бастасаңыз, бұл X сервердің жұмысын аяқтайды."
 
-#: ../panel/panel-application.c:1430
-#: ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Панельдің жұмысын аяқтауды шынымен қалайсыз ба?"
 
-#: ../panel/panel-application.c:1438
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -229,8 +221,7 @@ msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009-2010"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Жаңа элементті қосу"
 
@@ -239,8 +230,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Жаңа плагин үшін панельді тандаңыз:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150
-#: ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -360,7 +350,7 @@ msgstr "Фон"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
-msgstr "Фон сур_еті"
+msgstr "Фон суреті"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
@@ -1257,12 +1247,15 @@ msgstr "Сызық_ша батырма орналасуы:"
 msgid "Program launcher with optional menu"
 msgstr "Қосымша мәзірі бар бағдарлама жіберуші"
 
-#: ../plugins/pager/pager.c:413
+#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "Жұмыс орын _баптаулары..."
+
+#: ../plugins/pager/pager.c:425
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Xfce жұмыс орын баптауларын ашу мүмкін емес"
 
-#: ../plugins/pager/pager-buttons.c:412
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Жұмыс орны %d"
@@ -1292,10 +1285,6 @@ msgstr "Жұмыс орындар арасында _тышқан дөңгеле�
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Жұмыс орындар ауыстырғышы"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "Жұмыс орын _баптаулары..."
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
