@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-21 16:06+0000\n"
+"POT-Creation-Date: 2010-08-20 04:06+0000\n"
 "PO-Revision-Date: 2010-03-28 19:41+0200\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -78,19 +78,19 @@ msgid "_Move"
 msgstr "Verschieben"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
 #, fuzzy
 msgid "Add _New Items..."
 msgstr "Neue Elemente hinzufügen..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
 #, fuzzy
 msgid "Panel Pr_eferences..."
 msgstr "Leisten_einstellungen"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
 #, fuzzy
 msgid "Log _Out"
 msgstr "Abmelden"
@@ -158,54 +158,54 @@ msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
 msgid "Please report bugs to <%s>."
 msgstr "Bitte senden Sie Fehlermeldungen an <%s>"
 
-#: ../panel/main.c:227
+#: ../panel/main.c:232
 #, fuzzy
 msgid "There is already a running instance"
 msgstr "Es ist bereits eine Benachrichtigungsfläche auf diesem Bildschirm vorhanden"
 
 #. spawn ourselfs again
-#: ../panel/main.c:273
+#: ../panel/main.c:275
 msgid "Restarting..."
 msgstr "Neustart..."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:290
 msgid "Failed to show the preferences dialog"
 msgstr "Konnte den Einstellungsdialog nicht öffnen"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:292
 msgid "Failed to show the add new items dialog"
 msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:294
 #, fuzzy
 msgid "Failed to save the panel configuration"
 msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 #, fuzzy
 msgid "Failed to add a plugin to the panel"
 msgstr "Hinzufügen des Elements fehlgeschlagen"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:298
 msgid "Failed to restart the panel"
 msgstr "Neustart der Leiste fehlgeschlagen"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:300
 #, fuzzy
 msgid "Failed to quit the panel"
 msgstr "Schließen der Leiste fehlgeschlagen"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:302
 #, fuzzy
 msgid "Failed to send D-Bus message"
 msgstr "Konnte den Bildschirm nicht öffnen"
 
-#: ../panel/main.c:311
+#: ../panel/main.c:313
 #, fuzzy
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, um die Leiste beim Starten automatisch zu laden."
 
-#: ../panel/main.c:314 ../panel/main.c:328
+#: ../panel/main.c:316 ../panel/main.c:330
 #, fuzzy, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
@@ -214,16 +214,25 @@ msgstr "Keine laufende Instanz von %s gefunden"
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+msgid "If you have started Xfce without session manager, this will close the X server."
+msgstr ""
+
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+#, fuzzy
+msgid "Are you sure you want to quit the panel?"
+msgstr "Soll die Arbeitsfläche %d wirklich entfernt werden?"
+
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Konnte »%s« nicht ausführen."
 
-#: ../panel/panel-dbus-client.c:226
+#: ../panel/panel-dbus-client.c:209
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-dbus-client.c:242
 #, fuzzy, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Ungültiger Hinweistyp \"%s\". Erlaubte Typen sind 'bool', 'double', 'int', 'string' und 'uint'."
@@ -293,7 +302,7 @@ msgstr "Automatisch"
 
 #. I18N: screen name in the output selector
 #: ../panel/panel-preferences-dialog.c:459
-#, c-format, fuzzy
+#, fuzzy, c-format
 msgid "Screen %d"
 msgstr "Bildschirm %d"
 
@@ -309,9 +318,9 @@ msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Die ausgewählte Leiste und ihr gesamter Inhalt werden entfernt."
 
 #: ../panel/panel-preferences-dialog.c:816
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Soll die Arbeitsfläche %d wirklich entfernt werden?"
+msgstr "Soll die Leiste %d wirklich entfernt werden?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -433,13 +442,14 @@ msgid "O_utput:"
 msgstr "Ausgabe:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+#, fuzzy
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Farbe der Leiste auswählen"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 #, fuzzy
 msgid "Remove currently selected item"
-msgstr "Die ausgewählte Leiste entfernen"
+msgstr "Das ausgewählte Objekt entfernen"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 #, fuzzy
@@ -1330,9 +1340,18 @@ msgstr "_Pfeilknopf"
 msgid "Program launcher with optional menu"
 msgstr "Programmstarter mit optionalem Menü"
 
-#: ../plugins/pager/pager.c:413
+#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "Arbeitsflächeneinstellungen"
+
+#: ../plugins/pager/pager.c:425
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Arbeitsflächeneinstellungen konnten nicht geöffnet werden"
+
+#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "Arbeitsfläche %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1360,10 +1379,6 @@ msgstr "Arbeitsflächen mit dem Maus_rad wechseln"
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Arbeitsflächenumschalter"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "Arbeitsflächeneinstellungen"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1577,11 +1592,6 @@ msgstr "Mit Schaltflächen zwischen offenen Fenstern umschalten"
 #, fuzzy
 msgid "Desktop"
 msgstr "Schreibtisch anzeigen"
-
-#: ../plugins/windowmenu/windowmenu.c:854
-#, c-format
-msgid "Workspace %d"
-msgstr "Arbeitsfläche %d"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
