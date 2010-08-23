@@ -184,36 +184,35 @@ msgid "Do you want to start the Xfce panel? If you do, make sure you save the se
 msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
 #: ../panel/main.c:316 ../panel/main.c:330
-#, fuzzy, c-format
+#, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
 
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Konnte die Anwendung zum Migrieren der Leiste nicht starten"
 
 #: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
 msgid "If you have started Xfce without session manager, this will close the X server."
-msgstr ""
+msgstr "Wenn Sie Xfce ohne die Sitzungsverwaltung gestartet haben, beendet dies den X-Server."
 
 #: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
-#, fuzzy
 msgid "Are you sure you want to quit the panel?"
-msgstr "Soll die Arbeitsfläche %d wirklich entfernt werden?"
+msgstr "Soll die Leiste wirklich beendet werden?"
 
 #: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Konnte »%s« nicht ausführen."
+msgstr "Konnte Befehl »%s« nicht ausführen."
 
 #: ../panel/panel-dbus-client.c:209
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Ungültige Syntax für Plugin-Ereignisse angegeben. Verwenden Sie PLUGIN-NAME:NAME [:TYP:WERT]."
 
 #: ../panel/panel-dbus-client.c:242
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Ungültiger Hinweistyp \"%s\". Erlaubte Typen sind 'bool', 'double', 'int', 'string' und 'uint'."
+msgstr "Ungültiger Hinweistyp »%s«. Erlaubte Typen sind 'bool', 'double', 'int', 'string' und 'uint'."
 
 #: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
@@ -221,7 +220,7 @@ msgstr "Die Leiste der Xfce Desktop Umbegung"
 
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
-msgstr ""
+msgstr "Fabian Nowak <timystery@arcor.de>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -251,9 +250,8 @@ msgid "Add New Items"
 msgstr "Neue Elemente hinzufügen"
 
 #: ../panel/panel-item-dialog.c:177
-#, fuzzy
 msgid "Add new plugins to the panel"
-msgstr "Objekte zur Leiste hinzufügen"
+msgstr "Neue Plugins zur Leiste hinzufügen"
 
 #: ../panel/panel-item-dialog.c:200
 #: ../plugins/launcher/launcher-dialog.glade.h:23
@@ -270,9 +268,9 @@ msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Element \"%s\" hat die Leiste unerwartet verlassen. Soll es neu gestartet werden?"
 
 #: ../panel/panel-plugin-external.c:420
-#, fuzzy, c-format
+#, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neu gestartet. Durch Drücken von »« wird das Element neu gestartet. Andernfalls wird es von der Leiste entfernt."
+msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neu gestartet. Durch Drücken von »Ausführen« wird das Element neu gestartet. Andernfalls wird es endültig von der Leiste entfernt."
 
 #: ../panel/panel-preferences-dialog.c:440
 msgid "Automatic"
@@ -280,20 +278,19 @@ msgstr "Automatisch"
 
 #. I18N: screen name in the output selector
 #: ../panel/panel-preferences-dialog.c:459
-#, fuzzy, c-format
+#, c-format
 msgid "Screen %d"
 msgstr "Bildschirm %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:485
-#, fuzzy, c-format
+#, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:815
-#, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Die ausgewählte Leiste und ihr gesamter Inhalt werden entfernt."
+msgstr "Die Einstellungen der Leiste und der Plugins werden dauerhaft entfernt."
 
 #: ../panel/panel-preferences-dialog.c:816
 #, c-format
@@ -305,16 +302,18 @@ msgstr "Soll die Leiste %d wirklich entfernt werden?"
 #: ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
 #: ../panel/panel-preferences-dialog.c:901
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Interner Name: %s-%d"
+msgstr ""
+"Interner Name: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -324,29 +323,24 @@ msgid "Internal name: %s-%d"
 msgstr "Interner Name: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "A_utomatically increase the length"
-msgstr "Leiste automatisch verbergen"
+msgstr "_Länge automatisch erhöhen"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new panel"
 msgstr "Neue Leiste hinzufügen"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
-#, fuzzy
 msgid "Add new item to this panel"
-msgstr "Objekte zur Leiste hinzufügen"
+msgstr "Neues Objekt zur Leiste hinzufügen"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
 msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
-msgstr "Alpha Wert des Leistenhintergrunds. Zwischen 0 (transparent) und 100 (undurchsichtig)"
+msgstr "Alpha-Wert des Leistenhintergrunds. Zwischen 0 (transparent) und 100 (undurchsichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Aussehen"
+msgstr "_Erscheinungsbild"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -357,12 +351,10 @@ msgid "Background"
 msgstr "Hintergrund"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
 msgid "Background image"
-msgstr "Hintergrund"
+msgstr "Hintergrundbild"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
-#, fuzzy
 msgid "C_olor:"
 msgstr "_Farbe:"
 
@@ -377,7 +369,6 @@ msgstr "Ausgewähltes Objekt bearbeiten"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
-#, fuzzy
 msgid "General"
 msgstr "Allgemein"
 
@@ -386,9 +377,8 @@ msgid "Horizontal"
 msgstr "Horizontal"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-#, fuzzy
 msgid "Ite_ms"
-msgstr "Objekte hinzufügen"
+msgstr "_Objekte"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
@@ -413,35 +403,31 @@ msgstr "Ausgewähltes Objekt eine Zeile nach oben bewegen"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr ""
+msgstr "Keines (Systemstil verwenden)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
 msgstr "Ausgabe:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
-#, fuzzy
 msgid "Pick a Panel Color"
-msgstr "Farbe der Leiste auswählen"
+msgstr "Farbe für die Leiste auswählen"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-#, fuzzy
 msgid "Remove currently selected item"
 msgstr "Das ausgewählte Objekt entfernen"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
-#, fuzzy
 msgid "Remove the currently selected panel"
 msgstr "Die ausgewählte Leiste entfernen"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "Symbol auswählen"
+msgstr "Hintergrundbild auswählen"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr ""
+msgstr "Wählen Sie diese Option, wenn die Länge der Leiste automatisch vergrößert werden soll, wenn Plugins mehr Platz benötigen."
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select this option to extend the panel over multiple monitors."
@@ -449,30 +435,27 @@ msgstr "Diese Option wählen um die Leiste über mehrere Monitore zu verteilen."
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
+msgstr "Wählen Sie diese Option, um die Leistengriffe zu verbergen und die Position zu sperren."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Wählen Sie diese Option, um die Leiste zu verbergen, wenn sich der Zeiger nicht über ihr befindet. Dies funktioniert nur, wenn sich die Leiste an einer Bildschirmkante befindet."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-#, fuzzy
 msgid "Show about information of the currently selected item"
 msgstr "Informationen zum ausgewähltes Objekt anzeigen"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Solid color"
-msgstr ""
+msgstr "Deckfarbe"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
-#, fuzzy
 msgid "Span mo_nitors"
-msgstr "Auf Monitore verteilen"
+msgstr "Aus mehrere Monitore ausdehnen"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
-#, fuzzy
 msgid "Transparency"
-msgstr "_Durchsichtigkeit"
+msgstr "Durchsichtigkeit"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Transparency when the pointer is hovering over the panel."
@@ -491,30 +474,26 @@ msgid "Xfce Panel"
 msgstr "Leiste"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
-#, fuzzy
 msgid "_Alpha:"
-msgstr "Alpha:"
+msgstr "_Alpha:"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr ""
+msgstr "_Eingabe:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-#, fuzzy
 msgid "_File:"
-msgstr "_Stil:"
+msgstr "_Datei:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
-#, fuzzy
 msgid "_Leave:"
-msgstr "_Name:"
+msgstr "_Verlassen:"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
-#, fuzzy
 msgid "_Lock panel"
-msgstr "Leiste sperren"
+msgstr "_Leiste sperren"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Orientation:"
@@ -526,26 +505,25 @@ msgstr "_Größe (in Pixel):"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/separator/separator-dialog.glade.h:8
-#, fuzzy
 msgid "_Style:"
 msgstr "_Stil:"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "_Neues Spiel"
 
 #: ../panel/panel-tic-tac-toe.c:134
-#, fuzzy
 msgid "_Level:"
-msgstr "_Name:"
+msgstr "_Level:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
 msgstr "Anfänger"
 
 #: ../panel/panel-tic-tac-toe.c:141
+#, fuzzy
 msgid "Intermediate"
-msgstr ""
+msgstr "Zwischen..."
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
@@ -556,35 +534,32 @@ msgid "Expert"
 msgstr "Experte"
 
 #: ../migrate/main.c:78
-#, fuzzy
 msgid "Welcome to the first start of the Xfce Panel"
-msgstr "Neuen Starter zur Leiste hinzufügen"
+msgstr "Willkommen beim ersten Start der Xfce-Leiste"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
-msgstr ""
+msgstr "Da die Leiste auf neue Art ihre Einstellungen speichert, muss eine neue Konfiguration geladen werden."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Wählen Sie unten aus, welches Setup Sie für den ersten Start verwenden möchten"
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
-msgstr ""
+msgstr "Alte Einstellungen migrieren"
 
 #: ../migrate/main.c:90
-#, fuzzy
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Leisteneinstellungen speichern"
+msgstr "Alte Einstellungen der Version 4.6 zu Xfconf migrieren"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
 msgstr "Standardeinstellung benutzen"
 
 #: ../migrate/main.c:96
-#, fuzzy
 msgid "Load the default configuration"
-msgstr "Leisteneinstellungen speichern"
+msgstr "Standardeinstellungen laden"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
@@ -595,14 +570,12 @@ msgid "Start with one empty panel"
 msgstr "Mit einer leeren Leiste beginnen"
 
 #: ../migrate/main.c:115
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
+msgstr "Alte Leisteneinstellungen konnten nicht migriert werden"
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
+msgstr "Standardeinstellungen konnten nicht geladen werden"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -610,24 +583,20 @@ msgid "Action Buttons"
 msgstr "Aktionsknöpfe"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
 msgid "Button Actions"
-msgstr "Leisten-Aktionen"
+msgstr "Tasten-aktionen"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "_Pfeilknopf"
+msgstr "_Erste Taste:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "_Symbolknopf"
+msgstr "_Zweite Taste:"
 
 #: ../plugins/actions/actions.c:108
-#, fuzzy
 msgid "Disabled"
-msgstr "A_usgeschaltet"
+msgstr "Ausgeschaltet"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
@@ -650,19 +619,16 @@ msgid "Restart"
 msgstr "Neustarten"
 
 #: ../plugins/actions/actions.c:114
-#, fuzzy
 msgid "Suspend"
-msgstr "Ruhezustand"
+msgstr "Standby"
 
 #: ../plugins/actions/actions.c:115
-#, fuzzy
 msgid "Hibernate"
-msgstr "Tiefschlaf"
+msgstr "Ruhezustand"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Abmelden oder Bildschirm sperren"
+msgstr "Abmelden, sperren oder andere Systemaktionen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -677,27 +643,24 @@ msgstr "Aussehen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "Bekannte Anwendungen"
+msgstr "Anwendungsmenü"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#, fuzzy
 msgid "Button _title:"
-msgstr "Leisten-Aktionen"
+msgstr "Knopf_titel"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Menu File"
-msgstr ""
+msgstr "Menüdatei"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu _file:"
-msgstr ""
+msgstr "_Menüdatei:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Select A Menu File"
-msgstr "Befehl auswählen"
+msgstr "Wählen Sie eine Menüdatei"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
@@ -707,12 +670,11 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application description in t_ooltip"
-msgstr ""
+msgstr "Anwendungsbeschreibung in Kurzhilfe zeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show generic application n_ames"
-msgstr "Bekannte Anwendungen"
+msgstr "Allgemeine Anwendungsnamen zeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show ic_ons in menu"
@@ -720,22 +682,20 @@ msgstr "Symbole im Menü anzeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Use _default menu file"
-msgstr ""
+msgstr "_Standardmenüdatei verwenden"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file"
-msgstr ""
+msgstr "Benutzerangepasste Menüdatei verwenden"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
 msgid "_Icon:"
 msgstr "_Symbol:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#, fuzzy
 msgid "_Show button title"
-msgstr "Programmnamen a_nzeigen"
+msgstr "_Titel im Knopf anzeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 msgid "Xfce Menu"
@@ -748,23 +708,21 @@ msgstr "Symbol auswählen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:703
 #: ../plugins/launcher/launcher.c:2102
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Konnte »%s« nicht ausführen."
+msgstr "Konnte Befehl »%s« nicht ausführen."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:940
-#, fuzzy
 msgid "No applications found"
 msgstr "Keine Standardanwendung für »%s« gefunden"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:952
-#, fuzzy
 msgid "Failed to load the applications menu"
-msgstr "Konnte »%s« nicht ausführen."
+msgstr "Konnte Anwendungsmenü nicht laden"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "Menü mit Kategoerien der installierten Anwendungen anzeigen"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
