@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-20 04:06+0000\n"
+"POT-Creation-Date: 2010-08-23 16:06+0000\n"
 "PO-Revision-Date: 2010-03-28 19:41+0200\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -20,7 +20,6 @@ msgstr ""
 "Language: de\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-#, fuzzy
 msgid "Create Launcher on Xfce Panel"
 msgstr "Starter zur Leiste hinzufügen"
 
@@ -29,74 +28,63 @@ msgid "Create a new launcher on the Xfce Panel"
 msgstr "Neuen Starter zur Leiste hinzufügen"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the Xfce Panel"
-msgstr "Leiste anpassen"
+msgstr "Leiste einrichten"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Panel Preferences"
 msgstr "Leisteneinstellungen"
 
 #: ../common/panel-utils.c:155
-#, fuzzy
 msgid "_Read Online"
 msgstr "Online _lesen"
 
 #: ../common/panel-utils.c:156
-#, fuzzy
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Sie können die Dokumentation im Netz lesen. Diese Dokumentation muss nicht Ihrer Version entsprechen."
+msgstr "Sie können die Dokumentation im Netz lesen. Diese Dokumentation entspricht allerdings nicht immer Ihrer Version."
 
 #: ../common/panel-utils.c:158
-#, fuzzy
 msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr "Das Anwenderhandbuch ist nicht installiert"
+msgstr "Das Anwenderhandbuch ist auf Ihrem Rechner nicht installiert"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
-#, fuzzy
 msgid "Failed to open the documentation browser"
 msgstr "Konnte die Dokumentationsanzeige nicht öffnen"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:873
 #: ../panel/panel-preferences-dialog.c:1029
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
-#, fuzzy
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Wenn Sie dieses Element von der Leiste entfernen ist es dauerhaft verloren."
+msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1038
-#, fuzzy
 msgid "_Move"
-msgstr "Verschieben"
+msgstr "_Verschieben"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
-#, fuzzy
 msgid "Add _New Items..."
-msgstr "Neue Elemente hinzufügen..."
+msgstr "_Neue Elemente hinzufügen..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
-#, fuzzy
 msgid "Panel Pr_eferences..."
 msgstr "Leisten_einstellungen"
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
-#, fuzzy
 msgid "Log _Out"
-msgstr "Abmelden"
+msgstr "_Abmelden"
 
 #: ../panel/main.c:77
-#, fuzzy
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Dialog »Leiste einrichten« anzeigen"
 
@@ -105,7 +93,6 @@ msgid "PANEL-NUMBER"
 msgstr "LEISTENNUMMER"
 
 #: ../panel/main.c:78
-#, fuzzy
 msgid "Show the 'Add New Items' dialog"
 msgstr "Dialog »Neue Objekte hinzufügen« zeigen"
 
@@ -114,23 +101,20 @@ msgid "Save the panel configuration"
 msgstr "Leisteneinstellungen speichern"
 
 #: ../panel/main.c:80
-#, fuzzy
 msgid "Add a new plugin to the panel"
-msgstr "Neue Leiste hinzufügen"
+msgstr "Neues Plugin zur Leiste hinzufügen"
 
 #: ../panel/main.c:80
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "PLUGIN-NAMe"
 
 #: ../panel/main.c:81
-#, fuzzy
 msgid "Restart the running panel instance"
-msgstr "Laufende Instanz von xfce4-panel neustarten"
+msgstr "Laufende Instanz der Leiste neustarten"
 
 #: ../panel/main.c:82
-#, fuzzy
 msgid "Quit the running panel instance"
-msgstr "Laufende Instanz von xfce4-panel beenden"
+msgstr "Laufende Instanz der Leiste beenden"
 
 #: ../panel/main.c:83
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -142,7 +126,7 @@ msgstr "Versionsinformationen ausgeben und beenden"
 #. parse context options
 #: ../panel/main.c:154
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ARGUMENTE…]"
 
 #: ../panel/main.c:161
 #, c-format
@@ -159,9 +143,8 @@ msgid "Please report bugs to <%s>."
 msgstr "Bitte senden Sie Fehlermeldungen an <%s>"
 
 #: ../panel/main.c:232
-#, fuzzy
 msgid "There is already a running instance"
-msgstr "Es ist bereits eine Benachrichtigungsfläche auf diesem Bildschirm vorhanden"
+msgstr "Es gibt bereits eine laufende Instanz"
 
 #. spawn ourselfs again
 #: ../panel/main.c:275
@@ -177,33 +160,28 @@ msgid "Failed to show the add new items dialog"
 msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
 
 #: ../panel/main.c:294
-#, fuzzy
 msgid "Failed to save the panel configuration"
 msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
 #: ../panel/main.c:296
-#, fuzzy
 msgid "Failed to add a plugin to the panel"
-msgstr "Hinzufügen des Elements fehlgeschlagen"
+msgstr "Konnte Plugin nicht zur Leiste hinzufügen"
 
 #: ../panel/main.c:298
 msgid "Failed to restart the panel"
 msgstr "Neustart der Leiste fehlgeschlagen"
 
 #: ../panel/main.c:300
-#, fuzzy
 msgid "Failed to quit the panel"
-msgstr "Schließen der Leiste fehlgeschlagen"
+msgstr "Beenden der Leiste fehlgeschlagen"
 
 #: ../panel/main.c:302
-#, fuzzy
 msgid "Failed to send D-Bus message"
-msgstr "Konnte den Bildschirm nicht öffnen"
+msgstr "Konnte keine D-Bus-Nachricht senden"
 
 #: ../panel/main.c:313
-#, fuzzy
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, um die Leiste beim Starten automatisch zu laden."
+msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
 #: ../panel/main.c:316 ../panel/main.c:330
 #, fuzzy, c-format
