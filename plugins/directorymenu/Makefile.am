@@ -4,7 +4,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"libdirectorymenu\" \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel/plugins
 
 plugin_LTLIBRARIES = \
 	libdirectorymenu.la

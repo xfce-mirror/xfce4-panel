@@ -34,8 +34,8 @@
 #include <panel/panel-plugin-external-wrapper.h>
 #include <panel/panel-plugin-external-46.h>
 
-#define PANEL_PLUGINS_LIB_DIR LIBDIR G_DIR_SEPARATOR_S "panel-plugins"
-
+#define PANEL_PLUGINS_LIB_DIR (LIBDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "plugins")
+#define PANEL_PLUGINS_LIB_DIR_OLD (LIBDIR G_DIR_SEPARATOR_S "panel-plugins")
 
 
 typedef enum _PanelModuleRunMode PanelModuleRunMode;
@@ -301,6 +301,7 @@ panel_module_new_from_desktop_file (const gchar *filename,
   gchar       *path;
   const gchar *module_exec;
   const gchar *module_unique;
+  gboolean     found;
 
   panel_return_val_if_fail (!exo_str_is_empty (filename), NULL);
   panel_return_val_if_fail (!exo_str_is_empty (name), NULL);
@@ -333,13 +334,23 @@ panel_module_new_from_desktop_file (const gchar *filename,
           /* show a messsage if the old module path key still exists */
           g_message ("Plugin %s: The \"X-XFCE-Module-Path\" key is "
                      "ignored in \"%s\", the panel will look for the "
-                     "module in " PANEL_PLUGINS_LIB_DIR ". See bug "
-                     "#5455 why this decision was made", name, filename);
+                     "module in %s. See bug #5455 why this decision was made",
+                     name, filename, PANEL_PLUGINS_LIB_DIR);
         }
 #endif
 
       path = g_module_build_path (PANEL_PLUGINS_LIB_DIR, module_name);
-      if (G_LIKELY (g_file_test (path, G_FILE_TEST_EXISTS)))
+      found = g_file_test (path, G_FILE_TEST_EXISTS);
+
+      if (!found)
+        {
+          /* deprecated location for module plugin directories */
+          g_free (path);
+          path = g_module_build_path (PANEL_PLUGINS_LIB_DIR_OLD, module_name);
+          found = g_file_test (path, G_FILE_TEST_EXISTS);
+        }
+
+      if (G_LIKELY (found))
         {
           /* create new module */
           module = g_object_new (PANEL_TYPE_MODULE, NULL);

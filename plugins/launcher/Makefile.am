@@ -5,7 +5,7 @@ INCLUDES = \
 	-DSN_API_NOT_YET_FROZEN \
 	$(PLATFORM_CPPFLAGS)
 
-plugindir = $(libdir)/xfce4/panel-plugins
+plugindir = $(libdir)/xfce4/panel/plugins
 
 plugin_LTLIBRARIES = \
 	liblauncher.la
