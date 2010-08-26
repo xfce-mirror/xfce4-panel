@@ -4,7 +4,6 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"xfce4-panel\" \
 	-DDATADIR=\"$(datadir)/xfce4\" \
 	-DLIBDIR=\"$(libdir)/xfce4\" \
-	-DLIBEXECDIR=\"$(libexecdir)/xfce4\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DDBUS_API_SUBJECT_TO_CHANGE \
 	$(PLATFORM_CPPFLAGS)

@@ -50,7 +50,7 @@
 #include <panel/panel-plugin-external.h>
 
 #define AUTOSAVE_INTERVAL (10 * 60)
-#define MIGRATE_BIN       LIBEXECDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "migrate"
+#define MIGRATE_BIN       LIBDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "migrate"
 
 
 

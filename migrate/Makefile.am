@@ -10,7 +10,7 @@ confdir = $(sysconfdir)/xdg/xfce4/panel
 conf_DATA = \
 	default.xml
 
-migratedir = $(libexecdir)/xfce4/panel
+migratedir = $(libdir)/xfce4/panel
 
 migrate_PROGRAMS = \
 	migrate
