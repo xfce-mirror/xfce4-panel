@@ -391,7 +391,7 @@ G_BEGIN_DECLS
     \
     if (_xpp_debug) \
       g_printerr ("xfce4-panel(%s): send provider signal %d\n", \
-                  xfce_panel_plugin_get_name (xpp), message); \
+                  xfce_panel_plugin_get_name (XFCE_PANEL_PLUGIN (xpp)), message); \
     \
     event.type = GDK_CLIENT_EVENT; \
     event.window = gtk_widget_get_window (plug); \
