@@ -49,6 +49,8 @@ void       panel_window_set_locked       (PanelWindow *window,
 
 gboolean   panel_window_get_locked       (PanelWindow *window);
 
+void       panel_window_focus            (PanelWindow *window);
+
 G_END_DECLS
 
 #endif /* !__PANEL_WINDOW_H__ */

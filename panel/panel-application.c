@@ -567,7 +567,7 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 
     case PROVIDER_SIGNAL_FOCUS_PLUGIN:
        /* focus the panel window (as part of focusing a widget within the plugin) */
-       gtk_window_present_with_time (GTK_WINDOW (window), GDK_CURRENT_TIME);
+       panel_window_focus (window);
        break;
 
     case PROVIDER_SIGNAL_SHOW_CONFIGURE:

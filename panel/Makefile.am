@@ -61,6 +61,7 @@ xfce4_panel_CFLAGS = \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(DBUS_CFLAGS) \
 	$(XFCONF_CFLAGS) \
+	$(LIBX11_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS = \
@@ -77,6 +78,7 @@ xfce4_panel_LDADD = \
 	$(LIBXFCE4UI_LIBS) \
 	$(XFCONF_LIBS) \
 	$(DBUS_LIBS) \
+	$(LIBX11_LIBS) \
 	-lm
 
 xfce4_panel_DEPENDENCIES = \

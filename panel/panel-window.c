@@ -27,6 +27,11 @@
 #include <math.h>
 #endif
 
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#include <X11/Xlib.h>
+#endif
+
 #include <exo/exo.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -2433,4 +2438,39 @@ panel_window_get_locked (PanelWindow *window)
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), TRUE);
 
   return window->locked;
+}
+
+
+
+void
+panel_window_focus (PanelWindow *window)
+{
+#ifdef GDK_WINDOWING_X11
+  XClientMessageEvent event;
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (GTK_WIDGET_REALIZED (window));
+
+  /* we need a slightly custom version of the call through Gtk+ to
+   * properly focus the panel when a plugin calls
+   * xfce_panel_plugin_focus_widget() */
+  event.type = ClientMessage;
+  event.window = GDK_WINDOW_XID (GTK_WIDGET (window)->window);
+  event.message_type = gdk_x11_get_xatom_by_name ("_NET_ACTIVE_WINDOW");
+  event.format = 32;
+  event.data.l[0] = 0;
+
+  gdk_error_trap_push ();
+
+  XSendEvent (GDK_DISPLAY (), GDK_ROOT_WINDOW (), False,
+              StructureNotifyMask, (XEvent *) &event);
+
+  gdk_flush ();
+
+  if (gdk_error_trap_pop () != 0)
+    g_critical ("Failed to focus panel window");
+#else
+  /* our best guess on non-x11 clients */
+  gtk_window_present (GTK_WINDOW (window));
+#endif
 }
