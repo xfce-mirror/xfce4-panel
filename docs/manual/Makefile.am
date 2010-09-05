@@ -135,12 +135,12 @@ all: doc-build.stamp
 # include the css and html files in the dist
 dist-hook: dist-check-doc doc-build.stamp
 	file="$(srcdir)/html/$(PACKAGE).css"; \
+	mkdir -p "$(distdir)/html"; \
 	if test -f "$$file"; then \
-		mkdir -p "$(distdir)/html"; \
 		cp "$$file" "$(distdir)/html/"; \
 	fi; \
 	for lang in $(ALL_LINGUAS); do \
-		if test -d "$(srcdir)/html/$$lang/index.html"; then \
+		if test -f "$(srcdir)/html/$$lang/index.html"; then \
 			mkdir -p "$(distdir)/html/$$lang"; \
 			cp -t "$(distdir)/html/$$lang/" $(srcdir)/html/$$lang/*; \
 		fi \
