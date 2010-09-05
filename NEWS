@@ -1,3 +1,26 @@
+4.7.3
+=====
+- Add support to run plugins in valgrind.
+- Add lXext to tasklist libraries (bug #6471).
+- Add a pager mode with normal buttons.
+- Fix menu positioning with autohide panels.
+- Always wait for a grab if we popup menus from events.
+- Don't handle grabs on the window from menu's.
+- Register the plugin menu to block autohide.
+- Make the session warning a non-aborting error for startxfce4.
+- Allow to quit the panel if no session manager is running.
+- Improve checking if we own the dbus name.
+- Delay allocation of event table until we use it.
+- Add workspace settings option to pager submenu.
+- Libxfce4panel-1.0.pc is missing variable localedir (bug #6629).
+- Remove deprecated encoding key from desktop files.
+- Move helpers applications to $libdir.
+- Move module panel plugins in $libdir/xfce4/panel/plugins.
+- Add cast to fix a compile error in external 4.6 plugins.
+- Fix activating the panel when a plugin asks for focus.
+- Translation updates (pt_BR, da, hu, de, pt, ca, fr, kk, it,
+  zh_TW).
+
 4.7.2
 =====
 - Fix typos in translated strings (bug #6350).
