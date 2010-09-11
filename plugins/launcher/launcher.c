@@ -858,7 +858,7 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
           if (exists)
             {
               /* reload the file */
-              if (!garcon_menu_item_reload (item, &error))
+              if (!garcon_menu_item_reload (item, NULL, &error))
                 {
                   g_critical ("Failed to reload menu item: %s", error->message);
                   g_error_free (error);
