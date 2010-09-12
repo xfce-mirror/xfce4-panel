@@ -19,14 +19,15 @@
 #ifndef __PANEL_DEBUG_H__
 #define __PANEL_DEBUG_H__
 
-#define PANEL_DEBUG_DOMAIN_MAIN        "main"
-#define PANEL_DEBUG_DOMAIN_POSITIONING "positioning"
-#define PANEL_DEBUG_DOMAIN_STRUTS      "struts"
-#define PANEL_DEBUG_DOMAIN_APPLICATION "application"
-#define PANEL_DEBUG_DOMAIN_EXTERNAL    "external"
-#define PANEL_DEBUG_DOMAIN_EXTERNAL46  "external46"
-#define PANEL_DEBUG_DOMAIN_TASKLIST    "tasklist"
-#define PANEL_DEBUG_DOMAIN_BASE_WINDOW "base-window"
+#define PANEL_DEBUG_DOMAIN_MAIN            "main"
+#define PANEL_DEBUG_DOMAIN_POSITIONING     "positioning"
+#define PANEL_DEBUG_DOMAIN_STRUTS          "struts"
+#define PANEL_DEBUG_DOMAIN_APPLICATION     "application"
+#define PANEL_DEBUG_DOMAIN_EXTERNAL        "external"
+#define PANEL_DEBUG_DOMAIN_EXTERNAL46      "external46"
+#define PANEL_DEBUG_DOMAIN_TASKLIST        "tasklist"
+#define PANEL_DEBUG_DOMAIN_BASE_WINDOW     "base-window"
+#define PANEL_DEBUG_DOMAIN_APPLICATIONMENU "applicationmenu"
 
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 
