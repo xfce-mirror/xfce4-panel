@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Juraj Brosz <juro@jurajbrosz.info>, 2004.
 # Roman Moravcik <roman.moravcik@gmail.com>, 2006.
-# Robert Hartl <hartl.robert@gmail.com>, 2009, 2010., 2010.
+# Robert Hartl <hartl.robert@gmail.com>, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-20 22:18+0200\n"
+"POT-Creation-Date: 2010-09-15 16:07+0000\n"
 "PO-Revision-Date: 2010-05-10 12:12+0200\n"
 "Last-Translator: Robert Hartl <hartl.robert@gmail.com>\n"
 "Language-Team: Slovak <xfce-i18n@xfce.org>\n"
-"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
@@ -38,15 +38,12 @@ msgid "_Read Online"
 msgstr ""
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr ""
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr ""
-"Užívateľská príručka pre Panel Xfce nie je nainštalovaná na vašom počítači"
+msgstr "Užívateľská príručka pre Panel Xfce nie je nainštalovaná na vašom počítači"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -71,20 +68,19 @@ msgid "_Move"
 msgstr "_Presunúť"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
 msgid "Add _New Items..."
 msgstr "Pridať _nové položky..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr "_Nastavenia panela..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
 msgid "Log _Out"
-msgstr "Odhlásiť"
+msgstr "_Odhlásiť"
 
 #: ../panel/main.c:77
 msgid "Show the 'Panel Preferences' dialog"
@@ -144,51 +140,48 @@ msgstr "Tím vývojárov Xfce. Všetky práva vyhradené."
 msgid "Please report bugs to <%s>."
 msgstr "Prosím, nahláste chyby na <%s>."
 
-#: ../panel/main.c:227
+#: ../panel/main.c:232
 msgid "There is already a running instance"
 msgstr ""
 
 #. spawn ourselfs again
-#: ../panel/main.c:273
+#: ../panel/main.c:275
 msgid "Restarting..."
 msgstr "Reštartuje sa…"
 
-#: ../panel/main.c:288
+#: ../panel/main.c:290
 msgid "Failed to show the preferences dialog"
 msgstr "Nepodarilo sa zobraziť dialógové okno nastavení"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:292
 msgid "Failed to show the add new items dialog"
 msgstr "Nepodarilo sa zobraziť dialógové okno pre pridanie novej položky"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:294
 msgid "Failed to save the panel configuration"
 msgstr "Nepodarilo sa uložiť konfiguráciu panela"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:296
 msgid "Failed to add a plugin to the panel"
 msgstr "Nepodarilo sa pridať zásuvný modul na panel"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:298
 msgid "Failed to restart the panel"
 msgstr "Nepodarilo sa reštartovať panel"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:300
 msgid "Failed to quit the panel"
 msgstr "Nepodarilo sa ukončiť panel"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:302
 msgid "Failed to send D-Bus message"
 msgstr "Nepodarilo sa odoslať správu D-Bus"
 
-#: ../panel/main.c:311
-msgid ""
-"Do you want to start the Xfce panel? If you do, make sure you save the "
-"session on logout, so the panel is automatically started the next time you "
-"login."
+#: ../panel/main.c:313
+msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:314 ../panel/main.c:328
+#: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
@@ -197,20 +190,27 @@ msgstr ""
 msgid "Failed to launch the migration application"
 msgstr "Nepodarilo sa spustiť aplikáciu pre migráciu"
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+msgid "If you have started Xfce without session manager, this will close the X server."
+msgstr ""
+
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+#, fuzzy
+msgid "Are you sure you want to quit the panel?"
+msgstr "Naozaj chcete odstrániť panel %d?"
+
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nepodarilo sa spustiť príkaz „%s“"
 
-#: ../panel/panel-dbus-client.c:226
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+#: ../panel/panel-dbus-client.c:209
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-dbus-client.c:242
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:79
@@ -237,9 +237,7 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:186
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:188
@@ -270,10 +268,7 @@ msgstr ""
 
 #: ../panel/panel-plugin-external.c:420
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.c:440
@@ -338,9 +333,7 @@ msgid "Add new item to this panel"
 msgstr "Pridá novú položku na tento panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
+msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -390,7 +383,8 @@ msgstr "_Položky"
 msgid "L_ength (%):"
 msgstr "_Dĺžka (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Rozmery"
@@ -430,9 +424,7 @@ msgid "Select A Background Image"
 msgstr "Vybrať obrázok na pozadí"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:28
@@ -440,14 +432,11 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
+msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:31
@@ -548,9 +537,7 @@ msgid "Welcome to the first start of the Xfce Panel"
 msgstr "Vitajte pri prvom spustnení panela Xfce"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr ""
 
 #: ../migrate/main.c:83
@@ -576,7 +563,7 @@ msgstr "Načítať východziu konfiguráciu"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
-msgstr ""
+msgstr "Jeden prázdny panel"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
@@ -678,9 +665,7 @@ msgid "Select A Menu File"
 msgstr "Vyberte súbor ponuky"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
@@ -714,26 +699,26 @@ msgstr "_Ikona:"
 msgid "_Show button title"
 msgstr "Zobraziť _názvy aplikácií"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Xfce Menu"
 msgstr "Ponuka Xfce"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Vybrať ikonu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
+#: ../plugins/applicationsmenu/applicationsmenu.c:709
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepodarilo sa spustiť príkaz „%s“."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
+#: ../plugins/applicationsmenu/applicationsmenu.c:969
 msgid "No applications found"
 msgstr "Nenašli sa žiadne aplikácie"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
+#: ../plugins/applicationsmenu/applicationsmenu.c:992
 msgid "Failed to load the applications menu"
 msgstr "Nepodarilo sa načítať ponuku aplikácií"
 
@@ -817,7 +802,8 @@ msgstr "Zobraziť _sekundy"
 msgid "F_ormat:"
 msgstr "_Formát:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr ""
@@ -854,11 +840,7 @@ msgstr "Zobraziť _mriežku"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1148,10 +1130,7 @@ msgid "Show a directory tree in a menu"
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1249,9 +1228,7 @@ msgid "North"
 msgstr "Sever"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1284,9 +1261,18 @@ msgstr "Tlačilo so _šípkou"
 msgid "Program launcher with optional menu"
 msgstr "Programový spúšťač s nastaviteľnou ponukou"
 
-#: ../plugins/pager/pager.c:413
+#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "Nastavenia pracovnej plochy"
+
+#: ../plugins/pager/pager.c:425
 msgid "Unable to open the Xfce workspace settings"
 msgstr ""
+
+#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "Pracovná plocha %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1298,9 +1284,7 @@ msgid "Number of _rows:"
 msgstr "Počet _riadkov:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1315,10 +1299,6 @@ msgstr "Prepínať pracovné plochy _kolieskom myši"
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Prepínač pracovných plôch"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "Nastavenia pracovnej plochy"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1377,9 +1357,7 @@ msgstr "Urgentné oznámenie"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:569
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr ""
 
 #: ../plugins/systray/systray.c:571
@@ -1516,11 +1494,6 @@ msgstr "Prepínanie okien tlačidlami"
 msgid "Desktop"
 msgstr "Pracovnú plocha"
 
-#: ../plugins/windowmenu/windowmenu.c:854
-#, c-format
-msgid "Workspace %d"
-msgstr "Pracovná plocha %d"
-
 #: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
 msgstr "Žiadne okná"
@@ -1584,10 +1557,8 @@ msgstr "Prepínanie okien ponukou"
 #~ msgid "C_ompositing"
 #~ msgstr "Pozícia"
 
-#, fuzzy
 #~ msgid "Failed to open manual"
 #~ msgstr "Nepodarilo sa otvoriť displej"
 
-#, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "Tlačidlá akcií"
