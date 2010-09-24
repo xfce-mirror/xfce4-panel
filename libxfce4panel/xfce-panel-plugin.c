@@ -1069,7 +1069,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
 
       /* create a panel submenu item */
       submenu = gtk_menu_new ();
-      item = gtk_menu_item_new_with_mnemonic ("_Xfce Panel");
+      item = gtk_menu_item_new_with_mnemonic (_("_Xfce Panel"));
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
       gtk_widget_show (item);
