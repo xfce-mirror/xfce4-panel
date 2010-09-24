@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-27 16:06+0000\n"
+"POT-Creation-Date: 2010-09-24 19:26+0000\n"
 "PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -71,18 +71,22 @@ msgstr "Hvis du fjerner elementet fra panelet vil det være tabt."
 msgid "_Move"
 msgstr "_Flyt"
 
+#: ../libxfce4panel/xfce-panel-plugin.c:1072
+msgid "_Xfce Panel"
+msgstr "_Xfce Panel"
+
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
 msgid "Log _Out"
 msgstr "_Logud"
 
@@ -144,48 +148,48 @@ msgstr "Xfce udviklingsholdet. Alle rettigheder forbeholdes."
 msgid "Please report bugs to <%s>."
 msgstr "Rapporter venligst fejl til <%s>."
 
-#: ../panel/main.c:227
+#: ../panel/main.c:232
 msgid "There is already a running instance"
 msgstr "Der findes allerede en kørende instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:274
+#: ../panel/main.c:275
 msgid "Restarting..."
 msgstr "Genstarter..."
 
-#: ../panel/main.c:289
+#: ../panel/main.c:290
 msgid "Failed to show the preferences dialog"
 msgstr "Kunne ikke vise dialogen indstillinger"
 
-#: ../panel/main.c:291
+#: ../panel/main.c:292
 msgid "Failed to show the add new items dialog"
 msgstr "Kunne ikke vise dialogen tilføj nye elementer"
 
-#: ../panel/main.c:293
+#: ../panel/main.c:294
 msgid "Failed to save the panel configuration"
 msgstr "Kunne ikke gemme indstillingen til panelet"
 
-#: ../panel/main.c:295
+#: ../panel/main.c:296
 msgid "Failed to add a plugin to the panel"
 msgstr "Kunne ikke føje et udvidelsesmodul til panelet"
 
-#: ../panel/main.c:297
+#: ../panel/main.c:298
 msgid "Failed to restart the panel"
 msgstr "Kunne ikke genstarte panelet"
 
-#: ../panel/main.c:299
+#: ../panel/main.c:300
 msgid "Failed to quit the panel"
 msgstr "Kunne ikke afslutte panelet"
 
-#: ../panel/main.c:301
+#: ../panel/main.c:302
 msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-besked"
 
-#: ../panel/main.c:312
+#: ../panel/main.c:313
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Ønsker du at starte panelet til Xfce? Hvis du vil det skal du huske at gemme sessionen ved logud. Det vil sikre dig at panelet vil blive startet automatisk næste gang ved logind."
 
-#: ../panel/main.c:315 ../panel/main.c:329
+#: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
@@ -207,11 +211,11 @@ msgstr "Er du sikker på, at du vil afslutte panelet?"
 msgid "Failed to execute command \"%s\""
 msgstr "Kunne ikke køre kommando \"%s\""
 
-#: ../panel/panel-dbus-client.c:226
+#: ../panel/panel-dbus-client.c:209
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Ugyldigt udvidelsesmodul syntaks angivet. Brug UDVIDELSESMODULNAVN:NAVN[:TYPE:VÆRDI]."
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-dbus-client.c:242
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Ugyldig hentydningstype  \"%s\". Valide typer er boolesk, heltal , strenge og heltal uden fortegn."
@@ -475,7 +479,7 @@ msgstr "Gennemsigtigt når markøren ikke svæver over panelet."
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
@@ -700,26 +704,26 @@ msgstr "_Ikon:"
 msgid "_Show button title"
 msgstr "_Vis knaptitel"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Xfce Menu"
 msgstr "Xfce's menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Vælg et ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
+#: ../plugins/applicationsmenu/applicationsmenu.c:709
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
+#: ../plugins/applicationsmenu/applicationsmenu.c:969
 msgid "No applications found"
 msgstr "Ingen programmer blev fundet"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
+#: ../plugins/applicationsmenu/applicationsmenu.c:992
 msgid "Failed to load the applications menu"
 msgstr "Kunne ikke starte programmenu"
 
@@ -1256,7 +1260,11 @@ msgstr "Position af p_ilknap:"
 msgid "Program launcher with optional menu"
 msgstr "Program afvikler med valgfri menu"
 
-#: ../plugins/pager/pager.c:413
+#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "Arbejdsområde_indstillinger..."
+
+#: ../plugins/pager/pager.c:425
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Kunne ikke åbne arbejdsområdeindstillingerne til Xfce"
 
@@ -1290,10 +1298,6 @@ msgstr "Skift arbejdsområde med muse_hjulet"
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Skifter til arbejdsområde"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "Arbejdsområde_indstillinger..."
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
