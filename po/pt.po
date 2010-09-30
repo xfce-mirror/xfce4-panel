@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-27 22:05+0000\n"
+"POT-Creation-Date: 2010-09-30 10:07+0000\n"
 "PO-Revision-Date: 2010-03-04 16:59-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
@@ -70,18 +70,22 @@ msgstr "Se remover este item do painel, será perdido para sempre."
 msgid "_Move"
 msgstr "_Mover"
 
+#: ../libxfce4panel/xfce-panel-plugin.c:1072
+msgid "_Xfce Panel"
+msgstr "Painel _Xfce"
+
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
 msgid "Add _New Items..."
 msgstr "Adicionar _Novos Itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do Pain_el..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
 msgid "Log _Out"
 msgstr "_Sair"
 
@@ -470,7 +474,7 @@ msgstr "Transparência quando o ponteiro não estiver a pairar sobre o painel."
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
 msgid "Xfce Panel"
 msgstr "Painel Xfce"
 
@@ -695,26 +699,26 @@ msgstr "Í_cone:"
 msgid "_Show button title"
 msgstr "_Mostrar título do botão"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Xfce Menu"
 msgstr "Menu Xfce"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Seleccione Um Ícone"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
+#: ../plugins/applicationsmenu/applicationsmenu.c:709
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Falha ao exectar o comando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
+#: ../plugins/applicationsmenu/applicationsmenu.c:969
 msgid "No applications found"
 msgstr "Nenhuma aplicação encontrada"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
+#: ../plugins/applicationsmenu/applicationsmenu.c:992
 msgid "Failed to load the applications menu"
 msgstr "Falha ao carregar o menu das aplicações"
 
@@ -1250,7 +1254,11 @@ msgstr "Posição do botão s_eta:"
 msgid "Program launcher with optional menu"
 msgstr "Lançador de programas com menu opcional"
 
-#: ../plugins/pager/pager.c:413
+#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "De_finições da Área de Trabalho..."
+
+#: ../plugins/pager/pager.c:425
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Incapaz de abrir as definições da área de trabalho"
 
@@ -1284,10 +1292,6 @@ msgstr "Mudar de área de trabalho usando a roda do _rato"
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Alternador de Áreas de Trabalho"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "De_finições da Área de Trabalho..."
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
