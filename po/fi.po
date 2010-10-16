@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-03 04:06+0000\n"
-"PO-Revision-Date: 2010-08-03 11:11+0300\n"
+"POT-Creation-Date: 2010-10-16 10:08+0000\n"
+"PO-Revision-Date: 2010-10-16 16:09+0300\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -71,18 +71,22 @@ msgstr "Jos poistast osan paneelista, sitä ei voi palauttaa."
 msgid "_Move"
 msgstr "Sii_rrä"
 
+#: ../libxfce4panel/xfce-panel-plugin.c:1072
+msgid "_Xfce Panel"
+msgstr "_Xfce paneeli"
+
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2135
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
 msgid "Add _New Items..."
 msgstr "_Lisää osia..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2146
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr "Paneelin _asetukset"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2162
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
 msgid "Log _Out"
 msgstr "Kirjaudu _ulos"
 
@@ -504,7 +508,7 @@ msgstr "Läpinäkyvyys, kun osoitin ei ole paneelin yllä."
 msgid "Vertical"
 msgstr "Pysty"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
 msgid "Xfce Panel"
 msgstr "Xfce paneeli"
 
@@ -737,26 +741,26 @@ msgstr "_Kuvake:"
 msgid "_Show button title"
 msgstr "_Näytä painikkeen teksti"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Xfce Menu"
 msgstr "Xfce:n valikko"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Valitse kuvake"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
+#: ../plugins/applicationsmenu/applicationsmenu.c:709
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Komennon \"%s\" suoritus epäonnistui."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
+#: ../plugins/applicationsmenu/applicationsmenu.c:969
 msgid "No applications found"
 msgstr "Sovelluksia ei löytynyt"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
+#: ../plugins/applicationsmenu/applicationsmenu.c:992
 msgid "Failed to load the applications menu"
 msgstr "Sovellusvalikon lataus epäonnistui"
 
@@ -1333,8 +1337,7 @@ msgstr "_Rivien lukumäärä:"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr ""
-"Näytä työtila pienoiskoossa ja sen näkyvät ikkunat suorakulmioina"
+msgstr "Näytä työtila pienoiskoossa ja sen näkyvät ikkunat suorakulmioina"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
