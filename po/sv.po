@@ -1,50 +1,46 @@
 # Swedish translations for xfce4-panel package.
-# Copyright (C) 2002-2009 The Xfce development team.
+# Copyright (C) 2002-2010 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Joakim Andreasson <joakim.andreasson@gmx.net>, 2003-2004.
 # Alexander Toresson <alexander.toresson@gmail.com>, 2006.
-# Daniel Nylander <po@danielnylander.se>, 2008, 2009.
+# Daniel Nylander <po@danielnylander.se>, 2008, 2009, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-20 22:18+0200\n"
-"PO-Revision-Date: 2009-12-16 17:12+0100\n"
+"POT-Creation-Date: 2010-10-16 10:08+0000\n"
+"PO-Revision-Date: 2010-10-17 17:45+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-#, fuzzy
 msgid "Create Launcher on Xfce Panel"
-msgstr "Om Xfce-panelen"
+msgstr "Skapa programstartare på Xfce-panelen"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create a new launcher on the Xfce Panel"
-msgstr ""
+msgstr "Skapa en ny programstartare på Xfce-panelen"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the Xfce Panel"
-msgstr "Om Xfce-panelen"
+msgstr "Anpassa Xfce-panelen"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Panel Preferences"
-msgstr ""
+msgstr "Panelinställningar"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
 msgstr ""
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr ""
 
 #: ../common/panel-utils.c:158
@@ -54,14 +50,14 @@ msgstr ""
 #. display an error message to the user
 #: ../common/panel-utils.c:171
 msgid "Failed to open the documentation browser"
-msgstr ""
+msgstr "Misslyckades med att öppna dokumentationsvisaren"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:873
 #: ../panel/panel-preferences-dialog.c:1029
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Är du säker på att du vill ta bort arbetsytan \"%s\"?"
+msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:878
 #: ../panel/panel-preferences-dialog.c:1032
@@ -70,34 +66,40 @@ msgstr ""
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1038
-#, fuzzy
 msgid "_Move"
-msgstr "Flytta"
+msgstr "_Flytta"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1072
+msgid "_Xfce Panel"
+msgstr "_Xfce-panelen"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
+#: ../panel/panel-window.c:2140
 msgid "Add _New Items..."
-msgstr "Lägg till nya objekt..."
+msgstr "Lägg till _nya objekt..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1091
+#: ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr ""
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1108
+#: ../panel/panel-window.c:2167
 msgid "Log _Out"
-msgstr ""
+msgstr "Logga _ut"
 
 #: ../panel/main.c:77
 #, fuzzy
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Visa dialogrutan \"Anpassa panelen\""
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "PANELNUMMER"
 
 #: ../panel/main.c:78
 #, fuzzy
@@ -124,7 +126,7 @@ msgstr "Starta om körande instans av xfce4-panel"
 
 #: ../panel/main.c:82
 msgid "Quit the running panel instance"
-msgstr ""
+msgstr "Avsluta den körande panelinstansen"
 
 #: ../panel/main.c:83
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -136,12 +138,12 @@ msgstr "Skriv ut versionsinformation och avsluta"
 #. parse context options
 #: ../panel/main.c:154
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ARGUMENT...]"
 
 #: ../panel/main.c:161
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Skriv \"%s --help\" för användningshjälp."
 
 #: ../panel/main.c:180
 msgid "The Xfce development team. All rights reserved."
@@ -155,81 +157,82 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../panel/main.c:227
-#, fuzzy
+#: ../panel/main.c:232
 msgid "There is already a running instance"
-msgstr "Det finns redan ett notifieringsfält som körs på denna skärm"
+msgstr "Det finns redan en körande instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:273
-#, fuzzy
+#: ../panel/main.c:275
 msgid "Restarting..."
-msgstr "Starta om"
+msgstr "Startar om..."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:290
 #, fuzzy
 msgid "Failed to show the preferences dialog"
 msgstr "Misslyckades med att öppna display"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:292
 #, fuzzy
 msgid "Failed to show the add new items dialog"
 msgstr "Visa dialogrutan \"Lägg till nya objekt\""
 
-#: ../panel/main.c:292
-#, fuzzy
-msgid "Failed to save the panel configuration"
-msgstr "Spara panelkonfigurationen"
-
 #: ../panel/main.c:294
+msgid "Failed to save the panel configuration"
+msgstr "Misslyckades med att spara panelkonfigurationen"
+
+#: ../panel/main.c:296
 msgid "Failed to add a plugin to the panel"
 msgstr ""
 
-#: ../panel/main.c:296
-#, fuzzy
-msgid "Failed to restart the panel"
-msgstr "Lägg till objekt till panelen"
-
 #: ../panel/main.c:298
-#, fuzzy
-msgid "Failed to quit the panel"
-msgstr "Misslyckades med att öppna display"
+msgid "Failed to restart the panel"
+msgstr "Misslyckades med att starta om panelen"
 
 #: ../panel/main.c:300
-#, fuzzy
-msgid "Failed to send D-Bus message"
-msgstr "Misslyckades med att öppna display"
+msgid "Failed to quit the panel"
+msgstr "Misslyckades med att avsluta panelen"
 
-#: ../panel/main.c:311
-msgid ""
-"Do you want to start the Xfce panel? If you do, make sure you save the "
-"session on logout, so the panel is automatically started the next time you "
-"login."
+#: ../panel/main.c:302
+msgid "Failed to send D-Bus message"
+msgstr "Misslyckades med att skicka D-Bus-meddelande"
+
+#: ../panel/main.c:313
+msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:314 ../panel/main.c:328
+#: ../panel/main.c:316
+#: ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Ingen körande instans av %s hittades"
 
 #: ../panel/panel-application.c:197
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
-#, fuzzy, c-format
-msgid "Failed to execute command \"%s\""
-msgstr "Kunde inte starta \"%s\""
-
-#: ../panel/panel-dbus-client.c:226
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+#: ../panel/panel-application.c:1429
+#: ../plugins/actions/actions.c:413
+msgid "If you have started Xfce without session manager, this will close the X server."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-application.c:1430
+#: ../plugins/actions/actions.c:414
+msgid "Are you sure you want to quit the panel?"
+msgstr "Är du säker på att du vill avsluta panelen?"
+
+#: ../panel/panel-application.c:1438
+#: ../plugins/actions/actions.c:422
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Failed to execute command \"%s\""
+msgstr "Kunde inte köra kommandot \"%s\""
+
+#: ../panel/panel-dbus-client.c:209
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+
+#: ../panel/panel-dbus-client.c:242
+#, c-format
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:79
@@ -239,41 +242,43 @@ msgstr ""
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr ""
+"Daniel Nylander <po@danielnylander.se>\n"
+"\n"
+"Skicka synpunkter på översättningen till\n"
+"<tp-sv@listor.tp-sv.se>."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
+#: ../panel/panel-dialogs.c:125
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
-msgstr "Lägg till nya objekt"
+msgstr "Lägg till nytt objekt"
 
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr ""
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:150
+#: ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:186
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:188
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Ändring av panelen tillåts inte"
 
 #: ../panel/panel-item-dialog.c:175
 msgid "Add New Items"
 msgstr "Lägg till nya objekt"
 
 #: ../panel/panel-item-dialog.c:177
-#, fuzzy
 msgid "Add new plugins to the panel"
-msgstr "Lägg till objekt till panelen"
+msgstr "Lägg till nya insticksmoduler till panelen"
 
 #: ../panel/panel-item-dialog.c:200
 #: ../plugins/launcher/launcher-dialog.glade.h:23
@@ -282,7 +287,7 @@ msgstr "_Sök:"
 
 #: ../panel/panel-item-dialog.c:208
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Ange sökfrasen här"
 
 #: ../panel/panel-plugin-external.c:418
 #, c-format
@@ -291,10 +296,7 @@ msgstr ""
 
 #: ../panel/panel-plugin-external.c:420
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.c:440
@@ -305,13 +307,13 @@ msgstr "Automatiskt"
 #: ../panel/panel-preferences-dialog.c:459
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "Skärm %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:485
-#, fuzzy, c-format
+#, c-format
 msgid "Monitor %d"
-msgstr "Sträck över flera skärmar"
+msgstr "Skärm %d"
 
 #: ../panel/panel-preferences-dialog.c:815
 #, fuzzy
@@ -319,16 +321,16 @@ msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Den valda panelen och alla dess objekt kommer att tas bort."
 
 #: ../panel/panel-preferences-dialog.c:816
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Är du säker på att du vill ta bort arbetsyta %d?"
+msgstr "Är du säker på att du vill ta bort panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
 #: ../panel/panel-preferences-dialog.c:896
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -338,22 +340,23 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
+"Internt namn: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: ../panel/panel-preferences-dialog.c:913
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Internt namn: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "A_utomatically increase the length"
-msgstr ""
+msgstr "Ö_ka automatiskt längden"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Lägg till nya objekt"
+msgstr "Lägg till en ny panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 #, fuzzy
@@ -361,31 +364,28 @@ msgid "Add new item to this panel"
 msgstr "Lägg till objekt till panelen"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
+msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Utseende"
+msgstr "Uts_eende"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
-msgstr ""
+msgstr "Visa och _dölj panelen automatiskt"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
-msgstr ""
+msgstr "Bakgrund"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
-msgstr ""
+msgstr "Bakgrundsbild"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "Fä_rg:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -400,21 +400,20 @@ msgstr "Ta bort aktuellt markerad panel"
 #: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
-msgstr ""
+msgstr "Allmänt"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Horizontal"
 msgstr "Horisontell"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-#, fuzzy
 msgid "Ite_ms"
-msgstr "Lägg till objekt"
+msgstr "O_bjekt"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
 msgid "L_ength (%):"
-msgstr ""
+msgstr "Lä_ngd (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
@@ -435,7 +434,7 @@ msgstr "Ta bort aktuellt markerad panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr ""
+msgstr "Ingen (använd systemstil)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
@@ -443,7 +442,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Välj en panelfärg"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 #, fuzzy
@@ -456,14 +455,11 @@ msgid "Remove the currently selected panel"
 msgstr "Ta bort aktuellt markerad panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Select A Background Image"
-msgstr "Välj kommando"
+msgstr "Välj en bakgrundsbild"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:28
@@ -471,14 +467,11 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
+msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:31
@@ -488,7 +481,7 @@ msgstr "Ta bort aktuellt markerad panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Solid color"
-msgstr ""
+msgstr "Enfärgad"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 #, fuzzy
@@ -496,9 +489,8 @@ msgid "Span mo_nitors"
 msgstr "Sträck över flera skärmar"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
-#, fuzzy
 msgid "Transparency"
-msgstr "_Genomskinlighet (%):"
+msgstr "Genomskinlighet"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Transparency when the pointer is hovering over the panel."
@@ -513,12 +505,13 @@ msgid "Vertical"
 msgstr "Vertikal"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-window.c:2128
 msgid "Xfce Panel"
 msgstr "Xfce-panelen"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
-msgstr ""
+msgstr "_Alfa:"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
@@ -527,17 +520,16 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
-msgstr ""
+msgstr "_Fil:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
-#, fuzzy
 msgid "_Leave:"
-msgstr "_Namn:"
+msgstr "_Lämna:"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
-msgstr ""
+msgstr "_Lås panelen"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Orientation:"
@@ -550,41 +542,38 @@ msgstr "_Storlek (bildpunkter):"
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
-msgstr ""
+msgstr "_Stil:"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "_Nytt spel"
 
 #: ../panel/panel-tic-tac-toe.c:134
-#, fuzzy
 msgid "_Level:"
-msgstr "_Namn:"
+msgstr "_Nivå:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "Nybörjare"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Medelbra"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Erfaren"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Expert"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
-msgstr ""
+msgstr "Välkommen till första starten av Xfce-panelen"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr ""
 
 #: ../migrate/main.c:83
@@ -593,29 +582,27 @@ msgstr ""
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
-msgstr ""
+msgstr "Migrera gammal konfiguration"
 
 #: ../migrate/main.c:90
-#, fuzzy
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Spara panelkonfigurationen"
+msgstr "Migrera gammal konfiguration från 4.6 till Xfconf"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
-msgstr ""
+msgstr "Använd standardkonfiguration"
 
 #: ../migrate/main.c:96
-#, fuzzy
 msgid "Load the default configuration"
-msgstr "Spara panelkonfigurationen"
+msgstr "Läs in standardkonfigurationen"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
-msgstr ""
+msgstr "En tom panel"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Starta med en tom panel"
 
 #: ../migrate/main.c:115
 #, fuzzy
@@ -633,59 +620,52 @@ msgid "Action Buttons"
 msgstr "Åtgärdsknappar"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
 msgid "Button Actions"
-msgstr "Panelåtgärder"
+msgstr "Knappåtgärder"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "_Pilknapp"
+msgstr "_Första knappen:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "_Ikonknapp"
+msgstr "A_ndra knappen:"
 
 #: ../plugins/actions/actions.c:108
-#, fuzzy
 msgid "Disabled"
-msgstr "I_naktiverad"
+msgstr "Inaktiverad"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr ""
+msgstr "Utloggningsdialog"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr ""
+msgstr "Logga ut"
 
 #: ../plugins/actions/actions.c:111
-#, fuzzy
 msgid "Lock Screen"
 msgstr "Lås skärmen"
 
 #: ../plugins/actions/actions.c:112
 msgid "Shut Down"
-msgstr ""
+msgstr "Stäng av"
 
 #: ../plugins/actions/actions.c:113
 msgid "Restart"
 msgstr "Starta om"
 
 #: ../plugins/actions/actions.c:114
-#, fuzzy
 msgid "Suspend"
-msgstr "Ljud"
+msgstr "Vänteläge"
 
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
-msgstr ""
+msgstr "Viloläge"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Logga ut eller lås skärmen"
+msgstr "Logga ut, lås skärmen eller andra systemåtgärder"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -700,32 +680,27 @@ msgstr "Utseende"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "Dolda program"
+msgstr "Programmeny"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#, fuzzy
 msgid "Button _title:"
-msgstr "Panelåtgärder"
+msgstr "Knapp_titel:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Menu File"
-msgstr ""
+msgstr "Menyfil"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu _file:"
-msgstr ""
+msgstr "Meny_fil:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Select A Menu File"
-msgstr "Välj kommando"
+msgstr "Välj en menyfil"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
@@ -733,13 +708,12 @@ msgid "Show application description in t_ooltip"
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show generic application n_ames"
-msgstr "Dolda program"
+msgstr "Visa allmänna programn_amn"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show ic_ons in menu"
-msgstr ""
+msgstr "Visa ik_oner i meny"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Use _default menu file"
@@ -751,41 +725,35 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
 msgid "_Icon:"
 msgstr "_Ikon:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#, fuzzy
 msgid "_Show button title"
-msgstr "Visa aktivitets_namn"
+msgstr "_Visa knapptitel"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
-#, fuzzy
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Xfce Menu"
-msgstr "Xfce-panelen"
+msgstr "Xfce-meny"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
-#, fuzzy
 msgid "Select An Icon"
-msgstr "Välj kommando"
+msgstr "Välj en ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
+#: ../plugins/applicationsmenu/applicationsmenu.c:709
 #: ../plugins/launcher/launcher.c:2102
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Kunde inte starta \"%s\""
+msgstr "Kunde inte köra kommandot \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
-#, fuzzy
+#: ../plugins/applicationsmenu/applicationsmenu.c:969
 msgid "No applications found"
-msgstr "Välj en ikon för \"%s\""
+msgstr "Inga program hittades"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
-#, fuzzy
+#: ../plugins/applicationsmenu/applicationsmenu.c:992
 msgid "Failed to load the applications menu"
-msgstr "Kunde inte starta \"%s\""
+msgstr "Misslyckades med att läsa in programmenyn"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -795,20 +763,19 @@ msgstr ""
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "Användning:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "FLAGGA"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
-#, fuzzy
 msgid "Options:"
-msgstr "Klockalternativ"
+msgstr "Alternativ:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
@@ -819,27 +786,24 @@ msgstr ""
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "Använd _platta knappar"
+msgstr "Visa hjälpflaggor"
 
 #: ../plugins/clock/clock.c:144
 msgid "Week %V"
-msgstr ""
+msgstr "Vecka %V"
 
 #: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Misslyckades med att köra klockkommandot"
 
 #: ../plugins/clock/clock.c:677
-#, fuzzy
 msgid "Custom Format"
-msgstr "Anpassad"
+msgstr "Anpassat format"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
 msgid "24-_hour clock"
-msgstr "Använd 24-_timmarsklocka"
+msgstr "24-_timmarsklocka"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -868,12 +832,12 @@ msgstr "Visa s_ekunder"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr ""
+msgstr "F_ormat:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Lu_ddighet:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 #, fuzzy
@@ -882,7 +846,7 @@ msgstr "B_linka med tidsavgränsare"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
-msgstr ""
+msgstr "Luddig"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
@@ -908,11 +872,7 @@ msgstr "Visa _handtag"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -921,7 +881,7 @@ msgstr "Sann _binär klocka"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr ""
+msgstr "_Layout:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 #, fuzzy
@@ -929,38 +889,36 @@ msgid "_Tooltip format:"
 msgstr "Format för verktygstips"
 
 #: ../plugins/clock/clock-fuzzy.c:86
-#, fuzzy
 msgid "Night"
-msgstr "Höger"
+msgstr "Natt"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
-msgstr ""
+msgstr "Tidig morgon"
 
 #: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
-msgstr ""
+msgstr "Morgon"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
-msgstr ""
+msgstr "Nästa mitt på dagen"
 
 #: ../plugins/clock/clock-fuzzy.c:90
-#, fuzzy
 msgid "Noon"
-msgstr "Ingen ikon"
+msgstr "Mitt på dagen"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
-msgstr ""
+msgstr "Eftermiddag"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
-msgstr ""
+msgstr "Kväll"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr ""
+msgstr "Sen kväll"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
@@ -972,27 +930,27 @@ msgstr ""
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr ""
+msgstr "fem över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr ""
+msgstr "tio över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr ""
+msgstr "kvart över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr ""
+msgstr "tjugo över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr ""
+msgstr "tjugofem över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
@@ -1002,27 +960,27 @@ msgstr ""
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "tjugofem i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "tjugo i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "kvart i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "tio i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr ""
+msgstr "fem i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
@@ -1041,19 +999,19 @@ msgstr ""
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "fem över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "tio över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "kvart över %0"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
@@ -1083,25 +1041,25 @@ msgstr ""
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "tjugo i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "kvart i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "tio i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "fem i %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
@@ -1111,64 +1069,60 @@ msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
-msgstr ""
+msgstr "ett"
 
 #: ../plugins/clock/clock-fuzzy.c:137
-#, fuzzy
 msgid "two"
-msgstr "Nätverk"
+msgstr "två"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
-msgstr ""
+msgstr "tre"
 
 #: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
-msgstr ""
+msgstr "fyra"
 
 #: ../plugins/clock/clock-fuzzy.c:140
-#, fuzzy
 msgid "five"
-msgstr "Kontor"
+msgstr "fem"
 
 #: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
-msgstr ""
+msgstr "sex"
 
 #: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
-msgstr ""
+msgstr "sju"
 
 #: ../plugins/clock/clock-fuzzy.c:143
-#, fuzzy
 msgid "eight"
-msgstr "Höger"
+msgstr "åtta"
 
 #: ../plugins/clock/clock-fuzzy.c:144
-#, fuzzy
 msgid "nine"
-msgstr "_Linje"
+msgstr "nio"
 
 #: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
-msgstr ""
+msgstr "tio"
 
 #: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
-msgstr ""
+msgstr "elva"
 
 #: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
-msgstr ""
+msgstr "tolv"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
 msgstr "Vad är klockan?"
 
 #: ../plugins/directorymenu/directorymenu.c:550
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Kunde inte starta \"%s\""
+msgstr "Misslyckades med att starta programmet \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
@@ -1176,9 +1130,9 @@ msgid "Failed to query content type for \"%s\""
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu.c:590
-#, fuzzy, c-format
+#, c-format
 msgid "No default application found for \"%s\""
-msgstr "Välj en ikon för \"%s\""
+msgstr "Inget standardprogram hittades för \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:605
 #, fuzzy, c-format
@@ -1192,44 +1146,38 @@ msgstr ""
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
-msgstr ""
+msgstr "Öppna mapp"
 
 #: ../plugins/directorymenu/directorymenu.c:780
-#, fuzzy
 msgid "Open in Terminal"
-msgstr "Kör i _terminal"
+msgstr "Öppna i terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr ""
+msgstr "Katalogmeny"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr ""
+msgstr "Filtrering"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#, fuzzy
 msgid "Select A Directory"
-msgstr "Välj kommando"
+msgstr "Välj en katalog"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-#, fuzzy
 msgid "Show _hidden files"
-msgstr "Visa _handtag"
+msgstr "Visa _dolda filer"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
@@ -1237,31 +1185,28 @@ msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr ""
+msgstr "_Filmönster:"
 
 #: ../plugins/launcher/launcher.c:1448
-#, fuzzy
 msgid "Unnamed Item"
-msgstr "Namnlös"
+msgstr "Namnlöst objekt"
 
 #: ../plugins/launcher/launcher.c:1588
-#, fuzzy
 msgid "No items"
-msgstr "Nytt objekt"
+msgstr "Inga objekt"
 
 #: ../plugins/launcher/launcher-dialog.c:666
 msgid "If you delete an item, it will be permanently removed"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.c:667
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Är du säker på att du vill ta bort arbetsytan \"%s\"?"
+msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
 #: ../plugins/launcher/launcher-dialog.c:668
-#, fuzzy
 msgid "Unnamed item"
-msgstr "Namnlös"
+msgstr "Namnlöst objekt"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Failed to remove the desktop file from the config directory"
@@ -1273,9 +1218,8 @@ msgid "Failed to open desktop item editor"
 msgstr "Misslyckades med att öppna display"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new empty item"
-msgstr "Lägg till nya objekt"
+msgstr "Lägg till ett nytt tomt objekt"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
@@ -1283,7 +1227,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "Avancerat"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
@@ -1300,7 +1244,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
+msgstr "Öst"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
@@ -1313,12 +1257,10 @@ msgstr "Programstartare"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "Nord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1335,13 +1277,12 @@ msgid "Show last _used item in panel"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
 msgid "South"
-msgstr "Om"
+msgstr "Syd"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr ""
+msgstr "Väst"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 #, fuzzy
@@ -1352,24 +1293,33 @@ msgstr "_Pilknapp"
 msgid "Program launcher with optional menu"
 msgstr "Programstartare med meny som tillval"
 
-#: ../plugins/pager/pager.c:413
+#: ../plugins/pager/pager.c:350
+#: ../plugins/pager/pager-dialog.glade.h:8
+#, fuzzy
+msgid "Workspace _Settings..."
+msgstr "Arbetsyteväxlare"
+
+#: ../plugins/pager/pager.c:425
 msgid "Unable to open the Xfce workspace settings"
 msgstr ""
+
+#: ../plugins/pager/pager-buttons.c:412
+#: ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "Arbetsyta %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Beteende"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
 msgid "Number of _rows:"
 msgstr "Antal _rader:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1385,40 +1335,30 @@ msgstr "Växla arbetsytor med mus_hjulet"
 msgid "Workspace Switcher"
 msgstr "Arbetsyteväxlare"
 
-#: ../plugins/pager/pager-dialog.glade.h:8
-#, fuzzy
-msgid "Workspace _Settings..."
-msgstr "Arbetsyteväxlare"
-
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
 msgstr "Växla mellan virtuella skrivbord"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
-#, fuzzy
 msgid "Dots"
-msgstr "_Punkter"
+msgstr "Punkter"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
-#, fuzzy
 msgid "Handle"
-msgstr "Handtag:"
+msgstr "Handtag"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
-#, fuzzy
 msgid "New Line"
-msgstr "Ny panel"
+msgstr "Ny rad"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/separator/separator.desktop.in.h:2
-#, fuzzy
 msgid "Separator"
-msgstr "Stil för avgränsare"
+msgstr "Avgränsare"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
 msgid "Transparent"
-msgstr "_Genomskinlighet (%):"
+msgstr "Genomskinlig"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
@@ -1430,14 +1370,12 @@ msgid "Adds a separator or space between panel items"
 msgstr "Lägger till ett mellanrum eller en linje mellan panelobjekt"
 
 #: ../plugins/showdesktop/showdesktop.c:193
-#, fuzzy
 msgid "Restore the minimized windows"
-msgstr "Återställ dolda fönster"
+msgstr "Återställ minimerade fönster"
 
 #: ../plugins/showdesktop/showdesktop.c:194
-#, fuzzy
 msgid "Minimize all open windows and show the desktop"
-msgstr "Dölj alla fönster och visa skrivbordet"
+msgstr "Minimera alla öppna fönster och visa skrivbordet"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
@@ -1454,9 +1392,7 @@ msgstr "Uppmärksamhetsnotifiering"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:569
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr ""
 
 # Underlig sträng
@@ -1470,14 +1406,12 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Är du säker på att du vill tömma listan över kända program?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
 msgid "C_lear Known Applications"
-msgstr "Välj ett program"
+msgstr "Tö_m kända program"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
 msgid "Known Applications"
-msgstr "Dolda program"
+msgstr "Kända program"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
@@ -1499,7 +1433,7 @@ msgstr "Område där notifieringsikoner visas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "Alltid"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
@@ -1515,113 +1449,100 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "Aldrig"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-#, fuzzy
 msgid "Show _flat buttons"
-msgstr "Använd _platta knappar"
+msgstr "Visa _platta knappar"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _handle"
 msgstr "Visa _handtag"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#, fuzzy
 msgid "Show button _labels"
-msgstr "Visa aktivitets_namn"
+msgstr "Visa knapp_etiketter"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Visa endast _minimerade fönster"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Show windows from _all workspaces"
 msgstr "Visa fönster från _alla arbetsytor"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Sorting _order:"
-msgstr ""
+msgstr "Sorterings_ordning:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Timestamp"
-msgstr ""
+msgstr "Tidsstämpel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "When space is limited"
-msgstr ""
+msgstr "När utrymmet är begränsat"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
 msgid "Window Buttons"
-msgstr "Åtgärdsknappar"
+msgstr "Fönsterknappar"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr ""
+msgstr "Fönster_gruppering:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#, fuzzy
 msgid "Window title"
-msgstr "Fönsterlista"
+msgstr "Fönstertitel"
 
 #: ../plugins/tasklist/tasklist-widget.c:2620
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Mi_nimera alla"
 
 #: ../plugins/tasklist/tasklist-widget.c:2629
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Av_minimera alla"
 
 #: ../plugins/tasklist/tasklist-widget.c:2635
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Ma_ximera alla"
 
 #: ../plugins/tasklist/tasklist-widget.c:2644
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "Avmax_imera alla"
 
 #: ../plugins/tasklist/tasklist-widget.c:2654
 msgid "_Close All"
-msgstr ""
+msgstr "S_täng alla"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
 msgstr "Växla mellan öppna fönster med knappar"
 
 #: ../plugins/windowmenu/windowmenu.c:652
-#, fuzzy
 msgid "Desktop"
-msgstr "Visa skrivbordet"
-
-#: ../plugins/windowmenu/windowmenu.c:854
-#, c-format
-msgid "Workspace %d"
-msgstr "Arbetsyta %d"
+msgstr "Skrivbord"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
-#, fuzzy
 msgid "No Windows"
-msgstr "Fönsterlista"
+msgstr "Inga fönster"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
 msgstr ""
 
 #: ../plugins/windowmenu/windowmenu.c:1300
-#, fuzzy
 msgid "Add Workspace"
 msgstr "Lägg till arbetsyta"
 
 #: ../plugins/windowmenu/windowmenu.c:1320
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Ta bort arbetsytan \"%s\""
 
@@ -1631,13 +1552,12 @@ msgid "Remove Workspace %d"
 msgstr "Ta bort arbetsyta %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-#, fuzzy
 msgid "Arrow"
-msgstr "_Pil:"
+msgstr "Pil"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Knapplayout:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 #, fuzzy
@@ -1645,24 +1565,21 @@ msgid "Enable _urgency notification"
 msgstr "Uppmärksamhetsnotifiering"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Icon"
-msgstr "_Ikon:"
+msgstr "Ikon"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "Visa namn på a_rbetsytor"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show workspace a_ctions"
 msgstr "Visa åtgärder för ar_betsytor"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-#, fuzzy
 msgid "Window Menu"
-msgstr "Fönsterlista"
+msgstr "Fönstermeny"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
@@ -1683,3 +1600,4 @@ msgstr "Växla mellan öppna fönster med en meny"
 #, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "Åtgärdsknappar"
+
