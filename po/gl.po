@@ -1,19 +1,19 @@
 # Galician translation of xfce4-panel
 # Copyright (C) 2008, 2009, 2010 Leandro Regueiro
 # This file is distributed under the same license as the xfce package.
-# 
+#
 # Ricardo Domínguez Rouco <riklaren@gmail.com>, 2006.
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2008, 2009, 2010.
-# 
+#
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en <http://trasno.net>
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-09 10:05+0000\n"
-"PO-Revision-Date: 2010-02-21 19:12+0100\n"
+"PO-Revision-Date: 2010-10-19 18:27+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -73,17 +73,20 @@ msgid "_Move"
 msgstr "_Mover"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
+#: ../panel/panel-window.c:2140
 msgid "Add _New Items..."
 msgstr "Engadir _novos elementos..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091
+#: ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias do panel..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108
+#: ../panel/panel-window.c:2167
 msgid "Log _Out"
 msgstr "Saír da _sesión"
 
@@ -91,7 +94,8 @@ msgstr "Saír da _sesión"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar o diálogo \"Preferencias do panel\""
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-DE-PANEL"
 
@@ -186,7 +190,8 @@ msgstr "Produciuse un erro ao enviar a mensaxe a D-Bus"
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Desexa iniciar o panel de Xfce? Se o fai asegúrese de que garda a sesión ao rematar a sesión, para que o panel se inicie automaticamente a seguinte vez que inicie a sesión."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:316
+#: ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Non se atopou ningunha instancia en execución de %s"
@@ -195,18 +200,21 @@ msgstr "Non se atopou ningunha instancia en execución de %s"
 msgid "Failed to launch the migration application"
 msgstr "Produciuse un erro ao iniciar o aplicativo de migración"
 
-#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1429
+#: ../plugins/actions/actions.c:413
 msgid "If you have started Xfce without session manager, this will close the X server."
 msgstr "Se iniciou Xfce sen xestor de sesións isto pechará o servidor X."
 
-#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1430
+#: ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Está seguro de que desexa saír do panel?"
 
-#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1438
+#: ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Produciuse un erro ao executar o comando \"%s\""
+msgstr "Produciuse un erro ao executar a orde \"%s\""
 
 #: ../panel/panel-dbus-client.c:209
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
@@ -231,7 +239,8 @@ msgstr ""
 "Axúdanos a traducir software libre ao galego."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Engadir un novo elemento"
 
@@ -240,7 +249,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Escolla un panel para o novo engadido:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:150
+#: ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -715,7 +725,7 @@ msgstr "Seleccione unha icona"
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Produciuse un erro ao executar o comando \"%s\"."
+msgstr "Produciuse un erro ao executar a orde \"%s\"."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:940
 msgid "No applications found"
@@ -765,7 +775,7 @@ msgstr "Seman %V"
 
 #: ../plugins/clock/clock.c:383
 msgid "Failed to execute clock command"
-msgstr "Produciuse un erro ao executar o comando do reloxo"
+msgstr "Produciuse un erro ao executar a orde do reloxo"
 
 #: ../plugins/clock/clock.c:677
 msgid "Custom Format"
@@ -1257,7 +1267,8 @@ msgstr "P_osición do botón de frecha:"
 msgid "Program launcher with optional menu"
 msgstr "Iniciador de aplicativos con menú opcional"
 
-#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:350
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Opcións de e_spazo de traballo..."
 
@@ -1265,7 +1276,8 @@ msgstr "Opcións de e_spazo de traballo..."
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Non foi posible abrir as opcións do espazo de traballo de Xfce"
 
-#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:412
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Espazo de traballo %d"
@@ -1281,7 +1293,7 @@ msgstr "Número de _filas:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Show a miniature view of the workspace with rectangles for the visible windows"
-msgstr "Mostra unha vista en miniatura do espazo de traballo con rectángulos que representan as fiestras visibles"
+msgstr "Mostra unha vista en miniatura do espazo de traballo con rectángulos que representan as xanelas visibles"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1331,15 +1343,15 @@ msgstr "Engadir un separador ou un espazo entre os elementos do panel"
 
 #: ../plugins/showdesktop/showdesktop.c:193
 msgid "Restore the minimized windows"
-msgstr "Restaurar as fiestras minimizadas"
+msgstr "Restaurar as xanelas minimizadas"
 
 #: ../plugins/showdesktop/showdesktop.c:194
 msgid "Minimize all open windows and show the desktop"
-msgstr "Minimizar todas as fiestras abertas e mostrar o escritorio"
+msgstr "Minimizar todas as xanelas abertas e mostrar o escritorio"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
-msgstr "Ocultar todas as fiestras e mostrar o escritorio"
+msgstr "Ocultar todas as xanelas e mostrar o escritorio"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
@@ -1402,7 +1414,7 @@ msgstr "Agrupar o título e a marca de tempo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr "Agrupar o título e o título da fiestra"
+msgstr "Agrupar o título e o título da xanela"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
@@ -1410,7 +1422,7 @@ msgstr "Nunca"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr "Restaurar as fiestras minimizadas no _espazo de traballo actual"
+msgstr "Restaurar as xanelas minimizadas no _espazo de traballo actual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show _flat buttons"
@@ -1426,12 +1438,12 @@ msgstr "Mostrar as e_tiquetas dos botóns"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
-msgstr "Só mostrar as fiestras _minimizadas"
+msgstr "Só mostrar as xanelas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr "Mostrar as _fiestras de todos os espazos de traballo"
+msgstr "Mostrar as _xanelas de todos os espazos de traballo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Sorting _order:"
@@ -1448,15 +1460,15 @@ msgstr "Cando o espazo é limitado"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
-msgstr "Botóns de fiestras"
+msgstr "Botóns de xanelas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Window _grouping:"
-msgstr "A_grupamento de fiestras:"
+msgstr "A_grupamento de xanelas:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window title"
-msgstr "Título da fiestra"
+msgstr "Título da xanela"
 
 #: ../plugins/tasklist/tasklist-widget.c:2620
 msgid "Mi_nimize All"
@@ -1480,7 +1492,7 @@ msgstr "_Pechar todo"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr "Cambiar entre as fiestras abertas usando botóns"
+msgstr "Cambiar entre as xanelas abertas usando botóns"
 
 #: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
@@ -1488,11 +1500,11 @@ msgstr "Escritorio"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
-msgstr "Sen fiestras"
+msgstr "Sen xanelas"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
-msgstr "Fiestras urxentes"
+msgstr "Xanelas urxentes"
 
 #: ../plugins/windowmenu/windowmenu.c:1300
 msgid "Add Workspace"
@@ -1535,20 +1547,18 @@ msgstr "Mostrar as a_ccións do espazo de traballo"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Window Menu"
-msgstr "Menú de fiestras"
+msgstr "Menú de xanelas"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr "Cambiar entre as fiestras abertas usando un menú"
+msgstr "Cambiar entre as xanelas abertas usando un menú"
 
 #~ msgid "_Restart"
 #~ msgstr "_Reiniciar"
-
 #~ msgid "C_ompositing"
 #~ msgstr "C_omposición"
-
 #~ msgid "Failed to open manual"
 #~ msgstr "Produciuse un erro ao abrir o manual"
-
 #~ msgid "Action Button"
 #~ msgstr "Botón de acción"
+
