@@ -1,18 +1,18 @@
 # Galician translation of xfce4-panel
 # Copyright (C) 2008, 2009, 2010 Leandro Regueiro
 # This file is distributed under the same license as the xfce package.
-#
+# 
 # Ricardo Domínguez Rouco <riklaren@gmail.com>, 2006.
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2008, 2009, 2010.
-#
+# 
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en <http://trasno.net>
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-09 10:05+0000\n"
+"POT-Creation-Date: 2010-10-25 10:07+0000\n"
 "PO-Revision-Date: 2010-10-19 18:27+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -72,21 +72,22 @@ msgstr "Se elimina o elemento do panel, perderase permanentemente."
 msgid "_Move"
 msgstr "_Mover"
 
+#: ../libxfce4panel/xfce-panel-plugin.c:1072
+msgid "_Xfce Panel"
+msgstr "Panel de _Xfce"
+
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
 msgid "Add _New Items..."
 msgstr "Engadir _novos elementos..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091
-#: ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias do panel..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108
-#: ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
 msgid "Log _Out"
 msgstr "Saír da _sesión"
 
@@ -94,8 +95,7 @@ msgstr "Saír da _sesión"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar o diálogo \"Preferencias do panel\""
 
-#: ../panel/main.c:77
-#: ../panel/main.c:78
+#: ../panel/main.c:77 ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-DE-PANEL"
 
@@ -190,8 +190,7 @@ msgstr "Produciuse un erro ao enviar a mensaxe a D-Bus"
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Desexa iniciar o panel de Xfce? Se o fai asegúrese de que garda a sesión ao rematar a sesión, para que o panel se inicie automaticamente a seguinte vez que inicie a sesión."
 
-#: ../panel/main.c:316
-#: ../panel/main.c:330
+#: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Non se atopou ningunha instancia en execución de %s"
@@ -200,18 +199,15 @@ msgstr "Non se atopou ningunha instancia en execución de %s"
 msgid "Failed to launch the migration application"
 msgstr "Produciuse un erro ao iniciar o aplicativo de migración"
 
-#: ../panel/panel-application.c:1429
-#: ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
 msgid "If you have started Xfce without session manager, this will close the X server."
 msgstr "Se iniciou Xfce sen xestor de sesións isto pechará o servidor X."
 
-#: ../panel/panel-application.c:1430
-#: ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Está seguro de que desexa saír do panel?"
 
-#: ../panel/panel-application.c:1438
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Produciuse un erro ao executar a orde \"%s\""
@@ -239,8 +235,7 @@ msgstr ""
 "Axúdanos a traducir software libre ao galego."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Engadir un novo elemento"
 
@@ -249,8 +244,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Escolla un panel para o novo engadido:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150
-#: ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -487,7 +481,7 @@ msgstr "Transparencia cando o punteiro non está enriba do panel."
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
 msgid "Xfce Panel"
 msgstr "Panel de Xfce"
 
@@ -712,26 +706,26 @@ msgstr "_Icona:"
 msgid "_Show button title"
 msgstr "Mo_strar o título do botón"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Xfce Menu"
 msgstr "Menú de Xfce"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Seleccione unha icona"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
+#: ../plugins/applicationsmenu/applicationsmenu.c:709
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Produciuse un erro ao executar a orde \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
+#: ../plugins/applicationsmenu/applicationsmenu.c:969
 msgid "No applications found"
 msgstr "Non se atoparon aplicativos"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
+#: ../plugins/applicationsmenu/applicationsmenu.c:992
 msgid "Failed to load the applications menu"
 msgstr "Produciuse un erro ao cargar o menú de aplicativos"
 
@@ -1267,8 +1261,7 @@ msgstr "P_osición do botón de frecha:"
 msgid "Program launcher with optional menu"
 msgstr "Iniciador de aplicativos con menú opcional"
 
-#: ../plugins/pager/pager.c:350
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Opcións de e_spazo de traballo..."
 
@@ -1276,8 +1269,7 @@ msgstr "Opcións de e_spazo de traballo..."
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Non foi posible abrir as opcións do espazo de traballo de Xfce"
 
-#: ../plugins/pager/pager-buttons.c:412
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Espazo de traballo %d"
@@ -1555,10 +1547,12 @@ msgstr "Cambiar entre as xanelas abertas usando un menú"
 
 #~ msgid "_Restart"
 #~ msgstr "_Reiniciar"
+
 #~ msgid "C_ompositing"
 #~ msgstr "C_omposición"
+
 #~ msgid "Failed to open manual"
 #~ msgstr "Produciuse un erro ao abrir o manual"
+
 #~ msgid "Action Button"
 #~ msgstr "Botón de acción"
-
