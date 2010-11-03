@@ -7,7 +7,6 @@
     <property name="title" translatable="yes">Applications Menu</property>
     <property name="icon_name">gtk-properties</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -147,7 +146,7 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-tooltips">
-                            <property name="label" translatable="yes">Show application description in t_ooltip</property>
+                            <property name="label" translatable="yes">Show application d_escription in tooltip</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
