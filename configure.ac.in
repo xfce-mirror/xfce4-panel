@@ -12,10 +12,10 @@ m4_define([libxfce4panel_verinfo], [3:0:0]) dnl current:revision:age
 m4_define([libxfce4panel_version_api], [1.0])
 m4_define([xfce4_panel_version_major], [4])
 m4_define([xfce4_panel_version_minor], [7])
-m4_define([xfce4_panel_version_micro], [3])
+m4_define([xfce4_panel_version_micro], [4])
 m4_define([xfce4_panel_version_nano],  []) dnl leave this empty to have no nano version
 m4_define([xfce4_panel_version_build], [@REVISION@])
-m4_define([xfce4_panel_version_tag],   [git])
+m4_define([xfce4_panel_version_tag],   [])
 m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_version_minor().xfce4_panel_version_micro()ifelse(xfce4_panel_version_nano(), [], [], [.xfce4_panel_version_nano()])ifelse(xfce4_panel_version_tag(), [git], [xfce4_panel_version_tag()-xfce4_panel_version_build()], [xfce4_panel_version_tag()])])
 
 dnl *******************************************
@@ -107,7 +107,7 @@ dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
 XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.6.0])
-XDT_CHECK_PACKAGE([GARCON], [garcon-1], [0.1.1])
+XDT_CHECK_PACKAGE([GARCON], [garcon-1], [0.1.2])
 XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.7.1])
 XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.7.2])
 XDT_CHECK_PACKAGE([EXO], [exo-1], [0.5.1])
