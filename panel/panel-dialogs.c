@@ -44,9 +44,6 @@ panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
 {
   if (g_strcmp0 ("tictactoe@xfce.org", uri) == 0)
     {
-      /* gtk needs to finish some stuff before the dialog can be closed */
-      exo_gtk_object_destroy_later (GTK_OBJECT (dialog));
-
       /* open tic-tac-toe */
       panel_tic_tac_toe_show ();
     }
