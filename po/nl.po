@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-19 04:07+0000\n"
+"POT-Creation-Date: 2010-11-08 17:08+0000\n"
 "PO-Revision-Date: 2010-02-22 20:43+0100\n"
 "Last-Translator: Vincent Tunru <projects@vinnl.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -66,6 +66,10 @@ msgstr "Als u een item van het paneel verwijdert kan dit niet meer ongedaan gema
 #: ../libxfce4panel/xfce-panel-plugin.c:1038
 msgid "_Move"
 msgstr "_Verplaatsen"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1072
+msgid "_Xfce Panel"
+msgstr "_Xfce Paneel"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
@@ -212,34 +216,34 @@ msgstr "Ongeldige plugingebeurtenissyntax gespecificeerd. Gebruik PLUGINNAAM:NAA
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Ongeldig type \"%s\". Geldige types zijn bool, double, int, string en uint."
 
-#: ../panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Het paneel van de Xfce desktopomgeving"
 
-#: ../panel/panel-dialogs.c:84
+#: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr "Vincent Tunru <projects@vinnl.nl>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Nieuw item toevoegen"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "Kies een paneel voor de nieuwe plugin:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Paneel %d"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:183
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "Omdat het paneel in kiosk-modus draait, kunt u geen veranderingen aan de configuratie aanbrengen als normale gebruiker"
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
 msgstr "Aanpassen van het paneel niet toegestaan"
 
@@ -467,7 +471,7 @@ msgstr "Transparantie als de muisaanwijzer niet over het paneel gaat."
 msgid "Vertical"
 msgstr "Verticaal"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
@@ -664,7 +668,7 @@ msgid "Select this option to show the generic application name in the menu, for 
 msgstr "Kies deze optie om de generieke naam in het menu weer te geven, bijvoorbeeld \"Bestandsbeheer\" in plaats van \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application description in t_ooltip"
+msgid "Show application d_escription in tooltip"
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
@@ -1153,24 +1157,24 @@ msgstr "Naamloos"
 msgid "No items"
 msgstr "Geen items"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:704
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Het verwijderen van een item kan niet ongedaan worden gemaakt"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:705
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:706
 msgid "Unnamed item"
 msgstr "Naamloos"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:721
 msgid "Failed to remove the desktop file from the config directory"
 msgstr "Kon het .desktop-bestand niet uit de configuratiemap verwijderen"
 
-#: ../plugins/launcher/launcher-dialog.c:723
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Failed to open desktop item editor"
 msgstr "Kon dialoogvenster voor het bewerken van menu-items niet laden"
 
