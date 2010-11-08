@@ -307,7 +307,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                    g_param_spec_uint ("grouping",
                                                       NULL, NULL,
                                                       XFCE_TASKLIST_GROUPING_MIN,
-                                                      XFCE_TASKLIST_GROUPING_MAX,
+                                                      XFCE_TASKLIST_GROUPING_MAX + 1 /* TODO drop this later */,
                                                       XFCE_TASKLIST_GROUPING_DEFAULT,
                                                       EXO_PARAM_READWRITE));
 
@@ -765,10 +765,12 @@ xfce_tasklist_size_layout (XfceTasklist *tasklist,
       n_buttons = tasklist->n_windows;
       n_buttons_target = ((alloc->width / max_button_length) + 1) * rows;
 
+#if 0
       if (tasklist->grouping == XFCE_TASKLIST_GROUPING_AUTO)
         {
           /* try creating group buttons */
         }
+#endif
 
       /* we now push the windows with the lowest score in the
        * overflow menu */
@@ -2918,9 +2920,11 @@ xfce_tasklist_group_button_child_destroyed (XfceTasklistChild *group_child,
     }
 
   if ((group_child->tasklist->grouping == XFCE_TASKLIST_GROUPING_ALWAYS
-       && n_children > 0)
+       && n_children > 0))
+#if 0
       || (group_child->tasklist->grouping == XFCE_TASKLIST_GROUPING_AUTO
           && n_children > 1))
+#endif
     {
       xfce_tasklist_group_button_child_visible_changed (group_child);
       xfce_tasklist_group_button_name_changed (NULL, group_child);
@@ -3147,6 +3151,10 @@ xfce_tasklist_set_grouping (XfceTasklist         *tasklist,
                             XfceTasklistGrouping  grouping)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  /* TODO avoid overflow, because we allows + 1 in the object */
+  if (grouping > XFCE_TASKLIST_GROUPING_MAX)
+    grouping = XFCE_TASKLIST_GROUPING_MAX;
 
   if (tasklist->grouping != grouping)
     {

@@ -185,6 +185,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   GtkBuilder     *builder;
   GObject        *dialog;
   GObject        *object;
+  GtkTreeIter     iter;
 
   /* setup the dialog */
   PANEL_UTILS_LINK_4UI
@@ -221,6 +222,11 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   object = gtk_builder_get_object (builder, "show-wireframes");
   gtk_widget_hide (GTK_WIDGET (object));
 #endif
+
+  /* TODO: remove this if always group is supported */
+  object = gtk_builder_get_object (builder, "grouping-model");
+  if (gtk_tree_model_iter_nth_child (GTK_TREE_MODEL (object), &iter, NULL, 2))
+    gtk_list_store_remove (GTK_LIST_STORE (object), &iter);
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
