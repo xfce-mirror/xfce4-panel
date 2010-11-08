@@ -1586,6 +1586,7 @@ xfce_tasklist_update_icon_geometries (gpointer data)
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (tasklist));
   gtk_window_get_position (GTK_WINDOW (toplevel), &root_x, &root_y);
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
 
   for (li = tasklist->windows; li != NULL; li = li->next)
     {
@@ -1603,7 +1604,7 @@ xfce_tasklist_update_icon_geometries (gpointer data)
 
         case CHILD_TYPE_GROUP:
           alloc = &child->button->allocation;
-          for (lp = child->windows; li != NULL; li = li->next)
+          for (lp = child->windows; lp != NULL; lp = lp->next)
             {
               child2 = lp->data;
               panel_return_val_if_fail (WNCK_IS_WINDOW (child2->window), FALSE);
@@ -2382,7 +2383,6 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
   WnckWorkspace *workspace;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (child->tasklist));
-  panel_return_if_fail (child->type == CHILD_TYPE_WINDOW);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
 
   if (wnck_window_is_active (child->window))
