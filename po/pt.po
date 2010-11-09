@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Nuno Donato <nunodonato@gmail.com.pt>, 2004.
 # Nuno Miguel <nunis@netcabo.pt>, 2007, 2008, 2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-04 11:08+0000\n"
-"PO-Revision-Date: 2010-03-04 16:59-0000\n"
-"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
+"PO-Revision-Date: 2010-11-09 15:41+0100\n"
+"Last-Translator: Nuno Miguel <nunis@netcabo.pt>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +22,11 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on Xfce Panel"
-msgstr "Criar lançador no painel XFCE"
+msgstr "Criar lançador no painel Xfce"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create a new launcher on the Xfce Panel"
-msgstr "Criar um novo lançador no painel XFCE"
+msgstr "Criar um novo lançador no painel Xfce"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid "Customize the Xfce Panel"
@@ -46,7 +46,7 @@ msgstr "Pode ler o manual de utilizador \"on-line\". No entanto, este manual pod
 
 #: ../common/panel-utils.c:158
 msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr "O manual do painel XFCE não está instalado no computador"
+msgstr "O manual do painel Xfce não está instalado no computador"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -75,17 +75,20 @@ msgid "_Xfce Panel"
 msgstr "Painel _Xfce"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080
+#: ../panel/panel-window.c:2140
 msgid "Add _New Items..."
 msgstr "Adicionar _novos itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091
+#: ../panel/panel-window.c:2151
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do pain_el..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108
+#: ../panel/panel-window.c:2167
 msgid "Log _Out"
 msgstr "_Sair"
 
@@ -93,7 +96,8 @@ msgstr "_Sair"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar diálogo \"Preferências do painel\""
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-PAINEL"
 
@@ -188,7 +192,8 @@ msgstr "Falha ao enviar a mensagem D-BUS"
 msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Pretende iniciar o painel Xfce? Se sim, certifique-se que grava a sessão ao sair para que o painel seja iniciado automaticamente na próxima vez que iniciar a sessão."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:316
+#: ../panel/main.c:330
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância de %s foi encontrada"
@@ -197,15 +202,18 @@ msgstr "Nenhuma instância de %s foi encontrada"
 msgid "Failed to launch the migration application"
 msgstr "Falha ao lançar a aplicação de migração"
 
-#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1429
+#: ../plugins/actions/actions.c:413
 msgid "If you have started Xfce without session manager, this will close the X server."
 msgstr "Se iniciou o Xfce sem o gestor de sessões, isto irá fechar o servidor X."
 
-#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1430
+#: ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Tem a certeza que quer sair do painel?"
 
-#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1438
+#: ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Falha ao executar o comando \"%s\""
@@ -221,14 +229,15 @@ msgstr "O tipo \"%s\" é inválido. Os tipos válidos são bool, double, int, st
 
 #: ../panel/panel-dialogs.c:79
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "O painel do ambiente de trabalho XFCE"
+msgstr "O painel do ambiente de trabalho Xfce"
 
 #: ../panel/panel-dialogs.c:84
 msgid "translator-credits"
 msgstr "Sérgio Marques<smarquespt@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:125
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Adicionar novo item"
 
@@ -237,7 +246,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Por favor, escolha o painel para o novo \"plug-in\":"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:150
+#: ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
@@ -474,7 +484,8 @@ msgstr "Transparência quando o ponteiro não estiver a pairar sobre o painel."
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
+#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-window.c:2128
 msgid "Xfce Panel"
 msgstr "Painel Xfce"
 
@@ -506,7 +517,7 @@ msgstr "_Orientação:"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Size (pixels):"
-msgstr "Tamanho (pixei_s):"
+msgstr "_Tamanho (pixeis):"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/separator/separator-dialog.glade.h:8
@@ -539,7 +550,7 @@ msgstr "Especialista"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the Xfce Panel"
-msgstr "Bem-vindo à iniciação do painel XFCE"
+msgstr "Bem-vindo à iniciação do painel Xfce"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
@@ -1254,7 +1265,8 @@ msgstr "Posição do botão s_eta:"
 msgid "Program launcher with optional menu"
 msgstr "Lançador de programas com menu opcional"
 
-#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:350
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "De_finições da área de trabalho..."
 
@@ -1262,7 +1274,8 @@ msgstr "De_finições da área de trabalho..."
 msgid "Unable to open the Xfce workspace settings"
 msgstr "Incapaz de abrir as definições da área de trabalho"
 
-#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:412
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Área de trabalho %d"
@@ -1540,12 +1553,10 @@ msgstr "Trocar entre janelas abertas utilizando um menu"
 
 #~ msgid "_Restart"
 #~ msgstr "_Reiniciar"
-
 #~ msgid "C_ompositing"
 #~ msgstr "C_omposição"
-
 #~ msgid "Failed to open manual"
 #~ msgstr "Falha ao abrir o manual"
-
 #~ msgid "Action Button"
 #~ msgstr "Botão de Acção"
+
