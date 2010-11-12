@@ -323,8 +323,8 @@ launcher_dialog_add_key_press_event (GtkTreeView          *treeview,
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
   panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
 
-  if (event->keyval == GDK_KEY_Return
-      || event->keyval == GDK_KEY_KP_Enter)
+  if (event->keyval == GDK_Return
+      || event->keyval == GDK_KP_Enter)
     return launcher_dialog_press_event (dialog, "button-add");
 
   return FALSE;
@@ -638,8 +638,8 @@ launcher_dialog_tree_key_press_event (GtkTreeView          *treeview,
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
   panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
 
-  if (event->keyval == GDK_KEY_Return
-      || event->keyval == GDK_KEY_KP_Enter)
+  if (event->keyval == GDK_Return
+      || event->keyval == GDK_KP_Enter)
     return launcher_dialog_press_event (dialog, "item-edit");
 
   return FALSE;
