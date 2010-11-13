@@ -242,7 +242,7 @@ main (gint argc, gchar **argv)
     {
       g_printerr ("%s: Failed to connect to session manager: %s\n",
                   G_LOG_DOMAIN, error->message);
-      g_error_free (error);
+      g_clear_error (&error);
     }
 
   /* setup signal handlers to properly quit the main loop */
