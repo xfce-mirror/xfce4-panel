@@ -491,7 +491,7 @@
                                       <object class="GtkHScale" id="bg-alpha-scale">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Alpha value of the panel background, between 0 (transparent) and 100 (opaque).</property>
+                                        <property name="tooltip_text" translatable="yes">Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque.</property>
                                         <property name="adjustment">background-alpha</property>
                                         <property name="digits">0</property>
                                         <property name="value_pos">right</property>
@@ -637,7 +637,7 @@
                                   <object class="GtkHScale" id="enter-opacity-scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="tooltip_text" translatable="yes">Transparency when the pointer is hovering over the panel.</property>
+                                    <property name="tooltip_text" translatable="yes">Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque.</property>
                                     <property name="adjustment">enter-opacity</property>
                                     <property name="digits">0</property>
                                     <property name="value_pos">right</property>
@@ -651,7 +651,7 @@
                                   <object class="GtkHScale" id="leave-opacity-scale">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="tooltip_text" translatable="yes">Transparency when the pointer is not hovering the panel.</property>
+                                    <property name="tooltip_text" translatable="yes">Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque.</property>
                                     <property name="adjustment">leave-opacity</property>
                                     <property name="digits">0</property>
                                     <property name="value_pos">right</property>
@@ -670,7 +670,7 @@
                         <child type="label">
                           <object class="GtkLabel" id="label11">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Transparency</property>
+                            <property name="label" translatable="yes">Opacity</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                             </attributes>
