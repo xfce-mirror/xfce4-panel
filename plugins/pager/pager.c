@@ -132,7 +132,7 @@ pager_plugin_class_init (PagerPluginClass *klass)
                                    PROP_MINIATURE_VIEW,
                                    g_param_spec_boolean ("miniature-view",
                                                          NULL, NULL,
-                                                         FALSE,
+                                                         TRUE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -141,8 +141,6 @@ pager_plugin_class_init (PagerPluginClass *klass)
                                                       NULL, NULL,
                                                       1, 50, 1,
                                                       EXO_PARAM_READWRITE));
-
-
 }
 
 
@@ -152,7 +150,7 @@ pager_plugin_init (PagerPlugin *plugin)
 {
   plugin->wnck_screen = NULL;
   plugin->scrolling = TRUE;
-  plugin->miniature_view = FALSE;
+  plugin->miniature_view = TRUE;
   plugin->rows = 1;
   plugin->pager = NULL;
 }
