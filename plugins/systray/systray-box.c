@@ -448,12 +448,17 @@ systray_box_size_allocate (GtkWidget     *widget,
   gint             child_size;
   GtkAllocation    child_allocation;
   gint             swap;
+  gint             n_children;
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (widget));
   panel_return_if_fail (allocation != NULL);
 
   /* set widget allocation */
   widget->allocation = *allocation;
+
+  n_children = g_slist_length (box->childeren);
+  if (n_children == 0)
+    return;
 
   /* get root coordinates */
   x = allocation->x + GTK_CONTAINER (widget)->border_width;
@@ -469,9 +474,10 @@ systray_box_size_allocate (GtkWidget     *widget,
       child_size = IS_HORIZONTAL (box) ? width : height;
       if (box->n_hidden_childeren > 0)
          child_size -= BUTTON_SIZE + SPACING;
-      n = g_slist_length (box->childeren) - (box->show_hidden ? 0 : box->n_hidden_childeren);
+      n = n_children - (box->show_hidden ? 0 : box->n_hidden_childeren);
       child_size -= SPACING * MAX (n - 1, 0);
-      child_size /= n;
+      if (n > 1)
+        child_size /= n;
 
       if (IS_HORIZONTAL (box))
         y += MAX (height - child_size, 0) / 2;
@@ -493,8 +499,8 @@ systray_box_size_allocate (GtkWidget     *widget,
   if (box->n_hidden_childeren > 0)
     {
       /* initialize allocation */
-      child_allocation.x = x;
-      child_allocation.y = y;
+      child_allocation.x = allocation->x + GTK_CONTAINER (widget)->border_width;
+      child_allocation.y = allocation->y + GTK_CONTAINER (widget)->border_width;
 
       /* set the width and height */
       if (IS_HORIZONTAL (box))
