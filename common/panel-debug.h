@@ -21,6 +21,7 @@
 
 #define PANEL_DEBUG_DOMAIN_MAIN            "main"
 #define PANEL_DEBUG_DOMAIN_POSITIONING     "positioning"
+#define PANEL_DEBUG_DOMAIN_DISPLAY_LAYOUT  "display-layout"
 #define PANEL_DEBUG_DOMAIN_STRUTS          "struts"
 #define PANEL_DEBUG_DOMAIN_APPLICATION     "application"
 #define PANEL_DEBUG_DOMAIN_EXTERNAL        "external"

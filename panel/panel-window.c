@@ -120,6 +120,7 @@ static void         panel_window_screen_struts_set          (PanelWindow      *w
 static void         panel_window_screen_force_update        (PanelWindow      *window);
 static void         panel_window_screen_update_borders      (PanelWindow      *window);
 static SnapPosition panel_window_snap_position              (PanelWindow      *window);
+static void         panel_window_display_layout_debug       (GtkWidget        *widget);
 static void         panel_window_screen_layout_changed      (GdkScreen        *screen,
                                                              PanelWindow      *window);
 static void         panel_window_autohide_queue             (PanelWindow      *window,
@@ -1657,6 +1658,62 @@ panel_window_snap_position (PanelWindow *window)
 
 
 static void
+panel_window_display_layout_debug (GtkWidget *widget)
+{
+  GdkDisplay   *display;
+  GdkScreen    *screen;
+  gint          n, n_screens;
+  gint          m, n_monitors;
+  GdkRectangle  rect;
+  GString      *str;
+  gchar        *name;
+
+  panel_return_if_fail (GTK_IS_WIDGET (widget));
+  panel_return_if_fail (panel_debug_flags != 0);
+
+  str = g_string_new (NULL);
+
+  display = gtk_widget_get_display (widget);
+
+  n_screens = gdk_display_get_n_screens (display);
+  for (n = 0; n < n_screens; n++)
+    {
+      screen = gdk_display_get_screen (display, n);
+      g_string_append_printf (str, "screen-%d=[%d,%d] (", n,
+          gdk_screen_get_width (screen), gdk_screen_get_height (screen));
+
+      n_monitors = gdk_screen_get_n_monitors (screen);
+      for (m = 0; m < n_monitors; m++)
+        {
+          name = gdk_screen_get_monitor_plug_name (screen, m);
+          if (name == NULL)
+            name = g_strdup_printf ("monitor-%d", m);
+
+          gdk_screen_get_monitor_geometry (screen, m, &rect);
+          g_string_append_printf (str, "%s=[%d,%d;%d,%d]", name,
+              rect.x, rect.y, rect.width, rect.height);
+
+          g_free (name);
+
+          if (m < n_monitors - 1)
+            g_string_append (str, ", ");
+        }
+
+      g_string_append (str, ")");
+      if (n < n_screens - 1)
+        g_string_append (str, ", ");
+    }
+
+  panel_debug (PANEL_DEBUG_DOMAIN_DISPLAY_LAYOUT,
+               "display %s: %s",
+               gdk_display_get_name (display), str->str);
+
+  g_string_free (str, TRUE);
+}
+
+
+
+static void
 panel_window_screen_layout_changed (GdkScreen   *screen,
                                     PanelWindow *window)
 {
@@ -1677,6 +1734,10 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   /* leave when the screen position if not set */
   if (window->base_x == -1 && window->base_y == -1)
     return;
+
+  /* print the display layout when debugging is enabled */
+  if (G_UNLIKELY (panel_debug_flags != 0))
+    panel_window_display_layout_debug (GTK_WIDGET (window));
 
   /* update the struts edge of this window and check if we need to force
    * a struts update (ie. remove struts that are currently set) */
