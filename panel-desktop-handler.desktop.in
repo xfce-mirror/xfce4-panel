@@ -1,12 +1,11 @@
 [Desktop Entry]
+Type=Application
 _Name=Create Launcher on Xfce Panel
 _Comment=Create a new launcher on the Xfce Panel
 _GenericName=Create Launcher on Xfce Panel
-TryExec=xfce4-panel
 Exec=xfce4-panel --add=launcher '%F'
 Icon=application-x-executable
 Terminal=false
-Hidden=true
-StartupNotify=true
-Type=Application
+NoDisplay=true
+StartupNotify=false
 MimeType=application/x-desktop;
