@@ -467,7 +467,9 @@ systray_box_size_allocate (GtkWidget     *widget,
   if (box->rows == 1)
     {
       child_size = IS_HORIZONTAL (box) ? width : height;
-      n = g_slist_length (box->childeren) - box->n_hidden_childeren;
+      if (box->n_hidden_childeren > 0)
+         child_size -= BUTTON_SIZE + SPACING;
+      n = g_slist_length (box->childeren) - (box->show_hidden ? 0 : box->n_hidden_childeren);
       child_size -= SPACING * MAX (n - 1, 0);
       child_size /= n;
 
