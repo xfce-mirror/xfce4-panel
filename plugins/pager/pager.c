@@ -420,7 +420,7 @@ pager_plugin_configure_workspace_settings (GtkWidget *button)
       /* show an error dialog */
       toplevel = gtk_widget_get_toplevel (button);
       xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
-          _("Unable to open the Xfce workspace settings"));
+          _("Unable to open the workspace settings"));
       g_error_free (error);
     }
 }

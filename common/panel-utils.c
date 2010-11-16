@@ -155,7 +155,7 @@ panel_utils_show_help (GtkWindow   *parent,
   else if (xfce_dialog_confirm (parent, "web-browser", _("_Read Online"),
                _("You can read the user manual online. This manual may however "
                  "not exactly match your panel version."),
-               _("The Xfce Panel user manual is not installed on your computer")))
+               _("The user manual is not installed on your computer")))
     uri = g_strconcat ("http://foo-projects.org/~nick/docs/xfce4-panel/?lang=",
                        locale, "&page=", page, "&offset=", offset, NULL);
 

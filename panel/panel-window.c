@@ -2125,7 +2125,7 @@ panel_window_menu_popup (PanelWindow *window,
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (panel_window_menu_deactivate), window);
 
-  item = gtk_image_menu_item_new_with_label (_("Xfce Panel"));
+  item = gtk_image_menu_item_new_with_label (_("Panel"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_set_sensitive (item, FALSE);
   gtk_widget_show (item);

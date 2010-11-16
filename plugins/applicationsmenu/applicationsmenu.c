@@ -34,9 +34,9 @@
 #include "applicationsmenu-dialog_ui.h"
 
 
-
+/* I18N: default tooltip of the application menu */
+#define DEFAULT_TITLE     _("Applications Menu")
 #define DEFAULT_ICON_NAME "xfce4-panel-menu"
-#define DEFAULT_TITLE     _("Xfce Menu")
 #define DEFAULT_ICON_SIZE (16)
 #define DEFAULT_MENU      "menus" G_DIR_SEPARATOR_S "xfce-applications.menu"
 

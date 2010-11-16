@@ -75,13 +75,13 @@ main (gint argc, gchar **argv)
 
   /* create question dialog */
   dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-                                   _("Welcome to the first start of the Xfce Panel"));
+                                   _("Welcome to the first start of the panel"));
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s%s%s",
       file != NULL ? _("Because the panel moved to a new system for storing the "
                        "settings, it has to load a fresh initial configuration.") : "",
       file != NULL ? " " : "",
                      _("Choose below which setup you want for the first startup."));
-  gtk_window_set_title (GTK_WINDOW (dialog), "Xfce Panel");
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Panel"));
   gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PREFERENCES);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);

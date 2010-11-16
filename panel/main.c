@@ -310,12 +310,12 @@ dbus_return:
               g_clear_error (&error);
 
               if (xfce_dialog_confirm (NULL, GTK_STOCK_EXECUTE, NULL,
-                                       _("Do you want to start the Xfce panel? If you do, make sure "
+                                       _("Do you want to start the panel? If you do, make sure "
                                          "you save the session on logout, so the panel is "
                                          "automatically started the next time you login."),
                                        _("No running instance of %s was found"), G_LOG_DOMAIN))
                 {
-                  panel_debug (PANEL_DEBUG_DOMAIN_MAIN, "start panel of asking user");
+                  panel_debug (PANEL_DEBUG_DOMAIN_MAIN, "user confirmed to start the panel");
                   goto launch_panel;
                 }
               else
