@@ -464,9 +464,24 @@ systray_box_size_allocate (GtkWidget     *widget,
   height = allocation->height - 2 * GTK_CONTAINER (widget)->border_width;
 
   /* child size */
-  child_size = IS_HORIZONTAL (box) ? height : width;
-  child_size -= SPACING * (box->rows - 1);
-  child_size /= box->rows;
+  if (box->rows == 1)
+    {
+      child_size = IS_HORIZONTAL (box) ? width : height;
+      n = g_slist_length (box->childeren) - box->n_hidden_childeren;
+      child_size -= SPACING * MAX (n - 1, 0);
+      child_size /= n;
+
+      if (IS_HORIZONTAL (box))
+        y += MAX (height - child_size, 0) / 2;
+      else
+        x += MAX (width - child_size, 0) / 2;
+    }
+  else
+    {
+      child_size = IS_HORIZONTAL (box) ? height : width;
+      child_size -= SPACING * (box->rows - 1);
+      child_size /= box->rows;
+    }
 
   /* don't allocate zero width icon */
   if (child_size < 1)
