@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-03 05:08+0000\n"
+"POT-Creation-Date: 2010-11-17 17:08+0000\n"
 "PO-Revision-Date: 2010-05-07 10:59+0200\n"
 "Last-Translator: Piarres Beobide <pi+debian@beobide.net>\n"
 "Language-Team: Basque <debian-l10n-basque@lists.debian.org>\n"
@@ -22,20 +22,22 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "Sortu abiarazle bat Xfce panelean"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Gehitu abiarazle berri bat panelera mahaigain fitxategi honen argibideetan oinarriturik"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "Sortu abiarazle berri bat Xfce panelean"
+msgid "Create Launcher on the panel"
+msgstr "Sortu abiarazle bat panelean"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
-msgstr "Xfce panela pertsonalizatu"
+msgid "Customize the panel"
+msgstr "Pertsonalizatu panela"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "Panel hobespenak"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2189
+#: ../migrate/main.c:84
+msgid "Panel"
+msgstr "Panela"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -46,8 +48,8 @@ msgid "You can read the user manual online. This manual may however not exactly 
 msgstr "Erabiltzaile manuala linean irakurri dezakezu. Manual horrek hala ere ez du zehazki bertsio hau argitzen."
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr "Xfce panel erabiltzaile manuala ez dago instalaturik zure ordenagailuan"
+msgid "The user manual is not installed on your computer"
+msgstr "Erabiltzaile manuala ez dago instalaturik zure ordenagailuan"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -72,21 +74,21 @@ msgid "_Move"
 msgstr "_Mugitu"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1072
-msgid "_Xfce Panel"
-msgstr "_Xfce panela"
+msgid "Pane_l"
+msgstr "Pane_la"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2201
 msgid "Add _New Items..."
 msgstr "Gehitu elementu _berriak..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2212
 msgid "Panel Pr_eferences..."
 msgstr "Panel hob_espenak"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2228
 msgid "Log _Out"
 msgstr "Sai_oa itxi"
 
@@ -186,8 +188,8 @@ msgid "Failed to send D-Bus message"
 msgstr "Huts D-Bus mezua bidaltzean"
 
 #: ../panel/main.c:313
-msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Xfce panela abiarazi nahi dfuzu? Hala bada ziurtatu zaitez saioa gordetzen duzula ixterakoan, horrela saioa hastean panela automatikoki abiaraziko da."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Panela abiarazi nahi dfuzu? Hala bada ziurtatu zaitez saioa gordetzen duzula ixterakoan, horrela saioa hastean panela automatikoki abiaraziko da."
 
 #: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
@@ -199,8 +201,8 @@ msgid "Failed to launch the migration application"
 msgstr "Huts migrazio aplikazioa abiaraztean"
 
 #: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
-msgid "If you have started Xfce without session manager, this will close the X server."
-msgstr "Xfce saio kudeatzaile gabe abiarazi duzu, honek X zerbitzaria itxiko du."
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "X saio kudeatzaile gabe abiarazi duzu, Itxi sakatzean X zerbitzaria itxiko du."
 
 #: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
@@ -220,34 +222,34 @@ msgstr "Okerreko plugin gertaera sintaxia ezarria. Erabili PLUGIN-IZENA[:MOTA:BA
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Okerreko \"%s\" gomendio mota. Mota erabilgarriak bool, double, int, string eta uint dira,"
 
-#: ../panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce mahaigain inguruneko panela"
 
-#: ../panel/panel-dialogs.c:84
+#: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr "Piarres Beobide"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Gehitu elementu berri bat"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "Mesedez hautatu plugin berriarentzat panel bat:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "%d panela"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:183
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "Panela kiosko moduan abiarazirik dagoenez ezin dizkiozu aldaketarik egin erabiltzaile arrunt gisa."
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
 msgstr "Ez da onartzen panela eraldatzean"
 
@@ -341,7 +343,7 @@ msgid "Add new item to this panel"
 msgstr "Gehitu elementu berri bat panel honetara"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
 msgstr "Panelaren atzealdearen alpha balioa 0 (gardena) eta 100 (opakoa) artekoa."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -416,68 +418,64 @@ msgid "O_utput:"
 msgstr "I_rteera:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Opacity"
+msgstr "Opakotasuna"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr "Klikatu panel kolore bat"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "Ezabatu hautaturik dagoen elementua"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "Ezabatu hautaturik dagoen panela"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
 msgstr "Hautatu atzealdeko irudi bat"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Aukera hau hautatu pluginak tamaina gehiago eskatzean panelaren luzera automatikoki hedatzeko"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Hautatu aukera hau panela monitore anitzetan hedatzeko"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "Hautatu aukera hau panel kudeatzaileak ezkutatu eta bere kokalekua blokeatzeko"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Hautatu aukera hau markatzailea gainean ez duenean panela ezkutatzeko. Honek panela pantaila ertzean dagoenean bakarrik funtzionatuko du."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "Hautaturiko elementuaren argibideak bistarazi"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr "Kolore solidoa"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr "Zabor-posta monitoreak"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Transparency"
-msgstr "Gardentasuna"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Transparency when the pointer is hovering over the panel."
-msgstr "Gardentasuna markatzailea panel gainean dabilenean"
-
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is not hovering the panel."
-msgstr "Gardentasuna markatzailea panel gainean ez dabilenean"
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz gardena izango da eta 100 erabiliaz guztiz opakoa."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz gardena izango da eta 100 erabiliaz guztiz opakoa."
+
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
 msgstr "Bertikala"
-
-#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
-msgid "Xfce Panel"
-msgstr "Xfce panela"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -539,8 +537,8 @@ msgid "Expert"
 msgstr "Espertoa"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
-msgstr "Ongi etorria Xfce panelaren lehen abiaraztera"
+msgid "Welcome to the first start of the panel"
+msgstr "Ongi etorria panelaren lehen abiaraztera"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
@@ -646,7 +644,9 @@ msgstr "SAioa itxi, blokeatu beta beste zenbait sistema ekintza"
 msgid "Appearance"
 msgstr "Itxura"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Aplikazioa menua"
@@ -672,8 +672,8 @@ msgid "Select this option to show the generic application name in the menu, for 
 msgstr "Aukera hau hautatu menuan aplikazioaren izen generikoa bistartzeko, adibidez \"Fitxategi kudeatzailea\" \"Thunar ordez\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application description in t_ooltip"
-msgstr "Ikusi aplikazio deskribapena argibideetan"
+msgid "Show application d_escription in tooltip"
+msgstr "Ikusi aplikazio d_eskribapena argibideetan"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
@@ -699,10 +699,6 @@ msgstr "_Ikonoa:"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "_Show button title"
 msgstr "_Ikusi botoi izenburua"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-msgid "Xfce Menu"
-msgstr "Xfce menua"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
@@ -1161,24 +1157,24 @@ msgstr "Elementu izengabea"
 msgid "No items"
 msgstr "Elementurik ez"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:704
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Elementu bat ezabatzen baduzu betirako kenduko da"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:705
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" ezabatu nahi duzula?"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:706
 msgid "Unnamed item"
 msgstr "Elementu izengabea"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:721
 msgid "Failed to remove the desktop file from the config directory"
 msgstr "Huts mahaigain fitxategia direktorio konfiguraziotik ezabatzean"
 
-#: ../plugins/launcher/launcher-dialog.c:723
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Failed to open desktop item editor"
 msgstr "Huts mahaigain elementu editorea irekitzean"
 
@@ -1255,13 +1251,13 @@ msgstr "Ge_zi botoi kokalekua:"
 msgid "Program launcher with optional menu"
 msgstr "Programa abiarazlea aukerako menu batez"
 
-#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:348 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Lan-eremu _ezarpenak..."
 
-#: ../plugins/pager/pager.c:425
-msgid "Unable to open the Xfce workspace settings"
-msgstr "Ezin da Xfce lan-eremu ezarpenak ireki"
+#: ../plugins/pager/pager.c:423
+msgid "Unable to open the workspace settings"
+msgstr "Ezin da lan-eremu ezarpenak ireki"
 
 #: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
@@ -1456,23 +1452,23 @@ msgstr "Leiho _taldekatzea:"
 msgid "Window title"
 msgstr "Leiho izenburua"
 
-#: ../plugins/tasklist/tasklist-widget.c:2620
+#: ../plugins/tasklist/tasklist-widget.c:2622
 msgid "Mi_nimize All"
 msgstr "Mi_nimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:2629
+#: ../plugins/tasklist/tasklist-widget.c:2631
 msgid "Un_minimize All"
 msgstr "De_sminimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:2635
+#: ../plugins/tasklist/tasklist-widget.c:2637
 msgid "Ma_ximize All"
 msgstr "Ma_ximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:2644
+#: ../plugins/tasklist/tasklist-widget.c:2646
 msgid "_Unmaximize All"
 msgstr "_Desmaximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:2654
+#: ../plugins/tasklist/tasklist-widget.c:2656
 msgid "_Close All"
 msgstr "_Itxi dena"
 
@@ -1538,6 +1534,27 @@ msgstr "Leiho menua"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Aldatu irekitako leihoen artean menua erabiliaz"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "Sortu abiarazle berri bat Xfce panelean"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Panel hobespenak"
+
+#~ msgid "_Xfce Panel"
+#~ msgstr "_Xfce panela"
+
+#~ msgid "Transparency"
+#~ msgstr "Gardentasuna"
+
+#~ msgid "Transparency when the pointer is not hovering the panel."
+#~ msgstr "Gardentasuna markatzailea panel gainean ez dabilenean"
+
+#~ msgid "Xfce Panel"
+#~ msgstr "Xfce panela"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "Xfce menua"
 
 #~ msgid "_Restart"
 #~ msgstr "_Berrabiarazi"
