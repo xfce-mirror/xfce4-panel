@@ -138,8 +138,13 @@ main (gint argc, gchar **argv)
   const gchar      *error_msg;
   XfceSMClient     *sm_client;
 
-  panel_debug (PANEL_DEBUG_DOMAIN_MAIN, "panel version %s with Xfce %s",
-               LIBXFCE4PANEL_VERSION, xfce_version_string ());
+  panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
+               "version %s on gtk+ %d.%d.%d (%d.%d.%d), glib %d.%d.%d (%d.%d.%d)",
+               LIBXFCE4PANEL_VERSION,
+               gtk_major_version, gtk_minor_version, gtk_micro_version,
+               GTK_MAJOR_VERSION, GTK_MINOR_VERSION, GTK_MICRO_VERSION,
+               glib_major_version, glib_minor_version, glib_micro_version,
+               GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
