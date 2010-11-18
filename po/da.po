@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-16 11:08+0000\n"
+"POT-Creation-Date: 2010-11-18 17:08+0000\n"
 "PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -22,20 +22,22 @@ msgstr ""
 "X-Poedit-Country: DENMARK\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "Opret opstarter på panelet til Xfce"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Føj en ny opstarter til panelet baseret på informationen fra denne skrivebordsfil"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "Opret en ny opstarter på panelet til Xfce"
+msgid "Create Launcher on the panel"
+msgstr "Opret opstarter på panelet"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
-msgstr "Tilpas panelet til Xfce"
+msgid "Customize the panel"
+msgstr "Tilpas panelet"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "Panelindstillinger"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2189
+#: ../migrate/main.c:84
+msgid "Panel"
+msgstr "Panel"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -46,8 +48,8 @@ msgid "You can read the user manual online. This manual may however not exactly 
 msgstr "Du kan læse brugermanualen på internettet. Den manual kan være ikke helt i overenstemmelse med din panelversion."
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr "Manualen til panelet til Xfce er ikke installeret på din computer"
+msgid "The user manual is not installed on your computer"
+msgstr "Brugermanualen er ikke installeret på din computer"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -72,21 +74,21 @@ msgid "_Move"
 msgstr "_Flyt"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1072
-msgid "_Xfce Panel"
-msgstr "_Xfce Panel"
+msgid "Pane_l"
+msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2201
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2212
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2228
 msgid "Log _Out"
 msgstr "_Logud"
 
@@ -186,8 +188,8 @@ msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-besked"
 
 #: ../panel/main.c:313
-msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Ønsker du at starte panelet til Xfce? Hvis du vil det skal du huske at gemme sessionen ved logud. Det vil sikre dig at panelet vil blive startet automatisk næste gang ved logind."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Ønsker du at starte panelet? Hvis du vil det skal du huske at gemme sessionen ved logud. Det vil sikre dig at panelet vil blive startet automatisk næste gang ved logind."
 
 #: ../panel/main.c:316 ../panel/main.c:330
 #, c-format
@@ -199,8 +201,8 @@ msgid "Failed to launch the migration application"
 msgstr "Kunne ikke starte migrationsprogrammet"
 
 #: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
-msgid "If you have started Xfce without session manager, this will close the X server."
-msgstr "Hvis du har startet Xfce uden sessionshåndteringen vil dette lukke X-serveren ned."
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "Hvis du har startet X uden sessionshåndteringen vil dette lukke X-serveren ned."
 
 #: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
@@ -423,65 +425,61 @@ msgstr "Ud_data:"
 msgid "Opacity"
 msgstr "Ugennemsigtig"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr "Vælg en panelfarve"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "Fjern det aktuelle valgte element"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "Fjern det aktuelle valgte panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
 msgstr "Vælg et baggrundsbillede"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Vælg denne indstilling for automatisk udvidelse af panelets længde hvis udvidelsesmodulerne behøver mere plads."
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Vælg denne indstilling for af brede panelet ud over flere skærme."
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "Vælg denne indstilling for at skjule håndtagene til panelet og fastlåse positionen."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Vælg denne indstilling for at skjule panelet når markøren ikke er over det. Dette virker kun, når panelet er hæftet til en skærmkant."
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "Vis om information af det aktuelle valgte element"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr "Ensfarvet"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr "Udbred på _skærme"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Gennemsigtigt når markøren svæver over panelet med 0 fuld gennemsigtig og 100 uigennemsigtig."
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Gennemsigtigt når markøren svæver over panelet med 0 fuld gennemsigtig og 100 uigennemsigtig."
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
 msgstr "Vertikal"
-
-#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
-msgid "Xfce Panel"
-msgstr "Xfce Panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -543,8 +541,8 @@ msgid "Expert"
 msgstr "Ekspert"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
-msgstr "Velkommen til den første opstart af panelet til Xfce"
+msgid "Welcome to the first start of the panel"
+msgstr "Velkommen til den første opstart af panelet"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
@@ -650,7 +648,9 @@ msgstr "Log ud, lås skærmen eller andre systemhandlinger"
 msgid "Appearance"
 msgstr "Udseende"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Programmenu"
@@ -703,10 +703,6 @@ msgstr "_Ikon:"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "_Show button title"
 msgstr "_Vis knaptitel"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-msgid "Xfce Menu"
-msgstr "Xfce's menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
@@ -1265,8 +1261,8 @@ msgid "Workspace _Settings..."
 msgstr "Arbejdsområde_indstillinger..."
 
 #: ../plugins/pager/pager.c:423
-msgid "Unable to open the Xfce workspace settings"
-msgstr "Kunne ikke åbne arbejdsområdeindstillingerne til Xfce"
+msgid "Unable to open the workspace settings"
+msgstr "Kunne ikke åbne indstillingerne til arbejdsområde"
 
 #: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
@@ -1543,6 +1539,21 @@ msgstr "Vinduesliste"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Skift mellem åbne vinduer ved brug afen menu"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "Opret en ny opstarter på panelet til Xfce"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Panelindstillinger"
+
+#~ msgid "_Xfce Panel"
+#~ msgstr "_Xfce Panel"
+
+#~ msgid "Xfce Panel"
+#~ msgstr "Xfce Panel"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "Xfce's menu"
 
 #~ msgid "Transparency"
 #~ msgstr "Gennemsigtighed"
