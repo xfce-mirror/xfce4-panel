@@ -29,9 +29,11 @@
 
 G_BEGIN_DECLS
 
-GtkWidget *xfce_panel_create_button         (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkWidget   *xfce_panel_create_button         (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-GtkWidget *xfce_panel_create_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkWidget   *xfce_panel_create_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
+const gchar *xfce_panel_get_channel_name      (void);
 
 G_END_DECLS
 

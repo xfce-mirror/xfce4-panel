@@ -34,10 +34,14 @@ migrate_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 migrate_LDADD = \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(GTK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS)
+
+migrate_DEPENDENCIES = \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
 
 EXTRA_DIST = \
 	default.xml

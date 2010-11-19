@@ -86,5 +86,37 @@ xfce_panel_create_toggle_button (void)
 
 
 
+/**
+ * xfce_panel_get_channel_name:
+ *
+ * Function for the name of the Xfconf channel used by the panel. By default
+ * this returns "xfce4-panel", but you can override this value with the
+ * environment variable XFCE_PANEL_CHANNEL_NAME.
+ *
+ * Returns: name of the Xfconf channel
+ *
+ * See also: XFCE_PANEL_CHANNEL_NAME,
+ *           xfce_panel_plugin_xfconf_channel_new and
+ *           xfce_panel_plugin_get_property_base
+ *
+ * Since: 4.8
+ **/
+const gchar *
+xfce_panel_get_channel_name (void)
+{
+  static const gchar *name = NULL;
+
+  if (G_UNLIKELY (name == NULL))
+    {
+      name = g_getenv ("XFCE_PANEL_CHANNEL_NAME");
+      if (G_LIKELY (name == NULL))
+        name = "xfce4-panel";
+    }
+
+  return name;
+}
+
+
+
 #define __XFCE_PANEL_CONVENIENCE_C__
 #include <libxfce4panel/libxfce4panel-aliasdef.c>

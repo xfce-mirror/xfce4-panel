@@ -1505,8 +1505,9 @@ xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
  *
  * Returns: the property base for the xfconf channel userd by a plugin.
  *
- * See also: xfconf_channel_new_with_property_base() and
- *           XFCE_PANEL_PLUGIN_CHANNEL_NAME.
+ * See also: xfconf_channel_new_with_property_base.
+ *           XFCE_PANEL_PLUGIN_CHANNEL_NAME and
+ *           xfce_panel_get_channel_name
  **/
 G_CONST_RETURN gchar *
 xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
