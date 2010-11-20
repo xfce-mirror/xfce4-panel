@@ -150,7 +150,7 @@ static const gchar *digital_formats[] =
   DEFAULT_DIGITAL_FORMAT,
   "%T",
   "%r",
-  "%R %p",
+  "%I:%M %p",
   NULL
 };
 
