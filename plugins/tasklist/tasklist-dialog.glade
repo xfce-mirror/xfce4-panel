@@ -7,7 +7,6 @@
     <property name="title" translatable="yes">Window Buttons</property>
     <property name="icon_name">gtk-properties</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -74,6 +73,19 @@
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkCheckButton" id="rotate-vertically">
+                            <property name="label" translatable="yes">Ro_tate buttons in vertical panel</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkHBox" id="hbox2">
                             <property name="visible">True</property>
                             <property name="spacing">12</property>
@@ -107,7 +119,7 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="position">3</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </object>

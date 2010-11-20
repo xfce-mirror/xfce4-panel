@@ -132,6 +132,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-wireframes", G_TYPE_BOOLEAN },
     { "show-handle", G_TYPE_BOOLEAN },
     { "sort-order", G_TYPE_UINT },
+    { "rotate-vertically", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -211,6 +212,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("grouping", "active")
   TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
   TASKLIST_DIALOG_BIND ("flat-buttons", "active")
+  TASKLIST_DIALOG_BIND ("rotate-vertically", "active")
   TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
   TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
   TASKLIST_DIALOG_BIND ("show-wireframes", "active")
