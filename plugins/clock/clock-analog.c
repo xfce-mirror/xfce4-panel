@@ -245,7 +245,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
 
       /* set the line properties */
       cairo_set_line_width (cr, 1);
-      gdk_cairo_set_source_color (cr, &widget->style->fg[GTK_STATE_NORMAL]);
+      gdk_cairo_set_source_color (cr, &widget->style->fg[GTK_WIDGET_STATE (widget)]);
 
       /* draw the ticks */
       xfce_clock_analog_draw_ticks (cr, xc, yc, radius);

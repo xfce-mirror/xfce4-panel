@@ -299,6 +299,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 
   /* get the cairo context */
   cr = gdk_cairo_create (widget->window);
+  gdk_cairo_set_source_color (cr, &widget->style->fg[GTK_WIDGET_STATE (widget)]);
 
   if (G_LIKELY (cr != NULL))
     {

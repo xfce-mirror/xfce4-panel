@@ -276,8 +276,16 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
   gint         w, h, x;
   gint         ticks;
 
-  inactive = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_NORMAL]);
-  active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
+  if (G_UNLIKELY (GTK_WIDGET_STATE (binary) == GTK_STATE_INSENSITIVE))
+    {
+      inactive = &(GTK_WIDGET (binary)->style->mid[GTK_STATE_INSENSITIVE]);
+      active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_INSENSITIVE]);
+    }
+  else
+    {
+      inactive = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_NORMAL]);
+      active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
+    }
 
   clock_plugin_get_localtime (&tm);
 
@@ -352,8 +360,16 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
   gint         w, h, y;
   gint         ticks;
 
-  inactive = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_NORMAL]);
-  active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
+  if (G_UNLIKELY (GTK_WIDGET_STATE (binary) == GTK_STATE_INSENSITIVE))
+    {
+      inactive = &(GTK_WIDGET (binary)->style->mid[GTK_STATE_INSENSITIVE]);
+      active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_INSENSITIVE]);
+    }
+  else
+    {
+      inactive = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_NORMAL]);
+      active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
+    }
 
   clock_plugin_get_localtime (&tm);
 
