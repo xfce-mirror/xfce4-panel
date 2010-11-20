@@ -213,7 +213,11 @@ pager_plugin_set_property (GObject      *object,
       if (plugin->pager != NULL)
         {
           if (plugin->miniature_view)
-            wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
+            {
+              if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
+                g_message ("Failed to set the number of pager rows. You probably "
+                           "have more then 1 pager in your panel setup.");
+            }
           else
             pager_buttons_set_n_rows (XFCE_PAGER_BUTTONS (plugin->pager), plugin->rows);
         }
@@ -288,7 +292,9 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
     {
       plugin->pager = wnck_pager_new (plugin->wnck_screen);
       wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
-      wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows);
+      if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
+        g_message ("Failed to set the number of pager rows. You probably "
+                   "have more then 1 pager in your panel setup.");
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
     }
   else
