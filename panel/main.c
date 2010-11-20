@@ -138,7 +138,7 @@ main (gint argc, gchar **argv)
   PanelDBusService *dbus_service;
   gboolean          succeed = FALSE;
   guint             i;
-  const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM, SIGABRT };
+  const gint        signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT };
   const gchar      *error_msg;
   XfceSMClient     *sm_client;
 
