@@ -1722,6 +1722,10 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
 {
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
 
+  if (!GTK_WIDGET_IS_SENSITIVE (child->button)
+      || !GTK_WIDGET_PARENT_SENSITIVE (child->button))
+    return FALSE;
+
   child->motion_timestamp = timestamp;
   if (child->motion_timeout_id == 0
       && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (child->button)))
