@@ -460,6 +460,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
                                                   (GDestroyNotify) xfce_tasklist_group_button_remove);
 
   /* widgets for the overflow menu */
+  /* TODO support drag-motion and drag-leave */
   tasklist->arrow_button = xfce_arrow_button_new (GTK_ARROW_DOWN);
   gtk_widget_set_parent (tasklist->arrow_button, GTK_WIDGET (tasklist));
   gtk_widget_set_name (tasklist->arrow_button, "panel-tasklist-arrow");
