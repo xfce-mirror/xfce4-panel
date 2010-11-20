@@ -121,10 +121,11 @@ static void
 signal_handler_quit (gint signum)
 {
   panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
-               "received signal %s <%d>, quiting panel",
-               g_strsignal (signum), signum);
+               "received signal %s <%d>, %s panel",
+               g_strsignal (signum), signum,
+               signum == SIGUSR1 ? "restarting" : "quiting");
 
-  panel_dbus_service_exit_panel (FALSE);
+  panel_dbus_service_exit_panel (signum == SIGUSR1);
 }
 
 
@@ -138,7 +139,7 @@ main (gint argc, gchar **argv)
   PanelDBusService *dbus_service;
   gboolean          succeed = FALSE;
   guint             i;
-  const gint        signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT };
+  const gint        signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT, SIGUSR1 };
   const gchar      *error_msg;
   XfceSMClient     *sm_client;
 
