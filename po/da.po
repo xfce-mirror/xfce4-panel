@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-18 17:08+0000\n"
+"POT-Creation-Date: 2010-11-21 05:08+0000\n"
 "PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -132,66 +132,66 @@ msgid "Print version information and exit"
 msgstr "Udskriv versionsinformation og afslut"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:164
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTER...]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:171
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Tast \"%s --help\" for brugervejledning."
 
-#: ../panel/main.c:180
+#: ../panel/main.c:190
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce udviklingsholdet. Alle rettigheder forbeholdes."
 
-#: ../panel/main.c:181
+#: ../panel/main.c:191
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Rapporter venligst fejl til <%s>."
 
-#: ../panel/main.c:232
+#: ../panel/main.c:242
 msgid "There is already a running instance"
 msgstr "Der findes allerede en kørende instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:275
+#: ../panel/main.c:285
 msgid "Restarting..."
 msgstr "Genstarter..."
 
-#: ../panel/main.c:290
+#: ../panel/main.c:300
 msgid "Failed to show the preferences dialog"
 msgstr "Kunne ikke vise dialogen indstillinger"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:302
 msgid "Failed to show the add new items dialog"
 msgstr "Kunne ikke vise dialogen tilføj nye elementer"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:304
 msgid "Failed to save the panel configuration"
 msgstr "Kunne ikke gemme indstillingen til panelet"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:306
 msgid "Failed to add a plugin to the panel"
 msgstr "Kunne ikke føje et udvidelsesmodul til panelet"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:308
 msgid "Failed to restart the panel"
 msgstr "Kunne ikke genstarte panelet"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:310
 msgid "Failed to quit the panel"
 msgstr "Kunne ikke afslutte panelet"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:312
 msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-besked"
 
-#: ../panel/main.c:313
+#: ../panel/main.c:323
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Ønsker du at starte panelet? Hvis du vil det skal du huske at gemme sessionen ved logud. Det vil sikre dig at panelet vil blive startet automatisk næste gang ved logind."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:326 ../panel/main.c:340
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
@@ -1256,11 +1256,11 @@ msgstr "Position af p_ilknap:"
 msgid "Program launcher with optional menu"
 msgstr "Program afvikler med valgfri menu"
 
-#: ../plugins/pager/pager.c:348 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Arbejdsområde_indstillinger..."
 
-#: ../plugins/pager/pager.c:423
+#: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
 msgstr "Kunne ikke åbne indstillingerne til arbejdsområde"
 
@@ -1412,68 +1412,72 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "Gendan minimerede vinduer til det aktuelle _arbejdsområde"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr "Ro_tér knapperne på det vertikale panel"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "Brug fl_ade knapper"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "Vis _håndtag"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "Vis knap_mærkater"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "Vis kun _minimerede vinduer"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
 msgstr "Vis _vinduer fra alle arbejdsområder"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
 msgstr "Sor_teringsorden:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Timestamp"
 msgstr "Tidsstemple"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "When space is limited"
 msgstr "Når plads er begrænset"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Vinduesknapper"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window _grouping:"
 msgstr "Vindue_gruppering:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
 msgstr "Vinduestitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2622
+#: ../plugins/tasklist/tasklist-widget.c:2663
 msgid "Mi_nimize All"
 msgstr "Mi_nimér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2631
+#: ../plugins/tasklist/tasklist-widget.c:2672
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2637
+#: ../plugins/tasklist/tasklist-widget.c:2678
 msgid "Ma_ximize All"
 msgstr "Maksi_mér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2646
+#: ../plugins/tasklist/tasklist-widget.c:2687
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2656
+#: ../plugins/tasklist/tasklist-widget.c:2697
 msgid "_Close All"
 msgstr "_Luk alle"
 
