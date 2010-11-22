@@ -3,22 +3,22 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Nuno Donato <nunodonato@gmail.com.pt>, 2004.
 # Nuno Miguel <nunis@netcabo.pt>, 2007, 2008, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-16 17:09+0000\n"
+"POT-Creation-Date: 2010-11-22 05:08+0000\n"
 "PO-Revision-Date: 2010-11-16 19:26-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: PORTUGAL\n"
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: PORTUGAL\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
@@ -33,8 +33,7 @@ msgid "Customize the panel"
 msgstr "Personalizar o painel"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../panel/panel-window.c:2128
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2189
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Painel"
@@ -78,20 +77,17 @@ msgid "Pane_l"
 msgstr "Paine_l "
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2201
 msgid "Add _New Items..."
 msgstr "Adicionar _novos itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091
-#: ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2212
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do pain_el..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108
-#: ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2228
 msgid "Log _Out"
 msgstr "_Sair"
 
@@ -99,8 +95,7 @@ msgstr "_Sair"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar diálogo \"Preferências do painel\""
 
-#: ../panel/main.c:77
-#: ../panel/main.c:78
+#: ../panel/main.c:77 ../panel/main.c:78
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-PAINEL"
 
@@ -136,67 +131,66 @@ msgid "Print version information and exit"
 msgstr "Imprimir informações da versão e sair"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:164
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTOS...]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:171
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Digite \"%s --help\" para utilização."
 
-#: ../panel/main.c:180
+#: ../panel/main.c:190
 msgid "The Xfce development team. All rights reserved."
 msgstr "A equipa de desenvolvimento Xfce. Todos os direitos reservados."
 
-#: ../panel/main.c:181
+#: ../panel/main.c:191
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Por favor, reporte erros para <%s>."
 
-#: ../panel/main.c:232
+#: ../panel/main.c:242
 msgid "There is already a running instance"
 msgstr "Já existe uma instância em execução"
 
 #. spawn ourselfs again
-#: ../panel/main.c:275
+#: ../panel/main.c:285
 msgid "Restarting..."
 msgstr "Reiniciando..."
 
-#: ../panel/main.c:290
+#: ../panel/main.c:300
 msgid "Failed to show the preferences dialog"
 msgstr "Falha ao mostrar o diálogo de preferências"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:302
 msgid "Failed to show the add new items dialog"
 msgstr "Falha ao mostrar o diálogo \"Adicionar novos itens\""
 
-#: ../panel/main.c:294
+#: ../panel/main.c:304
 msgid "Failed to save the panel configuration"
 msgstr "Falha ao gravar a configuração do painel"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:306
 msgid "Failed to add a plugin to the panel"
 msgstr "Falha ao adicionar \"plug-in\" ao painel"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:308
 msgid "Failed to restart the panel"
 msgstr "Falha ao reiniciar o painel"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:310
 msgid "Failed to quit the panel"
 msgstr "Falha ao fechar o painel"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:312
 msgid "Failed to send D-Bus message"
 msgstr "Falha ao enviar a mensagem D-BUS"
 
-#: ../panel/main.c:313
+#: ../panel/main.c:323
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Pretende iniciar o painel? Se sim, certifique-se que grava a sessão ao sair para que o painel seja iniciado automaticamente na próxima vez que iniciar a sessão."
 
-#: ../panel/main.c:316
-#: ../panel/main.c:330
+#: ../panel/main.c:326 ../panel/main.c:340
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância de %s foi encontrada"
@@ -205,18 +199,15 @@ msgstr "Nenhuma instância de %s foi encontrada"
 msgid "Failed to launch the migration application"
 msgstr "Falha ao lançar a aplicação de migração"
 
-#: ../panel/panel-application.c:1429
-#: ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Iniciou o X sem o gestor de sessões. Ao seleccionar Sair irá fechar o servidor X."
 
-#: ../panel/panel-application.c:1430
-#: ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Tem a certeza que quer sair do painel?"
 
-#: ../panel/panel-application.c:1438
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Falha ao executar o comando \"%s\""
@@ -239,8 +230,7 @@ msgid "translator-credits"
 msgstr "Sérgio Marques<smarquespt@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Adicionar novo item"
 
@@ -249,8 +239,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Por favor, escolha o painel para o novo \"plug-in\":"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
@@ -403,7 +392,8 @@ msgstr "Ite_ns"
 msgid "L_ength (%):"
 msgstr "Comprim_ento (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Medidas"
@@ -807,7 +797,8 @@ msgstr "Mostrar _segundos"
 msgid "F_ormat:"
 msgstr "F_ormato:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Prec_isão:"
@@ -1259,17 +1250,15 @@ msgstr "Posição do botão s_eta:"
 msgid "Program launcher with optional menu"
 msgstr "Lançador de programas com menu opcional"
 
-#: ../plugins/pager/pager.c:348
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "De_finições da área de trabalho..."
 
-#: ../plugins/pager/pager.c:423
+#: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
 msgstr "Incapaz de abrir as definições da área de trabalho"
 
-#: ../plugins/pager/pager-buttons.c:412
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Área de trabalho %d"
@@ -1417,68 +1406,72 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "Restaurar as janelas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr "Rodar bo_tões do painel vertical"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "Usar b_otões lisos"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "Mostrar _manípulo"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "Mostrar _legendas do botão"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "Mostrar apenas janelas _minimizadas"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
 msgstr "Mostrar as j_anelas de todas as áreas de trabalho"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
 msgstr "Ordem de selecçã_o:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Timestamp"
 msgstr "Marca de tempo"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "When space is limited"
 msgstr "Quando o espaço é limitado"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Botões de janela"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window _grouping:"
 msgstr "A_grupamento de janelas:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
 msgstr "Título da janela"
 
-#: ../plugins/tasklist/tasklist-widget.c:2622
+#: ../plugins/tasklist/tasklist-widget.c:2663
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2631
+#: ../plugins/tasklist/tasklist-widget.c:2672
 msgid "Un_minimize All"
 msgstr "Res_taurar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2637
+#: ../plugins/tasklist/tasklist-widget.c:2678
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2646
+#: ../plugins/tasklist/tasklist-widget.c:2687
 msgid "_Unmaximize All"
 msgstr "_Reverter maximização"
 
-#: ../plugins/tasklist/tasklist-widget.c:2656
+#: ../plugins/tasklist/tasklist-widget.c:2697
 msgid "_Close All"
 msgstr "Fechar _todas"
 
@@ -1544,4 +1537,3 @@ msgstr "Menu da janela"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Trocar entre janelas abertas utilizando um menu"
-
