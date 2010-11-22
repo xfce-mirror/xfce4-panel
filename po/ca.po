@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-05 11:08+0000\n"
+"POT-Creation-Date: 2010-11-22 17:08+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: catalan <xfce-i18n@xfce.org>\n"
@@ -24,20 +24,22 @@ msgstr ""
 "X-Poedit-Country: Spain\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "Crea un llançador al quadre de Xfce"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Afegir un nou llençador al panell basant-se en la informació d'aquest fitxer d'escriptori"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "Crea un nou llançador al quadre de Xfce"
+msgid "Create Launcher on the panel"
+msgstr "Crear un llençador al quadre"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
-msgstr "Personalitza el quadre de Xfce"
+msgid "Customize the panel"
+msgstr "Personalitzar el quadre"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "Preferències del quadre"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2189
+#: ../migrate/main.c:84
+msgid "Panel"
+msgstr "Quadre"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -48,8 +50,8 @@ msgid "You can read the user manual online. This manual may however not exactly 
 msgstr "Podeu llegir el manual d'usuari en línia. Però pot ser que el manual sigui d'una altre versió del quadre."
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr "El manual d'usuari del quadre de Xfce no està instaŀlat en el vostre ordenador."
+msgid "The user manual is not installed on your computer"
+msgstr "El manual d'usuari no està instal·lat al vostre sistema"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -74,21 +76,21 @@ msgid "_Move"
 msgstr "_Mou"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1072
-msgid "_Xfce Panel"
-msgstr "Quadre _Xfce"
+msgid "Pane_l"
+msgstr "_Quadre"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2201
 msgid "Add _New Items..."
 msgstr "Afegir elements _nous…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2212
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferències del quadre…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2228
 msgid "Log _Out"
 msgstr "_Sortir"
 
@@ -132,66 +134,66 @@ msgid "Print version information and exit"
 msgstr "Mostra informació sobre la versió i surt"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:164
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:171
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Escriu \"%s --help\" per a obtenir ajuda."
 
-#: ../panel/main.c:180
+#: ../panel/main.c:190
 msgid "The Xfce development team. All rights reserved."
 msgstr "L’equip de desenvolupament d’Xfce. Tots els drets reservats."
 
-#: ../panel/main.c:181
+#: ../panel/main.c:191
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Envieu els errors a <%s>."
 
-#: ../panel/main.c:232
+#: ../panel/main.c:242
 msgid "There is already a running instance"
 msgstr "Ja hi ha una altra instància executant-se"
 
 #. spawn ourselfs again
-#: ../panel/main.c:275
+#: ../panel/main.c:285
 msgid "Restarting..."
 msgstr "Reiniciant…"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:300
 msgid "Failed to show the preferences dialog"
 msgstr "No s'ha pogut mostrar el diàleg de preferències"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:302
 msgid "Failed to show the add new items dialog"
 msgstr "No s'ha pogut mostrar el diàleg per afegir elements"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:304
 msgid "Failed to save the panel configuration"
 msgstr "No s'ha pogut desar la configuració del quadre"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:306
 msgid "Failed to add a plugin to the panel"
 msgstr "No s'ha pogut afegir un connector al quadre"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:308
 msgid "Failed to restart the panel"
 msgstr "No s'ha pogut reiniciar el quadre"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:310
 msgid "Failed to quit the panel"
 msgstr "No s'ha pogut sortir del quadre"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:312
 msgid "Failed to send D-Bus message"
 msgstr "No s'ha pogut enviar un missatge a través de D-BUS"
 
-#: ../panel/main.c:313
-msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Voleu iniciar el panell de Xfce? Si és el cas, assegureu-vos que deseu la sessió quan sortiu per tal que el panell s'inciï automàticament el proper cop que inicieu la sessió."
+#: ../panel/main.c:323
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Voleu iniciar el quadre? Si és el cas, assegureu-vos que deseu la sessió quan sortiu per tal que el panell s'inciï automàticament el proper cop que inicieu la sessió."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:326 ../panel/main.c:340
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No s'ha trobat una instància en marxa de %s"
@@ -201,8 +203,8 @@ msgid "Failed to launch the migration application"
 msgstr "No s'ha pogut iniciar l'aplicació de migració"
 
 #: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
-msgid "If you have started Xfce without session manager, this will close the X server."
-msgstr "Si heu iniciat Xfce sense el gestor de sessions, això tancarà el servidor X."
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "Heu iniciat X sense un gestor de sessions. Premeu Sortir per a sortir del servidor X."
 
 #: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
@@ -222,11 +224,11 @@ msgstr "La sintaxis d'esdeveniments per al connector és invàlida. Useu PLUGIN-
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Tipus invàlid \"%s\". Els tipus vàlids són: bool, double, int, string i uint."
 
-#: ../panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "El quadre de l'entorn d'escriptori Xfce"
 
-#: ../panel/panel-dialogs.c:84
+#: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr ""
 "Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008-2010.\n"
@@ -235,25 +237,25 @@ msgstr ""
 "Pau Ruŀlan Ferragut <paurullan@bulma.net>, 2005-2007."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Afegeix un element nou"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "Trieu un quadre pel connector nou:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Quadre %d"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:183
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "El quadre està executant-se en mode Kiosk; no esteu permesos de canviar la configuració del quadre."
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
 msgstr "No es pot modificar el quadre"
 
@@ -347,8 +349,8 @@ msgid "Add new item to this panel"
 msgstr "Afegeix un element a aquest quadre"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
-msgstr "Transparència del quadre de fons, entre 0 (transparent) i 100 (opac)."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgstr "Valor alfa per al quadre de fons, essent 0 completament transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -422,68 +424,64 @@ msgid "O_utput:"
 msgstr "_Sortida:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Opacity"
+msgstr "Opacitat"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr "Tria un color del panell"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "Suprimeix l'element seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "Suprimeix el quadre seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
 msgstr "Seleccioneu una imatge per al fons"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Seleccioneu aquesta opció per augmentar automàticament la longitud del quadre quan els connectors necessitin més espai."
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Seleccioneu aquesta opció per a estendre el quadre a múltiples monitors"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "Seleccioneu aquesta opció per bloquejar la posició del quadre i ocultar els tiradors."
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Seleccioneu aquesta opció per a ocultar el quadre quan el punter no està sobre el quadre. Aquesta funcionalitat només és operativa quan el quadre és a un extrem de la pantalla."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "Mostra informació sobre l'element seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr "Color sòlid"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr "Expandeix els mo_nitors"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Transparency"
-msgstr "Transparència"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Transparency when the pointer is hovering over the panel."
-msgstr "Transparència quan el punter està sobre el quadre."
-
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is not hovering the panel."
-msgstr "Transparència quan el punter no està sobre el quadre."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Transparència quan el punter és sobre el quadre, essent 0 completament transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Transparència quan el punter no és sobre el quadre, essent 0 completament transparent i 100 completament opac."
+
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
 msgstr "Vertical "
-
-#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
-msgid "Xfce Panel"
-msgstr "Quadre Xfce"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -545,8 +543,8 @@ msgid "Expert"
 msgstr "Expert"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
-msgstr "Benvinguts a la primera arrancada del quadre de Xfce"
+msgid "Welcome to the first start of the panel"
+msgstr "Benvinguts a la primera arrancada del quadre"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
@@ -652,7 +650,9 @@ msgstr "Surt, bloca o altres accions del sistema"
 msgid "Appearance"
 msgstr "Aparença"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Menú d'aplicacions"
@@ -705,10 +705,6 @@ msgstr "_Icona:"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "_Show button title"
 msgstr "_Mostra el títol del botó"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-msgid "Xfce Menu"
-msgstr "Menú Xfce"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
@@ -1167,24 +1163,24 @@ msgstr "Element sense nom"
 msgid "No items"
 msgstr "Sense elements"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:704
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Si esborreu un element, serà eliminat permanetment"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:705
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Esteu segurs de voler suprimir  «%s»?"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:706
 msgid "Unnamed item"
 msgstr "Element sense nom"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:721
 msgid "Failed to remove the desktop file from the config directory"
 msgstr "No s'ha pogut eliminar el fitxer d'escriptori des del directori de configuració"
 
-#: ../plugins/launcher/launcher-dialog.c:723
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Failed to open desktop item editor"
 msgstr "No s'ha pogut obrir l'editor d'elements de l'escriptori"
 
@@ -1261,13 +1257,13 @@ msgstr "Botó de _fletxa:"
 msgid "Program launcher with optional menu"
 msgstr "Llançadora de programa amb menu opcional"
 
-#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Configuració de l'espai de treball…"
 
-#: ../plugins/pager/pager.c:425
-msgid "Unable to open the Xfce workspace settings"
-msgstr "No s'ha pogut obrir la configuració de l'espai de treball de Xfce"
+#: ../plugins/pager/pager.c:429
+msgid "Unable to open the workspace settings"
+msgstr "No s'ha pogut obrir la configuració de l'espai de treball"
 
 #: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
@@ -1417,68 +1413,72 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "Restaura finestres minimitzades a l'espai de _treball actual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr "Ro_tar botons en un quadre vertical"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "Mostra botons _plans"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "Mostra _identificador"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "Mostra les _etiquetes dels botons"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "Mostra només les aplicacions _minimitzaes"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
 msgstr "Mostr_a les finestres de tots els espais de treball"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
 msgstr "_Ordenació:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Timestamp"
 msgstr "Marca de temps"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "When space is limited"
 msgstr "Quan l'espai és limitat"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Botons de la finestra"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window _grouping:"
 msgstr "A_grupament de finestres:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
 msgstr "Títol de la finestra"
 
-#: ../plugins/tasklist/tasklist-widget.c:2620
+#: ../plugins/tasklist/tasklist-widget.c:2663
 msgid "Mi_nimize All"
 msgstr "Mi_nimitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:2629
+#: ../plugins/tasklist/tasklist-widget.c:2672
 msgid "Un_minimize All"
 msgstr "De_sminimitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:2635
+#: ../plugins/tasklist/tasklist-widget.c:2678
 msgid "Ma_ximize All"
 msgstr "Ma_ximitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:2644
+#: ../plugins/tasklist/tasklist-widget.c:2687
 msgid "_Unmaximize All"
 msgstr "Des_maximitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:2654
+#: ../plugins/tasklist/tasklist-widget.c:2697
 msgid "_Close All"
 msgstr "_Tancar-ho tot"
 
@@ -1544,6 +1544,27 @@ msgstr "Menú de finestra"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Canvia entre les finestres obertes emprant un menú"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "Crea un nou llançador al quadre de Xfce"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Preferències del quadre"
+
+#~ msgid "_Xfce Panel"
+#~ msgstr "Quadre _Xfce"
+
+#~ msgid "Transparency"
+#~ msgstr "Transparència"
+
+#~ msgid "Transparency when the pointer is not hovering the panel."
+#~ msgstr "Transparència quan el punter no està sobre el quadre."
+
+#~ msgid "Xfce Panel"
+#~ msgstr "Quadre Xfce"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "Menú Xfce"
 
 #~ msgid "_Restart"
 #~ msgstr "_Reinicia"
