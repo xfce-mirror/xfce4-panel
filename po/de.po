@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-30 16:08+0000\n"
+"POT-Creation-Date: 2010-11-23 11:08+0000\n"
 "PO-Revision-Date: 2010-09-14 16:56+0200\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -20,20 +20,25 @@ msgstr ""
 "Language: de\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "Starter zur Leiste hinzufügen"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Einen neuen Starter zur Leiste hinzufügen, basierend auf den Informationen der Desktop Datei"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "Neuen Starter zur Leiste hinzufügen"
+#, fuzzy
+msgid "Create Launcher on the panel"
+msgstr "Starter zur Leiste hinzufügen"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
+#, fuzzy
+msgid "Customize the panel"
 msgstr "Leiste einrichten"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "Leisteneinstellungen"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2189
+#: ../migrate/main.c:84
+#, fuzzy
+msgid "Panel"
+msgstr "Leiste %d"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -44,7 +49,8 @@ msgid "You can read the user manual online. This manual may however not exactly 
 msgstr "Sie können die Dokumentation im Netz lesen. Diese Dokumentation entspricht allerdings nicht immer Ihrer Version."
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
+#, fuzzy
+msgid "The user manual is not installed on your computer"
 msgstr "Das Anwenderhandbuch ist auf Ihrem Rechner nicht installiert"
 
 #. display an error message to the user
@@ -70,21 +76,22 @@ msgid "_Move"
 msgstr "_Verschieben"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1072
-msgid "_Xfce Panel"
-msgstr "_Xfce-Leiste"
+#, fuzzy
+msgid "Pane_l"
+msgstr "Leiste %d"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2201
 msgid "Add _New Items..."
 msgstr "_Neue Elemente hinzufügen..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2212
 msgid "Panel Pr_eferences..."
 msgstr "Leisten_einstellungen..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2228
 msgid "Log _Out"
 msgstr "_Abmelden"
 
@@ -128,66 +135,67 @@ msgid "Print version information and exit"
 msgstr "Versionsinformationen ausgeben und beenden"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:164
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTE…]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:171
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Eingeben von \"%s --help\" für Hilfe."
 
-#: ../panel/main.c:180
+#: ../panel/main.c:190
 msgid "The Xfce development team. All rights reserved."
 msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
 
-#: ../panel/main.c:181
+#: ../panel/main.c:191
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Bitte senden Sie Fehlermeldungen an <%s>"
 
-#: ../panel/main.c:232
+#: ../panel/main.c:242
 msgid "There is already a running instance"
 msgstr "Es gibt bereits eine laufende Instanz"
 
 #. spawn ourselfs again
-#: ../panel/main.c:275
+#: ../panel/main.c:285
 msgid "Restarting..."
 msgstr "Neustart..."
 
-#: ../panel/main.c:290
+#: ../panel/main.c:300
 msgid "Failed to show the preferences dialog"
 msgstr "Konnte den Einstellungsdialog nicht öffnen"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:302
 msgid "Failed to show the add new items dialog"
 msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:304
 msgid "Failed to save the panel configuration"
 msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:306
 msgid "Failed to add a plugin to the panel"
 msgstr "Konnte Plugin nicht zur Leiste hinzufügen"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:308
 msgid "Failed to restart the panel"
 msgstr "Neustart der Leiste fehlgeschlagen"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:310
 msgid "Failed to quit the panel"
 msgstr "Beenden der Leiste fehlgeschlagen"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:312
 msgid "Failed to send D-Bus message"
 msgstr "Konnte keine D-Bus-Nachricht senden"
 
-#: ../panel/main.c:313
-msgid "Do you want to start the Xfce panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+#: ../panel/main.c:323
+#, fuzzy
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:326 ../panel/main.c:340
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
@@ -197,7 +205,8 @@ msgid "Failed to launch the migration application"
 msgstr "Konnte die Anwendung zum Migrieren der Leiste nicht starten"
 
 #: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
-msgid "If you have started Xfce without session manager, this will close the X server."
+#, fuzzy
+msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Wenn Sie Xfce ohne die Sitzungsverwaltung gestartet haben, beendet dies den X-Server."
 
 #: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
@@ -218,34 +227,34 @@ msgstr "Ungültige Syntax für Plugin-Ereignisse angegeben. Verwenden Sie PLUGIN
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Ungültiger Hinweistyp »%s«. Erlaubte Typen sind 'bool', 'double', 'int', 'string' und 'uint'."
 
-#: ../panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Die Leiste der Xfce Desktop Umbegung"
 
-#: ../panel/panel-dialogs.c:84
+#: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr "Fabian Nowak <timystery@arcor.de>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Neue Elemente hinzufügen"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "Bitte Leiste für das neue Element auswählen:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:183
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "Da sich die Leiste im »kiosk«-Modus befindet, ist es nicht erlaubt Änderungen an der Leistenkonfiguration vorzunehmen als normaler Nutzer"
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
 msgstr "Modifizieren der Leiste ist nicht erlaubt"
 
@@ -339,7 +348,8 @@ msgid "Add new item to this panel"
 msgstr "Neues Objekt zur Leiste hinzufügen"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, between 0 (transparent) and 100 (opaque)."
+#, fuzzy
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
 msgstr "Alpha-Wert des Leistenhintergrunds. Zwischen 0 (transparent) und 100 (undurchsichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -414,68 +424,67 @@ msgid "O_utput:"
 msgstr "_Ausgabe:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+#, fuzzy
+msgid "Opacity"
+msgstr "Deckkraft"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr "Farbe für die Leiste auswählen"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "Ausgewähltes Objekt entfernen"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "Die ausgewählte Leiste entfernen"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
 msgstr "Hintergrundbild auswählen"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Wählen Sie diese Option, wenn die Länge der Leiste automatisch vergrößert werden soll, wenn Plugins mehr Platz benötigen."
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Diese Option wählen, um die Leiste über mehrere Monitore zu verteilen."
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "Wählen Sie diese Option, um die Leistengriffe zu verbergen und die Position zu sperren."
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Wählen Sie diese Option, um die Leiste zu verbergen, wenn sich der Zeiger nicht über ihr befindet. Dies funktioniert nur, wenn sich die Leiste an einer Bildschirmkante befindet."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "Informationen zum ausgewähltes Objekt anzeigen"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr "Deckfarbe"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr "_Auf mehrere Monitore ausdehnen"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Transparency"
-msgstr "Durchsichtigkeit"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Transparency when the pointer is hovering over the panel."
-msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist."
-
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is not hovering the panel."
-msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist."
+#, fuzzy
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist. 0 völlig transparent und 100 völlig undurchsichtig"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
+#, fuzzy
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist."
+
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
 msgstr "Vertikal"
-
-#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
-msgid "Xfce Panel"
-msgstr "Leiste"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -537,7 +546,8 @@ msgid "Expert"
 msgstr "Experte"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
+#, fuzzy
+msgid "Welcome to the first start of the panel"
 msgstr "Willkommen beim ersten Start der Xfce-Leiste"
 
 #: ../migrate/main.c:80
@@ -644,7 +654,9 @@ msgstr "Abmelden, sperren oder andere Systemaktionen"
 msgid "Appearance"
 msgstr "Aussehen"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Anwendungsmenü"
@@ -672,7 +684,8 @@ msgstr ""
 "Beispielsweise: »Dateimanager« anstelle von »Thunar«"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application description in t_ooltip"
+#, fuzzy
+msgid "Show application d_escription in tooltip"
 msgstr "_Anwendungsbeschreibung in Kurzhilfe zeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
@@ -699,10 +712,6 @@ msgstr "_Symbol:"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "_Show button title"
 msgstr "_Titel im Knopf anzeigen"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-msgid "Xfce Menu"
-msgstr "Xfce-Menü"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:470
 #: ../plugins/directorymenu/directorymenu.c:369
@@ -1166,24 +1175,24 @@ msgstr "Unbenanntes Objekt"
 msgid "No items"
 msgstr "Keine Objekte"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:704
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Durch löschen eines Objekts wird dieses dauerhaft entfernt"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:705
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:706
 msgid "Unnamed item"
 msgstr "Unbenanntes Objekt"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:721
 msgid "Failed to remove the desktop file from the config directory"
 msgstr "Konnte »desktop« Datei nicht aus dem Konfigurationsverzeichnis entfernen"
 
-#: ../plugins/launcher/launcher-dialog.c:723
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Failed to open desktop item editor"
 msgstr "Konnte den Editor für Desktop-Objekte nicht öffnen"
 
@@ -1260,12 +1269,13 @@ msgstr "_Position des Pfeilknopfs:"
 msgid "Program launcher with optional menu"
 msgstr "Programmstarter mit optionalem Menü"
 
-#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Arbeitsflächeneinstellungen..."
 
-#: ../plugins/pager/pager.c:425
-msgid "Unable to open the Xfce workspace settings"
+#: ../plugins/pager/pager.c:429
+#, fuzzy
+msgid "Unable to open the workspace settings"
 msgstr "Arbeitsflächeneinstellungen konnten nicht geöffnet werden"
 
 #: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
@@ -1416,68 +1426,72 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "_Minimierte Fenster in aktueller Arbeitsfläche wiederherstellen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "_Flache Knöpfe"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "_Griff anzeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "_Knopfbeschriftung"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "_Nur minimierte Fenster anzeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
 msgstr "_Fenster aller Arbeitsflächen anzeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
 msgstr "_Sortierreihenfolge:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Timestamp"
 msgstr "Zeitstempel"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "When space is limited"
 msgstr "Bei begrenztem Platz"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Aktionsknöpfe"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window _grouping:"
 msgstr "Fenster_gruppierung:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
 msgstr "Fenstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2620
+#: ../plugins/tasklist/tasklist-widget.c:2663
 msgid "Mi_nimize All"
 msgstr "_Alle minimieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:2629
+#: ../plugins/tasklist/tasklist-widget.c:2672
 msgid "Un_minimize All"
 msgstr "_Minimieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:2635
+#: ../plugins/tasklist/tasklist-widget.c:2678
 msgid "Ma_ximize All"
 msgstr "_Alle maximieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:2644
+#: ../plugins/tasklist/tasklist-widget.c:2687
 msgid "_Unmaximize All"
 msgstr "_Maximieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:2654
+#: ../plugins/tasklist/tasklist-widget.c:2697
 msgid "_Close All"
 msgstr "_Alle schließen"
 
@@ -1543,6 +1557,27 @@ msgstr "Fenstermenü"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Mit einem Menü zwischen offenen Fenstern umschalten"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "Neuen Starter zur Leiste hinzufügen"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Leisteneinstellungen"
+
+#~ msgid "_Xfce Panel"
+#~ msgstr "_Xfce-Leiste"
+
+#~ msgid "Transparency"
+#~ msgstr "Durchsichtigkeit"
+
+#~ msgid "Transparency when the pointer is not hovering the panel."
+#~ msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist."
+
+#~ msgid "Xfce Panel"
+#~ msgstr "Leiste"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "Xfce-Menü"
 
 #~ msgid "_Restart"
 #~ msgstr "Neustarten"
