@@ -1772,6 +1772,9 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           display = gdk_screen_get_display (screen);
           if (gdk_display_get_n_screens (display) - 1 > screen_num)
             {
+              panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
+                           "screen-%d not found, hiding panel", screen_num);
+
               /* out of range, hide the window */
               if (GTK_WIDGET_VISIBLE (window))
                 gtk_widget_hide (GTK_WIDGET (window));
@@ -1779,6 +1782,11 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
             }
           else
             {
+              panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
+                           "moving panel from screen %d to %d",
+                           gdk_screen_get_number (screen),
+                           screen_num);
+
               /* move window to the correct screen */
               screen = gdk_display_get_screen (display, screen_num);
               gtk_window_set_screen (GTK_WINDOW (window), screen);
@@ -1849,11 +1857,12 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                 }
             }
 
-          panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
-                       "monitor-num=%d", monitor_num);
-
           if (G_UNLIKELY (monitor_num == -1))
             {
+              panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
+                           "output/monitor %s not found, hiding window",
+                           window->output_name);
+
               /* hide the panel if the monitor was not found */
               if (GTK_WIDGET_VISIBLE (window))
                 gtk_widget_hide (GTK_WIDGET (window));
