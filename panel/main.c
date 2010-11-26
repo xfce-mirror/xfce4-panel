@@ -60,6 +60,7 @@ static gboolean   opt_quit = FALSE;
 static gboolean   opt_version = FALSE;
 static gchar     *opt_plugin_event = NULL;
 static gchar    **opt_arguments = NULL;
+static gboolean   sm_client_saved_state = FALSE;
 
 
 
@@ -126,6 +127,37 @@ panel_signal_handler (gint signum)
                signum == SIGUSR1 ? "restarting" : "quiting");
 
   panel_dbus_service_exit_panel (signum == SIGUSR1);
+}
+
+
+
+static void
+panel_sm_client_quit (XfceSMClient *sm_client)
+{
+  panel_return_if_fail (XFCE_IS_SM_CLIENT (sm_client));
+  panel_return_if_fail (!panel_dbus_service_get_restart ());
+
+  panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
+               "terminate panel for session manager");
+
+  gtk_main_quit ();
+}
+
+
+
+static void
+panel_sm_client_save_state (XfceSMClient     *sm_client,
+                            PanelApplication *application)
+{
+  panel_return_if_fail (XFCE_IS_SM_CLIENT (sm_client));
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+
+  panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
+               "save configuration for session manager");
+
+  panel_application_save (application, TRUE);
+
+  sm_client_saved_state = TRUE;
 }
 
 
@@ -248,7 +280,7 @@ main (gint argc, gchar **argv)
   xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
   xfce_sm_client_set_priority (sm_client, XFCE_SM_CLIENT_PRIORITY_CORE);
   g_signal_connect (G_OBJECT (sm_client), "quit",
-      G_CALLBACK (panel_signal_handler), NULL);
+      G_CALLBACK (panel_sm_client_quit), NULL);
   if (!xfce_sm_client_connect (sm_client, &error))
     {
       g_printerr ("%s: Failed to connect to session manager: %s\n",
@@ -262,6 +294,10 @@ main (gint argc, gchar **argv)
 
   application = panel_application_get ();
 
+  /* save the state before the quit signal if we can, this is a bit safer */
+  g_signal_connect (G_OBJECT (sm_client), "save-state",
+      G_CALLBACK (panel_sm_client_save_state), application);
+
   /* open dialog if we started from launch_panel */
   if (opt_preferences >= 0)
     panel_preferences_dialog_show (panel_application_get_nth_window (application, opt_preferences));
@@ -274,8 +310,9 @@ main (gint argc, gchar **argv)
   /* destroy all the opened dialogs */
   panel_application_destroy_dialogs (application);
 
-  /* save the configuration */
-  panel_application_save (application, TRUE);
+  /* only save if we do not quit by the sm client */
+  if (!sm_client_saved_state)
+    panel_application_save (application, TRUE);
 
   g_object_unref (G_OBJECT (application));
   g_object_unref (G_OBJECT (sm_client));
