@@ -63,15 +63,15 @@ static gchar    **opt_arguments = NULL;
 
 
 
-static gboolean callback_handler (const gchar  *name,
-                                  const gchar  *value,
-                                  gpointer      user_data,
-                                  GError      **error);
+static gboolean panel_callback_handler (const gchar  *name,
+                                        const gchar  *value,
+                                        gpointer      user_data,
+                                        GError      **error);
 
 
 
 /* command line options */
-#define PANEL_CALLBACK_OPTION G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, callback_handler
+#define PANEL_CALLBACK_OPTION G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, panel_callback_handler
 static GOptionEntry option_entries[] =
 {
   { "preferences", 'p', PANEL_CALLBACK_OPTION, N_("Show the 'Panel Preferences' dialog"), N_("PANEL-NUMBER") },
@@ -89,10 +89,10 @@ static GOptionEntry option_entries[] =
 
 
 static gboolean
-callback_handler (const gchar  *name,
-                  const gchar  *value,
-                  gpointer      user_data,
-                  GError      **error)
+panel_callback_handler (const gchar  *name,
+                        const gchar  *value,
+                        gpointer      user_data,
+                        GError      **error)
 {
   panel_return_val_if_fail (name != NULL, FALSE);
 
@@ -118,7 +118,7 @@ callback_handler (const gchar  *name,
 
 
 static void
-signal_handler_quit (gint signum)
+panel_signal_handler (gint signum)
 {
   panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
                "received signal %s <%d>, %s panel",
@@ -248,7 +248,7 @@ main (gint argc, gchar **argv)
   xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
   xfce_sm_client_set_priority (sm_client, XFCE_SM_CLIENT_PRIORITY_CORE);
   g_signal_connect (G_OBJECT (sm_client), "quit",
-      G_CALLBACK (signal_handler_quit), NULL);
+      G_CALLBACK (panel_signal_handler), NULL);
   if (!xfce_sm_client_connect (sm_client, &error))
     {
       g_printerr ("%s: Failed to connect to session manager: %s\n",
@@ -258,7 +258,7 @@ main (gint argc, gchar **argv)
 
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
-    signal (signums[i], signal_handler_quit);
+    signal (signums[i], panel_signal_handler);
 
   application = panel_application_get ();
 
