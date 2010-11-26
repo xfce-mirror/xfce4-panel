@@ -216,6 +216,11 @@ struct _XfceTasklistChild
   WnckClassGroup         *class_group;
 };
 
+static const GtkTargetEntry source_targets[] =
+{
+  { "application/x-wnck-window-id", 0, 0 }
+};
+
 
 
 static void xfce_tasklist_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
@@ -2456,6 +2461,42 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
 
 
 
+static void
+xfce_tasklist_button_drag_data_get (GtkWidget         *button,
+			            GdkDragContext    *context,
+			            GtkSelectionData  *selection_data,
+			            guint              info,
+			            guint              timestamp,
+                                    XfceTasklistChild *child)
+{
+  gulong xid;
+
+  panel_return_if_fail (WNCK_IS_WINDOW (child->window));
+
+  xid = wnck_window_get_xid (child->window);
+  gtk_selection_data_set (selection_data,
+                          gtk_selection_data_get_target (selection_data),
+			  8, (guchar *)&xid, sizeof (gulong));
+}
+
+
+
+static void
+xfce_tasklist_button_drag_begin (GtkWidget         *button,
+			         GdkDragContext    *context,
+			         XfceTasklistChild *child)
+{
+  GdkPixbuf *pixbuf;
+
+  panel_return_if_fail (WNCK_IS_WINDOW (child->window));
+
+  pixbuf = wnck_window_get_icon (child->window);
+  if (G_LIKELY (pixbuf != NULL))
+    gtk_drag_set_icon_pixbuf (context, pixbuf, 0, 0);
+}
+
+
+
 static XfceTasklistChild *
 xfce_tasklist_button_new (WnckWindow   *window,
                           XfceTasklist *tasklist)
@@ -2475,6 +2516,15 @@ xfce_tasklist_button_new (WnckWindow   *window,
   child->window = window;
   child->class_group = wnck_window_get_class_group (window);
   child->unique_id = unique_id_counter++;
+
+  /* drag and drop to the pager */
+  gtk_drag_source_set (child->button, GDK_BUTTON1_MASK,
+                       source_targets, G_N_ELEMENTS (source_targets),
+                       GDK_ACTION_MOVE);
+  g_signal_connect (G_OBJECT (child->button), "drag-data-get",
+      G_CALLBACK (xfce_tasklist_button_drag_data_get), child);
+  g_signal_connect (G_OBJECT (child->button), "drag-begin",
+      G_CALLBACK (xfce_tasklist_button_drag_begin), child);
 
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "enter-notify-event",
