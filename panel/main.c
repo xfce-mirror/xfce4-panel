@@ -246,6 +246,7 @@ main (gint argc, gchar **argv)
   /* start session management */
   sm_client = xfce_sm_client_get ();
   xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_IMMEDIATELY);
+  xfce_sm_client_set_priority (sm_client, XFCE_SM_CLIENT_PRIORITY_CORE);
   g_signal_connect (G_OBJECT (sm_client), "quit",
       G_CALLBACK (signal_handler_quit), NULL);
   if (!xfce_sm_client_connect (sm_client, &error))
