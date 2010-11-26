@@ -861,9 +861,14 @@ applications_menu_plugin_menu_reload (ApplicationsMenuPlugin *plugin)
       panel_debug (PANEL_DEBUG_DOMAIN_APPLICATIONMENU,
                    "destroy menu for reload");
 
-      /* give garcon time to handle all the events */
-      exo_gtk_object_destroy_later (GTK_OBJECT (plugin->menu));
-      plugin->menu = NULL;
+      /* if the menu is opened, do not destroy it under the users'
+       * cursor, else destroy the menu in an idle, to give garcon
+       * time to finalize the events that triggered the reload */
+      if (GTK_WIDGET_VISIBLE (plugin->menu))
+        g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
+            G_CALLBACK (exo_gtk_object_destroy_later), NULL);
+      else
+        exo_gtk_object_destroy_later (GTK_OBJECT (plugin->menu));
     }
 }
 
