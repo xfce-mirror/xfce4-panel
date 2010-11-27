@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-22 05:08+0000\n"
+"POT-Creation-Date: 2010-11-27 05:08+0000\n"
 "PO-Revision-Date: 2010-08-03 09:46+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -30,7 +30,7 @@ msgid "Customize the panel"
 msgstr "Панельді баптау"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2189
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2192
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Панель"
@@ -74,53 +74,53 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2201
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2204
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2212
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2215
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2228
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2231
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Панель баптаулары' сұхбат терезесін көрсету"
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "'Жаңа элементтерді қосу' сұхбат терезесін көрсету"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "Панель баптауларын сақтау"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "Панельге жаңа плагинді қосу"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "Қосулы тұрған панельді қайта қосу"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "Қосулы тұрған панельдің жұмысын аяқтау"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -128,66 +128,66 @@ msgid "Print version information and exit"
 msgstr "Нұсқа ақпаратын шығару мен шығу"
 
 #. parse context options
-#: ../panel/main.c:164
+#: ../panel/main.c:196
 msgid "[ARGUMENTS...]"
 msgstr "[АРГУМЕНТТЕР...]"
 
-#: ../panel/main.c:171
+#: ../panel/main.c:203
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Қолдану ақпараты үшін \"%s --help\" енгізіңіз."
 
-#: ../panel/main.c:190
+#: ../panel/main.c:222
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce өндіру тобы. Барлық құқықтары қорғалған."
 
-#: ../panel/main.c:191
+#: ../panel/main.c:223
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Қателер жөнінде осында хабарласыңыз: <%s>."
 
-#: ../panel/main.c:242
+#: ../panel/main.c:274
 msgid "There is already a running instance"
 msgstr "Қосулы тұрған нұсқасы бар болып тұр"
 
 #. spawn ourselfs again
-#: ../panel/main.c:285
+#: ../panel/main.c:323
 msgid "Restarting..."
 msgstr "Қайта қосылуда..."
 
-#: ../panel/main.c:300
+#: ../panel/main.c:338
 msgid "Failed to show the preferences dialog"
 msgstr "Баптаулар терезесін көрсету сәтсіз аяқталды"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:340
 msgid "Failed to show the add new items dialog"
 msgstr "Жаңа элементтерді қосу сұхбат терезесін көрсету сәтсіз аяқталды"
 
-#: ../panel/main.c:304
+#: ../panel/main.c:342
 msgid "Failed to save the panel configuration"
 msgstr "Панель баптауларын сақтау сәтсіз аяқталды"
 
-#: ../panel/main.c:306
+#: ../panel/main.c:344
 msgid "Failed to add a plugin to the panel"
 msgstr "Панельге плагинді қосу сәтсіз аяқталды"
 
-#: ../panel/main.c:308
+#: ../panel/main.c:346
 msgid "Failed to restart the panel"
 msgstr "Панельді қайта қосу сәтсіз аяқталды"
 
-#: ../panel/main.c:310
+#: ../panel/main.c:348
 msgid "Failed to quit the panel"
 msgstr "Панельді жабу сәтсіз аяқталды"
 
-#: ../panel/main.c:312
+#: ../panel/main.c:350
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus хабарламасын жіберу сәтсіз аяқталды"
 
-#: ../panel/main.c:323
+#: ../panel/main.c:361
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Панельді іске қосуды қалайсыз ба? Олай болса, шыққан кезде сессияны сақтағаныңызға көз жеткізіңіз, одан кейін келесі кіргенде панель автоматты түрде іске қосылады."
 
-#: ../panel/main.c:326 ../panel/main.c:340
+#: ../panel/main.c:364 ../panel/main.c:378
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s үшін қосулы тұрған нұсқалары табылмады"
@@ -652,66 +652,75 @@ msgid "Button _title:"
 msgstr "Батырма мә_тіні:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Ed_it Menu"
+msgstr "Мә_зірді түзету"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
 msgstr "Мәзір файлы"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
 msgstr "Мәзір _файлы:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
 msgstr "Мәзір файлын таңдаңыз"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr "Мәзірде қолданбалардың негізгі атауын көрсету үшін, мыс. \"Thunar\" орнына \"Файлдар басқарушысы\", бұл опцияны таңдаңыз"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
 msgstr "Қолданба анықтамасын қалқымалы хабарламада көр_сету"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "Қолданбалардың негізгі а_тауларын көрсету"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
 msgstr "Мәзірде таңбашаларды көрсе_ту"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Use _default menu file"
-msgstr "_Негізгі мәзір файлын қолдану"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file"
-msgstr "Өзіңіздің _мәзір файлын қолдану"
+msgid "Use c_ustom menu file:"
+msgstr "Өзіңіздің _мәзір файлын қолдану:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+msgid "Use the _Xfce menu"
+msgstr "Xfce мәзірі_н қолдану "
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+msgid "Use the _default menu"
+msgstr "_Бастапқы мәзірді қолдану"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "Таңба_ша:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "_Show button title"
 msgstr "Бат_ырма атауын көрсету"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:476
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Таңбашаны таңдаңыз"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:709
+#: ../plugins/applicationsmenu/applicationsmenu.c:514
+#: ../plugins/applicationsmenu/applicationsmenu.c:796
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:969
+#: ../plugins/applicationsmenu/applicationsmenu.c:1068
 msgid "No applications found"
 msgstr "Қолданбалар табылмады"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:992
+#: ../plugins/applicationsmenu/applicationsmenu.c:1091
 msgid "Failed to load the applications menu"
 msgstr "Қолданбалар мәзірін жүктеу сәтсіз аяқталды"
 
@@ -1452,23 +1461,23 @@ msgstr "Терезелерді _топтау:"
 msgid "Window title"
 msgstr "Терезе атауы"
 
-#: ../plugins/tasklist/tasklist-widget.c:2663
+#: ../plugins/tasklist/tasklist-widget.c:2713
 msgid "Mi_nimize All"
 msgstr "Барл_ығын қайыру"
 
-#: ../plugins/tasklist/tasklist-widget.c:2672
+#: ../plugins/tasklist/tasklist-widget.c:2722
 msgid "Un_minimize All"
 msgstr "Барлығы_н қайырудан қайтару"
 
-#: ../plugins/tasklist/tasklist-widget.c:2678
+#: ../plugins/tasklist/tasklist-widget.c:2728
 msgid "Ma_ximize All"
 msgstr "Бар_лығын жазық қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:2687
+#: ../plugins/tasklist/tasklist-widget.c:2737
 msgid "_Unmaximize All"
 msgstr "Барлығын _жазық емес қылу"
 
-#: ../plugins/tasklist/tasklist-widget.c:2697
+#: ../plugins/tasklist/tasklist-widget.c:2747
 msgid "_Close All"
 msgstr "Ба_рлығын жабу"
 
