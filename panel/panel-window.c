@@ -696,6 +696,7 @@ panel_window_expose_event (GtkWidget      *widget,
   gint          xs, xe, ys, ye;
   gint          handle_w, handle_h;
   gdouble       alpha = 1.00;
+  GtkWidget    *child;
 
   /* expose the background and borders handled in PanelBaseWindow */
   (*GTK_WIDGET_CLASS (panel_window_parent_class)->expose_event) (widget, event);
@@ -770,6 +771,11 @@ panel_window_expose_event (GtkWidget      *widget,
   cairo_destroy (cr);
 
 end:
+  /* send the expose event to the child */
+  child = gtk_bin_get_child (GTK_BIN (widget));
+  if (G_LIKELY (child != NULL))
+    gtk_container_propagate_expose (GTK_CONTAINER (widget), child, event);
+
   return FALSE;
 }
 
