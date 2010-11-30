@@ -1883,7 +1883,7 @@ xfce_tasklist_wireframe_update (XfceTasklist      *tasklist,
 
   /* get the window geometry */
   wnck_window_get_geometry (child->window, &x, &y, &width, &height);
-g_message ("%d %d", x, y);
+
   gdpy = gtk_widget_get_display (GTK_WIDGET (tasklist));
   dpy = GDK_DISPLAY_XDISPLAY (gdpy);
 
