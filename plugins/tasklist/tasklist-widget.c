@@ -1568,12 +1568,16 @@ static void
 xfce_tasklist_viewports_changed (WnckScreen   *screen,
                                  XfceTasklist *tasklist)
 {
+  WnckWorkspace *active_ws;
+
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
   panel_return_if_fail (tasklist->screen == screen);
 
-  /* TODO, rebuild the tasklist (only when we filter windows on
-   * this monitor?) */
+  /* pretend we changed workspace, this will update the
+   * visibility of all the buttons */
+  active_ws = wnck_screen_get_active_workspace (screen);
+  xfce_tasklist_active_workspace_changed (screen, active_ws, tasklist);
 }
 
 
