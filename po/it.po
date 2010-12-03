@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-21 11:08+0000\n"
+"POT-Creation-Date: 2010-12-03 11:08+0000\n"
 "PO-Revision-Date: 2010-07-03 11:07+0100\n"
 "Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
 "Language-Team: Italian Translation Team <xfce-it-translators@googlegroups.com>\n"
@@ -44,7 +44,7 @@ msgid "Customize the panel"
 msgstr "Personalizzazione del pannello"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2189
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2198
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Pannello"
@@ -88,53 +88,53 @@ msgid "Pane_l"
 msgstr "_Pannello"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2201
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2210
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2212
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2221
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2228
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2237
 msgid "Log _Out"
 msgstr "_Esci"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostra la finestra di personalizzazione del pannello"
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "NUMERO-PANNELLO"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "Mostra la finestra per aggiungere nuovi elementi"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "Salva la configurazione del pannello"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "Aggiunge un nuovo plugin al pannello"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "NOME-PLUGIN"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "Riavvia l'istanza del pannello in esecuzione"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "Esce dall'istanza del pannello in esecuzione"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -142,66 +142,66 @@ msgid "Print version information and exit"
 msgstr "Stampa le informazioni di versione ed esce"
 
 #. parse context options
-#: ../panel/main.c:164
+#: ../panel/main.c:196
 msgid "[ARGUMENTS...]"
 msgstr "[ARGOMENTI...]"
 
-#: ../panel/main.c:171
+#: ../panel/main.c:203
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Digitare \"%s --help\" per le modalità d'uso"
 
-#: ../panel/main.c:190
+#: ../panel/main.c:222
 msgid "The Xfce development team. All rights reserved."
 msgstr "Il team di sviluppo di Xfce. Tutti i diritti riservati."
 
-#: ../panel/main.c:191
+#: ../panel/main.c:223
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Segnalare i problemi a <%s>."
 
-#: ../panel/main.c:242
+#: ../panel/main.c:274
 msgid "There is already a running instance"
 msgstr "Un'altra istanza è già in esecuzione"
 
 #. spawn ourselfs again
-#: ../panel/main.c:285
+#: ../panel/main.c:323
 msgid "Restarting..."
 msgstr "Riavvio in corso..."
 
-#: ../panel/main.c:300
+#: ../panel/main.c:338
 msgid "Failed to show the preferences dialog"
 msgstr "Impossibile mostrare la finestra delle preferenze"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:340
 msgid "Failed to show the add new items dialog"
 msgstr "Impossibile mostrare la finestra per aggiungere nuovi elementi"
 
-#: ../panel/main.c:304
+#: ../panel/main.c:342
 msgid "Failed to save the panel configuration"
 msgstr "Impossibile salvare la configurazione del pannello"
 
-#: ../panel/main.c:306
+#: ../panel/main.c:344
 msgid "Failed to add a plugin to the panel"
 msgstr "Impossibile aggiungere il plugin al pannello"
 
-#: ../panel/main.c:308
+#: ../panel/main.c:346
 msgid "Failed to restart the panel"
 msgstr "Impossibile riavviare il pannello"
 
-#: ../panel/main.c:310
+#: ../panel/main.c:348
 msgid "Failed to quit the panel"
 msgstr "Impossibile uscire dal pannello"
 
-#: ../panel/main.c:312
+#: ../panel/main.c:350
 msgid "Failed to send D-Bus message"
 msgstr "Impossibile inviare il messaggio D-Bus"
 
-#: ../panel/main.c:323
+#: ../panel/main.c:361
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Avviare il pannello? se sì, salvare la sessione all'uscita, in modo che il pannello venga avviato automaticamente al prossimo riavvio della sessione."
 
-#: ../panel/main.c:326 ../panel/main.c:340
+#: ../panel/main.c:364 ../panel/main.c:378
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
@@ -676,66 +676,75 @@ msgid "Button _title:"
 msgstr "_Titolo del pulsante:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Ed_it Menu"
+msgstr "M_odifica menu"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
 msgstr "File del menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
 msgstr "_File del menu:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
 msgstr "Selezionare un file del menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr "Selezionare questa opzione per mostrare il nome generico dell'applicazione nel menu, per esempio \"Gestore dei file\" in luogo di \"Thunar\""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
 msgstr "Mostra la descrizione dell'applicazione nel su_ggerimento"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "Mostra i no_mi generici delle applicazioni"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
 msgstr "Mostra le ico_ne nel menu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Use _default menu file"
-msgstr "Utilizza il file del menu pre_definito"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file"
-msgstr "Utilizza un file del menu personali_zzato"
+msgid "Use c_ustom menu file:"
+msgstr "Usa un file del menu personali_zzato"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+msgid "Use the _Xfce menu"
+msgstr "Usa il menu di _Xfce"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+msgid "Use the _default menu"
+msgstr "Usa il menu pre_definito"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "Icon_a:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "_Show button title"
 msgstr "Mostra il titolo del _pulsante"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:476
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Selezionare un'icona"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:709
+#: ../plugins/applicationsmenu/applicationsmenu.c:514
+#: ../plugins/applicationsmenu/applicationsmenu.c:796
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossibile eseguire il comando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:969
+#: ../plugins/applicationsmenu/applicationsmenu.c:1068
 msgid "No applications found"
 msgstr "Nessuna applicazione trovata"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:992
+#: ../plugins/applicationsmenu/applicationsmenu.c:1091
 msgid "Failed to load the applications menu"
 msgstr "Impossibile avviare il menu delle applicazioni"
 
@@ -1279,7 +1288,7 @@ msgstr "Impostazioni dello _spazio di lavoro..."
 msgid "Unable to open the workspace settings"
 msgstr "Impossibile aprire le impostazioni dello spazio di lavoro"
 
-#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Spazio di lavoro %d"
@@ -1447,9 +1456,8 @@ msgid "Show only _minimized windows"
 msgstr "Mostra solo le finestre mi_nimizzate"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
-msgstr "Mostra le _finestre di tutti gli spazi di lavoro"
+msgid "Show windows from _all workspaces or viewports"
+msgstr "Mostra le _finestre di tutti gli spazi di lavoro o porzioni"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
@@ -1477,23 +1485,23 @@ msgstr "Ra_ggruppa finestre:"
 msgid "Window title"
 msgstr "Titolo della finestra"
 
-#: ../plugins/tasklist/tasklist-widget.c:2663
+#: ../plugins/tasklist/tasklist-widget.c:2805
 msgid "Mi_nimize All"
 msgstr "Mi_nimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2672
+#: ../plugins/tasklist/tasklist-widget.c:2814
 msgid "Un_minimize All"
 msgstr "_Deminimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2678
+#: ../plugins/tasklist/tasklist-widget.c:2820
 msgid "Ma_ximize All"
 msgstr "_Massimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2687
+#: ../plugins/tasklist/tasklist-widget.c:2829
 msgid "_Unmaximize All"
 msgstr "D_emassimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2697
+#: ../plugins/tasklist/tasklist-widget.c:2839
 msgid "_Close All"
 msgstr "_Chiudi tutte"
 
@@ -1542,6 +1550,10 @@ msgstr "Abilita la notifica delle _urgenze"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
 msgstr "Icona"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "Mostra le _finestre di tutti gli spazi di lavoro"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
