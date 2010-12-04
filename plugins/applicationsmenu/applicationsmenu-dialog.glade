@@ -195,20 +195,6 @@
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkRadioButton" id="use-xfce-menu">
-                            <property name="label" translatable="yes">Use the _Xfce menu</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkHBox" id="hbox1">
                             <property name="visible">True</property>
                             <property name="spacing">12</property>
@@ -220,7 +206,6 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
-                                <property name="group">use-xfce-menu</property>
                               </object>
                               <packing>
                                 <property name="position">0</property>
@@ -242,7 +227,7 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="position">1</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
@@ -254,10 +239,10 @@
                             <property name="use_underline">True</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="group">use-xfce-menu</property>
+                            <property name="group">use-default-menu</property>
                           </object>
                           <packing>
-                            <property name="position">2</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -292,7 +277,7 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="position">3</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>

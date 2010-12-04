@@ -38,9 +38,6 @@
 #define DEFAULT_TITLE     _("Applications Menu")
 #define DEFAULT_ICON_NAME "xfce4-panel-menu"
 #define DEFAULT_ICON_SIZE (16)
-#define DEFAULT_MENU      "xfce-applications.menu"
-#define APPLICATIONS_MENU "applications.menu"
-#define CUSTOM_MENU       "custom"
 
 
 
@@ -65,7 +62,7 @@ struct _ApplicationsMenuPlugin
   guint            show_button_title : 1;
   gchar           *button_title;
   gchar           *button_icon;
-  gchar           *menu_file;
+  gboolean         custom_menu;
   gchar           *custom_menu_file;
 
   /* temp item we store here when the
@@ -82,7 +79,7 @@ enum
   PROP_SHOW_BUTTON_TITLE,
   PROP_BUTTON_TITLE,
   PROP_BUTTON_ICON,
-  PROP_MENU_FILE,
+  PROP_CUSTOM_MENU,
   PROP_CUSTOM_MENU_FILE
 };
 
@@ -185,10 +182,10 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
                                                         EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_MENU_FILE,
-                                   g_param_spec_string ("menu-file",
+                                   PROP_CUSTOM_MENU,
+                                   g_param_spec_boolean ("custom-menu",
                                                          NULL, NULL,
-                                                         DEFAULT_MENU,
+                                                         FALSE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -212,7 +209,11 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
 {
   plugin->show_menu_icons = TRUE;
   plugin->show_button_title = TRUE;
-  plugin->menu_file = g_strdup (DEFAULT_MENU);
+  plugin->custom_menu = FALSE;
+
+  panel_debug (PANEL_DEBUG_DOMAIN_APPLICATIONMENU,
+               "XDG_MENU_PREFIX is set to \"%s\"",
+               g_getenv ("XDG_MENU_PREFIX"));
 
   garcon_set_environment ("XFCE");
 
@@ -276,8 +277,8 @@ applications_menu_plugin_get_property (GObject    *object,
           DEFAULT_ICON_NAME : plugin->button_icon);
       break;
 
-    case PROP_MENU_FILE:
-      g_value_set_string (value, plugin->menu_file);
+    case PROP_CUSTOM_MENU:
+      g_value_set_boolean (value, plugin->custom_menu);
       break;
 
     case PROP_CUSTOM_MENU_FILE:
@@ -340,9 +341,8 @@ applications_menu_plugin_set_property (GObject      *object,
           exo_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon);
       return;
 
-    case PROP_MENU_FILE:
-      g_free (plugin->menu_file);
-      plugin->menu_file = g_value_dup_string (value);
+    case PROP_CUSTOM_MENU:
+      plugin->custom_menu = g_value_get_boolean (value);
       break;
 
     case PROP_CUSTOM_MENU_FILE:
@@ -372,7 +372,7 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-tooltips", G_TYPE_BOOLEAN },
     { "button-title", G_TYPE_STRING },
     { "button-icon", G_TYPE_STRING },
-    { "menu-file", G_TYPE_STRING },
+    { "custom-menu", G_TYPE_BOOLEAN },
     { "custom-menu-file", G_TYPE_STRING },
     { NULL }
   };
@@ -400,7 +400,6 @@ applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
   g_free (plugin->button_title);
   g_free (plugin->button_icon);
   g_free (plugin->custom_menu_file);
-  g_free (plugin->menu_file);
 }
 
 
@@ -519,33 +518,6 @@ applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
 
 
 static void
-applications_menu_plugin_configure_plugin_menu_toggled (GtkWidget              *button,
-                                                        ApplicationsMenuPlugin *plugin)
-{
-  const gchar *name;
-  const gchar *file;
-
-  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_RADIO_BUTTON (button));
-
-  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
-    {
-      name = gtk_buildable_get_name (GTK_BUILDABLE (button));
-
-      if (exo_str_is_equal (name, "use-custom-menu"))
-        file = CUSTOM_MENU;
-      else if (exo_str_is_equal (name, "use-default-menu"))
-        file = APPLICATIONS_MENU;
-      else
-        file = DEFAULT_MENU;
-
-      g_object_set (G_OBJECT (plugin), "menu-file", file, NULL);
-    }
-}
-
-
-
-static void
 applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
@@ -588,42 +560,28 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
   gtk_widget_show (plugin->dialog_icon);
 
-  object = gtk_builder_get_object (builder, "use-xfce-menu");
-  panel_return_if_fail (GTK_IS_RADIO_BUTTON (object));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (object),
-      exo_str_is_equal (plugin->menu_file, DEFAULT_MENU));
-  g_signal_connect (G_OBJECT (object), "toggled",
-      G_CALLBACK (applications_menu_plugin_configure_plugin_menu_toggled), plugin);
-
-  object = gtk_builder_get_object (builder, "use-default-menu");
-  panel_return_if_fail (GTK_IS_RADIO_BUTTON (object));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (object),
-      exo_str_is_equal (plugin->menu_file, APPLICATIONS_MENU));
-  g_signal_connect (G_OBJECT (object), "toggled",
-      G_CALLBACK (applications_menu_plugin_configure_plugin_menu_toggled), plugin);
-
   /* whether we show the edit menu button */
-  object2 = gtk_builder_get_object (builder, "edit-menu-button");
-  panel_return_if_fail (GTK_IS_BUTTON (object2));
+  object = gtk_builder_get_object (builder, "edit-menu-button");
+  panel_return_if_fail (GTK_IS_BUTTON (object));
   path = g_find_program_in_path ("alacarte");
   if (path != NULL)
     {
-      exo_binding_new (G_OBJECT (object), "active", G_OBJECT (object2), "sensitive");
-      g_signal_connect (G_OBJECT (object2), "clicked",
+      object2 = gtk_builder_get_object (builder, "use-default-menu");
+      panel_return_if_fail (GTK_IS_RADIO_BUTTON (object2));
+      exo_binding_new (G_OBJECT (object2), "active", G_OBJECT (object), "sensitive");
+      g_signal_connect (G_OBJECT (object), "clicked",
           G_CALLBACK (applications_menu_plugin_configure_plugin_edit), plugin);
     }
   else
     {
-      gtk_widget_hide (GTK_WIDGET (object2));
+      gtk_widget_hide (GTK_WIDGET (object));
     }
   g_free (path);
 
   object = gtk_builder_get_object (builder, "use-custom-menu");
   panel_return_if_fail (GTK_IS_RADIO_BUTTON (object));
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (object),
-      exo_str_is_equal (plugin->menu_file, CUSTOM_MENU));
-  g_signal_connect (G_OBJECT (object), "toggled",
-      G_CALLBACK (applications_menu_plugin_configure_plugin_menu_toggled), plugin);
+  exo_mutual_binding_new (G_OBJECT (plugin), "custom-menu",
+                          G_OBJECT (object), "active");
 
   /* sensitivity of custom file selector */
   object2 = gtk_builder_get_object (builder, "custom-box");
@@ -1020,7 +978,6 @@ applications_menu_plugin_menu (GtkWidget              *button,
   GError     *error = NULL;
   gchar      *filename;
   GFile      *file;
-  gchar      *path;
 
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
   panel_return_if_fail (button == NULL || plugin->button == button);
@@ -1031,28 +988,13 @@ applications_menu_plugin_menu (GtkWidget              *button,
 
   if (plugin->menu == NULL)
     {
-      if (G_LIKELY (!exo_str_is_empty (plugin->menu_file)))
-        {
-          if (G_UNLIKELY (strcmp (plugin->menu_file, CUSTOM_MENU) == 0
-              && plugin->custom_menu_file != NULL))
-            {
-              menu = garcon_menu_new_for_path (plugin->custom_menu_file);
-            }
-          else if (g_str_has_suffix (plugin->menu_file, ".menu"))
-            {
-              /* lookup the menu by file */
-              filename = g_build_filename ("menus", plugin->menu_file, NULL);
-              path = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, filename);
-              g_free (filename);
+      if (G_UNLIKELY (plugin->custom_menu
+          && plugin->custom_menu_file != NULL))
+        menu = garcon_menu_new_for_path (plugin->custom_menu_file);
 
-              if (G_LIKELY (path != NULL))
-                menu = garcon_menu_new_for_path (path);
-              g_free (path);
-            }
-        }
-
-      /* fallback to the default menu */
-      if (G_UNLIKELY (menu == NULL))
+      /* use the applications menu, this also respects the
+       * XDG_MENU_PREFIX environment variable */
+      if (G_LIKELY (menu == NULL))
         menu = garcon_menu_new_applications ();
 
       if (menu != NULL
