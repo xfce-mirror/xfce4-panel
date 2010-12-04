@@ -1,3 +1,33 @@
+4.7.5
+=====
+- Don't destroy the about dialog.
+- Allow using enter in the launcher treeviews.
+- Fix crash in always group mode (bug #6792).
+- Drop the automatic grouping option from tasklist; not implemented yet.
+- Fix Gdk key macro names.
+- Fix confustion with panel opacity (bug #6827).
+- Make miniature view the default in the pager (bug #6825).
+- Fix wrong capitalization of Xfce.
+- Fix issue in systray size allocation with 1 row (bug #6809).
+- Fix 'add launcher' desktop file.
+- Improve debugging output for display changes.
+- Restore shadow of spin button in systray dialog.
+- Add function to return the Xfconf panel name.
+- Warning why # pager rows does not apply (bug #6555).
+- Gracefully handle abort signal (bug #6563).
+- Restart the panel if we receive SIGUSR1.
+- Fix format of 12-hour clock.
+- Add option to not rotate buttons in vertical panel (bug #6687).
+- Propertly handle insensitive clock colors.
+- Set correct session priority.
+- Improve support for a menu editor (alacarte) in the applications menu.
+- Don't destroy the application menu under the users' cursor on reload.
+- Add window DND to the pager in tasklist.
+- Make viewports work in the tasklist (bug #6898 and #6665).
+- Support viewports in button pager.
+- Translation updates (be, ca, da, de, eu, fi, gl, hu, id, it, ja,
+  kk, nl, pt, sk, ta, uk, zh_CN, zh_TW).
+
 4.7.4
 =====
 - Add support for menu monitoring.
