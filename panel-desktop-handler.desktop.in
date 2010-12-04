@@ -2,7 +2,7 @@
 Type=Application
 _Name=Create Launcher on the panel
 _Comment=Add a new launcher to the panel based on the information of this desktop file
-Exec=xfce4-panel --add=launcher '%F'
+Exec=xfce4-panel --add=launcher %u
 Icon=application-x-executable
 Terminal=false
 NoDisplay=true
