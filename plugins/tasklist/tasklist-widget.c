@@ -1963,9 +1963,9 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
 
   if (child->tasklist->all_workspaces
       || (active_ws != NULL
-          && G_UNLIKELY (wnck_workspace_is_virtual (active_ws))
-             ? wnck_window_is_in_viewport (child->window, active_ws)
-             : wnck_window_is_on_workspace (child->window, active_ws)))
+          && (G_UNLIKELY (wnck_workspace_is_virtual (active_ws))
+              ? wnck_window_is_in_viewport (child->window, active_ws)
+              : wnck_window_is_on_workspace (child->window, active_ws))))
     {
       return (!child->tasklist->only_minimized
               || wnck_window_is_minimized (child->window));
