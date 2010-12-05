@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-29 05:08+0000\n"
+"POT-Creation-Date: 2010-12-05 17:08+0000\n"
 "PO-Revision-Date: 2010-11-16 19:26-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
@@ -691,39 +691,35 @@ msgid "Use c_ustom menu file:"
 msgstr "Utilizar ficheiro de men_u personalizado:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _Xfce menu"
-msgstr "Utilizar o menu _Xfce"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Use the _default menu"
 msgstr "Utili_zar menu omisso"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "Í_cone:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
 msgstr "_Mostrar título do botão"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:476
+#: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Seleccione um ícone"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:514
-#: ../plugins/applicationsmenu/applicationsmenu.c:796
+#: ../plugins/applicationsmenu/applicationsmenu.c:513
+#: ../plugins/applicationsmenu/applicationsmenu.c:754
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Falha ao executar o comando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1068
+#: ../plugins/applicationsmenu/applicationsmenu.c:1010
 msgid "No applications found"
 msgstr "Nenhuma aplicação encontrada"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1091
+#: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
 msgstr "Falha ao carregar o menu das aplicações"
 
@@ -1267,7 +1263,7 @@ msgstr "De_finições da área de trabalho..."
 msgid "Unable to open the workspace settings"
 msgstr "Incapaz de abrir as definições da área de trabalho"
 
-#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Área de trabalho %d"
@@ -1435,9 +1431,8 @@ msgid "Show only _minimized windows"
 msgstr "Mostrar apenas janelas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
-msgstr "Mostrar as j_anelas de todas as áreas de trabalho"
+msgid "Show windows from _all workspaces or viewports"
+msgstr "Mostrar as j_anelas de todas as áreas de trabalho ou \"viewports\""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
@@ -1464,23 +1459,23 @@ msgstr "A_grupamento de janelas:"
 msgid "Window title"
 msgstr "Título da janela"
 
-#: ../plugins/tasklist/tasklist-widget.c:2713
+#: ../plugins/tasklist/tasklist-widget.c:2805
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2722
+#: ../plugins/tasklist/tasklist-widget.c:2814
 msgid "Un_minimize All"
 msgstr "Res_taurar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2728
+#: ../plugins/tasklist/tasklist-widget.c:2820
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2737
+#: ../plugins/tasklist/tasklist-widget.c:2829
 msgid "_Unmaximize All"
 msgstr "_Reverter maximização"
 
-#: ../plugins/tasklist/tasklist-widget.c:2747
+#: ../plugins/tasklist/tasklist-widget.c:2839
 msgid "_Close All"
 msgstr "Fechar _todas"
 
@@ -1530,6 +1525,10 @@ msgstr "Activar notificação de _urgência"
 msgid "Icon"
 msgstr "Ícone"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "Mostrar as j_anelas de todas as áreas de trabalho"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "Mostrar _nomes das áreas de trabalho"
@@ -1546,3 +1545,6 @@ msgstr "Menu da janela"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Trocar entre janelas abertas utilizando um menu"
+
+#~ msgid "Use the _Xfce menu"
+#~ msgstr "Utilizar o menu _Xfce"
