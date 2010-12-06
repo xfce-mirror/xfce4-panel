@@ -6,12 +6,12 @@
 # Enrico Tröger <enrico@xfce.org>, 2008.
 # Simon Schneider <simon@schneiderimtal.de>, 2009
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-23 23:08+0000\n"
+"POT-Creation-Date: 2010-12-06 11:08+0000\n"
 "PO-Revision-Date: 2010-11-24 01:30+0100\n"
 "Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -33,8 +33,7 @@ msgid "Customize the panel"
 msgstr "Leiste einrichten"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../panel/panel-window.c:2189
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2198
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Leiste"
@@ -75,60 +74,56 @@ msgstr "_Verschieben"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1072
 msgid "Pane_l"
-msgstr "_Leiste"
+msgstr "Leiste"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080
-#: ../panel/panel-window.c:2201
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2210
 msgid "Add _New Items..."
-msgstr "_Neue Elemente hinzufügen..."
+msgstr "_Neue Elemente hinzufügen…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091
-#: ../panel/panel-window.c:2212
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2221
 msgid "Panel Pr_eferences..."
-msgstr "Leisten_einstellungen..."
+msgstr "Leisten_einstellungen…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108
-#: ../panel/panel-window.c:2228
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2237
 msgid "Log _Out"
 msgstr "_Abmelden"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Dialog »Leiste einrichten« anzeigen"
 
-#: ../panel/main.c:77
-#: ../panel/main.c:78
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "LEISTENNUMMER"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "Dialog »Neue Objekte hinzufügen« zeigen"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "Leisteneinstellungen speichern"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "Neues Plugin zur Leiste hinzufügen"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAMe"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "Laufende Instanz der Leiste neustarten"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "Laufende Instanz der Leiste beenden"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -136,67 +131,66 @@ msgid "Print version information and exit"
 msgstr "Versionsinformationen ausgeben und beenden"
 
 #. parse context options
-#: ../panel/main.c:164
+#: ../panel/main.c:196
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTE…]"
 
-#: ../panel/main.c:171
+#: ../panel/main.c:203
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Eingeben von \"%s --help\" für Hilfe."
+msgstr "»%s --help« für Hilfe eingeben."
 
-#: ../panel/main.c:190
+#: ../panel/main.c:222
 msgid "The Xfce development team. All rights reserved."
 msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
 
-#: ../panel/main.c:191
+#: ../panel/main.c:223
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Bitte senden Sie Fehlermeldungen an <%s>"
 
-#: ../panel/main.c:242
+#: ../panel/main.c:274
 msgid "There is already a running instance"
 msgstr "Es gibt bereits eine laufende Instanz"
 
 #. spawn ourselfs again
-#: ../panel/main.c:285
+#: ../panel/main.c:323
 msgid "Restarting..."
-msgstr "Neustart..."
+msgstr "Neustart…"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:338
 msgid "Failed to show the preferences dialog"
 msgstr "Konnte den Einstellungsdialog nicht öffnen"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:340
 msgid "Failed to show the add new items dialog"
 msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
 
-#: ../panel/main.c:304
+#: ../panel/main.c:342
 msgid "Failed to save the panel configuration"
 msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
-#: ../panel/main.c:306
+#: ../panel/main.c:344
 msgid "Failed to add a plugin to the panel"
 msgstr "Konnte Plugin nicht zur Leiste hinzufügen"
 
-#: ../panel/main.c:308
+#: ../panel/main.c:346
 msgid "Failed to restart the panel"
-msgstr "Neustart der Leiste fehlgeschlagen"
+msgstr "Konnte die Leiste nicht neustarten"
 
-#: ../panel/main.c:310
+#: ../panel/main.c:348
 msgid "Failed to quit the panel"
-msgstr "Beenden der Leiste fehlgeschlagen"
+msgstr "Konnte die Leiste nicht beenden"
 
-#: ../panel/main.c:312
+#: ../panel/main.c:350
 msgid "Failed to send D-Bus message"
 msgstr "Konnte keine D-Bus-Nachricht senden"
 
-#: ../panel/main.c:323
+#: ../panel/main.c:361
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
-#: ../panel/main.c:326
-#: ../panel/main.c:340
+#: ../panel/main.c:364 ../panel/main.c:378
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
@@ -205,19 +199,16 @@ msgstr "Keine laufende Instanz von %s gefunden"
 msgid "Failed to launch the migration application"
 msgstr "Konnte die Anwendung zum Migrieren der Leiste nicht starten"
 
-#: ../panel/panel-application.c:1429
-#: ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
 #, fuzzy
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Wenn Sie Xfce ohne die Sitzungsverwaltung gestartet haben, beendet dies den X-Server."
 
-#: ../panel/panel-application.c:1430
-#: ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Soll die Leiste wirklich beendet werden?"
 
-#: ../panel/panel-application.c:1438
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Konnte Befehl »%s« nicht ausführen."
@@ -240,8 +231,7 @@ msgid "translator-credits"
 msgstr "Fabian Nowak <timystery@arcor.de>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Neue Elemente hinzufügen"
 
@@ -250,8 +240,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Bitte Leiste für das neue Element auswählen:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
@@ -404,7 +393,8 @@ msgstr "_Objekte"
 msgid "L_ength (%):"
 msgstr "_Länge (in %):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Abmessungen"
@@ -480,8 +470,9 @@ msgid "Transparency when the pointer is hovering over the panel, with 0 being fu
 msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist. Zwischen 0 (transparent) und 100 (undurchsichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
+#, fuzzy
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist. Zwischen 0 (transparent) und 100 (undurchsichtig)."
+msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -666,68 +657,75 @@ msgid "Button _title:"
 msgstr "Knopf_titel:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Ed_it Menu"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
 msgstr "Menüdatei"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
 msgstr "_Menüdatei:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
 msgstr "Wählen Sie eine Menüdatei"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 "Diese Option zum Auswählen eines typischen Namen für diese Anwendung im Menü auswählen.\n"
 "Beispielsweise: »Dateimanager« anstelle von »Thunar«"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
 msgstr "_Anwendungsbeschreibung in Kurzhilfe zeigen"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "_Allgemeine Anwendungsnamen zeigen"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
 msgstr "_Symbole im Menü anzeigen"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Use _default menu file"
-msgstr "_Standardmenüdatei verwenden"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file"
+#, fuzzy
+msgid "Use c_ustom menu file:"
 msgstr "_Benutzerangepasste Menüdatei verwenden"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#, fuzzy
+msgid "Use the _default menu"
+msgstr "_Standardmenüdatei verwenden"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "_Symbol:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
 msgstr "_Titel im Knopf anzeigen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Symbol auswählen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:709
+#: ../plugins/applicationsmenu/applicationsmenu.c:513
+#: ../plugins/applicationsmenu/applicationsmenu.c:754
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Konnte Befehl »%s« nicht ausführen."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:969
+#: ../plugins/applicationsmenu/applicationsmenu.c:1010
 msgid "No applications found"
 msgstr "Keine Standardanwendung für »%s« gefunden"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:992
+#: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
 msgstr "Konnte Anwendungsmenü nicht laden"
 
@@ -810,7 +808,8 @@ msgstr "_Sekunden anzeigen"
 msgid "F_ormat:"
 msgstr "Anzeige_format:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "_Ungenauigkeit der Formulierung:"
@@ -1267,8 +1266,7 @@ msgstr "_Position des Pfeilknopfs:"
 msgid "Program launcher with optional menu"
 msgstr "Programmstarter mit optionalem Menü"
 
-#: ../plugins/pager/pager.c:354
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Arbeitsflächeneinstellungen..."
 
@@ -1276,8 +1274,7 @@ msgstr "_Arbeitsflächeneinstellungen..."
 msgid "Unable to open the workspace settings"
 msgstr "Arbeitsflächeneinstellungen konnten nicht geöffnet werden"
 
-#: ../plugins/pager/pager-buttons.c:412
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbeitsfläche %d"
@@ -1445,8 +1442,8 @@ msgid "Show only _minimized windows"
 msgstr "_Nur minimierte Fenster anzeigen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
+#, fuzzy
+msgid "Show windows from _all workspaces or viewports"
 msgstr "_Fenster aller Arbeitsflächen anzeigen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
@@ -1474,23 +1471,23 @@ msgstr "Fenster_gruppierung:"
 msgid "Window title"
 msgstr "Fenstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2663
+#: ../plugins/tasklist/tasklist-widget.c:2805
 msgid "Mi_nimize All"
 msgstr "_Alle minimieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:2672
+#: ../plugins/tasklist/tasklist-widget.c:2814
 msgid "Un_minimize All"
 msgstr "_Minimieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:2678
+#: ../plugins/tasklist/tasklist-widget.c:2820
 msgid "Ma_ximize All"
 msgstr "_Alle maximieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:2687
+#: ../plugins/tasklist/tasklist-widget.c:2829
 msgid "_Unmaximize All"
 msgstr "_Maximieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:2697
+#: ../plugins/tasklist/tasklist-widget.c:2839
 msgid "_Close All"
 msgstr "_Alle schließen"
 
@@ -1540,6 +1537,10 @@ msgstr "_Dringlichkeitsbenachrichtigung aktivieren"
 msgid "Icon"
 msgstr "Symbol"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "_Fenster aller Arbeitsflächen anzeigen"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "Zeige _Namen der Arbeitsflächen"
@@ -1559,24 +1560,33 @@ msgstr "Mit einem Menü zwischen offenen Fenstern umschalten"
 
 #~ msgid "Create a new launcher on the Xfce Panel"
 #~ msgstr "Neuen Starter zur Leiste hinzufügen"
+
 #~ msgid "Panel Preferences"
 #~ msgstr "Leisteneinstellungen"
+
 #~ msgid "_Xfce Panel"
 #~ msgstr "_Xfce-Leiste"
+
 #~ msgid "Transparency"
 #~ msgstr "Durchsichtigkeit"
+
 #~ msgid "Transparency when the pointer is not hovering the panel."
 #~ msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist."
+
 #~ msgid "Xfce Panel"
 #~ msgstr "Leiste"
+
 #~ msgid "Xfce Menu"
 #~ msgstr "Xfce-Menü"
+
 #~ msgid "_Restart"
 #~ msgstr "Neustarten"
+
 #~ msgid "C_ompositing"
 #~ msgstr "Position"
+
 #~ msgid "Failed to open manual"
 #~ msgstr "Konnte Anleitung nicht öffnen"
+
 #~ msgid "Action Button"
 #~ msgstr "Aktionsknöpfe"
-
