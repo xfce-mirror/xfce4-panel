@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-04 05:07+0000\n"
-"PO-Revision-Date: 2010-11-04 12:12+0200\n"
+"POT-Creation-Date: 2010-12-07 11:08+0000\n"
+"PO-Revision-Date: 2010-12-07 16:29+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,20 +18,24 @@ msgstr ""
 "Language: fi\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "Lisää käynnistin paneeliin"
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop file"
+msgstr ""
+"Luo käynnistin paneeliin tämän työpöytätiedoston tietojen perusteella"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "Luo uusi käynnistin Xfce:n paneeliin"
+msgid "Create Launcher on the panel"
+msgstr "Lisää käynnistin paneeliin"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
-msgstr "Muokkaa Xfce paneelin asetuksia"
+msgid "Customize the panel"
+msgstr "Muokkaa paneelin asetuksia"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "Paneelin asetukset"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2198
+#: ../migrate/main.c:84
+msgid "Panel"
+msgstr "Paneeli"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -46,8 +50,8 @@ msgstr ""
 "käyttämääsi paneelin versiota."
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
-msgstr "Xfce:n paneelin käyttöopasta ei ole asennettu koneellesi"
+msgid "The user manual is not installed on your computer"
+msgstr "Käyttöopasta ei ole asennettu koneellesi"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -72,57 +76,57 @@ msgid "_Move"
 msgstr "Sii_rrä"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1072
-msgid "_Xfce Panel"
-msgstr "_Xfce paneeli"
+msgid "Pane_l"
+msgstr "_Paneeli"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2210
 msgid "Add _New Items..."
 msgstr "_Lisää osia..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2221
 msgid "Panel Pr_eferences..."
 msgstr "Paneelin _asetukset"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2237
 msgid "Log _Out"
 msgstr "Kirjaudu _ulos"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Näytä paneelin asetusikkuna"
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "PANEELIN-NUMERO"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "Näytä osien lisäysikkuna"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "Tallenna paneelin asetukset"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "Lisää liitännäinen paneeliin"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "LIITÄNNÄISEN-NIMI"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "Käynnistä paneeli uudelleen"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "Sulje paneeli"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -130,72 +134,70 @@ msgid "Print version information and exit"
 msgstr "Tulosta versiotiedot"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:196
 msgid "[ARGUMENTS...]"
 msgstr "[MÄÄRITTEET...]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:203
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Saat ohjeita komennolla \"%s --help\""
 
-#: ../panel/main.c:180
+#: ../panel/main.c:222
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce:n kehitystiimi. Kaikki oikeudet pidätetään."
 
-#: ../panel/main.c:181
+#: ../panel/main.c:223
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Ilmoita virheistä osoitteeseen <%s>."
 
-#: ../panel/main.c:232
+#: ../panel/main.c:274
 msgid "There is already a running instance"
 msgstr "Paneeli on jo käynnissä"
 
 #. spawn ourselfs again
-#: ../panel/main.c:275
+#: ../panel/main.c:323
 msgid "Restarting..."
 msgstr "Käynnistetään uudelleen..."
 
-#: ../panel/main.c:290
+#: ../panel/main.c:338
 msgid "Failed to show the preferences dialog"
 msgstr "Asetusikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:340
 msgid "Failed to show the add new items dialog"
 msgstr "Osien lisäysikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:342
 msgid "Failed to save the panel configuration"
 msgstr "Paneelin asetusten tallennus epäonnistui"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:344
 msgid "Failed to add a plugin to the panel"
 msgstr "Osan lisääminen paneeliin epäonnistui"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:346
 msgid "Failed to restart the panel"
 msgstr "Paneelin uudelleenkäynnistys epäonnistui"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:348
 msgid "Failed to quit the panel"
 msgstr "Paneelin sulkeminen epäonnistui"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:350
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus -viestin lähetys epäonnistui"
 
-#: ../panel/main.c:313
+#: ../panel/main.c:361
 msgid ""
-"Do you want to start the Xfce panel? If you do, make sure you save the "
-"session on logout, so the panel is automatically started the next time you "
-"login."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
 msgstr ""
-"Haluatko käynnistää Xfce-paneelin? Jos haluat, muista tallentaa istunto "
-"kirjautuessasi ulos, jotta paneeli käynnistetään myös seuraavan "
-"kirjautumisen yhteydessä."
+"Käynnistetäänkö paneeli? Muista tallentaa istunto kirjautuessasi ulos, jotta "
+"paneeli käynnistetään myös seuraavan kirjautumisen yhteydessä."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:364 ../panel/main.c:378
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s ei ole käynnissä"
@@ -206,10 +208,10 @@ msgstr "Asetusten siirto-ohjelman käynnistys epäonnistui"
 
 #: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
 msgid ""
-"If you have started Xfce without session manager, this will close the X "
+"You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
-"Jos käynnistit Xfce:n ilman istunnonhallintaa, myös X-palvelin suljetaan."
+"X käynnistettiin ilman istunnonhallintaa. Lopeta-valinta sulkee X-palvelimen."
 
 #: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
@@ -235,37 +237,37 @@ msgstr ""
 "Vihjetyyppi \"%s\" ei kelpaa. Tyypiksi käyvät bool, double, int, string ja "
 "uint."
 
-#: ../panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce-työpöytäympäristön paneeli"
 
-#: ../panel/panel-dialogs.c:84
+#: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr "jari.rahkonen@pp1.inet.fi"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Lisää osa"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "Valitse paneeli uudelle liitännäiselle:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
 #, c-format
 msgid "Panel %d"
 msgstr "Paneeli %d"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:183
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
 "Paneeli on kioskitilassa, joten peruskäyttäjänä et voi muuttaa sen asetuksia."
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
 msgstr "Paneelin muokkaus on estetty"
 
@@ -366,8 +368,8 @@ msgstr "Lisää uusi osa paneeliin"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
 msgstr ""
 "Paneelin taustan läpinäkyvyys väliltä 0 (läpinäkyvä) ja 100 (läpinäkymätön)."
 
@@ -442,37 +444,41 @@ msgid "O_utput:"
 msgstr "_Tulostus:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Opacity"
+msgstr "Peitto"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr "Valitse paneelin väri"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "Poista valittu kohde"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "Poista valittu paneeli"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
 msgstr "Valitse taustakuva"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Pidennä paneelia automaattisesti, jos liitännäiset pyytävät lisätilaa."
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Levitä paneeli useille näytöille."
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Piilota paneelin kahvat ja lukitse sen sijainti."
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
@@ -480,37 +486,37 @@ msgstr ""
 "Näytä paneeli vain, kun hiiren osoitin on sen yllä. Toimii ainoastaan, jos "
 "paneeli on ruudun reunalla."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "Näytä valitun kohteen tiedot"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr "Yksivärinen"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr "Le_vitä näytöille"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Transparency"
-msgstr "Läpinäkyvyys"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Transparency when the pointer is hovering over the panel."
-msgstr "Läpinäkyvyys, kun osoitin on paneelin yllä."
-
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is not hovering the panel."
-msgstr "Läpinäkyvyys, kun osoitin ei ole paneelin yllä."
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
+msgstr ""
+"Läpinäkyvyys, kun osoitin on paneelin yllä. Väliltä 0 (läpinäkyvä) ja 100 "
+"(läpinäkymätön)."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr ""
+"Läpinäkyvyys, kun osoitin ei ole paneelin yllä. Väliltä 0 (läpinäkyvä) ja "
+"100 (läpinäkymätön)."
+
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
 msgstr "Pysty"
-
-#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
-msgid "Xfce Panel"
-msgstr "Xfce paneeli"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -572,7 +578,7 @@ msgid "Expert"
 msgstr "Mestari"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
+msgid "Welcome to the first start of the panel"
 msgstr "Xfce:n paneeli käynnistyi ensimmäisen kerran"
 
 #: ../migrate/main.c:80
@@ -683,7 +689,9 @@ msgstr "Kirjaudu ulos, lukitse näyttö tai muita toimintoja"
 msgid "Appearance"
 msgstr "Ulkonäkö"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Sovellusvalikko"
@@ -693,18 +701,22 @@ msgid "Button _title:"
 msgstr "Painikkeen tek_sti"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Ed_it Menu"
+msgstr "M_uokkaa valikkoa"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
 msgstr "Valikkotiedosto"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
 msgstr "_Valikkotiedosto:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
 msgstr "Valitse valikkotiedosto"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
@@ -712,55 +724,52 @@ msgstr ""
 "Näytä valikossa sovelluksen yleinen nimi, esimerkiksi \"Tiedostonhallinta\" "
 "sovellukselle \"Thunar\""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
 msgstr "Näytä sovelluksen kuvaus työkaluvi_hjeessä"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "Näytä sovellusten yl_eiset nimet"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
 msgstr "Näytä _kuvakkeet valikossa"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Use _default menu file"
-msgstr "Käytä v_akiovalikkotiedostoa"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file"
-msgstr "_Mukautettu valikkotiedosto"
+msgid "Use c_ustom menu file:"
+msgstr "_Mukautettu valikkotiedosto:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+msgid "Use the _default menu"
+msgstr "Käytä v_akiovalikkotiedostoa"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "_Kuvake:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
 msgstr "_Näytä painikkeen teksti"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-msgid "Xfce Menu"
-msgstr "Xfce:n valikko"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Valitse kuvake"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:709
+#: ../plugins/applicationsmenu/applicationsmenu.c:513
+#: ../plugins/applicationsmenu/applicationsmenu.c:754
 #: ../plugins/launcher/launcher.c:2102
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Komennon \"%s\" suoritus epäonnistui."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:969
+#: ../plugins/applicationsmenu/applicationsmenu.c:1010
 msgid "No applications found"
 msgstr "Sovelluksia ei löytynyt."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:992
+#: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
 msgstr "Sovellusvalikon lataus epäonnistui."
 
@@ -1213,24 +1222,24 @@ msgstr "Nimetön"
 msgid "No items"
 msgstr "Tyhjä"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:704
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Jos poistat kohteen, sitä ei voi palauttaa."
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:705
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Haluatko varmasti poistaa kohteen \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:706
 msgid "Unnamed item"
 msgstr "Nimetön"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:721
 msgid "Failed to remove the desktop file from the config directory"
 msgstr "Työpöytätiedoston poistaminen asetuskansiosta epäonnistui."
 
-#: ../plugins/launcher/launcher-dialog.c:723
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Failed to open desktop item editor"
 msgstr "Työpöytätiedostoeditorin avaaminen epäonnistui."
 
@@ -1311,15 +1320,15 @@ msgstr "_Nuolipainikkeen sijainti:"
 msgid "Program launcher with optional menu"
 msgstr "Sovelluskäynnistin, johon voi liittää valikon"
 
-#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Työtila-_asetukset..."
 
-#: ../plugins/pager/pager.c:425
-msgid "Unable to open the Xfce workspace settings"
-msgstr "Xfce:n työtila-asetusten avaaminen ei onnistu."
+#: ../plugins/pager/pager.c:429
+msgid "Unable to open the workspace settings"
+msgstr "Työtila-asetusten avaaminen ei onnistu."
 
-#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Työtila %d"
@@ -1472,68 +1481,71 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "Palauta pienennetyt ikkunat ny_kyiseen työtilaan"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr "K_äännä pystypaneelin painikkeet"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "Näytä litteät _painikkeet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "Näytä kah_va"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "Näytä t_eksti painikkeissa"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "Näytä vain pie_nennetyt ikkunat"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+msgid "Show windows from _all workspaces or viewports"
 msgstr "Näytä k_aikkien työtilojen ikkunat"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
 msgstr "_Järjestys:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Timestamp"
 msgstr "Aikaleima"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "When space is limited"
 msgstr "Kun tila on rajoitettu"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Ikkunapainikkeet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window _grouping:"
 msgstr "Ikkunoiden _ryhmitys"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
 msgstr "Ikkunan otsikko"
 
-#: ../plugins/tasklist/tasklist-widget.c:2620
+#: ../plugins/tasklist/tasklist-widget.c:2805
 msgid "Mi_nimize All"
 msgstr "P_ienennä kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:2629
+#: ../plugins/tasklist/tasklist-widget.c:2814
 msgid "Un_minimize All"
 msgstr "Pa_lauta kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:2635
+#: ../plugins/tasklist/tasklist-widget.c:2820
 msgid "Ma_ximize All"
 msgstr "Suu_renna kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:2644
+#: ../plugins/tasklist/tasklist-widget.c:2829
 msgid "_Unmaximize All"
 msgstr "Palau_ta suurennetut"
 
-#: ../plugins/tasklist/tasklist-widget.c:2654
+#: ../plugins/tasklist/tasklist-widget.c:2839
 msgid "_Close All"
 msgstr "Sulj_e kaikki"
 
@@ -1583,6 +1595,10 @@ msgstr "_Kiireellisyyshuomautus"
 msgid "Icon"
 msgstr "Kuvake"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "Näytä k_aikkien työtilojen ikkunat"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "Näytä työtilojen _nimet"
@@ -1599,3 +1615,24 @@ msgstr "Ikkunavalikko"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Käytä valikkoa ikkunoiden välillä siirtymiseen"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "Luo uusi käynnistin Xfce:n paneeliin"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Paneelin asetukset"
+
+#~ msgid "_Xfce Panel"
+#~ msgstr "_Xfce paneeli"
+
+#~ msgid "Transparency"
+#~ msgstr "Läpinäkyvyys"
+
+#~ msgid "Transparency when the pointer is not hovering the panel."
+#~ msgstr "Läpinäkyvyys, kun osoitin ei ole paneelin yllä."
+
+#~ msgid "Xfce Panel"
+#~ msgstr "Xfce paneeli"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "Xfce:n valikko"
