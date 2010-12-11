@@ -20,6 +20,13 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_LIBINTL_H
+#include <libintl.h>
+#endif
+#ifdef HAVE_LOCALE_H
+#include <locale.h>
+#endif
+
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
@@ -582,6 +589,13 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->flags = 0;
   plugin->priv->locked = TRUE;
   plugin->priv->menu_items = NULL;
+
+  /* bind the text domain of the panel so our strings
+   * are properly translated in the old 4.6 panel plugins */
+  bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
 
   /* hide the event box window to make the plugin transparent */
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);

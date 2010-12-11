@@ -3,6 +3,7 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libxfce4panel\" \
 	-DLIBXFCE4PANEL_COMPILATION \
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
 lib_LTLIBRARIES = \
