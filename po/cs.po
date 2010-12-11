@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-08 11:08+0000\n"
-"PO-Revision-Date: 2010-12-08 22:42+0100\n"
+"POT-Creation-Date: 2010-12-10 23:08+0000\n"
+"PO-Revision-Date: 2010-12-11 01:45+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr "[PARAMETRY...]"
 #: ../panel/main.c:203
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Informace o použití získáte příkazem \"%s --help\""
 
 #: ../panel/main.c:222
 msgid "The Xfce development team. All rights reserved."
@@ -403,7 +403,6 @@ msgstr "_Délka (%)"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
-#, fuzzy
 msgid "Measurements"
 msgstr "Jednotky"
 
@@ -500,7 +499,6 @@ msgstr "_Soubor:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
-#, fuzzy
 msgid "_Leave:"
 msgstr "_Opustit:"
 
@@ -631,9 +629,8 @@ msgid "Restart"
 msgstr "Restartovat"
 
 #: ../plugins/actions/actions.c:114
-#, fuzzy
 msgid "Suspend"
-msgstr "Zvuk"
+msgstr "Režim spánku"
 
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
@@ -850,7 +847,7 @@ msgstr "Zobrazova_t mřížku"
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr ""
+msgstr "Formát popisuje části data a času vložené do názvu souboru. Např. %Y bude nahrazeno rokem, %m měsícem a %d dnem. Více informací nástroje pro datum najdete v dokumentaci"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1103,7 +1100,7 @@ msgstr "Spuštění aplikace „%s“ se nezdařilo"
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Dotaz na typ obsahu \"%s\" se nezdařil"
 
 #: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
@@ -1118,11 +1115,11 @@ msgstr "Spuštění výchozí aplikace pro „%s“ se nezdařilo"
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Spuštění upřednostňované aplikace v kategorii \"%s\" se nezdařilo"
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
-msgstr ""
+msgstr "Otevřít složku"
 
 #: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
@@ -1131,21 +1128,21 @@ msgstr "Otevřít v terminálu"
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr ""
+msgstr "Nabídka adresáře"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Zobrazí adresářový strom v nabídce"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Upravit seznam předloh, které budou použity ke zjištění viditelnosti souborů v adresáři. Zadáte-li sem více než jednu předlohu, musí být seznam oddělený středníky (např. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr ""
+msgstr "Filtrace"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 msgid "Select A Directory"
@@ -1157,11 +1154,11 @@ msgstr "Zobrazova_t skryté soubory"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
-msgstr ""
+msgstr "_Základní adresář:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr ""
+msgstr "_Vzorek souboru:"
 
 #: ../plugins/launcher/launcher.c:1448
 msgid "Unnamed Item"
@@ -1173,7 +1170,7 @@ msgstr "Žádné položky"
 
 #: ../plugins/launcher/launcher-dialog.c:704
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "Smažete-li položku, bude trvale odstraněna"
 
 #: ../plugins/launcher/launcher-dialog.c:705
 #, c-format
@@ -1186,7 +1183,7 @@ msgstr "Nepojmenovaná položka"
 
 #: ../plugins/launcher/launcher-dialog.c:721
 msgid "Failed to remove the desktop file from the config directory"
-msgstr ""
+msgstr "Odebrání souboru plochu z adresáře s nastavením se nezdařilo"
 
 #: ../plugins/launcher/launcher-dialog.c:761
 msgid "Failed to open desktop item editor"
@@ -1198,11 +1195,11 @@ msgstr "Přidat novou prázdnou položku"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
-msgstr ""
+msgstr "Přidat ke spouštěči jednu nebo více existujících položek"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "Pokročilé"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
@@ -1214,11 +1211,11 @@ msgstr "Odstranit vybranou položku"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "_Zakázat tipy"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
+msgstr "Východ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
@@ -1231,15 +1228,15 @@ msgstr "Spouštěč"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "Sever"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr ""
+msgstr "Tuto možnost vyberte pro zakázání zobrazování tipů při přejetí ukazatele myši nad tlačítko panelu nebo položky nabídky."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Tuto volbu vyberte pro přesun položky nabídky na panel"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Show _label instead of icon"
@@ -1247,7 +1244,7 @@ msgstr "Zobrazovat _popisky místo ikon"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Zo_brazovat poslední použitou položku v panelu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "South"
@@ -1255,7 +1252,7 @@ msgstr "Jih"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr ""
+msgstr "Západ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "_Arrow button position:"
@@ -1272,7 +1269,7 @@ msgstr "_Nastavení pracovních ploch..."
 
 #: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "Nelze otevřít nastavení pracovní plochy"
 
 #: ../plugins/pager/pager-buttons.c:551
 #: ../plugins/windowmenu/windowmenu.c:854
@@ -1283,7 +1280,7 @@ msgstr "Pracovní plocha %d"
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Chování"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Number of _rows:"
@@ -1291,11 +1288,11 @@ msgstr "Poče_t řádků:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Show a miniature view of the workspace with rectangles for the visible windows"
-msgstr ""
+msgstr "Zobrazí zmenšený pohled plochy s obdélníky představující viditelná okna"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "Zobrazit _zmenšený pohled"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
@@ -1362,7 +1359,7 @@ msgstr "Nelze spustit oznamovací oblast"
 #. create fake error and show it
 #: ../plugins/systray/systray.c:569
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr ""
+msgstr "Funki oznamovací oblasti pravděpodobně převzala jiná pomůcka. Tato oblast nebude využita."
 
 #: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
@@ -1400,31 +1397,31 @@ msgstr "Oblast pro zobrazení oznamovacích ikon"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "Vždy"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "_Vykreslovat rám okna při umístění ukazatele myši nad tlačítko"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Seskupovat titulek a čas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "Seskupovat titulek a titulek okna"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Obnoví minimalizovaná okna na této _pracovní ploše"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Ro_tate buttons in vertical panel"
-msgstr ""
+msgstr "Otáčet _tlačítka ve svislém panelu"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
@@ -1440,7 +1437,7 @@ msgstr "Zobrazovat _názvy tlačítek"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Zobrazovat pouze _minimalizovaná okna"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
@@ -1448,15 +1445,15 @@ msgstr "Zobr_azovat okna ze všech pracovních ploch a zobrazovacích zařízen�
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
-msgstr ""
+msgstr "P_ořadí řazení:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Timestamp"
-msgstr ""
+msgstr "Časová známka"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "When space is limited"
-msgstr ""
+msgstr "Pokud je prostor omezený"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
@@ -1465,7 +1462,7 @@ msgstr "Tlačítka oken"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window _grouping:"
-msgstr ""
+msgstr "_Seskupování oken:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
@@ -1473,23 +1470,23 @@ msgstr "Titulek okna"
 
 #: ../plugins/tasklist/tasklist-widget.c:2805
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Mi_nimalizovat vše"
 
 #: ../plugins/tasklist/tasklist-widget.c:2814
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Obnovit vše z _minima"
 
 #: ../plugins/tasklist/tasklist-widget.c:2820
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Ma_ximalizovat vše"
 
 #: ../plugins/tasklist/tasklist-widget.c:2829
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "Obn_ovit vše z maxima"
 
 #: ../plugins/tasklist/tasklist-widget.c:2839
 msgid "_Close All"
-msgstr ""
+msgstr "_Zavříz vše"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
@@ -1505,7 +1502,7 @@ msgstr "Žádná okna"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Urgentní okna"
 
 #: ../plugins/windowmenu/windowmenu.c:1300
 msgid "Add Workspace"
@@ -1561,6 +1558,7 @@ msgstr "Přepínání oken nabídkou"
 #, fuzzy
 #~ msgid "Transparency"
 #~ msgstr "P_růhlednost (%):"
+
 #~ msgid "Xfce Panel"
 #~ msgstr "Panel Xfce"
 
@@ -1583,4 +1581,3 @@ msgstr "Přepínání oken nabídkou"
 #, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "Tlačítka akcí"
-
