@@ -80,6 +80,9 @@ static void                     panel_preferences_dialog_item_properties        
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_item_about             (GtkWidget              *button,
                                                                                  PanelPreferencesDialog *dialog);
+static gboolean                 panel_preferences_dialog_treeview_clicked       (GtkTreeView            *treeview,
+                                                                                 GdkEventButton         *event,
+                                                                                 PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_item_row_changed       (GtkTreeModel           *model,
                                                                                  GtkTreePath            *path,
                                                                                  GtkTreeIter            *iter,
@@ -225,6 +228,8 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   panel_return_if_fail (GTK_IS_WIDGET (treeview));
   gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (dialog->store));
   gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (treeview), ITEM_COLUMN_TOOLTIP);
+  g_signal_connect (G_OBJECT (treeview), "button-press-event",
+      G_CALLBACK (panel_preferences_dialog_treeview_clicked), dialog);
 
   gtk_tree_view_set_reorderable (GTK_TREE_VIEW (treeview), TRUE);
   g_signal_connect (G_OBJECT (dialog->store), "row-changed",
@@ -1099,6 +1104,34 @@ panel_preferences_dialog_item_about (GtkWidget              *button,
   provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
   if (G_LIKELY (provider != NULL))
     xfce_panel_plugin_provider_show_about (provider);
+}
+
+
+
+static gboolean
+panel_preferences_dialog_treeview_clicked (GtkTreeView            *treeview,
+                                           GdkEventButton         *event,
+                                           PanelPreferencesDialog *dialog)
+{
+  gint x, y;
+
+  panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog), FALSE);
+  panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
+
+  gtk_tree_view_convert_widget_to_bin_window_coords (treeview,
+                                                     event->x, event->y,
+                                                     &x, &y);
+
+  /* open preferences on double-click on a row */
+  if (event->type == GDK_2BUTTON_PRESS
+      && event->button == 1
+      && gtk_tree_view_get_path_at_pos (treeview, x, y, NULL, NULL, NULL, NULL))
+    {
+      panel_preferences_dialog_item_properties (NULL, dialog);
+      return TRUE;
+    }
+
+  return FALSE;
 }
 
 
