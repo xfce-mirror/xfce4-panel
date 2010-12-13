@@ -232,7 +232,6 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   treeview = gtk_tree_view_new_with_model (filter);
   dialog->treeview = GTK_TREE_VIEW (treeview);
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
-  gtk_tree_view_set_reorderable (GTK_TREE_VIEW (treeview), FALSE);
   gtk_tree_view_set_enable_search (GTK_TREE_VIEW (treeview), FALSE);
   gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview), panel_item_dialog_separator_func, NULL, NULL);
   g_signal_connect_swapped (G_OBJECT (treeview), "start-interactive-search", G_CALLBACK (gtk_widget_grab_focus), entry);
