@@ -220,11 +220,13 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
   panel_return_if_fail (panel_atom != GDK_NONE);
-  panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (external)->window));
   panel_return_if_fail (PANEL_IS_MODULE (external->module));
 
-  /* initial event information */
+  if (!GTK_WIDGET_REALIZED (external))
+    return;
+
   event.type = GDK_CLIENT_EVENT;
+  panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (external)->window));
   event.window = GTK_WIDGET (external)->window;
   event.send_event = TRUE;
   event.message_type = panel_atom;
