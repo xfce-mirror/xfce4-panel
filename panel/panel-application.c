@@ -1360,18 +1360,13 @@ void
 panel_application_windows_sensitive (PanelApplication *application,
                                      gboolean          sensitive)
 {
-  GtkWidget *itembar;
-  GSList    *li;
+  GSList *li;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
   /* walk the windows */
   for (li = application->windows; li != NULL; li = li->next)
     {
-      /* set sensitivity of the itembar (and the plugins) */
-      itembar = gtk_bin_get_child (GTK_BIN (li->data));
-      gtk_widget_set_sensitive (itembar, sensitive);
-
       /* block autohide for all windows */
       if (sensitive)
         panel_window_thaw_autohide (PANEL_WINDOW (li->data));
