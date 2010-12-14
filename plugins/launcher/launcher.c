@@ -121,6 +121,12 @@ static gboolean   launcher_plugin_button_drag_motion            (GtkWidget      
                                                                  gint                  y,
                                                                  guint                 drag_time,
                                                                  LauncherPlugin       *plugin);
+static gboolean   launcher_plugin_button_drag_drop              (GtkWidget            *widget,
+	                                                         GdkDragContext       *context,
+                                                                 gint                  x,
+                                                                 gint                  y,
+                                                                 guint                 drag_time,
+                                                                 LauncherPlugin       *plugin);
 static void       launcher_plugin_button_drag_leave             (GtkWidget            *widget,
                                                                  GdkDragContext       *context,
                                                                  guint                 drag_time,
@@ -354,8 +360,6 @@ launcher_plugin_init (LauncherPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_widget_set_has_tooltip (plugin->button, TRUE);
   gtk_widget_set_name (plugin->button, "launcher-button");
-  gtk_drag_dest_set (plugin->button, GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
-                     drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
       G_CALLBACK (launcher_plugin_button_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "button-release-event",
@@ -366,10 +370,14 @@ launcher_plugin_init (LauncherPlugin *plugin)
       G_CALLBACK (launcher_plugin_button_drag_data_received), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-motion",
       G_CALLBACK (launcher_plugin_button_drag_motion), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "drag-drop",
+      G_CALLBACK (launcher_plugin_button_drag_drop), plugin);
   g_signal_connect (G_OBJECT (plugin->button), "drag-leave",
       G_CALLBACK (launcher_plugin_button_drag_leave), plugin);
   g_signal_connect_after (G_OBJECT (plugin->button), "expose-event",
       G_CALLBACK (launcher_plugin_button_expose_event), plugin);
+
+
 
   plugin->child = xfce_panel_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
@@ -379,15 +387,19 @@ launcher_plugin_init (LauncherPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->arrow);
   gtk_button_set_relief (GTK_BUTTON (plugin->arrow), GTK_RELIEF_NONE);
   gtk_widget_set_name (plugin->button, "launcher-arrow");
-  gtk_drag_dest_set (plugin->arrow, GTK_DEST_DEFAULT_MOTION,
-                     drop_targets, G_N_ELEMENTS (drop_targets),
-                     GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->arrow), "button-press-event",
       G_CALLBACK (launcher_plugin_arrow_press_event), plugin);
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-motion",
       G_CALLBACK (launcher_plugin_arrow_drag_motion), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "drag-drop",
+      G_CALLBACK (launcher_plugin_button_drag_drop), plugin);
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-leave",
       G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
+
+  /* accept all sorts of drag data, but filter in drag-drop, so we can
+   * send other sorts of drops to parent widgets */
+  gtk_drag_dest_set (plugin->button, 0, NULL, 0, 0);
+  gtk_drag_dest_set (plugin->arrow, 0, NULL, 0, 0);
 
   /* sync button states */
   g_signal_connect (G_OBJECT (plugin->button), "state-changed",
@@ -1775,6 +1787,34 @@ launcher_plugin_button_drag_data_received (GtkWidget        *widget,
 
 
 
+static GdkAtom
+launcher_plugin_supported_drop (GdkDragContext *context,
+                                GtkWidget      *widget)
+{
+  GList           *li;
+  GdkAtom          target;
+  guint            i;
+  GdkModifierType  modifiers = 0;
+
+  /* do not handle drops if control is pressed */
+  gdk_window_get_pointer (gtk_widget_get_window (widget), NULL, NULL, &modifiers);
+  if (PANEL_HAS_FLAG (modifiers, GDK_CONTROL_MASK))
+    return GDK_NONE;
+
+  /* check if we support the target */
+  for (li = gdk_drag_context_list_targets (context); li; li = li->next)
+    {
+      target = GDK_POINTER_TO_ATOM (li->data);
+      for (i = 0; i < G_N_ELEMENTS (drop_targets); i++)
+        if (target == gdk_atom_intern_static_string (drop_targets[i].target))
+          return target;
+    }
+
+  return GDK_NONE;
+}
+
+
+
 static gboolean
 launcher_plugin_button_drag_motion (GtkWidget      *widget,
                                     GdkDragContext *context,
@@ -1784,6 +1824,9 @@ launcher_plugin_button_drag_motion (GtkWidget      *widget,
                                     LauncherPlugin *plugin)
 {
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
+
+  if (launcher_plugin_supported_drop (context, widget) == GDK_NONE)
+    return FALSE;
 
   /* do nothing if the plugin is empty */
   if (plugin->items == NULL)
@@ -1796,6 +1839,7 @@ launcher_plugin_button_drag_motion (GtkWidget      *widget,
   /* highlight the button if this is a launcher button */
   if (NO_ARROW_INSIDE_BUTTON (plugin))
     {
+      gdk_drag_status (context, GDK_ACTION_COPY, drag_time);
       gtk_drag_highlight (widget);
       return TRUE;
     }
@@ -1803,6 +1847,27 @@ launcher_plugin_button_drag_motion (GtkWidget      *widget,
   /* handle the popup menu */
   return launcher_plugin_arrow_drag_motion (widget, context, x, y,
                                             drag_time, plugin);
+}
+
+
+
+static gboolean
+launcher_plugin_button_drag_drop (GtkWidget	 *widget,
+	                          GdkDragContext *context,
+                                  gint            x,
+                                  gint            y,
+                                  guint           drag_time,
+                                  LauncherPlugin *plugin)
+{
+  GdkAtom target;
+
+  target = launcher_plugin_supported_drop (context, widget);
+  if (target == GDK_NONE)
+    return FALSE;
+
+  gtk_drag_get_data (widget, context, target, drag_time);
+
+  return TRUE;
 }
 
 
@@ -1929,6 +1994,9 @@ launcher_plugin_arrow_drag_motion (GtkWidget      *widget,
 {
   panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
+  if (launcher_plugin_supported_drop (context, widget) == GDK_NONE)
+    return FALSE;
+
   /* the arrow is not a drop zone */
   gdk_drag_status (context, 0, drag_time);
 
@@ -1942,11 +2010,9 @@ launcher_plugin_arrow_drag_motion (GtkWidget      *widget,
           g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, MENU_POPUP_DELAY,
                               launcher_plugin_menu_popup, plugin,
                               launcher_plugin_menu_popup_destroyed);
-
-      return TRUE;
     }
 
-  return FALSE;
+  return TRUE;
 }
 
 
