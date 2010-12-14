@@ -78,19 +78,19 @@ static void      panel_application_drag_data_received (PanelWindow            *w
                                                        guint                   info,
                                                        guint                   drag_time,
                                                        GtkWidget              *itembar);
-static gboolean  panel_application_drag_motion        (GtkWidget              *itembar,
+static gboolean  panel_application_drag_motion        (GtkWidget              *window,
                                                        GdkDragContext         *context,
                                                        gint                    x,
                                                        gint                    y,
                                                        guint                   drag_time,
                                                        PanelApplication       *application);
-static gboolean  panel_application_drag_drop          (GtkWidget              *itembar,
+static gboolean  panel_application_drag_drop          (GtkWidget              *window,
                                                        GdkDragContext         *context,
                                                        gint                    x,
                                                        gint                    y,
                                                        guint                   drag_time,
                                                        PanelApplication       *application);
-static void      panel_application_drag_leave         (GtkWidget              *itembar,
+static void      panel_application_drag_leave         (GtkWidget              *window,
                                                        GdkDragContext         *context,
                                                        guint                   drag_time,
                                                        PanelApplication       *application);
