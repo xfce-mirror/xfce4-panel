@@ -1226,6 +1226,9 @@ launcher_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
   /* set the new arrow direction */
   xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow),
       xfce_panel_plugin_arrow_type (panel_plugin));
+
+  /* destroy the menu to update sort order */
+  launcher_plugin_menu_destroy (plugin);
 }
 
 
@@ -1478,10 +1481,10 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
         }
 
       /* depending on the menu position we prepend or append */
-      if (G_UNLIKELY (arrow_type == GTK_ARROW_DOWN))
-        gtk_menu_shell_append (GTK_MENU_SHELL (plugin->menu), mi);
-      else
+      if (G_UNLIKELY (arrow_type == GTK_ARROW_UP))
         gtk_menu_shell_prepend (GTK_MENU_SHELL (plugin->menu), mi);
+      else
+        gtk_menu_shell_append (GTK_MENU_SHELL (plugin->menu), mi);
 
       /* set the icon if one is set */
       icon_name = garcon_menu_item_get_icon_name (item);
