@@ -1805,7 +1805,7 @@ launcher_plugin_supported_drop (GdkDragContext *context,
     return GDK_NONE;
 
   /* check if we support the target */
-  for (li = gdk_drag_context_list_targets (context); li; li = li->next)
+  for (li = context->targets; li; li = li->next)
     {
       target = GDK_POINTER_TO_ATOM (li->data);
       for (i = 0; i < G_N_ELEMENTS (drop_targets); i++)
