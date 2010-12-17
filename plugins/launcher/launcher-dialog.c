@@ -849,11 +849,7 @@ launcher_dialog_response (GtkWidget            *widget,
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (dialog->plugin));
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
 
-  if (G_UNLIKELY (response_id == 1))
-    {
-      /* TODO open help */
-    }
-  else
+  if (G_UNLIKELY (response_id != 1))
     {
       /* stop idle if still running */
       if (G_UNLIKELY (dialog->idle_populate_id != 0))
