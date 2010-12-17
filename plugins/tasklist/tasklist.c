@@ -126,6 +126,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-labels", G_TYPE_BOOLEAN },
     { "grouping", G_TYPE_UINT },
     { "include-all-workspaces", G_TYPE_BOOLEAN },
+    { "include-all-monitors", G_TYPE_BOOLEAN },
     { "flat-buttons", G_TYPE_BOOLEAN },
     { "switch-workspace-on-unminimize", G_TYPE_BOOLEAN },
     { "show-only-minimized", G_TYPE_BOOLEAN },
@@ -211,6 +212,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-labels", "active")
   TASKLIST_DIALOG_BIND ("grouping", "active")
   TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
+  TASKLIST_DIALOG_BIND ("include-all-monitors", "active")
   TASKLIST_DIALOG_BIND ("flat-buttons", "active")
   TASKLIST_DIALOG_BIND ("rotate-vertically", "active")
   TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
