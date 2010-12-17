@@ -431,7 +431,7 @@ actions_plugin_button_clicked (GtkWidget     *button,
                                ActionsPlugin *plugin)
 {
   ActionType    action;
-  XfceSMClient *sm_client;
+  XfceSMClient *sm_client = NULL;
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
 
@@ -441,10 +441,13 @@ actions_plugin_button_clicked (GtkWidget     *button,
   else
     action = plugin->second_action;
 
+#if 0
   /* get the active session */
+  /* TODO this is not implemented in XfceSMClient */
   sm_client = xfce_sm_client_get ();
   if (!xfce_sm_client_is_connected (sm_client))
     sm_client = NULL;
+#endif
 
   switch (action)
     {
