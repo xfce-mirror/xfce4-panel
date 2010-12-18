@@ -176,8 +176,7 @@ panel_application_class_init (PanelApplicationClass *klass)
 static void
 panel_application_init (PanelApplication *application)
 {
-  PanelWindow *window;
-  GError      *error = NULL;
+  GError *error = NULL;
 
   application->windows = NULL;
   application->dialogs = NULL;
@@ -217,7 +216,7 @@ panel_application_init (PanelApplication *application)
 
   /* create empty window if everything else failed */
   if (G_UNLIKELY (application->windows == NULL))
-    window = panel_application_new_window (application, NULL, TRUE);
+    panel_application_new_window (application, NULL, TRUE);
 }
 
 

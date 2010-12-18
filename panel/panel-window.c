@@ -1405,7 +1405,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   GdkRectangle  *alloc = &window->alloc;
   guint          i;
   gboolean       update_struts = FALSE;
-  gint           n = -1;
+  gint           n;
   const gchar   *strut_border[] = { "left", "right", "top", "bottom" };
   const gchar   *strut_xy[] = { "y", "y", "x", "x" };
 
@@ -1487,6 +1487,8 @@ panel_window_screen_struts_set (PanelWindow *window)
 
   if (G_UNLIKELY (panel_debug_flags != 0))
     {
+      n = -1;
+
       if (struts[STRUT_LEFT] != 0)
         n = STRUT_LEFT;
       else if (struts[STRUT_RIGHT] != 0)
