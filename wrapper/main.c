@@ -143,6 +143,10 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
           xfce_panel_plugin_provider_show_about (provider);
           break;
 
+        case PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE:
+          xfce_panel_plugin_provider_ask_remove (provider);
+          break;
+
         default:
           panel_assert_not_reached ();
           break;

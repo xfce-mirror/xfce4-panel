@@ -68,22 +68,30 @@ static void         panel_item_dialog_drag_begin             (GtkWidget         
 static void         panel_item_dialog_drag_data_get          (GtkWidget          *treeview,
                                                               GdkDragContext     *context,
                                                               GtkSelectionData   *selection_data,
-                                                              guint              info,
-                                                              guint              drag_time,
-                                                              PanelItemDialog   *dialog);
-static void         panel_item_dialog_populate_store         (PanelItemDialog   *dialog);
-static gint         panel_item_dialog_compare_func           (GtkTreeModel      *model,
-                                                              GtkTreeIter       *a,
-                                                              GtkTreeIter       *b,
-                                                              gpointer           user_data);
-static gboolean     panel_item_dialog_visible_func           (GtkTreeModel      *model,
-                                                              GtkTreeIter       *iter,
-                                                              gpointer           user_data);
-static void         panel_item_dialog_text_renderer          (GtkTreeViewColumn *column,
-                                                              GtkCellRenderer   *renderer,
-                                                              GtkTreeModel      *model,
-                                                              GtkTreeIter       *iter,
-                                                              gpointer           user_data);
+                                                              guint               info,
+                                                              guint               drag_time,
+                                                              PanelItemDialog    *dialog);
+static void         panel_item_dialog_drag_data_received     (GtkWidget          *treeview,
+                                                              GdkDragContext     *context,
+                                                              gint                x,
+                                                              gint                y,
+                                                              GtkSelectionData   *selection_data,
+                                                              guint               info,
+                                                              guint               drag_time,
+                                                              PanelItemDialog    *dialog);
+static void         panel_item_dialog_populate_store         (PanelItemDialog    *dialog);
+static gint         panel_item_dialog_compare_func           (GtkTreeModel       *model,
+                                                              GtkTreeIter        *a,
+                                                              GtkTreeIter        *b,
+                                                              gpointer            user_data);
+static gboolean     panel_item_dialog_visible_func           (GtkTreeModel       *model,
+                                                              GtkTreeIter        *iter,
+                                                              gpointer            user_data);
+static void         panel_item_dialog_text_renderer          (GtkTreeViewColumn  *column,
+                                                              GtkCellRenderer    *renderer,
+                                                              GtkTreeModel       *model,
+                                                              GtkTreeIter        *iter,
+                                                              gpointer            user_data);
 
 
 
@@ -116,7 +124,12 @@ enum
 
 static const GtkTargetEntry drag_targets[] =
 {
-  { "xfce-panel/plugin-name", 0, 0 },
+  { "xfce-panel/plugin-name", 0, 0 }
+};
+
+static const GtkTargetEntry drop_targets[] =
+{
+  { "xfce-panel/plugin-widget", GTK_TARGET_SAME_APP, 0 }
 };
 
 
@@ -247,6 +260,11 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_drag_source_set (treeview, GDK_BUTTON1_MASK, drag_targets, G_N_ELEMENTS (drag_targets), GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (treeview), "drag-begin", G_CALLBACK (panel_item_dialog_drag_begin), dialog);
   g_signal_connect (G_OBJECT (treeview), "drag-data-get", G_CALLBACK (panel_item_dialog_drag_data_get), dialog);
+
+  /* remove plugin when dropping it back in the treeview */
+  gtk_drag_dest_set (GTK_WIDGET (treeview), GTK_DEST_DEFAULT_ALL,
+      drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_MOVE);
+  g_signal_connect (G_OBJECT (treeview), "drag-data-received", G_CALLBACK (panel_item_dialog_drag_data_received), dialog);
 
   /* icon renderer */
   renderer = gtk_cell_renderer_pixbuf_new ();
@@ -526,6 +544,34 @@ panel_item_dialog_drag_data_get (GtkWidget        *treeview,
           (guchar *) internal_name, strlen (internal_name));
       g_object_unref (G_OBJECT (module));
     }
+}
+
+
+
+static void
+panel_item_dialog_drag_data_received (GtkWidget        *treeview,
+                                      GdkDragContext   *context,
+                                      gint              x,
+                                      gint              y,
+                                      GtkSelectionData *selection_data,
+                                      guint             info,
+                                      guint             drag_time,
+                                      PanelItemDialog  *dialog)
+{
+  GtkWidget *widget;
+
+  panel_return_if_fail (GTK_IS_TREE_VIEW (treeview));
+  panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
+  panel_return_if_fail (PANEL_IS_ITEM_DIALOG (dialog));
+
+  /* ask the plugin to cleanup when we destroy a panel window */
+  widget = gtk_drag_get_source_widget (context);
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  xfce_panel_plugin_provider_ask_remove (XFCE_PANEL_PLUGIN_PROVIDER (widget));
+
+  gtk_drag_finish (context, TRUE, FALSE, drag_time);
+
+  g_signal_stop_emission_by_name (G_OBJECT (treeview), "drag-data-received");
 }
 
 

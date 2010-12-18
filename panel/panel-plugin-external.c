@@ -101,6 +101,7 @@ static gboolean     panel_plugin_external_remote_event            (XfcePanelPlug
                                                                    guint                            *handler_id);
 static void         panel_plugin_external_set_locked              (XfcePanelPluginProvider          *provider,
                                                                    gboolean                          locked);
+static void         panel_plugin_external_ask_remove              (XfcePanelPluginProvider          *provider);
 static void         panel_plugin_external_set_sensitive           (PanelPluginExternal              *external);
 
 
@@ -230,6 +231,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->removed = panel_plugin_external_removed;
   iface->remote_event = panel_plugin_external_remote_event;
   iface->set_locked = panel_plugin_external_set_locked;
+  iface->ask_remove = panel_plugin_external_ask_remove;
 }
 
 
@@ -995,6 +997,18 @@ panel_plugin_external_set_locked (XfcePanelPluginProvider *provider,
                                    PROVIDER_PROP_TYPE_SET_LOCKED, &value);
 
   g_value_unset (&value);
+}
+
+
+
+static void
+panel_plugin_external_ask_remove (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  panel_plugin_external_queue_add_action (PANEL_PLUGIN_EXTERNAL (provider),
+                                          PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE);
 }
 
 

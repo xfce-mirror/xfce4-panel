@@ -106,6 +106,7 @@ static gboolean      xfce_panel_plugin_remote_event           (XfcePanelPluginPr
                                                                guint                            *handle);
 static void          xfce_panel_plugin_set_locked             (XfcePanelPluginProvider          *provider,
                                                                gboolean                          locked);
+static void          xfce_panel_plugin_ask_remove             (XfcePanelPluginProvider          *provider);
 static void          xfce_panel_plugin_take_window_notify     (gpointer                          data,
                                                                GObject                          *where_the_object_was);
 static void          xfce_panel_plugin_menu_item_destroy      (GtkWidget                        *item,
@@ -619,6 +620,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->removed = xfce_panel_plugin_removed;
   iface->remote_event = xfce_panel_plugin_remote_event;
   iface->set_locked = xfce_panel_plugin_set_locked;
+  iface->ask_remove = xfce_panel_plugin_ask_remove;
 }
 
 
@@ -1387,6 +1389,16 @@ xfce_panel_plugin_set_locked (XfcePanelPluginProvider *provider,
       /* destroy the menu if it exists */
       xfce_panel_plugin_menu_destroy (plugin);
     }
+}
+
+
+
+static void
+xfce_panel_plugin_ask_remove (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  xfce_panel_plugin_menu_remove (XFCE_PANEL_PLUGIN (provider));
 }
 
 

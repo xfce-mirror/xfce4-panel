@@ -68,6 +68,7 @@ struct _XfcePanelPluginProviderInterface
                                        guint                         *handle);
   void         (*set_locked)          (XfcePanelPluginProvider       *provider,
                                        gboolean                       locked);
+  void         (*ask_remove)          (XfcePanelPluginProvider       *provider);
 };
 
 /* signals send from the plugin to the panel (possibly through the wrapper) */
@@ -109,7 +110,8 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_ACTION_QUIT_FOR_RESTART, /* none */
   PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET, /* none */
   PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE,   /* none */
-  PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT        /* none */
+  PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT,       /* none */
+  PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE        /* none */
 }
 XfcePanelPluginProviderPropType;
 
@@ -178,6 +180,8 @@ gboolean              xfce_panel_plugin_provider_remote_event        (XfcePanelP
 
 void                  xfce_panel_plugin_provider_set_locked          (XfcePanelPluginProvider       *provider,
                                                                       gboolean                       locked);
+
+void                  xfce_panel_plugin_provider_ask_remove          (XfcePanelPluginProvider       *provider);
 
 G_END_DECLS
 
