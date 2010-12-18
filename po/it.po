@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-03 11:08+0000\n"
+"POT-Creation-Date: 2010-12-18 05:09+0000\n"
 "PO-Revision-Date: 2010-07-03 11:07+0100\n"
 "Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
 "Language-Team: Italian Translation Team <xfce-it-translators@googlegroups.com>\n"
@@ -67,38 +67,38 @@ msgid "Failed to open the documentation browser"
 msgstr "Impossibile aprire il browser della documentazione"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:873
-#: ../panel/panel-preferences-dialog.c:1029
+#: ../libxfce4panel/xfce-panel-plugin.c:887
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Rimuovere davvero \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:878
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../libxfce4panel/xfce-panel-plugin.c:892
+#: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se si rimuove l'elemento dal pannello, verrà perso per sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1038
+#: ../libxfce4panel/xfce-panel-plugin.c:1052
 msgid "_Move"
 msgstr "_Sposta"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1072
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
 msgid "Pane_l"
 msgstr "_Pannello"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2210
+#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2210
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2221
+#: ../libxfce4panel/xfce-panel-plugin.c:1105 ../panel/panel-window.c:2221
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2237
+#: ../libxfce4panel/xfce-panel-plugin.c:1122 ../panel/panel-window.c:2237
 msgid "Log _Out"
 msgstr "_Esci"
 
@@ -210,15 +210,15 @@ msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
 msgid "Failed to launch the migration application"
 msgstr "Avvio dell'applicazione di migrazione non riuscito"
 
-#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1424 ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "X è stato avviato senza gestore di sessione. Facendo clic su \"Esci\" il server X verrà chiuso."
 
-#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Rimuovere davvero il pannello?"
 
-#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1433 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossibile eseguire il comando \"%s\""
@@ -253,7 +253,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Selezionare un pannello per il nuovo plugin:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Pannello %d"
@@ -293,41 +293,41 @@ msgstr "Il plugin \"%s\" ha inaspettatamente abbandonato il pannello; riavviarlo
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Il plugin è stato riavviato più di una volta negli ultimi %d secondi. Premendo «Esegui» il pannello tenterà di riavviare il plugin altrimenti verrà rimosso definitivamente dal pannello."
 
-#: ../panel/panel-preferences-dialog.c:440
+#: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
 msgstr "Automatico"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:459
+#: ../panel/panel-preferences-dialog.c:472
 #, c-format
 msgid "Screen %d"
 msgstr "Schermo %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:485
+#: ../panel/panel-preferences-dialog.c:498
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:815
+#: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Le configurazioni del pannello e dei plugin saranno rimosse in modo permanente"
 
-#: ../panel/panel-preferences-dialog.c:816
+#: ../panel/panel-preferences-dialog.c:829
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Rimuovere davvero il pannello \"%d\"?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-preferences-dialog.c:912
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(esterno)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:901
+#: ../panel/panel-preferences-dialog.c:917
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -338,7 +338,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:913
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
@@ -712,39 +712,35 @@ msgid "Use c_ustom menu file:"
 msgstr "Usa un file del menu personali_zzato"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _Xfce menu"
-msgstr "Usa il menu di _Xfce"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Use the _default menu"
 msgstr "Usa il menu pre_definito"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "Icon_a:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
 msgstr "Mostra il titolo del _pulsante"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:476
+#: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Selezionare un'icona"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:514
-#: ../plugins/applicationsmenu/applicationsmenu.c:796
-#: ../plugins/launcher/launcher.c:2102
+#: ../plugins/applicationsmenu/applicationsmenu.c:513
+#: ../plugins/applicationsmenu/applicationsmenu.c:754
+#: ../plugins/launcher/launcher.c:2171
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossibile eseguire il comando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1068
+#: ../plugins/applicationsmenu/applicationsmenu.c:1010
 msgid "No applications found"
 msgstr "Nessuna applicazione trovata"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1091
+#: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
 msgstr "Impossibile avviare il menu delle applicazioni"
 
@@ -1178,32 +1174,32 @@ msgstr "Cartella _principale:"
 msgid "_File Pattern:"
 msgstr "Schema del _file:"
 
-#: ../plugins/launcher/launcher.c:1448
+#: ../plugins/launcher/launcher.c:1463
 msgid "Unnamed Item"
 msgstr "Elemento senza nome"
 
-#: ../plugins/launcher/launcher.c:1588
+#: ../plugins/launcher/launcher.c:1603
 msgid "No items"
 msgstr "Nessun elemento"
 
-#: ../plugins/launcher/launcher-dialog.c:704
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Se si cancella un elemento, verrà rimosso in modo permanente."
 
-#: ../plugins/launcher/launcher-dialog.c:705
+#: ../plugins/launcher/launcher-dialog.c:743
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Rimuovere davvero \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:706
+#: ../plugins/launcher/launcher-dialog.c:744
 msgid "Unnamed item"
 msgstr "Elemento senza nome"
 
-#: ../plugins/launcher/launcher-dialog.c:721
+#: ../plugins/launcher/launcher-dialog.c:759
 msgid "Failed to remove the desktop file from the config directory"
 msgstr "Impossibile rimuovere il file desktop dalla cartella di configurazione"
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:803
 msgid "Failed to open desktop item editor"
 msgstr "Impossibile aprire l'editor per l'elemento desktop"
 
@@ -1460,48 +1456,52 @@ msgid "Show windows from _all workspaces or viewports"
 msgstr "Mostra le _finestre di tutti gli spazi di lavoro o porzioni"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Show windows from all mo_nitors"
+msgstr "Mostra le _finestre di tutti gli sc_hermi"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "Or_dinamento:"
 
 # è l'offset di data dal 1/1/1970 utilizzato nei sistemi Unix
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr "Timestamp"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
 msgstr "Quando lo spazio è limitato"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Pulsanti delle finestre"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "Ra_ggruppa finestre:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
 msgstr "Titolo della finestra"
 
-#: ../plugins/tasklist/tasklist-widget.c:2805
+#: ../plugins/tasklist/tasklist-widget.c:2944
 msgid "Mi_nimize All"
 msgstr "Mi_nimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2814
+#: ../plugins/tasklist/tasklist-widget.c:2953
 msgid "Un_minimize All"
 msgstr "_Deminimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2820
+#: ../plugins/tasklist/tasklist-widget.c:2959
 msgid "Ma_ximize All"
 msgstr "_Massimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2829
+#: ../plugins/tasklist/tasklist-widget.c:2968
 msgid "_Unmaximize All"
 msgstr "D_emassimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:2839
+#: ../plugins/tasklist/tasklist-widget.c:2978
 msgid "_Close All"
 msgstr "_Chiudi tutte"
 
@@ -1571,6 +1571,9 @@ msgstr "Menu delle finestre"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Scorre tra le finestre aperte utilizzando un menu"
+
+#~ msgid "Use the _Xfce menu"
+#~ msgstr "Usa il menu di _Xfce"
 
 #~ msgid "Create a new launcher on the Xfce Panel"
 #~ msgstr "Crea un nuovo avviatore sul pannello di Xfce"
