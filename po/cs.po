@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-10 23:08+0000\n"
-"PO-Revision-Date: 2010-12-11 01:45+0100\n"
+"POT-Creation-Date: 2010-12-18 00:14+0000\n"
+"PO-Revision-Date: 2010-12-18 01:33+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -55,40 +55,40 @@ msgid "Failed to open the documentation browser"
 msgstr "Otevření prohlížeče dokumentace se nezdařilo."
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:873
-#: ../panel/panel-preferences-dialog.c:1029
+#: ../libxfce4panel/xfce-panel-plugin.c:887
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Opravdu chcete odebrat  \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:878
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../libxfce4panel/xfce-panel-plugin.c:892
+#: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Odeberete-li položku z panelu, zůstane trvale odebrána."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1038
+#: ../libxfce4panel/xfce-panel-plugin.c:1052
 msgid "_Move"
 msgstr "_Přesunout"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1072
+#: ../libxfce4panel/xfce-panel-plugin.c:1086
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080
+#: ../libxfce4panel/xfce-panel-plugin.c:1094
 #: ../panel/panel-window.c:2210
 msgid "Add _New Items..."
 msgstr "Přidat _nové položky..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091
+#: ../libxfce4panel/xfce-panel-plugin.c:1105
 #: ../panel/panel-window.c:2221
 msgid "Panel Pr_eferences..."
 msgstr "Př_edvolby panelu..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108
+#: ../libxfce4panel/xfce-panel-plugin.c:1122
 #: ../panel/panel-window.c:2237
 msgid "Log _Out"
 msgstr "_Odhlásit"
@@ -203,17 +203,17 @@ msgstr "Nebyla nalezena žádná spuštěná instance %s"
 msgid "Failed to launch the migration application"
 msgstr "Spuštění migrace aplikace se nezdařilo"
 
-#: ../panel/panel-application.c:1429
+#: ../panel/panel-application.c:1424
 #: ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Spustili jste X bez správce relace. Kliknutím na tlačítko Ukončit zavřete X server."
 
-#: ../panel/panel-application.c:1430
+#: ../panel/panel-application.c:1425
 #: ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Opravdu chcete ukončit panel?"
 
-#: ../panel/panel-application.c:1438
+#: ../panel/panel-application.c:1433
 #: ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
@@ -248,7 +248,7 @@ msgstr "Zvolte panel pro nový zásuvný modul:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -288,41 +288,41 @@ msgstr "Zásuvný modul \"%s\" neočekávaně opustil panel, chcete jej restarto
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Zásuvný modul se během předchozích %d sekund restartoval více než jednou. Pokud stisknete tlačítko Spustit, panel se pokusí o restart zásuvného modulu, v opačném případě bude zásuvný modul trvale odebrán z panelu."
 
-#: ../panel/panel-preferences-dialog.c:440
+#: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
 msgstr "Automatický"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:459
+#: ../panel/panel-preferences-dialog.c:472
 #, c-format
 msgid "Screen %d"
 msgstr "Obrazovka %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:485
+#: ../panel/panel-preferences-dialog.c:498
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:815
+#: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Nastavení panelu a zásuvných modulů budou trvale odstraněna"
 
-#: ../panel/panel-preferences-dialog.c:816
+#: ../panel/panel-preferences-dialog.c:829
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Opravdu chcete odebrat panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-preferences-dialog.c:912
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externí)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:901
+#: ../panel/panel-preferences-dialog.c:917
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -333,7 +333,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:913
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interní název: %s-%d"
@@ -718,7 +718,7 @@ msgstr "Vyberte ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2102
+#: ../plugins/launcher/launcher.c:2171
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Spuštění příkazu \"%s\" se nezdařilo."
@@ -1160,32 +1160,32 @@ msgstr "_Základní adresář:"
 msgid "_File Pattern:"
 msgstr "_Vzorek souboru:"
 
-#: ../plugins/launcher/launcher.c:1448
+#: ../plugins/launcher/launcher.c:1463
 msgid "Unnamed Item"
 msgstr "Nepojmenovaná položka"
 
-#: ../plugins/launcher/launcher.c:1588
+#: ../plugins/launcher/launcher.c:1603
 msgid "No items"
 msgstr "Žádné položky"
 
-#: ../plugins/launcher/launcher-dialog.c:704
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Smažete-li položku, bude trvale odstraněna"
 
-#: ../plugins/launcher/launcher-dialog.c:705
+#: ../plugins/launcher/launcher-dialog.c:743
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Opravdu chcete odebrat \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:706
+#: ../plugins/launcher/launcher-dialog.c:744
 msgid "Unnamed item"
 msgstr "Nepojmenovaná položka"
 
-#: ../plugins/launcher/launcher-dialog.c:721
+#: ../plugins/launcher/launcher-dialog.c:759
 msgid "Failed to remove the desktop file from the config directory"
 msgstr "Odebrání souboru plochu z adresáře s nastavením se nezdařilo"
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:803
 msgid "Failed to open desktop item editor"
 msgstr "Nepodařilo se otevřít editor položek pracovní plochy"
 
@@ -1444,47 +1444,51 @@ msgid "Show windows from _all workspaces or viewports"
 msgstr "Zobr_azovat okna ze všech pracovních ploch a zobrazovacích zařízení"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Show windows from all mo_nitors"
+msgstr "Zobr_azovat okna ze všech monitorů"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "P_ořadí řazení:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr "Časová známka"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
 msgstr "Pokud je prostor omezený"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Tlačítka oken"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "_Seskupování oken:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
 msgstr "Titulek okna"
 
-#: ../plugins/tasklist/tasklist-widget.c:2805
+#: ../plugins/tasklist/tasklist-widget.c:2944
 msgid "Mi_nimize All"
 msgstr "Mi_nimalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:2814
+#: ../plugins/tasklist/tasklist-widget.c:2953
 msgid "Un_minimize All"
 msgstr "Obnovit vše z _minima"
 
-#: ../plugins/tasklist/tasklist-widget.c:2820
+#: ../plugins/tasklist/tasklist-widget.c:2959
 msgid "Ma_ximize All"
 msgstr "Ma_ximalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:2829
+#: ../plugins/tasklist/tasklist-widget.c:2968
 msgid "_Unmaximize All"
 msgstr "Obn_ovit vše z maxima"
 
-#: ../plugins/tasklist/tasklist-widget.c:2839
+#: ../plugins/tasklist/tasklist-widget.c:2978
 msgid "_Close All"
 msgstr "_Zavříz vše"
 
