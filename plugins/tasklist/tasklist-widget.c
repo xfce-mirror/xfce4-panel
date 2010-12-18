@@ -2692,10 +2692,10 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
 
 static void
 xfce_tasklist_button_drag_data_get (GtkWidget         *button,
-			            GdkDragContext    *context,
-			            GtkSelectionData  *selection_data,
-			            guint              info,
-			            guint              timestamp,
+                                    GdkDragContext    *context,
+                                    GtkSelectionData  *selection_data,
+                                    guint              info,
+                                    guint              timestamp,
                                     XfceTasklistChild *child)
 {
   gulong xid;
@@ -2705,15 +2705,15 @@ xfce_tasklist_button_drag_data_get (GtkWidget         *button,
   xid = wnck_window_get_xid (child->window);
   gtk_selection_data_set (selection_data,
                           gtk_selection_data_get_target (selection_data),
-			  8, (guchar *)&xid, sizeof (gulong));
+                          8, (guchar *)&xid, sizeof (gulong));
 }
 
 
 
 static void
 xfce_tasklist_button_drag_begin (GtkWidget         *button,
-			         GdkDragContext    *context,
-			         XfceTasklistChild *child)
+                                 GdkDragContext    *context,
+                                 XfceTasklistChild *child)
 {
   GdkPixbuf *pixbuf;
 

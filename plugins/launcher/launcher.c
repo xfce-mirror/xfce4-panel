@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2008-2010 Nick Schermer <nick@xfce.org>
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -122,7 +122,7 @@ static gboolean   launcher_plugin_button_drag_motion            (GtkWidget      
                                                                  guint                 drag_time,
                                                                  LauncherPlugin       *plugin);
 static gboolean   launcher_plugin_button_drag_drop              (GtkWidget            *widget,
-	                                                         GdkDragContext       *context,
+                                                                 GdkDragContext       *context,
                                                                  gint                  x,
                                                                  gint                  y,
                                                                  guint                 drag_time,
@@ -1855,8 +1855,8 @@ launcher_plugin_button_drag_motion (GtkWidget      *widget,
 
 
 static gboolean
-launcher_plugin_button_drag_drop (GtkWidget	 *widget,
-	                          GdkDragContext *context,
+launcher_plugin_button_drag_drop (GtkWidget      *widget,
+                                  GdkDragContext *context,
                                   gint            x,
                                   gint            y,
                                   guint           drag_time,

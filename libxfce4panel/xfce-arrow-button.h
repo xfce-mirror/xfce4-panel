@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2006-2007 Jasper Huijsmans <jasper@xfce.org>
- * Copyright (C) 2008-2009 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2008-2010 Nick Schermer <nick@xfce.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
