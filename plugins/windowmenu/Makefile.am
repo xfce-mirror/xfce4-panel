@@ -61,7 +61,7 @@ xfce4-popup-windowmenu: xfce4-popup-windowmenu.sh Makefile
 #
 # .desktop file
 #
-desktopdir = $(datadir)/xfce4/panel-plugins
+desktopdir = $(datadir)/xfce4/panel/plugins
 desktop_in_files = windowmenu.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
