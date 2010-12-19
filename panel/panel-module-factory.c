@@ -38,13 +38,14 @@
 #include <panel/panel-module.h>
 #include <panel/panel-module-factory.h>
 
-#define PANEL_PLUGINS_DATA_DIR DATADIR G_DIR_SEPARATOR_S "panel-plugins"
+#define PANEL_PLUGINS_DATA_DIR     (DATADIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "plugins")
+#define PANEL_PLUGINS_DATA_DIR_OLD (DATADIR G_DIR_SEPARATOR_S "panel-plugins")
 
 
 
 static void     panel_module_factory_finalize        (GObject                  *object);
 static void     panel_module_factory_load_modules    (PanelModuleFactory       *factory,
-                                                      gboolean                  first_time);
+                                                      gboolean                  warn_if_known);
 static gboolean panel_module_factory_modules_cleanup (gpointer                  key,
                                                       gpointer                  value,
                                                       gpointer                  user_data);
@@ -138,8 +139,9 @@ panel_module_factory_finalize (GObject *object)
 
 
 static void
-panel_module_factory_load_modules (PanelModuleFactory *factory,
-                                   gboolean            first_time)
+panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
+                                       const gchar        *path,
+                                       gboolean            warn_if_known)
 {
   GDir        *dir;
   const gchar *name, *p;
@@ -148,7 +150,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory,
   gchar       *internal_name;
 
   /* try to open the directory */
-  dir = g_dir_open (PANEL_PLUGINS_DATA_DIR, 0, NULL);
+  dir = g_dir_open (path, 0, NULL);
   if (G_UNLIKELY (dir == NULL))
     return;
 
@@ -165,7 +167,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory,
         continue;
 
       /* create the full .desktop filename */
-      filename = g_build_filename (PANEL_PLUGINS_DATA_DIR, name, NULL);
+      filename = g_build_filename (path, name, NULL);
 
       /* find the dot in the name, this cannot
        * fail since it pasted the .desktop suffix check */
@@ -177,7 +179,7 @@ panel_module_factory_load_modules (PanelModuleFactory *factory,
       /* check if the modules name is already loaded */
       if (g_hash_table_lookup (factory->modules, internal_name) != NULL)
         {
-          if (first_time)
+          if (warn_if_known)
             {
               g_debug ("Another plugin already registered with "
                        "the internal name \"%s\".", internal_name);
@@ -210,6 +212,19 @@ panel_module_factory_load_modules (PanelModuleFactory *factory,
     }
 
   g_dir_close (dir);
+}
+
+
+
+static void
+panel_module_factory_load_modules (PanelModuleFactory *factory,
+                                   gboolean            warn_if_known)
+{
+  panel_return_if_fail (PANEL_IS_MODULE_FACTORY (factory));
+
+  /* load from the new and old location */
+  panel_module_factory_load_modules_dir (factory, PANEL_PLUGINS_DATA_DIR, warn_if_known);
+  panel_module_factory_load_modules_dir (factory, PANEL_PLUGINS_DATA_DIR_OLD, warn_if_known);
 }
 
 
