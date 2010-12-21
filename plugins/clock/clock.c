@@ -467,6 +467,7 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   gdouble      ratio;
   gint         ratio_size;
   gint         border = 0;
+  gint         offset;
 
   if (plugin->clock == NULL)
     return TRUE;
@@ -478,20 +479,35 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
   /* get the width:height ratio */
   g_object_get (G_OBJECT (plugin->clock), "size-ratio", &ratio, NULL);
-  ratio_size = ratio > 0 ? size : -1;
+  if (ratio > 0)
+    {
+      offset = MAX (plugin->frame->style->xthickness, plugin->frame->style->ythickness) + border;
+      offset *= 2;
+      ratio_size = size - offset;
+    }
+  else
+    {
+      ratio_size = -1;
+    }
 
   /* set the clock size */
   if (xfce_panel_plugin_get_orientation (panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
     {
-      if (ratio > 0 && ratio != 1.0)
-        ratio_size = ceil (size * ratio);
+      if (ratio > 0)
+        {
+          ratio_size = ceil (ratio_size * ratio);
+          ratio_size += offset;
+        }
 
       gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), ratio_size, size);
     }
   else
     {
-      if (ratio > 0 && ratio != 1.0)
-        ratio_size = ceil (size / ratio);
+      if (ratio > 0)
+        {
+          ratio_size = ceil (ratio_size / ratio);
+          ratio_size += offset;
+        }
 
       gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, ratio_size);
     }

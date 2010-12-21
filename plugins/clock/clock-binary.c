@@ -27,10 +27,6 @@
 #include <math.h>
 #endif
 
-#ifndef M_PI
-#define M_PI 3.141592654
-#endif
-
 #include <gtk/gtk.h>
 #include <cairo/cairo.h>
 

@@ -31,7 +31,7 @@
 #include "clock-lcd.h"
 
 #define RELATIVE_SPACE (0.10)
-#define RELATIVE_DIGIT (0.50)
+#define RELATIVE_DIGIT (5 * RELATIVE_SPACE)
 #define RELATIVE_DOTS  (3 * RELATIVE_SPACE)
 
 
@@ -88,6 +88,13 @@ struct _XfceClockLcd
   guint               show_meridiem : 1; /* am/pm */
   guint               flash_separators : 1;
 };
+
+typedef struct
+{
+  gdouble x;
+  gdouble y;
+}
+LcdPoint;
 
 
 
@@ -283,11 +290,8 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
   /* get the width:height ratio */
   ratio = xfce_clock_lcd_get_ratio (XFCE_CLOCK_LCD (widget));
 
-  /* size of a digit should be a fraction of 10 */
-  size = widget->allocation.height - widget->allocation.height % 10;
-
   /* make sure we also fit on small vertical panels */
-  size = MIN (rint ((gdouble) widget->allocation.width / ratio), size);
+  size = MIN ((gdouble) widget->allocation.width / ratio, widget->allocation.height);
 
   /* begin offsets */
   offset_x = rint ((widget->allocation.width - (size * ratio)) / 2.00);
@@ -299,13 +303,16 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 
   /* get the cairo context */
   cr = gdk_cairo_create (widget->window);
-  gdk_cairo_set_source_color (cr, &widget->style->fg[GTK_WIDGET_STATE (widget)]);
 
   if (G_LIKELY (cr != NULL))
     {
-      /* clip the drawing region */
+      gdk_cairo_set_source_color (cr, &widget->style->fg[GTK_WIDGET_STATE (widget)]);
       gdk_cairo_rectangle (cr, &event->area);
       cairo_clip (cr);
+      cairo_push_group (cr);
+
+      /* width of the clear line */
+      cairo_set_line_width (cr, MAX (size * 0.05, 1.5));
 
       /* get the local time */
       clock_plugin_get_localtime (&tm);
@@ -316,6 +323,9 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
       /* convert 24h clock to 12h clock */
       if (!lcd->show_military && ticks > 12)
         ticks -= 12;
+
+      if (ticks == 1 || (ticks >= 10 && ticks < 20))
+        offset_x -= size * (RELATIVE_SPACE * 4);
 
       /* queue a resize when the number of hour digits changed,
        * because we might miss the exact second (due to slightly delayed
@@ -374,7 +384,9 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
           offset_x = xfce_clock_lcd_draw_digit (cr, ticks, size, offset_x, offset_y);
         }
 
-      /* cleanup */
+      /* drop the pushed group */
+      cairo_pop_group_to_source (cr);
+      cairo_paint (cr);
       cairo_destroy (cr);
     }
 
@@ -393,7 +405,7 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
   /* get the local time */
   clock_plugin_get_localtime (&tm);
 
-  /* 8:88 */
+  /* 8:8(space)8 */
   ratio = (3 * RELATIVE_DIGIT) + RELATIVE_DOTS + RELATIVE_SPACE;
 
   ticks = tm.tm_hour;
@@ -401,9 +413,14 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
   if (!lcd->show_military && ticks > 12)
     ticks -= 12;
 
-  if (ticks >= 10)
+  if (ticks == 1)
+    ratio -= RELATIVE_SPACE * 4; /* only show 1 */
+  else if (ticks >= 10 && ticks < 20)
+    ratio += RELATIVE_SPACE * 2; /* 1 + space */
+  else if (ticks >= 20)
     ratio += RELATIVE_DIGIT + RELATIVE_SPACE;
 
+  /* (space):88 */
   if (lcd->show_seconds)
     ratio += (2 * RELATIVE_DIGIT) + RELATIVE_SPACE + RELATIVE_DOTS;
 
@@ -446,6 +463,15 @@ xfce_clock_lcd_draw_dots (cairo_t *cr,
 
 
 
+/*
+ * number:
+ *
+ * ##1##
+ * 6   2
+ * ##7##
+ * 5   3
+ * ##4##
+ */
 static gdouble
 xfce_clock_lcd_draw_digit (cairo_t *cr,
                            guint    number,
@@ -453,47 +479,43 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
                            gdouble  offset_x,
                            gdouble  offset_y)
 {
-  gint    i, j;
+  guint   i, j;
   gint    segment;
   gdouble x, y;
   gdouble rel_x, rel_y;
 
-  /* ##1##
-   * 6   2
-   * ##7##
-   * 5   3
-   * ##4##
-   */
-
   /* coordicates to draw for each segment */
-  gdouble segments_x[][6] = { { 0.02, 0.48,  0.38,  0.12,  -1.0,  0.00 },   /* 1x */
-                              { 0.40, 0.505, 0.505, 0.40,  -1.0,  0.00 },   /* 2x */
-                              { 0.40, 0.505, 0.505, 0.40,  -1.0,  0.00 },   /* 3x */
-                              { 0.12, 0.38,  0.48,  0.02,  -1.0,  0.00 },   /* 4x */
-                              { 0.00, 0.105, 0.105, 0.00,  -1.0,  0.00 },   /* 5x */
-                              { 0.00, 0.105, 0.105, 0.00,  -1.0,  0.00 },   /* 6x */
-                              { 0.00, 0.10,  0.40,  0.50,   0.40, 0.10 } }; /* 7x */
-  gdouble segments_y[][6] = { { 0.00, 0.00,  0.105, 0.105, -1.0,  0.00 },   /* 1y */
-                              { 0.12, 0.02,  0.48,  0.43,  -1.0,  0.00 },   /* 2y */
-                              { 0.57, 0.52,  0.98,  0.88,  -1.0,  0.00 },   /* 3y */
-                              { 0.90, 0.90,  1.00,  1.00,  -1.0,  0.00 },   /* 4y */
-                              { 0.52, 0.57,  0.88,  0.98,  -1.0,  0.00 },   /* 5y */
-                              { 0.02, 0.12,  0.43,  0.48,  -1.0,  0.00 },   /* 6y */
-                              { 0.50, 0.445, 0.445, 0.50,   0.55, 0.55 } }; /* 7y */
+  const LcdPoint segment_points[][6] = {
+    /* 1 */ { { 0, 0 }, { 0.5, 0 }, { 0.4, 0.1 }, { 0.1, 0.1 }, { -1, }, { -1, } },
+    /* 2 */ { { 0.4, 0.1 }, { 0.5, 0.0 }, { 0.5, 0.5 }, { 0.4, 0.45 }, { -1, },  { -1, } },
+    /* 3 */ { { 0.4, 0.55 }, { 0.5, 0.5 }, { 0.5, 1 }, { 0.4, 0.9 }, { -1, },  { -1, } },
+    /* 4 */ { { 0.1, 0.9 }, { 0.4, 0.9 }, { 0.5, 1 }, { 0.0, 1 }, { -1, },  { -1, } },
+    /* 5 */ { { 0.0, 0.5 }, { 0.1, 0.55 }, { 0.1, 0.90 }, { 0.0, 1}, { -1, },  { -1, } },
+    /* 6 */ { { 0.0, 0.0 }, { 0.1, 0.1 }, { 0.1, 0.45 }, { 0.0, 0.5 }, { -1, },  { -1, } },
+    /* 7 */ { { 0.0, 0.5 }, { 0.1, 0.45 }, { 0.4, 0.45 }, { 0.5, 0.5 }, { 0.4, 0.55 }, { 0.1, 0.55 } },
+  };
+
+  /* space line, mirrored to other side */
+  const LcdPoint clear_points[] = {
+    { 0, 0 }, { 0.25, 0.25 }, { 0.25, 0.375 }, { 0, 0.5 },
+    { 0.25, 0.625 }, { 0.25, 0.75 }, { 0, 1 }
+  };
 
   /* segment to draw for each number: 0, 1, ..., 9, A, P */
-  gint    numbers[][8] = { { 0, 1, 2, 3, 4, 5, -1 },
-                           { 1, 2, -1 },
-                           { 0, 1, 6, 4, 3, -1 },
-                           { 0, 1, 6, 2, 3, -1 },
-                           { 5, 6, 1, 2, -1 },
-                           { 0, 5, 6, 2, 3, -1 },
-                           { 0, 5, 4, 3, 2, 6, -1 },
-                           { 0, 1, 2, -1 },
-                           { 0, 1, 2, 3, 4, 5, 6, -1 },
-                           { 3, 2, 1, 0, 5, 6, -1 },
-                           { 4, 5, 0, 1, 2, 6, -1 },
-                           { 4, 5, 0, 1, 6, -1 } };
+  const gint numbers[][8] = {
+    { 0, 1, 2, 3, 4, 5, -1 },
+    { 1, 2, -1 },
+    { 0, 1, 6, 4, 3, -1 },
+    { 0, 1, 6, 2, 3, -1 },
+    { 5, 6, 1, 2, -1 },
+    { 0, 5, 6, 2, 3, -1 },
+    { 0, 5, 4, 3, 2, 6, -1 },
+    { 0, 1, 2, -1 },
+    { 0, 1, 2, 3, 4, 5, 6, -1 },
+    { 3, 2, 1, 0, 5, 6, -1 },
+    { 4, 5, 0, 1, 2, 6, -1 },
+    { 4, 5, 0, 1, 6, -1 }
+  };
 
   panel_return_val_if_fail (number <= 11, offset_x);
 
@@ -510,8 +532,8 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
       for (j = 0; j < 6; j++)
         {
           /* get the relative sizes */
-          rel_x = segments_x[segment][j];
-          rel_y = segments_y[segment][j];
+          rel_x = segment_points[segment][j].x;
+          rel_y = segment_points[segment][j].y;
 
           /* leave when there are no valid coordinates */
           if (rel_x == -1.00 || rel_y == -1.00)
@@ -521,25 +543,35 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
           x = rel_x * size + offset_x;
           y = rel_y * size + offset_y;
 
-          /* when 0.01 * size is larger then 1, round the numbers */
-          if (size >= 10)
-            {
-              x = rint (x);
-              y = rint (y);
-            }
-
           if (G_UNLIKELY (j == 0))
             cairo_move_to (cr, x, y);
           else
             cairo_line_to (cr, x, y);
         }
 
-      /* close the line */
       cairo_close_path (cr);
     }
 
-  /* fill the segments */
   cairo_fill (cr);
+
+  /* clear the space between the segments to get the lcd look */
+  cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
+  for (j = 0; j < 2; j++)
+    {
+      for (i = 0; i < G_N_ELEMENTS (clear_points); i++)
+        {
+          x = (j == 0 ? clear_points[i].x : 0.5 - clear_points[i].x) * size + offset_x;
+          y = clear_points[i].y * size + offset_y;
+
+          if (G_UNLIKELY (i == 0))
+            cairo_move_to (cr, x, y);
+          else
+            cairo_line_to (cr, x, y);
+        }
+
+      cairo_stroke (cr);
+    }
+  cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
   return (offset_x + size * (RELATIVE_DIGIT + RELATIVE_SPACE));
 }
