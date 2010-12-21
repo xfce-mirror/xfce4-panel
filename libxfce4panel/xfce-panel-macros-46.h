@@ -363,6 +363,10 @@ G_BEGIN_DECLS
             gtk_widget_queue_draw (plug); \
             break; \
             \
+          case PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE: \
+            xfce_panel_plugin_provider_ask_remove (provider); \
+            break; \
+            \
           default: \
             g_warning ("Received unknow client event %u", type); \
             break; \

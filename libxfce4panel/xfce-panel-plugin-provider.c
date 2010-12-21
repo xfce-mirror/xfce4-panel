@@ -246,5 +246,14 @@ xfce_panel_plugin_provider_set_locked (XfcePanelPluginProvider *provider,
 
 
 
+void
+xfce_panel_plugin_provider_ask_remove (XfcePanelPluginProvider *provider)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->ask_remove) (provider);
+}
+
+
 #define __XFCE_PANEL_PLUGIN_PROVIDER_C__
 #include <libxfce4panel/libxfce4panel-aliasdef.c>

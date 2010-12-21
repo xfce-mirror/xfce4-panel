@@ -364,6 +364,23 @@ panel_application_load (PanelApplication *application)
 
 
 static void
+panel_application_plugin_move_drag_data_get (GtkWidget        *item,
+                                             GdkDragContext   *drag_context,
+                                             GtkSelectionData *selection_data,
+                                             guint             info,
+                                             guint             drag_time,
+                                             PanelApplication *application)
+{
+  /* set some data, we never use this, but GTK_DEST_DEFAULT_ALL
+   * used in the item dialog requires this */
+  gtk_selection_data_set (selection_data,
+                          selection_data->target, 8,
+                          (const guchar *) "0", 1);
+}
+
+
+
+static void
 panel_application_plugin_move_drag_end (GtkWidget        *item,
                                         GdkDragContext   *context,
                                         PanelApplication *application)
@@ -374,6 +391,8 @@ panel_application_plugin_move_drag_end (GtkWidget        *item,
   /* disconnect this signal */
   g_signal_handlers_disconnect_by_func (G_OBJECT (item),
       G_CALLBACK (panel_application_plugin_move_drag_end), application);
+  g_signal_handlers_disconnect_by_func (G_OBJECT (item),
+      G_CALLBACK (panel_application_plugin_move_drag_data_get), application);
 
   /* make the window sensitive again */
   panel_application_windows_sensitive (application, TRUE);
@@ -415,6 +434,8 @@ panel_application_plugin_move (GtkWidget        *item,
   /* signal to make the window sensitive again on a drag end */
   g_signal_connect (G_OBJECT (item), "drag-end",
       G_CALLBACK (panel_application_plugin_move_drag_end), application);
+  g_signal_connect (G_OBJECT (item), "drag-data-get",
+      G_CALLBACK (panel_application_plugin_move_drag_data_get), application);
 }
 
 
