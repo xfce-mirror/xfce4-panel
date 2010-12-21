@@ -83,7 +83,8 @@ enum
   PROP_MODE,
   PROP_SHOW_FRAME,
   PROP_TOOLTIP_FORMAT,
-  PROP_COMMAND
+  PROP_COMMAND,
+  PROP_ROTATE_VERTICALLY
 };
 
 typedef enum
@@ -116,6 +117,7 @@ struct _ClockPlugin
   guint               show_frame : 1;
   gchar              *command;
   ClockPluginMode     mode;
+  guint               rotate_vertically : 1;
 
   gchar              *tooltip_format;
   ClockPluginTimeout *tooltip_timeout;
@@ -221,6 +223,13 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                                         EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_ROTATE_VERTICALLY,
+                                   g_param_spec_boolean ("rotate-vertically",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_COMMAND,
                                    g_param_spec_string ("command",
                                                         NULL, NULL, NULL,
@@ -238,6 +247,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
   plugin->command = NULL;
+  plugin->rotate_vertically = FALSE;
 
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
@@ -273,6 +283,10 @@ clock_plugin_get_property (GObject    *object,
       g_value_set_string (value, plugin->command);
       break;
 
+    case PROP_ROTATE_VERTICALLY:
+      g_value_set_boolean (value, plugin->rotate_vertically);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -289,6 +303,7 @@ clock_plugin_set_property (GObject      *object,
 {
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (object);
   gboolean     show_frame;
+  gboolean     rotate_vertically;
 
   switch (prop_id)
     {
@@ -318,6 +333,15 @@ clock_plugin_set_property (GObject      *object,
     case PROP_COMMAND:
       g_free (plugin->command);
       plugin->command = g_value_dup_string (value);
+      break;
+
+    case PROP_ROTATE_VERTICALLY:
+      rotate_vertically = g_value_get_boolean (value);
+      if (plugin->rotate_vertically != rotate_vertically)
+        {
+          plugin->rotate_vertically = rotate_vertically;
+          clock_plugin_set_mode (plugin);
+        }
       break;
 
     default:
@@ -402,6 +426,7 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-frame", G_TYPE_BOOLEAN },
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
+    { "rotate-vertically", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -805,14 +830,17 @@ clock_plugin_set_mode (ClockPlugin *plugin)
                          properties[plugin->mode], FALSE);
 
   gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->clock);
-  exo_binding_new (G_OBJECT (plugin), "orientation", G_OBJECT (plugin->clock), "orientation");
   clock_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
       xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
-  gtk_widget_show (plugin->clock);
+
+  if (plugin->rotate_vertically)
+    exo_binding_new (G_OBJECT (plugin), "orientation", G_OBJECT (plugin->clock), "orientation");
 
   /* watch width/height changes */
   g_signal_connect_swapped (G_OBJECT (plugin->clock), "notify::size-ratio",
       G_CALLBACK (clock_plugin_size_ratio_changed), plugin);
+
+  gtk_widget_show (plugin->clock);
 }
 
 

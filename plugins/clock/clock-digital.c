@@ -46,9 +46,9 @@ static gboolean xfce_clock_digital_update       (gpointer               user_dat
 
 enum
 {
- PROP_0,
- PROP_DIGITAL_FORMAT,
- PROP_SIZE_RATIO,
+  PROP_0,
+  PROP_DIGITAL_FORMAT,
+  PROP_SIZE_RATIO,
   PROP_ORIENTATION
 };
 
