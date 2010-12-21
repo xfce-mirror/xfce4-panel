@@ -835,12 +835,10 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
 
   /* add the itembar position */
   alloc = &GTK_WIDGET (itembar)->allocation;
-  x += alloc->x;
-  y += alloc->y;
 
   /* return -1 if point is outside the widget allocation */
   if (x > alloc->width || y > alloc->height)
-    return -1;
+    return g_slist_length (itembar->children);
 
   for (li = itembar->children, idx = 0; li != NULL; li = g_slist_next (li))
     {
