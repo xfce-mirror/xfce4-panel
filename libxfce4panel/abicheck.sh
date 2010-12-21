@@ -19,5 +19,5 @@
 #
 
 cpp -P -DINCLUDE_INTERNAL_SYMBOLS -DINCLUDE_VARIABLES -DALL_FILES ${srcdir:-.}/libxfce4panel.symbols | sed -e '/^$/d' -e 's/ G_GNUC.*$//' -e 's/ PRIVATE//' | sort > expected-abi
-nm -D .libs/libxfce4panel-1.0.so | grep " T\|R " | cut -d ' ' -f 3 | grep -v '^_.*' | sort > actual-abi
+nm -D .libs/libxfce4panel-1.0.so | grep " T\|R\|G " | cut -d ' ' -f 3 | grep -v '^_.*' | grep -v '^ *$' | sort > actual-abi
 diff -u expected-abi actual-abi && rm expected-abi actual-abi
