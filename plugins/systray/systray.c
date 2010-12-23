@@ -75,8 +75,9 @@ static void     systray_plugin_icon_removed                 (SystrayManager     
                                                              SystrayPlugin         *plugin);
 static void     systray_plugin_lost_selection               (SystrayManager        *manager,
                                                              SystrayPlugin         *plugin);
-static void     systray_plugin_dialog_add_application_names (SystrayPlugin         *plugin,
-                                                             GtkListStore          *store);
+static void     systray_plugin_dialog_add_application_names (gpointer               key,
+                                                             gpointer               value,
+                                                             gpointer               user_data);
 static void     systray_plugin_dialog_hidden_toggled        (GtkCellRendererToggle *renderer,
                                                              const gchar           *path_string,
                                                              SystrayPlugin         *plugin);
@@ -571,7 +572,8 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   store = gtk_builder_get_object (builder, "applications-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
-  systray_plugin_dialog_add_application_names (plugin, GTK_LIST_STORE (store));
+  g_hash_table_foreach (plugin->names,
+      systray_plugin_dialog_add_application_names, store);
   g_object_set_data (G_OBJECT (plugin), "applications-store", store);
 
   object = gtk_builder_get_object (builder, "hidden-toggle");
@@ -851,78 +853,62 @@ systray_plugin_dialog_icon (GtkIconTheme *icon_theme,
 
 
 static void
-systray_plugin_dialog_add_application_names (SystrayPlugin *plugin,
-                                             GtkListStore  *store)
+systray_plugin_dialog_add_application_names (gpointer key,
+                                             gpointer value,
+                                             gpointer user_data)
 {
-  GList        *names, *li;
-  const gchar  *name;
-  guint         i;
-  gboolean      hidden;
-  const gchar  *title, *icon_name;
-  gchar        *camelcase;
-  GdkPixbuf    *icon;
+  GtkListStore *store = GTK_LIST_STORE (user_data);
+  const gchar  *name = key;
+  gboolean      hidden = GPOINTER_TO_UINT (value);
   GtkIconTheme *icon_theme;
+  const gchar  *title = NULL;
+  gchar        *camelcase = NULL;
+  const gchar  *icon_name = name;
+  GdkPixbuf    *pixbuf;
+  guint         i;
   GtkTreeIter   iter;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->box));
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
+  panel_return_if_fail (name == NULL || g_utf8_validate (name, -1, NULL));
 
-  icon_theme = gtk_icon_theme_get_default ();
+  /* skip invalid names */
+  if (exo_str_is_empty (name))
+     return;
 
-  /* get the know application names and insert them in the store */
-  /* TODO use foreach here */
-  names = g_hash_table_get_keys (plugin->names);
-  names = g_list_sort (names, (GCompareFunc) strcmp);
-  for (li = names; li != NULL; li = li->next)
+  /* check if we have a better name for the application */
+  for (i = 0; i < G_N_ELEMENTS (known_applications); i++)
     {
-      name = li->data;
-
-      /* skip invalid names */
-      if (exo_str_is_empty (name))
-        continue;
-
-      title = NULL;
-      icon_name = name;
-      camelcase = NULL;
-      hidden = systray_plugin_names_get_hidden (plugin, name);
-
-      /* check if we have a better name for the application */
-      for (i = 0; i < G_N_ELEMENTS (known_applications); i++)
+      if (strcmp (name, known_applications[i][0]) == 0)
         {
-          if (strcmp (name, known_applications[i][0]) == 0)
-            {
-              icon_name = known_applications[i][1];
-              title = _(known_applications[i][2]);
-              break;
-            }
+          icon_name = known_applications[i][1];
+          title = _(known_applications[i][2]);
+          break;
         }
-
-      /* create fallback title if the application was not found */
-      if (title == NULL)
-        {
-          camelcase = systray_plugin_dialog_camel_case (name);
-          title = camelcase;
-        }
-
-      /* try to load the icon name */
-      icon = systray_plugin_dialog_icon (icon_theme, icon_name);
-
-      /* insert in the store */
-      gtk_list_store_append (store, &iter);
-      gtk_list_store_set (store, &iter,
-                          COLUMN_PIXBUF, icon,
-                          COLUMN_TITLE, title,
-                          COLUMN_HIDDEN, hidden,
-                          COLUMN_INTERNAL_NAME, name,
-                          -1);
-
-      g_free (camelcase);
-      if (icon != NULL)
-        g_object_unref (G_OBJECT (icon));
     }
 
-  g_list_free (names);
+  /* create fallback title if the application was not found */
+  if (title == NULL)
+    {
+      camelcase = systray_plugin_dialog_camel_case (name);
+      title = camelcase;
+    }
+
+  /* try to load the icon name */
+  icon_theme = gtk_icon_theme_get_default ();
+  pixbuf = systray_plugin_dialog_icon (icon_theme, icon_name);
+
+  /* insert in the store */
+  gtk_list_store_append (store, &iter);
+  gtk_list_store_set (store, &iter,
+                      COLUMN_PIXBUF, pixbuf,
+                      COLUMN_TITLE, title,
+                      COLUMN_HIDDEN, hidden,
+                      COLUMN_INTERNAL_NAME, name,
+                      -1);
+
+  g_free (camelcase);
+  if (pixbuf != NULL)
+    g_object_unref (G_OBJECT (pixbuf));
 }
 
 
