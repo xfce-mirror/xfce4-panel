@@ -495,9 +495,9 @@ launcher_plugin_item_changed (GarconMenuItem *item,
 
 
 static gboolean
-launcher_plugin_item_dupplicate (GFile   *src_file,
-                                 GFile   *dst_file,
-                                 GError **error)
+launcher_plugin_item_duplicate (GFile   *src_file,
+                                GFile   *dst_file,
+                                GError **error)
 {
   GKeyFile *key_file;
   gchar    *contents = NULL;
@@ -572,8 +572,8 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
           dst_path = launcher_plugin_unique_filename (plugin);
           dst_file = g_file_new_for_path (dst_path);
 
-          /* create a dupplicate in the config directory */
-          if (launcher_plugin_item_dupplicate (src_file, dst_file, &error))
+          /* create a duplicate in the config directory */
+          if (launcher_plugin_item_duplicate (src_file, dst_file, &error))
             {
               /* use the new file */
               g_object_unref (G_OBJECT (src_file));
@@ -582,7 +582,7 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
           else
             {
               src_path = g_file_get_parse_name (src_file);
-              g_warning ("Failed to create dupplicate of desktop file \"%s\" "
+              g_warning ("Failed to create duplicate of desktop file \"%s\" "
                           "to \"%s\": %s", src_path, dst_path, error->message);
               g_error_free (error);
               g_free (src_path);
@@ -2516,7 +2516,7 @@ launcher_plugin_garcon_menu_pool_add (GarconMenu *menu,
       if (!garcon_menu_element_get_visible (GARCON_MENU_ELEMENT (item)))
         continue;
 
-      /* skip dupplicates */
+      /* skip duplicates */
       desktop_id = garcon_menu_item_get_desktop_id (item);
       if (g_hash_table_lookup (pool, desktop_id) != NULL)
         continue;
