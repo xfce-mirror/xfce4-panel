@@ -1034,6 +1034,13 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
           child_alloc.width = MAX (w, 1); /* TODO this is a workaround */
           child_alloc.height = h / (rows - row);
 
+          if (!tasklist->horizontal
+              && xfce_tasklist_horizontal (tasklist))
+            {
+              gtk_widget_get_child_requisition (child->button, &child_req);
+              child_alloc.height = child_req.height;
+            }
+
           h -= child_alloc.height;
           y += child_alloc.height;
 
