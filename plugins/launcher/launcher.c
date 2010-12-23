@@ -590,7 +590,7 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
               /* continue using the source file, the user won't be able to
                * edit the item, but atleast we have something that works in
                * the panel */
-              g_object_unref (G_OBJECT (dst_path));
+              g_object_unref (G_OBJECT (dst_file));
             }
 
           g_free (dst_path);
