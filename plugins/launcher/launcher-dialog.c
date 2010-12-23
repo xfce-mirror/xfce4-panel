@@ -702,8 +702,6 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
   GarconMenuItem   *item;
   GtkWidget        *toplevel;
   gchar            *filename;
-  gboolean          can_delete;
-  GFile            *item_file;
   gboolean          save_items = TRUE;
 
   panel_return_if_fail (GTK_IS_BUILDABLE (button));
@@ -746,21 +744,7 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
               /* remove the item from the store */
               gtk_list_store_remove (GTK_LIST_STORE (model), &iter_a);
 
-              /* delete the desktop file if possible */
-              if (item != NULL
-                  && launcher_plugin_item_is_editable (dialog->plugin, item, &can_delete)
-                  && can_delete)
-                {
-                  item_file = garcon_menu_item_get_file (item);
-                  if (!g_file_delete (item_file, NULL, &error))
-                    {
-                      toplevel = gtk_widget_get_toplevel (button);
-                      xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
-                          _("Failed to remove the desktop file from the config directory"));
-                      g_error_free (error);
-                    }
-                  g_object_unref (G_OBJECT (item_file));
-                }
+              /* the .desktop file will be automatically removed in the launcher code */
             }
           else
             {

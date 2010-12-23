@@ -62,6 +62,7 @@ static void       launcher_plugin_removed                       (XfcePanelPlugin
 static gboolean   launcher_plugin_remote_event                  (XfcePanelPlugin      *panel_plugin,
                                                                  const gchar          *name,
                                                                  const GValue         *value);
+static void       launcher_plugin_save_delayed                  (LauncherPlugin       *plugin);
 static void       launcher_plugin_save                          (XfcePanelPlugin      *panel_plugin);
 static void       launcher_plugin_orientation_changed           (XfcePanelPlugin      *panel_plugin,
                                                                  GtkOrientation        orientation);
@@ -206,6 +207,8 @@ struct _LauncherPlugin
 
   GFile             *config_directory;
   GFileMonitor      *config_monitor;
+
+  guint              save_timeout_id;
 };
 
 enum
@@ -345,6 +348,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->child = NULL;
   plugin->tooltip_cache = NULL;
   plugin->menu_timeout_id = 0;
+  plugin->save_timeout_id = 0;
 
   /* monitor the default icon theme for changes */
   icon_theme = gtk_icon_theme_get_default ();
@@ -518,7 +522,7 @@ launcher_plugin_item_duplicate (GFile   *src_file,
   if (!g_key_file_load_from_data (key_file, contents, length, 0, error))
     goto err1;
 
-  /* store the source uri in the desktop file for resore purposes */
+  /* store the source uri in the desktop file for restore purposes */
   uri = g_file_get_uri (src_file);
   g_key_file_set_string (key_file, G_KEY_FILE_DESKTOP_GROUP, "X-XFCE-Source", uri);
   g_free (uri);
@@ -547,7 +551,8 @@ err1:
 static GarconMenuItem *
 launcher_plugin_item_load (LauncherPlugin *plugin,
                            const gchar    *str,
-                           gboolean       *desktop_id_return)
+                           gboolean       *desktop_id_return,
+                           gboolean       *location_changed)
 {
   GFile          *src_file, *dst_file;
   gchar          *src_path, *dst_path;
@@ -578,6 +583,9 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
               /* use the new file */
               g_object_unref (G_OBJECT (src_file));
               src_file = dst_file;
+
+              if (G_LIKELY (location_changed != NULL))
+                *location_changed = TRUE;
             }
           else
             {
@@ -645,13 +653,43 @@ launcher_plugin_item_load (LauncherPlugin *plugin,
 
 
 static void
-launcher_plugin_items_free (GSList *items)
+launcher_plugin_items_delete_configs (LauncherPlugin *plugin)
 {
-  if (items != NULL)
+  GSList   *li;
+  GFile    *file;
+  gboolean  succeed = TRUE;
+  GError   *error = NULL;
+
+  panel_return_if_fail (G_IS_FILE (plugin->config_directory));
+
+  /* cleanup desktop files in the config dir */
+  for (li = plugin->items; succeed && li != NULL; li = li->next)
     {
-      g_slist_foreach (items, (GFunc) g_object_unref, NULL);
-      g_slist_free (items);
-      items = NULL;
+      file = garcon_menu_item_get_file (li->data);
+      if (g_file_has_prefix (file, plugin->config_directory))
+        succeed = g_file_delete (file, NULL, &error);
+      g_object_unref (G_OBJECT (file));
+    }
+
+  if (!succeed)
+    {
+      g_message ("launcher-%d: Failed to cleanup the configuration: %s",
+                 xfce_panel_plugin_get_unique_id (XFCE_PANEL_PLUGIN (plugin)),
+                 error->message);
+      g_error_free (error);
+    }
+}
+
+
+
+static void
+launcher_plugin_items_free (LauncherPlugin *plugin)
+{
+  if (G_LIKELY (plugin->items != NULL))
+    {
+      g_slist_foreach (plugin->items, (GFunc) g_object_unref, NULL);
+      g_slist_free (plugin->items);
+      plugin->items = NULL;
     }
 }
 
@@ -670,6 +708,8 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
   GHashTable     *pool = NULL;
   gboolean        desktop_id;
   gchar          *uri;
+  gboolean        items_modified = FALSE;
+  gboolean        location_changed;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (array != NULL);
@@ -686,13 +726,19 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
 
       /* try to load the item */
       desktop_id = FALSE;
-      item = launcher_plugin_item_load (plugin, str, &desktop_id);
+      location_changed = FALSE;
+      item = launcher_plugin_item_load (plugin, str, &desktop_id, &location_changed);
       if (G_LIKELY (item == NULL))
         {
           /* str did not look like a desktop-id, so no need to look
            * for it in the application pool */
           if (!desktop_id)
             continue;
+
+          /* we are going to load an desktop_id from the item pool,
+           * even if this failes, save the new item list, so we don't
+           * try this again in the future */
+          items_modified = TRUE;
 
           /* load the pool with desktop items */
           if (pool == NULL)
@@ -704,7 +750,7 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
             {
               /* we want an editable file, so try to make a copy */
               uri = garcon_menu_item_get_uri (pool_item);
-              item = launcher_plugin_item_load (plugin, uri, NULL);
+              item = launcher_plugin_item_load (plugin, uri, NULL, NULL);
               g_free (uri);
 
               /* if something failed, use the pool item, but this one
@@ -717,6 +763,10 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
           if (item == NULL)
             continue;
         }
+      else if (location_changed)
+        {
+          items_modified = TRUE;
+        }
 
       /* add the item to the list */
       panel_assert (GARCON_IS_MENU_ITEM (item));
@@ -728,9 +778,16 @@ launcher_plugin_items_load (LauncherPlugin *plugin,
   if (G_UNLIKELY (pool != NULL))
     g_hash_table_destroy (pool);
 
+  /* remove config files of items not in the new config */
+  launcher_plugin_items_delete_configs (plugin);
+
   /* release the old menu items and set new one */
-  launcher_plugin_items_free (plugin->items);
+  launcher_plugin_items_free (plugin);
   plugin->items = items;
+
+  /* store the new item list */
+  if (items_modified)
+    launcher_plugin_save_delayed (plugin);
 }
 
 
@@ -755,9 +812,14 @@ launcher_plugin_set_property (GObject      *object,
       /* load new items from the array */
       array = g_value_get_boxed (value);
       if (G_LIKELY (array != NULL))
-        launcher_plugin_items_load (plugin, array);
+        {
+          launcher_plugin_items_load (plugin, array);
+        }
       else
-        launcher_plugin_items_free (plugin->items);
+        {
+          launcher_plugin_items_delete_configs (plugin);
+          launcher_plugin_items_free (plugin);
+        }
 
       /* emit signal */
       g_signal_emit (G_OBJECT (plugin), launcher_signals[ITEMS_CHANGED], 0);
@@ -906,7 +968,7 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
       launcher_plugin_menu_destroy (plugin);
 
       /* save the new config */
-      g_object_notify (G_OBJECT (plugin), "items");
+      launcher_plugin_save_delayed (plugin);
 
       /* update the dialog */
       g_signal_emit (G_OBJECT (plugin), launcher_signals[ITEMS_CHANGED], 0);
@@ -1016,14 +1078,16 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
       g_object_unref (G_OBJECT (plugin->config_monitor));
     }
 
-  if (plugin->config_directory != NULL)
-    g_object_unref (G_OBJECT (plugin->config_directory));
+  if (plugin->save_timeout_id != 0)
+    g_source_remove (plugin->save_timeout_id);
 
   /* destroy the menu and timeout */
   launcher_plugin_menu_destroy (plugin);
 
-  /* free items */
-  launcher_plugin_items_free (plugin->items);
+  launcher_plugin_items_free (plugin);
+
+  if (plugin->config_directory != NULL)
+    g_object_unref (G_OBJECT (plugin->config_directory));
 
   /* stop watching the icon theme */
   if (plugin->theme_change_id != 0)
@@ -1044,9 +1108,6 @@ launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
 {
   LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   GError         *error = NULL;
-  GSList         *li;
-  GFile          *item_file;
-  gboolean        result = TRUE;
 
   panel_return_if_fail (G_IS_FILE (plugin->config_directory));
 
@@ -1063,19 +1124,9 @@ launcher_plugin_removed (XfcePanelPlugin *panel_plugin)
     }
 
   /* cleanup desktop files in the config dir */
-  for (li = plugin->items; result && li != NULL; li = li->next)
-    {
-      item_file = garcon_menu_item_get_file (li->data);
-      if (g_file_has_prefix (item_file, plugin->config_directory))
-        result = g_file_delete (item_file, NULL, &error);
-      g_object_unref (G_OBJECT (item_file));
-    }
+  launcher_plugin_items_delete_configs (plugin);
 
-  /* remove config dir if everything went fine */
-  if (result)
-    result = g_file_delete (plugin->config_directory, NULL, &error);
-
-  if (!result)
+  if (!g_file_delete (plugin->config_directory, NULL, &error))
     {
       g_message ("launcher-%d: Failed to cleanup the configuration: %s",
                  xfce_panel_plugin_get_unique_id (panel_plugin),
@@ -1114,6 +1165,37 @@ launcher_plugin_remote_event (XfcePanelPlugin *panel_plugin,
     }
 
   return FALSE;
+}
+
+
+
+static void
+launcher_plugin_save_delayed_timeout_destroyed (gpointer user_data)
+{
+  XFCE_LAUNCHER_PLUGIN (user_data)->save_timeout_id = 0;
+}
+
+
+
+static gboolean
+launcher_plugin_save_delayed_timeout (gpointer user_data)
+{
+  launcher_plugin_save (XFCE_PANEL_PLUGIN (user_data));
+
+  return FALSE;
+}
+
+
+
+static void
+launcher_plugin_save_delayed (LauncherPlugin *plugin)
+{
+  if (plugin->save_timeout_id != 0)
+    g_source_remove (plugin->save_timeout_id);
+
+  plugin->save_timeout_id = g_timeout_add_seconds_full (G_PRIORITY_LOW, 1,
+      launcher_plugin_save_delayed_timeout, plugin,
+      launcher_plugin_save_delayed_timeout_destroyed);
 }
 
 
