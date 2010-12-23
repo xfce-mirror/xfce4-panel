@@ -52,12 +52,16 @@ struct _SystraySocket
   /* plug window */
   GdkNativeWindow window;
 
-  guint           is_composited : 1;
-  guint           parent_relative_bg : 1;
+  gchar           *name;
+
+  guint            is_composited : 1;
+  guint            parent_relative_bg : 1;
+  guint            hidden : 1;
 };
 
 
 
+static void     systray_socket_finalize      (GObject        *object);
 static void     systray_socket_realize       (GtkWidget      *widget);
 static void     systray_socket_size_allocate (GtkWidget      *widget,
                                               GtkAllocation  *allocation);
@@ -76,6 +80,10 @@ static void
 systray_socket_class_init (SystraySocketClass *klass)
 {
   GtkWidgetClass *gtkwidget_class;
+  GObjectClass   *gobject_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->finalize = systray_socket_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->realize = systray_socket_realize;
@@ -89,6 +97,20 @@ systray_socket_class_init (SystraySocketClass *klass)
 static void
 systray_socket_init (SystraySocket *socket)
 {
+  socket->hidden = FALSE;
+  socket->name = NULL;
+}
+
+
+
+static void
+systray_socket_finalize (GObject *object)
+{
+  SystraySocket *socket = XFCE_SYSTRAY_SOCKET (object);
+
+  g_free (socket->name);
+
+  G_OBJECT_CLASS (systray_socket_parent_class)->finalize (object);
 }
 
 
@@ -307,10 +329,9 @@ systray_socket_is_composited (SystraySocket *socket)
 
 
 
-gchar *
-systray_socket_get_title  (SystraySocket *socket)
+const gchar *
+systray_socket_get_name  (SystraySocket *socket)
 {
-  gchar      *name = NULL;
   GdkDisplay *display;
   Atom        utf8_string, type;
   gint        result;
@@ -320,6 +341,9 @@ systray_socket_get_title  (SystraySocket *socket)
   gchar      *val;
 
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), NULL);
+
+  if (socket->name != NULL)
+    return socket->name;
 
   display = gtk_widget_get_display (GTK_WIDGET (socket));
 
@@ -350,11 +374,11 @@ systray_socket_get_title  (SystraySocket *socket)
       return NULL;
     }
 
-  name = g_utf8_strdown (val, nitems);
+  socket->name = g_utf8_strdown (val, nitems);
 
   XFree (val);
 
-  return name;
+  return socket->name;
 }
 
 
@@ -365,4 +389,25 @@ systray_socket_get_window (SystraySocket *socket)
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), NULL);
 
   return &socket->window;
+}
+
+
+
+gboolean
+systray_socket_get_hidden (SystraySocket *socket)
+{
+  panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), FALSE);
+
+  return socket->hidden;
+}
+
+
+
+void
+systray_socket_set_hidden (SystraySocket *socket,
+                           gboolean       hidden)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket));
+
+  socket->hidden = hidden;
 }

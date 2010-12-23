@@ -65,22 +65,14 @@ static void     systray_box_forall                (GtkContainer    *container,
                                                    GtkCallback      callback,
                                                    gpointer         callback_data);
 static GType    systray_box_child_type            (GtkContainer    *container);
-static void     systray_box_names_collect_visible (gpointer         key,
-                                                   gpointer         value,
-                                                   gpointer         user_data);
-static void     systray_box_names_collect_hidden  (gpointer         key,
-                                                   gpointer         value,
-                                                   gpointer         user_data);
-static gboolean systray_box_names_remove          (gpointer         key,
-                                                   gpointer         value,
-                                                   gpointer         user_data);
 static void     systray_box_button_set_arrow      (SystrayBox      *box);
 static gboolean systray_box_button_press_event    (GtkWidget       *widget,
                                                    GdkEventButton  *event,
                                                    GtkWidget       *box);
 static void     systray_box_button_clicked        (GtkToggleButton *button,
                                                    SystrayBox      *box);
-static void     systray_box_update_hidden         (SystrayBox      *box);
+static gint     systray_box_compare_function      (gconstpointer    a,
+                                                   gconstpointer    b);
 
 
 
@@ -124,9 +116,6 @@ typedef struct
   /* the child widget */
   GtkWidget    *widget;
 
-  /* whether it could be hidden */
-  guint         auto_hide : 1;
-
   /* invisible icon because of invalid requisition */
   guint         invalid : 1;
 
@@ -134,13 +123,6 @@ typedef struct
   gchar        *name;
 }
 SystrayBoxChild;
-
-enum
-{
-  PROP_0,
-  PROP_NAMES_HIDDEN,
-  PROP_NAMES_VISIBLE
-};
 
 
 
@@ -170,20 +152,6 @@ systray_box_class_init (SystrayBoxClass *klass)
   gtkcontainer_class->remove = systray_box_remove;
   gtkcontainer_class->forall = systray_box_forall;
   gtkcontainer_class->child_type = systray_box_child_type;
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_NAMES_HIDDEN,
-                                   g_param_spec_boxed ("names-hidden",
-                                                       NULL, NULL,
-                                                       PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
-                                                       EXO_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_NAMES_VISIBLE,
-                                   g_param_spec_boxed ("names-visible",
-                                                       NULL, NULL,
-                                                       PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
-                                                       EXO_PARAM_READWRITE));
 }
 
 
@@ -200,7 +168,6 @@ systray_box_init (SystrayBox *box)
   box->arrow_type = GTK_ARROW_LEFT;
   box->show_hidden = FALSE;
   box->guess_size = 128;
-  box->names = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   /* create arrow button */
   box->button = xfce_arrow_button_new (box->arrow_type);
@@ -221,25 +188,10 @@ systray_box_get_property (GObject      *object,
                           GValue       *value,
                           GParamSpec   *pspec)
 {
-  SystrayBox *box = XFCE_SYSTRAY_BOX (object);
-  GPtrArray  *array;
+  /*SystrayBox *box = XFCE_SYSTRAY_BOX (object);*/
 
   switch (prop_id)
     {
-    case PROP_NAMES_VISIBLE:
-      array = g_ptr_array_new ();
-      g_hash_table_foreach (box->names, systray_box_names_collect_visible, array);
-      g_value_set_boxed (value, array);
-      xfconf_array_free (array);
-      break;
-
-    case PROP_NAMES_HIDDEN:
-      array = g_ptr_array_new ();
-      g_hash_table_foreach (box->names, systray_box_names_collect_hidden, array);
-      g_value_set_boxed (value, array);
-      xfconf_array_free (array);
-      break;
-
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -254,42 +206,10 @@ systray_box_set_property (GObject      *object,
                           const GValue *value,
                           GParamSpec   *pspec)
 {
-  SystrayBox   *box = XFCE_SYSTRAY_BOX (object);
-  GPtrArray    *array;
-  guint         i;
-  const GValue *tmp;
-  gchar        *name;
-  gboolean      hidden = TRUE;
+  /*SystrayBox   *box = XFCE_SYSTRAY_BOX (object);*/
 
   switch (prop_id)
     {
-    case PROP_NAMES_VISIBLE:
-      hidden = FALSE;
-      /* fall-though */
-
-    case PROP_NAMES_HIDDEN:
-      /* remove old names with this state */
-      g_hash_table_foreach_remove (box->names,
-                                   systray_box_names_remove,
-                                   GUINT_TO_POINTER (hidden));
-
-      /* add new values */
-      array = g_value_get_boxed (value);
-      if (G_LIKELY (array != NULL))
-        {
-          for (i = 0; i < array->len; i++)
-            {
-              tmp = g_ptr_array_index (array, i);
-              panel_assert (G_VALUE_HOLDS_STRING (tmp));
-              name = g_value_dup_string (tmp);
-              g_hash_table_replace (box->names, name, GUINT_TO_POINTER (hidden));
-            }
-        }
-
-      /* update icons in the box */
-      systray_box_update_hidden (box);
-      break;
-
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -310,9 +230,6 @@ systray_box_finalize (GObject *object)
       g_slist_free (box->childeren);
       g_debug ("Leaking memory, not all children have been removed");
     }
-
-  /* destroy the hash table */
-  g_hash_table_destroy (box->names);
 
   G_OBJECT_CLASS (systray_box_parent_class)->finalize (object);
 }
@@ -357,7 +274,7 @@ systray_box_size_request (GtkWidget      *widget,
               child_info->invalid = TRUE;
 
               /* decrease the hidden counter if needed */
-              if (child_info->auto_hide)
+              if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)))
                 box->n_hidden_childeren--;
             }
         }
@@ -370,12 +287,12 @@ systray_box_size_request (GtkWidget      *widget,
               child_info->invalid = FALSE;
 
               /* update counter */
-              if (child_info->auto_hide)
+              if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)))
                 box->n_hidden_childeren++;
             }
 
           /* count the number of visible childeren */
-          if (!child_info->auto_hide || box->show_hidden)
+          if (!systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)) || box->show_hidden)
             {
               /* get the icon size */
               icon_size = MIN (guess_size, MAX (child_req.width, child_req.height));
@@ -541,7 +458,8 @@ systray_box_size_allocate (GtkWidget     *widget,
     {
       child_info = li->data;
 
-      if (child_info->invalid || (child_info->auto_hide && !box->show_hidden))
+      if (child_info->invalid
+          || (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)) && !box->show_hidden))
         {
           /* put icons offscreen */
           child_allocation.x = child_allocation.y = OFFSCREEN;
@@ -609,7 +527,7 @@ systray_box_expose_event (GtkWidget      *widget,
 
           /* skip invisible or not composited children */
           if (child_info->invalid
-              || (child_info->auto_hide && !box->show_hidden)
+              || (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)) && !box->show_hidden)
               || !systray_socket_is_composited (XFCE_SYSTRAY_SOCKET (child_info->widget)))
             continue;
 
@@ -632,12 +550,28 @@ static void
 systray_box_add (GtkContainer *container,
                  GtkWidget    *child)
 {
-  SystrayBox *box = XFCE_SYSTRAY_BOX (container);
+  SystrayBoxChild *child_info;
+  SystrayBox      *box = XFCE_SYSTRAY_BOX (container);
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
+  panel_return_if_fail (GTK_IS_WIDGET (child));
+  panel_return_if_fail (child->parent == NULL);
 
-  /* add the entry */
-  systray_box_add_with_name (box, child, NULL);
+  /* create child info */
+  child_info = g_slice_new (SystrayBoxChild);
+  child_info->widget = child;
+  child_info->invalid = FALSE;
+
+  /* update hidden counter */
+  if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)))
+    box->n_hidden_childeren++;
+
+  /* insert sorted */
+  box->childeren = g_slist_insert_sorted (box->childeren, child_info,
+                                          systray_box_compare_function);
+
+  /* set parent widget */
+  gtk_widget_set_parent (child, GTK_WIDGET (box));
 }
 
 
@@ -659,17 +593,15 @@ systray_box_remove (GtkContainer *container,
       if (child_info->widget == child)
         {
           /* whether the need to redraw afterwards */
-          need_resize = !child_info->auto_hide;
+          need_resize = !systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget));
 
           /* update hidden counter */
-          if (child_info->auto_hide && !child_info->invalid)
+          if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget))
+              && !child_info->invalid)
             box->n_hidden_childeren--;
 
           /* remove from list */
           box->childeren = g_slist_remove_link (box->childeren, li);
-
-          /* free name */
-          g_free (child_info->name);
 
           /* free child info */
           g_slice_free (SystrayBoxChild, child_info);
@@ -699,7 +631,8 @@ systray_box_forall (GtkContainer *container,
   GSList          *li;
 
   /* for button */
-  (*callback) (GTK_WIDGET (box->button), callback_data);
+  if (include_internals)
+    (*callback) (GTK_WIDGET (box->button), callback_data);
 
   /* run callback for all childeren */
   for (li = box->childeren; li != NULL; li = li->next)
@@ -717,54 +650,6 @@ systray_box_child_type (GtkContainer *container)
 
 {
   return GTK_TYPE_WIDGET;
-}
-
-
-
-static inline void
-systray_box_names_collect (GPtrArray   *array,
-                           const gchar *name)
-{
-  GValue *tmp;
-
-  tmp = g_new0 (GValue, 1);
-  g_value_init (tmp, G_TYPE_STRING);
-  g_value_set_string (tmp, name);
-  g_ptr_array_add (array, tmp);
-}
-
-
-
-static void
-systray_box_names_collect_visible (gpointer key,
-                                   gpointer value,
-                                   gpointer user_data)
-{
-  /* add all the visible names */
-  if (!GPOINTER_TO_UINT (value))
-    systray_box_names_collect (user_data, key);
-}
-
-
-
-static void
-systray_box_names_collect_hidden  (gpointer key,
-                                   gpointer value,
-                                   gpointer user_data)
-{
-  /* add all the hidden names */
-  if (GPOINTER_TO_UINT (value))
-    systray_box_names_collect (user_data, key);
-}
-
-
-
-static gboolean
-systray_box_names_remove (gpointer key,
-                          gpointer value,
-                          gpointer user_data)
-{
-  return GPOINTER_TO_UINT (value) == GPOINTER_TO_UINT (user_data);
 }
 
 
@@ -827,63 +712,27 @@ systray_box_compare_function (gconstpointer a,
 {
   const SystrayBoxChild *child_a = a;
   const SystrayBoxChild *child_b = b;
+  const gchar           *name_a;
+  const gchar           *name_b;
 
   /* sort hidden icons before visible ones */
-  if (child_a->auto_hide != child_b->auto_hide)
-    return (child_a->auto_hide ? -1 : 1);
+  if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_a->widget))
+      != systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_b->widget)))
+    return (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_a->widget)) ? -1 : 1);
 
   /* put icons without name after the hidden icons */
-  if (exo_str_is_empty (child_a->name) || exo_str_is_empty (child_b->name))
+  name_a = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child_a->widget));
+  name_b = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child_b->widget));
+  if (exo_str_is_empty (name_a) || exo_str_is_empty (name_b))
     {
-      if (!exo_str_is_empty (child_a->name) == !exo_str_is_empty (child_b->name))
+      if (!exo_str_is_empty (name_a) == !exo_str_is_empty (name_b))
         return 0;
       else
-        return exo_str_is_empty (child_a->name) ? -1 : 1;
+        return exo_str_is_empty (name_a) ? -1 : 1;
     }
 
   /* sort by name */
-  return strcmp (child_a->name, child_b->name);
-}
-
-
-
-static void
-systray_box_update_hidden (SystrayBox *box)
-{
-  SystrayBoxChild *child_info;
-  GSList          *li;
-  gint             n_hidden_childeren;
-
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
-
-  /* reset counter */
-  n_hidden_childeren = 0;
-
-  /* update the icons */
-  for (li = box->childeren; li != NULL; li = li->next)
-    {
-      child_info = li->data;
-
-      /* update the hidden state */
-      child_info->auto_hide = systray_box_name_get_hidden (box, child_info->name);
-
-      /* increase counter if needed */
-      if (child_info->auto_hide && !child_info->invalid)
-        n_hidden_childeren++;
-    }
-
-  if (box->n_hidden_childeren != n_hidden_childeren)
-    {
-      /* set value */
-      box->n_hidden_childeren = n_hidden_childeren;
-
-      /* sort the list again */
-      box->childeren = g_slist_sort (box->childeren,
-          systray_box_compare_function);
-
-      /* update the box */
-      gtk_widget_queue_resize (GTK_WIDGET (box));
-    }
+  return strcmp (name_a, name_b);
 }
 
 
@@ -960,131 +809,38 @@ systray_box_get_rows (SystrayBox *box)
 
 
 void
-systray_box_add_with_name (SystrayBox  *box,
-                           GtkWidget   *child,
-                           const gchar *name)
+systray_box_update (SystrayBox *box)
 {
   SystrayBoxChild *child_info;
+  GSList          *li;
+  gint             n_hidden_childeren;
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
-  panel_return_if_fail (GTK_IS_WIDGET (child));
-  panel_return_if_fail (child->parent == NULL);
-  panel_return_if_fail (name == NULL || g_utf8_validate (name, -1, NULL));
 
-  /* create child info */
-  child_info = g_slice_new (SystrayBoxChild);
-  child_info->widget = child;
-  child_info->invalid = FALSE;
-  child_info->name = g_strdup (name);
-  child_info->auto_hide = systray_box_name_get_hidden (box, child_info->name);
+  /* reset counter */
+  n_hidden_childeren = 0;
 
-  /* update hidden counter */
-  if (child_info->auto_hide)
-      box->n_hidden_childeren++;
-
-  /* insert sorted */
-  box->childeren = g_slist_insert_sorted (box->childeren, child_info,
-                                          systray_box_compare_function);
-
-  /* set parent widget */
-  gtk_widget_set_parent (child, GTK_WIDGET (box));
-}
-
-
-
-void
-systray_box_name_add (SystrayBox  *box,
-                      const gchar *name,
-                      gboolean     hidden)
-{
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
-  panel_return_if_fail (!exo_str_is_empty (name));
-
-  /* insert the application */
-  g_hash_table_insert (box->names, g_strdup (name),
-                       GUINT_TO_POINTER (hidden ? 1 : 0));
-
-  g_object_notify (G_OBJECT (box), hidden ? "names-hidden"
-                   : "names-visible");
-}
-
-
-
-void
-systray_box_name_set_hidden (SystrayBox  *box,
-                             const gchar *name,
-                             gboolean     hidden)
-{
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
-  panel_return_if_fail (!exo_str_is_empty (name));
-
-  /* replace the old name */
-  g_hash_table_replace (box->names, g_strdup (name),
-      GUINT_TO_POINTER (hidden ? 1 : 0));
-
-  /* save new values */
-  g_object_notify (G_OBJECT (box), "names-hidden");
-  g_object_notify (G_OBJECT (box), "names-visible");
-
-  /* update the box */
-  systray_box_update_hidden (box);
-}
-
-
-
-gboolean
-systray_box_name_get_hidden (SystrayBox  *box,
-                             const gchar *name)
-{
-  gpointer p;
-
-  /* do not hide icons without name */
-  if (G_UNLIKELY (name == NULL))
-    return FALSE;
-
-  /* lookup the name in the table */
-  p = g_hash_table_lookup (box->names, name);
-  if (G_UNLIKELY (p == NULL))
+  /* update the icons */
+  for (li = box->childeren; li != NULL; li = li->next)
     {
-      /* add the name */
-      systray_box_name_add (box, name, FALSE);
+      child_info = li->data;
 
-      /* do not hide the icon */
-      return FALSE;
+      /* increase counter if needed */
+      if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget))
+          && !child_info->invalid)
+        n_hidden_childeren++;
     }
-  else
+
+  if (box->n_hidden_childeren != n_hidden_childeren)
     {
-      return (GPOINTER_TO_UINT (p) == 1 ? TRUE : FALSE);
+      /* set value */
+      box->n_hidden_childeren = n_hidden_childeren;
+
+      /* sort the list again */
+      box->childeren = g_slist_sort (box->childeren,
+          systray_box_compare_function);
+
+      /* update the box */
+      gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }
-
-
-
-GList *
-systray_box_name_list (SystrayBox *box)
-{
-  GList *keys;
-
-  /* get the hash table keys */
-  keys = g_hash_table_get_keys (box->names);
-
-  /* sort the list */
-  keys = g_list_sort (keys, (GCompareFunc) strcmp);
-
-  return keys;
-}
-
-
-
-void
-systray_box_name_clear (SystrayBox *box)
-{
-  /* remove all the entries from the list */
-  g_hash_table_remove_all (box->names);
-
-  g_object_notify (G_OBJECT (box), "names-hidden");
-  g_object_notify (G_OBJECT (box), "names-visible");
-
-  systray_box_update_hidden (box);
-}
-

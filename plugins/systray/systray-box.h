@@ -46,23 +46,6 @@ void       systray_box_set_rows        (SystrayBox          *box,
 
 gint       systray_box_get_rows        (SystrayBox          *box);
 
-void       systray_box_add_with_name   (SystrayBox          *box,
-                                        GtkWidget           *child,
-                                        const gchar         *name);
-
-void       systray_box_name_add        (SystrayBox          *box,
-                                        const gchar         *name,
-                                        gboolean             hidden);
-
-void       systray_box_name_set_hidden (SystrayBox          *box,
-                                        const gchar         *name,
-                                        gboolean             hidden);
-
-gboolean   systray_box_name_get_hidden (SystrayBox          *box,
-                                        const gchar         *name);
-
-GList     *systray_box_name_list       (SystrayBox          *box);
-
-void       systray_box_name_clear      (SystrayBox          *box);
+void       systray_box_update          (SystrayBox          *box);
 
 #endif /* !__SYSTRAY_BOX_H__ */

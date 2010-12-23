@@ -45,8 +45,13 @@ void             systray_socket_force_redraw  (SystraySocket   *socket);
 
 gboolean         systray_socket_is_composited (SystraySocket   *socket);
 
-gchar           *systray_socket_get_title     (SystraySocket   *socket) G_GNUC_MALLOC;
+const gchar     *systray_socket_get_name      (SystraySocket   *socket);
 
 GdkNativeWindow *systray_socket_get_window    (SystraySocket   *socket);
+
+gboolean         systray_socket_get_hidden    (SystraySocket   *socket);
+
+void             systray_socket_set_hidden    (SystraySocket   *socket,
+                                               gboolean         hidden);
 
 #endif /* !__SYSTRAY_SOCKET_H__ */
