@@ -34,7 +34,8 @@
 #include "systray-manager.h"
 #include "systray-dialog_ui.h"
 
-#define ICON_SIZE (22)
+#define ICON_SIZE   (22)
+#define BUTTON_SIZE (16)
 
 
 
@@ -55,6 +56,9 @@ static void     systray_plugin_orientation_changed          (XfcePanelPlugin    
 static gboolean systray_plugin_size_changed                 (XfcePanelPlugin       *panel_plugin,
                                                              gint                   size);
 static void     systray_plugin_configure_plugin             (XfcePanelPlugin       *panel_plugin);
+static void     systray_plugin_button_toggled               (GtkWidget             *button,
+                                                             SystrayPlugin         *plugin);
+static void     systray_plugin_button_set_arrow             (SystrayPlugin         *plugin);
 static void     systray_plugin_names_collect_visible        (gpointer               key,
                                                              gpointer               value,
                                                              gpointer               user_data);
@@ -102,7 +106,9 @@ struct _SystrayPlugin
 
   /* widgets */
   GtkWidget      *frame;
+  GtkWidget      *hvbox;
   GtkWidget      *box;
+  GtkWidget      *button;
 
   /* settings */
   guint           show_frame : 1;
@@ -208,10 +214,21 @@ systray_plugin_init (SystrayPlugin *plugin)
   gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
   gtk_widget_show (plugin->frame);
 
+  plugin->hvbox = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 2);
+  gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->hvbox);
+  gtk_widget_show (plugin->hvbox);
+
   plugin->box = systray_box_new ();
-  gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->box);
-  xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->box);
+  gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->box, TRUE, TRUE, 0);
   gtk_widget_show (plugin->box);
+
+  plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
+  gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->button, FALSE, FALSE, 0);
+  g_signal_connect (G_OBJECT (plugin->button), "toggled",
+      G_CALLBACK (systray_plugin_button_toggled), plugin);
+  gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
+  exo_binding_new (G_OBJECT (plugin->box), "has-hidden", G_OBJECT (plugin->button), "visible");
+  xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
 }
 
 
@@ -516,9 +533,16 @@ systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
 
-  /* send the new orientation to the manager */
   if (G_LIKELY (plugin->manager != NULL))
     systray_manager_set_orientation (plugin->manager, orientation);
+  xfce_hvbox_set_orientation (XFCE_HVBOX (plugin->hvbox), orientation);
+
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    gtk_widget_set_size_request (plugin->button, BUTTON_SIZE, -1);
+  else
+    gtk_widget_set_size_request (plugin->button, -1, BUTTON_SIZE);
+
+  systray_plugin_button_set_arrow (plugin);
 }
 
 
@@ -587,6 +611,42 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       G_CALLBACK (systray_plugin_dialog_clear_clicked), plugin);
 
   gtk_widget_show (GTK_WIDGET (dialog));
+}
+
+
+
+static void
+systray_plugin_button_toggled (GtkWidget     *button,
+                               SystrayPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
+  panel_return_if_fail (plugin->button == button);
+
+  systray_box_set_show_hidden (XFCE_SYSTRAY_BOX (plugin->box),
+      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
+  systray_plugin_button_set_arrow (plugin);
+}
+
+
+
+static void
+systray_plugin_button_set_arrow (SystrayPlugin *plugin)
+{
+  GtkArrowType   arrow_type;
+  gboolean       show_hidden;
+  GtkOrientation orientation;
+
+  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+
+  show_hidden = systray_box_get_show_hidden (XFCE_SYSTRAY_BOX (plugin->box));
+  orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    arrow_type = show_hidden ? GTK_ARROW_LEFT : GTK_ARROW_RIGHT;
+  else
+    arrow_type = show_hidden ? GTK_ARROW_UP : GTK_ARROW_DOWN;
+
+  xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (plugin->button), arrow_type);
 }
 
 

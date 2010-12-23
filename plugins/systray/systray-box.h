@@ -46,6 +46,11 @@ void       systray_box_set_rows        (SystrayBox          *box,
 
 gint       systray_box_get_rows        (SystrayBox          *box);
 
+void       systray_box_set_show_hidden (SystrayBox          *box,
+                                        gboolean             show_hidden);
+
+gboolean   systray_box_get_show_hidden (SystrayBox          *box);
+
 void       systray_box_update          (SystrayBox          *box);
 
 #endif /* !__SYSTRAY_BOX_H__ */

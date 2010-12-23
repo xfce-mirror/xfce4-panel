@@ -33,7 +33,6 @@
 #include "systray-box.h"
 #include "systray-socket.h"
 
-#define BUTTON_SIZE        (16)
 #define SPACING            (2)
 #define OFFSCREEN          (-9999)
 #define IS_HORIZONTAL(box) ((box)->arrow_type == GTK_ARROW_LEFT \
@@ -65,16 +64,16 @@ static void     systray_box_forall                (GtkContainer    *container,
                                                    GtkCallback      callback,
                                                    gpointer         callback_data);
 static GType    systray_box_child_type            (GtkContainer    *container);
-static void     systray_box_button_set_arrow      (SystrayBox      *box);
-static gboolean systray_box_button_press_event    (GtkWidget       *widget,
-                                                   GdkEventButton  *event,
-                                                   GtkWidget       *box);
-static void     systray_box_button_clicked        (GtkToggleButton *button,
-                                                   SystrayBox      *box);
 static gint     systray_box_compare_function      (gconstpointer    a,
                                                    gconstpointer    b);
 
 
+
+enum
+{
+  PROP_0,
+  PROP_HAS_HIDDEN
+};
 
 struct _SystrayBoxClass
 {
@@ -91,9 +90,6 @@ struct _SystrayBox
   /* table with names, value contains an uint
    * that represents the hidden bool */
   GHashTable   *names;
-
-  /* expand button */
-  GtkWidget    *button;
 
   /* position of the arrow button */
   GtkArrowType  arrow_type;
@@ -152,6 +148,13 @@ systray_box_class_init (SystrayBoxClass *klass)
   gtkcontainer_class->remove = systray_box_remove;
   gtkcontainer_class->forall = systray_box_forall;
   gtkcontainer_class->child_type = systray_box_child_type;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_HAS_HIDDEN,
+                                   g_param_spec_boolean ("has-hidden",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READABLE));
 }
 
 
@@ -162,22 +165,11 @@ systray_box_init (SystrayBox *box)
   GTK_WIDGET_SET_FLAGS (box, GTK_NO_WINDOW);
 
   box->childeren = NULL;
-  box->button = NULL;
   box->rows = 1;
   box->n_hidden_childeren = 0;
   box->arrow_type = GTK_ARROW_LEFT;
   box->show_hidden = FALSE;
   box->guess_size = 128;
-
-  /* create arrow button */
-  box->button = xfce_arrow_button_new (box->arrow_type);
-  GTK_WIDGET_UNSET_FLAGS (box->button, GTK_CAN_DEFAULT | GTK_CAN_FOCUS);
-  gtk_button_set_focus_on_click (GTK_BUTTON (box->button), FALSE);
-  g_signal_connect (G_OBJECT (box->button), "clicked",
-      G_CALLBACK (systray_box_button_clicked), box);
-  g_signal_connect (G_OBJECT (box->button), "button-press-event",
-      G_CALLBACK (systray_box_button_press_event), box);
-  gtk_widget_set_parent (box->button, GTK_WIDGET (box));
 }
 
 
@@ -188,10 +180,14 @@ systray_box_get_property (GObject      *object,
                           GValue       *value,
                           GParamSpec   *pspec)
 {
-  /*SystrayBox *box = XFCE_SYSTRAY_BOX (object);*/
+  SystrayBox *box = XFCE_SYSTRAY_BOX (object);
 
   switch (prop_id)
     {
+    case PROP_HAS_HIDDEN:
+      g_value_set_boolean (value, box->n_hidden_childeren > 0);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -275,7 +271,11 @@ systray_box_size_request (GtkWidget      *widget,
 
               /* decrease the hidden counter if needed */
               if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)))
-                box->n_hidden_childeren--;
+                {
+                  box->n_hidden_childeren--;
+                  if (box->n_hidden_childeren == 0)
+                    g_object_notify (G_OBJECT (box), "has-hidden");
+                }
             }
         }
       else
@@ -288,7 +288,11 @@ systray_box_size_request (GtkWidget      *widget,
 
               /* update counter */
               if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)))
-                box->n_hidden_childeren++;
+                {
+                  box->n_hidden_childeren++;
+                  if (box->n_hidden_childeren == 1)
+                    g_object_notify (G_OBJECT (box), "has-hidden");
+                }
             }
 
           /* count the number of visible childeren */
@@ -323,17 +327,6 @@ systray_box_size_request (GtkWidget      *widget,
   else
     {
       requisition->width = requisition->height = 0;
-    }
-
-  /* add the button size if there are hidden icons */
-  if (box->n_hidden_childeren > 0)
-    {
-      /* add the button size */
-      requisition->width += BUTTON_SIZE;
-
-      /* add space */
-      if (n_visible_childeren > 0)
-        requisition->width += SPACING;
     }
 
   /* swap the sizes if the orientation is vertical */
@@ -389,8 +382,6 @@ systray_box_size_allocate (GtkWidget     *widget,
   if (box->rows == 1)
     {
       child_size = IS_HORIZONTAL (box) ? width : height;
-      if (box->n_hidden_childeren > 0)
-         child_size -= BUTTON_SIZE + SPACING;
       n = n_children - (box->show_hidden ? 0 : box->n_hidden_childeren);
       child_size -= SPACING * MAX (n - 1, 0);
       if (n > 1)
@@ -411,47 +402,6 @@ systray_box_size_allocate (GtkWidget     *widget,
   /* don't allocate zero width icon */
   if (child_size < 1)
     child_size = 1;
-
-  /* position arrow button */
-  if (box->n_hidden_childeren > 0)
-    {
-      /* initialize allocation */
-      child_allocation.x = allocation->x + GTK_CONTAINER (widget)->border_width;
-      child_allocation.y = allocation->y + GTK_CONTAINER (widget)->border_width;
-
-      /* set the width and height */
-      if (IS_HORIZONTAL (box))
-        {
-          child_allocation.width = BUTTON_SIZE;
-          child_allocation.height = height;
-        }
-      else
-        {
-          child_allocation.width = width;
-          child_allocation.height = BUTTON_SIZE;
-        }
-
-      /* position the button on the other side of the box */
-      if (box->arrow_type == GTK_ARROW_RIGHT)
-        child_allocation.x += width - child_allocation.width;
-      else if (box->arrow_type == GTK_ARROW_DOWN)
-        child_allocation.y += height - child_allocation.height;
-
-      /* set the offset for the icons */
-      offset = BUTTON_SIZE + SPACING;
-
-      /* position the arrow button */
-      gtk_widget_size_allocate (box->button, &child_allocation);
-
-      /* show button if not already visible */
-      if (!GTK_WIDGET_VISIBLE (box->button))
-        gtk_widget_show (box->button);
-    }
-  else if (GTK_WIDGET_VISIBLE (box->button))
-    {
-      /* hide the button */
-      gtk_widget_hide (box->button);
-    }
 
   /* position icons */
   for (li = box->childeren, n = 0; li != NULL; li = li->next)
@@ -564,7 +514,12 @@ systray_box_add (GtkContainer *container,
 
   /* update hidden counter */
   if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget)))
-    box->n_hidden_childeren++;
+    {
+      box->n_hidden_childeren++;
+
+      if (box->n_hidden_childeren == 1)
+        g_object_notify (G_OBJECT (box), "has-hidden");
+    }
 
   /* insert sorted */
   box->childeren = g_slist_insert_sorted (box->childeren, child_info,
@@ -598,7 +553,11 @@ systray_box_remove (GtkContainer *container,
           /* update hidden counter */
           if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_info->widget))
               && !child_info->invalid)
-            box->n_hidden_childeren--;
+            {
+              box->n_hidden_childeren--;
+              if (box->n_hidden_childeren == 0)
+                g_object_notify (G_OBJECT (box), "has-hidden");
+            }
 
           /* remove from list */
           box->childeren = g_slist_remove_link (box->childeren, li);
@@ -630,10 +589,6 @@ systray_box_forall (GtkContainer *container,
   SystrayBoxChild *child_info;
   GSList          *li;
 
-  /* for button */
-  if (include_internals)
-    (*callback) (GTK_WIDGET (box->button), callback_data);
-
   /* run callback for all childeren */
   for (li = box->childeren; li != NULL; li = li->next)
     {
@@ -650,58 +605,6 @@ systray_box_child_type (GtkContainer *container)
 
 {
   return GTK_TYPE_WIDGET;
-}
-
-
-
-static void
-systray_box_button_set_arrow (SystrayBox *box)
-{
-  GtkArrowType arrow_type;
-
-  /* set arrow type */
-  arrow_type = box->arrow_type;
-
-  /* invert the arrow direction when the button is toggled */
-  if (box->show_hidden)
-    {
-      if (IS_HORIZONTAL (box))
-        arrow_type = (arrow_type == GTK_ARROW_LEFT ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT);
-      else
-        arrow_type = (arrow_type == GTK_ARROW_UP ? GTK_ARROW_DOWN : GTK_ARROW_UP);
-    }
-
-  /* set the arrow type */
-  xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (box->button), arrow_type);
-}
-
-
-
-static gboolean
-systray_box_button_press_event (GtkWidget      *widget,
-                                GdkEventButton *event,
-                                GtkWidget      *box)
-{
-  /* send the event to the box for the panel menu */
-  gtk_widget_event (box, (GdkEvent *) event);
-
-  return FALSE;
-}
-
-
-
-static void
-systray_box_button_clicked (GtkToggleButton *button,
-                            SystrayBox      *box)
-{
-  /* whether to show hidden icons */
-  box->show_hidden = gtk_toggle_button_get_active (button);
-
-  /* update the arrow */
-  systray_box_button_set_arrow (box);
-
-  /* queue a resize */
-  gtk_widget_queue_resize (GTK_WIDGET (box));
 }
 
 
@@ -768,9 +671,6 @@ systray_box_set_arrow_type (SystrayBox   *box,
       /* set new setting */
       box->arrow_type = arrow_type;
 
-      /* update button arrow */
-      systray_box_button_set_arrow (box);
-
       /* queue a resize */
       if (box->childeren != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
@@ -809,6 +709,31 @@ systray_box_get_rows (SystrayBox *box)
 
 
 void
+systray_box_set_show_hidden (SystrayBox *box,
+                              gboolean   show_hidden)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
+
+  if (box->show_hidden != show_hidden)
+    {
+      box->show_hidden = show_hidden;
+      gtk_widget_queue_resize (GTK_WIDGET (box));
+    }
+}
+
+
+
+gboolean
+systray_box_get_show_hidden (SystrayBox *box)
+{
+  panel_return_val_if_fail (XFCE_IS_SYSTRAY_BOX (box), FALSE);
+
+  return box->show_hidden;
+}
+
+
+
+void
 systray_box_update (SystrayBox *box)
 {
   SystrayBoxChild *child_info;
@@ -842,5 +767,7 @@ systray_box_update (SystrayBox *box)
 
       /* update the box */
       gtk_widget_queue_resize (GTK_WIDGET (box));
+
+      g_object_notify (G_OBJECT (box), "has-hidden");
     }
 }
