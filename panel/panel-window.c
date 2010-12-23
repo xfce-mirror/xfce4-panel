@@ -1778,7 +1778,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
       if (gdk_screen_get_number (screen) != screen_num)
         {
           display = gdk_screen_get_display (screen);
-          if (gdk_display_get_n_screens (display) - 1 > screen_num)
+          if (gdk_display_get_n_screens (display) - 1 < screen_num)
             {
               panel_debug (PANEL_DEBUG_DOMAIN_POSITIONING,
                            "screen-%d not found, hiding panel", screen_num);
