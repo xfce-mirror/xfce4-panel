@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-18 16:23+0000\n"
-"PO-Revision-Date: 2010-12-18 16:26+0100\n"
+"POT-Creation-Date: 2010-12-23 16:20+0000\n"
+"PO-Revision-Date: 2010-12-23 17:17+0100\n"
 "Last-Translator: Nuno Miguel <nunis@netcabo.pt>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -57,40 +57,40 @@ msgid "Failed to open the documentation browser"
 msgstr "Falha ao abrir a documentação"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:887
+#: ../libxfce4panel/xfce-panel-plugin.c:889
 #: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Tem a certeza que quer remover \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:892
+#: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se remover este item do painel, será perdido para sempre."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "_Mover"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
 msgid "Pane_l"
 msgstr "Paine_l "
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1094
+#: ../libxfce4panel/xfce-panel-plugin.c:1096
 #: ../panel/panel-window.c:2212
 msgid "Add _New Items..."
 msgstr "Adicionar _novos itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1105
+#: ../libxfce4panel/xfce-panel-plugin.c:1107
 #: ../panel/panel-window.c:2223
 msgid "Panel Pr_eferences..."
 msgstr "Preferências do pain_el..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1122
+#: ../libxfce4panel/xfce-panel-plugin.c:1124
 #: ../panel/panel-window.c:2239
 msgid "Log _Out"
 msgstr "_Sair"
@@ -205,17 +205,17 @@ msgstr "Nenhuma instância de %s foi encontrada"
 msgid "Failed to launch the migration application"
 msgstr "Falha ao lançar a aplicação de migração"
 
-#: ../panel/panel-application.c:1423
+#: ../panel/panel-application.c:1444
 #: ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Iniciou o X sem o gestor de sessões. Ao seleccionar Sair irá fechar o servidor X."
 
-#: ../panel/panel-application.c:1424
+#: ../panel/panel-application.c:1445
 #: ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Tem a certeza que quer sair do painel?"
 
-#: ../panel/panel-application.c:1432
+#: ../panel/panel-application.c:1453
 #: ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
@@ -263,29 +263,29 @@ msgstr "Porque o painel está a ser executado no modo \"kiosk\\2, você não tem
 msgid "Modifying the panel is not allowed"
 msgstr "Não é permitida a modificação do painel"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "Adicionar novos itens"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "Adicionar novos itens ao painel"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "Pe_squisar:"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "Indique aqui a frase a pesquisar"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "O \"plug-in\" \"%s\" desapareceu do painel. Deseja reiniciá-lo?"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "O \"plug-in\" reiniciou mais que uma vez nos últimos %d segundos. Se premir Executar, o painel irá tentar reiniciar o \"plug-in\". Caso contrário o \"plug-in\" será removido do painel para sempre."
@@ -456,7 +456,7 @@ msgstr "Seleccione esta opção para prolongar o painel sobre vários monitores.
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr "Seleccione esta opção para ocultar a manipulação do painel e bloquear a sua posição."
+msgstr "Seleccione esta opção para ocultar os manípulos do painel e bloquear a sua posição."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
@@ -480,7 +480,7 @@ msgstr "A transparência quando o ponteiro estiver a pairar sobre o painel, com 
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "A transparência quando o ponteiro estiver a pairar sobre o painel, com 0 a significar totalmente transparente e 100 totalmente opaco."
+msgstr "A transparência quando o ponteiro não estiver a pairar sobre o painel, com 0 a significar totalmente transparente e 100 totalmente opaco."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -493,7 +493,7 @@ msgstr "_Alfa:"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr "_Enter:"
+msgstr "_Entrar:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
@@ -563,7 +563,7 @@ msgstr "Migrar configuração antiga"
 
 #: ../migrate/main.c:90
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Migrar a antiga configuração 4.6 para XFconf"
+msgstr "Migrar a antiga configuração 4.6 para Xfconf"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
@@ -662,7 +662,7 @@ msgstr "Menu de aplicações"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
-msgstr "Título do bo_tão:"
+msgstr "_Título do botão:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
@@ -674,7 +674,7 @@ msgstr "Ficheiro de menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr "Ficheiro de m_enu:"
+msgstr "Fic_heiro de menu:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
@@ -690,7 +690,7 @@ msgstr "Mostrar d_escrição da aplicação nas dicas"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
-msgstr "Mostrar o nome genérico das _aplicações"
+msgstr "Mostrar o _nome genérico das aplicações"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
@@ -702,7 +702,7 @@ msgstr "Utilizar ficheiro de men_u personalizado:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
-msgstr "Utili_zar menu omisso"
+msgstr "Utili_zar menu por omissão"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
@@ -720,7 +720,7 @@ msgstr "Seleccione um ícone"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2171
+#: ../plugins/launcher/launcher.c:2253
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Falha ao executar o comando \"%s\"."
@@ -767,15 +767,15 @@ msgstr "Abrir menu na posição actual do rato"
 msgid "Show help options"
 msgstr "Mostrar ajuda de opções"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "Semana %V"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "Falha ao executar o comando do relógio"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:718
 msgid "Custom Format"
 msgstr "Formato personalizado"
 
@@ -819,7 +819,7 @@ msgstr "Prec_isão:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
-msgstr "Piscar os separadores de hora"
+msgstr "_Piscar os separadores de hora"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
@@ -861,7 +861,7 @@ msgstr "_Disposição:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
-msgstr "Formato de _dica:"
+msgstr "Forma_to de dica:"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
@@ -1160,34 +1160,30 @@ msgstr "Directório _base:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr "Exemplo do _ficheiro:"
+msgstr "Exemplo do fic_heiro:"
 
-#: ../plugins/launcher/launcher.c:1463
+#: ../plugins/launcher/launcher.c:1545
 msgid "Unnamed Item"
 msgstr "Item sem nome"
 
-#: ../plugins/launcher/launcher.c:1603
+#: ../plugins/launcher/launcher.c:1685
 msgid "No items"
 msgstr "Sem itens"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Se apagar um item, ele será removido para sempre"
 
-#: ../plugins/launcher/launcher-dialog.c:743
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Tem a certeza que quer remover \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "Item sem nome"
 
-#: ../plugins/launcher/launcher-dialog.c:759
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "Falha ao remover o ficheiro do directório de configuração"
-
-#: ../plugins/launcher/launcher-dialog.c:803
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "Falha ao abrir o editor de itens do ambiente de trabalho"
 
@@ -1267,7 +1263,7 @@ msgstr "Lançador de programas com menu opcional"
 #: ../plugins/pager/pager.c:354
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
-msgstr "De_finições da área de trabalho..."
+msgstr "Definiçõe_s da área de trabalho..."
 
 #: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
@@ -1286,7 +1282,7 @@ msgstr "Comportamento"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Number of _rows:"
-msgstr "Númer_o de linhas:"
+msgstr "Número de lin_has:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Show a miniature view of the workspace with rectangles for the visible windows"
@@ -1298,7 +1294,7 @@ msgstr "Mostrar vista de mi_niaturas"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Trocar de área de trabalho utilizando a roda do _rato"
+msgstr "Trocar de área de trabalho utilizando a _roda do rato"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
@@ -1315,7 +1311,7 @@ msgstr "Pontos"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
-msgstr "Manipular"
+msgstr "Manípulo"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
 msgid "New Line"
@@ -1451,7 +1447,7 @@ msgstr "Mostrar as janelas de todos os mo_nitores"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
-msgstr "Ordem de selecçã_o:"
+msgstr "_Ordem de selecção:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
@@ -1474,23 +1470,23 @@ msgstr "A_grupamento de janelas:"
 msgid "Window title"
 msgstr "Título da janela"
 
-#: ../plugins/tasklist/tasklist-widget.c:2990
+#: ../plugins/tasklist/tasklist-widget.c:2997
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:2999
+#: ../plugins/tasklist/tasklist-widget.c:3006
 msgid "Un_minimize All"
-msgstr "Res_taurar todas"
+msgstr "Reverter _minimização"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3014
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "_Unmaximize All"
-msgstr "_Reverter maximização"
+msgstr " _Reverter maximização"
 
-#: ../plugins/tasklist/tasklist-widget.c:3024
+#: ../plugins/tasklist/tasklist-widget.c:3031
 msgid "_Close All"
 msgstr "Fechar _todas"
 
@@ -1561,6 +1557,8 @@ msgstr "Menu da janela"
 msgid "Switch between open windows using a menu"
 msgstr "Trocar entre janelas abertas utilizando um menu"
 
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "Falha ao remover o ficheiro do directório de configuração"
 #~ msgid "Use the _Xfce menu"
 #~ msgstr "Utilizar o menu _Xfce"
 
