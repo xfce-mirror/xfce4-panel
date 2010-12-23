@@ -888,7 +888,9 @@ panel_application_drag_data_received (PanelWindow      *window,
           else
             {
               /* reparent the widget, this will also call remove and add for the itembar */
+              gtk_widget_hide (provider);
               gtk_widget_reparent (provider, itembar);
+              gtk_widget_show (provider);
 
               /* move the item to the correct position on the itembar */
               panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, application->drop_index);
