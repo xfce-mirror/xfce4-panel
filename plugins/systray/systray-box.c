@@ -85,10 +85,6 @@ struct _SystrayBox
   /* all the icons packed in this box */
   GSList       *childeren;
 
-  /* table with names, value contains an uint
-   * that represents the hidden bool */
-  GHashTable   *names;
-
   /* orientation of the box */
   guint         horizontal : 1;
 
@@ -112,9 +108,6 @@ typedef struct
 
   /* invisible icon because of invalid requisition */
   guint         invalid : 1;
-
-  /* the name of the applcation */
-  gchar        *name;
 }
 SystrayBoxChild;
 
