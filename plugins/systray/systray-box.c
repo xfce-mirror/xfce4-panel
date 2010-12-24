@@ -35,8 +35,6 @@
 
 #define SPACING            (2)
 #define OFFSCREEN          (-9999)
-#define IS_HORIZONTAL(box) ((box)->arrow_type == GTK_ARROW_LEFT \
-                            || (box)->arrow_type == GTK_ARROW_RIGHT)
 
 
 
@@ -91,8 +89,8 @@ struct _SystrayBox
    * that represents the hidden bool */
   GHashTable   *names;
 
-  /* position of the arrow button */
-  GtkArrowType  arrow_type;
+  /* orientation of the box */
+  guint         horizontal : 1;
 
   /* hidden childeren counter */
   gint          n_hidden_childeren;
@@ -167,7 +165,7 @@ systray_box_init (SystrayBox *box)
   box->childeren = NULL;
   box->rows = 1;
   box->n_hidden_childeren = 0;
-  box->arrow_type = GTK_ARROW_LEFT;
+  box->horizontal = TRUE;
   box->show_hidden = FALSE;
   box->guess_size = 128;
 }
@@ -330,7 +328,7 @@ systray_box_size_request (GtkWidget      *widget,
     }
 
   /* swap the sizes if the orientation is vertical */
-  if (!IS_HORIZONTAL (box))
+  if (!box->horizontal)
     {
       swap = requisition->width;
       requisition->width = requisition->height;
@@ -381,20 +379,20 @@ systray_box_size_allocate (GtkWidget     *widget,
   /* child size */
   if (box->rows == 1)
     {
-      child_size = IS_HORIZONTAL (box) ? width : height;
+      child_size = box->horizontal ? width : height;
       n = n_children - (box->show_hidden ? 0 : box->n_hidden_childeren);
       child_size -= SPACING * MAX (n - 1, 0);
       if (n > 1)
         child_size /= n;
 
-      if (IS_HORIZONTAL (box))
+      if (box->horizontal)
         y += MAX (height - child_size, 0) / 2;
       else
         x += MAX (width - child_size, 0) / 2;
     }
   else
     {
-      child_size = IS_HORIZONTAL (box) ? height : width;
+      child_size = box->horizontal ? height : width;
       child_size -= SPACING * (box->rows - 1);
       child_size /= box->rows;
     }
@@ -424,18 +422,12 @@ systray_box_size_allocate (GtkWidget     *widget,
           n++;
 
           /* swap coordinates on a vertical panel */
-          if (!IS_HORIZONTAL (box))
+          if (!box->horizontal)
             {
               swap = child_allocation.x;
               child_allocation.x = child_allocation.y;
               child_allocation.y = swap;
             }
-
-          /* invert the icon order if the arrow button position is right or down */
-          if (box->arrow_type == GTK_ARROW_RIGHT)
-            child_allocation.x = width - child_allocation.x - child_size;
-          else if (box->arrow_type == GTK_ARROW_DOWN)
-            child_allocation.y = height - child_allocation.y - child_size;
 
           /* add root */
           child_allocation.x += x;
@@ -661,17 +653,18 @@ systray_box_set_guess_size (SystrayBox *box,
 
 
 void
-systray_box_set_arrow_type (SystrayBox   *box,
-                            GtkArrowType  arrow_type)
+systray_box_set_orientation (SystrayBox     *box,
+                             GtkOrientation  orientation)
 {
+  gboolean horizontal;
+
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
 
-  if (G_LIKELY (arrow_type != box->arrow_type))
+  horizontal = !!(orientation == GTK_ORIENTATION_HORIZONTAL);
+  if (G_LIKELY (box->horizontal != horizontal))
     {
-      /* set new setting */
-      box->arrow_type = arrow_type;
+      box->horizontal = horizontal;
 
-      /* queue a resize */
       if (box->childeren != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
     }

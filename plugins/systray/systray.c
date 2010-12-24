@@ -49,8 +49,6 @@ static void     systray_plugin_set_property                 (GObject            
                                                              GParamSpec            *pspec);
 static void     systray_plugin_construct                    (XfcePanelPlugin       *panel_plugin);
 static void     systray_plugin_free_data                    (XfcePanelPlugin       *panel_plugin);
-static void     systray_plugin_screen_position_changed      (XfcePanelPlugin       *panel_plugin,
-                                                             XfceScreenPosition     screen_position);
 static void     systray_plugin_orientation_changed          (XfcePanelPlugin       *panel_plugin,
                                                              GtkOrientation         orientation);
 static gboolean systray_plugin_size_changed                 (XfcePanelPlugin       *panel_plugin,
@@ -166,7 +164,6 @@ systray_plugin_class_init (SystrayPluginClass *klass)
   plugin_class->construct = systray_plugin_construct;
   plugin_class->free_data = systray_plugin_free_data;
   plugin_class->size_changed = systray_plugin_size_changed;
-  plugin_class->screen_position_changed = systray_plugin_screen_position_changed;
   plugin_class->configure_plugin = systray_plugin_configure_plugin;
   plugin_class->orientation_changed = systray_plugin_orientation_changed;
 
@@ -459,83 +456,16 @@ systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 static void
-systray_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
-                                        XfceScreenPosition  screen_position)
-{
-  SystrayPlugin      *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
-  GdkScreen          *screen;
-  GdkRectangle        geom;
-  gint                mon, x, y;
-  GtkArrowType        arrow_type;
-
-  panel_return_if_fail (GTK_WIDGET_REALIZED (panel_plugin));
-
-  /* get the button position */
-  switch (screen_position)
-    {
-    /*    horizontal west */
-    case XFCE_SCREEN_POSITION_NW_H:
-    case XFCE_SCREEN_POSITION_SW_H:
-      arrow_type = GTK_ARROW_RIGHT;
-      break;
-
-    /* horizontal east */
-    case XFCE_SCREEN_POSITION_N:
-    case XFCE_SCREEN_POSITION_NE_H:
-    case XFCE_SCREEN_POSITION_S:
-    case XFCE_SCREEN_POSITION_SE_H:
-      arrow_type = GTK_ARROW_LEFT;
-      break;
-
-    /* vertical north */
-    case XFCE_SCREEN_POSITION_NW_V:
-    case XFCE_SCREEN_POSITION_NE_V:
-      arrow_type = GTK_ARROW_DOWN;
-      break;
-
-    /* vertical south */
-    case XFCE_SCREEN_POSITION_W:
-    case XFCE_SCREEN_POSITION_SW_V:
-    case XFCE_SCREEN_POSITION_E:
-    case XFCE_SCREEN_POSITION_SE_V:
-      arrow_type = GTK_ARROW_UP;
-      break;
-
-    /* floating */
-    default:
-      /* get the screen information */
-      screen = gtk_widget_get_screen (GTK_WIDGET (panel_plugin));
-      mon = gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (panel_plugin)->window);
-      gdk_screen_get_monitor_geometry (screen, mon, &geom);
-      gdk_window_get_root_origin (GTK_WIDGET (panel_plugin)->window, &x, &y);
-
-      /* get the position based on the screen position */
-      if (screen_position == XFCE_SCREEN_POSITION_FLOATING_H)
-          arrow_type = ((x < (geom.x + geom.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT);
-      else
-          arrow_type = ((y < (geom.y + geom.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP);
-      break;
-    }
-
-  /* set the arrow type of the tray widget */
-  systray_box_set_arrow_type (XFCE_SYSTRAY_BOX (plugin->box), arrow_type);
-
-  /* update the manager orientation */
-  systray_plugin_orientation_changed (panel_plugin,
-      xfce_panel_plugin_get_orientation (panel_plugin));
-}
-
-
-
-static void
 systray_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
                                     GtkOrientation   orientation)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
 
+  xfce_hvbox_set_orientation (XFCE_HVBOX (plugin->hvbox), orientation);
+  systray_box_set_orientation (XFCE_SYSTRAY_BOX (plugin->box), orientation);
+
   if (G_LIKELY (plugin->manager != NULL))
     systray_manager_set_orientation (plugin->manager, orientation);
-  xfce_hvbox_set_orientation (XFCE_HVBOX (plugin->hvbox), orientation);
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     gtk_widget_set_size_request (plugin->button, BUTTON_SIZE, -1);
