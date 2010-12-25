@@ -42,10 +42,12 @@ static void     systray_box_get_property          (GObject         *object,
                                                    guint            prop_id,
                                                    GValue          *value,
                                                    GParamSpec      *pspec);
+/*
 static void     systray_box_set_property          (GObject         *object,
                                                    guint            prop_id,
                                                    const GValue    *value,
                                                    GParamSpec      *pspec);
+*/
 static void     systray_box_finalize              (GObject         *object);
 static void     systray_box_size_request          (GtkWidget       *widget,
                                                    GtkRequisition  *requisition);
@@ -116,7 +118,7 @@ systray_box_class_init (SystrayBoxClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = systray_box_get_property;
-  gobject_class->set_property = systray_box_set_property;
+  /*gobject_class->set_property = systray_box_set_property;*/
   gobject_class->finalize = systray_box_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
@@ -177,13 +179,14 @@ systray_box_get_property (GObject      *object,
 
 
 
+/*
 static void
 systray_box_set_property (GObject      *object,
                           guint         prop_id,
                           const GValue *value,
                           GParamSpec   *pspec)
 {
-  /*SystrayBox   *box = XFCE_SYSTRAY_BOX (object);*/
+  SystrayBox *box = XFCE_SYSTRAY_BOX (object);
 
   switch (prop_id)
     {
@@ -192,6 +195,7 @@ systray_box_set_property (GObject      *object,
       break;
     }
 }
+*/
 
 
 
@@ -205,7 +209,7 @@ systray_box_finalize (GObject *object)
     {
       /* free the child list */
       g_slist_free (box->childeren);
-      g_debug ("Leaking memory, not all children have been removed");
+      g_debug ("Not all icons has been removed from the systray.");
     }
 
   G_OBJECT_CLASS (systray_box_parent_class)->finalize (object);
@@ -494,7 +498,7 @@ systray_box_remove (GtkContainer *container,
       box->childeren = g_slist_remove_link (box->childeren, li);
       gtk_widget_unparent (child);
 
-      /* resize, so we update the n_children in allocation */
+      /* resize, so we update has-hidden */
       gtk_widget_queue_resize (GTK_WIDGET (container));
     }
 }
@@ -533,29 +537,29 @@ static gint
 systray_box_compare_function (gconstpointer a,
                               gconstpointer b)
 {
-  GtkWidget   *child_a = GTK_WIDGET (a);
-  GtkWidget   *child_b = GTK_WIDGET (b);
-  const gchar *name_a;
-  const gchar *name_b;
+  const gchar *name_a, *name_b;
+  gboolean     hidden_a, hidden_b;
 
   /* sort hidden icons before visible ones */
-  if (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_a))
-      != systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_b)))
-    return (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child_a)) ? -1 : 1);
+  hidden_a = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (a));
+  hidden_b = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (b));
+  if (hidden_a != hidden_b)
+    return hidden_a ? -1 : 1;
 
-  /* put icons without name after the hidden icons */
-  name_a = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child_a));
-  name_b = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child_b));
-  if (exo_str_is_empty (name_a) || exo_str_is_empty (name_b))
-    {
-      if (!exo_str_is_empty (name_a) == !exo_str_is_empty (name_b))
-        return 0;
-      else
-        return exo_str_is_empty (name_a) ? -1 : 1;
-    }
+  /* sort icons by name */
+  name_a = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (a));
+  name_b = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (b));
 
-  /* sort by name */
+#if GLIB_CHECK_VERSION (2, 16, 0)
+  return g_strcmp0 (name_a, name_b);
+#else
+  if (name_a == NULL)
+    return -(name_a != name_b);
+  if (name_b == NULL)
+    return name_a != name_b;
+
   return strcmp (name_a, name_b);
+#endif
 }
 
 
