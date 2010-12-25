@@ -53,8 +53,6 @@ static void     systray_box_size_request          (GtkWidget       *widget,
                                                    GtkRequisition  *requisition);
 static void     systray_box_size_allocate         (GtkWidget       *widget,
                                                    GtkAllocation   *allocation);
-static gboolean systray_box_expose_event          (GtkWidget       *widget,
-                                                   GdkEventExpose  *event);
 static void     systray_box_add                   (GtkContainer    *container,
                                                    GtkWidget       *child);
 static void     systray_box_remove                (GtkContainer    *container,
@@ -124,7 +122,6 @@ systray_box_class_init (SystrayBoxClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->size_request = systray_box_size_request;
   gtkwidget_class->size_allocate = systray_box_size_allocate;
-  gtkwidget_class->expose_event = systray_box_expose_event;
 
   gtkcontainer_class = GTK_CONTAINER_CLASS (klass);
   gtkcontainer_class->add = systray_box_add;
@@ -413,50 +410,6 @@ systray_box_size_allocate (GtkWidget     *widget,
       /* allocate widget size */
       gtk_widget_size_allocate (child, &child_alloc);
     }
-}
-
-
-
-static gboolean
-systray_box_expose_event (GtkWidget      *widget,
-                          GdkEventExpose *event)
-{
-  SystrayBox    *box = XFCE_SYSTRAY_BOX (widget);
-  cairo_t       *cr;
-  GtkWidget     *child;
-  GSList        *li;
-  gboolean       result;
-  GtkAllocation *child_alloc;
-
-  result = GTK_WIDGET_CLASS (systray_box_parent_class)->expose_event (widget, event);
-
-  if (gtk_widget_is_composited (widget))
-    {
-      cr = gdk_cairo_create (widget->window);
-      gdk_cairo_region (cr, event->region);
-      cairo_clip (cr);
-
-      for (li = box->childeren; li != NULL; li = li->next)
-        {
-          child = GTK_WIDGET (li->data);
-          child_alloc = &child->allocation;
-
-          /* skip invisible (offscreen) or not composited children */
-          if (child_alloc->x < 0
-              || child_alloc->y < 0
-              || !systray_socket_is_composited (XFCE_SYSTRAY_SOCKET (child)))
-            continue;
-
-          /* paint the child */
-          gdk_cairo_set_source_pixmap (cr, gtk_widget_get_window (child),
-                                       child_alloc->x, child_alloc->y);
-          cairo_paint (cr);
-        }
-
-      cairo_destroy (cr);
-    }
-
-  return result;
 }
 
 
