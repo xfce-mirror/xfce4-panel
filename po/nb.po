@@ -4,7 +4,7 @@
 # Eskild Hustvedt <eskild@goldenfiles.com>, 2004.
 # Christian Lomsdalen <christian@vindstille.net>, 2007.
 # Terje Uriansrud <terje@uriansrud.net>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
@@ -19,11 +19,8 @@ msgstr ""
 "Language: nb\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"Legg til ny programstarter til panelet basert på informasjonen i denne "
-"skrivebordsfilen"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Legg til ny programstarter til panelet basert på informasjonen i denne skrivebordsfilen"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -44,16 +41,12 @@ msgid "_Read Online"
 msgstr "_Les på nettet"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Du kan lese brukermanualen på nettet. Denne manualen kan være skrevet for "
-"en annen versjon enn du benytter."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Du kan lese brukermanualen på nettet. Denne manualen kan være skrevet for en annen versjon enn du benytter."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
-msgstr ""
+msgstr "Brukermanualen er ikke installert på din maskin"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -70,8 +63,7 @@ msgstr "Er du sikker på at du vil fjerne «%s»?"
 #: ../libxfce4panel/xfce-panel-plugin.c:892
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
-"Hvis du sletter elementer fra panelet vil den slettes permanent."
+msgstr "Hvis du sletter elementer fra panelet vil den slettes permanent."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1052
@@ -193,12 +185,8 @@ msgid "Failed to send D-Bus message"
 msgstr "Klarte ikke sende D-Bus melding"
 
 #: ../panel/main.c:361
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Ønsker du å starte panelet? Hvis ja, sørg for å lagre økten ved utlogging "
-", slik at panelet startes automatisk neste gang du logger inn."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Ønsker du å starte panelet? Hvis ja, sørg for å lagre økten ved utlogging , slik at panelet startes automatisk neste gang du logger inn."
 
 #: ../panel/main.c:364 ../panel/main.c:378
 #, c-format
@@ -210,12 +198,8 @@ msgid "Failed to launch the migration application"
 msgstr "Klarte ikke starte migreringsapplikasjon"
 
 #: ../panel/panel-application.c:1423 ../plugins/actions/actions.c:413
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
-msgstr ""
-"Du har startet X uten en øktbehandler. Ved å klikke Avslutt lukkes "
-"X tjeneren."
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "Du har startet X uten en øktbehandler. Ved å klikke Avslutt lukkes X tjeneren."
 
 #: ../panel/panel-application.c:1424 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
@@ -227,18 +211,13 @@ msgid "Failed to execute command \"%s\""
 msgstr "Klarte ikke kjøre kommandoen «%s»"
 
 #: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Ugyldug programtillett hendelsessyntaks. Bruk PLUGIN-NAVN:NAVN[:TYPE:VERDI]."
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Ugyldug programtillett hendelsessyntaks. Bruk PLUGIN-NAVN:NAVN[:TYPE:VERDI]."
 
 #: ../panel/panel-dbus-client.c:242
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Ugyldig hinttype \"%s\". Gyldige verdier er bool, double, int, string "
-"og unit."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "Ugyldig hinttype \"%s\". Gyldige verdier er bool, double, int, string og unit."
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -264,12 +243,8 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"Ettersom panelet kjører i kiosk-modus, kan du ikke gjøre endringer "
-"på panelinnstillinger som vanlig bruker"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "Ettersom panelet kjører i kiosk-modus, kan du ikke gjøre endringer på panelinnstillinger som vanlig bruker"
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -295,19 +270,12 @@ msgstr "Skriv inn søkeord her"
 #: ../panel/panel-plugin-external.c:418
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"Programtillegg \"%s\" forsvant uventet fra panelet, ønsker du å restarte det?"
+msgstr "Programtillegg \"%s\" forsvant uventet fra panelet, ønsker du å restarte det?"
 
 #: ../panel/panel-plugin-external.c:420
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"Programtillegget startet på nytt mer enn en gang de siste %d sekunder. Hvis "
-"du velger Start så vil panelet forsøke å starte på nytt igjen ellers vil det "
-"permanent fjernes fra panelet."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "Programtillegget startet på nytt mer enn en gang de siste %d sekunder. Hvis du velger Start så vil panelet forsøke å starte på nytt igjen ellers vil det permanent fjernes fra panelet."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -372,12 +340,8 @@ msgid "Add new item to this panel"
 msgstr "Legg til nytt element på dette panelet"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-"Alfaverdien til panelbakgrunnen. hvor 0 er gjennomsiktig og 100 er "
-"ugjennomsitkig."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgstr "Alfaverdien til panelbakgrunnen. hvor 0 er gjennomsiktig og 100 er ugjennomsitkig."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -426,7 +390,8 @@ msgstr "Ele_menter"
 msgid "L_ength (%):"
 msgstr "L_engde (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Mål"
@@ -470,30 +435,20 @@ msgid "Select A Background Image"
 msgstr "Velg et bakgrunnsbilde"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-"Velg denne for å automatisk øke panellengden hvis programtillegg krever "
-"mer plass."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgstr "Velg denne for å automatisk øke panellengden hvis programtillegg krever mer plass."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Velg denne for å forlenge panelet over flere skjermer."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Velg denne for å skjule panelhåndtak og låse posisjonen."
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Velg denne for å skjule panelhåndtak og låse posisjonen."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Velg denne for å skjule panelet når musepekeren ikke berører panelet. Dette "
-"fungerer kun hvis panelet er plassert til en skjermkant."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Velg denne for å skjule panelet når musepekeren ikke berører panelet. Dette fungerer kun hvis panelet er plassert til en skjermkant."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -508,20 +463,12 @@ msgid "Span mo_nitors"
 msgstr "Flyt over flere s_kjermer"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Gjennomsiktighet når musepekeren er over panelet, hvor 0 er "
-"gjennomsiktig og 100 er ugjennomsiktig."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Gjennomsiktighet når musepekeren er over panelet, hvor 0 er gjennomsiktig og 100 er ugjennomsiktig."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr ""
-"Gjennomsiktighet når musepekeren er over panelet, hvor 0 er "
-"gjennomsiktig og 100 er ugjennomsiktig."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Gjennomsiktighet når musepekeren er over panelet, hvor 0 er gjennomsiktig og 100 er ugjennomsiktig."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -591,12 +538,8 @@ msgid "Welcome to the first start of the panel"
 msgstr "Velkommen til førte oppstart av panelet"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"Fordi panelet er flyttet til et nytt system for lagring, må det lastes "
-"en oppdatert startkonfigurasjon."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Fordi panelet er flyttet til et nytt system for lagring, må det lastes en oppdatert startkonfigurasjon."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -726,12 +669,8 @@ msgid "Select A Menu File"
 msgstr "Velg en menyfil"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Velg denne for å vise generisk applikasjonsnavn i menyen, for eksempel "
-"\"Filbehandler\" istedet for \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Velg denne for å vise generisk applikasjonsnavn i menyen, for eksempel \"Filbehandler\" istedet for \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -784,8 +723,7 @@ msgstr "Klarte ikke laste applikasjonsmeny"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
-"Vis meny som inneholder kategorier av installerte applikasjoner"
+msgstr "Vis meny som inneholder kategorier av installerte applikasjoner"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -809,7 +747,7 @@ msgstr "Innstillinger"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Hurtigmeny ved musposisjon"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
@@ -862,7 +800,8 @@ msgstr "Vis _sekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "F_uzziness:"
@@ -898,15 +837,8 @@ msgstr "Vis _rutenett"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"Formatet beskriver dato og tidspunkt-delene som settes i filnavnet. "
-"For eksempel vil %Y erstattes med år, %m med måned og %d ned dag. "
-"Se dokumentasjon for date programmet for tilleggsinformasjon."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "Formatet beskriver dato og tidspunkt-delene som settes i filnavnet. For eksempel vil %Y erstattes med år, %m med måned og %d ned dag. Se dokumentasjon for date programmet for tilleggsinformasjon."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1174,8 +1106,7 @@ msgstr "Klarte ikke starte standard applikasjon for «%s»"
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
-"Klarte ikke kjøre foretrukket applikasjon for kateegori \"%s\""
+msgstr "Klarte ikke kjøre foretrukket applikasjon for kateegori \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
@@ -1195,14 +1126,8 @@ msgid "Show a directory tree in a menu"
 msgstr "Vis mappestruktur i en meny"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Skriv inn en liste over mønstre som brukes for å avgjøre hvilke filer som "
-"er synlige i en mappe. Hvis du angir men enn ett mønster må de skilles med "
-"semikolon (f.eks *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Skriv inn en liste over mønstre som brukes for å avgjøre hvilke filer som er synlige i en mappe. Hvis du angir men enn ett mønster må de skilles med semikolon (f.eks *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1297,12 +1222,8 @@ msgid "North"
 msgstr "Nord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Velg denne for å skru av verktøytips når musepekeren beveger seg over "
-"knapper eller menyvalg."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgstr "Velg denne for å skru av verktøytips når musepekeren beveger seg over knapper eller menyvalg."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1355,11 +1276,8 @@ msgid "Number of _rows:"
 msgstr "Antall _rader:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr ""
-"Vis miniatyrbilde av arbeidsområdet med rektangler for synlige vinduer"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
+msgstr "Vis miniatyrbilde av arbeidsområdet med rektangler for synlige vinduer"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1429,12 +1347,8 @@ msgstr "Klarte ikke starte opp varslingsområdet"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:569
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
-msgstr ""
-"Sannsynligvis tok et annet skjermelement over funksjonen til et "
-"varslingsområde. Dette området vil ikke bli brukt."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Sannsynligvis tok et annet skjermelement over funksjonen til et varslingsområde. Dette området vil ikke bli brukt."
 
 #: ../plugins/systray/systray.c:571
 msgid "The notification area lost selection"
