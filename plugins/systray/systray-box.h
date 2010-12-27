@@ -22,6 +22,11 @@
 typedef struct _SystrayBoxClass SystrayBoxClass;
 typedef struct _SystrayBox      SystrayBox;
 
+/* keep those in sync with the glade file too! */
+#define SIZE_MAX_MIN     (12)
+#define SIZE_MAX_MAX     (64)
+#define SIZE_MAX_DEFAULT (22)
+
 #define XFCE_TYPE_SYSTRAY_BOX            (systray_box_get_type ())
 #define XFCE_SYSTRAY_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_SYSTRAY_BOX, SystrayBox))
 #define XFCE_SYSTRAY_BOX_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_SYSTRAY_BOX, SystrayBoxClass))
@@ -35,16 +40,16 @@ void       systray_box_register_type   (XfcePanelTypeModule *module);
 
 GtkWidget *systray_box_new             (void) G_GNUC_MALLOC;
 
-void       systray_box_set_guess_size  (SystrayBox          *box,
-                                        gint                 guess_size);
-
 void       systray_box_set_orientation (SystrayBox          *box,
                                         GtkOrientation       orientation);
 
-void       systray_box_set_rows        (SystrayBox          *box,
-                                        gint                 rows);
+void       systray_box_set_size_max    (SystrayBox          *box,
+                                        gint                 size_max);
 
-gint       systray_box_get_rows        (SystrayBox          *box);
+gint       systray_box_get_size_max    (SystrayBox          *box);
+
+void       systray_box_set_size_alloc  (SystrayBox          *box,
+                                        gint                 size_alloc);
 
 void       systray_box_set_show_hidden (SystrayBox          *box,
                                         gboolean             show_hidden);

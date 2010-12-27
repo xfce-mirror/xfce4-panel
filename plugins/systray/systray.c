@@ -34,9 +34,9 @@
 #include "systray-manager.h"
 #include "systray-dialog_ui.h"
 
-#define ICON_SIZE   (22)
-#define BUTTON_SIZE (16)
-
+#define ICON_SIZE     (22)
+#define BUTTON_SIZE   (16)
+#define FRAME_SPACING (1)
 
 
 static void     systray_plugin_get_property                 (GObject               *object,
@@ -118,7 +118,7 @@ struct _SystrayPlugin
 enum
 {
   PROP_0,
-  PROP_ROWS,
+  PROP_SIZE_MAX,
   PROP_SHOW_FRAME,
   PROP_NAMES_HIDDEN,
   PROP_NAMES_VISIBLE
@@ -174,10 +174,12 @@ systray_plugin_class_init (SystrayPluginClass *klass)
   plugin_class->orientation_changed = systray_plugin_orientation_changed;
 
   g_object_class_install_property (gobject_class,
-                                   PROP_ROWS,
-                                   g_param_spec_uint ("rows",
+                                   PROP_SIZE_MAX,
+                                   g_param_spec_uint ("size-max",
                                                       NULL, NULL,
-                                                      1, 10, 1,
+                                                      SIZE_MAX_MIN,
+                                                      SIZE_MAX_MAX,
+                                                      SIZE_MAX_DEFAULT,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -225,6 +227,7 @@ systray_plugin_init (SystrayPlugin *plugin)
   gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->box, TRUE, TRUE, 0);
   g_signal_connect (G_OBJECT (plugin->box), "expose-event",
       G_CALLBACK (systray_plugin_box_expose_event), NULL);
+  gtk_container_set_border_width (GTK_CONTAINER (plugin->box), FRAME_SPACING);
   gtk_widget_show (plugin->box);
 
   plugin->button = xfce_arrow_button_new (GTK_ARROW_RIGHT);
@@ -245,14 +248,13 @@ systray_plugin_get_property (GObject    *object,
                              GParamSpec *pspec)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
-  guint          rows;
   GPtrArray     *array;
 
   switch (prop_id)
     {
-    case PROP_ROWS:
-      rows = systray_box_get_rows (XFCE_SYSTRAY_BOX (plugin->box));
-      g_value_set_uint (value, rows);
+    case PROP_SIZE_MAX:
+      g_value_set_uint (value,
+          systray_box_get_size_max (XFCE_SYSTRAY_BOX (plugin->box)));
       break;
 
     case PROP_SHOW_FRAME:
@@ -297,9 +299,9 @@ systray_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_ROWS:
-      systray_box_set_rows (XFCE_SYSTRAY_BOX (plugin->box),
-                            g_value_get_uint (value));
+    case PROP_SIZE_MAX:
+      systray_box_set_size_max (XFCE_SYSTRAY_BOX (plugin->box),
+                                g_value_get_uint (value));
       break;
 
     case PROP_SHOW_FRAME:
@@ -309,6 +311,9 @@ systray_plugin_set_property (GObject      *object,
           plugin->show_frame = show_frame;
           gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
               show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
+
+          gtk_container_set_border_width (GTK_CONTAINER (plugin->box),
+              plugin->show_frame ? FRAME_SPACING : 0);
         }
       break;
 
@@ -418,7 +423,7 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   SystrayPlugin       *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
-    { "rows", G_TYPE_UINT },
+    { "size-max", G_TYPE_UINT },
     { "show-frame", G_TYPE_BOOLEAN },
     { "names-visible", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
     { "names-hidden", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
@@ -498,10 +503,12 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     border = 1;
   gtk_container_set_border_width (GTK_CONTAINER (frame), border);
 
-  /* set the guess size this is used to get the initial icon size request
-   * correct to avoid flickering in the system tray for new applications */
+  /* because the allocated size, used in size_requested is always 1 step
+   * behind the allocated size when resizing and during startup, we
+   * correct the maximum size set by the user with the size the panel
+   * will most likely allocated */
   border += MAX (frame->style->xthickness, frame->style->ythickness);
-  systray_box_set_guess_size (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border);
+  systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border);
 
   return TRUE;
 }
@@ -522,9 +529,9 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (G_UNLIKELY (builder == NULL))
     return;
 
-  object = gtk_builder_get_object (builder, "rows");
+  object = gtk_builder_get_object (builder, "size-max");
   panel_return_if_fail (GTK_IS_WIDGET (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "rows",
+  exo_mutual_binding_new (G_OBJECT (plugin), "size-max",
                           G_OBJECT (object), "value");
 
   object = gtk_builder_get_object (builder, "show-frame");

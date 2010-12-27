@@ -23,6 +23,9 @@
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 #include <exo/exo.h>
 #include <gtk/gtk.h>
@@ -33,8 +36,11 @@
 #include "systray-box.h"
 #include "systray-socket.h"
 
-#define SPACING            (2)
-#define OFFSCREEN          (-9999)
+#define SPACING    (2)
+#define OFFSCREEN  (-9999)
+
+/* some icon implementations request a 1x1 size for invisible icons */
+#define REQUISITION_IS_INVISIBLE(child_req) ((child_req).width <= 1 && (child_req).height <= 1)
 
 
 
@@ -90,15 +96,16 @@ struct _SystrayBox
 
   /* hidden childeren counter */
   gint          n_hidden_childeren;
+  gint          n_visible_children;
 
   /* whether hidden icons are visible */
   guint         show_hidden : 1;
 
-  /* number of rows */
-  gint          rows;
+  /* maximum icon size */
+  gint          size_max;
 
-  /* guess size, this is a value used to reduce the tray flickering */
-  gint          guess_size;
+  /* allocated size by the plugin */
+  gint          size_alloc;
 };
 
 
@@ -145,11 +152,12 @@ systray_box_init (SystrayBox *box)
   GTK_WIDGET_SET_FLAGS (box, GTK_NO_WINDOW);
 
   box->childeren = NULL;
-  box->rows = 1;
+  box->size_max = SIZE_MAX_DEFAULT;
+  box->size_alloc = SIZE_MAX_DEFAULT;
   box->n_hidden_childeren = 0;
+  box->n_visible_children = 0;
   box->horizontal = TRUE;
   box->show_hidden = FALSE;
-  box->guess_size = 128;
 }
 
 
@@ -215,96 +223,173 @@ systray_box_finalize (GObject *object)
 
 
 static void
+systray_box_size_get_max_child_size (SystrayBox *box,
+                                     gint        alloc_size,
+                                     gint       *rows_ret,
+                                     gint       *row_size_ret,
+                                     gint       *offset_ret)
+{
+  GtkWidget *widget = GTK_WIDGET (box);
+  gint       size;
+  gint       rows;
+  gint       row_size;
+
+  alloc_size -= 2 * GTK_CONTAINER (widget)->border_width;
+
+  /* count the number of rows that fit in the allocated space */
+  for (rows = 1;; rows++)
+    {
+      size = rows * box->size_max + (rows - 1) * SPACING;
+      if (size < alloc_size)
+        continue;
+
+      /* decrease rows if the new size doesn't fit */
+      if (rows > 1 && size > alloc_size)
+        rows--;
+
+      break;
+    }
+
+  row_size = (alloc_size - (rows - 1) * SPACING) / rows;
+  row_size = MIN (box->size_max, row_size);
+
+  if (rows_ret != NULL)
+    *rows_ret = rows;
+
+  if (row_size_ret != NULL)
+    *row_size_ret = row_size;
+
+  if (offset_ret != NULL)
+    {
+      rows = MIN (rows, box->n_visible_children);
+      *offset_ret = (alloc_size - (rows * row_size + (rows - 1) * SPACING)) / 2;
+      if (*offset_ret < 1)
+        *offset_ret = 0;
+    }
+}
+
+
+
+static void
 systray_box_size_request (GtkWidget      *widget,
                           GtkRequisition *requisition)
 {
-  SystrayBox      *box = XFCE_SYSTRAY_BOX (widget);
-  GSList          *li;
-  GtkWidget       *child;
-  gint             n_columns;
-  gint             child_size = -1;
-  GtkRequisition   child_req;
-  gint             n_visible_childeren = 0;
-  gint             swap;
-  gint             guess_size, icon_size;
-  gint             n_hidden_childeren = 0;
-  gboolean         hidden;
+  SystrayBox     *box = XFCE_SYSTRAY_BOX (widget);
+  GtkWidget      *child;
+  gint            border;
+  GtkRequisition  child_req;
+  gint            n_hidden_childeren = 0;
+  gint            rows;
+  gdouble         cols;
+  gint            row_size;
+  gdouble         cells;
+  gint            min_seq_cells = -1;
+  gdouble         ratio;
+  GSList         *li;
+  gboolean        hidden;
+  gint            col_px;
+  gint            row_px;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (widget));
-  panel_return_if_fail (requisition != NULL);
+  box->n_visible_children = 0;
 
-  /* get the guess size */
-  guess_size = box->guess_size - (SPACING * (box->rows - 1));
-  guess_size /= box->rows;
+  /* get some info about the n_rows we're going to allocate */
+  systray_box_size_get_max_child_size (box, box->size_alloc, &rows, &row_size, NULL);
 
-  /* check if we need to hide or show any childeren */
-  for (li = box->childeren; li != NULL; li = li->next)
+  for (li = box->childeren, cells = 0.00; li != NULL; li = li->next)
     {
       child = GTK_WIDGET (li->data);
+      panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (child));
 
-      /* get the icons size request */
       gtk_widget_size_request (child, &child_req);
 
-      /* a 1x1px request is in some tray implementations the same as
-       * an invisible icon, we allocate those offscreen in allocate */
-      if (child_req.width <= 1 && child_req.height <= 1)
+      /* skip invisible requisitions (see macro) or hidden widgets */
+      if (REQUISITION_IS_INVISIBLE (child_req)
+          || !GTK_WIDGET_VISIBLE (child))
         continue;
 
       hidden = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child));
-
-      if (!hidden || box->show_hidden)
-        {
-          /* get the icon size */
-          icon_size = MIN (guess_size, MAX (child_req.width, child_req.height));
-
-          /* pick largest icon */
-          if (G_UNLIKELY (child_size == -1))
-            child_size = icon_size;
-          else
-            child_size = MAX (child_size, icon_size);
-
-          /* increase number of visible childeren */
-          n_visible_childeren++;
-        }
-
       if (hidden)
         n_hidden_childeren++;
+
+      /* if we show hidden icons */
+      if (!hidden || box->show_hidden)
+        {
+          /* special handling for non-squared icons. this only works if
+           * the icon size ratio is > 1.00, if this is lower then 1.00
+           * the icon implementation should respect the tray orientation */
+          if (G_UNLIKELY (child_req.width != child_req.height))
+            {
+              ratio = (gdouble) child_req.width / (gdouble) child_req.height;
+              if (!box->horizontal)
+                ratio = 1 / ratio;
+
+              if (ratio > 1.00)
+                {
+                  if (G_UNLIKELY (rows > 1))
+                    {
+                      /* align to whole blocks if we have multiple rows */
+                      ratio = ceil (ratio);
+
+                      /* update the min sequential number of blocks */
+                      min_seq_cells = MAX (min_seq_cells, ratio);
+                    }
+
+                  cells += ratio;
+
+                  continue;
+                }
+            }
+
+          /* don't do anything with the actual size,
+           * just count the number of cells */
+          cells += 1.00;
+          box->n_visible_children++;
+        }
     }
 
-  /* update the visibility of the arrow button */
+  if (cells > 0.00)
+    {
+      cols = cells / (gdouble) rows;
+      if (rows > 1)
+        cols = ceil (cols);
+      if (cols * rows < cells)
+        cols += 1.00;
+
+      /* make sure we have enough columns to fix the minimum amount of cells */
+      if (min_seq_cells != -1)
+        cols = MAX (min_seq_cells, cols);
+
+      col_px = row_size * cols + (cols - 1) * SPACING;
+      row_px = row_size * rows + (rows - 1) * SPACING;
+
+      if (box->horizontal)
+        {
+          requisition->width = col_px;
+          requisition->height = row_px;
+        }
+      else
+        {
+          requisition->width = row_px;
+          requisition->height = col_px;
+        }
+    }
+  else
+    {
+      requisition->width = 0;
+      requisition->height = 0;
+    }
+
+  /* emit property if changed */
   if (box->n_hidden_childeren != n_hidden_childeren)
     {
       box->n_hidden_childeren = n_hidden_childeren;
       g_object_notify (G_OBJECT (box), "has-hidden");
     }
 
-  /* number of columns */
-  n_columns = n_visible_childeren / box->rows;
-  if (n_visible_childeren > (n_columns * box->rows))
-    n_columns++;
-
-  /* set the width and height needed for the icons */
-  if (n_visible_childeren > 0)
-    {
-      requisition->width = ((child_size + SPACING) * n_columns) - SPACING;
-      requisition->height = ((child_size + SPACING) * box->rows) - SPACING;
-    }
-  else
-    {
-      requisition->width = requisition->height = 0;
-    }
-
-  /* swap the sizes if the orientation is vertical */
-  if (!box->horizontal)
-    {
-      swap = requisition->width;
-      requisition->width = requisition->height;
-      requisition->height = swap;
-    }
-
-  /* add container border */
-  requisition->width += GTK_CONTAINER (widget)->border_width * 2;
-  requisition->height += GTK_CONTAINER (widget)->border_width * 2;
+  /* add border size */
+  border = GTK_CONTAINER (widget)->border_width * 2;
+  requisition->width += border;
+  requisition->height += border;
 }
 
 
@@ -313,101 +398,152 @@ static void
 systray_box_size_allocate (GtkWidget     *widget,
                            GtkAllocation *allocation)
 {
-  SystrayBox      *box = XFCE_SYSTRAY_BOX (widget);
-  GtkWidget       *child;
-  GSList          *li;
-  gint             n;
-  gint             x, y;
-  gint             width, height;
-  gint             offset = 0;
-  gint             child_size;
-  GtkAllocation    child_alloc;
-  GtkRequisition   child_req;
-  gint             swap;
-  gint             n_children;
+  SystrayBox     *box = XFCE_SYSTRAY_BOX (widget);
+  GtkWidget      *child;
+  GtkAllocation   child_alloc;
+  GtkRequisition  child_req;
+  gint            border;
+  gint            rows;
+  gint            row_size;
+  gdouble         ratio;
+  gint            x, x_start, x_end;
+  gint            y, y_start, y_end;
+  gint            offset;
+  GSList         *li;
+  gint            alloc_size;
+  gint            idx;
 
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (widget));
-  panel_return_if_fail (allocation != NULL);
-
-  /* set widget allocation */
   widget->allocation = *allocation;
 
-  n_children = g_slist_length (box->childeren);
-  if (n_children == 0)
-    return;
+  border = GTK_CONTAINER (widget)->border_width;
 
-  /* get root coordinates */
-  x = allocation->x + GTK_CONTAINER (widget)->border_width;
-  y = allocation->y + GTK_CONTAINER (widget)->border_width;
+  alloc_size = box->horizontal ? widget->allocation.height : widget->allocation.width;
+  systray_box_size_get_max_child_size (box, alloc_size, &rows, &row_size, &offset);
 
-  /* get real size */
-  width = allocation->width - 2 * GTK_CONTAINER (widget)->border_width;
-  height = allocation->height - 2 * GTK_CONTAINER (widget)->border_width;
+  /* get allocation bounds */
+  x_start = allocation->x + border;
+  x_end = allocation->x + allocation->width - border;
 
-  /* child size */
-  if (box->rows == 1)
-    {
-      child_size = box->horizontal ? width : height;
-      n = n_children - (box->show_hidden ? 0 : box->n_hidden_childeren);
-      child_size -= SPACING * MAX (n - 1, 0);
-      if (n > 1)
-        child_size /= n;
+  y_start = allocation->y + border;
+  y_end = allocation->y + allocation->height - border;
 
-      if (box->horizontal)
-        y += MAX (height - child_size, 0) / 2;
-      else
-        x += MAX (width - child_size, 0) / 2;
-    }
+  /* add offset to center the tray contents */
+  if (box->horizontal)
+    y_start += offset;
   else
-    {
-      child_size = box->horizontal ? height : width;
-      child_size -= SPACING * (box->rows - 1);
-      child_size /= box->rows;
-    }
+    x_start += offset;
 
-  /* don't allocate zero width icon */
-  if (child_size < 1)
-    child_size = 1;
+  restart_allocation:
 
-  /* position icons */
-  for (li = box->childeren, n = 0; li != NULL; li = li->next)
+  x = x_start;
+  y = y_start;
+
+  for (li = box->childeren; li != NULL; li = li->next)
     {
       child = GTK_WIDGET (li->data);
+      panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (child));
+
+      if (!GTK_WIDGET_VISIBLE (child))
+        continue;
 
       gtk_widget_get_child_requisition (child, &child_req);
-      if ((child_req.width == 1 && child_req.height == 1)
-          || (systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child)) && !box->show_hidden))
+
+      if (REQUISITION_IS_INVISIBLE (child_req)
+          || (!box->show_hidden
+              && systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child))))
         {
-          /* put icons offscreen */
+          /* position hidden icons offscreen if we don't show hidden icons
+           * or the requested size looks like an invisible icons (see macro) */
           child_alloc.x = child_alloc.y = OFFSCREEN;
+
+          /* do nothing special with the requested size */
+          child_alloc.width = child_req.width;
+          child_alloc.height = child_req.height;
         }
       else
         {
-          /* set coordinates */
-          child_alloc.x = (child_size + SPACING) * (n / box->rows) + offset;
-          child_alloc.y = (child_size + SPACING) * (n % box->rows);
-
-          /* increase item counter */
-          n++;
-
-          /* swap coordinates on a vertical panel */
-          if (!box->horizontal)
+          /* special case handling for non-squared icons */
+          if (G_UNLIKELY (child_req.width != child_req.height))
             {
-              swap = child_alloc.x;
-              child_alloc.x = child_alloc.y;
-              child_alloc.y = swap;
+              ratio = (gdouble) child_req.width / (gdouble) child_req.height;
+
+              if (box->horizontal)
+                {
+                  child_alloc.height = row_size;
+                  child_alloc.width = row_size * ratio;
+                  child_alloc.y = child_alloc.x = 0;
+
+                  if (rows > 1)
+                    {
+                      ratio = ceil (ratio);
+                      child_alloc.x = ((ratio * row_size) - child_alloc.width) / 2;
+                    }
+                }
+              else
+                {
+                  ratio = 1 / ratio;
+
+                  child_alloc.width = row_size;
+                  child_alloc.height = row_size * ratio;
+                  child_alloc.x = child_alloc.y = 0;
+
+                  if (rows > 1)
+                    {
+                      ratio = ceil (ratio);
+                      child_alloc.y = ((ratio * row_size) - child_alloc.height) / 2;
+                    }
+                }
+            }
+          else
+            {
+              /* fix icon to row size */
+              child_alloc.width = row_size;
+              child_alloc.height = row_size;
+              child_alloc.x = 0;
+              child_alloc.y = 0;
+
+              ratio = 1.00;
             }
 
-          /* add root */
+          if ((box->horizontal && x + child_alloc.width > x_end)
+              || (!box->horizontal && y + child_alloc.height > y_end))
+            {
+              if (ratio >= 2
+                  && li->next != NULL)
+                {
+                  /* child doesn't fit, but maybe we still have space for the
+                   * next icon, so move the child 1 step forward in the list
+                   * and restart allocating the box */
+                  idx = g_slist_position (box->childeren, li);
+                  box->childeren = g_slist_delete_link (box->childeren, li);
+                  box->childeren = g_slist_insert (box->childeren, child, idx + 1);
+
+                  goto restart_allocation;
+                }
+
+              /* TODO maybe restart allocating with row_size-- if new row
+               * doesn't fit? */
+              if (box->horizontal)
+                {
+                  x = x_start;
+                  y += row_size + SPACING;
+                }
+              else
+                {
+                  y = y_start;
+                  x += row_size + SPACING;
+                }
+            }
+
           child_alloc.x += x;
           child_alloc.y += y;
+
+          if (box->horizontal)
+            x += row_size * ratio + SPACING;
+          else
+            y += row_size * ratio + SPACING;
         }
 
-      /* set child width and height */
-      child_alloc.width = child_size;
-      child_alloc.height = child_size;
-
-      /* allocate widget size */
       gtk_widget_size_allocate (child, &child_alloc);
     }
 }
@@ -497,7 +633,7 @@ systray_box_compare_function (gconstpointer a,
   hidden_a = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (a));
   hidden_b = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (b));
   if (hidden_a != hidden_b)
-    return hidden_a ? -1 : 1;
+    return hidden_a ? 1 : -1;
 
   /* sort icons by name */
   name_a = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (a));
@@ -526,18 +662,6 @@ systray_box_new (void)
 
 
 void
-systray_box_set_guess_size (SystrayBox *box,
-                            gint        guess_size)
-{
-  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
-
-  /* set the systray guess size */
-  box->guess_size = guess_size;
-}
-
-
-
-void
 systray_box_set_orientation (SystrayBox     *box,
                              GtkOrientation  orientation)
 {
@@ -558,17 +682,17 @@ systray_box_set_orientation (SystrayBox     *box,
 
 
 void
-systray_box_set_rows (SystrayBox *box,
-                      gint        rows)
+systray_box_set_size_max (SystrayBox *box,
+                          gint        size_max)
 {
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
 
-  if (G_LIKELY (rows != box->rows))
-    {
-      /* set new setting */
-      box->rows = MAX (1, rows);
+  size_max = CLAMP (size_max, SIZE_MAX_MIN, SIZE_MAX_MAX);
 
-      /* queue a resize */
+  if (G_LIKELY (size_max != box->size_max))
+    {
+      box->size_max = size_max;
+
       if (box->childeren != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
     }
@@ -577,11 +701,28 @@ systray_box_set_rows (SystrayBox *box,
 
 
 gint
-systray_box_get_rows (SystrayBox *box)
+systray_box_get_size_max (SystrayBox *box)
 {
-  panel_return_val_if_fail (XFCE_IS_SYSTRAY_BOX (box), 1);
+  panel_return_val_if_fail (XFCE_IS_SYSTRAY_BOX (box), SIZE_MAX_DEFAULT);
 
-  return box->rows;
+  return box->size_max;
+}
+
+
+
+void
+systray_box_set_size_alloc (SystrayBox *box,
+                            gint        size_alloc)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
+
+  if (G_LIKELY (size_alloc != box->size_alloc))
+    {
+      box->size_alloc = size_alloc;
+
+      if (box->childeren != NULL)
+        gtk_widget_queue_resize (GTK_WIDGET (box));
+    }
 }
 
 
@@ -595,7 +736,9 @@ systray_box_set_show_hidden (SystrayBox *box,
   if (box->show_hidden != show_hidden)
     {
       box->show_hidden = show_hidden;
-      gtk_widget_queue_resize (GTK_WIDGET (box));
+
+      if (box->childeren != NULL)
+        gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }
 
