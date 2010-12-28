@@ -40,6 +40,7 @@
 
 #define ARROW_BUTTON_SIZE              (12)
 #define TOOLTIP_ICON_SIZE              (32)
+#define MENU_ICON_SIZE                 (32)
 #define MENU_POPUP_DELAY               (225)
 #define NO_ARROW_INSIDE_BUTTON(plugin) ((plugin)->arrow_position != LAUNCHER_ARROW_INTERNAL \
                                         || LIST_HAS_ONE_OR_NO_ENTRIES ((plugin)->items))
@@ -323,7 +324,9 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
 
   launcher_menu_icon_size = gtk_icon_size_from_name ("panel-launcher-menu");
   if (launcher_menu_icon_size == GTK_ICON_SIZE_INVALID)
-    launcher_menu_icon_size = gtk_icon_size_register ("panel-launcher-menu", 32, 32);
+    launcher_menu_icon_size = gtk_icon_size_register ("panel-launcher-menu",
+                                                      MENU_ICON_SIZE,
+                                                      MENU_ICON_SIZE);
 
   launcher_tooltip_icon_size = gtk_icon_size_from_name ("panel-launcher-tooltip");
   if (launcher_tooltip_icon_size == GTK_ICON_SIZE_INVALID)
@@ -1516,6 +1519,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
   GtkWidget      *mi, *image;
   const gchar    *name, *icon_name;
   GSList         *li;
+  gint            w, h, size;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
@@ -1528,6 +1532,12 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
   /* get the arrow type of the plugin */
   arrow_type = xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (plugin->arrow));
+
+  /* size of the menu items */
+  if (gtk_icon_size_lookup (launcher_menu_icon_size, &w, &h))
+    size = MIN (w, h);
+  else
+    size = MENU_ICON_SIZE;
 
   /* walk through the menu entries */
   for (li = plugin->items, n = 0; li != NULL; li = li->next, n++)
@@ -1572,7 +1582,8 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       icon_name = garcon_menu_item_get_icon_name (item);
       if (!exo_str_is_empty (icon_name))
         {
-          image = gtk_image_new_from_icon_name (icon_name, launcher_menu_icon_size);
+          image = xfce_panel_image_new_from_source (icon_name);
+          xfce_panel_image_set_size (XFCE_PANEL_IMAGE (image), size);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
           gtk_widget_show (image);
         }
