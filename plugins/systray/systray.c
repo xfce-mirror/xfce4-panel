@@ -148,6 +148,10 @@ static const gchar *known_applications[][3] =
   /* application name, icon-name, understandable name */
   { "networkmanager applet", "network-workgroup", "Network Manager Applet" },
   { "thunar", "Thunar", "Thunar Progress Dialog" },
+  { "workrave", NULL, "Workrave" },
+  { "workrave tray icon", NULL, "Workrave Applet" },
+  { "audacious2", "audacious", "Audacious" },
+  { "wicd-client.py", "wicd-gtk", "Wicd" },
 };
 
 
@@ -893,7 +897,7 @@ systray_plugin_dialog_add_application_names (gpointer key,
       if (strcmp (name, known_applications[i][0]) == 0)
         {
           icon_name = known_applications[i][1];
-          title = _(known_applications[i][2]);
+          title = known_applications[i][2];
           break;
         }
     }
