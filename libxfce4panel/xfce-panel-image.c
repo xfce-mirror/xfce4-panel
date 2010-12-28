@@ -33,6 +33,7 @@
 #include <common/panel-private.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-image.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/libxfce4panel-alias.h>
 
 
@@ -304,13 +305,10 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
                                 GtkAllocation *allocation)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
-  GdkPixbuf             *pixbuf = NULL;
+  GdkPixbuf             *pixbuf;
   GdkScreen             *screen;
-  GtkIconTheme          *icon_theme;
-  GError                *error = NULL;
+  GtkIconTheme          *icon_theme = NULL;
   gint                   size;
-  gchar                 *p, *name;
-  gchar                 *filename;
 
   widget->allocation = *allocation;
 
@@ -328,78 +326,38 @@ xfce_panel_image_size_allocate (GtkWidget     *widget,
       /* free cache */
       xfce_panel_image_unref_null (priv->cache);
 
+      size = MIN (priv->width, priv->height);
+      if (G_UNLIKELY (priv->force_icon_sizes && size < 32))
+        {
+          /* we use some hardcoded values here for convienence,
+           * above 32 pixels svg icons will kick in */
+          if (size > 16 && size < 22)
+            size = 16;
+          else if (size > 22 && size < 24)
+            size = 22;
+          else if (size > 24 && size < 32)
+            size = 24;
+        }
+
       if (priv->pixbuf != NULL)
         {
           /* use the pixbuf set by the user */
           pixbuf = g_object_ref (G_OBJECT (priv->pixbuf));
-        }
-      else if (G_UNLIKELY (g_path_is_absolute (priv->source)))
-        {
-          pixbuf = gdk_pixbuf_new_from_file (priv->source, &error);
-          if (G_UNLIKELY (pixbuf == NULL))
+
+          if (G_LIKELY (pixbuf != NULL))
             {
-              g_critical ("Failed to load image \"%s\": %s",
-                          priv->source, error->message);
-              g_error_free (error);
-              return;
+              /* scale the icon to the correct size */
+              priv->cache = xfce_panel_image_scale_pixbuf (pixbuf, size, size);
+              g_object_unref (G_OBJECT (pixbuf));
             }
         }
       else
         {
-          size = MIN (priv->width, priv->height);
-          if (G_UNLIKELY (priv->force_icon_sizes && size < 32))
-            {
-              /* we use some hardcoded values here for convienence,
-               * above 32 pixels svg icons will kick in */
-              if (size > 16 && size < 22)
-                size = 16;
-              else if (size > 22 && size < 24)
-                size = 22;
-              else if (size > 24 && size < 32)
-                size = 24;
-            }
-
           screen = gtk_widget_get_screen (widget);
           if (G_LIKELY (screen != NULL))
             icon_theme = gtk_icon_theme_get_for_screen (screen);
-          else
-            icon_theme = gtk_icon_theme_get_default ();
 
-          /* get a pixbuf from the theme */
-          pixbuf = gtk_icon_theme_load_icon (icon_theme, priv->source, size, 0, NULL);
-          if (G_UNLIKELY (pixbuf == NULL))
-            {
-              /* try to lookup names like application.png in the theme */
-              p = strrchr (priv->source, '.');
-              if (p != NULL)
-                {
-                  name = g_strndup (priv->source, p - priv->source);
-                  pixbuf = gtk_icon_theme_load_icon (icon_theme, name, size, 0, NULL);
-                  g_free (name);
-                }
-
-              /* maybe they point to a file in the pixbufs folder */
-              if (G_UNLIKELY (pixbuf == NULL))
-                {
-                  filename = g_build_filename ("pixmaps", priv->source, NULL);
-                  name = xfce_resource_lookup (XFCE_RESOURCE_DATA, filename);
-                  g_free (filename);
-
-                  if (name != NULL)
-                    pixbuf = gdk_pixbuf_new_from_file (name, NULL);
-                  g_free (name);
-                }
-            }
-        }
-
-      if (G_LIKELY (pixbuf != NULL))
-        {
-          /* scale the icon to the correct size */
-          priv->cache = xfce_panel_image_scale_pixbuf (pixbuf, priv->width,
-                                                       priv->height);
-
-          /* release the pixbuf */
-          g_object_unref (G_OBJECT (pixbuf));
+          priv->cache = xfce_panel_pixbuf_from_source (priv->source, icon_theme, size);
         }
     }
 }
