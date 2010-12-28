@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-18 05:09+0000\n"
+"POT-Creation-Date: 2010-12-28 20:04+0000\n"
 "PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -34,7 +34,7 @@ msgid "Customize the panel"
 msgstr "Tilpas panelet"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2198
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2200
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
@@ -57,38 +57,38 @@ msgid "Failed to open the documentation browser"
 msgstr "Kunne ikke åbne dokumentationsbrowseren"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:887
+#: ../libxfce4panel/xfce-panel-plugin.c:889
 #: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Er du sikker på at du vil fjerne \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:892
+#: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Hvis du fjerner elementet fra panelet vil det være tabt."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "_Flyt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2210
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2212
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1105 ../panel/panel-window.c:2221
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2223
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1122 ../panel/panel-window.c:2237
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2239
 msgid "Log _Out"
 msgstr "_Logud"
 
@@ -196,19 +196,19 @@ msgstr "Ønsker du at starte panelet? Hvis du vil det skal du huske at gemme ses
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
 
-#: ../panel/panel-application.c:197
+#: ../panel/panel-application.c:196
 msgid "Failed to launch the migration application"
 msgstr "Kunne ikke starte migrationsprogrammet"
 
-#: ../panel/panel-application.c:1424 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Hvis du har startet X uden sessionshåndteringen vil dette lukke X-serveren ned."
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Er du sikker på, at du vil afslutte panelet?"
 
-#: ../panel/panel-application.c:1433 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kunne ikke køre kommando \"%s\""
@@ -257,29 +257,29 @@ msgstr "Fordi panelet kører i kiosktilstand, er du ikke tilladt at lave ændrin
 msgid "Modifying the panel is not allowed"
 msgstr "Tilpasning af panelet er ikke tilladt"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "Tilføj nye elementer"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "Tilføj nye udvidelsesmoduler til panelet"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Søg:"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "Indtasts søgeudtryk her"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Udvicelsesmodul \"%s\" forlod uventet panelet. Vil du genstarte det?"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Udvidelsesmodulet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker 'Kør' vil panelet prøve at genstarte udvidelsesmodulet ellers vil det blive permanent fjernet fra panelet."
@@ -715,7 +715,7 @@ msgstr "Vælg et ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2171
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommando \"%s\"."
@@ -762,15 +762,15 @@ msgstr "Pop opmenu på aktuelle position af musen"
 msgid "Show help options"
 msgstr "Vis hjælpetilvalg"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "Uge %V"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "Kunne ikke udføre klokkommando"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "Tilpasset format"
 
@@ -1158,32 +1158,28 @@ msgstr "_Basismappe:"
 msgid "_File Pattern:"
 msgstr "_Filmønster:"
 
-#: ../plugins/launcher/launcher.c:1463
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher.c:1603
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "Ingen elementer"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Hvis du sletter et element vil det blive fjernet permanent"
 
-#: ../plugins/launcher/launcher-dialog.c:743
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Er du sikker på, at du vil fjerne \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher-dialog.c:759
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "Kunne ikke fjerne skrivebordsfilen fra indstillingsmappen"
-
-#: ../plugins/launcher/launcher-dialog.c:803
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "Kunne ikke åbne redigering af skrivebordselement"
 
@@ -1269,7 +1265,7 @@ msgstr "Arbejdsområde_indstillinger..."
 msgid "Unable to open the workspace settings"
 msgstr "Kunne ikke åbne indstillingerne til arbejdsområde"
 
-#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbejdsområde %d"
@@ -1349,20 +1345,20 @@ msgstr "Skjul alle vinduer og vis skrivebordet"
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:381
 msgid "Unable to start the notification area"
 msgstr "Kunne ikke starte beskedsområdet"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:831
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et beskedsområde. Dette område vil være ubenyttet."
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:833
 msgid "The notification area lost selection"
 msgstr "Beskedsområdet mistede valget"
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:986
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Er du sikker på at du vil slette listen over kendte programmer?"
 
@@ -1380,8 +1376,8 @@ msgid "Notification Area"
 msgstr "Påmindelsesområde"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "A_ntal rækker:"
+msgid "_Maximum icon size (px):"
+msgstr "_Maksimum ikonstørrelse (pixel):"
 
 #: ../plugins/systray/systray-manager.c:403
 #, c-format
@@ -1469,23 +1465,23 @@ msgstr "Vindue_gruppering:"
 msgid "Window title"
 msgstr "Vinduestitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2944
+#: ../plugins/tasklist/tasklist-widget.c:2997
 msgid "Mi_nimize All"
 msgstr "Mi_nimér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2953
+#: ../plugins/tasklist/tasklist-widget.c:3006
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2959
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Ma_ximize All"
 msgstr "Maksi_mér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:2968
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:2978
+#: ../plugins/tasklist/tasklist-widget.c:3031
 msgid "_Close All"
 msgstr "_Luk alle"
 
@@ -1555,6 +1551,12 @@ msgstr "Vinduesliste"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Skift mellem åbne vinduer ved brug afen menu"
+
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "Kunne ikke fjerne skrivebordsfilen fra indstillingsmappen"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "A_ntal rækker:"
 
 #~ msgid "Use the _Xfce menu"
 #~ msgstr "Brug menuen _Xfce"
