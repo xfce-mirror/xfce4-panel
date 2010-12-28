@@ -1014,6 +1014,8 @@ panel_window_grab_notify (GtkWidget *widget,
 {
   PanelWindow *window = PANEL_WINDOW (widget);
   GtkWidget   *current;
+  GdkScreen   *screen;
+  gint         x, y;
 
   current = gtk_grab_get_current ();
   if (GTK_IS_MENU_SHELL (current))
@@ -1024,11 +1026,31 @@ panel_window_grab_notify (GtkWidget *widget,
     }
   else if (window->autohide_grab_block > 0)
     {
-      /* drop previous menu block */
+      /* drop previous menu block or grab from outside window */
       window->autohide_grab_block--;
     }
   else if (window->autohide_grab_block == 0)
     {
+      if (current != NULL)
+        {
+          gdk_display_get_pointer (gtk_widget_get_display (current),
+                                   &screen, &x, &y, NULL);
+
+          /* filter out grab event that did not occur in the panel window,
+           * but in a windows that is part of this process */
+          if (gtk_window_get_screen (GTK_WINDOW (window)) != screen
+              || x < window->alloc.x
+              || x > window->alloc.x + window->alloc.width
+              || y < window->alloc.y
+              || y > window->alloc.y + window->alloc.height)
+            {
+              /* block the next notification */
+              window->autohide_grab_block++;
+
+              return;
+            }
+       }
+
       /* avoid hiding the panel when the window is grabbed. this
        * (for example) happens when the user drags in the pager plugin
        * see bug #4597 */
