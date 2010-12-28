@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-18 17:09+0000\n"
-"PO-Revision-Date: 2010-12-19 00:44+0200\n"
+"POT-Creation-Date: 2010-12-28 20:04+0000\n"
+"PO-Revision-Date: 2010-12-28 22:24+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,38 +58,38 @@ msgid "Failed to open the documentation browser"
 msgstr "Dokumentaatioselaimen avaaminen epäonnistui"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:887
+#: ../libxfce4panel/xfce-panel-plugin.c:889
 #: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Haluatko varmasti poistaa osan \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:892
+#: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Jos poistast osan paneelista, sitä ei voi palauttaa."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "Sii_rrä"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
 msgid "Pane_l"
 msgstr "_Paneeli"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2212
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2212
 msgid "Add _New Items..."
 msgstr "_Lisää osia..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1105 ../panel/panel-window.c:2223
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2223
 msgid "Panel Pr_eferences..."
 msgstr "Paneelin _asetukset"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1122 ../panel/panel-window.c:2239
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2239
 msgid "Log _Out"
 msgstr "Kirjaudu _ulos"
 
@@ -205,18 +205,18 @@ msgstr "%s ei ole käynnissä"
 msgid "Failed to launch the migration application"
 msgstr "Asetusten siirto-ohjelman käynnistys epäonnistui"
 
-#: ../panel/panel-application.c:1423 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 "X käynnistettiin ilman istunnonhallintaa. Lopeta-valinta sulkee X-palvelimen."
 
-#: ../panel/panel-application.c:1424 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Haluatko varmasti sulkea paneelin?"
 
-#: ../panel/panel-application.c:1432 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Komennon \"%s\" suoritus epäonnistui"
@@ -270,29 +270,29 @@ msgstr ""
 msgid "Modifying the panel is not allowed"
 msgstr "Paneelin muokkaus on estetty"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "Lisää osia"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "Lisää uusia osia paneeliin"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Hae:"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "Syötä haettava teksti tähän"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Osa \"%s\" poistui paneelista yllättäen. Käynnistetäänkö se uudelleen?"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -759,7 +759,7 @@ msgstr "Valitse kuvake"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2171
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Komennon \"%s\" suoritus epäonnistui."
@@ -806,15 +806,15 @@ msgstr "Näytä valikko hiiren sijainnissa"
 msgid "Show help options"
 msgstr "Näytä ohjevalinnat"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "Viikko %V"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "Kellokomennon suoritus epäonnistui"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "Mukautettu"
 
@@ -1213,32 +1213,28 @@ msgstr "Po_hjakansio:"
 msgid "_File Pattern:"
 msgstr "_Tiedostokaava:"
 
-#: ../plugins/launcher/launcher.c:1463
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "Nimetön"
 
-#: ../plugins/launcher/launcher.c:1603
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "Tyhjä"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Jos poistat kohteen, sitä ei voi palauttaa."
 
-#: ../plugins/launcher/launcher-dialog.c:743
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Haluatko varmasti poistaa kohteen \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "Nimetön"
 
-#: ../plugins/launcher/launcher-dialog.c:759
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "Työpöytätiedoston poistaminen asetuskansiosta epäonnistui."
-
-#: ../plugins/launcher/launcher-dialog.c:803
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "Työpöytätiedostoeditorin avaaminen epäonnistui."
 
@@ -1327,7 +1323,7 @@ msgstr "Työtila-_asetukset..."
 msgid "Unable to open the workspace settings"
 msgstr "Työtila-asetusten avaaminen ei onnistu."
 
-#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Työtila %d"
@@ -1409,23 +1405,23 @@ msgstr "Piilota ikkunat ja näytä työpöytä"
 msgid "Show Desktop"
 msgstr "Näytä työpöytä"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:381
 msgid "Unable to start the notification area"
 msgstr "Ilmoitusalueen käynnistys epäonnistui."
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:831
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 "Jokin toinen elementti toimii ilmoitusalueena. Tätä aluetta ei käytetä."
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:833
 msgid "The notification area lost selection"
 msgstr "Ilmoitusalue menetti valintansa."
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:986
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Haluatko varmasti tyhjentää tunnettujen sovellusten listan?"
 
@@ -1443,8 +1439,8 @@ msgid "Notification Area"
 msgstr "Ilmoitusalue"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "_Rivien lukumäärä:"
+msgid "_Maximum icon size (px):"
+msgstr "K_uvakkeen maksimikoko (px)"
 
 #: ../plugins/systray/systray-manager.c:403
 #, c-format
@@ -1532,23 +1528,23 @@ msgstr "Ikkunoiden _ryhmitys"
 msgid "Window title"
 msgstr "Ikkunan otsikko"
 
-#: ../plugins/tasklist/tasklist-widget.c:2990
+#: ../plugins/tasklist/tasklist-widget.c:2997
 msgid "Mi_nimize All"
 msgstr "P_ienennä kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:2999
+#: ../plugins/tasklist/tasklist-widget.c:3006
 msgid "Un_minimize All"
 msgstr "Pa_lauta kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Ma_ximize All"
 msgstr "Suu_renna kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3014
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "_Unmaximize All"
 msgstr "Palau_ta suurennetut"
 
-#: ../plugins/tasklist/tasklist-widget.c:3024
+#: ../plugins/tasklist/tasklist-widget.c:3031
 msgid "_Close All"
 msgstr "Sulj_e kaikki"
 
@@ -1618,6 +1614,12 @@ msgstr "Ikkunavalikko"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Käytä valikkoa ikkunoiden välillä siirtymiseen"
+
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "Työpöytätiedoston poistaminen asetuskansiosta epäonnistui."
+
+#~ msgid "_Number of rows:"
+#~ msgstr "_Rivien lukumäärä:"
 
 #~ msgid "Create a new launcher on the Xfce Panel"
 #~ msgstr "Luo uusi käynnistin Xfce:n paneeliin"
