@@ -32,7 +32,7 @@
   <object class="GtkListStore" id="add-store">
     <columns>
       <!-- column-name icon -->
-      <column type="gchararray"/>
+      <column type="GdkPixbuf"/>
       <!-- column-name name -->
       <column type="gchararray"/>
       <!-- column-name item -->
@@ -46,7 +46,7 @@
   <object class="GtkListStore" id="item-store">
     <columns>
       <!-- column-name icon -->
-      <column type="gchararray"/>
+      <column type="GdkPixbuf"/>
       <!-- column-name name -->
       <column type="gchararray"/>
       <!-- column-name item -->
@@ -100,7 +100,7 @@
                             <child>
                               <object class="GtkCellRendererPixbuf" id="itemrenderericon"/>
                               <attributes>
-                                <attribute name="icon-name">0</attribute>
+                                <attribute name="pixbuf">0</attribute>
                               </attributes>
                             </child>
                             <child>
@@ -484,7 +484,7 @@
                         <child>
                           <object class="GtkCellRendererPixbuf" id="addrenderericon"/>
                           <attributes>
-                            <attribute name="icon-name">0</attribute>
+                            <attribute name="pixbuf">0</attribute>
                           </attributes>
                         </child>
                         <child>

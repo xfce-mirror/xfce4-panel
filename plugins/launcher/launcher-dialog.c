@@ -938,6 +938,9 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
 {
   const gchar *name, *comment;
   gchar       *markup;
+  GdkPixbuf   *icon = NULL;
+  const gchar *icon_name;
+  gint         w, h;
 
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
@@ -950,12 +953,21 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
   else
     markup = g_markup_printf_escaped ("<b>%s</b>", name);
 
+  icon_name = garcon_menu_item_get_icon_name (item);
+  if (!exo_str_is_empty (icon_name))
+    {
+      if (!gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &w, &h))
+        w = h = 32;
+
+      icon = xfce_panel_pixbuf_from_source (icon_name, NULL, MIN (w, h));
+    }
+
   if (dialog != NULL)
     g_signal_handlers_block_by_func (G_OBJECT (model),
         G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
 
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
-                      COL_ICON, garcon_menu_item_get_icon_name (item),
+                      COL_ICON, icon,
                       COL_NAME, markup,
                       COL_ITEM, item,
                       -1);
@@ -964,6 +976,8 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
     g_signal_handlers_unblock_by_func (G_OBJECT (model),
         G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
 
+  if (G_LIKELY (icon != NULL))
+    g_object_unref (G_OBJECT (icon));
   g_free (markup);
 }
 
@@ -1143,12 +1157,6 @@ launcher_dialog_show (LauncherPlugin *plugin)
       launcher_dialog_add_visible_function, item, NULL);
   g_signal_connect_swapped (G_OBJECT (item), "changed",
       G_CALLBACK (gtk_tree_model_filter_refilter), object);
-
-  /* setup the icon size in the icon renderers */
-  object = gtk_builder_get_object (builder, "addrenderericon");
-  g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
-  object = gtk_builder_get_object (builder, "itemrenderericon");
-  g_object_set (G_OBJECT (object), "stock-size", GTK_ICON_SIZE_DND, NULL);
 
   /* load the plugin items */
   launcher_dialog_items_load (dialog);
