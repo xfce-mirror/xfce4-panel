@@ -280,14 +280,14 @@ pager_buttons_rebuild_idle (gpointer user_data)
   gint           rows, cols;
   gint           row, col;
   GtkWidget     *button;
-  WnckWorkspace *workspace;
+  WnckWorkspace *workspace = NULL;
   GtkWidget     *panel_plugin;
   GtkWidget     *label;
-  gint           workspace_width, workspace_height;
-  gint           screen_width, screen_height;
+  gint           workspace_width, workspace_height = 0;
+  gint           screen_width = 0, screen_height = 0;
   gint           viewport_x, viewport_y;
   gboolean       viewport_mode = FALSE;
-  gint           n_viewports;
+  gint           n_viewports = 0;
   gint          *vp_info;
   gchar          text[8];
 
@@ -335,10 +335,14 @@ pager_buttons_rebuild_idle (gpointer user_data)
         {
           g_warning ("only viewports with equally distributed screens are supported: %dx%d & %dx%d",
                      workspace_width, workspace_height, screen_width, screen_height);
+
+          goto workspace_layout;
         }
     }
   else
     {
+      workspace_layout:
+
       rows = CLAMP (1, pager->rows, n_workspaces);
       cols = n_workspaces / rows;
       if (cols * rows < n_workspaces)

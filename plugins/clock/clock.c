@@ -488,6 +488,7 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   else
     {
       ratio_size = -1;
+      offset = 0;
     }
 
   /* set the clock size */
