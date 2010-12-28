@@ -166,13 +166,15 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
 
   if (G_UNLIKELY (g_path_is_absolute (source)))
     {
-      pixbuf = gdk_pixbuf_new_from_file (source, &error);
+      pixbuf = gdk_pixbuf_new_from_file_at_scale (source, size, size, TRUE, &error);
       if (G_UNLIKELY (pixbuf == NULL))
         {
           g_message ("Failed to load image \"%s\": %s",
                      source, error->message);
           g_error_free (error);
         }
+
+      return pixbuf;
     }
   else
     {
