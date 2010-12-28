@@ -865,36 +865,6 @@ systray_plugin_dialog_camel_case (const gchar *text)
 
 
 
-static GdkPixbuf *
-systray_plugin_dialog_icon (GtkIconTheme *icon_theme,
-                            const gchar  *icon_name)
-{
-  GdkPixbuf   *icon = NULL;
-  gchar       *first_occ;
-  const gchar *p;
-
-  panel_return_val_if_fail (!exo_str_is_empty (icon_name), NULL);
-  panel_return_val_if_fail (GTK_IS_ICON_THEME (icon_theme), NULL);
-
-  /* try to load the icon from the theme */
-  icon = gtk_icon_theme_load_icon (icon_theme, icon_name, ICON_SIZE, 0, NULL);
-  if (icon != NULL)
-    return icon;
-
-  /* try the first part when the name contains a space */
-  p = g_utf8_strchr (icon_name, -1, ' ');
-  if (p != NULL)
-    {
-      first_occ = g_strndup (icon_name, p - icon_name);
-      icon = gtk_icon_theme_load_icon (icon_theme, first_occ, ICON_SIZE, 0, NULL);
-      g_free (first_occ);
-    }
-
-  return icon;
-}
-
-
-
 static void
 systray_plugin_dialog_add_application_names (gpointer key,
                                              gpointer value,
@@ -903,7 +873,6 @@ systray_plugin_dialog_add_application_names (gpointer key,
   GtkListStore *store = GTK_LIST_STORE (user_data);
   const gchar  *name = key;
   gboolean      hidden = GPOINTER_TO_UINT (value);
-  GtkIconTheme *icon_theme;
   const gchar  *title = NULL;
   gchar        *camelcase = NULL;
   const gchar  *icon_name = name;
@@ -937,8 +906,10 @@ systray_plugin_dialog_add_application_names (gpointer key,
     }
 
   /* try to load the icon name */
-  icon_theme = gtk_icon_theme_get_default ();
-  pixbuf = systray_plugin_dialog_icon (icon_theme, icon_name);
+  if (G_LIKELY (icon_name != NULL))
+    pixbuf = xfce_panel_pixbuf_from_source (icon_name, NULL, ICON_SIZE);
+  else
+    pixbuf = NULL;
 
   /* insert in the store */
   gtk_list_store_append (store, &iter);
