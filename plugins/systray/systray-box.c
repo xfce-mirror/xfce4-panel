@@ -48,12 +48,6 @@ static void     systray_box_get_property          (GObject         *object,
                                                    guint            prop_id,
                                                    GValue          *value,
                                                    GParamSpec      *pspec);
-/*
-static void     systray_box_set_property          (GObject         *object,
-                                                   guint            prop_id,
-                                                   const GValue    *value,
-                                                   GParamSpec      *pspec);
-*/
 static void     systray_box_finalize              (GObject         *object);
 static void     systray_box_size_request          (GtkWidget       *widget,
                                                    GtkRequisition  *requisition);
@@ -123,7 +117,6 @@ systray_box_class_init (SystrayBoxClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = systray_box_get_property;
-  /*gobject_class->set_property = systray_box_set_property;*/
   gobject_class->finalize = systray_box_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
@@ -181,26 +174,6 @@ systray_box_get_property (GObject      *object,
       break;
     }
 }
-
-
-
-/*
-static void
-systray_box_set_property (GObject      *object,
-                          guint         prop_id,
-                          const GValue *value,
-                          GParamSpec   *pspec)
-{
-  SystrayBox *box = XFCE_SYSTRAY_BOX (object);
-
-  switch (prop_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
-*/
 
 
 
