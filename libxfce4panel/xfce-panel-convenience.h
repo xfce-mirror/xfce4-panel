@@ -35,6 +35,10 @@ GtkWidget   *xfce_panel_create_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_U
 
 const gchar *xfce_panel_get_channel_name      (void);
 
+GdkPixbuf   *xfce_panel_pixbuf_from_source    (const gchar  *source,
+                                               GtkIconTheme *icon_theme,
+                                               gint          size) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_CONVENIENCE_H__ */

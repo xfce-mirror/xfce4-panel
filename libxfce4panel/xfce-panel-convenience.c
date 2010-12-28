@@ -21,6 +21,10 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 #include <libxfce4util/libxfce4util.h>
 #include <gtk/gtk.h>
 
@@ -114,6 +118,125 @@ xfce_panel_get_channel_name (void)
     }
 
   return name;
+}
+
+
+
+/**
+ * xfce_panel_pixbuf_from_source:
+ * @source: string that contains the location of an icon
+ * @icon_theme: icon theme or %NULL to use the default icon theme
+ * @size: size the icon should be loaded
+ *
+ * Try to load a pixbug from a source string. The source could be
+ * an abolute path, an icon name or a filename that point to a
+ * file in the pixmaps directory.
+ *
+ * This function is particularly usefull for loading names from
+ * the Icon key of desktop files.
+ *
+ * The pixbufs is never bigger then @size. If it is when loaded from the
+ * disk, the pixbuf is scales preserving the aspect ratio.
+ *
+ * Returns: a GdkPixbuf or %NULL is nothing was found. The value should
+ *          be released with g_object_unref is no long used.
+ *
+ * See also: XfcePanelImage
+ *
+ * Since: 4.8
+ **/
+GdkPixbuf *
+xfce_panel_pixbuf_from_source (const gchar  *source,
+                               GtkIconTheme *icon_theme,
+                               gint          size)
+{
+  GdkPixbuf *pixbuf = NULL;
+  gchar     *p;
+  gchar     *name;
+  gchar     *filename;
+  gint       src_w, src_h;
+  gdouble    wratio, hratio;
+  gint       dest_w, dest_h;
+  GdkPixbuf *dest;
+  GError    *error = NULL;
+
+  g_return_val_if_fail (source != NULL, NULL);
+  g_return_val_if_fail (icon_theme == NULL || GTK_IS_ICON_THEME (icon_theme), NULL);
+  g_return_val_if_fail (size > 0, NULL);
+
+  if (G_UNLIKELY (g_path_is_absolute (source)))
+    {
+      pixbuf = gdk_pixbuf_new_from_file (source, &error);
+      if (G_UNLIKELY (pixbuf == NULL))
+        {
+          g_message ("Failed to load image \"%s\": %s",
+                     source, error->message);
+          g_error_free (error);
+        }
+    }
+  else
+    {
+      if (G_UNLIKELY (icon_theme == NULL))
+        icon_theme = gtk_icon_theme_get_default ();
+
+      /* try to load from the icon theme */
+      pixbuf = gtk_icon_theme_load_icon (icon_theme, source, size, 0, NULL);
+      if (G_UNLIKELY (pixbuf == NULL))
+        {
+          /* try to lookup names like application.png in the theme */
+          p = strrchr (source, '.');
+          if (p != NULL)
+            {
+              name = g_strndup (source, p - source);
+              pixbuf = gtk_icon_theme_load_icon (icon_theme, name, size, 0, NULL);
+              g_free (name);
+            }
+
+          /* maybe they point to a file in the pixbufs folder */
+          if (G_UNLIKELY (pixbuf == NULL))
+            {
+              filename = g_build_filename ("pixmaps", source, NULL);
+              name = xfce_resource_lookup (XFCE_RESOURCE_DATA, filename);
+              g_free (filename);
+
+              if (name != NULL)
+                {
+                  pixbuf = gdk_pixbuf_new_from_file (name, NULL);
+                  g_free (name);
+                }
+            }
+        }
+    }
+
+  /* scale the pixbug if required */
+  if (G_LIKELY (pixbuf != NULL))
+    {
+      src_w = gdk_pixbuf_get_width (pixbuf);
+      src_h = gdk_pixbuf_get_height (pixbuf);
+
+      if (src_w > size || src_h > size)
+        {
+          /* calculate the new dimensions */
+          wratio = (gdouble) src_w / (gdouble) size;
+          hratio = (gdouble) src_h / (gdouble) size;
+
+          dest_w = dest_h = size;
+
+          if (hratio > wratio)
+            dest_w  = rint (src_w / hratio);
+          else
+            dest_h = rint (src_h / wratio);
+
+          dest = gdk_pixbuf_scale_simple (pixbuf, MAX (dest_w, 1),
+                                          MAX (dest_h, 1),
+                                          GDK_INTERP_BILINEAR);
+
+          g_object_unref (G_OBJECT (pixbuf));
+          pixbuf = dest;
+        }
+    }
+
+  return pixbuf;
 }
 
 
