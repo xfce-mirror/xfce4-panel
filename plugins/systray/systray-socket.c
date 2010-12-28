@@ -329,54 +329,74 @@ systray_socket_is_composited (SystraySocket *socket)
 
 
 
-const gchar *
-systray_socket_get_name  (SystraySocket *socket)
+static gchar *
+systray_socket_get_name_prop (SystraySocket *socket,
+                              const gchar   *prop_name,
+                              const gchar   *type_name)
 {
   GdkDisplay *display;
-  Atom        utf8_string, type;
+  Atom        req_type, type;
   gint        result;
+  gchar      *val;
   gint        format;
   gulong      nitems;
   gulong      bytes_after;
-  gchar      *val;
+  gchar      *name = NULL;
 
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), NULL);
-
-  if (socket->name != NULL)
-    return socket->name;
+  panel_return_val_if_fail (type_name != NULL && prop_name != NULL, NULL);
 
   display = gtk_widget_get_display (GTK_WIDGET (socket));
 
-  utf8_string = gdk_x11_get_xatom_by_name_for_display (display, "UTF8_STRING");
+  req_type = gdk_x11_get_xatom_by_name_for_display (display, type_name);
 
   gdk_error_trap_push ();
 
   result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display),
                                socket->window,
-                               gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_NAME"),
+                               gdk_x11_get_xatom_by_name_for_display (display, prop_name),
                                0, G_MAXLONG, False,
-                               utf8_string,
+                               req_type,
                                &type, &format, &nitems,
-                               &bytes_after, (guchar **) &val);
+                               &bytes_after,
+                               (guchar **) &val);
 
-  if (gdk_error_trap_pop () != 0 || result != Success || val == NULL)
+  /* check if everything went fine */
+  if (gdk_error_trap_pop () != 0
+      || result != Success
+      || val == NULL)
     return NULL;
 
-  if (type != utf8_string || format != 8 || nitems == 0)
-    {
-      XFree (val);
-      return NULL;
-    }
-
-  if (!g_utf8_validate (val, nitems, NULL))
-    {
-      XFree (val);
-      return NULL;
-    }
-
-  socket->name = g_utf8_strdown (val, nitems);
+  /* check the returned data */
+  if (type == req_type
+      && format == 8
+      && nitems > 0
+      && g_utf8_validate (val, nitems, NULL))
+   {
+     /* lowercase the result */
+     name = g_utf8_strdown (val, nitems);
+   }
 
   XFree (val);
+
+  return name;
+}
+
+
+
+const gchar *
+systray_socket_get_name  (SystraySocket *socket)
+{
+  panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), NULL);
+
+  if (G_LIKELY (socket->name != NULL))
+    return socket->name;
+
+  /* try _NET_WM_NAME first, for gtk icon implementations, fall back to
+   * WM_NAME for qt icons */
+  socket->name = systray_socket_get_name_prop (socket, "_NET_WM_NAME", "UTF8_STRING");
+  if (G_UNLIKELY (socket->name == NULL))
+    socket->name = systray_socket_get_name_prop (socket, "WM_NAME", "STRING");
 
   return socket->name;
 }
