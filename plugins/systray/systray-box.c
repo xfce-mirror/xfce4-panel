@@ -40,7 +40,8 @@
 #define OFFSCREEN  (-9999)
 
 /* some icon implementations request a 1x1 size for invisible icons */
-#define REQUISITION_IS_INVISIBLE(child_req) ((child_req).width <= 1 && (child_req).height <= 1)
+/*#define REQUISITION_IS_INVISIBLE(child_req) ((child_req).width <= 1 && (child_req).height <= 1)*/
+#define REQUISITION_IS_INVISIBLE(child_req) (TRUE)
 
 
 
