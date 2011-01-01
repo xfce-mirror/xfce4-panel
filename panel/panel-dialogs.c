@@ -74,7 +74,7 @@ panel_dialogs_show_about (void)
   gtk_show_about_dialog (NULL,
                          "authors", authors,
                          "comments", _("The panel of the Xfce Desktop Environment"),
-                         "copyright", "Copyright \302\251 2004-2010 Xfce Development Team",
+                         "copyright", "Copyright \302\251 2004-2011 Xfce Development Team",
                          "destroy-with-parent", TRUE,
                          "license", XFCE_LICENSE_GPL,
                          "program-name", PACKAGE_NAME,
