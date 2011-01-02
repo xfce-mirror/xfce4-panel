@@ -1,3 +1,59 @@
+4.7.7
+=====
+- Bind panel translation domain for external plugins (bug #6932).
+- Allow reordering plugins in preferences with dnd.
+- Open plugin preferences on double-click (bug #6975).
+- Change launcher dnd code for plugin moving.
+- Send drag motion event to parent widgets.
+- Do not make the itembar insensitive (bug #6818).
+- Fix some prototype variable names.
+- Fix warning when removing a panel with a 4.6 plugin.
+- Fix order of menu items based on screen position (bug #6978).
+- Drop too-new Gtk API.
+- Various improvements in the launcher dialog.
+- Don't use the session manager in action plugin.
+- Add option to filter tasklist window by monitor (bug #5199).
+- Remove plugin when dropping in items dialog (bug #6976).
+- Bump copyright to 2010 and fix licenses.
+- Also load desktop files from xfce4/panel/plugins (bug #7013).
+- Install desktop files in xfce4/plugins/actions (bug #7013).
+- Make vertical clock rotation optional (bug #7002).
+- Fix various size allocation issues in clock (bug #5219, #3960).
+- Fix plugin dnd with locked panel and outside itembar.
+- Add missing function to libxfce4panel.symbols.
+- Fix ABI check on ppc (bug #7009).
+- Fix typo in function name.
+- Add application menu in default layout.
+- Fix invalid unref.
+- Make sure launchers are properly removed and saved.
+- Fix vertical tasklist buttons in non-vertical mode.
+- Fix thinko in screen handling (bug #6830).
+- Workaround un nusable plugin when moving to other window.
+- Add xfce_panel_pixbuf_from_source().
+- Use xfce_panel_pixbuf_from_source() in XfcePanelImage.
+- Use XfcePanelImage in the launcher menu.
+- Use xfce_panel_pixbuf_from_source in launcher dialogs.
+- Optimize loading icons from absolute paths.
+- Fix some compiler warnings.
+- Move hidden name handling to plugin.
+- Use foreach to add application to store.
+- Move arrow button to plugin widget (bug #6694).
+- Only use orientation in systray box.
+- Remove unused variables in box structures.
+- Drop child structure from box and only use widgets.
+- Improve sort function a bit + other tiny changes.
+- Move composited child function to plugin.
+- Use xfce_panel_pixbuf_from_source() to load known apps.
+- Add some known tray application names.
+- Try WM_NAME(STRING) too for tray application name.
+- Redo icon positioning (bug #5565, #9650 and more).
+- Drop some unused systray code.
+- Block grabs from outside the panel.
+- 1x1 invisible icons doesn't seem to be true (bug #7044).
+- Bump copyrights to 2011.
+- Translation updates (ca, cs, da, de, en_GB, fi, gl, he, hr, hu, id,
+  it, ja, kk, nb, pl, pt, pt_BR ru, sk, sv, uk, zh_TW).
+
 4.7.6
 =====
 - Always use applications menu for default menu.
