@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-18 00:14+0000\n"
+"POT-Creation-Date: 2011-01-03 05:09+0000\n"
 "PO-Revision-Date: 2010-11-28 13:39+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at fsf dot hu>\n"
@@ -31,7 +31,7 @@ msgid "Customize the panel"
 msgstr "A panel személyre szabása"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2198
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
@@ -54,38 +54,38 @@ msgid "Failed to open the documentation browser"
 msgstr "Nem sikerült megnyitni a dokumentációböngészőt"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:887
+#: ../libxfce4panel/xfce-panel-plugin.c:889
 #: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Biztosan eltávolítja a következőt: „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:892
+#: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ha eltávolítja az elemet a panelről, az véglegesen elvész."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "Át_helyezés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
 msgid "Pane_l"
 msgstr "_Panel"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2210
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "Új _elemek hozzáadása…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1105 ../panel/panel-window.c:2221
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "_Panel beállításai…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1122 ../panel/panel-window.c:2237
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
@@ -193,19 +193,19 @@ msgstr "El kívánja indítani a panelt? Ebben az esetben mentse a munkamenetet 
 msgid "No running instance of %s was found"
 msgstr "Nem található a(z) %s futó példánya"
 
-#: ../panel/panel-application.c:197
+#: ../panel/panel-application.c:196
 msgid "Failed to launch the migration application"
 msgstr "A költöztető alkalmazás indítása meghiúsult"
 
-#: ../panel/panel-application.c:1424 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Az X-et munkamenet-kezelő nélkül indította. A Kilépés gombra kattintás bezárja az X kiszolgálót."
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Biztos, hogy be kívánja zárni a panelt?"
 
-#: ../panel/panel-application.c:1433 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "A parancs („%s”) indítása meghiúsult"
@@ -250,29 +250,29 @@ msgstr "Mivel a panel kioszk módban fut, normál felhasználóként nem módos�
 msgid "Modifying the panel is not allowed"
 msgstr "A panel módosítása nem engedélyezett"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "Új elemek felvétele"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "Új elemek hozzáadása a panelhez"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Keresés:"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "Adja meg a keresőkifejezést"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "A(z) „%s” bővítmény összeomlott, újra akarja indítani?"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "A bővítmény többször is újraindult az elmúlt %d másodpercben. A Végrehajtás gomb megnyomásával a panel megpróbálja újraindítani a bővítményt, egyébként az véglegesen eltávolításra kerül a panelről."
@@ -708,7 +708,7 @@ msgstr "Válasszon ikont"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2171
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "A parancs („%s”) végrehajtása meghiúsult."
@@ -755,15 +755,15 @@ msgstr "Menü megjelenítése az aktuális egérpozícióban "
 msgid "Show help options"
 msgstr "Súgólehetőségek megjelenítése"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "%V hét"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "Az óra parancs végrehajtása meghiúsult"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "Egyéni formátum"
 
@@ -1151,32 +1151,28 @@ msgstr "_Alapkönyvtár:"
 msgid "_File Pattern:"
 msgstr "_Fájlminta:"
 
-#: ../plugins/launcher/launcher.c:1463
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "Névtelen elem"
 
-#: ../plugins/launcher/launcher.c:1603
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "Nincs elem"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ha töröl egy elemet, akkor az véglegesen elvész"
 
-#: ../plugins/launcher/launcher-dialog.c:743
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Biztos, hogy el kívánja távolítani a következőt: „%s”?"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "Névtelen elem"
 
-#: ../plugins/launcher/launcher-dialog.c:759
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "Az asztali fájl eltávolítása meghiúsult a konfigurációs könyvtárból"
-
-#: ../plugins/launcher/launcher-dialog.c:803
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "Az asztalielem-szerkesztő megnyitása meghiúsult"
 
@@ -1261,7 +1257,7 @@ msgstr "M_unkaterület beállításai…"
 msgid "Unable to open the workspace settings"
 msgstr "A munkaterület beállításai nem nyithatók meg"
 
-#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "%d. munkaterület"
@@ -1341,20 +1337,20 @@ msgstr "Minden ablak elrejtése, és az asztal megjelenítése"
 msgid "Show Desktop"
 msgstr "Asztal megjelenítése"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:381
 msgid "Unable to start the notification area"
 msgstr "Az értesítési terület nem indítható el"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:831
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Valószínűleg egy másik felületi elem átvette az értesítési terület funkcióját. Ez a terület nem kerül felhasználásra."
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:833
 msgid "The notification area lost selection"
 msgstr "Az értesítési terület elvesztette a kiválasztást"
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:986
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Biztos, hogy törölni akarja az ismert alkalmazások listáját?"
 
@@ -1372,8 +1368,8 @@ msgid "Notification Area"
 msgstr "Értesítési terület"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "_Sorok száma:"
+msgid "_Maximum icon size (px):"
+msgstr "_Maximális ikonméret (képpont):"
 
 #: ../plugins/systray/systray-manager.c:403
 #, c-format
@@ -1461,23 +1457,23 @@ msgstr "Abla_kcsoportosítás:"
 msgid "Window title"
 msgstr "Ablakcím"
 
-#: ../plugins/tasklist/tasklist-widget.c:2944
+#: ../plugins/tasklist/tasklist-widget.c:2997
 msgid "Mi_nimize All"
 msgstr "Összes mi_nimalizálása"
 
-#: ../plugins/tasklist/tasklist-widget.c:2953
+#: ../plugins/tasklist/tasklist-widget.c:3006
 msgid "Un_minimize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:2959
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Ma_ximize All"
 msgstr "Összes ma_ximalizálás"
 
-#: ../plugins/tasklist/tasklist-widget.c:2968
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "_Unmaximize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:2978
+#: ../plugins/tasklist/tasklist-widget.c:3031
 msgid "_Close All"
 msgstr "Összes _bezárása"
 
@@ -1547,6 +1543,12 @@ msgstr "Ablakmenü"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Átváltás a nyitott ablakok között, menü használatával"
+
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "Az asztali fájl eltávolítása meghiúsult a konfigurációs könyvtárból"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "_Sorok száma:"
 
 #~ msgid "Use the _Xfce menu"
 #~ msgstr "Az _Xfce menü használata"
