@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-22 17:09+0000\n"
+"POT-Creation-Date: 2011-01-03 11:09+0000\n"
 "PO-Revision-Date: 2010-06-11 23:34+0200\n"
 "Last-Translator: Ivica Kolić<ikoli@yahoo.com> <>\n"
 "Language-Team: Croatian <>\n"
@@ -30,7 +30,7 @@ msgid "Customize the panel"
 msgstr "Prilagodi ploču"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2200
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Ploča"
@@ -74,17 +74,17 @@ msgid "Pane_l"
 msgstr "Ploč_a"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2212
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "Dodaj _nove stavke"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2223
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "Osobitosti Pl_oče"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2239
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 msgid "Log _Out"
 msgstr "Odja_va"
 
@@ -135,7 +135,7 @@ msgstr ""
 #: ../panel/main.c:203
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Upiši \"%s --help\" za uporabu."
 
 #: ../panel/main.c:222
 msgid "The Xfce development team. All rights reserved."
@@ -181,11 +181,11 @@ msgstr "Neuspjelo iskjlučivanje ploče"
 
 #: ../panel/main.c:350
 msgid "Failed to send D-Bus message"
-msgstr ""
+msgstr "Neuspjelo slanje D-bus poruke"
 
 #: ../panel/main.c:361
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "Želite li pokrenuti ploču?Ako želite spremite sesiju kod odjave,tako da se ploča automatiski pokrene idući put kada se prijavite."
 
 #: ../panel/main.c:364 ../panel/main.c:378
 #, c-format
@@ -196,15 +196,15 @@ msgstr ""
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:1444 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr ""
 
-#: ../panel/panel-application.c:1445 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr ""
 
-#: ../panel/panel-application.c:1453 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Neuspjeh u izvršenju naredbe \"%s\""
@@ -220,7 +220,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Ploča Xfce radnog okružrnja"
 
 #: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
@@ -337,7 +337,6 @@ msgid "Add new item to this panel"
 msgstr "Dodaj novu stavku na ovu ploču"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
 msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
 msgstr "Alfa vrijednost pozadine ploče između 0 (prozirno) i 100 (neprozirno)."
 
@@ -414,7 +413,7 @@ msgstr "I_zlaz"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Opacity"
-msgstr ""
+msgstr "Neprozirnost"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
@@ -454,21 +453,19 @@ msgstr "Pokaži informaciju o trenutno odabranoj stavci"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
-msgstr ""
+msgstr "Puna boja"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-#, fuzzy
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Prozirnost kada pokazivač prelazi preko ploče."
+msgstr "Prozirnost kada pokazivač prelazi preko ploče,0 je puna prozirnost i 100 puna neprozirnost."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-#, fuzzy
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Prozirnost kada pokazivač prelazi preko ploče."
+msgstr "Prozirnost kada pokazivač ne prelazi preko ploče,0 je puna prozirnost i 100 puna neprozirnost."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -534,9 +531,8 @@ msgid "Expert"
 msgstr "Stručnjak"
 
 #: ../migrate/main.c:78
-#, fuzzy
 msgid "Welcome to the first start of the panel"
-msgstr "Dobrodošli na prvo pokretanje Xfce Panel"
+msgstr "Dobrodošli na prvo pokretanje Xfce ploče"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
@@ -655,7 +651,7 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "Ure_di izbornik"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
@@ -686,14 +682,12 @@ msgid "Show ic_ons in menu"
 msgstr "Pokaži ik_one u izborniku"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#, fuzzy
 msgid "Use c_ustom menu file:"
-msgstr "Koristi p_rilagođenu datoteku izbornika"
+msgstr "Koristi p_rilagođenu datoteku izbornika:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-#, fuzzy
 msgid "Use the _default menu"
-msgstr "Koristi _zadanu datoteku izbornika"
+msgstr "Koristi _zadani izbornik"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
@@ -711,7 +705,7 @@ msgstr "Odaberi ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2171
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Neuspjeh u izvršenju naredbe \"%s\"."
@@ -766,7 +760,7 @@ msgstr "Tjedan  %V"
 msgid "Failed to execute clock command"
 msgstr "Neuspjeh u izvršenju naredbe sata"
 
-#: ../plugins/clock/clock.c:718
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "Prilagođeni format"
 
@@ -892,7 +886,7 @@ msgstr "Kasna večer"
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0 sat"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
@@ -1109,7 +1103,7 @@ msgstr "Neuspjelo pokretanje zadanog programa za \"%s\""
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Neuspjelo izvršenje željenog programa za kategoriju \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
@@ -1154,32 +1148,28 @@ msgstr ""
 msgid "_File Pattern:"
 msgstr "_Uzorak datoteke"
 
-#: ../plugins/launcher/launcher.c:1463
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "Neimenovana stavka"
 
-#: ../plugins/launcher/launcher.c:1603
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "Nema stavki"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ako obrišete stavku biti će trajno uklonjena"
 
-#: ../plugins/launcher/launcher-dialog.c:743
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Jeste li sigurni da želite ukloniti \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "Neimenovana stavka"
 
-#: ../plugins/launcher/launcher-dialog.c:759
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "Neuspjelo uklanjanje datoteke radne površine iz konfiguracijskog direktorija"
-
-#: ../plugins/launcher/launcher-dialog.c:803
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "Neuspjeh u otvaranju uređivača stavke radne površine"
 
@@ -1261,11 +1251,10 @@ msgid "Workspace _Settings..."
 msgstr "Postavke _radnog prostora"
 
 #: ../plugins/pager/pager.c:429
-#, fuzzy
 msgid "Unable to open the workspace settings"
-msgstr "Nije moguće otvoriti  Xfce postavke radnog prostora"
+msgstr "Nije moguće otvoriti  postavke radnog prostora"
 
-#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Radni prostor %d"
@@ -1345,21 +1334,20 @@ msgstr "sakrij sve prozore i pokaži radnu površinu"
 msgid "Show Desktop"
 msgstr "Pokaži radnu površinu"
 
-#: ../plugins/systray/systray.c:276
-#, fuzzy
+#: ../plugins/systray/systray.c:381
 msgid "Unable to start the notification area"
-msgstr "Nespjelo ponovno pokretanje ploče"
+msgstr ""
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:831
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:833
 msgid "The notification area lost selection"
 msgstr ""
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:986
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Jeste li sigurni da želite očistiti listu znanih programa?"
 
@@ -1377,8 +1365,8 @@ msgid "Notification Area"
 msgstr ""
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "_Broj redova"
+msgid "_Maximum icon size (px):"
+msgstr ""
 
 #: ../plugins/systray/systray-manager.c:403
 #, c-format
@@ -1439,13 +1427,12 @@ msgid "Show windows from _all workspaces or viewports"
 msgstr "Pokaži prozore sa _svih radnih prostora"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
 msgid "Show windows from all mo_nitors"
-msgstr "Pokaži prozore sa _svih radnih prostora"
+msgstr "Pokaži prozore sa _svih monitora"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
-msgstr ""
+msgstr "Red _slaganja"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
@@ -1468,23 +1455,23 @@ msgstr "Grupiranje _prozora"
 msgid "Window title"
 msgstr "Naslov prozora"
 
-#: ../plugins/tasklist/tasklist-widget.c:2990
+#: ../plugins/tasklist/tasklist-widget.c:2997
 msgid "Mi_nimize All"
 msgstr "Mi_nimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:2999
+#: ../plugins/tasklist/tasklist-widget.c:3006
 msgid "Un_minimize All"
 msgstr "De_minimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Ma_ximize All"
 msgstr "Ma_kimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3014
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "_Unmaximize All"
 msgstr "_Demaksimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3024
+#: ../plugins/tasklist/tasklist-widget.c:3031
 msgid "_Close All"
 msgstr "_Zatvori sve"
 
@@ -1554,6 +1541,12 @@ msgstr "Izbornik prozora"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr ""
+
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "Neuspjelo uklanjanje datoteke radne površine iz konfiguracijskog direktorija"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "_Broj redova"
 
 #~ msgid "Create a new launcher on the Xfce Panel"
 #~ msgstr "Napravi novi pokretač na Xfce Panel"
