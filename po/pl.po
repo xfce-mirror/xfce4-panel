@@ -6,14 +6,14 @@
 # Wit Wiliński <madman@berlios.de>, 2005.
 # Piotr Maliński <riklaunim@gmail.com>, 2006.
 # Szymon Kałasz <szymon_maestro@gazeta.pl>, 2006.
-# Piotr Sokół <psokol@jabster.pl>, 2009, 2010.
+# Piotr Sokół <psokol@jabster.pl>, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-23 23:09+0000\n"
-"PO-Revision-Date: 2010-12-30 11:51+0100\n"
+"PO-Revision-Date: 2011-01-03 17:24+0100\n"
 "Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
 "Language-Team: Polish <>\n"
 "MIME-Version: 1.0\n"
@@ -254,9 +254,8 @@ msgstr "Piotr Sokół <psokol@jabster.pl>, 2008, 2009, 2010"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
 msgid "Add New Item"
-msgstr "Dodawanie apletów"
+msgstr "Dodawanie aktywatora"
 
 #: ../panel/panel-dialogs.c:136
 #, fuzzy
@@ -482,7 +481,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Rozciąga panel pomiędzy kilkoma ekranami"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid ""
@@ -748,7 +747,7 @@ msgstr "Uproszczone _nazwy programów"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr "_Ikony w menu"
+msgstr "_Ikony menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
@@ -813,14 +812,13 @@ msgstr "Opcje:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Wyświetla menu w bieżącym położeniu kursora myszy"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "_Płaskie przyciski"
+msgstr "Wypisuje komunikat pomocy"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
@@ -1243,9 +1241,9 @@ msgid "If you delete an item, it will be permanently removed"
 msgstr "Aktywator zostanie bezpowrotnie usunięty."
 
 #: ../plugins/launcher/launcher-dialog.c:741
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Usunąć obszar roboczy „%s”?"
+msgstr "Usunąć aktywator „%s”?"
 
 #: ../plugins/launcher/launcher-dialog.c:742
 #, fuzzy
@@ -1358,7 +1356,7 @@ msgstr "Ilość _wierszy:"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr ""
+msgstr "Wyświetla miniaturę obszaru roboczego z obramowaniami widocznych okien"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1374,12 +1372,10 @@ msgid "Workspace Switcher"
 msgstr "Podgląd obszarów roboczych"
 
 #: ../plugins/pager/pager.desktop.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Przemieszcza pomiędzy obszarami roboczymi"
+msgstr "Przełącza pomiędzy obszarami roboczymi"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
-#, fuzzy
 msgid "Dots"
 msgstr "Punkty"
 
@@ -1398,7 +1394,7 @@ msgstr "Separator"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "Transparent"
-msgstr "Przezroczysty"
+msgstr "Odstęp"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
@@ -1406,7 +1402,7 @@ msgstr "_Rozciągnięcie"
 
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
-msgstr "Rozdziela aplety odstępem lub separatorem"
+msgstr "Rozdziela aplety za pomocą odstępu lub separatora"
 
 #: ../plugins/showdesktop/showdesktop.c:193
 msgid "Restore the minimized windows"
@@ -1438,7 +1434,6 @@ msgstr ""
 "będzie używany."
 
 #: ../plugins/systray/systray.c:571
-#, fuzzy
 msgid "The notification area lost selection"
 msgstr "Obszar powiadamiania utracił zaznaczenie"
 
@@ -1464,7 +1459,7 @@ msgid "_Number of rows:"
 msgstr "_Ilość wierszy:"
 
 #: ../plugins/systray/systray-manager.c:403
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Nie udało się pozyskać wyboru menedżera dla ekranu %d"
 
@@ -1477,7 +1472,6 @@ msgid "Always"
 msgstr "Zawsze"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
-#, fuzzy
 msgid "D_raw window frame when hovering a button"
 msgstr "_Wyświetlanie obramowania wskazywanego okna"
 
@@ -1556,7 +1550,7 @@ msgstr "Zm_inimalizuj wszystkie"
 
 #: ../plugins/tasklist/tasklist-widget.c:3006
 msgid "Un_minimize All"
-msgstr ""
+msgstr "_Cofnij minimalizację wszystkich"
 
 #: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Ma_ximize All"
@@ -1564,7 +1558,7 @@ msgstr "Zm_aksymalizuj wszystkie"
 
 #: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "C_ofnij maksymalizację wszystkich"
 
 #: ../plugins/tasklist/tasklist-widget.c:3031
 msgid "_Close All"
@@ -1579,12 +1573,10 @@ msgid "Desktop"
 msgstr "Pulpit"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
-#, fuzzy
 msgid "No Windows"
 msgstr "Brak okien"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
-#, fuzzy
 msgid "Urgent Windows"
 msgstr "Pilne okna"
 
