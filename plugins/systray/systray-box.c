@@ -495,17 +495,31 @@ systray_box_size_allocate (GtkWidget     *widget,
                   goto restart_allocation;
                 }
 
-              /* TODO maybe restart allocating with row_size-- if new row
-               * doesn't fit? */
               if (box->horizontal)
                 {
                   x = x_start;
                   y += row_size + SPACING;
+
+                  if (y > y_end)
+                    {
+                      /* we overflow the number of rows, restart
+                       * allocation with 1px smaller icons */
+                      row_size--;
+                      goto restart_allocation;
+                    }
                 }
               else
                 {
                   y = y_start;
                   x += row_size + SPACING;
+
+                  if (x > x_end)
+                    {
+                      /* we overflow the number of rows, restart
+                       * allocation with 1px smaller icons */
+                      row_size--;
+                      goto restart_allocation;
+                    }
                 }
             }
 
