@@ -358,7 +358,7 @@ panel_plugin_external_unrealize (GtkWidget *widget)
         kill (external->priv->pid, SIGTERM);
     }
 
-  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+  panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: plugin unrealized; quiting child",
                panel_module_get_name (external->module),
                external->unique_id);
@@ -375,7 +375,7 @@ panel_plugin_external_plug_added (GtkSocket *socket)
 
   external->priv->embedded = TRUE;
 
-  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+  panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child is embedded; %d properties in queue",
                panel_module_get_name (external->module),
                external->unique_id,
@@ -394,7 +394,7 @@ panel_plugin_external_plug_removed (GtkSocket *socket)
 
   external->priv->embedded = FALSE;
 
-  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+  panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child is unembedded",
                panel_module_get_name (external->module),
                external->unique_id);
@@ -510,6 +510,8 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
       cmd_line = NULL;
       program = NULL;
 
+      /* note that if the program was not found in PATH, we already
+       * warned for it in panel_debug_init, so no need to do that again */
       if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
         {
           program = g_find_program_in_path ("gdb");
@@ -560,7 +562,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
         }
       else
         {
-          panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+          panel_debug (PANEL_DEBUG_EXTERNAL,
                        "%s-%d: Failed to run the plugin in %s: %s",
                        panel_module_get_name (external->module),
                        external->unique_id, program,
@@ -580,7 +582,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
                                  G_SPAWN_DO_NOT_REAP_CHILD, NULL,
                                  NULL, &pid, &error);
 
-  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+  panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child spawned; pid=%d, argc=%d",
                panel_module_get_name (external->module),
                external->unique_id, pid, g_strv_length (argv));
@@ -619,7 +621,7 @@ panel_plugin_external_child_respawn (gpointer user_data)
   /* delay startup if the old child is still embedded */
   if (external->priv->embedded)
     {
-      panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+      panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: still a child embedded, respawn delayed",
                    panel_module_get_name (external->module), external->unique_id);
 
@@ -661,7 +663,7 @@ panel_plugin_external_child_watch (GPid     pid,
 
   external->priv->pid = 0;
 
-  panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+  panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child exited with status %d",
                panel_module_get_name (external->module),
                external->unique_id, status);
@@ -716,7 +718,7 @@ panel_plugin_external_child_watch (GPid     pid,
       && external->priv->spawn_timeout_id == 0
       && (auto_restart || panel_plugin_external_child_ask_restart (external)))
     {
-       panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+       panel_debug (PANEL_DEBUG_EXTERNAL,
                     "%s-%d: scheduled a respawn of the child",
                     panel_module_get_name (external->module), external->unique_id);
 
@@ -1038,7 +1040,7 @@ panel_plugin_external_restart (PanelPluginExternal *external)
 
   if (external->priv->pid != 0)
     {
-      panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL,
+      panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: child asked to restart; pid=%d",
                    panel_module_get_name (external->module),
                    external->unique_id, external->priv->pid);

@@ -121,7 +121,7 @@ panel_callback_handler (const gchar  *name,
 static void
 panel_signal_handler (gint signum)
 {
-  panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
+  panel_debug (PANEL_DEBUG_MAIN,
                "received signal %s <%d>, %s panel",
                g_strsignal (signum), signum,
                signum == SIGUSR1 ? "restarting" : "quiting");
@@ -137,7 +137,7 @@ panel_sm_client_quit (XfceSMClient *sm_client)
   panel_return_if_fail (XFCE_IS_SM_CLIENT (sm_client));
   panel_return_if_fail (!panel_dbus_service_get_restart ());
 
-  panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
+  panel_debug (PANEL_DEBUG_MAIN,
                "terminate panel for session manager");
 
   gtk_main_quit ();
@@ -152,7 +152,7 @@ panel_sm_client_save_state (XfceSMClient     *sm_client,
   panel_return_if_fail (XFCE_IS_SM_CLIENT (sm_client));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
-  panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
+  panel_debug (PANEL_DEBUG_MAIN,
                "save configuration for session manager");
 
   panel_application_save (application, TRUE);
@@ -175,7 +175,7 @@ main (gint argc, gchar **argv)
   const gchar      *error_msg;
   XfceSMClient     *sm_client;
 
-  panel_debug (PANEL_DEBUG_DOMAIN_MAIN,
+  panel_debug (PANEL_DEBUG_MAIN,
                "version %s on gtk+ %d.%d.%d (%d.%d.%d), glib %d.%d.%d (%d.%d.%d)",
                LIBXFCE4PANEL_VERSION,
                gtk_major_version, gtk_minor_version, gtk_micro_version,
@@ -363,7 +363,7 @@ dbus_return:
                                          "automatically started the next time you login."),
                                        _("No running instance of %s was found"), G_LOG_DOMAIN))
                 {
-                  panel_debug (PANEL_DEBUG_DOMAIN_MAIN, "user confirmed to start the panel");
+                  panel_debug (PANEL_DEBUG_MAIN, "user confirmed to start the panel");
                   goto launch_panel;
                 }
               else

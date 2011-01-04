@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2010-2011 Nick Schermer <nick@xfce.org>
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -37,28 +37,31 @@ PanelDebugFlag panel_debug_flags = 0;
 /* additional debug levels */
 static const GDebugKey panel_debug_keys[] =
 {
+  { "main", PANEL_DEBUG_MAIN },
+  { "positioning", PANEL_DEBUG_POSITIONING },
+  { "display-layout", PANEL_DEBUG_DISPLAY_LAYOUT },
+  { "struts", PANEL_DEBUG_STRUTS },
+  { "application", PANEL_DEBUG_APPLICATION },
+  { "external", PANEL_DEBUG_EXTERNAL },
+  { "external46", PANEL_DEBUG_EXTERNAL46 },
+  { "tasklist", PANEL_DEBUG_TASKLIST },
+  { "base-window", PANEL_DEBUG_BASE_WINDOW },
+  { "applicationmenu", PANEL_DEBUG_APPLICATIONMENU },
   { "gdb", PANEL_DEBUG_GDB },
   { "valgrind", PANEL_DEBUG_VALGRIND }
 };
 
 
 
-void
-panel_debug (const gchar *domain,
-             const gchar *message,
-             ...)
+static PanelDebugFlag
+panel_debug_init (void)
 {
-  static volatile gsize   level__volatile = 0;
-  const gchar            *value;
-  gchar                  *string, *path;
-  va_list                 args;
-  const gchar            *proxy_application;
+  static volatile gsize  inited__volatile = 0;
+  const gchar           *value;
+  gchar                 *path;
+  const gchar           *proxy_application;
 
-  panel_return_if_fail (domain != NULL);
-  panel_return_if_fail (message != NULL);
-
-  /* initialize the debugging domains */
-  if (g_once_init_enter (&level__volatile))
+  if (g_once_init_enter (&inited__volatile))
     {
       value = g_getenv ("PANEL_DEBUG");
       if (value != NULL && *value != '\0')
@@ -66,7 +69,7 @@ panel_debug (const gchar *domain,
           panel_debug_flags = g_parse_debug_string (value, panel_debug_keys,
                                                     G_N_ELEMENTS (panel_debug_keys));
 
-          /* always enable debug logging */
+          /* always enable (unfiltered) debugging messages */
           PANEL_SET_FLAG (panel_debug_flags, PANEL_DEBUG_YES);
 
           if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
@@ -75,6 +78,9 @@ panel_debug (const gchar *domain,
 
               /* performs sanity checks on the released memory slices */
               g_setenv ("G_SLICE", "debug-blocks", TRUE);
+
+              /* make sure we don't run gdb and valgrind at the same time */
+              PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND);
             }
           else if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
             {
@@ -109,17 +115,47 @@ panel_debug (const gchar *domain,
             }
         }
 
-      g_once_init_leave (&level__volatile, 1);
+      g_once_init_leave (&inited__volatile, 1);
     }
 
+  return panel_debug_flags;
+}
+
+
+
+void
+panel_debug (PanelDebugFlag  domain,
+             const gchar    *message,
+             ...)
+{
+  gchar       *string;
+  va_list      args;
+  const gchar *domain_name = NULL;
+  guint        i;
+
+  panel_return_if_fail (domain > 0);
+  panel_return_if_fail (message != NULL);
+
   /* leave when debug is disabled */
-  if (panel_debug_flags == 0)
+  if (panel_debug_init () == 0)
     return;
+
+  /* lookup domain name */
+  for (i = 0; i < G_N_ELEMENTS (panel_debug_keys); i++)
+    {
+      if (panel_debug_keys[i].value == domain)
+        {
+          domain_name = panel_debug_keys[i].key;
+          break;
+        }
+    }
+
+  panel_assert (domain_name != NULL);
 
   va_start (args, message);
   string = g_strdup_vprintf (message, args);
   va_end (args);
 
-  g_printerr (PACKAGE_NAME "(%s): %s\n", domain, string);
+  g_printerr (PACKAGE_NAME "(%s): %s\n", domain_name, string);
   g_free (string);
 }

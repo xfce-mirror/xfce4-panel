@@ -19,31 +19,30 @@
 #ifndef __PANEL_DEBUG_H__
 #define __PANEL_DEBUG_H__
 
-#define PANEL_DEBUG_DOMAIN_MAIN            "main"
-#define PANEL_DEBUG_DOMAIN_POSITIONING     "positioning"
-#define PANEL_DEBUG_DOMAIN_DISPLAY_LAYOUT  "display-layout"
-#define PANEL_DEBUG_DOMAIN_STRUTS          "struts"
-#define PANEL_DEBUG_DOMAIN_APPLICATION     "application"
-#define PANEL_DEBUG_DOMAIN_EXTERNAL        "external"
-#define PANEL_DEBUG_DOMAIN_EXTERNAL46      "external46"
-#define PANEL_DEBUG_DOMAIN_TASKLIST        "tasklist"
-#define PANEL_DEBUG_DOMAIN_BASE_WINDOW     "base-window"
-#define PANEL_DEBUG_DOMAIN_APPLICATIONMENU "applicationmenu"
-
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 
 typedef enum
 {
-  PANEL_DEBUG_YES      = 1 << 0,  /* always enabled if PANEL_DEBUG is not %NULL */
-  PANEL_DEBUG_GDB      = 1 << 1,  /* run plugin in gdb */
-  PANEL_DEBUG_VALGRIND = 1 << 2   /* run plugin in valgrind */
+  PANEL_DEBUG_YES             = 1 << 0, /* always enabled if PANEL_DEBUG is not %NULL */
+  PANEL_DEBUG_MAIN            = 1 << 1,
+  PANEL_DEBUG_POSITIONING     = 1 << 2,
+  PANEL_DEBUG_DISPLAY_LAYOUT  = 1 << 3,
+  PANEL_DEBUG_STRUTS          = 1 << 4,
+  PANEL_DEBUG_APPLICATION     = 1 << 5,
+  PANEL_DEBUG_EXTERNAL        = 1 << 6,
+  PANEL_DEBUG_EXTERNAL46      = 1 << 7,
+  PANEL_DEBUG_TASKLIST        = 1 << 8,
+  PANEL_DEBUG_BASE_WINDOW     = 1 << 9,
+  PANEL_DEBUG_APPLICATIONMENU = 1 << 10,
+  PANEL_DEBUG_GDB             = 1 << 11, /* run plugin in gdb */
+  PANEL_DEBUG_VALGRIND        = 1 << 12  /* run plugin in valgrind */
 }
 PanelDebugFlag;
 
 extern PanelDebugFlag panel_debug_flags;
 
-void panel_debug (const gchar *domain,
-                  const gchar *message,
+void panel_debug (PanelDebugFlag  domain,
+                  const gchar    *message,
                   ...) G_GNUC_PRINTF (2, 3);
 
 #endif /* !__PANEL_DEBUG_H__ */

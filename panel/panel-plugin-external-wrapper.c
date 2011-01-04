@@ -185,7 +185,7 @@ panel_plugin_external_wrapper_constructor (GType                  type,
       panel_return_val_if_fail (PANEL_PLUGIN_EXTERNAL (object)->unique_id != -1, NULL);
       path = g_strdup_printf (PANEL_DBUS_WRAPPER_PATH, PANEL_PLUGIN_EXTERNAL (object)->unique_id);
       dbus_g_connection_register_g_object (connection, path, object);
-      panel_debug (PANEL_DEBUG_DOMAIN_EXTERNAL, "register dbus path %s", path);
+      panel_debug (PANEL_DEBUG_EXTERNAL, "register dbus path %s", path);
       g_free (path);
 
       dbus_g_connection_unref (connection);

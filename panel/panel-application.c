@@ -244,7 +244,7 @@ panel_application_finalize (GObject *object)
   g_object_unref (G_OBJECT (application->factory));
 
   /* this is a good reference if all the objects are released */
-  panel_debug (PANEL_DEBUG_DOMAIN_APPLICATION, "finalized");
+  panel_debug (PANEL_DEBUG_APPLICATION, "finalized");
 
   (*G_OBJECT_CLASS (panel_application_parent_class)->finalize) (object);
 }
@@ -1112,7 +1112,7 @@ panel_application_save (PanelApplication *application,
       if (panel_window_get_locked (li->data))
         continue;
 
-      panel_debug (PANEL_DEBUG_DOMAIN_APPLICATION,
+      panel_debug (PANEL_DEBUG_APPLICATION,
                    "saving /panels/panel-%u, save-plugins=%s",
                    i, PANEL_DEBUG_BOOL (save_plugin_providers));
 

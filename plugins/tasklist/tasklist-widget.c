@@ -899,7 +899,7 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
        * overflow menu */
       if (n_buttons > n_buttons_target)
         {
-          panel_debug (PANEL_DEBUG_DOMAIN_TASKLIST,
+          panel_debug (PANEL_DEBUG_TASKLIST,
                        "Putting %d windows in overflow menu",
                        n_buttons - n_buttons_target);
 

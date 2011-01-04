@@ -670,7 +670,7 @@ panel_base_window_composited_changed (GtkWidget *widget)
   panel_return_if_fail (GDK_IS_COLORMAP (colormap));
   colormap_changed = gtk_widget_get_colormap (widget) != colormap;
 
-  panel_debug (PANEL_DEBUG_DOMAIN_BASE_WINDOW,
+  panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "set new colormap; composited=%s, rgba=%s, visible=%s",
                PANEL_DEBUG_BOOL (gtk_widget_is_composited (widget)),
                PANEL_DEBUG_BOOL (colormap_rgba),
