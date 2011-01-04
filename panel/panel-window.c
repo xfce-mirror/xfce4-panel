@@ -1507,7 +1507,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (gdk_error_trap_pop () != 0)
     g_critical ("Failed to set the struts");
 
-  if (G_UNLIKELY (panel_debug_flags != 0))
+  if (panel_debug_has_domain (PANEL_DEBUG_YES))
     {
       n = -1;
 
@@ -1693,7 +1693,7 @@ panel_window_display_layout_debug (GtkWidget *widget)
   gchar        *name;
 
   panel_return_if_fail (GTK_IS_WIDGET (widget));
-  panel_return_if_fail (panel_debug_flags != 0);
+  panel_return_if_fail (panel_debug_has_domain (PANEL_DEBUG_YES));
 
   str = g_string_new (NULL);
 
@@ -1760,7 +1760,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
     return;
 
   /* print the display layout when debugging is enabled */
-  if (G_UNLIKELY (panel_debug_flags != 0))
+  if (G_UNLIKELY (panel_debug_has_domain (PANEL_DEBUG_YES)))
     panel_window_display_layout_debug (GTK_WIDGET (window));
 
   /* update the struts edge of this window and check if we need to force

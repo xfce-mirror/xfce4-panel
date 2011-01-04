@@ -30,7 +30,7 @@
 
 
 
-PanelDebugFlag panel_debug_flags = 0;
+static PanelDebugFlag panel_debug_flags = 0;
 
 
 
@@ -147,6 +147,14 @@ panel_debug_print (PanelDebugFlag  domain,
   string = g_strdup_vprintf (message, args);
   g_printerr (PACKAGE_NAME "(%s): %s\n", domain_name, string);
   g_free (string);
+}
+
+
+
+gboolean
+panel_debug_has_domain (PanelDebugFlag domain)
+{
+  return PANEL_HAS_FLAG (panel_debug_flags, domain);
 }
 
 

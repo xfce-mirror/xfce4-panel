@@ -503,8 +503,8 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
   panel_return_if_fail (argv != NULL);
 
   /* check debugging state */
-  if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB)
-      || PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
+  if (panel_debug_has_domain (PANEL_DEBUG_GDB)
+      || panel_debug_has_domain (PANEL_DEBUG_VALGRIND))
     {
       g_get_current_time (&timestamp);
       cmd_line = NULL;
@@ -512,7 +512,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
 
       /* note that if the program was not found in PATH, we already
        * warned for it in panel_debug_init, so no need to do that again */
-      if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
+      if (panel_debug_has_domain (PANEL_DEBUG_GDB))
         {
           program = g_find_program_in_path ("gdb");
           if (G_LIKELY (program != NULL))
@@ -531,7 +531,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
                                           argv[PLUGIN_ARGV_UNIQUE_ID]);
             }
         }
-      else if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
+      else if (panel_debug_has_domain (PANEL_DEBUG_VALGRIND))
         {
           program = g_find_program_in_path ("valgrind");
           if (G_LIKELY (program != NULL))
