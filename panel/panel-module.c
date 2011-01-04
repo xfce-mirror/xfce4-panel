@@ -26,6 +26,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 
@@ -423,7 +424,8 @@ panel_module_new_plugin (PanelModule  *module,
                          gint          unique_id,
                          gchar       **arguments)
 {
-  GtkWidget *plugin = NULL;
+  GtkWidget   *plugin = NULL;
+  const gchar *debug_type = NULL;
 
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
   panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
@@ -450,6 +452,8 @@ panel_module_new_plugin (PanelModule  *module,
                                      "comment", module->comment,
                                      "arguments", arguments,
                                      NULL);
+
+              debug_type = "object-type";
             }
           else if (module->construct_func != NULL)
             {
@@ -460,6 +464,8 @@ panel_module_new_plugin (PanelModule  *module,
                                                   module->comment,
                                                   arguments,
                                                   screen);
+
+              debug_type = "construct-func";
             }
 
           if (G_LIKELY (plugin != NULL))
@@ -473,10 +479,12 @@ panel_module_new_plugin (PanelModule  *module,
 
     case WRAPPER:
       plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);
+      debug_type = "external-wrapper";
       break;
 
     case EXTERNAL_46:
       plugin = panel_plugin_external_46_new (module, unique_id, arguments);
+      debug_type = "external-46";
       break;
 
     default:
@@ -488,6 +496,9 @@ panel_module_new_plugin (PanelModule  *module,
     {
       /* increase count */
       module->use_count++;
+
+      panel_debug (PANEL_DEBUG_MODULE, "new item (type=%s, name=%s, id=%d)",
+          debug_type, panel_module_get_name (module), unique_id);
 
       /* handle module use count and unloading */
       g_object_weak_ref (G_OBJECT (plugin),

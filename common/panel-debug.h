@@ -36,7 +36,8 @@ typedef enum
   PANEL_DEBUG_APPLICATIONSMENU = 1 << 10,
   PANEL_DEBUG_GDB              = 1 << 11, /* run plugin in gdb */
   PANEL_DEBUG_VALGRIND         = 1 << 12, /* run plugin in valgrind */
-  PANEL_DEBUG_SYSTRAY          = 1 << 13
+  PANEL_DEBUG_SYSTRAY          = 1 << 13,
+  PANEL_DEBUG_MODULE           = 1 << 14
 }
 PanelDebugFlag;
 

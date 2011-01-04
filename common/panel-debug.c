@@ -49,7 +49,8 @@ static const GDebugKey panel_debug_keys[] =
   { "applicationsmenu", PANEL_DEBUG_APPLICATIONSMENU },
   { "systray", PANEL_DEBUG_SYSTRAY },
   { "gdb", PANEL_DEBUG_GDB },
-  { "valgrind", PANEL_DEBUG_VALGRIND }
+  { "valgrind", PANEL_DEBUG_VALGRIND },
+  { "module", PANEL_DEBUG_MODULE }
 };
 
 
