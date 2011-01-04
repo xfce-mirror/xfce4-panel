@@ -58,8 +58,6 @@ panel_debug_init (void)
 {
   static volatile gsize  inited__volatile = 0;
   const gchar           *value;
-  gchar                 *path;
-  const gchar           *proxy_application;
 
   if (g_once_init_enter (&inited__volatile))
     {
@@ -71,48 +69,6 @@ panel_debug_init (void)
 
           /* always enable (unfiltered) debugging messages */
           PANEL_SET_FLAG (panel_debug_flags, PANEL_DEBUG_YES);
-
-          if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
-            {
-              proxy_application = "gdb";
-
-              /* performs sanity checks on the released memory slices */
-              g_setenv ("G_SLICE", "debug-blocks", TRUE);
-
-              /* make sure we don't run gdb and valgrind at the same time */
-              PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND);
-            }
-          else if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
-            {
-              proxy_application = "valgrind";
-
-              /* use g_malloc() and g_free() instead of slices */
-              g_setenv ("G_SLICE", "always-malloc", TRUE);
-              g_setenv ("G_DEBUG", "gc-friendly", TRUE);
-            }
-          else
-            {
-              proxy_application = NULL;
-            }
-
-          if (proxy_application != NULL)
-            {
-              path = g_find_program_in_path (proxy_application);
-              if (G_LIKELY (path != NULL))
-                {
-                  /* TODO: only print those messages in the main application */
-                  g_printerr (PACKAGE_NAME "(debug): running plugins with %s; "
-                              "log files stored in %s\n", path, g_get_tmp_dir ());
-                  g_free (path);
-                }
-              else
-                {
-                  PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_GDB | PANEL_DEBUG_VALGRIND);
-
-                  g_printerr (PACKAGE_NAME "(debug): %s not found in PATH\n",
-                              proxy_application);
-                }
-            }
         }
 
       g_once_init_leave (&inited__volatile, 1);
@@ -147,6 +103,50 @@ panel_debug_print (PanelDebugFlag  domain,
   string = g_strdup_vprintf (message, args);
   g_printerr (PACKAGE_NAME "(%s): %s\n", domain_name, string);
   g_free (string);
+}
+
+
+
+void
+panel_debug_notify_proxy (void)
+{
+  gchar       *path;
+  const gchar *proxy_application;
+
+  if (G_UNLIKELY (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB)))
+    proxy_application = "gdb";
+  else if (G_UNLIKELY (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND)))
+    proxy_application = "valgrind";
+  else
+    return;
+
+  path = g_find_program_in_path (proxy_application);
+  if (G_LIKELY (path != NULL))
+    {
+      g_printerr (PACKAGE_NAME "(debug): running plugins with %s; "
+                  "log files stored in %s\n", path, g_get_tmp_dir ());
+      g_free (path);
+
+      if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
+        {
+          /* performs sanity checks on the released memory slices */
+          g_setenv ("G_SLICE", "debug-blocks", TRUE);
+        }
+      else if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
+        {
+          /* use g_malloc() and g_free() instead of slices */
+          g_setenv ("G_SLICE", "always-malloc", TRUE);
+          g_setenv ("G_DEBUG", "gc-friendly", TRUE);
+        }
+    }
+  else
+    {
+      /* make sure external plugins are not started in one of the proxies */
+      PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_GDB | PANEL_DEBUG_VALGRIND);
+
+      g_printerr (PACKAGE_NAME "(debug): %s not found in PATH\n",
+                  proxy_application);
+    }
 }
 
 

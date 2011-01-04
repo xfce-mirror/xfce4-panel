@@ -39,14 +39,16 @@ typedef enum
 }
 PanelDebugFlag;
 
-gboolean panel_debug_has_domain (PanelDebugFlag  domain);
+void     panel_debug_notify_proxy (void);
 
-void     panel_debug            (PanelDebugFlag  domain,
-                                 const gchar    *message,
-                                 ...) G_GNUC_PRINTF (2, 3);
+gboolean panel_debug_has_domain   (PanelDebugFlag  domain);
 
-void     panel_debug_filtered   (PanelDebugFlag  domain,
-                                 const gchar    *message,
-                                 ...) G_GNUC_PRINTF (2, 3);
+void     panel_debug              (PanelDebugFlag  domain,
+                                   const gchar    *message,
+                                   ...) G_GNUC_PRINTF (2, 3);
+
+void     panel_debug_filtered     (PanelDebugFlag  domain,
+                                   const gchar    *message,
+                                   ...) G_GNUC_PRINTF (2, 3);
 
 #endif /* !__PANEL_DEBUG_H__ */

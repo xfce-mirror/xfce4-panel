@@ -183,6 +183,9 @@ main (gint argc, gchar **argv)
                glib_major_version, glib_minor_version, glib_micro_version,
                GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
 
+  /* inform the user about usage of gdb/valgrind */
+  panel_debug_notify_proxy ();
+
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
