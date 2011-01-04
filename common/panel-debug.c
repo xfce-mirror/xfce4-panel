@@ -46,7 +46,7 @@ static const GDebugKey panel_debug_keys[] =
   { "external46", PANEL_DEBUG_EXTERNAL46 },
   { "tasklist", PANEL_DEBUG_TASKLIST },
   { "base-window", PANEL_DEBUG_BASE_WINDOW },
-  { "applicationmenu", PANEL_DEBUG_APPLICATIONMENU },
+  { "applicationsmenu", PANEL_DEBUG_APPLICATIONSMENU },
   { "gdb", PANEL_DEBUG_GDB },
   { "valgrind", PANEL_DEBUG_VALGRIND }
 };

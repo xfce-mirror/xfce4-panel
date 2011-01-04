@@ -211,7 +211,7 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   plugin->show_button_title = TRUE;
   plugin->custom_menu = FALSE;
 
-  panel_debug (PANEL_DEBUG_APPLICATIONMENU,
+  panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
                "XDG_MENU_PREFIX is set to \"%s\"",
                g_getenv ("XDG_MENU_PREFIX"));
 
@@ -816,7 +816,7 @@ applications_menu_plugin_menu_reload (ApplicationsMenuPlugin *plugin)
 
   if (plugin->menu != NULL)
     {
-      panel_debug (PANEL_DEBUG_APPLICATIONMENU,
+      panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
                    "destroy menu for reload");
 
       /* if the menu is opened, do not destroy it under the users'
@@ -1024,7 +1024,7 @@ applications_menu_plugin_menu (GtkWidget              *button,
           filename = g_file_get_parse_name (file);
           g_object_unref (G_OBJECT (file));
 
-          panel_debug (PANEL_DEBUG_APPLICATIONMENU,
+          panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
                        "loading from %s", filename);
           g_free (filename);
         }
