@@ -166,7 +166,8 @@ systray_socket_size_allocate (GtkWidget     *widget,
   gboolean       resized = allocation->width != widget->allocation.width
                            ||allocation->height != widget->allocation.height;
 
-  if ((moved || resized) && GTK_WIDGET_MAPPED (widget))
+  if ((moved || resized)
+      && GTK_WIDGET_MAPPED (widget))
     {
       if (socket->is_composited)
         gdk_window_invalidate_rect (gdk_window_get_parent (widget->window),
@@ -175,7 +176,8 @@ systray_socket_size_allocate (GtkWidget     *widget,
 
   GTK_WIDGET_CLASS (systray_socket_parent_class)->size_allocate (widget, allocation);
 
-  if ((moved || resized) && GTK_WIDGET_MAPPED (widget))
+  if ((moved || resized)
+      && GTK_WIDGET_MAPPED (widget))
     {
       if (socket->is_composited)
         gdk_window_invalidate_rect (gdk_window_get_parent (widget->window),
@@ -208,9 +210,9 @@ systray_socket_expose_event (GtkWidget      *widget,
       /* clear to parent-relative pixmap */
       gdk_window_clear_area (widget->window,
                              event->area.x,
-           event->area.y,
+                             event->area.y,
                              event->area.width,
-           event->area.height);
+                             event->area.height);
     }
 
   return FALSE;

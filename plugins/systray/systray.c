@@ -416,6 +416,14 @@ systray_plugin_screen_changed (GtkWidget *widget,
 }
 
 
+static void
+systray_plugin_composited_changed (GtkWidget *widget)
+{
+  /* restart the manager to add the sockets again */
+  systray_plugin_screen_changed (widget, gtk_widget_get_screen (widget));
+}
+
+
 
 static void
 systray_plugin_construct (XfcePanelPlugin *panel_plugin)
@@ -440,6 +448,10 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
       G_CALLBACK (systray_plugin_screen_changed), NULL);
   systray_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
+
+  /* restart internally if compositing changed */
+  g_signal_connect (G_OBJECT (plugin), "composited-changed",
+     G_CALLBACK (systray_plugin_composited_changed), NULL);
 }
 
 
