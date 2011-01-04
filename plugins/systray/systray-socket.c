@@ -35,7 +35,10 @@
 #include <gtk/gtk.h>
 
 #include <libxfce4panel/libxfce4panel.h>
+
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
+
 #include "systray-socket.h"
 
 
@@ -152,6 +155,12 @@ systray_socket_realize (GtkWidget *widget)
       socket->parent_relative_bg || socket->is_composited);
 
   gtk_widget_set_double_buffered (widget, socket->parent_relative_bg);
+
+  panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
+      "socket %s (composited=%s, relative-bg=%s",
+      systray_socket_get_name (socket),
+      PANEL_DEBUG_BOOL (socket->is_composited),
+      PANEL_DEBUG_BOOL (socket->parent_relative_bg));
 }
 
 

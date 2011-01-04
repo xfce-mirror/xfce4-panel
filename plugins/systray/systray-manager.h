@@ -67,7 +67,5 @@ void            systray_manager_unregister           (SystrayManager      *manag
 void            systray_manager_set_orientation      (SystrayManager      *manager,
                                                       GtkOrientation       orientation);
 
-gchar          *systray_manager_get_application_name (GtkWidget            *socket) G_GNUC_MALLOC;
-
 
 #endif /* !__SYSTRAY_MANAGER_H__ */

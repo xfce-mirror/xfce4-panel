@@ -31,7 +31,7 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
-#include <common/panel-xfconf.h>
+#include <common/panel-debug.h>
 
 #include "systray-box.h"
 #include "systray-socket.h"
@@ -321,6 +321,10 @@ systray_box_size_request (GtkWidget      *widget,
         }
     }
 
+  panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
+      "requested cells=%g, rows=%d, row_size=%d, children=%d",
+      cells, rows, row_size, box->n_visible_children);
+
   if (cells > 0.00)
     {
       cols = cells / (gdouble) rows;
@@ -356,6 +360,10 @@ systray_box_size_request (GtkWidget      *widget,
   /* emit property if changed */
   if (box->n_hidden_childeren != n_hidden_childeren)
     {
+      panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
+          "hidden children changed (%d -> %d)",
+          n_hidden_childeren, box->n_hidden_childeren);
+
       box->n_hidden_childeren = n_hidden_childeren;
       g_object_notify (G_OBJECT (box), "has-hidden");
     }
@@ -391,8 +399,12 @@ systray_box_size_allocate (GtkWidget     *widget,
 
   border = GTK_CONTAINER (widget)->border_width;
 
-  alloc_size = box->horizontal ? widget->allocation.height : widget->allocation.width;
+  alloc_size = box->horizontal ? allocation->height : allocation->width;
   systray_box_size_get_max_child_size (box, alloc_size, &rows, &row_size, &offset);
+
+  panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocate rows=%d, row_size=%d, w=%d, h=%d, horiz=%s",
+                        rows, row_size, allocation->width, allocation->height,
+                        PANEL_DEBUG_BOOL (box->horizontal));
 
   /* get allocation bounds */
   x_start = allocation->x + border;
@@ -505,6 +517,11 @@ systray_box_size_allocate (GtkWidget     *widget,
                       /* we overflow the number of rows, restart
                        * allocation with 1px smaller icons */
                       row_size--;
+
+                      panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
+                          "y overflow (%d > %d), restart with row_size=%d",
+                          y, y_end, row_size);
+
                       goto restart_allocation;
                     }
                 }
@@ -518,6 +535,11 @@ systray_box_size_allocate (GtkWidget     *widget,
                       /* we overflow the number of rows, restart
                        * allocation with 1px smaller icons */
                       row_size--;
+
+                      panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
+                          "x overflow (%d > %d), restart with row_size=%d",
+                          x, x_end, row_size);
+
                       goto restart_allocation;
                     }
                 }
@@ -531,6 +553,10 @@ systray_box_size_allocate (GtkWidget     *widget,
           else
             y += row_size * ratio + SPACING;
         }
+
+      panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocated %s at (%d,%d;%d,%d)",
+          systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child)),
+          child_alloc.x, child_alloc.y, child_alloc.width, child_alloc.height);
 
       gtk_widget_size_allocate (child, &child_alloc);
     }

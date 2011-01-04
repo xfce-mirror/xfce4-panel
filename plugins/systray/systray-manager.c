@@ -36,6 +36,7 @@
 #include <gtk/gtk.h>
 
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
@@ -387,6 +388,8 @@ systray_manager_register (SystrayManager  *manager,
       gdk_display_add_client_message_filter (display,
           gdk_atom_intern ("_NET_SYSTEM_TRAY_MESSAGE_DATA", FALSE),
           systray_manager_handle_client_message_message_data, manager);
+
+      panel_debug (PANEL_DEBUG_SYSTRAY, "registered manager on screen %d", screen_number);
     }
   else
     {
@@ -468,6 +471,8 @@ systray_manager_unregister (SystrayManager *manager)
   manager->invisible = NULL;
   gtk_widget_destroy (invisible);
   g_object_unref (G_OBJECT (invisible));
+
+  panel_debug (PANEL_DEBUG_SYSTRAY, "unregistered manager");
 }
 
 
