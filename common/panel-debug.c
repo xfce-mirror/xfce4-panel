@@ -123,22 +123,14 @@ panel_debug_init (void)
 
 
 
-void
-panel_debug (PanelDebugFlag  domain,
-             const gchar    *message,
-             ...)
+static void
+panel_debug_print (PanelDebugFlag  domain,
+                   const gchar    *message,
+                   va_list         args)
 {
   gchar       *string;
-  va_list      args;
   const gchar *domain_name = NULL;
   guint        i;
-
-  panel_return_if_fail (domain > 0);
-  panel_return_if_fail (message != NULL);
-
-  /* leave when debug is disabled */
-  if (panel_debug_init () == 0)
-    return;
 
   /* lookup domain name */
   for (i = 0; i < G_N_ELEMENTS (panel_debug_keys); i++)
@@ -152,10 +144,49 @@ panel_debug (PanelDebugFlag  domain,
 
   panel_assert (domain_name != NULL);
 
-  va_start (args, message);
   string = g_strdup_vprintf (message, args);
-  va_end (args);
-
   g_printerr (PACKAGE_NAME "(%s): %s\n", domain_name, string);
   g_free (string);
+}
+
+
+
+void
+panel_debug (PanelDebugFlag  domain,
+             const gchar    *message,
+             ...)
+{
+  va_list args;
+
+  panel_return_if_fail (domain > 0);
+  panel_return_if_fail (message != NULL);
+
+  /* leave when debug is disabled */
+  if (panel_debug_init () == 0)
+    return;
+
+  va_start (args, message);
+  panel_debug_print (domain, message, args);
+  va_end (args);
+}
+
+
+
+void
+panel_debug_filtered (PanelDebugFlag  domain,
+                      const gchar    *message,
+                      ...)
+{
+  va_list args;
+
+  panel_return_if_fail (domain > 0);
+  panel_return_if_fail (message != NULL);
+
+  /* leave when the filter does not match */
+  if (!PANEL_HAS_FLAG (panel_debug_init (), domain))
+    return;
+
+  va_start (args, message);
+  panel_debug_print (domain, message, args);
+  va_end (args);
 }
