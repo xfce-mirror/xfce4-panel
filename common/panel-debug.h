@@ -24,21 +24,25 @@
 typedef enum
 {
   PANEL_DEBUG_YES              = 1 << 0, /* always enabled if PANEL_DEBUG is not %NULL */
-  PANEL_DEBUG_MAIN             = 1 << 1,
-  PANEL_DEBUG_POSITIONING      = 1 << 2,
-  PANEL_DEBUG_DISPLAY_LAYOUT   = 1 << 3,
-  PANEL_DEBUG_STRUTS           = 1 << 4,
-  PANEL_DEBUG_APPLICATION      = 1 << 5,
-  PANEL_DEBUG_EXTERNAL         = 1 << 6,
-  PANEL_DEBUG_EXTERNAL46       = 1 << 7,
-  PANEL_DEBUG_TASKLIST         = 1 << 8,
-  PANEL_DEBUG_BASE_WINDOW      = 1 << 9,
-  PANEL_DEBUG_APPLICATIONSMENU = 1 << 10,
-  PANEL_DEBUG_GDB              = 1 << 11, /* run plugin in gdb */
-  PANEL_DEBUG_VALGRIND         = 1 << 12, /* run plugin in valgrind */
-  PANEL_DEBUG_SYSTRAY          = 1 << 13,
-  PANEL_DEBUG_MODULE           = 1 << 14,
-  PANEL_DEBUG_MODULE_FACTORY   = 1 << 15
+
+  /* external plugin proxy modes */
+  PANEL_DEBUG_GDB              = 1 << 1, /* run external plugins in gdb */
+  PANEL_DEBUG_VALGRIND         = 1 << 2, /* run external plugins in valgrind */
+
+  /* filter domains */
+  PANEL_DEBUG_APPLICATION      = 1 << 3,
+  PANEL_DEBUG_APPLICATIONSMENU = 1 << 4,
+  PANEL_DEBUG_BASE_WINDOW      = 1 << 5,
+  PANEL_DEBUG_DISPLAY_LAYOUT   = 1 << 6,
+  PANEL_DEBUG_EXTERNAL         = 1 << 7,
+  PANEL_DEBUG_EXTERNAL46       = 1 << 8,
+  PANEL_DEBUG_MAIN             = 1 << 9,
+  PANEL_DEBUG_MODULE           = 1 << 10,
+  PANEL_DEBUG_MODULE_FACTORY   = 1 << 11,
+  PANEL_DEBUG_POSITIONING      = 1 << 12,
+  PANEL_DEBUG_STRUTS           = 1 << 13,
+  PANEL_DEBUG_SYSTRAY          = 1 << 14,
+  PANEL_DEBUG_TASKLIST         = 1 << 15
 }
 PanelDebugFlag;
 

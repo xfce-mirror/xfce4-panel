@@ -37,21 +37,24 @@ static PanelDebugFlag panel_debug_flags = 0;
 /* additional debug levels */
 static const GDebugKey panel_debug_keys[] =
 {
-  { "main", PANEL_DEBUG_MAIN },
-  { "positioning", PANEL_DEBUG_POSITIONING },
-  { "display-layout", PANEL_DEBUG_DISPLAY_LAYOUT },
-  { "struts", PANEL_DEBUG_STRUTS },
-  { "application", PANEL_DEBUG_APPLICATION },
-  { "external", PANEL_DEBUG_EXTERNAL },
-  { "external46", PANEL_DEBUG_EXTERNAL46 },
-  { "tasklist", PANEL_DEBUG_TASKLIST },
-  { "base-window", PANEL_DEBUG_BASE_WINDOW },
-  { "applicationsmenu", PANEL_DEBUG_APPLICATIONSMENU },
-  { "systray", PANEL_DEBUG_SYSTRAY },
+  /* external plugin proxy modes */
   { "gdb", PANEL_DEBUG_GDB },
   { "valgrind", PANEL_DEBUG_VALGRIND },
-  { "module", PANEL_DEBUG_MODULE },
+
+  /* domains for debug messages in the code */
+  { "application", PANEL_DEBUG_APPLICATION },
+  { "applicationsmenu", PANEL_DEBUG_APPLICATIONSMENU },
+  { "base-window", PANEL_DEBUG_BASE_WINDOW },
+  { "display-layout", PANEL_DEBUG_DISPLAY_LAYOUT },
+  { "external46", PANEL_DEBUG_EXTERNAL46 },
+  { "external", PANEL_DEBUG_EXTERNAL },
+  { "main", PANEL_DEBUG_MAIN },
   { "module-factory", PANEL_DEBUG_MODULE_FACTORY },
+  { "module", PANEL_DEBUG_MODULE },
+  { "positioning", PANEL_DEBUG_POSITIONING },
+  { "struts", PANEL_DEBUG_STRUTS },
+  { "systray", PANEL_DEBUG_SYSTRAY },
+  { "tasklist", PANEL_DEBUG_TASKLIST }
 };
 
 
@@ -72,6 +75,10 @@ panel_debug_init (void)
 
           /* always enable (unfiltered) debugging messages */
           PANEL_SET_FLAG (panel_debug_flags, PANEL_DEBUG_YES);
+
+          /* unset gdb and valgrind in 'all' mode */
+          if (g_ascii_strcasecmp (value, "all") == 0)
+            PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_GDB | PANEL_DEBUG_VALGRIND);
         }
 
       g_once_init_leave (&inited__volatile, 1);
