@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel git version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-03 17:09+0000\n"
+"POT-Creation-Date: 2011-01-06 11:09+0000\n"
 "PO-Revision-Date: 2010-06-17 21:50+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -134,66 +134,66 @@ msgid "Print version information and exit"
 msgstr "Εμφάνιση πληροφοριών έκδοσης"
 
 #. parse context options
-#: ../panel/main.c:196
+#: ../panel/main.c:199
 msgid "[ARGUMENTS...]"
 msgstr "[ΟΡΙΣΜΑΤΑ...]"
 
-#: ../panel/main.c:203
+#: ../panel/main.c:206
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Πληκτρολογήστε  \"%s --help\"  για βοήθεια."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:225
 msgid "The Xfce development team. All rights reserved."
 msgstr "Η ομάδα ανάπτυξης του Xfce. Με την επιφύλαξη παντός νόμιμου δικαιώματος."
 
-#: ../panel/main.c:223
+#: ../panel/main.c:226
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Παρακαλώ αναφέρετε τυχόν σφάλματα στο <%s>"
 
-#: ../panel/main.c:274
+#: ../panel/main.c:277
 msgid "There is already a running instance"
 msgstr "Υπάρχει ήδη μια εκτελούμενη διεργασία"
 
 #. spawn ourselfs again
-#: ../panel/main.c:323
+#: ../panel/main.c:326
 msgid "Restarting..."
 msgstr "Επανεκκίνηση ..."
 
-#: ../panel/main.c:338
+#: ../panel/main.c:341
 msgid "Failed to show the preferences dialog"
 msgstr "Δεν είναι δυνατή η εμφάνιση του διαλόγου προτιμήσεων"
 
-#: ../panel/main.c:340
+#: ../panel/main.c:343
 msgid "Failed to show the add new items dialog"
 msgstr "Δεν είναι δυνατή η εμφάνιση του διαλόγου 'Προσθήκη νέων αντικειμένων'"
 
-#: ../panel/main.c:342
+#: ../panel/main.c:345
 msgid "Failed to save the panel configuration"
 msgstr "Αποτυχία αποθήκευσης των ρυθμίσεων του ταμπλό"
 
-#: ../panel/main.c:344
+#: ../panel/main.c:347
 msgid "Failed to add a plugin to the panel"
 msgstr "Αποτυχία προσθήκης ενός νέου αρθρώματος στο ταμπλό"
 
-#: ../panel/main.c:346
+#: ../panel/main.c:349
 msgid "Failed to restart the panel"
 msgstr "Αποτυχία επανεκκίνησης του ταμπλό"
 
-#: ../panel/main.c:348
+#: ../panel/main.c:351
 msgid "Failed to quit the panel"
 msgstr "Αποτυχία τερματισμού του ταμπλό"
 
-#: ../panel/main.c:350
+#: ../panel/main.c:353
 msgid "Failed to send D-Bus message"
 msgstr "Αποτυχία αποστολής μηνύματος D-BUS"
 
-#: ../panel/main.c:361
+#: ../panel/main.c:364
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Θέλετε να εκκινηθεί το ταμπλό; Αν το εκκινήσετε, αποθηκεύστε τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη φορά που θα συνδεθείτε."
 
-#: ../panel/main.c:364 ../panel/main.c:378
+#: ../panel/main.c:367 ../panel/main.c:381
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία του %s"
@@ -298,9 +298,9 @@ msgstr "Οθόνη %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:498
-#, fuzzy, c-format
+#, c-format
 msgid "Monitor %d"
-msgstr "Monitor %d"
+msgstr "Οθόνη %d"
 
 #: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
@@ -468,9 +468,8 @@ msgid "Solid color"
 msgstr "Συμπαγές χρώμα"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
-#, fuzzy
 msgid "Span mo_nitors"
-msgstr "Κενός δίσκος ΜΟ"
+msgstr "Επέκταση στις οθόνες"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
@@ -1347,20 +1346,20 @@ msgstr "Απόκρυψη των παραθύρων και εμφάνιση τη�
 msgid "Show Desktop"
 msgstr "Εμφάνιση επιφάνειας εργασίας"
 
-#: ../plugins/systray/systray.c:381
+#: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
 msgstr "Δεν ήταν δυνατή η εκκίνηση της περιοχής ειδοποιήσεων"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:831
+#: ../plugins/systray/systray.c:850
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Το πιο πιθανό ένα άλλο widget να δέσμευσε την λειτουργικότητα της περιοχής ειδοποιήσεων. Αυτή η περιοχή δεν θα χρησιμοποιηθεί."
 
-#: ../plugins/systray/systray.c:833
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr "Ο διαχειριστής πλαισίου συστήματος έχασε την επιλογή"
 
-#: ../plugins/systray/systray.c:986
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Σίγουρα θέλετε να καθαρίσετε τη λίστα γνωστών εφαρμογών;"
 
@@ -1381,7 +1380,7 @@ msgstr "Περιοχή ειδοποιήσεων"
 msgid "_Maximum icon size (px):"
 msgstr "_Μέγιστο μέγεθος εικονιδίου (px):"
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Η λήψη επιλογής διαχειριστή απέτυχε για την οθόνη %d"
@@ -1416,7 +1415,7 @@ msgstr "Επαναφορά ελαχιστοποίησης των παραθύρ�
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Ro_tate buttons in vertical panel"
-msgstr ""
+msgstr "Περιστροφή κουμπιών στο κάθετο ταμπλό"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
