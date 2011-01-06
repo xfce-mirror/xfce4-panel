@@ -41,8 +41,6 @@ typedef enum
 }
 PanelDebugFlag;
 
-void     panel_debug_notify_proxy (void);
-
 gboolean panel_debug_has_domain   (PanelDebugFlag  domain);
 
 void     panel_debug              (PanelDebugFlag  domain,

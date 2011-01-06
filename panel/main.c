@@ -162,6 +162,47 @@ panel_sm_client_save_state (XfceSMClient     *sm_client,
 
 
 
+static void
+panel_debug_notify_proxy (void)
+{
+  gchar       *path;
+  const gchar *proxy_cmd;
+
+  if (G_UNLIKELY (panel_debug_has_domain (PANEL_DEBUG_GDB)))
+    proxy_cmd = "gdb";
+  else if (G_UNLIKELY (panel_debug_has_domain (PANEL_DEBUG_VALGRIND)))
+    proxy_cmd = "valgrind";
+  else
+    return;
+
+  path = g_find_program_in_path (proxy_cmd);
+  if (G_LIKELY (path != NULL))
+    {
+      panel_debug (PANEL_DEBUG_MAIN,
+                   "running external plugins with %s, logs stored in %s",
+                   path, g_get_tmp_dir ());
+      g_free (path);
+
+      if (panel_debug_has_domain (PANEL_DEBUG_GDB))
+        {
+          /* performs sanity checks on the released memory slices */
+          g_setenv ("G_SLICE", "debug-blocks", TRUE);
+        }
+      else if (panel_debug_has_domain (PANEL_DEBUG_VALGRIND))
+        {
+          /* use g_malloc() and g_free() instead of slices */
+          g_setenv ("G_SLICE", "always-malloc", TRUE);
+          g_setenv ("G_DEBUG", "gc-friendly", TRUE);
+        }
+    }
+  else
+    {
+      panel_debug (PANEL_DEBUG_MAIN, "%s not found in PATH", proxy_cmd);
+    }
+}
+
+
+
 gint
 main (gint argc, gchar **argv)
 {

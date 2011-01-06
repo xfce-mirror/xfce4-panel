@@ -109,50 +109,6 @@ panel_debug_print (PanelDebugFlag  domain,
 
 
 
-void
-panel_debug_notify_proxy (void)
-{
-  gchar       *path;
-  const gchar *proxy_application;
-
-  if (G_UNLIKELY (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB)))
-    proxy_application = "gdb";
-  else if (G_UNLIKELY (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND)))
-    proxy_application = "valgrind";
-  else
-    return;
-
-  path = g_find_program_in_path (proxy_application);
-  if (G_LIKELY (path != NULL))
-    {
-      g_printerr (PACKAGE_NAME "(debug): running plugins with %s; "
-                  "log files stored in %s\n", path, g_get_tmp_dir ());
-      g_free (path);
-
-      if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_GDB))
-        {
-          /* performs sanity checks on the released memory slices */
-          g_setenv ("G_SLICE", "debug-blocks", TRUE);
-        }
-      else if (PANEL_HAS_FLAG (panel_debug_flags, PANEL_DEBUG_VALGRIND))
-        {
-          /* use g_malloc() and g_free() instead of slices */
-          g_setenv ("G_SLICE", "always-malloc", TRUE);
-          g_setenv ("G_DEBUG", "gc-friendly", TRUE);
-        }
-    }
-  else
-    {
-      /* make sure external plugins are not started in one of the proxies */
-      PANEL_UNSET_FLAG (panel_debug_flags, PANEL_DEBUG_GDB | PANEL_DEBUG_VALGRIND);
-
-      g_printerr (PACKAGE_NAME "(debug): %s not found in PATH\n",
-                  proxy_application);
-    }
-}
-
-
-
 gboolean
 panel_debug_has_domain (PanelDebugFlag domain)
 {

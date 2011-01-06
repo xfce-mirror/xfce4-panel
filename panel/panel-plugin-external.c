@@ -510,8 +510,8 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
       cmd_line = NULL;
       program = NULL;
 
-      /* note that if the program was not found in PATH, we already
-       * warned for it in panel_debug_init, so no need to do that again */
+      /* note that if the program was not found in PATH, we already warned
+       * for it in panel_debug_notify_proxy, so no need to do that again */
       if (panel_debug_has_domain (PANEL_DEBUG_GDB))
         {
           program = g_find_program_in_path ("gdb");
