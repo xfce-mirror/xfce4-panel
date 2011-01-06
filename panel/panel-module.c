@@ -409,6 +409,10 @@ panel_module_new_from_desktop_file (const gchar *filename,
         module->unique_mode = UNIQUE_TRUE;
       else
         module->unique_mode = UNIQUE_FALSE;
+
+       panel_debug_filtered (PANEL_DEBUG_MODULE, "new module %s, filename=%s, internal=%s",
+                             name, module->filename,
+                             PANEL_DEBUG_BOOL (module->mode == INTERNAL));
     }
 
   xfce_rc_close (rc);

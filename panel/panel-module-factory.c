@@ -32,6 +32,7 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
+#include <common/panel-debug.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 
@@ -153,6 +154,8 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
   dir = g_dir_open (path, 0, NULL);
   if (G_UNLIKELY (dir == NULL))
     return;
+
+  panel_debug (PANEL_DEBUG_MODULE_FACTORY, "reading %s", path);
 
   /* walk the directory */
   for (;;)
@@ -309,8 +312,12 @@ panel_module_factory_force_all_external (void)
 {
   force_all_external = TRUE;
 
+  panel_debug (PANEL_DEBUG_MODULE_FACTORY,
+               "forcing all plugins to run external");
+
 #ifndef NDEBUG
-  g_message ("Forcing all plugins to run external.");
+  if (!panel_debug_has_domain (PANEL_DEBUG_YES))
+    g_message ("Forcing all plugins to run external.");
 #endif
 }
 

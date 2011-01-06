@@ -50,7 +50,8 @@ static const GDebugKey panel_debug_keys[] =
   { "systray", PANEL_DEBUG_SYSTRAY },
   { "gdb", PANEL_DEBUG_GDB },
   { "valgrind", PANEL_DEBUG_VALGRIND },
-  { "module", PANEL_DEBUG_MODULE }
+  { "module", PANEL_DEBUG_MODULE },
+  { "module-factory", PANEL_DEBUG_MODULE_FACTORY },
 };
 
 
