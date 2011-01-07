@@ -5,14 +5,14 @@
 # Evaggelos Balaskas <ebal@ebal.gr>, 2008, 2009, 2010.
 # Spiros Georgaras <sng@hellug.gr>, 2010.
 # Stathis Kamperis <ekamperi@auth.gr>, 2006.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel git version\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-06 11:09+0000\n"
-"PO-Revision-Date: 2010-06-17 21:50+0200\n"
-"Last-Translator: Stavros Giannouris <stavrosg@hellug.gr>\n"
+"PO-Revision-Date: 2011-01-07 17:47+0200\n"
+"Last-Translator: Spiros Georgaras <sng@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,8 @@ msgid "Customize the panel"
 msgstr "Προσαρμογή του ταμπλό"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-window.c:2222
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Ταμπλό"
@@ -80,17 +81,20 @@ msgid "Pane_l"
 msgstr "Ταμπ_λό"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096
+#: ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "Προσθήκη _νέων αντικειμένων..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107
+#: ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "Π_ροτιμήσεις ταμπλό..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124
+#: ../panel/panel-window.c:2261
 msgid "Log _Out"
 msgstr "Απ_οσύνδεση"
 
@@ -98,7 +102,8 @@ msgstr "Απ_οσύνδεση"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Εμφάνιση του διαλόγου 'Ρυθμίσεις ταμπλό´"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "ΑΡΙΘΜΟΣ-ΤΑΜΠΛΟ"
 
@@ -193,7 +198,8 @@ msgstr "Αποτυχία αποστολής μηνύματος D-BUS"
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Θέλετε να εκκινηθεί το ταμπλό; Αν το εκκινήσετε, αποθηκεύστε τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη φορά που θα συνδεθείτε."
 
-#: ../panel/main.c:367 ../panel/main.c:381
+#: ../panel/main.c:367
+#: ../panel/main.c:381
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία του %s"
@@ -202,15 +208,18 @@ msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία 
 msgid "Failed to launch the migration application"
 msgstr "Απέτυχε η εκτέλεση της εφαρμογής μεταφοράς ρυθμίσεων"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1446
+#: ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας έξοδος θα κλείσει ο X server."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447
+#: ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Είστε σίγουροι ότι θέλετε να κλείσετε το ταμπλό;"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455
+#: ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Αδυναμία εκτέλεσης της εντολής \"%s\""
@@ -237,7 +246,8 @@ msgstr ""
 "Σπύρος Γεωργαράς <sng@hellug.gr>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Προσθήκη νέου αντικειμένου"
 
@@ -246,7 +256,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Παρακαλώ επιλέξτε ένα ταμπλό για το νέο άρθρωμα:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147
+#: ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Ταμπλό %d"
@@ -1258,7 +1269,8 @@ msgstr "_Θέση κουμπιού βέλους:"
 msgid "Program launcher with optional menu"
 msgstr "Εκκινητής προγραμμάτων με προαιρετικό μενού"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Ρυθμίσεις _χώρου εργασίας..."
 
@@ -1266,7 +1278,8 @@ msgstr "Ρυθμίσεις _χώρου εργασίας..."
 msgid "Unable to open the workspace settings"
 msgstr "Αδυναμία ανοίγματος των ρυθμίσεων των χώρων εργασίας"
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Χώρος εργασίας %d"
@@ -1555,33 +1568,24 @@ msgstr "Χρήση μενού για την εναλλαγή μεταξύ των
 
 #~ msgid "Create a new launcher on the Xfce Panel"
 #~ msgstr "Δημιουργία μίας νέας εκκίνησης προγράμματος στο ταμπλό του Χfce"
-
 #~ msgid "Panel Preferences"
 #~ msgstr "Προτιμήσεις ταμπλό"
-
 #~ msgid "_Xfce Panel"
 #~ msgstr "Ταμπλό του Xfce"
-
 #~ msgid "Transparency"
 #~ msgstr "Διαφάνεια"
-
 #~ msgid "Transparency when the pointer is not hovering the panel."
 #~ msgstr "Διαφανές όταν ο κέρσορας δεν περνάει πάνω από το ταμπλό."
-
 #~ msgid "Xfce Panel"
 #~ msgstr "Ταμπλό του Xfce"
-
 #~ msgid "Xfce Menu"
 #~ msgstr "Μενού του Xfce"
-
 #~ msgid "Failed to remove the desktop file from the config directory"
 #~ msgstr "Αποτυχία αφαίρεσης του αρχείου επιφάνειας από τον κατάλογο ρυθμίσεων"
-
 #~ msgid "_Number of rows:"
 #~ msgstr "_Αριθμός γραμμών:"
-
 #~ msgid "_Restart"
 #~ msgstr "_Επανεκκίνηση"
-
 #~ msgid "C_ompositing"
 #~ msgstr "Θέση"
+
