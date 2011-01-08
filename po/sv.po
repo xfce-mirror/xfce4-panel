@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-18 17:09+0000\n"
+"POT-Creation-Date: 2011-01-08 11:09+0000\n"
 "PO-Revision-Date: 2010-10-17 17:45+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
+msgstr "Lägg till en ny programstartare till panelen baserat på informationen i denna skrivbordsfil"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -32,22 +32,22 @@ msgid "Customize the panel"
 msgstr "Anpassa panelen"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2200
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
-msgstr ""
+msgstr "_Läs på nätet"
 
 #: ../common/panel-utils.c:156
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr ""
+msgstr "Du kan läsa användarhandboken på nätet. Denna handbok kan dock vara för en annan version."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
-msgstr ""
+msgstr "Användarhandboken är inte installerad på din dator"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
@@ -55,52 +55,50 @@ msgid "Failed to open the documentation browser"
 msgstr "Misslyckades med att öppna dokumentationsvisaren"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:887
+#: ../libxfce4panel/xfce-panel-plugin.c:889
 #: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:892
+#: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Om du tar bort objektet från panelen så kan du inte ångra det."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "_Flytta"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1086
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1094 ../panel/panel-window.c:2212
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "Lägg till _nya objekt..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1105 ../panel/panel-window.c:2223
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "Panelinstä_llningar..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1122 ../panel/panel-window.c:2239
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 msgid "Log _Out"
 msgstr "Logga _ut"
 
 #: ../panel/main.c:78
-#, fuzzy
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Visa dialogrutan \"Anpassa panelen\""
+msgstr "Visa dialogrutan \"Panelinställningar\""
 
 #: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "PANELNUMMER"
 
 #: ../panel/main.c:79
-#, fuzzy
 msgid "Show the 'Add New Items' dialog"
 msgstr "Visa dialogrutan \"Lägg till nya objekt\""
 
@@ -109,18 +107,16 @@ msgid "Save the panel configuration"
 msgstr "Spara panelkonfigurationen"
 
 #: ../panel/main.c:81
-#, fuzzy
 msgid "Add a new plugin to the panel"
-msgstr "Lägg till en ny panel"
+msgstr "Lägg till en ny insticksmodul till panelen"
 
 #: ../panel/main.c:81
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "INSTICKSNAMN"
 
 #: ../panel/main.c:82
-#, fuzzy
 msgid "Restart the running panel instance"
-msgstr "Starta om körande instans av xfce4-panel"
+msgstr "Starta om körande panelinstans"
 
 #: ../panel/main.c:83
 msgid "Quit the running panel instance"
@@ -134,20 +130,20 @@ msgid "Print version information and exit"
 msgstr "Skriv ut versionsinformation och avsluta"
 
 #. parse context options
-#: ../panel/main.c:196
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENT...]"
 
-#: ../panel/main.c:203
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Skriv \"%s --help\" för användningshjälp."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. Alla rättigheter är reserverade."
 
-#: ../panel/main.c:223
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr ""
@@ -155,67 +151,65 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../panel/main.c:274
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr "Det finns redan en körande instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:323
+#: ../panel/main.c:367
 msgid "Restarting..."
 msgstr "Startar om..."
 
-#: ../panel/main.c:338
-#, fuzzy
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
-msgstr "Misslyckades med att öppna display"
+msgstr "Misslyckades med att visa inställningsdialogen"
 
-#: ../panel/main.c:340
-#, fuzzy
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
-msgstr "Visa dialogrutan \"Lägg till nya objekt\""
+msgstr "Misslyckades med att visa dialogrutan \"Lägg till nya objekt\""
 
-#: ../panel/main.c:342
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr "Misslyckades med att spara panelkonfigurationen"
 
-#: ../panel/main.c:344
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgstr "Misslyckades med att lägga till en insticksmodul till panelen"
 
-#: ../panel/main.c:346
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr "Misslyckades med att starta om panelen"
 
-#: ../panel/main.c:348
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr "Misslyckades med att avsluta panelen"
 
-#: ../panel/main.c:350
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr "Misslyckades med att skicka D-Bus-meddelande"
 
-#: ../panel/main.c:361
+#: ../panel/main.c:405
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "Vill du starta om panelen? Om du gör det så försäkra dig om att du sparar din session vid utloggning så att panelen startas automatiskt nästa gång du loggar in."
 
-#: ../panel/main.c:364 ../panel/main.c:378
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen körande instans av %s hittades"
 
 #: ../panel/panel-application.c:196
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Misslyckades med att starta migreringsprogrammet"
 
-#: ../panel/panel-application.c:1423 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
-msgstr ""
+msgstr "Du har startat X utan en sessionshanterare. Klicka på Avsluta för att stänga X-servern."
 
-#: ../panel/panel-application.c:1424 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Är du säker på att du vill avsluta panelen?"
 
-#: ../panel/panel-application.c:1432 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kunde inte köra kommandot \"%s\""
@@ -248,7 +242,7 @@ msgstr "Lägg till nytt objekt"
 
 #: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Välj en panel för den nya insticksmodulen:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
@@ -264,29 +258,29 @@ msgstr ""
 msgid "Modifying the panel is not allowed"
 msgstr "Ändring av panelen tillåts inte"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "Lägg till nya objekt"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "Lägg till nya insticksmoduler till panelen"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Sök:"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "Ange sökfrasen här"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "Insticksmodulen \"%s\" lämnade oväntat panelen. Vill du starta om den?"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr ""
@@ -308,9 +302,8 @@ msgid "Monitor %d"
 msgstr "Skärm %d"
 
 #: ../panel/panel-preferences-dialog.c:828
-#, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Den valda panelen och alla dess objekt kommer att tas bort."
+msgstr "Panelen och instickskonfigurationerna kommer att permanent tas bort"
 
 #: ../panel/panel-preferences-dialog.c:829
 #, c-format
@@ -734,7 +727,7 @@ msgstr "Välj en ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2171
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunde inte köra kommandot \"%s\"."
@@ -781,15 +774,15 @@ msgstr ""
 msgid "Show help options"
 msgstr "Visa hjälpflaggor"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "Vecka %V"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "Misslyckades med att köra klockkommandot"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "Anpassat format"
 
@@ -1180,32 +1173,28 @@ msgstr ""
 msgid "_File Pattern:"
 msgstr "_Filmönster:"
 
-#: ../plugins/launcher/launcher.c:1463
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "Namnlöst objekt"
 
-#: ../plugins/launcher/launcher.c:1603
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "Inga objekt"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:743
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "Namnlöst objekt"
 
-#: ../plugins/launcher/launcher-dialog.c:759
-msgid "Failed to remove the desktop file from the config directory"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.c:803
+#: ../plugins/launcher/launcher-dialog.c:787
 #, fuzzy
 msgid "Failed to open desktop item editor"
 msgstr "Misslyckades med att öppna display"
@@ -1296,7 +1285,7 @@ msgstr "Arbetsyteväxlare"
 msgid "Unable to open the workspace settings"
 msgstr "Misslyckades med att öppna dokumentationsvisaren"
 
-#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbetsyta %d"
@@ -1377,23 +1366,23 @@ msgstr "Dölj alla fönster och visa skrivbordet"
 msgid "Show Desktop"
 msgstr "Visa skrivbordet"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:382
 #, fuzzy
 msgid "Unable to start the notification area"
 msgstr "Uppmärksamhetsnotifiering"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:850
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr ""
 
 # Underlig sträng
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:852
 #, fuzzy
 msgid "The notification area lost selection"
 msgstr "Notifieringsfältshanteraren förlorade markeringen"
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Är du säker på att du vill tömma listan över kända program?"
 
@@ -1411,10 +1400,10 @@ msgid "Notification Area"
 msgstr "Notifieringsfält"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "Antal _rader:"
+msgid "_Maximum icon size (px):"
+msgstr ""
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Misslyckades med att komma över hanterarvalet för skärm %d"
@@ -1502,23 +1491,23 @@ msgstr "Fönster_gruppering:"
 msgid "Window title"
 msgstr "Fönstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2990
+#: ../plugins/tasklist/tasklist-widget.c:2997
 msgid "Mi_nimize All"
 msgstr "Mi_nimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:2999
+#: ../plugins/tasklist/tasklist-widget.c:3006
 msgid "Un_minimize All"
 msgstr "Av_minimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3005
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Ma_ximize All"
 msgstr "Ma_ximera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3014
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "_Unmaximize All"
 msgstr "Avmax_imera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3024
+#: ../plugins/tasklist/tasklist-widget.c:3031
 msgid "_Close All"
 msgstr "S_täng alla"
 
@@ -1589,6 +1578,9 @@ msgstr "Fönstermeny"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Växla mellan öppna fönster med en meny"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "Antal _rader:"
 
 #~ msgid "Create a new launcher on the Xfce Panel"
 #~ msgstr "Skapa en ny programstartare på Xfce-panelen"
