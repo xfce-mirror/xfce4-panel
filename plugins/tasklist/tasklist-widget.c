@@ -2152,7 +2152,7 @@ xfce_tasklist_button_compare (gconstpointer child_a,
   XfceTasklist            *tasklist = XFCE_TASKLIST (user_data);
   gint                     retval;
   WnckClassGroup          *class_group_a, *class_group_b;
-  const gchar             *name_a = NULL, *name_b = NULL;
+  const gchar             *name_a, *name_b;
   WnckWorkspace           *workspace_a, *workspace_b;
   gint                     num_a, num_b;
 
@@ -2196,6 +2196,9 @@ xfce_tasklist_button_compare (gconstpointer child_a,
       /* skip this if windows are in same group (or both NULL) */
       if (class_group_a != class_group_b)
         {
+          name_a = NULL;
+          name_b = NULL;
+
           /* get the group name if available */
           if (G_LIKELY (class_group_a != NULL))
             name_a = wnck_class_group_get_name (class_group_a);
@@ -2204,11 +2207,12 @@ xfce_tasklist_button_compare (gconstpointer child_a,
 
           /* if there is no class group name, use the window name */
           if (G_UNLIKELY (exo_str_is_empty (name_a)))
-            name_a = wnck_window_get_name (a->window);
+            name_a = a->window != NULL ? wnck_window_get_name (a->window) : NULL;
           if (G_UNLIKELY (exo_str_is_empty (name_b)))
-            name_b = wnck_window_get_name (b->window);
+            name_b = b->window != NULL ? wnck_window_get_name (b->window) : NULL;
 
-          retval = strcasecmp (name_a, name_b);
+          retval = strcasecmp (name_a != NULL ? name_a : "",
+                               name_b != NULL ? name_b : "");
           if (retval != 0)
             return retval;
         }
@@ -2232,16 +2236,17 @@ xfce_tasklist_button_compare (gconstpointer child_a,
       else if (a->class_group != NULL)
         name_a = wnck_class_group_get_name (a->class_group);
       else
-        name_a = "";
+        name_a = NULL;
 
       if (b->window != NULL)
         name_b = wnck_window_get_name (b->window);
       else if (b->class_group != NULL)
         name_b = wnck_class_group_get_name (b->class_group);
       else
-        name_b = "";
+        name_b = NULL;
 
-      return strcasecmp (name_a, name_b);
+      return strcasecmp (name_a != NULL ? name_a : "",
+                         name_b != NULL ? name_b : "");
     }
 }
 
