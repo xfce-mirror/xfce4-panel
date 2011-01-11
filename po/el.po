@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Stavros Giannouris <StavrosG2002@freemail.gr>, 2005, 2006, 2008, 2009.
 # Stathis Kamperis <ekamperi@auth.gr>, 2006.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel git\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-27 15:41+0100\n"
+"POT-Creation-Date: 2011-01-11 05:29+0000\n"
 "PO-Revision-Date: 2009-08-31 23:27+0200\n"
 "Last-Translator: Evaggelos Balaskas <ebalaskas@ebalaskas.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Greek\n"
-"X-Poedit-Country: GREECE\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: GREECE\n"
 
 #. TRANSLATORS: This warning is printed to the commandline when
 #. an external plugin crashed
@@ -32,11 +32,8 @@ msgid "Remove \"%s\"?"
 msgstr "Να διαγραφεί το \"%s\";"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
-msgstr ""
-"Αυτό το αντικείμενο θα διαγραφεί από το ταμπλό και οι ρυθμίσεις του θα "
-"χαθούν."
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Αυτό το αντικείμενο θα διαγραφεί από το ταμπλό και οι ρυθμίσεις του θα χαθούν."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:836
@@ -91,9 +88,7 @@ msgstr "Ταμπλό του Xfce"
 
 #: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"Δεν μπορείτε να διαγράψετε το τελευταίο ταμπλό. Μήπως θέλετε να βγείτε από "
-"το πρόγραμμα;"
+msgstr "Δεν μπορείτε να διαγράψετε το τελευταίο ταμπλό. Μήπως θέλετε να βγείτε από το πρόγραμμα;"
 
 #: ../panel/panel-app.c:934
 #, c-format
@@ -171,7 +166,8 @@ msgstr "Δεν ήταν δυνατό το άνοιγμα του αρθρώματ
 msgid "Add New Items"
 msgstr "Προσθήκη νέων αντικειμένων"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items
+#. dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
@@ -603,7 +599,8 @@ msgstr "_Αριθμός γραμμών:"
 msgid "Hidden Applications"
 msgstr "Κρυφές εφαρμογές"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This
+#. won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -617,7 +614,6 @@ msgid "Task List"
 msgstr "Λίστα εργασιών"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:192
-#, fuzzy
 msgid "Fi_xed length (pixels):"
 msgstr "Μέγεθος (pixel_s):"
 
@@ -683,12 +679,8 @@ msgid "Window List"
 msgstr "Λίστα παραθύρων"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"H <i>Ειδοποίηση προτεραιότητας</i> θα κάνει το κουμπί να αναβοσβήνει όταν "
-"κάποια εφαρμογή απαιτήσει προσοχή."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "H <i>Ειδοποίηση προτεραιότητας</i> θα κάνει το κουμπί να αναβοσβήνει όταν κάποια εφαρμογή απαιτήσει προσοχή."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
