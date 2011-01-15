@@ -44,7 +44,6 @@ msgid "You can read the user manual online. This manual may however not exactly 
 msgstr "Galite skaityti vartotojo vadovą internetu. Tačiau šis vadovas  nebūtinai tiksliai atitinka jūsų skydelio versiją."
 
 #: ../common/panel-utils.c:158
-#, fuzzy
 msgid "The user manual is not installed on your computer"
 msgstr "Vartotojo vadovas nėra įdiegtas jūsų kompiuteryje"
 
@@ -207,9 +206,8 @@ msgid "No running instance of %s was found"
 msgstr "Joks veikiantis %s atvejis nerastas "
 
 #: ../panel/panel-application.c:196
-#, fuzzy
 msgid "Failed to launch the migration application"
-msgstr "Nepavyko paleisti migracijos programos"
+msgstr "Nepavyko paleisti atkėlimo programos"
 
 #: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
 #, fuzzy
@@ -268,14 +266,12 @@ msgid "Modifying the panel is not allowed"
 msgstr "Skydelio keitimas neleidžiamas"
 
 #: ../panel/panel-item-dialog.c:188
-#, fuzzy
 msgid "Add New Items"
-msgstr "Įdėti naują leistuką"
+msgstr "Pridėti naujus elementus"
 
 #: ../panel/panel-item-dialog.c:190
-#, fuzzy
 msgid "Add new plugins to the panel"
-msgstr "Įdėti naują leistuką"
+msgstr "Pridėti naujus įskiepius į skydelį"
 
 #: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
@@ -375,12 +371,10 @@ msgid "Automatically show and _hide the panel"
 msgstr "Automatiškai rodyti ir _slėpti skydelį"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
-#, fuzzy
 msgid "Background"
 msgstr "Fonas"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
-#, fuzzy
 msgid "Background image"
 msgstr "Fono paveikslėlis"
 
@@ -439,9 +433,8 @@ msgid "None (use system style)"
 msgstr "Joks (naudoti sistemos stilių)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
-#, fuzzy
 msgid "O_utput:"
-msgstr "O_utput:"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Opacity"
@@ -671,9 +664,8 @@ msgid "Hibernate"
 msgstr "Žiemoti"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "Užrakinti ekraną"
+msgstr "Atsijungti, užrakinti arba kiti sistemos veiksmai"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -690,35 +682,34 @@ msgstr "Vaizdas"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "Pasirinkite piktogram"
+msgstr "Programų Meniu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 #, fuzzy
 msgid "Button _title:"
-msgstr "Xfce skydelio nustatymai"
+msgstr "Mygtuko _antraštė:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "_Taisyti Meniu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
-msgstr ""
+msgstr "Meniu Failas"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr ""
+msgstr "Meniu _failas:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Select A Menu File"
-msgstr "Pasirinkite komandą"
+msgstr "Pasirinkite Meniu Failą"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#, fuzzy
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "Pasirinkite šią parinktį, kad parodyti  pavadinimą meniu, pavyzdžiui \\ \"File Manager \", o ne \\ \"thunar \""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -745,86 +736,86 @@ msgstr ""
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #, fuzzy
 msgid "_Icon:"
-msgstr "Piktograma:"
+msgstr "_Piktograma:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 #, fuzzy
 msgid "_Show button title"
-msgstr "Rodyti progr_amų pavadinimus"
+msgstr "_Rodyti mygtuko antraštę"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
-#, fuzzy
 msgid "Select An Icon"
-msgstr "Pasirinkite komandą"
+msgstr "Pasirinkite piktogramą"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
 #: ../plugins/launcher/launcher.c:2264
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Neįmanoma sukurti skydelio elemento \"%s\"."
+msgstr "Nepavyko paleisti komandą „%s”."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1010
-#, fuzzy
 msgid "No applications found"
-msgstr "Pasirinkite piktogram"
+msgstr "Programų nerasta"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1033
-#, fuzzy
 msgid "Failed to load the applications menu"
-msgstr "Neįmanoma sukurti skydelio elemento \"%s\"."
+msgstr "Nepavyko įkelti programų meniu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "Rodyti meniu su įdiegtų programų temomis"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "Naudojimas:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
+#, fuzzy
 msgid "OPTION"
-msgstr ""
+msgstr "OPTION"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
+#, fuzzy
 msgid "Options:"
-msgstr ""
+msgstr "Pasirinkimai:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
+#, fuzzy
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Iškylantis meniu dabartinėje pelės pozicijoje"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "Rodyti progr_amų pavadinimus"
+msgstr "Rodyti pagalbos parinktis"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
-msgstr ""
+msgstr "%V savaitė "
 
 #: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Nepavyko įvykdyti laikrodžio komandos"
 
 #: ../plugins/clock/clock.c:719
 msgid "Custom Format"
-msgstr ""
+msgstr "Pasirinktas formatas"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
+#, fuzzy
 msgid "24-_hour clock"
-msgstr ""
+msgstr "24-_valandų laikrodis"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -832,29 +823,31 @@ msgstr "Analoginis"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Binary"
-msgstr ""
+msgstr "Dvejetainis"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
 #, fuzzy
 msgid "Clock"
-msgstr "Užrakinti"
+msgstr "Laikrodis"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "Clock Options"
-msgstr ""
+msgstr "Laikrodžio funkcijos"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Digital"
 msgstr "Skaitmeninis"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
+#, fuzzy
 msgid "Display _seconds"
-msgstr ""
+msgstr "Rodyti _sekundes"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
+#, fuzzy
 msgid "F_ormat:"
-msgstr ""
+msgstr "F_ormatas:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
@@ -867,37 +860,40 @@ msgid "Fl_ash time separators"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:13
+#, fuzzy
 msgid "Fuzzy"
-msgstr ""
+msgstr "Neaiškus"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 #, fuzzy
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 #, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "AM/PM"
+msgstr "_Rodyti AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
+#, fuzzy
 msgid "Show _frame"
-msgstr ""
+msgstr "Rodyti _frame"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
+#, fuzzy
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Rodyti _inactive taškus"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 #, fuzzy
 msgid "Show gri_d"
-msgstr "Pozicija"
+msgstr "Rodyti gri_d"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format
+#, no-c-format, fuzzy
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr ""
+msgstr "Formatas aprašoma data ir laikas dalys įterpti į failo pavadinimą. Pavyzdžiui,% Y bus pakeistas metais,% m mėnesį ir% d su diena. Žr data Utility papildomos informacijos dokumentacijoje."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
