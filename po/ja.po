@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 18:56+0900\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
 "PO-Revision-Date: 2010-12-29 18:56+0900\n"
 "Last-Translator: Masato Hashimoto <cabezon.hashimoto@gmail.com>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
@@ -144,62 +144,62 @@ msgid "Print version information and exit"
 msgstr "バージョン情報を表示して終了する"
 
 #. parse context options
-#: ../panel/main.c:196
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr "[引数...]"
 
-#: ../panel/main.c:203
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "\"%s --help\" と入力すると使用方法が表示されます。"
 
-#: ../panel/main.c:222
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: ../panel/main.c:223
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "バグは <%s> まで報告してください。"
 
-#: ../panel/main.c:274
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr "すでに実行中のインスタンスがあります"
 
 #. spawn ourselfs again
-#: ../panel/main.c:323
+#: ../panel/main.c:367
 msgid "Restarting..."
 msgstr "再起動しています..."
 
-#: ../panel/main.c:338
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
 msgstr "設定ダイアログの表示に失敗しました"
 
-#: ../panel/main.c:340
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
 msgstr "'新しいアイテムの追加' ダイアログの表示に失敗しました"
 
-#: ../panel/main.c:342
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr "パネルの設定の保存に失敗しました"
 
-#: ../panel/main.c:344
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
 msgstr "パネルへのプラグインの追加に失敗しました"
 
-#: ../panel/main.c:346
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr "パネルの再起動に失敗しました"
 
-#: ../panel/main.c:348
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr "パネルの終了に失敗しました"
 
-#: ../panel/main.c:350
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus メッセージの送信に失敗しました"
 
-#: ../panel/main.c:361
+#: ../panel/main.c:405
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -207,7 +207,7 @@ msgstr ""
 "パネルを起動しますか? 起動した場合、ログアウト時にセッションを保存すれば次回"
 "ログイン時にパネルは自動起動されます。"
 
-#: ../panel/main.c:364 ../panel/main.c:378
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "動作中の %s インスタンスが見つかりませんでした"
@@ -1450,12 +1450,12 @@ msgstr "すべてのウィンドウを隠してデスクトップを表示しま
 msgid "Show Desktop"
 msgstr "デスクトップ表示"
 
-#: ../plugins/systray/systray.c:381
+#: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
 msgstr "通知エリアが起動できません"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:831
+#: ../plugins/systray/systray.c:850
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
@@ -1463,11 +1463,11 @@ msgstr ""
 "おそらく他のウィジェットが通知エリアの機能を占有しています。この通知エリアは"
 "使用されません。"
 
-#: ../plugins/systray/systray.c:833
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr "通知エリアはセレクションを失いました"
 
-#: ../plugins/systray/systray.c:986
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "既知のアプリケーションのリストをクリアしてもよろしいですか?"
 
@@ -1489,7 +1489,7 @@ msgstr "通知エリア"
 msgid "_Maximum icon size (px):"
 msgstr "最大アイコンサイズ(_M) (px):"
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "スクリーン %d の管理セレクションの取得に失敗しました"
@@ -1575,23 +1575,23 @@ msgstr "ウィンドウのグループ化(_G):"
 msgid "Window title"
 msgstr "ウィンドウタイトル"
 
-#: ../plugins/tasklist/tasklist-widget.c:2997
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3006
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3031
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 

@@ -4,24 +4,27 @@
 # Joakim Andreasson <joakim.andreasson@gmx.net>, 2003-2004.
 # Alexander Toresson <alexander.toresson@gmail.com>, 2006.
 # Daniel Nylander <po@danielnylander.se>, 2008, 2009, 2010.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-08 11:09+0000\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
 "PO-Revision-Date: 2010-10-17 17:45+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "Lägg till en ny programstartare till panelen baserat på informationen i denna skrivbordsfil"
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop file"
+msgstr ""
+"Lägg till en ny programstartare till panelen baserat på informationen i "
+"denna skrivbordsfil"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -42,8 +45,12 @@ msgid "_Read Online"
 msgstr "_Läs på nätet"
 
 #: ../common/panel-utils.c:156
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Du kan läsa användarhandboken på nätet. Denna handbok kan dock vara för en annan version."
+msgid ""
+"You can read the user manual online. This manual may however not exactly "
+"match your panel version."
+msgstr ""
+"Du kan läsa användarhandboken på nätet. Denna handbok kan dock vara för en "
+"annan version."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
@@ -189,8 +196,13 @@ msgid "Failed to send D-Bus message"
 msgstr "Misslyckades med att skicka D-Bus-meddelande"
 
 #: ../panel/main.c:405
-msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Vill du starta om panelen? Om du gör det så försäkra dig om att du sparar din session vid utloggning så att panelen startas automatiskt nästa gång du loggar in."
+msgid ""
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
+msgstr ""
+"Vill du starta om panelen? Om du gör det så försäkra dig om att du sparar "
+"din session vid utloggning så att panelen startas automatiskt nästa gång du "
+"loggar in."
 
 #: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
@@ -202,8 +214,12 @@ msgid "Failed to launch the migration application"
 msgstr "Misslyckades med att starta migreringsprogrammet"
 
 #: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
-msgid "You have started X without session manager. Clicking Quit will close the X server."
-msgstr "Du har startat X utan en sessionshanterare. Klicka på Avsluta för att stänga X-servern."
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr ""
+"Du har startat X utan en sessionshanterare. Klicka på Avsluta för att stänga "
+"X-servern."
 
 #: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
@@ -215,12 +231,14 @@ msgid "Failed to execute command \"%s\""
 msgstr "Kunde inte köra kommandot \"%s\""
 
 #: ../panel/panel-dbus-client.c:209
-msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
 #: ../panel/panel-dbus-client.c:242
 #, c-format
-msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:76
@@ -251,7 +269,9 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:185
@@ -282,7 +302,10 @@ msgstr "Insticksmodulen \"%s\" lämnade oväntat panelen. Vill du starta om den?
 
 #: ../panel/panel-plugin-external.c:422
 #, c-format
-msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.c:453
@@ -349,7 +372,9 @@ msgid "Add new item to this panel"
 msgstr "Lägg till objekt till panelen"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgid ""
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -400,8 +425,7 @@ msgstr "O_bjekt"
 msgid "L_ength (%):"
 msgstr "Lä_ngd (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr ""
@@ -449,7 +473,9 @@ msgid "Select A Background Image"
 msgstr "Välj en bakgrundsbild"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
@@ -457,11 +483,14 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Select this option to hide the handles of the panel and lock its position."
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:33
@@ -479,11 +508,15 @@ msgid "Span mo_nitors"
 msgstr "Sträck över flera skärmar"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:38
@@ -554,7 +587,9 @@ msgid "Welcome to the first start of the panel"
 msgstr "Välkommen till första starten av panelen"
 
 #: ../migrate/main.c:80
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgid ""
+"Because the panel moved to a new system for storing the settings, it has to "
+"load a fresh initial configuration."
 msgstr ""
 
 #: ../migrate/main.c:83
@@ -687,7 +722,9 @@ msgid "Select A Menu File"
 msgstr "Välj en menyfil"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
@@ -819,8 +856,7 @@ msgstr "Visa s_ekunder"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Lu_ddighet:"
@@ -858,7 +894,11 @@ msgstr "Visa _handtag"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgid ""
+"The format describes the date and time parts to insert into the file name. "
+"For example, %Y will be substituted with the year, %m with the month and %d "
+"with the day. See the documentation of the date utility for additional "
+"information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1148,7 +1188,10 @@ msgid "Show a directory tree in a menu"
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1242,7 +1285,9 @@ msgid "North"
 msgstr "Nord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1300,7 +1345,9 @@ msgid "Number of _rows:"
 msgstr "Antal _rader:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid "Show a miniature view of the workspace with rectangles for the visible windows"
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
 msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1373,7 +1420,9 @@ msgstr "Uppmärksamhetsnotifiering"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
 msgstr ""
 
 # Underlig sträng
@@ -1491,23 +1540,23 @@ msgstr "Fönster_gruppering:"
 msgid "Window title"
 msgstr "Fönstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:2997
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
 msgstr "Mi_nimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3006
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
 msgstr "Av_minimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
 msgstr "Ma_ximera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
 msgstr "Avmax_imera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3031
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "S_täng alla"
 

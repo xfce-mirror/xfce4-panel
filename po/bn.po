@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-20 22:18+0200\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
 "PO-Revision-Date: 2010-03-31 15:34+0600\n"
 "Last-Translator: Sadia Afroz <sadia@ankur.org.bd>\n"
 "Language-Team: Bengali <ankur-bd-l10n@googlegroups.com>\n"
@@ -18,20 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "Xfce প্যানেলে লঞ্চার তৈরি করা হবে"
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop file"
+msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "Xfce প্যানেলে একটি নতুন লঞ্চার তৈরি করা হবে"
+#, fuzzy
+msgid "Create Launcher on the panel"
+msgstr "Xfce প্যানেলে লঞ্চার তৈরি করা হবে"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
+#, fuzzy
+msgid "Customize the panel"
 msgstr "Xfce প্যানেল স্বনির্ধারণ করা হবে"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "প্যানেলের পছন্দসমূহ"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../migrate/main.c:84
+#, fuzzy
+msgid "Panel"
+msgstr "প্যানেল %d"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -46,7 +52,8 @@ msgstr ""
 "সংস্করণের সাথে নাও মিলতে পারে।"
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
+#, fuzzy
+msgid "The user manual is not installed on your computer"
 msgstr "আপনার কম্পিউটারে Xfce প্যানেলের ব্যবহারকারী ম্যানুয়াল ইনস্টল করা নেই"
 
 #. display an error message to the user
@@ -55,73 +62,78 @@ msgid "Failed to open the documentation browser"
 msgstr "ডকুমেন্টেশন ব্রাউজার খুলতে ব্যর্থ"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:873
-#: ../panel/panel-preferences-dialog.c:1029
+#: ../libxfce4panel/xfce-panel-plugin.c:889
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "আপনি কি নিশ্চিতভাবে \"%s\" অপসারণ করতে চান?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:878
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../libxfce4panel/xfce-panel-plugin.c:894
+#: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "আপনি যদি প্যানেল থেকে আইটেমটি অপসারণ করতে চান, তাহলে এটি স্থায়ীভাবে হারিয়ে "
 "যাবে। "
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1038
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "সরানো হবে (_M)"
 
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#, fuzzy
+msgid "Pane_l"
+msgstr "প্যানেল %d"
+
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "নতুন আইটেম যোগ করা হবে... (_N)"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "প্যানেলের পছন্দসমূহ... (_e)"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 #, fuzzy
 msgid "Log _Out"
 msgstr "লগআউট"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "\"প্যানেল পছন্দসমূহ\" ডায়ালগ প্রদর্শন"
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "\"নতুন আইটেম যোগ\" ডায়ালগ প্রদর্শন"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "প্যানেল কনফিগারেশন সংরক্ষণ করুন"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "প্যানেলে নতুন প্লাগইন যোগ করুন"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "চলমান প্যানেল ইন্সট্যান্স পুনরায় শুরু করুন"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "চলমান প্যানেল ইন্সট্যান্স ত্যাগ করুন"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -129,90 +141,100 @@ msgid "Print version information and exit"
 msgstr "সংস্করণ তথ্য মুদ্রণ করুন এবং প্রস্থান করুন"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "ব্যবহারের জন্য \"%s --সহায়তা\" টাইপ করুন।"
 
-#: ../panel/main.c:180
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce ডেভেলপমেন্ট টিম। সকল অধিকার সংরক্ষিত।"
 
-#: ../panel/main.c:181
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "অনুগ্রহ করে <%s> তে বাগ রিপোর্ট পাঠান।"
 
-#: ../panel/main.c:227
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr "ইতোমধ্যে এখানে একটি চলমান ইন্সট্যান্স আছে"
 
 #. spawn ourselfs again
-#: ../panel/main.c:273
+#: ../panel/main.c:367
 msgid "Restarting..."
 msgstr "পুনরায় আরম্ভ করা হচ্ছে..."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
 msgstr "পছন্দসমূহের ডায়ালগ দেখাতে ব্যর্থ"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
 msgstr "নতুন আইটেম যোগ করার ডায়ালগ দেখাতে ব্যর্থ"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr "প্যানেল কনফিগারেশন সংরক্ষণ করতে ব্যর্থ"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
 msgstr "প্যানেলে একটি প্লাগইন যোগ করতে ব্যর্থ"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr "প্যানেল পুনরায় শুরু করতে ব্যর্থ"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr "প্যানেল ত্যাগ করতে ব্যর্থ"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus বার্তা পাঠাতে ব্যর্থ"
 
-#: ../panel/main.c:311
+#: ../panel/main.c:405
 msgid ""
-"Do you want to start the Xfce panel? If you do, make sure you save the "
-"session on logout, so the panel is automatically started the next time you "
-"login."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:314 ../panel/main.c:328
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s এর কোনো চলমান ইন্সট্যান্স পাওয়া যায়নি"
 
-#: ../panel/panel-application.c:197
+#: ../panel/panel-application.c:196
 msgid "Failed to launch the migration application"
 msgstr "মাইগ্রেশন অ্যাপ্লিকেশন চালু করতে ব্যর্থ"
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr ""
+
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#, fuzzy
+msgid "Are you sure you want to quit the panel?"
+msgstr "আপনি কি নিশ্চিত ভাবে %d মুছে ফেলতে চান?"
+
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" কমান্ডটি এক্সিকিউট করতে ব্যর্থ"
 
-#: ../panel/panel-dbus-client.c:226
+#: ../panel/panel-dbus-client.c:209
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "অকার্যকর প্লাগইন ইভেন্ট সিনট্যাক্স উল্লেখ করা হয়েছে। PLUGIN-NAME:NAME[:TYPE:VALUE] "
 "ব্যবহার করুন।"
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-dbus-client.c:242
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -220,32 +242,32 @@ msgstr ""
 "ইঙ্গিতের ধরন \"%s\" অকার্যকর। কার্যকর ধরনগুলো হল bool, double, int, string এবং "
 "uint।"
 
-#: ../panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce ডেস্কটপ এনভায়রনমেন্টের প্যানেল"
 
-#: ../panel/panel-dialogs.c:84
+#: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr ""
 "অঙ্কুর প্রকল্পের পক্ষে লোবা ইয়াসমীন <loba@ankur.org.bd>\n"
 "সাদিয়া আফরোজ <sadia@ankur.org.bd>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "নতুন আইটেম যোগ করা হবে"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "নতুন প্লাগইনের জন্য অনুগ্রহ করে একটি প্যানেল বেছে নিন:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "প্যানেল %d"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:183
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -253,33 +275,33 @@ msgstr ""
 "যেহেতু প্যানেলটি kiosk মোডে চলছে, স্বাভাবিক ব্যবহারকারী হিসেবে আপনি প্যানেলের "
 "কনফিগারেশনে পরিবর্তন করার জন্য অনুমোদিত নন "
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
 msgstr "প্যানেলের পরিবর্ধন অনুমোদিত নয়"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "নতুন আইটেম যোগ করা হবে"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "প্যানেলে নতুন প্লাগইন যোগ করা হবে"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "অনুসন্ধান: (_S)"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "এখানে অনুসন্ধান শব্দসমষ্টি প্রবেশ করানো হবে"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "\"%s\" প্লাগইন প্যানেলে নেই, আপনি কি এটি পুনরায় শুরু করতে চান?"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -290,41 +312,41 @@ msgstr ""
 "প্যানেল প্লাগইনটি পুনরায় আরম্ভ করার চেষ্টা করবে নতুবা এটি প্যানেল থেকে চিরতরে "
 "অপসারণ করা হবে।"
 
-#: ../panel/panel-preferences-dialog.c:440
+#: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
 msgstr "স্বয়ংক্রিয়"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:459
+#: ../panel/panel-preferences-dialog.c:472
 #, c-format
 msgid "Screen %d"
 msgstr "পর্দা %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:485
+#: ../panel/panel-preferences-dialog.c:498
 #, c-format
 msgid "Monitor %d"
 msgstr "মনিটর %d"
 
-#: ../panel/panel-preferences-dialog.c:815
+#: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "প্যানেল এবং প্যানেল কনফিগারেশন স্থায়ীভাবে মুছে যাবে"
 
-#: ../panel/panel-preferences-dialog.c:816
+#: ../panel/panel-preferences-dialog.c:829
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "আপনি কি নিশ্চিত ভাবে %d মুছে ফেলতে চান?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-preferences-dialog.c:912
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:901
+#: ../panel/panel-preferences-dialog.c:917
 #, fuzzy, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -333,7 +355,7 @@ msgstr "মধ্যবর্তী নাম: %s-%d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:913
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "মধ্যবর্তী নাম: %s-%d"
@@ -354,8 +376,8 @@ msgstr "এই প্যানেলে একটি নতুন আইটে�
 #: ../panel/panel-preferences-dialog.glade.h:4
 #, fuzzy
 msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
 msgstr "প্যানেল পটভূমির আলফা ভ্যালু, 0 (স্বচ্ছ) এবং 100 (অনচ্ছ) এর মধ্যে।"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -431,23 +453,27 @@ msgid "O_utput:"
 msgstr "আউটপুট: (_u)"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Opacity"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "বর্তমানে নির্বাচিত আইটেম অপসারণ করা হবে"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "বর্তমানে নির্বাচিত প্যানেল অপসারণ করা হবে"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 #, fuzzy
 msgid "Select A Background Image"
 msgstr "একটি আইকন নির্বাচন করা হবে"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
@@ -455,16 +481,16 @@ msgstr ""
 "প্লাগইন যদি আরও ফাঁকাস্থানের জন্য অনুরোধ করে তবে স্বয়ংক্রিয়ভাবে প্যানেলের দৈর্ঘ্য বৃদ্ধি "
 "করতে এই অপশনটি নির্বাচন করুন।"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "একাধিক মনিটরে প্যানেল সম্প্রসারণ করতে এই অপশনটি নির্বাচন করুন।"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "প্যানেলের হ্যান্ডেল আড়াল এবং এর অবস্থান আবদ্ধ করতে এই অপশনটি নির্বাচন করুন।"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
@@ -472,37 +498,35 @@ msgstr ""
 "প্যানেলের উপর পয়েন্টার না থাকলে প্যানেল আড়াল করতে এই অপশনটি নির্বাচন করুন। এটি "
 "শুধুমাত্র তখনই কাজ করে যখন এটি কোনো পর্দার প্রান্তে সংযুক্ত করা হয়।"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "বর্তমানে নির্বাচিত আইটেম সম্পর্কিত তথ্যাবলী প্রদর্শন"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr "স্প্যান মনিটর (_n)"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Transparency"
-msgstr "স্বচ্ছতা"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Transparency when the pointer is hovering over the panel."
+#: ../panel/panel-preferences-dialog.glade.h:36
+#, fuzzy
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
 msgstr "পয়েন্টার প্যানেলের উপর আবর্তন করার সময় স্বচ্ছতা।"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is not hovering the panel."
-msgstr "পয়েন্টার প্যানেলের উপর আবর্তন না করার সময় স্বচ্ছতা।"
-
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Vertical"
-msgstr "উল্লম্ব"
+#, fuzzy
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr "পয়েন্টার প্যানেলের উপর আবর্তন করার সময় স্বচ্ছতা।"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
-msgid "Xfce Panel"
-msgstr "Xfce প্যানেল"
+msgid "Vertical"
+msgstr "উল্লম্ব"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -566,7 +590,8 @@ msgid "Expert"
 msgstr "দক্ষ"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
+#, fuzzy
+msgid "Welcome to the first start of the panel"
 msgstr "Xfce প্যানেলের প্রথম আরম্ভতে স্বাগতম"
 
 #: ../migrate/main.c:80
@@ -679,7 +704,9 @@ msgstr "লগআউট, আবদ্ধ বা অন্যান্য সি�
 msgid "Appearance"
 msgstr "অবয়ব"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "অ্যাপ্লিকেশন মেনু"
@@ -689,18 +716,22 @@ msgid "Button _title:"
 msgstr "বোতামের শিরোনাম: (_t)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Ed_it Menu"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
 msgstr "মেনু ফাইল"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
 msgstr "মেনু ফাইল: (_f)"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
 msgstr "একটি মেনু ফাইল নির্বাচন করা হবে"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
@@ -708,55 +739,55 @@ msgstr ""
 "মেনুতে সাধারণ অ্যাপ্লিকেশনের নাম প্রদর্শন করতে এই অপশনটি নির্বাচন করুন, উদাহরণস্বরূপ "
 "\"Thunar\"-এর পরিবর্তে \"ফাইল ব্যবস্থাপক\""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application description in t_ooltip"
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#, fuzzy
+msgid "Show application d_escription in tooltip"
 msgstr "টুলটিপে অ্যাপ্লিকেশনের বিবরণ প্রদর্শন (_o)"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "সাধারণ অ্যাপ্লিকেশনের নাম প্রদর্শন (_a)"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
 msgstr "মেনুতে আইকন প্রদর্শন করা হবে (_o)"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Use _default menu file"
-msgstr "ডিফল্ট মেনু ফাইল ব্যবহার করা হবে (_d)"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file"
+#, fuzzy
+msgid "Use c_ustom menu file:"
 msgstr "পছন্দসই মেনু ফাইল ব্যবহার করা হবে (_u)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#, fuzzy
+msgid "Use the _default menu"
+msgstr "ডিফল্ট মেনু ফাইল ব্যবহার করা হবে (_d)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "আইকন: (_I)"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
 msgstr "বোতামের শিরোনাম প্রদর্শন করা হবে (_S)"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
-msgid "Xfce Menu"
-msgstr "Xfce মেনু"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "একটি আইকন নির্বাচন করা হবে"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
-#: ../plugins/launcher/launcher.c:2102
+#: ../plugins/applicationsmenu/applicationsmenu.c:513
+#: ../plugins/applicationsmenu/applicationsmenu.c:754
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" কমান্ডটি এক্সিকিউট করতে ব্যর্থ।"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
+#: ../plugins/applicationsmenu/applicationsmenu.c:1010
 msgid "No applications found"
 msgstr "কোন অ্যাপ্লিকেশন পাওয়া যায়নি"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
+#: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
 msgstr "অ্যপ্লিকেশন মেনু লোড করতে ব্যর্থ"
 
@@ -794,15 +825,15 @@ msgstr "বর্তমান মাউস অবস্থানে পপআপ
 msgid "Show help options"
 msgstr "সহায়তা অপশন প্রদর্শন"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "সপ্তাহ %V"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "ঘড়ির কমান্ড চালাতে ব্যর্থ"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "স্বনির্বাচিত বিন্যাস"
 
@@ -1203,32 +1234,28 @@ msgstr "ভিত্তি ডিরেক্টরি: (_B)"
 msgid "_File Pattern:"
 msgstr "ফাইলের প্যাটার্ন: (_F)"
 
-#: ../plugins/launcher/launcher.c:1448
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "নামবিহীন আইটেম"
 
-#: ../plugins/launcher/launcher.c:1588
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "কোন আইটেম নেই"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "আপনি কোনো আইটেম মুছে ফেললে, এটি স্থায়ীভাবে অপসারিত হবে"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "আপনি \"%s\" মুছে ফেলতে চান?"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "নামবিহীন উপাদান"
 
-#: ../plugins/launcher/launcher-dialog.c:683
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "config ডিরেক্টরি হতে ডেস্কটপ ফাইল মুছে ফেলতে ব্যর্থ"
-
-#: ../plugins/launcher/launcher-dialog.c:723
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "ডেস্কটপ আইটেম সম্পাদক খুলতে ব্যর্থ"
 
@@ -1309,9 +1336,19 @@ msgstr "তীরচিহ্নযুক্ত বোতামের অবস�
 msgid "Program launcher with optional menu"
 msgstr "ঐচ্ছিক মেনু সহকারে প্রোগ্রাম লঞ্চার"
 
-#: ../plugins/pager/pager.c:413
-msgid "Unable to open the Xfce workspace settings"
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "কর্মপরিসরের বৈশিষ্ট্যাবলী... (_S)"
+
+#: ../plugins/pager/pager.c:429
+#, fuzzy
+msgid "Unable to open the workspace settings"
 msgstr "Xfce কর্মপরিসরের সেটিংসমূহ খুলতে ব্যর্থ"
+
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "%d কর্মস্থান"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1340,10 +1377,6 @@ msgstr "মাউসের চাকা ব্যবহার করে কর�
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "কর্মপরিসর পরিবর্তক"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "কর্মপরিসরের বৈশিষ্ট্যাবলী... (_S)"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1394,13 +1427,13 @@ msgstr "সব উইন্ডো আড়াল করে ডেস্কটপ �
 msgid "Show Desktop"
 msgstr "ডেস্কটপ প্রদর্শন করা হবে"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:382
 #, fuzzy
 msgid "Unable to start the notification area"
 msgstr "জরুরী ঘোষনা সক্রিয় করুন (_u)"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:850
 #, fuzzy
 msgid ""
 "Most likely another widget took over the function of a notification area. "
@@ -1409,11 +1442,11 @@ msgstr ""
 "সম্ভবত অন্য কোনো widget ঘোষনা এলাকার ফাংশনের স্থান দখল করেছে। এই প্লাগইনটি বন্ধ "
 "করা হবে।"
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr "ঘোষনা এলাকার নির্বাচন নেই"
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "আপনি কি নিশ্চিত আপনি পরিচিত অ্যাপ্লিকেশনসমূহের তালিকা মুছে ফেলতে চান?"
 
@@ -1431,10 +1464,10 @@ msgid "Notification Area"
 msgstr "ঘোষনা এলাকা"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "সারির সংখ্যা: (_N)"
+msgid "_Maximum icon size (px):"
+msgstr ""
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "%d পর্দার জন্য ব্যবস্থাপক নির্বাচন অর্জন করতে ব্যর্থ"
@@ -1468,68 +1501,77 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "বর্তমান কর্মপরিসরে ন্যূনতম বিস্তারের উইন্ডোসমূহ পূর্বাবস্থায় ফিরিয়ে আনা হবে (_w)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "ফ্ল্যাট বোতাম প্রদর্শন করা হবে (_f)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "হ্যান্ডেল প্রদর্শন করা হবে (_h)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "বোতামের লেবেল প্রদর্শন করা হবে (_l)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "শুধুমাত্র ছোটকরা উইন্ডোগুলো প্রদর্শন (_m)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#, fuzzy
+msgid "Show windows from _all workspaces or viewports"
 msgstr "সব ওয়ার্কস্পেস থেকে উইন্ডোগুলো প্রদর্শন (_a)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#, fuzzy
+msgid "Show windows from all mo_nitors"
+msgstr "সব ওয়ার্কস্পেস থেকে উইন্ডোগুলো প্রদর্শন (_a)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "সাজানোর ক্রম: (_o)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr "টাইমস্ট্যাম্প"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
 msgstr "যখন মধ্যবর্তী ফাঁকা স্থান সীমীত"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "উইন্ডোর বোতাম"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "উইন্ডো গ্রুপবদ্ধ করা হচ্ছে: (_g)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
 msgstr "উইন্ডোর শিরোনাম"
 
-#: ../plugins/tasklist/tasklist-widget.c:2620
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
 msgstr "সমস্ত ছোট করা হবে (_n)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2629
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
 msgstr "সমস্ত ছোট থেকে বড় করা হবে (_m)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2635
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
 msgstr "সমস্ত বড় করা হবে (_x)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2644
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
 msgstr "সমস্ত বড় থেকে ছোট করা হবে (_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2654
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "সমস্ত বন্ধ করা হবে (_C)"
 
@@ -1540,11 +1582,6 @@ msgstr "বোতাম ব্যবহার করে খোলা উইন�
 #: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
 msgstr "ডেস্কটপ"
-
-#: ../plugins/windowmenu/windowmenu.c:854
-#, c-format
-msgid "Workspace %d"
-msgstr "%d কর্মস্থান"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
@@ -1584,6 +1621,10 @@ msgstr "জরুরী ঘোষনা সক্রিয় করুন (_u)"
 msgid "Icon"
 msgstr "আইকন"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "সব ওয়ার্কস্পেস থেকে উইন্ডোগুলো প্রদর্শন (_a)"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "কর্মপরিসরের নাম প্রদর্শন করা হবে (_n)"
@@ -1600,6 +1641,30 @@ msgstr "উইন্ডো মেনু"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "মেনু ব্যবহার করে খোলা উইন্ডোসমূহের মাঝে পরিবর্তন করুন"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "Xfce প্যানেলে একটি নতুন লঞ্চার তৈরি করা হবে"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "প্যানেলের পছন্দসমূহ"
+
+#~ msgid "Transparency"
+#~ msgstr "স্বচ্ছতা"
+
+#~ msgid "Transparency when the pointer is not hovering the panel."
+#~ msgstr "পয়েন্টার প্যানেলের উপর আবর্তন না করার সময় স্বচ্ছতা।"
+
+#~ msgid "Xfce Panel"
+#~ msgstr "Xfce প্যানেল"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "Xfce মেনু"
+
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "config ডিরেক্টরি হতে ডেস্কটপ ফাইল মুছে ফেলতে ব্যর্থ"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "সারির সংখ্যা: (_N)"
 
 #~ msgid "_Restart"
 #~ msgstr "পুনরায় আরম্ভ (_R)"

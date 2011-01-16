@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-20 22:18+0200\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
 "PO-Revision-Date: 2010-02-19 19:02+0900\n"
 "Last-Translator: Gheyret T.Kenji <gheyret@gmail.com>\n"
 "Language-Team:Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -19,20 +19,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "Xfce Panel نىڭ ئۈستىگە ئىجراچى ياساش"
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop file"
+msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "Xfce Panel نىڭ ئۈستىگە يېڭى ئىجراچى ياساش"
+#, fuzzy
+msgid "Create Launcher on the panel"
+msgstr "Xfce Panel نىڭ ئۈستىگە ئىجراچى ياساش"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
+#, fuzzy
+msgid "Customize the panel"
 msgstr "Xfce Panel نى Customize قىلىش"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "Panel تەڭشىكى"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../migrate/main.c:84
+#, fuzzy
+msgid "Panel"
+msgstr "panel %d"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -47,7 +53,8 @@ msgstr ""
 "ماسلاشماسلىقى مۇمكىن."
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
+#, fuzzy
+msgid "The user manual is not installed on your computer"
 msgstr "Xfce Panel قوللانمىسى تېخى كومپيۇتېرغا ئورنىتىلماپتۇ"
 
 #. display an error message to the user
@@ -56,80 +63,85 @@ msgid "Failed to open the documentation browser"
 msgstr "پۈتۈك كۆرگۈنى ئېچىش مەغلۇپ بولدى"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:873
-#: ../panel/panel-preferences-dialog.c:1029
+#: ../libxfce4panel/xfce-panel-plugin.c:889
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" راستلا ئۆچۈرەمسىز؟"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:878
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../libxfce4panel/xfce-panel-plugin.c:894
+#: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Panel دىكى تۈرنى ئۆچۈرسىڭىز، ئۇ مەڭگۈلۈككە يوقىلىدۇ."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1038
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "يۆتكە(_M)"
 
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#, fuzzy
+msgid "Pane_l"
+msgstr "panel %d"
+
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2117
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "يېڭى تۇر قوش(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2128
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "Panel تەڭشىكى (_E)"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2144
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 #, fuzzy
 msgid "Log _Out"
 msgstr "چىقىش"
 
 # CLI --help
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Panel تەڭشىكى' دىئالوگ كۆزنىكىنى كۆرسىتىدۇ"
 
 # CLI --help: --preferences=PANEL-NUMBER
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
 # CLI --help
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "'يېڭى تۇر قوش' كۆزنىكىنى كۆرسىتىدۇ"
 
 # CLI --help
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "Panel تەڭشىكىنى ساقلا"
 
 # CLI --help
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "panel غا يېڭى قىستۇرما قوشۇش"
 
 # CLI --help: -add=PLUGIN-NAME
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
 # CLI --help
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "ئىجرا بولۇۋاتقان panel instance نى قايتا قوزغىتىش"
 
 # CLI --help
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "ئىجرا بولۇۋاتقان panel instance نى توختىتىش"
 
 # CLI --help
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -137,151 +149,161 @@ msgid "Print version information and exit"
 msgstr "نەشر ئۇچۇرىنى كۆرسىتىپ ئاخىرلاشتۇرۇش"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "\"%s --help\" نى كىرگۈزسىڭىز ئىشلىتىش ئۇسۇلى كۆرۈنىدۇ"
 
-#: ../panel/main.c:180
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce ئىجادىيەت گۇرۇپپىسى. All rights reserved."
 
-#: ../panel/main.c:181
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "كەمتۈكنى <%s> غا دوكلات قىلىڭ."
 
-#: ../panel/main.c:227
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr "ئىجرا بولۇۋاتقان instance مەۋجۇت"
 
 #. spawn ourselfs again
-#: ../panel/main.c:273
+#: ../panel/main.c:367
 msgid "Restarting..."
 msgstr "قايتا قوزغىلىۋاتىدۇ..."
 
-#: ../panel/main.c:288
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
 msgstr "تەڭشەك كۆزنىكىنى كۆرسىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:290
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
 msgstr "يېڭى تۈر قوشۇش كۆزنىكىنى كۆرسىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr "panel تەڭشىكىنى ساقلاش مەغلۇپ بولدى"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
 msgstr "panel غا قىستۇرما قوشۇش مەغلۇپ بولدى"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr "panel نى قايتا قوزغىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr "panel نى توختىتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus ئۇچۇرىنى ئەۋەتىش مەغلۇپ بولدى"
 
-#: ../panel/main.c:311
+#: ../panel/main.c:405
 msgid ""
-"Do you want to start the Xfce panel? If you do, make sure you save the "
-"session on logout, so the panel is automatically started the next time you "
-"login."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:314 ../panel/main.c:328
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s نىڭ ئىجرا بولۇۋاتقان instance ئى تېپىلمىدى"
 
-#: ../panel/panel-application.c:197
+#: ../panel/panel-application.c:196
 msgid "Failed to launch the migration application"
 msgstr "migration پروگراممىسىنى ئىجرا قىلىش مەغلۇپ بولدى"
 
-#: ../panel/panel-application.c:1425 ../plugins/actions/actions.c:409
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr ""
+
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#, fuzzy
+msgid "Are you sure you want to quit the panel?"
+msgstr "panel %d نى راستلا ئۆچۈرەمسىز؟"
+
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" نى ئىجرا قىلىش مەغلۇپ بولدى."
 
-#: ../panel/panel-dbus-client.c:226
+#: ../panel/panel-dbus-client.c:209
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "قىستۇرما event نىڭ يېزىلىشى توغرا ئەمەس. PLUGIN-NAME:NAME[:TYPE:VALUE] دەك "
 "ئىشلىتىڭ."
 
-#: ../panel/panel-dbus-client.c:259
+#: ../panel/panel-dbus-client.c:242
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:79
+#: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce ئىجادىيەت مۇھىتى panel ئى"
 
-#: ../panel/panel-dialogs.c:84
+#: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr "Gheyret T.Kenji <gheyret@gmail.com> 2010"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "يېڭى تۈر قوشۇش"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "يېڭى قىستۇرمىنىڭ panel نى تاللاڭ"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:150 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "panel %d"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:183
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:188
+#: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
 msgstr "panel نى تۈزىتىشكە بولمايدۇ"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "يېڭى تۈر قوش قوشۇش"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "panel غا يېڭى قىستۇرمىلارنى قوشىدۇ"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "ئىزدە(_S):"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "ئىزدەيدىغاننى بۇ يەرگە كىرگۈزۈڭ"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "قىستۇرما \"%s\" تېخىغىچە panel دا بار، قايتا قوزغىتامسىز؟"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -289,41 +311,41 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.c:440
+#: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
 msgstr "ئاپتوماتىك"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:459
+#: ../panel/panel-preferences-dialog.c:472
 #, c-format
 msgid "Screen %d"
 msgstr "ئېكران %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:485
+#: ../panel/panel-preferences-dialog.c:498
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:815
+#: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "panel ۋە قىستۇرما سەپلىمىلىرى مەڭگۈلۈككە ئۆچۈرۈلىدۇ"
 
-#: ../panel/panel-preferences-dialog.c:816
+#: ../panel/panel-preferences-dialog.c:829
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "panel %d نى راستلا ئۆچۈرەمسىز؟"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-preferences-dialog.c:912
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:901
+#: ../panel/panel-preferences-dialog.c:917
 #, fuzzy, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -332,7 +354,7 @@ msgstr "ئىچ ئاتى: %s-%d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:913
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "ئىچ ئاتى: %s-%d"
@@ -353,8 +375,8 @@ msgstr "بۇ panel غا يېڭى تۈر قوش"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -431,76 +453,76 @@ msgid "O_utput:"
 msgstr "چىقىرىش(_U)"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Opacity"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr ""
 
 # Tooltip
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "ھازىرقى تاللانغان تۇرنى ئۆچۈرىدۇ"
 
 # Tooltip
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "ھازىرقى panel نى ئۆچۈر"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 
 # Tooltip
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "ھازىرقى تاللانغان تۈر ھەققىدىكى ئۇچۇرلارنى كۆرسىتىدۇ"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Transparency"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Transparency when the pointer is hovering over the panel."
-msgstr ""
-
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is not hovering the panel."
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Vertical"
-msgstr "ۋېرتىكال"
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:38
-msgid "Xfce Panel"
-msgstr "Xfce Panel"
+msgid "Vertical"
+msgstr "ۋېرتىكال"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -562,7 +584,8 @@ msgid "Expert"
 msgstr "مۇتەخەسسىس"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
+#, fuzzy
+msgid "Welcome to the first start of the panel"
 msgstr "Xfce Panel نىڭ تۇنجى ئىجراسىغا مەرھەمەت"
 
 #: ../migrate/main.c:80
@@ -673,7 +696,9 @@ msgstr "چىقىش، قۇلۇپلاش ياكى سىستېما action لىرى"
 msgid "Appearance"
 msgstr "كۆرۈنۈشى"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "پروگرامما Menu سى"
@@ -683,72 +708,75 @@ msgid "Button _title:"
 msgstr "توپچا ماۋزۇسى(_T):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Ed_it Menu"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
 msgstr "Menu ھۆججىتى"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
 msgstr "Menu ھۆججىتى(_F):"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
 msgstr "Menu ھۆججىتى تاللا"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application description in t_ooltip"
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+msgid "Show application d_escription in tooltip"
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "ئادەتتىكى پروگرامما ناملىرىنى كۆرسەت(_A)"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
 msgstr "menu نىڭ ئىچىدە سىنبەلگە كۆرسەت(_O)"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Use _default menu file"
-msgstr "كۆڭۈلدىكى menu ھۆججىتىنى ئىشلەت(_D)"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file"
+#, fuzzy
+msgid "Use c_ustom menu file:"
 msgstr "كۆرسىتىلگەن menu ھۆججىتىنى ئىشلەت(_D)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#, fuzzy
+msgid "Use the _default menu"
+msgstr "كۆڭۈلدىكى menu ھۆججىتىنى ئىشلەت(_D)"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "سىنبەلگە(_I):"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
 msgstr "توپچا ماۋزۇسىنى كۆرسەت(_S)"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
-msgid "Xfce Menu"
-msgstr "Xfce Menu"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:463
+#: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "سىنبەلگە تاللاش"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:703
-#: ../plugins/launcher/launcher.c:2102
+#: ../plugins/applicationsmenu/applicationsmenu.c:513
+#: ../plugins/applicationsmenu/applicationsmenu.c:754
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "بۇيرۇق \"%s\"نى ئىجرا قىلىش مەغلۇپ بولدى."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:940
+#: ../plugins/applicationsmenu/applicationsmenu.c:1010
 msgid "No applications found"
 msgstr "پروگرامما تېپىلمىدى"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:952
+#: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
 msgstr "پروگرامما menu سېنى ئوقۇش مەغلۇپ بولدى"
 
@@ -786,15 +814,15 @@ msgstr "چاشقىنەكنىڭ ھازىرقى ئورنىدا menu نى كۆرس�
 msgid "Show help options"
 msgstr "ياردەم تاللانمىلىرىنى كۆرسىتىدۇ"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "ھەپتە %V"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "clock بۇيرۇقىنى ئىجرا قىلىش مەغلۇپ بولدى"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr ""
 
@@ -1196,32 +1224,28 @@ msgstr "ئاساس مۇندەرىجە"
 msgid "_File Pattern:"
 msgstr "ھۆججەت Pattern(_F):"
 
-#: ../plugins/launcher/launcher.c:1448
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "نامىزى تۈر"
 
-#: ../plugins/launcher/launcher.c:1588
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "تۈر يوق"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "بىرەر تۈرنى ئۆچۈرسىڭىز، ئۇ مەڭگۈلۈككە يوقىلىدۇ"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "\"%s\" نى راستلا ئۆچۈرەمسىز؟"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "نامسىز تۈر"
 
-#: ../plugins/launcher/launcher-dialog.c:683
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "سەپلىمە مۇندەرىجىدىكى ئۇستەليۈزى ھۆججىتىنى ئۆچۈرۈش مەغلۇپ بولدى"
-
-#: ../plugins/launcher/launcher-dialog.c:723
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "ئۇستەليۈزى تۈرى تەھرىرلىگۈچىنى ئېچىش مەغلۇپ بولدى"
 
@@ -1303,9 +1327,19 @@ msgstr ""
 msgid "Program launcher with optional menu"
 msgstr ""
 
-#: ../plugins/pager/pager.c:413
-msgid "Unable to open the Xfce workspace settings"
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+msgid "Workspace _Settings..."
+msgstr "Workspace تەڭشەكلىرى..."
+
+#: ../plugins/pager/pager.c:429
+#, fuzzy
+msgid "Unable to open the workspace settings"
 msgstr "Xfce workspace نىڭ تەڭشىكىنى ئاچالمىدى"
+
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#, c-format
+msgid "Workspace %d"
+msgstr "Workspace %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1334,10 +1368,6 @@ msgstr "چاشقىنەك چاقىنى ئىشلىتىپ workspaces نى ئالم�
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
 msgstr "Workspace ئالماشتۇرغۇ"
-
-#: ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "Workspace تەڭشەكلىرى..."
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1391,23 +1421,23 @@ msgstr "ھەممە كۆزنەكلەرنى يوشۇرۇپ ئۈستەل يۈزىن
 msgid "Show Desktop"
 msgstr "ئۈستەل يۈزىنى كۆرسەت"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:382
 #, fuzzy
 msgid "Unable to start the notification area"
 msgstr "panel نى قايتا قوزغىتىش مەغلۇپ بولدى"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:850
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr ""
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "بىلىدىغان پروگراممىلارنى تىزىملىكتىن تازىلىسۇنمۇ؟"
 
@@ -1426,10 +1456,10 @@ msgid "Notification Area"
 msgstr "ئۇقتۇرۇش رايونى"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "قۇر سانى(_N):"
+msgid "_Maximum icon size (px):"
+msgstr ""
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "ئېكران %d manager selection نى ئېلىش مەغلۇپ بولدى"
@@ -1463,68 +1493,77 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "ھازىرقى _workspace(_W) دىكى كىچىكلىتىلگەن كۆزنەكلەرنى ئەسلىگە كەلتۈر"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "سىدام توپچا كۆرسەت(_F)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "handle كۆرسەتسۇن(_H)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "كىچىكلىتىلگەن كۆزنەكلەرنىلا كۆرسەت"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#, fuzzy
+msgid "Show windows from _all workspaces or viewports"
 msgstr "ھەممە workspace لاردىكى كۆزنەكلەرنى كۆرسەت"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#, fuzzy
+msgid "Show windows from all mo_nitors"
+msgstr "ھەممە workspace لاردىكى كۆزنەكلەرنى كۆرسەت"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "تەرتىپلەش ئۇسۇلى(_O):"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr "Timestamp"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "كۆزنەك توپچىلىرى"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
 msgstr "كۆزنەك ماۋزۇسى"
 
-#: ../plugins/tasklist/tasklist-widget.c:2620
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
 msgstr "ھەممىنى كىچىكلەت(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2629
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2635
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
 msgstr "ھەممىنى چوڭايت(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:2644
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2654
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "ھەممىنى تاقا(_C)"
 
@@ -1535,11 +1574,6 @@ msgstr "توپچىلارنى ئىشلىتىپ ئوچۇق كۆزنەكلەرنى 
 #: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
 msgstr "ئۈستەليۈزى"
-
-#: ../plugins/windowmenu/windowmenu.c:854
-#, c-format
-msgid "Workspace %d"
-msgstr "Workspace %d"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
@@ -1579,6 +1613,10 @@ msgstr ""
 msgid "Icon"
 msgstr "سىنبەلگە"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "ھەممە workspace لاردىكى كۆزنەكلەرنى كۆرسەت"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "workspaces ئاتىنى كۆرسەتسۇن(_N)"
@@ -1595,6 +1633,24 @@ msgstr "كۆزنەك Menu سى"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "menu نى ئىشلىتىپ ئوچۇق كۆزنەكلەرنى ئۆزئارا ئالماشتۇرسۇن"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "Xfce Panel نىڭ ئۈستىگە يېڭى ئىجراچى ياساش"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Panel تەڭشىكى"
+
+#~ msgid "Xfce Panel"
+#~ msgstr "Xfce Panel"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "Xfce Menu"
+
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "سەپلىمە مۇندەرىجىدىكى ئۇستەليۈزى ھۆججىتىنى ئۆچۈرۈش مەغلۇپ بولدى"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "قۇر سانى(_N):"
 
 #~ msgid "_Restart"
 #~ msgstr "قايتا قوزغات(_R)"

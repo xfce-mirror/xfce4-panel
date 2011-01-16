@@ -9,18 +9,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 11:09+0000\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
 "PO-Revision-Date: 2011-01-01 13:35+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "Přidat na panel nový spouštěč založený na informacích ze souboru plochy"
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop file"
+msgstr ""
+"Přidat na panel nový spouštěč založený na informacích ze souboru plochy"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -31,8 +33,7 @@ msgid "Customize the panel"
 msgstr "Přizpůsobit panel"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
@@ -42,8 +43,12 @@ msgid "_Read Online"
 msgstr "Číst _online"
 
 #: ../common/panel-utils.c:156
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Uživatelskou příručku můžete číst online, může se však lišit od současně nainstalované verze panelu."
+msgid ""
+"You can read the user manual online. This manual may however not exactly "
+"match your panel version."
+msgstr ""
+"Uživatelskou příručku můžete číst online, může se však lišit od současně "
+"nainstalované verze panelu."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
@@ -76,20 +81,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096
-#: ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "Přidat _nové položky..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107
-#: ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "Př_edvolby panelu..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124
-#: ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 msgid "Log _Out"
 msgstr "_Odhlásit"
 
@@ -97,8 +99,7 @@ msgstr "_Odhlásit"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Zobrazit dialogové okno „Předvolby panelu“"
 
-#: ../panel/main.c:78
-#: ../panel/main.c:79
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "ČÍSLO-PANELU"
 
@@ -134,67 +135,70 @@ msgid "Print version information and exit"
 msgstr "Zobrazí informace o verzi a ukončí se"
 
 #. parse context options
-#: ../panel/main.c:196
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr "[PARAMETRY...]"
 
-#: ../panel/main.c:203
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Informace o použití získáte příkazem \"%s --help\""
 
-#: ../panel/main.c:222
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
 msgstr "Tým vývojářů Xfce. Všechna práva vyhrazena."
 
-#: ../panel/main.c:223
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Prosíme, abyste chyby hlásili na adresu <%s>."
 
-#: ../panel/main.c:274
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr "Již je spuštěna jedna instance"
 
 #. spawn ourselfs again
-#: ../panel/main.c:323
+#: ../panel/main.c:367
 msgid "Restarting..."
 msgstr "Restartování..."
 
-#: ../panel/main.c:338
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
 msgstr "Zobrazení dialogu předvoleb se nezdařilo"
 
-#: ../panel/main.c:340
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
 msgstr "Zobrazení dialogu pro přidání nových položek se nezdařilo"
 
-#: ../panel/main.c:342
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr "Uložení konfigurace panelu se nezdařilo"
 
-#: ../panel/main.c:344
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
 msgstr "Přidání zásuvného modulu na panel se nezdařilo"
 
-#: ../panel/main.c:346
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr "Restart panelu se nezdařil"
 
-#: ../panel/main.c:348
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr "Ukončení panelu se nezdařilo"
 
-#: ../panel/main.c:350
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr "Odeslání zprávy sběrnici D-Bus se nezdařilo"
 
-#: ../panel/main.c:361
-msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Chcete spustit panel? Pokud ano, ujistěte se, že jste uložili relaci při odhlášení, aby se panel automaticky spustil během příštího přihlášení."
+#: ../panel/main.c:405
+msgid ""
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
+msgstr ""
+"Chcete spustit panel? Pokud ano, ujistěte se, že jste uložili relaci při "
+"odhlášení, aby se panel automaticky spustil během příštího přihlášení."
 
-#: ../panel/main.c:364
-#: ../panel/main.c:378
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nebyla nalezena žádná spuštěná instance %s"
@@ -203,30 +207,37 @@ msgstr "Nebyla nalezena žádná spuštěná instance %s"
 msgid "Failed to launch the migration application"
 msgstr "Spuštění migrace aplikace se nezdařilo"
 
-#: ../panel/panel-application.c:1446
-#: ../plugins/actions/actions.c:413
-msgid "You have started X without session manager. Clicking Quit will close the X server."
-msgstr "Spustili jste X bez správce relace. Kliknutím na tlačítko Ukončit zavřete X server."
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+msgid ""
+"You have started X without session manager. Clicking Quit will close the X "
+"server."
+msgstr ""
+"Spustili jste X bez správce relace. Kliknutím na tlačítko Ukončit zavřete X "
+"server."
 
-#: ../panel/panel-application.c:1447
-#: ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Opravdu chcete ukončit panel?"
 
-#: ../panel/panel-application.c:1455
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Spuštění příkazu \"%s\" se nezdařilo"
 
 #: ../panel/panel-dbus-client.c:209
-msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Byla zadána neplatná syntaxe události zásuvného modulu. Použijte NÁZEV-ZÁSUVNÉHO-MODULU:NÁZEV[:TYP:HODNOTA]."
+msgid ""
+"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"Byla zadána neplatná syntaxe události zásuvného modulu. Použijte NÁZEV-"
+"ZÁSUVNÉHO-MODULU:NÁZEV[:TYP:HODNOTA]."
 
 #: ../panel/panel-dbus-client.c:242
 #, c-format
-msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Neplatný typ tipu \"%s\". Platnými typy jsou bool, double, int, string a uint."
+msgid ""
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+"Neplatný typ tipu \"%s\". Platnými typy jsou bool, double, int, string a "
+"uint."
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -237,8 +248,7 @@ msgid "translator-credits"
 msgstr "Michal Várady <miko.vaji@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Přidat novou položku"
 
@@ -247,15 +257,18 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Zvolte panel pro nový zásuvný modul:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "Z důvodu spuštění panelu v režimu kiosk nejste oprávněni provádět změny v nastavení panelu jako bežný uživatel"
+msgid ""
+"Because the panel is running in kiosk mode, you are not allowed to make "
+"changes to the panel configuration as a regular user"
+msgstr ""
+"Z důvodu spuštění panelu v režimu kiosk nejste oprávněni provádět změny v "
+"nastavení panelu jako bežný uživatel"
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -281,12 +294,19 @@ msgstr "Sem zadejte hledaný výraz."
 #: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Zásuvný modul \"%s\" neočekávaně opustil panel, chcete jej restartovat?"
+msgstr ""
+"Zásuvný modul \"%s\" neočekávaně opustil panel, chcete jej restartovat?"
 
 #: ../panel/panel-plugin-external.c:422
 #, c-format
-msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "Zásuvný modul se během předchozích %d sekund restartoval více než jednou. Pokud stisknete tlačítko Spustit, panel se pokusí o restart zásuvného modulu, v opačném případě bude zásuvný modul trvale odebrán z panelu."
+msgid ""
+"The plugin restarted more than once in the last %d seconds. If you press "
+"Execute the panel will try to restart the plugin otherwise it will be "
+"permanently removed from the panel."
+msgstr ""
+"Zásuvný modul se během předchozích %d sekund restartoval více než jednou. "
+"Pokud stisknete tlačítko Spustit, panel se pokusí o restart zásuvného "
+"modulu, v opačném případě bude zásuvný modul trvale odebrán z panelu."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -351,8 +371,12 @@ msgid "Add new item to this panel"
 msgstr "Přidat novou položku na tento panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
-msgstr "Hodnota alfa pro pozadí panelu. 0 pro plně průhledný, 100 pro plně neprůhledný"
+msgid ""
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
+msgstr ""
+"Hodnota alfa pro pozadí panelu. 0 pro plně průhledný, 100 pro plně "
+"neprůhledný"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -445,20 +469,30 @@ msgid "Select A Background Image"
 msgstr "Vyberte obrázek na pozadí"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "Tuto volbu vyberte pro automatické zvětšení délky panelu, pokud zásuvné moduly požadují více prostoru."
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+"Tuto volbu vyberte pro automatické zvětšení délky panelu, pokud zásuvné "
+"moduly požadují více prostoru."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Tuto volbu vyberte pro rozšíření panelu přes více monitorů."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Select this option to hide the handles of the panel and lock its position."
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
 msgstr "Tuto volbu vyberte pro skrytí úchytek panelu a uzamknutí jeho pozice."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr "Tuto volbu vyberte pro skrytí panelu v okamžiku, kdy se nad ním nenachází ukazatel myši. Tato volba pracuje pouze je-li panel připojen k okraji obrazovky."
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
+msgstr ""
+"Tuto volbu vyberte pro skrytí panelu v okamžiku, kdy se nad ním nenachází "
+"ukazatel myši. Tato volba pracuje pouze je-li panel připojen k okraji "
+"obrazovky."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -473,12 +507,20 @@ msgid "Span mo_nitors"
 msgstr "Ro_ztáhnout přes více monitorů"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Průhlednost v okamžiku umístění ukazatele myši nad panelem. Hodnota 0 znamená plnou průhlednost, hodnota 100 plnou neprůhlednost."
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
+msgstr ""
+"Průhlednost v okamžiku umístění ukazatele myši nad panelem. Hodnota 0 "
+"znamená plnou průhlednost, hodnota 100 plnou neprůhlednost."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Průhlednost v okamžiku umístění ukazatele myši mimo panel. Hodnota 0 znamená plnou průhlednost, hodnota 100 plnou neprůhlednost."
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr ""
+"Průhlednost v okamžiku umístění ukazatele myši mimo panel. Hodnota 0 znamená "
+"plnou průhlednost, hodnota 100 plnou neprůhlednost."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -548,8 +590,12 @@ msgid "Welcome to the first start of the panel"
 msgstr "Vítejte po prvním spuštění panelu"
 
 #: ../migrate/main.c:80
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
-msgstr "Panel musí načíst novou výchozí konfiguraci z důvodu přesunu na nový systém ukládání nastavení."
+msgid ""
+"Because the panel moved to a new system for storing the settings, it has to "
+"load a fresh initial configuration."
+msgstr ""
+"Panel musí načíst novou výchozí konfiguraci z důvodu přesunu na nový systém "
+"ukládání nastavení."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -679,8 +725,12 @@ msgid "Select A Menu File"
 msgstr "Vyberte soubor nabídky"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr "Tuto volbu vyberte pro zobrazení obecných názvů aplikací v nabídce, například \"Správce souborů\" místo \"Thunar\""
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr ""
+"Tuto volbu vyberte pro zobrazení obecných názvů aplikací v nabídce, "
+"například \"Správce souborů\" místo \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -846,8 +896,15 @@ msgstr "Zobrazova_t mřížku"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "Formát popisuje části data a času vložené do názvu souboru. Např. %Y bude nahrazeno rokem, %m měsícem a %d dnem. Více informací nástroje pro datum najdete v dokumentaci"
+msgid ""
+"The format describes the date and time parts to insert into the file name. "
+"For example, %Y will be substituted with the year, %m with the month and %d "
+"with the day. See the documentation of the date utility for additional "
+"information."
+msgstr ""
+"Formát popisuje části data a času vložené do názvu souboru. Např. %Y bude "
+"nahrazeno rokem, %m měsícem a %d dnem. Více informací nástroje pro datum "
+"najdete v dokumentaci"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1135,8 +1192,14 @@ msgid "Show a directory tree in a menu"
 msgstr "Zobrazí adresářový strom v nabídce"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Upravit seznam předloh, které budou použity ke zjištění viditelnosti souborů v adresáři. Zadáte-li sem více než jednu předlohu, musí být seznam oddělený středníky (např. *.txt;*.doc)."
+msgid ""
+"Enter a list of patterns that will be used to determine which files are "
+"visible in a directory. If you specify more than one pattern here, the list "
+"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr ""
+"Upravit seznam předloh, které budou použity ke zjištění viditelnosti souborů "
+"v adresáři. Zadáte-li sem více než jednu předlohu, musí být seznam oddělený "
+"středníky (např. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1227,8 +1290,12 @@ msgid "North"
 msgstr "Sever"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr "Tuto možnost vyberte pro zakázání zobrazování tipů při přejetí ukazatele myši nad tlačítko panelu nebo položky nabídky."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"Tuto možnost vyberte pro zakázání zobrazování tipů při přejetí ukazatele "
+"myši nad tlačítko panelu nebo položky nabídky."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1258,8 +1325,7 @@ msgstr "_Umístění tlačítka se šipkou:"
 msgid "Program launcher with optional menu"
 msgstr "Spouštěč programů s volitelnou nabídkou"
 
-#: ../plugins/pager/pager.c:354
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Nastavení pracovních ploch..."
 
@@ -1267,8 +1333,7 @@ msgstr "_Nastavení pracovních ploch..."
 msgid "Unable to open the workspace settings"
 msgstr "Nelze otevřít nastavení pracovní plochy"
 
-#: ../plugins/pager/pager-buttons.c:555
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Pracovní plocha %d"
@@ -1283,8 +1348,11 @@ msgid "Number of _rows:"
 msgstr "Poče_t řádků:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid "Show a miniature view of the workspace with rectangles for the visible windows"
-msgstr "Zobrazí zmenšený pohled plochy s obdélníky představující viditelná okna"
+msgid ""
+"Show a miniature view of the workspace with rectangles for the visible "
+"windows"
+msgstr ""
+"Zobrazí zmenšený pohled plochy s obdélníky představující viditelná okna"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1348,20 +1416,24 @@ msgstr "Skryje všechna okna a zobrazí pracovní plochu"
 msgid "Show Desktop"
 msgstr "Zobrazuje pracovní plochu"
 
-#: ../plugins/systray/systray.c:381
+#: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
 msgstr "Nelze spustit oznamovací oblast"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:831
-msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr "Funki oznamovací oblasti pravděpodobně převzala jiná pomůcka. Tato oblast nebude využita."
+#: ../plugins/systray/systray.c:850
+msgid ""
+"Most likely another widget took over the function of a notification area. "
+"This area will be unused."
+msgstr ""
+"Funki oznamovací oblasti pravděpodobně převzala jiná pomůcka. Tato oblast "
+"nebude využita."
 
-#: ../plugins/systray/systray.c:833
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr "Oznamovací oblast není vybraná"
 
-#: ../plugins/systray/systray.c:986
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Opravdu chcete vyprázdnit seznam známých aplikací?"
 
@@ -1382,7 +1454,7 @@ msgstr "Upozorňovací oblast"
 msgid "_Maximum icon size (px):"
 msgstr "_Maximální velikost ikony (v pixelech):"
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Nepodařilo se získat správce výběru pro obrazovku %d"
@@ -1468,23 +1540,23 @@ msgstr "_Seskupování oken:"
 msgid "Window title"
 msgstr "Titulek okna"
 
-#: ../plugins/tasklist/tasklist-widget.c:2997
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
 msgstr "Mi_nimalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:3006
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
 msgstr "Obnovit vše z _minima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
 msgstr "Ma_ximalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
 msgstr "Obn_ovit vše z maxima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3031
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "_Zavříz vše"
 

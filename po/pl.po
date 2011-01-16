@@ -12,14 +12,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-23 23:09+0000\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
 "PO-Revision-Date: 2011-01-03 17:24+0100\n"
 "Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
 "Language-Team: Polish <>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : ((n%10>=2 && n%10<=4 && (n"
 "%100<10 || n%100>=20)) ? 1 : 2));\n"
 
@@ -41,7 +41,7 @@ msgid "Customize the panel"
 msgstr "O programie"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2200
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
@@ -89,17 +89,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2212
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "_Dodaj aplet..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2223
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "P_referencje..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2239
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 msgid "Log _Out"
 msgstr "_Wyloguj"
 
@@ -143,63 +143,63 @@ msgid "Print version information and exit"
 msgstr "Wypisuje informacje o wersji i kończy"
 
 #. parse context options
-#: ../panel/main.c:196
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENT...]"
 
-#: ../panel/main.c:203
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Proszę wprowadzić „%s --help”, aby wypisać komunikat pomocy."
 
-#: ../panel/main.c:222
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
 msgstr ""
 "Zespół twórców środowiska graficznego Xfce. Wszystkie prawa zastrzeżone."
 
-#: ../panel/main.c:223
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Proszę zgłaszać błędy na adres <%s>."
 
-#: ../panel/main.c:274
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr "wystąpienie programu jest już uruchomione."
 
 #. spawn ourselfs again
-#: ../panel/main.c:323
+#: ../panel/main.c:367
 msgid "Restarting..."
 msgstr "Ponowne uruchamianie...."
 
-#: ../panel/main.c:338
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
 msgstr "Nie udało się wyświetlić okna preferencji"
 
-#: ../panel/main.c:340
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
 msgstr "Nie udało się wyświetlić okna dodawania apletów"
 
-#: ../panel/main.c:342
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr "Nie udało się zapisać konfiguracji panelu"
 
-#: ../panel/main.c:344
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
 msgstr "Nie udało się dodać apletu do panelu"
 
-#: ../panel/main.c:346
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr "Nie udało się ponownie uruchomić panelu"
 
-#: ../panel/main.c:348
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr "Nie udało się zakończyć działania panelu"
 
-#: ../panel/main.c:350
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr "Nie udało się wysłać wiadomości systemu D-Bus"
 
-#: ../panel/main.c:361
+#: ../panel/main.c:405
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -207,7 +207,7 @@ msgstr ""
 "Uruchomić panel? Proszę zapisać sesję przed wylogowaniem, aby panel został "
 "uruchomiony podczas następnego logowania."
 
-#: ../panel/main.c:364 ../panel/main.c:378
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
@@ -773,7 +773,7 @@ msgstr "Wybór ikony"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2253
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nie udało się wykonać polecenia „%s”."
@@ -828,7 +828,7 @@ msgstr "Tydzień %V"
 msgid "Failed to execute clock command"
 msgstr "Nie udało się wykonać polecenia zegara"
 
-#: ../plugins/clock/clock.c:718
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "Własny"
 
@@ -1227,12 +1227,12 @@ msgstr "_Podstawowy katalog:"
 msgid "_File Pattern:"
 msgstr "_Wzór plików:"
 
-#: ../plugins/launcher/launcher.c:1545
+#: ../plugins/launcher/launcher.c:1555
 #, fuzzy
 msgid "Unnamed Item"
 msgstr "Nienazwany"
 
-#: ../plugins/launcher/launcher.c:1685
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "Brak aktywatorów"
 
@@ -1338,7 +1338,7 @@ msgstr "Otwórz _preferencje obszarów roboczych..."
 msgid "Unable to open the workspace settings"
 msgstr "Nie można otworzyć preferencji obszarów roboczych"
 
-#: ../plugins/pager/pager-buttons.c:551 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Obszar roboczy %d"
@@ -1420,12 +1420,12 @@ msgstr "Minimalizuje wszystkie okna i wyświetla pulpit"
 msgid "Show Desktop"
 msgstr "Wyświetlanie pulpitu"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
 msgstr "Nie można uruchomić obszaru powiadamiania"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:850
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
@@ -1433,11 +1433,11 @@ msgstr ""
 "Prawdopodobnie inny widżet przejął funkcję obszaru powiadamiania. Aplet nie "
 "będzie używany."
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr "Obszar powiadamiania utracił zaznaczenie"
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Wyczyścić listę znanych programów?"
 
@@ -1455,10 +1455,10 @@ msgid "Notification Area"
 msgstr "Obszar powiadamiania"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "_Ilość wierszy:"
+msgid "_Maximum icon size (px):"
+msgstr ""
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Nie udało się pozyskać wyboru menedżera dla ekranu %d"
@@ -1544,23 +1544,23 @@ msgstr "_Grupowanie okien:"
 msgid "Window title"
 msgstr "Według nazwy okna"
 
-#: ../plugins/tasklist/tasklist-widget.c:2997
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
 msgstr "Zm_inimalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3006
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
 msgstr "_Cofnij minimalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
 msgstr "Zm_aksymalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
 msgstr "C_ofnij maksymalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3031
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "Za_mknij wszystkie"
 
@@ -1630,6 +1630,9 @@ msgstr "Menu okien"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Przełącza pomiędzy oknami przy użyciu menu"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "_Ilość wierszy:"
 
 #, fuzzy
 #~ msgid "Transparency"

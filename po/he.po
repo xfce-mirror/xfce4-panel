@@ -11,31 +11,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-10 17:08+0000\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
 "PO-Revision-Date: 2010-12-06 10:14+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Generator: KBabel 1.11.2\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid "Create Launcher on Xfce Panel"
-msgstr "יצירת משגר על לוח Xfce"
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop file"
+msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create a new launcher on the Xfce Panel"
-msgstr "יצירת משגר חדש על הלוח של Xfce"
+#, fuzzy
+msgid "Create Launcher on the panel"
+msgstr "יצירת משגר על לוח Xfce"
 
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the Xfce Panel"
+#, fuzzy
+msgid "Customize the panel"
 msgstr "התאמת לוח Xfce"
 
 #: ../panel-preferences.desktop.in.h:2
-msgid "Panel Preferences"
-msgstr "העדפות הלוח"
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../migrate/main.c:84
+#, fuzzy
+msgid "Panel"
+msgstr "לוח %d"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -50,7 +56,8 @@ msgstr ""
 "המותקנת."
 
 #: ../common/panel-utils.c:158
-msgid "The Xfce Panel user manual is not installed on your computer"
+#, fuzzy
+msgid "The user manual is not installed on your computer"
 msgstr "הוראות הלוח של Xfce אינן מותקנות על מחשב זה"
 
 #. display an error message to the user
@@ -59,74 +66,75 @@ msgid "Failed to open the documentation browser"
 msgstr "פתיחת דפדפן ההוראות נכשלה"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:873
-#: ../panel/panel-preferences-dialog.c:1029
+#: ../libxfce4panel/xfce-panel-plugin.c:889
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "האם להסיר את \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:878
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../libxfce4panel/xfce-panel-plugin.c:894
+#: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "הסרת הפריט מהלוח תגרום לאובדנו לצמיתות."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1038
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 msgid "_Move"
 msgstr "ה_זזה"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1072
-msgid "_Xfce Panel"
-msgstr "לוח Xfce_"
+#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#, fuzzy
+msgid "Pane_l"
+msgstr "לוח %d"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1080 ../panel/panel-window.c:2140
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
 msgstr "הוספת פריטים _חדשים"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1091 ../panel/panel-window.c:2151
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
 msgstr "ה_עדפות הלוח..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1108 ../panel/panel-window.c:2167
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 msgid "Log _Out"
 msgstr "י_ציאה"
 
-#: ../panel/main.c:77
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "הצגת דיאלוג \"אפשרויות הלוח\""
 
-#: ../panel/main.c:77 ../panel/main.c:78
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "מספר-לוח"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "הצגת דיאלוג \"הוספת פריטים חדשים\""
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "שמירת תצורת הלוח"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "הוספת תוסף חדש אל הלוח"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "שם-תוסף"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "איתחול הלוח מחדש"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "יציאה מהרצת הלוח"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -134,90 +142,91 @@ msgid "Print version information and exit"
 msgstr "כתיבת מידע הגירסה ויציאה"
 
 #. parse context options
-#: ../panel/main.c:154
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:161
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Type \"%s --help\" for usage."
 
-#: ../panel/main.c:180
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
 msgstr "צוות הפיתוח של Xfce. כל הזכויות שמורות"
 
-#: ../panel/main.c:181
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "נא לדווח על באגים אל <%s>."
 
-#: ../panel/main.c:232
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr "יש כבר הרצה פעילה"
 
 #. spawn ourselfs again
-#: ../panel/main.c:275
+#: ../panel/main.c:367
 msgid "Restarting..."
 msgstr "איתחול..."
 
-#: ../panel/main.c:290
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
 msgstr "הצגת דיאלוג ההעדפות נכשלה"
 
-#: ../panel/main.c:292
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
 msgstr "הצגת הדיאלוג להוספת פריטים חדשים נכשלה"
 
-#: ../panel/main.c:294
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr "שמירת תצורת הלוח נכשלה"
 
-#: ../panel/main.c:296
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
 msgstr "הוספת הפריט ללוח נכשלה"
 
-#: ../panel/main.c:298
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr "איתחול הלוח נכשל"
 
-#: ../panel/main.c:300
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr "היציאה מהלוח נכשלה"
 
-#: ../panel/main.c:302
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr "שליחת הודעת D-Bus נכשלה"
 
-#: ../panel/main.c:313
+#: ../panel/main.c:405
+#, fuzzy
 msgid ""
-"Do you want to start the Xfce panel? If you do, make sure you save the "
-"session on logout, so the panel is automatically started the next time you "
-"login."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
 msgstr ""
 "האם לאתחל את הלוח של Xfce? אם כן, יש לשמור את ההרצה בעת היציאה, על מנת "
 "להבטיח שהלוח יאותחל אוטומטית בכניסה הבאה למערכת."
 
-#: ../panel/main.c:316 ../panel/main.c:330
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "לא נמצאה הרצה פעילה של %s"
 
-#: ../panel/panel-application.c:197
+#: ../panel/panel-application.c:196
 msgid "Failed to launch the migration application"
 msgstr "הרצת יישום ההגירה נכשלה"
 
-#: ../panel/panel-application.c:1429 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+#, fuzzy
 msgid ""
-"If you have started Xfce without session manager, this will close the X "
+"You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "אם הפעלת את Xfce ללא מנהל הפעלה, פעולה זו תסגור את שרת ה־X."
 
-#: ../panel/panel-application.c:1430 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "האם לצאת מהלוח?"
 
-#: ../panel/panel-application.c:1438 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "נכשלה הרצת \"%s\"."
@@ -256,7 +265,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "יש לבחור לוח עבור התוסף החדש:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:754
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "לוח %d"
@@ -272,29 +281,29 @@ msgstr ""
 msgid "Modifying the panel is not allowed"
 msgstr "התאמת הלוח אסורה"
 
-#: ../panel/panel-item-dialog.c:175
+#: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
 msgstr "הוספת פריטים חדשים"
 
-#: ../panel/panel-item-dialog.c:177
+#: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "הוספת תוספים חדשים ללוח"
 
-#: ../panel/panel-item-dialog.c:200
+#: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_חיפוש"
 
-#: ../panel/panel-item-dialog.c:208
+#: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
 msgstr "חיפוש אחר הביטוי"
 
-#: ../panel/panel-plugin-external.c:418
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -304,41 +313,41 @@ msgstr ""
 "התוסף אותחל מחדש יותר מפעם אחת במהלך %d שניות. לחיצה על \"הפעלה\" תגרום "
 "לאיתחול נוסף של התוסף, אחרת הוא יוסר לצמיתות מהלוח."
 
-#: ../panel/panel-preferences-dialog.c:440
+#: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
 msgstr "אוטומטי"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:459
+#: ../panel/panel-preferences-dialog.c:472
 #, c-format
 msgid "Screen %d"
 msgstr "מסך %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:485
+#: ../panel/panel-preferences-dialog.c:498
 #, c-format
 msgid "Monitor %d"
 msgstr "מסך %d"
 
-#: ../panel/panel-preferences-dialog.c:815
+#: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "הלוח הנבחר וכל הפריטים בו יוסרו, התצורה תאבד."
 
-#: ../panel/panel-preferences-dialog.c:816
+#: ../panel/panel-preferences-dialog.c:829
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "האם להסיר את הלוח \"%d\"?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-preferences-dialog.c:912
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(חיצוני)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:901
+#: ../panel/panel-preferences-dialog.c:917
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -349,7 +358,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:913
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "שם פנימי: %s-%d"
@@ -367,9 +376,10 @@ msgid "Add new item to this panel"
 msgstr "הוספת פריט חדש ללוח זה"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
+#, fuzzy
 msgid ""
-"Alpha value of the panel background, between 0 (transparent) and 100 "
-"(opaque)."
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
 msgstr "ערך אלפא עובר רקע הלוח, בין 0 (שקוף) ל־100 (אטום)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -443,74 +453,76 @@ msgid "O_utput:"
 msgstr "_פלט:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
+msgid "Opacity"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
 msgstr "בחירת צבע הלוח"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
 msgstr "הסרת הפריט שנבחר"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
 msgstr "הסרת הלוח שנבחר"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
 msgstr "בחירת תמונת רקע"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "הגדלה אוטומטית את אורכו של הלוח אם התוספים ידרשו מקום נוסף."
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "פריסת הלוח בין מספר מסכים"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "החבאת ידית הלוח ועיגונו. "
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 "החבאת הלוח כאשר הסמן אינו עליו. אפשרות זו פועלת רק כאשר הלוח צמוד לקצה המסך."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
 msgstr "הצגת מידע \"אודות\" עבור הפריט הנבחר"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
 msgstr "צבע אטום"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
 msgstr "פריסה על המסכים"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Transparency"
-msgstr "שקיפות"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Transparency when the pointer is hovering over the panel."
+#: ../panel/panel-preferences-dialog.glade.h:36
+#, fuzzy
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
 msgstr "שקיפות כאשר הסמן מרחף על הלוח."
 
-#: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Transparency when the pointer is not hovering the panel."
-msgstr "שקיפות כאשר הסמן אינו מרחף על הלוח."
-
 #: ../panel/panel-preferences-dialog.glade.h:37
+#, fuzzy
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr "שקיפות כאשר הסמן מרחף על הלוח."
+
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
 msgstr "אנכי"
-
-#: ../panel/panel-preferences-dialog.glade.h:38 ../panel/panel-window.c:2128
-msgid "Xfce Panel"
-msgstr "לוח Xfce"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
@@ -572,7 +584,8 @@ msgid "Expert"
 msgstr "מומחה"
 
 #: ../migrate/main.c:78
-msgid "Welcome to the first start of the Xfce Panel"
+#, fuzzy
+msgid "Welcome to the first start of the panel"
 msgstr "ברוך בואך להרצה הראשונה של הלוח של Xfce"
 
 #: ../migrate/main.c:80
@@ -683,7 +696,9 @@ msgstr "יציאה, נעילת מסך או פעולות מערכת אחרות"
 msgid "Appearance"
 msgstr "מראה"
 
+#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "תפריט ישומים"
@@ -693,18 +708,22 @@ msgid "Button _title:"
 msgstr "כותרת _לחצן:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Ed_it Menu"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
 msgstr "קובץ תפריט"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
 msgstr "_קובץ תפריט"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
 msgstr "בחירת קובץ תפריט"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
@@ -712,55 +731,54 @@ msgstr ""
 "בחירה באפשרות זו תגרום להצגת שמות גנריים ליישומים בתפריט, למשל \"מנהל קבצים"
 "\" במקום \"Thunar\""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
 msgstr "הצגת תאור יישומים בחלונית _צפה"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
 msgstr "הצגת _שמות גנריים ליישומים"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
 msgstr "הצגת _סמלים בתפריט"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Use _default menu file"
-msgstr "שימוש בקובץ _בררת המחדל עבור התפריט"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file"
+#, fuzzy
+msgid "Use c_ustom menu file:"
 msgstr "שימוש בקובץ _מותאם עבור התפריט"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#, fuzzy
+msgid "Use the _default menu"
+msgstr "שימוש בקובץ _בררת המחדל עבור התפריט"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
 msgstr "_סמל:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
 msgstr "הצגת _כותרת לחצן"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-msgid "Xfce Menu"
-msgstr "תפריט Xfce"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:470
+#: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "בחירת סמל"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:709
-#: ../plugins/launcher/launcher.c:2102
+#: ../plugins/applicationsmenu/applicationsmenu.c:513
+#: ../plugins/applicationsmenu/applicationsmenu.c:754
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "נכשל ביצוע בפקודה \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:969
+#: ../plugins/applicationsmenu/applicationsmenu.c:1010
 msgid "No applications found"
 msgstr "היישום לא נמצא"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:992
+#: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
 msgstr "טעינת תפריט היישומים נכשלה"
 
@@ -798,15 +816,15 @@ msgstr "תפריט צץ במיקום הנוכחי של הסמן"
 msgid "Show help options"
 msgstr "הצג אפשרויות עזרה"
 
-#: ../plugins/clock/clock.c:144
+#: ../plugins/clock/clock.c:146
 msgid "Week %V"
 msgstr "שבוע %V"
 
-#: ../plugins/clock/clock.c:383
+#: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr "ביצוע פקודת שעון נכשלה"
 
-#: ../plugins/clock/clock.c:677
+#: ../plugins/clock/clock.c:719
 msgid "Custom Format"
 msgstr "תצורה מותאמת"
 
@@ -1202,32 +1220,28 @@ msgstr "תיקיית _בסיס:"
 msgid "_File Pattern:"
 msgstr "תבנית _קבצים:"
 
-#: ../plugins/launcher/launcher.c:1448
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
 msgstr "פריט ללא שם"
 
-#: ../plugins/launcher/launcher.c:1588
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
 msgstr "ללא פריטים"
 
-#: ../plugins/launcher/launcher-dialog.c:704
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
 msgstr "מחיקת פריט תגרום להסרתו לצמיתות"
 
-#: ../plugins/launcher/launcher-dialog.c:705
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "האם להסיר את  \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:706
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
 msgstr "פריט ללא שם"
 
-#: ../plugins/launcher/launcher-dialog.c:721
-msgid "Failed to remove the desktop file from the config directory"
-msgstr "הסרת קובץ שולחן העבודה מתיקית התצורה נכשלה"
-
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr "הרצת עורך פריטי שולחן העבודה נכשלה"
 
@@ -1306,15 +1320,16 @@ msgstr "_מיקום לחצן חץ:"
 msgid "Program launcher with optional menu"
 msgstr "משגר יישום עם אפשרות לתפריט"
 
-#: ../plugins/pager/pager.c:350 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "ה_גדרות משטחי עבודה..."
 
-#: ../plugins/pager/pager.c:425
-msgid "Unable to open the Xfce workspace settings"
+#: ../plugins/pager/pager.c:429
+#, fuzzy
+msgid "Unable to open the workspace settings"
 msgstr "לא ניתן לפתוח את תפריט הגדרות משטחי העבודה של Xfce"
 
-#: ../plugins/pager/pager-buttons.c:412 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "משטח עבודה %d"
@@ -1396,23 +1411,23 @@ msgstr "הקטנת כל החלונות והצגת שולחן העבודה"
 msgid "Show Desktop"
 msgstr "הצג את שולחן העבודה"
 
-#: ../plugins/systray/systray.c:276
+#: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
 msgstr "לא ניתן להתחיל את פעולת אזור ההתראות"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:569
+#: ../plugins/systray/systray.c:850
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 "כנראה שיישומון אחר השתלט על הפעילות של אזור ההתראות, ולכן לא יעשה בו שימוש."
 
-#: ../plugins/systray/systray.c:571
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr "אזור ההתרעות איבד את המיקוד"
 
-#: ../plugins/systray/systray.c:764
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "האם להסיר את רשימת היישומים המוכרים?"
 
@@ -1430,10 +1445,10 @@ msgid "Notification Area"
 msgstr "אזור ההתראות"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Number of rows:"
-msgstr "מספר _שורות:"
+msgid "_Maximum icon size (px):"
+msgstr ""
 
-#: ../plugins/systray/systray-manager.c:403
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
@@ -1467,68 +1482,77 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "שחזור חלונות ממוזערים למשטח העבודה ה_נוכחי"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "Ro_tate buttons in vertical panel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "הצגת לחצנים _שטוחים"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "הצגת _ידית"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "הצגת _תוויות על לחצנים"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "הצגת חלונות ממו_זערים בלבד"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#, fuzzy
+msgid "Show windows from _all workspaces or viewports"
 msgstr "הצגת _חלונות מכל משטחי העבודה"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#, fuzzy
+msgid "Show windows from all mo_nitors"
+msgstr "הצגת _חלונות מכל משטחי העבודה"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "_סידור לפי:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr "חותם זמן"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
 msgstr "כאשר חסר מקום"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "לחצני חלון"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "ק_בוצות חלונות:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
 msgstr "כותרת החלון"
 
-#: ../plugins/tasklist/tasklist-widget.c:2622
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
 msgstr "מי_זעור הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:2631
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2637
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
 msgstr "ה_גדלת הכול"
 
-#: ../plugins/tasklist/tasklist-widget.c:2646
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:2656
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "_סגירת הכל"
 
@@ -1578,6 +1602,10 @@ msgstr "הפעלת התראות _חרום"
 msgid "Icon"
 msgstr "סמל"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr "הצגת _חלונות מכל משטחי העבודה"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
 msgstr "הצגת _שמות משטחי עבודה"
@@ -1594,6 +1622,33 @@ msgstr "תפריט פעולות חלון"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "מעבר בין חלונות בעזרת תפריט"
+
+#~ msgid "Create a new launcher on the Xfce Panel"
+#~ msgstr "יצירת משגר חדש על הלוח של Xfce"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "העדפות הלוח"
+
+#~ msgid "_Xfce Panel"
+#~ msgstr "לוח Xfce_"
+
+#~ msgid "Transparency"
+#~ msgstr "שקיפות"
+
+#~ msgid "Transparency when the pointer is not hovering the panel."
+#~ msgstr "שקיפות כאשר הסמן אינו מרחף על הלוח."
+
+#~ msgid "Xfce Panel"
+#~ msgstr "לוח Xfce"
+
+#~ msgid "Xfce Menu"
+#~ msgstr "תפריט Xfce"
+
+#~ msgid "Failed to remove the desktop file from the config directory"
+#~ msgstr "הסרת קובץ שולחן העבודה מתיקית התצורה נכשלה"
+
+#~ msgid "_Number of rows:"
+#~ msgstr "מספר _שורות:"
 
 #, fuzzy
 #~ msgid "_Restart"
