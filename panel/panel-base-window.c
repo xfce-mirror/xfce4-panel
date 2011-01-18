@@ -206,6 +206,10 @@ panel_base_window_init (PanelBaseWindow *window)
   window->priv->borders = PANEL_BORDER_NONE;
   window->priv->active_timeout_id = 0;
 
+  /* some wm require stick to show the window on all workspaces, on xfwm4
+   * the type-hint already takes care of that */
+  gtk_window_stick (GTK_WINDOW (window));
+
   panel_base_window_composited_changed (GTK_WIDGET (window));
 }
 
