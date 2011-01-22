@@ -554,8 +554,8 @@ systray_box_size_allocate (GtkWidget     *widget,
             y += row_size * ratio + SPACING;
         }
 
-      panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocated %s at (%d,%d;%d,%d)",
-          systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child)),
+      panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocated %s[%p] at (%d,%d;%d,%d)",
+          systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child)), child,
           child_alloc.x, child_alloc.y, child_alloc.width, child_alloc.height);
 
       gtk_widget_size_allocate (child, &child_alloc);

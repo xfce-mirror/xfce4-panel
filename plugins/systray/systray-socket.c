@@ -156,8 +156,8 @@ systray_socket_realize (GtkWidget *widget)
   gtk_widget_set_double_buffered (widget, socket->parent_relative_bg);
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
-      "socket %s (composited=%s, relative-bg=%s",
-      systray_socket_get_name (socket),
+      "socket %s[%p] (composited=%s, relative-bg=%s",
+      systray_socket_get_name (socket), socket,
       PANEL_DEBUG_BOOL (socket->is_composited),
       PANEL_DEBUG_BOOL (socket->parent_relative_bg));
 }
@@ -409,7 +409,7 @@ systray_socket_get_name_prop (SystraySocket *socket,
 
 
 const gchar *
-systray_socket_get_name  (SystraySocket *socket)
+systray_socket_get_name (SystraySocket *socket)
 {
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), NULL);
 

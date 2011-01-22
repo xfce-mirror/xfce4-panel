@@ -811,8 +811,8 @@ systray_plugin_icon_added (SystrayManager *manager,
   gtk_container_add (GTK_CONTAINER (plugin->box), icon);
   gtk_widget_show (icon);
 
-  panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "added %s icon",
-      systray_socket_get_name (XFCE_SYSTRAY_SOCKET (icon)));
+  panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "added %s[%p] icon",
+      systray_socket_get_name (XFCE_SYSTRAY_SOCKET (icon)), icon);
 }
 
 
@@ -830,8 +830,8 @@ systray_plugin_icon_removed (SystrayManager *manager,
   /* remove the icon from the box */
   gtk_container_remove (GTK_CONTAINER (plugin->box), icon);
 
-  panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "removed %s icon",
-      systray_socket_get_name (XFCE_SYSTRAY_SOCKET (icon)));
+  panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "removed %s[%p] icon",
+      systray_socket_get_name (XFCE_SYSTRAY_SOCKET (icon)), icon);
 }
 
 
