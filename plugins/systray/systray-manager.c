@@ -214,8 +214,6 @@ systray_manager_init (SystrayManager *manager)
   manager->invisible = NULL;
   manager->orientation = GTK_ORIENTATION_HORIZONTAL;
   manager->messages = NULL;
-
-  /* create new sockets table */
   manager->sockets = g_hash_table_new (NULL, NULL);
 }
 
@@ -738,14 +736,12 @@ systray_manager_handle_undock_request (GtkSocket *socket,
 
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_MANAGER (manager), FALSE);
 
+  /* remove the socket from the list */
+  window = systray_socket_get_window (XFCE_SYSTRAY_SOCKET (socket));
+  g_hash_table_remove (manager->sockets, GUINT_TO_POINTER (*window));
+
   /* emit signal that the socket will be removed */
   g_signal_emit (manager, systray_manager_signals[ICON_REMOVED], 0, socket);
-
-  /* get the xwindow */
-  window = systray_socket_get_window (XFCE_SYSTRAY_SOCKET (socket));
-
-  /* remove the socket from the list */
-  g_hash_table_remove (manager->sockets, GUINT_TO_POINTER (*window));
 
   /* destroy the socket */
   return FALSE;

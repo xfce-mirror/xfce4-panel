@@ -122,34 +122,33 @@ static void
 systray_socket_realize (GtkWidget *widget)
 {
   SystraySocket *socket = XFCE_SYSTRAY_SOCKET (widget);
-  GdkVisual     *visual;
   GdkColor       transparent = { 0, 0, 0, 0 };
+  GdkWindow     *window;
 
   GTK_WIDGET_CLASS (systray_socket_parent_class)->realize (widget);
 
-  visual = gtk_widget_get_visual (widget);
-  if (visual->red_prec + visual->blue_prec + visual->green_prec < visual->depth
-      && gdk_display_supports_composite (gtk_widget_get_display (widget)))
-    {
-      gdk_window_set_background (widget->window, &transparent);
-      gdk_window_set_composited (widget->window, TRUE);
+  window = gtk_widget_get_window (widget);
 
-      socket->is_composited = TRUE;
+  if (socket->is_composited)
+    {
+      gdk_window_set_background (window, &transparent);
+      gdk_window_set_composited (window, TRUE);
+
       socket->parent_relative_bg = FALSE;
     }
-  else if (visual == gdk_drawable_get_visual (
-               GDK_DRAWABLE (gdk_window_get_parent (widget->window))))
+  else if (gtk_widget_get_visual (widget) ==
+           gdk_drawable_get_visual (GDK_DRAWABLE (gdk_window_get_parent (window))))
     {
-      gdk_window_set_back_pixmap (widget->window, NULL, TRUE);
+      gdk_window_set_back_pixmap (window, NULL, TRUE);
 
-      socket->is_composited = FALSE;
       socket->parent_relative_bg = TRUE;
     }
   else
     {
-      socket->is_composited = FALSE;
       socket->parent_relative_bg = FALSE;
     }
+
+  gdk_window_set_composited (window, socket->is_composited);
 
   gtk_widget_set_app_paintable (widget,
       socket->parent_relative_bg || socket->is_composited);
@@ -195,6 +194,7 @@ systray_socket_size_allocate (GtkWidget     *widget,
         systray_socket_force_redraw (socket);
     }
 }
+
 
 
 static gboolean
@@ -248,6 +248,7 @@ systray_socket_new (GdkScreen       *screen,
   GdkVisual         *visual;
   GdkColormap       *colormap;
   gboolean           release_colormap = FALSE;
+  gint               red_prec, green_prec, blue_prec, depth;
 
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
@@ -257,12 +258,13 @@ systray_socket_new (GdkScreen       *screen,
   result = XGetWindowAttributes (GDK_DISPLAY_XDISPLAY (display),
                                  window, &attr);
 
-  /* leave on an error or is the window does not exist */
+  /* leave on an error or if the window does not exist */
   if (gdk_error_trap_pop () != 0 || result == 0)
     return NULL;
 
   /* get the windows visual */
   visual = gdk_x11_screen_lookup_visual (screen, attr.visual->visualid);
+  panel_return_val_if_fail (visual == NULL || GDK_IS_VISUAL (visual), NULL);
   if (G_UNLIKELY (visual == NULL))
     return NULL;
 
@@ -282,12 +284,23 @@ systray_socket_new (GdkScreen       *screen,
 
   /* create a new socket */
   socket = g_object_new (XFCE_TYPE_SYSTRAY_SOCKET, NULL);
-  gtk_widget_set_colormap (GTK_WIDGET (socket), colormap);
   socket->window = window;
+  socket->is_composited = FALSE;
+  gtk_widget_set_colormap (GTK_WIDGET (socket), colormap);
 
   /* release the custom colormap */
   if (release_colormap)
     g_object_unref (G_OBJECT (colormap));
+
+  /* check if there is an alpha channel in the visual */
+  gdk_visual_get_red_pixel_details (visual, NULL, NULL, &red_prec);
+  gdk_visual_get_green_pixel_details (visual, NULL, NULL, &green_prec);
+  gdk_visual_get_blue_pixel_details (visual, NULL, NULL, &blue_prec);
+  depth = gdk_visual_get_depth (visual);
+
+  if (red_prec + blue_prec + green_prec < depth
+      && gdk_display_supports_composite (gdk_screen_get_display (screen)))
+    socket->is_composited = TRUE;
 
   return GTK_WIDGET (socket);
 }
