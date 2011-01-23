@@ -60,7 +60,6 @@ static void      panel_application_plugin_move        (GtkWidget              *i
                                                        PanelApplication       *application);
 static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
                                                        PanelWindow            *window,
-                                                       GdkScreen              *screen,
                                                        const gchar            *name,
                                                        gint                    unique_id,
                                                        gchar                 **arguments,
@@ -340,9 +339,6 @@ panel_application_load (PanelApplication *application)
       /* create a new window */
       window = panel_application_new_window (application, screen, FALSE);
 
-      /* get the screen the window if eventually shown on */
-      screen = gtk_window_get_screen (GTK_WINDOW (window));
-
       /* walk all the plugins on the panel */
       g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
       array = xfconf_channel_get_arrayv (application->xfconf, buf);
@@ -363,7 +359,7 @@ panel_application_load (PanelApplication *application)
 
           /* append the plugin to the panel */
           if (unique_id < 1 || name == NULL
-              || !panel_application_plugin_insert (application, window, screen,
+              || !panel_application_plugin_insert (application, window,
                                                    name, unique_id, NULL, -1))
             {
               /* plugin could not be loaded, remove it from the channel */
@@ -628,7 +624,6 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
 static gboolean
 panel_application_plugin_insert (PanelApplication  *application,
                                  PanelWindow       *window,
-                                 GdkScreen         *screen,
                                  const gchar       *name,
                                  gint               unique_id,
                                  gchar            **arguments,
@@ -639,7 +634,6 @@ panel_application_plugin_insert (PanelApplication  *application,
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), FALSE);
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
-  panel_return_val_if_fail (GDK_IS_SCREEN (screen), FALSE);
   panel_return_val_if_fail (name != NULL, FALSE);
 
   /* leave if the window is locked */
@@ -647,9 +641,9 @@ panel_application_plugin_insert (PanelApplication  *application,
     return FALSE;
 
   /* create a new panel plugin */
-  provider = panel_module_factory_new_plugin (application->factory,
-                                              name, screen, unique_id,
-                                              arguments, &new_unique_id);
+  provider = panel_module_factory_new_plugin (application->factory, name,
+                                              gtk_window_get_screen (GTK_WINDOW (window)),
+                                              unique_id, arguments, &new_unique_id);
   if (G_UNLIKELY (provider == NULL))
     return FALSE;
 
@@ -821,7 +815,6 @@ panel_application_drag_data_received (PanelWindow      *window,
   PanelApplication  *application;
   GtkWidget         *provider;
   gboolean           succeed = FALSE;
-  GdkScreen         *screen;
   const gchar       *name;
   guint              old_position;
   gchar            **uris;
@@ -869,9 +862,6 @@ panel_application_drag_data_received (PanelWindow      *window,
       /* reset the state */
       application->drop_occurred = FALSE;
 
-      /* get the widget screen */
-      screen = gtk_window_get_screen (GTK_WINDOW (window));
-
       switch (info)
         {
         case TARGET_PLUGIN_NAME:
@@ -879,8 +869,7 @@ panel_application_drag_data_received (PanelWindow      *window,
             {
               /* create a new item with a unique id */
               name = (const gchar *) selection_data->data;
-              succeed = panel_application_plugin_insert (application, window,
-                                                         screen, name,
+              succeed = panel_application_plugin_insert (application, window, name,
                                                          -1, NULL, application->drop_index);
             }
           break;
@@ -934,8 +923,7 @@ panel_application_drag_data_received (PanelWindow      *window,
               if (G_LIKELY (uris != NULL))
                 {
                   /* create a new item with a unique id */
-                  succeed = panel_application_plugin_insert (application, window,
-                                                             screen, LAUNCHER_PLUGIN_NAME,
+                  succeed = panel_application_plugin_insert (application, window, LAUNCHER_PLUGIN_NAME,
                                                              -1, uris, application->drop_index);
                   g_strfreev (uris);
                 }
@@ -1265,7 +1253,6 @@ panel_application_add_new_item (PanelApplication  *application,
       /* add the plugin to the end of the choosen window */
       window = g_slist_nth_data (application->windows, nth);
       panel_application_plugin_insert (application, window,
-                                       gtk_widget_get_screen (GTK_WIDGET (window)),
                                        plugin_name, -1, arguments, -1);
     }
   else
