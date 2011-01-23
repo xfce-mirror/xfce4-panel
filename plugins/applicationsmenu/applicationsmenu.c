@@ -1033,6 +1033,8 @@ applications_menu_plugin_menu (GtkWidget              *button,
           xfce_dialog_show_error (NULL, error, _("Failed to load the applications menu"));
           g_error_free (error);
 
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
+
           if (G_LIKELY (menu != NULL))
             g_object_unref (G_OBJECT (menu));
 
