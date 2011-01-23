@@ -2558,7 +2558,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                      xfce_panel_plugin_position_menu,
+                      child->type == CHILD_TYPE_WINDOW ? xfce_panel_plugin_position_menu : NULL,
                       xfce_tasklist_get_panel_plugin (child->tasklist),
                       event->button,
                       event->time);
