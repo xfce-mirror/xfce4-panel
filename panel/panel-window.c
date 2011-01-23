@@ -2216,6 +2216,8 @@ panel_window_menu_popup (PanelWindow *window,
 
   /* create menu */
   menu = gtk_menu_new ();
+  gtk_menu_set_screen (GTK_MENU (menu),
+      gtk_window_get_screen (GTK_WINDOW (window)));
   g_object_ref_sink (G_OBJECT (menu));
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (panel_window_menu_deactivate), window);
