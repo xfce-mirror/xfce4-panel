@@ -260,7 +260,6 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   const PanelProperty  properties[] =
   {
     { "position-locked", G_TYPE_BOOLEAN },
-    { "autohide", G_TYPE_BOOLEAN },
     { "span-monitors", G_TYPE_BOOLEAN },
     { "horizontal", G_TYPE_BOOLEAN },
     { "size", G_TYPE_UINT },
@@ -275,6 +274,8 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "output-name", G_TYPE_STRING },
     { "position", G_TYPE_STRING },
     { "disable-struts", G_TYPE_BOOLEAN },
+    { "role", G_TYPE_STRING }, /* GtkWindow property (see bug #7094) */
+    { "autohide", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -1264,6 +1265,8 @@ panel_application_new_window (PanelApplication *application,
   GtkWidget *itembar;
   gchar     *property;
   gint       idx;
+  GTimeVal   tv;
+  gchar     *wmrole;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
@@ -1324,6 +1327,16 @@ panel_application_new_window (PanelApplication *application,
    * the new window won't be visible on restart */
   if (new_window)
     g_object_notify (G_OBJECT (window), "position");
+
+  /* create a somewhat unique role for the panel window (bug #7094) */
+  if (gtk_window_get_role (GTK_WINDOW (window)) == NULL)
+    {
+      g_get_current_time (&tv);
+      idx = g_slist_index (application->windows, window);
+      wmrole = g_strdup_printf (PACKAGE_NAME "-%ld%d", tv.tv_sec, idx);
+      gtk_window_set_role (GTK_WINDOW (window), wmrole);
+      g_free (wmrole);
+    }
 
   return PANEL_WINDOW (window);
 }
