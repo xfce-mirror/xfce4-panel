@@ -248,7 +248,6 @@ systray_socket_new (GdkScreen       *screen,
   GdkVisual         *visual;
   GdkColormap       *colormap;
   gboolean           release_colormap = FALSE;
-  gint               red_prec, green_prec, blue_prec, depth;
 
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
@@ -293,12 +292,7 @@ systray_socket_new (GdkScreen       *screen,
     g_object_unref (G_OBJECT (colormap));
 
   /* check if there is an alpha channel in the visual */
-  gdk_visual_get_red_pixel_details (visual, NULL, NULL, &red_prec);
-  gdk_visual_get_green_pixel_details (visual, NULL, NULL, &green_prec);
-  gdk_visual_get_blue_pixel_details (visual, NULL, NULL, &blue_prec);
-  depth = gdk_visual_get_depth (visual);
-
-  if (red_prec + blue_prec + green_prec < depth
+  if (visual->red_prec + visual->blue_prec + visual->green_prec < visual->depth
       && gdk_display_supports_composite (gdk_screen_get_display (screen)))
     socket->is_composited = TRUE;
 
