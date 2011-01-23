@@ -1125,6 +1125,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
 
   /* setup responses for the add dialog */
   object = gtk_builder_get_object (builder, "dialog-add");
+  gtk_window_set_screen (GTK_WINDOW (object),
+      gtk_window_get_screen (GTK_WINDOW (window)));
   g_signal_connect (G_OBJECT (object), "response",
       G_CALLBACK (launcher_dialog_add_response), dialog);
   g_signal_connect (G_OBJECT (object), "delete-event",
