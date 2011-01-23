@@ -1159,10 +1159,33 @@ panel_window_size_allocate (GtkWidget     *widget,
 
       /* set hidden window size */
       w = h = 3;
-      if (window->horizontal)
-        w = alloc->width;
-      else
-        h = alloc->height;
+
+      switch (window->snap_position)
+        {
+        /* left or right of the screen */
+        case SNAP_POSITION_E:
+        case SNAP_POSITION_EC:
+        case SNAP_POSITION_W:
+        case SNAP_POSITION_WC:
+          h = alloc->height;
+          break;
+
+        /* top or bottom of the screen */
+        case SNAP_POSITION_NC:
+        case SNAP_POSITION_SC:
+        case SNAP_POSITION_N:
+        case SNAP_POSITION_S:
+          w = alloc->width;
+          break;
+
+        /* corner or floating panel */
+        default:
+          if (window->horizontal)
+            w = alloc->width;
+          else
+            h = alloc->height;
+          break;
+        }
 
       /* position the autohide window */
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
