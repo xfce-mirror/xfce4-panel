@@ -1756,8 +1756,8 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
   g_return_if_fail (GTK_IS_MENU_ITEM (item));
 
   /* take the item and add to internal list */
-  plugin->priv->menu_items = g_slist_prepend (plugin->priv->menu_items,
-                                              g_object_ref_sink (item));
+  plugin->priv->menu_items = g_slist_append (plugin->priv->menu_items,
+                                             g_object_ref_sink (item));
   g_signal_connect (G_OBJECT (item), "destroy",
       G_CALLBACK (xfce_panel_plugin_menu_item_destroy), plugin);
 
