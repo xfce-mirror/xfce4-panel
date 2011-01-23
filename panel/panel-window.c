@@ -859,6 +859,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   gint          pointer_x, pointer_y;
   gint          window_x, window_y;
   gint          high;
+  GdkScreen    *screen = NULL;
+  gboolean      retval = TRUE;
 
   /* leave when the pointer is not grabbed */
   if (G_UNLIKELY (window->grab_time == 0))
@@ -868,12 +870,27 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   pointer_x = event->x_root;
   pointer_y = event->y_root;
 
+  /* the 0x0 coordinate is a sign the cursor is on another screen then
+   * the panel that is currently dragged */
+  if (event->x == 0 && event->y == 0)
+    {
+      gdk_display_get_pointer (gtk_widget_get_display (widget),
+                               &screen, NULL, NULL, NULL);
+      if (screen != gtk_window_get_screen (GTK_WINDOW (window)))
+        {
+          gtk_window_set_screen (GTK_WINDOW (window), screen);
+
+          /* stop the drag, we somehow loose the motion event */
+          window->grab_time = 0;
+          retval = FALSE;
+        }
+    }
   /* check if the pointer moved to another monitor */
-  if (!window->span_monitors
-      && (pointer_x < window->area.x
-          || pointer_y < window->area.y
-          || pointer_x > window->area.x + window->area.width
-          || pointer_y > window->area.y + window->area.height))
+  else if (!window->span_monitors
+           && (pointer_x < window->area.x
+               || pointer_y < window->area.y
+               || pointer_x > window->area.x + window->area.width
+               || pointer_y > window->area.y + window->area.height))
     {
       /* set base point to cursor position and update working area */
       window->base_x = pointer_x;
@@ -908,7 +925,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   /* update the working area */
   panel_window_screen_layout_changed (window->screen, window);
 
-  return TRUE;
+  return retval;
 }
 
 
@@ -1330,6 +1347,7 @@ panel_window_screen_changed (GtkWidget *widget,
      {
        g_free (window->output_name);
        window->output_name = g_strdup_printf ("screen-%d", gdk_screen_get_number (screen));
+       g_object_notify (G_OBJECT (window), "output-name");
      }
 
   /* update the screen layout */
