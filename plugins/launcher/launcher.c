@@ -2209,18 +2209,26 @@ launcher_plugin_item_query_tooltip (GtkWidget      *widget,
       gtk_tooltip_set_text (tooltip, name);
     }
 
-  /* we use the cached pixbuf for the button, because they are more
-   * likely to occur and we don't want to poke the hard drive multiple
-   * times for a simple pixbuf. for menu items this is not a big real,
-   * so here we use the pixbuf directly */
+  /* the button uses a custom cache because the button widget is never
+   * destroyed, for menu items we cache the pixbuf by attaching the
+   * data on the menu item widget */
   if (GTK_IS_MENU_ITEM (widget))
     {
-      pixbuf = launcher_plugin_tooltip_pixbuf (gtk_widget_get_screen (widget),
-                                               garcon_menu_item_get_icon_name (item));
+      pixbuf = g_object_get_data (G_OBJECT (widget), I_("pixbuf-cache"));
       if (G_LIKELY (pixbuf != NULL))
         {
           gtk_tooltip_set_icon (tooltip, pixbuf);
-          g_object_unref (G_OBJECT (pixbuf));
+        }
+      else
+        {
+          pixbuf = launcher_plugin_tooltip_pixbuf (gtk_widget_get_screen (widget),
+                                                   garcon_menu_item_get_icon_name (item));
+          if (G_LIKELY (pixbuf != NULL))
+            {
+              gtk_tooltip_set_icon (tooltip, pixbuf);
+              g_object_set_data_full (G_OBJECT (widget), I_("pixbuf-cache"), pixbuf,
+                                      (GDestroyNotify) g_object_unref);
+            }
         }
      }
 
