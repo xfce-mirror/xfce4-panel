@@ -446,19 +446,16 @@ panel_base_window_expose_event (GtkWidget      *widget,
   gdouble                 height = widget->allocation.height;
   const gdouble           dashes[] = { 4.00, 4.00 };
   GTimeVal                timeval;
-  gboolean                result;
   GdkPixbuf              *pixbuf;
   GError                 *error = NULL;
   cairo_matrix_t          matrix = { 1, 0, 0, 1, 0, 0 }; /* identity matrix */
 
-  result = (*GTK_WIDGET_CLASS (panel_base_window_parent_class)->expose_event) (widget, event);
-
   if (!GTK_WIDGET_DRAWABLE (widget))
-    return result;
+    return FALSE;
 
   /* create cairo context and set some default properties */
   cr = gdk_cairo_create (widget->window);
-  panel_return_val_if_fail (cr != NULL, result);
+  panel_return_val_if_fail (cr != NULL, FALSE);
   cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
   cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
   cairo_set_line_width (cr, 1.00);
@@ -599,7 +596,7 @@ panel_base_window_expose_event (GtkWidget      *widget,
 
   cairo_destroy (cr);
 
-  return result;
+  return FALSE;
 }
 
 
