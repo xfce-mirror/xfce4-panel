@@ -35,7 +35,7 @@ typedef struct _PanelWindow      PanelWindow;
 
 GType      panel_window_get_type         (void) G_GNUC_CONST;
 
-GtkWidget *panel_window_new              (void) G_GNUC_MALLOC;
+GtkWidget *panel_window_new              (GdkScreen   *screen) G_GNUC_MALLOC;
 
 void       panel_window_set_povider_info (PanelWindow *window,
                                           GtkWidget   *provider);

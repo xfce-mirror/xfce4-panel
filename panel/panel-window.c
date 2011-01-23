@@ -2431,12 +2431,16 @@ panel_window_set_plugin_screen_position (GtkWidget *widget,
 
 
 GtkWidget *
-panel_window_new (void)
+panel_window_new (GdkScreen *screen)
 {
+  if (screen == NULL)
+    screen = gdk_screen_get_default ();
+
   return g_object_new (PANEL_TYPE_WINDOW,
                        "type", GTK_WINDOW_TOPLEVEL,
                        "decorated", FALSE,
                        "resizable", FALSE,
+                       "screen", screen,
                        "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
                        "gravity", GDK_GRAVITY_STATIC,
                        "name", "XfcePanelWindow",

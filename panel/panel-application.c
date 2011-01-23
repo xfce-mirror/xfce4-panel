@@ -310,16 +310,37 @@ panel_application_load (PanelApplication *application)
   GdkScreen    *screen;
   GPtrArray    *array;
   const GValue *value;
+  gchar        *output_name;
+  gint          screen_num;
+  GdkDisplay   *display;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
+
+  display = gdk_display_get_default ();
 
   /* walk all the panel in the configuration */
   n_panels = xfconf_channel_get_uint (application->xfconf, "/panels", 0);
   for (i = 0; i < n_panels; i++)
     {
+      screen = NULL;
+
+      /* start the panel directly on the correct screen */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/output-name", i);
+      output_name = xfconf_channel_get_string (application->xfconf, buf, NULL);
+      if (output_name != NULL
+          && strncmp (output_name, "screen-", 7) == 0
+          && sscanf (output_name, "screen-%d", &screen_num) == 1)
+        {
+          if (screen_num < gdk_display_get_n_screens (display))
+            screen = gdk_display_get_screen (display, screen_num);
+        }
+      g_free (output_name);
+
       /* create a new window */
-      window = panel_application_new_window (application, NULL, FALSE);
+      window = panel_application_new_window (application, screen, FALSE);
+
+      /* get the screen the window if eventually shown on */
       screen = gtk_window_get_screen (GTK_WINDOW (window));
 
       /* walk all the plugins on the panel */
@@ -1273,14 +1294,11 @@ panel_application_new_window (PanelApplication *application,
   panel_return_val_if_fail (XFCONF_IS_CHANNEL (application->xfconf), NULL);
 
   /* create panel window */
-  window = panel_window_new ();
+  window = panel_window_new (screen);
 
   /* monitor window destruction */
   g_signal_connect (G_OBJECT (window), "destroy",
       G_CALLBACK (panel_application_window_destroyed), application);
-
-  /* put on the correct screen */
-  gtk_window_set_screen (GTK_WINDOW (window), screen ? screen : gdk_screen_get_default ());
 
   /* add the window to internal list */
   application->windows = g_slist_append (application->windows, window);
