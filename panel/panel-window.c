@@ -1561,13 +1561,13 @@ panel_window_screen_struts_set (PanelWindow *window)
       else if (struts[STRUT_BOTTOM] != 0)
         n = STRUT_BOTTOM;
       else
-        panel_debug (PANEL_DEBUG_STRUTS, "unset");
+        panel_debug (PANEL_DEBUG_STRUTS, "%p: unset", window);
 
       if (n != -1)
         {
           panel_debug (PANEL_DEBUG_STRUTS,
-                       "%s=%ld, start_%s=%ld, end_%s=%ld",
-                       strut_border[n], struts[n],
+                       "%p: %s=%ld, start_%s=%ld, end_%s=%ld",
+                       window, strut_border[n], struts[n],
                        strut_xy[n], struts[4 + n * 2],
                        strut_xy[n], struts[5 + n * 2]);
         }
@@ -1744,7 +1744,7 @@ panel_window_display_layout_debug (GtkWidget *widget)
   for (n = 0; n < n_screens; n++)
     {
       screen = gdk_display_get_screen (display, n);
-      g_string_append_printf (str, "screen-%d=[%d,%d] (", n,
+      g_string_append_printf (str, "screen-%d[%p]=[%d,%d] (", n, screen,
           gdk_screen_get_width (screen), gdk_screen_get_height (screen));
 
       n_monitors = gdk_screen_get_n_monitors (screen);
@@ -1770,7 +1770,7 @@ panel_window_display_layout_debug (GtkWidget *widget)
     }
 
   panel_debug (PANEL_DEBUG_DISPLAY_LAYOUT,
-               "display %s: %s",
+               "%p: display=%s, %s", widget,
                gdk_display_get_name (display), str->str);
 
   g_string_free (str, TRUE);
@@ -1791,6 +1791,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   gboolean      force_struts_update = FALSE;
   gint          screen_num;
   GdkDisplay   *display;
+  GdkScreen    *new_screen;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (GDK_IS_SCREEN (screen));
@@ -1816,7 +1817,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   panel_return_if_fail (n_monitors > 0);
 
   panel_debug (PANEL_DEBUG_POSITIONING,
-               "monitors=%d, output-name=%s, span-monitors=%s, base=%d,%d",
+               "%p: screen=%p, monitors=%d, output-name=%s, span-monitors=%s, base=%d,%d",
+               window, screen,
                n_monitors, window->output_name,
                PANEL_DEBUG_BOOL (window->span_monitors),
                window->base_x, window->base_y);
@@ -1844,7 +1846,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           if (gdk_display_get_n_screens (display) - 1 < screen_num)
             {
               panel_debug (PANEL_DEBUG_POSITIONING,
-                           "screen-%d not found, hiding panel", screen_num);
+                           "%p: screen-%d not found, hiding panel",
+                           window, screen_num);
 
               /* out of range, hide the window */
               if (GTK_WIDGET_VISIBLE (window))
@@ -1853,14 +1856,14 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
             }
           else
             {
+              new_screen = gdk_display_get_screen (display, screen_num);
               panel_debug (PANEL_DEBUG_POSITIONING,
-                           "moving panel from screen %d to %d",
-                           gdk_screen_get_number (screen),
-                           screen_num);
+                           "%p: moving window to screen %d[%p] to %d[%p]",
+                           window, gdk_screen_get_number (screen), screen,
+                           screen_num, new_screen);
 
               /* move window to the correct screen */
-              screen = gdk_display_get_screen (display, screen_num);
-              gtk_window_set_screen (GTK_WINDOW (window), screen);
+              gtk_window_set_screen (GTK_WINDOW (window), new_screen);
 
               /* we will invoke this function again when the screen
                * changes, so bail out */
@@ -1931,8 +1934,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           if (G_UNLIKELY (monitor_num == -1))
             {
               panel_debug (PANEL_DEBUG_POSITIONING,
-                           "output/monitor %s not found, hiding window",
-                           window->output_name);
+                           "%p: monitor %s not found, hiding window",
+                           window, window->output_name);
 
               /* hide the panel if the monitor was not found */
               if (GTK_WIDGET_VISIBLE (window))
@@ -1984,14 +1987,16 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
             }
         }
 
-      panel_debug (PANEL_DEBUG_POSITIONING,
-                   "struts edge: %d", window->struts_edge);
+      if (window->struts_edge == STRUTS_EDGE_NONE)
+        panel_debug (PANEL_DEBUG_POSITIONING,
+                     "%p: unset struts edge; between monitors", window);
     }
 
   /* set the new working area of the panel */
   window->area = a;
   panel_debug (PANEL_DEBUG_POSITIONING,
-               "working-area: x=%d, y=%d, w=%d, h=%d",
+               "%p: working-area: screen=%p, x=%d, y=%d, w=%d, h=%d",
+               window, screen,
                a.x, a.y, a.width, a.height);
 
   panel_window_screen_update_borders (window);
