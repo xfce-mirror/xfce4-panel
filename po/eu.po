@@ -2,7 +2,7 @@
 # Euskera translations for xfce4-panel package.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-#
+# 
 # Jon Latorre Martinez <patataman@airtel.net>, 2003.
 # Piarres Beobide Egaña <pi@beobide.net>, 2004, 2005, 2006, 2007, 2008, 2009.
 # Piarres Beobide <pi+debian@beobide.net>, 2009, 2010.
@@ -10,23 +10,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-01-25 17:29+0000\n"
 "PO-Revision-Date: 2010-05-07 10:59+0200\n"
 "Last-Translator: Piarres Beobide <pi+debian@beobide.net>\n"
 "Language-Team: Basque <debian-l10n-basque@lists.debian.org>\n"
-"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.0\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"Gehitu abiarazle berri bat panelera mahaigain fitxategi honen argibideetan "
-"oinarriturik"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Gehitu abiarazle berri bat panelera mahaigain fitxategi honen argibideetan oinarriturik"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -47,12 +44,8 @@ msgid "_Read Online"
 msgstr "_Irakurri linean"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Erabiltzaile manuala linean irakurri dezakezu. Manual horrek hala ere ez du "
-"zehazki bertsio hau argitzen."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Erabiltzaile manuala linean irakurri dezakezu. Manual horrek hala ere ez du zehazki bertsio hau argitzen."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
@@ -195,12 +188,8 @@ msgid "Failed to send D-Bus message"
 msgstr "Huts D-Bus mezua bidaltzean"
 
 #: ../panel/main.c:405
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Panela abiarazi nahi dfuzu? Hala bada ziurtatu zaitez saioa gordetzen duzula "
-"ixterakoan, horrela saioa hastean panela automatikoki abiaraziko da."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Panela abiarazi nahi dfuzu? Hala bada ziurtatu zaitez saioa gordetzen duzula ixterakoan, horrela saioa hastean panela automatikoki abiaraziko da."
 
 #: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
@@ -212,12 +201,8 @@ msgid "Failed to launch the migration application"
 msgstr "Huts migrazio aplikazioa abiaraztean"
 
 #: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
-msgstr ""
-"X saio kudeatzaile gabe abiarazi duzu, Itxi sakatzean X zerbitzaria itxiko "
-"du."
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "X saio kudeatzaile gabe abiarazi duzu, Itxi sakatzean X zerbitzaria itxiko du."
 
 #: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
@@ -229,19 +214,13 @@ msgid "Failed to execute command \"%s\""
 msgstr "Ezin da \"%s\" komandoa exekutatu."
 
 #: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Okerreko plugin gertaera sintaxia ezarria. Erabili PLUGIN-IZENA[:MOTA:"
-"BALIOA]."
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Okerreko plugin gertaera sintaxia ezarria. Erabili PLUGIN-IZENA[:MOTA:BALIOA]."
 
 #: ../panel/panel-dbus-client.c:242
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Okerreko \"%s\" gomendio mota. Mota erabilgarriak bool, double, int, string "
-"eta uint dira,"
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "Okerreko \"%s\" gomendio mota. Mota erabilgarriak bool, double, int, string eta uint dira,"
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -267,12 +246,8 @@ msgid "Panel %d"
 msgstr "%d panela"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"Panela kiosko moduan abiarazirik dagoenez ezin dizkiozu aldaketarik egin "
-"erabiltzaile arrunt gisa."
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "Panela kiosko moduan abiarazirik dagoenez ezin dizkiozu aldaketarik egin erabiltzaile arrunt gisa."
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -298,18 +273,12 @@ msgstr "Idatzi bilaketa katea hemen"
 #: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"\"%s\" pluginak panela ustekabean utzi du, berriz abiaraztea nahi al duzu?"
+msgstr "\"%s\" pluginak panela ustekabean utzi du, berriz abiaraztea nahi al duzu?"
 
 #: ../panel/panel-plugin-external.c:422
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"Plugin-a behin baino gehiago berrabiarazi da azken %d segundoetan. Abiarazi "
-"sakatuaz panela abiarazten saiatuko da bestela betirako kenduko da paneletik."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "Plugin-a behin baino gehiago berrabiarazi da azken %d segundoetan. Abiarazi sakatuaz panela abiarazten saiatuko da bestela betirako kenduko da paneletik."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -374,11 +343,8 @@ msgid "Add new item to this panel"
 msgstr "Gehitu elementu berri bat panel honetara"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-"Panelaren atzealdearen alpha balioa 0 (gardena) eta 100 (opakoa) artekoa."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgstr "Panelaren atzealdearen alpha balioa 0 (gardena) eta 100 (opakoa) artekoa."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -427,7 +393,8 @@ msgstr "Ele_mentuak"
 msgid "L_ength (%):"
 msgstr "Z_abalera (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Neurri-sistema"
@@ -471,31 +438,20 @@ msgid "Select A Background Image"
 msgstr "Hautatu atzealdeko irudi bat"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-"Aukera hau hautatu pluginak tamaina gehiago eskatzean panelaren luzera "
-"automatikoki hedatzeko"
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgstr "Aukera hau hautatu pluginak tamaina gehiago eskatzean panelaren luzera automatikoki hedatzeko"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Hautatu aukera hau panela monitore anitzetan hedatzeko"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Hautatu aukera hau panel kudeatzaileak ezkutatu eta bere kokalekua "
-"blokeatzeko"
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Hautatu aukera hau panel kudeatzaileak ezkutatu eta bere kokalekua blokeatzeko"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Hautatu aukera hau markatzailea gainean ez duenean panela ezkutatzeko. Honek "
-"panela pantaila ertzean dagoenean bakarrik funtzionatuko du."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Hautatu aukera hau markatzailea gainean ez duenean panela ezkutatzeko. Honek panela pantaila ertzean dagoenean bakarrik funtzionatuko du."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -510,20 +466,12 @@ msgid "Span mo_nitors"
 msgstr "Zabor-posta monitoreak"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz "
-"gardena izango da eta 100 erabiliaz guztiz opakoa."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz gardena izango da eta 100 erabiliaz guztiz opakoa."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr ""
-"Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz "
-"gardena izango da eta 100 erabiliaz guztiz opakoa."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz gardena izango da eta 100 erabiliaz guztiz opakoa."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -593,12 +541,8 @@ msgid "Welcome to the first start of the panel"
 msgstr "Ongi etorria panelaren lehen abiaraztera"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"Paneleko ezarpenak gordetzeko sistema berri batera aldatu denez, instalazio "
-"berri bat kargatu du."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Paneleko ezarpenak gordetzeko sistema berri batera aldatu denez, instalazio berri bat kargatu du."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -713,7 +657,7 @@ msgstr "Botoi _titulua:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "Ed_itatu menua"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
@@ -728,12 +672,8 @@ msgid "Select A Menu File"
 msgstr "Hautatu menu fitxategi bat"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Aukera hau hautatu menuan aplikazioaren izen generikoa bistartzeko, adibidez "
-"\"Fitxategi kudeatzailea\" \"Thunar ordez\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Aukera hau hautatu menuan aplikazioaren izen generikoa bistartzeko, adibidez \"Fitxategi kudeatzailea\" \"Thunar ordez\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -748,14 +688,12 @@ msgid "Show ic_ons in menu"
 msgstr "Ikusi ik_onoak menuan"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#, fuzzy
 msgid "Use c_ustom menu file:"
-msgstr "Erabili _pertsonalizatutako menu fitxategia"
+msgstr "Erabili _pertsonalizatutako menu fitxategia:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-#, fuzzy
 msgid "Use the _default menu"
-msgstr "Erabili _lehenetitako menu fitxategia"
+msgstr "Erabili _lehenetsitako menu fitxategia"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
@@ -865,7 +803,8 @@ msgstr "Bistarazi _segunduak"
 msgid "F_ormat:"
 msgstr "F_ormatua:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "La_usotasuna:"
@@ -901,15 +840,8 @@ msgstr "Ikusi _sareta"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"Formatuak fitxategi izenean txertatuko diren data eta ordu zatiak zehazten "
-"ditu. Adibidez, %Y urteaz ordeztuko da, %m hilabeteaz eta %d egunaz. "
-"Begiratu date tresnaren dokumentazioa argibide gehiagorentzat."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "Formatuak fitxategi izenean txertatuko diren data eta ordu zatiak zehazten ditu. Adibidez, %Y urteaz ordeztuko da, %m hilabeteaz eta %d egunaz. Begiratu date tresnaren dokumentazioa argibide gehiagorentzat."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1197,14 +1129,8 @@ msgid "Show a directory tree in a menu"
 msgstr "Ikusi direktorio zuhaitza menu batean"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Idatzi direktorioan bistaraziko diren fitxategiak ezartzen dituen patroi "
-"zerrenda. Hemen patroi bat baino gehiago zehazten baduzu, zerrenda "
-"elementuak puntu eta gakoz bereizi behar dira (adib *.txt; *.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Idatzi direktorioan bistaraziko diren fitxategiak ezartzen dituen patroi zerrenda. Hemen patroi bat baino gehiago zehazten baduzu, zerrenda elementuak puntu eta gakoz bereizi behar dira (adib *.txt; *.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1295,12 +1221,8 @@ msgid "North"
 msgstr "Iparra"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Hautatu aukera hau menu elementu edo panel botoien gainean mugitzean "
-"gomendioak desgaitzeko"
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgstr "Hautatu aukera hau menu elementu edo panel botoien gainean mugitzean gomendioak desgaitzeko"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1353,9 +1275,7 @@ msgid "Number of _rows:"
 msgstr "Lerro _kopurua:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr "Lan-eremuaren ikuspegi txiki bat ikusi leiho ikusgarrien laukitxoekin"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1426,12 +1346,8 @@ msgstr "Ezin da larrialdi berri-ematea abiarazi"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
-msgstr ""
-"Ziurrenik beste widget batek berri-emate eremuaren kargu artu du. Eremu hau "
-"ez da erabiliko."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Ziurrenik beste widget batek berri-emate eremuaren kargu artu du. Eremu hau ez da erabiliko."
 
 #: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
@@ -1456,7 +1372,7 @@ msgstr "Berri-emate eremua"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "_Gehienezko ikono tamaina (px):"
 
 #: ../plugins/systray/systray-manager.c:406
 #, c-format
@@ -1493,7 +1409,7 @@ msgstr "Berrezarri minimizaturiko leihoak uneko lan-eremuan"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Ro_tate buttons in vertical panel"
-msgstr ""
+msgstr "Bira_tu botoiak panel bertikalean"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
@@ -1512,14 +1428,12 @@ msgid "Show only _minimized windows"
 msgstr "Ikusi bakarrik _minimizatutako leihoak"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#, fuzzy
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Ikusi lan-eremu guztietako leihoak"
+msgstr "Ikusi lan-eremu edo ikuste-ataka guztietako leihoak"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
 msgid "Show windows from all mo_nitors"
-msgstr "Ikusi lan-eremu guztietako leihoak"
+msgstr "Ikusi monitore guztietako leihoak"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
