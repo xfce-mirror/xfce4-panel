@@ -876,8 +876,6 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
                                                     xfce_tasklist_size_sort_window);
         }
 
-      panel_return_if_fail (g_slist_length (windows_scored) == (guint) tasklist->n_windows);
-
       if (!tasklist->show_labels)
         max_button_length = min_button_length;
       else if (tasklist->max_button_length != -1)
@@ -2558,7 +2556,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                      xfce_panel_plugin_position_menu,
+                      child->type == CHILD_TYPE_WINDOW ? xfce_panel_plugin_position_menu : NULL,
                       xfce_tasklist_get_panel_plugin (child->tasklist),
                       event->button,
                       event->time);

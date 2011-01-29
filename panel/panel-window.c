@@ -117,7 +117,6 @@ static void         panel_window_style_set                  (GtkWidget        *w
 static void         panel_window_realize                    (GtkWidget        *widget);
 static StrutsEgde   panel_window_screen_struts_edge         (PanelWindow      *window);
 static void         panel_window_screen_struts_set          (PanelWindow      *window);
-static void         panel_window_screen_force_update        (PanelWindow      *window);
 static void         panel_window_screen_update_borders      (PanelWindow      *window);
 static SnapPosition panel_window_snap_position              (PanelWindow      *window);
 static void         panel_window_display_layout_debug       (GtkWidget        *widget);
@@ -457,10 +456,6 @@ panel_window_init (PanelWindow *window)
 
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
-
-  /* watch changes in the compositing */
-  g_signal_connect (G_OBJECT (window), "notify::composited",
-      G_CALLBACK (panel_window_screen_force_update), NULL);
 }
 
 
@@ -859,6 +854,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   gint          pointer_x, pointer_y;
   gint          window_x, window_y;
   gint          high;
+  GdkScreen    *screen = NULL;
+  gboolean      retval = TRUE;
 
   /* leave when the pointer is not grabbed */
   if (G_UNLIKELY (window->grab_time == 0))
@@ -868,12 +865,27 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   pointer_x = event->x_root;
   pointer_y = event->y_root;
 
+  /* the 0x0 coordinate is a sign the cursor is on another screen then
+   * the panel that is currently dragged */
+  if (event->x == 0 && event->y == 0)
+    {
+      gdk_display_get_pointer (gtk_widget_get_display (widget),
+                               &screen, NULL, NULL, NULL);
+      if (screen != gtk_window_get_screen (GTK_WINDOW (window)))
+        {
+          gtk_window_set_screen (GTK_WINDOW (window), screen);
+
+          /* stop the drag, we somehow loose the motion event */
+          window->grab_time = 0;
+          retval = FALSE;
+        }
+    }
   /* check if the pointer moved to another monitor */
-  if (!window->span_monitors
-      && (pointer_x < window->area.x
-          || pointer_y < window->area.y
-          || pointer_x > window->area.x + window->area.width
-          || pointer_y > window->area.y + window->area.height))
+  else if (!window->span_monitors
+           && (pointer_x < window->area.x
+               || pointer_y < window->area.y
+               || pointer_x > window->area.x + window->area.width
+               || pointer_y > window->area.y + window->area.height))
     {
       /* set base point to cursor position and update working area */
       window->base_x = pointer_x;
@@ -908,7 +920,7 @@ panel_window_motion_notify_event (GtkWidget      *widget,
   /* update the working area */
   panel_window_screen_layout_changed (window->screen, window);
 
-  return TRUE;
+  return retval;
 }
 
 
@@ -1142,10 +1154,33 @@ panel_window_size_allocate (GtkWidget     *widget,
 
       /* set hidden window size */
       w = h = 3;
-      if (window->horizontal)
-        w = alloc->width;
-      else
-        h = alloc->height;
+
+      switch (window->snap_position)
+        {
+        /* left or right of the screen */
+        case SNAP_POSITION_E:
+        case SNAP_POSITION_EC:
+        case SNAP_POSITION_W:
+        case SNAP_POSITION_WC:
+          h = alloc->height;
+          break;
+
+        /* top or bottom of the screen */
+        case SNAP_POSITION_NC:
+        case SNAP_POSITION_SC:
+        case SNAP_POSITION_N:
+        case SNAP_POSITION_S:
+          w = alloc->width;
+          break;
+
+        /* corner or floating panel */
+        default:
+          if (window->horizontal)
+            w = alloc->width;
+          else
+            h = alloc->height;
+          break;
+        }
 
       /* position the autohide window */
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
@@ -1330,6 +1365,7 @@ panel_window_screen_changed (GtkWidget *widget,
      {
        g_free (window->output_name);
        window->output_name = g_strdup_printf ("screen-%d", gdk_screen_get_number (screen));
+       g_object_notify (G_OBJECT (window), "output-name");
      }
 
   /* update the screen layout */
@@ -1520,35 +1556,16 @@ panel_window_screen_struts_set (PanelWindow *window)
       else if (struts[STRUT_BOTTOM] != 0)
         n = STRUT_BOTTOM;
       else
-        panel_debug (PANEL_DEBUG_STRUTS, "unset");
+        panel_debug (PANEL_DEBUG_STRUTS, "%p: unset", window);
 
       if (n != -1)
         {
           panel_debug (PANEL_DEBUG_STRUTS,
-                       "%s=%ld, start_%s=%ld, end_%s=%ld",
-                       strut_border[n], struts[n],
+                       "%p: %s=%ld, start_%s=%ld, end_%s=%ld",
+                       window, strut_border[n], struts[n],
                        strut_xy[n], struts[4 + n * 2],
                        strut_xy[n], struts[5 + n * 2]);
         }
-    }
-}
-
-
-
-static void
-panel_window_screen_force_update (PanelWindow *window)
-{
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  if (GTK_WIDGET_VISIBLE (window))
-    {
-      /* make sure the struts are set again, when enabled */
-      if (window->struts_edge != STRUTS_EDGE_NONE
-          && window->autohide_state == AUTOHIDE_DISABLED)
-        window->struts[0] = -1;
-
-      /* update the panel position */
-      panel_window_screen_layout_changed (window->screen, window);
     }
 }
 
@@ -1703,7 +1720,7 @@ panel_window_display_layout_debug (GtkWidget *widget)
   for (n = 0; n < n_screens; n++)
     {
       screen = gdk_display_get_screen (display, n);
-      g_string_append_printf (str, "screen-%d=[%d,%d] (", n,
+      g_string_append_printf (str, "screen-%d[%p]=[%d,%d] (", n, screen,
           gdk_screen_get_width (screen), gdk_screen_get_height (screen));
 
       n_monitors = gdk_screen_get_n_monitors (screen);
@@ -1729,7 +1746,7 @@ panel_window_display_layout_debug (GtkWidget *widget)
     }
 
   panel_debug (PANEL_DEBUG_DISPLAY_LAYOUT,
-               "display %s: %s",
+               "%p: display=%s, %s", widget,
                gdk_display_get_name (display), str->str);
 
   g_string_free (str, TRUE);
@@ -1750,6 +1767,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   gboolean      force_struts_update = FALSE;
   gint          screen_num;
   GdkDisplay   *display;
+  GdkScreen    *new_screen;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (GDK_IS_SCREEN (screen));
@@ -1775,7 +1793,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   panel_return_if_fail (n_monitors > 0);
 
   panel_debug (PANEL_DEBUG_POSITIONING,
-               "monitors=%d, output-name=%s, span-monitors=%s, base=%d,%d",
+               "%p: screen=%p, monitors=%d, output-name=%s, span-monitors=%s, base=%d,%d",
+               window, screen,
                n_monitors, window->output_name,
                PANEL_DEBUG_BOOL (window->span_monitors),
                window->base_x, window->base_y);
@@ -1803,7 +1822,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           if (gdk_display_get_n_screens (display) - 1 < screen_num)
             {
               panel_debug (PANEL_DEBUG_POSITIONING,
-                           "screen-%d not found, hiding panel", screen_num);
+                           "%p: screen-%d not found, hiding panel",
+                           window, screen_num);
 
               /* out of range, hide the window */
               if (GTK_WIDGET_VISIBLE (window))
@@ -1812,14 +1832,14 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
             }
           else
             {
+              new_screen = gdk_display_get_screen (display, screen_num);
               panel_debug (PANEL_DEBUG_POSITIONING,
-                           "moving panel from screen %d to %d",
-                           gdk_screen_get_number (screen),
-                           screen_num);
+                           "%p: moving window to screen %d[%p] to %d[%p]",
+                           window, gdk_screen_get_number (screen), screen,
+                           screen_num, new_screen);
 
               /* move window to the correct screen */
-              screen = gdk_display_get_screen (display, screen_num);
-              gtk_window_set_screen (GTK_WINDOW (window), screen);
+              gtk_window_set_screen (GTK_WINDOW (window), new_screen);
 
               /* we will invoke this function again when the screen
                * changes, so bail out */
@@ -1890,8 +1910,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
           if (G_UNLIKELY (monitor_num == -1))
             {
               panel_debug (PANEL_DEBUG_POSITIONING,
-                           "output/monitor %s not found, hiding window",
-                           window->output_name);
+                           "%p: monitor %s not found, hiding window",
+                           window, window->output_name);
 
               /* hide the panel if the monitor was not found */
               if (GTK_WIDGET_VISIBLE (window))
@@ -1943,14 +1963,16 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
             }
         }
 
-      panel_debug (PANEL_DEBUG_POSITIONING,
-                   "struts edge: %d", window->struts_edge);
+      if (window->struts_edge == STRUTS_EDGE_NONE)
+        panel_debug (PANEL_DEBUG_POSITIONING,
+                     "%p: unset struts edge; between monitors", window);
     }
 
   /* set the new working area of the panel */
   window->area = a;
   panel_debug (PANEL_DEBUG_POSITIONING,
-               "working-area: x=%d, y=%d, w=%d, h=%d",
+               "%p: working-area: screen=%p, x=%d, y=%d, w=%d, h=%d",
+               window, screen,
                a.x, a.y, a.width, a.height);
 
   panel_window_screen_update_borders (window);
@@ -2109,7 +2131,8 @@ panel_window_set_autohide (PanelWindow *window,
   guint        i;
   const gchar *properties[] = { "enter-opacity", "leave-opacity",
                                 "background-alpha", "borders",
-                                "background-style", "background-color" };
+                                "background-style", "background-color",
+                                "role", "screen" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
@@ -2215,6 +2238,8 @@ panel_window_menu_popup (PanelWindow *window,
 
   /* create menu */
   menu = gtk_menu_new ();
+  gtk_menu_set_screen (GTK_MENU (menu),
+      gtk_window_get_screen (GTK_WINDOW (window)));
   g_object_ref_sink (G_OBJECT (menu));
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (panel_window_menu_deactivate), window);
@@ -2430,12 +2455,16 @@ panel_window_set_plugin_screen_position (GtkWidget *widget,
 
 
 GtkWidget *
-panel_window_new (void)
+panel_window_new (GdkScreen *screen)
 {
+  if (screen == NULL)
+    screen = gdk_screen_get_default ();
+
   return g_object_new (PANEL_TYPE_WINDOW,
                        "type", GTK_WINDOW_TOPLEVEL,
                        "decorated", FALSE,
                        "resizable", FALSE,
+                       "screen", screen,
                        "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
                        "gravity", GDK_GRAVITY_STATIC,
                        "name", "XfcePanelWindow",
@@ -2446,7 +2475,8 @@ panel_window_new (void)
 
 void
 panel_window_set_povider_info (PanelWindow *window,
-                               GtkWidget   *provider)
+                               GtkWidget   *provider,
+                               gboolean     moving_to_other_panel)
 {
   PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
 
@@ -2456,24 +2486,29 @@ panel_window_set_povider_info (PanelWindow *window,
   xfce_panel_plugin_provider_set_locked (XFCE_PANEL_PLUGIN_PROVIDER (provider),
                                          panel_window_get_locked (window));
 
-  if (base_window->background_alpha < 1.0)
+  if (PANEL_IS_PLUGIN_EXTERNAL (provider))
     {
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
-            base_window->background_alpha);
-    }
+      if (moving_to_other_panel || base_window->background_alpha < 1.0)
+        {
+          panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
+              base_window->background_alpha);
+        }
 
-  if (base_window->background_style == PANEL_BG_STYLE_COLOR)
-    {
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
-            base_window->background_color);
-    }
-  else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
-    {
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
-            base_window->background_image);
+      if (base_window->background_style == PANEL_BG_STYLE_COLOR)
+        {
+          panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
+              base_window->background_color);
+        }
+      else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
+        {
+          panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
+              base_window->background_image);
+        }
+      else if (moving_to_other_panel)
+        {
+          /* unset the background (PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET) */
+          panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider), NULL);
+        }
     }
 
   panel_window_set_plugin_orientation (provider, window);

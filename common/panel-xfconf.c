@@ -36,6 +36,8 @@ panel_properties_store_value (XfconfChannel *channel,
                               const gchar   *object_property)
 {
   GValue      value = { 0, };
+  GdkColor   *color;
+  guint16     alpha = 0xffff;
 #ifndef NDEBUG
   GParamSpec *pspec;
 #endif
@@ -53,7 +55,24 @@ panel_properties_store_value (XfconfChannel *channel,
   /* write the property to the xfconf channel */
   g_value_init (&value, xfconf_property_type);
   g_object_get_property (G_OBJECT (object), object_property, &value);
-  xfconf_channel_set_property (channel, xfconf_property, &value);
+
+  if (G_LIKELY (xfconf_property_type != GDK_TYPE_COLOR))
+    {
+      xfconf_channel_set_property (channel, xfconf_property, &value);
+    }
+  else
+    {
+      /* work around xfconf's lack of storing colors (bug #7117) and
+       * do the same as xfconf_g_property_bind_gdkcolor() does */
+      color = g_value_get_boxed (&value);
+      xfconf_channel_set_array (channel, xfconf_property,
+                                XFCONF_TYPE_UINT16, &color->red,
+                                XFCONF_TYPE_UINT16, &color->green,
+                                XFCONF_TYPE_UINT16, &color->blue,
+                                XFCONF_TYPE_UINT16, &alpha,
+                                G_TYPE_INVALID);
+    }
+
   g_value_unset (&value);
 }
 

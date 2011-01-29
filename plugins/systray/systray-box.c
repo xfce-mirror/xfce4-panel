@@ -40,8 +40,7 @@
 #define OFFSCREEN  (-9999)
 
 /* some icon implementations request a 1x1 size for invisible icons */
-/*#define REQUISITION_IS_INVISIBLE(child_req) ((child_req).width <= 1 && (child_req).height <= 1)*/
-#define REQUISITION_IS_INVISIBLE(child_req) (FALSE)
+#define REQUISITION_IS_INVISIBLE(child_req) ((child_req).width <= 1 && (child_req).height <= 1)
 
 
 
@@ -442,9 +441,10 @@ systray_box_size_allocate (GtkWidget     *widget,
            * or the requested size looks like an invisible icons (see macro) */
           child_alloc.x = child_alloc.y = OFFSCREEN;
 
-          /* do nothing special with the requested size */
-          child_alloc.width = child_req.width;
-          child_alloc.height = child_req.height;
+          /* some implementations (hi nm-applet) start their setup on
+           * a size-changed signal, so make sure this event is triggered
+           * by allocation a normal size instead of 1x1 */
+          child_alloc.width = child_alloc.height = row_size;
         }
       else
         {
@@ -554,8 +554,8 @@ systray_box_size_allocate (GtkWidget     *widget,
             y += row_size * ratio + SPACING;
         }
 
-      panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocated %s at (%d,%d;%d,%d)",
-          systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child)),
+      panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocated %s[%p] at (%d,%d;%d,%d)",
+          systray_socket_get_name (XFCE_SYSTRAY_SOCKET (child)), child,
           child_alloc.x, child_alloc.y, child_alloc.width, child_alloc.height);
 
       gtk_widget_size_allocate (child, &child_alloc);

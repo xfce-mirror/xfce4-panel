@@ -180,7 +180,10 @@ migrate_46_panel_set_property (ConfigParser  *parser,
                                const gchar   *value,
                                GError       **error)
 {
-  gchar prop[128];
+  gchar       prop[128];
+  GdkDisplay *display;
+  gchar      *name;
+  gint        num;
 
   if (strcmp (property_name, "size") == 0)
     {
@@ -200,17 +203,29 @@ migrate_46_panel_set_property (ConfigParser  *parser,
     }
   else if (strcmp (property_name, "xoffset") == 0)
     {
-      /* TODO test this */
       parser->panel_xoffset = MAX (0, atoi (value));
     }
   else if (strcmp (property_name, "yoffset") == 0)
     {
-      /* TODO test this */
       parser->panel_yoffset = MAX (0, atoi (value));
     }
   else if (strcmp (property_name, "monitor") == 0)
     {
-      /* TODO */
+      /* in 4.4 and 4.6 we only use monitor and make no difference between monitors
+       * and screen's, so check the setup of the user to properly convert this */
+      num = MAX (0, atoi (value));
+      if (G_LIKELY (num > 0))
+        {
+          display = gdk_display_get_default ();
+          if (display != NULL && gdk_display_get_n_screens (display) > 1)
+            name = g_strdup_printf ("screen-%d", num);
+          else
+            name = g_strdup_printf ("monitor-%d", num);
+
+          g_snprintf (prop, sizeof (prop), "/panels/panel-%u/output", parser->panel_id_counter);
+          xfconf_channel_set_string (parser->channel, prop, name);
+          g_free (name);
+        }
     }
   else if (strcmp (property_name, "handlestyle") == 0)
     {

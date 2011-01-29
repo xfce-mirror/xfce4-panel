@@ -1708,6 +1708,8 @@ xfce_panel_plugin_take_window (XfcePanelPlugin *plugin,
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_WINDOW (window));
 
+  gtk_window_set_screen (window, gtk_widget_get_screen (GTK_WIDGET (plugin)));
+
   /* monitor both objects */
   g_object_weak_ref (G_OBJECT (plugin),
       xfce_panel_plugin_take_window_notify, window);
@@ -1756,8 +1758,8 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
   g_return_if_fail (GTK_IS_MENU_ITEM (item));
 
   /* take the item and add to internal list */
-  plugin->priv->menu_items = g_slist_prepend (plugin->priv->menu_items,
-                                              g_object_ref_sink (item));
+  plugin->priv->menu_items = g_slist_append (plugin->priv->menu_items,
+                                             g_object_ref_sink (item));
   g_signal_connect (G_OBJECT (item), "destroy",
       G_CALLBACK (xfce_panel_plugin_menu_item_destroy), plugin);
 

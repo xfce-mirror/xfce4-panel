@@ -57,7 +57,6 @@ panel_dbus_client_get_proxy (GError **error)
 
   /* return null if no connection is found */
   dbus_connection = dbus_g_bus_get (DBUS_BUS_SESSION, error);
-  panel_return_val_if_fail (dbus_connection != NULL, NULL);
   if (G_UNLIKELY (dbus_connection == NULL))
     return NULL;
 
