@@ -583,10 +583,7 @@ G_BEGIN_DECLS
     gtk_widget_set_app_paintable (plug, TRUE); \
     \
     screen = gtk_widget_get_screen (plug); \
-    \
     colormap = gdk_screen_get_rgba_colormap (screen); \
-    if (colormap == NULL) \
-      colormap = gdk_screen_get_rgb_colormap (screen); \
     if (colormap != NULL) \
       gtk_widget_set_colormap (plug, colormap); \
     \

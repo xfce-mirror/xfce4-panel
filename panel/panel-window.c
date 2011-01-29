@@ -117,7 +117,6 @@ static void         panel_window_style_set                  (GtkWidget        *w
 static void         panel_window_realize                    (GtkWidget        *widget);
 static StrutsEgde   panel_window_screen_struts_edge         (PanelWindow      *window);
 static void         panel_window_screen_struts_set          (PanelWindow      *window);
-static void         panel_window_screen_force_update        (PanelWindow      *window);
 static void         panel_window_screen_update_borders      (PanelWindow      *window);
 static SnapPosition panel_window_snap_position              (PanelWindow      *window);
 static void         panel_window_display_layout_debug       (GtkWidget        *widget);
@@ -457,10 +456,6 @@ panel_window_init (PanelWindow *window)
 
   /* set the screen */
   panel_window_screen_changed (GTK_WIDGET (window), NULL);
-
-  /* watch changes in the compositing */
-  g_signal_connect (G_OBJECT (window), "notify::composited",
-      G_CALLBACK (panel_window_screen_force_update), NULL);
 }
 
 
@@ -1571,25 +1566,6 @@ panel_window_screen_struts_set (PanelWindow *window)
                        strut_xy[n], struts[4 + n * 2],
                        strut_xy[n], struts[5 + n * 2]);
         }
-    }
-}
-
-
-
-static void
-panel_window_screen_force_update (PanelWindow *window)
-{
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  if (GTK_WIDGET_VISIBLE (window))
-    {
-      /* make sure the struts are set again, when enabled */
-      if (window->struts_edge != STRUTS_EDGE_NONE
-          && window->autohide_state == AUTOHIDE_DISABLED)
-        window->struts[0] = -1;
-
-      /* update the panel position */
-      panel_window_screen_layout_changed (window->screen, window);
     }
 }
 

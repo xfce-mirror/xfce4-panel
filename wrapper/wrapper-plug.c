@@ -103,11 +103,7 @@ wrapper_plug_init (WrapperPlug *plug)
 
   /* set the colormap */
   screen = gtk_window_get_screen (GTK_WINDOW (plug));
-
-
   colormap = gdk_screen_get_rgba_colormap (screen);
-  if (colormap == NULL)
-    colormap = gdk_screen_get_rgb_colormap (screen);
   if (colormap != NULL)
     gtk_widget_set_colormap (GTK_WIDGET (plug), colormap);
 }

@@ -192,6 +192,9 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 static void
 panel_base_window_init (PanelBaseWindow *window)
 {
+  GdkColormap *colormap;
+  GdkScreen   *screen;
+
   window->priv = G_TYPE_INSTANCE_GET_PRIVATE (window, PANEL_TYPE_BASE_WINDOW, PanelBaseWindowPrivate);
 
   window->is_composited = FALSE;
@@ -210,7 +213,19 @@ panel_base_window_init (PanelBaseWindow *window)
    * the type-hint already takes care of that */
   gtk_window_stick (GTK_WINDOW (window));
 
-  panel_base_window_composited_changed (GTK_WIDGET (window));
+  /* set the rgba colormap if supported by the screen */
+  screen = gtk_window_get_screen (GTK_WINDOW (window));
+  colormap = gdk_screen_get_rgba_colormap (screen);
+  if (colormap != NULL)
+    {
+      gtk_widget_set_colormap (GTK_WIDGET (window), colormap);
+      window->is_composited = gtk_widget_is_composited (GTK_WIDGET (window));
+    }
+
+   panel_debug (PANEL_DEBUG_BASE_WINDOW,
+               "%p: rgba colormap=%s, compositing=%s", window,
+               PANEL_DEBUG_BOOL (colormap != NULL),
+               PANEL_DEBUG_BOOL (window->is_composited));
 }
 
 
@@ -641,50 +656,17 @@ static void
 panel_base_window_composited_changed (GtkWidget *widget)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
-  GdkColormap     *colormap = NULL;
   gboolean         was_composited = window->is_composited;
-  gboolean         was_visible;
-  GdkScreen       *screen;
-  gboolean         colormap_changed;
-  gboolean         colormap_rgba = FALSE;
+  GdkWindow       *gdkwindow;
 
-  panel_return_if_fail (PANEL_IS_BASE_WINDOW (widget));
-
-  /* get the widget screen */
-  screen = gtk_window_get_screen (GTK_WINDOW (widget));
-  panel_return_if_fail (GDK_IS_SCREEN (screen));
-
-  /* get the rgba colormap */
-  colormap = gdk_screen_get_rgba_colormap (screen);
-  if (G_UNLIKELY (colormap == NULL))
-    {
-      window->is_composited = FALSE;
-      colormap = gdk_screen_get_rgb_colormap (screen);
-    }
-  else
-    {
-      colormap_rgba = TRUE;
-      window->is_composited = gtk_widget_is_composited (widget);
-      gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->leave_opacity);
-    }
-
-  panel_return_if_fail (GDK_IS_COLORMAP (colormap));
-  colormap_changed = gtk_widget_get_colormap (widget) != colormap;
+  /* set new compositing state */
+  window->is_composited = gtk_widget_is_composited (widget);
+  if (window->is_composited)
+    gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->leave_opacity);
 
   panel_debug (PANEL_DEBUG_BASE_WINDOW,
-               "%p: composited=%s, rgba=%s, visible=%s", window,
-               PANEL_DEBUG_BOOL (gtk_widget_is_composited (widget)),
-               PANEL_DEBUG_BOOL (colormap_rgba),
-               PANEL_DEBUG_BOOL (GTK_WIDGET_VISIBLE (widget)));
-
-  was_visible = GTK_WIDGET_VISIBLE (widget);
-  if (was_visible)
-    {
-      gtk_widget_hide (widget);
-
-      if (colormap_changed)
-        gtk_widget_unrealize (widget);
-    }
+               "%p: compositing=%s", window,
+               PANEL_DEBUG_BOOL (window->is_composited));
 
   /* clear cairo image cache */
   if (window->priv->bg_image_cache != NULL)
@@ -693,20 +675,19 @@ panel_base_window_composited_changed (GtkWidget *widget)
       window->priv->bg_image_cache = NULL;
     }
 
-  if (colormap_changed)
-    gtk_widget_set_colormap (widget, colormap);
-
-  if (was_visible)
-    {
-      /* restore the window */
-      if (colormap_changed)
-        gtk_widget_realize (widget);
-      gtk_widget_show (widget);
-    }
-
-  /* emit the property if it changed */
   if (window->is_composited != was_composited)
     g_object_notify (G_OBJECT (widget), "composited");
+
+  /* make sure the entire window is redrawn */
+  gdkwindow = gtk_widget_get_window (widget);
+  if (gdkwindow != NULL)
+    gdk_window_invalidate_rect (gdkwindow, NULL, TRUE);
+
+  /* HACK: invalid the geometry, so the wm notices it */
+  gtk_window_move (GTK_WINDOW (window),
+                   widget->allocation.x,
+                   widget->allocation.y);
+  gtk_widget_queue_resize (widget);
 }
 
 
