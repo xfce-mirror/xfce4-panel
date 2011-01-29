@@ -38,7 +38,8 @@ GType      panel_window_get_type         (void) G_GNUC_CONST;
 GtkWidget *panel_window_new              (GdkScreen   *screen) G_GNUC_MALLOC;
 
 void       panel_window_set_povider_info (PanelWindow *window,
-                                          GtkWidget   *provider);
+                                          GtkWidget   *provider,
+                                          gboolean     moving_to_other_panel);
 
 void       panel_window_freeze_autohide  (PanelWindow *window);
 

@@ -2475,7 +2475,8 @@ panel_window_new (GdkScreen *screen)
 
 void
 panel_window_set_povider_info (PanelWindow *window,
-                               GtkWidget   *provider)
+                               GtkWidget   *provider,
+                               gboolean     moving_to_other_panel)
 {
   PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
 
@@ -2485,24 +2486,29 @@ panel_window_set_povider_info (PanelWindow *window,
   xfce_panel_plugin_provider_set_locked (XFCE_PANEL_PLUGIN_PROVIDER (provider),
                                          panel_window_get_locked (window));
 
-  if (base_window->background_alpha < 1.0)
+  if (PANEL_IS_PLUGIN_EXTERNAL (provider))
     {
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
-            base_window->background_alpha);
-    }
+      if (moving_to_other_panel || base_window->background_alpha < 1.0)
+        {
+          panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
+              base_window->background_alpha);
+        }
 
-  if (base_window->background_style == PANEL_BG_STYLE_COLOR)
-    {
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
-            base_window->background_color);
-    }
-  else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
-    {
-      if (PANEL_IS_PLUGIN_EXTERNAL (provider))
-        panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
-            base_window->background_image);
+      if (base_window->background_style == PANEL_BG_STYLE_COLOR)
+        {
+          panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
+              base_window->background_color);
+        }
+      else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
+        {
+          panel_plugin_external_set_background_image (PANEL_PLUGIN_EXTERNAL (provider),
+              base_window->background_image);
+        }
+      else if (moving_to_other_panel)
+        {
+          /* unset the background (PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET) */
+          panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider), NULL);
+        }
     }
 
   panel_window_set_plugin_orientation (provider, window);

@@ -669,7 +669,7 @@ panel_application_plugin_insert (PanelApplication  *application,
                         GTK_WIDGET (provider), position);
 
   /* send all the needed info about the panel to the plugin */
-  panel_window_set_povider_info (window, provider);
+  panel_window_set_povider_info (window, provider, FALSE);
 
   /* show the plugin */
   gtk_widget_show (provider);
@@ -907,7 +907,7 @@ panel_application_drag_data_received (PanelWindow      *window,
               panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, application->drop_index);
 
               /* send all the needed panel information to the plugin */
-              panel_window_set_povider_info (window, provider);
+              panel_window_set_povider_info (window, provider, TRUE);
             }
 
           /* everything went fine */
