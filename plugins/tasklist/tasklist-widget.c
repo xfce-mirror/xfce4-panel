@@ -876,8 +876,6 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
                                                     xfce_tasklist_size_sort_window);
         }
 
-      panel_return_if_fail (g_slist_length (windows_scored) == (guint) tasklist->n_windows);
-
       if (!tasklist->show_labels)
         max_button_length = min_button_length;
       else if (tasklist->max_button_length != -1)
