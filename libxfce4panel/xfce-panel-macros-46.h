@@ -420,6 +420,8 @@ G_BEGIN_DECLS
   _xpp_realize (XfcePanelPlugin *xpp, \
                 GtkPlug         *plug) \
   { \
+    GtkWidget *ebox; \
+    \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     g_return_if_fail (GTK_IS_PLUG (plug)); \
     g_return_if_fail (GTK_WIDGET_REALIZED (plug)); \
@@ -435,6 +437,10 @@ G_BEGIN_DECLS
         G_CALLBACK (_xpp_provider_signal), plug); \
     \
     ((XfcePanelPluginFunc) construct_func) (xpp); \
+    \
+    ebox = gtk_bin_get_child (GTK_BIN (xpp)); \
+    if (ebox != NULL && GTK_IS_EVENT_BOX (ebox)) \
+      gtk_event_box_set_visible_window (GTK_EVENT_BOX (ebox), FALSE); \
   } \
   \
   static gboolean \
