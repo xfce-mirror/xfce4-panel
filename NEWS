@@ -1,3 +1,30 @@
+4.8.1
+=====
+- Make the panels sticky for some window managers (bug #7130).
+- Fix assert when storing property values in xfconf (bug #7117).
+- Migrate monitor information (bug #7135).
+- Cache launcher menu tooltip pixbuf (bug #7146).
+- Reverse menu item insert order (bug #7102).
+- Set and restore a unique role name for windows (bug #7094).
+- Don't return a critical on a NULL dbus session.
+- Allocate 1x1 requests offscreen in the systray (bug #7143 and #7057).
+- Popup window menu under cursor on window button group menus.
+- Directly start the panel on the correct screen (bug #7161).
+- Move the panel menu to the correct screen (bug #7203).
+- Fix dragging panels to another screen.
+- Open plugin dialogs on same screen as plugin.
+- Sync hidden window and panel screen.
+- Show launcher add dialog on the same screen as parent.
+- Fix autohide direction based on orientation and edge.
+- Deactivate menu button if loading menu failed.
+- Don't double expose the panel's child widget (bug #6872).
+- Remove unneeded check (bug #7149).
+- Don't disappear when wm restarts with compositing (bug #7194).
+- Properly update the plugin background when moving to other panel.
+- Unset visible event window in 4.6 plugins.
+- Various small code cleanups and improved debug messages.
+- Translation updates (eu, fr, ja, lt, sv).
+
 4.8.0
 =====
 - Restart tray allocation if number of rows overflows (bug #7055).
