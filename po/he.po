@@ -2,7 +2,7 @@
 # Hebrew translations for xfce4-panel package.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-#
+# 
 # Dotan Kamber <kamberd@yahoo.com>, 2004, 2006.
 # Jonatan Perry <Jonatan443@walla.co.il>, 2004.
 # Yuval Tanny <tanai@int.gov.il>, 2004, 2006.
@@ -11,19 +11,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-01-31 23:11+0000\n"
 "PO-Revision-Date: 2010-12-06 10:14+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Generator: KBabel 1.11.2\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
 msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:2
@@ -37,7 +36,7 @@ msgid "Customize the panel"
 msgstr "התאמת לוח Xfce"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2247
 #: ../migrate/main.c:84
 #, fuzzy
 msgid "Panel"
@@ -48,12 +47,8 @@ msgid "_Read Online"
 msgstr "_קריאה מהרשת"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"ניתן לקרוא את ההוראות מהרשת. אולם הוראות אלה לא בהכרח תואמות את גירסת הלוח "
-"המותקנת."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "ניתן לקרוא את ההוראות מהרשת. אולם הוראות אלה לא בהכרח תואמות את גירסת הלוח המותקנת."
 
 #: ../common/panel-utils.c:158
 #, fuzzy
@@ -88,17 +83,17 @@ msgid "Pane_l"
 msgstr "לוח %d"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2259
 msgid "Add _New Items..."
 msgstr "הוספת פריטים _חדשים"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2270
 msgid "Panel Pr_eferences..."
 msgstr "ה_עדפות הלוח..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2286
 msgid "Log _Out"
 msgstr "י_ציאה"
 
@@ -199,47 +194,39 @@ msgstr "שליחת הודעת D-Bus נכשלה"
 
 #: ../panel/main.c:405
 #, fuzzy
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"האם לאתחל את הלוח של Xfce? אם כן, יש לשמור את ההרצה בעת היציאה, על מנת "
-"להבטיח שהלוח יאותחל אוטומטית בכניסה הבאה למערכת."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "האם לאתחל את הלוח של Xfce? אם כן, יש לשמור את ההרצה בעת היציאה, על מנת להבטיח שהלוח יאותחל אוטומטית בכניסה הבאה למערכת."
 
 #: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "לא נמצאה הרצה פעילה של %s"
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "הרצת יישום ההגירה נכשלה"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1464 ../plugins/actions/actions.c:413
 #, fuzzy
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
+msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "אם הפעלת את Xfce ללא מנהל הפעלה, פעולה זו תסגור את שרת ה־X."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1465 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "האם לצאת מהלוח?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1473 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "נכשלה הרצת \"%s\"."
 
-#: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+#: ../panel/panel-dbus-client.c:208
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:76
@@ -271,11 +258,8 @@ msgid "Panel %d"
 msgstr "לוח %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"מכיוון שהלוח רץ בתצורת קיוסק, אין לך הרשאה לשנות את תצורת הלוח כמשתמש רגיל."
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "מכיוון שהלוח רץ בתצורת קיוסק, אין לך הרשאה לשנות את תצורת הלוח כמשתמש רגיל."
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -305,13 +289,8 @@ msgstr ""
 
 #: ../panel/panel-plugin-external.c:422
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"התוסף אותחל מחדש יותר מפעם אחת במהלך %d שניות. לחיצה על \"הפעלה\" תגרום "
-"לאיתחול נוסף של התוסף, אחרת הוא יוסר לצמיתות מהלוח."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "התוסף אותחל מחדש יותר מפעם אחת במהלך %d שניות. לחיצה על \"הפעלה\" תגרום לאיתחול נוסף של התוסף, אחרת הוא יוסר לצמיתות מהלוח."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -377,9 +356,7 @@ msgstr "הוספת פריט חדש ללוח זה"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 #, fuzzy
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
 msgstr "ערך אלפא עובר רקע הלוח, בין 0 (שקוף) ל־100 (אטום)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -429,7 +406,8 @@ msgstr "_פריטים"
 msgid "L_ength (%):"
 msgstr "_אורך (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "מידות"
@@ -473,9 +451,7 @@ msgid "Select A Background Image"
 msgstr "בחירת תמונת רקע"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "הגדלה אוטומטית את אורכו של הלוח אם התוספים ידרשו מקום נוסף."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
@@ -483,16 +459,12 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr "פריסת הלוח בין מספר מסכים"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr "החבאת ידית הלוח ועיגונו. "
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "הסתרת ידיות הלוח ועיגונו. "
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"החבאת הלוח כאשר הסמן אינו עליו. אפשרות זו פועלת רק כאשר הלוח צמוד לקצה המסך."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "הסתרת הלוח כאשר הסמן אינו עליו. זה פעיל רק כאשר הלוח צמוד לקצה המסך."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -508,16 +480,12 @@ msgstr "פריסה על המסכים"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 #, fuzzy
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "שקיפות כאשר הסמן מרחף על הלוח."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 #, fuzzy
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "שקיפות כאשר הסמן מרחף על הלוח."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
@@ -589,12 +557,8 @@ msgid "Welcome to the first start of the panel"
 msgstr "ברוך בואך להרצה הראשונה של הלוח של Xfce"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"מכיוון שהלוח עבר למערכת חדשה לסידור ההגדרות, הוא חייב לטעון תצורה התחלתית "
-"חדשה."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "מכיוון שהלוח עבר למערכת חדשה לסידור ההגדרות, הוא חייב לטעון תצורה התחלתית חדשה."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -724,12 +688,8 @@ msgid "Select A Menu File"
 msgstr "בחירת קובץ תפריט"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"בחירה באפשרות זו תגרום להצגת שמות גנריים ליישומים בתפריט, למשל \"מנהל קבצים"
-"\" במקום \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "בחירה באפשרות זו תגרום להצגת שמות גנריים ליישומים בתפריט, למשל \"מנהל קבצים\" במקום \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -769,7 +729,7 @@ msgstr "בחירת סמל"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2272
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "נכשל ביצוע בפקודה \"%s\"."
@@ -861,7 +821,8 @@ msgstr "הצגת _שניות"
 msgid "F_ormat:"
 msgstr "ת_בנית:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "_ערפול:"
@@ -897,14 +858,8 @@ msgstr "הצג _סריג"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"התצורה מתארת את התאריך והשעה שיוכנסו לשם הקובץ. למשל, %Y יוחלף בשנה, %m "
-"בחודש ו־%d ביום. פרטים נוספים מופיעים בהוראות."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "התצורה מתארת את התאריך והשעה שיוכנסו לשם הקובץ. למשל, %Y יוחלף בשנה, %m בחודש ו־%d ביום. פרטים נוספים מופיעים בהוראות."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1192,10 +1147,7 @@ msgid "Show a directory tree in a menu"
 msgstr "הצגת עץ תיקיות בתפריט"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1287,9 +1239,7 @@ msgid "North"
 msgstr "צפון"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr "ביטול חלוניות צצות במיקום הסמן על לחצני הלוח או פריטי התפריט."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1344,9 +1294,7 @@ msgid "Number of _rows:"
 msgstr "מספר _שורות:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr "הצגת מראה מוקטן של משטחי העבודה עם יצוג של חלונות פתוחים"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1417,11 +1365,8 @@ msgstr "לא ניתן להתחיל את פעולת אזור ההתראות"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
-msgstr ""
-"כנראה שיישומון אחר השתלט על הפעילות של אזור ההתראות, ולכן לא יעשה בו שימוש."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "כנראה שיישומון אחר השתלט על הפעילות של אזור ההתראות, ולכן לא יעשה בו שימוש."
 
 #: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
@@ -1448,7 +1393,7 @@ msgstr "אזור ההתראות"
 msgid "_Maximum icon size (px):"
 msgstr ""
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
@@ -1536,23 +1481,23 @@ msgstr "ק_בוצות חלונות:"
 msgid "Window title"
 msgstr "כותרת החלון"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3010
 msgid "Mi_nimize All"
 msgstr "מי_זעור הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3019
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3025
 msgid "Ma_ximize All"
 msgstr "ה_גדלת הכול"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3034
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3044
 msgid "_Close All"
 msgstr "_סגירת הכל"
 
@@ -1650,18 +1595,14 @@ msgstr "מעבר בין חלונות בעזרת תפריט"
 #~ msgid "_Number of rows:"
 #~ msgstr "מספר _שורות:"
 
-#, fuzzy
 #~ msgid "_Restart"
 #~ msgstr "אתחל"
 
-#, fuzzy
 #~ msgid "Failed to open manual"
 #~ msgstr "כשל בהרצת \"%s\"."
 
-#, fuzzy
 #~ msgid "C_ompositing"
 #~ msgstr "מיקום"
 
-#, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "כפתורי פעולות"
