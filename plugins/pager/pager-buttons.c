@@ -390,8 +390,8 @@ pager_buttons_rebuild_idle (gpointer user_data)
           gtk_container_add (GTK_CONTAINER (button), label);
           gtk_widget_show (label);
 
-          row = n / rows;
-          col = n % rows;
+          row = n % cols;
+          col = n / cols;
 
           gtk_table_attach (GTK_TABLE (pager), button,
                             row, row + 1, col, col + 1,
@@ -426,8 +426,8 @@ pager_buttons_rebuild_idle (gpointer user_data)
 
           pager->buttons = g_slist_prepend (pager->buttons, button);
 
-          row = n / rows;
-          col = n % rows;
+          row = n % cols;
+          col = n / cols;
 
           gtk_table_attach (GTK_TABLE (pager), button,
                             row, row + 1, col, col + 1,
