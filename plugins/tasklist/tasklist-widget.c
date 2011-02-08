@@ -1376,6 +1376,9 @@ xfce_tasklist_connect_screen (XfceTasklist *tasklist)
       G_CALLBACK (xfce_tasklist_window_removed), tasklist);
   g_signal_connect (G_OBJECT (tasklist->screen), "viewports-changed",
       G_CALLBACK (xfce_tasklist_viewports_changed), tasklist);
+
+  /* update the viewport if not all monitors are shown */
+  xfce_tasklist_gdk_screen_changed (tasklist->gdk_screen, tasklist);
 }
 
 
