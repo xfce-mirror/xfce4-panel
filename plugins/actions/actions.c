@@ -164,6 +164,7 @@ actions_plugin_init (ActionsPlugin *plugin)
 {
   GtkWidget   *widget;
   ActionEntry *entry = &action_entries[ACTION_LOG_OUT_DIALOG];
+  AtkObject   *atkobj;
 
   plugin->first_action = ACTION_LOG_OUT_DIALOG;
   plugin->second_action = ACTION_DISABLED;
@@ -179,6 +180,10 @@ actions_plugin_init (ActionsPlugin *plugin)
   gtk_widget_set_tooltip_text (widget, _(entry->title));
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), widget);
   gtk_widget_show (widget);
+
+  atkobj = gtk_widget_get_accessible (widget);
+  if (atkobj != NULL)
+    atk_object_set_name (atkobj, _(entry->title));
 
   plugin->first_image = xfce_panel_image_new_from_source (entry->icon_name);
   gtk_container_add (GTK_CONTAINER (widget), plugin->first_image);
@@ -232,6 +237,7 @@ actions_plugin_set_property (GObject      *object,
 {
   ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (object);
   ActionType     action;
+  AtkObject     *atkobj;
 
   switch (prop_id)
     {
@@ -243,6 +249,10 @@ actions_plugin_set_property (GObject      *object,
       xfce_panel_image_set_from_source (
           XFCE_PANEL_IMAGE (plugin->first_image),
           action_entries[action].icon_name);
+
+      atkobj = gtk_widget_get_accessible (plugin->first_button);
+      if (atkobj != NULL)
+        atk_object_set_name (atkobj, _(action_entries[action].title));
       break;
 
     case PROP_SECOND_ACTION:
@@ -262,6 +272,10 @@ actions_plugin_set_property (GObject      *object,
           xfce_panel_image_set_from_source (
               XFCE_PANEL_IMAGE (plugin->second_image),
               action_entries[action].icon_name);
+
+          atkobj = gtk_widget_get_accessible (plugin->second_button);
+          if (atkobj != NULL)
+            atk_object_set_name (atkobj, _(action_entries[action].title));
         }
 
       /* update plugin size */

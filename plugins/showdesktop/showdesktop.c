@@ -177,7 +177,9 @@ static void
 show_desktop_plugin_toggled (GtkToggleButton   *button,
                              ShowDesktopPlugin *plugin)
 {
-  gboolean active;
+  gboolean     active;
+  AtkObject   *atkobj;
+  const gchar *text;
 
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
@@ -188,10 +190,19 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
   if (active != wnck_screen_get_showing_desktop (plugin->wnck_screen))
     wnck_screen_toggle_showing_desktop (plugin->wnck_screen, active);
 
-  /* update the tooltip */
-  gtk_widget_set_tooltip_text (GTK_WIDGET (button),
-      active ? _("Restore the minimized windows") :
-      _("Minimize all open windows and show the desktop"));
+  if (active)
+    text = _("Restore the minimized windows");
+  else
+    text = _("Minimize all open windows and show the desktop");
+
+  gtk_widget_set_tooltip_text (GTK_WIDGET (button), text);
+
+  atkobj = gtk_widget_get_accessible (GTK_WIDGET (button));
+  if (atkobj != NULL)
+    {
+      atk_object_set_name (atkobj, _("Show Desktop"));
+      atk_object_set_description (atkobj, text);
+    }
 }
 
 

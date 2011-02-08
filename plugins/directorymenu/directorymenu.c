@@ -226,6 +226,7 @@ directory_menu_plugin_set_property (GObject      *object,
   guint                 i;
   GFile                *base_directory;
   const gchar          *path;
+  AtkObject            *atkobj;
 
   switch (prop_id)
     {
@@ -242,6 +243,14 @@ directory_menu_plugin_set_property (GObject      *object,
 
       display_name = g_file_get_parse_name (plugin->base_directory);
       gtk_widget_set_tooltip_text (plugin->button, display_name);
+
+      atkobj = gtk_widget_get_accessible (plugin->button);
+      if (atkobj != NULL)
+        {
+          atk_object_set_name (atkobj, _("Directory Menu"));
+          atk_object_set_description (atkobj, display_name);
+        }
+
       g_free (display_name);
       break;
 
