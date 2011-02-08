@@ -13,18 +13,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-02-08 11:30+0000\n"
 "PO-Revision-Date: 2010-11-27 21:07+0800\n"
 "Last-Translator: Hunt Xu <huntxu@live.cn>\n"
 "Language-Team: Simplified Chinese <xfce-i18n@xfce.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
 msgstr "基于此 desktop 文件中的信息在面板上添加一个新的启动器"
 
 #: ../panel-desktop-handler.desktop.in.h:2
@@ -36,7 +35,7 @@ msgid "Customize the panel"
 msgstr "定制面板"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2247
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "面板"
@@ -46,9 +45,7 @@ msgid "_Read Online"
 msgstr "在线阅读(_R)"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr "你可以在线阅读用户手册。但本手册未必完全适合您当前面板的版本。"
 
 #: ../common/panel-utils.c:158
@@ -82,17 +79,17 @@ msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2259
 msgid "Add _New Items..."
 msgstr "添加新项目(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2270
 msgid "Panel Pr_eferences..."
 msgstr "面板属性(_E)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2286
 msgid "Log _Out"
 msgstr "登出(_O)"
 
@@ -192,48 +189,39 @@ msgid "Failed to send D-Bus message"
 msgstr "发送 D-Bus 信息失败"
 
 #: ../panel/main.c:405
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"您是否想启动面板程序？如果是的话，请在注销时确认您保存了当前的会话状态，如此"
-"面板程序将会在您下次登录时自动启动。"
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "您是否想启动面板程序？如果是的话，请在注销时确认您保存了当前的会话状态，如此面板程序将会在您下次登录时自动启动。"
 
 #: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "没有 %s 的运行实例被发现"
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "无法启动迁移程序"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
+#: ../panel/panel-application.c:1464 ../plugins/actions/actions.c:413
+msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "您没有使用任何的会话管理器来启动 X。点击退出将会关闭 X 服务器。"
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1465 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "你确认要退出面板程序吗？"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1473 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "无法执行命令 \"%s\""
 
-#: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+#: ../panel/panel-dbus-client.c:208
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "指定的插件事件语法不正确。请使用 插件名:事件名[:类型:值]。"
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"\"%s\" 不是一个有效类型。有效的类型包括 bool、double、int、string 和 uint。"
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "\"%s\" 不是一个有效类型。有效的类型包括 bool、double、int、string 和 uint。"
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -267,9 +255,7 @@ msgid "Panel %d"
 msgstr "面板 %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "因为面板运行于安全模式下，作为普通用户，您不被允许修改面板配置。"
 
 #: ../panel/panel-dialogs.c:185
@@ -300,13 +286,8 @@ msgstr "插件 \"%s\" 意外丢失，是否重新启动它？"
 
 #: ../panel/panel-plugin-external.c:422
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"此插件在过去的 %d 秒重启了不止一次。如果您点击运行，面板程序将会尝试重启该插"
-"件，否则，该插件将会永久从面板上移除。"
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "此插件在过去的 %d 秒重启了不止一次。如果您点击运行，面板程序将会尝试重启该插件，否则，该插件将会永久从面板上移除。"
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -371,9 +352,7 @@ msgid "Add new item to this panel"
 msgstr "添加新项目到面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
 msgstr "面板背景的阿尔法值，介于 0 (透明）和 100 (不透明）之间。"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -423,7 +402,8 @@ msgstr "项目(_M)"
 msgid "L_ength (%):"
 msgstr "长度(_E) (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "测量"
@@ -467,9 +447,7 @@ msgid "Select A Background Image"
 msgstr "选择一幅背景图片"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "选择此选项，当插件需要更多空间时，自动扩展面板长度。"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
@@ -477,17 +455,12 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr "选择此选项允许在多显示器中延伸面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
+msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "选择此选项以隐藏面板把手并锁定其位置。"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"选择该项允许在当鼠标指针不在面板上时隐藏面板。此选项只在面板被停靠在屏幕边缘"
-"时有效。"
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "选择该项允许在当鼠标指针不在面板上时隐藏面板。此选项只在面板被停靠在屏幕边缘时有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -502,20 +475,12 @@ msgid "Span mo_nitors"
 msgstr "跨显示器(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"当鼠标指针处在面板上时面板的透明度，介于 0(完全透明) 与 100(完全不透明) 之"
-"间。"
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "当鼠标指针处在面板上时面板的透明度，介于 0(完全透明) 与 100(完全不透明) 之间。"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr ""
-"当鼠标指针不处在面板上时面板的透明度，介于 0(完全透明) 与 100(完全不透明) 之"
-"间。"
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "当鼠标指针不处在面板上时面板的透明度，介于 0(完全透明) 与 100(完全不透明) 之间。"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -585,9 +550,7 @@ msgid "Welcome to the first start of the panel"
 msgstr "欢迎第一次启动 Xfce 面板程序"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr "因为该面板是从一个备份设置移动到新系统，它必须加载一个新的初始配置"
 
 #: ../migrate/main.c:83
@@ -718,12 +681,8 @@ msgid "Select A Menu File"
 msgstr "选择菜单文件"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"选择该项，将在菜单中显示通用程序名称，比如用 \"File Manager\" 而不是 \"Thunar"
-"\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "选择该项，将在菜单中显示通用程序名称，比如用 \"File Manager\" 而不是 \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -761,7 +720,7 @@ msgstr "选择图标"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2272
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "无法执行命令 \"%s\""
@@ -853,7 +812,8 @@ msgstr "显示秒(_S)"
 msgid "F_ormat:"
 msgstr "格式(_O)"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "模糊度(_U):"
@@ -889,15 +849,8 @@ msgstr "显示边框(_D)"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"描述要加入文件名中的日期和时间部分的格式字符串。例如，%Y 将被实际年份替"
-"换，%m 将被实际月份替换而 %d 将被实际日期替换。请查看日期工具的文档获取更多的"
-"信息。"
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "描述要加入文件名中的日期和时间部分的格式字符串。例如，%Y 将被实际年份替换，%m 将被实际月份替换而 %d 将被实际日期替换。请查看日期工具的文档获取更多的信息。"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1185,13 +1138,8 @@ msgid "Show a directory tree in a menu"
 msgstr "在菜单中显示目录树"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"输入一些用以决定某些文件是否在目录中可见的匹配模式。如果您需要指定多于一个匹"
-"配模式，各项之间需要用分号隔开 (例如 *.txt;*.doc)。"
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "输入一些用以决定某些文件是否在目录中可见的匹配模式。如果您需要指定多于一个匹配模式，各项之间需要用分号隔开 (例如 *.txt;*.doc)。"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1282,9 +1230,7 @@ msgid "North"
 msgstr "北"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr "选择这个选项，当移动到面板按钮或菜单项上时将不显示工具提示。"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1338,9 +1284,7 @@ msgid "Number of _rows:"
 msgstr "行数(_R):"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr "在工作区插件中显示缩小的矩形表示可见的窗口"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1411,9 +1355,7 @@ msgstr "无法启动通知区域"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "很可能同时有其它插件取代了通知区域的功能。通知区域将不被使用。"
 
 #: ../plugins/systray/systray.c:852
@@ -1439,9 +1381,9 @@ msgstr "系统提示区"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "最大图标尺寸 (像素) (_M):"
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "无法给屏幕 %d 安装提示区"
@@ -1495,14 +1437,12 @@ msgid "Show only _minimized windows"
 msgstr "只显示最小化的窗口(_M)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#, fuzzy
 msgid "Show windows from _all workspaces or viewports"
-msgstr "显示所有工作区窗口(_A)。"
+msgstr "显示所有工作区或 viewports 窗口(_A)。"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
 msgid "Show windows from all mo_nitors"
-msgstr "显示所有工作区窗口(_A)。"
+msgstr "显示所有屏幕窗口(_N)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -1529,23 +1469,23 @@ msgstr "窗口分组(_G):"
 msgid "Window title"
 msgstr "窗口标题"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3010
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3019
 msgid "Un_minimize All"
 msgstr "取消全部最小化(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3025
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3034
 msgid "_Unmaximize All"
 msgstr "取消全部最大化(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3044
 msgid "_Close All"
 msgstr "关闭所有(_C)"
 
