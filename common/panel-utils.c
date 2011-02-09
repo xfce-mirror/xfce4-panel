@@ -225,3 +225,37 @@ panel_utils_grab_available (void)
 
   return grab_succeed;
 }
+
+
+
+void
+panel_utils_set_atk_info (GtkWidget   *widget,
+                          const gchar *name,
+                          const gchar *description)
+{
+  static gboolean  initialized = FALSE;
+  static gboolean  atk_enabled = TRUE;
+  AtkObject       *object;
+
+  panel_return_if_fail (GTK_IS_WIDGET (widget));
+
+  if (atk_enabled)
+    {
+      object = gtk_widget_get_accessible (widget);
+
+      if (!initialized)
+        {
+          initialized = TRUE;
+          atk_enabled = GTK_IS_ACCESSIBLE (object);
+
+          if (!atk_enabled)
+            return;
+        }
+
+      if (name != NULL)
+        atk_object_set_name (object, name);
+
+      if (description != NULL)
+        atk_object_set_description (object, description);
+    }
+}

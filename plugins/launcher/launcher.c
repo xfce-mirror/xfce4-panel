@@ -34,6 +34,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-utils.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -341,7 +342,6 @@ static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
   GtkIconTheme *icon_theme;
-  AtkObject    *atkobj;
 
   plugin->disable_tooltips = FALSE;
   plugin->move_first = FALSE;
@@ -402,9 +402,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-leave",
       G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
 
-  atkobj = gtk_widget_get_accessible (plugin->arrow);
-  if (atkobj != NULL)
-    atk_object_set_name (atkobj, _("Open launcher menu"));
+  panel_utils_set_atk_info (plugin->arrow, _("Open launcher menu"), NULL);
 
   /* accept all sorts of drag data, but filter in drag-drop, so we can
    * send other sorts of drops to parent widgets */
@@ -1678,8 +1676,6 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
 {
   GarconMenuItem *item = NULL;
   const gchar    *icon_name;
-  AtkObject      *atkobj;
-  const gchar    *text;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
@@ -1708,17 +1704,9 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
       xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->child),
           exo_str_is_empty (icon_name) ? GTK_STOCK_MISSING_IMAGE : icon_name);
 
-      atkobj = gtk_widget_get_accessible (plugin->button);
-      if (atkobj != NULL)
-        {
-          text = garcon_menu_item_get_name (item);
-          if (text != NULL)
-            atk_object_set_name (atkobj, text);
-
-          text = garcon_menu_item_get_comment (item);
-          if (text != NULL)
-            atk_object_set_description (atkobj, text);
-        }
+      panel_utils_set_atk_info (plugin->button,
+          garcon_menu_item_get_name (item),
+          garcon_menu_item_get_comment (item));
     }
   else
     {

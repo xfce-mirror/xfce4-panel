@@ -23,6 +23,7 @@
 
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-private.h>
+#include <common/panel-utils.h>
 
 #include "showdesktop.h"
 
@@ -178,7 +179,6 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
                              ShowDesktopPlugin *plugin)
 {
   gboolean     active;
-  AtkObject   *atkobj;
   const gchar *text;
 
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
@@ -196,13 +196,7 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
     text = _("Minimize all open windows and show the desktop");
 
   gtk_widget_set_tooltip_text (GTK_WIDGET (button), text);
-
-  atkobj = gtk_widget_get_accessible (GTK_WIDGET (button));
-  if (atkobj != NULL)
-    {
-      atk_object_set_name (atkobj, _("Show Desktop"));
-      atk_object_set_description (atkobj, text);
-    }
+  panel_utils_set_atk_info (GTK_WIDGET (button), _("Show Desktop"), text);
 }
 
 

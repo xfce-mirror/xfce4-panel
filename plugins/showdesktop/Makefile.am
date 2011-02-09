@@ -29,12 +29,14 @@ libshowdesktop_la_LDFLAGS = \
 
 libshowdesktop_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
+	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBWNCK_LIBS)
 
 libshowdesktop_la_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
+	$(top_builddir)/common/libpanel-common.la
 
 #
 # .desktop file
