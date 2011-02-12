@@ -5,7 +5,7 @@ INCLUDES = \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
-wrapperdir = $(libdir)/xfce4/panel
+wrapperdir = $(HELPER_PATH_PREFIX)/xfce4/panel
 
 wrapper_PROGRAMS = \
 	wrapper

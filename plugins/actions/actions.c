@@ -11,9 +11,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU Library General Public License
- * along with this library; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
 #ifdef HAVE_CONFIG_H
@@ -180,6 +180,8 @@ actions_plugin_init (ActionsPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), widget);
   gtk_widget_show (widget);
 
+  panel_utils_set_atk_info (widget, _(entry->title), NULL);
+
   plugin->first_image = xfce_panel_image_new_from_source (entry->icon_name);
   gtk_container_add (GTK_CONTAINER (widget), plugin->first_image);
   gtk_widget_show (plugin->first_image);
@@ -243,6 +245,9 @@ actions_plugin_set_property (GObject      *object,
       xfce_panel_image_set_from_source (
           XFCE_PANEL_IMAGE (plugin->first_image),
           action_entries[action].icon_name);
+
+      panel_utils_set_atk_info (plugin->first_button,
+          _(action_entries[action].title), NULL);
       break;
 
     case PROP_SECOND_ACTION:
@@ -262,6 +267,9 @@ actions_plugin_set_property (GObject      *object,
           xfce_panel_image_set_from_source (
               XFCE_PANEL_IMAGE (plugin->second_image),
               action_entries[action].icon_name);
+
+          panel_utils_set_atk_info (plugin->second_button,
+              _(action_entries[action].title), NULL);
         }
 
       /* update plugin size */

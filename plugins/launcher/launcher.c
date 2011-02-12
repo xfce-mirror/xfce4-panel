@@ -11,9 +11,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU Library General Public License
- * along with this library; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
 #ifdef HAVE_CONFIG_H
@@ -34,6 +34,7 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
+#include <common/panel-utils.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -384,8 +385,6 @@ launcher_plugin_init (LauncherPlugin *plugin)
   g_signal_connect_after (G_OBJECT (plugin->button), "expose-event",
       G_CALLBACK (launcher_plugin_button_expose_event), plugin);
 
-
-
   plugin->child = xfce_panel_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
 
@@ -402,6 +401,8 @@ launcher_plugin_init (LauncherPlugin *plugin)
       G_CALLBACK (launcher_plugin_button_drag_drop), plugin);
   g_signal_connect (G_OBJECT (plugin->arrow), "drag-leave",
       G_CALLBACK (launcher_plugin_arrow_drag_leave), plugin);
+
+  panel_utils_set_atk_info (plugin->arrow, _("Open launcher menu"), NULL);
 
   /* accept all sorts of drag data, but filter in drag-drop, so we can
    * send other sorts of drops to parent widgets */
@@ -1702,6 +1703,10 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
       icon_name = garcon_menu_item_get_icon_name (item);
       xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->child),
           exo_str_is_empty (icon_name) ? GTK_STOCK_MISSING_IMAGE : icon_name);
+
+      panel_utils_set_atk_info (plugin->button,
+          garcon_menu_item_get_name (item),
+          garcon_menu_item_get_comment (item));
     }
   else
     {

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 23:09+0000\n"
+"POT-Creation-Date: 2011-02-01 11:10+0000\n"
 "PO-Revision-Date: 2010-10-17 17:45+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -32,7 +32,7 @@ msgid "Customize the panel"
 msgstr "Anpassa panelen"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2247
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
@@ -76,17 +76,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2259
 msgid "Add _New Items..."
 msgstr "Lägg till _nya objekt..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2270
 msgid "Panel Pr_eferences..."
 msgstr "Panelinstä_llningar..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2286
 msgid "Log _Out"
 msgstr "Logga _ut"
 
@@ -197,28 +197,28 @@ msgstr "Vill du starta om panelen? Om du gör det så försäkra dig om att du s
 msgid "No running instance of %s was found"
 msgstr "Ingen körande instans av %s hittades"
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "Misslyckades med att starta migreringsprogrammet"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1464 ../plugins/actions/actions.c:413
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Du har startat X utan en sessionshanterare. Klicka på Avsluta för att stänga X-servern."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1465 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr "Är du säker på att du vill avsluta panelen?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1473 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kunde inte köra kommandot \"%s\""
 
-#: ../panel/panel-dbus-client.c:209
+#: ../panel/panel-dbus-client.c:208
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
@@ -555,7 +555,7 @@ msgstr ""
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Välj nedan vilken konfiguration som du vill ha för första uppstarten."
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
@@ -582,14 +582,12 @@ msgid "Start with one empty panel"
 msgstr "Starta med en tom panel"
 
 #: ../migrate/main.c:115
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Spara panelkonfigurationen"
+msgstr "Misslyckades med att migrera den gamla panelkonfigurationen"
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Spara panelkonfigurationen"
+msgstr "Misslyckades med att läsa in standardkonfigurationen"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -722,7 +720,7 @@ msgstr "Välj en ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2272
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunde inte köra kommandot \"%s\"."
@@ -1393,7 +1391,7 @@ msgstr "Notifieringsfält"
 msgid "_Maximum icon size (px):"
 msgstr ""
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Misslyckades med att komma över hanterarvalet för skärm %d"
@@ -1479,23 +1477,23 @@ msgstr "Fönster_gruppering:"
 msgid "Window title"
 msgstr "Fönstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3010
 msgid "Mi_nimize All"
 msgstr "Mi_nimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3019
 msgid "Un_minimize All"
 msgstr "Av_minimera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3025
 msgid "Ma_ximize All"
 msgstr "Ma_ximera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3034
 msgid "_Unmaximize All"
 msgstr "Avmax_imera alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3044
 msgid "_Close All"
 msgstr "S_täng alla"
 

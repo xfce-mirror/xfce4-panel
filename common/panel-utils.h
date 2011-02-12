@@ -38,4 +38,8 @@ void        panel_utils_show_help      (GtkWindow        *parent,
 
 gboolean    panel_utils_grab_available (void);
 
+void        panel_utils_set_atk_info   (GtkWidget        *widget,
+                                        const gchar      *name,
+                                        const gchar      *description);
+
 #endif /* !__PANEL_BUILDER_H__ */

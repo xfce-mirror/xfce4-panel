@@ -11,9 +11,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU Library General Public License
- * along with this library; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
 #ifdef HAVE_CONFIG_H
@@ -224,4 +224,38 @@ panel_utils_grab_available (void)
     }
 
   return grab_succeed;
+}
+
+
+
+void
+panel_utils_set_atk_info (GtkWidget   *widget,
+                          const gchar *name,
+                          const gchar *description)
+{
+  static gboolean  initialized = FALSE;
+  static gboolean  atk_enabled = TRUE;
+  AtkObject       *object;
+
+  panel_return_if_fail (GTK_IS_WIDGET (widget));
+
+  if (atk_enabled)
+    {
+      object = gtk_widget_get_accessible (widget);
+
+      if (!initialized)
+        {
+          initialized = TRUE;
+          atk_enabled = GTK_IS_ACCESSIBLE (object);
+
+          if (!atk_enabled)
+            return;
+        }
+
+      if (name != NULL)
+        atk_object_set_name (object, name);
+
+      if (description != NULL)
+        atk_object_set_description (object, description);
+    }
 }

@@ -12,9 +12,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU Library General Public License
- * along with this library; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
 #ifdef HAVE_CONFIG_H
@@ -23,6 +23,7 @@
 
 #include <libxfce4util/libxfce4util.h>
 #include <common/panel-private.h>
+#include <common/panel-utils.h>
 
 #include "showdesktop.h"
 
@@ -177,7 +178,8 @@ static void
 show_desktop_plugin_toggled (GtkToggleButton   *button,
                              ShowDesktopPlugin *plugin)
 {
-  gboolean active;
+  gboolean     active;
+  const gchar *text;
 
   panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
@@ -188,10 +190,13 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
   if (active != wnck_screen_get_showing_desktop (plugin->wnck_screen))
     wnck_screen_toggle_showing_desktop (plugin->wnck_screen, active);
 
-  /* update the tooltip */
-  gtk_widget_set_tooltip_text (GTK_WIDGET (button),
-      active ? _("Restore the minimized windows") :
-      _("Minimize all open windows and show the desktop"));
+  if (active)
+    text = _("Restore the minimized windows");
+  else
+    text = _("Minimize all open windows and show the desktop");
+
+  gtk_widget_set_tooltip_text (GTK_WIDGET (button), text);
+  panel_utils_set_atk_info (GTK_WIDGET (button), _("Show Desktop"), text);
 }
 
 
