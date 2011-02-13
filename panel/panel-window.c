@@ -1720,8 +1720,20 @@ panel_window_display_layout_debug (GtkWidget *widget)
   for (n = 0; n < n_screens; n++)
     {
       screen = gdk_display_get_screen (display, n);
-      g_string_append_printf (str, "screen-%d[%p]=[%d,%d] (", n, screen,
+      g_string_append_printf (str, "screen-%d[%p]=[%d,%d]", n, screen,
           gdk_screen_get_width (screen), gdk_screen_get_height (screen));
+
+      if (panel_debug_has_domain (PANEL_DEBUG_DISPLAY_LAYOUT))
+        {
+          g_string_append_printf (str, "{comp=%s, sys=%p:%p, rgba=%p:%p}",
+              PANEL_DEBUG_BOOL (gdk_screen_is_composited (screen)),
+              gdk_screen_get_system_colormap (screen),
+              gdk_screen_get_system_visual (screen),
+              gdk_screen_get_rgba_colormap (screen),
+              gdk_screen_get_rgba_visual (screen));
+        }
+
+      str = g_string_append (str, " (");
 
       n_monitors = gdk_screen_get_n_monitors (screen);
       for (m = 0; m < n_monitors; m++)
@@ -1746,8 +1758,10 @@ panel_window_display_layout_debug (GtkWidget *widget)
     }
 
   panel_debug (PANEL_DEBUG_DISPLAY_LAYOUT,
-               "%p: display=%s, %s", widget,
-               gdk_display_get_name (display), str->str);
+               "%p: display=%s{comp=%s}, %s", widget,
+               gdk_display_get_name (display),
+               PANEL_DEBUG_BOOL (gdk_display_supports_composite (display)),
+               str->str);
 
   g_string_free (str, TRUE);
 }
