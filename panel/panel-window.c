@@ -2467,6 +2467,7 @@ panel_window_new (GdkScreen *screen)
                        "screen", screen,
                        "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
                        "gravity", GDK_GRAVITY_STATIC,
+                       "role", "Panel",
                        "name", "XfcePanelWindow",
                        NULL);
 }
