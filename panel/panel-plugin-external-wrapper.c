@@ -51,7 +51,7 @@
 
 
 
-#define WRAPPER_BIN HELPERDIR G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "wrapper"
+#define WRAPPER_BIN HELPERDIR G_DIR_SEPARATOR_S "wrapper"
 
 
 
