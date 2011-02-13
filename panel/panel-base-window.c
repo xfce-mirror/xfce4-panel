@@ -223,9 +223,8 @@ panel_base_window_init (PanelBaseWindow *window)
     }
 
    panel_debug (PANEL_DEBUG_BASE_WINDOW,
-               "%p: rgba colormap=%s, compositing=%s", window,
-               PANEL_DEBUG_BOOL (colormap != NULL),
-               PANEL_DEBUG_BOOL (window->is_composited));
+               "%p: rgba colormap=%p, compositing=%s", window,
+               colormap, PANEL_DEBUG_BOOL (window->is_composited));
 }
 
 
