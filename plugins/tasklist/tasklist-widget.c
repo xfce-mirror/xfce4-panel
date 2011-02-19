@@ -2614,6 +2614,8 @@ xfce_tasklist_button_enter_notify_event_disconnected (gpointer  data,
    * proxy dies */
   g_signal_handlers_disconnect_by_func (child->window,
       xfce_tasklist_button_geometry_changed, child);
+
+  g_object_unref (G_OBJECT (child->window));
 }
 
 
@@ -2631,6 +2633,7 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   panel_return_val_if_fail (child->type == CHILD_TYPE_OVERFLOW_MENU
                             || child->type == CHILD_TYPE_GROUP_MENU, NULL);
   panel_return_val_if_fail (GTK_IS_LABEL (child->label), NULL);
+  panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), NULL);
 
   mi = gtk_image_menu_item_new ();
   exo_binding_new (G_OBJECT (child->label), "label", G_OBJECT (mi), "label");
@@ -2652,6 +2655,7 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
 
   if (allow_wireframe)
     {
+      g_object_ref (G_OBJECT (child->window));
       g_signal_connect_data (G_OBJECT (mi), "enter-notify-event",
           G_CALLBACK (xfce_tasklist_button_enter_notify_event), child,
           xfce_tasklist_button_enter_notify_event_disconnected, 0);
