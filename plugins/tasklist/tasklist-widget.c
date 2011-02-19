@@ -2557,13 +2557,7 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
       return TRUE;
     }
 
-  if (event->button == 1)
-    {
-      xfce_tasklist_button_activate (child, event->time);
-
-      return TRUE;
-    }
-  else if (event->button == 3)
+  if (event->button == 3)
     {
       menu = wnck_action_menu_new (child->window);
       g_signal_connect (G_OBJECT (menu), "selection-done",
@@ -2577,6 +2571,29 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
                       event->time);
 
       return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static gboolean
+xfce_tasklist_button_button_release_event (GtkWidget         *button,
+                                           GdkEventButton    *event,
+                                           XfceTasklistChild *child)
+{
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
+  panel_return_val_if_fail (child->type != CHILD_TYPE_GROUP, FALSE);
+
+  /* only respond to in-button events */
+  if (event->type == GDK_BUTTON_RELEASE
+      && !xfce_taskbar_is_locked (child->tasklist)
+      && event->button == 1
+      && event->x > 0 && event->x < button->allocation.width
+      && event->y > 0 && event->y < button->allocation.width)
+    {
+      xfce_tasklist_button_activate (child, event->time);
     }
 
   return FALSE;
@@ -2841,6 +2858,8 @@ xfce_tasklist_button_new (WnckWindow   *window,
       G_CALLBACK (xfce_tasklist_button_enter_notify_event), child);
   g_signal_connect (G_OBJECT (child->button), "button-press-event",
       G_CALLBACK (xfce_tasklist_button_button_press_event), child);
+  g_signal_connect (G_OBJECT (child->button), "button-release-event",
+      G_CALLBACK (xfce_tasklist_button_button_release_event), child);
 
   /* monitor window changes */
   g_signal_connect (G_OBJECT (window), "icon-changed",
