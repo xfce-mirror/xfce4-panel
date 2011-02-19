@@ -1887,19 +1887,31 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
                                  gint               y,
                                  guint              timestamp)
 {
+  GtkWidget *dnd_widget;
+
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
 
-  child->motion_timestamp = timestamp;
-  if (child->motion_timeout_id == 0
-      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (child->button)))
+  /* don't respond to dragging our own children or panel plugins */
+  dnd_widget = gtk_drag_get_source_widget (context);
+  if (dnd_widget == NULL
+      || gtk_widget_get_parent (dnd_widget) != GTK_WIDGET (child->tasklist)
+      || XFCE_IS_PANEL_PLUGIN (dnd_widget))
     {
-      child->motion_timeout_id = g_timeout_add_full (G_PRIORITY_LOW, DRAG_ACTIVATE_TIMEOUT,
-                                                     xfce_tasklist_child_drag_motion_timeout, child,
-                                                     xfce_tasklist_child_drag_motion_timeout_destroyed);
-    }
+      child->motion_timestamp = timestamp;
+      if (child->motion_timeout_id == 0
+          && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (child->button)))
+        {
+          child->motion_timeout_id = g_timeout_add_full (G_PRIORITY_LOW, DRAG_ACTIVATE_TIMEOUT,
+                                                         xfce_tasklist_child_drag_motion_timeout, child,
+                                                         xfce_tasklist_child_drag_motion_timeout_destroyed);
+        }
 
-  /* keep emitting the signal */
-  gdk_drag_status (context, 0, timestamp);
+      /* keep emitting the signal */
+      gdk_drag_status (context, 0, timestamp);
+
+      /* we want to receive leave signal as well */
+      return TRUE;
+    }
 
   /* also send drag-motion to other widgets */
   return FALSE;
