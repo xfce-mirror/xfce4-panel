@@ -1894,8 +1894,8 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
   /* don't respond to dragging our own children or panel plugins */
   dnd_widget = gtk_drag_get_source_widget (context);
   if (dnd_widget == NULL
-      || gtk_widget_get_parent (dnd_widget) != GTK_WIDGET (child->tasklist)
-      || XFCE_IS_PANEL_PLUGIN (dnd_widget))
+      || (gtk_widget_get_parent (dnd_widget) != GTK_WIDGET (child->tasklist)
+           && !XFCE_IS_PANEL_PLUGIN (dnd_widget)))
     {
       child->motion_timestamp = timestamp;
       if (child->motion_timeout_id == 0
