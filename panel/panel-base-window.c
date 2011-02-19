@@ -45,6 +45,8 @@ static void     panel_base_window_set_property                (GObject          
                                                                const GValue         *value,
                                                                GParamSpec           *pspec);
 static void     panel_base_window_finalize                    (GObject              *object);
+static void     panel_base_window_screen_changed              (GtkWidget            *widget,
+                                                               GdkScreen            *previous_screen);
 static gboolean panel_base_window_expose_event                (GtkWidget            *widget,
                                                                GdkEventExpose       *event);
 static gboolean panel_base_window_enter_notify_event          (GtkWidget            *widget,
@@ -119,6 +121,7 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
   gtkwidget_class->enter_notify_event = panel_base_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_base_window_leave_notify_event;
   gtkwidget_class->composited_changed = panel_base_window_composited_changed;
+  gtkwidget_class->screen_changed = panel_base_window_screen_changed;
 
   g_object_class_install_property (gobject_class,
                                    PROP_ENTER_OPACITY,
@@ -192,9 +195,6 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 static void
 panel_base_window_init (PanelBaseWindow *window)
 {
-  GdkColormap *colormap;
-  GdkScreen   *screen;
-
   window->priv = G_TYPE_INSTANCE_GET_PRIVATE (window, PANEL_TYPE_BASE_WINDOW, PanelBaseWindowPrivate);
 
   window->is_composited = FALSE;
@@ -212,19 +212,6 @@ panel_base_window_init (PanelBaseWindow *window)
   /* some wm require stick to show the window on all workspaces, on xfwm4
    * the type-hint already takes care of that */
   gtk_window_stick (GTK_WINDOW (window));
-
-  /* set the rgba colormap if supported by the screen */
-  screen = gtk_window_get_screen (GTK_WINDOW (window));
-  colormap = gdk_screen_get_rgba_colormap (screen);
-  if (colormap != NULL)
-    {
-      gtk_widget_set_colormap (GTK_WIDGET (window), colormap);
-      window->is_composited = gtk_widget_is_composited (GTK_WIDGET (window));
-    }
-
-   panel_debug (PANEL_DEBUG_BASE_WINDOW,
-               "%p: rgba colormap=%p, compositing=%s", window,
-               colormap, PANEL_DEBUG_BOOL (window->is_composited));
 }
 
 
@@ -447,6 +434,32 @@ panel_base_window_finalize (GObject *object)
 
 
 
+static void
+panel_base_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen)
+{
+  PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
+  GdkColormap     *colormap;
+  GdkScreen       *screen;
+
+  if (GTK_WIDGET_CLASS (panel_base_window_parent_class)->screen_changed != NULL)
+    GTK_WIDGET_CLASS (panel_base_window_parent_class)->screen_changed (widget, previous_screen);
+
+  /* set the rgba colormap if supported by the screen */
+  screen = gtk_window_get_screen (GTK_WINDOW (window));
+  colormap = gdk_screen_get_rgba_colormap (screen);
+  if (colormap != NULL)
+    {
+      gtk_widget_set_colormap (widget, colormap);
+      window->is_composited = gtk_widget_is_composited (widget);
+    }
+
+   panel_debug (PANEL_DEBUG_BASE_WINDOW,
+               "%p: rgba colormap=%p, compositing=%s", window,
+               colormap, PANEL_DEBUG_BOOL (window->is_composited));
+}
+
+
+
 static gboolean
 panel_base_window_expose_event (GtkWidget      *widget,
                                 GdkEventExpose *event)
@@ -660,6 +673,9 @@ panel_base_window_composited_changed (GtkWidget *widget)
 
   /* set new compositing state */
   window->is_composited = gtk_widget_is_composited (widget);
+  if (window->is_composited ==  was_composited)
+    return;
+
   if (window->is_composited)
     gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->leave_opacity);
 

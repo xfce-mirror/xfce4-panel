@@ -1341,6 +1341,9 @@ panel_window_screen_changed (GtkWidget *widget,
   PanelWindow *window = PANEL_WINDOW (widget);
   GdkScreen   *screen;
 
+  if (G_LIKELY (GTK_WIDGET_CLASS (panel_window_parent_class)->screen_changed != NULL))
+    GTK_WIDGET_CLASS (panel_window_parent_class)->screen_changed (widget, previous_screen);
+
   /* get the new screen */
   screen = gtk_window_get_screen (GTK_WINDOW (widget));
   panel_return_if_fail (GDK_IS_SCREEN (screen));
