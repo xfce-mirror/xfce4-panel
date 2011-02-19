@@ -397,7 +397,7 @@ dbus_return:
       if (error->code == DBUS_GERROR_NAME_HAS_NO_OWNER)
         {
           /* normally start the panel */
-          if (opt_preferences >= 0)
+          if (opt_preferences >= 0 || opt_restart)
             {
               g_clear_error (&error);
 
