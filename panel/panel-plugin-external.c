@@ -68,8 +68,7 @@ static void         panel_plugin_external_plug_added              (GtkSocket    
 static gboolean     panel_plugin_external_plug_removed            (GtkSocket                        *socket);
 static gboolean     panel_plugin_external_child_ask_restart       (PanelPluginExternal              *external);
 static void         panel_plugin_external_child_spawn             (PanelPluginExternal              *external);
-static gboolean     panel_plugin_external_child_respawn           (gpointer                          user_data);
-static void         panel_plugin_external_child_respawn_destroyed (gpointer                          user_data);
+static void         panel_plugin_external_child_respawn_schedule  (PanelPluginExternal              *external);
 static void         panel_plugin_external_child_watch             (GPid                              pid,
                                                                    gint                              status,
                                                                    gpointer                          user_data);
@@ -339,6 +338,13 @@ panel_plugin_external_realize (GtkWidget *widget)
         g_source_remove (external->priv->spawn_timeout_id);
 
       panel_plugin_external_child_spawn (external);
+    }
+  else
+    {
+      /* the child was asked to quit during unrealize and there is
+       * still an pid, so wait for the child to quit and then
+       * spawn it again */
+      panel_plugin_external_child_respawn_schedule (external);
     }
 }
 
@@ -619,7 +625,8 @@ panel_plugin_external_child_respawn (gpointer user_data)
     return FALSE;
 
   /* delay startup if the old child is still embedded */
-  if (external->priv->embedded)
+  if (external->priv->embedded
+      || external->priv->pid != 0)
     {
       panel_debug (PANEL_DEBUG_EXTERNAL,
                    "%s-%d: still a child embedded, respawn delayed",
@@ -651,6 +658,25 @@ panel_plugin_external_child_respawn_destroyed (gpointer user_data)
 
 
 static void
+panel_plugin_external_child_respawn_schedule (PanelPluginExternal *external)
+{
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  if (external->priv->spawn_timeout_id == 0)
+    {
+      panel_debug (PANEL_DEBUG_EXTERNAL,
+                   "%s-%d: scheduled a respawn of the child",
+                   panel_module_get_name (external->module), external->unique_id);
+
+      /* schedule a restart timeout */
+      external->priv->spawn_timeout_id = g_timeout_add_full (G_PRIORITY_LOW, 100, panel_plugin_external_child_respawn,
+                                                             external, panel_plugin_external_child_respawn_destroyed);
+    }
+}
+
+
+
+static void
 panel_plugin_external_child_watch (GPid     pid,
                                    gint     status,
                                    gpointer user_data)
@@ -661,7 +687,9 @@ panel_plugin_external_child_watch (GPid     pid,
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
   panel_return_if_fail (external->priv->pid == pid);
 
+  /* reset the pid, it can't be embedded as well */
   external->priv->pid = 0;
+  external->priv->embedded = FALSE;
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
                "%s-%d: child exited with status %d",
@@ -715,16 +743,9 @@ panel_plugin_external_child_watch (GPid     pid,
     }
 
   if (GTK_WIDGET_REALIZED (external)
-      && external->priv->spawn_timeout_id == 0
       && (auto_restart || panel_plugin_external_child_ask_restart (external)))
     {
-       panel_debug (PANEL_DEBUG_EXTERNAL,
-                    "%s-%d: scheduled a respawn of the child",
-                    panel_module_get_name (external->module), external->unique_id);
-
-       /* schedule a restart timeout */
-       external->priv->spawn_timeout_id = g_timeout_add_full (G_PRIORITY_LOW, 100, panel_plugin_external_child_respawn,
-                                                              external, panel_plugin_external_child_respawn_destroyed);
+      panel_plugin_external_child_respawn_schedule (external);
     }
 
 close_pid:
