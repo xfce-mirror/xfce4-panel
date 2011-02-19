@@ -2819,8 +2819,23 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
                                  XfceTasklistChild *child)
 {
   GdkPixbuf *pixbuf;
+  GdkPixmap *pixmap;
 
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
+
+  if (child->tasklist->show_labels)
+    {
+      pixmap = gtk_widget_get_snapshot (button, NULL);
+      if (pixmap != NULL)
+        {
+          gtk_drag_set_icon_pixmap (context,
+              gdk_drawable_get_colormap (GDK_DRAWABLE (pixmap)),
+              pixmap, NULL, 0, 0);
+          g_object_unref (G_OBJECT (pixmap));
+
+          return;
+        }
+    }
 
   pixbuf = wnck_window_get_icon (child->window);
   if (G_LIKELY (pixbuf != NULL))
