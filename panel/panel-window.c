@@ -128,15 +128,14 @@ static void         panel_window_set_autohide               (PanelWindow      *w
                                                              gboolean          autohide);
 static void         panel_window_menu_popup                 (PanelWindow      *window,
                                                              guint32           event_time);
-static void         panel_window_update_plugins             (PanelWindow      *window,
+static void         panel_window_plugins_update             (PanelWindow      *window,
                                                              PluginProp        prop);
-static void         panel_window_set_plugin_orientation     (GtkWidget        *widget,
+static void         panel_window_plugin_set_orientation     (GtkWidget        *widget,
                                                              gpointer          user_data);
-static void         panel_window_set_plugin_size            (GtkWidget        *widget,
+static void         panel_window_plugin_set_size            (GtkWidget        *widget,
                                                              gpointer          user_data);
-static void         panel_window_set_plugin_screen_position (GtkWidget        *widget,
+static void         panel_window_plugin_set_screen_position (GtkWidget        *widget,
                                                              gpointer          user_data);
-
 
 
 enum
@@ -548,8 +547,8 @@ panel_window_set_property (GObject      *object,
         }
 
       /* send the new orientation and screen position to the panel plugins */
-      panel_window_update_plugins (window, PLUGIN_PROP_ORIENTATION);
-      panel_window_update_plugins (window, PLUGIN_PROP_SCREEN_POSITION);
+      panel_window_plugins_update (window, PLUGIN_PROP_ORIENTATION);
+      panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
       break;
 
     case PROP_SIZE:
@@ -561,7 +560,7 @@ panel_window_set_property (GObject      *object,
         }
 
       /* send the new size to the panel plugins */
-      panel_window_update_plugins (window, PLUGIN_PROP_SIZE);
+      panel_window_plugins_update (window, PLUGIN_PROP_SIZE);
       break;
 
     case PROP_LENGTH:
@@ -635,7 +634,7 @@ panel_window_set_property (GObject      *object,
           panel_window_screen_layout_changed (window->screen, window);
 
           /* send the new screen position to the panel plugins */
-          panel_window_update_plugins (window, PLUGIN_PROP_SCREEN_POSITION);
+          panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
         }
       else
         {
@@ -1007,7 +1006,7 @@ panel_window_button_release_event (GtkWidget      *widget,
       g_object_notify (G_OBJECT (widget), "position");
 
       /* send the new screen position to the panel plugins */
-      panel_window_update_plugins (window, PLUGIN_PROP_SCREEN_POSITION);
+      panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
 
       return TRUE;
     }
@@ -2332,7 +2331,7 @@ panel_window_menu_popup (PanelWindow *window,
 
 
 static void
-panel_window_update_plugins (PanelWindow *window,
+panel_window_plugins_update (PanelWindow *window,
                              PluginProp   prop)
 {
   GtkWidget   *itembar;
@@ -2343,15 +2342,16 @@ panel_window_update_plugins (PanelWindow *window,
   switch (prop)
     {
     case PLUGIN_PROP_ORIENTATION:
-      func = panel_window_set_plugin_orientation;
+      func = panel_window_plugin_set_orientation;
       break;
 
     case PLUGIN_PROP_SCREEN_POSITION:
-      func = panel_window_set_plugin_screen_position;
+      func = panel_window_plugin_set_screen_position;
       break;
 
     case PLUGIN_PROP_SIZE:
-      func = panel_window_set_plugin_size;
+      func = panel_window_plugin_set_size;
+      break;
       break;
 
     default:
@@ -2370,7 +2370,7 @@ panel_window_update_plugins (PanelWindow *window,
 
 
 static void
-panel_window_set_plugin_orientation (GtkWidget *widget,
+panel_window_plugin_set_orientation (GtkWidget *widget,
                                      gpointer   user_data)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
@@ -2384,7 +2384,7 @@ panel_window_set_plugin_orientation (GtkWidget *widget,
 
 
 static void
-panel_window_set_plugin_size (GtkWidget *widget,
+panel_window_plugin_set_size (GtkWidget *widget,
                               gpointer   user_data)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
@@ -2397,7 +2397,7 @@ panel_window_set_plugin_size (GtkWidget *widget,
 
 
 static void
-panel_window_set_plugin_screen_position (GtkWidget *widget,
+panel_window_plugin_set_screen_position (GtkWidget *widget,
                                          gpointer   user_data)
 {
   PanelWindow        *window = PANEL_WINDOW (user_data);
@@ -2526,9 +2526,9 @@ panel_window_set_povider_info (PanelWindow *window,
         }
     }
 
-  panel_window_set_plugin_orientation (provider, window);
-  panel_window_set_plugin_screen_position (provider, window);
-  panel_window_set_plugin_size (provider, window);
+  panel_window_plugin_set_orientation (provider, window);
+  panel_window_plugin_set_screen_position (provider, window);
+  panel_window_plugin_set_size (provider, window);
 }
 
 
