@@ -2590,8 +2590,9 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
   if (event->type == GDK_BUTTON_RELEASE
       && !xfce_taskbar_is_locked (child->tasklist)
       && event->button == 1
-      && event->x > 0 && event->x < button->allocation.width
-      && event->y > 0 && event->y < button->allocation.height)
+      && !(event->x == 0 && event->y == 0) /* 0,0 = outside the widget in Gtk */
+      && event->x >= 0 && event->x < button->allocation.width
+      && event->y >= 0 && event->y < button->allocation.height)
     {
       xfce_tasklist_button_activate (child, event->time);
     }
