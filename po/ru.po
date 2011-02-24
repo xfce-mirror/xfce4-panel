@@ -6,24 +6,23 @@
 # Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006.
 # Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006-2008.
 # Denis Koryavov <dkoryavov@yandex.ru>, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-02-24 11:10+0000\n"
 "PO-Revision-Date: 2010-03-07 11:49+0300\n"
 "Last-Translator: Dima Smirnov <arch@cnc-parts.info>\n"
 "Language-Team: Russian\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
 msgstr "Создать значок запуска для приложения, описываемого этим файлом"
 
 #: ../panel-desktop-handler.desktop.in.h:2
@@ -35,7 +34,7 @@ msgid "Customize the panel"
 msgstr "Настройка панели"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Панель"
@@ -45,12 +44,8 @@ msgid "_Read Online"
 msgstr "Читать в интернете."
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Вы можете прочесть документацию в Интернете. Информация, однако, может не "
-"полностью подходить к вашей версии панели."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Вы можете прочесть документацию в Интернете. Информация, однако, может не полностью подходить к вашей версии панели."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
@@ -83,17 +78,17 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "_Добавить новый элемент... "
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "_Настройки панели"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "За_вершение сеанса"
 
@@ -193,53 +188,39 @@ msgid "Failed to send D-Bus message"
 msgstr "Не удалось послать сообщение D-bus"
 
 #: ../panel/main.c:405
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Запустить панель? Если вы решите сохранить сеанс при выходе, панель будет "
-"запускаться автоматически при входе в систему."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Запустить панель? Если вы решите сохранить сеанс при выходе, панель будет запускаться автоматически при входе в систему."
 
 #: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s не запущен."
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "Не удалось запустить программу миграции"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
-msgstr ""
-"Вы запустили X-сервер без менеджера сеанса. После выхода X-сервер будет "
-"закрыт."
+#: ../panel/panel-application.c:1451 ../plugins/actions/actions.c:421
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "Вы запустили X-сервер без менеджера сеанса. После выхода X-сервер будет закрыт."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1452 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы действительно хотите выйти из панели? "
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1460 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не удалось запустить \"%s\" "
 
-#: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Неверный синтаксис события модуля. Используйте ИМЯ-МОДУЛЯ:НАЗВАНИЕ[:ТИП:"
-"ЗНАЧЕНИЕ]"
+#: ../panel/panel-dbus-client.c:208
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Неверный синтаксис события модуля. Используйте ИМЯ-МОДУЛЯ:НАЗВАНИЕ[:ТИП:ЗНАЧЕНИЕ]"
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Некорректный тип подсказки \"%s\". Корректные типы: логический, двоичный, "
-"целый, символьный и целочисленный."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "Некорректный тип подсказки \"%s\". Корректные типы: логический, двоичный, целый, символьный и целочисленный."
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -265,12 +246,8 @@ msgid "Panel %d"
 msgstr "Панель %d "
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"Поскольку панель запущена в режиме презентации, вам не разрешено изменять ее "
-"настройки от имени обычного пользователя."
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "Поскольку панель запущена в режиме презентации, вам не разрешено изменять ее настройки от имени обычного пользователя."
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -293,21 +270,15 @@ msgstr "_Искать: "
 msgid "Enter search phrase here"
 msgstr "Искомый текст"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Модуль \"%s\" неожиданно пропал с панели. Хотите его перезапустить?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"Модуль был несколько раз перезапущен в течение %d секунд. Если вы нажмёте "
-"\"Выполнить\", панель попробует запустить его снова, в противном случае он "
-"будет окончательно удалён."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "Модуль был несколько раз перезапущен в течение %d секунд. Если вы нажмёте \"Выполнить\", панель попробует запустить его снова, в противном случае он будет окончательно удалён."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -372,12 +343,8 @@ msgid "Add new item to this panel"
 msgstr "Добавить новую элемент"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-"Прозрачность для фона панели, от 0 (полностью прозрачно) до 100 (полностью "
-"непрозрачно)."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgstr "Прозрачность для фона панели, от 0 (полностью прозрачно) до 100 (полностью непрозрачно)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -426,7 +393,8 @@ msgstr "_Элементы"
 msgid "L_ength (%):"
 msgstr "_Длина (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Ед. измерения"
@@ -470,32 +438,20 @@ msgid "Select A Background Image"
 msgstr "Выберите значок"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-"Выберите этот параметр, чтобы сделать длину панели изменяющейся, если для "
-"модулей не будет хватать места"
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgstr "Выберите этот параметр, чтобы сделать длину панели изменяющейся, если для модулей не будет хватать места"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Выберите этот параметр, чтобы расширить панель на несколько мониторов."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Выберите этот параметр, чтобы скрыть области изменения размера панели и "
-"сделать её неподвижной."
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Выберите этот параметр, чтобы скрыть области изменения размера панели и сделать её неподвижной."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Выберите это параметр, чтобы панель была видима только когда над ней "
-"находится указатель мыши. Для этого панель должна быть прикреплена к краю "
-"экрана."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Выберите это параметр, чтобы панель была видима только когда над ней находится указатель мыши. Для этого панель должна быть прикреплена к краю экрана."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -510,18 +466,12 @@ msgid "Span mo_nitors"
 msgstr "Объединить экраны "
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Прозрачность при наведении указателя на панель (0 — полностью прозрачно, 100 "
-"— непрозрачно)."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Прозрачность при наведении указателя на панель (0 — полностью прозрачно, 100 — непрозрачно)."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 #, fuzzy
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Прозрачность при наведении указателя на панель."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
@@ -592,18 +542,12 @@ msgid "Welcome to the first start of the panel"
 msgstr "Добро пожаловать! Это первый запуск панели Xfce"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"Поскольку панель теперь использует новую систему хранения настроек, будут "
-"загружены свежие начальные установки"
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Поскольку панель теперь использует новую систему хранения настроек, будут загружены свежие начальные установки"
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
-"Выберите, какие из перечисленных ниже предустановленных настроек, вы хотите "
-"использовать для первого запуска"
+msgstr "Выберите, какие из перечисленных ниже предустановленных настроек, вы хотите использовать для первого запуска"
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
@@ -729,13 +673,8 @@ msgid "Select A Menu File"
 msgstr "Выберите файл меню"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Выберите эту опцию, если вы хотите, чтобы в меню отображалось название "
-"класса, к которому принадлежит приложение, например, \"Файловый менеджер\" "
-"вместо \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Выберите эту опцию, если вы хотите, чтобы в меню отображалось название класса, к которому принадлежит приложение, например, \"Файловый менеджер\" вместо \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -767,13 +706,13 @@ msgid "_Show button title"
 msgstr "_Показать заголовок кнопки"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
-#: ../plugins/directorymenu/directorymenu.c:369
+#: ../plugins/directorymenu/directorymenu.c:372
 msgid "Select An Icon"
 msgstr "Выберите значок"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2277
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не удалось запустить \"%s\" "
@@ -865,7 +804,8 @@ msgstr "Показывать _секунды "
 msgid "F_ormat:"
 msgstr "Ф_ормат:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Чёткость"
@@ -901,15 +841,8 @@ msgstr "Показывать _сетку"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"Формат описывает дату и время, которые будут подставлены в имя файла. "
-"Например, %Y будет заменено на год, %m на месяц, а %d на день. За "
-"дополнительной информацией обратитесь к документации по утилите date."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "Формат описывает дату и время, которые будут подставлены в имя файла. Например, %Y будет заменено на год, %m на месяц, а %d на день. За дополнительной информацией обратитесь к документации по утилите date."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -965,55 +898,55 @@ msgstr "%0 часов"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "%0:05"
+msgstr "%0 : 05"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "%0:10"
+msgstr "%0 : 10"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "%0:15"
+msgstr "%0 : 15"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "%0:20"
+msgstr "%0 : 20"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "%0:25"
+msgstr "%0 : 25"
 
 #: ../plugins/clock/clock-fuzzy.c:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "half past %0"
-msgstr "пол %0"
+msgstr "%0 : 30"
 
 #: ../plugins/clock/clock-fuzzy.c:107
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty five to %1"
 msgstr "без 25 минут, %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty to %1"
 msgstr "без 20 минут, %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "quarter to %1"
 msgstr "без 15 минут, %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ten to %1"
 msgstr "без 10 минут, %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "five to %1"
 msgstr "без 5 минут, %1"
 
@@ -1154,57 +1087,52 @@ msgstr "двенадцать"
 msgid "What time is it?"
 msgstr "Который час? "
 
-#: ../plugins/directorymenu/directorymenu.c:550
-#, c-format
-msgid "Failed to launch application \"%s\""
-msgstr "Не удалось запустить \"%s\" "
-
-#: ../plugins/directorymenu/directorymenu.c:581
-#, c-format
-msgid "Failed to query content type for \"%s\""
-msgstr "Не удалось получить тип содержимого для \"%s\""
-
-#: ../plugins/directorymenu/directorymenu.c:590
-#, c-format
-msgid "No default application found for \"%s\""
-msgstr "Не найдено приложение по умолчанию для \"%s\" "
-
-#: ../plugins/directorymenu/directorymenu.c:605
-#, c-format
-msgid "Failed to launch default application for \"%s\""
-msgstr "Не удалось запустить \"%s\" "
-
-#: ../plugins/directorymenu/directorymenu.c:696
-#, c-format
-msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Не удалось запустить предпочтительное приложение для категории \"%s\""
-
-#: ../plugins/directorymenu/directorymenu.c:769
-msgid "Open Folder"
-msgstr "Открыть папку"
-
-#: ../plugins/directorymenu/directorymenu.c:780
-msgid "Open in Terminal"
-msgstr "_Открыть в окне терминала "
-
+#: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Меню директории"
+
+#: ../plugins/directorymenu/directorymenu.c:553
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr "Не удалось запустить \"%s\" "
+
+#: ../plugins/directorymenu/directorymenu.c:584
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr "Не удалось получить тип содержимого для \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:593
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr "Не найдено приложение по умолчанию для \"%s\" "
+
+#: ../plugins/directorymenu/directorymenu.c:608
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr "Не удалось запустить \"%s\" "
+
+#: ../plugins/directorymenu/directorymenu.c:699
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr "Не удалось запустить предпочтительное приложение для категории \"%s\""
+
+#: ../plugins/directorymenu/directorymenu.c:772
+msgid "Open Folder"
+msgstr "Открыть папку"
+
+#: ../plugins/directorymenu/directorymenu.c:783
+msgid "Open in Terminal"
+msgstr "_Открыть в окне терминала "
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Показать дерево директорий в меню."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Введите список шаблонов, которым должны удовлетворять файлы, отображаемые в "
-"директории. Если вы хотите указать более одного шаблона, то они должны "
-"разделяться точкой с запятой, например \"*.txt;*.doc\"."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Введите список шаблонов, которым должны удовлетворять файлы, отображаемые в директории. Если вы хотите указать более одного шаблона, то они должны разделяться точкой с запятой, например \"*.txt;*.doc\"."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1228,11 +1156,15 @@ msgstr "_Базовая Директория:"
 msgid "_File Pattern:"
 msgstr "Шаблон _файла:"
 
-#: ../plugins/launcher/launcher.c:1555
+#: ../plugins/launcher/launcher.c:405
+msgid "Open launcher menu"
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:1556
 msgid "Unnamed Item"
 msgstr "Без названия "
 
-#: ../plugins/launcher/launcher.c:1696
+#: ../plugins/launcher/launcher.c:1697
 msgid "No items"
 msgstr "Нет элементов"
 
@@ -1295,9 +1227,7 @@ msgid "North"
 msgstr "Север"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr "Отключить всплывающие подсказки для кнопок панели и меню."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1351,11 +1281,8 @@ msgid "Number of _rows:"
 msgstr "Количество _строк: "
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr ""
-"Показывать эскиз рабочего места, где прямоугольники означают видимые окна"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
+msgstr "Показывать эскиз рабочего места, где прямоугольники означают видимые окна"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1403,21 +1330,22 @@ msgstr "_Развернуть"
 msgid "Adds a separator or space between panel items"
 msgstr "Добавляет промежуток или разделитель между элементами панели "
 
-#: ../plugins/showdesktop/showdesktop.c:193
+#: ../plugins/showdesktop/showdesktop.c:194
 msgid "Restore the minimized windows"
 msgstr "Восстановить свёрнутые окна "
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:196
 msgid "Minimize all open windows and show the desktop"
 msgstr "Скрыть окна и показать рабочий стол "
+
+#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Показать рабочий стол "
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
 msgstr "Скрыть окна и показать рабочий стол "
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "Показать рабочий стол "
 
 #: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
@@ -1425,12 +1353,8 @@ msgstr "Не удалось создать область уведомлений
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
-msgstr ""
-"Скорее всего, другой элемент взял на себя функцию области уведомлений. Этот "
-"модуль будет отключен."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Скорее всего, другой элемент взял на себя функцию области уведомлений. Этот модуль будет отключен."
 
 #: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
@@ -1457,7 +1381,7 @@ msgstr "Системный лоток"
 msgid "_Maximum icon size (px):"
 msgstr "_Максимальный размер значков:"
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Невозможно запустить системный лоток на экране %d "
@@ -1543,23 +1467,23 @@ msgstr "Группировать _окна:"
 msgid "Window title"
 msgstr "Заголовок окна"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3064
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3073
 msgid "Un_minimize All"
 msgstr "Убрать разворот"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3079
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3088
 msgid "_Unmaximize All"
 msgstr "_Убрать разворот"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3098
 msgid "_Close All"
 msgstr "_Закрыть все"
 
