@@ -1,3 +1,21 @@
+4.8.2
+=====
+- Change packing order of buttons in pager to match wnck.
+- Initialize tasklist viewport if screen is connected (bug #7255).
+- Set some atk object names on panel buttons without label.
+- Allow installation of the helpers in a custom location.
+- Set a static role for the panels (bug #7094). Reverted the previous fix.
+- Ask to start the panel if 'xfce4-panel -r' is called without instance.
+- Respawn a child if the plugin was realized with a pid.
+- Don't crash on a wrong colormap when changing screens.
+- Don't activate windows in tasklist when dnd a button or plugin.
+- Keep reference on window to avoid crash (bug #7193).
+- Activate windows on button release events (bug #7296).
+- Use the widget snapshot as tasklist draw icon.
+- Fix test so manual is installed (bug #7274).
+- Translation updates (he, sv, id, zh_CN, da, kk, pt, uk, 
+  zh_TW, ja, ru).
+
 4.8.1
 =====
 - Make the panels sticky for some window managers (bug #7130).
