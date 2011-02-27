@@ -6,12 +6,12 @@
 # Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006.
 # Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006-2008.
 # Denis Koryavov <dkoryavov@yandex.ru>, 2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-27 11:10+0000\n"
+"POT-Creation-Date: 2011-02-27 17:10+0000\n"
 "PO-Revision-Date: 2011-02-27 18:01+0300\n"
 "Last-Translator: Dmitrij Smirnov <arch@cnc-parts.info>\n"
 "Language-Team: Russian\n"
@@ -34,8 +34,7 @@ msgid "Customize the panel"
 msgstr "Настройка панели"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../panel/panel-window.c:2263
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Панель"
@@ -79,20 +78,17 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096
-#: ../panel/panel-window.c:2275
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "_Добавить новый элемент... "
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107
-#: ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "_Настройки панели"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124
-#: ../panel/panel-window.c:2302
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "За_вершение сеанса"
 
@@ -100,8 +96,7 @@ msgstr "За_вершение сеанса"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Показать диалог 'настройка панели'"
 
-#: ../panel/main.c:78
-#: ../panel/main.c:79
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "НОМЕР-ПАНЕЛИ"
 
@@ -196,8 +191,7 @@ msgstr "Не удалось послать сообщение D-bus"
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Запустить панель? Если вы решите сохранить сеанс при выходе, панель будет запускаться автоматически при входе в систему."
 
-#: ../panel/main.c:408
-#: ../panel/main.c:422
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s не запущен."
@@ -206,18 +200,15 @@ msgstr "%s не запущен."
 msgid "Failed to launch the migration application"
 msgstr "Не удалось запустить программу миграции"
 
-#: ../panel/panel-application.c:1451
-#: ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1451 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Вы запустили X-сервер без менеджера сеанса. После выхода X-сервер будет закрыт."
 
-#: ../panel/panel-application.c:1452
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1452 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы действительно хотите выйти из панели? "
 
-#: ../panel/panel-application.c:1460
-#: ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1460 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не удалось запустить \"%s\" "
@@ -240,8 +231,7 @@ msgid "translator-credits"
 msgstr "Alexandr Ponomarenko, 2010Alexander Matveyev, 2010"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Добавить новый элемент"
 
@@ -250,8 +240,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Выберите панель для нового модуля:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d "
@@ -404,7 +393,8 @@ msgstr "_Элементы"
 msgid "L_ength (%):"
 msgstr "_Длина (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Ед. измерения"
@@ -480,9 +470,8 @@ msgid "Transparency when the pointer is hovering over the panel, with 0 being fu
 msgstr "Прозрачность при наведении указателя на панель (0 — полностью прозрачно, 100 — непрозрачно)."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-#, fuzzy
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Прозрачность при наведении указателя на панель."
+msgstr "Прозрачность при наведении указателя на панель. 0 - полная прозрачность, 100 - полная непрозрачность"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -814,7 +803,8 @@ msgstr "Показывать _секунды "
 msgid "F_ormat:"
 msgstr "Ф_ормат:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Чёткость"
@@ -900,67 +890,67 @@ msgstr "Поздний вечер"
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:100
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 часов"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "%0 : 05"
+msgstr "%0:05"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "%0 : 10"
+msgstr "%0:10"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "%0 : 15"
+msgstr "%0:15"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "%0 : 20"
+msgstr "%0:20"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "%0 : 25"
+msgstr "%0:25"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
-msgstr "%0 : 30"
+msgstr "половина %1"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "без 25 минут, %1"
+msgstr "без 25 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr "без 20 минут, %1"
+msgstr "без 20 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr "без 15 минут, %1"
+msgstr "без 15 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr "без 10 минут, %1"
+msgstr "без 10 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr "без 5 минут, %1"
+msgstr "без 5 минут %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 час"
 
@@ -1267,8 +1257,7 @@ msgstr "Положение кнопки со _стрелкой"
 msgid "Program launcher with optional menu"
 msgstr "Кнопка запуска приложения с дополнительным меню "
 
-#: ../plugins/pager/pager.c:354
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Настройки рабочего места"
 
@@ -1276,8 +1265,7 @@ msgstr "_Настройки рабочего места"
 msgid "Unable to open the workspace settings"
 msgstr "Не удалось получить свойства рабочих мест"
 
-#: ../plugins/pager/pager-buttons.c:555
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Рабочее место %d "
