@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-24 11:29+0000\n"
-"PO-Revision-Date: 2011-02-24 18:59+0300\n"
+"POT-Creation-Date: 2011-02-27 11:30+0000\n"
+"PO-Revision-Date: 2011-02-27 17:46+0300\n"
 "Last-Translator: Dmitrij Smirnov <arch@cnc-parts.info>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Настройка панели"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:24
-#: ../panel/panel-window.c:2247
+#: ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Панель"
@@ -80,19 +80,19 @@ msgstr "Пане_ль"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1096
-#: ../panel/panel-window.c:2259
+#: ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "_Добавить новый элемент... "
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1107
-#: ../panel/panel-window.c:2270
+#: ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "_Настройки панели"
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1124
-#: ../panel/panel-window.c:2286
+#: ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "За_вершение сеанса"
 
@@ -206,17 +206,17 @@ msgstr "%s не запущен."
 msgid "Failed to launch the migration application"
 msgstr "Не удалось запустить программу миграции"
 
-#: ../panel/panel-application.c:1464
+#: ../panel/panel-application.c:1451
 #: ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Вы запустили X-сервер без менеджера сеанса. После выхода X-сервер будет закрыт."
 
-#: ../panel/panel-application.c:1465
+#: ../panel/panel-application.c:1452
 #: ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы действительно хотите выйти из панели? "
 
-#: ../panel/panel-application.c:1473
+#: ../panel/panel-application.c:1460
 #: ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
@@ -281,12 +281,12 @@ msgstr "_Искать: "
 msgid "Enter search phrase here"
 msgstr "Искомый текст"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Модуль \"%s\" неожиданно пропал с панели. Хотите его перезапустить?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Модуль был несколько раз перезапущен в течение %d секунд. Если вы нажмёте \"Выполнить\", панель попробует запустить его снова, в противном случае он будет окончательно удалён."
@@ -384,7 +384,7 @@ msgstr "_Экран"
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
-msgstr "Удалить выбранный элемент"
+msgstr "Редактировать выбранный элемент"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
@@ -429,7 +429,7 @@ msgstr "В_ывод:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Opacity"
-msgstr "Прозрачность"
+msgstr "Непрозрачность"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
@@ -1478,23 +1478,23 @@ msgstr "Группировать _окна:"
 msgid "Window title"
 msgstr "Заголовок окна"
 
-#: ../plugins/tasklist/tasklist-widget.c:3013
+#: ../plugins/tasklist/tasklist-widget.c:3064
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3022
+#: ../plugins/tasklist/tasklist-widget.c:3073
 msgid "Un_minimize All"
 msgstr "Убрать разворот"
 
-#: ../plugins/tasklist/tasklist-widget.c:3028
+#: ../plugins/tasklist/tasklist-widget.c:3079
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3037
+#: ../plugins/tasklist/tasklist-widget.c:3088
 msgid "_Unmaximize All"
 msgstr "_Убрать разворот"
 
-#: ../plugins/tasklist/tasklist-widget.c:3047
+#: ../plugins/tasklist/tasklist-widget.c:3098
 msgid "_Close All"
 msgstr "_Закрыть все"
 
