@@ -6,26 +6,23 @@
 # Enrico Tröger <enrico@xfce.org>, 2008.
 # Simon Schneider <simon@schneiderimtal.de>, 2009
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-02-28 17:29+0000\n"
 "PO-Revision-Date: 2010-12-28 22:32+0100\n"
 "Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"Einen neuen Starter zur Leiste hinzufügen anhand der Informationen in der "
-"Desktop-Datei"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Einen neuen Starter zur Leiste hinzufügen anhand der Informationen in der Desktop-Datei"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -36,7 +33,7 @@ msgid "Customize the panel"
 msgstr "Leiste einrichten"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Leiste"
@@ -46,12 +43,8 @@ msgid "_Read Online"
 msgstr "Online _lesen"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Sie können das Anwenderhandbuch online lesen. Dieses Handbuch entspricht "
-"allerdings nicht immer Ihrer Version."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Sie können das Anwenderhandbuch online lesen. Dieses Handbuch entspricht allerdings nicht immer Ihrer Version."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
@@ -72,8 +65,7 @@ msgstr "Soll »%s« wirklich entfernt werden?"
 #: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
-"Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
+msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1054
@@ -85,17 +77,17 @@ msgid "Pane_l"
 msgstr "_Leiste"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "_Neue Elemente hinzufügen…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "Leisten_einstellungen…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "_Abmelden"
 
@@ -195,55 +187,39 @@ msgid "Failed to send D-Bus message"
 msgstr "Konnte keine D-Bus-Nachricht senden"
 
 #: ../panel/main.c:405
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, "
-"dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten "
-"Mal automatisch geladen wird."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
 #: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
-msgstr ""
-"Konnte die Anwendung zum Migrieren der Leisteneinstellungen nicht starten"
+msgstr "Konnte die Anwendung zum Migrieren der Leisteneinstellungen nicht starten"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
-msgstr ""
-"Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« "
-"klicken, beendet dies den X-Server."
+#: ../panel/panel-application.c:1451 ../plugins/actions/actions.c:421
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« klicken, beendet dies den X-Server."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1452 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Soll die Leiste wirklich beendet werden?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1460 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Konnte Befehl »%s« nicht ausführen."
 
-#: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Ungültige Syntax für Plugin-Ereignisse angegeben. Verwenden Sie PLUGIN-NAME:"
-"NAME [:TYP:WERT]."
+#: ../panel/panel-dbus-client.c:208
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Ungültige Syntax für Plugin-Ereignisse angegeben. Verwenden Sie PLUGIN-NAME:NAME [:TYP:WERT]."
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Ungültiger Hinweistyp »%s«. Erlaubte Typen sind 'bool', 'double', 'int', "
-"'string' und 'uint'."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "Ungültiger Hinweistyp »%s«. Erlaubte Typen sind 'bool', 'double', 'int', 'string' und 'uint'."
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -274,12 +250,8 @@ msgid "Panel %d"
 msgstr "Leiste %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"Da sich die Leiste im »Kiosk«-Modus befindet, sind Änderungen an der "
-"Leisteneinstellung als normaler Nutzer nicht erlaubt."
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "Da sich die Leiste im »Kiosk«-Modus befindet, sind Änderungen an der Leisteneinstellung als normaler Nutzer nicht erlaubt."
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -302,23 +274,15 @@ msgstr "_Suche:"
 msgid "Enter search phrase here"
 msgstr "Suchbegriff hier eingeben"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"Element »%s« hat die Leiste unerwartet verlassen. Soll es neugestartet "
-"werden?"
+msgstr "Element »%s« hat die Leiste unerwartet verlassen. Soll es neugestartet werden?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"Das Element wurde in den letzten %d Sekunden mehr als einmal neugestartet. "
-"Durch Drücken von »Ausführen« wird das Element noch einmal neugestartet. "
-"Andernfalls wird es endgültig von der Leiste entfernt."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neugestartet. Durch Drücken von »Ausführen« wird das Element noch einmal neugestartet. Andernfalls wird es endgültig von der Leiste entfernt."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -338,8 +302,7 @@ msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr ""
-"Die Einstellungen der Leiste und der Plugins werden dauerhaft entfernt."
+msgstr "Die Einstellungen der Leiste und der Plugins werden dauerhaft entfernt."
 
 #: ../panel/panel-preferences-dialog.c:829
 #, c-format
@@ -384,12 +347,8 @@ msgid "Add new item to this panel"
 msgstr "Neues Objekt zur Leiste hinzufügen"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-"Alpha-Wert des Leistenhintergrunds. Zwischen 0 (transparent) und 100 "
-"(undurchsichtig)."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgstr "Alpha-Wert des Leistenhintergrunds. Zwischen 0 (transparent) und 100 (undurchsichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -438,7 +397,8 @@ msgstr "_Objekte"
 msgid "L_ength (%):"
 msgstr "_Länge (in %):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Abmessungen"
@@ -482,33 +442,20 @@ msgid "Select A Background Image"
 msgstr "Hintergrundbild auswählen"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-"Wählen Sie diese Option, wenn die Länge der Leiste automatisch vergrößert "
-"werden soll, wenn Plugins mehr Platz benötigen."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgstr "Wählen Sie diese Option, wenn die Länge der Leiste automatisch vergrößert werden soll, wenn Plugins mehr Platz benötigen."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
-"Wählen Sie diese Option, um die Leiste über mehrere Monitore zu verteilen."
+msgstr "Wählen Sie diese Option, um die Leiste über mehrere Monitore zu verteilen."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Wählen Sie diese Option, um die Leistengriffe zu verbergen und die Position "
-"zu sperren."
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Wählen Sie diese Option, um die Leistengriffe zu verbergen und die Position zu sperren."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Wählen Sie diese Option, um die Leiste zu verbergen, wenn sich der Zeiger "
-"nicht über ihr befindet. Dies funktioniert nur, wenn sich die Leiste an "
-"einer Bildschirmkante befindet."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Wählen Sie diese Option, um die Leiste zu verbergen, wenn sich der Zeiger nicht über ihr befindet. Dies funktioniert nur, wenn sich die Leiste an einer Bildschirmkante befindet."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -523,20 +470,12 @@ msgid "Span mo_nitors"
 msgstr "_Auf mehrere Monitore ausdehnen"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist. Zwischen 0 "
-"(transparent) und 100 (undurchsichtig)."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist. Zwischen 0 (transparent) und 100 (undurchsichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr ""
-"Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist.Zwischen "
-"0 (transparent) und 100 (undurchsichtig)."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist.Zwischen 0 (transparent) und 100 (undurchsichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -606,18 +545,12 @@ msgid "Welcome to the first start of the panel"
 msgstr "Willkommen beim ersten Start der Xfce-Leiste"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"Da die Leiste auf neue Art ihre Einstellungen speichert, muss eine neue "
-"Konfiguration geladen werden."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Da die Leiste auf neue Art ihre Einstellungen speichert, muss eine neue Konfiguration geladen werden."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
-"Wählen Sie unten aus, welches Setup Sie für den ersten Start verwenden "
-"möchten"
+msgstr "Wählen Sie unten aus, welches Setup Sie für den ersten Start verwenden möchten"
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
@@ -743,12 +676,9 @@ msgid "Select A Menu File"
 msgstr "Wählen Sie eine Menüdatei"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr ""
-"Diese Option zum Auswählen eines typischen Namen für diese Anwendung im Menü "
-"auswählen.\n"
+"Diese Option zum Auswählen eines typischen Namen für diese Anwendung im Menü auswählen.\n"
 "Beispielsweise: »Dateimanager« anstelle von »Thunar«"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
@@ -781,13 +711,13 @@ msgid "_Show button title"
 msgstr "_Titel im Knopf anzeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
-#: ../plugins/directorymenu/directorymenu.c:369
+#: ../plugins/directorymenu/directorymenu.c:372
 msgid "Select An Icon"
 msgstr "Symbol auswählen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2277
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Konnte Befehl »%s« nicht ausführen."
@@ -802,7 +732,7 @@ msgstr "Konnte Anwendungsmenü nicht laden"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "Menü mit Kategoerien der installierten Anwendungen anzeigen"
+msgstr "Menü mit Kategorien der installierten Anwendungen anzeigen"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -879,7 +809,8 @@ msgstr "_Sekunden anzeigen"
 msgid "F_ormat:"
 msgstr "Anzeige_format:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "_Ungenauigkeit der Formulierung:"
@@ -915,16 +846,10 @@ msgstr "_Netz zeigen"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
-"Das Anzeigeformat definiert, welche Teile von Datum und Uhrzeit in den "
-"Dateinamen eingefügt werden.\n"
-"Beispielsweise wird %Y durch das Jahr, %m durch den Monat und %d durch den "
-"Tag ersetzt. Ziehen Sie die\n"
+"Das Anzeigeformat definiert, welche Teile von Datum und Uhrzeit in den Dateinamen eingefügt werden.\n"
+"Beispielsweise wird %Y durch das Jahr, %m durch den Monat und %d durch den Tag ersetzt. Ziehen Sie die\n"
 "Dokumentation des Datumswerkzeugs für weitere Informationen heran."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1170,56 +1095,53 @@ msgstr "zwölf"
 msgid "What time is it?"
 msgstr "Wieviel Uhr ist es?"
 
-#: ../plugins/directorymenu/directorymenu.c:550
-#, c-format
-msgid "Failed to launch application \"%s\""
-msgstr "Konnte Anwendung »%s« nicht starten."
-
-#: ../plugins/directorymenu/directorymenu.c:581
-#, c-format
-msgid "Failed to query content type for \"%s\""
-msgstr "Konnte Inhaltstyp für »%s« nicht erfragen"
-
-#: ../plugins/directorymenu/directorymenu.c:590
-#, c-format
-msgid "No default application found for \"%s\""
-msgstr "Keine Standardanwendung für »%s« gefunden"
-
-#: ../plugins/directorymenu/directorymenu.c:605
-#, c-format
-msgid "Failed to launch default application for \"%s\""
-msgstr "Konnte Anwendung für »%s« nicht ausführen."
-
-#: ../plugins/directorymenu/directorymenu.c:696
-#, c-format
-msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Konnte Standardanwendung der Kategorie »%s« nicht ausführen"
-
-#: ../plugins/directorymenu/directorymenu.c:769
-msgid "Open Folder"
-msgstr "Öffne Ordner"
-
-#: ../plugins/directorymenu/directorymenu.c:780
-msgid "Open in Terminal"
-msgstr "In Terminal ausführen"
-
+#: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Verzeichnismenü"
+
+#: ../plugins/directorymenu/directorymenu.c:553
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr "Konnte Anwendung »%s« nicht starten."
+
+#: ../plugins/directorymenu/directorymenu.c:584
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr "Konnte Inhaltstyp für »%s« nicht erfragen"
+
+#: ../plugins/directorymenu/directorymenu.c:593
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr "Keine Standardanwendung für »%s« gefunden"
+
+#: ../plugins/directorymenu/directorymenu.c:608
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr "Konnte Anwendung für »%s« nicht ausführen."
+
+#: ../plugins/directorymenu/directorymenu.c:699
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr "Konnte Standardanwendung der Kategorie »%s« nicht ausführen"
+
+#: ../plugins/directorymenu/directorymenu.c:772
+msgid "Open Folder"
+msgstr "Ordner öffnen"
+
+#: ../plugins/directorymenu/directorymenu.c:783
+msgid "Open in Terminal"
+msgstr "In Terminal ausführen"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Verzeichnisbaum im Menü anzeigen"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
-"Liste mit Mustern eingeben, um festzulegen, welche Dateien in einem "
-"Verzeichnis sichtbar sein sollen. Bei der Angabe mehrerer Muster\n"
+"Liste mit Mustern eingeben, um festzulegen, welche Dateien in einem Verzeichnis sichtbar sein sollen. Bei der Angabe mehrerer Muster\n"
 "müssen diese durch Semikolons getrennt werden (z.B. *.txt; *.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1244,11 +1166,15 @@ msgstr "_Basisverzeichnis:"
 msgid "_File Pattern:"
 msgstr "_Dateimuster:"
 
-#: ../plugins/launcher/launcher.c:1555
+#: ../plugins/launcher/launcher.c:405
+msgid "Open launcher menu"
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:1556
 msgid "Unnamed Item"
 msgstr "Unbenanntes Objekt"
 
-#: ../plugins/launcher/launcher.c:1696
+#: ../plugins/launcher/launcher.c:1697
 msgid "No items"
 msgstr "Keine Objekte"
 
@@ -1311,18 +1237,12 @@ msgid "North"
 msgstr "Norden"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Diese Option auswählen, um Kurzhilfen beim Bewegen über Schaltflächen und "
-"Menüeinträge zu deaktivieren."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgstr "Diese Option auswählen, um Kurzhilfen beim Bewegen über Schaltflächen und Menüeinträge zu deaktivieren."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
-"Wählen Sie diese Option, um den angewählten Menüeintrag zur Leiste "
-"hinzuzufügen."
+msgstr "Wählen Sie diese Option, um den angewählten Menüeintrag zur Leiste hinzuzufügen."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Show _label instead of icon"
@@ -1371,12 +1291,8 @@ msgid "Number of _rows:"
 msgstr "Anzahl der _Zeilen:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr ""
-"Miniaturansicht der Arbeitsfläche mitsamt Rechtecken für die sichtbaren "
-"Fenster zeigen"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
+msgstr "Miniaturansicht der Arbeitsfläche mitsamt Rechtecken für die sichtbaren Fenster zeigen"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1424,21 +1340,22 @@ msgstr "_Ausdehnen"
 msgid "Adds a separator or space between panel items"
 msgstr "Fügt ein Trennelement oder Platz zwischen Leistenelementen ein"
 
-#: ../plugins/showdesktop/showdesktop.c:193
+#: ../plugins/showdesktop/showdesktop.c:194
 msgid "Restore the minimized windows"
 msgstr "Versteckte Fenster wiederherstellen"
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:196
 msgid "Minimize all open windows and show the desktop"
 msgstr "Geöffnete Fenster verstecken und Schreibtisch zeigen"
+
+#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Schreibtisch zeigen"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
 msgstr "Fenster verstecken und Schreibtisch zeigen"
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "Schreibtisch zeigen"
 
 #: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
@@ -1446,12 +1363,8 @@ msgstr "Kann Benachrichtigungsfläche nicht starten"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
-msgstr ""
-"Wahrscheinlich hat ein anderes Programm die Funktion der "
-"Benachrichtigungsfläche übernommen. Diese Fläche wird nicht verwendet."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Wahrscheinlich hat ein anderes Programm die Funktion der Benachrichtigungsfläche übernommen. Diese Fläche wird nicht verwendet."
 
 #: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
@@ -1459,8 +1372,7 @@ msgstr "Die Benachrichtigungsfläche hat die Auswahl verloren"
 
 #: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
-"Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
+msgstr "Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
@@ -1479,7 +1391,7 @@ msgstr "Benachrichtigungsfläche"
 msgid "_Maximum icon size (px):"
 msgstr "_Maximale Symbolgröße (px):"
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Konnte Manager-Auswahl für Bildschirm %d nicht erhalten."
@@ -1565,23 +1477,23 @@ msgstr "F_enstergruppierung:"
 msgid "Window title"
 msgstr "Fenstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3064
 msgid "Mi_nimize All"
 msgstr "_Alle minimieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3073
 msgid "Un_minimize All"
 msgstr "_Minimieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3079
 msgid "Ma_ximize All"
 msgstr "_Alle maximieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3088
 msgid "_Unmaximize All"
 msgstr "_Maximieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3098
 msgid "_Close All"
 msgstr "_Alle schließen"
 
@@ -1653,8 +1565,7 @@ msgid "Switch between open windows using a menu"
 msgstr "Mit einem Menü zwischen offenen Fenstern umschalten"
 
 #~ msgid "Failed to remove the desktop file from the config directory"
-#~ msgstr ""
-#~ "Konnte Sesktop-Datei nicht aus dem Konfigurationsverzeichnis entfernen"
+#~ msgstr "Konnte Sesktop-Datei nicht aus dem Konfigurationsverzeichnis entfernen"
 
 #~ msgid "_Number of rows:"
 #~ msgstr "_Anzahl der Zeilen:"
