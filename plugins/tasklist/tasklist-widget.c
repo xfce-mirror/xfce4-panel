@@ -302,7 +302,7 @@ static void               xfce_tasklist_wireframe_update                 (XfceTa
 #endif
 
 /* tasklist buttons */
-static gboolean           xfce_tasklist_button_visible                   (XfceTasklistChild    *child,
+static inline gboolean    xfce_tasklist_button_visible                   (XfceTasklistChild    *child,
                                                                           WnckWorkspace         *active_ws);
 static gint               xfce_tasklist_button_compare                   (gconstpointer         child_a,
                                                                           gconstpointer         child_b,
