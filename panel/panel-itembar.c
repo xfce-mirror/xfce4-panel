@@ -695,7 +695,7 @@ panel_itembar_get_child_property (GtkContainer *container,
 
 
 
-static inline PanelItembarChild *
+static PanelItembarChild *
 panel_itembar_get_child (PanelItembar *itembar,
                          GtkWidget    *widget)
 {
