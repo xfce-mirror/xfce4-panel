@@ -5,30 +5,27 @@
 # Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008-2010.
 # Pau Rul.lan Ferragut <paurullan@bulma.net> 2005-2007.
 # Ivà Burgos <debian.public@gmail.com>, 2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-03-15 11:11+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: catalan <xfce-i18n@xfce.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Catalan\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Country: Spain\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"Afegir un nou llençador al panell basant-se en la informació d'aquest fitxer "
-"d'escriptori"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Afegir un nou llençador al panell basant-se en la informació d'aquest fitxer d'escriptori"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -39,7 +36,7 @@ msgid "Customize the panel"
 msgstr "Personalitzar el quadre"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Quadre"
@@ -49,12 +46,8 @@ msgid "_Read Online"
 msgstr "_Llegeix-lo en línia"
 
 #: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Podeu llegir el manual d'usuari en línia. Però pot ser que el manual sigui "
-"d'una altre versió del quadre."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Podeu llegir el manual d'usuari en línia. Però pot ser que el manual sigui d'una altre versió del quadre."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
@@ -87,17 +80,17 @@ msgid "Pane_l"
 msgstr "_Quadre"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "Afegir elements _nous…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferències del quadre…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "_Sortir"
 
@@ -197,53 +190,39 @@ msgid "Failed to send D-Bus message"
 msgstr "No s'ha pogut enviar un missatge a través de D-BUS"
 
 #: ../panel/main.c:405
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Voleu iniciar el quadre? Si és el cas, assegureu-vos que deseu la sessió "
-"quan sortiu per tal que el panell s'inciï automàticament el proper cop que "
-"inicieu la sessió."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Voleu iniciar el quadre? Si és el cas, assegureu-vos que deseu la sessió quan sortiu per tal que el panell s'inciï automàticament el proper cop que inicieu la sessió."
 
 #: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No s'ha trobat una instància en marxa de %s"
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "No s'ha pogut iniciar l'aplicació de migració"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
-msgstr ""
-"Heu iniciat X sense un gestor de sessions. Premeu Sortir per a sortir del "
-"servidor X."
+#: ../panel/panel-application.c:1451 ../plugins/actions/actions.c:421
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "Heu iniciat X sense un gestor de sessions. Premeu Sortir per a sortir del servidor X."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1452 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Esteu segurs que voleu sortir del panell?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1460 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "No s'ha pogut llançar la comanda «%s»"
 
-#: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"La sintaxis d'esdeveniments per al connector és invàlida. Useu PLUGIN-NAME:"
-"NAME[:TYPE:VALUE]."
+#: ../panel/panel-dbus-client.c:208
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "La sintaxis d'esdeveniments per al connector és invàlida. Useu PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Tipus invàlid \"%s\". Els tipus vàlids són: bool, double, int, string i uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "Tipus invàlid \"%s\". Els tipus vàlids són: bool, double, int, string i uint."
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -273,12 +252,8 @@ msgid "Panel %d"
 msgstr "Quadre %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"El quadre està executant-se en mode Kiosk; no esteu permesos de canviar la "
-"configuració del quadre."
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "El quadre està executant-se en mode Kiosk; no esteu permesos de canviar la configuració del quadre."
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -301,23 +276,15 @@ msgstr "_Cerca:"
 msgid "Enter search phrase here"
 msgstr "Introduïu la frase a cercar aquí"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"El connector del quadre \"%s\" ha finalitzat inesperadament. Voleu reiniciar-"
-"lo?"
+msgstr "El connector del quadre \"%s\" ha finalitzat inesperadament. Voleu reiniciar-lo?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"El connector s'ha reiniciat més d'un cop en els darrers %d segons. Si premeu "
-"«Executar» el quadre intentarà reiniciar el connector sinó serà eliminat "
-"permanentment del panell."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "El connector s'ha reiniciat més d'un cop en els darrers %d segons. Si premeu «Executar» el quadre intentarà reiniciar el connector sinó serà eliminat permanentment del panell."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -337,8 +304,7 @@ msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr ""
-"El quadre i la configuració dels connectors seran eliminats permanentment."
+msgstr "El quadre i la configuració dels connectors seran eliminats permanentment."
 
 #: ../panel/panel-preferences-dialog.c:829
 #, c-format
@@ -383,12 +349,8 @@ msgid "Add new item to this panel"
 msgstr "Afegeix un element a aquest quadre"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-"Valor alfa per al quadre de fons, essent 0 completament transparent i 100 "
-"completament opac."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgstr "Valor alfa per al quadre de fons, essent 0 completament transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -437,7 +399,8 @@ msgstr "Ele_ments"
 msgid "L_ength (%):"
 msgstr "_Longitud (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Mides"
@@ -481,33 +444,20 @@ msgid "Select A Background Image"
 msgstr "Seleccioneu una imatge per al fons"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-"Seleccioneu aquesta opció per augmentar automàticament la longitud del "
-"quadre quan els connectors necessitin més espai."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
+msgstr "Seleccioneu aquesta opció per augmentar automàticament la longitud del quadre quan els connectors necessitin més espai."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
-"Seleccioneu aquesta opció per a estendre el quadre a múltiples monitors"
+msgstr "Seleccioneu aquesta opció per a estendre el quadre a múltiples monitors"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Seleccioneu aquesta opció per bloquejar la posició del quadre i ocultar els "
-"tiradors."
+msgid "Select this option to hide the handles of the panel and lock its position."
+msgstr "Seleccioneu aquesta opció per bloquejar la posició del quadre i ocultar els tiradors."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Seleccioneu aquesta opció per a ocultar el quadre quan el punter no està "
-"sobre el quadre. Aquesta funcionalitat només és operativa quan el quadre és "
-"a un extrem de la pantalla."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Seleccioneu aquesta opció per a ocultar el quadre quan el punter no està sobre el quadre. Aquesta funcionalitat només és operativa quan el quadre és a un extrem de la pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -522,20 +472,12 @@ msgid "Span mo_nitors"
 msgstr "Expandeix els mo_nitors"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Transparència quan el punter és sobre el quadre, essent 0 completament "
-"transparent i 100 completament opac."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Transparència quan el punter és sobre el quadre, essent 0 completament transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr ""
-"Transparència quan el punter no és sobre el quadre, essent 0 completament "
-"transparent i 100 completament opac."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Transparència quan el punter no és sobre el quadre, essent 0 completament transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -605,12 +547,8 @@ msgid "Welcome to the first start of the panel"
 msgstr "Benvinguts a la primera arrancada del quadre"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"Degut a que el quadre està emprant un nou sistema per desar la configuració, "
-"aquest ha de carregar una configuració inicial predeterminada."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Degut a que el quadre està emprant un nou sistema per desar la configuració, aquest ha de carregar una configuració inicial predeterminada."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -740,12 +678,8 @@ msgid "Select A Menu File"
 msgstr "Selecciona un fitxer de menú"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Seleccioneu aquesta opció mer veure els noms genèrics d'aplicacions al menú "
-"(e.g.: «Gestor de fitxers» en lloc de «Thunar»)."
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Seleccioneu aquesta opció mer veure els noms genèrics d'aplicacions al menú (e.g.: «Gestor de fitxers» en lloc de «Thunar»)."
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -777,13 +711,13 @@ msgid "_Show button title"
 msgstr "_Mostra el títol del botó"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
-#: ../plugins/directorymenu/directorymenu.c:369
+#: ../plugins/directorymenu/directorymenu.c:372
 msgid "Select An Icon"
 msgstr "Seleccioneu una icona"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2277
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "No s'ha pogut executar la comanda «%s»"
@@ -875,7 +809,8 @@ msgstr "Mostra _segons"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "D_ifús:"
@@ -911,15 +846,8 @@ msgstr "Mostra _graella"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"El format descriu les parts de la data i hora a inserir en el nom de fitxer. "
-"Per exemple, %Y serà substituït per l'any, %m pel mes i %d pel dia. "
-"Consulteu la documentació de la utilitat de data per més informació."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "El format descriu les parts de la data i hora a inserir en el nom de fitxer. Per exemple, %Y serà substituït per l'any, %m pel mes i %d pel dia. Consulteu la documentació de la utilitat de data per més informació."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1164,57 +1092,52 @@ msgstr "dotze"
 msgid "What time is it?"
 msgstr "Quina hora és?"
 
-#: ../plugins/directorymenu/directorymenu.c:550
-#, c-format
-msgid "Failed to launch application \"%s\""
-msgstr "No s'ha pogut llançar l'aplicació «%s»"
-
-#: ../plugins/directorymenu/directorymenu.c:581
-#, c-format
-msgid "Failed to query content type for \"%s\""
-msgstr "No s'ha pogut consultar el tipus de contingut per a «%s»"
-
-#: ../plugins/directorymenu/directorymenu.c:590
-#, c-format
-msgid "No default application found for \"%s\""
-msgstr "No s'ha trobat una aplicació predeterminada per «%s»"
-
-#: ../plugins/directorymenu/directorymenu.c:605
-#, c-format
-msgid "Failed to launch default application for \"%s\""
-msgstr "No s'ha pogut llançar l'aplicació predeterminada per «%s»"
-
-#: ../plugins/directorymenu/directorymenu.c:696
-#, c-format
-msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "No s'ha pogut obrir l'aplicació preferida per a la categoria «%s»"
-
-#: ../plugins/directorymenu/directorymenu.c:769
-msgid "Open Folder"
-msgstr "Obrir carpeta"
-
-#: ../plugins/directorymenu/directorymenu.c:780
-msgid "Open in Terminal"
-msgstr "Obrir en un Terminal"
-
+#: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Directori de mení"
+
+#: ../plugins/directorymenu/directorymenu.c:553
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr "No s'ha pogut llançar l'aplicació «%s»"
+
+#: ../plugins/directorymenu/directorymenu.c:584
+#, c-format
+msgid "Failed to query content type for \"%s\""
+msgstr "No s'ha pogut consultar el tipus de contingut per a «%s»"
+
+#: ../plugins/directorymenu/directorymenu.c:593
+#, c-format
+msgid "No default application found for \"%s\""
+msgstr "No s'ha trobat una aplicació predeterminada per «%s»"
+
+#: ../plugins/directorymenu/directorymenu.c:608
+#, c-format
+msgid "Failed to launch default application for \"%s\""
+msgstr "No s'ha pogut llançar l'aplicació predeterminada per «%s»"
+
+#: ../plugins/directorymenu/directorymenu.c:699
+#, c-format
+msgid "Failed to execute the preferred application for category \"%s\""
+msgstr "No s'ha pogut obrir l'aplicació preferida per a la categoria «%s»"
+
+#: ../plugins/directorymenu/directorymenu.c:772
+msgid "Open Folder"
+msgstr "Obrir carpeta"
+
+#: ../plugins/directorymenu/directorymenu.c:783
+msgid "Open in Terminal"
+msgstr "Obrir en un Terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Mostra un arbre de directoris al menú"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Introduïu una llista de patrons que s'empraran per determinar quins fitxers "
-"es mostren als directoris. Si especifiqueu més d'un patró la llista "
-"d'elements ha d'estar separada amb punts i comes (e.g.: «*.txt;*.doc»)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Introduïu una llista de patrons que s'empraran per determinar quins fitxers es mostren als directoris. Si especifiqueu més d'un patró la llista d'elements ha d'estar separada amb punts i comes (e.g.: «*.txt;*.doc»)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1238,11 +1161,15 @@ msgstr "Directori _base:"
 msgid "_File Pattern:"
 msgstr "Patró de _fitxers:"
 
-#: ../plugins/launcher/launcher.c:1555
+#: ../plugins/launcher/launcher.c:405
+msgid "Open launcher menu"
+msgstr "Obrir el menú llençador"
+
+#: ../plugins/launcher/launcher.c:1556
 msgid "Unnamed Item"
 msgstr "Element sense nom"
 
-#: ../plugins/launcher/launcher.c:1696
+#: ../plugins/launcher/launcher.c:1697
 msgid "No items"
 msgstr "Sense elements"
 
@@ -1305,12 +1232,8 @@ msgid "North"
 msgstr "Nord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Selecciona aquesta opció per a desactivar els rètols emergents que apareixen "
-"als botons del quadre o als elements del menú."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
+msgstr "Selecciona aquesta opció per a desactivar els rètols emergents que apareixen als botons del quadre o als elements del menú."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1363,12 +1286,8 @@ msgid "Number of _rows:"
 msgstr "Nombre de _files:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
-msgstr ""
-"Mostra una vista en miniatura de l'entorn de treball amb rectangles per a "
-"les finestres visibles"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
+msgstr "Mostra una vista en miniatura de l'entorn de treball amb rectangles per a les finestres visibles"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1416,21 +1335,22 @@ msgstr "_Expandir"
 msgid "Adds a separator or space between panel items"
 msgstr "Afegeix un espai o separador entre els elements del quadre"
 
-#: ../plugins/showdesktop/showdesktop.c:193
+#: ../plugins/showdesktop/showdesktop.c:194
 msgid "Restore the minimized windows"
 msgstr "Recupera les finestres minimitzades"
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:196
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimitza totes les finestres i mostra l'escriptori"
+
+#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Mostra l'escriptori"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
 msgstr "Oculta totes les finestres i mostra l'escriptori"
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "Mostra l'escriptori"
 
 #: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
@@ -1438,12 +1358,8 @@ msgstr "No s'ha pogut iniciar l'àrea de notificacions"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
-msgstr ""
-"Sembla que una altra aplicació o connector ha pres la funcionalitat de "
-"l'àrea de notificació. Aquesta àrea romandrà inutilitzada."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Sembla que una altra aplicació o connector ha pres la funcionalitat de l'àrea de notificació. Aquesta àrea romandrà inutilitzada."
 
 #: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
@@ -1470,7 +1386,7 @@ msgstr "Espai de notificació"
 msgid "_Maximum icon size (px):"
 msgstr "Tamany _màxim de la icona (px):"
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "No s’ha pogut controlar el gestor de selecció per la pantalla %d"
@@ -1556,23 +1472,23 @@ msgstr "A_grupament de finestres:"
 msgid "Window title"
 msgstr "Títol de la finestra"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3066
 msgid "Mi_nimize All"
 msgstr "Mi_nimitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3075
 msgid "Un_minimize All"
 msgstr "De_sminimitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3081
 msgid "Ma_ximize All"
 msgstr "Ma_ximitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3090
 msgid "_Unmaximize All"
 msgstr "Des_maximitzar-ho tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3100
 msgid "_Close All"
 msgstr "_Tancar-ho tot"
 
@@ -1644,9 +1560,7 @@ msgid "Switch between open windows using a menu"
 msgstr "Canvia entre les finestres obertes emprant un menú"
 
 #~ msgid "Failed to remove the desktop file from the config directory"
-#~ msgstr ""
-#~ "No s'ha pogut eliminar el fitxer d'escriptori des del directori de "
-#~ "configuració"
+#~ msgstr "No s'ha pogut eliminar el fitxer d'escriptori des del directori de configuració"
 
 #~ msgid "_Number of rows:"
 #~ msgstr "_Nombre de files:"
