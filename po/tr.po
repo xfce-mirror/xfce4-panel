@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-17 05:32+0000\n"
+"POT-Creation-Date: 2011-03-17 19:03+0000\n"
 "PO-Revision-Date: 2010-05-15 00:16+0300\n"
 "Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org,xfce-i18n@xfce.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
+msgstr "Bu masaüstü dosyasının bilgilerini temel alarak panele yeni bir başlatıcı ekle"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 #, fuzzy
@@ -142,13 +142,14 @@ msgstr "Sürüm bilgisini yazdır ve çık"
 
 #. parse context options
 #: ../panel/main.c:240
+#, fuzzy
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[SEÇENEKLER...]"
 
 #: ../panel/main.c:247
-#, c-format
+#, c-format, fuzzy
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Kullanımı hakkında bilgi almek için \"%s --help\" yazın."
 
 #: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
@@ -215,7 +216,7 @@ msgstr ""
 
 #: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Göç uygulaması başlatılamadı"
 
 #: ../panel/panel-application.c:1451 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
@@ -242,7 +243,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Xfce Masaüstü Ortamı'nın paneli"
 
 #: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
@@ -256,7 +257,7 @@ msgstr "Yeni Öğeler Ekle"
 
 #: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Lütfen yeni eklenti için bir panel seçin:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
@@ -270,7 +271,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Panelde değişiklik yapılmasına izin verilmiyor"
 
 #: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
@@ -288,7 +289,7 @@ msgstr "A_ra:"
 
 #: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Arama ifadesini buraya girin"
 
 #: ../panel/panel-plugin-external.c:426
 #, c-format
@@ -364,8 +365,9 @@ msgid "Add new item to this panel"
 msgstr "Panele yeni öğeler ekle"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
+#, fuzzy
 msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
-msgstr ""
+msgstr "0 tamamen şeffaf ve 100 tamamen mat olacak biçimde panel arkaalan alfa değeri."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 #, fuzzy
@@ -374,19 +376,21 @@ msgstr "Görünüm"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
-msgstr ""
+msgstr "Paneli otomatik olarak göster ve _gizle"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
+#, fuzzy
 msgid "Background"
-msgstr ""
+msgstr "Arkaalan"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
+#, fuzzy
 msgid "Background image"
-msgstr ""
+msgstr "Arkaalan resmi"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "_Renk:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -401,7 +405,7 @@ msgstr "Seçili paneli sil"
 #: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Horizontal"
@@ -415,7 +419,7 @@ msgstr "Öğeler Ekle"
 #: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
 msgid "L_ength (%):"
-msgstr ""
+msgstr "_Uzunluk (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -449,7 +453,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Bir Panel Rengi Seçin"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 #, fuzzy
@@ -468,15 +472,15 @@ msgstr "\"%s\" için simge seç"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr ""
+msgstr "Eklentiler daha fazla alan istediklerinde panelin boyunu otomatik olarak arttırmak için bu seçeneği seçin."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Paneli birden fazla ekranda göstermek için bu seçeneği seçin."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
+msgstr "Panelin kulplarını saklamak ve konumunu kilitlemek için bu seçeneği seçin."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
@@ -510,7 +514,7 @@ msgstr "Dikey"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
-msgstr ""
+msgstr "_Alfa:"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
@@ -519,11 +523,10 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
-msgstr ""
+msgstr "_Dosya:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
-#, fuzzy
 msgid "_Leave:"
 msgstr "_İsim:"
 
@@ -542,11 +545,11 @@ msgstr "Bo_yut (piksel):"
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
-msgstr ""
+msgstr "_Biçim:"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "_Yeni oyun"
 
 #: ../panel/panel-tic-tac-toe.c:134
 #, fuzzy
@@ -555,19 +558,19 @@ msgstr "_İsim:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "Acemi"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Orta seviye"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Deneyimli"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Uzman"
 
 #: ../migrate/main.c:78
 #, fuzzy
@@ -593,7 +596,7 @@ msgstr "Panel yapılandırmasını kaydet"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
-msgstr ""
+msgstr "Varsayılan yapılandırmayı kullan"
 
 #: ../migrate/main.c:96
 #, fuzzy
@@ -602,11 +605,11 @@ msgstr "Panel yapılandırmasını kaydet"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
-msgstr ""
+msgstr "Bir boş panel"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Bir boş panel ile başla"
 
 #: ../migrate/main.c:115
 #, fuzzy
