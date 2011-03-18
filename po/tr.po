@@ -32,16 +32,14 @@ msgid "Create Launcher on the panel"
 msgstr "Xfce Panelinde Başlatıcı oluştur"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel"
-msgstr "Xfce Panelini özelleştir"
+msgstr "Paneli özelleştir"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
-#, fuzzy
 msgid "Panel"
-msgstr "Panel %d"
+msgstr "Panel"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
@@ -107,7 +105,6 @@ msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMARASI"
 
 #: ../panel/main.c:79
-#, fuzzy
 msgid "Show the 'Add New Items' dialog"
 msgstr "'Yeni Öğeler Ekle' penceresini göster"
 
@@ -125,7 +122,6 @@ msgid "PLUGIN-NAME"
 msgstr "EKLENTİ-İSMİ"
 
 #: ../panel/main.c:82
-#, fuzzy
 msgid "Restart the running panel instance"
 msgstr "Çalışan Xfce4 panelini yeniden başlat"
 
@@ -142,7 +138,6 @@ msgstr "Sürüm bilgisini yazdır ve çık"
 
 #. parse context options
 #: ../panel/main.c:240
-#, fuzzy
 msgid "[ARGUMENTS...]"
 msgstr "[SEÇENEKLER...]"
 
@@ -167,9 +162,8 @@ msgstr "Bu ekranda zaten çalışan bir sistem çekmecesi var"
 
 #. spawn ourselfs again
 #: ../panel/main.c:367
-#, fuzzy
 msgid "Restarting..."
-msgstr "Yeniden Başlat"
+msgstr "Yeniden Başlatılıyor..."
 
 #: ../panel/main.c:382
 #, fuzzy
@@ -191,9 +185,8 @@ msgid "Failed to add a plugin to the panel"
 msgstr "Panele eklenti eklenmesi başarısız oldu"
 
 #: ../panel/main.c:390
-#, fuzzy
 msgid "Failed to restart the panel"
-msgstr "Panele yeni öğeler ekle"
+msgstr "Panel yeniden başlatılamadı"
 
 #: ../panel/main.c:392
 #, fuzzy
@@ -201,9 +194,8 @@ msgid "Failed to quit the panel"
 msgstr "'xfce4-panel -c' çalıştırılamadı"
 
 #: ../panel/main.c:394
-#, fuzzy
 msgid "Failed to send D-Bus message"
-msgstr "Görüntü açılamadı"
+msgstr "D-Bus mesajı gönderilemedi"
 
 #: ../panel/main.c:405
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
@@ -223,14 +215,13 @@ msgid "You have started X without session manager. Clicking Quit will close the 
 msgstr ""
 
 #: ../panel/panel-application.c:1452 ../plugins/actions/actions.c:422
-#, fuzzy
 msgid "Are you sure you want to quit the panel?"
-msgstr "%d. çalışma alanını silmek istediğinizden emin misiniz?"
+msgstr "Panelden çıkmak istediğnizden emin misiniz?"
 
 #: ../panel/panel-application.c:1460 ../plugins/actions/actions.c:430
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "\"%s\" çalıştırılamadı"
+msgstr "\"%s\" komutu çalıştırılamadı"
 
 #: ../panel/panel-dbus-client.c:208
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
