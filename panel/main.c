@@ -121,6 +121,14 @@ panel_callback_handler (const gchar  *name,
 static void
 panel_signal_handler (gint signum)
 {
+  static gboolean was_triggered = FALSE;
+
+  /* avoid recursing this handler if we receive a
+   * signal before the mainloop is started */
+  if (was_triggered)
+    return;
+  was_triggered = TRUE;
+
   panel_debug (PANEL_DEBUG_MAIN,
                "received signal %s <%d>, %s panel",
                g_strsignal (signum), signum,
