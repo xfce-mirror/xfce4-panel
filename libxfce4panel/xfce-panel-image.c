@@ -374,6 +374,7 @@ xfce_panel_image_expose_event (GtkWidget      *widget,
   GtkIconSource         *source;
   GdkPixbuf             *rendered = NULL;
   GdkPixbuf             *pixbuf = priv->cache;
+  cairo_t               *cr;
 
   if (G_LIKELY (pixbuf != NULL))
     {
@@ -402,12 +403,13 @@ xfce_panel_image_expose_event (GtkWidget      *widget,
         }
 
       /* draw the pixbuf */
-      gdk_draw_pixbuf (widget->window,
-                       widget->style->black_gc,
-                       pixbuf, 0, 0,
-                       dest_x, dest_y,
-                       source_width, source_height,
-                       GDK_RGB_DITHER_NORMAL, 0, 0);
+      cr = gdk_cairo_create (gtk_widget_get_window (widget));
+      if (G_LIKELY (cr != NULL))
+        {
+          gdk_cairo_set_source_pixbuf (cr, pixbuf, dest_x, dest_y);
+          cairo_paint (cr);
+          cairo_destroy (cr);
+        }
 
       if (rendered != NULL)
         g_object_unref (G_OBJECT (rendered));
