@@ -1674,6 +1674,16 @@ xfce_tasklist_window_removed (WnckScreen   *screen,
           panel_return_if_fail (WNCK_IS_WINDOW (window));
           n = g_signal_handlers_disconnect_matched (G_OBJECT (window),
               G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, child);
+
+#ifdef GDK_WINDOWING_X11
+          /* hide the wireframe */
+          if (G_UNLIKELY (n > 5 && tasklist->show_wireframes))
+            {
+              xfce_tasklist_wireframe_hide (tasklist);
+              n--;
+            }
+#endif
+
           panel_return_if_fail (n == 5);
 
           /* destroy the button, this will free the child data in the
