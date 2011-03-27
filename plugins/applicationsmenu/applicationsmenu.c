@@ -508,7 +508,8 @@ applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_WIDGET (button));
 
-  if (!gdk_spawn_command_line_on_screen (gtk_widget_get_screen (button), command, &error))
+  if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (button), command, 
+                                          FALSE, FALSE, &error))
     {
       xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), command);
       g_error_free (error);

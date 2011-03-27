@@ -780,7 +780,7 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
 
           /* spawn item editor */
           screen = gtk_widget_get_screen (button);
-          if (!gdk_spawn_command_line_on_screen (screen, command, &error))
+          if (!xfce_spawn_command_line_on_screen (screen, command, FALSE, FALSE, &error))
             {
               toplevel = gtk_widget_get_toplevel (button);
               xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
