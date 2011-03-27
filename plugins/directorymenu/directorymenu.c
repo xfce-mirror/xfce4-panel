@@ -224,7 +224,6 @@ directory_menu_plugin_set_property (GObject      *object,
   gchar                *display_name;
   gchar               **array;
   guint                 i;
-  GFile                *base_directory;
   const gchar          *path;
 
   switch (prop_id)
@@ -237,8 +236,6 @@ directory_menu_plugin_set_property (GObject      *object,
       if (plugin->base_directory != NULL)
         g_object_unref (G_OBJECT (plugin->base_directory));
       plugin->base_directory = g_file_new_for_commandline_arg (path);
-
-      base_directory = g_file_new_for_commandline_arg (g_value_get_string (value));
 
       display_name = g_file_get_parse_name (plugin->base_directory);
       gtk_widget_set_tooltip_text (plugin->button, display_name);
