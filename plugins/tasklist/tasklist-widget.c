@@ -162,6 +162,9 @@ struct _XfceTasklist
   /* icon geometries update timeout */
   guint                 update_icon_geometries_id;
 
+  /* idle monitor geometry update */
+  guint                 update_monitor_geometry_id;
+
   /* button grouping mode */
   XfceTasklistGrouping  grouping;
 
@@ -289,7 +292,6 @@ static void               xfce_tasklist_skipped_windows_state_changed    (WnckWi
                                                                           WnckWindowState       new_state,
                                                                           XfceTasklist         *tasklist);
 static void               xfce_tasklist_sort                             (XfceTasklist         *tasklist);
-static void               xfce_tasklist_update_monitor_geometry          (XfceTasklist         *tasklist);
 static gboolean           xfce_tasklist_update_icon_geometries           (gpointer              data);
 static void               xfce_tasklist_update_icon_geometries_destroyed (gpointer              data);
 
@@ -536,6 +538,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->wireframe_window = 0;
 #endif
   tasklist->update_icon_geometries_id = 0;
+  tasklist->update_monitor_geometry_id = 0;
   tasklist->max_button_length = DEFAULT_MAX_BUTTON_LENGTH;
   tasklist->min_button_length = DEFAULT_MIN_BUTTON_LENGTH;
   tasklist->max_button_size = DEFAULT_BUTTON_SIZE;
@@ -704,9 +707,11 @@ xfce_tasklist_finalize (GObject *object)
   panel_return_if_fail (tasklist->skipped_windows == NULL);
   panel_return_if_fail (tasklist->screen == NULL);
 
-  /* stop icon geometry update timeout */
+  /* stop pending timeouts */
   if (tasklist->update_icon_geometries_id != 0)
     g_source_remove (tasklist->update_icon_geometries_id);
+  if (tasklist->update_monitor_geometry_id != 0)
+    g_source_remove (tasklist->update_monitor_geometry_id);
 
   /* free the class group hash table */
   g_hash_table_destroy (tasklist->class_groups);
@@ -1448,10 +1453,6 @@ xfce_tasklist_gdk_screen_changed (GdkScreen    *gdk_screen,
     {
       /* update the monitor geometry */
       xfce_tasklist_update_monitor_geometry (tasklist);
-
-      /* update visibility of buttons */
-      xfce_tasklist_active_workspace_changed (tasklist->screen,
-                                              NULL, tasklist);
     }
 }
 
@@ -1753,41 +1754,6 @@ xfce_tasklist_sort (XfceTasklist *tasklist)
 
 
 
-static void
-xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist)
-{
-  GdkScreen *screen;
-  gboolean   geometry_set = FALSE;
-  GdkWindow *window;
-
-  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-
-  if (!tasklist->all_monitors)
-    {
-      screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
-      window = gtk_widget_get_window (GTK_WIDGET (tasklist));
-
-      if (G_LIKELY (screen != NULL
-          && window != NULL
-          && gdk_screen_get_n_monitors (screen) > 1))
-        {
-          /* set the monitor geometry */
-          gdk_screen_get_monitor_geometry (screen,
-              gdk_screen_get_monitor_at_window (screen, window),
-              &tasklist->monitor_geometry);
-
-          geometry_set = TRUE;
-        }
-    }
-
-  /* make sure we never poke the window geometry unneeded
-   * in the visibility function */
-  if (!geometry_set)
-    xfce_tasklist_geometry_set_invalid (tasklist);
-}
-
-
-
 static gboolean
 xfce_tasklist_update_icon_geometries (gpointer data)
 {
@@ -1853,6 +1819,57 @@ static void
 xfce_tasklist_update_icon_geometries_destroyed (gpointer data)
 {
   XFCE_TASKLIST (data)->update_icon_geometries_id = 0;
+}
+
+
+
+static gboolean
+xfce_tasklist_update_monitor_geometry_idle (gpointer data)
+{
+  XfceTasklist *tasklist = XFCE_TASKLIST (data);
+  GdkScreen    *screen;
+  gboolean      geometry_set = FALSE;
+  GdkWindow    *window;
+
+  panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
+
+  if (!tasklist->all_monitors)
+    {
+      screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
+      window = gtk_widget_get_window (GTK_WIDGET (tasklist));
+
+      if (G_LIKELY (screen != NULL
+          && window != NULL
+          && gdk_screen_get_n_monitors (screen) > 1))
+        {
+          /* set the monitor geometry */
+          gdk_screen_get_monitor_geometry (screen,
+              gdk_screen_get_monitor_at_window (screen, window),
+              &tasklist->monitor_geometry);
+
+          geometry_set = TRUE;
+        }
+    }
+
+  /* make sure we never poke the window geometry unneeded
+   * in the visibility function */
+  if (!geometry_set)
+    xfce_tasklist_geometry_set_invalid (tasklist);
+
+  /* update visibility of buttons */
+  if (tasklist->screen != NULL)
+    xfce_tasklist_active_workspace_changed (tasklist->screen,
+                                            NULL, tasklist);
+
+  return FALSE;
+}
+
+
+
+static void
+xfce_tasklist_update_monitor_geometry_idle_destroy (gpointer data)
+{
+  XFCE_TASKLIST (data)->update_monitor_geometry_id = 0;
 }
 
 
@@ -3738,3 +3755,16 @@ xfce_tasklist_set_size (XfceTasklist *tasklist,
       gtk_widget_queue_resize (GTK_WIDGET (tasklist));
     }
 }
+
+
+
+void
+xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist)
+{
+  if (tasklist->update_monitor_geometry_id == 0)
+    {
+      tasklist->update_monitor_geometry_id = g_idle_add_full (G_PRIORITY_LOW, xfce_tasklist_update_monitor_geometry_idle,
+                                                              tasklist, xfce_tasklist_update_monitor_geometry_idle_destroy);
+    }
+}
+
