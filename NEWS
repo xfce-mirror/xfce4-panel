@@ -1,3 +1,17 @@
+4.8.3
+=====
+- Tasklist: Work around segfaulting of group buttons.
+- Tasklist: Properly initialize the monitor geometry on startup (bug #7340).
+- Use portable abicheck.sh from xfconf.
+- Panel: Avoid recursing gtk_main_quit() on signal.
+- Tasklist: Hide wireframe when window is destroyed (bug #7377).
+- Directorymenu: Remove unused varaible.
+- Pager: Fix typo in row warning.
+- Tasklist: Fix function prototype.
+- Panel: Do no inline function.
+- Tasklist: add button release event to proxy item (bug #7362).
+- Translation updates (zh_CN, tr, de).
+
 4.8.2
 =====
 - Change packing order of buttons in pager to match wnck.
@@ -13,7 +27,7 @@
 - Activate windows on button release events (bug #7296).
 - Use the widget snapshot as tasklist draw icon.
 - Fix test so manual is installed (bug #7274).
-- Translation updates (he, sv, id, zh_CN, da, kk, pt, uk, 
+- Translation updates (he, sv, id, zh_CN, da, kk, pt, uk,
   zh_TW, ja, ru).
 
 4.8.1
