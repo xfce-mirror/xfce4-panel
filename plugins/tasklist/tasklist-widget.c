@@ -911,7 +911,9 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
                lp = lp->next, n_buttons--)
             {
               child = lp->data;
-              child->type = CHILD_TYPE_OVERFLOW_MENU;
+
+              if (child->type == CHILD_TYPE_WINDOW)
+                child->type = CHILD_TYPE_OVERFLOW_MENU;
             }
 
           *arrow_visible = TRUE;
@@ -1018,6 +1020,10 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
 
               if (tasklist->show_labels)
                 {
+                  /* TODO, this is a work-around, something else goes wrong
+                   * with counting the windows... */
+                  if (cols < 1)
+                    cols = 1;
                   w = area_width / cols--;
                   if (tasklist->max_button_length > 0
                       && w > tasklist->max_button_length)
