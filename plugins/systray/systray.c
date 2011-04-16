@@ -585,7 +585,7 @@ systray_plugin_box_expose_event_icon (GtkWidget *child,
       alloc = &child->allocation;
 
       /* skip hidden (see offscreen in box widget) icons */
-      if (alloc->x > 0 && alloc->y > 0)
+      if (alloc->x > -1 && alloc->y > -1)
         {
           gdk_cairo_set_source_pixmap (cr, gtk_widget_get_window (child),
                                        alloc->x, alloc->y);
