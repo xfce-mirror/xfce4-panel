@@ -344,7 +344,6 @@ panel_application_load (PanelApplication *application)
       if (array == NULL)
         continue;
 
-      /* walk the array in pairs of two */
       for (j = 0; j < array->len; j++)
         {
           /* get the plugin id */
@@ -635,10 +634,6 @@ panel_application_plugin_insert (PanelApplication  *application,
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
   panel_return_val_if_fail (name != NULL, FALSE);
 
-  /* leave if the window is locked */
-  if (panel_window_get_locked (window))
-    return FALSE;
-
   /* create a new panel plugin */
   provider = panel_module_factory_new_plugin (application->factory, name,
                                               gtk_window_get_screen (GTK_WINDOW (window)),
@@ -824,15 +819,12 @@ panel_application_drag_data_received (PanelWindow      *window,
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
 
-  /* we don't allow any kind of drops here when the panel is locked */
-  if (panel_window_get_locked (window))
-    {
-      gdk_drag_status (context, 0, drag_time);
-      return;
-    }
-
-  /* get the application */
   application = panel_application_get ();
+
+  /* we don't allow any kind of drops here when the panel is locked */
+  if (panel_application_get_locked (application)
+      || panel_window_get_locked (window))
+    goto invalid_drag;
 
   if (!application->drop_data_ready)
     {
@@ -945,6 +937,7 @@ panel_application_drag_data_received (PanelWindow      *window,
     }
   else
     {
+      invalid_drag:
       gdk_drag_status (context, 0, drag_time);
     }
 
@@ -1229,6 +1222,10 @@ panel_application_add_new_item (PanelApplication  *application,
   panel_return_if_fail (plugin_name != NULL);
   panel_return_if_fail (g_slist_length (application->windows) > 0);
 
+  /* leave if the config is locked */
+  if (panel_application_get_locked (application))
+    return;
+
   if (panel_module_factory_has_module (application->factory, plugin_name))
     {
       /* find a suitable window if there are 2 or more windows */
@@ -1251,8 +1248,11 @@ panel_application_add_new_item (PanelApplication  *application,
 
       /* add the plugin to the end of the choosen window */
       window = g_slist_nth_data (application->windows, nth);
-      panel_application_plugin_insert (application, window,
-                                       plugin_name, -1, arguments, -1);
+      if (!panel_window_get_locked (window))
+        {
+          panel_application_plugin_insert (application, window,
+                                           plugin_name, -1, arguments, -1);
+        }
     }
   else
     {
