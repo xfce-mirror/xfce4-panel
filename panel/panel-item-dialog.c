@@ -191,6 +191,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_ADD);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_default_size (GTK_WINDOW (dialog), 350, 450);
+  gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 
   dialog->add_button = gtk_button_new_from_stock (GTK_STOCK_ADD);
   gtk_widget_show (dialog->add_button);
