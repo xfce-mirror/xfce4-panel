@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-20 16:11+0000\n"
-"PO-Revision-Date: 2011-04-20 19:42-0300\n"
+"PO-Revision-Date: 2011-04-20 20:58-0300\n"
 "Last-Translator: Sérgio Cipolla <secipolla@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,11 +23,11 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "Adicionar um novo lançador para o painel baseado nesta informação do arquivo do desktop"
+msgstr "Adicionar um novo lançador ao painel baseado na informação deste arquivo desktop"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
-msgstr "Criar lançador no Painel do Xfce"
+msgstr "Criar lançador no painel"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid "Customize the panel"
@@ -42,27 +42,27 @@ msgstr "Painel"
 
 #: ../common/panel-utils.c:155
 msgid "_Read Online"
-msgstr "_Ler Online"
+msgstr "_Ler online"
 
 #: ../common/panel-utils.c:156
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Você pode ler o manual online do usuário. Este manual pode contudo não mostrar exatamente a versão de seu painel."
+msgstr "Você pode ler o manual do usuário online. Esse manual pode contudo não mostrar exatamente a versão do seu painel."
 
 #: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
-msgstr "O manual do usuário não está instalado em seu computador"
+msgstr "O manual do usuário não está instalado no seu computador"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:171
 msgid "Failed to open the documentation browser"
-msgstr "Falhou ao abrir a documentação no navegador"
+msgstr "Falhou ao abrir o navegador de documentação"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:889
 #: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Você tem certeza que deseja remover o espaço de trabalho \"%s\"?"
+msgstr "Você tem certeza que deseja remover \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
@@ -115,7 +115,7 @@ msgstr "Salvar a configuração do painel"
 
 #: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
-msgstr "Adicionar um novo plugin para o painel"
+msgstr "Adicionar um novo plugin ao painel"
 
 #: ../panel/main.c:81
 msgid "PLUGIN-NAME"
@@ -178,7 +178,7 @@ msgstr "Falhou ao salvar a configuração do painel"
 
 #: ../panel/main.c:396
 msgid "Failed to add a plugin to the panel"
-msgstr "Falhou ao adicionar um ao painel"
+msgstr "Falhou ao adicionar um plugin ao painel"
 
 #: ../panel/main.c:398
 msgid "Failed to restart the panel"
@@ -224,7 +224,7 @@ msgstr "Não foi possível executar \"%s\""
 
 #: ../panel/panel-dbus-client.c:208
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Plugin inválido para a sintaxe do evento. Use Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "Especificada sintaxe de evento do plugin inválida. Use NOME-DO-PLUGIN:NOME[:TIPO:VALOR]."
 
 #: ../panel/panel-dbus-client.c:241
 #, c-format
@@ -276,7 +276,7 @@ msgstr "Adicionar novos itens"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
-msgstr "Adicionar novos plugins ao painel"
+msgstr "Adiciona novos plugins ao painel"
 
 #: ../panel/panel-item-dialog.c:214
 #: ../plugins/launcher/launcher-dialog.glade.h:23
@@ -290,12 +290,12 @@ msgstr "Coloque a frase de pesquisa aqui"
 #: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Plugin \"%s\" saiu inesperadamente do painel, você quer iniciá-lo?"
+msgstr "Plugin \"%s\" saiu inesperadamente do painel, você quer reiniciá-lo?"
 
 #: ../panel/panel-plugin-external.c:428
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "O plugin reiniciou mais que uma vez nos últimos %d segundos. Se você pressionar Executar no painel ele tentará reiniciar o plugin, caso contrário ele será removido permanentemente do painel."
+msgstr "O plugin reiniciou mais que uma vez nos últimos %d segundos. Se você pressionar Executar, o painel tentará reiniciar o plugin, caso contrário ele será removido permanentemente do painel."
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -349,7 +349,7 @@ msgstr "Nome interno: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "A_utomatically increase the length"
-msgstr "Aumentar a_utomaticamente o comprimento"
+msgstr "_Aumentar automaticamente o comprimento"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -357,7 +357,7 @@ msgstr "Adicionar um novo painel"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Add new item to this panel"
-msgstr "Adicionar novo item a este painel"
+msgstr "Adicionar novo item ao painel"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
@@ -385,7 +385,7 @@ msgstr "C_or:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
-msgstr "D_isplay"
+msgstr "E_xibição"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
@@ -403,7 +403,7 @@ msgstr "Horizontal"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Ite_ms"
-msgstr "Ite_ns"
+msgstr "_Itens"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
@@ -418,12 +418,12 @@ msgstr "Medições"
 #: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
-msgstr "Move o item selecionado atualmente para uma linha abaixo"
+msgstr "Mover o item selecionado atualmente para uma linha abaixo"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
-msgstr "Move o item selecionado atualmente para uma linha acima"
+msgstr "Mover o item selecionado atualmente para uma linha acima"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
@@ -443,11 +443,11 @@ msgstr "Escolher uma cor do painel"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
-msgstr "Remove o item selecionado atualmente"
+msgstr "Remover o item selecionado atualmente"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
-msgstr "Remove o painel selecionado atualmente"
+msgstr "Remover o painel selecionado atualmente"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
@@ -455,19 +455,19 @@ msgstr "Selecionar uma imagem de fundo"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "Selecione esta opção para aumentar o comprimento do painel automaticamente se os plugins precisarem de mais espaço"
+msgstr "Selecione esta opção para aumentar o comprimento do painel automaticamente se os plugins precisarem de mais espaço."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Selecione esta opção para estender o painel sobre múltiplos monitores."
+msgstr "Selecione esta opção para estender o painel por múltiplos monitores."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr "Selecione esta opção para esconder os cabeçalhos do painel e trancar sua posição"
+msgstr "Selecione esta opção para esconder os manipuladores do painel e trancar sua posição."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr "Selecione esta opção para esconder o painel quando o ponteiro não estiver acima dele. Isto trabalha somente quando o painel é preso para o canto de uma tela"
+msgstr "Selecione esta opção para esconder o painel quando o ponteiro não estiver sobre ele. Isso só funciona quando o painel está preso a um canto da tela."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -479,15 +479,15 @@ msgstr "Cor sólida"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
-msgstr "Vão dos mo_nitores"
+msgstr "Abranger mo_nitores"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Transparência quando o ponteiro estiver pairando acima do painel, entre 0 (transparente) e 100 (totalmente opaco)."
+msgstr "Transparência quando o ponteiro estiver pairando sobre o painel, entre 0 (transparente) e 100 (totalmente opaco)."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Transparência quando o ponteiro não estiver pairando acima do painel, entre 0 (transparente) e 100 (totalmente opaco)."
+msgstr "Transparência quando o ponteiro não estiver pairando sobre o painel, entre 0 (transparente) e 100 (totalmente opaco)."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -521,7 +521,7 @@ msgstr "Orie_ntação:"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Size (pixels):"
-msgstr "_Tamanho (pixels):"
+msgstr "Ta_manho (pixels):"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/separator/separator-dialog.glade.h:8
@@ -673,27 +673,27 @@ msgstr "_Título do botão:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr "Ed_itar Menu"
+msgstr "Ed_itar menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
-msgstr "Menu arquivo"
+msgstr "Arquivo de menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr "Menu _arquivo:"
+msgstr "_Arquivo de menu:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
-msgstr "Selecionar um arquivo do menu"
+msgstr "Selecionar um arquivo de menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr "Selecione esta opção para mostrar o nome genérico do aplicativo menu, por exemplo \"Gerenciador de arquivo\" em vez de \"Thunar\""
+msgstr "Selecione esta opção para mostrar o nome genérico do aplicativo no menu, por exemplo \"Gerenciador de arquivo\" em vez de \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
-msgstr "Mostrar d_escrição do aplicativo na dica"
+msgstr "Mostrar _descrição do aplicativo na dica"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
@@ -701,7 +701,7 @@ msgstr "Mostrar n_omes genéricos nos aplicativos"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr "Mostrar íc_ones no menu"
+msgstr "Mostrar _ícones no menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
@@ -738,11 +738,11 @@ msgstr "Nenhum aplicativo encontrado"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1034
 msgid "Failed to load the applications menu"
-msgstr "Falhou ao carregar os aplicativos do menu"
+msgstr "Falhou ao carregar o menu de aplicativos"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "Mostrar um menu contendo categorias de aplicativos instalados"
+msgstr "Mostrar um menu contendo as categorias dos aplicativos instalados"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -766,7 +766,7 @@ msgstr "Opções:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr "Menu popup na posição atual do mouse"
+msgstr "Abrir o menu na posição atual do mouse"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
@@ -784,7 +784,7 @@ msgstr "Falhou ao executar comando do relógio"
 
 #: ../plugins/clock/clock.c:719
 msgid "Custom Format"
-msgstr "Formato Personalizado"
+msgstr "Formato personalizado"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
@@ -1105,7 +1105,7 @@ msgstr "Que horas são?"
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr "Diretório do menu"
+msgstr "Menu de diretórios"
 
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
@@ -1142,7 +1142,7 @@ msgstr "Abrir no Terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr "Mostrar um diretório árvore em um menu"
+msgstr "Mostrar uma árvore de diretórios num menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
@@ -1242,11 +1242,11 @@ msgstr "Norte"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr "Selecione esta opção para desabilitar as dicas ao mover sobre o botão do painel ou itens do menu."
+msgstr "Selecione esta opção para desabilitar as dicas ao mover o ponteiro sobre o botão do painel ou itens do menu."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Selecione esta opção para mover o menu clicado para o painel."
+msgstr "Selecione esta opção para mover o item de menu clicado para o painel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Show _label instead of icon"
@@ -1266,7 +1266,7 @@ msgstr "Oeste"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "_Arrow button position:"
-msgstr "_Posição do botão seta:"
+msgstr "_Posição do botão de seta:"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
@@ -1323,7 +1323,7 @@ msgstr "_Pontos"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
-msgstr "Controlador:"
+msgstr "Manipulador"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
 msgid "New Line"
@@ -1336,7 +1336,7 @@ msgstr "Separador"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "Transparent"
-msgstr "Tr_ansparência"
+msgstr "Transparente"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
@@ -1370,7 +1370,7 @@ msgstr "Incapaz de iniciar área de notificação"
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr "Mais provável que outro widget tenha levado a função acima de uma área de notificação. Esta área não será usada."
+msgstr "É provável que outro widget tenha tomado a função de uma área de notificação. Esta área não será usada."
 
 #: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
@@ -1564,7 +1564,7 @@ msgstr "Mostrar ações da área de tra_balho"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Window Menu"
-msgstr "Menu da janela"
+msgstr "Menu de janelas"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
