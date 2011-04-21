@@ -60,7 +60,15 @@ main (gint argc, gchar **argv)
   g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
 #endif
 
-  /* initialize gtk */
+  /* lookup the possible configuration files */
+  file = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, XFCE_46_CONFIG);
+  default_config_exists = g_file_test (DEFAULT_CONFIG, G_FILE_TEST_IS_REGULAR);
+  if (file == NULL && !default_config_exists)
+    {
+      g_warning ("No default or old configuration found");
+      return EXIT_FAILURE;
+    }
+
   gtk_init (&argc, &argv);
 
   if (!xfconf_init (&error))
@@ -70,8 +78,16 @@ main (gint argc, gchar **argv)
       return EXIT_FAILURE;
     }
 
-  /* lookup the old 4.6 config file */
-  file = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, XFCE_46_CONFIG);
+  /* check if we auto-migrate the default configuration */
+  if (g_getenv ("XFCE_PANEL_MIGRATE_DEFAULT") != NULL)
+    {
+      if (file != NULL)
+        g_message ("Tried to auto-migrate, but old configuration found");
+      else if (!!default_config_exists)
+        g_message ("Tried to auto-migrate, but no default configuration found");
+      else
+        goto migrate_default;
+    }
 
   /* create question dialog */
   dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
@@ -94,7 +110,6 @@ main (gint argc, gchar **argv)
 
   button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Use default config"), GTK_RESPONSE_YES);
   gtk_widget_set_tooltip_text (button, _("Load the default configuration"));
-  default_config_exists = g_file_test (DEFAULT_CONFIG, G_FILE_TEST_IS_REGULAR);
   gtk_widget_set_sensitive (button, default_config_exists);
   if (default_config_exists && file == NULL)
     default_response = GTK_RESPONSE_YES;
@@ -107,7 +122,8 @@ main (gint argc, gchar **argv)
   result = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
 
-  if (result == GTK_RESPONSE_OK && file != NULL)
+  if (result == GTK_RESPONSE_OK
+      && file != NULL)
     {
       /* restore 4.6 config */
       if (!migrate_46 (file, &error))
@@ -117,8 +133,11 @@ main (gint argc, gchar **argv)
           retval = EXIT_FAILURE;
         }
     }
-  else if (result == GTK_RESPONSE_YES && default_config_exists)
+  else if (result == GTK_RESPONSE_YES
+           && default_config_exists)
     {
+      migrate_default:
+
       /* apply default config */
       if (!migrate_default (DEFAULT_CONFIG, &error))
         {
