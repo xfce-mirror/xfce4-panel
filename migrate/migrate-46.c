@@ -849,11 +849,11 @@ migrate_46_end_element_handler (GMarkupParseContext  *context,
 
           /* set transparency */
           g_snprintf (prop, sizeof (prop), "/panels/panel-%u/leave-opacity", parser->panel_id_counter);
-          xfconf_channel_set_uint (parser->channel, prop,  parser->panel_transparency);
+          xfconf_channel_set_uint (parser->channel, prop, 100 - parser->panel_transparency);
 
           g_snprintf (prop, sizeof (prop), "/panels/panel-%u/enter-opacity", parser->panel_id_counter);
           xfconf_channel_set_uint (parser->channel, prop,  parser->panel_activetrans ?
-                                   parser->panel_transparency : 100);
+                                   100 - parser->panel_transparency : 100);
 
           /* prepare for the next panel */
           parser->panel_id_counter++;
