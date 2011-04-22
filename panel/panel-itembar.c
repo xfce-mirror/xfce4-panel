@@ -362,34 +362,31 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   PanelItembarChild *child;
   GtkRequisition     child_req;
   GtkAllocation      child_alloc;
-  guint              n_expand_children;
   guint              row;
-  gint               expand_length, border_width;
-  gint               expand_length_avail;
-  gint               expand_length_req;
-  gint               shrink_length;
-  gint               shrink_length_req;
-  gint               length_req, length;
-  gint               alloc_length;
+  gint               widget_length, border_width;
+  gint               expand_length_avail, expand_length_req;
+  gint               shrink_length_avail, shrink_length_req;
+  gint               length;
   gint               x, y;
   gboolean           expand_children_fit;
+  gint               new_length;
+  gint               child_length;
 
   widget->allocation = *allocation;
 
   border_width = GTK_CONTAINER (widget)->border_width;
 
   if (itembar->horizontal)
-    expand_length = allocation->width - 2 * border_width;
+    widget_length = allocation->width - 2 * border_width;
   else
-    expand_length = allocation->height - 2 * border_width;
+    widget_length = allocation->height - 2 * border_width;
 
   /* loop for wrap items */
   for (row = 0, li = itembar->children; li != NULL; li = g_slist_next (li), row++)
     {
-      expand_length_avail = expand_length;
+      expand_length_avail = widget_length;
       expand_length_req = 0;
-      n_expand_children = 0;
-      shrink_length = 0;
+      shrink_length_avail = 0;
       shrink_length_req = 0;
 
       /* get information about the expandable lengths */
@@ -410,7 +407,6 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
               if (G_UNLIKELY (child->expand))
                 {
-                  n_expand_children++;
                   expand_length_req += length;
                 }
               else
@@ -418,7 +414,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
                   expand_length_avail -= length;
 
                   if (child->shrink)
-                    shrink_length += length;
+                    shrink_length_avail += length;
                 }
             }
           else
@@ -440,10 +436,11 @@ panel_itembar_size_allocate (GtkWidget     *widget,
        * not really enough length to expand (ie. items make the panel grow,
        * not the length set by the user) */
       expand_children_fit = expand_length_req == expand_length_avail;
+
       if (expand_length_avail < 0)
         {
           /* check if there are plugins on the panel we can shrink */
-          if (shrink_length > 0)
+          if (shrink_length_avail > 0)
             shrink_length_req = ABS (expand_length_avail);
 
           expand_length_avail = 0;
@@ -506,61 +503,48 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               break;
             }
 
+          child_length = itembar->horizontal ? child_req.width : child_req.height;
+
           if (G_UNLIKELY (!expand_children_fit && child->expand))
             {
-              /* try to equally distribute the length between the expanding plugins */
-              length_req = itembar->horizontal ? child_req.width : child_req.height;
-              panel_assert (n_expand_children > 0);
-              if (G_LIKELY (expand_length_req > 0 || length_req > 0))
-                alloc_length = expand_length_avail * length_req / expand_length_req;
-              else
-                alloc_length = expand_length_avail / n_expand_children;
+              /* equally share the length between the expanding plugins */
+              panel_assert (expand_length_req > 0);
+              new_length = expand_length_avail * child_length / expand_length_req;
 
-              if (itembar->horizontal)
-                child_alloc.width = alloc_length;
-              else
-                child_alloc.height = alloc_length;
+              expand_length_req -= child_length;
+              expand_length_avail -= new_length;
 
-              n_expand_children--;
-              expand_length_req -= length_req;
-              expand_length_avail -= alloc_length;
+              child_length = new_length;
             }
           else if (child->shrink && shrink_length_req > 0)
             {
               /* equally shrink all shrinking plugins */
-              length_req = itembar->horizontal ? child_req.width : child_req.height;
-              alloc_length = shrink_length_req * length_req / shrink_length;
+              panel_assert (shrink_length_avail > 0);
+              new_length = shrink_length_req * child_length / shrink_length_avail;
 
-              shrink_length_req -= alloc_length;
-              shrink_length -= length_req;
+              shrink_length_req -= new_length;
+              shrink_length_avail -= child_length;
 
-              alloc_length = length_req - alloc_length;
-              if (alloc_length < 1)
-                alloc_length = 1;
-
-              if (itembar->horizontal)
-                child_alloc.width = alloc_length;
-              else
-                child_alloc.height = alloc_length;
-
-
+              /* the size we decrease can never be more then the actual length,
+               * if this is the case the size allocation is lacking behind,
+               * which happens on panel startup with a expanding panel */
+              if (new_length < child_length)
+                child_length -= new_length;
             }
-          else
-            {
-              if (itembar->horizontal)
-                child_alloc.width = child_req.width;
-              else
-                child_alloc.height = child_req.height;
-            }
+
+          if (child_length < 1)
+            child_length = 1;
 
           if (itembar->horizontal)
             {
               child_alloc.height = itembar->size;
+              child_alloc.width = child_length;
               x += child_alloc.width;
             }
           else
             {
               child_alloc.width = itembar->size;
+              child_alloc.height = child_length;
               y += child_alloc.height;
             }
 
