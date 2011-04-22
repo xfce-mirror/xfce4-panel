@@ -144,7 +144,8 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* expand the plugin */
-  xfce_panel_plugin_set_expand (panel_plugin, TRUE);
+  /* xfce_panel_plugin_set_expand (panel_plugin, FALSE); */
+  xfce_panel_plugin_set_shrink (panel_plugin, TRUE);
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin->tasklist),
