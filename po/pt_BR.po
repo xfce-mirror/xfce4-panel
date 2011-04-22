@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-20 16:11+0000\n"
-"PO-Revision-Date: 2011-04-21 12:46-0300\n"
+"PO-Revision-Date: 2011-04-22 13:45-0300\n"
 "Last-Translator: Sérgio Cipolla <secipolla@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
@@ -209,18 +209,18 @@ msgstr "Falhou ao lançar o aplicativo de migração"
 #: ../panel/panel-application.c:1451
 #: ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
-msgstr "Você iniciou X sem gerenciador de sessão. Ao clicar em Sair, você fechará o servidor X."
+msgstr "Você iniciou X sem um gerenciador de sessão. Ao clicar em Sair, você fechará o servidor X."
 
 #: ../panel/panel-application.c:1452
 #: ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
-msgstr "Você tem certeza que deseja remover o painel?"
+msgstr "Você tem certeza que deseja fechar o painel?"
 
 #: ../panel/panel-application.c:1460
 #: ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Não foi possível executar \"%s\""
+msgstr "Não foi possível executar o comando \"%s\""
 
 #: ../panel/panel-dbus-client.c:208
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
@@ -229,7 +229,7 @@ msgstr "Especificada sintaxe de evento do plugin inválida. Use NOME-DO-PLUGIN:N
 #: ../panel/panel-dbus-client.c:241
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Aviso inválido digite \"%s\". Tipos válidos são bool, double, int, string e uint."
+msgstr "Tipo de hint \"%s\" inválido. Tipos válidos são bool, double, int, string e uint."
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -268,7 +268,7 @@ msgstr "Como o painel está sendo executado em modo quiosque, você não pode fa
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
-msgstr "Não é permitida a modificação no painel"
+msgstr "A modificação do painel não é permintida"
 
 #: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
@@ -290,7 +290,7 @@ msgstr "Coloque a frase de pesquisa aqui"
 #: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Plugin \"%s\" saiu inesperadamente do painel, você quer reiniciá-lo?"
+msgstr "O plugin \"%s\" saiu inesperadamente do painel, você quer reiniciá-lo?"
 
 #: ../panel/panel-plugin-external.c:428
 #, c-format
@@ -369,7 +369,7 @@ msgstr "Aparê_ncia"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
-msgstr "Mostrar e _esconder o painel automaticamente"
+msgstr "Mostrar e _ocultar o painel automaticamente"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
@@ -463,11 +463,11 @@ msgstr "Selecione esta opção para estender o painel por múltiplos monitores."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr "Selecione esta opção para esconder os manipuladores do painel e trancar sua posição."
+msgstr "Selecione esta opção para ocultar os manipuladores do painel e trancar sua posição."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr "Selecione esta opção para esconder o painel quando o ponteiro não estiver sobre ele. Isso só funciona quando o painel estiver preso a um canto da tela."
+msgstr "Selecione esta opção para ocultar o painel quando o ponteiro não estiver sobre ele. Isso só funciona quando o painel estiver preso a um canto da tela."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -500,7 +500,7 @@ msgstr "_Alfa:"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr "_Enter:"
+msgstr "_Entrada:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
@@ -509,7 +509,7 @@ msgstr "_Arquivo:"
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
-msgstr "_Sair:"
+msgstr "_Saída:"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
@@ -566,7 +566,7 @@ msgstr "Escolha abaixo qual configuração você quer para a primeira inicializa
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
-msgstr "Migrar para configuração antiga"
+msgstr "Migrar a configuração antiga"
 
 #: ../migrate/main.c:90
 msgid "Migrate the old 4.6 configuration to Xfconf"
@@ -603,7 +603,7 @@ msgstr "Botões de ação"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Button Actions"
-msgstr "Botões de ação"
+msgstr "Ações dos botões"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "_First button:"
@@ -697,7 +697,7 @@ msgstr "Mostrar _descrição do aplicativo na dica"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
-msgstr "Mostrar n_omes genéricos nos aplicativos"
+msgstr "Mostrar os n_omes genéricos dos aplicativos"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
@@ -730,7 +730,7 @@ msgstr "Selecionar um ícone"
 #: ../plugins/launcher/launcher.c:2277
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Falhou ao executar comando \"%s\""
+msgstr "Falhou ao executar o comando \"%s\""
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1011
 msgid "No applications found"
@@ -748,7 +748,7 @@ msgstr "Mostrar um menu contendo as categorias dos aplicativos instalados"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr "Usar:"
+msgstr "Uso:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
@@ -780,7 +780,7 @@ msgstr "Semana %V"
 
 #: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
-msgstr "Falhou ao executar comando do relógio"
+msgstr "Falhou ao executar o comando do relógio"
 
 #: ../plugins/clock/clock.c:719
 msgid "Custom Format"
@@ -813,7 +813,7 @@ msgstr "Digital"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
-msgstr "Mostrar _segundos"
+msgstr "Mostrar os _segundos"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
@@ -826,7 +826,7 @@ msgstr "Apr_oximação:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
-msgstr "Separador de horário com fl_ash"
+msgstr "_Piscar os separadores"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
@@ -838,7 +838,7 @@ msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr "Mo_strar AM/PM"
+msgstr "Mostr_ar AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
@@ -851,12 +851,12 @@ msgstr "Mostrar pontos _inativos"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
-msgstr "Mostrar gri_d"
+msgstr "Mostrar _grade"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "O formato descreve a data e partes do tempo para inserir no nome do arquivo. Por exemplo, %Y será substituído com o ano, %me com o mês e %d com o dia. Veja a documentação do utilitário de data para informação adicional."
+msgstr "O formato descreve as partes referentes à data e à hora para inserir no nome do arquivo. Por exemplo, %Y será substituído com o ano, %m com o mês e %d com o dia. Veja a documentação do comando \"date\" para mais informações."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -864,7 +864,7 @@ msgstr "Relógio _binário real"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr "_Layout:"
+msgstr "Apresen_tação:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
@@ -967,7 +967,7 @@ msgstr "cinco para %1"
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr "%1 hora"
+msgstr "%1 horas"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1047,7 +1047,7 @@ msgstr "cinco para as %1"
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr "%1 horas"
+msgstr "%1 hora"
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
@@ -1110,12 +1110,12 @@ msgstr "Menu de diretórios"
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Falhou ao lançar aplicativo \"%s\""
+msgstr "Falhou ao lançar o aplicativo \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "Falhou ao perguntar por tipo de conteúdo para \"%s\""
+msgstr "Falhou ao perguntar pelo tipo de conteúdo para \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
@@ -1125,7 +1125,7 @@ msgstr "Nenhum aplicativo padrão encontrado para \"%s\""
 #: ../plugins/directorymenu/directorymenu.c:605
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Falhou ao lançar aplicativo padrão para \"%s\""
+msgstr "Falhou ao lançar o aplicativo padrão para \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
@@ -1138,7 +1138,7 @@ msgstr "Abrir pasta"
 
 #: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
-msgstr "Abrir no Terminal"
+msgstr "Abrir no terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1146,7 +1146,7 @@ msgstr "Mostrar uma árvore de diretórios num menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Coloque uma lista de padrões que serão usados para determinar quais arquivos são visíveis em um diretório. Se você especificar mais que um padrão aqui, os itens da lista devem ser separadados com ponto e vírgula (ex. *.txt;*.doc)."
+msgstr "Coloque uma lista de padrões que serão usados para determinar quais arquivos serão visíveis em um diretório. Se você especificar mais que um padrão, os itens da lista devem ser separadados com ponto e vírgula (ex. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1160,15 +1160,15 @@ msgstr "Selecionar um diretório"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid "Show _hidden files"
-msgstr "Mostrar _arquivos escondidos"
+msgstr "Mostrar _arquivos ocultos"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
-msgstr "_Diretório base"
+msgstr "_Diretório base:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr "_Arquivo padrão"
+msgstr "_Padrão de arquivo:"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
@@ -1180,7 +1180,7 @@ msgstr "Item sem nome"
 
 #: ../plugins/launcher/launcher.c:1697
 msgid "No items"
-msgstr "Sem itens"
+msgstr "Nenhum item"
 
 #: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
@@ -1275,11 +1275,11 @@ msgstr "Lançador de programas com menu opcional"
 #: ../plugins/pager/pager.c:354
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
-msgstr "Configurações da área de trabalho..."
+msgstr "Configurações da área de _trabalho..."
 
 #: ../plugins/pager/pager.c:430
 msgid "Unable to open the workspace settings"
-msgstr "Não é possível abrir as configurações da área de trabalho"
+msgstr "Incapaz de abrir as configurações da área de trabalho"
 
 #: ../plugins/pager/pager-buttons.c:555
 #: ../plugins/windowmenu/windowmenu.c:854
@@ -1302,11 +1302,11 @@ msgstr "Mostrar uma visualização em miniatura dos espaços de trabalho com ret
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr "Mostrar visualização da mi_niatura"
+msgstr "Mostrar visualização em mi_niatura"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Alte_rnar de área de trabalho usando a roda do mouse"
+msgstr "Alte_rnar entre áreas de trabalho usando a roda do mouse"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
@@ -1319,7 +1319,7 @@ msgstr "Alternar entre áreas de trabalho virtuais"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "Dots"
-msgstr "_Pontos"
+msgstr "Pontos"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
@@ -1348,11 +1348,11 @@ msgstr "Adiciona um separador ou espaço entre os itens do painel"
 
 #: ../plugins/showdesktop/showdesktop.c:194
 msgid "Restore the minimized windows"
-msgstr "Restaurar janelas minimizadas"
+msgstr "Restaurar as janelas minimizadas"
 
 #: ../plugins/showdesktop/showdesktop.c:196
 msgid "Minimize all open windows and show the desktop"
-msgstr "Minimizar as janelas e mostrar a área de trabalho"
+msgstr "Minimizar as janelas abertas e mostrar a área de trabalho"
 
 #: ../plugins/showdesktop/showdesktop.c:199
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
@@ -1361,11 +1361,11 @@ msgstr "Mostrar a área de trabalho"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
-msgstr "Esconder todas as janelas e mostrar a área de trabalho"
+msgstr "Ocultar todas as janelas e mostrar a área de trabalho"
 
 #: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
-msgstr "Incapaz de iniciar área de notificação"
+msgstr "Incapaz de iniciar a área de notificação"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
@@ -1400,11 +1400,11 @@ msgstr "Tamanho _máximo de ícone (px):"
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Falha ao obter a seleção do gerenciador para a tela %d"
+msgstr "Falhou ao obter a seleção do gerenciador para a tela %d"
 
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
-msgstr "Área onde o ícone de notificação aparece"
+msgstr "Área onde os ícones de notificação aparecem"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
@@ -1412,7 +1412,7 @@ msgstr "Sempre"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr "D_esenhar quadro na janela quando um botão estiver pairando"
+msgstr "D_esenhar quadro da janela quando pairar sobre um botão"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
@@ -1428,7 +1428,7 @@ msgstr "Nunca"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr "Restaurar janelas minimizadas para _área de trabalho atual"
+msgstr "Restaurar as janelas minimizadas para a _área de trabalho atual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Ro_tate buttons in vertical panel"
@@ -1448,11 +1448,11 @@ msgstr "Mostrar _legendas dos botões"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
-msgstr "Mostrar somente janelas _minimizadas"
+msgstr "Mostrar somente as janelas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Mostrar janelas de _todas áreas de trabalho"
+msgstr "Mostrar janelas de _todas as áreas de trabalho"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from all mo_nitors"
@@ -1513,7 +1513,7 @@ msgstr "Área de trabalho"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
 msgid "No Windows"
-msgstr "Sem janelas"
+msgstr "Nenhuma janela"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
@@ -1535,11 +1535,11 @@ msgstr "Remover a área de trabalho %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
-msgstr "S_eta"
+msgstr "Seta"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr "Layout do botão:"
+msgstr "Apresentação do botão:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Enable _urgency notification"
@@ -1547,7 +1547,7 @@ msgstr "Habilitar notificação de _urgência"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
-msgstr "Í_cone"
+msgstr "Ícone"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
@@ -1555,11 +1555,11 @@ msgstr "Mostrar janelas de _todas as áreas de trabalho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
-msgstr "Mostrar _nome da área de trabalho"
+msgstr "Mostrar os _nomes das áreas de trabalho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"
-msgstr "Mostrar ações da área de tra_balho"
+msgstr "Mostrar ações de área de tra_balho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
