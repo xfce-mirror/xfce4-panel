@@ -97,6 +97,7 @@ struct _PanelItembarChild
 {
   GtkWidget *widget;
   guint      expand : 1;
+  guint      shrink : 1;
   guint      wrap : 1;
 };
 
@@ -111,6 +112,7 @@ enum
 {
   CHILD_PROP_0,
   CHILD_PROP_EXPAND,
+  CHILD_PROP_SHRINK,
   CHILD_PROP_WRAP
 };
 
@@ -180,6 +182,13 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtk_container_class_install_child_property (gtkcontainer_class,
                                               CHILD_PROP_EXPAND,
                                               g_param_spec_boolean ("expand",
+                                                                    NULL, NULL,
+                                                                    FALSE,
+                                                                    EXO_PARAM_READWRITE));
+
+  gtk_container_class_install_child_property (gtkcontainer_class,
+                                              CHILD_PROP_SHRINK,
+                                              g_param_spec_boolean ("shrink",
                                                                     NULL, NULL,
                                                                     FALSE,
                                                                     EXO_PARAM_READWRITE));
@@ -358,6 +367,8 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   gint               expand_length, border_width;
   gint               expand_length_avail;
   gint               expand_length_req;
+  gint               shrink_length;
+  gint               shrink_length_req;
   gint               length_req, length;
   gint               alloc_length;
   gint               x, y;
@@ -378,6 +389,8 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       expand_length_avail = expand_length;
       expand_length_req = 0;
       n_expand_children = 0;
+      shrink_length = 0;
+      shrink_length_req = 0;
 
       /* get information about the expandable lengths */
       for (lp = li; lp != NULL; lp = g_slist_next (lp))
@@ -403,6 +416,9 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               else
                 {
                   expand_length_avail -= length;
+
+                  if (child->shrink)
+                    shrink_length += length;
                 }
             }
           else
@@ -425,7 +441,13 @@ panel_itembar_size_allocate (GtkWidget     *widget,
        * not the length set by the user) */
       expand_children_fit = expand_length_req == expand_length_avail;
       if (expand_length_avail < 0)
-        expand_length_avail = 0;
+        {
+          /* check if there are plugins on the panel we can shrink */
+          if (shrink_length > 0)
+            shrink_length_req = ABS (expand_length_avail);
+
+          expand_length_avail = 0;
+        }
 
       /* allocate the children on this row */
       for (; li != NULL; li = g_slist_next (li))
@@ -502,6 +524,26 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               n_expand_children--;
               expand_length_req -= length_req;
               expand_length_avail -= alloc_length;
+            }
+          else if (child->shrink && shrink_length_req > 0)
+            {
+              /* equally shrink all shrinking plugins */
+              length_req = itembar->horizontal ? child_req.width : child_req.height;
+              alloc_length = shrink_length_req * length_req / shrink_length;
+
+              shrink_length_req -= alloc_length;
+              shrink_length -= length_req;
+
+              alloc_length = length_req - alloc_length;
+              if (alloc_length < 1)
+                alloc_length = 1;
+
+              if (itembar->horizontal)
+                child_alloc.width = alloc_length;
+              else
+                child_alloc.height = alloc_length;
+
+
             }
           else
             {
@@ -647,6 +689,13 @@ panel_itembar_set_child_property (GtkContainer *container,
       child->expand = boolean;
       break;
 
+    case CHILD_PROP_SHRINK:
+      boolean = g_value_get_boolean (value);
+      if (child->shrink == boolean)
+        return;
+      child->shrink = boolean;
+      break;
+
     case CHILD_PROP_WRAP:
       boolean = g_value_get_boolean (value);
       if (child->wrap == boolean)
@@ -681,6 +730,10 @@ panel_itembar_get_child_property (GtkContainer *container,
     {
     case CHILD_PROP_EXPAND:
       g_value_set_boolean (value, child->expand);
+      break;
+
+    case CHILD_PROP_SHRINK:
+      g_value_set_boolean (value, child->shrink);
       break;
 
     case CHILD_PROP_WRAP:
