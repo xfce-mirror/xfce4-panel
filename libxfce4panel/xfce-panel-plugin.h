@@ -174,6 +174,11 @@ gboolean              xfce_panel_plugin_get_expand          (XfcePanelPlugin   *
 void                  xfce_panel_plugin_set_expand          (XfcePanelPlugin   *plugin,
                                                              gboolean           expand);
 
+gboolean              xfce_panel_plugin_get_shrink          (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+
+void                  xfce_panel_plugin_set_shrink          (XfcePanelPlugin   *plugin,
+                                                             gboolean           shrink);
+
 GtkOrientation        xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 XfceScreenPosition    xfce_panel_plugin_get_screen_position (XfcePanelPlugin   *plugin) G_GNUC_PURE;

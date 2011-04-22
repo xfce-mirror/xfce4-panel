@@ -125,7 +125,8 @@ enum
   PROP_ORIENTATION,
   PROP_SIZE,
   PROP_SCREEN_POSITION,
-  PROP_EXPAND
+  PROP_EXPAND,
+  PROP_SHRINK
 };
 
 enum
@@ -164,6 +165,7 @@ struct _XfcePanelPluginPrivate
   gchar              **arguments;
   gint                 size;
   guint                expand : 1;
+  guint                shrink : 1;
   GtkOrientation       orientation;
   XfceScreenPosition   screen_position;
   guint                locked : 1;
@@ -563,6 +565,24 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                          G_PARAM_READWRITE
                                                          | G_PARAM_STATIC_STRINGS));
 
+  /**
+   * XfcePanelPlugin:shrink:
+   *
+   * Wether the #XfcePanelPlugin can shrink when there is no space left on the panel.
+   * Plugin writes can use it to read or set this property, but xfce_panel_plugin_set_shrink()
+   * is recommended.
+   *
+   * Since: 4.10
+   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_SHRINK,
+                                   g_param_spec_boolean ("shrink",
+                                                         "Shrink",
+                                                         "Whether this plugin can shrink",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE
+                                                         | G_PARAM_STATIC_STRINGS));
+
   item_properties = g_quark_from_static_string ("item-properties");
   item_about = g_quark_from_static_string ("item-about");
 }
@@ -582,6 +602,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->arguments = NULL;
   plugin->priv->size = 0;
   plugin->priv->expand = FALSE;
+  plugin->priv->shrink = FALSE;
   plugin->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
   plugin->priv->screen_position = XFCE_SCREEN_POSITION_NONE;
   plugin->priv->menu = NULL;
@@ -688,6 +709,10 @@ xfce_panel_plugin_get_property (GObject    *object,
       g_value_set_boolean (value, private->expand);
       break;
 
+    case PROP_SHRINK:
+      g_value_set_boolean (value, private->shrink);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -737,6 +762,11 @@ xfce_panel_plugin_set_property (GObject      *object,
 
     case PROP_EXPAND:
       xfce_panel_plugin_set_expand (XFCE_PANEL_PLUGIN (object),
+                                    g_value_get_boolean (value));
+      break;
+
+    case PROP_SHRINK:
+      xfce_panel_plugin_set_shrink (XFCE_PANEL_PLUGIN (object),
                                     g_value_get_boolean (value));
       break;
 
@@ -1648,6 +1678,64 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
                                                   PROVIDER_SIGNAL_COLLAPSE_PLUGIN);
 
       g_object_notify (G_OBJECT (plugin), "expand");
+    }
+}
+
+
+
+/**
+ * xfce_panel_plugin_get_shrink:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * Whether the plugin can shrink if the size on the panel is limited. This
+ * is effective with plugins that do not have expand set, but can accept
+ * a smaller size when needed.
+ *
+ * Returns: %TRUE when the plugin can shrink,
+ *          %FALSE otherwise.
+ *
+ * Since: 4.10
+ **/
+gboolean
+xfce_panel_plugin_get_shrink (XfcePanelPlugin *plugin)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
+  g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), FALSE);
+
+  return plugin->priv->shrink;
+}
+
+
+
+/**
+ * xfce_panel_plugin_set_shrink:
+ * @plugin : an #XfcePanelPlugin.
+ * @shrink : whether the plugin can shrink.
+ *
+ * Wether the plugin can shrink if the size on the panel
+ * is limited. This does not work if the plugin is expanded.
+ **/
+void
+xfce_panel_plugin_set_shrink (XfcePanelPlugin *plugin,
+                              gboolean         shrink)
+{
+  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
+
+  /* normalize the value */
+  shrink = !!shrink;
+
+  /* check if update is required */
+  if (G_LIKELY (xfce_panel_plugin_get_shrink (plugin) != shrink))
+    {
+      plugin->priv->shrink = shrink;
+
+      /* emit signal (in provider) */
+      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                              shrink ? PROVIDER_SIGNAL_SHRINK_PLUGIN :
+                                                  PROVIDER_SIGNAL_UNSHRINK_PLUGIN);
+
+      g_object_notify (G_OBJECT (plugin), "shrink");
     }
 }
 
