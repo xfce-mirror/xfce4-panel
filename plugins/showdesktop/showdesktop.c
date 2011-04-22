@@ -36,6 +36,9 @@ static gboolean show_desktop_plugin_size_changed            (XfcePanelPlugin    
                                                              gint                    size);
 static void     show_desktop_plugin_toggled                 (GtkToggleButton        *button,
                                                              ShowDesktopPlugin      *plugin);
+static gboolean show_desktop_plugin_button_release_event    (GtkToggleButton        *button,
+                                                             GdkEventButton         *event,
+                                                             ShowDesktopPlugin      *plugin);
 static void     show_desktop_plugin_showing_desktop_changed (WnckScreen             *wnck_screen,
                                                              ShowDesktopPlugin      *plugin);
 
@@ -94,6 +97,8 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   gtk_widget_set_name (button, "showdesktop-button");
   g_signal_connect (G_OBJECT (button), "toggled",
       G_CALLBACK (show_desktop_plugin_toggled), plugin);
+  g_signal_connect (G_OBJECT (button), "button-release-event",
+      G_CALLBACK (show_desktop_plugin_button_release_event), plugin);
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), button);
   gtk_widget_show (button);
 
@@ -197,6 +202,43 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
 
   gtk_widget_set_tooltip_text (GTK_WIDGET (button), text);
   panel_utils_set_atk_info (GTK_WIDGET (button), _("Show Desktop"), text);
+}
+
+
+
+static gboolean
+show_desktop_plugin_button_release_event (GtkToggleButton   *button,
+                                          GdkEventButton    *event,
+                                          ShowDesktopPlugin *plugin)
+{
+  WnckWorkspace *active_ws;
+  GList         *windows, *li;
+  WnckWindow    *window;
+
+  panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen), FALSE);
+
+  if (event->button == 2)
+    {
+      active_ws = wnck_screen_get_active_workspace (plugin->wnck_screen);
+      windows = wnck_screen_get_windows (plugin->wnck_screen);
+
+      for (li = windows; li != NULL; li = li->next)
+        {
+          window = WNCK_WINDOW (li->data);
+
+          if (wnck_window_get_workspace (window) != active_ws)
+            continue;
+
+          /* toggle the shade state */
+          if (wnck_window_is_shaded (window))
+            wnck_window_unshade (window);
+          else
+            wnck_window_shade (window);
+        }
+    }
+
+  return FALSE;
 }
 
 
