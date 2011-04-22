@@ -207,15 +207,25 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
 static void
 applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
 {
+  const gchar *desktop;
+
   plugin->show_menu_icons = TRUE;
   plugin->show_button_title = TRUE;
   plugin->custom_menu = FALSE;
 
-  panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
-               "XDG_MENU_PREFIX is set to \"%s\"",
-               g_getenv ("XDG_MENU_PREFIX"));
+  /* if the value is unset, fallback to XFCE, if the
+   * value is empty, allow all applications in the menu */
+  desktop = g_getenv ("XDG_CURRENT_DESKTOP");
+  if (G_LIKELY (desktop == NULL))
+    desktop = "XFCE";
+  else if (*desktop == '\0')
+    desktop = NULL;
 
-  garcon_set_environment ("XFCE");
+  panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
+               "XDG_MENU_PREFIX is set to \"%s\", menu environment is \"%s\"",
+               g_getenv ("XDG_MENU_PREFIX"), desktop);
+
+  garcon_set_environment (desktop);
 
   plugin->button = xfce_panel_create_toggle_button ();
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
@@ -508,7 +518,7 @@ applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_WIDGET (button));
 
-  if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (button), command, 
+  if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (button), command,
                                           FALSE, FALSE, &error))
     {
       xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), command);
