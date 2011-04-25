@@ -36,7 +36,7 @@
 /**
  * SECTION: xfce-hvbox
  * @title: XfceHVBox
- * @short_description: Container widget with configurable orienation
+ * @short_description: Container widget with configurable orientation
  * @include: libxfce4panel/libxfce4panel.h
  *
  * #XfceHVBox is a #GtkBox widget that allows the user to change
