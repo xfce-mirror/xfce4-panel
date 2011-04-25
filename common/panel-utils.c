@@ -151,13 +151,17 @@ panel_utils_show_help (GtkWindow   *parent,
     }
 
   if (G_LIKELY (exists))
-    uri = g_strconcat ("file://", filename, offset != NULL ? "#" : NULL, offset, NULL);
+    {
+      uri = g_strconcat ("file://", filename, offset != NULL ? "#" : NULL, offset, NULL);
+    }
   else if (xfce_dialog_confirm (parent, "web-browser", _("_Read Online"),
                _("You can read the user manual online. This manual may however "
                  "not exactly match your panel version."),
                _("The user manual is not installed on your computer")))
-    uri = g_strconcat ("http://foo-projects.org/~nick/docs/xfce4-panel/?lang=",
-                       locale, "&page=", page, "&offset=", offset, NULL);
+    {
+      uri = g_strconcat ("http://docs.xfce.org/help.php?package=xfce4-panel&lang=",
+                         locale, "&page=", page, "&anchor=", offset, NULL);
+    }
 
   g_free (filename);
   g_free (locale);
