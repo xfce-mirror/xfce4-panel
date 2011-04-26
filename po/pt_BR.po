@@ -7,13 +7,13 @@
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2008.
 # Henrique P. Machado <hpmachado@gnome.org>, 2009-2010.
 # Sérgio Cipolla <secipolla@gmail.com>, 2011.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-24 22:10+0000\n"
-"PO-Revision-Date: 2011-04-22 17:42-0300\n"
+"PO-Revision-Date: 2011-04-26 16:50-0300\n"
 "Last-Translator: Sérgio Cipolla <secipolla@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,8 @@ msgid "Customize the panel"
 msgstr "Personalizar o painel"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
+#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-window.c:2263
 #: ../migrate/main.c:100
 msgid "Panel"
 msgstr "Painel"
@@ -78,17 +79,20 @@ msgid "Pane_l"
 msgstr "Paine_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1126 ../panel/panel-window.c:2275
+#: ../libxfce4panel/xfce-panel-plugin.c:1126
+#: ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "Adicionar _novos itens..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1137 ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1137
+#: ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferências do painel"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1154 ../panel/panel-window.c:2302
+#: ../libxfce4panel/xfce-panel-plugin.c:1154
+#: ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "Encerrar sessã_o"
 
@@ -96,7 +100,8 @@ msgstr "Encerrar sessã_o"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar o diálogo \"Preferências do painel\""
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-DO-PAINEL"
 
@@ -191,7 +196,8 @@ msgstr "Falhou ao enviar mensagem D-Bus"
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Você quer iniciar o painel? Se você o fizer, certifique-se de salvar a sessão ao desconectar, assim o painel é iniciado automaticamente na próxima vez que você se conectar."
 
-#: ../panel/main.c:416 ../panel/main.c:430
+#: ../panel/main.c:416
+#: ../panel/main.c:430
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nenhuma instância em execução do %s foi encontrada"
@@ -200,15 +206,18 @@ msgstr "Nenhuma instância em execução do %s foi encontrada"
 msgid "Failed to launch the migration application"
 msgstr "Falhou ao lançar o aplicativo de migração"
 
-#: ../panel/panel-application.c:1461 ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1461
+#: ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Você iniciou X sem um gerenciador de sessão. Ao clicar em Sair, você fechará o servidor X."
 
-#: ../panel/panel-application.c:1462 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1462
+#: ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Você tem certeza que deseja fechar o painel?"
 
-#: ../panel/panel-application.c:1470 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1470
+#: ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Não foi possível executar o comando \"%s\""
@@ -237,7 +246,8 @@ msgstr ""
 "Sérgio Cipolla <secipolla@gmail.com>, 2011."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Adicionar novo item"
 
@@ -246,7 +256,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Por favor escolha um painel para o novo plugin:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147
+#: ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
@@ -1263,18 +1274,20 @@ msgstr "_Posição do botão de seta:"
 msgid "Program launcher with optional menu"
 msgstr "Lançador de programas com menu opcional"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
-msgstr "Configurações da área de _trabalho..."
+msgstr "Configurações dos espaços de _trabalho..."
 
 #: ../plugins/pager/pager.c:430
 msgid "Unable to open the workspace settings"
-msgstr "Incapaz de abrir as configurações da área de trabalho"
+msgstr "Incapaz de abrir as configurações dos espaços de trabalho"
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:555
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
-msgstr "Área de trabalho %d"
+msgstr "Espaço de trabalho %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1295,12 +1308,12 @@ msgstr "Mostrar visualização em mi_niatura"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Alte_rnar entre áreas de trabalho usando a roda do mouse"
+msgstr "Alte_rnar entre espaços de trabalho usando a roda do mouse"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
-msgstr "Alternador de área de trabalho"
+msgstr "Alternador de espaço de trabalho"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1417,7 +1430,7 @@ msgstr "Nunca"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Restore minimized windows to current _workspace"
-msgstr "Restaurar as janelas minimizadas para a _área de trabalho atual"
+msgstr "Restaurar as janelas minimizadas para o espaço de trabalho _atual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Ro_tate buttons in vertical panel"
@@ -1441,7 +1454,7 @@ msgstr "Mostrar somente as janelas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Mostrar janelas de _todas as áreas de trabalho"
+msgstr "Mostrar janelas de _todas os espaços de trabalho ou áreas de visualização"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from all mo_nitors"
@@ -1510,17 +1523,17 @@ msgstr "Janelas urgentes"
 
 #: ../plugins/windowmenu/windowmenu.c:1300
 msgid "Add Workspace"
-msgstr "Adicionar área de trabalho"
+msgstr "Adicionar espaço de trabalho"
 
 #: ../plugins/windowmenu/windowmenu.c:1320
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Remover a área de trabalho \"%s\""
+msgstr "Remover o espaço de trabalho \"%s\""
 
 #: ../plugins/windowmenu/windowmenu.c:1322
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Remover a área de trabalho %d"
+msgstr "Remover o espaço de trabalho %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
@@ -1540,15 +1553,15 @@ msgstr "Ícone"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr "Mostrar janelas de _todas as áreas de trabalho"
+msgstr "Mostrar janelas de _todas os espaços de trabalho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
-msgstr "Mostrar os _nomes das áreas de trabalho"
+msgstr "Mostrar os _nomes dos espaços de trabalho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"
-msgstr "Mostrar ações de área de tra_balho"
+msgstr "Mostrar ações de espaço de tra_balho"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
