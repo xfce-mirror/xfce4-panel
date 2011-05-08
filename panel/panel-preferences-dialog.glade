@@ -272,6 +272,20 @@
                                     <property name="position">4</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkCheckButton" id="disable-struts">
+                                    <property name="label" translatable="yes">Don't _reserve space on borders</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge.</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="draw_indicator">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="position">5</property>
+                                  </packing>
+                                </child>
                               </object>
                             </child>
                           </object>

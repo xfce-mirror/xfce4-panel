@@ -407,6 +407,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active");
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active");
   panel_preferences_dialog_bindings_add (dialog, "autohide", "active");
+  panel_preferences_dialog_bindings_add (dialog, "disable-struts", "active");
   panel_preferences_dialog_bindings_add (dialog, "size", "value");
   panel_preferences_dialog_bindings_add (dialog, "length", "value");
   panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active");
