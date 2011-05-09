@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-08 17:10+0000\n"
+"POT-Creation-Date: 2011-05-09 10:11+0000\n"
 "PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -34,61 +34,61 @@ msgid "Customize the panel"
 msgstr "Tilpas panelet"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2247
-#: ../migrate/main.c:84
+#: ../panel/panel-preferences-dialog.glade.h:25 ../panel/panel-window.c:2263
+#: ../migrate/main.c:100
 msgid "Panel"
 msgstr "Panel"
 
-#: ../common/panel-utils.c:155
+#: ../common/panel-utils.c:157
 msgid "_Read Online"
 msgstr "_Læs på internet"
 
-#: ../common/panel-utils.c:156
+#: ../common/panel-utils.c:158
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr "Du kan læse brugermanualen på internettet. Den manual kan være ikke helt i overenstemmelse med din panelversion."
 
-#: ../common/panel-utils.c:158
+#: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
 msgstr "Brugermanualen er ikke installeret på din computer"
 
 #. display an error message to the user
-#: ../common/panel-utils.c:171
+#: ../common/panel-utils.c:175
 msgid "Failed to open the documentation browser"
 msgstr "Kunne ikke åbne dokumentationsbrowseren"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:889
-#: ../panel/panel-preferences-dialog.c:1048
+#: ../libxfce4panel/xfce-panel-plugin.c:919
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Er du sikker på at du vil fjerne \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:894
-#: ../panel/panel-preferences-dialog.c:1051
+#: ../libxfce4panel/xfce-panel-plugin.c:924
+#: ../panel/panel-preferences-dialog.c:1052
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Hvis du fjerner elementet fra panelet vil det være tabt."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1054
+#: ../libxfce4panel/xfce-panel-plugin.c:1084
 msgid "_Move"
 msgstr "_Flyt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1088
+#: ../libxfce4panel/xfce-panel-plugin.c:1118
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2259
+#: ../libxfce4panel/xfce-panel-plugin.c:1126 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2270
+#: ../libxfce4panel/xfce-panel-plugin.c:1137 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1154 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "_Logud"
 
@@ -132,66 +132,66 @@ msgid "Print version information and exit"
 msgstr "Udskriv versionsinformation og afslut"
 
 #. parse context options
-#: ../panel/main.c:240
+#: ../panel/main.c:248
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTER...]"
 
-#: ../panel/main.c:247
+#: ../panel/main.c:255
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Tast \"%s --help\" for brugervejledning."
 
-#: ../panel/main.c:266
+#: ../panel/main.c:274
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce udviklingsholdet. Alle rettigheder forbeholdes."
 
-#: ../panel/main.c:267
+#: ../panel/main.c:275
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Rapporter venligst fejl til <%s>."
 
-#: ../panel/main.c:318
+#: ../panel/main.c:326
 msgid "There is already a running instance"
 msgstr "Der findes allerede en kørende instans"
 
 #. spawn ourselfs again
-#: ../panel/main.c:367
+#: ../panel/main.c:375
 msgid "Restarting..."
 msgstr "Genstarter..."
 
-#: ../panel/main.c:382
+#: ../panel/main.c:390
 msgid "Failed to show the preferences dialog"
 msgstr "Kunne ikke vise dialogen indstillinger"
 
-#: ../panel/main.c:384
+#: ../panel/main.c:392
 msgid "Failed to show the add new items dialog"
 msgstr "Kunne ikke vise dialogen tilføj nye elementer"
 
-#: ../panel/main.c:386
+#: ../panel/main.c:394
 msgid "Failed to save the panel configuration"
 msgstr "Kunne ikke gemme indstillingen til panelet"
 
-#: ../panel/main.c:388
+#: ../panel/main.c:396
 msgid "Failed to add a plugin to the panel"
 msgstr "Kunne ikke føje et udvidelsesmodul til panelet"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:398
 msgid "Failed to restart the panel"
 msgstr "Kunne ikke genstarte panelet"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:400
 msgid "Failed to quit the panel"
 msgstr "Kunne ikke afslutte panelet"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:402
 msgid "Failed to send D-Bus message"
 msgstr "Kunne ikke sende D-bus-besked"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:413
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Ønsker du at starte panelet? Hvis du vil det skal du huske at gemme sessionen ved logud. Det vil sikre dig at panelet vil blive startet automatisk næste gang ved logind."
 
-#: ../panel/main.c:408 ../panel/main.c:422
+#: ../panel/main.c:416 ../panel/main.c:430
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Ingen kørende instans af %s blev fundet"
@@ -200,15 +200,15 @@ msgstr "Ingen kørende instans af %s blev fundet"
 msgid "Failed to launch the migration application"
 msgstr "Kunne ikke starte migrationsprogrammet"
 
-#: ../panel/panel-application.c:1464 ../plugins/actions/actions.c:427
+#: ../panel/panel-application.c:1461 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Hvis du har startet X uden sessionshåndteringen vil dette lukke X-serveren ned."
 
-#: ../panel/panel-application.c:1465 ../plugins/actions/actions.c:428
+#: ../panel/panel-application.c:1462 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Er du sikker på, at du vil afslutte panelet?"
 
-#: ../panel/panel-application.c:1473 ../plugins/actions/actions.c:436
+#: ../panel/panel-application.c:1470 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kunne ikke køre kommando \"%s\""
@@ -244,7 +244,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Vælg venligst et panel for det nye udvidelsesmodul:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:768
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -265,60 +265,60 @@ msgstr "Tilføj nye elementer"
 msgid "Add new plugins to the panel"
 msgstr "Tilføj nye udvidelsesmoduler til panelet"
 
-#: ../panel/panel-item-dialog.c:213
+#: ../panel/panel-item-dialog.c:214
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Søg:"
 
-#: ../panel/panel-item-dialog.c:221
+#: ../panel/panel-item-dialog.c:222
 msgid "Enter search phrase here"
 msgstr "Indtasts søgeudtryk her"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Udvicelsesmodul \"%s\" forlod uventet panelet. Vil du genstarte det?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Udvidelsesmodulet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker 'Kør' vil panelet prøve at genstarte udvidelsesmodulet ellers vil det blive permanent fjernet fra panelet."
 
-#: ../panel/panel-preferences-dialog.c:453
+#: ../panel/panel-preferences-dialog.c:454
 msgid "Automatic"
 msgstr "Automatisk"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:472
+#: ../panel/panel-preferences-dialog.c:473
 #, c-format
 msgid "Screen %d"
 msgstr "Skærm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:498
+#: ../panel/panel-preferences-dialog.c:499
 #, c-format
 msgid "Monitor %d"
 msgstr "Overvåg %d"
 
-#: ../panel/panel-preferences-dialog.c:828
+#: ../panel/panel-preferences-dialog.c:829
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Indstillingerne til panel og udvidelsesmoduler vil blive fjernet for altid"
 
-#: ../panel/panel-preferences-dialog.c:829
+#: ../panel/panel-preferences-dialog.c:830
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Er du sikker på, at du vil fjerne panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:912
+#: ../panel/panel-preferences-dialog.c:913
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:917
+#: ../panel/panel-preferences-dialog.c:918
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -329,7 +329,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:930
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Intert navn: %s-%d"
@@ -375,143 +375,151 @@ msgid "D_isplay"
 msgstr "_Vis"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
+msgid "Don't _reserve space on borders"
+msgstr "Undlad at _reservere plads ved adskillere"
+
+#: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
 msgstr "Redigér det aktuelle valgte element"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Generelt"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Horizontal"
 msgstr "Horisontal"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Ite_ms"
 msgstr "Ele_menter"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "L_ængde (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Measurements"
 msgstr "Dimensioner til panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
 msgstr "Flyt det aktuelle valgte element en række ned"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
 msgstr "Flyt det aktuelle valgte element en række op"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "None (use system style)"
 msgstr "Ingen (brug systemstil)"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "O_utput:"
 msgstr "Ud_data:"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Opacity"
 msgstr "Ugennemsigtig"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Pick a Panel Color"
 msgstr "Vælg en panelfarve"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove currently selected item"
 msgstr "Fjern det aktuelle valgte element"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Remove the currently selected panel"
 msgstr "Fjern det aktuelle valgte panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Select A Background Image"
 msgstr "Vælg et baggrundsbillede"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:30
+msgid "Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge."
+msgstr "Vælg dette tilvalg hvis du ønsker maksimerede vinduer til at dække arealet bag panelet. Dette fungerer kun, når panelet er tilsluttet til et skærmhjørne."
+
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Vælg denne indstilling for automatisk udvidelse af panelets længde hvis udvidelsesmodulerne behøver mere plads."
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Vælg denne indstilling for af brede panelet ud over flere skærme."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "Vælg denne indstilling for at skjule håndtagene til panelet og fastlåse positionen."
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Vælg denne indstilling for at skjule panelet når markøren ikke er over det. Dette virker kun, når panelet er hæftet til en skærmkant."
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Show about information of the currently selected item"
 msgstr "Vis om information af det aktuelle valgte element"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Solid color"
 msgstr "Ensfarvet"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Span mo_nitors"
 msgstr "Udbred på _skærme"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Gennemsigtigt når markøren svæver over panelet med 0 fuld gennemsigtig og 100 uigennemsigtig."
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Gennemsigtigt når markøren svæver over panelet med 0 fuld gennemsigtig og 100 uigennemsigtig."
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "_Enter:"
 msgstr "_Indtast:"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_File:"
 msgstr "_Fil:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Leave:"
 msgstr "_Forlad:"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Lock panel"
 msgstr "_Lås panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Orientation:"
 msgstr "_Orientering:"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_Size (pixels):"
 msgstr "_Størrelse (pixels):"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:50
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
 msgstr "_Stil:"
@@ -540,47 +548,47 @@ msgstr "Øvet"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../migrate/main.c:78
+#: ../migrate/main.c:94
 msgid "Welcome to the first start of the panel"
 msgstr "Velkommen til den første opstart af panelet"
 
-#: ../migrate/main.c:80
+#: ../migrate/main.c:96
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr "Fordi panelet er flyttet til et nyt system for gemme indstillingerne, er det nødt til at indlæse en frisk basisindstilling."
 
-#: ../migrate/main.c:83
+#: ../migrate/main.c:99
 msgid "Choose below which setup you want for the first startup."
 msgstr "Vælg forneden hvilken opsætning du ønsker for den første opstart."
 
-#: ../migrate/main.c:89
+#: ../migrate/main.c:105
 msgid "Migrate old config"
 msgstr "Migrér gamle config"
 
-#: ../migrate/main.c:90
+#: ../migrate/main.c:106
 msgid "Migrate the old 4.6 configuration to Xfconf"
 msgstr "Migrér den gamle indstilling 4.6 til Xfconf"
 
-#: ../migrate/main.c:95
+#: ../migrate/main.c:111
 msgid "Use default config"
 msgstr "Brug standard config"
 
-#: ../migrate/main.c:96
+#: ../migrate/main.c:112
 msgid "Load the default configuration"
 msgstr "Indlæs standardindstillingen"
 
-#: ../migrate/main.c:102
+#: ../migrate/main.c:117
 msgid "One empty panel"
 msgstr "Et tomt panel"
 
-#: ../migrate/main.c:103
+#: ../migrate/main.c:118
 msgid "Start with one empty panel"
 msgstr "Begynd med et tomt panel"
 
-#: ../migrate/main.c:115
+#: ../migrate/main.c:131
 msgid "Failed to migrate the old panel configuration"
 msgstr "Kunne ikke migrere den gamle panelindstilling"
 
-#: ../migrate/main.c:125
+#: ../migrate/main.c:144
 msgid "Failed to load the default configuration"
 msgstr "Kunne ikke indlæse standardindstillingen"
 
@@ -708,23 +716,23 @@ msgstr "_Ikon:"
 msgid "_Show button title"
 msgstr "_Vis knaptitel"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:475
-#: ../plugins/directorymenu/directorymenu.c:378
+#: ../plugins/applicationsmenu/applicationsmenu.c:485
+#: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Vælg et ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:513
-#: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2289
+#: ../plugins/applicationsmenu/applicationsmenu.c:524
+#: ../plugins/applicationsmenu/applicationsmenu.c:765
+#: ../plugins/launcher/launcher.c:2277
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kunne ikke køre kommando \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1010
+#: ../plugins/applicationsmenu/applicationsmenu.c:1021
 msgid "No applications found"
 msgstr "Ingen programmer blev fundet"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1033
+#: ../plugins/applicationsmenu/applicationsmenu.c:1044
 msgid "Failed to load the applications menu"
 msgstr "Kunne ikke starte programmenu"
 
@@ -1090,42 +1098,42 @@ msgstr "tolv"
 msgid "What time is it?"
 msgstr "Hvad er klokken?"
 
-#: ../plugins/directorymenu/directorymenu.c:250
+#: ../plugins/directorymenu/directorymenu.c:243
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Mappemenu"
 
-#: ../plugins/directorymenu/directorymenu.c:559
+#: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Kunne ikke starte program \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:590
+#: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Kunne ikke forespørge om indholdstype for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:599
+#: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Standardprogram for \"%s\" blev ikke fundet"
 
-#: ../plugins/directorymenu/directorymenu.c:614
+#: ../plugins/directorymenu/directorymenu.c:605
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Kunne ikke starte standardprogram for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:705
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Kunne ikke køre det foretrukne program for kategori \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:778
+#: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
 msgstr "Åbn mappe"
 
-#: ../plugins/directorymenu/directorymenu.c:789
+#: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
 msgstr "Åbn i terminal"
 
@@ -1159,15 +1167,15 @@ msgstr "_Basismappe:"
 msgid "_File Pattern:"
 msgstr "_Filmønster:"
 
-#: ../plugins/launcher/launcher.c:407
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Åbn menu til opstart"
 
-#: ../plugins/launcher/launcher.c:1558
+#: ../plugins/launcher/launcher.c:1556
 msgid "Unnamed Item"
 msgstr "Ikke navngivet element"
 
-#: ../plugins/launcher/launcher.c:1701
+#: ../plugins/launcher/launcher.c:1697
 msgid "No items"
 msgstr "Ingen elementer"
 
@@ -1266,7 +1274,7 @@ msgstr "Program afvikler med valgfri menu"
 msgid "Workspace _Settings..."
 msgstr "Arbejdsområde_indstillinger..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:430
 msgid "Unable to open the workspace settings"
 msgstr "Kunne ikke åbne indstillingerne til arbejdsområde"
 
@@ -1334,15 +1342,15 @@ msgstr "_Udvid"
 msgid "Adds a separator or space between panel items"
 msgstr "Tilføj en skillelinje eller et mellemrum mellem panelets elementer"
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:199
 msgid "Restore the minimized windows"
 msgstr "Gendan de minimerede vinduer"
 
-#: ../plugins/showdesktop/showdesktop.c:196
+#: ../plugins/showdesktop/showdesktop.c:201
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimér alle vinduer og vis skrivebordet"
 
-#: ../plugins/showdesktop/showdesktop.c:203
+#: ../plugins/showdesktop/showdesktop.c:204
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
@@ -1471,23 +1479,23 @@ msgstr "Vindue_gruppering:"
 msgid "Window title"
 msgstr "Vinduestitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3013
+#: ../plugins/tasklist/tasklist-widget.c:3099
 msgid "Mi_nimize All"
 msgstr "Mi_nimér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3022
+#: ../plugins/tasklist/tasklist-widget.c:3108
 msgid "Un_minimize All"
 msgstr "Gen_dan alle minimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3028
+#: ../plugins/tasklist/tasklist-widget.c:3114
 msgid "Ma_ximize All"
 msgstr "Maksi_mér alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3037
+#: ../plugins/tasklist/tasklist-widget.c:3123
 msgid "_Unmaximize All"
 msgstr "_Gendan alle maksimerede"
 
-#: ../plugins/tasklist/tasklist-widget.c:3047
+#: ../plugins/tasklist/tasklist-widget.c:3133
 msgid "_Close All"
 msgstr "_Luk alle"
 
