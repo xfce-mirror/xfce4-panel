@@ -7,95 +7,92 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-05-11 10:11+0000\n"
 "PO-Revision-Date: 2010-02-22 20:43+0100\n"
-"Last-Translator: Vincent Tunru <projects@vinnl.nl>\n"
+"Last-Translator: Pjotr\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop file"
 msgstr ""
+"Voeg een nieuwe snelstarter toe aan de werkbalk, gebaseerd op de informatie "
+"van dit bureaubladbestand"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-#, fuzzy
 msgid "Create Launcher on the panel"
-msgstr "Snelstarter op het paneel maken"
+msgstr "Maak snelstarter op de werkbalk"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel"
-msgstr "Het paneel aanpassen"
+msgstr "Pas de werkbalk aan"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
-#: ../migrate/main.c:84
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:25 ../panel/panel-window.c:2263
+#: ../migrate/main.c:100
 msgid "Panel"
-msgstr "Paneel %d"
+msgstr "Werkbalk"
 
-#: ../common/panel-utils.c:155
+#: ../common/panel-utils.c:157
 msgid "_Read Online"
 msgstr "_Lees Online"
 
-#: ../common/panel-utils.c:156
+#: ../common/panel-utils.c:158
 msgid ""
 "You can read the user manual online. This manual may however not exactly "
 "match your panel version."
 msgstr ""
+"U kunt de handleiding raadplegen op het internet. Die handleiding zou echter "
+"niet geheel kunnen overeenkomen met uw werkbalkversie."
 
-#: ../common/panel-utils.c:158
-#, fuzzy
+#: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
-msgstr ""
-"De Xfce Paneel gebruikershandleiding is niet geïnstalleerd op deze computer"
+msgstr "De handleiding is niet geïnstalleerd op uw computer"
 
 #. display an error message to the user
-#: ../common/panel-utils.c:171
-#, fuzzy
+#: ../common/panel-utils.c:175
 msgid "Failed to open the documentation browser"
-msgstr "Kon het toepassingen-menu niet laden"
+msgstr "Kon de documentatiedoorzoeker niet openen"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:889
-#: ../panel/panel-preferences-dialog.c:1048
+#: ../libxfce4panel/xfce-panel-plugin.c:919
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:894
-#: ../panel/panel-preferences-dialog.c:1051
+#: ../libxfce4panel/xfce-panel-plugin.c:924
+#: ../panel/panel-preferences-dialog.c:1052
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
-"Als u een item van het paneel verwijdert kan dit niet meer ongedaan gemaakt "
-"worden."
+"Als u een element van het paneel verwijdert, dan kan dit niet meer ongedaan "
+"gemaakt worden."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1054
+#: ../libxfce4panel/xfce-panel-plugin.c:1084
 msgid "_Move"
 msgstr "_Verplaatsen"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1088
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1118
 msgid "Pane_l"
-msgstr "Paneel %d"
+msgstr "_Werkbalk"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1126 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
-msgstr "_Nieuwe items toevoegen..."
+msgstr "_Nieuwe elementen toevoegen..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1137 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "Paneelvoork_euren..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1154 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "Af_melden"
 
@@ -113,7 +110,7 @@ msgstr "Geef het \"Nieuwe items toevoegen\"-dialoogvenster weer"
 
 #: ../panel/main.c:80
 msgid "Save the panel configuration"
-msgstr "Sla de paneel configuratie op"
+msgstr "Sla de paneelconfiguratie op"
 
 #: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
@@ -136,103 +133,108 @@ msgstr "Actieve panelen afsluiten"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "Print versie-informatie en sluit af"
+msgstr "Druk versie-informatie af en sluit af"
 
 #. parse context options
-#: ../panel/main.c:240
+#: ../panel/main.c:248
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTEN...]"
 
-#: ../panel/main.c:247
+#: ../panel/main.c:255
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Type \"%s --help\" voor gebruiksaanwijzingen."
+msgstr "Tik \"%s --help\" voor gebruiksaanwijzingen."
 
-#: ../panel/main.c:266
+#: ../panel/main.c:274
 msgid "The Xfce development team. All rights reserved."
-msgstr "Het Xfce ontwikkelteam. Alle rechten voorbehouden."
+msgstr "De Xfce-ontwikkelploeg. Alle rechten voorbehouden."
 
-#: ../panel/main.c:267
+#: ../panel/main.c:275
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Meld fouten a.u.b. op <%s>."
+msgstr "Meld fouten a.u.b. bij <%s>."
 
-#: ../panel/main.c:318
+#: ../panel/main.c:326
 msgid "There is already a running instance"
 msgstr "Er is al een actieve instantie"
 
 #. spawn ourselfs again
-#: ../panel/main.c:367
+#: ../panel/main.c:375
 msgid "Restarting..."
 msgstr "Opnieuw aan het opstarten..."
 
-#: ../panel/main.c:382
+#: ../panel/main.c:390
 msgid "Failed to show the preferences dialog"
-msgstr "Kon de instellingen niet weergeven"
+msgstr "Kon de instellingendialoog niet weergeven"
 
-#: ../panel/main.c:384
+#: ../panel/main.c:392
 msgid "Failed to show the add new items dialog"
 msgstr ""
-"Kon het dialoogvenster voor het toevoegen van nieuwe items niet weergeven"
+"Kon het dialoogvenster voor het toevoegen van nieuwe elementen niet weergeven"
 
-#: ../panel/main.c:386
+#: ../panel/main.c:394
 msgid "Failed to save the panel configuration"
-msgstr "Kon de instellingen niet opslaan"
+msgstr "Kon de paneelinstellingen niet opslaan"
 
-#: ../panel/main.c:388
+#: ../panel/main.c:396
 msgid "Failed to add a plugin to the panel"
 msgstr "Kon de plugin niet aan het paneel toevoegen"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:398
 msgid "Failed to restart the panel"
 msgstr "Kon het paneel niet opnieuw opstarten"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:400
 msgid "Failed to quit the panel"
 msgstr "Kon het paneel niet afsluiten"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:402
 msgid "Failed to send D-Bus message"
 msgstr "Kon het D-Busbericht niet versturen"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:413
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
+"Wilt u de werkbalk starten? Zo ja, zorg er dan voor dat u de sessie opslaat "
+"bij afmelden, zodat de werkbalk automatisch wordt gestart wanneer u zich "
+"weer aanmeldt."
 
-#: ../panel/main.c:408 ../panel/main.c:422
+#: ../panel/main.c:416 ../panel/main.c:430
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Geen actieve instantie van %s gevonden"
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:195
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1461 ../plugins/actions/actions.c:421
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
+"U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u "
+"op Sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1462 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u het paneel wilt afsluiten?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1470 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kon het commando \"%s\" niet uitvoeren"
 
-#: ../panel/panel-dbus-client.c:209
+#: ../panel/panel-dbus-client.c:208
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
-"Ongeldige plugingebeurtenissyntax gespecificeerd. Gebruik PLUGINNAAM:NAAM[:"
+"Ongeldige plugin-gebeurtenis-syntax gespecificeerd. Gebruik PLUGINNAAM:NAAM[:"
 "TYPE:WAARDE]."
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -241,7 +243,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "Het paneel van de Xfce desktopomgeving"
+msgstr "Het paneel van de Xfce werkomgeving"
 
 #: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
@@ -250,14 +252,14 @@ msgstr "Vincent Tunru <projects@vinnl.nl>"
 #. setup the dialog
 #: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
-msgstr "Nieuw item toevoegen"
+msgstr "Nieuw element toevoegen"
 
 #: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
 msgstr "Kies een paneel voor de nieuwe plugin:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:768
 #, c-format
 msgid "Panel %d"
 msgstr "Paneel %d"
@@ -267,38 +269,38 @@ msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
-"Omdat het paneel in kiosk-modus draait, kunt u geen veranderingen aan de "
+"Omdat het paneel in kioskmodus draait, kunt u geen veranderingen aan de "
 "configuratie aanbrengen als normale gebruiker"
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
-msgstr "Aanpassen van het paneel niet toegestaan"
+msgstr "Aanpassen van het paneel is niet toegestaan"
 
 #: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
-msgstr "Nieuwe items toevoegen"
+msgstr "Nieuwe elementen toevoegen"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
 msgstr "Nieuwe plugins aan het paneel toevoegen"
 
-#: ../panel/panel-item-dialog.c:213
+#: ../panel/panel-item-dialog.c:214
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
 msgstr "_Zoeken:"
 
-#: ../panel/panel-item-dialog.c:221
+#: ../panel/panel-item-dialog.c:222
 msgid "Enter search phrase here"
 msgstr "Geef hier een zoekterm op"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
-"De plugin \"%s\" is onverwacht opgehouden, wilt u deze plugin opnieuw "
-"starten?"
+"De plugin \"%s\" heeft onverwacht het paneel verlaten, wilt u deze plugin "
+"opnieuw starten?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -306,46 +308,46 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 "De plugin is meer dan één keer opnieuw opgestart in de afgelopen %d "
-"seconden. Druk op \"Uitvoeren\" om nogmaals te proberen de plugin opnieuw te "
-"starten, anders zal deze plugin van het paneel verwijderd worden."
+"seconden. Druk op \"Uitvoeren\" om te proberen de plugin opnieuw te starten, "
+"anders zal deze plugin blijvend van het paneel verwijderd worden."
 
-#: ../panel/panel-preferences-dialog.c:453
+#: ../panel/panel-preferences-dialog.c:454
 msgid "Automatic"
 msgstr "Automatisch"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:472
+#: ../panel/panel-preferences-dialog.c:473
 #, c-format
 msgid "Screen %d"
 msgstr "Scherm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:498
+#: ../panel/panel-preferences-dialog.c:499
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:828
+#: ../panel/panel-preferences-dialog.c:829
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "De instellingen van het panel en de plugins zullen permanent verwijderd "
 "worden"
 
-#: ../panel/panel-preferences-dialog.c:829
+#: ../panel/panel-preferences-dialog.c:830
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Weet u zeker dat u paneel %d wil verwijderen?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:912
+#: ../panel/panel-preferences-dialog.c:913
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:917
+#: ../panel/panel-preferences-dialog.c:918
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -356,7 +358,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:930
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interne naam: %s-%d"
@@ -371,20 +373,19 @@ msgstr "Nieuw paneel toevoegen"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Add new item to this panel"
-msgstr "Nieuw item aan dit paneel toevoegen"
+msgstr "Nieuw element aan dit paneel toevoegen"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-#, fuzzy
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr ""
-"Alfawaarde van de achtergrond van het paneel, tussen 0 (transparant) en 100 "
-"(ondoorzichtig)."
+"Alfawaarde van de achtergrond van de werkbalk, tussen 0 (volledig "
+"transparant) en 100 (volledig ondoorzichtig)."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
-msgstr ""
+msgstr "_Uiterlijk"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -396,7 +397,7 @@ msgstr "Achtergrond"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
-msgstr "Achtergrond afbeelding"
+msgstr "Achtergrondafbeelding"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
@@ -407,90 +408,105 @@ msgid "D_isplay"
 msgstr "_Weergave"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Edit the currently selected item"
-msgstr "Bewerk het geselecteerde item"
+msgid "Don't _reserve space on borders"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Edit the currently selected item"
+msgstr "Bewerk het geselecteerde element"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Algemeen"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Ite_ms"
-msgstr "Ite_ms"
+msgstr "Ele_menten"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "L_engte (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Measurements"
 msgstr "Afmetingen"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
-msgstr "Verplaats het geselecteerde item één plaats omlaag"
-
-#: ../panel/panel-preferences-dialog.glade.h:20
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-msgid "Move currently selected item up by one row"
-msgstr "Verplaats het geselecteerde item één plaats omhoog"
+msgstr "Verplaats het thans geselecteerde element één rij omlaag"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
-msgid "None (use system style)"
-msgstr "Geen (gebruik systeem stijl)"
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item up by one row"
+msgstr "Verplaats het thans geselecteerde element één rij omhoog"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
-msgid "O_utput:"
-msgstr "O_utput:"
+msgid "None (use system style)"
+msgstr "Geen (gebruik systeemstijl)"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Opacity"
-msgstr ""
+msgid "O_utput:"
+msgstr "_Uitvoer:"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
-msgid "Pick a Panel Color"
-msgstr "Selecteer een paneel kleur"
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Opacity"
+msgstr "Ondoorzichtigheid"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-msgid "Remove currently selected item"
-msgstr "Verwijder het geselecteerde item"
+msgid "Pick a Panel Color"
+msgstr "Selecteer een paneelkleur"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
+msgid "Remove currently selected item"
+msgstr "Verwijder het geselecteerde element"
+
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Remove the currently selected panel"
 msgstr "Verwijder het geselecteerde paneel"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
-msgid "Select A Background Image"
-msgstr "Selecteer een achtergrond kleur"
-
 #: ../panel/panel-preferences-dialog.glade.h:29
+msgid "Select A Background Image"
+msgstr "Selecteer een achtergrondkleur"
+
+#: ../panel/panel-preferences-dialog.glade.h:30
+#, fuzzy
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
+msgstr ""
+"Selecteer deze optie om het paneel te verbergen als er geen muisaanwijzer op "
+"rust. Dit werkt alleen als het paneel aan de rand van het scherm zit."
+
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
+"Kies deze optie om de lengte van de werkbalk automatisch te vergroten "
+"wanneer de plugins meer ruimte nodig hebben."
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 "Selecteer deze optie om het paneel over meerdere schermen uit te strekken."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 "Selecteer deze optie om de handvatten van het paneel te verbergen en de "
 "positie vast te zetten."
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
@@ -498,142 +514,143 @@ msgstr ""
 "Selecteer deze optie om het paneel te verbergen als er geen muisaanwijzer op "
 "rust. Dit werkt alleen als het paneel aan de rand van het scherm zit."
 
-#: ../panel/panel-preferences-dialog.glade.h:33
-msgid "Show about information of the currently selected item"
-msgstr "Informatie over het geselecteerde item weergeven"
-
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Solid color"
-msgstr ""
-
 #: ../panel/panel-preferences-dialog.glade.h:35
+msgid "Show about information of the currently selected item"
+msgstr "Informatie over het geselecteerde element weergeven"
+
+#: ../panel/panel-preferences-dialog.glade.h:36
+msgid "Solid color"
+msgstr "Enkele kleur"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Span mo_nitors"
 msgstr "Over meerdere _beeldschermen"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
-msgstr "Transparantie als de muisaanwijzer over het paneel gaat."
+msgstr ""
+"Transparantie wanneer de muisaanwijzer over de werkbalk gaat, tussen 0 "
+"(volledig transparant) en 100 (volledig ondoorzichtig)."
 
-#: ../panel/panel-preferences-dialog.glade.h:37
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Transparantie als de muisaanwijzer over het paneel gaat."
+msgstr ""
+"Transparantie wanneer de muisaanwijzer NIET over de werkbalk gaat, tussen 0 "
+"(volledig transparant) en 100 (volledig ondoorzichtig)."
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Vertical"
 msgstr "Verticaal"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "_Enter:"
 msgstr "_Binnengaan:"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_File:"
-msgstr ""
+msgstr "_Bestand"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Leave:"
 msgstr "Ver_laten:"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Lock panel"
 msgstr "Paneel _vastzetten"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Orientation:"
 msgstr "_Oriëntatie:"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_Size (pixels):"
 msgstr "Grootte (pixel_s):"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:50
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
 msgstr "_Stijl:"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "_Nieuw Spel"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr ""
+msgstr "_Niveau"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "Beginner"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Gemiddeld"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Ervaren"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Deskundige"
 
-#: ../migrate/main.c:78
-#, fuzzy
+#: ../migrate/main.c:94
 msgid "Welcome to the first start of the panel"
-msgstr "Welkom bij de eerste start van het Xfce-paneel"
+msgstr "Welkom bij de eerste start van de werkbalk"
 
-#: ../migrate/main.c:80
+#: ../migrate/main.c:96
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
-"Omdat het paneel een nieuw configuratiesysteem heeft, moeten de "
+"Omdat het paneel een nieuw configuratiesysteem heeft, moeten in het begin de "
 "standaardinstellingen worden geladen."
 
-#: ../migrate/main.c:83
+#: ../migrate/main.c:99
 msgid "Choose below which setup you want for the first startup."
 msgstr ""
 "Kies hieronder welke instelling gebruikt moet worden bij de eerste start."
 
-#: ../migrate/main.c:89
+#: ../migrate/main.c:105
 msgid "Migrate old config"
 msgstr "Oude instellingen overnemen"
 
-#: ../migrate/main.c:90
+#: ../migrate/main.c:106
 msgid "Migrate the old 4.6 configuration to Xfconf"
 msgstr "Neem de oude instellingen over"
 
-#: ../migrate/main.c:95
+#: ../migrate/main.c:111
 msgid "Use default config"
 msgstr "Standaardinstellingen gebruiken"
 
-#: ../migrate/main.c:96
+#: ../migrate/main.c:112
 msgid "Load the default configuration"
 msgstr "Gebruik de standaardinstellingen"
 
-#: ../migrate/main.c:102
+#: ../migrate/main.c:117
 msgid "One empty panel"
 msgstr "Eén leeg paneel"
 
-#: ../migrate/main.c:103
+#: ../migrate/main.c:118
 msgid "Start with one empty panel"
 msgstr "Begin met één leeg paneel"
 
-#: ../migrate/main.c:115
+#: ../migrate/main.c:131
 msgid "Failed to migrate the old panel configuration"
 msgstr "Kon de oude instellingen niet overnemen"
 
-#: ../migrate/main.c:125
+#: ../migrate/main.c:144
 msgid "Failed to load the default configuration"
 msgstr "Kon de standaardinstellingen niet laden"
 
@@ -706,7 +723,7 @@ msgstr "Weergave"
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
-msgstr "Toepassingen-menu"
+msgstr "Toepassingenmenu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
@@ -714,7 +731,7 @@ msgstr "Knop_titel:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "Be_werk Menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
@@ -738,7 +755,7 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
-msgstr ""
+msgstr "Toon beschrijving van de toepassing in gereedschaptip"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
@@ -749,14 +766,12 @@ msgid "Show ic_ons in menu"
 msgstr "Pict_ogrammen in het menu weergeven"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#, fuzzy
 msgid "Use c_ustom menu file:"
-msgstr "_Aangepast menubestand gebruiken"
+msgstr "_Aangepast menubestand gebruiken:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-#, fuzzy
 msgid "Use the _default menu"
-msgstr "Stan_daard menubestand gebruiken"
+msgstr "Stan_daardmenu gebruiken"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
@@ -767,25 +782,25 @@ msgstr "P_ictogram:"
 msgid "_Show button title"
 msgstr "Knoptitel _weergeven"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:475
+#: ../plugins/applicationsmenu/applicationsmenu.c:485
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Selecteer een pictogram"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:513
-#: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/applicationsmenu/applicationsmenu.c:524
+#: ../plugins/applicationsmenu/applicationsmenu.c:765
+#: ../plugins/launcher/launcher.c:2277
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon commando \"%s\" niet uitvoeren."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1010
+#: ../plugins/applicationsmenu/applicationsmenu.c:1021
 msgid "No applications found"
 msgstr "Geen toepassingen gevonden"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1033
+#: ../plugins/applicationsmenu/applicationsmenu.c:1044
 msgid "Failed to load the applications menu"
-msgstr "Kon het toepassingen-menu niet laden"
+msgstr "Kon het toepassingenmenu niet laden"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -795,31 +810,31 @@ msgstr "Menu weergeven met categorieën van geinstalleerde toepassingen"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "Gebruik:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "OPTIE"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
 msgid "Options:"
-msgstr ""
+msgstr "Opties:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Opspringend menu gebruiken bij de huidige muispositie"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
-msgstr ""
+msgstr "Toon hulpopties"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
@@ -831,7 +846,7 @@ msgstr "Kon het klokcommando niet uitvoeren"
 
 #: ../plugins/clock/clock.c:719
 msgid "Custom Format"
-msgstr "Aangepaste indeling"
+msgstr "Aangepaste bestandindeling"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
@@ -873,7 +888,7 @@ msgstr "Af_ronding"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
-msgstr "_Knipperende scheidingstekens"
+msgstr "_Knipperende tijdscheidingstekens"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
@@ -881,7 +896,7 @@ msgstr "Afgerond"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
@@ -911,7 +926,7 @@ msgstr ""
 "De indeling beschrijft welke onderdelen van de tijd en datum in de "
 "bestandsnaam worden ingevoegd. Zo wordt bijvoorbeeld %Y vervangen door het "
 "jaartal, %m door de maand en %d door de dag. Zie de documentatie van het "
-"datum-hulpmiddel voor meer informatie."
+"datumhulpmiddel voor meer informatie."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -939,7 +954,7 @@ msgstr "Ochtend"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
-msgstr "Vroege middag"
+msgstr "Bijna middag"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
@@ -1156,6 +1171,12 @@ msgstr "twaalf"
 msgid "What time is it?"
 msgstr "Hoe laat is het?"
 
+#: ../plugins/directorymenu/directorymenu.c:243
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Directory Menu"
+msgstr "Mapmenu"
+
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
@@ -1189,11 +1210,6 @@ msgstr "Map openen"
 msgid "Open in Terminal"
 msgstr "Openen in _terminalvenster"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-msgid "Directory Menu"
-msgstr "Mapmenu"
-
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Mappenhiërarchie in een menu weergeven"
@@ -1206,8 +1222,8 @@ msgid ""
 msgstr ""
 "Geef een lijst in van patronen die gebruikt zullen worden om te bepalen "
 "welke bestanden in een map worden weergegeven. Als hier meer dan één patroon "
-"worden ingevoerd, dienen de individuele items in de lijst gescheiden te "
-"worden met behulp van puntkomma's (bijv. *.txt;*.doc)."
+"wordt ingevoerd, dan dienen de individuele elementen in de lijst gescheiden "
+"te worden met behulp van puntkomma's (bijv. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1231,17 +1247,21 @@ msgstr "_Basismap:"
 msgid "_File Pattern:"
 msgstr "_Bestandspatroon:"
 
-#: ../plugins/launcher/launcher.c:1555
+#: ../plugins/launcher/launcher.c:405
+msgid "Open launcher menu"
+msgstr "Open het snelstartermenu"
+
+#: ../plugins/launcher/launcher.c:1556
 msgid "Unnamed Item"
 msgstr "Naamloos"
 
-#: ../plugins/launcher/launcher.c:1696
+#: ../plugins/launcher/launcher.c:1697
 msgid "No items"
-msgstr "Geen items"
+msgstr "Geen elementen"
 
 #: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Het verwijderen van een item kan niet ongedaan worden gemaakt"
+msgstr "Het verwijderen van een element kan niet ongedaan worden gemaakt"
 
 #: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
@@ -1250,19 +1270,19 @@ msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
 #: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
-msgstr "Naamloos"
+msgstr "Naamloos element"
 
 #: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
-msgstr "Kon dialoogvenster voor het bewerken van menu-items niet laden"
+msgstr "Kon dialoogvenster voor het bewerken van menu-elementen niet laden"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add a new empty item"
-msgstr "Leeg item toevoegen"
+msgstr "Leeg element toevoegen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
-msgstr "Een of meer bestaande items aan de snelstarter toevoegen"
+msgstr "Een of meer bestaande elementen aan de snelstarter toevoegen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
@@ -1274,7 +1294,7 @@ msgstr "Standaard"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Delete the currently selected item"
-msgstr "Verwijder het geselecteerde item"
+msgstr "Verwijder het geselecteerde element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
@@ -1291,7 +1311,7 @@ msgstr "In knop"
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
-msgstr "Snelkoppeling"
+msgstr "Snelstarter"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
@@ -1302,8 +1322,8 @@ msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
 msgstr ""
-"Selecteer deze optie om de tooltips die verschijnen als de muisaanwijzer "
-"over knoppen of menu-items zweeft uit te schakelen."
+"Selecteer deze optie om de tooltips uit te schakelen, die verschijnen als de "
+"muisaanwijzer over knoppen of menu-items zweeft."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1313,11 +1333,11 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Show _label instead of icon"
-msgstr "_Label in plaats van pictogram weergeven"
+msgstr "_Etiket in plaats van pictogram weergeven"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
-msgstr "Laatstgebr_uikte item in het paneel weergeven"
+msgstr "Laatstgebr_uikte element in het paneel weergeven"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "South"
@@ -1339,15 +1359,14 @@ msgstr "Programma-starter met optioneel menu"
 msgid "Workspace _Settings..."
 msgstr "Werkbladinstellingen"
 
-#: ../plugins/pager/pager.c:429
-#, fuzzy
+#: ../plugins/pager/pager.c:430
 msgid "Unable to open the workspace settings"
-msgstr "Kon de werkbladinstellingen van Xfce niet openen"
+msgstr "Kon de werkbladinstellingen niet openen"
 
 #: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
-msgstr "Bureaublad %d"
+msgstr "Werkblad %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
@@ -1363,19 +1382,21 @@ msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
 msgstr ""
+"Toon een miniatuuraanblik van het werkblad met rechthoeken voor de zichtbare "
+"vensters"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "Toon mi_niatuuraanblik"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Bureaublad _wisselen met muis-wiel"
+msgstr "Werkblad _wisselen met muiswiel"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
-msgstr "Bureabladwisselaar"
+msgstr "Werkbladwisselaar"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
@@ -1408,37 +1429,37 @@ msgstr "_Uitvouwen"
 
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
-msgstr "Voegt een scheidingslijn of witruimte tussen items in"
+msgstr "Voegt een scheidingslijn of witruimte tussen elementen in"
 
-#: ../plugins/showdesktop/showdesktop.c:193
+#: ../plugins/showdesktop/showdesktop.c:199
 msgid "Restore the minimized windows"
 msgstr "Verborgen vensters herstellen"
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:201
 msgid "Minimize all open windows and show the desktop"
 msgstr "Vensters verbergen en bureaublad weergeven"
+
+#: ../plugins/showdesktop/showdesktop.c:204
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Bureaublad Tonen"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
 msgstr "Vensters verbergen en bureaublad weergeven"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "Bureaublad Tonen"
-
 #: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
-msgstr ""
+msgstr "Kon het meldingengebied niet starten"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:850
-#, fuzzy
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
-"Waarschijnlijk heeft een ander item de functie van mededelingengebied "
-"overgenomen. Deze plugin zal nu sluiten."
+"Waarschijnlijk heeft een ander onderdeel de functie van mededelingengebied "
+"overgenomen. Dit gebied zal niet worden gebruikt."
 
 #: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
@@ -1446,7 +1467,7 @@ msgstr "Het mededelingengebied is de selectie kwijt"
 
 #: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Weet U zeker dat U de lijst met bekende toepassingen wilt wissen?"
+msgstr "Weet u zeker dat u de lijst met bekende toepassingen wilt wissen?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
@@ -1463,12 +1484,12 @@ msgstr "Mededelingengebied"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "_Maximale pictogramgrootte (px):"
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Het is mislukt om het mededelingengebied op te starten voor scherm %d"
+msgstr "Het is niet gelukt om beheerderselectie te verkrijgen voor scherm %d"
 
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
@@ -1500,7 +1521,7 @@ msgstr "Geminimaliseerde vensters naar het huidige werkblad herstellen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Ro_tate buttons in vertical panel"
-msgstr ""
+msgstr "_Draai de knoppen in een verticale werkbalk"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
@@ -1512,21 +1533,19 @@ msgstr "_Handgreep tonen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
-msgstr "Knop_labels weergeven"
+msgstr "Knop_etiketten weergeven"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "Alleen ge_minimaliseerde vensters weergeven"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#, fuzzy
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Vensters van _alle werkbladen tonen"
+msgstr "Toon vensters van _alle werkbladen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
 msgid "Show windows from all mo_nitors"
-msgstr "Vensters van _alle werkbladen tonen"
+msgstr "Vensters van alle _monitors tonen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -1538,7 +1557,7 @@ msgstr "Tijdsaanduiding"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
-msgstr "Bij gelimiteerde ruimte"
+msgstr "Bij beperkte ruimte"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
@@ -1553,23 +1572,23 @@ msgstr "Venster_groepering:"
 msgid "Window title"
 msgstr "Venstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3099
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3108
 msgid "Un_minimize All"
-msgstr "Alles _herstellen"
+msgstr "Alles _ONTminimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3114
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3123
 msgid "_Unmaximize All"
-msgstr "Alle vensters her_stellen"
+msgstr "Alles ONT_maximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3133
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
@@ -1601,7 +1620,7 @@ msgstr "Werkblad \"%s\" verwijderen"
 #: ../plugins/windowmenu/windowmenu.c:1322
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Bureaublad %d verwijderen"
+msgstr "Werkblad %d verwijderen"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
@@ -1625,7 +1644,7 @@ msgstr "Vensters van _alle werkbladen tonen"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
-msgstr "Laat bureaublad _namen zien"
+msgstr "Laat werkblad_namen zien"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"
@@ -1653,7 +1672,7 @@ msgstr "Wisselen tussen open vensters met behulp van een menu"
 #~ msgstr "Transparantie"
 
 #~ msgid "Transparency when the pointer is not hovering the panel."
-#~ msgstr "Transparantie als de muisaanwijzer niet over het paneel gaat."
+#~ msgstr "Transparantie wanneer de muisaanwijzer niet over het paneel gaat."
 
 #~ msgid "Xfce Panel"
 #~ msgstr "Xfce Paneel"
