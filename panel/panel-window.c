@@ -1184,7 +1184,7 @@ panel_window_size_allocate (GtkWidget     *widget,
       /* position the autohide window */
       panel_window_size_allocate_set_xy (window, w, h, &x, &y);
       panel_base_window_move_resize (PANEL_BASE_WINDOW (window->autohide_window),
-                                     x - 1 , y - 1, w + 2, h + 2);
+                                     x, y, w, h);
     }
   else
     {
