@@ -2163,7 +2163,7 @@ panel_window_set_autohide (PanelWindow *window,
       /* create the window */
       panel_return_if_fail (window->autohide_window == NULL);
       popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
-                            "type", GTK_WINDOW_POPUP,
+                            "type", GTK_WINDOW_TOPLEVEL,
                             "decorated", FALSE,
                             "resizable", TRUE,
                             "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
