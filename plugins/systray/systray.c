@@ -360,6 +360,8 @@ systray_plugin_screen_changed_idle (gpointer user_data)
   GdkScreen     *screen;
   GError        *error = NULL;
 
+  GDK_THREADS_ENTER ();
+
   /* create a new manager and register this screen */
   plugin->manager = systray_manager_new ();
   g_signal_connect (G_OBJECT (plugin->manager), "icon-added",
@@ -382,6 +384,8 @@ systray_plugin_screen_changed_idle (gpointer user_data)
       xfce_dialog_show_error (NULL, error, _("Unable to start the notification area"));
       g_error_free (error);
     }
+
+  GDK_THREADS_LEAVE ();
 
   return FALSE;
 }

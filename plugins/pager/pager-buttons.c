@@ -294,6 +294,8 @@ pager_buttons_rebuild_idle (gpointer user_data)
   panel_return_val_if_fail (XFCE_IS_PAGER_BUTTONS (pager), FALSE);
   panel_return_val_if_fail (WNCK_IS_SCREEN (pager->wnck_screen), FALSE);
 
+  GDK_THREADS_ENTER ();
+
   gtk_container_foreach (GTK_CONTAINER (pager),
       (GtkCallback) gtk_widget_destroy, NULL);
 
@@ -303,7 +305,7 @@ pager_buttons_rebuild_idle (gpointer user_data)
   active_ws = wnck_screen_get_active_workspace (pager->wnck_screen);
   workspaces = wnck_screen_get_workspaces (pager->wnck_screen);
   if (workspaces == NULL)
-    return FALSE;
+    goto leave;
 
   n_workspaces = g_list_length (workspaces);
 
@@ -437,6 +439,10 @@ pager_buttons_rebuild_idle (gpointer user_data)
     }
 
   pager->buttons = g_slist_reverse (pager->buttons);
+
+  leave:
+
+  GDK_THREADS_LEAVE ();
 
   return FALSE;
 }

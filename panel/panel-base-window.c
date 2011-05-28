@@ -714,7 +714,9 @@ static gboolean
 panel_base_window_active_timeout (gpointer user_data)
 {
   /* redraw to update marching ants */
+  GDK_THREADS_ENTER ();
   gtk_widget_queue_draw (GTK_WIDGET (user_data));
+  GDK_THREADS_LEAVE ();
 
   return TRUE;
 }
