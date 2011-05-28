@@ -471,6 +471,8 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
   GObject   *store;
   GPtrArray *array;
 
+  GDK_THREADS_ENTER ();
+
   store = gtk_builder_get_object (dialog->builder, "item-store");
 
   array = g_ptr_array_new ();
@@ -484,6 +486,8 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
           G_CALLBACK (launcher_dialog_items_load), dialog);
 
   xfconf_array_free (array);
+
+  GDK_THREADS_LEAVE ();
 }
 
 

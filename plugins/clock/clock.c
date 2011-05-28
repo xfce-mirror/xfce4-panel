@@ -893,7 +893,9 @@ clock_plugin_timeout_running (gpointer user_data)
   gboolean            result;
   struct tm           tm;
 
+  GDK_THREADS_ENTER ();
   result = (timeout->function) (timeout->data);
+  GDK_THREADS_LEAVE ();
 
   /* check if the timeout still runs in time if updating once a minute */
   if (result && timeout->interval == CLOCK_INTERVAL_MINUTE)

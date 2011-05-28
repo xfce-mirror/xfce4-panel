@@ -1839,6 +1839,8 @@ xfce_tasklist_update_monitor_geometry_idle (gpointer data)
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
 
+  GDK_THREADS_ENTER ();
+
   if (!tasklist->all_monitors)
     {
       screen = gtk_widget_get_screen (GTK_WIDGET (tasklist));
@@ -1867,6 +1869,8 @@ xfce_tasklist_update_monitor_geometry_idle (gpointer data)
     xfce_tasklist_active_workspace_changed (tasklist->screen,
                                             NULL, tasklist);
 
+  GDK_THREADS_LEAVE ();
+
   return FALSE;
 }
 
@@ -1888,6 +1892,8 @@ xfce_tasklist_child_drag_motion_timeout (gpointer data)
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
   panel_return_val_if_fail (WNCK_IS_SCREEN (child->tasklist->screen), FALSE);
 
+  GDK_THREADS_ENTER ();
+
   if (child->type == CHILD_TYPE_WINDOW)
     {
       xfce_tasklist_button_activate (child, child->motion_timestamp);
@@ -1896,6 +1902,8 @@ xfce_tasklist_child_drag_motion_timeout (gpointer data)
     {
        /* TODO popup menu */
     }
+
+  GDK_THREADS_LEAVE ();
 
   return FALSE;
 }

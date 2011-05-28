@@ -381,6 +381,8 @@ xfce_arrow_button_blinking_timeout (gpointer user_data)
   GtkStyle        *style;
   GtkRcStyle      *rc;
 
+  GDK_THREADS_ENTER ();
+
   rc = gtk_widget_get_modifier_style (GTK_WIDGET (button));
   if(PANEL_HAS_FLAG (rc->color_flags[GTK_STATE_NORMAL], GTK_RC_BG)
      || button->priv->blinking_timeout_id == 0)
@@ -397,6 +399,8 @@ xfce_arrow_button_blinking_timeout (gpointer user_data)
       rc->bg[GTK_STATE_NORMAL] = style->bg[GTK_STATE_SELECTED];
       gtk_widget_modify_style(GTK_WIDGET (button), rc);
     }
+
+  GDK_THREADS_LEAVE ();
 
   return (button->priv->blinking_counter++ < MAX_BLINKING_COUNT);
 }
