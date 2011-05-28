@@ -30,6 +30,11 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 
+#ifdef GDK_WINDOWING_X11
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#endif
+
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-debug.h>
@@ -55,7 +60,6 @@
 
 
 static void      panel_application_finalize           (GObject                *object);
-static void      panel_application_load               (PanelApplication       *application);
 static void      panel_application_plugin_move        (GtkWidget              *item,
                                                        PanelApplication       *application);
 static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
@@ -126,12 +130,29 @@ struct _PanelApplication
   /* autosave timeout */
   guint               autosave_timeout_id;
 
+#ifdef GDK_WINDOWING_X11
+  guint               wait_for_wm_timeout_id;
+#endif
+
   /* drag and drop data */
   guint               drop_data_ready : 1;
   guint               drop_occurred : 1;
   guint               drop_desktop_files : 1;
   guint               drop_index;
 };
+
+#ifdef GDK_WINDOWING_X11
+typedef struct
+{
+  PanelApplication *application;
+
+  Display          *dpy;
+  Atom              wm_cm_atom;
+  guint             have_wm : 1;
+  guint             counter;
+}
+WaitForWM;
+#endif
 
 enum
 {
@@ -204,18 +225,11 @@ panel_application_init (PanelApplication *application)
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
 
-  /* load setup */
-  panel_application_load (application);
-
   /* start the autosave timeout */
   application->autosave_timeout_id =
       g_timeout_add_seconds (AUTOSAVE_INTERVAL,
                              panel_application_save_timeout,
                              application);
-
-  /* create empty window if everything else failed */
-  if (G_UNLIKELY (application->windows == NULL))
-    panel_application_new_window (application, NULL, TRUE);
 }
 
 
@@ -230,6 +244,12 @@ panel_application_finalize (GObject *object)
 
   /* stop the autosave timeout */
   g_source_remove (application->autosave_timeout_id);
+
+#ifdef GDK_WINDOWING_X11
+  /* stop autostart timeout */
+  if (application->wait_for_wm_timeout_id != 0)
+    g_source_remove (application->wait_for_wm_timeout_id);
+#endif
 
   /* free all windows */
   for (li = application->windows; li != NULL; li = li->next)
@@ -298,7 +318,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
 
 static void
-panel_application_load (PanelApplication *application)
+panel_application_load_real (PanelApplication *application)
 {
   PanelWindow  *window;
   guint         i, j, n_panels;
@@ -375,7 +395,58 @@ panel_application_load (PanelApplication *application)
 
       xfconf_array_free (array);
     }
+
+  /* create empty window if everything else failed */
+  if (G_UNLIKELY (application->windows == NULL))
+    panel_application_new_window (application, NULL, TRUE);
 }
+
+
+
+#ifdef GDK_WINDOWING_X11
+static gboolean
+panel_application_wait_for_window_manager (gpointer data)
+{
+  WaitForWM *wfwm = data;
+
+  if (XGetSelectionOwner (wfwm->dpy, wfwm->wm_cm_atom) != None)
+    wfwm->have_wm = TRUE;
+
+  /* abort if a window manager is found or 5 seconds expired */
+  return wfwm->counter++ < 20 * 5 && !wfwm->have_wm;
+}
+
+
+
+static void
+panel_application_wait_for_window_manager_destroyed (gpointer data)
+{
+  WaitForWM        *wfwm = data;
+  PanelApplication *application = wfwm->application;
+
+  application->wait_for_wm_timeout_id = 0;
+
+  if (!wfwm->have_wm)
+    {
+      g_printerr (G_LOG_DOMAIN ": No window manager registered on screen 0. "
+                  "To start the panel without this check, run with --disable-wm-check.\n");
+    }
+  else
+    {
+      panel_debug (PANEL_DEBUG_APPLICATION, "found window manager after %d tries",
+                   wfwm->counter);
+    }
+
+  XCloseDisplay (wfwm->dpy);
+  g_slice_free (WaitForWM, wfwm);
+
+  /* start loading the panels, hopefully a window manager is found, but it
+   * probably also works fine without... */
+  GDK_THREADS_ENTER ();
+  panel_application_load_real (application);
+  GDK_THREADS_LEAVE ();
+}
+#endif
 
 
 
@@ -1097,6 +1168,41 @@ panel_application_get (void)
     }
 
   return application;
+}
+
+
+
+void
+panel_application_load (PanelApplication  *application,
+                        gboolean           disable_wm_check)
+{
+#ifdef GDK_WINDOWING_X11
+  WaitForWM *wfwm;
+
+  if (!disable_wm_check)
+    {
+      /* setup data for wm checking */
+      wfwm = g_slice_new0 (WaitForWM);
+      wfwm->application = application;
+      wfwm->dpy = XOpenDisplay (NULL);
+      wfwm->wm_cm_atom = XInternAtom (wfwm->dpy, "_NET_WM_CM_S0", False);
+      wfwm->have_wm = FALSE;
+      wfwm->counter = 0;
+
+      /* setup timeout to check for a window manager */
+      application->wait_for_wm_timeout_id =
+          g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, 50, panel_application_wait_for_window_manager,
+                            wfwm, panel_application_wait_for_window_manager_destroyed);
+    }
+  else
+    {
+      /* directly launch */
+      panel_application_load_real (application);
+    }
+#else
+  /* directly launch */
+  panel_application_load_real (application);
+#endif
 }
 
 

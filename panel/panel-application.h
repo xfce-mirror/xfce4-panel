@@ -38,6 +38,9 @@ GType             panel_application_get_type          (void) G_GNUC_CONST;
 
 PanelApplication *panel_application_get               (void);
 
+void              panel_application_load              (PanelApplication  *application,
+                                                       gboolean           disable_wm_check);
+
 void              panel_application_save              (PanelApplication  *application,
                                                        gboolean           save_plugin_providers);
 
