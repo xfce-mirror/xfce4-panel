@@ -276,7 +276,9 @@ static void
 migrate_46_plugin_actions (XfconfChannel *channel,
                            XfceRc        *rc)
 {
-  gint type;
+  gint  type;
+  guint first_action = 0;
+  guint second_action = 0;
 
   if (!xfce_rc_has_entry (rc, "type"))
     return;
@@ -285,18 +287,21 @@ migrate_46_plugin_actions (XfconfChannel *channel,
   switch (type)
     {
     case 0: /* ACTION_QUIT */
-      xfconf_channel_set_uint (channel, "/first-action", 0);
+      first_action = 1;
       break;
 
     case 1: /* ACTION_LOCK */
-      xfconf_channel_set_uint (channel, "/first-action", 2);
+      first_action = 2;
       break;
 
     default: /* ACTION_QUIT_LOCK */
-      xfconf_channel_set_uint (channel, "/first-action", 0);
-      xfconf_channel_set_uint (channel, "/second-action", 2);
+      first_action = 1;
+      second_action = 3;
       break;
     }
+
+    xfconf_channel_set_uint (channel, "/first-action", first_action);
+    xfconf_channel_set_uint (channel, "/second-action", second_action);
 }
 
 
