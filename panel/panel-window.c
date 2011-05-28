@@ -53,6 +53,7 @@
 #define SET_OLD_WM_STRUTS     (FALSE)
 #define DEFAULT_POPUP_DELAY   (225)
 #define DEFAULT_POPDOWN_DELAY (350)
+#define DEFAULT_ATUOHIDE_SIZE (3)
 #define HANDLE_SPACING        (4)
 #define HANDLE_DOTS           (2)
 #define HANDLE_PIXELS         (2)
@@ -269,6 +270,7 @@ struct _PanelWindow
   guint                autohide_timeout_id;
   gint                 autohide_block;
   gint                 autohide_grab_block;
+  gint                 autohide_size;
 
   /* popup/down delay from gtk style */
   gint                 popup_delay;
@@ -408,6 +410,14 @@ panel_window_class_init (PanelWindowClass *klass)
                                                              DEFAULT_POPDOWN_DELAY,
                                                              EXO_PARAM_READABLE));
 
+  gtk_widget_class_install_style_property (gtkwidget_class,
+                                           g_param_spec_int ("autohide-size",
+                                                             NULL,
+                                                             "Size of hidden panel",
+                                                             1, G_MAXINT,
+                                                             DEFAULT_ATUOHIDE_SIZE,
+                                                             EXO_PARAM_READABLE));
+
   /* initialize the atoms */
   cardinal_atom = gdk_atom_intern_static_string ("CARDINAL");
   net_wm_strut_partial_atom = gdk_atom_intern_static_string ("_NET_WM_STRUT_PARTIAL");
@@ -436,6 +446,7 @@ panel_window_init (PanelWindow *window)
   window->autohide_timeout_id = 0;
   window->autohide_block = 0;
   window->autohide_grab_block = 0;
+  window->autohide_size = DEFAULT_ATUOHIDE_SIZE;
   window->popup_delay = DEFAULT_POPUP_DELAY;
   window->popdown_delay = DEFAULT_POPDOWN_DELAY;
   window->base_x = -1;
@@ -1152,7 +1163,7 @@ panel_window_size_allocate (GtkWidget     *widget,
       window->alloc.x = window->alloc.y = -9999;
 
       /* set hidden window size */
-      w = h = 3;
+      w = h = window->autohide_size;
 
       switch (window->snap_position)
         {
@@ -1388,6 +1399,7 @@ panel_window_style_set (GtkWidget *widget,
   gtk_widget_style_get (GTK_WIDGET (widget),
                         "popup-delay", &window->popup_delay,
                         "popdown-delay", &window->popdown_delay,
+                        "autohide-size", &window->autohide_size,
                         NULL);
 }
 
