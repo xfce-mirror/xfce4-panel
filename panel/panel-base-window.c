@@ -212,6 +212,9 @@ panel_base_window_init (PanelBaseWindow *window)
   /* some wm require stick to show the window on all workspaces, on xfwm4
    * the type-hint already takes care of that */
   gtk_window_stick (GTK_WINDOW (window));
+
+  /* set colormap */
+  panel_base_window_screen_changed (GTK_WIDGET (window), NULL);
 }
 
 
@@ -673,7 +676,7 @@ panel_base_window_composited_changed (GtkWidget *widget)
 
   /* set new compositing state */
   window->is_composited = gtk_widget_is_composited (widget);
-  if (window->is_composited ==  was_composited)
+  if (window->is_composited == was_composited)
     return;
 
   if (window->is_composited)
