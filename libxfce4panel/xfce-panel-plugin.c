@@ -2055,6 +2055,8 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GdkRectangle    monitor;
   gint            monitor_num;
   GTimeVal        now_t, end_t;
+  GtkWidget      *toplevel, *plug;
+  gint            px, py;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_WIDGET (menu_widget));
@@ -2077,7 +2079,19 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   gtk_widget_size_request (menu_widget, &requisition);
 
   /* get the root position of the attach widget */
-  gdk_window_get_position (GDK_WINDOW (attach_widget->window), x, y);
+  toplevel = gtk_widget_get_toplevel (attach_widget);
+  gtk_window_get_position (GTK_WINDOW (toplevel), x, y);
+
+  /* correct position for external plugins */
+  plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
+  if (plug != NULL)
+    {
+       gdk_window_get_geometry (gtk_plug_get_socket_window (GTK_PLUG (plug)),
+                                &px, &py, NULL, NULL, NULL);
+
+       *x += px;
+       *y += py;
+    }
 
   /* if the panel is hidden (auto hide is enabled) and we requested a
    * panel lock, wait for gtk to position the panel before we actually
