@@ -126,20 +126,20 @@ xfce_panel_get_channel_name (void)
  * xfce_panel_pixbuf_from_source:
  * @source: string that contains the location of an icon
  * @icon_theme: icon theme or %NULL to use the default icon theme
- * @size: size the icon should be loaded
+ * @size: size the icon that should be loaded
  *
- * Try to load a pixbug from a source string. The source could be
- * an abolute path, an icon name or a filename that point to a
+ * Try to load a pixbuf from a source string. The source could be
+ * an abolute path, an icon name or a filename that points to a
  * file in the pixmaps directory.
  *
  * This function is particularly usefull for loading names from
  * the Icon key of desktop files.
  *
- * The pixbufs is never bigger then @size. If it is when loaded from the
- * disk, the pixbuf is scales preserving the aspect ratio.
+ * The pixbuf is never bigger than @size. If it is when loaded from the
+ * disk, the pixbuf is scaled preserving the aspect ratio.
  *
- * Returns: a GdkPixbuf or %NULL is nothing was found. The value should
- *          be released with g_object_unref is no long used.
+ * Returns: a GdkPixbuf or %NULL if nothing was found. The value should
+ *          be released with g_object_unref when no longer used.
  *
  * See also: XfcePanelImage
  *
