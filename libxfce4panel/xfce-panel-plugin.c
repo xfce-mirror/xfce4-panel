@@ -1473,7 +1473,7 @@ xfce_panel_plugin_menu_item_destroy (GtkWidget       *item,
  *
  * Returns: the name of the panel plugin.
  **/
-G_CONST_RETURN gchar *
+const gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1493,7 +1493,7 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
  *
  * Returns: the (translated) display name of the plugin.
  **/
-G_CONST_RETURN gchar *
+const gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1518,7 +1518,7 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
  *
  * Since: 4.8
  **/
-G_CONST_RETURN gchar *
+const gchar *
 xfce_panel_plugin_get_comment (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1565,7 +1565,7 @@ xfce_panel_plugin_get_unique_id (XfcePanelPlugin *plugin)
  *           XFCE_PANEL_PLUGIN_CHANNEL_NAME and
  *           xfce_panel_get_channel_name
  **/
-G_CONST_RETURN gchar *
+const gchar *
 xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
@@ -1598,7 +1598,7 @@ xfce_panel_plugin_get_property_base (XfcePanelPlugin *plugin)
  *
  * Since: 4.8
  **/
-G_CONST_RETURN gchar * G_CONST_RETURN *
+const gchar * const *
 xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);

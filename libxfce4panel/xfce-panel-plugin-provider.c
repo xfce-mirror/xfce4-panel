@@ -83,7 +83,7 @@ xfce_panel_plugin_provider_default_init (XfcePanelPluginProviderInterface *klass
 
 
 
-G_CONST_RETURN gchar *
+const gchar *
 xfce_panel_plugin_provider_get_name (XfcePanelPluginProvider *provider)
 {
   panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider), NULL);

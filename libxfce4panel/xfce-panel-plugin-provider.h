@@ -147,7 +147,7 @@ enum
 
 GType                 xfce_panel_plugin_provider_get_type            (void) G_GNUC_CONST;
 
-G_CONST_RETURN gchar *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);
+const gchar          *xfce_panel_plugin_provider_get_name            (XfcePanelPluginProvider       *provider);
 
 gint                  xfce_panel_plugin_provider_get_unique_id       (XfcePanelPluginProvider       *provider);
 

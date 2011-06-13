@@ -97,9 +97,9 @@ extern const guint libxfce4panel_major_version;
 extern const guint libxfce4panel_minor_version;
 extern const guint libxfce4panel_micro_version;
 
-G_CONST_RETURN gchar *libxfce4panel_check_version (guint required_major,
-                                                   guint required_minor,
-                                                   guint required_micro);
+const gchar *libxfce4panel_check_version (guint required_major,
+                                          guint required_minor,
+                                          guint required_micro);
 
 G_END_DECLS
 

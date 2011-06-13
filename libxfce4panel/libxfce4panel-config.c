@@ -121,7 +121,7 @@ const guint libxfce4panel_micro_version = LIBXFCE4PANEL_MICRO_VERSION;
  *
  * Since: 4.8
  **/
-G_CONST_RETURN gchar *
+const gchar *
 libxfce4panel_check_version (guint required_major,
                              guint required_minor,
                              guint required_micro)

@@ -154,18 +154,17 @@ struct _XfcePanelPlugin
 
 GType                 xfce_panel_plugin_get_type            (void) G_GNUC_CONST;
 
-G_CONST_RETURN gchar *xfce_panel_plugin_get_name            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar          *xfce_panel_plugin_get_name            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-G_CONST_RETURN gchar *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar          *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-G_CONST_RETURN gchar *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar          *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 gint                  xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-G_CONST_RETURN gchar *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar          *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-G_CONST_RETURN gchar * G_CONST_RETURN *
-                      xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+const gchar * const  *xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 gint                  xfce_panel_plugin_get_size            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
