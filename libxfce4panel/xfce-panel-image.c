@@ -442,6 +442,8 @@ xfce_panel_image_load (gpointer data)
   GtkIconTheme          *icon_theme = NULL;
   gint                   size;
 
+  GDK_THREADS_ENTER ();
+
   size = MIN (priv->width, priv->height);
   if (G_UNLIKELY (priv->force_icon_sizes && size < 32))
     {
@@ -478,6 +480,8 @@ xfce_panel_image_load (gpointer data)
 
   if (G_LIKELY (priv->cache != NULL))
     gtk_widget_queue_draw (GTK_WIDGET (data));
+
+  GDK_THREADS_LEAVE ();
 
   return FALSE;
 }
