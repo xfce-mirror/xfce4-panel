@@ -333,8 +333,8 @@ window_menu_plugin_set_property (GObject      *object,
               xfce_panel_plugin_get_size (panel_plugin));
           window_menu_plugin_screen_position_changed (panel_plugin,
               xfce_panel_plugin_get_screen_position (panel_plugin));
-          window_menu_plugin_active_window_changed (plugin->screen,
-              NULL, plugin);
+          if (plugin->screen != NULL)
+            window_menu_plugin_active_window_changed (plugin->screen, NULL, plugin);
         }
       break;
 
