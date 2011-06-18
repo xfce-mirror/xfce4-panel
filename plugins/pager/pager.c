@@ -293,8 +293,7 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
       plugin->pager = wnck_pager_new (plugin->wnck_screen);
       wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
       if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
-        g_message ("Failed to set the number of pager rows. You probably "
-                   "have more than 1 pager in your panel setup.");
+        g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
     }
   else
