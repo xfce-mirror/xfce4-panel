@@ -2735,7 +2735,8 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
   panel_return_if_fail (WNCK_IS_SCREEN (child->tasklist->screen));
 
-  if (wnck_window_is_active (child->window))
+  if (wnck_window_is_active (child->window)
+      || wnck_window_transient_is_most_recently_activated (child->window))
     {
       wnck_window_minimize (child->window);
     }
