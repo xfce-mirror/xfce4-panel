@@ -1751,9 +1751,10 @@ xfce_tasklist_sort (XfceTasklist *tasklist)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
-  tasklist->windows = g_list_sort_with_data (tasklist->windows,
-                                             xfce_tasklist_button_compare,
-                                             tasklist);
+  if (tasklist->sort_order != XFCE_TASKLIST_SORT_ORDER_DND)
+    tasklist->windows = g_list_sort_with_data (tasklist->windows,
+                                               xfce_tasklist_button_compare,
+                                               tasklist);
 
   gtk_widget_queue_resize (GTK_WIDGET (tasklist));
 }
@@ -2214,6 +2215,10 @@ xfce_tasklist_button_compare (gconstpointer child_a,
                             || WNCK_IS_WINDOW (a->window), 0);
   panel_return_val_if_fail (b->type == CHILD_TYPE_GROUP
                             || WNCK_IS_WINDOW (b->window), 0);
+
+  /* just append to the list */
+  if (tasklist->sort_order == XFCE_TASKLIST_SORT_ORDER_DND)
+    return a->unique_id - b->unique_id;
 
   if (tasklist->all_workspaces)
     {
@@ -2887,6 +2892,55 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
 
 
 
+static void
+xfce_tasklist_button_drag_data_received (GtkWidget         *button,
+                                         GdkDragContext    *context,
+                                         gint               x,
+                                         gint               y,
+                                         GtkSelectionData  *selection_data,
+                                         guint              info,
+                                         guint              drag_time,
+                                         XfceTasklistChild *child2)
+{
+  GList             *li, *sibling;
+  gulong             xid;
+  XfceTasklistChild *child;
+  XfceTasklist      *tasklist = XFCE_TASKLIST (child2->tasklist);
+
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  if (tasklist->sort_order != XFCE_TASKLIST_SORT_ORDER_DND)
+    return;
+
+  sibling = g_list_find (tasklist->windows, child2);
+  panel_return_if_fail (sibling != NULL);
+
+  if ((tasklist->horizontal && x >= button->allocation.width / 2)
+      || (!tasklist->horizontal && y >= button->allocation.height / 2))
+    sibling = g_list_next (sibling);
+
+  xid = *((gulong *) gtk_selection_data_get_data (selection_data));
+  for (li = tasklist->windows; li != NULL; li = li->next)
+    {
+      child = li->data;
+
+      if (child != child2
+          && child->window != NULL
+          && wnck_window_get_xid (child->window) == xid)
+        {
+          /* swap items */
+          tasklist->windows = g_list_delete_link (tasklist->windows, li);
+          tasklist->windows = g_list_insert_before (tasklist->windows, sibling, child);
+
+          gtk_widget_queue_resize (GTK_WIDGET (tasklist));
+
+          break;
+        }
+    }
+}
+
+
+
 static XfceTasklistChild *
 xfce_tasklist_button_new (WnckWindow   *window,
                           XfceTasklist *tasklist)
@@ -2911,10 +2965,15 @@ xfce_tasklist_button_new (WnckWindow   *window,
   gtk_drag_source_set (child->button, GDK_BUTTON1_MASK,
                        source_targets, G_N_ELEMENTS (source_targets),
                        GDK_ACTION_MOVE);
+  gtk_drag_dest_set (child->button, GTK_DEST_DEFAULT_ALL,
+                     source_targets, G_N_ELEMENTS (source_targets),
+                     GDK_ACTION_MOVE);
   g_signal_connect (G_OBJECT (child->button), "drag-data-get",
       G_CALLBACK (xfce_tasklist_button_drag_data_get), child);
   g_signal_connect (G_OBJECT (child->button), "drag-begin",
       G_CALLBACK (xfce_tasklist_button_drag_begin), child);
+  g_signal_connect (G_OBJECT (child->button), "drag-data-received",
+      G_CALLBACK (xfce_tasklist_button_drag_data_received), child);
 
   /* note that the same signals should be in the proxy menu item too */
   g_signal_connect (G_OBJECT (child->button), "enter-notify-event",
