@@ -52,7 +52,7 @@
 
 
 #define ARROW_WIDTH        (8)
-#define MAX_BLINKING_COUNT (16)
+#define MAX_BLINKING_COUNT (G_MAXUINT)
 
 enum
 {
