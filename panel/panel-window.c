@@ -1483,28 +1483,28 @@ panel_window_screen_struts_set (PanelWindow *window)
       /* the window is snapped on the top screen edge */
       struts[STRUT_TOP] = alloc->y + alloc->height;
       struts[STRUT_TOP_START_X] = alloc->x;
-      struts[STRUT_TOP_END_X] = alloc->x + alloc->width;
+      struts[STRUT_TOP_END_X] = alloc->x + alloc->width - 1;
     }
   else if (window->struts_edge == STRUTS_EDGE_BOTTOM)
     {
       /* the window is snapped on the bottom screen edge */
       struts[STRUT_BOTTOM] = gdk_screen_get_height (window->screen) - alloc->y;
       struts[STRUT_BOTTOM_START_X] = alloc->x;
-      struts[STRUT_BOTTOM_END_X] = alloc->x + alloc->width;
+      struts[STRUT_BOTTOM_END_X] = alloc->x + alloc->width - 1;
     }
   else if (window->struts_edge == STRUTS_EDGE_LEFT)
     {
       /* the window is snapped on the left screen edge */
       struts[STRUT_LEFT] = alloc->x + alloc->width;
       struts[STRUT_LEFT_START_Y] = alloc->y;
-      struts[STRUT_LEFT_END_Y] = alloc->y + alloc->height;
+      struts[STRUT_LEFT_END_Y] = alloc->y + alloc->height - 1;
     }
   else if (window->struts_edge == STRUTS_EDGE_RIGHT)
     {
       /* the window is snapped on the right screen edge */
       struts[STRUT_RIGHT] = gdk_screen_get_width (window->screen) - alloc->x;
       struts[STRUT_RIGHT_START_Y] = alloc->y;
-      struts[STRUT_RIGHT_END_Y] = alloc->y + alloc->height;
+      struts[STRUT_RIGHT_END_Y] = alloc->y + alloc->height - 1;
     }
 
   /* store the new struts */
