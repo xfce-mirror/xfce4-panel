@@ -147,7 +147,7 @@ typedef struct
   PanelApplication *application;
 
   Display          *dpy;
-  Atom              wm_cm_atom;
+  Atom              wm_atom;
   guint             have_wm : 1;
   guint             counter;
 }
@@ -409,7 +409,7 @@ panel_application_wait_for_window_manager (gpointer data)
 {
   WaitForWM *wfwm = data;
 
-  if (XGetSelectionOwner (wfwm->dpy, wfwm->wm_cm_atom) != None)
+  if (XGetSelectionOwner (wfwm->dpy, wfwm->wm_atom) != None)
     wfwm->have_wm = TRUE;
 
   /* abort if a window manager is found or 5 seconds expired */
@@ -1185,7 +1185,7 @@ panel_application_load (PanelApplication  *application,
       wfwm = g_slice_new0 (WaitForWM);
       wfwm->application = application;
       wfwm->dpy = XOpenDisplay (NULL);
-      wfwm->wm_cm_atom = XInternAtom (wfwm->dpy, "_NET_WM_CM_S0", False);
+      wfwm->wm_atom = XInternAtom (wfwm->dpy, "WM_S0", False);
       wfwm->have_wm = FALSE;
       wfwm->counter = 0;
 
