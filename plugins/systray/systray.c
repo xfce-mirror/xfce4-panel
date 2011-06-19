@@ -153,6 +153,7 @@ static const gchar *known_applications[][3] =
   { "workrave tray icon", NULL, "Workrave Applet" },
   { "audacious2", "audacious", "Audacious" },
   { "wicd-client.py", "wicd-gtk", "Wicd" },
+  { "xfce4-power-manager", "xfpm-ac-adapter", "Xfce Power Manager" },
 };
 
 
