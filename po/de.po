@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-18 23:46+0000\n"
+"POT-Creation-Date: 2011-06-20 16:34+0000\n"
 "PO-Revision-Date: 2010-12-28 22:32+0100\n"
 "Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -38,20 +38,20 @@ msgstr "Leiste einrichten"
 msgid "Panel"
 msgstr "Leiste"
 
-#: ../common/panel-utils.c:155
+#: ../common/panel-utils.c:157
 msgid "_Read Online"
 msgstr "Online _lesen"
 
-#: ../common/panel-utils.c:156
+#: ../common/panel-utils.c:158
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr "Sie können das Anwenderhandbuch online lesen. Dieses Handbuch entspricht allerdings nicht immer Ihrer Version."
 
-#: ../common/panel-utils.c:158
+#: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
 msgstr "Das Anwenderhandbuch ist auf Ihrem Rechner nicht installiert"
 
 #. display an error message to the user
-#: ../common/panel-utils.c:171
+#: ../common/panel-utils.c:175
 msgid "Failed to open the documentation browser"
 msgstr "Konnte die Dokumentationsanzeige nicht öffnen"
 
@@ -131,66 +131,66 @@ msgid "Print version information and exit"
 msgstr "Versionsinformationen ausgeben und beenden"
 
 #. parse context options
-#: ../panel/main.c:240
+#: ../panel/main.c:248
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTE…]"
 
-#: ../panel/main.c:247
+#: ../panel/main.c:255
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Geben Sie »%s --help« für Informationen zur Nutzung an."
 
-#: ../panel/main.c:266
+#: ../panel/main.c:274
 msgid "The Xfce development team. All rights reserved."
 msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
 
-#: ../panel/main.c:267
+#: ../panel/main.c:275
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Bitte melden Sie Fehler an <%s>"
 
-#: ../panel/main.c:318
+#: ../panel/main.c:326
 msgid "There is already a running instance"
 msgstr "Es gibt bereits eine laufende Instanz"
 
 #. spawn ourselfs again
-#: ../panel/main.c:367
+#: ../panel/main.c:375
 msgid "Restarting..."
 msgstr "Neustart…"
 
-#: ../panel/main.c:382
+#: ../panel/main.c:390
 msgid "Failed to show the preferences dialog"
 msgstr "Konnte den Einstellungsdialog nicht öffnen"
 
-#: ../panel/main.c:384
+#: ../panel/main.c:392
 msgid "Failed to show the add new items dialog"
 msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
 
-#: ../panel/main.c:386
+#: ../panel/main.c:394
 msgid "Failed to save the panel configuration"
 msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
-#: ../panel/main.c:388
+#: ../panel/main.c:396
 msgid "Failed to add a plugin to the panel"
 msgstr "Konnte Plugin nicht zur Leiste hinzufügen"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:398
 msgid "Failed to restart the panel"
 msgstr "Konnte die Leiste nicht neustarten"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:400
 msgid "Failed to quit the panel"
 msgstr "Konnte die Leiste nicht beenden"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:402
 msgid "Failed to send D-Bus message"
 msgstr "Konnte keine D-Bus-Nachricht senden"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:413
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
-#: ../panel/main.c:408 ../panel/main.c:422
+#: ../panel/main.c:416 ../panel/main.c:430
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
@@ -711,7 +711,7 @@ msgid "_Show button title"
 msgstr "_Titel im Knopf anzeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
-#: ../plugins/directorymenu/directorymenu.c:372
+#: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Symbol auswählen"
 
@@ -1095,42 +1095,42 @@ msgstr "zwölf"
 msgid "What time is it?"
 msgstr "Wieviel Uhr ist es?"
 
-#: ../plugins/directorymenu/directorymenu.c:246
+#: ../plugins/directorymenu/directorymenu.c:243
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Verzeichnismenü"
 
-#: ../plugins/directorymenu/directorymenu.c:553
+#: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Konnte Anwendung »%s« nicht starten."
 
-#: ../plugins/directorymenu/directorymenu.c:584
+#: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Konnte Inhaltstyp für »%s« nicht erfragen"
 
-#: ../plugins/directorymenu/directorymenu.c:593
+#: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Keine Standardanwendung für »%s« gefunden"
 
-#: ../plugins/directorymenu/directorymenu.c:608
+#: ../plugins/directorymenu/directorymenu.c:605
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Konnte Anwendung für »%s« nicht ausführen."
 
-#: ../plugins/directorymenu/directorymenu.c:699
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Konnte Standardanwendung der Kategorie »%s« nicht ausführen"
 
-#: ../plugins/directorymenu/directorymenu.c:772
+#: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
 msgstr "Ordner öffnen"
 
-#: ../plugins/directorymenu/directorymenu.c:783
+#: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
 msgstr "In Terminal ausführen"
 
@@ -1178,20 +1178,20 @@ msgstr "Unbenanntes Objekt"
 msgid "No items"
 msgstr "Keine Objekte"
 
-#: ../plugins/launcher/launcher-dialog.c:740
+#: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Durch Löschen eines Objekts wird dieses dauerhaft entfernt"
 
-#: ../plugins/launcher/launcher-dialog.c:741
+#: ../plugins/launcher/launcher-dialog.c:745
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:746
 msgid "Unnamed item"
 msgstr "Unbenanntes Objekt"
 
-#: ../plugins/launcher/launcher-dialog.c:787
+#: ../plugins/launcher/launcher-dialog.c:791
 msgid "Failed to open desktop item editor"
 msgstr "Konnte den Editor für Desktop-Objekte nicht öffnen"
 
@@ -1268,15 +1268,15 @@ msgstr "_Position des Pfeilknopfs:"
 msgid "Program launcher with optional menu"
 msgstr "Programmstarter mit optionalem Menü"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Arbeitsflächeneinstellungen..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:428
 msgid "Unable to open the workspace settings"
 msgstr "Arbeitsflächeneinstellungen konnten nicht geöffnet werden"
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbeitsfläche %d"
@@ -1357,20 +1357,20 @@ msgstr "Schreibtisch zeigen"
 msgid "Hide all windows and show the desktop"
 msgstr "Fenster verstecken und Schreibtisch zeigen"
 
-#: ../plugins/systray/systray.c:382
+#: ../plugins/systray/systray.c:384
 msgid "Unable to start the notification area"
 msgstr "Kann Benachrichtigungsfläche nicht starten"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:850
+#: ../plugins/systray/systray.c:854
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Wahrscheinlich hat ein anderes Programm die Funktion der Benachrichtigungsfläche übernommen. Diese Fläche wird nicht verwendet."
 
-#: ../plugins/systray/systray.c:852
+#: ../plugins/systray/systray.c:856
 msgid "The notification area lost selection"
 msgstr "Die Benachrichtigungsfläche hat die Auswahl verloren"
 
-#: ../plugins/systray/systray.c:1005
+#: ../plugins/systray/systray.c:1009
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
 
@@ -1421,79 +1421,83 @@ msgid "Never"
 msgstr "Nie"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr "Keine, drag & drop ermöglichen"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr "_Minimierte Fenster in aktueller Arbeitsfläche wiederherstellen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
 msgstr "_Knöpfe in vertikalen Leisten drehen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr "_Flache Knöpfe"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
 msgstr "_Griff anzeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
 msgstr "_Namen der Anwendungen zeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr "N_ur minimierte Fenster anzeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Fenster _aller Arbeitsflächen oder Anzeigebereiche anzeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
 msgstr "_Fenster aller Monitore anzeigen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "_Sortierreihenfolge:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
 msgstr "Zeitstempel"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr "Bei begrenztem Platz"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Taskleiste"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "F_enstergruppierung:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Window title"
 msgstr "Fenstertitel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3064
+#: ../plugins/tasklist/tasklist-widget.c:3167
 msgid "Mi_nimize All"
 msgstr "_Alle minimieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3073
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Un_minimize All"
 msgstr "_Minimieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:3079
+#: ../plugins/tasklist/tasklist-widget.c:3182
 msgid "Ma_ximize All"
 msgstr "_Alle maximieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3088
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "_Unmaximize All"
 msgstr "_Maximieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:3098
+#: ../plugins/tasklist/tasklist-widget.c:3201
 msgid "_Close All"
 msgstr "_Alle schließen"
 
