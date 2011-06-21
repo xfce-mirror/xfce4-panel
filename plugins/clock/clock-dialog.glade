@@ -3,6 +3,12 @@
   <requires lib="gtk+" version="2.14"/>
   <!-- interface-requires libxfce4ui 0.0 -->
   <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkAdjustment" id="fuzziness">
+    <property name="upper">3</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">1</property>
+    <property name="page_size">1</property>
+  </object>
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Clock</property>
     <property name="icon_name">gtk-properties</property>
@@ -433,11 +439,5 @@
         <col id="0" translatable="yes">LCD</col>
       </row>
     </data>
-  </object>
-  <object class="GtkAdjustment" id="fuzziness">
-    <property name="upper">3</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">1</property>
-    <property name="page_size">1</property>
   </object>
 </interface>

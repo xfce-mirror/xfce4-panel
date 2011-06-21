@@ -48,6 +48,52 @@
       </row>
     </data>
   </object>
+    <object class="GtkAdjustment" id="size">
+    <property name="value">16</property>
+    <property name="lower">16</property>
+    <property name="upper">128</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="length">
+    <property name="value">25</property>
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="background-alpha">
+    <property name="value">100</property>
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="enter-opacity">
+    <property name="value">100</property>
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="leave-opacity">
+    <property name="value">100</property>
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkSizeGroup" id="display-sizegroup">
+    <widgets>
+      <widget name="label13"/>
+      <widget name="label1"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="bg-sizegroup">
+    <widgets>
+      <widget name="label7"/>
+      <widget name="label15"/>
+      <widget name="label16"/>
+      <widget name="label19"/>
+    </widgets>
+  </object>
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Panel</property>
     <property name="window_position">center-on-parent</property>
@@ -935,51 +981,5 @@
       <action-widget response="0">button-close</action-widget>
       <action-widget response="1">button-help</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkAdjustment" id="size">
-    <property name="value">16</property>
-    <property name="lower">16</property>
-    <property name="upper">128</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="length">
-    <property name="value">25</property>
-    <property name="lower">1</property>
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="background-alpha">
-    <property name="value">100</property>
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="enter-opacity">
-    <property name="value">100</property>
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="leave-opacity">
-    <property name="value">100</property>
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkSizeGroup" id="display-sizegroup">
-    <widgets>
-      <widget name="label13"/>
-      <widget name="label1"/>
-    </widgets>
-  </object>
-  <object class="GtkSizeGroup" id="bg-sizegroup">
-    <widgets>
-      <widget name="label7"/>
-      <widget name="label15"/>
-      <widget name="label16"/>
-      <widget name="label19"/>
-    </widgets>
   </object>
 </interface>
