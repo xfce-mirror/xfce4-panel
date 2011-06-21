@@ -2934,7 +2934,9 @@ xfce_tasklist_button_drag_data_received (GtkWidget         *button,
     {
       child = li->data;
 
-      if (sibling != li
+      if (sibling != li /* drop on end previous button */
+          && child != child2 /* drop on the same button */
+          && g_list_next (li) != sibling /* drop start of next button */
           && child->window != NULL
           && wnck_window_get_xid (child->window) == xid)
         {
