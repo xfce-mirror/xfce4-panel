@@ -1929,8 +1929,7 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
                                  gint               y,
                                  guint              timestamp)
 {
-  GtkWidget     *dnd_widget;
-  GdkDragAction  action;
+  GtkWidget *dnd_widget;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
 
@@ -1958,8 +1957,7 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
   else if (gtk_drag_dest_find_target (child->button, context, NULL) != GDK_NONE)
     {
       /* dnd to reorder buttons */
-      action = gdk_drag_context_get_suggested_action (context);
-      gdk_drag_status (context, action, timestamp);
+      gdk_drag_status (context, GDK_ACTION_MOVE, timestamp);
 
       return TRUE;
     }
