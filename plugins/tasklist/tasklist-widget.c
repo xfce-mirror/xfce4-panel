@@ -1929,7 +1929,8 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
                                  gint               y,
                                  guint              timestamp)
 {
-  GtkWidget *dnd_widget;
+  GtkWidget     *dnd_widget;
+  GdkDragAction  action;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (child->tasklist), FALSE);
 
@@ -1952,6 +1953,14 @@ xfce_tasklist_child_drag_motion (XfceTasklistChild *child,
       gdk_drag_status (context, 0, timestamp);
 
       /* we want to receive leave signal as well */
+      return TRUE;
+    }
+  else if (gtk_drag_dest_find_target (child->button, context, NULL) != GDK_NONE)
+    {
+      /* dnd to reorder buttons */
+      action = gdk_drag_context_get_suggested_action (context);
+      gdk_drag_status (context, action, timestamp);
+
       return TRUE;
     }
 
@@ -2966,7 +2975,7 @@ xfce_tasklist_button_new (WnckWindow   *window,
   gtk_drag_source_set (child->button, GDK_BUTTON1_MASK,
                        source_targets, G_N_ELEMENTS (source_targets),
                        GDK_ACTION_MOVE);
-  gtk_drag_dest_set (child->button, GTK_DEST_DEFAULT_ALL,
+  gtk_drag_dest_set (child->button, GTK_DEST_DEFAULT_DROP,
                      source_targets, G_N_ELEMENTS (source_targets),
                      GDK_ACTION_MOVE);
   g_signal_connect (G_OBJECT (child->button), "drag-data-get",
