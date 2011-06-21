@@ -2925,7 +2925,7 @@ xfce_tasklist_button_drag_data_received (GtkWidget         *button,
     {
       child = li->data;
 
-      if (child != child2
+      if (sibling != li
           && child->window != NULL
           && wnck_window_get_xid (child->window) == xid)
         {
