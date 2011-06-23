@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-29 10:12+0000\n"
+"POT-Creation-Date: 2011-06-23 10:12+0000\n"
 "PO-Revision-Date: 2010-07-03 11:07+0100\n"
 "Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
 "Language-Team: Italian Translation Team <xfce-it-translators@googlegroups.com>\n"
@@ -743,7 +743,7 @@ msgstr "Selezionare un'icona"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:524
 #: ../plugins/applicationsmenu/applicationsmenu.c:765
-#: ../plugins/launcher/launcher.c:2277
+#: ../plugins/launcher/launcher.c:2295
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossibile eseguire il comando \"%s\"."
@@ -1187,15 +1187,15 @@ msgstr "Cartella _principale:"
 msgid "_File Pattern:"
 msgstr "Schema del _file:"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:406
 msgid "Open launcher menu"
 msgstr "Apre il menu dell'avviatore"
 
-#: ../plugins/launcher/launcher.c:1556
+#: ../plugins/launcher/launcher.c:1574
 msgid "Unnamed Item"
 msgstr "Elemento senza nome"
 
-#: ../plugins/launcher/launcher.c:1697
+#: ../plugins/launcher/launcher.c:1715
 msgid "No items"
 msgstr "Nessun elemento"
 
@@ -1289,11 +1289,11 @@ msgstr "Posizione del pulsante della f_reccia"
 msgid "Program launcher with optional menu"
 msgstr "Avviatore di programmi con menu opzionale"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Impostazioni dello _spazio di lavoro..."
 
-#: ../plugins/pager/pager.c:430
+#: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
 msgstr "Impossibile aprire le impostazioni dello spazio di lavoro"
 
@@ -1378,20 +1378,20 @@ msgstr "Mostra scrivania"
 msgid "Hide all windows and show the desktop"
 msgstr "Nasconde tutte le finestre e mostra la scrivania"
 
-#: ../plugins/systray/systray.c:384
+#: ../plugins/systray/systray.c:385
 msgid "Unable to start the notification area"
 msgstr "Impossibile avviare l'area di notifica"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:854
+#: ../plugins/systray/systray.c:855
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Probabilmente un altro widget ha preso il controllo dell'area di notifica. Quest'area non verrà utilizzata."
 
-#: ../plugins/systray/systray.c:856
+#: ../plugins/systray/systray.c:857
 msgid "The notification area lost selection"
 msgstr "L'area di notifica ha perso la selezione"
 
-#: ../plugins/systray/systray.c:1009
+#: ../plugins/systray/systray.c:1010
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ripulire davvero la lista delle applicazioni conosciute?"
 
@@ -1442,80 +1442,84 @@ msgid "Never"
 msgstr "Mai"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr "Nessuno, permetti drag&drop"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr "Ripristina le finestre minimizzate nello spazio di lavoro co_rrente"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
 msgstr "Ruota i pulsanti nei pannelli _verticali"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr "Usa pulsanti pia_tti"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
 msgstr "Mostra _maniglie"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
 msgstr "Mostra le _etichette dei pulsanti"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr "Mostra solo le finestre mi_nimizzate"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Mostra le _finestre di tutti gli spazi di lavoro o porzioni"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
 msgstr "Mostra le _finestre di tutti gli sc_hermi"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "Or_dinamento:"
 
 # è l'offset di data dal 1/1/1970 utilizzato nei sistemi Unix
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
 msgstr "Timestamp"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr "Quando lo spazio è limitato"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Pulsanti delle finestre"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "Ra_ggruppa finestre:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Window title"
 msgstr "Titolo della finestra"
 
-#: ../plugins/tasklist/tasklist-widget.c:3107
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr "Mi_nimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3116
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr "_Deminimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3122
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr "_Massimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3131
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr "D_emassimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3141
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr "_Chiudi tutte"
 
