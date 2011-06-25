@@ -147,7 +147,8 @@ typedef struct
   PanelApplication *application;
 
   Display          *dpy;
-  Atom              wm_atom;
+  Atom             *atoms;
+  guint             atom_count;
   guint             have_wm : 1;
   guint             counter;
 }
@@ -408,9 +409,21 @@ static gboolean
 panel_application_wait_for_window_manager (gpointer data)
 {
   WaitForWM *wfwm = data;
+  guint      i;
+  gboolean   have_wm = TRUE;
 
-  if (XGetSelectionOwner (wfwm->dpy, wfwm->wm_atom) != None)
-    wfwm->have_wm = TRUE;
+  for (i = 0; i < wfwm->atom_count; i++)
+    {
+      if (XGetSelectionOwner (wfwm->dpy, wfwm->atoms[i]) == None)
+        {
+          panel_debug (PANEL_DEBUG_APPLICATION, "window manager not ready on screen %d", i);
+
+          have_wm = FALSE;
+          break;
+        }
+    }
+
+  wfwm->have_wm = have_wm;
 
   /* abort if a window manager is found or 5 seconds expired */
   return wfwm->counter++ < 20 * 5 && !wfwm->have_wm;
@@ -437,6 +450,7 @@ panel_application_wait_for_window_manager_destroyed (gpointer data)
                    wfwm->counter);
     }
 
+  g_free (wfwm->atoms);
   XCloseDisplay (wfwm->dpy);
   g_slice_free (WaitForWM, wfwm);
 
@@ -1177,7 +1191,9 @@ panel_application_load (PanelApplication  *application,
                         gboolean           disable_wm_check)
 {
 #ifdef GDK_WINDOWING_X11
-  WaitForWM *wfwm;
+  WaitForWM  *wfwm;
+  guint       i;
+  gchar     **atom_names;
 
   if (!disable_wm_check)
     {
@@ -1185,14 +1201,26 @@ panel_application_load (PanelApplication  *application,
       wfwm = g_slice_new0 (WaitForWM);
       wfwm->application = application;
       wfwm->dpy = XOpenDisplay (NULL);
-      wfwm->wm_atom = XInternAtom (wfwm->dpy, "WM_S0", False);
       wfwm->have_wm = FALSE;
       wfwm->counter = 0;
+
+      /* preload wm atoms for all screens */
+      wfwm->atom_count = XScreenCount (wfwm->dpy);
+      wfwm->atoms = g_new (Atom, wfwm->atom_count);
+      atom_names = g_new0 (gchar *, wfwm->atom_count + 1);
+
+      for (i = 0; i < wfwm->atom_count; i++)
+        atom_names[i] = g_strdup_printf ("WM_S%d", i);
+
+      if (!XInternAtoms (wfwm->dpy, atom_names, wfwm->atom_count, False, wfwm->atoms))
+        wfwm->atom_count = 0;
+
+      g_strfreev (atom_names);
 
       /* setup timeout to check for a window manager */
       application->wait_for_wm_timeout_id =
           g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, 50, panel_application_wait_for_window_manager,
-                            wfwm, panel_application_wait_for_window_manager_destroyed);
+                              wfwm, panel_application_wait_for_window_manager_destroyed);
     }
   else
     {
