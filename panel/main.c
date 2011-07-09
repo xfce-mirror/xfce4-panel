@@ -58,6 +58,7 @@ static gchar     *opt_add = NULL;
 static gboolean   opt_restart = FALSE;
 static gboolean   opt_quit = FALSE;
 static gboolean   opt_version = FALSE;
+static gboolean   opt_disable_wm_check = FALSE;
 static gchar     *opt_plugin_event = NULL;
 static gchar    **opt_arguments = NULL;
 static gboolean   sm_client_saved_state = FALSE;
@@ -81,6 +82,7 @@ static GOptionEntry option_entries[] =
   { "add", '\0', 0, G_OPTION_ARG_STRING, &opt_add, N_("Add a new plugin to the panel"), N_("PLUGIN-NAME") },
   { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_("Restart the running panel instance"), NULL },
   { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_("Quit the running panel instance"), NULL },
+  { "disable-wm-check", 'd', 0, G_OPTION_ARG_NONE, &opt_disable_wm_check, N_("Do not wait for a window manager on startup"), NULL },
   { "version", 'V', 0, G_OPTION_ARG_NONE, &opt_version, N_("Print version information and exit"), NULL },
   { "plugin-event", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_plugin_event, NULL, NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
@@ -345,6 +347,7 @@ main (gint argc, gchar **argv)
     signal (signums[i], panel_signal_handler);
 
   application = panel_application_get ();
+  panel_application_load (application, opt_disable_wm_check);
 
   /* save the state before the quit signal if we can, this is a bit safer */
   g_signal_connect (G_OBJECT (sm_client), "save-state",
