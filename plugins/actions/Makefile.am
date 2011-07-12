@@ -23,6 +23,7 @@ libactions_la_CFLAGS = \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
+	$(DBUS_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libactions_la_LDFLAGS = \
@@ -39,6 +40,7 @@ libactions_la_LIBADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(EXO_LIBS) \
+	$(DBUS_LIBS) \
 	$(XFCONF_LIBS)
 
 libactions_la_DEPENDENCIES = \
