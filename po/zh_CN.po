@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-19 22:34+0000\n"
+"POT-Creation-Date: 2011-07-10 10:34+0000\n"
 "PO-Revision-Date: 2010-11-27 21:07+0800\n"
 "Last-Translator: Hunt Xu <huntxu@live.cn>\n"
 "Language-Team: Simplified Chinese <xfce-i18n@xfce.org>\n"
@@ -96,39 +96,43 @@ msgstr "面板首选项(_E)..."
 msgid "Log _Out"
 msgstr "注销(_O)"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "显示 “面板属性” 对话框"
+msgstr "显示 ‘面板属性’ 对话框"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "面板号"
 
-#: ../panel/main.c:79
-msgid "Show the 'Add New Items' dialog"
-msgstr "显示 “添加新项目” 对话框"
-
 #: ../panel/main.c:80
+msgid "Show the 'Add New Items' dialog"
+msgstr "显示 ‘添加新项目’ 对话框"
+
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "保存面板配置"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "在面板上添加新插件"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "插件名称"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "重启正在运行的面板实例"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "退出正在运行的面板实例"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
+msgid "Do not wait for a window manager on startup"
+msgstr "在启动时不等待窗口管理器"
+
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -136,89 +140,89 @@ msgid "Print version information and exit"
 msgstr "显示版本信息然后退出"
 
 #. parse context options
-#: ../panel/main.c:248
+#: ../panel/main.c:250
 msgid "[ARGUMENTS...]"
 msgstr "[参数...]"
 
-#: ../panel/main.c:255
+#: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "键入 “%s --help” 查找说明。"
 
-#: ../panel/main.c:274
+#: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce 开发团队。版权所有。"
 
-#: ../panel/main.c:275
+#: ../panel/main.c:277
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "请向 <%s> 报告缺陷。"
 
-#: ../panel/main.c:326
+#: ../panel/main.c:328
 msgid "There is already a running instance"
 msgstr "已经有一个实例正在运行"
 
 #. spawn ourselfs again
-#: ../panel/main.c:375
+#: ../panel/main.c:378
 msgid "Restarting..."
 msgstr "正在重启..."
 
-#: ../panel/main.c:390
+#: ../panel/main.c:393
 msgid "Failed to show the preferences dialog"
 msgstr "无法显示首选项对话框"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:395
 msgid "Failed to show the add new items dialog"
 msgstr "无法显示添加新项目对话框"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:397
 msgid "Failed to save the panel configuration"
 msgstr "无法保存面板配置"
 
-#: ../panel/main.c:396
+#: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
 msgstr "无法向面板添加插件"
 
-#: ../panel/main.c:398
+#: ../panel/main.c:401
 msgid "Failed to restart the panel"
 msgstr "无法重启面板"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:403
 msgid "Failed to quit the panel"
 msgstr "无法退出面板"
 
-#: ../panel/main.c:402
+#: ../panel/main.c:405
 msgid "Failed to send D-Bus message"
-msgstr "发送 D-Bus 消息失败"
+msgstr "无法发送 D-Bus 消息"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:416
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
-"您要启动面板程序吗？如果是的话，请您确保在注销时保存了会话，"
-"这样面板将会在您下次登录时自动启动。"
+"您要启动面板程序吗？如果是的话，请您确保在注销时保存了会话，这样面板将会在您"
+"下次登录时自动启动。"
 
-#: ../panel/main.c:416 ../panel/main.c:430
+#: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "没有发现正在运行的 %s 实例"
 
-#: ../panel/panel-application.c:195
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr "无法启动迁移程序"
 
-#: ../panel/panel-application.c:1451 ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "您没有使用会话管理器来启动 X。点击退出将关闭 X 服务器。"
 
-#: ../panel/panel-application.c:1452 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "您确定要退出面板吗？"
 
-#: ../panel/panel-application.c:1460 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "无法执行命令 “%s”"
@@ -232,8 +236,7 @@ msgstr "指定的插件事件语法不正确。使用 PLUGIN-NAME:NAME[:TYPE:VAL
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"“%s” 提示类型无效。有效的类型包括 bool、double、int、string 和 uint。"
+msgstr "“%s” 提示类型无效。有效的类型包括 bool、double、int、string 和 uint。"
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -305,8 +308,8 @@ msgid ""
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr ""
-"此插件在 %d 秒内重启了不止一次。如果您点击运行，面板将尝试"
-"重启该插件，否则，该插件将从面板上永久移除。"
+"此插件在 %d 秒内重启了不止一次。如果您点击运行，面板将尝试重启该插件，"
+"否则，该插件将从面板上永久移除。"
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -426,7 +429,7 @@ msgstr "长度(_E)(%)："
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
-msgstr "测量"
+msgstr "尺寸"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
@@ -486,12 +489,12 @@ msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
-"选择此选项后，当鼠标指针不在面板上时隐藏面板。"
-"此选项只有当面板停靠屏幕边缘时才有效。"
+"选择此选项后，当鼠标指针不在面板上时隐藏面板。此选项只有当面板停靠在屏幕"
+"边缘时才有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
-msgstr "显示当前选中的项目的相关信息"
+msgstr "显示当前选中项目的相关信息"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
@@ -505,15 +508,13 @@ msgstr "跨显示器(_N)"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
-msgstr ""
-"当鼠标指针处在面板上时面板的透明度，0 为完全透明，100 为完全不透明。"
+msgstr "当鼠标指针处于面板上时面板的透明度，0 为完全透明，100 为完全不透明。"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
-"当鼠标指针不处在面板上时面板的透明度，0 为完全透明，100 为完全不透明。"
+msgstr "当鼠标指针不处于面板上时面板的透明度，0 为完全透明，100 为完全不透明。"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -521,7 +522,7 @@ msgstr "竖直"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
-msgstr "阿尔法(_A)："
+msgstr "阿尔法值(_A)："
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
@@ -586,8 +587,7 @@ msgstr "欢迎第一次启动面板"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "因为该面板为备份设置而移动到新系统，"
-"所以它必须加载一个全新的初始配置"
+msgstr "因为该面板为备份设置而移动到新系统，所以它必须加载一个全新的初始配置"
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -721,8 +721,7 @@ msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr ""
-"选择该选项，将在菜单中显示通用程序名称，"
-"比如用 “文件管理器” 而不是 “Thunar”"
+"选择该选项，将在菜单中显示通用程序名称，比如用 “文件管理器” 而不是 “Thunar”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -760,7 +759,7 @@ msgstr "选择图标"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2277
+#: ../plugins/launcher/launcher.c:2295
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "无法执行命令 “%s” 。"
@@ -775,7 +774,7 @@ msgstr "无法载入应用程序菜单"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "显示一个包含已安装应用程序类别的菜单"
+msgstr "显示一个包含已安装应用程序种类的菜单"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -871,7 +870,7 @@ msgstr "液晶式"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr "显示 上午/下午(_W)"
+msgstr "显示上午/下午(_W)"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
@@ -894,8 +893,8 @@ msgid ""
 "with the day. See the documentation of the date utility for additional "
 "information."
 msgstr ""
-"描述要插入文件名中的日期和时间部分的格式。比如，%Y 会被年替换，"
-"%m 会被月替换，%d 会被日替换。参看 date 工具的文档获取额外信息。"
+"描述要插入文件名中的日期和时间部分的格式。比如，%Y 会被年替换，%m 会被月替"
+"换，%d 会被日替换。参看 date 工具的文档获取额外信息。"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1189,8 +1188,8 @@ msgid ""
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
-"输入一些用以决定文件是否在目录中可见的类型。如果您指定了不止一个"
-"类型，各类型项目之间必须用分号隔开(比如 *.txt ; *.doc)。"
+"输入一些用以决定文件是否在目录中可见的类型。如果您指定了不止一个类型，各类型"
+"项目之间必须用分号隔开(比如 *.txt ; *.doc)。"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1214,15 +1213,15 @@ msgstr "基本目录(_B)："
 msgid "_File Pattern:"
 msgstr "文件类型(_F)："
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:406
 msgid "Open launcher menu"
 msgstr "打开启动菜单"
 
-#: ../plugins/launcher/launcher.c:1556
+#: ../plugins/launcher/launcher.c:1574
 msgid "Unnamed Item"
 msgstr "未命名项目"
 
-#: ../plugins/launcher/launcher.c:1697
+#: ../plugins/launcher/launcher.c:1715
 msgid "No items"
 msgstr "无项目"
 
@@ -1409,22 +1408,22 @@ msgstr "显示桌面"
 msgid "Hide all windows and show the desktop"
 msgstr "隐藏所有窗口并显示桌面"
 
-#: ../plugins/systray/systray.c:384
+#: ../plugins/systray/systray.c:385
 msgid "Unable to start the notification area"
 msgstr "无法启动通知区域"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:854
+#: ../plugins/systray/systray.c:855
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "很可能有其它插件在此取代了通知区域的功能。此区域将无法使用。"
 
-#: ../plugins/systray/systray.c:856
+#: ../plugins/systray/systray.c:857
 msgid "The notification area lost selection"
 msgstr "通知区域失去选择项目"
 
-#: ../plugins/systray/systray.c:1009
+#: ../plugins/systray/systray.c:1010
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "您确定要清除已知应用程序的列表吗？"
 
@@ -1535,23 +1534,23 @@ msgstr "窗口群组(_G)："
 msgid "Window title"
 msgstr "窗口标题"
 
-#: ../plugins/tasklist/tasklist-widget.c:3167
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3176
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr "全部取消最小化(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3182
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3191
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr "全部取消最大化(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3201
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
