@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 10:11+0000\n"
+"POT-Creation-Date: 2011-07-18 04:12+0000\n"
 "PO-Revision-Date: 2011-06-17 21:26+0100\n"
 "Last-Translator: Tomáš Vadina <kyberdev@gmail.com>\n"
 "Language-Team: Slovak <xfce-i18n@xfce.org>\n"
@@ -201,19 +201,19 @@ msgstr "Chcete spustiť panel? Pokiaľ áno, uistite sa, že ste uložili relác
 msgid "No running instance of %s was found"
 msgstr "Nebola nájdená žiadna spustená inštancia %s"
 
-#: ../panel/panel-application.c:216
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr "Nepodarilo sa spustiť aplikáciu pre migráciu"
 
-#: ../panel/panel-application.c:1567 ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1595 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Spustili ste X server bez správcu relácie. Kliknutím na tlačidlo Ukončiť zatvoríte X server."
 
-#: ../panel/panel-application.c:1568 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1596 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Naozaj chcete ukončiť panel?"
 
-#: ../panel/panel-application.c:1576 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1604 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nepodarilo sa spustiť príkaz „%s“"
@@ -729,7 +729,7 @@ msgstr "Vybrať ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:524
 #: ../plugins/applicationsmenu/applicationsmenu.c:765
-#: ../plugins/launcher/launcher.c:2277
+#: ../plugins/launcher/launcher.c:2295
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepodarilo sa spustiť príkaz „%s“."
@@ -1130,16 +1130,16 @@ msgstr "Nebola nájdená predvolená aplikácia pre „%s“"
 msgid "Failed to launch default application for \"%s\""
 msgstr "Nepodarilo sa spustiť predvolenú aplikáciu pre „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:696
+#: ../plugins/directorymenu/directorymenu.c:697
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Nepodarilo sa spustiť uprednostňovanú aplikáciu pre kategóriu „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:769
+#: ../plugins/directorymenu/directorymenu.c:770
 msgid "Open Folder"
 msgstr "Otvoriť priečinok"
 
-#: ../plugins/directorymenu/directorymenu.c:780
+#: ../plugins/directorymenu/directorymenu.c:781
 msgid "Open in Terminal"
 msgstr "Spustiť v termináli"
 
@@ -1173,15 +1173,15 @@ msgstr "_Základný adresár:"
 msgid "_File Pattern:"
 msgstr "_Vzorka súbora:"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:406
 msgid "Open launcher menu"
 msgstr "Otvoriť ponuku spúšťača"
 
-#: ../plugins/launcher/launcher.c:1556
+#: ../plugins/launcher/launcher.c:1574
 msgid "Unnamed Item"
 msgstr "Nepomenovaná položka"
 
-#: ../plugins/launcher/launcher.c:1697
+#: ../plugins/launcher/launcher.c:1715
 msgid "No items"
 msgstr "Žiadne položky"
 
@@ -1275,11 +1275,11 @@ msgstr "Pozícia tlačidla so šípkou"
 msgid "Program launcher with optional menu"
 msgstr "Programový spúšťač s nastaviteľnou ponukou"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Nastavenia pracovnej plochy"
 
-#: ../plugins/pager/pager.c:430
+#: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
 msgstr "Nedajú sa otvoriť nastavenia pracovnej plochy"
 
@@ -1365,20 +1365,20 @@ msgstr "Zobrazí pracovnú plochu"
 msgid "Hide all windows and show the desktop"
 msgstr "Skryje všetky okná a zobrazí pracovnú plochu"
 
-#: ../plugins/systray/systray.c:384
+#: ../plugins/systray/systray.c:385
 msgid "Unable to start the notification area"
 msgstr "Nedá sa spustiť oznamovacia oblasť"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:854
+#: ../plugins/systray/systray.c:855
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Funkciu oznamovacej oblasti pravdepodobne prevzal iný nástroj. Táto oblasť nebude využitá."
 
-#: ../plugins/systray/systray.c:856
+#: ../plugins/systray/systray.c:857
 msgid "The notification area lost selection"
 msgstr "Správca oznamovacej oblasti stratil výber"
 
-#: ../plugins/systray/systray.c:1009
+#: ../plugins/systray/systray.c:1010
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Naozaj chcete vyčistiť zoznam známych aplikácií?"
 
@@ -1429,79 +1429,83 @@ msgid "Never"
 msgstr "Nikdy"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr "Žiadne, povoliť funkciu potiahni a pusť"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr "Obnoví minimalizované okná na tejto _pracovnej ploche"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
 msgstr "Otáčať _tlačidlá v zvislom paneli"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr "Zobraziť _ploché tlačidlá"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
 msgstr "Zobraziť _uško"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
 msgstr "Zobrazovať _názvy tlačidiel"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr "Zobraziť iba _minimalizované okná"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Zobr_aziť okná zo všetkých pracovných plôch a zobrazovacích zariadení"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
 msgstr "Zobraziť okná zo všetkých mo_nitorov"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "_Zoradenie"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
 msgstr "Časová značka"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr "Pokiaľ je priestor obmedzený"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Tlačidlá okna"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "_Zoskupovanie okien:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Window title"
 msgstr "Titulok okna"
 
-#: ../plugins/tasklist/tasklist-widget.c:3107
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr "Mi_nimalizovať všetko"
 
-#: ../plugins/tasklist/tasklist-widget.c:3116
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr "Obnoviť všetko z _minima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3122
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr "Ma_ximalizovať všetko"
 
-#: ../plugins/tasklist/tasklist-widget.c:3131
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr "Ob_noviť všetko z maxima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3141
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr "_Zatvoriť všetko"
 
