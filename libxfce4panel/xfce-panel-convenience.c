@@ -210,6 +210,16 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
         }
     }
 
+  if (G_UNLIKELY (pixbuf == NULL))
+    {
+      if (G_UNLIKELY (icon_theme == NULL))
+        icon_theme = gtk_icon_theme_get_default ();
+
+      /* bit ugly as a fallback, but in most cases better then no icon */
+      pixbuf = gtk_icon_theme_load_icon (icon_theme, GTK_STOCK_MISSING_IMAGE,
+                                         size, GTK_ICON_LOOKUP_USE_BUILTIN, NULL);
+    }
+
   /* scale the pixbug if required */
   if (G_LIKELY (pixbuf != NULL))
     {
