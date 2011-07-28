@@ -36,7 +36,7 @@ msgstr "패널"
 
 #: ../common/panel-utils.c:157
 msgid "_Read Online"
-msgstr "온라인상에서 읽기 (_R)"
+msgstr "온라인 상에서 읽기 (_R)"
 
 #: ../common/panel-utils.c:158
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
@@ -142,7 +142,7 @@ msgstr "사용방법을 보기 위해 \"%s --help\"를 입력하십시오"
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
-msgstr "(저) Xfce 개발팀"
+msgstr "Xfce 개발 팀. All rights reserved."
 
 #: ../panel/main.c:277
 #, c-format
@@ -349,7 +349,7 @@ msgstr "패널 배경의 알파 값. 0은 완전히 투명하게 되고 100은 �
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
-msgstr "외관"
+msgstr "외관 (_n)"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -398,7 +398,7 @@ msgstr "길이 (%) (_L)"
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
-msgstr "Measurements"
+msgstr "측정기"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
@@ -444,11 +444,11 @@ msgstr "플러그인이 더 많은 공간을 필요로 한다면 패널의 길�
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "패널을 다중 모니터의 길이만큼 확장하려면 이 옵션을 선택합니다"
+msgstr "패널을 다중 모니터의 길이만큼 확장하려면 이 옵션을 선택합니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr "패널의 손잡이를 숨기고 위치를 고정하려면 이 옵션을 선택합니다"
+msgstr "패널의 손잡이를 숨기고 위치를 고정하려면 이 옵션을 선택합니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
@@ -485,7 +485,7 @@ msgstr "알파 (_A):"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr "_Enter:"
+msgstr "커서 내부 위치 (_E):"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
@@ -539,51 +539,47 @@ msgstr "전문가"
 
 #: ../migrate/main.c:78
 msgid "Welcome to the first start of the panel"
-msgstr "패널을 첫 시작을 환영합니다"
+msgstr "패널의 첫 시작을 환영합니다"
 
 #: ../migrate/main.c:80
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
-msgstr ""
+msgstr "설정을 저장하기 위한 새로운 시스템으로 패널이 이동되었기 때문에, 처음 초기 환경설정을 로드하였습니다."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "처음 시작히 원하는 설정을 아래에서 선택하십시오."
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
-msgstr ""
+msgstr "이전 환경설정을 가져오기"
 
 #: ../migrate/main.c:90
-#, fuzzy
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "설정 저장"
+msgstr "이전 4.6 환경설정을 Xfconf로 가져오기"
 
 #: ../migrate/main.c:95
 msgid "Use default config"
-msgstr ""
+msgstr "기본 환경설정 사용하기"
 
 #: ../migrate/main.c:96
-#, fuzzy
 msgid "Load the default configuration"
-msgstr "설정 저장"
+msgstr "기본 환경설정 로드하기"
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
-msgstr ""
+msgstr "단일 빈 패널"
 
 #: ../migrate/main.c:103
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "단일 빈 패널로 시작하기"
 
 #: ../migrate/main.c:115
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "설정 저장"
+msgstr "이전 패널 환경설정을 가져오는데 실패했습니다"
 
 #: ../migrate/main.c:125
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "설정 저장"
+msgstr "기본 환경설정을 로드하는데 실패했습니다"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -591,59 +587,52 @@ msgid "Action Buttons"
 msgstr "동작 버튼"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
 msgid "Button Actions"
-msgstr "패널 기능"
+msgstr "버튼 동작"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "_First button:"
-msgstr "방향키(_r)"
+msgstr "첫번째 버튼 (_F):"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
 msgid "_Second button:"
-msgstr "아이콘 박스(_I)"
+msgstr "두번째 버튼 (_S):"
 
 #: ../plugins/actions/actions.c:108
-#, fuzzy
 msgid "Disabled"
-msgstr "안함(_D)"
+msgstr "비활성화됨"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr ""
+msgstr "대화상자 로그아웃"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr ""
+msgstr "로그아웃"
 
 #: ../plugins/actions/actions.c:111
-#, fuzzy
 msgid "Lock Screen"
-msgstr "화면잠금"
+msgstr "화면 잠금"
 
 #: ../plugins/actions/actions.c:112
 msgid "Shut Down"
-msgstr ""
+msgstr "시스템 종료"
 
 #: ../plugins/actions/actions.c:113
 msgid "Restart"
 msgstr "다시 시작"
 
 #: ../plugins/actions/actions.c:114
-#, fuzzy
 msgid "Suspend"
-msgstr "사운드"
+msgstr "대기"
 
 #: ../plugins/actions/actions.c:115
 msgid "Hibernate"
-msgstr ""
+msgstr "최대절전"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "종료 아니면 화면 잠금"
+msgstr "로그아웃, 잠금 혹은 다른 시스템 동작"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -654,150 +643,137 @@ msgstr "종료 아니면 화면 잠금"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 msgid "Appearance"
-msgstr "겉 모습"
+msgstr "외형"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "숨겨진 프로그램"
+msgstr "프로그램 메뉴"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#, fuzzy
 msgid "Button _title:"
-msgstr "패널 기능"
+msgstr "버튼 제목 (_t)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "메뉴 편집 (_i)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
-msgstr ""
+msgstr "메뉴 파일"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr ""
+msgstr "메뉴 파일 (_f)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Select A Menu File"
-msgstr "명령어 선택"
+msgstr "메뉴 파일 선택"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "메뉴에서 일반적 프로그램 이름을 보이려면 이 옵션을 선택, 예: \"Thunar\" 대신 \"File Manager\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
-msgstr ""
+msgstr "툴팁에 프로그램 설명 보이기 (_e)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-#, fuzzy
 msgid "Show generic application n_ames"
-msgstr "숨겨진 프로그램"
+msgstr "일반적 프로그램 이름 보이기 (_a)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr ""
+msgstr "메뉴에 아이콘 보이기 (_o)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
-msgstr ""
+msgstr "사용자 정의 메뉴 파일 사용 (_u):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
-msgstr ""
+msgstr "기본 메뉴 사용 (_d)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
 msgid "_Icon:"
-msgstr "아이콘(_I)"
+msgstr "아이콘 (_I):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-#, fuzzy
 msgid "_Show button title"
-msgstr "프로그램 이름 보이기(_n)"
+msgstr "버튼 제목 보이기 (_S)"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
-#, fuzzy
 msgid "Select An Icon"
-msgstr "명령어 선택"
+msgstr "아이콘 선택"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
 #: ../plugins/launcher/launcher.c:2295
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "\"%s\"를(을) 실행하지 못 했습니다."
+msgstr "\"%s\" 명령을 실행하는데 실패했습니다."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1010
-#, fuzzy
 msgid "No applications found"
-msgstr "\"%s\"에 대한 아이콘 선택"
+msgstr "프로그램이 없습니다"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1033
-#, fuzzy
 msgid "Failed to load the applications menu"
-msgstr "\"%s\"를(을) 실행하지 못 했습니다."
+msgstr "프로그램 메뉴를 로드하는데 실패했습니다."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "설치된 프로그램의 분류를 포함하고 있는 메뉴 보이기"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "사용법:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "OPTION"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
-#, fuzzy
 msgid "Options:"
-msgstr "시계 설정"
+msgstr "옵션:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "현재 마우스 포지션에 메뉴 띄우기"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "밋밋한 버튼 사용"
+msgstr "도움말 옵션 보이기"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
-msgstr ""
+msgstr "Week %V"
 
 #: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "clock 명령을 실행하는데 실패했습니다."
 
 #: ../plugins/clock/clock.c:719
-#, fuzzy
 msgid "Custom Format"
-msgstr "사용자 정의"
+msgstr "사용자 정의 형식"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
 msgid "24-_hour clock"
-msgstr "24시간 사용(_h)"
+msgstr "24시간 사용 (_h)"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -822,26 +798,25 @@ msgstr "디지탈"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
-msgstr "초 표시(_s)"
+msgstr "초 표시 (_s)"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr ""
+msgstr "형식 (_F):"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "모호성 (_u):"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
-#, fuzzy
 msgid "Fl_ash time separators"
-msgstr "Flash time separators(_a)"
+msgstr "시계 구분자 깜빡이기 (_a)"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
-msgstr ""
+msgstr "Fuzzy"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
@@ -849,26 +824,25 @@ msgstr "전광판"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr "오전/오후 표시(_w)"
+msgstr "오전/오후 표시 (_w)"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
-msgstr "틀 보이기(_f)"
+msgstr "틀 보이기 (_f)"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "비활성 점들 보이기 (_i)"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
-#, fuzzy
 msgid "Show gri_d"
-msgstr "핸들 보이기"
+msgstr "격자 보이기 (_d)"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr ""
+msgstr "이 형식은 파일 네임에 들어갈 날짜와 시간 부분을 서술합니다. 예를 들어, %Y는 연도를 대신할 것이고, %m은 달 수를 그리고 %d는 날짜의 일 수를 대신할 것입니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 봅니다."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -876,113 +850,110 @@ msgstr "바이너리 시계(_b)"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr ""
+msgstr "형태 (_L):"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
-#, fuzzy
 msgid "_Tooltip format:"
-msgstr "도움말 형식"
+msgstr "툴팁 형식 (_T):"
 
 #: ../plugins/clock/clock-fuzzy.c:86
-#, fuzzy
 msgid "Night"
-msgstr "오른쪽"
+msgstr "밤"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
-msgstr ""
+msgstr "이른 아침"
 
 #: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
-msgstr ""
+msgstr "아침"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
-msgstr ""
+msgstr "정오 무렵"
 
 #: ../plugins/clock/clock-fuzzy.c:90
-#, fuzzy
 msgid "Noon"
-msgstr "아이콘 없음"
+msgstr "정오"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
-msgstr ""
+msgstr "오후"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
-msgstr ""
+msgstr "저녁"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr ""
+msgstr "늦은 저녁"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0 시 정각"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr ""
+msgstr "5분 지난 %0 시"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr ""
+msgstr "10분 지난 %0 시"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr ""
+msgstr "15분 지난 %0 시"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr ""
+msgstr "20분 지난 %0 시"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr ""
+msgstr "25분 지난 %0 시"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
-msgstr ""
+msgstr "30분 지난 %0 시"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "25분 전 %1 시"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "20분 전 %1 시"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "15분 전 %1 시"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "10분 전 %1 시"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr ""
+msgstr "5분 전 %1 시"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1 시 정각"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1066,55 +1037,51 @@ msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
-msgstr ""
+msgstr "한"
 
 #: ../plugins/clock/clock-fuzzy.c:137
-#, fuzzy
 msgid "two"
-msgstr "네트워크"
+msgstr "두"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
-msgstr ""
+msgstr "세"
 
 #: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
-msgstr ""
+msgstr "네"
 
 #: ../plugins/clock/clock-fuzzy.c:140
-#, fuzzy
 msgid "five"
-msgstr "사무도구"
+msgstr "다섯"
 
 #: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
-msgstr ""
+msgstr "여섯"
 
 #: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
-msgstr ""
+msgstr "일곱"
 
 #: ../plugins/clock/clock-fuzzy.c:143
-#, fuzzy
 msgid "eight"
-msgstr "오른쪽"
+msgstr "여덟"
 
 #: ../plugins/clock/clock-fuzzy.c:144
-#, fuzzy
 msgid "nine"
-msgstr "선(_L)"
+msgstr "아홉"
 
 #: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
-msgstr ""
+msgstr "열"
 
 #: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
-msgstr ""
+msgstr "열 하나"
 
 #: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
-msgstr ""
+msgstr "열 두"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
@@ -1124,119 +1091,111 @@ msgstr "몇 시죠?"
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr ""
+msgstr "디렉토리 메뉴"
 
 #: ../plugins/directorymenu/directorymenu.c:550
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "\"%s\"를(을) 실행하지 못 했습니다."
+msgstr "\"%s\" 프로그램을을 실행하는데 실패했습니다"
 
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "\"%s\" 의 내용 유형을 요청하는데 실패했습니다"
 
 #: ../plugins/directorymenu/directorymenu.c:590
-#, fuzzy, c-format
+#, c-format
 msgid "No default application found for \"%s\""
-msgstr "\"%s\"에 대한 아이콘 선택"
+msgstr "\"%s\" 을(를) 위한 기본 프로그램을 찾을 수 없습니다"
 
 #: ../plugins/directorymenu/directorymenu.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "\"%s\"를(을) 실행하지 못 했습니다."
+msgstr "\"%s\" 을(를) 위한 기본 프로그램을 실행하는데 실패했습니다"
 
 #: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "\"%s\" 카테고리를 위한 기본 프로그램을 실행하는데 실패했습니다"
 
 #: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
-msgstr ""
+msgstr "폴더 열기"
 
 #: ../plugins/directorymenu/directorymenu.c:780
-#, fuzzy
 msgid "Open in Terminal"
-msgstr "터미널에서 실행하기(_t)"
+msgstr "터미널에서 열기"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "메뉴에서 디렉토리 트리 보이기"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "디렉토리에서 보이는 어떤 파일들을 보여줄지 결정하는데 사용할 패턴의 리스트를 입력합니다. 만약 여기에 하나 이상의 패턴을 적는다면, 목록의 팡목은 반드시 세미콜론으로 구분되어야 합니다 (e.g. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr ""
+msgstr "필터링"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#, fuzzy
 msgid "Select A Directory"
-msgstr "명령어 선택"
+msgstr "디렉토리 선택"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-#, fuzzy
 msgid "Show _hidden files"
-msgstr "핸들 보이기"
+msgstr "숨김 파일 보이기 (_h)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
-msgstr ""
+msgstr "기본 디렉토리 (_B):"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr ""
+msgstr "파일 패턴 (_F):"
 
 #: ../plugins/launcher/launcher.c:406
 msgid "Open launcher menu"
-msgstr ""
+msgstr "실행기 메뉴 열기"
 
 #: ../plugins/launcher/launcher.c:1574
-#, fuzzy
 msgid "Unnamed Item"
-msgstr "이름 없음"
+msgstr "이름 없는 항목"
 
 #: ../plugins/launcher/launcher.c:1715
-#, fuzzy
 msgid "No items"
-msgstr "새로운 항목"
+msgstr "항목 없음"
 
 #: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "항목을 삭제하면, 영원히 지워질 것입니다"
 
 #: ../plugins/launcher/launcher-dialog.c:745
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "작업공간 '%s'를(을) 없애시렵니까?"
+msgstr "'%s' 을(를) 정말 없애시렵니까?"
 
 #: ../plugins/launcher/launcher-dialog.c:746
-#, fuzzy
 msgid "Unnamed item"
-msgstr "이름 없음"
+msgstr "이름 없는 항목"
 
 #: ../plugins/launcher/launcher-dialog.c:791
-#, fuzzy
 msgid "Failed to open desktop item editor"
-msgstr "화면을 열지 못 했습니다."
+msgstr "데스크탑 항목 편집기를 여는데 실패했습니다"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new empty item"
-msgstr "새로운 항목 추가"
+msgstr "새로운 빈 항목 추가"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
-msgstr ""
+msgstr "하나 이상의 존재하는 아이템을 실행기에 추가"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
-msgstr ""
+msgstr "고급"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Default"
@@ -1244,15 +1203,15 @@ msgstr "기본"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Delete the currently selected item"
-msgstr ""
+msgstr "현재 선택된 항목 삭제"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "툴팁 비활성화 (_o)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
-msgstr ""
+msgstr "동"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
@@ -1265,51 +1224,47 @@ msgstr "실행기"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "North"
-msgstr ""
+msgstr "북"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr ""
+msgstr "패널 버튼이나 메뉴 항목 위로 마우스 포인터를 옮길 때 툴팁 보이기를 비활성화하려면 이 옵션을 선택합니다."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "클릭한 메뉴 항목을 패널에 옮기려면 이 옵션을 선택합니다."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
 msgid "Show _label instead of icon"
-msgstr "프로그램 아이콘 보이기(_p)"
+msgstr "아이콘 대신 레이블 보이기 (_l)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "최근 사용된 항목을 패널에 보이기 (_u)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
 msgid "South"
-msgstr "패널에 대하여..."
+msgstr "남"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr ""
+msgstr "서"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#, fuzzy
 msgid "_Arrow button position:"
-msgstr "방향키(_r)"
+msgstr "화살표 버튼 위치 (_A):"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "선택 메뉴가 있는 실행기"
+msgstr "선택 메뉴가 있는 프로그램 실행기"
 
 #: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
-#, fuzzy
 msgid "Workspace _Settings..."
-msgstr "작업공간 %d"
+msgstr "작업공간 설정 (_S)..."
 
 #: ../plugins/pager/pager.c:428
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "작업공간 설정을 열 수 없습니다"
 
 #: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
@@ -1319,110 +1274,95 @@ msgstr "작업공간 %d"
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "행동"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
 msgid "Number of _rows:"
-msgstr "몇 줄:"
+msgstr "줄 수 (_r):"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Show a miniature view of the workspace with rectangles for the visible windows"
-msgstr ""
+msgstr "보이는 창을 사각형으로 표시하는 작업공간을 작은 뷰로 보이기"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "작은 뷰 보이기 (_n)"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "마우스 휠로 작업공간 전환"
+msgstr "마우스 휠로 작업공간 전환 (_w)"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "작업공간 %d"
+msgstr "작업공간 전환기"
 
 #: ../plugins/pager/pager.desktop.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "모든 작업 공간에 대해 쬐만하게 보이기"
+msgstr "가상 데스크탑 전환"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
-#, fuzzy
 msgid "Dots"
-msgstr "점(_D)"
+msgstr "점"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
-#, fuzzy
 msgid "Handle"
-msgstr "핸들 위치:"
+msgstr "손잡이"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
-#, fuzzy
 msgid "New Line"
-msgstr "새로운 패널"
+msgstr "새 줄"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/separator/separator.desktop.in.h:2
-#, fuzzy
 msgid "Separator"
-msgstr "분리표시 스타일"
+msgstr "분리 표시"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
 msgid "Transparent"
-msgstr "투명도(%):"
+msgstr "투명도"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
-msgstr "확장(_E)"
+msgstr "확장 (_E)"
 
 #: ../plugins/separator/separator.desktop.in.h:1
-#, fuzzy
 msgid "Adds a separator or space between panel items"
-msgstr "항목 사이에 빈 공간이나 줄을 추가"
+msgstr "항목 사이에 빈 공간이나 분리 표시를 추가"
 
 #: ../plugins/showdesktop/showdesktop.c:194
-#, fuzzy
 msgid "Restore the minimized windows"
 msgstr "숨긴 창 보이기"
 
 #: ../plugins/showdesktop/showdesktop.c:196
-#, fuzzy
 msgid "Minimize all open windows and show the desktop"
-msgstr "창을 숨기고 작업화면 보이기"
+msgstr "모든 창을 숨기고 데스크탑 보이기"
 
 #: ../plugins/showdesktop/showdesktop.c:199
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
-msgstr "작업공간 보이기"
+msgstr "데스크탑 보이기"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "창을 숨기고 작업화면 보이기"
+msgstr "모든 창을 숨기고 데스크탑 보이기"
 
 #: ../plugins/systray/systray.c:385
-#, fuzzy
 msgid "Unable to start the notification area"
-msgstr "긴급통보"
+msgstr "알림 영역을 시작할 수 없습니다"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:855
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr ""
+msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용되지 않을 것입니다."
 
 #: ../plugins/systray/systray.c:857
-#, fuzzy
 msgid "The notification area lost selection"
-msgstr "트레이 관리자가 헤메고 있습니다."
+msgstr "알림 영역이 선택을 잃었습니다"
 
 #: ../plugins/systray/systray.c:1010
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "응용 프로그램 목록을 없애시렵니까?"
+msgstr "알려진 프로그램의 목록을 정말 없애시렵니까?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 #, fuzzy
