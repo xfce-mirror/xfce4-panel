@@ -2,249 +2,232 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # ByungHyun Choi<byunghyun.choi@gmail.com>, 2005.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-07-28 10:35+0000\n"
 "PO-Revision-Date: 2008-07-25 01:13+0900\n"
 "Last-Translator: ByungHyun Choi <byunghyun.choi@debianusers.org>\n"
-"Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
-"net>\n"
-"Language: \n"
+"Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "이 데스크탑 파일의 정보에 기반하여 새로운 실행기를 패널에 등록"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-#, fuzzy
 msgid "Create Launcher on the panel"
-msgstr "Xfce 패널은..."
+msgstr "패널에 실행기 생성"
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel"
-msgstr "Xfce 패널은..."
+msgstr ""
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
-#, fuzzy
 msgid "Panel"
-msgstr "패널 %d"
+msgstr "패널"
 
-#: ../common/panel-utils.c:155
+#: ../common/panel-utils.c:157
 msgid "_Read Online"
-msgstr ""
-
-#: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
+msgstr "온라인상에서 읽기 (_R)"
 
 #: ../common/panel-utils.c:158
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "사용자 메뉴얼을 온라인상에서 읽을 수 있습니다. 그러나 이 메뉴얼은 여러분이 사용하는 패널의 버전과 맞지 않을지도 모릅니다."
+
+#: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
-msgstr ""
+msgstr "사용자 메뉴얼이 여러분의 컴퓨터에 설치되지 않았습니다"
 
 #. display an error message to the user
-#: ../common/panel-utils.c:171
+#: ../common/panel-utils.c:175
 msgid "Failed to open the documentation browser"
-msgstr ""
+msgstr "문서 브라우저를 여는데 실패했습니다"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:889
 #: ../panel/panel-preferences-dialog.c:1048
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "작업공간 '%s'를(을) 없애시렵니까?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "항목을 패널에서 제거한다면, 즉시 잃게 될 것입니다."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1054
-#, fuzzy
 msgid "_Move"
-msgstr "이동"
+msgstr "이동 (_M)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1088
-#, fuzzy
 msgid "Pane_l"
-msgstr "패널 %d"
+msgstr "패널 (_l)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
-msgstr "새로운 항목 추가"
+msgstr "새로운 항목 추가 (_N)"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "패널 기본설정 (_e)"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
-msgstr ""
-
-#: ../panel/main.c:78
-#, fuzzy
-msgid "Show the 'Panel Preferences' dialog"
-msgstr "패널 꾸미기"
-
-#: ../panel/main.c:78 ../panel/main.c:79
-msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "로그 아웃 (_O)"
 
 #: ../panel/main.c:79
-#, fuzzy
-msgid "Show the 'Add New Items' dialog"
-msgstr "새로운 항목 추가"
+msgid "Show the 'Panel Preferences' dialog"
+msgstr "'패널 기본설정' 대화상자 보이기"
+
+#: ../panel/main.c:79 ../panel/main.c:80
+msgid "PANEL-NUMBER"
+msgstr "PANEL-NUMBER"
 
 #: ../panel/main.c:80
-#, fuzzy
+msgid "Show the 'Add New Items' dialog"
+msgstr "'새로운 항목 추가' 대화상자 보이기"
+
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
-msgstr "설정 저장"
-
-#: ../panel/main.c:81
-#, fuzzy
-msgid "Add a new plugin to the panel"
-msgstr "새로운 항목 추가"
-
-#: ../panel/main.c:81
-msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "패널 환경설정 저장하기"
 
 #: ../panel/main.c:82
-#, fuzzy
-msgid "Restart the running panel instance"
-msgstr "xfce4-panel을 다시 시작 중..."
+msgid "Add a new plugin to the panel"
+msgstr "패널에 새로운 항목 추가"
+
+#: ../panel/main.c:82
+msgid "PLUGIN-NAME"
+msgstr "PLUGIN-NAME"
 
 #: ../panel/main.c:83
-msgid "Quit the running panel instance"
-msgstr ""
+msgid "Restart the running panel instance"
+msgstr "실행 중인 패널 인스턴스를 재시작"
 
 #: ../panel/main.c:84
+msgid "Quit the running panel instance"
+msgstr "실행 중인 패널 인스턴스를 종료"
+
+#: ../panel/main.c:85
+msgid "Do not wait for a window manager on startup"
+msgstr "시작시 창 관리자를 기다리지 않기"
+
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr ""
+msgstr "버전 정보를 출력하고 종료하기"
 
 #. parse context options
-#: ../panel/main.c:240
+#: ../panel/main.c:250
 msgid "[ARGUMENTS...]"
 msgstr ""
 
-#: ../panel/main.c:247
+#: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr ""
 
-#: ../panel/main.c:266
+#: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
 msgstr "(저) Xfce 개발팀"
 
-#: ../panel/main.c:267
+#: ../panel/main.c:277
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "버그는 <%s>에게 보내주십시오."
 
-#: ../panel/main.c:318
+#: ../panel/main.c:328
 #, fuzzy
 msgid "There is already a running instance"
 msgstr "이 화면에는 시스템 트레이가 이미 동작 중입니다."
 
 #. spawn ourselfs again
-#: ../panel/main.c:367
+#: ../panel/main.c:378
 #, fuzzy
 msgid "Restarting..."
 msgstr "다시 시작"
 
-#: ../panel/main.c:382
+#: ../panel/main.c:393
 #, fuzzy
 msgid "Failed to show the preferences dialog"
 msgstr "화면을 열지 못 했습니다."
 
-#: ../panel/main.c:384
+#: ../panel/main.c:395
 #, fuzzy
 msgid "Failed to show the add new items dialog"
 msgstr "새로운 항목 추가"
 
-#: ../panel/main.c:386
+#: ../panel/main.c:397
 #, fuzzy
 msgid "Failed to save the panel configuration"
 msgstr "설정 저장"
 
-#: ../panel/main.c:388
+#: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
 msgstr ""
 
-#: ../panel/main.c:390
+#: ../panel/main.c:401
 #, fuzzy
 msgid "Failed to restart the panel"
 msgstr "패널에 항목추가"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:403
 #, fuzzy
 msgid "Failed to quit the panel"
 msgstr "'xfce4-panel -c' 실행 실패"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:405
 #, fuzzy
 msgid "Failed to send D-Bus message"
 msgstr "화면을 열지 못 했습니다."
 
-#: ../panel/main.c:405
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
+#: ../panel/main.c:416
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:408 ../panel/main.c:422
+#: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
+#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
+msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr ""
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
 #, fuzzy
 msgid "Are you sure you want to quit the panel?"
 msgstr "작업공간%d를 없애시렵니까?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\"를(을) 실행하지 못 했습니다."
 
-#: ../panel/panel-dbus-client.c:209
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+#: ../panel/panel-dbus-client.c:208
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:76
@@ -272,9 +255,7 @@ msgid "Panel %d"
 msgstr "패널 %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:185
@@ -300,17 +281,14 @@ msgstr ""
 msgid "Enter search phrase here"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.c:453
@@ -377,9 +355,7 @@ msgid "Add new item to this panel"
 msgstr "패널에 항목추가"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -431,7 +407,8 @@ msgstr "항목 추가"
 msgid "L_ength (%):"
 msgstr ""
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr ""
@@ -476,9 +453,7 @@ msgid "Select A Background Image"
 msgstr "명령어 선택"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:30
@@ -486,14 +461,11 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
+msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:33
@@ -510,15 +482,11 @@ msgid "Span mo_nitors"
 msgstr "감시자 펼치기"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:38
@@ -594,9 +562,7 @@ msgid "Welcome to the first start of the panel"
 msgstr "패널에 항목추가"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr ""
 
 #: ../migrate/main.c:83
@@ -741,9 +707,7 @@ msgid "Select A Menu File"
 msgstr "명령어 선택"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
@@ -786,7 +750,7 @@ msgstr "명령어 선택"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2295
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\"를(을) 실행하지 못 했습니다."
@@ -884,7 +848,8 @@ msgstr "초 표시(_s)"
 msgid "F_ormat:"
 msgstr ""
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr ""
@@ -922,11 +887,7 @@ msgstr "핸들 보이기"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1179,6 +1140,12 @@ msgstr ""
 msgid "What time is it?"
 msgstr "몇 시죠?"
 
+#: ../plugins/directorymenu/directorymenu.c:243
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Directory Menu"
+msgstr ""
+
 #: ../plugins/directorymenu/directorymenu.c:550
 #, fuzzy, c-format
 msgid "Failed to launch application \"%s\""
@@ -1213,20 +1180,12 @@ msgstr ""
 msgid "Open in Terminal"
 msgstr "터미널에서 실행하기(_t)"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-msgid "Directory Menu"
-msgstr ""
-
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1253,31 +1212,35 @@ msgstr ""
 msgid "_File Pattern:"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1555
+#: ../plugins/launcher/launcher.c:406
+msgid "Open launcher menu"
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:1574
 #, fuzzy
 msgid "Unnamed Item"
 msgstr "이름 없음"
 
-#: ../plugins/launcher/launcher.c:1696
+#: ../plugins/launcher/launcher.c:1715
 #, fuzzy
 msgid "No items"
 msgstr "새로운 항목"
 
-#: ../plugins/launcher/launcher-dialog.c:740
+#: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:741
+#: ../plugins/launcher/launcher-dialog.c:745
 #, fuzzy, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "작업공간 '%s'를(을) 없애시렵니까?"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:746
 #, fuzzy
 msgid "Unnamed item"
 msgstr "이름 없음"
 
-#: ../plugins/launcher/launcher-dialog.c:787
+#: ../plugins/launcher/launcher-dialog.c:791
 #, fuzzy
 msgid "Failed to open desktop item editor"
 msgstr "화면을 열지 못 했습니다."
@@ -1325,9 +1288,7 @@ msgid "North"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1361,16 +1322,16 @@ msgstr "방향키(_r)"
 msgid "Program launcher with optional menu"
 msgstr "선택 메뉴가 있는 실행기"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 #, fuzzy
 msgid "Workspace _Settings..."
 msgstr "작업공간 %d"
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:428
 msgid "Unable to open the workspace settings"
 msgstr ""
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "작업공간 %d"
@@ -1386,9 +1347,7 @@ msgid "Number of _rows:"
 msgstr "몇 줄:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1446,43 +1405,42 @@ msgstr "확장(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "항목 사이에 빈 공간이나 줄을 추가"
 
-#: ../plugins/showdesktop/showdesktop.c:193
+#: ../plugins/showdesktop/showdesktop.c:194
 #, fuzzy
 msgid "Restore the minimized windows"
 msgstr "숨긴 창 보이기"
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:196
 #, fuzzy
 msgid "Minimize all open windows and show the desktop"
 msgstr "창을 숨기고 작업화면 보이기"
+
+#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "작업공간 보이기"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 #, fuzzy
 msgid "Hide all windows and show the desktop"
 msgstr "창을 숨기고 작업화면 보이기"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "작업공간 보이기"
-
-#: ../plugins/systray/systray.c:382
+#: ../plugins/systray/systray.c:385
 #, fuzzy
 msgid "Unable to start the notification area"
 msgstr "긴급통보"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:850
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
+#: ../plugins/systray/systray.c:855
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:852
+#: ../plugins/systray/systray.c:857
 #, fuzzy
 msgid "The notification area lost selection"
 msgstr "트레이 관리자가 헤메고 있습니다."
 
-#: ../plugins/systray/systray.c:1005
+#: ../plugins/systray/systray.c:1010
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "응용 프로그램 목록을 없애시렵니까?"
 
@@ -1506,7 +1464,7 @@ msgstr "긴급통보"
 msgid "_Maximum icon size (px):"
 msgstr ""
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "화면 %d에 대한 관리자 선택 실패"
@@ -1537,86 +1495,90 @@ msgid "Never"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "Restore minimized windows to current _workspace"
+msgid "None, allow drag-and-drop"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-msgid "Ro_tate buttons in vertical panel"
+msgid "Restore minimized windows to current _workspace"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
+msgid "Ro_tate buttons in vertical panel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #, fuzzy
 msgid "Show _flat buttons"
 msgstr "밋밋한 버튼 사용"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #, fuzzy
 msgid "Show _handle"
 msgstr "핸들 보이기"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #, fuzzy
 msgid "Show button _labels"
 msgstr "프로그램 이름 보이기(_n)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 #, fuzzy
 msgid "Show windows from _all workspaces or viewports"
 msgstr "모든 작업공간의 태스크 보이기(_w)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 #, fuzzy
 msgid "Show windows from all mo_nitors"
 msgstr "모든 작업공간의 태스크 보이기(_w)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 #, fuzzy
 msgid "Window Buttons"
 msgstr "동작 버튼"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 #, fuzzy
 msgid "Window title"
 msgstr "창 목록"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr ""
 
@@ -1697,32 +1659,26 @@ msgstr "창 목록"
 msgid "Switch between open windows using a menu"
 msgstr ""
 
-#, fuzzy
 #~ msgid "Transparency"
 #~ msgstr "투명도(%):"
 
 #~ msgid "Xfce Panel"
 #~ msgstr "Xfce 패널"
 
-#, fuzzy
 #~ msgid "Xfce Menu"
 #~ msgstr "Xfce 패널"
 
 #~ msgid "_Number of rows:"
 #~ msgstr "몇번째 줄(_N):"
 
-#, fuzzy
 #~ msgid "_Restart"
 #~ msgstr "다시 시작"
 
-#, fuzzy
 #~ msgid "Failed to open manual"
 #~ msgstr "화면을 열지 못 했습니다."
 
-#, fuzzy
 #~ msgid "C_ompositing"
 #~ msgstr "위치"
 
-#, fuzzy
 #~ msgid "Action Button"
 #~ msgstr "동작 버튼"
