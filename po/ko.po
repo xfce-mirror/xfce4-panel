@@ -26,7 +26,7 @@ msgstr "패널에 실행기 생성"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid "Customize the panel"
-msgstr ""
+msgstr "패널을 취향대로 설정하기"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
@@ -133,12 +133,12 @@ msgstr "버전 정보를 출력하고 종료하기"
 #. parse context options
 #: ../panel/main.c:250
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ARGUMENTS...]"
 
 #: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "사용방법을 보기 위해 \"%s --help\"를 입력하십시오"
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
@@ -150,103 +150,95 @@ msgid "Please report bugs to <%s>."
 msgstr "버그는 <%s>에게 보내주십시오."
 
 #: ../panel/main.c:328
-#, fuzzy
 msgid "There is already a running instance"
-msgstr "이 화면에는 시스템 트레이가 이미 동작 중입니다."
+msgstr "실행중인 인스턴스가 존재합니다"
 
 #. spawn ourselfs again
 #: ../panel/main.c:378
-#, fuzzy
 msgid "Restarting..."
-msgstr "다시 시작"
+msgstr "다시 시작하는중..."
 
 #: ../panel/main.c:393
-#, fuzzy
 msgid "Failed to show the preferences dialog"
-msgstr "화면을 열지 못 했습니다."
+msgstr "기본설정 대화상자를 보여주는데 실패했습니다"
 
 #: ../panel/main.c:395
-#, fuzzy
 msgid "Failed to show the add new items dialog"
-msgstr "새로운 항목 추가"
+msgstr "새로운 항목 추가 대화상자를 보여주는데 실패했습니다"
 
 #: ../panel/main.c:397
-#, fuzzy
 msgid "Failed to save the panel configuration"
-msgstr "설정 저장"
+msgstr "패널 환경설정을 저장하는데 실패했습니다"
 
 #: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgstr "패널에 플러그인을 추가하는데 실패했습니다"
 
 #: ../panel/main.c:401
-#, fuzzy
 msgid "Failed to restart the panel"
-msgstr "패널에 항목추가"
+msgstr "패널 재시작에 실패했습니다"
 
 #: ../panel/main.c:403
-#, fuzzy
 msgid "Failed to quit the panel"
-msgstr "'xfce4-panel -c' 실행 실패"
+msgstr "패널을 종료하는데 실패했습니다"
 
 #: ../panel/main.c:405
-#, fuzzy
 msgid "Failed to send D-Bus message"
-msgstr "화면을 열지 못 했습니다."
+msgstr "D-Bus 메세지를 보내는데 실패했습니다"
 
 #: ../panel/main.c:416
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "패널을 시작하겠습니까? 패널을 시작 하면, 로그아웃시 세션을 저장하는지 확인하여 다음번 로그인시 패널이 자동으로 시작되도록 합니다."
 
 #: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "%s의 인스턴스가 실행되지 않았습니다"
 
 #: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "마이그레이션 프로그램을 실행하는데 실패했습니다"
 
 #: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
-msgstr ""
+msgstr "세션 매니저 없이 X를 시작하였습니다. 종료를 클릭하면 X 서버가 닫힐 것입니다."
 
 #: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
-#, fuzzy
 msgid "Are you sure you want to quit the panel?"
-msgstr "작업공간%d를 없애시렵니까?"
+msgstr "정말 패널을 종료하시겠습니까?"
 
 #: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "\"%s\"를(을) 실행하지 못 했습니다."
+msgstr "\"%s\" 명령을 실행하지 못 했습니다."
 
 #: ../panel/panel-dbus-client.c:208
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "정의된 플러그인 이벤트 문법이 잘못되었습니다. PLUGIN-NAME:NAME[:TYPE:VALUE]를 사용하십시오."
 
 #: ../panel/panel-dbus-client.c:241
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
+msgstr "Invalid hint type \"%s\""
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Xfce 데스크탑 환경의 패널"
 
 #: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
 msgstr ""
+"Boram Kim <boramism@gmail.com>\r\n"
+"조성호 <darkcircle.0426@gmail.com>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
 msgid "Add New Item"
 msgstr "새로운 항목 추가"
 
 #: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "새로운 플러그인을 위한 패널을 선택하여 주십시오:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
@@ -256,7 +248,7 @@ msgstr "패널 %d"
 
 #: ../panel/panel-dialogs.c:183
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr ""
+msgstr "패널이 키오스크 모드로 동작하고 있기 때문에, 정식 사용자로서의 패널 환경설정을 변경하도록 허락되지 않았습니다"
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
