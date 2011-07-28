@@ -1365,24 +1365,21 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr "알려진 프로그램의 목록을 정말 없애시렵니까?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
 msgid "C_lear Known Applications"
-msgstr "프로그램 선택"
+msgstr "알려진 프로그램 지우기 (_l)"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
 msgid "Known Applications"
-msgstr "숨겨진 프로그램"
+msgstr "알려진 프로그램"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "긴급통보"
+msgstr "알림 영역"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "최대 아이콘 크기 (픽셀) (_M):"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
@@ -1390,145 +1387,134 @@ msgid "Failed to acquire manager selection for screen %d"
 msgstr "화면 %d에 대한 관리자 선택 실패"
 
 #: ../plugins/systray/systray.desktop.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "알림 아이콘 보이기"
+msgstr "알림 아이콘을 보일 영역"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "항상"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "버튼 위에 커서 위치 했을 때 창 틀 그리기 (_r)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "제목과 타임스탬프 모으기"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "제목과 창 제목 모으기"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "전혀"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "아니오, 끌어 놓기를 허용합니다"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "현재 작업 공간에 숨겨진 창 표시"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
-msgstr ""
+msgstr "수직 패널의 버튼 회전하기 (_t)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#, fuzzy
 msgid "Show _flat buttons"
-msgstr "밋밋한 버튼 사용"
+msgstr "밋밋한 버튼 사용 (_f)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
-#, fuzzy
 msgid "Show _handle"
-msgstr "핸들 보이기"
+msgstr "손잡이 보이기 (_h)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
-#, fuzzy
 msgid "Show button _labels"
-msgstr "프로그램 이름 보이기(_n)"
+msgstr "버튼 이름 보이기(_n)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "숨겨진 창만 보이기 (_m)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
 msgid "Show windows from _all workspaces or viewports"
-msgstr "모든 작업공간의 태스크 보이기(_w)"
+msgstr "모든 작업공간 혹은 뷰포트의 창 보이기 (_a)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
-#, fuzzy
 msgid "Show windows from all mo_nitors"
 msgstr "모든 작업공간의 태스크 보이기(_w)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
-msgstr ""
+msgstr "정렬 순서 (_o):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
-msgstr ""
+msgstr "타임스탬프"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
-msgstr ""
+msgstr "공간이 제한되어 있을 때"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
 msgid "Window Buttons"
-msgstr "동작 버튼"
+msgstr "창 버튼"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
-msgstr ""
+msgstr "창 모으기 (_g):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-#, fuzzy
 msgid "Window title"
-msgstr "창 목록"
+msgstr "창 제목"
 
 #: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "모두 최소화 (_n)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
-msgstr ""
+msgstr "모두 최소화 취소 (_m)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "모두 최대화 (_x)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "모두 최대화 취소 (_U)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
-msgstr ""
+msgstr "모두 닫기 (_C)"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "버튼을 사용하여 열린 창 전환"
 
 #: ../plugins/windowmenu/windowmenu.c:652
-#, fuzzy
 msgid "Desktop"
-msgstr "작업공간 보이기"
+msgstr "데스크탑"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
-#, fuzzy
 msgid "No Windows"
-msgstr "창 목록"
+msgstr "창 없음"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
-msgstr ""
+msgstr "긴급 창"
 
 #: ../plugins/windowmenu/windowmenu.c:1300
-#, fuzzy
 msgid "Add Workspace"
 msgstr "작업공간 추가"
 
 #: ../plugins/windowmenu/windowmenu.c:1320
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "작업공간 '%s' 삭제"
+msgstr "작업공간 \"%s\" 삭제"
 
 #: ../plugins/windowmenu/windowmenu.c:1322
 #, c-format
@@ -1536,48 +1522,41 @@ msgid "Remove Workspace %d"
 msgstr "작업공간 %d를(을) 삭제할까요?"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-#, fuzzy
 msgid "Arrow"
-msgstr "방향키(_r):"
+msgstr "방향키"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "버튼 배치:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
-#, fuzzy
 msgid "Enable _urgency notification"
-msgstr "긴급통보"
+msgstr "긴급 통보 활성화 (_u)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Icon"
-msgstr "아이콘(_I)"
+msgstr "아이콘"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Show windows from _all workspaces"
-msgstr "모든 작업공간의 태스크 보이기(_w)"
+msgstr "모든 작업공간의 창 보이기 (_a)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "작업공간 이름 보이기"
+msgstr "작업공간 이름 보이기 (_n)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show workspace a_ctions"
-msgstr "작업공간 움직임 보이기(_k)"
+msgstr "작업공간 움직임 보이기 (_c)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-#, fuzzy
 msgid "Window Menu"
-msgstr "창 목록"
+msgstr "창 메뉴"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "메뉴를 사용하여 열린 창 전환"
 
 #~ msgid "Transparency"
 #~ msgstr "투명도(%):"
