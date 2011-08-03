@@ -163,6 +163,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
 {
   GObject           *window;
   GObject           *object;
+  GObject           *info;
   GObject           *treeview;
   GtkTreeViewColumn *column;
   GtkCellRenderer   *renderer;
@@ -202,6 +203,11 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   panel_return_if_fail (G_IS_OBJECT (object));
   g_signal_connect_swapped (G_OBJECT (object), "notify::visible",
       G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
+
+  info = gtk_builder_get_object (GTK_BUILDER (dialog), "composited-info");
+  panel_return_if_fail (G_IS_OBJECT (info));
+  exo_binding_new_with_negation (G_OBJECT (object), "sensitive",
+                                 G_OBJECT (info), "visible");
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-image");
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (object));
@@ -414,7 +420,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "background-alpha", "value");
   panel_preferences_dialog_bindings_add (dialog, "enter-opacity", "value");
   panel_preferences_dialog_bindings_add (dialog, "leave-opacity", "value");
-  panel_preferences_dialog_bindings_add (dialog, "composited", "visible");
+  panel_preferences_dialog_bindings_add (dialog, "composited", "sensitive");
   panel_preferences_dialog_bindings_add (dialog, "background-style", "active");
   panel_preferences_dialog_bindings_add (dialog, "background-color", "color");
 
@@ -600,7 +606,8 @@ panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-alpha-box");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_get (G_OBJECT (dialog->active), "composited", &composited, NULL);
-  g_object_set (G_OBJECT (object), "visible", composited && active < 2, NULL);
+  g_object_set (G_OBJECT (object), "visible", active < 2,
+                "sensitive", composited, NULL);
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-color-box");
   panel_return_if_fail (GTK_IS_WIDGET (object));
