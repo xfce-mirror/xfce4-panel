@@ -92,7 +92,8 @@ enum
   PROP_SHOW_WIREFRAMES,
   PROP_SHOW_HANDLE,
   PROP_SORT_ORDER,
-  PROP_ROTATE_VERTICALLY
+  PROP_ROTATE_VERTICALLY,
+  PROP_WINDOW_SCROLLING
 };
 
 struct _XfceTasklistClass
@@ -149,6 +150,9 @@ struct _XfceTasklist
 
   /* if we rotate buttons in a vertical panel */
   guint                 rotate_vertically : 1;
+
+  /* switch window with the mouse wheel */
+  guint                 window_scrolling : 1;
 
   /* whether we only show windows that are in the geometry of
    * the monitor the tasklist is on */
@@ -458,6 +462,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_WINDOW_SCROLLING,
+                                   g_param_spec_boolean ("window-scrolling",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
                                                              NULL,
@@ -533,6 +544,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_handle = TRUE;
   tasklist->rotate_vertically = TRUE;
   tasklist->all_monitors = TRUE;
+  tasklist->window_scrolling = TRUE;
   xfce_tasklist_geometry_set_invalid (tasklist);
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
@@ -619,6 +631,10 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_boolean (value, tasklist->rotate_vertically);
       break;
 
+    case PROP_WINDOW_SCROLLING:
+      g_value_set_boolean (value, tasklist->window_scrolling);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -687,6 +703,10 @@ xfce_tasklist_set_property (GObject      *object,
 
     case PROP_ROTATE_VERTICALLY:
       xfce_tasklist_set_rotate_vertically (tasklist, g_value_get_boolean (value));
+      break;
+
+    case PROP_WINDOW_SCROLLING:
+      tasklist->window_scrolling = g_value_get_boolean (value);
       break;
 
     default:
@@ -1168,6 +1188,9 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
   XfceTasklist      *tasklist = XFCE_TASKLIST (widget);
   XfceTasklistChild *child = NULL;
   GList             *li, *lnew = NULL;
+
+  if (!tasklist->window_scrolling)
+    return TRUE;
 
   for (li = tasklist->windows; li != NULL; li = li->next)
     {

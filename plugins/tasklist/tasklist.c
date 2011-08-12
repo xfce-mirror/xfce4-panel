@@ -137,6 +137,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-handle", G_TYPE_BOOLEAN },
     { "sort-order", G_TYPE_UINT },
     { "rotate-vertically", G_TYPE_BOOLEAN },
+    { "window-scrolling", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -237,6 +238,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-wireframes", "active")
   TASKLIST_DIALOG_BIND ("show-handle", "active")
   TASKLIST_DIALOG_BIND ("sort-order", "active")
+  TASKLIST_DIALOG_BIND ("window-scrolling", "active")
 
 #ifndef GDK_WINDOWING_X11
   /* not functional in x11, so avoid confusion */
