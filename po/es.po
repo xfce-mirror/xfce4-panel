@@ -23,7 +23,6 @@ msgid "Add a new launcher to the panel based on the information of this desktop 
 msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:2
-#, fuzzy
 msgid "Create Launcher on the panel"
 msgstr "Crear Lanzador en el panel"
 
@@ -46,9 +45,8 @@ msgid "You can read the user manual online. This manual may however not exactly 
 msgstr "Puede leer el manual de usuario en línea. Puede que este manual no se corresponda exactamente con la versión del panel instalada."
 
 #: ../common/panel-utils.c:160
-#, fuzzy
 msgid "The user manual is not installed on your computer"
-msgstr "El manual de usuario del panel de Xfce no está instalada en su equipo."
+msgstr "El manual del usuario no está instalado en su ordenador"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:175
@@ -124,8 +122,9 @@ msgid "Quit the running panel instance"
 msgstr "Terminar la instancia del panel en ejecución"
 
 #: ../panel/main.c:85
+#, fuzzy
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "No espere a que un gestor de ventanas en el arranque"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -1388,8 +1387,9 @@ msgid "Notification Area"
 msgstr "Área de notificación"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
+#, fuzzy
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "_Maximum Icono de tamaño (px):"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
@@ -1422,7 +1422,7 @@ msgstr "Nunca"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Ninguno, permite arrastrar y soltar"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
@@ -1449,14 +1449,12 @@ msgid "Show only _minimized windows"
 msgstr "Mostrar solo ventanas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Mostrar ventanas de _todas las áreas de trabajo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
-#, fuzzy
 msgid "Show windows from all mo_nitors"
-msgstr "Mostrar ventanas de _todas las áreas de trabajo"
+msgstr "Mostrar ventanas de todos los mo_nitores"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
