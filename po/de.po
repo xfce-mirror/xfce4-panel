@@ -1,1622 +1,1277 @@
-# German translations for xfce4-panel package.
-# Copyright (C) 2002-2006 The Xfce development team.
-# This file is distributed under the same license as the xfce4-panel package.
-# Moritz Heiber <moe@xfce.org>, 2003-2005.
-# Fabian Nowak <timystery@arcor.de>, 2005-2010.
-# Enrico Tröger <enrico@xfce.org>, 2008.
+# German translations for xfce4-session package.
+# Copyright (C) 2003-2007 The Xfce development team.
+# This file is distributed under the same license as the xfce4-session package.
+# Moritz Heiber <moe@xfce.org>, 2003.
+# Fabian Nowak <timystery@arcor.de>, 2006-2009.
+# Nico Schümann <nico@prog.nico22.de>, 2007.
+# Benedikt Meurer <benny@xfce.org>, 2007, 2008.
 # Simon Schneider <simon@schneiderimtal.de>, 2009
-# Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.7.0\n"
+"Project-Id-Version: xfce4-session 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-20 16:12+0000\n"
-"PO-Revision-Date: 2010-12-28 22:32+0100\n"
-"Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
-"Language-Team: German <xfce-i18n-de@xfce.org>\n"
+"POT-Creation-Date: 2011-08-21 23:19+0200\n"
+"PO-Revision-Date: 2010-05-08 22:56+0200\n"
+"Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
+"Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 
-#: ../panel-desktop-handler.desktop.in.h:1
-msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "Einen neuen Starter zur Leiste hinzufügen anhand der Informationen in der Desktop-Datei"
+#: ../engines/balou/balou-theme.c:110
+msgid "No description given"
+msgstr "Keine Beschreibung verfügbar"
 
-#: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create Launcher on the panel"
-msgstr "Starter zur Leiste hinzufügen"
+#: ../engines/balou/config.c:324
+msgid "Choose theme file to install..."
+msgstr "Wählen Sie die Themadatei, die Sie installieren möchten..."
 
-#: ../panel-preferences.desktop.in.h:1
-msgid "Customize the panel"
-msgstr "Leiste einrichten"
-
-#: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:25 ../panel/panel-window.c:2275
-#: ../migrate/main.c:100
-msgid "Panel"
-msgstr "Leiste"
-
-#: ../common/panel-utils.c:157
-msgid "_Read Online"
-msgstr "Online _lesen"
-
-#: ../common/panel-utils.c:158
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Sie können das Anwenderhandbuch online lesen. Dieses Handbuch entspricht allerdings nicht immer Ihrer Version."
-
-#: ../common/panel-utils.c:160
-msgid "The user manual is not installed on your computer"
-msgstr "Das Anwenderhandbuch ist auf Ihrem Rechner nicht installiert"
-
-#. display an error message to the user
-#: ../common/panel-utils.c:175
-msgid "Failed to open the documentation browser"
-msgstr "Konnte die Dokumentationsanzeige nicht öffnen"
-
-#. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:919
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../engines/balou/config.c:336
 #, c-format
-msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Soll »%s« wirklich entfernt werden?"
+msgid "Unable to install splash theme from file \"%s\""
+msgstr "Kann das Startbildschirmthema aus »%s« nicht installieren"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:924
-#: ../panel/panel-preferences-dialog.c:1052
-msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
+#: ../engines/balou/config.c:339
+msgid "Theme File Error"
+msgstr "Fehler in der Themadatei"
 
-#. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1084
-msgid "_Move"
-msgstr "_Verschieben"
-
-#: ../libxfce4panel/xfce-panel-plugin.c:1118
-msgid "Pane_l"
-msgstr "_Leiste"
-
-#. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1126 ../panel/panel-window.c:2287
-msgid "Add _New Items..."
-msgstr "_Neue Elemente hinzufügen…"
-
-#. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1137 ../panel/panel-window.c:2298
-msgid "Panel Pr_eferences..."
-msgstr "Leisten_einstellungen…"
-
-#. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1154 ../panel/panel-window.c:2314
-msgid "Log _Out"
-msgstr "_Abmelden"
-
-#: ../panel/main.c:79
-msgid "Show the 'Panel Preferences' dialog"
-msgstr "Dialog »Leiste einrichten« anzeigen"
-
-#: ../panel/main.c:79 ../panel/main.c:80
-msgid "PANEL-NUMBER"
-msgstr "LEISTENNUMMER"
-
-#: ../panel/main.c:80
-msgid "Show the 'Add New Items' dialog"
-msgstr "Dialog »Neue Objekte hinzufügen« zeigen"
-
-#: ../panel/main.c:81
-msgid "Save the panel configuration"
-msgstr "Leisteneinstellungen speichern"
-
-#: ../panel/main.c:82
-msgid "Add a new plugin to the panel"
-msgstr "Neues Plugin zur Leiste hinzufügen"
-
-#: ../panel/main.c:82
-msgid "PLUGIN-NAME"
-msgstr "PLUGIN-NAME"
-
-#: ../panel/main.c:83
-msgid "Restart the running panel instance"
-msgstr "Laufende Instanz der Leiste neustarten"
-
-#: ../panel/main.c:84
-msgid "Quit the running panel instance"
-msgstr "Laufende Instanz der Leiste beenden"
-
-#: ../panel/main.c:85
-#, fuzzy
-msgid "Do not wait for a window manager on startup"
-msgstr "Beim Starten nicht auf Fenstermanager warten"
-
-#: ../panel/main.c:86
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
-msgid "Print version information and exit"
-msgstr "Versionsinformationen ausgeben und beenden"
-
-#. parse context options
-#: ../panel/main.c:250
-msgid "[ARGUMENTS...]"
-msgstr "[ARGUMENTE…]"
-
-#: ../panel/main.c:257
-#, c-format
-msgid "Type \"%s --help\" for usage."
-msgstr "Geben Sie »%s --help« für Informationen zur Nutzung an."
-
-#: ../panel/main.c:276
-msgid "The Xfce development team. All rights reserved."
-msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
-
-#: ../panel/main.c:277
-#, c-format
-msgid "Please report bugs to <%s>."
-msgstr "Bitte melden Sie Fehler an <%s>"
-
-#: ../panel/main.c:328
-msgid "There is already a running instance"
-msgstr "Es gibt bereits eine laufende Instanz"
-
-#. spawn ourselfs again
-#: ../panel/main.c:378
-msgid "Restarting..."
-msgstr "Neustart…"
-
-#: ../panel/main.c:393
-msgid "Failed to show the preferences dialog"
-msgstr "Konnte den Einstellungsdialog nicht öffnen"
-
-#: ../panel/main.c:395
-msgid "Failed to show the add new items dialog"
-msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
-
-#: ../panel/main.c:397
-msgid "Failed to save the panel configuration"
-msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
-
-#: ../panel/main.c:399
-msgid "Failed to add a plugin to the panel"
-msgstr "Konnte Plugin nicht zur Leiste hinzufügen"
-
-#: ../panel/main.c:401
-msgid "Failed to restart the panel"
-msgstr "Konnte die Leiste nicht neustarten"
-
-#: ../panel/main.c:403
-msgid "Failed to quit the panel"
-msgstr "Konnte die Leiste nicht beenden"
-
-#: ../panel/main.c:405
-msgid "Failed to send D-Bus message"
-msgstr "Konnte keine D-Bus-Nachricht senden"
-
-#: ../panel/main.c:416
-msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
-
-#: ../panel/main.c:419 ../panel/main.c:433
-#, c-format
-msgid "No running instance of %s was found"
-msgstr "Keine laufende Instanz von %s gefunden"
-
-#: ../panel/panel-application.c:216
-msgid "Failed to launch the migration application"
-msgstr "Konnte die Anwendung zum Migrieren der Leisteneinstellungen nicht starten"
-
-#: ../panel/panel-application.c:1567 ../plugins/actions/actions.c:421
-msgid "You have started X without session manager. Clicking Quit will close the X server."
-msgstr "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« klicken, beendet dies den X-Server."
-
-#: ../panel/panel-application.c:1568 ../plugins/actions/actions.c:422
-msgid "Are you sure you want to quit the panel?"
-msgstr "Soll die Leiste wirklich beendet werden?"
-
-#: ../panel/panel-application.c:1576 ../plugins/actions/actions.c:430
-#, c-format
-msgid "Failed to execute command \"%s\""
-msgstr "Konnte Befehl »%s« nicht ausführen."
-
-#: ../panel/panel-dbus-client.c:208
-msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ungültige Syntax für Plugin-Ereignisse angegeben. Verwenden Sie PLUGIN-NAME:NAME [:TYP:WERT]."
-
-#: ../panel/panel-dbus-client.c:241
-#, c-format
-msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Ungültiger Hinweistyp »%s«. Erlaubte Typen sind 'bool', 'double', 'int', 'string' und 'uint'."
-
-#: ../panel/panel-dialogs.c:76
-msgid "The panel of the Xfce Desktop Environment"
-msgstr "Die Leiste der Arbeitsumgebung Xfce"
-
-#: ../panel/panel-dialogs.c:81
-msgid "translator-credits"
+#: ../engines/balou/config.c:342
+msgid "Please check that the file is a valid splash theme archive."
 msgstr ""
-"Moritz Heiber <moe@xfce.org>\n"
-"Fabian Nowak <timystery@arcor.de>\n"
-"Enrico Tröger <enrico@xfce.org>\n"
-"Simon Schneider <simon@schneiderimtal.de>\n"
-"Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>"
+"Stellen Sie bitte sicher, dass die Datei ein Archiv für ein "
+"Startbildschirmthema ist."
 
-#. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
-msgid "Add New Item"
-msgstr "Neue Elemente hinzufügen"
-
-#: ../panel/panel-dialogs.c:136
-msgid "Please choose a panel for the new plugin:"
-msgstr "Bitte wählen Sie eine Leiste für das neue Element:"
-
-#. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:768
+#: ../engines/balou/config.c:402
 #, c-format
-msgid "Panel %d"
-msgstr "Leiste %d"
-
-#: ../panel/panel-dialogs.c:183
-msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "Da sich die Leiste im »Kiosk«-Modus befindet, sind Änderungen an der Leisteneinstellung als normaler Nutzer nicht erlaubt."
-
-#: ../panel/panel-dialogs.c:185
-msgid "Modifying the panel is not allowed"
-msgstr "Modifizieren der Leiste ist nicht erlaubt"
-
-#: ../panel/panel-item-dialog.c:188
-msgid "Add New Items"
-msgstr "Neue Elemente hinzufügen"
-
-#: ../panel/panel-item-dialog.c:190
-msgid "Add new plugins to the panel"
-msgstr "Neue Plugins zur Leiste hinzufügen"
-
-#: ../panel/panel-item-dialog.c:214
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-msgid "_Search:"
-msgstr "_Suche:"
-
-#: ../panel/panel-item-dialog.c:222
-msgid "Enter search phrase here"
-msgstr "Suchbegriff hier eingeben"
-
-#: ../panel/panel-plugin-external.c:426
-#, c-format
-msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Element »%s« hat die Leiste unerwartet verlassen. Soll es neugestartet werden?"
-
-#: ../panel/panel-plugin-external.c:428
-#, c-format
-msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neugestartet. Durch Drücken von »Ausführen« wird das Element noch einmal neugestartet. Andernfalls wird es endgültig von der Leiste entfernt."
-
-#: ../panel/panel-preferences-dialog.c:454
-msgid "Automatic"
-msgstr "Automatisch"
-
-#. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:473
-#, c-format
-msgid "Screen %d"
-msgstr "Bildschirm %d"
-
-#. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:499
-#, c-format
-msgid "Monitor %d"
-msgstr "Monitor %d"
-
-#: ../panel/panel-preferences-dialog.c:829
-msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Die Einstellungen der Leiste und der Plugins werden dauerhaft entfernt."
-
-#: ../panel/panel-preferences-dialog.c:830
-#, c-format
-msgid "Are you sure you want to remove panel %d?"
-msgstr "Soll die Leiste %d wirklich entfernt werden?"
-
-#. I18N: append (external) in the preferences dialog if the plugin
-#. * runs external
-#: ../panel/panel-preferences-dialog.c:913
-#, c-format
-msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
-
-#. I18N: tooltip in preferences dialog when hovering an item in the list
-#. * for external plugins
-#: ../panel/panel-preferences-dialog.c:918
-#, c-format
-msgid ""
-"Internal name: %s-%d\n"
-"PID: %d"
-msgstr ""
-"Interner Name: %s-%d\n"
-"PID: %d"
-
-#. I18N: tooltip in preferences dialog when hovering an item in the list
-#. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:930
-#, c-format
-msgid "Internal name: %s-%d"
-msgstr "Interner Name: %s-%d"
-
-#: ../panel/panel-preferences-dialog.glade.h:1
-msgid "A_utomatically increase the length"
-msgstr "_Länge automatisch erhöhen"
-
-#: ../panel/panel-preferences-dialog.glade.h:2
-msgid "Add a new panel"
-msgstr "Neue Leiste hinzufügen"
-
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Add new item to this panel"
-msgstr "Neues Objekt zur Leiste hinzufügen"
-
-#: ../panel/panel-preferences-dialog.glade.h:4
-msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
-msgstr "Alpha-Wert des Leistenhintergrunds. Zwischen 0 (transparent) und 100 (undurchsichtig)."
-
-#: ../panel/panel-preferences-dialog.glade.h:5
-msgid "Appeara_nce"
-msgstr "_Erscheinungsbild"
-
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "Automatically show and _hide the panel"
-msgstr "Leiste _automatisch verbergen"
-
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "Background"
-msgstr "Hintergrund"
-
-#: ../panel/panel-preferences-dialog.glade.h:8
-msgid "Background image"
-msgstr "Hintergrundbild"
-
-#: ../panel/panel-preferences-dialog.glade.h:9
-msgid "C_olor:"
-msgstr "_Farbe:"
-
-#: ../panel/panel-preferences-dialog.glade.h:10
-msgid "D_isplay"
-msgstr "A_nzeige"
-
-#: ../panel/panel-preferences-dialog.glade.h:11
-#, fuzzy
-msgid "Don't _reserve space on borders"
-msgstr "Keinen Platz in den Rändern _reservieren"
-
-#: ../panel/panel-preferences-dialog.glade.h:12
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Edit the currently selected item"
-msgstr "Ausgewähltes Objekt bearbeiten"
-
-#: ../panel/panel-preferences-dialog.glade.h:13
-#: ../plugins/launcher/launcher-dialog.glade.h:10
-msgid "General"
-msgstr "Allgemein"
-
-#: ../panel/panel-preferences-dialog.glade.h:14
-msgid "Horizontal"
-msgstr "Horizontal"
-
-#: ../panel/panel-preferences-dialog.glade.h:15
-msgid "Ite_ms"
-msgstr "_Objekte"
-
-#: ../panel/panel-preferences-dialog.glade.h:17
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "_Länge (in %):"
-
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:19
-msgid "Measurements"
-msgstr "Abmessungen"
-
-#: ../panel/panel-preferences-dialog.glade.h:20
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-msgid "Move currently selected item down by one row"
-msgstr "Ausgewähltes Objekt eine Zeile nach unten bewegen"
-
-#: ../panel/panel-preferences-dialog.glade.h:21
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-msgid "Move currently selected item up by one row"
-msgstr "Ausgewähltes Objekt eine Zeile nach oben bewegen"
-
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "None (use system style)"
-msgstr "Keines (Systemstil verwenden)"
-
-#: ../panel/panel-preferences-dialog.glade.h:23
-msgid "O_utput:"
-msgstr "_Ausgabe:"
-
-#: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Opacity"
-msgstr "Deckkraft"
-
-#: ../panel/panel-preferences-dialog.glade.h:26
-msgid "Pick a Panel Color"
-msgstr "Farbe für die Leiste auswählen"
-
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "Remove currently selected item"
-msgstr "Ausgewähltes Objekt entfernen"
-
-#: ../panel/panel-preferences-dialog.glade.h:28
-msgid "Remove the currently selected panel"
-msgstr "Die ausgewählte Leiste entfernen"
-
-#: ../panel/panel-preferences-dialog.glade.h:29
-msgid "Select A Background Image"
-msgstr "Hintergrundbild auswählen"
-
-#: ../panel/panel-preferences-dialog.glade.h:30
-msgid "Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge."
-msgstr "Wählen Sie diese Option,wenn Sie möchten, dass maximierte Fenster den Platz hinter der Leiste nutzen. Dies funktioniert nur, wenn sich die Leiste am Rand des Bildschirms befindet."
-
-#: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "Wählen Sie diese Option, wenn die Länge der Leiste automatisch vergrößert werden soll, wenn Plugins mehr Platz benötigen."
-
-#: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Wählen Sie diese Option, um die Leiste über mehrere Monitore zu verteilen."
-
-#: ../panel/panel-preferences-dialog.glade.h:33
-msgid "Select this option to hide the handles of the panel and lock its position."
-msgstr "Wählen Sie diese Option, um die Leistengriffe zu verbergen und die Position zu sperren."
-
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
-msgstr "Wählen Sie diese Option, um die Leiste zu verbergen, wenn sich der Zeiger nicht über ihr befindet. Dies funktioniert nur, wenn sich die Leiste an einer Bildschirmkante befindet."
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid "Show about information of the currently selected item"
-msgstr "Informationen zum ausgewähltes Objekt anzeigen"
-
-#: ../panel/panel-preferences-dialog.glade.h:36
-msgid "Solid color"
-msgstr "Deckfarbe"
-
-#: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Span mo_nitors"
-msgstr "_Auf mehrere Monitore ausdehnen"
-
-#: ../panel/panel-preferences-dialog.glade.h:38
-msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist. Zwischen 0 (transparent) und 100 (undurchsichtig)."
-
-#: ../panel/panel-preferences-dialog.glade.h:39
-msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
-msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist.Zwischen 0 (transparent) und 100 (undurchsichtig)."
-
-#: ../panel/panel-preferences-dialog.glade.h:40
-msgid "Vertical"
-msgstr "Vertikal"
-
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "_Alpha:"
-msgstr "_Alpha:"
-
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:43
-msgid "_Enter:"
-msgstr "_Eingabe:"
-
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "_File:"
-msgstr "_Datei:"
-
-#. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:46
-msgid "_Leave:"
-msgstr "_Verlassen:"
-
-#: ../panel/panel-preferences-dialog.glade.h:47
-msgid "_Lock panel"
-msgstr "_Leiste sperren"
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-msgid "_Orientation:"
-msgstr "_Ausrichtung:"
-
-#: ../panel/panel-preferences-dialog.glade.h:49
-msgid "_Size (pixels):"
-msgstr "_Größe (in Pixel):"
-
-#: ../panel/panel-preferences-dialog.glade.h:50
-#: ../plugins/separator/separator-dialog.glade.h:8
-msgid "_Style:"
-msgstr "_Stil:"
-
-#: ../panel/panel-tic-tac-toe.c:123
-msgid "_New Game"
-msgstr "_Neues Spiel"
-
-#: ../panel/panel-tic-tac-toe.c:134
-msgid "_Level:"
-msgstr "_Level:"
-
-#: ../panel/panel-tic-tac-toe.c:140
-msgid "Novice"
-msgstr "Anfänger"
-
-#: ../panel/panel-tic-tac-toe.c:141
-msgid "Intermediate"
-msgstr "Erfahren"
-
-#: ../panel/panel-tic-tac-toe.c:142
-msgid "Experienced"
-msgstr "Profi"
-
-#: ../panel/panel-tic-tac-toe.c:143
-msgid "Expert"
-msgstr "Experte"
-
-#: ../migrate/main.c:94
-msgid "Welcome to the first start of the panel"
-msgstr "Willkommen beim ersten Start der Xfce-Leiste"
-
-#: ../migrate/main.c:96
-msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
-msgstr "Da die Leiste auf neue Art ihre Einstellungen speichert, muss eine neue Konfiguration geladen werden."
-
-#: ../migrate/main.c:99
-msgid "Choose below which setup you want for the first startup."
-msgstr "Wählen Sie unten aus, welches Setup Sie für den ersten Start verwenden möchten"
-
-#: ../migrate/main.c:105
-msgid "Migrate old config"
-msgstr "Alte Einstellungen migrieren"
-
-#: ../migrate/main.c:106
-msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Alte Einstellungen der Version 4.6 zu Xfconf migrieren"
-
-#: ../migrate/main.c:111
-msgid "Use default config"
-msgstr "Standardeinstellung benutzen"
-
-#: ../migrate/main.c:112
-msgid "Load the default configuration"
-msgstr "Standardeinstellungen laden"
-
-#: ../migrate/main.c:117
-msgid "One empty panel"
-msgstr "Eine leere Leiste"
-
-#: ../migrate/main.c:118
-msgid "Start with one empty panel"
-msgstr "Mit einer leeren Leiste beginnen"
-
-#: ../migrate/main.c:131
-msgid "Failed to migrate the old panel configuration"
-msgstr "Alte Leisteneinstellungen konnten nicht migriert werden"
-
-#: ../migrate/main.c:144
-msgid "Failed to load the default configuration"
-msgstr "Standardeinstellungen konnten nicht geladen werden"
-
-#: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.h:1
-msgid "Action Buttons"
-msgstr "Aktionsknöpfe"
-
-#: ../plugins/actions/actions-dialog.glade.h:2
-msgid "Button Actions"
-msgstr "Tastenaktionen"
-
-#: ../plugins/actions/actions-dialog.glade.h:3
-msgid "_First button:"
-msgstr "_Erste Taste:"
-
-#: ../plugins/actions/actions-dialog.glade.h:4
-msgid "_Second button:"
-msgstr "_Zweite Taste:"
-
-#: ../plugins/actions/actions.c:108
-msgid "Disabled"
-msgstr "Ausgeschaltet"
-
-#: ../plugins/actions/actions.c:109
-msgid "Log Out Dialog"
-msgstr "Abmeldedialog"
-
-#: ../plugins/actions/actions.c:110
-msgid "Log Out"
-msgstr "Abmelden"
-
-#: ../plugins/actions/actions.c:111
-msgid "Lock Screen"
+msgid "Unable to remove splash theme \"%s\" from directory %s."
+msgstr "Konnte Startbildschirmthema »%s« nicht aus Verzeichnis »%s« entfernen."
+
+#: ../engines/balou/config.c:491
+msgid "Choose theme filename..."
+msgstr "Wählen Sie die Themadatei, die Sie installieren möchten..."
+
+#: ../engines/balou/config.c:624
+msgid "_Install new theme"
+msgstr "Neues Thema _installieren"
+
+#: ../engines/balou/config.c:633
+msgid "_Remove theme"
+msgstr "Thema _entfernen"
+
+#: ../engines/balou/config.c:650
+msgid "_Export theme"
+msgstr "Thema e_xportieren"
+
+#: ../engines/balou/config.c:866
+msgid "Balou theme"
+msgstr "Balou"
+
+#: ../engines/balou/config.c:951
+msgid "Configure Balou..."
+msgstr "Balou einstellen..."
+
+#: ../engines/balou/config.c:994
+msgid "Balou"
+msgstr "Balou"
+
+#: ../engines/balou/config.c:995
+msgid "Balou Splash Engine"
+msgstr "Startbildschirm »Balou«"
+
+#: ../engines/mice/mice.c:373
+msgid "Mice"
+msgstr "Mäuse"
+
+#: ../engines/mice/mice.c:374
+msgid "Mice Splash Engine"
+msgstr "Startbildschirm »Mäuse«"
+
+#: ../engines/simple/simple.c:346
+msgid "Configure Simple..."
+msgstr "Einfaches Thema einstellen..."
+
+#: ../engines/simple/simple.c:357
+msgid "Font"
+msgstr "Schriftart"
+
+#: ../engines/simple/simple.c:367
+msgid "Colors"
+msgstr "Farben"
+
+#: ../engines/simple/simple.c:375
+msgid "Background color:"
+msgstr "Hintergrundfarbe:"
+
+#: ../engines/simple/simple.c:388
+msgid "Text color:"
+msgstr "Textfarbe:"
+
+#: ../engines/simple/simple.c:401
+msgid "Image"
+msgstr "Bild"
+
+#: ../engines/simple/simple.c:409
+msgid "Use custom image"
+msgstr "Eigenes Bild verwenden"
+
+#: ../engines/simple/simple.c:413
+msgid "Choose image..."
+msgstr "Bild auswählen..."
+
+#: ../engines/simple/simple.c:419
+msgid "Images"
+msgstr "Bilder"
+
+#: ../engines/simple/simple.c:425
+msgid "All files"
+msgstr "Alle Dateien"
+
+#: ../engines/simple/simple.c:497
+msgid "Simple"
+msgstr "Einfach"
+
+#: ../engines/simple/simple.c:498
+msgid "Simple Splash Engine"
+msgstr "Einfacher Startbildschirm"
+
+#: ../panel-plugin/xfsm-logout-plugin.c:86
+msgid "Session"
+msgstr "_Sitzung"
+
+#: ../panel-plugin/xfsm-logout-plugin.c:87
+msgid "Loc_k screen"
 msgstr "Bildschirm sperren"
 
-#: ../plugins/actions/actions.c:112
-msgid "Shut Down"
-msgstr "Herunterfahren"
+#: ../panel-plugin/xfsm-logout-plugin.c:88
+#: ../panel-plugin/xfsm-logout-plugin.c:128
+msgid "_Suspend"
+msgstr "_Standby"
 
-#: ../plugins/actions/actions.c:113
-msgid "Restart"
-msgstr "Neustarten"
+#: ../panel-plugin/xfsm-logout-plugin.c:89
+#: ../panel-plugin/xfsm-logout-plugin.c:135 ../xfce4-session/shutdown.c:599
+msgid "_Hibernate"
+msgstr "_Ruhezustand"
 
-#: ../plugins/actions/actions.c:114
-msgid "Suspend"
-msgstr "Standby"
+#: ../panel-plugin/xfsm-logout-plugin.c:90
+#: ../panel-plugin/xfsm-logout-plugin.c:121
+msgid "_Reboot"
+msgstr "_Neustarten"
 
-#: ../plugins/actions/actions.c:115
-msgid "Hibernate"
-msgstr "Ruhezustand"
+#: ../panel-plugin/xfsm-logout-plugin.c:91
+#: ../panel-plugin/xfsm-logout-plugin.c:114
+msgid "Shut _down"
+msgstr "_Herunterfahren"
 
-#: ../plugins/actions/actions.desktop.in.h:2
-msgid "Log out, lock or other system actions"
-msgstr "Abmelden, sperren oder andere Systemaktionen"
+#: ../panel-plugin/xfsm-logout-plugin.c:92
+#: ../panel-plugin/xfsm-logout-plugin.c:107
+msgid "_Log out"
+msgstr "_Abmelden"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/clock/clock-dialog.glade.h:3
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
-#: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-msgid "Appearance"
-msgstr "Aussehen"
+#. XFSM_SHUTDOWN_ASK
+#. XFSM_SHUTDOWN_LOGOUT
+#: ../panel-plugin/xfsm-logout-plugin.c:105
+msgid "Are you sure you want to log out?"
+msgstr "Wollen Sie sich wirklich abmelden?"
 
-#. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-msgid "Applications Menu"
-msgstr "Anwendungsmenü"
+#: ../panel-plugin/xfsm-logout-plugin.c:106
+#, c-format
+msgid "You will be logged out in %u seconds."
+msgstr "Sie werden in %u Sekunden abgemeldet."
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-msgid "Button _title:"
-msgstr "_Knopftitel:"
+#: ../panel-plugin/xfsm-logout-plugin.c:109
+msgid "Failed to log out."
+msgstr "Abmelden fehlgeschlagen."
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-msgid "Ed_it Menu"
-msgstr "_Menü bearbeiten"
+#. XFSM_SHUTDOWN_HALT
+#: ../panel-plugin/xfsm-logout-plugin.c:112
+msgid "Are you sure you want to shut down?"
+msgstr "Wollen Sie den Computer wirklich herunterfahren?"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "Menu File"
-msgstr "Menüdatei"
+#: ../panel-plugin/xfsm-logout-plugin.c:113
+#, c-format
+msgid "Your system will shut down in %u seconds."
+msgstr "System wird in %u Sekunden heruntergefahren."
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Menu _file:"
-msgstr "_Menüdatei:"
+#: ../panel-plugin/xfsm-logout-plugin.c:116
+msgid "Failed to shut down."
+msgstr "Konnte nicht herunterfahren."
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "Select A Menu File"
-msgstr "Wählen Sie eine Menüdatei"
+#. XFSM_SHUTDOWN_REBOOT
+#: ../panel-plugin/xfsm-logout-plugin.c:119
+msgid "Are you sure you want to reboot?"
+msgstr "Wollen Sie den Computer wirklich neustarten?"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+#: ../panel-plugin/xfsm-logout-plugin.c:120
+#, c-format
+msgid "Your system will reboot in %u seconds."
+msgstr "System wird in %u Sekunden neu gestartet."
+
+#: ../panel-plugin/xfsm-logout-plugin.c:123
+msgid "Failed to reboot."
+msgstr "Konnte nicht neu starten"
+
+#: ../panel-plugin/xfsm-logout-plugin.c:130
+msgid "Failed to suspend"
+msgstr "Konnte Sitzung nicht in Standby versetzen"
+
+#: ../panel-plugin/xfsm-logout-plugin.c:137
+msgid "Failed to hibernate"
+msgstr "Konnte Sitzung nicht in Ruhemodus versetzen"
+
+#: ../panel-plugin/xfsm-logout-plugin.c:150
+msgid "Xflock4 could not be launched"
+msgstr "Xflock4 konnte nicht gestartet werden"
+
+#: ../panel-plugin/xfsm-logout-plugin.c:222
+msgid "Close Session"
+msgstr "Sitzung schließen"
+
+#: ../settings/main.c:43
+msgid "Settings manager socket"
+msgstr "Socket der Sitzungsverwaltung"
+
+#: ../settings/main.c:43
+msgid "SOCKET ID"
+msgstr "SOCKET-NUMMER"
+
+#: ../settings/main.c:44
+msgid "Version information"
+msgstr "Versionsinformation"
+
+#: ../settings/main.c:74
+#, c-format
+msgid "Type '%s --help' for usage."
+msgstr "Geben Sie »%s --help« ein, um mehr über die Verwendung zu erfahren."
+
+#: ../settings/main.c:86 ../xfce4-session/main.c:219
+msgid "The Xfce development team. All rights reserved."
+msgstr "Das Entwicklungsteam von Xfce. Alle Rechte vorbehalten."
+
+#: ../settings/main.c:87 ../xfce4-session/main.c:225
+#, c-format
+msgid "Please report bugs to <%s>."
+msgstr "Bitte melden Sie Fehler an <%s>."
+
+#: ../settings/main.c:96 ../xfce4-session/main.c:231
+msgid "Unable to contact settings server"
+msgstr "Kann Einstellungsserver nicht kontaktieren"
+
+#: ../settings/main.c:115
+msgid "Unable to create user interface from embedded definition data"
 msgstr ""
-"Diese Option zum Auswählen eines typischen Namen für diese Anwendung im Menü auswählen.\n"
-"Beispielsweise: »Dateimanager« anstelle von »Thunar«"
+"Kann kein Nutzerbedienfeld aus den enthaltenen Definitionsdaten erzeugen"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-msgid "Show application d_escription in tooltip"
-msgstr "A_nwendungsbeschreibung in Kurzhilfe zeigen"
+#: ../settings/main.c:128
+msgid "_Application Autostart"
+msgstr "_Automatisch gestartete Anwendungen"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-msgid "Show generic application n_ames"
-msgstr "_Allgemeine Anwendungsnamen zeigen"
+#: ../settings/session-editor.c:61
+msgid "If running"
+msgstr "Im Betrieb"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Show ic_ons in menu"
-msgstr "_Symbole im Menü anzeigen"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-msgid "Use c_ustom menu file:"
-msgstr "_Angepasste Menüdatei verwenden:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _default menu"
-msgstr "Stan_dardmenü verwenden"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-msgid "_Icon:"
-msgstr "S_ymbol:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-msgid "_Show button title"
-msgstr "_Titel im Knopf anzeigen"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:485
-#: ../plugins/directorymenu/directorymenu.c:369
-msgid "Select An Icon"
-msgstr "Symbol auswählen"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:524
-#: ../plugins/applicationsmenu/applicationsmenu.c:765
-#: ../plugins/launcher/launcher.c:2277
-#, c-format
-msgid "Failed to execute command \"%s\"."
-msgstr "Konnte Befehl »%s« nicht ausführen."
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1021
-msgid "No applications found"
-msgstr "Keine Standardanwendung für »%s« gefunden"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1044
-msgid "Failed to load the applications menu"
-msgstr "Konnte Anwendungsmenü nicht laden"
-
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
-msgid "Show a menu containing categories of installed applications"
-msgstr "Menü mit Kategorien der installierten Anwendungen anzeigen"
-
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
-msgid "Usage:"
-msgstr "Verwendung:"
-
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
-msgid "OPTION"
-msgstr "OPTION"
-
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
-msgid "Options:"
-msgstr "Optionen:"
-
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
-msgid "Popup menu at current mouse position"
-msgstr "Menü an aktueller Position des Mauszeigers hervorbringen"
-
-#: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
-#: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
-#: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-msgid "Show help options"
-msgstr "Hilfeoptionen zeigen"
-
-#: ../plugins/clock/clock.c:146
-msgid "Week %V"
-msgstr "Woche %V"
-
-#: ../plugins/clock/clock.c:407
-msgid "Failed to execute clock command"
-msgstr "Ausführen des Uhrzeitbefehls fehlgeschlagen"
-
-#: ../plugins/clock/clock.c:719
-msgid "Custom Format"
-msgstr "Benutzerdefiniertes Format"
-
-#: ../plugins/clock/clock-dialog.glade.h:1
-msgid "24-_hour clock"
-msgstr "24-S_tunden Uhr verwenden"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Analog"
-msgstr "Analog"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Binary"
-msgstr "Binär"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
-#: ../plugins/clock/clock.desktop.in.h:1
-msgid "Clock"
-msgstr "Uhr"
-
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "Clock Options"
-msgstr "Einstellungen für die Uhr"
-
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "Digital"
-msgstr "Digital"
-
-#: ../plugins/clock/clock-dialog.glade.h:8
-msgid "Display _seconds"
-msgstr "_Sekunden anzeigen"
-
-#: ../plugins/clock/clock-dialog.glade.h:9
-msgid "F_ormat:"
-msgstr "Anzeige_format:"
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "F_uzziness:"
-msgstr "_Ungenauigkeit der Formulierung:"
-
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fl_ash time separators"
-msgstr "_Blinkende Zeit-Trennzeichen"
-
-#: ../plugins/clock/clock-dialog.glade.h:13
-msgid "Fuzzy"
-msgstr "in Worten"
-
-#: ../plugins/clock/clock-dialog.glade.h:14
-msgid "LCD"
-msgstr "LCD"
-
-#: ../plugins/clock/clock-dialog.glade.h:15
-msgid "Sho_w AM/PM"
-msgstr "AM/PM _zeigen"
-
-#: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "Ra_hmen zeigen"
-
-#: ../plugins/clock/clock-dialog.glade.h:17
-msgid "Show _inactive dots"
-msgstr "_Inaktive Punkte zeigen"
-
-#: ../plugins/clock/clock-dialog.glade.h:18
-msgid "Show gri_d"
-msgstr "_Netz zeigen"
-
-#: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr ""
-"Das Anzeigeformat definiert, welche Teile von Datum und Uhrzeit in den Dateinamen eingefügt werden.\n"
-"Beispielsweise wird %Y durch das Jahr, %m durch den Monat und %d durch den Tag ersetzt. Ziehen Sie die\n"
-"Dokumentation des Datumswerkzeugs für weitere Informationen heran."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr "_Richtige Binäruhr"
-
-#: ../plugins/clock/clock-dialog.glade.h:22
-msgid "_Layout:"
-msgstr "_Anordnung:"
-
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "_Tooltip format:"
-msgstr "_Format der Kurzhilfen:"
-
-#: ../plugins/clock/clock-fuzzy.c:86
-msgid "Night"
-msgstr "Nacht"
-
-#: ../plugins/clock/clock-fuzzy.c:87
-msgid "Early morning"
-msgstr "Früher Morgen"
-
-#: ../plugins/clock/clock-fuzzy.c:88
-msgid "Morning"
-msgstr "Morgen"
-
-#: ../plugins/clock/clock-fuzzy.c:89
-msgid "Almost noon"
-msgstr "Kurz vor Mittag"
-
-#: ../plugins/clock/clock-fuzzy.c:90
-msgid "Noon"
-msgstr "Mittag"
-
-#: ../plugins/clock/clock-fuzzy.c:91
-msgid "Afternoon"
-msgstr "Nachmittag"
-
-#: ../plugins/clock/clock-fuzzy.c:92
-msgid "Evening"
-msgstr "Abend"
-
-#: ../plugins/clock/clock-fuzzy.c:93
-msgid "Late evening"
-msgstr "Später Abend"
-
-#. I18N: %0 will be replaced with the preceding hour, %1 with
-#. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:100
-#, no-c-format
-msgid "%0 o'clock"
-msgstr "%0 Uhr"
-
-#: ../plugins/clock/clock-fuzzy.c:101
-#, no-c-format
-msgid "five past %0"
-msgstr "Fünf nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:102
-#, no-c-format
-msgid "ten past %0"
-msgstr "Zehn nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:103
-#, no-c-format
-msgid "quarter past %0"
-msgstr "Viertel nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:104
-#, no-c-format
-msgid "twenty past %0"
-msgstr "Zwanzig nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:105
-#, no-c-format
-msgid "twenty five past %0"
-msgstr "Fünf vor halb %1"
-
-#: ../plugins/clock/clock-fuzzy.c:106
-#, no-c-format
-msgid "half past %0"
-msgstr "Halb %1"
-
-#: ../plugins/clock/clock-fuzzy.c:107
-#, no-c-format
-msgid "twenty five to %1"
-msgstr "Fünf nach halb %1"
-
-#: ../plugins/clock/clock-fuzzy.c:108
-#, no-c-format
-msgid "twenty to %1"
-msgstr "Zwanzig vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:109
-#, no-c-format
-msgid "quarter to %1"
-msgstr "Viertel vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:110
-#, no-c-format
-msgid "ten to %1"
-msgstr "Zehn vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:111
-#, no-c-format
-msgid "five to %1"
-msgstr "Fünf vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:112
-#, no-c-format
-msgid "%1 o'clock"
-msgstr "%1 Uhr"
-
-#. I18N: some languages have a singular form for the first hour,
-#. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:119
-#, no-c-format
-msgctxt "one"
-msgid "%0 o'clock"
-msgstr "%0 Uhr"
-
-#: ../plugins/clock/clock-fuzzy.c:120
-#, no-c-format
-msgctxt "one"
-msgid "five past %0"
-msgstr "Fünf nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:121
-#, no-c-format
-msgctxt "one"
-msgid "ten past %0"
-msgstr "Zehn nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:122
-#, no-c-format
-msgctxt "one"
-msgid "quarter past %0"
-msgstr "Viertel nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:123
-#, no-c-format
-msgctxt "one"
-msgid "twenty past %0"
-msgstr "Zwanzig nach %0"
-
-#: ../plugins/clock/clock-fuzzy.c:124
-#, no-c-format
-msgctxt "one"
-msgid "twenty five past %0"
-msgstr "Fünf vor halb %1"
-
-#: ../plugins/clock/clock-fuzzy.c:125
-#, no-c-format
-msgctxt "one"
-msgid "half past %0"
-msgstr "Halb %1"
-
-#: ../plugins/clock/clock-fuzzy.c:126
-#, no-c-format
-msgctxt "one"
-msgid "twenty five to %1"
-msgstr "Fünf nach halb %1"
-
-#: ../plugins/clock/clock-fuzzy.c:127
-#, no-c-format
-msgctxt "one"
-msgid "twenty to %1"
-msgstr "Zwanzig vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:128
-#, no-c-format
-msgctxt "one"
-msgid "quarter to %1"
-msgstr "Viertel vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:129
-#, no-c-format
-msgctxt "one"
-msgid "ten to %1"
-msgstr "Zehn vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:130
-#, no-c-format
-msgctxt "one"
-msgid "five to %1"
-msgstr "Fünf vor %1"
-
-#: ../plugins/clock/clock-fuzzy.c:131
-#, no-c-format
-msgctxt "one"
-msgid "%1 o'clock"
-msgstr "%1 Uhr"
-
-#: ../plugins/clock/clock-fuzzy.c:136
-msgid "one"
-msgstr "eins"
-
-#: ../plugins/clock/clock-fuzzy.c:137
-msgid "two"
-msgstr "zwei"
-
-#: ../plugins/clock/clock-fuzzy.c:138
-msgid "three"
-msgstr "drei"
-
-#: ../plugins/clock/clock-fuzzy.c:139
-msgid "four"
-msgstr "vier"
-
-#: ../plugins/clock/clock-fuzzy.c:140
-msgid "five"
-msgstr "fünf"
-
-#: ../plugins/clock/clock-fuzzy.c:141
-msgid "six"
-msgstr "sechs"
-
-#: ../plugins/clock/clock-fuzzy.c:142
-msgid "seven"
-msgstr "sieben"
-
-#: ../plugins/clock/clock-fuzzy.c:143
-msgid "eight"
-msgstr "acht"
-
-#: ../plugins/clock/clock-fuzzy.c:144
-msgid "nine"
-msgstr "neun"
-
-#: ../plugins/clock/clock-fuzzy.c:145
-msgid "ten"
-msgstr "zehn"
-
-#: ../plugins/clock/clock-fuzzy.c:146
-msgid "eleven"
-msgstr "elf"
-
-#: ../plugins/clock/clock-fuzzy.c:147
-msgid "twelve"
-msgstr "zwölf"
-
-#: ../plugins/clock/clock.desktop.in.h:2
-msgid "What time is it?"
-msgstr "Wieviel Uhr ist es?"
-
-#: ../plugins/directorymenu/directorymenu.c:243
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-msgid "Directory Menu"
-msgstr "Verzeichnismenü"
-
-#: ../plugins/directorymenu/directorymenu.c:550
-#, c-format
-msgid "Failed to launch application \"%s\""
-msgstr "Konnte Anwendung »%s« nicht starten."
-
-#: ../plugins/directorymenu/directorymenu.c:581
-#, c-format
-msgid "Failed to query content type for \"%s\""
-msgstr "Konnte Inhaltstyp für »%s« nicht erfragen"
-
-#: ../plugins/directorymenu/directorymenu.c:590
-#, c-format
-msgid "No default application found for \"%s\""
-msgstr "Keine Standardanwendung für »%s« gefunden"
-
-#: ../plugins/directorymenu/directorymenu.c:605
-#, c-format
-msgid "Failed to launch default application for \"%s\""
-msgstr "Konnte Anwendung für »%s« nicht ausführen."
-
-#: ../plugins/directorymenu/directorymenu.c:696
-#, c-format
-msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Konnte Standardanwendung der Kategorie »%s« nicht ausführen"
-
-#: ../plugins/directorymenu/directorymenu.c:769
-msgid "Open Folder"
-msgstr "Ordner öffnen"
-
-#: ../plugins/directorymenu/directorymenu.c:780
-msgid "Open in Terminal"
-msgstr "In Terminal ausführen"
-
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
-msgid "Show a directory tree in a menu"
-msgstr "Verzeichnisbaum im Menü anzeigen"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Liste mit Mustern eingeben, um festzulegen, welche Dateien in einem Verzeichnis sichtbar sein sollen. Bei der Angabe mehrerer Muster\n"
-"müssen diese durch Semikolons getrennt werden (z.B. *.txt; *.doc)."
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
-msgstr "Filtern"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-msgid "Select A Directory"
-msgstr "Verzeichnis auswählen"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-msgid "Show _hidden files"
-msgstr "_Versteckte Dateien zeigen"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "_Base Directory:"
-msgstr "_Basisverzeichnis:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "_File Pattern:"
-msgstr "_Dateimuster:"
-
-#: ../plugins/launcher/launcher.c:405
-msgid "Open launcher menu"
-msgstr "Startermenü öffnen"
-
-#: ../plugins/launcher/launcher.c:1556
-msgid "Unnamed Item"
-msgstr "Unbenanntes Objekt"
-
-#: ../plugins/launcher/launcher.c:1697
-msgid "No items"
-msgstr "Keine Objekte"
-
-#: ../plugins/launcher/launcher-dialog.c:744
-msgid "If you delete an item, it will be permanently removed"
-msgstr "Durch Löschen eines Objekts wird dieses dauerhaft entfernt"
-
-#: ../plugins/launcher/launcher-dialog.c:745
-#, c-format
-msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Soll »%s« wirklich entfernt werden?"
-
-#: ../plugins/launcher/launcher-dialog.c:746
-msgid "Unnamed item"
-msgstr "Unbenanntes Objekt"
-
-#: ../plugins/launcher/launcher-dialog.c:791
-msgid "Failed to open desktop item editor"
-msgstr "Konnte den Editor für Desktop-Objekte nicht öffnen"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-msgid "Add a new empty item"
-msgstr "Neues Objekt hinzufügen"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:3
-msgid "Add one or more existing items to the launcher"
-msgstr "Ein oder mehrere vorhandene Objekte zum Starter hinzufügen"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
-msgid "Advanced"
-msgstr "Erweitert"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:5
-msgid "Default"
-msgstr "Standard"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:6
-msgid "Delete the currently selected item"
-msgstr "Ausgewähltes Objekt entfernen"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:7
-msgid "Disable t_ooltips"
-msgstr "_Kurzhilfen deaktivieren"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:8
-msgid "East"
-msgstr "Osten"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:11
-msgid "Inside Button"
-msgstr "Im Knopf"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:12
-#: ../plugins/launcher/launcher.desktop.in.h:1
-msgid "Launcher"
-msgstr "Starter"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "North"
-msgstr "Norden"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr "Diese Option auswählen, um Kurzhilfen beim Bewegen über Schaltflächen und Menüeinträge zu deaktivieren."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Wählen Sie diese Option, um den angewählten Menüeintrag zur Leiste hinzuzufügen."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:18
-msgid "Show _label instead of icon"
-msgstr "_Text anstatt Symbol anzeigen"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-msgid "Show last _used item in panel"
-msgstr "_Zuletzt benutztes Element in der Leiste anzeigen"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid "South"
-msgstr "Süden"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "West"
-msgstr "Westen"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:22
-msgid "_Arrow button position:"
-msgstr "_Position des Pfeilknopfs:"
-
-#: ../plugins/launcher/launcher.desktop.in.h:2
-msgid "Program launcher with optional menu"
-msgstr "Programmstarter mit optionalem Menü"
-
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
-msgid "Workspace _Settings..."
-msgstr "_Arbeitsflächeneinstellungen..."
-
-#: ../plugins/pager/pager.c:429
-msgid "Unable to open the workspace settings"
-msgstr "Arbeitsflächeneinstellungen konnten nicht geöffnet werden"
-
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
-#, c-format
-msgid "Workspace %d"
-msgstr "Arbeitsfläche %d"
-
-#: ../plugins/pager/pager-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "Behaviour"
-msgstr "Verhalten"
-
-#: ../plugins/pager/pager-dialog.glade.h:3
-msgid "Number of _rows:"
-msgstr "Anzahl der _Zeilen:"
-
-#: ../plugins/pager/pager-dialog.glade.h:4
-msgid "Show a miniature view of the workspace with rectangles for the visible windows"
-msgstr "Miniaturansicht der Arbeitsfläche mitsamt Rechtecken für die sichtbaren Fenster zeigen"
-
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
-msgstr "_Miniaturansicht"
-
-#: ../plugins/pager/pager-dialog.glade.h:6
-msgid "Switch workspaces using the mouse _wheel"
-msgstr "Arbeitsflächen mit dem Maus_rad wechseln"
-
-#: ../plugins/pager/pager-dialog.glade.h:7
-#: ../plugins/pager/pager.desktop.in.h:2
-msgid "Workspace Switcher"
-msgstr "Arbeitsflächenumschalter"
-
-#: ../plugins/pager/pager.desktop.in.h:1
-msgid "Switch between virtual desktops"
-msgstr "Zwischen virtuellen Arbeitsflächen umschalten"
-
-#: ../plugins/separator/separator-dialog.glade.h:2
-msgid "Dots"
-msgstr "Punkte"
-
-#: ../plugins/separator/separator-dialog.glade.h:3
-msgid "Handle"
-msgstr "Griff"
-
-#: ../plugins/separator/separator-dialog.glade.h:4
-msgid "New Line"
-msgstr "Neue Zeile"
-
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/separator/separator.desktop.in.h:2
-msgid "Separator"
-msgstr "Trennelement"
-
-#: ../plugins/separator/separator-dialog.glade.h:6
-msgid "Transparent"
-msgstr "Durchsichtig"
-
-#: ../plugins/separator/separator-dialog.glade.h:7
-msgid "_Expand"
-msgstr "_Ausdehnen"
-
-#: ../plugins/separator/separator.desktop.in.h:1
-msgid "Adds a separator or space between panel items"
-msgstr "Fügt ein Trennelement oder Platz zwischen Leistenelementen ein"
-
-#: ../plugins/showdesktop/showdesktop.c:199
-msgid "Restore the minimized windows"
-msgstr "Versteckte Fenster wiederherstellen"
-
-#: ../plugins/showdesktop/showdesktop.c:201
-msgid "Minimize all open windows and show the desktop"
-msgstr "Geöffnete Fenster verstecken und Schreibtisch zeigen"
-
-#: ../plugins/showdesktop/showdesktop.c:204
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "Schreibtisch zeigen"
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
-msgid "Hide all windows and show the desktop"
-msgstr "Fenster verstecken und Schreibtisch zeigen"
-
-#: ../plugins/systray/systray.c:385
-msgid "Unable to start the notification area"
-msgstr "Kann Benachrichtigungsfläche nicht starten"
-
-#. create fake error and show it
-#: ../plugins/systray/systray.c:855
-msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr "Wahrscheinlich hat ein anderes Programm die Funktion der Benachrichtigungsfläche übernommen. Diese Fläche wird nicht verwendet."
-
-#: ../plugins/systray/systray.c:857
-msgid "The notification area lost selection"
-msgstr "Die Benachrichtigungsfläche hat die Auswahl verloren"
-
-#: ../plugins/systray/systray.c:1010
-msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Sind Sie sicher, dass Sie die Liste der bekannten Anwendungen löschen wollen?"
-
-#: ../plugins/systray/systray-dialog.glade.h:2
-msgid "C_lear Known Applications"
-msgstr "_Liste bekannter Anwendungen leeren"
-
-#: ../plugins/systray/systray-dialog.glade.h:3
-msgid "Known Applications"
-msgstr "Bekannte Anwendungen"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/systray/systray.desktop.in.h:2
-msgid "Notification Area"
-msgstr "Benachrichtigungsfläche"
-
-#: ../plugins/systray/systray-dialog.glade.h:6
-msgid "_Maximum icon size (px):"
-msgstr "_Maximale Symbolgröße (px):"
-
-#: ../plugins/systray/systray-manager.c:404
-#, c-format
-msgid "Failed to acquire manager selection for screen %d"
-msgstr "Konnte Manager-Auswahl für Bildschirm %d nicht erhalten."
-
-#: ../plugins/systray/systray.desktop.in.h:1
-msgid "Area where notification icons appear"
-msgstr "Fläche, in der Symbole für Benachrichtigungen erscheinen"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+#: ../settings/session-editor.c:62
 msgid "Always"
 msgstr "Immer"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
-msgid "D_raw window frame when hovering a button"
-msgstr "Fenster_rahmen zeichnen, wenn ein Knopf mit der Maus überfahren wird"
+#: ../settings/session-editor.c:63
+msgid "Immediately"
+msgstr "Sofort"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
-msgid "Group title and timestamp"
-msgstr "Titel und Zeitstempel gruppieren"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
-msgid "Group title and window title"
-msgstr "Titel und Fenstertitel gruppieren"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../settings/session-editor.c:64
 msgid "Never"
 msgstr "Nie"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "None, allow drag-and-drop"
-msgstr "Keine, drag & drop ermöglichen"
+#: ../settings/session-editor.c:129
+msgid "Session Save Error"
+msgstr "Fehler beim Speichern der Sitzung"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
-msgid "Restore minimized windows to current _workspace"
-msgstr "_Minimierte Fenster in aktueller Arbeitsfläche wiederherstellen"
+#: ../settings/session-editor.c:130
+msgid "Unable to save the session"
+msgstr "Kann Sitzung nicht speichern"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "Ro_tate buttons in vertical panel"
-msgstr "_Knöpfe in vertikalen Leisten drehen"
+#: ../settings/session-editor.c:170
+msgid "Clear sessions"
+msgstr "Sitzungen löschen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
-msgid "Show _flat buttons"
-msgstr "_Flache Knöpfe"
+#: ../settings/session-editor.c:171
+msgid "Are you sure you want to empty the session cache?"
+msgstr "Sind Sie sicher, dass Sie die letzten Sitzungen löschen möchten?"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "Show _handle"
-msgstr "_Griff anzeigen"
+#: ../settings/session-editor.c:172
+msgid ""
+"The saved states of your applications will not be restored during your next "
+"login."
+msgstr ""
+"Die vormals gesicherten Zustände der Anwendungen gehen verloren und werden "
+"in der nächsten Sitzung nicht wiederhergestellt."
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show button _labels"
-msgstr "_Namen der Anwendungen zeigen"
+#: ../settings/session-editor.c:174
+msgid "_Proceed"
+msgstr "_Fortfahren"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-msgid "Show only _minimized windows"
-msgstr "N_ur minimierte Fenster anzeigen"
+#: ../settings/session-editor.c:212
+msgid "You might need to delete some files manually in "
+msgstr "Sie müssen möglicherweise manuell Dateien löschen in "
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
-msgid "Show windows from _all workspaces or viewports"
-msgstr "Fenster _aller Arbeitsflächen oder Anzeigebereiche anzeigen"
+#: ../settings/session-editor.c:216
+msgid "All Xfce cache files could not be cleared"
+msgstr "Es konnten nicht alle Dateien aus dem Speicher gelöscht werden"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Show windows from all mo_nitors"
-msgstr "_Fenster aller Monitore anzeigen"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Sorting _order:"
-msgstr "_Sortierreihenfolge:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "Timestamp"
-msgstr "Zeitstempel"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "When space is limited"
-msgstr "Bei begrenztem Platz"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
-msgid "Window Buttons"
-msgstr "Taskleiste"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window _grouping:"
-msgstr "F_enstergruppierung:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "Window title"
-msgstr "Fenstertitel"
-
-#: ../plugins/tasklist/tasklist-widget.c:3167
-msgid "Mi_nimize All"
-msgstr "_Alle minimieren"
-
-#: ../plugins/tasklist/tasklist-widget.c:3176
-msgid "Un_minimize All"
-msgstr "_Minimieren rückgängig"
-
-#: ../plugins/tasklist/tasklist-widget.c:3182
-msgid "Ma_ximize All"
-msgstr "_Alle maximieren"
-
-#: ../plugins/tasklist/tasklist-widget.c:3191
-msgid "_Unmaximize All"
-msgstr "_Maximieren rückgängig"
-
-#: ../plugins/tasklist/tasklist-widget.c:3201
-msgid "_Close All"
-msgstr "_Alle schließen"
-
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
-msgid "Switch between open windows using buttons"
-msgstr "Mit Schaltflächen zwischen offenen Fenstern umschalten"
-
-#: ../plugins/windowmenu/windowmenu.c:652
-msgid "Desktop"
-msgstr "Schreibtisch"
-
-#: ../plugins/windowmenu/windowmenu.c:1243
-msgid "No Windows"
-msgstr "Keine Fenster"
-
-#: ../plugins/windowmenu/windowmenu.c:1258
-msgid "Urgent Windows"
-msgstr "Wichtige Fenster"
-
-#: ../plugins/windowmenu/windowmenu.c:1300
-msgid "Add Workspace"
-msgstr "Arbeitsfläche hinzufügen"
-
-#: ../plugins/windowmenu/windowmenu.c:1320
+#: ../settings/session-editor.c:250
 #, c-format
-msgid "Remove Workspace \"%s\""
-msgstr "Arbeitsfläche »%s« entfernen"
+msgid "Are you sure you want to terminate \"%s\"?"
+msgstr "Soll »%s« wirklich beendet werden?"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../settings/session-editor.c:253 ../settings/session-editor.c:281
+msgid "Terminate Program"
+msgstr "Programm beenden"
+
+#: ../settings/session-editor.c:255
+msgid ""
+"The application will lose any unsaved state and will not be restarted in "
+"your next session."
+msgstr ""
+"Die Anwendung wird jeden ungesicherten Zustand verlieren und in der nächsten "
+"Sitzung nicht gestartet."
+
+#: ../settings/session-editor.c:257
+#: ../settings/xfce4-session-settings.glade.h:37
+msgid "_Quit Program"
+msgstr "_Programm beenden"
+
+#: ../settings/session-editor.c:282
+msgid "Unable to terminate program."
+msgstr "Kann Programm nicht beenden."
+
+#: ../settings/session-editor.c:460
+msgid "(Unknown program)"
+msgstr "(Unbekannter Fehler)"
+
+#: ../settings/session-editor.c:680
+msgid "Priority"
+msgstr "Priorität"
+
+#: ../settings/session-editor.c:688
+msgid "PID"
+msgstr "PID"
+
+#: ../settings/session-editor.c:694
+msgid "Program"
+msgstr "Programm"
+
+#: ../settings/session-editor.c:719
+msgid "Restart Style"
+msgstr "Art des Neustarts"
+
+#: ../settings/splash-settings.c:291 ../settings/splash-settings.c:294
+#: ../settings/splash-settings.c:297 ../settings/splash-settings.c:300
+#: ../settings/splash-settings.c:357
+msgid "None"
+msgstr "Keiner"
+
+#: ../settings/xfae-dialog.c:78
+msgid "Add application"
+msgstr "Anwendung hinzufügen"
+
+#: ../settings/xfae-dialog.c:92
+msgid "Name:"
+msgstr "Name:"
+
+#: ../settings/xfae-dialog.c:109
+msgid "Description:"
+msgstr "Beschreibung:"
+
+#: ../settings/xfae-dialog.c:124
+msgid "Command:"
+msgstr "Befehl:"
+
+#: ../settings/xfae-dialog.c:184
+msgid "Select a command"
+msgstr "Wählen Sie einen Befehl aus"
+
+#: ../settings/xfae-dialog.c:233
+msgid "Edit application"
+msgstr "Anwendung bearbeiten"
+
+#: ../settings/xfae-model.c:562
 #, c-format
-msgid "Remove Workspace %d"
-msgstr "Arbeitsfläche %d entfernen"
+msgid "Failed to unlink %s: %s"
+msgstr "Konnte »%s« nicht löschen: %s"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-msgid "Arrow"
-msgstr "Pfeil"
+#: ../settings/xfae-model.c:651
+#, c-format
+msgid "Failed to create file %s"
+msgstr "Konnte Datei »%s« nicht erstellen"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
-msgid "Button layout:"
-msgstr "Anordnung innerhalb der Schaltflächen:"
+#: ../settings/xfae-model.c:673
+#, c-format
+msgid "Failed to write file %s"
+msgstr "Konnte Datei »%s« nicht schreiben"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
-msgid "Enable _urgency notification"
-msgstr "_Dringlichkeitsbenachrichtigung aktivieren"
+#: ../settings/xfae-model.c:732
+#, c-format
+msgid "Failed to open %s for reading"
+msgstr "Konnte »%s« nicht zum Lesen öffnen"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-msgid "Icon"
-msgstr "Symbol"
+#: ../settings/xfae-model.c:841 ../settings/xfae-model.c:898
+#, c-format
+msgid "Failed to open %s for writing"
+msgstr "Konnte »%s« nicht zum Lesen öffnen"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-msgid "Show windows from _all workspaces"
-msgstr "_Fenster aller Arbeitsflächen anzeigen"
+#: ../settings/xfae-window.c:101
+msgid ""
+"Below is the list of applications that will be started automatically when "
+"you login to your Xfce desktop, in addition to the applications that were "
+"saved when you logged out last time:"
+msgstr ""
+"Unten ist eine Liste der Anwendungen, die automatisch gestartet werden, wenn "
+"Sie sich an Ihrer Xfce-Arbeitsumgebung anmelden, zusätzlich zu den beim "
+"Abmelden gespeicherten Anwendungen:"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "Zeige _Namen der Arbeitsflächen"
+#: ../settings/xfae-window.c:289
+#, c-format
+msgid "Failed adding \"%s\""
+msgstr "Konnte »%s« nicht hinzufügen"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-msgid "Show workspace a_ctions"
-msgstr "A_ktionen für die Arbeitsfläche zeigen"
+#: ../settings/xfae-window.c:320 ../settings/xfae-window.c:334
+msgid "Failed to remove item"
+msgstr "Konnte Eintrag nicht löschen"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-msgid "Window Menu"
-msgstr "Fenstermenü"
+#: ../settings/xfae-window.c:326
+msgid ""
+"This will permanently remove the application from the list of automatically "
+"started applications"
+msgstr ""
+"Dies wird die Anwendung dauerhaft aus der Liste automatisch gestarteter "
+"Anwendungen entfernen"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
-msgid "Switch between open windows using a menu"
-msgstr "Mit einem Menü zwischen offenen Fenstern umschalten"
+#: ../settings/xfae-window.c:328
+#, c-format
+msgid "Are you sure you want to remove \"%s\""
+msgstr "Soll »%s« wirklich gelöscht werden?"
 
-#~ msgid "Failed to remove the desktop file from the config directory"
-#~ msgstr "Konnte Sesktop-Datei nicht aus dem Konfigurationsverzeichnis entfernen"
+#: ../settings/xfae-window.c:362
+msgid "Failed to edit item"
+msgstr "Konnte Eintrag nicht bearbeiten"
 
-#~ msgid "_Number of rows:"
-#~ msgstr "_Anzahl der Zeilen:"
+#: ../settings/xfae-window.c:382
+#, c-format
+msgid "Failed to edit item \"%s\""
+msgstr "Konnte Eintrag »%s« nicht bearbeiten"
 
-#~ msgid "Create a new launcher on the Xfce Panel"
-#~ msgstr "Neuen Starter zur Leiste hinzufügen"
+#: ../settings/xfae-window.c:410
+msgid "Failed to toggle item"
+msgstr "Konnte Eintrag nicht umschalten"
 
-#~ msgid "Panel Preferences"
-#~ msgstr "Leisteneinstellungen"
+#: ../xfce4-session/main.c:76
+msgid "Disable binding to TCP ports"
+msgstr "Verbinden mit TCP-Port deaktivieren"
 
-#~ msgid "_Xfce Panel"
-#~ msgstr "_Xfce-Leiste"
+#: ../xfce4-session/main.c:77 ../xfce4-session-logout/main.c:93
+msgid "Print version information and exit"
+msgstr "Versionsinformation anzeigen und beenden"
 
-#~ msgid "Transparency"
-#~ msgstr "Durchsichtigkeit"
+#: ../xfce4-session/main.c:140
+msgid "Loading desktop settings"
+msgstr "Lade Einstellungen der Arbeitsumgebung"
 
-#~ msgid "Transparency when the pointer is not hovering the panel."
-#~ msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist."
+#: ../xfce4-session/main.c:220
+msgid "Written by Benedikt Meurer <benny@xfce.org>."
+msgstr "Geschrieben von Benedikt Meurer <benny@xfce.org>."
 
-#~ msgid "Xfce Panel"
-#~ msgstr "Leiste"
+#: ../xfce4-session/main.c:221
+#, c-format
+msgid "Built with Gtk+-%d.%d.%d, running with Gtk+-%d.%d.%d"
+msgstr "Gebaut mit Gtk+-%d.%d.%d, gestartet mit Gtk+-%d.%d.%d"
 
-#~ msgid "Xfce Menu"
-#~ msgstr "Xfce-Menü"
+#. verify that the DNS settings are ok
+#: ../xfce4-session/main.c:253
+msgid "Verifying DNS settings"
+msgstr "DNS-Einstellungen werden geprüft"
 
-#~ msgid "_Restart"
-#~ msgstr "Neustarten"
+#: ../xfce4-session/main.c:257
+msgid "Loading session data"
+msgstr "Lade Sitzungsdaten"
 
-#~ msgid "C_ompositing"
-#~ msgstr "Position"
+#: ../xfce4-session/shutdown.c:372
+#, c-format
+msgid "<span size='large'><b>Log out %s</b></span>"
+msgstr "<span size='large'><b>»%s« abmelden</b></span>"
 
-#~ msgid "Failed to open manual"
-#~ msgstr "Konnte Anleitung nicht öffnen"
+#: ../xfce4-session/shutdown.c:422
+msgid "_Log Out"
+msgstr "A_bmelden"
 
-#~ msgid "Action Button"
-#~ msgstr "Aktionsknöpfe"
+#: ../xfce4-session/shutdown.c:457
+msgid "_Restart"
+msgstr "_Neustarten"
+
+#: ../xfce4-session/shutdown.c:499
+msgid "Shut _Down"
+msgstr "_Herunterfahren"
+
+#: ../xfce4-session/shutdown.c:561
+msgid "Sus_pend"
+msgstr "_Standby"
+
+#: ../xfce4-session/shutdown.c:608
+msgid "_Save session for future logins"
+msgstr "_Speichere Sitzung für weitere Logins"
+
+#: ../xfce4-session/shutdown.c:668
+msgid "Please enter your password:"
+msgstr "Bitte geben Sie Ihr Passwort ein:"
+
+#: ../xfce4-session/shutdown.c:700
+msgid "<b>An error occurred</b>"
+msgstr "<b>Es ist ein Fehler aufgetreten</b>"
+
+#: ../xfce4-session/shutdown.c:714
+msgid ""
+"Either the password you entered is invalid, or the system administrator "
+"disallows shutting down this computer with your user account."
+msgstr ""
+"Entweder haben Sie Ihr Passwort falsch eingegeben oder der "
+"Systemadministrator hat es Ihnen nicht erlaubt, den Computer mit Ihrem "
+"Benutzerkonto aus herunterzufahren."
+
+#: ../xfce4-session/shutdown.c:833 ../xfce4-session/xfsm-manager.c:1122
+msgid "Shutdown Failed"
+msgstr "Herunterfahren fehlgeschlagen"
+
+#: ../xfce4-session/shutdown.c:835
+msgid "Unable to perform shutdown"
+msgstr "Kann System nicht herunterfahren"
+
+#: ../xfce4-session/xfsm-chooser.c:90
+#, c-format
+msgid "Last accessed: %s"
+msgstr "Letzter Zugriff: %s"
+
+#: ../xfce4-session/xfsm-chooser.c:172
+msgid ""
+"Choose the session you want to restore. You can simply double-click the "
+"session name to restore it."
+msgstr ""
+"Wählen Sie die Sitzung aus, die Sie weiterführen wollen. Sie können einfach "
+"auf die Sitzung doppelklicken, welche Sie weiterführen wollen."
+
+#. "Logout" button
+#: ../xfce4-session/xfsm-chooser.c:198
+msgid "Log out"
+msgstr "Abmelden"
+
+#: ../xfce4-session/xfsm-chooser.c:200
+msgid "Cancel the login attempt and return to the login screen."
+msgstr "Den Anmeldevorgang abbrechen und zum Anmeldebildschirm zurückkehren."
+
+#. "New" button
+#: ../xfce4-session/xfsm-chooser.c:207
+msgid "New session"
+msgstr "Neue Sitzung"
+
+#: ../xfce4-session/xfsm-chooser.c:208
+msgid "Create a new session."
+msgstr "Eine neue Sitzung erstellen."
+
+#: ../xfce4-session/xfsm-client.c:506 ../xfce4-session/xfsm-client.c:532
+#: ../xfce4-session/xfsm-client.c:571
+#, c-format
+msgid "The client doesn't have any properties set yet"
+msgstr "Für den Client sind keine Eigenschaften eingestellt"
+
+#: ../xfce4-session/xfsm-compat-gnome.c:246
+msgid "Starting The Gnome Keyring Daemon"
+msgstr "Gnome Keyring Daemon wird gestartet"
+
+#: ../xfce4-session/xfsm-compat-kde.c:124
+msgid "Starting KDE services"
+msgstr "Laufzeitumgebung für KDE wird gestartet"
+
+#: ../xfce4-session/xfsm-dns.c:78
+msgid "(Unknown)"
+msgstr "(Unbekannt)"
+
+#: ../xfce4-session/xfsm-dns.c:147
+#, c-format
+msgid ""
+"Could not look up internet address for %s.\n"
+"This will prevent Xfce from operating correctly.\n"
+"It may be possible to correct the problem by adding\n"
+"%s to the file /etc/hosts on your system."
+msgstr ""
+"Konnte Netzadresse für »%s« nicht finden.\n"
+"Dadurch wird Xfce nicht richtig funktionieren können.\n"
+"Vielleicht kann das Problem durch das Hinzufügen von »%s«\n"
+"zur Datei »/etc/hosts« gelöst werden."
+
+#: ../xfce4-session/xfsm-dns.c:154
+msgid "Continue anyway"
+msgstr "Trotzdem fortfahren"
+
+#: ../xfce4-session/xfsm-dns.c:155
+msgid "Try again"
+msgstr "Nochmal versuchen"
+
+#: ../xfce4-session/xfsm-manager.c:604
+#, c-format
+msgid ""
+"Unable to determine failsafe session name.  Possible causes: xfconfd isn't "
+"running (D-Bus setup problem); environment variable $XDG_CONFIG_DIRS is set "
+"incorrectly (must include \"%s\"), or xfce4-session is installed incorrectly."
+msgstr ""
+"Kann den Namen der abgesicherten Sitzung nicht bestimmen. Mögliche Usachen "
+"sind: xfconfd läuft gerade nicht (Einstellungsproblem von D-Bus); die "
+"Umgebungsvariable $XDG_CONFIG_DIRS ist nicht korrekt gesetzt (muss »%s« "
+"enthalten) oder xfce4-session wurde falsch installiert."
+
+#: ../xfce4-session/xfsm-manager.c:615
+#, c-format
+msgid ""
+"The specified failsafe session (\"%s\") is not marked as a failsafe session."
+msgstr ""
+"Die angegebene abgesicherte Sitzung (»%s«) ist nicht als solche deklariert."
+
+#: ../xfce4-session/xfsm-manager.c:662
+msgid "The list of applications in the failsafe session is empty."
+msgstr "Die Liste der Anwendungen in der abgesicherten Sitzung ist leer."
+
+#. FIXME: migrate this into the splash screen somehow so the
+#. * window doesn't look ugly (right now now WM is running, so it
+#. * won't have window decorations).
+#: ../xfce4-session/xfsm-manager.c:709
+msgid "Session Manager Error"
+msgstr "Fehler in der Sitzungsverwaltung"
+
+#: ../xfce4-session/xfsm-manager.c:711
+msgid "Unable to load a failsafe session"
+msgstr "Kann abgesicherte Sitzugn nicht laden"
+
+#: ../xfce4-session/xfsm-manager.c:1125
+msgid "Failed to suspend session"
+msgstr "Kann Sitzung nicht in Standby versetzen"
+
+#: ../xfce4-session/xfsm-manager.c:1126
+msgid "Failed to hibernate session"
+msgstr "Kann Sitzung nicht in Ruhemodus versetzen"
+
+#: ../xfce4-session/xfsm-manager.c:1414
+#, c-format
+msgid "Can only terminate clients when in the idle state"
+msgstr ""
+"Kann Clients nur dann beenden, wenn keine anderen Aufgaben durchgeführt "
+"werden"
+
+#: ../xfce4-session/xfsm-manager.c:1955
+#, c-format
+msgid "Session manager must be in idle state when requesting a checkpoint"
+msgstr ""
+"Die Sitzungsverwaltung muss unbeschäftigt sein, wenn ein Checkpoint gemacht "
+"werden soll"
+
+#: ../xfce4-session/xfsm-manager.c:1996
+#, c-format
+msgid "Session manager must be in idle state when requesting a shutdown"
+msgstr ""
+"Die Sitzungsverwaltung muss unbeschäftigt sein, wenn heruntergefahren werden "
+"soll"
+
+#: ../xfce4-session/xfsm-manager.c:2003
+#, c-format
+msgid "Invalid shutdown type \"%u\""
+msgstr "Ungültiger Typ »%u« zum Herunterfahren des Systems"
+
+#: ../xfce4-session/xfsm-shutdown-helper.c:1601
+#, c-format
+msgid "Error sending command to shutdown helper: %s"
+msgstr "Fehler bei der Steuerung des Abschaltprogramms: %s"
+
+#: ../xfce4-session/xfsm-shutdown-helper.c:1615
+#, c-format
+msgid "Error receiving response from shutdown helper: %s"
+msgstr "Fehler beim Empfang der Antwort des Abschaltprogramms: %s"
+
+#: ../xfce4-session/xfsm-shutdown-helper.c:1624
+#, c-format
+msgid "Shutdown command failed"
+msgstr "Befehl zum Herunterfahren fehlgeschlagen"
+
+#: ../xfce4-session/xfsm-shutdown-helper.c:1802
+msgid "Suspend failed, no backend supported"
+msgstr "Standby fehlgeschlagen, kein Backend wird unterstützt"
+
+#: ../xfce4-session/xfsm-shutdown-helper.c:1829
+msgid "Hibernate failed, no backend supported"
+msgstr "Ruhezustand fehlgeschlagen, kein Backend wird unterstützt"
+
+#: ../xfce4-session/xfsm-shutdown-helper.c:1859
+msgid "Shutdown Command not found"
+msgstr "Befehl zum Herunterfahren nicht gefunden"
+
+#: ../xfce4-session/xfsm-splash-screen.c:178
+msgid "Choose session"
+msgstr "Sitzung wählen"
+
+#: ../xfce4-session/xfsm-splash-screen.c:208
+msgid "Choose session name"
+msgstr "Sitzungsnamen wählen"
+
+#: ../xfce4-session/xfsm-splash-screen.c:222
+msgid "Choose a name for the new session:"
+msgstr "Wählen Sie einen Namen für die neue Sitzung:"
+
+#: ../xfce4-session/xfsm-startup.c:115
+msgid "Starting the Volume Controller"
+msgstr "Starte den Lautstärkeregler"
+
+#: ../xfce4-session/xfsm-startup.c:117
+msgid "Starting the Panel"
+msgstr "Starte die Sitzungsverwaltung"
+
+#: ../xfce4-session/xfsm-startup.c:119
+msgid "Starting the Desktop Manager"
+msgstr "Starte die Arbeitsoberfläche"
+
+#: ../xfce4-session/xfsm-startup.c:121
+msgid "Starting the Taskbar"
+msgstr "Starte die Taskleiste"
+
+#: ../xfce4-session/xfsm-startup.c:123
+msgid "Starting the Window Manager"
+msgstr "Starte die Fensterverwaltung"
+
+#: ../xfce4-session/xfsm-startup.c:127
+msgid "Starting the Gnome Terminal Emulator"
+msgstr "Starte den Gnome Terminal-Emulator"
+
+#: ../xfce4-session/xfsm-startup.c:131
+msgid "Starting the KDE Advanced Text Editor"
+msgstr "Starte den KDE Advanced Text Editor"
+
+#: ../xfce4-session/xfsm-startup.c:133
+msgid "Starting the KDE Clipboard Manager"
+msgstr "Starte den KDE Clipboard-Manager"
+
+#: ../xfce4-session/xfsm-startup.c:135
+msgid "Starting the KDE Mail Reader"
+msgstr "Starte das KDE E-Mail-Programm"
+
+#: ../xfce4-session/xfsm-startup.c:137
+msgid "Starting the KDE News Reader"
+msgstr "Starte den KDE News Reader"
+
+#: ../xfce4-session/xfsm-startup.c:139
+msgid "Starting the Konqueror"
+msgstr "Starte Konqueror"
+
+#: ../xfce4-session/xfsm-startup.c:141
+msgid "Starting the KDE Terminal Emulator"
+msgstr "Starte den KDE Terminal-Emulator"
+
+#: ../xfce4-session/xfsm-startup.c:145
+msgid "Starting the Beep Media Player"
+msgstr "Starte den Beep Media Player"
+
+#: ../xfce4-session/xfsm-startup.c:147
+msgid "Starting The Gimp"
+msgstr "Starte Gimp"
+
+#: ../xfce4-session/xfsm-startup.c:149
+msgid "Starting the VI Improved Editor"
+msgstr "Starte den VI Improved Editor"
+
+#: ../xfce4-session/xfsm-startup.c:151
+msgid "Starting the Session Management Proxy"
+msgstr "Starte den Session Management Proxy"
+
+#: ../xfce4-session/xfsm-startup.c:153
+msgid "Starting the X-Chat IRC Client"
+msgstr "Start den X-Chat IRC Client"
+
+#: ../xfce4-session/xfsm-startup.c:155
+msgid "Starting the X Multimedia System"
+msgstr "Starte das X Multimedia System"
+
+#: ../xfce4-session/xfsm-startup.c:157
+msgid "Starting the X Terminal Emulator"
+msgstr "Starte den X Terminal-Emulator"
+
+#: ../xfce4-session/xfsm-startup.c:159
+#, c-format
+msgid "Starting %s"
+msgstr "Starte %s"
+
+#: ../xfce4-session/xfsm-startup.c:283
+#, c-format
+msgid ""
+"The location and the format of the autostart directory has changed.\n"
+"The new location is\n"
+"\n"
+"  %s\n"
+"\n"
+"where you can place .desktop files to, that describe the applications\n"
+"to start when you login to your Xfce desktop. The files in your old\n"
+"autostart directory have been successfully migrated to the new\n"
+"location.\n"
+"You should delete this directory now.\n"
+msgstr ""
+"Der Ort und das Format des Autostart-Verzeichnisses haben sich geändert.\n"
+"Der neue Ort ist\n"
+"\n"
+"  %s,\n"
+"\n"
+"wo .desktop-Dateien abgelegt werden können, die die Anwendungen festlegen,\n"
+"die beim Anmelden an der Xfce-Arbeitsumgebung gestartet werden sollen. Die\n"
+"Dateien im alten Autostart-Verzeichnis wurden erfolgreich zum neuen Ort\n"
+"übertragen. Sie sollten dieses Verzeichnis jetzt löschen.\n"
+
+#: ../xfce4-session/xfsm-startup.c:458
+msgid "Performing Autostart..."
+msgstr "Führe Autostart aus..."
+
+#: ../xfce4-session/xfsm-startup.c:564
+msgid "Starting Assistive Technologies"
+msgstr "Starte Hilfstechnologien ..."
+
+#: ../xfce4-session-logout/main.c:69
+msgid "Log out without displaying the logout dialog"
+msgstr "Keinen Abmeldedialog beim Abmelden anzeigen"
+
+#: ../xfce4-session-logout/main.c:73
+msgid "Halt without displaying the logout dialog"
+msgstr "Keinen Abmeldedialog beim Herunterfahren anzeigen"
+
+#: ../xfce4-session-logout/main.c:77
+msgid "Reboot without displaying the logout dialog"
+msgstr "Keinen Abmeldedialog beim Neustart anzeigen"
+
+#: ../xfce4-session-logout/main.c:81
+msgid "Suspend without displaying the logout dialog"
+msgstr "Keinen Abmeldedialog beim Standby anzeigen"
+
+#: ../xfce4-session-logout/main.c:85
+msgid "Hibernate without displaying the logout dialog"
+msgstr "Keinen Abmeldedialog beim Ruhezustand anzeigen"
+
+#: ../xfce4-session-logout/main.c:89
+msgid "Log out quickly; don't save the session"
+msgstr "Schnell abmelden; Sitzung nicht speichern"
+
+#: ../xfce4-session-logout/main.c:107
+msgid "Logout Error"
+msgstr "Fehler beim Abmelden"
+
+#: ../xfce4-session-logout/main.c:110 ../xfce4-session-logout/main.c:117
+msgid "Unknown error"
+msgstr "Unbekannter Fehler"
+
+#: ../xfce4-session-logout/main.c:178
+msgid "Unable to contact D-Bus session bus."
+msgstr "Kann Sitzungsbus »D-Bus« nicht kontaktieren"
+
+#: ../xfce4-session-logout/main.c:190
+msgid "Failed to create new D-Bus message"
+msgstr "Konnte keine neue D-Bus-Nachricht erstellen"
+
+#: ../xfce4-session-logout/main.c:206
+msgid "Failed to receive a reply from the session manager"
+msgstr "Keine Antwort von der Sitzungsverwaltung erhalten"
+
+#: ../xfce4-session-logout/main.c:214
+msgid "Received error while trying to log out"
+msgstr "Fehler während des Abmeldevorgangs erhalten"
+
+#: ../xfce4-session-logout/xfce4-session-logout.desktop.in.h:1
+msgid "Log Out"
+msgstr "Abmelden"
+
+#: ../xfce4-session-logout/xfce4-session-logout.desktop.in.h:2
+msgid "Log out of the Xfce Desktop"
+msgstr "Vom Xfce-Desktop abmelden"
+
+#: ../panel-plugin/xfsm-logout-plugin.desktop.in.h:1
+msgid "Session Menu"
+msgstr "Sitzungsmenü"
+
+#: ../panel-plugin/xfsm-logout-plugin.desktop.in.h:2
+msgid ""
+"Shows a menu with options to lock the screen, suspend, shutdown, or log out"
+msgstr ""
+"Zeigt Menü mit Optionen zum Bildschirmsperren, Standby, Herunterfahren oder "
+"Abmelden"
+
+#: ../settings/xfce-session-settings.desktop.in.h:1
+#: ../settings/xfce4-session-settings.glade.h:14
+msgid "Customize desktop startup and splash screen"
+msgstr ""
+"Passen Sie das Startverhalten der Arbeitsumgebung und den Startbildschirm an "
+"Ihre Bedürfnisse an"
+
+#: ../settings/xfce-session-settings.desktop.in.h:2
+#: ../settings/xfce4-session-settings.glade.h:28
+msgid "Session and Startup"
+msgstr "Sitzung und Startverhalten"
+
+#: ../settings/xfce4-session-settings.glade.h:1
+msgid "<b>Author:</b>"
+msgstr "<b>Autor:</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:2
+msgid "<b>Compatibility</b>"
+msgstr "<b>Kompatibilität</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:3
+msgid "<b>Description:</b>"
+msgstr "<b>Beschreibung:</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:4
+msgid "<b>Homepage:</b>"
+msgstr "<b>Webseite:</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:5
+msgid "<b>Information</b>"
+msgstr "<b>Information</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:6
+msgid "<b>Logout Settings</b>"
+msgstr "<b>Abmelde-Einstellungen</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:7
+msgid "<b>Security</b>"
+msgstr "<b>Sicherheit</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:8
+msgid "<b>Session Chooser</b>"
+msgstr "<b>Sitzungsübersicht</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:9
+msgid "<b>Version:</b>"
+msgstr "<b>Version:</b>"
+
+#: ../settings/xfce4-session-settings.glade.h:10
+msgid "Ad_vanced"
+msgstr "_Fortgeschritten"
+
+#: ../settings/xfce4-session-settings.glade.h:11
+msgid "Always save the session when logging out"
+msgstr "Sitzung immer beim Abmelden speichern"
+
+#: ../settings/xfce4-session-settings.glade.h:12
+msgid "Automatically save session on _logout"
+msgstr "_Sitzung automatisch beim Abmelden speichern"
+
+#: ../settings/xfce4-session-settings.glade.h:13
+msgid "Con_figure"
+msgstr "_Einstellen"
+
+#: ../settings/xfce4-session-settings.glade.h:15
+msgid "Demonstrates the selected splash screen"
+msgstr "Zeigt eine Vorschau des ausgewählten Startbildschirms."
+
+#: ../settings/xfce4-session-settings.glade.h:16
+msgid "Display the session chooser every time Xfce starts"
+msgstr "Zeigt die Sitzungsauswahl bei jedem Start von Xfce an"
+
+#: ../settings/xfce4-session-settings.glade.h:17
+msgid "Empty the session cache"
+msgstr "Sitzungsspeicher leeren"
+
+#: ../settings/xfce4-session-settings.glade.h:18
+msgid "Launch GN_OME services on startup"
+msgstr "Laufzeitumgebung für _Gnome beim Starten laden"
+
+#: ../settings/xfce4-session-settings.glade.h:19
+msgid "Launch _KDE services on startup"
+msgstr "Laufzeitumgebung für _KDE beim Starten laden"
+
+#: ../settings/xfce4-session-settings.glade.h:20
+msgid "Manage _remote applications"
+msgstr "_Anwendungen auf entfernten Rechnern verwalten"
+
+#: ../settings/xfce4-session-settings.glade.h:21
+msgid ""
+"Manage remote applications over the network (this may be a security risk)"
+msgstr ""
+"Entfernte Anwendungen über das Netzwerk verwalten (dies kann ein "
+"Sicherheitsrisiko sein)"
+
+#: ../settings/xfce4-session-settings.glade.h:22
+msgid "Opens the configuration panel for the selected splash screen"
+msgstr "Öffnet das Konfigurationsfenster für den ausgewählten Startbildschirm"
+
+#: ../settings/xfce4-session-settings.glade.h:23
+msgid "Prompt for confirmation when logging out"
+msgstr "Bestätigung beim Abmelden verlangen"
+
+#: ../settings/xfce4-session-settings.glade.h:24
+msgid "Quit the program, and remove it from the session"
+msgstr "Das Programm beenden und aus der Sitzung entfernen"
+
+#: ../settings/xfce4-session-settings.glade.h:25
+msgid "S_plash"
+msgstr "S_tartbild"
+
+#: ../settings/xfce4-session-settings.glade.h:26
+msgid "Save Sessio_n"
+msgstr "_Sitzung speichern"
+
+#: ../settings/xfce4-session-settings.glade.h:27
+msgid "Saving Session"
+msgstr "Sitzungsdaten speichern"
+
+#: ../settings/xfce4-session-settings.glade.h:29
+msgid ""
+"Start GNOME services, such as gnome-keyring and the GNOME accessibility "
+"framework"
+msgstr ""
+"GNOME-Dienste starten, z.B. gnome-keyring und die GNOME Barrierefreiheit"
+
+#: ../settings/xfce4-session-settings.glade.h:30
+msgid "Start KDE services, such as \"kdeinit,\" DCOP, and ARTS"
+msgstr "KDE-Dienste starten, z.B. kdeinit, DCOP und ARTS"
+
+#: ../settings/xfce4-session-settings.glade.h:31
+msgid ""
+"These applications are a part of the currently-running session, and can be "
+"saved when you log out.  Changes below will only take effect when the "
+"session is saved."
+msgstr ""
+"Diese Anwendungen sind Teil der bereits laufenden Sitzung und können beim "
+"Abmelden gespeichert werden. Änderungen bewirken nur etwas, wenn die Sitzung "
+"gespeichert wird."
+
+#: ../settings/xfce4-session-settings.glade.h:32
+msgid ""
+"Your session is being saved.  If you do not wish to wait, you may close this "
+"window."
+msgstr ""
+"Ihre Sitzung wird gespeichert. Wenn Sie nicht warten möchten, können Sie "
+"dieses Fenster schließen."
+
+#: ../settings/xfce4-session-settings.glade.h:33
+msgid "_Clear saved sessions"
+msgstr "Gespeicherte Sitzungen _löschen"
+
+#: ../settings/xfce4-session-settings.glade.h:34
+msgid "_Display chooser on login"
+msgstr "_Sitzungsauswahl beim Starten anzeigen"
+
+#: ../settings/xfce4-session-settings.glade.h:35
+msgid "_General"
+msgstr "_Allgemeine Einstellungen"
+
+#: ../settings/xfce4-session-settings.glade.h:36
+msgid "_Prompt on logout"
+msgstr "_Vor dem Abmelden nachfragen"
+
+#: ../settings/xfce4-session-settings.glade.h:38
+msgid "_Session"
+msgstr "_Sitzung"
+
+#: ../settings/xfce4-session-settings.glade.h:39
+msgid "_Test"
+msgstr "_Testen"
+
+#: ../settings/xfce4-session-settings.glade.h:40
+msgid "label"
+msgstr "label"
+
+#~ msgid "Hibernate"
+#~ msgstr "Ruhezustand"
+
+#~ msgid "Tips and Tricks"
+#~ msgstr "Tipps und Tricks"
+
+#~ msgid "Fortunes"
+#~ msgstr "Zufallstexte"
+
+#~ msgid "Could not load tips database (%s)."
+#~ msgstr "Konnte Tippdatenbank (%s) nicht laden."
+
+#~ msgid "Invalid output of fortune."
+#~ msgstr "Ungültige Ausgabe von »fortune«."
+
+#~ msgid "Executing fortune failed (%s)"
+#~ msgstr "Ausführen von »fortune« fehlgeschlagen (%s)"
+
+#~ msgid "Error while loading tips."
+#~ msgstr "Fehler beim Laden der Tipps."
+
+#~ msgid "Display tips on _startup"
+#~ msgstr "Xfce-Tipps und -Tricks beim _Start anzeigen"
+
+#~ msgid "Next"
+#~ msgstr "Nächster"
+
+#~ msgid "Tips and tricks"
+#~ msgstr "Tipps beim Starten anzeigen"
+
+#~ msgid "xfce4-tips"
+#~ msgstr "Xfce4-Tipps"
+
+#~ msgid "Invalid shutdown type"
+#~ msgstr "Ungültiger Typ zum Herunterfahren des Systems"
+
+#~ msgid "No HAL method for command %d"
+#~ msgstr "Keine HAL-Methode für Befehl »%d« verfügbar"
+
+#~ msgid ""
+#~ "Program \"sudo\" was not found.  You will not be able to shutdown your "
+#~ "system from within Xfce."
+#~ msgstr ""
+#~ "Befehl »sudo« wurde nicht gefunden. Sie werden Ihr System nicht aus Xfce "
+#~ "heraus ausschalten können."
+
+#~ msgid "Unable to create parent pipe: %s"
+#~ msgstr "Konnte keine Datenweiterleitung zu Elternprozess erstellen: %s"
+
+#~ msgid "Unable to create child pipe: %s"
+#~ msgstr "Konnte keine Datenweiterleitung zu Kindprozess erstellen: %s"
+
+#~ msgid "Unable to fork sudo helper: %s"
+#~ msgstr "Konnte keinen Prozess für Sudo-Helfer abspalten: %s"
+
+#~ msgid "Unable to read response from sudo helper: %s"
+#~ msgstr "Konnte die Antwort vom Sudo-Helfer nicht lesen: %s"
+
+#~ msgid "Unable to open parent pipe: %s"
+#~ msgstr "Konnte Datenweiterleitung von Elternprozess nicht öffnen: %s"
+
+#~ msgid "Unable to open child pipe: %s"
+#~ msgstr "Konnte Datenweiterleitung von Kindprozess nicht öffnen: %s"
+
+#~ msgid "Got unexpected reply from sudo shutdown helper"
+#~ msgstr "Unerwartete Antwort von Sudo-Helfer empfangen"
+
+#~ msgid ""
+#~ "Suspend and Hibernate are only supported through HAL, which is unavailable"
+#~ msgstr ""
+#~ "Ruhemodus und Standby werden nur mittels HAL unterstützt, was nicht "
+#~ "verfügbar ist"
+
+#~ msgid "Session Error"
+#~ msgstr "Fehler beim Speichern der Sitzung"
+
+#~ msgid "Session Settings"
+#~ msgstr "Sitzungseinstellungen"
+
+#~ msgid "Internal Error"
+#~ msgstr "Interner Fehler"
+
+#~ msgid "This is likely a problem with your Xfce installation"
+#~ msgstr "Dies ist wahrscheinlich ein Problem an Ihrer Installation von Xfce"
+
+#~ msgid "Terminate \"%s\""
+#~ msgstr "Beende »%s«"
+
+#~ msgid "Xfce Session Manager"
+#~ msgstr "Sitzungsverwaltung"
+
+#~ msgid "Unexpected error from HAL"
+#~ msgstr "Unerwarteter HAL-Fehler"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "gtk-help"
+#~ msgstr "gtk-help"
+
+#~ msgid "Session and Startup Settings"
+#~ msgstr "Sitzungs- und Starteinstellungen"
+
+#~ msgid "Sessions and Startup Settings"
+#~ msgstr "Sitzungen und Starteinstellungen"
+
+#~ msgid "Xfce 4 Sessions and Startup Settings"
+#~ msgstr "Xfce4-Sitzungs- und Starteinstellungen"
+
+#~ msgid "Remove the selected application from the session."
+#~ msgstr "Entfernt die ausgewählte Anwendung aus der Sitzung."
+
+#~ msgid "gtk-remove"
+#~ msgstr "gtk-remove"
+
+#~ msgid ""
+#~ "If set, the session manager will ask you to choose a session every time "
+#~ "you log in to Xfce."
+#~ msgstr ""
+#~ "Der Sitzungsmanager wird Sie bei jedem Login eine Sitzung auswählen "
+#~ "lassen,falls Sie diese Option ankreuzen."
+
+#~ msgid ""
+#~ "This option instructs the session manager to save the current session "
+#~ "automatically when you log out. If you don't select this option you'll be "
+#~ "prompted whether you want to save the current session on each logout."
+#~ msgstr ""
+#~ "Wenn Sie diese Option auswählen, werden Ihre Sitzungen automatisch "
+#~ "gespeichert. Ansonsten wird Sie der Manager bei jedem Logout fragen, ob "
+#~ "Sie die Sitzung speichern wollen."
+
+#~ msgid ""
+#~ "This option disables the logout confirmation dialog. Whether the session "
+#~ "will be saved or not depends on whether you enabled the automatic saving "
+#~ "of sessions on logout or not."
+#~ msgstr ""
+#~ "Diese Option schaltet den Logoutdialog ab. Ob die Sitzung gespeichert "
+#~ "wird oder nicht, hängt davon ab, ob Sie das automatische Speichern beim "
+#~ "Logout aktiviert haben oder nicht."
+
+#~ msgid "Launch Gnome services on startup"
+#~ msgstr "Laufzeitumgebung für Gnome beim Starten laden"
+
+#~ msgid ""
+#~ "Enable this if you plan to use Gnome applications. This will instruct the "
+#~ "session manager to start some vital Gnome services for you. You should "
+#~ "also enable this if you want to use the Assistive Technologies that ship "
+#~ "with Gnome."
+#~ msgstr ""
+#~ "Wählen Sie dies aus, wenn Sie Gnome Programme verwenden. Der "
+#~ "Sitzungsmanager wird dann einige wichtige Laufzeitprogramme für Gnome für "
+#~ "Sie starten."
+
+#~ msgid ""
+#~ "Enable this option if you plan to run KDE applications as part of your "
+#~ "Xfce Desktop session. This will notably increase the startup time, but on "
+#~ "the other hand, KDE applications will startup faster. Some KDE "
+#~ "applications may not work at all if you don't enable this option."
+#~ msgstr ""
+#~ "Wählen Sie dies aus, wenn Sie KDE-Programme verwenden. Der "
+#~ "Sitzungsmanager wird dann einige wichtige KDE-Laufzeitprogramme für Sie "
+#~ "starten. Dadurch wird der Start des Systems um einiges verlangsamt. "
+#~ "Allerdings starten dann alle auf KDE basierenden Programme schneller."
+
+#~ msgid "Security"
+#~ msgstr "Sicherheit"
+
+#~ msgid ""
+#~ "Allow the session manager to manage applications running on remote hosts. "
+#~ "Do not enable this option unless you know what you are doing."
+#~ msgstr ""
+#~ "Erlaubt dem Sitzungsmanager, Programme auf entfernten Rechnern zu "
+#~ "verwalten. Aktivieren Sie diese Option nur, wenn Sie wissen, was Sie tun."
+
+#~ msgid "Button Label|Sessions and Startup"
+#~ msgstr "Sitzungs- und Starteinstellungen"
+
+#~ msgid "Splash Screen Settings"
+#~ msgstr "Einstellungen für den Startbildschirm"
+
+#~ msgid "Button Label|Splash Screen"
+#~ msgstr "Startbildschirm"
+
+#~ msgid "Autostarted applications"
+#~ msgstr "Automatisch gestartete Anwendungen"
+
+#~ msgid "Xfce 4 Splash Screen Settings"
+#~ msgstr "Xfce4-Startbildschirm"
+
+#~ msgid "Autostarted Applications"
+#~ msgstr "Automatisch gestartete Anwendungen"
+
+#~ msgid "Edit the list of autostarted applications"
+#~ msgstr "Ändern Sie die Liste der automatisch gestarteten Anwendungen"
+
+#~ msgid "Xfce 4 Autostarted Applications"
+#~ msgstr "Von Xfce 4 automatisch gestartete Anwendungen"
