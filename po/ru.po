@@ -12,12 +12,12 @@
 # Denis Koryavov <dkoryavov@yandex.ru>, 2010.
 # Andres Kovtunos <kovtunos@yandex.ru>, 2010.
 # Artem Zolochevskiy <artem.zolochevskiy@gmail.com>, 2011.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-26 10:35+0000\n"
+"POT-Creation-Date: 2011-08-26 04:36+0000\n"
 "PO-Revision-Date: 2011-07-26 20:32+0300\n"
 "Last-Translator: Artem Zolochevskiy <artem.zolochevskiy@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -40,8 +40,7 @@ msgid "Customize the panel"
 msgstr "Настройка панели"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../panel/panel-window.c:2263
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Панель"
@@ -85,20 +84,17 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096
-#: ../panel/panel-window.c:2275
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "_Добавить новые элементы..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107
-#: ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "_Параметры панели..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124
-#: ../panel/panel-window.c:2302
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "_Завершение сеанса"
 
@@ -106,8 +102,7 @@ msgstr "_Завершение сеанса"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Показать диалог настроек панели"
 
-#: ../panel/main.c:79
-#: ../panel/main.c:80
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "НОМЕР-ПАНЕЛИ"
 
@@ -154,7 +149,7 @@ msgstr "[ПАРАМЕТРЫ...]"
 #: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Выполните \"%s --help\" для получения информации об использовании."
+msgstr "Выполните «%s --help» для получения информации об использовании."
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
@@ -206,8 +201,7 @@ msgstr "Не удалось послать сообщение D-Bus"
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Запустить панель? Если вы решите сохранить сеанс при выходе, панель будет запускаться автоматически при входе в систему."
 
-#: ../panel/main.c:419
-#: ../panel/main.c:433
+#: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Не обнаружено запущенного экземпляра %s"
@@ -216,18 +210,15 @@ msgstr "Не обнаружено запущенного экземпляра %s
 msgid "Failed to launch the migration application"
 msgstr "Не удалось запустить программу миграции"
 
-#: ../panel/panel-application.c:1585
-#: ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Вы запустили X-сервер без менеджера сеансов. Щелчок на Quit закроет X-сервер."
 
-#: ../panel/panel-application.c:1586
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы действительно хотите завершить работу панели?"
 
-#: ../panel/panel-application.c:1594
-#: ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Не удалось запустить команду «%s»"
@@ -261,8 +252,7 @@ msgstr ""
 "Artem Zolochevskiy <artem.zolochevskiy@gmail.com>, 2011"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Добавление нового элемента"
 
@@ -271,8 +261,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Выберите панель для нового модуля:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -425,7 +414,8 @@ msgstr "_Элементы"
 msgid "L_ength (%):"
 msgstr "_Длина (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Measurements"
 msgstr "Размеры"
@@ -834,7 +824,8 @@ msgstr "Показывать _секунды"
 msgid "F_ormat:"
 msgstr "Ф_ормат:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Степень не_точности:"
@@ -1287,8 +1278,7 @@ msgstr "Положение кнопки со _стрелкой:"
 msgid "Program launcher with optional menu"
 msgstr "Кнопка запуска приложений с дополнительным меню"
 
-#: ../plugins/pager/pager.c:353
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Настройки рабочих мест..."
 
@@ -1296,8 +1286,7 @@ msgstr "_Настройки рабочих мест..."
 msgid "Unable to open the workspace settings"
 msgstr "Не удалось получить свойства рабочих мест"
 
-#: ../plugins/pager/pager-buttons.c:561
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Рабочее место %d"
