@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 11:29+0000\n"
+"POT-Creation-Date: 2011-08-27 22:36+0000\n"
 "PO-Revision-Date: 2010-12-19 18:49+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -29,25 +29,25 @@ msgid "Customize the panel"
 msgstr "Sesuaikan panel"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2247
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
 
-#: ../common/panel-utils.c:155
+#: ../common/panel-utils.c:157
 msgid "_Read Online"
 msgstr "_Baca secara Daring"
 
-#: ../common/panel-utils.c:156
+#: ../common/panel-utils.c:158
 msgid "You can read the user manual online. This manual may however not exactly match your panel version."
 msgstr "Anda dapat membaca buku petunjuk secara daring, namun begitu mungkin saja terdapat perbedaan versi dengan panel yang anda gunakan."
 
-#: ../common/panel-utils.c:158
+#: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
 msgstr "Manual pengguna tidak terpasang pada komputer anda"
 
 #. display an error message to the user
-#: ../common/panel-utils.c:171
+#: ../common/panel-utils.c:175
 msgid "Failed to open the documentation browser"
 msgstr "Gagal membuka peramban dokumentasi"
 
@@ -73,53 +73,57 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2259
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "_Tambah Item Baru..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2270
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "_Konfigurasi Panel"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "_Keluar"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Tampilkan dialog 'Konfigurasi Panel'"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "NOMOR-PANEL"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "Tampilkan dialog 'Tambah Item Baru'"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "Simpan konfigurasi panel"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "Tambah panel baru"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "NAMA-PLUGIN"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "Start ulang instansiasi panel"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "Keluar dari proses instansiasi panel"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
+msgid "Do not wait for a window manager on startup"
+msgstr "Jangan menunggu manajer jendela pada permulaan sistem berjalan"
+
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -127,83 +131,83 @@ msgid "Print version information and exit"
 msgstr "Cetak informasi versi lalu keluar"
 
 #. parse context options
-#: ../panel/main.c:240
+#: ../panel/main.c:250
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMEN...]"
 
-#: ../panel/main.c:247
+#: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Ketik \"%s --help\" untuk bantuan penggunaan."
 
-#: ../panel/main.c:266
+#: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
 msgstr "Tim pengembang Xfce. Hak cipta dilindungi undang-undang."
 
-#: ../panel/main.c:267
+#: ../panel/main.c:277
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Silakan laporkan kutu ke <%s>."
 
-#: ../panel/main.c:318
+#: ../panel/main.c:328
 msgid "There is already a running instance"
 msgstr "Telah ada baki area notifikasi yang berjalan di layar ini"
 
 #. spawn ourselfs again
-#: ../panel/main.c:367
+#: ../panel/main.c:378
 msgid "Restarting..."
 msgstr "Sedang memulai ulang..."
 
-#: ../panel/main.c:382
+#: ../panel/main.c:393
 msgid "Failed to show the preferences dialog"
 msgstr "Gagal menampilkan jendela dialog 'Konfigurasi...'"
 
-#: ../panel/main.c:384
+#: ../panel/main.c:395
 msgid "Failed to show the add new items dialog"
 msgstr "Gagal menampilkan jendela dialog 'Tambah Item Baru'"
 
-#: ../panel/main.c:386
+#: ../panel/main.c:397
 msgid "Failed to save the panel configuration"
 msgstr "Gagal menyimpan konfigurasi panel"
 
-#: ../panel/main.c:388
+#: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
 msgstr "Gagal menambahkan plugin ke panel"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:401
 msgid "Failed to restart the panel"
 msgstr "Gagal memulai ulang panel"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:403
 msgid "Failed to quit the panel"
 msgstr "Gagal mematikan panel"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:405
 msgid "Failed to send D-Bus message"
 msgstr "Gagal mengirim pesan D-Bus"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:416
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Anda ingin menjalankan panel? Jika iya, pastikan anda menyimpan sesi saat keluar, sehingga panel secara otomatis dijalankan ketika lain kali anda masuk."
 
-#: ../panel/main.c:408 ../panel/main.c:422
+#: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Tidak ada instansi %s berjalan yang ditemukan"
 
-#: ../panel/panel-application.c:195
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr "Gagal meluncurkan aplikasi migrasi"
 
-#: ../panel/panel-application.c:1464 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Anda telah menjalankan X tanpa manajer sesi. Klik Keluar akan menutup server X."
 
-#: ../panel/panel-application.c:1465 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Anda yakin anda ingin keluar panel?"
 
-#: ../panel/panel-application.c:1473 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Gagal menjalankan perintah \"%s\""
@@ -265,12 +269,12 @@ msgstr "Te_lusuri:"
 msgid "Enter search phrase here"
 msgstr "Masukkan kata pencarian di sini"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "Plugin \"%s\" secara tidak didugaberhenti bekerja. Apakah anda ingin menjalankan ulang plugin tersebut?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Plugin dijalankan ulang lebih dari satu kali dalam %d detik terakhir. Jika anda menekan tombol Eksekusi, maka panel akan mencoba untuk menjalankan ulang plugin tersebut. Jika tidak, plugin akan dihilangkan dari panel."
@@ -706,7 +710,7 @@ msgstr "Pilih Ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2272
+#: ../plugins/launcher/launcher.c:2295
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Gagal mengeksekusi perintah \"%s\"."
@@ -1081,6 +1085,12 @@ msgstr "dua belas"
 msgid "What time is it?"
 msgstr "Jam berapa sekarang?"
 
+#: ../plugins/directorymenu/directorymenu.c:243
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Directory Menu"
+msgstr "Menu Direktori"
+
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
@@ -1114,11 +1124,6 @@ msgstr "Buka Folder"
 msgid "Open in Terminal"
 msgstr "Buka di Terminal"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-msgid "Directory Menu"
-msgstr "Menu Direktori"
-
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Tampilkan pohon direktori di menu"
@@ -1149,28 +1154,32 @@ msgstr "_Direktori Dasar:"
 msgid "_File Pattern:"
 msgstr "_Pola Berkas:"
 
-#: ../plugins/launcher/launcher.c:1555
+#: ../plugins/launcher/launcher.c:406
+msgid "Open launcher menu"
+msgstr "Buka peluncur menu"
+
+#: ../plugins/launcher/launcher.c:1574
 msgid "Unnamed Item"
 msgstr "Item Tak Bernama"
 
-#: ../plugins/launcher/launcher.c:1696
+#: ../plugins/launcher/launcher.c:1715
 msgid "No items"
 msgstr "Tak ada item"
 
-#: ../plugins/launcher/launcher-dialog.c:740
+#: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Jika anda menghapus sebuah item, maka item akan secara permanen dihapus"
 
-#: ../plugins/launcher/launcher-dialog.c:741
+#: ../plugins/launcher/launcher-dialog.c:745
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Anda yakin ingin menghapus \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:746
 msgid "Unnamed item"
 msgstr "Item tak bernama"
 
-#: ../plugins/launcher/launcher-dialog.c:787
+#: ../plugins/launcher/launcher-dialog.c:791
 msgid "Failed to open desktop item editor"
 msgstr "Gagal membuka penyunting item desktop"
 
@@ -1247,15 +1256,15 @@ msgstr "Posisi tombol _panah:"
 msgid "Program launcher with optional menu"
 msgstr "Peluncur program dengan menu opsional"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Pengaturan Ruang Kerja..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:428
 msgid "Unable to open the workspace settings"
 msgstr "Tak dapat membuka pengaturan ruang kerja"
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Ruang kerja %d"
@@ -1319,36 +1328,37 @@ msgstr "_Perluas"
 msgid "Adds a separator or space between panel items"
 msgstr "Tambah pemisah atau spasi diantara item panel"
 
-#: ../plugins/showdesktop/showdesktop.c:193
+#: ../plugins/showdesktop/showdesktop.c:194
 msgid "Restore the minimized windows"
 msgstr "Kembalikan jendela yang diminimalkan"
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:196
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimalkan semua jendela yang terbuka dan tampilkan desktop"
+
+#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Tampilkan Desktop"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
 msgstr "Sembunyikan semua jendela dan tampilkan desktop"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "Tampilkan Desktop"
-
-#: ../plugins/systray/systray.c:382
+#: ../plugins/systray/systray.c:385
 msgid "Unable to start the notification area"
 msgstr "Tak dapat menjalankan area notifikasi"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:850
+#: ../plugins/systray/systray.c:855
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Kelihatannya widget lain mengambil alih fungsi area notifikasi. Area ini tidak akan digunakan."
 
-#: ../plugins/systray/systray.c:852
+#: ../plugins/systray/systray.c:857
 msgid "The notification area lost selection"
 msgstr "Area notifikasi kehilangan pilihan"
 
-#: ../plugins/systray/systray.c:1005
+#: ../plugins/systray/systray.c:1010
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Anda yakin ingin membersihkan senarai aplikasi yang diketahui?"
 
@@ -1399,79 +1409,84 @@ msgid "Never"
 msgstr "Tidak Pernah"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#, fuzzy
+msgid "None, allow drag-and-drop"
+msgstr "Perbolehkan mode tarik-dan-letakkan"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr "Kembalikan jendela yang diminimalkan ke _ruang kerja saat ini"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
 msgstr "Ro_tasi tombol dalam panel vertikal"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr "Tampilkan _tombol rata"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
 msgstr "Tampilkan _penanganan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
 msgstr "Tampilkan _label tombol"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr "Hanya tampilkan jendela yang di_minimalkan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Tampilkan _jendela dari semua ruang kerja atau pangkalan tampilan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
 msgstr "Tampilkan jendela dari semua mo_nitor"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "Urutan _pengurutan:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
 msgstr "Stempel waktu"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr "Jika ruang terbatas"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Tombol Jendela"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "Pen_gelompokan jendela:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Window title"
 msgstr "Judul jendela"
 
-#: ../plugins/tasklist/tasklist-widget.c:3010
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr "Mi_nimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3019
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr "Tidak Mini_malkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3025
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr "Ma_ksimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3034
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr "Tidak Maksima_lkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3044
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr "_Tutup Semua"
 
