@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 22:11+0000\n"
+"POT-Creation-Date: 2011-09-01 10:12+0000\n"
 "PO-Revision-Date: 2010-06-11 23:34+0200\n"
 "Last-Translator: Ivica Kolić<ikoli@yahoo.com> <>\n"
 "Language-Team: Croatian <>\n"
@@ -30,7 +30,7 @@ msgid "Customize the panel"
 msgstr "Prilagodi ploču"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:25 ../panel/panel-window.c:2275
+#: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
 #: ../migrate/main.c:100
 msgid "Panel"
 msgstr "Ploča"
@@ -54,13 +54,13 @@ msgstr "Neuspjelo otvaranje preglednika dokumentacije"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:919
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1056
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeste li sigurni da želite ukloniti \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:924
-#: ../panel/panel-preferences-dialog.c:1052
+#: ../panel/panel-preferences-dialog.c:1059
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ako uklonite stavku sa ploče,biti će trajno izgubljena."
 
@@ -196,19 +196,19 @@ msgstr "Želite li pokrenuti ploču?Ako želite spremite sesiju kod odjave,tako 
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:216
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr "Neuspjelo pokretanje programa premještanja"
 
-#: ../panel/panel-application.c:1567 ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1595 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Pokrenuli ste X bez upravitelja sesijama.Klik na Isključi će zatvoriti X poslužitelj."
 
-#: ../panel/panel-application.c:1568 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1596 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeste li sigurni da želite iskjlučiti ploču?"
 
-#: ../panel/panel-application.c:1576 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1604 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Neuspjeh u izvršenju naredbe \"%s\""
@@ -240,7 +240,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Izaberite ploču za novi priključak"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:768
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:775
 #, c-format
 msgid "Panel %d"
 msgstr "Ploča %d"
@@ -280,41 +280,41 @@ msgstr "Priključak \"%s je neočekivano napustio ploču.želite li ga ponovno p
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Priključak se restartirao više puta u zadnjih %d sekunda.Ako pritisnete Izvrši ploča će pokušati ponovo pokrenuti priključak,u protivnom će biti trajno uklonjen sa ploče."
 
-#: ../panel/panel-preferences-dialog.c:454
+#: ../panel/panel-preferences-dialog.c:460
 msgid "Automatic"
 msgstr "Automatski"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:473
+#: ../panel/panel-preferences-dialog.c:479
 #, c-format
 msgid "Screen %d"
 msgstr "Zaslon %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:499
+#: ../panel/panel-preferences-dialog.c:505
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:829
+#: ../panel/panel-preferences-dialog.c:836
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Ploča i konfiguracija priključaka biti će trajno uklonjena"
 
-#: ../panel/panel-preferences-dialog.c:830
+#: ../panel/panel-preferences-dialog.c:837
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Jeste li sigurni da želite ukloniti ploču %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:913
+#: ../panel/panel-preferences-dialog.c:920
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:918
+#: ../panel/panel-preferences-dialog.c:925
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -323,7 +323,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:937
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr ""
@@ -378,142 +378,146 @@ msgid "Edit the currently selected item"
 msgstr "Uredi trenutno odabranu stavku"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:14
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Osnovno"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Horizontal"
 msgstr "Vodoravno"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Ite_ms"
 msgstr "Sta_vke"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:18
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "D_užina (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Measurements"
 msgstr "Mjerenja"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
 msgstr "Odabranu stavku pomakni dolje za jedan red"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
 msgstr "Odabranu stavku pomakni gore za jedan red"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "None (use system style)"
 msgstr "Ništa (koristi stil sustava)"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "O_utput:"
 msgstr "I_zlaz"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Opacity"
 msgstr "Neprozirnost"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Pick a Panel Color"
 msgstr "Odaberi boju ploče"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Remove currently selected item"
 msgstr "Ukloni trenutno odabranu stavku"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Remove the currently selected panel"
 msgstr "Ukloni trenutno odabranu ploču"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select A Background Image"
 msgstr "Odaberi pozadinsku sliku"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Odaberi ovu opciju za automatsko povećanje dužine ploče ako priključak zahtjeva više prostora"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Odaberite ovu opciju da biste raširili ploču preko više monitora."
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Show about information of the currently selected item"
 msgstr "Pokaži informaciju o trenutno odabranoj stavci"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Solid color"
 msgstr "Puna boja"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Span mo_nitors"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Prozirnost kada pokazivač prelazi preko ploče,0 je puna prozirnost i 100 puna neprozirnost."
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Prozirnost kada pokazivač ne prelazi preko ploče,0 je puna prozirnost i 100 puna neprozirnost."
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Vertical"
 msgstr "Okomito"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Enter:"
 msgstr "_Unos:"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_File:"
 msgstr "_Datoteka:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Leave:"
 msgstr "_Napusti:"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Lock panel"
 msgstr "_Zaključaj ploču"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_Orientation:"
 msgstr "_Orijentacija:"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:50
 msgid "_Size (pixels):"
 msgstr "_Veličina (pixeli):"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
 msgstr "_Stil:"
@@ -717,7 +721,7 @@ msgstr "Odaberi ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:524
 #: ../plugins/applicationsmenu/applicationsmenu.c:765
-#: ../plugins/launcher/launcher.c:2277
+#: ../plugins/launcher/launcher.c:2295
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Neuspjeh u izvršenju naredbe \"%s\"."
@@ -1118,16 +1122,16 @@ msgstr "NIje nađen zadani program za \"%s\""
 msgid "Failed to launch default application for \"%s\""
 msgstr "Neuspjelo pokretanje zadanog programa za \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:696
+#: ../plugins/directorymenu/directorymenu.c:697
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Neuspjelo izvršenje željenog programa za kategoriju \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:769
+#: ../plugins/directorymenu/directorymenu.c:770
 msgid "Open Folder"
 msgstr "Otvori mapu"
 
-#: ../plugins/directorymenu/directorymenu.c:780
+#: ../plugins/directorymenu/directorymenu.c:781
 msgid "Open in Terminal"
 msgstr "Otvori u treminalu"
 
@@ -1161,15 +1165,15 @@ msgstr ""
 msgid "_File Pattern:"
 msgstr "_Uzorak datoteke"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:406
 msgid "Open launcher menu"
 msgstr "Otvori izbornik pokretača"
 
-#: ../plugins/launcher/launcher.c:1556
+#: ../plugins/launcher/launcher.c:1574
 msgid "Unnamed Item"
 msgstr "Neimenovana stavka"
 
-#: ../plugins/launcher/launcher.c:1697
+#: ../plugins/launcher/launcher.c:1715
 msgid "No items"
 msgstr "Nema stavki"
 
@@ -1263,11 +1267,11 @@ msgstr ""
 msgid "Program launcher with optional menu"
 msgstr "Pokretač program sa neobaveznim izbornikom"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Postavke _radnog prostora"
 
-#: ../plugins/pager/pager.c:430
+#: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
 msgstr "Nije moguće otvoriti  postavke radnog prostora"
 
@@ -1352,20 +1356,20 @@ msgstr "Pokaži radnu površinu"
 msgid "Hide all windows and show the desktop"
 msgstr "sakrij sve prozore i pokaži radnu površinu"
 
-#: ../plugins/systray/systray.c:384
+#: ../plugins/systray/systray.c:385
 msgid "Unable to start the notification area"
 msgstr "Nije moguće pokrenuti područje obavijesti"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:854
+#: ../plugins/systray/systray.c:855
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:856
+#: ../plugins/systray/systray.c:857
 msgid "The notification area lost selection"
 msgstr ""
 
-#: ../plugins/systray/systray.c:1009
+#: ../plugins/systray/systray.c:1010
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Jeste li sigurni da želite očistiti listu znanih programa?"
 
@@ -1416,79 +1420,87 @@ msgid "Never"
 msgstr "Nikada"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr "Obnovi minimizirane prozore na trenutnom _radnom prostoru"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
 msgstr "Ro_tiraj dugmad na okomitoj ploči"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
 msgstr "Prikaži natpise _dugmadi"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr "Pokaži samo _minimizirane prozore"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Pokaži prozore sa _svih radnih prostora ili pogleda"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
 msgstr "Pokaži prozore sa _svih monitora"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "Red _slaganja"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
 msgstr "Vremenska oznaka"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr "Kad je prostor ograničen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Dugmad prozora"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "Grupiranje _prozora"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Window title"
 msgstr "Naslov prozora"
 
-#: ../plugins/tasklist/tasklist-widget.c:3107
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+msgid "_Switch windows using the mouse wheel"
+msgstr "_Prebacivanje radnih prostora koristeći kotačić miša"
+
+#: ../plugins/tasklist/tasklist-widget.c:3199
 msgid "Mi_nimize All"
 msgstr "Mi_nimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3116
+#: ../plugins/tasklist/tasklist-widget.c:3208
 msgid "Un_minimize All"
 msgstr "De_minimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3122
+#: ../plugins/tasklist/tasklist-widget.c:3214
 msgid "Ma_ximize All"
 msgstr "Ma_kimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3131
+#: ../plugins/tasklist/tasklist-widget.c:3223
 msgid "_Unmaximize All"
 msgstr "_Demaksimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3141
+#: ../plugins/tasklist/tasklist-widget.c:3233
 msgid "_Close All"
 msgstr "_Zatvori sve"
 
