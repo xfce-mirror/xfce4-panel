@@ -638,7 +638,7 @@ panel_window_set_property (GObject      *object,
         }
       else
         {
-          g_message ("no valid position defined");
+          g_message ("no valid position defined: %s", val_string);
         }
       break;
 
