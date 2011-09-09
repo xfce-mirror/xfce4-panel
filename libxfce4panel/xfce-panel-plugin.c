@@ -2077,6 +2077,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
   gint                monitor_num;
   GdkRectangle        monitor;
   gint                x, y;
+  GdkWindow          *window;
 
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), GTK_ARROW_NONE);
   g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), GTK_ARROW_NONE);
@@ -2095,13 +2096,17 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
     return GTK_ARROW_LEFT;
   else /* floating */
     {
+      window = gtk_widget_get_window (GTK_WIDGET (plugin));
+      if (G_UNLIKELY (window == NULL))
+        return GTK_ARROW_NONE;
+
       /* get the monitor geometry */
       screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-      monitor_num = gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (plugin)->window);
+      monitor_num = gdk_screen_get_monitor_at_window (screen, window);
       gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
       /* get the plugin root origin */
-      gdk_window_get_root_origin (GTK_WIDGET (plugin)->window, &x, &y);
+      gdk_window_get_root_origin (window, &x, &y);
 
       /* detect arrow type */
       if (screen_position == XFCE_SCREEN_POSITION_FLOATING_H)
