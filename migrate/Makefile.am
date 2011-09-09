@@ -19,6 +19,8 @@ migrate_SOURCES = \
 	main.c \
 	migrate-46.c \
 	migrate-46.h \
+	migrate-config.c \
+	migrate-config.h \
 	migrate-default.c \
 	migrate-default.h
 

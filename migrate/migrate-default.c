@@ -158,7 +158,7 @@ migrate_default_start_element_handler (GMarkupParseContext  *context,
       if (channel_name != NULL)
         {
           /* open the xfconf channel */
-          parser->channel = xfconf_channel_new (channel_name);
+          parser->channel = xfconf_channel_get (channel_name);
         }
       else
         {
@@ -292,10 +292,7 @@ migrate_default_end_element_handler (GMarkupParseContext  *context,
   if (strcmp (element_name, "channel") == 0)
     {
       if (G_LIKELY (parser->channel != NULL))
-        {
-          g_object_unref (G_OBJECT (parser->channel));
-          parser->channel = NULL;
-        }
+        parser->channel = NULL;
 
      if (parser->path != NULL)
        {

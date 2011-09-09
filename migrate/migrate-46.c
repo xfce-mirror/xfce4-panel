@@ -899,8 +899,9 @@ static GMarkupParser markup_parser =
 
 
 gboolean
-migrate_46 (const gchar  *filename,
-            GError      **error)
+migrate_46 (const gchar    *filename,
+            XfconfChannel  *channel,
+            GError        **error)
 {
   gsize                length;
   gchar               *contents;
@@ -910,6 +911,7 @@ migrate_46 (const gchar  *filename,
 
   g_return_val_if_fail (filename != NULL, FALSE);
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+  g_return_val_if_fail (XFCONF_IS_CHANNEL (channel), FALSE);
 
   if (!g_file_get_contents (filename, &contents, &length, error))
     return FALSE;
@@ -918,7 +920,7 @@ migrate_46 (const gchar  *filename,
   parser->state = START;
   parser->plugin_id_counter = 0;
   parser->panel_id_counter = 0;
-  parser->channel = xfconf_channel_new (XFCE_PANEL_CHANNEL_NAME);
+  parser->channel = channel;
 
   context = g_markup_parse_context_new (&markup_parser, 0, parser, NULL);
 
@@ -935,7 +937,6 @@ migrate_46 (const gchar  *filename,
 
   g_free (contents);
   g_markup_parse_context_free (context);
-  g_object_unref (G_OBJECT (parser->channel));
   g_slice_free (ConfigParser, parser);
 
   return succeed;

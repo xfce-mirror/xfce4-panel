@@ -198,6 +198,7 @@ static void
 panel_application_init (PanelApplication *application)
 {
   GError *error = NULL;
+  gint    configver;
 
   application->windows = NULL;
   application->dialogs = NULL;
@@ -209,8 +210,9 @@ panel_application_init (PanelApplication *application)
   /* get the xfconf channel (singleton) */
   application->xfconf = panel_properties_get_channel (G_OBJECT (application));
 
-  /* check if we need to launch the migration application */
-  if (!xfconf_channel_has_property (application->xfconf, "/panels"))
+  /* check if we need to migrate configuration */
+  configver = xfconf_channel_get_int (application->xfconf, "/configver", -1);
+  if (G_UNLIKELY (configver < XFCE4_PANEL_CONFIG_VERSION))
     {
       if (!g_spawn_command_line_sync (MIGRATE_BIN, NULL, NULL, NULL, &error))
         {
