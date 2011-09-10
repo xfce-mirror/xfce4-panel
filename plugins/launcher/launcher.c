@@ -65,7 +65,6 @@ static gboolean           launcher_plugin_remote_event                  (XfcePan
                                                                          const gchar          *name,
                                                                          const GValue         *value);
 static void               launcher_plugin_save_delayed                  (LauncherPlugin       *plugin);
-static void               launcher_plugin_save                          (XfcePanelPlugin      *panel_plugin);
 static void               launcher_plugin_orientation_changed           (XfcePanelPlugin      *panel_plugin,
                                                                          GtkOrientation        orientation);
 static gboolean           launcher_plugin_size_changed                  (XfcePanelPlugin      *panel_plugin,
@@ -268,7 +267,6 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = launcher_plugin_construct;
   plugin_class->free_data = launcher_plugin_free_data;
-  plugin_class->save = launcher_plugin_save;
   plugin_class->orientation_changed = launcher_plugin_orientation_changed;
   plugin_class->size_changed = launcher_plugin_size_changed;
   plugin_class->configure_plugin = launcher_plugin_configure_plugin;
@@ -1084,7 +1082,10 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
     }
 
   if (plugin->save_timeout_id != 0)
-    g_source_remove (plugin->save_timeout_id);
+    {
+      g_source_remove (plugin->save_timeout_id);
+      launcher_plugin_save_delayed_timeout (plugin);
+    }
 
   /* destroy the menu and timeout */
   launcher_plugin_menu_destroy (plugin);
@@ -1185,7 +1186,8 @@ launcher_plugin_save_delayed_timeout_destroyed (gpointer user_data)
 static gboolean
 launcher_plugin_save_delayed_timeout (gpointer user_data)
 {
-  launcher_plugin_save (XFCE_PANEL_PLUGIN (user_data));
+  /* make sure the items are stored */
+  g_object_notify (G_OBJECT (user_data), "items");
 
   return FALSE;
 }
@@ -1201,15 +1203,6 @@ launcher_plugin_save_delayed (LauncherPlugin *plugin)
   plugin->save_timeout_id = g_timeout_add_seconds_full (G_PRIORITY_LOW, 1,
       launcher_plugin_save_delayed_timeout, plugin,
       launcher_plugin_save_delayed_timeout_destroyed);
-}
-
-
-
-static void
-launcher_plugin_save (XfcePanelPlugin *panel_plugin)
-{
-  /* make sure the items are stored */
-  g_object_notify (G_OBJECT (panel_plugin), "items");
 }
 
 
