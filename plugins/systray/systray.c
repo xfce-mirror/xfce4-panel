@@ -525,7 +525,8 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
    * behind the allocated size when resizing and during startup, we
    * correct the maximum size set by the user with the size the panel
    * will most likely allocated */
-  border += MAX (frame->style->xthickness, frame->style->ythickness);
+  if (plugin->show_frame)
+    border += MAX (frame->style->xthickness, frame->style->ythickness);
   systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border);
 
   return TRUE;
