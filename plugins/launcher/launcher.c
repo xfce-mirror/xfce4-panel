@@ -64,6 +64,7 @@ static void               launcher_plugin_removed                       (XfcePan
 static gboolean           launcher_plugin_remote_event                  (XfcePanelPlugin      *panel_plugin,
                                                                          const gchar          *name,
                                                                          const GValue         *value);
+static gboolean           launcher_plugin_save_delayed_timeout          (gpointer              user_data);
 static void               launcher_plugin_save_delayed                  (LauncherPlugin       *plugin);
 static void               launcher_plugin_orientation_changed           (XfcePanelPlugin      *panel_plugin,
                                                                          GtkOrientation        orientation);
