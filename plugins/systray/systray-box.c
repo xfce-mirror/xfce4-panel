@@ -399,11 +399,12 @@ systray_box_size_allocate (GtkWidget     *widget,
   border = GTK_CONTAINER (widget)->border_width;
 
   alloc_size = box->horizontal ? allocation->height : allocation->width;
+
   systray_box_size_get_max_child_size (box, alloc_size, &rows, &row_size, &offset);
 
-  panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocate rows=%d, row_size=%d, w=%d, h=%d, horiz=%s",
+  panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocate rows=%d, row_size=%d, w=%d, h=%d, horiz=%s, border=%d",
                         rows, row_size, allocation->width, allocation->height,
-                        PANEL_DEBUG_BOOL (box->horizontal));
+                        PANEL_DEBUG_BOOL (box->horizontal), border);
 
   /* get allocation bounds */
   x_start = allocation->x + border;
