@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 10:12+0000\n"
+"POT-Creation-Date: 2011-09-11 22:12+0000\n"
 "PO-Revision-Date: 2010-05-07 10:59+0200\n"
 "Last-Translator: Piarres Beobide <pi+debian@beobide.net>\n"
 "Language-Team: Basque <debian-l10n-basque@lists.debian.org>\n"
@@ -34,7 +34,7 @@ msgid "Customize the panel"
 msgstr "Pertsonalizatu panela"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:25 ../panel/panel-window.c:2275
+#: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
 #: ../migrate/main.c:100
 msgid "Panel"
 msgstr "Panela"
@@ -58,13 +58,13 @@ msgstr "Huts dokumentazio arakatzailea irekitzean"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:919
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1056
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ziur al zaude \"%s\" idazmahaia ezabatu nahi duzula?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:924
-#: ../panel/panel-preferences-dialog.c:1052
+#: ../panel/panel-preferences-dialog.c:1059
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Elementua paneletik ezabatzen baduzu betirako galduko da."
 
@@ -244,7 +244,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Mesedez hautatu plugin berriarentzat panel bat:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:768
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:775
 #, c-format
 msgid "Panel %d"
 msgstr "%d panela"
@@ -284,41 +284,41 @@ msgstr "\"%s\" pluginak panela ustekabean utzi du, berriz abiaraztea nahi al duz
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Plugin-a behin baino gehiago berrabiarazi da azken %d segundoetan. Abiarazi sakatuaz panela abiarazten saiatuko da bestela betirako kenduko da paneletik."
 
-#: ../panel/panel-preferences-dialog.c:454
+#: ../panel/panel-preferences-dialog.c:460
 msgid "Automatic"
 msgstr "Automatikoa"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:473
+#: ../panel/panel-preferences-dialog.c:479
 #, c-format
 msgid "Screen %d"
 msgstr "%d pantaila"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:499
+#: ../panel/panel-preferences-dialog.c:505
 #, c-format
 msgid "Monitor %d"
 msgstr "%d monitorea"
 
-#: ../panel/panel-preferences-dialog.c:829
+#: ../panel/panel-preferences-dialog.c:836
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panela eta plugin konfigurazioak betirako kenduko dira"
 
-#: ../panel/panel-preferences-dialog.c:830
+#: ../panel/panel-preferences-dialog.c:837
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ziur al zaude %d panela ezabatu nahi duzula?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:913
+#: ../panel/panel-preferences-dialog.c:920
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(kanpokoa)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:918
+#: ../panel/panel-preferences-dialog.c:925
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -329,7 +329,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:937
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Barne-izena: %s-%d"
@@ -384,142 +384,146 @@ msgid "Edit the currently selected item"
 msgstr "Editatu hautaturik dagoen elementua"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Enable compositing in the window manager for opacity settings in the panel."
+msgstr "Gaitu konposizioa leiho kudeatzailean  panelaren opakutasun ezarpenetarako."
+
+#: ../panel/panel-preferences-dialog.glade.h:14
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Orokorra"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Horizontal"
 msgstr "Horizontala"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Ite_ms"
 msgstr "Ele_mentuak"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:18
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "Z_abalera (%):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Measurements"
 msgstr "Neurri-sistema"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
 msgstr "Mugitu hautaturik dagoen elementua lerro bat behera"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
 msgstr "Mugitu hautaturik dagoen elementua lerro bat gora"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "None (use system style)"
 msgstr "Batez (erabili sistema egoera)"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "O_utput:"
 msgstr "I_rteera:"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Opacity"
 msgstr "Opakotasuna"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Pick a Panel Color"
 msgstr "Klikatu panel kolore bat"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Remove currently selected item"
 msgstr "Ezabatu hautaturik dagoen elementua"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Remove the currently selected panel"
 msgstr "Ezabatu hautaturik dagoen panela"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select A Background Image"
 msgstr "Hautatu atzealdeko irudi bat"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge."
 msgstr "Hautatu aukera hau handitutako leihoek panelaren eremua estaltzea nahi baduzu. Honek panela leiho ertz batera loturik dagoenean funtzionatzen du."
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Aukera hau hautatu pluginak tamaina gehiago eskatzean panelaren luzera automatikoki hedatzeko"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Hautatu aukera hau panela monitore anitzetan hedatzeko"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "Hautatu aukera hau panel kudeatzaileak ezkutatu eta bere kokalekua blokeatzeko"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "Hautatu aukera hau markatzailea gainean ez duenean panela ezkutatzeko. Honek panela pantaila ertzean dagoenean bakarrik funtzionatuko du."
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Show about information of the currently selected item"
 msgstr "Hautaturiko elementuaren argibideak bistarazi"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Solid color"
 msgstr "Kolore solidoa"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Span mo_nitors"
 msgstr "Zabor-posta monitoreak"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz gardena izango da eta 100 erabiliaz guztiz opakoa."
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "Gardentasuna markatzailea panel gainean dabilenean, 0 erabiliaz guztiz gardena izango da eta 100 erabiliaz guztiz opakoa."
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Vertical"
 msgstr "Bertikala"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_Alpha:"
 msgstr "_Alpha:"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Enter:"
 msgstr "_Sartu:"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_File:"
 msgstr "_Fixategia:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Leave:"
 msgstr "_Utzi:"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Lock panel"
 msgstr "B_lokeatu panela"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_Orientation:"
 msgstr "N_orabidea:"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:50
 msgid "_Size (pixels):"
 msgstr "_Tamaina (pixel):"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
 msgstr "E_stiloa:"
@@ -723,7 +727,7 @@ msgstr "Hautatu ikono bat"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:524
 #: ../plugins/applicationsmenu/applicationsmenu.c:765
-#: ../plugins/launcher/launcher.c:2295
+#: ../plugins/launcher/launcher.c:2289
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Ezin da \"%s\" komandoa exekutatu."
@@ -1167,15 +1171,15 @@ msgstr "_Oinarri direktorioa:"
 msgid "_File Pattern:"
 msgstr "_Fitxategi patroia:"
 
-#: ../plugins/launcher/launcher.c:406
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Ireki abiarazle menua"
 
-#: ../plugins/launcher/launcher.c:1574
+#: ../plugins/launcher/launcher.c:1568
 msgid "Unnamed Item"
 msgstr "Elementu izengabea"
 
-#: ../plugins/launcher/launcher.c:1715
+#: ../plugins/launcher/launcher.c:1709
 msgid "No items"
 msgstr "Elementurik ez"
 
@@ -1358,20 +1362,20 @@ msgstr "Ikusi mahaigaina"
 msgid "Hide all windows and show the desktop"
 msgstr "Ezkutatu leiho guztiak eta mahaigaina bistarazi"
 
-#: ../plugins/systray/systray.c:385
+#: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
 msgstr "Ezin da larrialdi berri-ematea abiarazi"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:855
+#: ../plugins/systray/systray.c:868
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "Ziurrenik beste widget batek berri-emate eremuaren kargu artu du. Eremu hau ez da erabiliko."
 
-#: ../plugins/systray/systray.c:857
+#: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
 msgstr "Beri-emate eremuak hautapena galtzen du"
 
-#: ../plugins/systray/systray.c:1010
+#: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ziur al zaude aplikazio ezagunen zerrenda ezabatu nahi duzula?"
 
@@ -1482,23 +1486,27 @@ msgstr "Leiho _taldekatzea:"
 msgid "Window title"
 msgstr "Leiho izenburua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3176
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+msgid "_Switch windows using the mouse wheel"
+msgstr "Idazmahai birtualak sagu _gurpilaren bidez txandakatu"
+
+#: ../plugins/tasklist/tasklist-widget.c:3199
 msgid "Mi_nimize All"
 msgstr "Mi_nimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3185
+#: ../plugins/tasklist/tasklist-widget.c:3208
 msgid "Un_minimize All"
 msgstr "De_sminimizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3191
+#: ../plugins/tasklist/tasklist-widget.c:3214
 msgid "Ma_ximize All"
 msgstr "Ma_ximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3200
+#: ../plugins/tasklist/tasklist-widget.c:3223
 msgid "_Unmaximize All"
 msgstr "_Desmaximizatu dena"
 
-#: ../plugins/tasklist/tasklist-widget.c:3210
+#: ../plugins/tasklist/tasklist-widget.c:3233
 msgid "_Close All"
 msgstr "_Itxi dena"
 
