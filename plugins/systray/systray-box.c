@@ -399,7 +399,7 @@ systray_box_size_allocate (GtkWidget     *widget,
   border = GTK_CONTAINER (widget)->border_width;
 
   alloc_size = box->horizontal ? allocation->height : allocation->width;
-  alloc_size -= 2 * border;
+
   systray_box_size_get_max_child_size (box, alloc_size, &rows, &row_size, &offset);
 
   panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocate rows=%d, row_size=%d, w=%d, h=%d, horiz=%s, border=%d",

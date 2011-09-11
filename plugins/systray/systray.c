@@ -211,6 +211,8 @@ systray_plugin_class_init (SystrayPluginClass *klass)
 static void
 systray_plugin_init (SystrayPlugin *plugin)
 {
+  GtkRcStyle *style;
+
   plugin->manager = NULL;
   plugin->show_frame = TRUE;
   plugin->idle_startup = 0;
@@ -220,6 +222,11 @@ systray_plugin_init (SystrayPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
   gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
   gtk_widget_show (plugin->frame);
+
+  style = gtk_rc_style_new ();
+  style->xthickness = style->ythickness = 1;
+  gtk_widget_modify_style (plugin->frame, style);
+  g_object_unref (G_OBJECT (style));
 
   plugin->hvbox = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 2);
   gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->hvbox);
@@ -298,6 +305,7 @@ systray_plugin_set_property (GObject      *object,
   const GValue  *tmp;
   gchar         *name;
   guint          i;
+  GtkRcStyle    *style;
 
   switch (prop_id)
     {
@@ -314,8 +322,13 @@ systray_plugin_set_property (GObject      *object,
           gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
               show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
 
-          gtk_container_set_border_width (GTK_CONTAINER (plugin->box),
-              plugin->show_frame ? FRAME_SPACING : 0);
+          style = gtk_rc_style_new ();
+          style->xthickness = style->ythickness = show_frame ? 1 : 0;
+          gtk_widget_modify_style (plugin->frame, style);
+          g_object_unref (G_OBJECT (style));
+
+          systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+              xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
         }
       break;
 
@@ -525,8 +538,7 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
    * behind the allocated size when resizing and during startup, we
    * correct the maximum size set by the user with the size the panel
    * will most likely allocated */
-  if (plugin->show_frame)
-    border += MAX (frame->style->xthickness, frame->style->ythickness);
+  border += MAX (frame->style->xthickness, frame->style->ythickness);
   systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border);
 
   return TRUE;
