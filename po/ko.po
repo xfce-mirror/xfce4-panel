@@ -2,12 +2,12 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # ByungHyun Choi<byunghyun.choi@gmail.com>, 2005.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-28 10:35+0000\n"
+"POT-Creation-Date: 2011-09-12 10:37+0000\n"
 "PO-Revision-Date: 2011-07-28 23:13+0900\n"
 "Last-Translator: Seong-ho, Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge.net>\n"
@@ -18,19 +18,18 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "이 데스크탑 화일의 정보에 기반하여 새로운 실행기를 패널에 등록"
+msgstr "이 데스크탑 화일의 정보에 기반하여 새로운 실행 아이콘을 패널에 등록"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
-msgstr "패널에 실행기 생성"
+msgstr "패널에 실행 아이콘 생성"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid "Customize the panel"
 msgstr "패널을 취향대로 설정하기"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../panel/panel-window.c:2263
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "패널"
@@ -74,20 +73,17 @@ msgid "Pane_l"
 msgstr "패널 (_l)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096
-#: ../panel/panel-window.c:2275
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "새로운 항목 추가 (_N)"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107
-#: ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "패널 기본설정 (_e)"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124
-#: ../panel/panel-window.c:2302
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "로그 아웃 (_O)"
 
@@ -95,8 +91,7 @@ msgstr "로그 아웃 (_O)"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'패널 기본설정' 대화상자 보이기"
 
-#: ../panel/main.c:79
-#: ../panel/main.c:80
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
@@ -195,8 +190,7 @@ msgstr "D-Bus 메세지를 보내는데 실패했습니다"
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "패널을 시작하겠습니까? 패널을 시작 하면, 로그아웃시 세션을 저장하는지 확인하여 다음번 로그인시 패널이 자동으로 시작되도록 합니다."
 
-#: ../panel/main.c:419
-#: ../panel/main.c:433
+#: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s의 인스턴스가 실행되지 않았습니다"
@@ -205,18 +199,15 @@ msgstr "%s의 인스턴스가 실행되지 않았습니다"
 msgid "Failed to launch the migration application"
 msgstr "마이그레이션 프로그램을 실행하는데 실패했습니다"
 
-#: ../panel/panel-application.c:1585
-#: ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "세션 매니저 없이 X를 시작하였습니다. 종료를 클릭하면 X 서버가 닫힐 것입니다."
 
-#: ../panel/panel-application.c:1586
-#: ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "정말 패널을 종료하시겠습니까?"
 
-#: ../panel/panel-application.c:1594
-#: ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" 명령을 실행하지 못 했습니다."
@@ -241,8 +232,7 @@ msgstr ""
 "조성호 <darkcircle.0426@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "새로운 항목 추가"
 
@@ -251,8 +241,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "새로운 플러그인을 위한 패널을 선택하여 주십시오:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
@@ -595,19 +584,19 @@ msgstr "기본 환경설정을 로드하는데 실패했습니다"
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
-msgstr "동작 버튼"
+msgstr "동작 단추"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Button Actions"
-msgstr "버튼 동작"
+msgstr "단추 동작"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "_First button:"
-msgstr "첫번째 버튼 (_F):"
+msgstr "첫번째 단추 (_F):"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Second button:"
-msgstr "두번째 버튼 (_S):"
+msgstr "두번째 단추 (_S):"
 
 #: ../plugins/actions/actions.c:108
 msgid "Disabled"
@@ -665,7 +654,7 @@ msgstr "프로그램 메뉴"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
-msgstr "버튼 제목 (_t)"
+msgstr "단추 제목 (_t)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
@@ -714,7 +703,7 @@ msgstr "아이콘 (_I):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
-msgstr "버튼 제목 보이기 (_S)"
+msgstr "단추 제목 보이기 (_S)"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
@@ -723,7 +712,7 @@ msgstr "아이콘 선택"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2295
+#: ../plugins/launcher/launcher.c:2289
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" 명령을 실행하는데 실패했습니다."
@@ -1124,16 +1113,16 @@ msgstr "\"%s\" 을(를) 위한 기본 프로그램을 찾을 수 없습니다"
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" 을(를) 위한 기본 프로그램을 실행하는데 실패했습니다"
 
-#: ../plugins/directorymenu/directorymenu.c:696
+#: ../plugins/directorymenu/directorymenu.c:697
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "\"%s\" 카테고리를 위한 기본 프로그램을 실행하는데 실패했습니다"
 
-#: ../plugins/directorymenu/directorymenu.c:769
+#: ../plugins/directorymenu/directorymenu.c:770
 msgid "Open Folder"
 msgstr "폴더 열기"
 
-#: ../plugins/directorymenu/directorymenu.c:780
+#: ../plugins/directorymenu/directorymenu.c:781
 msgid "Open in Terminal"
 msgstr "터미널에서 열기"
 
@@ -1167,15 +1156,15 @@ msgstr "기본 디렉토리 (_B):"
 msgid "_File Pattern:"
 msgstr "화일 패턴 (_F):"
 
-#: ../plugins/launcher/launcher.c:406
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr "실행기 메뉴 열기"
+msgstr "실행 아이콘 메뉴 열기"
 
-#: ../plugins/launcher/launcher.c:1574
+#: ../plugins/launcher/launcher.c:1568
 msgid "Unnamed Item"
 msgstr "이름 없는 항목"
 
-#: ../plugins/launcher/launcher.c:1715
+#: ../plugins/launcher/launcher.c:1709
 msgid "No items"
 msgstr "항목 없음"
 
@@ -1202,7 +1191,7 @@ msgstr "새로운 빈 항목 추가"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
-msgstr "하나 이상의 존재하는 아이템을 실행기에 추가"
+msgstr "하나 이상의 존재하는 아이템을 실행 아이콘에 추가"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Advanced"
@@ -1226,7 +1215,7 @@ msgstr "동"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
-msgstr "안쪽 버튼"
+msgstr "안쪽 단추"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
@@ -1239,7 +1228,7 @@ msgstr "북"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr "패널 버튼이나 메뉴 항목 위로 마우스 포인터를 옮길 때 툴팁 보이기를 비활성화하려면 이 옵션을 선택합니다."
+msgstr "패널 단추나 메뉴 항목 위로 마우스 포인터를 옮길 때 툴팁 보이기를 비활성화하려면 이 옵션을 선택합니다."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1263,14 +1252,13 @@ msgstr "서"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "_Arrow button position:"
-msgstr "화살표 버튼 위치 (_A):"
+msgstr "화살표 단추 위치 (_A):"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "선택 메뉴가 있는 프로그램 실행기"
+msgstr "선택 메뉴가 있는 프로그램 실행 아이콘"
 
-#: ../plugins/pager/pager.c:353
-#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "작업공간 설정 (_S)..."
 
@@ -1278,8 +1266,7 @@ msgstr "작업공간 설정 (_S)..."
 msgid "Unable to open the workspace settings"
 msgstr "작업공간 설정을 열 수 없습니다"
 
-#: ../plugins/pager/pager-buttons.c:561
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "작업공간 %d"
@@ -1360,20 +1347,20 @@ msgstr "데스크탑 보이기"
 msgid "Hide all windows and show the desktop"
 msgstr "모든 창을 숨기고 데스크탑 보이기"
 
-#: ../plugins/systray/systray.c:385
+#: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
 msgstr "알림 영역을 시작할 수 없습니다"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:855
+#: ../plugins/systray/systray.c:868
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용되지 않을 것입니다."
 
-#: ../plugins/systray/systray.c:857
+#: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
 msgstr "알림 영역이 선택을 잃었습니다"
 
-#: ../plugins/systray/systray.c:1010
+#: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "알려진 프로그램의 목록을 정말 없애시렵니까?"
 
@@ -1409,7 +1396,7 @@ msgstr "항상"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr "버튼 위에 커서 위치 했을 때 창 틀 그리기 (_r)"
+msgstr "단추 위에 커서 위치 했을 때 창 틀 그리기 (_r)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
@@ -1433,11 +1420,11 @@ msgstr "현재 작업 공간에 숨겨진 창 표시"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
-msgstr "수직 패널의 버튼 회전하기 (_t)"
+msgstr "수직 패널의 단추 회전하기 (_t)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
-msgstr "밋밋한 버튼 사용 (_f)"
+msgstr "밋밋한 단추 사용 (_f)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
@@ -1445,7 +1432,7 @@ msgstr "손잡이 보이기 (_h)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
-msgstr "버튼 이름 보이기(_n)"
+msgstr "단추 이름 보이기(_n)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
@@ -1474,7 +1461,7 @@ msgstr "공간이 제한되어 있을 때"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
-msgstr "창 버튼"
+msgstr "창 단추"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
@@ -1506,7 +1493,7 @@ msgstr "모두 닫기 (_C)"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr "버튼을 사용하여 열린 창 전환"
+msgstr "단추를 사용하여 열린 창 전환"
 
 #: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
@@ -1540,7 +1527,7 @@ msgstr "방향키"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr "버튼 배치:"
+msgstr "단추 배치:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Enable _urgency notification"
