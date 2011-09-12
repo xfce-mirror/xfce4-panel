@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "이 데스크톱 화일의 정보에 기반하여 새로운 실행 아이콘을 패널에 등록"
+msgstr "이 데스크톱 파일의 정보에 기반하여 새로운 실행 아이콘을 패널에 등록"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -75,17 +75,17 @@ msgstr "패널 (_l)"
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
-msgstr "새로운 항목 추가 (_N)"
+msgstr "새로운 항목 추가(_N)..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
-msgstr "패널 기본 설정 (_e)"
+msgstr "패널 기본 설정(_e)..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
-msgstr "로그 아웃 (_O)"
+msgstr "로그아웃(_O)"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
@@ -128,7 +128,7 @@ msgstr "시작시 창 관리자를 기다리지 않기"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "버전 정보를 출력하고 종료하기"
+msgstr "버전 정보를 출력하고 끝내기"
 
 #. parse context options
 #: ../panel/main.c:250
@@ -138,7 +138,7 @@ msgstr "[ARGUMENTS...]"
 #: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "사용방법을 보기 위해 \"%s --help\"를 입력하십시오"
+msgstr "사용방법을 보기 위해 \"%s --help\"를 입력하십시오."
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
@@ -219,7 +219,7 @@ msgstr "정의된 플러그인 이벤트 문법이 잘못되었습니다. PLUGIN
 #: ../panel/panel-dbus-client.c:241
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Invalid hint type \"%s\""
+msgstr "잘못된 힌트 유형 \"%s\"입니다. 올바른 유형은 bool, double, int string 그리고 uint 입니다."
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -229,7 +229,7 @@ msgstr "Xfce 데스크톱 환경의 패널"
 msgid "translator-credits"
 msgstr ""
 "Boram Kim <boramism@gmail.com>\r\n"
-"조성호 <darkcircle.0426@gmail.com>"
+"Seong-ho, Cho <darkcircle.0426@gmail.com>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -248,7 +248,7 @@ msgstr "패널 %d"
 
 #: ../panel/panel-dialogs.c:183
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "패널이 키오스크 모드로 동작하고 있기 때문에, 정식 사용자로서의 패널 환경설정을 변경하도록 허락되지 않았습니다"
+msgstr "패널이 키오스크 모드로 동작하고 있기 때문에, 정식 사용자로서의 패널 환경설정을 바꾸도록 허락되지 않았습니다"
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -265,7 +265,7 @@ msgstr "패널에 새로운 플러그인 추가"
 #: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
-msgstr "검색 (_S)"
+msgstr "검색(_S):"
 
 #: ../panel/panel-item-dialog.c:221
 msgid "Enter search phrase here"
@@ -274,7 +274,7 @@ msgstr "검색 문구를 여기에 입력하십시오"
 #: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "플러그인 \"%s\" 이(가) 예기치 않게 패널에서 제거되었습니다. 다시 시작 하시렵니까?"
+msgstr "플러그인 \"%s\"이(가) 예기치 않게 패널에서 제거되었습니다. 다시 시작 하시렵니까?"
 
 #: ../panel/panel-plugin-external.c:428
 #, c-format
@@ -304,7 +304,7 @@ msgstr "패널과 플러그인 환경설정이 완전히 제거될 것입니다"
 #: ../panel/panel-preferences-dialog.c:829
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "패널 %d를 정말로 없애시렵니까?"
+msgstr "패널 %d을(를) 정말로 없애시렵니까?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -365,11 +365,11 @@ msgstr "배경 이미지"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr "색 (_o):"
+msgstr "색(_o):"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
-msgstr "디스플레이 (_i)"
+msgstr "표시(_i)"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
@@ -387,12 +387,12 @@ msgstr "수평"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Ite_ms"
-msgstr "항목 (_m)"
+msgstr "항목(_m)"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 #, no-c-format
 msgid "L_ength (%):"
-msgstr "길이 (%) (_L)"
+msgstr "길이(%)(_e):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -464,7 +464,7 @@ msgstr "단일 색"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
-msgstr "감시자 펼치기 (_o)"
+msgstr "감시자 펼치기 (_n)"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
@@ -489,7 +489,7 @@ msgstr "커서 내부 위치 (_E):"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
-msgstr "화일 (_F):"
+msgstr "파일 (_F):"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
@@ -654,7 +654,7 @@ msgstr "프로그램 메뉴"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
-msgstr "단추 제목 (_t)"
+msgstr "단추 제목 (_t):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
@@ -662,15 +662,15 @@ msgstr "메뉴 편집 (_i)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
-msgstr "메뉴 화일"
+msgstr "메뉴 파일"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr "메뉴 화일 (_f)"
+msgstr "메뉴 파일 (_f):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
-msgstr "메뉴 화일 선택"
+msgstr "메뉴 파일 선택"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
@@ -690,7 +690,7 @@ msgstr "메뉴에 아이콘 보이기 (_o)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
-msgstr "사용자 정의 메뉴 화일 사용 (_u):"
+msgstr "사용자 정의 메뉴 파일 사용 (_u):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
@@ -802,7 +802,7 @@ msgstr "초 표시 (_s)"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr "형식 (_F):"
+msgstr "형식 (_o):"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
@@ -812,7 +812,7 @@ msgstr "모호성 (_u):"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
-msgstr "시계 구분자 깜빡이기 (_a)"
+msgstr "시계 구분표시 깜빡이기 (_a)"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
@@ -842,7 +842,7 @@ msgstr "격자 보이기 (_d)"
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "이 형식은 화일 네임에 들어갈 날짜와 시간 부분을 서술합니다. 예를 들어, %Y는 연도를 대신할 것이고, %m은 달 수를 그리고 %d는 날짜의 일 수를 대신할 것입니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 봅니다."
+msgstr "이 형식은 파일 네임에 들어갈 날짜와 시간 부분을 서술합니다. 예를 들어, %Y은(는) 연도를 대신할 것이고, %m은(는) 달 수를 그리고 %d은(는) 날짜의 일 수를 대신할 것입니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 봅니다."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1091,7 +1091,7 @@ msgstr "몇 시죠?"
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
-msgstr "디렉토리 메뉴"
+msgstr "디렉터리 메뉴"
 
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
@@ -1101,7 +1101,7 @@ msgstr "\"%s\" 프로그램을을 실행하는데 실패했습니다"
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "\"%s\" 의 내용 유형을 요청하는데 실패했습니다"
+msgstr "\"%s\"의 내용 유형을 요청하는데 실패했습니다"
 
 #: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
@@ -1128,11 +1128,11 @@ msgstr "터미널에서 열기"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr "메뉴에서 디렉토리 트리 보이기"
+msgstr "메뉴에서 디렉터리 트리 보이기"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "디렉토리에서 보이는 어떤 화일들을 보여줄지 결정하는데 사용할 패턴의 리스트를 입력합니다. 만약 여기에 하나 이상의 패턴을 적는다면, 목록의 팡목은 반드시 세미콜론으로 구분되어야 합니다 (e.g. *.txt;*.doc)."
+msgstr "디렉터리에서 보이는 어떤 파일들을 보여줄지 결정하는데 사용할 패턴의 리스트를 입력합니다. 만약 여기에 하나 이상의 패턴을 적는다면, 목록의 팡목은 반드시 세미콜론으로 구분되어야 합니다 (e.g. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1142,19 +1142,19 @@ msgstr "필터링"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 msgid "Select A Directory"
-msgstr "디렉토리 선택"
+msgstr "디렉터리 선택"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid "Show _hidden files"
-msgstr "숨김 화일 보이기 (_h)"
+msgstr "숨김 파일 보이기 (_h)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
-msgstr "기본 디렉토리 (_B):"
+msgstr "기본 디렉터리 (_B):"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr "화일 패턴 (_F):"
+msgstr "파일 패턴 (_F):"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
@@ -1175,7 +1175,7 @@ msgstr "항목을 삭제하면, 영원히 제거될 것입니다"
 #: ../plugins/launcher/launcher-dialog.c:745
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "'%s' 을(를) 정말 없애시렵니까?"
+msgstr "'%s'을(를) 정말 없애시렵니까?"
 
 #: ../plugins/launcher/launcher-dialog.c:746
 msgid "Unnamed item"
@@ -1416,7 +1416,7 @@ msgstr "아니오, 끌어 놓기를 허용합니다"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
-msgstr "현재 작업 공간에 숨겨진 창 표시"
+msgstr "현재 작업 공간에 숨겨진 창 표시(_w)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
@@ -1424,7 +1424,7 @@ msgstr "수직 패널의 단추 회전하기 (_t)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
-msgstr "밋밋한 단추 사용 (_f)"
+msgstr "밋밋한 단추로 보이기(_f)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
@@ -1432,7 +1432,7 @@ msgstr "손잡이 보이기 (_h)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
-msgstr "단추 이름 보이기(_n)"
+msgstr "단추 이름 보이기(_l)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
@@ -1444,7 +1444,7 @@ msgstr "모든 작업공간 혹은 뷰포트의 창 보이기 (_a)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
-msgstr "모든 작업공간의 태스크 보이기(_w)"
+msgstr "모든 모니터의 창 보이기(_n)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
