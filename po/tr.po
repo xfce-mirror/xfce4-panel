@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-14 10:12+0000\n"
+"POT-Creation-Date: 2011-09-15 16:13+0000\n"
 "PO-Revision-Date: 2010-05-15 00:16+0300\n"
 "Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org,xfce-i18n@xfce.org>\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
-"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 1.0\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
@@ -145,7 +145,7 @@ msgstr ""
 #: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Kullanım için \"%s --help\" yazınız."
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
@@ -159,7 +159,7 @@ msgstr "Lütfen hataları <%s> adresine bildirin."
 #: ../panel/main.c:328
 #, fuzzy
 msgid "There is already a running instance"
-msgstr "Bu ekranda zaten çalışan bir sistem çekmecesi var"
+msgstr "Halihazırda çalışan bir panel örneği var"
 
 #. spawn ourselfs again
 #: ../panel/main.c:378
@@ -167,19 +167,16 @@ msgid "Restarting..."
 msgstr "Yeniden Başlatıyor..."
 
 #: ../panel/main.c:393
-#, fuzzy
 msgid "Failed to show the preferences dialog"
-msgstr "Görüntü açılamadı"
+msgstr "Tercihler penceresi gösterilemedi"
 
 #: ../panel/main.c:395
-#, fuzzy
 msgid "Failed to show the add new items dialog"
-msgstr "'Yeni Öğeler Ekle' penceresini göster"
+msgstr "'Yeni Öğeler Ekle' penceresi gösterilemedi"
 
 #: ../panel/main.c:397
-#, fuzzy
 msgid "Failed to save the panel configuration"
-msgstr "Panel yapılandırmasını kaydet"
+msgstr "Panel ayarları kaydedilemedi"
 
 #: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
@@ -198,31 +195,31 @@ msgid "Failed to send D-Bus message"
 msgstr "D-Bus imesajı gönderilemedi"
 
 #: ../panel/main.c:416
+#, fuzzy
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "Paneli başlatmak istiyor musunuz? Eğer öyleyse çıkış sırasında oturumu kaydettiğinizden emin olun. Böylece bir sonraki giriş yaptığınızda panel otomatik olarak başlayacak."
 
 #: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "%s 'in hiçbir çalışan örneği bulunamadı"
 
 #: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Göç uygulaması çalıştırılamadı"
 
 #: ../panel/panel-application.c:1595 ../plugins/actions/actions.c:421
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr ""
 
 #: ../panel/panel-application.c:1596 ../plugins/actions/actions.c:422
-#, fuzzy
 msgid "Are you sure you want to quit the panel?"
-msgstr "%d. çalışma alanını silmek istediğinizden emin misiniz?"
+msgstr "Paneli kapatmak istediğinizden emin misiniz?"
 
 #: ../panel/panel-application.c:1604 ../plugins/actions/actions.c:430
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "\"%s\" çalıştırılamadı"
+msgstr "\"%s\" komutu çalıştırılamadı"
 
 #: ../panel/panel-dbus-client.c:208
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
@@ -248,7 +245,7 @@ msgstr "Yeni Öğe Ekle"
 
 #: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Lütfen yeni eklenti için bir panel seçiniz:"
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:775
@@ -257,8 +254,9 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:183
+#, fuzzy
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr ""
+msgstr "Panel kiosk modunda çalıştığı için, normal kullanıcı olarak panel ayarları üzerinde değişiklik yapmanıza izin verilmiyor"
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -279,12 +277,12 @@ msgstr "A_ra:"
 
 #: ../panel/panel-item-dialog.c:222
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Aranacak kelimeyi buraya girin"
 
 #: ../panel/panel-plugin-external.c:426
-#, c-format
+#, c-format, fuzzy
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "\"%s\" eklentisi beklenmedik şekilde paneli terketti, yeniden başlatmak ister misiniz?"
 
 #: ../panel/panel-plugin-external.c:428
 #, c-format
@@ -299,18 +297,17 @@ msgstr "Otomatik"
 #: ../panel/panel-preferences-dialog.c:479
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "Ekran %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:505
-#, fuzzy, c-format
+#, c-format
 msgid "Monitor %d"
-msgstr "Monitörleri Yay"
+msgstr "Monitör %d"
 
 #: ../panel/panel-preferences-dialog.c:836
-#, fuzzy
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Seçilen panel ve tüm öğeleri silinecek."
+msgstr "Panel ve eklenti ayarları kalıcı olarak silinecek"
 
 #: ../panel/panel-preferences-dialog.c:837
 #, fuzzy, c-format
