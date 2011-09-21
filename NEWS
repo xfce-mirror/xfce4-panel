@@ -1,3 +1,17 @@
+4.8.6
+=====
+- Panel: Wait until the wm is ready on all screens (bug #7161).
+- Systray: Control the thinkness of the frame (bug #7593).
+- Launcher: Fix broken compilation (bug #7966).
+- Launcher: Don't reconstruct the items on save (bug #7952).
+- Applicationsmenu: Fix segfault with not-existing menu (bug #7895).
+- Libxfce4panel: Avoid problem if panel is not yet realized.
+- Panel: Print string in case of an invalid position.
+- Libxfce4panel: Always try to return an icon.
+- Directorymenu: Also send the target directory as arg (bug #7745).
+- Translation updates (it, tr, nl, sk, pt_BR, te, zh_CN, pt, ru, ko,
+  ja, ro, fr, kk, ms, es, id, eu).
+
 4.8.5
 =====
 - Tasklist: Avoid unneeded dnd actions.
