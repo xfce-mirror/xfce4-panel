@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-31 10:12+0000\n"
-"PO-Revision-Date: 2011-08-31 16:25+0300\n"
+"POT-Creation-Date: 2011-10-03 10:06+0000\n"
+"PO-Revision-Date: 2011-10-03 14:13+0300\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <xfce-i18n@xfce.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -67,7 +67,7 @@ msgstr "Haluatko varmasti poistaa osan \"%s\"?"
 #: ../libxfce4panel/xfce-panel-plugin.c:924
 #: ../panel/panel-preferences-dialog.c:1059
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Jos poistast osan paneelista, sitä ei voi palauttaa."
+msgstr "Jos poistat osan paneelista, menetät sen asetukset pysyvästi."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1084
@@ -451,7 +451,7 @@ msgstr "Siirrä valittu kohde rivin verran ylöspäin"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "None (use system style)"
-msgstr "Ei mitään (järjestemän tyyli)"
+msgstr "Ei mitään (järjestelmän tyyli)"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "O_utput:"
@@ -782,7 +782,7 @@ msgstr "Valitse kuvake"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:524
 #: ../plugins/applicationsmenu/applicationsmenu.c:765
-#: ../plugins/launcher/launcher.c:2295
+#: ../plugins/launcher/launcher.c:2289
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Komennon \"%s\" suoritus epäonnistui."
@@ -1237,15 +1237,15 @@ msgstr "Po_hjakansio:"
 msgid "_File Pattern:"
 msgstr "_Tiedostokaava:"
 
-#: ../plugins/launcher/launcher.c:406
+#: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
 msgstr "Avaa käynnistinvalikko"
 
-#: ../plugins/launcher/launcher.c:1574
+#: ../plugins/launcher/launcher.c:1568
 msgid "Unnamed Item"
 msgstr "Nimetön"
 
-#: ../plugins/launcher/launcher.c:1715
+#: ../plugins/launcher/launcher.c:1709
 msgid "No items"
 msgstr "Tyhjä"
 
@@ -1312,7 +1312,7 @@ msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
 msgstr ""
-"Älä näytä työkaluvihjeitä, kun hiiren osoitin on paneelin panikkeen tai "
+"Älä näytä työkaluvihjeitä, kun hiiren osoitin on paneelin painikkeen tai "
 "valikon kohteiden yllä."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1434,23 +1434,23 @@ msgstr "Näytä työpöytä"
 msgid "Hide all windows and show the desktop"
 msgstr "Piilota ikkunat ja näytä työpöytä"
 
-#: ../plugins/systray/systray.c:385
+#: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
 msgstr "Ilmoitusalueen käynnistys epäonnistui."
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:855
+#: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 "Jokin toinen elementti toimii ilmoitusalueena. Tätä aluetta ei käytetä."
 
-#: ../plugins/systray/systray.c:857
+#: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
 msgstr "Ilmoitusalue menetti valintansa."
 
-#: ../plugins/systray/systray.c:1010
+#: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Haluatko varmasti tyhjentää tunnettujen sovellusten listan?"
 
