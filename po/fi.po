@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-11 16:31+0000\n"
-"PO-Revision-Date: 2011-04-11 22:53+0300\n"
+"POT-Creation-Date: 2011-10-03 10:17+0000\n"
+"PO-Revision-Date: 2011-10-03 14:10+0300\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <xfce-i18n@xfce.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -36,11 +36,11 @@ msgstr "Muokkaa paneelin asetuksia"
 msgid "Panel"
 msgstr "Paneeli"
 
-#: ../common/panel-utils.c:155
+#: ../common/panel-utils.c:157
 msgid "_Read Online"
 msgstr "Lue _verkossa"
 
-#: ../common/panel-utils.c:156
+#: ../common/panel-utils.c:158
 msgid ""
 "You can read the user manual online. This manual may however not exactly "
 "match your panel version."
@@ -48,12 +48,12 @@ msgstr ""
 "Käyttöopas on luettavissa verkossa. Huomaa, että opas ei välttämättä vastaa "
 "käyttämääsi paneelin versiota."
 
-#: ../common/panel-utils.c:158
+#: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
 msgstr "Käyttöopasta ei ole asennettu koneellesi"
 
 #. display an error message to the user
-#: ../common/panel-utils.c:171
+#: ../common/panel-utils.c:175
 msgid "Failed to open the documentation browser"
 msgstr "Dokumentaatioselaimen avaaminen epäonnistui"
 
@@ -67,7 +67,7 @@ msgstr "Haluatko varmasti poistaa osan \"%s\"?"
 #: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Jos poistast osan paneelista, sitä ei voi palauttaa."
+msgstr "Jos poistat osan paneelista, menetät sen asetukset pysyvästi."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1054
@@ -93,39 +93,43 @@ msgstr "Paneelin _asetukset"
 msgid "Log _Out"
 msgstr "Kirjaudu _ulos"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Näytä paneelin asetusikkuna"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "PANEELIN-NUMERO"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "Näytä osien lisäysikkuna"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "Tallenna paneelin asetukset"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "Lisää liitännäinen paneeliin"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "LIITÄNNÄISEN-NIMI"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "Käynnistä paneeli uudelleen"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "Sulje paneeli"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
+msgid "Do not wait for a window manager on startup"
+msgstr "Älä odota ikkunamanageria käynnistyessä"
+
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -133,62 +137,62 @@ msgid "Print version information and exit"
 msgstr "Tulosta versiotiedot"
 
 #. parse context options
-#: ../panel/main.c:248
+#: ../panel/main.c:250
 msgid "[ARGUMENTS...]"
 msgstr "[MÄÄRITTEET...]"
 
-#: ../panel/main.c:255
+#: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Saat ohjeita komennolla \"%s --help\""
 
-#: ../panel/main.c:274
+#: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce:n kehitystiimi. Kaikki oikeudet pidätetään."
 
-#: ../panel/main.c:275
+#: ../panel/main.c:277
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Ilmoita virheistä osoitteeseen <%s>."
 
-#: ../panel/main.c:326
+#: ../panel/main.c:328
 msgid "There is already a running instance"
 msgstr "Paneeli on jo käynnissä"
 
 #. spawn ourselfs again
-#: ../panel/main.c:375
+#: ../panel/main.c:378
 msgid "Restarting..."
 msgstr "Käynnistetään uudelleen..."
 
-#: ../panel/main.c:390
+#: ../panel/main.c:393
 msgid "Failed to show the preferences dialog"
 msgstr "Asetusikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:395
 msgid "Failed to show the add new items dialog"
 msgstr "Osien lisäysikkunan näyttäminen epäonnistui"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:397
 msgid "Failed to save the panel configuration"
 msgstr "Paneelin asetusten tallennus epäonnistui"
 
-#: ../panel/main.c:396
+#: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
 msgstr "Osan lisääminen paneeliin epäonnistui"
 
-#: ../panel/main.c:398
+#: ../panel/main.c:401
 msgid "Failed to restart the panel"
 msgstr "Paneelin uudelleenkäynnistys epäonnistui"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:403
 msgid "Failed to quit the panel"
 msgstr "Paneelin sulkeminen epäonnistui"
 
-#: ../panel/main.c:402
+#: ../panel/main.c:405
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus -viestin lähetys epäonnistui"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:416
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -196,27 +200,27 @@ msgstr ""
 "Käynnistetäänkö paneeli? Muista tallentaa istunto kirjautuessasi ulos, jotta "
 "paneeli käynnistetään myös seuraavan kirjautumisen yhteydessä."
 
-#: ../panel/main.c:416 ../panel/main.c:430
+#: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s ei ole käynnissä"
 
-#: ../panel/panel-application.c:195
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
 msgstr "Asetusten siirto-ohjelman käynnistys epäonnistui"
 
-#: ../panel/panel-application.c:1451 ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 "X käynnistettiin ilman istunnonhallintaa. Lopeta-valinta sulkee X-palvelimen."
 
-#: ../panel/panel-application.c:1452 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Haluatko varmasti sulkea paneelin?"
 
-#: ../panel/panel-application.c:1460 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Komennon \"%s\" suoritus epäonnistui"
@@ -436,7 +440,7 @@ msgstr "Siirrä valittu kohde rivin verran ylöspäin"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
-msgstr "Ei mitään (järjestemän tyyli)"
+msgstr "Ei mitään (järjestelmän tyyli)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
@@ -759,7 +763,7 @@ msgstr "Valitse kuvake"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2277
+#: ../plugins/launcher/launcher.c:2289
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Komennon \"%s\" suoritus epäonnistui."
@@ -1166,16 +1170,16 @@ msgstr "Kohteelle \"%s\" ei löytynyt oletussovellusta."
 msgid "Failed to launch default application for \"%s\""
 msgstr "Kohteen \"%s\" oletussovelluksen käynnistys epäonnistui."
 
-#: ../plugins/directorymenu/directorymenu.c:696
+#: ../plugins/directorymenu/directorymenu.c:697
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Kategorian \"%s\" oletussovelluksen käynnistys epäonnistui."
 
-#: ../plugins/directorymenu/directorymenu.c:769
+#: ../plugins/directorymenu/directorymenu.c:770
 msgid "Open Folder"
 msgstr "Avaa kansio"
 
-#: ../plugins/directorymenu/directorymenu.c:780
+#: ../plugins/directorymenu/directorymenu.c:781
 msgid "Open in Terminal"
 msgstr "Suorita päätteessä"
 
@@ -1218,28 +1222,28 @@ msgstr "_Tiedostokaava:"
 msgid "Open launcher menu"
 msgstr "Avaa käynnistinvalikko"
 
-#: ../plugins/launcher/launcher.c:1556
+#: ../plugins/launcher/launcher.c:1568
 msgid "Unnamed Item"
 msgstr "Nimetön"
 
-#: ../plugins/launcher/launcher.c:1697
+#: ../plugins/launcher/launcher.c:1709
 msgid "No items"
 msgstr "Tyhjä"
 
-#: ../plugins/launcher/launcher-dialog.c:740
+#: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Jos poistat kohteen, sitä ei voi palauttaa."
 
-#: ../plugins/launcher/launcher-dialog.c:741
+#: ../plugins/launcher/launcher-dialog.c:745
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Haluatko varmasti poistaa kohteen \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:746
 msgid "Unnamed item"
 msgstr "Nimetön"
 
-#: ../plugins/launcher/launcher-dialog.c:787
+#: ../plugins/launcher/launcher-dialog.c:791
 msgid "Failed to open desktop item editor"
 msgstr "Työpöytätiedostoeditorin avaaminen epäonnistui."
 
@@ -1289,7 +1293,7 @@ msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
 msgstr ""
-"Älä näytä työkaluvihjeitä, kun hiiren osoitin on paneelin panikkeen tai "
+"Älä näytä työkaluvihjeitä, kun hiiren osoitin on paneelin painikkeen tai "
 "valikon kohteiden yllä."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1320,15 +1324,15 @@ msgstr "_Nuolipainikkeen sijainti:"
 msgid "Program launcher with optional menu"
 msgstr "Sovelluskäynnistin, johon voi liittää valikon"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Työtila-_asetukset..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:428
 msgid "Unable to open the workspace settings"
 msgstr "Työtila-asetusten avaaminen ei onnistu."
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Työtila %d"
@@ -1411,23 +1415,23 @@ msgstr "Näytä työpöytä"
 msgid "Hide all windows and show the desktop"
 msgstr "Piilota ikkunat ja näytä työpöytä"
 
-#: ../plugins/systray/systray.c:382
+#: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
 msgstr "Ilmoitusalueen käynnistys epäonnistui."
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:850
+#: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 "Jokin toinen elementti toimii ilmoitusalueena. Tätä aluetta ei käytetä."
 
-#: ../plugins/systray/systray.c:852
+#: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
 msgstr "Ilmoitusalue menetti valintansa."
 
-#: ../plugins/systray/systray.c:1005
+#: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Haluatko varmasti tyhjentää tunnettujen sovellusten listan?"
 
@@ -1478,79 +1482,83 @@ msgid "Never"
 msgstr "Ei koskaan"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr "Ei, salli kohteiden raahaus"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr "Palauta pienennetyt ikkunat ny_kyiseen työtilaan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
 msgstr "K_äännä pystypaneelin painikkeet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr "Näytä litteät _painikkeet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
 msgstr "Näytä kah_va"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
 msgstr "Näytä t_eksti painikkeissa"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr "Näytä vain pie_nennetyt ikkunat"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Näytä k_aikkien työtilojen tai näkymien ikkunat"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
 msgstr "Näytä kaikkien näytt_öjen ikkunat"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "_Järjestys:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
 msgstr "Aikaleima"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr "Kun tila on rajoitettu"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Ikkunapainikkeet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "Ikkunoiden _ryhmitys"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Window title"
 msgstr "Ikkunan otsikko"
 
-#: ../plugins/tasklist/tasklist-widget.c:3099
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr "P_ienennä kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3108
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr "Pa_lauta kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3114
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr "Suu_renna kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3123
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr "Palau_ta suurennetut"
 
-#: ../plugins/tasklist/tasklist-widget.c:3133
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr "Sulj_e kaikki"
 
