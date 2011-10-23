@@ -630,7 +630,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
   gchar       **binaries = NULL;
   guint         i;
   gboolean      result = FALSE;
-  gchar        *argv[3];
+  gchar        *argv[2];
 
   /* try to work around the exo code and get the direct command */
   rc = xfce_rc_config_open (XFCE_RESOURCE_CONFIG, "xfce4/helpers.rc", TRUE);
@@ -673,8 +673,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
             continue;
 
           argv[0] = filename;
-          argv[1] = working_dir;
-          argv[2] = NULL;
+          argv[1] = NULL;
 
           /* try to spawn the program, if this fails we try exo for
            * a decent error message */
