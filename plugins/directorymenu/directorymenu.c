@@ -620,7 +620,8 @@ err:
 static void
 directory_menu_plugin_menu_open (GtkWidget   *mi,
                                  GFile       *dir,
-                                 const gchar *category)
+                                 const gchar *category,
+                                 gboolean     path_as_arg)
 {
   GError       *error = NULL;
   gchar        *working_dir;
@@ -630,7 +631,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
   gchar       **binaries = NULL;
   guint         i;
   gboolean      result = FALSE;
-  gchar        *argv[2];
+  gchar        *argv[3];
 
   /* try to work around the exo code and get the direct command */
   rc = xfce_rc_config_open (XFCE_RESOURCE_CONFIG, "xfce4/helpers.rc", TRUE);
@@ -673,7 +674,8 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
             continue;
 
           argv[0] = filename;
-          argv[1] = NULL;
+          argv[1] = path_as_arg ? working_dir : NULL;
+          argv[2] = NULL;
 
           /* try to spawn the program, if this fails we try exo for
            * a decent error message */
@@ -709,7 +711,7 @@ directory_menu_plugin_menu_open_terminal (GtkWidget *mi,
   panel_return_if_fail (GTK_IS_WIDGET (mi));
   panel_return_if_fail (G_IS_FILE (dir));
 
-  directory_menu_plugin_menu_open (mi, dir, "TerminalEmulator");
+  directory_menu_plugin_menu_open (mi, dir, "TerminalEmulator", FALSE);
 }
 
 
@@ -721,7 +723,7 @@ directory_menu_plugin_menu_open_folder (GtkWidget *mi,
   panel_return_if_fail (GTK_IS_WIDGET (mi));
   panel_return_if_fail (G_IS_FILE (dir));
 
-  directory_menu_plugin_menu_open (mi, dir, "FileManager");
+  directory_menu_plugin_menu_open (mi, dir, "FileManager", TRUE);
 }
 
 
