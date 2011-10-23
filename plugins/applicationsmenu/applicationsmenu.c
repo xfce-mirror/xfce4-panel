@@ -108,7 +108,8 @@ static gboolean  applications_menu_plugin_remote_event         (XfcePanelPlugin 
                                                                 const gchar            *name,
                                                                 const GValue           *value);
 static void      applications_menu_plugin_menu_reload          (ApplicationsMenuPlugin *plugin);
-static void      applications_menu_plugin_menu                 (GtkWidget              *button,
+static gboolean  applications_menu_plugin_menu                 (GtkWidget              *button,
+                                                                GdkEventButton         *event,
                                                                 ApplicationsMenuPlugin *plugin);
 
 
@@ -233,7 +234,7 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   gtk_widget_set_name (plugin->button, "applicationmenu-button");
   gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
   gtk_widget_set_tooltip_text (plugin->button, DEFAULT_TITLE);
-  g_signal_connect (G_OBJECT (plugin->button), "toggled",
+  g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
       G_CALLBACK (applications_menu_plugin_menu), plugin);
 
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 1);
@@ -630,12 +631,12 @@ applications_menu_plugin_remote_event (XfcePanelPlugin *panel_plugin,
           && g_value_get_boolean (value))
         {
           /* show menu under cursor */
-          applications_menu_plugin_menu (NULL, plugin);
+          applications_menu_plugin_menu (NULL, NULL, plugin);
         }
       else
         {
           /* show the menu at the button */
-          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
+          applications_menu_plugin_menu (plugin->button, NULL, plugin);
         }
 
       /* don't popup another menu */
@@ -980,8 +981,9 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
 
 
 
-static void
+static gboolean
 applications_menu_plugin_menu (GtkWidget              *button,
+                               GdkEventButton         *event,
                                ApplicationsMenuPlugin *plugin)
 {
   GtkWidget  *mi;
@@ -990,12 +992,17 @@ applications_menu_plugin_menu (GtkWidget              *button,
   gchar      *filename;
   GFile      *file;
 
-  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
-  panel_return_if_fail (button == NULL || plugin->button == button);
+  panel_return_val_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (button == NULL || plugin->button == button, FALSE);
 
-  if (button != NULL
-      && !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
-    return;
+  if (event != NULL
+      && !(event->button == 1
+           && event->type == GDK_BUTTON_PRESS
+           && !PANEL_HAS_FLAG (event->state, GDK_CONTROL_MASK)))
+    return FALSE;
+
+  if (button != NULL)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
   if (plugin->menu == NULL)
     {
@@ -1043,18 +1050,22 @@ applications_menu_plugin_menu (GtkWidget              *button,
         {
           xfce_dialog_show_error (NULL, error, _("Failed to load the applications menu"));
 
-          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
+          if (button != NULL)
+            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
 
           if (G_LIKELY (error != NULL))
             g_error_free (error);
           if (G_LIKELY (menu != NULL))
             g_object_unref (G_OBJECT (menu));
 
-          return;
+          return FALSE;
         }
     }
 
   gtk_menu_popup (GTK_MENU (plugin->menu), NULL, NULL,
                   button != NULL ? xfce_panel_plugin_position_menu : NULL,
-                  plugin, 1, gtk_get_current_event_time ());
+                  plugin, 1,
+                  event != NULL ? event->time : gtk_get_current_event_time ());
+
+  return TRUE;
 }
