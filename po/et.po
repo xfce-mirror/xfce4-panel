@@ -4,19 +4,21 @@
 # Mart Tõnso <mart.tonso@ttu.ee>, 2004.
 # Peeter Vois <peeter.vois@proekspert.ee>, 2004, 2006.
 # Kristjan Siimson <kristjan.siimson@gmail.com>, 2009.
-# 
+# Allar Kiristaja <aquastus@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-10-26 10:07+0000\n"
-"PO-Revision-Date: 2009-01-13 11:57-0800\n"
-"Last-Translator: kristjan <kristjan.siimson@gmail.com>\n"
-"Language-Team: Estonian <xfce-i18n@xfce.org>\n"
+"PO-Revision-Date: 2011-10-26 23:55+0300\n"
+"Last-Translator: Allar Kiristaja <aquastus@gmail.com>\n"
+"Language-Team: Eesti <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -45,7 +47,9 @@ msgstr "_Loe internetist"
 msgid ""
 "You can read the user manual online. This manual may however not exactly "
 "match your panel version."
-msgstr "Kasutusjuhendit saab lugeda internetist. See kasutusjuhend ei pruugi aga sobida teie riba versiooniga."
+msgstr ""
+"Kasutusjuhendit saab lugeda internetist. See kasutusjuhend ei pruugi aga "
+"sobida teie riba versiooniga."
 
 #: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
@@ -144,7 +148,7 @@ msgstr "[ARGUMENTS...]"
 #: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Trüki „%s --help” kasutusjuhisteks."
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
@@ -196,7 +200,9 @@ msgstr "D-Bus sõnumi saatmine ebaõnnestus"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
-msgstr "Kas soovite käivitada riba? Kui nii, siis salvestage kindlalt sessioon välja logimisel, et riba käivituks automaatselt järgmisel sisse logimisel."
+msgstr ""
+"Kas soovite käivitada riba? Kui nii, siis salvestage kindlalt sessioon välja "
+"logimisel, et riba käivituks automaatselt järgmisel sisse logimisel."
 
 #: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
@@ -211,7 +217,8 @@ msgstr "Migratsioonirakenduse käivitamine ebaõnnestus."
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Käivitasite X-i sessioonihaldurita. Klõpsates „Lõpeta” sulgete X serveri."
+msgstr ""
+"Käivitasite X-i sessioonihaldurita. Klõpsates „Lõpeta” sulgete X serveri."
 
 #: ../panel/panel-application.c:1598
 msgid "Are you sure you want to quit the panel?"
@@ -239,7 +246,7 @@ msgstr "Xfce Töölaua Keskkonna riba"
 
 #: ../panel/panel-dialogs.c:81
 msgid "translator-credits"
-msgstr ""
+msgstr "tõlkija-tunnustus"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -261,6 +268,8 @@ msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
+"Tavalise kasutajana ei ole teil õigust teha muudatusi riba sätetes, kuna "
+"riba jookseb kioskiviisil."
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -286,7 +295,8 @@ msgstr "Sisesta siia otsisõna"
 #: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Plugin \\„%s\\” ootamatult lahkus ribalt, kas soovite selle taaskäivitada?"
+msgstr ""
+"Plugin \\„%s\\” ootamatult lahkus ribalt, kas soovite selle taaskäivitada?"
 
 #: ../panel/panel-plugin-external.c:428
 #, c-format
@@ -294,7 +304,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Plugin taaskäivitus mitu korda viimase %d sekundi jooksul. Kui vajutate „Teosta”, üritab riba pluginat taaskäivitada, vastasel juhul eemaldatakse see ribalt jäädavalt."
+msgstr ""
+"Plugin taaskäivitus mitu korda viimase %d sekundi jooksul. Kui vajutate "
+"„Teosta”, üritab riba pluginat taaskäivitada, vastasel juhul eemaldatakse "
+"see ribalt jäädavalt."
 
 #: ../panel/panel-preferences-dialog.c:460
 msgid "Automatic"
@@ -336,6 +349,8 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
+"Sisemine nimi: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -360,7 +375,9 @@ msgstr "Lisa ribale uus ese"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "Riba tausta alfa väärtus, 0 on täiesti läbipaistev ja 100 täiesti läbipaistmatu."
+msgstr ""
+"Riba tausta alfa väärtus, 0 on täiesti läbipaistev ja 100 täiesti "
+"läbipaistmatu."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -441,7 +458,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "O_utput:"
-msgstr ""
+msgstr "Väl_jund:"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Opacity"
@@ -467,7 +484,9 @@ msgstr "Vali taustapilt"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Vali see, kui tahad, et suurendatud aknad kataksid riba taha jääva ala. See töötab ainult siis, kui riba on kinnitatud ekraani äärde."
+msgstr ""
+"Vali see, kui tahad, et suurendatud aknad kataksid riba taha jääva ala. See "
+"töötab ainult siis, kui riba on kinnitatud ekraani äärde."
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
@@ -488,7 +507,9 @@ msgstr "Vali see, et peita riba sangad ja lukustada selle asukoht."
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "Vali see, et peita riba kui hiireosuti ei ole selle kohal. See töötab ainult siis, kui riba on kinnitatud ekraani äärde."
+msgstr ""
+"Vali see, et peita riba kui hiireosuti ei ole selle kohal. See töötab ainult "
+"siis, kui riba on kinnitatud ekraani äärde."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Show about information of the currently selected item"
@@ -507,13 +528,17 @@ msgstr "Vahe monitorid"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
-msgstr "Läbipaistvus, kui hiireosuti on paneeli kohal, 0 on täiesti läbipaistev ja 100 täiesti läbipaistmatu."
+msgstr ""
+"Läbipaistvus, kui hiireosuti on paneeli kohal, 0 on täiesti läbipaistev ja "
+"100 täiesti läbipaistmatu."
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Läbipaistvus, kui hiireosuti ei ole paneeli kohal, 0 on täiesti läbipaistev ja 100 täiesti läbipaistmatu."
+msgstr ""
+"Läbipaistvus, kui hiireosuti ei ole paneeli kohal, 0 on täiesti läbipaistev "
+"ja 100 täiesti läbipaistmatu."
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Vertical"
@@ -586,7 +611,9 @@ msgstr "Tere tulemast riba esmakäivitusele"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "Riba peab laadima värsked algsätted, kuna liikus sätete hoidmiseks uuele süsteemile."
+msgstr ""
+"Riba peab laadima värsked algsätted, kuna liikus sätete hoidmiseks uuele "
+"süsteemile."
 
 #: ../migrate/main.c:106
 msgid "Choose below which setup you want for the first startup."
@@ -844,7 +871,9 @@ msgstr "Vali menüüfail"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Vali see, et näidata menüüs üldist rakenduse nime, näiteks\\„Thunar\\” asemel \\„Failihaldur\\”"
+msgstr ""
+"Vali see, et näidata menüüs üldist rakenduse nime, näiteks\\„Thunar\\” "
+"asemel \\„Failihaldur\\”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -909,7 +938,7 @@ msgstr "Kasutus:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "VALIK"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
@@ -1017,6 +1046,9 @@ msgid ""
 "with the day. See the documentation of the date utility for additional "
 "information."
 msgstr ""
+"Vorm kirjeldab kella ja kuupäeva osasid faili nimesse sisestamiseks. Näiteks "
+"%Y asendatakse aastaga, %m kuuga ja %d päevaga. Vaata kuupäeva abivahendi "
+"dokumentatsiooni täiendavaks teabeks."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1067,7 +1099,7 @@ msgstr "Hilisõhtu"
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
-msgstr "kell %0"
+msgstr "%0"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
@@ -1127,7 +1159,7 @@ msgstr "viie pärast %1"
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr "kell %1"
+msgstr "%1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1135,79 +1167,79 @@ msgstr "kell %1"
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0"
 
 #: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "%0 ja viis minutit"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "%0 ja kümme minutit"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "veerand %1"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr ""
+msgstr "%0 ja kakskümmend minutit"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr ""
+msgstr "%0 ja kakskümmend viis minutit"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "pool %1"
 
 #: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "kahekümne viie pärast %1"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "kahekümne pärast %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "kolmveerand %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "kümne pärast %1"
 
 #: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "viie pärast %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1"
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
@@ -1270,7 +1302,7 @@ msgstr "Kataloogi menüü"
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Rakenduse \\„%s\\” käivitamine ebaõnnestus"
+msgstr "Rakenduse „%s” käivitamine ebaõnnestus"
 
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
@@ -1280,12 +1312,12 @@ msgstr ""
 #: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr "\\„%s\\” jaoks ei leitud vaikimisi rakendust"
+msgstr "„%s” jaoks ei leitud vaikimisi rakendust"
 
 #: ../plugins/directorymenu/directorymenu.c:605
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "\\„%s\\” jaoks vaikimisi rakenduse käivitamine ebaõnnestus"
+msgstr "„%s” jaoks vaikimisi rakenduse käivitamine ebaõnnestus"
 
 #: ../plugins/directorymenu/directorymenu.c:698
 #, c-format
@@ -1407,7 +1439,9 @@ msgstr "Põhi"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
-msgstr "Vali see, et lülitada välja näpunäited, kui liigud üle riba nupu või menüü esemete."
+msgstr ""
+"Vali see, et lülitada välja näpunäited, kui liigud üle riba nupu või menüü "
+"esemete."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Select this option to move the clicked menu item to the panel."
@@ -1463,7 +1497,8 @@ msgstr "_Ridade arv:"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Näita vähendatud vaadet tööalast. Nähtavaid aknaid kujutavad ristkülikud."
+msgstr ""
+"Näita vähendatud vaadet tööalast. Nähtavaid aknaid kujutavad ristkülikud."
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
@@ -1532,11 +1567,13 @@ msgstr "Ei saa käivitada teateala"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Tõenäoliselt võttis mõni teine vidin üle teateala ülesande. Ala jääb kasutamata."
+msgstr ""
+"Tõenäoliselt võttis mõni teine vidin üle teateala ülesande. Ala jääb "
+"kasutamata."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Teateala kaotas valiku"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1583,7 +1620,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "Rühmita pealkiri ja akna pealkiri"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
@@ -1595,11 +1632,11 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Taasta vähendatud aknad käesolevale _tööalale"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Ro_tate buttons in vertical panel"
-msgstr ""
+msgstr "P_ööra nuppe vertikaalsel ribal"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
