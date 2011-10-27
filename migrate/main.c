@@ -42,19 +42,24 @@
 
 
 
+#define DEFAULT_CONFIG_FILENAME "xfce4" G_DIR_SEPARATOR_S "panel" G_DIR_SEPARATOR_S "default.xml"
+#define DEFAULT_CONFIG_PATH     XDGCONFIGDIR G_DIR_SEPARATOR_S DEFAULT_CONFIG_FILENAME
+
+
 gint
 main (gint argc, gchar **argv)
 {
-  gchar         *file;
   GError        *error = NULL;
   GtkWidget     *dialog;
   GtkWidget     *button;
   gint           result;
   gint           retval = EXIT_SUCCESS;
-  gboolean       default_config_exists;
   gint           default_response = GTK_RESPONSE_CANCEL;
   XfconfChannel *channel;
   gint           configver;
+  gchar         *filename_46;
+  gchar         *filename_default;
+  gboolean       migrate_vendor_default;
 
   /* set translation domain */
   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
@@ -76,21 +81,31 @@ main (gint argc, gchar **argv)
   channel = xfconf_channel_get (XFCE_PANEL_CHANNEL_NAME);
   if (!xfconf_channel_has_property (channel, "/panels"))
     {
-      /* lookup the possible configuration files */
-      file = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, XFCE_46_CONFIG);
-      default_config_exists = g_file_test (DEFAULT_CONFIG, G_FILE_TEST_IS_REGULAR);
-      if (file == NULL && !default_config_exists)
+      /* lookup the old 4.6 config file */
+      filename_46 = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, XFCE_46_CONFIG);
+
+      /* lookup the default configuration */
+      xfce_resource_push_path (XFCE_RESOURCE_CONFIG, XDGCONFIGDIR);
+      filename_default = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, DEFAULT_CONFIG_FILENAME);
+      xfce_resource_pop_path (XFCE_RESOURCE_CONFIG);
+
+      if (filename_46 == NULL && filename_default == NULL)
         {
           g_warning ("No default or old configuration found");
           return EXIT_FAILURE;
         }
 
+      /* if the default configuration does not match with the file found
+       * by the resource lookup, migrate it without asking */
+      migrate_vendor_default = (g_strcmp0 (DEFAULT_CONFIG_PATH, filename_default) != 0);
+
       /* check if we auto-migrate the default configuration */
-      if (g_getenv ("XFCE_PANEL_MIGRATE_DEFAULT") != NULL)
+      if (g_getenv ("XFCE_PANEL_MIGRATE_DEFAULT") != NULL
+          || migrate_vendor_default)
         {
-          if (file != NULL)
+          if (filename_46 != NULL)
             g_message ("Tried to auto-migrate, but old configuration found");
-          else if (!!default_config_exists)
+          else if (filename_default == NULL)
             g_message ("Tried to auto-migrate, but no default configuration found");
           else
             goto migrate_default;
@@ -99,54 +114,60 @@ main (gint argc, gchar **argv)
       /* create question dialog */
       dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
                                        _("Welcome to the first start of the panel"));
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s%s%s",
-          file != NULL ? _("Because the panel moved to a new system for storing the "
-                           "settings, it has to load a fresh initial configuration.") : "",
-          file != NULL ? " " : "",
-                         _("Choose below which setup you want for the first startup."));
       gtk_window_set_title (GTK_WINDOW (dialog), _("Panel"));
       gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PREFERENCES);
       gtk_window_stick (GTK_WINDOW (dialog));
       gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
 
-      button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Migrate old config"), GTK_RESPONSE_OK);
-      gtk_widget_set_tooltip_text (button, _("Migrate the old 4.6 configuration to Xfconf"));
-      gtk_widget_set_sensitive (button, file != NULL);
-      if (file != NULL)
-        default_response = GTK_RESPONSE_OK;
+      if (filename_46 != NULL)
+        {
+          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s\n%s",
+              _("Because the panel moved to a new system for storing the "
+                "settings, it has to load a fresh initial configuration."),
+              _("Choose below which setup you want for the first startup."));
 
-      button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Use default config"), GTK_RESPONSE_YES);
-      gtk_widget_set_tooltip_text (button, _("Load the default configuration"));
-      gtk_widget_set_sensitive (button, default_config_exists);
-      if (default_config_exists && file == NULL)
-        default_response = GTK_RESPONSE_YES;
+          button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Migrate old config"), GTK_RESPONSE_OK);
+          gtk_widget_set_tooltip_text (button, _("Migrate the old 4.6 configuration to Xfconf"));
+          default_response = GTK_RESPONSE_OK;
+        }
+      else
+        {
+          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+              _("Choose below which setup you want for the first startup."));
+        }
+
+      if (filename_default != NULL)
+        {
+          button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Use default config"), GTK_RESPONSE_YES);
+          gtk_widget_set_tooltip_text (button, _("Load the default configuration"));
+
+          if (default_response == GTK_RESPONSE_CANCEL)
+            default_response = GTK_RESPONSE_YES;
+        }
 
       button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("One empty panel"), GTK_RESPONSE_CANCEL);
       gtk_widget_set_tooltip_text (button, _("Start with one empty panel"));
 
       gtk_dialog_set_default_response (GTK_DIALOG (dialog), default_response);
-
       result = gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
 
-      if (result == GTK_RESPONSE_OK
-          && file != NULL)
+      if (result == GTK_RESPONSE_OK && filename_46 != NULL)
         {
           /* restore 4.6 config */
-          if (!migrate_46 (file, channel, &error))
+          if (!migrate_46 (filename_46, channel, &error))
             {
               xfce_dialog_show_error (NULL, error, _("Failed to migrate the old panel configuration"));
               g_error_free (error);
               retval = EXIT_FAILURE;
             }
         }
-      else if (result == GTK_RESPONSE_YES
-               && default_config_exists)
+      else if (result == GTK_RESPONSE_YES && filename_default != NULL)
         {
           migrate_default:
 
           /* apply default config */
-          if (!migrate_default (DEFAULT_CONFIG, &error))
+          if (!migrate_default (filename_default, &error))
             {
               xfce_dialog_show_error (NULL, error, _("Failed to load the default configuration"));
               g_error_free (error);
@@ -154,7 +175,8 @@ main (gint argc, gchar **argv)
             }
         }
 
-      g_free (file);
+      g_free (filename_46);
+      g_free (filename_default);
     }
 
   configver = xfconf_channel_get_int (channel, "/configver", -1);

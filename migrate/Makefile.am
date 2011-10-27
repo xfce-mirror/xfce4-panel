@@ -3,7 +3,7 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"xfce4-panel-migrate\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
-	-DDEFAULT_CONFIG=\"$(sysconfdir)/xdg/xfce4/panel/default.xml\" \
+	-DXDGCONFIGDIR=\"$(sysconfdir)/xdg\" \
 	$(PLATFORM_CPPFLAGS)
 
 confdir = $(sysconfdir)/xdg/xfce4/panel
