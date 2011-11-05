@@ -733,7 +733,6 @@ msgid "Log Out"
 msgstr "Завершение сеанса"
 
 #: ../plugins/actions/actions.c:160
-#, fuzzy
 msgid "_Log Out"
 msgstr "Завер_шение сеанса"
 
@@ -775,18 +774,17 @@ msgid "Hibernate"
 msgstr "Спящий режим"
 
 #: ../plugins/actions/actions.c:185
-#, fuzzy
 msgid "_Hibernate"
 msgstr "Сп_ящий режим"
 
 #: ../plugins/actions/actions.c:186
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Перейти в спящий режим (записав память на диск)?"
 
 #: ../plugins/actions/actions.c:187
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "Компьютер перейдет в спящий режим через %d с."
 
 #: ../plugins/actions/actions.c:191
 msgid "Suspend"
@@ -798,50 +796,46 @@ msgstr "Жд_ущий режим"
 
 #: ../plugins/actions/actions.c:193
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Перейти в ждущий режим (без записи памяти на диск)?"
 
 #: ../plugins/actions/actions.c:194
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Компьютер перейдет в ждущий режим через %d с."
 
 #: ../plugins/actions/actions.c:198
 msgid "Restart"
 msgstr "Перезагрузка"
 
 #: ../plugins/actions/actions.c:199
-#, fuzzy
 msgid "_Restart"
-msgstr "Перезагрузка"
+msgstr "Переза_грузка"
 
 #: ../plugins/actions/actions.c:200
-#, fuzzy
 msgid "Are you sure you want to restart?"
-msgstr "Вы действительно хотите удалить «%s»?"
+msgstr "Вы действительно хотите перезагрузить компьютер?"
 
 #: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Компьютер будет перезагружен через %d с."
 
 #: ../plugins/actions/actions.c:205
 msgid "Shut Down"
 msgstr "Выключение"
 
 #: ../plugins/actions/actions.c:206
-#, fuzzy
 msgid "Shut _Down"
-msgstr "Выключение"
+msgstr "Выклю_чение"
 
 #: ../plugins/actions/actions.c:207
-#, fuzzy
 msgid "Are you sure you want to shut down?"
-msgstr "Вы действительно хотите завершить работу панели?"
+msgstr "Вы действительно хотите выключить компьютер?"
 
 #: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Компьютер будет выключен через %d с."
 
 #: ../plugins/actions/actions.c:600
 #: ../plugins/separator/separator-dialog.glade.h:5
@@ -850,13 +844,13 @@ msgid "Separator"
 msgstr "Разделитель"
 
 #: ../plugins/actions/actions.c:869
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Не удалось запустить приложение «%s»"
+msgstr "Не удалось выполнить действие «%s»"
 
 #: ../plugins/actions/actions.c:1027
 msgid "John Doo"
-msgstr ""
+msgstr "Петр Сидоров"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1724,9 +1718,8 @@ msgid "Window title"
 msgstr "Заголовок окна"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
-#, fuzzy
 msgid "_Switch windows using the mouse wheel"
-msgstr "Переключать рабочие места с помощью _колёсика мыши"
+msgstr "Переключать окна с помощью _колёсика мыши"
 
 #: ../plugins/tasklist/tasklist-widget.c:3199
 msgid "Mi_nimize All"
