@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"POT-Creation-Date: 2011-11-05 11:21+0000\n"
 "PO-Revision-Date: 2010-06-11 23:34+0200\n"
 "Last-Translator: Ivica Kolić<ikoli@yahoo.com> <>\n"
 "Language-Team: Croatian <>\n"
@@ -22,6 +22,8 @@ msgstr ""
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop file"
 msgstr ""
+"Na ploču dodaj novi pokretač koji je baziran na informacijama ove datoteke "
+"radne površine"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -32,16 +34,16 @@ msgid "Customize the panel"
 msgstr "Prilagodi ploču"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Ploča"
 
-#: ../common/panel-utils.c:155
+#: ../common/panel-utils.c:157
 msgid "_Read Online"
 msgstr "_Čitaj online"
 
-#: ../common/panel-utils.c:156
+#: ../common/panel-utils.c:158
 msgid ""
 "You can read the user manual online. This manual may however not exactly "
 "match your panel version."
@@ -49,12 +51,12 @@ msgstr ""
 "Možete čitati korisnički priručnik online.Ovaj priručnik možda ne odgovara "
 "vašoj veriji ploče."
 
-#: ../common/panel-utils.c:158
+#: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
 msgstr " Korisnički priručnik nije instaliran na vašem računalu."
 
 #. display an error message to the user
-#: ../common/panel-utils.c:171
+#: ../common/panel-utils.c:175
 msgid "Failed to open the documentation browser"
 msgstr "Neuspjelo otvaranje preglednika dokumentacije"
 
@@ -80,53 +82,57 @@ msgid "Pane_l"
 msgstr "Ploč_a"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "Dodaj _nove stavke"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "Osobitosti Pl_oče"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "Odja_va"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Pokaži dijalog 'Osobitosti ploče'"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "BROJ-PLOČE"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "Pokaži dijalog 'Dodaj nove stavke'"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "Spremi konfiguraciju ploče"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "Dodaj novi priključak ploči"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "IME-PRIKLJUČKA"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr ""
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr ""
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
+msgid "Do not wait for a window manager on startup"
+msgstr "Ne čekaj upravitelja prozora pri pokretanju"
+
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -134,62 +140,62 @@ msgid "Print version information and exit"
 msgstr "Ispis informacija o verziji i izlaz"
 
 #. parse context options
-#: ../panel/main.c:240
+#: ../panel/main.c:250
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTI...]"
 
-#: ../panel/main.c:247
+#: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Upiši \"%s --help\" za uporabu."
 
-#: ../panel/main.c:266
+#: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce razvojni tim.Sva prava pridržana."
 
-#: ../panel/main.c:267
+#: ../panel/main.c:277
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Prijavite probleme u <%s>."
 
-#: ../panel/main.c:318
+#: ../panel/main.c:328
 msgid "There is already a running instance"
 msgstr ""
 
 #. spawn ourselfs again
-#: ../panel/main.c:367
+#: ../panel/main.c:378
 msgid "Restarting..."
 msgstr "Ponovno pokretanje..."
 
-#: ../panel/main.c:382
+#: ../panel/main.c:393
 msgid "Failed to show the preferences dialog"
 msgstr "Neuspjelo pokazivanje dijaloga osobitosti"
 
-#: ../panel/main.c:384
+#: ../panel/main.c:395
 msgid "Failed to show the add new items dialog"
 msgstr "Neuspjelo pokazivanje dijaloga dodaj nove stavke"
 
-#: ../panel/main.c:386
+#: ../panel/main.c:397
 msgid "Failed to save the panel configuration"
 msgstr "Neuspjelo spremanje konfiguracije ploče"
 
-#: ../panel/main.c:388
+#: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
 msgstr "Neuspjelo dodavanje priključka ploči"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:401
 msgid "Failed to restart the panel"
 msgstr "Nespjelo ponovno pokretanje ploče"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:403
 msgid "Failed to quit the panel"
 msgstr "Neuspjelo iskjlučivanje ploče"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:405
 msgid "Failed to send D-Bus message"
 msgstr "Neuspjelo slanje D-bus poruke"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:416
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -197,16 +203,16 @@ msgstr ""
 "Želite li pokrenuti ploču?Ako želite spremite sesiju kod odjave,tako da se "
 "ploča automatiski pokrene idući put kada se prijavite."
 
-#: ../panel/main.c:408 ../panel/main.c:422
+#: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:217
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Neuspjelo pokretanje programa premještanja"
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -214,21 +220,21 @@ msgstr ""
 "Pokrenuli ste X bez upravitelja sesijama.Klik na Isključi će zatvoriti X "
 "poslužitelj."
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
+#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeste li sigurni da želite iskjlučiti ploču?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Neuspjeh u izvršenju naredbe \"%s\""
 
-#: ../panel/panel-dbus-client.c:209
+#: ../panel/panel-dbus-client.c:208
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:241
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -286,13 +292,13 @@ msgstr "_Traži"
 msgid "Enter search phrase here"
 msgstr "Ovdje unesite frazu traženja"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 "Priključak \"%s je neočekivano napustio ploču.želite li ga ponovno pokrenuti?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:428
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -379,7 +385,7 @@ msgstr "Automatdki pokaži i _sakrij ploču"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
-msgstr "POzadina"
+msgstr "Pozadina"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
@@ -563,7 +569,7 @@ msgstr "Početnik"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Srednji"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
@@ -587,7 +593,7 @@ msgstr ""
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Odaberite ispod koju postavu želite za prvo pokretanje."
 
 #: ../migrate/main.c:89
 msgid "Migrate old config"
@@ -624,11 +630,12 @@ msgstr "Neuspjelo učitavanje zadane konfiguracije"
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Akcijska dugmeta"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
+#, fuzzy
 msgid "Button Actions"
-msgstr ""
+msgstr "Naslov _dugmeta"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "_First button:"
@@ -694,7 +701,7 @@ msgstr "Izbornik programa"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
-msgstr ""
+msgstr "Naslov _dugmeta"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
@@ -747,7 +754,7 @@ msgstr "_Ikona:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
-msgstr ""
+msgstr "_Prikaži naziv dugmeta"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
@@ -756,7 +763,7 @@ msgstr "Odaberi ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
+#: ../plugins/launcher/launcher.c:2289
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Neuspjeh u izvršenju naredbe \"%s\"."
@@ -851,7 +858,7 @@ msgstr "F_ormat:"
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "N_ejasnost"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
@@ -859,7 +866,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
-msgstr ""
+msgstr "Nejasno"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
@@ -876,7 +883,7 @@ msgstr "Pokaži _okvir"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Prikaži _neaktivne točkice"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
@@ -1134,6 +1141,12 @@ msgstr "dvanaest"
 msgid "What time is it?"
 msgstr "Koliko je sati?"
 
+#: ../plugins/directorymenu/directorymenu.c:243
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Directory Menu"
+msgstr "Izbornik direktorija"
+
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
 msgid "Failed to launch application \"%s\""
@@ -1154,23 +1167,18 @@ msgstr "NIje nađen zadani program za \"%s\""
 msgid "Failed to launch default application for \"%s\""
 msgstr "Neuspjelo pokretanje zadanog programa za \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:696
+#: ../plugins/directorymenu/directorymenu.c:697
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Neuspjelo izvršenje željenog programa za kategoriju \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:769
+#: ../plugins/directorymenu/directorymenu.c:770
 msgid "Open Folder"
 msgstr "Otvori mapu"
 
-#: ../plugins/directorymenu/directorymenu.c:780
+#: ../plugins/directorymenu/directorymenu.c:781
 msgid "Open in Terminal"
 msgstr "Otvori u treminalu"
-
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-msgid "Directory Menu"
-msgstr "Izbornik direktorija"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1205,28 +1213,32 @@ msgstr ""
 msgid "_File Pattern:"
 msgstr "_Uzorak datoteke"
 
-#: ../plugins/launcher/launcher.c:1555
+#: ../plugins/launcher/launcher.c:405
+msgid "Open launcher menu"
+msgstr "Otvori izbornik pokretača"
+
+#: ../plugins/launcher/launcher.c:1568
 msgid "Unnamed Item"
 msgstr "Neimenovana stavka"
 
-#: ../plugins/launcher/launcher.c:1696
+#: ../plugins/launcher/launcher.c:1709
 msgid "No items"
 msgstr "Nema stavki"
 
-#: ../plugins/launcher/launcher-dialog.c:740
+#: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Ako obrišete stavku biti će trajno uklonjena"
 
-#: ../plugins/launcher/launcher-dialog.c:741
+#: ../plugins/launcher/launcher-dialog.c:745
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Jeste li sigurni da želite ukloniti \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:742
+#: ../plugins/launcher/launcher-dialog.c:746
 msgid "Unnamed item"
 msgstr "Neimenovana stavka"
 
-#: ../plugins/launcher/launcher-dialog.c:787
+#: ../plugins/launcher/launcher-dialog.c:791
 msgid "Failed to open desktop item editor"
 msgstr "Neuspjeh u otvaranju uređivača stavke radne površine"
 
@@ -1284,7 +1296,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "Pokaži _natpis umjesto ikone"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Show last _used item in panel"
@@ -1304,17 +1316,17 @@ msgstr ""
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Pokretač program sa neobaveznim izbornikom"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Postavke _radnog prostora"
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:428
 msgid "Unable to open the workspace settings"
 msgstr "Nije moguće otvoriti  postavke radnog prostora"
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Radni prostor %d"
@@ -1349,7 +1361,7 @@ msgstr "Prebacivač radnih prostora"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
-msgstr ""
+msgstr "Prebacivanje između virtualnih radnih površina"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "Dots"
@@ -1380,38 +1392,39 @@ msgstr "_Proširi"
 msgid "Adds a separator or space between panel items"
 msgstr "Dodaj razdjelnik ili prostor između stavki ploče"
 
-#: ../plugins/showdesktop/showdesktop.c:193
+#: ../plugins/showdesktop/showdesktop.c:194
 msgid "Restore the minimized windows"
 msgstr "Obnovi minimizirane prozore"
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:196
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimiziraj sve otvorene prozore i pokaži radnu površinu"
+
+#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Pokaži radnu površinu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
 msgstr "sakrij sve prozore i pokaži radnu površinu"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-msgid "Show Desktop"
-msgstr "Pokaži radnu površinu"
-
-#: ../plugins/systray/systray.c:382
+#: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr ""
+msgstr "Nije moguće pokrenuti područje obavijesti"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:850
+#: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:852
+#: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
 msgstr ""
 
-#: ../plugins/systray/systray.c:1005
+#: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Jeste li sigurni da želite očistiti listu znanih programa?"
 
@@ -1426,20 +1439,20 @@ msgstr "Znani programi"
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
 msgid "Notification Area"
-msgstr ""
+msgstr "Područje obavijesti"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
 msgstr "_Maksimalna veličina ikone (px)"
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
-msgstr ""
+msgstr "Područje gdje se pojavljuju ikone obavijesti"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
@@ -1462,85 +1475,89 @@ msgid "Never"
 msgstr "Nikada"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "None, allow drag-and-drop"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr "Obnovi minimizirane prozore na trenutnom _radnom prostoru"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
-msgid "Ro_tate buttons in vertical panel"
-msgstr ""
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
+msgid "Ro_tate buttons in vertical panel"
+msgstr "Ro_tiraj dugmad na okomitoj ploči"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "Show button _labels"
-msgstr ""
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
+msgid "Show button _labels"
+msgstr "Prikaži natpise _dugmadi"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
 msgstr "Pokaži samo _minimizirane prozore"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Pokaži prozore sa _svih radnih prostora ili pogleda"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show windows from all mo_nitors"
 msgstr "Pokaži prozore sa _svih monitora"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "Red _slaganja"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Timestamp"
-msgstr ""
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
+msgid "Timestamp"
+msgstr "Vremenska oznaka"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
 msgstr "Kad je prostor ograničen"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Dugmad prozora"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window _grouping:"
 msgstr "Grupiranje _prozora"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Window title"
 msgstr "Naslov prozora"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr "Mi_nimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr "De_minimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr "Ma_kimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr "_Demaksimiziraj sve"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr "_Zatvori sve"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Prebacivanje između otvorenih prozora koristeći dugmad"
 
 #: ../plugins/windowmenu/windowmenu.c:652
 msgid "Desktop"
@@ -1574,7 +1591,7 @@ msgstr "Strelica"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Raspored dugmeta:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Enable _urgency notification"
@@ -1633,3 +1650,45 @@ msgstr "Prebacivanje između prozora koristeći izbornik"
 
 #~ msgid "_Restart"
 #~ msgstr "_Ponovno pokreni"
+
+#~ msgid "Failed to migrate the existing configuration"
+#~ msgstr "Neuspjelo premještanje postojeće konfiguracije"
+
+#~ msgid "Appeara_nce:"
+#~ msgstr "Izgl_ed"
+
+#~ msgid "Session Menu"
+#~ msgstr "Izbornik sesije"
+
+#~ msgid "_Log Out"
+#~ msgstr "Odjava"
+
+#~ msgid "Are you sure you want to log out?"
+#~ msgstr "Jeste li sigurni da se želite odjaviti?"
+
+#~ msgid "Log Out..."
+#~ msgstr "Odjava..."
+
+#~ msgid "Log _Out..."
+#~ msgstr "Odja_va..."
+
+#~ msgid "L_ock Screen"
+#~ msgstr "Z_aključaj zaslon"
+
+#~ msgid "_Hibernate"
+#~ msgstr "_Hibernacija"
+
+#~ msgid "Sus_pend"
+#~ msgstr "Sus_pendiraj"
+
+#~ msgid "Are you sure you want to restart?"
+#~ msgstr "Jeste li sigurni da želite ponovno pokrenuti?"
+
+#~ msgid "Shut _Down"
+#~ msgstr "Isključi"
+
+#~ msgid "Are you sure you want to shut down?"
+#~ msgstr "Jeste li sigurni da želite iskjlučiti?"
+
+#~ msgid "_Switch windows using the mouse wheel"
+#~ msgstr "_Prebacivanje radnih prostora koristeći kotačić miša"
