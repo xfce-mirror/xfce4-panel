@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-24 10:07+0000\n"
+"POT-Creation-Date: 2011-11-11 05:08+0000\n"
 "PO-Revision-Date: 2010-06-14 11:44+0100\n"
 "Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -38,7 +38,7 @@ msgstr "Tilpas panelet"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
-#: ../migrate/main.c:107
+#: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
 
@@ -618,11 +618,11 @@ msgstr "Øvet"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../migrate/main.c:101
+#: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Velkommen til den første opstart af panelet"
 
-#: ../migrate/main.c:103
+#: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
@@ -630,51 +630,51 @@ msgstr ""
 "Fordi panelet er flyttet til et nyt system for gemme indstillingerne, er det "
 "nødt til at indlæse en frisk basisindstilling."
 
-#: ../migrate/main.c:106
+#: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
 msgstr "Vælg forneden hvilken opsætning du ønsker for den første opstart."
 
-#: ../migrate/main.c:112
+#: ../migrate/main.c:129
 msgid "Migrate old config"
 msgstr "Migrér gamle config"
 
-#: ../migrate/main.c:113
+#: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
 msgstr "Migrér den gamle indstilling 4.6 til Xfconf"
 
-#: ../migrate/main.c:118
+#: ../migrate/main.c:141
 msgid "Use default config"
 msgstr "Brug standard config"
 
-#: ../migrate/main.c:119
+#: ../migrate/main.c:142
 msgid "Load the default configuration"
 msgstr "Indlæs standardindstillingen"
 
-#: ../migrate/main.c:124
+#: ../migrate/main.c:148
 msgid "One empty panel"
 msgstr "Et tomt panel"
 
-#: ../migrate/main.c:125
+#: ../migrate/main.c:149
 msgid "Start with one empty panel"
 msgstr "Begynd med et tomt panel"
 
-#: ../migrate/main.c:138
+#: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
 msgstr "Kunne ikke migrere den gamle panelindstilling"
 
-#: ../migrate/main.c:151
+#: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
 msgstr "Kunne ikke indlæse standardindstillingen"
 
-#: ../migrate/main.c:163
+#: ../migrate/main.c:185
 msgid "Panel config needs migration..."
 msgstr "Panelindstilling skal migreres..."
 
-#: ../migrate/main.c:167
+#: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
 msgstr "Kunne ikke migrere den nuværende panelindstilling"
 
-#: ../migrate/main.c:173
+#: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
 msgstr "Panelindstilling er blevet opdateret."
 
@@ -692,9 +692,8 @@ msgid "Appeara_nce:"
 msgstr "Ud_seende:"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
-#, fuzzy
 msgid "Invert buttons _orientation"
-msgstr "Position af p_ilknap:"
+msgstr "Vend knappernes _retning"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Session Menu"
@@ -703,7 +702,7 @@ msgstr "Sessionsmenu"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Vis en bekræftelsesdialog med 30 sekunders udløbstid for en del af handlingerne."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
@@ -768,12 +767,12 @@ msgstr "_Dvaletilstand"
 
 #: ../plugins/actions/actions.c:186
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Ønsker du at gå i hviletilstand til disken?"
 
 #: ../plugins/actions/actions.c:187
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "Computer går i dvaletilstand om %d sekunder."
 
 #: ../plugins/actions/actions.c:191
 msgid "Suspend"
@@ -785,12 +784,12 @@ msgstr "H_viletilstand"
 
 #: ../plugins/actions/actions.c:193
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Ønsker du at gå i hviletilstand til hukommelsen?"
 
 #: ../plugins/actions/actions.c:194
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Computeren går i dvaletilstand om %d sekunder."
 
 #: ../plugins/actions/actions.c:198
 msgid "Restart"
