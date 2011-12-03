@@ -1,5 +1,4 @@
-# Simplified Chinese translation of the xfce-mcs-plugins package.
-# Copyright (C) 2002-2006 The Xfce development team.
+# Simplified Chinese translation of the xfce-plugins package.
 # This file is distributed under the same license as the xfce4-panel package.
 # Yongtao Yang <yongtao.yang@telia.com>, 2004.
 # Huang Huan <unicon221@gmail.com>, 2006.
@@ -9,23 +8,26 @@
 # Chris K. Zhang <plutino@gmail.com>, 2009.
 # Aron Xu <aronmalache@163.com>, 2009.
 # 微尘 <squeeze@189.cn>, 2010.
+# Chipong Luo <chipong_l@yahoo.com>, 2011.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.7.0\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 10:07+0000\n"
+"POT-Creation-Date: 2011-11-25 17:26+0000\n"
 "PO-Revision-Date: 2010-11-27 21:07+0800\n"
-"Last-Translator: Hunt Xu <huntxu@live.cn>\n"
-"Language-Team: Simplified Chinese <xfce-i18n@xfce.org>\n"
+"Last-Translator: Chipong Luo <chipong_l@yahoo.com>\n"
+"Language-Team: Chinese (simplified) <xfce-i18n@xfce.org>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "基于此 desktop 文件中的信息在面板上添加一个新的启动器"
+msgstr ""
+"基于此桌面文件的信息在面板上添加一个新的启动器"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -33,11 +35,11 @@ msgstr "在面板上创建启动器"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid "Customize the panel"
-msgstr "定制面板"
+msgstr "自定义面板"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
-#: ../migrate/main.c:107
+#: ../migrate/main.c:117
 msgid "Panel"
 msgstr "面板"
 
@@ -49,11 +51,13 @@ msgstr "在线阅读(_R)"
 msgid ""
 "You can read the user manual online. This manual may however not exactly "
 "match your panel version."
-msgstr "你可以在线阅读用户手册。但本手册未必完全适合您当前面板的版本。"
+msgstr ""
+"你可以在线阅读此用户手册。此手册未必完全与您当前"
+"面板的版本匹配。"
 
 #: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
-msgstr "你的电脑上没有安装用户手册"
+msgstr "在您的计算机上没有安装用户手册"
 
 #. display an error message to the user
 #: ../common/panel-utils.c:175
@@ -70,7 +74,7 @@ msgstr "你确认要移除“%s” 吗？"
 #: ../libxfce4panel/xfce-panel-plugin.c:924
 #: ../panel/panel-preferences-dialog.c:1059
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "如果你从面板移除该项目，它将永久消失。"
+msgstr "如果你从面板移除此项目，它将永远消失。"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1084
@@ -98,15 +102,15 @@ msgstr "注销(_O)"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "显示“面板属性”对话框"
+msgstr "显示 ‘面板属性’ 对话框"
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
-msgstr "PANEL-NUMBER"
+msgstr "面板-编号"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
-msgstr "显示“添加新项目”对话框"
+msgstr "显示 ‘添加新项目’ 对话框"
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
@@ -114,15 +118,15 @@ msgstr "保存面板配置"
 
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
-msgstr "添加新插件到面板"
+msgstr "在面板上添加新插件"
 
 #: ../panel/main.c:82
 msgid "PLUGIN-NAME"
-msgstr "PLUGIN-NAME"
+msgstr "面板-名称"
 
 #: ../panel/main.c:83
 msgid "Restart the running panel instance"
-msgstr "重启运行中的面板实例"
+msgstr "重启正在运行的面板实例"
 
 #: ../panel/main.c:84
 msgid "Quit the running panel instance"
@@ -137,7 +141,7 @@ msgstr "启动时不等待窗口管理器"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "显示版本信息然后退出"
+msgstr "列印版本信息后退出"
 
 #. parse context options
 #: ../panel/main.c:250
@@ -147,16 +151,16 @@ msgstr "[参数...]"
 #: ../panel/main.c:257
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "使用 \"%s --help\" 显示用法。"
+msgstr "输入 “%s --help” 获取用法。"
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
-msgstr "Xfce 开发团队，版权所有。"
+msgstr "Xfce 开发团队。保留所有权利。"
 
 #: ../panel/main.c:277
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "请向 <%s> 报告程序漏洞。"
+msgstr "请向 <%s> 报告缺陷。"
 
 #: ../panel/main.c:328
 msgid "There is already a running instance"
@@ -437,8 +441,7 @@ msgstr "项目(_M)"
 msgid "L_ength (%):"
 msgstr "长度(_E) (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Measurements"
 msgstr "测量"
@@ -603,61 +606,61 @@ msgstr "有经验的"
 msgid "Expert"
 msgstr "专家"
 
-#: ../migrate/main.c:101
+#: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "欢迎第一次启动 Xfce 面板程序"
 
-#: ../migrate/main.c:103
+#: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr "因为该面板是从一个备份设置移动到新系统，它必须加载一个新的初始配置"
 
-#: ../migrate/main.c:106
+#: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
 msgstr "请选择下面哪一个是你想设置为第一启动的。"
 
-#: ../migrate/main.c:112
+#: ../migrate/main.c:129
 msgid "Migrate old config"
 msgstr "迁移旧配置"
 
-#: ../migrate/main.c:113
+#: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
 msgstr "迁移旧的 4.6 配置文件到 Xfconf"
 
-#: ../migrate/main.c:118
+#: ../migrate/main.c:141
 msgid "Use default config"
 msgstr "使用默认配置"
 
-#: ../migrate/main.c:119
+#: ../migrate/main.c:142
 msgid "Load the default configuration"
 msgstr "引导默认配置"
 
-#: ../migrate/main.c:124
+#: ../migrate/main.c:148
 msgid "One empty panel"
 msgstr "一个空面板"
 
-#: ../migrate/main.c:125
+#: ../migrate/main.c:149
 msgid "Start with one empty panel"
 msgstr "使用空面板开始"
 
-#: ../migrate/main.c:138
+#: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
 msgstr "迁移旧的面板配置失败"
 
-#: ../migrate/main.c:151
+#: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
 msgstr "引导默认配置失败"
 
-#: ../migrate/main.c:163
+#: ../migrate/main.c:185
 msgid "Panel config needs migration..."
 msgstr "面板配置需要迁移......"
 
-#: ../migrate/main.c:167
+#: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
 msgstr "无法迁移现有的配置"
 
-#: ../migrate/main.c:173
+#: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
 msgstr "面板配置已更新。"
 
@@ -1001,8 +1004,7 @@ msgstr "显示秒(_S)"
 msgid "F_ormat:"
 msgstr "格式(_O)"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "模糊度(_U):"
@@ -1771,48 +1773,3 @@ msgstr "窗口菜单"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "通过菜单在打开的窗口间切换"
-
-#~ msgid "_First button:"
-#~ msgstr "第一按钮(_F)"
-
-#~ msgid "_Second button:"
-#~ msgstr "第二按钮(_S)"
-
-#~ msgid "Disabled"
-#~ msgstr "禁用"
-
-#~ msgid "Log Out Dialog"
-#~ msgstr "登出对话框"
-
-#~ msgid "Use the _Xfce menu"
-#~ msgstr "使用 Xfce 菜单(_X)"
-
-#~ msgid "Failed to remove the desktop file from the config directory"
-#~ msgstr "从配置目录移除桌面文件失败"
-
-#~ msgid "_Number of rows:"
-#~ msgstr "行数(_N):"
-
-#~ msgid "Create a new launcher on the Xfce Panel"
-#~ msgstr "在 Xfce 面板创建一个新启动器"
-
-#~ msgid "Panel Preferences"
-#~ msgstr "面板属性"
-
-#~ msgid "Transparency"
-#~ msgstr "透明度"
-
-#~ msgid "Transparency when the pointer is not hovering the panel."
-#~ msgstr "当鼠标指针不在面板上时透明。"
-
-#~ msgid "Xfce Panel"
-#~ msgstr "Xfce 面板"
-
-#~ msgid "Xfce Menu"
-#~ msgstr "Xfce 菜单"
-
-#~ msgid "C_ompositing"
-#~ msgstr "混合(_O)"
-
-#~ msgid "Failed to open manual"
-#~ msgstr "无法打开显示"
