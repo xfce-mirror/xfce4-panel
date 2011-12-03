@@ -169,11 +169,11 @@ msgstr "已经有一个正在运行的实例"
 #. spawn ourselfs again
 #: ../panel/main.c:378
 msgid "Restarting..."
-msgstr "重新启动..."
+msgstr "正在重启..."
 
 #: ../panel/main.c:393
 msgid "Failed to show the preferences dialog"
-msgstr "无法显示属性对话框"
+msgstr "无法显示首选项对话框"
 
 #: ../panel/main.c:395
 msgid "Failed to show the add new items dialog"
@@ -181,11 +181,11 @@ msgstr "无法显示添加新项目对话框"
 
 #: ../panel/main.c:397
 msgid "Failed to save the panel configuration"
-msgstr "无法保存面板配置"
+msgstr "无法保存面板首选项"
 
 #: ../panel/main.c:399
 msgid "Failed to add a plugin to the panel"
-msgstr "无法添加插件到面板"
+msgstr "无法在面板上添加插件"
 
 #: ../panel/main.c:401
 msgid "Failed to restart the panel"
@@ -197,51 +197,56 @@ msgstr "无法退出面板"
 
 #: ../panel/main.c:405
 msgid "Failed to send D-Bus message"
-msgstr "发送 D-Bus 信息失败"
+msgstr "无法发送 D-Bus 信息"
 
 #: ../panel/main.c:416
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
-"您是否想启动面板程序？如果是的话，请在注销时确认您保存了当前的会话状态，如此"
-"面板程序将会在您下次登录时自动启动。"
+"您要启动面板吗？如果是的话，您一定要在注销时保存"
+"此会话，这样此面板在您下次登录时将自动启动。"
 
 #: ../panel/main.c:419 ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "没有 %s 的运行实例被发现"
+msgstr "没有发现 %s 的正在运行的实例"
 
 #: ../panel/panel-application.c:219
 msgid "Failed to launch the migration application"
-msgstr "无法启动迁移程序"
+msgstr "无法启动迁移应用程序"
 
 #: ../panel/panel-application.c:1597
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "您没有使用任何的会话管理器来启动 X。点击退出将会关闭 X 服务器。"
+msgstr ""
+"您启动了不带会话管理器的 X。点击退出将关闭"
+"此 X 服务器。"
 
 #: ../panel/panel-application.c:1598
 msgid "Are you sure you want to quit the panel?"
-msgstr "你确认要退出面板程序吗？"
+msgstr "你确认要退出此面板吗？"
 
 #: ../panel/panel-application.c:1606
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "无法执行命令  “%s”"
+msgstr "无法执行命令 “%s”"
 
 #: ../panel/panel-dbus-client.c:208
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "指定的插件事件语法不正确。请使用 插件名:事件名[:类型:值]。"
+msgstr ""
+"指定了无效的插件事件句法。使用 "
+"插件-名称:名称[:类型:值]。"
 
 #: ../panel/panel-dbus-client.c:241
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
-"\"%s\" 不是一个有效类型。有效的类型包括 bool、double、int、string 和 uint。"
+"无效的提示类型 “%s”。有效的类型是 bool、double、"
+"int、string 和 uint。"
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
@@ -257,7 +262,8 @@ msgstr ""
 "Hunt Xu <huntxu@live.cn>, 2008, 2009, 2010.\n"
 "Chris K. Zhang <plutino@gmail.com>, 2009.\n"
 "Aron Xu <aronmalache@163.com>, 2009.\n"
-"微尘 <squeeze@189.cn>, 2010."
+"微尘 <squeeze@189.cn>, 2010.\n"
+"Chipong Luo <chipong_l@yahoo.com>, 2011."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -266,7 +272,7 @@ msgstr "添加新项目"
 
 #: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
-msgstr "请为新插件选择一个面板:"
+msgstr "请为新插件选择面板："
 
 #. I18N: panel combo box in the preferences dialog
 #: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:775
@@ -278,7 +284,9 @@ msgstr "面板 %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "因为面板运行于安全模式下，作为普通用户，您不被允许修改面板配置。"
+msgstr ""
+"因为面板在 kiosk 模式下运行，作为普通用户不允许"
+"您更改面板配置。"
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -290,21 +298,21 @@ msgstr "添加新项目"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
-msgstr "添加新插件到面板"
+msgstr "在面板上添加新插件"
 
 #: ../panel/panel-item-dialog.c:214
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "_Search:"
-msgstr "搜索(_S):"
+msgstr "搜索(_S)："
 
 #: ../panel/panel-item-dialog.c:222
 msgid "Enter search phrase here"
-msgstr "在此输入搜索词组"
+msgstr "在此输入搜索词语"
 
 #: ../panel/panel-plugin-external.c:426
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "插件 \"%s\" 意外丢失，是否重新启动它？"
+msgstr "插件 “%s” 意外丢失，您要重启它吗？"
 
 #: ../panel/panel-plugin-external.c:428
 #, c-format
