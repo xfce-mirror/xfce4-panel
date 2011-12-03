@@ -73,34 +73,34 @@ migrate_config_session_menu (gpointer key,
 
 
 
-static gint
+static const gchar *
 migrate_config_action_48_convert (gint action)
 {
   switch (action)
     {
     case 1: /* ACTION_LOG_OUT_DIALOG */
-      return 3; /* ACTION_TYPE_LOGOUT_DIALOG */
+      return "+logout-dialog";
 
     case 2: /* ACTION_LOG_OUT */
-      return 2; /* ACTION_TYPE_LOGOUT */
+      return "+logout";
 
     case 3: /* ACTION_LOCK_SCREEN */
-      return 5; /* ACTION_TYPE_LOCK_SCREEN */
+      return "+lock-screen";
 
     case 4: /* ACTION_SHUT_DOWN */
-      return 9; /* ACTION_TYPE_SHUTDOWN */
+      return "+shutdown";
 
     case 5: /* ACTION_RESTART */
-      return 8; /* ACTION_TYPE_RESTART */
+      return "+restart";
 
     case 6: /* ACTION_SUSPEND */
-      return 7; /* ACTION_TYPE_SUSPEND */
+      return "+suspend";
 
     case 7: /* ACTION_HIBERNATE */
-      return 6; /* ACTION_TYPE_HIBERNATE */
+      return "+hibernate";
 
     default: /* ACTION_DISABLED */
-      return -4; /* ACTION_TYPE_SWITCH_USER */
+      return "-switch-user"; /* something else */
     }
 }
 
@@ -114,8 +114,10 @@ migrate_config_action_48 (gpointer key,
   const GValue *gvalue = value;
   const gchar  *prop = key;
   gchar         str[64];
-  gint          first_action;
-  gint          second_action;
+  gint          first_action_int;
+  gint          second_action_int;
+  const gchar  *first_action;
+  const gchar  *second_action;
 
   /* skip non root plugin properties */
   if (!G_VALUE_HOLDS_STRING (gvalue)
@@ -125,18 +127,18 @@ migrate_config_action_48 (gpointer key,
 
   /* read and remove the old properties */
   g_snprintf (str, sizeof (str), "%s/first-action", prop);
-  first_action = xfconf_channel_get_uint (channel, str, 0) + 1;
+  first_action_int = xfconf_channel_get_uint (channel, str, 0) + 1;
   xfconf_channel_reset_property (channel, str, FALSE);
 
   g_snprintf (str, sizeof (str), "%s/second-action", prop);
-  second_action = xfconf_channel_get_uint (channel, str, 0);
+  second_action_int = xfconf_channel_get_uint (channel, str, 0);
   xfconf_channel_reset_property (channel, str, FALSE);
 
   /* corrections for new plugin */
-  if (first_action == 0)
-    first_action = 1;
-  if (first_action == second_action)
-    second_action = 0;
+  if (first_action_int == 0)
+    first_action_int = 1;
+  if (first_action_int == second_action_int)
+    second_action_int = 0;
 
   /* set appearance to button mode */
   g_snprintf (str, sizeof (str), "%s/appearance", prop);
@@ -144,17 +146,17 @@ migrate_config_action_48 (gpointer key,
 
   /* set orientation */
   g_snprintf (str, sizeof (str), "%s/invert-orientation", prop);
-  xfconf_channel_set_bool (channel, str, second_action > 0);
+  xfconf_channel_set_bool (channel, str, second_action_int > 0);
 
   /* convert the old value to new ones */
-  first_action = migrate_config_action_48_convert (first_action);
-  second_action = migrate_config_action_48_convert (second_action);
+  first_action = migrate_config_action_48_convert (first_action_int);
+  second_action = migrate_config_action_48_convert (second_action_int);
 
   /* set the visible properties */
   g_snprintf (str, sizeof (str), "%s/items", prop);
   xfconf_channel_set_array (channel, str,
-                            G_TYPE_INT, &first_action,
-                            G_TYPE_INT, &second_action,
+                            G_TYPE_STRING, &first_action,
+                            G_TYPE_STRING, &second_action,
                             G_TYPE_INVALID);
 }
 
