@@ -1,26 +1,25 @@
-# translation of xfce4-panel.master.untitled.po to Icelandic
+# translation of is.po to Icelandic
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# Sveinn í Felli <sveinki@nett.is>, 2010.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel.master.untitled\n"
+"Project-Id-Version: is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-01 16:42+0000\n"
-"PO-Revision-Date: 2010-05-03 12:38+0000\n"
+"POT-Creation-Date: 2011-01-16 17:01+0100\n"
+"PO-Revision-Date: 2011-12-03 13:28+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
-"Language-Team: Icelandic <rglug@rglug.org>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: is\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
 msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:2
@@ -32,27 +31,27 @@ msgid "Customize the panel"
 msgstr ""
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
+#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
 #: ../migrate/main.c:84
 msgid "Panel"
-msgstr ""
+msgstr "Spjald"
 
-#: ../common/panel-utils.c:157
+#: ../common/panel-utils.c:155
 msgid "_Read Online"
 msgstr "_Lesa á netinu"
 
-#: ../common/panel-utils.c:158
+#: ../common/panel-utils.c:156
 msgid ""
 "You can read the user manual online. This manual may however not exactly "
 "match your panel version."
 msgstr ""
 
-#: ../common/panel-utils.c:160
+#: ../common/panel-utils.c:158
 msgid "The user manual is not installed on your computer"
-msgstr "Notanda handbókinn er ekki uppsett á tölvunni þinni"
+msgstr ""
 
 #. display an error message to the user
-#: ../common/panel-utils.c:175
+#: ../common/panel-utils.c:171
 msgid "Failed to open the documentation browser"
 msgstr ""
 
@@ -61,7 +60,7 @@ msgstr ""
 #: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Ertu viss að þú viljir eyða \"%s\"?"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin.c:894
 #: ../panel/panel-preferences-dialog.c:1051
@@ -78,176 +77,166 @@ msgid "Pane_l"
 msgstr ""
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
+#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
 msgid "Add _New Items..."
-msgstr "Bæta við _Nýju atriði..."
+msgstr "Bæta við _nýjum atriðum..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "_Kjörstillingar spjalds..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
+#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
 msgid "Log _Out"
-msgstr "Skrá Út"
+msgstr "_Skrá út"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr ""
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr ""
 
-#: ../panel/main.c:80
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr ""
 
-#: ../panel/main.c:81
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr ""
 
-#: ../panel/main.c:82
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr ""
 
-#: ../panel/main.c:82
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr ""
 
-#: ../panel/main.c:83
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr ""
 
-#: ../panel/main.c:84
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr ""
 
-#: ../panel/main.c:85
-msgid "Do not wait for a window manager on startup"
-msgstr ""
-
-#: ../panel/main.c:86
+#: ../panel/main.c:84
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
-#, fuzzy
 msgid "Print version information and exit"
 msgstr "Prenta upplýsingar um útgáfu og hætta"
 
 #. parse context options
-#: ../panel/main.c:250
+#: ../panel/main.c:240
 msgid "[ARGUMENTS...]"
 msgstr ""
 
-#: ../panel/main.c:257
+#: ../panel/main.c:247
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr ""
 
-#: ../panel/main.c:276
+#: ../panel/main.c:266
 msgid "The Xfce development team. All rights reserved."
-msgstr "Xfce þróunnar liðið. Öll réttindi áskilin."
+msgstr "Xfce þróunarteymið. Allur réttur áskilinn."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:267
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Vinsamlegast sendu alla galla til <%s>."
+msgstr "Tilkynntu villur til <%s>."
 
-#: ../panel/main.c:328
+#: ../panel/main.c:318
 msgid "There is already a running instance"
 msgstr ""
 
 #. spawn ourselfs again
-#: ../panel/main.c:378
+#: ../panel/main.c:367
 msgid "Restarting..."
-msgstr "Ræsa á ný..."
+msgstr ""
 
-#: ../panel/main.c:393
+#: ../panel/main.c:382
 msgid "Failed to show the preferences dialog"
 msgstr ""
 
-#: ../panel/main.c:395
+#: ../panel/main.c:384
 msgid "Failed to show the add new items dialog"
 msgstr ""
 
-#: ../panel/main.c:397
+#: ../panel/main.c:386
 msgid "Failed to save the panel configuration"
 msgstr ""
 
-#: ../panel/main.c:399
+#: ../panel/main.c:388
 msgid "Failed to add a plugin to the panel"
 msgstr ""
 
-#: ../panel/main.c:401
+#: ../panel/main.c:390
 msgid "Failed to restart the panel"
 msgstr ""
 
-#: ../panel/main.c:403
+#: ../panel/main.c:392
 msgid "Failed to quit the panel"
 msgstr ""
 
-#: ../panel/main.c:405
+#: ../panel/main.c:394
 msgid "Failed to send D-Bus message"
 msgstr ""
 
-#: ../panel/main.c:416
+#: ../panel/main.c:405
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:419 ../panel/main.c:433
+#: ../panel/main.c:408 ../panel/main.c:422
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:217
+#: ../panel/panel-application.c:196
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 
-#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
 msgid "Are you sure you want to quit the panel?"
 msgstr ""
 
-#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Mistókst að framkvæma skipunina \"%s\""
-
-#: ../panel/panel-dbus-client.c:208
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:241
+#: ../panel/panel-dbus-client.c:209
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+
+#: ../panel/panel-dbus-client.c:242
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:76
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Spjald fyrir Xfce skjáborðsumhverfið"
 
 #: ../panel/panel-dialogs.c:81
-#, fuzzy
 msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Baldur https://launchpad.net/~baldurpet"
+msgstr "Sveinn í Felli"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
-msgstr "Bæta Við Nýju Atriði"
+msgstr ""
 
 #: ../panel/panel-dialogs.c:136
 msgid "Please choose a panel for the new plugin:"
@@ -271,7 +260,7 @@ msgstr ""
 
 #: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
-msgstr "Bæta við Nýju Atriði"
+msgstr ""
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add new plugins to the panel"
@@ -279,21 +268,19 @@ msgstr ""
 
 #: ../panel/panel-item-dialog.c:213
 #: ../plugins/launcher/launcher-dialog.glade.h:23
-#, fuzzy
 msgid "_Search:"
 msgstr "_Leita:"
 
 #: ../panel/panel-item-dialog.c:221
-#, fuzzy
 msgid "Enter search phrase here"
 msgstr "Sláðu hér inn leitarstreng"
 
-#: ../panel/panel-plugin-external.c:426
+#: ../panel/panel-plugin-external.c:420
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 
-#: ../panel/panel-plugin-external.c:428
+#: ../panel/panel-plugin-external.c:422
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -302,21 +289,20 @@ msgid ""
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.c:453
-#, fuzzy
 msgid "Automatic"
 msgstr "Sjálfvirkt"
 
 #. I18N: screen name in the output selector
 #: ../panel/panel-preferences-dialog.c:472
-#, fuzzy, c-format
+#, c-format
 msgid "Screen %d"
-msgstr "Skjár %d"
+msgstr "Kerfisskjár %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:498
 #, c-format
 msgid "Monitor %d"
-msgstr ""
+msgstr "Skjátæki %d"
 
 #: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
@@ -352,7 +338,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "A_utomatically increase the length"
-msgstr "A_uka lengd sjálfkrafa"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -369,44 +355,40 @@ msgid ""
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Útlit"
+msgstr "Út_lit"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:7
-#, fuzzy
 msgid "Background"
 msgstr "Bakgrunnur"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
-msgstr "Bakgrunns mynd"
+msgstr "Bakgrunnsmynd"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr "L_itur:"
+msgstr "_Litur:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
-msgstr ""
+msgstr "B_irting"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
-msgstr "Breyta völdu atriði"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:10
-#, fuzzy
 msgid "General"
 msgstr "Almennt"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
-#, fuzzy
 msgid "Horizontal"
 msgstr "Lárétt"
 
@@ -419,22 +401,20 @@ msgstr "At_riði"
 msgid "L_ength (%):"
 msgstr "L_engd (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:18
-#, fuzzy
 msgid "Measurements"
-msgstr "Mælingar"
+msgstr "Mæling"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
-msgstr "Færa valið atriði niður um eina röð"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
-msgstr "Færa valið atriði upp um eina röð"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "None (use system style)"
@@ -442,11 +422,11 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "O_utput:"
-msgstr ""
+msgstr "Útta_k:"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Opacity"
-msgstr "Gegnsæi"
+msgstr "Ógegnsæi"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Pick a Panel Color"
@@ -454,7 +434,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Remove currently selected item"
-msgstr "Eyða völdu atriði"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Remove the currently selected panel"
@@ -462,7 +442,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Select A Background Image"
-msgstr "Velja Bakgrunns Mynd"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
@@ -475,8 +455,7 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
+msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:32
@@ -491,7 +470,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Solid color"
-msgstr ""
+msgstr "Heillitur"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Span mo_nitors"
@@ -510,18 +489,17 @@ msgid ""
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:38
-#, fuzzy
 msgid "Vertical"
 msgstr "Lóðrétt"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Alpha:"
-msgstr ""
+msgstr "_Alfa gegnsæisrás:"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr ""
+msgstr "_Byrja:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_File:"
@@ -530,24 +508,22 @@ msgstr "_Skrá:"
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
-msgstr ""
+msgstr "_Fara:"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_Lock panel"
-msgstr ""
+msgstr "_Læsa spjaldi"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
-#, fuzzy
 msgid "_Orientation:"
-msgstr "_Snúningur:"
+msgstr "St_efna:"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Size (pixels):"
-msgstr "_Stærð (pixlar):"
+msgstr "_Stærð (dílar):"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/separator/separator-dialog.glade.h:8
-#, fuzzy
 msgid "_Style:"
 msgstr "_Stíll:"
 
@@ -599,11 +575,11 @@ msgstr ""
 
 #: ../migrate/main.c:95
 msgid "Use default config"
-msgstr "Nota sjálfgefnar stillingar"
+msgstr ""
 
 #: ../migrate/main.c:96
 msgid "Load the default configuration"
-msgstr "Hlaða inn sjálfgefnum stillingum"
+msgstr ""
 
 #: ../migrate/main.c:102
 msgid "One empty panel"
@@ -624,10 +600,9 @@ msgstr ""
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Aðgerðahnappar"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
 msgid "Button Actions"
 msgstr "Hnappaaðgerðir"
 
@@ -637,42 +612,37 @@ msgstr "_Fyrsti hnappur:"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Second button:"
-msgstr "_Annar hnappur:"
+msgstr "_Seinni hnappur:"
 
 #: ../plugins/actions/actions.c:108
-#, fuzzy
 msgid "Disabled"
-msgstr "Óvirkt"
+msgstr "Aftengt"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
-msgstr "Skrá Út Dálkur"
+msgstr "Útskráningargluggi"
 
 #: ../plugins/actions/actions.c:110
 msgid "Log Out"
-msgstr "Skrá Út"
+msgstr "Útskráning"
 
 #: ../plugins/actions/actions.c:111
 msgid "Lock Screen"
-msgstr "Læsa Skjá"
+msgstr "Læsa skjá"
 
 #: ../plugins/actions/actions.c:112
-#, fuzzy
 msgid "Shut Down"
 msgstr "Slökkva á tölvunni"
 
 #: ../plugins/actions/actions.c:113
-#, fuzzy
 msgid "Restart"
 msgstr "Endurræsa"
 
 #: ../plugins/actions/actions.c:114
-#, fuzzy
 msgid "Suspend"
 msgstr "Setja í bið"
 
 #: ../plugins/actions/actions.c:115
-#, fuzzy
 msgid "Hibernate"
 msgstr "Leggja í dvala"
 
@@ -688,7 +658,6 @@ msgstr ""
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#, fuzzy
 msgid "Appearance"
 msgstr "Útlit"
 
@@ -697,27 +666,27 @@ msgstr "Útlit"
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
-msgstr ""
+msgstr "Forritavalmynd"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
-msgstr "Hnappa _titill:"
+msgstr "Hnappa_titill:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr "Brey_ta Valmynd"
+msgstr "_Breytingavalmynd"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
-msgstr "Valmyndar Skrá"
+msgstr "Valmyndarskrá"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr "Valmyndar _Skrá:"
+msgstr "_Valmyndarskrá:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
-msgstr "Velja Valmyndar Skrá"
+msgstr "Veldu valmyndarskrá"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
@@ -735,7 +704,7 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr "Sýna _tákn í valmynd"
+msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
@@ -747,7 +716,6 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
 msgid "_Icon:"
 msgstr "Táknm_ynd:"
 
@@ -758,23 +726,22 @@ msgstr ""
 #: ../plugins/applicationsmenu/applicationsmenu.c:475
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
-msgstr "Velja Tákn"
+msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:513
 #: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2289
+#: ../plugins/launcher/launcher.c:2264
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr ""
+msgstr "Gat ekki keyrt skipun \"%s\"."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1010
-#, fuzzy
 msgid "No applications found"
 msgstr "Engin forrit fundust"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1033
 msgid "Failed to load the applications menu"
-msgstr "Mistókst að hlaða inn valmynd forrita"
+msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -783,7 +750,6 @@ msgstr ""
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
-#, fuzzy
 msgid "Usage:"
 msgstr "Notkun:"
 
@@ -791,12 +757,11 @@ msgstr "Notkun:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr "VALKOSTUR"
+msgstr "VALKOSTIR"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
-#, fuzzy
 msgid "Options:"
 msgstr "Valkostir:"
 
@@ -809,9 +774,8 @@ msgstr ""
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "Sýna hjálpar stillingar"
+msgstr "Sýna hjálparmöguleika"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
@@ -823,81 +787,74 @@ msgstr ""
 
 #: ../plugins/clock/clock.c:719
 msgid "Custom Format"
-msgstr ""
+msgstr "Sérsnið"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
-msgstr "24-_tíma klukka"
+msgstr "24 _klst. klukka"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
-msgstr ""
+msgstr "Skífuklukka"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
-#, fuzzy
 msgid "Binary"
-msgstr "Tvíundakerfi"
+msgstr "Tvíundakerfis"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
-#, fuzzy
 msgid "Clock"
 msgstr "Klukka"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
-#, fuzzy
 msgid "Clock Options"
 msgstr "Eiginleikar klukku"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Digital"
-msgstr ""
+msgstr "Stafræn"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
-msgstr "Sýna _sekúndur"
+msgstr "_Sýna sekúndur"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
-msgstr ""
+msgstr "F_orsnið:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Ó_nákvæmni:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:13
-#, fuzzy
 msgid "Fuzzy"
-msgstr "Loðið"
+msgstr "Ónákvæm"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
-#, fuzzy
 msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr "Sýn_a AM/PM"
+msgstr "Sýna AM/_PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
-msgstr "Sýna _ramma"
+msgstr "Sýna ra_mma."
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
-msgstr "Sýna _óvirka punkta"
+msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:18
-#, fuzzy
 msgid "Show gri_d"
-msgstr "Sý_na rúður"
+msgstr "Sýna _hnitanet"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
@@ -914,201 +871,192 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr ""
+msgstr "_Framsetning:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
-msgstr ""
+msgstr "S_nið ábendinga:"
 
 #: ../plugins/clock/clock-fuzzy.c:86
-#, fuzzy
 msgid "Night"
 msgstr "Nótt"
 
 #: ../plugins/clock/clock-fuzzy.c:87
-#, fuzzy
 msgid "Early morning"
 msgstr "Snemma morguns"
 
 #: ../plugins/clock/clock-fuzzy.c:88
-#, fuzzy
 msgid "Morning"
 msgstr "Morgunn"
 
 #: ../plugins/clock/clock-fuzzy.c:89
-#, fuzzy
 msgid "Almost noon"
-msgstr "Fyrir hádegi"
+msgstr "Næstum hádegi"
 
 #: ../plugins/clock/clock-fuzzy.c:90
-#, fuzzy
 msgid "Noon"
 msgstr "Hádegi"
 
 #: ../plugins/clock/clock-fuzzy.c:91
-#, fuzzy
 msgid "Afternoon"
 msgstr "Eftirmiðdagur"
 
 #: ../plugins/clock/clock-fuzzy.c:92
-#, fuzzy
 msgid "Evening"
 msgstr "Kvöld"
 
 #: ../plugins/clock/clock-fuzzy.c:93
-#, fuzzy
 msgid "Late evening"
 msgstr "Síðkvöld"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:100
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%0 o'clock"
 msgstr "á slaginu %0"
 
 #: ../plugins/clock/clock-fuzzy.c:101
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "five past %0"
 msgstr "fimm mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ten past %0"
 msgstr "tíu mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "quarter past %0"
 msgstr "korter yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:104
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty past %0"
 msgstr "tuttugu mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty five past %0"
 msgstr "tuttuguogfimm mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "half past %0"
 msgstr "þrjátíu mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:107
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty five to %1"
 msgstr "tuttuguogfimm mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty to %1"
 msgstr "tuttugu mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "quarter to %1"
 msgstr "korter í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ten to %1"
 msgstr "tíu mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "five to %1"
 msgstr "fimm mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%1 o'clock"
 msgstr "Klukkan er %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
 #: ../plugins/clock/clock-fuzzy.c:119
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "á slaginu %0"
 
 #: ../plugins/clock/clock-fuzzy.c:120
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "fimm mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:121
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "tíu mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:122
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "korter yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:123
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "tuttugu mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:124
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "tuttuguogfimm mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:125
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "þrjátíu mínútur yfir %0"
 
 #: ../plugins/clock/clock-fuzzy.c:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "tuttuguogfimm mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:127
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "tuttugu mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "korter í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "tíu mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:130
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "fimm mínútur í %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "Klukkan er %1"
 
 #: ../plugins/clock/clock-fuzzy.c:136
-#, fuzzy
 msgid "one"
 msgstr "eitt"
 
@@ -1137,7 +1085,6 @@ msgid "seven"
 msgstr "sjö"
 
 #: ../plugins/clock/clock-fuzzy.c:143
-#, fuzzy
 msgid "eight"
 msgstr "átta"
 
@@ -1150,24 +1097,16 @@ msgid "ten"
 msgstr "tíu"
 
 #: ../plugins/clock/clock-fuzzy.c:146
-#, fuzzy
 msgid "eleven"
 msgstr "ellefu"
 
 #: ../plugins/clock/clock-fuzzy.c:147
-#, fuzzy
 msgid "twelve"
 msgstr "tólf"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
 msgstr "Hvað er klukkan?"
-
-#: ../plugins/directorymenu/directorymenu.c:243
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-msgid "Directory Menu"
-msgstr ""
 
 #: ../plugins/directorymenu/directorymenu.c:550
 #, c-format
@@ -1189,20 +1128,23 @@ msgstr ""
 msgid "Failed to launch default application for \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:697
+#: ../plugins/directorymenu/directorymenu.c:696
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:770
-#, fuzzy
+#: ../plugins/directorymenu/directorymenu.c:769
 msgid "Open Folder"
 msgstr "Opna möppu"
 
-#: ../plugins/directorymenu/directorymenu.c:781
-#, fuzzy
+#: ../plugins/directorymenu/directorymenu.c:780
 msgid "Open in Terminal"
 msgstr "Opna í skjáhermi"
+
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Directory Menu"
+msgstr "Möppuvalmynd"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1218,66 +1160,59 @@ msgstr ""
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-#, fuzzy
 msgid "Filtering"
 msgstr "Síun"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#, fuzzy
 msgid "Select A Directory"
 msgstr "Veldu möppu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid "Show _hidden files"
-msgstr ""
+msgstr "Sýna _faldar skrár"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
-msgstr ""
+msgstr "_Grunnmappa:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr ""
+msgstr "Skráa_mynstur"
 
-#: ../plugins/launcher/launcher.c:405
-msgid "Open launcher menu"
-msgstr ""
-
-#: ../plugins/launcher/launcher.c:1568
+#: ../plugins/launcher/launcher.c:1555
 msgid "Unnamed Item"
-msgstr "Ónefnt Atriði"
+msgstr "Nafnlaust atriði"
 
-#: ../plugins/launcher/launcher.c:1709
+#: ../plugins/launcher/launcher.c:1696
 msgid "No items"
-msgstr "Engir hlutir"
+msgstr "Engin atriði"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:740
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Ef þú eyðir atriði, verður það óaðgengilegt"
+msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:745
+#: ../plugins/launcher/launcher-dialog.c:741
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Ertu viss að þú viljir eyða \"%s\"?"
+msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:746
+#: ../plugins/launcher/launcher-dialog.c:742
 msgid "Unnamed item"
-msgstr "Ónefnt atriði"
+msgstr "Nafnlaust atriði"
 
-#: ../plugins/launcher/launcher-dialog.c:791
+#: ../plugins/launcher/launcher-dialog.c:787
 msgid "Failed to open desktop item editor"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add a new empty item"
-msgstr "Bæta við nýju tómu atriði"
+msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add one or more existing items to the launcher"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
-#, fuzzy
 msgid "Advanced"
 msgstr "Nánar"
 
@@ -1287,11 +1222,11 @@ msgstr "Sjálfgefið"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Delete the currently selected item"
-msgstr "Eyða völdum atriðum"
+msgstr "Eyða valda atriðinu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "_Gera ábendingar óvirkar"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "East"
@@ -1299,16 +1234,14 @@ msgstr "Austur"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Inside Button"
-msgstr ""
+msgstr "Innan í hnapp"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
-#, fuzzy
 msgid "Launcher"
 msgstr "Ræsir"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
-#, fuzzy
 msgid "North"
 msgstr "Norður"
 
@@ -1331,7 +1264,6 @@ msgid "Show last _used item in panel"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
 msgid "South"
 msgstr "Suður"
 
@@ -1341,34 +1273,33 @@ msgstr "Vestur"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "_Arrow button position:"
-msgstr ""
+msgstr "St_aðsetning örvarhnapps:"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
 msgstr ""
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
-msgstr ""
+msgstr "_Stillingar vinnusvæða..."
 
-#: ../plugins/pager/pager.c:428
+#: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
 msgstr ""
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
-#, fuzzy, c-format
+#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#, c-format
 msgid "Workspace %d"
 msgstr "Vinnusvæði %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
-#, fuzzy
 msgid "Behaviour"
 msgstr "Hegðun"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Number of _rows:"
-msgstr ""
+msgstr "Fjöldi _raða:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
@@ -1386,117 +1317,104 @@ msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Vinnusvæðaflettir"
+msgstr "Vinnusvæðaskiptir"
 
 #: ../plugins/pager/pager.desktop.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
 msgstr "Skiptir milli sýndarskjáborða"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
-#, fuzzy
 msgid "Dots"
 msgstr "Punktar"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
-msgstr ""
+msgstr "Haldfang"
 
 #: ../plugins/separator/separator-dialog.glade.h:4
-#, fuzzy
 msgid "New Line"
 msgstr "Ný lína"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 #: ../plugins/separator/separator.desktop.in.h:2
-#, fuzzy
 msgid "Separator"
-msgstr "Aðskiljari"
+msgstr "Aðgreinir"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
 msgid "Transparent"
 msgstr "Gegnsætt"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
-msgstr ""
+msgstr "_Víkka"
 
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
 msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:194
+#: ../plugins/showdesktop/showdesktop.c:193
 msgid "Restore the minimized windows"
-msgstr ""
+msgstr "Endurheimta lágmarkaða glugga"
 
-#: ../plugins/showdesktop/showdesktop.c:196
+#: ../plugins/showdesktop/showdesktop.c:194
 msgid "Minimize all open windows and show the desktop"
-msgstr ""
-
-#: ../plugins/showdesktop/showdesktop.c:199
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-#, fuzzy
-msgid "Show Desktop"
-msgstr "Sýna skjáborðið"
+msgstr "Lágmarka alla glugga og sýna skjáborðið"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
 msgstr "Fela alla glugga og sýna skjáborðið"
 
-#: ../plugins/systray/systray.c:398
-#, fuzzy
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Show Desktop"
+msgstr "Sýna skjáborðið"
+
+#: ../plugins/systray/systray.c:382
 msgid "Unable to start the notification area"
-msgstr "Svæðið þar sem tilkynningatáknmyndir birtast"
+msgstr "Get ekki ræst svæðið þar sem tilkynningatáknmyndir birtast"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:868
+#: ../plugins/systray/systray.c:850
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:870
+#: ../plugins/systray/systray.c:852
 msgid "The notification area lost selection"
 msgstr ""
 
-#: ../plugins/systray/systray.c:1023
+#: ../plugins/systray/systray.c:1005
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
+msgstr "Ertu viss um að þú viljir hreinsa listann með þekktum forritum?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
-msgstr ""
+msgstr "Hreinsa _lista með þekktum forritum"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
 msgid "Known Applications"
 msgstr "Þekkt forrit"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
-#, fuzzy
 msgid "Notification Area"
 msgstr "Tilkynningasvæði"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
-msgstr "Hámarks stærð tákna (px):"
+msgstr "Há_marksstærð táknmynda (mynddílar):"
 
-#: ../plugins/systray/systray-manager.c:404
+#: ../plugins/systray/systray-manager.c:406
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
 msgstr "Svæðið þar sem tilkynningatáknmyndir birtast"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
-#, fuzzy
 msgid "Always"
 msgstr "Alltaf"
 
@@ -1506,179 +1424,157 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Hópa titil og tímamerki"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr "Hóps titill og glugga titill"
+msgstr "Hópa titil og gluggatitil"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
-#, fuzzy
 msgid "Never"
 msgstr "Aldrei"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "None, allow drag-and-drop"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Ro_tate buttons in vertical panel"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr ""
+msgstr "Sýna _flata hnappa"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+msgid "Show _handle"
+msgstr "Sýna haldfang"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "Show _handle"
-msgstr ""
+msgid "Show button _labels"
+msgstr "Sýna _hnappamerki"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show button _labels"
-msgstr ""
+msgid "Show only _minimized windows"
+msgstr "Sýna einungis _lágmarkaða glugga"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
-msgid "Show only _minimized windows"
-msgstr ""
+msgid "Show windows from _all workspaces or viewports"
+msgstr "Sýna glugga frá öllum vinnusvæðum eða skjásvæðum"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
-msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgid "Show windows from all mo_nitors"
+msgstr "Sýna _glugga frá öllum skjám"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Show windows from all mo_nitors"
-msgstr ""
+msgid "Sorting _order:"
+msgstr "_Röðun:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Sorting _order:"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-#, fuzzy
 msgid "Timestamp"
 msgstr "Tímastimpill"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
-msgstr ""
+msgstr "Þegar pláss er takmarkað"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
-msgstr "Glugga Hnappar"
+msgstr "Gluggahnappar"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+msgid "Window _grouping:"
+msgstr "_Hópun glugga:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window _grouping:"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
-#, fuzzy
 msgid "Window title"
 msgstr "Gluggatitill"
 
-#: ../plugins/tasklist/tasklist-widget.c:3176
-#, fuzzy
+#: ../plugins/tasklist/tasklist-widget.c:3012
 msgid "Mi_nimize All"
-msgstr "_Minnka alla glugga"
+msgstr "_Lágmarka alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3185
+#: ../plugins/tasklist/tasklist-widget.c:3021
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Stæ_kka alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3191
-#, fuzzy
+#: ../plugins/tasklist/tasklist-widget.c:3027
 msgid "Ma_ximize All"
-msgstr "St_ækka alla glugga"
+msgstr "_Hámarka alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3200
+#: ../plugins/tasklist/tasklist-widget.c:3036
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "_Minnka alla"
 
-#: ../plugins/tasklist/tasklist-widget.c:3210
-#, fuzzy
+#: ../plugins/tasklist/tasklist-widget.c:3046
 msgid "_Close All"
 msgstr "Loka _öllum gluggum"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
-#, fuzzy
 msgid "Switch between open windows using buttons"
 msgstr "Skipta á milli opinna glugga með hnöppum"
 
 #: ../plugins/windowmenu/windowmenu.c:652
-#, fuzzy
 msgid "Desktop"
 msgstr "Skjáborð"
 
 #: ../plugins/windowmenu/windowmenu.c:1243
-#, fuzzy
 msgid "No Windows"
 msgstr "Engir gluggar"
 
 #: ../plugins/windowmenu/windowmenu.c:1258
 msgid "Urgent Windows"
-msgstr ""
+msgstr "Áríðandi gluggar"
 
 #: ../plugins/windowmenu/windowmenu.c:1300
 msgid "Add Workspace"
-msgstr "Bæta við Vinnusvæði"
+msgstr "Bæta við vinnusvæði"
 
 #: ../plugins/windowmenu/windowmenu.c:1320
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Eyða Vinnusvæði \"%s\""
+msgstr "Fjarlægja við vinnusvæði \"%s\""
 
 #: ../plugins/windowmenu/windowmenu.c:1322
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Eyða Vinnusvæði %d"
+msgstr "Fjarlægja við vinnusvæði %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-#, fuzzy
 msgid "Arrow"
 msgstr "Ör"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Framsetning hnappa:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Enable _urgency notification"
-msgstr ""
+msgstr "Virkja áríðandi tilkynningar"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Icon"
 msgstr "Táknmynd"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr ""
+msgstr "Sýna glugga frá ö_llum vinnusvæðum"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
-msgstr ""
+msgstr "_Birta heiti vinnusvæða"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"
-msgstr ""
+msgstr "Birta _vinnusvæðaaðgerðir"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-#, fuzzy
 msgid "Window Menu"
 msgstr "Gluggavalmynd"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
-#, fuzzy
 msgid "Switch between open windows using a menu"
 msgstr "Skipta á milli opinna glugga með valmynd"
 
-#~ msgid "Transparency"
-#~ msgstr "Gegnsæi"
-
-#~ msgid "_Restart"
-#~ msgstr "_Endurræsa"
