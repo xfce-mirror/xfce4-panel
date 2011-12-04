@@ -321,8 +321,9 @@ msgid ""
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr ""
-"此插件在过去的 %d 秒重启了不止一次。如果您点击运行，面板程序将会尝试重启该插"
-"件，否则，该插件将会永久从面板上移除。"
+"此插件在过去的 %d 秒内重启了不止一次。如果您"
+"点击执行，面板会尝试重启此插件，否则会永远从"
+"面板上移除它。"
 
 #: ../panel/panel-preferences-dialog.c:460
 msgid "Automatic"
@@ -342,7 +343,7 @@ msgstr "显示器 %d"
 
 #: ../panel/panel-preferences-dialog.c:836
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "所选面板及其插件配置都将被永久移除"
+msgstr "将永远移除面板和插件配置"
 
 #: ../panel/panel-preferences-dialog.c:837
 #, c-format
@@ -364,19 +365,19 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
-"内部名称: %s-%d\n"
-"进程号: %d"
+"内部名称：%s-%d\n"
+"PID：%d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: ../panel/panel-preferences-dialog.c:937
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr "内部名称: %s-%d"
+msgstr "内部名称：%s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "A_utomatically increase the length"
-msgstr "自动延伸长度(_U)"
+msgstr "自动增加长度(_U)"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -384,13 +385,15 @@ msgstr "添加新面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Add new item to this panel"
-msgstr "添加新项目到面板"
+msgstr "在面板上添加新项目"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "面板背景的阿尔法值，介于 0 (透明）和 100 (不透明）之间。"
+msgstr ""
+"面板背景的 Alpha 值，介于完全透明 0 和完全不透明 "
+"100 之间。"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -398,7 +401,7 @@ msgstr "外观(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
-msgstr "自动显示或隐藏面板(_H)"
+msgstr "自动显示和隐藏面板(_H)"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
@@ -410,7 +413,7 @@ msgstr "背景图片"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr "颜色(_O):"
+msgstr "颜色(_O)："
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
@@ -418,12 +421,12 @@ msgstr "显示(_I)"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Don't _reserve space on borders"
-msgstr "在边界处不保留空间"
+msgstr "在边框处不保留间隔(_R)"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Edit the currently selected item"
-msgstr "编辑当前项目"
+msgstr "编辑当前选中的项目"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid ""
@@ -434,7 +437,7 @@ msgstr "为面板的不透明设置启用窗口管理器的混合模式"
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
-msgstr "常规"
+msgstr "一般"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Horizontal"
@@ -447,34 +450,34 @@ msgstr "项目(_M)"
 #: ../panel/panel-preferences-dialog.glade.h:18
 #, no-c-format
 msgid "L_ength (%):"
-msgstr "长度(_E) (%):"
+msgstr "长度(_E)(%)："
 
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Measurements"
-msgstr "测量"
+msgstr "尺寸"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item down by one row"
-msgstr "将当前项目下移一排"
+msgstr "将当前选中的项目下移一行"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item up by one row"
-msgstr "将当前项目上移一排"
+msgstr "将当前选中的项目上移一行"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "None (use system style)"
-msgstr "无 (使用系统默认值)"
+msgstr "无(使用系统默认)"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "O_utput:"
-msgstr "输出(_O)"
+msgstr "输出(_O)："
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "Opacity"
-msgstr "阻光度"
+msgstr "不透明度"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Pick a Panel Color"
@@ -482,54 +485,55 @@ msgstr "选择面板颜色"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Remove currently selected item"
-msgstr "移除选中的项目"
+msgstr "移除当前选中的项目"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Remove the currently selected panel"
-msgstr "移除选中的面板"
+msgstr "移除当前选中的面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Select A Background Image"
-msgstr "选择一幅背景图片"
+msgstr "选择背景图片"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"选择该项允许在当鼠标指针不在面板上时隐藏面板。此选项只在面板被停靠在屏幕边缘"
-"时有效。"
+"如果您要最大化窗口至面板背后区域则选择此项。这只在"
+"面板附着在屏幕边缘时有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "选择此选项，当插件需要更多空间时，自动扩展面板长度。"
+msgstr ""
+"当插件需要更多空间时，选择此项自动增加面板的长度。"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "选择此选项允许在多显示器中延伸面板"
+msgstr "选择此项在多显示器中扩展面板"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "选择此选项以隐藏面板把手并锁定其位置。"
+msgstr "选择此项隐藏面板控制器并锁定其位置。"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
-"选择该项允许在当鼠标指针不在面板上时隐藏面板。此选项只在面板被停靠在屏幕边缘"
-"时有效。"
+"选择此项在当指针不在其上时隐藏面板。这只在面板附着在"
+"屏幕边缘时有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Show about information of the currently selected item"
-msgstr "显示选中项目的相关信息"
+msgstr "显示当前选中的项目的相关信息"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Solid color"
-msgstr "固定颜色"
+msgstr "纯色"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Span mo_nitors"
@@ -540,16 +544,16 @@ msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
 msgstr ""
-"当鼠标指针处在面板上时面板的透明度，介于 0(完全透明) 与 100(完全不透明) 之"
-"间。"
+"鼠标指针停在面板上时的透明度，介于完全透明 0 和"
+"完全不透明 100 之间。"
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
-"当鼠标指针不处在面板上时面板的透明度，介于 0(完全透明) 与 100(完全不透明) 之"
-"间。"
+"鼠标指针不停在面板上时的透明度，介于完全透明 0 和"
+"完全不透明 100 之间。"
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Vertical"
@@ -557,21 +561,21 @@ msgstr "竖直"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_Alpha:"
-msgstr "阿尔法(_A):"
+msgstr "Alpha(_A)："
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Enter:"
-msgstr "直接输入数值:"
+msgstr "进入(_E)："
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "_File:"
-msgstr "文件(_F):"
+msgstr "文件(_F)："
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "_Leave:"
-msgstr "离开(_L):"
+msgstr "离开(_L)："
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Lock panel"
@@ -579,28 +583,28 @@ msgstr "锁定面板(_L)"
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_Orientation:"
-msgstr "面板方向(_O):"
+msgstr "方向(_O)："
 
 #: ../panel/panel-preferences-dialog.glade.h:50
 msgid "_Size (pixels):"
-msgstr "大小(_S)(像素):"
+msgstr "大小(像素)(_S)："
 
 #: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Style:"
-msgstr "样式(_S)"
+msgstr "样式(_S)："
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr "新游戏(_N)"
+msgstr "新建游戏(_N)"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr "级别(_L):"
+msgstr "级别(_L)："
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr "初学者"
+msgstr "初级"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
@@ -608,7 +612,7 @@ msgstr "中级"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr "有经验的"
+msgstr "高级"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
@@ -616,17 +620,19 @@ msgstr "专家"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
-msgstr "欢迎第一次启动 Xfce 面板程序"
+msgstr "欢迎第一次启动面板"
 
 #: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "因为该面板是从一个备份设置移动到新系统，它必须加载一个新的初始配置"
+msgstr ""
+"因为此面板为存储设置移到新系统，它必须加载一个新的"
+"初始配置。"
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr "请选择下面哪一个是你想设置为第一启动的。"
+msgstr "从下面选一个您要首先启动的设置。"
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
@@ -634,7 +640,7 @@ msgstr "迁移旧配置"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "迁移旧的 4.6 配置文件到 Xfconf"
+msgstr "迁移旧的 4.6 配置文件至 Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
@@ -642,7 +648,7 @@ msgstr "使用默认配置"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr "引导默认配置"
+msgstr "载入默认配置"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
@@ -650,27 +656,27 @@ msgstr "一个空面板"
 
 #: ../migrate/main.c:149
 msgid "Start with one empty panel"
-msgstr "使用空面板开始"
+msgstr "以一个空面板开始"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "迁移旧的面板配置失败"
+msgstr "无法迁移旧的面板配置"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr "引导默认配置失败"
+msgstr "无法载入默认配置"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "面板配置需要迁移......"
+msgstr "面板配置需要迁移..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "无法迁移现有的配置"
+msgstr "无法迁移已存在的配置"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr "面板配置已更新。"
+msgstr "已更新面板配置。"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 msgid "Action"
@@ -683,11 +689,11 @@ msgstr "动作按钮"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Appeara_nce:"
-msgstr "外观(_N):"
+msgstr "外观(_N)："
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "Invert buttons _orientation"
-msgstr "反转按钮方向(_O)"
+msgstr "倒转按钮方向(_O)"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Session Menu"
@@ -696,11 +702,12 @@ msgstr "会话菜单"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "为一些动作显示一个30秒超时的确认对话框。"
+msgstr ""
+"为一些动作显示一个 30 秒超时的确认对话框。"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
-msgstr "可见"
+msgstr "可见的"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
@@ -712,7 +719,7 @@ msgstr "显示确认对话框(_S)"
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out"
-msgstr "登出"
+msgstr "注销"
 
 #: ../plugins/actions/actions.c:160
 msgid "_Log Out"
@@ -720,12 +727,12 @@ msgstr "注销(_L)"
 
 #: ../plugins/actions/actions.c:161
 msgid "Are you sure you want to log out?"
-msgstr "你确认注销吗？"
+msgstr "你确定要注销吗？"
 
 #: ../plugins/actions/actions.c:162
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr "将在 %d 秒内注销。"
+msgstr "在 %d 秒内注销。"
 
 #: ../plugins/actions/actions.c:166
 msgid "Log Out..."
@@ -745,11 +752,11 @@ msgstr "切换用户(_S)"
 
 #: ../plugins/actions/actions.c:178
 msgid "Lock Screen"
-msgstr "锁住屏幕"
+msgstr "锁屏"
 
 #: ../plugins/actions/actions.c:179
 msgid "L_ock Screen"
-msgstr "锁住屏幕(_O)"
+msgstr "锁屏(_O)"
 
 #: ../plugins/actions/actions.c:184
 msgid "Hibernate"
@@ -761,37 +768,37 @@ msgstr "休眠(_H)"
 
 #: ../plugins/actions/actions.c:186
 msgid "Do you want to suspend to disk?"
-msgstr "您确定要挂起到硬盘么？"
+msgstr "您确定要在硬盘待机吗？"
 
 #: ../plugins/actions/actions.c:187
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr "计算机将在 %d 秒内休眠。"
+msgstr "在 %d 秒内计算机休眠。"
 
 #: ../plugins/actions/actions.c:191
 msgid "Suspend"
-msgstr "挂起"
+msgstr "待机"
 
 #: ../plugins/actions/actions.c:192
 msgid "Sus_pend"
-msgstr "挂起（_P)"
+msgstr "待机(_P)"
 
 #: ../plugins/actions/actions.c:193
 msgid "Do you want to suspend to RAM?"
-msgstr "您确定要挂起到内存么？"
+msgstr "您确定要在内存待机吗？"
 
 #: ../plugins/actions/actions.c:194
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr "在 %d 秒内挂起计算机。"
+msgstr "在 %d 秒内计算机待机。"
 
 #: ../plugins/actions/actions.c:198
 msgid "Restart"
-msgstr "重新启动"
+msgstr "重启"
 
 #: ../plugins/actions/actions.c:199
 msgid "_Restart"
-msgstr "重新启动(_R)"
+msgstr "重启(_R)"
 
 #: ../plugins/actions/actions.c:200
 msgid "Are you sure you want to restart?"
@@ -800,7 +807,7 @@ msgstr "你确认要重启吗？"
 #: ../plugins/actions/actions.c:201
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr "计算机将在 %d 秒内重启。"
+msgstr "在 %d 秒内计算机重启。"
 
 #: ../plugins/actions/actions.c:205
 msgid "Shut Down"
@@ -817,7 +824,7 @@ msgstr "你确定要关机吗？"
 #: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr "计算机将在 %d 秒内关机。"
+msgstr "在 %d 秒内切断计算机。"
 
 #: ../plugins/actions/actions.c:600
 #: ../plugins/separator/separator-dialog.glade.h:5
@@ -828,7 +835,7 @@ msgstr "分隔符"
 #: ../plugins/actions/actions.c:869
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr "无法执行动作 \"%s\""
+msgstr "无法运行动作 “%s”"
 
 #: ../plugins/actions/actions.c:1027
 msgid "John Doo"
@@ -836,7 +843,7 @@ msgstr "John Doo"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
-msgstr "注销，锁屏或其他系统操作"
+msgstr "注销、锁屏或其它系统动作"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -870,7 +877,7 @@ msgstr "菜单文件"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr "菜单文件(_F)"
+msgstr "菜单文件(_F)："
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Select A Menu File"
@@ -881,8 +888,8 @@ msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr ""
-"选择该项，将在菜单中显示通用程序名称，比如用 \"File Manager\" 而不是 \"Thunar"
-"\""
+"选择此项在菜单中显示通用应用程序名称，比如用 "
+"“文件管理器” 而不是 “Thunar”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -890,7 +897,7 @@ msgstr "在工具提示中显示应用程序描述(_E)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
-msgstr "显示通用应用程序名称"
+msgstr "显示通用应用程序名称(_N)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
@@ -898,7 +905,7 @@ msgstr "在菜单中显示图标(_O)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
-msgstr "使用自定义菜单文件(_U):"
+msgstr "使用自定义的菜单文件(_U)："
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Use the _default menu"
@@ -907,7 +914,7 @@ msgstr "使用默认菜单(_D)"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
-msgstr "图标(_I):"
+msgstr "图标(_I)："
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
