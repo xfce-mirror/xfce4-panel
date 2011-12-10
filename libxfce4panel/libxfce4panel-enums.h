@@ -37,7 +37,23 @@ G_BEGIN_DECLS
  * Currently only contains the definition of #XfceScreenPosition.
  **/
 
-
+/**
+ * XfcePanelPluginMode
+ * @XFCE_PANEL_PLUGIN_MODE_HORIZONTAL : Horizontal panel and plugins
+ * @XFCE_PANEL_PLUGIN_MODE_VERTICAL   : Vertical rotated panel and plugins
+ * @XFCE_PANEL_PLUGIN_MODE_DESKBAR    : Vertical panel with horizontal plugins
+ *
+ * Orientation of the plugin in the panel.
+ *
+ * Since: 4.10
+ **/
+typedef enum /*<enum,prefix=XFCE_PANEL_PLUGIN_MODE >*/
+{
+  XFCE_PANEL_PLUGIN_MODE_HORIZONTAL,
+  XFCE_PANEL_PLUGIN_MODE_VERTICAL,
+  XFCE_PANEL_PLUGIN_MODE_DESKBAR
+}
+XfcePanelPluginMode;
 
 /**
  * XfceScreenPosition

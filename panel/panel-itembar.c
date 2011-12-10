@@ -28,6 +28,8 @@
 
 #include <panel/panel-itembar.h>
 
+#define HORIZONTAL(itembar) ((itembar)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+
 
 
 typedef struct _PanelItembarChild PanelItembarChild;
@@ -85,12 +87,13 @@ struct _PanelItembar
   GSList         *children;
 
   /* some properties we clone from the panel window */
-  guint           horizontal : 1;
-  guint           size;
+  XfcePanelPluginMode mode;
+  guint               size;
+  guint               nrows;
 
   /* dnd support */
-  gint            highlight_index;
-  gint            highlight_x, highlight_y;
+  gint                highlight_index;
+  gint                highlight_x, highlight_y;
 };
 
 struct _PanelItembarChild
@@ -104,8 +107,9 @@ struct _PanelItembarChild
 enum
 {
   PROP_0,
-  PROP_HORIZONTAL,
-  PROP_SIZE
+  PROP_MODE,
+  PROP_SIZE,
+  PROP_NROWS
 };
 
 enum
@@ -166,17 +170,25 @@ panel_itembar_class_init (PanelItembarClass *klass)
                   G_TYPE_NONE, 0);
 
   g_object_class_install_property (gobject_class,
-                                   PROP_HORIZONTAL,
-                                   g_param_spec_boolean ("horizontal",
-                                                         NULL, NULL,
-                                                         TRUE,
-                                                         EXO_PARAM_WRITABLE));
+                                   PROP_MODE,
+                                   g_param_spec_enum ("mode",
+                                                      NULL, NULL,
+                                                      XFCE_TYPE_PANEL_PLUGIN_MODE,
+                                                      XFCE_PANEL_PLUGIN_MODE_HORIZONTAL,
+                                                      EXO_PARAM_WRITABLE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
                                    g_param_spec_uint ("size",
                                                       NULL, NULL,
-                                                      16, 128, 48,
+                                                      16, 128, 30,
+                                                      EXO_PARAM_WRITABLE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_NROWS,
+                                   g_param_spec_uint ("nrows",
+                                                      NULL, NULL,
+                                                      1, 6, 1,
                                                       EXO_PARAM_WRITABLE));
 
   gtk_container_class_install_child_property (gtkcontainer_class,
@@ -207,8 +219,9 @@ static void
 panel_itembar_init (PanelItembar *itembar)
 {
   itembar->children = NULL;
-  itembar->horizontal = TRUE;
+  itembar->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   itembar->size = 30;
+  itembar->nrows = 1;
   itembar->highlight_index = -1;
 
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (itembar), GTK_NO_WINDOW);
@@ -228,12 +241,16 @@ panel_itembar_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_HORIZONTAL:
-      itembar->horizontal = g_value_get_boolean (value);
+    case PROP_MODE:
+      itembar->mode = g_value_get_enum (value);
       break;
 
     case PROP_SIZE:
       itembar->size = g_value_get_uint (value);
+      break;
+
+    case PROP_NROWS:
+      itembar->nrows = g_value_get_uint (value);
       break;
 
     default:
@@ -284,7 +301,7 @@ panel_itembar_size_request (GtkWidget      *widget,
   gint               row_length = 0;
 
   /* intialize the requisition, we always set the panel height */
-  if (itembar->horizontal)
+  if (HORIZONTAL (itembar))
     {
       requisition->height = itembar->size;
       requisition->width = 0;
@@ -309,7 +326,7 @@ panel_itembar_size_request (GtkWidget      *widget,
 
           if (G_LIKELY (!child->wrap))
             {
-              if (itembar->horizontal)
+              if (HORIZONTAL (itembar))
                 row_length += child_requisition.width;
               else
                 row_length += child_requisition.height;
@@ -317,7 +334,7 @@ panel_itembar_size_request (GtkWidget      *widget,
           else
             {
               /* add to size for new wrap element */
-              if (itembar->horizontal)
+              if (HORIZONTAL (itembar))
                 {
                   requisition->height += itembar->size;
                   requisition->width = MAX (requisition->width, row_length);
@@ -340,7 +357,7 @@ panel_itembar_size_request (GtkWidget      *widget,
     }
 
   /* also take the last row_length into account */
-  if (itembar->horizontal)
+  if (HORIZONTAL (itembar))
     requisition->width = MAX (requisition->width, row_length);
   else
     requisition->height = MAX (requisition->height, row_length);
@@ -376,7 +393,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
   border_width = GTK_CONTAINER (widget)->border_width;
 
-  if (itembar->horizontal)
+  if (HORIZONTAL (itembar))
     widget_length = allocation->width - 2 * border_width;
   else
     widget_length = allocation->height - 2 * border_width;
@@ -403,7 +420,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
                 break;
 
               gtk_widget_get_child_requisition (child->widget, &child_req);
-              length = itembar->horizontal ? child_req.width : child_req.height;
+              length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
 
               if (G_UNLIKELY (child->expand))
                 {
@@ -426,7 +443,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       /* set start coordinates for the items in the row*/
       x = allocation->x + border_width;
       y = allocation->y + border_width;
-      if (itembar->horizontal)
+      if (HORIZONTAL (itembar))
         y += row * itembar->size;
       else
         x += row * itembar->size;
@@ -458,7 +475,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               itembar->highlight_y = y;
               expand_length_avail -= itembar->size;
 
-              if (itembar->horizontal)
+              if (HORIZONTAL (itembar))
                 x += itembar->size;
               else
                 y += itembar->size;
@@ -480,7 +497,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
                * wrapping plugin to improve accessibility */
               if (expand_length_avail > 0)
                 {
-                  if (itembar->horizontal)
+                  if (HORIZONTAL (itembar))
                     {
                       child_alloc.height = itembar->size;
                       child_alloc.width = expand_length_avail;
@@ -503,7 +520,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               break;
             }
 
-          child_length = itembar->horizontal ? child_req.width : child_req.height;
+          child_length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
 
           if (G_UNLIKELY (!expand_children_fit && child->expand))
             {
@@ -535,7 +552,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
           if (child_length < 1)
             child_length = 1;
 
-          if (itembar->horizontal)
+          if (HORIZONTAL (itembar))
             {
               child_alloc.height = itembar->size;
               child_alloc.width = child_length;
@@ -888,14 +905,14 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
           row += itembar->size;
 
           /* always make sure the item is on the row */
-          if ((itembar->horizontal && y < row)
-              || (!itembar->horizontal && x < row))
+          if ((HORIZONTAL (itembar) && y < row)
+              || (!HORIZONTAL (itembar) && x < row))
             break;
         }
 
       alloc = &child->widget->allocation;
 
-      if (itembar->horizontal)
+      if (HORIZONTAL (itembar))
         {
           if (x < (alloc->x + (alloc->width / 2))
               && y >= alloc->y

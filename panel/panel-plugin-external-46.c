@@ -243,7 +243,8 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
       switch (property->type)
         {
         case PROVIDER_PROP_TYPE_SET_SIZE:
-        case PROVIDER_PROP_TYPE_SET_ORIENTATION:
+        case PROVIDER_PROP_TYPE_SET_MODE:
+        case PROVIDER_PROP_TYPE_SET_NROWS:
         case PROVIDER_PROP_TYPE_SET_SCREEN_POSITION:
           event.data.s[1] = g_value_get_int (&property->value);
           break;

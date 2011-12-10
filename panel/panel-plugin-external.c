@@ -84,8 +84,10 @@ static const gchar *panel_plugin_external_get_name                (XfcePanelPlug
 static gint         panel_plugin_external_get_unique_id           (XfcePanelPluginProvider          *provider);
 static void         panel_plugin_external_set_size                (XfcePanelPluginProvider          *provider,
                                                                    gint                              size);
-static void         panel_plugin_external_set_orientation         (XfcePanelPluginProvider          *provider,
-                                                                   GtkOrientation                    orientation);
+static void         panel_plugin_external_set_mode                (XfcePanelPluginProvider          *provider,
+                                                                   XfcePanelPluginMode               mode);
+static void         panel_plugin_external_set_nrows               (XfcePanelPluginProvider          *provider,
+                                                                   guint                             rows);
 static void         panel_plugin_external_set_screen_position     (XfcePanelPluginProvider          *provider,
                                                                    XfceScreenPosition                screen_position);
 static void         panel_plugin_external_save                    (XfcePanelPluginProvider          *provider);
@@ -220,7 +222,8 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->get_name = panel_plugin_external_get_name;
   iface->get_unique_id = panel_plugin_external_get_unique_id;
   iface->set_size = panel_plugin_external_set_size;
-  iface->set_orientation = panel_plugin_external_set_orientation;
+  iface->set_mode = panel_plugin_external_set_mode;
+  iface->set_nrows = panel_plugin_external_set_nrows;
   iface->set_screen_position = panel_plugin_external_set_screen_position;
   iface->save = panel_plugin_external_save;
   iface->get_show_configure = panel_plugin_external_get_show_configure;
@@ -898,8 +901,8 @@ panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
 
 
 static void
-panel_plugin_external_set_orientation (XfcePanelPluginProvider *provider,
-                                       GtkOrientation           orientation)
+panel_plugin_external_set_mode (XfcePanelPluginProvider *provider,
+                                XfcePanelPluginMode      mode)
 {
   GValue value = { 0, };
 
@@ -907,10 +910,30 @@ panel_plugin_external_set_orientation (XfcePanelPluginProvider *provider,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
   g_value_init (&value, G_TYPE_INT);
-  g_value_set_int (&value, orientation);
+  g_value_set_int (&value, mode);
 
   panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
-                                   PROVIDER_PROP_TYPE_SET_ORIENTATION, &value);
+                                   PROVIDER_PROP_TYPE_SET_MODE, &value);
+
+  g_value_unset (&value);
+}
+
+
+
+static void
+panel_plugin_external_set_nrows (XfcePanelPluginProvider *provider,
+                                 guint                    rows)
+{
+  GValue value = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  g_value_init (&value, G_TYPE_INT);
+  g_value_set_int (&value, rows);
+
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   PROVIDER_PROP_TYPE_SET_NROWS, &value);
 
   g_value_unset (&value);
 }

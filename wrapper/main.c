@@ -89,12 +89,16 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
           xfce_panel_plugin_provider_set_size (provider, g_value_get_int (value));
           break;
 
-        case PROVIDER_PROP_TYPE_SET_ORIENTATION:
-          xfce_panel_plugin_provider_set_orientation (provider, g_value_get_int (value));
+        case PROVIDER_PROP_TYPE_SET_MODE:
+          xfce_panel_plugin_provider_set_mode (provider, g_value_get_int (value));
           break;
 
         case PROVIDER_PROP_TYPE_SET_SCREEN_POSITION:
           xfce_panel_plugin_provider_set_screen_position (provider, g_value_get_int (value));
+          break;
+
+        case PROVIDER_PROP_TYPE_SET_NROWS:
+          xfce_panel_plugin_provider_set_nrows (provider, g_value_get_int (value));
           break;
 
         case PROVIDER_PROP_TYPE_SET_LOCKED:

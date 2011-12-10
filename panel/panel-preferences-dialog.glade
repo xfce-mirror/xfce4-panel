@@ -1,19 +1,22 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.14"/>
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-requires libxfce4ui 0.0 -->
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="orientation-store">
+  <object class="GtkListStore" id="mode-store">
     <columns>
       <!-- column-name title -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
+        <col id="0" translatable="yes">Horizontal</col>
+      </row>
+      <row>
         <col id="0" translatable="yes">Vertical</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Horizontal</col>
+        <col id="0" translatable="yes">Deskbar</col>
       </row>
     </data>
   </object>
@@ -59,6 +62,13 @@
     <property name="value">25</property>
     <property name="lower">1</property>
     <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="nrows">
+    <property name="value">1</property>
+    <property name="lower">1</property>
+    <property name="upper">6</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -207,10 +217,9 @@
                                       <object class="GtkLabel" id="label1">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">_Orientation:</property>
+                                        <property name="label" translatable="yes">M_ode:</property>
                                         <property name="use_underline">True</property>
-                                        <property name="wrap_mode">word-char</property>
-                                        <property name="mnemonic_widget">horizontal</property>
+                                        <property name="mnemonic_widget">mode</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -218,9 +227,9 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="horizontal">
+                                      <object class="GtkComboBox" id="mode">
                                         <property name="visible">True</property>
-                                        <property name="model">orientation-store</property>
+                                        <property name="model">mode-store</property>
                                         <child>
                                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                                           <attributes>
@@ -364,7 +373,7 @@
                               <object class="GtkTable" id="table1">
                                 <property name="visible">True</property>
                                 <property name="border_width">6</property>
-                                <property name="n_rows">3</property>
+                                <property name="n_rows">4</property>
                                 <property name="n_columns">2</property>
                                 <property name="column_spacing">12</property>
                                 <property name="row_spacing">6</property>
@@ -372,7 +381,7 @@
                                   <object class="GtkLabel" id="label3">
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">_Size (pixels):</property>
+                                    <property name="label" translatable="yes">Row _Size (pixels):</property>
                                     <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">size-scale</property>
                                   </object>
@@ -387,6 +396,20 @@
                                     <property name="label" translatable="yes">L_ength (%):</property>
                                     <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">length-scale</property>
+                                  </object>
+                                  <packing>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
+                                    <property name="x_options">GTK_FILL</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label18">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Num_ber of rows:</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="mnemonic_widget">nrows-scale</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -406,8 +429,8 @@
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="right_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                    <property name="bottom_attach">2</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -425,6 +448,22 @@
                                   </packing>
                                 </child>
                                 <child>
+                                  <object class="GtkHScale" id="nrows-scale">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="update_policy">discontinuous</property>
+                                    <property name="adjustment">nrows</property>
+                                    <property name="digits">0</property>
+                                    <property name="value_pos">right</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">1</property>
+                                    <property name="right_attach">2</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="bottom_attach">2</property>
+                                  </packing>
+                                </child>
+                                <child>
                                   <object class="GtkCheckButton" id="length-adjust">
                                     <property name="label" translatable="yes">A_utomatically increase the length</property>
                                     <property name="visible">True</property>
@@ -436,8 +475,8 @@
                                   </object>
                                   <packing>
                                     <property name="right_attach">2</property>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="bottom_attach">4</property>
                                   </packing>
                                 </child>
                               </object>

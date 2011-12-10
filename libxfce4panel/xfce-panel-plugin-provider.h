@@ -52,8 +52,10 @@ struct _XfcePanelPluginProviderInterface
   gint         (*get_unique_id)       (XfcePanelPluginProvider       *provider);
   void         (*set_size)            (XfcePanelPluginProvider       *provider,
                                        gint                           size);
-  void         (*set_orientation)     (XfcePanelPluginProvider       *provider,
-                                       GtkOrientation                 orientation);
+  void         (*set_mode)            (XfcePanelPluginProvider       *provider,
+                                       XfcePanelPluginMode            mode);
+  void         (*set_nrows)           (XfcePanelPluginProvider       *provider,
+                                       guint                          rows);
   void         (*set_screen_position) (XfcePanelPluginProvider       *provider,
                                        XfceScreenPosition             screen_position);
   void         (*save)                (XfcePanelPluginProvider       *provider);
@@ -99,9 +101,10 @@ XfcePanelPluginProviderSignal;
 typedef enum /*< skip >*/
 {
   PROVIDER_PROP_TYPE_SET_SIZE,                /* gint */
-  PROVIDER_PROP_TYPE_SET_ORIENTATION,         /* GtkOrientation (as gint) */
+  PROVIDER_PROP_TYPE_SET_MODE,                /* XfcePanelPluginMode (as gint) */
   PROVIDER_PROP_TYPE_SET_SCREEN_POSITION,     /* XfceScreenPosition (as gint) */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA,    /* gdouble */
+  PROVIDER_PROP_TYPE_SET_NROWS,               /* gint */
   PROVIDER_PROP_TYPE_SET_LOCKED,              /* gboolean */
   PROVIDER_PROP_TYPE_SET_SENSITIVE,           /* gboolean */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string, wrapper only */
@@ -154,8 +157,11 @@ gint                  xfce_panel_plugin_provider_get_unique_id       (XfcePanelP
 void                  xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider       *provider,
                                                                       gint                           size);
 
-void                  xfce_panel_plugin_provider_set_orientation     (XfcePanelPluginProvider       *provider,
-                                                                      GtkOrientation                 orientation);
+void                  xfce_panel_plugin_provider_set_mode            (XfcePanelPluginProvider       *provider,
+                                                                      XfcePanelPluginMode            mode);
+
+void                  xfce_panel_plugin_provider_set_nrows           (XfcePanelPluginProvider       *provider,
+                                                                      guint                          rows);
 
 void                  xfce_panel_plugin_provider_set_screen_position (XfcePanelPluginProvider       *provider,
                                                                       XfceScreenPosition             screen_position);

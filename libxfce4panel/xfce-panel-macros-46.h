@@ -320,8 +320,12 @@ G_BEGIN_DECLS
             xfce_panel_plugin_provider_set_locked (provider, !!value); \
             break; \
             \
-          case PROVIDER_PROP_TYPE_SET_ORIENTATION: \
-            xfce_panel_plugin_provider_set_orientation (provider, value); \
+          case PROVIDER_PROP_TYPE_SET_MODE: \
+            xfce_panel_plugin_provider_set_mode (provider, value); \
+            break; \
+            \
+          case PROVIDER_PROP_TYPE_SET_NROWS: \
+            xfce_panel_plugin_provider_set_nrows (provider, value); \
             break; \
             \
           case PROVIDER_PROP_TYPE_SET_SCREEN_POSITION: \

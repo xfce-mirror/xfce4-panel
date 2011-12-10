@@ -284,8 +284,9 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "position-locked", G_TYPE_BOOLEAN },
     { "autohide", G_TYPE_BOOLEAN },
     { "span-monitors", G_TYPE_BOOLEAN },
-    { "horizontal", G_TYPE_BOOLEAN },
+    { "mode", G_TYPE_UINT },
     { "size", G_TYPE_UINT },
+    { "nrows", G_TYPE_UINT },
     { "length", G_TYPE_UINT },
     { "length-adjust", G_TYPE_BOOLEAN },
     { "enter-opacity", G_TYPE_UINT },
@@ -1414,10 +1415,12 @@ panel_application_new_window (PanelApplication *application,
                               GdkScreen        *screen,
                               gboolean          new_window)
 {
-  GtkWidget *window;
-  GtkWidget *itembar;
-  gchar     *property;
-  gint       idx;
+  GtkWidget          *window;
+  GtkWidget          *itembar;
+  gchar              *property;
+  gint                idx;
+  static const gchar *props[] = { "mode", "size", "nrows" };
+  guint               i;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
@@ -1448,8 +1451,8 @@ panel_application_new_window (PanelApplication *application,
 
   /* add the itembar */
   itembar = panel_itembar_new ();
-  exo_binding_new (G_OBJECT (window), "horizontal", G_OBJECT (itembar), "horizontal");
-  exo_binding_new (G_OBJECT (window), "size", G_OBJECT (itembar), "size");
+  for (i = 0; i < G_N_ELEMENTS (props); i++)
+    exo_binding_new (G_OBJECT (window), props[i], G_OBJECT (itembar), props[i]);
   gtk_container_add (GTK_CONTAINER (window), itembar);
   gtk_widget_show (itembar);
 

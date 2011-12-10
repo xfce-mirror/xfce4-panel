@@ -127,11 +127,15 @@ struct _XfcePanelPluginClass
                                        const gchar        *name,
                                        const GValue       *value);
 
+  /* new in 4.10 */
+  void     (*mode_changed)            (XfcePanelPlugin    *plugin,
+                                       XfcePanelPluginMode mode);
+  void     (*nrows_changed)           (XfcePanelPlugin    *plugin,
+                                       guint               rows);
+
   /*< private >*/
   void (*reserved1) (void);
   void (*reserved2) (void);
-  void (*reserved3) (void);
-  void (*reserved4) (void);
 };
 
 
@@ -179,6 +183,10 @@ void                  xfce_panel_plugin_set_shrink          (XfcePanelPlugin   *
                                                              gboolean           shrink);
 
 GtkOrientation        xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+
+XfcePanelPluginMode   xfce_panel_plugin_get_mode            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+
+guint                 xfce_panel_plugin_get_nrows           (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 XfceScreenPosition    xfce_panel_plugin_get_screen_position (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 

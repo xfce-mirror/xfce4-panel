@@ -115,12 +115,23 @@ xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
 
 
 void
-xfce_panel_plugin_provider_set_orientation (XfcePanelPluginProvider *provider,
-                                            GtkOrientation           orientation)
+xfce_panel_plugin_provider_set_mode (XfcePanelPluginProvider *provider,
+                                     XfcePanelPluginMode      mode)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
-  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_orientation) (provider, orientation);
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_mode) (provider, mode);
+}
+
+
+
+void
+xfce_panel_plugin_provider_set_nrows (XfcePanelPluginProvider *provider,
+                                      guint                    rows)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_nrows) (provider, rows);
 }
 
 

@@ -90,8 +90,10 @@ static void          xfce_panel_plugin_unregister_menu        (GtkMenu          
                                                                XfcePanelPlugin                  *plugin);
 static void          xfce_panel_plugin_set_size               (XfcePanelPluginProvider          *provider,
                                                                gint                              size);
-static void          xfce_panel_plugin_set_orientation        (XfcePanelPluginProvider          *provider,
-                                                               GtkOrientation                    orientation);
+static void          xfce_panel_plugin_set_mode               (XfcePanelPluginProvider          *provider,
+                                                               XfcePanelPluginMode               mode);
+static void          xfce_panel_plugin_set_nrows              (XfcePanelPluginProvider          *provider,
+                                                               guint                             nrows);
 static void          xfce_panel_plugin_set_screen_position    (XfcePanelPluginProvider          *provider,
                                                                XfceScreenPosition                screen_position);
 static void          xfce_panel_plugin_save                   (XfcePanelPluginProvider          *provider);
@@ -126,6 +128,8 @@ enum
   PROP_SIZE,
   PROP_SCREEN_POSITION,
   PROP_EXPAND,
+  PROP_MODE,
+  PROP_NROWS,
   PROP_SHRINK
 };
 
@@ -140,6 +144,8 @@ enum
   SAVE,
   SIZE_CHANGED,
   SCREEN_POSITION_CHANGED,
+  MODE_CHANGED,
+  NROWS_CHANGED,
   LAST_SIGNAL
 };
 
@@ -166,7 +172,8 @@ struct _XfcePanelPluginPrivate
   gint                 size;
   guint                expand : 1;
   guint                shrink : 1;
-  GtkOrientation       orientation;
+  guint                nrows;
+  XfcePanelPluginMode  mode;
   XfceScreenPosition   screen_position;
   guint                locked : 1;
   GSList              *menu_items;
@@ -296,6 +303,44 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                   NULL, NULL,
                   g_cclosure_marshal_VOID__ENUM,
                   G_TYPE_NONE, 1, GTK_TYPE_ORIENTATION);
+
+  /**
+   * XfcePanelPlugin::mode-changed
+   * @plugin : an #XfcePanelPlugin.
+   * @mode   : new #XfcePanelPluginMode of the panel.
+   *
+   * This signal is emmitted whenever the mode of the panel
+   * the @plugin is on changes.
+   *
+   * Since: 4.10
+   **/
+  plugin_signals[MODE_CHANGED] =
+    g_signal_new (g_intern_static_string ("mode-changed"),
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (XfcePanelPluginClass, mode_changed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__ENUM,
+                  G_TYPE_NONE, 1, XFCE_TYPE_PANEL_PLUGIN_MODE);
+
+  /**
+   * XfcePanelPlugin::nrows-changed
+   * @plugin : an #XfcePanelPlugin.
+   * @rows   : new number of rows of the panel
+   *
+   * This signal is emmitted whenever the nrows of the panel
+   * the @plugin is on changes.
+   *
+   * Since: 4.10
+   **/
+  plugin_signals[NROWS_CHANGED] =
+    g_signal_new (g_intern_static_string ("nrows-changed"),
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (XfcePanelPluginClass, nrows_changed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__UINT,
+                  G_TYPE_NONE, 1, G_TYPE_UINT);
 
   /**
    * XfcePanelPlugin::remote-event
@@ -583,6 +628,39 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                          G_PARAM_READWRITE
                                                          | G_PARAM_STATIC_STRINGS));
 
+  /**
+   * XfcePanelPlugin:mode:
+   *
+   * Display mode of the plugin.
+   *
+   * Since: 4.10
+   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_MODE,
+                                   g_param_spec_enum ("mode",
+                                                      "Mode",
+                                                      "Disply mode of the plugin",
+                                                      XFCE_TYPE_PANEL_PLUGIN_MODE,
+                                                      XFCE_PANEL_PLUGIN_MODE_HORIZONTAL,
+                                                      G_PARAM_READABLE
+                                                      | G_PARAM_STATIC_STRINGS));
+
+  /**
+   * XfcePanelPlugin:nrows:
+   *
+   * Number of rows the plugin is embedded on.
+   *
+   * Since: 4.10
+   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_NROWS,
+                                   g_param_spec_uint ("nrows",
+                                                      "Nrows",
+                                                      "Number of rows of the panel",
+                                                      1, 6, 1,
+                                                      G_PARAM_READABLE
+                                                      | G_PARAM_STATIC_STRINGS));
+
   item_properties = g_quark_from_static_string ("item-properties");
   item_about = g_quark_from_static_string ("item-about");
 }
@@ -603,7 +681,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->size = 0;
   plugin->priv->expand = FALSE;
   plugin->priv->shrink = FALSE;
-  plugin->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
+  plugin->priv->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   plugin->priv->screen_position = XFCE_SCREEN_POSITION_NONE;
   plugin->priv->menu = NULL;
   plugin->priv->menu_blocked = 0;
@@ -611,6 +689,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->flags = 0;
   plugin->priv->locked = TRUE;
   plugin->priv->menu_items = NULL;
+  plugin->priv->nrows = 1;
 
   /* bind the text domain of the panel so our strings
    * are properly translated in the old 4.6 panel plugins */
@@ -631,7 +710,8 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->get_name = (ProviderToPluginChar) xfce_panel_plugin_get_name;
   iface->get_unique_id = (ProviderToPluginInt) xfce_panel_plugin_get_unique_id;
   iface->set_size = xfce_panel_plugin_set_size;
-  iface->set_orientation = xfce_panel_plugin_set_orientation;
+  iface->set_mode = xfce_panel_plugin_set_mode;
+  iface->set_nrows = xfce_panel_plugin_set_nrows;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
   iface->save = xfce_panel_plugin_save;
   iface->get_show_configure = xfce_panel_plugin_get_show_configure;
@@ -694,7 +774,7 @@ xfce_panel_plugin_get_property (GObject    *object,
       break;
 
     case PROP_ORIENTATION:
-      g_value_set_enum (value, private->orientation);
+      g_value_set_enum (value, xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (object)));
       break;
 
     case PROP_SIZE:
@@ -1260,22 +1340,58 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
 
 
 static void
-xfce_panel_plugin_set_orientation (XfcePanelPluginProvider *provider,
-                                   GtkOrientation           orientation)
+xfce_panel_plugin_set_mode (XfcePanelPluginProvider *provider,
+                            XfcePanelPluginMode      mode)
+{
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+  GtkOrientation   old_orientation;
+  GtkOrientation   new_orientation;
+
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
+
+  /* check if update is required */
+  if (G_LIKELY (plugin->priv->mode != mode))
+    {
+      old_orientation = xfce_panel_plugin_get_orientation (plugin);
+
+      plugin->priv->mode = mode;
+
+      g_signal_emit (G_OBJECT (plugin),
+                     plugin_signals[MODE_CHANGED], 0, mode);
+
+      g_object_notify (G_OBJECT (plugin), "mode");
+
+      /* emit old orientation property for compatibility */
+      new_orientation = xfce_panel_plugin_get_orientation (plugin);
+      if (old_orientation != new_orientation)
+        {
+          g_signal_emit (G_OBJECT (plugin),
+                         plugin_signals[ORIENTATION_CHANGED], 0, new_orientation);
+
+          g_object_notify (G_OBJECT (plugin), "orientation");
+        }
+    }
+}
+
+
+
+static void
+xfce_panel_plugin_set_nrows (XfcePanelPluginProvider *provider,
+                             guint                    nrows)
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
   /* check if update is required */
-  if (G_LIKELY (plugin->priv->orientation != orientation))
+  if (G_LIKELY (plugin->priv->nrows != nrows))
     {
-      plugin->priv->orientation = orientation;
+      plugin->priv->nrows = nrows;
 
       g_signal_emit (G_OBJECT (plugin),
-                     plugin_signals[ORIENTATION_CHANGED], 0, orientation);
+                     plugin_signals[NROWS_CHANGED], 0, nrows);
 
-      g_object_notify (G_OBJECT (plugin), "orientation");
+      g_object_notify (G_OBJECT (plugin), "nrows");
     }
 }
 
@@ -1742,7 +1858,7 @@ xfce_panel_plugin_set_shrink (XfcePanelPlugin *plugin,
 
 
 /**
- * xfce_panel_plugin_get_orientation:
+ * xfce_panel_plugin_get_mode:
  * @plugin : an #XfcePanelPlugin.
  *
  * The orientation of the panel in which the plugin is embedded.
@@ -1753,9 +1869,53 @@ GtkOrientation
 xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
 {
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), GTK_ORIENTATION_HORIZONTAL);
-  g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), GTK_ORIENTATION_HORIZONTAL);
 
-  return plugin->priv->orientation;
+  if (plugin->priv->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+    return GTK_ORIENTATION_HORIZONTAL;
+  else
+    return GTK_ORIENTATION_VERTICAL;
+}
+
+
+
+/**
+ * xfce_panel_plugin_get_orientation:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * The mode of the panel in which the plugin is embedded.
+ *
+ * Returns: the current #XfcePanelPluginMode of the panel.
+ *
+ * Since: 4.10
+ **/
+XfcePanelPluginMode
+xfce_panel_plugin_get_mode (XfcePanelPlugin *plugin)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), XFCE_PANEL_PLUGIN_MODE_HORIZONTAL);
+  g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), XFCE_PANEL_PLUGIN_MODE_HORIZONTAL);
+
+  return plugin->priv->mode;
+}
+
+
+
+/**
+ * xfce_panel_plugin_get_nrows:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * The number of rows of the panel in which the plugin is embedded.
+ *
+ * Returns: the current number of rows of the panel.
+ *
+ * Since: 4.10
+ **/
+guint
+xfce_panel_plugin_get_nrows (XfcePanelPlugin *plugin)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), 1);
+  g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), 1);
+
+  return plugin->priv->nrows;
 }
 
 

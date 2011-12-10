@@ -409,12 +409,13 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
     return;
 
   /* hook up the bindings */
-  panel_preferences_dialog_bindings_add (dialog, "horizontal", "active");
+  panel_preferences_dialog_bindings_add (dialog, "mode", "active");
   panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active");
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active");
   panel_preferences_dialog_bindings_add (dialog, "autohide", "active");
   panel_preferences_dialog_bindings_add (dialog, "disable-struts", "active");
   panel_preferences_dialog_bindings_add (dialog, "size", "value");
+  panel_preferences_dialog_bindings_add (dialog, "nrows", "value");
   panel_preferences_dialog_bindings_add (dialog, "length", "value");
   panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active");
   panel_preferences_dialog_bindings_add (dialog, "background-alpha", "value");

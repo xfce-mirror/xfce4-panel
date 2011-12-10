@@ -117,7 +117,6 @@ migrate_config_action_48 (gpointer key,
   gint          first_action;
   gint          second_action;
 
-
   /* skip non root plugin properties */
   if (!G_VALUE_HOLDS_STRING (gvalue)
       || migrate_config_strchr_count (prop, G_DIR_SEPARATOR) != 2
@@ -167,6 +166,9 @@ migrate_config (XfconfChannel  *channel,
                 GError        **error)
 {
   GHashTable *plugins;
+  guint       n, n_panels;
+  gchar       buf[50];
+  gboolean    horizontal;
 
   plugins = xfconf_channel_get_properties (channel, "/plugins");
 
@@ -179,6 +181,25 @@ migrate_config (XfconfChannel  *channel,
       /* migrate old action plugins */
       g_hash_table_foreach (plugins, migrate_config_action_48, channel);
     }
+
+  /* migrate horizontal to mode property */
+  if (configver < 2)
+    {
+      n_panels = xfconf_channel_get_uint (channel, "/panels", 0);
+      for (n = 0; n < n_panels; n++)
+        {
+          /* read and remove old property */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/horizontal", n);
+          horizontal = xfconf_channel_get_bool (channel, buf, TRUE);
+          xfconf_channel_reset_property (channel, buf, FALSE);
+
+          /* set new mode */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/mode", n);
+          xfconf_channel_set_uint (channel, buf, horizontal ? 0 : 1);
+        }
+    }
+
+  g_hash_table_destroy (plugins);
 
   return TRUE;
 }

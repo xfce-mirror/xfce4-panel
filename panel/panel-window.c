@@ -61,6 +61,7 @@
 #define HANDLE_SIZE           (HANDLE_DOTS * (HANDLE_PIXELS + \
                                HANDLE_PIXEL_SPACE) - HANDLE_PIXEL_SPACE)
 #define HANDLE_SIZE_TOTAL     (2 * HANDLE_SPACING + HANDLE_SIZE)
+#define HORIZONTAL(window)    ((window)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 
 
 
@@ -131,9 +132,11 @@ static void         panel_window_menu_popup                 (PanelWindow      *w
                                                              guint32           event_time);
 static void         panel_window_plugins_update             (PanelWindow      *window,
                                                              PluginProp        prop);
-static void         panel_window_plugin_set_orientation     (GtkWidget        *widget,
+static void         panel_window_plugin_set_mode            (GtkWidget        *widget,
                                                              gpointer          user_data);
 static void         panel_window_plugin_set_size            (GtkWidget        *widget,
+                                                             gpointer          user_data);
+static void         panel_window_plugin_set_nrows           (GtkWidget        *widget,
                                                              gpointer          user_data);
 static void         panel_window_plugin_set_screen_position (GtkWidget        *widget,
                                                              gpointer          user_data);
@@ -142,8 +145,9 @@ static void         panel_window_plugin_set_screen_position (GtkWidget        *w
 enum
 {
   PROP_0,
-  PROP_HORIZONTAL,
+  PROP_MODE,
   PROP_SIZE,
+  PROP_NROWS,
   PROP_LENGTH,
   PROP_LENGTH_ADJUST,
   PROP_POSITION_LOCKED,
@@ -156,8 +160,9 @@ enum
 
 enum _PluginProp
 {
-  PLUGIN_PROP_ORIENTATION,
+  PLUGIN_PROP_MODE,
   PLUGIN_PROP_SCREEN_POSITION,
+  PLUGIN_PROP_NROWS,
   PLUGIN_PROP_SIZE
 };
 
@@ -256,7 +261,8 @@ struct _PanelWindow
   guint                size;
   gdouble              length;
   guint                length_adjust : 1;
-  guint                horizontal : 1;
+  XfcePanelPluginMode  mode;
+  guint                nrows;
   SnapPosition         snap_position;
   guint                span_monitors : 1;
   gchar               *output_name;
@@ -335,10 +341,11 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->realize = panel_window_realize;
 
   g_object_class_install_property (gobject_class,
-                                   PROP_HORIZONTAL,
-                                   g_param_spec_boolean ("horizontal", NULL, NULL,
-                                                         TRUE,
-                                                         EXO_PARAM_READWRITE));
+                                   PROP_MODE,
+                                   g_param_spec_enum ("mode", NULL, NULL,
+                                                      XFCE_TYPE_PANEL_PLUGIN_MODE,
+                                                      XFCE_PANEL_PLUGIN_MODE_HORIZONTAL,
+                                                      EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
@@ -347,9 +354,15 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_NROWS,
+                                   g_param_spec_uint ("nrows", NULL, NULL,
+                                                      1, 6, 1,
+                                                      EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_LENGTH,
                                    g_param_spec_uint ("length", NULL, NULL,
-                                                      1, 100, 25,
+                                                      1, 100, 10,
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -435,8 +448,9 @@ panel_window_init (PanelWindow *window)
   window->screen = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_disabled = FALSE;
-  window->horizontal = TRUE;
-  window->size = 30;
+  window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
+  window->size = 48;
+  window->nrows = 1;
   window->length = 0.10;
   window->length_adjust = TRUE;
   window->snap_position = SNAP_POSITION_NONE;
@@ -481,12 +495,16 @@ panel_window_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_HORIZONTAL:
-      g_value_set_boolean (value, window->horizontal);
+    case PROP_MODE:
+      g_value_set_enum (value, window->mode);
       break;
 
     case PROP_SIZE:
       g_value_set_uint (value, window->size);
+      break;
+
+    case PROP_NROWS:
+      g_value_set_uint (value, window->nrows);
       break;
 
     case PROP_LENGTH:
@@ -539,26 +557,27 @@ panel_window_set_property (GObject      *object,
                            const GValue *value,
                            GParamSpec   *pspec)
 {
-  PanelWindow *window = PANEL_WINDOW (object);
-  gboolean     val_bool;
-  guint        val_uint;
-  gdouble      val_double;
-  const gchar *val_string;
-  gboolean     update = FALSE;
-  gint         x, y, snap_position;
+  PanelWindow         *window = PANEL_WINDOW (object);
+  gboolean             val_bool;
+  guint                val_uint;
+  gdouble              val_double;
+  const gchar         *val_string;
+  gboolean             update = FALSE;
+  gint                 x, y, snap_position;
+  XfcePanelPluginMode  val_mode;
 
   switch (prop_id)
     {
-    case PROP_HORIZONTAL:
-      val_bool = g_value_get_boolean (value);
-      if (window->horizontal != val_bool)
+    case PROP_MODE:
+      val_mode = g_value_get_enum (value);
+      if (window->mode != val_mode)
         {
-          window->horizontal = !!val_bool;
+          window->mode = val_mode;
           panel_window_screen_layout_changed (window->screen, window);
         }
 
       /* send the new orientation and screen position to the panel plugins */
-      panel_window_plugins_update (window, PLUGIN_PROP_ORIENTATION);
+      panel_window_plugins_update (window, PLUGIN_PROP_MODE);
       panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
       break;
 
@@ -572,6 +591,18 @@ panel_window_set_property (GObject      *object,
 
       /* send the new size to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_SIZE);
+      break;
+
+    case PROP_NROWS:
+      val_uint = g_value_get_uint (value);
+      if (window->nrows != val_uint)
+        {
+          window->nrows = val_uint;
+          gtk_widget_queue_resize (GTK_WIDGET (window));
+        }
+
+      /* send the new size to the panel plugins */
+      panel_window_plugins_update (window, PLUGIN_PROP_NROWS);
       break;
 
     case PROP_LENGTH:
@@ -709,7 +740,7 @@ panel_window_expose_event (GtkWidget      *widget,
   if (window->position_locked || !GTK_WIDGET_DRAWABLE (widget))
     goto end;
 
-  if (window->horizontal)
+  if (HORIZONTAL (window))
     {
       handle_h = window->alloc.height / 2;
       handle_w = HANDLE_SIZE;
@@ -1102,7 +1133,7 @@ panel_window_size_request (GtkWidget      *widget,
   /* handle size */
   if (!window->position_locked)
     {
-      if (window->horizontal)
+      if (HORIZONTAL (window))
         extra_width += 2 * HANDLE_SIZE_TOTAL;
       else
         extra_height += 2 * HANDLE_SIZE_TOTAL;
@@ -1123,7 +1154,7 @@ panel_window_size_request (GtkWidget      *widget,
   requisition->width = child_requisition.width + extra_width;
 
   /* respect the length and monitor/screen size */
-  if (window->horizontal)
+  if (HORIZONTAL (window))
     {
       if (!window->length_adjust)
         requisition->width = extra_width;
@@ -1185,7 +1216,7 @@ panel_window_size_allocate (GtkWidget     *widget,
 
         /* corner or floating panel */
         default:
-          if (window->horizontal)
+          if (HORIZONTAL (window))
             w = alloc->width;
           else
             h = alloc->height;
@@ -1244,7 +1275,7 @@ panel_window_size_allocate (GtkWidget     *widget,
       /* keep space for the panel handles if not locked */
       if (!window->position_locked)
         {
-          if (window->horizontal)
+          if (HORIZONTAL (window))
             {
               child_alloc.width -= 2 * HANDLE_SIZE_TOTAL;
               child_alloc.x += HANDLE_SIZE_TOTAL;
@@ -1438,31 +1469,31 @@ panel_window_screen_struts_edge (PanelWindow *window)
 
     case SNAP_POSITION_E:
     case SNAP_POSITION_EC:
-      return window->horizontal ? STRUTS_EDGE_NONE : STRUTS_EDGE_RIGHT;
+      return HORIZONTAL (window) ? STRUTS_EDGE_NONE : STRUTS_EDGE_RIGHT;
 
     case SNAP_POSITION_NE:
-      return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_RIGHT;
+      return HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_RIGHT;
 
     case SNAP_POSITION_SE:
-      return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_RIGHT;
+      return HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_RIGHT;
 
     case SNAP_POSITION_W:
     case SNAP_POSITION_WC:
-      return window->horizontal ? STRUTS_EDGE_NONE : STRUTS_EDGE_LEFT;
+      return HORIZONTAL (window) ? STRUTS_EDGE_NONE : STRUTS_EDGE_LEFT;
 
     case SNAP_POSITION_NW:
-      return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_LEFT;
+      return HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_LEFT;
 
     case SNAP_POSITION_SW:
-      return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_LEFT;
+      return HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_LEFT;
 
     case SNAP_POSITION_NC:
     case SNAP_POSITION_N:
-      return window->horizontal ? STRUTS_EDGE_TOP : STRUTS_EDGE_NONE;
+      return HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_NONE;
 
     case SNAP_POSITION_SC:
     case SNAP_POSITION_S:
-      return window->horizontal ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_NONE;
+      return HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_NONE;
     }
 
   return STRUTS_EDGE_NONE;
@@ -1644,7 +1675,7 @@ panel_window_screen_update_borders (PanelWindow *window)
   /* don't show the side borders if the length is 100% */
   if (window->length == 1.00)
     {
-      if (window->horizontal)
+      if (HORIZONTAL (window))
         PANEL_UNSET_FLAG (borders, PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT);
       else
         PANEL_UNSET_FLAG (borders, PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM);
@@ -2356,17 +2387,20 @@ panel_window_plugins_update (PanelWindow *window,
 
   switch (prop)
     {
-    case PLUGIN_PROP_ORIENTATION:
-      func = panel_window_plugin_set_orientation;
+    case PLUGIN_PROP_MODE:
+      func = panel_window_plugin_set_mode;
       break;
 
     case PLUGIN_PROP_SCREEN_POSITION:
       func = panel_window_plugin_set_screen_position;
       break;
 
+    case PLUGIN_PROP_NROWS:
+      func = panel_window_plugin_set_nrows;
+      break;
+
     case PLUGIN_PROP_SIZE:
       func = panel_window_plugin_set_size;
-      break;
       break;
 
     default:
@@ -2385,15 +2419,14 @@ panel_window_plugins_update (PanelWindow *window,
 
 
 static void
-panel_window_plugin_set_orientation (GtkWidget *widget,
-                                     gpointer   user_data)
+panel_window_plugin_set_mode (GtkWidget *widget,
+                              gpointer   user_data)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
   panel_return_if_fail (PANEL_IS_WINDOW (user_data));
 
-  xfce_panel_plugin_provider_set_orientation (XFCE_PANEL_PLUGIN_PROVIDER (widget),
-      PANEL_WINDOW (user_data)->horizontal ? GTK_ORIENTATION_HORIZONTAL:
-          GTK_ORIENTATION_VERTICAL);
+  xfce_panel_plugin_provider_set_mode (XFCE_PANEL_PLUGIN_PROVIDER (widget),
+                                       PANEL_WINDOW (user_data)->mode);
 }
 
 
@@ -2412,6 +2445,19 @@ panel_window_plugin_set_size (GtkWidget *widget,
 
 
 static void
+panel_window_plugin_set_nrows (GtkWidget *widget,
+                               gpointer   user_data)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
+
+  xfce_panel_plugin_provider_set_nrows (XFCE_PANEL_PLUGIN_PROVIDER (widget),
+                                        PANEL_WINDOW (user_data)->nrows);
+}
+
+
+
+static void
 panel_window_plugin_set_screen_position (GtkWidget *widget,
                                          gpointer   user_data)
 {
@@ -2424,51 +2470,51 @@ panel_window_plugin_set_screen_position (GtkWidget *widget,
   switch (window->snap_position)
     {
     case SNAP_POSITION_NONE:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
           XFCE_SCREEN_POSITION_FLOATING_V;
       break;
 
     case SNAP_POSITION_NW:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_NW_H :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_NW_H :
           XFCE_SCREEN_POSITION_NW_V;
       break;
 
     case SNAP_POSITION_NE:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_NE_H :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_NE_H :
           XFCE_SCREEN_POSITION_NE_V;
       break;
 
     case SNAP_POSITION_SW:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_SW_H :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_SW_H :
           XFCE_SCREEN_POSITION_SW_V;
       break;
 
     case SNAP_POSITION_SE:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_SE_H :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_SE_H :
           XFCE_SCREEN_POSITION_SE_V;
       break;
 
     case SNAP_POSITION_W:
     case SNAP_POSITION_WC:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
           XFCE_SCREEN_POSITION_W;
       break;
 
     case SNAP_POSITION_E:
     case SNAP_POSITION_EC:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_FLOATING_H :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
           XFCE_SCREEN_POSITION_E;
       break;
 
     case SNAP_POSITION_S:
     case SNAP_POSITION_SC:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_S :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_S :
           XFCE_SCREEN_POSITION_FLOATING_V;
       break;
 
     case SNAP_POSITION_N:
     case SNAP_POSITION_NC:
-      position = window->horizontal ? XFCE_SCREEN_POSITION_N :
+      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_N :
           XFCE_SCREEN_POSITION_FLOATING_V;
       break;
 
@@ -2541,7 +2587,7 @@ panel_window_set_povider_info (PanelWindow *window,
         }
     }
 
-  panel_window_plugin_set_orientation (provider, window);
+  panel_window_plugin_set_mode (provider, window);
   panel_window_plugin_set_screen_position (provider, window);
   panel_window_plugin_set_size (provider, window);
 }
