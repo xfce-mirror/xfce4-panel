@@ -61,7 +61,7 @@
 #define HANDLE_SIZE           (HANDLE_DOTS * (HANDLE_PIXELS + \
                                HANDLE_PIXEL_SPACE) - HANDLE_PIXEL_SPACE)
 #define HANDLE_SIZE_TOTAL     (2 * HANDLE_SPACING + HANDLE_SIZE)
-#define HORIZONTAL(window)    ((window)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+#define IS_HORIZONTAL(window) ((window)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 
 
 
@@ -740,7 +740,7 @@ panel_window_expose_event (GtkWidget      *widget,
   if (window->position_locked || !GTK_WIDGET_DRAWABLE (widget))
     goto end;
 
-  if (HORIZONTAL (window))
+  if (IS_HORIZONTAL (window))
     {
       handle_h = window->alloc.height / 2;
       handle_w = HANDLE_SIZE;
@@ -1133,7 +1133,7 @@ panel_window_size_request (GtkWidget      *widget,
   /* handle size */
   if (!window->position_locked)
     {
-      if (HORIZONTAL (window))
+      if (IS_HORIZONTAL (window))
         extra_width += 2 * HANDLE_SIZE_TOTAL;
       else
         extra_height += 2 * HANDLE_SIZE_TOTAL;
@@ -1154,7 +1154,7 @@ panel_window_size_request (GtkWidget      *widget,
   requisition->width = child_requisition.width + extra_width;
 
   /* respect the length and monitor/screen size */
-  if (HORIZONTAL (window))
+  if (IS_HORIZONTAL (window))
     {
       if (!window->length_adjust)
         requisition->width = extra_width;
@@ -1216,7 +1216,7 @@ panel_window_size_allocate (GtkWidget     *widget,
 
         /* corner or floating panel */
         default:
-          if (HORIZONTAL (window))
+          if (IS_HORIZONTAL (window))
             w = alloc->width;
           else
             h = alloc->height;
@@ -1275,7 +1275,7 @@ panel_window_size_allocate (GtkWidget     *widget,
       /* keep space for the panel handles if not locked */
       if (!window->position_locked)
         {
-          if (HORIZONTAL (window))
+          if (IS_HORIZONTAL (window))
             {
               child_alloc.width -= 2 * HANDLE_SIZE_TOTAL;
               child_alloc.x += HANDLE_SIZE_TOTAL;
@@ -1469,31 +1469,31 @@ panel_window_screen_struts_edge (PanelWindow *window)
 
     case SNAP_POSITION_E:
     case SNAP_POSITION_EC:
-      return HORIZONTAL (window) ? STRUTS_EDGE_NONE : STRUTS_EDGE_RIGHT;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_NONE : STRUTS_EDGE_RIGHT;
 
     case SNAP_POSITION_NE:
-      return HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_RIGHT;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_RIGHT;
 
     case SNAP_POSITION_SE:
-      return HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_RIGHT;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_RIGHT;
 
     case SNAP_POSITION_W:
     case SNAP_POSITION_WC:
-      return HORIZONTAL (window) ? STRUTS_EDGE_NONE : STRUTS_EDGE_LEFT;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_NONE : STRUTS_EDGE_LEFT;
 
     case SNAP_POSITION_NW:
-      return HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_LEFT;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_LEFT;
 
     case SNAP_POSITION_SW:
-      return HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_LEFT;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_LEFT;
 
     case SNAP_POSITION_NC:
     case SNAP_POSITION_N:
-      return HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_NONE;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_TOP : STRUTS_EDGE_NONE;
 
     case SNAP_POSITION_SC:
     case SNAP_POSITION_S:
-      return HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_NONE;
+      return IS_HORIZONTAL (window) ? STRUTS_EDGE_BOTTOM : STRUTS_EDGE_NONE;
     }
 
   return STRUTS_EDGE_NONE;
@@ -1675,7 +1675,7 @@ panel_window_screen_update_borders (PanelWindow *window)
   /* don't show the side borders if the length is 100% */
   if (window->length == 1.00)
     {
-      if (HORIZONTAL (window))
+      if (IS_HORIZONTAL (window))
         PANEL_UNSET_FLAG (borders, PANEL_BORDER_LEFT | PANEL_BORDER_RIGHT);
       else
         PANEL_UNSET_FLAG (borders, PANEL_BORDER_TOP | PANEL_BORDER_BOTTOM);
@@ -2470,51 +2470,51 @@ panel_window_plugin_set_screen_position (GtkWidget *widget,
   switch (window->snap_position)
     {
     case SNAP_POSITION_NONE:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
           XFCE_SCREEN_POSITION_FLOATING_V;
       break;
 
     case SNAP_POSITION_NW:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_NW_H :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_NW_H :
           XFCE_SCREEN_POSITION_NW_V;
       break;
 
     case SNAP_POSITION_NE:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_NE_H :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_NE_H :
           XFCE_SCREEN_POSITION_NE_V;
       break;
 
     case SNAP_POSITION_SW:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_SW_H :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_SW_H :
           XFCE_SCREEN_POSITION_SW_V;
       break;
 
     case SNAP_POSITION_SE:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_SE_H :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_SE_H :
           XFCE_SCREEN_POSITION_SE_V;
       break;
 
     case SNAP_POSITION_W:
     case SNAP_POSITION_WC:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
           XFCE_SCREEN_POSITION_W;
       break;
 
     case SNAP_POSITION_E:
     case SNAP_POSITION_EC:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_FLOATING_H :
           XFCE_SCREEN_POSITION_E;
       break;
 
     case SNAP_POSITION_S:
     case SNAP_POSITION_SC:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_S :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_S :
           XFCE_SCREEN_POSITION_FLOATING_V;
       break;
 
     case SNAP_POSITION_N:
     case SNAP_POSITION_NC:
-      position = HORIZONTAL (window) ? XFCE_SCREEN_POSITION_N :
+      position = IS_HORIZONTAL (window) ? XFCE_SCREEN_POSITION_N :
           XFCE_SCREEN_POSITION_FLOATING_V;
       break;
 
