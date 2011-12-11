@@ -30,6 +30,7 @@
 #include <panel/panel-itembar.h>
 
 #define IS_HORIZONTAL(itembar) ((itembar)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+#define HIGHLIGHT_SIZE         2
 
 
 
@@ -370,7 +371,7 @@ panel_itembar_size_request (GtkWidget      *widget,
       else
         {
           /* this noop item is the dnd position */
-          total_len += itembar->size;
+          total_len += HIGHLIGHT_SIZE;
         }
     }
 
@@ -407,6 +408,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   gint               shrink_len_avail, shrink_len_req;
   gint               itembar_len;
   gint               x, y;
+  gint               x_init, y_init;
   gboolean           expand_children_fit;
   gint               new_len;
   gint               child_len;
@@ -490,7 +492,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       else
         {
           /* dnd separator */
-          expand_len_avail -= itembar->size;
+          expand_len_avail -= HIGHLIGHT_SIZE;
         }
     }
 
@@ -510,8 +512,8 @@ panel_itembar_size_allocate (GtkWidget     *widget,
     }
 
   /* init coordinates for first child */
-  x = allocation->x + border_width;
-  y = allocation->y + border_width;
+  x = x_init = allocation->x + border_width;
+  y = y_init = allocation->y + border_width;
 
   /* init counters for small child packing */
   row_max_size = 0;
@@ -528,14 +530,23 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       /* the highlight item for which we keep some spare space */
       if (G_UNLIKELY (child == NULL))
         {
-          itembar->highlight_x = x;
-          itembar->highlight_y = y;
-          expand_len_avail -= itembar->size;
 
           if (IS_HORIZONTAL (itembar))
-            x += itembar->size;
+            {
+              itembar->highlight_x = x;
+              itembar->highlight_y = y_init;
+
+              x += HIGHLIGHT_SIZE;
+            }
           else
-            y += itembar->size;
+            {
+              itembar->highlight_x = x_init;
+              itembar->highlight_y = y;
+
+              y += HIGHLIGHT_SIZE;
+            }
+
+          expand_len_avail -= HIGHLIGHT_SIZE;
 
           continue;
         }
@@ -613,12 +624,12 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               if (IS_HORIZONTAL (itembar)) \
                 { \
                   x += row_max_size; \
-                  y = allocation->y + border_width; \
+                  y = y_init; \
                 } \
               else \
                 { \
                   y += row_max_size; \
-                  x = allocation->x + border_width; \
+                  x = x_init; \
                 } \
                \
               col_count = 0; \
@@ -664,20 +675,45 @@ static gboolean
 panel_itembar_expose_event (GtkWidget      *widget,
                             GdkEventExpose *event)
 {
-  gboolean      result;
   PanelItembar *itembar = PANEL_ITEMBAR (widget);
+  gboolean      result;
+  cairo_t      *cr;
+  GdkWindow    *window;
+  GdkRectangle  rect;
+  gint          row_size;
 
   result = (*GTK_WIDGET_CLASS (panel_itembar_parent_class)->expose_event) (widget, event);
 
   if (itembar->highlight_index != -1)
     {
-      gtk_paint_box (widget->style, widget->window,
-                     GTK_STATE_NORMAL, GTK_SHADOW_OUT,
-                     &event->area, widget, "panel-dnd",
-                     itembar->highlight_x + 1,
-                     itembar->highlight_y + 1,
-                     itembar->size - 2,
-                     itembar->size - 2);
+      row_size = itembar->size * itembar->nrows;
+
+      rect.x = itembar->highlight_x - 1;
+      rect.y = itembar->highlight_y - 1;
+
+      if (IS_HORIZONTAL (itembar))
+        {
+          rect.width = HIGHLIGHT_SIZE;
+          rect.height = row_size;
+        }
+      else
+        {
+          rect.height = HIGHLIGHT_SIZE;
+          rect.width = row_size;
+        }
+
+      /* draw highlight box */
+      window = gtk_widget_get_window (widget);
+      cr = gdk_cairo_create (window);
+      cairo_set_source_rgb (cr, 1.00, 0.00, 0.00);
+
+      gdk_cairo_rectangle (cr, &event->area);
+      cairo_clip (cr);
+
+      gdk_cairo_rectangle (cr, &rect);
+      cairo_fill (cr);
+
+      cairo_destroy (cr);
     }
 
   return result;
