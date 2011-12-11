@@ -182,6 +182,11 @@ gboolean              xfce_panel_plugin_get_shrink          (XfcePanelPlugin   *
 void                  xfce_panel_plugin_set_shrink          (XfcePanelPlugin   *plugin,
                                                              gboolean           shrink);
 
+gboolean              xfce_panel_plugin_get_small           (XfcePanelPlugin   *plugin) G_GNUC_PURE;
+
+void                  xfce_panel_plugin_set_small           (XfcePanelPlugin   *plugin,
+                                                             gboolean           small);
+
 GtkOrientation        xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 XfcePanelPluginMode   xfce_panel_plugin_get_mode            (XfcePanelPlugin   *plugin) G_GNUC_PURE;

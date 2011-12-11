@@ -126,6 +126,7 @@ enum
   PROP_UNIQUE_ID,
   PROP_ORIENTATION,
   PROP_SIZE,
+  PROP_SMALL,
   PROP_SCREEN_POSITION,
   PROP_EXPAND,
   PROP_MODE,
@@ -174,6 +175,7 @@ struct _XfcePanelPluginPrivate
   guint                shrink : 1;
   guint                nrows;
   XfcePanelPluginMode  mode;
+  guint                small : 1;
   XfceScreenPosition   screen_position;
   guint                locked : 1;
   GSList              *menu_items;
@@ -595,6 +597,24 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                                        | G_PARAM_STATIC_STRINGS));
 
   /**
+   * XfcePanelPlugin:small:
+   *
+   * Wether the #XfcePanelPlugin is small enough to fit a single row of a multi-row panel.
+   * Plugin writes can use it to read or set this property, but xfce_panel_plugin_set_small()
+   * is recommended.
+   *
+   * Since: 4.10
+   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_SMALL,
+                                   g_param_spec_boolean ("small",
+                                                         "Small",
+                                                         "Is this plugin small, e.g. a single button?",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE
+                                                         | G_PARAM_STATIC_STRINGS));
+
+  /**
    * XfcePanelPlugin:expand:
    *
    * Wether the #XfcePanelPlugin expands on the panel. Plugin writes can use it
@@ -679,6 +699,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->property_base = NULL;
   plugin->priv->arguments = NULL;
   plugin->priv->size = 0;
+  plugin->priv->small = FALSE;
   plugin->priv->expand = FALSE;
   plugin->priv->shrink = FALSE;
   plugin->priv->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
@@ -781,6 +802,14 @@ xfce_panel_plugin_get_property (GObject    *object,
       g_value_set_int (value, private->size);
       break;
 
+    case PROP_NROWS:
+      g_value_set_uint (value, private->nrows);
+      break;
+
+    case PROP_SMALL:
+      g_value_set_boolean (value, private->small);
+      break;
+
     case PROP_SCREEN_POSITION:
       g_value_set_enum (value, private->screen_position);
       break;
@@ -838,6 +867,11 @@ xfce_panel_plugin_set_property (GObject      *object,
 
     case PROP_ARGUMENTS:
       private->arguments = g_value_dup_boxed (value);
+      break;
+
+    case PROP_SMALL:
+      xfce_panel_plugin_set_small (XFCE_PANEL_PLUGIN (object),
+                                   g_value_get_boolean (value));
       break;
 
     case PROP_EXPAND:
@@ -1852,6 +1886,62 @@ xfce_panel_plugin_set_shrink (XfcePanelPlugin *plugin,
                                                   PROVIDER_SIGNAL_UNSHRINK_PLUGIN);
 
       g_object_notify (G_OBJECT (plugin), "shrink");
+    }
+}
+
+
+/**
+ * xfce_panel_plugin_get_small:
+ * @plugin : an #XfcePanelPlugin.
+ *
+ * Whether the plugin is small enough to fit in a single row of
+ * a multi-row panel. E.g. if it is a button-like applet.
+ *
+ * Returns: %TRUE when the plugin is small,
+ *          %FALSE otherwise.
+ *
+ * Since: 4.10
+ **/
+gboolean
+xfce_panel_plugin_get_small (XfcePanelPlugin *plugin)
+{
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
+  g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), FALSE);
+
+  return plugin->priv->small;
+}
+
+
+
+/**
+ * xfce_panel_plugin_set_small:
+ * @plugin : an #XfcePanelPlugin.
+ * @small : whether the plugin is a small button-like applet.
+ *
+ * Whether the plugin is small enough to fit in a single row of
+ * a multi-row panel. E.g. if it is a button-like applet.
+ **/
+void
+xfce_panel_plugin_set_small (XfcePanelPlugin *plugin,
+                             gboolean         small)
+{
+  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+  g_return_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin));
+
+  /* normalize the value */
+  small = !!small;
+
+  /* check if update is required */
+  if (G_LIKELY (xfce_panel_plugin_get_small (plugin) != small))
+    {
+      plugin->priv->small = small;
+
+      /* emit signal (in provider) */
+      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                              small ? PROVIDER_SIGNAL_SMALL_PLUGIN :
+                                              PROVIDER_SIGNAL_UNSMALL_PLUGIN);
+
+      g_object_notify (G_OBJECT (plugin), "small");
     }
 }
 

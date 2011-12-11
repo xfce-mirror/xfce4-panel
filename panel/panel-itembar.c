@@ -102,6 +102,7 @@ struct _PanelItembarChild
   guint      expand : 1;
   guint      shrink : 1;
   guint      wrap : 1;
+  guint      small : 1;
 };
 
 enum
@@ -117,7 +118,8 @@ enum
   CHILD_PROP_0,
   CHILD_PROP_EXPAND,
   CHILD_PROP_SHRINK,
-  CHILD_PROP_WRAP
+  CHILD_PROP_WRAP,
+  CHILD_PROP_SMALL
 };
 
 enum
@@ -208,6 +210,13 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtk_container_class_install_child_property (gtkcontainer_class,
                                               CHILD_PROP_WRAP,
                                               g_param_spec_boolean ("wrap",
+                                                                    NULL, NULL,
+                                                                    FALSE,
+                                                                    EXO_PARAM_READWRITE));
+
+  gtk_container_class_install_child_property (gtkcontainer_class,
+                                              CHILD_PROP_SMALL,
+                                              g_param_spec_boolean ("small",
                                                                     NULL, NULL,
                                                                     FALSE,
                                                                     EXO_PARAM_READWRITE));
@@ -704,6 +713,13 @@ panel_itembar_set_child_property (GtkContainer *container,
       child->wrap = boolean;
       break;
 
+    case CHILD_PROP_SMALL:
+      boolean = g_value_get_boolean (value);
+      if (child->small == boolean)
+        return;
+      child->small = boolean;
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (container, prop_id, pspec);
       break;
@@ -739,6 +755,10 @@ panel_itembar_get_child_property (GtkContainer *container,
 
     case CHILD_PROP_WRAP:
       g_value_set_boolean (value, child->wrap);
+      break;
+
+    case CHILD_PROP_SMALL:
+      g_value_set_boolean (value, child->small);
       break;
 
     default:
