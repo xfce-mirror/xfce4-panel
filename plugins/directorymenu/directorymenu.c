@@ -85,6 +85,8 @@ static void      directory_menu_plugin_set_property         (GObject            
 static void      directory_menu_plugin_construct            (XfcePanelPlugin     *panel_plugin);
 static void      directory_menu_plugin_free_file_patterns   (DirectoryMenuPlugin *plugin);
 static void      directory_menu_plugin_free_data            (XfcePanelPlugin     *panel_plugin);
+static gboolean  directory_menu_plugin_size_changed         (XfcePanelPlugin     *panel_plugin,
+                                                             gint                 size);
 static void      directory_menu_plugin_configure_plugin     (XfcePanelPlugin     *panel_plugin);
 static gboolean  directory_menu_plugin_remote_event         (XfcePanelPlugin     *panel_plugin,
                                                              const gchar         *name,
@@ -116,6 +118,7 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = directory_menu_plugin_construct;
   plugin_class->free_data = directory_menu_plugin_free_data;
+  plugin_class->size_changed = directory_menu_plugin_size_changed;
   plugin_class->configure_plugin = directory_menu_plugin_configure_plugin;
   plugin_class->remote_event = directory_menu_plugin_remote_event;
 
@@ -295,7 +298,9 @@ directory_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
     { NULL }
   };
 
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+  xfce_panel_plugin_menu_show_configure (panel_plugin);
+
+  xfce_panel_plugin_set_small (panel_plugin, TRUE);
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),
@@ -337,6 +342,20 @@ directory_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   directory_menu_plugin_free_file_patterns (plugin);
 }
+
+
+
+static gboolean
+directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                                    gint             size)
+{
+  /* force a square button */
+  size /= xfce_panel_plugin_get_nrows (panel_plugin);
+  gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
+
+  return TRUE;
+}
+
 
 
 
