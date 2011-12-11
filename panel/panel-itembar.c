@@ -84,24 +84,31 @@ struct _PanelItembar
 {
   GtkContainer __parent__;
 
-  GSList         *children;
+  GSList              *children;
 
   /* some properties we clone from the panel window */
-  XfcePanelPluginMode mode;
-  guint               size;
-  guint               nrows;
+  XfcePanelPluginMode  mode;
+  guint                size;
+  guint                nrows;
 
   /* dnd support */
-  gint                highlight_index;
-  gint                highlight_x, highlight_y;
+  gint                 highlight_index;
+  gint                 highlight_x, highlight_y;
 };
+
+typedef enum
+{
+  CHILD_OPTION_NONE,
+  CHILD_OPTION_EXPAND,
+  CHILD_OPTION_SHRINK,
+  CHILD_OPTION_SMALL
+}
+ChildOptions;
 
 struct _PanelItembarChild
 {
-  GtkWidget *widget;
-  guint      expand : 1;
-  guint      shrink : 1;
-  guint      small : 1;
+  GtkWidget    *widget;
+  ChildOptions  option;
 };
 
 enum
@@ -394,7 +401,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
           gtk_widget_get_child_requisition (child->widget, &child_req);
           length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
 
-          if (G_UNLIKELY (child->expand))
+          if (G_UNLIKELY (child->option == CHILD_OPTION_EXPAND))
             {
               expand_length_req += length;
             }
@@ -402,7 +409,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
             {
               expand_length_avail -= length;
 
-              if (child->shrink)
+              if (child->option == CHILD_OPTION_SHRINK)
                 shrink_length_avail += length;
             }
         }
@@ -461,7 +468,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
       child_length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
 
-      if (G_UNLIKELY (!expand_children_fit && child->expand))
+      if (G_UNLIKELY (!expand_children_fit && child->option == CHILD_OPTION_EXPAND))
         {
           /* equally share the length between the expanding plugins */
           panel_assert (expand_length_req > 0);
@@ -472,7 +479,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
           child_length = new_length;
         }
-      else if (child->shrink && shrink_length_req > 0)
+      else if (child->option == CHILD_OPTION_SHRINK && shrink_length_req > 0)
         {
           /* equally shrink all shrinking plugins */
           panel_assert (shrink_length_avail > 0);
@@ -614,7 +621,8 @@ panel_itembar_set_child_property (GtkContainer *container,
                                   GParamSpec   *pspec)
 {
   PanelItembarChild *child;
-  gboolean           boolean;
+  gboolean           enable;
+  ChildOptions       option;
 
   child = panel_itembar_get_child (PANEL_ITEMBAR (container), widget);
   if (G_UNLIKELY (child == NULL))
@@ -623,30 +631,34 @@ panel_itembar_set_child_property (GtkContainer *container,
   switch (prop_id)
     {
     case CHILD_PROP_EXPAND:
-      boolean = g_value_get_boolean (value);
-      if (child->expand == boolean)
-        return;
-      child->expand = boolean;
+      option = CHILD_OPTION_EXPAND;
       break;
 
     case CHILD_PROP_SHRINK:
-      boolean = g_value_get_boolean (value);
-      if (child->shrink == boolean)
-        return;
-      child->shrink = boolean;
+      option = CHILD_OPTION_SHRINK;
       break;
 
     case CHILD_PROP_SMALL:
-      boolean = g_value_get_boolean (value);
-      if (child->small == boolean)
-        return;
-      child->small = boolean;
+      option = CHILD_OPTION_SMALL;
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (container, prop_id, pspec);
-      break;
+      return;
     }
+
+  /* warn if we override an old option */
+  if (child->option != CHILD_OPTION_NONE
+      && child->option != option)
+    g_warning ("Itembar child can only enable only of expand, shrink or small.");
+
+  /* leave if nothing changes */
+  enable = g_value_get_boolean (value);
+  if ((!enable && child->option == CHILD_OPTION_NONE)
+      || (enable && child->option == option))
+    return;
+
+  child->option = enable ? option : CHILD_OPTION_NONE;
 
   gtk_widget_queue_resize (GTK_WIDGET (container));
 }
@@ -669,15 +681,15 @@ panel_itembar_get_child_property (GtkContainer *container,
   switch (prop_id)
     {
     case CHILD_PROP_EXPAND:
-      g_value_set_boolean (value, child->expand);
+      g_value_set_boolean (value, child->option == CHILD_OPTION_EXPAND);
       break;
 
     case CHILD_PROP_SHRINK:
-      g_value_set_boolean (value, child->shrink);
+      g_value_set_boolean (value, child->option == CHILD_OPTION_SHRINK);
       break;
 
     case CHILD_PROP_SMALL:
-      g_value_set_boolean (value, child->small);
+      g_value_set_boolean (value, child->option == CHILD_OPTION_SMALL);
       break;
 
     default:
@@ -733,7 +745,7 @@ panel_itembar_insert (PanelItembar *itembar,
 
   child = g_slice_new0 (PanelItembarChild);
   child->widget = widget;
-  child->expand = FALSE;
+  child->option = CHILD_OPTION_NONE;
 
   itembar->children = g_slist_insert (itembar->children, child, position);
   gtk_widget_set_parent (widget, GTK_WIDGET (itembar));
