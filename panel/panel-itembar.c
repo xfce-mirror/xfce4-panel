@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2008-2010 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2008-2011 Nick Schermer <nick@xfce.org>
+ * Copyright (C)      2011 Andrzej <ndrwrdck@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +29,7 @@
 
 #include <panel/panel-itembar.h>
 
-#define HORIZONTAL(itembar) ((itembar)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+#define IS_HORIZONTAL(itembar) ((itembar)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 
 
 
@@ -88,8 +89,8 @@ struct _PanelItembar
 
   /* some properties we clone from the panel window */
   XfcePanelPluginMode  mode;
-  guint                size;
-  guint                nrows;
+  gint                 size;
+  gint                 nrows;
 
   /* dnd support */
   gint                 highlight_index;
@@ -294,7 +295,12 @@ panel_itembar_finalize (GObject *object)
   (*G_OBJECT_CLASS (panel_itembar_parent_class)->finalize) (object);
 }
 
+#define CHILD_FITS_IN_ROW(child_req, itembar) \
+  ((IS_HORIZONTAL (itembar) && child_req.height <= (itembar)->size) \
+   || (!IS_HORIZONTAL (itembar) && child_req.width <= (itembar)->size))
 
+#define CHILD_LENGTH(child_req, itembar) \
+  (IS_HORIZONTAL (itembar) ? child_req.width : child_req.height)
 
 static void
 panel_itembar_size_request (GtkWidget      *widget,
@@ -303,56 +309,86 @@ panel_itembar_size_request (GtkWidget      *widget,
   PanelItembar      *itembar = PANEL_ITEMBAR (widget);
   GSList            *li;
   PanelItembarChild *child;
-  GtkRequisition     child_requisition;
+  GtkRequisition     child_req;
   gint               border_width;
-  gint               row_length = 0;
+  gint               row_max_size;
+  gint               col_count;
+  gint               rows_size;
+  gint               total_len;
+  gint               child_len;
 
-  /* intialize the requisition, we always set the panel height */
-  if (HORIZONTAL (itembar))
-    {
-      requisition->height = itembar->size;
-      requisition->width = 0;
-    }
-  else
-    {
-      requisition->height = 0;
-      requisition->width = itembar->size;
-    }
+  /* total length we request */
+  total_len = 0;
 
-  /* get the size requests of the children and use the longest row for
-   * the requested width/height when we have wrap items */
-  for (li = itembar->children; li != NULL; li = g_slist_next (li))
+  /* counter for small child packing */
+  row_max_size = 0;
+  col_count = 0;
+
+  for (li = itembar->children; li != NULL; li = li->next)
     {
       child = li->data;
+
       if (G_LIKELY (child != NULL))
         {
           if (!GTK_WIDGET_VISIBLE (child->widget))
             continue;
 
-          gtk_widget_size_request (child->widget, &child_requisition);
+          /* get the child's size request */
+          gtk_widget_size_request (child->widget, &child_req);
 
-          if (HORIZONTAL (itembar))
-            row_length += child_requisition.width;
-          else
-            row_length += child_requisition.height;
+          /* check if the small child fits in a row */
+          if (child->option == CHILD_OPTION_SMALL
+              && itembar->nrows > 1
+              && CHILD_FITS_IN_ROW (child_req, itembar))
+            {
+              child_len = CHILD_LENGTH (child_req, itembar);
+
+              /* make sure we have enough space for all the children on the row.
+               * so add the difference between the largest child in this column */
+              if (child_len > row_max_size)
+                {
+                  total_len += child_len - row_max_size;
+                  row_max_size = child_len;
+                }
+
+              /* reset to new row if all columns are filled */
+              if (++col_count >= itembar->nrows)
+                {
+                  col_count = 0;
+                  row_max_size = 0;
+                }
+            }
+          else /* expanding or normal item */
+            {
+              total_len += CHILD_LENGTH (child_req, itembar);
+
+              /* reset column packing */
+              col_count = 0;
+              row_max_size = 0;
+            }
         }
       else
         {
           /* this noop item is the dnd position */
-          row_length += itembar->size;
+          total_len += itembar->size;
         }
     }
 
-  /* also take the last row_length into account */
-  if (HORIZONTAL (itembar))
-    requisition->width = MAX (requisition->width, row_length);
-  else
-    requisition->height = MAX (requisition->height, row_length);
+  /* the size property stored in the itembar is that of a single row */
+  rows_size = itembar->size * itembar->nrows;
 
-  /* add border width */
+  /* return the total size */
   border_width = GTK_CONTAINER (widget)->border_width * 2;
-  requisition->height += border_width;
-  requisition->width += border_width;
+  if (IS_HORIZONTAL (itembar))
+    {
+      requisition->width = total_len + border_width;
+      requisition->height = rows_size + border_width;
+    }
+  else
+    {
+      requisition->height = total_len + border_width;
+      requisition->width = rows_size + border_width;
+    }
 }
 
 
@@ -366,31 +402,43 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   PanelItembarChild *child;
   GtkRequisition     child_req;
   GtkAllocation      child_alloc;
-  gint               widget_length, border_width;
-  gint               expand_length_avail, expand_length_req;
-  gint               shrink_length_avail, shrink_length_req;
-  gint               length;
+  gint               border_width;
+  gint               expand_len_avail, expand_len_req;
+  gint               shrink_len_avail, shrink_len_req;
+  gint               itembar_len;
   gint               x, y;
   gboolean           expand_children_fit;
-  gint               new_length;
-  gint               child_length;
+  gint               new_len;
+  gint               child_len;
+  gint               row_max_size;
+  gint               col_count;
+  gint               rows_size;
 
+  /* the maximum allocation is limited by that of the
+   * panel window, so take over the assigned allocation */
   widget->allocation = *allocation;
 
   border_width = GTK_CONTAINER (widget)->border_width;
 
-  if (HORIZONTAL (itembar))
-    widget_length = allocation->width - 2 * border_width;
+  if (IS_HORIZONTAL (itembar))
+    itembar_len = allocation->width - 2 * border_width;
   else
-    widget_length = allocation->height - 2 * border_width;
+    itembar_len = allocation->height - 2 * border_width;
 
-  expand_length_avail = widget_length;
-  expand_length_req = 0;
-  shrink_length_avail = 0;
-  shrink_length_req = 0;
+  /* init the remaining space for expanding plugins */
+  expand_len_avail = itembar_len;
+  expand_len_req = 0;
+
+  /* init the total size of shrinking plugins */
+  shrink_len_avail = 0;
+  shrink_len_req = 0;
+
+  /* init counters for small child packing */
+  row_max_size = 0;
+  col_count = 0;
 
   /* get information about the expandable lengths */
-  for (lp = itembar->children; lp != NULL; lp = g_slist_next (lp))
+  for (lp = itembar->children; lp != NULL; lp = lp->next)
     {
       child = lp->data;
       if (G_LIKELY (child != NULL))
@@ -399,47 +447,81 @@ panel_itembar_size_allocate (GtkWidget     *widget,
             continue;
 
           gtk_widget_get_child_requisition (child->widget, &child_req);
-          length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
 
-          if (G_UNLIKELY (child->option == CHILD_OPTION_EXPAND))
+          child_len = CHILD_LENGTH (child_req, itembar);
+
+          if (G_UNLIKELY (child->option == CHILD_OPTION_SMALL
+              && itembar->nrows > 1
+              && CHILD_FITS_IN_ROW (child_req, itembar)))
             {
-              expand_length_req += length;
+              /* extract from the available space */
+              if (child_len > row_max_size)
+                {
+                  expand_len_avail -= child_len - row_max_size;
+                  row_max_size = child_len;
+                }
+
+              /* reset to new row if all columns are filled */
+              if (++col_count >= itembar->nrows)
+                {
+                  col_count = 0;
+                  row_max_size = 0;
+                }
             }
           else
             {
-              expand_length_avail -= length;
+              /* reset column packing counters */
+              col_count = 0;
+              row_max_size = 0;
 
-              if (child->option == CHILD_OPTION_SHRINK)
-                shrink_length_avail += length;
+              if (G_UNLIKELY (child->option == CHILD_OPTION_EXPAND))
+                {
+                  expand_len_req += child_len;
+                }
+              else
+                {
+                  expand_len_avail -= child_len;
+
+                  if (child->option == CHILD_OPTION_SHRINK)
+                    shrink_len_avail += child_len;
+                }
             }
         }
       else
         {
-          expand_length_avail -= itembar->size;
+          /* dnd separator */
+          expand_len_avail -= itembar->size;
         }
     }
-
-  /* set start coordinates for the items in the row*/
-  x = allocation->x + border_width;
-  y = allocation->y + border_width;
 
   /* whether the expandable items fit on this row; we use this
    * as a fast-path when there are expanding items on a panel with
    * not really enough length to expand (ie. items make the panel grow,
    * not the length set by the user) */
-  expand_children_fit = expand_length_req == expand_length_avail;
+  expand_children_fit = expand_len_req == expand_len_avail;
 
-  if (expand_length_avail < 0)
+  if (expand_len_avail < 0)
     {
       /* check if there are plugins on the panel we can shrink */
-      if (shrink_length_avail > 0)
-        shrink_length_req = ABS (expand_length_avail);
+      if (shrink_len_avail > 0)
+        shrink_len_req = ABS (expand_len_avail);
 
-      expand_length_avail = 0;
+      expand_len_avail = 0;
     }
 
+  /* init coordinates for first child */
+  x = allocation->x + border_width;
+  y = allocation->y + border_width;
+
+  /* init counters for small child packing */
+  row_max_size = 0;
+  col_count = 0;
+
+  /* the size property stored in the itembar is that of a single row */
+  rows_size = itembar->size * itembar->nrows;
+
   /* allocate the children on this row */
-  for (lp = itembar->children; lp != NULL; lp = g_slist_next (lp))
+  for (lp = itembar->children; lp != NULL; lp = lp->next)
     {
       child = lp->data;
 
@@ -448,9 +530,9 @@ panel_itembar_size_allocate (GtkWidget     *widget,
         {
           itembar->highlight_x = x;
           itembar->highlight_y = y;
-          expand_length_avail -= itembar->size;
+          expand_len_avail -= itembar->size;
 
-          if (HORIZONTAL (itembar))
+          if (IS_HORIZONTAL (itembar))
             x += itembar->size;
           else
             y += itembar->size;
@@ -463,57 +545,117 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
       gtk_widget_get_child_requisition (child->widget, &child_req);
 
-      child_alloc.x = x;
-      child_alloc.y = y;
-
-      child_length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
+      child_len = CHILD_LENGTH (child_req, itembar);
 
       if (G_UNLIKELY (!expand_children_fit && child->option == CHILD_OPTION_EXPAND))
         {
           /* equally share the length between the expanding plugins */
-          panel_assert (expand_length_req > 0);
-          new_length = expand_length_avail * child_length / expand_length_req;
+          panel_assert (expand_len_req > 0);
+          new_len = expand_len_avail * child_len / expand_len_req;
 
-          expand_length_req -= child_length;
-          expand_length_avail -= new_length;
+          expand_len_req -= child_len;
+          expand_len_avail -= new_len;
 
-          child_length = new_length;
+          child_len = new_len;
         }
-      else if (child->option == CHILD_OPTION_SHRINK && shrink_length_req > 0)
+      else if (child->option == CHILD_OPTION_SHRINK
+               && shrink_len_req > 0)
         {
           /* equally shrink all shrinking plugins */
-          panel_assert (shrink_length_avail > 0);
-          new_length = shrink_length_req * child_length / shrink_length_avail;
+          panel_assert (shrink_len_avail > 0);
+          new_len = shrink_len_req * child_len / shrink_len_avail;
 
-          shrink_length_req -= new_length;
-          shrink_length_avail -= child_length;
+          shrink_len_req -= new_len;
+          shrink_len_avail -= child_len;
 
           /* the size we decrease can never be more then the actual length,
            * if this is the case the size allocation is lacking behind,
            * which happens on panel startup with a expanding panel */
-          if (new_length < child_length)
-            child_length -= new_length;
+          if (new_len < child_len)
+            child_len -= new_len;
         }
 
-      if (child_length < 1)
-        child_length = 1;
+      if (G_UNLIKELY (child_len < 1))
+        child_len = 1;
 
-      if (HORIZONTAL (itembar))
+      if (child->option == CHILD_OPTION_SMALL
+          && itembar->nrows > 1
+          && CHILD_FITS_IN_ROW (child_req, itembar))
         {
-          child_alloc.height = itembar->size;
-          child_alloc.width = child_length;
-          x += child_alloc.width;
+          if (row_max_size < child_len)
+            row_max_size = child_len;
+
+          child_alloc.x = x;
+          child_alloc.y = y;
+
+          if (IS_HORIZONTAL (itembar))
+            {
+              child_alloc.height = MIN (itembar->size, child_req.height);
+              child_alloc.width = child_len;
+
+              /* pack next small item below this one */
+              y += itembar->size;
+            }
+          else
+            {
+              child_alloc.width = MIN (itembar->size, child_req.width);
+              child_alloc.height = child_len;
+
+              /* pack next time right of this one */
+              x += itembar->size;
+            }
+
+          /* reset to new row if all columns are filled */
+          if (++col_count >= itembar->nrows)
+            {
+#define RESET_COLUMN_COUNTERS \
+              /* update coordinates */ \
+              if (IS_HORIZONTAL (itembar)) \
+                { \
+                  x += row_max_size; \
+                  y = allocation->y + border_width; \
+                } \
+              else \
+                { \
+                  y += row_max_size; \
+                  x = allocation->x + border_width; \
+                } \
+               \
+              col_count = 0; \
+              row_max_size = 0;
+
+              RESET_COLUMN_COUNTERS
+            }
         }
       else
         {
-          child_alloc.width = itembar->size;
-          child_alloc.height = child_length;
-          y += child_alloc.height;
+          /* reset column packing counters */
+          if (col_count > 0)
+            {
+              RESET_COLUMN_COUNTERS
+            }
+
+          child_alloc.x = x;
+          child_alloc.y = y;
+
+          if (IS_HORIZONTAL (itembar))
+            {
+              child_alloc.height = MIN (rows_size, child_req.height);
+              child_alloc.width = child_len;
+
+              x += child_len;
+            }
+          else
+            {
+              child_alloc.width = MIN (rows_size, child_req.width);
+              child_alloc.height = child_len;
+
+              y += child_len;
+            }
         }
 
       gtk_widget_size_allocate (child->widget, &child_alloc);
     }
-
 }
 
 
@@ -851,7 +993,7 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
 
       alloc = &child->widget->allocation;
 
-      if (HORIZONTAL (itembar))
+      if (IS_HORIZONTAL (itembar))
         {
           if (x < (alloc->x + (alloc->width / 2))
               && y >= alloc->y
