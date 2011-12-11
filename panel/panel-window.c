@@ -2590,6 +2590,7 @@ panel_window_set_povider_info (PanelWindow *window,
   panel_window_plugin_set_mode (provider, window);
   panel_window_plugin_set_screen_position (provider, window);
   panel_window_plugin_set_size (provider, window);
+  panel_window_plugin_set_nrows (provider, window);
 }
 
 
