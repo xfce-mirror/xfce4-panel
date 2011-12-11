@@ -170,7 +170,7 @@ struct _XfcePanelPluginPrivate
   gint                 unique_id;
   gchar               *property_base;
   gchar              **arguments;
-  gint                 size;
+  gint                 size; /* single row size */
   guint                expand : 1;
   guint                shrink : 1;
   guint                nrows;
@@ -799,7 +799,7 @@ xfce_panel_plugin_get_property (GObject    *object,
       break;
 
     case PROP_SIZE:
-      g_value_set_int (value, private->size);
+      g_value_set_int (value, private->size * private->nrows);
       break;
 
     case PROP_NROWS:
@@ -1352,20 +1352,23 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
 {
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
   gboolean         handled = FALSE;
+  gint             real_size;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
+  real_size = size * plugin->priv->nrows;
+
   /* check if update is required */
-  if (G_LIKELY (plugin->priv->size != size))
+  if (G_LIKELY (plugin->priv->size != real_size))
     {
       plugin->priv->size = size;
 
       g_signal_emit (G_OBJECT (plugin),
-                     plugin_signals[SIZE_CHANGED], 0, size, &handled);
+                     plugin_signals[SIZE_CHANGED], 0, real_size, &handled);
 
       /* handle the size when not done by the plugin */
       if (!handled)
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
+        gtk_widget_set_size_request (GTK_WIDGET (plugin), real_size, real_size);
 
       g_object_notify (G_OBJECT (plugin), "size");
     }
@@ -1417,6 +1420,8 @@ xfce_panel_plugin_set_nrows (XfcePanelPluginProvider *provider,
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
+  nrows = MAX (nrows, 1);
+
   /* check if update is required */
   if (G_LIKELY (plugin->priv->nrows != nrows))
     {
@@ -1426,6 +1431,9 @@ xfce_panel_plugin_set_nrows (XfcePanelPluginProvider *provider,
                      plugin_signals[NROWS_CHANGED], 0, nrows);
 
       g_object_notify (G_OBJECT (plugin), "nrows");
+
+      /* also the size changed */
+      xfce_panel_plugin_set_size (provider, plugin->priv->size);
     }
 }
 
@@ -1770,11 +1778,14 @@ xfce_panel_plugin_get_arguments (XfcePanelPlugin *plugin)
 gint
 xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
 {
+  gint real_size;
+
   g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), -1);
   g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), -1);
 
   /* always return a 'positive' size that makes sence */
-  return MAX (16, plugin->priv->size);
+  real_size = plugin->priv->size * plugin->priv->nrows;
+  return MAX (16, real_size);
 }
 
 
@@ -1818,7 +1829,7 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
   expand = !!expand;
 
   /* check if update is required */
-  if (G_LIKELY (xfce_panel_plugin_get_expand (plugin) != expand))
+  if (G_LIKELY (plugin->priv->expand != expand))
     {
       plugin->priv->expand = expand;
 
@@ -1876,7 +1887,7 @@ xfce_panel_plugin_set_shrink (XfcePanelPlugin *plugin,
   shrink = !!shrink;
 
   /* check if update is required */
-  if (G_LIKELY (xfce_panel_plugin_get_shrink (plugin) != shrink))
+  if (G_LIKELY (plugin->priv->shrink != shrink))
     {
       plugin->priv->shrink = shrink;
 
@@ -1932,7 +1943,7 @@ xfce_panel_plugin_set_small (XfcePanelPlugin *plugin,
   small = !!small;
 
   /* check if update is required */
-  if (G_LIKELY (xfce_panel_plugin_get_small (plugin) != small))
+  if (G_LIKELY (plugin->priv->small != small))
     {
       plugin->priv->small = small;
 
