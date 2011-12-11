@@ -575,7 +575,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                                    g_param_spec_int ("size",
                                                      "Size",
                                                      "Size of the plugin's panel",
-                                                     0, 128, 0,
+                                                     0, (128 * 6), 0,
                                                      G_PARAM_READABLE
                                                      | G_PARAM_STATIC_STRINGS));
 
