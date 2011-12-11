@@ -329,6 +329,7 @@ window_menu_plugin_set_property (GObject      *object,
             gtk_widget_hide (plugin->icon);
 
           /* update the plugin */
+          xfce_panel_plugin_set_small (panel_plugin, plugin->button_style == BUTTON_STYLE_ICON);
           window_menu_plugin_size_changed (panel_plugin,
               xfce_panel_plugin_get_size (panel_plugin));
           window_menu_plugin_screen_position_changed (panel_plugin,
@@ -451,6 +452,7 @@ window_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+  xfce_panel_plugin_set_small (panel_plugin, TRUE);
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin),
@@ -520,6 +522,7 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   if (plugin->button_style == BUTTON_STYLE_ICON)
     {
       /* square the plugin */
+      size /= xfce_panel_plugin_get_nrows (panel_plugin);
       gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
     }
   else
