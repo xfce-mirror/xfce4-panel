@@ -31,6 +31,7 @@
 
 static void     show_desktop_plugin_screen_changed          (GtkWidget              *widget,
                                                              GdkScreen              *previous_screen);
+static void     show_desktop_plugin_construct               (XfcePanelPlugin        *panel_plugin);
 static void     show_desktop_plugin_free_data               (XfcePanelPlugin        *panel_plugin);
 static gboolean show_desktop_plugin_size_changed            (XfcePanelPlugin        *panel_plugin,
                                                              gint                    size);
@@ -73,6 +74,7 @@ show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
   XfcePanelPluginClass *plugin_class;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
+  plugin_class->construct = show_desktop_plugin_construct;
   plugin_class->free_data = show_desktop_plugin_free_data;
   plugin_class->size_changed = show_desktop_plugin_size_changed;
 }
@@ -105,6 +107,14 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   image = xfce_panel_image_new_from_source ("user-desktop");
   gtk_container_add (GTK_CONTAINER (button), image);
   gtk_widget_show (image);
+}
+
+
+
+static void
+show_desktop_plugin_construct (XfcePanelPlugin *panel_plugin)
+{
+  xfce_panel_plugin_set_small (panel_plugin, TRUE);
 }
 
 
@@ -172,6 +182,7 @@ show_desktop_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (panel_plugin), FALSE);
 
   /* keep the button squared */
+  size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
 
   return TRUE;
