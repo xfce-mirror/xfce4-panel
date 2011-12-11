@@ -66,7 +66,7 @@ enum _SeparatorPluginStyle
   SEPARATOR_PLUGIN_STYLE_SEPARATOR,
   SEPARATOR_PLUGIN_STYLE_HANDLE,
   SEPARATOR_PLUGIN_STYLE_DOTS,
-  SEPARATOR_PLUGIN_STYLE_WRAP,
+  SEPARATOR_PLUGIN_STYLE_WRAP, /* not used in 4.10, nrows property is now used */
 
   /* defines */
   SEPARATOR_PLUGIN_STYLE_MIN = SEPARATOR_PLUGIN_STYLE_TRANSPARENT,
@@ -194,17 +194,17 @@ separator_plugin_set_property (GObject      *object,
                                GParamSpec   *pspec)
 {
   SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (object);
-  gboolean         wrap;
 
   switch (prop_id)
     {
     case PROP_STYLE:
       plugin->style = g_value_get_uint (value);
-      gtk_widget_queue_draw (GTK_WIDGET (object));
 
-      wrap = plugin->style == SEPARATOR_PLUGIN_STYLE_WRAP;
-      xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (object),
-           wrap ? PROVIDER_SIGNAL_WRAP_PLUGIN : PROVIDER_SIGNAL_UNWRAP_PLUGIN);
+      /* old property */
+      if (plugin->style == SEPARATOR_PLUGIN_STYLE_WRAP)
+        plugin->style = SEPARATOR_PLUGIN_STYLE_DEFAULT;
+
+      gtk_widget_queue_draw (GTK_WIDGET (object));
       break;
 
     case PROP_EXPAND:
@@ -380,17 +380,6 @@ separator_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-separator_plugin_configure_style_changed (GtkComboBox *combo_box,
-                                          GtkWidget   *expand)
-{
-  /* expand is not functional when the wrap function is enabled */
-  gtk_widget_set_sensitive (expand,
-      gtk_combo_box_get_active (combo_box) != SEPARATOR_PLUGIN_STYLE_WRAP);
-}
-
-
-
-static void
 separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   SeparatorPlugin *plugin = XFCE_SEPARATOR_PLUGIN (panel_plugin);
@@ -407,12 +396,10 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     return;
 
   style = gtk_builder_get_object (builder, "style");
-  expand = gtk_builder_get_object (builder, "expand");
-  g_signal_connect (G_OBJECT (style), "changed",
-      G_CALLBACK (separator_plugin_configure_style_changed), expand);
-
   exo_mutual_binding_new (G_OBJECT (plugin), "style",
                           G_OBJECT (style), "active");
+
+  expand = gtk_builder_get_object (builder, "expand");
   exo_mutual_binding_new (G_OBJECT (plugin), "expand",
                           G_OBJECT (expand), "active");
 

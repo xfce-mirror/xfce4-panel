@@ -633,16 +633,6 @@ panel_application_plugin_provider_signal (XfcePanelPluginProvider       *provide
                                NULL);
       break;
 
-    case PROVIDER_SIGNAL_WRAP_PLUGIN:
-    case PROVIDER_SIGNAL_UNWRAP_PLUGIN:
-      itembar = gtk_bin_get_child (GTK_BIN (window));
-      gtk_container_child_set (GTK_CONTAINER (itembar),
-                               GTK_WIDGET (provider),
-                               "wrap",
-                               provider_signal == PROVIDER_SIGNAL_WRAP_PLUGIN,
-                               NULL);
-      break;
-
     case PROVIDER_SIGNAL_SMALL_PLUGIN:
     case PROVIDER_SIGNAL_UNSMALL_PLUGIN:
       itembar = gtk_bin_get_child (GTK_BIN (window));

@@ -101,7 +101,6 @@ struct _PanelItembarChild
   GtkWidget *widget;
   guint      expand : 1;
   guint      shrink : 1;
-  guint      wrap : 1;
   guint      small : 1;
 };
 
@@ -118,7 +117,6 @@ enum
   CHILD_PROP_0,
   CHILD_PROP_EXPAND,
   CHILD_PROP_SHRINK,
-  CHILD_PROP_WRAP,
   CHILD_PROP_SMALL
 };
 
@@ -203,13 +201,6 @@ panel_itembar_class_init (PanelItembarClass *klass)
   gtk_container_class_install_child_property (gtkcontainer_class,
                                               CHILD_PROP_SHRINK,
                                               g_param_spec_boolean ("shrink",
-                                                                    NULL, NULL,
-                                                                    FALSE,
-                                                                    EXO_PARAM_READWRITE));
-
-  gtk_container_class_install_child_property (gtkcontainer_class,
-                                              CHILD_PROP_WRAP,
-                                              g_param_spec_boolean ("wrap",
                                                                     NULL, NULL,
                                                                     FALSE,
                                                                     EXO_PARAM_READWRITE));
@@ -333,30 +324,10 @@ panel_itembar_size_request (GtkWidget      *widget,
 
           gtk_widget_size_request (child->widget, &child_requisition);
 
-          if (G_LIKELY (!child->wrap))
-            {
-              if (HORIZONTAL (itembar))
-                row_length += child_requisition.width;
-              else
-                row_length += child_requisition.height;
-            }
+          if (HORIZONTAL (itembar))
+            row_length += child_requisition.width;
           else
-            {
-              /* add to size for new wrap element */
-              if (HORIZONTAL (itembar))
-                {
-                  requisition->height += itembar->size;
-                  requisition->width = MAX (requisition->width, row_length);
-                }
-              else
-                {
-                  requisition->width += itembar->size;
-                  requisition->height = MAX (requisition->height, row_length);
-                }
-
-              /* reset length for new row */
-              row_length = 0;
-            }
+            row_length += child_requisition.height;
         }
       else
         {
@@ -384,11 +355,10 @@ panel_itembar_size_allocate (GtkWidget     *widget,
                              GtkAllocation *allocation)
 {
   PanelItembar      *itembar = PANEL_ITEMBAR (widget);
-  GSList            *li, *lp;
+  GSList            *lp;
   PanelItembarChild *child;
   GtkRequisition     child_req;
   GtkAllocation      child_alloc;
-  guint              row;
   gint               widget_length, border_width;
   gint               expand_length_avail, expand_length_req;
   gint               shrink_length_avail, shrink_length_req;
@@ -407,176 +377,136 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   else
     widget_length = allocation->height - 2 * border_width;
 
-  /* loop for wrap items */
-  for (row = 0, li = itembar->children; li != NULL; li = g_slist_next (li), row++)
+  expand_length_avail = widget_length;
+  expand_length_req = 0;
+  shrink_length_avail = 0;
+  shrink_length_req = 0;
+
+  /* get information about the expandable lengths */
+  for (lp = itembar->children; lp != NULL; lp = g_slist_next (lp))
     {
-      expand_length_avail = widget_length;
-      expand_length_req = 0;
-      shrink_length_avail = 0;
-      shrink_length_req = 0;
-
-      /* get information about the expandable lengths */
-      for (lp = li; lp != NULL; lp = g_slist_next (lp))
+      child = lp->data;
+      if (G_LIKELY (child != NULL))
         {
-          child = lp->data;
-          if (G_LIKELY (child != NULL))
-            {
-              if (!GTK_WIDGET_VISIBLE (child->widget))
-                continue;
-
-              /* continue allocating until we hit a wrap child */
-              if (G_UNLIKELY (child->wrap))
-                break;
-
-              gtk_widget_get_child_requisition (child->widget, &child_req);
-              length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
-
-              if (G_UNLIKELY (child->expand))
-                {
-                  expand_length_req += length;
-                }
-              else
-                {
-                  expand_length_avail -= length;
-
-                  if (child->shrink)
-                    shrink_length_avail += length;
-                }
-            }
-          else
-            {
-              expand_length_avail -= itembar->size;
-            }
-        }
-
-      /* set start coordinates for the items in the row*/
-      x = allocation->x + border_width;
-      y = allocation->y + border_width;
-      if (HORIZONTAL (itembar))
-        y += row * itembar->size;
-      else
-        x += row * itembar->size;
-
-      /* whether the expandable items fit on this row; we use this
-       * as a fast-path when there are expanding items on a panel with
-       * not really enough length to expand (ie. items make the panel grow,
-       * not the length set by the user) */
-      expand_children_fit = expand_length_req == expand_length_avail;
-
-      if (expand_length_avail < 0)
-        {
-          /* check if there are plugins on the panel we can shrink */
-          if (shrink_length_avail > 0)
-            shrink_length_req = ABS (expand_length_avail);
-
-          expand_length_avail = 0;
-        }
-
-      /* allocate the children on this row */
-      for (; li != NULL; li = g_slist_next (li))
-        {
-          child = li->data;
-
-          /* the highlight item for which we keep some spare space */
-          if (G_UNLIKELY (child == NULL))
-            {
-              itembar->highlight_x = x;
-              itembar->highlight_y = y;
-              expand_length_avail -= itembar->size;
-
-              if (HORIZONTAL (itembar))
-                x += itembar->size;
-              else
-                y += itembar->size;
-
-              continue;
-            }
-
           if (!GTK_WIDGET_VISIBLE (child->widget))
             continue;
 
           gtk_widget_get_child_requisition (child->widget, &child_req);
+          length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
 
-          child_alloc.x = x;
-          child_alloc.y = y;
-
-          if (child->wrap)
+          if (G_UNLIKELY (child->expand))
             {
-              /* if there is any expanding length available use it for the
-               * wrapping plugin to improve accessibility */
-              if (expand_length_avail > 0)
-                {
-                  if (HORIZONTAL (itembar))
-                    {
-                      child_alloc.height = itembar->size;
-                      child_alloc.width = expand_length_avail;
-                    }
-                  else
-                    {
-                      child_alloc.width = itembar->size;
-                      child_alloc.height = expand_length_avail;
-                    }
-                }
-              else
-                {
-                  /* hide it */
-                  child_alloc.width = child_alloc.height = 0;
-                }
-
-              gtk_widget_size_allocate (child->widget, &child_alloc);
-
-              /* stop and continue to the next row */
-              break;
-            }
-
-          child_length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
-
-          if (G_UNLIKELY (!expand_children_fit && child->expand))
-            {
-              /* equally share the length between the expanding plugins */
-              panel_assert (expand_length_req > 0);
-              new_length = expand_length_avail * child_length / expand_length_req;
-
-              expand_length_req -= child_length;
-              expand_length_avail -= new_length;
-
-              child_length = new_length;
-            }
-          else if (child->shrink && shrink_length_req > 0)
-            {
-              /* equally shrink all shrinking plugins */
-              panel_assert (shrink_length_avail > 0);
-              new_length = shrink_length_req * child_length / shrink_length_avail;
-
-              shrink_length_req -= new_length;
-              shrink_length_avail -= child_length;
-
-              /* the size we decrease can never be more then the actual length,
-               * if this is the case the size allocation is lacking behind,
-               * which happens on panel startup with a expanding panel */
-              if (new_length < child_length)
-                child_length -= new_length;
-            }
-
-          if (child_length < 1)
-            child_length = 1;
-
-          if (HORIZONTAL (itembar))
-            {
-              child_alloc.height = itembar->size;
-              child_alloc.width = child_length;
-              x += child_alloc.width;
+              expand_length_req += length;
             }
           else
             {
-              child_alloc.width = itembar->size;
-              child_alloc.height = child_length;
-              y += child_alloc.height;
-            }
+              expand_length_avail -= length;
 
-          gtk_widget_size_allocate (child->widget, &child_alloc);
+              if (child->shrink)
+                shrink_length_avail += length;
+            }
+        }
+      else
+        {
+          expand_length_avail -= itembar->size;
         }
     }
+
+  /* set start coordinates for the items in the row*/
+  x = allocation->x + border_width;
+  y = allocation->y + border_width;
+
+  /* whether the expandable items fit on this row; we use this
+   * as a fast-path when there are expanding items on a panel with
+   * not really enough length to expand (ie. items make the panel grow,
+   * not the length set by the user) */
+  expand_children_fit = expand_length_req == expand_length_avail;
+
+  if (expand_length_avail < 0)
+    {
+      /* check if there are plugins on the panel we can shrink */
+      if (shrink_length_avail > 0)
+        shrink_length_req = ABS (expand_length_avail);
+
+      expand_length_avail = 0;
+    }
+
+  /* allocate the children on this row */
+  for (lp = itembar->children; lp != NULL; lp = g_slist_next (lp))
+    {
+      child = lp->data;
+
+      /* the highlight item for which we keep some spare space */
+      if (G_UNLIKELY (child == NULL))
+        {
+          itembar->highlight_x = x;
+          itembar->highlight_y = y;
+          expand_length_avail -= itembar->size;
+
+          if (HORIZONTAL (itembar))
+            x += itembar->size;
+          else
+            y += itembar->size;
+
+          continue;
+        }
+
+      if (!GTK_WIDGET_VISIBLE (child->widget))
+        continue;
+
+      gtk_widget_get_child_requisition (child->widget, &child_req);
+
+      child_alloc.x = x;
+      child_alloc.y = y;
+
+      child_length = HORIZONTAL (itembar) ? child_req.width : child_req.height;
+
+      if (G_UNLIKELY (!expand_children_fit && child->expand))
+        {
+          /* equally share the length between the expanding plugins */
+          panel_assert (expand_length_req > 0);
+          new_length = expand_length_avail * child_length / expand_length_req;
+
+          expand_length_req -= child_length;
+          expand_length_avail -= new_length;
+
+          child_length = new_length;
+        }
+      else if (child->shrink && shrink_length_req > 0)
+        {
+          /* equally shrink all shrinking plugins */
+          panel_assert (shrink_length_avail > 0);
+          new_length = shrink_length_req * child_length / shrink_length_avail;
+
+          shrink_length_req -= new_length;
+          shrink_length_avail -= child_length;
+
+          /* the size we decrease can never be more then the actual length,
+           * if this is the case the size allocation is lacking behind,
+           * which happens on panel startup with a expanding panel */
+          if (new_length < child_length)
+            child_length -= new_length;
+        }
+
+      if (child_length < 1)
+        child_length = 1;
+
+      if (HORIZONTAL (itembar))
+        {
+          child_alloc.height = itembar->size;
+          child_alloc.width = child_length;
+          x += child_alloc.width;
+        }
+      else
+        {
+          child_alloc.width = itembar->size;
+          child_alloc.height = child_length;
+          y += child_alloc.height;
+        }
+
+      gtk_widget_size_allocate (child->widget, &child_alloc);
+    }
+
 }
 
 
@@ -706,13 +636,6 @@ panel_itembar_set_child_property (GtkContainer *container,
       child->shrink = boolean;
       break;
 
-    case CHILD_PROP_WRAP:
-      boolean = g_value_get_boolean (value);
-      if (child->wrap == boolean)
-        return;
-      child->wrap = boolean;
-      break;
-
     case CHILD_PROP_SMALL:
       boolean = g_value_get_boolean (value);
       if (child->small == boolean)
@@ -751,10 +674,6 @@ panel_itembar_get_child_property (GtkContainer *container,
 
     case CHILD_PROP_SHRINK:
       g_value_set_boolean (value, child->shrink);
-      break;
-
-    case CHILD_PROP_WRAP:
-      g_value_set_boolean (value, child->wrap);
       break;
 
     case CHILD_PROP_SMALL:
@@ -815,7 +734,6 @@ panel_itembar_insert (PanelItembar *itembar,
   child = g_slice_new0 (PanelItembarChild);
   child->widget = widget;
   child->expand = FALSE;
-  child->wrap = FALSE;
 
   itembar->children = g_slist_insert (itembar->children, child, position);
   gtk_widget_set_parent (widget, GTK_WIDGET (itembar));
@@ -903,7 +821,6 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
   GSList            *li;
   GtkAllocation     *alloc;
   guint              idx;
-  gint               row = 0;
 
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), 0);
 
@@ -919,16 +836,6 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
       child = li->data;
       if (G_UNLIKELY (child == NULL))
         continue;
-
-      if (child->wrap)
-        {
-          row += itembar->size;
-
-          /* always make sure the item is on the row */
-          if ((HORIZONTAL (itembar) && y < row)
-              || (!HORIZONTAL (itembar) && x < row))
-            break;
-        }
 
       alloc = &child->widget->allocation;
 
