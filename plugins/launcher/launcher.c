@@ -1002,7 +1002,9 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   };
 
   /* show the configure menu item */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+  xfce_panel_plugin_menu_show_configure (panel_plugin);
+
+  xfce_panel_plugin_set_small (panel_plugin, TRUE);
 
   /* lookup the config directory where this launcher stores it's desktop files */
   file = g_strdup_printf (RELATIVE_CONFIG_PATH,
@@ -1237,6 +1239,7 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   LauncherArrowType  arrow_position;
 
   /* initialize the plugin size */
+  size /= xfce_panel_plugin_get_nrows (panel_plugin);
   p_width = p_height = size;
   a_width = a_height = -1;
 
