@@ -601,7 +601,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
           if (IS_HORIZONTAL (itembar))
             {
-              child_alloc.height = MIN (itembar->size, child_req.height);
+              child_alloc.height = itembar->size;
               child_alloc.width = child_len;
 
               /* pack next small item below this one */
@@ -609,7 +609,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
             }
           else
             {
-              child_alloc.width = MIN (itembar->size, child_req.width);
+              child_alloc.width = itembar->size;
               child_alloc.height = child_len;
 
               /* pack next time right of this one */
@@ -651,14 +651,14 @@ panel_itembar_size_allocate (GtkWidget     *widget,
 
           if (IS_HORIZONTAL (itembar))
             {
-              child_alloc.height = MIN (rows_size, child_req.height);
+              child_alloc.height = rows_size;
               child_alloc.width = child_len;
 
               x += child_len;
             }
           else
             {
-              child_alloc.width = MIN (rows_size, child_req.width);
+              child_alloc.width = rows_size;
               child_alloc.height = child_len;
 
               y += child_len;
