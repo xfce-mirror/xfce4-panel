@@ -55,8 +55,8 @@ static void       actions_plugin_free_data           (XfcePanelPlugin       *pan
 static gboolean   actions_plugin_size_changed        (XfcePanelPlugin       *panel_plugin,
                                                       gint                   size);
 static void       actions_plugin_configure_plugin    (XfcePanelPlugin       *panel_plugin);
-static void       actions_plugin_orientation_changed (XfcePanelPlugin       *panel_plugin,
-                                                      GtkOrientation         orientation);
+static void       actions_plugin_mode_changed        (XfcePanelPlugin       *panel_plugin,
+                                                      XfcePanelPluginMode    mode);
 static void       actions_plugin_pack                (ActionsPlugin         *plugin);
 static GPtrArray *actions_plugin_default_array       (void);
 static void       actions_plugin_menu                (GtkWidget             *button,
@@ -237,7 +237,7 @@ actions_plugin_class_init (ActionsPluginClass *klass)
   plugin_class->free_data = actions_plugin_free_data;
   plugin_class->size_changed = actions_plugin_size_changed;
   plugin_class->configure_plugin = actions_plugin_configure_plugin;
-  plugin_class->orientation_changed = actions_plugin_orientation_changed;
+  plugin_class->mode_changed = actions_plugin_mode_changed;
 
   g_object_class_install_property (gobject_class,
                                    PROP_ITEMS,
@@ -387,8 +387,8 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
   actions_plugin_pack (plugin);
 
   /* set orientation and size */
-  actions_plugin_orientation_changed (panel_plugin,
-      xfce_panel_plugin_get_orientation (panel_plugin));
+  actions_plugin_mode_changed (panel_plugin,
+      xfce_panel_plugin_get_mode (panel_plugin));
 }
 
 
@@ -681,8 +681,8 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static void
-actions_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                    GtkOrientation   orientation)
+actions_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
+                             XfcePanelPluginMode  mode)
 {
   actions_plugin_pack (XFCE_ACTIONS_PLUGIN (panel_plugin));
 }
@@ -958,17 +958,18 @@ actions_plugin_action_menu_item (ActionsPlugin *plugin,
 static gboolean
 actions_plugin_pack_idle (gpointer data)
 {
-  ActionsPlugin  *plugin = XFCE_ACTIONS_PLUGIN (data);
-  GtkWidget      *label;
-  GtkWidget      *button;
-  GtkWidget      *widget;
-  const gchar    *username;
-  GtkWidget      *child;
-  GtkWidget      *box;
-  guint           i;
-  const GValue   *val;
-  gint            type;
-  GtkOrientation  orientation;
+  ActionsPlugin       *plugin = XFCE_ACTIONS_PLUGIN (data);
+  GtkWidget           *label;
+  GtkWidget           *button;
+  GtkWidget           *widget;
+  const gchar         *username;
+  GtkWidget           *child;
+  GtkWidget           *box;
+  guint                i;
+  const GValue        *val;
+  gint                 type;
+  GtkOrientation       orientation;
+  XfcePanelPluginMode  mode;
 
   child = gtk_bin_get_child (GTK_BIN (plugin));
   if (child != NULL)
@@ -1038,8 +1039,9 @@ actions_plugin_pack_idle (gpointer data)
 
       label = gtk_label_new (username);
       gtk_container_add (GTK_CONTAINER (button), label);
+      mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
       gtk_label_set_angle (GTK_LABEL (label),
-          orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
+          (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
       gtk_widget_show (label);
     }
 
