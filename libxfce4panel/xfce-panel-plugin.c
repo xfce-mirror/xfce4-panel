@@ -806,6 +806,10 @@ xfce_panel_plugin_get_property (GObject    *object,
       g_value_set_uint (value, private->nrows);
       break;
 
+    case PROP_MODE:
+      g_value_set_enum (value, private->mode);
+      break;
+
     case PROP_SMALL:
       g_value_set_boolean (value, private->small);
       break;
