@@ -101,8 +101,8 @@ static void      applications_menu_plugin_construct            (XfcePanelPlugin 
 static void      applications_menu_plugin_free_data            (XfcePanelPlugin        *panel_plugin);
 static gboolean  applications_menu_plugin_size_changed         (XfcePanelPlugin        *panel_plugin,
                                                                 gint                    size);
-static void      applications_menu_plugin_orientation_changed  (XfcePanelPlugin        *panel_plugin,
-                                                                GtkOrientation          orientation);
+static void      applications_menu_plugin_mode_changed         (XfcePanelPlugin        *panel_plugin,
+                                                                XfcePanelPluginMode     mode);
 static void      applications_menu_plugin_configure_plugin     (XfcePanelPlugin        *panel_plugin);
 static gboolean  applications_menu_plugin_remote_event         (XfcePanelPlugin        *panel_plugin,
                                                                 const gchar            *name,
@@ -137,7 +137,7 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
   plugin_class->construct = applications_menu_plugin_construct;
   plugin_class->free_data = applications_menu_plugin_free_data;
   plugin_class->size_changed = applications_menu_plugin_size_changed;
-  plugin_class->orientation_changed = applications_menu_plugin_orientation_changed;
+  plugin_class->mode_changed = applications_menu_plugin_mode_changed;
   plugin_class->configure_plugin = applications_menu_plugin_configure_plugin;
   plugin_class->remote_event = applications_menu_plugin_remote_event;
 
@@ -343,6 +343,14 @@ applications_menu_plugin_set_property (GObject      *object,
           plugin->button_title != NULL ? plugin->button_title : "");
       gtk_widget_set_tooltip_text (plugin->button,
           exo_str_is_empty (plugin->button_title) ? NULL : plugin->button_title);
+
+      /* check if the label still fits */
+      if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_DESKBAR
+          && plugin->show_button_title)
+        {
+          applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+              xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+        }
       return;
 
     case PROP_BUTTON_ICON:
@@ -420,25 +428,55 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                        gint             size)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  gint                    row_size;
   gint                    icon_size;
   GtkStyle               *style;
+  XfcePanelPluginMode     mode;
+  GtkRequisition          label_size;
+  GtkOrientation          orientation;
+  gint                    border_thickness;
+
+  row_size = size / xfce_panel_plugin_get_nrows (panel_plugin);
 
   gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->icon,
                              !plugin->show_button_title, !plugin->show_button_title,
                              0, GTK_PACK_START);
 
+  mode = xfce_panel_plugin_get_mode (panel_plugin);
+
+  if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+    orientation = GTK_ORIENTATION_HORIZONTAL;
+  else
+    orientation = GTK_ORIENTATION_VERTICAL;
+
   if (!plugin->show_button_title)
     {
       xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->icon), -1);
-      gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
+
+      if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), row_size, size);
+      else
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, row_size);
     }
   else
     {
       style = gtk_widget_get_style (plugin->button);
-      icon_size = size - 2 * MAX (style->xthickness, style->ythickness);
+      border_thickness = 2 * MAX (style->xthickness, style->ythickness) + 2;
+
+      icon_size = row_size - border_thickness;
       xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->icon), icon_size);
       gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
+
+      if (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+        {
+          /* check if the label fits next to the icon */
+          gtk_widget_size_request (GTK_WIDGET (plugin->label), &label_size);
+          if (label_size.width <= size - border_thickness - icon_size)
+            orientation = GTK_ORIENTATION_HORIZONTAL;
+        }
     }
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box), orientation);
 
   return TRUE;
 }
@@ -446,13 +484,17 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-applications_menu_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                              GtkOrientation   orientation)
+applications_menu_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
+                                       XfcePanelPluginMode  mode)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
+  gint                    angle;
 
-  xfce_hvbox_set_orientation (XFCE_HVBOX (plugin->box), orientation);
-  gtk_label_set_angle (GTK_LABEL (plugin->label), orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 270);
+  angle = (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0;
+  gtk_label_set_angle (GTK_LABEL (plugin->label), angle);
+
+  applications_menu_plugin_size_changed (panel_plugin,
+      xfce_panel_plugin_get_size (panel_plugin));
 }
 
 
