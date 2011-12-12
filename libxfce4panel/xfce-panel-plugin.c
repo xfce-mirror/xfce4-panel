@@ -1959,7 +1959,7 @@ xfce_panel_plugin_set_small (XfcePanelPlugin *plugin,
 
 
 /**
- * xfce_panel_plugin_get_mode:
+ * xfce_panel_plugin_get_orientation:
  * @plugin : an #XfcePanelPlugin.
  *
  * The orientation of the panel in which the plugin is embedded.
@@ -1980,7 +1980,7 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_get_orientation:
+ * xfce_panel_plugin_get_mode:
  * @plugin : an #XfcePanelPlugin.
  *
  * The mode of the panel in which the plugin is embedded.
