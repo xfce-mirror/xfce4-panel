@@ -60,8 +60,9 @@ panel_dialogs_show_about (void)
 {
   static const gchar *authors[] =
   {
-    "Jasper Huijsmans <jasper@xfce.org>",
-    "Nick Schermer <nick@xfce.org>",
+    "Maintainer:\nNick Schermer <nick@xfce.org>\n",
+    "Deskbar Mode:\nAndrzej Radecki <ndrwrdck@gmail.com>\n",
+    "Inactive Maintainers:\nJasper Huijsmans <jasper@xfce.org>",
     "Tic-tac-toe <tictactoe@xfce.org>",
     NULL
   };
