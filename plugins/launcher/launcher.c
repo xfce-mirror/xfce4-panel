@@ -66,8 +66,8 @@ static gboolean           launcher_plugin_remote_event                  (XfcePan
                                                                          const GValue         *value);
 static gboolean           launcher_plugin_save_delayed_timeout          (gpointer              user_data);
 static void               launcher_plugin_save_delayed                  (LauncherPlugin       *plugin);
-static void               launcher_plugin_orientation_changed           (XfcePanelPlugin      *panel_plugin,
-                                                                         GtkOrientation        orientation);
+static void               launcher_plugin_mode_changed                  (XfcePanelPlugin      *panel_plugin,
+                                                                         XfcePanelPluginMode   mode);
 static gboolean           launcher_plugin_size_changed                  (XfcePanelPlugin      *panel_plugin,
                                                                          gint                  size);
 static void               launcher_plugin_configure_plugin              (XfcePanelPlugin      *panel_plugin);
@@ -268,7 +268,7 @@ launcher_plugin_class_init (LauncherPluginClass *klass)
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = launcher_plugin_construct;
   plugin_class->free_data = launcher_plugin_free_data;
-  plugin_class->orientation_changed = launcher_plugin_orientation_changed;
+  plugin_class->mode_changed = launcher_plugin_mode_changed;
   plugin_class->size_changed = launcher_plugin_size_changed;
   plugin_class->configure_plugin = launcher_plugin_configure_plugin;
   plugin_class->screen_position_changed = launcher_plugin_screen_position_changed;
@@ -1211,9 +1211,12 @@ launcher_plugin_save_delayed (LauncherPlugin *plugin)
 
 
 static void
-launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                     GtkOrientation   orientation)
+launcher_plugin_mode_changed (XfcePanelPlugin    *panel_plugin,
+                              XfcePanelPluginMode mode)
 {
+  /* update label orientation */
+  launcher_plugin_button_update (XFCE_LAUNCHER_PLUGIN (panel_plugin));
+
   /* update the widget order */
   launcher_plugin_pack_widgets (XFCE_LAUNCHER_PLUGIN (panel_plugin));
 
@@ -1689,8 +1692,9 @@ launcher_plugin_menu_destroy (LauncherPlugin *plugin)
 static void
 launcher_plugin_button_update (LauncherPlugin *plugin)
 {
-  GarconMenuItem *item = NULL;
-  const gchar    *icon_name;
+  GarconMenuItem      *item = NULL;
+  const gchar         *icon_name;
+  XfcePanelPluginMode  mode;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
@@ -1708,6 +1712,9 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
   if (G_UNLIKELY (plugin->show_label))
     {
       panel_return_if_fail (GTK_IS_LABEL (plugin->child));
+      mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
+      gtk_label_set_angle (GTK_LABEL (plugin->child),
+                           (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
       gtk_label_set_text (GTK_LABEL (plugin->child),
           item != NULL ? garcon_menu_item_get_name (item) : _("No items"));
     }
