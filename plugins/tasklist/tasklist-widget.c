@@ -68,7 +68,9 @@
 #define xfce_taskbar_is_locked(tasklist) (XFCE_TASKLIST (tasklist)->locked > 0)
 
 #define xfce_tasklist_get_panel_plugin(tasklist) gtk_widget_get_ancestor (GTK_WIDGET (tasklist), XFCE_TYPE_PANEL_PLUGIN)
-#define xfce_tasklist_horizontal(tasklist) ((tasklist)->horizontal || (!(tasklist)->rotate_vertically && (tasklist)->show_labels))
+#define xfce_tasklist_horizontal(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+#define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+#define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
 #define xfce_tasklist_filter_monitors(tasklist) (!(tasklist)->all_monitors && (tasklist)->monitor_geometry.width != -1)
 #define xfce_tasklist_geometry_set_invalid(tasklist) ((tasklist)->monitor_geometry.width = -1)
 #define xfce_tasklist_geometry_has_point(tasklist, x, y) ( \
@@ -92,7 +94,6 @@ enum
   PROP_SHOW_WIREFRAMES,
   PROP_SHOW_HANDLE,
   PROP_SORT_ORDER,
-  PROP_ROTATE_VERTICALLY,
   PROP_WINDOW_SCROLLING
 };
 
@@ -130,8 +131,8 @@ struct _XfceTasklist
   /* size of the panel pluin */
   gint                  size;
 
-  /* orientation of the tasklist */
-  guint                 horizontal : 1;
+  /* mode (orientation) of the tasklist */
+  XfcePanelPluginMode   mode;
 
   /* relief of the tasklist buttons */
   GtkReliefStyle        button_relief;
@@ -148,8 +149,8 @@ struct _XfceTasklist
    * tasklist */
   guint                 only_minimized : 1;
 
-  /* if we rotate buttons in a vertical panel */
-  guint                 rotate_vertically : 1;
+  /* number of rows of window buttons */
+  gint                  nrows;
 
   /* switch window with the mouse wheel */
   guint                 window_scrolling : 1;
@@ -342,9 +343,6 @@ static void               xfce_tasklist_set_show_wireframes              (XfceTa
                                                                           gboolean              show_wireframes);
 static void               xfce_tasklist_set_grouping                     (XfceTasklist         *tasklist,
                                                                           XfceTasklistGrouping  grouping);
-static void               xfce_tasklist_set_rotate_vertically            (XfceTasklist         *tasklist,
-                                                                          gboolean              rotate_vertically);
-
 
 
 G_DEFINE_TYPE (XfceTasklist, xfce_tasklist, GTK_TYPE_CONTAINER)
@@ -456,13 +454,6 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_ROTATE_VERTICALLY,
-                                   g_param_spec_boolean ("rotate-vertically",
-                                                         NULL, NULL,
-                                                         TRUE,
-                                                         EXO_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_WINDOW_SCROLLING,
                                    g_param_spec_boolean ("window-scrolling",
                                                          NULL, NULL,
@@ -534,7 +525,8 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->screen = NULL;
   tasklist->windows = NULL;
   tasklist->skipped_windows = NULL;
-  tasklist->horizontal = TRUE;
+  tasklist->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
+  tasklist->nrows = 1;
   tasklist->all_workspaces = FALSE;
   tasklist->button_relief = GTK_RELIEF_NORMAL;
   tasklist->switch_workspace = TRUE;
@@ -542,7 +534,6 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_labels = TRUE;
   tasklist->show_wireframes = FALSE;
   tasklist->show_handle = TRUE;
-  tasklist->rotate_vertically = TRUE;
   tasklist->all_monitors = TRUE;
   tasklist->window_scrolling = TRUE;
   xfce_tasklist_geometry_set_invalid (tasklist);
@@ -627,10 +618,6 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_uint (value, tasklist->sort_order);
       break;
 
-    case PROP_ROTATE_VERTICALLY:
-      g_value_set_boolean (value, tasklist->rotate_vertically);
-      break;
-
     case PROP_WINDOW_SCROLLING:
       g_value_set_boolean (value, tasklist->window_scrolling);
       break;
@@ -701,10 +688,6 @@ xfce_tasklist_set_property (GObject      *object,
         }
       break;
 
-    case PROP_ROTATE_VERTICALLY:
-      xfce_tasklist_set_rotate_vertically (tasklist, g_value_get_boolean (value));
-      break;
-
     case PROP_WINDOW_SCROLLING:
       tasklist->window_scrolling = g_value_get_boolean (value);
       break;
@@ -767,15 +750,11 @@ xfce_tasklist_size_request (GtkWidget      *widget,
         {
           gtk_widget_size_request (child->button, &child_req);
 
-          child_height = MAX (child_height, child_req.height);
+          /* child_height = MAX (child_height, child_req.height); */
+          child_height = MAX (child_height, tasklist->size / tasklist->nrows);
 
           if (child->type == CHILD_TYPE_GROUP_MENU)
             continue;
-
-          /* unset overflow items, we decide about that again
-           * during allocation */
-          if (child->type == CHILD_TYPE_OVERFLOW_MENU)
-            child->type = CHILD_TYPE_WINDOW;
 
           n_windows++;
         }
@@ -789,8 +768,7 @@ xfce_tasklist_size_request (GtkWidget      *widget,
     }
   else
     {
-      rows = tasklist->size / tasklist->max_button_size;
-      rows = CLAMP (rows, 1, n_windows);
+      rows = MAX (tasklist->nrows, 1);
 
       cols = n_windows / rows;
       if (cols * rows < n_windows)
@@ -805,18 +783,15 @@ xfce_tasklist_size_request (GtkWidget      *widget,
     }
 
   /* set the requested sizes */
-  if (xfce_tasklist_horizontal (tasklist))
+  if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
     {
-      if (tasklist->horizontal != xfce_tasklist_horizontal (tasklist))
-        {
-          requisition->height = child_height * n_windows;
-          requisition->width = tasklist->size;
-        }
-      else
-        {
-          requisition->width = length;
-          requisition->height = tasklist->size;
-        }
+      requisition->height = child_height * n_windows;
+      requisition->width = tasklist->size;
+    }
+  else if (xfce_tasklist_horizontal (tasklist))
+    {
+      requisition->width = length;
+      requisition->height = tasklist->size;
     }
   else
     {
@@ -850,7 +825,7 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
                            GtkAllocation *alloc,
                            gint          *n_rows,
                            gint          *n_cols,
-                           gboolean      *arrow_visible)
+                           gint          *arrow_position)
 {
   gint               rows;
   gint               min_button_length;
@@ -862,11 +837,13 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
   gint               n_buttons;
   gint               n_buttons_target;
 
-  /* if we're in the opposite vertical mode, there are no columns */
-  if (tasklist->horizontal != xfce_tasklist_horizontal (tasklist))
-    rows = tasklist->n_windows;
+  /* if we're in deskbar mode, there are no columns */
+  if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
+    //rows = tasklist->n_windows;
+    rows = 1;
   else
-    rows = alloc->height / tasklist->max_button_size;
+    /* rows = alloc->height / tasklist->max_button_size; */
+    rows = tasklist->nrows;
 
   if (rows < 1)
     rows = 1;
@@ -875,12 +852,12 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
   if (cols * rows < tasklist->n_windows)
     cols++;
 
-  if (tasklist->show_labels)
-    min_button_length = tasklist->min_button_length;
+  if (xfce_tasklist_deskbar (tasklist) || !tasklist->show_labels)
+    min_button_length = alloc->height / tasklist->nrows;
   else
-    min_button_length = alloc->height / rows;
+    min_button_length = tasklist->min_button_length;
 
-  *arrow_visible = FALSE;
+  *arrow_position = -1; /* not visible */
 
   if (min_button_length * cols <= alloc->width)
     {
@@ -897,11 +874,17 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
         {
           child = li->data;
           if (GTK_WIDGET_VISIBLE (child->button))
-            windows_scored = g_slist_insert_sorted (windows_scored, child,
-                                                    xfce_tasklist_size_sort_window);
+            {
+              windows_scored = g_slist_insert_sorted (windows_scored, child,
+                                                      xfce_tasklist_size_sort_window);
+              /* unset overflow items, we decide about that again
+               * later */
+              if (child->type == CHILD_TYPE_OVERFLOW_MENU)
+                child->type = CHILD_TYPE_WINDOW;
+            }
         }
 
-      if (!tasklist->show_labels)
+      if (xfce_tasklist_deskbar (tasklist) || !tasklist->show_labels)
         max_button_length = min_button_length;
       else if (tasklist->max_button_length != -1)
         max_button_length = tasklist->max_button_length;
@@ -909,7 +892,13 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
         max_button_length = DEFAULT_MAX_BUTTON_LENGTH;
 
       n_buttons = tasklist->n_windows;
-      n_buttons_target = ((alloc->width / max_button_length) + 1) * rows;
+      /* Matches the existing behavior (with a bug fix) */
+      /* n_buttons_target = MIN ((alloc->width - ARROW_BUTTON_SIZE) / min_button_length * rows,          *
+       *                         (((alloc->width - ARROW_BUTTON_SIZE) / max_button_length) + 1) * rows); */
+
+      /* Perhaps a better behavior (tries to display more buttons on the panel, */
+      /* yet still within the specified limits) */
+      n_buttons_target = (alloc->width - ARROW_BUTTON_SIZE) / min_button_length * rows;
 
 #if 0
       if (tasklist->grouping == XFCE_TASKLIST_GROUPING_AUTO)
@@ -936,7 +925,11 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
                 child->type = CHILD_TYPE_OVERFLOW_MENU;
             }
 
-          *arrow_visible = TRUE;
+          /* Try to position the arrow widget at the end of the allocation area  *
+           * if that's impossible (because buttons cannot be expanded enough)    *
+           * position it just after the buttons.                                 */
+          *arrow_position = MIN (alloc->width - ARROW_BUTTON_SIZE,
+                                 n_buttons_target * max_button_length / rows);
         }
 
       g_slist_free (windows_scored);
@@ -967,7 +960,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   gboolean           direction_rtl = gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL;
   gint               w, x, y, h;
   gint               area_x, area_width;
-  gboolean           arrow_visible;
+  gint               arrow_position;
   GtkRequisition     child_req;
 
   panel_return_if_fail (GTK_WIDGET_VISIBLE (tasklist->arrow_button));
@@ -978,7 +971,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   /* swap integers with vertical orientation */
   if (!xfce_tasklist_horizontal (tasklist))
     TRANSPOSE_AREA (area);
-  /*panel_return_if_fail (area.height == tasklist->size);*/
+  panel_return_if_fail (area.height == tasklist->size);
 
   /* TODO if we compare the allocation with the requisition we can
    * do a fast path to the child allocation, i think */
@@ -986,23 +979,23 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
   /* useless but hides compiler warning */
   w = h = x = y = rows = cols = 0;
 
-  xfce_tasklist_size_layout (tasklist, &area, &rows, &cols, &arrow_visible);
+  xfce_tasklist_size_layout (tasklist, &area, &rows, &cols, &arrow_position);
 
   /* allocate the arrow button for the overflow menu */
   child_alloc.width = ARROW_BUTTON_SIZE;
   child_alloc.height = area.height;
 
-  if (arrow_visible)
+  if (arrow_position != -1)
     {
       child_alloc.x = area.x;
       child_alloc.y = area.y;
 
       if (!direction_rtl)
-        child_alloc.x += area.width - ARROW_BUTTON_SIZE;
+        child_alloc.x += arrow_position;
       else
-        area.x += ARROW_BUTTON_SIZE;
+        child_alloc.x += (area.width - arrow_position);
 
-      area.width -= ARROW_BUTTON_SIZE;
+      area.width = arrow_position;
 
       /* position the arrow in the correct position */
       if (!xfce_tasklist_horizontal (tasklist))
@@ -1017,6 +1010,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
 
   area_x = area.x;
   area_width = area.width;
+  h = area.height / rows;
 
   /* allocate all the children */
   for (li = tasklist->windows, i = 0; li != NULL; li = li->next)
@@ -1031,14 +1025,17 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
           || child->type == CHILD_TYPE_GROUP))
         {
           row = (i % rows);
-
           if (row == 0)
             {
               x = area_x;
               y = area.y;
-              h = area.height;
 
-              if (tasklist->show_labels)
+              if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
+                {
+                  /* fixed width is OK because area.width==w*cols */
+                  w = area.height / tasklist->nrows;
+                }
+              else if (tasklist->show_labels)
                 {
                   /* TODO, this is a work-around, something else goes wrong
                    * with counting the windows... */
@@ -1049,29 +1046,25 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
                       && w > tasklist->max_button_length)
                     w = tasklist->max_button_length;
                 }
-              else
+              else /* buttons without labels */
                 {
-                  w = h / (rows - row);
+                  w = h;
                 }
 
               area_width -= w;
               area_x += w;
             }
 
-          child_alloc.y = y;
+          if (xfce_tasklist_vertical (tasklist))
+            /* lay out buttons right to left in the vertical mode */
+            child_alloc.y = 2 * area.y + area.height - y - h;
+          else
+            child_alloc.y = y;
           child_alloc.x = x;
           child_alloc.width = MAX (w, 1); /* TODO this is a workaround */
-          child_alloc.height = h / (rows - row);
+          child_alloc.height = h;
 
-          if (!tasklist->horizontal
-              && xfce_tasklist_horizontal (tasklist))
-            {
-              gtk_widget_get_child_requisition (child->button, &child_req);
-              child_alloc.height = child_req.height;
-            }
-
-          h -= child_alloc.height;
-          y += child_alloc.height;
+          y += h;
 
           if (direction_rtl)
             child_alloc.x = area.x + area.width - (child_alloc.x - area.x) - child_alloc.width;
@@ -2020,7 +2013,7 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   gtk_button_set_relief (GTK_BUTTON (child->button),
                          tasklist->button_relief);
 
-  child->box = xfce_hvbox_new (xfce_tasklist_horizontal (tasklist) ?
+  child->box = xfce_hvbox_new (!xfce_tasklist_vertical (tasklist) ?
       GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, FALSE, 6);
   gtk_container_add (GTK_CONTAINER (child->button), child->box);
   gtk_widget_show (child->box);
@@ -2035,13 +2028,15 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
 
   child->label = gtk_label_new (NULL);
   gtk_box_pack_start (GTK_BOX (child->box), child->label, TRUE, TRUE, 0);
-  if (xfce_tasklist_horizontal (tasklist))
+  if (!xfce_tasklist_vertical (tasklist))
     {
+      /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, 0); */
       gtk_misc_set_alignment (GTK_MISC (child->label), 0.0, 0.5);
       gtk_label_set_ellipsize (GTK_LABEL (child->label), tasklist->ellipsize_mode);
     }
   else
     {
+      /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, -1); */
       gtk_label_set_angle (GTK_LABEL (child->label), 270);
       gtk_misc_set_alignment (GTK_MISC (child->label), 0.50, 0.00);
       /* TODO can we already ellipsize here yet? */
@@ -2946,8 +2941,8 @@ xfce_tasklist_button_drag_data_received (GtkWidget         *button,
   sibling = g_list_find (tasklist->windows, child2);
   panel_return_if_fail (sibling != NULL);
 
-  if ((tasklist->horizontal && x >= button->allocation.width / 2)
-      || (!tasklist->horizontal && y >= button->allocation.height / 2))
+  if ((!xfce_tasklist_vertical (tasklist) && x >= button->allocation.width / 2)
+      || (xfce_tasklist_vertical (tasklist) && y >= button->allocation.height / 2))
     sibling = g_list_next (sibling);
 
   xid = *((gulong *) gtk_selection_data_get_data (selection_data));
@@ -3784,7 +3779,7 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
   GList             *li;
   XfceTasklistChild *child;
 
-  horizontal = xfce_tasklist_horizontal (tasklist);
+  horizontal = !xfce_tasklist_vertical (tasklist);
 
   /* update the tasklist */
   for (li = tasklist->windows; li != NULL; li = li->next)
@@ -3798,6 +3793,7 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
       /* update the label */
       if (horizontal)
         {
+          /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, 0); */
           gtk_misc_set_alignment (GTK_MISC (child->label), 0.0, 0.5);
           gtk_label_set_angle (GTK_LABEL (child->label), 0);
           gtk_label_set_ellipsize (GTK_LABEL (child->label),
@@ -3805,6 +3801,7 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
         }
       else
         {
+          /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, -1); */
           gtk_misc_set_alignment (GTK_MISC (child->label), 0.50, 0.00);
           gtk_label_set_angle (GTK_LABEL (child->label), 270);
           gtk_label_set_ellipsize (GTK_LABEL (child->label), PANGO_ELLIPSIZE_NONE);
@@ -3816,33 +3813,31 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
 
 
 
-static void
-xfce_tasklist_set_rotate_vertically (XfceTasklist *tasklist,
-                                     gboolean      rotate_vertically)
+void
+xfce_tasklist_set_nrows (XfceTasklist *tasklist,
+                         gint          nrows)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  panel_return_if_fail (nrows >= 1);
 
-  if (tasklist->rotate_vertically != rotate_vertically)
+  if (tasklist->nrows != nrows)
     {
-      tasklist->rotate_vertically = rotate_vertically;
-      xfce_tasklist_update_orientation (tasklist);
+      tasklist->nrows = nrows;
+      gtk_widget_queue_resize (GTK_WIDGET (tasklist));
     }
 }
 
 
 
 void
-xfce_tasklist_set_orientation (XfceTasklist   *tasklist,
-                               GtkOrientation  orientation)
+xfce_tasklist_set_mode (XfceTasklist        *tasklist,
+                        XfcePanelPluginMode  mode)
 {
-  gboolean horizontal;
-
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
 
-  horizontal = !!(orientation == GTK_ORIENTATION_HORIZONTAL);
-  if (tasklist->horizontal != horizontal)
+  if (tasklist->mode != mode)
     {
-      tasklist->horizontal = horizontal;
+      tasklist->mode = mode;
       xfce_tasklist_update_orientation (tasklist);
     }
 }

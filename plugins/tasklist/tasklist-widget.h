@@ -65,11 +65,14 @@ enum _XfceTasklistSortOrder
 
 GType xfce_tasklist_get_type                (void) G_GNUC_CONST;
 
-void  xfce_tasklist_set_orientation         (XfceTasklist   *tasklist,
-                                             GtkOrientation  orientation);
+void  xfce_tasklist_set_mode                (XfceTasklist        *tasklist,
+                                             XfcePanelPluginMode  mode);
 
 void  xfce_tasklist_set_size                (XfceTasklist   *tasklist,
                                              gint            size);
+
+void  xfce_tasklist_set_nrows               (XfceTasklist   *tasklist,
+                                             gint            nrows);
 
 void  xfce_tasklist_update_monitor_geometry (XfceTasklist   *tasklist);
 

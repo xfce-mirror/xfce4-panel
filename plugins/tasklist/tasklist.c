@@ -60,10 +60,12 @@ struct _TasklistPlugin
 
 
 static void     tasklist_plugin_construct               (XfcePanelPlugin    *panel_plugin);
-static void     tasklist_plugin_orientation_changed     (XfcePanelPlugin    *panel_plugin,
-                                                         GtkOrientation      orientation);
+static void     tasklist_plugin_mode_changed            (XfcePanelPlugin    *panel_plugin,
+                                                         XfcePanelPluginMode mode);
 static gboolean tasklist_plugin_size_changed            (XfcePanelPlugin    *panel_plugin,
                                                          gint                size);
+static void     tasklist_plugin_nrows_changed           (XfcePanelPlugin    *panel_plugin,
+                                                         guint               nrows);
 static void     tasklist_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
                                                          XfceScreenPosition  position);
 static void     tasklist_plugin_configure_plugin        (XfcePanelPlugin    *panel_plugin);
@@ -85,8 +87,9 @@ tasklist_plugin_class_init (TasklistPluginClass *klass)
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = tasklist_plugin_construct;
-  plugin_class->orientation_changed = tasklist_plugin_orientation_changed;
+  plugin_class->mode_changed = tasklist_plugin_mode_changed;
   plugin_class->size_changed = tasklist_plugin_size_changed;
+  plugin_class->nrows_changed = tasklist_plugin_nrows_changed;
   plugin_class->screen_position_changed = tasklist_plugin_screen_position_changed;
   plugin_class->configure_plugin = tasklist_plugin_configure_plugin;
 }
@@ -136,7 +139,6 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-wireframes", G_TYPE_BOOLEAN },
     { "show-handle", G_TYPE_BOOLEAN },
     { "sort-order", G_TYPE_UINT },
-    { "rotate-vertically", G_TYPE_BOOLEAN },
     { "window-scrolling", G_TYPE_BOOLEAN },
     { NULL }
   };
@@ -160,13 +162,13 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 
 
 static void
-tasklist_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                     GtkOrientation   orientation)
+tasklist_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
+                              XfcePanelPluginMode  mode)
 {
   TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
 
-  /* set the new tasklist orientation */
-  xfce_tasklist_set_orientation (XFCE_TASKLIST (plugin->tasklist), orientation);
+  /* set the new tasklist mode */
+  xfce_tasklist_set_mode (XFCE_TASKLIST (plugin->tasklist), mode);
 }
 
 
@@ -181,6 +183,18 @@ tasklist_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   xfce_tasklist_set_size (XFCE_TASKLIST (plugin->tasklist), size);
 
   return TRUE;
+}
+
+
+
+static void
+tasklist_plugin_nrows_changed (XfcePanelPlugin *panel_plugin,
+                               guint            nrows)
+{
+  TasklistPlugin *plugin = XFCE_TASKLIST_PLUGIN (panel_plugin);
+
+  /* set the tasklist nrows */
+  xfce_tasklist_set_nrows (XFCE_TASKLIST (plugin->tasklist), nrows);
 }
 
 
@@ -232,7 +246,6 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("include-all-workspaces", "active")
   TASKLIST_DIALOG_BIND ("include-all-monitors", "active")
   TASKLIST_DIALOG_BIND ("flat-buttons", "active")
-  TASKLIST_DIALOG_BIND ("rotate-vertically", "active")
   TASKLIST_DIALOG_BIND_INV ("switch-workspace-on-unminimize", "active")
   TASKLIST_DIALOG_BIND ("show-only-minimized", "active")
   TASKLIST_DIALOG_BIND ("show-wireframes", "active")
