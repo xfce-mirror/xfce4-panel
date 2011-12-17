@@ -2,19 +2,19 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-19 10:13+0000\n"
-"PO-Revision-Date: 2010-08-03 09:46+0600\n"
+"POT-Creation-Date: 2011-12-17 16:12+0000\n"
+"PO-Revision-Date: 2011-12-17 23:04+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
+"Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: kk\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -30,8 +30,9 @@ msgid "Customize the panel"
 msgstr "Панельді баптау"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
-#: ../migrate/main.c:100
+#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-window.c:2275
+#: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Панель"
 
@@ -74,17 +75,20 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1126 ../panel/panel-window.c:2287
+#: ../libxfce4panel/xfce-panel-plugin.c:1126
+#: ../panel/panel-window.c:2287
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1137 ../panel/panel-window.c:2298
+#: ../libxfce4panel/xfce-panel-plugin.c:1137
+#: ../panel/panel-window.c:2298
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1154 ../panel/panel-window.c:2314
+#: ../libxfce4panel/xfce-panel-plugin.c:1154
+#: ../panel/panel-window.c:2314
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
@@ -92,7 +96,8 @@ msgstr "Жүйеден ш_ығу"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Панель баптаулары' сұхбат терезесін көрсету"
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
@@ -191,24 +196,25 @@ msgstr "D-Bus хабарламасын жіберу сәтсіз аяқталд�
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Панельді іске қосуды қалайсыз ба? Олай болса, шыққан кезде сессияны сақтағаныңызға көз жеткізіңіз, одан кейін келесі кіргенде панель автоматты түрде іске қосылады."
 
-#: ../panel/main.c:419 ../panel/main.c:433
+#: ../panel/main.c:419
+#: ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s үшін қосулы тұрған нұсқалары табылмады"
 
-#: ../panel/panel-application.c:217
+#: ../panel/panel-application.c:219
 msgid "Failed to launch the migration application"
 msgstr "Көшу қолданбасын жөнелту сәтсіз аяқталды"
 
-#: ../panel/panel-application.c:1595 ../plugins/actions/actions.c:421
+#: ../panel/panel-application.c:1597
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "X серверін сессия басқарушысыз іске қосқансыз. Шығу басылған кезде X сервері өз жұмысын аяқтайды."
 
-#: ../panel/panel-application.c:1596 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1598
 msgid "Are you sure you want to quit the panel?"
 msgstr "Панельдің жұмысын аяқтауды шынымен қалайсыз ба?"
 
-#: ../panel/panel-application.c:1604 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1606
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -231,7 +237,8 @@ msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2009-2010"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Жаңа элементті қосу"
 
@@ -240,7 +247,8 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Жаңа плагин үшін панельді тандаңыз:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:775
+#: ../panel/panel-dialogs.c:147
+#: ../panel/panel-preferences-dialog.c:775
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -384,6 +392,7 @@ msgid "Enable compositing in the window manager for opacity settings in the pane
 msgstr "Панель мөлдірсіздік баптаулары үшін терезелер басқарушысында композитингті іске қосыңыз."
 
 #: ../panel/panel-preferences-dialog.glade.h:14
+#: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "General"
 msgstr "Жалпы"
@@ -401,8 +410,7 @@ msgstr "Э_лементтер"
 msgid "L_ength (%):"
 msgstr "Ұ_зындығы (%):"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Measurements"
 msgstr "Өлшем бірліктері"
@@ -548,98 +556,223 @@ msgstr "Орташа"
 msgid "Expert"
 msgstr "Тәжірибелі"
 
-#: ../migrate/main.c:94
+#: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Панельді бірінші рет іске қостыңыз, қош келіпсіз"
 
-#: ../migrate/main.c:96
+#: ../migrate/main.c:125
 msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr "Панель жаңа жүйеге баптауларды сақтау үшін ауыстырылған соң, жаңа баптаулар жүктеледі."
 
-#: ../migrate/main.c:99
+#: ../migrate/main.c:127
+#: ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
 msgstr "Бірінші рет қосылу түрін таңдаңыз."
 
-#: ../migrate/main.c:105
+#: ../migrate/main.c:129
 msgid "Migrate old config"
 msgstr "Ескі баптауларды көшіру"
 
-#: ../migrate/main.c:106
+#: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
 msgstr "Ескі 4.6 баптауларын Xfconf ішіне апару"
 
-#: ../migrate/main.c:111
+#: ../migrate/main.c:141
 msgid "Use default config"
 msgstr "Негізгі баптауларды қолдану"
 
-#: ../migrate/main.c:112
+#: ../migrate/main.c:142
 msgid "Load the default configuration"
 msgstr "Негізгі баптауларды жүктеп алу"
 
-#: ../migrate/main.c:117
+#: ../migrate/main.c:148
 msgid "One empty panel"
 msgstr "Бір бос панель"
 
-#: ../migrate/main.c:118
+#: ../migrate/main.c:149
 msgid "Start with one empty panel"
 msgstr "Бір бос панельмен бастау"
 
-#: ../migrate/main.c:131
+#: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
 msgstr "Ескі панель баптауларын көшіру сәтсіз аяқталды"
 
-#: ../migrate/main.c:144
+#: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
 msgstr "Негізгі баптауларды жүктеу сәтсіз аяқталды"
 
+#: ../migrate/main.c:185
+msgid "Panel config needs migration..."
+msgstr "Панель баптауларын көшіру керек..."
+
+#: ../migrate/main.c:189
+msgid "Failed to migrate the existing configuration"
+msgstr "Ағымдағы баптауларды көшіру сәтсіз аяқталды"
+
+#: ../migrate/main.c:195
+msgid "Panel configuration has been updated."
+msgstr "Панель баптаулары жаңартылды."
+
 #: ../plugins/actions/actions-dialog.glade.h:1
+msgid "Action"
+msgstr "Әрекет"
+
+#: ../plugins/actions/actions-dialog.glade.h:2
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
 msgstr "Әрекеттер батырмалары"
 
-#: ../plugins/actions/actions-dialog.glade.h:2
-msgid "Button Actions"
-msgstr "Батырма әрекеттері"
-
 #: ../plugins/actions/actions-dialog.glade.h:3
-msgid "_First button:"
-msgstr "_Бірінші батырма:"
+msgid "Appeara_nce:"
+msgstr "Сыр_тқы түрі:"
 
-#: ../plugins/actions/actions-dialog.glade.h:4
-msgid "_Second button:"
-msgstr "_Екінші батырма:"
+#: ../plugins/actions/actions-dialog.glade.h:5
+msgid "Invert buttons _orientation"
+msgstr "Батыр_малар бағдарлауын терістеу"
 
-#: ../plugins/actions/actions.c:108
-msgid "Disabled"
-msgstr "Сөндірулі"
+#: ../plugins/actions/actions-dialog.glade.h:6
+msgid "Session Menu"
+msgstr "Сессия мәзірі"
 
-#: ../plugins/actions/actions.c:109
-msgid "Log Out Dialog"
-msgstr "Жүйеден шығу сұхбаты"
+#: ../plugins/actions/actions-dialog.glade.h:7
+msgid "Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgstr "Кейбір әрекеттері үшін 30 сек бөгеуі бар растау сұхбатын көрсету."
 
-#: ../plugins/actions/actions.c:110
+#: ../plugins/actions/actions-dialog.glade.h:8
+msgid "Visible"
+msgstr "Көрінетін"
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+msgid "_Actions"
+msgstr "Әр_екеттер"
+
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "_Show confirmation dialog"
+msgstr "Ра_стау сұхбатын көрсету"
+
+#: ../plugins/actions/actions.c:159
 msgid "Log Out"
 msgstr "Жүйеден шығу"
 
-#: ../plugins/actions/actions.c:111
+#: ../plugins/actions/actions.c:160
+msgid "_Log Out"
+msgstr "Жүйеден ш_ығу"
+
+#: ../plugins/actions/actions.c:161
+msgid "Are you sure you want to log out?"
+msgstr "Жүйеден шығуды шынымен қалайсыз ба?"
+
+#: ../plugins/actions/actions.c:162
+#, c-format
+msgid "Logging out in %d seconds."
+msgstr "%d секундтан кейін шығу."
+
+#: ../plugins/actions/actions.c:166
+msgid "Log Out..."
+msgstr "Жүйеден шығу..."
+
+#: ../plugins/actions/actions.c:167
+msgid "Log _Out..."
+msgstr "Жүйеден ш_ығу..."
+
+#: ../plugins/actions/actions.c:172
+msgid "Switch User"
+msgstr "Пайдаланушыны ауыстыру"
+
+#: ../plugins/actions/actions.c:173
+msgid "_Switch User"
+msgstr "Па_йдаланушыны ауыстыру"
+
+#: ../plugins/actions/actions.c:178
 msgid "Lock Screen"
 msgstr "Экранды бұғаттау"
 
-#: ../plugins/actions/actions.c:112
-msgid "Shut Down"
-msgstr "Сөндіру"
+#: ../plugins/actions/actions.c:179
+msgid "L_ock Screen"
+msgstr "Экра_нды бұғаттау"
 
-#: ../plugins/actions/actions.c:113
-msgid "Restart"
-msgstr "Қайта қосу"
+#: ../plugins/actions/actions.c:184
+msgid "Hibernate"
+msgstr "Гибернация"
 
-#: ../plugins/actions/actions.c:114
+#: ../plugins/actions/actions.c:185
+msgid "_Hibernate"
+msgstr "Г_ибернация"
+
+#: ../plugins/actions/actions.c:186
+msgid "Do you want to suspend to disk?"
+msgstr "Дискіге ұйықтатуды қалайсыз ба?"
+
+#: ../plugins/actions/actions.c:187
+#, c-format
+msgid "Hibernating computer in %d seconds."
+msgstr "Компьютер %d секундтан кейін гибернацияланады."
+
+#: ../plugins/actions/actions.c:191
 msgid "Suspend"
 msgstr "Ұйықтату"
 
-#: ../plugins/actions/actions.c:115
-msgid "Hibernate"
-msgstr "Гибернация"
+#: ../plugins/actions/actions.c:192
+msgid "Sus_pend"
+msgstr "Ұ_йықтату"
+
+#: ../plugins/actions/actions.c:193
+msgid "Do you want to suspend to RAM?"
+msgstr "Жадыға ұйықтатуды қалайсыз ба?"
+
+#: ../plugins/actions/actions.c:194
+#, c-format
+msgid "Suspending computer in %d seconds."
+msgstr "Компьютер %d секундтан кейін ұйықтатылады."
+
+#: ../plugins/actions/actions.c:198
+msgid "Restart"
+msgstr "Қайта қосу"
+
+#: ../plugins/actions/actions.c:199
+msgid "_Restart"
+msgstr "Қа_йта қосу"
+
+#: ../plugins/actions/actions.c:200
+msgid "Are you sure you want to restart?"
+msgstr "Қайта қосуды шынымен қалайсыз ба?"
+
+#: ../plugins/actions/actions.c:201
+#, c-format
+msgid "Restarting computer in %d seconds."
+msgstr "Компьютер %d секундтан кейін қайта қосылады."
+
+#: ../plugins/actions/actions.c:205
+msgid "Shut Down"
+msgstr "Сөндіру"
+
+#: ../plugins/actions/actions.c:206
+msgid "Shut _Down"
+msgstr "Сө_ндіру"
+
+#: ../plugins/actions/actions.c:207
+msgid "Are you sure you want to shut down?"
+msgstr "Сөндіруді шынымен қалайсыз ба?"
+
+#: ../plugins/actions/actions.c:208
+#, c-format
+msgid "Turning off computer in %d seconds."
+msgstr "Компьютер %d секундтан кейін сөндіріледі."
+
+#: ../plugins/actions/actions.c:600
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/separator/separator.desktop.in.h:2
+msgid "Separator"
+msgstr "Ажыратқыш"
+
+#: ../plugins/actions/actions.c:869
+#, c-format
+msgid "Failed to run action \"%s\""
+msgstr "\"%s\" әрекетін жөнелту сәтсіз"
+
+#: ../plugins/actions/actions.c:1027
+msgid "John Doo"
+msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -716,23 +849,23 @@ msgstr "Таңба_ша:"
 msgid "_Show button title"
 msgstr "Бат_ырма атауын көрсету"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:485
+#: ../plugins/applicationsmenu/applicationsmenu.c:486
 #: ../plugins/directorymenu/directorymenu.c:369
 msgid "Select An Icon"
 msgstr "Таңбашаны таңдаңыз"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:524
-#: ../plugins/applicationsmenu/applicationsmenu.c:765
+#: ../plugins/applicationsmenu/applicationsmenu.c:525
+#: ../plugins/applicationsmenu/applicationsmenu.c:766
 #: ../plugins/launcher/launcher.c:2289
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1021
+#: ../plugins/applicationsmenu/applicationsmenu.c:1028
 msgid "No applications found"
 msgstr "Қолданбалар табылмады"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1044
+#: ../plugins/applicationsmenu/applicationsmenu.c:1051
 msgid "Failed to load the applications menu"
 msgstr "Қолданбалар мәзірін жүктеу сәтсіз аяқталды"
 
@@ -815,8 +948,7 @@ msgstr "_Секундтарды көрсету"
 msgid "F_ormat:"
 msgstr "Пі_шім:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Қыз_ықтылығы:"
@@ -1124,16 +1256,16 @@ msgstr "\"%s\" үшін негізгі қолданба табылмады"
 msgid "Failed to launch default application for \"%s\""
 msgstr "\"%s\" үшін негізгі қолданбаны жөнелту сәтсіз аяқталды"
 
-#: ../plugins/directorymenu/directorymenu.c:697
+#: ../plugins/directorymenu/directorymenu.c:698
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "\"%s\" санаты үшін таңдамалы қолданбаны жөнелту сәтсіз аяқталды"
 
-#: ../plugins/directorymenu/directorymenu.c:770
+#: ../plugins/directorymenu/directorymenu.c:771
 msgid "Open Folder"
 msgstr "Буманы ашу"
 
-#: ../plugins/directorymenu/directorymenu.c:781
+#: ../plugins/directorymenu/directorymenu.c:782
 msgid "Open in Terminal"
 msgstr "Терминалда ашу"
 
@@ -1269,7 +1401,8 @@ msgstr "Сызық_ша батырма орналасуы:"
 msgid "Program launcher with optional menu"
 msgstr "Қосымша мәзірі бар бағдарлама жіберуші"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Жұмыс орын _баптаулары..."
 
@@ -1277,7 +1410,8 @@ msgstr "Жұмыс орын _баптаулары..."
 msgid "Unable to open the workspace settings"
 msgstr "Жұмыс орындар баптауларын ашу мүмкін емес"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Жұмыс орны %d"
@@ -1323,11 +1457,6 @@ msgstr "Тұтқа"
 #: ../plugins/separator/separator-dialog.glade.h:4
 msgid "New Line"
 msgstr "Жаңа сызық"
-
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/separator/separator.desktop.in.h:2
-msgid "Separator"
-msgstr "Ажыратқыш"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "Transparent"
@@ -1573,6 +1702,18 @@ msgstr "Терезелер мәзірі"
 msgid "Switch between open windows using a menu"
 msgstr "Ашық терезелер арасында мәзір арқылы ауысу"
 
+#~ msgid "_First button:"
+#~ msgstr "_Бірінші батырма:"
+
+#~ msgid "_Second button:"
+#~ msgstr "_Екінші батырма:"
+
+#~ msgid "Disabled"
+#~ msgstr "Сөндірулі"
+
+#~ msgid "Log Out Dialog"
+#~ msgstr "Жүйеден шығу сұхбаты"
+
 #~ msgid "Failed to remove the desktop file from the config directory"
 #~ msgstr "Баптаулар бумасынан desktop файлын өшіру сәтсіз аяқталды"
 
@@ -1603,14 +1744,8 @@ msgstr "Ашық терезелер арасында мәзір арқылы а�
 #~ msgid "Xfce Menu"
 #~ msgstr "Xfce мәзірі"
 
-#~ msgid "_Restart"
-#~ msgstr "Қа_йта қосу"
-
 #~ msgid "C_ompositing"
 #~ msgstr "Э_ффекттер"
 
 #~ msgid "Failed to open manual"
 #~ msgstr "Дисплейді ашу сәтсіз аяқталды"
-
-#~ msgid "Action Button"
-#~ msgstr "Әрекеттер батырмалары"
