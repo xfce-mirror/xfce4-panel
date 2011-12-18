@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 16:07+0000\n"
+"POT-Creation-Date: 2011-12-18 16:36+0000\n"
 "PO-Revision-Date: 2009-01-26 15:54+0200\n"
 "Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
 "Language-Team: Ukrainian <xfce4-dev@xfce.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -35,7 +35,7 @@ msgstr "Упорядкувати панель"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
-#: ../migrate/main.c:107
+#: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Панель"
 
@@ -169,11 +169,11 @@ msgstr "Перезапустити..."
 
 #: ../panel/main.c:393
 msgid "Failed to show the preferences dialog"
-msgstr "Не вдалось відобразити діалог налаштування"
+msgstr "Не вдалось показати діалог налаштування"
 
 #: ../panel/main.c:395
 msgid "Failed to show the add new items dialog"
-msgstr "Не вдалось відобразити діалог додавання нових елементів"
+msgstr "Не вдалось показати діалог додавання нових елементів"
 
 #: ../panel/main.c:397
 msgid "Failed to save the panel configuration"
@@ -327,7 +327,7 @@ msgstr "Екран %d"
 #: ../panel/panel-preferences-dialog.c:505
 #, c-format
 msgid "Monitor %d"
-msgstr "Менітор %d"
+msgstr "Монітор %d"
 
 #: ../panel/panel-preferences-dialog.c:836
 msgid "The panel and plugin configurations will be permanently removed"
@@ -591,7 +591,7 @@ msgstr "_Нова гра"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr "_Рівень"
+msgstr "_Рівень:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
@@ -609,11 +609,11 @@ msgstr "Досвідчений"
 msgid "Expert"
 msgstr "Експерт"
 
-#: ../migrate/main.c:101
+#: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Запрошуємо до першого старту панелі"
 
-#: ../migrate/main.c:103
+#: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
@@ -621,51 +621,51 @@ msgstr ""
 "Через переміщення панелі на нову систему збереження властивостей, вона "
 "завантажує свіжу початкову конфігурацію."
 
-#: ../migrate/main.c:106
+#: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
 msgstr "Виберіть нижче, з яким налаштуванням Ви хочете розпочати перший старт."
 
-#: ../migrate/main.c:112
+#: ../migrate/main.c:129
 msgid "Migrate old config"
 msgstr "Міграція старої конфігурації"
 
-#: ../migrate/main.c:113
+#: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
 msgstr "Міграція старої конфігурації 4.6 на Xfconf"
 
-#: ../migrate/main.c:118
+#: ../migrate/main.c:141
 msgid "Use default config"
 msgstr "Використовувати типову конфігурацію"
 
-#: ../migrate/main.c:119
+#: ../migrate/main.c:142
 msgid "Load the default configuration"
 msgstr "Завантажити типову конфігурацію"
 
-#: ../migrate/main.c:124
+#: ../migrate/main.c:148
 msgid "One empty panel"
 msgstr "Одна порожня панель"
 
-#: ../migrate/main.c:125
+#: ../migrate/main.c:149
 msgid "Start with one empty panel"
 msgstr "Стартувати з однією порожньою панеллю"
 
-#: ../migrate/main.c:138
+#: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
 msgstr "Не вдалось провести міграцію старої конфігурації панелі"
 
-#: ../migrate/main.c:151
+#: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
 msgstr "Не вдалось завантажити типову конфігурацію"
 
-#: ../migrate/main.c:163
+#: ../migrate/main.c:185
 msgid "Panel config needs migration..."
 msgstr "Потрібно провести міграцію конфігурації панелі..."
 
-#: ../migrate/main.c:167
+#: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
 msgstr "Не вдалось провести міграцію старої конфігурації панелі"
 
-#: ../migrate/main.c:173
+#: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
 msgstr "Конфігурацію панелі оновлено."
 
@@ -693,7 +693,9 @@ msgstr "Меню сеансу"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Показати діалогове вікно підтвердження з 30-секундним тайм-аутом для деяких дій."
+msgstr ""
+"Показати діалогове вікно підтвердження з 30-секундним тайм-аутом для деяких "
+"дій."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
@@ -891,7 +893,7 @@ msgstr "Показувати загальні н_азви програм"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr "Відображати значк_и в меню"
+msgstr "Показувати значк_и в меню"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
@@ -1003,7 +1005,7 @@ msgstr "Цифровий"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
-msgstr "Відображати _секунди"
+msgstr "Показувати _секунди"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
@@ -1017,7 +1019,7 @@ msgstr "Прибли_зність:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
-msgstr "Б_лимаючі розділювачі часу "
+msgstr "Б_лимаючий розділювач часу "
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
@@ -1034,7 +1036,7 @@ msgstr "По_казувати AM/PM"
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
-msgstr "Відображати _рамку"
+msgstr "Показувати _рамку"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
@@ -1042,7 +1044,7 @@ msgstr "Показати _неактивні крапки"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
-msgstr "_Відображати розділювач"
+msgstr "Показувати розділю_вач"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
@@ -1098,7 +1100,7 @@ msgstr "Вечір"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr "Пізньо ввечері"
+msgstr "Пізно ввечері"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
@@ -1110,7 +1112,7 @@ msgstr "%0 година"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "п’ять по %0"
+msgstr "п'ять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
@@ -1130,7 +1132,7 @@ msgstr "двадцять по %0"
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "двадцять п’ять по %0"
+msgstr "двадцять п'ять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
@@ -1140,7 +1142,7 @@ msgstr "пів години по %0"
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "без двадцяти п’яти %1"
+msgstr "без двадцяти п'яти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
@@ -1150,7 +1152,7 @@ msgstr "без двадцяти %1"
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr "без п’ятнадцяти %1"
+msgstr "без п'ятнадцяти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
@@ -1160,7 +1162,7 @@ msgstr "без десяти %1"
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr "без п’яти %1"
+msgstr "без п'яти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
@@ -1340,7 +1342,7 @@ msgstr "Відкрити у Терміналі"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr "Відобразити вміст теки в меню"
+msgstr "Показувати вміст теки в меню"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid ""
@@ -1365,7 +1367,7 @@ msgstr "Виберіть теку"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid "Show _hidden files"
-msgstr "Відоб_ражати сховані файли"
+msgstr "Показувати п_риховані файли"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
@@ -1389,7 +1391,7 @@ msgstr "Немає елементів"
 
 #: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Якщо Ви видалите елемент, його буде повністю видалено"
+msgstr "Якщо Ви видалите елемент, його буде повністю вилучено"
 
 #: ../plugins/launcher/launcher-dialog.c:745
 #, c-format
@@ -1471,7 +1473,7 @@ msgstr "Південь"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr "Схід"
+msgstr "Захід"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "_Arrow button position:"
@@ -1487,7 +1489,7 @@ msgstr "Властивост_і Робочих областей..."
 
 #: ../plugins/pager/pager.c:429
 msgid "Unable to open the workspace settings"
-msgstr "Неможливо відкрити властивості робочої області "
+msgstr "Неможливо відкрити властивості робочої області"
 
 #: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
@@ -1650,15 +1652,15 @@ msgstr "Розв_ернути кнопки у вертикальній пане�
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
-msgstr "Відображати пл_аскі кнопки"
+msgstr "Показувати пл_аскі кнопки"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
-msgstr "Відображати _заголовок"
+msgstr "Показувати _заголовок"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
-msgstr "Ві_дображати мітки кнопки"
+msgstr "Показувати мітки кнопок"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
@@ -1711,11 +1713,11 @@ msgstr "Д_емінімізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:3214
 msgid "Ma_ximize All"
-msgstr "Ма_ксимінімізувати всі"
+msgstr "Ма_ксимізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:3223
 msgid "_Unmaximize All"
-msgstr "Демаксимі_німізувати всі"
+msgstr "Демаксимізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:3233
 msgid "_Close All"
