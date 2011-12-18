@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-14 21:09+0000\n"
+"POT-Creation-Date: 2011-12-18 16:39+0000\n"
 "PO-Revision-Date: 2009-01-26 15:54+0200\n"
 "Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
 "Language-Team: Ukrainian <xfce4-dev@xfce.org>\n"
@@ -169,11 +169,11 @@ msgstr "Перезапустити..."
 
 #: ../panel/main.c:393
 msgid "Failed to show the preferences dialog"
-msgstr "Не вдалось відобразити діалог налаштування"
+msgstr "Не вдалось показати діалог налаштування"
 
 #: ../panel/main.c:395
 msgid "Failed to show the add new items dialog"
-msgstr "Не вдалось відобразити діалог додавання нових елементів"
+msgstr "Не вдалось показати діалог додавання нових елементів"
 
 #: ../panel/main.c:397
 msgid "Failed to save the panel configuration"
@@ -327,7 +327,7 @@ msgstr "Екран %d"
 #: ../panel/panel-preferences-dialog.c:498
 #, c-format
 msgid "Monitor %d"
-msgstr "Менітор %d"
+msgstr "Монітор %d"
 
 #: ../panel/panel-preferences-dialog.c:828
 msgid "The panel and plugin configurations will be permanently removed"
@@ -571,7 +571,7 @@ msgstr "_Нова гра"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr "_Рівень"
+msgstr "_Рівень:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
@@ -656,7 +656,7 @@ msgstr "_Друга кнопка:"
 
 #: ../plugins/actions/actions.c:108
 msgid "Disabled"
-msgstr "Вимкнуто"
+msgstr "Вимкнено"
 
 #: ../plugins/actions/actions.c:109
 msgid "Log Out Dialog"
@@ -738,7 +738,7 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
-msgstr "Показувати опис програми _у спливаючих"
+msgstr "Показувати опис програми _у підказках"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
@@ -746,7 +746,7 @@ msgstr "Показувати загальні н_азви програм"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr "Відображати значк_и в меню"
+msgstr "Показувати значк_и в меню"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
@@ -858,7 +858,7 @@ msgstr "Цифровий"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
-msgstr "Відображати _секунди"
+msgstr "Показувати _секунди"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
@@ -872,7 +872,7 @@ msgstr "Прибли_зність:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
-msgstr "Б_лимаючі розділювачі часу "
+msgstr "Б_лимаючий розділювач часу "
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
@@ -889,7 +889,7 @@ msgstr "По_казувати AM/PM"
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
-msgstr "Відображати _рамку"
+msgstr "Показувати _рамку"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
@@ -897,7 +897,7 @@ msgstr "Показати _неактивні крапки"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
-msgstr "_Відображати розділювач"
+msgstr "Показувати розділю_вач"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
@@ -953,7 +953,7 @@ msgstr "Вечір"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr "Пізньо ввечері"
+msgstr "Пізно ввечері"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
@@ -965,7 +965,7 @@ msgstr "%0 година"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "п’ять по %0"
+msgstr "п'ять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
@@ -985,7 +985,7 @@ msgstr "двадцять по %0"
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "двадцять п’ять по %0"
+msgstr "двадцять п'ять по %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
@@ -995,7 +995,7 @@ msgstr "пів години по %0"
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "без двадцяти п’яти %1"
+msgstr "без двадцяти п'яти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
@@ -1005,7 +1005,7 @@ msgstr "без двадцяти %1"
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr "без п’ятнадцяти %1"
+msgstr "без п'ятнадцяти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
@@ -1015,7 +1015,7 @@ msgstr "без десяти %1"
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr "без п’яти %1"
+msgstr "без п'яти %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
@@ -1195,7 +1195,7 @@ msgstr "Відкрити у Терміналі"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr "Відобразити вміст теки в меню"
+msgstr "Показувати вміст теки в меню"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid ""
@@ -1220,7 +1220,7 @@ msgstr "Виберіть теку"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid "Show _hidden files"
-msgstr "Відоб_ражати сховані файли"
+msgstr "Показувати п_рховані файли"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_Base Directory:"
@@ -1244,7 +1244,7 @@ msgstr "Немає елементів"
 
 #: ../plugins/launcher/launcher-dialog.c:744
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Якщо Ви видалите елемент, його буде повністю видалено"
+msgstr "Якщо Ви видалите елемент, його буде повністю вилучено"
 
 #: ../plugins/launcher/launcher-dialog.c:745
 #, c-format
@@ -1326,7 +1326,7 @@ msgstr "Південь"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "West"
-msgstr "Схід"
+msgstr "Захід"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "_Arrow button position:"
@@ -1342,7 +1342,7 @@ msgstr "Властивост_і Робочих областей..."
 
 #: ../plugins/pager/pager.c:428
 msgid "Unable to open the workspace settings"
-msgstr "Неможливо відкрити властивості робочої області "
+msgstr "Неможливо відкрити властивості робочої області"
 
 #: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
 #, c-format
@@ -1498,7 +1498,7 @@ msgstr "Ніколи"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
-msgstr "Немає, дозволити перетягути-і-вставити"
+msgstr "Немає, дозволити перетягнути-і-вставити"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
@@ -1514,11 +1514,11 @@ msgstr "Відображати пл_аскі кнопки"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show _handle"
-msgstr "Відображати _заголовок"
+msgstr "Показувати _заголовок"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show button _labels"
-msgstr "Ві_дображати мітки кнопки"
+msgstr "Показувати мітки кнопок"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show only _minimized windows"
@@ -1538,7 +1538,7 @@ msgstr "Порядок _сортування:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Timestamp"
-msgstr "Відображення часу"
+msgstr "Показ часу"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "When space is limited"
@@ -1567,11 +1567,11 @@ msgstr "Д_емінімізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
-msgstr "Ма_ксимінімізувати всі"
+msgstr "Ма_ксимізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
-msgstr "Демаксимі_німізувати всі"
+msgstr "Демаксимізувати всі"
 
 #: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
