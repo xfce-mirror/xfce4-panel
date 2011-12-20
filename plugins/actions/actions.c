@@ -1024,7 +1024,7 @@ actions_plugin_pack_idle (gpointer data)
           username = g_get_user_name ();
           if (exo_str_is_empty (username)
               || strcmp (username, "somebody") == 0)
-            username = _("John Doo");
+            username = _("John Doe");
         }
 
       button = xfce_arrow_button_new (GTK_ARROW_NONE);
