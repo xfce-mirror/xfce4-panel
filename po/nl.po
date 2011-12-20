@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-24 10:07+0000\n"
+"POT-Creation-Date: 2011-12-20 17:24+0000\n"
 "PO-Revision-Date: 2011-09-24 20:43+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch (Flemish)\n"
@@ -35,7 +35,7 @@ msgstr "Pas de werkbalk aan"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
-#: ../migrate/main.c:107
+#: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Werkbalk"
 
@@ -620,11 +620,11 @@ msgstr "Ervaren"
 msgid "Expert"
 msgstr "Deskundige"
 
-#: ../migrate/main.c:101
+#: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Welkom bij de eerste start van de werkbalk"
 
-#: ../migrate/main.c:103
+#: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
@@ -632,52 +632,52 @@ msgstr ""
 "Omdat de werkbalk een nieuw configuratiesysteem heeft, moeten in het begin "
 "de standaardinstellingen worden geladen."
 
-#: ../migrate/main.c:106
+#: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
 msgstr ""
 "Kies hieronder welke instelling gebruikt moet worden bij de eerste start."
 
-#: ../migrate/main.c:112
+#: ../migrate/main.c:129
 msgid "Migrate old config"
 msgstr "Oude instellingen overnemen"
 
-#: ../migrate/main.c:113
+#: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
 msgstr "Neem de oude instellingen over"
 
-#: ../migrate/main.c:118
+#: ../migrate/main.c:141
 msgid "Use default config"
 msgstr "Standaardinstellingen gebruiken"
 
-#: ../migrate/main.c:119
+#: ../migrate/main.c:142
 msgid "Load the default configuration"
 msgstr "Gebruik de standaardinstellingen"
 
-#: ../migrate/main.c:124
+#: ../migrate/main.c:148
 msgid "One empty panel"
 msgstr "Eén lege werkbalk"
 
-#: ../migrate/main.c:125
+#: ../migrate/main.c:149
 msgid "Start with one empty panel"
 msgstr "Begin met één lege werkbalk"
 
-#: ../migrate/main.c:138
+#: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
 msgstr "Kon de oude instellingen niet overnemen"
 
-#: ../migrate/main.c:151
+#: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
 msgstr "Kon de standaardinstellingen niet laden"
 
-#: ../migrate/main.c:163
+#: ../migrate/main.c:185
 msgid "Panel config needs migration..."
 msgstr "Werkbalkconfiguratie heeft migratie nodig..."
 
-#: ../migrate/main.c:167
+#: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
 msgstr "Kon de bestaande instellingen niet overbrengen"
 
-#: ../migrate/main.c:173
+#: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
 msgstr "Werkbalkconfiguratie is bijgewerkt."
 
@@ -705,7 +705,9 @@ msgstr "Sessiemenu"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Toon een bevestigingsdialoog met een aftelling van 30 seconden voor sommige acties."
+msgstr ""
+"Toon een bevestigingsdialoog met een aftelling van 30 seconden voor sommige "
+"acties."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
@@ -840,7 +842,7 @@ msgid "Failed to run action \"%s\""
 msgstr "Kon actie \"%s\" niet uitvoeren"
 
 #: ../plugins/actions/actions.c:1027
-msgid "John Doo"
+msgid "John Doe"
 msgstr "Jantje"
 
 #: ../plugins/actions/actions.desktop.in.h:2
