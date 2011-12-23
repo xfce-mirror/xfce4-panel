@@ -86,6 +86,10 @@ static gboolean launcher_dialog_press_event            (LauncherPluginDialog *di
                                                         const gchar          *object_name);
 static void     launcher_dialog_items_unload           (LauncherPluginDialog *dialog);
 static void     launcher_dialog_items_load             (LauncherPluginDialog *dialog);
+static void     launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
+                                                        const gchar          *type,
+                                                        const gchar          *uri,
+                                                        LauncherPluginDialog *dialog);
 
 
 
@@ -563,7 +567,7 @@ launcher_dialog_tree_drag_data_received (GtkWidget            *treeview,
     }
   else if (info == DROP_TARGET_ROW)
     {
-        /* nothing to do here, just wait for an row-inserted signal */
+      /* nothing to do here, just wait for an row-inserted signal */
     }
 }
 
@@ -605,28 +609,39 @@ launcher_dialog_tree_selection_changed (GtkTreeSelection     *selection,
     }
 
   /* update the sensitivity of the buttons */
+  sensitive = n_children > 0;
   object = gtk_builder_get_object (dialog->builder, "item-delete");
-  gtk_widget_set_sensitive (GTK_WIDGET (object), !!(n_children > 0));
-
-  object = gtk_builder_get_object (dialog->builder, "item-move-up");
-  sensitive = !!(position > 0 && position <= n_children);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
+  object = gtk_builder_get_object (dialog->builder, "mi-delete");
   gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
-  object = gtk_builder_get_object (dialog->builder, "item-move-down");
+  sensitive = !!(position > 0 && position <= n_children);
+  object = gtk_builder_get_object (dialog->builder, "item-move-up");
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
+  object = gtk_builder_get_object (dialog->builder, "mi-move-up");
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
+
   sensitive = !!(position >= 0 && position < n_children - 1);
+  object = gtk_builder_get_object (dialog->builder, "item-move-down");
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
+  object = gtk_builder_get_object (dialog->builder, "mi-move-down");
   gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
   object = gtk_builder_get_object (dialog->builder, "item-edit");
   gtk_widget_set_sensitive (GTK_WIDGET (object), editable);
+  object = gtk_builder_get_object (dialog->builder, "mi-edit");
+  gtk_widget_set_sensitive (GTK_WIDGET (object), editable);
+
+  sensitive = n_children > 1;
 
   object = gtk_builder_get_object (dialog->builder, "arrow-position");
-  gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
   object = gtk_builder_get_object (dialog->builder, "move-first");
-  gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 
   object = gtk_builder_get_object (dialog->builder, "arrow-position-label");
-  gtk_widget_set_sensitive (GTK_WIDGET (object), n_children > 1);
+  gtk_widget_set_sensitive (GTK_WIDGET (object), sensitive);
 }
 
 
@@ -653,6 +668,62 @@ launcher_dialog_press_event (LauncherPluginDialog *dialog,
 
 
 static gboolean
+launcher_dialog_tree_popup_menu (GtkWidget            *treeview,
+                                 LauncherPluginDialog *dialog)
+{
+  GObject *menu;
+
+  panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
+  panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
+
+  /* show the menu */
+  menu = gtk_builder_get_object (dialog->builder, "popup-menu");
+  gtk_menu_popup (GTK_MENU (menu),
+                  NULL, treeview,
+                  NULL, NULL, 3,
+                  gtk_get_current_event_time ());
+
+  return TRUE;
+}
+
+
+
+static void
+launcher_dialog_tree_popup_menu_activated (GtkWidget            *mi,
+                                           LauncherPluginDialog *dialog)
+{
+  const gchar *name;
+
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  panel_return_if_fail (GTK_IS_BUILDABLE (mi));
+
+  /* name of the button */
+  name = gtk_buildable_get_name (GTK_BUILDABLE (mi));
+  if (G_UNLIKELY (name == NULL))
+    return;
+
+  /* click the button in the dialog to trigger the action */
+  if (strcmp (name, "mi-move-up") == 0)
+    launcher_dialog_press_event (dialog, "item-move-up");
+  else if (strcmp (name, "mi-move-down") == 0)
+    launcher_dialog_press_event (dialog, "item-move-down");
+  else if (strcmp (name, "mi-edit") == 0)
+    launcher_dialog_press_event (dialog, "item-add");
+  else if (strcmp (name, "mi-delete") == 0)
+    launcher_dialog_press_event (dialog, "item-delete");
+  else if (strcmp (name, "mi-add") == 0)
+    launcher_dialog_press_event (dialog, "item-add");
+  else if (strcmp (name, "mi-application") == 0)
+    launcher_dialog_press_event (dialog, "item-new");
+  else if (strcmp (name, "mi-link") == 0)
+    launcher_dialog_item_desktop_item_edit (mi, "Link", NULL, dialog);
+  else
+    panel_assert_not_reached ();
+}
+
+
+
+static gboolean
 launcher_dialog_tree_button_press_event (GtkTreeView          *treeview,
                                          GdkEventButton       *event,
                                          LauncherPluginDialog *dialog)
@@ -660,11 +731,19 @@ launcher_dialog_tree_button_press_event (GtkTreeView          *treeview,
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
   panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
 
-  if (event->button == 1  && event->type == GDK_2BUTTON_PRESS
+  if (event->button == 1
+      && event->type == GDK_2BUTTON_PRESS
       && event->window == gtk_tree_view_get_bin_window (treeview)
       && gtk_tree_view_get_path_at_pos (treeview, event->x, event->y,
                                         NULL, NULL, NULL, NULL))
-    return launcher_dialog_press_event (dialog, "item-edit");
+    {
+      return launcher_dialog_press_event (dialog, "item-edit");
+    }
+  else if (event->button == 3
+           && event->type == GDK_BUTTON_PRESS)
+    {
+      launcher_dialog_tree_popup_menu (GTK_WIDGET (treeview), dialog);
+    }
 
   return FALSE;
 }
@@ -689,6 +768,52 @@ launcher_dialog_tree_key_press_event (GtkTreeView          *treeview,
 
 
 static void
+launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
+                                        const gchar          *type,
+                                        const gchar          *uri,
+                                        LauncherPluginDialog *dialog)
+{
+  gchar     *filename;
+  gchar     *command;
+  GdkScreen *screen;
+  GError    *error = NULL;
+  GtkWidget *toplevel;
+
+  panel_return_if_fail (GTK_IS_WIDGET (widget));
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  panel_return_if_fail (type != NULL || uri != NULL);
+
+  /* build command */
+  if (uri != NULL)
+    {
+      command = g_strdup_printf ("exo-desktop-item-edit --xid=%d '%s'",
+                                 LAUNCHER_WIDGET_XID (widget), uri);
+    }
+  else
+    {
+      filename = launcher_plugin_unique_filename (dialog->plugin);
+      command = g_strdup_printf ("exo-desktop-item-edit -t %s -c --xid=%d '%s'",
+                                 type, LAUNCHER_WIDGET_XID (widget),
+                                 filename);
+      g_free (filename);
+    }
+
+  /* spawn item editor */
+  screen = gtk_widget_get_screen (widget);
+  if (!xfce_spawn_command_line_on_screen (screen, command, FALSE, FALSE, &error))
+    {
+      toplevel = gtk_widget_get_toplevel (widget);
+      xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
+          _("Failed to open desktop item editor"));
+      g_error_free (error);
+    }
+
+  g_free (command);
+}
+
+
+
+static void
 launcher_dialog_item_button_clicked (GtkWidget            *button,
                                      LauncherPluginDialog *dialog)
 {
@@ -700,12 +825,9 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
   GtkTreeModel     *model;
   GtkTreeIter       iter_a, iter_b;
   GtkTreePath      *path;
-  gchar            *command, *uri;
-  GdkScreen        *screen;
-  GError           *error = NULL;
+  gchar            *uri;
   GarconMenuItem   *item;
   GtkWidget        *toplevel;
-  gchar            *filename;
   gboolean          save_items = TRUE;
 
   panel_return_if_fail (GTK_IS_BUILDABLE (button));
@@ -769,30 +891,13 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
 
               /* build command */
               uri = garcon_menu_item_get_uri (item);
-              command = g_strdup_printf ("exo-desktop-item-edit --xid=%d '%s'",
-                                         LAUNCHER_WIDGET_XID (button), uri);
+              launcher_dialog_item_desktop_item_edit (button, NULL, uri, dialog);
               g_free (uri);
             }
           else
             {
-              /* build command */
-              filename = launcher_plugin_unique_filename (dialog->plugin);
-              command = g_strdup_printf ("exo-desktop-item-edit -c --xid=%d '%s'",
-                                         LAUNCHER_WIDGET_XID (button), filename);
-              g_free (filename);
+              launcher_dialog_item_desktop_item_edit (button, "Application", NULL, dialog);
             }
-
-          /* spawn item editor */
-          screen = gtk_widget_get_screen (button);
-          if (!xfce_spawn_command_line_on_screen (screen, command, FALSE, FALSE, &error))
-            {
-              toplevel = gtk_widget_get_toplevel (button);
-              xfce_dialog_show_error (GTK_WINDOW (toplevel), error,
-                  _("Failed to open desktop item editor"));
-              g_error_free (error);
-            }
-
-          g_free (command);
 
           save_items = FALSE;
         }
@@ -1066,6 +1171,9 @@ launcher_dialog_show (LauncherPlugin *plugin)
   const gchar          *button_names[] = { "item-add", "item-delete",
                                            "item-move-up", "item-move-down",
                                            "item-edit", "item-new" };
+  const gchar          *mi_names[] = { "mi-edit", "mi-delete",
+                                       "mi-application", "mi-link", "mi-add",
+                                       "mi-move-up", "mi-move-down" };
   const gchar          *binding_names[] = { "disable-tooltips", "show-label",
                                             "move-first", "arrow-position" };
 
@@ -1096,6 +1204,15 @@ launcher_dialog_show (LauncherPlugin *plugin)
           G_CALLBACK (launcher_dialog_item_button_clicked), dialog);
     }
 
+  /* connect menu items */
+  for (i = 0; i < G_N_ELEMENTS (mi_names); i++)
+    {
+      object = gtk_builder_get_object (builder, mi_names[i]);
+      panel_return_if_fail (GTK_IS_WIDGET (object));
+      g_signal_connect (G_OBJECT (object), "activate",
+          G_CALLBACK (launcher_dialog_tree_popup_menu_activated), dialog);
+    }
+
   object = gtk_builder_get_object (dialog->builder, "item-store");
   g_signal_connect (G_OBJECT (object), "row-changed",
       G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
@@ -1117,6 +1234,8 @@ launcher_dialog_show (LauncherPlugin *plugin)
       G_CALLBACK (launcher_dialog_tree_button_press_event), dialog);
   g_signal_connect (G_OBJECT (object), "key-press-event",
       G_CALLBACK (launcher_dialog_tree_key_press_event), dialog);
+  g_signal_connect (G_OBJECT (object), "popup-menu",
+      G_CALLBACK (launcher_dialog_tree_popup_menu), dialog);
 
   /* connect bindings to the advanced properties */
   for (i = 0; i < G_N_ELEMENTS (binding_names); i++)
