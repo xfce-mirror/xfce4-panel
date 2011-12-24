@@ -708,7 +708,7 @@ launcher_dialog_tree_popup_menu_activated (GtkWidget            *mi,
   else if (strcmp (name, "mi-move-down") == 0)
     launcher_dialog_press_event (dialog, "item-move-down");
   else if (strcmp (name, "mi-edit") == 0)
-    launcher_dialog_press_event (dialog, "item-add");
+    launcher_dialog_press_event (dialog, "item-edit");
   else if (strcmp (name, "mi-delete") == 0)
     launcher_dialog_press_event (dialog, "item-delete");
   else if (strcmp (name, "mi-add") == 0)
