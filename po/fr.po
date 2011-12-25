@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 17:08+0000\n"
+"POT-Creation-Date: 2011-12-25 07:12+0000\n"
 "PO-Revision-Date: 2011-01-16 12:45+0100\n"
 "Last-Translator: Durand-Favreau Arnaud <biginoz@free.fr>\n"
 "Language-Team: French <xfce-i18n@xfce.org>\n"
@@ -35,7 +35,7 @@ msgid "Customize the panel"
 msgstr "Modifier le tableau de bord"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2306
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Tableau de bord"
@@ -62,40 +62,40 @@ msgid "Failed to open the documentation browser"
 msgstr "Échec à l'ouverture du navigateur"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:919
-#: ../panel/panel-preferences-dialog.c:1056
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1057
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Êtes-vous sûr de vouloir supprimer « %s » ?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:924
-#: ../panel/panel-preferences-dialog.c:1059
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../panel/panel-preferences-dialog.c:1060
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "Si vous supprimer le greffon du tableau de bord, il le sera de manière "
 "permanente."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1084
+#: ../libxfce4panel/xfce-panel-plugin.c:1202
 msgid "_Move"
 msgstr "_Déplacer"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1118
+#: ../libxfce4panel/xfce-panel-plugin.c:1236
 msgid "Pane_l"
 msgstr "Tableau de _bord"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1126 ../panel/panel-window.c:2287
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2318
 msgid "Add _New Items..."
 msgstr "Ajouter des _greffons..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1137 ../panel/panel-window.c:2298
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2329
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1154 ../panel/panel-window.c:2314
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2345
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
@@ -216,7 +216,7 @@ msgstr "Aucune instance de %s n'a été trouvée"
 msgid "Failed to launch the migration application"
 msgstr "Échec au lancement de la procédure de migration"
 
-#: ../panel/panel-application.c:1597
+#: ../panel/panel-application.c:1600
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -224,11 +224,11 @@ msgstr ""
 "La session Xorg a été ouverte sans gestionnaire de session. L'action Quitter "
 "fermera la session Xorg."
 
-#: ../panel/panel-application.c:1598
+#: ../panel/panel-application.c:1601
 msgid "Are you sure you want to quit the panel?"
 msgstr "Êtes-vous sûr de vouloir quitter le tableau de bord ?"
 
-#: ../panel/panel-application.c:1606
+#: ../panel/panel-application.c:1609
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Échec à l'exécution de la commande « %s »"
@@ -248,11 +248,11 @@ msgstr ""
 "Type invalide trouvé : « %s ». Les types valides sont bool, double, int, "
 "string et uint."
 
-#: ../panel/panel-dialogs.c:76
+#: ../panel/panel-dialogs.c:77
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Tableau de bord de l'environnement Xfce"
 
-#: ../panel/panel-dialogs.c:81
+#: ../panel/panel-dialogs.c:82
 msgid "translator-credits"
 msgstr ""
 "Olivier Fourdan <fourdan@xfce.org>\n"
@@ -263,21 +263,21 @@ msgstr ""
 "Durand-Favreau Arnaud <biginoz@free.fr>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:123 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Ajouter un élément"
 
-#: ../panel/panel-dialogs.c:136
+#: ../panel/panel-dialogs.c:137
 msgid "Please choose a panel for the new plugin:"
 msgstr "Veuillez sélectionner un tableau de bord pour le nouveau greffon :"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:775
+#: ../panel/panel-dialogs.c:148 ../panel/panel-preferences-dialog.c:776
 #, c-format
 msgid "Panel %d"
 msgstr "Panneau %d"
 
-#: ../panel/panel-dialogs.c:183
+#: ../panel/panel-dialogs.c:184
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -285,7 +285,7 @@ msgstr ""
 "Le tableau de bord est exécuté en mode restreint, vous ne pouvez apporter "
 "des modifications en tant qu'utilisateur régulier"
 
-#: ../panel/panel-dialogs.c:185
+#: ../panel/panel-dialogs.c:186
 msgid "Modifying the panel is not allowed"
 msgstr "Modification du tableau de bord interdit"
 
@@ -298,7 +298,7 @@ msgid "Add new plugins to the panel"
 msgstr "Ajouter un nouveau tableau de bord"
 
 #: ../panel/panel-item-dialog.c:214
-#: ../plugins/launcher/launcher-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
 msgstr "_Rechercher :"
 
@@ -306,14 +306,14 @@ msgstr "_Rechercher :"
 msgid "Enter search phrase here"
 msgstr "Saisissez vos termes de recherche ici"
 
-#: ../panel/panel-plugin-external.c:426
+#: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 "Le greffon « %s » a quitté le tableau de bord de manière inattendu, voulez-"
 "vous le redémarrer ?"
 
-#: ../panel/panel-plugin-external.c:428
+#: ../panel/panel-plugin-external.c:431
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -324,43 +324,43 @@ msgstr ""
 "vous cliquez sur Exécuter le greffon sera redémarrer sinon supprimer de "
 "manière permanente du tableau de bord."
 
-#: ../panel/panel-preferences-dialog.c:460
+#: ../panel/panel-preferences-dialog.c:461
 msgid "Automatic"
 msgstr "Automatique"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:479
+#: ../panel/panel-preferences-dialog.c:480
 #, c-format
 msgid "Screen %d"
 msgstr "Écran %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:505
+#: ../panel/panel-preferences-dialog.c:506
 #, c-format
 msgid "Monitor %d"
 msgstr "Écran %d"
 
-#: ../panel/panel-preferences-dialog.c:836
+#: ../panel/panel-preferences-dialog.c:837
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "Les configurations du tableau de bord et greffons seront supprimées de "
 "manière permanente"
 
-#: ../panel/panel-preferences-dialog.c:837
+#: ../panel/panel-preferences-dialog.c:838
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Êtes-vous sûr de vouloir supprimer le tableau de bord %d ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:921
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externe)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:925
+#: ../panel/panel-preferences-dialog.c:926
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -371,7 +371,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:937
+#: ../panel/panel-preferences-dialog.c:938
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom interne : %s-%d"
@@ -421,94 +421,112 @@ msgid "D_isplay"
 msgstr "_Affichage"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
+msgid "Deskbar"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
 msgstr "Ne pas _réserver d'espace sur les bords"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Edit the currently selected item"
 msgstr "Editer le greffon sélectionné"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
 "Activer composite dans le gestionnaire de fenêtre pour les paramètres "
 "d'opacité du tableau de bord."
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "General"
 msgstr "Général"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Ite_ms"
 msgstr "G_reffons"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 #, no-c-format
 msgid "L_ength (%):"
-msgstr "_Largeur (%):"
+msgstr "_Largeur (%) :"
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "M_ode:"
+msgstr ""
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "Dimensions"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Move currently selected item down by one row"
 msgstr "Déplacer le greffon sélectionné d'une ligne vers le bas"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Move currently selected item up by one row"
 msgstr "Déplacer le greffon sélectionné d'une ligne vers le haut"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
 msgstr "Aucun (style par défaut)"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
+#, fuzzy
+msgid "Num_ber of rows:"
+msgstr "Nombre _de lignes :"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
 msgstr "S_ortie :"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Opacity"
 msgstr "Opacité"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Pick a Panel Color"
 msgstr "Sélectionner une couleur"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Remove currently selected item"
 msgstr "Supprimer le greffon selectionné"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Remove the currently selected panel"
 msgstr "Supprimer le tableau de bord sélectionné"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:33
+#, fuzzy
+msgid "Row _Size (pixels):"
+msgstr "_Taille (pixels) :"
+
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
 msgstr "Sélectionner une image pour l'arrière-plan"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
 "Cette option permet de maximiser les fenêtres au-dessous de l'espace réservé "
-"au tableau de bord. Cela fonctionne uniquement pour un tableau de bord rattaché "
-"au bord de l'écran."
+"au tableau de bord. Cela fonctionne uniquement pour un tableau de bord "
+"rattaché au bord de l'écran."
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
@@ -516,40 +534,40 @@ msgstr ""
 "Cette option permet d'agrandir automatiquement la largeur du tableau de bord "
 "tel que requis par les greffons."
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 "Cette option permet d'étendre le tableau de bord à travers plusieurs "
 "moniteurs."
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 "Cette option masque les poignées du tableau de bord et vérouille sa position."
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 "Cette option masque le tableau de bord lorsque la souris ne pointe pas "
-"dessus. Cela fonctionne uniquement pour un tableau de bord rattaché "
-"au bord de l'écran."
+"dessus. Cela fonctionne uniquement pour un tableau de bord rattaché au bord "
+"de l'écran."
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Show about information of the currently selected item"
 msgstr "Afficher les informations à propos du greffon sélectionné"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Solid color"
 msgstr "Couleur pleine"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Span mo_nitors"
 msgstr "Étendre à tous les moni_teurs"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
@@ -557,7 +575,7 @@ msgstr ""
 "Transparence lorsque la souris pointe sur le tableau de bord, 0 étant "
 "transparent et 100 opaque."
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
@@ -565,42 +583,34 @@ msgstr ""
 "Transparence lorsque la souris ne pointe pas sur le tableau de bord, 0 étant "
 "transparent et 100 opaque."
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Alpha:"
 msgstr "_Opacité :"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Enter:"
 msgstr "_Survol :"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_File:"
 msgstr "_Fichier :"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Leave:"
 msgstr "_Normal :"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Lock panel"
 msgstr "_Vérouiller le tableau de bord"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
-msgid "_Orientation:"
-msgstr "_Orientation :"
-
-#: ../panel/panel-preferences-dialog.glade.h:50
-msgid "_Size (pixels):"
-msgstr "_Taille (pixels) :"
-
-#: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/separator/separator-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Style :"
 
@@ -839,7 +849,7 @@ msgid "Turning off computer in %d seconds."
 msgstr "Extinction dans %d secondes."
 
 #: ../plugins/actions/actions.c:600
-#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Séparateur"
@@ -849,8 +859,9 @@ msgstr "Séparateur"
 msgid "Failed to run action \"%s\""
 msgstr "Échec à l'exécution de l'action « %s »"
 
-#: ../plugins/actions/actions.c:1027
-msgid "John Doo"
+#: ../plugins/actions/actions.c:1028
+#, fuzzy
+msgid "John Doe"
 msgstr "John Doo"
 
 #: ../plugins/actions/actions.desktop.in.h:2
@@ -932,23 +943,23 @@ msgstr "_Icône :"
 msgid "_Show button title"
 msgstr "Afficher le titre du _bouton"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:486
-#: ../plugins/directorymenu/directorymenu.c:369
+#: ../plugins/applicationsmenu/applicationsmenu.c:528
+#: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Sélection de l'icône"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:525
-#: ../plugins/applicationsmenu/applicationsmenu.c:766
-#: ../plugins/launcher/launcher.c:2289
+#: ../plugins/applicationsmenu/applicationsmenu.c:567
+#: ../plugins/applicationsmenu/applicationsmenu.c:808
+#: ../plugins/launcher/launcher.c:2299
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Échec à l'exécution de la commande « %s »."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1028
+#: ../plugins/applicationsmenu/applicationsmenu.c:1070
 msgid "No applications found"
 msgstr "Aucune application trouvée"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1051
+#: ../plugins/applicationsmenu/applicationsmenu.c:1093
 msgid "Failed to load the applications menu"
 msgstr "Échec au chargement du fichier de menu"
 
@@ -1067,11 +1078,11 @@ msgid "Show gri_d"
 msgstr "Afficher une _grille"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. See the documentation of the date utility for additional "
 "information."
 msgstr ""
 "Le format décrit les parties de la date ou l'heure à insérer dans le format. "
@@ -1321,42 +1332,42 @@ msgstr "douze"
 msgid "What time is it?"
 msgstr "Quelle heure est-il ?"
 
-#: ../plugins/directorymenu/directorymenu.c:243
+#: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "Menu de répertoire"
 
-#: ../plugins/directorymenu/directorymenu.c:550
+#: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Échec à l'exéution de l'application « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:581
+#: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Échec à lecture du type de « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:590
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Application par défaut non trouvée pour « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:605
+#: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Échec à l'exécution de l'application par défaut de « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:698
+#: ../plugins/directorymenu/directorymenu.c:717
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Échec à l'exécution de l'application préférée pour la catégorie « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:771
+#: ../plugins/directorymenu/directorymenu.c:790
 msgid "Open Folder"
 msgstr "Ouvrir le répertoire"
 
-#: ../plugins/directorymenu/directorymenu.c:782
+#: ../plugins/directorymenu/directorymenu.c:801
 msgid "Open in Terminal"
 msgstr "Ouvrir dans un terminal"
 
@@ -1400,73 +1411,92 @@ msgstr "_Motif des fichiers :"
 msgid "Open launcher menu"
 msgstr "Ouvrir le menu du lanceur"
 
-#: ../plugins/launcher/launcher.c:1568
+#: ../plugins/launcher/launcher.c:1574
 msgid "Unnamed Item"
 msgstr "Item sans nom"
 
-#: ../plugins/launcher/launcher.c:1709
+#: ../plugins/launcher/launcher.c:1719
 msgid "No items"
 msgstr "Aucun item"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:807
+msgid "Failed to open desktop item editor"
+msgstr "Échec à l'ouverture de l'éditeur d'item"
+
+#: ../plugins/launcher/launcher-dialog.c:866
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Si vous supprimer un item, il le sera de manière permanente"
 
-#: ../plugins/launcher/launcher-dialog.c:745
+#: ../plugins/launcher/launcher-dialog.c:867
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Êtes-vous sûr de vouloir supprimer « %s » ?"
 
-#: ../plugins/launcher/launcher-dialog.c:746
+#: ../plugins/launcher/launcher-dialog.c:868
 msgid "Unnamed item"
 msgstr "Item sans nom"
 
-#: ../plugins/launcher/launcher-dialog.c:791
-msgid "Failed to open desktop item editor"
-msgstr "Échec à l'ouverture de l'éditeur d'item"
+#: ../plugins/launcher/launcher-dialog.glade.h:1
+#, fuzzy
+msgid "Add Appli_cation"
+msgstr "Applications connues"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
 msgstr "Ajouter un nouveau item vide"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Add one or more existing items to the launcher"
 msgstr "Ajouter un ou plusieurs items existants dans le lanceur"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Advanced"
 msgstr "Avancé"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:6
+msgid "D_elete Item"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
 msgstr "Par défaut"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "Delete the currently selected item"
 msgstr "Supprimer l'item sélectionné"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Disable t_ooltips"
 msgstr "Désactiver les _bulles d'aides"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "East"
 msgstr "Est"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Inside Button"
 msgstr "À l’intérieur"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
 msgstr "Lanceur"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:15
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+#, fuzzy
+msgid "New _Application"
+msgstr "Applications connues"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+#, fuzzy
+msgid "New _Link"
+msgstr "Nouvel ligne"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
 msgstr "Nord"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
@@ -1474,31 +1504,35 @@ msgstr ""
 "Cette option désactive les bulles d'aides lorsque la souris pointent au-"
 "dessus du bouton ou les éléments du menu."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
 "Cette option permet d'afficher le dernier élément cliqué dans le tableau de "
 "bord."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
 msgstr "Afficher le _nom à la place de l'icône"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
 msgstr "Affiché le _dernier item cliqué dans le tableau de bord"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "South"
 msgstr "Sud"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "West"
 msgstr "Ouest"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "_Arrow button position:"
 msgstr "Position de la _flèche :"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:27
+msgid "_Edit Item"
+msgstr ""
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
@@ -1512,7 +1546,7 @@ msgstr "_Préférences des espaces de travail..."
 msgid "Unable to open the workspace settings"
 msgstr "Impossible d'ouvrir la fenêtre de préférences des espaces de travail"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "Espace de travail %d"
@@ -1559,15 +1593,11 @@ msgstr "Points"
 msgid "Handle"
 msgstr "Poignée"
 
-#: ../plugins/separator/separator-dialog.glade.h:4
-msgid "New Line"
-msgstr "Nouvel ligne"
-
-#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
 msgstr "Transparent"
 
-#: ../plugins/separator/separator-dialog.glade.h:7
+#: ../plugins/separator/separator-dialog.glade.h:6
 msgid "_Expand"
 msgstr "É_tendre"
 
@@ -1575,15 +1605,15 @@ msgstr "É_tendre"
 msgid "Adds a separator or space between panel items"
 msgstr "Ajoute un séparateur ou un espace entre les greffons"
 
-#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
 msgstr "Restaurer les fenêtres réduites"
 
-#: ../plugins/showdesktop/showdesktop.c:201
+#: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
 msgstr "Réduire toutes les fenêtres et afficher le bureau"
 
-#: ../plugins/showdesktop/showdesktop.c:204
+#: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
 msgstr "Afficher le bureau"
@@ -1668,79 +1698,75 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "Restaurer les fenêtres réduites vers l'_espace de travail courrant"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "Ro_tate buttons in vertical panel"
-msgstr "Ré_orienter les boutons dans un tableau de bord vertical"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr "Afficher des boutons _plats"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "Afficher la poi_gnée"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "Afficher le _nom des fenêtres"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "Afficher uniquement les fenêtres _réduites"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Afficher les _fenêtres de tous les espaces de travail"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from all mo_nitors"
 msgstr "Afficher les fenêtres de tous les _moniteurs"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "Or_dre de tri :"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr "Apparition"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
 msgstr "Espace limité"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "Boutons des fenêtres"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "R_egroupement :"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
 msgstr "Titre de la fenêtre"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Changer d'espace de travail à l'aide de la roulette de la souris"
 
-#: ../plugins/tasklist/tasklist-widget.c:3199
+#: ../plugins/tasklist/tasklist-widget.c:3176
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3208
+#: ../plugins/tasklist/tasklist-widget.c:3185
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3214
+#: ../plugins/tasklist/tasklist-widget.c:3191
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3223
+#: ../plugins/tasklist/tasklist-widget.c:3200
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3233
+#: ../plugins/tasklist/tasklist-widget.c:3210
 msgid "_Close All"
 msgstr "Tout _fermer"
 
@@ -1748,28 +1774,28 @@ msgstr "Tout _fermer"
 msgid "Switch between open windows using buttons"
 msgstr "Circuler parmi les fenêtres ouvertes en utilisant les boutons"
 
-#: ../plugins/windowmenu/windowmenu.c:652
+#: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
 msgstr "Bureau"
 
-#: ../plugins/windowmenu/windowmenu.c:1243
+#: ../plugins/windowmenu/windowmenu.c:1246
 msgid "No Windows"
 msgstr "Aucune fenêtre"
 
-#: ../plugins/windowmenu/windowmenu.c:1258
+#: ../plugins/windowmenu/windowmenu.c:1261
 msgid "Urgent Windows"
 msgstr "Fenêtres urgentes"
 
-#: ../plugins/windowmenu/windowmenu.c:1300
+#: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
 msgstr "Ajouter un espace de travail"
 
-#: ../plugins/windowmenu/windowmenu.c:1320
+#: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Supprimer l'espace de travail « %s »"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Supprimer l'espace de travail %d"
@@ -1810,3 +1836,9 @@ msgstr "Menu des fenêtres"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Circuler parmi les fenêtres ouvertes en utilisant un menu"
+
+#~ msgid "_Orientation:"
+#~ msgstr "_Orientation :"
+
+#~ msgid "Ro_tate buttons in vertical panel"
+#~ msgstr "Ré_orienter les boutons dans un tableau de bord vertical"
