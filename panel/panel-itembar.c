@@ -502,13 +502,13 @@ panel_itembar_size_allocate (GtkWidget     *widget,
    * not the length set by the user) */
   expand_children_fit = expand_len_req == expand_len_avail;
 
-  if (expand_len_avail < 0)
+  if (expand_len_avail < expand_len_req)
     {
       /* check if there are plugins on the panel we can shrink */
       if (shrink_len_avail > 0)
-        shrink_len_req = ABS (expand_len_avail);
+        shrink_len_req = expand_len_req - expand_len_avail;
 
-      expand_len_avail = 0;
+      expand_len_avail = expand_len_req;
     }
 
   /* init coordinates for first child */
