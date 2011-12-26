@@ -579,11 +579,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
           shrink_len_req -= new_len;
           shrink_len_avail -= child_len;
 
-          /* the size we decrease can never be more then the actual length,
-           * if this is the case the size allocation is lacking behind,
-           * which happens on panel startup with a expanding panel */
-          if (new_len < child_len)
-            child_len -= new_len;
+          child_len -= new_len;
         }
 
       if (G_UNLIKELY (child_len < 1))
