@@ -995,6 +995,9 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
               gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);
               gtk_widget_show (mi);
 
+              g_signal_connect_swapped (G_OBJECT (li->data), "directory-changed",
+                  G_CALLBACK (applications_menu_plugin_menu_reload), plugin);
+
               if (plugin->show_menu_icons)
                 {
                   icon_name = garcon_menu_element_get_icon_name (li->data);
