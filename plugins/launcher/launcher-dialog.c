@@ -41,7 +41,7 @@
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
-#define LAUNCHER_WIDGET_XID(widget) ((gint) GDK_WINDOW_XID (GDK_WINDOW ((widget)->window)))
+#define LAUNCHER_WIDGET_XID(widget) ((guint) GDK_WINDOW_XID (GDK_WINDOW ((widget)->window)))
 #else
 #define LAUNCHER_WIDGET_XID(widget) (0)
 #endif
@@ -786,13 +786,13 @@ launcher_dialog_item_desktop_item_edit (GtkWidget            *widget,
   /* build command */
   if (uri != NULL)
     {
-      command = g_strdup_printf ("exo-desktop-item-edit --xid=%d '%s'",
+      command = g_strdup_printf ("exo-desktop-item-edit --xid=0x%x '%s'",
                                  LAUNCHER_WIDGET_XID (widget), uri);
     }
   else
     {
       filename = launcher_plugin_unique_filename (dialog->plugin);
-      command = g_strdup_printf ("exo-desktop-item-edit -t %s -c --xid=%d '%s'",
+      command = g_strdup_printf ("exo-desktop-item-edit -t %s -c --xid=0x%x '%s'",
                                  type, LAUNCHER_WIDGET_XID (widget),
                                  filename);
       g_free (filename);
