@@ -49,7 +49,13 @@ panel_properties_store_value (XfconfChannel *channel,
   /* check if the types match */
   pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (object), object_property);
   panel_assert (pspec != NULL);
-  panel_assert (G_PARAM_SPEC_VALUE_TYPE (pspec) == xfconf_property_type);
+  if (G_PARAM_SPEC_VALUE_TYPE (pspec) != xfconf_property_type)
+    {
+      g_critical ("Object and Xfconf properties don't match! %s::%s. %s != %s",
+                  G_OBJECT_TYPE_NAME (object), xfconf_property,
+                  g_type_name (xfconf_property_type),
+                  g_type_name (G_PARAM_SPEC_VALUE_TYPE (pspec)));
+    }
 #endif
 
   /* write the property to the xfconf channel */
