@@ -61,7 +61,6 @@ static gboolean   opt_version = FALSE;
 static gboolean   opt_disable_wm_check = FALSE;
 static gchar     *opt_plugin_event = NULL;
 static gchar    **opt_arguments = NULL;
-static gboolean   sm_client_saved_state = FALSE;
 
 
 
@@ -151,23 +150,6 @@ panel_sm_client_quit (XfceSMClient *sm_client)
                "terminate panel for session manager");
 
   gtk_main_quit ();
-}
-
-
-
-static void
-panel_sm_client_save_state (XfceSMClient     *sm_client,
-                            PanelApplication *application)
-{
-  panel_return_if_fail (XFCE_IS_SM_CLIENT (sm_client));
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-
-  panel_debug (PANEL_DEBUG_MAIN,
-               "save configuration for session manager");
-
-  panel_application_save (application, TRUE);
-
-  sm_client_saved_state = TRUE;
 }
 
 
@@ -348,10 +330,6 @@ main (gint argc, gchar **argv)
 
   application = panel_application_get ();
   panel_application_load (application, opt_disable_wm_check);
-
-  /* save the state before the quit signal if we can, this is a bit safer */
-  g_signal_connect (G_OBJECT (sm_client), "save-state",
-      G_CALLBACK (panel_sm_client_save_state), application);
 
   /* open dialog if we started from launch_panel */
   if (opt_preferences >= 0)

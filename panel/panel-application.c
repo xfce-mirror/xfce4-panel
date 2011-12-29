@@ -96,6 +96,9 @@ static void      panel_application_drag_leave         (GtkWidget              *w
                                                        GdkDragContext         *context,
                                                        guint                   drag_time,
                                                        PanelApplication       *application);
+static void      panel_application_save_window        (PanelApplication       *application,
+                                                       PanelWindow            *window,
+                                                       PanelSaveTypes          save_types);
 
 
 
@@ -828,8 +831,8 @@ panel_application_window_destroyed (GtkWidget        *window,
   xfconf_channel_reset_property (application->xfconf, property, TRUE);
   g_free (property);
 
-  /* schedule a save to store the new number of panels */
-  panel_application_save (application, FALSE);
+  /* save updated panel ids */
+  panel_application_save (application, SAVE_PANEL_IDS);
 
   /* quit if there are no windows */
   /* TODO, allow removing all windows and ask user what to do */
@@ -889,6 +892,7 @@ panel_application_drag_data_received (PanelWindow      *window,
   PanelApplication  *application;
   GtkWidget         *provider;
   gboolean           succeed = FALSE;
+  gboolean           save_application = FALSE;
   const gchar       *name;
   guint              old_position;
   gchar            **uris;
@@ -979,6 +983,9 @@ panel_application_drag_data_received (PanelWindow      *window,
 
               /* send all the needed panel information to the plugin */
               panel_window_set_povider_info (window, provider, TRUE);
+
+              /* moved between panels, save everything */
+              save_application = TRUE;
             }
 
           /* everything went fine */
@@ -1008,9 +1015,11 @@ panel_application_drag_data_received (PanelWindow      *window,
           break;
         }
 
-      /* save the panel configuration if we succeeded */
-      if (G_LIKELY (succeed))
-        panel_application_save (application, FALSE);
+      /* save the new plugin ids */
+      if (G_LIKELY (save_application))
+        panel_application_save (application, SAVE_PLUGIN_IDS);
+      else if (succeed)
+        panel_application_save_window (application, window, SAVE_PLUGIN_IDS);
 
       /* tell the peer that we handled the drop */
       gtk_drag_finish (context, succeed, FALSE, drag_time);
@@ -1166,6 +1175,89 @@ panel_application_window_id_exists (PanelApplication *application,
 
 
 
+static void
+panel_application_save_window (PanelApplication *application,
+                               PanelWindow      *window,
+                               PanelSaveTypes    save_types)
+{
+  GList                   *children, *lp;
+  GtkWidget               *itembar;
+  XfcePanelPluginProvider *provider;
+  gchar                    buf[50];
+  XfconfChannel           *channel = application->xfconf;
+  GPtrArray               *array = NULL;
+  GValue                  *value;
+  gint                     plugin_id;
+  gint                     panel_id;
+
+  /* skip this window if it is locked */
+  if (panel_window_get_locked (window)
+      || !PANEL_HAS_FLAG (save_types, SAVE_PLUGIN_IDS | SAVE_PLUGIN_PROVIDERS))
+    return;
+
+  panel_id = panel_window_get_id (window);
+  panel_debug (PANEL_DEBUG_APPLICATION,
+               "saving /panels/panel-%d: ids=%s, providers=%s",
+               panel_id,
+               PANEL_DEBUG_BOOL (PANEL_HAS_FLAG (save_types, SAVE_PLUGIN_IDS)),
+               PANEL_DEBUG_BOOL (PANEL_HAS_FLAG (save_types, SAVE_PLUGIN_PROVIDERS)));
+
+  /* get the itembar children */
+  itembar = gtk_bin_get_child (GTK_BIN (window));
+  children = gtk_container_get_children (GTK_CONTAINER (itembar));
+
+  /* only cleanup and continue if there are no children */
+  if (PANEL_HAS_FLAG (save_types, SAVE_PLUGIN_IDS))
+    {
+      if (G_UNLIKELY (children == NULL))
+        {
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
+          if (xfconf_channel_has_property (channel, buf))
+            xfconf_channel_reset_property (channel, buf, FALSE);
+          return;
+        }
+
+      array = g_ptr_array_new ();
+    }
+
+  /* walk all the plugin children */
+  for (lp = children; lp != NULL; lp = lp->next)
+    {
+      provider = XFCE_PANEL_PLUGIN_PROVIDER (lp->data);
+
+      if (array != NULL)
+        {
+          plugin_id = xfce_panel_plugin_provider_get_unique_id (provider);
+
+          /* add plugin id to the array */
+          value = g_new0 (GValue, 1);
+          g_value_init (value, G_TYPE_INT);
+          g_value_set_int (value, plugin_id);
+          g_ptr_array_add (array, value);
+
+          /* make sure the plugin type-name is store in the plugin item */
+          g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", plugin_id);
+          xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_name (provider));
+        }
+
+      /* ask the plugin to save */
+      if (PANEL_HAS_FLAG (save_types, SAVE_PLUGIN_PROVIDERS))
+        xfce_panel_plugin_provider_save (provider);
+    }
+
+  if (array != NULL)
+    {
+      /* store the plugin ids for this panel */
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
+      xfconf_channel_set_arrayv (channel, buf, array);
+      xfconf_array_free (array);
+    }
+
+  g_list_free (children);
+}
+
+
+
 PanelApplication *
 panel_application_get (void)
 {
@@ -1237,95 +1329,47 @@ panel_application_load (PanelApplication  *application,
 
 void
 panel_application_save (PanelApplication *application,
-                        gboolean          save_plugin_providers)
+                        PanelSaveTypes    save_types)
 {
-  GSList                  *li;
-  GList                   *children, *lp;
-  GtkWidget               *itembar;
-  XfcePanelPluginProvider *provider;
-  guint                    i;
-  gchar                    buf[50];
-  XfconfChannel           *channel = application->xfconf;
-  GPtrArray               *array;
-  GValue                  *value;
-  GPtrArray               *panels;
-  gint                     panel_id;
+  GSList        *li;
+  XfconfChannel *channel = application->xfconf;
+  GValue        *value;
+  GPtrArray     *panels = NULL;
+  gint           panel_id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
 
-  panels = g_ptr_array_new ();
+  /* leave if the whole application is locked */
+  if (xfconf_channel_is_property_locked (channel, "/panels"))
+    return;
 
-  for (li = application->windows, i = 0; li != NULL; li = li->next, i++)
+  if (PANEL_HAS_FLAG (save_types, SAVE_PANEL_IDS))
+    panels = g_ptr_array_new ();
+
+  for (li = application->windows; li != NULL; li = li->next)
     {
-      /* store the panel id */
-      value = g_new0 (GValue, 1);
-      panel_id = panel_window_get_id (li->data);
-      g_value_init (value, G_TYPE_INT);
-      g_value_set_int (value, panel_id);
-      g_ptr_array_add (panels, value);
-
-      /* skip this window if it is locked */
-      if (panel_window_get_locked (li->data))
-        continue;
-
-      panel_debug (PANEL_DEBUG_APPLICATION,
-                   "saving /panels/panel-%d, save-plugins=%s",
-                   panel_id, PANEL_DEBUG_BOOL (save_plugin_providers));
-
-      /* get the itembar children */
-      itembar = gtk_bin_get_child (GTK_BIN (li->data));
-      children = gtk_container_get_children (GTK_CONTAINER (itembar));
-
-      /* only cleanup and continue if there are no children */
-      if (G_UNLIKELY (children == NULL))
+      if (panels != NULL)
         {
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
-          if (xfconf_channel_has_property (channel, buf))
-            xfconf_channel_reset_property (channel, buf, FALSE);
-          continue;
-        }
-
-      /* create empty pointer array */
-      array = g_ptr_array_new ();
-
-      /* walk all the plugin children */
-      for (lp = children; lp != NULL; lp = lp->next)
-        {
-          provider = XFCE_PANEL_PLUGIN_PROVIDER (lp->data);
-
-          /* add plugin id to the array */
+          /* store the panel id */
           value = g_new0 (GValue, 1);
+          panel_id = panel_window_get_id (li->data);
           g_value_init (value, G_TYPE_INT);
-          g_value_set_int (value,
-              xfce_panel_plugin_provider_get_unique_id (provider));
-          g_ptr_array_add (array, value);
-
-          /* make sure the plugin type is store in the plugin item */
-          g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", g_value_get_int (value));
-          xfconf_channel_set_string (channel, buf, xfce_panel_plugin_provider_get_name (provider));
-
-          /* ask the plugin to save */
-          if (save_plugin_providers)
-            xfce_panel_plugin_provider_save (provider);
+          g_value_set_int (value, panel_id);
+          g_ptr_array_add (panels, value);
         }
 
-      /* store the plugins for this panel */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
-      xfconf_channel_set_arrayv (channel, buf, array);
-
-      g_list_free (children);
-      xfconf_array_free (array);
+      /* save the panel settings */
+      panel_application_save_window (application, li->data, save_types);
     }
 
-  /* store the panel ids */
-  if (!xfconf_channel_is_property_locked (channel, "/panels"))
+  if (panels != NULL)
     {
+      /* store the panel ids */
       if (!xfconf_channel_set_arrayv (channel, "/panels", panels))
         g_warning ("Failed to store the number of panels");
+      xfconf_array_free (panels);
     }
-
-  xfconf_array_free (panels);
 }
 
 
@@ -1411,9 +1455,13 @@ panel_application_add_new_item (PanelApplication  *application,
       if (window != NULL && !panel_window_get_locked (window))
         {
           /* insert plugin at the end of the panel */
-          panel_application_plugin_insert (application, window,
-                                           plugin_name, -1,
-                                           arguments, -1);
+          if (panel_application_plugin_insert (application, window,
+                                               plugin_name, -1,
+                                               arguments, -1))
+            {
+              /* save the new plugin ids */
+              panel_application_save_window (application, window, SAVE_PLUGIN_IDS);
+            }
         }
     }
   else
@@ -1508,6 +1556,10 @@ panel_application_new_window (PanelApplication *application,
       g_object_set (G_OBJECT (window), "position", position, NULL);
       g_free (position);
     }
+
+  /* save the new panel layout */
+  if (new_window)
+    panel_application_save (application, SAVE_PANEL_IDS);
 
   return PANEL_WINDOW (window);
 }

@@ -34,6 +34,16 @@ typedef struct _PanelApplication      PanelApplication;
 #define PANEL_IS_APPLICATION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_APPLICATION))
 #define PANEL_APPLICATION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_APPLICATION, PanelApplicationClass))
 
+typedef enum
+{
+  SAVE_PLUGIN_PROVIDERS = 1 << 1,
+  SAVE_PLUGIN_IDS       = 1 << 2,
+  SAVE_PANEL_IDS        = 1 << 3,
+}
+PanelSaveTypes;
+#define SAVE_EVERYTHING (SAVE_PLUGIN_PROVIDERS | SAVE_PLUGIN_IDS | SAVE_PANEL_IDS)
+
+
 GType             panel_application_get_type          (void) G_GNUC_CONST;
 
 PanelApplication *panel_application_get               (void);
@@ -42,7 +52,7 @@ void              panel_application_load              (PanelApplication  *applic
                                                        gboolean           disable_wm_check);
 
 void              panel_application_save              (PanelApplication  *application,
-                                                       gboolean           save_plugin_providers);
+                                                       PanelSaveTypes     save_types);
 
 void              panel_application_take_dialog       (PanelApplication  *application,
                                                        GtkWindow         *dialog);
