@@ -1421,6 +1421,7 @@ panel_application_new_window (PanelApplication *application,
   gint                idx;
   static const gchar *props[] = { "mode", "size", "nrows" };
   guint               i;
+  gchar              *position;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
@@ -1444,9 +1445,6 @@ panel_application_new_window (PanelApplication *application,
       property = g_strdup_printf ("/panels/panel-%d", idx);
       xfconf_channel_reset_property (application->xfconf, property, TRUE);
       g_free (property);
-
-      /* set default position */
-      g_object_set (G_OBJECT (window), "position", "p=0;x=100;y=100", NULL);
     }
 
   /* add the itembar */
@@ -1474,10 +1472,18 @@ panel_application_new_window (PanelApplication *application,
   /* add the xfconf bindings */
   panel_application_xfconf_window_bindings (application, PANEL_WINDOW (window), FALSE);
 
-  /* make sure the position of the panel is always saved else
-   * the new window won't be visible on restart */
-  if (new_window)
-    g_object_notify (G_OBJECT (window), "position");
+  /* make sure the panel has a valid position, else it is not visible */
+  if (!panel_window_has_position (PANEL_WINDOW (window)))
+    {
+      if (!new_window)
+        g_message ("No panel position set, restoring default");
+
+      /* create a position so not all panels overlap */
+      idx = g_slist_index (application->windows, window);
+      position = g_strdup_printf ("p=0;x=100;y=%d", 100 + (idx * 48 * 2));
+      g_object_set (G_OBJECT (window), "position", position, NULL);
+      g_free (position);
+    }
 
   return PANEL_WINDOW (window);
 }

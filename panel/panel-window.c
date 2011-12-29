@@ -142,6 +142,7 @@ static void         panel_window_plugin_set_screen_position (GtkWidget        *w
                                                              gpointer          user_data);
 
 
+
 enum
 {
   PROP_0,
@@ -670,8 +671,8 @@ panel_window_set_property (GObject      *object,
           && sscanf (val_string, "p=%d;x=%d;y=%d", &snap_position, &x, &y) == 3)
         {
           window->snap_position = CLAMP (snap_position, SNAP_POSITION_NONE, SNAP_POSITION_S);
-          window->base_x = x;
-          window->base_y = y;
+          window->base_x = MAX (x, 0);
+          window->base_y = MAX (y, 0);
 
           panel_window_screen_layout_changed (window->screen, window);
 
@@ -680,7 +681,7 @@ panel_window_set_property (GObject      *object,
         }
       else
         {
-          g_message ("no valid position defined: %s", val_string);
+          g_message ("Not a valid position defined: %s", val_string);
         }
       break;
 
@@ -2545,6 +2546,15 @@ panel_window_new (GdkScreen *screen)
                        "role", "Panel",
                        "name", "XfcePanelWindow",
                        NULL);
+}
+
+
+
+gboolean
+panel_window_has_position (PanelWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
+  return window->base_x != -1 && window->base_y != -1;
 }
 
 
