@@ -35,7 +35,10 @@ typedef struct _PanelWindow      PanelWindow;
 
 GType      panel_window_get_type         (void) G_GNUC_CONST;
 
-GtkWidget *panel_window_new              (GdkScreen   *screen) G_GNUC_MALLOC;
+GtkWidget *panel_window_new              (GdkScreen   *screen,
+                                          gint         id) G_GNUC_MALLOC;
+
+gint       panel_window_get_id           (PanelWindow *window);
 
 gboolean   panel_window_has_position     (PanelWindow *window);
 

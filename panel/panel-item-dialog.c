@@ -814,6 +814,20 @@ panel_item_dialog_show (PanelWindow *window)
 
 
 
+void
+panel_item_dialog_show_from_id (gint panel_id)
+{
+  PanelApplication *application;
+  PanelWindow      *window;
+
+  application = panel_application_get ();
+  window = panel_application_get_window (application, panel_id);
+  panel_item_dialog_show (window);
+  g_object_unref (G_OBJECT (application));
+}
+
+
+
 gboolean
 panel_item_dialog_visible (void)
 {

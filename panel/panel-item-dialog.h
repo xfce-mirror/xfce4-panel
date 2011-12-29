@@ -33,11 +33,13 @@ typedef struct _PanelItemDialog      PanelItemDialog;
 #define PANEL_IS_ITEM_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_ITEM_DIALOG))
 #define PANEL_ITEM_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_ITEM_DIALOG, PanelItemDialogClass))
 
-GType      panel_item_dialog_get_type (void) G_GNUC_CONST;
+GType      panel_item_dialog_get_type     (void) G_GNUC_CONST;
 
-void       panel_item_dialog_show     (PanelWindow *window);
+void       panel_item_dialog_show         (PanelWindow *active);
 
-gboolean   panel_item_dialog_visible  (void);
+void       panel_item_dialog_show_from_id (gint         panel_id);
+
+gboolean   panel_item_dialog_visible      (void);
 
 G_END_DECLS
 

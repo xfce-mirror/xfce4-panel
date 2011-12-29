@@ -89,19 +89,45 @@ panel_dialogs_show_about (void)
 
 
 
+enum
+{
+  CHOOSER_COLUMN_ID,
+  CHOOSER_COLUMN_TEXT,
+  N_CHOOSER_COLUMNS
+};
+
+
+
+static gint
+panel_dialogs_choose_panel_combo_get_id (GtkComboBox *combo)
+{
+  gint          panel_id = -1;
+  GtkTreeIter   iter;
+  GtkTreeModel *model;
+
+  if (gtk_combo_box_get_active_iter (combo, &iter))
+    {
+      model = gtk_combo_box_get_model (combo);
+      gtk_tree_model_get (model, &iter, CHOOSER_COLUMN_ID, &panel_id, -1);
+    }
+
+  return panel_id;
+}
+
+
+
 static void
 panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
                                           PanelApplication *application)
 {
-  gint idx;
+  gint panel_id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
 
-  /* select active panel */
-  idx = gtk_combo_box_get_active (combo);
+  panel_id = panel_dialogs_choose_panel_combo_get_id (combo);
   panel_application_window_select (application,
-      panel_application_get_nth_window (application, idx));
+      panel_application_get_window (application, panel_id));
 }
 
 
@@ -109,13 +135,16 @@ panel_dialogs_choose_panel_combo_changed (GtkComboBox      *combo,
 gint
 panel_dialogs_choose_panel (PanelApplication *application)
 {
-  GtkWidget *dialog;
-  GtkWidget *vbox;
-  GtkWidget *label;
-  GtkWidget *combo;
-  guint      i;
-  gint       response = -1;
-  gchar     *name;
+  GtkWidget       *dialog;
+  GtkWidget       *vbox;
+  GtkWidget       *label;
+  GtkWidget       *combo;
+  gchar           *name;
+  GtkListStore    *store;
+  GtkCellRenderer *renderer;
+  GSList          *windows, *li;
+  gint             i;
+  gint             panel_id;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), -1);
 
@@ -138,15 +167,26 @@ panel_dialogs_choose_panel (PanelApplication *application)
   gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
 
-  combo = gtk_combo_box_new_text ();
+  store = gtk_list_store_new (N_CHOOSER_COLUMNS, G_TYPE_INT, G_TYPE_STRING);
+  combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));
   gtk_box_pack_start (GTK_BOX (vbox), combo, FALSE, FALSE, 0);
   gtk_widget_show (combo);
+  g_object_unref (G_OBJECT (store));
+
+  renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), renderer,
+                                  "text", CHOOSER_COLUMN_TEXT, NULL);
 
   /* insert the panels */
-  for (i = 0; i < panel_application_get_n_windows (application); i++)
+  windows = panel_application_get_windows (application);
+  for (li = windows, i = 0; li != NULL; li = li->next, i++)
     {
-      name = g_strdup_printf (_("Panel %d"), i + 1);
-      gtk_combo_box_append_text (GTK_COMBO_BOX (combo), name);
+      panel_id = panel_window_get_id (li->data);
+      name = g_strdup_printf (_("Panel %d"), panel_id);
+      gtk_list_store_insert_with_values (store, NULL, i,
+                                         CHOOSER_COLUMN_ID, panel_id,
+                                         CHOOSER_COLUMN_TEXT, name, -1);
       g_free (name);
     }
 
@@ -157,13 +197,15 @@ panel_dialogs_choose_panel (PanelApplication *application)
 
   /* run the dialog */
   if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
-    response = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
+    panel_id = panel_dialogs_choose_panel_combo_get_id (GTK_COMBO_BOX (combo));
+  else
+    panel_id = -1;
   gtk_widget_destroy (dialog);
 
   /* unset panel selections */
   panel_application_window_select (application, NULL);
 
-  return response;
+  return panel_id;
 }
 
 

@@ -55,15 +55,13 @@ void              panel_application_add_new_item      (PanelApplication  *applic
 
 PanelWindow      *panel_application_new_window        (PanelApplication  *application,
                                                        GdkScreen         *screen,
+                                                       gint               id,
                                                        gboolean           new_window);
 
-guint             panel_application_get_n_windows     (PanelApplication  *application);
+GSList           *panel_application_get_windows       (PanelApplication  *application);
 
-gint              panel_application_get_window_index  (PanelApplication  *application,
-                                                       PanelWindow       *window);
-
-PanelWindow      *panel_application_get_nth_window    (PanelApplication  *application,
-                                                       guint              idx);
+PanelWindow      *panel_application_get_window        (PanelApplication  *application,
+                                                       gint               panel_id);
 
 void              panel_application_window_select     (PanelApplication  *application,
                                                        PanelWindow       *window);

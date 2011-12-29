@@ -302,11 +302,9 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   };
 
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
-  panel_return_if_fail (g_slist_index (application->windows, window) > -1);
 
   /* create the property base */
-  property_base = g_strdup_printf ("/panels/panel-%d",
-      g_slist_index (application->windows, window));
+  property_base = g_strdup_printf ("/panels/panel-%d", panel_window_get_id (window));
 
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
@@ -335,74 +333,109 @@ panel_application_load_real (PanelApplication *application)
   gchar        *output_name;
   gint          screen_num;
   GdkDisplay   *display;
+  GValue        val = { 0, };
+  GPtrArray    *panels;
+  gint          panel_id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
 
   display = gdk_display_get_default ();
 
-  /* walk all the panel in the configuration */
-  n_panels = xfconf_channel_get_uint (application->xfconf, "/panels", 0);
-  for (i = 0; i < n_panels; i++)
+  if (xfconf_channel_get_property (application->xfconf, "/panels", &val)
+      && (G_VALUE_HOLDS_UINT (&val)
+          || G_VALUE_HOLDS (&val, PANEL_PROPERTIES_TYPE_VALUE_ARRAY)))
     {
-      screen = NULL;
-
-      /* start the panel directly on the correct screen */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/output-name", i);
-      output_name = xfconf_channel_get_string (application->xfconf, buf, NULL);
-      if (output_name != NULL
-          && strncmp (output_name, "screen-", 7) == 0
-          && sscanf (output_name, "screen-%d", &screen_num) == 1)
+      if (G_VALUE_HOLDS_UINT (&val))
         {
-          if (screen_num < gdk_display_get_n_screens (display))
-            screen = gdk_display_get_screen (display, screen_num);
+          n_panels = g_value_get_uint (&val);
+          panels = NULL;
         }
-      g_free (output_name);
-
-      /* create a new window */
-      window = panel_application_new_window (application, screen, FALSE);
-
-      /* walk all the plugins on the panel */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
-      array = xfconf_channel_get_arrayv (application->xfconf, buf);
-      if (array == NULL)
-        continue;
-
-      for (j = 0; j < array->len; j++)
+      else
         {
-          /* get the plugin id */
-          value = g_ptr_array_index (array, j);
-          panel_assert (value != NULL);
-          unique_id = g_value_get_int (value);
+          panels = g_value_get_boxed (&val);
+          n_panels = panels->len;
+        }
 
-          /* get the plugin name */
-          g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", unique_id);
-          name = xfconf_channel_get_string (application->xfconf, buf, NULL);
+      /* walk all the panel in the configuration */
+      for (i = 0; i < n_panels; i++)
+        {
+          screen = NULL;
 
-          /* append the plugin to the panel */
-          if (unique_id < 1 || name == NULL
-              || !panel_application_plugin_insert (application, window,
-                                                   name, unique_id, NULL, -1))
+          /* get the panel id */
+          if (panels != NULL)
             {
-              /* plugin could not be loaded, remove it from the channel */
-              g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
-              if (xfconf_channel_has_property (application->xfconf, buf))
-                xfconf_channel_reset_property (application->xfconf, buf, TRUE);
-
-              /* show warnings */
-              g_message ("Plugin \"%s-%d\" was not found and has been "
-                         "removed from the configuration", name, unique_id);
+              /* get the id from the array */
+              value = g_ptr_array_index (panels, i);
+              panel_assert (value != NULL);
+              panel_id = g_value_get_int (value);
+            }
+          else
+            {
+              /* use the list position if /panels is an uint */
+              panel_id = i;
             }
 
-          g_free (name);
+          /* start the panel directly on the correct screen */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/output-name", panel_id);
+          output_name = xfconf_channel_get_string (application->xfconf, buf, NULL);
+          if (output_name != NULL
+              && strncmp (output_name, "screen-", 7) == 0
+              && sscanf (output_name, "screen-%d", &screen_num) == 1)
+            {
+              if (screen_num < gdk_display_get_n_screens (display))
+                screen = gdk_display_get_screen (display, screen_num);
+            }
+          g_free (output_name);
+
+          /* create a new window */
+          window = panel_application_new_window (application, screen, panel_id, FALSE);
+
+          /* walk all the plugins on the panel */
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
+          array = xfconf_channel_get_arrayv (application->xfconf, buf);
+          if (array == NULL)
+            continue;
+
+          for (j = 0; j < array->len; j++)
+            {
+              /* get the plugin id */
+              value = g_ptr_array_index (array, j);
+              panel_assert (value != NULL);
+              unique_id = g_value_get_int (value);
+
+              /* get the plugin name */
+              g_snprintf (buf, sizeof (buf), "/plugins/plugin-%d", unique_id);
+              name = xfconf_channel_get_string (application->xfconf, buf, NULL);
+
+              /* append the plugin to the panel */
+              if (unique_id < 1 || name == NULL
+                  || !panel_application_plugin_insert (application, window,
+                                                       name, unique_id, NULL, -1))
+                {
+                  /* plugin could not be loaded, remove it from the channel */
+                  g_snprintf (buf, sizeof (buf), "/panels/plugin-%d", unique_id);
+                  if (xfconf_channel_has_property (application->xfconf, buf))
+                    xfconf_channel_reset_property (application->xfconf, buf, TRUE);
+
+                  /* show warnings */
+                  g_message ("Plugin \"%s-%d\" was not found and has been "
+                             "removed from the configuration", name, unique_id);
+                }
+
+              g_free (name);
+            }
+
+          xfconf_array_free (array);
         }
 
-      xfconf_array_free (array);
+      /* free xfconf array or uint */
+      g_value_unset (&val);
     }
 
   /* create empty window if everything else failed */
   if (G_UNLIKELY (application->windows == NULL))
-    panel_application_new_window (application, NULL, TRUE);
+    panel_application_new_window (application, NULL, -1, TRUE);
 }
 
 
@@ -791,58 +824,37 @@ static void
 panel_application_window_destroyed (GtkWidget        *window,
                                     PanelApplication *application)
 {
-  guint      n;
   gchar     *property;
-  GSList    *li, *lnext;
-  gboolean   passed_destroyed_window = FALSE;
   GtkWidget *itembar;
+  gint       panel_id;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (g_slist_find (application->windows, window) != NULL);
 
-  /* leave if the application is locked */
-  if (panel_application_get_locked (application))
+  /* leave if the application or window is locked */
+  if (panel_application_get_locked (application)
+      || panel_window_get_locked (PANEL_WINDOW (window)))
     return;
 
-  /* we need to update the bindings of all the panels... */
-  for (li = application->windows, n = 0; li != NULL; li = lnext, n++)
-    {
-      lnext = li->next;
+  panel_id = panel_window_get_id (PANEL_WINDOW (window));
+  panel_debug (PANEL_DEBUG_APPLICATION,
+               "removing configuration and plugins of panel %d",
+               panel_id);
 
-      /* TODO, this might go wrong when only 1 window is locked */
-      if (panel_window_get_locked (li->data))
-        continue;
+  /* remove from the internal list */
+  application->windows = g_slist_remove (application->windows, window);
 
-      if (passed_destroyed_window)
-        {
-          /* save this panel again at it's new position */
-          panel_properties_unbind (G_OBJECT (li->data));
-          panel_application_xfconf_window_bindings (application,
-                                                    PANEL_WINDOW (li->data),
-                                                    TRUE);
-        }
-      else if (li->data == window)
-        {
-          /* disconnect bindings from this panel */
-          panel_properties_unbind (G_OBJECT (window));
+  /* disconnect bindings from this panel */
+  panel_properties_unbind (G_OBJECT (window));
 
-          /* remove all the plugins from the itembar */
-          itembar = gtk_bin_get_child (GTK_BIN (window));
-          gtk_container_foreach (GTK_CONTAINER (itembar),
-              panel_application_plugin_remove, NULL);
+  /* remove all the plugins from the itembar */
+  itembar = gtk_bin_get_child (GTK_BIN (window));
+  gtk_container_foreach (GTK_CONTAINER (itembar),
+      panel_application_plugin_remove, NULL);
 
-          /* remove from the internal list */
-          application->windows = g_slist_delete_link (application->windows, li);
-
-          /* keep updating the bindings for the remaining windows */
-          passed_destroyed_window = TRUE;
-        }
-    }
-
-  /* remove the last property from the channel */
-  property = g_strdup_printf ("/panels/panel-%u", n - 1);
-  panel_assert (n - 1 == g_slist_length (application->windows));
+  /* remove the panel settings */
+  property = g_strdup_printf ("/panels/panel-%d", panel_id);
   xfconf_channel_reset_property (application->xfconf, property, TRUE);
   g_free (property);
 
@@ -1169,6 +1181,21 @@ panel_application_drag_leave (GtkWidget        *window,
 
 
 
+static gboolean
+panel_application_window_id_exists (PanelApplication *application,
+                                    gint              id)
+{
+  GSList *li;
+
+  for (li = application->windows; li != NULL; li = li->next)
+    if (panel_window_get_id (li->data) == id)
+      return TRUE;
+
+  return FALSE;
+}
+
+
+
 PanelApplication *
 panel_application_get (void)
 {
@@ -1251,19 +1278,30 @@ panel_application_save (PanelApplication *application,
   XfconfChannel           *channel = application->xfconf;
   GPtrArray               *array;
   GValue                  *value;
+  GPtrArray               *panels;
+  gint                     panel_id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (channel));
 
+  panels = g_ptr_array_new ();
+
   for (li = application->windows, i = 0; li != NULL; li = li->next, i++)
     {
+      /* store the panel id */
+      value = g_new0 (GValue, 1);
+      panel_id = panel_window_get_id (li->data);
+      g_value_init (value, G_TYPE_INT);
+      g_value_set_int (value, panel_id);
+      g_ptr_array_add (panels, value);
+
       /* skip this window if it is locked */
       if (panel_window_get_locked (li->data))
         continue;
 
       panel_debug (PANEL_DEBUG_APPLICATION,
-                   "saving /panels/panel-%u, save-plugins=%s",
-                   i, PANEL_DEBUG_BOOL (save_plugin_providers));
+                   "saving /panels/panel-%d, save-plugins=%s",
+                   panel_id, PANEL_DEBUG_BOOL (save_plugin_providers));
 
       /* get the itembar children */
       itembar = gtk_bin_get_child (GTK_BIN (li->data));
@@ -1272,7 +1310,7 @@ panel_application_save (PanelApplication *application,
       /* only cleanup and continue if there are no children */
       if (G_UNLIKELY (children == NULL))
         {
-          g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
+          g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
           if (xfconf_channel_has_property (channel, buf))
             xfconf_channel_reset_property (channel, buf, FALSE);
           continue;
@@ -1303,16 +1341,21 @@ panel_application_save (PanelApplication *application,
         }
 
       /* store the plugins for this panel */
-      g_snprintf (buf, sizeof (buf), "/panels/panel-%u/plugin-ids", i);
+      g_snprintf (buf, sizeof (buf), "/panels/panel-%d/plugin-ids", panel_id);
       xfconf_channel_set_arrayv (channel, buf, array);
 
       g_list_free (children);
       xfconf_array_free (array);
     }
 
-  /* store the number of panels */
+  /* store the panel ids */
   if (!xfconf_channel_is_property_locked (channel, "/panels"))
-    xfconf_channel_set_uint (channel, "/panels", i);
+    {
+      if (!xfconf_channel_set_arrayv (channel, "/panels", panels))
+        g_warning ("Failed to store the number of panels");
+    }
+
+  xfconf_array_free (panels);
 }
 
 
@@ -1360,14 +1403,12 @@ panel_application_add_new_item (PanelApplication  *application,
                                 const gchar       *plugin_name,
                                 gchar            **arguments)
 {
-  gint         nth = 0;
-  GSList      *li;
-  gboolean     active;
-  PanelWindow *window;
+  PanelWindow *window = NULL;
+  gint         panel_id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (plugin_name != NULL);
-  panel_return_if_fail (g_slist_length (application->windows) > 0);
+  panel_return_if_fail (application->windows != NULL);
 
   /* leave if the config is locked */
   if (panel_application_get_locked (application))
@@ -1375,30 +1416,34 @@ panel_application_add_new_item (PanelApplication  *application,
 
   if (panel_module_factory_has_module (application->factory, plugin_name))
     {
-      /* find a suitable window if there are 2 or more windows */
+      /* find a suitable panel if there are 2 or more panel */
       if (LIST_HAS_TWO_OR_MORE_ENTRIES (application->windows))
         {
-          /* try to find an avtive panel */
-          for (li = application->windows, nth = 0; li != NULL; li = li->next, nth++)
+          /* ask the user to select a panel */
+          panel_id = panel_dialogs_choose_panel (application);
+          if (panel_id == -1)
             {
-              g_object_get (G_OBJECT (li->data), "active", &active, NULL);
-              if (active)
-                break;
+              /* cancel was clicked */
+              return;
             }
-
-          /* no active panel found, ask user to select a panel, leave when
-           * the cancel button is pressed */
-          if (li == NULL
-              && (nth = panel_dialogs_choose_panel (application)) == -1)
-            return;
+          else
+            {
+              /* get panel from the id */
+              window = panel_application_get_window (application, panel_id);
+            }
+        }
+      else
+        {
+          /* get the first (and only) window */
+          window = g_slist_nth_data (application->windows, 0);
         }
 
-      /* add the plugin to the end of the choosen window */
-      window = g_slist_nth_data (application->windows, nth);
-      if (!panel_window_get_locked (window))
+      if (window != NULL && !panel_window_get_locked (window))
         {
+          /* insert plugin at the end of the panel */
           panel_application_plugin_insert (application, window,
-                                           plugin_name, -1, arguments, -1);
+                                           plugin_name, -1,
+                                           arguments, -1);
         }
     }
   else
@@ -1413,6 +1458,7 @@ panel_application_add_new_item (PanelApplication  *application,
 PanelWindow *
 panel_application_new_window (PanelApplication *application,
                               GdkScreen        *screen,
+                              gint              panel_id,
                               gboolean          new_window)
 {
   GtkWidget          *window;
@@ -1422,13 +1468,23 @@ panel_application_new_window (PanelApplication *application,
   static const gchar *props[] = { "mode", "size", "nrows" };
   guint               i;
   gchar              *position;
+  static gint         unqiue_id_counter = 1;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
   panel_return_val_if_fail (XFCONF_IS_CHANNEL (application->xfconf), NULL);
+  panel_return_val_if_fail (new_window || !panel_application_window_id_exists (application, panel_id), NULL);
+
+  if (new_window)
+    {
+      /* get a new unique id */
+      panel_id = unqiue_id_counter;
+      while (panel_application_window_id_exists (application, panel_id))
+        panel_id = ++unqiue_id_counter;
+    }
 
   /* create panel window */
-  window = panel_window_new (screen);
+  window = panel_window_new (screen, panel_id);
 
   /* monitor window destruction */
   g_signal_connect (G_OBJECT (window), "destroy",
@@ -1437,12 +1493,10 @@ panel_application_new_window (PanelApplication *application,
   /* add the window to internal list */
   application->windows = g_slist_append (application->windows, window);
 
-  /* flush the window properties */
   if (new_window)
     {
-      /* remove the xfconf properties */
-      idx = g_slist_index (application->windows, window);
-      property = g_strdup_printf ("/panels/panel-%d", idx);
+      /* remove the old xfconf properties to be sure */
+      property = g_strdup_printf ("/panels/panel-%d", panel_id);
       xfconf_channel_reset_property (application->xfconf, property, TRUE);
       g_free (property);
     }
@@ -1480,7 +1534,7 @@ panel_application_new_window (PanelApplication *application,
 
       /* create a position so not all panels overlap */
       idx = g_slist_index (application->windows, window);
-      position = g_strdup_printf ("p=0;x=100;y=%d", 100 + (idx * 48 * 2));
+      position = g_strdup_printf ("p=0;x=100;y=%d", 100 + (idx * 48) + 10);
       g_object_set (G_OBJECT (window), "position", position, NULL);
       g_free (position);
     }
@@ -1490,35 +1544,28 @@ panel_application_new_window (PanelApplication *application,
 
 
 
-guint
-panel_application_get_n_windows (PanelApplication *application)
+GSList *
+panel_application_get_windows (PanelApplication *application)
 {
-  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), 0);
-
-  return g_slist_length (application->windows);
-}
-
-
-
-gint
-panel_application_get_window_index (PanelApplication *application,
-                                    PanelWindow      *window)
-{
-  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), 0);
-  panel_return_val_if_fail (PANEL_IS_WINDOW (window), 0);
-
-  return g_slist_index (application->windows, window);
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
+  return application->windows;
 }
 
 
 
 PanelWindow *
-panel_application_get_nth_window (PanelApplication *application,
-                                  guint             idx)
+panel_application_get_window (PanelApplication  *application,
+                              gint               panel_id)
 {
-  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), 0);
+  GSList *li;
 
-  return g_slist_nth_data (application->windows, idx);
+  panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
+
+  for (li = application->windows; li != NULL; li = li->next)
+    if (panel_window_get_id (li->data) == panel_id)
+      return li->data;
+
+  return NULL;
 }
 
 

@@ -146,6 +146,7 @@ static void         panel_window_plugin_set_screen_position (GtkWidget        *w
 enum
 {
   PROP_0,
+  PROP_ID,
   PROP_MODE,
   PROP_SIZE,
   PROP_NROWS,
@@ -245,6 +246,9 @@ struct _PanelWindow
 {
   PanelBaseWindow      __parent__;
 
+  /* unique id of this panel */
+  gint                 id;
+
   /* whether the user is allowed to make
    * changes to this window */
   guint                locked : 1;
@@ -340,6 +344,13 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->screen_changed = panel_window_screen_changed;
   gtkwidget_class->style_set = panel_window_style_set;
   gtkwidget_class->realize = panel_window_realize;
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_ID,
+                                   g_param_spec_int ("id", NULL, NULL,
+                                                     0, G_MAXINT, 0,
+                                                     EXO_PARAM_READWRITE
+                                                     | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
                                    PROP_MODE,
@@ -445,6 +456,7 @@ panel_window_class_init (PanelWindowClass *klass)
 static void
 panel_window_init (PanelWindow *window)
 {
+  window->id = -1;
   window->locked = TRUE;
   window->screen = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
@@ -496,6 +508,10 @@ panel_window_get_property (GObject    *object,
 
   switch (prop_id)
     {
+    case PROP_ID:
+      g_value_set_int (value, window->id);
+      break;
+
     case PROP_MODE:
       g_value_set_enum (value, window->mode);
       break;
@@ -569,6 +585,10 @@ panel_window_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_ID:
+      window->id = g_value_get_int (value);
+      break;
+
     case PROP_MODE:
       val_mode = g_value_get_enum (value);
       if (window->mode != val_mode)
@@ -2531,12 +2551,14 @@ panel_window_plugin_set_screen_position (GtkWidget *widget,
 
 
 GtkWidget *
-panel_window_new (GdkScreen *screen)
+panel_window_new (GdkScreen *screen,
+                  gint       id)
 {
   if (screen == NULL)
     screen = gdk_screen_get_default ();
 
   return g_object_new (PANEL_TYPE_WINDOW,
+                       "id", id,
                        "type", GTK_WINDOW_TOPLEVEL,
                        "decorated", FALSE,
                        "resizable", FALSE,
@@ -2546,6 +2568,16 @@ panel_window_new (GdkScreen *screen)
                        "role", "Panel",
                        "name", "XfcePanelWindow",
                        NULL);
+}
+
+
+
+gint
+panel_window_get_id (PanelWindow *window)
+{
+  panel_return_val_if_fail (PANEL_IS_WINDOW (window), -1);
+  panel_return_val_if_fail (window->id > -1, -1);
+  return window->id;
 }
 
 

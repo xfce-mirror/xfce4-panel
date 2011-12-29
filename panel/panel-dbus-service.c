@@ -192,15 +192,11 @@ panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
                                                guint              active,
                                                GError           **error)
 {
-  PanelApplication *application;
-
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   /* show the preferences dialog */
-  application = panel_application_get ();
-  panel_preferences_dialog_show (panel_application_get_nth_window (application, active));
-  g_object_unref (G_OBJECT (application));
+  panel_preferences_dialog_show_from_id (active);
 
   return TRUE;
 }
@@ -212,15 +208,11 @@ panel_dbus_service_display_items_dialog (PanelDBusService  *service,
                                          guint              active,
                                          GError           **error)
 {
-  PanelApplication *application;
-
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   /* show the items dialog */
-  application = panel_application_get ();
-  panel_item_dialog_show (panel_application_get_nth_window (application, active));
-  g_object_unref (G_OBJECT (application));
+  panel_preferences_dialog_show_from_id (active);
 
   return TRUE;
 }

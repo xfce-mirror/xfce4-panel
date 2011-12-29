@@ -355,7 +355,7 @@ main (gint argc, gchar **argv)
 
   /* open dialog if we started from launch_panel */
   if (opt_preferences >= 0)
-    panel_preferences_dialog_show (panel_application_get_nth_window (application, opt_preferences));
+    panel_preferences_dialog_show_from_id (opt_preferences);
 
   gtk_main ();
 
