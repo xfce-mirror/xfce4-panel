@@ -68,7 +68,6 @@ static gboolean  panel_application_plugin_insert      (PanelApplication       *a
                                                        gint                    unique_id,
                                                        gchar                 **arguments,
                                                        gint                    position);
-static gboolean  panel_application_save_timeout       (gpointer                user_data);
 static void      panel_application_window_destroyed   (GtkWidget              *window,
                                                        PanelApplication       *application);
 static void      panel_application_dialog_destroyed   (GtkWindow              *dialog,
@@ -126,9 +125,6 @@ struct _PanelApplication
 
   /* internal list of opened dialogs */
   GSList             *dialogs;
-
-  /* autosave timeout */
-  guint               autosave_timeout_id;
 
 #ifdef GDK_WINDOWING_X11
   guint               wait_for_wm_timeout_id;
@@ -202,7 +198,6 @@ panel_application_init (PanelApplication *application)
 
   application->windows = NULL;
   application->dialogs = NULL;
-  application->autosave_timeout_id = 0;
   application->drop_desktop_files = FALSE;
   application->drop_data_ready = FALSE;
   application->drop_occurred = FALSE;
@@ -227,12 +222,6 @@ panel_application_init (PanelApplication *application)
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
-
-  /* start the autosave timeout */
-  application->autosave_timeout_id =
-      g_timeout_add_seconds (AUTOSAVE_INTERVAL,
-                             panel_application_save_timeout,
-                             application);
 }
 
 
@@ -244,9 +233,6 @@ panel_application_finalize (GObject *object)
   GSList           *li;
 
   panel_return_if_fail (application->dialogs == NULL);
-
-  /* stop the autosave timeout */
-  g_source_remove (application->autosave_timeout_id);
 
 #ifdef GDK_WINDOWING_X11
   /* stop autostart timeout */
@@ -798,22 +784,6 @@ panel_application_plugin_insert (PanelApplication  *application,
 
   /* show the plugin */
   gtk_widget_show (provider);
-
-  return TRUE;
-}
-
-
-
-static gboolean
-panel_application_save_timeout (gpointer user_data)
-{
-  panel_return_val_if_fail (PANEL_IS_APPLICATION (user_data), FALSE);
-
-  GDK_THREADS_ENTER ();
-
-  panel_application_save (PANEL_APPLICATION (user_data), TRUE);
-
-  GDK_THREADS_LEAVE ();
 
   return TRUE;
 }

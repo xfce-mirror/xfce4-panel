@@ -365,10 +365,6 @@ main (gint argc, gchar **argv)
   /* destroy all the opened dialogs */
   panel_application_destroy_dialogs (application);
 
-  /* only save if we do not quit by the sm client */
-  if (!sm_client_saved_state)
-    panel_application_save (application, TRUE);
-
   g_object_unref (G_OBJECT (application));
   g_object_unref (G_OBJECT (sm_client));
 
