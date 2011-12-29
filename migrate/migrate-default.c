@@ -172,6 +172,17 @@ migrate_default_start_element_handler (GMarkupParseContext  *context,
       prop_value = NULL;
       prop_type = NULL;
 
+      /* check if we need to flush an array */
+      if (parser->array != NULL)
+        {
+          prop_path = migrate_default_property_path (parser);
+          xfconf_channel_set_arrayv (parser->channel, prop_path, parser->array);
+          g_free (prop_path);
+
+          xfconf_array_free (parser->array);
+          parser->array = NULL;
+        }
+
       if (G_LIKELY (attribute_names != NULL))
         {
           for (i = 0; attribute_names[i] != NULL; i++)
