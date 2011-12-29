@@ -1534,7 +1534,7 @@ panel_application_new_window (PanelApplication *application,
 
       /* create a position so not all panels overlap */
       idx = g_slist_index (application->windows, window);
-      position = g_strdup_printf ("p=0;x=100;y=%d", 100 + (idx * 48) + 10);
+      position = g_strdup_printf ("p=0;x=100;y=%d", 30 + (idx * (48 + 10)));
       g_object_set (G_OBJECT (window), "position", position, NULL);
       g_free (position);
     }
