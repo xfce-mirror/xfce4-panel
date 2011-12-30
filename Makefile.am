@@ -13,9 +13,8 @@ SUBDIRS = \
 distclean-local:
 	rm -rf *.spec *.cache *~
 
-rpm: dist
-	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
-	@rm -f $(PACKAGE)-$(VERSION).tar.gz
+distuninstallcheck_listfiles = 						\ 
+	find . -type f -print | grep -v ./share/icons/hicolor/icon-theme.cache
 
 desktopdir = $(datadir)/applications
 desktop_in_files = \
