@@ -1047,11 +1047,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
               area_x += w;
             }
 
-          if (xfce_tasklist_vertical (tasklist))
-            /* lay out buttons right to left in the vertical mode */
-            child_alloc.y = 2 * area.y + area.height - y - h;
-          else
-            child_alloc.y = y;
+          child_alloc.y = y;
           child_alloc.x = x;
           child_alloc.width = MAX (w, 1); /* TODO this is a workaround */
           child_alloc.height = h;
