@@ -1,3 +1,29 @@
+4.9.0
+=====
+- Panel: Add option in preferences dialog to disable struts (bug #7202).
+- Showdesktop: Allow middle-click to shade windows (bug #7177).
+- Panel: Add style property to control size of autohide window.
+- Panel: Make compositing settings insensitive (bug #7862).
+- Tasklist: Add option to disable mouse scrolling (bug #6996).
+- Tasklist: Make the plugin shrink instead of expand (bug #7389, #7129).
+- Drop AC_PROG_LIBTOOL and AC_DISABLE_STATIC for LT_PREREQ and LT_INIT.
+- Clock: Use realtime POSIX timers for the clock.
+- Actions: Merge functionality of xfce4-session plugin.
+- Applicationmenu: Show menu on button-press-event (bug #8047).
+- Migrate: Add version based config migration.
+- Clock: Fix typo in tooltip (bug #8137).
+- General: Add deskbar mode and nrows property to plugins.
+- General: Add small property for plugins.
+- Separator: Remove new line option.
+- General: Make plugins work with deskbar mode and small property.
+- Panel: Change drop highlighting to a red line.
+- Applicationmenu: Reload menu on directory changes.
+- Panel: Make sure the panel has a position on startup (bug #8287).
+- Panel: Work with a unique id for each panel.
+- Panel: Remove autosaving on exit and with timeout.
+- Panel: Only save what is required and when needed.
+- Docs: Update to latest version.
+
 4.8.6
 =====
 - Panel: Wait until the wm is ready on all screens (bug #7161).
