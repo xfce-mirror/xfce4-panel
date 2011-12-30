@@ -843,7 +843,6 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
                                        PanelPreferencesDialog *dialog)
 {
   gint       idx;
-  GObject   *combo;
   GtkWidget *toplevel;
   GSList    *windows;
   gint       n_windows;
@@ -866,17 +865,13 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
       idx = g_slist_index (windows, dialog->active);
       n_windows = g_slist_length (windows) - 2;
 
-      /* destroy the panel */
-      gtk_widget_destroy (GTK_WIDGET (dialog->active));
+      /* remove the panel, plugins and configuration */
+      panel_application_remove_window (dialog->application,
+                                       dialog->active);
       dialog->active = NULL;
 
       /* rebuild the selector */
-      panel_preferences_dialog_panel_combobox_rebuild (dialog, -1);
-
-      /* select window after this window */
-      combo = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
-      panel_return_if_fail (GTK_IS_WIDGET (combo));
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), CLAMP (idx, 0, n_windows));
+      panel_preferences_dialog_panel_combobox_rebuild (dialog, CLAMP (idx, 0, n_windows));
     }
 }
 

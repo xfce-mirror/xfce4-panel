@@ -68,6 +68,9 @@ PanelWindow      *panel_application_new_window        (PanelApplication  *applic
                                                        gint               id,
                                                        gboolean           new_window);
 
+void              panel_application_remove_window     (PanelApplication  *application,
+                                                       PanelWindow       *window);
+
 GSList           *panel_application_get_windows       (PanelApplication  *application);
 
 PanelWindow      *panel_application_get_window        (PanelApplication  *application,

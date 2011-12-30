@@ -68,8 +68,6 @@ static gboolean  panel_application_plugin_insert      (PanelApplication       *a
                                                        gint                    unique_id,
                                                        gchar                 **arguments,
                                                        gint                    position);
-static void      panel_application_window_destroyed   (GtkWidget              *window,
-                                                       PanelApplication       *application);
 static void      panel_application_dialog_destroyed   (GtkWindow              *dialog,
                                                        PanelApplication       *application);
 static void      panel_application_drag_data_received (PanelWindow            *window,
@@ -233,7 +231,6 @@ static void
 panel_application_finalize (GObject *object)
 {
   PanelApplication *application = PANEL_APPLICATION (object);
-  GSList           *li;
 
   panel_return_if_fail (application->dialogs == NULL);
 
@@ -243,13 +240,8 @@ panel_application_finalize (GObject *object)
     g_source_remove (application->wait_for_wm_timeout_id);
 #endif
 
-  /* free all windows */
-  for (li = application->windows; li != NULL; li = li->next)
-    {
-      g_signal_handlers_disconnect_by_func (G_OBJECT (li->data),
-          G_CALLBACK (panel_application_window_destroyed), application);
-      gtk_widget_destroy (GTK_WIDGET (li->data));
-    }
+  /* destroy all panels */
+  g_slist_foreach (application->windows, (GFunc) gtk_widget_destroy, NULL);
   g_slist_free (application->windows);
 
   g_object_unref (G_OBJECT (application->factory));
@@ -789,55 +781,6 @@ panel_application_plugin_insert (PanelApplication  *application,
   gtk_widget_show (provider);
 
   return TRUE;
-}
-
-
-
-static void
-panel_application_window_destroyed (GtkWidget        *window,
-                                    PanelApplication *application)
-{
-  gchar     *property;
-  GtkWidget *itembar;
-  gint       panel_id;
-
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  panel_return_if_fail (g_slist_find (application->windows, window) != NULL);
-
-  /* leave if the application or window is locked */
-  if (panel_application_get_locked (application)
-      || panel_window_get_locked (PANEL_WINDOW (window)))
-    return;
-
-  panel_id = panel_window_get_id (PANEL_WINDOW (window));
-  panel_debug (PANEL_DEBUG_APPLICATION,
-               "removing configuration and plugins of panel %d",
-               panel_id);
-
-  /* remove from the internal list */
-  application->windows = g_slist_remove (application->windows, window);
-
-  /* disconnect bindings from this panel */
-  panel_properties_unbind (G_OBJECT (window));
-
-  /* remove all the plugins from the itembar */
-  itembar = gtk_bin_get_child (GTK_BIN (window));
-  gtk_container_foreach (GTK_CONTAINER (itembar),
-      panel_application_plugin_remove, NULL);
-
-  /* remove the panel settings */
-  property = g_strdup_printf ("/panels/panel-%d", panel_id);
-  xfconf_channel_reset_property (application->xfconf, property, TRUE);
-  g_free (property);
-
-  /* save updated panel ids */
-  panel_application_save (application, SAVE_PANEL_IDS);
-
-  /* quit if there are no windows */
-  /* TODO, allow removing all windows and ask user what to do */
-  if (application->windows == NULL)
-    gtk_main_quit ();
 }
 
 
@@ -1504,10 +1447,6 @@ panel_application_new_window (PanelApplication *application,
   /* create panel window */
   window = panel_window_new (screen, panel_id);
 
-  /* monitor window destruction */
-  g_signal_connect (G_OBJECT (window), "destroy",
-      G_CALLBACK (panel_application_window_destroyed), application);
-
   /* add the window to internal list */
   application->windows = g_slist_append (application->windows, window);
 
@@ -1562,6 +1501,58 @@ panel_application_new_window (PanelApplication *application,
     panel_application_save (application, SAVE_PANEL_IDS);
 
   return PANEL_WINDOW (window);
+}
+
+
+
+void
+panel_application_remove_window (PanelApplication *application,
+                                 PanelWindow      *window)
+{
+  gchar     *property;
+  GtkWidget *itembar;
+  gint       panel_id;
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (PANEL_IS_APPLICATION (application));
+  panel_return_if_fail (g_slist_find (application->windows, window) != NULL);
+
+  /* leave if the application or window is locked */
+  if (panel_application_get_locked (application)
+      || panel_window_get_locked (PANEL_WINDOW (window)))
+    return;
+
+  panel_id = panel_window_get_id (PANEL_WINDOW (window));
+  panel_debug (PANEL_DEBUG_APPLICATION,
+               "removing configuration and plugins of panel %d",
+               panel_id);
+
+  /* remove from the internal list */
+  application->windows = g_slist_remove (application->windows, window);
+
+  /* disconnect bindings from this panel */
+  panel_properties_unbind (G_OBJECT (window));
+
+  /* set all the plugins on this panel the remove signal */
+  itembar = gtk_bin_get_child (GTK_BIN (window));
+  gtk_container_foreach (GTK_CONTAINER (itembar),
+      panel_application_plugin_remove, NULL);
+
+  /* destroy */
+  gtk_widget_destroy (GTK_WIDGET (window));
+
+  /* remove the panel settings */
+  property = g_strdup_printf ("/panels/panel-%d", panel_id);
+  xfconf_channel_reset_property (application->xfconf, property, TRUE);
+  g_free (property);
+
+  /* save changed panel ids */
+  panel_application_save (application, SAVE_PANEL_IDS);
+
+  /* quit if there are no windows */
+  /* TODO, allow removing all windows and ask user what to do */
+  if (application->windows == NULL)
+    gtk_main_quit ();
 }
 
 
