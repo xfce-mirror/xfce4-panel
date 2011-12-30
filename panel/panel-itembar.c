@@ -688,8 +688,8 @@ panel_itembar_expose_event (GtkWidget      *widget,
     {
       row_size = itembar->size * itembar->nrows;
 
-      rect.x = itembar->highlight_x - 1;
-      rect.y = itembar->highlight_y - 1;
+      rect.x = itembar->highlight_x;
+      rect.y = itembar->highlight_y;
 
       if (IS_HORIZONTAL (itembar))
         {
