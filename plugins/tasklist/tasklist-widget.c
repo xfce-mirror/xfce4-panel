@@ -846,6 +846,15 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
 
   *arrow_position = -1; /* not visible */
 
+  /* unset overflow items, we decide about that again
+   * later */
+  for (li = tasklist->windows; li != NULL; li = li->next)
+    {
+      child = li->data;
+      if (child->type == CHILD_TYPE_OVERFLOW_MENU)
+        child->type = CHILD_TYPE_WINDOW;
+    }
+
   if (min_button_length * cols <= alloc->width)
     {
       /* all the windows seem to fit */
@@ -864,10 +873,6 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
             {
               windows_scored = g_slist_insert_sorted (windows_scored, child,
                                                       xfce_tasklist_size_sort_window);
-              /* unset overflow items, we decide about that again
-               * later */
-              if (child->type == CHILD_TYPE_OVERFLOW_MENU)
-                child->type = CHILD_TYPE_WINDOW;
             }
         }
 
