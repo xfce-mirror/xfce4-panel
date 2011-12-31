@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 15:18+0000\n"
+"POT-Creation-Date: 2011-12-31 09:36+0000\n"
 "PO-Revision-Date: 2010-05-15 00:16+0300\n"
 "Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org,xfce-i18n@xfce.org>\n"
@@ -29,7 +29,6 @@ msgstr ""
 "Bu masaüstü dosyası bilgisine dayalı olarak panele yeni bir başlatıcı ekle"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-#, fuzzy
 msgid "Create Launcher on the panel"
 msgstr "Xfce Panelinde Başlatıcı oluştur"
 
@@ -66,13 +65,13 @@ msgstr "Belge görüntüleyici açılamadı"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1086
+#: ../panel/panel-preferences-dialog.c:1078
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "'%s' ögesini silmek istediğinizden emin misiniz?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1089
+#: ../panel/panel-preferences-dialog.c:1081
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Panelden bir ögeyi kaldırdığınızda, tamamen kaybolur."
 
@@ -145,7 +144,6 @@ msgstr "Sürüm bilgisini yazdır ve çık"
 
 #. parse context options
 #: ../panel/main.c:232
-#, fuzzy
 msgid "[ARGUMENTS...]"
 msgstr "[SEÇENEKLER...]"
 
@@ -164,7 +162,6 @@ msgid "Please report bugs to <%s>."
 msgstr "Lütfen hataları <%s> adresine bildirin."
 
 #: ../panel/main.c:310
-#, fuzzy
 msgid "There is already a running instance"
 msgstr "Halihazırda çalışan bir panel örneği var"
 
@@ -202,7 +199,6 @@ msgid "Failed to send D-Bus message"
 msgstr "D-Bus imesajı gönderilemedi"
 
 #: ../panel/main.c:390
-#, fuzzy
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -216,38 +212,40 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr "%s 'in hiçbir çalışan örneği bulunamadı"
 
-#: ../panel/panel-application.c:217
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Göç uygulaması çalıştırılamadı"
 
-#: ../panel/panel-application.c:1675
-#, fuzzy
+#: ../panel/panel-application.c:1666
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 "Oturum yöneticisi olmadan X başlamıştır. Çık tıklamak X sunucusu kapanacak."
 
-#: ../panel/panel-application.c:1676
+#: ../panel/panel-application.c:1667
 msgid "Are you sure you want to quit the panel?"
 msgstr "Paneli kapatmak istediğinizden emin misiniz?"
 
-#: ../panel/panel-application.c:1684
+#: ../panel/panel-application.c:1675
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" komutu çalıştırılamadı"
 
 #: ../panel/panel-dbus-client.c:208
-#, fuzzy
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Geçersiz eklenti kullanım sözdizimi.  PLUGIN-NAME:NAME[:TYPE:VALUE] şeklinde kullanın."
+msgstr ""
+"Geçersiz eklenti kullanım sözdizimi.  PLUGIN-NAME:NAME[:TYPE:VALUE] şeklinde "
+"kullanın."
 
 #: ../panel/panel-dbus-client.c:241
-#, c-format, fuzzy
+#, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Geçersiz yumuşatma türü \"%s\". Geçerli türler: bool, double, int, string ve uint."
+msgstr ""
+"Geçersiz yumuşatma türü \"%s\". Geçerli türler: bool, double, int, string ve "
+"uint."
 
 #: ../panel/panel-dialogs.c:77
 msgid "The panel of the Xfce Desktop Environment"
@@ -266,7 +264,7 @@ msgstr "Yeni Öğe Ekle"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Lütfen yeni eklenti için bir panel seçiniz:"
 
-#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:793
+#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:790
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -309,49 +307,52 @@ msgstr ""
 "ister misiniz?"
 
 #: ../panel/panel-plugin-external.c:431
-#, c-format, fuzzy
+#, fuzzy, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Eklenti %d saniyede birden fazla yeniden başlatıldı. Eğer Çalıştıra bastıysanız panel eklentiyi yeniden başlatmayı deneyecek aksi halde kalıcı olarak panelden kaldırılacak."
+msgstr ""
+"Eklenti %d saniyede birden fazla yeniden başlatıldı. Eğer Çalıştıra "
+"bastıysanız panel eklentiyi yeniden başlatmayı deneyecek aksi halde kalıcı "
+"olarak panelden kaldırılacak."
 
-#: ../panel/panel-preferences-dialog.c:459
+#: ../panel/panel-preferences-dialog.c:456
 msgid "Automatic"
 msgstr "Otomatik"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:478
+#: ../panel/panel-preferences-dialog.c:475
 #, c-format
 msgid "Screen %d"
 msgstr "Ekran %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:504
+#: ../panel/panel-preferences-dialog.c:501
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitör %d"
 
-#: ../panel/panel-preferences-dialog.c:860
+#: ../panel/panel-preferences-dialog.c:856
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel ve eklenti ayarları kalıcı olarak silinecek"
 
-#: ../panel/panel-preferences-dialog.c:861
+#: ../panel/panel-preferences-dialog.c:857
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d. Paneli silmek istediğinize emin misiniz?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:950
-#, c-format, fuzzy
+#: ../panel/panel-preferences-dialog.c:942
+#, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(harici)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:955
-#, c-format, fuzzy
+#: ../panel/panel-preferences-dialog.c:947
+#, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
@@ -361,13 +362,12 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:967
-#, c-format, fuzzy
+#: ../panel/panel-preferences-dialog.c:959
+#, c-format
 msgid "Internal name: %s-%d"
 msgstr "Dahili isim: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-#, fuzzy
 msgid "A_utomatically increase the length"
 msgstr "Uz_unluğu otomatik olarak arttır"
 
@@ -384,15 +384,14 @@ msgstr "Bu panele yeni öğe ekle"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "0 tamamen şeffaf ve 100 tamamen mat olacak biçimde panel artalan alfa değeri."
+msgstr ""
+"0 tamamen şeffaf ve 100 tamamen mat olacak biçimde panel artalan alfa değeri."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
 msgstr "Görünüm"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
-#, fuzzy
 msgid "Automatically show and _hide the panel"
 msgstr "Paneli otomatik olarak göster ve gizle"
 
@@ -451,41 +450,36 @@ msgid "L_ength (%):"
 msgstr "U_zunluk (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
-#, fuzzy
 msgid "M_ode:"
 msgstr "M_od:"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
-#, fuzzy
 msgid "Measurements"
 msgstr "Ölçümler"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/launcher/launcher-dialog.glade.h:15
-#, fuzzy
 msgid "Move currently selected item down by one row"
-msgstr "Şu anda seçili öğeyi bir satır aşağı doğru hareket ettirin"
+msgstr "Seçili öğeyi bir satır aşağı doğru hareket ettirin"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#, fuzzy
 msgid "Move currently selected item up by one row"
-msgstr "Seçili olan öğenin bir satır yukarı taşımak"
+msgstr "Seçili öğeyi bir satır yukarı taşı"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
-msgstr ""
+msgstr "Hiçbiri (sistem stilini kullan)"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Num_ber of rows:"
 msgstr "Satır s_ayısı:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
-msgstr ""
+msgstr "Ç_ıktı:"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Opacity"
@@ -504,9 +498,8 @@ msgid "Remove the currently selected panel"
 msgstr "Seçili paneli kaldır"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
-#, fuzzy
 msgid "Row _Size (pixels):"
-msgstr "Bo_yut (piksel):"
+msgstr "Satır_Boyutu (piksel):"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
@@ -523,7 +516,9 @@ msgstr ""
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Eklentiler daha fazla alan istediklerinde panelin boyunu otomatik olarak arttırmak için bu seçeneği seçin."
+msgstr ""
+"Eklentiler daha fazla alan istediklerinde panelin boyunu otomatik olarak "
+"arttırmak için bu seçeneği seçin."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 #, fuzzy
@@ -534,14 +529,17 @@ msgstr "Paneli birden fazla ekranda göstermek için bu seçeneği seçin."
 #, fuzzy
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Panelin kulplarını saklamak ve konumunu kilitlemek için bu seçeneği seçin."
+msgstr ""
+"Panelin kulplarını saklamak ve konumunu kilitlemek için bu seçeneği seçin."
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 #, fuzzy
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "İmleç üzerinde olmadığında paneli gizlemek için bu seçeneği seçin. Bu sadece panel ekranın bir kenarına iliştirilmiş olduğunda çalışır."
+msgstr ""
+"İmleç üzerinde olmadığında paneli gizlemek için bu seçeneği seçin. Bu sadece "
+"panel ekranın bir kenarına iliştirilmiş olduğunda çalışır."
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 #, fuzzy
@@ -563,27 +561,28 @@ msgstr "Monitörleri Yay"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
-msgstr "İşaretçi panel üzerindeyken 0 ile tam şeffaflık ve ile 100 tam mat görünüm."
+msgstr ""
+"İşaretçi panel üzerindeyken 0 ile tam şeffaflık ve ile 100 tam mat görünüm."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 #, fuzzy
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "İşaretçi panel üzerinde değilken 0 ile tam şeffaflık ve ile 100 tam mat görünüm."
+msgstr ""
+"İşaretçi panel üzerinde değilken 0 ile tam şeffaflık ve ile 100 tam mat "
+"görünüm."
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Vertical"
 msgstr "Dikey"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
-#, fuzzy
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:48
-#, fuzzy
 msgid "_Enter:"
 msgstr "_Giriş"
 
@@ -593,7 +592,6 @@ msgstr "_Dosya:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
-#, fuzzy
 msgid "_Leave:"
 msgstr "_İsim:"
 
@@ -603,12 +601,10 @@ msgstr "Paneli _Kilitle"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
 #: ../plugins/separator/separator-dialog.glade.h:7
-#, fuzzy
 msgid "_Style:"
 msgstr "_Biçim:"
 
 #: ../panel/panel-tic-tac-toe.c:123
-#, fuzzy
 msgid "_New Game"
 msgstr "_Yeni Oyun"
 
@@ -617,12 +613,10 @@ msgid "_Level:"
 msgstr "_Seviye:"
 
 #: ../panel/panel-tic-tac-toe.c:140
-#, fuzzy
 msgid "Novice"
 msgstr "Acemi"
 
 #: ../panel/panel-tic-tac-toe.c:141
-#, fuzzy
 msgid "Intermediate"
 msgstr "Ara"
 
@@ -635,16 +629,17 @@ msgid "Expert"
 msgstr "Uzman"
 
 #: ../migrate/main.c:116
-#, fuzzy
 msgid "Welcome to the first start of the panel"
-msgstr "Panele yeni öğeler ekle"
+msgstr "Panelin ilk çalışmasına hoşgeldiniz"
 
 #: ../migrate/main.c:125
 #, fuzzy
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "Panel kayıtlı ayarlar için yeni bir sisteme taşındığı için yeni bir başlangıç yapılandırması yükledi."
+msgstr ""
+"Panel kayıtlı ayarlar için yeni bir sisteme taşındığı için yeni bir "
+"başlangıç yapılandırması yükledi."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 #, fuzzy
@@ -691,18 +686,16 @@ msgid "Panel config needs migration..."
 msgstr ""
 
 #: ../migrate/main.c:189
-#, fuzzy
 msgid "Failed to migrate the existing configuration"
-msgstr "Panel yapılandırmasını kaydet"
+msgstr ""
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Panel yapılandırması güncellendi"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
 msgid "Action"
-msgstr "Hareket Düğmeleri"
+msgstr "Eylem"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -710,19 +703,16 @@ msgid "Action Buttons"
 msgstr "Hareket Düğmeleri"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "Appeara_nce:"
-msgstr "Görünüm"
+msgstr "Görünüm:"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
-#, fuzzy
 msgid "Invert buttons _orientation"
-msgstr "O_k düğmesi"
+msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:6
-#, fuzzy
 msgid "Session Menu"
-msgstr "Pencere Listesi"
+msgstr "Oturum Menüsü"
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
@@ -730,18 +720,16 @@ msgid ""
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:8
-#, fuzzy
 msgid "Visible"
 msgstr "Görünür"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
-#, fuzzy
 msgid "_Actions"
-msgstr "Panel Davranışları"
+msgstr "_Panel Davranışları"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "_Onay kutusunu göster"
 
 #: ../plugins/actions/actions.c:159
 #, fuzzy
@@ -759,7 +747,7 @@ msgid "Are you sure you want to log out?"
 msgstr "'%s' çalışma alanını silmek istediğinizden emin misiniz?"
 
 #: ../plugins/actions/actions.c:162
-#, c-format, fuzzy
+#, fuzzy, c-format
 msgid "Logging out in %d seconds."
 msgstr "%d saniye içinde oturum kapatılıyor"
 
@@ -807,7 +795,7 @@ msgid "Do you want to suspend to disk?"
 msgstr ""
 
 #: ../plugins/actions/actions.c:187
-#, c-format, fuzzy
+#, fuzzy, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "%d saniye içinde uyku moduna geçiliyor."
 
@@ -844,7 +832,7 @@ msgid "Are you sure you want to restart?"
 msgstr "'%s' çalışma alanını silmek istediğinizden emin misiniz?"
 
 #: ../plugins/actions/actions.c:201
-#, c-format, fuzzy
+#, fuzzy, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Bilgisayar %d saniye içinde yeniden başlatılıyor"
 
@@ -864,16 +852,15 @@ msgid "Are you sure you want to shut down?"
 msgstr "Paneli kapatmak istediğinizden emin misiniz?"
 
 #: ../plugins/actions/actions.c:208
-#, c-format, fuzzy
+#, fuzzy, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Bilgisayar %d saniye içinde kapatılıyor"
 
 #: ../plugins/actions/actions.c:600
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
-#, fuzzy
 msgid "Separator"
-msgstr "Ayırıcı Tarzı"
+msgstr "Ayırıcı "
 
 #: ../plugins/actions/actions.c:869
 #, fuzzy, c-format
@@ -904,17 +891,14 @@ msgstr "Görünüm"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "Gizlenen Uygulamalar"
+msgstr "Uygulamalar Menüsü"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#, fuzzy
 msgid "Button _title:"
-msgstr "Panel Davranışları"
+msgstr "Tuş _başlığı:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-#, fuzzy
 msgid "Ed_it Menu"
 msgstr "Menüyü Dü_zenle"
 
@@ -923,7 +907,6 @@ msgid "Menu File"
 msgstr "Menü Dosyası"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-#, fuzzy
 msgid "Menu _file:"
 msgstr "Menü _dosyası:"
 
@@ -936,25 +919,23 @@ msgstr "Bir Menü Dosyası Seç"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Menüde uygulamanın genel adını görmek için bu seçeneği seçin, mesela \"Thunar\" yerine \"Dosya Yöneticisi\""
+msgstr ""
+"Menüde uygulamanın genel adını görmek için bu seçeneği seçin, mesela \"Thunar"
+"\" yerine \"Dosya Yöneticisi\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-#, fuzzy
 msgid "Show application d_escription in tooltip"
 msgstr "Uygulama _tanımını ipucunda göster"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-#, fuzzy
 msgid "Show generic application n_ames"
-msgstr "Gizlenen Uygulamalar"
+msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-#, fuzzy
 msgid "Show ic_ons in menu"
 msgstr "Menüde _simgeleri göster"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#, fuzzy
 msgid "Use c_ustom menu file:"
 msgstr "Ki_şiselleştirilmiş menü dosyasını kullan:"
 
@@ -964,14 +945,12 @@ msgstr "_Öntanımlı menüyü kullan"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
 msgid "_Icon:"
 msgstr "_Simge:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-#, fuzzy
 msgid "_Show button title"
-msgstr "O_k düğmesi"
+msgstr "_Tuş başlığını göster"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:528
 #: ../plugins/directorymenu/directorymenu.c:388
@@ -1007,7 +986,6 @@ msgstr "Kullanım:"
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
-#, fuzzy
 msgid "OPTION"
 msgstr "SEÇENEK"
 
@@ -1046,7 +1024,6 @@ msgid "Custom Format"
 msgstr "Özel"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
 msgid "24-_hour clock"
 msgstr "24'lük _saat sistemi kullan"
 
@@ -1076,9 +1053,8 @@ msgid "Display _seconds"
 msgstr "S_aniyeleri göster"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
-#, fuzzy
 msgid "F_ormat:"
-msgstr "Biçim:"
+msgstr "B_içim:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
@@ -1120,20 +1096,22 @@ msgid "Show gri_d"
 msgstr "Çerçeve gös_ter"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format, fuzzy
+#, fuzzy, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
 "the day. See the documentation of the date utility for additional "
 "information."
-msgstr "Biçim, dosya adına eklenecek tarih ve zaman dilimini tanımlar. Örnek, %Y yılın yerine, %m ayın yerine ve %d günün yerine geçer. Ek bilgi için tarih uygulamasının belgesine bakınız."
+msgstr ""
+"Biçim, dosya adına eklenecek tarih ve zaman dilimini tanımlar. Örnek, %Y "
+"yılın yerine, %m ayın yerine ve %d günün yerine geçer. Ek bilgi için tarih "
+"uygulamasının belgesine bakınız."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr "İki_li saat"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
-#, fuzzy
 msgid "_Layout:"
 msgstr "_Yerleşim:"
 
@@ -1147,7 +1125,6 @@ msgid "Night"
 msgstr "Gece"
 
 #: ../plugins/clock/clock-fuzzy.c:87
-#, fuzzy
 msgid "Early morning"
 msgstr "Seher"
 
@@ -1156,7 +1133,6 @@ msgid "Morning"
 msgstr "Sabah"
 
 #: ../plugins/clock/clock-fuzzy.c:89
-#, fuzzy
 msgid "Almost noon"
 msgstr "Öğleden önce"
 
@@ -1173,7 +1149,6 @@ msgid "Evening"
 msgstr "Akşam"
 
 #: ../plugins/clock/clock-fuzzy.c:93
-#, fuzzy
 msgid "Late evening"
 msgstr "Akşam üzeri"
 
@@ -1185,57 +1160,57 @@ msgid "%0 o'clock"
 msgstr "Saat %0"
 
 #: ../plugins/clock/clock-fuzzy.c:101
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "five past %0"
 msgstr "%0 'ı beş geçe"
 
 #: ../plugins/clock/clock-fuzzy.c:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ten past %0"
 msgstr "%0 'ı on geçe"
 
 #: ../plugins/clock/clock-fuzzy.c:103
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "quarter past %0"
 msgstr "%0 'ı çeyrek geçe"
 
 #: ../plugins/clock/clock-fuzzy.c:104
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty past %0"
-msgstr "%0 'ı yi rmi geçe"
+msgstr "%0 'ı yirmi geçe"
 
 #: ../plugins/clock/clock-fuzzy.c:105
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 'ı yirmi beş geçe"
 
 #: ../plugins/clock/clock-fuzzy.c:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "half past %0"
 msgstr "%0 buçuk"
 
 #: ../plugins/clock/clock-fuzzy.c:107
-#, no-c-format, fuzzy
+#, no-c-format
 msgid "twenty five to %1"
-msgstr "%1 yirmi beş var"
+msgstr "%1'e yirmi beş var"
 
 #: ../plugins/clock/clock-fuzzy.c:108
-#, no-c-format, fuzzy
+#, no-c-format
 msgid "twenty to %1"
-msgstr "%1 yirmi var"
+msgstr "%1'e yirmi var"
 
 #: ../plugins/clock/clock-fuzzy.c:109
-#, no-c-format, fuzzy
+#, no-c-format
 msgid "quarter to %1"
 msgstr "%1'e çeyrek var"
 
 #: ../plugins/clock/clock-fuzzy.c:110
-#, no-c-format, fuzzy
+#, no-c-format
 msgid "ten to %1"
 msgstr "%1'e on var"
 
 #: ../plugins/clock/clock-fuzzy.c:111
-#, no-c-format, fuzzy
+#, no-c-format
 msgid "five to %1"
 msgstr "%1'e beş var"
 
@@ -1383,27 +1358,27 @@ msgid "Directory Menu"
 msgstr "Dizin  Menüsü"
 
 #: ../plugins/directorymenu/directorymenu.c:569
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "\"%s\" çalıştırılamadı"
+msgstr "\"%s\" uygulaması çalıştırılamadı"
 
 #: ../plugins/directorymenu/directorymenu.c:600
-#, c-format, fuzzy
+#, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "\"%s\" için içerik sorgulama başarısız oldu"
 
 #: ../plugins/directorymenu/directorymenu.c:609
-#, fuzzy, c-format
+#, c-format
 msgid "No default application found for \"%s\""
-msgstr "\"%s\" için simge seç"
+msgstr "\"%s\" için öntanımlı uygulama bulunamadı"
 
 #: ../plugins/directorymenu/directorymenu.c:624
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "\"%s\" çalıştırılamadı"
+msgstr "\"%s\" için öntanımlı uygulama çalıştırılamadı"
 
 #: ../plugins/directorymenu/directorymenu.c:717
-#, c-format, fuzzy
+#, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr " \"%s\" kategorisi için seçilen uygulama çalıştırılamadı"
 
@@ -1425,7 +1400,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Bir dizindeki görünebilir olmasını istediğiniz dosyaların desenini yazın. Eğer birden fazla desen yazacaksanız, noktalı virgül ile ayırın.(ör. *.txt;*.doc)"
+msgstr ""
+"Bir dizindeki görünebilir olmasını istediğiniz dosyaların desenini yazın. "
+"Eğer birden fazla desen yazacaksanız, noktalı virgül ile ayırın.(ör. *.txt;*."
+"doc)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1443,12 +1421,10 @@ msgid "Show _hidden files"
 msgstr "Çerçeve gös_ter"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#, fuzzy
 msgid "_Base Directory:"
 msgstr "_Temel Dizin:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-#, fuzzy
 msgid "_File Pattern:"
 msgstr "_Dosya Deseni:"
 
@@ -1466,9 +1442,8 @@ msgid "No items"
 msgstr "Öğe yok"
 
 #: ../plugins/launcher/launcher-dialog.c:807
-#, fuzzy
 msgid "Failed to open desktop item editor"
-msgstr "Görüntü açılamadı"
+msgstr "Masaüstü öğe düzenleyicisi açılamadı"
 
 #: ../plugins/launcher/launcher-dialog.c:866
 msgid "If you delete an item, it will be permanently removed"
@@ -1484,9 +1459,8 @@ msgid "Unnamed item"
 msgstr "İsimsiz öğe"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
 msgid "Add Appli_cation"
-msgstr "Gizlenen Uygulamalar"
+msgstr "Uy_gulama Ekle"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
@@ -1502,7 +1476,6 @@ msgid "Advanced"
 msgstr "Gelişmiş"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
-#, fuzzy
 msgid "D_elete Item"
 msgstr "Öğeyi S_il"
 
@@ -1516,7 +1489,7 @@ msgstr "Seçili öğeyi sil"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "İ_pucunu Etkisizleştir"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "East"
@@ -1532,9 +1505,8 @@ msgid "Launcher"
 msgstr "Başlatıcı"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#, fuzzy
 msgid "New _Application"
-msgstr "Gizlenen Uygulamalar"
+msgstr "Yeni _Uygulama"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #, fuzzy
@@ -1550,7 +1522,9 @@ msgstr "Kuzey"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
-msgstr "Fare panel düğmesinin veya menü öğelerinin üzerindeyken ipuçlarının devre dışı bırakılmasını istiyorsanız bu seçeneği işaretleyin."
+msgstr ""
+"Fare panel düğmesinin veya menü öğelerinin üzerindeyken ipuçlarının devre "
+"dışı bırakılmasını istiyorsanız bu seçeneği işaretleyin."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 #, fuzzy
@@ -1567,9 +1541,8 @@ msgid "Show last _used item in panel"
 msgstr "Panelde son _kullanılan ögeyi göster"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
-#, fuzzy
 msgid "South"
-msgstr "Hakkında"
+msgstr "Güney"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "West"
@@ -1581,7 +1554,6 @@ msgid "_Arrow button position:"
 msgstr "O_k düğmesi"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:27
-#, fuzzy
 msgid "_Edit Item"
 msgstr "Öğeyi _Düzenle"
 
@@ -1590,9 +1562,8 @@ msgid "Program launcher with optional menu"
 msgstr "Uygulama çalıştırıcısı"
 
 #: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
-#, fuzzy
 msgid "Workspace _Settings..."
-msgstr "Çalışma Alanı Değiştiricisi"
+msgstr "Çalışma Alanı _Ayarları..."
 
 #: ../plugins/pager/pager.c:429
 #, fuzzy
@@ -1610,16 +1581,17 @@ msgid "Behaviour"
 msgstr "Davranış"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
 msgid "Number of _rows:"
-msgstr "Diz_eç sayısı:"
+msgstr "_Satır sayısı:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 #, fuzzy
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Açık pencereler için dikdörtgen şeklinde çalışma alanlarının küçük görünümünü göster"
+msgstr ""
+"Açık pencereler için dikdörtgen şeklinde çalışma alanlarının küçük "
+"görünümünü göster"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 #, fuzzy
@@ -1640,19 +1612,16 @@ msgid "Switch between virtual desktops"
 msgstr "Sanal masaüstleri arasında geçiş yap"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
-#, fuzzy
 msgid "Dots"
-msgstr "_Noktalar"
+msgstr "Noktalar"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
-#, fuzzy
 msgid "Handle"
 msgstr "İşle:"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
-#, fuzzy
 msgid "Transparent"
-msgstr "Şeffaflı_k (%):"
+msgstr "Şeffaf"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "_Expand"
@@ -1693,7 +1662,9 @@ msgstr "Acil Uyarı"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Bilgilendirme alanının işlevini çoğunluklar diğer programcıklar alırlar. Bu alan kullanılamaz olacak."
+msgstr ""
+"Bilgilendirme alanının işlevini çoğunluklar diğer programcıklar alırlar. Bu "
+"alan kullanılamaz olacak."
 
 #: ../plugins/systray/systray.c:870
 #, fuzzy
@@ -1827,27 +1798,27 @@ msgstr "Pencere başlığı"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Çalış_ma alanları arasında fare topu kullanarak geçiş yap"
 
-#: ../plugins/tasklist/tasklist-widget.c:3176
+#: ../plugins/tasklist/tasklist-widget.c:3177
 #, fuzzy
 msgid "Mi_nimize All"
 msgstr "Hepsini _küçült"
 
-#: ../plugins/tasklist/tasklist-widget.c:3185
+#: ../plugins/tasklist/tasklist-widget.c:3186
 #, fuzzy
 msgid "Un_minimize All"
 msgstr "Tümü en _son boyuta"
 
-#: ../plugins/tasklist/tasklist-widget.c:3191
+#: ../plugins/tasklist/tasklist-widget.c:3192
 #, fuzzy
 msgid "Ma_ximize All"
 msgstr "Hepsini _büyüt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3200
+#: ../plugins/tasklist/tasklist-widget.c:3201
 #, fuzzy
 msgid "_Unmaximize All"
 msgstr "Tümü _normal boyuta"
 
-#: ../plugins/tasklist/tasklist-widget.c:3210
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "_Close All"
 msgstr "Hepsini _Kapat"
 
