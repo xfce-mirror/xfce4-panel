@@ -83,6 +83,8 @@ static void         panel_window_set_property               (GObject          *o
 static void         panel_window_finalize                   (GObject          *object);
 static gboolean     panel_window_expose_event               (GtkWidget        *widget,
                                                              GdkEventExpose   *event);
+static gboolean     panel_window_delete_event               (GtkWidget        *widget,
+                                                             GdkEventAny      *event);
 static gboolean     panel_window_enter_notify_event         (GtkWidget        *widget,
                                                              GdkEventCrossing *event);
 static gboolean     panel_window_leave_notify_event         (GtkWidget        *widget,
@@ -331,6 +333,7 @@ panel_window_class_init (PanelWindowClass *klass)
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->expose_event = panel_window_expose_event;
+  gtkwidget_class->delete_event = panel_window_delete_event;
   gtkwidget_class->enter_notify_event = panel_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_window_leave_notify_event;
   gtkwidget_class->drag_motion = panel_window_drag_motion;
@@ -834,6 +837,16 @@ end:
     gtk_container_propagate_expose (GTK_CONTAINER (widget), child, event);
 
   return FALSE;
+}
+
+
+
+static gboolean
+panel_window_delete_event (GtkWidget   *widget,
+                           GdkEventAny *event)
+{
+  /* do not respond to alt-f4 or any other signals */
+  return TRUE;
 }
 
 
