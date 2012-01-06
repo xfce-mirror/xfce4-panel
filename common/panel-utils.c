@@ -44,7 +44,7 @@ panel_utils_help_button_clicked (GtkWidget       *button,
   toplevel = gtk_widget_get_toplevel (button);
   panel_utils_show_help (GTK_WINDOW (toplevel),
       xfce_panel_plugin_get_name (panel_plugin),
-      "properties");
+      NULL);
 }
 
 
@@ -114,69 +114,7 @@ panel_utils_show_help (GtkWindow   *parent,
                        const gchar *page,
                        const gchar *offset)
 {
-  GdkScreen *screen;
-  gchar     *filename;
-  gchar     *uri = NULL;
-  GError    *error = NULL;
-  gchar     *locale;
-  gboolean   exists;
-
-  panel_return_if_fail (parent == NULL || GTK_IS_WINDOW (parent));
-
-  if (G_LIKELY (parent != NULL))
-    screen = gtk_window_get_screen (parent);
-  else
-    screen = gdk_screen_get_default ();
-
-  if (page == NULL)
-    page = "index";
-
-  /* get the locale of the user */
-  locale = g_strdup (setlocale (LC_MESSAGES, NULL));
-  if (G_LIKELY (locale != NULL))
-    locale = g_strdelimit (locale, "._", '\0');
-  else
-    locale = g_strdup ("C");
-
-  /* check if the help page exists on the system */
-  filename = g_strconcat (HELPDIR, G_DIR_SEPARATOR_S, locale,
-                          G_DIR_SEPARATOR_S, page, ".html", NULL);
-  exists = g_file_test (filename, G_FILE_TEST_EXISTS);
-  if (!exists)
-    {
-      g_free (filename);
-      filename = g_strconcat (HELPDIR, G_DIR_SEPARATOR_S "C"
-                              G_DIR_SEPARATOR_S, page, ".html", NULL);
-      exists = g_file_test (filename, G_FILE_TEST_EXISTS);
-    }
-
-  if (G_LIKELY (exists))
-    {
-      uri = g_strconcat ("file://", filename, offset != NULL ? "#" : NULL, offset, NULL);
-    }
-  else if (xfce_dialog_confirm (parent, "web-browser", _("_Read Online"),
-               _("You can read the user manual online. This manual may however "
-                 "not exactly match your panel version."),
-               _("The user manual is not installed on your computer")))
-    {
-      uri = g_strconcat ("http://docs.xfce.org/help.php?package=xfce4-panel&lang=",
-                         locale, "&page=", page, "&anchor=", offset, NULL);
-    }
-
-  g_free (filename);
-  g_free (locale);
-
-  /* try to run the documentation browser */
-  if (uri != NULL
-      && !exo_execute_preferred_application_on_screen ("WebBrowser", uri, NULL,
-                                                       NULL, screen, &error))
-    {
-      /* display an error message to the user */
-      xfce_dialog_show_error (parent, error, _("Failed to open the documentation browser"));
-      g_error_free (error);
-    }
-
-  g_free (uri);
+  xfce_dialog_show_help (parent, "xfce4-panel", page, offset);
 }
 
 
