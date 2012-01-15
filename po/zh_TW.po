@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 23:08+0000\n"
-"PO-Revision-Date: 2011-11-13 10:30+0800\n"
+"POT-Creation-Date: 2012-01-14 23:54+0000\n"
+"PO-Revision-Date: 2012-01-15 10:38+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -32,106 +32,89 @@ msgid "Customize the panel"
 msgstr "自訂面板"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:26
-#: ../panel/panel-window.c:2275
+#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-window.c:2340
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "面板"
 
-#: ../common/panel-utils.c:157
-msgid "_Read Online"
-msgstr "線上閱讀(_R)"
-
-#: ../common/panel-utils.c:158
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "您可以線上閱讀使用者手冊。該手冊有可能不與您的面板版本吻合。"
-
-#: ../common/panel-utils.c:160
-msgid "The user manual is not installed on your computer"
-msgstr "您的電腦上沒有安裝使用者手冊"
-
-#. display an error message to the user
-#: ../common/panel-utils.c:175
-msgid "Failed to open the documentation browser"
-msgstr "未能開啟文件瀏覽器"
-
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:919
-#: ../panel/panel-preferences-dialog.c:1056
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1078
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您確定要移除「%s」嗎？"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:924
-#: ../panel/panel-preferences-dialog.c:1059
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../panel/panel-preferences-dialog.c:1081
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您要從面板移除該項目，它將永遠消失。"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1084
+#: ../libxfce4panel/xfce-panel-plugin.c:1202
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1118
+#: ../libxfce4panel/xfce-panel-plugin.c:1236
 msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1126
-#: ../panel/panel-window.c:2287
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
+#: ../panel/panel-window.c:2352
 msgid "Add _New Items..."
 msgstr "加入新項目(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1137
-#: ../panel/panel-window.c:2298
+#: ../libxfce4panel/xfce-panel-plugin.c:1255
+#: ../panel/panel-window.c:2363
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1154
-#: ../panel/panel-window.c:2314
+#: ../libxfce4panel/xfce-panel-plugin.c:1272
+#: ../panel/panel-window.c:2379
 msgid "Log _Out"
 msgstr "登出(_O)"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "顯示「面板偏好設定」對話窗"
 
+#: ../panel/main.c:78
 #: ../panel/main.c:79
-#: ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "面板號碼"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
 msgstr "顯示「加入新項目」對話窗"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:80
 msgid "Save the panel configuration"
 msgstr "儲存面板組態"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:81
 msgid "Add a new plugin to the panel"
 msgstr "加入新插件至面板"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:81
 msgid "PLUGIN-NAME"
 msgstr "插件名稱"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:82
 msgid "Restart the running panel instance"
 msgstr "重新啟動執行中的面板實體"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
 msgstr "退出執行中的面板實體"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:84
 msgid "Do not wait for a window manager on startup"
 msgstr "啟動時不要等待視窗管理器"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:85
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -139,84 +122,84 @@ msgid "Print version information and exit"
 msgstr "印出版本資訊並離開"
 
 #. parse context options
-#: ../panel/main.c:250
+#: ../panel/main.c:232
 msgid "[ARGUMENTS...]"
 msgstr "[參數...]"
 
-#: ../panel/main.c:257
+#: ../panel/main.c:239
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "輸入 \"%s --help\" 以瞭解用法。"
 
-#: ../panel/main.c:276
+#: ../panel/main.c:258
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce 開發團隊。保留所有權利。"
 
-#: ../panel/main.c:277
+#: ../panel/main.c:259
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "請回報錯誤至 <%s>。"
 
-#: ../panel/main.c:328
+#: ../panel/main.c:310
 msgid "There is already a running instance"
 msgstr "已經有執行中的實體"
 
 #. spawn ourselfs again
-#: ../panel/main.c:378
+#: ../panel/main.c:352
 msgid "Restarting..."
 msgstr "正在重新啟動..."
 
-#: ../panel/main.c:393
+#: ../panel/main.c:367
 msgid "Failed to show the preferences dialog"
 msgstr "未能顯示偏好設定對話窗"
 
-#: ../panel/main.c:395
+#: ../panel/main.c:369
 msgid "Failed to show the add new items dialog"
 msgstr "未能顯示加入新項目對話窗"
 
-#: ../panel/main.c:397
+#: ../panel/main.c:371
 msgid "Failed to save the panel configuration"
 msgstr "未能儲存面板組態"
 
-#: ../panel/main.c:399
+#: ../panel/main.c:373
 msgid "Failed to add a plugin to the panel"
 msgstr "未能加入插件至面板"
 
-#: ../panel/main.c:401
+#: ../panel/main.c:375
 msgid "Failed to restart the panel"
 msgstr "未能重新啟動面板"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:377
 msgid "Failed to quit the panel"
 msgstr "未能退出面板"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:379
 msgid "Failed to send D-Bus message"
 msgstr "未能傳送 D-Bus 訊息"
 
-#: ../panel/main.c:416
+#: ../panel/main.c:390
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "您想要啟動面板嗎？如果要的話，請確認在登出時您有儲存工作階段，這樣該面板才能在下一次您登入時自動啟動。"
 
-#: ../panel/main.c:419
-#: ../panel/main.c:433
+#: ../panel/main.c:393
+#: ../panel/main.c:407
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "找不到執行中的 %s 實體"
 
-#: ../panel/panel-application.c:219
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "未能啟動轉移應用程式"
 
-#: ../panel/panel-application.c:1597
+#: ../panel/panel-application.c:1666
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "若您未透過工作階段管理程式啟動 X。只要點擊「退出」就會關閉 X 伺服器。"
 
-#: ../panel/panel-application.c:1598
+#: ../panel/panel-application.c:1667
 msgid "Are you sure you want to quit the panel?"
 msgstr "您確定要退出該面板嗎？"
 
-#: ../panel/panel-application.c:1606
+#: ../panel/panel-application.c:1675
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "未能執行指令 \"%s\""
@@ -230,36 +213,35 @@ msgstr "指定了無效的插件事件語法。請使用 PLUGIN-NAME:NAME[:TYPE:
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "無效的暗示類型「%s」。有效的類型為真假值 (bool)、倍精度 (double)、整數 (int)、字串 (string)、單位 (unit)。"
 
-#: ../panel/panel-dialogs.c:76
+#: ../panel/panel-dialogs.c:77
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce 桌面環境的面板"
 
-#: ../panel/panel-dialogs.c:81
+#: ../panel/panel-dialogs.c:82
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2010."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:152
+#: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "加入新項目"
 
-#: ../panel/panel-dialogs.c:136
+#: ../panel/panel-dialogs.c:166
 msgid "Please choose a panel for the new plugin:"
 msgstr "請為新插件選擇面板："
 
-#. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147
-#: ../panel/panel-preferences-dialog.c:775
+#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-preferences-dialog.c:790
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
 
-#: ../panel/panel-dialogs.c:183
+#: ../panel/panel-dialogs.c:226
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "因為面板正在以 kiosk 模式執行中，您不被允許以一般使用者身份變更面板的組態"
 
-#: ../panel/panel-dialogs.c:185
+#: ../panel/panel-dialogs.c:228
 msgid "Modifying the panel is not allowed"
 msgstr "修改面板不被允許"
 
@@ -272,7 +254,7 @@ msgid "Add new plugins to the panel"
 msgstr "加入新插件至面板"
 
 #: ../panel/panel-item-dialog.c:214
-#: ../plugins/launcher/launcher-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
 msgstr "搜尋(_S)："
 
@@ -280,51 +262,51 @@ msgstr "搜尋(_S)："
 msgid "Enter search phrase here"
 msgstr "在這裡輸入搜尋詞語"
 
-#: ../panel/panel-plugin-external.c:426
+#: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr "插件「%s」無預期退出面板，您想要重新啟動它嗎？"
 
-#: ../panel/panel-plugin-external.c:428
+#: ../panel/panel-plugin-external.c:431
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "該插件在 %d 秒內重新啟動超過一次。若您按下「執行」，面板將試著重新啟動該插件，否則它將永久自面板上移除。"
 
-#: ../panel/panel-preferences-dialog.c:460
+#: ../panel/panel-preferences-dialog.c:456
 msgid "Automatic"
 msgstr "自動"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:479
+#: ../panel/panel-preferences-dialog.c:475
 #, c-format
 msgid "Screen %d"
 msgstr "螢幕 %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:505
+#: ../panel/panel-preferences-dialog.c:501
 #, c-format
 msgid "Monitor %d"
 msgstr "顯示器 %d"
 
-#: ../panel/panel-preferences-dialog.c:836
+#: ../panel/panel-preferences-dialog.c:856
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "面板與插件組態將被永久移除"
 
-#: ../panel/panel-preferences-dialog.c:837
+#: ../panel/panel-preferences-dialog.c:857
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "您確定要移除面板 %d 嗎？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:942
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:925
+#: ../panel/panel-preferences-dialog.c:947
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -335,7 +317,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:937
+#: ../panel/panel-preferences-dialog.c:959
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "內部名稱：%s-%d"
@@ -381,156 +363,164 @@ msgid "D_isplay"
 msgstr "顯示(_I)"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
+msgid "Deskbar"
+msgstr "桌面列"
+
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
 msgstr "不要保留邊緣空間(_R)"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "Edit the currently selected item"
 msgstr "編輯目前所選的項目"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "啟用視窗管理員對於面板內不透明設定的混成功能。"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "General"
 msgstr "一般"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Ite_ms"
 msgstr "項目(_M)"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "長度 (%)(_E)："
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:20
+msgid "M_ode:"
+msgstr "模式(_O)："
+
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "測量"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Move currently selected item down by one row"
 msgstr "將目前所選的項目向下移動一列"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Move currently selected item up by one row"
 msgstr "將目前所選的項目向上移動一列"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
 msgstr "無 (使用系統樣式)"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid "Num_ber of rows:"
+msgstr "列數(_B)："
+
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
 msgstr "輸入(_U)："
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Opacity"
 msgstr "不透明度"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Pick a Panel Color"
 msgstr "挑選面板顏色"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Remove currently selected item"
 msgstr "移除目前所選的項目"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Remove the currently selected panel"
 msgstr "移除目前所選的面板"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "Row _Size (pixels):"
+msgstr "列大小 (像素)(_S)："
+
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
 msgstr "選取背景影像"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge."
 msgstr "如果你想讓最大化視窗覆蓋面板後的區域，請選取此選項。這只對於附在螢幕邊緣的面板有效。"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "選取此選項以在插件需要更多空間時自動增長面板。"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "選取此選項以將面板擴展至多個螢幕。"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "選取此選項以隱藏面板的控制把並且鎖住其位置。"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr "選取此選項以在指標不在面板上時隱藏面板。這只對於附在螢幕邊緣的面板有效。"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Show about information of the currently selected item"
 msgstr "顯示關於目前所選項目的資訊"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Solid color"
 msgstr "填滿色彩"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Span mo_nitors"
 msgstr "跨越螢幕(_N)"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "當指標停在面板上時的透明度，0 代表完全透明，100 代表完全不透明。"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr "當指標沒有停在面板上時的透明度，0 代表完全透明，100 代表完全不透明。"
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Vertical"
 msgstr "垂直"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Alpha:"
 msgstr "_Alpha："
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Enter:"
 msgstr "進入(_E)："
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_File:"
 msgstr "檔案(_F)："
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Leave:"
 msgstr "退出(_L)："
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Lock panel"
 msgstr "鎖住面板(_L)"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
-msgid "_Orientation:"
-msgstr "方向(_O)："
-
-#: ../panel/panel-preferences-dialog.glade.h:50
-msgid "_Size (pixels):"
-msgstr "大小 (像素)(_S)："
-
-#: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/separator/separator-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "樣式(_S)："
 
@@ -762,7 +752,7 @@ msgid "Turning off computer in %d seconds."
 msgstr "%d 秒內關閉電腦。"
 
 #: ../plugins/actions/actions.c:600
-#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "分隔符"
@@ -772,9 +762,9 @@ msgstr "分隔符"
 msgid "Failed to run action \"%s\""
 msgstr "無法執行動作「%s」"
 
-#: ../plugins/actions/actions.c:1027
-msgid "John Doo"
-msgstr "John Doo"
+#: ../plugins/actions/actions.c:1028
+msgid "John Doe"
+msgstr "John Doe"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -851,23 +841,23 @@ msgstr "圖示(_I)："
 msgid "_Show button title"
 msgstr "顯示按鈕標題(_S)"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:486
-#: ../plugins/directorymenu/directorymenu.c:369
+#: ../plugins/applicationsmenu/applicationsmenu.c:528
+#: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "選取圖示"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:525
-#: ../plugins/applicationsmenu/applicationsmenu.c:766
-#: ../plugins/launcher/launcher.c:2289
+#: ../plugins/applicationsmenu/applicationsmenu.c:567
+#: ../plugins/applicationsmenu/applicationsmenu.c:808
+#: ../plugins/launcher/launcher.c:2299
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」。"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1028
+#: ../plugins/applicationsmenu/applicationsmenu.c:1073
 msgid "No applications found"
 msgstr "找不到應用程式"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1051
+#: ../plugins/applicationsmenu/applicationsmenu.c:1096
 msgid "Failed to load the applications menu"
 msgstr "未能載入應用程式選單"
 
@@ -987,8 +977,8 @@ msgstr "顯示格欄(_F)"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "要插入檔案名稱內用來描述日期與時間的格式。舉例來說，%Y 會被年份替換，%m 會被月份替換，而 %d 則是日期。請查看日期公用程式的文件以瞭解額外資訊。"
+msgid "The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "要插入面板的格式，用來描述日期與時間的部份。舉例來說，%Y 會被年份替換，%m 會被月份替換，而 %d 則是日。請查看日期公用程式的文件以瞭解更多資訊。"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1233,42 +1223,42 @@ msgstr "十二"
 msgid "What time is it?"
 msgstr "現在幾點？"
 
-#: ../plugins/directorymenu/directorymenu.c:243
+#: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Directory Menu"
 msgstr "目錄選單"
 
-#: ../plugins/directorymenu/directorymenu.c:550
+#: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "無法啟動應用程式「%s」"
 
-#: ../plugins/directorymenu/directorymenu.c:581
+#: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "無法查詢「%s」的內容類型"
 
-#: ../plugins/directorymenu/directorymenu.c:590
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "找不到「%s」的預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:605
+#: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "無法為「%s」啟動預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:698
+#: ../plugins/directorymenu/directorymenu.c:717
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "未能執行分類「%s」的偏好應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:771
+#: ../plugins/directorymenu/directorymenu.c:790
 msgid "Open Folder"
 msgstr "開啟資料夾"
 
-#: ../plugins/directorymenu/directorymenu.c:782
+#: ../plugins/directorymenu/directorymenu.c:801
 msgid "Open in Terminal"
 msgstr "在終端機內開啟"
 
@@ -1306,99 +1296,119 @@ msgstr "檔案樣式(_F)："
 msgid "Open launcher menu"
 msgstr "開啟啟動器選單"
 
-#: ../plugins/launcher/launcher.c:1568
+#: ../plugins/launcher/launcher.c:1574
 msgid "Unnamed Item"
 msgstr "未命名項目"
 
-#: ../plugins/launcher/launcher.c:1709
+#: ../plugins/launcher/launcher.c:1719
 msgid "No items"
 msgstr "無項目"
 
-#: ../plugins/launcher/launcher-dialog.c:744
+#: ../plugins/launcher/launcher-dialog.c:807
+msgid "Failed to open desktop item editor"
+msgstr "未能開啟桌面項目編輯器"
+
+#: ../plugins/launcher/launcher-dialog.c:866
 msgid "If you delete an item, it will be permanently removed"
 msgstr "若您刪除項目，它將被永遠移除"
 
-#: ../plugins/launcher/launcher-dialog.c:745
+#: ../plugins/launcher/launcher-dialog.c:867
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "您確定要移除「%s」嗎？"
 
-#: ../plugins/launcher/launcher-dialog.c:746
+#: ../plugins/launcher/launcher-dialog.c:868
 msgid "Unnamed item"
 msgstr "未命名項目"
 
-#: ../plugins/launcher/launcher-dialog.c:791
-msgid "Failed to open desktop item editor"
-msgstr "未能開啟桌面項目編輯器"
+#: ../plugins/launcher/launcher-dialog.glade.h:1
+msgid "Add Appli_cation"
+msgstr "加入應用程式(_C)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
 msgstr "加入新的空項目"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Add one or more existing items to the launcher"
 msgstr "加入一個或多個現存的項目至啟動器"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Advanced"
 msgstr "進階"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:6
+msgid "D_elete Item"
+msgstr "刪除項目(_E)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
 msgstr "預設"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "Delete the currently selected item"
 msgstr "刪除目前所選的項目"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Disable t_ooltips"
 msgstr "停用提示框(_O)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "East"
 msgstr "東方"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Inside Button"
 msgstr "按鈕內"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
 msgstr "啟動器"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:15
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+msgid "New _Application"
+msgstr "新增應用程式(_A)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "New _Link"
+msgstr "新增連結(_L)"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
 msgstr "北方"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr "選取此選項以停用移動至面板按鈕上方或選單項目上方所顯示的提示框"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "選取此項目將點擊的選單項目移至面板。"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
 msgstr "顯示標籤而不是圖示(_L)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
 msgstr "在面板內顯示最近使用的項目(_U)"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "South"
 msgstr "南方"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "West"
 msgstr "西方"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "_Arrow button position:"
 msgstr "箭號按鈕位置(_A)："
+
+#: ../plugins/launcher/launcher-dialog.glade.h:27
+msgid "_Edit Item"
+msgstr "編輯項目(_E)"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
@@ -1414,7 +1424,7 @@ msgid "Unable to open the workspace settings"
 msgstr "無法開啟工作區設定值"
 
 #: ../plugins/pager/pager-buttons.c:561
-#: ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "工作區 %d"
@@ -1457,15 +1467,11 @@ msgstr "點"
 msgid "Handle"
 msgstr "控制把"
 
-#: ../plugins/separator/separator-dialog.glade.h:4
-msgid "New Line"
-msgstr "新列"
-
-#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
 msgstr "透明"
 
-#: ../plugins/separator/separator-dialog.glade.h:7
+#: ../plugins/separator/separator-dialog.glade.h:6
 msgid "_Expand"
 msgstr "延展(_E)"
 
@@ -1473,15 +1479,15 @@ msgstr "延展(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "在面板項目間加入分隔符或空格"
 
-#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
 msgstr "還原最小化的視窗"
 
-#: ../plugins/showdesktop/showdesktop.c:201
+#: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
 msgstr "最小化所有開啟視窗並顯示桌面"
 
-#: ../plugins/showdesktop/showdesktop.c:204
+#: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
 msgstr "顯示桌面"
@@ -1562,79 +1568,75 @@ msgid "Restore minimized windows to current _workspace"
 msgstr "還原最小化視窗至目前工作區(_W)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "Ro_tate buttons in vertical panel"
-msgstr "旋轉垂直面板上的按鈕(_T)"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _flat buttons"
 msgstr "顯示扁平按鈕(_F)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "顯示控制把(_F)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "顯示按鈕標籤(_L)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
 msgstr "只顯示最小化的視窗(_M)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
 msgstr "顯示所有工作區或 viewport 內的視窗(_A)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from all mo_nitors"
 msgstr "顯示所有螢幕的視窗(_N)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr "排序(_O)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr "時間戳記"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
 msgstr "當空間受到限制時"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
 msgstr "視窗按鈕"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr "視窗群組(_G)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
 msgstr "視窗標題"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "_Switch windows using the mouse wheel"
 msgstr "用滑鼠滾輪切換視窗(_S)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3199
+#: ../plugins/tasklist/tasklist-widget.c:3177
 msgid "Mi_nimize All"
 msgstr "最小化全部(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3208
+#: ../plugins/tasklist/tasklist-widget.c:3186
 msgid "Un_minimize All"
 msgstr "取消"
 
-#: ../plugins/tasklist/tasklist-widget.c:3214
+#: ../plugins/tasklist/tasklist-widget.c:3192
 msgid "Ma_ximize All"
 msgstr "最大化全部(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3223
+#: ../plugins/tasklist/tasklist-widget.c:3201
 msgid "_Unmaximize All"
 msgstr "取消最大化(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3233
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "_Close All"
 msgstr "關閉全部(_C)"
 
@@ -1642,28 +1644,28 @@ msgstr "關閉全部(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "使用按鈕在開啟視窗間切換"
 
-#: ../plugins/windowmenu/windowmenu.c:652
+#: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../plugins/windowmenu/windowmenu.c:1243
+#: ../plugins/windowmenu/windowmenu.c:1246
 msgid "No Windows"
 msgstr "無視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1258
+#: ../plugins/windowmenu/windowmenu.c:1261
 msgid "Urgent Windows"
 msgstr "緊急視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1300
+#: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
 msgstr "新增工作區"
 
-#: ../plugins/windowmenu/windowmenu.c:1320
+#: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作區「%s」"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作區 %d"
@@ -1705,6 +1707,26 @@ msgstr "視窗選單"
 msgid "Switch between open windows using a menu"
 msgstr "使用選單在開啟視窗間切換"
 
+#~ msgid "_Read Online"
+#~ msgstr "線上閱讀(_R)"
+
+#~ msgid ""
+#~ "You can read the user manual online. This manual may however not exactly "
+#~ "match your panel version."
+#~ msgstr "您可以線上閱讀使用者手冊。該手冊有可能不與您的面板版本吻合。"
+
+#~ msgid "The user manual is not installed on your computer"
+#~ msgstr "您的電腦上沒有安裝使用者手冊"
+
+#~ msgid "Failed to open the documentation browser"
+#~ msgstr "未能開啟文件瀏覽器"
+
+#~ msgid "_Orientation:"
+#~ msgstr "方向(_O)："
+
+#~ msgid "Ro_tate buttons in vertical panel"
+#~ msgstr "旋轉垂直面板上的按鈕(_T)"
+
 #~ msgid "_First button:"
 #~ msgstr "第一個按鈕(_F)："
 
@@ -1719,9 +1741,6 @@ msgstr "使用選單在開啟視窗間切換"
 
 #~ msgid "Failed to remove the desktop file from the config directory"
 #~ msgstr "未能從組態目錄移除桌面檔"
-
-#~ msgid "_Number of rows:"
-#~ msgstr "列數(_N)："
 
 #~ msgid "Create a new launcher on the Xfce Panel"
 #~ msgstr "在 Xfce 面板上建立新的啟動器"
