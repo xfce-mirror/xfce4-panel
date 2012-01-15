@@ -2,15 +2,15 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Saleh Alhathal <hathalsal@hotmail.com>, 2004.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-15 11:24+0000\n"
-"PO-Revision-Date: 2011-01-11 21:51-0000\n"
-"Last-Translator: كريم أولاد الشلحة <herr.linux88@gmail.com>\n"
+"PO-Revision-Date: 2012-01-15 15:27-0000\n"
+"Last-Translator: كريم اولاد الشلحة <herr.linux88@gmail.com>\n"
 "Language-Team: Arabeyes Translation & Documentation <admin@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,8 +18,7 @@ msgstr ""
 "Language: \n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
 msgstr "أضف مطلق جديد إلى الشريط في معلومات لملف سطح المكتب هذا"
 
 #: ../panel-desktop-handler.desktop.in.h:2
@@ -31,7 +30,8 @@ msgid "Customize the panel"
 msgstr "خصص الشريط"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
+#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-window.c:2340
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "شريط"
@@ -58,17 +58,20 @@ msgid "Pane_l"
 msgstr "الش_ريط"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
+#: ../panel/panel-window.c:2352
 msgid "Add _New Items..."
 msgstr "أضف عناصر _جديدة..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
+#: ../libxfce4panel/xfce-panel-plugin.c:1255
+#: ../panel/panel-window.c:2363
 msgid "Panel Pr_eferences..."
 msgstr "تفضيلات الشري_ط..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
+#: ../libxfce4panel/xfce-panel-plugin.c:1272
+#: ../panel/panel-window.c:2379
 msgid "Log _Out"
 msgstr "تسجيل الخروج"
 
@@ -76,7 +79,8 @@ msgstr "تسجيل الخروج"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "أظهر حوار 'تفضيلات الشريط'"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "PANEL-NUMBER"
 msgstr "رقم-الشريط"
 
@@ -98,9 +102,7 @@ msgstr "إسم-الملجق"
 
 #: ../panel/main.c:82
 msgid "Restart the running panel instance"
-msgstr ""
-"\n"
-"تمرير رسائل لمرّة تعمل من أوبن‌بوكس:\n"
+msgstr "إعادة تشغيل الشريط المثيل الذي يوجد حاليا قيد التشغيل"
 
 #: ../panel/main.c:83
 msgid "Quit the running panel instance"
@@ -174,12 +176,11 @@ msgid "Failed to send D-Bus message"
 msgstr "فشل إرسال رسالة D-Bus"
 
 #: ../panel/main.c:390
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "هل تريد تشغيل الشريط؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, ليتمكن الشريط من البدء تلقائيا عنذ الولوج التالي."
 
-#: ../panel/main.c:393 ../panel/main.c:407
+#: ../panel/main.c:393
+#: ../panel/main.c:407
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "لم يتم العثور على مثيل لـ %s قيد التشغيل"
@@ -189,9 +190,7 @@ msgid "Failed to launch the migration application"
 msgstr "فشل إطلاق تطبيق الهجرة"
 
 #: ../panel/panel-application.c:1666
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
+msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "لقد قمت بتشغيل X بدون مدير الجلسة. إضغط على الخروج لإعلاق خادم X."
 
 #: ../panel/panel-application.c:1667
@@ -204,14 +203,12 @@ msgid "Failed to execute command \"%s\""
 msgstr "فشل تنفيد الأمر \"%s\""
 
 #: ../panel/panel-dbus-client.c:208
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
 #: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:77
@@ -228,7 +225,8 @@ msgstr ""
 "خالد حسني\t<khaledhosny@eglug.org>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:152 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:152
+#: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "أضف عنصر جديد"
 
@@ -236,15 +234,14 @@ msgstr "أضف عنصر جديد"
 msgid "Please choose a panel for the new plugin:"
 msgstr "المرجوا إختيار شريط للملحق الجديد:"
 
-#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:790
+#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-preferences-dialog.c:790
 #, c-format
 msgid "Panel %d"
 msgstr "الشريط %d"
 
 #: ../panel/panel-dialogs.c:226
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:228
@@ -275,10 +272,7 @@ msgstr "غادر الملحق \"%s\" الشريط بشكل غير متوقع, ه
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "تم إعادة تشغيل الملحق اكثر من مرة في %d ثانية الأخيرة. إذا كنت تضغط على تنفيذ سيتم إعادة تشغيله من طرف الشريط وإلا سيتم حذفه نهائيا من الشريط."
 
 #: ../panel/panel-preferences-dialog.c:456
@@ -345,9 +339,7 @@ msgid "Add new item to this panel"
 msgstr "أضف أشياء إلى الشريط"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -393,8 +385,7 @@ msgid "Edit the currently selected item"
 msgstr "عدّل الإجراء المختار حالياً"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
+msgid "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:15
@@ -483,15 +474,11 @@ msgid "Select A Background Image"
 msgstr "اختر صورة الخلفية"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
-msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
+msgid "Select this option if you want maximized windows to cover the area behind the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:37
@@ -499,14 +486,11 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:38
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
+msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:39
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:40
@@ -524,15 +508,11 @@ msgid "Span mo_nitors"
 msgstr "<i><b><span size=\"small\">مثل، %s</span></b></i>"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:44
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:45
@@ -606,12 +586,11 @@ msgid "Welcome to the first start of the panel"
 msgstr "فشل في إعادة تشغيل نفسه"
 
 #: ../migrate/main.c:125
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
 msgstr ""
 
-#: ../migrate/main.c:127 ../migrate/main.c:136
+#: ../migrate/main.c:127
+#: ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
 msgstr ""
 
@@ -693,8 +672,7 @@ msgid "Session Menu"
 msgstr "قائمة النافذة"
 
 #: ../plugins/actions/actions-dialog.glade.h:7
-msgid ""
-"Show a confirmation dialog with a 30 second timeout for some of the actions."
+msgid "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:8
@@ -900,9 +878,7 @@ msgid "Select A Menu File"
 msgstr "انتقي ملف قائمة"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
@@ -1092,11 +1068,7 @@ msgstr "إظهار فضائل الذكر"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
-"information."
+msgid "The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1399,10 +1371,7 @@ msgid "Show a directory tree in a menu"
 msgstr "تصفح شجرة أدلة من القائمة (المؤلف: PCMan)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1530,9 +1499,7 @@ msgid "North"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
@@ -1571,7 +1538,8 @@ msgstr ""
 msgid "Program launcher with optional menu"
 msgstr "مطلق البرامج مع قائمة اختيارية"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353
+#: ../plugins/pager/pager-dialog.glade.h:8
 #, fuzzy
 msgid "Workspace _Settings..."
 msgstr "إعدادات اللغة"
@@ -1581,7 +1549,8 @@ msgstr "إعدادات اللغة"
 msgid "Unable to open the workspace settings"
 msgstr "فشل فتح سِجِلّ التنقيح: %s\n"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
+#: ../plugins/pager/pager-buttons.c:561
+#: ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "مساحة عمل %d"
@@ -1598,9 +1567,7 @@ msgid "Number of _rows:"
 msgstr "الرقم التسلسلي:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1674,9 +1641,7 @@ msgstr "أستخدم _تنبية بدأ التشغيل"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
 msgstr ""
 
 #: ../plugins/systray/systray.c:870
