@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-01 16:36+0000\n"
+"POT-Creation-Date: 2012-01-15 11:24+0000\n"
 "PO-Revision-Date: 2011-01-11 21:51-0000\n"
 "Last-Translator: كريم أولاد الشلحة <herr.linux88@gmail.com>\n"
 "Language-Team: Arabeyes Translation & Documentation <admin@arabeyes.org>\n"
@@ -31,220 +31,177 @@ msgid "Customize the panel"
 msgstr "خصص الشريط"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:26 ../panel/panel-window.c:2275
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "شريط"
 
-#: ../common/panel-utils.c:157
-msgid "_Read Online"
-msgstr "أقرء في _ويب"
-
-#: ../common/panel-utils.c:158
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr "يمكنك قراءة دليل المستخدم عبر الشبكة.هذا دليل يمكن أن لا يطابق تماما إصدار شريطك."
-
-#: ../common/panel-utils.c:160
-msgid "The user manual is not installed on your computer"
-msgstr "دليل المستخدم غير مثبت في حاسوبك"
-
-#. display an error message to the user
-#: ../common/panel-utils.c:175
-msgid "Failed to open the documentation browser"
-msgstr "فشل تحميل متصفح الوثائق"
-
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:919
-#: ../panel/panel-preferences-dialog.c:1056
-#, fuzzy, c-format
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1078
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "هل انت متأكد من أنك تريد حذف \"%s\" ؟"
+msgstr "هل انت متأكد من أنك تريد حذف \"%s\"؟"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:924
-#: ../panel/panel-preferences-dialog.c:1059
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../panel/panel-preferences-dialog.c:1081
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "إدا قمت بحذف العنصر من الشريط, سيتم فقدانه نهائيا."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1084
+#: ../libxfce4panel/xfce-panel-plugin.c:1202
 msgid "_Move"
 msgstr "ا_نقل"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1118
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1236
 msgid "Pane_l"
-msgstr "الشريط %d"
+msgstr "الش_ريط"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1126 ../panel/panel-window.c:2287
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
 msgid "Add _New Items..."
-msgstr "أ_ضِف شريط أدوات جديد"
+msgstr "أضف عناصر _جديدة..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1137 ../panel/panel-window.c:2298
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
 msgid "Panel Pr_eferences..."
-msgstr "لوحة ألوان Plus"
+msgstr "تفضيلات الشري_ط..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1154 ../panel/panel-window.c:2314
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
 msgid "Log _Out"
 msgstr "تسجيل الخروج"
 
-#: ../panel/main.c:79
-#, fuzzy
+#: ../panel/main.c:78
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "أظهر حوار الشّريط لتشغيل التّطبيقات"
+msgstr "أظهر حوار 'تفضيلات الشريط'"
 
-#: ../panel/main.c:79 ../panel/main.c:80
-#, fuzzy
+#: ../panel/main.c:78 ../panel/main.c:79
 msgid "PANEL-NUMBER"
-msgstr "الرقم التسلسلي:"
+msgstr "رقم-الشريط"
+
+#: ../panel/main.c:79
+msgid "Show the 'Add New Items' dialog"
+msgstr "أظهر حوار 'أضف عناصر جديدة'"
 
 #: ../panel/main.c:80
-#, fuzzy
-msgid "Show the 'Add New Items' dialog"
-msgstr "أضف شيء جديد"
+msgid "Save the panel configuration"
+msgstr "حفظ إعدادات الشريط"
 
 #: ../panel/main.c:81
-#, fuzzy
-msgid "Save the panel configuration"
-msgstr "ضبط آخر ما قيل"
-
-#: ../panel/main.c:82
-#, fuzzy
 msgid "Add a new plugin to the panel"
-msgstr "فشل في إضافة وصلة أخرى"
+msgstr "أضف ملحق جديد إلى الشريط"
+
+#: ../panel/main.c:81
+msgid "PLUGIN-NAME"
+msgstr "إسم-الملجق"
 
 #: ../panel/main.c:82
-#, fuzzy
-msgid "PLUGIN-NAME"
-msgstr "الاسم العمومي:"
-
-#: ../panel/main.c:83
-#, fuzzy
 msgid "Restart the running panel instance"
 msgstr ""
 "\n"
 "تمرير رسائل لمرّة تعمل من أوبن‌بوكس:\n"
 
-#: ../panel/main.c:84
-#, fuzzy
+#: ../panel/main.c:83
 msgid "Quit the running panel instance"
-msgstr "الخروج من نسخة البرنامج الحالية"
+msgstr "خروج من مثيل الشريط"
+
+#: ../panel/main.c:84
+msgid "Do not wait for a window manager on startup"
+msgstr "عدم إنتظار مدير النوافذ عنذ بدء التشغيل"
 
 #: ../panel/main.c:85
-msgid "Do not wait for a window manager on startup"
-msgstr ""
-
-#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
-#, fuzzy
 msgid "Print version information and exit"
-msgstr "اظهر نوع الإصدار ثم أخرج"
+msgstr "طباعة معلومات الإصدار و الخروج"
 
 #. parse context options
-#: ../panel/main.c:250
+#: ../panel/main.c:232
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[الحجج...]"
 
-#: ../panel/main.c:257
-#, fuzzy, c-format
+#: ../panel/main.c:239
+#, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "لمساعدة مساعدة تمهيدية, اطبع 'help'."
+msgstr "أكتب \"%s --help\" للإستعمال."
 
-#: ../panel/main.c:276
+#: ../panel/main.c:258
 msgid "The Xfce development team. All rights reserved."
 msgstr "اكسفس فريق التطوير.جميع الحقوق محفوظة."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:259
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "أرسل من قضلك الأخطاء الى<%s>."
 
-#: ../panel/main.c:328
-#, fuzzy
+#: ../panel/main.c:310
 msgid "There is already a running instance"
-msgstr "StarDict يعمل حاليا و يستعمل العملية الحالية"
+msgstr "حاليا يوجد مثيل قيد التشغيل"
 
 #. spawn ourselfs again
-#: ../panel/main.c:378
-#, fuzzy
+#: ../panel/main.c:352
 msgid "Restarting..."
-msgstr "يجري إعادة تشغيل م‌ع‌ج..."
+msgstr "إعادة التشغيل..."
 
-#: ../panel/main.c:393
-#, fuzzy
+#: ../panel/main.c:367
 msgid "Failed to show the preferences dialog"
-msgstr "الشعار الذي يظهر على مربع الحوار"
+msgstr "فشل عرض حوار التفضيلات"
 
-#: ../panel/main.c:395
-#, fuzzy
+#: ../panel/main.c:369
 msgid "Failed to show the add new items dialog"
-msgstr "أضف شيء جديد"
+msgstr "فشل عرض حوار أضف عناصر جديدة"
 
-#: ../panel/main.c:397
-#, fuzzy
+#: ../panel/main.c:371
 msgid "Failed to save the panel configuration"
-msgstr "فشل في حفظ الإجراءات للقرص."
+msgstr "فشل حفظ إعدادات الشريط"
 
-#: ../panel/main.c:399
-#, fuzzy
+#: ../panel/main.c:373
 msgid "Failed to add a plugin to the panel"
-msgstr "فشل في إضافة وصلة أخرى"
+msgstr "فشل إضافة ملحق إلى الشريط"
 
-#: ../panel/main.c:401
-#, fuzzy
+#: ../panel/main.c:375
 msgid "Failed to restart the panel"
-msgstr "فشل في إعادة تشغيل نفسه"
+msgstr "فشل عادة تشغيل الشريط"
 
-#: ../panel/main.c:403
-#, fuzzy
+#: ../panel/main.c:377
 msgid "Failed to quit the panel"
-msgstr "أضف فاصلا للشريط"
+msgstr "فشل الخروج من الشريط"
 
-#: ../panel/main.c:405
-#, fuzzy
+#: ../panel/main.c:379
 msgid "Failed to send D-Bus message"
-msgstr "أرسل بريد للعنوان “%s”"
+msgstr "فشل إرسال رسالة D-Bus"
 
-#: ../panel/main.c:416
+#: ../panel/main.c:390
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "هل تريد تشغيل الشريط؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, ليتمكن الشريط من البدء تلقائيا عنذ الولوج التالي."
 
-#: ../panel/main.c:419 ../panel/main.c:433
+#: ../panel/main.c:393 ../panel/main.c:407
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "لم يتم العثور على مثيل لـ %s قيد التشغيل"
 
-#: ../panel/panel-application.c:219
-#, fuzzy
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
-msgstr "شريط يحتوي على أزرار لفتح تطبيقات"
+msgstr "فشل إطلاق تطبيق الهجرة"
 
-#: ../panel/panel-application.c:1597
+#: ../panel/panel-application.c:1666
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
+msgstr "لقد قمت بتشغيل X بدون مدير الجلسة. إضغط على الخروج لإعلاق خادم X."
 
-#: ../panel/panel-application.c:1598
-#, fuzzy
+#: ../panel/panel-application.c:1667
 msgid "Are you sure you want to quit the panel?"
-msgstr "هل تريد فعلا حذف جهة الإتصال %s؟"
+msgstr "هل تريد حقا الخروج من الشريط؟"
 
-#: ../panel/panel-application.c:1606
-#, fuzzy, c-format
+#: ../panel/panel-application.c:1675
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "لقد فشل تنفيذ الأمر \"%s\":"
+msgstr "فشل تنفيد الأمر \"%s\""
 
 #: ../panel/panel-dbus-client.c:208
 msgid ""
@@ -257,13 +214,11 @@ msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:76
-#, fuzzy
+#: ../panel/panel-dialogs.c:77
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "معلومات حول بيئة سطح مكتب Xfce"
+msgstr "شريط بيئة سطح المكتب إكسفسي"
 
-#: ../panel/panel-dialogs.c:81
-#, fuzzy
+#: ../panel/panel-dialogs.c:82
 msgid "translator-credits"
 msgstr ""
 "فريق عربآيز للترجمة http://www.arabeyes.org:\n"
@@ -273,101 +228,94 @@ msgstr ""
 "خالد حسني\t<khaledhosny@eglug.org>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
+#: ../panel/panel-dialogs.c:152 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
-msgstr "أ_ضِف شريط أدوات جديد"
+msgstr "أضف عنصر جديد"
 
-#: ../panel/panel-dialogs.c:136
+#: ../panel/panel-dialogs.c:166
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "المرجوا إختيار شريط للملحق الجديد:"
 
-#. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:775
+#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:790
 #, c-format
 msgid "Panel %d"
 msgstr "الشريط %d"
 
-#: ../panel/panel-dialogs.c:183
+#: ../panel/panel-dialogs.c:226
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:185
-#, fuzzy
+#: ../panel/panel-dialogs.c:228
 msgid "Modifying the panel is not allowed"
-msgstr "العنصر <%s> غير مسموح به تحت <%s>"
+msgstr "غير مسموح بتحرير الشريط"
 
 #: ../panel/panel-item-dialog.c:188
-#, fuzzy
 msgid "Add New Items"
-msgstr "أ_ضِف شريط أدوات جديد"
+msgstr "اضف عناصر جديدة"
 
 #: ../panel/panel-item-dialog.c:190
-#, fuzzy
 msgid "Add new plugins to the panel"
-msgstr "فشل في إضافة وصلة أخرى"
+msgstr "أضف ملحقات جديدة إلى الشريط"
 
 #: ../panel/panel-item-dialog.c:214
-#: ../plugins/launcher/launcher-dialog.glade.h:23
-#, fuzzy
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
-msgstr "ا_بحث:"
+msgstr "بحث:"
 
 #: ../panel/panel-item-dialog.c:222
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "أدخل جملة البحث هنا"
 
-#: ../panel/panel-plugin-external.c:426
+#: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "غادر الملحق \"%s\" الشريط بشكل غير متوقع, هل تريد إعادة تشغيله؟"
 
-#: ../panel/panel-plugin-external.c:428
+#: ../panel/panel-plugin-external.c:431
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
+msgstr "تم إعادة تشغيل الملحق اكثر من مرة في %d ثانية الأخيرة. إذا كنت تضغط على تنفيذ سيتم إعادة تشغيله من طرف الشريط وإلا سيتم حذفه نهائيا من الشريط."
 
-#: ../panel/panel-preferences-dialog.c:460
+#: ../panel/panel-preferences-dialog.c:456
 msgid "Automatic"
 msgstr "تلقائي"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:479
-#, fuzzy, c-format
+#: ../panel/panel-preferences-dialog.c:475
+#, c-format
 msgid "Screen %d"
 msgstr "الشاشة %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:505
-#, fuzzy, c-format
+#: ../panel/panel-preferences-dialog.c:501
+#, c-format
 msgid "Monitor %d"
-msgstr "المرقاب الافتراضي"
+msgstr "مراقب %d"
 
-#: ../panel/panel-preferences-dialog.c:836
-#, fuzzy
+#: ../panel/panel-preferences-dialog.c:856
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "الائخة المختارة وجميع خياراتها سيتم حذفها."
+msgstr "سيتم حذف نهائيا إعدادات الشريط و الملحقات"
 
-#: ../panel/panel-preferences-dialog.c:837
+#: ../panel/panel-preferences-dialog.c:857
 #, fuzzy, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "هل تريد فعلا حذف جهة الإتصال %s؟"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:942
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:925
+#: ../panel/panel-preferences-dialog.c:947
 #, fuzzy, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -376,7 +324,7 @@ msgstr "خطأ داخلي أثناء الحصول على اسم الحزمة"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:937
+#: ../panel/panel-preferences-dialog.c:959
 #, fuzzy, c-format
 msgid "Internal name: %s-%d"
 msgstr "الاسم العمومي:"
@@ -431,187 +379,195 @@ msgid "D_isplay"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:11
-msgid "Don't _reserve space on borders"
+msgid "Deskbar"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:12
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Don't _reserve space on borders"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 #, fuzzy
 msgid "Edit the currently selected item"
 msgstr "عدّل الإجراء المختار حالياً"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 #, fuzzy
 msgid "General"
 msgstr "عام"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Horizontal"
 msgstr "أفقي"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 #, fuzzy
 msgid "Ite_ms"
 msgstr "%6d.%02d ملي ثانية"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 #, no-c-format
 msgid "L_ength (%):"
 msgstr ""
 
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "M_ode:"
+msgstr ""
+
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:21
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:15
 #, fuzzy
 msgid "Move currently selected item down by one row"
 msgstr "انقل الإجراء المختار حالياً للأسفل بصف واحد"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:16
 #, fuzzy
 msgid "Move currently selected item up by one row"
 msgstr "انقل الإجراء المختار حالياً للأعلى بصف واحد"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
+#, fuzzy
+msgid "Num_ber of rows:"
+msgstr "الرقم التسلسلي:"
+
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Opacity"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:30
 #, fuzzy
 msgid "Pick a Panel Color"
 msgstr "لوحة ألوان Plus"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:31
 #, fuzzy
 msgid "Remove currently selected item"
 msgstr "احذف العنصر المحدد من شريط الأدوات"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:32
 #, fuzzy
 msgid "Remove the currently selected panel"
 msgstr "لغة الخطوط المختارة حاليا"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:33
+#, fuzzy
+msgid "Row _Size (pixels):"
+msgstr "حجم المرئيات:"
+
+#: ../panel/panel-preferences-dialog.glade.h:34
 #, fuzzy
 msgid "Select A Background Image"
 msgstr "اختر صورة الخلفية"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Show about information of the currently selected item"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:41
 #, fuzzy
 msgid "Solid color"
 msgstr "لون (بشفافية)"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:42
 #, fuzzy
 msgid "Span mo_nitors"
 msgstr "<i><b><span size=\"small\">مثل، %s</span></b></i>"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Vertical"
 msgstr "عمودي"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:46
 #, fuzzy
 msgid "_Alpha:"
 msgstr "شفافية مربع الانتقاء"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:48
 #, fuzzy
 msgid "_Enter:"
 msgstr "الدخول إلى السوق"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:49
 #, fuzzy
 msgid "_File:"
 msgstr "_ملف"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:51
 #, fuzzy
 msgid "_Leave:"
 msgstr "_ترك"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:52
 #, fuzzy
 msgid "_Lock panel"
 msgstr "عناصر الشريط"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
-#, fuzzy
-msgid "_Orientation:"
-msgstr "التوجيه"
-
-#: ../panel/panel-preferences-dialog.glade.h:50
-#, fuzzy
-msgid "_Size (pixels):"
-msgstr "حجم المرئيات:"
-
-#: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/separator/separator-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../plugins/separator/separator-dialog.glade.h:7
 #, fuzzy
 msgid "_Style:"
 msgstr "الأ_سلوب:"
@@ -880,7 +836,7 @@ msgid "Turning off computer in %d seconds."
 msgstr ""
 
 #: ../plugins/actions/actions.c:600
-#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 #, fuzzy
 msgid "Separator"
@@ -891,8 +847,8 @@ msgstr "فاصل"
 msgid "Failed to run action \"%s\""
 msgstr "فشل في اطلاق \"%s\""
 
-#: ../plugins/actions/actions.c:1027
-msgid "John Doo"
+#: ../plugins/actions/actions.c:1028
+msgid "John Doe"
 msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.h:2
@@ -983,25 +939,25 @@ msgstr "_ايقونة"
 msgid "_Show button title"
 msgstr "ا_ظهر العنوان على الزر"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:486
-#: ../plugins/directorymenu/directorymenu.c:369
+#: ../plugins/applicationsmenu/applicationsmenu.c:528
+#: ../plugins/directorymenu/directorymenu.c:388
 #, fuzzy
 msgid "Select An Icon"
 msgstr "انتقي أيقونة"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:525
-#: ../plugins/applicationsmenu/applicationsmenu.c:766
-#: ../plugins/launcher/launcher.c:2289
+#: ../plugins/applicationsmenu/applicationsmenu.c:567
+#: ../plugins/applicationsmenu/applicationsmenu.c:808
+#: ../plugins/launcher/launcher.c:2299
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "لقد فشل تنفيذ الأمر \"%s\":"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1028
+#: ../plugins/applicationsmenu/applicationsmenu.c:1073
 #, fuzzy
 msgid "No applications found"
 msgstr "لم يُعثر على أية حزم"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1051
+#: ../plugins/applicationsmenu/applicationsmenu.c:1096
 #, fuzzy
 msgid "Failed to load the applications menu"
 msgstr "أخفق في تحميل البرنامج من الملف %s"
@@ -1137,9 +1093,9 @@ msgstr "إظهار فضائل الذكر"
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. See the documentation of the date utility for additional "
 "information."
 msgstr ""
 
@@ -1395,44 +1351,44 @@ msgstr ""
 msgid "What time is it?"
 msgstr "ماهى الساعة؟"
 
-#: ../plugins/directorymenu/directorymenu.c:243
+#: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #, fuzzy
 msgid "Directory Menu"
 msgstr "قائمة الأدلة"
 
-#: ../plugins/directorymenu/directorymenu.c:550
+#: ../plugins/directorymenu/directorymenu.c:569
 #, fuzzy, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "فشل في اطلاق \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:581
+#: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:590
+#: ../plugins/directorymenu/directorymenu.c:609
 #, fuzzy, c-format
 msgid "No default application found for \"%s\""
 msgstr "لم توجد أي سجلّات لـ%s"
 
-#: ../plugins/directorymenu/directorymenu.c:605
+#: ../plugins/directorymenu/directorymenu.c:624
 #, fuzzy, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "فشل في تغيير البرنامج الإفتراضي لـ \"%s\" الى \"%s\":"
 
-#: ../plugins/directorymenu/directorymenu.c:698
+#: ../plugins/directorymenu/directorymenu.c:717
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:771
+#: ../plugins/directorymenu/directorymenu.c:790
 #, fuzzy
 msgid "Open Folder"
 msgstr "افتح المجلد"
 
-#: ../plugins/directorymenu/directorymenu.c:782
+#: ../plugins/directorymenu/directorymenu.c:801
 #, fuzzy
 msgid "Open in Terminal"
 msgstr "افتح في الطرفية"
@@ -1479,114 +1435,137 @@ msgstr "افتح الملف"
 msgid "Open launcher menu"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1568
+#: ../plugins/launcher/launcher.c:1574
 #, fuzzy
 msgid "Unnamed Item"
 msgstr "عنصر جديد"
 
-#: ../plugins/launcher/launcher.c:1709
+#: ../plugins/launcher/launcher.c:1719
 #, fuzzy
 msgid "No items"
 msgstr "إزالة البنود:"
 
-#: ../plugins/launcher/launcher-dialog.c:744
-msgid "If you delete an item, it will be permanently removed"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.c:745
-#, fuzzy, c-format
-msgid "Are you sure you want to remove \"%s\"?"
-msgstr "هل تريد فعلا حذف جهة الإتصال %s؟"
-
-#: ../plugins/launcher/launcher-dialog.c:746
-#, fuzzy
-msgid "Unnamed item"
-msgstr "عنصر جديد"
-
-#: ../plugins/launcher/launcher-dialog.c:791
+#: ../plugins/launcher/launcher-dialog.c:807
 #, fuzzy
 msgid "Failed to open desktop item editor"
 msgstr "فشل في فتح الشاشة"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.c:866
+msgid "If you delete an item, it will be permanently removed"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:867
+#, fuzzy, c-format
+msgid "Are you sure you want to remove \"%s\"?"
+msgstr "هل تريد فعلا حذف جهة الإتصال %s؟"
+
+#: ../plugins/launcher/launcher-dialog.c:868
+#, fuzzy
+msgid "Unnamed item"
+msgstr "عنصر جديد"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:1
+#, fuzzy
+msgid "Add Appli_cation"
+msgstr "التطبيقات المتوفرة"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 #, fuzzy
 msgid "Add a new empty item"
 msgstr "أضف إجراء مخصص جديد"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Add one or more existing items to the launcher"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 #, fuzzy
 msgid "Advanced"
 msgstr "متقدِم"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:6
+msgid "D_elete Item"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
 msgstr "تلقائي"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 #, fuzzy
 msgid "Delete the currently selected item"
 msgstr "احذف الإجراء المختار حالياً"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 #, fuzzy
 msgid "Disable t_ooltips"
 msgstr "عطّل التأريخ"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 #, fuzzy
 msgid "East"
 msgstr "شرق أسيوي"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Inside Button"
 msgstr "داخل الزر"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
 msgstr "برنامج"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:15
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+#, fuzzy
+msgid "New _Application"
+msgstr "التطبيقات المتوفرة"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+#, fuzzy
+msgid "New _Link"
+msgstr "سطر %d محْرف %d: %s"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../plugins/launcher/launcher-dialog.glade.h:22
 #, fuzzy
 msgid "Show _label instead of icon"
 msgstr "أظهر أيقونة \"الحاسوب\" على سطح المكتب"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/launcher/launcher-dialog.glade.h:24
 #, fuzzy
 msgid "South"
 msgstr "جنوب أوروبي"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 #, fuzzy
 msgid "West"
 msgstr "غرب أوروبي"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 #, fuzzy
 msgid "_Arrow button position:"
 msgstr "مكان أداة اختيار الأوضاع"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:27
+msgid "_Edit Item"
+msgstr ""
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
@@ -1602,7 +1581,7 @@ msgstr "إعدادات اللغة"
 msgid "Unable to open the workspace settings"
 msgstr "فشل فتح سِجِلّ التنقيح: %s\n"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "مساحة عمل %d"
@@ -1654,17 +1633,12 @@ msgstr "_نقط"
 msgid "Handle"
 msgstr "المؤشر:"
 
-#: ../plugins/separator/separator-dialog.glade.h:4
-#, fuzzy
-msgid "New Line"
-msgstr "سطر %d محْرف %d: %s"
-
-#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:5
 #, fuzzy
 msgid "Transparent"
 msgstr "مكّن شفافية القوائم"
 
-#: ../plugins/separator/separator-dialog.glade.h:7
+#: ../plugins/separator/separator-dialog.glade.h:6
 msgid "_Expand"
 msgstr "_افرد"
 
@@ -1673,17 +1647,17 @@ msgstr "_افرد"
 msgid "Adds a separator or space between panel items"
 msgstr "أضف مساحة أو سطر بين عناصر اللائحة"
 
-#: ../plugins/showdesktop/showdesktop.c:199
+#: ../plugins/showdesktop/showdesktop.c:210
 #, fuzzy
 msgid "Restore the minimized windows"
 msgstr "استرجع النوافذ المخفية"
 
-#: ../plugins/showdesktop/showdesktop.c:201
+#: ../plugins/showdesktop/showdesktop.c:212
 #, fuzzy
 msgid "Minimize all open windows and show the desktop"
 msgstr "اخفي النوافذ واظهر سطح المكتب"
 
-#: ../plugins/showdesktop/showdesktop.c:204
+#: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
 msgstr "اظهر سطح المكتب"
@@ -1778,95 +1752,91 @@ msgid "Restore minimized windows to current _workspace"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "Ro_tate buttons in vertical panel"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #, fuzzy
 msgid "Show _flat buttons"
 msgstr "أظهار الأيقونات في الأزرار"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #, fuzzy
 msgid "Show _handle"
 msgstr "إظهار فضائل الذكر"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 #, fuzzy
 msgid "Show button _labels"
 msgstr "عناوين أ_زرار شريط الأدوات:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #, fuzzy
 msgid "Show only _minimized windows"
 msgstr "اعرض _هذا الإطار فقط"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #, fuzzy
 msgid "Show windows from _all workspaces or viewports"
 msgstr "أظهر النوافذ من جميع ساحات العمل"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 #, fuzzy
 msgid "Show windows from all mo_nitors"
 msgstr "أظهر النوافذ من جميع ساحات العمل"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 #, fuzzy
 msgid "Sorting _order:"
 msgstr "ترتيب القاموس"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #, fuzzy
 msgid "When space is limited"
 msgstr "هز النافذة عندما يصلك تنبيه"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 #, fuzzy
 msgid "Window Buttons"
 msgstr "أزرار مسطحة"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 #, fuzzy
 msgid "Window _grouping:"
 msgstr "نافذة _جديدة"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 #, fuzzy
 msgid "Window title"
 msgstr "عنوان النافذة يكون هنا"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 #, fuzzy
 msgid "_Switch windows using the mouse wheel"
 msgstr "تغيير ساحة العمل بالستعمال الفأرة"
 
-#: ../plugins/tasklist/tasklist-widget.c:3199
+#: ../plugins/tasklist/tasklist-widget.c:3177
 #, fuzzy
 msgid "Mi_nimize All"
 msgstr "كل الأنواع المدعومة"
 
-#: ../plugins/tasklist/tasklist-widget.c:3208
+#: ../plugins/tasklist/tasklist-widget.c:3186
 #, fuzzy
 msgid "Un_minimize All"
 msgstr "صغّر جميع النوافذ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3214
+#: ../plugins/tasklist/tasklist-widget.c:3192
 #, fuzzy
 msgid "Ma_ximize All"
 msgstr "كل الأنواع المدعومة"
 
-#: ../plugins/tasklist/tasklist-widget.c:3223
+#: ../plugins/tasklist/tasklist-widget.c:3201
 #, fuzzy
 msgid "_Unmaximize All"
 msgstr "كل الملفات"
 
-#: ../plugins/tasklist/tasklist-widget.c:3233
+#: ../plugins/tasklist/tasklist-widget.c:3211
 #, fuzzy
 msgid "_Close All"
 msgstr "إغلاق الكل"
@@ -1875,32 +1845,32 @@ msgstr "إغلاق الكل"
 msgid "Switch between open windows using buttons"
 msgstr ""
 
-#: ../plugins/windowmenu/windowmenu.c:652
+#: ../plugins/windowmenu/windowmenu.c:655
 #, fuzzy
 msgid "Desktop"
 msgstr "سطح المكتب"
 
-#: ../plugins/windowmenu/windowmenu.c:1243
+#: ../plugins/windowmenu/windowmenu.c:1246
 #, fuzzy
 msgid "No Windows"
 msgstr "النوافذ المنبثقة"
 
-#: ../plugins/windowmenu/windowmenu.c:1258
+#: ../plugins/windowmenu/windowmenu.c:1261
 #, fuzzy
 msgid "Urgent Windows"
 msgstr "النوافذ المنبثقة"
 
-#: ../plugins/windowmenu/windowmenu.c:1300
+#: ../plugins/windowmenu/windowmenu.c:1303
 #, fuzzy
 msgid "Add Workspace"
 msgstr "_أضف مساحة عمل"
 
-#: ../plugins/windowmenu/windowmenu.c:1320
+#: ../plugins/windowmenu/windowmenu.c:1323
 #, fuzzy, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "_حذف مساحة العمل %d"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "ازل مساحة العمل %d"
@@ -1950,6 +1920,25 @@ msgstr "قائمة النافذة"
 msgid "Switch between open windows using a menu"
 msgstr ""
 
+#~ msgid "_Read Online"
+#~ msgstr "أقرء في _ويب"
+
+#~ msgid ""
+#~ "You can read the user manual online. This manual may however not exactly "
+#~ "match your panel version."
+#~ msgstr ""
+#~ "يمكنك قراءة دليل المستخدم عبر الشبكة.هذا دليل يمكن أن لا يطابق تماما "
+#~ "إصدار شريطك."
+
+#~ msgid "The user manual is not installed on your computer"
+#~ msgstr "دليل المستخدم غير مثبت في حاسوبك"
+
+#~ msgid "Failed to open the documentation browser"
+#~ msgstr "فشل تحميل متصفح الوثائق"
+
+#~ msgid "_Orientation:"
+#~ msgstr "التوجيه"
+
 #~ msgid "_First button:"
 #~ msgstr "تصاميم الأزرار"
 
@@ -1973,9 +1962,6 @@ msgstr ""
 
 #~ msgid "Xfce Menu"
 #~ msgstr "قائمة Xfce"
-
-#~ msgid "_Number of rows:"
-#~ msgstr "الرقم التسلسلي:"
 
 #~ msgid "Failed to open manual"
 #~ msgstr "فشل في فتح الشاشة"
