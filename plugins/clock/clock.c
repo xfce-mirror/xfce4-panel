@@ -226,7 +226,7 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                    PROP_ROTATE_VERTICALLY,
                                    g_param_spec_boolean ("rotate-vertically",
                                                          NULL, NULL,
-                                                         FALSE,
+                                                         TRUE,
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
@@ -247,7 +247,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
   plugin->command = NULL;
-  plugin->rotate_vertically = FALSE;
+  plugin->rotate_vertically = TRUE;
 
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
