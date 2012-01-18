@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-31 09:36+0000\n"
+"POT-Creation-Date: 2012-01-18 06:42+0000\n"
 "PO-Revision-Date: 2010-05-15 00:16+0300\n"
 "Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org,xfce-i18n@xfce.org>\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -37,31 +37,10 @@ msgid "Customize the panel"
 msgstr "Paneli özelleştir"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2327
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
-
-#: ../common/panel-utils.c:157
-msgid "_Read Online"
-msgstr "Çevrimiçi _Oku"
-
-#: ../common/panel-utils.c:158
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Kullanıcı kılavuzunu çevrimiçi olarak okuyabilirsiniz. Ancak, bu kılavuz, "
-"güncel panel sürümü ile uyuşmayabilir."
-
-#: ../common/panel-utils.c:160
-msgid "The user manual is not installed on your computer"
-msgstr "Xfce Panel kullanıcı kılavuzu bilgisayarınızda kurulu değil"
-
-#. display an error message to the user
-#: ../common/panel-utils.c:175
-msgid "Failed to open the documentation browser"
-msgstr "Belge görüntüleyici açılamadı"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
@@ -85,17 +64,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2339
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
 msgid "Add _New Items..."
 msgstr "_Yeni Ögeler Ekle..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2350
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
 msgid "Panel Pr_eferences..."
 msgstr "Panel T_ercihleri..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2366
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
 msgid "Log _Out"
 msgstr "Çıkış_Yap"
 
@@ -673,9 +652,8 @@ msgid "Start with one empty panel"
 msgstr "Boş bir panelle başla"
 
 #: ../migrate/main.c:160
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Panel yapılandırmasını kaydet"
+msgstr "Eski panel yapılandırılmasına geri dönülmesi başarısız oldu"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
@@ -683,11 +661,11 @@ msgstr "Öntanımlı panel yapılandırması yüklenemedi"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Panel yapılandırılmasının taşınması gerekiyor..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Mevcut yapılandırmaya dönülmesi başarısız oldu"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -816,7 +794,7 @@ msgstr ""
 #: ../plugins/actions/actions.c:194
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Bilgisayar %d saniye içinde askıya alınıyor."
 
 #: ../plugins/actions/actions.c:198
 msgid "Restart"
@@ -1895,6 +1873,22 @@ msgstr "Pencere Listesi"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Açık pencereler arasında bir menü kullanarak geçiş yap"
+
+#~ msgid "_Read Online"
+#~ msgstr "Çevrimiçi _Oku"
+
+#~ msgid ""
+#~ "You can read the user manual online. This manual may however not exactly "
+#~ "match your panel version."
+#~ msgstr ""
+#~ "Kullanıcı kılavuzunu çevrimiçi olarak okuyabilirsiniz. Ancak, bu kılavuz, "
+#~ "güncel panel sürümü ile uyuşmayabilir."
+
+#~ msgid "The user manual is not installed on your computer"
+#~ msgstr "Xfce Panel kullanıcı kılavuzu bilgisayarınızda kurulu değil"
+
+#~ msgid "Failed to open the documentation browser"
+#~ msgstr "Belge görüntüleyici açılamadı"
 
 #~ msgid "_Orientation:"
 #~ msgstr "Yönel_im:"
