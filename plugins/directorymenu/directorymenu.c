@@ -651,6 +651,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
   guint         i;
   gboolean      result = FALSE;
   gchar        *argv[3];
+  gboolean      startup_notify = FALSE;
 
   /* try to work around the exo code and get the direct command */
   rc = xfce_rc_config_open (XFCE_RESOURCE_CONFIG, "xfce4/helpers.rc", TRUE);
@@ -665,13 +666,10 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
 
           if (G_LIKELY (helperrc != NULL))
             {
-              /* only try our custom stuff if startup notify is supported */
-              if (xfce_rc_read_bool_entry (helperrc, "StartupNotify", FALSE))
-                {
-                  value = xfce_rc_read_entry_untranslated (helperrc, "X-XFCE-Binaries", NULL);
-                  if (value != NULL)
-                    binaries = g_strsplit (value, ";", -1);
-                }
+              startup_notify = xfce_rc_read_bool_entry (helperrc, "StartupNotify", FALSE);
+              value = xfce_rc_read_entry_untranslated (helperrc, "X-XFCE-Binaries", NULL);
+              if (value != NULL)
+                binaries = g_strsplit (value, ";", -1);
 
               xfce_rc_close (helperrc);
             }
@@ -699,7 +697,8 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
           /* try to spawn the program, if this fails we try exo for
            * a decent error message */
           result = xfce_spawn_on_screen (gtk_widget_get_screen (mi),
-                                         working_dir, argv, NULL, 0, TRUE,
+                                         working_dir, argv, NULL, 0,
+                                         startup_notify,
                                          gtk_get_current_event_time (),
                                          NULL, NULL);
           g_free (filename);
