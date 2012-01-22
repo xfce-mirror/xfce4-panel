@@ -21,6 +21,10 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
+
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
@@ -62,6 +66,10 @@ static void     pager_plugin_mode_changed                 (XfcePanelPlugin     *
 static void     pager_plugin_configure_workspace_settings (GtkWidget         *button);
 static void     pager_plugin_configure_plugin             (XfcePanelPlugin   *panel_plugin);
 static void     pager_plugin_screen_layout_changed        (PagerPlugin       *plugin);
+static void     pager_plugin_size_request                 (GtkWidget         *widget,
+                                                           GtkRequisition    *requisition);
+static void     pager_plugin_size_allocate                (GtkWidget         *widget,
+                                                           GtkAllocation     *allocation);
 
 
 
@@ -82,6 +90,12 @@ struct _PagerPlugin
   guint          scrolling : 1;
   guint          miniature_view : 1;
   gint           rows;
+
+  /* panel size */
+  gint           size;
+
+  /* WNCK pager aspect ratio */
+  gdouble        aspect;
 };
 
 enum
@@ -113,6 +127,8 @@ pager_plugin_class_init (PagerPluginClass *klass)
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->scroll_event = pager_plugin_scroll_event;
+  widget_class->size_request = pager_plugin_size_request;
+  widget_class->size_allocate = pager_plugin_size_allocate;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = pager_plugin_construct;
@@ -153,6 +169,8 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->miniature_view = TRUE;
   plugin->rows = 1;
   plugin->pager = NULL;
+  plugin->size = 0;
+  plugin->aspect = 1.;
 }
 
 
@@ -384,10 +402,79 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 
+static void
+pager_plugin_size_request (GtkWidget      *widget,
+                           GtkRequisition *requisition)
+{
+  PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (widget);
+  XfcePanelPlugin    *panel_plugin = XFCE_PANEL_PLUGIN (widget);
+  gdouble             aspect = 1.0;
+
+  /* propagate the size request as normal */
+  gtk_widget_size_request (GTK_WIDGET (plugin->pager), requisition);
+
+  /* if in deskbar mode, memorize the aspect ratio of the WNCK pager     */
+  /* WNCK pager assumes that orientation of the panel is always same     */
+  /* as orientation of the pager, which is not true in the deskbar mode. */
+  if (plugin->miniature_view &&
+      xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+    {
+      if (requisition->width > 1)
+        aspect = (gdouble) requisition->height / (gdouble) requisition->width;
+
+      /* Update the memorized aspect value only if change is big enough */
+      /* WNCK pager requests resizing if the allocated vertical dimension */
+      /* is different from the previously allocated vertical dimension. */
+      /* Therefore, we only want to change the aspect ratio (and allocation) */
+      /* when it corresponds to a "real" aspect ratio change. */
+      /* The threshold is arbitrary - small value may cause infinite looping, */
+      /* large value reduces accuracy of pager scaling. */
+      if (fabs ((plugin->aspect - aspect) * plugin->size) > 3.0)
+        plugin->aspect = aspect;
+
+      requisition->width = plugin->size;
+      requisition->height = rint (requisition->width * plugin->aspect);
+    }
+}
+
+
+
+static void
+pager_plugin_size_allocate (GtkWidget      *widget,
+                            GtkAllocation  *allocation)
+{
+  PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (widget);
+  XfcePanelPlugin    *panel_plugin = XFCE_PANEL_PLUGIN (widget);
+
+  /* if in deskbar mode, force the allocation based on memorized aspect ratio. */
+  /* WNCK pager will request resizing if it differs from previous allocation.  */
+  if (plugin->miniature_view &&
+      xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+    {
+      allocation->width = plugin->size;
+      allocation->height = rint (allocation->width * plugin->aspect);
+    }
+  gtk_widget_size_allocate (plugin->pager, allocation);
+}
+
+
+
 static gboolean
 pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint             size)
 {
+  PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+
+  /* request resize when using WNCK pager */
+  /* (its height depends on width)        */
+  if (plugin->miniature_view &&
+      plugin->size != size &&
+      xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+    {
+      plugin->size = size;
+      gtk_widget_queue_resize (GTK_WIDGET (panel_plugin));
+    }
+
   /* do not set fixed size */
   return TRUE;
 }
