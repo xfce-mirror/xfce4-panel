@@ -351,10 +351,11 @@ pager_buttons_rebuild_idle (gpointer user_data)
         cols++;
     }
 
-  if (pager->orientation != GTK_ORIENTATION_HORIZONTAL)
-    SWAP_INTEGER (rows, cols);
+  if (pager->orientation == GTK_ORIENTATION_HORIZONTAL)
+    gtk_table_resize (GTK_TABLE (pager), rows, cols);
+  else
+    gtk_table_resize (GTK_TABLE (pager), cols, rows);
 
-  gtk_table_resize (GTK_TABLE (pager), rows, cols);
 
   panel_plugin = gtk_widget_get_ancestor (GTK_WIDGET (pager), XFCE_TYPE_PANEL_PLUGIN);
 
@@ -392,8 +393,17 @@ pager_buttons_rebuild_idle (gpointer user_data)
           gtk_container_add (GTK_CONTAINER (button), label);
           gtk_widget_show (label);
 
-          row = n % cols;
-          col = n / cols;
+          if (pager->orientation == GTK_ORIENTATION_HORIZONTAL)
+            {
+              row = n % cols;
+              col = n / cols;
+            }
+          else
+            {
+              row = n / cols;
+              col = n % cols;
+            }
+
 
           gtk_table_attach (GTK_TABLE (pager), button,
                             row, row + 1, col, col + 1,
@@ -428,8 +438,16 @@ pager_buttons_rebuild_idle (gpointer user_data)
 
           pager->buttons = g_slist_prepend (pager->buttons, button);
 
-          row = n % cols;
-          col = n / cols;
+          if (pager->orientation == GTK_ORIENTATION_HORIZONTAL)
+            {
+              row = n % cols;
+              col = n / cols;
+            }
+          else
+            {
+              row = n / cols;
+              col = n % cols;
+            }
 
           gtk_table_attach (GTK_TABLE (pager), button,
                             row, row + 1, col, col + 1,
