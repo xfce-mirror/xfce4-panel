@@ -465,14 +465,17 @@ pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 {
   PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
 
-  /* request resize when using WNCK pager */
-  /* (its height depends on width)        */
-  if (plugin->miniature_view &&
-      plugin->size != size &&
-      xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+  if (plugin->size != size)
     {
       plugin->size = size;
-      gtk_widget_queue_resize (GTK_WIDGET (panel_plugin));
+
+      /* request resize when using WNCK pager */
+      /* (its height depends on width)        */
+      if (plugin->miniature_view &&
+          xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+        {
+          gtk_widget_queue_resize (GTK_WIDGET (panel_plugin));
+        }
     }
 
   /* do not set fixed size */
