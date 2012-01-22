@@ -57,8 +57,8 @@ static void     pager_plugin_construct                    (XfcePanelPlugin   *pa
 static void     pager_plugin_free_data                    (XfcePanelPlugin   *panel_plugin);
 static gboolean pager_plugin_size_changed                 (XfcePanelPlugin   *panel_plugin,
                                                            gint               size);
-static void     pager_plugin_orientation_changed          (XfcePanelPlugin   *panel_plugin,
-                                                           GtkOrientation     orientation);
+static void     pager_plugin_mode_changed                 (XfcePanelPlugin     *panel_plugin,
+                                                           XfcePanelPluginMode  mode);
 static void     pager_plugin_configure_workspace_settings (GtkWidget         *button);
 static void     pager_plugin_configure_plugin             (XfcePanelPlugin   *panel_plugin);
 static void     pager_plugin_screen_layout_changed        (PagerPlugin       *plugin);
@@ -118,7 +118,7 @@ pager_plugin_class_init (PagerPluginClass *klass)
   plugin_class->construct = pager_plugin_construct;
   plugin_class->free_data = pager_plugin_free_data;
   plugin_class->size_changed = pager_plugin_size_changed;
-  plugin_class->orientation_changed = pager_plugin_orientation_changed;
+  plugin_class->mode_changed = pager_plugin_mode_changed;
   plugin_class->configure_plugin = pager_plugin_configure_plugin;
 
   g_object_class_install_property (gobject_class,
@@ -286,7 +286,9 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
       wnck_screen_force_update (plugin->wnck_screen);
     }
 
-  orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
+  orientation =
+    (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) != XFCE_PANEL_PLUGIN_MODE_VERTICAL) ?
+    GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
   if (plugin->miniature_view)
     {
@@ -393,10 +395,15 @@ pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-pager_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                  GtkOrientation   orientation)
+pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
+                           XfcePanelPluginMode  mode)
 {
-  PagerPlugin *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  PagerPlugin       *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
+  GtkOrientation     orientation;
+
+  orientation =
+    (mode != XFCE_PANEL_PLUGIN_MODE_VERTICAL) ?
+    GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
   if (plugin->miniature_view)
     wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
