@@ -94,8 +94,8 @@ struct _PagerPlugin
   /* panel size */
   gint           size;
 
-  /* WNCK pager aspect ratio */
-  gdouble        aspect;
+  /* last height of the WNCK pager in deskbar mode */
+  gint           height;
 };
 
 enum
@@ -170,7 +170,7 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->rows = 1;
   plugin->pager = NULL;
   plugin->size = 0;
-  plugin->aspect = 1.;
+  plugin->height = 1;
 }
 
 
@@ -422,18 +422,21 @@ pager_plugin_size_request (GtkWidget      *widget,
       if (requisition->width > 1)
         aspect = (gdouble) requisition->height / (gdouble) requisition->width;
 
-      /* Update the memorized aspect value only if change is big enough */
+      /* Update the memorized height value only if change is big enough */
       /* WNCK pager requests resizing if the allocated vertical dimension */
       /* is different from the previously allocated vertical dimension. */
-      /* Therefore, we only want to change the aspect ratio (and allocation) */
+      /* Therefore, we only want to change it */
       /* when it corresponds to a "real" aspect ratio change. */
-      /* The threshold is arbitrary - small value may cause infinite looping, */
-      /* large value reduces accuracy of pager scaling. */
-      if (fabs ((plugin->aspect - aspect) * plugin->size) > 3.0)
-        plugin->aspect = aspect;
+      /* The threshold and the minimum height values are arbitrary. */
+      /* They are the tradeoff between the accuracy of vertical size */
+      /* and eliminating infinite resizing loop. */
+      /* The values below eliminate looping in a worst-case condition: */
+      /* panel size = 16<->17, workspace rows = 1, no of workspaces = 100 */
+      if (abs (rint (plugin->size * aspect) - plugin->height) > 3)
+        plugin->height = MAX (rint (plugin->size * aspect), 10);
 
       requisition->width = plugin->size;
-      requisition->height = rint (requisition->width * plugin->aspect);
+      requisition->height = rint (requisition->width * aspect);
     }
 }
 
@@ -446,13 +449,13 @@ pager_plugin_size_allocate (GtkWidget      *widget,
   PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (widget);
   XfcePanelPlugin    *panel_plugin = XFCE_PANEL_PLUGIN (widget);
 
-  /* if in deskbar mode, force the allocation based on memorized aspect ratio. */
+  /* if in deskbar mode, force the allocation based on memorized plugin height. */
   /* WNCK pager will request resizing if it differs from previous allocation.  */
   if (plugin->miniature_view &&
       xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
     {
+      allocation->height = plugin->height;
       allocation->width = plugin->size;
-      allocation->height = rint (allocation->width * plugin->aspect);
     }
   gtk_widget_size_allocate (plugin->pager, allocation);
 }
