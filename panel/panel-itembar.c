@@ -296,10 +296,6 @@ panel_itembar_finalize (GObject *object)
   (*G_OBJECT_CLASS (panel_itembar_parent_class)->finalize) (object);
 }
 
-#define CHILD_FITS_IN_ROW(child_req, itembar) \
-  ((IS_HORIZONTAL (itembar) && child_req.height <= (itembar)->size) \
-   || (!IS_HORIZONTAL (itembar) && child_req.width <= (itembar)->size))
-
 #define CHILD_LENGTH(child_req, itembar) \
   (IS_HORIZONTAL (itembar) ? child_req.width : child_req.height)
 
@@ -339,8 +335,7 @@ panel_itembar_size_request (GtkWidget      *widget,
 
           /* check if the small child fits in a row */
           if (child->option == CHILD_OPTION_SMALL
-              && itembar->nrows > 1
-              && CHILD_FITS_IN_ROW (child_req, itembar))
+              && itembar->nrows > 1)
             {
               child_len = CHILD_LENGTH (child_req, itembar);
 
@@ -453,8 +448,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
           child_len = CHILD_LENGTH (child_req, itembar);
 
           if (G_UNLIKELY (child->option == CHILD_OPTION_SMALL
-              && itembar->nrows > 1
-              && CHILD_FITS_IN_ROW (child_req, itembar)))
+                          && itembar->nrows > 1))
             {
               /* extract from the available space */
               if (child_len > row_max_size)
@@ -586,8 +580,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
         child_len = 1;
 
       if (child->option == CHILD_OPTION_SMALL
-          && itembar->nrows > 1
-          && CHILD_FITS_IN_ROW (child_req, itembar))
+          && itembar->nrows > 1)
         {
           if (row_max_size < child_len)
             row_max_size = child_len;
