@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-08 06:36+0000\n"
-"PO-Revision-Date: 2012-01-12 08:35+0200\n"
+"POT-Creation-Date: 2012-01-28 03:39+0000\n"
+"PO-Revision-Date: 2012-01-28 10:31+0200\n"
 "Last-Translator: Algimantas Margevičius <margevicius.algimantas@gmail.com>\n"
 "Language-Team: Lietuvių <>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bits\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2)\n"
 
@@ -85,7 +85,7 @@ msgstr "PANEL-NUMBER"
 
 #: ../panel/main.c:79
 msgid "Show the 'Add New Items' dialog"
-msgstr "Parodyti „Pridėti naujus elementus“ dialogą"
+msgstr "Rodyti „Pridėti naujus elementus“ dialogą"
 
 #: ../panel/main.c:80
 msgid "Save the panel configuration"
@@ -130,12 +130,12 @@ msgstr "Rašykite „%s --help” naudojimui."
 
 #: ../panel/main.c:258
 msgid "The Xfce development team. All rights reserved."
-msgstr "Xfce plėtros burys. Visos teisės saugomos."
+msgstr "Xfce kūrėjų komanda. Visos teisės saugomos."
 
 #: ../panel/main.c:259
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Prašome pranešti apie klaidas <%s>."
+msgstr "Apie klaidas pranešti <%s>."
 
 #: ../panel/main.c:310
 msgid "There is already a running instance"
@@ -160,7 +160,7 @@ msgstr "Nepavyko išsaugoti skydelio konfigūracijos"
 
 #: ../panel/main.c:373
 msgid "Failed to add a plugin to the panel"
-msgstr "Nepavyko pridėti įskiepį į skydelį"
+msgstr "Pridėti įskiepio į skydelį nepavyko"
 
 #: ../panel/main.c:375
 msgid "Failed to restart the panel"
@@ -186,7 +186,7 @@ msgstr ""
 #: ../panel/main.c:393 ../panel/main.c:407
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "Joks veikiantis %s atvejis nerastas "
+msgstr "Jokia veikianti %s kopija nerasta"
 
 #: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
@@ -197,7 +197,8 @@ msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
-"Jūs paleidote X be sesijos tvarkytuvės. „Quit” paspaudimas uždarys X serverį."
+"Jūs paleidote X be sesijos tvarkytuvės. „Užverti” paspaudimas uždarys X "
+"serverį."
 
 #: ../panel/panel-application.c:1667
 msgid "Are you sure you want to quit the panel?"
@@ -403,7 +404,7 @@ msgstr "Redaguoti pasirinktą elementą"
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
-"Matomumo nustatymams skydelyje, langų tvarkyklėje įjunkite kompozicionavimą."
+"Skydelio matomumo nustatymams, langų tvarkyklėje įjunkite kompozicionavimą."
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
@@ -436,12 +437,12 @@ msgstr "Išmatavimai"
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Move currently selected item down by one row"
-msgstr "Perkelti pasirinktą elementą vieną eilutę žemyn"
+msgstr "Perkelti pasirinktą elementą viena eilute žemyn"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Move currently selected item up by one row"
-msgstr "Perkelti pasirinktą elementą vieną eilutę viršun"
+msgstr "Perkelti pasirinktą elementą viena eilute viršun"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
@@ -484,16 +485,16 @@ msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"Pasirinkite šią parinktį, kad paslėpti skydelį kai žymeklis yra ne virš jo. "
-"Tai veikia tik kai skydelis yra pritvirtintas prie ekrano krašto."
+"Pasirinkite šią parinktį, jei norite paslėpti skydelį kai žymeklis yra ne "
+"virš jo. Tai veikia tik kai skydelis yra pritvirtintas prie ekrano krašto."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
-"Pasirinkite šią parinktį, kad automatiškai didėtų skydelio ilgis jei "
-"įskiepiams prireiktų daugiau vietos."
+"Pasirinkite šią parinktį, jei norite jog automatiškai didėtų skydelio ilgis, "
+"jei įskiepiams prireiktų daugiau vietos."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select this option to extend the panel over multiple monitors."
@@ -595,7 +596,7 @@ msgstr "Patyręs"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr "Žinovas"
+msgstr "Ekspertas"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
@@ -619,7 +620,7 @@ msgstr "Atkelti seną sąranką"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Atkelti seną 4,6 sąranką į Xfconf"
+msgstr "Atkelti seną 4.6 sąranką į Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
@@ -748,7 +749,7 @@ msgstr "S_ustabdyti"
 
 #: ../plugins/actions/actions.c:186
 msgid "Do you want to suspend to disk?"
-msgstr "Ar norite užlaikyti diske (sustabdyti)?"
+msgstr "Ar norite užlaikyti diske (sustabdyti)?"
 
 #: ../plugins/actions/actions.c:187
 #, c-format
@@ -849,11 +850,11 @@ msgstr "Mygtuko _antraštė:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr "_Taisyti Meniu"
+msgstr "_Taisyti meniu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
-msgstr "Meniu Failas"
+msgstr "Meniu failas"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
@@ -922,7 +923,7 @@ msgstr "Nepavyko įkelti programų meniu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "Rodyti meniu su įdiegtų programų temomis"
+msgstr "Rodyti meniu su įdiegtų programų kategorijomis"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -956,7 +957,7 @@ msgstr "Rodyti pagalbos parinktis"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
-msgstr "%V savaitė "
+msgstr "%V savaitė"
 
 #: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
@@ -964,7 +965,7 @@ msgstr "Nepavyko įvykdyti laikrodžio komandos"
 
 #: ../plugins/clock/clock.c:719
 msgid "Custom Format"
-msgstr "Pasirinktas formatas"
+msgstr "Pasirinktinis formatas"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
@@ -1010,7 +1011,7 @@ msgstr "Šviečiantys _laiko skirtukai"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
-msgstr "Fuzzy"
+msgstr "Neaiškus"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
@@ -1042,7 +1043,7 @@ msgid ""
 "information."
 msgstr ""
 "Formatas aprašo datos ir laiko dalis kurias reikia įterpti į skydelį. "
-"Pavyzdžiui, %Y bus pakeistas metais, %m mėnesį ir %d diena. Papildomai "
+"Pavyzdžiui, %Y bus pakeistas metais, %m mėnesiu ir %d diena. Papildomai "
 "informacijai skaitykite datos programos dokumentaciją."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
@@ -1307,23 +1308,23 @@ msgstr "Nepavyko užklausti „%s“ turinio tipo"
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr "Nerasta numatytoji programa skirta „%s“"
+msgstr "Numatytoji programa skirta „%s“ nerasta"
 
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Nepavyko paleisti numatytosios programos skirtos „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:717
+#: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Nepavyko paleisti pageidaujamos programos kategorijai „%s“"
 
-#: ../plugins/directorymenu/directorymenu.c:790
+#: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
 msgstr "Atverti aplanką"
 
-#: ../plugins/directorymenu/directorymenu.c:801
+#: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
 msgstr "Paleisti terminale"
 
@@ -1338,7 +1339,7 @@ msgid ""
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 "Įveskite formų sąrašą kuris nuspręs kokie failų tipai bus matomi aplanke. "
-"Jei nurodysite daugiau nei vieną formą, sąrašas turi būti atskirtas "
+"Jei nurodysite daugiau nei vieną formą, sąrašo elementai turi būti atskirti "
 "kabliataškiu (pvz. *txt;*.doc)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1573,7 +1574,7 @@ msgstr "Slėpti visus langus ir rodyti darbastalį"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "Nepavyko paleisti pranešimo srities"
+msgstr "Nepavyko paleisti pranešimų srities"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
