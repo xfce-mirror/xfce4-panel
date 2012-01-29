@@ -317,6 +317,7 @@ panel_application_load_real (PanelApplication *application)
   GValue        val = { 0, };
   GPtrArray    *panels;
   gint          panel_id;
+  gboolean      save_changed_ids = FALSE;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (XFCONF_IS_CHANNEL (application->xfconf));
@@ -402,6 +403,9 @@ panel_application_load_real (PanelApplication *application)
                   /* show warnings */
                   g_message ("Plugin \"%s-%d\" was not found and has been "
                              "removed from the configuration", name, unique_id);
+
+                  /* save configuration change after loading */
+                  save_changed_ids = TRUE;
                 }
 
               g_free (name);
@@ -417,6 +421,9 @@ panel_application_load_real (PanelApplication *application)
   /* create empty window if everything else failed */
   if (G_UNLIKELY (application->windows == NULL))
     panel_application_new_window (application, NULL, -1, TRUE);
+
+  if (save_changed_ids)
+    panel_application_save (application, SAVE_PLUGIN_IDS);
 }
 
 
