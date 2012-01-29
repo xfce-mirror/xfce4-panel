@@ -70,8 +70,9 @@ panel_dbus_client_get_proxy (GError **error)
 
 
 gboolean
-panel_dbus_client_display_preferences_dialog (guint    active,
-                                              GError **error)
+panel_dbus_client_display_preferences_dialog (guint         active,
+                                              const gchar  *socket_id,
+                                              GError      **error)
 {
   gboolean    result;
   DBusGProxy *dbus_proxy;
@@ -83,7 +84,8 @@ panel_dbus_client_display_preferences_dialog (guint    active,
     return FALSE;
 
   result = _panel_dbus_client_display_preferences_dialog (dbus_proxy,
-                                                          active, error);
+                                                          active, socket_id,
+                                                          error);
 
   g_object_unref (G_OBJECT (dbus_proxy));
 

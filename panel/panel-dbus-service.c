@@ -44,6 +44,7 @@
 static void      panel_dbus_service_finalize                   (GObject            *object);
 static gboolean  panel_dbus_service_display_preferences_dialog (PanelDBusService   *service,
                                                                 guint               active,
+                                                                const gchar        *socket_id,
                                                                 GError            **error);
 static gboolean  panel_dbus_service_display_items_dialog       (PanelDBusService   *service,
                                                                 guint               active,
@@ -190,13 +191,14 @@ panel_dbus_service_finalize (GObject *object)
 static gboolean
 panel_dbus_service_display_preferences_dialog (PanelDBusService  *service,
                                                guint              active,
+                                               const gchar       *socket_id,
                                                GError           **error)
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   /* show the preferences dialog */
-  panel_preferences_dialog_show_from_id (active);
+  panel_preferences_dialog_show_from_id (active, socket_id);
 
   return TRUE;
 }
@@ -212,7 +214,7 @@ panel_dbus_service_display_items_dialog (PanelDBusService  *service,
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   /* show the items dialog */
-  panel_preferences_dialog_show_from_id (active);
+  panel_item_dialog_show_from_id (active);
 
   return TRUE;
 }

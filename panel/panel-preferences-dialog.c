@@ -20,6 +20,10 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STDLIB_H
+#include <stdlib.h>
+#endif
+
 #include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -136,6 +140,9 @@ struct _PanelPreferencesDialog
 
   /* changed signal for the output selector */
   gulong            output_changed_handler_id;
+
+  /* plug in which the dialog is embedded */
+  GtkWidget        *socket_plug;
 };
 
 
@@ -282,6 +289,10 @@ panel_preferences_dialog_finalize (GObject *object)
 
   /* free bindings list */
   g_slist_free (dialog->bindings);
+
+  /* destroy possible pluggable dialog */
+  if (dialog->socket_plug != NULL)
+    gtk_widget_destroy (dialog->socket_plug);
 
   if (dialog->active != NULL)
     {
@@ -1266,13 +1277,28 @@ panel_preferences_dialog_item_selection_changed (GtkTreeSelection       *selecti
 
 
 
-void
-panel_preferences_dialog_show (PanelWindow *active)
+static void
+panel_preferences_dialog_plug_deleted (GtkWidget *plug)
+{
+  g_signal_handlers_disconnect_by_func (G_OBJECT (plug),
+      G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
+
+  g_object_unref (G_OBJECT (dialog_singleton));
+}
+
+
+
+static void
+panel_preferences_dialog_show_internal (PanelWindow     *active,
+                                        GdkNativeWindow  socket_window)
 {
   gint         panel_id = 0;
   GObject     *window, *combo;
   GdkScreen   *screen;
   GSList      *windows;
+  GtkWidget   *plug;
+  GObject     *plug_child;
+  GtkWidget   *content_area;
 
   panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
 
@@ -1295,17 +1321,6 @@ panel_preferences_dialog_show (PanelWindow *active)
         active = g_slist_nth_data (windows, 0);
     }
 
-  /* get the active screen */
-  if (G_LIKELY (active != NULL))
-    screen = gtk_widget_get_screen (GTK_WIDGET (active));
-  else
-    screen = gdk_screen_get_default ();
-
-  /* show the dialog on the same screen as the panel */
-  window = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "dialog");
-  panel_return_if_fail (GTK_IS_WIDGET (window));
-  gtk_window_set_screen (GTK_WINDOW (window), screen);
-
   /* select the active window in the dialog */
   combo = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "panel-combobox");
   panel_return_if_fail (GTK_IS_WIDGET (combo));
@@ -1313,20 +1328,86 @@ panel_preferences_dialog_show (PanelWindow *active)
   if (!panel_preferences_dialog_panel_combobox_rebuild (dialog_singleton, panel_id))
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
-  gtk_window_present (GTK_WINDOW (window));
+  window = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "dialog");
+  panel_return_if_fail (GTK_IS_WIDGET (window));
+  plug_child = gtk_builder_get_object (GTK_BUILDER (dialog_singleton), "plug-child");
+  panel_return_if_fail (GTK_IS_WIDGET (plug_child));
+
+  /* check if we need to remove the window from the plug */
+  if (dialog_singleton->socket_plug != NULL)
+    {
+      panel_return_if_fail (GTK_IS_PLUG (dialog_singleton->socket_plug));
+
+      /* move the vbox to the dialog */
+      content_area = gtk_dialog_get_content_area (GTK_DIALOG (window));
+      gtk_widget_reparent (GTK_WIDGET (plug_child), content_area);
+      gtk_widget_show (GTK_WIDGET (plug_child));
+
+      /* destroy the plug */
+      plug = dialog_singleton->socket_plug;
+      dialog_singleton->socket_plug = NULL;
+
+      g_signal_handlers_disconnect_by_func (G_OBJECT (plug),
+          G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
+      gtk_widget_destroy (plug);
+    }
+
+  if (socket_window == 0)
+    {
+      /* show the dialog on the same screen as the panel */
+      if (G_LIKELY (active != NULL))
+        screen = gtk_widget_get_screen (GTK_WIDGET (active));
+      else
+        screen = gdk_screen_get_default ();
+      gtk_window_set_screen (GTK_WINDOW (window), screen);
+
+      gtk_window_present (GTK_WINDOW (window));
+    }
+  else
+    {
+      /* hide window */
+      gtk_widget_hide (GTK_WIDGET (window));
+
+      /* create a new plug */
+      plug = gtk_plug_new (socket_window);
+      g_signal_connect (G_OBJECT (plug), "delete-event",
+          G_CALLBACK (panel_preferences_dialog_plug_deleted), NULL);
+      dialog_singleton->socket_plug = plug;
+      gtk_widget_show (plug);
+
+      /* move the vbox in the plug */
+      gtk_widget_reparent (GTK_WIDGET (plug_child), plug);
+      gtk_widget_show (GTK_WIDGET (plug_child));
+    }
 }
 
 
 
 void
-panel_preferences_dialog_show_from_id (gint panel_id)
+panel_preferences_dialog_show (PanelWindow *active)
+{
+  panel_return_if_fail (active == NULL || PANEL_IS_WINDOW (active));
+  panel_preferences_dialog_show_internal (active, 0);
+}
+
+
+
+void
+panel_preferences_dialog_show_from_id (gint         panel_id,
+                                       const gchar *socket_id)
 {
   PanelApplication *application;
   PanelWindow      *window;
+  GdkNativeWindow   socket_window = 0;
+
+  /* x11 windows are ulong on 64 bit platforms
+   * or uint32 on other platforms */
+  if (socket_id != NULL)
+    socket_window = (GdkNativeWindow) strtoul (socket_id, NULL, 0);
 
   application = panel_application_get ();
   window = panel_application_get_window (application, panel_id);
-  panel_preferences_dialog_show (window);
+  panel_preferences_dialog_show_internal (window, socket_window);
   g_object_unref (G_OBJECT (application));
 }
 

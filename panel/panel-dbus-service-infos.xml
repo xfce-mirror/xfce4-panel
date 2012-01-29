@@ -12,7 +12,7 @@
                 value="_panel_dbus_client"/>
 
     <!--
-      DisplayPreferencesDialog (active : UINT, socket-id : INT) : VOID
+      DisplayPreferencesDialog (active : UINT, socket-id : STRING) : VOID
 
       active    : The active panel number in the dialog, starting
                   at zero.
@@ -22,6 +22,7 @@
     -->
     <method name="DisplayPreferencesDialog">
       <arg name="active" direction="in" type="u" />
+      <arg name="socket_id" direction="in" type="s" />
     </method>
 
     <!--
