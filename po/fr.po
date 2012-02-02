@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-02 17:03+0000\n"
+"POT-Creation-Date: 2012-02-02 05:27+0000\n"
 "PO-Revision-Date: 2011-01-16 12:45+0100\n"
 "Last-Translator: Durand-Favreau Arnaud <biginoz@free.fr>\n"
 "Language-Team: French <xfce-i18n@xfce.org>\n"
@@ -51,7 +51,7 @@ msgstr "Êtes-vous sûr de vouloir supprimer « %s » ?"
 #: ../panel/panel-preferences-dialog.c:1092
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
-"Si vous supprimer le greffon du tableau de bord, il le sera de manière "
+"Si vous supprimez le greffon du tableau de bord, il le sera de manière "
 "permanente."
 
 #. move item
@@ -80,7 +80,7 @@ msgstr "Dé_connexion"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Afficher la fenêtre \"Préférences du tableau de bord\""
+msgstr "Afficher la fenêtre de préférences du tableau de bord"
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
@@ -88,11 +88,11 @@ msgstr "NUMERO-PANNEAU"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
-msgstr "Afficher la fenêtre \"Ajouter de nouveaux greffons\""
+msgstr "Afficher la fenêtre d'ajout de nouveaux greffons"
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
-msgstr "Enregistrer la configuration du tableau de bord"
+msgstr "Enregistrer la configuration du panneau"
 
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
@@ -129,7 +129,7 @@ msgstr "[ARGUMENTS...]"
 #: ../panel/main.c:241
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Saisissez  « %s --help » pour l'utilisation."
+msgstr "Saisissez « %s --help » pour l'usage."
 
 #: ../panel/main.c:260
 msgid "The Xfce development team. All rights reserved."
@@ -265,7 +265,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:228
 msgid "Modifying the panel is not allowed"
-msgstr "Modification du tableau de bord interdit"
+msgstr "Modification du tableau de bord interdite"
 
 #: ../panel/panel-item-dialog.c:188
 msgid "Add New Items"
@@ -288,7 +288,7 @@ msgstr "Saisissez vos termes de recherche ici"
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
-"Le greffon « %s » a quitté le tableau de bord de manière inattendu, voulez-"
+"Le greffon « %s » a quitté le tableau de bord de manière inattendue, voulez-"
 "vous le redémarrer ?"
 
 #: ../panel/panel-plugin-external.c:431
@@ -299,7 +299,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 "Le greffon a redémarré plusieurs fois depuis les dernières %d secondes. Si "
-"vous cliquez sur Exécuter le greffon sera redémarrer sinon supprimer de "
+"vous cliquez sur Exécuter le greffon sera redémarré sinon supprimé de "
 "manière permanente du tableau de bord."
 
 #: ../panel/panel-preferences-dialog.c:467
@@ -371,7 +371,7 @@ msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr ""
-"Opacité de l'arrière plan du tableau de bord, 0 étant transparent et 100 "
+"Opacité de l'arrière-plan du tableau de bord, 0 étant transparent et 100 "
 "opaque."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
@@ -400,7 +400,7 @@ msgstr "_Affichage"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Deskbar"
-msgstr "Deskbar"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
@@ -439,7 +439,7 @@ msgstr "_Largeur (%) :"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "M_ode:"
-msgstr "M_ode :"
+msgstr ""
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -462,6 +462,7 @@ msgid "None (use system style)"
 msgstr "Aucun (style par défaut)"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
+#, fuzzy
 msgid "Num_ber of rows:"
 msgstr "Nombre _de lignes :"
 
@@ -486,8 +487,9 @@ msgid "Remove the currently selected panel"
 msgstr "Supprimer le tableau de bord sélectionné"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
+#, fuzzy
 msgid "Row _Size (pixels):"
-msgstr "_Taille de ligne (pixels) :"
+msgstr "_Taille (pixels) :"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
@@ -520,7 +522,7 @@ msgstr ""
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
-"Cette option masque les poignées du tableau de bord et vérouille sa position."
+"Cette option masque les poignées du tableau de bord et verrouille sa position."
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid ""
@@ -583,7 +585,7 @@ msgstr "_Normal :"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Lock panel"
-msgstr "_Vérrouiller le tableau de bord"
+msgstr "_Verrouiller le tableau de bord"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -616,7 +618,7 @@ msgstr "Expert"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
-msgstr "Bienvenu au premier démarrage du tableau de bord"
+msgstr "Bienvenue au premier démarrage du tableau de bord"
 
 #: ../migrate/main.c:125
 msgid ""
@@ -625,7 +627,7 @@ msgid ""
 msgstr ""
 "Parce que le tableau de bord utilise un nouveau système pour le stockage des "
 "paramètres sur disque, il est nécessaire de repartir sur une configuration "
-"initial."
+"initiale."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -836,8 +838,9 @@ msgid "Failed to run action \"%s\""
 msgstr "Échec à l'exécution de l'action « %s »"
 
 #: ../plugins/actions/actions.c:1028
+#, fuzzy
 msgid "John Doe"
-msgstr "John Doe"
+msgstr "John Doo"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1053,14 +1056,14 @@ msgid "Show gri_d"
 msgstr "Afficher une _grille"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
 "the day. See the documentation of the date utility for additional "
 "information."
 msgstr ""
-"Le format décrit les parties de la date ou l'heure à insérer dans le format. "
+"Le format décrit les parties de la date ou l'heure à insérer dans le tableau de bord. "
 "Par exemple, %Y correspond à l'année, %m au mois et %d au jour. Veuillez "
 "consulter la documentation de la commande date pour plus d'information."
 
@@ -1412,8 +1415,9 @@ msgid "Unnamed item"
 msgstr "Item sans nom"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
+#, fuzzy
 msgid "Add Appli_cation"
-msgstr "Ajouter une Appli_cations"
+msgstr "Applications connues"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
@@ -1429,7 +1433,7 @@ msgstr "Avancé"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "D_elete Item"
-msgstr "S_upprimer le greffon"
+msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
@@ -1457,12 +1461,14 @@ msgid "Launcher"
 msgstr "Lanceur"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
+#, fuzzy
 msgid "New _Application"
-msgstr "Nouvelle _Application"
+msgstr "Applications connues"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
+#, fuzzy
 msgid "New _Link"
-msgstr "Nouveau _Lien"
+msgstr "Nouvel ligne"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
@@ -1473,7 +1479,7 @@ msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
 msgstr ""
-"Cette option désactive les bulles d'aides lorsque la souris pointent au-"
+"Cette option désactive les bulles d'aides lorsque la souris pointe au-"
 "dessus du bouton ou les éléments du menu."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
@@ -1504,7 +1510,7 @@ msgstr "Position de la _flèche :"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "_Edit Item"
-msgstr "_Éditer le greffon"
+msgstr ""
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
@@ -1667,7 +1673,7 @@ msgstr "Aucun, autoriser le glisser-déposer"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
-msgstr "Restaurer les fenêtres réduites vers l'_espace de travail courrant"
+msgstr "Restaurer les fenêtres réduites vers l'_espace de travail courant"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
