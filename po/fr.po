@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-25 07:12+0000\n"
+"POT-Creation-Date: 2012-02-02 05:27+0000\n"
 "PO-Revision-Date: 2011-01-16 12:45+0100\n"
 "Last-Translator: Durand-Favreau Arnaud <biginoz@free.fr>\n"
 "Language-Team: French <xfce-i18n@xfce.org>\n"
@@ -35,41 +35,20 @@ msgid "Customize the panel"
 msgstr "Modifier le tableau de bord"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2306
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Tableau de bord"
 
-#: ../common/panel-utils.c:157
-msgid "_Read Online"
-msgstr "_Lire en ligne"
-
-#: ../common/panel-utils.c:158
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Vous pouvez lire le manuel en ligne. Cependant le manuel ne correspond pas "
-"forcément à la version de votre tableau de bord."
-
-#: ../common/panel-utils.c:160
-msgid "The user manual is not installed on your computer"
-msgstr "Le manuel n'est pas installé sur votre machine"
-
-#. display an error message to the user
-#: ../common/panel-utils.c:175
-msgid "Failed to open the documentation browser"
-msgstr "Échec à l'ouverture du navigateur"
-
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1057
+#: ../panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Êtes-vous sûr de vouloir supprimer « %s » ?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1060
+#: ../panel/panel-preferences-dialog.c:1092
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "Si vous supprimer le greffon du tableau de bord, il le sera de manière "
@@ -85,17 +64,17 @@ msgid "Pane_l"
 msgstr "Tableau de _bord"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2318
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
 msgid "Add _New Items..."
 msgstr "Ajouter des _greffons..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2329
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2345
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
 msgid "Log _Out"
 msgstr "Dé_connexion"
 
@@ -143,62 +122,62 @@ msgid "Print version information and exit"
 msgstr "Afficher les informations sur la version et quitter"
 
 #. parse context options
-#: ../panel/main.c:250
+#: ../panel/main.c:234
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTS...]"
 
-#: ../panel/main.c:257
+#: ../panel/main.c:241
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Saisissez « %s --help » pour l'usage."
 
-#: ../panel/main.c:276
+#: ../panel/main.c:260
 msgid "The Xfce development team. All rights reserved."
 msgstr "L'équipe de développement de Xfce. Tous droits réservés."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:261
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Veuillez signaler tout bogue à <%s>."
 
-#: ../panel/main.c:328
+#: ../panel/main.c:312
 msgid "There is already a running instance"
 msgstr "Il y a déjà un tableau de bord en cours d'exécution"
 
 #. spawn ourselfs again
-#: ../panel/main.c:378
+#: ../panel/main.c:354
 msgid "Restarting..."
 msgstr "Redémarrer"
 
-#: ../panel/main.c:393
+#: ../panel/main.c:369
 msgid "Failed to show the preferences dialog"
 msgstr "Échec à l'ouverture de la fenêtre des préférences"
 
-#: ../panel/main.c:395
+#: ../panel/main.c:371
 msgid "Failed to show the add new items dialog"
 msgstr "Échec à l'ouverture de la fenêtre d'ajout de nouveaux greffons"
 
-#: ../panel/main.c:397
+#: ../panel/main.c:373
 msgid "Failed to save the panel configuration"
 msgstr "Échec à l'enregistrement de la configuration du tableau de bord"
 
-#: ../panel/main.c:399
+#: ../panel/main.c:375
 msgid "Failed to add a plugin to the panel"
 msgstr "Échec à l'ajout d'un greffon dans le tableau de bord"
 
-#: ../panel/main.c:401
+#: ../panel/main.c:377
 msgid "Failed to restart the panel"
 msgstr "Échec au redémarrage du tableau de bord"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:379
 msgid "Failed to quit the panel"
 msgstr "Échec à la fermeture du tableau de bord"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:381
 msgid "Failed to send D-Bus message"
 msgstr "Échec à l'envoi d'un message D-Bus"
 
-#: ../panel/main.c:416
+#: ../panel/main.c:392
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -207,16 +186,16 @@ msgstr ""
 "session soit sauvegardée lors de la déconnexion, de manière que le tableau "
 "de bord soit relancé à la prochaine ouverture de session."
 
-#: ../panel/main.c:419 ../panel/main.c:433
+#: ../panel/main.c:395 ../panel/main.c:409
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Aucune instance de %s n'a été trouvée"
 
-#: ../panel/panel-application.c:219
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Échec au lancement de la procédure de migration"
 
-#: ../panel/panel-application.c:1600
+#: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -224,23 +203,23 @@ msgstr ""
 "La session Xorg a été ouverte sans gestionnaire de session. L'action Quitter "
 "fermera la session Xorg."
 
-#: ../panel/panel-application.c:1601
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Êtes-vous sûr de vouloir quitter le tableau de bord ?"
 
-#: ../panel/panel-application.c:1609
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Échec à l'exécution de la commande « %s »"
 
-#: ../panel/panel-dbus-client.c:208
+#: ../panel/panel-dbus-client.c:210
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "Syntaxe d'évènement du plugin spécifée invalide. Utiliser NOM-PLUGIN:NOM[:"
 "TYPE:VALEUR]."
 
-#: ../panel/panel-dbus-client.c:241
+#: ../panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -263,21 +242,20 @@ msgstr ""
 "Durand-Favreau Arnaud <biginoz@free.fr>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:123 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:152 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Ajouter un élément"
 
-#: ../panel/panel-dialogs.c:137
+#: ../panel/panel-dialogs.c:166
 msgid "Please choose a panel for the new plugin:"
 msgstr "Veuillez sélectionner un tableau de bord pour le nouveau greffon :"
 
-#. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:148 ../panel/panel-preferences-dialog.c:776
+#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Panneau %d"
 
-#: ../panel/panel-dialogs.c:184
+#: ../panel/panel-dialogs.c:226
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -285,7 +263,7 @@ msgstr ""
 "Le tableau de bord est exécuté en mode restreint, vous ne pouvez apporter "
 "des modifications en tant qu'utilisateur régulier"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:228
 msgid "Modifying the panel is not allowed"
 msgstr "Modification du tableau de bord interdit"
 
@@ -324,43 +302,43 @@ msgstr ""
 "vous cliquez sur Exécuter le greffon sera redémarrer sinon supprimer de "
 "manière permanente du tableau de bord."
 
-#: ../panel/panel-preferences-dialog.c:461
+#: ../panel/panel-preferences-dialog.c:467
 msgid "Automatic"
 msgstr "Automatique"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:480
+#: ../panel/panel-preferences-dialog.c:486
 #, c-format
 msgid "Screen %d"
 msgstr "Écran %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:506
+#: ../panel/panel-preferences-dialog.c:512
 #, c-format
 msgid "Monitor %d"
 msgstr "Écran %d"
 
-#: ../panel/panel-preferences-dialog.c:837
+#: ../panel/panel-preferences-dialog.c:867
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "Les configurations du tableau de bord et greffons seront supprimées de "
 "manière permanente"
 
-#: ../panel/panel-preferences-dialog.c:838
+#: ../panel/panel-preferences-dialog.c:868
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Êtes-vous sûr de vouloir supprimer le tableau de bord %d ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:921
+#: ../panel/panel-preferences-dialog.c:953
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externe)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:926
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -371,7 +349,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:938
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom interne : %s-%d"
@@ -607,7 +585,7 @@ msgstr "_Normal :"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Lock panel"
-msgstr "_Vérouiller le tableau de bord"
+msgstr "_Vérrouiller le tableau de bord"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
 #: ../plugins/separator/separator-dialog.glade.h:7
@@ -955,11 +933,11 @@ msgstr "Sélection de l'icône"
 msgid "Failed to execute command \"%s\"."
 msgstr "Échec à l'exécution de la commande « %s »."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1070
+#: ../plugins/applicationsmenu/applicationsmenu.c:1073
 msgid "No applications found"
 msgstr "Aucune application trouvée"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1093
+#: ../plugins/applicationsmenu/applicationsmenu.c:1096
 msgid "Failed to load the applications menu"
 msgstr "Échec au chargement du fichier de menu"
 
@@ -1358,16 +1336,16 @@ msgstr "Application par défaut non trouvée pour « %s »"
 msgid "Failed to launch default application for \"%s\""
 msgstr "Échec à l'exécution de l'application par défaut de « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:717
+#: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Échec à l'exécution de l'application préférée pour la catégorie « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:790
+#: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
 msgstr "Ouvrir le répertoire"
 
-#: ../plugins/directorymenu/directorymenu.c:801
+#: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
 msgstr "Ouvrir dans un terminal"
 
@@ -1750,23 +1728,23 @@ msgstr "Titre de la fenêtre"
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Changer d'espace de travail à l'aide de la roulette de la souris"
 
-#: ../plugins/tasklist/tasklist-widget.c:3176
+#: ../plugins/tasklist/tasklist-widget.c:3177
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3185
+#: ../plugins/tasklist/tasklist-widget.c:3186
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3191
+#: ../plugins/tasklist/tasklist-widget.c:3192
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3200
+#: ../plugins/tasklist/tasklist-widget.c:3201
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3210
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "_Close All"
 msgstr "Tout _fermer"
 
@@ -1836,6 +1814,22 @@ msgstr "Menu des fenêtres"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Circuler parmi les fenêtres ouvertes en utilisant un menu"
+
+#~ msgid "_Read Online"
+#~ msgstr "_Lire en ligne"
+
+#~ msgid ""
+#~ "You can read the user manual online. This manual may however not exactly "
+#~ "match your panel version."
+#~ msgstr ""
+#~ "Vous pouvez lire le manuel en ligne. Cependant le manuel ne correspond "
+#~ "pas forcément à la version de votre tableau de bord."
+
+#~ msgid "The user manual is not installed on your computer"
+#~ msgstr "Le manuel n'est pas installé sur votre machine"
+
+#~ msgid "Failed to open the documentation browser"
+#~ msgstr "Échec à l'ouverture du navigateur"
 
 #~ msgid "_Orientation:"
 #~ msgstr "_Orientation :"
