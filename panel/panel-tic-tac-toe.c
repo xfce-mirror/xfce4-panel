@@ -419,7 +419,7 @@ panel_tic_tac_toe_get_move (gint state,
                             gint level)
 {
   gint winner;
-  gint moves, legal_moves;
+  gint moves = 0, legal_moves;
   gint first_moves;
   gint rate, value;
   gint i;

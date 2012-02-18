@@ -437,12 +437,12 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bg_image_notified (dialog);
 
   /* get run mode of the driver (multiple screens or randr) */
+  screen = gtk_widget_get_screen (GTK_WIDGET (dialog->active));
   display = gtk_widget_get_display (GTK_WIDGET (dialog->active));
   n_screens = gdk_display_get_n_screens (display);
   n_monitors = 1;
   if (G_LIKELY (n_screens <= 1))
     {
-      screen = gtk_widget_get_screen (GTK_WIDGET (dialog->active));
       n_monitors = gdk_screen_get_n_monitors (screen);
     }
 
