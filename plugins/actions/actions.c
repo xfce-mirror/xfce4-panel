@@ -431,9 +431,11 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   GList         *children, *li;
   gint           n_children;
   gint           child_size;
+  gint           max_size;
 
   if (plugin->type == APPEARANCE_TYPE_BUTTONS)
     {
+      max_size = size / xfce_panel_plugin_get_nrows (panel_plugin);
       box = gtk_bin_get_child (GTK_BIN (plugin));
       if (box != NULL)
         {
@@ -446,8 +448,9 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
               for (li = children; li != NULL; li = li->next)
                 {
-                  child_size = size / n_children--;
+                  child_size = MIN (size / n_children, max_size);
                   size -= child_size;
+                  n_children--;
 
                   gtk_widget_set_size_request (GTK_WIDGET (li->data),
                                                child_size, child_size);
@@ -457,7 +460,7 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
             {
               gtk_container_foreach (GTK_CONTAINER (box),
                   actions_plugin_size_changed_child,
-                  GINT_TO_POINTER (size));
+                  GINT_TO_POINTER (max_size));
             }
         }
     }
