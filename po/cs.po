@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-01 22:12+0000\n"
-"PO-Revision-Date: 2012-01-02 02:13+0100\n"
+"POT-Creation-Date: 2012-02-24 12:51+0000\n"
+"PO-Revision-Date: 2012-02-24 14:20+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -32,37 +32,20 @@ msgstr "Přizpůsobit panel"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:29
-#: ../panel/panel-window.c:2327
+#: ../panel/panel-window.c:2340
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
 
-#: ../common/panel-utils.c:157
-msgid "_Read Online"
-msgstr "Číst _online"
-
-#: ../common/panel-utils.c:158
-msgid "You can read the user manual online. This manual may however not exactly match your panel version."
-msgstr "Uživatelskou příručku můžete číst online, může se však lišit od současně nainstalované verze panelu."
-
-#: ../common/panel-utils.c:160
-msgid "The user manual is not installed on your computer"
-msgstr "Uživatelská příručka není na tomto počítači nainstalována."
-
-#. display an error message to the user
-#: ../common/panel-utils.c:175
-msgid "Failed to open the documentation browser"
-msgstr "Otevření prohlížeče dokumentace se nezdařilo."
-
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1078
+#: ../panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Opravdu chcete odebrat  \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1081
+#: ../panel/panel-preferences-dialog.c:1092
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Odeberete-li položku z panelu, zůstane trvale odebrána."
 
@@ -77,60 +60,60 @@ msgstr "Pane_l"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1244
-#: ../panel/panel-window.c:2339
+#: ../panel/panel-window.c:2352
 msgid "Add _New Items..."
 msgstr "Přidat _nové položky..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1255
-#: ../panel/panel-window.c:2350
+#: ../panel/panel-window.c:2363
 msgid "Panel Pr_eferences..."
 msgstr "Př_edvolby panelu..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1272
-#: ../panel/panel-window.c:2366
+#: ../panel/panel-window.c:2379
 msgid "Log _Out"
 msgstr "_Odhlásit"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Zobrazit dialogové okno „Předvolby panelu“"
 
-#: ../panel/main.c:78
 #: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "ČÍSLO-PANELU"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "Zobrazit dialogové okno „Přidat nové položky“"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "Uložit konfiguraci panelu"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "Přidat nový zásuvný modul na panel"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "NÁZEV-ZÁSUVNÉHO-MODULU"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "Restartovat spuštěnou instanci panelu"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "Ukončit spuštěnou instanci panelu"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
 msgstr "Při spuštění nečekat na správce oken"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -138,67 +121,67 @@ msgid "Print version information and exit"
 msgstr "Zobrazí informace o verzi a ukončí se"
 
 #. parse context options
-#: ../panel/main.c:232
+#: ../panel/main.c:234
 msgid "[ARGUMENTS...]"
 msgstr "[PARAMETRY...]"
 
-#: ../panel/main.c:239
+#: ../panel/main.c:241
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Informace o použití získáte příkazem \"%s --help\""
 
-#: ../panel/main.c:258
+#: ../panel/main.c:260
 msgid "The Xfce development team. All rights reserved."
 msgstr "Tým vývojářů Xfce. Všechna práva vyhrazena."
 
-#: ../panel/main.c:259
+#: ../panel/main.c:261
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Prosíme, abyste chyby hlásili na adresu <%s>."
 
-#: ../panel/main.c:310
+#: ../panel/main.c:312
 msgid "There is already a running instance"
 msgstr "Již je spuštěna jedna instance"
 
 #. spawn ourselfs again
-#: ../panel/main.c:352
+#: ../panel/main.c:354
 msgid "Restarting..."
 msgstr "Restartování..."
 
-#: ../panel/main.c:367
+#: ../panel/main.c:369
 msgid "Failed to show the preferences dialog"
 msgstr "Zobrazení dialogu předvoleb se nezdařilo"
 
-#: ../panel/main.c:369
+#: ../panel/main.c:371
 msgid "Failed to show the add new items dialog"
 msgstr "Zobrazení dialogu pro přidání nových položek se nezdařilo"
 
-#: ../panel/main.c:371
+#: ../panel/main.c:373
 msgid "Failed to save the panel configuration"
 msgstr "Uložení konfigurace panelu se nezdařilo"
 
-#: ../panel/main.c:373
+#: ../panel/main.c:375
 msgid "Failed to add a plugin to the panel"
 msgstr "Přidání zásuvného modulu na panel se nezdařilo"
 
-#: ../panel/main.c:375
+#: ../panel/main.c:377
 msgid "Failed to restart the panel"
 msgstr "Restart panelu se nezdařil"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:379
 msgid "Failed to quit the panel"
 msgstr "Ukončení panelu se nezdařilo"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:381
 msgid "Failed to send D-Bus message"
 msgstr "Odeslání zprávy sběrnici D-Bus se nezdařilo"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:392
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Chcete spustit panel? Pokud ano, ujistěte se, že jste uložili relaci při odhlášení, aby se panel automaticky spustil během příštího přihlášení."
 
-#: ../panel/main.c:393
-#: ../panel/main.c:407
+#: ../panel/main.c:395
+#: ../panel/main.c:409
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nebyla nalezena žádná spuštěná instance %s"
@@ -207,24 +190,24 @@ msgstr "Nebyla nalezena žádná spuštěná instance %s"
 msgid "Failed to launch the migration application"
 msgstr "Spuštění migrace aplikace se nezdařilo"
 
-#: ../panel/panel-application.c:1666
+#: ../panel/panel-application.c:1673
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Spustili jste X bez správce relace. Kliknutím na tlačítko Ukončit zavřete X server."
 
-#: ../panel/panel-application.c:1667
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Opravdu chcete ukončit panel?"
 
-#: ../panel/panel-application.c:1675
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Spuštění příkazu \"%s\" se nezdařilo"
 
-#: ../panel/panel-dbus-client.c:208
+#: ../panel/panel-dbus-client.c:210
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Byla zadána neplatná syntaxe události zásuvného modulu. Použijte NÁZEV-ZÁSUVNÉHO-MODULU:NÁZEV[:TYP:HODNOTA]."
 
-#: ../panel/panel-dbus-client.c:241
+#: ../panel/panel-dbus-client.c:243
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Neplatný typ tipu \"%s\". Platnými typy jsou bool, double, int, string a uint."
@@ -248,7 +231,7 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Zvolte panel pro nový zásuvný modul:"
 
 #: ../panel/panel-dialogs.c:186
-#: ../panel/panel-preferences-dialog.c:790
+#: ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -288,41 +271,41 @@ msgstr "Zásuvný modul \"%s\" neočekávaně opustil panel, chcete jej restarto
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "Zásuvný modul se během předchozích %d sekund restartoval více než jednou. Pokud stisknete tlačítko Spustit, panel se pokusí o restart zásuvného modulu, v opačném případě bude zásuvný modul trvale odebrán z panelu."
 
-#: ../panel/panel-preferences-dialog.c:456
+#: ../panel/panel-preferences-dialog.c:467
 msgid "Automatic"
 msgstr "Automatický"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:475
+#: ../panel/panel-preferences-dialog.c:486
 #, c-format
 msgid "Screen %d"
 msgstr "Obrazovka %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:501
+#: ../panel/panel-preferences-dialog.c:512
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:856
+#: ../panel/panel-preferences-dialog.c:867
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Nastavení panelu a zásuvných modulů budou trvale odstraněna"
 
-#: ../panel/panel-preferences-dialog.c:857
+#: ../panel/panel-preferences-dialog.c:868
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Opravdu chcete odebrat panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:942
+#: ../panel/panel-preferences-dialog.c:953
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externí)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:947
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -333,7 +316,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interní název: %s-%d"
@@ -830,15 +813,15 @@ msgstr "Tuto volbu vyberte pro zobrazení obecných názvů aplikací v nabídce
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
-msgstr "Zobrazovat popis _aplikace jako tip"
+msgstr "Zobrazit popis _aplikace jako tip"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Show generic application n_ames"
-msgstr "Zobrazovat obecné _názvy aplikací"
+msgstr "Zobrazit obecné _názvy aplikací"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr "Zobrazovat _ikony v nabídce"
+msgstr "Zobrazit _ikony v nabídce"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
@@ -855,7 +838,7 @@ msgstr "_Ikona:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
-msgstr "Zobrazovat _titulek okna"
+msgstr "Zobrazit _titulek okna"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:528
 #: ../plugins/directorymenu/directorymenu.c:388
@@ -950,7 +933,7 @@ msgstr "Digitální"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
-msgstr "Zobrazovat _sekundy"
+msgstr "Zobrazit _sekundy"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "F_ormat:"
@@ -980,11 +963,11 @@ msgstr "Zo_brazovat AM a PM (dopoledne a odpoledne)"
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
-msgstr "Zobrazovat _rámeček"
+msgstr "Zobrazit _rámeček"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
-msgstr "Zobrazovat _neaktivní tečky"
+msgstr "Zobrazit _neaktivní tečky"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
@@ -1264,16 +1247,16 @@ msgstr "Výchozí aplikace pro „%s“ nebyla nalezena"
 msgid "Failed to launch default application for \"%s\""
 msgstr "Spuštění výchozí aplikace pro „%s“ se nezdařilo"
 
-#: ../plugins/directorymenu/directorymenu.c:717
+#: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Spuštění upřednostňované aplikace v kategorii \"%s\" se nezdařilo"
 
-#: ../plugins/directorymenu/directorymenu.c:790
+#: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
 msgstr "Otevřít složku"
 
-#: ../plugins/directorymenu/directorymenu.c:801
+#: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
 msgstr "Otevřít v terminálu"
 
@@ -1403,7 +1386,7 @@ msgstr "Tuto volbu vyberte pro přesun položky nabídky na panel"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr "Zobrazovat _popisky místo ikon"
+msgstr "Zobrazit _popisky místo ikon"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
@@ -1560,7 +1543,7 @@ msgstr "Vždy"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr "_Vykreslovat rám okna při umístění ukazatele myši nad tlačítko"
+msgstr "_Vykreslit rám okna při umístění ukazatele myši nad tlačítko"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
@@ -1580,11 +1563,11 @@ msgstr "Žádný, povolit přetažení"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
-msgstr "Obnoví minimalizovaná okna na této _pracovní ploše"
+msgstr "Obnovit minimalizovaná okna na této _pracovní ploše"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr "Zobrazovat _plochá tlačítka"
+msgstr "Zobrazit _plochá tlačítka"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
@@ -1592,11 +1575,11 @@ msgstr "Zobrazova_t úchytku"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
-msgstr "Zobrazovat _názvy tlačítek"
+msgstr "Zobrazit _názvy tlačítek"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
-msgstr "Zobrazovat pouze _minimalizovaná okna"
+msgstr "Zobrazit pouze _minimalizovaná okna"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
@@ -1633,7 +1616,7 @@ msgstr "Titulek okna"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "_Switch windows using the mouse wheel"
-msgstr "Přepínání mezi okny _kolečkem myši"
+msgstr "Přepínat mezi okny _kolečkem myši"
 
 #: ../plugins/tasklist/tasklist-widget.c:3177
 msgid "Mi_nimize All"
@@ -1721,6 +1704,22 @@ msgstr "Nabídka okna"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Přepínání oken nabídkou"
+
+#~ msgid "_Read Online"
+#~ msgstr "Číst _online"
+
+#~ msgid ""
+#~ "You can read the user manual online. This manual may however not exactly "
+#~ "match your panel version."
+#~ msgstr ""
+#~ "Uživatelskou příručku můžete číst online, může se však lišit od současně "
+#~ "nainstalované verze panelu."
+
+#~ msgid "The user manual is not installed on your computer"
+#~ msgstr "Uživatelská příručka není na tomto počítači nainstalována."
+
+#~ msgid "Failed to open the documentation browser"
+#~ msgstr "Otevření prohlížeče dokumentace se nezdařilo."
 
 #~ msgid "_Orientation:"
 #~ msgstr "_Orientace:"
