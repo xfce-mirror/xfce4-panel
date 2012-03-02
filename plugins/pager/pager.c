@@ -42,6 +42,7 @@
 
 
 #define WORKSPACE_SETTINGS_COMMAND "xfwm4-workspace-settings"
+#define WNCK_PAGER_HAS_LAYOUT_POLICY (defined (WNCK_CHECK_VERSION) && WNCK_CHECK_VERSION (2,31,0))
 
 
 
@@ -66,10 +67,12 @@ static void     pager_plugin_mode_changed                 (XfcePanelPlugin     *
 static void     pager_plugin_configure_workspace_settings (GtkWidget         *button);
 static void     pager_plugin_configure_plugin             (XfcePanelPlugin   *panel_plugin);
 static void     pager_plugin_screen_layout_changed        (PagerPlugin       *plugin);
+#if !WNCK_PAGER_HAS_LAYOUT_POLICY
 static void     pager_plugin_size_request                 (GtkWidget         *widget,
                                                            GtkRequisition    *requisition);
 static void     pager_plugin_size_allocate                (GtkWidget         *widget,
                                                            GtkAllocation     *allocation);
+#endif
 
 
 
@@ -91,11 +94,13 @@ struct _PagerPlugin
   guint          miniature_view : 1;
   gint           rows;
 
+#if !WNCK_PAGER_HAS_LAYOUT_POLICY
   /* panel size */
   gint           size;
 
   /* last height of the WNCK pager in deskbar mode */
   gint           height;
+#endif
 };
 
 enum
@@ -127,8 +132,10 @@ pager_plugin_class_init (PagerPluginClass *klass)
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->scroll_event = pager_plugin_scroll_event;
+#if !WNCK_PAGER_HAS_LAYOUT_POLICY
   widget_class->size_request = pager_plugin_size_request;
   widget_class->size_allocate = pager_plugin_size_allocate;
+#endif
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = pager_plugin_construct;
@@ -169,8 +176,10 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->miniature_view = TRUE;
   plugin->rows = 1;
   plugin->pager = NULL;
+#if !WNCK_PAGER_HAS_LAYOUT_POLICY
   plugin->size = 0;
   plugin->height = 1;
+#endif
 }
 
 
@@ -293,7 +302,8 @@ pager_plugin_scroll_event (GtkWidget      *widget,
 static void
 pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 {
-  GtkOrientation orientation;
+  XfcePanelPluginMode mode;
+  GtkOrientation      orientation;
 
   panel_return_if_fail (XFCE_IS_PAGER_PLUGIN (plugin));
   panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
@@ -304,8 +314,9 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
       wnck_screen_force_update (plugin->wnck_screen);
     }
 
+  mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
   orientation =
-    (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) != XFCE_PANEL_PLUGIN_MODE_VERTICAL) ?
+    (mode != XFCE_PANEL_PLUGIN_MODE_VERTICAL) ?
     GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
   if (plugin->miniature_view)
@@ -314,6 +325,12 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
       wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
       if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
         g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
+#if WNCK_PAGER_HAS_LAYOUT_POLICY
+      wnck_pager_set_layout_policy (WNCK_PAGER (plugin->pager),
+                                    (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
+                                    WNCK_PAGER_LAYOUT_POLICY_WIDTH_FOR_HEIGHT :
+                                    WNCK_PAGER_LAYOUT_POLICY_HEIGHT_FOR_WIDTH);
+#endif
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
     }
   else
@@ -402,6 +419,7 @@ pager_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 
+#if !WNCK_PAGER_HAS_LAYOUT_POLICY
 static void
 pager_plugin_size_request (GtkWidget      *widget,
                            GtkRequisition *requisition)
@@ -459,6 +477,7 @@ pager_plugin_size_allocate (GtkWidget      *widget,
     }
   gtk_widget_size_allocate (plugin->pager, allocation);
 }
+#endif
 
 
 
@@ -466,6 +485,7 @@ static gboolean
 pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint             size)
 {
+#if !WNCK_PAGER_HAS_LAYOUT_POLICY
   PagerPlugin        *plugin = XFCE_PAGER_PLUGIN (panel_plugin);
 
   if (plugin->size != size)
@@ -480,6 +500,7 @@ pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
           gtk_widget_queue_resize (GTK_WIDGET (panel_plugin));
         }
     }
+#endif
 
   /* do not set fixed size */
   return TRUE;
@@ -499,7 +520,15 @@ pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
     GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
   if (plugin->miniature_view)
-    wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+    {
+#if WNCK_PAGER_HAS_LAYOUT_POLICY
+      wnck_pager_set_layout_policy (WNCK_PAGER (plugin->pager),
+                                    (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
+                                    WNCK_PAGER_LAYOUT_POLICY_WIDTH_FOR_HEIGHT :
+                                    WNCK_PAGER_LAYOUT_POLICY_HEIGHT_FOR_WIDTH);
+#endif
+      wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+    }
   else
     pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
 }
