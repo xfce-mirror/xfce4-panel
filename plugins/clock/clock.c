@@ -23,9 +23,6 @@
 #ifdef HAVE_TIME_H
 #include <time.h>
 #endif
-#ifdef HAVE_SIGNAL_H
-#include <signal.h>
-#endif
 #ifdef HAVE_MATH_H
 #include <math.h>
 #endif
@@ -74,6 +71,9 @@ static void     clock_plugin_mode_changed              (XfcePanelPlugin       *p
 static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_set_mode                  (ClockPlugin           *plugin);
 static gboolean clock_plugin_tooltip                   (gpointer               user_data);
+static gboolean clock_plugin_timeout_running           (gpointer               user_data);
+static void     clock_plugin_timeout_destroyed         (gpointer               user_data);
+static gboolean clock_plugin_timeout_sync              (gpointer               user_data);
 
 
 
@@ -125,11 +125,11 @@ struct _ClockPlugin
 
 struct _ClockPluginTimeout
 {
+  guint       interval;
   GSourceFunc function;
   gpointer    data;
-  guint       interval;
-  guint       timer_idle;
-  timer_t     timer_id;
+  guint       timeout_id;
+  guint       restart : 1;
 };
 
 typedef struct
@@ -905,35 +905,62 @@ clock_plugin_tooltip (gpointer user_data)
 
 
 static gboolean
-clock_plugin_timeout_expired_idle (gpointer data)
+clock_plugin_timeout_running (gpointer user_data)
 {
-  ClockPluginTimeout *timeout = data;
-
-  timeout->timer_idle = 0;
+  ClockPluginTimeout *timeout = user_data;
+  gboolean            result;
+  struct tm           tm;
 
   GDK_THREADS_ENTER ();
-  (timeout->function) (timeout->data);
+  result = (timeout->function) (timeout->data);
   GDK_THREADS_LEAVE ();
 
-  return FALSE;
+  /* check if the timeout still runs in time if updating once a minute */
+  if (result && timeout->interval == CLOCK_INTERVAL_MINUTE)
+    {
+      /* sync again when we don't run on time */
+      clock_plugin_get_localtime (&tm);
+      timeout->restart = tm.tm_sec != 0;
+    }
+
+  return result && !timeout->restart;
 }
 
 
 
 static void
-clock_plugin_timeout_expired (sigval_t info)
+clock_plugin_timeout_destroyed (gpointer user_data)
 {
-  ClockPluginTimeout *timeout = info.sival_ptr;
+  ClockPluginTimeout *timeout = user_data;
 
-  panel_return_if_fail (GTK_IS_WIDGET (timeout->data));
+  timeout->timeout_id = 0;
 
-  /* drop pending timeout */
-  if (timeout->timer_idle != 0)
-    g_source_remove (timeout->timer_idle);
+  if (G_UNLIKELY (timeout->restart))
+    clock_plugin_timeout_set_interval (timeout, timeout->interval);
+}
 
-  /* this function is called in a new thread, schedule
-   * an update in the mainloop */
-  timeout->timer_idle = g_idle_add (clock_plugin_timeout_expired_idle, timeout);
+
+
+static gboolean
+clock_plugin_timeout_sync (gpointer user_data)
+{
+  ClockPluginTimeout *timeout = user_data;
+
+  /* run the user function */
+  if ((timeout->function) (timeout->data))
+    {
+      /* start the real timeout */
+      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, timeout->interval,
+                                                        clock_plugin_timeout_running, timeout,
+                                                        clock_plugin_timeout_destroyed);
+    }
+  else
+    {
+      timeout->timeout_id = 0;
+    }
+
+  /* stop the sync timeout */
+  return FALSE;
 }
 
 
@@ -944,25 +971,18 @@ clock_plugin_timeout_new (guint       interval,
                           gpointer    data)
 {
   ClockPluginTimeout *timeout;
-  struct sigevent     event;
 
   panel_return_val_if_fail (interval > 0, NULL);
   panel_return_val_if_fail (function != NULL, NULL);
 
   timeout = g_slice_new0 (ClockPluginTimeout);
+  timeout->interval = 0;
   timeout->function = function;
   timeout->data = data;
+  timeout->timeout_id = 0;
+  timeout->restart = FALSE;
 
-  event.sigev_notify = SIGEV_THREAD;
-  event.sigev_notify_function = clock_plugin_timeout_expired;
-  event.sigev_notify_attributes = NULL;
-  event.sigev_value.sival_ptr = timeout;
-
-  /* create the realtime timer */
-  if (timer_create (CLOCK_REALTIME, &event, &timeout->timer_id) == 0)
-    clock_plugin_timeout_set_interval (timeout, interval);
-  else
-    g_critical ("Failed to start realtime clock timeout");
+  clock_plugin_timeout_set_interval (timeout, interval);
 
   return timeout;
 }
@@ -973,42 +993,53 @@ void
 clock_plugin_timeout_set_interval (ClockPluginTimeout *timeout,
                                    guint               interval)
 {
-  struct itimerspec itimer;
-  GTimeVal          current;
-  gint              flags = 0;
+  struct tm tm;
+  guint     next_interval;
+  gboolean  restart = timeout->restart;
 
-  /* leave if the intervals are equal */
-  if (timeout->interval == interval)
+  panel_return_if_fail (timeout != NULL);
+  panel_return_if_fail (interval > 0);
+
+  /* leave if nothing changed and we're not restarting */
+  if (!restart && timeout->interval == interval)
+    return;
+  timeout->interval = interval;
+  timeout->restart = FALSE;
+
+  /* stop running timeout */
+  if (G_LIKELY (timeout->timeout_id != 0))
+    g_source_remove (timeout->timeout_id);
+  timeout->timeout_id = 0;
+
+  /* run function when not restarting, leave if it returns false */
+  if (!restart && !(timeout->function) (timeout->data))
     return;
 
-  /* set the interval timeout */
-  timeout->interval = interval;
-  itimer.it_interval.tv_sec = interval;
-  itimer.it_interval.tv_nsec = 0;
-
-  if (interval >= CLOCK_INTERVAL_MINUTE)
+  /* get the seconds to the next internal */
+  if (interval == CLOCK_INTERVAL_MINUTE)
     {
-      g_get_current_time (&current);
-
-      /* sync to the next absolute time */
-      itimer.it_value.tv_nsec = 0;
-      itimer.it_value.tv_sec = current.tv_sec + 60 - (current.tv_sec % 60) + 1;
-
-      flags = TIMER_ABSTIME;
+      clock_plugin_get_localtime (&tm);
+      next_interval = 60 - tm.tm_sec;
     }
   else
     {
-      /* for the seconds timer */
-      itimer.it_value.tv_nsec = 0;
-      itimer.it_value.tv_sec = interval;
+      next_interval = 0;
     }
 
-  if (timer_settime (timeout->timer_id, flags, &itimer, NULL) != 0)
-    g_critical ("Failed to set timer timeout");
-
-  /* schedule the first update */
-  if (timeout->timer_idle == 0)
-    timeout->timer_idle = g_idle_add (clock_plugin_timeout_expired_idle, timeout);
+  if (next_interval > 0)
+    {
+      /* start the sync timeout */
+      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, next_interval,
+                                                        clock_plugin_timeout_sync,
+                                                        timeout, NULL);
+    }
+  else
+    {
+      /* directly start running the normal timeout */
+      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, interval,
+                                                        clock_plugin_timeout_running, timeout,
+                                                        clock_plugin_timeout_destroyed);
+    }
 }
 
 
@@ -1018,9 +1049,9 @@ clock_plugin_timeout_free (ClockPluginTimeout *timeout)
 {
   panel_return_if_fail (timeout != NULL);
 
-  timer_delete (timeout->timer_id);
-  if (timeout->timer_idle != 0)
-    g_source_remove (timeout->timer_idle);
+  timeout->restart = FALSE;
+  if (G_LIKELY (timeout->timeout_id != 0))
+    g_source_remove (timeout->timeout_id);
   g_slice_free (ClockPluginTimeout, timeout);
 }
 
