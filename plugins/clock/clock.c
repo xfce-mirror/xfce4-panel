@@ -921,7 +921,7 @@ clock_plugin_timeout_expired_idle (gpointer data)
 
 
 static void
-clock_plugin_timeout_expired (union sigval info)
+clock_plugin_timeout_expired (sigval_t info)
 {
   ClockPluginTimeout *timeout = info.sival_ptr;
 
