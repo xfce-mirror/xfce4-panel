@@ -771,8 +771,7 @@ xfce_tasklist_size_request (GtkWidget      *widget,
       rows = MAX (tasklist->nrows, 1);
       if (tasklist->show_labels && tasklist->max_button_size > 0)
         {
-          rows = MAX (rows,
-                      ceil ((gdouble) tasklist->size / (gdouble) tasklist->max_button_size));
+          rows = MAX (rows, tasklist->size / tasklist->max_button_size);
           child_height = MIN (child_height, tasklist->max_button_size);
         }
 
@@ -847,8 +846,7 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
   if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
     rows = 1;
   else if (tasklist->show_labels && tasklist->max_button_size > 0)
-    rows = MAX (tasklist->nrows,
-                ceil ((gdouble) tasklist->size / (gdouble) tasklist->max_button_size));
+    rows = MAX (tasklist->nrows, tasklist->size / tasklist->max_button_size);
   else
     rows = tasklist->nrows;
 
