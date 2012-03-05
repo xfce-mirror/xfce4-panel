@@ -769,6 +769,12 @@ xfce_tasklist_size_request (GtkWidget      *widget,
   else
     {
       rows = MAX (tasklist->nrows, 1);
+      if (tasklist->show_labels && tasklist->max_button_size > 0)
+        {
+          rows = MAX (rows,
+                      ceil ((gdouble) tasklist->size / (gdouble) tasklist->max_button_size));
+          child_height = MIN (child_height, tasklist->max_button_size);
+        }
 
       cols = n_windows / rows;
       if (cols * rows < n_windows)
@@ -840,6 +846,9 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
   /* if we're in deskbar mode, there are no columns */
   if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
     rows = 1;
+  else if (tasklist->show_labels && tasklist->max_button_size > 0)
+    rows = MAX (tasklist->nrows,
+                ceil ((gdouble) tasklist->size / (gdouble) tasklist->max_button_size));
   else
     rows = tasklist->nrows;
 
@@ -850,7 +859,9 @@ xfce_tasklist_size_layout (XfceTasklist  *tasklist,
   if (cols * rows < tasklist->n_windows)
     cols++;
 
-  if (xfce_tasklist_deskbar (tasklist) || !tasklist->show_labels)
+  if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
+    min_button_length = MIN (alloc->height / tasklist->nrows, tasklist->max_button_size);
+  else if (!tasklist->show_labels)
     min_button_length = alloc->height / tasklist->nrows;
   else
     min_button_length = tasklist->min_button_length;
@@ -1036,7 +1047,7 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
               if (xfce_tasklist_deskbar (tasklist) && tasklist->show_labels)
                 {
                   /* fixed width is OK because area.width==w*cols */
-                  w = area.height / tasklist->nrows;
+                  w = MIN (area.height / tasklist->nrows, tasklist->max_button_size);
                 }
               else if (tasklist->show_labels)
                 {
