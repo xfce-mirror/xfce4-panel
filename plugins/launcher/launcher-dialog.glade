@@ -37,9 +37,9 @@
       <column type="gchararray"/>
       <!-- column-name item -->
       <column type="GObject"/>
-      <!-- column-name search -->
-      <column type="gchararray"/>
       <!-- column-name tooltip -->
+      <column type="gchararray"/>
+      <!-- column-name search -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -51,6 +51,8 @@
       <column type="gchararray"/>
       <!-- column-name item -->
       <column type="GObject"/>
+      <!-- column-name tooltip -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkTreeModelFilter" id="add-store-filter">
@@ -214,6 +216,7 @@
                         <property name="headers_visible">False</property>
                         <property name="rules_hint">True</property>
                         <property name="enable_search">False</property>
+                        <property name="tooltip_column">3</property>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn2">
                             <property name="spacing">2</property>
@@ -597,7 +600,7 @@
                     <property name="headers_visible">False</property>
                     <property name="rules_hint">True</property>
                     <property name="enable_search">False</property>
-                    <property name="tooltip_column">4</property>
+                    <property name="tooltip_column">3</property>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                         <property name="spacing">2</property>

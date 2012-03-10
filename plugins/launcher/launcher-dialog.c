@@ -69,8 +69,8 @@ enum
   COL_ICON,
   COL_NAME,
   COL_ITEM,
-  COL_SEARCH,
-  COL_TOOLTIP
+  COL_TOOLTIP,
+  COL_SEARCH /* only in add-store */
 };
 
 
@@ -185,8 +185,6 @@ launcher_dialog_add_store_insert (gpointer key,
                                   gpointer user_data)
 {
   GtkTreeIter     iter;
-  gchar          *tooltip;
-  GFile          *gfile;
   GarconMenuItem *item = GARCON_MENU_ITEM (value);
   GtkTreeModel   *model = GTK_TREE_MODEL (user_data);
 
@@ -195,13 +193,6 @@ launcher_dialog_add_store_insert (gpointer key,
 
   gtk_list_store_append (GTK_LIST_STORE (model), &iter);
   launcher_dialog_items_set_item (model, &iter, item, NULL);
-
-  gfile = garcon_menu_item_get_file (item);
-  tooltip = g_file_get_parse_name (gfile);
-  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-                      COL_TOOLTIP, tooltip, -1);
-  g_object_unref (G_OBJECT (gfile));
-  g_free (tooltip);
 }
 
 
@@ -1050,6 +1041,8 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
   GdkPixbuf   *icon = NULL;
   const gchar *icon_name;
   gint         w, h;
+  gchar       *tooltip;
+  GFile       *gfile;
 
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
   panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
@@ -1075,10 +1068,15 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
     g_signal_handlers_block_by_func (G_OBJECT (model),
         G_CALLBACK (launcher_dialog_tree_row_changed), dialog);
 
+  gfile = garcon_menu_item_get_file (item);
+  tooltip = g_file_get_parse_name (gfile);
+  g_object_unref (G_OBJECT (gfile));
+
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
                       COL_ICON, icon,
                       COL_NAME, markup,
                       COL_ITEM, item,
+                      COL_TOOLTIP, tooltip,
                       -1);
 
   if (dialog != NULL)
@@ -1088,6 +1086,7 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
   if (G_LIKELY (icon != NULL))
     g_object_unref (G_OBJECT (icon));
   g_free (markup);
+  g_free (tooltip);
 }
 
 
