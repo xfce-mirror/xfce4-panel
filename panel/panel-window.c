@@ -2294,6 +2294,19 @@ panel_window_set_autohide (PanelWindow *window,
 
 
 static void
+panel_window_menu_toggle_locked (GtkCheckMenuItem *item,
+                                 PanelWindow      *window)
+{
+  panel_return_if_fail (GTK_IS_CHECK_MENU_ITEM (item));
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  g_object_set (G_OBJECT (window), "position-locked",
+      gtk_check_menu_item_get_active (item), NULL);
+}
+
+
+
+static void
 panel_window_menu_help (void)
 {
   panel_utils_show_help (NULL, NULL, NULL);
@@ -2369,6 +2382,18 @@ panel_window_menu_popup (PanelWindow *window,
       image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
       gtk_widget_show (image);
+
+      item = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
+
+      item = gtk_check_menu_item_new_with_mnemonic (_("_Lock Panel"));
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
+          window->position_locked);
+      g_signal_connect (G_OBJECT (item), "toggled",
+          G_CALLBACK (panel_window_menu_toggle_locked), window);
+      gtk_widget_show (item);
 
       item = gtk_separator_menu_item_new ();
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
