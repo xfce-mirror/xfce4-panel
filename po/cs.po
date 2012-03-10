@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-24 12:51+0000\n"
-"PO-Revision-Date: 2012-02-24 14:29+0100\n"
+"POT-Creation-Date: 2012-03-10 20:09+0000\n"
+"PO-Revision-Date: 2012-03-11 00:26+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -32,7 +32,7 @@ msgstr "Přizpůsobit panel"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:29
-#: ../panel/panel-window.c:2340
+#: ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -42,7 +42,7 @@ msgstr "Panel"
 #: ../panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Opravdu chcete odebrat  \"%s\"?"
+msgstr "Opravdu chcete odebrat \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1092
@@ -60,19 +60,19 @@ msgstr "Pane_l"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1244
-#: ../panel/panel-window.c:2352
+#: ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "Přidat _nové položky..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1255
-#: ../panel/panel-window.c:2363
+#: ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "Př_edvolby panelu..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1272
-#: ../panel/panel-window.c:2379
+#: ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "_Odhlásit"
 
@@ -121,67 +121,67 @@ msgid "Print version information and exit"
 msgstr "Zobrazí informace o verzi a ukončí se"
 
 #. parse context options
-#: ../panel/main.c:234
+#: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
 msgstr "[PARAMETRY...]"
 
-#: ../panel/main.c:241
+#: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Informace o použití získáte příkazem \"%s --help\""
 
-#: ../panel/main.c:260
+#: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
 msgstr "Tým vývojářů Xfce. Všechna práva vyhrazena."
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Prosíme, abyste chyby hlásili na adresu <%s>."
 
-#: ../panel/main.c:312
+#: ../panel/main.c:320
 msgid "There is already a running instance"
 msgstr "Již je spuštěna jedna instance"
 
 #. spawn ourselfs again
-#: ../panel/main.c:354
+#: ../panel/main.c:362
 msgid "Restarting..."
 msgstr "Restartování..."
 
-#: ../panel/main.c:369
+#: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
 msgstr "Zobrazení dialogu předvoleb se nezdařilo"
 
-#: ../panel/main.c:371
+#: ../panel/main.c:379
 msgid "Failed to show the add new items dialog"
 msgstr "Zobrazení dialogu pro přidání nových položek se nezdařilo"
 
-#: ../panel/main.c:373
+#: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
 msgstr "Uložení konfigurace panelu se nezdařilo"
 
-#: ../panel/main.c:375
+#: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
 msgstr "Přidání zásuvného modulu na panel se nezdařilo"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:385
 msgid "Failed to restart the panel"
 msgstr "Restart panelu se nezdařil"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:387
 msgid "Failed to quit the panel"
 msgstr "Ukončení panelu se nezdařilo"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
 msgstr "Odeslání zprávy sběrnici D-Bus se nezdařilo"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:400
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "Chcete spustit panel? Pokud ano, ujistěte se, že jste uložili relaci při odhlášení, aby se panel automaticky spustil během příštího přihlášení."
 
-#: ../panel/main.c:395
-#: ../panel/main.c:409
+#: ../panel/main.c:403
+#: ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nebyla nalezena žádná spuštěná instance %s"
@@ -190,74 +190,86 @@ msgstr "Nebyla nalezena žádná spuštěná instance %s"
 msgid "Failed to launch the migration application"
 msgstr "Spuštění migrace aplikace se nezdařilo"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1677
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "Spustili jste X bez správce relace. Kliknutím na tlačítko Ukončit zavřete X server."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1678
 msgid "Are you sure you want to quit the panel?"
 msgstr "Opravdu chcete ukončit panel?"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1686
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Spuštění příkazu \"%s\" se nezdařilo"
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:211
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Byla zadána neplatná syntaxe události zásuvného modulu. Použijte NÁZEV-ZÁSUVNÉHO-MODULU:NÁZEV[:TYP:HODNOTA]."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "Neplatný typ tipu \"%s\". Platnými typy jsou bool, double, int, string a uint."
 
-#: ../panel/panel-dialogs.c:77
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr "Správci"
+
+#: ../panel/panel-dialogs.c:68
+msgid "Deskbar Mode"
+msgstr "Režim panelu plochy"
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr "Neaktivní správci"
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Panel pracovního prostředí Xfce"
 
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr "Michal Várady <miko.vaji@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:152
+#: ../panel/panel-dialogs.c:158
 #: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Přidat novou položku"
 
-#: ../panel/panel-dialogs.c:166
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "Zvolte panel pro nový zásuvný modul:"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:192
 #: ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:226
+#: ../panel/panel-dialogs.c:232
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
-msgstr "Z důvodu spuštění panelu v režimu kiosk nejste oprávněni provádět změny v nastavení panelu jako bežný uživatel"
+msgstr "Z důvodu spuštění panelu v režimu kiosk nejste oprávněni provádět změny v nastavení panelu, jste-li příhlášeni jako běžný uživatel"
 
-#: ../panel/panel-dialogs.c:228
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
 msgstr "Úprava panelu není povolena"
 
-#: ../panel/panel-item-dialog.c:188
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Přidat nové položky"
 
-#: ../panel/panel-item-dialog.c:190
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Přidat nové zásuvné moduly na panel"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
 msgstr "_Hledat:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Sem zadejte hledaný výraz."
 
@@ -547,6 +559,10 @@ msgstr "Zkušený"
 msgid "Expert"
 msgstr "Expert"
 
+#: ../panel/panel-window.c:2390
+msgid "_Lock Panel"
+msgstr "_Uzamknout panel"
+
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Vítejte po prvním spuštění panelu"
@@ -750,18 +766,18 @@ msgstr "Opravdu chcete vypnout systém?"
 msgid "Turning off computer in %d seconds."
 msgstr "Vypnutí počítače bude zahájeno za %d sekund."
 
-#: ../plugins/actions/actions.c:600
+#: ../plugins/actions/actions.c:603
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Oddělovač"
 
-#: ../plugins/actions/actions.c:869
+#: ../plugins/actions/actions.c:872
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Spuštění akce „%s“ se nezdařilo"
 
-#: ../plugins/actions/actions.c:1028
+#: ../plugins/actions/actions.c:1031
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -847,16 +863,16 @@ msgstr "Vyberte ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:567
 #: ../plugins/applicationsmenu/applicationsmenu.c:808
-#: ../plugins/launcher/launcher.c:2299
+#: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Spuštění příkazu \"%s\" se nezdařilo."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1073
+#: ../plugins/applicationsmenu/applicationsmenu.c:1077
 msgid "No applications found"
 msgstr "Nenalezeny žádné aplikace"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1096
+#: ../plugins/applicationsmenu/applicationsmenu.c:1100
 msgid "Failed to load the applications menu"
 msgstr "Načtení nabídky aplikací se nezdařilo"
 
@@ -902,7 +918,7 @@ msgstr "Týden %V"
 msgid "Failed to execute clock command"
 msgstr "Spuštění příkazu pro hodiny se nezdařilo"
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
 msgstr "Vlastní formát"
 
@@ -1298,24 +1314,24 @@ msgstr "Otevřít nabídku spouštěče"
 msgid "Unnamed Item"
 msgstr "Nepojmenovaná položka"
 
-#: ../plugins/launcher/launcher.c:1719
+#: ../plugins/launcher/launcher.c:1727
 msgid "No items"
 msgstr "Žádné položky"
 
-#: ../plugins/launcher/launcher-dialog.c:807
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr "Nepodařilo se otevřít editor položek pracovní plochy"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Smažete-li položku, bude trvale odstraněna"
 
-#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Opravdu chcete odebrat \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:868
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
 msgstr "Nepojmenovaná položka"
 
@@ -1412,16 +1428,16 @@ msgstr "Up_ravit položku"
 msgid "Program launcher with optional menu"
 msgstr "Spouštěč programů s volitelnou nabídkou"
 
-#: ../plugins/pager/pager.c:353
+#: ../plugins/pager/pager.c:370
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Nastavení pracovních ploch..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr "Nelze otevřít nastavení pracovní plochy"
 
-#: ../plugins/pager/pager-buttons.c:561
+#: ../plugins/pager/pager-buttons.c:579
 #: ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
