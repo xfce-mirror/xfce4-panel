@@ -60,6 +60,7 @@ void              panel_application_take_dialog       (PanelApplication  *applic
 void              panel_application_destroy_dialogs   (PanelApplication  *application);
 
 void              panel_application_add_new_item      (PanelApplication  *application,
+                                                       PanelWindow       *window,
                                                        const gchar       *plugin_name,
                                                        gchar            **arguments);
 

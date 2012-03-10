@@ -27,6 +27,7 @@
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
+#include <exo/exo.h>
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
 #include <libxfce4util/libxfce4util.h>
@@ -254,11 +255,11 @@ panel_dbus_service_add_new_item (PanelDBusService  *service,
 
   application = panel_application_get ();
 
+  if (arguments != NULL && exo_str_is_empty (*arguments))
+    arguments = NULL;
+
   /* add new plugin (with or without arguments) */
-  if (arguments && *arguments != NULL)
-    panel_application_add_new_item (application, plugin_name, arguments);
-  else
-    panel_application_add_new_item (application, plugin_name, NULL);
+  panel_application_add_new_item (application, NULL, plugin_name, arguments);
 
   g_object_unref (G_OBJECT (application));
 

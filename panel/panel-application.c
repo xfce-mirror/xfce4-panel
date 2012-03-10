@@ -1364,15 +1364,16 @@ panel_application_destroy_dialogs (PanelApplication *application)
 
 void
 panel_application_add_new_item (PanelApplication  *application,
+                                PanelWindow       *window,
                                 const gchar       *plugin_name,
                                 gchar            **arguments)
 {
-  PanelWindow *window = NULL;
-  gint         panel_id;
+  gint panel_id;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
   panel_return_if_fail (plugin_name != NULL);
   panel_return_if_fail (application->windows != NULL);
+  panel_return_if_fail (window == NULL || PANEL_IS_WINDOW (window));
 
   /* leave if the config is locked */
   if (panel_application_get_locked (application))
@@ -1380,26 +1381,29 @@ panel_application_add_new_item (PanelApplication  *application,
 
   if (panel_module_factory_has_module (application->factory, plugin_name))
     {
-      /* find a suitable panel if there are 2 or more panel */
-      if (LIST_HAS_TWO_OR_MORE_ENTRIES (application->windows))
+      if (window == NULL)
         {
-          /* ask the user to select a panel */
-          panel_id = panel_dialogs_choose_panel (application);
-          if (panel_id == -1)
+          /* find a suitable panel if there are 2 or more panel */
+          if (LIST_HAS_TWO_OR_MORE_ENTRIES (application->windows))
             {
-              /* cancel was clicked */
-              return;
+              /* ask the user to select a panel */
+              panel_id = panel_dialogs_choose_panel (application);
+              if (panel_id == -1)
+                {
+                  /* cancel was clicked */
+                  return;
+                }
+              else
+                {
+                  /* get panel from the id */
+                  window = panel_application_get_window (application, panel_id);
+                }
             }
           else
             {
-              /* get panel from the id */
-              window = panel_application_get_window (application, panel_id);
+              /* get the first (and only) window */
+              window = g_slist_nth_data (application->windows, 0);
             }
-        }
-      else
-        {
-          /* get the first (and only) window */
-          window = g_slist_nth_data (application->windows, 0);
         }
 
       if (window != NULL && !panel_window_get_locked (window))

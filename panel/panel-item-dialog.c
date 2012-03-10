@@ -108,6 +108,8 @@ struct _PanelItemDialog
 
   PanelModuleFactory *factory;
 
+  PanelWindow        *active;
+
   /* pointers to list */
   GtkListStore       *store;
   GtkTreeView        *treeview;
@@ -329,6 +331,7 @@ panel_item_dialog_response (GtkDialog *gtk_dialog,
       if (G_LIKELY (module != NULL))
         {
           panel_application_add_new_item (dialog->application,
+              dialog->active,
               panel_module_get_name (module), NULL);
           g_object_unref (G_OBJECT (module));
         }
@@ -795,6 +798,7 @@ panel_item_dialog_show (PanelWindow *window)
       /* set the active panel */
       application = panel_application_get ();
       panel_application_window_select (application, window);
+      dialog_singleton->active = window;
       g_object_unref (G_OBJECT (application));
 
       screen = gtk_window_get_screen (GTK_WINDOW (window));
@@ -803,10 +807,8 @@ panel_item_dialog_show (PanelWindow *window)
     {
       screen = gdk_screen_get_default ();
     }
-  gtk_window_set_screen (GTK_WINDOW (dialog_singleton), screen);
 
-  /* show the dialog */
-  gtk_widget_show (GTK_WIDGET (dialog_singleton));
+  gtk_window_set_screen (GTK_WINDOW (dialog_singleton), screen);
 
   /* focus the window */
   gtk_window_present (GTK_WINDOW (dialog_singleton));

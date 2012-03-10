@@ -84,9 +84,6 @@ void         panel_base_window_set_borders (PanelBaseWindow *window,
                                             PanelBorders     borders);
 PanelBorders panel_base_window_get_borders (PanelBaseWindow *window);
 
-void         panel_base_window_set_active  (PanelBaseWindow *window,
-                                            gboolean         active);
-
 void         panel_util_set_source_rgba    (cairo_t         *cr,
                                             const GdkColor  *color,
                                             gdouble          alpha);
