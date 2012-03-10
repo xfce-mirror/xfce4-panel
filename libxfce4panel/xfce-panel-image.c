@@ -440,21 +440,27 @@ xfce_panel_image_load (gpointer data)
   GdkPixbuf             *pixbuf;
   GdkScreen             *screen;
   GtkIconTheme          *icon_theme = NULL;
-  gint                   size;
+  gint                   dest_w, dest_h;
 
   GDK_THREADS_ENTER ();
 
-  size = MIN (priv->width, priv->height);
-  if (G_UNLIKELY (priv->force_icon_sizes && size < 32))
+  dest_w = priv->width;
+  dest_h = priv->height;
+
+  if (G_UNLIKELY (priv->force_icon_sizes
+      && dest_w < 32
+      && dest_w == dest_h))
     {
       /* we use some hardcoded values here for convienence,
        * above 32 pixels svg icons will kick in */
-      if (size > 16 && size < 22)
-        size = 16;
-      else if (size > 22 && size < 24)
-        size = 22;
-      else if (size > 24 && size < 32)
-        size = 24;
+      if (dest_w > 16 && dest_w < 22)
+        dest_w = 16;
+      else if (dest_w > 22 && dest_w < 24)
+        dest_w = 22;
+      else if (dest_w > 24 && dest_w < 32)
+        dest_w = 24;
+
+      dest_h = dest_w;
     }
 
   if (priv->pixbuf != NULL)
@@ -465,7 +471,7 @@ xfce_panel_image_load (gpointer data)
       if (G_LIKELY (pixbuf != NULL))
         {
           /* scale the icon to the correct size */
-          priv->cache = xfce_panel_image_scale_pixbuf (pixbuf, size, size);
+          priv->cache = xfce_panel_image_scale_pixbuf (pixbuf, dest_w, dest_h);
           g_object_unref (G_OBJECT (pixbuf));
         }
     }
@@ -475,7 +481,7 @@ xfce_panel_image_load (gpointer data)
       if (G_LIKELY (screen != NULL))
         icon_theme = gtk_icon_theme_get_for_screen (screen);
 
-      priv->cache = xfce_panel_pixbuf_from_source (priv->source, icon_theme, size);
+      priv->cache = xfce_panel_pixbuf_from_source_at_size (priv->source, icon_theme, dest_w, dest_h);
     }
 
   if (G_LIKELY (priv->cache != NULL))
