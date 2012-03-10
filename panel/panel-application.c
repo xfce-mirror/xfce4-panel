@@ -848,6 +848,7 @@ panel_application_drag_data_received (PanelWindow      *window,
   gchar            **uris;
   guint              i;
   gboolean           found;
+  gint               n_items;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
@@ -950,9 +951,20 @@ panel_application_drag_data_received (PanelWindow      *window,
               uris = gtk_selection_data_get_uris (selection_data);
               if (G_LIKELY (uris != NULL))
                 {
-                  /* create a new item with a unique id */
-                  succeed = panel_application_plugin_insert (application, window, LAUNCHER_PLUGIN_NAME,
-                                                             -1, uris, application->drop_index);
+                  n_items = g_strv_length (uris);
+                  if (xfce_dialog_confirm (NULL, GTK_STOCK_ADD, _("Create _Launcher"),
+                                           _("This will create a new launcher plugin on the panel and inserts "
+                                             "the dropped files as menu items."),
+                                           ngettext ("Create new launcher from %d desktop file",
+                                                     "Create new launcher from %d desktop files",
+                                                     n_items),
+                                           n_items))
+                    {
+                      /* create a new item with a unique id */
+                      succeed = panel_application_plugin_insert (application, window, LAUNCHER_PLUGIN_NAME,
+                                                                 -1, uris, application->drop_index);
+                    }
+
                   g_strfreev (uris);
                 }
 
