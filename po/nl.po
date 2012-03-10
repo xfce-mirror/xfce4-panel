@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-25 07:12+0000\n"
+"POT-Creation-Date: 2012-03-10 14:21+0000\n"
 "PO-Revision-Date: 2011-09-24 20:43+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch (Flemish)\n"
@@ -34,41 +34,20 @@ msgid "Customize the panel"
 msgstr "Pas de werkbalk aan"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2306
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Werkbalk"
 
-#: ../common/panel-utils.c:157
-msgid "_Read Online"
-msgstr "_Lees op internet"
-
-#: ../common/panel-utils.c:158
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"U kunt de handleiding raadplegen op het internet. Die handleiding zou echter "
-"niet geheel kunnen overeenkomen met uw werkbalkversie."
-
-#: ../common/panel-utils.c:160
-msgid "The user manual is not installed on your computer"
-msgstr "De handleiding is niet geïnstalleerd op uw computer"
-
-#. display an error message to the user
-#: ../common/panel-utils.c:175
-msgid "Failed to open the documentation browser"
-msgstr "Kon de documentatieverkenner niet openen"
-
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1057
+#: ../panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1060
+#: ../panel/panel-preferences-dialog.c:1092
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "Als u een element van de werkbalk verwijdert, dan kan dit niet meer ongedaan "
@@ -84,17 +63,17 @@ msgid "Pane_l"
 msgstr "_Werkbalk"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2318
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
 msgid "Add _New Items..."
 msgstr "_Nieuwe elementen toevoegen..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2329
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
 msgid "Panel Pr_eferences..."
 msgstr "Werkbalkvoork_euren..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2345
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
 msgid "Log _Out"
 msgstr "Af_melden"
 
@@ -142,63 +121,63 @@ msgid "Print version information and exit"
 msgstr "Druk versie-informatie af en sluit af"
 
 #. parse context options
-#: ../panel/main.c:250
+#: ../panel/main.c:234
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTEN...]"
 
-#: ../panel/main.c:257
+#: ../panel/main.c:241
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Tik \"%s --help\" voor gebruiksaanwijzingen."
 
-#: ../panel/main.c:276
+#: ../panel/main.c:260
 msgid "The Xfce development team. All rights reserved."
 msgstr "De Xfce-ontwikkelploeg. Alle rechten voorbehouden."
 
-#: ../panel/main.c:277
+#: ../panel/main.c:261
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Fouten graag melden bij <%s>."
 
-#: ../panel/main.c:328
+#: ../panel/main.c:312
 msgid "There is already a running instance"
 msgstr "Er is al een actieve instantie"
 
 #. spawn ourselfs again
-#: ../panel/main.c:378
+#: ../panel/main.c:354
 msgid "Restarting..."
 msgstr "Aan het herstarten..."
 
-#: ../panel/main.c:393
+#: ../panel/main.c:369
 msgid "Failed to show the preferences dialog"
 msgstr "Kon de voorkeurendialoog niet weergeven"
 
-#: ../panel/main.c:395
+#: ../panel/main.c:371
 msgid "Failed to show the add new items dialog"
 msgstr ""
 "Kon het dialoogvenster voor het toevoegen van nieuwe elementen niet weergeven"
 
-#: ../panel/main.c:397
+#: ../panel/main.c:373
 msgid "Failed to save the panel configuration"
 msgstr "Kon de werkbalkinstellingen niet opslaan"
 
-#: ../panel/main.c:399
+#: ../panel/main.c:375
 msgid "Failed to add a plugin to the panel"
 msgstr "Kon de plugin niet aan de werkbalk toevoegen"
 
-#: ../panel/main.c:401
+#: ../panel/main.c:377
 msgid "Failed to restart the panel"
 msgstr "Kon de werkbalk niet herstarten"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:379
 msgid "Failed to quit the panel"
 msgstr "Kon de werkbalk niet afsluiten"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:381
 msgid "Failed to send D-Bus message"
 msgstr "Kon het D-Busbericht niet versturen"
 
-#: ../panel/main.c:416
+#: ../panel/main.c:392
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -207,16 +186,16 @@ msgstr ""
 "bij afmelden, zodat de werkbalk automatisch wordt gestart wanneer u zich "
 "weer aanmeldt."
 
-#: ../panel/main.c:419 ../panel/main.c:433
+#: ../panel/main.c:395 ../panel/main.c:409
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Geen actieve functie van %s gevonden"
 
-#: ../panel/panel-application.c:219
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
-#: ../panel/panel-application.c:1600
+#: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -224,53 +203,64 @@ msgstr ""
 "U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u "
 "op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: ../panel/panel-application.c:1601
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u de werkbalk wil afsluiten?"
 
-#: ../panel/panel-application.c:1609
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kon de opdracht \"%s\" niet uitvoeren"
 
-#: ../panel/panel-dbus-client.c:208
+#: ../panel/panel-dbus-client.c:210
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "Ongeldige plugin-gebeurtenis-syntax gespecificeerd. Gebruik PLUGINNAAM:NAAM[:"
 "TYPE:WAARDE]."
 
-#: ../panel/panel-dbus-client.c:241
+#: ../panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 "Ongeldig type \"%s\". Geldige types zijn bool, double, int, string en uint."
 
-#: ../panel/panel-dialogs.c:77
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr "Pakketbeheerders"
+
+#: ../panel/panel-dialogs.c:68
+msgid "Deskbar Mode"
+msgstr "Bureaubalkmodus"
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr "Inactieve pakketbeheerders"
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "De werkbalk van de Xfce-werkomgeving"
 
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr "Vincent Tunru <projects@vinnl.nl>Pjotr"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:123 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Nieuw element toevoegen"
 
-#: ../panel/panel-dialogs.c:137
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "Kies een werkbalk voor de nieuwe plugin:"
 
-#. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:148 ../panel/panel-preferences-dialog.c:776
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Werkbalk %d"
 
-#: ../panel/panel-dialogs.c:184
+#: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -278,7 +268,7 @@ msgstr ""
 "Omdat de werkbalk in kioskmodus draait, kunt u als normale gebruiker geen "
 "veranderingen aan de configuratie aanbrengen"
 
-#: ../panel/panel-dialogs.c:186
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
 msgstr "Aanpassen van de werkbalk is niet toegestaan"
 
@@ -317,43 +307,43 @@ msgstr ""
 "seconden. Druk op \"Uitvoeren\" om te proberen de plugin opnieuw te starten, "
 "anders zal deze plugin blijvend van de werkbalk verwijderd worden."
 
-#: ../panel/panel-preferences-dialog.c:461
+#: ../panel/panel-preferences-dialog.c:467
 msgid "Automatic"
 msgstr "Automatisch"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:480
+#: ../panel/panel-preferences-dialog.c:486
 #, c-format
 msgid "Screen %d"
 msgstr "Scherm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:506
+#: ../panel/panel-preferences-dialog.c:512
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:837
+#: ../panel/panel-preferences-dialog.c:867
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "De instellingen van de werkbalk en de plugins zullen blijvend verwijderd "
 "worden"
 
-#: ../panel/panel-preferences-dialog.c:838
+#: ../panel/panel-preferences-dialog.c:868
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Weet u zeker dat u werkbalk %d wil verwijderen?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:921
+#: ../panel/panel-preferences-dialog.c:953
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:926
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -364,7 +354,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:938
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interne naam: %s-%d"
@@ -838,18 +828,18 @@ msgstr "Weet u zeker dat u wil afsluiten?"
 msgid "Turning off computer in %d seconds."
 msgstr "De computer zal worden uitgezet over %d seconden."
 
-#: ../plugins/actions/actions.c:600
+#: ../plugins/actions/actions.c:603
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Scheidingslijn"
 
-#: ../plugins/actions/actions.c:869
+#: ../plugins/actions/actions.c:872
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Kon actie \"%s\" niet uitvoeren"
 
-#: ../plugins/actions/actions.c:1028
+#: ../plugins/actions/actions.c:1031
 msgid "John Doe"
 msgstr "Jantje"
 
@@ -939,16 +929,16 @@ msgstr "Selecteer een pictogram"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:567
 #: ../plugins/applicationsmenu/applicationsmenu.c:808
-#: ../plugins/launcher/launcher.c:2299
+#: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht \"%s\" niet uitvoeren."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1070
+#: ../plugins/applicationsmenu/applicationsmenu.c:1073
 msgid "No applications found"
 msgstr "Geen toepassingen gevonden"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1093
+#: ../plugins/applicationsmenu/applicationsmenu.c:1096
 msgid "Failed to load the applications menu"
 msgstr "Kon het toepassingenmenu niet laden"
 
@@ -994,7 +984,7 @@ msgstr "Week %V"
 msgid "Failed to execute clock command"
 msgstr "Kon de klokopdracht niet uitvoeren"
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
 msgstr "Aangepaste bestandopmaak"
 
@@ -1348,16 +1338,16 @@ msgstr "Geen standaardtoepassing gevonden voor \"%s\""
 msgid "Failed to launch default application for \"%s\""
 msgstr "Kon standaardtoepassing voor \"%s\" niet uitvoeren"
 
-#: ../plugins/directorymenu/directorymenu.c:717
+#: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Kon de voorkeurstoepassing voor de categorie \"%s\" niet uitvoeren"
 
-#: ../plugins/directorymenu/directorymenu.c:790
+#: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
 msgstr "Map openen"
 
-#: ../plugins/directorymenu/directorymenu.c:801
+#: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
 msgstr "Openen in terminalvenster"
 
@@ -1406,24 +1396,24 @@ msgstr "Open startermenu"
 msgid "Unnamed Item"
 msgstr "Naamloos element"
 
-#: ../plugins/launcher/launcher.c:1719
+#: ../plugins/launcher/launcher.c:1727
 msgid "No items"
 msgstr "Geen elementen"
 
-#: ../plugins/launcher/launcher-dialog.c:807
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr "Kon dialoogvenster voor het bewerken van menu-elementen niet laden"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Het verwijderen van een element kan niet ongedaan worden gemaakt"
 
-#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
-#: ../plugins/launcher/launcher-dialog.c:868
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
 msgstr "Naamloos element"
 
@@ -1526,15 +1516,15 @@ msgstr "Element bewerken"
 msgid "Program launcher with optional menu"
 msgstr "Programma-starter met optioneel menu"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Werkbladinstellingen"
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr "Kon de werkbladinstellingen niet openen"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
+#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "Werkblad %d"
@@ -1738,23 +1728,23 @@ msgstr "Venstertitel"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Werkblad wisselen met muiswiel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3176
+#: ../plugins/tasklist/tasklist-widget.c:3177
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3185
+#: ../plugins/tasklist/tasklist-widget.c:3186
 msgid "Un_minimize All"
 msgstr "Alles _ONTminimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3191
+#: ../plugins/tasklist/tasklist-widget.c:3192
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3200
+#: ../plugins/tasklist/tasklist-widget.c:3201
 msgid "_Unmaximize All"
 msgstr "Alles ONT_maximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3210
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
@@ -1824,6 +1814,22 @@ msgstr "Venstermenu"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Wisselen tussen open vensters met behulp van een menu"
+
+#~ msgid "_Read Online"
+#~ msgstr "_Lees op internet"
+
+#~ msgid ""
+#~ "You can read the user manual online. This manual may however not exactly "
+#~ "match your panel version."
+#~ msgstr ""
+#~ "U kunt de handleiding raadplegen op het internet. Die handleiding zou "
+#~ "echter niet geheel kunnen overeenkomen met uw werkbalkversie."
+
+#~ msgid "The user manual is not installed on your computer"
+#~ msgstr "De handleiding is niet geïnstalleerd op uw computer"
+
+#~ msgid "Failed to open the documentation browser"
+#~ msgstr "Kon de documentatieverkenner niet openen"
 
 #~ msgid "_Orientation:"
 #~ msgstr "_Oriëntatie:"
