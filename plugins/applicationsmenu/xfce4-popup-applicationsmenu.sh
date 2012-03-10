@@ -42,6 +42,7 @@ case "$1" in
     ;;
 esac
 
-exec @bindir@/xfce4-panel --plugin-event=applicationsmenu:popup:bool:$ATPOINTER
+# try to open panel menu, if this fails try xfdesktop
+@bindir@/xfce4-panel --plugin-event=applicationsmenu:popup:bool:$ATPOINTER || xfdesktop --menu
 
 # vim:set ts=2 sw=2 et ai:
