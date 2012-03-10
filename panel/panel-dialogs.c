@@ -58,14 +58,19 @@ panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
 void
 panel_dialogs_show_about (void)
 {
-  static const gchar *authors[] =
-  {
-    "Maintainer:\nNick Schermer <nick@xfce.org>\n",
-    "Deskbar Mode:\nAndrzej Radecki <ndrwrdck@gmail.com>\n",
-    "Inactive Maintainers:\nJasper Huijsmans <jasper@xfce.org>",
-    "Tic-tac-toe <tictactoe@xfce.org>",
-    NULL
-  };
+  gchar **authors;
+
+  authors = g_new0 (gchar *, 4);
+  authors[0] = g_strdup_printf ("%s:\n%s\n",
+                                _("Maintainers"),
+                                "Nick Schermer <nick@xfce.org>");
+  authors[1] = g_strdup_printf ("%s:\n%s\n",
+                                _("Deskbar Mode"),
+                                "Andrzej Radecki <ndrwrdck@gmail.com>");
+  authors[2] = g_strdup_printf ("%s:\n%s\n%s\n",
+                                _("Inactive Maintainers"),
+                                "Jasper Huijsmans <jasper@xfce.org>",
+                                "Tic-tac-toe <tictactoe@xfce.org>");
 
   gtk_about_dialog_set_email_hook (panel_dialogs_show_about_email_hook, NULL, NULL);
 #if !GTK_CHECK_VERSION (2, 18, 0)
@@ -75,7 +80,7 @@ panel_dialogs_show_about (void)
   gtk_show_about_dialog (NULL,
                          "authors", authors,
                          "comments", _("The panel of the Xfce Desktop Environment"),
-                         "copyright", "Copyright \302\251 2004-2011 Xfce Development Team",
+                         "copyright", "Copyright \302\251 2004-2012 Xfce Development Team",
                          "destroy-with-parent", TRUE,
                          "license", XFCE_LICENSE_GPL,
                          "program-name", PACKAGE_NAME,
@@ -85,6 +90,7 @@ panel_dialogs_show_about (void)
                          "logo-icon-name", PACKAGE_NAME,
                          NULL);
 
+  g_strfreev (authors);
 }
 
 
