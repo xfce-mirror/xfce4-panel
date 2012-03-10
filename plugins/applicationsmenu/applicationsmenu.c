@@ -311,19 +311,24 @@ applications_menu_plugin_set_property (GObject      *object,
                                        GParamSpec   *pspec)
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (object);
+  gboolean                force_a_resize = FALSE;
+  gboolean                reload_menu = FALSE;
 
   switch (prop_id)
     {
     case PROP_SHOW_GENERIC_NAMES:
       plugin->show_generic_names = g_value_get_boolean (value);
+      reload_menu = TRUE;
       break;
 
     case PROP_SHOW_MENU_ICONS:
       plugin->show_menu_icons = g_value_get_boolean (value);
+      reload_menu = TRUE;
       break;
 
     case PROP_SHOW_TOOLTIPS:
       plugin->show_tooltips = g_value_get_boolean (value);
+      reload_menu = TRUE;
       break;
 
     case PROP_SHOW_BUTTON_TITLE:
@@ -348,25 +353,29 @@ applications_menu_plugin_set_property (GObject      *object,
       if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_DESKBAR
           && plugin->show_button_title)
         {
-          applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-              xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+          force_a_resize = TRUE;
         }
-      return;
+      break;
 
     case PROP_BUTTON_ICON:
+    g_message ("set icon");
       g_free (plugin->button_icon);
       plugin->button_icon = g_value_dup_string (value);
       xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->icon),
           exo_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon);
-      return;
+
+      force_a_resize = TRUE;
+      break;
 
     case PROP_CUSTOM_MENU:
       plugin->custom_menu = g_value_get_boolean (value);
+      reload_menu = TRUE;
       break;
 
     case PROP_CUSTOM_MENU_FILE:
       g_free (plugin->custom_menu_file);
       plugin->custom_menu_file = g_value_dup_string (value);
+      reload_menu = TRUE;
       break;
 
     default:
@@ -374,7 +383,14 @@ applications_menu_plugin_set_property (GObject      *object,
       break;
     }
 
-  applications_menu_plugin_menu_reload (plugin);
+  if (force_a_resize)
+    {
+      applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+          xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+    }
+
+  if (reload_menu)
+    applications_menu_plugin_menu_reload (plugin);
 }
 
 
@@ -435,11 +451,14 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   GtkRequisition          label_size;
   GtkOrientation          orientation;
   gint                    border_thickness;
+  gdouble                 icon_wh_ratio;
+  GdkPixbuf              *icon;
 
   row_size = size / xfce_panel_plugin_get_nrows (panel_plugin);
 
   gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->icon,
-                             !plugin->show_button_title, !plugin->show_button_title,
+                             !plugin->show_button_title,
+                             !plugin->show_button_title,
                              0, GTK_PACK_START);
 
   mode = xfce_panel_plugin_get_mode (panel_plugin);
@@ -453,8 +472,27 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     {
       xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->icon), -1);
 
+        /* get scale of the icon for non-squared custom files */
+        if (mode != XFCE_PANEL_PLUGIN_MODE_DESKBAR
+            && plugin->button_icon != NULL
+            && g_path_is_absolute (plugin->button_icon))
+          {
+            icon = gdk_pixbuf_new_from_file (plugin->button_icon, NULL);
+            if (G_LIKELY (icon != NULL))
+              {
+                icon_wh_ratio = (gdouble) gdk_pixbuf_get_width (icon) / (gdouble) gdk_pixbuf_get_height (icon);
+                g_object_unref (G_OBJECT (icon));
+              }
+          }
+        else
+          {
+            icon_wh_ratio = 1.0;
+          }
+
       if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
-        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), row_size, size);
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), row_size * icon_wh_ratio, size);
+      else if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, row_size / icon_wh_ratio);
       else
         gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, row_size);
     }
@@ -542,7 +580,6 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
-      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->dialog_icon), icon);
       g_free (icon);
     }
 
