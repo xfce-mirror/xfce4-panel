@@ -123,10 +123,11 @@ xfce_panel_get_channel_name (void)
 
 
 /**
- * xfce_panel_pixbuf_from_source:
+ * xfce_panel_pixbuf_from_source_at_size:
  * @source: string that contains the location of an icon
  * @icon_theme: icon theme or %NULL to use the default icon theme
- * @size: size the icon that should be loaded
+ * @dest_width: the maximum returned width of the GdkPixbuf
+ * @dest_height: the maximum returned height of the GdkPixbuf
  *
  * Try to load a pixbuf from a source string. The source could be
  * an abolute path, an icon name or a filename that points to a
@@ -135,20 +136,22 @@ xfce_panel_get_channel_name (void)
  * This function is particularly usefull for loading names from
  * the Icon key of desktop files.
  *
- * The pixbuf is never bigger than @size. If it is when loaded from the
- * disk, the pixbuf is scaled preserving the aspect ratio.
+ * The pixbuf is never bigger than @dest_width and @dest_height.
+ * If it is when loaded from the disk, the pixbuf is scaled
+ * preserving the aspect ratio.
  *
  * Returns: a GdkPixbuf or %NULL if nothing was found. The value should
  *          be released with g_object_unref when no longer used.
  *
  * See also: XfcePanelImage
  *
- * Since: 4.8
+ * Since: 4.10
  **/
 GdkPixbuf *
-xfce_panel_pixbuf_from_source (const gchar  *source,
-                               GtkIconTheme *icon_theme,
-                               gint          size)
+xfce_panel_pixbuf_from_source_at_size (const gchar  *source,
+                                       GtkIconTheme *icon_theme,
+                                       gint          dest_width,
+                                       gint          dest_height)
 {
   GdkPixbuf *pixbuf = NULL;
   gchar     *p;
@@ -156,17 +159,18 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
   gchar     *filename;
   gint       src_w, src_h;
   gdouble    wratio, hratio;
-  gint       dest_w, dest_h;
   GdkPixbuf *dest;
   GError    *error = NULL;
+  gint       size = MIN (dest_width, dest_height);
 
   g_return_val_if_fail (source != NULL, NULL);
   g_return_val_if_fail (icon_theme == NULL || GTK_IS_ICON_THEME (icon_theme), NULL);
-  g_return_val_if_fail (size > 0, NULL);
+  g_return_val_if_fail (dest_width > 0, NULL);
+  g_return_val_if_fail (dest_height > 0, NULL);
 
   if (G_UNLIKELY (g_path_is_absolute (source)))
     {
-      pixbuf = gdk_pixbuf_new_from_file_at_scale (source, size, size, TRUE, &error);
+      pixbuf = gdk_pixbuf_new_from_file_at_scale (source, dest_width, dest_height, TRUE, &error);
       if (G_UNLIKELY (pixbuf == NULL))
         {
           g_message ("Failed to load image \"%s\": %s",
@@ -226,21 +230,20 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
       src_w = gdk_pixbuf_get_width (pixbuf);
       src_h = gdk_pixbuf_get_height (pixbuf);
 
-      if (src_w > size || src_h > size)
+      if (src_w > dest_width || src_h > dest_height)
         {
           /* calculate the new dimensions */
           wratio = (gdouble) src_w / (gdouble) size;
           hratio = (gdouble) src_h / (gdouble) size;
 
-          dest_w = dest_h = size;
-
           if (hratio > wratio)
-            dest_w  = rint (src_w / hratio);
+            dest_width  = rint (src_w / hratio);
           else
-            dest_h = rint (src_h / wratio);
+            dest_height = rint (src_h / wratio);
 
-          dest = gdk_pixbuf_scale_simple (pixbuf, MAX (dest_w, 1),
-                                          MAX (dest_h, 1),
+          dest = gdk_pixbuf_scale_simple (pixbuf,
+                                          MAX (dest_width, 1),
+                                          MAX (dest_height, 1),
                                           GDK_INTERP_BILINEAR);
 
           g_object_unref (G_OBJECT (pixbuf));
@@ -249,6 +252,31 @@ xfce_panel_pixbuf_from_source (const gchar  *source,
     }
 
   return pixbuf;
+}
+
+
+
+/**
+ * xfce_panel_pixbuf_from_source:
+ * @source: string that contains the location of an icon
+ * @icon_theme: icon theme or %NULL to use the default icon theme
+ * @size: size the icon that should be loaded
+ *
+ * See xfce_panel_pixbuf_from_source_at_size
+ *
+ * Returns: a GdkPixbuf or %NULL if nothing was found. The value should
+ *          be released with g_object_unref when no longer used.
+ *
+ * See also: XfcePanelImage
+ *
+ * Since: 4.8
+ **/
+GdkPixbuf *
+xfce_panel_pixbuf_from_source (const gchar  *source,
+                               GtkIconTheme *icon_theme,
+                               gint          size)
+{
+  return xfce_panel_pixbuf_from_source_at_size (source, icon_theme, size, size);
 }
 
 
