@@ -205,6 +205,7 @@ main (gint argc, gchar **argv)
   GError           *error = NULL;
   PanelDBusService *dbus_service;
   gboolean          succeed = FALSE;
+  gboolean          remote_succeed;
   guint             i;
   const gint        signums[] = { SIGINT, SIGQUIT, SIGTERM, SIGABRT, SIGUSR1 };
   const gchar      *error_msg;
@@ -296,7 +297,14 @@ main (gint argc, gchar **argv)
   else if (opt_plugin_event != NULL)
     {
       /* send the plugin event to the running instance */
-      succeed = panel_dbus_client_plugin_event (opt_plugin_event, &error);
+      remote_succeed = FALSE;
+      succeed = panel_dbus_client_plugin_event (opt_plugin_event, &remote_succeed, &error);
+
+      /* the panel returns EXIT_FAILURE if the dbus event succeeds, but
+       * no suitable plugin was found on the service side */
+      if (succeed && !remote_succeed)
+        succeed = FALSE;
+
       goto dbus_return;
     }
 

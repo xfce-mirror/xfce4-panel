@@ -61,6 +61,7 @@ static gboolean  panel_dbus_service_plugin_event               (PanelDBusService
                                                                 const gchar       *plugin_name,
                                                                 const gchar       *name,
                                                                 const GValue      *value,
+                                                                gboolean          *OUT_succeed,
                                                                 GError           **error);
 static gboolean  panel_dbus_service_terminate                  (PanelDBusService   *service,
                                                                 gboolean            restart,
@@ -350,6 +351,7 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
                                  const gchar       *plugin_name,
                                  const gchar       *name,
                                  const GValue      *value,
+                                 gboolean          *OUT_succeed,
                                  GError           **error)
 {
   GSList             *plugins, *li, *lnext;
@@ -357,6 +359,7 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
   PluginEvent        *event;
   guint               handle;
   gboolean            result;
+  gboolean            plugin_replied = FALSE;
 
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -394,11 +397,18 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
           g_signal_connect (G_OBJECT (li->data), "remote-event-result",
               G_CALLBACK (panel_dbus_service_plugin_event_result), service);
 
+          /* not entirely sure the event is handled, but at least suitable
+           * plugins were found */
+          plugin_replied = TRUE;
+
           /* we're going to wait until the plugin replied */
           break;
         }
       else if (result)
         {
+          /* we've handled the event */
+          plugin_replied = TRUE;
+
           /* plugin returned %TRUE, so abort the event notification */
           break;
         }
@@ -406,6 +416,10 @@ panel_dbus_service_plugin_event (PanelDBusService  *service,
 
   g_slist_free (plugins);
   g_object_unref (G_OBJECT (factory));
+
+  /* return status for the panel */
+  if (OUT_succeed)
+    *OUT_succeed = plugin_replied;
 
   return TRUE;
 }

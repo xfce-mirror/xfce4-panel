@@ -184,6 +184,7 @@ panel_dbus_client_gtype_from_string (const gchar *str)
 
 gboolean
 panel_dbus_client_plugin_event (const gchar  *plugin_event,
+                                gboolean     *return_succeed,
                                 GError      **error)
 {
   DBusGProxy  *dbus_proxy;
@@ -258,6 +259,7 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
                                             tokens[PLUGIN_NAME],
                                             tokens[NAME],
                                             &value,
+                                            return_succeed,
                                             error);
   g_value_unset (&value);
 

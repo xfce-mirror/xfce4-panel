@@ -56,12 +56,13 @@
     </method>
     
     <!--
-      PluginEvent (plugin-name : STRING, name : STRING, value : VARIANT)
+      PluginEvent (plugin-name : STRING, name : STRING, value : VARIANT, succeed (return) : BOOL)
       
       plugin-name : Name of the panel plugins to send this event to.
       name        : Event signal name.
       value       : GValue holding the event data.
-      
+      succeed     : Boolean if a suitable plugin was found.
+
       Send a plugin to a group of plugins using the remote-event
       XfcePanelPlugin signal.
     -->
@@ -69,6 +70,7 @@
       <arg name="plugin_name" direction="in" type="s" />
       <arg name="name" direction="in" type="s" />
       <arg name="value" direction="in" type="v" />
+      <arg name="succeed" direction="out" type="b" />
      </method>
 
     <!--
