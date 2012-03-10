@@ -888,6 +888,7 @@ applications_menu_plugin_menu_reload (ApplicationsMenuPlugin *plugin)
 
 static gboolean
 applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
+                                   GtkWidget              *button,
                                    GarconMenu             *menu,
                                    ApplicationsMenuPlugin *plugin)
 {
@@ -904,6 +905,7 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
   panel_return_val_if_fail (GTK_IS_MENU (gtk_menu), FALSE);
   panel_return_val_if_fail (GARCON_IS_MENU (menu), FALSE);
   panel_return_val_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button), FALSE);
 
   if (gtk_icon_size_lookup (menu_icon_size, &w, &h))
     size = MIN (w, h);
@@ -987,12 +989,14 @@ applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
             continue;
 
           submenu = gtk_menu_new ();
-          if (applications_menu_plugin_menu_add (submenu, li->data, plugin))
+          if (applications_menu_plugin_menu_add (submenu, button, li->data, plugin))
             {
               name = garcon_menu_element_get_name (li->data);
               mi = gtk_image_menu_item_new_with_label (name);
               gtk_menu_shell_append (GTK_MENU_SHELL (gtk_menu), mi);
               gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);
+              g_signal_connect (G_OBJECT (submenu), "selection-done",
+                  G_CALLBACK (applications_menu_plugin_menu_deactivate), button);
               gtk_widget_show (mi);
 
               g_signal_connect_swapped (G_OBJECT (li->data), "directory-changed",
@@ -1068,7 +1072,7 @@ applications_menu_plugin_menu (GtkWidget              *button,
                G_CALLBACK (applications_menu_plugin_menu_deactivate), button);
           g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
-          if (!applications_menu_plugin_menu_add (plugin->menu, menu, plugin))
+          if (!applications_menu_plugin_menu_add (plugin->menu, button, menu, plugin))
             {
               mi = gtk_menu_item_new_with_label (_("No applications found"));
               gtk_menu_shell_append (GTK_MENU_SHELL (plugin->menu), mi);
