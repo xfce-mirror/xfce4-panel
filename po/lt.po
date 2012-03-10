@@ -3,21 +3,20 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Mantas Zapolskas <mantaz@users.sf.net>, 2003-2004.
 # Algimantas Margevičius <margevicius.algimantas@gmail.com>, 2012.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-28 03:39+0000\n"
+"POT-Creation-Date: 2012-03-10 14:21+0000\n"
 "PO-Revision-Date: 2012-01-28 10:31+0200\n"
 "Last-Translator: Algimantas Margevičius <margevicius.algimantas@gmail.com>\n"
 "Language-Team: Lietuvių <>\n"
-"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2)\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -41,13 +40,13 @@ msgstr "Skydelis"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1078
+#: ../panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ar esate tikri, jog norite pašalinti „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1081
+#: ../panel/panel-preferences-dialog.c:1092
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Jei pašalinsit elementą iš skydelio, jis bus prarastas visam laikui."
 
@@ -75,43 +74,43 @@ msgstr "Skydelio _nuostatos..."
 msgid "Log _Out"
 msgstr "_Atsijungti"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Parodyti „Skydelio nuostatos“ dialogą"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "Rodyti „Pridėti naujus elementus“ dialogą"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "Išsaugoti skydelio konfigūraciją"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "Pridėti naują įskiepį į skydelį"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "Iš naujo paleisti veikiantį skydelį"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "Uždaryti veikiantį skydelį"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
 msgstr "Paleidžiant nelaukti langų tvarkyklės"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -119,62 +118,62 @@ msgid "Print version information and exit"
 msgstr "Rodyti versijos informaciją ir išeiti"
 
 #. parse context options
-#: ../panel/main.c:232
+#: ../panel/main.c:234
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTAI...]"
 
-#: ../panel/main.c:239
+#: ../panel/main.c:241
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Rašykite „%s --help” naudojimui."
 
-#: ../panel/main.c:258
+#: ../panel/main.c:260
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce kūrėjų komanda. Visos teisės saugomos."
 
-#: ../panel/main.c:259
+#: ../panel/main.c:261
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Apie klaidas pranešti <%s>."
 
-#: ../panel/main.c:310
+#: ../panel/main.c:312
 msgid "There is already a running instance"
 msgstr "Jau yra veikianti kopija"
 
 #. spawn ourselfs again
-#: ../panel/main.c:352
+#: ../panel/main.c:354
 msgid "Restarting..."
 msgstr "Paleidžiama iš naujo..."
 
-#: ../panel/main.c:367
+#: ../panel/main.c:369
 msgid "Failed to show the preferences dialog"
 msgstr "Nepavyko parodyti nustatymų lango"
 
-#: ../panel/main.c:369
+#: ../panel/main.c:371
 msgid "Failed to show the add new items dialog"
 msgstr "Nepavyko parodyti naujų elementų pridėjimo lango"
 
-#: ../panel/main.c:371
+#: ../panel/main.c:373
 msgid "Failed to save the panel configuration"
 msgstr "Nepavyko išsaugoti skydelio konfigūracijos"
 
-#: ../panel/main.c:373
+#: ../panel/main.c:375
 msgid "Failed to add a plugin to the panel"
 msgstr "Pridėti įskiepio į skydelį nepavyko"
 
-#: ../panel/main.c:375
+#: ../panel/main.c:377
 msgid "Failed to restart the panel"
 msgstr "Nepavyko iš naujo paleisti skydelio"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:379
 msgid "Failed to quit the panel"
 msgstr "Nepavyko uždaryti skydelio"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:381
 msgid "Failed to send D-Bus message"
 msgstr "Nepavyko išsiųsti D-Bus žinutės"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:392
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -183,7 +182,7 @@ msgstr ""
 "išsaugosite sesiją, tada skydelis pasileis automatiškai, kai kitą kartą "
 "prisijungsite."
 
-#: ../panel/main.c:393 ../panel/main.c:407
+#: ../panel/main.c:395 ../panel/main.c:409
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Jokia veikianti %s kopija nerasta"
@@ -192,7 +191,7 @@ msgstr "Jokia veikianti %s kopija nerasta"
 msgid "Failed to launch the migration application"
 msgstr "Nepavyko paleisti atkėlimo programos"
 
-#: ../panel/panel-application.c:1666
+#: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -200,23 +199,23 @@ msgstr ""
 "Jūs paleidote X be sesijos tvarkytuvės. „Užverti” paspaudimas uždarys X "
 "serverį."
 
-#: ../panel/panel-application.c:1667
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Ar tikrai norite uždaryti skydelį?"
 
-#: ../panel/panel-application.c:1675
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nepavyko įvykdyti komandos „%s”"
 
-#: ../panel/panel-dbus-client.c:208
+#: ../panel/panel-dbus-client.c:210
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "Neteisingai panaudota įskiepio įvykio sintaksė. Naudokite PLUGIN-NAME:NAME[:"
 "TYPE:VALUE]."
 
-#: ../panel/panel-dbus-client.c:241
+#: ../panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -224,31 +223,43 @@ msgstr ""
 "Neteisingas patarimo tipas „%s”. Tinkami tipai - bool, double, int, string "
 "ir uint."
 
-#: ../panel/panel-dialogs.c:77
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr "Prižiūrėtojai"
+
+#: ../panel/panel-dialogs.c:68
+msgid "Deskbar Mode"
+msgstr "Darbastalio juostos režimas"
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr "Ankstesni prižiūrėtojai"
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce darbastalio aplinkos skydelis"
 
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr ""
 "Mantas Zapolskas <mantaz@users.sf.net>\n"
 "Algimantas Margevičius <margevicius.algimantas@gmail.com>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:152 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Pridėti naują elementą"
 
-#: ../panel/panel-dialogs.c:166
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "Prašome pasirinkti naujo įskiepio skydelį:"
 
-#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:790
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Skydelis %d"
 
-#: ../panel/panel-dialogs.c:226
+#: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -256,7 +267,7 @@ msgstr ""
 "Kadangi skydelis jau veikia „kiosk” režimu, jums neleidžiama keisti skydelio "
 "nustatymų kaip paprastam vartotojui"
 
-#: ../panel/panel-dialogs.c:228
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
 msgstr "Skydelio keitimas neleidžiamas"
 
@@ -293,41 +304,41 @@ msgstr ""
 "naujo. Jei paspausite „Execute” skydelis bandys jį vėl paleisti. Kitaip "
 "įskiepis bus galutinai pašalintas iš skydelio."
 
-#: ../panel/panel-preferences-dialog.c:456
+#: ../panel/panel-preferences-dialog.c:467
 msgid "Automatic"
 msgstr "Automatinis"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:475
+#: ../panel/panel-preferences-dialog.c:486
 #, c-format
 msgid "Screen %d"
 msgstr "Ekranas %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:501
+#: ../panel/panel-preferences-dialog.c:512
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitorius %d"
 
-#: ../panel/panel-preferences-dialog.c:856
+#: ../panel/panel-preferences-dialog.c:867
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Skydelio ir įskiepių sąranka bus galutinai pašalinta"
 
-#: ../panel/panel-preferences-dialog.c:857
+#: ../panel/panel-preferences-dialog.c:868
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ar tikrai norite pašalinti %d skydelį?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:942
+#: ../panel/panel-preferences-dialog.c:953
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(išorinis)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:947
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -338,7 +349,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Vidinis pavadinimas: %s-%d"
@@ -429,7 +440,8 @@ msgstr "_Ilgis (%):"
 msgid "M_ode:"
 msgstr "_Režimas:"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "Išmatavimai"
@@ -807,18 +819,18 @@ msgstr "Ar tikrai norite išjungti?"
 msgid "Turning off computer in %d seconds."
 msgstr "Kompiuteris bus išjungtas po %d sekundžių."
 
-#: ../plugins/actions/actions.c:600
+#: ../plugins/actions/actions.c:603
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Skirtukas"
 
-#: ../plugins/actions/actions.c:869
+#: ../plugins/actions/actions.c:872
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Nepavyko įvykdyti veiksmo „%s“"
 
-#: ../plugins/actions/actions.c:1028
+#: ../plugins/actions/actions.c:1031
 msgid "John Doe"
 msgstr "Vardenis Pavardenis"
 
@@ -908,7 +920,7 @@ msgstr "Pasirinkite piktogramą"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:567
 #: ../plugins/applicationsmenu/applicationsmenu.c:808
-#: ../plugins/launcher/launcher.c:2299
+#: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepavyko paleisti komandos „%s”."
@@ -963,7 +975,7 @@ msgstr "%V savaitė"
 msgid "Failed to execute clock command"
 msgstr "Nepavyko įvykdyti laikrodžio komandos"
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
 msgstr "Pasirinktinis formatas"
 
@@ -1000,7 +1012,8 @@ msgstr "Rodyti _sekundes"
 msgid "F_ormat:"
 msgstr "F_ormatas:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Ne_aiškumas:"
@@ -1372,24 +1385,24 @@ msgstr "Atverti paleidimo meniu"
 msgid "Unnamed Item"
 msgstr "Nepavadintas elementas"
 
-#: ../plugins/launcher/launcher.c:1719
+#: ../plugins/launcher/launcher.c:1727
 msgid "No items"
 msgstr "Nėra elementų"
 
-#: ../plugins/launcher/launcher-dialog.c:807
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr "Nepavyko atverti darbastalio elementų redaktoriaus"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Jei ištrinsite elementą, jis bus prarastas visam laikui"
 
-#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Ar tikrai norite pašalinti „%s“?"
 
-#: ../plugins/launcher/launcher-dialog.c:868
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
 msgstr "Nepavadintas elementas"
 
@@ -1490,15 +1503,15 @@ msgstr "_Keisti elementą"
 msgid "Program launcher with optional menu"
 msgstr "Programų leistukas su papildomu meniu"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Darbalaukio _nustatymai..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr "Nepavyko atverti darbalaukio nustatymų"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
+#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "Darbalaukis %d"
