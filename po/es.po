@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-24 18:27+0000\n"
+"POT-Creation-Date: 2012-03-14 11:09+0000\n"
 "PO-Revision-Date: 2010-03-28 20:52+0100\n"
 "Last-Translator: Abel Martín <abel.martin.ruiz@gmail.com>\n"
 "Language-Team: Spanish/ES <xfce-i18n@xfce.org>\n"
@@ -34,20 +34,20 @@ msgid "Customize the panel"
 msgstr "Personalizar el panel"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1078
+#: ../panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "¿Está seguro de que desea eliminar \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1081
+#: ../panel/panel-preferences-dialog.c:1092
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si borra el elemento del panel se perderá permanentemente."
 
@@ -61,57 +61,57 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "Añadir _nuevos elementos..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias del panel..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "Cerrar _sesión"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostrar el diálogo 'Preferencias del panel'"
 
-#: ../panel/main.c:78 ../panel/main.c:79
+#: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "NÚMERO-PANEL"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "Mostrar el diálogo 'Añadir nuevos elementos'"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "Guardar la configuración del panel"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "Añadir un nuevo complemento al panel"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "NOMBRE-COMPLEMENTO"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "Reiniciar la instancia en ejecución del panel"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "Terminar la instancia del panel en ejecución"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
 msgstr "No esperar por un manejador de ventanas al inicio"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -119,62 +119,62 @@ msgid "Print version information and exit"
 msgstr "Mostrar información de versión y salir"
 
 #. parse context options
-#: ../panel/main.c:232
+#: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTOS...]"
 
-#: ../panel/main.c:239
+#: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Escriba \"%s --help\" para ver opciones de uso."
 
-#: ../panel/main.c:258
+#: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
 msgstr "El equipo de desarrollo de Xfce. Todos los derechos reservados."
 
-#: ../panel/main.c:259
+#: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Por favor, informe de fallos a <%s>."
 
-#: ../panel/main.c:310
+#: ../panel/main.c:320
 msgid "There is already a running instance"
 msgstr "Ya existe una instancia en ejecución"
 
 #. spawn ourselfs again
-#: ../panel/main.c:352
+#: ../panel/main.c:362
 msgid "Restarting..."
 msgstr "Reiniciando..."
 
-#: ../panel/main.c:367
+#: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
 msgstr "Fallo al mostrar el diálogo de preferencias"
 
-#: ../panel/main.c:369
+#: ../panel/main.c:379
 msgid "Failed to show the add new items dialog"
 msgstr "Fallo al mostrar el diálogo para añadir nuevos complementos"
 
-#: ../panel/main.c:371
+#: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
 msgstr "Fallo al guardar la configuración del panel"
 
-#: ../panel/main.c:373
+#: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
 msgstr "Fallo al añadir un complemento al panel"
 
-#: ../panel/main.c:375
+#: ../panel/main.c:385
 msgid "Failed to restart the panel"
 msgstr "Fallo al reiniciar el panel"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:387
 msgid "Failed to quit the panel"
 msgstr "Fallo al cerrar el panel"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
 msgstr "Fallo al enviar un mensaje D-Bus"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:400
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -183,7 +183,7 @@ msgstr ""
 "sesión al salir, para que el panel arranque automáticamente la próxima vez "
 "que inicie su sesión."
 
-#: ../panel/main.c:393 ../panel/main.c:407
+#: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "No se encontró ninguna instancia de %s en ejecución"
@@ -192,7 +192,25 @@ msgstr "No se encontró ninguna instancia de %s en ejecución"
 msgid "Failed to launch the migration application"
 msgstr "Fallo al lanzar la aplicación de migración"
 
-#: ../panel/panel-application.c:1666
+#: ../panel/panel-application.c:955
+msgid "Create _Launcher"
+msgstr "Crear _Lanzador"
+
+#: ../panel/panel-application.c:956
+#, fuzzy
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr "Esto creará un nuevo p"
+
+#: ../panel/panel-application.c:958
+#, fuzzy, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] "Crear un nuevo lanzador en el panel de Xfce"
+msgstr[1] "Crear un nuevo lanzador en el panel de Xfce"
+
+#: ../panel/panel-application.c:1689
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -200,23 +218,23 @@ msgstr ""
 "Ha iniciado X sin un gestor de sesiones. Si desea cerrar el servidor X, haga "
 "click en Salir."
 
-#: ../panel/panel-application.c:1667
+#: ../panel/panel-application.c:1690
 msgid "Are you sure you want to quit the panel?"
 msgstr "¿Está seguro de que desea eliminar el panel?"
 
-#: ../panel/panel-application.c:1675
+#: ../panel/panel-application.c:1698
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Fallo al ejecutar la orden \"%s\""
 
-#: ../panel/panel-dbus-client.c:208
+#: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "Sintaxis de evento de complemento inválida. Use NOMBRE-COMPLEMENTO:NOMBRE[:"
 "TIPO:VALOR]."
 
-#: ../panel/panel-dbus-client.c:241
+#: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -224,29 +242,42 @@ msgstr ""
 "Tipo de pista inválido \"%s\". Los tipos válidos son bool, double, int, "
 "string y uint."
 
-#: ../panel/panel-dialogs.c:77
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr "Mantenedores"
+
+#: ../panel/panel-dialogs.c:68
+#, fuzzy
+msgid "Deskbar Mode"
+msgstr "Barra de escritorio"
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr "Mantenedores Inactivos"
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "El panel del entorno de escritorio Xfce"
 
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr "Abel Martín, abel.martin.ruiz@gmail.com"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:152 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Añadir nuevo elemento"
 
-#: ../panel/panel-dialogs.c:166
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "Por favor, elija un panel para el nuevo complemento:"
 
-#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:790
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:226
+#: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -254,24 +285,24 @@ msgstr ""
 "Debido a que el panel está funcionando en modo kiosko no se le permiten "
 "hacer cambios a la configuración del panel como un usuario normal"
 
-#: ../panel/panel-dialogs.c:228
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
 msgstr "No se permite la modificación del panel"
 
-#: ../panel/panel-item-dialog.c:188
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Añadir nuevos elementos"
 
-#: ../panel/panel-item-dialog.c:190
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Añadir nuevos complementos al panel"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
 msgstr "_Buscar:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Introduzca la frase de búsqueda aquí"
 
@@ -293,42 +324,42 @@ msgstr ""
 "pulsa Ejecutar, el panel intentará reiniciar el plugin; de lo contrario, se "
 "borrará permanentemente del panel"
 
-#: ../panel/panel-preferences-dialog.c:456
+#: ../panel/panel-preferences-dialog.c:467
 msgid "Automatic"
 msgstr "Automático"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:475
+#: ../panel/panel-preferences-dialog.c:486
 #, c-format
 msgid "Screen %d"
 msgstr "Pantalla %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:501
+#: ../panel/panel-preferences-dialog.c:512
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:856
+#: ../panel/panel-preferences-dialog.c:867
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "Las configuraciones de panel y complementos se borrarán permanentemente"
 
-#: ../panel/panel-preferences-dialog.c:857
+#: ../panel/panel-preferences-dialog.c:868
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "¿Está seguro de que desea eliminar el panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:942
+#: ../panel/panel-preferences-dialog.c:953
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externo)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:947
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -339,7 +370,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nombre interno: %s-%d"
@@ -597,6 +628,10 @@ msgstr "Experimentado"
 msgid "Expert"
 msgstr "Experto"
 
+#: ../panel/panel-window.c:2390
+msgid "_Lock Panel"
+msgstr "_Bloquear Panel"
+
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Bienvenido al primer inicio del panel"
@@ -805,18 +840,18 @@ msgstr "¿Está seguro que desea apagar?"
 msgid "Turning off computer in %d seconds."
 msgstr "Apagando el computador en %d segundos."
 
-#: ../plugins/actions/actions.c:600
+#: ../plugins/actions/actions.c:603
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Separador"
 
-#: ../plugins/actions/actions.c:869
+#: ../plugins/actions/actions.c:872
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Fallo al ejecutar acción \"%s\""
 
-#: ../plugins/actions/actions.c:1028
+#: ../plugins/actions/actions.c:1031
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -899,23 +934,23 @@ msgstr "_Icono:"
 msgid "_Show button title"
 msgstr "_Mostrar título del botón"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:528
+#: ../plugins/applicationsmenu/applicationsmenu.c:566
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Seleccionar un icono"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:567
-#: ../plugins/applicationsmenu/applicationsmenu.c:808
-#: ../plugins/launcher/launcher.c:2299
+#: ../plugins/applicationsmenu/applicationsmenu.c:604
+#: ../plugins/applicationsmenu/applicationsmenu.c:845
+#: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Fallo al ejecutar la orden \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1073
+#: ../plugins/applicationsmenu/applicationsmenu.c:1114
 msgid "No applications found"
 msgstr "No se encontró ninguna aplicación"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1096
+#: ../plugins/applicationsmenu/applicationsmenu.c:1137
 msgid "Failed to load the applications menu"
 msgstr "Fallo al cargar el menú de aplicaciones"
 
@@ -961,7 +996,7 @@ msgstr "Semana %V"
 msgid "Failed to execute clock command"
 msgstr "Fallo al ejecutar el comando de reloj"
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
 msgstr "Formato personalizado"
 
@@ -1372,24 +1407,24 @@ msgstr "Abrir el menú del lanzador"
 msgid "Unnamed Item"
 msgstr "Elemento sin nombre"
 
-#: ../plugins/launcher/launcher.c:1719
+#: ../plugins/launcher/launcher.c:1727
 msgid "No items"
 msgstr "Sin elementos"
 
-#: ../plugins/launcher/launcher-dialog.c:807
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr "Fallo al abrir el editor de elementos de escritorio"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Si borra un elemento, se eliminará permanentemente"
 
-#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "¿Está seguro de que desea eliminar \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:868
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
 msgstr "Elemento sin nombre"
 
@@ -1490,15 +1525,15 @@ msgstr "_Editar Elemento"
 msgid "Program launcher with optional menu"
 msgstr "Lanzador de programa con menú opcional"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Configuración del área de trabajo..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr "No se pudo abrir la configuración de áreas de trabajo de Xfce"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
+#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "Área de trabajo %d"
@@ -1823,9 +1858,6 @@ msgstr "Intercambiar ventanas abiertas usando un menú"
 
 #~ msgid "Log Out Dialog"
 #~ msgstr "Diálogo de cierre de sesión"
-
-#~ msgid "Create a new launcher on the Xfce Panel"
-#~ msgstr "Crear un nuevo lanzador en el panel de Xfce"
 
 #~ msgid "Panel Preferences"
 #~ msgstr "Preferencias del panel"
