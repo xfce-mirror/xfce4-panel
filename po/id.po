@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-03 10:27+0000\n"
-"PO-Revision-Date: 2010-12-19 18:49+0700\n"
+"POT-Creation-Date: 2012-03-13 06:09+0000\n"
+"PO-Revision-Date: 2012-03-18 10:01+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -31,7 +32,7 @@ msgid "Customize the panel"
 msgstr "Sesuaikan panel"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -58,17 +59,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "_Tambah Item Baru..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "_Konfigurasi Panel"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "_Keluar"
 
@@ -116,62 +117,62 @@ msgid "Print version information and exit"
 msgstr "Cetak informasi versi lalu keluar"
 
 #. parse context options
-#: ../panel/main.c:234
+#: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMEN...]"
 
-#: ../panel/main.c:241
+#: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Ketik \"%s --help\" untuk bantuan penggunaan."
 
-#: ../panel/main.c:260
+#: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
 msgstr "Tim pengembang Xfce. Hak cipta dilindungi undang-undang."
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Silakan laporkan kutu ke <%s>."
 
-#: ../panel/main.c:312
+#: ../panel/main.c:320
 msgid "There is already a running instance"
 msgstr "Telah ada baki area notifikasi yang berjalan di layar ini"
 
 #. spawn ourselfs again
-#: ../panel/main.c:354
+#: ../panel/main.c:362
 msgid "Restarting..."
 msgstr "Sedang memulai ulang..."
 
-#: ../panel/main.c:369
+#: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
 msgstr "Gagal menampilkan jendela dialog 'Konfigurasi...'"
 
-#: ../panel/main.c:371
+#: ../panel/main.c:379
 msgid "Failed to show the add new items dialog"
 msgstr "Gagal menampilkan jendela dialog 'Tambah Item Baru'"
 
-#: ../panel/main.c:373
+#: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
 msgstr "Gagal menyimpan konfigurasi panel"
 
-#: ../panel/main.c:375
+#: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
 msgstr "Gagal menambahkan plugin ke panel"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:385
 msgid "Failed to restart the panel"
 msgstr "Gagal memulai ulang panel"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:387
 msgid "Failed to quit the panel"
 msgstr "Gagal mematikan panel"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
 msgstr "Gagal mengirim pesan D-Bus"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:400
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -180,7 +181,7 @@ msgstr ""
 "keluar, sehingga panel secara otomatis dijalankan ketika lain kali anda "
 "masuk."
 
-#: ../panel/main.c:395 ../panel/main.c:409
+#: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Tidak ada instansi %s berjalan yang ditemukan"
@@ -189,7 +190,23 @@ msgstr "Tidak ada instansi %s berjalan yang ditemukan"
 msgid "Failed to launch the migration application"
 msgstr "Gagal meluncurkan aplikasi migrasi"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:955
+msgid "Create _Launcher"
+msgstr "Buat _Peluncur"
+
+#: ../panel/panel-application.c:956
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr "Ini akan membuat plugin peluncur baru di panel dan memasukkan berkas yang ditaruh sebagai item menu."
+
+#: ../panel/panel-application.c:958
+#, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] "Tambahkan peluncur baru dari %d berkas desktop"
+
+#: ../panel/panel-application.c:1689
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -197,23 +214,23 @@ msgstr ""
 "Anda telah menjalankan X tanpa manajer sesi. Klik Keluar akan menutup server "
 "X."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1690
 msgid "Are you sure you want to quit the panel?"
 msgstr "Anda yakin anda ingin keluar panel?"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1698
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Gagal menjalankan perintah \"%s\""
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "Sintaks yang diberikan pada plugin tidak valid. Gunakan: PLUGIN-NAME:NAME[:"
 "TYPE:VALUE]."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -221,29 +238,41 @@ msgstr ""
 "Tipe \"%s\" tidak valid. Gunakan salah satu tipe berikut: bool, double, int, "
 "string, dan uint."
 
-#: ../panel/panel-dialogs.c:77
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr "Pengelola"
+
+#: ../panel/panel-dialogs.c:68
+msgid "Deskbar Mode"
+msgstr "Mode Deskbar"
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr "Pengelola Tidak Aktif"
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Panel Desktop Xfce "
 
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr "Para penerjemah"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:152 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Tambah Item Baru"
 
-#: ../panel/panel-dialogs.c:166
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "Mohon pilih sebuah panel untuk menempatkan plugin baru:"
 
-#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:226
+#: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -251,24 +280,24 @@ msgstr ""
 "Anda tidak diizinkan untuk mengubah konfigurasi panel dengan akun pengguna "
 "biasa dikarenakan panel sedang berjalan pada mode kiosk"
 
-#: ../panel/panel-dialogs.c:228
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
 msgstr "Perubahan pada panel tidak diizinkan"
 
-#: ../panel/panel-item-dialog.c:188
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Tambah Item Baru"
 
-#: ../panel/panel-item-dialog.c:190
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Tambah plugin baru ke panel"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
 msgstr "Te_lusuri:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Masukkan kata pencarian di sini"
 
@@ -595,6 +624,10 @@ msgstr "Berpengalaman"
 msgid "Expert"
 msgstr "Mahir"
 
+#: ../panel/panel-window.c:2390
+msgid "_Lock Panel"
+msgstr "_Kunci Panel"
+
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Selamat datang dalam pengaturan awal panel"
@@ -802,18 +835,18 @@ msgstr "Anda yakin anda ingin mematikan?"
 msgid "Turning off computer in %d seconds."
 msgstr "Mematikan komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:600
+#: ../plugins/actions/actions.c:603
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Pemisah"
 
-#: ../plugins/actions/actions.c:869
+#: ../plugins/actions/actions.c:872
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Gagal menjalankan aksi \"%s\""
 
-#: ../plugins/actions/actions.c:1028
+#: ../plugins/actions/actions.c:1031
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -896,23 +929,23 @@ msgstr "_Ikon:"
 msgid "_Show button title"
 msgstr "Tampilkan judul _tombol"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:528
+#: ../plugins/applicationsmenu/applicationsmenu.c:566
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Pilih Ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:567
-#: ../plugins/applicationsmenu/applicationsmenu.c:808
-#: ../plugins/launcher/launcher.c:2299
+#: ../plugins/applicationsmenu/applicationsmenu.c:604
+#: ../plugins/applicationsmenu/applicationsmenu.c:845
+#: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Gagal mengeksekusi perintah \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1073
+#: ../plugins/applicationsmenu/applicationsmenu.c:1114
 msgid "No applications found"
 msgstr "Tak ada aplikasi yang ditemukan"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1096
+#: ../plugins/applicationsmenu/applicationsmenu.c:1137
 msgid "Failed to load the applications menu"
 msgstr "Gagal memuat menu aplikasi"
 
@@ -958,7 +991,7 @@ msgstr "Minggu %V"
 msgid "Failed to execute clock command"
 msgstr "Gagal mengeksekusi perintah jam"
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
 msgstr "Format Suai"
 
@@ -1368,25 +1401,25 @@ msgstr "Buka peluncuran menu"
 msgid "Unnamed Item"
 msgstr "Item Tak Bernama"
 
-#: ../plugins/launcher/launcher.c:1719
+#: ../plugins/launcher/launcher.c:1727
 msgid "No items"
 msgstr "Tak ada item"
 
-#: ../plugins/launcher/launcher-dialog.c:807
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr "Gagal membuka penyunting item desktop"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
 msgstr ""
 "Jika anda menghapus sebuah item, maka item akan secara permanen dihapus"
 
-#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Anda yakin ingin menghapus \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:868
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
 msgstr "Item tak bernama"
 
@@ -1487,15 +1520,15 @@ msgstr "_Sunting Item"
 msgid "Program launcher with optional menu"
 msgstr "Peluncur program dengan menu opsional"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Pengaturan Ruang Kerja..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr "Tak dapat membuka pengaturan ruang kerja"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
+#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "Ruang kerja %d"
@@ -1822,9 +1855,6 @@ msgstr "Tukar diantara jendela yang terbuka dengan menggunakan menu"
 
 #~ msgid "Failed to remove the desktop file from the config directory"
 #~ msgstr "Gagal menghapus berkas desktop dari direktori konfigurasi"
-
-#~ msgid "Create a new launcher on the Xfce Panel"
-#~ msgstr "Tambahkan Menu Utama baru pada panel Xfce"
 
 #~ msgid "Panel Preferences"
 #~ msgstr "Konfigurasi Panel"
