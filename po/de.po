@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-17 05:21+0000\n"
+"POT-Creation-Date: 2012-03-20 06:21+0000\n"
 "PO-Revision-Date: 2012-01-21 15:46+0100\n"
 "Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -36,7 +36,7 @@ msgid "Customize the panel"
 msgstr "Leiste einrichten"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2340
+#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Leiste"
@@ -64,17 +64,17 @@ msgid "Pane_l"
 msgstr "_Leiste"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2352
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "_Neue Elemente hinzufügen…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2363
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "Leisten_einstellungen…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2379
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "_Abmelden"
 
@@ -122,62 +122,62 @@ msgid "Print version information and exit"
 msgstr "Versionsinformationen ausgeben und beenden"
 
 #. parse context options
-#: ../panel/main.c:234
+#: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTE…]"
 
-#: ../panel/main.c:241
+#: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Geben Sie »%s --help« für Informationen zur Nutzung an."
 
-#: ../panel/main.c:260
+#: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
 msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Bitte melden Sie Fehler an <%s>"
 
-#: ../panel/main.c:312
+#: ../panel/main.c:320
 msgid "There is already a running instance"
 msgstr "Es gibt bereits eine laufende Instanz"
 
 #. spawn ourselfs again
-#: ../panel/main.c:354
+#: ../panel/main.c:362
 msgid "Restarting..."
 msgstr "Neustart…"
 
-#: ../panel/main.c:369
+#: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
 msgstr "Konnte den Einstellungsdialog nicht öffnen"
 
-#: ../panel/main.c:371
+#: ../panel/main.c:379
 msgid "Failed to show the add new items dialog"
 msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
 
-#: ../panel/main.c:373
+#: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
 msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
-#: ../panel/main.c:375
+#: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
 msgstr "Konnte Plugin nicht zur Leiste hinzufügen"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:385
 msgid "Failed to restart the panel"
 msgstr "Konnte die Leiste nicht neustarten"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:387
 msgid "Failed to quit the panel"
 msgstr "Konnte die Leiste nicht beenden"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
 msgstr "Konnte keine D-Bus-Nachricht senden"
 
-#: ../panel/main.c:392
+#: ../panel/main.c:400
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
@@ -186,7 +186,7 @@ msgstr ""
 "dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten "
 "Mal automatisch geladen wird."
 
-#: ../panel/main.c:395 ../panel/main.c:409
+#: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
@@ -196,7 +196,25 @@ msgid "Failed to launch the migration application"
 msgstr ""
 "Konnte die Anwendung zum Migrieren der Leisteneinstellungen nicht starten"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:955
+#, fuzzy
+msgid "Create _Launcher"
+msgstr "Starter zur Leiste hinzufügen"
+
+#: ../panel/panel-application.c:956
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr ""
+
+#: ../panel/panel-application.c:958
+#, fuzzy, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] "Neuen Starter zur Leiste hinzufügen"
+msgstr[1] "Neuen Starter zur Leiste hinzufügen"
+
+#: ../panel/panel-application.c:1689
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -204,23 +222,23 @@ msgstr ""
 "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« "
 "klicken, beendet dies den X-Server."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1690
 msgid "Are you sure you want to quit the panel?"
 msgstr "Soll die Leiste wirklich beendet werden?"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1698
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Konnte Befehl »%s« nicht ausführen."
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 "Ungültige Syntax für Plugin-Ereignisse angegeben. Verwenden Sie PLUGIN-NAME:"
 "NAME [:TYP:WERT]."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
@@ -228,11 +246,23 @@ msgstr ""
 "Ungültiger Hinweistyp »%s«. Erlaubte Typen sind 'bool', 'double', 'int', "
 "'string' und 'uint'."
 
-#: ../panel/panel-dialogs.c:77
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:68
+msgid "Deskbar Mode"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Die Leiste der Arbeitsumgebung Xfce"
 
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr ""
 "Moritz Heiber <moe@xfce.org>\n"
@@ -242,20 +272,20 @@ msgstr ""
 "Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:152 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "Neue Elemente hinzufügen"
 
-#: ../panel/panel-dialogs.c:166
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "Bitte wählen Sie eine Leiste für das neue Element:"
 
-#: ../panel/panel-dialogs.c:186 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
 
-#: ../panel/panel-dialogs.c:226
+#: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -263,24 +293,24 @@ msgstr ""
 "Da sich die Leiste im »Kiosk«-Modus befindet, sind Änderungen an der "
 "Leisteneinstellung als normaler Nutzer nicht erlaubt."
 
-#: ../panel/panel-dialogs.c:228
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
 msgstr "Modifizieren der Leiste ist nicht erlaubt"
 
-#: ../panel/panel-item-dialog.c:188
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Neue Elemente hinzufügen"
 
-#: ../panel/panel-item-dialog.c:190
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Neue Plugins zur Leiste hinzufügen"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
 msgstr "_Suche:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "Suchbegriff hier eingeben"
 
@@ -614,6 +644,11 @@ msgstr "Profi"
 msgid "Expert"
 msgstr "Experte"
 
+#: ../panel/panel-window.c:2390
+#, fuzzy
+msgid "_Lock Panel"
+msgstr "_Leiste sperren"
+
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "Willkommen beim ersten Start der Xfce-Leiste"
@@ -770,8 +805,9 @@ msgid "_Hibernate"
 msgstr "_Ruhezustand"
 
 #: ../plugins/actions/actions.c:186
+#, fuzzy
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "In den Ruhezustand versetzen?"
 
 #: ../plugins/actions/actions.c:187
 #, c-format
@@ -788,13 +824,14 @@ msgid "Sus_pend"
 msgstr "S_tandby"
 
 #: ../plugins/actions/actions.c:193
+#, fuzzy
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "In den Standby-Modus versetzen?"
 
 #: ../plugins/actions/actions.c:194
-#, c-format
+#, c-format, fuzzy
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Der Rechner wird in %d Sekunden in den Energiesparmodus versetzt."
 
 #: ../plugins/actions/actions.c:198
 msgid "Restart"
@@ -830,20 +867,21 @@ msgstr "Wollen Sie den Computer wirklich herunterfahren?"
 msgid "Turning off computer in %d seconds."
 msgstr "Computer wird in %d Sekunden heruntergefahren"
 
-#: ../plugins/actions/actions.c:600
+#: ../plugins/actions/actions.c:603
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Trennelement"
 
-#: ../plugins/actions/actions.c:869
+#: ../plugins/actions/actions.c:872
 #, fuzzy, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Konnte Anwendung »%s« nicht starten."
 
-#: ../plugins/actions/actions.c:1028
+#: ../plugins/actions/actions.c:1031
+#, fuzzy
 msgid "John Doe"
-msgstr ""
+msgstr "Max Mustermann"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -925,23 +963,23 @@ msgstr "S_ymbol:"
 msgid "_Show button title"
 msgstr "_Titel im Knopf anzeigen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:528
+#: ../plugins/applicationsmenu/applicationsmenu.c:566
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Symbol auswählen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:567
-#: ../plugins/applicationsmenu/applicationsmenu.c:808
-#: ../plugins/launcher/launcher.c:2299
+#: ../plugins/applicationsmenu/applicationsmenu.c:604
+#: ../plugins/applicationsmenu/applicationsmenu.c:845
+#: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Konnte Befehl »%s« nicht ausführen."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1073
+#: ../plugins/applicationsmenu/applicationsmenu.c:1114
 msgid "No applications found"
 msgstr "Keine Standardanwendung für »%s« gefunden"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1096
+#: ../plugins/applicationsmenu/applicationsmenu.c:1137
 msgid "Failed to load the applications menu"
 msgstr "Konnte Anwendungsmenü nicht laden"
 
@@ -987,7 +1025,7 @@ msgstr "Woche %V"
 msgid "Failed to execute clock command"
 msgstr "Ausführen des Uhrzeitbefehls fehlgeschlagen"
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
 msgstr "Benutzerdefiniertes Format"
 
@@ -1399,24 +1437,24 @@ msgstr "Startermenü öffnen"
 msgid "Unnamed Item"
 msgstr "Unbenanntes Objekt"
 
-#: ../plugins/launcher/launcher.c:1719
+#: ../plugins/launcher/launcher.c:1727
 msgid "No items"
 msgstr "Keine Objekte"
 
-#: ../plugins/launcher/launcher-dialog.c:807
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr "Konnte den Editor für Desktop-Objekte nicht öffnen"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Durch Löschen eines Objekts wird dieses dauerhaft entfernt"
 
-#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
-#: ../plugins/launcher/launcher-dialog.c:868
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
 msgstr "Unbenanntes Objekt"
 
@@ -1522,15 +1560,15 @@ msgstr "Eintrag _bearbeiten"
 msgid "Program launcher with optional menu"
 msgstr "Programmstarter mit optionalem Menü"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "_Arbeitsflächeneinstellungen..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr "Arbeitsflächeneinstellungen konnten nicht geöffnet werden"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:857
+#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbeitsfläche %d"
@@ -1859,9 +1897,6 @@ msgstr "Mit einem Menü zwischen offenen Fenstern umschalten"
 #~ msgid "Failed to remove the desktop file from the config directory"
 #~ msgstr ""
 #~ "Konnte Sesktop-Datei nicht aus dem Konfigurationsverzeichnis entfernen"
-
-#~ msgid "Create a new launcher on the Xfce Panel"
-#~ msgstr "Neuen Starter zur Leiste hinzufügen"
 
 #~ msgid "Panel Preferences"
 #~ msgstr "Leisteneinstellungen"
