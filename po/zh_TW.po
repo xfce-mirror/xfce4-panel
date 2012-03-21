@@ -10,14 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-14 23:54+0000\n"
-"PO-Revision-Date: 2012-01-15 10:38+0800\n"
+"POT-Creation-Date: 2012-03-21 11:21+0000\n"
+"PO-Revision-Date: 2012-03-21 22:01+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
@@ -33,20 +34,20 @@ msgstr "自訂面板"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:29
-#: ../panel/panel-window.c:2340
+#: ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "面板"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1078
+#: ../panel/panel-preferences-dialog.c:1089
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您確定要移除「%s」嗎？"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1081
+#: ../panel/panel-preferences-dialog.c:1092
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您要從面板移除該項目，它將永遠消失。"
 
@@ -61,60 +62,60 @@ msgstr "面板(_L)"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1244
-#: ../panel/panel-window.c:2352
+#: ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "加入新項目(_N)..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1255
-#: ../panel/panel-window.c:2363
+#: ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1272
-#: ../panel/panel-window.c:2379
+#: ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "登出(_O)"
 
-#: ../panel/main.c:78
+#: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "顯示「面板偏好設定」對話窗"
 
-#: ../panel/main.c:78
 #: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "面板號碼"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "顯示「加入新項目」對話窗"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "儲存面板組態"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "加入新插件至面板"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "插件名稱"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "重新啟動執行中的面板實體"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "退出執行中的面板實體"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
 msgstr "啟動時不要等待視窗管理器"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -122,67 +123,67 @@ msgid "Print version information and exit"
 msgstr "印出版本資訊並離開"
 
 #. parse context options
-#: ../panel/main.c:232
+#: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
 msgstr "[參數...]"
 
-#: ../panel/main.c:239
+#: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "輸入 \"%s --help\" 以瞭解用法。"
 
-#: ../panel/main.c:258
+#: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce 開發團隊。保留所有權利。"
 
-#: ../panel/main.c:259
+#: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "請回報錯誤至 <%s>。"
 
-#: ../panel/main.c:310
+#: ../panel/main.c:320
 msgid "There is already a running instance"
 msgstr "已經有執行中的實體"
 
 #. spawn ourselfs again
-#: ../panel/main.c:352
+#: ../panel/main.c:362
 msgid "Restarting..."
 msgstr "正在重新啟動..."
 
-#: ../panel/main.c:367
+#: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
 msgstr "未能顯示偏好設定對話窗"
 
-#: ../panel/main.c:369
+#: ../panel/main.c:379
 msgid "Failed to show the add new items dialog"
 msgstr "未能顯示加入新項目對話窗"
 
-#: ../panel/main.c:371
+#: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
 msgstr "未能儲存面板組態"
 
-#: ../panel/main.c:373
+#: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
 msgstr "未能加入插件至面板"
 
-#: ../panel/main.c:375
+#: ../panel/main.c:385
 msgid "Failed to restart the panel"
 msgstr "未能重新啟動面板"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:387
 msgid "Failed to quit the panel"
 msgstr "未能退出面板"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
 msgstr "未能傳送 D-Bus 訊息"
 
-#: ../panel/main.c:390
+#: ../panel/main.c:400
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
 msgstr "您想要啟動面板嗎？如果要的話，請確認在登出時您有儲存工作階段，這樣該面板才能在下一次您登入時自動啟動。"
 
-#: ../panel/main.c:393
-#: ../panel/main.c:407
+#: ../panel/main.c:403
+#: ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "找不到執行中的 %s 實體"
@@ -191,74 +192,101 @@ msgstr "找不到執行中的 %s 實體"
 msgid "Failed to launch the migration application"
 msgstr "未能啟動轉移應用程式"
 
-#: ../panel/panel-application.c:1666
+#: ../panel/panel-application.c:955
+msgid "Create _Launcher"
+msgstr "建立啟動器(_L)"
+
+#: ../panel/panel-application.c:956
+msgid "This will create a new launcher plugin on the panel and inserts the dropped files as menu items."
+msgstr "這會在面板尚建立新的啟動器插件，並將放下的檔案插入為選單項目。"
+
+#: ../panel/panel-application.c:958
+#, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] "從 %d 項桌面檔建立新的啟動器"
+msgstr[1] "從 %d 項桌面檔建立新的啟動器"
+
+#: ../panel/panel-application.c:1689
 msgid "You have started X without session manager. Clicking Quit will close the X server."
 msgstr "若您未透過工作階段管理程式啟動 X。只要點擊「退出」就會關閉 X 伺服器。"
 
-#: ../panel/panel-application.c:1667
+#: ../panel/panel-application.c:1690
 msgid "Are you sure you want to quit the panel?"
 msgstr "您確定要退出該面板嗎？"
 
-#: ../panel/panel-application.c:1675
+#: ../panel/panel-application.c:1698
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "未能執行指令 \"%s\""
 
-#: ../panel/panel-dbus-client.c:208
+#: ../panel/panel-dbus-client.c:211
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "指定了無效的插件事件語法。請使用 PLUGIN-NAME:NAME[:TYPE:VALUE]。"
 
-#: ../panel/panel-dbus-client.c:241
+#: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr "無效的暗示類型「%s」。有效的類型為真假值 (bool)、倍精度 (double)、整數 (int)、字串 (string)、單位 (unit)。"
 
-#: ../panel/panel-dialogs.c:77
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr "維護者"
+
+#: ../panel/panel-dialogs.c:68
+msgid "Deskbar Mode"
+msgstr "桌面列模式"
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr "非活躍中的維護者"
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Xfce 桌面環境的面板"
 
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2010."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:152
+#: ../panel/panel-dialogs.c:158
 #: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
 msgstr "加入新項目"
 
-#: ../panel/panel-dialogs.c:166
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "請為新插件選擇面板："
 
-#: ../panel/panel-dialogs.c:186
-#: ../panel/panel-preferences-dialog.c:790
+#: ../panel/panel-dialogs.c:192
+#: ../panel/panel-preferences-dialog.c:801
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
 
-#: ../panel/panel-dialogs.c:226
+#: ../panel/panel-dialogs.c:232
 msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
 msgstr "因為面板正在以 kiosk 模式執行中，您不被允許以一般使用者身份變更面板的組態"
 
-#: ../panel/panel-dialogs.c:228
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
 msgstr "修改面板不被允許"
 
-#: ../panel/panel-item-dialog.c:188
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "加入新項目"
 
-#: ../panel/panel-item-dialog.c:190
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "加入新插件至面板"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
 msgstr "搜尋(_S)："
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
 msgstr "在這裡輸入搜尋詞語"
 
@@ -272,41 +300,41 @@ msgstr "插件「%s」無預期退出面板，您想要重新啟動它嗎？"
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
 msgstr "該插件在 %d 秒內重新啟動超過一次。若您按下「執行」，面板將試著重新啟動該插件，否則它將永久自面板上移除。"
 
-#: ../panel/panel-preferences-dialog.c:456
+#: ../panel/panel-preferences-dialog.c:467
 msgid "Automatic"
 msgstr "自動"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:475
+#: ../panel/panel-preferences-dialog.c:486
 #, c-format
 msgid "Screen %d"
 msgstr "螢幕 %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:501
+#: ../panel/panel-preferences-dialog.c:512
 #, c-format
 msgid "Monitor %d"
 msgstr "顯示器 %d"
 
-#: ../panel/panel-preferences-dialog.c:856
+#: ../panel/panel-preferences-dialog.c:867
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "面板與插件組態將被永久移除"
 
-#: ../panel/panel-preferences-dialog.c:857
+#: ../panel/panel-preferences-dialog.c:868
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "您確定要移除面板 %d 嗎？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:942
+#: ../panel/panel-preferences-dialog.c:953
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:947
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -317,7 +345,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:959
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "內部名稱：%s-%d"
@@ -548,6 +576,10 @@ msgstr "老手"
 msgid "Expert"
 msgstr "專家"
 
+#: ../panel/panel-window.c:2390
+msgid "_Lock Panel"
+msgstr "鎖住面板(_L)"
+
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
 msgstr "歡迎初次使用本面板"
@@ -751,18 +783,18 @@ msgstr "您確定要關機嗎？"
 msgid "Turning off computer in %d seconds."
 msgstr "%d 秒內關閉電腦。"
 
-#: ../plugins/actions/actions.c:600
+#: ../plugins/actions/actions.c:603
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "分隔符"
 
-#: ../plugins/actions/actions.c:869
+#: ../plugins/actions/actions.c:872
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "無法執行動作「%s」"
 
-#: ../plugins/actions/actions.c:1028
+#: ../plugins/actions/actions.c:1031
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -841,23 +873,23 @@ msgstr "圖示(_I)："
 msgid "_Show button title"
 msgstr "顯示按鈕標題(_S)"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:528
+#: ../plugins/applicationsmenu/applicationsmenu.c:566
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "選取圖示"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:567
-#: ../plugins/applicationsmenu/applicationsmenu.c:808
-#: ../plugins/launcher/launcher.c:2299
+#: ../plugins/applicationsmenu/applicationsmenu.c:604
+#: ../plugins/applicationsmenu/applicationsmenu.c:845
+#: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」。"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1073
+#: ../plugins/applicationsmenu/applicationsmenu.c:1114
 msgid "No applications found"
 msgstr "找不到應用程式"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1096
+#: ../plugins/applicationsmenu/applicationsmenu.c:1137
 msgid "Failed to load the applications menu"
 msgstr "未能載入應用程式選單"
 
@@ -903,7 +935,7 @@ msgstr "第 %V 週"
 msgid "Failed to execute clock command"
 msgstr "未能執行時鐘指令"
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
 msgstr "自訂格式"
 
@@ -1249,16 +1281,16 @@ msgstr "找不到「%s」的預設應用程式"
 msgid "Failed to launch default application for \"%s\""
 msgstr "無法為「%s」啟動預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:717
+#: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "未能執行分類「%s」的偏好應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:790
+#: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
 msgstr "開啟資料夾"
 
-#: ../plugins/directorymenu/directorymenu.c:801
+#: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
 msgstr "在終端機內開啟"
 
@@ -1300,24 +1332,24 @@ msgstr "開啟啟動器選單"
 msgid "Unnamed Item"
 msgstr "未命名項目"
 
-#: ../plugins/launcher/launcher.c:1719
+#: ../plugins/launcher/launcher.c:1727
 msgid "No items"
 msgstr "無項目"
 
-#: ../plugins/launcher/launcher-dialog.c:807
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr "未能開啟桌面項目編輯器"
 
-#: ../plugins/launcher/launcher-dialog.c:866
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
 msgstr "若您刪除項目，它將被永遠移除"
 
-#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "您確定要移除「%s」嗎？"
 
-#: ../plugins/launcher/launcher-dialog.c:868
+#: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
 msgstr "未命名項目"
 
@@ -1414,16 +1446,16 @@ msgstr "編輯項目(_E)"
 msgid "Program launcher with optional menu"
 msgstr "程式啟動器，可附加選單"
 
-#: ../plugins/pager/pager.c:353
+#: ../plugins/pager/pager.c:370
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "工作區設定值(_S)..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr "無法開啟工作區設定值"
 
-#: ../plugins/pager/pager-buttons.c:561
+#: ../plugins/pager/pager-buttons.c:579
 #: ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
@@ -1741,9 +1773,6 @@ msgstr "使用選單在開啟視窗間切換"
 
 #~ msgid "Failed to remove the desktop file from the config directory"
 #~ msgstr "未能從組態目錄移除桌面檔"
-
-#~ msgid "Create a new launcher on the Xfce Panel"
-#~ msgstr "在 Xfce 面板上建立新的啟動器"
 
 #~ msgid "Panel Preferences"
 #~ msgstr "面板偏好設定"
