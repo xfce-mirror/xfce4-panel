@@ -358,7 +358,6 @@ applications_menu_plugin_set_property (GObject      *object,
       break;
 
     case PROP_BUTTON_ICON:
-    g_message ("set icon");
       g_free (plugin->button_icon);
       plugin->button_icon = g_value_dup_string (value);
       xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->icon),
