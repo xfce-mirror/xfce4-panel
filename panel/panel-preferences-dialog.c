@@ -1031,6 +1031,11 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
                                        GTK_WIDGET (provider),
                                        position + direction);
 
+          /* save the new ids */
+          panel_application_save_window (dialog->application,
+                                         dialog->active,
+                                         SAVE_PLUGIN_IDS);
+
           /* unblock the changed signal */
           g_signal_handler_unblock (G_OBJECT (itembar), dialog->items_changed_handler_id);
 
@@ -1208,9 +1213,15 @@ panel_preferences_dialog_item_row_changed (GtkTreeModel           *model,
 
   /* move the item on the panel */
   if (position != store_position)
-    panel_itembar_reorder_child (PANEL_ITEMBAR (itembar),
-                                 GTK_WIDGET (provider),
-                                 store_position);
+    {
+      panel_itembar_reorder_child (PANEL_ITEMBAR (itembar),
+                                   GTK_WIDGET (provider),
+                                   store_position);
+
+      panel_application_save_window (dialog->application,
+                                     dialog->active,
+                                     SAVE_PLUGIN_IDS);
+    }
 }
 
 

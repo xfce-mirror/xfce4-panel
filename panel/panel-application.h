@@ -54,6 +54,10 @@ void              panel_application_load              (PanelApplication  *applic
 void              panel_application_save              (PanelApplication  *application,
                                                        PanelSaveTypes     save_types);
 
+void              panel_application_save_window       (PanelApplication  *application,
+                                                       PanelWindow       *window,
+                                                       PanelSaveTypes     save_types);
+
 void              panel_application_take_dialog       (PanelApplication  *application,
                                                        GtkWindow         *dialog);
 
