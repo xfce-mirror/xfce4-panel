@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 06:21+0000\n"
+"POT-Creation-Date: 2012-03-28 11:33+0000\n"
 "PO-Revision-Date: 2012-01-21 15:46+0100\n"
 "Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -43,13 +43,13 @@ msgstr "Leiste"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1089
+#: ../panel/panel-preferences-dialog.c:1094
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1092
+#: ../panel/panel-preferences-dialog.c:1097
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
@@ -191,7 +191,7 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:212
 msgid "Failed to launch the migration application"
 msgstr ""
 "Konnte die Anwendung zum Migrieren der Leisteneinstellungen nicht starten"
@@ -199,22 +199,23 @@ msgstr ""
 #: ../panel/panel-application.c:955
 #, fuzzy
 msgid "Create _Launcher"
-msgstr "Starter zur Leiste hinzufügen"
+msgstr "Starter zur _Leiste hinzufügen"
 
 #: ../panel/panel-application.c:956
+#, fuzzy
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Dies erzeugt eine neue Starter-Erweiterung auf der Leiste und fügt die abgelegten Dateien als Menüpunkte hinzu."
 
 #: ../panel/panel-application.c:958
 #, fuzzy, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "Neuen Starter zur Leiste hinzufügen"
-msgstr[1] "Neuen Starter zur Leiste hinzufügen"
+msgstr[0] "Neuen Starter aus %d Datei für Arbeitsumgebung zur Leiste hinzufügen"
+msgstr[1] "Neuen Starter aus %d Dateien für Arbeitsumgebung zur Leiste hinzufügen"
 
-#: ../panel/panel-application.c:1689
+#: ../panel/panel-application.c:1692
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -222,11 +223,11 @@ msgstr ""
 "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« "
 "klicken, beendet dies den X-Server."
 
-#: ../panel/panel-application.c:1690
+#: ../panel/panel-application.c:1693
 msgid "Are you sure you want to quit the panel?"
 msgstr "Soll die Leiste wirklich beendet werden?"
 
-#: ../panel/panel-application.c:1698
+#: ../panel/panel-application.c:1701
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Konnte Befehl »%s« nicht ausführen."
@@ -248,7 +249,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
-msgstr ""
+msgstr "Betreuer"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
@@ -256,7 +257,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr ""
+msgstr "Inaktive Betreuer"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
@@ -700,8 +701,9 @@ msgid "Failed to load the default configuration"
 msgstr "Standardeinstellungen konnten nicht geladen werden"
 
 #: ../migrate/main.c:185
+#, fuzzy
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Leisteneinstellungen benötigen Migration..."
 
 #: ../migrate/main.c:189
 #, fuzzy
@@ -709,7 +711,6 @@ msgid "Failed to migrate the existing configuration"
 msgstr "Alte Leisteneinstellungen konnten nicht migriert werden"
 
 #: ../migrate/main.c:195
-#, fuzzy
 msgid "Panel configuration has been updated."
 msgstr "Leisteneinstellungen wurden aktualisiert."
 
@@ -730,12 +731,12 @@ msgstr "_Erscheinungsbild"
 #: ../plugins/actions/actions-dialog.glade.h:5
 #, fuzzy
 msgid "Invert buttons _orientation"
-msgstr "_Position des Pfeilknopfs:"
+msgstr "_Orientierung der Knöpfe umkehren"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 #, fuzzy
 msgid "Session Menu"
-msgstr "Fenstermenü"
+msgstr "Sitzungsmenü"
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 #, fuzzy
@@ -829,7 +830,7 @@ msgid "Do you want to suspend to RAM?"
 msgstr "In den Standby-Modus versetzen?"
 
 #: ../plugins/actions/actions.c:194
-#, c-format, fuzzy
+#, fuzzy, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Der Rechner wird in %d Sekunden in den Energiesparmodus versetzt."
 
@@ -963,23 +964,23 @@ msgstr "S_ymbol:"
 msgid "_Show button title"
 msgstr "_Titel im Knopf anzeigen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:566
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Symbol auswählen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:604
-#: ../plugins/applicationsmenu/applicationsmenu.c:845
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/applicationsmenu/applicationsmenu.c:844
 #: ../plugins/launcher/launcher.c:2307
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Konnte Befehl »%s« nicht ausführen."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1114
+#: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
 msgstr "Keine Standardanwendung für »%s« gefunden"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1137
+#: ../plugins/applicationsmenu/applicationsmenu.c:1136
 msgid "Failed to load the applications menu"
 msgstr "Konnte Anwendungsmenü nicht laden"
 
