@@ -8,21 +8,18 @@
 - Clock: Don't use sigval_t (bug #8297).
 - Panel: Add support for pluggable dialogs.
 - Panel: Save changed plugin ids if a plugin failed to load.
-- Directorymenu: Fix prefered app not working without snotify
-  (bug #8298).
+- Directorymenu: Fix prefered app not working without snotify (bug #8298).
 - Launcher: Small=FALSE in deskbar mode with label visible.
 - Actions: Limit size of action buttons to row size.
 - Panel: Removed item size checks.
 - Clock: Fixing clock orientation in vertical/deskbar mode.
-- Pager: Fixing infinite loopin in the WNCK pager aspect ratio
-  workaround.
+- Pager: Fixing infinite loopin in the WNCK pager aspect ratio workaround.
 - Pager: Fixing plugin->size updates.
 - Pager: Fixed workspace ordering in the vertical mode.
-- Pager: Workaround for aspect ratio error in WNCK pager in deskbar
-  mode.
+- Pager: Workaround for aspect ratio error in WNCK pager in deskbar mode.
 - Pager: Changing orientation depending on the panel mode.
 - Clock: Changing default value of rotate-vertically to TRUE.
-- Pager: Fixed preprocessor macro.	Andrzej	1	-3/+7
+- Pager: Fixed preprocessor macro.
 - Pager: Removing broken workaround for aspect ratio in deskbar mode.
 - Pager: Making use of a fixed libwnck version (>=2.31.0).
 - Revert "Use realtime POSIX timers for the clock."
@@ -33,13 +30,10 @@
 - Panel: Reply to the caller for plugin events (bug #7365).
 - Applicationsmenu: Fall-back to xfdesktop for
   xfce4-popup-applicationsmenu (bug #7365).
-- Applicationsmenu: Recurse application menu selection-done
-  gignal (bug #8541).
+- Applicationsmenu: Recurse application menu selection-done gignal (bug #8541).
 - Panel: Add (un)lock option to panel menu (bug #6980).
-- Panel: Add confirmation before creating launchers from dnd
-  (bug #6926).
-- Applicationsmenu: Allow non-squared icons in applications button
-  (bug #7381).
+- Panel: Add confirmation before creating launchers from dnd (bug #6926).
+- Applicationsmenu: Allow non-squared icons in applications button (bug #7381).
 - Panel: Save plugin-ids when removing and moving items in ed.
 - Translation updates ().
 
