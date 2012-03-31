@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-28 17:21+0000\n"
+"POT-Creation-Date: 2012-03-31 20:45+0000\n"
 "PO-Revision-Date: 2012-01-21 15:46+0100\n"
 "Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -738,7 +738,7 @@ msgstr "Sitzungsmenü"
 #, fuzzy
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Bestätigungsdialog für manche der Aktionen 30 Sekunden lang anzeigen."
+msgstr "Für manche Aktionen 30 Sekunden lang einen Bestätigungsdialog anzeigen."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
@@ -752,129 +752,129 @@ msgstr "_Aktionen"
 msgid "_Show confirmation dialog"
 msgstr "_Zeige Bestätigungsdialog an"
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Abmelden"
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "_Abmelden"
 
-#: ../plugins/actions/actions.c:161
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "Wollen Sie sich wirklich abmelden?"
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Sie werden in %d Sekunden abgemeldet."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Abmelden…"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "_Abmelden…"
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Benutzer wechseln"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "_Benutzer wechseln"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Bildschirm sperren"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:174
 msgid "L_ock Screen"
 msgstr "Bildschirm _sperren"
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Ruhezustand"
 
-#: ../plugins/actions/actions.c:185
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "_Ruhezustand"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "In den Ruhezustand versetzen?"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Computer wird in %d Sekunden in den Ruhezustand versetzt."
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Standby"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:189
 #, fuzzy
 msgid "Sus_pend"
 msgstr "S_tandby"
 
-#: ../plugins/actions/actions.c:193
+#: ../plugins/actions/actions.c:190
 #, fuzzy
 msgid "Do you want to suspend to RAM?"
-msgstr "In Bereitschaft versetzen?"
+msgstr "In Standby-Modus versetzen?"
 
-#: ../plugins/actions/actions.c:194
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Der Rechner wird in %d Sekunden in den Energiesparmodus versetzt."
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Neustarten"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "Neustarten"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "Wollen Sie wirklich neustarten?"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Computer wird in %d Sekunden neu gestartet."
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Herunterfahren"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
 msgstr "_Herunterfahren"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "Wollen Sie den Computer wirklich herunterfahren?"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Computer wird in %d Sekunden heruntergefahren"
 
-#: ../plugins/actions/actions.c:603
+#: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Trennelement"
 
-#: ../plugins/actions/actions.c:872
+#: ../plugins/actions/actions.c:974
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Aktion »%s« konnte nicht ausgeführt werden."
 
-#: ../plugins/actions/actions.c:1031
+#: ../plugins/actions/actions.c:1141
 msgid "John Doe"
 msgstr "Max Mustermann"
 
@@ -1456,7 +1456,7 @@ msgstr "Unbenanntes Objekt"
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 #, fuzzy
 msgid "Add Appli_cation"
-msgstr "Bekannte Anwendungen"
+msgstr "An_wendung hinzufügen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
@@ -1502,12 +1502,12 @@ msgstr "Starter"
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #, fuzzy
 msgid "New _Application"
-msgstr "Neue _Anwendungen"
+msgstr "Neue _Anwendung"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #, fuzzy
 msgid "New _Link"
-msgstr "Neue Verknüpfung"
+msgstr "Neue Ver_knüpfung"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
@@ -1768,23 +1768,23 @@ msgstr "Fenstertitel"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Fenster mit dem Maus_rad wechseln"
 
-#: ../plugins/tasklist/tasklist-widget.c:3177
+#: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
 msgstr "_Alle minimieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3186
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
 msgstr "_Minimieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:3192
+#: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
 msgstr "_Alle maximieren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3201
+#: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
 msgstr "_Maximieren rückgängig"
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3236
 msgid "_Close All"
 msgstr "_Alle schließen"
 
