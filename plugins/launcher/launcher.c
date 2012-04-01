@@ -912,7 +912,8 @@ launcher_plugin_file_changed (GFileMonitor      *monitor,
 
   /* waited until all events are proccessed */
   if (event_type != G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
-      && event_type != G_FILE_MONITOR_EVENT_DELETED)
+      && event_type != G_FILE_MONITOR_EVENT_DELETED
+      && event_type != G_FILE_MONITOR_EVENT_CREATED)
     return;
 
   /* we only act on desktop files */
