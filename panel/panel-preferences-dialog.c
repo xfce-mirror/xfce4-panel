@@ -181,7 +181,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   dialog->application = panel_application_get ();
 
   /* block autohide */
-  panel_application_windows_sensitive (dialog->application, FALSE);
+  panel_application_windows_blocked (dialog->application, TRUE);
 
   /* load the builder data into the object */
   gtk_builder_add_from_string (GTK_BUILDER (dialog), panel_preferences_dialog_ui,
@@ -290,7 +290,7 @@ panel_preferences_dialog_finalize (GObject *object)
   GtkWidget              *itembar;
 
   /* unblock autohide */
-  panel_application_windows_sensitive (dialog->application, TRUE);
+  panel_application_windows_blocked (dialog->application, FALSE);
 
   /* free bindings list */
   g_slist_free (dialog->bindings);

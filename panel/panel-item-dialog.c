@@ -179,7 +179,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   panel_application_take_dialog (dialog->application, GTK_WINDOW (dialog));
 
   /* make the application windows insensitive */
-  panel_application_windows_sensitive (dialog->application, FALSE);
+  panel_application_windows_blocked (dialog->application, TRUE);
 
   dialog->factory = panel_module_factory_get ();
 
@@ -299,7 +299,7 @@ panel_item_dialog_finalize (GObject *object)
       panel_item_dialog_unique_changed, dialog);
 
   /* make the windows sensitive again */
-  panel_application_windows_sensitive (dialog->application, TRUE);
+  panel_application_windows_blocked (dialog->application, FALSE);
 
   g_object_unref (G_OBJECT (dialog->store));
   g_object_unref (G_OBJECT (dialog->factory));

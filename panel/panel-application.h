@@ -84,8 +84,8 @@ PanelWindow      *panel_application_get_window        (PanelApplication  *applic
 void              panel_application_window_select     (PanelApplication  *application,
                                                        PanelWindow       *window);
 
-void              panel_application_windows_sensitive (PanelApplication  *application,
-                                                       gboolean           sensitive);
+void              panel_application_windows_blocked   (PanelApplication  *application,
+                                                       gboolean           blocked);
 
 gboolean          panel_application_get_locked        (PanelApplication  *application);
 

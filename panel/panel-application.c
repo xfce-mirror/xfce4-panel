@@ -516,8 +516,8 @@ panel_application_plugin_move_drag_end (GtkWidget        *item,
   g_signal_handlers_disconnect_by_func (G_OBJECT (item),
       G_CALLBACK (panel_application_plugin_move_drag_data_get), application);
 
-  /* make the window sensitive again */
-  panel_application_windows_sensitive (application, TRUE);
+  /* unblock autohide */
+  panel_application_windows_blocked (application, FALSE);
 }
 
 
@@ -535,8 +535,8 @@ panel_application_plugin_move (GtkWidget        *item,
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (item));
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
 
-  /* make the window insensitive */
-  panel_application_windows_sensitive (application, FALSE);
+  /* block autohide */
+  panel_application_windows_blocked (application, TRUE);
 
   /* create drag context */
   target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
@@ -793,25 +793,6 @@ panel_application_plugin_insert (PanelApplication  *application,
 
 
 static void
-panel_application_windows_block_autohide (PanelApplication *application,
-                                          gboolean          blocked)
-{
-  GSList *li;
-
-  panel_return_if_fail (PANEL_IS_APPLICATION (application));
-
-  for (li = application->windows; li != NULL; li = li->next)
-    {
-      if (blocked)
-        panel_window_freeze_autohide (PANEL_WINDOW (li->data));
-      else
-        panel_window_thaw_autohide (PANEL_WINDOW (li->data));
-    }
-}
-
-
-
-static void
 panel_application_dialog_destroyed (GtkWindow        *dialog,
                                     PanelApplication *application)
 {
@@ -824,7 +805,7 @@ panel_application_dialog_destroyed (GtkWindow        *dialog,
 
   /* unblock autohide if there are no open windows anymore */
   if (application->dialogs == NULL)
-    panel_application_windows_block_autohide (application, FALSE);
+    panel_application_windows_blocked (application, FALSE);
 }
 
 
@@ -1348,7 +1329,7 @@ panel_application_take_dialog (PanelApplication *application,
 
   /* block autohide if this will be the first dialog */
   if (application->dialogs == NULL)
-    panel_application_windows_block_autohide (application, TRUE);
+    panel_application_windows_blocked (application, TRUE);
 
   /* monitor window destruction */
   g_signal_connect (G_OBJECT (dialog), "destroy",
@@ -1625,8 +1606,8 @@ panel_application_window_select (PanelApplication *application,
 
 
 void
-panel_application_windows_sensitive (PanelApplication *application,
-                                     gboolean          sensitive)
+panel_application_windows_blocked (PanelApplication *application,
+                                   gboolean          blocked)
 {
   GSList *li;
 
@@ -1636,10 +1617,10 @@ panel_application_windows_sensitive (PanelApplication *application,
   for (li = application->windows; li != NULL; li = li->next)
     {
       /* block autohide for all windows */
-      if (sensitive)
-        panel_window_thaw_autohide (PANEL_WINDOW (li->data));
-      else
+      if (blocked)
         panel_window_freeze_autohide (PANEL_WINDOW (li->data));
+      else
+        panel_window_thaw_autohide (PANEL_WINDOW (li->data));
     }
 }
 
