@@ -96,6 +96,7 @@ struct _PanelItembar
   /* dnd support */
   gint                 highlight_index;
   gint                 highlight_x, highlight_y;
+  gboolean             highlight_small;
 };
 
 typedef enum
@@ -111,6 +112,7 @@ struct _PanelItembarChild
 {
   GtkWidget    *widget;
   ChildOptions  option;
+  gint          row;
 };
 
 enum
@@ -394,7 +396,7 @@ panel_itembar_size_allocate (GtkWidget     *widget,
                              GtkAllocation *allocation)
 {
   PanelItembar      *itembar = PANEL_ITEMBAR (widget);
-  GSList            *lp;
+  GSList            *lp, *ltemp;
   PanelItembarChild *child;
   GtkRequisition     child_req;
   GtkAllocation      child_alloc;
@@ -525,22 +527,34 @@ panel_itembar_size_allocate (GtkWidget     *widget,
       if (G_UNLIKELY (child == NULL))
         {
 
-          if (IS_HORIZONTAL (itembar))
+          ltemp = g_slist_next (lp);
+          itembar->highlight_small = (col_count > 0 && ltemp && ltemp->data  && ((PanelItembarChild *)ltemp->data)->option == CHILD_OPTION_SMALL);
+
+          if (itembar->highlight_small)
             {
               itembar->highlight_x = x;
+              itembar->highlight_y = y;
+              if (IS_HORIZONTAL (itembar))
+                y += HIGHLIGHT_SIZE;
+              else
+                x += HIGHLIGHT_SIZE;
+            }
+          else if (IS_HORIZONTAL (itembar))
+            {
+              itembar->highlight_x = (col_count > 0) ? x + row_max_size : x;
               itembar->highlight_y = y_init;
 
               x += HIGHLIGHT_SIZE;
+              expand_len_avail -= HIGHLIGHT_SIZE;
             }
           else
             {
               itembar->highlight_x = x_init;
-              itembar->highlight_y = y;
+              itembar->highlight_y = (col_count > 0) ? y + row_max_size : y;
 
               y += HIGHLIGHT_SIZE;
+              expand_len_avail -= HIGHLIGHT_SIZE;
             }
-
-          expand_len_avail -= HIGHLIGHT_SIZE;
 
           continue;
         }
@@ -605,6 +619,8 @@ panel_itembar_size_allocate (GtkWidget     *widget,
               x += itembar->size;
             }
 
+          child->row = col_count;
+
           /* reset to new row if all columns are filled */
           if (++col_count >= itembar->nrows)
             {
@@ -634,6 +650,8 @@ panel_itembar_size_allocate (GtkWidget     *widget,
             {
               RESET_COLUMN_COUNTERS
             }
+
+          child->row = col_count;
 
           child_alloc.x = x;
           child_alloc.y = y;
@@ -675,12 +693,13 @@ panel_itembar_expose_event (GtkWidget      *widget,
 
   if (itembar->highlight_index != -1)
     {
-      row_size = itembar->size * itembar->nrows;
+      row_size = (itembar->highlight_small) ? itembar->size : itembar->size * itembar->nrows;
 
       rect.x = itembar->highlight_x;
       rect.y = itembar->highlight_y;
 
-      if (IS_HORIZONTAL (itembar))
+      if ((IS_HORIZONTAL (itembar) && !itembar->highlight_small) ||
+          (!IS_HORIZONTAL (itembar) && itembar->highlight_small))
         {
           rect.width = HIGHLIGHT_SIZE;
           rect.height = row_size;
@@ -998,41 +1017,75 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
 {
   PanelItembarChild *child;
   GSList            *li;
-  GtkAllocation     *alloc;
-  guint              idx;
+  GtkAllocation      alloc;
+  guint              idx, col_start_idx;
+  gint               xr, yr;
 
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), 0);
 
   /* add the itembar position */
-  alloc = &GTK_WIDGET (itembar)->allocation;
+  alloc = GTK_WIDGET (itembar)->allocation;
+
+  if (!IS_HORIZONTAL (itembar))
+    {
+      SWAP_INTEGER (x, y);
+      TRANSPOSE_AREA (alloc);
+    }
 
   /* return -1 if point is outside the widget allocation */
-  if (x > alloc->width || y > alloc->height)
+  if (x < alloc.x || y < alloc.y ||
+      x >= alloc.x + alloc.width || y >= alloc.y + alloc.height)
     return g_slist_length (itembar->children);
 
-  for (li = itembar->children, idx = 0; li != NULL; li = g_slist_next (li))
+  for (li = itembar->children, idx = 0, col_start_idx = 0; li != NULL; li = g_slist_next (li))
     {
       child = li->data;
       if (G_UNLIKELY (child == NULL))
         continue;
 
-      alloc = &child->widget->allocation;
+      if (child->row == 0)
+        col_start_idx = idx;
 
-      if (IS_HORIZONTAL (itembar))
+      alloc = child->widget->allocation;
+
+      if (!IS_HORIZONTAL (itembar))
+        TRANSPOSE_AREA (alloc);
+
+      xr = x - alloc.x;
+      yr = y - alloc.y;
+      if (child->option == CHILD_OPTION_SMALL)
         {
-          if (x < (alloc->x + (alloc->width / 2))
-              && y >= alloc->y
-              && y <= alloc->y + alloc->height)
+          /* before current column */
+          if (xr < 0 ||
+              (xr < yr && xr < alloc.height - yr))
+            {
+              idx = col_start_idx;
+              break;
+            }
+          /* before current child */
+          if (xr < alloc.width && xr >= yr && alloc.width - xr >= yr)
             break;
+          /* after current column */
+          if (xr < alloc.width && xr >= alloc.height - yr && xr >= yr)
+            {
+              /* search for the beginning of the next column */
+              for (li = g_slist_next (li), idx++; li != NULL; li = g_slist_next (li))
+                {
+                  child = li->data;
+                  if (G_UNLIKELY (child == NULL))
+                    continue;
+                  if (child->row == 0)
+                    break;
+                  idx++;
+                }
+              break;
+            }
         }
       else
         {
-          if (y < (alloc->y + (alloc->height / 2))
-              && x >= alloc->x
-              && x <= alloc->x + alloc->width)
+          if (xr < alloc.width / 2)
             break;
         }
-
       idx++;
     }
 
