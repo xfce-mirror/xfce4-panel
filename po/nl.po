@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 07:45+0000\n"
+"POT-Creation-Date: 2012-04-02 07:33+0000\n"
 "PO-Revision-Date: 2011-09-24 20:43+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch (Flemish)\n"
@@ -41,13 +41,13 @@ msgstr "Werkbalk"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1089
+#: ../panel/panel-preferences-dialog.c:1094
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1092
+#: ../panel/panel-preferences-dialog.c:1097
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "Als u een element van de werkbalk verwijdert, dan kan dit niet meer ongedaan "
@@ -79,7 +79,7 @@ msgstr "Af_melden"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Geef het \"werkbalkvoorkeuren\"-dialoogvenster weer"
+msgstr "Geef het 'werkbalkvoorkeuren'-dialoogvenster weer"
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
@@ -87,7 +87,7 @@ msgstr "WERKBALKNUMMER"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
-msgstr "Geef het \"Nieuwe elementen toevoegen\"-dialoogvenster weer"
+msgstr "Geef het 'Nieuwe elementen toevoegen'-dialoogvenster weer"
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
@@ -128,7 +128,7 @@ msgstr "[ARGUMENTEN...]"
 #: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Tik \"%s --help\" voor gebruiksaanwijzingen."
+msgstr "Tik '%s --help' voor gebruiksaanwijzingen."
 
 #: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
@@ -189,9 +189,9 @@ msgstr ""
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "Geen actieve functie van %s gevonden"
+msgstr "Geen actieve instantie van %s gevonden"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:212
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
@@ -203,7 +203,9 @@ msgstr "Maak starter"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Dit zal een nieuwe starter toevoegen aan de werkbalk en voegt de geplaatste bestanden in als menu-onderdelen."
+msgstr ""
+"Dit zal een nieuwe starter toevoegen aan de werkbalk en voegt de geplaatste "
+"bestanden in als menu-onderdelen."
 
 #: ../panel/panel-application.c:958
 #, c-format
@@ -212,7 +214,7 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Maak een nieuwe starter van %d bureaubladbestand"
 msgstr[1] "Maak een nieuwe starter van %d bureaubladbestanden"
 
-#: ../panel/panel-application.c:1689
+#: ../panel/panel-application.c:1692
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -220,14 +222,14 @@ msgstr ""
 "U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u "
 "op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: ../panel/panel-application.c:1690
+#: ../panel/panel-application.c:1693
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u de werkbalk wil afsluiten?"
 
-#: ../panel/panel-application.c:1698
+#: ../panel/panel-application.c:1701
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Kon de opdracht \"%s\" niet uitvoeren"
+msgstr "Kon de opdracht '%s' niet uitvoeren"
 
 #: ../panel/panel-dbus-client.c:211
 msgid ""
@@ -513,7 +515,7 @@ msgstr "Grootte van rij (pixels):"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
-msgstr "Selecteer een achtergrondkleur"
+msgstr "Selecteer een achtergrondafbeelding"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
@@ -558,7 +560,7 @@ msgstr "Informatie over het geselecteerde element weergeven"
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Solid color"
-msgstr "Enkele kleur"
+msgstr "Effen kleur"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Span mo_nitors"
@@ -740,127 +742,127 @@ msgstr "Acties"
 msgid "_Show confirmation dialog"
 msgstr "Toon bevestigingsdialoog"
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Afmelden"
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "Afmelden"
 
-#: ../plugins/actions/actions.c:161
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "Weet u zeker dat u zich wil afmelden?"
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Afmelden over %d seconden"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Afmelden..."
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr "Afmelden..."
+msgstr "Af_melden..."
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Gebruiker wisselen"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr "Gebruiker wisselen"
+msgstr "Gebruiker _wisselen"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Scherm vergrendelen"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:174
 msgid "L_ock Screen"
-msgstr "Scherm vergrendelen"
+msgstr "Scherm _vergrendelen"
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Slaapstand"
 
-#: ../plugins/actions/actions.c:185
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
-msgstr "Slaapstand"
+msgstr "_Slaapstand"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "Wilt u de pauzestand wegschrijven naar de schijf?"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Slaapstand gaat in over %d seconden."
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Pauzestand"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
-msgstr "Pauzestand"
+msgstr "_Pauzestand"
 
-#: ../plugins/actions/actions.c:193
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
 msgstr "Wilt u de pauzestand wegschrijven naar het RAM?"
 
-#: ../plugins/actions/actions.c:194
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Pauzestand gaat in over %d seconden."
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Herstarten"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "_Herstarten"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "Weet u zeker dat u wil herstarten?"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Herstart vindt plaats over %d seconden."
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Afsluiten"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
-msgstr "Afsluiten"
+msgstr "_Afsluiten"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "Weet u zeker dat u wil afsluiten?"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "De computer zal worden uitgezet over %d seconden."
 
-#: ../plugins/actions/actions.c:603
+#: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Scheidingslijn"
 
-#: ../plugins/actions/actions.c:872
+#: ../plugins/actions/actions.c:974
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Kon actie \"%s\" niet uitvoeren"
+msgstr "Kon actie '%s' niet uitvoeren"
 
-#: ../plugins/actions/actions.c:1031
+#: ../plugins/actions/actions.c:1141
 msgid "John Doe"
 msgstr "Jantje"
 
@@ -877,7 +879,7 @@ msgstr "Afmelden, vergrendelen of andere systeemacties"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 msgid "Appearance"
-msgstr "Weergave"
+msgstr "Uiterlijk"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
@@ -943,23 +945,23 @@ msgstr "P_ictogram:"
 msgid "_Show button title"
 msgstr "Knoptitel _weergeven"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:566
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Selecteer een pictogram"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:604
-#: ../plugins/applicationsmenu/applicationsmenu.c:845
-#: ../plugins/launcher/launcher.c:2307
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/applicationsmenu/applicationsmenu.c:844
+#: ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Kon opdracht \"%s\" niet uitvoeren."
+msgstr "Kon opdracht '%s' niet uitvoeren."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1114
+#: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
 msgstr "Geen toepassingen gevonden"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1137
+#: ../plugins/applicationsmenu/applicationsmenu.c:1136
 msgid "Failed to load the applications menu"
 msgstr "Kon het toepassingenmenu niet laden"
 
@@ -1096,7 +1098,7 @@ msgstr "Volledig binaire klok"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr "Inde_ling:"
+msgstr "Vormgeving:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
@@ -1342,27 +1344,27 @@ msgstr "Mapmenu"
 #: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Kon toepassing \"%s\" niet uitvoeren"
+msgstr "Kon toepassing '%s' niet starten"
 
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "Kon het bestandtype van \"%s\" niet achterhalen"
+msgstr "Kon het type inhoud van '%s' niet achterhalen"
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr "Geen standaardtoepassing gevonden voor \"%s\""
+msgstr "Geen standaardtoepassing gevonden voor '%s'"
 
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Kon standaardtoepassing voor \"%s\" niet uitvoeren"
+msgstr "Kon standaardtoepassing voor '%s' niet starten"
 
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Kon de voorkeurstoepassing voor de categorie \"%s\" niet uitvoeren"
+msgstr "Kon de voorkeurstoepassing voor de categorie '%s' niet starten"
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
@@ -1413,17 +1415,17 @@ msgstr "_Bestandpatroon:"
 msgid "Open launcher menu"
 msgstr "Open startermenu"
 
-#: ../plugins/launcher/launcher.c:1574
+#: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
 msgstr "Naamloos element"
 
-#: ../plugins/launcher/launcher.c:1727
+#: ../plugins/launcher/launcher.c:1728
 msgid "No items"
 msgstr "Geen elementen"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr "Kon dialoogvenster voor het bewerken van menu-elementen niet laden"
+msgstr "Kon bewerker van menu-elementen niet openen"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
@@ -1573,7 +1575,7 @@ msgstr "Toon mi_niatuuraanblik"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Werkblad _wisselen met muiswiel"
+msgstr "Werkbladen _wisselen met muiswiel"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
@@ -1623,7 +1625,7 @@ msgstr "Vensters verbergen en bureaublad weergeven"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "Kon het meldingengebied niet starten"
+msgstr "Kon het mededelingengebied niet starten"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
@@ -1749,23 +1751,23 @@ msgstr "Venstertitel"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Werkblad wisselen met muiswiel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3177
+#: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3186
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
 msgstr "Alles _ONTminimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3192
+#: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3201
+#: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
 msgstr "Alles ONT_maximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3236
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
@@ -1792,7 +1794,7 @@ msgstr "Werkblad toevoegen"
 #: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Werkblad \"%s\" verwijderen"
+msgstr "Werkblad '%s' verwijderen"
 
 #: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
@@ -1805,11 +1807,11 @@ msgstr "Pijl"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr "Knopweergave:"
+msgstr "Knopvormgeving:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Enable _urgency notification"
-msgstr "Urgentie-notificatie inschakelen"
+msgstr "Urgentiemelding inschakelen"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
@@ -1834,7 +1836,7 @@ msgstr "Venstermenu"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr "Wisselen tussen open vensters met behulp van een menu"
+msgstr "Schakelen tussen open vensters met behulp van een menu"
 
 #~ msgid "_Read Online"
 #~ msgstr "_Lees op internet"
