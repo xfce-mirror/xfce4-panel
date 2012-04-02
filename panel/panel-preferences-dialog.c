@@ -180,6 +180,9 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   dialog->bindings = NULL;
   dialog->application = panel_application_get ();
 
+  /* block autohide */
+  panel_application_windows_sensitive (dialog->application, FALSE);
+
   /* load the builder data into the object */
   gtk_builder_add_from_string (GTK_BUILDER (dialog), panel_preferences_dialog_ui,
                                panel_preferences_dialog_ui_length, NULL);
@@ -187,7 +190,6 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   /* get the dialog */
   window = gtk_builder_get_object (GTK_BUILDER (dialog), "dialog");
   panel_return_if_fail (GTK_IS_WIDGET (window));
-  panel_application_take_dialog (dialog->application, GTK_WINDOW (window));
   g_signal_connect (G_OBJECT (window), "response",
       G_CALLBACK (panel_preferences_dialog_response), dialog);
 
@@ -286,6 +288,9 @@ panel_preferences_dialog_finalize (GObject *object)
 {
   PanelPreferencesDialog *dialog = PANEL_PREFERENCES_DIALOG (object);
   GtkWidget              *itembar;
+
+  /* unblock autohide */
+  panel_application_windows_sensitive (dialog->application, TRUE);
 
   /* free bindings list */
   g_slist_free (dialog->bindings);
@@ -1373,6 +1378,7 @@ panel_preferences_dialog_show_internal (PanelWindow     *active,
       gtk_window_set_screen (GTK_WINDOW (window), screen);
 
       gtk_window_present (GTK_WINDOW (window));
+      panel_application_take_dialog (dialog_singleton->application, GTK_WINDOW (window));
     }
   else
     {
