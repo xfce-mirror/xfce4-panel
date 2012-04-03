@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 12:09+0000\n"
+"POT-Creation-Date: 2012-04-03 06:45+0000\n"
 "PO-Revision-Date: 2011-03-24 22:11+0100\n"
 "Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
 "Language-Team: Polish <>\n"
@@ -45,13 +45,13 @@ msgstr "Panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1089
+#: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Usunąć aplet „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1092
+#: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Aplet zostanie bezpowrotnie usunięty."
 
@@ -192,22 +192,22 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:212
 msgid "Failed to launch the migration application"
 msgstr "Nie udało się uruchomić programu importowania konfiguracji"
 
-#: ../panel/panel-application.c:955
+#: ../panel/panel-application.c:936
 #, fuzzy
 msgid "Create _Launcher"
 msgstr "Dodanie aktywatora do panelu"
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:937
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
 
-#: ../panel/panel-application.c:958
+#: ../panel/panel-application.c:939
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -215,7 +215,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../panel/panel-application.c:1689
+#: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -223,11 +223,11 @@ msgstr ""
 "Uruchomiono serwer X bez menedżera sesji. Zakończenie programu zakończy "
 "działanie serwera X."
 
-#: ../panel/panel-application.c:1690
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Zakończyć działanie panelu?"
 
-#: ../panel/panel-application.c:1698
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nie udało się wykonać polecenia „%s”."
@@ -272,7 +272,7 @@ msgstr "Dodawanie aktywatora"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Proszę wybrać panel, do którego zostanie dodany aplet:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -322,41 +322,41 @@ msgstr ""
 "apletu. Ponowić próbę ponownego uruchomienia apletu czy usunąć aplet z "
 "panelu?"
 
-#: ../panel/panel-preferences-dialog.c:467
+#: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
 msgstr "Autmatycznie"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
 msgstr "Ekran %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:512
+#: ../panel/panel-preferences-dialog.c:517
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:867
+#: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel zostanie usunięty wraz z konfiguracją apletów."
 
-#: ../panel/panel-preferences-dialog.c:868
+#: ../panel/panel-preferences-dialog.c:873
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Usunąć panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:953
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(zewnętrzny)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -367,7 +367,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Wewnętrzna nazwa: %s-%d"
@@ -693,9 +693,8 @@ msgid "Panel configuration has been updated."
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
 msgid "Action"
-msgstr "Przyciski akcji"
+msgstr "Czynność"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -732,131 +731,127 @@ msgstr "_Czynności"
 msgid "_Show confirmation dialog"
 msgstr "_Wyświetl prośbę o potwierdzenie"
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Wylogowanie"
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "_Wylogowanie"
 
-#: ../plugins/actions/actions.c:161
-#, fuzzy
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
-msgstr "Usunąć aktywator „%s”?"
+msgstr "Wylogować bieżącego użytkownika?"
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Wylogowywanie za %d sekund."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Wylogowanie..."
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "Za_kończ sesję"
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Przełącz użytkownika"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "_Przełącz użytkownika"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Zablokowanie ekranu"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:174
 msgid "L_ock Screen"
 msgstr "_Zablokowanie ekranu"
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Zahibernowanie"
 
-#: ../plugins/actions/actions.c:185
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "_Zahibernowanie"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Zahibernować działanie komputera?"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "Działanie komputera zostanie zahibernowane za %d sekund."
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Wstrzymanie"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
 msgstr "_Wstrzymanie"
 
-#: ../plugins/actions/actions.c:193
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Wstrzymać działanie komputera?"
 
-#: ../plugins/actions/actions.c:194
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Działanie komputera zostanie wstrzymane za %d sekund."
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Ponowne uruchomienie"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "_Ponowne uruchomienie"
 
-#: ../plugins/actions/actions.c:200
-#, fuzzy
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr "Usunąć aktywator „%s”?"
+msgstr "Uruchomić komputer ponownie?"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Komputer zostanie ponownie uruchomiony za %d sekund."
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Wyłączenie"
 
-#: ../plugins/actions/actions.c:206
-#, fuzzy
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
-msgstr "Wyłączenie"
+msgstr "_Wyłącz"
+
+#: ../plugins/actions/actions.c:206
+msgid "Are you sure you want to shut down?"
+msgstr "Wyłączyć komputer?"
 
 #: ../plugins/actions/actions.c:207
-#, fuzzy
-msgid "Are you sure you want to shut down?"
-msgstr "Zakończyć działanie panelu?"
-
-#: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Komputer zostanie wyłączony za %d sekund."
 
-#: ../plugins/actions/actions.c:603
+#: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Separator"
 
-#: ../plugins/actions/actions.c:872
+#: ../plugins/actions/actions.c:974
 #, fuzzy, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Nie udało się uruchomić programu „%s”."
+msgstr "Nie udało się uruchomić czynności „%s”."
 
-#: ../plugins/actions/actions.c:1031
+#: ../plugins/actions/actions.c:1141
 msgid "John Doe"
 msgstr "Jan Kowalski"
 
@@ -939,23 +934,23 @@ msgstr "I_kona:"
 msgid "_Show button title"
 msgstr "_Etykieta przycisku"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:566
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Wybór ikony"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:604
-#: ../plugins/applicationsmenu/applicationsmenu.c:845
-#: ../plugins/launcher/launcher.c:2307
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/applicationsmenu/applicationsmenu.c:844
+#: ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nie udało się wykonać polecenia „%s”."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1114
+#: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
 msgstr "Nie odnaleziono programu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1137
+#: ../plugins/applicationsmenu/applicationsmenu.c:1136
 msgid "Failed to load the applications menu"
 msgstr "Nie udało się wczytać menu programów"
 
@@ -1074,7 +1069,7 @@ msgid "Show gri_d"
 msgstr "_Siatka"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
@@ -1406,11 +1401,11 @@ msgstr "_Wzór plików:"
 msgid "Open launcher menu"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:1574
+#: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
 msgstr "Nienazwany element"
 
-#: ../plugins/launcher/launcher.c:1727
+#: ../plugins/launcher/launcher.c:1728
 msgid "No items"
 msgstr "Brak aktywatorów"
 
@@ -1736,23 +1731,23 @@ msgstr "Według nazwy okna"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Przełącz okna za pomocą _kółka myszy"
 
-#: ../plugins/tasklist/tasklist-widget.c:3177
+#: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
 msgstr "Zm_inimalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3186
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
 msgstr "_Cofnij minimalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3192
+#: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
 msgstr "Zm_aksymalizuj wszystkie"
 
-#: ../plugins/tasklist/tasklist-widget.c:3201
+#: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
 msgstr "C_ofnij maksymalizację wszystkich"
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3236
 msgid "_Close All"
 msgstr "Za_mknij wszystkie"
 
