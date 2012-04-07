@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-31 20:45+0000\n"
+"POT-Creation-Date: 2012-04-07 14:42+0000\n"
 "PO-Revision-Date: 2012-01-21 15:46+0100\n"
 "Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
@@ -43,13 +43,13 @@ msgstr "Leiste"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1094
+#: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1097
+#: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
@@ -196,11 +196,13 @@ msgid "Failed to launch the migration application"
 msgstr ""
 "Konnte die Anwendung zum Migrieren der Leisteneinstellungen nicht starten"
 
-#: ../panel/panel-application.c:955
+#: ../panel/panel-application.c:936
+#, fuzzy
 msgid "Create _Launcher"
-msgstr "Starter zur _Leiste hinzufügen"
+msgstr "Starter an_legen"
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:937
+#, fuzzy
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -208,7 +210,7 @@ msgstr ""
 "Dies erzeugt eine neue Starter-Erweiterung auf der Leiste und fügt die "
 "abgelegten Dateien als Menüpunkte hinzu."
 
-#: ../panel/panel-application.c:958
+#: ../panel/panel-application.c:939
 #, fuzzy, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -217,7 +219,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Neuen Starter aus %d Dateien für Arbeitsumgebung zur Leiste hinzufügen"
 
-#: ../panel/panel-application.c:1692
+#: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -225,11 +227,11 @@ msgstr ""
 "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« "
 "klicken, beendet dies den X-Server."
 
-#: ../panel/panel-application.c:1693
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Soll die Leiste wirklich beendet werden?"
 
-#: ../panel/panel-application.c:1701
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Konnte Befehl »%s« nicht ausführen."
@@ -250,16 +252,18 @@ msgstr ""
 "'string' und 'uint'."
 
 #: ../panel/panel-dialogs.c:65
+#, fuzzy
 msgid "Maintainers"
-msgstr "Betreuer"
+msgstr "Entwickler"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:71
+#, fuzzy
 msgid "Inactive Maintainers"
-msgstr "Inaktive Betreuer"
+msgstr "Inaktive Entwickler"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
@@ -283,7 +287,7 @@ msgstr "Neue Elemente hinzufügen"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Bitte wählen Sie eine Leiste für das neue Element:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
@@ -335,42 +339,42 @@ msgstr ""
 "Durch Drücken von »Ausführen« wird das Element noch einmal neugestartet. "
 "Andernfalls wird es endgültig von der Leiste entfernt."
 
-#: ../panel/panel-preferences-dialog.c:467
+#: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
 msgstr "Automatisch"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
 msgstr "Bildschirm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:512
+#: ../panel/panel-preferences-dialog.c:517
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:867
+#: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "Die Einstellungen der Leiste und der Plugins werden dauerhaft entfernt."
 
-#: ../panel/panel-preferences-dialog.c:868
+#: ../panel/panel-preferences-dialog.c:873
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Soll die Leiste %d wirklich entfernt werden?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:953
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -381,7 +385,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interner Name: %s-%d"
@@ -703,7 +707,7 @@ msgstr "Standardeinstellungen konnten nicht geladen werden"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "Leisteneinstellungen benötigen Migration…"
+msgstr "Die Leisteneinstellungen müssen migriert werden …"
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
@@ -731,6 +735,7 @@ msgid "Invert buttons _orientation"
 msgstr "_Orientierung der Knöpfe umkehren"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
+#, fuzzy
 msgid "Session Menu"
 msgstr "Sitzungsmenü"
 
@@ -738,7 +743,8 @@ msgstr "Sitzungsmenü"
 #, fuzzy
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Für manche Aktionen 30 Sekunden lang einen Bestätigungsdialog anzeigen."
+msgstr ""
+"Für manche Aktionen 30 Sekunden lang einen Bestätigungsdialog anzeigen."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
@@ -876,7 +882,7 @@ msgstr "Aktion »%s« konnte nicht ausgeführt werden."
 
 #: ../plugins/actions/actions.c:1141
 msgid "John Doe"
-msgstr "Max Mustermann"
+msgstr "John Doe"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -965,7 +971,7 @@ msgstr "Symbol auswählen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/launcher/launcher.c:2307
+#: ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Konnte Befehl »%s« nicht ausführen."
@@ -1428,11 +1434,11 @@ msgstr "_Dateimuster:"
 msgid "Open launcher menu"
 msgstr "Startermenü öffnen"
 
-#: ../plugins/launcher/launcher.c:1574
+#: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
 msgstr "Unbenanntes Objekt"
 
-#: ../plugins/launcher/launcher.c:1727
+#: ../plugins/launcher/launcher.c:1728
 msgid "No items"
 msgstr "Keine Objekte"
 
@@ -1454,9 +1460,8 @@ msgid "Unnamed item"
 msgstr "Unbenanntes Objekt"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
 msgid "Add Appli_cation"
-msgstr "An_wendung hinzufügen"
+msgstr "Anwendung _hinzufügen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
@@ -1500,14 +1505,13 @@ msgid "Launcher"
 msgstr "Starter"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#, fuzzy
 msgid "New _Application"
 msgstr "Neue _Anwendung"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #, fuzzy
 msgid "New _Link"
-msgstr "Neue Ver_knüpfung"
+msgstr "Neue _Verknüpfung"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
