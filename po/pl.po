@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-03 06:45+0000\n"
+"POT-Creation-Date: 2012-04-08 19:27+0000\n"
 "PO-Revision-Date: 2011-03-24 22:11+0100\n"
 "Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
 "Language-Team: Polish <>\n"
@@ -113,7 +113,7 @@ msgstr "Kończy działanie bieżącego wystąpienia programu"
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "Nie czekaj na manadżer okien na starcie"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -197,23 +197,28 @@ msgid "Failed to launch the migration application"
 msgstr "Nie udało się uruchomić programu importowania konfiguracji"
 
 #: ../panel/panel-application.c:936
-#, fuzzy
 msgid "Create _Launcher"
-msgstr "Dodanie aktywatora do panelu"
+msgstr "Utwórz _aktywator"
 
 #: ../panel/panel-application.c:937
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Opcja stworzy nową wtyczkę aktywatora na panelu i doda wrzucone pliki, jako menu"
 
 #: ../panel/panel-application.c:939
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] ""
+"Utwórz nowy aktywator z pliku pulpitu %d\r\n"
+"Utwórz nowy aktywator z plików pulpitu %d"
 msgstr[1] ""
+"Utwórz nowy aktywator z pliku pulpitu %d\r\n"
+"Utwórz nowy aktywator z plików pulpitu %d"
 msgstr[2] ""
+"Utwórz nowy aktywator z pliku pulpitu %d\r\n"
+"Utwórz nowy aktywator z plików pulpitu %d"
 
 #: ../panel/panel-application.c:1673
 msgid ""
@@ -235,13 +240,13 @@ msgstr "Nie udało się wykonać polecenia „%s”."
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Nieprawidłowa składnia zdarzenia określonej wtyczki. Użyj PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
+msgstr "Nieprawidłowy typ podpowiedzi \"%s\". Prawidłowe typy to bool, double, int, string i uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -249,7 +254,7 @@ msgstr "Opiekunowie"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Tryb paska pulpitu"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -418,11 +423,11 @@ msgstr "_Wyświetlanie"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Deskbar"
-msgstr ""
+msgstr "Pasek pulpitu"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Nie rezerwuj przestrzeni po bokach"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:11
@@ -430,9 +435,10 @@ msgid "Edit the currently selected item"
 msgstr "Wyświetla okno preferencji zaznaczonego elementu"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
+#, fuzzy
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "Uruchom kompozycje w menedżerze okien w celu ukrycia ustawień na panelu."
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
@@ -483,7 +489,7 @@ msgstr "_Ilość wierszy:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
-msgstr ""
+msgstr "Wyjście"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Opacity"
@@ -618,7 +624,7 @@ msgstr "Początkujący"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Pośredni"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
@@ -682,7 +688,7 @@ msgstr "Nie udało się wczytać domyślnej konfiguracji"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Ustawienia panelu wymagają migracji..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
@@ -690,7 +696,7 @@ msgstr "Nie udało się zaimportować istniejącej konfiguracji programu"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Zaktualizowano konfigurację panelu."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 msgid "Action"
@@ -717,7 +723,7 @@ msgstr "Menu sesji"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Pokaż okno potwierdzenia z 30 sekundowym opóźnieniem dla niektórych akcji."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
@@ -1129,37 +1135,37 @@ msgstr "Późny wieczór"
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
-msgstr "%0 godzina"
+msgstr "Godzina %0"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "pięć po %0"
+msgstr "Pięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "dziesięć po %0"
+msgstr "Dziesięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "kwadrans po %0"
+msgstr "Kwadrans po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "dwadzieścia po %0"
+msgstr "Dwadzieścia po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "dwadzieścia pięć po %0"
+msgstr "Dwadzieścia pięć minut po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
-msgstr "%0 trzydzieści"
+msgstr "Pół godziny po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
