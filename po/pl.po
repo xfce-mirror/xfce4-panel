@@ -6,21 +6,22 @@
 # Wit Wiliński <madman@berlios.de>, 2005.
 # Piotr Maliński <riklaunim@gmail.com>, 2006.
 # Szymon Kałasz <szymon_maestro@gazeta.pl>, 2006.
-# Piotr Sokół <psokol@jabster.pl>, 2009, 2010, 2011.
-# 
+# Piotr Sokół <psokol@jabster.pl>, 2009, 2010, 2011, 2012.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-08 19:27+0000\n"
-"PO-Revision-Date: 2011-03-24 22:11+0100\n"
+"POT-Creation-Date: 2012-04-09 12:42+0000\n"
+"PO-Revision-Date: 2012-04-09 16:32+0200\n"
 "Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
-"Language-Team: Polish <>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: polski <>\n"
 "Language: \n"
-"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : ((n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2));\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : ((n%10>=2 && n%10<=4 && (n"
+"%100<10 || n%100>=20)) ? 1 : 2));\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -125,7 +126,7 @@ msgstr "Wypisuje informacje o wersji i kończy"
 #. parse context options
 #: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
-msgstr "[ARGUMENT...]"
+msgstr "[PARAMETR...]"
 
 #: ../panel/main.c:242
 #, c-format
@@ -204,7 +205,9 @@ msgstr "Utwórz _aktywator"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Opcja stworzy nową wtyczkę aktywatora na panelu i doda wrzucone pliki, jako menu"
+msgstr ""
+"Opcja stworzy nową wtyczkę aktywatora na panelu i doda wrzucone pliki, jako "
+"menu"
 
 #: ../panel/panel-application.c:939
 #, c-format
@@ -240,13 +243,17 @@ msgstr "Nie udało się wykonać polecenia „%s”."
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Nieprawidłowa składnia zdarzenia określonej wtyczki. Użyj PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"Nieprawidłowa składnia zdarzenia określonej wtyczki. Użyj PLUGIN-NAME:NAME[:"
+"TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr "Nieprawidłowy typ podpowiedzi \"%s\". Prawidłowe typy to bool, double, int, string i uint."
+msgstr ""
+"Nieprawidłowy typ podpowiedzi \"%s\". Prawidłowe typy to bool, double, int, "
+"string i uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -254,7 +261,7 @@ msgstr "Opiekunowie"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr "Tryb paska pulpitu"
+msgstr "Układ boczny"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -262,11 +269,11 @@ msgstr "Nieaktywni opiekunowie"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "Panel dla środowiska graficznego Xfce"
+msgstr "Wyświetla panele w środowisku graficznym Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Piotr Sokół <psokol@jabster.pl>, 2008, 2009, 2010, 2011."
+msgstr "Piotr Sokół <psokol@jabster.pl>, 2008, 2009, 2010, 2011, 2012."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
@@ -399,7 +406,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
-msgstr "_Wygląd"
+msgstr "Wyg_ląd"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
@@ -423,11 +430,11 @@ msgstr "_Wyświetlanie"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Deskbar"
-msgstr "Pasek pulpitu"
+msgstr "Boczny"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
-msgstr "Nie rezerwuj przestrzeni po bokach"
+msgstr "Nie rezerwowanie powierzchni na krawędziach"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:11
@@ -435,10 +442,11 @@ msgid "Edit the currently selected item"
 msgstr "Wyświetla okno preferencji zaznaczonego elementu"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
-#, fuzzy
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Uruchom kompozycje w menedżerze okien w celu ukrycia ustawień na panelu."
+msgstr ""
+"Proszę włączyć obsługę kompozycji menedżera okien, aby uzyskać dostęp do "
+"ustawień przezroczystości panelu."
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
@@ -448,7 +456,7 @@ msgstr "Ogólne"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Horizontal"
-msgstr "Pozioma"
+msgstr "Poziomy"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Ite_ms"
@@ -461,10 +469,9 @@ msgstr "_Długość (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "M_ode:"
-msgstr "_Tryb"
+msgstr "_Układ:"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "Wymiary"
@@ -516,13 +523,12 @@ msgid "Select A Background Image"
 msgstr "Wybór pliku"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
-#, fuzzy
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"Ukrywa panel kiedy kursor myszy nie znajduje się nad nim. Działa tylko kiedy "
-"panel jest umieszczony na krawędzi ekranu."
+"Sprawia, że zmaksymalizowane okna zakrywają powierzchnię za panelem. Działa "
+"tylko, gdy panel jest umieszczony przy krawędzi."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
@@ -581,7 +587,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Vertical"
-msgstr "Pionowa"
+msgstr "Pionowy"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Alpha:"
@@ -590,7 +596,7 @@ msgstr "Kanał _alfa:"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Enter:"
-msgstr "_Aktywny:"
+msgstr "A_ktywny:"
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "_File:"
@@ -712,9 +718,8 @@ msgid "Appeara_nce:"
 msgstr "_Wygląd:"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
-#, fuzzy
 msgid "Invert buttons _orientation"
-msgstr "Położenie przycisku _strzałki:"
+msgstr "_Odwrotna orientacja"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Session Menu"
@@ -723,7 +728,8 @@ msgstr "Menu sesji"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Pokaż okno potwierdzenia z 30 sekundowym opóźnieniem dla niektórych akcji."
+msgstr ""
+"Wyświetla okno potwierdzające, wstrzymujące podjęcie czynności na 30 sekund"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
@@ -735,7 +741,7 @@ msgstr "_Czynności"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "_Show confirmation dialog"
-msgstr "_Wyświetl prośbę o potwierdzenie"
+msgstr "_Wyświetlanie potwierdzenia czynności"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -743,7 +749,7 @@ msgstr "Wylogowanie"
 
 #: ../plugins/actions/actions.c:152
 msgid "_Log Out"
-msgstr "_Wylogowanie"
+msgstr "_Wyloguj"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
@@ -756,7 +762,7 @@ msgstr "Wylogowywanie za %d sekund."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr "Wylogowanie..."
+msgstr "Zakończenie sesji..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
@@ -764,7 +770,7 @@ msgstr "Za_kończ sesję"
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
-msgstr "Przełącz użytkownika"
+msgstr "Przełączenie użytkownika"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
@@ -776,7 +782,7 @@ msgstr "Zablokowanie ekranu"
 
 #: ../plugins/actions/actions.c:174
 msgid "L_ock Screen"
-msgstr "_Zablokowanie ekranu"
+msgstr "_Zablokuj ekran"
 
 #: ../plugins/actions/actions.c:180
 msgid "Hibernate"
@@ -784,7 +790,7 @@ msgstr "Zahibernowanie"
 
 #: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
-msgstr "_Zahibernowanie"
+msgstr "_Zahibernuj"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
@@ -801,7 +807,7 @@ msgstr "Wstrzymanie"
 
 #: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
-msgstr "_Wstrzymanie"
+msgstr "_Wstrzymaj"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
@@ -818,7 +824,7 @@ msgstr "Ponowne uruchomienie"
 
 #: ../plugins/actions/actions.c:197
 msgid "_Restart"
-msgstr "_Ponowne uruchomienie"
+msgstr "_Uruchom ponownie"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
@@ -853,9 +859,9 @@ msgid "Separator"
 msgstr "Separator"
 
 #: ../plugins/actions/actions.c:974
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Nie udało się uruchomić czynności „%s”."
+msgstr "Nie udało się uruchomić czynności „%s”"
 
 #: ../plugins/actions/actions.c:1141
 msgid "John Doe"
@@ -1039,8 +1045,7 @@ msgstr "_Sekundy"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Stopień _rozmycia:"
@@ -1135,67 +1140,67 @@ msgstr "Późny wieczór"
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
-msgstr "Godzina %0"
+msgstr "%0"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "Pięć po %0"
+msgstr "%0 pięć"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "Dziesięć po %0"
+msgstr "%0 dziesięć"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "Kwadrans po %0"
+msgstr "%0 piętnaście"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "Dwadzieścia po %0"
+msgstr "%0 dwadzieścia"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "Dwadzieścia pięć po %0"
+msgstr "%0 dwadzieścia pięć"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
-msgstr "W pół do %1"
+msgstr "%0 trzydzieści"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "Za dwadzieścia pięć %1"
+msgstr "za dwadzieścia pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr "Za dwadzieścia %1"
+msgstr "za dwadzieścia %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr "Kwadrans do %1"
+msgstr "za piętnaście %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr "Za dziesięć %1"
+msgstr "za dziesięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr "Za pięć %1"
+msgstr "za pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr "Godzina %1"
+msgstr "%1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1343,7 +1348,7 @@ msgstr "Nie udało się uruchomić programu „%s”."
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Nie udało się odpytać o typ zawartości „%s”"
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
@@ -1505,7 +1510,7 @@ msgstr "Wyświetlanie _etykiety zamiast ikony"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr "Wyświetlanie ostatnio _użytego aktywatora w panelu"
+msgstr "Wyświetlanie ostatnio _użytego aktywatora"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "South"
