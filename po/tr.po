@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-04 17:33+0000\n"
+"POT-Creation-Date: 2012-04-09 18:27+0000\n"
 "PO-Revision-Date: 2010-05-15 00:16+0300\n"
 "Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org,xfce-i18n@xfce.org>\n"
@@ -205,13 +205,15 @@ msgstr "Xfce Panelinde Başlatıcı oluştur"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Bu davranış panelde yeni bir uygulama başlatıcısı yaratacak ve sürükleyip bırakılan dosyaları menü öğesi olarak ekleyecek."
+msgstr ""
+"Bu davranış panelde yeni bir uygulama başlatıcısı yaratacak ve sürükleyip "
+"bırakılan dosyaları menü öğesi olarak ekleyecek."
 
 #: ../panel/panel-application.c:939
-#, fuzzy, c-format
+#, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "Xfce Panelinde yeni bir başlatıcı oluştur"
+msgstr[0] "%d masaüstü dosyasından yeni bir başlatıcı yarat"
 
 #: ../panel/panel-application.c:1673
 msgid ""
@@ -245,7 +247,6 @@ msgstr ""
 "uint."
 
 #: ../panel/panel-dialogs.c:65
-#, fuzzy
 msgid "Maintainers"
 msgstr "Katkıcılar"
 
@@ -254,7 +255,6 @@ msgid "Deskbar Mode"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:71
-#, fuzzy
 msgid "Inactive Maintainers"
 msgstr "Aktif Olmayan Katkıcılar"
 
@@ -282,7 +282,6 @@ msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:232
-#, fuzzy
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
@@ -312,7 +311,7 @@ msgid "Enter search phrase here"
 msgstr "Aranacak kelimeyi buraya girin"
 
 #: ../panel/panel-plugin-external.c:429
-#, fuzzy, c-format
+#, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
 "\"%s\" eklentisi beklenmedik şekilde paneli terketti, yeniden başlatmak "
@@ -524,7 +523,6 @@ msgid ""
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-#, fuzzy
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
@@ -556,7 +554,7 @@ msgstr ""
 #: ../panel/panel-preferences-dialog.glade.h:40
 #, fuzzy
 msgid "Show about information of the currently selected item"
-msgstr "Seçili paneli sil"
+msgstr "Seçili öğenin hakkında bilgisini göster"
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 #, fuzzy
@@ -671,7 +669,7 @@ msgstr "Eski yapılandırmaya geri dön"
 #: ../migrate/main.c:130
 #, fuzzy
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Panel yapılandırmasını kaydet"
+msgstr "Xconf'a eski 4.6 yapılandırmasını yükle"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
@@ -760,7 +758,7 @@ msgstr "Çıkış_Yap"
 #: ../plugins/actions/actions.c:153
 #, fuzzy
 msgid "Are you sure you want to log out?"
-msgstr "'%s' çalışma alanını silmek istediğinizden emin misiniz?"
+msgstr "Çıkış yapmak istediğinizden emin misiniz?"
 
 #: ../plugins/actions/actions.c:154
 #, fuzzy, c-format
@@ -879,12 +877,12 @@ msgstr "Bilgisayar %d saniye içinde kapatılıyor"
 msgid "Separator"
 msgstr "Ayırıcı "
 
-#: ../plugins/actions/actions.c:974
+#: ../plugins/actions/actions.c:975
 #, fuzzy, c-format
 msgid "Failed to run action \"%s\""
 msgstr "\"%s\" çalıştırılamadı"
 
-#: ../plugins/actions/actions.c:1141
+#: ../plugins/actions/actions.c:1142
 msgid "John Doe"
 msgstr "John Doe"
 
