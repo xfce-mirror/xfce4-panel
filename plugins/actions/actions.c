@@ -714,7 +714,8 @@ actions_plugin_action_confirmation_time (gpointer data)
   else
     {
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (timeout->dialog),
-                                                timeout->entry->status, timeout->time_left);
+                                                _(timeout->entry->status),
+                                                timeout->time_left);
     }
 
   return --timeout->time_left >= 0;
@@ -739,7 +740,7 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
 
   dialog = gtk_message_dialog_new (NULL, 0,
                                    GTK_MESSAGE_QUESTION, GTK_BUTTONS_CANCEL,
-                                   "%s", entry->question);
+                                   "%s", _(entry->question));
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
