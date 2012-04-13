@@ -55,7 +55,7 @@ bin_SCRIPTS = \
 	xfce4-popup-windowmenu
 
 xfce4-popup-windowmenu: xfce4-popup-windowmenu.sh Makefile
-	$(AM_V_GEN) sed -e "s,\@bindir\@,$(bindir),g" \
+	$(AM_V_GEN) $(SED) -e "s,\@bindir\@,$(bindir),g" \
 	-e "s,\@localedir\@,$(localedir),g" $< >$@
 
 #
