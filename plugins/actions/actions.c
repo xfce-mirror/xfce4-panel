@@ -171,7 +171,7 @@ static ActionEntry action_entries[] =
   { ACTION_TYPE_LOCK_SCREEN,
     "lock-screen",
     N_("Lock Screen"),
-    N_("L_ock Screen"),
+    N_("Loc_k Screen"),
     NULL, NULL, /* not needed */
     "system-lock-screen"
   },
