@@ -354,7 +354,7 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
   gint         remain_h, remain_w;
   gint         offset_x, offset_y;
   gint         w, h, y;
-  gint         ticks;
+  gint         ticks = 0;
 
   if (G_UNLIKELY (GTK_WIDGET_STATE (binary) == GTK_STATE_INSENSITIVE))
     {
