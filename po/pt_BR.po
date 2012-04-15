@@ -7,19 +7,19 @@
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2008.
 # Henrique P. Machado <hpmachado@gnome.org>, 2009-2010.
 # Sérgio Cipolla <secipolla@gmail.com>, 2011.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.8.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-01 19:57+0000\n"
-"PO-Revision-Date: 2011-04-26 16:57-0300\n"
+"POT-Creation-Date: 2012-04-15 12:27+0000\n"
+"PO-Revision-Date: 2012-04-15 16:45-0300\n"
 "Last-Translator: Sérgio Cipolla <secipolla@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <xfce-i18n@xfce.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -44,13 +44,13 @@ msgstr "Painel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1094
+#: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Você tem certeza que deseja remover \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1097
+#: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se você remover o item do painel, ele será perdido permanentemente."
 
@@ -96,7 +96,7 @@ msgstr "Salvar a configuração do painel"
 
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
-msgstr "Adicionar um novo plugin ao painel"
+msgstr "Adicionar um novo plug-in ao painel"
 
 #: ../panel/main.c:82
 msgid "PLUGIN-NAME"
@@ -138,7 +138,7 @@ msgstr "A equipe de desenvolvimento do Xfce. Todos os direitos reservados."
 #: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Por favor, relate problemas para <%s>."
+msgstr "Por favor, relate erros para <%s>."
 
 #: ../panel/main.c:320
 msgid "There is already a running instance"
@@ -163,7 +163,7 @@ msgstr "Falhou ao salvar a configuração do painel"
 
 #: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
-msgstr "Falhou ao adicionar um plugin ao painel"
+msgstr "Falhou ao adicionar um plug-in ao painel"
 
 #: ../panel/main.c:385
 msgid "Failed to restart the panel"
@@ -195,24 +195,26 @@ msgstr "Nenhuma instância em execução do %s foi encontrada"
 msgid "Failed to launch the migration application"
 msgstr "Falhou ao lançar o aplicativo de migração"
 
-#: ../panel/panel-application.c:955
+#: ../panel/panel-application.c:936
 msgid "Create _Launcher"
 msgstr "Criar _Lançador"
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:937
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Isto irá criar um novo plug-in lançador no painel e inserir os arquivos soltos como itens de menu."
+msgstr ""
+"Isto irá criar um novo plug-in lançador no painel e inserir os arquivos "
+"soltos como itens de menu."
 
-#: ../panel/panel-application.c:958
+#: ../panel/panel-application.c:939
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Criar um novo lançador a partir de %d arquivo desktop"
 msgstr[1] "Criar um novo lançador de %d arquivos desktop"
 
-#: ../panel/panel-application.c:1692
+#: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -220,11 +222,11 @@ msgstr ""
 "Você iniciou X sem um gerenciador de sessão. Ao clicar em Sair, você fechará "
 "o servidor X."
 
-#: ../panel/panel-application.c:1693
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Você tem certeza que deseja fechar o painel?"
 
-#: ../panel/panel-application.c:1701
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Não foi possível executar o comando \"%s\""
@@ -233,7 +235,7 @@ msgstr "Não foi possível executar o comando \"%s\""
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
-"Especificada sintaxe de evento do plugin inválida. Use NOME-DO-PLUGIN:NOME[:"
+"Sintaxe de evento do plug-in inválida. Use NOME-DO-PLUGIN:NOME[:"
 "TIPO:VALOR]."
 
 #: ../panel/panel-dbus-client.c:244
@@ -277,9 +279,9 @@ msgstr "Adicionar novo item"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr "Por favor escolha um painel para o novo plugin:"
+msgstr "Por favor escolha um painel para o novo plug-in:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
@@ -294,7 +296,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
-msgstr "A modificação do painel não é permintida"
+msgstr "A modificação do painel não é permitida"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
@@ -302,7 +304,7 @@ msgstr "Adicionar novos itens"
 
 #: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
-msgstr "Adiciona novos plugins ao painel"
+msgstr "Adiciona novos plug-ins ao painel"
 
 #: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
@@ -316,7 +318,7 @@ msgstr "Coloque a frase de pesquisa aqui"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "O plugin \"%s\" saiu inesperadamente do painel, você quer reiniciá-lo?"
+msgstr "O plug-in \"%s\" saiu inesperadamente do painel, você quer reiniciá-lo?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -325,45 +327,45 @@ msgid ""
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr ""
-"O plugin reiniciou mais que uma vez nos últimos %d segundos. Se você "
-"pressionar Executar, o painel tentará reiniciar o plugin, caso contrário ele "
+"O plug-in reiniciou mais que uma vez nos últimos %d segundos. Se você "
+"pressionar Executar, o painel tentará reiniciar o plug-in, caso contrário ele "
 "será removido permanentemente do painel."
 
-#: ../panel/panel-preferences-dialog.c:467
+#: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
 msgstr "Automático"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
 msgstr "Tela %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:512
+#: ../panel/panel-preferences-dialog.c:517
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:867
+#: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "O painel e as configurações do plugin serão removidas permanentemente"
+msgstr "O painel e as configurações do plug-in serão removidas permanentemente"
 
-#: ../panel/panel-preferences-dialog.c:868
+#: ../panel/panel-preferences-dialog.c:873
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Você tem certeza que deseja remover o painel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:953
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -374,7 +376,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
@@ -466,8 +468,7 @@ msgstr "C_omprimento (%):"
 msgid "M_ode:"
 msgstr "M_odo"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "Medições"
@@ -524,7 +525,7 @@ msgid ""
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
 "Selecione esta opção se você quer que janelas maximizadas cubram a área "
-"atrás do painel. Isto somente funciona quando o painel está anexado a um "
+"atrás do painel. Isto somente funciona quando o painel está preso a um "
 "canto da tela."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
@@ -533,7 +534,7 @@ msgid ""
 "plugins request more space."
 msgstr ""
 "Selecione esta opção para aumentar o comprimento do painel automaticamente "
-"se os plugins precisarem de mais espaço."
+"se os plug-ins precisarem de mais espaço."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select this option to extend the panel over multiple monitors."
@@ -543,7 +544,7 @@ msgstr "Selecione esta opção para estender o painel por múltiplos monitores."
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
-"Selecione esta opção para ocultar os manipuladores do painel e trancar sua "
+"Selecione esta opção para ocultar os manipuladores do painel e travar sua "
 "posição."
 
 #: ../panel/panel-preferences-dialog.glade.h:39
@@ -564,7 +565,7 @@ msgstr "Cor sólida"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Span mo_nitors"
-msgstr "Abranger mo_nitores"
+msgstr "Estender nos mo_nitores"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
@@ -650,7 +651,7 @@ msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
-"Como o painel passou a usar um novo sistema para guardar as configurações, "
+"Como o painel passou a usar um novo sistema para salvar as configurações, "
 "ele precisa carregar uma nova configuração inicial."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
@@ -765,7 +766,7 @@ msgstr "Sair..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr "Sair..."
+msgstr "_Sair..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
@@ -793,7 +794,7 @@ msgstr "_Hibernar"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr "Deseja suspender em Disco?"
+msgstr "Deseja suspender em disco?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -810,7 +811,7 @@ msgstr "Sus_pender"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr "Deseja suspender em Memória RAM?"
+msgstr "Deseja suspender em memória RAM?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -823,7 +824,7 @@ msgstr "Reiniciar"
 
 #: ../plugins/actions/actions.c:197
 msgid "_Restart"
-msgstr "Reiniciar"
+msgstr "_Reiniciar"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
@@ -857,12 +858,12 @@ msgstr "Desligando o computador em %d segundos."
 msgid "Separator"
 msgstr "Separador"
 
-#: ../plugins/actions/actions.c:974
+#: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Falha ao executar ação \"%s\""
 
-#: ../plugins/actions/actions.c:1141
+#: ../plugins/actions/actions.c:1142
 msgid "John Doe"
 msgstr "Fulano"
 
@@ -955,7 +956,7 @@ msgstr "Selecionar um ícone"
 #: ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Falhou ao executar o comando \"%s\""
+msgstr "Falhou ao executar o comando \"%s\"."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
@@ -1044,8 +1045,7 @@ msgstr "Mostrar os _segundos"
 msgid "F_ormat:"
 msgstr "F_ormato:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "Apr_oximação:"
@@ -1097,7 +1097,7 @@ msgstr "Relógio _binário real"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr "Apresentação:"
+msgstr "_Apresentação:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
@@ -1375,7 +1375,7 @@ msgstr "Abrir no terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr "Mostrar uma árvore de diretórios num menu"
+msgstr "Mostrar uma árvore de diretórios em um menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid ""
@@ -1385,7 +1385,7 @@ msgid ""
 msgstr ""
 "Coloque uma lista de padrões que serão usados para determinar quais arquivos "
 "serão visíveis em um diretório. Se você especificar mais que um padrão, os "
-"itens da lista devem ser separadados com ponto e vírgula (ex. *.txt;*.doc)."
+"itens da lista devem ser separados com ponto e vírgula (ex.: *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1440,7 +1440,7 @@ msgstr "Item sem nome"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add Appli_cation"
-msgstr "Adicionar Apli_cativo"
+msgstr "Adicionar apli_cativo"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
@@ -1529,7 +1529,7 @@ msgstr "_Posição do botão de seta:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "_Edit Item"
-msgstr "_Editar Item"
+msgstr "_Editar item"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
@@ -1680,7 +1680,7 @@ msgstr "Título do grupo e marca temporal"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr "Titulo do grupo e título da janela"
+msgstr "Título do grupo e título da janela"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
@@ -1696,7 +1696,7 @@ msgstr "Restaurar as janelas minimizadas para o espaço de trabalho _atual"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr "Mostrar botôes _planos"
+msgstr "Mostrar botões _planos"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
