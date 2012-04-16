@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-02 07:33+0000\n"
+"POT-Creation-Date: 2012-04-16 17:12+0000\n"
 "PO-Revision-Date: 2011-09-24 20:43+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch (Flemish)\n"
@@ -41,13 +41,13 @@ msgstr "Werkbalk"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1094
+#: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1097
+#: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 "Als u een element van de werkbalk verwijdert, dan kan dit niet meer ongedaan "
@@ -195,11 +195,11 @@ msgstr "Geen actieve instantie van %s gevonden"
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
-#: ../panel/panel-application.c:955
+#: ../panel/panel-application.c:936
 msgid "Create _Launcher"
 msgstr "Maak starter"
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:937
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -207,14 +207,14 @@ msgstr ""
 "Dit zal een nieuwe starter toevoegen aan de werkbalk en voegt de geplaatste "
 "bestanden in als menu-onderdelen."
 
-#: ../panel/panel-application.c:958
+#: ../panel/panel-application.c:939
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Maak een nieuwe starter van %d bureaubladbestand"
 msgstr[1] "Maak een nieuwe starter van %d bureaubladbestanden"
 
-#: ../panel/panel-application.c:1692
+#: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -222,11 +222,11 @@ msgstr ""
 "U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u "
 "op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: ../panel/panel-application.c:1693
+#: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u de werkbalk wil afsluiten?"
 
-#: ../panel/panel-application.c:1701
+#: ../panel/panel-application.c:1682
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kon de opdracht '%s' niet uitvoeren"
@@ -274,7 +274,7 @@ msgstr "Nieuw element toevoegen"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Kies een werkbalk voor de nieuwe plugin:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
 msgstr "Werkbalk %d"
@@ -326,43 +326,43 @@ msgstr ""
 "seconden. Druk op \"Uitvoeren\" om te proberen de plugin opnieuw te starten, "
 "anders zal deze plugin blijvend van de werkbalk verwijderd worden."
 
-#: ../panel/panel-preferences-dialog.c:467
+#: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
 msgstr "Automatisch"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
 msgstr "Scherm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:512
+#: ../panel/panel-preferences-dialog.c:517
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:867
+#: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "De instellingen van de werkbalk en de plugins zullen blijvend verwijderd "
 "worden"
 
-#: ../panel/panel-preferences-dialog.c:868
+#: ../panel/panel-preferences-dialog.c:873
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Weet u zeker dat u werkbalk %d wil verwijderen?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:953
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -373,7 +373,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interne naam: %s-%d"
@@ -556,7 +556,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Show about information of the currently selected item"
-msgstr "Informatie over het geselecteerde element weergeven"
+msgstr "Informatie over het thans geselecteerde element weergeven"
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Solid color"
@@ -793,7 +793,7 @@ msgstr "_Slaapstand"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr "Wilt u de pauzestand wegschrijven naar de schijf?"
+msgstr "Wilt u de slaapstand laten ingaan (wegschrijven op schijf)?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -810,7 +810,7 @@ msgstr "_Pauzestand"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr "Wilt u de pauzestand wegschrijven naar het RAM?"
+msgstr "Wilt u de pauzestand laten ingaan (wegschrijven naar RAM)?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -857,12 +857,12 @@ msgstr "De computer zal worden uitgezet over %d seconden."
 msgid "Separator"
 msgstr "Scheidingslijn"
 
-#: ../plugins/actions/actions.c:974
+#: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Kon actie '%s' niet uitvoeren"
 
-#: ../plugins/actions/actions.c:1141
+#: ../plugins/actions/actions.c:1142
 msgid "John Doe"
 msgstr "Jantje"
 
@@ -991,7 +991,7 @@ msgstr "Opties:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr "Opspringend menu gebruiken bij de huidige muispositie"
+msgstr "Opduikmenu gebruiken bij de huidige muispositie"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
