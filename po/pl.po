@@ -7,14 +7,14 @@
 # Piotr Maliński <riklaunim@gmail.com>, 2006.
 # Szymon Kałasz <szymon_maestro@gazeta.pl>, 2006.
 # Piotr Sokół <psokol@jabster.pl>, 2009, 2010, 2011.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-19 08:30+0000\n"
-"PO-Revision-Date: 2011-01-03 17:24+0100\n"
-"Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
+"PO-Revision-Date: 2012-04-19 15:58+0100\n"
+"Last-Translator: Michał Olber <michal.olber@osworld.pl>\n"
 "Language-Team: Polish <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -23,10 +23,8 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : ((n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2));\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"Dodaje do panelu aktywator wykorzystując do tego wskazany plik aktywatora"
+msgid "Add a new launcher to the panel based on the information of this desktop file"
+msgstr "Dodaje do panelu aktywator wykorzystując do tego wskazany plik aktywatora"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -37,7 +35,8 @@ msgid "Customize the panel"
 msgstr "Konfiguruj panel"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2263
+#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-window.c:2263
 #: ../migrate/main.c:84
 msgid "Panel"
 msgstr "Panel"
@@ -47,12 +46,8 @@ msgid "_Read Online"
 msgstr "_Przejdź na stronę podręcznika"
 
 #: ../common/panel-utils.c:158
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-"Można użyć podręcznika umieszczonego w sieci, lecz jego zawartość może "
-"dotyczyć innej wersji programu."
+msgid "You can read the user manual online. This manual may however not exactly match your panel version."
+msgstr "Można użyć podręcznika umieszczonego w sieci, lecz jego zawartość może dotyczyć innej wersji programu."
 
 #: ../common/panel-utils.c:160
 msgid "The user manual is not installed on your computer"
@@ -85,17 +80,20 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2275
+#: ../libxfce4panel/xfce-panel-plugin.c:1096
+#: ../panel/panel-window.c:2275
 msgid "Add _New Items..."
 msgstr "_Dodaj aplet..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2286
+#: ../libxfce4panel/xfce-panel-plugin.c:1107
+#: ../panel/panel-window.c:2286
 msgid "Panel Pr_eferences..."
 msgstr "P_referencje..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2302
+#: ../libxfce4panel/xfce-panel-plugin.c:1124
+#: ../panel/panel-window.c:2302
 msgid "Log _Out"
 msgstr "_Wyloguj"
 
@@ -103,7 +101,8 @@ msgstr "_Wyloguj"
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Wyświetla okno preferencji panelu"
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "NUMER_PANELU"
 
@@ -154,8 +153,7 @@ msgstr "Proszę wprowadzić „%s --help”, aby wypisać komunikat pomocy."
 
 #: ../panel/main.c:276
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
-"Zespół twórców środowiska graficznego Xfce. Wszystkie prawa zastrzeżone."
+msgstr "Zespół twórców środowiska graficznego Xfce. Wszystkie prawa zastrzeżone."
 
 #: ../panel/main.c:277
 #, c-format
@@ -200,14 +198,11 @@ msgid "Failed to send D-Bus message"
 msgstr "Nie udało się wysłać wiadomości systemu D-Bus"
 
 #: ../panel/main.c:416
-msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Uruchomić panel? Proszę zapisać sesję przed wylogowaniem, aby panel został "
-"uruchomiony podczas następnego logowania."
+msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
+msgstr "Uruchomić panel? Proszę zapisać sesję przed wylogowaniem, aby panel został uruchomiony podczas następnego logowania."
 
-#: ../panel/main.c:419 ../panel/main.c:433
+#: ../panel/main.c:419
+#: ../panel/main.c:433
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
@@ -216,32 +211,29 @@ msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
 msgid "Failed to launch the migration application"
 msgstr "Nie udało się uruchomić programu importowania konfiguracji"
 
-#: ../panel/panel-application.c:1585 ../plugins/actions/actions.c:421
-msgid ""
-"You have started X without session manager. Clicking Quit will close the X "
-"server."
-msgstr ""
-"Uruchomiono serwer X bez menedżera sesji. Zakończenie programu zakończy "
-"działanie serwera X."
+#: ../panel/panel-application.c:1585
+#: ../plugins/actions/actions.c:421
+msgid "You have started X without session manager. Clicking Quit will close the X server."
+msgstr "Uruchomiono serwer X bez menedżera sesji. Zakończenie programu zakończy działanie serwera X."
 
-#: ../panel/panel-application.c:1586 ../plugins/actions/actions.c:422
+#: ../panel/panel-application.c:1586
+#: ../plugins/actions/actions.c:422
 msgid "Are you sure you want to quit the panel?"
 msgstr "Zakończyć działanie panelu?"
 
-#: ../panel/panel-application.c:1594 ../plugins/actions/actions.c:430
+#: ../panel/panel-application.c:1594
+#: ../plugins/actions/actions.c:430
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nie udało się wykonać polecenia „%s”."
 
 #: ../panel/panel-dbus-client.c:208
-msgid ""
-"Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
 #: ../panel/panel-dbus-client.c:241
 #, c-format
-msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgid "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:76
@@ -253,7 +245,8 @@ msgid "translator-credits"
 msgstr "Piotr Sokół <psokol@jabster.pl>, 2008, 2009, 2010"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:122
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Dodawanie aktywatora"
 
@@ -262,18 +255,15 @@ msgid "Please choose a panel for the new plugin:"
 msgstr "Proszę wybrać panel, do którego zostanie dodany aplet:"
 
 #. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:147
+#: ../panel/panel-preferences-dialog.c:767
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:183
-msgid ""
-"Because the panel is running in kiosk mode, you are not allowed to make "
-"changes to the panel configuration as a regular user"
-msgstr ""
-"Panel uruchomiono w trybie kiosk, przez co zwykły użytkownik nie może "
-"wprowadzać zmian do jego konfiguracji."
+msgid "Because the panel is running in kiosk mode, you are not allowed to make changes to the panel configuration as a regular user"
+msgstr "Panel uruchomiono w trybie kiosk, przez co zwykły użytkownik nie może wprowadzać zmian do jego konfiguracji."
 
 #: ../panel/panel-dialogs.c:185
 msgid "Modifying the panel is not allowed"
@@ -303,14 +293,8 @@ msgstr "Aplet „%s” niespodziewanie zakończył działanie. Uruchomić go pon
 
 #: ../panel/panel-plugin-external.c:428
 #, c-format
-msgid ""
-"The plugin restarted more than once in the last %d seconds. If you press "
-"Execute the panel will try to restart the plugin otherwise it will be "
-"permanently removed from the panel."
-msgstr ""
-"W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia "
-"apletu. Ponowić próbę ponownego uruchomienia apletu czy usunąć aplet z "
-"panelu?"
+msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
+msgstr "W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia apletu. Ponowić próbę ponownego uruchomienia apletu czy usunąć aplet z panelu?"
 
 #: ../panel/panel-preferences-dialog.c:453
 msgid "Automatic"
@@ -375,12 +359,8 @@ msgid "Add new item to this panel"
 msgstr "Dodaje nowy aplet do panelu"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-"Określa stopień przezroczystości tła panelu. Całkowita przezroczystość dla "
-"wartości 0 i brak przezroczystości dla wartości 100."
+msgid "Alpha value of the panel background, with 0 being fully transparent and 100 fully opaque."
+msgstr "Określa stopień przezroczystości tła panelu. Całkowita przezroczystość dla wartości 0 i brak przezroczystości dla wartości 100."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -474,9 +454,7 @@ msgid "Select A Background Image"
 msgstr "Wybór pliku"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
 msgstr "Zaznacz tą opcję, aby automatycznie zwiększać długość panelu, jeżeli aplety wymagają więcej miejsca"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
@@ -484,17 +462,12 @@ msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Rozciąga panel pomiędzy kilkoma ekranami"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
+msgid "Select this option to hide the handles of the panel and lock its position."
 msgstr "Ukrywa uchwyty panelu i blokuje jego położenie"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Ukrywa panel kiedy kursor myszy nie znajduje się nad nim. Działa tylko kiedy "
-"panel jest umieszczony na krawędzi ekranu."
+msgid "Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge."
+msgstr "Ukrywa panel kiedy kursor myszy nie znajduje się nad nim. Działa tylko kiedy panel jest umieszczony na krawędzi ekranu."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Show about information of the currently selected item"
@@ -509,22 +482,12 @@ msgid "Span mo_nitors"
 msgstr "Marginesy monitora"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się nad "
-"panelem. Całkowita przezroczystość dla wartości 0 i brak przezroczystości "
-"dla wartości 100."
+msgid "Transparency when the pointer is hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się nad panelem. Całkowita przezroczystość dla wartości 0 i brak przezroczystości dla wartości 100."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr ""
-"Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się "
-"poza panelem. Całkowita przezroczystość dla wartości 0 i brak "
-"przezroczystości dla wartości 100."
+msgid "Transparency when the pointer is not hovering over the panel, with 0 being fully transparent and 100 fully opaque."
+msgstr "Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się poza panelem. Całkowita przezroczystość dla wartości 0 i brak przezroczystości dla wartości 100."
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Vertical"
@@ -594,12 +557,8 @@ msgid "Welcome to the first start of the panel"
 msgstr "Pierwsze uruchomienie panelu"
 
 #: ../migrate/main.c:80
-msgid ""
-"Because the panel moved to a new system for storing the settings, it has to "
-"load a fresh initial configuration."
-msgstr ""
-"Panele używają nowego systemu przechowywania ustawień. Należy zainicjować "
-"nową konfigurację programu."
+msgid "Because the panel moved to a new system for storing the settings, it has to load a fresh initial configuration."
+msgstr "Panele używają nowego systemu przechowywania ustawień. Należy zainicjować nową konfigurację programu."
 
 #: ../migrate/main.c:83
 msgid "Choose below which setup you want for the first startup."
@@ -729,12 +688,8 @@ msgid "Select A Menu File"
 msgstr "Wybór pliku"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Wyświetla w menu ogólne nazwy programów, np. „Przeglądarka plików” zamiast "
-"„Thunar”"
+msgid "Select this option to show the generic application name in the menu, for example \"File Manager\" instead of \"Thunar\""
+msgstr "Wyświetla w menu ogólne nazwy programów, np. „Przeglądarka plików” zamiast „Thunar”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
@@ -901,15 +856,8 @@ msgstr "_Siatka"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"Określa formatowanie wskazań daty i czasu. Np. ciąg %Y zostanie zastąpiony "
-"przez bieżący rok, %m przez miesiąc a %d przez dzień. Więcej informacji "
-"można znaleźć w dokumentacji programu date."
+msgid "The format describes the date and time parts to insert into the file name. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
+msgstr "Określa formatowanie wskazań daty i czasu. Np. ciąg %Y zostanie zastąpiony przez bieżący rok, %m przez miesiąc a %d przez dzień. Więcej informacji można znaleźć w dokumentacji programu date."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1028,79 +976,79 @@ msgstr "Godzina \"%1\""
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr ""
+msgstr "Godzina %0"
 
 #: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "Pięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "Dziesięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "Dwadzieścia po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr ""
+msgstr "Dwadzieścia po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr ""
+msgstr "Dwadzieścia pięć po %0"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "W pół do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "Za dwadzieścia pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "Za dwadzieścia %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "Za dwadzieścia %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "Za dziesięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "Za pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr ""
+msgstr "Godzina %1"
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
@@ -1168,7 +1116,7 @@ msgstr "Nie udało się uruchomić programu „%s”."
 #: ../plugins/directorymenu/directorymenu.c:581
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Nie można wysłać zapytania o podanej treści do \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:590
 #, c-format
@@ -1183,7 +1131,7 @@ msgstr "Nie udało się uruchomić domyślnego programu dla „%s”."
 #: ../plugins/directorymenu/directorymenu.c:697
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Nie można uruchmić aplikacji dla kategorii \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:770
 msgid "Open Folder"
@@ -1198,13 +1146,8 @@ msgid "Show a directory tree in a menu"
 msgstr "Wyświetla drzewo katalogów w menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-msgid ""
-"Enter a list of patterns that will be used to determine which files are "
-"visible in a directory. If you specify more than one pattern here, the list "
-"items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Wprowadza wzory określające typy plików wyświetlanych w menu, rozdzielone "
-"znakiem średnika (np. *.txt;*.doc)"
+msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
+msgstr "Wprowadza wzory określające typy plików wyświetlanych w menu, rozdzielone znakiem średnika (np. *.txt;*.doc)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1299,9 +1242,7 @@ msgid "North"
 msgstr "Góra"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
 msgstr "Wyłącza podpowiedzi przycisków panelu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
@@ -1332,7 +1273,8 @@ msgstr "Położenie przycisku _strzałki:"
 msgid "Program launcher with optional menu"
 msgstr "Uruchamia programy z opcjonalnymi parametrami"
 
-#: ../plugins/pager/pager.c:353 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:353
+#: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
 msgstr "Otwórz _preferencje obszarów roboczych..."
 
@@ -1340,7 +1282,8 @@ msgstr "Otwórz _preferencje obszarów roboczych..."
 msgid "Unable to open the workspace settings"
 msgstr "Nie można otworzyć preferencji obszarów roboczych"
 
-#: ../plugins/pager/pager-buttons.c:561 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:561
+#: ../plugins/windowmenu/windowmenu.c:854
 #, c-format
 msgid "Workspace %d"
 msgstr "Obszar roboczy %d"
@@ -1355,9 +1298,7 @@ msgid "Number of _rows:"
 msgstr "Ilość _wierszy:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
-msgid ""
-"Show a miniature view of the workspace with rectangles for the visible "
-"windows"
+msgid "Show a miniature view of the workspace with rectangles for the visible windows"
 msgstr "Wyświetla miniaturę obszaru roboczego z obramowaniami widocznych okien"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
@@ -1429,12 +1370,8 @@ msgstr "Nie można uruchomić obszaru powiadamiania"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
-msgid ""
-"Most likely another widget took over the function of a notification area. "
-"This area will be unused."
-msgstr ""
-"Prawdopodobnie inny widżet przejął funkcję obszaru powiadamiania. Aplet nie "
-"będzie używany."
+msgid "Most likely another widget took over the function of a notification area. This area will be unused."
+msgstr "Prawdopodobnie inny widżet przejął funkcję obszaru powiadamiania. Aplet nie będzie używany."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
