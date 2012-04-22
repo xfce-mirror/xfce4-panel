@@ -830,6 +830,10 @@ panel_application_drag_data_received (PanelWindow      *window,
   guint              i;
   gboolean           found;
   gint               n_items;
+  gboolean           child_small;
+  gboolean           child_expand;
+  gboolean           child_shrink;
+  GtkWidget         *parent_itembar;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (GDK_IS_DRAG_CONTEXT (context));
@@ -889,7 +893,8 @@ panel_application_drag_data_received (PanelWindow      *window,
           panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
 
           /* check if we move to another itembar */
-          if (gtk_widget_get_parent (provider) == itembar)
+          parent_itembar = gtk_widget_get_parent (provider);
+          if (parent_itembar == itembar)
             {
               /* get the current position on the itembar */
               old_position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
@@ -905,6 +910,12 @@ panel_application_drag_data_received (PanelWindow      *window,
             }
           else
             {
+              /* get properties from old itemsbar */
+              gtk_container_child_get (GTK_CONTAINER (parent_itembar), provider,
+                                       "expand", &child_expand,
+                                       "shrink", &child_shrink,
+                                       "small", &child_small, NULL);
+
               /* reparent the widget, this will also call remove and add for the itembar */
               gtk_widget_hide (provider);
               gtk_widget_reparent (provider, itembar);
@@ -912,6 +923,12 @@ panel_application_drag_data_received (PanelWindow      *window,
 
               /* move the item to the correct position on the itembar */
               panel_itembar_reorder_child (PANEL_ITEMBAR (itembar), provider, application->drop_index);
+
+              /* restore child properties */
+              gtk_container_child_set (GTK_CONTAINER (itembar), provider,
+                                       "expand", child_expand,
+                                       "shrink", child_shrink,
+                                       "small", child_small, NULL);
 
               /* send all the needed panel information to the plugin */
               panel_window_set_povider_info (window, provider, TRUE);
