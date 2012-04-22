@@ -6,19 +6,21 @@
 # Enrico Tröger <enrico@xfce.org>, 2008.
 # Simon Schneider <simon@schneiderimtal.de>, 2009
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010, 2012.
-# 
+# Jakob Kramer <jakob.kramer@gmx.de>, 2012.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-12 15:27+0000\n"
-"PO-Revision-Date: 2012-01-21 15:46+0100\n"
-"Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
+"POT-Creation-Date: 2012-04-22 16:57+0000\n"
+"PO-Revision-Date: 2012-04-22 21:31+0200\n"
+"Last-Translator: Jakob Kramer <jakob.kramer@gmx.de>\n"
 "Language-Team: German <xfce-i18n-de@xfce.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -211,13 +213,13 @@ msgstr ""
 "abgelegten Dateien als Menüpunkte hinzu."
 
 #: ../panel/panel-application.c:939
-#, fuzzy, c-format
+#, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] ""
-"Neuen Starter aus %d Datei für Arbeitsumgebung zur Leiste hinzufügen"
+"Neuen Starter aus %d Desktop-Konfigurationsdatei zur Leiste hinzufügen"
 msgstr[1] ""
-"Neuen Starter aus %d Dateien für Arbeitsumgebung zur Leiste hinzufügen"
+"Neuen Starter aus %d Desktop-Konfigurationsdateien zur Leiste hinzufügen"
 
 #: ../panel/panel-application.c:1673
 msgid ""
@@ -479,8 +481,7 @@ msgstr "_Länge (in %):"
 msgid "M_ode:"
 msgstr "M_odus:"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "Abmessungen"
@@ -1065,8 +1066,7 @@ msgstr "_Sekunden anzeigen"
 msgid "F_ormat:"
 msgstr "Anzeige_format:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "_Ungenauigkeit der Formulierung:"
