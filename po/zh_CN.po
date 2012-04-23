@@ -185,7 +185,7 @@ msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
-"您要启动面板吗？如果是，您一定要在注销时保存会话，这样面板将在您下次登录"
+"您要启动面板吗？如果是，您一定要在注销时保存会话，这样面板会在您下次登录"
 "时自动启动。"
 
 #: ../panel/main.c:403 ../panel/main.c:417
@@ -286,7 +286,7 @@ msgstr "面板 %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "因为面板在 kiosk 模式下运行，不允许作为普通用户的您更改面板配置。"
+msgstr "因为面板在 kiosk 模式下运行，所以不允许作为普通用户的您更改面板配置。"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -513,7 +513,8 @@ msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"如果您要最大化的窗口遮住面板背后的区域则选择此项。这只在面板附着在屏幕边缘时有效。"
+"如果您要最大化的窗口遮住面板背后的区域则选择此项。面板只有附着"
+"在屏幕边缘时才有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
@@ -534,7 +535,7 @@ msgstr "选择此项隐藏面板控制器并锁定其位置。"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "选择此项在指针不在其上时隐藏面板。面板只在附着在屏幕边缘时才有效。"
+msgstr "选择此项在指针不在其上时隐藏面板。面板只有附着在屏幕边缘时才有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Show about information of the currently selected item"
@@ -627,7 +628,7 @@ msgstr "欢迎第一次启动面板"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "为了存储设置，所以此面板移到了一个新系统中，它必须加载一新的初始配置。"
+msgstr "为了存储设置，此面板移到了一个新系统中，所以它必须加载一个新的初始配置。"
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -1472,7 +1473,7 @@ msgstr "在面板按钮或菜单项目上移动时，选择此项禁用工具提
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "选择此项将点中的菜单项目移动至面板。"
+msgstr "选择此项将点中的菜单项目移至面板上。"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
