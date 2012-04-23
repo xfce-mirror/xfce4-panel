@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
-"Report-Msgid-Bugs-To: <xfce-i18n@xfce.org>\n"
-"POT-Creation-Date: 2012-04-20 07:27+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-22 22:42+0000\n"
 "PO-Revision-Date: 2010-11-27 21:07+0800\n"
 "Last-Translator: Chipong Luo <chipong.luo@yahoo.com>\n"
 "Language-Team: Chinese (Simplified) <xfce-i18n-cn@xfce.org>\n"
@@ -55,7 +55,7 @@ msgstr "您确定要移除 “%s” 吗？"
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "如果您从面板移除此项目，它将永远消失。"
+msgstr "如果您从面板上移除此项目，它将永远消失。"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1202
@@ -162,7 +162,7 @@ msgstr "无法显示添加新项目对话框"
 
 #: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
-msgstr "无法保存面板首选项"
+msgstr "无法保存面板配置"
 
 #: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
@@ -185,45 +185,45 @@ msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
-"您要启动面板吗？如果是的话，您一定要在注销时保存会话，这样面板将在您下次登录"
+"您要启动面板吗？如果是，您一定要在注销时保存会话，这样面板将在您下次登录"
 "时自动启动。"
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "未发现 %s 的正在运行的实例"
+msgstr "未发现正在运行的 %s 实例"
 
 #: ../panel/panel-application.c:212
 msgid "Failed to launch the migration application"
 msgstr "无法启动迁移应用程序"
 
-#: ../panel/panel-application.c:936
+#: ../panel/panel-application.c:953
 msgid "Create _Launcher"
 msgstr "创建启动器(_L)"
 
-#: ../panel/panel-application.c:937
+#: ../panel/panel-application.c:954
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "这样会在面板上创建一个新的启动器插件并将除去的文件作为菜单项目。"
 
-#: ../panel/panel-application.c:939
+#: ../panel/panel-application.c:956
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "从 %d 桌面文件创建新的启动器"
+msgstr[0] "从 %d 个桌面文件创建新的启动器"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1690
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "您启动了不带会话管理器的 X。点击退出将关闭此 X 服务器。"
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1691
 msgid "Are you sure you want to quit the panel?"
-msgstr "您确定要退出此面板吗？"
+msgstr "您确定要退出面板吗？"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1699
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "无法执行命令 “%s”"
@@ -286,7 +286,7 @@ msgstr "面板 %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "为面板在 kiosk 模式下运行，不允许作为普通用户的您更改面板配置。"
+msgstr "因为面板在 kiosk 模式下运行，不允许作为普通用户的您更改面板配置。"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -312,7 +312,7 @@ msgstr "在此输入搜索词语"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "插件 “%s” 意外地离开面板，您要重启它吗？"
+msgstr "插件 “%s” 意外地离开了面板，您要重启它吗？"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -322,7 +322,7 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 "此插件在过去的 %d 秒内重启了不止一次。如果您点击执行，面板会尝试重启此插件，"
-"否则会永远从面板上移除它。"
+"否则会从面板上永远移除它。"
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -432,7 +432,7 @@ msgstr "编辑当前选中的项目"
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "为面板的不透明设置启用窗口管理器的混合模式"
+msgstr "为面板的不透明设置启用窗口管理器的混合模式。"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
@@ -513,7 +513,7 @@ msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"如果您要最大化窗口至面板背后区域则选择此项。这只在面板附着在屏幕边缘时有效。"
+"如果您要最大化的窗口遮住面板背后的区域则选择此项。这只在面板附着在屏幕边缘时有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
@@ -523,7 +523,7 @@ msgstr "当插件需要更多空间时，选择此项自动增加面板的长度
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "选择此项在多显示器中扩展面板"
+msgstr "选择此项在多显示器中扩展面板。"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid ""
@@ -534,11 +534,11 @@ msgstr "选择此项隐藏面板控制器并锁定其位置。"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "选择此项在当指针不在其上时隐藏面板。这只在面板附着在屏幕边缘时有效。"
+msgstr "选择此项在指针不在其上时隐藏面板。面板只在附着在屏幕边缘时才有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Show about information of the currently selected item"
-msgstr "显示当前选中的项目的相关信息"
+msgstr "显示当前选中项目的相关信息"
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Solid color"
@@ -627,7 +627,7 @@ msgstr "欢迎第一次启动面板"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "因为此面板为存储设置移到新系统，它必须加载一新的初始配置。"
+msgstr "为了存储设置，所以此面板移到了一个新系统中，它必须加载一新的初始配置。"
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -675,7 +675,7 @@ msgstr "无法迁移已存在的配置"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr "已更新面板配置。"
+msgstr "已经更新面板配置。"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 msgid "Action"
@@ -754,7 +754,7 @@ msgstr "锁屏"
 
 #: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
-msgstr "锁屏(_O)"
+msgstr "锁屏(_K)"
 
 #: ../plugins/actions/actions.c:180
 msgid "Hibernate"
@@ -822,7 +822,7 @@ msgstr "您确定要关机吗？"
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr "在 %d 秒内切断计算机。"
+msgstr "在 %d 秒内关闭计算机。"
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
@@ -939,7 +939,7 @@ msgstr "无法载入应用程序菜单"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "显示一个包含已安装应用程序类别的菜单"
+msgstr "显示包含已安装应用程序类别的菜单"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1364,7 +1364,7 @@ msgstr "过滤"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 msgid "Select A Directory"
-msgstr "选择目录"
+msgstr "选择一个目录"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid "Show _hidden files"
@@ -1468,11 +1468,11 @@ msgstr "北"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
-msgstr "选择此项在面板按钮或菜单项目上移动时禁用工具提示。"
+msgstr "在面板按钮或菜单项目上移动时，选择此项禁用工具提示。"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "选择此项将点中的菜单项目移动至面板"
+msgstr "选择此项将点中的菜单项目移动至面板。"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1601,7 +1601,7 @@ msgstr "通知区域缺少选择区"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "您确定要清除已知应用程序列表吗？"
+msgstr "您确定要清除此已知应用程序列表吗？"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
@@ -1655,7 +1655,7 @@ msgstr "无，允许拖放"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
-msgstr "在当前工作区恢复已最小化窗口(_W)"
+msgstr "在当前工作区恢复已最小化的窗口(_W)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
@@ -1716,7 +1716,7 @@ msgstr "全部最小化(_N)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
-msgstr "取消全部最小化(_M)"
+msgstr "最小化全部取消(_M)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
@@ -1724,7 +1724,7 @@ msgstr "全部最大化(_X)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
-msgstr "取消全部最大化(_U)"
+msgstr "最大化全部取消(_U)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3236
 msgid "_Close All"
@@ -1778,7 +1778,7 @@ msgstr "图标"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr "从所有工作区显示窗口(_A)。"
+msgstr "从所有工作区显示窗口(_A)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
