@@ -1,37 +1,42 @@
-# Polish translation for thunar package.
-# Copyright (C) 2004-2011 Benedikt Meurer.
-# This file is distributed under the same license as the thunar package.
+# Polish translations for xfce4-panel package.
+# Copyright © 2004-2011 Xfce Development Team
+# This file is distributed under the same license as the xfce4-panel package.
+# Paweł Pastuła <pastulap@poczta.onet.pl>, 2003.
+# Daniel Mróz <beorn@alpha.pl>, 2003.
+# Wit Wiliński <madman@berlios.de>, 2005.
 # Piotr Maliński <riklaunim@gmail.com>, 2006.
-# Tomasz Michał Łukaszewski <T.Lukaszewski@aster.pl>, 2006.
-# Szymon Kałasz <szymon_maestro@gazeta.pl>, 2007.
-# Piotr Sokół <psokol@jabster.pl>, 2009, 2011, 2012.
-# 
+# Szymon Kałasz <szymon_maestro@gazeta.pl>, 2006.
+# Piotr Sokół <psokol@jabster.pl>, 2009, 2010, 2011, 2012.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Thunar 1.2.1\n"
+"Project-Id-Version: xfce4-panel 4.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-22 16:57+0000\n"
-"PO-Revision-Date: 2012-04-19 20:23+0100\n"
-"Last-Translator: Michał Olber <michal.olber@osworld.pl>\n"
+"POT-Creation-Date: 2012-04-09 12:42+0000\n"
+"PO-Revision-Date: 2012-04-15 12:05+0200\n"
+"Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
 "Language-Team: polski <>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
-"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : ((n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2));\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : ((n%10>=2 && n%10<=4 && (n"
+"%100<10 || n%100>=20)) ? 1 : 2));\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop file"
 msgstr ""
+"Dodaje do panelu aplet aktywatora wykorzystując do tego wskazany plik ."
+"desktop"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
-msgstr ""
+msgstr "Dodanie aktywatora do panelu"
 
 #: ../panel-preferences.desktop.in.h:1
 msgid "Customize the panel"
-msgstr ""
+msgstr "Konfiguruje wygląd, zachowanie i zawartość paneli"
 
 #: ../panel-preferences.desktop.in.h:2
 #: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2353
@@ -44,28 +49,26 @@ msgstr "Panel"
 #: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "Usunąć „%s”?"
+msgstr "Usunąć aplet „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1102
-#, fuzzy
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Po usunięciu elementu, nie będzie można go odzyskać."
+msgstr "Aplet zostanie bezpowrotnie usunięty."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1202
 msgid "_Move"
-msgstr "_Przenieś"
+msgstr "_Przemieść"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1236
 msgid "Pane_l"
-msgstr ""
+msgstr "Pane_l"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
-#, fuzzy
 msgid "Add _New Items..."
-msgstr "_Dodaj pliki..."
+msgstr "_Dodaj aplet..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
@@ -74,257 +77,245 @@ msgstr "P_referencje..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
-#, fuzzy
 msgid "Log _Out"
-msgstr "Po_mniejsz"
+msgstr "Za_kończ sesję"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr ""
+msgstr "Wyświetla okno preferencji panelu"
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "NUMER_PANELU"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
-msgstr ""
+msgstr "Wyświetla okno dodawania apletów"
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
-msgstr ""
+msgstr "Zapisuje konfigurację panelu"
 
 #: ../panel/main.c:82
-#, fuzzy
 msgid "Add a new plugin to the panel"
-msgstr "Dodaje nową czynność"
+msgstr "Umieszcza nowy aplet na panelu"
 
 #: ../panel/main.c:82
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "APLET"
 
 #: ../panel/main.c:83
-#, fuzzy
 msgid "Restart the running panel instance"
-msgstr "Kończy uruchomione wystąpienie programu"
+msgstr "Uruchamia ponownie bieżące wystąpienie programu"
 
 #: ../panel/main.c:84
-#, fuzzy
 msgid "Quit the running panel instance"
-msgstr "Kończy uruchomione wystąpienie programu"
+msgstr "Kończy działanie bieżącego wystąpienia programu"
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "Nie czekaj na manadżer okien na starcie"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "Wyświetla informacje o wersji i kończy"
+msgstr "Wypisuje informacje o wersji i kończy"
 
 #. parse context options
 #: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[PARAMETR...]"
 
 #: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Proszę wprowadzić „%s --help”, aby wypisać komunikat pomocy."
 
 #: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
-msgstr "Zespół twórców programu Thunar. Wszelkie prawa zastrzeżone."
+msgstr ""
+"Zespół twórców środowiska graficznego Xfce. Wszystkie prawa zastrzeżone."
 
 #: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Proszę zgłaszać błędy na adres <%s>."
+msgstr "Proszę zgłaszać błędy na adres <%s>."
 
 #: ../panel/main.c:320
-#, fuzzy
 msgid "There is already a running instance"
-msgstr "Kończy uruchomione wystąpienie programu"
+msgstr "Jedno wystąpienie programu jest już uruchomione."
 
 #. spawn ourselfs again
 #: ../panel/main.c:362
-#, fuzzy
 msgid "Restarting..."
-msgstr "Przygotowywanie..."
+msgstr "Ponowne uruchamianie...."
 
 #: ../panel/main.c:377
-#, fuzzy
 msgid "Failed to show the preferences dialog"
-msgstr "Nie udało się wyświetlić zawartości sieci"
+msgstr "Nie udało się wyświetlić okna preferencji"
 
 #: ../panel/main.c:379
-#, fuzzy
 msgid "Failed to show the add new items dialog"
-msgstr "Nie udało się utworzyć nowej wiadomości e-mail"
+msgstr "Nie udało się wyświetlić okna dodawania apletów"
 
 #: ../panel/main.c:381
-#, fuzzy
 msgid "Failed to save the panel configuration"
-msgstr "Nie udało się wykonać operacji"
+msgstr "Nie udało się zapisać konfiguracji panelu"
 
 #: ../panel/main.c:383
-#, fuzzy
 msgid "Failed to add a plugin to the panel"
-msgstr "Nie udało się utworzyć dowiązania do adresu URL „%s”"
+msgstr "Nie udało się dodać apletu do panelu"
 
 #: ../panel/main.c:385
-#, fuzzy
 msgid "Failed to restart the panel"
-msgstr "Nie udało się przywrócić katalogu „%s”"
+msgstr "Nie udało się ponownie uruchomić panelu"
 
 #: ../panel/main.c:387
-#, fuzzy
 msgid "Failed to quit the panel"
-msgstr "Nie udało się wyświetlić zawartości sieci"
+msgstr "Nie udało się zakończyć działania panelu"
 
 #: ../panel/main.c:389
-#, fuzzy
 msgid "Failed to send D-Bus message"
-msgstr "Nie udało się otworzyć „%s”: %s"
+msgstr "Nie udało się wysłać wiadomości systemu D-Bus"
 
 #: ../panel/main.c:400
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
+"Uruchomić panel? Proszę zapisać sesję przed wylogowaniem, aby panel został "
+"uruchomiony podczas następnego logowania."
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
 
 #: ../panel/panel-application.c:212
-#, fuzzy
 msgid "Failed to launch the migration application"
-msgstr "Nie udało się wykonać operacji"
+msgstr "Nie udało się uruchomić programu importowania konfiguracji"
 
 #: ../panel/panel-application.c:936
-#, fuzzy
 msgid "Create _Launcher"
-msgstr "_Usuń aktywator"
+msgstr "Utwórz _aktywator"
 
 #: ../panel/panel-application.c:937
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
+"Do panelu zostanie dodany nowy aplet aktywatora z zawartością "
+"przeciągniętych plików."
 
 #: ../panel/panel-application.c:939
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Tworzenie %d aktywatora"
+msgstr[1] "Tworzenie %d aktywatorów"
+msgstr[2] "Tworzenie %d aktywatorów"
 
 #: ../panel/panel-application.c:1673
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
+"Uruchomiono serwer X bez menedżera sesji. Zakończenie programu zakończy "
+"działanie serwera X."
 
 #: ../panel/panel-application.c:1674
-#, fuzzy
 msgid "Are you sure you want to quit the panel?"
-msgstr "Otworzyć wszystkie katalogi?"
+msgstr "Zakończyć działanie panelu?"
 
 #: ../panel/panel-application.c:1682
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Nie udało się uruchomić „%s”"
+msgstr "Nie udało się wykonać polecenia „%s”."
 
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
+"Nieprawidłowa składnia zdarzenia określonej wtyczki. Użyj PLUGIN-NAME:NAME[:"
+"TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
+"Nieprawidłowy typ podpowiedzi \"%s\". Prawidłowe typy to bool, double, int, "
+"string i uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
-msgstr ""
+msgstr "Opiekunowie"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Układ boczny"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr ""
+msgstr "Nieaktywni opiekunowie"
 
 #: ../panel/panel-dialogs.c:82
-#, fuzzy
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
-"Thunar jest szybkim i łatwym w użyciu menedżerem\n"
-"plików dla środowiska Xfce."
+msgstr "Wyświetla panele w środowisku graficznym Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr ""
-"Piotr Maliński <admin@rk.edu.pl>, 2006.\n"
-"Tomasz Michał Łukaszewski <T.Lukaszewski@aster.pl>, 2006.\n"
-"Szymon Kałasz <szymon_maestro@gazeta.pl>, 2007.\n"
-"Piotr Sokół <psokol@jabster.pl>, 2009, 2011, 2012.\n"
-"Michał Olber <michal.olber@osworld.pl>, 2011, 2012"
+msgstr "Piotr Sokół <psokol@jabster.pl>, 2008, 2009, 2010, 2011, 2012."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "Add New Item"
-msgstr ""
+msgstr "Dodawanie aktywatora"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Proszę wybrać panel, do którego zostanie dodany aplet:"
 
 #: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
-msgstr ""
+msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
+"Panel uruchomiono w trybie kiosk, przez co zwykły użytkownik nie może "
+"wprowadzać zmian do jego konfiguracji."
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Nie zezwolono na modyfikowanie paneli"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
-msgstr ""
+msgstr "Dodawanie apletów"
 
 #: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
-msgstr ""
+msgstr "Dodaje nowe aplety do panelu"
 
 #: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
-#, fuzzy
 msgid "_Search:"
-msgstr "_Tekst:"
+msgstr "_Wyszukiwanie:"
 
 #: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Wprowadza wyszukiwany ciąg"
 
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "Aplet „%s” niespodziewanie zakończył działanie. Uruchomić go ponownie?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -333,38 +324,41 @@ msgid ""
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
 msgstr ""
+"W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uruchomienia "
+"apletu. Ponowić próbę ponownego uruchomienia apletu czy usunąć aplet z "
+"panelu?"
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
-msgstr ""
+msgstr "Autmatycznie"
 
 #. I18N: screen name in the output selector
 #: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "Ekran %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:517
 #, c-format
 msgid "Monitor %d"
-msgstr ""
+msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr ""
+msgstr "Panel zostanie usunięty wraz z konfiguracją apletów."
 
 #: ../panel/panel-preferences-dialog.c:873
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Usunąć „%s”?"
+msgstr "Usunąć panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
 #: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(zewnętrzny)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -374,77 +368,79 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
+"Wewnętrzna nazwa: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Wewnętrzna nazwa: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "A_utomatically increase the length"
-msgstr ""
+msgstr "_Rozciągnięcie"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Dodaje nową czynność"
+msgstr "Dodaje nowy panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Add new item to this panel"
-msgstr ""
+msgstr "Dodaje nowy aplet do panelu"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr ""
+"Określa stopień przezroczystości tła panelu. Całkowita przezroczystość dla "
+"wartości 0 i brak przezroczystości dla wartości 100."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
 msgid "Appeara_nce"
-msgstr "Wyświetlanie"
+msgstr "Wyg_ląd"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
-msgstr ""
+msgstr "Automatyczne _ukrywanie"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
-msgstr ""
+msgstr "Tło"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
-msgstr ""
+msgstr "Obraz tła"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "C_olor:"
-msgstr ""
+msgstr "_Kolor:"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
-#, fuzzy
 msgid "D_isplay"
-msgstr "Wyświetlanie"
+msgstr "_Wyświetlanie"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Deskbar"
-msgstr ""
+msgstr "Boczny"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Nie rezerwowanie powierzchni na krawędziach"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:11
-#, fuzzy
 msgid "Edit the currently selected item"
-msgstr "Edytuje zazanczoną czynność"
+msgstr "Wyświetla okno preferencji zaznaczonego elementu"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
+"Proszę włączyć obsługę kompozycji menedżera okien, aby uzyskać dostęp do "
+"ustawień przezroczystości panelu."
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
@@ -454,431 +450,420 @@ msgstr "Ogólne"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Horizontal"
-msgstr ""
+msgstr "Poziomy"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Ite_ms"
-msgstr ""
+msgstr "_Aplety"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 #, no-c-format
 msgid "L_ength (%):"
-msgstr ""
+msgstr "_Długość (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "M_ode:"
-msgstr ""
+msgstr "_Układ:"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
-msgstr ""
+msgstr "Wymiary"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/launcher/launcher-dialog.glade.h:15
-#, fuzzy
 msgid "Move currently selected item down by one row"
-msgstr "Przenosi zaznaczoną czynność o jedną pozycję w dół"
+msgstr "Przemieszcza wybrany element jeden wiersz w dół"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#, fuzzy
 msgid "Move currently selected item up by one row"
-msgstr "Przenosi zaznaczoną czynność o jedną pozycję do góry"
+msgstr "Przemieszcza wybrany element jeden wiersz w górę"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
-msgstr ""
+msgstr "Brak (motyw systemowy)"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
 msgid "Num_ber of rows:"
-msgstr "Format _liczb:"
+msgstr "_Ilość wierszy:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
-msgstr ""
+msgstr "Wyjście"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Opacity"
-msgstr ""
+msgstr "Nieprzezroczystość"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "Wybór koloru"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
-#, fuzzy
 msgid "Remove currently selected item"
-msgstr "Usuwa zaznaczoną czynność"
+msgstr "Usuwa zaznaczony aplet"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
-#, fuzzy
 msgid "Remove the currently selected panel"
-msgstr "Usuwa zaznaczoną czynność"
+msgstr "Usuwa wybrany panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "_Rozmiar (piksele):"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
-msgstr ""
+msgstr "Wybór pliku"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
+"Sprawia, że zmaksymalizowane okna zakrywają powierzchnię za panelem. Działa "
+"tylko, gdy panel jest umieszczony przy krawędzi."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
+"Automatycznie zwiększa długość panelu jeśli aplety będą wymagać większej "
+"ilości przestrzeni."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
-#, fuzzy
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Uruchamia polecenie w oknie terminala"
+msgstr "Rozciąga panel pomiędzy kilkoma ekranami"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
-#, fuzzy
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Uruchamia polecenie w oknie terminala"
+msgstr "Ukrywa uchwyty panelu i blokuje jego położenie"
 
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
+"Ukrywa panel kiedy kursor myszy nie znajduje się nad nim. Działa tylko kiedy "
+"panel jest umieszczony na krawędzi ekranu."
 
 #: ../panel/panel-preferences-dialog.glade.h:40
-#, fuzzy
 msgid "Show about information of the currently selected item"
-msgstr "Edytuje zazanczoną czynność"
+msgstr "Wyświetla informacje na temat zaznaczonego elementu"
 
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Solid color"
-msgstr ""
+msgstr "Jednolity kolor"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "Span mo_nitors"
-msgstr ""
+msgstr "Marginesy monitora"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
 msgstr ""
+"Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się nad "
+"panelem. Całkowita przezroczystość dla wartości 0 i brak przezroczystości "
+"dla wartości 100."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
+"Określa stopień przezroczystości panelu, kiedy kursor myszy znajduje się "
+"poza panelem. Całkowita przezroczystość dla wartości 0 i brak "
+"przezroczystości dla wartości 100."
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid "Vertical"
-msgstr ""
+msgstr "Pionowy"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Alpha:"
-msgstr ""
+msgstr "Kanał _alfa:"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "_Enter:"
-msgstr ""
+msgstr "A_ktywny:"
 
 #: ../panel/panel-preferences-dialog.glade.h:49
-#, fuzzy
 msgid "_File:"
-msgstr "_Plik"
+msgstr "_Plik:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
 msgid "_Leave:"
-msgstr ""
+msgstr "_Nieaktywny:"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "_Lock panel"
-msgstr ""
+msgstr "_Zablokowanie"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
-msgstr ""
+msgstr "_Styl:"
 
 #: ../panel/panel-tic-tac-toe.c:123
-#, fuzzy
 msgid "_New Game"
-msgstr "Nowa nazwa"
+msgstr "_Nowa gra"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr ""
+msgstr "_Poziom:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "Początkujący"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Pośredni"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Zaawansowany"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Ekspert"
 
 #: ../panel/panel-window.c:2390
 msgid "_Lock Panel"
-msgstr ""
+msgstr "_Zablokowanie panelu"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
-msgstr ""
+msgstr "Pierwsze uruchomienie panelu"
 
 #: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
+"Panele używają nowego systemu przechowywania ustawień. Należy zainicjować "
+"nową konfigurację programu."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Proszę wybrać sposób konfiguracji panelu."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr ""
+msgstr "Zaimportuj starą"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr ""
+msgstr "Importuje starą konfigurację wersji 4.6 do Xfconf"
 
 #: ../migrate/main.c:141
-#, fuzzy
 msgid "Use default config"
-msgstr "Przywróć _domyślne"
+msgstr "Użyj domyślnej"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr ""
+msgstr "Wczytuje domyślną konfigurację programu"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
-msgstr ""
+msgstr "Utwórz pusty panel"
 
 #: ../migrate/main.c:149
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Uruchamia program z jednym pustym panelem"
 
 #: ../migrate/main.c:160
-#, fuzzy
 msgid "Failed to migrate the old panel configuration"
-msgstr "Nie udało się wykonać operacji"
+msgstr "Nie udało się zaimportować starej konfiguracji programu"
 
 #: ../migrate/main.c:172
-#, fuzzy
 msgid "Failed to load the default configuration"
-msgstr "Nie udało się wykonać operacji"
+msgstr "Nie udało się wczytać domyślnej konfiguracji"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Ustawienia panelu wymagają migracji..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Nie udało się zaimportować istniejącej konfiguracji programu"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Zaktualizowano konfigurację panelu."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
 msgid "Action"
-msgstr "Edycja czynności"
+msgstr "Czynność"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Przyciski sesji"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
 msgid "Appeara_nce:"
-msgstr "Wyświetlanie"
+msgstr "_Wygląd:"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "_Odwrotna orientacja"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Session Menu"
-msgstr ""
+msgstr "Menu sesji"
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr ""
+"Wyświetla okno potwierdzające, wstrzymujące podjęcie czynności na 30 sekund"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
-#, fuzzy
 msgid "Visible"
-msgstr "Widoczne"
+msgstr "Widoczny"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
-#, fuzzy
 msgid "_Actions"
-msgstr "_Położenie:"
+msgstr "_Czynności"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "_Wyświetlanie potwierdzenia czynności"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
-msgstr ""
+msgstr "Wylogowanie"
 
 #: ../plugins/actions/actions.c:152
 msgid "_Log Out"
-msgstr ""
+msgstr "_Wyloguj"
 
 #: ../plugins/actions/actions.c:153
-#, fuzzy
 msgid "Are you sure you want to log out?"
-msgstr "Otworzyć wszystkie katalogi?"
+msgstr "Wylogować bieżącego użytkownika?"
 
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "Wylogowywanie za %d sekund."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr ""
+msgstr "Zakończenie sesji..."
 
 #: ../plugins/actions/actions.c:160
-#, fuzzy
 msgid "Log _Out..."
-msgstr "Po_mniejsz"
+msgstr "Za_kończ sesję"
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
-msgstr ""
+msgstr "Przełączenie użytkownika"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "_Przełącz użytkownika"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
-msgstr ""
+msgstr "Zablokowanie ekranu"
 
 #: ../plugins/actions/actions.c:174
-msgid "Loc_k Screen"
-msgstr ""
+msgid "L_ock Screen"
+msgstr "_Zablokuj ekran"
 
 #: ../plugins/actions/actions.c:180
 msgid "Hibernate"
-msgstr ""
+msgstr "Zahibernowanie"
 
 #: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
-msgstr ""
+msgstr "_Zahibernuj"
 
 #: ../plugins/actions/actions.c:182
-#, fuzzy
 msgid "Do you want to suspend to disk?"
-msgstr "Pominąć go?"
+msgstr "Zahibernować działanie komputera?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "Działanie komputera zostanie zahibernowane za %d sekund."
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
-msgstr ""
+msgstr "Wstrzymanie"
 
 #: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
-msgstr ""
+msgstr "_Wstrzymaj"
 
 #: ../plugins/actions/actions.c:190
-#, fuzzy
 msgid "Do you want to suspend to RAM?"
-msgstr "Pominąć go?"
+msgstr "Wstrzymać działanie komputera?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Działanie komputera zostanie wstrzymane za %d sekund."
 
 #: ../plugins/actions/actions.c:196
-#, fuzzy
 msgid "Restart"
-msgstr "_Przywróć"
+msgstr "Ponowne uruchomienie"
 
 #: ../plugins/actions/actions.c:197
-#, fuzzy
 msgid "_Restart"
-msgstr "_Przywróć"
+msgstr "_Uruchom ponownie"
 
 #: ../plugins/actions/actions.c:198
-#, fuzzy
 msgid "Are you sure you want to restart?"
-msgstr "Usunąć „%s”?"
+msgstr "Uruchomić komputer ponownie?"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Komputer zostanie ponownie uruchomiony za %d sekund."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
-msgstr ""
+msgstr "Wyłączenie"
 
 #: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
-msgstr ""
+msgstr "_Wyłącz"
 
 #: ../plugins/actions/actions.c:206
-#, fuzzy
 msgid "Are you sure you want to shut down?"
-msgstr "Otworzyć wszystkie katalogi?"
+msgstr "Wyłączyć komputer?"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Komputer zostanie wyłączony za %d sekund."
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
-msgstr ""
+msgstr "Separator"
 
-#: ../plugins/actions/actions.c:975
-#, fuzzy, c-format
+#: ../plugins/actions/actions.c:974
+#, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Nie udało się uruchomić czynności „%s”."
+msgstr "Nie udało się uruchomić czynności „%s”"
 
-#: ../plugins/actions/actions.c:1142
+#: ../plugins/actions/actions.c:1141
 msgid "John Doe"
-msgstr ""
+msgstr "Jan Kowalski"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
-msgstr ""
+msgstr "Wykonuje typowe czynności zarządzania sesją"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/clock/clock-dialog.glade.h:3
@@ -888,116 +873,108 @@ msgstr ""
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#, fuzzy
 msgid "Appearance"
-msgstr "Wyświetlanie"
+msgstr "Wygląd"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "Inne programy"
+msgstr "Programy"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid "Button _title:"
-msgstr ""
+msgstr "_Treść etykiety:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "_Edytuj menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-#, fuzzy
 msgid "Menu File"
-msgstr "Nowy plik"
+msgstr "Menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Menu _file:"
-msgstr ""
+msgstr "_Plik menu:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-#, fuzzy
 msgid "Select A Menu File"
-msgstr "Zaznacz w_szystko"
+msgstr "Wybór pliku"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr ""
+"Wyświetla w menu ogólne nazwy programów, np. „Przeglądarka plików” zamiast "
+"„Thunar”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show application d_escription in tooltip"
-msgstr ""
+msgstr "_Opisy programów w podpowiedziach"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-#, fuzzy
 msgid "Show generic application n_ames"
-msgstr "Wybór pliku"
+msgstr "Uproszczone _nazwy programów"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Show ic_ons in menu"
-msgstr ""
+msgstr "_Ikony menu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
-#, fuzzy
 msgid "Use c_ustom menu file:"
-msgstr "_Własne polecenie:"
+msgstr "_Własne:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-#, fuzzy
 msgid "Use the _default menu"
-msgstr "Przywróć _domyślne"
+msgstr "_Domyślne"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid "_Icon:"
-msgstr "_Ikona:"
+msgstr "I_kona:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "_Show button title"
-msgstr ""
+msgstr "_Etykieta przycisku"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
-#, fuzzy
 msgid "Select An Icon"
-msgstr "Wybierz ikonę dla „%s”"
+msgstr "Wybór ikony"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
 #: ../plugins/launcher/launcher.c:2308
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Nie udało się uruchomić „%s”"
+msgstr "Nie udało się wykonać polecenia „%s”."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1113
-#, fuzzy
 msgid "No applications found"
-msgstr "Nie wybrano programu."
+msgstr "Nie odnaleziono programu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1136
-#, fuzzy
 msgid "Failed to load the applications menu"
-msgstr "Nie udało się wczytać aplikacji z pliku %s"
+msgstr "Nie udało się wczytać menu programów"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "Wyświetla aktywatory zainstalowanych programów, rozmieszczone w menu"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "Użycie:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "OPCJA"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
@@ -1009,222 +986,215 @@ msgstr "Opcje:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Wyświetla menu w bieżącym położeniu kursora myszy"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
-msgstr ""
+msgstr "Wypisuje komunikat pomocy"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
-msgstr ""
+msgstr "Tydzień %V"
 
 #: ../plugins/clock/clock.c:407
-#, fuzzy
 msgid "Failed to execute clock command"
-msgstr "Nie udało się uruchomić „%s”"
+msgstr "Nie udało się wykonać polecenia zegara"
 
 #: ../plugins/clock/clock.c:729
-#, fuzzy
 msgid "Custom Format"
-msgstr "Format _liczb:"
+msgstr "Własny"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
-msgstr ""
+msgstr "24 _godziny"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
-msgstr ""
+msgstr "Analogowy"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Binary"
-msgstr ""
+msgstr "Binarny"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
 msgid "Clock"
-msgstr ""
+msgstr "Zegar"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
-#, fuzzy
 msgid "Clock Options"
-msgstr "Opcje:"
+msgstr "Wskazania"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "Digital"
-msgstr ""
+msgstr "Cyfrowy"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Wyświetlanie"
+msgstr "_Sekundy"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
-#, fuzzy
 msgid "F_ormat:"
-msgstr "_Format:"
+msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Stopień _rozmycia:"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "Migający _separator"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "Fuzzy"
-msgstr ""
+msgstr "Rozmyty"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
-msgstr ""
+msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr ""
+msgstr "_AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Show _frame"
-msgstr ""
+msgstr "_Obramowanie"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "_Nieaktywne punkty"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
-msgstr ""
+msgstr "_Siatka"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
 "the day. See the documentation of the date utility for additional "
 "information."
 msgstr ""
-"Określa format daty i czasu wstawianych do nazw plików. Przykładowo, %Y "
-"zostanie zastąpione rokiem, %m miesiącem a %d dniem. Szczegóły zawiera "
-"dokumentacja date."
+"Określa formatowanie wskazań daty i czasu. Np. ciąg %Y zostanie zastąpiony "
+"przez bieżący rok, %m przez miesiąc a %d przez dzień. Więcej informacji "
+"można znaleźć w dokumentacji programu date."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
-msgstr ""
+msgstr "Rzeczywiste wskazania _binarne"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Layout:"
-msgstr ""
+msgstr "_Układ:"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
-#, fuzzy
 msgid "_Tooltip format:"
-msgstr "Format t_ekstu:"
+msgstr "Format p_odpowiedzi:"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
-msgstr ""
+msgstr "noc"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
-msgstr ""
+msgstr "wczesny poranek"
 
 #: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
-msgstr ""
+msgstr "poranek"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
-msgstr ""
+msgstr "przed południem"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
-msgstr ""
+msgstr "południe"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
-msgstr ""
+msgstr "popołudnie"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
-msgstr ""
+msgstr "wieczór"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr ""
+msgstr "Późny wieczór"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr ""
+msgstr "%0 pięć"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr ""
+msgstr "%0 dziesięć"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr ""
+msgstr "%0 piętnaście"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr ""
+msgstr "%0 dwadzieścia"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr ""
+msgstr "%0 dwadzieścia pięć"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
-msgstr ""
+msgstr "%0 trzydzieści"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "za dwadzieścia pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "za dwadzieścia %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "za piętnaście %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ten to %1"
-msgstr "dowiązanie do %s"
+msgstr "za dziesięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "five to %1"
-msgstr "dowiązanie do %s"
+msgstr "za pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1289,16 +1259,16 @@ msgid "quarter to %1"
 msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:129
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr "dowiązanie do %s"
+msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:130
-#, fuzzy, no-c-format
+#, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr "dowiązanie do %s"
+msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
@@ -1307,217 +1277,199 @@ msgid "%1 o'clock"
 msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:136
-#, fuzzy
 msgid "one"
-msgstr "Brak"
+msgstr "pierwsza"
 
 #: ../plugins/clock/clock-fuzzy.c:137
-#, fuzzy
 msgid "two"
-msgstr "Sieć"
+msgstr "druga"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
-msgstr ""
+msgstr "trzecia"
 
 #: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
-msgstr ""
+msgstr "czwarta"
 
 #: ../plugins/clock/clock-fuzzy.c:140
 msgid "five"
-msgstr ""
+msgstr "piąta"
 
 #: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
-msgstr ""
+msgstr "szósta"
 
 #: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
-msgstr ""
+msgstr "siódma"
 
 #: ../plugins/clock/clock-fuzzy.c:143
 msgid "eight"
-msgstr ""
+msgstr "ósma"
 
 #: ../plugins/clock/clock-fuzzy.c:144
 msgid "nine"
-msgstr ""
+msgstr "dziewiąta"
 
 #: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
-msgstr ""
+msgstr "dziesiąta"
 
 #: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
-msgstr ""
+msgstr "jedenasta"
 
 #: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
-msgstr ""
+msgstr "dwunasta"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
-msgstr ""
+msgstr "Wyświetla bieżący czas"
 
 #: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-#, fuzzy
 msgid "Directory Menu"
-msgstr "_Katalogi"
+msgstr "Menu katalogów"
 
 #: ../plugins/directorymenu/directorymenu.c:569
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Nie udało się uruchomić czynności „%s”."
+msgstr "Nie udało się uruchomić programu „%s”."
 
 #: ../plugins/directorymenu/directorymenu.c:600
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "Nie udało się przywrócić katalogu „%s”"
+msgstr "Nie udało się odpytać o typ zawartości „%s”"
 
 #: ../plugins/directorymenu/directorymenu.c:609
-#, fuzzy, c-format
+#, c-format
 msgid "No default application found for \"%s\""
-msgstr "Nie udało się ustawić domyślnego programu dla „%s”"
+msgstr "Nie odnaleziono domyślnego programu dla „%s”."
 
 #: ../plugins/directorymenu/directorymenu.c:624
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Nie udało się ustawić domyślnego programu dla „%s”"
+msgstr "Nie udało się uruchomić domyślnego programu dla „%s”."
 
 #: ../plugins/directorymenu/directorymenu.c:716
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Nie udało się uruchomić programu „%s”"
+msgstr "Nie udało się uruchomić preferowanego programu dla kategorii „%s”."
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
-msgstr "Otwórz katalog"
+msgstr "Otwórz"
 
 #: ../plugins/directorymenu/directorymenu.c:800
-#, fuzzy
 msgid "Open in Terminal"
 msgstr "Otwórz w terminalu"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Wyświetla drzewo katalogów w menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
-#, fuzzy
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
-"Wprowadza wzory używane do ustalenia, czy czynność powinna być dostępna dla "
-"określonego elementu. Użycie większe niż jeden liczby wzorów wymaga "
-"rozdzielenia ich średnikami (np.: *.txt;*.doc)."
+"Wprowadza wzory określające typy plików wyświetlanych w menu, rozdzielone "
+"znakiem średnika (np. *.txt;*.doc)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Filtering"
-msgstr ""
+msgstr "Filtrowanie"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#, fuzzy
 msgid "Select A Directory"
-msgstr "Wybór pliku"
+msgstr "Wybór katalogu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-#, fuzzy
 msgid "Show _hidden files"
 msgstr "Wyświetlanie _ukrytych plików"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-#, fuzzy
 msgid "_Base Directory:"
-msgstr "_Katalogi"
+msgstr "_Podstawowy katalog:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
-msgstr "_Wzór pliku:"
+msgstr "_Wzór plików:"
 
 #: ../plugins/launcher/launcher.c:405
-#, fuzzy
 msgid "Open launcher menu"
-msgstr "Katalog _nadrzędny"
+msgstr "Otwórz aktywator menu"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
-msgstr ""
+msgstr "Nienazwany element"
 
 #: ../plugins/launcher/launcher.c:1728
-#, fuzzy
 msgid "No items"
-msgstr "%d element"
+msgstr "Brak aktywatorów"
 
 #: ../plugins/launcher/launcher-dialog.c:798
-#, fuzzy
 msgid "Failed to open desktop item editor"
-msgstr "Nie udało się przetworzyć pliku aktywatora: %s"
+msgstr "Nie udało się otworzyć edytora elementów pulpitu"
 
 #: ../plugins/launcher/launcher-dialog.c:857
-#, fuzzy
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Po usunięciu elementu, nie będzie można go odzyskać."
+msgstr "Aktywator zostanie bezpowrotnie usunięty."
 
 #: ../plugins/launcher/launcher-dialog.c:858
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Usunąć „%s”?"
+msgstr "Usunąć aktywator „%s”?"
 
 #: ../plugins/launcher/launcher-dialog.c:859
-#, fuzzy
 msgid "Unnamed item"
-msgstr "%d element"
+msgstr "Nienazwany element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
 msgid "Add Appli_cation"
-msgstr "Inne programy"
+msgstr "Dodaj _aplikację"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
-msgstr ""
+msgstr "Dodaje nowy aktywator"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Add one or more existing items to the launcher"
-msgstr ""
+msgstr "Dodaje istniejące aktywatory do apletu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "Advanced"
 msgstr "Zaawansowane"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
-#, fuzzy
 msgid "D_elete Item"
-msgstr "_Usuń"
+msgstr "_Usuń element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
-#, fuzzy
 msgid "Default"
-msgstr "Domyślny widok"
+msgstr "Domyślne"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
-#, fuzzy
 msgid "Delete the currently selected item"
-msgstr "Usuwa zaznaczoną czynność"
+msgstr "Usuwa zaznaczony aktywator"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "Wyłączenie p_odpowiedzi"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "East"
-msgstr ""
+msgstr "Po prawej"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Inside Button"
-msgstr ""
+msgstr "Wewnątrz"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 #: ../plugins/launcher/launcher.desktop.in.h:1
@@ -1525,150 +1477,140 @@ msgid "Launcher"
 msgstr "Aktywator"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#, fuzzy
 msgid "New _Application"
-msgstr "Inne programy"
+msgstr "Nowa _aplikacja"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
 msgid "New _Link"
-msgstr "Utwórz _dowiązanie"
+msgstr "Nowy _link"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
-msgstr ""
+msgstr "Na górze"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button "
 "or menu items."
-msgstr ""
+msgstr "Wyłącza podpowiedzi przycisków panelu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-#, fuzzy
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Uruchamia polecenie w oknie terminala"
+msgstr "Wyświetla ostatnio użyty aktywator menu na panelu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "Wyświetlanie _etykiety zamiast ikony"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Wyświetlanie ostatnio _użytego aktywatora"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "South"
-msgstr ""
+msgstr "Na dole"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "West"
-msgstr ""
+msgstr "Po lewej"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
-#, fuzzy
 msgid "_Arrow button position:"
-msgstr "_Numer pozycji:"
+msgstr "Położenie przycisku _strzałki:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:27
-#, fuzzy
 msgid "_Edit Item"
-msgstr "_Edycja"
+msgstr "Edytuj obiekt"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Uruchamia programy z opcjonalnymi parametrami"
 
 #: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
-msgstr ""
+msgstr "Otwórz _preferencje obszarów roboczych..."
 
 #: ../plugins/pager/pager.c:461
-#, fuzzy
 msgid "Unable to open the workspace settings"
-msgstr "Nie udało się uruchomić przeglądarki dokumentacji"
+msgstr "Nie można otworzyć preferencji obszarów roboczych"
 
 #: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "Obszar roboczy %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
-#, fuzzy
 msgid "Behaviour"
 msgstr "Zachowanie"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
 msgid "Number of _rows:"
-msgstr "Format _liczb:"
+msgstr "Ilość _wierszy:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr ""
+msgstr "Wyświetla miniaturę obszaru roboczego z obramowaniami widocznych okien"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "Widok _miniatur"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr ""
+msgstr "Przełączanie za pomocą _kółka myszy"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
-msgstr ""
+msgstr "Podgląd obszarów roboczych"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
-msgstr ""
+msgstr "Przełącza pomiędzy obszarami roboczymi"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "Dots"
-msgstr ""
+msgstr "Punkty"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
-msgstr ""
+msgstr "Uchwyt"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
-msgstr ""
+msgstr "Odstęp"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "_Expand"
-msgstr ""
+msgstr "_Rozciągnięcie"
 
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
-msgstr ""
+msgstr "Rozdziela aplety za pomocą odstępu lub separatora"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
-msgstr ""
+msgstr "Przywraca zminimalizowane okna"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
-msgstr ""
+msgstr "Minimalizuje wszystkie otwarte okna i wyświetla pulpit"
 
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
-#, fuzzy
 msgid "Show Desktop"
-msgstr "Pulpit"
+msgstr "Wyświetlanie pulpitu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
-msgstr ""
+msgstr "Minimalizuje wszystkie okna i wyświetla pulpit"
 
 #: ../plugins/systray/systray.c:398
-#, fuzzy
 msgid "Unable to start the notification area"
-msgstr "P_owiadamianie o uruchamianiu"
+msgstr "Nie można uruchomić obszaru powiadamiania"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
@@ -1676,194 +1618,185 @@ msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
+"Prawdopodobnie inny widżet przejął funkcję obszaru powiadamiania. Aplet nie "
+"będzie używany."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Obszar powiadamiania utracił zaznaczenie"
 
 #: ../plugins/systray/systray.c:1023
-#, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Usunąć czynność „%s”?"
+msgstr "Wyczyścić listę znanych programów?"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
 msgid "C_lear Known Applications"
-msgstr "Inne programy"
+msgstr "_Wyczyść listę"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
 msgid "Known Applications"
-msgstr "Inne programy"
+msgstr "Znane programy"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Według czasu _modyfikacji"
+msgstr "Obszar powiadamiania"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "M_aksymalny rozmiar ikon (piksele):"
 
 #: ../plugins/systray/systray-manager.c:404
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Nie udało się określić miejsca zapisu dla uca.xml"
+msgstr "Nie udało się pozyskać wyboru menedżera dla ekranu %d"
 
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
-msgstr ""
+msgstr "Wyświetla ikony powiadomień"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
-msgstr ""
+msgstr "Zawsze"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "_Wyświetlanie obramowania wskazywanego okna"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Według nazwy grupy i znacznika czasu"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "Według nazwy grupy i okna"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
-msgstr ""
+msgstr "Nigdy"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Żaden, pozwalaj na przeciągnij i upuść"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Przywracnie zminimalizowanych okien na bieżącym _obszarze roboczym"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr ""
+msgstr "_Płaskie przyciski"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#, fuzzy
 msgid "Show _handle"
-msgstr "Wyświetlanie _ukrytych plików"
+msgstr "_Uchwyt"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
-#, fuzzy
 msgid "Show button _labels"
-msgstr "_Symbole ikon"
+msgstr "_Etykiety przycisków"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Wyświetlanie tylko _zminimalizowanych okien"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgstr "Okna wszystkich _obszarów roboczych lub obszarów wyświetlania"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from all mo_nitors"
-msgstr ""
+msgstr "Okna wszystkich _ekranów"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
-#, fuzzy
 msgid "Sorting _order:"
-msgstr "Sposób pomiaru światła:"
+msgstr "_Sortowanie:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Timestamp"
-msgstr ""
+msgstr "Według znacznika czasu"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "When space is limited"
-msgstr ""
+msgstr "Kiedy brakuje przestrzeni panelu"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Window Buttons"
-msgstr ""
+msgstr "Przyciski okien"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
-msgstr ""
+msgstr "_Grupowanie okien:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
-msgstr ""
+msgstr "Według nazwy okna"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "Przełącz okna za pomocą _kółka myszy"
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Zm_inimalizuj wszystkie"
 
 #: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
-msgstr ""
+msgstr "_Cofnij minimalizację wszystkich"
 
 #: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Zm_aksymalizuj wszystkie"
 
 #: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "C_ofnij maksymalizację wszystkich"
 
 #: ../plugins/tasklist/tasklist-widget.c:3236
-#, fuzzy
 msgid "_Close All"
-msgstr "_Zamknij"
+msgstr "Za_mknij wszystkie"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Przełącza pomiędzy oknami przy pomocy przycisków"
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
 msgstr "Pulpit"
 
 #: ../plugins/windowmenu/windowmenu.c:1246
-#, fuzzy
 msgid "No Windows"
-msgstr "Zamknij w_szystkie"
+msgstr "Brak okien"
 
 #: ../plugins/windowmenu/windowmenu.c:1261
-#, fuzzy
 msgid "Urgent Windows"
-msgstr "_Nowe okno"
+msgstr "Pilne okna"
 
 #: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
-msgstr ""
+msgstr "Dodaj obszar roboczy"
 
 #: ../plugins/windowmenu/windowmenu.c:1323
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Usuwanie znaków"
+msgstr "Usuń obszar roboczy „%s”"
 
 #: ../plugins/windowmenu/windowmenu.c:1325
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace %d"
-msgstr "Usuwanie znaków"
+msgstr "Usuń obszar roboczy %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
-msgstr ""
+msgstr "Strzałka"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "Przycisk:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
-#, fuzzy
 msgid "Enable _urgency notification"
-msgstr "P_owiadamianie o uruchamianiu"
+msgstr "_Pilne powiadomienia"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
@@ -1871,2400 +1804,70 @@ msgstr "Ikona"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr ""
+msgstr "Okna _wszystkich obszarów roboczych"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Show workspace _names"
-msgstr ""
+msgstr "_Nazwy obszarów roboczych"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"
-msgstr ""
+msgstr "Polecenia _obszarów roboczych"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Window Menu"
-msgstr ""
+msgstr "Menu okien"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Przełącza pomiędzy oknami przy użyciu menu"
 
-#~ msgid "Open the bulk rename dialog"
-#~ msgstr "Otwiera okno dialogowe wielokrotnej zmiany nazw"
-
-#~ msgid "Run in daemon mode"
-#~ msgstr "Uruchamia w trybie demona"
-
-#~ msgid "Run in daemon mode (not supported)"
-#~ msgstr "Uruchamia w trybie demona (nie obsługiwane)"
-
-#~ msgid "Quit a running Thunar instance (not supported)"
-#~ msgstr "Kończy uruchomione wystąpienie programu (nie obsługiwane)"
-
-#~ msgid "Thunar"
-#~ msgstr "Thunar"
-
-#~ msgid "[FILES...]"
-#~ msgstr "[PLIKI...]"
-
-#~ msgid "Thunar: Failed to open display: %s\n"
-#~ msgstr "Thunar: Nie udało się otworzyć okna %s.\n"
-
-#~ msgid "Thunar: %s\n"
-#~ msgstr "Thunar: %s\n"
-
-#~ msgid "Written by Benedikt Meurer <benny@xfce.org>."
-#~ msgstr "Autor: Benedikt Meurer <benny@xfce.org>."
-
-#~ msgid "Arran_ge Items"
-#~ msgstr "So_rtowanie"
-
-#~ msgid "Sort By _Name"
-#~ msgstr "Według _nazwy"
-
-#~ msgid "Keep items sorted by their name"
-#~ msgstr "Utrzymuje elementy posortowane według nazwy"
-
-#~ msgid "Sort By _Size"
-#~ msgstr "Według _rozmiaru"
-
-#~ msgid "Keep items sorted by their size"
-#~ msgstr "Utrzymuje elementy posortowane według rozmiaru"
-
-#~ msgid "Sort By _Type"
-#~ msgstr "Według _typu pliku"
-
-#~ msgid "Keep items sorted by their type"
-#~ msgstr "Utrzymuje elementy posortowane według typu pliku"
-
-#~ msgid "Keep items sorted by their modification date"
-#~ msgstr "Utrzymuje elementy posortowane według daty ostatniej modyfikacji"
-
-#~ msgid "_Ascending"
-#~ msgstr "R_osnąco"
-
-#~ msgid "Sort items in ascending order"
-#~ msgstr "Sortuje elementy w porządku rosnącym"
-
-#~ msgid "_Descending"
-#~ msgstr "M_alejąco"
-
-#~ msgid "Sort items in descending order"
-#~ msgstr "Sortuje elementy w porządku malejącym"
-
-#~ msgid "Failed to open \"%s\""
-#~ msgstr "Nie udało się otworzyć „%s”"
-
-#~ msgid "Failed to rename \"%s\""
-#~ msgstr "Nie udało się zmienić nazwy „%s”"
-
-#~ msgid "New Folder"
-#~ msgstr "Nowy katalog"
-
-#~ msgid "Create New Folder"
-#~ msgstr "Nowy katalog"
-
-#~ msgid "Create New File"
-#~ msgstr "Stwórz nowy plik"
-
-#~ msgid "Create Document from template \"%s\""
-#~ msgstr "Tworzenie pliku z szablonu „%s”"
-
-#~ msgid "Copying files..."
-#~ msgstr "Kopiowanie plików..."
-
-#~ msgid "Copying files to \"%s\"..."
-#~ msgstr "Kopiowanie plików do „%s”..."
-
-#~ msgid "Creating symbolic links in \"%s\"..."
-#~ msgstr "Tworzenie dowiązań symbolicznych w „%s”..."
-
-#~ msgid "Moving files into \"%s\"..."
-#~ msgstr "Przenoszenie plików do „%s”..."
+#~ msgid "_Read Online"
+#~ msgstr "_Przejdź na stronę podręcznika"
 
 #~ msgid ""
-#~ "Are you sure that you want to\n"
-#~ "permanently delete \"%s\"?"
-#~ msgstr "Usunąć trwale „%s”?"
-
-#~ msgid ""
-#~ "Are you sure that you want to permanently\n"
-#~ "delete the selected file?"
-#~ msgid_plural ""
-#~ "Are you sure that you want to permanently\n"
-#~ "delete the %u selected files?"
-#~ msgstr[0] "Usunąć trwale zaznaczony element?"
-#~ msgstr[1] "Usunąć trwale %u zaznaczone elementy?"
-#~ msgstr[2] "Usunąć trwale %u zaznaczonych elementów?"
-
-#~ msgid "Deleting files..."
-#~ msgstr "Usuwanie plików..."
-
-#~ msgid "Moving files into the trash..."
-#~ msgstr "Przenoszenie plików do kosza..."
-
-#~ msgid "Creating files..."
-#~ msgstr "Tworzenie plików..."
-
-#~ msgid "Creating directories..."
-#~ msgstr "Tworzenie katalogów..."
-
-#~ msgid "Remove all files and folders from the Trash?"
-#~ msgstr "Opróżnić kosz ze wszystkich elementów?"
-
-#~ msgid "_Empty Trash"
-#~ msgstr "Opróżnij _kosz"
-
-#~ msgid ""
-#~ "If you choose to empty the Trash, all items in it will be permanently "
-#~ "lost. Please note that you can also delete them separately."
+#~ "You can read the user manual online. This manual may however not exactly "
+#~ "match your panel version."
 #~ msgstr ""
-#~ "Po opróżnieniu kosza, wszystkie elementy zostaną z niego trwale usunięte. "
-#~ "Elementy znajdujące się w koszu można także usuwać pojedynczo."
+#~ "Można użyć podręcznika umieszczonego w sieci, lecz jego zawartość może "
+#~ "dotyczyć innej wersji programu."
 
-#~ msgid "Emptying the Trash..."
-#~ msgstr "Opróżnianie kosza..."
+#~ msgid "The user manual is not installed on your computer"
+#~ msgstr "Nie zainstalowano podręcznika użytkownika"
 
-#~ msgid "Failed to determine the original path for \"%s\""
-#~ msgstr "Nie udało się ustalić pierwotnej ścieżki dla „%s”"
+#~ msgid "Failed to open the documentation browser"
+#~ msgstr "Nie udało się otworzyć przeglądarki dokumentacji"
 
-#~ msgid "Could not restore \"%s\""
-#~ msgstr "Nie można przywrócić „%s”"
+#~ msgid "_Orientation:"
+#~ msgstr "_Orientacja:"
 
-#~ msgid "Restoring files..."
-#~ msgstr "Przywracanie plików..."
+#~ msgid "_First button:"
+#~ msgstr "_Pierwszy przycisk:"
 
-#~ msgid ""
-#~ "The selected application is used to open this and other files of type \"%s"
-#~ "\"."
-#~ msgstr ""
-#~ "Określa program używany do otwierania tego i innych plików typu „%s”"
-
-#~ msgid "Other Application..."
-#~ msgstr "Inny program..."
-
-#~ msgid "Open With"
-#~ msgstr "Otwórz za pomocą..."
-
-#~ msgid ""
-#~ "Use a custom command for an application that is not available from the "
-#~ "above application list."
-#~ msgstr "Używa własnego polecenia niedostępnego z powyższej listy"
-
-#~ msgid "_Browse..."
-#~ msgstr "_Przeglądaj..."
-
-#~ msgid "Use as _default for this kind of file"
-#~ msgstr "_Domyślne dla tego typu plików"
-
-#~ msgid "Failed to add new application \"%s\""
-#~ msgstr "Nie udało się dodać programu „%s”"
-
-#~ msgid "Open <i>%s</i> and other files of type \"%s\" with:"
-#~ msgstr "Otwieranie pliku „%s” i innych plików typu „%s”, przy użyciu:"
-
-#~ msgid ""
-#~ "Browse the file system to select an application to open files of type \"%s"
-#~ "\"."
-#~ msgstr ""
-#~ "Przegląda system plików w celu wybrania programu obsługującego pliki typu "
-#~ "„%s”"
-
-#~ msgid ""
-#~ "Change the default application for files of type \"%s\" to the selected "
-#~ "application."
-#~ msgstr "Zmienia domyślny program dla plików typu „%s” na wybrany"
-
-#~ msgid ""
-#~ "This will remove the application launcher that appears in the file "
-#~ "context menu, but will not uninstall the application itself.\n"
-#~ "\n"
-#~ "You can only remove application launchers that were created using the "
-#~ "custom command box in the \"Open With\" dialog of the file manager."
-#~ msgstr ""
-#~ "Z menu podręcznego pliku zostanie usunięty aktywator programu, ale sam "
-#~ "program nie zostanie odinstalowany.\n"
-#~ "Można usuwać tylko aktywatory utworzone z opcją „Własne polecenie” w "
-#~ "oknie dialogowym otwieranym poleceniem „Otwórz za pomocą innego "
-#~ "programu...”."
-
-#~ msgid "Failed to remove \"%s\""
-#~ msgstr "Nie udało się usunąć „%s”"
-
-#~ msgid "All Files"
-#~ msgstr "Wszystkie pliki"
-
-#~ msgid "Executable Files"
-#~ msgstr "Pliki wykonywalne"
-
-#~ msgid "Perl Scripts"
-#~ msgstr "Skrypty języka Perl"
-
-#~ msgid "Python Scripts"
-#~ msgstr "Skrypty języka Python"
-
-#~ msgid "Ruby Scripts"
-#~ msgstr "Skrypty języka Ruby"
-
-#~ msgid "Shell Scripts"
-#~ msgstr "Skrypty powłoki"
-
-#~ msgid "None available"
-#~ msgstr "brak"
-
-#~ msgid "Recommended Applications"
-#~ msgstr "Sugerowane programy"
-
-#~ msgid "Failed to remove \"%s\"."
-#~ msgstr "Nie udało się usunąć „%s”."
-
-#~ msgid "There is nothing on the clipboard to paste"
-#~ msgstr "W schowku nie ma elementów do wklejenia"
-
-#~ msgid "Configure Columns in the Detailed List View"
-#~ msgstr "Kolumny widoku szczegółowej listy"
-
-#~ msgid ""
-#~ "Choose the order of information to appear in the\n"
-#~ "detailed list view."
-#~ msgstr ""
-#~ "Określa kolejność informacji wyświetlanych w\n"
-#~ "widoku listy szczegółowej."
-
-#~ msgid "Move _Up"
-#~ msgstr "W _górę"
-
-#~ msgid "Move Dow_n"
-#~ msgstr "W _dół"
-
-#~ msgid "_Show"
-#~ msgstr "_Pokaż"
-
-#~ msgid "Hi_de"
-#~ msgstr "U_kryj"
-
-#~ msgid "Column Sizing"
-#~ msgstr "Rozmiar"
-
-#~ msgid ""
-#~ "By default columns will be automatically expanded if\n"
-#~ "needed to ensure the text is fully visible. If you dis-\n"
-#~ "able this behavior below the file manager will always\n"
-#~ "use the user defined column widths."
-#~ msgstr ""
-#~ "Domyślnie kolumny skalowane są do rozmiaru\n"
-#~ "zapewniającego najlepszą widoczność tekstu.\n"
-#~ "Po wyłączenieu tej opcji, program będzie używał\n"
-#~ "określonej długości."
-
-#~ msgid "Automatically _expand columns as needed"
-#~ msgstr "Automatyczne _skalowanie"
-
-#~ msgid "Unknown"
-#~ msgstr "Nieznany"
-
-#~ msgid "Compact directory listing"
-#~ msgstr "Listowanie kompaktowe"
-
-#~ msgid "Compact view"
-#~ msgstr "Lista zwarta"
-
-#~ msgid "C_reate"
-#~ msgstr "U_twórz"
-
-#~ msgid "Enter the new name:"
-#~ msgstr "Proszę wprowadzić nazwę:"
-
-#~ msgid "Cannot convert filename \"%s\" to the local encoding"
-#~ msgstr "Nie można skonwertować pliku „%s” do lokalnego kodowania"
-
-#~ msgid "Invalid filename \"%s\""
-#~ msgstr "Nieprawidłowa nazwa pliku „%s”"
-
-#~ msgid "The working directory must be an absolute path"
-#~ msgstr "Katalog roboczy musi być ścieżką bezwzględną"
-
-#~ msgid "Atleast one filename must be specified"
-#~ msgstr "Należy okeślić co najmniej jeden plik"
-
-#~ msgid "At least one source filename must be specified"
-#~ msgstr "Należy określić co najmniej jeden plik źródłowy"
-
-#~ msgid "The number of source and target filenames must be the same"
-#~ msgstr "Ilość plików źródłowych i docelowych musi być taka sama"
-
-#~ msgid "A destination directory must be specified"
-#~ msgstr "Należy określić katalog docelowy"
-
-#~ msgid "At least one filename must be specified"
-#~ msgstr "Należy określić co najmniej jeden plik"
-
-#~ msgid "Configure _Columns..."
-#~ msgstr "_Kolumny..."
-
-#~ msgid "Configure the columns in the detailed list view"
-#~ msgstr "Otwiera okno konfiguracji kolumn widoku listy"
-
-#~ msgid "Detailed directory listing"
-#~ msgstr "Szczegółowa lista katalogów"
-
-#~ msgid "Details view"
-#~ msgstr "Lista szczegółowa"
-
-#~ msgid "Rename \"%s\""
-#~ msgstr "Zmiana nazwy „%s”"
-
-#~ msgid "_Rename"
-#~ msgstr "_Zmień nazwę"
-
-#~ msgid "_Yes"
-#~ msgstr "_Tak"
-
-#~ msgid "Yes to _all"
-#~ msgstr "Tak dla _wszystkich"
-
-#~ msgid "_No"
-#~ msgstr "_Nie"
-
-#~ msgid "N_o to all"
-#~ msgstr "N_ie dla wszystkich"
-
-#~ msgid "_Retry"
-#~ msgstr "_Ponów próbę"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Anuluj"
-
-#~ msgid "Confirm to replace files"
-#~ msgstr "Potwierdzenie zastąpienia plików"
-
-#~ msgid "S_kip All"
-#~ msgstr "Pomiń wszystkie"
-
-#~ msgid "_Skip"
-#~ msgstr "_Pomiń"
-
-#~ msgid "Replace _All"
-#~ msgstr "Zastąp _wszystkie"
-
-#~ msgid "_Replace"
-#~ msgstr "_Zastąp"
-
-#~ msgid "This folder already contains a symbolic link \"%s\"."
-#~ msgstr "Ten katalog zawiera już dowiązanie symboliczne „%s”."
-
-#~ msgid "This folder already contains a folder \"%s\"."
-#~ msgstr "Ten katalog zawiera już katalog „%s”."
-
-#~ msgid "This folder already contains a file \"%s\"."
-#~ msgstr "Ten katalog zawiera już plik „%s”."
-
-#~ msgid "ReplaceDialogPart1|Do you want to replace the link"
-#~ msgstr "Zastąpić istniejące dowiązanie symboliczne"
-
-#~ msgid "ReplaceDialogPart1|Do you want to replace the existing folder"
-#~ msgstr "Zastąpić istniejący katalog"
-
-#~ msgid "ReplaceDialogPart1|Do you want to replace the existing file"
-#~ msgstr "Zastąpić istniejący plik"
-
-#~ msgid "Size:"
-#~ msgstr "Rozmiar:"
-
-#~ msgid "Modified:"
-#~ msgstr "Czas modyfikacji:"
-
-#~ msgid "ReplaceDialogPart2|with the following link?"
-#~ msgstr "następującym dowiązaniem?"
-
-#~ msgid "ReplaceDialogPart2|with the following folder?"
-#~ msgstr "następującym katalogiem?"
-
-#~ msgid "ReplaceDialogPart2|with the following file?"
-#~ msgstr "następującym plikiem?"
-
-#~ msgid "_Copy here"
-#~ msgstr "S_kopiuj"
-
-#~ msgid "_Link here"
-#~ msgstr "Utwórz _dowiązanie"
-
-#~ msgid "Name only"
-#~ msgstr "Tylko nazwa"
-
-#~ msgid "Suffix only"
-#~ msgstr "Tylko sufiks"
-
-#~ msgid "Name and Suffix"
-#~ msgstr "Nazwa i sufiks"
-
-#~ msgid "Date Accessed"
-#~ msgstr "Czas dostępu"
-
-#~ msgid "Date Modified"
-#~ msgstr "Czas modyfikacji"
-
-#~ msgid "Group"
-#~ msgstr "Grupa"
-
-#~ msgid "MIME Type"
-#~ msgstr "Typ MIME"
-
-#~ msgid "Name"
-#~ msgstr "Nazwa"
-
-#~ msgid "Owner"
-#~ msgstr "Właściciel"
-
-#~ msgid "Permissions"
-#~ msgstr "Uprawnienia"
-
-#~ msgid "Size"
-#~ msgstr "Rozmiar"
-
-#~ msgid "Type"
-#~ msgstr "Typ"
-
-#~ msgid "File"
-#~ msgstr "Plik"
-
-#~ msgid "File Name"
-#~ msgstr "Nazwa pliku"
-
-#~ msgid "File System"
-#~ msgstr "System plików"
-
-#~ msgid "The root folder has no parent"
-#~ msgstr "Katalog główny nie ma katalogu nadrzędnego"
-
-#~ msgid "No Exec field specified"
-#~ msgstr "Nie określono pola Exec"
-
-#~ msgid "No URL field specified"
-#~ msgstr "Nie określono pola URL"
-
-#~ msgid "Invalid desktop file"
-#~ msgstr "Nieprawidłowy plik .desktop"
-
-#~ msgid "Back"
-#~ msgstr "Wstecz"
-
-#~ msgid "Go to the previous visited folder"
-#~ msgstr "Przechodzi do ostatnio odwiedzonego położenia"
-
-#~ msgid "Forward"
-#~ msgstr "Naprzód"
-
-#~ msgid "Go to the next visited folder"
-#~ msgstr "Przechodzi do położenia odwiedzonego w następnej kolejności"
-
-#~ msgid "Icon based directory listing"
-#~ msgstr "Pokazuj tylko ikony"
-
-#~ msgid "Icon view"
-#~ msgstr "Ikony"
-
-#~ msgid "The file \"%s\" already exists"
-#~ msgstr "Plik „%s” już istnieje"
-
-#~ msgid "Failed to create empty file \"%s\": %s"
-#~ msgstr "Nie udało się utworzyć pustego pliku „%s”: %s"
-
-#~ msgid "Failed to create directory \"%s\": %s"
-#~ msgstr "Nie udało się utworzyć katalogu „%s”: %s"
-
-#~ msgid "Could not delete file \"%s\": %s"
-#~ msgstr "Nie można usunąć pliku \"%s\": %s"
-
-#~ msgid ""
-#~ "Could not create symbolic link to \"%s\" because it is not a local file"
-#~ msgstr ""
-#~ "Nie można utworzyć dowiązania symbolicznego do „%s”, ponieważ plik "
-#~ "źródłowy nie jest plikiem lokalnym"
-
-#~ msgid "Failed to change the owner of \"%s\": %s"
-#~ msgstr "Nie udało się zmienić właściciela dla „%s”: %s"
-
-#~ msgid "Failed to change the group of \"%s\": %s"
-#~ msgstr "Nie udało się zmienić grupy dla „%s”: %s"
-
-#~ msgid "Failed to change the permissions of \"%s\": %s"
-#~ msgstr "Nie udało się zmienić uprawnień dla „%s”: %s"
-
-#~ msgid "copy of %s"
-#~ msgstr "kopia %s"
-
-#~ msgid "another copy of %s"
-#~ msgstr "druga kopia %s"
-
-#~ msgid "another link to %s"
-#~ msgstr "drugie dowiązanie do %s"
-
-#~ msgid "third copy of %s"
-#~ msgstr "trzecia kopia %s"
-
-#~ msgid "third link to %s"
-#~ msgstr "trzecie dowiązanie do %s"
-
-#~ msgid "%uth copy of %s"
-#~ msgstr "%u. kopia %s"
-
-#~ msgid "%uth link to %s"
-#~ msgstr "%u. dowiązanie do %s"
-
-#~ msgid ""
-#~ "The file \"%s\" already exists. Would you like to replace it?\n"
-#~ "\n"
-#~ "If you replace an existing file, its contents will be overwritten."
-#~ msgstr ""
-#~ "Plik „%s” już istnieje. Zastąpić go?\n"
-#~ "Po zastąpieniu istniejącego pliku, jego zawartość zostanie nadpisana."
-
-#~ msgid "Do you want to overwrite it?"
-#~ msgstr "Zastąpić go?"
-
-#~ msgid "Do you want to create it?"
-#~ msgstr "Utworzyć go?"
-
-#~ msgid "_Open"
-#~ msgstr "_Otwórz"
-
-#~ msgid "Open in New Window"
-#~ msgstr "Otwórz w nowym oknie"
-
-#~ msgid "Open the selected directory in a new window"
-#~ msgstr "Otwiera zaznaczony katalog w nowym oknie"
-
-#~ msgid "Open With Other _Application..."
-#~ msgstr "Otwórz za pomocą innego p_rogramu..."
-
-#~ msgid "Choose another application with which to open the selected file"
-#~ msgstr "Wybiera inny program do otwarcia zaznaczonego pliku"
-
-#~ msgid "Failed to open file \"%s\""
-#~ msgstr "Nie udało się otworzyć pliku „%s”"
-
-#~ msgid "Failed to open %d file"
-#~ msgid_plural "Failed to open %d files"
-#~ msgstr[0] "Nie udało się otworzyć %d pliku"
-#~ msgstr[1] "Nie udało się otworzyć %d plików"
-#~ msgstr[2] "Nie udało się otworzyć %d plików"
-
-#~ msgid "This will open %d separate file manager window."
-#~ msgid_plural "This will open %d separate file manager windows."
-#~ msgstr[0] "Zostanie otwarte dodatkowe okno."
-#~ msgstr[1] "Zostaną otwarte %d dodatkowe okna."
-#~ msgstr[2] "Zostanie otwartych %d dodatkowych okien."
-
-#~ msgid "Open %d New Window"
-#~ msgid_plural "Open %d New Windows"
-#~ msgstr[0] "Otwórz w nowym oknie"
-#~ msgstr[1] "Otwórz w %d nowych oknach"
-#~ msgstr[2] "Otwórz w %d nowych oknach"
-
-#~ msgid "Open in %d New Window"
-#~ msgid_plural "Open in %d New Windows"
-#~ msgstr[0] "Otwórz w nowym oknie"
-#~ msgstr[1] "Otwórz w %d nowych oknach"
-#~ msgstr[2] "Otwórz w %d nowych oknach"
-
-#~ msgid "Open the selected directory in %d new window"
-#~ msgid_plural "Open the selected directories in %d new windows"
-#~ msgstr[0] "Otwórz wybrany katalog w %d nowym oknie"
-#~ msgstr[1] "Otwórz wybrane katalogi w %d nowych oknach"
-#~ msgstr[2] "Otwórz wybrane katalogi w %d nowych oknach"
-
-#~ msgid "_Open in New Window"
-#~ msgstr "_Otwórz w nowym oknie"
-
-#~ msgid "Open the selected file"
-#~ msgid_plural "Open the selected files"
-#~ msgstr[0] "Otwiera zaznaczony plik"
-#~ msgstr[1] "Otwiera zaznaczone pliki"
-#~ msgstr[2] "Otwiera zaznaczone pliki"
-
-#~ msgid "_Execute"
-#~ msgstr "_Uruchom"
-
-#~ msgid "Execute the selected file"
-#~ msgid_plural "Execute the selected files"
-#~ msgstr[0] "Uruchom zaznaczony plik"
-#~ msgstr[1] "Uruchom zaznaczone pliki"
-#~ msgstr[2] "Uruchom zaznaczone pliki"
-
-#~ msgid "_Open With \"%s\""
-#~ msgstr "_Otwórz za pomocą „%s”"
-
-#~ msgid "Use \"%s\" to open the selected file"
-#~ msgid_plural "Use \"%s\" to open the selected files"
-#~ msgstr[0] "Otwiera zaznaczony plik za pomocą „%s”"
-#~ msgstr[1] "Otwiera zaznaczone pliki za pomocą „%s”"
-#~ msgstr[2] "Otwiera zaznaczone pliki za pomocą „%s”"
-
-#~ msgid "_Open With Other Application..."
-#~ msgstr "_Otwórz za pomocą..."
-
-#~ msgid "_Open With Default Applications"
-#~ msgstr "_Otwórz za pomocą domyślnych programów"
-
-#~ msgid "Open the selected file with the default application"
-#~ msgid_plural "Open the selected files with the default applications"
-#~ msgstr[0] "Otwiera zaznaczony plik za pomocą domyślnego programu"
-#~ msgstr[1] "Otwiera zaznaczone pliki za pomocą domyślnych programów"
-#~ msgstr[2] "Otwiera zaznaczone pliki za pomocą domyślnych programów"
-
-#~ msgid "Open With \"%s\""
-#~ msgstr "Otwórz za pomocą „%s”"
-
-#~ msgid "Failed to mount \"%s\""
-#~ msgstr "Nie udało się zamontować „%s”"
-
-#~ msgid "Desktop (Create Link)"
-#~ msgid_plural "Desktop (Create Links)"
-#~ msgstr[0] "Pulpit (utwórz dowiązanie)"
-#~ msgstr[1] "Pulpit (utwórz dowiązania)"
-#~ msgstr[2] "Pulpit (utwórz dowiązania)"
-
-#~ msgid "Create a link to the selected file on the desktop"
-#~ msgid_plural "Create links to the selected files on the desktop"
-#~ msgstr[0] "Tworzy dowiązanie do zaznaczonego pliku na pulpicie"
-#~ msgstr[1] "Tworzy dowiązania do zaznaczonych plików na pulpicie"
-#~ msgstr[2] "Tworzy dowiązania do zaznaczonych plików na pulpicie"
-
-#~ msgid "Send the selected file to \"%s\""
-#~ msgid_plural "Send the selected files to \"%s\""
-#~ msgstr[0] "Wysyła zaznaczony plik do „%s”"
-#~ msgstr[1] "Wyślij zaznaczone pliki do „%s”"
-#~ msgstr[2] "Wyślij zaznaczone pliki do „%s”"
-
-#~ msgid "%d item (%s), Free space: %s"
-#~ msgid_plural "%d items (%s), Free space: %s"
-#~ msgstr[0] "%d element (%s), wolna przestrzeń: %s"
-#~ msgstr[1] "%d elementy (%s), wolna przestrzeń: %s"
-#~ msgstr[2] "%d elementów (%s), wolna przestrzeń: %s"
-
-#~ msgid "%d item, Free space: %s"
-#~ msgid_plural "%d items, Free space: %s"
-#~ msgstr[0] "%d element, wolna przestrzeń: %s"
-#~ msgstr[1] "%d elementy, wolna przestrzeń: %s"
-#~ msgstr[2] "%d elementów, wolna przestrzeń: %s"
-
-#~ msgid "\"%s\" broken link"
-#~ msgstr "Nieprawidłowe dowiązanie symboliczne „%s”"
-
-#~ msgid "\"%s\" (%s) link to %s"
-#~ msgstr "Dowiązanie symboliczne „%s” (%s) do %s"
-
-#~ msgid "\"%s\" shortcut"
-#~ msgstr "Skrót „%s”"
-
-#~ msgid "\"%s\" mountable"
-#~ msgstr "Nośnik „%s”"
-
-#~ msgid "\"%s\" (%s) %s"
-#~ msgstr "%3$s „%1$s” (%2$s)"
-
-#~ msgid "Original Path:"
-#~ msgstr "Pierwotna ścieżka:"
-
-#~ msgid "Image Size:"
-#~ msgstr "Wymiary:"
-
-#~ msgid "%d item selected (%s)"
-#~ msgid_plural "%d items selected (%s)"
-#~ msgstr[0] "%d zaznaczony element (%s)"
-#~ msgstr[1] "%d zaznaczone elementy (%s)"
-#~ msgstr[2] "%d zaznaczonych elementów (%s)"
-
-#~ msgid "%d item selected"
-#~ msgid_plural "%d items selected"
-#~ msgstr[0] "%d zaznaczony element"
-#~ msgstr[1] "%d zaznaczone elementy"
-#~ msgstr[2] "%d zaznaczonych elementów"
-
-#~ msgid "Create _Folder..."
-#~ msgstr "Utwórz _katalog..."
-
-#~ msgid "Delete all files and folders in the Trash"
-#~ msgstr "Usuwa wszystkie pliki i katalogi z kosza"
-
-#~ msgid "Paste Into Folder"
-#~ msgstr "Wklej do katalogu"
-
-#~ msgid "_Properties..."
-#~ msgstr "_Właściwości..."
-
-#~ msgid "Spacing"
-#~ msgstr "Odstęp"
-
-#~ msgid "The amount of space between the path buttons"
-#~ msgstr "Odstęp pomiędzy przyciskami elementów ścieżki"
-
-#~ msgid "Open \"%s\" in this window"
-#~ msgstr "Otwórz „%s” w tym oknie"
-
-#~ msgid "Open \"%s\" in a new window"
-#~ msgstr "Otwórz „%s” w nowym oknie"
-
-#~ msgid "Create a new folder in \"%s\""
-#~ msgstr "Utwórz nowy katalog w „%s”"
-
-#~ msgid ""
-#~ "Move or copy files previously selected by a Cut or Copy command into \"%s"
-#~ "\""
-#~ msgstr ""
-#~ "Przenosi lub kopiuje pliki wybrane wcześniej poleceniem „Wytnij” lub "
-#~ "„Skopiuj” do „%s”"
-
-#~ msgid "View the properties of the folder \"%s\""
-#~ msgstr "Wyświetla właściwości katalogu „%s”"
-
-#~ msgid "Open Location"
-#~ msgstr "Otwieranie położenia"
-
-#~ msgid "File does not exist"
-#~ msgstr "Plik nie istnieje"
-
-#~ msgid "Failed to determine the mount point of \"%s\""
-#~ msgstr "Nie udało się określić punktu montowania dla „%s”"
-
-#~ msgid "Unmounting device"
-#~ msgstr "Odmontowywanie nośnika"
-
-#~ msgid ""
-#~ "The device \"%s\" is being unmounted by the system. Please do not remove "
-#~ "the media or disconnect the drive"
-#~ msgstr ""
-#~ "Trwa odmontowywanie nośnika „%s”. Proszę nie wysuwać nośnika bądź "
-#~ "odłączać napędu."
-
-#~ msgid "Writing data to device"
-#~ msgstr "Zapisywanie danych na nośniku"
-
-#~ msgid ""
-#~ "There is data that needs to be written to the device \"%s\" before it can "
-#~ "be removed. Please do not remove the media or disconnect the drive"
-#~ msgstr ""
-#~ "Pewne dane muszą zostać zapisane na nośniku „%s” przed jego wysunięciem. "
-#~ "Proszę nie wysuwać nośnika bądź odłączać napędu."
-
-#~ msgid "Ejecting device"
-#~ msgstr "Wysuwanie nośnika"
-
-#~ msgid "The device \"%s\" is being ejected. This may take some time"
-#~ msgstr "Trwa wysuwanie nośnika „%s”. Może to potrwać dłuższy czas."
-
-#~ msgid "No templates installed"
-#~ msgstr "Brak szablonów"
-
-#~ msgid "Icon size"
-#~ msgstr "Rozmiar ikony"
-
-#~ msgid "The icon size for the path entry"
-#~ msgstr "Rozmiar ikony dla elementów ścieżki"
-
-#~ msgid "Write only"
-#~ msgstr "Tylko zapisywanie"
-
-#~ msgid "Read only"
-#~ msgstr "Tylko odczytywanie"
-
-#~ msgid "Read & Write"
-#~ msgstr "Odczytywanie i zapisywanie"
-
-#~ msgid "Owner:"
-#~ msgstr "Właściciel:"
-
-#~ msgid "Access:"
-#~ msgstr "Prawa dostępu:"
-
-#~ msgid "Group:"
-#~ msgstr "Grupa:"
-
-#~ msgid "Others:"
-#~ msgstr "Inni:"
-
-#~ msgid "Program:"
-#~ msgstr "Uruchamianie:"
-
-#~ msgid "Allow this file to _run as a program"
-#~ msgstr "Zezwolenie na _uruchamianie jako program"
-
-#~ msgid ""
-#~ "Allowing untrusted programs to run\n"
-#~ "presents a security risk to your system."
-#~ msgstr ""
-#~ "Zezwala na uruchamianie programów\n"
-#~ "z niewiadomego źródła, co jest potencjalnie\n"
-#~ "niebezpieczne"
-
-#~ msgid ""
-#~ "The folder permissions are inconsistent, you\n"
-#~ "may not be able to work with files in this folder."
-#~ msgstr ""
-#~ "Uprawnienia katalogu są niestosowne. Może wystąpić \n"
-#~ "problem podczas pracy z plikami w tym katalogu."
-
-#~ msgid "Correct folder permissions..."
-#~ msgstr "Popraw uprawnienia katalogu..."
-
-#~ msgid "Click here to automatically fix the folder permissions."
-#~ msgstr "Naprawia uprawnienia katalogu"
-
-#~ msgid "Please wait..."
-#~ msgstr "Proszę czekać..."
-
-#~ msgid "Stop applying permissions recursively."
-#~ msgstr "Zatrzymaj rekursywne nadawanie uprawnień"
-
-#~ msgid "Question"
-#~ msgstr "Pytanie"
-
-#~ msgid "Apply recursively?"
-#~ msgstr "Zastosować rekursywnie?"
-
-#~ msgid ""
-#~ "Do you want to apply your changes recursively to\n"
-#~ "all files and subfolders below the selected folder?"
-#~ msgstr ""
-#~ "Zastosować zmiany rekursywnie dla wszystkich plików\n"
-#~ "i podkatalogów wewnątrz zaznaczonego katalogu?"
-
-#~ msgid "Do _not ask me again"
-#~ msgstr "_Ukrywanie tego okna w przyszłości"
-
-#~ msgid ""
-#~ "If you select this option your choice will be remembered and you won't be "
-#~ "asked again. You can use the preferences dialog to alter your choice "
-#~ "afterwards."
-#~ msgstr ""
-#~ "Zapamiętuje wybór i nie zadaje więcej tego pytania. Można zmieniać tę "
-#~ "opcję w oknie preferencji programu."
-
-#~ msgid "Unknown file owner"
-#~ msgstr "Nieznany właściciel pliku"
-
-#~ msgid "Correct folder permissions automatically?"
-#~ msgstr "Poprawiać prawa katalogów automatycznie?"
-
-#~ msgid "Correct folder permissions"
-#~ msgstr "Poprawianie uprawnień katalogów"
-
-#~ msgid ""
-#~ "The folder permissions will be reset to a consistent state. Only users "
-#~ "allowed to read the contents of this folder will be allowed to enter the "
-#~ "folder afterwards."
-#~ msgstr ""
-#~ "Ustawia uprawnienia do katalogu na normalne. Tylko użytkownicy mogący "
-#~ "czytać zawartość katalogu będą mogły wejść do niego."
-
-#~ msgid "File Manager Preferences"
-#~ msgstr "Preferencje"
-
-#~ msgid "View _new folders using:"
-#~ msgstr "_Nowo otwarte katalogi:"
-
-#~ msgid "Icon View"
-#~ msgstr "Ikony"
-
-#~ msgid "Detailed List View"
-#~ msgstr "Lista szczegółowa"
-
-#~ msgid "Compact List View"
-#~ msgstr "Lista zwarta"
-
-#~ msgid "Last Active View"
-#~ msgstr "Ostatnio aktywny"
-
-#~ msgid "Sort _folders before files"
-#~ msgstr "Wyświetlanie _katalogów przed plikami"
-
-#~ msgid ""
-#~ "Select this option to list folders before files when you sort a folder."
-#~ msgstr "Wyświetla posortowane katalogi przed plikami"
-
-#~ msgid "_Show thumbnails"
-#~ msgstr "_Miniatury"
-
-#~ msgid ""
-#~ "Select this option to display previewable files within a folder as "
-#~ "automatically generated thumbnail icons."
-#~ msgstr "Wyświetla w minaturach podgląd zawartości obsługiwanych plików"
-
-#~ msgid "_Text beside icons"
-#~ msgstr "_Etykiety obok ikon"
-
-#~ msgid ""
-#~ "Select this option to place the icon captions for items beside the icon "
-#~ "rather than below the icon."
-#~ msgstr "Wyświetla etykiety obok ikon plików"
-
-#~ msgid "Date"
-#~ msgstr "Data"
-
-#~ msgid "Side Pane"
-#~ msgstr "Panel boczny"
-
-#~ msgid "Shortcuts Pane"
-#~ msgstr "Położenia"
-
-#~ msgid "_Icon Size:"
-#~ msgstr "Rozmiar _ikon:"
-
-#~ msgid "Very Small"
-#~ msgstr "Bardzo mały"
-
-#~ msgid "Smaller"
-#~ msgstr "Mniejszy"
-
-#~ msgid "Small"
-#~ msgstr "Mały"
-
-#~ msgid "Normal"
-#~ msgstr "Zwykły"
-
-#~ msgid "Large"
-#~ msgstr "Duży"
-
-#~ msgid "Larger"
-#~ msgstr "Większy"
-
-#~ msgid "Very Large"
-#~ msgstr "Bardzo duży"
-
-#~ msgid ""
-#~ "Select this option to display icon emblems in the shortcuts pane for all "
-#~ "folders for which emblems have been defined in the folders properties "
-#~ "dialog."
-#~ msgstr "Wyświetla zdefiniowane symbole katalogów w panelu położeń"
-
-#~ msgid "Tree Pane"
-#~ msgstr "Drzewo katalogów"
-
-#~ msgid "Icon _Size:"
-#~ msgstr "_Rozmiar ikon:"
-
-#~ msgid "Show Icon E_mblems"
-#~ msgstr "Sym_bole ikon"
-
-#~ msgid ""
-#~ "Select this option to display icon emblems in the tree pane for all "
-#~ "folders for which emblems have been defined in the folders properties "
-#~ "dialog."
-#~ msgstr "Wyświetla zdefiniowane symbole katalogów w panelu drzewa katalogów"
-
-#~ msgid "Navigation"
-#~ msgstr "Nawigacja"
-
-#~ msgid "_Single click to activate items"
-#~ msgstr "Zaznaczanie _jednokrotnym kliknięciem"
-
-#~ msgid ""
-#~ "Specify the d_elay before an item gets selected\n"
-#~ "when the mouse pointer is paused over it:"
-#~ msgstr ""
-#~ "Proszę wprowadzić wartość _opóźnienia, niezbędnego\n"
-#~ "do zaznaczenia  elementu po umieszczeniu nad nim\n"
-#~ "kursora myszy:"
-
-#~ msgid ""
-#~ "When single-click activation is enabled, pausing the mouse pointer over "
-#~ "an item will automatically select that item after the chosen delay. You "
-#~ "can disable this behavior by moving the slider to the left-most position. "
-#~ "This behavior may be useful when single clicks activate items, and you "
-#~ "want only to select the item without activating it."
-#~ msgstr ""
-#~ "Wprowadza wartość czasu po upływie, którego element zostanie zaznaczony. "
-#~ "Przesunięcie suwaka do lewej skrajnej pozycji, wyłącza tą cechę. "
-#~ "Przydatne do zaznaczania elementów gdy wybrano aktywację pojedynczym "
-#~ "kliknięciem."
+#~ msgid "_Second button:"
+#~ msgstr "_Drugi przycisk:"
 
 #~ msgid "Disabled"
-#~ msgstr "Brak"
+#~ msgstr "Wyłączony"
 
-#~ msgid "Medium"
-#~ msgstr "Średnie"
+#~ msgid "Log Out Dialog"
+#~ msgstr "Wyświetlenie okna wylogowania"
 
-#~ msgid "Long"
-#~ msgstr "Długie"
+#~ msgid "Ro_tate buttons in vertical panel"
+#~ msgstr "_Obracanie przycisków pionowego panelu"
 
-#~ msgid "_Double click to activate items"
-#~ msgstr "Zaznaczanie _dwukrotnym kliknięciem"
+#~ msgid "Transparency"
+#~ msgstr "_Przezroczystość (%):"
 
-#~ msgid "Folder Permissions"
-#~ msgstr "Prawa dostępu katalogów"
+#~ msgid "Xfce Panel"
+#~ msgstr "Xfce Panel"
 
-#~ msgid ""
-#~ "When changing the permissions of a folder, you\n"
-#~ "can also apply the changes to the contents of the\n"
-#~ "folder. Select the default behavior below:"
-#~ msgstr ""
-#~ "Zmiana uprawnień katalogów może dotyczyć również\n"
-#~ "ich zawartości. Proszę zaznaczyć domyślne działanie:"
+#~ msgid "Xfce Menu"
+#~ msgstr "Xfce Panel"
 
-#~ msgid "Ask everytime"
-#~ msgstr "Wyświetlanie pytania"
+#~ msgid "Failed to open manual"
+#~ msgstr "Nie udało się otworzyć ekranu"
 
-#~ msgid "Apply to Folder Only"
-#~ msgstr "Tylko dla katalogów"
-
-#~ msgid "Apply to Folder and Contents"
-#~ msgstr "Dla katalogów i zawartości"
-
-#~ msgid "Volume Management"
-#~ msgstr "Zarządzanie wolumenami i urządzeniami"
-
-#~ msgid "Enable _Volume Management"
-#~ msgstr "_Włączenie"
-
-#~ msgid ""
-#~ "<a href=\"volman-config:\">Configure</a> the management of removable "
-#~ "drives\n"
-#~ "and media (i.e. how cameras should be handled)."
-#~ msgstr ""
-#~ "<a href=\"volman-config:\">Konfiguruj</a> zarządzanie nośnikami "
-#~ "wymiennymi\n"
-#~ "i urządzeniami (np. aparatami fotograficznymi)."
-
-#~ msgid "Failed to display the volume management settings"
-#~ msgstr "Nie udało się wyświetlić ustawień menedżera wolumenów"
-
-#~ msgid "File Operation Progress"
-#~ msgstr "Postęp operacji plikowych"
-
-#~ msgid "%d file operation running"
-#~ msgid_plural "%d file operations running"
-#~ msgstr[0] "Trwa %d operacja plikowa"
-#~ msgstr[1] "Trwają %d operacje plikowe"
-#~ msgstr[2] "Trwa %d operacji plikowych"
-
-#~ msgid "Cancelling..."
-#~ msgstr "Anulowanie..."
-
-#~ msgid "%lu hour remaining"
-#~ msgid_plural "%lu hours remaining"
-#~ msgstr[0] "pozostała %lu godzina"
-#~ msgstr[1] "pozostały %lu godziny"
-#~ msgstr[2] "pozostało %lu godzin"
-
-#~ msgid "%lu minute remaining"
-#~ msgid_plural "%lu minutes remaining"
-#~ msgstr[0] "pozostała %lu minuta"
-#~ msgstr[1] "pozostały %lu minuty"
-#~ msgstr[2] "pozostało %lu minut"
-
-#~ msgid "%lu second remaining"
-#~ msgid_plural "%lu seconds remaining"
-#~ msgstr[0] "pozostała %lu sekunda"
-#~ msgstr[1] "pozostały %lu sekundy"
-#~ msgstr[2] "pozostało %lu sekund"
-
-#~ msgid "Name:"
-#~ msgstr "Nazwa:"
-
-#~ msgid "Kind:"
-#~ msgstr "Typ:"
-
-#~ msgid "Open With:"
-#~ msgstr "Otwieranie za pomocą:"
-
-#~ msgid "Link Target:"
-#~ msgstr "Cel dowiązania:"
-
-#~ msgid "Deleted:"
-#~ msgstr "Usunięto:"
-
-#~ msgid "Accessed:"
-#~ msgstr "Czas dostępu:"
-
-#~ msgid "Volume:"
-#~ msgstr "Urządzenie:"
-
-#~ msgid "Free Space:"
-#~ msgstr "Wolna przestrzeń:"
-
-#~ msgid "Emblems"
-#~ msgstr "Symbole"
-
-#~ msgid "Failed to change icon of \"%s\""
-#~ msgstr "Nie udało się zmienić ikony „%s”"
-
-#~ msgid "%s - Properties"
-#~ msgstr "%s – właściwości"
-
-#~ msgid "broken link"
-#~ msgstr "nieprawidłowe dowiązanie"
-
-#~ msgid "unknown"
-#~ msgstr "Nieznany"
-
-#~ msgid "_Send To"
-#~ msgstr "Wyś_lij do"
-
-#~ msgid "File Context Menu"
-#~ msgstr "Menu podręczne pliku"
-
-#~ msgid "Include additional files in the list of files to be renamed"
-#~ msgstr "Dołącza pliki do listy plików przeznaczonych do zmiany nazwy"
-
-#~ msgid "Clear"
-#~ msgstr "Wyczyść"
-
-#~ msgid "Clear the file list below"
-#~ msgstr "Czyści listę plików"
-
-#~ msgid "_About"
-#~ msgstr "_O programie"
-
-#~ msgid "Display information about Thunar Bulk Rename"
-#~ msgstr "Wyświetla informacje o programie"
-
-#~ msgid "View the properties of the selected file"
-#~ msgstr "Wyświetla właściwości zaznaczonego elementu"
-
-#~ msgid "Rename Multiple Files"
-#~ msgstr "Wielokrotna zmiana nazw"
-
-#~ msgid "_Rename Files"
-#~ msgstr "_Zmień nazwy"
-
-#~ msgid ""
-#~ "Click here to actually rename the files listed above to their new names."
-#~ msgstr "Zmienia nazwy plików wyświetlonych powyżej"
-
-#~ msgid ""
-#~ "Click here to view the documentation for the selected rename operation."
-#~ msgstr "Wyświetla pomoc na temat zaznaczonej operacji zmiany nazwy"
-
-#~ msgid ""
-#~ "No renamer modules were found on your system. Please check your\n"
-#~ "installation or contact your system administrator. If you install Thunar\n"
-#~ "from source, be sure to enable the \"Simple Builtin Renamers\" plugin."
-#~ msgstr ""
-#~ "Nie znaleziono modułów zmian nazw. Proszę sprawdzić instalację\n"
-#~ "programu lub skontaktować się z administratorem systemu. Jeżeli\n"
-#~ "program zainstalowano ze źródeł, należy upewnić się, że włączono\n"
-#~ "obsługę wtyczki „Simple Builtin Renamers”."
-
-#~ msgid "Select files to rename"
-#~ msgstr "Wybór pliku"
-
-#~ msgid "Audio Files"
-#~ msgstr "Pliki nagrań dźwiękowych"
-
-#~ msgid "Image Files"
-#~ msgstr "Pliki obrazów"
-
-#~ msgid "Video Files"
-#~ msgstr "Pliki nagrań wideo"
-
-#~ msgid "Bulk Rename"
-#~ msgstr "Bulk Rename"
-
-#~ msgid ""
-#~ "Thunar Bulk Rename is a powerful and extensible\n"
-#~ "tool to rename multiple files at once."
-#~ msgstr ""
-#~ "Narzędzie wielokrotnej zmiany nazw jest specjalną aplikacją\n"
-#~ "do zmiany nazwy wielu plików za jednym razem."
-
-#~ msgid "Remove File"
-#~ msgid_plural "Remove Files"
-#~ msgstr[0] "Usuń plik"
-#~ msgstr[1] "Usuń pliki"
-#~ msgstr[2] "Usuń pliki"
-
-#~ msgid "Remove the selected file from the list of files to be renamed"
-#~ msgid_plural ""
-#~ "Remove the selected files from the list of files to be renamed"
-#~ msgstr[0] ""
-#~ "Usuwa zaznaczony plik z listy plików przeznaczonych do zmiany nazwy"
-#~ msgstr[1] ""
-#~ "Usuwa zaznaczone pliki z listy plików przeznaczonych do zmiany nazwy"
-#~ msgstr[2] ""
-#~ "Usuwa zaznaczone pliki z listy plików przeznaczonych do zmiany nazwy"
-
-#~ msgid "Bulk Rename - Rename Multiple Files"
-#~ msgstr "Narzędzie wielokrotnej zmiany nazw"
-
-#~ msgid "Failed to rename \"%s\" to \"%s\"."
-#~ msgstr "Nie udało się zmienić nazwy „%s” na „%s”."
-
-#~ msgid ""
-#~ "You can either choose to skip this file and continue to rename the "
-#~ "remaining files, or revert the previously renamed files to their previous "
-#~ "names, or cancel the operation without reverting previous changes."
-#~ msgstr ""
-#~ "Można pominąć ten plik kontynuując zmiany nazw pozostałych plików, "
-#~ "przywrócić poprzednie nazwy wszystkim plikom lub po prostu przerwać "
-#~ "operację, pozostawiając dokonane zmiany."
-
-#~ msgid "_Revert Changes"
-#~ msgstr "_Cofnij zmiany"
-
-#~ msgid "_Skip This File"
-#~ msgstr "_Pomiń ten plik"
-
-#~ msgid ""
-#~ "Do you want to skip this file and continue to rename the remaining files?"
-#~ msgstr "Pominąć ten plik i kontynuować zmiany nazw pozostałych plików?"
-
-#~ msgid "Side Pane (Create Shortcut)"
-#~ msgid_plural "Side Pane (Create Shortcuts)"
-#~ msgstr[0] "Panel boczny (dodaj zakładkę)"
-#~ msgstr[1] "Panel boczny (dodaj zakładki)"
-#~ msgstr[2] "Panel boczny (dodaj zakładki)"
-
-#~ msgid "Add the selected folder to the shortcuts side pane"
-#~ msgid_plural "Add the selected folders to the shortcuts side pane"
-#~ msgstr[0] "Dodaje zakładkę do zaznaczonego katalogu"
-#~ msgstr[1] "Dodaje zakładki do zaznaczonych katalogów"
-#~ msgstr[2] "Dodaje zakładki do zaznaczonych katalogów"
-
-#~ msgid "_Mount Volume"
-#~ msgstr "_Zamontuj"
-
-#~ msgid "E_ject Volume"
-#~ msgstr "_Wysuń"
-
-#~ msgid "_Remove Shortcut"
-#~ msgstr "_Usuń zakładkę"
-
-#~ msgid "Re_name Shortcut"
-#~ msgstr "Zmień _nazwę zakładki"
-
-#~ msgid "The path \"%s\" does not refer to a directory"
-#~ msgstr "Ścieżka „%s” nie wskazuje na katalog"
-
-#~ msgid "Failed to add new shortcut"
-#~ msgstr "Nie udało się dodać nowej zakładki"
-
-#~ msgid "Failed to eject \"%s\""
-#~ msgstr "Nie udało się wysunąć „%s”"
-
-#~ msgid "Click here to stop calculating the total size of the folder."
-#~ msgstr "Zatrzymuje obliczanie rozmiaru katalogu"
-
-#~ msgid "Calculation aborted"
-#~ msgstr "Obliczanie anulowane"
-
-#~ msgid "Calculating..."
-#~ msgstr "Obliczanie..."
-
-#~ msgid "%s Bytes"
-#~ msgstr "%s bajtów"
-
-#~ msgid "%u item, totalling %s"
-#~ msgid_plural "%u items, totalling %s"
-#~ msgstr[0] "%u element, %s"
-#~ msgstr[1] "%u elementy, łącznie %s"
-#~ msgstr[2] "%u elementów, łącznie %s"
-
-#~ msgid "Folder Context Menu"
-#~ msgstr "Menu podręczne katalogu"
-
-#~ msgid "Create an empty folder within the current folder"
-#~ msgstr "Tworzy pusty katalog w bieżącym katalogu"
-
-#~ msgid "Cu_t"
-#~ msgstr "_Wytnij"
-
-#~ msgid "_Copy"
-#~ msgstr "S_kopiuj"
-
-#~ msgid "_Paste"
-#~ msgstr "Wk_lej"
-
-#~ msgid "Move or copy files previously selected by a Cut or Copy command"
-#~ msgstr ""
-#~ "Przenosi lub kopiuje pliki wybrane wcześniej poleceniem „Wytnij” lub "
-#~ "„Skopiuj”"
-
-#~ msgid ""
-#~ "Move or copy files previously selected by a Cut or Copy command into the "
-#~ "selected folder"
-#~ msgstr ""
-#~ "Przenieś lub skopiuj pliki wybrane wcześniej przez polecenie „Wytnij” lub "
-#~ "„Skopiuj” do zaznaczonego katalogu"
-
-#~ msgid "Select all files in this window"
-#~ msgstr "Zaznacza wszystkie pliki w bieżącym katalogu"
-
-#~ msgid "Select _by Pattern..."
-#~ msgstr "Zaznacz według w_zoru..."
-
-#~ msgid "Select all files that match a certain pattern"
-#~ msgstr "Zaznacza wszystkie pliki pasujące do określonego wzoru"
-
-#~ msgid "Du_plicate"
-#~ msgstr "_Powiel"
-
-#~ msgid "_Rename..."
-#~ msgstr "Zmień _nazwę..."
-
-#~ msgid "Create _Document"
-#~ msgstr "Utwórz z _szablonu..."
-
-#~ msgid "Loading folder contents..."
-#~ msgstr "Wczytywanie zawartości katalogu..."
-
-#~ msgid "New Empty File"
-#~ msgstr "Nowy pusty plik"
-
-#~ msgid "New Empty File..."
-#~ msgstr "Nowy plik"
-
-#~ msgid "Select by Pattern"
-#~ msgstr "Wprowadzanie wzoru"
-
-#~ msgid "_Select"
-#~ msgstr "_Zaznacz"
-
-#~ msgid "_Pattern:"
-#~ msgstr "_Wzór:"
-
-#~ msgid "Invalid filename provided by XDS drag site"
-#~ msgstr "Nieprawidłowa nazwa pliku dostarczona przez źródło XDS"
-
-#~ msgid "Failed to open directory \"%s\""
-#~ msgstr "Nie udało się otworzyć katalogu „%s”"
-
-#~ msgid "Prepare the selected file to be moved with a Paste command"
-#~ msgid_plural "Prepare the selected files to be moved with a Paste command"
-#~ msgstr[0] ""
-#~ "Przygotowuje zaznaczony plik do przeniesienia za pomocą polecenia „Wklej”"
-#~ msgstr[1] ""
-#~ "Przygotowuje zaznaczone pliki do przeniesienia za pomocą polecenia „Wklej”"
-#~ msgstr[2] ""
-#~ "Przygotowuje zaznaczone pliki do przeniesienia za pomocą polecenia „Wklej”"
-
-#~ msgid "Prepare the selected file to be copied with a Paste command"
-#~ msgid_plural "Prepare the selected files to be copied with a Paste command"
-#~ msgstr[0] ""
-#~ "Przygotowuje zaznaczony plik do skopiowania za pomocą polecenia „Wklej”"
-#~ msgstr[1] ""
-#~ "Przygotowuje zaznaczone pliki do skopiowania za pomocą polecenia „Wklej”"
-#~ msgstr[2] ""
-#~ "Przygotowuje zaznaczone pliki do skopiowania za pomocą polecenia „Wklej”"
-
-#~ msgid "Delete the selected file"
-#~ msgid_plural "Delete the selected files"
-#~ msgstr[0] "Usuwa zaznaczony plik"
-#~ msgstr[1] "Usuwa zaznaczone pliki"
-#~ msgstr[2] "Usuwa zaznaczone pliki"
-
-#~ msgid "Duplicate the selected file"
-#~ msgid_plural "Duplicate each selected file"
-#~ msgstr[0] "Duplikuje zaznaczony plik"
-#~ msgstr[1] "Duplikuje zaznaczone pliki"
-#~ msgstr[2] "Duplikuje zaznaczone pliki"
-
-#~ msgid "Create a symbolic link for the selected file"
-#~ msgid_plural "Create a symbolic link for each selected file"
-#~ msgstr[0] "Tworzy dowiązanie do zaznaczonego pliku"
-#~ msgstr[1] "Tworzy dowiązania do zaznaczonych plików"
-#~ msgstr[2] "Tworzy dowiązania do zaznaczonych plików"
-
-#~ msgid "Rename the selected file"
-#~ msgid_plural "Rename the selected files"
-#~ msgstr[0] "Zmienia nazwę zaznaczonego pliku"
-#~ msgstr[1] "Zmienia nazwy zaznaczonych plików"
-#~ msgstr[2] "Zmienia nazwy zaznaczonych plików"
-
-#~ msgid "Restore the selected file"
-#~ msgid_plural "Restore the selected files"
-#~ msgstr[0] "Przenosi zaznaczony plik do jego pierwotnego położenia"
-#~ msgstr[1] "Przenosi zaznaczone pliki do ich pierwotnych położeń"
-#~ msgstr[2] "Przenosi zaznaczone pliki do ich pierwotnych położeń"
-
-#~ msgid "_Empty File"
-#~ msgstr "_Pusty plik"
-
-#~ msgid "Collecting files..."
-#~ msgstr "Wyszukiwanie plików..."
-
-#~ msgid "Trying to restore \"%s\""
-#~ msgstr "Próbowanie przywrócenia „%s”"
-
-#~ msgid ""
-#~ "The folder \"%s\" does not exist anymore but is required to restore the "
-#~ "file \"%s\" from the trash"
-#~ msgstr ""
-#~ "Katalog „%s” już nie istnieje, lecz jest potrzebny do przywrócenia pliku "
-#~ "„%s” z kosza"
-
-#~ msgid "Trying to move \"%s\""
-#~ msgstr "Próbowanie przeniesienia „%s”"
-
-#~ msgid "Could not move \"%s\" directly. Collecting files for copying..."
-#~ msgstr ""
-#~ "Nie można przenieść „%s” bezpośrednio. Zliczanie plików do skopiowania..."
-
-#~ msgid "T_rash"
-#~ msgstr "_Kosz"
-
-#~ msgid "Display the contents of the trash can"
-#~ msgstr "Wyświetla zawartość kosza"
-
-#~ msgid "Loading..."
-#~ msgstr "Wczytywanie..."
-
-#~ msgid "_Paste Into Folder"
-#~ msgstr "_Wklej pliki do katalogu"
-
-#~ msgid "P_roperties..."
-#~ msgstr "_Właściwości..."
-
-#~ msgid "Invalid path"
-#~ msgstr "Nieprawidłowa ścieżka"
-
-#~ msgid "Unknown user \"%s\""
-#~ msgstr "Nieznany użytkownik „%s”"
-
-#~ msgid "Today"
-#~ msgstr "Dzisiaj"
-
-#~ msgid "Today at %X"
-#~ msgstr "Dzisiaj o %X"
-
-#~ msgid "Yesterday"
-#~ msgstr "Wczoraj"
-
-#~ msgid "Yesterday at %X"
-#~ msgstr "Wczoraj o %X"
-
-#~ msgid "%A at %X"
-#~ msgstr "%A o %X"
-
-#~ msgid "%x at %X"
-#~ msgstr "%x o %X"
-
-#~ msgid "Open a new Thunar window for the displayed location"
-#~ msgstr "Otwiera bieżący katalog w nowym oknie"
-
-#~ msgid "Close all Thunar windows"
-#~ msgstr "Zamyka wszystkie okna programu"
-
-#~ msgid "Close this window"
-#~ msgstr "Zamyka bieżące okno"
-
-#~ msgid "Edit Thunars Preferences"
-#~ msgstr "Otwiera okno preferencji programu"
-
-#~ msgid "_View"
-#~ msgstr "_Widok"
-
-#~ msgid "_Reload"
-#~ msgstr "W_czytaj ponownie"
-
-#~ msgid "Reload the current folder"
-#~ msgstr "Ponownie odczytuje zawartość katalogu"
-
-#~ msgid "_Location Selector"
-#~ msgstr "Pasek p_ołożenia"
-
-#~ msgid "_Side Pane"
-#~ msgstr "Panel _boczny"
-
-#~ msgid "Zoom I_n"
-#~ msgstr "Po_większ"
-
-#~ msgid "Show the contents in more detail"
-#~ msgstr "Powiększa rozmiar ikon"
-
-#~ msgid "Show the contents in less detail"
-#~ msgstr "Pomniejsza rozmiar ikon"
-
-#~ msgid "Normal Si_ze"
-#~ msgstr "Zwykły _rozmiar"
-
-#~ msgid "Show the contents at the normal size"
-#~ msgstr "Przywraca zwykły rozmiar ikon"
-
-#~ msgid "_Go"
-#~ msgstr "P_rzejdź"
-
-#~ msgid "Open the parent folder"
-#~ msgstr "Przechodzi do katalogu nadrzędnego"
-
-#~ msgid "_Home"
-#~ msgstr "Katalog _użytkownika"
-
-#~ msgid "Go to the home folder"
-#~ msgstr "Przechodzi do katalogu użytkownika"
-
-#~ msgid "Go to the desktop folder"
-#~ msgstr "Przechodzi do katalogu pulpitu"
-
-#~ msgid "Browse the file system"
-#~ msgstr "Przegląda system plików za pomocą menedżera plików"
-
-#~ msgid "Go to the documents folder"
-#~ msgstr "Przechodzi do katalogu dokumentów"
-
-#~ msgid "Go to the downloads folder"
-#~ msgstr "Przechodzi do katalogu pobranych plików"
-
-#~ msgid "Go to the music folder"
-#~ msgstr "Przechodzi do katalogu nagrań dźwiękowych"
-
-#~ msgid "Go to the pictures folder"
-#~ msgstr "Przechodzi do katalogu obrazów"
-
-#~ msgid "Go to the videos folder"
-#~ msgstr "Przechodzi do katalogu nagrań wideo"
-
-#~ msgid "Go to the public folder"
-#~ msgstr "Przechodzi do katalogu publicznego"
-
-#~ msgid "T_emplates"
-#~ msgstr "_Szablony"
-
-#~ msgid "Go to the templates folder"
-#~ msgstr "Przechodzi do katalogu szablonów"
-
-#~ msgid "_Open Location..."
-#~ msgstr "_Położenie..."
-
-#~ msgid "Specify a location to open"
-#~ msgstr "Otwiera określone położenie w systemie plików"
-
-#~ msgid "_Help"
-#~ msgstr "Pomo_c"
-
-#~ msgid "_Contents"
-#~ msgstr "_Spis treści"
-
-#~ msgid "Display Thunar user manual"
-#~ msgstr "Wyświetla podręcznik programu"
-
-#~ msgid "Display information about Thunar"
-#~ msgstr "Wyświetla informacje o programie"
-
-#~ msgid "Toggles the display of hidden files in the current window"
-#~ msgstr "Wyświetla pliki ukryte oraz kopie bezpieczeństwa"
-
-#~ msgid "_Pathbar Style"
-#~ msgstr "Przyciski _katalogów"
-
-#~ msgid "Modern approach with buttons that correspond to folders"
-#~ msgstr "Wyświetla pasek położenia z przyciskami odpowiadającymi katalogom"
-
-#~ msgid "_Toolbar Style"
-#~ msgstr "Przyciski _nawigacyjne"
-
-#~ msgid "Traditional approach with location bar and navigation buttons"
-#~ msgstr "Wyświetla pasek położenia z przyciskami nawigacyjnymi"
-
-#~ msgid "_Shortcuts"
-#~ msgstr "_Położenia"
-
-#~ msgid "Toggles the visibility of the shortcuts pane"
-#~ msgstr "Wyświetla w panelu bocznym wolumeny i zakładki"
-
-#~ msgid "_Tree"
-#~ msgstr "_Drzewo katalogów"
-
-#~ msgid "Toggles the visibility of the tree pane"
-#~ msgstr "Wyświetla w panelu bocznym drzewo katalogów"
-
-#~ msgid "St_atusbar"
-#~ msgstr "Pasek _stanu"
-
-#~ msgid "Change the visibility of this window's statusbar"
-#~ msgstr "Wyświetla pasek stanu"
-
-#~ msgid "View as _Icons"
-#~ msgstr "Iko_ny"
-
-#~ msgid "Display folder content in an icon view"
-#~ msgstr "Wyświetla zawartość katalogu w formie listy ikon"
-
-#~ msgid "View as _Detailed List"
-#~ msgstr "Lista _szczegółowa"
-
-#~ msgid "Display folder content in a detailed list view"
-#~ msgstr "Wyświetla zawartość katalogu w formie szczegółowej listy"
-
-#~ msgid "View as _Compact List"
-#~ msgstr "Lista _zwarta"
-
-#~ msgid "Display folder content in a compact list view"
-#~ msgstr "Wyświetla zawartość katalogu w formie zwartej listy ikon"
-
-#~ msgid "Warning, you are using the root account, you may harm your system."
-#~ msgstr ""
-#~ "Uwaga: używane konto należy do użytkowanika root. Istnieje "
-#~ "niebezpieczeństwo uszkodzenia systemu."
-
-#~ msgid "Browse the network"
-#~ msgstr "Przegląda sieć za pomocą menedżera plików"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Nie udało się uruchomić „%s”"
-
-#~ msgid "Failed to open parent folder"
-#~ msgstr "Nie udało się otworzyć katalogu nadrzędnego"
-
-#~ msgid "Failed to open the home folder"
-#~ msgstr "Nie udało się otworzyć katalogu domowego"
-
-#~ msgid "Failed to open folder \"%s\""
-#~ msgstr "Nie udało się otworzyć katalogu „%s”"
-
-#~ msgid "About Templates"
-#~ msgstr "O szablonach"
-
-#~ msgid ""
-#~ "All files in this folder will appear in the \"Create Document\" menu."
-#~ msgstr ""
-#~ "Pliki katalogu szablonów zostaną wyświetlone w menu „Utwórz z szablonu...”"
-
-#~ msgid ""
-#~ "If you frequently create certain kinds  of documents, make a copy of one "
-#~ "and put it in this folder. Thunar will add an entry for this document in "
-#~ "the \"Create Document\" menu.\n"
-#~ "\n"
-#~ "You can then select the entry from the \"Create Document\" menu and a "
-#~ "copy of the document will be created in the directory you are viewing."
-#~ msgstr ""
-#~ "W tym katalogu można umieszczać kopie często tworzonych plików. "
-#~ "Kliknięcie pozycji w menu „Utwórz z szablonu...” odpowiadającej danemu "
-#~ "plikowi, utworzy kopię tego pliku w bieżącym katalogu."
-
-#~ msgid "Do _not display this message again"
-#~ msgstr "_Ukrywanie tego okna w przyszłości"
-
-#~ msgid "Failed to open the file system root folder"
-#~ msgstr "Nie udało się otworzyć katalogu głównego systemu plików"
-
-#~ msgid "Failed to display the contents of the trash can"
-#~ msgstr "Nie udało się wyświetlić zawartości kosza"
-
-#~ msgid "File Manager"
-#~ msgstr "Menedżer plików"
-
-#~ msgid "Label"
-#~ msgstr "Etykieta"
-
-#~ msgid "Text of the page's label"
-#~ msgstr "Tekst etykiety strony"
-
-#~ msgid "Label widget"
-#~ msgstr "Widżet etykiety"
-
-#~ msgid "A widget to display in place of the usual page label"
-#~ msgstr "Widżet wyświetlany w miejsce typowej etykiety karty"
-
-#~ msgid "Resident"
-#~ msgstr "Zawsze aktywne"
-
-#~ msgid "Don't unload the plugin from memory"
-#~ msgstr "Proszę nie usuwać wtyczki z pamięci"
-
-#~ msgid "Help URL"
-#~ msgstr "URL pomocy"
-
-#~ msgid "The URL to the documentation of the renamer"
-#~ msgstr "URL dokumentacji narzędzia do zmieniania nazw plików"
-
-#~ msgid "The user visible name of the renamer"
-#~ msgstr "Nazwa użytkownika, który zmienił nazwę"
-
-#~ msgid "Description:"
-#~ msgstr "Opis:"
-
-#~ msgid ""
-#~ "The generic name of the entry, for example \"Web Browser\" in case of "
-#~ "Firefox."
-#~ msgstr "Wprowadza ogólną nazwę programu, np. „Przeglądarka sieci WWW”"
-
-#~ msgid "Command:"
-#~ msgstr "Polecenie:"
-
-#~ msgid "The program to execute, possibly with arguments."
-#~ msgstr "Wprowadza nazwę program do uruchomienia z parametrami"
-
-#~ msgid "URL:"
-#~ msgstr "URL:"
-
-#~ msgid "The URL to access."
-#~ msgstr "Dostępowy URL"
-
-#~ msgid "Comment:"
-#~ msgstr "Komentarz:"
-
-#~ msgid ""
-#~ "Tooltip for the entry, for example \"View sites on the Internet\" in case "
-#~ "of Firefox. Should not be redundant with the name or the description."
-#~ msgstr ""
-#~ "Wprowadza podpowiedź do pozycji menu, np. „Przegląda strony internetowe” "
-#~ "w przypadku programu Firefox. Nie powinna powielać nazwy lub opisu."
-
-#~ msgid ""
-#~ "Select this option to enable startup notification when the command is run "
-#~ "from the file manager or the menu. Not every application supports startup "
-#~ "notification."
-#~ msgstr ""
-#~ "Powiadamia o uruchomieniu polecenia z menedżera plików lub menu. Nie "
-#~ "każdy program jest obsługiwany."
-
-#~ msgid "Run in _terminal"
-#~ msgstr "Uruchamianie w _terminalu"
-
-#~ msgid "Link"
-#~ msgstr "Odnośnik"
-
-#~ msgid "Failed to save \"%s\"."
-#~ msgstr "Nie udało się zapisać „%s”."
-
-#~ msgid "Date Taken:"
-#~ msgstr "Czas wykonania:"
-
-#~ msgid "Camera Brand:"
-#~ msgstr "Marka aparatu:"
-
-#~ msgid "Camera Model:"
-#~ msgstr "Model aparatu:"
-
-#~ msgid "Exposure Time:"
-#~ msgstr "Czas ekspozycji:"
-
-#~ msgid "Exposure Program:"
-#~ msgstr "Program ekspozycji:"
-
-#~ msgid "Aperture Value:"
-#~ msgstr "Apertura:"
-
-#~ msgid "Flash Fired:"
-#~ msgstr "Lampa błyskowa:"
-
-#~ msgid "Focal Length:"
-#~ msgstr "Ogniskowa:"
-
-#~ msgid "Shutter Speed:"
-#~ msgstr "Szybkość migawki:"
-
-#~ msgid "ISO Speed Ratings:"
-#~ msgstr "Czułość ISO:"
-
-#~ msgid "Software:"
-#~ msgstr "Oprogramowanie:"
-
-#~ msgid "Image"
-#~ msgstr "Obraz"
-
-#~ msgid "Image Type:"
-#~ msgstr "Typ:"
-
-#~ msgid "%dx%d pixel"
-#~ msgid_plural "%dx%d pixels"
-#~ msgstr[0] "%dx%d piksel"
-#~ msgstr[1] "%dx%d pikseli"
-#~ msgstr[2] "%dx%d pikseli"
-
-#~ msgid "Con_vert to:"
-#~ msgstr "Z_amienienie:"
-
-#~ msgid "Uppercase / Lowercase"
-#~ msgstr "Zamienianie na wielkie/małe litery"
-
-#~ msgid "Insert _time:"
-#~ msgstr "_Czas:"
-
-#~ msgid "Insert Date / Time"
-#~ msgstr "Wstawianie daty/czasu"
-
-#~ msgid "lowercase"
-#~ msgstr "na małe litery"
-
-#~ msgid "UPPERCASE"
-#~ msgstr "NA WIELKIE LITERY"
-
-#~ msgid "Camelcase"
-#~ msgstr "Pierwszej Litery na Wielką"
-
-#~ msgid "Insert"
-#~ msgstr "Wstawienie"
-
-#~ msgid "Overwrite"
-#~ msgstr "Zastąpienie"
-
-#~ msgid "1, 2, 3, ..."
-#~ msgstr "1, 2, 3, ..."
-
-#~ msgid "01, 02, 03, ..."
-#~ msgstr "01, 02, 03, ..."
-
-#~ msgid "001, 002, 003, ..."
-#~ msgstr "001, 002, 003, ..."
-
-#~ msgid "0001, 0002, 0003, ..."
-#~ msgstr "0001, 0002, 0003, ..."
-
-#~ msgid "a, b, c, d, ..."
-#~ msgstr "a, b, c, d, ..."
-
-#~ msgid "From the front (left)"
-#~ msgstr "Od początku (od lewej)"
-
-#~ msgid "From the back (right)"
-#~ msgstr "Od końca (od prawej)"
-
-#~ msgid "Old Name - Text - Number"
-#~ msgstr "Stara nazwa – tekst – liczba"
-
-#~ msgid "Number - Text - Old Name"
-#~ msgstr "Liczba – tekst – pierwotna nazwa"
-
-#~ msgid "Text - Number"
-#~ msgstr "Tekst – liczba"
-
-#~ msgid "Number - Text"
-#~ msgstr "Liczba – tekst"
-
-#~ msgid "Current"
-#~ msgstr "Bieżący"
-
-#~ msgid "Date Picture Taken"
-#~ msgstr "Czas wykonania"
-
-#~ msgid "_Text:"
-#~ msgstr "_Tekst:"
-
-#~ msgid "Insert / Overwrite"
-#~ msgstr "Wstawianie/zastępowanie znaków"
-
-#~ msgid "_Start With:"
-#~ msgstr "Wartość p_oczątkowa:"
-
-#~ msgid "Numbering"
-#~ msgstr "Numerowanie"
-
-#~ msgid "Remove _From Position:"
-#~ msgstr "Pozycja p_oczątkowa:"
-
-#~ msgid "_To Position:"
-#~ msgstr "Pozycja _końcowa:"
-
-#~ msgid "Enter the text to search for in the file names."
-#~ msgstr "Wprowadza ciąg do wyszukania w nazwach plików"
-
-#~ msgid "Regular _Expression"
-#~ msgstr "_Wyrażenie regularne"
-
-#~ msgid ""
-#~ "If you enable this option, the pattern will be treated as a regular "
-#~ "expression and matched using the Perl-compatible regular expressions "
-#~ "(PCRE). Check the documentation for details about the regular expression "
-#~ "syntax."
-#~ msgstr ""
-#~ "Traktuje wzór jako wyrażenie regularne w stylu Perl (PCRE). Szczegółowe "
-#~ "informacje na ten temat można znaleźć w dokumentacji."
-
-#~ msgid "Replace _With:"
-#~ msgstr "Z_astąpienie na:"
-
-#~ msgid ""
-#~ "Enter the text that should be used as replacement for the pattern above."
-#~ msgstr "Wprowadza ciąg, którym zostanie zastąpiony tekst pasujący do wzoru"
-
-#~ msgid "C_ase Sensitive Search"
-#~ msgstr "_Rozróżnianie wielkości liter"
-
-#~ msgid ""
-#~ "If you enable this option, the pattern will be searched in a case-"
-#~ "sensitive manner. The default is to use a case-insensitive search."
-#~ msgstr ""
-#~ "Dopasowywuje wzór z uwzględnieniem wielkości liter. Domyślnie wielkość "
-#~ "liter nie ma znaczenia."
-
-#~ msgid "Invalid regular expression, at character position %ld: %s"
-#~ msgstr "Nieprawidłowe wyrażenie regularne na pozycji %ld: %s"
-
-#~ msgid "Search & Replace"
-#~ msgstr "Zastępowanie ciągów"
-
-#~ msgid "Send \"%s\" as compressed archive?"
-#~ msgstr "Wysłać „%s” jako skompresowane archiwum?"
-
-#~ msgid "Send _directly"
-#~ msgstr "Wyślij _bezpośrednio"
-
-#~ msgid "Send com_pressed"
-#~ msgstr "Wyślij _skompresowane"
-
-#~ msgid ""
-#~ "When sending a file via email, you can either choose to send the file "
-#~ "directly, as is, or compress the file before attaching it to an email. It "
-#~ "is highly recommended to compress large files before sending them."
-#~ msgstr ""
-#~ "Wysyłając plik e-mailem, można wybrać, czy wysłać plik bezpośrednio (tak "
-#~ "jak jest), czy skompresować go przed dołączaniem do wiadomości. Zaleca "
-#~ "się kompresowanie dużych plików przed wysłaniem."
-
-#~ msgid "Send %d file as compressed archive?"
-#~ msgid_plural "Send %d files as compressed archive?"
-#~ msgstr[0] "Wysłać %d plik w skompresowanym archiwum?"
-#~ msgstr[1] "Wysłać %d pliki w skompresowanym archiwum?"
-#~ msgstr[2] "Wysłać %d plików w skompresowanym archiwum?"
-
-#~ msgid "Send as _archive"
-#~ msgstr "Wyślij jako a_rchiwum"
-
-#~ msgid ""
-#~ "When sending multiple files via email, you can either choose to send the "
-#~ "files directly, attaching multiple files to an email, or send all files "
-#~ "compressed into a single archive file and attach the archive. It is "
-#~ "highly recommended to send multiple large files as archive."
-#~ msgstr ""
-#~ "Wysyłając kilka plików e-mailem, można wybrać, czy wysłać pliki "
-#~ "bezpośrednio (dołączając kilka plików do e-maila), czy wysłać wszystkie "
-#~ "pliki skompresowane w pojedynczym archiwum dołączonym do wiadomości. "
-#~ "Zaleca się wysyłanie wielu dużych plików jako archiwum."
-
-#~ msgid "Compressing files..."
-#~ msgstr "Kompresowanie plików..."
-
-#~ msgid "ZIP command terminated with error %d"
-#~ msgstr "Polecenie ZIP zostało zakończone z błędem %d"
-
-#~ msgid "Failed to create temporary directory"
-#~ msgstr "Nie udało się utworzyć katalogu tymczasowego"
-
-#~ msgid "Failed to create symbolic link for \"%s\""
-#~ msgstr "Nie udało się utworzyć dowiązania dla „%s”"
-
-#~ msgid "Failed to compress %d file"
-#~ msgid_plural "Failed to compress %d files"
-#~ msgstr[0] "Nie udało się skompresować %d pliku"
-#~ msgstr[1] "Nie udało się skompresować %d plików"
-#~ msgstr[2] "Nie udało się skompresować %d plików"
-
-#~ msgid "Mail Recipient"
-#~ msgstr "Odbiorca poczty elektronicznej"
-
-#~ msgid "Failed to connect to the Trash"
-#~ msgstr "Nie udało się połączyć z koszem."
-
-#~ msgid "Trash contains files"
-#~ msgstr "W koszu znajdują się pliki"
-
-#~ msgid "Trash is empty"
-#~ msgstr "Kosz jest pusty"
-
-#~ msgid "Display the trash can"
-#~ msgstr "Wyświetla zawartość kosza"
-
-#~ msgid "Trash Applet"
-#~ msgstr "Kosz"
-
-#~ msgid "Custom Actions"
-#~ msgstr "Czynności"
-
-#~ msgid ""
-#~ "You can configure custom actions that will appear in the\n"
-#~ "file managers context menus for certain kinds of files."
-#~ msgstr ""
-#~ "Konfiguruje polecenia wykonywane na katalogach lub\n"
-#~ "określonych typach plików. Polecenia te wywoływać\n"
-#~ "można za pośrednictwem menu podręcznego elementu."
-
-#~ msgid "Create Action"
-#~ msgstr "Nowa czynność"
-
-#~ msgid "Failed to save actions to disk."
-#~ msgstr "Nie udało się zapisać czynności."
-
-#~ msgid "If you delete a custom action, it is permanently lost."
-#~ msgstr "Czynność zostanie trwale usunięta."
-
-#~ msgid "Basic"
-#~ msgstr "Ogólne"
-
-#~ msgid "_Name:"
-#~ msgstr "_Nazwa:"
-
-#~ msgid "The name of the action that will be displayed in the context menu."
-#~ msgstr "Wprowadza nazwę czynności wyświetlanej w menu podręcznym"
-
-#~ msgid "_Description:"
-#~ msgstr "_Opis:"
-
-#~ msgid ""
-#~ "The description of the action that will be displayed as tooltip in the "
-#~ "statusbar when selecting the item from the context menu."
-#~ msgstr ""
-#~ "Wprowadza opis czynności wyświetlany na pasku stanu, podczas wybierania "
-#~ "polecenia z menu podręcznego"
-
-#~ msgid "_Command:"
-#~ msgstr "_Polecenie:"
-
-#~ msgid ""
-#~ "The command (including the necessary parameters) to perform the action. "
-#~ "See the command parameter legend below for a list of supported parameter "
-#~ "variables, which will be substituted when launching the command. When "
-#~ "upper-case letters (e.g. %F, %D, %N) are used, the action will be "
-#~ "applicable even if more than one item is selected. Else the action will "
-#~ "only be applicable if exactly one item is selected."
-#~ msgstr ""
-#~ "Wprowadza polecenie (wraz z koniecznymi parametrami) do wykonania "
-#~ "czynności. W opisie poniżej znajduje się lista obsługiwanych parametrów. "
-#~ "Zastosowanie wielkich liter parametrów (np. %F, %D, %N), umożliwia "
-#~ "wykonanie czynności w odniesieniu do wielu plików. W przeciwnym wypadku, "
-#~ "polecenie uruchomione będzie tylko dla jednego pliku."
-
-#~ msgid ""
-#~ "Browse the file system to select an application to use for this action."
-#~ msgstr ""
-#~ "Przegląda system plików w poszukiwaniu programu do wykonania czynności"
-
-#~ msgid "Use Startup Notification"
-#~ msgstr "Powiadamianie o uruchamianiu"
-
-#~ msgid ""
-#~ "Enable this option if you want a waiting cursor to be shown while the "
-#~ "action is launched. This is also highly recommended if you have focus "
-#~ "stealing prevention enabled in your window manager."
-#~ msgstr ""
-#~ "Wyświetla kursor oczekiwania podczas wykonywania czynności. Opcja "
-#~ "rekomendowana także jeśli użyto opcji zapobiegania utraty zaznaczenia w "
-#~ "konfiguracji menedżera okien."
-
-#~ msgid "No icon"
-#~ msgstr "Brak"
-
-#~ msgid ""
-#~ "Click this button to select an icon file that will be displayed in the "
-#~ "context menu in addition to the action name chosen above."
-#~ msgstr "Wybiera ikonę wyświetlaną w menu obok nazwy czynności"
-
-#~ msgid ""
-#~ "The following command parameters will be\n"
-#~ "substituted when launching the action:"
-#~ msgstr ""
-#~ "Do skonfigurowania czynności można użyć\n"
-#~ "następujących oznaczeń:"
-
-#~ msgid "the path to the first selected file"
-#~ msgstr "ścieżka pierwszego zaznaczonego pliku,"
-
-#~ msgid "the paths to all selected files"
-#~ msgstr "ścieżki  wszystkich zaznaczonych plików,"
-
-#~ msgid "directory containing the file that is passed in %f"
-#~ msgstr "ścieżka położenia, w którym znajduje się plik określony jako %f,"
-
-#~ msgid "directories containing the files that are passed in %F"
-#~ msgstr "ścieżki położeń, w którym znajdują się pliki określone jako %F,"
-
-#~ msgid "the first selected filename (without path)"
-#~ msgstr "nazwa pierwszego zaznaczonego pliku,"
-
-#~ msgid "the selected filenames (without paths)"
-#~ msgstr "nazwy zaznaczonych plików."
-
-#~ msgid "Appears if selection contains:"
-#~ msgstr "Typy elementów:"
-
-#~ msgid "_Audio Files"
-#~ msgstr "Pliki nagrań _dźwiękowych"
-
-#~ msgid "_Image Files"
-#~ msgstr "Pliki _obrazów"
-
-#~ msgid "_Text Files"
-#~ msgstr "Pliki _tekstowe"
-
-#~ msgid "_Video Files"
-#~ msgstr "Pliki nagrań _wideo"
-
-#~ msgid "_Other Files"
-#~ msgstr "_Inne pliki"
-
-#~ msgid ""
-#~ "This page lists the conditions under which the\n"
-#~ "action will appear in the file managers context\n"
-#~ "menus. The file patterns are specified as a list\n"
-#~ "of simple file patterns separated by semicolons\n"
-#~ "(e.g. *.txt;*.doc). For an action to appear in the\n"
-#~ "context menu of a file or folder, atleast one of\n"
-#~ "these patterns must match the name of the file\n"
-#~ "or folder. Additionally, you can specify that the\n"
-#~ "action should only appear for certain kinds of\n"
-#~ "files."
-#~ msgstr ""
-#~ "Określa warunki wyświetlania czynności w menu\n"
-#~ "podręcznym menedżera plików.\n"
-#~ "Wzory stanowią listę prostych filtrów plików,\n"
-#~ "rozdzieloną średnikami (np. *.txt;*.doc). Aby\n"
-#~ "czynności pojawiła się w menu podręcznym danego\n"
-#~ "elementu, przynajmniej jeden z tych wzorów musi\n"
-#~ "do niego pasować. Ponadto można określić\n"
-#~ "dostępność czynności tylko dla pewnego typu plików."
-
-#~ msgid "Unknown element <%s>"
-#~ msgstr "Nieznany element <%s>"
-
-#~ msgid "End element handler called while in root context"
-#~ msgstr "Funkcja obsługi elementu zamykającego wywołana z głównego kontekstu"
-
-#~ msgid "Unknown closing element <%s>"
-#~ msgstr "Nieznany element zamykający <%s>"
-
-#~ msgid "Command not configured"
-#~ msgstr "Polecenie nie skonfigurowane"
-
-#~ msgid "Configure c_ustom actions..."
-#~ msgstr "_Czynności..."
-
-#~ msgid ""
-#~ "Setup custom actions that will appear in the file managers context menus"
-#~ msgstr "Otwiera okno czynności menu podręcznego"
-
-#~ msgid "Example for a custom action"
-#~ msgstr "Otwiera terminal w bieżącym położeniu"
-
-#~ msgid "Set as wallpaper"
-#~ msgstr "Ustaw jako tło pulpitu"
-
-#~ msgid "Browse the filesystem with the file manager"
-#~ msgstr "Przegląda system plików za pomocą menedżera plików"
-
-#~ msgid "Thunar File Manager"
-#~ msgstr "Menedżer plików Thunar"
-
-#~ msgid "Open Folder with Thunar"
-#~ msgstr "Otwórz katalog za pomocą menedżera plików Thunar"
-
-#~ msgid "Open the specified folders in Thunar"
-#~ msgstr "Otwiera wybrane katalogi za pomocą menedżera plików Thunar"
-
-#~ msgid "Configure the Thunar file manager"
-#~ msgstr "Konfiguruje preferencje menedżera plików Thunar"
-
-#~ msgid ""
-#~ "Failed to load fallback icon from \"%s\" (%s). Check your installation!"
-#~ msgstr ""
-#~ "Nie udało się wczytać ikony awaryjnej z „%s” (%s). Proszę sprawdzić "
-#~ "system!"
-
-#~ msgid "Unknown error"
-#~ msgstr "Nieznany błąd"
-
-#~ msgid "Moving files..."
-#~ msgstr "Przenoszenie plików..."
-
-#~ msgid "Failed to read folder contents"
-#~ msgstr "Nie udało się odczytać zawartości katalogu"
-
-#~ msgid "Failed to parse file"
-#~ msgstr "Nie udało się parsować pliku"
-
-#~ msgid "Invalid file name"
-#~ msgstr "Nieprawidłowa nazwa pliku"
-
-#~ msgid "Only local files may be renamed"
-#~ msgstr "Można zmieniać nazwy tylko lokalnych plików"
-
-#~ msgid "Failed to open \"%s\" for reading"
-#~ msgstr "Nie udało się otworzyć „%s” do odczytu"
-
-#~ msgid "Failed to open \"%s\" for writing"
-#~ msgstr "Nie udało się otworzyć „%s” do zapisu"
-
-#~ msgid "Failed to write data to \"%s\""
-#~ msgstr "Nie udało się zapisać do pliku „%s”"
-
-#~ msgid "Failed to read data from \"%s\""
-#~ msgstr "Nie udało się odczytać z pliku „%s”"
-
-#~ msgid "Failed to determine file info for \"%s\""
-#~ msgstr "Nie udało się odczytać atrybutów pliku „%s”"
-
-#~ msgid "Failed to create directory \"%s\""
-#~ msgstr "Nie udało się utworzyć katalogu „%s”"
-
-#~ msgid "Failed to create named fifo \"%s\""
-#~ msgstr "Nie udało się utworzyć kolejki FIFO „%s”"
-
-#~ msgid "Failed to create symbolic link \"%s\""
-#~ msgstr "Nie udało się utworzyć dowiązania „%s”"
-
-#~ msgid "Special files cannot be copied"
-#~ msgstr "Pliki specjalne nie mogą być kopiowane"
-
-#~ msgid "Symbolic links are not supported"
-#~ msgstr "Dowiązania nie są obsługiwane"
-
-#~ msgid "Failed to copy \"%s\" to \"%s\""
-#~ msgstr "Nie udało się skopiować „%s” do „%s”"
-
-#~ msgid "Failed to link \"%s\" to \"%s\""
-#~ msgstr "Nie udało się utworzyć dowiązania „%s” do „%s”"
-
-#~ msgid "Failed to move \"%s\" to \"%s\""
-#~ msgstr "Nie udało się przenieść „%s” do „%s”"
-
-#~ msgid "The URI \"%s\" does not refer to a valid resource in the trash"
-#~ msgstr "URI „%s” nie wskazuje na prawidłowy zasób w koszu"
-
-#~ msgid "Trash"
-#~ msgstr "Kosz"
-
-#~ msgid "Cannot move or copy files within the trash"
-#~ msgstr "Nie można przenosić ani kopiować plików w koszu"
-
-#~ msgid "Failed to remove \"%s\": %s"
-#~ msgstr "Nie udało się usunąć pliku  „%s”: %s"
-
-#~ msgid "Command"
-#~ msgstr "Polecenie"
-
-#~ msgid "The command to run the mime handler"
-#~ msgstr "Polecenie do wykonania dla typu mime"
-
-#~ msgid "Flags"
-#~ msgstr "Flagi"
-
-#~ msgid "The flags for the mime handler"
-#~ msgstr "Flagi dla typu mime"
-
-#~ msgid "The icon of the mime handler"
-#~ msgstr "Ikona dla typu mime"
-
-#~ msgid "The name of the mime handler"
-#~ msgstr "Nazwa typu mime"
-
-#~ msgid "%s document"
-#~ msgstr "dokument %s"
-
-#~ msgid "The URI \"%s\" is invalid"
-#~ msgstr "URI „%s” jest nieprawidłowy"
-
-#~ msgid "Path too long to fit into buffer"
-#~ msgstr "Ścieżka jest zbyt długa"
-
-#~ msgid "URI too long to fit into buffer"
-#~ msgstr "Identyfikator URI jest zbyt długi"
-
-#~ msgid "Operation not supported"
-#~ msgstr "Nie obsługiwana operacja"
-
-#~ msgid "Invalidly escaped characters"
-#~ msgstr "Niepoprawne sekwencje sterujące"
-
-#~ msgid "The desired thumbnail size"
-#~ msgstr "Rozmiar miniatury"
-
-#~ msgid "Failed to connect to the HAL daemon: %s"
-#~ msgstr "Nie można połączyć się z daemonem HAL: %s"
-
-#~ msgid "Create the folder \"%s\"?"
-#~ msgstr "Utworzyć nowy katalog „%s”?"
-
-#~ msgid "C_reate Folder"
-#~ msgstr "Utwórz _katalog..."
-
-#~ msgid "Failed to change group"
-#~ msgstr "Nie udało się zmienić grupy"
-
-#~ msgid "Failed to apply new permissions"
-#~ msgstr "Nie udało się zmienić uprawnień"
-
-#~ msgid ""
-#~ "Install the \"thunar-volman\" package to use\n"
-#~ "the volume management support in Thunar."
-#~ msgstr ""
-#~ "Aby użyć menedżera wolumenów, należy\n"
-#~ "zainstalować „thunar-volman”."
-
-#~ msgid ""
-#~ "Build thunar-vfs with HAL support to use\n"
-#~ "the volume management support in Thunar."
-#~ msgstr ""
-#~ "Aby użyć menedżera wolumenów, należy\n"
-#~ "skompilować „thunar-vfs” z obsługą HAL."
-
-#~ msgid "_Unmount Volume"
-#~ msgstr "_Odmontuj"
-
-#~ msgid "Failed to unmount \"%s\""
-#~ msgstr "Nie udało się odmontować „%s”"
-
-#~ msgid "File Manager Settings"
-#~ msgstr "Menedżer plików"
-
-#~ msgid "Thunar Settings"
-#~ msgstr "Thunar: %s\n"
-
-#~ msgid "%s (%s)"
-#~ msgstr "\"%s\" (%s) %s"
-
-#~ msgid "Views"
-#~ msgstr "Widoki"
-
-#~ msgid "Copyright (c) 2004-2006"
-#~ msgstr "Copyright (c) 2004-2006"
-
-#~ msgid "_Properties"
-#~ msgstr "_Właściwości"
-
-#~ msgid "_Hidden"
-#~ msgstr "Niewidoczny"
-
-#~ msgid "Don't display any location selector"
-#~ msgstr "Nie pokazuj bieżącego położenia"
-
-#~ msgid "Links from or to resources in the trash are not supported"
-#~ msgstr "Dowiązania z lub do śmietnika nie są obsługiwane"
-
-#~ msgid "Delete the selected file permanently"
-#~ msgid_plural "Delete the selected files permanently"
-#~ msgstr[0] "Usuń zaznaczony plik"
-#~ msgstr[1] "Usuń zaznaczone pliki"
-#~ msgstr[2] "Usuń zaznaczone pliki"
-
-#~ msgid "Failed to change permisions of \"%s\""
-#~ msgstr "Nie udało się zmienić praw dostępu do \"%s\": %s"
-
-#~ msgid "Failed to determine file info of \"%s\": %s"
-#~ msgstr "Nie udało się ustalić informacji o pliku \"%s\": %s"
-
-#~ msgid ""
-#~ "Failed to remove \"%s\".\n"
-#~ "\n"
-#~ "Do you want to skip it?"
-#~ msgstr ""
-#~ "Nie można usunąć \"%s\".\n"
-#~ "\n"
-#~ "Czy chcesz go pominąć?"
-
-#~ msgid ""
-#~ "Failed to create empty file \"%s\".\n"
-#~ "\n"
-#~ "Do you want to skip it?"
-#~ msgstr ""
-#~ "Nie można usunąć \"%s\".\n"
-#~ "\n"
-#~ "Czy chcesz go pominąć?"
-
-#~ msgid "Deleting directories..."
-#~ msgstr "Usuwam katalogi..."
-
-#~ msgid "Failed to remove directory \"%s\": %s"
-#~ msgstr "Nie można usunąć katalogu \"%s\": %s"
-
-#~ msgid "Cannot transfer the root directory"
-#~ msgstr "Nie mogę przenieść katalogu głównego"
-
-#~ msgid "Operation canceled"
-#~ msgstr "Operacja anulowana"
-
-#~ msgid "Failed to read link target from \"%s\""
-#~ msgstr "Nie można odczytać obiektu, na który wskazuje \"%s\""
-
-#~ msgid "Failed to copy special file \"%s\""
-#~ msgstr "Nie udało się skopiować pliku specjalnego \"%s\""
+#~ msgid "C_ompositing"
+#~ msgstr "Pozycja"
