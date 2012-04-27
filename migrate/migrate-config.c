@@ -155,8 +155,8 @@ migrate_config_action_48 (gpointer key,
   /* set the visible properties */
   g_snprintf (str, sizeof (str), "%s/items", prop);
   xfconf_channel_set_array (channel, str,
-                            G_TYPE_STRING, &first_action,
-                            G_TYPE_STRING, &second_action,
+                            G_TYPE_STRING, first_action,
+                            G_TYPE_STRING, second_action,
                             G_TYPE_INVALID);
 }
 
