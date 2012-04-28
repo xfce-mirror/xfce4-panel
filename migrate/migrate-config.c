@@ -125,6 +125,15 @@ migrate_config_action_48 (gpointer key,
       || g_strcmp0 (g_value_get_string (gvalue), "actions") != 0)
     return;
 
+  /* this is a bug that affects pre users: don't try to migrate
+   * when the appearance property is already set */
+  g_snprintf (str, sizeof (str), "%s/appearance", prop);
+  if (xfconf_channel_has_property (channel, str))
+    return;
+
+  /* set appearance to button mode */
+  xfconf_channel_set_uint (channel, str, 0);
+
   /* read and remove the old properties */
   g_snprintf (str, sizeof (str), "%s/first-action", prop);
   first_action_int = xfconf_channel_get_uint (channel, str, 0) + 1;
@@ -139,10 +148,6 @@ migrate_config_action_48 (gpointer key,
     first_action_int = 1;
   if (first_action_int == second_action_int)
     second_action_int = 0;
-
-  /* set appearance to button mode */
-  g_snprintf (str, sizeof (str), "%s/appearance", prop);
-  xfconf_channel_set_uint (channel, str, 0);
 
   /* set orientation */
   g_snprintf (str, sizeof (str), "%s/invert-orientation", prop);
