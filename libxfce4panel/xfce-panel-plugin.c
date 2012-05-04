@@ -2704,9 +2704,9 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
  *
  * Returns the path that can be used to store configuration information.
  * Don't use this function if you want to read from the config file, but
- * use xfce_panel_plugin_rc_location() instead.
+ * use xfce_panel_plugin_lookup_rc_file() instead.
  *
- * See also: xfce_panel_plugin_rc_location() and xfce_resource_save_location()
+ * See also: xfce_panel_plugin_lookup_rc_file() and xfce_resource_save_location()
  *
  * Returns: The path to a config file or %NULL if no file was found.
  *          The returned string must be freed u sing g_free().
