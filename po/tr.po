@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-13 20:12+0000\n"
+"POT-Creation-Date: 2012-05-05 06:36+0000\n"
 "PO-Revision-Date: 2010-05-15 00:16+0300\n"
 "Last-Translator: Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org,xfce-i18n@xfce.org>\n"
@@ -195,13 +195,11 @@ msgstr "%s 'in hiçbir çalışan örneği bulunamadı"
 msgid "Failed to launch the migration application"
 msgstr "Göç uygulaması çalıştırılamadı"
 
-#: ../panel/panel-application.c:936
-#, fuzzy
+#: ../panel/panel-application.c:953
 msgid "Create _Launcher"
-msgstr "Xfce Panelinde Başlatıcı oluştur"
+msgstr "Baş_latıcı oluştur"
 
-#: ../panel/panel-application.c:937
-#, fuzzy
+#: ../panel/panel-application.c:954
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -209,24 +207,24 @@ msgstr ""
 "Bu davranış panelde yeni bir uygulama başlatıcısı yaratacak ve sürükleyip "
 "bırakılan dosyaları menü öğesi olarak ekleyecek."
 
-#: ../panel/panel-application.c:939
+#: ../panel/panel-application.c:956
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d masaüstü dosyasından yeni bir başlatıcı yarat"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1690
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 "Oturum yöneticisi olmadan X başlamıştır. Çık tıklamak X sunucusu kapanacak."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1691
 msgid "Are you sure you want to quit the panel?"
 msgstr "Paneli kapatmak istediğinizden emin misiniz?"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1699
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" komutu çalıştırılamadı"
@@ -440,7 +438,9 @@ msgstr "Seçili öğeyi düzenle"
 #, fuzzy
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Panel için şeffakflık ayarlarını görüntülemek için pencere yöneticisinde birleştirmeyi etkinleştir."
+msgstr ""
+"Panel için şeffakflık ayarlarını görüntülemek için pencere yöneticisinde "
+"birleştirmeyi etkinleştir."
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 #: ../plugins/actions/actions-dialog.glade.h:4
@@ -522,7 +522,10 @@ msgstr "Bir Arkaplan Resmi Seç"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Bu seçeneği, genişletişmiş pencerenin panelin arkasındaki alanı da kaplamasını istiyorsanız seçin. Bu, sadece panel bir ekran kenarına iliştirilmişse işe yarar."
+msgstr ""
+"Bu seçeneği, genişletişmiş pencerenin panelin arkasındaki alanı da "
+"kaplamasını istiyorsanız seçin. Bu, sadece panel bir ekran kenarına "
+"iliştirilmişse işe yarar."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
@@ -641,9 +644,8 @@ msgid "Expert"
 msgstr "Uzman"
 
 #: ../panel/panel-window.c:2390
-#, fuzzy
 msgid "_Lock Panel"
-msgstr "Paneli _Kilitle"
+msgstr "Pane_li Kilitle"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
@@ -732,7 +734,9 @@ msgstr "Oturum Menüsü"
 #, fuzzy
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Bazı işlevler için 30 saniyelik bir gerisayımı çalıştıran doğrulama iletişim kutusu göster."
+msgstr ""
+"Bazı işlevler için 30 saniyelik bir gerisayımı çalıştıran doğrulama iletişim "
+"kutusu göster."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
