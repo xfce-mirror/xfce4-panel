@@ -60,6 +60,7 @@
 
 
 static void      panel_application_finalize           (GObject                *object);
+static gboolean  panel_application_autosave_timer     (gpointer                user_data);
 static void      panel_application_plugin_move        (GtkWidget              *item,
                                                        PanelApplication       *application);
 static gboolean  panel_application_plugin_insert      (PanelApplication       *application,
@@ -123,6 +124,9 @@ struct _PanelApplication
 
   /* internal list of opened dialogs */
   GSList             *dialogs;
+
+  /* autosave timer for plugins */
+  guint               autosave_timer_id;
 
 #ifdef GDK_WINDOWING_X11
   guint               wait_for_wm_timeout_id;
@@ -220,6 +224,10 @@ panel_application_init (PanelApplication *application)
 
   /* get a factory reference so it never unloads */
   application->factory = panel_module_factory_get ();
+
+  /* start the autosave timer for plugins */
+  application->autosave_timer_id = g_timeout_add_seconds (60 * 10,
+      panel_application_autosave_timer, application);
 }
 
 
@@ -230,6 +238,14 @@ panel_application_finalize (GObject *object)
   PanelApplication *application = PANEL_APPLICATION (object);
 
   panel_return_if_fail (application->dialogs == NULL);
+
+  if (application->autosave_timer_id != 0)
+    {
+      g_source_remove (application->autosave_timer_id);
+
+      /* save plugins */
+      panel_application_autosave_timer (application);
+    }
 
 #ifdef GDK_WINDOWING_X11
   /* stop autostart timeout */
@@ -247,6 +263,19 @@ panel_application_finalize (GObject *object)
   panel_debug (PANEL_DEBUG_APPLICATION, "finalized");
 
   (*G_OBJECT_CLASS (panel_application_parent_class)->finalize) (object);
+}
+
+
+
+static gboolean
+panel_application_autosave_timer (gpointer user_data)
+{
+  PanelApplication *application = PANEL_APPLICATION (user_data);
+
+  /* emit a save signal for the plugins */
+  panel_application_save (application, SAVE_PLUGIN_PROVIDERS);
+
+  return TRUE;
 }
 
 
