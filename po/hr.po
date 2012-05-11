@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-02 19:09+0000\n"
-"PO-Revision-Date: 2010-06-11 23:34+0200\n"
-"Last-Translator: Ivica Kolić<ikoli@yahoo.com> <>\n"
+"POT-Creation-Date: 2012-05-11 17:51+0000\n"
+"PO-Revision-Date: 2012-05-11 20:53+0100\n"
+"Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; p xfce4-panellural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; p xfce4-panellural=(n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
@@ -40,13 +41,13 @@ msgstr "Ploča"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1094
+#: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeste li sigurni da želite ukloniti \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1097
+#: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ako uklonite stavku sa ploče,biti će trajno izgubljena."
 
@@ -186,28 +187,28 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "Neuspjelo pokretanje programa premještanja"
 
-#: ../panel/panel-application.c:955
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Napravi _pokretač "
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
 
-#: ../panel/panel-application.c:958
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Napravi novi pokretač iz %d datoteke radne površine"
 msgstr[1] "Napravi novi pokretač iz %d datoteka radne površine"
 
-#: ../panel/panel-application.c:1692
+#: ../panel/panel-application.c:1719
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -215,11 +216,11 @@ msgstr ""
 "Pokrenuli ste X bez upravitelja sesijama.Klik na Isključi će zatvoriti X "
 "poslužitelj."
 
-#: ../panel/panel-application.c:1693
+#: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeste li sigurni da želite iskjlučiti ploču?"
 
-#: ../panel/panel-application.c:1701
+#: ../panel/panel-application.c:1728
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Neuspjeh u izvršenju naredbe \"%s\""
@@ -237,7 +238,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
-msgstr ""
+msgstr "Održavatelji"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
@@ -245,7 +246,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr ""
+msgstr "Neaktivni održavatelji"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
@@ -264,7 +265,7 @@ msgstr "Dodaj novu stavku"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Izaberite ploču za novi priključak"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
 msgstr "Ploča %d"
@@ -315,41 +316,41 @@ msgstr ""
 "Izvrši ploča će pokušati ponovo pokrenuti priključak,u protivnom će biti "
 "trajno uklonjen sa ploče."
 
-#: ../panel/panel-preferences-dialog.c:467
+#: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
 msgstr "Automatski"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
 msgstr "Zaslon %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:512
+#: ../panel/panel-preferences-dialog.c:517
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:867
+#: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Ploča i konfiguracija priključaka biti će trajno uklonjena"
 
-#: ../panel/panel-preferences-dialog.c:868
+#: ../panel/panel-preferences-dialog.c:873
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Jeste li sigurni da želite ukloniti ploču %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:953
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -358,7 +359,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr ""
@@ -446,8 +447,7 @@ msgstr "D_užina (%):"
 msgid "M_ode:"
 msgstr ""
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "Mjerenja"
@@ -672,7 +672,7 @@ msgstr "Neuspjelo premještanje postojeće konfiguracije"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Konfiguracija ploče je dopunjena."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 msgid "Action"
@@ -702,7 +702,7 @@ msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
-msgstr ""
+msgstr "Vidljivo"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
@@ -710,7 +710,7 @@ msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "_Pokaži dijalog potvrde"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -727,7 +727,7 @@ msgstr "Jeste li sigurni da se želite odjaviti?"
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "Odjava za %s sekundi."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
@@ -739,11 +739,11 @@ msgstr "Odja_va..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
-msgstr ""
+msgstr "Zamjeni korisnika"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "_Zamjeni korisnika"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
@@ -802,7 +802,7 @@ msgstr "Jeste li sigurni da želite ponovno pokrenuti?"
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Ponovno pokretanje računal za %s sekundi."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -819,7 +819,7 @@ msgstr "Jeste li sigurni da želite iskjlučiti?"
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Isključivanje računala za %s sekundi."
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
@@ -827,14 +827,14 @@ msgstr ""
 msgid "Separator"
 msgstr "Razdjelnik"
 
-#: ../plugins/actions/actions.c:974
+#: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr ""
 
-#: ../plugins/actions/actions.c:1141
+#: ../plugins/actions/actions.c:1142
 msgid "John Doe"
-msgstr ""
+msgstr "John Doe"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1014,8 +1014,7 @@ msgstr "Prikaži _sekunde"
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "N_ejasnost"
@@ -1420,7 +1419,7 @@ msgstr "Napredno"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "D_elete Item"
-msgstr ""
+msgstr "I_zbriši stavku"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
@@ -1492,7 +1491,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "_Edit Item"
-msgstr ""
+msgstr "_Uredi stavku"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
