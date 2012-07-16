@@ -20,7 +20,7 @@ msgstr ""
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
+msgstr "مەزكۇر ئۈستەلئۈستى ھۆججىتىدىكى ئۇچۇرلارغا ئاساسەن يېڭىدىن ئىجراچىنى كۆزنەككە(panel) قوشىدۇ"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -55,7 +55,7 @@ msgstr "يۆتكە(_M)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1236
 msgid "Pane_l"
-msgstr ""
+msgstr "كۆزنەك(_L)"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
@@ -106,7 +106,7 @@ msgstr "ئىجرا بولۇۋاتقان كۆزنەك ئۈلگىسىنى توخت
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "باشلانغاندا ھۆججەت باشقۇرغۇنى كۈتمىسۇن"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -175,7 +175,7 @@ msgstr "D-Bus ئۇچۇرىنى ئەۋەتىش مەغلۇپ بولدى"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "كۆزنەكنى باشلىغۇڭىز بارمۇ؟ شۇنداق بولسا، چىقىدىغان چاغدا چوقۇم ئەڭگىمەنى ساقلىشىڭىز كېرەك. شۇنىڭ بىلەن كېيىنكى قېتىم كىرگەندە ئاپتوماتىك باشلىنىدۇ."
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
@@ -188,29 +188,29 @@ msgstr "migration پروگراممىسىنى ئىجرا قىلىش مەغلۇپ 
 
 #: ../panel/panel-application.c:953
 msgid "Create _Launcher"
-msgstr ""
+msgstr "ئىجراچى قۇر(_L)"
 
 #: ../panel/panel-application.c:954
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "بۇ قىستۇرما كۆزنىكىگە يېڭى ئىجراچى قۇرىدۇ ۋە تاشلانغان ھۆججەتنى تىزىملىك سۈپىتىدە ئىشلىتىدۇ."
 
 #: ../panel/panel-application.c:956
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
+msgstr[0] "ئۈستەلئۈستى ھۆججىتى %d دىن ئىجراچى قۇرۇش"
 
 #: ../panel/panel-application.c:1690
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
+msgstr "ئەڭگىمە باشقۇرغىنى ئىشلەتمەي X نى قوزغاتتىڭىز. ئاخىرلاشتۇر نى باسسىڭىز X مۇلازىمېتىرى ئاخىرلىشىدۇ."
 
 #: ../panel/panel-application.c:1691
 msgid "Are you sure you want to quit the panel?"
-msgstr ""
+msgstr "راستلا كۆزنەك(panel) ئاخىرلاشتۇرغۇڭىز بارمۇ؟"
 
 #: ../panel/panel-application.c:1699
 #, c-format
@@ -226,11 +226,11 @@ msgstr "قىستۇرما event نىڭ يېزىلىشى توغرا ئەمەس. PL
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
+msgstr "بېشارەت ئۇچۇرى «%s» ئىناۋەتسىز. ئىناۋەتلىك تىپلار bool، double، int، string ۋە uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
-msgstr ""
+msgstr "مەسئۇل كىشىلەر"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
@@ -238,7 +238,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr ""
+msgstr "پاسسىپ مەسئۇل كىشىلەر"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
@@ -332,7 +332,7 @@ msgstr "كۆزنەك %d نى راستلا ئۆچۈرەمسىز؟"
 #: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(سىرتقى)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -341,7 +341,8 @@ msgstr ""
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
+msgstr "ئىچكى ئاتى: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -366,7 +367,7 @@ msgstr "بۇ كۆزنەككە يېڭى تۈر قوش"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr ""
+msgstr "كۆزنەك تەگلىكىنىڭ ئالفا قىممىتى، 0 بولسا تولۇق سۈزۈك، 100 بولسا تولۇق تۇتۇق."
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Appeara_nce"
@@ -390,15 +391,15 @@ msgstr "رەڭ(_o):"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "D_isplay"
-msgstr ""
+msgstr "كۆرسەتكۈچ(_I)"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Deskbar"
-msgstr ""
+msgstr "ئۈستەل بالداق"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "گىرۋەكلىرىدە بوشلۇق قالدۇرمىسۇن(_R)"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:11
@@ -436,7 +437,7 @@ msgstr "شەكىل(_O):"
 #. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
-msgstr ""
+msgstr "ئۆلچەملىرى"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/launcher/launcher-dialog.glade.h:15
@@ -454,7 +455,7 @@ msgstr "يوق(سىستېما ئۇسلۇبىنى ئىشلىتىدۇ)"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Num_ber of rows:"
-msgstr ""
+msgstr "قۇر سانى(_B):"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
@@ -466,7 +467,7 @@ msgstr "غۇۋالىقى"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Pick a Panel Color"
-msgstr ""
+msgstr "كۆزنەك رەڭگىنى ئېلىش"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Remove currently selected item"
@@ -478,11 +479,11 @@ msgstr "ھازىرقى كۆزنەكنى ئۆچۈر"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "قۇر چوڭلۇقى (پىكسېل)"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
-msgstr "[fuzzy]تەگلىك رەسىمىنى تاللاش"
+msgstr "تەگلىك رەسىمىنى تاللاش"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
@@ -541,7 +542,7 @@ msgstr "ۋېرتىكال"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Alpha:"
-msgstr ""
+msgstr "ئالفا(_A):"
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:48
@@ -592,11 +593,11 @@ msgstr "مۇتەخەسسىس"
 
 #: ../panel/panel-window.c:2390
 msgid "_Lock Panel"
-msgstr ""
+msgstr "كۆزنەكنى قۇلۇپلا(_L)"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
-msgstr ""
+msgstr "تۇنجى كۆزنەككە مەرھابا"
 
 #: ../migrate/main.c:125
 msgid ""
@@ -630,7 +631,7 @@ msgstr "بىر قۇرۇق كۆزنەك"
 
 #: ../migrate/main.c:149
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "بىر قۇرۇق كۆزنەك بىلەن باشلا"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
@@ -642,15 +643,15 @@ msgstr "كۆڭۈلدىكى تەڭشەكنى ئوقۇش مەغلۇپ بولدى"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "كۆزنەك سەپلىمىسىنى كۆچۈرۈپ كېلىش زۆرۈر…"
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "مەۋجۇت سەپلىمىنى كۆچۈرۈپ كېلىش مەغلۇپ بولدى"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "كۆزنەك سەپلىمىسى يېڭىلاندى."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 msgid "Action"
@@ -663,11 +664,11 @@ msgstr "مەشغۇلات توپچىلىرى"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Appeara_nce:"
-msgstr ""
+msgstr "كۆرۈنۈشى(_N):"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "توپچىلارنىڭ يۆنىلىشىنى ئالماشتۇر(_O)"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Session Menu"
@@ -688,7 +689,7 @@ msgstr "مەشغۇلاتلار(_A)"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "جەزملەش سۆزلەشكۈسى كۆرسەت(_S)"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -705,15 +706,15 @@ msgstr "تىزىمدىن راستلا چىقامسىز؟"
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "يەنە %d سېكۇنتتىن كېيىن چىقىپ كېتىدۇ."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr ""
+msgstr "چىقىش…"
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr ""
+msgstr "چىقىش(_O)…"
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
@@ -729,7 +730,7 @@ msgstr "ئېكران قۇلۇپلا"
 
 #: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
-msgstr ""
+msgstr "ئېكران قۇلۇپلا(_K)"
 
 #: ../plugins/actions/actions.c:180
 msgid "Hibernate"
@@ -741,12 +742,12 @@ msgstr "ئۈچەككە كىر(_H)"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "دىسكىغا توڭلىتامسىز؟"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "يەنە %d سېكۇنتتىن كېيىن ئۈچەككە كىرىدۇ."
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
@@ -754,16 +755,16 @@ msgstr "توڭلات"
 
 #: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
-msgstr ""
+msgstr "توڭلات(_P)"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "ئەسلەككە توڭلىتامسىز؟"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "يەنە %d سېكۇنتتىن كېيىن توڭلاپ قالىدۇ."
 
 #: ../plugins/actions/actions.c:196
 msgid "Restart"
@@ -775,12 +776,12 @@ msgstr "قايتا قوزغات(_R)"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr ""
+msgstr "راستلا قايتا قوزغىتامسىز؟"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "يەنە %d سېكۇنتتىن كېيىن قايتا قوزغىلىدۇ."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -788,7 +789,7 @@ msgstr "توكنى ئۇز"
 
 #: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
-msgstr ""
+msgstr "تاقا(_D)"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
@@ -797,7 +798,7 @@ msgstr "راستلا توكنى ئۈزەمسىز؟"
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "يەنە %d سېكۇنتتىن كېيىن كومپيۇتېر تاقىلىدۇ."
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
@@ -808,11 +809,11 @@ msgstr "ئايرىغۇچ"
 #: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr ""
+msgstr "مەشغۇلات «%s» ئىجرا قىلىش مەغلۇپ بولدى"
 
 #: ../plugins/actions/actions.c:1142
 msgid "John Doe"
-msgstr ""
+msgstr "John Doe"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -842,7 +843,7 @@ msgstr "توپچا ماۋزۇسى(_T):"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "تىزىملىك تەھرىرلە(_I)"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Menu File"
@@ -913,7 +914,7 @@ msgstr "پروگرامما تىزىملىكىنى ئوقۇش مەغلۇپ بول
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "[fuzzy]ئورنىتىلغان پروگراممىلارنىڭ كاتېگورىيىسى بار تىزىملىكنى كۆرسەت"
+msgstr "ئورنىتىلغان پروگراممىلارنىڭ كاتېگورىيىسى بار تىزىملىكنى كۆرسەت"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -963,7 +964,7 @@ msgstr "24-سائەت (_H)"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
-msgstr ""
+msgstr "ئانالوگ"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Binary"
@@ -993,7 +994,7 @@ msgstr "فورماتى(_O)"
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
-msgstr ""
+msgstr "مۈجمەللىكى(_U):"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Fl_ash time separators"
@@ -1022,7 +1023,7 @@ msgstr "ئاكتىپ بولمىغان چېكىتلەرنى كۆرسەت(_I)"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Show gri_d"
-msgstr ""
+msgstr "سېتكىلارنى كۆرسەت(_D)"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
@@ -1043,7 +1044,7 @@ msgstr "ئورۇنلاشتۇرۇلۇشى(_L)"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "_Tooltip format:"
-msgstr ""
+msgstr "كۆرسەتمە پىچىمى(_T):"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
@@ -1075,7 +1076,7 @@ msgstr "كەچ"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr ""
+msgstr "تۇم كېچە"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
@@ -1290,22 +1291,22 @@ msgstr "پروگرامما «%s» نى ئىجرا قىلغىلى بولمىدى"
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "«%s» نىڭ مەزمۇنىنى سوراش مەغلۇپ بولدى"
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr ""
+msgstr "«%s» نى بىر تەرەپ قىلىدىغان كۆڭۈلدىكى پروگرامما يوق"
 
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr ""
+msgstr "«%s» نى بىر تەرەپ قىلىدىغان كۆڭۈلدىكى پروگراممىنى ئىجرا قىلىش مەغلۇپ بولدى"
 
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "«%s» نى بىر تەرەپ قىلىدىغان ئامراق پروگراممىنى ئىجرا قىلىش مەغلۇپ بولدى"
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
@@ -1317,7 +1318,7 @@ msgstr "تېرمىنالدا ئېچىش"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "مۇندەرىجە دەرىخىنى تىزىملىكتە كۆرسىتىدۇ"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid ""
@@ -1350,7 +1351,7 @@ msgstr "ھۆججەت ئەندىزىسى(_F):"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr ""
+msgstr "ئىجراچى تىزىملىكىنى ئاچ"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
@@ -1379,7 +1380,7 @@ msgstr "نامسىز تۈر"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add Appli_cation"
-msgstr ""
+msgstr "پروگرامما قوش(_C)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "Add a new empty item"
@@ -1395,7 +1396,7 @@ msgstr "ئالىي"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "D_elete Item"
-msgstr ""
+msgstr "تۈرنى ئۆچۈر(_E)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
@@ -1424,11 +1425,11 @@ msgstr "ئىجراچى"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "New _Application"
-msgstr ""
+msgstr "يېڭى پروگرامما(_A)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "New _Link"
-msgstr ""
+msgstr "يېڭى ئۇلانما(_L)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
@@ -1446,7 +1447,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "سىنبەلگىنى ئەمەس ئەننى كۆرسەتسۇن(_L)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
@@ -1462,15 +1463,15 @@ msgstr "غەرب"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "_Arrow button position:"
-msgstr ""
+msgstr "يا ئوق توپچىسىنىڭ ئورنى(_A):"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "_Edit Item"
-msgstr ""
+msgstr "تۈر تەھرىرلە(_E)"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "تاللانما تىزىملىكى بار ئىجراچى"
 
 #: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
@@ -1478,7 +1479,7 @@ msgstr "خىزمەت رايونى تەڭشەكلىرى..."
 
 #: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "خىزمەت رايونى تەڭشەكلىرى ئاچقىلى بولمىدى"
 
 #: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
@@ -1515,7 +1516,7 @@ msgstr "خىزمەت رايونى ئالماشتۇرغۇ"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
-msgstr "مەۋھۇم ئۈستەل يۈزلىرىنى ئۆزئارا ئالماشتۇرسۇن"
+msgstr "مەۋھۇم ئۈستەلۈستىلىرىنى ئۆزئارا ئالماشتۇرسۇن"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "Dots"
@@ -1523,7 +1524,7 @@ msgstr "چېكىتلەر"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
-msgstr ""
+msgstr "تۇتقۇ"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
@@ -1539,7 +1540,7 @@ msgstr "كۆزنەكتىكى تۈرلەر ئارىسىغا ئايرىغۇ ياك
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
-msgstr ""
+msgstr "كىچىكلىتىلگەن كۆزنەكنى ئەسلىگە كەلتۈرىدۇ"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
@@ -1548,15 +1549,15 @@ msgstr "بارلىق ئېچىلغان كۆزنەكلەرنى كىچىكلىتى�
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
-msgstr "ئۈستەل يۈزىنى كۆرسەت"
+msgstr "ئۈستەلئۈستىنى كۆرسەت"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
-msgstr "ھەممە كۆزنەكلەرنى يوشۇرۇپ ئۈستەل يۈزىنى كۆرسەتسۇن"
+msgstr "ھەممە كۆزنەكلەرنى يوشۇرۇپ ئۈستەلئۈستىنى كۆرسەتسۇن"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr ""
+msgstr "ئۇقتۇرۇش رايونىنى باشلىغىلى بولمىدى"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
@@ -1567,7 +1568,7 @@ msgstr ""
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "ئۇقتۇرۇش رايونى تاللانمىدى"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1575,11 +1576,11 @@ msgstr "بىلىدىغان پروگراممىلارنى تىزىملىكتىن �
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
-msgstr ""
+msgstr "تونۇش پروگراممىلارنى تازىلا(_L)"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Known Applications"
-msgstr "مەلۇملۇق پىروگراممالار"
+msgstr "مەلۇملۇق پروگراممىلار"
 
 #: ../plugins/systray/systray-dialog.glade.h:4
 #: ../plugins/systray/systray.desktop.in.h:2
@@ -1588,7 +1589,7 @@ msgstr "ئۇقتۇرۇش رايونى"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "سىنبەلگىنىڭ ئەڭ چوڭ چوڭلۇقى (px):"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
@@ -1609,11 +1610,11 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "گۇرۇپپا ماۋزۇسى ۋە ۋاقىت"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "گۇرۇپپا ماۋزۇسى ۋە كۆزنەك ماۋزۇسى"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Never"
@@ -1621,7 +1622,7 @@ msgstr "زادىلا"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "يوق، سۆرەپ-تاشلاشقا ئىجازەت"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
@@ -1637,7 +1638,7 @@ msgstr "handle كۆرسەتسۇن(_H)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
-msgstr ""
+msgstr "توپچا ئەنلىرىنى كۆرسەتسۇن(_L)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show only _minimized windows"
@@ -1645,11 +1646,11 @@ msgstr "كىچىكلىتىلگەن كۆزنەكلەرنىلا كۆرسەت"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgstr "بارلىق خىزمەت رايونى ياكى كۆرۈش ئېغىزلىرىدىكى كۆزنەكلەرنى كۆرسەتسۇن(_A)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from all mo_nitors"
-msgstr ""
+msgstr "بارلىق كۆزەتكۈچلەردىكى كۆزنەكلەرنى كۆرسەتسۇن(_N)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
@@ -1670,7 +1671,7 @@ msgstr "كۆزنەك توپچىلىرى"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
-msgstr ""
+msgstr "كۆزنەك گۇرۇپپىلاش(_G):"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Window title"
@@ -1678,7 +1679,7 @@ msgstr "كۆزنەك ماۋزۇسى"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "چاشقىنەك غالتىكى ئارقىلىق كۆزنەكلەرنى ئالماشتۇرسۇن(_S)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
@@ -1714,7 +1715,7 @@ msgstr "كۆزنەك يوق"
 
 #: ../plugins/windowmenu/windowmenu.c:1261
 msgid "Urgent Windows"
-msgstr ""
+msgstr "جىددىي كۆزنەكلەر"
 
 #: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
@@ -1732,15 +1733,15 @@ msgstr "خىزمەت رايونى %d نى ئۆچۈر"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Arrow"
-msgstr "يا ئوق"
+msgstr "ياق ئوقى"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Button layout:"
-msgstr ""
+msgstr "توپچا ئورۇنلاشتۇرۇلۇشى:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Enable _urgency notification"
-msgstr ""
+msgstr "جىددىي ئۇقتۇرۇشلارغا ئىجازەت(_U)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Icon"
@@ -1756,7 +1757,7 @@ msgstr "خىزمەت رايونى ئاتىنى كۆرسەتسۇن(_N)"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show workspace a_ctions"
-msgstr ""
+msgstr "خىزمەت رايونى مەشغۇلاتلىرى"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
