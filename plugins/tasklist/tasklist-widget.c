@@ -94,7 +94,8 @@ enum
   PROP_SHOW_WIREFRAMES,
   PROP_SHOW_HANDLE,
   PROP_SORT_ORDER,
-  PROP_WINDOW_SCROLLING
+  PROP_WINDOW_SCROLLING,
+  PROP_INCLUDE_ALL_BLINKING
 };
 
 struct _XfceTasklistClass
@@ -154,6 +155,10 @@ struct _XfceTasklist
 
   /* switch window with the mouse wheel */
   guint                 window_scrolling : 1;
+
+  /* whether we show blinking windows from all workspaces
+   * or only the active workspace */
+  guint                 all_blinking : 1;
 
   /* whether we only show windows that are in the geometry of
    * the monitor the tasklist is on */
@@ -460,6 +465,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_INCLUDE_ALL_BLINKING,
+                                   g_param_spec_boolean ("include-all-blinking",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         EXO_PARAM_READWRITE));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
                                                              NULL,
@@ -536,6 +548,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_handle = TRUE;
   tasklist->all_monitors = TRUE;
   tasklist->window_scrolling = TRUE;
+  tasklist->all_blinking = TRUE;
   xfce_tasklist_geometry_set_invalid (tasklist);
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
@@ -622,6 +635,10 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_boolean (value, tasklist->window_scrolling);
       break;
 
+    case PROP_INCLUDE_ALL_BLINKING:
+      g_value_set_boolean (value, tasklist->all_blinking);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -690,6 +707,10 @@ xfce_tasklist_set_property (GObject      *object,
 
     case PROP_WINDOW_SCROLLING:
       tasklist->window_scrolling = g_value_get_boolean (value);
+      break;
+
+    case PROP_INCLUDE_ALL_BLINKING:
+      tasklist->all_blinking = g_value_get_boolean (value);
       break;
 
     default:
@@ -2220,7 +2241,9 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
       || (active_ws != NULL
           && (G_UNLIKELY (wnck_workspace_is_virtual (active_ws))
               ? wnck_window_is_in_viewport (child->window, active_ws)
-              : wnck_window_is_on_workspace (child->window, active_ws))))
+              : wnck_window_is_on_workspace (child->window, active_ws)))
+      || (tasklist->all_blinking
+          && xfce_arrow_button_get_blinking (XFCE_ARROW_BUTTON (child->button))))
     {
       return (!tasklist->only_minimized
               || wnck_window_is_minimized (child->window));
@@ -2441,9 +2464,10 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
                                     WnckWindowState    new_state,
                                     XfceTasklistChild *child)
 {
-  gboolean      blink;
-  WnckScreen   *screen;
-  XfceTasklist *tasklist;
+  gboolean       blink;
+  WnckScreen    *screen;
+  XfceTasklist  *tasklist;
+  WnckWorkspace *active_ws;
 
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (child->window == window);
@@ -2490,11 +2514,27 @@ xfce_tasklist_button_state_changed (WnckWindow        *window,
   if (PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_DEMANDS_ATTENTION)
       || PANEL_HAS_FLAG (changed_state, WNCK_WINDOW_STATE_URGENT))
     {
-      /* only start blinking if the window requesting urgentcy
+      /* only start blinking if the window requesting urgency
        * notification is not the active window */
       blink = wnck_window_or_transient_needs_attention (window);
       if (!blink || (blink && !wnck_window_is_active (window)))
-        xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
+        {
+          /* if we have all_blinking set make sure we toggle visibility of the button
+           * in case the window is not in the current workspace */
+          active_ws = wnck_screen_get_active_workspace (child->tasklist->screen);
+          if (child->tasklist->all_blinking && blink
+              && !xfce_tasklist_button_visible (child, active_ws))
+            {
+              gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child->button), FALSE);
+              gtk_widget_show (child->button);
+            }
+
+          xfce_arrow_button_set_blinking (XFCE_ARROW_BUTTON (child->button), blink);
+
+          if (child->tasklist->all_blinking
+              && !xfce_tasklist_button_visible (child, active_ws))
+            gtk_widget_hide (child->button);
+        }
     }
 }
 
@@ -2776,9 +2816,12 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
   else
     {
       /* we only change worksapces/viewports for non-pinned windows
-       * and if all workspaces/viewports are shown */
-      if (child->tasklist->all_workspaces
+       * and if all workspaces/viewports are shown or if we have
+       * all blinking enabled and the current button is blinking */
+      if ((child->tasklist->all_workspaces
           && !wnck_window_is_pinned (child->window))
+          || (child->tasklist->all_blinking
+              && xfce_arrow_button_get_blinking (XFCE_ARROW_BUTTON (child->button))))
         {
           workspace = wnck_window_get_workspace (child->window);
 
