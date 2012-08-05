@@ -253,7 +253,6 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-handle", "active")
   TASKLIST_DIALOG_BIND ("sort-order", "active")
   TASKLIST_DIALOG_BIND ("window-scrolling", "active")
-  TASKLIST_DIALOG_BIND ("include-all-blinking", "active")
 
 #ifndef GDK_WINDOWING_X11
   /* not functional in x11, so avoid confusion */
