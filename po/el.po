@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel git version\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-08 19:27+0000\n"
-"PO-Revision-Date: 2012-04-11 21:37+0300\n"
+"POT-Creation-Date: 2012-08-19 14:39+0000\n"
+"PO-Revision-Date: 2012-08-22 19:54+0300\n"
 "Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
 "Language-Team: Ελληνικά, Σύγχρονα <opensuse-translation-el@opensuse.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -93,7 +93,7 @@ msgstr "Εμφάνιση του διαλόγου 'Προσθήκη νέων αν
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
-msgstr "Αποθήκευση ρυθμίσεων"
+msgstr "Αποθήκευση ρυθμίσεων ταμπλό"
 
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
@@ -113,7 +113,7 @@ msgstr "Τερματισμός της εκτελούμενης διεργασί�
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "Μην αναμένετε για τον διαχειριστή παραθύρων στην έναρξη"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -193,28 +193,30 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία του %s"
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "Απέτυχε η εκτέλεση της εφαρμογής μεταφοράς ρυθμίσεων"
 
-#: ../panel/panel-application.c:936
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Δημιουργία _εκκινητή"
 
-#: ../panel/panel-application.c:937
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
+"Αυτό θα δημιουργήσει νέο πρόσθετο εκκινητή στο ταμπλό και εισάγει τα αρχεία "
+"ως αντικείμενα του μενού."
 
-#: ../panel/panel-application.c:939
-#, fuzzy, c-format
+#: ../panel/panel-application.c:985
+#, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "Δημιουργία μίας νέας εκκίνησης προγράμματος στο ταμπλό του Χfce"
-msgstr[1] "Δημιουργία μίας νέας εκκίνησης προγράμματος στο ταμπλό του Χfce"
+msgstr[0] "Δημιουργία νέου εκκινητή από το αρχείο %d της επιφάνειας εργασίας"
+msgstr[1] "Δημιουργία νέου εκκινητή από τα αρχεία %d της επιφάνειας εργασίας"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1719
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -222,11 +224,11 @@ msgstr ""
 "Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας έξοδος θα "
 "κλείσει ο X server."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
 msgstr "Είστε σίγουροι ότι θέλετε να κλείσετε το ταμπλό;"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1728
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Αδυναμία εκτέλεσης της εντολής \"%s\""
@@ -252,7 +254,7 @@ msgstr "Συντηρητές"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Κατάσταση Deskbar"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -268,7 +270,8 @@ msgstr ""
 "Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\n"
 "Σταύρος Γιαννούρης <stavrosg@hellug.gr>\n"
 "Στάθης Καμπέρης <ekamperi@auth.gr>\n"
-"Σπύρος Γεωργαράς <sng@hellug.gr>"
+"Σπύρος Γεωργαράς <sng@hellug.gr>\n"
+"Ευστάθιος Ιωσηφίδης <iosifidis@opensuse.org>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
@@ -427,11 +430,11 @@ msgstr "Πρ_οβολή"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Deskbar"
-msgstr ""
+msgstr "Deskbar"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Να μην _δεσμεύεται κενό στο περίγραμμα"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:11
@@ -518,14 +521,13 @@ msgid "Select A Background Image"
 msgstr "Επιλέξτε μία εικόνα φόντου"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
-#, fuzzy
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"Επιλέξτε αυτή την επιλογή για να αποκρύψετε το ταμπλό όταν ο κέρσορας δεν "
-"είναι από πάνω του. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο "
-"στην άκρη της οθόνης."
+"Επιλέξτε αυτή την ρύθμιση εάν θέλετε το μεγιστοποιημένο παράθυρο να καλύπτει "
+"την περιοχή πίσω από το ταμπλό. Αυτό δουλεύει μόνο όταν το ταμπλό είναι "
+"προσαρτημένο στην άκρη της οθόνης."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid ""
@@ -696,13 +698,12 @@ msgid "Panel config needs migration..."
 msgstr ""
 
 #: ../migrate/main.c:189
-#, fuzzy
 msgid "Failed to migrate the existing configuration"
-msgstr "Η μεταφορά των παλαιών ρυθμίσεων του ταμπλό απέτυχε"
+msgstr "Αποτυχία μεταφοράς της υπάρχουσας ρύθμισης"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Η ρύθμιση του ταμπλό ενημερώθηκε."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 msgid "Action"
@@ -718,9 +719,8 @@ msgid "Appeara_nce:"
 msgstr "Εμφά_νιση:"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
-#, fuzzy
 msgid "Invert buttons _orientation"
-msgstr "_Θέση κουμπιού βέλους:"
+msgstr "Αναστροφή _προσανατολισμού κουμπιών"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "Session Menu"
@@ -729,11 +729,11 @@ msgstr "Μενού Συνεδρίας"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Εμφάνιση παραθύρου επιβεβαίωσης ενεργειών για 30 δευτερόλεπτα."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
-msgstr ""
+msgstr "Ορατό"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
@@ -741,7 +741,7 @@ msgstr "_Ενέργειες"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "_Εμφάνιση παραθύρου επιβεβαίωσης"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -858,12 +858,12 @@ msgstr "Τερματισμός του υπολογιστή σε %d δευτερ�
 msgid "Separator"
 msgstr "Διαχωριστικό"
 
-#: ../plugins/actions/actions.c:974
+#: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Αποτυχία εκτέλεσης της ενέργειας \"%s\""
 
-#: ../plugins/actions/actions.c:1141
+#: ../plugins/actions/actions.c:1142
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -1000,15 +1000,15 @@ msgstr "Αναδυόμενο μενού στην τρέχουσα θέση το�
 msgid "Show help options"
 msgstr "Εμφάνιση επιλογών βοήθειας"
 
-#: ../plugins/clock/clock.c:146
+#: ../plugins/clock/clock.c:155
 msgid "Week %V"
 msgstr "Εβδομάδα %V"
 
-#: ../plugins/clock/clock.c:407
+#: ../plugins/clock/clock.c:437
 msgid "Failed to execute clock command"
 msgstr "Αποτυχία εκτέλεσης της εντολής ρολογιού"
 
-#: ../plugins/clock/clock.c:729
+#: ../plugins/clock/clock.c:780
 msgid "Custom Format"
 msgstr "Προσαρμοσμένη μορφή"
 
@@ -1080,7 +1080,7 @@ msgid "Show gri_d"
 msgstr "Εμφάνιση πλέγμα_τος"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
@@ -1088,9 +1088,9 @@ msgid ""
 "information."
 msgstr ""
 "Αυτή η μορφή εξηγεί τα τμήματα της ημερομηνίας και της ώρας που μπορούν να "
-"εισαχθούν στο όνομα του αρχείου. Για παράδειγμα, το %Y αντικαθίσταται με το "
-"έτος, %m με το μήνα και %d με την ημέρα. Δείτε την τεκμηρίωση της εντολής "
-"date για περισσότερες πληροφορίες."
+"εισαχθούν στο ταμπλό. Για παράδειγμα, το %Y αντικαθίσταται με το έτος, %m με "
+"το μήνα και %d με την ημέρα. Δείτε την τεκμηρίωση της εντολής date για "
+"περισσότερες πληροφορίες."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1491,9 +1491,8 @@ msgid "New _Application"
 msgstr "Νέα _Εφαρμογή"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
 msgid "New _Link"
-msgstr "Νέα γραμμή"
+msgstr "Νέος _Σύνδεσμος"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
@@ -1694,7 +1693,7 @@ msgstr "Ποτέ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Κανένα, να επιτρέπεται η μεταφορά και απόθεση (drag-and-drop)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Restore minimized windows to current _workspace"
@@ -1750,27 +1749,26 @@ msgid "Window title"
 msgstr "Τίτλος παραθύρου"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-#, fuzzy
 msgid "_Switch windows using the mouse wheel"
-msgstr "Εναλλαγή χώρων εργασίας με χρήση της ροδέλα_ς του ποντικιού"
+msgstr "_Εναλλαγή παραθύρων με χρήση της ροδέλας του ποντικιού"
 
-#: ../plugins/tasklist/tasklist-widget.c:3202
+#: ../plugins/tasklist/tasklist-widget.c:3245
 msgid "Mi_nimize All"
 msgstr "Ελα_χιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3254
 msgid "Un_minimize All"
 msgstr "Αποε_λαχιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3217
+#: ../plugins/tasklist/tasklist-widget.c:3260
 msgid "Ma_ximize All"
 msgstr "Με_γιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3226
+#: ../plugins/tasklist/tasklist-widget.c:3269
 msgid "_Unmaximize All"
 msgstr "Α_πομεγιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3236
+#: ../plugins/tasklist/tasklist-widget.c:3279
 msgid "_Close All"
 msgstr "_Κλείσιμο Όλων"
 
