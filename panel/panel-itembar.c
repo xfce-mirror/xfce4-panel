@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <math.h>
 #include <gtk/gtk.h>
 #include <exo/exo.h>
 
@@ -95,7 +96,7 @@ struct _PanelItembar
 
   /* dnd support */
   gint                 highlight_index;
-  gint                 highlight_x, highlight_y;
+  gint                 highlight_x, highlight_y, highlight_length;
   gboolean             highlight_small;
 };
 
@@ -234,6 +235,7 @@ panel_itembar_init (PanelItembar *itembar)
   itembar->size = 30;
   itembar->nrows = 1;
   itembar->highlight_index = -1;
+  itembar->highlight_length = -1;
 
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (itembar), GTK_NO_WINDOW);
 
@@ -702,12 +704,14 @@ panel_itembar_expose_event (GtkWidget      *widget,
           (!IS_HORIZONTAL (itembar) && itembar->highlight_small))
         {
           rect.width = HIGHLIGHT_SIZE;
-          rect.height = row_size;
+          rect.height = (itembar->highlight_length != -1) ?
+            itembar->highlight_length : row_size;
         }
       else
         {
           rect.height = HIGHLIGHT_SIZE;
-          rect.width = row_size;
+          rect.width = (itembar->highlight_length != -1) ?
+            itembar->highlight_length : row_size;
         }
 
       /* draw highlight box */
@@ -1015,11 +1019,12 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
                               gint          x,
                               gint          y)
 {
-  PanelItembarChild *child;
-  GSList            *li;
+  PanelItembarChild *child, *child2;
+  GSList            *li, *li2;
   GtkAllocation      alloc;
-  guint              idx, col_start_idx;
-  gint               xr, yr;
+  guint              idx, col_start_idx, col_end_idx;
+  gint               xr, yr, col_width;
+  gdouble            aspect;
 
   panel_return_val_if_fail (PANEL_IS_ITEMBAR (itembar), 0);
 
@@ -1037,15 +1042,19 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
       x >= alloc.x + alloc.width || y >= alloc.y + alloc.height)
     return g_slist_length (itembar->children);
 
-  for (li = itembar->children, idx = 0, col_start_idx = 0; li != NULL; li = g_slist_next (li))
+  col_width = -1;
+  itembar->highlight_length = -1;
+  idx = 0;
+  col_start_idx = 0;
+  col_end_idx = 0;
+
+  for (li = itembar->children; li != NULL; li = g_slist_next (li))
     {
       child = li->data;
       if (G_UNLIKELY (child == NULL))
         continue;
 
-      if (child->row == 0)
-        col_start_idx = idx;
-
+      panel_assert (child->widget != NULL);
       alloc = child->widget->allocation;
 
       if (!IS_HORIZONTAL (itembar))
@@ -1053,31 +1062,61 @@ panel_itembar_get_drop_index (PanelItembar *itembar,
 
       xr = x - alloc.x;
       yr = y - alloc.y;
+
       if (child->option == CHILD_OPTION_SMALL)
         {
+          /* are we at the beginning of the column? */
+          if (child->row == 0)
+            {
+              col_start_idx = idx;
+              col_end_idx = idx + 1;
+              col_width = alloc.width;
+              /* find the width of the current column and the idx of last item */
+              for (li2 = g_slist_next (li); li2 != NULL; li2 = g_slist_next (li2))
+                {
+                  child2 = li2->data;
+                  if (G_UNLIKELY (child2 == NULL))
+                    continue;
+                  if (child2->row == 0)
+                    break;
+                  panel_assert (child2->widget != NULL);
+                  col_end_idx++;
+                  if (IS_HORIZONTAL (itembar))
+                    col_width = MAX (col_width, child2->widget->allocation.width);
+                  else
+                    col_width = MAX (col_width, child2->widget->allocation.height);
+                }
+            }
+
+          /* calculate aspect ratio */
+          if (alloc.height > 0 && col_width > 0)
+            aspect = (gdouble) col_width / (gdouble) alloc.height;
+          else
+            aspect = 1.0;
+
           /* before current column */
           if (xr < 0 ||
-              (xr < yr && xr < alloc.height - yr))
+              (xr < (gint) round (yr * aspect) &&
+               xr < (gint) round ((alloc.height - yr) * aspect)))
             {
               idx = col_start_idx;
               break;
             }
           /* before current child */
-          if (xr < alloc.width && xr >= yr && alloc.width - xr >= yr)
-            break;
-          /* after current column */
-          if (xr < alloc.width && xr >= alloc.height - yr && xr >= yr)
+          if (xr < col_width &&
+              xr >= (gint) round (yr * aspect) &&
+              col_width - xr >= (gint) round (yr * aspect))
             {
-              /* search for the beginning of the next column */
-              for (li = g_slist_next (li), idx++; li != NULL; li = g_slist_next (li))
-                {
-                  child = li->data;
-                  if (G_UNLIKELY (child == NULL))
-                    continue;
-                  if (child->row == 0)
-                    break;
-                  idx++;
-                }
+              if (child->row != 0)
+                itembar->highlight_length = col_width;
+              break;
+            }
+          /* after current column */
+          if (xr < col_width &&
+              xr >= (gint) round ((alloc.height - yr) * aspect) &&
+              xr >= (gint) round (yr * aspect))
+            {
+              idx = col_end_idx;
               break;
             }
         }
