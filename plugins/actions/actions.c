@@ -1256,6 +1256,11 @@ actions_plugin_menu (GtkWidget     *button,
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
 
+  // do not popup the menu if the button is being toggled off
+  if (button != NULL
+      && !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (button)))
+    return;
+
   if (plugin->menu == NULL)
     {
       plugin->menu = gtk_menu_new ();
