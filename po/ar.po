@@ -4,25 +4,27 @@
 # Saleh Alhathal <hathalsal@hotmail.com>, 2004.
 # mohammad <malham1@gmail.com>, 2012.
 # كريم أولاد الشلحة <herr.linux88@gmail.com>, 2012.
+# محمد الحرقان <malham1@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-12 11:30+0000\n"
-"PO-Revision-Date: 2012-01-30 11:10+0300\n"
-"Last-Translator: mohammad <malham1@gmail.com>\n"
+"POT-Creation-Date: 2012-11-09 10:09+0000\n"
+"PO-Revision-Date: 2012-11-09 16:08+0300\n"
+"Last-Translator: محمد الحرقان <malham1@gmail.com>\n"
 "Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Virtaal 0.7.0\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.1\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop file"
-msgstr "أضف مُطْلِق جديد إلى اللوحةبالاستناد لمعلومات لملف سطح المكتب هذا"
+msgstr "أضف مُطْلِق جديد للوحة إستناداً لمعلومات لملف سطح المكتب هذا"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -43,7 +45,7 @@ msgstr "لوحة"
 #: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "هل انت متأكد من أنك تريد حذف \"%s\"؟"
+msgstr "متأكد أنك تريد حذف \"%s\"؟"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1102
@@ -108,7 +110,7 @@ msgstr "خروج من لوحة الحالة"
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr "عدم إنتظار مدير النوافذ عنذ بدء التشغيل"
+msgstr "عدم إنتظار مدير النوافذ عند بدء التشغيل"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -125,7 +127,7 @@ msgstr "[الحجج...]"
 #: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "أكتب \"%s --help\" للإستعمال."
+msgstr "أكتب \"%s --help\" لدليل الإستعمال."
 
 #: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
@@ -138,7 +140,7 @@ msgstr "أرسل من فضلك الأخطاء الى<%s>."
 
 #: ../panel/main.c:320
 msgid "There is already a running instance"
-msgstr "حاليا يوجد حالة قيد التشغيل"
+msgstr "يوجد حالة حاليا قيد التشغيل"
 
 #. spawn ourselfs again
 #: ../panel/main.c:362
@@ -184,7 +186,7 @@ msgstr ""
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "لم يتم العثور على مثيل لـ %s قيد التشغيل"
+msgstr "لم يتم العثور على مثيل %s قيد التشغيل"
 
 #: ../panel/panel-application.c:212
 msgid "Failed to launch the migration application"
@@ -198,7 +200,9 @@ msgstr "أنشئ مُطْلِ_ق"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "هذا سيقوم بإنشاء ملحق مطلق جديد في الشريط و سيدرج الملفات المسقط فيه كعناصر قائمة."
+msgstr ""
+"هذا سيقوم بإنشاء ملحق مطلق جديد في الشريط و سيدرج الملفات المسقط فيه كعناصر "
+"قائمة."
 
 #: ../panel/panel-application.c:956
 #, c-format
@@ -215,7 +219,7 @@ msgstr[5] "أنشء مطلق جدبد من %d ملفات سطح المكتب"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "لقد قمت بتشغيل X بدون مدير الجلسة. إضغط على الخروج لإعلاق خادم X."
+msgstr "لقد قمت بتشغيل X بدون مدير الجلسة. إضغط على الخروج لإغلاق خادم X."
 
 #: ../panel/panel-application.c:1691
 msgid "Are you sure you want to quit the panel?"
@@ -230,7 +234,8 @@ msgstr "فشل تنفيد الأمر \"%s\""
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
-"بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم [:نوع:قيمة]."
+"بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم "
+"[:نوع:قيمة]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
@@ -250,7 +255,7 @@ msgstr "نمط شريط المكتب"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr "مشرفون غير نشيطون"
+msgstr "مشرفون غير نشطون"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
@@ -258,16 +263,7 @@ msgstr "لوحة بيئة سطح المكتب إكسفس"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr ""
-"سابقا\n"
-"فريق عربآيز للترجمة http://www.arabeyes.org:\n"
-"جهاد عفيفي\t<djihed@gmail.com>\n"
-"عرفات المديني\t<lumina@silverpen.de>\n"
-"محمد مجدي\t<alnokta@yahoo.com>\n"
-"خالد حسني\t<khaledhosny@eglug.org>\n"
-"حاليا\n"
-"محمد الحرقان\t<malham1@gmail.com>\n"
-"كريم اولاد الشلحة\t<herr.linux88@gmail.com>"
+msgstr "كريم اولاد الشلحة محمد الحرقان"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
@@ -460,8 +456,7 @@ msgstr "طول (%):"
 msgid "M_ode:"
 msgstr "نمط:"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "القياسات"
@@ -809,7 +804,7 @@ msgstr "_إعادة تشغيل"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr "هل أنت متأكد أنك تريد إعادة تشغيل؟"
+msgstr "متأكد أنك تريد إعادة التشغيل؟"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
@@ -826,7 +821,7 @@ msgstr "غلق الجهاز"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
-msgstr "هل أنت متأكد من أنك تريد إغلاق الجهاز؟"
+msgstr "متأكد أنك تريد إغلاق الجهاز؟"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
@@ -995,7 +990,7 @@ msgstr "تهيئة خاصة"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
-msgstr "استخدم ساعة ال 24"
+msgstr "نمط 24 ساعة"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -1003,7 +998,7 @@ msgstr "عقارب"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Binary"
-msgstr "رفمي"
+msgstr "رقمي"
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
@@ -1026,8 +1021,7 @@ msgstr "اعرض الثواني"
 msgid "F_ormat:"
 msgstr "التنسيق:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "ال&ضبابية:"
@@ -1042,7 +1036,7 @@ msgstr "ضبابي"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "LCD"
-msgstr "لسيدي"
+msgstr "شاشة كريستال سائل"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
@@ -1087,7 +1081,7 @@ msgstr "_هيئة التلميح:"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
-msgstr "الليل"
+msgstr "مساء"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
@@ -1314,7 +1308,7 @@ msgstr "الثانية عشر"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
-msgstr "ماهى الساعة؟"
+msgstr "ما الوقت الآن؟"
 
 #: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
@@ -1414,7 +1408,7 @@ msgstr "إذا قمت بحذف عنصر، سيتم إزالته بشكل دائ�
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "هل انت متأكد من أنك تريد حذف \"%s\"؟"
+msgstr "متأكد أنك تريد حذف \"%s\"؟"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
@@ -1519,7 +1513,7 @@ msgstr "مُطْلِق البرامج مع قائمة اختيارية"
 
 #: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
-msgstr "إعدادات مساحة عمل..."
+msgstr "إعدادات مساحة العمل..."
 
 #: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
@@ -1551,7 +1545,7 @@ msgstr "عرض مشهد مصغر"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "التبديل مساحات العمل باستخدام عجلة الفارة"
+msgstr "تبديل مساحات العمل باستخدام عجلة الفارة"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
@@ -1618,7 +1612,7 @@ msgstr "فقدت تحديد منطقة التنبيه"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "هل أنت متأكد من أنك تريد مسح قائمة التطبيقات المعروفة؟"
+msgstr "متأكد أنك تريد مسح قائمة التطبيقات المعروفة؟"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "C_lear Known Applications"
@@ -1640,11 +1634,11 @@ msgstr "_أكبر حجم للرمز (px):"
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "فشل في الحصول على الإختيار من أجل الشاشة·%d"
+msgstr "فشل الحصول على الإختيار من أجل الشاشة %d"
 
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Area where notification icons appear"
-msgstr "مساحة حيث ستعرض أيقونات التنبيه"
+msgstr "مساحة ستعرض أيقونات التنبيه"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Always"
@@ -1749,7 +1743,7 @@ msgstr "_إغلاق الكل"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr "تحول بين النوافذ المفتوحة باستعمال أزرار"
+msgstr "تحول بين النوافذ المفتوحة باستعمال الأزرار"
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
