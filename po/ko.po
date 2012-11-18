@@ -2,7 +2,7 @@
 # Copyright(C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # ByungHyun Choi<byunghyun.choi@gmail.com>, 2005.
-# Seong-ho, Cho <darkcircle.0426@gmail.com>, 2011, 2012.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2011, 2012.
 #
 # Please write your name and e-mail into "translator-credits" if you update this translation script.
 #
@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: https://bugzilla.xfce.org/enter_bug.cgi?product=Xfce4-panel\n"
 "POT-Creation-Date: 2012-04-18 09:27+0000\n"
 "PO-Revision-Date: 2012-04-18 23:14+0900\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
@@ -53,7 +53,7 @@ msgstr "'%s'을(를) 정말로 없애시렵니까?"
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "항목을 패널에서 제거하면 영원히 잃을 것입니다."
+msgstr "항목을 패널에서 제거하면 완전히 잃게 됩니다."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1202
@@ -143,7 +143,7 @@ msgstr "Xfce 개발 팀. All rights reserved."
 #: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "버그는 <%s>에게 보내주시기 바랍니다."
+msgstr "버그는 <%s>에게 보내주십시오."
 
 #: ../panel/main.c:320
 msgid "There is already a running instance"
@@ -202,7 +202,7 @@ msgstr "실행 아이콘 만들기(_L)"
 
 #: ../panel/panel-application.c:937
 msgid "This will create a new launcher plugin on the panel and inserts the dropped files as menu items."
-msgstr "패널에 새 실행 아이콘 플러그인을 만들고 파일을 메뉴 항목으로 넣을 것입니다."
+msgstr "패널에 새 실행 아이콘 플러그인을 만들고 파일을 메뉴 항목으로 넣습니다."
 
 #: ../panel/panel-application.c:939
 #, c-format
@@ -212,7 +212,7 @@ msgstr[0] "%d개의 데스크톱 파일에 대한 새 실행 아이콘 만들기
 
 #: ../panel/panel-application.c:1673
 msgid "You have started X without session manager. Clicking Quit will close the X server."
-msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 X 서버가 닫힐 것입니다."
+msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 X 서버가 닫힙니다."
 
 #: ../panel/panel-application.c:1674
 msgid "Are you sure you want to quit the panel?"
@@ -262,7 +262,7 @@ msgstr "새로운 항목 추가"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr "새로운 플러그인을 위한 패널을 선택하여 주시기 바랍니다:"
+msgstr "새로운 플러그인을 위한 패널을 선택하여 주십시오:"
 
 #: ../panel/panel-dialogs.c:192
 #: ../panel/panel-preferences-dialog.c:806
@@ -303,7 +303,7 @@ msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습�
 #: ../panel/panel-plugin-external.c:431
 #, c-format
 msgid "The plugin restarted more than once in the last %d seconds. If you press Execute the panel will try to restart the plugin otherwise it will be permanently removed from the panel."
-msgstr "최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습니다. 패널 실행을 누르시면 플러그인 다시 시작을 시도할 것이고, 그렇지 않으면 패널에서 완전히 제거할 것입니다."
+msgstr "최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습니다. 패널 실행을 누르시면 플러그인 다시 시작을 시도할 것이고, 그렇지 않으면 패널에서 완전히 제거합니다."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -323,7 +323,7 @@ msgstr "모니터 %d"
 
 #: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "패널과 플러그인 환경설정을 완전히 제거할 것입니다"
+msgstr "패널과 플러그인 환경설정을 완전히 제거합니다"
 
 #: ../panel/panel-preferences-dialog.c:873
 #, c-format
@@ -452,7 +452,7 @@ msgstr "현재 선택한 목록을 한 줄 위로 옮기기"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
-msgstr "없음 (시스템 방식 사용)"
+msgstr "없음(시스템 방식 사용)"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Num_ber of rows:"
@@ -492,7 +492,7 @@ msgstr "패널 뒤 영역을 덮어 창을 최대화하려면 이 옵션을 선�
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Select this option to automatically increase the length of the panel if the plugins request more space."
-msgstr "플러그인이 더 많은 공간을 필요로 한다면 패널의 길이를 자동으로 증가시키기 위해 이 옵션을 선택합니다."
+msgstr "플러그인이 더 많은 공간을 필요로 한다면 패널의 길이를 자동으로 늘이는 이 옵션을 선택합니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select this option to extend the panel over multiple monitors."
@@ -1014,7 +1014,7 @@ msgstr "격자 표시(_D)"
 #: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid "The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. See the documentation of the date utility for additional information."
-msgstr "이 형식은 파일이름에 들어갈 날짜와 시간 부분을 서술합니다. 예를 들어, %Y은(는) 연도를 대신할 것이고, %m은(는) 달 수를 그리고 %d은(는) 날짜의 일 수를 대신할 것입니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 봅니다."
+msgstr "이 형식은 파일이름에 들어갈 날짜와 시간 부분을 서술합니다. 예를 들어, %Y은(는) 연도를 대신할 것이고, %m은(는) 달 수를 그리고 %d은(는) 날짜의 일 수를 대신합니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 봅니다."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
@@ -1304,7 +1304,7 @@ msgstr "메뉴에서 디렉터리 트리를 보여줍니다"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "Enter a list of patterns that will be used to determine which files are visible in a directory. If you specify more than one pattern here, the list items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "디렉터리에서 어떤 파일을 보여줄지 결정하는데 사용할 패턴의 목록을 입력합니다. 여기에 하나 이상의 패턴을 지정한다면, 목록의 항목은 반드시 세미콜론으로 구분해야 합니다 (e.g. *.txt;*.doc)."
+msgstr "디렉터리에서 어떤 파일을 보여줄지 결정하는데 사용할 패턴의 목록을 입력합니다. 여기에 하나 이상의 패턴을 지정한다면, 목록의 항목은 반드시 세미콜론으로 구분해야 합니다(e.g. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
@@ -1346,7 +1346,7 @@ msgstr "데스크톱 항목 편집기를 여는데 실패했습니다"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
-msgstr "항목을 삭제하면, 완전히 제거할 것입니다"
+msgstr "항목을 삭제하면, 완전히 제거합니다"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
@@ -1539,7 +1539,7 @@ msgstr "알림 영역을 시작할 수 없습니다"
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용하지 않을 것입니다."
+msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용하지 않습니다."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
