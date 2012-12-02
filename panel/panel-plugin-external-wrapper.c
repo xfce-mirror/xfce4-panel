@@ -270,8 +270,10 @@ panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
   /* send array to the wrapper */
   g_signal_emit (G_OBJECT (external), external_signals[SET], 0, array);
 
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   for (i = 0; i < array->len; i++)
     g_value_array_free (g_ptr_array_index (array, i));
+  G_GNUC_END_IGNORE_DEPRECATIONS
   g_ptr_array_free (array, TRUE);
   g_value_unset (&message);
 }
