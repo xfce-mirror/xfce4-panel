@@ -1483,6 +1483,7 @@ panel_application_new_window (PanelApplication *application,
   guint               i;
   gchar              *position;
   static gint         unqiue_id_counter = 1;
+  GtkWindowGroup     *window_group;
 
   panel_return_val_if_fail (PANEL_IS_APPLICATION (application), NULL);
   panel_return_val_if_fail (screen == NULL || GDK_IS_SCREEN (screen), NULL);
@@ -1499,6 +1500,11 @@ panel_application_new_window (PanelApplication *application,
 
   /* create panel window */
   window = panel_window_new (screen, panel_id);
+
+  /* put the window in its own group */
+  window_group = gtk_window_group_new ();
+  gtk_window_group_add_window (window_group, GTK_WINDOW (window));
+  g_object_weak_ref (G_OBJECT (window), (GWeakNotify) g_object_unref, window_group);
 
   /* add the window to internal list */
   application->windows = g_slist_append (application->windows, window);
