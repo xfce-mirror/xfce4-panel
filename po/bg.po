@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-24 16:12+0000\n"
-"PO-Revision-Date: 2012-12-24 20:33+0200\n"
+"PO-Revision-Date: 2012-12-24 21:26+0200\n"
 "Last-Translator: cybercop <cybercop_montana@abv.bg>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "Language: bg\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
+msgstr "Добавяне на нов стартер в панела, базиран на информацията от този десктоп файл"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
@@ -40,12 +40,12 @@ msgstr "Панел"
 #: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr ""
+msgstr "Сигурен ли сте, че искате да премахнете \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr ""
+msgstr "Ако премахнете този елемент от панела, той ще бъде изгубен завинаги."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1202
@@ -66,22 +66,22 @@ msgstr "Добавяне на нови обекти..."
 #: ../libxfce4panel/xfce-panel-plugin.c:1255
 #: ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "Настройване на панела..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1272
 #: ../panel/panel-window.c:2404
 msgid "Log _Out"
-msgstr ""
+msgstr "Отписване"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr ""
+msgstr "Показване на диалог \"Настройване на панела\""
 
 #: ../panel/main.c:79
 #: ../panel/main.c:80
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "Номер на панел"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
@@ -89,7 +89,7 @@ msgstr "Показване на диалог \"Добавяне на нови е
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
-msgstr ""
+msgstr "Запазване на конфигурацията на панела"
 
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
@@ -97,45 +97,45 @@ msgstr "Добавяне на нов плъгин в панела"
 
 #: ../panel/main.c:82
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "Име на плъгин"
 
 #: ../panel/main.c:83
 msgid "Restart the running panel instance"
-msgstr ""
+msgstr "Рестартиране по настояване на панела"
 
 #: ../panel/main.c:84
 msgid "Quit the running panel instance"
-msgstr ""
+msgstr "Спиране на работата по настояване на панела"
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "Не изчаквай мениджъра на прозорците при стартиране"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Отпечатване на журнал и изход"
 
 #. parse context options
 #: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[Аргументи...]"
 
 #: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "Напишете \"%s --help\" за ползване."
 
 #: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Екипът по разработката на XFCE. Всички права са запазени."
 
 #: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Моля, докладвайте грешки на <%s>."
 
 #: ../panel/main.c:320
 msgid "There is already a running instance"
@@ -144,11 +144,11 @@ msgstr "Вече има стартирано копие"
 #. spawn ourselfs again
 #: ../panel/main.c:362
 msgid "Restarting..."
-msgstr ""
+msgstr "Рестартиране..."
 
 #: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
-msgstr ""
+msgstr "Не може да бъде показан диалогът с настройките"
 
 #: ../panel/main.c:379
 msgid "Failed to show the add new items dialog"
@@ -156,7 +156,7 @@ msgstr "Не може да бъде показан диалога \"Добавя
 
 #: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
-msgstr ""
+msgstr "Не може да бъде запазена конфигурацията на панела"
 
 #: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
@@ -1376,15 +1376,15 @@ msgstr "По Подразбиране"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "Delete the currently selected item"
-msgstr ""
+msgstr "Изтриване на текущо избраните елементи"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "Забраняване на поясненията"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "East"
-msgstr ""
+msgstr "Изток"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Inside Button"
@@ -1405,23 +1405,23 @@ msgstr "Нова връзка"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "North"
-msgstr ""
+msgstr "Север"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Select this option to disable the tooltips when moving over the panel button or menu items."
-msgstr ""
+msgstr "Изберете тази опция, за да изключите поясненията, когато придвижвате над бутона на панела или елементи от менюто."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Изберете тази опция, за да се премести елемента от менюто, върху който сме кликнали на панела"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "Показване на етикет вместо икона"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Покажи последният използван елемент в панела"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "South"
@@ -1429,7 +1429,7 @@ msgstr "Юг"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "West"
-msgstr ""
+msgstr "Запад"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "_Arrow button position:"
@@ -1437,60 +1437,60 @@ msgstr "Посочване на позицията на бутон:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "_Edit Item"
-msgstr ""
+msgstr "Редактиране на елемент"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Стартер на програма с меню за опции"
 
 #: ../plugins/pager/pager.c:370
 #: ../plugins/pager/pager-dialog.glade.h:8
 msgid "Workspace _Settings..."
-msgstr ""
+msgstr "Настройване на работното място..."
 
 #: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "Не могат да бъдат отворени настройките на работното място"
 
 #: ../plugins/pager/pager-buttons.c:579
 #: ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "Работно място %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "Behaviour"
-msgstr ""
+msgstr "Поведение"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Number of _rows:"
-msgstr ""
+msgstr "Номер на редове:"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid "Show a miniature view of the workspace with rectangles for the visible windows"
-msgstr ""
+msgstr "Покажи изглед с миниатюри на работното място с правоъгълници за видимите прозорци"
 
 #: ../plugins/pager/pager-dialog.glade.h:5
 msgid "Show mi_niature view"
-msgstr ""
+msgstr "Показвай изглед с миниатюри"
 
 #: ../plugins/pager/pager-dialog.glade.h:6
 msgid "Switch workspaces using the mouse _wheel"
-msgstr ""
+msgstr "Превключване между работните места, като се използва колелото на мишката"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Workspace Switcher"
-msgstr ""
+msgstr "Превключвател на работното място"
 
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Switch between virtual desktops"
-msgstr ""
+msgstr "Превключване между виртуалните работни плотове"
 
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "Dots"
-msgstr ""
+msgstr "Точки"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
@@ -1498,32 +1498,32 @@ msgstr "Ръкохватка"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
-msgstr ""
+msgstr "Прозрачност"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "_Expand"
-msgstr ""
+msgstr "Разширяване"
 
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Adds a separator or space between panel items"
-msgstr ""
+msgstr "Добавяне на разделител или разстояние между елементите в панела"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
-msgstr ""
+msgstr "Възстановяване на минимизираните прозорци"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
-msgstr ""
+msgstr "Минимизирай всички отворени прозорци и покажи работният плот"
 
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
-msgstr ""
+msgstr "Показване на Работният плот"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Hide all windows and show the desktop"
-msgstr ""
+msgstr "Скриване на всички прозорци и показване на работният плот"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
@@ -1532,7 +1532,7 @@ msgstr "Областта за уведомяване не може да стар
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
 msgid "Most likely another widget took over the function of a notification area. This area will be unused."
-msgstr ""
+msgstr "Най-вероятно друга програмка функционира в областта за уведомяване. Тази зона ще остане неизползвана."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
