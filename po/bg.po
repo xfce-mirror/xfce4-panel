@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-24 16:12+0000\n"
-"PO-Revision-Date: 2012-12-25 10:21+0200\n"
+"PO-Revision-Date: 2012-12-25 10:45+0200\n"
 "Last-Translator: cybercop <cybercop_montana@abv.bg>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "Language: bg\n"
@@ -160,19 +160,19 @@ msgstr "Не може да бъде запазена конфигурацият�
 
 #: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgstr "Не може да бъде добавен плъгин в панела"
 
 #: ../panel/main.c:385
 msgid "Failed to restart the panel"
-msgstr ""
+msgstr "Не може да се рестартира панела"
 
 #: ../panel/main.c:387
 msgid "Failed to quit the panel"
-msgstr ""
+msgstr "Не може да се спре панела"
 
 #: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
-msgstr ""
+msgstr "Не може да бъде изпратено съобщение от D-Bus"
 
 #: ../panel/main.c:400
 msgid "Do you want to start the panel? If you do, make sure you save the session on logout, so the panel is automatically started the next time you login."
@@ -182,11 +182,11 @@ msgstr ""
 #: ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Няма стартиране копия на %s бяха открити"
 
 #: ../panel/panel-application.c:212
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "хНе може да стартира миграцията на програмата"
 
 #: ../panel/panel-application.c:953
 msgid "Create _Launcher"
@@ -209,12 +209,12 @@ msgstr ""
 
 #: ../panel/panel-application.c:1691
 msgid "Are you sure you want to quit the panel?"
-msgstr ""
+msgstr "Сигурен ли сте, че искате да изключите панела?"
 
 #: ../panel/panel-application.c:1699
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr ""
+msgstr "Не може да бъде изпълнена команда \"%s\" "
 
 #: ../panel/panel-dbus-client.c:211
 msgid "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
@@ -227,23 +227,23 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
-msgstr ""
+msgstr "Поддръжка"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Режим на панел за навигация"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr ""
+msgstr "Пасивна поддръжка"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
-msgstr ""
+msgstr "Панелът на XFCE"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr ""
+msgstr "преводач-кредити"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158
@@ -254,7 +254,7 @@ msgstr "Добавяне на нов обект"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Моля изберете панел за новият плъгин:"
 
 #: ../panel/panel-dialogs.c:192
 #: ../panel/panel-preferences-dialog.c:806
@@ -268,7 +268,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Преобразуването на панела не е позволено"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
@@ -281,11 +281,11 @@ msgstr "Добавяне на нов плъгин в панела"
 #: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
-msgstr ""
+msgstr "Търсене:"
 
 #: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "напишете търсеният израз тук"
 
 #: ../panel/panel-plugin-external.c:429
 #, c-format
@@ -299,13 +299,13 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
-msgstr ""
+msgstr "Автоматично"
 
 #. I18N: screen name in the output selector
 #: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "Екран %d"
 
 #. I18N: monitor name in the output selector
 #: ../panel/panel-preferences-dialog.c:517
@@ -337,17 +337,19 @@ msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
 msgstr ""
+"Вътрешно име: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Вътрешно име: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "A_utomatically increase the length"
-msgstr ""
+msgstr "Автоматично разширяване на дължината"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Add a new panel"
@@ -367,11 +369,11 @@ msgstr "Външен вид"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Automatically show and _hide the panel"
-msgstr ""
+msgstr "Автоматично показване и скриване на панела"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "Background"
-msgstr ""
+msgstr "Фон на работният плот"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Background image"
@@ -391,7 +393,7 @@ msgstr "Лента за навигация"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Без запазване на място на границите"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 #: ../plugins/launcher/launcher-dialog.glade.h:11
