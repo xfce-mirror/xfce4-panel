@@ -1,5 +1,5 @@
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"libshowdesktop\" \
 	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \

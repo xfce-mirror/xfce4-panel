@@ -1,5 +1,5 @@
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"xfce4-panel-wrapper\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
