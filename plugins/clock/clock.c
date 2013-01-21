@@ -94,7 +94,6 @@ enum
 {
   PROP_0,
   PROP_MODE,
-  PROP_SHOW_FRAME,
   PROP_TOOLTIP_FORMAT,
   PROP_COMMAND,
   PROP_ROTATE_VERTICALLY
@@ -130,7 +129,6 @@ struct _ClockPlugin
   GtkWidget          *calendar_window;
   GtkWidget          *calendar;
 
-  guint               show_frame : 1;
   gchar              *command;
   ClockPluginMode     mode;
   guint               rotate_vertically : 1;
@@ -220,13 +218,6 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                                       EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_SHOW_FRAME,
-                                   g_param_spec_boolean ("show-frame",
-                                                         NULL, NULL,
-                                                         TRUE,
-                                                         EXO_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_TOOLTIP_FORMAT,
                                    g_param_spec_string ("tooltip-format",
                                                         NULL, NULL,
@@ -254,7 +245,6 @@ clock_plugin_init (ClockPlugin *plugin)
 {
   plugin->mode = CLOCK_PLUGIN_MODE_DEFAULT;
   plugin->clock = NULL;
-  plugin->show_frame = TRUE;
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
   plugin->command = NULL;
@@ -292,10 +282,6 @@ clock_plugin_get_property (GObject    *object,
       g_value_set_uint (value, plugin->mode);
       break;
 
-    case PROP_SHOW_FRAME:
-      g_value_set_boolean (value, plugin->show_frame);
-      break;
-
     case PROP_TOOLTIP_FORMAT:
       g_value_set_string (value, plugin->tooltip_format);
       break;
@@ -323,7 +309,6 @@ clock_plugin_set_property (GObject      *object,
                            GParamSpec   *pspec)
 {
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (object);
-  gboolean     show_frame;
   gboolean     rotate_vertically;
 
   switch (prop_id)
@@ -333,14 +318,6 @@ clock_plugin_set_property (GObject      *object,
         {
           plugin->mode = g_value_get_uint (value);
           clock_plugin_set_mode (plugin);
-        }
-      break;
-
-    case PROP_SHOW_FRAME:
-      show_frame = g_value_get_boolean (value);
-      if (plugin->show_frame != show_frame)
-        {
-          plugin->show_frame = show_frame;
         }
       break;
 
@@ -463,7 +440,6 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty  properties[] =
   {
     { "mode", G_TYPE_UINT },
-    { "show-frame", G_TYPE_BOOLEAN },
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
     { "rotate-vertically", G_TYPE_BOOLEAN },
@@ -830,10 +806,6 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       G_CALLBACK (clock_plugin_configure_plugin_mode_changed), dialog,
       (GClosureNotify) clock_plugin_configure_plugin_free, 0);
   exo_mutual_binding_new (G_OBJECT (plugin), "mode",
-                          G_OBJECT (object), "active");
-
-  object = gtk_builder_get_object (builder, "show-frame");
-  exo_mutual_binding_new (G_OBJECT (plugin), "show-frame",
                           G_OBJECT (object), "active");
 
   object = gtk_builder_get_object (builder, "tooltip-format");
