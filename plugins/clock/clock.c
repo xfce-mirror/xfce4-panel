@@ -57,11 +57,14 @@ static void     clock_plugin_set_property              (GObject               *o
                                                         const GValue          *value,
                                                         GParamSpec            *pspec);
 static gboolean clock_plugin_leave_notify_event        (GtkWidget             *widget,
-                                                        GdkEventCrossing      *event);
+                                                        GdkEventCrossing      *event,
+                                                        ClockPlugin           *plugin);
 static gboolean clock_plugin_enter_notify_event        (GtkWidget             *widget,
-                                                        GdkEventCrossing      *event);
+                                                        GdkEventCrossing      *event,
+                                                        ClockPlugin           *plugin);
 static gboolean clock_plugin_button_press_event        (GtkWidget             *widget,
-                                                        GdkEventButton        *event);
+                                                        GdkEventButton        *event,
+                                                        ClockPlugin           *plugin);
 static void     clock_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
 static gboolean clock_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
@@ -118,6 +121,7 @@ struct _ClockPlugin
   XfcePanelPlugin __parent__;
 
   GtkWidget          *clock;
+  GtkWidget          *button;
   GtkWidget          *frame;
 
   GtkWidget          *calendar_window;
@@ -189,17 +193,11 @@ static void
 clock_plugin_class_init (ClockPluginClass *klass)
 {
   GObjectClass         *gobject_class;
-  GtkWidgetClass       *widget_class;
   XfcePanelPluginClass *plugin_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = clock_plugin_set_property;
   gobject_class->get_property = clock_plugin_get_property;
-
-  widget_class = GTK_WIDGET_CLASS (klass);
-  widget_class->leave_notify_event = clock_plugin_leave_notify_event;
-  widget_class->enter_notify_event = clock_plugin_enter_notify_event;
-  widget_class->button_press_event = clock_plugin_button_press_event;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = clock_plugin_construct;
@@ -259,8 +257,23 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->command = NULL;
   plugin->rotate_vertically = TRUE;
 
+  plugin->button = xfce_panel_create_toggle_button ();
+  /* xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button); */
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
+  gtk_widget_set_name (plugin->button, "clock-button");
+  gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
+  /* Have to handle all events in the button object rather than the plugin.
+   * Otherwise, default handlers will block the events. */
+  g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
+                    G_CALLBACK (clock_plugin_button_press_event), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "enter-notify-event",
+                    G_CALLBACK (clock_plugin_enter_notify_event), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "leave-notify-event",
+                    G_CALLBACK (clock_plugin_leave_notify_event), plugin);
+  gtk_widget_show (plugin->button);
+
   plugin->frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
+  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->frame);
   gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
   gtk_widget_show (plugin->frame);
 }
@@ -369,10 +382,9 @@ clock_plugin_set_property (GObject      *object,
 
 static gboolean
 clock_plugin_leave_notify_event (GtkWidget        *widget,
-                                 GdkEventCrossing *event)
+                                 GdkEventCrossing *event,
+                                 ClockPlugin      *plugin)
 {
-  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (widget);
-
   /* stop a running tooltip timeout when we leave the widget */
   if (plugin->tooltip_timeout != NULL)
     {
@@ -387,9 +399,9 @@ clock_plugin_leave_notify_event (GtkWidget        *widget,
 
 static gboolean
 clock_plugin_enter_notify_event (GtkWidget        *widget,
-                                 GdkEventCrossing *event)
+                                 GdkEventCrossing *event,
+                                 ClockPlugin      *plugin)
 {
-  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (widget);
   guint        interval;
 
   /* start the tooltip timeout if needed */
@@ -406,9 +418,9 @@ clock_plugin_enter_notify_event (GtkWidget        *widget,
 
 static gboolean
 clock_plugin_button_press_event (GtkWidget      *widget,
-                                 GdkEventButton *event)
+                                 GdkEventButton *event,
+                                 ClockPlugin    *plugin)
 {
-  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (widget);
   GError      *error = NULL;
 
   if (event->button == 1)
@@ -442,7 +454,8 @@ clock_plugin_button_press_event (GtkWidget      *widget,
         }
     }
 
-  return (*GTK_WIDGET_CLASS (clock_plugin_parent_class)->button_press_event) (widget, event);
+  /* bypass GTK_TOGGLE_BUTTON's handler and go directly to the plugin's one */
+  return (*GTK_WIDGET_CLASS (clock_plugin_parent_class)->button_press_event) (GTK_WIDGET (plugin), event);
 }
 
 
@@ -995,6 +1008,7 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
       gtk_widget_show (plugin->calendar);
     }
 
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
   gtk_widget_show (GTK_WIDGET (plugin->calendar_window));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
 }
@@ -1008,6 +1022,7 @@ clock_plugin_hide_calendar (ClockPlugin *plugin)
 
   gtk_widget_hide (GTK_WIDGET (plugin->calendar_window));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
 }
 
 
