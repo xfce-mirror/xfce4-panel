@@ -126,7 +126,6 @@ struct _ClockPlugin
 
   GtkWidget          *clock;
   GtkWidget          *button;
-  GtkWidget          *frame;
 
   GtkWidget          *calendar_window;
   GtkWidget          *calendar;
@@ -275,11 +274,6 @@ clock_plugin_init (ClockPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "leave-notify-event",
                     G_CALLBACK (clock_plugin_leave_notify_event), plugin);
   gtk_widget_show (plugin->button);
-
-  plugin->frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->frame);
-  gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
-  gtk_widget_show (plugin->frame);
 }
 
 
@@ -347,8 +341,6 @@ clock_plugin_set_property (GObject      *object,
       if (plugin->show_frame != show_frame)
         {
           plugin->show_frame = show_frame;
-          gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
-              show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
         }
       break;
 
@@ -517,24 +509,17 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
   gdouble      ratio;
   gint         ratio_size;
-  gint         border = 0;
   gint         offset;
 
   if (plugin->clock == NULL)
     return TRUE;
 
-  /* set the frame border */
-  if (plugin->show_frame && size > 26)
-    border = 1;
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), border);
-
   /* get the width:height ratio */
   g_object_get (G_OBJECT (plugin->clock), "size-ratio", &ratio, NULL);
   if (ratio > 0)
     {
-      offset = MAX (plugin->frame->style->xthickness, plugin->frame->style->ythickness) + border;
-      offset *= 2;
-      ratio_size = size - offset;
+      ratio_size = size;
+      offset = 0;
     }
   else
     {
@@ -941,7 +926,7 @@ clock_plugin_set_mode (ClockPlugin *plugin)
                          xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)),
                          properties[plugin->mode], FALSE);
 
-  gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->clock);
+  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->clock);
 
   gtk_widget_show (plugin->clock);
 }
