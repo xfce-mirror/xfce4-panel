@@ -28,6 +28,7 @@
 #include <math.h>
 #endif
 
+#include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -76,7 +77,10 @@ static void     clock_plugin_screen_position_changed   (XfcePanelPlugin       *p
                                                         XfceScreenPosition     position);
 static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_set_mode                  (ClockPlugin           *plugin);
-static void     clock_plugin_reposition_calendar       (ClockPlugin          *plugin);
+static void     clock_plugin_reposition_calendar       (ClockPlugin           *plugin);
+static gboolean clock_plugin_calendar_key_press_event  (GtkWidget             *calendar_window,
+                                                        GdkEventKey           *event,
+                                                        ClockPlugin           *plugin);
 static void     clock_plugin_popup_calendar            (ClockPlugin           *plugin);
 static void     clock_plugin_hide_calendar             (ClockPlugin           *plugin);
 static gboolean clock_plugin_tooltip                   (gpointer               user_data);
@@ -975,6 +979,22 @@ clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
 
 
 
+static gboolean
+clock_plugin_calendar_key_press_event (GtkWidget      *calendar_window,
+                                       GdkEventKey    *event,
+                                       ClockPlugin    *plugin)
+{
+  if (event->type == GDK_KEY_PRESS && event->keyval == GDK_KEY_Escape)
+    {
+      clock_plugin_hide_calendar (plugin);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
 static void
 clock_plugin_popup_calendar (ClockPlugin *plugin)
 {
@@ -1004,6 +1024,8 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
                                         | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "show",
                         G_CALLBACK (clock_plugin_calendar_show_event), plugin);
+      g_signal_connect (G_OBJECT (plugin->calendar_window), "key-press-event",
+                        G_CALLBACK (clock_plugin_calendar_key_press_event), plugin);
       gtk_container_add (GTK_CONTAINER (calendar_frame), plugin->calendar);
       gtk_widget_show (plugin->calendar);
     }
