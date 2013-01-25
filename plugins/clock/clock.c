@@ -28,6 +28,7 @@
 #include <math.h>
 #endif
 
+#include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -57,11 +58,14 @@ static void     clock_plugin_set_property              (GObject               *o
                                                         const GValue          *value,
                                                         GParamSpec            *pspec);
 static gboolean clock_plugin_leave_notify_event        (GtkWidget             *widget,
-                                                        GdkEventCrossing      *event);
+                                                        GdkEventCrossing      *event,
+                                                        ClockPlugin           *plugin);
 static gboolean clock_plugin_enter_notify_event        (GtkWidget             *widget,
-                                                        GdkEventCrossing      *event);
+                                                        GdkEventCrossing      *event,
+                                                        ClockPlugin           *plugin);
 static gboolean clock_plugin_button_press_event        (GtkWidget             *widget,
-                                                        GdkEventButton        *event);
+                                                        GdkEventButton        *event,
+                                                        ClockPlugin           *plugin);
 static void     clock_plugin_construct                 (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_free_data                 (XfcePanelPlugin       *panel_plugin);
 static gboolean clock_plugin_size_changed              (XfcePanelPlugin       *panel_plugin,
@@ -73,7 +77,10 @@ static void     clock_plugin_screen_position_changed   (XfcePanelPlugin       *p
                                                         XfceScreenPosition     position);
 static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_set_mode                  (ClockPlugin           *plugin);
-static void     clock_plugin_reposition_calendar       (ClockPlugin          *plugin);
+static void     clock_plugin_reposition_calendar       (ClockPlugin           *plugin);
+static gboolean clock_plugin_calendar_key_press_event  (GtkWidget             *calendar_window,
+                                                        GdkEventKey           *event,
+                                                        ClockPlugin           *plugin);
 static void     clock_plugin_popup_calendar            (ClockPlugin           *plugin);
 static void     clock_plugin_hide_calendar             (ClockPlugin           *plugin);
 static gboolean clock_plugin_tooltip                   (gpointer               user_data);
@@ -87,7 +94,6 @@ enum
 {
   PROP_0,
   PROP_MODE,
-  PROP_SHOW_FRAME,
   PROP_TOOLTIP_FORMAT,
   PROP_COMMAND,
   PROP_ROTATE_VERTICALLY
@@ -118,12 +124,11 @@ struct _ClockPlugin
   XfcePanelPlugin __parent__;
 
   GtkWidget          *clock;
-  GtkWidget          *frame;
+  GtkWidget          *button;
 
   GtkWidget          *calendar_window;
   GtkWidget          *calendar;
 
-  guint               show_frame : 1;
   gchar              *command;
   ClockPluginMode     mode;
   guint               rotate_vertically : 1;
@@ -189,17 +194,11 @@ static void
 clock_plugin_class_init (ClockPluginClass *klass)
 {
   GObjectClass         *gobject_class;
-  GtkWidgetClass       *widget_class;
   XfcePanelPluginClass *plugin_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->set_property = clock_plugin_set_property;
   gobject_class->get_property = clock_plugin_get_property;
-
-  widget_class = GTK_WIDGET_CLASS (klass);
-  widget_class->leave_notify_event = clock_plugin_leave_notify_event;
-  widget_class->enter_notify_event = clock_plugin_enter_notify_event;
-  widget_class->button_press_event = clock_plugin_button_press_event;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = clock_plugin_construct;
@@ -217,13 +216,6 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                                       CLOCK_PLUGIN_MODE_MAX,
                                                       CLOCK_PLUGIN_MODE_DEFAULT,
                                                       EXO_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_SHOW_FRAME,
-                                   g_param_spec_boolean ("show-frame",
-                                                         NULL, NULL,
-                                                         TRUE,
-                                                         EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_TOOLTIP_FORMAT,
@@ -253,16 +245,25 @@ clock_plugin_init (ClockPlugin *plugin)
 {
   plugin->mode = CLOCK_PLUGIN_MODE_DEFAULT;
   plugin->clock = NULL;
-  plugin->show_frame = TRUE;
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
   plugin->command = NULL;
   plugin->rotate_vertically = TRUE;
 
-  plugin->frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
-  gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), GTK_SHADOW_ETCHED_IN);
-  gtk_widget_show (plugin->frame);
+  plugin->button = xfce_panel_create_toggle_button ();
+  /* xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button); */
+  gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
+  gtk_widget_set_name (plugin->button, "clock-button");
+  gtk_button_set_relief (GTK_BUTTON (plugin->button), GTK_RELIEF_NONE);
+  /* Have to handle all events in the button object rather than the plugin.
+   * Otherwise, default handlers will block the events. */
+  g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
+                    G_CALLBACK (clock_plugin_button_press_event), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "enter-notify-event",
+                    G_CALLBACK (clock_plugin_enter_notify_event), plugin);
+  g_signal_connect (G_OBJECT (plugin->button), "leave-notify-event",
+                    G_CALLBACK (clock_plugin_leave_notify_event), plugin);
+  gtk_widget_show (plugin->button);
 }
 
 
@@ -279,10 +280,6 @@ clock_plugin_get_property (GObject    *object,
     {
     case PROP_MODE:
       g_value_set_uint (value, plugin->mode);
-      break;
-
-    case PROP_SHOW_FRAME:
-      g_value_set_boolean (value, plugin->show_frame);
       break;
 
     case PROP_TOOLTIP_FORMAT:
@@ -312,7 +309,6 @@ clock_plugin_set_property (GObject      *object,
                            GParamSpec   *pspec)
 {
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (object);
-  gboolean     show_frame;
   gboolean     rotate_vertically;
 
   switch (prop_id)
@@ -322,16 +318,6 @@ clock_plugin_set_property (GObject      *object,
         {
           plugin->mode = g_value_get_uint (value);
           clock_plugin_set_mode (plugin);
-        }
-      break;
-
-    case PROP_SHOW_FRAME:
-      show_frame = g_value_get_boolean (value);
-      if (plugin->show_frame != show_frame)
-        {
-          plugin->show_frame = show_frame;
-          gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
-              show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
         }
       break;
 
@@ -369,10 +355,9 @@ clock_plugin_set_property (GObject      *object,
 
 static gboolean
 clock_plugin_leave_notify_event (GtkWidget        *widget,
-                                 GdkEventCrossing *event)
+                                 GdkEventCrossing *event,
+                                 ClockPlugin      *plugin)
 {
-  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (widget);
-
   /* stop a running tooltip timeout when we leave the widget */
   if (plugin->tooltip_timeout != NULL)
     {
@@ -387,9 +372,9 @@ clock_plugin_leave_notify_event (GtkWidget        *widget,
 
 static gboolean
 clock_plugin_enter_notify_event (GtkWidget        *widget,
-                                 GdkEventCrossing *event)
+                                 GdkEventCrossing *event,
+                                 ClockPlugin      *plugin)
 {
-  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (widget);
   guint        interval;
 
   /* start the tooltip timeout if needed */
@@ -406,9 +391,9 @@ clock_plugin_enter_notify_event (GtkWidget        *widget,
 
 static gboolean
 clock_plugin_button_press_event (GtkWidget      *widget,
-                                 GdkEventButton *event)
+                                 GdkEventButton *event,
+                                 ClockPlugin    *plugin)
 {
-  ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (widget);
   GError      *error = NULL;
 
   if (event->button == 1)
@@ -442,7 +427,8 @@ clock_plugin_button_press_event (GtkWidget      *widget,
         }
     }
 
-  return (*GTK_WIDGET_CLASS (clock_plugin_parent_class)->button_press_event) (widget, event);
+  /* bypass GTK_TOGGLE_BUTTON's handler and go directly to the plugin's one */
+  return (*GTK_WIDGET_CLASS (clock_plugin_parent_class)->button_press_event) (GTK_WIDGET (plugin), event);
 }
 
 
@@ -454,7 +440,6 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty  properties[] =
   {
     { "mode", G_TYPE_UINT },
-    { "show-frame", G_TYPE_BOOLEAN },
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
     { "rotate-vertically", G_TYPE_BOOLEAN },
@@ -500,24 +485,17 @@ clock_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
   gdouble      ratio;
   gint         ratio_size;
-  gint         border = 0;
   gint         offset;
 
   if (plugin->clock == NULL)
     return TRUE;
 
-  /* set the frame border */
-  if (plugin->show_frame && size > 26)
-    border = 1;
-  gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), border);
-
   /* get the width:height ratio */
   g_object_get (G_OBJECT (plugin->clock), "size-ratio", &ratio, NULL);
   if (ratio > 0)
     {
-      offset = MAX (plugin->frame->style->xthickness, plugin->frame->style->ythickness) + border;
-      offset *= 2;
-      ratio_size = size - offset;
+      ratio_size = size;
+      offset = 0;
     }
   else
     {
@@ -830,10 +808,6 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   exo_mutual_binding_new (G_OBJECT (plugin), "mode",
                           G_OBJECT (object), "active");
 
-  object = gtk_builder_get_object (builder, "show-frame");
-  exo_mutual_binding_new (G_OBJECT (plugin), "show-frame",
-                          G_OBJECT (object), "active");
-
   object = gtk_builder_get_object (builder, "tooltip-format");
   exo_mutual_binding_new (G_OBJECT (plugin), "tooltip-format",
                           G_OBJECT (object), "text");
@@ -924,7 +898,7 @@ clock_plugin_set_mode (ClockPlugin *plugin)
                          xfce_panel_plugin_get_property_base (XFCE_PANEL_PLUGIN (plugin)),
                          properties[plugin->mode], FALSE);
 
-  gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->clock);
+  gtk_container_add (GTK_CONTAINER (plugin->button), plugin->clock);
 
   gtk_widget_show (plugin->clock);
 }
@@ -962,6 +936,22 @@ clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
 
 
 
+static gboolean
+clock_plugin_calendar_key_press_event (GtkWidget      *calendar_window,
+                                       GdkEventKey    *event,
+                                       ClockPlugin    *plugin)
+{
+  if (event->type == GDK_KEY_PRESS && event->keyval == GDK_KEY_Escape)
+    {
+      clock_plugin_hide_calendar (plugin);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
 static void
 clock_plugin_popup_calendar (ClockPlugin *plugin)
 {
@@ -991,10 +981,13 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
                                         | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "show",
                         G_CALLBACK (clock_plugin_calendar_show_event), plugin);
+      g_signal_connect (G_OBJECT (plugin->calendar_window), "key-press-event",
+                        G_CALLBACK (clock_plugin_calendar_key_press_event), plugin);
       gtk_container_add (GTK_CONTAINER (calendar_frame), plugin->calendar);
       gtk_widget_show (plugin->calendar);
     }
 
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
   gtk_widget_show (GTK_WIDGET (plugin->calendar_window));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
 }
@@ -1008,6 +1001,7 @@ clock_plugin_hide_calendar (ClockPlugin *plugin)
 
   gtk_widget_hide (GTK_WIDGET (plugin->calendar_window));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
 }
 
 
