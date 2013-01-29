@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-08 14:36+0000\n"
+"POT-Creation-Date: 2013-01-29 08:09+0000\n"
 "PO-Revision-Date: 2012-04-15 12:05+0200\n"
 "Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
 "Language-Team: polski <>\n"
@@ -482,7 +482,7 @@ msgstr "Przemieszcza wybrany element jeden wiersz w górę"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "None (use system style)"
-msgstr "Brak (motyw systemowy)"
+msgstr "Brak (styl systemowy)"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Num_ber of rows:"
@@ -994,15 +994,15 @@ msgstr "Wyświetla menu w bieżącym położeniu kursora myszy"
 msgid "Show help options"
 msgstr "Wypisuje komunikat pomocy"
 
-#: ../plugins/clock/clock.c:155
+#: ../plugins/clock/clock.c:160
 msgid "Week %V"
 msgstr "Tydzień %V"
 
-#: ../plugins/clock/clock.c:437
+#: ../plugins/clock/clock.c:422
 msgid "Failed to execute clock command"
 msgstr "Nie udało się wykonać polecenia zegara"
 
-#: ../plugins/clock/clock.c:780
+#: ../plugins/clock/clock.c:758
 msgid "Custom Format"
 msgstr "Własny"
 
@@ -1062,19 +1062,14 @@ msgid "Sho_w AM/PM"
 msgstr "_AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "_Obramowanie"
-
-#: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
 msgstr "_Nieaktywne punkty"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show gri_d"
 msgstr "_Siatka"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:19
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1086,15 +1081,15 @@ msgstr ""
 "przez bieżący rok, %m przez miesiąc a %d przez dzień. Więcej informacji "
 "można znaleźć w dokumentacji programu date."
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid "True _binary clock"
 msgstr "Rzeczywiste wskazania _binarne"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "_Layout:"
 msgstr "_Układ:"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "_Tooltip format:"
 msgstr "Format p_odpowiedzi:"
 
@@ -1642,6 +1637,10 @@ msgstr "Znane programy"
 #: ../plugins/systray/systray.desktop.in.h:2
 msgid "Notification Area"
 msgstr "Obszar powiadamiania"
+
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "Show _frame"
+msgstr "_Obramowanie"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
