@@ -46,6 +46,7 @@
 #include "clock-dialog_ui.h"
 
 #define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
+#define DEFAULT_TIMEZONE ""
 
 
 
@@ -87,6 +88,7 @@ static gboolean clock_plugin_tooltip                   (gpointer               u
 static gboolean clock_plugin_timeout_running           (gpointer               user_data);
 static void     clock_plugin_timeout_destroyed         (gpointer               user_data);
 static gboolean clock_plugin_timeout_sync              (gpointer               user_data);
+static void     clock_plugin_set_timezone              (ClockPlugin           *plugin);
 
 
 
@@ -96,7 +98,8 @@ enum
   PROP_MODE,
   PROP_TOOLTIP_FORMAT,
   PROP_COMMAND,
-  PROP_ROTATE_VERTICALLY
+  PROP_ROTATE_VERTICALLY,
+  PROP_TIMEZONE
 };
 
 typedef enum
@@ -135,6 +138,8 @@ struct _ClockPlugin
 
   gchar              *tooltip_format;
   ClockPluginTimeout *tooltip_timeout;
+
+  gchar              *timezone;
 };
 
 struct _ClockPluginTimeout
@@ -236,6 +241,13 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                    g_param_spec_string ("command",
                                                         NULL, NULL, NULL,
                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_TIMEZONE,
+                                   g_param_spec_string ("timezone",
+                                                        NULL, NULL,
+                                                        DEFAULT_TIMEZONE,
+                                                        EXO_PARAM_READWRITE));
 }
 
 
@@ -249,6 +261,9 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_timeout = NULL;
   plugin->command = NULL;
   plugin->rotate_vertically = TRUE;
+  plugin->timezone = g_strdup (DEFAULT_TIMEZONE);
+
+  clock_plugin_set_timezone (plugin);
 
   plugin->button = xfce_panel_create_toggle_button ();
   /* xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button); */
@@ -292,6 +307,10 @@ clock_plugin_get_property (GObject    *object,
 
     case PROP_ROTATE_VERTICALLY:
       g_value_set_boolean (value, plugin->rotate_vertically);
+      break;
+
+    case PROP_TIMEZONE:
+      g_value_set_string (value, plugin->timezone);
       break;
 
     default:
@@ -345,11 +364,35 @@ clock_plugin_set_property (GObject      *object,
         }
       break;
 
+    case PROP_TIMEZONE:
+      g_free (plugin->timezone);
+      plugin->timezone = g_value_dup_string (value);
+      clock_plugin_set_timezone (plugin);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
     }
 }
+
+
+
+static void
+clock_plugin_set_timezone (ClockPlugin *plugin)
+{
+  if (plugin->timezone == NULL || g_strcmp0 (plugin->timezone, "") == 0)
+    g_unsetenv ("TZ");
+  else
+    g_setenv ("TZ", plugin->timezone, TRUE);
+
+  tzset();
+
+  /* rather expensive way of notifying the clock widget of timezone change */
+  if (plugin->clock != NULL)
+    clock_plugin_set_mode (plugin);
+}
+
 
 
 
@@ -443,6 +486,7 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
     { "rotate-vertically", G_TYPE_BOOLEAN },
+    { "timezone", G_TYPE_STRING },
     { NULL }
   };
 
