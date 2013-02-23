@@ -21,9 +21,6 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_TIME_H
-#include <time.h>
-#endif
 #ifdef HAVE_MATH_H
 #include <math.h>
 #endif
@@ -38,6 +35,7 @@
 #include <common/panel-utils.h>
 
 #include "clock.h"
+#include "clock-time.h"
 #include "clock-analog.h"
 #include "clock-binary.h"
 #include "clock-digital.h"
@@ -46,8 +44,6 @@
 #include "clock-dialog_ui.h"
 
 #define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
-#define DEFAULT_TIMEZONE ""
-
 
 
 static void     clock_plugin_get_property              (GObject               *object,
@@ -85,10 +81,6 @@ static gboolean clock_plugin_calendar_key_press_event  (GtkWidget             *c
 static void     clock_plugin_popup_calendar            (ClockPlugin           *plugin);
 static void     clock_plugin_hide_calendar             (ClockPlugin           *plugin);
 static gboolean clock_plugin_tooltip                   (gpointer               user_data);
-static gboolean clock_plugin_timeout_running           (gpointer               user_data);
-static void     clock_plugin_timeout_destroyed         (gpointer               user_data);
-static gboolean clock_plugin_timeout_sync              (gpointer               user_data);
-static void     clock_plugin_set_timezone              (ClockPlugin           *plugin);
 
 
 
@@ -98,8 +90,7 @@ enum
   PROP_MODE,
   PROP_TOOLTIP_FORMAT,
   PROP_COMMAND,
-  PROP_ROTATE_VERTICALLY,
-  PROP_TIMEZONE
+  PROP_ROTATE_VERTICALLY
 };
 
 typedef enum
@@ -137,18 +128,9 @@ struct _ClockPlugin
   guint               rotate_vertically : 1;
 
   gchar              *tooltip_format;
-  ClockPluginTimeout *tooltip_timeout;
+  ClockTimeTimeout   *tooltip_timeout;
 
-  gchar              *timezone;
-};
-
-struct _ClockPluginTimeout
-{
-  guint       interval;
-  GSourceFunc function;
-  gpointer    data;
-  guint       timeout_id;
-  guint       restart : 1;
+  ClockTime          *time;
 };
 
 typedef struct
@@ -241,13 +223,6 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                    g_param_spec_string ("command",
                                                         NULL, NULL, NULL,
                                                         EXO_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_TIMEZONE,
-                                   g_param_spec_string ("timezone",
-                                                        NULL, NULL,
-                                                        DEFAULT_TIMEZONE,
-                                                        EXO_PARAM_READWRITE));
 }
 
 
@@ -261,9 +236,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_timeout = NULL;
   plugin->command = NULL;
   plugin->rotate_vertically = TRUE;
-  plugin->timezone = g_strdup (DEFAULT_TIMEZONE);
-
-  clock_plugin_set_timezone (plugin);
+  plugin->time = clock_time_new ();
 
   plugin->button = xfce_panel_create_toggle_button ();
   /* xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button); */
@@ -307,10 +280,6 @@ clock_plugin_get_property (GObject    *object,
 
     case PROP_ROTATE_VERTICALLY:
       g_value_set_boolean (value, plugin->rotate_vertically);
-      break;
-
-    case PROP_TIMEZONE:
-      g_value_set_string (value, plugin->timezone);
       break;
 
     default:
@@ -364,35 +333,11 @@ clock_plugin_set_property (GObject      *object,
         }
       break;
 
-    case PROP_TIMEZONE:
-      g_free (plugin->timezone);
-      plugin->timezone = g_value_dup_string (value);
-      clock_plugin_set_timezone (plugin);
-      break;
-
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
     }
 }
-
-
-
-static void
-clock_plugin_set_timezone (ClockPlugin *plugin)
-{
-  if (plugin->timezone == NULL || g_strcmp0 (plugin->timezone, "") == 0)
-    g_unsetenv ("TZ");
-  else
-    g_setenv ("TZ", plugin->timezone, TRUE);
-
-  tzset();
-
-  /* rather expensive way of notifying the clock widget of timezone change */
-  if (plugin->clock != NULL)
-    clock_plugin_set_mode (plugin);
-}
-
 
 
 
@@ -404,7 +349,7 @@ clock_plugin_leave_notify_event (GtkWidget        *widget,
   /* stop a running tooltip timeout when we leave the widget */
   if (plugin->tooltip_timeout != NULL)
     {
-      clock_plugin_timeout_free (plugin->tooltip_timeout);
+      clock_time_timeout_free (plugin->tooltip_timeout);
       plugin->tooltip_timeout = NULL;
     }
 
@@ -423,8 +368,9 @@ clock_plugin_enter_notify_event (GtkWidget        *widget,
   /* start the tooltip timeout if needed */
   if (plugin->tooltip_timeout == NULL)
     {
-      interval = clock_plugin_interval_from_format (plugin->tooltip_format);
-      plugin->tooltip_timeout = clock_plugin_timeout_new (interval, clock_plugin_tooltip, plugin);
+      interval = clock_time_interval_from_format (plugin->tooltip_format);
+      plugin->tooltip_timeout = clock_time_timeout_new (interval, plugin->time,
+                                                        G_CALLBACK (clock_plugin_tooltip), plugin);
     }
 
   return FALSE;
@@ -486,9 +432,14 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
     { "rotate-vertically", G_TYPE_BOOLEAN },
-    { "timezone", G_TYPE_STRING },
     { NULL }
   };
+
+  const PanelProperty  time_properties[] =
+    {
+      { "timezone", G_TYPE_STRING },
+      { NULL }
+    };
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (panel_plugin);
@@ -497,6 +448,10 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
   panel_properties_bind (NULL, G_OBJECT (panel_plugin),
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
+
+  panel_properties_bind (NULL, G_OBJECT (plugin->time),
+                         xfce_panel_plugin_get_property_base (panel_plugin),
+                         time_properties, FALSE);
 
   /* make sure a mode is set */
   if (plugin->mode == CLOCK_PLUGIN_MODE_DEFAULT)
@@ -511,7 +466,7 @@ clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
 
   if (plugin->tooltip_timeout != NULL)
-    clock_plugin_timeout_free (plugin->tooltip_timeout);
+    clock_time_timeout_free (plugin->tooltip_timeout);
 
   if (plugin->calendar_window != NULL)
     gtk_widget_destroy (plugin->calendar_window);
@@ -752,18 +707,19 @@ clock_plugin_configure_plugin_chooser_separator (GtkTreeModel *model,
 
 
 static void
-clock_plugin_configure_plugin_chooser_fill (GtkComboBox *combo,
+clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
+                                            GtkComboBox *combo,
                                             GtkEntry    *entry,
                                             const gchar *formats[])
 {
   guint         i;
   GtkListStore *store;
   gchar        *preview;
-  struct tm     now;
   GtkTreeIter   iter;
   const gchar  *active_format;
   gboolean      has_active = FALSE;
 
+  panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_COMBO_BOX (combo));
   panel_return_if_fail (GTK_IS_ENTRY (entry));
 
@@ -773,13 +729,11 @@ clock_plugin_configure_plugin_chooser_fill (GtkComboBox *combo,
   store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_STRING);
   gtk_combo_box_set_model (combo, GTK_TREE_MODEL (store));
 
-  clock_plugin_get_localtime (&now);
-
   active_format = gtk_entry_get_text (entry);
 
   for (i = 0; formats[i] != NULL; i++)
     {
-      preview = clock_plugin_strdup_strftime (_(formats[i]), &now);
+      preview = clock_time_strdup_strftime (plugin->time, _(formats[i]));
       gtk_list_store_insert_with_values (store, &iter, i,
                                          COLUMN_FORMAT, _(formats[i]),
                                          COLUMN_TEXT, preview, -1);
@@ -856,13 +810,15 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   exo_mutual_binding_new (G_OBJECT (plugin), "tooltip-format",
                           G_OBJECT (object), "text");
   combo = gtk_builder_get_object (builder, "tooltip-chooser");
-  clock_plugin_configure_plugin_chooser_fill (GTK_COMBO_BOX (combo),
+  clock_plugin_configure_plugin_chooser_fill (plugin,
+                                              GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
                                               tooltip_formats);
 
   object = gtk_builder_get_object (builder, "digital-format");
   combo = gtk_builder_get_object (builder, "digital-chooser");
-  clock_plugin_configure_plugin_chooser_fill (GTK_COMBO_BOX (combo),
+  clock_plugin_configure_plugin_chooser_fill (plugin,
+                                              GTK_COMBO_BOX (combo),
                                               GTK_ENTRY (object),
                                               digital_formats);
 
@@ -912,15 +868,16 @@ clock_plugin_set_mode (ClockPlugin *plugin)
 
   /* create a new clock */
   if (plugin->mode == CLOCK_PLUGIN_MODE_ANALOG)
-    plugin->clock = xfce_clock_analog_new ();
+    plugin->clock = xfce_clock_analog_new (plugin->time);
   else if (plugin->mode == CLOCK_PLUGIN_MODE_BINARY)
-    plugin->clock = xfce_clock_binary_new ();
+    plugin->clock = xfce_clock_binary_new (plugin->time);
   else if (plugin->mode == CLOCK_PLUGIN_MODE_DIGITAL)
-    plugin->clock = xfce_clock_digital_new ();
+    plugin->clock = xfce_clock_digital_new (plugin->time);
   else if (plugin->mode == CLOCK_PLUGIN_MODE_FUZZY)
-    plugin->clock = xfce_clock_fuzzy_new ();
+    plugin->clock = xfce_clock_fuzzy_new (plugin->time);
   else
-    plugin->clock = xfce_clock_lcd_new ();
+    plugin->clock = xfce_clock_lcd_new (plugin->time);
+
 
   if (plugin->rotate_vertically)
     {
@@ -966,16 +923,17 @@ static void
 clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
                                   ClockPlugin *plugin)
 {
-  struct tm tm;
+  GDateTime *time;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
   clock_plugin_reposition_calendar (plugin);
 
-  clock_plugin_get_localtime (&tm);
-  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), tm.tm_mon,
-                             1900 + tm.tm_year);
-  gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), tm.tm_mday);
+  time = clock_time_get_time (plugin->time);
+  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (time),
+                             g_date_time_get_year (time));
+  gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), g_date_time_get_day_of_month (time));
+  g_date_time_unref (time);
 }
 
 
@@ -1055,13 +1013,9 @@ clock_plugin_tooltip (gpointer user_data)
 {
   ClockPlugin *plugin = XFCE_CLOCK_PLUGIN (user_data);
   gchar       *string;
-  struct tm    tm;
-
-  /* get the local time */
-  clock_plugin_get_localtime (&tm);
 
   /* set the tooltip */
-  string = clock_plugin_strdup_strftime (plugin->tooltip_format, &tm);
+  string = clock_time_strdup_strftime (plugin->time, plugin->tooltip_format);
   gtk_widget_set_tooltip_markup (GTK_WIDGET (plugin), string);
   g_free (string);
 
@@ -1070,238 +1024,4 @@ clock_plugin_tooltip (gpointer user_data)
 
   /* keep the timeout running */
   return TRUE;
-}
-
-
-
-static gboolean
-clock_plugin_timeout_running (gpointer user_data)
-{
-  ClockPluginTimeout *timeout = user_data;
-  gboolean            result;
-  struct tm           tm;
-
-  GDK_THREADS_ENTER ();
-  result = (timeout->function) (timeout->data);
-  GDK_THREADS_LEAVE ();
-
-  /* check if the timeout still runs in time if updating once a minute */
-  if (result && timeout->interval == CLOCK_INTERVAL_MINUTE)
-    {
-      /* sync again when we don't run on time */
-      clock_plugin_get_localtime (&tm);
-      timeout->restart = tm.tm_sec != 0;
-    }
-
-  return result && !timeout->restart;
-}
-
-
-
-static void
-clock_plugin_timeout_destroyed (gpointer user_data)
-{
-  ClockPluginTimeout *timeout = user_data;
-
-  timeout->timeout_id = 0;
-
-  if (G_UNLIKELY (timeout->restart))
-    clock_plugin_timeout_set_interval (timeout, timeout->interval);
-}
-
-
-
-static gboolean
-clock_plugin_timeout_sync (gpointer user_data)
-{
-  ClockPluginTimeout *timeout = user_data;
-
-  /* run the user function */
-  if ((timeout->function) (timeout->data))
-    {
-      /* start the real timeout */
-      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, timeout->interval,
-                                                        clock_plugin_timeout_running, timeout,
-                                                        clock_plugin_timeout_destroyed);
-    }
-  else
-    {
-      timeout->timeout_id = 0;
-    }
-
-  /* stop the sync timeout */
-  return FALSE;
-}
-
-
-
-ClockPluginTimeout *
-clock_plugin_timeout_new (guint       interval,
-                          GSourceFunc function,
-                          gpointer    data)
-{
-  ClockPluginTimeout *timeout;
-
-  panel_return_val_if_fail (interval > 0, NULL);
-  panel_return_val_if_fail (function != NULL, NULL);
-
-  timeout = g_slice_new0 (ClockPluginTimeout);
-  timeout->interval = 0;
-  timeout->function = function;
-  timeout->data = data;
-  timeout->timeout_id = 0;
-  timeout->restart = FALSE;
-
-  clock_plugin_timeout_set_interval (timeout, interval);
-
-  return timeout;
-}
-
-
-
-void
-clock_plugin_timeout_set_interval (ClockPluginTimeout *timeout,
-                                   guint               interval)
-{
-  struct tm tm;
-  guint     next_interval;
-  gboolean  restart = timeout->restart;
-
-  panel_return_if_fail (timeout != NULL);
-  panel_return_if_fail (interval > 0);
-
-  /* leave if nothing changed and we're not restarting */
-  if (!restart && timeout->interval == interval)
-    return;
-  timeout->interval = interval;
-  timeout->restart = FALSE;
-
-  /* stop running timeout */
-  if (G_LIKELY (timeout->timeout_id != 0))
-    g_source_remove (timeout->timeout_id);
-  timeout->timeout_id = 0;
-
-  /* run function when not restarting, leave if it returns false */
-  if (!restart && !(timeout->function) (timeout->data))
-    return;
-
-  /* get the seconds to the next internal */
-  if (interval == CLOCK_INTERVAL_MINUTE)
-    {
-      clock_plugin_get_localtime (&tm);
-      next_interval = 60 - tm.tm_sec;
-    }
-  else
-    {
-      next_interval = 0;
-    }
-
-  if (next_interval > 0)
-    {
-      /* start the sync timeout */
-      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, next_interval,
-                                                        clock_plugin_timeout_sync,
-                                                        timeout, NULL);
-    }
-  else
-    {
-      /* directly start running the normal timeout */
-      timeout->timeout_id = g_timeout_add_seconds_full (G_PRIORITY_DEFAULT, interval,
-                                                        clock_plugin_timeout_running, timeout,
-                                                        clock_plugin_timeout_destroyed);
-    }
-}
-
-
-
-void
-clock_plugin_timeout_free (ClockPluginTimeout *timeout)
-{
-  panel_return_if_fail (timeout != NULL);
-
-  timeout->restart = FALSE;
-  if (G_LIKELY (timeout->timeout_id != 0))
-    g_source_remove (timeout->timeout_id);
-  g_slice_free (ClockPluginTimeout, timeout);
-}
-
-
-
-void
-clock_plugin_get_localtime (struct tm *tm)
-{
-  time_t now = time (NULL);
-
-#ifndef HAVE_LOCALTIME_R
-  struct tm *tmbuf;
-
-  tmbuf = localtime (&now);
-  *tm = *tmbuf;
-#else
-  localtime_r (&now, tm);
-#endif
-}
-
-
-
-gchar *
-clock_plugin_strdup_strftime (const gchar     *format,
-                              const struct tm *tm)
-{
-  gchar *converted, *result;
-  gsize  length;
-  gchar  buffer[1024];
-
-  /* leave when format is null */
-  if (G_UNLIKELY (exo_str_is_empty (format)))
-    return NULL;
-
-  /* convert to locale, because that's what strftime uses */
-  converted = g_locale_from_utf8 (format, -1, NULL, NULL, NULL);
-  if (G_UNLIKELY (converted == NULL))
-    return NULL;
-
-  /* parse the time string */
-  length = strftime (buffer, sizeof (buffer), converted, tm);
-  if (G_UNLIKELY (length == 0))
-    buffer[0] = '\0';
-
-  /* convert the string back to utf-8 */
-  result = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
-
-  /* cleanup */
-  g_free (converted);
-
-  return result;
-}
-
-
-
-guint
-clock_plugin_interval_from_format (const gchar *format)
-{
-  const gchar *p;
-
-  if (G_UNLIKELY (exo_str_is_empty (format)))
-      return CLOCK_INTERVAL_MINUTE;
-
-  for (p = format; *p != '\0'; ++p)
-    {
-      if (p[0] == '%' && p[1] != '\0')
-        {
-          switch (*++p)
-            {
-            case 'c':
-            case 'N':
-            case 'r':
-            case 's':
-            case 'S':
-            case 'T':
-            case 'X':
-              return CLOCK_INTERVAL_SECOND;
-            }
-        }
-    }
-
-  return CLOCK_INTERVAL_MINUTE;
 }

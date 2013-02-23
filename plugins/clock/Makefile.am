@@ -16,6 +16,8 @@ libclock_la_SOURCES = \
 	$(libclock_built_sources) \
 	clock.c \
 	clock.h \
+	clock-time.c \
+	clock-time.h \
 	clock-analog.c \
 	clock-analog.h \
 	clock-binary.c \
@@ -28,6 +30,7 @@ libclock_la_SOURCES = \
 	clock-lcd.h
 
 libclock_la_CFLAGS = \
+	$(GLIB_CFLAGS) \
 	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(CAIRO_CFLAGS) \
@@ -46,6 +49,7 @@ libclock_la_LDFLAGS =	 \
 libclock_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
+	$(GLIB_LIBS) \
 	$(GTK_LIBS) \
 	$(CAIRO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \

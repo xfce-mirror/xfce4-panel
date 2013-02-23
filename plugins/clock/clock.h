@@ -46,22 +46,6 @@ GType               clock_plugin_get_type             (void) G_GNUC_CONST;
 
 void                clock_plugin_register_type        (XfcePanelTypeModule *type_module);
 
-ClockPluginTimeout *clock_plugin_timeout_new          (guint                interval,
-                                                       GSourceFunc          function,
-                                                       gpointer             data);
-
-void                clock_plugin_timeout_set_interval (ClockPluginTimeout  *timeout,
-                                                       guint                interval);
-
-void                clock_plugin_timeout_free         (ClockPluginTimeout  *timeout);
-
-void                clock_plugin_get_localtime        (struct tm           *tm);
-
-gchar              *clock_plugin_strdup_strftime      (const gchar         *format,
-                                                       const struct tm     *tm);
-
-guint               clock_plugin_interval_from_format (const gchar         *format);
-
 G_END_DECLS
 
 #endif /* !__CLOCK_H__ */

@@ -28,6 +28,7 @@
 #include <cairo/cairo.h>
 
 #include "clock.h"
+#include "clock-time.h"
 #include "clock-lcd.h"
 
 #define RELATIVE_SPACE (0.10)
@@ -57,7 +58,9 @@ static gdouble   xfce_clock_lcd_draw_digit   (cairo_t           *cr,
                                               gdouble            size,
                                               gdouble            offset_x,
                                               gdouble            offset_y);
-static gboolean  xfce_clock_lcd_update       (gpointer           user_data);
+static gboolean  xfce_clock_lcd_update       (XfceClockLcd      *lcd,
+                                              ClockTime         *time);
+
 
 
 
@@ -81,12 +84,14 @@ struct _XfceClockLcd
 {
   GtkImage __parent__;
 
-  ClockPluginTimeout *timeout;
+  ClockTimeTimeout   *timeout;
 
   guint               show_seconds : 1;
   guint               show_military : 1; /* 24-hour clock */
   guint               show_meridiem : 1; /* am/pm */
   guint               flash_separators : 1;
+
+  ClockTime          *time;
 };
 
 typedef struct
@@ -169,9 +174,6 @@ xfce_clock_lcd_init (XfceClockLcd *lcd)
   lcd->show_meridiem = FALSE;
   lcd->show_military = TRUE;
   lcd->flash_separators = FALSE;
-  lcd->timeout = clock_plugin_timeout_new (CLOCK_INTERVAL_MINUTE,
-                                           xfce_clock_lcd_update,
-                                           lcd);
 }
 
 
@@ -215,7 +217,7 @@ xfce_clock_lcd_set_property (GObject      *object,
 
   /* reschedule the timeout and resize */
   show_seconds = lcd->show_seconds || lcd->flash_separators;
-  clock_plugin_timeout_set_interval (lcd->timeout,
+  clock_time_timeout_set_interval (lcd->timeout,
       show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE);
   gtk_widget_queue_resize (GTK_WIDGET (lcd));
 }
@@ -266,7 +268,7 @@ static void
 xfce_clock_lcd_finalize (GObject *object)
 {
   /* stop the timeout */
-  clock_plugin_timeout_free (XFCE_CLOCK_LCD (object)->timeout);
+  clock_time_timeout_free (XFCE_CLOCK_LCD (object)->timeout);
 
   (*G_OBJECT_CLASS (xfce_clock_lcd_parent_class)->finalize) (object);
 }
@@ -283,7 +285,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
   gint          ticks, i;
   gdouble       size;
   gdouble       ratio;
-  struct tm     tm;
+  GDateTime    *time;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), FALSE);
 
@@ -315,10 +317,10 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
       cairo_set_line_width (cr, MAX (size * 0.05, 1.5));
 
       /* get the local time */
-      clock_plugin_get_localtime (&tm);
+      time = clock_time_get_time (lcd->time);
 
       /* draw the hours */
-      ticks = tm.tm_hour;
+      ticks = g_date_time_get_hour (time);
 
       /* convert 24h clock to 12h clock */
       if (!lcd->show_military && ticks > 12)
@@ -331,8 +333,8 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
        * because we might miss the exact second (due to slightly delayed
        * timeout) we queue a resize the first 3 seconds or anything in
        * the first minute */
-      if ((ticks == 10 || ticks == 0) && tm.tm_min == 0
-          && (!lcd->show_seconds || tm.tm_sec < 3))
+      if ((ticks == 10 || ticks == 0) && g_date_time_get_minute (time) == 0
+          && (!lcd->show_seconds || g_date_time_get_second (time) < 3))
         g_object_notify (G_OBJECT (lcd), "size-ratio");
 
       if (ticks >= 10)
@@ -350,7 +352,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
           if (i == 0)
             {
               /* get the minutes */
-              ticks = tm.tm_min;
+              ticks = g_date_time_get_minute (time);
             }
           else
             {
@@ -359,11 +361,11 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
                 break;
 
               /* get the seconds */
-              ticks = tm.tm_sec;
+              ticks = g_date_time_get_second (time);
             }
 
           /* draw the dots */
-          if (lcd->flash_separators && (tm.tm_sec % 2) == 1)
+          if (lcd->flash_separators && (g_date_time_get_second (time) % 2) == 1)
             offset_x += size * RELATIVE_SPACE * 2;
           else
             offset_x = xfce_clock_lcd_draw_dots (cr, size, offset_x, offset_y);
@@ -378,13 +380,14 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
       if (lcd->show_meridiem)
         {
           /* am or pm? */
-          ticks = tm.tm_hour >= 12 ? 11 : 10;
+          ticks = g_date_time_get_hour (time) >= 12 ? 11 : 10;
 
           /* draw the digit */
           offset_x = xfce_clock_lcd_draw_digit (cr, ticks, size, offset_x, offset_y);
         }
 
       /* drop the pushed group */
+      g_date_time_unref (time);
       cairo_pop_group_to_source (cr);
       cairo_paint (cr);
       cairo_destroy (cr);
@@ -398,17 +401,18 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 static gdouble
 xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
 {
-  gdouble   ratio;
-  gint      ticks;
-  struct tm tm;
+  gdouble    ratio;
+  gint       ticks;
+  GDateTime *time;
 
   /* get the local time */
-  clock_plugin_get_localtime (&tm);
+  time = clock_time_get_time (lcd->time);
 
   /* 8:8(space)8 */
   ratio = (3 * RELATIVE_DIGIT) + RELATIVE_DOTS + RELATIVE_SPACE;
 
-  ticks = tm.tm_hour;
+  ticks = g_date_time_get_hour (time);
+  g_date_time_unref (time);
 
   if (!lcd->show_military && ticks > 12)
     ticks -= 12;
@@ -579,11 +583,12 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
 
 
 static gboolean
-xfce_clock_lcd_update (gpointer user_data)
+xfce_clock_lcd_update (XfceClockLcd *lcd,
+                       ClockTime    *time)
 {
-  GtkWidget *widget = GTK_WIDGET (user_data);
+  GtkWidget *widget = GTK_WIDGET (lcd);
 
-  panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (user_data), FALSE);
+  panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), FALSE);
 
   /* update if the widget if visible */
   if (G_LIKELY (GTK_WIDGET_VISIBLE (widget)))
@@ -595,7 +600,14 @@ xfce_clock_lcd_update (gpointer user_data)
 
 
 GtkWidget *
-xfce_clock_lcd_new (void)
+xfce_clock_lcd_new (ClockTime *time)
 {
-  return g_object_new (XFCE_CLOCK_TYPE_LCD, NULL);
+  XfceClockLcd *lcd = g_object_new (XFCE_CLOCK_TYPE_LCD, NULL);
+
+  lcd->time = time;
+  lcd->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
+                                         lcd->time,
+                                         G_CALLBACK (xfce_clock_lcd_update), lcd);
+
+  return GTK_WIDGET (lcd);
 }

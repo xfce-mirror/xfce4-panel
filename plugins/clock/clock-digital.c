@@ -20,13 +20,10 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_TIME_H
-#include <time.h>
-#endif
-
 #include <gtk/gtk.h>
 
 #include "clock.h"
+#include "clock-time.h"
 #include "clock-digital.h"
 
 
@@ -40,7 +37,9 @@ static void     xfce_clock_digital_get_property (GObject               *object,
                                                  GValue                *value,
                                                  GParamSpec            *pspec);
 static void     xfce_clock_digital_finalize     (GObject               *object);
-static gboolean xfce_clock_digital_update       (gpointer               user_data);
+static gboolean xfce_clock_digital_update       (XfceClockDigital      *digital,
+                                                 ClockTime             *time);
+
 
 
 
@@ -61,7 +60,8 @@ struct _XfceClockDigital
 {
   GtkLabel __parent__;
 
-  ClockPluginTimeout *timeout;
+  ClockTime          *time;
+  ClockTimeTimeout   *timeout;
 
   gchar *format;
 };
@@ -111,9 +111,6 @@ static void
 xfce_clock_digital_init (XfceClockDigital *digital)
 {
   digital->format = g_strdup (DEFAULT_DIGITAL_FORMAT);
-  digital->timeout = clock_plugin_timeout_new (clock_plugin_interval_from_format (digital->format),
-                                               xfce_clock_digital_update,
-                                               digital);
 
   gtk_label_set_justify (GTK_LABEL (digital), GTK_JUSTIFY_CENTER);
 }
@@ -147,9 +144,9 @@ xfce_clock_digital_set_property (GObject      *object,
     }
 
   /* reschedule the timeout and redraw */
-  clock_plugin_timeout_set_interval (digital->timeout,
-      clock_plugin_interval_from_format (digital->format));
-  xfce_clock_digital_update (digital);
+  clock_time_timeout_set_interval (digital->timeout,
+      clock_time_interval_from_format (digital->format));
+  xfce_clock_digital_update (digital, digital->time);
 }
 
 
@@ -186,7 +183,7 @@ xfce_clock_digital_finalize (GObject *object)
   XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (object);
 
   /* stop the timeout */
-  clock_plugin_timeout_free (digital->timeout);
+  clock_time_timeout_free (digital->timeout);
 
   g_free (digital->format);
 
@@ -196,19 +193,16 @@ xfce_clock_digital_finalize (GObject *object)
 
 
 static gboolean
-xfce_clock_digital_update (gpointer user_data)
+xfce_clock_digital_update (XfceClockDigital *digital,
+                           ClockTime        *time)
 {
-  XfceClockDigital *digital = XFCE_CLOCK_DIGITAL (user_data);
   gchar            *string;
-  struct tm         tm;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (digital), FALSE);
-
-  /* get the local time */
-  clock_plugin_get_localtime (&tm);
+  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
 
   /* set time string */
-  string = clock_plugin_strdup_strftime (digital->format, &tm);
+  string = clock_time_strdup_strftime (digital->time, digital->format);
   gtk_label_set_markup (GTK_LABEL (digital), string);
   g_free (string);
 
@@ -218,7 +212,14 @@ xfce_clock_digital_update (gpointer user_data)
 
 
 GtkWidget *
-xfce_clock_digital_new (void)
+xfce_clock_digital_new (ClockTime *time)
 {
-  return g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
+  XfceClockDigital *digital = g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
+
+  digital->time = time;
+  digital->timeout = clock_time_timeout_new (clock_time_interval_from_format (digital->format),
+                                             digital->time,
+                                             G_CALLBACK (xfce_clock_digital_update), digital);
+
+  return GTK_WIDGET (digital);
 }
