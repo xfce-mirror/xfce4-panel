@@ -799,6 +799,10 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   dialog->plugin = plugin;
   dialog->builder = builder;
 
+  object = gtk_builder_get_object (builder, "timezone-name");
+  exo_mutual_binding_new (G_OBJECT (plugin->time), "timezone",
+                          G_OBJECT (object), "text");
+
   object = gtk_builder_get_object (builder, "mode");
   g_signal_connect_data (G_OBJECT (object), "changed",
       G_CALLBACK (clock_plugin_configure_plugin_mode_changed), dialog,
