@@ -934,7 +934,7 @@ clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
   clock_plugin_reposition_calendar (plugin);
 
   time = clock_time_get_time (plugin->time);
-  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (time),
+  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (time) - 1,
                              g_date_time_get_year (time));
   gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), g_date_time_get_day_of_month (time));
   g_date_time_unref (time);
