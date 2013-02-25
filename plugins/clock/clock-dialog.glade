@@ -123,15 +123,14 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="label10">
+                          <object class="GtkButton" id="run-time-config-tool">
+                            <property name="label" translatable="yes">_Run configuration tool</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="tooltip_text" translatable="yes">To change the system time and the default timezone use a Time and Date configuration tool provided with your system.</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">System time</property>
-                            <attributes>
-                              <attribute name="style" value="oblique"/>
-                            </attributes>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Alternatively, use a "date" utility to set your system time.</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>

@@ -44,6 +44,8 @@
 #include "clock-dialog_ui.h"
 
 #define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
+/* Please adjust the following command to match your distribution */
+#define DEFAULT_TIME_CONFIG_TOOL "time-admin"
 
 
 static void     clock_plugin_get_property              (GObject               *object,
@@ -90,7 +92,8 @@ enum
   PROP_MODE,
   PROP_TOOLTIP_FORMAT,
   PROP_COMMAND,
-  PROP_ROTATE_VERTICALLY
+  PROP_ROTATE_VERTICALLY,
+  PROP_TIME_CONFIG_TOOL
 };
 
 typedef enum
@@ -130,6 +133,7 @@ struct _ClockPlugin
   gchar              *tooltip_format;
   ClockTimeTimeout   *tooltip_timeout;
 
+  gchar              *time_config_tool;
   ClockTime          *time;
 };
 
@@ -223,6 +227,12 @@ clock_plugin_class_init (ClockPluginClass *klass)
                                    g_param_spec_string ("command",
                                                         NULL, NULL, NULL,
                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_TIME_CONFIG_TOOL,
+                                   g_param_spec_string ("time-config-tool",
+                                                        NULL, NULL, NULL,
+                                                        EXO_PARAM_READWRITE));
 }
 
 
@@ -235,6 +245,7 @@ clock_plugin_init (ClockPlugin *plugin)
   plugin->tooltip_format = g_strdup (DEFAULT_TOOLTIP_FORMAT);
   plugin->tooltip_timeout = NULL;
   plugin->command = NULL;
+  plugin->time_config_tool = g_strdup (DEFAULT_TIME_CONFIG_TOOL);
   plugin->rotate_vertically = TRUE;
   plugin->time = clock_time_new ();
 
@@ -276,6 +287,10 @@ clock_plugin_get_property (GObject    *object,
 
     case PROP_COMMAND:
       g_value_set_string (value, plugin->command);
+      break;
+
+    case PROP_TIME_CONFIG_TOOL:
+      g_value_set_string (value, plugin->time_config_tool);
       break;
 
     case PROP_ROTATE_VERTICALLY:
@@ -322,6 +337,11 @@ clock_plugin_set_property (GObject      *object,
        * toggling
        */
       clock_plugin_hide_calendar (plugin);
+      break;
+
+    case PROP_TIME_CONFIG_TOOL:
+      g_free (plugin->time_config_tool);
+      plugin->time_config_tool = g_value_dup_string (value);
       break;
 
     case PROP_ROTATE_VERTICALLY:
@@ -777,6 +797,26 @@ clock_plugin_configure_plugin_free (gpointer user_data)
 
 
 static void
+clock_plugin_configure_run_config_tool (GtkWidget   *button,
+                                        ClockPlugin *plugin)
+{
+  GError      *error = NULL;
+
+  panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
+
+  if (!xfce_spawn_command_line_on_screen (gtk_widget_get_screen (button),
+                                          plugin->time_config_tool,
+                                          FALSE, FALSE, &error))
+    {
+      xfce_dialog_show_error
+        (NULL, error, _("Failed to execute command \"%s\"."), plugin->time_config_tool);
+      g_error_free (error);
+    }
+}
+
+
+
+static void
 clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   ClockPlugin       *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
@@ -799,7 +839,13 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   dialog->plugin = plugin;
   dialog->builder = builder;
 
+  object = gtk_builder_get_object (builder, "run-time-config-tool");
+  panel_return_if_fail (GTK_IS_BUTTON (object));
+  g_signal_connect (G_OBJECT (object), "clicked",
+      G_CALLBACK (clock_plugin_configure_run_config_tool), plugin);
+
   object = gtk_builder_get_object (builder, "timezone-name");
+  panel_return_if_fail (GTK_IS_ENTRY (object));
   exo_mutual_binding_new (G_OBJECT (plugin->time), "timezone",
                           G_OBJECT (object), "text");
 
