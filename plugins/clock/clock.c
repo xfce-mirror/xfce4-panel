@@ -231,7 +231,8 @@ clock_plugin_class_init (ClockPluginClass *klass)
   g_object_class_install_property (gobject_class,
                                    PROP_TIME_CONFIG_TOOL,
                                    g_param_spec_string ("time-config-tool",
-                                                        NULL, NULL, NULL,
+                                                        NULL, NULL,
+                                                        DEFAULT_TIME_CONFIG_TOOL,
                                                         EXO_PARAM_READWRITE));
 }
 
@@ -452,6 +453,7 @@ clock_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "tooltip-format", G_TYPE_STRING },
     { "command", G_TYPE_STRING },
     { "rotate-vertically", G_TYPE_BOOLEAN },
+    { "time-config-tool", G_TYPE_STRING },
     { NULL }
   };
 
