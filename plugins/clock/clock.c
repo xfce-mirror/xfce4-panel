@@ -45,7 +45,8 @@
 
 #define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
 /* Please adjust the following command to match your distribution */
-#define DEFAULT_TIME_CONFIG_TOOL "time-admin"
+/* e.g. "time-admin" */
+#define DEFAULT_TIME_CONFIG_TOOL ""
 
 
 static void     clock_plugin_get_property              (GObject               *object,
@@ -799,6 +800,25 @@ clock_plugin_configure_plugin_free (gpointer user_data)
 
 
 static void
+clock_plugin_configure_config_tool_changed (ClockPluginDialog *dialog)
+{
+  GObject           *object;
+
+  panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
+  panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (dialog->plugin));
+
+  object = gtk_builder_get_object (dialog->builder, "run-time-config-tool");
+  panel_return_if_fail (GTK_IS_BUTTON (object));
+
+  gtk_widget_set_sensitive
+    (GTK_WIDGET (object),
+     dialog->plugin->time_config_tool != NULL &&
+     g_strcmp0 (dialog->plugin->time_config_tool, "") != 0);
+}
+
+
+
+static void
 clock_plugin_configure_run_config_tool (GtkWidget   *button,
                                         ClockPlugin *plugin)
 {
@@ -843,6 +863,10 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   object = gtk_builder_get_object (builder, "run-time-config-tool");
   panel_return_if_fail (GTK_IS_BUTTON (object));
+  g_signal_connect_swapped (G_OBJECT (plugin), "notify::time-config-tool",
+                            G_CALLBACK (clock_plugin_configure_config_tool_changed),
+                            dialog);
+  clock_plugin_configure_config_tool_changed (dialog);
   g_signal_connect (G_OBJECT (object), "clicked",
       G_CALLBACK (clock_plugin_configure_run_config_tool), plugin);
 
