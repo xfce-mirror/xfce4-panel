@@ -74,7 +74,7 @@ enum
 static guint clock_time_signals[LAST_SIGNAL] = { 0, };
 
 
-G_DEFINE_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
+XFCE_PANEL_DEFINE_TYPE (ClockTime, clock_time, G_TYPE_OBJECT)
 
 
 
@@ -347,10 +347,12 @@ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
 {
   GDateTime *time;
   guint      next_interval;
-  gboolean   restart = timeout->restart;
+  gboolean   restart;
 
   panel_return_if_fail (timeout != NULL);
   panel_return_if_fail (interval > 0);
+
+  restart = timeout->restart;
 
   /* leave if nothing changed and we're not restarting */
   if (!restart && timeout->interval == interval)

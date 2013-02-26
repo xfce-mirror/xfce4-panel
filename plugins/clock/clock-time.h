@@ -20,6 +20,8 @@
 #define __CLOCK_TIME_H__
 
 #include <glib.h>
+#include <libxfce4util/libxfce4util.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
@@ -40,6 +42,8 @@ typedef struct _ClockTimeTimeout   ClockTimeTimeout;
 
 
 GType               clock_time_get_type               (void) G_GNUC_CONST;
+
+void                clock_time_register_type          (XfcePanelTypeModule *type_module);
 
 ClockTime          *clock_time_new                    (void);
 
