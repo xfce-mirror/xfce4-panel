@@ -1034,8 +1034,6 @@ clock_plugin_calendar_key_press_event (GtkWidget      *calendar_window,
 static void
 clock_plugin_popup_calendar (ClockPlugin *plugin)
 {
-  GtkWidget *calendar_frame;
-
   if (plugin->calendar_window == NULL)
     {
       plugin->calendar_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -1048,11 +1046,6 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
       gtk_window_set_keep_above (GTK_WINDOW (plugin->calendar_window), TRUE);
       gtk_window_stick (GTK_WINDOW (plugin->calendar_window));
 
-      calendar_frame = gtk_frame_new (NULL);
-      gtk_frame_set_shadow_type (GTK_FRAME (calendar_frame), GTK_SHADOW_OUT);
-      gtk_container_add (GTK_CONTAINER (plugin->calendar_window), calendar_frame);
-      gtk_widget_show (calendar_frame);
-
       plugin->calendar = gtk_calendar_new ();
       gtk_calendar_set_display_options (GTK_CALENDAR (plugin->calendar),
                                         GTK_CALENDAR_SHOW_HEADING
@@ -1062,7 +1055,7 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
                         G_CALLBACK (clock_plugin_calendar_show_event), plugin);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "key-press-event",
                         G_CALLBACK (clock_plugin_calendar_key_press_event), plugin);
-      gtk_container_add (GTK_CONTAINER (calendar_frame), plugin->calendar);
+      gtk_container_add (GTK_CONTAINER (plugin->calendar_window), plugin->calendar);
       gtk_widget_show (plugin->calendar);
     }
 
