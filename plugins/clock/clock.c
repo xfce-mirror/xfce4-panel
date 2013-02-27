@@ -437,6 +437,7 @@ clock_plugin_button_press_event (GtkWidget      *widget,
 
           return TRUE;
         }
+      return TRUE;
     }
 
   /* bypass GTK_TOGGLE_BUTTON's handler and go directly to the plugin's one */
