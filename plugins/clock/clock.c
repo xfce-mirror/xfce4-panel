@@ -78,10 +78,22 @@ static void     clock_plugin_screen_position_changed   (XfcePanelPlugin       *p
 static void     clock_plugin_configure_plugin          (XfcePanelPlugin       *panel_plugin);
 static void     clock_plugin_set_mode                  (ClockPlugin           *plugin);
 static void     clock_plugin_reposition_calendar       (ClockPlugin           *plugin);
+static gboolean clock_plugin_pointer_grab              (ClockPlugin           *plugin,
+                                                        GtkWidget             *widget,
+                                                        gboolean               keep);
+static void     clock_plugin_pointer_ungrab            (ClockPlugin           *plugin,
+                                                        GtkWidget             *widget);
+static gboolean clock_plugin_calendar_pointed          (GtkWidget             *calendar_window,
+                                                        gdouble                x_root,
+                                                        gdouble                y_root);
+static gboolean clock_plugin_calendar_button_press_event (GtkWidget           *calendar_window,
+                                                          GdkEventButton      *event,
+                                                          ClockPlugin         *plugin);
 static gboolean clock_plugin_calendar_key_press_event  (GtkWidget             *calendar_window,
                                                         GdkEventKey           *event,
                                                         ClockPlugin           *plugin);
-static void     clock_plugin_popup_calendar            (ClockPlugin           *plugin);
+static void     clock_plugin_popup_calendar            (ClockPlugin           *plugin,
+                                                        gboolean               modal);
 static void     clock_plugin_hide_calendar             (ClockPlugin           *plugin);
 static gboolean clock_plugin_tooltip                   (gpointer               user_data);
 
@@ -133,6 +145,9 @@ struct _ClockPlugin
 
   gchar              *tooltip_format;
   ClockTimeTimeout   *tooltip_timeout;
+
+  GdkGrabStatus       grab_pointer;
+  GdkGrabStatus       grab_keyboard;
 
   gchar              *time_config_tool;
   ClockTime          *time;
@@ -408,7 +423,7 @@ clock_plugin_button_press_event (GtkWidget      *widget,
 {
   GError      *error = NULL;
 
-  if (event->button == 1)
+  if (event->button == 1 || event->button == 2)
     {
       if (event->type == GDK_BUTTON_PRESS &&
           exo_str_is_empty (plugin->command))
@@ -416,7 +431,8 @@ clock_plugin_button_press_event (GtkWidget      *widget,
           /* toggle calendar window visibility */
           if (plugin->calendar_window == NULL
               || !gtk_widget_get_visible (GTK_WIDGET (plugin->calendar_window)))
-            clock_plugin_popup_calendar (plugin);
+            clock_plugin_popup_calendar
+              (plugin, event->button == 1 && !(event->state & GDK_CONTROL_MASK));
           else
             clock_plugin_hide_calendar (plugin);
 
@@ -1016,6 +1032,104 @@ clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
 
 
 
+static void
+clock_plugin_pointer_ungrab (ClockPlugin *plugin,
+                             GtkWidget   *widget)
+{
+  if (plugin->grab_pointer == GDK_GRAB_SUCCESS)
+    gdk_pointer_ungrab (GDK_CURRENT_TIME);
+  if (plugin->grab_keyboard == GDK_GRAB_SUCCESS)
+    gdk_keyboard_ungrab (GDK_CURRENT_TIME);
+}
+
+
+
+static gboolean
+clock_plugin_pointer_grab (ClockPlugin *plugin,
+                           GtkWidget   *widget,
+                           gboolean     keep)
+{
+  GdkWindow     *window;
+  gboolean       grab_succeed = FALSE;
+  guint          i;
+  GdkEventMask   pointer_mask = GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK
+                                | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK
+                                | GDK_POINTER_MOTION_MASK;
+
+  window = widget->window;
+
+  /* don't try to get the grab for longer then 1/4 second */
+  for (i = 0; i < (G_USEC_PER_SEC / 100 / 4); i++)
+    {
+      plugin->grab_keyboard = gdk_keyboard_grab (window, TRUE, GDK_CURRENT_TIME);
+      if (plugin->grab_keyboard == GDK_GRAB_SUCCESS)
+        {
+          plugin->grab_pointer = gdk_pointer_grab (window, TRUE, pointer_mask,
+                                                   NULL, NULL, GDK_CURRENT_TIME);
+          if (plugin->grab_pointer == GDK_GRAB_SUCCESS)
+            {
+              grab_succeed = TRUE;
+              break;
+            }
+        }
+
+      g_usleep (100);
+    }
+
+  /* release the grab */
+  if (!keep)
+    clock_plugin_pointer_ungrab (plugin, widget);
+
+  if (!grab_succeed)
+    {
+      clock_plugin_pointer_ungrab (plugin, widget);
+      g_printerr (PACKAGE_NAME ": Unable to get keyboard and mouse "
+                  "grab. Popup failed.\n");
+    }
+
+  return grab_succeed;
+}
+
+
+
+static gboolean
+clock_plugin_calendar_pointed (GtkWidget *calendar_window,
+                               gdouble    x_root,
+                               gdouble    y_root)
+{
+  gint          window_x, window_y;
+
+  if (gtk_widget_get_mapped (calendar_window))
+    {
+      gdk_window_get_position (calendar_window->window, &window_x, &window_y);
+
+      if (x_root >= window_x && x_root < window_x + calendar_window->allocation.width &&
+          y_root >= window_y && y_root < window_y + calendar_window->allocation.height)
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
+static gboolean
+clock_plugin_calendar_button_press_event (GtkWidget      *calendar_window,
+                                          GdkEventButton *event,
+                                          ClockPlugin    *plugin)
+{
+  if (event->type == GDK_BUTTON_PRESS &&
+      !clock_plugin_calendar_pointed (calendar_window, event->x_root, event->y_root))
+    {
+      clock_plugin_hide_calendar (plugin);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+
+
 static gboolean
 clock_plugin_calendar_key_press_event (GtkWidget      *calendar_window,
                                        GdkEventKey    *event,
@@ -1033,7 +1147,8 @@ clock_plugin_calendar_key_press_event (GtkWidget      *calendar_window,
 
 
 static void
-clock_plugin_popup_calendar (ClockPlugin *plugin)
+clock_plugin_popup_calendar (ClockPlugin *plugin,
+                             gboolean     modal)
 {
   if (plugin->calendar_window == NULL)
     {
@@ -1054,6 +1169,8 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
                                         | GTK_CALENDAR_SHOW_WEEK_NUMBERS);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "show",
                         G_CALLBACK (clock_plugin_calendar_show_event), plugin);
+      g_signal_connect (G_OBJECT (plugin->calendar_window), "button-press-event",
+                        G_CALLBACK (clock_plugin_calendar_button_press_event), plugin);
       g_signal_connect (G_OBJECT (plugin->calendar_window), "key-press-event",
                         G_CALLBACK (clock_plugin_calendar_key_press_event), plugin);
       gtk_container_add (GTK_CONTAINER (plugin->calendar_window), plugin->calendar);
@@ -1063,6 +1180,8 @@ clock_plugin_popup_calendar (ClockPlugin *plugin)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), TRUE);
   gtk_widget_show (GTK_WIDGET (plugin->calendar_window));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), TRUE);
+  if (modal)
+    clock_plugin_pointer_grab (plugin, GTK_WIDGET (plugin->calendar_window), TRUE);
 }
 
 
@@ -1072,6 +1191,7 @@ clock_plugin_hide_calendar (ClockPlugin *plugin)
 {
   panel_return_if_fail (plugin->calendar_window != NULL);
 
+  clock_plugin_pointer_ungrab (plugin, GTK_WIDGET (plugin->calendar_window));
   gtk_widget_hide (GTK_WIDGET (plugin->calendar_window));
   xfce_panel_plugin_block_autohide (XFCE_PANEL_PLUGIN (plugin), FALSE);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button), FALSE);
