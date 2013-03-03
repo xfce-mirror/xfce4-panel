@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-16 17:12+0000\n"
+"POT-Creation-Date: 2013-03-03 13:18+0000\n"
 "PO-Revision-Date: 2011-09-24 20:43+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch (Flemish)\n"
@@ -191,15 +191,15 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr "Geen actieve instantie van %s gevonden"
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "Kon de migratietoepassing niet openen"
 
-#: ../panel/panel-application.c:936
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Maak starter"
 
-#: ../panel/panel-application.c:937
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -207,14 +207,14 @@ msgstr ""
 "Dit zal een nieuwe starter toevoegen aan de werkbalk en voegt de geplaatste "
 "bestanden in als menu-onderdelen."
 
-#: ../panel/panel-application.c:939
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Maak een nieuwe starter van %d bureaubladbestand"
 msgstr[1] "Maak een nieuwe starter van %d bureaubladbestanden"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -222,11 +222,11 @@ msgstr ""
 "U hebt X (de grafische omgeving) gestart zonder sessiebeheerder. Wanneer u "
 "op sluiten klikt, dan zal dat de grafische omgeving afsluiten."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "Weet u zeker dat u de werkbalk wil afsluiten?"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kon de opdracht '%s' niet uitvoeren"
@@ -952,7 +952,7 @@ msgstr "Selecteer een pictogram"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht '%s' niet uitvoeren."
@@ -999,15 +999,15 @@ msgstr "Opduikmenu gebruiken bij de huidige muispositie"
 msgid "Show help options"
 msgstr "Toon hulpopties"
 
-#: ../plugins/clock/clock.c:146
+#: ../plugins/clock/clock.c:167
 msgid "Week %V"
 msgstr "Week %V"
 
-#: ../plugins/clock/clock.c:407
+#: ../plugins/clock/clock.c:450
 msgid "Failed to execute clock command"
 msgstr "Kon de klokopdracht niet uitvoeren"
 
-#: ../plugins/clock/clock.c:729
+#: ../plugins/clock/clock.c:797
 msgid "Custom Format"
 msgstr "Aangepaste bestandopmaak"
 
@@ -1063,13 +1063,14 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
-msgid "Sho_w AM/PM"
-msgstr "AM/PM t_onen"
+msgid ""
+"Name of the timezone matching the system's timezone database. Leave empty to "
+"revert to the local time."
+msgstr "Naam van de tijdzone, in overeenstemming met de tijdzone-gegevensbank van het systeem. Laat leeg om terug te vallen op de plaatselijke tijd."
 
 #: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "Omlijsting tonen"
+msgid "Sho_w AM/PM"
+msgstr "AM/PM t_onen"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
@@ -1079,255 +1080,277 @@ msgstr "_Inactieve punten weergeven"
 msgid "Show gri_d"
 msgstr "_Raster weergeven"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid ""
+"Start a tool for setting the system time and date. If the button is grayed "
+"out, check the \"Help\" page to see how to configure it correctly."
+msgstr "Start een gereedschapje om de tijd en datum van het systeem in te stellen. Indien de knop is uitgegrijsd, kunt u de 'Hulp'-pagina oproepen om te zien hoe u het correct kunt instellen."
+
+#: ../plugins/clock/clock-dialog.glade.h:21
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
-"information."
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
 msgstr ""
 "De indeling beschrijft welke onderdelen van de tijd en datum in de "
 "bestandnaam worden ingevoegd. Zo wordt bijvoorbeeld %Y vervangen door het "
 "jaartal, %m door de maand en %d door de dag. Zie de documentatie van het "
 "datumhulpmiddel voor meer informatie."
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time Settings"
+msgstr "Tijdinstellingen"
+
+#: ../plugins/clock/clock-dialog.glade.h:23
+msgid "Time:"
+msgstr "Tijd:"
+
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Time_zone:"
+msgstr "Tijdzone:"
+
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "True _binary clock"
 msgstr "Volledig binaire klok"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Layout:"
 msgstr "Vormgeving:"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:27
+msgid "_Set"
+msgstr "In_stellen"
+
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "_Tooltip format:"
 msgstr "Opmaak van gereedschap_tip:"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Nacht"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Vroege ochtend"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Ochtend"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Bijna middag"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "Middag"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "Namiddag"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Avond"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Laat op de avond"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 uur"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "vijf over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "tien over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "kwart over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "tien voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "vijf voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "vijf over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "tien over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "kwart voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "tien voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "vijf voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 uur"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:119
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 uur"
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "vijf over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "tien over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "kwart over %0"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "tien voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "vijf voor half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "vijf over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "tien over half %1"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "kwart voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "tien voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "vijf voor %1"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 uur"
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "one"
 msgstr "één"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "two"
 msgstr "twee"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "three"
 msgstr "drie"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "four"
 msgstr "vier"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "five"
 msgstr "vijf"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "six"
 msgstr "zes"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "seven"
 msgstr "zeven"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "eight"
 msgstr "acht"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:146
 msgid "nine"
 msgstr "negen"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "ten"
 msgstr "tien"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:148
 msgid "eleven"
 msgstr "elf"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:149
 msgid "twelve"
 msgstr "twaalf"
 
@@ -1657,6 +1680,10 @@ msgstr "Bekende toepassingen"
 msgid "Notification Area"
 msgstr "Mededelingengebied"
 
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "Show _frame"
+msgstr "Omlijsting tonen"
+
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
 msgstr "_Maximale pictogramgrootte (px):"
@@ -1751,23 +1778,23 @@ msgstr "Venstertitel"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Werkblad wisselen met muiswiel"
 
-#: ../plugins/tasklist/tasklist-widget.c:3202
+#: ../plugins/tasklist/tasklist-widget.c:3245
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3254
 msgid "Un_minimize All"
 msgstr "Alles _ONTminimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3217
+#: ../plugins/tasklist/tasklist-widget.c:3260
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3226
+#: ../plugins/tasklist/tasklist-widget.c:3269
 msgid "_Unmaximize All"
 msgstr "Alles ONT_maximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3236
+#: ../plugins/tasklist/tasklist-widget.c:3279
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
