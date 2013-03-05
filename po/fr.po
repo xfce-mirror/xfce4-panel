@@ -5,19 +5,19 @@
 # Collet Etienne <xanaxlnx@gmail.com>, 2005.
 # Maximilian Schleiss <maximilian@xfce.org>, 2006-2009.
 # Jérôme Guelfucci <jeromeg@xfce.org>, 2009
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-15 06:42+0000\n"
+"POT-Creation-Date: 2013-03-05 02:45+0000\n"
 "PO-Revision-Date: 2012-04-15 14:09+0200\n"
 "Last-Translator: Iliyas Jorio <inv.jorio@gmail.com>\n"
 "Language-Team: French <xfce-i18n@xfce.org>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -191,15 +191,15 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr "Aucune instance de %s n'a été trouvée"
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "Échec au lancement de la procédure de migration"
 
-#: ../panel/panel-application.c:936
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Créer un _lanceur"
 
-#: ../panel/panel-application.c:937
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
@@ -207,14 +207,14 @@ msgstr ""
 "Ceci créera un lanceur sur le tableau de bord. Un élément de menu y sera "
 "inséré pour chaque fichier qui y sera déposé."
 
-#: ../panel/panel-application.c:939
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Créer un lanceur à partir de %d fichier desktop"
 msgstr[1] "Créer un lanceur à partir de %d fichiers desktop"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -222,11 +222,11 @@ msgstr ""
 "La session Xorg a été ouverte sans gestionnaire de session. L'action Quitter "
 "fermera la session Xorg."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "Voulez-vous vraiment quitter le tableau de bord ?"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Échec à l'exécution de la commande « %s »"
@@ -474,7 +474,8 @@ msgstr "_Largeur (%) :"
 msgid "M_ode:"
 msgstr "M_ode :"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid "Measurements"
 msgstr "Dimensions"
@@ -960,7 +961,7 @@ msgstr "Sélection de l'icône"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Échec à l'exécution de la commande « %s »."
@@ -1007,15 +1008,15 @@ msgstr "Afficher le menu à la position du curseur"
 msgid "Show help options"
 msgstr "Afficher l'aide"
 
-#: ../plugins/clock/clock.c:146
+#: ../plugins/clock/clock.c:167
 msgid "Week %V"
 msgstr "Semaine %V"
 
-#: ../plugins/clock/clock.c:407
+#: ../plugins/clock/clock.c:450
 msgid "Failed to execute clock command"
 msgstr "Échec à l'exécution de la commande de l'horloge"
 
-#: ../plugins/clock/clock.c:729
+#: ../plugins/clock/clock.c:797
 msgid "Custom Format"
 msgstr "Format personnalisé"
 
@@ -1052,7 +1053,8 @@ msgstr "Afficher les _secondes"
 msgid "F_ormat:"
 msgstr "F_ormat :"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "F_uzziness:"
 msgstr "_Précision :"
@@ -1070,13 +1072,14 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
-msgid "Sho_w AM/PM"
-msgstr "_Afficher AM/PM"
+msgid ""
+"Name of the timezone matching the system's timezone database. Leave empty to "
+"revert to the local time."
+msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "Afficher dans un _cadre"
+msgid "Sho_w AM/PM"
+msgstr "_Afficher AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
@@ -1086,255 +1089,277 @@ msgstr "Afficher les bits _inactifs"
 msgid "Show gri_d"
 msgstr "Afficher une _grille"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid ""
+"Start a tool for setting the system time and date. If the button is grayed "
+"out, check the \"Help\" page to see how to configure it correctly."
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:21
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
-"information."
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
 msgstr ""
 "Le format décrit les parties de la date ou l'heure à insérer dans le tableau "
 "de bord. Par exemple, %Y correspond à l'année, %m au mois et %d au jour. "
 "Veuillez consulter la documentation de la commande date pour plus "
 "d'information."
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time Settings"
+msgstr "Paramètres heure"
+
+#: ../plugins/clock/clock-dialog.glade.h:23
+msgid "Time:"
+msgstr "Heure :"
+
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Time_zone:"
+msgstr "Fuseau horaire :"
+
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "True _binary clock"
 msgstr "Horloge _binaire réelle"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Layout:"
 msgstr "T_ype :"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:27
+msgid "_Set"
+msgstr "Fixer"
+
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "_Tooltip format:"
 msgstr "_Bulle d'aide :"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Nuit"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Tôt le matin"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Matin"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Presque midi"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "midi"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "Après-midi"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Soir"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Tard le soir"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "%0 heure"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "%0 heure cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "%0 heure dix"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "%0 heure et quart"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "%0 heure vingt"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "%0 heure vingt-cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "%0 heure et demi"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "%1 heure moins vingt-cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "%1 heure moins vingt"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "%1 heure moins le quart"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "%1 heure moins dix"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "%1 heure moins cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "%1 heure"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:119
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "%0 heure"
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "%0 heure cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "%0 heure dix"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "%0 heure et quart"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "%0 heure vingt"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "%0 heure vingt-cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "%0 heure et demi"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "%1 heure moins vingt-cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "%1 heure moins vingt"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "%1 heure moins le quart"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "%1 heure moins dix"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "%1 heure moins cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "%1 heure"
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "one"
 msgstr "une"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "two"
 msgstr "deux"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "three"
 msgstr "trois"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "four"
 msgstr "quatre"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "five"
 msgstr "cinq"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "six"
 msgstr "six"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "seven"
 msgstr "sept"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "eight"
 msgstr "huit"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:146
 msgid "nine"
 msgstr "neuf"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "ten"
 msgstr "dix"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:148
 msgid "eleven"
 msgstr "onze"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:149
 msgid "twelve"
 msgstr "douze"
 
@@ -1663,6 +1688,10 @@ msgstr "Applications connues"
 msgid "Notification Area"
 msgstr "Zone de notification"
 
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "Show _frame"
+msgstr "Afficher dans un _cadre"
+
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
 msgstr "_Taille maximale d'une icône (pixel) :"
@@ -1757,23 +1786,23 @@ msgstr "Titre de la fenêtre"
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Changer de fenêtre à l'aide de la roulette de la souris"
 
-#: ../plugins/tasklist/tasklist-widget.c:3202
+#: ../plugins/tasklist/tasklist-widget.c:3245
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3254
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3217
+#: ../plugins/tasklist/tasklist-widget.c:3260
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3226
+#: ../plugins/tasklist/tasklist-widget.c:3269
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3236
+#: ../plugins/tasklist/tasklist-widget.c:3279
 msgid "_Close All"
 msgstr "Tout _fermer"
 
