@@ -1189,7 +1189,9 @@ clock_plugin_popup_calendar (ClockPlugin *plugin,
 static void
 clock_plugin_hide_calendar (ClockPlugin *plugin)
 {
-  panel_return_if_fail (plugin->calendar_window != NULL);
+  /* calendar_window is initialized on the first call to clock_plugin_popup_calendar () */
+  if (plugin->calendar_window == NULL)
+    return;
 
   clock_plugin_pointer_ungrab (plugin, GTK_WIDGET (plugin->calendar_window));
   gtk_widget_hide (GTK_WIDGET (plugin->calendar_window));
