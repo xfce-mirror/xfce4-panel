@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-09 13:45+0000\n"
-"PO-Revision-Date: 2013-03-09 16:35+0100\n"
+"POT-Creation-Date: 2013-03-10 11:09+0000\n"
+"PO-Revision-Date: 2013-03-10 14:15+0100\n"
 "Last-Translator: Piotr Sokół <psokol@jabster.pl>\n"
 "Language-Team: polski <>\n"
 "Language: \n"
@@ -239,15 +239,15 @@ msgstr "Nie udało się wykonać polecenia „%s”."
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
-"Nieprawidłowa składnia zdarzenia określonej wtyczki. Użyj PLUGIN-NAME:NAME[:"
-"TYPE:VALUE]."
+"Użyto nieprawidłowej składni zdarzenia wtyczki. Proszę użyć wyrażenia PLUGIN-"
+"NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
-"Nieprawidłowy typ podpowiedzi \"%s\". Prawidłowe typy to bool, double, int, "
+"Nieprawidłowy typ podpowiedzi „%s”. Prawidłowe typy to bool, double, int, "
 "string i uint."
 
 #: ../panel/panel-dialogs.c:65
@@ -331,7 +331,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
-msgstr "Autmatycznie"
+msgstr "Automatycznie"
 
 #. I18N: screen name in the output selector
 #: ../panel/panel-preferences-dialog.c:491
@@ -491,7 +491,7 @@ msgstr "_Ilość wierszy:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "O_utput:"
-msgstr "Wyjście"
+msgstr "_Ekran:"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Opacity"
@@ -511,7 +511,7 @@ msgstr "Usuwa wybrany panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "Row _Size (pixels):"
-msgstr "_Rozmiar (piksele):"
+msgstr "_Rozmiar wiersza (piksele):"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Select A Background Image"
@@ -761,7 +761,7 @@ msgstr "Zakończenie sesji..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr "Za_kończ sesję"
+msgstr "Za_kończ sesję..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
@@ -955,7 +955,7 @@ msgstr "Nie udało się wykonać polecenia „%s”."
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
-msgstr "Nie odnaleziono programu"
+msgstr "Nie odnaleziono programów"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1136
 msgid "Failed to load the applications menu"
@@ -1009,7 +1009,7 @@ msgstr "Własny"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
 msgid "24-_hour clock"
-msgstr "24 _godziny"
+msgstr "24 g_odziny"
 
 #: ../plugins/clock/clock-dialog.glade.h:2
 msgid "Analog"
@@ -1169,42 +1169,42 @@ msgstr "%0"
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
-msgstr "pięć minut po %0"
+msgstr "%0 pięć"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
-msgstr "dziesięć minut po %0"
+msgstr "%0 dziesięć"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
-msgstr "kwadrans po %0"
+msgstr "%0 i kwadrans"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
-msgstr "dwadzieścia minut po %0"
+msgstr "%0 dwadzieścia"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "dwadzieścia pięć minut po %0"
+msgstr "%0 dwadzieścia pięć"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
-msgstr "pół godziny po %0"
+msgstr "%0 trzydzieści"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
-msgstr "za dwadzieścia pięć minut %1"
+msgstr "za dwadzieścia pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
-msgstr "za dwadzieścia minut %1"
+msgstr "za dwadzieścia %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
@@ -1219,7 +1219,7 @@ msgstr "za dziesięć %1"
 #: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
-msgstr "za pięć minut %1"
+msgstr "za pięć %1"
 
 #: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
