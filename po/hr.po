@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-05 02:45+0000\n"
+"POT-Creation-Date: 2013-03-17 14:21+0000\n"
 "PO-Revision-Date: 2012-05-11 20:53+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <>\n"
@@ -922,7 +922,7 @@ msgstr "Odaberi ikonu"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:855 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Neuspjeh u izvršenju naredbe \"%s\"."
@@ -969,15 +969,15 @@ msgstr ""
 msgid "Show help options"
 msgstr "Pokaži opcije pomoći"
 
-#: ../plugins/clock/clock.c:167
+#: ../plugins/clock/clock.c:169
 msgid "Week %V"
 msgstr "Tjedan  %V"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:452
 msgid "Failed to execute clock command"
 msgstr "Neuspjeh u izvršenju naredbe sata"
 
-#: ../plugins/clock/clock.c:797
+#: ../plugins/clock/clock.c:802
 msgid "Custom Format"
 msgstr "Prilagođeni format"
 
@@ -1034,8 +1034,8 @@ msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid ""
-"Name of the timezone matching the system's timezone database. Leave empty to "
-"revert to the local time."
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:16
@@ -1050,13 +1050,7 @@ msgstr "Prikaži _neaktivne točkice"
 msgid "Show gri_d"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid ""
-"Start a tool for setting the system time and date. If the button is grayed "
-"out, check the \"Help\" page to see how to configure it correctly."
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1065,31 +1059,27 @@ msgid ""
 "page for additional information."
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Time:"
-msgstr ""
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "Postavke datuma i _vremena..."
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Pravi _binarni sat"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "_Raspored:"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
-msgid "_Set"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr ""
 
