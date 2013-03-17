@@ -44,9 +44,11 @@
 #include "clock-dialog_ui.h"
 
 #define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
+
 /* Please adjust the following command to match your distribution */
 /* e.g. "time-admin" */
-#define DEFAULT_TIME_CONFIG_TOOL ""
+#define DEFAULT_TIME_CONFIG_TOOL "time-admin"
+
 
 
 static void     clock_plugin_get_property              (GObject               *object,
@@ -512,7 +514,10 @@ clock_plugin_free_data (XfcePanelPlugin *panel_plugin)
   if (plugin->calendar_window != NULL)
     gtk_widget_destroy (plugin->calendar_window);
 
+  g_object_unref (G_OBJECT (plugin->time));
+
   g_free (plugin->tooltip_format);
+  g_free (plugin->time_config_tool);
   g_free (plugin->command);
 }
 
@@ -820,18 +825,17 @@ clock_plugin_configure_plugin_free (gpointer user_data)
 static void
 clock_plugin_configure_config_tool_changed (ClockPluginDialog *dialog)
 {
-  GObject           *object;
+  GObject *object;
+  gchar   *path;
 
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
   panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (dialog->plugin));
 
   object = gtk_builder_get_object (dialog->builder, "run-time-config-tool");
   panel_return_if_fail (GTK_IS_BUTTON (object));
-
-  gtk_widget_set_sensitive
-    (GTK_WIDGET (object),
-     dialog->plugin->time_config_tool != NULL &&
-     g_strcmp0 (dialog->plugin->time_config_tool, "") != 0);
+  path = g_find_program_in_path (dialog->plugin->time_config_tool);
+  gtk_widget_set_visible (GTK_WIDGET (object), path != NULL);
+  g_free (path);
 }
 
 
@@ -840,7 +844,7 @@ static void
 clock_plugin_configure_run_config_tool (GtkWidget   *button,
                                         ClockPlugin *plugin)
 {
-  GError      *error = NULL;
+  GError *error = NULL;
 
   panel_return_if_fail (XFCE_IS_CLOCK_PLUGIN (plugin));
 
@@ -848,8 +852,7 @@ clock_plugin_configure_run_config_tool (GtkWidget   *button,
                                           plugin->time_config_tool,
                                           FALSE, FALSE, &error))
     {
-      xfce_dialog_show_error
-        (NULL, error, _("Failed to execute command \"%s\"."), plugin->time_config_tool);
+      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), plugin->time_config_tool);
       g_error_free (error);
     }
 }
