@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-03 13:18+0000\n"
+"POT-Creation-Date: 2013-03-18 11:45+0000\n"
 "PO-Revision-Date: 2011-09-24 20:43+0200\n"
 "Last-Translator: Pjotr\n"
 "Language-Team: Dutch (Flemish)\n"
@@ -952,7 +952,7 @@ msgstr "Selecteer een pictogram"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:855 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht '%s' niet uitvoeren."
@@ -999,15 +999,15 @@ msgstr "Opduikmenu gebruiken bij de huidige muispositie"
 msgid "Show help options"
 msgstr "Toon hulpopties"
 
-#: ../plugins/clock/clock.c:167
+#: ../plugins/clock/clock.c:169
 msgid "Week %V"
 msgstr "Week %V"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:452
 msgid "Failed to execute clock command"
 msgstr "Kon de klokopdracht niet uitvoeren"
 
-#: ../plugins/clock/clock.c:797
+#: ../plugins/clock/clock.c:802
 msgid "Custom Format"
 msgstr "Aangepaste bestandopmaak"
 
@@ -1064,9 +1064,11 @@ msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid ""
-"Name of the timezone matching the system's timezone database. Leave empty to "
-"revert to the local time."
-msgstr "Naam van de tijdzone, in overeenstemming met de tijdzone-gegevensbank van het systeem. Laat leeg om terug te vallen op de plaatselijke tijd."
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+"Naam van de tijdzone, in overeenstemming met de tijdzone-gegevensbank van "
+"het systeem. Laat leeg om terug te vallen op de plaatselijke tijd."
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "Sho_w AM/PM"
@@ -1080,13 +1082,7 @@ msgstr "_Inactieve punten weergeven"
 msgid "Show gri_d"
 msgstr "_Raster weergeven"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid ""
-"Start a tool for setting the system time and date. If the button is grayed "
-"out, check the \"Help\" page to see how to configure it correctly."
-msgstr "Start een gereedschapje om de tijd en datum van het systeem in te stellen. Indien de knop is uitgegrijsd, kunt u de 'Hulp'-pagina oproepen om te zien hoe u het correct kunt instellen."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1099,31 +1095,27 @@ msgstr ""
 "jaartal, %m door de maand en %d door de dag. Zie de documentatie van het "
 "datumhulpmiddel voor meer informatie."
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
 msgstr "Tijdinstellingen"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Time:"
-msgstr "Tijd:"
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "Tijd- en datuminstellingen..."
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
 msgstr "Tijdzone:"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Volledig binaire klok"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "Vormgeving:"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
-msgid "_Set"
-msgstr "In_stellen"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr "Opmaak van gereedschap_tip:"
 
@@ -1864,6 +1856,20 @@ msgstr "Venstermenu"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Schakelen tussen open vensters met behulp van een menu"
+
+#~ msgid ""
+#~ "Start a tool for setting the system time and date. If the button is "
+#~ "grayed out, check the \"Help\" page to see how to configure it correctly."
+#~ msgstr ""
+#~ "Start een gereedschapje om de tijd en datum van het systeem in te "
+#~ "stellen. Indien de knop is uitgegrijsd, kunt u de 'Hulp'-pagina oproepen "
+#~ "om te zien hoe u het correct kunt instellen."
+
+#~ msgid "Time:"
+#~ msgstr "Tijd:"
+
+#~ msgid "_Set"
+#~ msgstr "In_stellen"
 
 #~ msgid "_Read Online"
 #~ msgstr "_Lees op internet"
