@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-10 21:51+0000\n"
+"POT-Creation-Date: 2013-03-18 17:06+0000\n"
 "PO-Revision-Date: 2013-03-11 01:50+0100\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
@@ -941,7 +941,7 @@ msgstr "Selecione um ícone"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:855 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Falha ao executar o comando \"%s\"."
@@ -988,15 +988,15 @@ msgstr "Abrir menu na posição atual do rato"
 msgid "Show help options"
 msgstr "Mostrar opções de ajuda"
 
-#: ../plugins/clock/clock.c:167
+#: ../plugins/clock/clock.c:169
 msgid "Week %V"
 msgstr "Semana %V"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:452
 msgid "Failed to execute clock command"
 msgstr "Falha ao executar o comando do relógio"
 
-#: ../plugins/clock/clock.c:797
+#: ../plugins/clock/clock.c:802
 msgid "Custom Format"
 msgstr "Formato personalizado"
 
@@ -1053,9 +1053,11 @@ msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid ""
-"Name of the timezone matching the system's timezone database. Leave empty to "
-"revert to the local time."
-msgstr "Nome do fuso horário coincidente com a base de dados do sistema. Deixe em branco para utilizar a hora local."
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+"Nome do fuso horário coincidente com a base de dados do sistema. Deixe em "
+"branco para utilizar a hora local."
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "Sho_w AM/PM"
@@ -1069,13 +1071,7 @@ msgstr "Mostrar pontos _inativos"
 msgid "Show gri_d"
 msgstr "Mostrar grel_ha"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid ""
-"Start a tool for setting the system time and date. If the button is grayed "
-"out, check the \"Help\" page to see how to configure it correctly."
-msgstr "Abre uma ferramenta para definir a hora e a data. Se o botão estiver escuro, consulte a página da \"Ajuda\" para saber mais informações."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1087,31 +1083,27 @@ msgstr ""
 "exemplo, %Y será substituído pelo ano, %m pelo mês e %d pelo dia. Veja a "
 "documentação do utilitário de datas para informações adicionais."
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
 msgstr "Definições de hora"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Time:"
-msgstr "Hora:"
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "Definiçõe_s de data e hora..."
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
 msgstr "Fuso _horário:"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Relógio _binário autêntico"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "_Esquema:"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
-msgid "_Set"
-msgstr "_Definir"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr "Forma_to de dica:"
 
@@ -1847,3 +1839,16 @@ msgstr "Menu da janela"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Trocar entre janelas abertas utilizando um menu"
+
+#~ msgid ""
+#~ "Start a tool for setting the system time and date. If the button is "
+#~ "grayed out, check the \"Help\" page to see how to configure it correctly."
+#~ msgstr ""
+#~ "Abre uma ferramenta para definir a hora e a data. Se o botão estiver "
+#~ "escuro, consulte a página da \"Ajuda\" para saber mais informações."
+
+#~ msgid "Time:"
+#~ msgstr "Hora:"
+
+#~ msgid "_Set"
+#~ msgstr "_Definir"
