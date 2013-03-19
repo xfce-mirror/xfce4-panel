@@ -49,6 +49,8 @@
 /* e.g. "time-admin" */
 #define DEFAULT_TIME_CONFIG_TOOL "time-admin"
 
+#define ZONEINFO_DIR "/usr/share/zoneinfo/"
+
 
 
 static void     clock_plugin_get_property              (GObject               *object,
@@ -159,6 +161,7 @@ typedef struct
 {
   ClockPlugin *plugin;
   GtkBuilder  *builder;
+  guint        zonecompletion_idle;
 }
 ClockPluginDialog;
 
@@ -817,7 +820,12 @@ clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
 static void
 clock_plugin_configure_plugin_free (gpointer user_data)
 {
-  g_slice_free (ClockPluginDialog, user_data);
+  ClockPluginDialog *dialog = user_data;
+
+  if (dialog->zonecompletion_idle != 0)
+    g_source_remove (dialog->zonecompletion_idle);
+
+  g_slice_free (ClockPluginDialog, dialog);
 }
 
 
@@ -860,6 +868,85 @@ clock_plugin_configure_run_config_tool (GtkWidget   *button,
 
 
 static void
+clock_plugin_configure_zoneinfo_model_insert (GtkListStore *store,
+                                              const gchar  *parent)
+{
+  gchar       *filename;
+  GtkTreeIter  iter;
+  GDir        *dir;
+  const gchar *name;
+  gsize        dirlen = strlen (ZONEINFO_DIR);
+
+  panel_return_if_fail (GTK_IS_LIST_STORE (store));
+
+  dir = g_dir_open (parent, 0, NULL);
+  if (dir == NULL)
+    return;
+
+  for (;;)
+    {
+      name = g_dir_read_name (dir);
+      if (name == NULL)
+        break;
+
+      filename = g_build_filename (parent, name, NULL);
+
+      if (g_file_test (filename, G_FILE_TEST_IS_DIR))
+        {
+          clock_plugin_configure_zoneinfo_model_insert (store, filename);
+        }
+      else
+        {
+          gtk_list_store_append (store, &iter);
+          gtk_list_store_set (store, &iter, 0, filename + dirlen, -1);
+        }
+
+      g_free (filename);
+    }
+
+  g_dir_close (dir);
+}
+
+
+
+static gboolean
+clock_plugin_configure_zoneinfo_model (gpointer data)
+{
+  ClockPluginDialog  *dialog = data;
+  GtkEntryCompletion *completion;
+  GtkListStore       *store;
+  GObject            *object;
+
+  GDK_THREADS_ENTER ();
+
+  dialog->zonecompletion_idle = 0;
+
+  object = gtk_builder_get_object (dialog->builder, "timezone-name");
+  panel_return_val_if_fail (GTK_IS_ENTRY (object), FALSE);
+
+  /* build timezone model */
+  store = gtk_list_store_new (1, G_TYPE_STRING);
+  clock_plugin_configure_zoneinfo_model_insert (store, ZONEINFO_DIR);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store), 0, GTK_SORT_ASCENDING);
+
+  completion = gtk_entry_completion_new ();
+  gtk_entry_completion_set_model (completion, GTK_TREE_MODEL (store));
+  g_object_unref (G_OBJECT (store));
+
+  gtk_entry_set_completion (GTK_ENTRY (object), completion);
+  gtk_entry_completion_set_popup_single_match (completion, TRUE);
+  gtk_entry_completion_set_text_column (completion, 0);
+
+  g_object_unref (G_OBJECT (completion));
+
+  GDK_THREADS_LEAVE ();
+
+  return FALSE;
+}
+
+
+
+static void
 clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
   ClockPlugin       *plugin = XFCE_CLOCK_PLUGIN (panel_plugin);
@@ -895,6 +982,9 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   panel_return_if_fail (GTK_IS_ENTRY (object));
   exo_mutual_binding_new (G_OBJECT (plugin->time), "timezone",
                           G_OBJECT (object), "text");
+
+  /* idle add the zone completion */
+  dialog->zonecompletion_idle = g_idle_add (clock_plugin_configure_zoneinfo_model, dialog);
 
   object = gtk_builder_get_object (builder, "mode");
   g_signal_connect_data (G_OBJECT (object), "changed",
