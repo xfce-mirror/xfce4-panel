@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-05 02:45+0000\n"
+"POT-Creation-Date: 2013-03-19 09:09+0000\n"
 "PO-Revision-Date: 2012-04-15 14:09+0200\n"
 "Last-Translator: Iliyas Jorio <inv.jorio@gmail.com>\n"
 "Language-Team: French <xfce-i18n@xfce.org>\n"
@@ -961,7 +961,7 @@ msgstr "Sélection de l'icône"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:855 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Échec à l'exécution de la commande « %s »."
@@ -1008,15 +1008,15 @@ msgstr "Afficher le menu à la position du curseur"
 msgid "Show help options"
 msgstr "Afficher l'aide"
 
-#: ../plugins/clock/clock.c:167
+#: ../plugins/clock/clock.c:169
 msgid "Week %V"
 msgstr "Semaine %V"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:452
 msgid "Failed to execute clock command"
 msgstr "Échec à l'exécution de la commande de l'horloge"
 
-#: ../plugins/clock/clock.c:797
+#: ../plugins/clock/clock.c:802
 msgid "Custom Format"
 msgstr "Format personnalisé"
 
@@ -1073,9 +1073,11 @@ msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid ""
-"Name of the timezone matching the system's timezone database. Leave empty to "
-"revert to the local time."
-msgstr "Le nom du fuseau horaire correspondant à la base de données du fuseau horaire du système. Laisser vide pour revenir à l'heure locale."
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+"Le nom du fuseau horaire correspondant à la base de données du fuseau "
+"horaire du système. Laisser vide pour revenir à l'heure locale."
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "Sho_w AM/PM"
@@ -1089,13 +1091,7 @@ msgstr "Afficher les bits _inactifs"
 msgid "Show gri_d"
 msgstr "Afficher une _grille"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid ""
-"Start a tool for setting the system time and date. If the button is grayed "
-"out, check the \"Help\" page to see how to configure it correctly."
-msgstr "Démarrer un outil pour régler l'heure et la date système. Si le bouton est grisé, vérifier la page d'« Aide » pour voir comment les configurer correctement."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1108,31 +1104,27 @@ msgstr ""
 "Veuillez consulter la documentation de la commande date pour plus "
 "d'information."
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
 msgstr "Paramètres heure"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Time:"
-msgstr "Heure :"
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "Paramètres heure et date ..."
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
 msgstr "Fuseau horaire :"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Horloge _binaire réelle"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "T_ype :"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
-msgid "_Set"
-msgstr "Fixer"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr "_Bulle d'aide :"
 
@@ -1872,6 +1864,20 @@ msgstr "Menu des fenêtres"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Circuler parmi les fenêtres ouvertes en utilisant un menu"
+
+#~ msgid ""
+#~ "Start a tool for setting the system time and date. If the button is "
+#~ "grayed out, check the \"Help\" page to see how to configure it correctly."
+#~ msgstr ""
+#~ "Démarrer un outil pour régler l'heure et la date système. Si le bouton "
+#~ "est grisé, vérifier la page d'« Aide » pour voir comment les configurer "
+#~ "correctement."
+
+#~ msgid "Time:"
+#~ msgstr "Heure :"
+
+#~ msgid "_Set"
+#~ msgstr "Fixer"
 
 #~ msgid "L_ock Screen"
 #~ msgstr "_Verrouiller l'écran"
