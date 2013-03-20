@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-04 16:03+0000\n"
+"POT-Creation-Date: 2013-03-20 11:54+0000\n"
 "PO-Revision-Date: 2011-12-17 23:04+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -934,7 +934,7 @@ msgstr "Таңбашаны таңдаңыз"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -981,15 +981,15 @@ msgstr "Курсор тұрған орындағы қалқымалы мәзір
 msgid "Show help options"
 msgstr "Көмек опцияларын көрсету"
 
-#: ../plugins/clock/clock.c:167
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "Апта %V"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
 msgstr "Clock командасын орындау сәтсіз аяқталды"
 
-#: ../plugins/clock/clock.c:797
+#: ../plugins/clock/clock.c:807
 msgid "Custom Format"
 msgstr "Таңдауыңызша пішім"
 
@@ -1046,9 +1046,11 @@ msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid ""
-"Name of the timezone matching the system's timezone database. Leave empty to "
-"revert to the local time."
-msgstr "Жүйелік уақыт белдеулер дерекқорына сәйкес уақыт белдеуінің атауы. Жергілікті уақытқа қайтару үшін бос қалдырыңыз."
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+"Жүйелік уақыт белдеулер дерекқорына сәйкес уақыт белдеуінің атауы. "
+"Жергілікті уақытқа қайтару үшін бос қалдырыңыз."
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "Sho_w AM/PM"
@@ -1062,13 +1064,7 @@ msgstr "Белсен_ді емес нүстелерді көрсету"
 msgid "Show gri_d"
 msgstr "_Торды көрсету"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid ""
-"Start a tool for setting the system time and date. If the button is grayed "
-"out, check the \"Help\" page to see how to configure it correctly."
-msgstr "Жүйелік уақыт пен күнді орнату үшін сайманды іске қосу. Егер батырма сұр түспен боялған болса, оны дұрыс баптау туралы \"Көмек\" парағынан оқыңыз."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1080,31 +1076,27 @@ msgstr ""
 "ағымдағы жылмен, %m аймен ал %d күнмен алмастырылады. Көбірек білу үшін, "
 "date утилитасының құжаттамасын оқыңыз."
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
 msgstr "Уақыт баптаулары"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Time:"
-msgstr "Уақыт:"
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "Уақыт және күн ба_птаулары..."
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
 msgstr "Уақыт _белдеуі:"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Шын _бинарлы сағат"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "_Жайма:"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
-msgid "_Set"
-msgstr "_Орнату"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr "_Хабарлама пішімі:"
 
@@ -1839,6 +1831,19 @@ msgstr "Терезелер мәзірі"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Ашық терезелер арасында мәзір арқылы ауысу"
+
+#~ msgid ""
+#~ "Start a tool for setting the system time and date. If the button is "
+#~ "grayed out, check the \"Help\" page to see how to configure it correctly."
+#~ msgstr ""
+#~ "Жүйелік уақыт пен күнді орнату үшін сайманды іске қосу. Егер батырма сұр "
+#~ "түспен боялған болса, оны дұрыс баптау туралы \"Көмек\" парағынан оқыңыз."
+
+#~ msgid "Time:"
+#~ msgstr "Уақыт:"
+
+#~ msgid "_Set"
+#~ msgstr "_Орнату"
 
 #~ msgid "_Read Online"
 #~ msgstr "_Интернеттен оқу"
