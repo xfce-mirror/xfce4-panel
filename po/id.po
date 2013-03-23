@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-13 06:09+0000\n"
+"POT-Creation-Date: 2013-03-23 14:48+0000\n"
 "PO-Revision-Date: 2012-03-18 10:01+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -39,13 +39,13 @@ msgstr "Panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1089
+#: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Anda yakin ingin menghapus '%s'?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1092
+#: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Item yang anda hapus dari panel akan dibuang secara permanen."
 
@@ -186,27 +186,29 @@ msgstr ""
 msgid "No running instance of %s was found"
 msgstr "Tidak ada instansi %s berjalan yang ditemukan"
 
-#: ../panel/panel-application.c:215
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "Gagal meluncurkan aplikasi migrasi"
 
-#: ../panel/panel-application.c:955
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Buat _Peluncur"
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Ini akan membuat plugin peluncur baru di panel dan memasukkan berkas yang ditaruh sebagai item menu."
+msgstr ""
+"Ini akan membuat plugin peluncur baru di panel dan memasukkan berkas yang "
+"ditaruh sebagai item menu."
 
-#: ../panel/panel-application.c:958
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Tambahkan peluncur baru dari %d berkas desktop"
 
-#: ../panel/panel-application.c:1689
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
@@ -214,11 +216,11 @@ msgstr ""
 "Anda telah menjalankan X tanpa manajer sesi. Klik Keluar akan menutup server "
 "X."
 
-#: ../panel/panel-application.c:1690
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "Anda yakin anda ingin keluar panel?"
 
-#: ../panel/panel-application.c:1698
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Gagal menjalankan perintah \"%s\""
@@ -267,7 +269,7 @@ msgstr "Tambah Item Baru"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Mohon pilih sebuah panel untuk menempatkan plugin baru:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:801
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -319,41 +321,41 @@ msgstr ""
 "anda menekan tombol Eksekusi, maka panel akan mencoba untuk menjalankan "
 "ulang plugin tersebut. Jika tidak, plugin akan dihilangkan dari panel."
 
-#: ../panel/panel-preferences-dialog.c:467
+#: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
 msgstr "Otomatis"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
 msgstr "Layar %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:512
+#: ../panel/panel-preferences-dialog.c:517
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:867
+#: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel terpilih dan seluruh item serta konfigurasinya akan dihapus"
 
-#: ../panel/panel-preferences-dialog.c:868
+#: ../panel/panel-preferences-dialog.c:873
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Anda yakin ingin menghapus panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:953
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(eksternal)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -364,7 +366,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nama internal: %s-%d"
@@ -726,127 +728,127 @@ msgstr "_Aksi"
 msgid "_Show confirmation dialog"
 msgstr "_Tampilkan dialog konfirmasi"
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Log Keluar"
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "_Log Keluar"
 
-#: ../plugins/actions/actions.c:161
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "Anda yakin ingin menghapus keluar?"
 
-#: ../plugins/actions/actions.c:162
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Keluar dalam %d detik."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Log Keluar..."
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "Log _Keluar..."
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Ganti Pengguna"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "_Ganti Pengguna"
 
-#: ../plugins/actions/actions.c:178
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Kunci Layar"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
 msgstr "K_unci Layar"
 
-#: ../plugins/actions/actions.c:184
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: ../plugins/actions/actions.c:185
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "_Hibernasi"
 
-#: ../plugins/actions/actions.c:186
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "Anda yakin ingin suspensi ke cakram?"
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Hibernasi komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Siaga"
 
-#: ../plugins/actions/actions.c:192
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
 msgstr "Sus_pensi"
 
-#: ../plugins/actions/actions.c:193
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
 msgstr "Anda ingin suspensi ke RAM?"
 
-#: ../plugins/actions/actions.c:194
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Suspensi komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Mulai Kembali"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "Start _Ulang"
 
-#: ../plugins/actions/actions.c:200
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "Anda yakin ingin menghidupkan ulang?"
 
-#: ../plugins/actions/actions.c:201
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Menghidupkan ulang komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Matikan"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
 msgstr "_Matikan"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "Anda yakin anda ingin mematikan?"
 
-#: ../plugins/actions/actions.c:208
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Mematikan komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:603
+#: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Separator"
 msgstr "Pemisah"
 
-#: ../plugins/actions/actions.c:872
+#: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Gagal menjalankan aksi \"%s\""
 
-#: ../plugins/actions/actions.c:1031
+#: ../plugins/actions/actions.c:1142
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -929,23 +931,23 @@ msgstr "_Ikon:"
 msgid "_Show button title"
 msgstr "Tampilkan judul _tombol"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:566
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Pilih Ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:604
-#: ../plugins/applicationsmenu/applicationsmenu.c:845
-#: ../plugins/launcher/launcher.c:2307
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/applicationsmenu/applicationsmenu.c:844
+#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Gagal mengeksekusi perintah \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1114
+#: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
 msgstr "Tak ada aplikasi yang ditemukan"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1137
+#: ../plugins/applicationsmenu/applicationsmenu.c:1136
 msgid "Failed to load the applications menu"
 msgstr "Gagal memuat menu aplikasi"
 
@@ -983,15 +985,15 @@ msgstr "Menu popup di posisi tetikus saat ini"
 msgid "Show help options"
 msgstr "Tampilkan opsi bantuan"
 
-#: ../plugins/clock/clock.c:146
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "Minggu %V"
 
-#: ../plugins/clock/clock.c:407
+#: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
 msgstr "Gagal mengeksekusi perintah jam"
 
-#: ../plugins/clock/clock.c:729
+#: ../plugins/clock/clock.c:807
 msgid "Custom Format"
 msgstr "Format Suai"
 
@@ -1047,13 +1049,14 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
-msgid "Sho_w AM/PM"
-msgstr "Tampil_kan AM/PM"
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr "Nama zona waktu yang sesuai dengan data yang terdaftar, misalnya \"Indonesia/Jakarta\". Jika ingin menggunakan waktu lokal pada komputer, biarkan dalam keadaan kosong."
 
 #: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "Tampilkan _bingkai"
+msgid "Sho_w AM/PM"
+msgstr "Tampil_kan AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show _inactive dots"
@@ -1068,249 +1071,261 @@ msgstr "Tampilkan _petak"
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
 "example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
-"information."
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
 msgstr ""
 "Format menjelaskan bagian tanggal dan waktu untuk dimasukkan ke dalam nama "
 "berkas. Misalnya, %Y akan diganti dengan tahun, %m dengan bulan dan %d "
 "dengan hari. Lihat dokumentasi utilitas tanggal untuk informasi tambahan."
 
 #: ../plugins/clock/clock-dialog.glade.h:21
+msgid "Time Settings"
+msgstr "Pengaturan Waktu"
+
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "_Pengaturan Waktu dan Tanggal ..."
+
+#: ../plugins/clock/clock-dialog.glade.h:23
+msgid "Time_zone:"
+msgstr "_Zona Waktu:"
+
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Jam _biner nyata"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "Tata _Letak:"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr "_Format tip alat:"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
 msgstr "Malam"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr "Dini hari"
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr "Pagi"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr "Hampir siang"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
 msgstr "Siang"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr "Sore"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr "Malam"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr "Tengah malam"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "pukul %0"
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr "pukul %0 lewat lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr "pukul %0 lewat sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr "pukul %0 lewat seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr "pukul %0 lewat dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "pukul %0 lewat dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr "pukul %0 lewat tiga puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "pukul %1 kurang dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr "pukul %1 kurang dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr "pukul %1 kurang seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr "pukul %1 kurang sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr "pukul %1 kurang lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "pukul %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:119
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "pukul %0"
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "pukul %0 lewat lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "pukul %0 lewat sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "pukul %0 lewat seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "pukul %0 lewat dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "pukul %0 lewat dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "pukul %0 lewat tiga puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "pukul %1 kurang dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "pukul %1 kurang dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "pukul %1 kurang seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "pukul %1 kurang sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "pukul %1 kurang lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "pukul %1"
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "one"
 msgstr "satu"
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "two"
 msgstr "dua"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "three"
 msgstr "tiga"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "four"
 msgstr "empat"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "five"
 msgstr "lima"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "six"
 msgstr "enam"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "seven"
 msgstr "tujuh"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "eight"
 msgstr "delapan"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:146
 msgid "nine"
 msgstr "sembilan"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "ten"
 msgstr "sepuluh"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:148
 msgid "eleven"
 msgstr "sebelas"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:149
 msgid "twelve"
 msgstr "dua belas"
 
@@ -1397,11 +1412,11 @@ msgstr "_Pola Berkas:"
 msgid "Open launcher menu"
 msgstr "Buka peluncuran menu"
 
-#: ../plugins/launcher/launcher.c:1574
+#: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
 msgstr "Item Tak Bernama"
 
-#: ../plugins/launcher/launcher.c:1727
+#: ../plugins/launcher/launcher.c:1728
 msgid "No items"
 msgstr "Tak ada item"
 
@@ -1638,6 +1653,10 @@ msgstr "Aplikasi Yang Dikenal"
 msgid "Notification Area"
 msgstr "Area Pemberitahuan"
 
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "Show _frame"
+msgstr "Tampilkan _bingkai"
+
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
 msgstr "_Maksimal ukuran ikon (px):"
@@ -1732,23 +1751,23 @@ msgstr "Judul jendela"
 msgid "_Switch windows using the mouse wheel"
 msgstr "Pindah jendela menggunakan roda tetik_us"
 
-#: ../plugins/tasklist/tasklist-widget.c:3177
+#: ../plugins/tasklist/tasklist-widget.c:3245
 msgid "Mi_nimize All"
 msgstr "Mi_nimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3186
+#: ../plugins/tasklist/tasklist-widget.c:3254
 msgid "Un_minimize All"
 msgstr "Tidak Mini_malkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3192
+#: ../plugins/tasklist/tasklist-widget.c:3260
 msgid "Ma_ximize All"
 msgstr "Ma_ksimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3201
+#: ../plugins/tasklist/tasklist-widget.c:3269
 msgid "_Unmaximize All"
 msgstr "Tidak Maksima_lkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3279
 msgid "_Close All"
 msgstr "_Tutup Semua"
 
