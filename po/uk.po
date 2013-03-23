@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-08 11:00+0000\n"
+"POT-Creation-Date: 2013-03-23 14:48+0000\n"
 "PO-Revision-Date: 2009-01-26 15:54+0200\n"
 "Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
 "Language-Team: Ukrainian <xfce4-dev@xfce.org>\n"
@@ -941,7 +941,7 @@ msgstr "Вибрати значок"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:603
 #: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
+#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не вдається виконати команду \"%s\"."
@@ -988,15 +988,15 @@ msgstr "Спливаюче меню в позиції вказівника ми�
 msgid "Show help options"
 msgstr "Показати опції допомоги"
 
-#: ../plugins/clock/clock.c:167
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "Тиждень %V"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
 msgstr "Не вдалось виконати команду годинника"
 
-#: ../plugins/clock/clock.c:797
+#: ../plugins/clock/clock.c:807
 msgid "Custom Format"
 msgstr "Довільний формат"
 
@@ -1053,9 +1053,11 @@ msgstr "Рідкокристалічний"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid ""
-"Name of the timezone matching the system's timezone database. Leave empty to "
-"revert to the local time."
-msgstr "Назва часової зони, що співпадає з часовою зоною системи. Залишити порожнім для використання локального часу."
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+"Назва часової зони, що співпадає з часовою зоною системи. Залишити порожнім "
+"для використання локального часу."
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "Sho_w AM/PM"
@@ -1069,13 +1071,7 @@ msgstr "Показати _неактивні крапки"
 msgid "Show gri_d"
 msgstr "Показувати розділю_вач"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid ""
-"Start a tool for setting the system time and date. If the button is grayed "
-"out, check the \"Help\" page to see how to configure it correctly."
-msgstr "Запускає утиліту для налаштування системного часу та дати. Якщо кнопка неактивна, перевірте сторінку допомоги  для правильної конфігурації."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1087,31 +1083,27 @@ msgstr ""
 "Наприклад, %Y буде замінятись роком, %m - місяцем і %d - днем. Дивіться "
 "документацію утиліти дати для додаткової інформації."
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
 msgstr "Налаштування часу"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Time:"
-msgstr "Час:"
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "Налаштування часу та _дати..."
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
 msgstr "Часова _зона"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Справжній _двійковий годинник"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "Розкла_дка:"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
-msgid "_Set"
-msgstr "_Налаштування"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr "Формат спливаючого повідомл_ення:"
 
@@ -1850,6 +1842,19 @@ msgstr "Меню вікна"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Перемикатись між відкритими вікнами використовуючи меню"
+
+#~ msgid ""
+#~ "Start a tool for setting the system time and date. If the button is "
+#~ "grayed out, check the \"Help\" page to see how to configure it correctly."
+#~ msgstr ""
+#~ "Запускає утиліту для налаштування системного часу та дати. Якщо кнопка "
+#~ "неактивна, перевірте сторінку допомоги  для правильної конфігурації."
+
+#~ msgid "Time:"
+#~ msgstr "Час:"
+
+#~ msgid "_Set"
+#~ msgstr "_Налаштування"
 
 #~ msgid "_Read Online"
 #~ msgstr "Переглянути інтера_ктивно"
