@@ -237,11 +237,12 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "button-press-event",
       G_CALLBACK (applications_menu_plugin_menu), plugin);
 
-  plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 1);
+  plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 2);
+  gtk_container_set_border_width (GTK_CONTAINER (plugin->box), 0);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->box);
   gtk_widget_show (plugin->box);
 
-  plugin->icon = xfce_panel_image_new_from_source (DEFAULT_ICON_NAME);
+  plugin->icon = gtk_image_new ();
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->icon, FALSE, FALSE, 0);
   gtk_widget_show (plugin->icon);
 
@@ -360,8 +361,6 @@ applications_menu_plugin_set_property (GObject      *object,
     case PROP_BUTTON_ICON:
       g_free (plugin->button_icon);
       plugin->button_icon = g_value_dup_string (value);
-      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->icon),
-          exo_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon);
 
       force_a_resize = TRUE;
       break;
@@ -444,16 +443,17 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (panel_plugin);
   gint                    row_size;
-  gint                    icon_size;
   GtkStyle               *style;
   XfcePanelPluginMode     mode;
   GtkRequisition          label_size;
   GtkOrientation          orientation;
   gint                    border_thickness;
-  gdouble                 icon_wh_ratio;
   GdkPixbuf              *icon;
-
-  row_size = size / xfce_panel_plugin_get_nrows (panel_plugin);
+  gint                    icon_width_max, icon_height_max;
+  gint                    icon_width = 0;
+  GdkScreen              *screen;
+  GtkIconTheme           *icon_theme = NULL;
+  gchar                  *icon_name;
 
   gtk_box_set_child_packing (GTK_BOX (plugin->box), plugin->icon,
                              !plugin->show_button_title,
@@ -467,50 +467,42 @@ applications_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   else
     orientation = GTK_ORIENTATION_VERTICAL;
 
-  if (!plugin->show_button_title)
+  row_size = size / xfce_panel_plugin_get_nrows (panel_plugin);
+  style = gtk_widget_get_style (plugin->button);
+  border_thickness = 2 * MAX (style->xthickness, style->ythickness) + 2;
+
+  /* arbitrary limit on non-square icon width in horizontal panel */
+  icon_width_max = (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
+    6 * row_size - border_thickness :
+    size - border_thickness;
+  icon_height_max = row_size - border_thickness;
+
+  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+  if (G_LIKELY (screen != NULL))
+    icon_theme = gtk_icon_theme_get_for_screen (screen);
+
+  icon_name = exo_str_is_empty (plugin->button_icon) ?
+    DEFAULT_ICON_NAME : plugin->button_icon;
+
+  icon = xfce_panel_pixbuf_from_source_at_size (icon_name,
+                                                icon_theme,
+                                                icon_width_max,
+                                                icon_height_max);
+
+  if (G_LIKELY (icon != NULL))
     {
-      xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->icon), -1);
-
-        /* get scale of the icon for non-squared custom files */
-        if (mode != XFCE_PANEL_PLUGIN_MODE_DESKBAR
-            && plugin->button_icon != NULL
-            && g_path_is_absolute (plugin->button_icon))
-          {
-            icon = gdk_pixbuf_new_from_file (plugin->button_icon, NULL);
-            if (G_LIKELY (icon != NULL))
-              {
-                icon_wh_ratio = (gdouble) gdk_pixbuf_get_width (icon) / (gdouble) gdk_pixbuf_get_height (icon);
-                g_object_unref (G_OBJECT (icon));
-              }
-          }
-        else
-          {
-            icon_wh_ratio = 1.0;
-          }
-
-      if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
-        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), row_size * icon_wh_ratio, size);
-      else if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, row_size / icon_wh_ratio);
-      else
-        gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, row_size);
+      gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->icon), icon);
+      icon_width = gdk_pixbuf_get_width (icon);
+      g_object_unref (G_OBJECT (icon));
     }
-  else
+
+  if (plugin->show_button_title &&
+      mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
     {
-      style = gtk_widget_get_style (plugin->button);
-      border_thickness = 2 * MAX (style->xthickness, style->ythickness) + 2;
-
-      icon_size = row_size - border_thickness;
-      xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->icon), icon_size);
-      gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
-
-      if (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
-        {
-          /* check if the label fits next to the icon */
-          gtk_widget_size_request (GTK_WIDGET (plugin->label), &label_size);
-          if (label_size.width <= size - border_thickness - icon_size)
-            orientation = GTK_ORIENTATION_HORIZONTAL;
-        }
+      /* check if the label fits next to the icon */
+      gtk_widget_size_request (GTK_WIDGET (plugin->label), &label_size);
+      if (label_size.width <= size - border_thickness - icon_width)
+        orientation = GTK_ORIENTATION_HORIZONTAL;
     }
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (plugin->box), orientation);
