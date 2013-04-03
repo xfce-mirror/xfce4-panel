@@ -158,7 +158,7 @@ xfce_panel_pixbuf_from_source_at_size (const gchar  *source,
   gchar     *name;
   gchar     *filename;
   gint       src_w, src_h;
-  gdouble    wratio, hratio;
+  gdouble    ratio;
   GdkPixbuf *dest;
   GError    *error = NULL;
   gint       size = MIN (dest_width, dest_height);
@@ -231,13 +231,11 @@ xfce_panel_pixbuf_from_source_at_size (const gchar  *source,
       if (src_w > dest_width || src_h > dest_height)
         {
           /* calculate the new dimensions */
-          wratio = (gdouble) src_w / (gdouble) size;
-          hratio = (gdouble) src_h / (gdouble) size;
+          ratio = MIN ((gdouble) dest_width / (gdouble) src_w,
+                       (gdouble) dest_height / (gdouble) src_h);
 
-          if (hratio > wratio)
-            dest_width  = rint (src_w / hratio);
-          else
-            dest_height = rint (src_h / wratio);
+          dest_width  = rint (src_w * ratio);
+          dest_height = rint (src_h * ratio);
 
           dest = gdk_pixbuf_scale_simple (pixbuf,
                                           MAX (dest_width, 1),
