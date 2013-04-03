@@ -579,6 +579,9 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
+      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->dialog_icon),
+                                        exo_str_is_empty (plugin->button_icon) ?
+                                        DEFAULT_ICON_NAME : plugin->button_icon);
       g_free (icon);
     }
 
