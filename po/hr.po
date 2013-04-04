@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 14:21+0000\n"
+"POT-Creation-Date: 2013-04-03 23:39+0000\n"
 "PO-Revision-Date: 2012-05-11 20:53+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <>\n"
@@ -39,38 +39,38 @@ msgid "Panel"
 msgstr "Ploča"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../libxfce4panel/xfce-panel-plugin.c:1029
 #: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeste li sigurni da želite ukloniti \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
 #: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ako uklonite stavku sa ploče,biti će trajno izgubljena."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1202
+#: ../libxfce4panel/xfce-panel-plugin.c:1194
 msgid "_Move"
 msgstr "_Pomakni"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1236
+#: ../libxfce4panel/xfce-panel-plugin.c:1228
 msgid "Pane_l"
 msgstr "Ploč_a"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "Dodaj _nove stavke"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "Osobitosti Pl_oče"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "Odja_va"
 
@@ -915,23 +915,23 @@ msgstr "_Ikona:"
 msgid "_Show button title"
 msgstr "_Prikaži naziv dugmeta"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:565
+#: ../plugins/applicationsmenu/applicationsmenu.c:557
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Odaberi ikonu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:855 ../plugins/launcher/launcher.c:2308
+#: ../plugins/applicationsmenu/applicationsmenu.c:598
+#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Neuspjeh u izvršenju naredbe \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1113
+#: ../plugins/applicationsmenu/applicationsmenu.c:1108
 msgid "No applications found"
 msgstr "Nijedan program nije pronađen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1136
+#: ../plugins/applicationsmenu/applicationsmenu.c:1131
 msgid "Failed to load the applications menu"
 msgstr "Neuspjeh u učitavanju izbornika programa"
 
@@ -969,15 +969,15 @@ msgstr ""
 msgid "Show help options"
 msgstr "Pokaži opcije pomoći"
 
-#: ../plugins/clock/clock.c:169
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "Tjedan  %V"
 
-#: ../plugins/clock/clock.c:452
+#: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
 msgstr "Neuspjeh u izvršenju naredbe sata"
 
-#: ../plugins/clock/clock.c:802
+#: ../plugins/clock/clock.c:807
 msgid "Custom Format"
 msgstr "Prilagođeni format"
 
@@ -1061,7 +1061,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
-msgstr ""
+msgstr "Postavke vremena"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Time and Date _Settings..."
@@ -1069,7 +1069,7 @@ msgstr "Postavke datuma i _vremena..."
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
-msgstr ""
+msgstr "Vremenska_zona:"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
