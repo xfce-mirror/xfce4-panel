@@ -21,7 +21,6 @@
 #endif
 
 #include <gmodule.h>
-#include <exo/exo.h>
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -63,7 +62,6 @@ enum _PanelModuleRunMode
   UNKNOWN,    /* Unset */
   INTERNAL,   /* plugin library will be loaded in the panel */
   WRAPPER,    /* external library with comunication through PanelPluginExternal */
-  WRAPPER3,   /* external library with comunication through PanelPluginExternal */
   EXTERNAL_46 /* external executable with comunication through PanelPluginExternal46 */
 };
 
@@ -102,6 +100,9 @@ struct _PanelModule
 
   /* for gobject plugins */
   GType                plugin_type;
+
+  /* for wrapper plugins */
+  gchar               *api;
 };
 
 
@@ -146,6 +147,7 @@ panel_module_init (PanelModule *module)
   module->library = NULL;
   module->construct_func = NULL;
   module->plugin_type = G_TYPE_NONE;
+  module->api = NULL;
 }
 
 
@@ -172,6 +174,7 @@ panel_module_finalize (GObject *object)
   g_free (module->display_name);
   g_free (module->comment);
   g_free (module->icon_name);
+  g_free (module->api);
 
   (*G_OBJECT_CLASS (panel_module_parent_class)->finalize) (object);
 }
@@ -216,6 +219,7 @@ panel_module_load (GTypeModule *type_module)
 
       /* from now on, run this plugin in a wrapper */
       module->mode = WRAPPER;
+      module->api = g_strdup (LIBXFCE4PANEL_VERSION_API);
 
       return FALSE;
     }
@@ -305,8 +309,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
   const gchar *module_unique;
   gboolean     found;
 
-  panel_return_val_if_fail (!exo_str_is_empty (filename), NULL);
-  panel_return_val_if_fail (!exo_str_is_empty (name), NULL);
+  panel_return_val_if_fail (!panel_str_is_empty (filename), NULL);
+  panel_return_val_if_fail (!panel_str_is_empty (name), NULL);
 
   rc = xfce_rc_simple_open (filename, TRUE);
   if (G_UNLIKELY (rc == NULL))
@@ -361,16 +365,10 @@ panel_module_new_from_desktop_file (const gchar *filename,
           /* run mode of the module, by default everything runs in
            * the wrapper, unless defined otherwise */
           if (force_external || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE))
-            if (!xfce_rc_read_bool_entry (rc, "X-XFCE-Gtk3", TRUE))
-              {
-                printf ("wrapper3 %s\n", path);
-                module->mode = WRAPPER3;
-              }
-            else
-              {
-                printf ("wrapper %s\n", path);
-                module->mode = WRAPPER;
-              }
+            {
+              module->mode = WRAPPER;
+              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", "1.0"));
+            }
           else
             module->mode = INTERNAL;
         }
@@ -491,13 +489,8 @@ panel_module_new_plugin (PanelModule  *module,
       /* fall-through (make wrapper plugin), probably a plugin with
        * preinit_func which is not supported for internal plugins */
 
-    case WRAPPER3:
-      plugin = panel_plugin_external_wrapper_new (module, unique_id, TRUE, arguments);
-      debug_type = "external-wrapper3";
-      break;
-
     case WRAPPER:
-      plugin = panel_plugin_external_wrapper_new (module, unique_id, FALSE, arguments);
+      plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);
       debug_type = "external-wrapper";
       break;
 
@@ -587,6 +580,17 @@ panel_module_get_icon_name (PanelModule *module)
                             || g_utf8_validate (module->icon_name, -1, NULL), NULL);
 
   return module->icon_name;
+}
+
+
+
+const gchar *
+panel_module_get_api (PanelModule *module)
+{
+  panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
+  panel_return_val_if_fail (G_IS_TYPE_MODULE (module), NULL);
+
+  return module->api;
 }
 
 

@@ -91,6 +91,7 @@ LIBXFCE4PANEL_VERSION_API=libxfce4panel_version_api()
 LIBXFCE4PANEL_VERSION_MAJOR=xfce4_panel_version_major()
 LIBXFCE4PANEL_VERSION_MINOR=xfce4_panel_version_minor()
 LIBXFCE4PANEL_VERSION_MICRO=xfce4_panel_version_micro()
+AC_DEFINE([LIBXFCE4PANEL_VERSION_API], "libxfce4panel_version_api()", [libxfce4panel api version])
 AC_SUBST([LIBXFCE4PANEL_VERSION])
 AC_SUBST([LIBXFCE4PANEL_VERSION_API])
 AC_SUBST([LIBXFCE4PANEL_VERSION_MAJOR])
@@ -245,16 +246,27 @@ panel/Makefile
 wrapper/Makefile
 plugins/Makefile
 plugins/actions/Makefile
+plugins/actions/actions.desktop.in
 plugins/applicationsmenu/Makefile
+plugins/applicationsmenu/applicationsmenu.desktop.in
 plugins/clock/Makefile
+plugins/clock/clock.desktop.in
 plugins/directorymenu/Makefile
+plugins/directorymenu/directorymenu.desktop.in
 plugins/launcher/Makefile
+plugins/launcher/launcher.desktop.in
 plugins/pager/Makefile
+plugins/pager/pager.desktop.in
 plugins/separator/Makefile
+plugins/separator/separator.desktop.in
 plugins/showdesktop/Makefile
+plugins/showdesktop/showdesktop.desktop.in
 plugins/systray/Makefile
+plugins/systray/systray.desktop.in
 plugins/tasklist/Makefile
+plugins/tasklist/tasklist.desktop.in
 plugins/windowmenu/Makefile
+plugins/windowmenu/windowmenu.desktop.in
 po/Makefile.in
 ])
 

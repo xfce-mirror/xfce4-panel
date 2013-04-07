@@ -63,8 +63,8 @@ xfce4-popup-applicationsmenu: xfce4-popup-applicationsmenu.sh Makefile
 # .desktop file
 #
 desktopdir = $(datadir)/xfce4/panel/plugins
-desktop_in_files = applicationsmenu.desktop.in
-desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+desktop_in_files = applicationsmenu.desktop.in.in
+desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \

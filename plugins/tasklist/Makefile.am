@@ -55,8 +55,8 @@ libtasklist_la_DEPENDENCIES = \
 # .desktop file
 #
 desktopdir = $(datadir)/xfce4/panel/plugins
-desktop_in_files = tasklist.desktop.in
-desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+desktop_in_files = tasklist.desktop.in.in
+desktop_DATA = $(desktop_in_files:.desktop.in.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \

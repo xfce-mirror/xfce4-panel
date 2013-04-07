@@ -58,6 +58,8 @@ const gchar *panel_module_get_comment              (PanelModule             *mod
 
 const gchar *panel_module_get_icon_name            (PanelModule             *module) G_GNUC_PURE;
 
+const gchar *panel_module_get_api                  (PanelModule             *module) G_GNUC_PURE;
+
 PanelModule *panel_module_get_from_plugin_provider (XfcePanelPluginProvider *provider);
 
 gboolean     panel_module_is_valid                 (PanelModule             *module);
