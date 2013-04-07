@@ -271,7 +271,11 @@ main (gint argc, gchar **argv)
   GError                  *error = NULL;
   const gchar             *filename;
   gint                     unique_id;
+#if GTK_CHECK_VERSION (3, 0, 0)
+  Window                   socket_id;
+#else
   GdkNativeWindow          socket_id;
+#endif
   const gchar             *name;
   const gchar             *display_name;
   const gchar             *comment;
