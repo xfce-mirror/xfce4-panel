@@ -28,6 +28,9 @@
 #endif
 
 #include <gtk/gtk.h>
+#if GTK_CHECK_VERSION (3, 0, 0)
+#include <gtk/gtkx.h>
+#endif
 #include <glib.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -2409,6 +2412,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   GTimeVal        now_t, end_t;
   GtkWidget      *toplevel, *plug;
   gint            px, py;
+  GtkAllocation   alloc;
 
   g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   g_return_if_fail (GTK_IS_WIDGET (menu_widget));
@@ -2420,15 +2424,19 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
     attach_widget = GTK_WIDGET (plugin);
 
   /* make sure the menu is realized to get valid rectangle sizes */
-  if (!GTK_WIDGET_REALIZED (menu_widget))
+  if (!gtk_widget_get_realized (menu_widget))
     gtk_widget_realize (menu_widget);
 
   /* make sure the attach widget is realized for the gdkwindow */
-  if (!GTK_WIDGET_REALIZED (attach_widget))
+  if (!gtk_widget_get_realized (attach_widget))
     gtk_widget_realize (attach_widget);
 
   /* get the menu/widget size request */
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_get_preferred_size (menu_widget, &requisition, NULL);
+#else
   gtk_widget_size_request (menu_widget, &requisition);
+#endif
 
   /* get the root position of the attach widget */
   toplevel = gtk_widget_get_toplevel (attach_widget);
@@ -2438,8 +2446,13 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
   plug = gtk_widget_get_ancestor (attach_widget, GTK_TYPE_PLUG);
   if (plug != NULL)
     {
+#if GTK_CHECK_VERSION (3, 0, 0)
+       gdk_window_get_geometry (gtk_plug_get_socket_window (GTK_PLUG (plug)),
+                                &px, &py, NULL, NULL);
+#else
        gdk_window_get_geometry (gtk_plug_get_socket_window (GTK_PLUG (plug)),
                                 &px, &py, NULL, NULL, NULL);
+#endif
 
        *x += px;
        *y += py;
@@ -2458,7 +2471,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
           while (gtk_events_pending ())
             gtk_main_iteration ();
 
-          gdk_window_get_position (GDK_WINDOW (attach_widget->window), x, y);
+          gdk_window_get_position (gtk_widget_get_window (attach_widget), x, y);
 
           /* don't try longer then 1/2 a second */
           g_get_current_time (&now_t);
@@ -2470,8 +2483,9 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
     }
 
   /* add the widgets allocation */
-  *x += attach_widget->allocation.x;
-  *y += attach_widget->allocation.y;
+  gtk_widget_get_allocation (attach_widget, &alloc);
+  *x += alloc.x;
+  *y += alloc.y;
 
   switch (xfce_panel_plugin_arrow_type (plugin))
     {
@@ -2480,7 +2494,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
       break;
 
     case GTK_ARROW_DOWN:
-      *y += attach_widget->allocation.height;
+      *y += alloc.height;
       break;
 
     case GTK_ARROW_LEFT:
@@ -2488,13 +2502,13 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
       break;
 
     default: /* GTK_ARROW_RIGHT and GTK_ARROW_NONE */
-      *x += attach_widget->allocation.width;
+      *x += alloc.width;
       break;
     }
 
   /* get the monitor geometry */
   screen = gtk_widget_get_screen (attach_widget);
-  monitor_num = gdk_screen_get_monitor_at_window (screen, attach_widget->window);
+  monitor_num = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (attach_widget));
   gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
   /* keep the menu inside the screen */

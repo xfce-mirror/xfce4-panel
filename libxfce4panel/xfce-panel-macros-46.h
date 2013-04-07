@@ -393,9 +393,9 @@ G_BEGIN_DECLS
     \
     g_return_if_fail (GTK_IS_PLUG (plug)); \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
-    g_return_if_fail (GTK_WIDGET_REALIZED (plug)); \
+    g_return_if_fail (gtk_widget_get_realized (plug)); \
     g_return_if_fail (_xpp_atom != GDK_NONE); \
-    g_return_if_fail (GTK_WIDGET_REALIZED (xpp)); \
+    g_return_if_fail (gtk_widget_get_realized (xpp)); \
     \
     if (_xpp_debug) \
       g_printerr ("xfce4-panel(%s): send provider signal %d\n", \
@@ -428,7 +428,7 @@ G_BEGIN_DECLS
     \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
     g_return_if_fail (GTK_IS_PLUG (plug)); \
-    g_return_if_fail (GTK_WIDGET_REALIZED (plug)); \
+    g_return_if_fail (gtk_widget_get_realized (plug)); \
     \
     if (_xpp_debug) \
       g_printerr ("xfce4-panel(%s): calling plugin construct function\n", \

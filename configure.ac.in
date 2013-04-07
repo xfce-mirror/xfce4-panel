@@ -140,6 +140,14 @@ XDT_CHECK_PACKAGE([DBUS], [dbus-glib-1], [0.73])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.30])
 
+dnl ***********************************************************
+dnl *** Optional support for a GTK+3 version of the library ***
+dnl ***********************************************************
+XDT_CHECK_OPTIONAL_PACKAGE([GTK3],
+                           [gtk+-3.0], [3.2.0], [gtk3],
+                           [GTK+ 3 support])
+AM_CONDITIONAL([ENABLE_GTK3_LIBRARY], [test "x$GTK3_FOUND" = "xyes"])
+
 dnl **********************************
 dnl *** Optional GIO UNIX features ***
 dnl **********************************
@@ -229,6 +237,7 @@ icons/48x48/Makefile
 icons/scalable/Makefile
 libxfce4panel/Makefile
 libxfce4panel/libxfce4panel-1.0.pc
+libxfce4panel/libxfce4panel-2.0.pc
 libxfce4panel/libxfce4panel-config.h
 migrate/Makefile
 migrate/default.xml
@@ -257,4 +266,5 @@ echo "Build Configuration:"
 echo
 echo "* Debug Support:          $enable_debug"
 echo "* GNU Visibility:         $have_gnuc_visibility"
+echo "* GTK+ 3 Support:         $GTK3_FOUND"
 echo
