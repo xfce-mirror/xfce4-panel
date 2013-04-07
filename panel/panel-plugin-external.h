@@ -70,6 +70,7 @@ struct _PanelPluginExternal
    * implementations of the abstract object */
   guint                       show_configure : 1;
   guint                       show_about : 1;
+  gboolean                    is_gtk3;
 };
 
 typedef struct

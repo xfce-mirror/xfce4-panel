@@ -63,6 +63,7 @@ enum _PanelModuleRunMode
   UNKNOWN,    /* Unset */
   INTERNAL,   /* plugin library will be loaded in the panel */
   WRAPPER,    /* external library with comunication through PanelPluginExternal */
+  WRAPPER3,   /* external library with comunication through PanelPluginExternal */
   EXTERNAL_46 /* external executable with comunication through PanelPluginExternal46 */
 };
 
@@ -360,7 +361,16 @@ panel_module_new_from_desktop_file (const gchar *filename,
           /* run mode of the module, by default everything runs in
            * the wrapper, unless defined otherwise */
           if (force_external || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE))
-            module->mode = WRAPPER;
+            if (!xfce_rc_read_bool_entry (rc, "X-XFCE-Gtk3", TRUE))
+              {
+                printf ("wrapper3 %s\n", path);
+                module->mode = WRAPPER3;
+              }
+            else
+              {
+                printf ("wrapper %s\n", path);
+                module->mode = WRAPPER;
+              }
           else
             module->mode = INTERNAL;
         }
@@ -481,8 +491,13 @@ panel_module_new_plugin (PanelModule  *module,
       /* fall-through (make wrapper plugin), probably a plugin with
        * preinit_func which is not supported for internal plugins */
 
+    case WRAPPER3:
+      plugin = panel_plugin_external_wrapper_new (module, unique_id, TRUE, arguments);
+      debug_type = "external-wrapper3";
+      break;
+
     case WRAPPER:
-      plugin = panel_plugin_external_wrapper_new (module, unique_id, arguments);
+      plugin = panel_plugin_external_wrapper_new (module, unique_id, FALSE, arguments);
       debug_type = "external-wrapper";
       break;
 

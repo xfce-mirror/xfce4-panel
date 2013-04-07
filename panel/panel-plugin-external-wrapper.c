@@ -52,6 +52,7 @@
 
 
 #define WRAPPER_BIN HELPERDIR G_DIR_SEPARATOR_S "wrapper"
+#define WRAPPER3_BIN HELPERDIR G_DIR_SEPARATOR_S "wrapper3"
 
 
 
@@ -218,7 +219,10 @@ panel_plugin_external_wrapper_get_argv (PanelPluginExternal   *external,
 
   /* setup the basic argv */
   argv = g_new0 (gchar *, argc + 1);
-  argv[PLUGIN_ARGV_0] = g_strdup (WRAPPER_BIN);
+  if (external->is_gtk3)
+    argv[PLUGIN_ARGV_0] = g_strdup (WRAPPER3_BIN);
+  else
+    argv[PLUGIN_ARGV_0] = g_strdup (WRAPPER_BIN);
   argv[PLUGIN_ARGV_FILENAME] = g_strdup (panel_module_get_filename (external->module));
   argv[PLUGIN_ARGV_UNIQUE_ID] = g_strdup_printf ("%d", external->unique_id);;
   argv[PLUGIN_ARGV_SOCKET_ID] = g_strdup_printf ("%u", gtk_socket_get_id (GTK_SOCKET (external)));;
@@ -366,6 +370,7 @@ panel_plugin_external_wrapper_dbus_remote_event_result (PanelPluginExternalWrapp
 GtkWidget *
 panel_plugin_external_wrapper_new (PanelModule  *module,
                                    gint          unique_id,
+                                   gboolean      is_gtk3,
                                    gchar       **arguments)
 {
   panel_return_val_if_fail (PANEL_IS_MODULE (module), NULL);
@@ -374,5 +379,6 @@ panel_plugin_external_wrapper_new (PanelModule  *module,
   return g_object_new (PANEL_TYPE_PLUGIN_EXTERNAL_WRAPPER,
                        "module", module,
                        "unique-id", unique_id,
+                       "is-gtk3", is_gtk3,
                        "arguments", arguments, NULL);
 }
