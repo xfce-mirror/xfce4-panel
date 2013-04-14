@@ -669,8 +669,7 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
                                gint       dest_width,
                                gint       dest_height)
 {
-  gdouble wratio;
-  gdouble hratio;
+  gdouble ratio;
   gint    source_width;
   gint    source_height;
 
@@ -688,13 +687,12 @@ xfce_panel_image_scale_pixbuf (GdkPixbuf *source,
     return g_object_ref (G_OBJECT (source));
 
   /* calculate the new dimensions */
-  wratio = (gdouble) source_width  / (gdouble) dest_width;
-  hratio = (gdouble) source_height / (gdouble) dest_height;
 
-  if (hratio > wratio)
-    dest_width  = rint (source_width / hratio);
-  else
-    dest_height = rint (source_height / wratio);
+  ratio = MIN ((gdouble) dest_width / (gdouble) source_width,
+               (gdouble) dest_height / (gdouble) source_height);
+
+  dest_width  = rint (source_width * ratio);
+  dest_height = rint (source_height * ratio);
 
   return gdk_pixbuf_scale_simple (source, MAX (dest_width, 1),
                                   MAX (dest_height, 1),
