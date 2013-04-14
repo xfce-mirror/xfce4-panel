@@ -134,8 +134,12 @@ static gboolean   xfce_panel_image_draw                 (GtkWidget       *widget
 static gboolean   xfce_panel_image_expose_event         (GtkWidget       *widget,
                                                          GdkEventExpose  *event);
 #endif
+#if GTK_CHECK_VERSION (3, 0, 0)
+static void       xfce_panel_image_style_updated        (GtkWidget       *widget);
+#else
 static void       xfce_panel_image_style_set            (GtkWidget       *widget,
                                                          GtkStyle        *previous_style);
+#endif
 static gboolean   xfce_panel_image_load                 (gpointer         data);
 static void       xfce_panel_image_load_destroy         (gpointer         data);
 static GdkPixbuf *xfce_panel_image_scale_pixbuf         (GdkPixbuf       *source,
@@ -171,10 +175,11 @@ xfce_panel_image_class_init (XfcePanelImageClass *klass)
   gtkwidget_class->size_allocate = xfce_panel_image_size_allocate;
 #if GTK_CHECK_VERSION (3, 0, 0)
   gtkwidget_class->draw = xfce_panel_image_draw;
+  gtkwidget_class->style_updated = xfce_panel_image_style_updated;
 #else
   gtkwidget_class->expose_event = xfce_panel_image_expose_event;
-#endif
   gtkwidget_class->style_set = xfce_panel_image_style_set;
+#endif
 
   g_object_class_install_property (gobject_class,
                                    PROP_SOURCE,
@@ -525,6 +530,41 @@ xfce_panel_image_expose_event (GtkWidget      *widget,
 
 
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+static void
+xfce_panel_image_style_updated (GtkWidget *widget)
+{
+  XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
+  gboolean               force;
+
+  /* let gtk update the widget style */
+  (*GTK_WIDGET_CLASS (xfce_panel_image_parent_class)->style_updated) (widget);
+
+  /* get style property */
+  gtk_widget_style_get (widget, "force-gtk-icon-sizes", &force, NULL);
+
+  /* update if needed */
+  if (priv->force_icon_sizes != force)
+    {
+      priv->force_icon_sizes = force;
+      if (priv->size > 0)
+        gtk_widget_queue_resize (widget);
+    }
+
+  /* update the icon if we have an icon-name source */
+  if (priv->source != NULL
+      && !g_path_is_absolute (priv->source))
+    {
+      /* unset the size to force an update */
+      priv->width = priv->height = -1;
+      gtk_widget_queue_resize (widget);
+    }
+}
+#endif
+
+
+
+#if !GTK_CHECK_VERSION (3, 0, 0)
 static void
 xfce_panel_image_style_set (GtkWidget *widget,
                             GtkStyle  *previous_style)
@@ -555,6 +595,7 @@ xfce_panel_image_style_set (GtkWidget *widget,
       gtk_widget_queue_resize (widget);
     }
 }
+#endif
 
 
 
