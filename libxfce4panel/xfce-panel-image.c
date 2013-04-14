@@ -438,8 +438,8 @@ xfce_panel_image_draw (GtkWidget *widget,
 
       /* position */
       gtk_widget_get_allocation (widget, &alloc);
-      dest_x = alloc.x + (priv->width - source_width) / 2;
-      dest_y = alloc.y + (priv->height - source_height) / 2;
+      dest_x = (priv->width - source_width) / 2;
+      dest_y = (priv->height - source_height) / 2;
 
       context = gtk_widget_get_style_context (widget);
 

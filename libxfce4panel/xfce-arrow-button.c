@@ -265,10 +265,12 @@ xfce_arrow_button_draw (GtkWidget *widget,
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (widget);
   GtkWidget       *child;
-  gint             x, y, width;
+  gdouble          x, y, width;
   GtkAllocation    alloc;
   gdouble          angle;
   GtkStyleContext *context;
+  GtkBorder        padding;
+  GdkRGBA          fg_rgba;
 
   /* draw the button */
   (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->draw) (widget, cr);
@@ -276,34 +278,36 @@ xfce_arrow_button_draw (GtkWidget *widget,
   if (button->priv->arrow_type != GTK_ARROW_NONE
       && gtk_widget_is_drawable (widget))
     {
+      gtk_widget_get_allocation (widget, &alloc);
       child = gtk_bin_get_child (GTK_BIN (widget));
+      context = gtk_widget_get_style_context (widget);
+      gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
+
       if (child != NULL
           && gtk_widget_get_visible (child))
         {
-          gtk_widget_get_allocation (widget, &alloc);
-          
           if (button->priv->arrow_type == GTK_ARROW_UP
               || button->priv->arrow_type == GTK_ARROW_DOWN)
             {
-              width = ARROW_WIDTH;
-              x = alloc.x + 1 /* widget->style->xthickness */;
-              y = alloc.y + (alloc.height - width) / 2;
+              width = (gdouble) ARROW_WIDTH;
+              x = (gdouble) padding.left;
+              y = (gdouble) (alloc.height - width) / 2.0;
             }
           else
             {
-              width = ARROW_WIDTH;
-              x = alloc.x + (alloc.width - width) / 2;
-              y = alloc.y + 1 /* widget->style->ythickness */;
+              width = (gdouble) ARROW_WIDTH;
+              x = (gdouble) (alloc.width - width) / 2.0;
+              y = (gdouble) padding.top;
             }
         }
       else
         {
-          width = MIN (alloc.height - 2 * 1 /* widget->style->ythickness */,
-                       alloc.width  - 2 * 1 /* widget->style->xthickness */);
-          width = CLAMP (width, 1, ARROW_WIDTH);
+          width = (gdouble) MIN (alloc.height - padding.top - padding.bottom,
+                                 alloc.width  - padding.left - padding.right);
+          width = (gdouble) CLAMP (width, 1.0, (gdouble) ARROW_WIDTH);
 
-          x = alloc.x + (alloc.width - width) / 2;
-          y = alloc.y + (alloc.height - width) / 2;
+          x = (gdouble) (alloc.width - width) / 2.0;
+          y = (gdouble) (alloc.height - width) / 2.0;
         }
 
       switch (button->priv->arrow_type)
@@ -311,10 +315,10 @@ xfce_arrow_button_draw (GtkWidget *widget,
         case GTK_ARROW_DOWN:  angle = G_PI;
         case GTK_ARROW_LEFT:  angle = G_PI / 2.0 + G_PI;
         case GTK_ARROW_RIGHT: angle = G_PI / 2.0;
-        default:              angle = 0;
+        default:              angle = 0.0;
         }
-
-      context = gtk_widget_get_style_context (widget);
+      gtk_style_context_get_color (context, gtk_widget_get_state_flags (widget), &fg_rgba);
+      gdk_cairo_set_source_rgba (cr, &fg_rgba);
       gtk_render_arrow (context, cr, angle, x, y, ARROW_WIDTH);
     }
 
