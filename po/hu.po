@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-13 19:24+0000\n"
+"POT-Creation-Date: 2013-04-14 00:42+0000\n"
 "PO-Revision-Date: 2012-01-16 02:10+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Magyar <gnome-hu-list at gnome dot org>\n"
@@ -38,38 +38,38 @@ msgid "Panel"
 msgstr "Panel"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../libxfce4panel/xfce-panel-plugin.c:1029
 #: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Biztosan eltávolítja a következőt: „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
 #: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ha eltávolítja az elemet a panelről, az véglegesen elvész."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1202
+#: ../libxfce4panel/xfce-panel-plugin.c:1194
 msgid "_Move"
 msgstr "Át_helyezés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1236
+#: ../libxfce4panel/xfce-panel-plugin.c:1228
 msgid "Pane_l"
 msgstr "_Panel"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "Új _elemek hozzáadása…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "_Panel beállításai…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
@@ -930,23 +930,23 @@ msgstr "_Ikon:"
 msgid "_Show button title"
 msgstr "_Gombfelirat megjelenítése"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:565
+#: ../plugins/applicationsmenu/applicationsmenu.c:557
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Válasszon ikont"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:852 ../plugins/launcher/launcher.c:2308
+#: ../plugins/applicationsmenu/applicationsmenu.c:598
+#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "A parancs („%s”) végrehajtása meghiúsult."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1113
+#: ../plugins/applicationsmenu/applicationsmenu.c:1108
 msgid "No applications found"
 msgstr "Nem találhatók alkalmazások"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1136
+#: ../plugins/applicationsmenu/applicationsmenu.c:1131
 msgid "Failed to load the applications menu"
 msgstr "Az alkalmazások menü betöltése meghiúsult"
 
@@ -985,15 +985,15 @@ msgstr "Menü megjelenítése az aktuális egérpozícióban "
 msgid "Show help options"
 msgstr "Súgólehetőségek megjelenítése"
 
-#: ../plugins/clock/clock.c:167
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "%V hét"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
 msgstr "Az óra parancs végrehajtása meghiúsult"
 
-#: ../plugins/clock/clock.c:797
+#: ../plugins/clock/clock.c:807
 msgid "Custom Format"
 msgstr "Egyéni formátum"
 
@@ -1050,8 +1050,8 @@ msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid ""
-"Name of the timezone matching the system's timezone database. Leave empty to "
-"revert to the local time."
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
 msgstr ""
 "Az időzóna neve, mely megegyezik a rendszer időzóna adatbázisával. Hagyja "
 "üresen a helyi időhöz való visszatéréshez."
@@ -1068,13 +1068,7 @@ msgstr "_Inaktív pontok megjelenítése"
 msgid "Show gri_d"
 msgstr "_Rács megjelenítése"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
-msgid ""
-"Start a tool for setting the system time and date. If the button is grayed "
-"out, check the \"Help\" page to see how to configure it correctly."
-msgstr "Indítson el egy eszközt a rendszeridő és dátum beállításához. Ha a gomb szürke, a megfelelő konfiguráláshoz ellenőrizze a \"Súgó\" oldalt."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1086,31 +1080,27 @@ msgstr ""
 "az évet, a %m a hónapot, a %d pedig a napot jelöli. További információkért "
 "lásd a date segédprogram kézikönyvoldalát."
 
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Time Settings"
 msgstr "Idő beállítások"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Time:"
-msgstr "Idő:"
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Time and Date _Settings..."
+msgstr "Idő és dátum beállítások..."
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Time_zone:"
 msgstr "Idő_zóna:"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "True _binary clock"
 msgstr "Valódi bi_náris óra"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "_Layout:"
 msgstr "_Elrendezés:"
 
-#: ../plugins/clock/clock-dialog.glade.h:27
-msgid "_Set"
-msgstr "Beállítá_s"
-
-#: ../plugins/clock/clock-dialog.glade.h:28
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "_Tooltip format:"
 msgstr "B_uboréksúgó formátuma:"
 
@@ -1847,6 +1837,19 @@ msgstr "Ablakmenü"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Switch between open windows using a menu"
 msgstr "Átváltás a nyitott ablakok között, menü használatával"
+
+#~ msgid ""
+#~ "Start a tool for setting the system time and date. If the button is "
+#~ "grayed out, check the \"Help\" page to see how to configure it correctly."
+#~ msgstr ""
+#~ "Indítson el egy eszközt a rendszeridő és dátum beállításához. Ha a gomb "
+#~ "szürke, a megfelelő konfiguráláshoz ellenőrizze a \"Súgó\" oldalt."
+
+#~ msgid "Time:"
+#~ msgstr "Idő:"
+
+#~ msgid "_Set"
+#~ msgstr "Beállítá_s"
 
 #~ msgid "_Read Online"
 #~ msgstr "Megtekintés _online"
