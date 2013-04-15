@@ -308,6 +308,48 @@ xfce_panel_image_finalize (GObject *object)
 
 
 
+//#if GTK_CHECK_VERSION (3, 0, 0) && !GTK_CHECK_VERSION (3, 10, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
+#define GTK_BUTTON_SIZING_FIX
+#endif
+
+#ifdef GTK_BUTTON_SIZING_FIX
+/* When can_focus is true, GtkButton allocates larger size than requested *
+ * and causes the panel image to grow indefinitely.                       *
+ * This workaround compensates for this difference.                       *
+ * Details in https://bugzilla.gnome.org/show_bug.cgi?id=698030           *
+ */
+static gint
+xfce_panel_image_padding_correction (GtkWidget *widget)
+{
+  GtkWidget             *parent;
+  GtkStyleContext       *context;
+  gint                   focus_width;
+  gint                   focus_pad;
+  gint                   correction;
+
+  parent = gtk_widget_get_parent (widget);
+  if (parent != NULL &&
+      GTK_IS_BUTTON (parent) &&
+      !gtk_widget_get_can_focus (parent))
+    {
+      context = gtk_widget_get_style_context (parent);
+      gtk_style_context_get_style (context,
+                                   "focus-line-width", &focus_width,
+                                   "focus-padding", &focus_pad,
+                                   NULL);
+      correction = (focus_width + focus_pad) * 2;
+    }
+  else
+    {
+      correction = 0;
+    }
+
+  return correction;
+}
+#endif
+
+
 #if GTK_CHECK_VERSION (3, 0, 0)
 static void
 xfce_panel_image_get_preferred_width (GtkWidget *widget,
@@ -324,6 +366,9 @@ xfce_panel_image_get_preferred_width (GtkWidget *widget,
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
+#ifdef GTK_BUTTON_SIZING_FIX
+      alloc.width -= xfce_panel_image_padding_correction (widget);
+#endif
       *minimal_width = alloc.width;
     }
 
@@ -347,6 +392,9 @@ xfce_panel_image_get_preferred_height (GtkWidget *widget,
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
+#ifdef GTK_BUTTON_SIZING_FIX
+      alloc.height -= xfce_panel_image_padding_correction (widget);
+#endif
       *minimal_height = alloc.height;
     }
 
