@@ -116,10 +116,10 @@ static void       xfce_panel_image_set_property         (GObject         *object
 static void       xfce_panel_image_finalize             (GObject         *object);
 #if GTK_CHECK_VERSION (3, 0, 0)
 static void       xfce_panel_image_get_preferred_width  (GtkWidget       *widget,
-                                                         gint            *minimal_width,
+                                                         gint            *minimum_width,
                                                          gint            *natural_width);
 static void       xfce_panel_image_get_preferred_height (GtkWidget       *widget,
-                                                         gint            *minimal_height,
+                                                         gint            *minimum_height,
                                                          gint            *natural_height);
 #else
 static void       xfce_panel_image_size_request         (GtkWidget       *widget,
@@ -353,52 +353,64 @@ xfce_panel_image_padding_correction (GtkWidget *widget)
 #if GTK_CHECK_VERSION (3, 0, 0)
 static void
 xfce_panel_image_get_preferred_width (GtkWidget *widget,
-                                      gint      *minimal_width,
+                                      gint      *minimum_width,
                                       gint      *natural_width)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GtkAllocation          alloc;
+  gint                   width;
 
   if (priv->size > 0)
-    *minimal_width = priv->size;
+    width = priv->size;
   else if (priv->pixbuf != NULL)
-    *minimal_width = gdk_pixbuf_get_width (priv->pixbuf);
+    width = gdk_pixbuf_get_width (priv->pixbuf);
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
-#ifdef GTK_BUTTON_SIZING_FIX
-      alloc.width -= xfce_panel_image_padding_correction (widget);
-#endif
-      *minimal_width = alloc.width;
+      width = alloc.width;
     }
 
-  *natural_width = *minimal_width;
+#ifdef GTK_BUTTON_SIZING_FIX
+  width -= xfce_panel_image_padding_correction (widget);
+#endif
+
+  if (minimum_width != NULL)
+    *minimum_width = width;
+
+  if (natural_width != NULL)
+    *natural_width = width;
 }
 
 
 
 static void
 xfce_panel_image_get_preferred_height (GtkWidget *widget,
-                                       gint      *minimal_height,
+                                       gint      *minimum_height,
                                        gint      *natural_height)
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GtkAllocation          alloc;
+  gint                   height;
 
   if (priv->size > 0)
-    *minimal_height = priv->size;
+    height = priv->size;
   else if (priv->pixbuf != NULL)
-    *minimal_height = gdk_pixbuf_get_height (priv->pixbuf);
+    height = gdk_pixbuf_get_height (priv->pixbuf);
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
-#ifdef GTK_BUTTON_SIZING_FIX
-      alloc.height -= xfce_panel_image_padding_correction (widget);
-#endif
-      *minimal_height = alloc.height;
+      height = alloc.height;
     }
 
-  *natural_height = *minimal_height;
+#ifdef GTK_BUTTON_SIZING_FIX
+  height -= xfce_panel_image_padding_correction (widget);
+#endif
+
+  if (minimum_height != NULL)
+    *minimum_height = height;
+
+  if (natural_height != NULL)
+    *natural_height = height;
 }
 #endif
 
@@ -481,7 +493,6 @@ xfce_panel_image_draw (GtkWidget *widget,
   GdkPixbuf             *rendered = NULL;
   GdkPixbuf             *pixbuf = priv->cache;
   GtkStyleContext       *context;
-  GtkAllocation          alloc;
 
   if (G_LIKELY (pixbuf != NULL))
     {
@@ -490,7 +501,6 @@ xfce_panel_image_draw (GtkWidget *widget,
       source_height = gdk_pixbuf_get_height (pixbuf);
 
       /* position */
-      gtk_widget_get_allocation (widget, &alloc);
       dest_x = (priv->width - source_width) / 2;
       dest_y = (priv->height - source_height) / 2;
 
