@@ -79,10 +79,10 @@ static void     xfce_arrow_button_finalize             (GObject               *o
 static gboolean xfce_arrow_button_draw                 (GtkWidget             *widget,
                                                         cairo_t               *cr);
 static void     xfce_arrow_button_get_preferred_width  (GtkWidget             *widget,
-                                                        gint                  *minimal_width,
+                                                        gint                  *minimum_width,
                                                         gint                  *natural_width);
 static void     xfce_arrow_button_get_preferred_height (GtkWidget             *widget,
-                                                        gint                  *minimal_height,
+                                                        gint                  *minimum_height,
                                                         gint                  *natural_height);
 #else
 static gboolean xfce_arrow_button_expose_event         (GtkWidget             *widget,
@@ -269,7 +269,7 @@ xfce_arrow_button_draw (GtkWidget *widget,
   GtkAllocation    alloc;
   gdouble          angle;
   GtkStyleContext *context;
-  GtkBorder        padding;
+  GtkBorder        padding, border;
   GdkRGBA          fg_rgba;
 
   /* draw the button */
@@ -282,6 +282,7 @@ xfce_arrow_button_draw (GtkWidget *widget,
       child = gtk_bin_get_child (GTK_BIN (widget));
       context = gtk_widget_get_style_context (widget);
       gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
+      gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
 
       if (child != NULL
           && gtk_widget_get_visible (child))
@@ -290,20 +291,20 @@ xfce_arrow_button_draw (GtkWidget *widget,
               || button->priv->arrow_type == GTK_ARROW_DOWN)
             {
               width = (gdouble) ARROW_WIDTH;
-              x = (gdouble) padding.left;
+              x = (gdouble) padding.left + border.left;
               y = (gdouble) (alloc.height - width) / 2.0;
             }
           else
             {
               width = (gdouble) ARROW_WIDTH;
               x = (gdouble) (alloc.width - width) / 2.0;
-              y = (gdouble) padding.top;
+              y = (gdouble) padding.top + border.top;
             }
         }
       else
         {
-          width = (gdouble) MIN (alloc.height - padding.top - padding.bottom,
-                                 alloc.width  - padding.left - padding.right);
+          width = (gdouble) MIN (alloc.height - padding.top - padding.bottom - border.top - border.bottom,
+                                 alloc.width  - padding.left - padding.right - border.left - border.right);
           width = (gdouble) CLAMP (width, 1.0, (gdouble) ARROW_WIDTH);
 
           x = (gdouble) (alloc.width - width) / 2.0;
@@ -313,13 +314,16 @@ xfce_arrow_button_draw (GtkWidget *widget,
       switch (button->priv->arrow_type)
         {
         case GTK_ARROW_DOWN:  angle = G_PI;
+          break;
         case GTK_ARROW_LEFT:  angle = G_PI / 2.0 + G_PI;
+          break;
         case GTK_ARROW_RIGHT: angle = G_PI / 2.0;
+          break;
         default:              angle = 0.0;
         }
       gtk_style_context_get_color (context, gtk_widget_get_state_flags (widget), &fg_rgba);
       gdk_cairo_set_source_rgba (cr, &fg_rgba);
-      gtk_render_arrow (context, cr, angle, x, y, ARROW_WIDTH);
+      gtk_render_arrow (context, cr, angle, x, y, width);
     }
 
   return TRUE;
@@ -327,28 +331,31 @@ xfce_arrow_button_draw (GtkWidget *widget,
 
 
 
-static void     
+static void
 xfce_arrow_button_get_preferred_width (GtkWidget *widget,
-                                       gint      *minimal_width,
+                                       gint      *minimum_width,
                                        gint      *natural_width)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (widget);
   GtkWidget       *child;
-
-  /* use gtk for the widget size */
-  (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->get_preferred_width) (widget, minimal_width, natural_width);
+  gint             minimum_child_width, natural_child_width;
+  GtkStyleContext *context;
+  GtkBorder        padding, border;
 
   child = gtk_bin_get_child (GTK_BIN (widget));
-  if (child != NULL 
+  if (child != NULL
       && gtk_widget_get_visible (child))
     {
+      /* use gtk for the widget size */
+      (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->get_preferred_width) (widget, &minimum_child_width, &natural_child_width);
+
       /* reserve space for the arrow */
       switch (button->priv->arrow_type)
         {
         case GTK_ARROW_UP:
         case GTK_ARROW_DOWN:
-          *minimal_width += ARROW_WIDTH;
-          *natural_width += ARROW_WIDTH;
+          minimum_child_width += ARROW_WIDTH;
+          natural_child_width += ARROW_WIDTH;
           break;
 
         default:
@@ -357,35 +364,48 @@ xfce_arrow_button_get_preferred_width (GtkWidget *widget,
     }
   else if (button->priv->arrow_type != GTK_ARROW_NONE)
     {
-      *minimal_width += ARROW_WIDTH;
-      *natural_width += ARROW_WIDTH;
+      /* style thickness */
+      context = gtk_widget_get_style_context (widget);
+      gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
+      gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
+      natural_child_width = (ARROW_WIDTH + padding.left + padding.right + border.left + border.right);
+      minimum_child_width = natural_child_width;
     }
+
+  if (minimum_width != NULL)
+    *minimum_width = minimum_child_width;
+
+  if (natural_width != NULL)
+    *natural_width = natural_child_width;
 }
 
 
 
-static void     
+static void
 xfce_arrow_button_get_preferred_height (GtkWidget *widget,
-                                        gint      *minimal_height,
+                                        gint      *minimum_height,
                                         gint      *natural_height)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (widget);
   GtkWidget       *child;
-
-  /* use gtk for the widget size */
-  (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->get_preferred_height) (widget, minimal_height, natural_height);
+  gint             minimum_child_height, natural_child_height;
+  GtkStyleContext *context;
+  GtkBorder        padding, border;
 
   child = gtk_bin_get_child (GTK_BIN (widget));
-  if (child != NULL 
+  if (child != NULL
       && gtk_widget_get_visible (child))
     {
+      /* use gtk for the widget size */
+      (*GTK_WIDGET_CLASS (xfce_arrow_button_parent_class)->get_preferred_height) (widget, &minimum_child_height, &natural_child_height);
+
       /* reserve space for the arrow */
       switch (button->priv->arrow_type)
         {
-        case GTK_ARROW_UP:
-        case GTK_ARROW_DOWN:
-          *minimal_height += ARROW_WIDTH;
-          *natural_height += ARROW_WIDTH;
+        case GTK_ARROW_LEFT:
+        case GTK_ARROW_RIGHT:
+          minimum_child_height += ARROW_WIDTH;
+          natural_child_height += ARROW_WIDTH;
           break;
 
         default:
@@ -394,9 +414,20 @@ xfce_arrow_button_get_preferred_height (GtkWidget *widget,
     }
   else if (button->priv->arrow_type != GTK_ARROW_NONE)
     {
-      *minimal_height += ARROW_WIDTH;
-      *natural_height += ARROW_WIDTH;
+      /* style thickness */
+      context = gtk_widget_get_style_context (widget);
+      gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
+      gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
+      natural_child_height = (ARROW_WIDTH + padding.top + padding.bottom + border.top + border.bottom);
+      minimum_child_height = natural_child_height;
     }
+
+
+  if (minimum_height != NULL)
+    *minimum_height = minimum_child_height;
+
+  if (natural_height != NULL)
+    *natural_height = natural_child_height;
 }
 #endif
 
