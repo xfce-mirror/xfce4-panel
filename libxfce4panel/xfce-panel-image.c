@@ -358,24 +358,33 @@ xfce_panel_image_get_preferred_width (GtkWidget *widget,
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GtkAllocation          alloc;
-  gint                   width;
+  gint                   width, width_min;
+#ifdef GTK_BUTTON_SIZING_FIX
+  gint                   correction;
+#endif
 
   if (priv->size > 0)
-    width = priv->size;
+    width = width_min = priv->size;
   else if (priv->pixbuf != NULL)
-    width = gdk_pixbuf_get_width (priv->pixbuf);
+    {
+      width = gdk_pixbuf_get_width (priv->pixbuf);
+      width_min = width / 2;
+    }
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
       width = alloc.width;
+      width_min = width / 2;
     }
 
 #ifdef GTK_BUTTON_SIZING_FIX
-  width -= xfce_panel_image_padding_correction (widget);
+  correction = xfce_panel_image_padding_correction (widget);
+  width -= correction;
+  width_min -= correction;
 #endif
 
   if (minimum_width != NULL)
-    *minimum_width = width;
+    *minimum_width = width_min;
 
   if (natural_width != NULL)
     *natural_width = width;
@@ -390,24 +399,33 @@ xfce_panel_image_get_preferred_height (GtkWidget *widget,
 {
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GtkAllocation          alloc;
-  gint                   height;
+  gint                   height, height_min;
+#ifdef GTK_BUTTON_SIZING_FIX
+  gint                   correction;
+#endif
 
   if (priv->size > 0)
-    height = priv->size;
+    height = height_min = priv->size;
   else if (priv->pixbuf != NULL)
-    height = gdk_pixbuf_get_height (priv->pixbuf);
+    {
+      height = gdk_pixbuf_get_height (priv->pixbuf);
+      height_min = height / 2;
+    }
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
       height = alloc.height;
+      height_min = height / 2;
     }
 
 #ifdef GTK_BUTTON_SIZING_FIX
-  height -= xfce_panel_image_padding_correction (widget);
+  correction = xfce_panel_image_padding_correction (widget);
+  height -= correction;
+  height_min -= correction;
 #endif
 
   if (minimum_height != NULL)
-    *minimum_height = height;
+    *minimum_height = height_min;
 
   if (natural_height != NULL)
     *natural_height = height;
