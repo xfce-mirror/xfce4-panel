@@ -359,29 +359,26 @@ xfce_panel_image_get_preferred_width (GtkWidget *widget,
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GtkAllocation          alloc;
   gint                   width, width_min;
-#ifdef GTK_BUTTON_SIZING_FIX
-  gint                   correction;
-#endif
 
   if (priv->size > 0)
-    width = width_min = priv->size;
+    width = priv->size;
   else if (priv->pixbuf != NULL)
-    {
-      width = gdk_pixbuf_get_width (priv->pixbuf);
-      width_min = width / 2;
-    }
+    width = gdk_pixbuf_get_width (priv->pixbuf);
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
       width = alloc.width;
-      width_min = width / 2;
     }
 
 #ifdef GTK_BUTTON_SIZING_FIX
-  correction = xfce_panel_image_padding_correction (widget);
-  width -= correction;
-  width_min -= correction;
+  width -= xfce_panel_image_padding_correction (widget);
+  width = MAX (width, 0);
 #endif
+
+  if (priv->size > 0)
+    width_min = width;
+  else
+    width_min = 0;
 
   if (minimum_width != NULL)
     *minimum_width = width_min;
@@ -400,29 +397,26 @@ xfce_panel_image_get_preferred_height (GtkWidget *widget,
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   GtkAllocation          alloc;
   gint                   height, height_min;
-#ifdef GTK_BUTTON_SIZING_FIX
-  gint                   correction;
-#endif
 
   if (priv->size > 0)
     height = height_min = priv->size;
   else if (priv->pixbuf != NULL)
-    {
-      height = gdk_pixbuf_get_height (priv->pixbuf);
-      height_min = height / 2;
-    }
+    height = gdk_pixbuf_get_height (priv->pixbuf);
   else
     {
       gtk_widget_get_allocation (widget, &alloc);
       height = alloc.height;
-      height_min = height / 2;
     }
 
 #ifdef GTK_BUTTON_SIZING_FIX
-  correction = xfce_panel_image_padding_correction (widget);
-  height -= correction;
-  height_min -= correction;
+  height -= xfce_panel_image_padding_correction (widget);
+  height = MAX (height, 0);
 #endif
+
+  if (priv->size > 0)
+    height_min = height;
+  else
+    height_min = 0;
 
   if (minimum_height != NULL)
     *minimum_height = height_min;
