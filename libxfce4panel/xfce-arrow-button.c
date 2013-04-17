@@ -305,7 +305,7 @@ xfce_arrow_button_draw (GtkWidget *widget,
         {
           width = (gdouble) MIN (alloc.height - padding.top - padding.bottom - border.top - border.bottom,
                                  alloc.width  - padding.left - padding.right - border.left - border.right);
-          width = (gdouble) CLAMP (width, 1.0, (gdouble) ARROW_WIDTH);
+          width = (gdouble) CLAMP (width, 0.0, (gdouble) ARROW_WIDTH);
 
           x = (gdouble) (alloc.width - width) / 2.0;
           y = (gdouble) (alloc.height - width) / 2.0;
@@ -323,7 +323,8 @@ xfce_arrow_button_draw (GtkWidget *widget,
         }
       gtk_style_context_get_color (context, gtk_widget_get_state_flags (widget), &fg_rgba);
       gdk_cairo_set_source_rgba (cr, &fg_rgba);
-      gtk_render_arrow (context, cr, angle, x, y, width);
+      if (width > 0)
+        gtk_render_arrow (context, cr, angle, x, y, width);
     }
 
   return TRUE;
@@ -354,7 +355,6 @@ xfce_arrow_button_get_preferred_width (GtkWidget *widget,
         {
         case GTK_ARROW_UP:
         case GTK_ARROW_DOWN:
-          minimum_child_width += ARROW_WIDTH;
           natural_child_width += ARROW_WIDTH;
           break;
 
@@ -369,7 +369,7 @@ xfce_arrow_button_get_preferred_width (GtkWidget *widget,
       gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
       gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
       natural_child_width = (ARROW_WIDTH + padding.left + padding.right + border.left + border.right);
-      minimum_child_width = natural_child_width;
+      minimum_child_width = natural_child_width - ARROW_WIDTH;
     }
 
   if (minimum_width != NULL)
@@ -404,7 +404,6 @@ xfce_arrow_button_get_preferred_height (GtkWidget *widget,
         {
         case GTK_ARROW_LEFT:
         case GTK_ARROW_RIGHT:
-          minimum_child_height += ARROW_WIDTH;
           natural_child_height += ARROW_WIDTH;
           break;
 
@@ -419,7 +418,7 @@ xfce_arrow_button_get_preferred_height (GtkWidget *widget,
       gtk_style_context_get_padding (context, gtk_widget_get_state_flags (widget), &padding);
       gtk_style_context_get_border (context, gtk_widget_get_state_flags (widget), &border);
       natural_child_height = (ARROW_WIDTH + padding.top + padding.bottom + border.top + border.bottom);
-      minimum_child_height = natural_child_height;
+      minimum_child_height = natural_child_height - ARROW_WIDTH;
     }
 
 
