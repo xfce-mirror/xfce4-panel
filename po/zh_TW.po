@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-18 06:24+0000\n"
-"PO-Revision-Date: 2013-03-18 18:56+0800\n"
+"POT-Creation-Date: 2013-04-18 12:42+0000\n"
+"PO-Revision-Date: 2013-04-18 22:46+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -41,38 +41,38 @@ msgid "Panel"
 msgstr "面板"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../libxfce4panel/xfce-panel-plugin.c:1029
 #: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您確定要移除「%s」嗎？"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
 #: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您要從面板移除該項目，它將永遠消失。"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1202
+#: ../libxfce4panel/xfce-panel-plugin.c:1194
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1236
+#: ../libxfce4panel/xfce-panel-plugin.c:1228
 msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "加入新項目(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "登出(_O)"
 
@@ -910,23 +910,23 @@ msgstr "圖示(_I)："
 msgid "_Show button title"
 msgstr "顯示按鈕標題(_S)"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:565
+#: ../plugins/applicationsmenu/applicationsmenu.c:557
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "選取圖示"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/clock/clock.c:855 ../plugins/launcher/launcher.c:2308
+#: ../plugins/applicationsmenu/applicationsmenu.c:598
+#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」。"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1113
+#: ../plugins/applicationsmenu/applicationsmenu.c:1108
 msgid "No applications found"
 msgstr "找不到應用程式"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1136
+#: ../plugins/applicationsmenu/applicationsmenu.c:1131
 msgid "Failed to load the applications menu"
 msgstr "未能載入應用程式選單"
 
@@ -964,15 +964,15 @@ msgstr "於目前滑鼠位置彈出選單"
 msgid "Show help options"
 msgstr "顯示幫助選項"
 
-#: ../plugins/clock/clock.c:169
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr "第 %V 週"
 
-#: ../plugins/clock/clock.c:452
+#: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
 msgstr "未能執行時鐘指令"
 
-#: ../plugins/clock/clock.c:802
+#: ../plugins/clock/clock.c:807
 msgid "Custom Format"
 msgstr "自訂格式"
 
@@ -1689,7 +1689,7 @@ msgstr "只顯示最小化的視窗(_M)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show windows from _all workspaces or viewports"
-msgstr "顯示所有工作區或 viewport 內的視窗(_A)"
+msgstr "顯示所有工作區視域內的視窗(_A)"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show windows from all mo_nitors"
