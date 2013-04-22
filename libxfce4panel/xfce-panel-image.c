@@ -622,8 +622,10 @@ xfce_panel_image_style_updated (GtkWidget *widget)
     }
 
   /* update the icon if we have an icon-name source */
+  /* and size is not set */
   if (priv->source != NULL
-      && !g_path_is_absolute (priv->source))
+      && !g_path_is_absolute (priv->source)
+      && priv->size <= 0)
     {
       /* unset the size to force an update */
       priv->width = priv->height = -1;
