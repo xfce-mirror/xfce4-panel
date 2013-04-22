@@ -2589,8 +2589,15 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
   xfce_panel_plugin_position_widget (XFCE_PANEL_PLUGIN (panel_plugin),
                                      GTK_WIDGET (menu), attach_widget, x, y);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  /* FIXME */
+  /* A workaround for Gtk3 popup menus with scroll buttons */
+  /* Menus are "pushed in" anyway */
+  *push_in = FALSE;
+#else
   /* keep the menu inside screen */
   *push_in = TRUE;
+#endif
 }
 
 
