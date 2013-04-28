@@ -141,6 +141,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "sort-order", G_TYPE_UINT },
     { "window-scrolling", G_TYPE_BOOLEAN },
     { "include-all-blinking", G_TYPE_BOOLEAN },
+    { "middle-button-close", G_TYPE_BOOLEAN },
     { NULL }
   };
 
@@ -253,6 +254,7 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   TASKLIST_DIALOG_BIND ("show-handle", "active")
   TASKLIST_DIALOG_BIND ("sort-order", "active")
   TASKLIST_DIALOG_BIND ("window-scrolling", "active")
+  TASKLIST_DIALOG_BIND ("middle-button-close", "active")
 
 #ifndef GDK_WINDOWING_X11
   /* not functional in x11, so avoid confusion */

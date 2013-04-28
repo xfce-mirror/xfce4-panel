@@ -95,7 +95,8 @@ enum
   PROP_SHOW_HANDLE,
   PROP_SORT_ORDER,
   PROP_WINDOW_SCROLLING,
-  PROP_INCLUDE_ALL_BLINKING
+  PROP_INCLUDE_ALL_BLINKING,
+  PROP_MIDDLE_BUTTON_CLOSE
 };
 
 struct _XfceTasklistClass
@@ -159,6 +160,9 @@ struct _XfceTasklist
   /* whether we show blinking windows from all workspaces
    * or only the active workspace */
   guint                 all_blinking : 1;
+
+  /* close window with the mouse middle button */
+  guint                 middle_button_close : 1;
 
   /* whether we only show windows that are in the geometry of
    * the monitor the tasklist is on */
@@ -472,6 +476,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          TRUE,
                                                          EXO_PARAM_READWRITE));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_MIDDLE_BUTTON_CLOSE,
+                                   g_param_spec_boolean ("middle-button-close",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
                                                              NULL,
@@ -549,6 +560,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->all_monitors = TRUE;
   tasklist->window_scrolling = TRUE;
   tasklist->all_blinking = TRUE;
+  tasklist->middle_button_close = FALSE;
   xfce_tasklist_geometry_set_invalid (tasklist);
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
@@ -639,6 +651,10 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_boolean (value, tasklist->all_blinking);
       break;
 
+    case PROP_MIDDLE_BUTTON_CLOSE:
+      g_value_set_boolean (value, tasklist->middle_button_close);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -711,6 +727,10 @@ xfce_tasklist_set_property (GObject      *object,
 
     case PROP_INCLUDE_ALL_BLINKING:
       tasklist->all_blinking = g_value_get_boolean (value);
+      break;
+
+    case PROP_MIDDLE_BUTTON_CLOSE:
+      tasklist->middle_button_close = g_value_get_boolean (value);
       break;
 
     default:
@@ -2714,6 +2734,19 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
       && event->y >= 0 && event->y < button->allocation.height)
     {
       xfce_tasklist_button_activate (child, event->time);
+    }
+
+  /* close the window on middle mouse button */
+  if (event->type == GDK_BUTTON_RELEASE
+      && !xfce_taskbar_is_locked (child->tasklist)
+      && event->button == 2
+      && child->tasklist->middle_button_close
+      && !(event->x == 0 && event->y == 0) /* 0,0 = outside the widget in Gtk */
+      && event->x >= 0 && event->x < button->allocation.width
+      && event->y >= 0 && event->y < button->allocation.height)
+    {
+      wnck_window_close (child->window, event->time);
+      return TRUE;
     }
 
   return FALSE;
