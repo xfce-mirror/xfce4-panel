@@ -96,7 +96,7 @@ enum
   PROP_SORT_ORDER,
   PROP_WINDOW_SCROLLING,
   PROP_INCLUDE_ALL_BLINKING,
-  PROP_MIDDLE_BUTTON_CLOSE
+  PROP_MIDDLE_CLICK
 };
 
 struct _XfceTasklistClass
@@ -161,8 +161,8 @@ struct _XfceTasklist
    * or only the active workspace */
   guint                 all_blinking : 1;
 
-  /* close window with the mouse middle button */
-  guint                 middle_button_close : 1;
+  /* action to preform when middle clicking */
+  XfceTasklistMClick    middle_click;
 
   /* whether we only show windows that are in the geometry of
    * the monitor the tasklist is on */
@@ -485,11 +485,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_MIDDLE_BUTTON_CLOSE,
-                                   g_param_spec_boolean ("middle-button-close",
-                                                         NULL, NULL,
-                                                         FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                   PROP_MIDDLE_CLICK,
+                                   g_param_spec_uint ("middle-click",
+                                                      NULL, NULL,
+                                                      XFCE_TASKLIST_MIDDLE_CLICK_MIN,
+                                                      XFCE_TASKLIST_MIDDLE_CLICK_MAX,
+                                                      XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT,
+                                                      EXO_PARAM_READWRITE));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
@@ -568,7 +570,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->all_monitors = TRUE;
   tasklist->window_scrolling = TRUE;
   tasklist->all_blinking = TRUE;
-  tasklist->middle_button_close = FALSE;
+  tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
   xfce_tasklist_geometry_set_invalid (tasklist);
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
@@ -659,8 +661,8 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_boolean (value, tasklist->all_blinking);
       break;
 
-    case PROP_MIDDLE_BUTTON_CLOSE:
-      g_value_set_boolean (value, tasklist->middle_button_close);
+    case PROP_MIDDLE_CLICK:
+      g_value_set_uint (value, tasklist->middle_click);
       break;
 
     default:
@@ -737,8 +739,8 @@ xfce_tasklist_set_property (GObject      *object,
       tasklist->all_blinking = g_value_get_boolean (value);
       break;
 
-    case PROP_MIDDLE_BUTTON_CLOSE:
-      tasklist->middle_button_close = g_value_get_boolean (value);
+    case PROP_MIDDLE_CLICK:
+      tasklist->middle_click= g_value_get_uint (value);
       break;
 
     default:
@@ -2778,25 +2780,35 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
   /* only respond to in-button events */
   if (event->type == GDK_BUTTON_RELEASE
       && !xfce_taskbar_is_locked (child->tasklist)
-      && event->button == 1
       && !(event->x == 0 && event->y == 0) /* 0,0 = outside the widget in Gtk */
       && event->x >= 0 && event->x < allocation.width
       && event->y >= 0 && event->y < allocation.height)
     {
-      xfce_tasklist_button_activate (child, event->time);
-    }
+      if (event->button == 1)
+        {
+          /* press the button */
+          xfce_tasklist_button_activate (child, event->time);
 
-  /* close the window on middle mouse button */
-  if (event->type == GDK_BUTTON_RELEASE
-      && !xfce_taskbar_is_locked (child->tasklist)
-      && event->button == 2
-      && child->tasklist->middle_button_close
-      && !(event->x == 0 && event->y == 0) /* 0,0 = outside the widget in Gtk */
-      && event->x >= 0 && event->x < allocation.width
-      && event->y >= 0 && event->y < allocation.height)
-    {
-      wnck_window_close (child->window, event->time);
-      return TRUE;
+          /* if the window is still active, don't toggle the button */
+          return wnck_window_is_active (child->window);
+        }
+      else if (event->button == 2)
+        {
+          switch (child->tasklist->middle_click)
+            {
+            case XFCE_TASKLIST_MIDDLE_CLICK_NOTHING:
+              break;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW:
+              wnck_window_close (child->window, event->time);
+              return TRUE;
+
+            case XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW:
+              if (!wnck_window_is_minimized (child->window))
+                wnck_window_minimize (child->window);
+              return FALSE;
+            }
+        }
     }
 
   return FALSE;
@@ -2900,7 +2912,10 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
   if (wnck_window_is_active (child->window)
       || wnck_window_transient_is_most_recently_activated (child->window))
     {
-      wnck_window_minimize (child->window);
+      /* minimize does not work when this is assigned to the
+       * middle mouse button */
+      if (child->tasklist->middle_click != XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW)
+        wnck_window_minimize (child->window);
     }
   else
     {
