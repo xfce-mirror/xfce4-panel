@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-02 22:26+0200\n"
-"PO-Revision-Date: 2013-07-29 06:00+0000\n"
+"POT-Creation-Date: 2013-07-30 00:30+0200\n"
+"PO-Revision-Date: 2013-07-30 08:33+0000\n"
 "Last-Translator: k3lt01 <keltoiboy@gmail.com>\n"
 "Language-Team: English (Australia) (http://www.transifex.com/projects/p/xfce/language/en_AU/)\n"
 "MIME-Version: 1.0\n"
@@ -867,7 +867,7 @@ msgstr "Show application d_escription in tooltip"
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Appearance"
 msgstr "Appearance"
@@ -1362,7 +1362,7 @@ msgid "Show _hidden files"
 msgstr "Show _hidden files"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
 msgstr "Filtering"
@@ -1528,7 +1528,7 @@ msgid "Switch workspaces using the mouse _wheel"
 msgstr "Switch workspaces using the mouse _wheel"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Behaviour"
 msgstr "Behaviour"
 
@@ -1623,107 +1623,119 @@ msgid "Area where notification icons appear"
 msgstr "Area where notification icons appear"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "Never"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "Always"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "When space is limited"
+msgstr "When space is limited"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Timestamp"
+msgstr "Timestamp"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Group title and timestamp"
+msgstr "Group title and timestamp"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Window title"
+msgstr "Window title"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "Group title and window title"
+msgstr "Group title and window title"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "None, allow drag-and-drop"
+msgstr "None, allow drag-and-drop"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Window Buttons"
 msgstr "Window Buttons"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
 msgstr "Show button _labels"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "Show _flat buttons"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "Show _handle"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
 msgstr "Sorting _order:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
 msgstr "Window _grouping:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Mi_ddle click action:"
+msgstr "Mi_ddle click action:"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
 msgstr "Restore minimised windows to current _workspace"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
 msgstr "D_raw window frame when hovering a button"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Switch windows using the mouse wheel"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "_Close windows using middle mouse button"
-msgstr "_Close windows using middle mouse button"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Show windows from _all workspaces or viewports"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr "Show only _minimised windows"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
 msgstr "Show windows from all mo_nitors"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Never"
-msgstr "Never"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Always"
-msgstr "Always"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr "When space is limited"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "Timestamp"
-msgstr "Timestamp"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-msgid "Group title and timestamp"
-msgstr "Group title and timestamp"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window title"
-msgstr "Window title"
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "Group title and window title"
-msgstr "Group title and window title"
+msgid "Show only _minimized windows"
+msgstr "Show only _minimised windows"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-msgid "None, allow drag-and-drop"
-msgstr "None, allow drag-and-drop"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Nothing"
+msgstr "Nothing"
 
-#: ../plugins/tasklist/tasklist-widget.c:3278
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+msgid "Close Window"
+msgstr "Close Window"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+msgid "Minimize Window"
+msgstr "Minimise Window"
+
+#: ../plugins/tasklist/tasklist-widget.c:3293
 msgid "Mi_nimize All"
 msgstr "Mi_nimise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3287
+#: ../plugins/tasklist/tasklist-widget.c:3302
 msgid "Un_minimize All"
 msgstr "Un_minimise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Ma_ximize All"
 msgstr "Ma_ximise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "_Unmaximize All"
 msgstr "_Unmaximise All"
 
-#: ../plugins/tasklist/tasklist-widget.c:3312
+#: ../plugins/tasklist/tasklist-widget.c:3327
 msgid "_Close All"
 msgstr "_Close All"
 
