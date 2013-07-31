@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-02 22:26+0200\n"
-"PO-Revision-Date: 2013-07-11 06:17+0000\n"
+"POT-Creation-Date: 2013-07-30 00:30+0200\n"
+"PO-Revision-Date: 2013-07-31 06:48+0000\n"
 "Last-Translator: kawichi\n"
 "Language-Team: Uighur (http://www.transifex.com/projects/p/xfce/language/ug/)\n"
 "MIME-Version: 1.0\n"
@@ -866,7 +866,7 @@ msgstr "پروگرامما چۈشەندۈرۈشى كۆرسەتمىدە كۆرس�
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Appearance"
 msgstr "كۆرۈنۈشى"
@@ -1361,7 +1361,7 @@ msgid "Show _hidden files"
 msgstr "يوشۇرۇن ھۆججەتلەرنى كۆرسەتسۇن(_H)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
 msgstr "سۈزۈش"
@@ -1527,7 +1527,7 @@ msgid "Switch workspaces using the mouse _wheel"
 msgstr "چاشقىنەك چاقىنى ئىشلىتىپ خىزمەت رايونلىرىنى ئالماشتۇرسۇن(_W)"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Behaviour"
 msgstr "قىلمىش"
 
@@ -1622,107 +1622,119 @@ msgid "Area where notification icons appear"
 msgstr "ئۇقتۇرۇش سىنبەلگىسى كۆرۈنىدىغان رايون"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "زادىلا"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "ھەمىشە"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "When space is limited"
+msgstr "بوشلۇق تۈگىگەندە"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Timestamp"
+msgstr "ۋاقىت(Timestamp)"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Group title and timestamp"
+msgstr "گۇرۇپپا ماۋزۇسى ۋە ۋاقىت"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Window title"
+msgstr "كۆزنەك ماۋزۇسى"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "Group title and window title"
+msgstr "گۇرۇپپا ماۋزۇسى ۋە كۆزنەك ماۋزۇسى"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "None, allow drag-and-drop"
+msgstr "يوق، سۆرەپ-تاشلاشقا ئىجازەت"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Window Buttons"
 msgstr "كۆزنەك توپچىلىرى"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
 msgstr "توپچا ئەنلىرىنى كۆرسەتسۇن(_L)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "سىدام توپچا كۆرسەت(_F)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "handle كۆرسەتسۇن(_H)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
 msgstr "تەرتىپلەش ئۇسۇلى(_O):"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
 msgstr "كۆزنەك گۇرۇپپىلاش(_G):"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Mi_ddle click action:"
+msgstr "ئوتتۇرا توپچا بېسىلغاندا(_D):"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
 msgstr "ھازىرقى خىزمەت رايونىدىكى كىچىكلىتىلگەن كۆزنەكلەرنى ئەسلىگە كەلتۈر(_W)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
 msgstr "ئىسترېلكا توپچا ئۈستىدە تۇرغاندا كۆزنەك كاندۇكىنى سىزسۇن(_R)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
 msgstr "چاشقىنەك غالتىكى ئارقىلىق كۆزنەكلەرنى ئالماشتۇرسۇن(_S)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "_Close windows using middle mouse button"
-msgstr "چاشقىنەك ئوتتۇرا توپچىسى ئارىلىق كۆزنەكلەرنى ياپسۇن(_C)"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
 msgstr "بارلىق خىزمەت رايونى ياكى كۆرۈش ئېغىزلىرىدىكى كۆزنەكلەرنى كۆرسەتسۇن(_A)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr "كىچىكلىتىلگەن كۆزنەكلەرنىلا كۆرسەت"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
 msgstr "بارلىق كۆزەتكۈچلەردىكى كۆزنەكلەرنى كۆرسەتسۇن(_N)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Never"
-msgstr "زادىلا"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Always"
-msgstr "ھەمىشە"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr "بوشلۇق تۈگىگەندە"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "Timestamp"
-msgstr "ۋاقىت(Timestamp)"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-msgid "Group title and timestamp"
-msgstr "گۇرۇپپا ماۋزۇسى ۋە ۋاقىت"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window title"
-msgstr "كۆزنەك ماۋزۇسى"
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "Group title and window title"
-msgstr "گۇرۇپپا ماۋزۇسى ۋە كۆزنەك ماۋزۇسى"
+msgid "Show only _minimized windows"
+msgstr "كىچىكلىتىلگەن كۆزنەكلەرنىلا كۆرسەت"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-msgid "None, allow drag-and-drop"
-msgstr "يوق، سۆرەپ-تاشلاشقا ئىجازەت"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Nothing"
+msgstr "ھېچنېمە"
 
-#: ../plugins/tasklist/tasklist-widget.c:3278
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+msgid "Close Window"
+msgstr "كۆزنەكنى ياپ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+msgid "Minimize Window"
+msgstr "كۆزنەكنى كىچىكلەت"
+
+#: ../plugins/tasklist/tasklist-widget.c:3293
 msgid "Mi_nimize All"
 msgstr "ھەممىنى كىچىكلەت(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3287
+#: ../plugins/tasklist/tasklist-widget.c:3302
 msgid "Un_minimize All"
 msgstr "ھەممىنى ئەڭ كىچىك قىلىشنى بىكار قىلىش(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Ma_ximize All"
 msgstr "ھەممىنى چوڭايت(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "_Unmaximize All"
 msgstr "ھەممىنى ئەڭ چوڭ قىلىشنى بىكار قىلىش(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3312
+#: ../plugins/tasklist/tasklist-widget.c:3327
 msgid "_Close All"
 msgstr "ھەممىنى تاقا(_C)"
 
