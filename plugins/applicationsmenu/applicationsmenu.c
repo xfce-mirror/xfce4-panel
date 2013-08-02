@@ -21,6 +21,7 @@
 #endif
 
 #include <garcon/garcon.h>
+#include <garcon-gtk/garcon-gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -55,9 +56,8 @@ struct _ApplicationsMenuPlugin
   GtkWidget       *label;
   GtkWidget       *menu;
 
-  guint            show_generic_names : 1;
-  guint            show_menu_icons : 1;
-  guint            show_tooltips : 1;
+  guint            is_constructed : 1;
+
   guint            show_button_title : 1;
   gchar           *button_title;
   gchar           *button_icon;
@@ -82,10 +82,6 @@ enum
   PROP_CUSTOM_MENU_FILE
 };
 
-static const GtkTargetEntry dnd_target_list[] = {
-  { "text/uri-list", 0, 0 }
-};
-
 
 
 static void      applications_menu_plugin_get_property         (GObject                *object,
@@ -106,19 +102,17 @@ static void      applications_menu_plugin_configure_plugin     (XfcePanelPlugin 
 static gboolean  applications_menu_plugin_remote_event         (XfcePanelPlugin        *panel_plugin,
                                                                 const gchar            *name,
                                                                 const GValue           *value);
-static void      applications_menu_plugin_menu_reload          (ApplicationsMenuPlugin *plugin);
 static gboolean  applications_menu_plugin_menu                 (GtkWidget              *button,
                                                                 GdkEventButton         *event,
                                                                 ApplicationsMenuPlugin *plugin);
+static void      applications_menu_plugin_menu_deactivate      (GtkWidget              *menu,
+                                                                GtkWidget              *button);
+static void      applications_menu_plugin_set_garcon_menu      (ApplicationsMenuPlugin *plugin);
 
 
 
 /* define the plugin */
 XFCE_PANEL_DEFINE_PLUGIN (ApplicationsMenuPlugin, applications_menu_plugin)
-
-
-
-static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
 
 
 
@@ -144,7 +138,7 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
                                    PROP_SHOW_GENERIC_NAMES,
                                    g_param_spec_boolean ("show-generic-names",
                                                          NULL, NULL,
-                                                         TRUE,
+                                                         FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
@@ -194,12 +188,6 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
                                                         NULL, NULL,
                                                         NULL,
                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  menu_icon_size = gtk_icon_size_from_name ("panel-applications-menu");
-  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
-    menu_icon_size = gtk_icon_size_register ("panel-applications-menu",
-                                             DEFAULT_ICON_SIZE,
-                                             DEFAULT_ICON_SIZE);
 }
 
 
@@ -207,25 +195,8 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
 static void
 applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
 {
-  const gchar *desktop;
-
-  plugin->show_menu_icons = TRUE;
-  plugin->show_button_title = TRUE;
-  plugin->custom_menu = FALSE;
-
-  /* if the value is unset, fallback to XFCE, if the
-   * value is empty, allow all applications in the menu */
-  desktop = g_getenv ("XDG_CURRENT_DESKTOP");
-  if (G_LIKELY (desktop == NULL))
-    desktop = "XFCE";
-  else if (*desktop == '\0')
-    desktop = NULL;
-
-  panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
-               "XDG_MENU_PREFIX is set to \"%s\", menu environment is \"%s\"",
-               g_getenv ("XDG_MENU_PREFIX"), desktop);
-
-  garcon_set_environment (desktop);
+  /* init garcon environment */
+  garcon_set_environment_xdg (GARCON_ENVIRONMENT_XFCE);
 
   plugin->button = xfce_panel_create_toggle_button ();
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
@@ -248,6 +219,11 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   plugin->label = gtk_label_new (DEFAULT_TITLE);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->label, FALSE, FALSE, 0);
   gtk_widget_show (plugin->label);
+
+  /* prepare the menu */
+  plugin->menu = garcon_gtk_menu_new (NULL);
+  g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
+      G_CALLBACK (applications_menu_plugin_menu_deactivate), plugin->button);
 }
 
 
@@ -263,15 +239,18 @@ applications_menu_plugin_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_SHOW_GENERIC_NAMES:
-      g_value_set_boolean (value, plugin->show_generic_names);
+      g_value_set_boolean (value,
+          garcon_gtk_menu_get_show_generic_names (GARCON_GTK_MENU (plugin->menu)));
       break;
 
     case PROP_SHOW_MENU_ICONS:
-      g_value_set_boolean (value, plugin->show_menu_icons);
+      g_value_set_boolean (value,
+          garcon_gtk_menu_get_show_menu_icons (GARCON_GTK_MENU (plugin->menu)));
       break;
 
     case PROP_SHOW_TOOLTIPS:
-      g_value_set_boolean (value, plugin->show_tooltips);
+      g_value_set_boolean (value,
+          garcon_gtk_menu_get_show_tooltips (GARCON_GTK_MENU (plugin->menu)));
       break;
 
     case PROP_SHOW_BUTTON_TITLE:
@@ -312,23 +291,22 @@ applications_menu_plugin_set_property (GObject      *object,
 {
   ApplicationsMenuPlugin *plugin = XFCE_APPLICATIONS_MENU_PLUGIN (object);
   gboolean                force_a_resize = FALSE;
-  gboolean                reload_menu = FALSE;
 
   switch (prop_id)
     {
     case PROP_SHOW_GENERIC_NAMES:
-      plugin->show_generic_names = g_value_get_boolean (value);
-      reload_menu = TRUE;
+      garcon_gtk_menu_set_show_generic_names (GARCON_GTK_MENU (plugin->menu),
+                                              g_value_get_boolean (value));
       break;
 
     case PROP_SHOW_MENU_ICONS:
-      plugin->show_menu_icons = g_value_get_boolean (value);
-      reload_menu = TRUE;
-      break;
+      garcon_gtk_menu_set_show_menu_icons (GARCON_GTK_MENU (plugin->menu),
+                                           g_value_get_boolean (value));
+       break;
 
     case PROP_SHOW_TOOLTIPS:
-      plugin->show_tooltips = g_value_get_boolean (value);
-      reload_menu = TRUE;
+      garcon_gtk_menu_set_show_tooltips (GARCON_GTK_MENU (plugin->menu),
+                                         g_value_get_boolean (value));
       break;
 
     case PROP_SHOW_BUTTON_TITLE:
@@ -366,13 +344,17 @@ applications_menu_plugin_set_property (GObject      *object,
 
     case PROP_CUSTOM_MENU:
       plugin->custom_menu = g_value_get_boolean (value);
-      reload_menu = TRUE;
+
+      if (plugin->is_constructed)
+        applications_menu_plugin_set_garcon_menu (plugin);
       break;
 
     case PROP_CUSTOM_MENU_FILE:
       g_free (plugin->custom_menu_file);
       plugin->custom_menu_file = g_value_dup_string (value);
-      reload_menu = TRUE;
+
+      if (plugin->is_constructed)
+        applications_menu_plugin_set_garcon_menu (plugin);
       break;
 
     default:
@@ -385,9 +367,6 @@ applications_menu_plugin_set_property (GObject      *object,
       applications_menu_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
           xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
     }
-
-  if (reload_menu)
-    applications_menu_plugin_menu_reload (plugin);
 }
 
 
@@ -416,7 +395,12 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
                          xfce_panel_plugin_get_property_base (panel_plugin),
                          properties, FALSE);
 
+  /* make sure the menu is set */
+  applications_menu_plugin_set_garcon_menu (plugin);
+
   gtk_widget_show (plugin->button);
+
+  plugin->is_constructed = TRUE;
 }
 
 
@@ -592,7 +576,7 @@ applications_menu_plugin_configure_plugin_edit (GtkWidget              *button,
                                                 ApplicationsMenuPlugin *plugin)
 {
   GError      *error = NULL;
-  const gchar *command = "alacarte";
+  const gchar  command[] = "alacarte";
 
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
   panel_return_if_fail (GTK_IS_WIDGET (button));
@@ -750,325 +734,41 @@ applications_menu_plugin_menu_deactivate (GtkWidget *menu,
 
 
 static void
-applications_menu_plugin_append_quoted (GString     *string,
-                                        const gchar *unquoted)
+applications_menu_plugin_set_garcon_menu (ApplicationsMenuPlugin *plugin)
 {
-  gchar *quoted;
+  GarconMenu *menu = NULL;
+  gchar      *filename;
+  GFile      *file;
 
-  quoted = g_shell_quote (unquoted);
-  g_string_append (string, quoted);
-  g_free (quoted);
-}
-
-
-
-static void
-applications_menu_plugin_menu_item_activate (GtkWidget      *mi,
-                                             GarconMenuItem *item)
-{
-  GString      *string;
-  const gchar  *command;
-  const gchar  *p;
-  const gchar  *tmp;
-  gchar       **argv;
-  gboolean      result = FALSE;
-  gchar        *uri;
-  GError       *error = NULL;
-
-  panel_return_if_fail (GTK_IS_WIDGET (mi));
-  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
-
-  command = garcon_menu_item_get_command (item);
-  if (panel_str_is_empty (command))
-    return;
-
-  string = g_string_sized_new (100);
-
-  if (garcon_menu_item_requires_terminal (item))
-    g_string_append (string, "exo-open --launch TerminalEmulator ");
-
-  /* expand the field codes */
-  for (p = command; *p != '\0'; ++p)
-    {
-      if (G_UNLIKELY (p[0] == '%' && p[1] != '\0'))
-        {
-          switch (*++p)
-            {
-            case 'f': case 'F':
-            case 'u': case 'U':
-              /* TODO for dnd, not a regression, xfdesktop never had this */
-              break;
-
-            case 'i':
-              tmp = garcon_menu_item_get_icon_name (item);
-              if (!panel_str_is_empty (tmp))
-                {
-                  g_string_append (string, "--icon ");
-                  applications_menu_plugin_append_quoted (string, tmp);
-                }
-              break;
-
-            case 'c':
-              tmp = garcon_menu_item_get_name (item);
-              if (!panel_str_is_empty (tmp))
-                applications_menu_plugin_append_quoted (string, tmp);
-              break;
-
-            case 'k':
-              uri = garcon_menu_item_get_uri (item);
-              if (!panel_str_is_empty (uri))
-                applications_menu_plugin_append_quoted (string, uri);
-              g_free (uri);
-              break;
-
-            case '%':
-              g_string_append_c (string, '%');
-              break;
-            }
-        }
-      else
-        {
-          g_string_append_c (string, *p);
-        }
-    }
-
-  /* parse and spawn command */
-  if (g_shell_parse_argv (string->str, NULL, &argv, &error))
-    {
-      result = xfce_spawn_on_screen (gtk_widget_get_screen (mi),
-                                     garcon_menu_item_get_path (item),
-                                     argv, NULL, G_SPAWN_SEARCH_PATH,
-                                     garcon_menu_item_supports_startup_notification (item),
-                                     gtk_get_current_event_time (),
-                                     garcon_menu_item_get_icon_name (item),
-                                     &error);
-
-      g_strfreev (argv);
-    }
-
-  if (G_UNLIKELY (!result))
-    {
-      xfce_dialog_show_error (NULL, error, _("Failed to execute command \"%s\"."), command);
-      g_error_free (error);
-    }
-
-  g_string_free (string, TRUE);
-}
-
-
-
-static void
-applications_menu_plugin_menu_item_drag_begin (GarconMenuItem   *item,
-                                               GdkDragContext   *drag_context)
-{
-  const gchar *icon_name;
-
-  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
-
-  icon_name = garcon_menu_item_get_icon_name (item);
-  if (!panel_str_is_empty (icon_name))
-    gtk_drag_set_icon_name (drag_context, icon_name, 0, 0);
-}
-
-
-
-static void
-applications_menu_plugin_menu_item_drag_data_get (GarconMenuItem   *item,
-                                                  GdkDragContext   *drag_context,
-                                                  GtkSelectionData *selection_data,
-                                                  guint             info,
-                                                  guint             drag_time)
-{
-  gchar *uris[2] = { NULL, NULL };
-
-  panel_return_if_fail (GARCON_IS_MENU_ITEM (item));
-
-  uris[0] = garcon_menu_item_get_uri (item);
-  if (G_LIKELY (uris[0] != NULL))
-    {
-      gtk_selection_data_set_uris (selection_data, uris);
-      g_free (uris[0]);
-    }
-}
-
-
-
-static void
-applications_menu_plugin_menu_item_drag_end (ApplicationsMenuPlugin *plugin)
-{
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (plugin->button));
-  panel_return_if_fail (GTK_IS_MENU (plugin->menu));
+  panel_return_if_fail (GARCON_GTK_IS_MENU (plugin->menu));
 
-  /* selection-done is never called, so handle that manually */
-  applications_menu_plugin_menu_deactivate (plugin->menu, plugin->button);
-}
+  /* load the custom menu if set */
+  if (plugin->custom_menu
+      && plugin->custom_menu_file != NULL)
+    menu = garcon_menu_new_for_path (plugin->custom_menu_file);
 
+  /* use the applications menu, this also respects the
+   * XDG_MENU_PREFIX environment variable */
+  if (G_LIKELY (menu == NULL))
+    menu = garcon_menu_new_applications ();
 
+  /* set the menu */
+  garcon_gtk_menu_set_menu (GARCON_GTK_MENU (plugin->menu), menu);
 
-static void
-applications_menu_plugin_menu_reload (ApplicationsMenuPlugin *plugin)
-{
-  panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
-
-  if (plugin->menu != NULL)
+  /* debugging information */
+  if (0)
     {
-      panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
-                   "destroy menu for reload");
+  file = garcon_menu_get_file (menu);
+  filename = g_file_get_parse_name (file);
+  g_object_unref (G_OBJECT (file));
 
-      /* if the menu is opened, do not destroy it under the users'
-       * cursor, else destroy the menu in an idle, to give garcon
-       * time to finalize the events that triggered the reload */
-      if (gtk_widget_get_visible (plugin->menu))
-        g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
-            G_CALLBACK (panel_utils_destroy_later), NULL);
-      else
-        panel_utils_destroy_later (GTK_WIDGET (plugin->menu));
-    }
-}
-
-
-
-static gboolean
-applications_menu_plugin_menu_add (GtkWidget              *gtk_menu,
-                                   GtkWidget              *button,
-                                   GarconMenu             *menu,
-                                   ApplicationsMenuPlugin *plugin)
-{
-  GList               *elements, *li;
-  GtkWidget           *mi, *image;
-  const gchar         *name, *icon_name;
-  const gchar         *comment;
-  GtkWidget           *submenu;
-  gboolean             has_children = FALSE;
-  gint                 size = DEFAULT_ICON_SIZE, w, h;
-  const gchar         *command;
-  GarconMenuDirectory *directory;
-
-  panel_return_val_if_fail (GTK_IS_MENU (gtk_menu), FALSE);
-  panel_return_val_if_fail (GARCON_IS_MENU (menu), FALSE);
-  panel_return_val_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin), FALSE);
-  panel_return_val_if_fail (button == NULL || GTK_IS_TOGGLE_BUTTON (button), FALSE);
-
-  if (gtk_icon_size_lookup (menu_icon_size, &w, &h))
-    size = MIN (w, h);
-
-  elements = garcon_menu_get_elements (menu);
-  for (li = elements; li != NULL; li = li->next)
-    {
-      panel_return_val_if_fail (GARCON_IS_MENU_ELEMENT (li->data), FALSE);
-      if (GARCON_IS_MENU_ITEM (li->data))
-        {
-          g_signal_connect_swapped (G_OBJECT (li->data), "changed",
-              G_CALLBACK (applications_menu_plugin_menu_reload), plugin);
-
-          if (!garcon_menu_element_get_visible (li->data))
-            continue;
-
-          name = NULL;
-          if (plugin->show_generic_names)
-            name = garcon_menu_item_get_generic_name (li->data);
-          if (name == NULL)
-            name = garcon_menu_item_get_name (li->data);
-          if (G_UNLIKELY (name == NULL))
-            continue;
-
-          mi = gtk_image_menu_item_new_with_label (name);
-          gtk_menu_shell_append (GTK_MENU_SHELL (gtk_menu), mi);
-          g_signal_connect (G_OBJECT (mi), "activate",
-              G_CALLBACK (applications_menu_plugin_menu_item_activate), li->data);
-          gtk_widget_show (mi);
-
-          if (plugin->show_tooltips)
-            {
-              comment = garcon_menu_item_get_comment (li->data);
-              if (!panel_str_is_empty (comment))
-                gtk_widget_set_tooltip_text (mi, comment);
-            }
-
-          /* dragging items from the menu to the panel */
-          gtk_drag_source_set (mi, GDK_BUTTON1_MASK, dnd_target_list,
-              G_N_ELEMENTS (dnd_target_list), GDK_ACTION_COPY);
-          g_signal_connect_swapped (G_OBJECT (mi), "drag-begin",
-              G_CALLBACK (applications_menu_plugin_menu_item_drag_begin), li->data);
-          g_signal_connect_swapped (G_OBJECT (mi), "drag-data-get",
-              G_CALLBACK (applications_menu_plugin_menu_item_drag_data_get), li->data);
-          g_signal_connect_swapped (G_OBJECT (mi), "drag-end",
-              G_CALLBACK (applications_menu_plugin_menu_item_drag_end), plugin);
-
-          command = garcon_menu_item_get_command (li->data);
-          if (G_UNLIKELY (panel_str_is_empty (command)))
-            gtk_widget_set_sensitive (mi, FALSE);
-
-          if (plugin->show_menu_icons)
-            {
-              icon_name = garcon_menu_item_get_icon_name (li->data);
-              if (panel_str_is_empty (icon_name))
-                icon_name = "applications-other";
-
-              image = xfce_panel_image_new_from_source (icon_name);
-              xfce_panel_image_set_size (XFCE_PANEL_IMAGE (image), size);
-              gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-              gtk_widget_show (image);
-            }
-
-          has_children = TRUE;
-        }
-      else if (GARCON_IS_MENU_SEPARATOR (li->data))
-        {
-          mi = gtk_separator_menu_item_new ();
-          gtk_menu_shell_append (GTK_MENU_SHELL (gtk_menu), mi);
-          gtk_widget_show (mi);
-        }
-      else if (GARCON_IS_MENU (li->data))
-        {
-          /* the element check for menu also copies the item list to
-           * check if all the elements are visible, we do that with the
-           * return value of this function, so avoid that and only check
-           * the visibility of the menu directory */
-          directory = garcon_menu_get_directory (li->data);
-          if (directory != NULL
-              && !garcon_menu_directory_get_visible (directory))
-            continue;
-
-          submenu = gtk_menu_new ();
-          if (applications_menu_plugin_menu_add (submenu, button, li->data, plugin))
-            {
-              name = garcon_menu_element_get_name (li->data);
-              mi = gtk_image_menu_item_new_with_label (name);
-              gtk_menu_shell_append (GTK_MENU_SHELL (gtk_menu), mi);
-              gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);
-              g_signal_connect (G_OBJECT (submenu), "selection-done",
-                  G_CALLBACK (applications_menu_plugin_menu_deactivate), button);
-              gtk_widget_show (mi);
-
-              g_signal_connect_swapped (G_OBJECT (li->data), "directory-changed",
-                  G_CALLBACK (applications_menu_plugin_menu_reload), plugin);
-
-              if (plugin->show_menu_icons)
-                {
-                  icon_name = garcon_menu_element_get_icon_name (li->data);
-                  if (panel_str_is_empty (icon_name))
-                    icon_name = "applications-other";
-
-                  image = xfce_panel_image_new_from_source (icon_name);
-                  xfce_panel_image_set_size (XFCE_PANEL_IMAGE (image), size);
-                  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-                  gtk_widget_show (image);
-                }
-
-              has_children = TRUE;
-            }
-          else
-            {
-              gtk_widget_destroy (submenu);
-            }
-        }
+  panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
+               "menu from \"%s\"", filename);
+  g_free (filename);
     }
 
-  g_list_free (elements);
-
-  return has_children;
+  g_object_unref (G_OBJECT (menu));
 }
 
 
@@ -1078,16 +778,10 @@ applications_menu_plugin_menu (GtkWidget              *button,
                                GdkEventButton         *event,
                                ApplicationsMenuPlugin *plugin)
 {
-  GtkWidget  *mi;
-  GarconMenu *menu = NULL;
-  GError     *error = NULL;
-  gchar      *filename;
-  GFile      *file;
-
   panel_return_val_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (button == NULL || plugin->button == button, FALSE);
 
-  if (event != NULL
+  if (event != NULL /* remove event */
       && !(event->button == 1
            && event->type == GDK_BUTTON_PRESS
            && !PANEL_HAS_FLAG (event->state, GDK_CONTROL_MASK)))
@@ -1096,64 +790,7 @@ applications_menu_plugin_menu (GtkWidget              *button,
   if (button != NULL)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
-  if (plugin->menu == NULL)
-    {
-      if (G_UNLIKELY (plugin->custom_menu
-          && plugin->custom_menu_file != NULL))
-        menu = garcon_menu_new_for_path (plugin->custom_menu_file);
-
-      /* use the applications menu, this also respects the
-       * XDG_MENU_PREFIX environment variable */
-      if (G_LIKELY (menu == NULL))
-        menu = garcon_menu_new_applications ();
-
-      if (menu != NULL
-          && garcon_menu_load (menu, NULL, &error))
-        {
-          plugin->menu = gtk_menu_new ();
-          g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
-               G_CALLBACK (applications_menu_plugin_menu_deactivate), button);
-          g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
-
-          if (!applications_menu_plugin_menu_add (plugin->menu, button, menu, plugin))
-            {
-              mi = gtk_menu_item_new_with_label (_("No applications found"));
-              gtk_menu_shell_append (GTK_MENU_SHELL (plugin->menu), mi);
-              gtk_widget_set_sensitive (mi, FALSE);
-              gtk_widget_show (mi);
-            }
-
-          /* watch the menu for changes */
-          g_object_weak_ref (G_OBJECT (plugin->menu),
-              (GWeakNotify) g_object_unref, menu);
-          g_signal_connect_swapped (G_OBJECT (menu), "reload-required",
-              G_CALLBACK (applications_menu_plugin_menu_reload), plugin);
-
-          /* debugging information */
-          file = garcon_menu_get_file (menu);
-          filename = g_file_get_parse_name (file);
-          g_object_unref (G_OBJECT (file));
-
-          panel_debug (PANEL_DEBUG_APPLICATIONSMENU,
-                       "loading from %s", filename);
-          g_free (filename);
-        }
-      else
-        {
-          xfce_dialog_show_error (NULL, error, _("Failed to load the applications menu"));
-
-          if (button != NULL)
-            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
-
-          if (G_LIKELY (error != NULL))
-            g_error_free (error);
-          if (G_LIKELY (menu != NULL))
-            g_object_unref (G_OBJECT (menu));
-
-          return FALSE;
-        }
-    }
-
+  /* show the menu */
   gtk_menu_popup (GTK_MENU (plugin->menu), NULL, NULL,
                   button != NULL ? xfce_panel_plugin_position_menu : NULL,
                   plugin, 1,

@@ -23,6 +23,7 @@ libapplicationsmenu_la_CFLAGS = \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(GARCON_CFLAGS) \
+	$(GARCON_GTK3_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libapplicationsmenu_la_LDFLAGS = \
@@ -39,6 +40,7 @@ libapplicationsmenu_la_LIBADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(GARCON_LIBS) \
+	$(GARCON_GTK3_LIBS) \
 	$(XFCONF_LIBS)
 
 libapplicationsmenu_la_DEPENDENCIES = \
