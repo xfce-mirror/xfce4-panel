@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-30 00:30+0200\n"
-"PO-Revision-Date: 2013-07-31 15:30+0000\n"
+"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"PO-Revision-Date: 2013-08-05 14:35+0000\n"
 "Last-Translator: MC <correomc2000-ing@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -827,7 +827,7 @@ msgstr "Cerrar sesión, bloquear u otras acciones del sistema"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Menú de Aplicaciones"
@@ -898,25 +898,16 @@ msgstr ""
 msgid "Menu File"
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:557
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Seleccione un icono"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:598
-#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Fallo al ejecutar el comando \"%s\"."
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1108
-msgid "No applications found"
-msgstr "No se han encontrado aplicaciones"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1131
-msgid "Failed to load the applications menu"
-msgstr "Fallo al cargar el menú de aplicaciones"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1338,7 +1329,7 @@ msgstr "Abrir en Terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Mostrar árbol de directorios en el menú"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
@@ -1353,7 +1344,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Introduzca una lista de patrones a utilizar para determinar que archivos son visibles en el directorio. Si especifica más de un patrón aquí, la lista de elementos deberá usar punto y coma como separador (p.e: *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
