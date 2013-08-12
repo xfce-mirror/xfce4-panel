@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Adolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2013
+# The Idiot <brian.peraza@gmail.com>, 2013
 # danpergal84 <danpergal84@gmail.com>, 2013
 # MC <correomc2000-ing@yahoo.es>, 2013
 # pharamir <pamirmatos@gmail.com>, 2013
@@ -12,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2013-08-07 13:46+0000\n"
-"Last-Translator: pharamir <pamirmatos@gmail.com>\n"
+"PO-Revision-Date: 2013-08-12 10:14+0000\n"
+"Last-Translator: The Idiot <brian.peraza@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -174,7 +175,7 @@ msgstr "Fallo al cerrar el panel"
 
 #: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
-msgstr ""
+msgstr "Error al enviar mensaje de D-Bus"
 
 #: ../panel/main.c:400
 msgid ""
@@ -193,7 +194,7 @@ msgstr "Fallo al ejecutar la aplicación de migración"
 
 #: ../panel/panel-application.c:982
 msgid "Create _Launcher"
-msgstr ""
+msgstr "Crear _Lanzador"
 
 #: ../panel/panel-application.c:983
 msgid ""
@@ -226,7 +227,7 @@ msgstr "Fallo al ejecutar el comando \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Se ha especificado una sintaxis inválida para el evento del complemento. Utilice NOMBRE-COMPLEMENTO:NOMBRE[:TIPO:VALOR]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
@@ -241,7 +242,7 @@ msgstr "Mantenedores"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Modo barra de escritorio"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -367,7 +368,7 @@ msgstr "Vertical"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Barra de escritorio"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
@@ -391,7 +392,7 @@ msgstr "Eliminar panel seleccionado"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "M_ode:"
-msgstr ""
+msgstr "M_odo"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "O_utput:"
@@ -407,16 +408,16 @@ msgstr "Seleccione esta opción para extender el panel sobre multiple monitores.
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Lock panel"
-msgstr ""
+msgstr "Anclar panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
+msgstr "Seleccione esta opción para habilitar las manijas del panel y anclar su posición"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Automatically show and _hide the panel"
-msgstr ""
+msgstr "Mostrar y _ocultar el panel automáticamente"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid ""
@@ -426,7 +427,7 @@ msgstr "Selecciona esta opción para esconder el panel cuando el punto no esta e
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "No _reservar espacio en los bordes"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
@@ -442,12 +443,12 @@ msgstr "General"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "_Tamaño de la fila (pixeles):"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #, no-c-format
 msgid "L_ength (%):"
-msgstr ""
+msgstr "L_ongitud (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Num_ber of rows:"
@@ -522,13 +523,13 @@ msgstr ""
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr ""
+msgstr "Transparencia cuando el puntero está flotando sobre el panel, siendo 0 completamente transparente y 100 completamente opaco."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
+msgstr "Transparencia cuando el puntero no está flotando sobre el panel, siendo 0 completamente transparente y 100 completamente opaco."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -537,7 +538,7 @@ msgstr "Opacidad"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "Habilitar la composición en el administrador de ventanas para las opciones de opacidad en el panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
