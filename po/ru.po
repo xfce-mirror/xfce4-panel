@@ -3,9 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# AK <ak099@mail.ru>, 2013
+# Aleksandr P <davian818@gmail.com>, 2010
 # Aleksandr P <davian818@gmail.com>, 2010
 # AK <ak099@mail.ru>, 2013
 # Alexander Matveyev <a.s.matveyev@gmail.com>, 2010
+# Andres <kovtunos@yandex.ru>, 2010
 # Andres <kovtunos@yandex.ru>, 2010
 # Anthony Ivanoff <a-i@bk.ru>, 2004-2005
 # Artem Zolochevskiy <artem.zolochevskiy@gmail.com>, 2011
@@ -17,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-30 00:30+0200\n"
-"PO-Revision-Date: 2013-07-31 07:41+0000\n"
-"Last-Translator: AK <ak099@mail.ru>\n"
+"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"PO-Revision-Date: 2013-08-17 11:18+0000\n"
+"Last-Translator: asvl <alyoshin.s@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/xfce/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -835,7 +838,7 @@ msgstr "Завершение сеанса, блокировка экрана и�
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Меню приложений"
@@ -906,25 +909,16 @@ msgstr "Выберите файл меню"
 msgid "Menu File"
 msgstr "Файл меню"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:557
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Выберите значок"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:598
-#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не удалось выполнить команду «%s»."
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1108
-msgid "No applications found"
-msgstr "Не найдено приложений"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1131
-msgid "Failed to load the applications menu"
-msgstr "Не удалось загрузить меню приложений"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1671,11 +1665,11 @@ msgstr "Кнопки окон"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
-msgstr "_Показывать подписи кнопок"
+msgstr "Показывать _подписи кнопок"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr "_Показывать плоские кнопки"
+msgstr "Показывать плоские к_нопки"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
@@ -1683,7 +1677,7 @@ msgstr "Показывать _ручку"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
-msgstr "Порядок с_ортировки:"
+msgstr "Порядок сор_тировки:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
@@ -1691,15 +1685,15 @@ msgstr "_Группировать окна:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
-msgstr ""
+msgstr "_Действие по щелчку средней кнопкой мыши:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
-msgstr "Разворачивать свёрнутые окна на текущий рабочий стол"
+msgstr "Разворачивать свёрнутые окна на текущий ра_бочий стол"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
-msgstr "Отображать рамку окна под курсором мыши"
+msgstr "Отображать р_амку окна под курсором мыши"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
@@ -1719,7 +1713,7 @@ msgstr "Показывать только с_вёрнутые окна"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
-msgstr ""
+msgstr "Ничего"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
