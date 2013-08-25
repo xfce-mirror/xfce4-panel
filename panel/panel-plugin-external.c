@@ -133,7 +133,6 @@ enum
   PROP_0,
   PROP_MODULE,
   PROP_UNIQUE_ID,
-  PROP_IS_GTK3,
   PROP_ARGUMENTS
 };
 
@@ -175,14 +174,6 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
                                                      | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_IS_GTK3,
-                                   g_param_spec_boolean ("is-gtk3",
-                                                         NULL, NULL,
-                                                         FALSE,
-                                                         EXO_PARAM_READWRITE
-                                                         | G_PARAM_CONSTRUCT_ONLY));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_MODULE,
                                    g_param_spec_object ("module",
                                                         NULL, NULL,
@@ -210,7 +201,6 @@ panel_plugin_external_init (PanelPluginExternal *external)
   external->show_configure = FALSE;
   external->show_about = FALSE;
   external->unique_id = -1;
-  external->is_gtk3 = FALSE;
 
   external->priv->arguments = NULL;
   external->priv->queue = NULL;
@@ -291,10 +281,6 @@ panel_plugin_external_get_property (GObject    *object,
       g_value_set_int (value, external->unique_id);
       break;
 
-    case PROP_IS_GTK3:
-      g_value_set_boolean (value, external->is_gtk3);
-      break;
-
     case PROP_ARGUMENTS:
       g_value_set_boxed (value, external->priv->arguments);
       break;
@@ -323,10 +309,6 @@ panel_plugin_external_set_property (GObject      *object,
     {
     case PROP_UNIQUE_ID:
       external->unique_id = g_value_get_int (value);
-      break;
-
-    case PROP_IS_GTK3:
-      external->is_gtk3 = g_value_get_boolean (value);
       break;
 
     case PROP_ARGUMENTS:

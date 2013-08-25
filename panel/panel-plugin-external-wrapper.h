@@ -40,7 +40,6 @@ GType      panel_plugin_external_wrapper_get_type (void) G_GNUC_CONST;
 
 GtkWidget *panel_plugin_external_wrapper_new      (PanelModule  *module,
                                                    gint          unique_id,
-                                                   gboolean      is_gtk3,
                                                    gchar       **arguments) G_GNUC_MALLOC;
 
 G_END_DECLS

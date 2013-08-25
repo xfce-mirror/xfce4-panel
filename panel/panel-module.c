@@ -21,6 +21,7 @@
 #endif
 
 #include <gmodule.h>
+#include <exo/exo.h>
 #include <glib/gstdio.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -309,8 +310,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
   const gchar *module_unique;
   gboolean     found;
 
-  panel_return_val_if_fail (!panel_str_is_empty (filename), NULL);
-  panel_return_val_if_fail (!panel_str_is_empty (name), NULL);
+  panel_return_val_if_fail (!exo_str_is_empty (filename), NULL);
+  panel_return_val_if_fail (!exo_str_is_empty (name), NULL);
 
   rc = xfce_rc_simple_open (filename, TRUE);
   if (G_UNLIKELY (rc == NULL))
