@@ -108,14 +108,14 @@ wrapper_plug_init (WrapperPlug *plug)
   /* allow painting, else compositing won't work */
   gtk_widget_set_app_paintable (GTK_WIDGET (plug), TRUE);
 
+#if !GTK_CHECK_VERSION (3, 0, 0)
   /* old versions of gtk don't support transparent tray icons, if we
    * set an argb colormap on the tray, the icons won't be embedded because
    * the socket-plugin implementation requires identical colormaps */
-
-  /* FIXIT temporarily disabled because it crashes xfce4-indicator-plugin */
-  /* if (gtk_check_version (2, 16, 0) != NULL
-   *    && strcmp (wrapper_name, "systray") == 0)
-   *  return; */
+  if (gtk_check_version (2, 16, 0) != NULL
+      && strcmp (wrapper_name, "systray") == 0)
+    return;
+#endif
 
   /* set the colormap */
   screen = gtk_window_get_screen (GTK_WINDOW (plug));
