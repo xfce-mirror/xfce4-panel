@@ -25,7 +25,6 @@ libxfce4panel_headers = \
 	libxfce4panel-config.h \
 	libxfce4panel-enums.h \
 	xfce-arrow-button.h \
-	xfce-hvbox.h \
 	xfce-panel-convenience.h \
 	xfce-panel-macros.h \
 	xfce-panel-macros-46.h \
@@ -38,11 +37,13 @@ libxfce4panel_includedir = \
 
 libxfce4panel_include_HEADERS = \
 	$(libxfce4panel_public_built_sources) \
-	$(libxfce4panel_headers)
+	$(libxfce4panel_headers) \
+	xfce-hvbox.h
 
 libxfce4panel_1_0_la_SOURCES = \
 	$(libxfce4panel_built_sources) \
 	$(libxfce4panel_headers) \
+	xfce-hvbox.h \
 	libxfce4panel-config.c \
 	xfce-arrow-button.c \
 	xfce-hvbox.c \
@@ -99,7 +100,7 @@ libxfce4panel_2_0_la_SOURCES = \
 	xfce-panel-image.c
 
 libxfce4panel_2_0_la_CFLAGS =	 \
-	$(GTK_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
@@ -111,7 +112,7 @@ libxfce4panel_2_0_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 libxfce4panel_2_0_la_LIBADD = \
-	$(GTK_LIBS) \
+	$(GTK3_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	-lm
 
