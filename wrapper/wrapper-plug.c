@@ -91,8 +91,9 @@ static void
 wrapper_plug_init (WrapperPlug *plug)
 {
 #if GTK_CHECK_VERSION (3, 0, 0)
-  GdkVisual *visual = NULL;
-  GdkScreen *screen;
+  GdkVisual       *visual = NULL;
+  GdkScreen       *screen;
+  GtkStyleContext *context;
 #else
   GdkColormap *colormap = NULL;
   GdkScreen   *screen;
@@ -127,6 +128,13 @@ wrapper_plug_init (WrapperPlug *plug)
   colormap = gdk_screen_get_rgba_colormap (screen);
   if (colormap != NULL)
     gtk_widget_set_colormap (GTK_WIDGET (plug), colormap);
+#endif
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+  /* set the panel class */
+  context = gtk_widget_get_style_context (GTK_WIDGET (plug));
+  gtk_style_context_add_class (context, "panel");
+  gtk_style_context_add_class (context, "xfce4-panel");
 #endif
 }
 
