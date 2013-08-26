@@ -111,9 +111,11 @@ wrapper_plug_init (WrapperPlug *plug)
   /* old versions of gtk don't support transparent tray icons, if we
    * set an argb colormap on the tray, the icons won't be embedded because
    * the socket-plugin implementation requires identical colormaps */
-  if (gtk_check_version (2, 16, 0) != NULL
-      && strcmp (wrapper_name, "systray") == 0)
-    return;
+
+  /* FIXIT temporarily disabled because it crashes xfce4-indicator-plugin */
+  /* if (gtk_check_version (2, 16, 0) != NULL
+   *    && strcmp (wrapper_name, "systray") == 0)
+   *  return; */
 
   /* set the colormap */
   screen = gtk_window_get_screen (GTK_WINDOW (plug));
