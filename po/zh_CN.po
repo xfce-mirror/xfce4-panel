@@ -10,6 +10,7 @@
 # Hunt Xu <huntxu@live.cn>, 2008-2010
 # Jick Nan <jick.nan@gmail.com>, 2006
 # wuli <wurisky@gmail.com>, 2007-2008
+# 玉堂白鹤 <yjwork@qq.com>, 2013
 # Yongtao Yang <yongtao.yang@telia.com>, 2004
 # 潇波 周 <zhouxiaobo.500@gmail.com>, 2013
 # 玉堂 白鹤 <squeeze@189.cn>, 2010
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-02 22:26+0200\n"
-"PO-Revision-Date: 2013-07-27 11:10+0000\n"
-"Last-Translator: 潇波 周 <zhouxiaobo.500@gmail.com>\n"
+"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"PO-Revision-Date: 2013-09-09 08:05+0000\n"
+"Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/xfce/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -833,7 +834,7 @@ msgstr "注销、锁屏或其它系统动作"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "应用程序菜单"
@@ -875,7 +876,7 @@ msgstr "在工具提示中显示应用程序描述(_E)"
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Appearance"
 msgstr "外观"
@@ -904,25 +905,16 @@ msgstr "选择菜单文件"
 msgid "Menu File"
 msgstr "菜单文件"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:557
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "选择图标"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:598
-#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "无法执行命令 “%s”。"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1108
-msgid "No applications found"
-msgstr "未找到应用程序"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1131
-msgid "Failed to load the applications menu"
-msgstr "无法载入应用程序菜单"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1370,7 +1362,7 @@ msgid "Show _hidden files"
 msgstr "显示隐藏文件(_H)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
 msgstr "过滤"
@@ -1536,7 +1528,7 @@ msgid "Switch workspaces using the mouse _wheel"
 msgstr "使用鼠标滚轮切换工作区(_W)"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Behaviour"
 msgstr "行为"
 
@@ -1631,107 +1623,119 @@ msgid "Area where notification icons appear"
 msgstr "通知图标出现的区域"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "从不"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "总是"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "When space is limited"
+msgstr "当间距有限时"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Timestamp"
+msgstr "时间戳"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Group title and timestamp"
+msgstr "组标题和时间戳"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Window title"
+msgstr "窗口标题"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "Group title and window title"
+msgstr "组标题和窗口标题"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "None, allow drag-and-drop"
+msgstr "无，允许拖放"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Window Buttons"
 msgstr "窗口按钮"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
 msgstr "显示按钮标签(_L)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "使用扁平按钮(_F)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "显示控制器(_H)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
 msgstr "排列顺序(_O)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
 msgstr "窗口组(_G)："
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Mi_ddle click action:"
+msgstr "中键点击动作(_D)："
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
 msgstr "在当前工作区恢复已最小化的窗口(_W)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
 msgstr "停在按钮上时绘制窗口边框(_R)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
 msgstr "使用鼠标滚轮切换窗口(_S)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "_Close windows using middle mouse button"
-msgstr "使用鼠标中键关闭窗口"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
 msgstr "从所有工作区或视口显示窗口(_A)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr "仅显示已最小化的窗口(_M)"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
 msgstr "从所有显示器显示窗口(_N)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Never"
-msgstr "从不"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Always"
-msgstr "总是"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr "当间距有限时"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "Timestamp"
-msgstr "时间戳"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-msgid "Group title and timestamp"
-msgstr "组标题和时间戳"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window title"
-msgstr "窗口标题"
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "Group title and window title"
-msgstr "组标题和窗口标题"
+msgid "Show only _minimized windows"
+msgstr "仅显示已最小化的窗口(_M)"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-msgid "None, allow drag-and-drop"
-msgstr "无，允许拖放"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Nothing"
+msgstr "无"
 
-#: ../plugins/tasklist/tasklist-widget.c:3278
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+msgid "Close Window"
+msgstr "关闭窗口"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+msgid "Minimize Window"
+msgstr "最小化窗口"
+
+#: ../plugins/tasklist/tasklist-widget.c:3293
 msgid "Mi_nimize All"
 msgstr "全部最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3287
+#: ../plugins/tasklist/tasklist-widget.c:3302
 msgid "Un_minimize All"
 msgstr "最小化全部取消(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Ma_ximize All"
 msgstr "全部最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "_Unmaximize All"
 msgstr "最大化全部取消(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3312
+#: ../plugins/tasklist/tasklist-widget.c:3327
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
