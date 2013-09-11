@@ -7,14 +7,15 @@
 # The Idiot <brian.peraza@gmail.com>, 2013
 # danpergal84 <danpergal84@gmail.com>, 2013
 # MC <correomc2000-ing@yahoo.es>, 2013
+# Pablo Lezaeta <prflr88@gmail.com>, 2013
 # pharamir <pamirmatos@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2013-08-12 10:14+0000\n"
-"Last-Translator: The Idiot <brian.peraza@gmail.com>\n"
+"PO-Revision-Date: 2013-09-11 03:37+0000\n"
+"Last-Translator: Pablo Lezaeta <prflr88@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -206,8 +207,8 @@ msgstr "Esto creará un nuevo complemento en el panel y insertara los archivos c
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Cree un nuevo lanzador de escritorio para %d"
+msgstr[1] "Cree un nuevos lanzadores de escritorio para %d"
 
 #: ../panel/panel-application.c:1725
 msgid ""
@@ -396,7 +397,7 @@ msgstr "M_odo"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "O_utput:"
-msgstr ""
+msgstr "S_alida:"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Span mo_nitors"
@@ -477,11 +478,11 @@ msgstr ""
 #: ../panel/panel-preferences-dialog.glade.h:30
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "_Style:"
-msgstr ""
+msgstr "_Estilo:"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "_Alpha:"
-msgstr ""
+msgstr "_Alfa:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
@@ -491,7 +492,7 @@ msgstr "Valor alpha del fondo del panel, siendo 0 completamente transparente y 1
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
-msgstr ""
+msgstr "C_olor:"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Pick a Panel Color"
@@ -542,7 +543,7 @@ msgstr "Habilitar la composición en el administrador de ventanas para las opcio
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
-msgstr ""
+msgstr "Aparien_cia"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:13
@@ -573,7 +574,7 @@ msgstr "Mostrar información acerca del objeto seleccionado "
 
 #: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Ite_ms"
-msgstr ""
+msgstr "Ite_mes"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
@@ -668,7 +669,7 @@ msgstr "Botones de Acción"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Appeara_nce:"
-msgstr ""
+msgstr "Aparien_cia:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
@@ -705,7 +706,7 @@ msgstr "Cerrar sesión"
 
 #: ../plugins/actions/actions.c:152
 msgid "_Log Out"
-msgstr ""
+msgstr "_Terminar sesión"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
@@ -722,7 +723,7 @@ msgstr "Cerrar sesión..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr ""
+msgstr "Terminar _sesión..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
@@ -730,7 +731,7 @@ msgstr "Cambiar Usuario"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "_Cambiar de usuario"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
@@ -763,7 +764,7 @@ msgstr "Suspender"
 
 #: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
-msgstr ""
+msgstr "Sus_pender"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
@@ -882,7 +883,7 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Ed_it Menu"
-msgstr ""
+msgstr "Edi_tar el menú"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
@@ -890,7 +891,7 @@ msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Menu _file:"
-msgstr ""
+msgstr "Archivo del Menú:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Select A Menu File"
@@ -1019,7 +1020,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "F_ormat:"
-msgstr ""
+msgstr "F_ormato:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
