@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-30 00:30+0200\n"
-"PO-Revision-Date: 2013-07-31 11:00+0000\n"
+"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"PO-Revision-Date: 2013-09-19 14:10+0000\n"
 "Last-Translator: Pjotr123 <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/xfce/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -140,7 +140,7 @@ msgstr "Fouten graag melden bij <%s>."
 
 #: ../panel/main.c:320
 msgid "There is already a running instance"
-msgstr "Er is al een actieve instantie"
+msgstr "Er is al een actieve functie"
 
 #. spawn ourselfs again
 #: ../panel/main.c:362
@@ -184,7 +184,7 @@ msgstr "Wilt u de werkbalk starten? Zo ja, zorg er dan voor dat u de sessie opsl
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "Geen actieve instantie van %s gevonden"
+msgstr "Geen actieve functie van %s gevonden"
 
 #: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
@@ -252,7 +252,7 @@ msgstr "De werkbalk van de Xfce-werkomgeving"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Vincent Tunru <projects@vinnl.nl>, Pjotr pjotrvertaalt@gmail.com"
+msgstr "Vincent Tunru <projects@vinnl.nl>\nPjotr pjotrvertaalt@gmail.com"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -298,7 +298,7 @@ msgstr "Geef hier een zoekterm op"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "De invoegtoepassing '%s' heeft onverwacht de werkbalk verlaten, wilt u deze invoegtoepassing opnieuw starten?"
+msgstr "De invoegtoepassing '%s' heeft onverwacht de werkbalk verlaten, wilt u hem herstarten?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -406,7 +406,7 @@ msgstr "Selecteer deze optie om de werkbalk over meerdere schermen uit te strekk
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Lock panel"
-msgstr "Werkbalk _vastzetten"
+msgstr "Werkbalk _vergrendelen"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
@@ -493,7 +493,7 @@ msgstr "Kle_ur:"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Pick a Panel Color"
-msgstr "Selecteer een werkbalkkleur"
+msgstr "Kies een werkbalkkleur"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "_File:"
@@ -501,7 +501,7 @@ msgstr "_Bestand"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Select A Background Image"
-msgstr "Selecteer een achtergrondafbeelding"
+msgstr "Kies een achtergrondafbeelding"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Background"
@@ -827,7 +827,7 @@ msgstr "Afmelden, vergrendelen of andere systeemacties"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Toepassingenmenu"
@@ -898,25 +898,16 @@ msgstr "Kies een menubestand"
 msgid "Menu File"
 msgstr "Menubestand"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:557
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Kies een pictogram"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:598
-#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht '%s' niet uitvoeren."
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1108
-msgid "No applications found"
-msgstr "Geen toepassingen gevonden"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1131
-msgid "Failed to load the applications menu"
-msgstr "Kon het toepassingenmenu niet laden"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1002,7 +993,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "De indeling beschrijft welke onderdelen van de tijd en datum in de bestandnaam worden ingevoegd. Zo wordt bijvoorbeeld %Y vervangen door het jaartal, %m door de maand en %d door de dag. Zie de documentatie van het datumhulpmiddel voor meer informatie."
+msgstr "De indeling beschrijft welke onderdelen van de tijd en datum in de bestandnaam worden gevoegd. Zo wordt bijvoorbeeld %Y vervangen door het jaartal, %m door de maand en %d door de dag. Zie de hulppagina voor meer informatie."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1577,18 +1568,18 @@ msgstr "Verberg alle vensters en toon het bureaublad"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "Kon het mededelingengebied niet starten"
+msgstr "Kon het meldingengebied niet starten"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Waarschijnlijk heeft een ander onderdeel de functie van mededelingengebied overgenomen. Dit gebied zal niet worden gebruikt."
+msgstr "Waarschijnlijk heeft een ander onderdeel de functie van meldingengebied overgenomen. Dit gebied zal niet worden gebruikt."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr "Het mededelingengebied is de selectie kwijt"
+msgstr "Het meldingengebied is de selectie kwijt"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1597,7 +1588,7 @@ msgstr "Weet u zeker dat u de lijst met bekende toepassingen wilt wissen?"
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Notification Area"
-msgstr "Mededelingengebied"
+msgstr "Meldingengebied"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
@@ -1622,7 +1613,7 @@ msgstr "Het is niet gelukt om beheerderselectie te verkrijgen voor scherm %d"
 
 #: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
-msgstr "Gebied waar mededelingpictogrammen verschijnen"
+msgstr "Gebied waar meldingpictogrammen verschijnen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Never"
@@ -1642,7 +1633,7 @@ msgstr "Tijdstempel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Group title and timestamp"
-msgstr "Groepstitel en tijdstempel"
+msgstr "Groeptitel en tijdstempel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Window title"
@@ -1650,7 +1641,7 @@ msgstr "Venstertitel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr "Groepstitel en venstertitel"
+msgstr "Groeptitel en venstertitel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "None, allow drag-and-drop"
