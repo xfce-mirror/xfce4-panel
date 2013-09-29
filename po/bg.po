@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-30 00:30+0200\n"
-"PO-Revision-Date: 2013-07-30 07:42+0000\n"
+"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"PO-Revision-Date: 2013-09-29 13:06+0000\n"
 "Last-Translator: cybercop <cybercop_montana@abv.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/xfce/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "Изход"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Показване на диалог \"Настройки на панела\""
+msgstr "Показване на диалог 'Настройки на панела'"
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
@@ -85,7 +85,7 @@ msgstr "НОМЕР НА ПАНЕЛ"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
-msgstr "Показване на диалог \"Добавяне на нови елементи\""
+msgstr "Показване на диалог 'Добавяне на нови елементи'"
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
@@ -126,11 +126,11 @@ msgstr "[ПАРАМЕТРИ...]"
 #: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Напишете \"%s --help\" за показване на потребителкото ръководство."
+msgstr "Напишете \"%s --help\" за показване на потребителското ръководство."
 
 #: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
-msgstr "Екипът по разработката на XFCE. Всички права са запазени."
+msgstr "Екипът по разработката на Xfce. Всички права са запазени."
 
 #: ../panel/main.c:262
 #, c-format
@@ -251,7 +251,7 @@ msgstr "Панелът на графична среда Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "преводач-кредити"
+msgstr "Kiril Kirilov (Cybercop) <cybercop_montana@abv.bg>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -410,7 +410,7 @@ msgstr "Заключване на панела"
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Изберете тази опция, за да се скрият ръковатките и да се заключи позицията на панела."
+msgstr "Изберете тази опция, за да се скрият ръкохватките и да се заключи позицията на панела."
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Automatically show and _hide the panel"
@@ -535,7 +535,7 @@ msgstr "Непрозрачност"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Включете композитния мениджър на прозорци, за да настроите прозрачността на панела."
+msgstr "Включете композитният мениджър на прозорци, за да настроите прозрачността на панела."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -803,7 +803,7 @@ msgstr "Сигурен ли сте, че искате да изключите к
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr "Компютърът ще бъде иключен след %d секунди."
+msgstr "Компютърът ще бъде изключен след %d секунди."
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -826,7 +826,7 @@ msgstr "Изход, заключване и други системни дейс
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Меню на програмите"
@@ -897,25 +897,16 @@ msgstr "Избор на файл с меню"
 msgid "Menu File"
 msgstr "Файл с меню"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:557
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Избиране на икона"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:598
-#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Неуспех при изпълнението на команда \"%s\"."
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1108
-msgid "No applications found"
-msgstr "Няма открити програми"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1131
-msgid "Failed to load the applications menu"
-msgstr "Не може да бъде заредено менюто на програмите."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1341,18 +1332,18 @@ msgstr "Показване на дървото на директориите в 
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
-msgstr "Избор на папка"
+msgstr "Избор на директория"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "_Base Directory:"
-msgstr "Основна диектория:"
+msgstr "Основна директория:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Въведете списък на шаблоните, които трябва да удовлетворят файловете, които се виждат в папката. Ако искате да въведете повече от един щаблон, то те трябва да бъдат разделени с точка и запетая, например *.txt;*.doc."
+msgstr "Въведете списък на шаблоните, които трябва да удовлетворят файловете, които се виждат в папката. Ако искате да въведете повече от един шаблон, то те трябва да бъдат разделени с точка и запетая, например *.txt;*.doc."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
