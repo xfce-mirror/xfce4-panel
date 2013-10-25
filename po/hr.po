@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2013-09-10 03:42+0000\n"
+"PO-Revision-Date: 2013-10-25 17:02+0000\n"
 "Last-Translator: Ivica  Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/xfce/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgstr "Odjava"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr ""
+msgstr "Pokaži dijalog 'Osobitosti ploče' "
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
-msgstr ""
+msgstr "Pokaži dijalog 'Dodaj nove stavke'"
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
@@ -177,7 +177,7 @@ msgstr ""
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "Želite li pokrenuti ploču?Ako želite, budite sigurni da ste spremili sesiju prilikom odjave, tako da se ploča automatski pokrene idući put kada se prijavite."
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
@@ -196,15 +196,15 @@ msgstr "Napravi _pokretač"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Ovo će stvoriti novi priključak pokretača na ploči i umetnuti će ubačene datoteke kao stavke izbornika."
 
 #: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Napravi novi pokretač sa %d datoteke radne površine"
+msgstr[1] "Napravi nove pokretače sa %d datoteka radne površine"
+msgstr[2] "Napravi nove pokretače sa %d datoteka radne površine"
 
 #: ../panel/panel-application.c:1725
 msgid ""
@@ -214,7 +214,7 @@ msgstr ""
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
-msgstr ""
+msgstr "Jeste li sigurni da želite isključiti ploču?"
 
 #: ../panel/panel-application.c:1734
 #, c-format
@@ -297,7 +297,7 @@ msgstr ""
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "Priključak \"%s\" je neočekivano napustio ploču, želite li ga ponovno pokrenuti?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -369,7 +369,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
-msgstr ""
+msgstr "Nijedan (koristi stil sustava)"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Solid color"
@@ -440,7 +440,7 @@ msgstr "Općenito"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "Veličina _retka (pikseli):"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #, no-c-format
@@ -449,7 +449,7 @@ msgstr "D_uljina (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Num_ber of rows:"
-msgstr ""
+msgstr "Br_oj redaka:"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "A_utomatically increase the length"
@@ -465,11 +465,11 @@ msgstr "Odaberi ovu opciju za automatsko povećanje duljine ploče ako priključ
 #. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
-msgstr ""
+msgstr "Mjerenja"
 
 #: ../panel/panel-preferences-dialog.glade.h:29
 msgid "D_isplay"
-msgstr ""
+msgstr "Z_aslon"
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 #: ../plugins/separator/separator-dialog.glade.h:2
@@ -484,7 +484,7 @@ msgstr "_Alfa:"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr ""
+msgstr "Alfa vrijednost pozadine ploče, gdje je 0 potpuno prozirno i 100 potpuno neprozirno."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -509,7 +509,7 @@ msgstr "Pozadina"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_Enter:"
-msgstr ""
+msgstr "_Unesi:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
@@ -616,19 +616,19 @@ msgstr ""
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr ""
+msgstr "Premjesti staru konfiguraciju"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr ""
+msgstr "Premjesti staru 4.6 konfiguraciju u Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
-msgstr ""
+msgstr "Koristi zadanu konfiguraciju"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr ""
+msgstr "Učitaj zadanu konfiguraciju"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
@@ -690,7 +690,7 @@ msgstr "Radnja"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
-msgstr "_Akcije"
+msgstr "_Radnje"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Session Menu"
@@ -752,7 +752,7 @@ msgstr ""
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "Hiberniram računalo za %d sekundi."
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
@@ -814,7 +814,7 @@ msgstr "Razdjelnik"
 #: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr ""
+msgstr "Neuspjelo pokretanje radnje \"%s\""
 
 #: ../plugins/actions/actions.c:1142
 msgid "John Doe"
@@ -833,7 +833,7 @@ msgstr "Izbornik programa"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 msgid "Show generic application n_ames"
-msgstr ""
+msgstr "Pokaži generička imena p_rograma"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid ""
@@ -1012,7 +1012,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr ""
+msgstr "Pokaž_i AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "F_ormat:"
@@ -1026,7 +1026,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Pokaži _neaktivne točke"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 msgid "Show gri_d"
@@ -1311,12 +1311,12 @@ msgstr ""
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr ""
+msgstr "Ne mogu pokrenuti zadani program za \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Neuspjelo pokretanje željenog programa za kategoriju \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
@@ -1503,7 +1503,7 @@ msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Number of _rows:"
-msgstr ""
+msgstr "Broj _redaka:"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Show mi_niature view"
@@ -1530,7 +1530,7 @@ msgstr ""
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "_Expand"
-msgstr ""
+msgstr "_Proširi"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
@@ -1546,7 +1546,7 @@ msgstr "Točke"
 
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr ""
+msgstr "Dodaje razdjelnik ili razmak između stavki ploče"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
@@ -1559,11 +1559,11 @@ msgstr ""
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "Pokaži radnu površinu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr ""
+msgstr "Sakrij sve prozore i pokaži radnu površinu"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
@@ -1582,28 +1582,28 @@ msgstr ""
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
+msgstr "Jeste li sigurni da želite očistiti listu poznatih programa?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Notification Area"
-msgstr ""
+msgstr "Područje obavijesti"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "_Maksimalna veličina ikone (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
-msgstr ""
+msgstr "Pokaži _okvir"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
-msgstr ""
+msgstr "O_čisti poznate programe"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Known Applications"
-msgstr ""
+msgstr "Poznati programi"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
@@ -1616,15 +1616,15 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Never"
-msgstr ""
+msgstr "Nikada"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
 msgid "Always"
-msgstr ""
+msgstr "Uvijek"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
-msgstr ""
+msgstr "Kada je prostor ograničen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "Timestamp"
@@ -1669,7 +1669,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
-msgstr ""
+msgstr "Grupiranje _prozora:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
@@ -1701,19 +1701,19 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
-msgstr ""
+msgstr "Ništa"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
-msgstr ""
+msgstr "Zatvori prozor"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Minimize Window"
-msgstr ""
+msgstr "Minimiziraj prozor"
 
 #: ../plugins/tasklist/tasklist-widget.c:3293
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "Mi_nimiziraj sve"
 
 #: ../plugins/tasklist/tasklist-widget.c:3302
 msgid "Un_minimize All"
@@ -1721,7 +1721,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "Ma_ksimiziraj sve"
 
 #: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "_Unmaximize All"
@@ -1729,7 +1729,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-widget.c:3327
 msgid "_Close All"
-msgstr ""
+msgstr "_Zatvori sve"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Switch between open windows using buttons"
@@ -1737,11 +1737,11 @@ msgstr ""
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
-msgstr ""
+msgstr "Radna površina"
 
 #: ../plugins/windowmenu/windowmenu.c:1246
 msgid "No Windows"
-msgstr ""
+msgstr "Bez prozora"
 
 #: ../plugins/windowmenu/windowmenu.c:1261
 msgid "Urgent Windows"
@@ -1749,22 +1749,22 @@ msgstr ""
 
 #: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
-msgstr ""
+msgstr "Dodaj radni prostor"
 
 #: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr ""
+msgstr "Ukloni radni prostor \"%s\""
 
 #: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
-msgstr ""
+msgstr "Ukloni radni prostor %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
 msgid "Window Menu"
-msgstr ""
+msgstr "Izbornik prozora"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
@@ -1788,7 +1788,7 @@ msgstr ""
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Icon"
-msgstr ""
+msgstr "Ikona"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Arrow"
