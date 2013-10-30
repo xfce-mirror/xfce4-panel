@@ -6,16 +6,22 @@
 # Adolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2013
 # The Idiot <brian.peraza@gmail.com>, 2013
 # danpergal84 <danpergal84@gmail.com>, 2013
+# danpergal84 <danpergal84@gmail.com>, 2013
+# hernan144 <hernan.alvarez.guerra@gmail.com>, 2013
 # hernan144 <hernan.alvarez.guerra@gmail.com>, 2013
 # MC <correomc2000-ing@yahoo.es>, 2013
+# MC <correomc2000-ing@yahoo.es>, 2013
+# Pablo Lezaeta <prflr88@gmail.com>, 2013
 # Pablo Lezaeta <prflr88@gmail.com>, 2013
 # pharamir <pamirmatos@gmail.com>, 2013
+# pharamir <pamirmatos@gmail.com>, 2013
+# The Idiot <brian.peraza@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2013-10-30 04:18+0000\n"
+"PO-Revision-Date: 2013-10-30 08:26+0000\n"
 "Last-Translator: Pablo Lezaeta <prflr88@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +189,7 @@ msgstr "Error al enviar mensaje de D-Bus"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "¿Quieres iniciar el panel? Si lo haces, tienes asegurarte de guardar la sesión antes de salir, para que el panel inicie automáticamente cuando vuelvas a iniciar sesión."
+msgstr "¿Quieres iniciar el panel? Si lo hace, debe asegurarse de guardar la sesión antes de salir, para que el panel inicie automáticamente cuando vuelva a iniciar sesión."
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
@@ -402,7 +408,7 @@ msgstr "S_alida:"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Span mo_nitors"
-msgstr ""
+msgstr "Abar_cado de los monitores"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
@@ -489,7 +495,7 @@ msgstr "_Alfa:"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "Valor alpha del fondo del panel, siendo 0 completamente trasparente y 100 completamente opaco."
+msgstr "Valor alfa del fondo del panel, siendo 0 completamente trasparente y 100 completamente opaco."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -997,7 +1003,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
+msgstr "El formato describe las partes de la fecha y la hora para insertar en el panel. Por ejemplo, %Y será sustituido con el año, el mes con %m y %d con el día. Del mismo modo, las etiquetas <b></b> combertirán el texto en negrita. Consulte la página de \"Ayuda\" para obtener información adicional."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1027,7 +1033,7 @@ msgstr "F_ormato:"
 #. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Pr_ecisión:"
 
 #: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Show _inactive dots"
@@ -1055,7 +1061,7 @@ msgstr "Digital"
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fuzzy"
-msgstr ""
+msgstr "Impresiso"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "LCD"
@@ -1075,7 +1081,7 @@ msgstr "por la mañana"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
-msgstr ""
+msgstr "Casi mediodía"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Noon"
@@ -1098,7 +1104,7 @@ msgstr "Tarde-noche"
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0 en punto"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
@@ -1166,7 +1172,7 @@ msgstr "%1 en punto"
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0 en punto"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
@@ -1306,7 +1312,7 @@ msgstr "Fallo al ejecutar la aplicación \"%s\"."
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Error al consultar el tipo de contenido de \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
@@ -1321,7 +1327,7 @@ msgstr "Fallo al ejecutar la aplicación predeterminada para \"%s\""
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Fallo al ejecutar la aplicación favorita para la categoría \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
@@ -1352,7 +1358,7 @@ msgstr "Introduzca una lista de patrones a utilizar para determinar que archivos
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
-msgstr ""
+msgstr "Patrón de _archivo:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
@@ -1415,7 +1421,7 @@ msgstr "Sur"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
-msgstr ""
+msgstr "Dentro del botón"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
@@ -1466,19 +1472,19 @@ msgstr "Selecciona esta opción para deshabilitar las ayudas cuando te mueves so
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "Mostrar _etiquetas en lugar de iconos"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Mostrar ú_ltimo objeto usado en el panel"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Seleccione esta opción para mover el elemento de menú seleccionado en el panel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
-msgstr ""
+msgstr "Posición del botón _flecha:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Advanced"
@@ -1543,7 +1549,7 @@ msgstr "Trasparente"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "Handle"
-msgstr ""
+msgstr "Separador"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "Dots"
@@ -1579,7 +1585,7 @@ msgstr "Fallo al iniciar el area de notificación"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
+msgstr "Lo más probable es que otro \"widget\" se hizo cargo de la función de área de notificación. Esta área no será utilizada."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1596,7 +1602,7 @@ msgstr "Área de notificación"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "Tamaño _máximo para el icono (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
@@ -1604,7 +1610,7 @@ msgstr "Mostrar _marco"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
-msgstr ""
+msgstr "L_impiar aplicaciones conocidas"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Known Applications"
@@ -1613,7 +1619,7 @@ msgstr "Aplicaciones conocidas"
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "No se ha podido adquirir un manejador de sección para la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
@@ -1658,19 +1664,19 @@ msgstr "Botones de las ventanas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
-msgstr ""
+msgstr "Mostrar _etiquetas de los botones"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr ""
+msgstr "Mostrar botones _planos"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
-msgstr ""
+msgstr "Mostrar _separador"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
-msgstr ""
+msgstr "Forma de _ordenado:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
@@ -1773,7 +1779,7 @@ msgstr "Menú de ventanas"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
-msgstr ""
+msgstr "Distribución de botones:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Show workspace a_ctions"
