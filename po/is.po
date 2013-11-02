@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2013-10-16 10:46+0000\n"
+"PO-Revision-Date: 2013-11-02 09:09+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic (http://www.transifex.com/projects/p/xfce/language/is/)\n"
 "MIME-Version: 1.0\n"
@@ -259,7 +259,7 @@ msgstr "Bæta við nýju atriði"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "Veldu nafn á nýju færsluna:"
 
 #: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
@@ -274,7 +274,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
-msgstr ""
+msgstr "Ekki er leyfilegt að breyta skjástikunni"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
@@ -419,17 +419,17 @@ msgstr "Sýna og _fela skjástiku sjálfkrafa"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Veldu þetta ef þú vilt að skjástikan sé falin ef bendillinn er ekki yfir henni. Þetta virkar einungis ef skjástikan er fest við skjájaðar."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "_Ekki taka frá pláss á jöðrum"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Veldu þetta ef þú vilt að hámarkaðir gluggar noti svæðið bakvið skjástikuna. Þetta virkar einungis ef skjástikan er fest við skjájaðar."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -519,13 +519,13 @@ msgstr "_Fara:"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr ""
+msgstr "Gegnsæi þegar bendill svífur yfir skjástikunni, þar sem 0 er alveg gegnsætt og 100 er alveg ógegnsætt."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
+msgstr "Gegnsæi þegar bendill er ekki yfir skjástikunni, þar sem 0 er alveg gegnsætt og 100 er alveg ógegnsætt."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -534,7 +534,7 @@ msgstr "Ógegnsæi"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "Virkja skjásamsetningu (compositing) í gluggastjóranum til að fá fram gegnsæisstillingar fyrir skjástikuna."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -607,7 +607,7 @@ msgstr "Velkomin/n í fyrstu keyrslu þessara skjástiku"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
+msgstr "Þar sem skjástikan fékk nýtt kerfi til geymslu stillinga, þá þarf að hlaða inn ferskum frumstillingum."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -639,7 +639,7 @@ msgstr "Byrja með einni tómri skjástiku"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr ""
+msgstr "Mistókst að millifæra eldri skjástikustillingar"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
@@ -647,11 +647,11 @@ msgstr "Mistókst að hlaða inn sjálfgefnum stillingum"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Skjástikustillingar þarfnast millifærslu..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Mistókst að millifæra núgildandi stillingar"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -838,7 +838,7 @@ msgstr "Birta almenn heiti forrita"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "Veldu þennan möguleika til að birta almenn heiti forrita í valmynd, til dæmis \"Skráastjóri\" í stað \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -962,7 +962,7 @@ msgstr "Klukka"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
+msgstr "Heiti tímabeltis samkvæmt skrá í zoneinfo gagnagrunni; til dæmis \"Ameríka/New_York\". Skildu eftir autt til að nota staðartíma."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -991,7 +991,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
+msgstr "Sniðið lýsir hlutum dagsetninga og tíma sem settir verða á skjástikuna. Til dæmis verður %Y skipt út fyrir ártal, %m verður mánuður og %d verður dagsetning. Á svipaðan hátt gera <b></b> merki innlagðan texta feitletraðan. Skoðaðu síðuna \"Hjálp\" til að fá vitneskju um meira."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1342,7 +1342,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Settu inn lista með þeim mynstrum sem verða notuð til að ákvarða hvaða skrár verði sýnilegar í möppu. Ef þú tiltekur hér fleiri en eitt mynstur, þurfa færslurnar að vera aðgreindar með tvípunktum (t.d. *.txt:*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
