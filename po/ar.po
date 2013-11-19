@@ -1,44 +1,45 @@
-# Arabic translations for xfce4-panel package.
-# Copyright (C) 2002-2006 The Xfce development team.
-# This file is distributed under the same license as the xfce4-panel package.
-# Saleh Alhathal <hathalsal@hotmail.com>, 2004.
-# mohammad <malham1@gmail.com>, 2012.
-# كريم أولاد الشلحة <herr.linux88@gmail.com>, 2012.
-# محمد الحرقان <malham1@gmail.com>, 2012.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# محمد الحرقان <malham1@gmail.com>, 2012
+# Saleh Alhathal <hathalsal@hotmail.com>, 2004
+# Karim Oulad Chalha <herr.linux88@gmail.com>, 2012
+# محمد الحرقان <malham1@gmail.com>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.7.0\n"
+"Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-09 10:09+0000\n"
-"PO-Revision-Date: 2012-11-09 16:08+0300\n"
-"Last-Translator: محمد الحرقان <malham1@gmail.com>\n"
-"Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
-"Language: ar\n"
+"POT-Creation-Date: 2013-07-02 23:10+0200\n"
+"PO-Revision-Date: 2013-11-19 14:26+0000\n"
+"Last-Translator: Nick <nick@xfce.org>\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/xfce/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Virtaal 0.7.1\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr "أضف مُطْلِق جديد للوحة إستناداً لمعلومات لملف سطح المكتب هذا"
-
-#: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
 msgstr "أنشئ مُطْلِق في اللوحة"
 
-#: ../panel-preferences.desktop.in.h:1
-msgid "Customize the panel"
-msgstr "خصص اللوحة"
+#: ../panel-desktop-handler.desktop.in.h:2
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "أضف مُطْلِق جديد للوحة إستناداً لمعلومات لملف سطح المكتب هذا"
 
-#: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2353
+#: ../panel-preferences.desktop.in.h:1
+#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "لوحة"
+
+#: ../panel-preferences.desktop.in.h:2
+msgid "Customize the panel"
+msgstr "خصص اللوحة"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
@@ -177,34 +178,30 @@ msgstr "فشل إرسال رسالة D-Bus"
 
 #: ../panel/main.c:400
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"هل تريد تشغيل اللوحة؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, "
-"لتتمكن اللوحة من البدء تلقائيا عنذ الولوج التالي."
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr "هل تريد تشغيل اللوحة؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, لتتمكن اللوحة من البدء تلقائيا عنذ الولوج التالي."
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "لم يتم العثور على مثيل %s قيد التشغيل"
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "فشل إطلاق تطبيق الهجرة"
 
-#: ../panel/panel-application.c:953
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "أنشئ مُطْلِ_ق"
 
-#: ../panel/panel-application.c:954
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
-"هذا سيقوم بإنشاء ملحق مطلق جديد في الشريط و سيدرج الملفات المسقط فيه كعناصر "
-"قائمة."
+msgstr "هذا سيقوم بإنشاء ملحق مطلق جديد في الشريط و سيدرج الملفات المسقط فيه كعناصر قائمة."
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -215,17 +212,17 @@ msgstr[3] "أنشء مطلق جدبد من %d ملفات سطح المكتب"
 msgstr[4] "أنشء مطلق جدبد من %d ملفات سطح المكتب"
 msgstr[5] "أنشء مطلق جدبد من %d ملفات سطح المكتب"
 
-#: ../panel/panel-application.c:1690
+#: ../panel/panel-application.c:1719
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "لقد قمت بتشغيل X بدون مدير الجلسة. إضغط على الخروج لإغلاق خادم X."
 
-#: ../panel/panel-application.c:1691
+#: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
 msgstr "هل تريد حقا الخروج من اللوحة؟"
 
-#: ../panel/panel-application.c:1699
+#: ../panel/panel-application.c:1728
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "فشل تنفيد الأمر \"%s\""
@@ -233,17 +230,14 @@ msgstr "فشل تنفيد الأمر \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم "
-"[:نوع:قيمة]."
+msgstr "بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم [:نوع:قيمة]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"نوع التلميح غير صالح \"%s\". الأنواع الصالحة هي bool مزدوج، int والسلسلة و "
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
+msgstr "نوع التلميح غير صالح \"%s\". الأنواع الصالحة هي bool مزدوج، int والسلسلة و uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -266,7 +260,7 @@ msgid "translator-credits"
 msgstr "كريم اولاد الشلحة محمد الحرقان"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Add New Item"
 msgstr "أضف عنصر جديد"
 
@@ -283,9 +277,7 @@ msgstr "لوحة %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
-"لأن اللوحة قيد التشغيل في وضع kiosk، لا يسمح بإجراء تغييرات على إعداد اللوحة "
-"كمستخدم عادي"
+msgstr "لأن اللوحة قيد التشغيل في وضع kiosk، لا يسمح بإجراء تغييرات على إعداد اللوحة كمستخدم عادي"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -319,9 +311,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
-"تم إعادة تشغيل الملحق اكثر من مرة في آخر %d ثانية. إذا ضغطت على تنفيذ سيتم "
-"إعادة تشغيله من على اللوحة وإلا سيتم حذفه نهائيا من اللوحة."
+msgstr "تم إعادة تشغيل الملحق اكثر من مرة في آخر %d ثانية. إذا ضغطت على تنفيذ سيتم إعادة تشغيله من على اللوحة وإلا سيتم حذفه نهائيا من اللوحة."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -362,9 +352,7 @@ msgstr "%s <span color=\"grey\" size=\"small\">(الخارجية)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
-"إسم داخلي: %s-%d\n"
-"معرف العملية: %d"
+msgstr "إسم داخلي: %s-%d\nمعرف العملية: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -374,225 +362,221 @@ msgid "Internal name: %s-%d"
 msgstr "إسم داخلي: : %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-msgid "A_utomatically increase the length"
-msgstr "تلقائياً زيادة طول"
+msgid "Horizontal"
+msgstr "أفقي"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Vertical"
+msgstr "عمودي"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
+msgid "Deskbar"
+msgstr "لوحة المكتب"
+
+#: ../panel/panel-preferences-dialog.glade.h:4
+msgid "None (use system style)"
+msgstr "بلا (استخدام نمط النظام)"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Solid color"
+msgstr "لون خالص"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "Background image"
+msgstr "صورة الخلفية"
+
+#: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Add a new panel"
 msgstr "إضافة لوحة جديدة"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Add new item to this panel"
-msgstr "إضافة عنصر جديد إلى هذه اللوحة"
+#: ../panel/panel-preferences-dialog.glade.h:9
+msgid "Remove the currently selected panel"
+msgstr "إزالة اللوحة المحددة حاليا"
 
-#: ../panel/panel-preferences-dialog.glade.h:4
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "M_ode:"
+msgstr "نمط:"
+
+#: ../panel/panel-preferences-dialog.glade.h:11
+msgid "O_utput:"
+msgstr "مخرجات:"
+
+#: ../panel/panel-preferences-dialog.glade.h:12
+msgid "Span mo_nitors"
+msgstr "مدد الشاشات"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "حدد هذا الخيار لتوسيع اللوحة عبر أجهزة عرض متعددة."
+
+#: ../panel/panel-preferences-dialog.glade.h:14
+msgid "_Lock panel"
+msgstr "_قفل اللوحة"
+
+#: ../panel/panel-preferences-dialog.glade.h:15
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "حدد هذا الخيار لإخفاء مؤشرات الشريط وإقفال موقعها."
+
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Automatically show and _hide the panel"
+msgstr "إخفاء عرض اللوحة بشكل تلقائي"
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
+msgstr "حدد هذا الخيار لإخفاء اللوحة عندما لا يكون المؤشر فوقها. هذا يعمل فقط عند وصول اللوحة لحافة شاشة."
+
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "Don't _reserve space on borders"
+msgstr "لا تحجز مساحة على اللوحة"
+
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
+msgstr "حدد هذا الخيار إذا أردت تغطية النوافذ المكبرة للمنطقة خلف اللوحة. هذا يعمل فقط عند وصول اللوحة إلى حافة شاشة."
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../plugins/actions/actions-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+msgid "General"
+msgstr "عام"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "Row _Size (pixels):"
+msgstr "حجم الصف (بالبكسل):"
+
+#: ../panel/panel-preferences-dialog.glade.h:23
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "طول (%):"
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Num_ber of rows:"
+msgstr "عدد الصفوف:"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "A_utomatically increase the length"
+msgstr "تلقائياً زيادة طول"
+
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr "حدد هذا الخيار لزيادة طول اللوحة تلقائياً إذا تطلبت الإضافات مساحة أكبر."
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:28
+msgid "Measurements"
+msgstr "القياسات"
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "D_isplay"
+msgstr "عرض"
+
+#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../plugins/separator/separator-dialog.glade.h:2
+msgid "_Style:"
+msgstr "_أسلوب:"
+
+#: ../panel/panel-preferences-dialog.glade.h:31
+msgid "_Alpha:"
+msgstr "_ألفا:"
+
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr "قيمة ألفا للوحة الخلفية، 0 يكون شفاف تماما و 100 غير شفاف."
 
-#: ../panel/panel-preferences-dialog.glade.h:5
-msgid "Appeara_nce"
-msgstr "المظهر"
-
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "Automatically show and _hide the panel"
-msgstr "إخفاء عرض اللوحة بشكل تلقائي"
-
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "Background"
-msgstr "الخلفية"
-
-#: ../panel/panel-preferences-dialog.glade.h:8
-msgid "Background image"
-msgstr "صورة الخلفية"
-
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
 msgstr "لو_ن:"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
-msgid "D_isplay"
-msgstr "عرض"
-
-#: ../panel/panel-preferences-dialog.glade.h:11
-msgid "Deskbar"
-msgstr "لوحة المكتب"
-
-#: ../panel/panel-preferences-dialog.glade.h:12
-msgid "Don't _reserve space on borders"
-msgstr "لا تحجز مساحة على اللوحة"
-
-#: ../panel/panel-preferences-dialog.glade.h:13
-#: ../plugins/launcher/launcher-dialog.glade.h:11
-msgid "Edit the currently selected item"
-msgstr "حرر العنصر المحدد حاليا"
-
-#: ../panel/panel-preferences-dialog.glade.h:14
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr "تمكين التركيب في مدير النوافذ لإعدادا الشفافية في اللوحة."
-
-#: ../panel/panel-preferences-dialog.glade.h:15
-#: ../plugins/actions/actions-dialog.glade.h:4
-#: ../plugins/launcher/launcher-dialog.glade.h:12
-msgid "General"
-msgstr "عام"
-
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Horizontal"
-msgstr "أفقي"
-
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid "Ite_ms"
-msgstr "عنا_صر"
-
-#: ../panel/panel-preferences-dialog.glade.h:19
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "طول (%):"
-
-#: ../panel/panel-preferences-dialog.glade.h:20
-msgid "M_ode:"
-msgstr "نمط:"
-
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "Measurements"
-msgstr "القياسات"
-
-#: ../panel/panel-preferences-dialog.glade.h:23
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "Move currently selected item down by one row"
-msgstr "نقل العنصر المحدد حاليا إلى الأسفل بصف واحد"
-
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Move currently selected item up by one row"
-msgstr "نقل العنصر المحدد حاليا للأعلى بصف واحد"
-
-#: ../panel/panel-preferences-dialog.glade.h:25
-msgid "None (use system style)"
-msgstr "بلا (استخدام نمط النظام)"
-
-#: ../panel/panel-preferences-dialog.glade.h:26
-msgid "Num_ber of rows:"
-msgstr "عدد الصفوف:"
-
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "O_utput:"
-msgstr "مخرجات:"
-
-#: ../panel/panel-preferences-dialog.glade.h:28
-msgid "Opacity"
-msgstr "الشفافية"
-
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Pick a Panel Color"
 msgstr "انتقاء لون اللوحة"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Remove currently selected item"
-msgstr "إزالة العنصر المحدد حاليا"
+#: ../panel/panel-preferences-dialog.glade.h:35
+msgid "_File:"
+msgstr "_ملف:"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
-msgid "Remove the currently selected panel"
-msgstr "إزالة اللوحة المحددة حاليا"
-
-#: ../panel/panel-preferences-dialog.glade.h:33
-msgid "Row _Size (pixels):"
-msgstr "حجم الصف (بالبكسل):"
-
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Select A Background Image"
 msgstr "اختر صورة الخلفية"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
-"حدد هذا الخيار إذا أردت تغطية النوافذ المكبرة للمنطقة خلف اللوحة. هذا يعمل "
-"فقط عند وصول اللوحة إلى حافة شاشة."
-
-#: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-"حدد هذا الخيار لزيادة طول اللوحة تلقائياً إذا تطلبت الإضافات مساحة أكبر."
-
 #: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Select this option to extend the panel over multiple monitors."
-msgstr "حدد هذا الخيار لتوسيع اللوحة عبر أجهزة عرض متعددة."
+msgid "Background"
+msgstr "الخلفية"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr "حدد هذا الخيار لإخفاء مؤشرات الشريط وإقفال موقعها."
-
+#. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:39
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"حدد هذا الخيار لإخفاء اللوحة عندما لا يكون المؤشر فوقها. هذا يعمل فقط عند "
-"وصول اللوحة لحافة شاشة."
+msgid "_Enter:"
+msgstr "_إدخال:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
-msgid "Show about information of the currently selected item"
-msgstr "عرض معلومات حول للعنصر المحدد حاليا"
-
+#. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Solid color"
-msgstr "لون خالص"
+msgid "_Leave:"
+msgstr "_غادِر:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-msgid "Span mo_nitors"
-msgstr "مدد الشاشات"
-
-#: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
 msgstr "شفاف عندما يحوم المؤشر فوق اللوحة، 0 شفاف تماما و 100 غير شفاف."
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "شفاف، 0 شفاف تماما و 100 غير شفاف."
 
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "Opacity"
+msgstr "الشفافية"
+
 #: ../panel/panel-preferences-dialog.glade.h:45
-msgid "Vertical"
-msgstr "عمودي"
+msgid ""
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr "تمكين التركيب في مدير النوافذ لإعدادا الشفافية في اللوحة."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
-msgid "_Alpha:"
-msgstr "_ألفا:"
+msgid "Appeara_nce"
+msgstr "المظهر"
 
-#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item up by one row"
+msgstr "نقل العنصر المحدد حاليا للأعلى بصف واحد"
+
 #: ../panel/panel-preferences-dialog.glade.h:48
-msgid "_Enter:"
-msgstr "_إدخال:"
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item down by one row"
+msgstr "نقل العنصر المحدد حاليا إلى الأسفل بصف واحد"
 
 #: ../panel/panel-preferences-dialog.glade.h:49
-msgid "_File:"
-msgstr "_ملف:"
+msgid "Add new item to this panel"
+msgstr "إضافة عنصر جديد إلى هذه اللوحة"
 
-#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:50
+msgid "Remove currently selected item"
+msgstr "إزالة العنصر المحدد حاليا"
+
 #: ../panel/panel-preferences-dialog.glade.h:51
-msgid "_Leave:"
-msgstr "_غادِر:"
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "Edit the currently selected item"
+msgstr "حرر العنصر المحدد حاليا"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
-msgid "_Lock panel"
-msgstr "_قفل اللوحة"
+msgid "Show about information of the currently selected item"
+msgstr "عرض معلومات حول للعنصر المحدد حاليا"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
-#: ../plugins/separator/separator-dialog.glade.h:7
-msgid "_Style:"
-msgstr "_أسلوب:"
+msgid "Ite_ms"
+msgstr "عنا_صر"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
@@ -630,8 +614,7 @@ msgstr "مرحبا بكم في البداية الأولى للوحة"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
-"بسبب نقل اللوحة إلى نظام تخزين إعدادات جديد، تم تحميل إعدادات أولية جديدة."
+msgstr "بسبب نقل اللوحة إلى نظام تخزين إعدادات جديد، تم تحميل إعدادات أولية جديدة."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -682,42 +665,42 @@ msgid "Panel configuration has been updated."
 msgstr "تم تحديث إعداد اللوحة."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-msgid "Action"
-msgstr "إجراء"
-
-#: ../plugins/actions/actions-dialog.glade.h:2
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
 msgstr "زر العمل"
 
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Appeara_nce:"
 msgstr "المظهر:"
 
-#: ../plugins/actions/actions-dialog.glade.h:5
+#: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
 msgstr "عكس اتجاه أزرار"
 
-#: ../plugins/actions/actions-dialog.glade.h:6
-msgid "Session Menu"
-msgstr "قائمة الجلسة"
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "_Show confirmation dialog"
+msgstr "_عرض مربع حوار التأكيد"
 
-#: ../plugins/actions/actions-dialog.glade.h:7
+#: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr "عرض مربع حوار تأكيد بمهلة 30 ثانية لبعض الإجراءات."
 
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
 msgstr "مرئي"
+
+#: ../plugins/actions/actions-dialog.glade.h:8
+msgid "Action"
+msgstr "إجراء"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
 msgstr "_إجراءات"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
-msgid "_Show confirmation dialog"
-msgstr "_عرض مربع حوار التأكيد"
+msgid "Session Menu"
+msgstr "قائمة الجلسة"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -829,8 +812,8 @@ msgid "Turning off computer in %d seconds."
 msgstr "إغلاق جهاز الكمبيوتر في %d ثانية."
 
 #: ../plugins/actions/actions.c:620
-#: ../plugins/separator/separator-dialog.glade.h:4
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/separator/separator-dialog.glade.h:1
+#: ../plugins/separator/separator.desktop.in.h:1
 msgid "Separator"
 msgstr "فاصل"
 
@@ -847,80 +830,78 @@ msgstr "John Doe"
 msgid "Log out, lock or other system actions"
 msgstr "تسجيل الخروج، تأمين أو إجراءات نظام أخرى"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/clock/clock-dialog.glade.h:3
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
-#: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-msgid "Appearance"
-msgstr "مظهر"
-
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "قائمة التطبيقات"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-msgid "Button _title:"
-msgstr "عنوان الزر:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-msgid "Ed_it Menu"
-msgstr "حرّر القوائم"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "Menu File"
-msgstr "ملف القائمة"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Menu _file:"
-msgstr "ملف القائمة:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "Select A Menu File"
-msgstr "اختر ملف قائمة"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"حدد هذا الخيار لعرض اسم التطبيق العام في القائمة، على سبيل المثال \"إدارة "
-"الملفات\" بدلاً من \"Thunar\""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-msgid "Show application d_escription in tooltip"
-msgstr "عرض وصف التطبيق في تلميح الأدوات"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 msgid "Show generic application n_ames"
 msgstr "عرض اسماء التطبيقات العامة"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr "حدد هذا الخيار لعرض اسم التطبيق العام في القائمة، على سبيل المثال \"إدارة الملفات\" بدلاً من \"Thunar\""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
 msgstr "عرض أيقونات في القوائم"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "_Show button title"
+msgstr "_عرض عنوان الزر"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Button _title:"
+msgstr "عنوان الزر:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+msgid "_Icon:"
+msgstr "_أيقونة:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show application d_escription in tooltip"
+msgstr "عرض وصف التطبيق في تلميح الأدوات"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Appearance"
+msgstr "مظهر"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+msgid "Use the _default menu"
+msgstr "استخدام قائمة ملف إفتراضية"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+msgid "Ed_it Menu"
+msgstr "حرّر القوائم"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
 msgstr "استخدام قائمة ملف مخصصة:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _default menu"
-msgstr "استخدام قائمة ملف إفتراضية"
+msgid "Menu _file:"
+msgstr "ملف القائمة:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-msgid "_Icon:"
-msgstr "_أيقونة:"
+msgid "Select A Menu File"
+msgstr "اختر ملف قائمة"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-msgid "_Show button title"
-msgstr "_عرض عنوان الزر"
+msgid "Menu File"
+msgstr "ملف القائمة"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
@@ -989,95 +970,93 @@ msgid "Custom Format"
 msgstr "تهيئة خاصة"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-msgid "24-_hour clock"
-msgstr "نمط 24 ساعة"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Analog"
-msgstr "عقارب"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Binary"
-msgstr "رقمي"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
 msgid "Clock"
 msgstr "الساعة"
 
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "Clock Options"
-msgstr "خيارات الساعة"
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "_Layout:"
+msgstr "_تخطيط:"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "Digital"
-msgstr "رقمية"
+#: ../plugins/clock/clock-dialog.glade.h:3
+msgid "_Tooltip format:"
+msgstr "_هيئة التلميح:"
+
+#: ../plugins/clock/clock-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Show _frame"
+msgstr "عرض النافذة"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. See the documentation of the date utility for additional "
+"information."
+msgstr "يصف التنسيق أجزاء التاريخ والوقت المدرجة في اللوحة. على سبيل المثال، سيتم استبداله%Y للسنة، %m للشهر و %d لليوم. راجع وثائق إدارة التاريخ للحصول على معلومات إضافية."
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
 msgstr "اعرض الثواني"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
-msgid "F_ormat:"
-msgstr "التنسيق:"
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "F_uzziness:"
-msgstr "ال&ضبابية:"
-
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fl_ash time separators"
-msgstr "وميض الفواصل الزمنية"
-
-#: ../plugins/clock/clock-dialog.glade.h:13
-msgid "Fuzzy"
-msgstr "ضبابي"
-
-#: ../plugins/clock/clock-dialog.glade.h:14
-msgid "LCD"
-msgstr "شاشة كريستال سائل"
-
-#: ../plugins/clock/clock-dialog.glade.h:15
-msgid "Sho_w AM/PM"
-msgstr "عرض صباحاً/مساء"
-
-#: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "عرض النافذة"
-
-#: ../plugins/clock/clock-dialog.glade.h:17
-msgid "Show _inactive dots"
-msgstr "عرض نقاط _بطيئة"
-
-#: ../plugins/clock/clock-dialog.glade.h:18
-msgid "Show gri_d"
-msgstr "عرض الشبك_ة"
-
-#: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"يصف التنسيق أجزاء التاريخ والوقت المدرجة في اللوحة. على سبيل المثال، سيتم "
-"استبداله%Y للسنة، %m للشهر و %d لليوم. راجع وثائق إدارة التاريخ للحصول على "
-"معلومات إضافية."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr "ساعة رقمية حقيقية"
 
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "24-_hour clock"
+msgstr "نمط 24 ساعة"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Fl_ash time separators"
+msgstr "وميض الفواصل الزمنية"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "Sho_w AM/PM"
+msgstr "عرض صباحاً/مساء"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
+msgid "F_ormat:"
+msgstr "التنسيق:"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: ../plugins/clock/clock-dialog.glade.h:15
+msgid "F_uzziness:"
+msgstr "ال&ضبابية:"
+
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid "Show _inactive dots"
+msgstr "عرض نقاط _بطيئة"
+
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Show gri_d"
+msgstr "عرض الشبك_ة"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Clock Options"
+msgstr "خيارات الساعة"
+
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid "Analog"
+msgstr "عقارب"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
+msgid "Binary"
+msgstr "رقمي"
+
+#: ../plugins/clock/clock-dialog.glade.h:21
+msgid "Digital"
+msgstr "رقمية"
+
 #: ../plugins/clock/clock-dialog.glade.h:22
-msgid "_Layout:"
-msgstr "_تخطيط:"
+msgid "Fuzzy"
+msgstr "ضبابي"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
-msgid "_Tooltip format:"
-msgstr "_هيئة التلميح:"
+msgid "LCD"
+msgstr "شاشة كريستال سائل"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
@@ -1312,7 +1291,7 @@ msgstr "ما الوقت الآن؟"
 
 #: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "قائمة المجلد"
 
@@ -1353,37 +1332,34 @@ msgstr "افتح في الطرفية"
 msgid "Show a directory tree in a menu"
 msgstr "عرض شجرة المجلد في إحدى القوائم"
 
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Select A Directory"
+msgstr "اختر مجلد"
+
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid "_Base Directory:"
+msgstr "_إختيار مجلد:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"اكتب قائمة بالأنماط التي سيتم استخدامها لتحديد الملفات المرئية في المجلد. "
-"إذا أردت تحديد أكثر من نمط واحد. يجب فصل عناصر القائمة بواسطة الفواصل "
-"المنقوطة (مثلاً *.txt;*.doc)."
+msgstr "اكتب قائمة بالأنماط التي سيتم استخدامها لتحديد الملفات المرئية في المجلد. إذا أردت تحديد أكثر من نمط واحد. يجب فصل عناصر القائمة بواسطة الفواصل المنقوطة (مثلاً *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
-msgstr "ترشيح"
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "_File Pattern:"
+msgstr "_نمط الملف:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-msgid "Select A Directory"
-msgstr "اختر مجلد"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
 msgstr "عرض _الملفات المخفية"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "_Base Directory:"
-msgstr "_إختيار مجلد:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "_File Pattern:"
-msgstr "_نمط الملف:"
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Filtering"
+msgstr "ترشيح"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
@@ -1415,73 +1391,75 @@ msgid "Unnamed item"
 msgstr "عنصر بدون اسم"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
-msgid "Add Appli_cation"
-msgstr "أضف تطبيقا"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:3
-msgid "Add a new empty item"
-msgstr "إضافة عنصر فارغ جديد"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
-msgid "Add one or more existing items to the launcher"
-msgstr "إضافة واحد أو أكثر من العناصر الموجودة في المُطْلِق"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:5
-msgid "Advanced"
-msgstr "متقدِم"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:6
-msgid "D_elete Item"
-msgstr "حذف العنصر"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
 msgstr "تلقائي"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
-msgid "Delete the currently selected item"
-msgstr "حذف العنصر المحدد حاليا"
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "North"
+msgstr "الشمال"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Disable t_ooltips"
-msgstr "عطل تلميحات الأدوات"
+#: ../plugins/launcher/launcher-dialog.glade.h:3
+msgid "West"
+msgstr "الغرب"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
 msgstr "شرق"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:5
+msgid "South"
+msgstr "جنوب"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
 msgstr "داخل الزر"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "_Edit Item"
+msgstr "_حرر عنصر"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "D_elete Item"
+msgstr "حذف العنصر"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Add Appli_cation"
+msgstr "أضف تطبيقا"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:10
+msgid "New _Application"
+msgstr "تطبيق جديد"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:11
+msgid "New _Link"
+msgstr "رابط جديد"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
 msgstr "مُطْلِق"
 
+#: ../plugins/launcher/launcher-dialog.glade.h:15
+msgid "Add one or more existing items to the launcher"
+msgstr "إضافة واحد أو أكثر من العناصر الموجودة في المُطْلِق"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+msgid "Add a new empty item"
+msgstr "إضافة عنصر فارغ جديد"
+
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "New _Application"
-msgstr "تطبيق جديد"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:18
-msgid "New _Link"
-msgstr "رابط جديد"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-msgid "North"
-msgstr "الشمال"
+msgid "Delete the currently selected item"
+msgstr "حذف العنصر المحدد حاليا"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"حدد هذا الخيار لتعطيل تلميحات الأدوات عندما تتحرك عبر عناصر قائمة أو زر في "
-"اللوحة."
+msgid "Disable t_ooltips"
+msgstr "عطل تلميحات الأدوات"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Select this option to move the clicked menu item to the panel."
-msgstr "حدد هذا الخيار لتحريك عنصر من القائمة للوحة بالنقر عليها."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "حدد هذا الخيار لتعطيل تلميحات الأدوات عندما تتحرك عبر عناصر قائمة أو زر في اللوحة."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1492,26 +1470,22 @@ msgid "Show last _used item in panel"
 msgstr "عرض العنصر المستخدم مؤخراً في اللوحة"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
-msgid "South"
-msgstr "جنوب"
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "حدد هذا الخيار لتحريك عنصر من القائمة للوحة بالنقر عليها."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
-msgid "West"
-msgstr "الغرب"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "_Arrow button position:"
 msgstr "_وظيفة أزرار الأسهم:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
-msgid "_Edit Item"
-msgstr "_حرر عنصر"
+#: ../plugins/launcher/launcher-dialog.glade.h:26
+msgid "Advanced"
+msgstr "متقدِم"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "مُطْلِق البرامج مع قائمة اختيارية"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "إعدادات مساحة العمل..."
 
@@ -1524,14 +1498,18 @@ msgstr "غير قادر على فتح إعدادات مساحة العمل"
 msgid "Workspace %d"
 msgstr "مساحة عمل %d"
 
-#: ../plugins/pager/pager-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "Behaviour"
-msgstr "السّلوك"
+#: ../plugins/pager/pager-dialog.glade.h:1
+#: ../plugins/pager/pager.desktop.in.h:1
+msgid "Workspace Switcher"
+msgstr "مبدّل مساحات العمل"
 
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Number of _rows:"
 msgstr "عدد الصفوف:"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
+msgid "Show mi_niature view"
+msgstr "عرض مشهد مصغر"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
@@ -1539,40 +1517,36 @@ msgid ""
 "windows"
 msgstr "عرض شكل مصغر لمساحة العمل في مستطيل للإطارات مرئية"
 
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
-msgstr "عرض مشهد مصغر"
-
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "تبديل مساحات العمل باستخدام عجلة الفارة"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
-#: ../plugins/pager/pager.desktop.in.h:2
-msgid "Workspace Switcher"
-msgstr "مبدّل مساحات العمل"
+#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+msgid "Behaviour"
+msgstr "السّلوك"
 
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.h:2
 msgid "Switch between virtual desktops"
 msgstr "يبدل بين أسطح المكتب الإفتراضية"
 
-#: ../plugins/separator/separator-dialog.glade.h:2
-msgid "Dots"
-msgstr "نقاط"
-
 #: ../plugins/separator/separator-dialog.glade.h:3
-msgid "Handle"
-msgstr "التعامل"
+msgid "_Expand"
+msgstr "_افرد"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
 msgstr "شفاف"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-msgid "_Expand"
-msgstr "_افرد"
+msgid "Handle"
+msgstr "التعامل"
 
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator-dialog.glade.h:7
+msgid "Dots"
+msgstr "نقاط"
+
+#: ../plugins/separator/separator.desktop.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "إضافة فاصل أو مسافة بين عناصر اللوحة"
 
@@ -1585,11 +1559,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "تصغير كافة الإطارات المفتوحة وعرض سطح المكتب"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Show Desktop"
 msgstr "عرض سطح المكتب"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "إخفاء كافة الإطارات وعرض سطح المكتب"
 
@@ -1602,9 +1576,7 @@ msgstr "غير قادر على بدء تشغيل منطقة التنبيه"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
-"الاحتمال الأكثر أن برنامج آخر أخذ وظيفة ومساحة التنبيه. وستكون هذه المساحة "
-"غير مستخدمة."
+msgstr "الاحتمال الأكثر أن برنامج آخر أخذ وظيفة ومساحة التنبيه. وستكون هذه المساحة غير مستخدمة."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1614,112 +1586,112 @@ msgstr "فقدت تحديد منطقة التنبيه"
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "متأكد أنك تريد مسح قائمة التطبيقات المعروفة؟"
 
-#: ../plugins/systray/systray-dialog.glade.h:2
-msgid "C_lear Known Applications"
-msgstr "امسح التطبيقات المعروفة"
-
-#: ../plugins/systray/systray-dialog.glade.h:3
-msgid "Known Applications"
-msgstr "التطبيقات المعروفة"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray-dialog.glade.h:1
+#: ../plugins/systray/systray.desktop.in.h:1
 msgid "Notification Area"
 msgstr "مكان التذكير"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
 msgstr "_أكبر حجم للرمز (px):"
+
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "C_lear Known Applications"
+msgstr "امسح التطبيقات المعروفة"
+
+#: ../plugins/systray/systray-dialog.glade.h:6
+msgid "Known Applications"
+msgstr "التطبيقات المعروفة"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "فشل الحصول على الإختيار من أجل الشاشة %d"
 
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
 msgstr "مساحة ستعرض أيقونات التنبيه"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Always"
-msgstr "دائماً"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
-msgid "D_raw window frame when hovering a button"
-msgstr "اعرض إطار نافذة عند المرور بالفارة على زر"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
-msgid "Group title and timestamp"
-msgstr "عنوان المجموعة والطابع الزمني"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
-msgid "Group title and window title"
-msgstr "عنوان المجموعة وعنوان الإطار"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
-msgid "Never"
-msgstr "أبداً"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "None, allow drag-and-drop"
-msgstr "لا شيء، سماح بالسحب والإفلات"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
-msgid "Restore minimized windows to current _workspace"
-msgstr "استعادة الإطارات التي تم تصغيرها لمساحة العمل الحالية"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "Show _flat buttons"
-msgstr "عرض أزرار مسطحة"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
-msgid "Show _handle"
-msgstr "عرض المقبض"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "Show button _labels"
-msgstr "عرض تسمية الأزرار"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr "عرض فقط النوافذ المصغرة"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-msgid "Show windows from _all workspaces or viewports"
-msgstr "عرض الإطارات من كل مساحات العمل والمشاهد"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
-msgid "Show windows from all mo_nitors"
-msgstr "عرض النوافذ من جميع الشاشات"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Sorting _order:"
-msgstr "ترتيب الفرز:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Timestamp"
-msgstr "الطابع الزمني"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr "عندما تكون المساحة محدودة"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
+#: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Window Buttons"
 msgstr "أزرار النافذة"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Show button _labels"
+msgstr "عرض تسمية الأزرار"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "Show _flat buttons"
+msgstr "عرض أزرار مسطحة"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Show _handle"
+msgstr "عرض المقبض"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Sorting _order:"
+msgstr "ترتيب الفرز:"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Window _grouping:"
 msgstr "جمع النافذة:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "Restore minimized windows to current _workspace"
+msgstr "استعادة الإطارات التي تم تصغيرها لمساحة العمل الحالية"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "D_raw window frame when hovering a button"
+msgstr "اعرض إطار نافذة عند المرور بالفارة على زر"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "_Switch windows using the mouse wheel"
+msgstr "_التبديل بين النوافذ باستخدام عجلة الفارة"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+msgid "Show windows from _all workspaces or viewports"
+msgstr "عرض الإطارات من كل مساحات العمل والمشاهد"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "Show only _minimized windows"
+msgstr "عرض فقط النوافذ المصغرة"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+msgid "Show windows from all mo_nitors"
+msgstr "عرض النوافذ من جميع الشاشات"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Never"
+msgstr "أبداً"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+msgid "Always"
+msgstr "دائماً"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "When space is limited"
+msgstr "عندما تكون المساحة محدودة"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+msgid "Timestamp"
+msgstr "الطابع الزمني"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "Group title and timestamp"
+msgstr "عنوان المجموعة والطابع الزمني"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
 msgstr "عنوان النافذة"
 
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+msgid "Group title and window title"
+msgstr "عنوان المجموعة وعنوان الإطار"
+
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "_Switch windows using the mouse wheel"
-msgstr "_التبديل بين النوافذ باستخدام عجلة الفارة"
+msgid "None, allow drag-and-drop"
+msgstr "لا شيء، سماح بالسحب والإفلات"
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
@@ -1741,7 +1713,7 @@ msgstr "_ألغِ تكبير الكل"
 msgid "_Close All"
 msgstr "_إغلاق الكل"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr "تحول بين النوافذ المفتوحة باستعمال الأزرار"
 
@@ -1771,88 +1743,39 @@ msgstr "إزالة مساحة العمل \"%s\""
 msgid "Remove Workspace %d"
 msgstr "ازل مساحة العمل %d"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-msgid "Arrow"
-msgstr "سهم"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+msgid "Window Menu"
+msgstr "قائمة النافذة"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
 msgstr "تخطيط الزر:"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+msgid "Show workspace a_ctions"
+msgstr "عرض أحداث مساحة العمل"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+msgid "Show workspace _names"
+msgstr "عرض _اسماء مساحة العمل"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
 msgstr "تمكين التنبيه العاجل"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-msgid "Icon"
-msgstr "أيقونة"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
 msgstr "عرض النوافذ من جميع مساحات العمل"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "عرض _اسماء مساحة العمل"
-
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-msgid "Show workspace a_ctions"
-msgstr "عرض أحداث مساحة العمل"
+msgid "Icon"
+msgstr "أيقونة"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-msgid "Window Menu"
-msgstr "قائمة النافذة"
+msgid "Arrow"
+msgstr "سهم"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "تحول بين النوافذ المفتوحة باستعمال القائمة"
-
-#~ msgid "_Read Online"
-#~ msgstr "أقرء في _ويب"
-
-#~ msgid ""
-#~ "You can read the user manual online. This manual may however not exactly "
-#~ "match your panel version."
-#~ msgstr ""
-#~ "يمكنك قراءة دليل المستخدم عبر الشبكة.هذا دليل يمكن أن لا يطابق تماما "
-#~ "إصدار شريطك."
-
-#~ msgid "The user manual is not installed on your computer"
-#~ msgstr "دليل المستخدم غير مثبت في حاسوبك"
-
-#~ msgid "Failed to open the documentation browser"
-#~ msgstr "فشل تحميل متصفح الوثائق"
-
-#~ msgid "_Orientation:"
-#~ msgstr "التوجيه"
-
-#~ msgid "_First button:"
-#~ msgstr "تصاميم الأزرار"
-
-#~ msgid "_Second button:"
-#~ msgstr "تصاميم الأزرار"
-
-#~ msgid "Disabled"
-#~ msgstr "معطل"
-
-#~ msgid "Log Out Dialog"
-#~ msgstr "تسجيل الخروج من سطح مكتب Xfce"
-
-#~ msgid "Panel Preferences"
-#~ msgstr "تفضيلات الشريط"
-
-#~ msgid "Transparency"
-#~ msgstr "الشفافية (%):"
-
-#~ msgid "Xfce Panel"
-#~ msgstr "شريط Xfce"
-
-#~ msgid "Xfce Menu"
-#~ msgstr "قائمة Xfce"
-
-#~ msgid "Failed to open manual"
-#~ msgstr "فشل في فتح الشاشة"
-
-#~ msgid "C_ompositing"
-#~ msgstr "موقع"
