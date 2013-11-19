@@ -1,47 +1,46 @@
-# Greek translation of xfce4-panel
-# Copyright (C) 2002-2006, 2008-2010 The Xfce development team.
-# This file is distributed under the same license as the xfce4-panel package.
-# Stavros Giannouris <stavros@hellug.gr>, 2005, 2006, 2008, 2009, 2010.
-# Evaggelos Balaskas <ebal@ebal.gr>, 2008, 2009, 2010.
-# Spiros Georgaras <sng@hellug.gr>, 2010.
-# Stathis Kamperis <ekamperi@auth.gr>, 2006.
-# Efstathios Iosifidis <iosifidis@opensuse.org>, 2012.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Efstathios Iosifidis <iosifidis@opensuse.org>, 2012
+# Evaggelos Balaskas <ebal@ebal.gr>, 2008-2010
+# Spiros Georgaras <sng@hellug.gr>, 2010
+# Stathis Kamperis <ekamperi@auth.gr>, 2006
+# Stavros Giannouris <stavros@hellug.gr>, 2005-2006,2008-2010
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel git version\n"
+"Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-08 19:27+0000\n"
-"PO-Revision-Date: 2012-04-11 21:37+0300\n"
-"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
-"Language-Team: Ελληνικά, Σύγχρονα <opensuse-translation-el@opensuse.org>\n"
-"Language: el\n"
+"POT-Creation-Date: 2013-07-02 23:10+0200\n"
+"PO-Revision-Date: 2013-11-19 14:26+0000\n"
+"Last-Translator: Nick <nick@xfce.org>\n"
+"Language-Team: Greek (http://www.transifex.com/projects/p/xfce/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Poedit-Language: Greek\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: GREECE\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr "Δημιουργία νέου εκκινητή στο ταμπλό από αυτό το αρχείο .desktop"
-
-#: ../panel-desktop-handler.desktop.in.h:2
 msgid "Create Launcher on the panel"
 msgstr "Δημιουργία εκκινητή στο ταμπλό"
 
-#: ../panel-preferences.desktop.in.h:1
-msgid "Customize the panel"
-msgstr "Προσαρμογή του ταμπλό"
+#: ../panel-desktop-handler.desktop.in.h:2
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "Δημιουργία νέου εκκινητή στο ταμπλό από αυτό το αρχείο .desktop"
 
-#: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2353
+#: ../panel-preferences.desktop.in.h:1
+#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Ταμπλό"
+
+#: ../panel-preferences.desktop.in.h:2
+msgid "Customize the panel"
+msgstr "Προσαρμογή του ταμπλό"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
@@ -134,8 +133,7 @@ msgstr "Πληκτρολογήστε  \"%s --help\"  για βοήθεια."
 
 #: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
-"Η ομάδα ανάπτυξης του Xfce. Με την επιφύλαξη παντός νόμιμου δικαιώματος."
+msgstr "Η ομάδα ανάπτυξης του Xfce. Με την επιφύλαξη παντός νόμιμου δικαιώματος."
 
 #: ../panel/main.c:262
 #, c-format
@@ -181,52 +179,47 @@ msgstr "Αποτυχία αποστολής μηνύματος D-BUS"
 
 #: ../panel/main.c:400
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Θέλετε να εκκινηθεί το ταμπλό; Αν το εκκινήσετε, αποθηκεύστε τη συνεδρία "
-"κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη "
-"φορά που θα συνδεθείτε."
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr "Θέλετε να εκκινηθεί το ταμπλό; Αν το εκκινήσετε, αποθηκεύστε τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη φορά που θα συνδεθείτε."
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία του %s"
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "Απέτυχε η εκτέλεση της εφαρμογής μεταφοράς ρυθμίσεων"
 
-#: ../panel/panel-application.c:936
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Δημιουργία _εκκινητή"
 
-#: ../panel/panel-application.c:937
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
 
-#: ../panel/panel-application.c:939
-#, fuzzy, c-format
+#: ../panel/panel-application.c:985
+#, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "Δημιουργία μίας νέας εκκίνησης προγράμματος στο ταμπλό του Χfce"
-msgstr[1] "Δημιουργία μίας νέας εκκίνησης προγράμματος στο ταμπλό του Χfce"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1719
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
-"Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας έξοδος θα "
-"κλείσει ο X server."
+msgstr "Ξεκινήσατε το Xfce χωρίς διαχειριστή συνεδρίας. Επιλέγοντας έξοδος θα κλείσει ο X server."
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
 msgstr "Είστε σίγουροι ότι θέλετε να κλείσετε το ταμπλό;"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1728
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Αδυναμία εκτέλεσης της εντολής \"%s\""
@@ -234,17 +227,14 @@ msgstr "Αδυναμία εκτέλεσης της εντολής \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Προσδιορίστηκε μη έγκυρη σύνταξη του γεγονότος αρθρώματος: Χρησιμοποιήστε το "
-"ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
+msgstr "Προσδιορίστηκε μη έγκυρη σύνταξη του γεγονότος αρθρώματος: Χρησιμοποιήστε το ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Μη έγκυρος τύπος \"%s\". Έγκυροι τύπο είναι οι εξής: bool, double, int, "
-"string και uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr "Μη έγκυρος τύπος \"%s\". Έγκυροι τύπο είναι οι εξής: bool, double, int, string και uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -264,14 +254,10 @@ msgstr "Το ταμπλό του περιβάλλοντος εργασίας Xfc
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr ""
-"Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\n"
-"Σταύρος Γιαννούρης <stavrosg@hellug.gr>\n"
-"Στάθης Καμπέρης <ekamperi@auth.gr>\n"
-"Σπύρος Γεωργαράς <sng@hellug.gr>"
+msgstr "Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\nΣταύρος Γιαννούρης <stavrosg@hellug.gr>\nΣτάθης Καμπέρης <ekamperi@auth.gr>\nΣπύρος Γεωργαράς <sng@hellug.gr>"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Add New Item"
 msgstr "Προσθήκη νέου αντικειμένου"
 
@@ -288,9 +274,7 @@ msgstr "Ταμπλό %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
-"Επειδή το ταμπλό που εκτελείτε είναι σε kiosk mode, δεν επιτρέπεται να "
-"γίνουν αλλαγές στις ρυθμίσεις του ταμπλό από απλούς χρήστες."
+msgstr "Επειδή το ταμπλό που εκτελείτε είναι σε kiosk mode, δεν επιτρέπεται να γίνουν αλλαγές στις ρυθμίσεις του ταμπλό από απλούς χρήστες."
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -316,9 +300,7 @@ msgstr "Εισάγετε εδώ τη φράση για αναζήτηση"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"Το άρθρωμα \"%s\" έφυγε απροσδόκητα από το ταμπλό, θέλετε να το "
-"επανεκκινήσετε;"
+msgstr "Το άρθρωμα \"%s\" έφυγε απροσδόκητα από το ταμπλό, θέλετε να το επανεκκινήσετε;"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -326,10 +308,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
-"Το άρθρωμα επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d "
-"δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να "
-"επανεκκινήσει το άρθρωμα αλλιώς αυτό θα απομακρυνθεί οριστικά από το ταμπλό."
+msgstr "Το άρθρωμα επανεκκινήθηκε περισσότερες από μία φορές τα τελευταία %d δευτερόλεπτα. Εάν πατήσετε εκτέλεση, το ταμπλό θα προσπαθήσει να επανεκκινήσει το άρθρωμα αλλιώς αυτό θα απομακρυνθεί οριστικά από το ταμπλό."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -370,9 +349,7 @@ msgstr "%s <span color=\"grey\" size=\"small\">(εξωτερικό/)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
-"Εσωτερικό όνομα: %s-%d\n"
-"PID: %d"
+msgstr "Εσωτερικό όνομα: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -382,238 +359,221 @@ msgid "Internal name: %s-%d"
 msgstr "Εσωτερικό όνομα: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-msgid "A_utomatically increase the length"
-msgstr "Α_υτόματη αύξηση του μήκους"
-
-#: ../panel/panel-preferences-dialog.glade.h:2
-msgid "Add a new panel"
-msgstr "Προσθήκη ενός νέου ταμπλό"
-
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Add new item to this panel"
-msgstr "Προσθήκη νέου αντικειμένου σε αυτό το ταμπλό."
-
-#: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-"Διαφάνεια του παρασκηνίου του ταμπλό, μεταξύ 0 (διαφανές) και 100 "
-"(αδιαφανές)."
-
-#: ../panel/panel-preferences-dialog.glade.h:5
-msgid "Appeara_nce"
-msgstr "Εμφά_νιση"
-
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "Automatically show and _hide the panel"
-msgstr "Αυτόματη απόκρυψη και εμ_φάνιση του ταμπλό"
-
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "Background"
-msgstr "Παρασκηνίο"
-
-#: ../panel/panel-preferences-dialog.glade.h:8
-msgid "Background image"
-msgstr "Εικόνα φόντου"
-
-#: ../panel/panel-preferences-dialog.glade.h:9
-msgid "C_olor:"
-msgstr "_Χρώμα:"
-
-#: ../panel/panel-preferences-dialog.glade.h:10
-msgid "D_isplay"
-msgstr "Πρ_οβολή"
-
-#: ../panel/panel-preferences-dialog.glade.h:11
-msgid "Deskbar"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:12
-msgid "Don't _reserve space on borders"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:13
-#: ../plugins/launcher/launcher-dialog.glade.h:11
-msgid "Edit the currently selected item"
-msgstr "Επεξεργασία του επιλεγμένου αντικείμενο μενού"
-
-#: ../panel/panel-preferences-dialog.glade.h:14
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:15
-#: ../plugins/actions/actions-dialog.glade.h:4
-#: ../plugins/launcher/launcher-dialog.glade.h:12
-msgid "General"
-msgstr "Γενικά"
-
-#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Horizontal"
 msgstr "Οριζόντιο"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid "Ite_ms"
-msgstr "Αντικεί_μενα"
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Vertical"
+msgstr "Κάθετο"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "_Μήκος (%):"
+#: ../panel/panel-preferences-dialog.glade.h:3
+msgid "Deskbar"
+msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:20
-msgid "M_ode:"
-msgstr "_Κατάσταση:"
-
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "Measurements"
-msgstr "Μετρήσεις"
-
-#: ../panel/panel-preferences-dialog.glade.h:23
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "Move currently selected item down by one row"
-msgstr "Μετακίνηση του επιλεγμένου αντικειμένου μια γραμμή κάτω"
-
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Move currently selected item up by one row"
-msgstr "Μετακίνηση του επιλεγμένου αντικειμένου μια γραμμή επάνω"
-
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
 msgstr "Κανένα (χρήση του στυλ συστήματος)"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
-msgid "Num_ber of rows:"
-msgstr "_Αριθμός γραμμών:"
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Solid color"
+msgstr "Συμπαγές χρώμα"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "O_utput:"
-msgstr "Έ_ξοδος:"
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "Background image"
+msgstr "Εικόνα φόντου"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
-msgid "Opacity"
-msgstr "Αδιαφάνεια"
+#: ../panel/panel-preferences-dialog.glade.h:8
+msgid "Add a new panel"
+msgstr "Προσθήκη ενός νέου ταμπλό"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
-msgid "Pick a Panel Color"
-msgstr "Επιλέξτε χρώμα γοα το ταμπλό"
-
-#: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Remove currently selected item"
-msgstr "Αφαίρεση του τρέχοντος επιλεγμένου αντικειμένου"
-
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Remove the currently selected panel"
 msgstr "Αφαίρεση του τρέχοντος επιλεγμένου ταμπλό"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
-msgid "Row _Size (pixels):"
-msgstr "_Μέγεθος Γραμμής (pixels):"
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "M_ode:"
+msgstr "_Κατάσταση:"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Select A Background Image"
-msgstr "Επιλέξτε μία εικόνα φόντου"
+#: ../panel/panel-preferences-dialog.glade.h:11
+msgid "O_utput:"
+msgstr "Έ_ξοδος:"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
-#, fuzzy
+#: ../panel/panel-preferences-dialog.glade.h:12
+msgid "Span mo_nitors"
+msgstr "Επέκταση στις ο_θόνες"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Select this option to extend the panel over multiple monitors."
+msgstr "Επιλέξτε αυτή την επιλογή για να επεκτείνεται το ταμπλό σε πολλαπλές οθόνες."
+
+#: ../panel/panel-preferences-dialog.glade.h:14
+msgid "_Lock panel"
+msgstr "Κ_λείδωμα ταμπλό"
+
+#: ../panel/panel-preferences-dialog.glade.h:15
+msgid ""
+"Select this option to hide the handles of the panel and lock its position."
+msgstr "Επιλέξτε αυτή την επιλογή για να αποκυψετε τους χειριστές του ταμπλό και να το κλειδώσετε στην θέση του."
+
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Automatically show and _hide the panel"
+msgstr "Αυτόματη απόκρυψη και εμ_φάνιση του ταμπλό"
+
+#: ../panel/panel-preferences-dialog.glade.h:17
+msgid ""
+"Select this option to hide the panel when the pointer is not above it. This "
+"only works when the panel is attached to a screen edge."
+msgstr "Επιλέξτε αυτή την επιλογή για να αποκρύψετε το ταμπλό όταν ο κέρσορας δεν είναι από πάνω του. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο στην άκρη της οθόνης."
+
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "Don't _reserve space on borders"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
-"Επιλέξτε αυτή την επιλογή για να αποκρύψετε το ταμπλό όταν ο κέρσορας δεν "
-"είναι από πάνω του. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο "
-"στην άκρη της οθόνης."
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../plugins/actions/actions-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+msgid "General"
+msgstr "Γενικά"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "Row _Size (pixels):"
+msgstr "_Μέγεθος Γραμμής (pixels):"
+
+#: ../panel/panel-preferences-dialog.glade.h:23
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "_Μήκος (%):"
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Num_ber of rows:"
+msgstr "_Αριθμός γραμμών:"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "A_utomatically increase the length"
+msgstr "Α_υτόματη αύξηση του μήκους"
+
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr ""
-"Ενεργοποιήστε αυτή την επιλογή για να γίνεται αυτόματη αύξηση του μήκους του "
-"ταμπλό, όταν τα αρθρώματα ζητούν περισσότερο χώρο."
+msgstr "Ενεργοποιήστε αυτή την επιλογή για να γίνεται αυτόματη αύξηση του μήκους του ταμπλό, όταν τα αρθρώματα ζητούν περισσότερο χώρο."
 
-#: ../panel/panel-preferences-dialog.glade.h:37
-msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
-"Επιλέξτε αυτή την επιλογή για να επεκτείνεται το ταμπλό σε πολλαπλές οθόνες."
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:28
+msgid "Measurements"
+msgstr "Μετρήσεις"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
-msgid ""
-"Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Επιλέξτε αυτή την επιλογή για να αποκυψετε τους χειριστές του ταμπλό και να "
-"το κλειδώσετε στην θέση του."
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "D_isplay"
+msgstr "Πρ_οβολή"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Επιλέξτε αυτή την επιλογή για να αποκρύψετε το ταμπλό όταν ο κέρσορας δεν "
-"είναι από πάνω του. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο "
-"στην άκρη της οθόνης."
+#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../plugins/separator/separator-dialog.glade.h:2
+msgid "_Style:"
+msgstr "_Στυλ:"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
-msgid "Show about information of the currently selected item"
-msgstr "Εμφάνιση πληροφοριών για το επιλεγμένο αντιμκείμενο"
-
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Solid color"
-msgstr "Συμπαγές χρώμα"
-
-#: ../panel/panel-preferences-dialog.glade.h:42
-msgid "Span mo_nitors"
-msgstr "Επέκταση στις ο_θόνες"
-
-#: ../panel/panel-preferences-dialog.glade.h:43
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Διαφάνεια όταν ο κέρσορας περνάει από πάνω από το ταμπλό, μεταξύ 0 "
-"(διαφανές) και 100 (αδιαφανές)."
-
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid ""
-"Transparency when the pointer is not hovering over the panel, with 0 being "
-"fully transparent and 100 fully opaque."
-msgstr ""
-"Διαφάνεια όταν ο κέρσορας είναι εκτός ταμπλό, μεταξύ 0 (διαφανές) και 100 "
-"(αδιαφανές)."
-
-#: ../panel/panel-preferences-dialog.glade.h:45
-msgid "Vertical"
-msgstr "Κάθετο"
-
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "_Alpha:"
 msgstr "Άλφ_α:"
 
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:48
-msgid "_Enter:"
-msgstr "Ε_ισαγωγή:"
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid ""
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
+msgstr "Διαφάνεια του παρασκηνίου του ταμπλό, μεταξύ 0 (διαφανές) και 100 (αδιαφανές)."
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "C_olor:"
+msgstr "_Χρώμα:"
+
+#: ../panel/panel-preferences-dialog.glade.h:34
+msgid "Pick a Panel Color"
+msgstr "Επιλέξτε χρώμα γοα το ταμπλό"
+
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "_File:"
 msgstr "_Αρχείο:"
 
+#: ../panel/panel-preferences-dialog.glade.h:36
+msgid "Select A Background Image"
+msgstr "Επιλέξτε μία εικόνα φόντου"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
+msgid "Background"
+msgstr "Παρασκηνίο"
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:39
+msgid "_Enter:"
+msgstr "Ε_ισαγωγή:"
+
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Leave:"
 msgstr "Απο_χώρηση:"
 
+#: ../panel/panel-preferences-dialog.glade.h:42
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
+msgstr "Διαφάνεια όταν ο κέρσορας περνάει από πάνω από το ταμπλό, μεταξύ 0 (διαφανές) και 100 (αδιαφανές)."
+
+#: ../panel/panel-preferences-dialog.glade.h:43
+msgid ""
+"Transparency when the pointer is not hovering over the panel, with 0 being "
+"fully transparent and 100 fully opaque."
+msgstr "Διαφάνεια όταν ο κέρσορας είναι εκτός ταμπλό, μεταξύ 0 (διαφανές) και 100 (αδιαφανές)."
+
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "Opacity"
+msgstr "Αδιαφάνεια"
+
+#: ../panel/panel-preferences-dialog.glade.h:45
+msgid ""
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:46
+msgid "Appeara_nce"
+msgstr "Εμφά_νιση"
+
+#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item up by one row"
+msgstr "Μετακίνηση του επιλεγμένου αντικειμένου μια γραμμή επάνω"
+
+#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item down by one row"
+msgstr "Μετακίνηση του επιλεγμένου αντικειμένου μια γραμμή κάτω"
+
+#: ../panel/panel-preferences-dialog.glade.h:49
+msgid "Add new item to this panel"
+msgstr "Προσθήκη νέου αντικειμένου σε αυτό το ταμπλό."
+
+#: ../panel/panel-preferences-dialog.glade.h:50
+msgid "Remove currently selected item"
+msgstr "Αφαίρεση του τρέχοντος επιλεγμένου αντικειμένου"
+
+#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "Edit the currently selected item"
+msgstr "Επεξεργασία του επιλεγμένου αντικείμενο μενού"
+
 #: ../panel/panel-preferences-dialog.glade.h:52
-msgid "_Lock panel"
-msgstr "Κ_λείδωμα ταμπλό"
+msgid "Show about information of the currently selected item"
+msgstr "Εμφάνιση πληροφοριών για το επιλεγμένο αντιμκείμενο"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
-#: ../plugins/separator/separator-dialog.glade.h:7
-msgid "_Style:"
-msgstr "_Στυλ:"
+msgid "Ite_ms"
+msgstr "Αντικεί_μενα"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
@@ -651,9 +611,7 @@ msgstr "Καλώς ήλθατε στην πρώτη εκτέλεση του τα
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
-"Επειδή το ταμπλό μετακινήθηκε σε ένα νέο σύστημα αποθήκευσης ρυθμίσεων, "
-"πρέπει να φορτωθεί μία καθαρή αρχική ρύθμιση."
+msgstr "Επειδή το ταμπλό μετακινήθηκε σε ένα νέο σύστημα αποθήκευσης ρυθμίσεων, πρέπει να φορτωθεί μία καθαρή αρχική ρύθμιση."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -696,52 +654,50 @@ msgid "Panel config needs migration..."
 msgstr ""
 
 #: ../migrate/main.c:189
-#, fuzzy
 msgid "Failed to migrate the existing configuration"
-msgstr "Η μεταφορά των παλαιών ρυθμίσεων του ταμπλό απέτυχε"
+msgstr ""
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-msgid "Action"
-msgstr "Ενέργεια"
-
-#: ../plugins/actions/actions-dialog.glade.h:2
 #: ../plugins/actions/actions.desktop.in.h:1
 msgid "Action Buttons"
 msgstr "Κουμπιά ενεργειών "
 
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Appeara_nce:"
 msgstr "Εμφά_νιση:"
 
-#: ../plugins/actions/actions-dialog.glade.h:5
-#, fuzzy
+#: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
-msgstr "_Θέση κουμπιού βέλους:"
+msgstr ""
 
-#: ../plugins/actions/actions-dialog.glade.h:6
-msgid "Session Menu"
-msgstr "Μενού Συνεδρίας"
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "_Show confirmation dialog"
+msgstr ""
 
-#: ../plugins/actions/actions-dialog.glade.h:7
+#: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr ""
 
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
 msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:8
+msgid "Action"
+msgstr "Ενέργεια"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
 msgstr "_Ενέργειες"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
-msgid "_Show confirmation dialog"
-msgstr ""
+msgid "Session Menu"
+msgstr "Μενού Συνεδρίας"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -853,17 +809,17 @@ msgid "Turning off computer in %d seconds."
 msgstr "Τερματισμός του υπολογιστή σε %d δευτερόλεπτα."
 
 #: ../plugins/actions/actions.c:620
-#: ../plugins/separator/separator-dialog.glade.h:4
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/separator/separator-dialog.glade.h:1
+#: ../plugins/separator/separator.desktop.in.h:1
 msgid "Separator"
 msgstr "Διαχωριστικό"
 
-#: ../plugins/actions/actions.c:974
+#: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Αποτυχία εκτέλεσης της ενέργειας \"%s\""
 
-#: ../plugins/actions/actions.c:1141
+#: ../plugins/actions/actions.c:1142
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -871,80 +827,78 @@ msgstr "John Doe"
 msgid "Log out, lock or other system actions"
 msgstr "Αποσύνδεση, κλείδωμα οθόνης και άλλες ενέργειες συστήματος"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/clock/clock-dialog.glade.h:3
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
-#: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-msgid "Appearance"
-msgstr "Εμφάνιση"
-
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Μενού εφαρμογών"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-msgid "Button _title:"
-msgstr "Τίτλος _κουμπιού:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-msgid "Ed_it Menu"
-msgstr "Επε_ξεργασία μενού"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "Menu File"
-msgstr "Αρχείο μενού"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Menu _file:"
-msgstr "Αρ_χείο μενού:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-msgid "Select A Menu File"
-msgstr "Επιλογή αρχείου μενού"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid ""
-"Select this option to show the generic application name in the menu, for "
-"example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Επιλέξτε αυτή την επιλογή για να δείτε τα γενικά ονόματα εφαρμογών στο "
-"μενού, για παράδειγμα \"Διαχειριστής αρχείων\" αντί του \"Thunar\""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-msgid "Show application d_escription in tooltip"
-msgstr "Εμφάνιση της περιγραφής της εφαρμογής υπό μορφή υπόδει_ξης"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 msgid "Show generic application n_ames"
 msgstr "Εμφάνιση γενικού ονόματος εφ_αρμογών"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+msgid ""
+"Select this option to show the generic application name in the menu, for "
+"example \"File Manager\" instead of \"Thunar\""
+msgstr "Επιλέξτε αυτή την επιλογή για να δείτε τα γενικά ονόματα εφαρμογών στο μενού, για παράδειγμα \"Διαχειριστής αρχείων\" αντί του \"Thunar\""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
 msgstr "Εμφάνιση εικον_ιδίων στο μενού"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "_Show button title"
+msgstr "_Εμφάνιση τίτλου στο κουμπί"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Button _title:"
+msgstr "Τίτλος _κουμπιού:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+msgid "_Icon:"
+msgstr "Ε_ικονίδιο:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+msgid "Show application d_escription in tooltip"
+msgstr "Εμφάνιση της περιγραφής της εφαρμογής υπό μορφή υπόδει_ξης"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+msgid "Use the _default menu"
+msgstr "Χρήση του προκαθορισμένου αρχείου _μενού"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+msgid "Ed_it Menu"
+msgstr "Επε_ξεργασία μενού"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
 msgstr "Χρήση _προσαρμοσμένου αρχείου μενού"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _default menu"
-msgstr "Χρήση του προκαθορισμένου αρχείου _μενού"
+msgid "Menu _file:"
+msgstr "Αρ_χείο μενού:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-msgid "_Icon:"
-msgstr "Ε_ικονίδιο:"
+msgid "Select A Menu File"
+msgstr "Επιλογή αρχείου μενού"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-msgid "_Show button title"
-msgstr "_Εμφάνιση τίτλου στο κουμπί"
+msgid "Menu File"
+msgstr "Αρχείο μενού"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
@@ -1013,96 +967,93 @@ msgid "Custom Format"
 msgstr "Προσαρμοσμένη μορφή"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-msgid "24-_hour clock"
-msgstr "_Χρήση 24ώρου ρολογιού"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Analog"
-msgstr "Αναλογικό"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Binary"
-msgstr "Δυαδικό"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
 msgid "Clock"
 msgstr "Ρολόι"
 
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "Clock Options"
-msgstr "Επιλογές ρολογιού"
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "_Layout:"
+msgstr "_Διάταξη:"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "Digital"
-msgstr "Ψηφιακό"
+#: ../plugins/clock/clock-dialog.glade.h:3
+msgid "_Tooltip format:"
+msgstr "Μορφή υπο_δείξεων:"
+
+#: ../plugins/clock/clock-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Show _frame"
+msgstr "Εμ_φάνιση πλαισίου"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. See the documentation of the date utility for additional "
+"information."
+msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
 msgstr "Προβολή _δεπτερολέπτων"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
-msgid "F_ormat:"
-msgstr "Μ_ορφοποίηση:"
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "F_uzziness:"
-msgstr "Α_σάφεια:"
-
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fl_ash time separators"
-msgstr "Ο δι_αχωριστής ώρας αναβοσβήνει"
-
-#: ../plugins/clock/clock-dialog.glade.h:13
-msgid "Fuzzy"
-msgstr "Ασαφές"
-
-#: ../plugins/clock/clock-dialog.glade.h:14
-msgid "LCD"
-msgstr "LCD"
-
-#: ../plugins/clock/clock-dialog.glade.h:15
-msgid "Sho_w AM/PM"
-msgstr "Προ_βολή ΠΜ/ΜΜ"
-
-#: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "Εμ_φάνιση πλαισίου"
-
-#: ../plugins/clock/clock-dialog.glade.h:17
-msgid "Show _inactive dots"
-msgstr "Εμφάν_ιση ανενεργών κουκκίδων"
-
-#: ../plugins/clock/clock-dialog.glade.h:18
-msgid "Show gri_d"
-msgstr "Εμφάνιση πλέγμα_τος"
-
-#: ../plugins/clock/clock-dialog.glade.h:20
-#, fuzzy, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-"Αυτή η μορφή εξηγεί τα τμήματα της ημερομηνίας και της ώρας που μπορούν να "
-"εισαχθούν στο όνομα του αρχείου. Για παράδειγμα, το %Y αντικαθίσταται με το "
-"έτος, %m με το μήνα και %d με την ημέρα. Δείτε την τεκμηρίωση της εντολής "
-"date για περισσότερες πληροφορίες."
-
-#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr "Αληθινά _δυαδικό ρολόι"
 
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "24-_hour clock"
+msgstr "_Χρήση 24ώρου ρολογιού"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Fl_ash time separators"
+msgstr "Ο δι_αχωριστής ώρας αναβοσβήνει"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "Sho_w AM/PM"
+msgstr "Προ_βολή ΠΜ/ΜΜ"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
+msgid "F_ormat:"
+msgstr "Μ_ορφοποίηση:"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: ../plugins/clock/clock-dialog.glade.h:15
+msgid "F_uzziness:"
+msgstr "Α_σάφεια:"
+
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid "Show _inactive dots"
+msgstr "Εμφάν_ιση ανενεργών κουκκίδων"
+
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Show gri_d"
+msgstr "Εμφάνιση πλέγμα_τος"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Clock Options"
+msgstr "Επιλογές ρολογιού"
+
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid "Analog"
+msgstr "Αναλογικό"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
+msgid "Binary"
+msgstr "Δυαδικό"
+
+#: ../plugins/clock/clock-dialog.glade.h:21
+msgid "Digital"
+msgstr "Ψηφιακό"
+
 #: ../plugins/clock/clock-dialog.glade.h:22
-msgid "_Layout:"
-msgstr "_Διάταξη:"
+msgid "Fuzzy"
+msgstr "Ασαφές"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
-msgid "_Tooltip format:"
-msgstr "Μορφή υπο_δείξεων:"
+msgid "LCD"
+msgstr "LCD"
 
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
@@ -1337,7 +1288,7 @@ msgstr "Τι ώρα είναι;"
 
 #: ../plugins/directorymenu/directorymenu.c:246
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Μενού καταλόγου"
 
@@ -1378,38 +1329,34 @@ msgstr "Εκτέλεση σε τερματικό"
 msgid "Show a directory tree in a menu"
 msgstr "Εμφάνιση δέντρου καταλόγων σε μενού"
 
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Select A Directory"
+msgstr "Επιλογή φακέλου"
+
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid "_Base Directory:"
+msgstr "_Βασικός κατάλογος:"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Εισαγωγή λίστας μοτίβων τα οποία θα χρησιμοποιηθούν στον προσδιορισμό ποια "
-"αρχεία θα είναι εμφανή σε έναν κατάλογο. Εάν προσδιορίσετε παραπάνω από ένα "
-"μοτίβο εδώ, η λίστα των αντικειμένων θα πρέπει να διαχωρίζεται με "
-"ερωτηματικό (π.χ.*.txt;*.doc)."
+msgstr "Εισαγωγή λίστας μοτίβων τα οποία θα χρησιμοποιηθούν στον προσδιορισμό ποια αρχεία θα είναι εμφανή σε έναν κατάλογο. Εάν προσδιορίσετε παραπάνω από ένα μοτίβο εδώ, η λίστα των αντικειμένων θα πρέπει να διαχωρίζεται με ερωτηματικό (π.χ.*.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
-msgstr "Φιλτράρισμα"
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "_File Pattern:"
+msgstr "_Μοτίβο αρχείου:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-msgid "Select A Directory"
-msgstr "Επιλογή φακέλου"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
 msgstr "Εμφάνιση _κρυφών αρχείων"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "_Base Directory:"
-msgstr "_Βασικός κατάλογος:"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "_File Pattern:"
-msgstr "_Μοτίβο αρχείου:"
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Filtering"
+msgstr "Φιλτράρισμα"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
@@ -1425,8 +1372,7 @@ msgstr "Δε βρέθηκαν αντικείμενα"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr ""
-"Δεν ήταν δυνατό το άνοιγμα του επεξεργαστή αντικειμένου επιφάνειας εργασίας"
+msgstr "Δεν ήταν δυνατό το άνοιγμα του επεξεργαστή αντικειμένου επιφάνειας εργασίας"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
@@ -1442,76 +1388,75 @@ msgid "Unnamed item"
 msgstr "Αντικείμενο χωρίς όνομα"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
-msgid "Add Appli_cation"
-msgstr "Προσθήκη Εφαμ_ογής"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:3
-msgid "Add a new empty item"
-msgstr "Προσθήκη ενός νέου κενού αντικειμένου"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:4
-msgid "Add one or more existing items to the launcher"
-msgstr "Προσθήκη ενός ή περισσοτέρων αντικειμένων στον εκκινητή."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:5
-msgid "Advanced"
-msgstr "Για προχωρημένους"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:6
-msgid "D_elete Item"
-msgstr "_Διαγραφή Αντικειμένου"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "Default"
 msgstr "Προκαθορισμένο"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
-msgid "Delete the currently selected item"
-msgstr "Διαγραφή του επιλεγμένου αντικειμένου"
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "North"
+msgstr "Βορράς"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Disable t_ooltips"
-msgstr "Απενεργοποίηση συμβ_ουλών εργαλείων"
+#: ../plugins/launcher/launcher-dialog.glade.h:3
+msgid "West"
+msgstr "Δυτικά"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "East"
 msgstr "Ανατολικά"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../plugins/launcher/launcher-dialog.glade.h:5
+msgid "South"
+msgstr "Νότια"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
 msgstr "Εσωτερικό κουμπί"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "_Edit Item"
+msgstr "_Επεξεργασία Αντικειμένου"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "D_elete Item"
+msgstr "_Διαγραφή Αντικειμένου"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Add Appli_cation"
+msgstr "Προσθήκη Εφαμ_ογής"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:10
+msgid "New _Application"
+msgstr "Νέα _Εφαρμογή"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:11
+msgid "New _Link"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
 msgid "Launcher"
 msgstr "Εκκινητής"
 
+#: ../plugins/launcher/launcher-dialog.glade.h:15
+msgid "Add one or more existing items to the launcher"
+msgstr "Προσθήκη ενός ή περισσοτέρων αντικειμένων στον εκκινητή."
+
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+msgid "Add a new empty item"
+msgstr "Προσθήκη ενός νέου κενού αντικειμένου"
+
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "New _Application"
-msgstr "Νέα _Εφαρμογή"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
-msgid "New _Link"
-msgstr "Νέα γραμμή"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-msgid "North"
-msgstr "Βορράς"
+msgid "Delete the currently selected item"
+msgstr "Διαγραφή του επιλεγμένου αντικειμένου"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Επιλέξτε αυτή την επιλογή και θα απενεργοποιηθούν οι συμβουλές όταν "
-"μεταφέρονται τα πλήκτρα του ταμπλό ή τα αντικείμενα του μενού."
+msgid "Disable t_ooltips"
+msgstr "Απενεργοποίηση συμβ_ουλών εργαλείων"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
-"Επιλέξτε αυτή την επιλογή για να μετακινήσετε τα επιλεγμένα αντικείμενα του "
-"μενού στο ταμπλό."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "Επιλέξτε αυτή την επιλογή και θα απενεργοποιηθούν οι συμβουλές όταν μεταφέρονται τα πλήκτρα του ταμπλό ή τα αντικείμενα του μενού."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1522,26 +1467,22 @@ msgid "Show last _used item in panel"
 msgstr "Εμφάνιση του τελευταίου _χρησιμοποιημένου αντικειμένου στο ταμπλό"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
-msgid "South"
-msgstr "Νότια"
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr "Επιλέξτε αυτή την επιλογή για να μετακινήσετε τα επιλεγμένα αντικείμενα του μενού στο ταμπλό."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
-msgid "West"
-msgstr "Δυτικά"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "_Arrow button position:"
 msgstr "_Θέση κουμπιού βέλους:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
-msgid "_Edit Item"
-msgstr "_Επεξεργασία Αντικειμένου"
+#: ../plugins/launcher/launcher-dialog.glade.h:26
+msgid "Advanced"
+msgstr "Για προχωρημένους"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Εκκινητής προγραμμάτων με προαιρετικό μενού"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "Ρυθμίσεις _χώρου εργασίας..."
 
@@ -1554,56 +1495,55 @@ msgstr "Αδυναμία ανοίγματος των ρυθμίσεων των �
 msgid "Workspace %d"
 msgstr "Χώρος εργασίας %d"
 
-#: ../plugins/pager/pager-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "Behaviour"
-msgstr "Συμπεριφορά"
+#: ../plugins/pager/pager-dialog.glade.h:1
+#: ../plugins/pager/pager.desktop.in.h:1
+msgid "Workspace Switcher"
+msgstr "Εναλλάκτης χώρων εργασίας"
 
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Number of _rows:"
 msgstr "Αριθμός γ_ραμμών:"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
+msgid "Show mi_niature view"
+msgstr "Προβολή μικρογρα_φιών"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr ""
-"Προβολή μικρογραφίας του χώρου εργασίας με ορθογώνια για τα ορατά παράθυρα"
+msgstr "Προβολή μικρογραφίας του χώρου εργασίας με ορθογώνια για τα ορατά παράθυρα"
 
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
-msgstr "Προβολή μικρογρα_φιών"
-
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Εναλλαγή χώρων εργασίας με χρήση της ροδέλα_ς του ποντικιού"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
-#: ../plugins/pager/pager.desktop.in.h:2
-msgid "Workspace Switcher"
-msgstr "Εναλλάκτης χώρων εργασίας"
+#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+msgid "Behaviour"
+msgstr "Συμπεριφορά"
 
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.h:2
 msgid "Switch between virtual desktops"
 msgstr "Εναλλαγή μεταξύ εικονικών επιφανειών εργασίας"
 
-#: ../plugins/separator/separator-dialog.glade.h:2
-msgid "Dots"
-msgstr "Τελίτσες"
-
 #: ../plugins/separator/separator-dialog.glade.h:3
-msgid "Handle"
-msgstr "Χειρολαβή"
+msgid "_Expand"
+msgstr "_Ανάπτυξη"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "Transparent"
 msgstr "Διαφανές"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-msgid "_Expand"
-msgstr "_Ανάπτυξη"
+msgid "Handle"
+msgstr "Χειρολαβή"
 
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator-dialog.glade.h:7
+msgid "Dots"
+msgstr "Τελίτσες"
+
+#: ../plugins/separator/separator.desktop.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "Προσθέτει ένα κενό ή μια γραμμή μεταξύ των αντικειμένων του ταμπλό"
 
@@ -1616,11 +1556,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "Ελαχιστοποίηση όλων των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Show Desktop"
 msgstr "Εμφάνιση επιφάνειας εργασίας"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "Απόκρυψη των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
 
@@ -1633,9 +1573,7 @@ msgstr "Δεν ήταν δυνατή η εκκίνηση της περιοχής
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
-"Το πιο πιθανό ένα άλλο widget να δέσμευσε την λειτουργικότητα της περιοχής "
-"ειδοποιήσεων. Αυτή η περιοχή δεν θα χρησιμοποιηθεί."
+msgstr "Το πιο πιθανό ένα άλλο widget να δέσμευσε την λειτουργικότητα της περιοχής ειδοποιήσεων. Αυτή η περιοχή δεν θα χρησιμοποιηθεί."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1645,114 +1583,112 @@ msgstr "Ο διαχειριστής πλαισίου συστήματος έχα
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Σίγουρα θέλετε να καθαρίσετε τη λίστα γνωστών εφαρμογών;"
 
-#: ../plugins/systray/systray-dialog.glade.h:2
-msgid "C_lear Known Applications"
-msgstr "Καθαρισμός _γνωστών εφαρμογών"
-
-#: ../plugins/systray/systray-dialog.glade.h:3
-msgid "Known Applications"
-msgstr "Γνωστές εφαρμογές"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray-dialog.glade.h:1
+#: ../plugins/systray/systray.desktop.in.h:1
 msgid "Notification Area"
 msgstr "Περιοχή ειδοποιήσεων"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
 msgstr "_Μέγιστο μέγεθος εικονιδίου (px):"
+
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "C_lear Known Applications"
+msgstr "Καθαρισμός _γνωστών εφαρμογών"
+
+#: ../plugins/systray/systray-dialog.glade.h:6
+msgid "Known Applications"
+msgstr "Γνωστές εφαρμογές"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Η λήψη επιλογής διαχειριστή απέτυχε για την οθόνη %d"
 
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
 msgstr "Περιοχή που εμφανίζονται τα εικονίδια ειδοποίησης"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Always"
-msgstr "Πάντα"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
-msgid "D_raw window frame when hovering a button"
-msgstr ""
-"Σχ_εδίαση του περιγράμματος ενός παραθύρου όταν περνάει πάνω από ένα πλήκτρο"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
-msgid "Group title and timestamp"
-msgstr "Ομαδοποίηση τίτλου και χρόνου"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
-msgid "Group title and window title"
-msgstr "Ομαδοποίηση τίτλου και τίτλου παραθύρου"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
-msgid "Never"
-msgstr "Ποτέ"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "None, allow drag-and-drop"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
-msgid "Restore minimized windows to current _workspace"
-msgstr "Επαναφορά ελα_χιστοποίησης των παραθύρων στο τωρινό χώρο εργασίας"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "Show _flat buttons"
-msgstr "Χρήση ε_πίπεδων κουμπιών"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
-msgid "Show _handle"
-msgstr "Εμφάνιση _χειρολαβής"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-msgid "Show button _labels"
-msgstr "Εμφάνιση ετικετών στα _κουμπιά"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr "Εμφάνιση μόνο ελα_χιστοποιημένων εφαρμογών"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-msgid "Show windows from _all workspaces or viewports"
-msgstr "Προβολή παραθύρων από ό_λους τους χώρους εργασίας ή παράθυρα προβολής"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
-msgid "Show windows from all mo_nitors"
-msgstr "Προβολή παραθύρων από όλα τα mo_nitor"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Sorting _order:"
-msgstr "Σειρά τ_αξινόμησης:"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Timestamp"
-msgstr "Χρονοσήμανση"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr "Όταν ο χώρος είναι περιορισμένος"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
+#: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Window Buttons"
 msgstr "Κουμπιά παραθύρων"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Show button _labels"
+msgstr "Εμφάνιση ετικετών στα _κουμπιά"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "Show _flat buttons"
+msgstr "Χρήση ε_πίπεδων κουμπιών"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Show _handle"
+msgstr "Εμφάνιση _χειρολαβής"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Sorting _order:"
+msgstr "Σειρά τ_αξινόμησης:"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Window _grouping:"
 msgstr "Ομ_αδοποίηση παραθύρων:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "Restore minimized windows to current _workspace"
+msgstr "Επαναφορά ελα_χιστοποίησης των παραθύρων στο τωρινό χώρο εργασίας"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "D_raw window frame when hovering a button"
+msgstr "Σχ_εδίαση του περιγράμματος ενός παραθύρου όταν περνάει πάνω από ένα πλήκτρο"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "_Switch windows using the mouse wheel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+msgid "Show windows from _all workspaces or viewports"
+msgstr "Προβολή παραθύρων από ό_λους τους χώρους εργασίας ή παράθυρα προβολής"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "Show only _minimized windows"
+msgstr "Εμφάνιση μόνο ελα_χιστοποιημένων εφαρμογών"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+msgid "Show windows from all mo_nitors"
+msgstr "Προβολή παραθύρων από όλα τα mo_nitor"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Never"
+msgstr "Ποτέ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+msgid "Always"
+msgstr "Πάντα"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "When space is limited"
+msgstr "Όταν ο χώρος είναι περιορισμένος"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+msgid "Timestamp"
+msgstr "Χρονοσήμανση"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "Group title and timestamp"
+msgstr "Ομαδοποίηση τίτλου και χρόνου"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
 msgstr "Τίτλος παραθύρου"
 
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+msgid "Group title and window title"
+msgstr "Ομαδοποίηση τίτλου και τίτλου παραθύρου"
+
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-#, fuzzy
-msgid "_Switch windows using the mouse wheel"
-msgstr "Εναλλαγή χώρων εργασίας με χρήση της ροδέλα_ς του ποντικιού"
+msgid "None, allow drag-and-drop"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
@@ -1774,7 +1710,7 @@ msgstr "Α_πομεγιστοποίηση όλων"
 msgid "_Close All"
 msgstr "_Κλείσιμο Όλων"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr "Χρήση πλήκτρων για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
 
@@ -1804,99 +1740,39 @@ msgstr "Αφαίρεση του χώρου εργασίας \"%s\""
 msgid "Remove Workspace %d"
 msgstr "Διαγραφή χώρου εργασίας %d"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-msgid "Arrow"
-msgstr "Βέλος"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+msgid "Window Menu"
+msgstr "Μενού παραθύρων"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
 msgstr "Διάταξη κουμπιών:"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+msgid "Show workspace a_ctions"
+msgstr "Εμφάνιση εν_εργειών στους χώρους εργασίας"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+msgid "Show workspace _names"
+msgstr "Προβολή ο_νομάτων χώρων εργασίας"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
 msgstr "Ενεργοποίηση επ_είγουσας ειδοποίησης"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-msgid "Icon"
-msgstr "Εικονίδιο"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
 msgstr "Προβολή παραθύρων από ό_λους τους χώρους εργασίας"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-msgid "Show workspace _names"
-msgstr "Προβολή ο_νομάτων χώρων εργασίας"
-
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-msgid "Show workspace a_ctions"
-msgstr "Εμφάνιση εν_εργειών στους χώρους εργασίας"
+msgid "Icon"
+msgstr "Εικονίδιο"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-msgid "Window Menu"
-msgstr "Μενού παραθύρων"
+msgid "Arrow"
+msgstr "Βέλος"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "Χρήση μενού για την εναλλαγή μεταξύ των ανοιχτών παραθύρων"
-
-#~ msgid "_Read Online"
-#~ msgstr "_Διάβαστε διαδικτυακά"
-
-#~ msgid ""
-#~ "You can read the user manual online. This manual may however not exactly "
-#~ "match your panel version."
-#~ msgstr ""
-#~ "Μπορείτε να διαβάσετε το εγχειρίδιο χρήσης στο διαδίκτυο. Σημειώνεται ότι "
-#~ "η παρεχόμενη έκδοση μπορεί μην ταιριάζει με την έκδοση του εγκατεστημένου "
-#~ "λογισμικού."
-
-#~ msgid "The user manual is not installed on your computer"
-#~ msgstr "To εγχειρίδιο χρήστη δεν είναι εγκατεστημένο στον υπολογιστή σας"
-
-#~ msgid "Failed to open the documentation browser"
-#~ msgstr "Το άνοιγμα του αναγνώστη τεκμηρίωσης απέτυχε"
-
-#~ msgid "_Orientation:"
-#~ msgstr "Προ_σανατολισμός:"
-
-#~ msgid "_First button:"
-#~ msgstr "Π_ρώτο κουμπί:"
-
-#~ msgid "_Second button:"
-#~ msgstr "_Δεύτερο κουμπί:"
-
-#~ msgid "Disabled"
-#~ msgstr "Απενεργοποιημένο"
-
-#~ msgid "Log Out Dialog"
-#~ msgstr "Διάλογος αποσύνδεσης"
-
-#~ msgid "Ro_tate buttons in vertical panel"
-#~ msgstr "Περιστροφή κουμπιών στο κάθετο _ταμπλό"
-
-#~ msgid "Panel Preferences"
-#~ msgstr "Προτιμήσεις ταμπλό"
-
-#~ msgid "_Xfce Panel"
-#~ msgstr "Ταμπλό του Xfce"
-
-#~ msgid "Transparency"
-#~ msgstr "Διαφάνεια"
-
-#~ msgid "Transparency when the pointer is not hovering the panel."
-#~ msgstr "Διαφανές όταν ο κέρσορας δεν περνάει πάνω από το ταμπλό."
-
-#~ msgid "Xfce Panel"
-#~ msgstr "Ταμπλό του Xfce"
-
-#~ msgid "Xfce Menu"
-#~ msgstr "Μενού του Xfce"
-
-#~ msgid "Failed to remove the desktop file from the config directory"
-#~ msgstr ""
-#~ "Αποτυχία αφαίρεσης του αρχείου επιφάνειας από τον κατάλογο ρυθμίσεων"
-
-#~ msgid "C_ompositing"
-#~ msgstr "Θέση"
