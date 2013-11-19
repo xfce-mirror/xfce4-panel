@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-02 22:26+0200\n"
-"PO-Revision-Date: 2013-07-05 09:42+0000\n"
-"Last-Translator: unhammer <unhammer+dill@mm.st>\n"
+"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"PO-Revision-Date: 2013-11-19 12:46+0000\n"
+"Last-Translator: Xfce <transifex@xfce.org>\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/projects/p/xfce/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -825,7 +825,7 @@ msgstr "Logg ut, lås eller andre systemhandlingar"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
 msgid "Applications Menu"
 msgstr "Program"
@@ -867,7 +867,7 @@ msgstr "Vis program_skildring i tipsteksten"
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:4
 #: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Appearance"
 msgstr "Utsjånad"
@@ -896,25 +896,16 @@ msgstr "Vel ei menyfil"
 msgid "Menu File"
 msgstr "Menyfil:"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:557
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Vel eit ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:598
-#: ../plugins/applicationsmenu/applicationsmenu.c:839
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Klarte ikkje køyra kommandoen «%s»"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1108
-msgid "No applications found"
-msgstr "Fann ingen program"
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1131
-msgid "Failed to load the applications menu"
-msgstr "Klarte ikkje lasta programmenyen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1362,7 +1353,7 @@ msgid "Show _hidden files"
 msgstr "Vis _gøymde filer"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
 msgstr "Filtrering"
@@ -1528,7 +1519,7 @@ msgid "Switch workspaces using the mouse _wheel"
 msgstr "Byt arbeidsområde med muse_hjulet"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Behaviour"
 msgstr "Åtferd"
 
@@ -1623,107 +1614,119 @@ msgid "Area where notification icons appear"
 msgstr "Området der varslingsikona skal visa"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "Aldri"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "Alltid"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "When space is limited"
+msgstr "Når det er lite plass"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Timestamp"
+msgstr "Tidsstempel"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Group title and timestamp"
+msgstr "Tittel og tidsstempel for gruppa"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Window title"
+msgstr "Tittelen på vindauget"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+msgid "Group title and window title"
+msgstr "Tittel og vindaugstittel for gruppa"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "None, allow drag-and-drop"
+msgstr "Ingen, gje løyve til dra-og-slepp"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Window Buttons"
 msgstr "Vindaugsknappar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
 msgstr "Vis knappemerke_lappar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
 msgstr "Vis _flate knappar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
 msgstr "Vis _handtak"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
 msgstr "S_orteringsrekkefølgje:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
 msgstr "Vindags_gruppering:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Mi_ddle click action:"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
 msgstr "Gjenopprett minimerte vindaugo til dette _arbeidsområdet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
 msgstr "Teikn ei vindauge_ramme når du held peikaren over ein knapp"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Byt mellom vindaugo med musehjulet"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-msgid "_Close windows using middle mouse button"
-msgstr "_Lukk vindauge med midtre museknappen"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Vis vindaugo frå alle _arbeidsområde eller visingar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr "Berre vis minimerte vindaugo"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
 msgstr "Vis vindaugo frå alle _skjermar"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Never"
-msgstr "Aldri"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Always"
-msgstr "Alltid"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr "Når det er lite plass"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-msgid "Timestamp"
-msgstr "Tidsstempel"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
-msgid "Group title and timestamp"
-msgstr "Tittel og tidsstempel for gruppa"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Window title"
-msgstr "Tittelen på vindauget"
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
-msgid "Group title and window title"
-msgstr "Tittel og vindaugstittel for gruppa"
+msgid "Show only _minimized windows"
+msgstr "Berre vis minimerte vindaugo"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-msgid "None, allow drag-and-drop"
-msgstr "Ingen, gje løyve til dra-og-slepp"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Nothing"
+msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3278
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+msgid "Close Window"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+msgid "Minimize Window"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3293
 msgid "Mi_nimize All"
 msgstr "Mi_nimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3287
+#: ../plugins/tasklist/tasklist-widget.c:3302
 msgid "Un_minimize All"
 msgstr "Gjen_opprett alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Ma_ximize All"
 msgstr "Ma_ksimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "_Unmaximize All"
 msgstr "Gjeno_pprett alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3312
+#: ../plugins/tasklist/tasklist-widget.c:3327
 msgid "_Close All"
 msgstr "_Lukk alle"
 
