@@ -1,23 +1,20 @@
-# $Id$
-#
-# Japanese translations for xfce4-panel package.
-# Copyright (C) 2002-2012 The Xfce development team.
-# This file is distributed under the same license as the xfce4-panel package.
-# Daichi Kawahata <daichi@xfce.org>, 2005-2007.
-# Masato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel\n"
+"Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-18 23:49+0900\n"
-"PO-Revision-Date: 2012-04-25 20:36+0900\n"
-"Last-Translator: Masato Hashimoto <cabezon.hashimoto@gmail.com>\n"
-"Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
-"Language: ja\n"
+"POT-Creation-Date: 2013-07-02 23:10+0200\n"
+"PO-Revision-Date: 2013-11-19 14:26+0000\n"
+"Last-Translator: Nick <nick@xfce.org>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/xfce/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -26,9 +23,9 @@ msgstr "Xfce パネルにランチャーを作成"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"このデスクトップファイルの情報を基にパネルに新しいランチャーを追加します。"
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "このデスクトップファイルの情報を基にパネルに新しいランチャーを追加します。"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
@@ -76,42 +73,34 @@ msgstr "パネルの設定(_E)..."
 msgid "Log _Out"
 msgstr "ログアウト(_O)"
 
-# CLI --help
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'パネルの設定' ダイアログを表示する"
 
-# CLI --help: --preferences=PANEL-NUMBER
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMBER"
 
-# CLI --help
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
 msgstr "'新しいアイテムの追加' ダイアログを表示する"
 
-# CLI --help
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
 msgstr "パネルの設定を保存する"
 
-# CLI --help
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
 msgstr "パネルに新しいプラグインを追加する"
 
-# CLI --help: -add=PLUGIN-NAME
 #: ../panel/main.c:82
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-# CLI --help
 #: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr "動作中のパネルインスタンスを再起動する"
 
-# CLI --help
 #: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr "動作中のパネルインスタンスを終了する"
@@ -120,7 +109,6 @@ msgstr "動作中のパネルインスタンスを終了する"
 msgid "Do not wait for a window manager on startup"
 msgstr "ウィンドウマネージャーの起動を待たない"
 
-# CLI --help
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
@@ -186,53 +174,46 @@ msgstr "D-Bus メッセージの送信に失敗しました"
 
 #: ../panel/main.c:400
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"パネルを起動しますか? 起動した場合、ログアウト時にセッションを保存すれば次回"
-"ログイン時にパネルは自動起動されます。"
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr "パネルを起動しますか? 起動した場合、ログアウト時にセッションを保存すれば次回ログイン時にパネルは自動起動されます。"
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "動作中の %s インスタンスが見つかりませんでした"
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr "移行アプリケーションの起動に失敗しました"
 
-# button label
-#: ../panel/panel-application.c:936
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "ランチャーを作成(_L)"
 
-#: ../panel/panel-application.c:937
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
-"パネル上に新しいランチャーを作成し、ドロップしたファイルをメニューアイテムと"
-"して挿入します。"
+msgstr "パネル上に新しいランチャーを作成し、ドロップしたファイルをメニューアイテムとして挿入します。"
 
-#: ../panel/panel-application.c:939
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d 個のデスクトップファイルから新しいランチャーを作成します"
 
-#: ../panel/panel-application.c:1673
+#: ../panel/panel-application.c:1719
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
-"セッションマネージャーなしで X を起動した場合、「終了」をクリックすると X "
-"サーバーをクローズします。"
+msgstr "セッションマネージャーなしで X を起動した場合、「終了」をクリックすると X サーバーをクローズします。"
 
-#: ../panel/panel-application.c:1674
+#: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
 msgstr "パネルを終了してもよろしいですか?"
 
-#: ../panel/panel-application.c:1682
+#: ../panel/panel-application.c:1728
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -240,17 +221,14 @@ msgstr "コマンド \"%s\" の実行に失敗しました"
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"不正なプラグインイベント構文が指定されています。PLUGIN-NAME:NAME[:TYPE:"
-"VALUE] と指定してください。"
+msgstr "不正なプラグインイベント構文が指定されています。PLUGIN-NAME:NAME[:TYPE:VALUE] と指定してください。"
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"\"%s\" は不正なヒントタイプです。正しいタイプは bool、double、int、string お"
-"よび uint です。"
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr "\"%s\" は不正なヒントタイプです。正しいタイプは bool、double、int、string および uint です。"
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -270,9 +248,7 @@ msgstr "Xfce デスクトップ環境のパネルです。"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr ""
-"Daichi Kawahata <daichi@xfce.org>, 2005-2007.\n"
-"Masato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
+msgstr "Daichi Kawahata <daichi@xfce.org>, 2005-2007.\nMasato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -292,9 +268,7 @@ msgstr "パネル %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
-"パネルはキオスクモードで動作しているため、一般ユーザーがパネルの設定を変更す"
-"ることは許可されません。"
+msgstr "パネルはキオスクモードで動作しているため、一般ユーザーがパネルの設定を変更することは許可されません。"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -320,9 +294,7 @@ msgstr "検索フレーズを入力してください"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"プラグイン \"%s\" は予期せずパネルから失われました。このプラグインを再起動し"
-"ますか?"
+msgstr "プラグイン \"%s\" は予期せずパネルから失われました。このプラグインを再起動しますか?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -330,9 +302,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
-"プラグインは最近 %d 秒以内に 1 回以上再起動されました。「実行」を押すとパネル"
-"はプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
+msgstr "プラグインは最近 %d 秒以内に 1 回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -373,9 +343,7 @@ msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
-"内部名: %s-%d\n"
-"PID: %d"
+msgstr "内部名: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -408,12 +376,10 @@ msgstr "単一色"
 msgid "Background image"
 msgstr "背景画像"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Add a new panel"
 msgstr "新しいパネルを追加します"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Remove the currently selected panel"
 msgstr "現在選択されているパネルを削除します"
@@ -432,8 +398,7 @@ msgstr "複数モニターにまたがって表示する(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
-"パネルを複数モニターに拡張させる場合はこのオプションを選択してください。"
+msgstr "パネルを複数モニターに拡張させる場合はこのオプションを選択してください。"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Lock panel"
@@ -442,9 +407,7 @@ msgstr "パネルをロックする(_L)"
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"パネルの取っ手を非表示にして位置を固定する場合はこのオプションを選択してくだ"
-"さい。"
+msgstr "パネルの取っ手を非表示にして位置を固定する場合はこのオプションを選択してください。"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Automatically show and _hide the panel"
@@ -454,9 +417,7 @@ msgstr "パネルを自動的に隠す(_H)"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr ""
-"ポインターがパネル上にないときに隠す場合はこのオプションを選択してください。"
-"これはパネルが画面端に付着している場合のみ機能します。"
+msgstr "ポインターがパネル上にないときに隠す場合はこのオプションを選択してください。これはパネルが画面端に付着している場合のみ機能します。"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -466,9 +427,7 @@ msgstr "パネル分のスペースを確保しない(_R)"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
-"ウィンドウを最大化した時にパネルの後ろまで広げたい場合はこのオプションを選択"
-"してください。これはパネルが画面端に付着している場合のみ機能します。"
+msgstr "ウィンドウを最大化した時にパネルの後ろまで広げたい場合はこのオプションを選択してください。これはパネルが画面端に付着している場合のみ機能します。"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -499,7 +458,8 @@ msgid ""
 "plugins request more space."
 msgstr "プラグインの要求に合わせてパネルの長さを自動的に伸ばします。"
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "大きさ"
@@ -521,8 +481,7 @@ msgstr "透明度(_A):"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr ""
-"パネルの背景のアルファ値です。0 で完全に透明、100 で完全に不透明になります。"
+msgstr "パネルの背景のアルファ値です。0 で完全に透明、100 で完全に不透明になります。"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -536,7 +495,6 @@ msgstr "パネルの色の選択"
 msgid "_File:"
 msgstr "ファイル(_F):"
 
-# Dialog title
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Select A Background Image"
 msgstr "背景画像の選択"
@@ -557,19 +515,15 @@ msgstr "非ホバー(_L):"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"ポインターがパネル上にあるときの透明度です。0 で完全に透明、100 で完全に不透"
-"明になります。"
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
+msgstr "ポインターがパネル上にあるときの透明度です。0 で完全に透明、100 で完全に不透明になります。"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
-"ポインターがパネル上にないときの透明度です。0 で完全に透明、100 で完全に不透"
-"明になります。"
+msgstr "ポインターがパネル上にないときの透明度です。0 で完全に透明、100 で完全に不透明になります。"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -578,43 +532,35 @@ msgstr "不透明度"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
-"パネルの不透明度を設定する場合はウィンドウマネージャーの合成処理を有効にして"
-"ください。"
+msgstr "パネルの不透明度を設定する場合はウィンドウマネージャーの合成処理を有効にしてください。"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
 msgstr "外観(_N)"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item up by one row"
 msgstr "現在選択されているアイテムを一つ上へ移動します"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item down by one row"
 msgstr "現在選択されているアイテムを一つ下へ移動します"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Add new item to this panel"
 msgstr "このパネルに新しいアイテムを追加します"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:50
 msgid "Remove currently selected item"
 msgstr "現在選択されているアイテムを削除します"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Edit the currently selected item"
 msgstr "現在選択されているアイテムを編集します"
 
-# Tooltip
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Show about information of the currently selected item"
 msgstr "現在選択されているアイテムの情報を表示します"
@@ -647,7 +593,6 @@ msgstr "上級者"
 msgid "Expert"
 msgstr "達人"
 
-# context menu on panel
 #: ../panel/panel-window.c:2390
 msgid "_Lock Panel"
 msgstr "パネルをロック(_L)"
@@ -660,9 +605,7 @@ msgstr "ようこそ Xfce へ。初めてパネルが起動されました。"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
-"新しいシステムでパネルを使用するにあたり、使用する初期設定を選択してくださ"
-"い。"
+msgstr "新しいシステムでパネルを使用するにあたり、使用する初期設定を選択してください。"
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -732,8 +675,7 @@ msgstr "確認のダイアログを表示する(_S)"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
-"一部のアクションが選択された時、30 秒待機する確認のダイアログを表示します。"
+msgstr "一部のアクションが選択された時、30 秒待機する確認のダイアログを表示します。"
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -894,9 +836,7 @@ msgstr "アプリケーションを一般名で表示する(_A)"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"アプリケーションを一般名でメニューに表示する場合にこのオプションを選択してく"
-"ださい。例えば \"Thunar\" は \"ファイルマネージャー\" と表示されます。"
+msgstr "アプリケーションを一般名でメニューに表示する場合にこのオプションを選択してください。例えば \"Thunar\" は \"ファイルマネージャー\" と表示されます。"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -976,9 +916,7 @@ msgstr "アプリケーションメニューの読み込みに失敗しました
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
-"インストールされているアプリケーションのカテゴリに含まれるメニューを表示しま"
-"す。"
+msgstr "インストールされているアプリケーションのカテゴリに含まれるメニューを表示します。"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -998,14 +936,12 @@ msgstr "オプション"
 msgid "Options:"
 msgstr "オプション:"
 
-# cli help
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
 msgstr "現在のマウスの位置にメニューをポップアップする"
 
-# CLI --help
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
@@ -1046,13 +982,10 @@ msgstr "枠を表示する(_F)"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. See the documentation of the date utility for additional "
 "information."
-msgstr ""
-"この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m "
-"は月に、%d は日に置き換えられます。詳しくは date ユーティリティのドキュメント"
-"を参照してください。"
+msgstr "この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m は月に、%d は日に置き換えられます。詳しくは date ユーティリティのドキュメントを参照してください。"
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
@@ -1078,7 +1011,8 @@ msgstr "AM/PMを表示する(_W)"
 msgid "F_ormat:"
 msgstr "表示形式(_O):"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "F_uzziness:"
 msgstr "曖昧さ(_U):"
@@ -1115,42 +1049,34 @@ msgstr "ファジー"
 msgid "LCD"
 msgstr "LCD"
 
-# 0 =< o'clock < 3
 #: ../plugins/clock/clock-fuzzy.c:86
 msgid "Night"
 msgstr "深夜"
 
-# 3 =< o'clock < 6
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
 msgstr "早朝"
 
-# 6 =< o'clock < 9
 #: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
 msgstr "朝"
 
-# 9 =< o'clock < 12
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
 msgstr "午前中"
 
-# 12 =< o'clock < 15
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
 msgstr "お昼すぎ"
 
-# 15 =< o'clock < 18
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
 msgstr "午後"
 
-# 18 =< o'clock < 21
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
 msgstr "夜"
 
-# 21 =< o'clock < 24
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
 msgstr "夜おそく"
@@ -1410,10 +1336,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"ディレクトリ内のファイルを表示するパターンのリストを入力してください。1 つ以"
-"上のパターンを指定する場合は、それぞれをセミコロンで区切ってください (例: *."
-"txt;*.doc)。"
+msgstr "ディレクトリ内のファイルを表示するパターンのリストを入力してください。1 つ以上のパターンを指定する場合は、それぞれをセミコロンで区切ってください (例: *.txt;*.doc)。"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1507,17 +1430,14 @@ msgstr "新しいリンク(_L)"
 msgid "Launcher"
 msgstr "ランチャー"
 
-# Tooltip
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
 msgstr "既存のアイテムを追加します"
 
-# Tooltip
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Add a new empty item"
 msgstr "新しいアイテムを作成します"
 
-# Tooltip
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Delete the currently selected item"
 msgstr "現在選択されているアイテムを削除します"
@@ -1528,11 +1448,9 @@ msgstr "ツールチップを無効にする(_O)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"パネルボタンやメニューアイテム上にポインターを移動したときにツールチップを表"
-"示させない場合はこのオプションを選択してください。"
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "パネルボタンやメニューアイテム上にポインターを移動したときにツールチップを表示させない場合はこのオプションを選択してください。"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1544,9 +1462,7 @@ msgstr "最後に使用したアイテムをパネルに表示する(_U)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
-"クリックしたメニューをパネルに移動させる場合はこのオプションを選択してくださ"
-"い。"
+msgstr "クリックしたメニューをパネルに移動させる場合はこのオプションを選択してください。"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
@@ -1625,12 +1541,10 @@ msgstr "ドット"
 msgid "Adds a separator or space between panel items"
 msgstr "パネルのアイテム間に区切りか空間を加えます。"
 
-# Tooltip
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
 msgstr "最小化されたウィンドウを元に戻します"
 
-# Tooltip
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
 msgstr "すべてのウィンドウを最小化してデスクトップを表示します"
@@ -1640,7 +1554,6 @@ msgstr "すべてのウィンドウを最小化してデスクトップを表示
 msgid "Show Desktop"
 msgstr "デスクトップ表示"
 
-# Tip help
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "すべてのウィンドウを隠してデスクトップを表示します。"
@@ -1654,9 +1567,7 @@ msgstr "通知エリアが起動できません"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
-"おそらく他のウィジェットが通知エリアの機能を占有しています。この通知エリアは"
-"使用されません。"
+msgstr "おそらく他のウィジェットが通知エリアの機能を占有しています。この通知エリアは使用されません。"
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1666,7 +1577,6 @@ msgstr "通知エリアはセレクションを失いました"
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "既知のアプリケーションのリストをクリアしてもよろしいですか?"
 
-# former name 'System tray'
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Notification Area"
@@ -1860,6 +1770,3 @@ msgstr "矢印"
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "開いているウィンドウをメニューを使って切り替えます。"
-
-#~ msgid "L_ock Screen"
-#~ msgstr "画面をロック(_O)"
