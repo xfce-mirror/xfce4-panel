@@ -146,7 +146,7 @@ dnl *** Optional support for a GTK+3 version of the library ***
 dnl ***********************************************************
 XDT_CHECK_OPTIONAL_PACKAGE([GTK3],
                            [gtk+-3.0], [3.2.0], [gtk3],
-                           [GTK+ 3 support])
+                           [GTK+ 3 support], [no])
 AM_CONDITIONAL([ENABLE_GTK3_LIBRARY], [test "x$GTK3_FOUND" = "xyes"])
 
 dnl **********************************
@@ -278,5 +278,9 @@ echo "Build Configuration:"
 echo
 echo "* Debug Support:          $enable_debug"
 echo "* GNU Visibility:         $have_gnuc_visibility"
-echo "* GTK+ 3 Support:         $GTK3_FOUND"
+if test x"$GTK3_FOUND" = x"yes"; then
+echo "* GTK+ 3 Support:         yes"
+else
+echo "* GTK+ 3 Support:         no"
+fi
 echo
