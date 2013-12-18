@@ -148,7 +148,7 @@ panel_module_init (PanelModule *module)
   module->library = NULL;
   module->construct_func = NULL;
   module->plugin_type = G_TYPE_NONE;
-  module->api = NULL;
+  module->api = g_strdup (LIBXFCE4PANEL_VERSION_API);
 }
 
 
@@ -220,6 +220,7 @@ panel_module_load (GTypeModule *type_module)
 
       /* from now on, run this plugin in a wrapper */
       module->mode = WRAPPER;
+      g_free (module->api);
       module->api = g_strdup (LIBXFCE4PANEL_VERSION_API);
 
       return FALSE;
@@ -368,7 +369,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
           if (force_external || !xfce_rc_read_bool_entry (rc, "X-XFCE-Internal", FALSE))
             {
               module->mode = WRAPPER;
-              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", "1.0"));
+              g_free (module->api);
+              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
             }
           else
             module->mode = INTERNAL;
