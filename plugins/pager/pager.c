@@ -53,6 +53,8 @@ static void     pager_plugin_set_property                 (GObject           *ob
                                                            guint              prop_id,
                                                            const GValue      *value,
                                                            GParamSpec        *pspec);
+static void     pager_plugin_size_request                 (GtkWidget         *widget,
+                                                           GtkRequisition    *requisition);
 static gboolean pager_plugin_scroll_event                 (GtkWidget         *widget,
                                                            GdkEventScroll    *event);
 static void     pager_plugin_screen_changed               (GtkWidget         *widget,
@@ -86,6 +88,7 @@ struct _PagerPlugin
   guint          scrolling : 1;
   guint          miniature_view : 1;
   gint           rows;
+  gfloat         ratio;
 };
 
 enum
@@ -117,6 +120,7 @@ pager_plugin_class_init (PagerPluginClass *klass)
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->scroll_event = pager_plugin_scroll_event;
+  widget_class->size_request = pager_plugin_size_request;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = pager_plugin_construct;
@@ -156,6 +160,7 @@ pager_plugin_init (PagerPlugin *plugin)
   plugin->scrolling = TRUE;
   plugin->miniature_view = TRUE;
   plugin->rows = 1;
+  plugin->ratio = 1.0;
   plugin->pager = NULL;
 }
 
@@ -303,15 +308,8 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
       if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
         g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
 
-#ifdef WNCK_CHECK_VERSION
-#if WNCK_CHECK_VERSION (2,31,0)
-      wnck_pager_set_layout_policy (WNCK_PAGER (plugin->pager),
-                                    (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
-                                    WNCK_PAGER_LAYOUT_POLICY_WIDTH_FOR_HEIGHT :
-                                    WNCK_PAGER_LAYOUT_POLICY_HEIGHT_FOR_WIDTH);
-#endif
-#endif
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+      plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
     }
   else
     {
@@ -421,17 +419,7 @@ pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
     GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
   if (plugin->miniature_view)
-    {
-#ifdef WNCK_CHECK_VERSION
-#if WNCK_CHECK_VERSION (2,31,0)
-      wnck_pager_set_layout_policy (WNCK_PAGER (plugin->pager),
-                                    (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
-                                    WNCK_PAGER_LAYOUT_POLICY_WIDTH_FOR_HEIGHT :
-                                    WNCK_PAGER_LAYOUT_POLICY_HEIGHT_FOR_WIDTH);
-#endif
-#endif
-      wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
-    }
+    wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
   else
     pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
 }
@@ -560,3 +548,41 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
+
+
+
+static void
+pager_plugin_size_request (GtkWidget      *widget,
+                           GtkRequisition *requisition)
+{
+  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
+  XfcePanelPluginMode  mode;
+  gint                 n_workspaces, n_cols;
+
+  if (plugin->miniature_view)
+    {
+      mode   = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
+      n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen);
+      n_cols = MAX (1, (n_workspaces + plugin->rows - 1) / plugin->rows);
+      if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+        {
+          requisition->height = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+          requisition->width = (gint) (requisition->height / plugin->rows * plugin->ratio * n_cols);
+        }
+      else if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+        {
+          requisition->width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+          requisition->height = (gint) (requisition->width / plugin->rows / plugin->ratio * n_cols);
+        }
+      else /* (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) */
+        {
+          requisition->width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+          requisition->height = (gint) (requisition->width / n_cols / plugin->ratio * plugin->rows);
+        }
+    }
+  else
+    {
+      gtk_widget_size_request (plugin->pager, requisition);
+    }
+}
+
