@@ -580,9 +580,14 @@ pager_plugin_size_request (GtkWidget      *widget,
           requisition->height = (gint) (requisition->width / n_cols / plugin->ratio * plugin->rows);
         }
     }
-  else
+  else if (plugin->pager)
     {
       gtk_widget_size_request (plugin->pager, requisition);
+    }
+  else // initial fallback
+    {
+      requisition->width = 1;
+      requisition->height = 1;
     }
 }
 
