@@ -401,6 +401,8 @@ static gboolean
 pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint             size)
 {
+  gtk_widget_queue_resize (GTK_WIDGET (panel_plugin));
+
   /* do not set fixed size */
   return TRUE;
 }
