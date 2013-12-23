@@ -94,6 +94,8 @@ wrapper_plug_init (WrapperPlug *plug)
   GdkVisual       *visual = NULL;
   GdkScreen       *screen;
   GtkStyleContext *context;
+  GtkCssProvider  *provider = gtk_css_provider_new();
+  gchar           *css_string;
 #else
   GdkColormap *colormap = NULL;
   GdkScreen   *screen;
@@ -126,6 +128,17 @@ wrapper_plug_init (WrapperPlug *plug)
   context = gtk_widget_get_style_context (GTK_WIDGET (plug));
   gtk_style_context_add_class (context, "panel");
   gtk_style_context_add_class (context, "xfce4-panel");
+
+  /* We need to set the plugin button to transparent and let everything else
+   * be in the theme or panel's color */
+  css_string = g_strdup_printf (".xfce4-panel .button { background-color: transparent; }");
+  gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
+  gtk_style_context_add_provider (context,
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+  g_free (css_string);
+  g_object_unref (provider);
 #endif
 }
 
@@ -154,71 +167,77 @@ wrapper_plug_draw (GtkWidget *widget,
   GdkPixbuf       *pixbuf;
   GError          *error = NULL;
 
-  if (gtk_widget_is_drawable (widget))
-    {
-      if (G_UNLIKELY (plug->background_image != NULL))
-        {
-          cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+  cairo_save (cr);
 
-          if (G_LIKELY (plug->background_image_cache != NULL))
+  /* The "draw" signal is in widget coordinates, transform back to window */
+  gtk_cairo_transform_to_window (cr,
+                                 GTK_WIDGET (plug),
+                                 gtk_widget_get_window (gtk_widget_get_toplevel (GTK_WIDGET (plug))));
+
+  if (G_UNLIKELY (plug->background_image != NULL))
+    {
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+      if (G_LIKELY (plug->background_image_cache != NULL))
+        {
+          cairo_set_source (cr, plug->background_image_cache);
+          cairo_paint (cr);
+        }
+      else
+        {
+          /* load the image in a pixbuf */
+          pixbuf = gdk_pixbuf_new_from_file (plug->background_image, &error);
+
+          if (G_LIKELY (pixbuf != NULL))
             {
-              cairo_set_source (cr, plug->background_image_cache);
+              gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+              g_object_unref (G_OBJECT (pixbuf));
+
+              plug->background_image_cache = cairo_get_source (cr);
+              cairo_pattern_reference (plug->background_image_cache);
+              cairo_pattern_set_extend (plug->background_image_cache, CAIRO_EXTEND_REPEAT);
               cairo_paint (cr);
             }
           else
             {
-              /* load the image in a pixbuf */
-              pixbuf = gdk_pixbuf_new_from_file (plug->background_image, &error);
+              /* print error message */
+              g_warning ("Background image disabled, \"%s\" could not be loaded: %s",
+                         plug->background_image, error != NULL ? error->message : "No error");
+              g_error_free (error);
 
-              if (G_LIKELY (pixbuf != NULL))
-                {
-                  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-                  g_object_unref (G_OBJECT (pixbuf));
-
-                  plug->background_image_cache = cairo_get_source (cr);
-                  cairo_pattern_reference (plug->background_image_cache);
-                  cairo_pattern_set_extend (plug->background_image_cache, CAIRO_EXTEND_REPEAT);
-                  cairo_paint (cr);
-                }
-              else
-                {
-                  /* print error message */
-                  g_warning ("Background image disabled, \"%s\" could not be loaded: %s",
-                             plug->background_image, error != NULL ? error->message : "No error");
-                  g_error_free (error);
-
-                  /* disable background image */
-                  wrapper_plug_background_reset (plug);
-                }
-            }
-        }
-      else
-        {
-          alpha = gtk_widget_is_composited (GTK_WIDGET (plug)) ? plug->background_alpha : 1.00;
-
-          if (alpha < 1.00 || plug->background_color != NULL)
-            {
-              cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-
-              /* get the background gdk color */
-              if (plug->background_color != NULL)
-                {
-                  color = plug->background_color;
-                  cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color), alpha);
-                }
-              else
-                {
-                  style = gtk_widget_get_style_context (widget);
-                  gtk_style_context_get_background_color (style, GTK_STATE_FLAG_NORMAL, &rgba);
-                  rgba.alpha = alpha;
-                  gdk_cairo_set_source_rgba (cr, &rgba);
-                }
-
-              /* draw the background color */
-              cairo_fill (cr);
+              /* disable background image */
+              wrapper_plug_background_reset (plug);
             }
         }
     }
+  else
+    {
+      alpha = gtk_widget_is_composited (GTK_WIDGET (plug)) ? plug->background_alpha : 1.00;
+
+      if (alpha < 1.00 || plug->background_color != NULL)
+        {
+          cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+
+          /* get the background gdk color */
+          if (plug->background_color != NULL)
+            {
+              color = plug->background_color;
+              cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color), alpha);
+            }
+          else
+            {
+              style = gtk_widget_get_style_context (widget);
+              gtk_style_context_get_background_color (style, GTK_STATE_FLAG_NORMAL, &rgba);
+              rgba.alpha = alpha;
+              gdk_cairo_set_source_rgba (cr, &rgba);
+            }
+
+          /* draw the background color */
+          cairo_paint (cr);
+        }
+    }
+
+  cairo_restore(cr);
 
   return GTK_WIDGET_CLASS (wrapper_plug_parent_class)->draw (widget, cr);
 }

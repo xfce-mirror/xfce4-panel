@@ -711,10 +711,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 #endif
 
   /* hide the event box window to make the plugin transparent */
-  // FIXME
-  // Temporarily disabled to workaround plugin transparency issues.
-  // It breaks background transparency and color support.
-  //gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
+  gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
 }
 
 
