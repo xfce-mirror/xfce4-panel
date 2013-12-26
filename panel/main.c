@@ -40,6 +40,7 @@
 #include <dbus/dbus-glib.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
+#include <libwnck/libwnck.h>
 
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
@@ -337,6 +338,9 @@ main (gint argc, gchar **argv)
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
     signal (signums[i], panel_signal_handler);
+
+  /* set EWMH source indication */
+  wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
 
   application = panel_application_get ();
   panel_application_load (application, opt_disable_wm_check);
