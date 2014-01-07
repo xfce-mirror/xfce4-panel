@@ -1046,6 +1046,7 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
       itembar = gtk_bin_get_child (GTK_BIN (dialog->active));
       position = panel_itembar_get_child_index (PANEL_ITEMBAR (itembar),
                                                 GTK_WIDGET (provider));
+      path = gtk_tree_model_get_path (GTK_TREE_MODEL (dialog->store), &iter_a);
 
       if (G_LIKELY (position != -1))
         {
@@ -1071,20 +1072,20 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
               /* swap the items in the list */
               iter_b = iter_a;
               if (gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->store), &iter_b))
-                gtk_list_store_swap (dialog->store, &iter_a, &iter_b);
+                {
+                  gtk_list_store_swap (dialog->store, &iter_a, &iter_b);
+                  gtk_tree_path_next (path);
+                }
             }
           else
             {
               /* get the previous item in the list */
-              path = gtk_tree_model_get_path (GTK_TREE_MODEL (dialog->store), &iter_a);
               if (gtk_tree_path_prev (path))
                 {
                   /* swap the items in the list */
                   gtk_tree_model_get_iter (GTK_TREE_MODEL (dialog->store), &iter_b, path);
                   gtk_list_store_swap (dialog->store, &iter_a, &iter_b);
                 }
-
-              gtk_tree_path_free (path);
             }
 
           /* fake update the selection */
@@ -1092,7 +1093,13 @@ panel_preferences_dialog_item_move (GtkWidget              *button,
           panel_return_if_fail (GTK_IS_WIDGET (treeview));
           selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
           panel_preferences_dialog_item_selection_changed (selection, dialog);
+
+          /* make the new selected position visible if moved out of area */
+          gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (treeview), path, NULL, FALSE, 0, 0);
+          gtk_tree_view_set_cursor (GTK_TREE_VIEW (treeview), path, NULL, FALSE);
+
         }
+      gtk_tree_path_free (path);
     }
 }
 
