@@ -934,14 +934,21 @@ static void
 panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
                                              PanelPreferencesDialog *dialog)
 {
-  GList       *items, *li;
-  guint        i;
-  PanelModule *module;
-  gchar       *tooltip, *display_name;
+  GList                   *items, *li;
+  guint                    i;
+  PanelModule             *module;
+  gchar                   *tooltip, *display_name;
+  XfcePanelPluginProvider *selected_provider;
+  GtkTreeIter              iter;
+  GtkTreePath             *path;
+  GObject                 *treeview;
 
   panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
   panel_return_if_fail (GTK_IS_LIST_STORE (dialog->store));
   panel_return_if_fail (PANEL_IS_ITEMBAR (itembar));
+
+  /* memorize selected item */
+  selected_provider = panel_preferences_dialog_item_get_selected (dialog, NULL);
 
   gtk_list_store_clear (dialog->store);
 
@@ -981,7 +988,7 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
                                      xfce_panel_plugin_provider_get_unique_id (li->data));
         }
 
-      gtk_list_store_insert_with_values (dialog->store, NULL, i,
+      gtk_list_store_insert_with_values (dialog->store, &iter, i,
                                          ITEM_COLUMN_ICON_NAME,
                                          panel_module_get_icon_name (module),
                                          ITEM_COLUMN_DISPLAY_NAME,
@@ -989,6 +996,16 @@ panel_preferences_dialog_item_store_rebuild (GtkWidget              *itembar,
                                          ITEM_COLUMN_TOOLTIP,
                                          tooltip,
                                          ITEM_COLUMN_PROVIDER, li->data, -1);
+
+      /* reconstruct selection */
+      if (selected_provider == li->data)
+        {
+          path = gtk_tree_model_get_path (GTK_TREE_MODEL (dialog->store), &iter);
+          treeview = gtk_builder_get_object (GTK_BUILDER (dialog), "item-treeview");
+          if (GTK_IS_WIDGET (treeview))
+            gtk_tree_view_set_cursor (GTK_TREE_VIEW (treeview), path, NULL, FALSE);
+          gtk_tree_path_free (path);
+        }
 
       g_free (tooltip);
       g_free (display_name);
