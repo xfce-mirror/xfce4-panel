@@ -71,13 +71,8 @@
 #define xfce_tasklist_horizontal(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 #define xfce_tasklist_vertical(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
 #define xfce_tasklist_deskbar(tasklist) ((tasklist)->mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
-#define xfce_tasklist_filter_monitors(tasklist) (!(tasklist)->all_monitors && (tasklist)->monitor_geometry.width != -1)
-#define xfce_tasklist_geometry_set_invalid(tasklist) ((tasklist)->monitor_geometry.width = -1)
-#define xfce_tasklist_geometry_has_point(tasklist, x, y) ( \
-  (x) >= ((tasklist)->monitor_geometry.x) \
-  && (x) < ((tasklist)->monitor_geometry.x + (tasklist)->monitor_geometry.width) \
-  && (y) >= ((tasklist)->monitor_geometry.y) \
-  && (y) < ((tasklist)->monitor_geometry.y + (tasklist)->monitor_geometry.height))
+#define xfce_tasklist_filter_monitors(tasklist) (!(tasklist)->all_monitors && (tasklist)->n_monitors > 1)
+#define xfce_tasklist_geometry_set_invalid(tasklist) ((tasklist)->n_monitors = 0)
 
 
 
@@ -167,7 +162,9 @@ struct _XfceTasklist
   /* whether we only show windows that are in the geometry of
    * the monitor the tasklist is on */
   guint                 all_monitors : 1;
-  GdkRectangle          monitor_geometry;
+  guint                 n_monitors;
+  guint                 my_monitor;
+  GdkRectangle *        all_monitors_geometry;
 
   /* whether we show wireframes when hovering a button in
    * the tasklist */
@@ -568,6 +565,8 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->show_wireframes = FALSE;
   tasklist->show_handle = TRUE;
   tasklist->all_monitors = TRUE;
+  tasklist->n_monitors = 0;
+  tasklist->all_monitors_geometry = NULL;
   tasklist->window_scrolling = TRUE;
   tasklist->all_blinking = TRUE;
   tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
@@ -1956,6 +1955,7 @@ xfce_tasklist_update_monitor_geometry_idle (gpointer data)
   GdkScreen    *screen;
   gboolean      geometry_set = FALSE;
   GdkWindow    *window;
+  guint         tmp;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
 
@@ -1966,12 +1966,25 @@ xfce_tasklist_update_monitor_geometry_idle (gpointer data)
 
       if (G_LIKELY (screen != NULL
           && window != NULL
-          && gdk_screen_get_n_monitors (screen) > 1))
+          && (tasklist->n_monitors = gdk_screen_get_n_monitors (screen)) > 1))
         {
           /* set the monitor geometry */
-          gdk_screen_get_monitor_geometry (screen,
-              gdk_screen_get_monitor_at_window (screen, window),
-              &tasklist->monitor_geometry);
+          tasklist->my_monitor = gdk_screen_get_monitor_at_window (screen, window);
+
+          if (tasklist->all_monitors_geometry)
+          {
+              tasklist->all_monitors_geometry = g_renew (GdkRectangle, tasklist->all_monitors_geometry, tasklist->n_monitors);
+          }
+          else
+          {
+              tasklist->all_monitors_geometry = g_new (GdkRectangle, tasklist->n_monitors);
+          }
+
+          for(tmp=0;tmp<tasklist->n_monitors;tmp++)
+          {
+              gdk_screen_get_monitor_geometry (screen, tmp,
+                  &tasklist->all_monitors_geometry[tmp]);
+          }
 
           geometry_set = TRUE;
         }
@@ -2286,7 +2299,8 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
                               WnckWorkspace     *active_ws)
 {
   XfceTasklist *tasklist = XFCE_TASKLIST (child->tasklist);
-  gint          x, y, w, h;
+  GdkRectangle  window, intersection;
+  guint         best_size=0, best_monitor=0, size, tmp;
 
   panel_return_val_if_fail (active_ws == NULL || WNCK_IS_WORKSPACE (active_ws), FALSE);
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), FALSE);
@@ -2295,12 +2309,17 @@ xfce_tasklist_button_visible (XfceTasklistChild *child,
   if (xfce_tasklist_filter_monitors (tasklist))
     {
       /* center of the window must be on this screen */
-      wnck_window_get_geometry (child->window, &x, &y, &w, &h);
-      x += w / 2;
-      y += h / 2;
+      wnck_window_get_geometry (child->window, &window.x, &window.y, &window.width, &window.height);
 
-      if (!xfce_tasklist_geometry_has_point (tasklist, x, y))
-        return FALSE;
+      for(tmp=0;tmp<tasklist->n_monitors;tmp++) {
+          gdk_rectangle_intersect(&tasklist->all_monitors_geometry[tmp], &window, &intersection);
+          size = intersection.width * intersection.height;
+          if(size > best_size) {
+              best_size = size;
+              best_monitor = tmp;
+          }
+      }
+      if (best_monitor != tasklist->my_monitor) return FALSE;
     }
 
   if (tasklist->all_workspaces
