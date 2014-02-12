@@ -213,28 +213,24 @@ wrapper_plug_draw (GtkWidget *widget,
   else
     {
       alpha = gtk_widget_is_composited (GTK_WIDGET (plug)) ? plug->background_alpha : 1.00;
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
-      if (alpha < 1.00 || plug->background_color != NULL)
+      /* get the background gdk color */
+      if (plug->background_color != NULL)
         {
-          cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-
-          /* get the background gdk color */
-          if (plug->background_color != NULL)
-            {
-              color = plug->background_color;
-              cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color), alpha);
-            }
-          else
-            {
-              style = gtk_widget_get_style_context (widget);
-              gtk_style_context_get_background_color (style, GTK_STATE_FLAG_NORMAL, &rgba);
-              rgba.alpha = alpha;
-              gdk_cairo_set_source_rgba (cr, &rgba);
-            }
-
-          /* draw the background color */
-          cairo_paint (cr);
+          color = plug->background_color;
+          cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color), alpha);
         }
+      else
+        {
+          style = gtk_widget_get_style_context (widget);
+          gtk_style_context_get_background_color (style, GTK_STATE_FLAG_NORMAL, &rgba);
+          rgba.alpha = alpha;
+          gdk_cairo_set_source_rgba (cr, &rgba);
+        }
+
+      /* draw the background color */
+      cairo_paint (cr);
     }
 
   cairo_restore(cr);
