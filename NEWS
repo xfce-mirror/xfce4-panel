@@ -1,3 +1,24 @@
+4.11.0
+======
+- Window Buttons: Improve the tasklist multimonitor handling.
+- Scroll the items list in the config dialog box (bug #10582)
+- Set EWMH client type to WNCK_CLIENT_TYPE_PAGER (bug #10508).
+- Fixed transparency issues with Gtk3 plugins.
+- Workspace Switcher: fixed aspect ratio in deskbar mode.
+- Added --enable-gtk3 configure flag. Note: it produces gtk2/gtk3 versions
+  of libxfce4panel and wrapper binary so that both gtk2 and gtk3 plugins can
+  be embedded. The panel and stock plugins are still using gtk2.
+- Applications Menu: Use new GarconGtkMenu.
+- Window Buttons: middle-click action configurable (nothing, close, minimize).
+- Drectory Menu: Pass path to argument (bug #10270).
+- Window Buttons: close a window on middle click (bug #8096).
+- Applications Menu: support for non-square icons and layout fixes.
+- Install XfcePanelPlugin properties at once.
+- Clock: added support for timezone selection.
+- Put each window in a new window group.
+- Window Buttons: Show urgent windows from other workspaces (bug #5167).
+- Clock: calendar popup.
+
 4.10.1
 ======
 - Bugfix in icon/pixbuf resizing code.
