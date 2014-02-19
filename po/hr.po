@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# schizo <eveskovic@gmail.com>, 2014
 # Ivica  Kolić <ikoli@yahoo.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2014-01-16 11:00+0000\n"
-"Last-Translator: Ivica  Kolić <ikoli@yahoo.com>\n"
+"PO-Revision-Date: 2014-02-19 19:04+0000\n"
+"Last-Translator: schizo <eveskovic@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/xfce/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,7 +81,7 @@ msgstr "Pokaži dijalog 'Osobitosti ploče' "
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "BROJ-PLOČE"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
@@ -100,15 +101,15 @@ msgstr "IME-PRIKLJUČKA"
 
 #: ../panel/main.c:83
 msgid "Restart the running panel instance"
-msgstr ""
+msgstr "Ponovno pokreni pokrenutu instancu ploče"
 
 #: ../panel/main.c:84
 msgid "Quit the running panel instance"
-msgstr ""
+msgstr "Ugasi pokrenutu instancu ploče"
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "Ne čekaj upravitelja prozora pri pokretanju"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -138,7 +139,7 @@ msgstr "Prijavite probleme u <%s>."
 
 #: ../panel/main.c:320
 msgid "There is already a running instance"
-msgstr ""
+msgstr "Jedna instanca je već pokrenuta"
 
 #. spawn ourselfs again
 #: ../panel/main.c:362
@@ -171,7 +172,7 @@ msgstr "Neuspjelo isključivanje ploče"
 
 #: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
-msgstr ""
+msgstr "Neuspjelo slanje D-Bus poruke"
 
 #: ../panel/main.c:400
 msgid ""
@@ -182,11 +183,11 @@ msgstr "Želite li pokrenuti ploču?Ako želite, budite sigurni da ste spremili 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Nije pronađena pokrenuta instanca %s"
 
 #: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Neuspjelo pokretanje aplikacije za premještanje"
 
 #: ../panel/panel-application.c:982
 msgid "Create _Launcher"
@@ -210,7 +211,7 @@ msgstr[2] "Napravi nove pokretače sa %d datoteka radne površine"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
+msgstr "Pokrenuli ste X bez upravitelja sesijom. Kliknte na Isključi i X poslužitelj će se zatvoriti."
 
 #: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
@@ -239,7 +240,7 @@ msgstr "Održavatelji"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Deskbar način"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -271,7 +272,7 @@ msgstr "Ploča %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
+msgstr "Kao običan korisnik niste u mogućnosti mjenjati konfiguraciju ploče zato što se ploča pokreće u kiosk načinu"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -292,7 +293,7 @@ msgstr "_Traži:"
 
 #: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "Ovdje unesite frazu"
 
 #: ../panel/panel-plugin-external.c:429
 #, c-format
@@ -305,7 +306,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
+msgstr "Priključak se ponovno pokrenuo više puta u zadnjih %d sekundi. Ako pritisnete Pokreni ploča će probati ponovno pokrenuti priključak inače će biti trajno izbrisan s ploče."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -365,7 +366,7 @@ msgstr "Okomito"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Deskbar"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
@@ -401,7 +402,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Ovu opciju izaberite za proširenje ploče na više monitora."
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Lock panel"
@@ -410,7 +411,7 @@ msgstr "_Zaključaj ploču"
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
+msgstr "Izaberite ovu opciju kako bi sakrili ručke ploče i zaključali njenu poziciju."
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Automatically show and _hide the panel"
@@ -420,17 +421,17 @@ msgstr "Automatski pokaži i _sakrij ploču"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Izaberite ovu opciju kako bi sakrili ploču kada pokazivač nije iznad nje. Ovo djeluje samo kada se ploča nalazi uz rub zaslona."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Ne rezirvaj prostor do granice ploče"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Izaberite ovu opciju ako želite da maksimizirani prozor pokrije prostor iza ploče. Ovo djeluje samo kada se ploča nalazi uz rub zaslona."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -520,13 +521,13 @@ msgstr "_Napusti:"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr ""
+msgstr "Prozirnost ploče kada se pokazivač nalazi iznad nje, gdje 0 znači potpunu prozirnost, a 100 potpunu vidljivost."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
+msgstr "Prozirnost ploče kada se pokazivač ne nalazi iznad nje, gdje 0 znači potpunu prozirnost, a 100 potpunu vidljivost."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -612,7 +613,7 @@ msgstr ""
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Dole izaberite koje uređenje želite za prvo pokretanje."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
@@ -648,15 +649,15 @@ msgstr "Neuspjelo učitavanje zadane konfiguracije"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Konfiguracija ploče treba premještanje..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Neuspjelo premještanje postojeće konfiguracije"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Konfiguracija ploče je ažurirana."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -669,7 +670,7 @@ msgstr "Izgl_ed:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "Izmjeni _orijentaciju dugmadi"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
@@ -678,7 +679,7 @@ msgstr "_Pokaži dijalog potvrde"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Pokaži dijaloški okvir s vremenskim ograničenjem od 30 sekundi za neke od radnji."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -747,7 +748,7 @@ msgstr "_Hibernacija"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Želite li suspendirati na disk?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -764,7 +765,7 @@ msgstr "Sus_penzija"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Želite li suspendirati u memoriju?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -839,7 +840,7 @@ msgstr "Pokaži generička imena p_rograma"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "Izaberite ovu opciju za prikaz općih imena u izborniku poput \"Upravitelj datotekama\" umjesto \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -847,11 +848,11 @@ msgstr "Pokaži ik_one u izborniku"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "_Show button title"
-msgstr ""
+msgstr "_Pokaži ime gumba"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Button _title:"
-msgstr ""
+msgstr "_Ime gumba:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -953,7 +954,7 @@ msgstr "Pokaži opcije pomoći"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
-msgstr ""
+msgstr "Tjedan %V"
 
 #: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
@@ -1324,7 +1325,7 @@ msgstr "Otvori u terminalu"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Pokaži stablo direktorija u izborniku"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
@@ -1332,14 +1333,14 @@ msgstr "Odaberi direktorij"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "_Base Directory:"
-msgstr ""
+msgstr "_Bazni direktorij:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Unesite popis uzoraka koji će biti korišteni za odrediti koje datoteke će biti vidljive u direktoriju. Ako upisujete više od jednog uzorka, za odvajanje koristiti točku sa zarezom (npr. *.txt;*.odt)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1406,7 +1407,7 @@ msgstr "Jug"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
-msgstr ""
+msgstr "Unutarnji gumb"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
@@ -1457,7 +1458,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "Pokaži _natpis umjesto ikone"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
