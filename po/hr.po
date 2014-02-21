@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2014-02-21 11:30+0000\n"
+"PO-Revision-Date: 2014-02-21 11:46+0000\n"
 "Last-Translator: schizo <eveskovic@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/xfce/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -225,14 +225,14 @@ msgstr "Neuspjelo izvršenje naredbe \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Nepravilna sintaksa radnje priključka. Koristite PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr ""
+msgstr "Nepraviln tip podataka \"%s\". Ispravni tipovi su bool, double, int, string i uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -338,7 +338,7 @@ msgstr "Jeste li sigurni da želite ukloniti ploču %d?"
 #: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(vanjski)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -347,14 +347,14 @@ msgstr ""
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
+msgstr "Interno ime: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Interno ime: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "Horizontal"
@@ -398,7 +398,7 @@ msgstr "I_zlaz:"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Span mo_nitors"
-msgstr ""
+msgstr "Obuhvati mo_nitore"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
@@ -1601,7 +1601,7 @@ msgstr "Poznati programi"
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Neuspjelo pribavljanje izbora upravitelja za zaslon %d"
 
 #: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
