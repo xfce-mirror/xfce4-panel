@@ -8,6 +8,7 @@
 # danpergal84 <danpergal84@gmail.com>, 2013
 # danpergal84 <danpergal84@gmail.com>, 2013
 # edwinpm5 <edwinpm5@gmail.com>, 2014
+# edwinpm5 <edwinpm5@gmail.com>, 2014
 # hernan144 <hernan.alvarez.guerra@gmail.com>, 2013
 # hernan144 <hernan.alvarez.guerra@gmail.com>, 2013
 # MC <correomc2000-ing@yahoo.es>, 2013
@@ -22,7 +23,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2014-03-23 13:11+0000\n"
+"PO-Revision-Date: 2014-03-23 23:22+0000\n"
 "Last-Translator: edwinpm5 <edwinpm5@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +76,7 @@ msgstr "Pane_l"
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
-msgstr "Añadir _nuevos elementos..."
+msgstr "_Añadir nuevos elementos..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
@@ -85,11 +86,11 @@ msgstr "Pr_eferencias del panel..."
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
 msgid "Log _Out"
-msgstr "_Cerrar sesión"
+msgstr "Cerrar ses_ión"
 
 #: ../panel/main.c:79
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Mostrar el diálogo «Preferencias del panel»"
+msgstr "Mostrar diálogo «Preferencias del panel»"
 
 #: ../panel/main.c:79 ../panel/main.c:80
 msgid "PANEL-NUMBER"
@@ -97,7 +98,7 @@ msgstr "NÚMERO-DEL-PANEL"
 
 #: ../panel/main.c:80
 msgid "Show the 'Add New Items' dialog"
-msgstr "Mostrar el diálogo «Añadir nuevos elementos»"
+msgstr "Mostrar diálogo «Añadir nuevos elementos»"
 
 #: ../panel/main.c:81
 msgid "Save the panel configuration"
@@ -147,7 +148,7 @@ msgstr "El equipo de desarrollo de Xfce. Todos los derechos reservados."
 #: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Enviar informes de errores a <%s>."
+msgstr "Informes de errores a <%s>."
 
 #: ../panel/main.c:320
 msgid "There is already a running instance"
@@ -1385,7 +1386,7 @@ msgstr "No hay elementos"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr "Fallo al abrir el editor de elementos de escritorio"
+msgstr "No se pudo abrir el editor de elementos .desktop"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
@@ -1402,7 +1403,7 @@ msgstr "Objeto sin nombre"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
-msgstr "Predeterminado"
+msgstr "Predeterminada"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:2
 msgid "North"
@@ -1434,15 +1435,15 @@ msgstr "_Borrar elemento"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
-msgstr "_Agregar a plicación"
+msgstr "_Agregar aplicación"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
-msgstr "Nueva _aplicación"
+msgstr "_Nueva aplicación"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
-msgstr "Nuevo _enlace"
+msgstr "Nue_vo enlace"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
@@ -1451,25 +1452,25 @@ msgstr "Lanzador"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
-msgstr "Añade uno o mas elementos existentes al lanzador"
+msgstr "Agregar uno o más elementos existentes al lanzador"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Add a new empty item"
-msgstr "Añadir nuevo elemento vacío"
+msgstr "Agregar un elemento nuevo"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Delete the currently selected item"
-msgstr "Borrar el objeto seeccionado"
+msgstr "Remover el elemento seleccionado"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Disable t_ooltips"
-msgstr "Desabilitar diálogos emergentes"
+msgstr "Desactivar _descripciones emergentes"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Selecciona esta opción para deshabilitar las ayudas cuando te mueves sobre los botones del panel o los elementos del menú."
+msgstr "Seleccione esta opción para desactivar las descripciones cuando se mueve el puntero sobre el botón o los elementos del menú."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1477,15 +1478,15 @@ msgstr "Mostrar _etiquetas en lugar de iconos"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr "Mostrar ú_ltimo objeto usado en el panel"
+msgstr "Mostrar el ú_ltimo elemento usado"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Seleccione esta opción para mover el elemento de menú seleccionado en el panel."
+msgstr "Seleccione esta opción para mover el elemento activado al panel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
-msgstr "Posición del botón _flecha:"
+msgstr "Posición de la _flecha:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Advanced"
@@ -1501,7 +1502,7 @@ msgstr "_Configuración de áreas de trabajo..."
 
 #: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
-msgstr "Fallo al abrir las propiedades del área de trabajo"
+msgstr "No se pudo abrir la configuración de áreas de trabajo"
 
 #: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
@@ -1519,17 +1520,17 @@ msgstr "Cantidad de _filas:"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Show mi_niature view"
-msgstr "Mostrar vista en m_iniatura"
+msgstr "Mostrar vista en _miniatura"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Mostrar vista en miniatura del área de trabajo con rectángulos para las ventanas visibles"
+msgstr "Muestra una vista en miniatura del área de trabajo con rectángulos para las ventanas visibles"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Cambiar entre áreas de trabajo usando la _rueda del ratón"
+msgstr "Cambia_r entre áreas de trabajo usando la rueda del ratón"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
@@ -1550,7 +1551,7 @@ msgstr "Trasparente"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
 msgid "Handle"
-msgstr "Separador"
+msgstr "Manija"
 
 #: ../plugins/separator/separator-dialog.glade.h:7
 msgid "Dots"
@@ -1558,7 +1559,7 @@ msgstr "Puntos"
 
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr "Añade un separador o un espacio entre los elementos del panel"
+msgstr "Agrega un separador o espacio entre elementos del panel"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
@@ -1571,26 +1572,26 @@ msgstr "Minimizar todas las ventanas abiertas y mostrar el escritorio"
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
 msgid "Show Desktop"
-msgstr "Mostrar Escritorio"
+msgstr "Mostrar escritorio"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr "Esconder todas las ventanas y mostrar el escritorio"
+msgstr "Minimiza todas las ventanas para mostrar el escritorio"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "Fallo al iniciar el area de notificación"
+msgstr "No se pudo iniciar el área de notificación"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Lo más probable es que otro \"widget\" se hizo cargo de la función de área de notificación. Esta área no será utilizada."
+msgstr "Probablemente otro elemento está funcionando como área de notificación. Esta área no será utilizada."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr "Se ha deseleccionado el area de notificación"
+msgstr "El área de notificación ha perdido el foco"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1603,7 +1604,7 @@ msgstr "Área de notificación"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr "Tamaño _máximo para el icono (px):"
+msgstr "_Tamaño máximo de icono (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
@@ -1611,7 +1612,7 @@ msgstr "Mostrar _marco"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
-msgstr "L_impiar aplicaciones conocidas"
+msgstr "_Limpiar aplicaciones conocidas"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Known Applications"
@@ -1620,7 +1621,7 @@ msgstr "Aplicaciones conocidas"
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "No se ha podido adquirir un manejador de sección para la pantalla %d"
+msgstr "No se pudo adquirir la seleción del gestor para la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
@@ -1636,19 +1637,19 @@ msgstr "Siempre"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
-msgstr "Cuando espacio es limitado"
+msgstr "Cuando el espacio sea limitado"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "Timestamp"
-msgstr "Marca Horaria"
+msgstr "Marca de tiempo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Group title and timestamp"
-msgstr "Título del grupo y marca horaria"
+msgstr "Título del grupo y marca de tiempo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Window title"
-msgstr "Nombre de las ventana"
+msgstr "Título de la ventana"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
@@ -1661,7 +1662,7 @@ msgstr "Ninguno, permitir arrastrar y soltar"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
 msgid "Window Buttons"
-msgstr "Botones de las ventanas"
+msgstr "Botones de ventanas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
@@ -1681,7 +1682,7 @@ msgstr "Forma de _ordenado:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
-msgstr "A_grupacion de ventanas:"
+msgstr "A_grupar las ventanas:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
@@ -1689,7 +1690,7 @@ msgstr "Acción del clic de al medio:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
-msgstr "Restaurar ventanas minimizadas a la actual á_rea de trabajo"
+msgstr "Restau_rar ventanas minimizadas al área de trabajo activa"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
@@ -1701,7 +1702,7 @@ msgstr "_Cambiar ventanas usando la rueda del ratón"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Mostrar ventanas de _todas las áreas de trabajo o puertos de vista"
+msgstr "Mostrar ventanas de _todas las áreas de trabajo"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
@@ -1709,7 +1710,7 @@ msgstr "Mostrar ventanas de todos los mo_nitores"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Show only _minimized windows"
-msgstr "Solamente mostrar ventanas _maximizadas"
+msgstr "Sólo mostrar ventanas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
@@ -1717,11 +1718,11 @@ msgstr "Nada"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
-msgstr "Cerrar Ventana"
+msgstr "Cerrar ventana"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Minimize Window"
-msgstr "Minimizar Ventana"
+msgstr "Minimizar ventana"
 
 #: ../plugins/tasklist/tasklist-widget.c:3293
 msgid "Mi_nimize All"
@@ -1729,11 +1730,11 @@ msgstr "Mi_nimizar todas"
 
 #: ../plugins/tasklist/tasklist-widget.c:3302
 msgid "Un_minimize All"
-msgstr "Des_minimizar todas"
+msgstr "_Restaurar todas"
 
 #: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Ma_ximize All"
-msgstr "Ma_ximizar todas"
+msgstr "M_aximizar todas"
 
 #: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "_Unmaximize All"
@@ -1766,12 +1767,12 @@ msgstr "Añadir área de trabajo"
 #: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Eliminar Area de Trabajo \"%s\""
+msgstr "Eliminar el área de trabajo «%s»"
 
 #: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Eliminar Area de Trabajo %d"
+msgstr "Eliminar el área de trabajo %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
@@ -1784,11 +1785,11 @@ msgstr "Distribución de botones:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Show workspace a_ctions"
-msgstr "Mostrar ac_ciones del área de trabajo"
+msgstr "Mostrar ac_ciones de las áreas de trabajo"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Show workspace _names"
-msgstr "Nombre del á_rea de trabajo"
+msgstr "Mostrar nombres de las ár_eas de trabajo"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
