@@ -7,13 +7,14 @@
 # Jakob Kramer <jakob.kramer@gmx.de>, 2012
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010,2012
 # Simon Schneider <simon@schneiderimtal.de>, 2009
+# to_ba, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2013-11-19 14:26+0000\n"
-"Last-Translator: Nick <nick@xfce.org>\n"
+"PO-Revision-Date: 2014-03-28 16:00+0000\n"
+"Last-Translator: to_ba\n"
 "Language-Team: German (http://www.transifex.com/projects/p/xfce/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,12 +66,12 @@ msgstr "_Leiste"
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
-msgstr "_Neue Elemente hinzufügen…"
+msgstr "_Neue Elemente hinzufügen …"
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
-msgstr "Leisten_einstellungen…"
+msgstr "_Leisteneinstellungen …"
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
@@ -123,7 +124,7 @@ msgstr "Versionsinformationen ausgeben und beenden"
 #. parse context options
 #: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
-msgstr "[ARGUMENTE…]"
+msgstr "[ARGUMENTE …]"
 
 #: ../panel/main.c:242
 #, c-format
@@ -146,7 +147,7 @@ msgstr "Es gibt bereits eine laufende Instanz"
 #. spawn ourselfs again
 #: ../panel/main.c:362
 msgid "Restarting..."
-msgstr "Neustart…"
+msgstr "Neustart …"
 
 #: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
@@ -249,7 +250,7 @@ msgstr "Inaktive Betreuer"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "Die Leiste der Arbeitsumgebung Xfce"
+msgstr "Die Leiste der Xfce-Arbeitsumgebung"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
@@ -675,7 +676,7 @@ msgstr "_Orientierung der Knöpfe umkehren"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
-msgstr "_Zeige Bestätigungsdialog an"
+msgstr "_Bestätigungsdialog anzeigen"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
@@ -717,11 +718,11 @@ msgstr "Sie werden in %d Sekunden abgemeldet."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr "Abmelden…"
+msgstr "Abmelden …"
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr "_Abmelden…"
+msgstr "_Abmelden …"
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
@@ -749,16 +750,16 @@ msgstr "_Ruhezustand"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr "In den Ruhezustand versetzen?"
+msgstr "In Bereitschaft versetzen?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr "Computer wird in %d Sekunden in den Ruhezustand versetzt."
+msgstr "Rechner wird in %d Sekunden in den Ruhezustand versetzt."
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
-msgstr "Standby"
+msgstr "Bereitschaft"
 
 #: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
@@ -771,7 +772,7 @@ msgstr "In den Bereitschaftsmodus versetzen?"
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr "Der Rechner wird in %d Sekunden in den Energiesparmodus versetzt."
+msgstr "Der Rechner wird in %d Sekunden in Bereitschaft versetzt."
 
 #: ../plugins/actions/actions.c:196
 msgid "Restart"
@@ -788,7 +789,7 @@ msgstr "Wollen Sie wirklich neustarten?"
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr "Computer wird in %d Sekunden neu gestartet."
+msgstr "Rechner wird in %d Sekunden neu gestartet."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -805,7 +806,7 @@ msgstr "Wollen Sie den Computer wirklich herunterfahren?"
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr "Computer wird in %d Sekunden heruntergefahren"
+msgstr "Rechner wird in %d Sekunden heruntergefahren"
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -1371,7 +1372,7 @@ msgstr "Keine Objekte"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr "Konnte den Editor für Desktop-Objekte nicht öffnen"
+msgstr "Fehler beim Öffnen des Einstellungsfensters für Schreibtischelemente"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
@@ -1483,7 +1484,7 @@ msgstr "Programmstarter mit optionalem Menü"
 
 #: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
-msgstr "_Arbeitsflächeneinstellungen..."
+msgstr "_Arbeitsflächeneinstellungen …"
 
 #: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
@@ -1524,7 +1525,7 @@ msgstr "Verhalten"
 
 #: ../plugins/pager/pager.desktop.in.h:2
 msgid "Switch between virtual desktops"
-msgstr "Zwischen virtuellen Arbeitsflächen umschalten"
+msgstr "Zwischen virtuellen Schreibtischen umschalten"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "_Expand"
@@ -1552,7 +1553,7 @@ msgstr "Versteckte Fenster wiederherstellen"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
-msgstr "Geöffnete Fenster verstecken und Schreibtisch zeigen"
+msgstr "Geöffnete Fenster verstecken und Schreibtisch anzeigen"
 
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
@@ -1561,7 +1562,7 @@ msgstr "Schreibtisch zeigen"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr "Fenster verstecken und Schreibtisch zeigen"
+msgstr "Fenster verstecken und Schreibtisch anzeigen"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
