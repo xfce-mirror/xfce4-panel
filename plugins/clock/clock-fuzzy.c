@@ -132,20 +132,38 @@ static const gchar *i18n_hour_sectors_one[] =
   /* xgettext:no-c-format */ NC_("one", "%1 o'clock")
 };
 
-static const gchar *i18n_hour_names[] =
+static const gchar *i18n_hour_am_names[] =
 {
-  N_("one"),
-  N_("two"),
-  N_("three"),
-  N_("four"),
-  N_("five"),
-  N_("six"),
-  N_("seven"),
-  N_("eight"),
-  N_("nine"),
-  N_("ten"),
-  N_("eleven"),
-  N_("twelve")
+  NC_("am", "one"),
+  NC_("am", "two"),
+  NC_("am", "three"),
+  NC_("am", "four"),
+  NC_("am", "five"),
+  NC_("am", "six"),
+  NC_("am", "seven"),
+  NC_("am", "eight"),
+  NC_("am", "nine"),
+  NC_("am", "ten"),
+  NC_("am", "eleven"),
+  /* I18N: 12 AM is midnight */
+  NC_("am", "twelve")
+};
+
+static const gchar *i18n_hour_pm_names[] =
+{
+  NC_("pm", "one"),
+  NC_("pm", "two"),
+  NC_("pm", "three"),
+  NC_("pm", "four"),
+  NC_("pm", "five"),
+  NC_("pm", "six"),
+  NC_("pm", "seven"),
+  NC_("pm", "eight"),
+  NC_("pm", "nine"),
+  NC_("pm", "ten"),
+  NC_("pm", "eleven"),
+  /* I18N: 12 PM is noon */
+  NC_("pm", "twelve")
 };
 
 
@@ -283,6 +301,7 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
   const gchar    *time_format;
   gchar          *p;
   gchar           pattern[3];
+  gboolean        is_pm;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_FUZZY (fuzzy), FALSE);
 
@@ -318,6 +337,7 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
       if (G_LIKELY (p != NULL))
         hour += g_ascii_digit_value (*(p + 1));
 
+      is_pm = (hour >= 12 && hour != 24);
       if (hour % 12 > 0)
         hour = hour % 12 - 1;
       else
@@ -341,7 +361,8 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
       if (p != NULL)
         {
           g_string_append_len (string, time_format, p - time_format);
-          g_string_append (string, _(i18n_hour_names[hour]));
+          g_string_append (string, is_pm ? g_dpgettext2 (NULL, "pm", i18n_hour_pm_names[hour])
+                                         : g_dpgettext2 (NULL, "am", i18n_hour_am_names[hour]));
           g_string_append (string, p + strlen (pattern));
         }
       else
