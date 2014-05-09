@@ -1263,6 +1263,7 @@ actions_plugin_menu (GtkWidget     *button,
           G_CALLBACK (actions_plugin_menu_deactivate), button);
       g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
+      size = DEFAULT_ICON_SIZE;
       if (gtk_icon_size_lookup (menu_icon_size, &w, &h))
         size = MIN (w, h);
 
