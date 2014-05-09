@@ -437,7 +437,8 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
       box = gtk_bin_get_child (GTK_BIN (plugin));
       if (box != NULL)
         {
-          if (plugin->invert_orientation)
+          if (plugin->invert_orientation !=
+              (xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR))
             {
               children = gtk_container_get_children (GTK_CONTAINER (box));
               if (G_UNLIKELY (children == NULL))
@@ -1095,12 +1096,15 @@ actions_plugin_pack_idle (gpointer data)
   if (plugin->items == NULL)
     plugin->items = actions_plugin_default_array ();
 
-  orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
-
   allowed_types = actions_plugin_actions_allowed ();
 
   if (plugin->type == APPEARANCE_TYPE_BUTTONS)
     {
+      if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
+        orientation = GTK_ORIENTATION_VERTICAL;
+      else
+        orientation = GTK_ORIENTATION_HORIZONTAL;
+
       if (plugin->invert_orientation)
         orientation = !orientation;
       box = gtk_box_new (orientation, 0);
@@ -1116,7 +1120,8 @@ actions_plugin_pack_idle (gpointer data)
 
           /* skip separators when packing buttons in the opposite
            * orientation */
-          if (plugin->invert_orientation
+          if (plugin->invert_orientation !=
+              (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
               && g_strcmp0 (name + 1, "separator") == 0)
             continue;
 
