@@ -6,14 +6,15 @@
 # kingu <comradekingu@gmail.com>, 2014
 # Christian Lomsdalen <christian@vindstille.net>, 2007
 # Eskild Hustvedt <eskild@goldenfiles.com>, 2004
+# haarek <haarektrans@gmail.com>, 2014
 # Terje Uriansrud <terje@uriansrud.net>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2014-05-04 00:24+0000\n"
-"Last-Translator: kingu <comradekingu@gmail.com>\n"
+"PO-Revision-Date: 2014-05-10 12:43+0000\n"
+"Last-Translator: haarek <haarektrans@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/xfce4-panel/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -253,7 +254,7 @@ msgstr "Panelet til Xfce Skrivebordsmiljø"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Terje Uriansrud<terje@uriansrud.net>"
+msgstr "haarek - Harald <https://www.transifex.com/accounts/profile/haarek/>\nkingu - Allan Nordhøy <https://www.transifex.com/accounts/profile/kingu/>\npapparonny - Ronny K. M. Olufsen <https://www.transifex.com/accounts/profile/papparonny/>\nTerje Uriansrud<terje@uriansrud.net>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -432,7 +433,7 @@ msgstr ""
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Velg dette alternativet hvis du vil at maksimerte vinduer skal dekke området bak panelet. Dette fungerer bare når panelet er plassert til en skjermkant."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -442,7 +443,7 @@ msgstr "Generelt"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "Radstørrelse (piksler):"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #, no-c-format
@@ -451,7 +452,7 @@ msgstr "L_engde (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Num_ber of rows:"
-msgstr ""
+msgstr "Antall rader:"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "A_utomatically increase the length"
@@ -600,7 +601,7 @@ msgstr "Ekspert"
 
 #: ../panel/panel-window.c:2390
 msgid "_Lock Panel"
-msgstr ""
+msgstr "_Lås panel"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
@@ -667,7 +668,7 @@ msgstr "Handlingknapper"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Appeara_nce:"
-msgstr ""
+msgstr "Utsee_nde:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
@@ -675,28 +676,28 @@ msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "Vis bekreftelsesdialog"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Vis en bekreftelsesdialog med en 30 sekunders nedtelling for noen av handlingene."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
-msgstr ""
+msgstr "Synlig"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Action"
-msgstr ""
+msgstr "Handling"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
-msgstr ""
+msgstr "Handlinger"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Session Menu"
-msgstr ""
+msgstr "Øktmeny"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -704,32 +705,32 @@ msgstr "Logg ut"
 
 #: ../plugins/actions/actions.c:152
 msgid "_Log Out"
-msgstr ""
+msgstr "_Logg ut"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
-msgstr ""
+msgstr "Er du sikker på at du vil logge ut?"
 
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "Logger ut om %d sekunder."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr ""
+msgstr "Logg ut ..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr ""
+msgstr "Logg ut ..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
-msgstr ""
+msgstr "Bytt bruker"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "Bytt bruker"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
@@ -737,7 +738,7 @@ msgstr "Lås skjerm"
 
 #: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
-msgstr ""
+msgstr "Lås skjermen"
 
 #: ../plugins/actions/actions.c:180
 msgid "Hibernate"
@@ -779,16 +780,16 @@ msgstr "Omstart"
 
 #: ../plugins/actions/actions.c:197
 msgid "_Restart"
-msgstr ""
+msgstr "Start på nytt"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr ""
+msgstr "Er du sikker på at du vil starte på nytt?"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Starter datamaskinen på nytt om %d sekunder."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -796,16 +797,16 @@ msgstr "Avslutt"
 
 #: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
-msgstr ""
+msgstr "_Avslutt"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
-msgstr ""
+msgstr "Er du sikker på at du vil avslutte?"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Datamaskinen slås av om %d sekunder."
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -816,15 +817,15 @@ msgstr "Skille"
 #: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr ""
+msgstr "Klarte ikke å kjøre handlingen «%s»"
 
 #: ../plugins/actions/actions.c:1142
 msgid "John Doe"
-msgstr ""
+msgstr "Ola Nordmann"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
-msgstr "Logg ut, lås eller andre systemvalg"
+msgstr "Logg ut, lås eller andre systemhandlinger"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
@@ -1412,19 +1413,19 @@ msgstr "Innenfor knappen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
-msgstr ""
+msgstr "Rediger element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
-msgstr ""
+msgstr "Slett element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
-msgstr ""
+msgstr "Legg til program"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
-msgstr ""
+msgstr "Nytt program"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
@@ -1643,7 +1644,7 @@ msgstr "Tegn vindus_ramme når over en knapp"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "Bytt vinduer med musehjulet"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show windows from _all workspaces or viewports"
@@ -1687,7 +1688,7 @@ msgstr "Grupper tittel og vindustittel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Ingen, tillat dra-og-slipp"
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
