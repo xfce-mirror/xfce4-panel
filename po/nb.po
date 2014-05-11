@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# kingu <comradekingu@gmail.com>, 2014
 # Christian Lomsdalen <christian@vindstille.net>, 2007
 # Eskild Hustvedt <eskild@goldenfiles.com>, 2004
 # haarek <haarektrans@gmail.com>, 2014
@@ -12,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2014-05-10 12:43+0000\n"
-"Last-Translator: haarek <haarektrans@gmail.com>\n"
+"PO-Revision-Date: 2014-05-11 16:15+0000\n"
+"Last-Translator: kingu <comradekingu@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/xfce4-panel/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +112,7 @@ msgstr "Avslutt den kjørende instansen"
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
-msgstr ""
+msgstr "Ikke vent på vindusbehandler ved oppstart"
 
 #: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -193,20 +194,20 @@ msgstr "Klarte ikke starte migreringsapplikasjon"
 
 #: ../panel/panel-application.c:982
 msgid "Create _Launcher"
-msgstr ""
+msgstr "Lag _oppstarter"
 
 #: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Dette vil opprette et nytt oppstarter-tillegg på panelet og legger til inndregde filer som menyelementer."
 
 #: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Lag ny oppstarter fra %d skrivebordsfil"
+msgstr[1] "Lag ny oppstarter fra %d skrivebordsfiler"
 
 #: ../panel/panel-application.c:1725
 msgid ""
@@ -237,7 +238,7 @@ msgstr "Ugyldig hinttype \"%s\". Gyldige verdier er bool, double, int, string og
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
-msgstr ""
+msgstr "Vedlikeholdere"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
@@ -245,7 +246,7 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
-msgstr ""
+msgstr "Inaktive vedlikeholdere"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
@@ -391,7 +392,7 @@ msgstr "Fjern valgt panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "M_ode:"
-msgstr ""
+msgstr "M_odus:"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "O_utput:"
@@ -426,13 +427,13 @@ msgstr "Velg denne for å skjule panelet når musepekeren ikke berører panelet.
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Ikke _reserver plass ved kanter"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Velg dette alternativet hvis du vil at maksimerte vinduer skal dekke området bak panelet. Dette fungerer bare når panelet er tilknyttet en skjermkant."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -442,7 +443,7 @@ msgstr "Generelt"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "Rad_størrelse (piksler):"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #, no-c-format
@@ -451,7 +452,7 @@ msgstr "L_engde (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Num_ber of rows:"
-msgstr ""
+msgstr "An_tall rader:"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 msgid "A_utomatically increase the length"
@@ -654,7 +655,7 @@ msgstr ""
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Klarete ikke å flytte den eksisterende konfigurasjonen"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -667,7 +668,7 @@ msgstr "Handlingknapper"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Appeara_nce:"
-msgstr ""
+msgstr "Utsee_nde:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
@@ -675,24 +676,24 @@ msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "_Vis bekreftelsesdialog"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Vis en bekreftelsesdialog med en 30 sekunders nedtelling for noen av handlingene."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
-msgstr ""
+msgstr "Synlig"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Action"
-msgstr ""
+msgstr "Handling"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 msgid "_Actions"
-msgstr ""
+msgstr "_Handlinger"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Session Menu"
@@ -721,7 +722,7 @@ msgstr "Logg ut ..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr ""
+msgstr "Logg _ut..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
@@ -729,7 +730,7 @@ msgstr "Bytt bruker"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "_Bytt bruker"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
@@ -737,7 +738,7 @@ msgstr "Lås skjerm"
 
 #: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
-msgstr ""
+msgstr "Lå_s skjerm"
 
 #: ../plugins/actions/actions.c:180
 msgid "Hibernate"
@@ -762,7 +763,7 @@ msgstr "Hvilemodus"
 
 #: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
-msgstr ""
+msgstr "Hvile_modus"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
@@ -771,7 +772,7 @@ msgstr ""
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Datamaskinen går i hvilemodus om %d sekunder."
 
 #: ../plugins/actions/actions.c:196
 msgid "Restart"
@@ -779,16 +780,16 @@ msgstr "Omstart"
 
 #: ../plugins/actions/actions.c:197
 msgid "_Restart"
-msgstr ""
+msgstr "_Start på nytt"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr ""
+msgstr "Er du sikker på at du vil starte på nytt?"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Starter datamaskinen på nytt om %d sekunder."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -796,16 +797,16 @@ msgstr "Avslutt"
 
 #: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
-msgstr ""
+msgstr "_Avslutt"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
-msgstr ""
+msgstr "Er du sikker på at du vil avslutte?"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Datamaskinen slås av om %d sekunder."
 
 #: ../plugins/actions/actions.c:620
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -816,11 +817,11 @@ msgstr "Skille"
 #: ../plugins/actions/actions.c:975
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr ""
+msgstr "Klarte ikke å kjøre handlingen «%s»"
 
 #: ../plugins/actions/actions.c:1142
 msgid "John Doe"
-msgstr ""
+msgstr "Ola Nordmann"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -969,15 +970,15 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
-msgstr ""
+msgstr "Tids_sone:"
 
 #: ../plugins/clock/clock-dialog.glade.h:4
 msgid "Time and Date _Settings..."
-msgstr ""
+msgstr "Tid og dato-_innstillinger..."
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "Time Settings"
-msgstr ""
+msgstr "Tidsinnstillinger"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "_Layout:"
@@ -1363,7 +1364,7 @@ msgstr "Filtrering"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr ""
+msgstr "Åpne oppstarter-menyen"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
@@ -1416,23 +1417,23 @@ msgstr "Innenfor knappen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
-msgstr ""
+msgstr "_Rediger element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
-msgstr ""
+msgstr "S_lett element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
-msgstr ""
+msgstr "Legg til pro_gram"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
-msgstr ""
+msgstr "Nytt _program"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
-msgstr ""
+msgstr "Ny _lenke"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
@@ -1646,7 +1647,7 @@ msgstr "Grupper tittel og vindustittel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Ingen, tillat dra-og-slipp"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
@@ -1687,7 +1688,7 @@ msgstr "Tegn vindus_ramme når over en knapp"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "_Bytt vinduer ved bruk av musehjulet"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
@@ -1703,15 +1704,15 @@ msgstr "Vis kun _minimerte vinduer"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
-msgstr ""
+msgstr "Ingenting"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
-msgstr ""
+msgstr "Lukk vindu"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Minimize Window"
-msgstr ""
+msgstr "Minimer vindu"
 
 #: ../plugins/tasklist/tasklist-widget.c:3293
 msgid "Mi_nimize All"
