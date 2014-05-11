@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-03 00:30+0200\n"
-"PO-Revision-Date: 2014-05-11 16:15+0000\n"
+"PO-Revision-Date: 2014-05-11 18:35+0000\n"
 "Last-Translator: kingu <comradekingu@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/xfce4-panel/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -242,7 +242,7 @@ msgstr "Vedlikeholdere"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Bardisk-modus"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -368,7 +368,7 @@ msgstr "Vertikal"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Bardisk"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
@@ -538,7 +538,7 @@ msgstr "Ugjennomsiktighet"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "Skru på sammenfatting i vindusbehandleren for å få gjennomsiktighetsinnstillinger i panelet."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -619,11 +619,11 @@ msgstr "Velg under hvilket oppsett du ønsker for første oppstart."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr "Konverter gammel konfigurasjon"
+msgstr "Konverter gammelt oppsett"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Flytt den gamle 4.6 konfigurasjonen til Xfconf"
+msgstr "Flytt det gamle 4.6 oppsettet til Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
@@ -643,23 +643,23 @@ msgstr "Start med et tomt panel"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "Klarte ikke flytte den gamle konfigurasjonen"
+msgstr "Klarte ikke flytte det gamle paneloppsettet"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr "Klarte ikke laste standard konfigurasjon"
+msgstr "Klarte ikke laste standard-oppsett"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Det er behov for å migrere panelinnstillingen..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "Klarete ikke å flytte den eksisterende konfigurasjonen"
+msgstr "Klarte ikke å flytte det eksisterende oppsettet"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Paneloppsett har blitt oppdatert."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -672,7 +672,7 @@ msgstr "Utsee_nde:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "Inverter taste_retning"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
@@ -750,7 +750,7 @@ msgstr "_Dvalemodus"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Vil du igangsette dvalgang til hardisk?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -767,7 +767,7 @@ msgstr "Hvile_modus"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Vil du indusere hvilemodus til RAM?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -966,7 +966,7 @@ msgstr "Klokke"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
+msgstr "Navn på tidssone som har sammenheng med fil i soneinfo-database, for eksempel \"Amerika/New_York\". La stå tom for å bruke lokal tid."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -995,7 +995,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
+msgstr "Formatet beskriver dato og tids-delene som settes inn i filnavnet. For eksempel, %Y erstattes med året, %m med måneden og %d med dagen. Likeledes vil <b></b> formatering vil gjøre tekst halvfet. Se \"Hjelp\"-siden for ytterligere informasjon."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1676,7 +1676,7 @@ msgstr "Vindus_gruppering"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
-msgstr ""
+msgstr "Mi_dt-trykks-handling"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
