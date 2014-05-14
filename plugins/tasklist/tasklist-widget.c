@@ -1606,14 +1606,6 @@ xfce_tasklist_active_window_changed (WnckScreen   *screen,
     {
       child = li->data;
 
-      /* skip hidden buttons */
-      /* TODO the visible check probably breaks with grouping */
-      if (!gtk_widget_get_visible (child->button)
-          || !(child->window == previous_window
-               || child->window == active_window
-               || !tasklist->all_workspaces))
-        continue;
-
       /* update timestamp for window */
       if (child->window == active_window)
         g_get_current_time (&child->last_focused);
