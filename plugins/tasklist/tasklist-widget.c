@@ -2983,7 +2983,8 @@ xfce_tasklist_button_activate (XfceTasklistChild *child,
               else if (wnck_screen_get_active_workspace (child->tasklist->screen) != workspace)
                 {
                   /* switch to the other workspace before we activate the window */
-                  wnck_workspace_activate (workspace, timestamp - 1);
+                  wnck_workspace_activate (workspace, timestamp);
+                  gtk_main_iteration ();
                 }
             }
           else if (workspace != NULL
