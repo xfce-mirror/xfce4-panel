@@ -602,6 +602,12 @@ static void
 xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
+  GtkRcStyle      *rc;
+
+  rc = gtk_widget_get_modifier_style (GTK_WIDGET (button));
+  gtk_button_set_relief (GTK_BUTTON (button), button->priv->last_relief);
+  PANEL_UNSET_FLAG (rc->color_flags[GTK_STATE_NORMAL], GTK_RC_BG);
+  gtk_widget_modify_style (GTK_WIDGET (button), rc);
 
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
@@ -725,6 +731,7 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
               gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 500,
                                             xfce_arrow_button_blinking_timeout, button,
                                             xfce_arrow_button_blinking_timeout_destroyed);
+          xfce_arrow_button_blinking_timeout (button);
         }
     }
   else if (button->priv->blinking_timeout_id != 0)
@@ -732,9 +739,6 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
       /* stop the blinking timeout */
       g_source_remove (button->priv->blinking_timeout_id);
     }
-
-  /* start with a blinking or make sure the button is normal */
-  xfce_arrow_button_blinking_timeout (button);
 }
 
 
