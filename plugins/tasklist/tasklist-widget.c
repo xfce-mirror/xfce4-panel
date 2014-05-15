@@ -1235,6 +1235,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
   if (!tasklist->window_scrolling)
     return TRUE;
 
+  /* get the current active button */
   for (li = tasklist->windows; li != NULL; li = li->next)
     {
       child = li->data;
@@ -1258,6 +1259,9 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
               && GTK_WIDGET_VISIBLE (child->button))
             break;
         }
+
+      /* wrap if the first button is reached */
+      lnew = lnew ? lnew : g_list_last (li);
       break;
 
     case GDK_SCROLL_DOWN:
@@ -1269,6 +1273,9 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
               && GTK_WIDGET_VISIBLE (child->button))
             break;
         }
+
+      /* wrap if the last button is reached */
+      lnew = lnew ? lnew : g_list_first (li);
       break;
 
     case GDK_SCROLL_LEFT:
@@ -1280,7 +1287,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
       break;
     }
 
-  if (lnew != NULL)
+  if (G_LIKELY(lnew != NULL))
     xfce_tasklist_button_activate (lnew->data, event->time);
 
   return TRUE;
