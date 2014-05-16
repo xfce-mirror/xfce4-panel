@@ -2806,9 +2806,7 @@ xfce_tasklist_button_button_release_event (GtkWidget         *button,
         {
           /* press the button */
           xfce_tasklist_button_activate (child, event->time);
-
-          /* if the window is still active, don't toggle the button */
-          return wnck_window_is_active (child->window);
+          return FALSE;
         }
       else if (event->button == 2)
         {
