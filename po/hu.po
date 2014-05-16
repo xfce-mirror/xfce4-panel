@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Nucleo <nucleo@indamail.hu>, 2013
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009-2010,2012
@@ -9,14 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"POT-Creation-Date: 2014-05-16 21:39+0100\n"
 "PO-Revision-Date: 2013-08-30 22:52+0000\n"
 "Last-Translator: Nucleo <nucleo@indamail.hu>\n"
-"Language-Team: Hungarian (http://www.transifex.com/projects/p/xfce/language/hu/)\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/xfce/language/"
+"hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -25,8 +26,7 @@ msgstr "Parancsikon létrehozása a panelen"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
+"Add a new launcher to the panel based on the information of this desktop file"
 msgstr "Új parancsikon panelhez adása ezen asztali fájl információi alapján"
 
 #: ../panel-preferences.desktop.in.h:1
@@ -40,78 +40,78 @@ msgid "Customize the panel"
 msgstr "A panel személyre szabása"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1029
-#: ../panel/panel-preferences-dialog.c:1099
+#: ../libxfce4panel/xfce-panel-plugin.c:1032
+#: ../panel/panel-preferences-dialog.c:1123
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Biztosan eltávolítja a következőt: „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
-#: ../panel/panel-preferences-dialog.c:1102
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1126
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ha eltávolítja az elemet a panelről, az véglegesen elvész."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1194
+#: ../libxfce4panel/xfce-panel-plugin.c:1197
 msgid "_Move"
 msgstr "Át_helyezés"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
 msgstr "_Panel"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "Új _elemek hozzáadása…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "_Panel beállításai…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "_Kijelentkezés"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "A „Panel beállításai” ablak megjelenítése"
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
 msgstr "PANELSZÁM"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
 msgstr "Az „Új elemek hozzáadása” ablak megjelenítése"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Save the panel configuration"
 msgstr "Panel beállításainak mentése"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
 msgstr "Új bővítmény hozzáadása a panelhez"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "PLUGIN-NAME"
 msgstr "BŐVÍTMÉNYNÉV"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Restart the running panel instance"
 msgstr "A panel futó példányának újraindítása"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Quit the running panel instance"
 msgstr "Kilépés a panel futó példányából"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
 msgstr "Ne várjon az ablakkezelőre indításkor"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -119,68 +119,70 @@ msgid "Print version information and exit"
 msgstr "Verzióinformációk kiírása és kilépés"
 
 #. parse context options
-#: ../panel/main.c:235
+#: ../panel/main.c:236
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMENTUMOK…]"
 
-#: ../panel/main.c:242
+#: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Segítségért adja ki a „%s --help” parancsot."
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
 msgstr "Az Xfce fejlesztőcsapata. Minden jog fenntartva."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "A hibákat ide jelentse: <%s>."
 
-#: ../panel/main.c:320
+#: ../panel/main.c:321
 msgid "There is already a running instance"
 msgstr "Már fut egy példány"
 
 #. spawn ourselfs again
-#: ../panel/main.c:362
+#: ../panel/main.c:366
 msgid "Restarting..."
 msgstr "Újraindítás…"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
 msgstr "A beállítóablak megjelenítése meghiúsult"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
 msgstr "Az „Új elemek hozzáadása” ablak megjelenítése meghiúsult"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
 msgstr "A panel beállításainak mentése meghiúsult"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
 msgstr "A bővítmény panelhez adása meghiúsult"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:389
 msgid "Failed to restart the panel"
 msgstr "A panel újraindítása meghiúsult"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:391
 msgid "Failed to quit the panel"
 msgstr "A panelből való kilépés meghiúsult"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
 msgstr "A D-Bus üzenet elküldése meghiúsult"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on"
-" logout, so the panel is automatically started the next time you login."
-msgstr "El kívánja indítani a panelt? Ebben az esetben mentse a munkamenetet kilépéskor, így a panel a következő bejelentkezéskor automatikusan elindul."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
+msgstr ""
+"El kívánja indítani a panelt? Ebben az esetben mentse a munkamenetet "
+"kilépéskor, így a panel a következő bejelentkezéskor automatikusan elindul."
 
-#: ../panel/main.c:403 ../panel/main.c:417
+#: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Nem található a(z) %s futó példánya"
@@ -197,7 +199,9 @@ msgstr "_Parancsikon létrehozása"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Ez egy új indítóbővítményt hoz létre a panelen, a ráejtett fájlokat menüelemekként pedig veszi fel."
+msgstr ""
+"Ez egy új indítóbővítményt hoz létre a panelen, a ráejtett fájlokat "
+"menüelemekként pedig veszi fel."
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -210,7 +214,9 @@ msgstr[1] "Új parancsikon létrehozása %d asztali fájlból"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Az X-et munkamenet-kezelő nélkül indította. A Kilépés gombra kattintás bezárja az X kiszolgálót."
+msgstr ""
+"Az X-et munkamenet-kezelő nélkül indította. A Kilépés gombra kattintás "
+"bezárja az X kiszolgálót."
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
@@ -224,14 +230,17 @@ msgstr "A parancs („%s”) indítása meghiúsult"
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Érvénytelen bővítményesemény-szintaxis került megadásra. Használja a BŐVÍTMÉNYNÉV:NÉV[:TÍPUS:ÉRTÉK] alakot."
+msgstr ""
+"Érvénytelen bővítményesemény-szintaxis került megadásra. Használja a "
+"BŐVÍTMÉNYNÉV:NÉV[:TÍPUS:ÉRTÉK] alakot."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
-"uint."
-msgstr "Érvénytelen tipptípus: „%s”. Az érvényes típusok: bool, double, int, string és uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+"Érvénytelen tipptípus: „%s”. Az érvényes típusok: bool, double, int, string "
+"és uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -271,7 +280,9 @@ msgstr "%d. panel"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Mivel a panel kioszk módban fut, normál felhasználóként nem módosíthatja a panel beállításait"
+msgstr ""
+"Mivel a panel kioszk módban fut, normál felhasználóként nem módosíthatja a "
+"panel beállításait"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -305,7 +316,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "A bővítmény többször is újraindult az elmúlt %d másodpercben. A Végrehajtás gomb megnyomásával a panel megpróbálja újraindítani a bővítményt, egyébként az véglegesen eltávolításra kerül a panelről."
+msgstr ""
+"A bővítmény többször is újraindult az elmúlt %d másodpercben. A Végrehajtás "
+"gomb megnyomásával a panel megpróbálja újraindítani a bővítményt, egyébként "
+"az véglegesen eltávolításra kerül a panelről."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -334,23 +348,25 @@ msgstr "Biztos, hogy el kívánja távolítani a(z) %d. panelt?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:965
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(külső)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Belső név: %s-%d\nPID: %d"
+msgstr ""
+"Belső név: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:975
+#: ../panel/panel-preferences-dialog.c:982
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Belső név: %s-%d"
@@ -420,7 +436,9 @@ msgstr "A panel _automatikus megjelenítése és elrejtése"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "A panel elrejtése, ha a mutató nincs fölötte. Ez csak akkor működik, ha a panel a képernyő széléhez csatlakozik."
+msgstr ""
+"A panel elrejtése, ha a mutató nincs fölötte. Ez csak akkor működik, ha a "
+"panel a képernyő széléhez csatlakozik."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -430,7 +448,9 @@ msgstr "Ne _foglaljon helyet a szegélyeken"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "A teljes méretű ablakok lefedik-e a panel mögötti területet. Ez csak akkor működik, ha a panel a képernyő széléhez csatlakozik."
+msgstr ""
+"A teljes méretű ablakok lefedik-e a panel mögötti területet. Ez csak akkor "
+"működik, ha a panel a képernyő széléhez csatlakozik."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -459,10 +479,11 @@ msgstr "A hossz a_utomatikus növelése"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "A panel méretének automatikus növelése, ha a bővítmények több helyet igényelnek"
+msgstr ""
+"A panel méretének automatikus növelése, ha a bővítmények több helyet "
+"igényelnek"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "Méretek"
@@ -484,7 +505,8 @@ msgstr "_Alfa:"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "A panel hátterének alfa értéke 0 (átlátszó) és 100 (átlátszatlan) között."
+msgstr ""
+"A panel hátterének alfa értéke 0 (átlátszó) és 100 (átlátszatlan) között."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -518,15 +540,19 @@ msgstr "_Elhagyás:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully"
-" transparent and 100 fully opaque."
-msgstr "Átlátszóság, amikor a mutató a panel fölött áll, 0 (átlátszó) és 100 (átlátszatlan) között."
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
+msgstr ""
+"Átlátszóság, amikor a mutató a panel fölött áll, 0 (átlátszó) és 100 "
+"(átlátszatlan) között."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Átlátszóság, amikor a mutató nem a panel fölött áll, 0 (átlátszó) és 100 (átlátszatlan) között."
+msgstr ""
+"Átlátszóság, amikor a mutató nem a panel fölött áll, 0 (átlátszó) és 100 "
+"(átlátszatlan) között."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -535,7 +561,9 @@ msgstr "Átlátszóság"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Kompozitálás engedélyezése az ablakkezelőben a panel átlátszatlansági beállításaihoz."
+msgstr ""
+"Kompozitálás engedélyezése az ablakkezelőben a panel átlátszatlansági "
+"beállításaihoz."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -608,7 +636,9 @@ msgstr "Üdvözöljük a panel első indításakor"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "Mivel a panel a beállításait immár új rendszerben tárolja, friss kezdőbeállításokat kell betöltenie."
+msgstr ""
+"Mivel a panel a beállításait immár új rendszerben tárolja, friss "
+"kezdőbeállításokat kell betöltenie."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -659,7 +689,7 @@ msgid "Panel configuration has been updated."
 msgstr "A panel beállításai frissítésre kerültek."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Műveletgombok"
 
@@ -678,7 +708,9 @@ msgstr "M_egerősítési ablak megjelenítése"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Megerősítési ablak megjelenítése 30 másodperces időkorláttal egyes műveletekhez."
+msgstr ""
+"Megerősítési ablak megjelenítése 30 másodperces időkorláttal egyes "
+"műveletekhez."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -805,29 +837,27 @@ msgstr "Biztos, hogy le kívánja állítani a számítógépet?"
 msgid "Turning off computer in %d seconds."
 msgstr "A számítógép kikapcsolása %d másodperc múlva."
 
-#: ../plugins/actions/actions.c:620
+#: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Elválasztó"
 
-#: ../plugins/actions/actions.c:975
+#: ../plugins/actions/actions.c:976
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "A művelet („%s”) futtatása meghiúsult"
 
-#: ../plugins/actions/actions.c:1142
+#: ../plugins/actions/actions.c:1147
 msgid "John Doe"
 msgstr "Példa Béla"
 
-#: ../plugins/actions/actions.desktop.in.h:2
+#: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
 msgstr "Kijelentkezés, zárolás vagy más rendszerműveletek"
 
-#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 msgid "Applications Menu"
 msgstr "Alkalmazások menü"
 
@@ -839,7 +869,9 @@ msgstr "Általános _alkalmazásnevek megjelenítése"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Az általános alkalmazásnév, például a „Thunar” helyett a „Fájlkezelő” megjelenítése a menüben"
+msgstr ""
+"Az általános alkalmazásnév, például a „Thunar” helyett a „Fájlkezelő” "
+"megjelenítése a menüben"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -897,20 +929,27 @@ msgstr "Válasszon menüfájlt"
 msgid "Menu File"
 msgstr "Menüfájl"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:541
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#, fuzzy
+msgid "Applications"
+msgstr "Alkalmazások menü"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:644
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Válasszon ikont"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:582
+#: ../plugins/applicationsmenu/applicationsmenu.c:685
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "A parancs („%s”) végrehajtása meghiúsult."
 
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "A telepített alkalmazásokat kategorizálva tartalmazó menü megjelenítése"
+msgstr ""
+"A telepített alkalmazásokat kategorizálva tartalmazó menü megjelenítése"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -955,7 +994,7 @@ msgid "Custom Format"
 msgstr "Egyéni formátum"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#: ../plugins/clock/clock.desktop.in.h:1
+#: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Óra"
 
@@ -963,7 +1002,9 @@ msgstr "Óra"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Az időzóna neve, mely megegyezik a rendszer időzóna adatbázisával. Hagyja üresen a helyi időhöz való visszatéréshez."
+msgstr ""
+"Az időzóna neve, mely megegyezik a rendszer időzóna adatbázisával. Hagyja "
+"üresen a helyi időhöz való visszatéréshez."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -989,10 +1030,13 @@ msgstr "B_uboréksúgó formátuma:"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "A formátum leírja a panelbe beszúrandó dátum és idő részeket. A %Y például az évet, a %m a hónapot, a %d pedig a napot jelöli. További információkért lásd a date segédprogram kézikönyvoldalát."
+msgstr ""
+"A formátum leírja a panelbe beszúrandó dátum és idő részeket. A %Y például "
+"az évet, a %m a hónapot, a %d pedig a napot jelöli. További információkért "
+"lásd a date segédprogram kézikönyvoldalát."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1018,8 +1062,7 @@ msgstr "DE/D_U megjelenítése"
 msgid "F_ormat:"
 msgstr "F_ormátum:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "_Pontosság:"
@@ -1283,12 +1326,12 @@ msgstr "tizenegy"
 msgid "twelve"
 msgstr "tizenkettő"
 
-#: ../plugins/clock/clock.desktop.in.h:2
+#: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Mennyi az idő?"
 
 #: ../plugins/directorymenu/directorymenu.c:246
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Könyvtár menü"
@@ -1326,7 +1369,7 @@ msgstr "Mappa megnyitása"
 msgid "Open in Terminal"
 msgstr "Terminálban fusson"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "A könyvtárfa megjelenítése menüben"
 
@@ -1343,7 +1386,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Adja meg a könyvtárban látható fájlok névmintáinak listáját. Ha több mintát ad meg, akkor a lista elemeit pontosvesszővel válassza el (például:  *.txt;*.doc)."
+msgstr ""
+"Adja meg a könyvtárban látható fájlok névmintáinak listáját. Ha több mintát "
+"ad meg, akkor a lista elemeit pontosvesszővel válassza el (például:  *.txt;*."
+"doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1433,7 +1479,7 @@ msgid "New _Link"
 msgstr "Új _hivatkozás"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
-#: ../plugins/launcher/launcher.desktop.in.h:1
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Indító"
 
@@ -1455,9 +1501,10 @@ msgstr "B_uboréksúgók tiltása"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
-msgstr "A buboréksúgók letiltása a panel gombjaira vagy menüelemekre mutatáskor."
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"A buboréksúgók letiltása a panel gombjaira vagy menüelemekre mutatáskor."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1479,15 +1526,15 @@ msgstr "_Nyílgomb pozíciója:"
 msgid "Advanced"
 msgstr "Speciális"
 
-#: ../plugins/launcher/launcher.desktop.in.h:2
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Programindító elhagyható menüvel"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "M_unkaterület beállításai…"
 
-#: ../plugins/pager/pager.c:461
+#: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
 msgstr "A munkaterület beállításai nem nyithatók meg"
 
@@ -1497,7 +1544,7 @@ msgid "Workspace %d"
 msgstr "%d. munkaterület"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "Munkaterület-váltó"
 
@@ -1513,7 +1560,9 @@ msgstr "Mi_niatűr nézet megjelenítése"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "A munkaterület miniatűr nézetének megjelenítése a látható ablakoknak megfelelő négyzetekkel"
+msgstr ""
+"A munkaterület miniatűr nézetének megjelenítése a látható ablakoknak "
+"megfelelő négyzetekkel"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1524,7 +1573,7 @@ msgstr "Munkaterületek közti _váltás egérgörgővel"
 msgid "Behaviour"
 msgstr "Viselkedés"
 
-#: ../plugins/pager/pager.desktop.in.h:2
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
 msgstr "Váltás virtuális asztalok között"
 
@@ -1544,7 +1593,7 @@ msgstr "Fogantyú"
 msgid "Dots"
 msgstr "Pontok"
 
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "Elválasztó vagy hely beszúrása a panelelemek közé"
 
@@ -1557,11 +1606,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "Minden ablak minimalizálása, és az asztal megjelenítése"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Asztal megjelenítése"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "Minden ablak elrejtése, és az asztal megjelenítése"
 
@@ -1574,7 +1623,9 @@ msgstr "Az értesítési terület nem indítható el"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Valószínűleg egy másik felületi elem átvette az értesítési terület funkcióját. Ez a terület nem kerül felhasználásra."
+msgstr ""
+"Valószínűleg egy másik felületi elem átvette az értesítési terület "
+"funkcióját. Ez a terület nem kerül felhasználásra."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1585,7 +1636,7 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Biztos, hogy törölni akarja az ismert alkalmazások listáját?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
 msgstr "Értesítési terület"
 
@@ -1610,7 +1661,7 @@ msgstr "Ismert alkalmazások"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "A kezelőkiválasztás megszerzése meghiúsult a(z) %d. képernyőhöz"
 
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "Terület, ahol az értesítési ikonok megjelennek"
 
@@ -1647,7 +1698,7 @@ msgid "None, allow drag-and-drop"
 msgstr "Nincs, fogd és vidd engedélyezése"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "Ablakgombok"
 
@@ -1711,27 +1762,27 @@ msgstr "Ablak bezárása"
 msgid "Minimize Window"
 msgstr "Ablak minimalizálása"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Mi_nimize All"
 msgstr "Összes mi_nimalizálása"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "Un_minimize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3323
 msgid "Ma_ximize All"
 msgstr "Összes ma_ximalizálás"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3332
 msgid "_Unmaximize All"
 msgstr "Összes _eredeti méretű"
 
-#: ../plugins/tasklist/tasklist-widget.c:3327
+#: ../plugins/tasklist/tasklist-widget.c:3342
 msgid "_Close All"
 msgstr "Összes _bezárása"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr "Átváltás a nyitott ablakok között, gombok használatával"
 
@@ -1762,7 +1813,7 @@ msgid "Remove Workspace %d"
 msgstr "%d. munkaterület eltávolítása"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
 msgstr "Ablakmenü"
 
@@ -1794,6 +1845,6 @@ msgstr "Ikon"
 msgid "Arrow"
 msgstr "Nyíl"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "Átváltás a nyitott ablakok között, menü használatával"

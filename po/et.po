@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Allar Kiristaja <aquastus@gmail.com>, 2011
 # Kristjan Siimson <kristjan.siimson@gmail.com>, 2009
@@ -11,14 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"POT-Creation-Date: 2014-05-16 21:39+0100\n"
 "PO-Revision-Date: 2013-11-19 12:46+0000\n"
 "Last-Translator: Xfce <transifex@xfce.org>\n"
-"Language-Team: Estonian (http://www.transifex.com/projects/p/xfce/language/et/)\n"
+"Language-Team: Estonian (http://www.transifex.com/projects/p/xfce/language/"
+"et/)\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -27,8 +28,7 @@ msgstr "Loo ribale käivitaja"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
+"Add a new launcher to the panel based on the information of this desktop file"
 msgstr "Lisa ribale uus käivitaja selle töölaua faili teabe põhjal"
 
 #: ../panel-preferences.desktop.in.h:1
@@ -42,78 +42,78 @@ msgid "Customize the panel"
 msgstr "Kohanda riba"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1029
-#: ../panel/panel-preferences-dialog.c:1099
+#: ../libxfce4panel/xfce-panel-plugin.c:1032
+#: ../panel/panel-preferences-dialog.c:1123
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Kas soovite kindlalt eemaldada „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
-#: ../panel/panel-preferences-dialog.c:1102
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1126
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Kui eemaldate eseme ribalt, kaob see jäädavalt."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1194
+#: ../libxfce4panel/xfce-panel-plugin.c:1197
 msgid "_Move"
 msgstr "L_iiguta"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
 msgstr "_Riba"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "Lisa _uusi esemeid..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "Riba _sätted"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "Logi _välja"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Näita „riba sätted” dialoogi"
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
 msgstr "RIBA-ARV"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
 msgstr "Näita „Lisa uusi esemeid” dialoogi"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Save the panel configuration"
 msgstr "Salvesta riba seadistused"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
 msgstr "Lisa ribale uus plugin"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "PLUGIN-NAME"
 msgstr "PLUGINA-NIMI"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Restart the running panel instance"
 msgstr "Taaskäivita jooksev riba instants"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Quit the running panel instance"
 msgstr "Lõpeta jooksev riba instants"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
 msgstr "Ära oota käivitamisel aknahaldurit"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -121,68 +121,70 @@ msgid "Print version information and exit"
 msgstr "Trüki versioon ja välju"
 
 #. parse context options
-#: ../panel/main.c:235
+#: ../panel/main.c:236
 msgid "[ARGUMENTS...]"
 msgstr ""
 
-#: ../panel/main.c:242
+#: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Trüki „%s --help” kasutusjuhisteks."
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce arendusmeeskond. Kõik õigused kaitstud."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Palun teata vigadest <%s>."
 
-#: ../panel/main.c:320
+#: ../panel/main.c:321
 msgid "There is already a running instance"
 msgstr ""
 
 #. spawn ourselfs again
-#: ../panel/main.c:362
+#: ../panel/main.c:366
 msgid "Restarting..."
 msgstr "Taaskäivitan..."
 
-#: ../panel/main.c:377
+#: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
 msgstr "Sätete dialoogi näitamine ebaõnnestus"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
 msgstr "Uute esemete lisamise dialoogi näitamine ebaõnnestus"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
 msgstr "Riba sätete salvestamine ebaõnnestus"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
 msgstr "Plugina lisamine ribale ebaõnnestus"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:389
 msgid "Failed to restart the panel"
 msgstr "Riba taaskäivitamine ebaõnnestus"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:391
 msgid "Failed to quit the panel"
 msgstr "Riba lõpetamine ebaõnnestus"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus sõnumi saatmine ebaõnnestus"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on"
-" logout, so the panel is automatically started the next time you login."
-msgstr "Kas soovite käivitada riba? Kui nii, siis salvestage kindlalt sessioon välja logimisel, et riba käivituks automaatselt järgmisel sisse logimisel."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
+msgstr ""
+"Kas soovite käivitada riba? Kui nii, siis salvestage kindlalt sessioon välja "
+"logimisel, et riba käivituks automaatselt järgmisel sisse logimisel."
 
-#: ../panel/main.c:403 ../panel/main.c:417
+#: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
@@ -212,7 +214,8 @@ msgstr[1] ""
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Käivitasite X-i sessioonihaldurita. Klõpsates „Lõpeta” sulgete X serveri."
+msgstr ""
+"Käivitasite X-i sessioonihaldurita. Klõpsates „Lõpeta” sulgete X serveri."
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
@@ -231,8 +234,7 @@ msgstr ""
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
-"uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
 msgstr ""
 
 #: ../panel/panel-dialogs.c:65
@@ -273,7 +275,9 @@ msgstr "%d. ääreriba"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Tavalise kasutajana ei ole teil õigust teha muudatusi riba sätetes, kuna riba jookseb kioskiviisil."
+msgstr ""
+"Tavalise kasutajana ei ole teil õigust teha muudatusi riba sätetes, kuna "
+"riba jookseb kioskiviisil."
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -299,7 +303,8 @@ msgstr "Sisesta siia otsisõna"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Plugin \\„%s\\” ootamatult lahkus ribalt, kas soovite selle taaskäivitada?"
+msgstr ""
+"Plugin \\„%s\\” ootamatult lahkus ribalt, kas soovite selle taaskäivitada?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -307,7 +312,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Plugin taaskäivitus mitu korda viimase %d sekundi jooksul. Kui vajutate „Teosta”, üritab riba pluginat taaskäivitada, vastasel juhul eemaldatakse see ribalt jäädavalt."
+msgstr ""
+"Plugin taaskäivitus mitu korda viimase %d sekundi jooksul. Kui vajutate "
+"„Teosta”, üritab riba pluginat taaskäivitada, vastasel juhul eemaldatakse "
+"see ribalt jäädavalt."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -336,23 +344,25 @@ msgstr "Kas soovite kindlalt eemaldada riba %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:965
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Sisemine nimi: %s-%d\nPID: %d"
+msgstr ""
+"Sisemine nimi: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:975
+#: ../panel/panel-preferences-dialog.c:982
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Sisemine nimetus: %s-%d"
@@ -422,7 +432,9 @@ msgstr "Näita ja _peida riba automaatselt"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "Vali see, et peita riba kui hiireosuti ei ole selle kohal. See töötab ainult siis, kui riba on kinnitatud ekraani äärde."
+msgstr ""
+"Vali see, et peita riba kui hiireosuti ei ole selle kohal. See töötab ainult "
+"siis, kui riba on kinnitatud ekraani äärde."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -432,7 +444,9 @@ msgstr "Ära _reserveeri äärtes ruumi"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Vali see, kui tahad, et suurendatud aknad kataksid riba taha jääva ala. See töötab ainult siis, kui riba on kinnitatud ekraani äärde."
+msgstr ""
+"Vali see, kui tahad, et suurendatud aknad kataksid riba taha jääva ala. See "
+"töötab ainult siis, kui riba on kinnitatud ekraani äärde."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -463,8 +477,7 @@ msgid ""
 "plugins request more space."
 msgstr "Vali see, et riba pikeneks automaatselt kui plugin nõuab rohkem ruumi."
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "Mõõtmed"
@@ -486,7 +499,9 @@ msgstr "_Alfa"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "Riba tausta alfa väärtus, 0 on täiesti läbipaistev ja 100 täiesti läbipaistmatu."
+msgstr ""
+"Riba tausta alfa väärtus, 0 on täiesti läbipaistev ja 100 täiesti "
+"läbipaistmatu."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -520,15 +535,19 @@ msgstr "_Jäta:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully"
-" transparent and 100 fully opaque."
-msgstr "Läbipaistvus, kui hiireosuti on paneeli kohal, 0 on täiesti läbipaistev ja 100 täiesti läbipaistmatu."
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
+msgstr ""
+"Läbipaistvus, kui hiireosuti on paneeli kohal, 0 on täiesti läbipaistev ja "
+"100 täiesti läbipaistmatu."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Läbipaistvus, kui hiireosuti ei ole paneeli kohal, 0 on täiesti läbipaistev ja 100 täiesti läbipaistmatu."
+msgstr ""
+"Läbipaistvus, kui hiireosuti ei ole paneeli kohal, 0 on täiesti läbipaistev "
+"ja 100 täiesti läbipaistmatu."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -610,7 +629,9 @@ msgstr "Tere tulemast riba esmakäivitusele"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "Riba peab laadima värsked algsätted, kuna liikus sätete hoidmiseks uuele süsteemile."
+msgstr ""
+"Riba peab laadima värsked algsätted, kuna liikus sätete hoidmiseks uuele "
+"süsteemile."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -661,7 +682,7 @@ msgid "Panel configuration has been updated."
 msgstr "Riba sätteid on uuendatud"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Toimingute nupud"
 
@@ -807,29 +828,27 @@ msgstr "Kas soovite kindlalt välja lülitada?"
 msgid "Turning off computer in %d seconds."
 msgstr "Lülitan %d sekundi pärast välja."
 
-#: ../plugins/actions/actions.c:620
+#: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Eraldaja"
 
-#: ../plugins/actions/actions.c:975
+#: ../plugins/actions/actions.c:976
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Ebaõnnestus käivitada \\„%s\\”"
 
-#: ../plugins/actions/actions.c:1142
+#: ../plugins/actions/actions.c:1147
 msgid "John Doe"
 msgstr ""
 
-#: ../plugins/actions/actions.desktop.in.h:2
+#: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
 msgstr "Logi välja, lukusta või muud süsteemi tegevused"
 
-#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 msgid "Applications Menu"
 msgstr "Rakenduste menüü"
 
@@ -841,7 +860,9 @@ msgstr "Näita üldisi rakenduste nimesid"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Vali see, et näidata menüüs üldist rakenduse nime, näiteks\\„Thunar\\” asemel \\„Failihaldur\\”"
+msgstr ""
+"Vali see, et näidata menüüs üldist rakenduse nime, näiteks\\„Thunar\\” "
+"asemel \\„Failihaldur\\”"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -899,18 +920,24 @@ msgstr "Vali menüüfail"
 msgid "Menu File"
 msgstr "Menüüfail"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:541
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#, fuzzy
+msgid "Applications"
+msgstr "Rakenduste menüü"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:644
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Vali ikoon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:582
+#: ../plugins/applicationsmenu/applicationsmenu.c:685
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Käsu \\„%s\\” täitmine ebaõnnestus."
 
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
 msgstr "Näita menüüd, mis sisaldab paigaldatud rakenduste kategooriaid."
 
@@ -957,7 +984,7 @@ msgid "Custom Format"
 msgstr "Kohandatud vorm"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#: ../plugins/clock/clock.desktop.in.h:1
+#: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Kell"
 
@@ -991,8 +1018,8 @@ msgstr "Näpunäi_te formaat"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
 msgstr ""
 
@@ -1020,8 +1047,7 @@ msgstr "_Näita AM/PM"
 msgid "F_ormat:"
 msgstr "_Vorm"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "Häg_usus"
@@ -1285,12 +1311,12 @@ msgstr "üksteist"
 msgid "twelve"
 msgstr "kaksteist"
 
-#: ../plugins/clock/clock.desktop.in.h:2
+#: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Mis kell on?"
 
 #: ../plugins/directorymenu/directorymenu.c:246
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Kataloogi menüü"
@@ -1328,7 +1354,7 @@ msgstr "Ava kaust"
 msgid "Open in Terminal"
 msgstr "Ava terminalis"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr ""
 
@@ -1435,7 +1461,7 @@ msgid "New _Link"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
-#: ../plugins/launcher/launcher.desktop.in.h:1
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Käivitaja"
 
@@ -1457,9 +1483,11 @@ msgstr "Lülita _näpunäited välja"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
-msgstr "Vali see, et lülitada välja näpunäited, kui liigud üle riba nupu või menüü esemete."
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"Vali see, et lülitada välja näpunäited, kui liigud üle riba nupu või menüü "
+"esemete."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1481,15 +1509,15 @@ msgstr "_Noolenupu asukoht"
 msgid "Advanced"
 msgstr "Edasijõudnud"
 
-#: ../plugins/launcher/launcher.desktop.in.h:2
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Rakenduse käivitaja valikulise menüüga"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "Tööala _sätted"
 
-#: ../plugins/pager/pager.c:461
+#: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
 msgstr "Ei saa avada tööala sätteid"
 
@@ -1499,7 +1527,7 @@ msgid "Workspace %d"
 msgstr "%d. tööala"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "Tööala vahetaja"
 
@@ -1515,7 +1543,8 @@ msgstr "Näita vähe_ndatud vaadet"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Näita vähendatud vaadet tööalast. Nähtavaid aknaid kujutavad ristkülikud."
+msgstr ""
+"Näita vähendatud vaadet tööalast. Nähtavaid aknaid kujutavad ristkülikud."
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1526,7 +1555,7 @@ msgstr "Vaheta tööalasid hiire _kerimisrulliku abil"
 msgid "Behaviour"
 msgstr "Käitumine"
 
-#: ../plugins/pager/pager.desktop.in.h:2
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
 msgstr "Vaheta virtuaalseid töölaudasid"
 
@@ -1546,7 +1575,7 @@ msgstr "Sang:"
 msgid "Dots"
 msgstr "Punktid"
 
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "Lisab ribal paiknevate esemete vahele tühja ruumi või eraldaja"
 
@@ -1559,11 +1588,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "Vähenda kõik avatud aknad ja näita töölauda"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Näita töölauda"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "Peida kõik aknad ja näita töölauda"
 
@@ -1576,7 +1605,9 @@ msgstr "Ei saa käivitada teateala"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Tõenäoliselt võttis mõni teine vidin üle teateala ülesande. Ala jääb kasutamata."
+msgstr ""
+"Tõenäoliselt võttis mõni teine vidin üle teateala ülesande. Ala jääb "
+"kasutamata."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1584,10 +1615,11 @@ msgstr "Teateala kaotas valiku"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Kas olete kindel, et soovite tühjendada teadaolevate rakenduste loendit?"
+msgstr ""
+"Kas olete kindel, et soovite tühjendada teadaolevate rakenduste loendit?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
 msgstr "Teateala"
 
@@ -1612,7 +1644,7 @@ msgstr "Tuntud rakendus"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Ekraanile %d halduri valiku hankimine ebaõnnestus"
 
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "Ala, kuhu ilmuvad teateikoonid"
 
@@ -1649,7 +1681,7 @@ msgid "None, allow drag-and-drop"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "Akende nupud"
 
@@ -1713,27 +1745,27 @@ msgstr ""
 msgid "Minimize Window"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Mi_nimize All"
 msgstr "_Vähenda kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "Un_minimize All"
 msgstr "_Taasta kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3323
 msgid "Ma_ximize All"
 msgstr "_Suurenda kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3332
 msgid "_Unmaximize All"
 msgstr "T_aasta kõik"
 
-#: ../plugins/tasklist/tasklist-widget.c:3327
+#: ../plugins/tasklist/tasklist-widget.c:3342
 msgid "_Close All"
 msgstr "S_ulge kõik"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr "Vaheta avatud aknaid nuppude abil"
 
@@ -1764,7 +1796,7 @@ msgid "Remove Workspace %d"
 msgstr "Eemalda tööala %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
 msgstr "Akende menüü"
 
@@ -1796,6 +1828,6 @@ msgstr "Ikoon"
 msgid "Arrow"
 msgstr "Nool"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "Vaheta avatud aknaid menüü abil"

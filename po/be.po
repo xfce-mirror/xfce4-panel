@@ -2,113 +2,113 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Ales Nyakhaychyk <nab@mail.by>, 2004.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 14:24+0000\n"
+"POT-Creation-Date: 2014-05-16 21:39+0100\n"
 "PO-Revision-Date: 2008-11-09 11:38+0200\n"
 "Last-Translator: Alexander Nyakhaychyk <nyakhaychyk@gmail.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
+"Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: be\n"
 "X-Rosetta-Export-Date: 2007-01-03 10:28+0000\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
+msgid "Create Launcher on the panel"
+msgstr "Стварыць прыстасаванне для запуска на панэлі"
+
+#: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop file"
 msgstr "Дадаць новы элемент для запуска"
 
-#: ../panel-desktop-handler.desktop.in.h:2
-msgid "Create Launcher on the panel"
-msgstr "Стварыць прыстасаванне для запуска на панэлі"
-
 #: ../panel-preferences.desktop.in.h:1
-msgid "Customize the panel"
-msgstr "Наладзіць панэль"
-
-#: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:29 ../panel/panel-window.c:2353
+#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Панэль"
 
+#: ../panel-preferences.desktop.in.h:2
+msgid "Customize the panel"
+msgstr "Наладзіць панэль"
+
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1099
+#: ../libxfce4panel/xfce-panel-plugin.c:1032
+#: ../panel/panel-preferences-dialog.c:1123
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Вы насамрэч жадаеце выдаліць \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1102
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1126
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Калі вы выдаліць гэта з панэлі, то гэта будзе назаўжды."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1202
+#: ../libxfce4panel/xfce-panel-plugin.c:1197
 msgid "_Move"
 msgstr "Перамясціць"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1236
+#: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
 msgstr "Панэль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "Дадаць новы элемэнт"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "Наладкі панэлі"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr ""
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Паказаць акно \"Наладкі панэлі\""
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
 msgstr ""
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
 msgstr "Дадаць новы элемэнт"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Save the panel configuration"
 msgstr "Захаваць наладкі"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
 msgstr "Дадаць новы модуль на панэль"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "PLUGIN-NAME"
 msgstr ""
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Restart the running panel instance"
 msgstr "Перазапуск панэлі"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Quit the running panel instance"
 msgstr "Зачыніць запушчаную панэль"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
 msgstr "Не чакаць Кіраўнік Вокнаў пад час запуска"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -116,106 +116,106 @@ msgid "Print version information and exit"
 msgstr "Надрукаваць інфармацыю аб версіі і выйсці"
 
 #. parse context options
-#: ../panel/main.c:235
+#: ../panel/main.c:236
 msgid "[ARGUMENTS...]"
 msgstr ""
 
-#: ../panel/main.c:242
+#: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Скарыстайцеся \"%s --help\" каб ўбачыць падказку пра выкарыстанне"
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
 msgstr "Каманда распрацоўкі Xfce. Усе правы абаронены."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Калі ласка, паведамляйце пра памылкі на <%s>."
 
-#: ../panel/main.c:320
+#: ../panel/main.c:321
 msgid "There is already a running instance"
 msgstr "На гэтым экране ўжо прысутнічае гэтая панэль"
 
 #. spawn ourselfs again
-#: ../panel/main.c:362
+#: ../panel/main.c:366
 msgid "Restarting..."
 msgstr "Перазапуск…"
 
-#: ../panel/main.c:377
+#: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
 msgstr "Не атрымалася паказаць акно наладак"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
 msgstr "Не атрымалася паказаць акно дадавання новага элемента"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
 msgstr "Не траымалася захаваць наладкі панэлі"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
 msgstr "Не атрымалася дадаць модуль на панэль"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:389
 msgid "Failed to restart the panel"
 msgstr "Не атрымалася перазапусціць панэль"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:391
 msgid "Failed to quit the panel"
 msgstr "Не атрымалася зачыніць панэль"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
 msgstr "Не атрымалася паслаць паведамленне праз D-Bus"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on "
 "logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:403 ../panel/main.c:417
+#: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:212
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:953
+#: ../panel/panel-application.c:982
 #, fuzzy
 msgid "Create _Launcher"
 msgstr "Пра Панэль Xfce"
 
-#: ../panel/panel-application.c:954
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
 
-#: ../panel/panel-application.c:956
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../panel/panel-application.c:1690
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 
-#: ../panel/panel-application.c:1691
+#: ../panel/panel-application.c:1726
 #, fuzzy
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы насамрэч жадаеце выдаліць прастору %d?"
 
-#: ../panel/panel-application.c:1699
+#: ../panel/panel-application.c:1734
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Немагчыма запусьціць \"%s\""
@@ -252,7 +252,7 @@ msgid "translator-credits"
 msgstr ""
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
 #, fuzzy
 msgid "Add New Item"
 msgstr "Дадаць новы элемэнт"
@@ -336,14 +336,14 @@ msgstr "Вы насамрэч жадаеце выдаліць прастору %
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:965
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -352,237 +352,236 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:975
+#: ../panel/panel-preferences-dialog.c:982
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-msgid "A_utomatically increase the length"
-msgstr ""
+msgid "Horizontal"
+msgstr "Гарызантальная"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Vertical"
+msgstr "Вэртыкальная"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
+msgid "Deskbar"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:4
+msgid "None (use system style)"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Solid color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "Background image"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:8
 #, fuzzy
 msgid "Add a new panel"
 msgstr "Дадаць новыя элемэнты"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
-#, fuzzy
-msgid "Add new item to this panel"
-msgstr "Дадаць элемэнт на Панэль"
-
-#: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
-msgid "Appeara_nce"
-msgstr "Вонкавы выгляд"
-
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "Automatically show and _hide the panel"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "Background"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:8
-msgid "Background image"
-msgstr ""
-
 #: ../panel/panel-preferences-dialog.glade.h:9
-msgid "C_olor:"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:10
-msgid "D_isplay"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:11
-msgid "Deskbar"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:12
-msgid "Don't _reserve space on borders"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:13
-#: ../plugins/launcher/launcher-dialog.glade.h:11
-msgid "Edit the currently selected item"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:14
-msgid ""
-"Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:15
-#: ../plugins/actions/actions-dialog.glade.h:4
-#: ../plugins/launcher/launcher-dialog.glade.h:12
-msgid "General"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Horizontal"
-msgstr "Гарызантальная"
-
-#: ../panel/panel-preferences-dialog.glade.h:17
-#, fuzzy
-msgid "Ite_ms"
-msgstr "Дадаць элемэнт"
-
-#: ../panel/panel-preferences-dialog.glade.h:19
-#, no-c-format
-msgid "L_ength (%):"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:20
-msgid "M_ode:"
-msgstr ""
-
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "Measurements"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:23
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "Move currently selected item down by one row"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:24
-#: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid "Move currently selected item up by one row"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:25
-msgid "None (use system style)"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:26
-#, fuzzy
-msgid "Num_ber of rows:"
-msgstr "_Колькасьць радкоў:"
-
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "O_utput:"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:28
-msgid "Opacity"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:30
-msgid "Pick a Panel Color"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:31
-msgid "Remove currently selected item"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:33
-#, fuzzy
-msgid "Row _Size (pixels):"
-msgstr "Памер (піксэлі):"
-
-#: ../panel/panel-preferences-dialog.glade.h:34
-#, fuzzy
-msgid "Select A Background Image"
-msgstr "Вылучыце загад"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid ""
-"Select this option if you want maximized windows to cover the area behind "
-"the panel. This only works when the panel is attached to a screen edge."
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "M_ode:"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
+#: ../panel/panel-preferences-dialog.glade.h:11
+msgid "O_utput:"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:12
+#, fuzzy
+msgid "Span mo_nitors"
+msgstr "Зьвязаныя маніторы"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:14
+#, fuzzy
+msgid "_Lock panel"
+msgstr "За_мкнуць экран"
+
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Automatically show and _hide the panel"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:40
-msgid "Show about information of the currently selected item"
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "Don't _reserve space on borders"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "Solid color"
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../plugins/actions/actions-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+msgid "General"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+#, fuzzy
+msgid "Row _Size (pixels):"
+msgstr "Памер (піксэлі):"
+
+#: ../panel/panel-preferences-dialog.glade.h:23
+#, no-c-format
+msgid "L_ength (%):"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+#, fuzzy
+msgid "Num_ber of rows:"
+msgstr "_Колькасьць радкоў:"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "A_utomatically increase the length"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:28
+msgid "Measurements"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "D_isplay"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../plugins/separator/separator-dialog.glade.h:2
+msgid "_Style:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:31
+msgid "_Alpha:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid ""
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "C_olor:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:34
+msgid "Pick a Panel Color"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:35
+msgid "_File:"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:36
+#, fuzzy
+msgid "Select A Background Image"
+msgstr "Вылучыце загад"
+
+#: ../panel/panel-preferences-dialog.glade.h:37
+msgid "Background"
+msgstr ""
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:39
+msgid "_Enter:"
+msgstr ""
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:41
+#, fuzzy
+msgid "_Leave:"
+msgstr "_Назва"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
-#, fuzzy
-msgid "Span mo_nitors"
-msgstr "Зьвязаныя маніторы"
-
-#: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully "
 "transparent and 100 fully opaque."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:45
-msgid "Vertical"
-msgstr "Вэртыкальная"
-
-#: ../panel/panel-preferences-dialog.glade.h:46
-msgid "_Alpha:"
+#: ../panel/panel-preferences-dialog.glade.h:44
+msgid "Opacity"
 msgstr ""
 
-#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:45
+msgid ""
+"Enable compositing in the window manager for opacity settings in the panel."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:46
+#, fuzzy
+msgid "Appeara_nce"
+msgstr "Вонкавы выгляд"
+
+#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item up by one row"
+msgstr ""
+
 #: ../panel/panel-preferences-dialog.glade.h:48
-msgid "_Enter:"
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item down by one row"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:49
-msgid "_File:"
+#, fuzzy
+msgid "Add new item to this panel"
+msgstr "Дадаць элемэнт на Панэль"
+
+#: ../panel/panel-preferences-dialog.glade.h:50
+msgid "Remove currently selected item"
 msgstr ""
 
-#. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:51
-#, fuzzy
-msgid "_Leave:"
-msgstr "_Назва"
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "Edit the currently selected item"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:52
-#, fuzzy
-msgid "_Lock panel"
-msgstr "За_мкнуць экран"
+msgid "Show about information of the currently selected item"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:53
-#: ../plugins/separator/separator-dialog.glade.h:7
-msgid "_Style:"
-msgstr ""
+#, fuzzy
+msgid "Ite_ms"
+msgstr "Дадаць элемэнт"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
@@ -679,38 +678,37 @@ msgid "Panel configuration has been updated."
 msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#, fuzzy
-msgid "Action"
-msgstr "Кнопкі дзеяньняў"
-
-#: ../plugins/actions/actions-dialog.glade.h:2
-#: ../plugins/actions/actions.desktop.in.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Кнопкі дзеяньняў"
 
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:2
 #, fuzzy
 msgid "Appeara_nce:"
 msgstr "Вонкавы выгляд"
 
-#: ../plugins/actions/actions-dialog.glade.h:5
+#: ../plugins/actions/actions-dialog.glade.h:3
 #, fuzzy
 msgid "Invert buttons _orientation"
 msgstr "_Стрэлка"
 
-#: ../plugins/actions/actions-dialog.glade.h:6
-#, fuzzy
-msgid "Session Menu"
-msgstr "Сьпіс вокнаў"
+#: ../plugins/actions/actions-dialog.glade.h:4
+msgid "_Show confirmation dialog"
+msgstr ""
 
-#: ../plugins/actions/actions-dialog.glade.h:7
+#: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr ""
 
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
 msgstr ""
+
+#: ../plugins/actions/actions-dialog.glade.h:8
+#, fuzzy
+msgid "Action"
+msgstr "Кнопкі дзеяньняў"
 
 #: ../plugins/actions/actions-dialog.glade.h:9
 #, fuzzy
@@ -718,8 +716,9 @@ msgid "_Actions"
 msgstr "Дзяньні Панэлі"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
-msgid "_Show confirmation dialog"
-msgstr ""
+#, fuzzy
+msgid "Session Menu"
+msgstr "Сьпіс вокнаў"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -837,85 +836,85 @@ msgstr "Вы насамрэч жадаеце выдаліць прастору %
 msgid "Turning off computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:620
-#: ../plugins/separator/separator-dialog.glade.h:4
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/actions/actions.c:621
+#: ../plugins/separator/separator-dialog.glade.h:1
+#: ../plugins/separator/separator.desktop.in.in.h:1
 #, fuzzy
 msgid "Separator"
 msgstr "Стыль падзяляльніка"
 
-#: ../plugins/actions/actions.c:975
+#: ../plugins/actions/actions.c:976
 #, fuzzy, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Немагчыма запусьціць \"%s\""
 
-#: ../plugins/actions/actions.c:1142
+#: ../plugins/actions/actions.c:1147
 msgid "John Doe"
 msgstr ""
 
-#: ../plugins/actions/actions.desktop.in.h:2
+#: ../plugins/actions/actions.desktop.in.in.h:2
 #, fuzzy
 msgid "Log out, lock or other system actions"
 msgstr "Выйсьці альбо замкнуць экран"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/clock/clock-dialog.glade.h:3
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
-#: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-msgid "Appearance"
-msgstr "Вонкавы выгляд"
-
-#. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 #, fuzzy
 msgid "Applications Menu"
 msgstr "Схаваныя дастасаваньні"
 
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#, fuzzy
+msgid "Show generic application n_ames"
+msgstr "Схаваныя дастасаваньні"
+
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#, fuzzy
-msgid "Button _title:"
-msgstr "Дзяньні Панэлі"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-msgid "Ed_it Menu"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "Menu File"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Menu _file:"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-#, fuzzy
-msgid "Select A Menu File"
-msgstr "Вылучыце загад"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Show ic_ons in menu"
+msgstr ""
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#, fuzzy
+msgid "_Show button title"
+msgstr "Паказваць назвы дас_тасаваньняў"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#, fuzzy
+msgid "Button _title:"
+msgstr "Дзяньні Панэлі"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+#, fuzzy
+msgid "_Icon:"
+msgstr "_Значка"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
 msgstr ""
 
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Appearance"
+msgstr "Вонкавы выгляд"
+
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-#, fuzzy
-msgid "Show generic application n_ames"
-msgstr "Схаваныя дастасаваньні"
+msgid "Use the _default menu"
+msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Show ic_ons in menu"
+msgid "Ed_it Menu"
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
@@ -923,44 +922,37 @@ msgid "Use c_ustom menu file:"
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _default menu"
+msgid "Menu _file:"
 msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #, fuzzy
-msgid "_Icon:"
-msgstr "_Значка"
+msgid "Select A Menu File"
+msgstr "Вылучыце загад"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-#, fuzzy
-msgid "_Show button title"
-msgstr "Паказваць назвы дас_тасаваньняў"
+msgid "Menu File"
+msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:565
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#, fuzzy
+msgid "Applications"
+msgstr "Схаваныя дастасаваньні"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:644
 #: ../plugins/directorymenu/directorymenu.c:388
 #, fuzzy
 msgid "Select An Icon"
 msgstr "Вылучыце загад"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:603
-#: ../plugins/applicationsmenu/applicationsmenu.c:844
-#: ../plugins/launcher/launcher.c:2308
+#: ../plugins/applicationsmenu/applicationsmenu.c:685
+#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, fuzzy, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Немагчыма запусьціць \"%s\""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1113
-#, fuzzy
-msgid "No applications found"
-msgstr "Вылучыце значку для \"%s\""
-
-#: ../plugins/applicationsmenu/applicationsmenu.c:1136
-#, fuzzy
-msgid "Failed to load the applications menu"
-msgstr "Немагчыма запусьціць \"%s\""
-
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
 msgstr ""
 
@@ -996,352 +988,365 @@ msgstr ""
 msgid "Show help options"
 msgstr "Плоскія кнопкі"
 
-#: ../plugins/clock/clock.c:146
+#: ../plugins/clock/clock.c:174
 msgid "Week %V"
 msgstr ""
 
-#: ../plugins/clock/clock.c:407
+#: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
 msgstr ""
 
-#: ../plugins/clock/clock.c:729
+#: ../plugins/clock/clock.c:807
 #, fuzzy
 msgid "Custom Format"
 msgstr "Асабісты"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Гадзіньнік"
+
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid ""
+"Name of a timezone corresponding a file in the zoneinfo database, for "
+"example \"America/New_York\". Leave empty to use the localtime."
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:3
+msgid "Time_zone:"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:4
+#, fuzzy
+msgid "Time and Date _Settings..."
+msgstr "Працоўная прастора %d"
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+msgid "Time Settings"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+msgid "_Layout:"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:7
+#, fuzzy
+msgid "_Tooltip format:"
+msgstr "Фармат падказкі:"
+
+#: ../plugins/clock/clock-dialog.glade.h:9
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"page for additional information."
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Display _seconds"
+msgstr "Паказваць _сэкунды"
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "True _binary clock"
+msgstr "Сапраўдны _бінарны гадзіньнік"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
 #, fuzzy
 msgid "24-_hour clock"
 msgstr "24-х гадзінны фармат"
 
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Analog"
-msgstr "Стрэлачны"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Binary"
-msgstr "Бінарны"
-
-#: ../plugins/clock/clock-dialog.glade.h:5
-#: ../plugins/clock/clock.desktop.in.h:1
-msgid "Clock"
-msgstr "Гадзіньнік"
-
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "Clock Options"
-msgstr "Опцыі гадзіньніа"
-
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "Digital"
-msgstr "Лічбавы"
-
-#: ../plugins/clock/clock-dialog.glade.h:8
-msgid "Display _seconds"
-msgstr "Паказваць _сэкунды"
-
-#: ../plugins/clock/clock-dialog.glade.h:9
-msgid "F_ormat:"
-msgstr ""
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "F_uzziness:"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:14
 #, fuzzy
 msgid "Fl_ash time separators"
 msgstr "Мі_льгаць падзяляльнікамі"
-
-#: ../plugins/clock/clock-dialog.glade.h:13
-msgid "Fuzzy"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:14
-msgid "LCD"
-msgstr "Дыёдны"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
 msgstr "Паказ_ваць AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "Паказаць _рамку"
+msgid "F_ormat:"
+msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "F_uzziness:"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Show _inactive dots"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:20
 #, fuzzy
 msgid "Show gri_d"
 msgstr "Паказаць за_чэпку"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-
 #: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr "Сапраўдны _бінарны гадзіньнік"
+msgid "Clock Options"
+msgstr "Опцыі гадзіньніа"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
-msgid "_Layout:"
-msgstr ""
+msgid "Analog"
+msgstr "Стрэлачны"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
-#, fuzzy
-msgid "_Tooltip format:"
-msgstr "Фармат падказкі:"
+msgid "Binary"
+msgstr "Бінарны"
 
-#: ../plugins/clock/clock-fuzzy.c:86
+#: ../plugins/clock/clock-dialog.glade.h:24
+msgid "Digital"
+msgstr "Лічбавы"
+
+#: ../plugins/clock/clock-dialog.glade.h:25
+msgid "Fuzzy"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:26
+msgid "LCD"
+msgstr "Дыёдны"
+
+#: ../plugins/clock/clock-fuzzy.c:88
 #, fuzzy
 msgid "Night"
 msgstr "Праваруч"
 
-#: ../plugins/clock/clock-fuzzy.c:87
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Early morning"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Morning"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Almost noon"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:92
 #, fuzzy
 msgid "Noon"
 msgstr "Значка адсутнічае"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Afternoon"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Evening"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:95
 msgid "Late evening"
 msgstr ""
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:100
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:101
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "five past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "ten past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "quarter past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "half past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty five to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "twenty to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "quarter to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "ten to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "five to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
 msgstr ""
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:119
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:120
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:136
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "one"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:137
+#: ../plugins/clock/clock-fuzzy.c:139
 #, fuzzy
 msgid "two"
 msgstr "Сетка"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "three"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "four"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:142
 #, fuzzy
 msgid "five"
 msgstr "Офіс"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "six"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "seven"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:145
 #, fuzzy
 msgid "eight"
 msgstr "Праваруч"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:146
 #, fuzzy
 msgid "nine"
 msgstr "Л_інія"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "ten"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:148
 msgid "eleven"
 msgstr ""
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:149
 msgid "twelve"
 msgstr ""
 
-#: ../plugins/clock/clock.desktop.in.h:2
+#: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Колькі зараз часу?"
 
 #: ../plugins/directorymenu/directorymenu.c:246
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr ""
 
@@ -1379,39 +1384,39 @@ msgstr ""
 msgid "Open in Terminal"
 msgstr "Выконваць у _тэрмінале"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr ""
 
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#, fuzzy
+msgid "Select A Directory"
+msgstr "Вылучыце загад"
+
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid "_Base Directory:"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+msgid "_File Pattern:"
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#, fuzzy
-msgid "Select A Directory"
-msgstr "Вылучыце загад"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 #, fuzzy
 msgid "Show _hidden files"
 msgstr "Паказаць за_чэпку"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "_Base Directory:"
-msgstr ""
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "_File Pattern:"
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Filtering"
 msgstr ""
 
 #: ../plugins/launcher/launcher.c:405
@@ -1448,75 +1453,79 @@ msgid "Unnamed item"
 msgstr "Безназоўны"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
-msgid "Add Appli_cation"
-msgstr "Схаваныя дастасаваньні"
+msgid "Default"
+msgstr "Прадвызначаны"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "North"
+msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:3
-#, fuzzy
-msgid "Add a new empty item"
-msgstr "Дадаць новыя элемэнты"
+msgid "West"
+msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
-msgid "Add one or more existing items to the launcher"
+msgid "East"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 #, fuzzy
-msgid "Advanced"
-msgstr "Дадаць запускальнік"
+msgid "South"
+msgstr "Пра..."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
-msgid "D_elete Item"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:7
-msgid "Default"
-msgstr "Прадвызначаны"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:8
-msgid "Delete the currently selected item"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Disable t_ooltips"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:10
-msgid "East"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Inside Button"
 msgstr "Унутры кнопкі"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-#: ../plugins/launcher/launcher.desktop.in.h:1
-msgid "Launcher"
-msgstr "Запускальнік"
+#: ../plugins/launcher/launcher-dialog.glade.h:7
+msgid "_Edit Item"
+msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:8
+msgid "D_elete Item"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+#, fuzzy
+msgid "Add Appli_cation"
+msgstr "Схаваныя дастасаваньні"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 #, fuzzy
 msgid "New _Application"
 msgstr "Схаваныя дастасаваньні"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 #, fuzzy
 msgid "New _Link"
 msgstr "Стварыць Панэль"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-msgid "North"
+#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Запускальнік"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:15
+msgid "Add one or more existing items to the launcher"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+#, fuzzy
+msgid "Add a new empty item"
+msgstr "Дадаць новыя элемэнты"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:17
+msgid "Delete the currently selected item"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+msgid "Disable t_ooltips"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "Select this option to move the clicked menu item to the panel."
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
@@ -1529,33 +1538,29 @@ msgid "Show last _used item in panel"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
-#, fuzzy
-msgid "South"
-msgstr "Пра..."
-
-#: ../plugins/launcher/launcher-dialog.glade.h:25
-msgid "West"
+msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 #, fuzzy
 msgid "_Arrow button position:"
 msgstr "_Стрэлка"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
-msgid "_Edit Item"
-msgstr ""
+#: ../plugins/launcher/launcher-dialog.glade.h:26
+#, fuzzy
+msgid "Advanced"
+msgstr "Дадаць запускальнік"
 
-#: ../plugins/launcher/launcher.desktop.in.h:2
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Запускальнік праграм з апцыянальным мэню"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 #, fuzzy
 msgid "Workspace _Settings..."
 msgstr "Працоўная прастора %d"
 
-#: ../plugins/pager/pager.c:461
+#: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
 msgstr ""
 
@@ -1564,15 +1569,20 @@ msgstr ""
 msgid "Workspace %d"
 msgstr "Працоўная прастора %d"
 
-#: ../plugins/pager/pager-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "Behaviour"
-msgstr "Паводзіны"
+#: ../plugins/pager/pager-dialog.glade.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:1
+#, fuzzy
+msgid "Workspace Switcher"
+msgstr "Працоўная прастора %d"
 
-#: ../plugins/pager/pager-dialog.glade.h:3
+#: ../plugins/pager/pager-dialog.glade.h:2
 #, fuzzy
 msgid "Number of _rows:"
 msgstr "Колькасьць радкоў:"
+
+#: ../plugins/pager/pager-dialog.glade.h:3
+msgid "Show mi_niature view"
+msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
@@ -1580,35 +1590,24 @@ msgid ""
 "windows"
 msgstr ""
 
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
-msgstr ""
-
-#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/pager/pager-dialog.glade.h:7
 #, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
 msgstr "Пераключэньне працоўных прастораў паваротам кола мышы"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
-#: ../plugins/pager/pager.desktop.in.h:2
-#, fuzzy
-msgid "Workspace Switcher"
-msgstr "Працоўная прастора %d"
+#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "Behaviour"
+msgstr "Паводзіны"
 
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:2
 #, fuzzy
 msgid "Switch between virtual desktops"
 msgstr "Мініяцюрны выгляд усіх працоўных прастораў"
 
-#: ../plugins/separator/separator-dialog.glade.h:2
-#, fuzzy
-msgid "Dots"
-msgstr "Кр_опкі"
-
 #: ../plugins/separator/separator-dialog.glade.h:3
-#, fuzzy
-msgid "Handle"
-msgstr "Зачэпка:"
+msgid "_Expand"
+msgstr "Па_шырыць"
 
 #: ../plugins/separator/separator-dialog.glade.h:5
 #, fuzzy
@@ -1616,10 +1615,16 @@ msgid "Transparent"
 msgstr "Празрыстасьць (%):"
 
 #: ../plugins/separator/separator-dialog.glade.h:6
-msgid "_Expand"
-msgstr "Па_шырыць"
+#, fuzzy
+msgid "Handle"
+msgstr "Зачэпка:"
 
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator-dialog.glade.h:7
+#, fuzzy
+msgid "Dots"
+msgstr "Кр_опкі"
+
+#: ../plugins/separator/separator.desktop.in.in.h:2
 #, fuzzy
 msgid "Adds a separator or space between panel items"
 msgstr "Дадае прастору альбо лінію паміж элемэнтамі панэлі"
@@ -1635,11 +1640,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "Схаваць вокны й паказаць Сталец"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Паказаць сталец"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 #, fuzzy
 msgid "Hide all windows and show the desktop"
 msgstr "Схаваць вокны й паказаць Сталец"
@@ -1665,64 +1670,84 @@ msgstr "Кіраўнік сподка згубіў вылучэньне"
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Вы насамрэч жадаеце ачысьціць сьпіс вядомых дастасаваньняў?"
 
-#: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
-msgid "C_lear Known Applications"
-msgstr "Вылучыце дастасаваньне"
-
-#: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
-msgid "Known Applications"
-msgstr "Схаваныя дастасаваньні"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray-dialog.glade.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
 msgid "Notification Area"
 msgstr "Прыцягненьне ўвагі"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
 msgstr ""
+
+#: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Show _frame"
+msgstr "Паказаць _рамку"
+
+#: ../plugins/systray/systray-dialog.glade.h:5
+#, fuzzy
+msgid "C_lear Known Applications"
+msgstr "Вылучыце дастасаваньне"
+
+#: ../plugins/systray/systray-dialog.glade.h:6
+#, fuzzy
+msgid "Known Applications"
+msgstr "Схаваныя дастасаваньні"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Немагчыма атрымаць кіраўніка вылучэньня для экрана %d"
 
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:2
 #, fuzzy
 msgid "Area where notification icons appear"
 msgstr "Паказвае значкі нагадваньня"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
 #, fuzzy
 msgid "Always"
 msgstr "Заўсёды зьверху:"
 
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "When space is limited"
+msgstr ""
+
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
-msgid "D_raw window frame when hovering a button"
+msgid "Timestamp"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Group title and timestamp"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
-msgid "Group title and timestamp"
-msgstr ""
+#, fuzzy
+msgid "Window title"
+msgstr "Сьпіс вокнаў"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
-msgid "Never"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "None, allow drag-and-drop"
 msgstr ""
 
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Buttons"
+msgstr "Кнопкі дзеяньняў"
+
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
-msgid "Restore minimized windows to current _workspace"
-msgstr ""
+#, fuzzy
+msgid "Show button _labels"
+msgstr "Паказваць назвы дас_тасаваньняў"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 #, fuzzy
@@ -1735,77 +1760,78 @@ msgid "Show _handle"
 msgstr "Паказаць за_чэпку"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
-#, fuzzy
-msgid "Show button _labels"
-msgstr "Паказваць назвы дас_тасаваньняў"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#, fuzzy
-msgid "Show windows from _all workspaces or viewports"
-msgstr "Паказваць вокны з _усіх працоўных прастораў"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
-msgid "Show windows from all mo_nitors"
-msgstr "Паказваць вокны з _усіх працоўных прастораў"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Sorting _order:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Timestamp"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
-msgid "Window Buttons"
-msgstr "Кнопкі дзеяньняў"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-#, fuzzy
-msgid "Window title"
-msgstr "Сьпіс вокнаў"
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Mi_ddle click action:"
+msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+msgid "Restore minimized windows to current _workspace"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "D_raw window frame when hovering a button"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #, fuzzy
 msgid "_Switch windows using the mouse wheel"
 msgstr "Пераключэньне працоўных прастораў паваротам кола мышы"
 
-#: ../plugins/tasklist/tasklist-widget.c:3202
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#, fuzzy
+msgid "Show windows from _all workspaces or viewports"
+msgstr "Паказваць вокны з _усіх працоўных прастораў"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#, fuzzy
+msgid "Show windows from all mo_nitors"
+msgstr "Паказваць вокны з _усіх працоўных прастораў"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+msgid "Show only _minimized windows"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+msgid "Nothing"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#, fuzzy
+msgid "Close Window"
+msgstr "Сьпіс вокнаў"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+msgid "Minimize Window"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Mi_nimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3211
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3217
+#: ../plugins/tasklist/tasklist-widget.c:3323
 msgid "Ma_ximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3226
+#: ../plugins/tasklist/tasklist-widget.c:3332
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3236
+#: ../plugins/tasklist/tasklist-widget.c:3342
 msgid "_Close All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr ""
 
@@ -1838,50 +1864,58 @@ msgstr "Выдаліць Прастору \"%s\""
 msgid "Remove Workspace %d"
 msgstr "Выдаліць Прастору %d"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 #, fuzzy
-msgid "Arrow"
-msgstr "_Стрэлка:"
+msgid "Window Menu"
+msgstr "Сьпіс вокнаў"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 #, fuzzy
 msgid "Button layout:"
 msgstr "Кнопка №1:"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+#, fuzzy
+msgid "Show workspace a_ctions"
+msgstr "Паказваць дзяньні над _прасторамі"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+#, fuzzy
+msgid "Show workspace _names"
+msgstr "Паказваць назвы прастораў"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 #, fuzzy
 msgid "Enable _urgency notification"
 msgstr "Прыцягненьне ўвагі"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
-msgid "Icon"
-msgstr "_Значка"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 #, fuzzy
 msgid "Show windows from _all workspaces"
 msgstr "Паказваць вокны з _усіх працоўных прастораў"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-#, fuzzy
-msgid "Show workspace _names"
-msgstr "Паказваць назвы прастораў"
-
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 #, fuzzy
-msgid "Show workspace a_ctions"
-msgstr "Паказваць дзяньні над _прасторамі"
+msgid "Icon"
+msgstr "_Значка"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
 #, fuzzy
-msgid "Window Menu"
-msgstr "Сьпіс вокнаў"
+msgid "Arrow"
+msgstr "_Стрэлка:"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr ""
+
+#, fuzzy
+#~ msgid "No applications found"
+#~ msgstr "Вылучыце значку для \"%s\""
+
+#, fuzzy
+#~ msgid "Failed to load the applications menu"
+#~ msgstr "Немагчыма запусьціць \"%s\""
 
 #~ msgid "_Orientation:"
 #~ msgstr "Арыентацыя:"

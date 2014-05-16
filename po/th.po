@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Theppitak Karoonboonyanan <thep@linux.thai.net>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"POT-Creation-Date: 2014-05-16 21:39+0100\n"
 "PO-Revision-Date: 2013-08-21 04:26+0000\n"
 "Last-Translator: theppitak <theppitak@gmail.com>\n"
 "Language-Team: Thai (http://www.transifex.com/projects/p/xfce/language/th/)\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -24,8 +24,7 @@ msgstr "สร้างปุ่มเรียกบนพาเนล"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
+"Add a new launcher to the panel based on the information of this desktop file"
 msgstr "เพิ่มปุ่มเรียกปุ่มใหม่ลงในพาเนลโดยใช้ข้อมูลจากแฟ้มเดสก์ท็อปนี้"
 
 #: ../panel-preferences.desktop.in.h:1
@@ -39,78 +38,78 @@ msgid "Customize the panel"
 msgstr "ปรับแต่งพาเนล"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1029
-#: ../panel/panel-preferences-dialog.c:1099
+#: ../libxfce4panel/xfce-panel-plugin.c:1032
+#: ../panel/panel-preferences-dialog.c:1123
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "แน่ใจหรือไม่ว่าคุณต้องการลบ \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
-#: ../panel/panel-preferences-dialog.c:1102
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1126
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "ถ้าคุณลบรายการนี้ออกจากพาเนล ก็จะเป็นการลบอย่างถาวร"
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1194
+#: ../libxfce4panel/xfce-panel-plugin.c:1197
 msgid "_Move"
 msgstr "_ย้าย"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
 msgstr "_พาเนล"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "เพิ่มรายการใ_หม่..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "_ปรับแต่งพาเนล..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "_ออกจากระบบ"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "แสดงกล่องโต้ตอบ 'ปรับแต่งพาเนล'"
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
 msgstr "หมายเลขพาเนล"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
 msgstr "แสดงกล่องโต้ตอบ 'เพิ่มรายการใหม่'"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Save the panel configuration"
 msgstr "บันทึกค่าตั้งของพาเนล"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
 msgstr "เพิ่มโปรแกรมเสริมลงในพาเนล"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "PLUGIN-NAME"
 msgstr "ชื่อโปรแกรมเสริม"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Restart the running panel instance"
 msgstr "เริ่มเปิดพาเนลที่กำลังทำงานอยู่ใหม่"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Quit the running panel instance"
 msgstr "จบการทำงานพาเนลที่กำลังทำงานอยู่"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
 msgstr "ไม่ต้องรอโปรแกรมจัดการหน้าต่างขณะเริ่มทำงาน"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -118,68 +117,71 @@ msgid "Print version information and exit"
 msgstr "แสดงข้อมูลรุ่นแล้วจบการทำงาน"
 
 #. parse context options
-#: ../panel/main.c:235
+#: ../panel/main.c:236
 msgid "[ARGUMENTS...]"
 msgstr "[อาร์กิวเมนต์...]"
 
-#: ../panel/main.c:242
+#: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "สั่ง \"%s --help\" เพื่อดูวิธีใช้"
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
 msgstr "The Xfce development team. All rights reserved."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "กรุณารายงานข้อผิดพลาดไปที่ <%s>"
 
-#: ../panel/main.c:320
+#: ../panel/main.c:321
 msgid "There is already a running instance"
 msgstr "มีอินสแตนซ์อื่นทำงานอยู่ก่อนแล้ว"
 
 #. spawn ourselfs again
-#: ../panel/main.c:362
+#: ../panel/main.c:366
 msgid "Restarting..."
 msgstr "กำลังเริ่มเปิดใหม่..."
 
-#: ../panel/main.c:377
+#: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
 msgstr "แสดงกล่องโต้ตอบปรับแต่งไม่สำเร็จ"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
 msgstr "แสดงกล่องโต้ตอบเพิ่มรายการใหม่ไม่สำเร็จ"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
 msgstr "บันทึกค่าตั้งของพาเนลไม่สำเร็จ"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
 msgstr "เพิ่มโปรแกรมเสริมลงในพาเนลไม่สำเร็จ"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:389
 msgid "Failed to restart the panel"
 msgstr "เริ่มเปิดพาเนลใหม่ไม่สำเร็จ"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:391
 msgid "Failed to quit the panel"
 msgstr "จบการทำงานของพาเนลไม่สำเร็จ"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
 msgstr "ส่งข้อความ D-Bus ไม่สำเร็จ"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on"
-" logout, so the panel is automatically started the next time you login."
-msgstr "คุณต้องการจะเปิดทำงานพาเนลหรือไม่? ถ้าต้องการ ก็กรุณาตรวจสอบให้แน่ใจว่าคุณได้บันทึกวาระขณะออกจากระบบ เพื่อที่วาระจะได้เปิดทำงานพาเนลโดยอัตโนมัติเมื่อคุณเข้าระบบครั้งต่อไป"
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
+msgstr ""
+"คุณต้องการจะเปิดทำงานพาเนลหรือไม่? ถ้าต้องการ "
+"ก็กรุณาตรวจสอบให้แน่ใจว่าคุณได้บันทึกวาระขณะออกจากระบบ "
+"เพื่อที่วาระจะได้เปิดทำงานพาเนลโดยอัตโนมัติเมื่อคุณเข้าระบบครั้งต่อไป"
 
-#: ../panel/main.c:403 ../panel/main.c:417
+#: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "ไม่พบอินสแตนซ์ของ %s ที่ทำงานอยู่"
@@ -196,7 +198,8 @@ msgstr "สร้างปุ่_มเรียก"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "นี่จะเป็นการสร้างโปรแกรมเสริมปุ่มเรียกโปรแกรมลงในพาเนล และแทรกแฟ้มที่ปล่อยเข้าเป็นรายการเมนู"
+msgstr ""
+"นี่จะเป็นการสร้างโปรแกรมเสริมปุ่มเรียกโปรแกรมลงในพาเนล และแทรกแฟ้มที่ปล่อยเข้าเป็นรายการเมนู"
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -208,7 +211,8 @@ msgstr[0] "สร้างปุ่มเรียกโปรแกรมจา
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "คุณได้เปิดทำงาน X โดยไม่มีโปรแกรมจัดการวาระ ถ้าคลิกปุ่ม \"ออก\" ก็จะเป็นการปิด X server"
+msgstr ""
+"คุณได้เปิดทำงาน X โดยไม่มีโปรแกรมจัดการวาระ ถ้าคลิกปุ่ม \"ออก\" ก็จะเป็นการปิด X server"
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
@@ -222,14 +226,15 @@ msgstr "เรียกทำงานคำสั่ง \"%s\" ไม่สำ�
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "รูปแบบของเหตุการณ์โปรแกรมเสริมผิดไวยากรณ์ กรุณาใช้รูปแบบ ชื่อโปรแกรมเสริม:ชื่อ[:ชนิด:ค่า]"
+msgstr ""
+"รูปแบบของเหตุการณ์โปรแกรมเสริมผิดไวยากรณ์ กรุณาใช้รูปแบบ ชื่อโปรแกรมเสริม:ชื่อ[:ชนิด:ค่า]"
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
-"uint."
-msgstr "ชนิด \"%s\" ของ hint ไม่ถูกต้อง ชนิดที่ใช้ได้คือ bool, double, int, string และ uint"
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+"ชนิด \"%s\" ของ hint ไม่ถูกต้อง ชนิดที่ใช้ได้คือ bool, double, int, string และ uint"
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -269,7 +274,9 @@ msgstr "พาเนล %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "เนื่องจากพาเนลกำลังทำงานอยู่ในโหมดเครื่องขายของ คุณจึงไม่ได้รับอนุญาตให้เปลี่ยนค่าตั้งของพาเนลในฐานะผู้ใช้ธรรมดา"
+msgstr ""
+"เนื่องจากพาเนลกำลังทำงานอยู่ในโหมดเครื่องขายของ "
+"คุณจึงไม่ได้รับอนุญาตให้เปลี่ยนค่าตั้งของพาเนลในฐานะผู้ใช้ธรรมดา"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -295,7 +302,8 @@ msgstr "ป้อนคำค้นที่นี่"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "โปรแกรมเสริม \"%s\" หลุดจากพาเนลกะทันหัน คุณต้องการจะเริ่มโปรแกรมเสริมดังกล่าวใหม่หรือไม่?"
+msgstr ""
+"โปรแกรมเสริม \"%s\" หลุดจากพาเนลกะทันหัน คุณต้องการจะเริ่มโปรแกรมเสริมดังกล่าวใหม่หรือไม่?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -303,7 +311,9 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "โปรแกรมเสริมนี้เริ่มทำงานใหม่เกินหนึ่งครั้งใน %d วินาทีที่ผ่านมา ถ้าคุณกดปุ่ม \"เรียกทำงาน\" พาเนลก็จะพยายามเปิดโปรแกรมเสริมนี้ใหม่ มิฉะนั้นก็จะลบโปรแกรมเสริมออกจากพาเนลอย่างถาวร"
+msgstr ""
+"โปรแกรมเสริมนี้เริ่มทำงานใหม่เกินหนึ่งครั้งใน %d วินาทีที่ผ่านมา ถ้าคุณกดปุ่ม \"เรียกทำงาน\" "
+"พาเนลก็จะพยายามเปิดโปรแกรมเสริมนี้ใหม่ มิฉะนั้นก็จะลบโปรแกรมเสริมออกจากพาเนลอย่างถาวร"
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -332,23 +342,25 @@ msgstr "ยืนยันที่จะลบพาเนล %d หรือ�
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:965
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ภายนอก)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "ชื่อภายใน: %s-%d\nPID: %d"
+msgstr ""
+"ชื่อภายใน: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:975
+#: ../panel/panel-preferences-dialog.c:982
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "ชื่อภายใน: %s-%d"
@@ -418,7 +430,8 @@ msgstr "ซ่อ_นและแสดงพาเนลโดยอัตโ�
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "เลือกตัวเลือกนี้เพื่อซ่อนพาเนลเมื่อตัวชี้เมาส์ไม่ได้อยู่บนพาเนล มีผลเมื่อพาเนลวางอยู่ติดขอบหน้าจอเท่านั้น"
+msgstr ""
+"เลือกตัวเลือกนี้เพื่อซ่อนพาเนลเมื่อตัวชี้เมาส์ไม่ได้อยู่บนพาเนล มีผลเมื่อพาเนลวางอยู่ติดขอบหน้าจอเท่านั้น"
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -428,7 +441,9 @@ msgstr "ไม่ต้อง_กันเนื้อที่ที่ขอ�
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "เลือกตัวเลือกนี้ถ้าคุณต้องการให้หน้าต่างที่ขยายแผ่สามารถใช้เนื้อที่ครอบคลุมพื้นที่หลังพาเนลด้วย มีผลเมื่อพาเนลวางอยู่ติดขอบหน้าจอเท่านั้น"
+msgstr ""
+"เลือกตัวเลือกนี้ถ้าคุณต้องการให้หน้าต่างที่ขยายแผ่สามารถใช้เนื้อที่ครอบคลุมพื้นที่หลังพาเนลด้วย "
+"มีผลเมื่อพาเนลวางอยู่ติดขอบหน้าจอเท่านั้น"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -459,8 +474,7 @@ msgid ""
 "plugins request more space."
 msgstr "เลือกตัวเลือกนี้เพื่อให้พาเนลขยายความยาวโดยอัตโนมัติถ้าโปรแกรมเสริมร้องขอเนื้อที่เพิ่ม"
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "ขนาด"
@@ -516,15 +530,19 @@ msgstr "เมาส์ออ_ก:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully"
-" transparent and 100 fully opaque."
-msgstr "ความโปร่งแสงของพาเนลเมื่อตัวชี้เมาส์วางอยู่บนพาเนล โดยค่า 0 หมายถึงโปร่งใสเต็มที่ และ 100 หมายถึงทึบแสงเต็มที่"
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
+msgstr ""
+"ความโปร่งแสงของพาเนลเมื่อตัวชี้เมาส์วางอยู่บนพาเนล โดยค่า 0 หมายถึงโปร่งใสเต็มที่ และ 100 "
+"หมายถึงทึบแสงเต็มที่"
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "ความโปร่งแสงของพาเนลเมื่อตัวชี้เมาส์ไม่ได้วางอยู่บนพาเนล โดยค่า 0 หมายถึงโปร่งใสเต็มที่ และ 100 หมายถึงทึบแสงเต็มที่"
+msgstr ""
+"ความโปร่งแสงของพาเนลเมื่อตัวชี้เมาส์ไม่ได้วางอยู่บนพาเนล โดยค่า 0 หมายถึงโปร่งใสเต็มที่ และ "
+"100 หมายถึงทึบแสงเต็มที่"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -533,7 +551,8 @@ msgstr "ความทึบแสง"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "คุณต้องเปิดใช้ composite ในโปรแกรมจัดการหน้าต่างเพื่อจะกำหนดค่าความทึบแสงต่างๆ ในพาเนลได้"
+msgstr ""
+"คุณต้องเปิดใช้ composite ในโปรแกรมจัดการหน้าต่างเพื่อจะกำหนดค่าความทึบแสงต่างๆ ในพาเนลได้"
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -657,7 +676,7 @@ msgid "Panel configuration has been updated."
 msgstr "ปรับข้อมูลค่าตั้งของพาเนลเรียบร้อยแล้ว"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "ปุ่มเลือกการกระทำ"
 
@@ -803,29 +822,27 @@ msgstr "ยืนยันที่จะปิดเครื่องหรื
 msgid "Turning off computer in %d seconds."
 msgstr "จะปิดเครื่องภายใน %d วินาที"
 
-#: ../plugins/actions/actions.c:620
+#: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "ขีดคั่น"
 
-#: ../plugins/actions/actions.c:975
+#: ../plugins/actions/actions.c:976
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "การกระทำ \"%s\" ทำไม่สำเร็จ"
 
-#: ../plugins/actions/actions.c:1142
+#: ../plugins/actions/actions.c:1147
 msgid "John Doe"
 msgstr "สมชาย"
 
-#: ../plugins/actions/actions.desktop.in.h:2
+#: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
 msgstr "ออกจากระบบ, ล็อคหน้าจอ หรือการกระทำอื่นเกี่ยวกับระบบ"
 
-#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 msgid "Applications Menu"
 msgstr "เมนูโปรแกรม"
 
@@ -837,7 +854,9 @@ msgstr "แสดงชื่อ_ทั่วไปของโปรแกร�
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "เลือกตัวเลือกนี้ถ้าต้องการแสดงชื่อทั่วไปของโปรแกรมในเมนู เช่น \"โปรแกรมจัดการแฟ้ม\" แทนที่จะเป็น \"Thunar\""
+msgstr ""
+"เลือกตัวเลือกนี้ถ้าต้องการแสดงชื่อทั่วไปของโปรแกรมในเมนู เช่น \"โปรแกรมจัดการแฟ้ม\" "
+"แทนที่จะเป็น \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -895,18 +914,24 @@ msgstr "เลือกแฟ้มเมนู"
 msgid "Menu File"
 msgstr "แฟ้มเมนู"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:541
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#, fuzzy
+msgid "Applications"
+msgstr "เมนูโปรแกรม"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:644
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "เลือกไอคอน"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:582
+#: ../plugins/applicationsmenu/applicationsmenu.c:685
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "เรียกทำงานคำสั่ง \"%s\" ไม่สำเร็จ"
 
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
 msgstr "แสดงเมนูหมวดหมู่ของโปรแกรมต่างๆ ที่ติดตั้งไว้"
 
@@ -953,7 +978,7 @@ msgid "Custom Format"
 msgstr "รูปแบบกำหนดเอง"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#: ../plugins/clock/clock.desktop.in.h:1
+#: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "นาฬิกา"
 
@@ -961,7 +986,9 @@ msgstr "นาฬิกา"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "ชื่อของเขตเวลาตามชื่อแฟ้มในฐานข้อมูล zoneinfo ตัวอย่างเช่น \"America/New_York\" หากปล่อยเป็นค่าว่างไว้จะหมายถึงเวลาท้องถิ่นของระบบ"
+msgstr ""
+"ชื่อของเขตเวลาตามชื่อแฟ้มในฐานข้อมูล zoneinfo ตัวอย่างเช่น \"America/New_York\" "
+"หากปล่อยเป็นค่าว่างไว้จะหมายถึงเวลาท้องถิ่นของระบบ"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -987,10 +1014,13 @@ msgstr "รูปแบบคำแ_นะนำเครื่องมือ:"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "รูปแบบซึ่งกำหนดส่วนต่างๆ ของวันที่และเวลาที่จะแทรกลงในพาเนล ตัวอย่างเช่น %Y จะถูกแทนที่ด้วยปี ค.ศ., %m แทนหมายเลขเดือน และ %d แทนวันที่ ในทำนองเดียวกัน แท็ก <b></b> จะทำให้ข้อความเป็นตัวหนา ดูข้อมูลเพิ่มเติมได้ที่หน้า \"วิธีใช้\""
+msgstr ""
+"รูปแบบซึ่งกำหนดส่วนต่างๆ ของวันที่และเวลาที่จะแทรกลงในพาเนล ตัวอย่างเช่น %Y จะถูกแทนที่ด้วยปี "
+"ค.ศ., %m แทนหมายเลขเดือน และ %d แทนวันที่ ในทำนองเดียวกัน แท็ก <b></b> "
+"จะทำให้ข้อความเป็นตัวหนา ดูข้อมูลเพิ่มเติมได้ที่หน้า \"วิธีใช้\""
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1016,8 +1046,7 @@ msgstr "แสด_ง AM/PM"
 msgid "F_ormat:"
 msgstr "รูปแ_บบ:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "ความ_คลุมเครือ:"
@@ -1281,12 +1310,12 @@ msgstr "สิบเอ็ดโมง"
 msgid "twelve"
 msgstr "สิบสองโมง"
 
-#: ../plugins/clock/clock.desktop.in.h:2
+#: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "กี่โมงแล้ว?"
 
 #: ../plugins/directorymenu/directorymenu.c:246
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "เมนูไดเรกทอรี"
@@ -1324,7 +1353,7 @@ msgstr "เปิดโฟลเดอร์"
 msgid "Open in Terminal"
 msgstr "เปิดในเทอร์มินัล"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "แสดงโครงสร้างต้นไม้ของไดเรกทอรีในรูปเมนู"
 
@@ -1341,7 +1370,9 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "ป้อนรายการแพตเทิร์นที่จะใช้กรองแฟ้มที่จะแสดงในไดเรกทอรี ถ้าคุณระบุมากกว่าหนึ่งแพตเทิร์น ก็คั่นแพตเทิร์นต่างๆ ด้วยอัฒภาค (เช่น *.txt;*.doc)"
+msgstr ""
+"ป้อนรายการแพตเทิร์นที่จะใช้กรองแฟ้มที่จะแสดงในไดเรกทอรี ถ้าคุณระบุมากกว่าหนึ่งแพตเทิร์น "
+"ก็คั่นแพตเทิร์นต่างๆ ด้วยอัฒภาค (เช่น *.txt;*.doc)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1431,7 +1462,7 @@ msgid "New _Link"
 msgstr "_ลิงก์ใหม่"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
-#: ../plugins/launcher/launcher.desktop.in.h:1
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "ปุ่มเรียก"
 
@@ -1453,8 +1484,8 @@ msgstr "ปิดคำแ_นะนำเครื่องมือ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
 msgstr "เลือกตัวเลือกนี้ถ้าต้องการปิดคำแนะนำเครื่องมือเมื่อเลื่อนเมาส์ไปวางบนปุ่มหรือรายการเมนูบนพาเนล"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
@@ -1477,15 +1508,15 @@ msgstr "ตำแหน่งของปุ่มลูกศ_ร:"
 msgid "Advanced"
 msgstr "ขั้นสูง"
 
-#: ../plugins/launcher/launcher.desktop.in.h:2
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "ปุ่มเรียกโปรแกรมพร้อมเมนูประกอบถ้ามี"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "_ตั้งค่าพื้นที่ทำงาน..."
 
-#: ../plugins/pager/pager.c:461
+#: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
 msgstr "ไม่สามารถเปิดโปรแกรมตั้งค่าพื้นที่ทำงาน"
 
@@ -1495,7 +1526,7 @@ msgid "Workspace %d"
 msgstr "พื้นที่ทำงาน %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "สลับพื้นที่ทำงาน"
 
@@ -1522,7 +1553,7 @@ msgstr "สลับพื้นที่ทำงานโดยใช้_ล�
 msgid "Behaviour"
 msgstr "พฤติกรรม"
 
-#: ../plugins/pager/pager.desktop.in.h:2
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
 msgstr "สลับไปมาระหว่างพื้นโต๊ะเสมือนต่างๆ"
 
@@ -1542,7 +1573,7 @@ msgstr "มือจับ"
 msgid "Dots"
 msgstr "ไข่ปลา"
 
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "เพิ่มเส้นขีดคั่นหรือช่องว่างระหว่างรายการต่างๆ บนพาเนล"
 
@@ -1555,11 +1586,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "ย่อเก็บหน้าต่างทั้งหมดที่เปิดอยู่และแสดงพื้นโต๊ะ"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "แสดงพื้นโต๊ะ"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "ซ่อนหน้าต่างทั้งหมดและแสดงพื้นโต๊ะ"
 
@@ -1583,7 +1614,7 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr "ยืนยันหรือไม่ว่าคุณต้องการล้างรายชื่อของโปรแกรมที่รู้จัก?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
 msgstr "พื้นที่แจ้งเหตุ"
 
@@ -1608,7 +1639,7 @@ msgstr "โปรแกรมที่รู้จัก"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "ไม่สามารถจับยึดการเลือกของโปรแกรมจัดการสำหรับหน้าจอ %d"
 
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "พื้นที่สำหรับไอคอนแจ้งเหตุ"
 
@@ -1645,7 +1676,7 @@ msgid "None, allow drag-and-drop"
 msgstr "ไม่มีลำดับ อนุญาตให้ลากวางได้"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "ปุ่มเลือกหน้าต่าง"
 
@@ -1709,27 +1740,27 @@ msgstr "ปิดหน้าต่าง"
 msgid "Minimize Window"
 msgstr "ย่อเก็บหน้าต่าง"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Mi_nimize All"
 msgstr "_ย่อเก็บหน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "Un_minimize All"
 msgstr "_คืนขนาดหน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3323
 msgid "Ma_ximize All"
 msgstr "_ขยายแผ่หน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3332
 msgid "_Unmaximize All"
 msgstr "เ_ลิกขยายแผ่หน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist-widget.c:3327
+#: ../plugins/tasklist/tasklist-widget.c:3342
 msgid "_Close All"
 msgstr "ปิ_ดหน้าต่างทั้งหมด"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr "สลับไปมาระหว่างหน้าต่างที่เปิดอยู่โดยใช้ปุ่มกด"
 
@@ -1760,7 +1791,7 @@ msgid "Remove Workspace %d"
 msgstr "ลบพื้นที่ทำงาน %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
 msgstr "เมนูหน้าต่าง"
 
@@ -1792,6 +1823,6 @@ msgstr "ไอคอน"
 msgid "Arrow"
 msgstr "ลูกศร"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "สลับไปมาระหว่างหน้าต่างที่เปิดอยู่โดยใช้เมนู"

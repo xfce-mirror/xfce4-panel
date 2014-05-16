@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Karim Oulad Chalha <herr.linux88@gmail.com>, 2013
 # محمد الحرقان <malham1@gmail.com>, 2012
@@ -12,15 +12,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"POT-Creation-Date: 2014-05-16 21:39+0100\n"
 "PO-Revision-Date: 2013-09-08 13:11+0000\n"
 "Last-Translator: Karim Oulad Chalha <herr.linux88@gmail.com>\n"
-"Language-Team: Arabic (http://www.transifex.com/projects/p/xfce/language/ar/)\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/xfce/language/"
+"ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
@@ -28,8 +30,7 @@ msgstr "أنشئ مُطْلِق في اللوحة"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
+"Add a new launcher to the panel based on the information of this desktop file"
 msgstr "أضف مُطْلِق جديد إلى اللوحة استناد لمعلومات لملف سطح المكتب هذا"
 
 #: ../panel-preferences.desktop.in.h:1
@@ -43,78 +44,78 @@ msgid "Customize the panel"
 msgstr "خصص اللوحة"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1029
-#: ../panel/panel-preferences-dialog.c:1099
+#: ../libxfce4panel/xfce-panel-plugin.c:1032
+#: ../panel/panel-preferences-dialog.c:1123
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "متأكد أنك تريد حذف \"%s\"؟"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
-#: ../panel/panel-preferences-dialog.c:1102
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1126
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "إدا قمت بحذف العنصر من اللوحة, سيتم فقدانه نهائيا."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1194
+#: ../libxfce4panel/xfce-panel-plugin.c:1197
 msgid "_Move"
 msgstr "_انقل"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
 msgstr "الش_ريط"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "أضف عناصر _جديدة..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "تفضيلات اللوحة..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "تسجيل الخروج"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "عرض حوار 'تفضيلات اللوحة'"
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
 msgstr "رقم-اللوحة"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
 msgstr "عرض حوار 'أضف عناصر جديدة'"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Save the panel configuration"
 msgstr "حفظ إعدادات اللوحة"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
 msgstr "أضف ملحق جديد إلى اللوحة"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "PLUGIN-NAME"
 msgstr "إسم-الملجق"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Restart the running panel instance"
 msgstr "إعادة تشغيل لوحة الحالة"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Quit the running panel instance"
 msgstr "خروج من لوحة الحالة"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
 msgstr "عدم إنتظار مدير النوافذ عنذ بدء التشغيل"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -122,68 +123,70 @@ msgid "Print version information and exit"
 msgstr "طباعة معلومات الإصدار و الخروج"
 
 #. parse context options
-#: ../panel/main.c:235
+#: ../panel/main.c:236
 msgid "[ARGUMENTS...]"
 msgstr "[الحجج...]"
 
-#: ../panel/main.c:242
+#: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "طباعة \"%s --help\" للحصول على معلومات الإستعمال."
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
 msgstr "فريق التطوير إكسفس. جميع الحقوق محفوظة."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "أرسل من فضلك العلل الى<%s>."
 
-#: ../panel/main.c:320
+#: ../panel/main.c:321
 msgid "There is already a running instance"
 msgstr "حاليا يوجد حالة قيد التشغيل"
 
 #. spawn ourselfs again
-#: ../panel/main.c:362
+#: ../panel/main.c:366
 msgid "Restarting..."
 msgstr "إعادة التشغيل..."
 
-#: ../panel/main.c:377
+#: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
 msgstr "فشل عرض حوار التفضيلات"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
 msgstr "فشل عرض حوار أضف عناصر جديدة"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
 msgstr "فشل حفظ إعدادات اللوحة"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
 msgstr "فشل إضافة ملحق إلى اللوحة"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:389
 msgid "Failed to restart the panel"
 msgstr "فشلت إعادة تشغيل اللوحة"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:391
 msgid "Failed to quit the panel"
 msgstr "فشل الخروج من اللوحة"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
 msgstr "فشل إرسال رسالة D-Bus"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on"
-" logout, so the panel is automatically started the next time you login."
-msgstr "هل تريد تشغيل اللوحة؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, لتتمكن اللوحة من البدء تلقائيا عند الولوج التالي."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
+msgstr ""
+"هل تريد تشغيل اللوحة؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, "
+"لتتمكن اللوحة من البدء تلقائيا عند الولوج التالي."
 
-#: ../panel/main.c:403 ../panel/main.c:417
+#: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "لم يتم العثور على مثيل %s قيد التشغيل"
@@ -200,7 +203,8 @@ msgstr "أنش_ئ مُطْلِق"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "هذا سينشئ ملحق مطلقة في اللوحة و إدراج الملفات المحددة في قائمة العناصر."
+msgstr ""
+"هذا سينشئ ملحق مطلقة في اللوحة و إدراج الملفات المحددة في قائمة العناصر."
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -231,14 +235,16 @@ msgstr "فشل تنفيد الأمر \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم [:نوع:قيمة]."
+msgstr ""
+"بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم [:نوع:قيمة]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+"نوع التلميح غير صالح \"%s\". الأنواع الصالحة هي bool مزدوج، int والسلسلة و "
 "uint."
-msgstr "نوع التلميح غير صالح \"%s\". الأنواع الصالحة هي bool مزدوج، int والسلسلة و uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -278,7 +284,9 @@ msgstr "لوحة %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "لأن اللوحة قيد التشغيل في وضع kiosk، لا يسمح بإجراء تغييرات على إعداد اللوحة كمستخدم عادي"
+msgstr ""
+"لأن اللوحة قيد التشغيل في وضع kiosk، لا يسمح بإجراء تغييرات على إعداد اللوحة "
+"كمستخدم عادي"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -312,7 +320,9 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "تم إعادة تشغيل الملحق اكثر من مرة في آخر %d ثانية. إذا ضغطت على تنفيذ سيتم إعادة تشغيله من على اللوحة وإلا سيتم حذفه نهائيا من اللوحة."
+msgstr ""
+"تم إعادة تشغيل الملحق اكثر من مرة في آخر %d ثانية. إذا ضغطت على تنفيذ سيتم "
+"إعادة تشغيله من على اللوحة وإلا سيتم حذفه نهائيا من اللوحة."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -341,23 +351,25 @@ msgstr "متأكد أنك تريد إزالة اللوحة %d؟"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:965
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(الخارجية)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "إسم داخلي: %s-%d\nمعرف العملية: %d"
+msgstr ""
+"إسم داخلي: %s-%d\n"
+"معرف العملية: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:975
+#: ../panel/panel-preferences-dialog.c:982
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "إسم داخلي: : %s-%d"
@@ -427,7 +439,9 @@ msgstr "إخفاء عرض اللوحة بشكل تلقائي"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "حدد هذا الخيار لإخفاء اللوحة عندما لا يكون المؤشر فوقها. هذا يعمل فقط عند وصول اللوحة لحافة شاشة."
+msgstr ""
+"حدد هذا الخيار لإخفاء اللوحة عندما لا يكون المؤشر فوقها. هذا يعمل فقط عند "
+"وصول اللوحة لحافة شاشة."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -437,7 +451,9 @@ msgstr "لا تحجز مساحة على اللوحة"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "حدد هذا الخيار إذا أردت تغطية النوافذ المكبرة للمنطقة خلف اللوحة. هذا يعمل فقط عند وصول اللوحة إلى حافة شاشة."
+msgstr ""
+"حدد هذا الخيار إذا أردت تغطية النوافذ المكبرة للمنطقة خلف اللوحة. هذا يعمل "
+"فقط عند وصول اللوحة إلى حافة شاشة."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -466,10 +482,10 @@ msgstr "زيادة الطول تلقائياًً"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "حدد هذا الخيار لزيادة طول اللوحة تلقائياً إذا تطلبت الإضافات مساحة أكبر."
+msgstr ""
+"حدد هذا الخيار لزيادة طول اللوحة تلقائياً إذا تطلبت الإضافات مساحة أكبر."
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "القياسات"
@@ -525,8 +541,8 @@ msgstr "_غادِر:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully"
-" transparent and 100 fully opaque."
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
 msgstr "شفاف عندما يحوم المؤشر فوق اللوحة، 0 شفاف تماما و 100 غير شفاف."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
@@ -615,7 +631,8 @@ msgstr "مرحبا بكم في البداية الأولى للوحة"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "بسبب نقل اللوحة إلى نظام تخزين إعدادات جديد، تم تحميل إعدادات أولية جديدة."
+msgstr ""
+"بسبب نقل اللوحة إلى نظام تخزين إعدادات جديد، تم تحميل إعدادات أولية جديدة."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -666,7 +683,7 @@ msgid "Panel configuration has been updated."
 msgstr "تم تحديث إعداد اللوحة."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "زر العمل"
 
@@ -812,29 +829,27 @@ msgstr "متأكد أنك تريد إغلاق الجهاز؟"
 msgid "Turning off computer in %d seconds."
 msgstr "إغلاق الكمبيوتر بعد %d ثانية."
 
-#: ../plugins/actions/actions.c:620
+#: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "فاصل"
 
-#: ../plugins/actions/actions.c:975
+#: ../plugins/actions/actions.c:976
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "فشل في تشغيل الإجراء \"%s\""
 
-#: ../plugins/actions/actions.c:1142
+#: ../plugins/actions/actions.c:1147
 msgid "John Doe"
 msgstr "فلان الفلاني"
 
-#: ../plugins/actions/actions.desktop.in.h:2
+#: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
 msgstr "تسجيل الخروج، تأمين أو إجراءات نظام أخرى"
 
-#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 msgid "Applications Menu"
 msgstr "قائمة التطبيقات"
 
@@ -846,7 +861,9 @@ msgstr "عرض اسماء التطبيقات العامة"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "حدد هذا الخيار لعرض اسم التطبيق العام في القائمة، على سبيل المثال \"إدارة الملفات\" بدلاً من \"Thunar\""
+msgstr ""
+"حدد هذا الخيار لعرض اسم التطبيق العام في القائمة، على سبيل المثال \"إدارة "
+"الملفات\" بدلاً من \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -904,18 +921,24 @@ msgstr "اختر ملف قائمة"
 msgid "Menu File"
 msgstr "ملف القائمة"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:541
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#, fuzzy
+msgid "Applications"
+msgstr "قائمة التطبيقات"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:644
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "اختر أيقونة"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:582
+#: ../plugins/applicationsmenu/applicationsmenu.c:685
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "فشل تنفيد الأمر \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
 msgstr "عرض قائمة تحتوي على فئات من التطبيقات المثبتة"
 
@@ -962,7 +985,7 @@ msgid "Custom Format"
 msgstr "تهيئة خاصة"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#: ../plugins/clock/clock.desktop.in.h:1
+#: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "الساعة"
 
@@ -970,7 +993,9 @@ msgstr "الساعة"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "اسم المنطقة الزمنية المقابل للملف في قاعدة البيانات zoneinfo، على سبيل المثال \"أمريكا/New_York\". ترك فارغاً ليتم استخدامها في المنطقة الزمنية."
+msgstr ""
+"اسم المنطقة الزمنية المقابل للملف في قاعدة البيانات zoneinfo، على سبيل "
+"المثال \"أمريكا/New_York\". ترك فارغاً ليتم استخدامها في المنطقة الزمنية."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -996,10 +1021,13 @@ msgstr "_هيئة التلميح:"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "يصف التنسيق أجزاء التاريخ والوقت المدرجة في اللوحة. على سبيل المثال، سيتم استبدال%Y للسنة، %m للشهر و %d لليوم. وهكذا <b></b> العلامات ستجعل النص غامقاً. انظر صفحة \"التعليمات\" للحصول على معلومات إضافية."
+msgstr ""
+"يصف التنسيق أجزاء التاريخ والوقت المدرجة في اللوحة. على سبيل المثال، سيتم "
+"استبدال%Y للسنة، %m للشهر و %d لليوم. وهكذا <b></b> العلامات ستجعل النص "
+"غامقاً. انظر صفحة \"التعليمات\" للحصول على معلومات إضافية."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1025,8 +1053,7 @@ msgstr "عرض صباحاً/مساء"
 msgid "F_ormat:"
 msgstr "التنسيق:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "ال&ضبابية:"
@@ -1290,12 +1317,12 @@ msgstr "الحادية عشر"
 msgid "twelve"
 msgstr "الثانية عشر"
 
-#: ../plugins/clock/clock.desktop.in.h:2
+#: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "ماهى الساعة؟"
 
 #: ../plugins/directorymenu/directorymenu.c:246
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "قائمة المجلد"
@@ -1333,7 +1360,7 @@ msgstr "افتح المجلد"
 msgid "Open in Terminal"
 msgstr "افتح في الطرفية"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "عرض شجرة المجلد في إحدى القوائم"
 
@@ -1350,7 +1377,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "اكتب قائمة بالأنماط التي سيتم استخدامها لتحديد الملفات المرئية في المجلد. إذا أردت تحديد أكثر من نمط واحد. يجب فصل عناصر القائمة بواسطة الفواصل المنقوطة (مثلاً *.txt;*.doc)."
+msgstr ""
+"اكتب قائمة بالأنماط التي سيتم استخدامها لتحديد الملفات المرئية في المجلد. "
+"إذا أردت تحديد أكثر من نمط واحد. يجب فصل عناصر القائمة بواسطة الفواصل "
+"المنقوطة (مثلاً *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1440,7 +1470,7 @@ msgid "New _Link"
 msgstr "رابط جديد"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
-#: ../plugins/launcher/launcher.desktop.in.h:1
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "مُطْلِق"
 
@@ -1462,9 +1492,11 @@ msgstr "عطل تلميحات الأدوات"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
-msgstr "حدد هذا الخيار لتعطيل تلميحات الأدوات عندما تتحرك عبر عناصر قائمة أو زر في اللوحة."
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"حدد هذا الخيار لتعطيل تلميحات الأدوات عندما تتحرك عبر عناصر قائمة أو زر في "
+"اللوحة."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1486,15 +1518,15 @@ msgstr "_وظيفة أزرار الأسهم:"
 msgid "Advanced"
 msgstr "متقدِم"
 
-#: ../plugins/launcher/launcher.desktop.in.h:2
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "مُطْلِق البرامج مع قائمة اختيارية"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "إعدادات مساحة عمل..."
 
-#: ../plugins/pager/pager.c:461
+#: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
 msgstr "غير قادر على فتح إعدادات مساحة العمل"
 
@@ -1504,7 +1536,7 @@ msgid "Workspace %d"
 msgstr "مساحة عمل %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "مبدّل مساحات العمل"
 
@@ -1531,7 +1563,7 @@ msgstr "تبديل مساحات العمل باستخدام عجلة الفار�
 msgid "Behaviour"
 msgstr "السّلوك"
 
-#: ../plugins/pager/pager.desktop.in.h:2
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
 msgstr "يبدل بين أسطح المكتب الإفتراضية"
 
@@ -1551,7 +1583,7 @@ msgstr "التعامل"
 msgid "Dots"
 msgstr "نقاط"
 
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "إضافة فاصل أو مسافة بين عناصر اللوحة"
 
@@ -1564,11 +1596,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "تصغير كافة الإطارات المفتوحة وعرض سطح المكتب"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "عرض سطح المكتب"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "إخفاء كافة الإطارات وعرض سطح المكتب"
 
@@ -1581,7 +1613,9 @@ msgstr "غير قادر على بدء تشغيل منطقة التنبيه"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "الاحتمال الأكثر أن برنامج آخر أخذ وظيفة ومساحة التنبيه. وستكون هذه المساحة غير مستخدمة."
+msgstr ""
+"الاحتمال الأكثر أن برنامج آخر أخذ وظيفة ومساحة التنبيه. وستكون هذه المساحة "
+"غير مستخدمة."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1592,7 +1626,7 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr "متأكد أنك تريد مسح قائمة التطبيقات المعروفة؟"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
 msgstr "مكان التذكير"
 
@@ -1617,7 +1651,7 @@ msgstr "التطبيقات المعروفة"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "فشل في الحصول على الإختيار من أجل الشاشة·%d"
 
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "مساحة عرض أيقونات التنبيه"
 
@@ -1654,7 +1688,7 @@ msgid "None, allow drag-and-drop"
 msgstr "لا شيء، سماح بالسحب والإفلات"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "أزرار النافذة"
 
@@ -1718,27 +1752,27 @@ msgstr "غلق النافذة"
 msgid "Minimize Window"
 msgstr "تصغير النافذة"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Mi_nimize All"
 msgstr "صغّر الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "Un_minimize All"
 msgstr "ألغِ تص_غير الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3323
 msgid "Ma_ximize All"
 msgstr "ك_بّر الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3332
 msgid "_Unmaximize All"
 msgstr "_ألغِ تكبير الكل"
 
-#: ../plugins/tasklist/tasklist-widget.c:3327
+#: ../plugins/tasklist/tasklist-widget.c:3342
 msgid "_Close All"
 msgstr "_إغلاق الكل"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr "تحول بين النوافذ المفتوحة باستعمال أزرار"
 
@@ -1769,7 +1803,7 @@ msgid "Remove Workspace %d"
 msgstr "ازل مساحة العمل %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
 msgstr "قائمة النافذة"
 
@@ -1801,6 +1835,6 @@ msgstr "أيقونة"
 msgid "Arrow"
 msgstr "سهم"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "تحول بين النوافذ المفتوحة باستعمال القائمة"

@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Ayhan YALÇINSOY <ayhanyalcinsoy@gmail.com>, 2010
 # Erçin EKER <ercin.eker@linux.org.tr>, 2004
@@ -14,14 +14,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-03 00:30+0200\n"
+"POT-Creation-Date: 2014-05-16 21:39+0100\n"
 "PO-Revision-Date: 2013-09-12 10:12+0000\n"
 "Last-Translator: farukuzun <farukuzun@mail.com>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/xfce/language/tr/)\n"
+"Language-Team: Turkish (http://www.transifex.com/projects/p/xfce/language/"
+"tr/)\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -30,9 +31,9 @@ msgstr "Xfce Panelinde Başlatıcı oluştur"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop "
-"file"
-msgstr "Bu masaüstü dosyası bilgisine dayalı olarak panele yeni bir başlatıcı ekle"
+"Add a new launcher to the panel based on the information of this desktop file"
+msgstr ""
+"Bu masaüstü dosyası bilgisine dayalı olarak panele yeni bir başlatıcı ekle"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
@@ -45,78 +46,78 @@ msgid "Customize the panel"
 msgstr "Paneli özelleştir"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1029
-#: ../panel/panel-preferences-dialog.c:1099
+#: ../libxfce4panel/xfce-panel-plugin.c:1032
+#: ../panel/panel-preferences-dialog.c:1123
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "'%s' ögesini silmek istediğinizden emin misiniz?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
-#: ../panel/panel-preferences-dialog.c:1102
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1126
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Panelden bir ögeyi kaldırdığınızda, tamamen kaybolur."
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1194
+#: ../libxfce4panel/xfce-panel-plugin.c:1197
 msgid "_Move"
 msgstr "_Taşı"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1228
+#: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1236 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
 msgstr "_Yeni Ögeler Ekle..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1247 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
 msgstr "Panel T_ercihleri..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1264 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
 msgid "Log _Out"
 msgstr "Çıkış_Yap"
 
-#: ../panel/main.c:79
+#: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'Panel Tercihleri' penceresini göster"
 
-#: ../panel/main.c:79 ../panel/main.c:80
+#: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
 msgstr "PANEL-NUMARASI"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
 msgstr "'Yeni Öğeler Ekle' penceresini göster"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Save the panel configuration"
 msgstr "Panel yapılandırmasını kaydet"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
 msgstr "Panele yeni bir eklenti ekle"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Restart the running panel instance"
 msgstr "Çalışan panel örneğini yeniden başlat"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Quit the running panel instance"
 msgstr "Çalışan panel örneğinden çık"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
 msgstr "Başlangıçta bir pencere yöneticisi için bekleme"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
@@ -124,68 +125,71 @@ msgid "Print version information and exit"
 msgstr "Sürüm bilgisini yazdır ve çık"
 
 #. parse context options
-#: ../panel/main.c:235
+#: ../panel/main.c:236
 msgid "[ARGUMENTS...]"
 msgstr "[SEÇENEKLER...]"
 
-#: ../panel/main.c:242
+#: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Kullanım için \"%s --help\" yazınız."
 
-#: ../panel/main.c:261
+#: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce geliştirici takımı. Tüm hakları ayırılmıştır."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Lütfen hataları <%s> adresine bildirin."
 
-#: ../panel/main.c:320
+#: ../panel/main.c:321
 msgid "There is already a running instance"
 msgstr "Halihazırda çalışan bir panel örneği var"
 
 #. spawn ourselfs again
-#: ../panel/main.c:362
+#: ../panel/main.c:366
 msgid "Restarting..."
 msgstr "Yeniden Başlatıyor..."
 
-#: ../panel/main.c:377
+#: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
 msgstr "Tercihler penceresi gösterilemedi"
 
-#: ../panel/main.c:379
+#: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
 msgstr "'Yeni Öğeler Ekle' penceresi gösterilemedi"
 
-#: ../panel/main.c:381
+#: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
 msgstr "Panel ayarları kaydedilemedi"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
 msgstr "Panele eklenti yerleştirilemedi"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:389
 msgid "Failed to restart the panel"
 msgstr "Panel yeniden başlatılamadı"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:391
 msgid "Failed to quit the panel"
 msgstr "Panel  kaldırılamadı"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus imesajı gönderilemedi"
 
-#: ../panel/main.c:400
+#: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on"
-" logout, so the panel is automatically started the next time you login."
-msgstr "Paneli başlatmak istiyor musunuz? Eğer öyleyse çıkış sırasında oturumu kaydettiğinizden emin olun. Böylece bir sonraki giriş yaptığınızda panel otomatik olarak başlayacak."
+"Do you want to start the panel? If you do, make sure you save the session on "
+"logout, so the panel is automatically started the next time you login."
+msgstr ""
+"Paneli başlatmak istiyor musunuz? Eğer öyleyse çıkış sırasında oturumu "
+"kaydettiğinizden emin olun. Böylece bir sonraki giriş yaptığınızda panel "
+"otomatik olarak başlayacak."
 
-#: ../panel/main.c:403 ../panel/main.c:417
+#: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "%s 'in hiçbir çalışan örneği bulunamadı"
@@ -202,7 +206,9 @@ msgstr "Baş_latıcı oluştur"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Bu davranış panelde yeni bir uygulama başlatıcısı yaratacak ve sürükleyip bırakılan dosyaları menü öğesi olarak ekleyecek."
+msgstr ""
+"Bu davranış panelde yeni bir uygulama başlatıcısı yaratacak ve sürükleyip "
+"bırakılan dosyaları menü öğesi olarak ekleyecek."
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -215,7 +221,8 @@ msgstr[1] "%d masaüstü dosyalarından yeni başlatıcı oluştur"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Oturum yöneticisi olmadan X başlamıştır. Çık tıklamak X sunucusu kapanacak."
+msgstr ""
+"Oturum yöneticisi olmadan X başlamıştır. Çık tıklamak X sunucusu kapanacak."
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
@@ -229,14 +236,17 @@ msgstr "\"%s\" komutu çalıştırılamadı"
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Geçersiz eklenti kullanım sözdizimi.  PLUGIN-NAME:NAME[:TYPE:VALUE] şeklinde kullanın."
+msgstr ""
+"Geçersiz eklenti kullanım sözdizimi.  PLUGIN-NAME:NAME[:TYPE:VALUE] şeklinde "
+"kullanın."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr ""
+"Geçersiz yumuşatma türü \"%s\". Geçerli türler: bool, double, int, string ve "
 "uint."
-msgstr "Geçersiz yumuşatma türü \"%s\". Geçerli türler: bool, double, int, string ve uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -276,7 +286,9 @@ msgstr "Panel %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Panel kiosk modunda çalıştığı için, normal kullanıcı olarak panel ayarları üzerinde değişiklik yapmanıza izin verilmiyor"
+msgstr ""
+"Panel kiosk modunda çalıştığı için, normal kullanıcı olarak panel ayarları "
+"üzerinde değişiklik yapmanıza izin verilmiyor"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -302,7 +314,9 @@ msgstr "Aranacak kelimeyi buraya girin"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "\"%s\" eklentisi beklenmedik şekilde paneli terketti, yeniden başlatmak ister misiniz?"
+msgstr ""
+"\"%s\" eklentisi beklenmedik şekilde paneli terketti, yeniden başlatmak "
+"ister misiniz?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -310,7 +324,10 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Eklenti %d saniyede birden fazla yeniden başlatıldı. Eğer Çalıştıra bastıysanız panel eklentiyi yeniden başlatmayı deneyecek aksi halde kalıcı olarak panelden kaldırılacak."
+msgstr ""
+"Eklenti %d saniyede birden fazla yeniden başlatıldı. Eğer Çalıştıra "
+"bastıysanız panel eklentiyi yeniden başlatmayı deneyecek aksi halde kalıcı "
+"olarak panelden kaldırılacak."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -339,23 +356,25 @@ msgstr "%d. Paneli silmek istediğinize emin misiniz?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:958
+#: ../panel/panel-preferences-dialog.c:965
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(harici)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:963
+#: ../panel/panel-preferences-dialog.c:970
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Dahili isim: %s-%d\nPID: %d"
+msgstr ""
+"Dahili isim: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:975
+#: ../panel/panel-preferences-dialog.c:982
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Dahili isim: %s-%d"
@@ -415,7 +434,8 @@ msgstr "Paneli _Kilitle"
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Panelin kulplarını saklamak ve konumunu kilitlemek için bu seçeneği seçin."
+msgstr ""
+"Panelin kulplarını saklamak ve konumunu kilitlemek için bu seçeneği seçin."
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Automatically show and _hide the panel"
@@ -425,7 +445,9 @@ msgstr "Paneli otomatik olarak göster ve gizle"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "İmleç üzerinde olmadığında paneli gizlemek için bu seçeneği seçin. Bu sadece panel ekranın bir kenarına iliştirilmiş olduğunda çalışır."
+msgstr ""
+"İmleç üzerinde olmadığında paneli gizlemek için bu seçeneği seçin. Bu sadece "
+"panel ekranın bir kenarına iliştirilmiş olduğunda çalışır."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -435,7 +457,10 @@ msgstr "Kenarlıkların üstünde boşluk _ayırma"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Bu seçeneği, genişletişmiş pencerenin panelin arkasındaki alanı da kaplamasını istiyorsanız seçin. Bu, sadece panel bir ekran kenarına iliştirilmişse işe yarar."
+msgstr ""
+"Bu seçeneği, genişletişmiş pencerenin panelin arkasındaki alanı da "
+"kaplamasını istiyorsanız seçin. Bu, sadece panel bir ekran kenarına "
+"iliştirilmişse işe yarar."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -464,10 +489,11 @@ msgstr "Uz_unluğu otomatik olarak arttır"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Eklentiler daha fazla alan istediklerinde panelin boyunu otomatik olarak arttırmak için bu seçeneği seçin."
+msgstr ""
+"Eklentiler daha fazla alan istediklerinde panelin boyunu otomatik olarak "
+"arttırmak için bu seçeneği seçin."
 
-#. I18N: name of the section (frame) in the panel preferences where the user
-#. can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "Ölçümler"
@@ -489,7 +515,8 @@ msgstr "_Alfa:"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "0 tamamen şeffaf ve 100 tamamen mat olacak biçimde panel artalan alfa değeri."
+msgstr ""
+"0 tamamen şeffaf ve 100 tamamen mat olacak biçimde panel artalan alfa değeri."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -523,15 +550,18 @@ msgstr "_İsim:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully"
-" transparent and 100 fully opaque."
-msgstr "İşaretçi panel üzerindeyken 0 ile tam şeffaflık ve ile 100 tam mat görünüm."
+"Transparency when the pointer is hovering over the panel, with 0 being fully "
+"transparent and 100 fully opaque."
+msgstr ""
+"İşaretçi panel üzerindeyken 0 ile tam şeffaflık ve ile 100 tam mat görünüm."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "İşaretçi panel üzerinde değilken 0 ile tam şeffaflık ve ile 100 tam mat görünüm."
+msgstr ""
+"İşaretçi panel üzerinde değilken 0 ile tam şeffaflık ve ile 100 tam mat "
+"görünüm."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -540,7 +570,9 @@ msgstr "Saydamlık"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Panel için şeffakflık ayarlarını görüntülemek için pencere yöneticisinde birleştirmeyi etkinleştir."
+msgstr ""
+"Panel için şeffakflık ayarlarını görüntülemek için pencere yöneticisinde "
+"birleştirmeyi etkinleştir."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -613,7 +645,9 @@ msgstr "Panelin ilk çalışmasına hoşgeldiniz"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "Panel ayarları saklamak için yeni bir sisteme taşındığı için yeni bir başlangıç yapılandırması yükledi."
+msgstr ""
+"Panel ayarları saklamak için yeni bir sisteme taşındığı için yeni bir "
+"başlangıç yapılandırması yükledi."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -664,7 +698,7 @@ msgid "Panel configuration has been updated."
 msgstr "Panel yapılandırması güncellendi"
 
 #: ../plugins/actions/actions-dialog.glade.h:1
-#: ../plugins/actions/actions.desktop.in.h:1
+#: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Hareket Düğmeleri"
 
@@ -683,7 +717,9 @@ msgstr "_Onay kutusunu göster"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Bazı işlevler için 30 saniyelik bir gerisayımı çalıştıran doğrulama iletişim kutusu göster."
+msgstr ""
+"Bazı işlevler için 30 saniyelik bir gerisayımı çalıştıran doğrulama iletişim "
+"kutusu göster."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -810,29 +846,27 @@ msgstr "Bilgisayarı kapatmak istediğinizden emin misiniz?"
 msgid "Turning off computer in %d seconds."
 msgstr "Bilgisayar %d saniye içinde kapatılıyor."
 
-#: ../plugins/actions/actions.c:620
+#: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/separator/separator.desktop.in.h:1
+#: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Ayırıcı "
 
-#: ../plugins/actions/actions.c:975
+#: ../plugins/actions/actions.c:976
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "\"%s\" çalıştırılamadı"
 
-#: ../plugins/actions/actions.c:1142
+#: ../plugins/actions/actions.c:1147
 msgid "John Doe"
 msgstr "John Doe"
 
-#: ../plugins/actions/actions.desktop.in.h:2
+#: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
 msgstr "Çıkış, kilitleme veya diğer sistem seçenekleri"
 
-#. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/applicationsmenu/applicationsmenu.c:39
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 msgid "Applications Menu"
 msgstr "Uygulamalar Menüsü"
 
@@ -844,7 +878,9 @@ msgstr "Uygulamaların genel isimlerini göster"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Menüde uygulamanın genel adını görmek için bu seçeneği seçin, mesela \"Thunar\" yerine \"Dosya Yöneticisi\""
+msgstr ""
+"Menüde uygulamanın genel adını görmek için bu seçeneği seçin, mesela \"Thunar"
+"\" yerine \"Dosya Yöneticisi\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -902,18 +938,24 @@ msgstr "Bir Menü Dosyası Seç"
 msgid "Menu File"
 msgstr "Menü Dosyası"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:541
+#. I18N: default tooltip of the application menu
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
+#, fuzzy
+msgid "Applications"
+msgstr "Uygulamalar Menüsü"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:644
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Bir Simge Seç"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:582
+#: ../plugins/applicationsmenu/applicationsmenu.c:685
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" komutu çalıştırılamadı."
 
-#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
+#: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
 msgstr "Yüklenmiş uygulamaların kategorilerini içeren bir menü göster"
 
@@ -960,7 +1002,7 @@ msgid "Custom Format"
 msgstr "Özel Biçim"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#: ../plugins/clock/clock.desktop.in.h:1
+#: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Saat"
 
@@ -968,7 +1010,10 @@ msgstr "Saat"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Bölgesel bilgi veritabanında, herhangi bir bölgesel saate karşı düşen bir dosyanın adı. Örneğin \"Amerika/New_York\". Yerel saati kullanmak için boş bırakın."
+msgstr ""
+"Bölgesel bilgi veritabanında, herhangi bir bölgesel saate karşı düşen bir "
+"dosyanın adı. Örneğin \"Amerika/New_York\". Yerel saati kullanmak için boş "
+"bırakın."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -994,10 +1039,14 @@ msgstr "_İpucu biçimi:"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with"
-" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with "
+"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Biçim, dosya adına eklenecek tarih ve zaman dilimini tanımlar. Örneğin, %Y yılın yerine, %m ayın yerine ve %d günün yerine geçer. Benzer olarak <b></b> etiketleri metni kalın yapar. Ek bilgi için \"Yardım\" uygulamasının belgesine bakınız."
+msgstr ""
+"Biçim, dosya adına eklenecek tarih ve zaman dilimini tanımlar. Örneğin, %Y "
+"yılın yerine, %m ayın yerine ve %d günün yerine geçer. Benzer olarak <b></b> "
+"etiketleri metni kalın yapar. Ek bilgi için \"Yardım\" uygulamasının "
+"belgesine bakınız."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1023,8 +1072,7 @@ msgstr "AM/PM'i Gö_ster"
 msgid "F_ormat:"
 msgstr "B_içim:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
-#. or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "B_ulanıklık:"
@@ -1288,12 +1336,12 @@ msgstr "onbir"
 msgid "twelve"
 msgstr "oniki"
 
-#: ../plugins/clock/clock.desktop.in.h:2
+#: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Saat kaç?"
 
 #: ../plugins/directorymenu/directorymenu.c:246
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Dizin  Menüsü"
@@ -1331,7 +1379,7 @@ msgstr "Dizini Aç"
 msgid "Open in Terminal"
 msgstr "Uçbirimde aç"
 
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:2
+#: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
 msgstr "Menüde bir dizin ağacı göster"
 
@@ -1348,7 +1396,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Bir dizindeki görünebilir olmasını istediğiniz dosyaların desenini yazın. Eğer birden fazla desen yazacaksanız, noktalı virgül ile ayırın.(ör. *.txt;*.doc)"
+msgstr ""
+"Bir dizindeki görünebilir olmasını istediğiniz dosyaların desenini yazın. "
+"Eğer birden fazla desen yazacaksanız, noktalı virgül ile ayırın.(ör. *.txt;*."
+"doc)"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1438,7 +1489,7 @@ msgid "New _Link"
 msgstr "Yeni _Bağlantı"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
-#: ../plugins/launcher/launcher.desktop.in.h:1
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Başlatıcı"
 
@@ -1460,9 +1511,11 @@ msgstr "İ_pucunu Etkisizleştir"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button"
-" or menu items."
-msgstr "Fare panel düğmesinin veya menü öğelerinin üzerindeyken ipuçlarının devre dışı bırakılmasını istiyorsanız bu seçeneği işaretleyin."
+"Select this option to disable the tooltips when moving over the panel button "
+"or menu items."
+msgstr ""
+"Fare panel düğmesinin veya menü öğelerinin üzerindeyken ipuçlarının devre "
+"dışı bırakılmasını istiyorsanız bu seçeneği işaretleyin."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1484,15 +1537,15 @@ msgstr "O_k tuşu konumu:"
 msgid "Advanced"
 msgstr "Gelişmiş"
 
-#: ../plugins/launcher/launcher.desktop.in.h:2
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Uygulama çalıştırıcısı"
 
-#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "Çalışma Alanı _Ayarları..."
 
-#: ../plugins/pager/pager.c:461
+#: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
 msgstr "Çalışma alanı ayarları açılamadı"
 
@@ -1502,7 +1555,7 @@ msgid "Workspace %d"
 msgstr "Çalışma Alanı %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/pager/pager.desktop.in.h:1
+#: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Workspace Switcher"
 msgstr "Çalışma Alanı Değiştiricisi"
 
@@ -1518,7 +1571,9 @@ msgstr "Küçük görü_nüm göster"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Açık pencereler için dikdörtgen şeklinde çalışma alanlarının küçük görünümünü göster"
+msgstr ""
+"Açık pencereler için dikdörtgen şeklinde çalışma alanlarının küçük "
+"görünümünü göster"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1529,7 +1584,7 @@ msgstr "Çalış_ma alanları arasında fare topu kullanarak geçiş yap"
 msgid "Behaviour"
 msgstr "Davranış"
 
-#: ../plugins/pager/pager.desktop.in.h:2
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
 msgstr "Sanal masaüstleri arasında geçiş yap"
 
@@ -1549,7 +1604,7 @@ msgstr "İşle:"
 msgid "Dots"
 msgstr "Noktalar"
 
-#: ../plugins/separator/separator.desktop.in.h:2
+#: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "Panel öğeleri arasına boşluk veya ayraç ekler"
 
@@ -1562,11 +1617,11 @@ msgid "Minimize all open windows and show the desktop"
 msgstr "Tüm pencereleri gizle ve masaüstünü göster"
 
 #: ../plugins/showdesktop/showdesktop.c:215
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:1
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Masaüstünü Göster"
 
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
 msgstr "Tüm pencereleri gizle ve masaüstünü göster"
 
@@ -1579,7 +1634,9 @@ msgstr "Bildirim alanı başlatılamadı"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Bildirim alanının işlevini muhtemelen başka bir bileşen alacak. Bu alan kullanılmayacak."
+msgstr ""
+"Bildirim alanının işlevini muhtemelen başka bir bileşen alacak. Bu alan "
+"kullanılmayacak."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1590,7 +1647,7 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Bilinen uygulama listesini temizlemek istediğinizden emin misiniz?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/systray/systray.desktop.in.h:1
+#: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
 msgstr "Sistem çekmecesi"
 
@@ -1615,7 +1672,7 @@ msgstr "Bilinen Uygulamalar"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "%d ekranı için yönetim seçimi elde edilemedi"
 
-#: ../plugins/systray/systray.desktop.in.h:2
+#: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "Bildirim simgelerinin göründüğü alan"
 
@@ -1652,7 +1709,7 @@ msgid "None, allow drag-and-drop"
 msgstr "Hiçbiri, sürükle-bıraka izin ver"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "Pencere Düğmeleri"
 
@@ -1716,27 +1773,27 @@ msgstr "Pencereyi Kapat"
 msgid "Minimize Window"
 msgstr "Pencereyi Küçült"
 
-#: ../plugins/tasklist/tasklist-widget.c:3293
+#: ../plugins/tasklist/tasklist-widget.c:3308
 msgid "Mi_nimize All"
 msgstr "Hepsini _küçült"
 
-#: ../plugins/tasklist/tasklist-widget.c:3302
+#: ../plugins/tasklist/tasklist-widget.c:3317
 msgid "Un_minimize All"
 msgstr "Küçült_meleri geri al"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3323
 msgid "Ma_ximize All"
 msgstr "Hepsini _büyüt"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3332
 msgid "_Unmaximize All"
 msgstr "Büyültmeleri geri al"
 
-#: ../plugins/tasklist/tasklist-widget.c:3327
+#: ../plugins/tasklist/tasklist-widget.c:3342
 msgid "_Close All"
 msgstr "Hepsini _Kapat"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr "Açık pencereler arasında düğmeleri kullanarak geçiş yap"
 
@@ -1767,7 +1824,7 @@ msgid "Remove Workspace %d"
 msgstr "%d. çalışma alanını sil"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
 msgstr "Pencere Listesi"
 
@@ -1799,6 +1856,6 @@ msgstr "Simge"
 msgid "Arrow"
 msgstr "O_k:"
 
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+#: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
 msgstr "Açık pencereler arasında bir menü kullanarak geçiş yap"
