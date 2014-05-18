@@ -1,25 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Dmitry Nikitin <luckas_fb@mail.ru>, 2007-2008
-# Yarema aka Knedlyk <yupadmin@gmail.com>, 2013
+# Yarema aka Knedlyk <yupadmin@gmail.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 21:39+0100\n"
-"PO-Revision-Date: 2013-09-02 00:02+0000\n"
+"POT-Creation-Date: 2014-05-17 00:30+0200\n"
+"PO-Revision-Date: 2014-05-18 12:17+0000\n"
 "Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
-"Language-Team: Ukrainian (http://www.transifex.com/projects/p/xfce/language/"
-"uk/)\n"
-"Language: uk\n"
+"Language-Team: Ukrainian (http://www.transifex.com/projects/p/xfce4-panel/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
@@ -27,9 +25,9 @@ msgstr "Створити запускач на панелі"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"Додати новий запускач до панелі на основі інформації з його desktop файлу"
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "Додати новий запускач до панелі на основі інформації з його desktop файлу"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
@@ -178,12 +176,9 @@ msgstr "Не вдалось відіслати повідомлення D-Bus"
 
 #: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Ви бажаєте запустити панель? Якщо так, то тоді переконайтеся, що Ви зберегли "
-"сесію при виході, щоб наступним разом при вході панель запускалася "
-"автоматично."
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr "Ви бажаєте запустити панель? Якщо так, то тоді переконайтеся, що Ви зберегли сесію при виході, щоб наступним разом при вході панель запускалася автоматично."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -202,9 +197,7 @@ msgstr "Створити _запускач"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
-"Це створить новий запускач додатку на панелі і вставить кинуті файли як "
-"пункти меню."
+msgstr "Це створить новий запускач додатку на панелі і вставить кинуті файли як пункти меню."
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -218,9 +211,7 @@ msgstr[2] "Створити новий запускач з desktop-файлів 
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
-"Ви запустили X без менеджера сесії. Натискання на кнопку виходу закриє X-"
-"сервер."
+msgstr "Ви запустили X без менеджера сесії. Натискання на кнопку виходу закриє X-сервер."
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
@@ -234,17 +225,14 @@ msgstr "Не вдалось виконати команду \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Присвоєно неправильну подію плагіну. Використовуйте ПЛАГІН-НАЗВА:НАЗВА[:ТИП:"
-"ЗНАЧЕННЯ]."
+msgstr "Присвоєно неправильну подію плагіну. Використовуйте ПЛАГІН-НАЗВА:НАЗВА[:ТИП:ЗНАЧЕННЯ]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Неправильний тип виклику \"%s\". Правильними типами є bool, double, int, "
-"string та uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr "Неправильний тип виклику \"%s\". Правильними типами є bool, double, int, string та uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -284,9 +272,7 @@ msgstr "Панель %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
-"Через встановлений режим кіоска, Вам не дозволено робити зміни до "
-"конфігурації панелі в режимі звичайного користувача"
+msgstr "Через встановлений режим кіоска, Вам не дозволено робити зміни до конфігурації панелі в режимі звичайного користувача"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -320,10 +306,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
-"Розширення перезапускалось більше одного разу за останніх %d секунд. Якщо Ви "
-"натиснете Виконати панель спробує перезапустити це розширення, інакше воно "
-"буде повністю видалено з панелі."
+msgstr "Розширення перезапускалось більше одного разу за останніх %d секунд. Якщо Ви натиснете Виконати панель спробує перезапустити це розширення, інакше воно буде повністю видалено з панелі."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -364,9 +347,7 @@ msgstr "%s <span color=\"grey\" size=\"small\">(зовнішній)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
-"Внутрішня назва: %s-%d\n"
-"PID: %d"
+msgstr "Внутрішня назва: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -430,8 +411,7 @@ msgstr "_Заблокувати панель"
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr ""
-"Виберіть цю опцію щоб сховати тримачі панелі та зафіксувати їх позиції."
+msgstr "Виберіть цю опцію щоб сховати тримачі панелі та зафіксувати їх позиції."
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Automatically show and _hide the panel"
@@ -441,9 +421,7 @@ msgstr "Автоматично показувати та п_риховувати
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr ""
-"Виберіть цю опцію щоб сховати панель поки вказівник не опиниться над нею. Це "
-"працюватиме тільки коли панель приєднано до рамки екрану."
+msgstr "Виберіть цю опцію щоб сховати панель поки вказівник не опиниться над нею. Це працюватиме тільки коли панель приєднано до рамки екрану."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -453,9 +431,7 @@ msgstr "Не _резервувати місце на рамках"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
-"Виберіть цю опцію, якщо бажаєте, щоб максимізовані вікна закривали область "
-"за панеллю. Це працюватиме тільки коли панель приєднано до рамки екрану."
+msgstr "Виберіть цю опцію, якщо бажаєте, щоб максимізовані вікна закривали область за панеллю. Це працюватиме тільки коли панель приєднано до рамки екрану."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -484,11 +460,10 @@ msgstr "А_втоматично збільшувати довжину"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr ""
-"Виберіть цю опцію щоб автоматично збільшувати довжину панелі, якщо плагіни "
-"потребують більше місця."
+msgstr "Виберіть цю опцію щоб автоматично збільшувати довжину панелі, якщо плагіни потребують більше місця."
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "Розміри"
@@ -544,19 +519,15 @@ msgstr "_Залишити:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Прозорість коли вказівник знаходиться над панеллю, 0 (прозоре) та 100 "
-"(видиме)."
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
+msgstr "Прозорість коли вказівник знаходиться над панеллю, 0 (прозоре) та 100 (видиме)."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
-"Прозорість коли вказівник не знаходиться над панеллю, 0 (прозоре) та 100 "
-"(видиме)."
+msgstr "Прозорість коли вказівник не знаходиться над панеллю, 0 (прозоре) та 100 (видиме)."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -565,9 +536,7 @@ msgstr "Непрозорість"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
-"Включити композитні ефекти у віконний менеджер для настройки прозорості "
-"панелі."
+msgstr "Включити композитні ефекти у віконний менеджер для настройки прозорості панелі."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -640,9 +609,7 @@ msgstr "Запрошуємо до першого старту панелі"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
-"Через переміщення панелі на нову систему збереження властивостей, вона "
-"завантажує свіжу початкову конфігурацію."
+msgstr "Через переміщення панелі на нову систему збереження властивостей, вона завантажує свіжу початкову конфігурацію."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -712,9 +679,7 @@ msgstr "_Показати підтвердження"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
-"Показати діалогове вікно підтвердження з 30-секундним тайм-аутом для деяких "
-"дій."
+msgstr "Показати діалогове вікно підтвердження з 30-секундним тайм-аутом для деяких дій."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -873,9 +838,7 @@ msgstr "Показувати загальні н_азви програм"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Виберіть цю опцію щоб показати основну назву програми в меню, для прикладу "
-"\"Файловий менеджер\" замість \"Thunar\""
+msgstr "Виберіть цю опцію щоб показати основну назву програми в меню, для прикладу \"Файловий менеджер\" замість \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -935,16 +898,15 @@ msgstr "Меню Файл"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
-#, fuzzy
 msgid "Applications"
-msgstr "Меню програм"
+msgstr "Програми"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:644
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Вибрати значок"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:685
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1005,9 +967,7 @@ msgstr "Годинник"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
-"Назва часової зони, що відповідає файлу в базі zoneinfo, наприклад \"Europe/"
-"Kiev\". Залишіть порожнім для використання локального часу."
+msgstr "Назва часової зони, що відповідає файлу в базі zoneinfo, наприклад \"Europe/Kiev\". Залишіть порожнім для використання локального часу."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1033,13 +993,10 @@ msgstr "Формат спливаючого повідомл_ення:"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
-"Формат описує вигляд дати та часу при їх вставлянні у панель. Наприклад, %Y "
-"буде замінено на рік, %m на місяць та %d на день. Теги<b></b> зроблять текст "
-"погрубленим. Додаткову інформацію дивіться на сторінці \"Допомога\"."
+msgstr "Формат описує вигляд дати та часу при їх вставлянні у панель. Наприклад, %Y буде замінено на рік, %m на місяць та %d на день. Теги<b></b> зроблять текст погрубленим. Додаткову інформацію дивіться на сторінці \"Допомога\"."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1065,7 +1022,8 @@ msgstr "По_казувати AM/PM"
 msgid "F_ormat:"
 msgstr "Ф_ормат:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "Прибли_зність:"
@@ -1389,11 +1347,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Введіть список відповідностей які будуть використовуватись для відображення "
-"файлів, які будуть видимі в теці. Якщо Ви призначите більше однієї "
-"відповідності тут, список елементів мусить розділятись крапкою з комою (так "
-"як *.txt;*.doc)."
+msgstr "Введіть список відповідностей які будуть використовуватись для відображення файлів, які будуть видимі в теці. Якщо Ви призначите більше однієї відповідності тут, список елементів мусить розділятись крапкою з комою (так як *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1505,11 +1459,9 @@ msgstr "Вимкнути с_пливаючі повідомлення"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Виберіть цю опцію щоб вимкнути спливаючі повідомлення над кнопками панелі чи "
-"елементами меню."
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "Виберіть цю опцію щоб вимкнути спливаючі повідомлення над кнопками панелі чи елементами меню."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1565,9 +1517,7 @@ msgstr "Показати перегляд мініатюрами"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr ""
-"Показати вигляд мініатюрами для робочого середовища з прямокутниками для "
-"видимих вікон"
+msgstr "Показати вигляд мініатюрами для робочого середовища з прямокутниками для видимих вікон"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1628,9 +1578,7 @@ msgstr "Не можу запустити область повідомлень"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
-"Швидше за все інший віджет взяв на себе цю функцію в області повідомлень. Ця "
-"область неможливо буде використовувати."
+msgstr "Швидше за все інший віджет взяв на себе цю функцію в області повідомлень. Ця область неможливо буде використовувати."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1767,23 +1715,23 @@ msgstr "Закрити вікно"
 msgid "Minimize Window"
 msgstr "Мінімізувати вікно"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3306
 msgid "Mi_nimize All"
 msgstr "Мінімізува_ти всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3315
 msgid "Un_minimize All"
 msgstr "Д_емінімізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3323
+#: ../plugins/tasklist/tasklist-widget.c:3321
 msgid "Ma_ximize All"
 msgstr "Ма_ксимізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3332
+#: ../plugins/tasklist/tasklist-widget.c:3330
 msgid "_Unmaximize All"
 msgstr "Демаксимізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3342
+#: ../plugins/tasklist/tasklist-widget.c:3340
 msgid "_Close All"
 msgstr "Закрити в_сі"
 
