@@ -68,6 +68,9 @@ struct _ApplicationsMenuPlugin
   /* temp item we store here when the
    * properties dialog is opened */
   GtkWidget       *dialog_icon;
+
+  gulong           style_set_id;
+  gulong           screen_changed_id;
 };
 
 enum
@@ -109,6 +112,7 @@ static gboolean  applications_menu_plugin_menu                 (GtkWidget       
 static void      applications_menu_plugin_menu_deactivate      (GtkWidget              *menu,
                                                                 GtkWidget              *button);
 static void      applications_menu_plugin_set_garcon_menu      (ApplicationsMenuPlugin *plugin);
+static void      applications_menu_button_theme_changed        (ApplicationsMenuPlugin *plugin);
 
 
 
@@ -225,6 +229,11 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   plugin->menu = garcon_gtk_menu_new (NULL);
   g_signal_connect (G_OBJECT (plugin->menu), "selection-done",
       G_CALLBACK (applications_menu_plugin_menu_deactivate), plugin->button);
+
+  plugin->style_set_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "style-set",
+                                                   G_CALLBACK (applications_menu_button_theme_changed), plugin);
+  plugin->screen_changed_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "screen-changed",
+                                                        G_CALLBACK (applications_menu_button_theme_changed), plugin);
 }
 
 
@@ -401,6 +410,8 @@ applications_menu_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   gtk_widget_show (plugin->button);
 
+  applications_menu_plugin_size_changed (panel_plugin,
+      xfce_panel_plugin_get_size (panel_plugin));
   plugin->is_constructed = TRUE;
 }
 
@@ -413,6 +424,18 @@ applications_menu_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
   if (plugin->menu != NULL)
     gtk_widget_destroy (plugin->menu);
+
+  if (plugin->style_set_id != 0)
+    {
+      g_signal_handler_disconnect (plugin->button, plugin->style_set_id);
+      plugin->style_set_id = 0;
+    }
+
+  if (plugin->screen_changed_id != 0)
+    {
+      g_signal_handler_disconnect (plugin->button, plugin->screen_changed_id);
+      plugin->screen_changed_id = 0;
+    }
 
   g_free (plugin->button_title);
   g_free (plugin->button_icon);
@@ -786,3 +809,15 @@ applications_menu_plugin_menu (GtkWidget              *button,
 
   return TRUE;
 }
+
+
+
+static void
+applications_menu_button_theme_changed (ApplicationsMenuPlugin *plugin)
+{
+  XfcePanelPlugin *panel_plugin = XFCE_PANEL_PLUGIN (plugin);
+
+  applications_menu_plugin_size_changed (panel_plugin,
+      xfce_panel_plugin_get_size (panel_plugin));
+}
+
