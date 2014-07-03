@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Juhani Numminen <juhaninumminen0@gmail.com>, 2013
+# Tero Mononen <tero@mononen.eu>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 21:39+0100\n"
-"PO-Revision-Date: 2013-11-22 13:55+0000\n"
-"Last-Translator: Juhani Numminen <juhaninumminen0@gmail.com>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/xfce/language/"
-"fi/)\n"
-"Language: fi\n"
+"POT-Creation-Date: 2014-05-17 00:30+0200\n"
+"PO-Revision-Date: 2014-07-03 13:03+0000\n"
+"Last-Translator: Tero Mononen <tero@mononen.eu>\n"
+"Language-Team: Finnish (http://www.transifex.com/projects/p/xfce4-panel/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -25,7 +25,8 @@ msgstr "Luo käynnistin paneeliin"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
 msgstr ""
 
 #: ../panel-preferences.desktop.in.h:1
@@ -175,8 +176,8 @@ msgstr "D-Bus-viestin lähettäminen epäonnistui"
 
 #: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
 msgstr ""
 
 #: ../panel/main.c:407 ../panel/main.c:421
@@ -228,10 +229,9 @@ msgstr ""
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Virheellinen vihjeen tyyppi ”%s”. Mahdolliset tyypit ovat bool, double, int, "
-"string ja uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr "Virheellinen vihjeen tyyppi ”%s”. Mahdolliset tyypit ovat bool, double, int, string ja uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -297,9 +297,7 @@ msgstr "Kirjoita hakusana tähän"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"Liitännäinen ”%s” sulkeutui odottamattomasti, haluatko käynnistää sen "
-"uudelleen?"
+msgstr "Liitännäinen ”%s” sulkeutui odottamattomasti, haluatko käynnistää sen uudelleen?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -348,9 +346,7 @@ msgstr "%s <span color=\"grey\" size=\"small\">(ulkoinen)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
-"Sisäinen nimi: %s-%d\n"
-"Prosessitunniste: %d"
+msgstr "Sisäinen nimi: %s-%d\nProsessitunniste: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -463,11 +459,10 @@ msgstr "Kas_vata pituutta automaattisesti"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr ""
-"Kasvata paneelin pituutta automaattisesti, jos liitännäiset pyytävät "
-"lisätilaa."
+msgstr "Kasvata paneelin pituutta automaattisesti, jos liitännäiset pyytävät lisätilaa."
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "Mitat"
@@ -523,8 +518,8 @@ msgstr "Hiiri pois _päältä:"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:43
@@ -535,7 +530,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
-msgstr ""
+msgstr "Läpinäkyvyys"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
@@ -661,7 +656,7 @@ msgstr ""
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Paneelin asetukset ovat päivitetty."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.in.h:1
@@ -752,12 +747,12 @@ msgstr "L_epotila"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Haluatko siirtyä levypohjaiseen lepotilaan?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "Siirrytään lepotilaan %d sekunnin kuluessa."
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
@@ -769,12 +764,12 @@ msgstr "Kesk_eytystila"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Haluatko siirtyä RAM-pohjaiseen keskeytystilaan?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "Siirrytään lepotilaan %d sekunnin kuluessa."
 
 #: ../plugins/actions/actions.c:196
 msgid "Restart"
@@ -902,16 +897,15 @@ msgstr "Valikkotiedosto"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
-#, fuzzy
 msgid "Applications"
-msgstr "Sovellusvalikko"
+msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:644
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Valitse kuvake"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:685
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -937,7 +931,7 @@ msgstr "VALITSIN"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
 msgid "Options:"
-msgstr ""
+msgstr "Asetukset:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
@@ -998,8 +992,8 @@ msgstr ""
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
 msgstr ""
 
@@ -1027,7 +1021,8 @@ msgstr "Nä_ytä ip/ap"
 msgid "F_ormat:"
 msgstr "_Muoto:"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "_Tarkkuus:"
@@ -1340,7 +1335,7 @@ msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
-msgstr ""
+msgstr "Valitse kansio"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "_Base Directory:"
@@ -1394,7 +1389,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
-msgstr ""
+msgstr "Nimetön kohde"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
@@ -1451,7 +1446,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Add a new empty item"
-msgstr ""
+msgstr "Lisää uusi tyhjä kohde"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Delete the currently selected item"
@@ -1463,8 +1458,8 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
@@ -1485,7 +1480,7 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Advanced"
-msgstr ""
+msgstr "Lisäasetukset"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
@@ -1521,9 +1516,7 @@ msgstr "Näytä pienoisnäkymä"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr ""
-"Näyttää työtilan pienoisnäkymän, jossa näkyvien ikkunoiden kohdalla on "
-"suorakulmiot"
+msgstr "Näyttää työtilan pienoisnäkymän, jossa näkyvien ikkunoiden kohdalla on suorakulmiot"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1560,7 +1553,7 @@ msgstr "Lisää erottimen paneelin kohteiden väliin"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
-msgstr ""
+msgstr "Palauta pienennetyt ikkunat"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
@@ -1573,7 +1566,7 @@ msgstr "Näytä työpöytä"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
-msgstr ""
+msgstr "Piiloita kaikki ikkunat ja näytä työpöytä"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
@@ -1592,7 +1585,7 @@ msgstr ""
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr ""
+msgstr "Haluatko varmasti tyhjentää listan tunnetuista ohjelmista?"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
@@ -1638,7 +1631,7 @@ msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "Timestamp"
-msgstr ""
+msgstr "Aikaleima"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Group title and timestamp"
@@ -1721,23 +1714,23 @@ msgstr "Sulje ikkuna"
 msgid "Minimize Window"
 msgstr "Pienennä ikkuna"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3306
 msgid "Mi_nimize All"
 msgstr "_Pienennä kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3315
 msgid "Un_minimize All"
 msgstr "_Palauta kaikki näkyviin"
 
-#: ../plugins/tasklist/tasklist-widget.c:3323
+#: ../plugins/tasklist/tasklist-widget.c:3321
 msgid "Ma_ximize All"
 msgstr "S_uurenna kaikki"
 
-#: ../plugins/tasklist/tasklist-widget.c:3332
+#: ../plugins/tasklist/tasklist-widget.c:3330
 msgid "_Unmaximize All"
 msgstr "Palauta kaikkien _koko"
 
-#: ../plugins/tasklist/tasklist-widget.c:3342
+#: ../plugins/tasklist/tasklist-widget.c:3340
 msgid "_Close All"
 msgstr "_Sulje kaikki"
 
