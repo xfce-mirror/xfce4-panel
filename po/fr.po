@@ -8,14 +8,15 @@
 # jc1 <jc1.quebecos@gmail.com>, 2013
 # Jérôme Guelfucci <jeromeg@xfce.org>, 2009
 # Olivier Fourdan <fourdan@xfce.org>, 2004
+# Urien Desterres <urien.desterres@gmail.com>, 2014
 # Yannick Le Guen <leguen.yannick@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-17 00:30+0200\n"
-"PO-Revision-Date: 2014-07-05 10:09+0000\n"
-"Last-Translator: Yannick Le Guen <leguen.yannick@gmail.com>\n"
+"PO-Revision-Date: 2014-07-05 15:52+0000\n"
+"Last-Translator: Urien Desterres <urien.desterres@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/xfce4-panel/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -201,7 +202,7 @@ msgstr "Créer un _lanceur"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Cela créera un nouveau greffon de lancement sur le tableau de bord et insérera les fichiers déposés comme éléments du menu."
+msgstr "Cela créera un nouveau greffon de lancement sur le tableau de bord et un élément de menu y sera inséré pour chaque fichier qui y sera déposé."
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -275,7 +276,7 @@ msgstr "Tableau de bord %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Parce que le tableau de bord est en cours d'exécution en mode restreint, vous n'êtes pas autorisé à apporter des modifications à la configuration du tableau de bord en tant qu'utilisateur normal"
+msgstr "Le tableau de bord est en cours d'exécution en mode restreint, vous n'êtes donc pas autorisé à apporter des modifications à la configuration du tableau de bord en tant qu'utilisateur normal"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -309,7 +310,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Le greffon a redémarré plusieurs fois au cours des %d dernières secondes. Si vous appuyez sur Exécuter le tableau de bord va essayer de redémarrer le greffon, sinon il sera définitivement supprimé du tableau de bord."
+msgstr "Le greffon a redémarré plusieurs fois au cours des %d dernières secondes. Si vous appuyez sur Exécuter le tableau de bord essaiera de redémarrer le greffon, sinon il sera définitivement supprimé du tableau de bord."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -986,11 +987,11 @@ msgstr "Paramètres heure"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 msgid "_Layout:"
-msgstr "_Disposition :"
+msgstr "T_ype :"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "_Tooltip format:"
-msgstr "Format info_bulle :"
+msgstr "Format de l'info_bulle :"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 #, no-c-format
@@ -999,7 +1000,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Le format décrit quelles parties de la date et de l'heure insérer dans le tableau de bord. Par exemple, %Y sera substitué par l'année, %m par le mois et %d par le jour. De même, les balises <b> </b>  afficheront le texte en gras. Voir la page «Aide» pour plus d'informations."
+msgstr "Le format décrit quelles parties de la date et de l'heure insérer dans le tableau de bord. Par exemple, %Y sera remplacé par l'année, %m par le mois et %d par le jour. De même, les balises <b> </b> afficheront le texte en gras. Voir la page «Aide» pour plus d'informations."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1327,7 +1328,7 @@ msgstr "Impossible d'exécuter l'application préférée pour la catégorie « %
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
-msgstr "Ouvrir le répertoire"
+msgstr "Ouvrir le dossier"
 
 #: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
@@ -1335,7 +1336,7 @@ msgstr "Ouvrir dans un terminal"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr "Afficher une arborescence de répertoires dans un menu"
+msgstr "Afficher l'arborescence d'un répertoire dans un menu"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
@@ -1350,7 +1351,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Entrez une liste de modèles qui seront utilisés pour déterminer quels fichiers sont visibles dans un répertoire. Si vous spécifiez plus d'un modèle ici, les éléments de la liste doivent être séparés par des points-virgules (par exemple *.txt;*. doc)."
+msgstr "Entrer une liste de motifs qui seront utilisés pour déterminer quels fichiers afficher dans un répertoire. Si vous spécifiez ici plus d'un motif, les éléments de la liste devront être séparés par des points-virgules (par exemple *.txt;*. doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1364,7 +1365,7 @@ msgstr "Afficher les fichiers _cachés"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
-msgstr "Filtre"
+msgstr "Filtrage"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
@@ -1429,15 +1430,15 @@ msgstr "S_upprimer l'élément"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
-msgstr "A_jouter une application"
+msgstr "Ajouter une appli_cation"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
-msgstr "Nou_velle application"
+msgstr "Nouvelle _application"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
-msgstr "No_uveau lien"
+msgstr "Nouveau _lien"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
@@ -1458,13 +1459,13 @@ msgstr "Supprimer l'élément actuellement sélectionné"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Disable t_ooltips"
-msgstr "Désactiver les _bulles d'aides"
+msgstr "Désactiver les inf_obulles"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Sélectionnez cette option pour désactiver les info-bulles lorsque la souris se déplace sur le bouton du tableau de bord ou les éléments du menu."
+msgstr "Sélectionner cette option pour désactiver les infobulles lorsque la souris se déplace sur le bouton du tableau de bord ou les éléments du menu."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1476,7 +1477,7 @@ msgstr "Afficher le _dernier élément utilisé dans le tableau de bord"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Sélectionnez cette option pour déplacer l'élément du menu cliqué sur le tableau de bord."
+msgstr "Sélectionner cette option pour déplacer l'élément du menu cliqué sur le tableau de bord."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
@@ -1492,11 +1493,11 @@ msgstr "Lanceur de programme avec menu facultatif"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
-msgstr "_Préférences des espaces de travail..."
+msgstr "_Paramètres des espaces de travail..."
 
 #: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
-msgstr "Impossible d'ouvrir les paramètres de l'espace de travail"
+msgstr "Impossible d'ouvrir les paramètres des espaces de travail"
 
 #: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
@@ -1520,7 +1521,7 @@ msgstr "Afficher une vue _miniature"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Afficher une vue miniature de l'espaces de travail, avec des rectangles correspondant aux fenêtres visibles"
+msgstr "Afficher une vue miniature des espaces de travail, avec des rectangles correspondant aux fenêtres visibles"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1533,7 +1534,7 @@ msgstr "Comportement"
 
 #: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Switch between virtual desktops"
-msgstr "Changer de postes de travail  virtuels"
+msgstr "Changer de bureau virtuel"
 
 #: ../plugins/separator/separator-dialog.glade.h:3
 msgid "_Expand"
@@ -1581,7 +1582,7 @@ msgstr "Impossible de démarrer la zone de notification"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Il est probable qu'une autre application ait pris la fonction de zone de notification. Cette zone restera inutilisée."
+msgstr "Il est probable qu'une autre application assure déjà la fonction de zone de notification. Cette zone restera inutilisée."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1660,7 +1661,7 @@ msgstr "Boutons des fenêtres"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
-msgstr "Afficher les  _noms des boutons"
+msgstr "Afficher le _nom des boutons"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
@@ -1676,7 +1677,7 @@ msgstr "Or_dre de tri :"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
-msgstr "_Groupement de fenêtre :"
+msgstr "_Groupement de fenêtres :"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
@@ -1708,7 +1709,7 @@ msgstr "Afficher uniquement les fenêtres _réduites"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
-msgstr "Rien"
+msgstr "Aucune"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
@@ -1724,7 +1725,7 @@ msgstr "Tout _réduire"
 
 #: ../plugins/tasklist/tasklist-widget.c:3315
 msgid "Un_minimize All"
-msgstr "Non minimiser tout"
+msgstr "Tout _afficher"
 
 #: ../plugins/tasklist/tasklist-widget.c:3321
 msgid "Ma_ximize All"
@@ -1732,7 +1733,7 @@ msgstr "Tout _maximiser"
 
 #: ../plugins/tasklist/tasklist-widget.c:3330
 msgid "_Unmaximize All"
-msgstr "Non maximiser tout"
+msgstr "Tout r_estaurer"
 
 #: ../plugins/tasklist/tasklist-widget.c:3340
 msgid "_Close All"
@@ -1803,4 +1804,4 @@ msgstr "Flèche"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
-msgstr "Changer parmi les fenêtres ouvertes en utilisant un menu"
+msgstr "Basculer entre les fenêtres ouvertes en utilisant un menu"
