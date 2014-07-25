@@ -1,24 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # ByungHyun Choi<byunghyun.choi@gmail.com>, 2005
-# Darkcircle <darkcircle.0426@gmail.com>, 2013
-# ujuc Gang <potopro@gmail.com>, 2013
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2013
+# lego37yoon <lego37yoon@outlook.com>, 2014
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2013
+# Sungjin Kang <potopro@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 21:39+0100\n"
-"PO-Revision-Date: 2013-11-19 12:46+0000\n"
-"Last-Translator: Xfce <transifex@xfce.org>\n"
-"Language-Team: Korean (http://www.transifex.com/projects/p/xfce/language/"
-"ko/)\n"
-"Language: ko\n"
+"POT-Creation-Date: 2014-05-17 00:30+0200\n"
+"PO-Revision-Date: 2014-07-25 12:59+0000\n"
+"Last-Translator: lego37yoon <lego37yoon@outlook.com>\n"
+"Language-Team: Korean (http://www.transifex.com/projects/p/xfce4-panel/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -27,9 +28,9 @@ msgstr "패널에 실행 아이콘 만들기"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"이 데스크톱 파일의 정보에 기반하여 새로운 실행 아이콘을 패널에 등록합니다"
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "이 데스크톱 파일의 정보에 기반하여 새로운 실행 아이콘을 패널에 등록합니다"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
@@ -39,7 +40,7 @@ msgstr "패널"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Customize the panel"
-msgstr "패널을 취향대로 설정하기"
+msgstr "취향에 따른 패널 설정"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
@@ -178,11 +179,9 @@ msgstr "D-Bus 메시지를 보내는데 실패했습니다"
 
 #: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"패널을 시작하시렵니까? 패널을 시작 하면 로그아웃시 세션을 저장하는지 확인하"
-"여 다음 로그인시 패널이 자동으로 시작하도록 합니다."
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr "패널을 시작하시렵니까? 패널을 시작 하면 로그아웃시 세션을 저장하는지 확인하여 다음 로그인시 패널이 자동으로 시작하도록 합니다."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -227,17 +226,14 @@ msgstr "\"%s\" 명령을 실행하지 못 했습니다."
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"정의된 플러그인 이벤트 문법이 잘못되었습니다. PLUGIN-NAME:NAME[:TYPE:VALUE]"
-"를 사용합니다."
+msgstr "정의된 플러그인 이벤트 문법이 잘못되었습니다. PLUGIN-NAME:NAME[:TYPE:VALUE]를 사용합니다."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"잘못된 힌트 유형 \"%s\" 입니다. 올바른 유형은 bool, double, int string 그리"
-"고 uint 입니다."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr "잘못된 힌트 유형 \"%s\" 입니다. 올바른 유형은 bool, double, int string 그리고 uint 입니다."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -257,9 +253,7 @@ msgstr "XFCE 데스크톱 환경의 패널"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr ""
-"ByungHyun Choi<byunghyun.choi@gmail.com>\n"
-"Seong-ho Cho <darkcircle.0426@gmail.com>"
+msgstr "ByungHyun Choi<byunghyun.choi@gmail.com>\nSeong-ho Cho <darkcircle.0426@gmail.com>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -279,9 +273,7 @@ msgstr "패널 %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
-"패널이 키오스크 모드로 동작하고 있기 때문에, 정식 사용자로서의 패널 환경설정"
-"을 바꾸도록 허락하지 않았습니다"
+msgstr "패널이 키오스크 모드로 동작하고 있기 때문에, 정식 사용자로서의 패널 환경설정을 바꾸도록 허락하지 않았습니다"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -307,9 +299,7 @@ msgstr "검색 문구를 여기에 입력합니다"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습니다. 다시 시작 하시렵니"
-"까?"
+msgstr "플러그인 \"%s\"을(를) 예기치 않게 패널에서 제거했습니다. 다시 시작 하시렵니까?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -317,10 +307,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
-"최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습니다. 패널 실행을 누르시"
-"면 플러그인 다시 시작을 시도할 것이고, 그렇지 않으면 패널에서 완전히 제거합니"
-"다."
+msgstr "최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습니다. 패널 실행을 누르시면 플러그인 다시 시작을 시도할 것이고, 그렇지 않으면 패널에서 완전히 제거합니다."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -361,9 +348,7 @@ msgstr "%s <span color=\"grey\" size=\"small\">(외부)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
-"내부 이름: %s-%d\n"
-"PID: %d"
+msgstr "내부 이름: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -437,21 +422,17 @@ msgstr "패널을 자동으로 보이고 숨기기(_H)"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr ""
-"포인터가 패널 위에 있지 않을 때 패널을 숨기려면 이 옵션을 선택합니다. 이는 패"
-"널이 스크린의 모서리에 붙어있을 때만 동작합니다."
+msgstr "포인터가 패널 위에 있지 않을 때 패널을 숨기려면 이 옵션을 선택합니다. 이는 패널이 스크린의 모서리에 붙어있을 때만 동작합니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr "테두리의 공간을 남겨두지 말기(_R)"
+msgstr "테두리 공간 남겨두지 말기(_R)"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
-"패널 뒤 영역을 덮어 창을 최대화하려면 이 옵션을 선택하십시오. 이는 패널이 화"
-"면의 모서리에 붙어있을 때만 동작합니다."
+msgstr "패널 뒤 영역을 덮어 창을 최대화하려면 이 옵션을 선택하십시오. 이는 패널이 화면의 모서리에 붙어있을 때만 동작합니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -480,11 +461,10 @@ msgstr "길이를 자동으로 증가(_U)"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr ""
-"플러그인이 더 많은 공간을 필요로 한다면 패널의 길이를 자동으로 늘이는 이 옵션"
-"을 선택하십시오."
+msgstr "플러그인이 더 많은 공간을 필요로 한다면 패널의 길이를 자동으로 늘이는 이 옵션을 선택하십시오."
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Measurements"
 msgstr "측정기"
@@ -506,9 +486,7 @@ msgstr "알파(_A):"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr ""
-"패널 배경의 알파 값입니다. 0은 완전히 투명하게 하고 100은 완전히 불투명하게 "
-"합니다."
+msgstr "패널 배경의 알파 값입니다. 0은 완전히 투명하게 하고 100은 완전히 불투명하게 합니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -542,19 +520,15 @@ msgstr "커서 외부 위치(_L):"
 
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"마우스 포인터가 패널 위로 올라갔을 때의 투명도입니다. 0은 완전히 투명해지고 "
-"100은 완전히 불투명해집니다."
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
+msgstr "마우스 포인터가 패널 위로 올라갔을 때의 투명도입니다. 0은 완전히 투명해지고 100은 완전히 불투명해집니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
-"마우스 포인터가 패널 위로 올라가지 않았을 때의 투명도입니다. 0은 완전히 투명"
-"해지고 100은 완전히 불투명해집니다."
+msgstr "마우스 포인터가 패널 위로 올라가지 않았을 때의 투명도입니다. 0은 완전히 투명해지고 100은 완전히 불투명해집니다."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -636,9 +610,7 @@ msgstr "패널의 첫 시작을 환영합니다"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
-"설정을 저장하기 위한 새로운 시스템으로 패널을 이동했기 때문에, 처음 초기 환경"
-"설정을 불러왔습니다."
+msgstr "설정을 저장하기 위한 새로운 시스템으로 패널을 이동했기 때문에, 처음 초기 환경설정을 불러왔습니다."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -867,9 +839,7 @@ msgstr "일반적 프로그램 이름 표시(_A)"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"메뉴에서 일반적 프로그램 이름을 보이려면 이 옵션을 선택하십시오. 예: \"투나"
-"\" 대신 \"파일 관리자\""
+msgstr "메뉴에서 일반적 프로그램 이름을 보이려면 이 옵션을 선택하십시오. 예: \"투나\" 대신 \"파일 관리자\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -929,16 +899,15 @@ msgstr "메뉴 파일"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
-#, fuzzy
 msgid "Applications"
-msgstr "프로그램 메뉴"
+msgstr "어플리케이션"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:644
+#: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "아이콘 선택"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:685
+#: ../plugins/applicationsmenu/applicationsmenu.c:582
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -999,9 +968,7 @@ msgstr "시계"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
-"시간대 정보 데이터베이스에 있는 파일과 관련된 시간대 이름이며, 예를 들어 "
-"\"America/New_York\"이 있습니다. 지역 시간대를 사용하려면 빈 칸으로 두십시오."
+msgstr "시간대 정보 데이터베이스에 있는 파일과 관련된 시간대 이름이며, 예를 들어 \"America/New_York\"이 있습니다. 지역 시간대를 사용하려면 빈 칸으로 두십시오."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1027,14 +994,10 @@ msgstr "풍선 도움말 형식(_T):"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
-"이 형식은 파일 이름에 들어갈 날짜와 시간 부분을 나타냅니다. 예를 들어, %Y은"
-"(는) 연도를 대신하고, %m은(는) 달 수를 그리고 %d은(는) 날짜의 일 수를 나타냅"
-"니다. <b></b> 태그는 글씨를 굵게 강조합니다. 좀 더 알아보시려면 날짜 유틸리"
-"티 문서를 보십시오."
+msgstr "이 형식은 파일 이름에 들어갈 날짜와 시간 부분을 나타냅니다. 예를 들어, %Y은(는) 연도를 대신하고, %m은(는) 달 수를 그리고 %d은(는) 날짜의 일 수를 나타냅니다. <b></b> 태그는 글씨를 굵게 강조합니다. 좀 더 알아보시려면 날짜 유틸리티 문서를 보십시오."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1060,7 +1023,8 @@ msgstr "오전/오후 표시(_W)"
 msgid "F_ormat:"
 msgstr "형식(_O):"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "퍼지방식(_U):"
@@ -1384,10 +1348,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"디렉터리에서 어떤 파일을 보여줄지 결정하는데 사용할 패턴의 목록을 입력합니"
-"다. 여기에 하나 이상의 패턴을 지정한다면, 목록의 항목은 반드시 세미콜론으로 "
-"구분해야 합니다(e.g. *.txt;*.doc)."
+msgstr "디렉터리에서 어떤 파일을 보여줄지 결정하는데 사용할 패턴의 목록을 입력합니다. 여기에 하나 이상의 패턴을 지정한다면, 목록의 항목은 반드시 세미콜론으로 구분해야 합니다(e.g. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1499,11 +1460,9 @@ msgstr "풍선 도움말 비활성화(_O)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"패널 단추나 메뉴 항목 위로 마우스 포인터를 옮길 때 풍선 도움말 표시를 비활성"
-"화하려면 이 옵션을 선택합니다."
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "패널 단추나 메뉴 항목 위로 마우스 포인터를 옮길 때 풍선 도움말 표시를 비활성화하려면 이 옵션을 선택합니다."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1620,9 +1579,7 @@ msgstr "알림 영역을 시작할 수 없습니다"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
-"다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용하지 "
-"않습니다."
+msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용하지 않습니다."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1759,23 +1716,23 @@ msgstr "창 닫기"
 msgid "Minimize Window"
 msgstr "최소화"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3306
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3315
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3323
+#: ../plugins/tasklist/tasklist-widget.c:3321
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3332
+#: ../plugins/tasklist/tasklist-widget.c:3330
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3342
+#: ../plugins/tasklist/tasklist-widget.c:3340
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
 
