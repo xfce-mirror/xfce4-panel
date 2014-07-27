@@ -136,7 +136,7 @@ panel_signal_handler (gint signum)
   panel_debug (PANEL_DEBUG_MAIN,
                "received signal %s <%d>, %s panel",
                g_strsignal (signum), signum,
-               signum == SIGUSR1 ? "restarting" : "quiting");
+               signum == SIGUSR1 ? "restarting" : "quitting");
 
   panel_dbus_service_exit_panel (signum == SIGUSR1);
 }
