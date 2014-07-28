@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2008-2010 Nick Schermer <nick@xfce.org>
+ * Copyright (C) 2014 Jannis Pohlmann <jannis@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -423,7 +424,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "mode", "active");
   panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active");
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active");
-  panel_preferences_dialog_bindings_add (dialog, "autohide", "active");
+  panel_preferences_dialog_bindings_add (dialog, "autohide-behavior", "active");
   panel_preferences_dialog_bindings_add (dialog, "disable-struts", "active");
   panel_preferences_dialog_bindings_add (dialog, "size", "value");
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value");
