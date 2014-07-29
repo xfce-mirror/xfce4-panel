@@ -36,6 +36,7 @@
 #include <libwnck/libwnck.h>
 
 #include <exo/exo.h>
+#include <xfconf/xfconf.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
 #include <common/panel-utils.h>
@@ -2962,4 +2963,52 @@ panel_window_focus (PanelWindow *window)
   /* our best guess on non-x11 clients */
   gtk_window_present (GTK_WINDOW (window));
 #endif
+}
+
+
+
+void
+panel_window_migrate_autohide_property (PanelWindow   *window,
+                                        XfconfChannel *xfconf,
+                                        const gchar   *property_base)
+{
+  gboolean autohide;
+  gchar   *new_property;
+  gchar   *old_property;
+
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (XFCONF_IS_CHANNEL (xfconf));
+  panel_return_if_fail (property_base != NULL && *property_base != '\0');
+
+  old_property = g_strdup_printf ("%s/autohide", property_base);
+
+  /* check if we have an old "autohide" property for this panel */
+  if (xfconf_channel_has_property (xfconf, old_property))
+    {
+      new_property = g_strdup_printf ("%s/autohide-behavior", property_base);
+
+      /* migrate from old "autohide" to new "autohide-behavior" if the latter
+       * isn't set already */
+      if (!xfconf_channel_has_property (xfconf, new_property))
+        {
+          /* find out whether or not autohide was enabled in the old config */
+          autohide = xfconf_channel_get_bool (xfconf, old_property, FALSE);
+
+          /* set autohide behavior to always or never, depending on whether it
+           * was enabled in the old configuration */
+          if (xfconf_channel_set_uint (xfconf,
+                                       new_property,
+                                       autohide ? AUTOHIDE_BEHAVIOR_ALWAYS
+                                                : AUTOHIDE_BEHAVIOR_NEVER))
+            {
+              /* remove the old autohide property */
+              xfconf_channel_reset_property (xfconf, old_property, FALSE);
+            }
+        }
+      else
+        {
+          /* the new property is already set, simply remove the old property */
+          xfconf_channel_reset_property (xfconf, old_property, FALSE);
+        }
+    }
 }
