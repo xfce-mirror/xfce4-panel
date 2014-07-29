@@ -60,6 +60,8 @@ static void                     panel_preferences_dialog_bindings_add           
 static void                     panel_preferences_dialog_bindings_update        (PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_output_changed         (GtkComboBox            *combobox,
                                                                                  PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_autohide_changed       (GtkComboBox            *combobox,
+                                                                                 PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_bg_style_changed       (PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_bg_image_file_set      (GtkFileChooserButton   *button,
                                                                                  PanelPreferencesDialog *dialog);
@@ -280,6 +282,12 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
       g_signal_connect (G_OBJECT (object), "changed",
                         G_CALLBACK (panel_preferences_dialog_output_changed),
                         dialog);
+
+  /* connect the autohide behavior changed signal */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "autohide-behavior");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (object));
+  g_signal_connect (G_OBJECT (object), "changed",
+      G_CALLBACK (panel_preferences_dialog_autohide_changed), dialog);
 }
 
 
@@ -568,6 +576,11 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   g_object_set (G_OBJECT (object), "visible", n_monitors > 1, NULL);
 
   g_free (output_name);
+
+  /* update sensitivity of "don't reserve space on borders" option */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "autohide-behavior");
+  panel_return_if_fail (GTK_IS_COMBO_BOX (object));
+  panel_preferences_dialog_autohide_changed (GTK_COMBO_BOX (object), dialog);
 }
 
 
@@ -598,6 +611,28 @@ panel_preferences_dialog_output_changed (GtkComboBox            *combobox,
 
       g_free (output_name);
     }
+}
+
+
+
+static void
+panel_preferences_dialog_autohide_changed (GtkComboBox            *combobox,
+                                           PanelPreferencesDialog *dialog)
+{
+  GObject *object;
+
+  panel_return_if_fail (GTK_IS_COMBO_BOX (combobox));
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  panel_return_if_fail (PANEL_WINDOW (dialog->active));
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "disable-struts");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+
+  /* make "don't reserve space on borders" sensitive only when autohide is disabled */
+  if (gtk_combo_box_get_active (combobox) == 0)
+    gtk_widget_set_sensitive (GTK_WIDGET (object), TRUE);
+  else
+    gtk_widget_set_sensitive (GTK_WIDGET (object), FALSE);
 }
 
 
