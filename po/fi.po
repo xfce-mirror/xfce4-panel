@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Juhani Numminen <juhaninumminen0@gmail.com>, 2013
+# Pasi Lallinaho <pasi@shimmerproject.org>, 2014
 # Tero Mononen <tero@mononen.eu>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-17 00:30+0200\n"
-"PO-Revision-Date: 2014-07-03 13:03+0000\n"
-"Last-Translator: Tero Mononen <tero@mononen.eu>\n"
+"PO-Revision-Date: 2014-08-22 18:27+0000\n"
+"Last-Translator: Pasi Lallinaho <pasi@shimmerproject.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/xfce4-panel/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr "Luo käynnistin paneeliin"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr ""
+msgstr "Lisää uusi käynnistin paneeliin perustuen tämän työpöytätiedoston tietoihin"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
@@ -178,16 +179,16 @@ msgstr "D-Bus-viestin lähettäminen epäonnistui"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr ""
+msgstr "Haluatko käynnistää paneelin? Jos käynnistät paneelin, varmista että tallennat istunnon kirjautuessasi ulos, jotta paneeli käynnistetään automaattisesti seuraavan kerran kun kirjaudut sisään."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
-msgstr ""
+msgstr "Käynnissä olevaa instanssia kohteelle %s ei löytynyt"
 
 #: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
-msgstr ""
+msgstr "Tuomissovelluksen käynnistäminen epäonnistui"
 
 #: ../panel/panel-application.c:982
 msgid "Create _Launcher"
@@ -197,7 +198,7 @@ msgstr "Luo kä_ynnistin"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Tämä luo uuden käynnistinliitännäisen paneeliin ja lisää pudoteut tiedostot valikkokohteina."
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -210,7 +211,7 @@ msgstr[1] "Luo uusi käynnistin %d työpöytäkuvaketiedostosta"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
+msgstr "Olet käynnistänyt X:n ilman ikkunointimanageria. Painaessasi \"Quit\" X-palvelin suljetaan."
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
@@ -224,7 +225,7 @@ msgstr "Komennon ”%s” suorittaminen epäonnistui."
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
+msgstr "Liitännäisen tapahtuman syntaksi on tuntematon. Käytä syntaksia LIITÄNNÄISEN-NIMI:NIMI[:TYYPPI:ARVO]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
@@ -239,7 +240,7 @@ msgstr "Ylläpitäjät"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Työpöytäpalkki -tila"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -251,7 +252,7 @@ msgstr "Xfce-työpöytäympäristön paneeli"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Juhani Numminen <juhaninumminen0@gmail.com>"
+msgstr "Juhani Numminen <juhaninumminen0@gmail.com>\nPasi Lallinaho <pasi@shimmerproject.org>"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -271,7 +272,7 @@ msgstr "Paneeli %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
+msgstr "Koska paneelia ajetaan kioskitilassa, et voi tehdä muutoksia paneeliin normaalina käyttäjänä."
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -305,7 +306,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
+msgstr "Liitännäinen käynnistyi uudelleen useammin kuin kerran viimeisen %d sekunnin aikana. Jos painat Suorita paneeli yrittää käynnistää liitännäisen uudelleen. Muussa tapauksessa se poistetaan lopullisesti paneelista."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -365,7 +366,7 @@ msgstr "Pystysuuntainen"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Työpöytäpalkki"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
@@ -397,11 +398,11 @@ msgstr "_Ulostulo:"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Span mo_nitors"
-msgstr ""
+msgstr "Venytä _näyttöjen yli"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
+msgstr "Valitse tämä valinta jos haluat venyttää paneelin useammalle näytölle."
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "_Lock panel"
@@ -420,17 +421,17 @@ msgstr "Näytä ja piilota paneeli automaattisesti"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Valitse tämä valinta piilottaaksesi paneelin kun osoitin ei ole sen päällä. Tämä valinta toimii vain kun paneeli on kiinni näytön reunassa."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Älä va_raa tilaa reunoilla"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Valitse tämä valinta jos haluat suurennettujen ikkunoiden peittävän alueen paneelin takana. Tämä valinta toimii vain kun paneeli on kiinni näytön reunassa."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -440,7 +441,7 @@ msgstr "Yleiset"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "Rivin _koko (pikseleissä):"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #, no-c-format
@@ -478,13 +479,13 @@ msgstr "_Tyyli:"
 
 #: ../panel/panel-preferences-dialog.glade.h:31
 msgid "_Alpha:"
-msgstr "Al_fa:"
+msgstr "_Läpinäkyvyys:"
 
 #: ../panel/panel-preferences-dialog.glade.h:32
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr ""
+msgstr "Paneelin taustavärin läpinäkyvyys, jossa 0 on täysin läpinäkyvä ja 100 täysin läpinäkymätön."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -520,13 +521,13 @@ msgstr "Hiiri pois _päältä:"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr ""
+msgstr "Läpinäkyvyys kun osoitin on paneelin päällä, jossa 0 on täysin läpinäkyvä ja 100 täysin läpinäkymätön."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
+msgstr "Läpinäkyvyys kun osoitin ei ole paneelin päällä, jossa 0 on täysin läpinäkyvä ja 100 täysin läpinäkymätön."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -535,7 +536,7 @@ msgstr "Läpinäkyvyys"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "Kytke komposointi päälle ikkunointimanagerissa käyttääksesi paneelin läpinäkyvyysasetuksia."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -608,11 +609,11 @@ msgstr "Tervetuloa paneelin ensikäynnistykseen"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
+msgstr "Koska paneeli käyttää uutta järjestelmää asetuksien säilyttämiseen, asetukset täytyy ladata uudelleen. "
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Valitse alta mitkä asetukset haluat käyttöön ensimmäisen käynnistyksen yhteydessä."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
@@ -648,11 +649,11 @@ msgstr "Oletusten lataaminen epäonnistui"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Paneelin asetukset täytyy tuoda..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Olemassa olevien asetusten tuonti epäonnistui"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -669,7 +670,7 @@ msgstr "U_lkoasu:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "Käännä painikkeiden _suunta"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
@@ -678,7 +679,7 @@ msgstr "_Kysy vahvistusta"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Näytä vahvistusikkuna 30 sekunnin aikakatkaisulla joillekin toiminnoista."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -837,7 +838,7 @@ msgstr "Näytä sovellusten yleiset nimet"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "Valitse tämä valinta näyttääksesi sovellusten yleiset nimet valikossa, esimerkiksi \"Tiedostoselain\" eikä \"Thunar\". "
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -858,7 +859,7 @@ msgstr "_Kuvake:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
-msgstr ""
+msgstr "Näytä sovelluksen kuvaus työkaluvihjeessä"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 #: ../plugins/clock/clock-dialog.glade.h:10
@@ -873,7 +874,7 @@ msgstr "Ulkoasu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid "Use the _default menu"
-msgstr ""
+msgstr "Käytä _oletusvalikkoa"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 msgid "Ed_it Menu"
@@ -898,7 +899,7 @@ msgstr "Valikkotiedosto"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr ""
+msgstr "Sovellukset"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:541
 #: ../plugins/directorymenu/directorymenu.c:388
@@ -913,7 +914,7 @@ msgstr "Komennon ”%s” suorittaminen epäonnistui."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
+msgstr "Näytä valikko jossa on kategoriat sovellusten sijasta"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -937,7 +938,7 @@ msgstr "Asetukset:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr ""
+msgstr "Avaa valikko osoittimen nykyisessä sijainnissa"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
@@ -966,7 +967,7 @@ msgstr "Kello"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
+msgstr "Zoneinfo-tietokannan mukainen aikavyöhykkeen nimi, esimerkiksi \"America/New_York\". Jätä tyhjäksi käyttääksesi localtimeä."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -986,7 +987,7 @@ msgstr "_Asettelu:"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "_Tooltip format:"
-msgstr ""
+msgstr "_Työkaluvihjeen muoto:"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 #, no-c-format
@@ -995,7 +996,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
+msgstr "Muoto määrittelee päiväyksen ja ajan osat jotka näytetään paneelissa. Esimerkiksi %Y korvataan vuodella, %m kuukaudella ja %d päivällä. Samalla tavalla, <b></b> -tagit tummentaa tekstin. Katso \"Ohje\" -sivulta lisätietoja."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1003,7 +1004,7 @@ msgstr "Näytä _sekunnit"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "True _binary clock"
-msgstr ""
+msgstr "Todellinen _binäärikello"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "24-_hour clock"
@@ -1029,7 +1030,7 @@ msgstr "_Tarkkuus:"
 
 #: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Näytä pisteet jotka _eivät ole aktiivisia"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 msgid "Show gri_d"
@@ -1294,36 +1295,36 @@ msgstr "Paljonko kello on?"
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
-msgstr ""
+msgstr "Hakemistovalikko"
 
 #: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr ""
+msgstr "Sovelluksen \"%s\" käynnistäminen epäonnistui"
 
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Sisältötyypin kysely kohteelle \"%s\" epäonnistui"
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr ""
+msgstr "Oletussovellusta ei löytynyt kohteelle \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr ""
+msgstr "Oletussovelluksen käynnistäminen kohteelle \"%s\" epäonnistui"
 
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Kategorian \"%s\" suositun sovelluksen käynnistäminen epäonnistui"
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
-msgstr "Avaa kansio"
+msgstr "Avaa hakemisto"
 
 #: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
@@ -1331,61 +1332,61 @@ msgstr "Avaa päätteessä"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Näytä hakemistorakenne valikossa"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
-msgstr "Valitse kansio"
+msgstr "Valitse hakemisto"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "_Base Directory:"
-msgstr ""
+msgstr "_Ylähakemisto:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Syötä lista suodattimista, jotka määrittävät mitkä tiedostot ovat näkyvissä hakemistossa. Jos määrität useamman kuin yhden suodattimen, listan pitää erotella puolipilkuilla (esim. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
-msgstr ""
+msgstr "Tiedosto_suodatin:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
-msgstr ""
+msgstr "Näytä _piilotetut tiedostot"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
-msgstr ""
+msgstr "Suodatus"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr ""
+msgstr "Avaa käynnistinvalikko"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
-msgstr ""
+msgstr "Nimetön kohde"
 
 #: ../plugins/launcher/launcher.c:1728
 msgid "No items"
-msgstr ""
+msgstr "Ei kohteita"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr ""
+msgstr "Työpöytätiedoston muokkaimen käynnistäminen epäonnistui"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "Jos poistat kohteen, se poistetaan lopullisesti"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr ""
+msgstr "Oletko varma että haluat poistaa kohteen \"%s\"?"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
@@ -1413,7 +1414,7 @@ msgstr "Etelä"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
-msgstr ""
+msgstr "Painikkeen sisällä"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
@@ -1442,7 +1443,7 @@ msgstr "Käynnistin"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
-msgstr ""
+msgstr "Lisää yksi tai useampi olemassa oleva kohde käynnistimeen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Add a new empty item"
@@ -1450,33 +1451,33 @@ msgstr "Lisää uusi tyhjä kohde"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Delete the currently selected item"
-msgstr ""
+msgstr "Poista valittu kohde"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Disable t_ooltips"
-msgstr ""
+msgstr "Kytke t_yökaluvihjeet pois päältä"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr ""
+msgstr "Valite tämä valinta kytkeäksesi työkaluvihjeet pois päältä silloin kun osoitin on paneelin painikkeiden tai valikon kohteiden päällä."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr ""
+msgstr "Näytä _selite kuvakkeen sijasta"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr ""
+msgstr "Näytä _viimeksi käytetty kohde paneelissa"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
+msgstr "Valitse tämä valinta siirtääksesi napsautetun valikon kohteen paneeliin."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
-msgstr ""
+msgstr "_Nuolipainikkeen sijainti:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Advanced"
@@ -1484,15 +1485,15 @@ msgstr "Lisäasetukset"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Sovelluskäynnistin valinnaisella valikolla"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
-msgstr ""
+msgstr "Työtila-_asetukset..."
 
 #: ../plugins/pager/pager.c:451
 msgid "Unable to open the workspace settings"
-msgstr ""
+msgstr "Työtila-asetuksia ei voitu avata"
 
 #: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
@@ -1557,7 +1558,7 @@ msgstr "Palauta pienennetyt ikkunat"
 
 #: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
-msgstr ""
+msgstr "Pienennä kaikki avoimet ikkunat ja näytä työpöytä"
 
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
@@ -1570,18 +1571,18 @@ msgstr "Piiloita kaikki ikkunat ja näytä työpöytä"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr ""
+msgstr "Ilmoitusaluetta ei voitu käynnistää"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
+msgstr "Jokin muu vimpain toimii todennäköisesti ilmoitusalueena. Tätä aluetta ei käytetä."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr ""
+msgstr "Ilmoitusalue menetti valinnan"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1590,23 +1591,23 @@ msgstr "Haluatko varmasti tyhjentää listan tunnetuista ohjelmista?"
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
-msgstr ""
+msgstr "Ilmoitusalue"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "Kuvakkeen _maksimikoko (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
-msgstr ""
+msgstr "Näytä _kehys"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
-msgstr ""
+msgstr "Poista _tunnetut sovellukset"
 
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Known Applications"
-msgstr ""
+msgstr "Tunnetut sovellukset"
 
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
@@ -1615,7 +1616,7 @@ msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
-msgstr ""
+msgstr "Alue jolle ilmoituskuvakkeet ilmestyvät"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Never"
@@ -1627,7 +1628,7 @@ msgstr "Aina"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
-msgstr ""
+msgstr "Kun tila on vähissä"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
 msgid "Timestamp"
@@ -1635,7 +1636,7 @@ msgstr "Aikaleima"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:5
 msgid "Group title and timestamp"
-msgstr ""
+msgstr "Ryhmitä otsikko ja aikaleima"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:6
 msgid "Window title"
@@ -1643,64 +1644,64 @@ msgstr "Ikkunan otsikko"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Group title and window title"
-msgstr ""
+msgstr "Ryhmitä otsikko ja ikkunan otsikko"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Ei mitään, salli veto ja pudotus"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
-msgstr ""
+msgstr "Ikkunapainikkeet"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
-msgstr ""
+msgstr "Näytä painikkeiden _kuvaukset"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "Show _flat buttons"
-msgstr ""
+msgstr "Näytä _tasaiset painikkeet"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show _handle"
-msgstr ""
+msgstr "Näytä k_ahva"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
-msgstr ""
+msgstr "_Järjestys:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
-msgstr ""
+msgstr "Ikkunoiden _ryhmitys:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
-msgstr ""
+msgstr "_Keskimmäisen näppäimen toiminto:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
-msgstr ""
+msgstr "Palauta pienennetyt ikkunat nykyiseen _työtilaan"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
-msgstr ""
+msgstr "_Piirrä ikkunan reunus kun osoite on painikkeen päällä"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "_Vaihda ikkunoita käyttäen hiiren rullaa"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgstr "Näytä ikkunat _kaikista työtiloista tai näkymistä"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
-msgstr ""
+msgstr "Näytä ikkunat kaikista _näytöistä"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Show only _minimized windows"
-msgstr ""
+msgstr "Näytä vain _pienennetyt ikkunat"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
@@ -1736,7 +1737,7 @@ msgstr "_Sulje kaikki"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Vaihda avointen ikkunoiden välillä käyttäen painikkeita"
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
@@ -1767,27 +1768,27 @@ msgstr "Poista työtila %d"
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
-msgstr ""
+msgstr "Ikkunavalikko"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
-msgstr ""
+msgstr "Painikkeiden järjestys:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Show workspace a_ctions"
-msgstr ""
+msgstr "Näytä työtilojen _toiminnot"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Show workspace _names"
-msgstr ""
+msgstr "Näytä työtilojen _nimet"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
-msgstr ""
+msgstr "Kytke _kiireellisyysilmoitukset päälle"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr ""
+msgstr "Näytä ikkunat _kaikista työtiloista"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Icon"
@@ -1799,4 +1800,4 @@ msgstr "Nuoli"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Vaihda avoimien ikkunoiden välillä käyttäen valikkoa"
