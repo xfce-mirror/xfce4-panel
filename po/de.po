@@ -6,7 +6,7 @@
 # Enrico Tröger <enrico@xfce.org>, 2008
 # Harald Judt <h.judt@gmx.at>, 2013
 # Jakob Kramer <jakob.kramer@gmx.de>, 2012
-# Markus Hentsch, 2013
+# Markus, 2013
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010,2012
 # Simon Schneider <simon@schneiderimtal.de>, 2009
 # Tobias Bannert, 2013-2014
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-05 06:30+0200\n"
-"PO-Revision-Date: 2014-09-05 12:30+0000\n"
+"PO-Revision-Date: 2014-09-17 22:15+0000\n"
 "Last-Translator: Tobias Bannert\n"
 "Language-Team: German (http://www.transifex.com/projects/p/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Starter zur Leiste hinzufügen"
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Einen neuen Starter zur Leiste hinzufügen anhand der Informationen in der Desktop-Datei"
+msgstr "Einen neuen Starter zur Leiste hinzufügen, basierend auf den Informationen in dieser Schreibtischdatei"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2557
@@ -98,11 +98,11 @@ msgstr "Leisteneinstellungen speichern"
 
 #: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
-msgstr "Neues Plugin zur Leiste hinzufügen"
+msgstr "Neue Erweiterung zur Leiste hinzufügen"
 
 #: ../panel/main.c:83
 msgid "PLUGIN-NAME"
-msgstr "PLUGIN-NAME"
+msgstr "ERWEITERUNGSNAME"
 
 #: ../panel/main.c:84
 msgid "Restart the running panel instance"
@@ -131,20 +131,20 @@ msgstr "[ARGUMENTE …]"
 #: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Geben Sie »%s --help« für Informationen zur Nutzung an."
+msgstr "»%s --help« für Informationen zur Benutzung eingeben."
 
 #: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
-msgstr "Das Xfce-Entwicklerteam. Alle Rechte vorbehalten."
+msgstr "Die Xfce-Entwicklungsmannschaft. Alle Rechte vorbehalten."
 
 #: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Bitte melden Sie Fehler an <%s>"
+msgstr "Fehler bitte an <%s> melden."
 
 #: ../panel/main.c:321
 msgid "There is already a running instance"
-msgstr "Es gibt bereits eine laufende Instanz"
+msgstr "Es ist bereits eine laufende Instanz vorhanden"
 
 #. spawn ourselfs again
 #: ../panel/main.c:366
@@ -153,11 +153,11 @@ msgstr "Neustart …"
 
 #: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
-msgstr "Konnte den Einstellungsdialog nicht öffnen"
+msgstr "Einstellungsdialog konnte nicht geöffnet werden"
 
 #: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
-msgstr "Dialog »Neue Elemente hinzufügen« konnte nicht angezeigt werden"
+msgstr "»Neue Elemente hinzufügen«-Dialog konnte nicht angezeigt werden"
 
 #: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
@@ -165,25 +165,25 @@ msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
 #: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
-msgstr "Konnte Plugin nicht zur Leiste hinzufügen"
+msgstr "Erweiterung konnte nicht zur Leiste hinzugefügt werden"
 
 #: ../panel/main.c:389
 msgid "Failed to restart the panel"
-msgstr "Konnte die Leiste nicht neustarten"
+msgstr "Leiste konnte nicht neu gestartet werden"
 
 #: ../panel/main.c:391
 msgid "Failed to quit the panel"
-msgstr "Konnte die Leiste nicht beenden"
+msgstr "Leiste konnte nicht beendet werden"
 
 #: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
-msgstr "Konnte keine D-Bus-Nachricht senden"
+msgstr "D-Bus-Nachricht konnte nicht gesendet werden"
 
 #: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
+msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie bitte sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -192,7 +192,7 @@ msgstr "Keine laufende Instanz von %s gefunden"
 
 #: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
-msgstr "Konnte die Anwendung zum Migrieren der Leisteneinstellungen nicht starten"
+msgstr "Anwendung zum Migrieren der Leisteneinstellungen konnte nicht gestartet werden"
 
 #: ../panel/panel-application.c:985
 msgid "Create _Launcher"
@@ -202,20 +202,20 @@ msgstr "Starter an_legen"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Dies erzeugt eine neue Starter-Erweiterung auf der Leiste und fügt die abgelegten Dateien als Menüpunkte hinzu."
+msgstr "Das erzeugt eine neue Startererweiterung auf der Leiste und fügt die abgelegten Dateien als Menüpunkte hinzu."
 
 #: ../panel/panel-application.c:988
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] "Neuen Starter aus %d Desktop-Konfigurationsdatei zur Leiste hinzufügen"
-msgstr[1] "Neuen Starter aus %d Desktop-Konfigurationsdateien zur Leiste hinzufügen"
+msgstr[0] "Neuen Starter aus %d Schreibtischdatei erstellen"
+msgstr[1] "Neuen Starter aus %d Schreibtischdateien erstellen"
 
 #: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« klicken, beendet dies den X-Server."
+msgstr "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« klicken, beendet das den X-Server."
 
 #: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
@@ -224,19 +224,19 @@ msgstr "Soll die Leiste wirklich beendet werden?"
 #: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Konnte Befehl »%s« nicht ausführen."
+msgstr "Befehl »%s« konnte nicht ausgeführt werden"
 
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ungültige Syntax für Plugin-Ereignisse angegeben. Verwenden Sie PLUGIN-NAME:NAME [:TYP:WERT]."
+msgstr "Nicht gültige Syntax für Erweiterungsereignis angegeben. Bitte ERWEITERUNGSNAME:NAME[:TYP:WERT] verwenden."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Ungültiger Hinweistyp »%s«. Erlaubte Typen sind 'bool', 'double', 'int', 'string' und 'uint'."
+msgstr "Nicht gültiger Hinweistyp »%s«. Erlaubte Typen sind »bool«, »double«, »int«, »string« und »uint«."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -1575,7 +1575,7 @@ msgstr "Geöffnete Fenster verstecken und Schreibtisch anzeigen"
 #: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr "Schreibtisch zeigen"
+msgstr "Schreibtisch anzeigen"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Hide all windows and show the desktop"
