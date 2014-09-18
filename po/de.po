@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-05 06:30+0200\n"
-"PO-Revision-Date: 2014-09-17 22:15+0000\n"
+"PO-Revision-Date: 2014-09-17 23:18+0000\n"
 "Last-Translator: Tobias Bannert\n"
 "Language-Team: German (http://www.transifex.com/projects/p/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -244,7 +244,7 @@ msgstr "Betreuer"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr "Deskbar-Modus"
+msgstr "Schreibtischleistenmodus"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -261,11 +261,11 @@ msgstr "Moritz Heiber <moe@xfce.org>\nFabian Nowak <timystery@arcor.de>\nEnrico 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Add New Item"
-msgstr "Neue Elemente hinzufügen"
+msgstr "Neues Element hinzufügen"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr "Bitte wählen Sie eine Leiste für das neue Element:"
+msgstr "Bitte eine Leiste für das neue Element auswählen:"
 
 #: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:842
 #, c-format
@@ -276,11 +276,11 @@ msgstr "Leiste %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Da sich die Leiste im »Kiosk«-Modus befindet, sind Änderungen an der Leisteneinstellung als normaler Nutzer nicht erlaubt."
+msgstr "Da sich die Leiste im »Kiosk«-Modus befindet, sind Änderungen an der Leisteneinstellung als normaler Benutzer nicht erlaubt."
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
-msgstr "Modifizieren der Leiste ist nicht erlaubt"
+msgstr "Verändern der Leiste ist nicht erlaubt"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
@@ -288,7 +288,7 @@ msgstr "Neue Elemente hinzufügen"
 
 #: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
-msgstr "Neue Plugins zur Leiste hinzufügen"
+msgstr "Neue Erweiterungen zur Leiste hinzufügen"
 
 #: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
@@ -310,7 +310,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neugestartet. Durch Drücken von »Ausführen« wird das Element noch einmal neugestartet. Andernfalls wird es endgültig von der Leiste entfernt."
+msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neu gestartet. Durch Drücken von »Ausführen« wird das Element noch einmal neu gestartet. Andernfalls wird es endgültig von der Leiste entfernt."
 
 #: ../panel/panel-preferences-dialog.c:481
 msgid "Automatic"
@@ -330,7 +330,7 @@ msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:908
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Die Einstellungen der Leiste und der Plugins werden dauerhaft entfernt."
+msgstr "Die Einstellungen der Leiste und der Erweiterungen werden dauerhaft entfernt."
 
 #: ../panel/panel-preferences-dialog.c:909
 #, c-format
@@ -351,7 +351,7 @@ msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "Interner Name: %s-%d\nPID: %d"
+msgstr "Interner Name: %s-%d\nProzesskennung: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -362,15 +362,15 @@ msgstr "Interner Name: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "Horizontal"
-msgstr "Horizontal"
+msgstr "Waagerecht"
 
 #: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Vertical"
-msgstr "Vertikal"
+msgstr "Senkrecht"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr "Deskbar"
+msgstr "Schreibtischleiste"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -420,7 +420,7 @@ msgstr "_Auf mehrere Monitore ausdehnen"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Wählen Sie diese Option, um die Leiste über mehrere Monitore zu verteilen."
+msgstr "Diese Option auswählen, um die Leiste über mehrere Monitore zu erweitern."
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "_Lock panel"
@@ -429,7 +429,7 @@ msgstr "_Leiste sperren"
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Wählen Sie diese Option, um die Leistengriffe zu verbergen und die Position zu sperren."
+msgstr "Diese Option auswählen, um die Leistengriffe zu verbergen und die Position zu sperren."
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Automatically hide the panel:"
@@ -472,7 +472,7 @@ msgstr "_Länge automatisch erhöhen"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Wählen Sie diese Option, wenn die Länge der Leiste automatisch vergrößert werden soll, wenn Plugins mehr Platz benötigen."
+msgstr "Diese Option auswählen, wenn die Länge der Leiste automatisch vergrößert werden soll, wenn Erweiterungen mehr Platz benötigen."
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -922,7 +922,7 @@ msgstr "Symbol auswählen"
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Konnte Befehl »%s« nicht ausführen."
+msgstr "Befehl »%s« konnte nicht ausgeführt werden."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1332,7 +1332,7 @@ msgstr "Konnte Anwendung für »%s« nicht ausführen."
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Konnte Standardanwendung der Kategorie »%s« nicht ausführen"
+msgstr "Bevorzugte Anwendung der Kategorie »%s« konnte nicht gestartet werden"
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
