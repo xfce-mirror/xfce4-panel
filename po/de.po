@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-05 06:30+0200\n"
-"PO-Revision-Date: 2014-09-17 23:18+0000\n"
+"PO-Revision-Date: 2014-09-22 15:32+0000\n"
 "Last-Translator: Tobias Bannert\n"
 "Language-Team: German (http://www.transifex.com/projects/p/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -443,7 +443,7 @@ msgstr "Keinen Platz an den Rändern _reservieren"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Wählen Sie diese Option,wenn Sie möchten, dass maximierte Fenster den Platz hinter der Leiste nutzen. Dies funktioniert nur, wenn sich die Leiste am Rand des Bildschirms befindet."
+msgstr "Diese Option auswählen, wenn Sie möchten, dass vergrößerte Fenster den Platz hinter der Leiste benutzen sollen. Das funktioniert nur, wenn sich die Leiste am Rand des Bildschirms befindet."
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -453,7 +453,7 @@ msgstr "Allgemein"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Row _Size (pixels):"
-msgstr "Zeilen_größe (in Pixel):"
+msgstr "_Zeilengröße (in Pixeln):"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 #, no-c-format
@@ -462,7 +462,7 @@ msgstr "_Länge (in %):"
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Num_ber of rows:"
-msgstr "_Anzahl der Zeilen:"
+msgstr "Anzahl _der Zeilen:"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "A_utomatically increase the length"
@@ -491,13 +491,13 @@ msgstr "_Stil:"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "_Alpha:"
-msgstr "_Alpha:"
+msgstr "Al_pha:"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "Alpha-Wert des Leistenhintergrunds. Zwischen 0 (transparent) und 100 (undurchsichtig)."
+msgstr "Alphakanal des Leistenhintergrundes. Von 0 (durchsichtig) bis 100 (deckend)."
 
 #: ../panel/panel-preferences-dialog.glade.h:35
 msgid "C_olor:"
@@ -522,7 +522,7 @@ msgstr "Hintergrund"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr "_Eingabe:"
+msgstr "_Betreten:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:43
@@ -533,13 +533,13 @@ msgstr "_Verlassen:"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr "Durchsichtigkeit, wenn der Mauszeiger über dieser Leiste ist. Zwischen 0 (transparent) und 100 (undurchsichtig)."
+msgstr "Durchsichtig, wenn sich der Mauszeiger über die Leiste bewegt. Von 0 (durchsichtig) bis 100 (deckend)."
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Durchsichtigkeit, wenn der Mauszeiger nicht über dieser Leiste ist.Zwischen 0 (transparent) und 100 (undurchsichtig)."
+msgstr "Durchsichtig, wenn der Mauszeiger nicht über dieser Leiste ist. Von 0 (durchsichtig) bis 100 (deckend)."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Opacity"
@@ -548,7 +548,7 @@ msgstr "Deckkraft"
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Composite in den Feineinstellungen des Fensterverhaltens aktivieren, damit die Xfce-Leiste transparent wird."
+msgstr "Composite in den »Feineinstellungen der Fensterverwaltung« aktivieren, um die Deckkrafteinstellungen der Leiste benutzen zu können."
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Appeara_nce"
@@ -591,7 +591,7 @@ msgstr "_Neues Spiel"
 
 #: ../panel/panel-tic-tac-toe.c:134
 msgid "_Level:"
-msgstr "_Level:"
+msgstr "_Ebene:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
@@ -625,7 +625,7 @@ msgstr "Da die Leiste auf neue Art ihre Einstellungen speichert, muss eine neue 
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr "Wählen Sie unten aus, welches Setup Sie für den ersten Start verwenden möchten"
+msgstr "Unten bitte auswählen, welchen Einrichtungsvorgang Sie für den ersten Start verwenden möchten."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
@@ -665,7 +665,7 @@ msgstr "Die Leisteneinstellungen müssen migriert werden …"
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "Fehler bei der Migration der existierenden Einstellungen"
+msgstr "Fehler bei der Migration der vorhandenen Einstellungen"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -831,7 +831,7 @@ msgstr "Aktion »%s« konnte nicht ausgeführt werden."
 
 #: ../plugins/actions/actions.c:1147
 msgid "John Doe"
-msgstr "John Doe"
+msgstr "Max Mustermann"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -844,7 +844,7 @@ msgstr "Anwendungsmenü"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 msgid "Show generic application n_ames"
-msgstr "_Allgemeine Anwendungsnamen zeigen"
+msgstr "_Allgemeine Anwendungsnamen anzeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid ""
@@ -871,7 +871,7 @@ msgstr "S_ymbol:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
-msgstr "A_nwendungsbeschreibung in Kurzhilfe zeigen"
+msgstr "A_nwendungsbeschreibung in Kurzhilfe anzeigen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 #: ../plugins/clock/clock-dialog.glade.h:10
@@ -902,7 +902,7 @@ msgstr "_Menüdatei:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Select A Menu File"
-msgstr "Wählen Sie eine Menüdatei"
+msgstr "Eine Menüdatei auswählen"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Menu File"
@@ -950,13 +950,13 @@ msgstr "Optionen:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr "Menü an aktueller Position des Mauszeigers hervorbringen"
+msgstr "Menü an aktueller Position des Mauszeigers öffnen"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
 msgid "Show help options"
-msgstr "Hilfeoptionen zeigen"
+msgstr "Hilfeoptionen anzeigen"
 
 #: ../plugins/clock/clock.c:174
 msgid "Week %V"
@@ -979,7 +979,7 @@ msgstr "Uhr"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Name einer Zeitzone, die einem Dateinamen in der zoneinfo Datenbank entspricht, zum Beispiel »Europe/Berlin«. Wenn leer, wird die lokale Zeit verwendet."
+msgstr "Name einer Zeitzone, die einem Dateinamen in der Zeitzonendatenbank entspricht, zum Beispiel »Europe/Berlin«. Wenn leer, wird die lokale Zeit verwendet.\nhttp://php.net/manual/en/timezones.europe.php"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1008,7 +1008,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Das Anzeigeformat definiert, welche Teile von Datum und Uhrzeit in den Dateinamen eingefügt werden sollen. Beispiel: %Y wird durch das Jahr ersetzt, %m durch das Monat und %d mit dem Tag. Dabei können auch Tags wie <b></b> verwendet werden, um den Text hervorzuheben. Weitere Informationen dazu finden Sie auf der »Hilfe«-Seite."
+msgstr "Das Anzeigeformat beschreibt, welche Teile von Datum und Uhrzeit in den Dateinamen eingefügt werden sollen. Beispiel: %Y wird durch das Jahr ersetzt, %m durch den Monat und %d mit dem Tag. Dabei können auch HTML-Auszeichnungen wie <b></b> verwendet werden, um den Text hervorzuheben. Weitere Informationen dazu finden Sie auf der »Hilfe«-Seite."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1016,7 +1016,7 @@ msgstr "_Sekunden anzeigen"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "True _binary clock"
-msgstr "_Richtige Binäruhr"
+msgstr "_Echte Binäruhr"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "24-_hour clock"
@@ -1028,7 +1028,7 @@ msgstr "_Blinkende Zeit-Trennzeichen"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
-msgstr "AM/PM _zeigen"
+msgstr "AM/PM an_zeigen"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "F_ormat:"
@@ -1042,11 +1042,11 @@ msgstr "_Ungenauigkeit der Formulierung:"
 
 #: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Show _inactive dots"
-msgstr "_Inaktive Punkte zeigen"
+msgstr "_Inaktive Punkte anzeigen"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 msgid "Show gri_d"
-msgstr "_Netz zeigen"
+msgstr "_Netz anzeigen"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Clock Options"
@@ -1066,7 +1066,7 @@ msgstr "Digital"
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fuzzy"
-msgstr "in Worten"
+msgstr "In Worten"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "LCD"
@@ -1312,12 +1312,12 @@ msgstr "Verzeichnismenü"
 #: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Konnte Anwendung »%s« nicht starten."
+msgstr "Anwendung »%s« konnte nicht gestartet werden"
 
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "Konnte Inhaltstyp für »%s« nicht erfragen"
+msgstr "Inhaltstyp für »%s« konnte nicht erfragen werden"
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
@@ -1327,7 +1327,7 @@ msgstr "Keine Standardanwendung für »%s« gefunden"
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Konnte Anwendung für »%s« nicht ausführen."
+msgstr "Vorgabeanwendung für »%s« konnte nicht gestartet werden"
 
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
@@ -1340,7 +1340,7 @@ msgstr "Ordner öffnen"
 
 #: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
-msgstr "In Terminal ausführen"
+msgstr "In Terminal öffnen"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1359,7 +1359,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Liste mit Mustern eingeben, um festzulegen, welche Dateien in einem Verzeichnis sichtbar sein sollen. Bei der Angabe mehrerer Muster\nmüssen diese durch Semikolons getrennt werden (z.B. *.txt; *.doc)."
+msgstr "Liste mit Mustern eingeben, um festzulegen, welche Dateien in einem Verzeichnis sichtbar sein sollen. Bei der Angabe mehrerer Muster müssen diese durch Semikolons getrennt werden (z.B. *.txt; *.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1367,7 +1367,7 @@ msgstr "_Dateimuster:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
-msgstr "_Versteckte Dateien zeigen"
+msgstr "_Versteckte Dateien anzeigen"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
@@ -1393,7 +1393,7 @@ msgstr "Fehler beim Öffnen des Einstellungsfensters für Schreibtischelemente"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Durch Löschen eines Objekts wird dieses dauerhaft entfernt"
+msgstr "Durch Löschen eines Objektes wird dieses dauerhaft entfernt"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
@@ -1434,7 +1434,7 @@ msgstr "Eintrag _bearbeiten"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
-msgstr "Eintrag _Löschen"
+msgstr "Eintrag _löschen"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
@@ -1473,7 +1473,7 @@ msgstr "_Kurzhilfen deaktivieren"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Diese Option auswählen, um Kurzhilfen beim Bewegen über Schaltflächen und Menüeinträge zu deaktivieren."
+msgstr "Diese Option auswählen, um Kurzhilfen beim Bewegen über die Leistenknöpfe und Menüeinträge zu deaktivieren."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1489,7 +1489,7 @@ msgstr "Wählen Sie diese Option, um den angewählten Menüeintrag zur Leiste hi
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
-msgstr "_Position des Pfeilknopfs:"
+msgstr "_Position des Pfeilknopfes:"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Advanced"
@@ -1529,7 +1529,7 @@ msgstr "_Miniaturansicht"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Miniaturansicht der Arbeitsfläche mitsamt Rechtecken für die sichtbaren Fenster zeigen"
+msgstr "Miniaturansicht der Arbeitsfläche, mit Rechtecken für die sichtbaren Fenster, anzeigen"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1583,7 +1583,7 @@ msgstr "Fenster verstecken und Schreibtisch anzeigen"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "Kann Benachrichtigungsfläche nicht starten"
+msgstr "Benachrichtigungsfläche kann nicht gestartet werden"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
@@ -1611,7 +1611,7 @@ msgstr "_Maximale Symbolgröße (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
-msgstr "Ra_hmen zeigen"
+msgstr "_Rahmen anzeigen"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
@@ -1657,7 +1657,7 @@ msgstr "Keine, Ziehen und Ablegen (Drag and Drop) ermöglichen"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
-msgstr "Taskleiste"
+msgstr "Fensterknöpfe"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Show button _labels"
@@ -1685,7 +1685,7 @@ msgstr "_Mittelklick Aktion:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
-msgstr "_Minimierte Fenster in aktueller Arbeitsfläche wiederherstellen"
+msgstr "_Verkleinerte Fenster in aktueller Arbeitsfläche wiederherstellen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "D_raw window frame when hovering a button"
@@ -1705,7 +1705,7 @@ msgstr "_Fenster aller Monitore anzeigen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Show only _minimized windows"
-msgstr "N_ur minimierte Fenster anzeigen"
+msgstr "N_ur verkleinerte Fenster anzeigen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
@@ -1717,23 +1717,23 @@ msgstr "Fenster schließen"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Minimize Window"
-msgstr "Fenster minimieren"
+msgstr "Fenster verkleinern"
 
 #: ../plugins/tasklist/tasklist-widget.c:3306
 msgid "Mi_nimize All"
-msgstr "_Alle minimieren"
+msgstr "_Alle verkleinern"
 
 #: ../plugins/tasklist/tasklist-widget.c:3315
 msgid "Un_minimize All"
-msgstr "_Minimieren rückgängig"
+msgstr "Alle _wiederherstellen"
 
 #: ../plugins/tasklist/tasklist-widget.c:3321
 msgid "Ma_ximize All"
-msgstr "_Alle maximieren"
+msgstr "_Alle vergrößern"
 
 #: ../plugins/tasklist/tasklist-widget.c:3330
 msgid "_Unmaximize All"
-msgstr "_Maximieren rückgängig"
+msgstr "Alle _wiederherstellen"
 
 #: ../plugins/tasklist/tasklist-widget.c:3340
 msgid "_Close All"
@@ -1741,7 +1741,7 @@ msgstr "_Alle schließen"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
-msgstr "Mit Schaltflächen zwischen offenen Fenstern umschalten"
+msgstr "Mit Knöpfen zwischen offenen Fenstern umschalten"
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
@@ -1776,15 +1776,15 @@ msgstr "Fenstermenü"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
 msgid "Button layout:"
-msgstr "Anordnung innerhalb der Schaltflächen:"
+msgstr "Knopfansicht:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Show workspace a_ctions"
-msgstr "A_ktionen für die Arbeitsfläche zeigen"
+msgstr "_Arbeitsflächenaktionen anzeigen"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Show workspace _names"
-msgstr "Zeige _Namen der Arbeitsflächen"
+msgstr "Arbeitsflächen_namen anzeigen"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
