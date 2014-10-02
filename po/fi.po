@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-05 06:30+0200\n"
-"PO-Revision-Date: 2014-10-02 16:11+0000\n"
+"PO-Revision-Date: 2014-10-02 19:15+0000\n"
 "Last-Translator: Tapio Väisänen <tapio.vaeisaenen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/xfce4-panel/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgstr "Käynnistä Xfce:n paneeli uudelleen"
 
 #: ../panel/main.c:85
 msgid "Quit the running panel instance"
-msgstr "Lopeta käynnissä oleva paneeli-instanssi"
+msgstr "Lopeta käynnissä oleva paneeli"
 
 #: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
@@ -376,7 +376,7 @@ msgstr "Ei koskaan"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Intelligently"
-msgstr ""
+msgstr "Älykkäästi"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
@@ -389,7 +389,7 @@ msgstr "Ei mitään (käytä järjestelmän teemaa)"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
-msgstr "Tasainen väri"
+msgstr "Tasaväri"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
@@ -430,7 +430,7 @@ msgstr "Tämä valinta piilottaa paneelin kahvat ja lukitsee sen sijainnin"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Automatically hide the panel:"
-msgstr ""
+msgstr "Piilota paneeli automaattisesti"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Don't _reserve space on borders"
@@ -519,7 +519,7 @@ msgstr "Tausta"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
-msgstr "_Hiiri päälle:"
+msgstr "Lisää:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:43
@@ -923,7 +923,7 @@ msgstr "Komennon ”%s” suorittaminen epäonnistui."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr "Näytä valikko jossa on kategoriat sovellusten sijasta"
+msgstr "Näytä asennettujen sovellusten luokat sisältävä valikko"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1055,7 +1055,7 @@ msgstr "Analoginen"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Binary"
-msgstr "Binäärikello"
+msgstr "Binäärinen"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 msgid "Digital"
@@ -1067,7 +1067,7 @@ msgstr "Epätarkka"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "LCD"
-msgstr "LCD"
+msgstr "Nestekidenäyttö"
 
 #: ../plugins/clock/clock-fuzzy.c:88
 msgid "Night"
@@ -1329,11 +1329,11 @@ msgstr "Oletussovelluksen käynnistäminen kohteelle \"%s\" epäonnistui"
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Kategorian \"%s\" suositun sovelluksen käynnistäminen epäonnistui"
+msgstr "Kategorian \"%s\" valitun sovelluksen käynnistäminen epäonnistui"
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
-msgstr "Avaa hakemisto"
+msgstr "Avaa kansio"
 
 #: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
@@ -1349,7 +1349,7 @@ msgstr "Valitse hakemisto"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "_Base Directory:"
-msgstr "_Ylähakemisto:"
+msgstr "Perushakemisto:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
@@ -1621,7 +1621,7 @@ msgstr "Tunnetut sovellukset"
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "%d-ruudun käsittelijävalinnan nouto epäonnistui"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
@@ -1670,7 +1670,7 @@ msgstr "Näytä k_ahva"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Sorting _order:"
-msgstr "_Järjestys:"
+msgstr "Lajittelujärjestys:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Window _grouping:"
