@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 00:30+0200\n"
-"PO-Revision-Date: 2014-05-19 11:29+0000\n"
+"POT-Creation-Date: 2014-09-05 06:30+0200\n"
+"PO-Revision-Date: 2014-10-06 02:48+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh (http://www.transifex.com/projects/p/xfce4-panel/language/kk/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgid ""
 msgstr "Бұл desktop файлының ақпараты негізінде панельге жаңа жөнелткішті қосу"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2557
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Панель"
@@ -40,13 +40,13 @@ msgstr "Панельді баптау"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1123
+#: ../panel/panel-preferences-dialog.c:1159
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" өшіруді шынымен қалайсыз ба?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1126
+#: ../panel/panel-preferences-dialog.c:1162
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Элементті панельден өшірсеңіз, ол толығымен жойылады."
 
@@ -60,17 +60,17 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2569
 msgid "Add _New Items..."
 msgstr "Жаңа _элементтерді қосу..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2580
 msgid "Panel Pr_eferences..."
 msgstr "Панель ба_птаулары..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2608
 msgid "Log _Out"
 msgstr "Жүйеден ш_ығу"
 
@@ -188,33 +188,33 @@ msgstr "%s үшін қосулы тұрған нұсқалары табылма�
 msgid "Failed to launch the migration application"
 msgstr "Көшу қолданбасын жөнелту сәтсіз аяқталды"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:985
 msgid "Create _Launcher"
 msgstr "Жө_нелткішті жасау"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:986
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Бұл панельде жаңа жөнелткіш плагинін жасайды және тасталған файлдарды мәзір элементтері ретінде орнатады."
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:988
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "%d desktop фай(дар)дан жаңа жөнелткішті жасау"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "X серверін сессия басқарушысыз іске қосқансыз. Шығу басылған кезде X сервері өз жұмысын аяқтайды."
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Панельдің жұмысын аяқтауды шынымен қалайсыз ба?"
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" командасын орындау сәтсіз аяқталды"
@@ -260,7 +260,7 @@ msgstr "Жаңа элементті қосу"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Жаңа плагин үшін панельді таңдаңыз:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:842
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -305,41 +305,41 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Плагин соңғы %d секундта бірден көп рет қайта қосылған. Орындау батырмасын бассаңыз, панель ол плагинді қайта қосып көреді, олай болмаса, ол плагин панельден өшіріледі."
 
-#: ../panel/panel-preferences-dialog.c:472
+#: ../panel/panel-preferences-dialog.c:481
 msgid "Automatic"
 msgstr "Авто"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:491
+#: ../panel/panel-preferences-dialog.c:500
 #, c-format
 msgid "Screen %d"
 msgstr "Экран %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:517
+#: ../panel/panel-preferences-dialog.c:526
 #, c-format
 msgid "Monitor %d"
 msgstr "Монитор %d"
 
-#: ../panel/panel-preferences-dialog.c:872
+#: ../panel/panel-preferences-dialog.c:908
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Панель мен плагиндер баптаулары толығымен өшіріледі."
 
-#: ../panel/panel-preferences-dialog.c:873
+#: ../panel/panel-preferences-dialog.c:909
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "%d панелін өшіруді шынымен қалайсыз ба?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:965
+#: ../panel/panel-preferences-dialog.c:1001
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(сыртқы)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:1006
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -348,7 +348,7 @@ msgstr "Ішкі аты: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:982
+#: ../panel/panel-preferences-dialog.c:1018
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Ішкі аты: %s-%d"
@@ -366,94 +366,102 @@ msgid "Deskbar"
 msgstr "Deskbar"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "Ешқашан"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Intelligently"
+msgstr "Ақылды"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "Әрқашан"
+
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
 msgstr "Жоқ (жүйелік стиль)"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
 msgstr "Бүтін түс"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
 msgstr "Фон суреті"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Add a new panel"
 msgstr "Жаңа панельді қосу"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Remove the currently selected panel"
 msgstr "Ағымдағы таңдаулы тұрған панельді өшіру"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "M_ode:"
 msgstr "Реж_имі:"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "O_utput:"
 msgstr "_Шығыс:"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Span mo_nitors"
 msgstr "Мо_ниторларды біріктіру"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Панельді бірнеше мониторға созу үшін бұл опцияны таңдаңыз."
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "_Lock panel"
 msgstr "Пане_льді бұғаттау"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Тұтқаларын жасырып, панельді бұғаттау үшін бұл опцияны таңдаңыз."
 
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Automatically show and _hide the panel"
-msgstr "Панельді а_вто көрсету мен жасыру"
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid "Automatically hide the panel:"
+msgstr "Панельді автожасыру:"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr "Курсор өтпесе, панельді жасыру үшін бұл опцияны таңдаңыз. Бұл әрекет панель экран шетіне тіркеліп тұрса ғана істейді."
-
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Don't _reserve space on borders"
 msgstr "Шет_терде орынды алдын-ала қалдырмау"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Жазық етілген терезе панельдің артындағы орынды алу керек болса, бұл опцияны таңдаңыз. Бұл әрекет панель экран шетіне тіркеліп тұрса ғана істейді."
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:22
 #: ../plugins/actions/actions-dialog.glade.h:6
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "General"
 msgstr "Жалпы"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Row _Size (pixels):"
 msgstr "Жол ө_лшемі (пикс.):"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:25
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "Ұ_зындығы (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Num_ber of rows:"
 msgstr "Жолдар са_ны:"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "A_utomatically increase the length"
 msgstr "Панель е_нін автоөзгерту"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
@@ -461,112 +469,112 @@ msgstr "Таңдалған болса, панель ені плагиндер т
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Measurements"
 msgstr "Өлшем бірліктері"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "D_isplay"
 msgstr "Көрс_ету"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "_Style:"
 msgstr "_Стиль"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "_Alpha:"
 msgstr "_Альфа:"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr "Панель фонның альфа мәні, 0 (мөлдір) және 100 (мөлдір емес) арасында болуы керек."
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "C_olor:"
 msgstr "Тү_сі:"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Pick a Panel Color"
 msgstr "Панель түсін таңдау"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "_File:"
 msgstr "_Файл:"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Select A Background Image"
 msgstr "Фон суретін таңдаңыз"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Background"
 msgstr "Фон"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
 msgstr "_Енгізу:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "_Leave:"
 msgstr "Қа_лдыру:"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
 msgstr "Курсор панельдің үстінде болған кезде панельдің мөлдірлілігі (0 - толығымен мөлдір, 100 - мүлдем мөлдір емес)"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Курсор панельдің үстінде болмаған кезде панельдің мөлдірлілігі (0 - толығымен мөлдір, 100 - мүлдем мөлдір емес)"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Opacity"
 msgstr "Мөлдірсіздік"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "Панель мөлдірсіздік баптаулары үшін терезелер басқарушысында композитингті іске қосыңыз."
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Appeara_nce"
 msgstr "Сыр_тқы түрі"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:49
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item up by one row"
 msgstr "Таңдаулы тұрған элементті төмен жылжыту"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:50
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item down by one row"
 msgstr "Таңдаулы тұрған элементті жоғары жылжыту"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:51
 msgid "Add new item to this panel"
 msgstr "Бұл панельге жаңа элементті қосу"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Remove currently selected item"
 msgstr "Ағымдағы таңдаулы тұрған элементті өшіру"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:53
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Edit the currently selected item"
 msgstr "Ағымдағы таңдаулы тұрған элементті баптау"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:54
 msgid "Show about information of the currently selected item"
 msgstr "Таңдаулы тұрған элемент ақпаратын көрсету"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Ite_ms"
 msgstr "Э_лементтер"
 
@@ -594,7 +602,7 @@ msgstr "Орташа"
 msgid "Expert"
 msgstr "Тәжірибелі"
 
-#: ../panel/panel-window.c:2390
+#: ../panel/panel-window.c:2594
 msgid "_Lock Panel"
 msgstr "Пане_льді бұғаттау"
 
@@ -898,12 +906,12 @@ msgstr "Мәзір файлы"
 msgid "Applications"
 msgstr "Қолданбалар"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:541
+#: ../plugins/applicationsmenu/applicationsmenu.c:564
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Таңбашаны таңдаңыз"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:582
+#: ../plugins/applicationsmenu/applicationsmenu.c:605
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1614,14 +1622,6 @@ msgstr "%d экраны үшін таңдау менеджерін орында�
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "Хабарлама таңбашасы шығатын орны"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Never"
-msgstr "Ешқашан"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-msgid "Always"
-msgstr "Әрқашан"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
