@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Ḷḷumex03 <l.lumex03.tornes@gmail.com>, 2014
-# Ḷḷumex03 <l.lumex03.tornes@gmail.com>, 2014
-# Ḷḷumex03 <l.lumex03.tornes@gmail.com>, 2014
+# Ḷḷumex03 <tornes@opmbx.org>, 2014
+# Ḷḷumex03 <tornes@opmbx.org>, 2014
+# Ḷḷumex03 <tornes@opmbx.org>, 2014
+# Ḷḷumex03 <tornes@opmbx.org>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 00:30+0200\n"
-"PO-Revision-Date: 2014-06-16 22:13+0000\n"
-"Last-Translator: Ḷḷumex03 <l.lumex03.tornes@gmail.com>\n"
+"POT-Creation-Date: 2014-09-05 06:30+0200\n"
+"PO-Revision-Date: 2014-10-25 19:06+0000\n"
+"Last-Translator: Ḷḷumex03 <tornes@opmbx.org>\n"
 "Language-Team: Asturian (http://www.transifex.com/projects/p/xfce4-panel/language/ast/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgid ""
 msgstr "Amestar un llanzador nuevu al panel basáu na información d'esti ficheru d'escritoriu"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2557
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -42,15 +43,15 @@ msgstr "Personalizar el panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1123
+#: ../panel/panel-preferences-dialog.c:1159
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "¿De xuru quies desaniciar \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1126
+#: ../panel/panel-preferences-dialog.c:1162
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Si desanicies l'oxetu del panel, perderáse dafechu."
+msgstr "Si desanicies l'elementu del panel, perderáse dafechu."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1197
@@ -62,17 +63,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2569
 msgid "Add _New Items..."
-msgstr "Amestar oxetos _nuevos..."
+msgstr "Amestar elementos _nuevos..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2580
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencies del panel"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2608
 msgid "Log _Out"
 msgstr "Zarrar _sesión"
 
@@ -86,7 +87,7 @@ msgstr "NÚMBERU-DEL-PANEL"
 
 #: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
-msgstr "Amosar el diálogu 'Amestar oxetos nuevos'"
+msgstr "Amosar el diálogu 'Amestar elementos nuevos'"
 
 #: ../panel/main.c:82
 msgid "Save the panel configuration"
@@ -153,7 +154,7 @@ msgstr "Fallu al amosar el diálogu de preferencies"
 
 #: ../panel/main.c:383
 msgid "Failed to show the add new items dialog"
-msgstr "Fallu al amosar el diálogu d'amestadura d'oxetos nuevos"
+msgstr "Fallu al amosar el diálogu d'amestadura d'elementos nuevos"
 
 #: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
@@ -190,34 +191,34 @@ msgstr "Nun s'alcontró denguna instancia nexecución de %s"
 msgid "Failed to launch the migration application"
 msgstr "Fallu al llanzar l'aplicación de migración"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:985
 msgid "Create _Launcher"
 msgstr "Criar _llanzador"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:986
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Esto criará un complementu de llanzador nuevu nel panel ya inxertará los ficheros soltaos como menú d'oxetos."
+msgstr "Esto creará un complementu de llanzador nuevu nel panel ya inxertará los ficheros soltaos como elementos del menú."
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:988
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear un llanzador nuevu del ficheru de configuración %d"
 msgstr[1] "Crear un llanzador nuevu de los ficheros de configuración %d"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Tienes d'aniciar X ensin l'alministrador de sesión. Primi Colar pa zarrar el sirvidor X"
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "¿De xuru quies colar d'esti panel?"
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Fallu al executar el comandu \"%s\""
@@ -257,13 +258,13 @@ msgstr "Softastur www.softastur.org"
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Add New Item"
-msgstr "Amestar oxetu nuevu"
+msgstr "Amestar elementu nuevu"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
 msgstr "Por favor, esbilla un panel pal complementu nuevu:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:842
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -280,7 +281,7 @@ msgstr "Nun s'almite la modificación d'esti panel"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
-msgstr "Amestar nuevos elementos"
+msgstr "Amestar elementos nuevos"
 
 #: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
@@ -308,41 +309,41 @@ msgid ""
 "permanently removed from the panel."
 msgstr "El complementu reanicióse más d'una vegada nos caberos %d segundos. Si primes Executar, el panel intentará reaniciar el complementu, d'otramiente desaniciaráse dafechu del panel."
 
-#: ../panel/panel-preferences-dialog.c:472
+#: ../panel/panel-preferences-dialog.c:481
 msgid "Automatic"
 msgstr "Automáticu"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:491
+#: ../panel/panel-preferences-dialog.c:500
 #, c-format
 msgid "Screen %d"
 msgstr "Pantalla %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:517
+#: ../panel/panel-preferences-dialog.c:526
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:872
+#: ../panel/panel-preferences-dialog.c:908
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Desaniciaránse dafechu les configuraciones del panel y del complementu"
 
-#: ../panel/panel-preferences-dialog.c:873
+#: ../panel/panel-preferences-dialog.c:909
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "¿De xuru quies desaniciar el panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:965
+#: ../panel/panel-preferences-dialog.c:1001
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:1006
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -351,7 +352,7 @@ msgstr "Nome internu: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:982
+#: ../panel/panel-preferences-dialog.c:1018
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome internu: %s-%d"
@@ -369,94 +370,102 @@ msgid "Deskbar"
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "Tanina"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Intelligently"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "Siempres"
+
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
 msgstr "Dengún (usar l'estilu'l sistema)"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
 msgstr "Color solida"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
 msgstr "Imaxe de fondu"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Add a new panel"
 msgstr "Amestar un panel nuevu"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Remove the currently selected panel"
 msgstr "Desanciar el panel esbilláu anguaño"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "M_ode:"
 msgstr "M_ou:"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "O_utput:"
 msgstr "S_alida:"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Span mo_nitors"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Esbilla esta opción pa estender el panel sobro monitores múltiples."
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "_Lock panel"
 msgstr "_Bloquiar panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Esbilla esta opción p'anubrir el remanamientu del panel y bloquiar la so posición."
 
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Automatically show and _hide the panel"
-msgstr "Amosar y anubrir automá_ticamente'l panel"
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid "Automatically hide the panel:"
+msgstr "Anubrir el panel automáticamente:"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr "Esbilla esta opción p'anubrir el panel cuando'l punteru nun tea enriba d'ello. Esto namái furrula cuando'l panel tea axuntáu a una esquina la pantalla"
-
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Don't _reserve space on borders"
 msgstr "Nun acuta_r l'espaciu nos bervesos"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Esbilla esta opción si quies les ventanes maximizaes pa cubrir l'area ente'l panel. Esto namái furrula cuando'l panel tea axuntáu a una esquina la pantalla."
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:22
 #: ../plugins/actions/actions-dialog.glade.h:6
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "General"
 msgstr "Xeneral"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Row _Size (pixels):"
 msgstr "Ta_mañu de filera (píxeles):"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:25
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "Llon_xitú (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:26
 msgid "Num_ber of rows:"
 msgstr "Núm_beru de fileres"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "A_utomatically increase the length"
 msgstr "Aumentar automáticamente la llonxitú"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
@@ -464,112 +473,112 @@ msgstr "Esbilla esta opción p'aumentar automáticamente la llonxitú del panel 
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:30
 msgid "Measurements"
 msgstr "Midíes"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "D_isplay"
 msgstr "P_antalla"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "_Style:"
 msgstr "E_stilu"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 msgid "_Alpha:"
 msgstr "_Alpha:"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr "Valor alfa del panel de fondu, con 0 siendo tresparente dafechu y 100 opacu dafechu."
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "C_olor:"
 msgstr "C_olor:"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "Pick a Panel Color"
 msgstr "Escueyi una color del panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "_File:"
 msgstr "_Ficheru:"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Select A Background Image"
 msgstr "Esbilla una imaxe de fondu"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Background"
 msgstr "Fondu"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
 msgstr "_Introducir:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "_Leave:"
 msgstr "_Dexar:"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Opacity"
 msgstr "Opacidá"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "Habilitar composición nel alministrador de ventanes pa los axustes d'opacidá nel panel."
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid "Appeara_nce"
 msgstr "As_peutu"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:49
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item up by one row"
-msgstr "Mover l'oxetu esbilláu anguaño una filera arriba"
-
-#: ../panel/panel-preferences-dialog.glade.h:48
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-msgid "Move currently selected item down by one row"
-msgstr "Mover l'oxetu esbilláu anguaño una filera abaxo"
-
-#: ../panel/panel-preferences-dialog.glade.h:49
-msgid "Add new item to this panel"
-msgstr "Amestar oxetu nuevu a esti panel"
+msgstr "Mover l'elementu esbilláu anguaño una filera arriba"
 
 #: ../panel/panel-preferences-dialog.glade.h:50
-msgid "Remove currently selected item"
-msgstr "Desaniciar l'oxetu esbilláu aunguaño"
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item down by one row"
+msgstr "Mover l'elementu esbilláu anguaño una filera abaxo"
 
 #: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/launcher/launcher-dialog.glade.h:18
-msgid "Edit the currently selected item"
-msgstr "Editar l'oxetu esbilláu aunguaño"
+msgid "Add new item to this panel"
+msgstr "Amestar l'elementu nuevu a esti panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
-msgid "Show about information of the currently selected item"
-msgstr "Amosar información tocante l'oxetu esbilláu anguaño"
+msgid "Remove currently selected item"
+msgstr "Desaniciar l'elementu esbilláu anguaño"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "Edit the currently selected item"
+msgstr "Editar l'elementu esbilláu anguaño"
+
+#: ../panel/panel-preferences-dialog.glade.h:54
+msgid "Show about information of the currently selected item"
+msgstr "Amosar información tocante al elementu esbilláu anguaño"
+
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Ite_ms"
 msgstr "O_xetos"
 
@@ -597,7 +606,7 @@ msgstr "Con esperiencia"
 msgid "Expert"
 msgstr "Espertu"
 
-#: ../panel/panel-window.c:2390
+#: ../panel/panel-window.c:2594
 msgid "_Lock Panel"
 msgstr "_Bloquiar panel"
 
@@ -901,12 +910,12 @@ msgstr "Ficheru de menú"
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:541
+#: ../plugins/applicationsmenu/applicationsmenu.c:564
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Esbilla un iconu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:582
+#: ../plugins/applicationsmenu/applicationsmenu.c:605
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -1347,7 +1356,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Introduz una llista patrones que s'usarán pa determinar que ficheros son visibles nun direutoriu. Si especifiques más d'un patrón equí, la llista 'oxetos tien de separtase con puntos y comes (exem. *.txt;*.doc)."
+msgstr "Introduz una llista patrones que s'usarán pa determinar que ficheros son visibles nun direutoriu. Si especifiques equí más d'un patrón, la llista d'elementos tien de separtase con puntos y comes (exem. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1369,19 +1378,19 @@ msgstr "Abrir el menú llanzador"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
-msgstr "Oxetu non nomáu"
+msgstr "Elementu ensin nomar"
 
 #: ../plugins/launcher/launcher.c:1728
 msgid "No items"
-msgstr "Ensin oxetos"
+msgstr "Ensin elementos"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr "Fallu al abrir l'editor d'oxetos del escritoriu"
+msgstr "Fallu al abrir l'editor d'elementos d'escritoriu"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Si desanicies un oxetu, desaniciaráse dafechu"
+msgstr "Si desanicies un elementu, desaniciaráse dafechu"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
@@ -1390,7 +1399,7 @@ msgstr "¿De xuru quies desaniciar \"%s\"?"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
-msgstr "Oxetu non nomáu"
+msgstr "Elementu ensin nomar"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
@@ -1418,11 +1427,11 @@ msgstr "Dientru'l botón"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
-msgstr "_Editar oxetu"
+msgstr "_Editar elementu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
-msgstr "D_esanicar oxetu"
+msgstr "D_esanicar elementu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
@@ -1443,15 +1452,15 @@ msgstr "Llanzador"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
-msgstr "Amestar ún o más oxetos esistentes al llanzador"
+msgstr "Amestar ún o más elementos esistentes al llanzador"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Add a new empty item"
-msgstr "Amestar un oxetu baleru"
+msgstr "Amestar un elementu baleru"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Delete the currently selected item"
-msgstr "Desaniciar l'oxetu esbilláu anguaño"
+msgstr "Desaniciar l'elementu esbilláu anguaño"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Disable t_ooltips"
@@ -1461,7 +1470,7 @@ msgstr "Deshabilitar indicado_res de función"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "Esbilla esta opción pa deshabilitar los indicadores de función al movese sobro'l botón del panel o los oxetos del panel."
+msgstr "Esbilla esta opción pa deshabilitar los indicadores de función al movese sobro'l botón del panel o los elementos del panel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1469,11 +1478,11 @@ msgstr "Amosar eti_queta en cuantes d'iconu"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr "Amosar el caberu oxetu usáu nel panel"
+msgstr "Amosar el caberu elementu usáu nel panel"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr "Esbilla esta opción pa mover l'oxetu del menú primíu al panel."
+msgstr "Esbilla esta opción pa mover l'elementu del menú primíu al panel."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
@@ -1550,7 +1559,7 @@ msgstr "Puntos"
 
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr "Amestar un separtador o espaciu ente los oxetos del panel"
+msgstr "Amestar un separtador o espaciu ente los elementos del panel"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
@@ -1617,14 +1626,6 @@ msgstr "Fallu al alquirir la seleición del xestor pa la pantalla %d"
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "Estaya na qu'apaecen los iconos de notificación"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Never"
-msgstr "Tanina"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-msgid "Always"
-msgstr "Siempres"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
