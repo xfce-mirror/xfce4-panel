@@ -911,10 +911,12 @@ static void
 actions_plugin_action_activate (GtkWidget      *widget,
                                 ActionsPlugin  *plugin)
 {
-  ActionEntry *entry;
-  gboolean     unattended = FALSE;
-  GError      *error = NULL;
-  gboolean     succeed = FALSE;
+  ActionEntry   *entry;
+  gboolean       unattended = FALSE;
+  GError        *error = NULL;
+  gboolean       succeed = FALSE;
+  XfconfChannel *channel;
+  gboolean       allow_save;
 
   entry = g_object_get_qdata (G_OBJECT (widget), action_quark);
   panel_return_if_fail (entry != NULL);
@@ -925,26 +927,29 @@ actions_plugin_action_activate (GtkWidget      *widget,
       && !actions_plugin_action_confirmation (plugin, entry, &unattended))
     return;
 
+  channel = xfconf_channel_get ("xfce4-session");
+  allow_save = xfconf_channel_get_bool (channel, "/general/SaveOnExit", FALSE);
+
   switch (entry->type)
     {
     case ACTION_TYPE_LOGOUT:
       succeed = actions_plugin_action_dbus_xfsm ("Logout", FALSE,
-                                                 !unattended, &error);
+                                                 allow_save, &error);
       break;
 
     case ACTION_TYPE_LOGOUT_DIALOG:
       succeed = actions_plugin_action_dbus_xfsm ("Logout", TRUE,
-                                                 !unattended, &error);
+                                                 allow_save, &error);
       break;
 
     case ACTION_TYPE_RESTART:
       succeed = actions_plugin_action_dbus_xfsm ("Restart", FALSE,
-                                                 !unattended, &error);
+                                                 allow_save, &error);
       break;
 
     case ACTION_TYPE_SHUTDOWN:
       succeed = actions_plugin_action_dbus_xfsm ("Shutdown", FALSE,
-                                                 !unattended, &error);
+                                                 allow_save, &error);
       break;
 
     case ACTION_TYPE_HIBERNATE:
