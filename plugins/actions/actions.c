@@ -932,6 +932,8 @@ actions_plugin_action_activate (GtkWidget      *widget,
 
   channel = xfconf_channel_get ("xfce4-session");
   allow_save = xfconf_channel_get_bool (channel, "/general/SaveOnExit", FALSE);
+  /* unattended shutdown, don't save the session to avoid blocking the logout */
+  allow_save = allow_save && !unattended;
 
   switch (entry->type)
     {
