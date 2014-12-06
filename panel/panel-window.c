@@ -2162,7 +2162,8 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
 
   /* only react to active window geometry changes if we are doing
    * intelligent autohiding */
-  if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+  if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY
+      && window->autohide_block == 0)
     {
       if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
         {
@@ -2363,7 +2364,7 @@ panel_window_set_autohide_behavior (PanelWindow     *window,
   /* create an autohide window only if we are autohiding at all */
   if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
-      /* create an authoide window; doing this only when it doesn't exist
+      /* create an autohide window; doing this only when it doesn't exist
        * yet allows us to transition between "always autohide" and "intelligently
        * autohide" without recreating the window */
       if (window->autohide_window == NULL)
