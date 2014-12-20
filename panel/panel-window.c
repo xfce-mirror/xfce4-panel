@@ -31,7 +31,6 @@
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
-#include <X11/Xatom.h>
 #endif
 
 #include <libwnck/libwnck.h>
@@ -136,10 +135,6 @@ static void         panel_window_active_window_changed          (WnckScreen     
                                                                  WnckWindow       *previous_window,
                                                                  PanelWindow      *window);
 static void         panel_window_active_window_geometry_changed (WnckWindow       *active_window,
-                                                                 PanelWindow      *window);
-static void         panel_window_active_window_state_changed    (WnckWindow       *active_window,
-                                                                 WnckWindowState   changed,
-                                                                 WnckWindowState   new,
                                                                  PanelWindow      *window);
 static void         panel_window_autohide_queue                 (PanelWindow      *window,
                                                                  AutohideState     new_state);
@@ -2177,32 +2172,6 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                                     &window_area.x, &window_area.y,
                                     &window_area.width, &window_area.height);
 
-          /* if a window is shaded, check the height of the window's
-           * decoration as exposed through the _NET_FRAME_EXTENTS application
-           * window property */
-          if (wnck_window_is_shaded (active_window))
-          {
-            Display *display;
-            Atom real_type;
-            int real_format;
-            unsigned long items_read, items_left;
-            guint32 *data;
-
-            display = XOpenDisplay(0);
-            if (XGetWindowProperty (display, wnck_window_get_xid (active_window),
-                                    XInternAtom(display, "_NET_FRAME_EXTENTS", True),
-                                    0, 4, FALSE, AnyPropertyType,
-                                    &real_type, &real_format, &items_read, &items_left,
-                                    (unsigned char **) &data) == Success
-                                    && (items_read >= 4))
-              window_area.height = data[2] + data[3];
-
-            if (data)
-            {
-              XFree (data);
-            }
-          }
-
           /* obtain position and dimension from the panel */
           panel_window_size_allocate_set_xy (window,
                                              window->alloc.width,
@@ -2234,20 +2203,6 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
             panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
         }
     }
-}
-
-
-
-static void
-panel_window_active_window_state_changed (WnckWindow  *active_window,
-                                             WnckWindowState changed,
-                                             WnckWindowState new,
-                                             PanelWindow *window)
-{
-  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
-
-  if (changed & WNCK_WINDOW_STATE_SHADED)
-    panel_window_active_window_geometry_changed (active_window, window);
 }
 
 
@@ -2529,8 +2484,6 @@ panel_window_update_autohide_window (PanelWindow *window,
         {
           g_signal_handlers_disconnect_by_func (window->wnck_active_window,
               panel_window_active_window_geometry_changed, window);
-          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
-              panel_window_active_window_state_changed, window);
         }
 
       /* remember the new window */
@@ -2541,8 +2494,6 @@ panel_window_update_autohide_window (PanelWindow *window,
         {
           g_signal_connect (G_OBJECT (active_window), "geometry-changed",
               G_CALLBACK (panel_window_active_window_geometry_changed), window);
-          g_signal_connect (G_OBJECT (active_window), "state-changed",
-              G_CALLBACK (panel_window_active_window_state_changed), window);
 
           /* simulate a geometry change for immediate hiding when the new active
            * window already overlaps the panel */
