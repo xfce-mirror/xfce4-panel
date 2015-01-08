@@ -31,7 +31,6 @@
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
-#include <X11/Xatom.h>
 #endif
 
 #include <libwnck/libwnck.h>
@@ -2178,29 +2177,17 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
                                     &window_area.width, &window_area.height);
 
           /* if a window is shaded, check the height of the window's
-           * decoration as exposed through the _NET_FRAME_EXTENTS application
-           * window property */
+           * decoration */
           if (wnck_window_is_shaded (active_window))
           {
-            Display *display;
-            Atom real_type;
-            int real_format;
-            unsigned long items_read, items_left;
-            guint32 *data;
+            GdkRectangle window_content;
 
-            display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-            if (XGetWindowProperty (display, wnck_window_get_xid (active_window),
-                                    XInternAtom(display, "_NET_FRAME_EXTENTS", True),
-                                    0, 4, FALSE, AnyPropertyType,
-                                    &real_type, &real_format, &items_read, &items_left,
-                                    (unsigned char **) &data) == Success
-                                    && (items_read >= 4))
-              window_area.height = data[2] + data[3];
-
-            if (data)
-            {
-              XFree (data);
-            }
+            wnck_window_get_client_window_geometry (active_window,
+                                                    &window_content.x,
+                                                    &window_content.y,
+                                                    &window_content.width,
+                                                    &window_content.height);
+            window_area.height = window_area.height - window_content.height;
           }
 
           /* obtain position and dimension from the panel */
