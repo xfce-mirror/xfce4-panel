@@ -895,7 +895,8 @@ clock_plugin_configure_zoneinfo_model_insert (GtkListStore *store,
 
       if (g_file_test (filename, G_FILE_TEST_IS_DIR))
         {
-          clock_plugin_configure_zoneinfo_model_insert (store, filename);
+          if (!g_file_test (filename, G_FILE_TEST_IS_SYMLINK))
+            clock_plugin_configure_zoneinfo_model_insert (store, filename);
         }
       else
         {
