@@ -86,6 +86,7 @@ struct _PagerPlugin
 
   /* settings */
   guint          scrolling : 1;
+  guint          wrap_workspaces : 1;
   guint          miniature_view : 1;
   gint           rows;
   gfloat         ratio;
@@ -95,6 +96,7 @@ enum
 {
   PROP_0,
   PROP_WORKSPACE_SCROLLING,
+  PROP_WRAP_WORKSPACES,
   PROP_MINIATURE_VIEW,
   PROP_ROWS
 };
@@ -137,6 +139,13 @@ pager_plugin_class_init (PagerPluginClass *klass)
                                                          EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_WRAP_WORKSPACES,
+                                   g_param_spec_boolean ("wrap-workspaces",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_MINIATURE_VIEW,
                                    g_param_spec_boolean ("miniature-view",
                                                          NULL, NULL,
@@ -158,6 +167,7 @@ pager_plugin_init (PagerPlugin *plugin)
 {
   plugin->wnck_screen = NULL;
   plugin->scrolling = TRUE;
+  plugin->wrap_workspaces = FALSE;
   plugin->miniature_view = TRUE;
   plugin->rows = 1;
   plugin->ratio = 1.0;
@@ -178,6 +188,10 @@ pager_plugin_get_property (GObject    *object,
     {
     case PROP_WORKSPACE_SCROLLING:
       g_value_set_boolean (value, plugin->scrolling);
+      break;
+
+    case PROP_WRAP_WORKSPACES:
+      g_value_set_boolean (value, plugin->wrap_workspaces);
       break;
 
     case PROP_MINIATURE_VIEW:
@@ -210,6 +224,10 @@ pager_plugin_set_property (GObject      *object,
     {
     case PROP_WORKSPACE_SCROLLING:
       plugin->scrolling = g_value_get_boolean (value);
+      break;
+
+    case PROP_WRAP_WORKSPACES:
+      plugin->wrap_workspaces = g_value_get_boolean (value);
       break;
 
     case PROP_MINIATURE_VIEW:
@@ -265,12 +283,21 @@ pager_plugin_scroll_event (GtkWidget      *widget,
   else
     active_n++;
 
-  /* wrap around */
   n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen) - 1;
-  if (active_n < 0)
-    active_n = n_workspaces;
-  else if (active_n > n_workspaces)
-    active_n = 0;
+
+  if (plugin->wrap_workspaces == TRUE)
+  {
+    /* wrap around */
+    if (active_n < 0)
+      active_n = n_workspaces;
+    else if (active_n > n_workspaces)
+      active_n = 0;
+  }
+  else if (active_n < 0 || active_n > n_workspaces )
+  {
+    /* we do not need to do anything */
+    return TRUE;
+  }
 
   new_ws = wnck_screen_get_workspace (plugin->wnck_screen, active_n);
   if (new_ws != NULL && active_ws != new_ws)
@@ -358,6 +385,7 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty  properties[] =
   {
     { "workspace-scrolling", G_TYPE_BOOLEAN },
+    { "wrap-workspaces", G_TYPE_BOOLEAN },
     { "miniature-view", G_TYPE_BOOLEAN },
     { "rows", G_TYPE_UINT },
     { NULL }
