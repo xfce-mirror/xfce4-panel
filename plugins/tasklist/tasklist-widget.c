@@ -90,6 +90,7 @@ enum
   PROP_SHOW_HANDLE,
   PROP_SORT_ORDER,
   PROP_WINDOW_SCROLLING,
+  PROP_WRAP_WINDOWS,
   PROP_INCLUDE_ALL_BLINKING,
   PROP_MIDDLE_CLICK
 };
@@ -151,6 +152,7 @@ struct _XfceTasklist
 
   /* switch window with the mouse wheel */
   guint                 window_scrolling : 1;
+  guint                 wrap_windows : 1;
 
   /* whether we show blinking windows from all workspaces
    * or only the active workspace */
@@ -475,6 +477,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_WRAP_WINDOWS,
+                                   g_param_spec_boolean ("wrap-windows",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         EXO_PARAM_READWRITE));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_INCLUDE_ALL_BLINKING,
                                    g_param_spec_boolean ("include-all-blinking",
                                                          NULL, NULL,
@@ -568,6 +577,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->n_monitors = 0;
   tasklist->all_monitors_geometry = NULL;
   tasklist->window_scrolling = TRUE;
+  tasklist->wrap_windows = FALSE;
   tasklist->all_blinking = TRUE;
   tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
   xfce_tasklist_geometry_set_invalid (tasklist);
@@ -656,6 +666,10 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_boolean (value, tasklist->window_scrolling);
       break;
 
+    case PROP_WRAP_WINDOWS:
+      g_value_set_boolean (value, tasklist->wrap_windows);
+      break;
+
     case PROP_INCLUDE_ALL_BLINKING:
       g_value_set_boolean (value, tasklist->all_blinking);
       break;
@@ -732,6 +746,10 @@ xfce_tasklist_set_property (GObject      *object,
 
     case PROP_WINDOW_SCROLLING:
       tasklist->window_scrolling = g_value_get_boolean (value);
+      break;
+
+    case PROP_WRAP_WINDOWS:
+      tasklist->wrap_windows = g_value_get_boolean (value);
       break;
 
     case PROP_INCLUDE_ALL_BLINKING:
@@ -1309,7 +1327,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
         }
 
       /* wrap if the first button is reached */
-      lnew = lnew ? lnew : g_list_last (li);
+      lnew = (lnew == NULL && tasklist->wrap_windows) ? g_list_last (li) : lnew;
       break;
 
     case GDK_SCROLL_DOWN:
@@ -1323,7 +1341,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
         }
 
       /* wrap if the last button is reached */
-      lnew = lnew ? lnew : g_list_first (li);
+      lnew = (lnew == NULL && tasklist->wrap_windows) ? g_list_first (li) : lnew;
       break;
 
     case GDK_SCROLL_LEFT:
@@ -1339,7 +1357,7 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
       break;
     }
 
-  if (G_LIKELY(lnew != NULL))
+  if (lnew != NULL)
     xfce_tasklist_button_activate (lnew->data, event->time);
 
   return TRUE;

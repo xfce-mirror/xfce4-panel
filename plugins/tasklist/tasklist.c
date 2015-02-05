@@ -147,6 +147,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "show-handle", G_TYPE_BOOLEAN },
     { "sort-order", G_TYPE_UINT },
     { "window-scrolling", G_TYPE_BOOLEAN },
+    { "wrap-windows", G_TYPE_BOOLEAN },
     { "include-all-blinking", G_TYPE_BOOLEAN },
     { "middle-click", G_TYPE_UINT },
     { NULL }
