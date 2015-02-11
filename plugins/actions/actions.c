@@ -197,7 +197,7 @@ static ActionEntry action_entries[] =
     N_("_Restart"),
     N_("Are you sure you want to restart?"),
     N_("Restarting computer in %d seconds."),
-    "xfsm-reboot"
+    "system-reboot"
   },
   { ACTION_TYPE_SHUTDOWN,
     "shutdown",
