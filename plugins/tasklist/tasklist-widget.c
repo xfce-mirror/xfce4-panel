@@ -3835,7 +3835,10 @@ xfce_tasklist_set_show_labels (XfceTasklist *tasklist,
 
           /* update the icon (we use another size for
            * icon box mode) */
-          xfce_tasklist_button_icon_changed (child->window, child);
+          if (child->type == CHILD_TYPE_GROUP)
+            xfce_tasklist_group_button_icon_changed (child->class_group, child);
+          else
+            xfce_tasklist_button_icon_changed (child->window, child);
         }
     }
 }
