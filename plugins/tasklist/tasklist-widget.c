@@ -3029,7 +3029,9 @@ xfce_tasklist_button_drag_begin (GtkWidget         *button,
 
   if (child->tasklist->show_labels)
     {
-      pixmap = gtk_widget_get_snapshot (button, NULL);
+      /* FIXME Triggers specific repaint error (bug 11283) */
+      //pixmap = gtk_widget_get_snapshot (button, NULL);
+      pixmap = NULL;
       if (pixmap != NULL)
         {
           gtk_drag_set_icon_pixmap (context,
