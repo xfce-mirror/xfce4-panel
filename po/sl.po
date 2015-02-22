@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-05 06:30+0200\n"
-"PO-Revision-Date: 2015-02-08 14:17+0000\n"
-"Last-Translator: Sasa Batistic <sasa.batistic@gmail.com>\n"
+"PO-Revision-Date: 2015-02-22 15:57+0000\n"
+"Last-Translator: kernc\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/xfce4-panel/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -243,7 +243,7 @@ msgstr "Vzdrževalci"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Deskbar način"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -341,7 +341,7 @@ msgstr "Ali ste prepričani, da želite odstraniti pult št. %d?"
 #: ../panel/panel-preferences-dialog.c:1001
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(zunanji)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
@@ -350,14 +350,14 @@ msgstr ""
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
+msgstr "Interno ime: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
 #: ../panel/panel-preferences-dialog.c:1018
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "Interno ime: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
 msgid "Horizontal"
@@ -369,7 +369,7 @@ msgstr "Navpično"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Deskbar"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -378,7 +378,7 @@ msgstr "Nikoli"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Intelligently"
-msgstr ""
+msgstr "Inteligentno"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
@@ -452,7 +452,7 @@ msgstr "Splošno"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "Veliko_st vrstice (št. slikovnih točk):"
 
 #: ../panel/panel-preferences-dialog.glade.h:25
 #, no-c-format
@@ -578,7 +578,7 @@ msgstr "Uredi trenutno izbrani predmet"
 
 #: ../panel/panel-preferences-dialog.glade.h:54
 msgid "Show about information of the currently selected item"
-msgstr ""
+msgstr "Pokaži informacije o trenutno izbranem predmetu"
 
 #: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Ite_ms"
@@ -598,15 +598,15 @@ msgstr "Začetnik"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "Srednje težko"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "Izkušeno"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
-msgstr ""
+msgstr "Profesionalno"
 
 #: ../panel/panel-window.c:2594
 msgid "_Lock Panel"
@@ -614,25 +614,25 @@ msgstr "_Zakleni pult"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
-msgstr ""
+msgstr "Pozdravljeni v prvem zagonu pulta"
 
 #: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
+msgstr "Pult je prešel na drug sistem nastavitev, zato mora začeti z novo konfiguracijo."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr ""
+msgstr "Izberite, kako želite ustvariti nastavitve za prvi zagon."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr ""
+msgstr "Preseli stare nastavitve"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr ""
+msgstr "Preseli stare Xfce 4.6 nastavitve v nov Xfconf sistem"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
@@ -640,40 +640,40 @@ msgstr "Uporabi privzete nastavitve"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr ""
+msgstr "Naloži privzete nastavitve"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
-msgstr ""
+msgstr "En prazen pult"
 
 #: ../migrate/main.c:149
 msgid "Start with one empty panel"
-msgstr ""
+msgstr "Začni z enim praznim pultom, ki ga prilagodite"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr ""
+msgstr "Ni bilo mogoče preseliti starih nastavitev pulta"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr ""
+msgstr "Ni bilo mogoče nastaviti privzetih nastavitev pulta"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "Nastavitve pulta potrebujejo preselitev..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Ni bilo mogoče preseliti obstoječih nastavitev pulta"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr ""
+msgstr "Nastavitve pulta so bile posodobljene."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Gumbi dejanj"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
 msgid "Appeara_nce:"
@@ -681,20 +681,20 @@ msgstr "_Videz:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "_Obrni usmerjenost gumbov"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
-msgstr ""
+msgstr "Po_kaži potrditveno okno"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Pokaži potrditveno okno s 30-sekundno zakasnitvijo za nekatera dejanja."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
-msgstr ""
+msgstr "Vidno"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Action"
@@ -706,7 +706,7 @@ msgstr "_Dejanja"
 
 #: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Session Menu"
-msgstr ""
+msgstr "Meni seje"
 
 #: ../plugins/actions/actions.c:151
 msgid "Log Out"
@@ -723,7 +723,7 @@ msgstr "Ali ste prepričani, da se želite odjaviti?"
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "Odjava čez %d sekund."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
@@ -735,11 +735,11 @@ msgstr "_Odjava ..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
-msgstr ""
+msgstr "Zamenjaj uporabnika"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "_Zamenjaj uporabnika"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
@@ -759,12 +759,12 @@ msgstr "_Mirovanje"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Ali želite vključiti stanje mirovanja (na disk)?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr ""
+msgstr "V stanje mirovanja čez %d sekund."
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
@@ -776,12 +776,12 @@ msgstr "V _pripravljenost"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Ali želite vključiti stanje pripravljenosti (v RAM)?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr ""
+msgstr "V stanje pripravljenosti čez %d sekund."
 
 #: ../plugins/actions/actions.c:196
 msgid "Restart"
@@ -793,12 +793,12 @@ msgstr "_Znova zaženi"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr ""
+msgstr "Ali ste prepričani, da želite znova zagnati sistem?"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr ""
+msgstr "Znova zaganjam čez %d sekund."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -810,12 +810,12 @@ msgstr "_Izklopi"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
-msgstr ""
+msgstr "Ali ste prepričani, da želite izklopiti sistem?"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr ""
+msgstr "Izklapljam čez %d sekund."
 
 #: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -826,7 +826,7 @@ msgstr "Ločilnik"
 #: ../plugins/actions/actions.c:976
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr ""
+msgstr "Ni mogoče zagnati dejanja \"%s\"."
 
 #: ../plugins/actions/actions.c:1147
 msgid "John Doe"
@@ -834,7 +834,7 @@ msgstr "Janez Novak"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
-msgstr ""
+msgstr "Odjava, zaklep zaslona in ostala sistemska dejanja"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
@@ -843,25 +843,25 @@ msgstr "Meni programov"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 msgid "Show generic application n_ames"
-msgstr ""
+msgstr "Pok_aži splošna imena programov"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
+msgstr "Z izbiro te možnosti so v meniju prikazana splošna imena programov, npr. \"Upravljalnik datotek\" namesto \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
-msgstr ""
+msgstr "Pokaži ik_one v meniju"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "_Show button title"
-msgstr ""
+msgstr "Pokaži oznako gum_ba"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Button _title:"
-msgstr ""
+msgstr "_Oznaka gumba:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -870,7 +870,7 @@ msgstr "_Ikona:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
-msgstr ""
+msgstr "Pokaži opise programov v orodnem namigu"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 #: ../plugins/clock/clock-dialog.glade.h:10
@@ -893,19 +893,19 @@ msgstr "_Uredi meni"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
-msgstr ""
+msgstr "_Uporabi prilagojeni meni:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Menu _file:"
-msgstr ""
+msgstr "Menijska _datoteka:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Select A Menu File"
-msgstr ""
+msgstr "Izberite menijsko datoteko"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Menu File"
-msgstr ""
+msgstr "Menijska datoteka"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
@@ -963,7 +963,7 @@ msgstr "%V. teden"
 
 #: ../plugins/clock/clock.c:457
 msgid "Failed to execute clock command"
-msgstr ""
+msgstr "Ni bilo mogoče zagnati urnega ukaza"
 
 #: ../plugins/clock/clock.c:807
 msgid "Custom Format"
@@ -978,7 +978,7 @@ msgstr "Ura"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
+msgstr "Ime časovnega pasu, ki ustreza datoteki v zoneinfo zbirki, npr. \"Europe/Ljubljana\". Če pustite prazno, bo uporabljen lokalni sistemski čas."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -998,7 +998,7 @@ msgstr "_Razporeditev:"
 
 #: ../plugins/clock/clock-dialog.glade.h:7
 msgid "_Tooltip format:"
-msgstr ""
+msgstr "Zapis orodnega nami_ga:"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 #, no-c-format
@@ -1007,7 +1007,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
+msgstr "Zapis določa, katere dele datuma in časa naj se vstavi v pult. Na primer, %Y bo nadomeščeno z letom, %m z mesecem, %d z dnem. Podobno bo besedilo znotraj <b></b> značk odebeljeno. Glej Pomoč za dodatne informacije."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1023,7 +1023,7 @@ msgstr "24-_urna ura"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "Č_asovni ločilnik"
 
 #: ../plugins/clock/clock-dialog.glade.h:15
 msgid "Sho_w AM/PM"
@@ -1037,15 +1037,15 @@ msgstr "_Oblika:"
 #. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
-msgstr ""
+msgstr "Ohla_pnost:"
 
 #: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Pokaž_i neaktivne pike"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 msgid "Show gri_d"
-msgstr ""
+msgstr "Pokaži m_režo"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Clock Options"
@@ -1053,19 +1053,19 @@ msgstr "Možnosti ure"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Analog"
-msgstr ""
+msgstr "Analogna"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "Binary"
-msgstr ""
+msgstr "Binarna"
 
 #: ../plugins/clock/clock-dialog.glade.h:24
 msgid "Digital"
-msgstr ""
+msgstr "Digitalna"
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fuzzy"
-msgstr ""
+msgstr "Ohlapna"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "LCD"
@@ -1108,7 +1108,7 @@ msgstr "Pozno zvečer"
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "%0 o'clock"
-msgstr ""
+msgstr "približno %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
@@ -1168,7 +1168,7 @@ msgstr "pet do %1"
 #: ../plugins/clock/clock-fuzzy.c:114
 #, no-c-format
 msgid "%1 o'clock"
-msgstr ""
+msgstr "približno %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1176,79 +1176,79 @@ msgstr ""
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr ""
+msgstr "približno %0"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "pet čez %0"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "deset čez %0"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "četrt čez %0"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr ""
+msgstr "dvajset čez %0"
 
 #: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr ""
+msgstr "petindvajset čez %0"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "pol %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "petindvajset do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "dvajset do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "četrt do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "deset do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "pet do %1"
 
 #: ../plugins/clock/clock-fuzzy.c:133
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr ""
+msgstr "približno %1"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "one"
@@ -1256,7 +1256,7 @@ msgstr "ena"
 
 #: ../plugins/clock/clock-fuzzy.c:139
 msgid "two"
-msgstr ""
+msgstr "dva"
 
 #: ../plugins/clock/clock-fuzzy.c:140
 msgid "three"
@@ -1306,7 +1306,7 @@ msgstr "Koliko je ura?"
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
-msgstr ""
+msgstr "Meni map"
 
 #: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
@@ -1316,22 +1316,22 @@ msgstr "Programa \"%s\" ni mogoče zagnati"
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr ""
+msgstr "Ni mogoče poizvesti vsebinskega tipa za \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr ""
+msgstr "Privzeti program za \"%s\" ni nastavljen"
 
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr ""
+msgstr "Ni bilo mogoče zagnati privzetega programa za \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr ""
+msgstr "Ni bilo mogoče zagnati prednostnega programa za kategorijo \"%s\""
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
@@ -1343,7 +1343,7 @@ msgstr "Odpri v terminalu"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "Pokaži drevo map v meniju"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 msgid "Select A Directory"
@@ -1351,18 +1351,18 @@ msgstr "Izberite mapo"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 msgid "_Base Directory:"
-msgstr ""
+msgstr "Os_novna mapa:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
+msgstr "Vnesite seznam vzorcev, ki bodo določali, katere datoteke naj bodo vidne v mapi. Če določite več kot en vzorec, morajo biti ti ločeni s podpičji (npr. *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
-msgstr ""
+msgstr "V_zorec:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
@@ -1372,15 +1372,15 @@ msgstr "Pokaži _skrite datoteke"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
-msgstr ""
+msgstr "Filtriranje"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr ""
+msgstr "Odpri meni zaganjalnikov"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
-msgstr ""
+msgstr "Neimenovan predmet"
 
 #: ../plugins/launcher/launcher.c:1728
 msgid "No items"
@@ -1388,11 +1388,11 @@ msgstr "Ni predmetov"
 
 #: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
-msgstr ""
+msgstr "Neuspešno zaganjanje urejevalnika desktop predmetov"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
-msgstr ""
+msgstr "Izbrisan predmet bo trajno odstranjen"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
@@ -1401,7 +1401,7 @@ msgstr "Ali ste prepričani, da želite odstraniti \"%s\"?"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
-msgstr ""
+msgstr "Neimenovan predmet"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
@@ -1425,7 +1425,7 @@ msgstr "Jug"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "Inside Button"
-msgstr ""
+msgstr "Znotraj gumba"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
