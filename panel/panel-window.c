@@ -1948,9 +1948,24 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 
       /* get the screen geometry we also use this if there is only
        * one monitor and no output is choosen, as a fast-path */
-      a.x = a.y = 0;
-      a.width = gdk_screen_get_width (screen);
-      a.height = gdk_screen_get_height (screen);
+      gdk_screen_get_monitor_geometry (screen, 0, &a);
+
+      a.width += a.x;
+      a.height += a.y;
+
+      for (n = 1; n < n_monitors; n++)
+        {
+          gdk_screen_get_monitor_geometry (screen, n, &b);
+
+          a.x = MIN (a.x, b.x);
+          a.y = MIN (a.y, b.y);
+          a.width = MAX (a.width, b.x + b.width);
+          a.height = MAX (a.height, b.y + b.height);
+        }
+
+      a.width -= a.x;
+      a.height -= a.y;
+
       panel_return_if_fail (a.width > 0 && a.height > 0);
     }
   else if (window->output_name != NULL
