@@ -748,7 +748,7 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_title (GTK_WINDOW (dialog), _(entry->name));
+  gtk_window_set_title (GTK_WINDOW (dialog), _(entry->display_name));
 
   button = gtk_dialog_add_button (GTK_DIALOG (dialog), _(entry->mnemonic), GTK_RESPONSE_ACCEPT);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
