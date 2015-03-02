@@ -1113,17 +1113,17 @@ static void
 clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
                                   ClockPlugin *plugin)
 {
-  GDateTime *time;
+  GDateTime *date_time;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
   clock_plugin_reposition_calendar (plugin);
 
-  time = clock_time_get_time (plugin->time);
-  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (time) - 1,
-                             g_date_time_get_year (time));
-  gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), g_date_time_get_day_of_month (time));
-  g_date_time_unref (time);
+  date_time = clock_time_get_time (plugin->time);
+  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (date_time) - 1,
+                             g_date_time_get_year (date_time));
+  gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), g_date_time_get_day_of_month (date_time));
+  g_date_time_unref (date_time);
 }
 
 

@@ -262,7 +262,7 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
                                             GtkAllocation   *alloc)
 {
   GdkColor    *active, *inactive;
-  GDateTime   *time;
+  GDateTime   *date_time;
   gint         row, rows;
   static gint  binary_table[] = { 32, 16, 8, 4, 2, 1 };
   gint         col, cols = G_N_ELEMENTS (binary_table);
@@ -282,7 +282,7 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
       active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
     }
 
-  time = clock_time_get_time (binary->time);
+  date_time = clock_time_get_time (binary->time);
 
   /* init sizes */
   remain_h = alloc->height;
@@ -293,11 +293,11 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
     {
       /* get the time this row represents */
       if (row == 0)
-        ticks = g_date_time_get_hour (time);
+        ticks = g_date_time_get_hour (date_time);
       else if (row == 1)
-        ticks = g_date_time_get_minute (time);
+        ticks = g_date_time_get_minute (date_time);
       else
-        ticks = g_date_time_get_second (time);
+        ticks = g_date_time_get_second (date_time);
 
       /* reset sizes */
       remain_w = alloc->width;
@@ -336,7 +336,7 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
       offset_y += h;
     }
 
-  g_date_time_unref (time);
+  g_date_time_unref (date_time);
 }
 
 
@@ -348,7 +348,7 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
 {
   GdkColor    *active, *inactive;
   static gint  binary_table[] = { 80, 40, 20, 10, 8, 4, 2, 1 };
-  GDateTime   *time;
+  GDateTime   *date_time;
   gint         row, rows = G_N_ELEMENTS (binary_table) / 2;
   gint         col, cols;
   gint         digit;
@@ -368,7 +368,7 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
       active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
     }
 
-  time = clock_time_get_time (binary->time);
+  date_time = clock_time_get_time (binary->time);
 
   remain_w = alloc->width;
   offset_x = alloc->x;
@@ -379,11 +379,11 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
     {
       /* get the time this row represents */
       if (col == 0)
-        ticks = g_date_time_get_hour (time);
+        ticks = g_date_time_get_hour (date_time);
       else if (col == 2)
-        ticks = g_date_time_get_minute (time);
+        ticks = g_date_time_get_minute (date_time);
       else if (col == 4)
-        ticks = g_date_time_get_second (time);
+        ticks = g_date_time_get_second (date_time);
 
       /* reset sizes */
       remain_h = alloc->height;
@@ -520,7 +520,7 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
 
 static gboolean
 xfce_clock_binary_update (XfceClockBinary     *binary,
-                          ClockTime           *time)
+                          ClockTime           *clock_time)
 {
   GtkWidget *widget = GTK_WIDGET (binary);
 
@@ -536,11 +536,11 @@ xfce_clock_binary_update (XfceClockBinary     *binary,
 
 
 GtkWidget *
-xfce_clock_binary_new (ClockTime *time)
+xfce_clock_binary_new (ClockTime *clock_time)
 {
   XfceClockBinary *binary = g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
 
-  binary->time = time;
+  binary->time = clock_time;
   binary->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                             binary->time,
                                             G_CALLBACK (xfce_clock_binary_update), binary);

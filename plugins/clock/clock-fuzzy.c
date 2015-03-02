@@ -275,7 +275,7 @@ xfce_clock_fuzzy_finalize (GObject *object)
 
 static gboolean
 xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
-                         ClockTime      *time)
+                         ClockTime      *clock_time)
 {
   GDateTime      *date_time;
   gint            sector;
@@ -353,11 +353,11 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
 
 
 GtkWidget *
-xfce_clock_fuzzy_new (ClockTime *time)
+xfce_clock_fuzzy_new (ClockTime *clock_time)
 {
   XfceClockFuzzy *fuzzy = g_object_new (XFCE_CLOCK_TYPE_FUZZY, NULL);
 
-  fuzzy->time = time;
+  fuzzy->time = clock_time;
   fuzzy->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                            fuzzy->time,
                                            G_CALLBACK (xfce_clock_fuzzy_update), fuzzy);

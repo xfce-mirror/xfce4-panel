@@ -216,7 +216,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
   gdouble          xc, yc;
   gdouble          angle, radius;
   cairo_t         *cr;
-  GDateTime       *time;
+  GDateTime       *date_time;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
 
@@ -239,7 +239,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
       cairo_clip (cr);
 
       /* get the local time */
-      time = clock_time_get_time (analog->time);
+      date_time = clock_time_get_time (analog->time);
 
       /* set the line properties */
       cairo_set_line_width (cr, 1);
@@ -251,20 +251,20 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
       if (analog->show_seconds)
         {
           /* second pointer */
-          angle = TICKS_TO_RADIANS (g_date_time_get_second (time));
+          angle = TICKS_TO_RADIANS (g_date_time_get_second (date_time));
           xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.7, TRUE);
         }
 
       /* minute pointer */
-      angle = TICKS_TO_RADIANS (g_date_time_get_minute (time));
+      angle = TICKS_TO_RADIANS (g_date_time_get_minute (date_time));
       xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.8, FALSE);
 
       /* hour pointer */
-      angle = HOURS_TO_RADIANS (g_date_time_get_hour (time), g_date_time_get_minute (time));
+      angle = HOURS_TO_RADIANS (g_date_time_get_hour (date_time), g_date_time_get_minute (date_time));
       xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.5, FALSE);
 
       /* cleanup */
-      g_date_time_unref (time);
+      g_date_time_unref (date_time);
       cairo_destroy (cr);
     }
 
@@ -347,12 +347,12 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
 
 static gboolean
 xfce_clock_analog_update (XfceClockAnalog *analog,
-                          ClockTime       *time)
+                          ClockTime       *clock_time)
 {
   GtkWidget *widget = GTK_WIDGET (analog);
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
+  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), FALSE);
 
   /* update if the widget if visible */
   if (G_LIKELY (GTK_WIDGET_VISIBLE (widget)))
@@ -364,11 +364,11 @@ xfce_clock_analog_update (XfceClockAnalog *analog,
 
 
 GtkWidget *
-xfce_clock_analog_new (ClockTime *time)
+xfce_clock_analog_new (ClockTime *clock_time)
 {
   XfceClockAnalog *analog = g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
 
-  analog->time = time;
+  analog->time = clock_time;
   analog->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                             analog->time,
                                             G_CALLBACK (xfce_clock_analog_update), analog);

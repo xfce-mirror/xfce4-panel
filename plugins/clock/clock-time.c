@@ -107,10 +107,10 @@ clock_time_class_init (ClockTimeClass *klass)
 
 
 static void
-clock_time_init (ClockTime *time)
+clock_time_init (ClockTime *clock_time)
 {
-  time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
-  time->timezone = g_time_zone_new_local ();
+  clock_time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
+  clock_time->timezone = g_time_zone_new_local ();
 }
 
 
@@ -118,11 +118,11 @@ clock_time_init (ClockTime *time)
 static void
 clock_time_finalize (GObject *object)
 {
-  ClockTime *time = XFCE_CLOCK_TIME (object);
+  ClockTime *clock_time = XFCE_CLOCK_TIME (object);
 
-  g_free (time->timezone_name);
+  g_free (clock_time->timezone_name);
 
-  g_time_zone_unref (time->timezone);
+  g_time_zone_unref (clock_time->timezone);
 
   G_OBJECT_CLASS (clock_time_parent_class)->finalize (object);
 }
@@ -135,12 +135,12 @@ clock_time_get_property (GObject    *object,
                          GValue     *value,
                          GParamSpec *pspec)
 {
-  ClockTime *time = XFCE_CLOCK_TIME (object);
+  ClockTime *clock_time = XFCE_CLOCK_TIME (object);
 
   switch (prop_id)
     {
     case PROP_TIMEZONE:
-      g_value_set_string (value, time->timezone_name);
+      g_value_set_string (value, clock_time->timezone_name);
       break;
 
     default:
@@ -157,29 +157,29 @@ clock_time_set_property (GObject      *object,
                          const GValue *value,
                          GParamSpec   *pspec)
 {
-  ClockTime     *time = XFCE_CLOCK_TIME (object);
+  ClockTime     *clock_time = XFCE_CLOCK_TIME (object);
   const gchar   *str_value;
 
   switch (prop_id)
     {
     case PROP_TIMEZONE:
       str_value = g_value_get_string (value);
-      if (g_strcmp0 (time->timezone_name, str_value) != 0)
+      if (g_strcmp0 (clock_time->timezone_name, str_value) != 0)
         {
-          g_free (time->timezone_name);
-          g_time_zone_unref (time->timezone);
+          g_free (clock_time->timezone_name);
+          g_time_zone_unref (clock_time->timezone);
           if (str_value == NULL || g_strcmp0 (str_value, "") == 0)
             {
-              time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
-              time->timezone = g_time_zone_new_local ();
+              clock_time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
+              clock_time->timezone = g_time_zone_new_local ();
             }
           else
             {
-              time->timezone_name = g_strdup (str_value);
-              time->timezone = g_time_zone_new (str_value);
+              clock_time->timezone_name = g_strdup (str_value);
+              clock_time->timezone = g_time_zone_new (str_value);
             }
 
-          g_signal_emit (G_OBJECT (time), clock_time_signals[TIME_CHANGED], 0);
+          g_signal_emit (G_OBJECT (clock_time), clock_time_signals[TIME_CHANGED], 0);
         }
       break;
 
@@ -192,14 +192,14 @@ clock_time_set_property (GObject      *object,
 
 
 GDateTime *
-clock_time_get_time (ClockTime *time)
+clock_time_get_time (ClockTime *clock_time)
 {
   GDateTime *date_time;
 
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), NULL);
 
-  if (time->timezone != NULL)
-    date_time = g_date_time_new_now (time->timezone);
+  if (clock_time->timezone != NULL)
+    date_time = g_date_time_new_now (clock_time->timezone);
   else
     date_time = g_date_time_new_now_local ();
 
@@ -209,15 +209,15 @@ clock_time_get_time (ClockTime *time)
 
 
 gchar *
-clock_time_strdup_strftime (ClockTime       *time,
+clock_time_strdup_strftime (ClockTime       *clock_time,
                             const gchar     *format)
 {
   GDateTime *date_time;
   gchar     *str;
 
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), NULL);
 
-  date_time = clock_time_get_time (time);
+  date_time = clock_time_get_time (clock_time);
   str = g_date_time_format (date_time, format);
 
   g_date_time_unref (date_time);
@@ -262,7 +262,7 @@ static gboolean
 clock_time_timeout_running (gpointer user_data)
 {
   ClockTimeTimeout *timeout = user_data;
-  GDateTime        *time;
+  GDateTime        *date_time;
 
   g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
 
@@ -270,8 +270,8 @@ clock_time_timeout_running (gpointer user_data)
   if (timeout->interval == CLOCK_INTERVAL_MINUTE)
     {
       /* sync again when we don't run on time */
-      time = clock_time_get_time (timeout->time);
-      timeout->restart = (g_date_time_get_second (time) != 0);
+      date_time = clock_time_get_time (timeout->time);
+      timeout->restart = (g_date_time_get_second (date_time) != 0);
     }
 
   return !timeout->restart;
@@ -312,13 +312,13 @@ clock_time_timeout_sync (gpointer user_data)
 
 ClockTimeTimeout *
 clock_time_timeout_new (guint       interval,
-                        ClockTime  *time,
+                        ClockTime  *clock_time,
                         GCallback   c_handler,
                         gpointer    gobject)
 {
   ClockTimeTimeout *timeout;
 
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), NULL);
 
   panel_return_val_if_fail (interval > 0, NULL);
 
@@ -326,10 +326,10 @@ clock_time_timeout_new (guint       interval,
   timeout->interval = 0;
   timeout->timeout_id = 0;
   timeout->restart = FALSE;
-  timeout->time = time;
+  timeout->time = clock_time;
 
   timeout->time_changed_id =
-    g_signal_connect_swapped (G_OBJECT (time), "time-changed",
+    g_signal_connect_swapped (G_OBJECT (clock_time), "time-changed",
                               c_handler, gobject);
 
   g_object_ref (G_OBJECT (timeout->time));
@@ -345,7 +345,7 @@ void
 clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
                                  guint             interval)
 {
-  GDateTime *time;
+  GDateTime *date_time;
   guint      next_interval;
   gboolean   restart;
 
@@ -372,8 +372,8 @@ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
   /* get the seconds to the next internal */
   if (interval == CLOCK_INTERVAL_MINUTE)
     {
-      time = clock_time_get_time (timeout->time);
-      next_interval = 60 - g_date_time_get_second (time);
+      date_time = clock_time_get_time (timeout->time);
+      next_interval = 60 - g_date_time_get_second (date_time);
     }
   else
     {
