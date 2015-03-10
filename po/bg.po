@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2015-02-23 12:38+0000\n"
+"PO-Revision-Date: 2015-03-10 07:02+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/xfce4-panel/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -94,11 +94,11 @@ msgstr "Запазване на конфигурацията на панела"
 
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
-msgstr "Добавяне на нов плъгин в панела"
+msgstr "Добавяне на нова добавка в панела"
 
 #: ../panel/main.c:82
 msgid "PLUGIN-NAME"
-msgstr "ИМЕ НА ПЛЪГИН"
+msgstr "ИМЕ НА ДОБАВКА"
 
 #: ../panel/main.c:83
 msgid "Restart the running panel instance"
@@ -161,7 +161,7 @@ msgstr "Не могат да бъдат запазени настройките 
 
 #: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
-msgstr "Не може да бъде добавен плъгин в панела"
+msgstr "Неуспешно добавяне на добавка в панела"
 
 #: ../panel/main.c:385
 msgid "Failed to restart the panel"
@@ -225,7 +225,7 @@ msgstr "Не може да бъде стартирана команда „%s“
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Неправилен синтаксис на събитие в плъгин. Използвайте ИМЕ НА ПЛЪГИН:ТИП[:ТИП:СТОЙНОСТ]."
+msgstr "Неправилен синтаксис на събитие в добавка. Използвайте ИМЕ НА ДОБАВКА:ТИП[:ТИП:СТОЙНОСТ]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
@@ -261,7 +261,7 @@ msgstr "Добавяне на нов елемент"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr "Моля, изберете панел за новият плъгин:"
+msgstr "Моля, изберете панел за новата добавка:"
 
 #: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
@@ -284,7 +284,7 @@ msgstr "Добавяне на нов елемент"
 
 #: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
-msgstr "Добавяне на нов плъгин в панела"
+msgstr "Добавяне на нови добавки в панела"
 
 #: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
@@ -306,7 +306,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Плъгинът е бил стартиран няколко пъти в течение на %d секунди. Ако натиснете Изпълнение, панелът ще опита да го рестартира. В противен случай, той ще бъде окончателно премахнат."
+msgstr "Добавката е била стартирана няколко пъти в последните %d секунди. Ако натиснете „Изпълнение“, панелът ще опита да я рестартира. В противен случай, тя ще бъде окончателно премахната от него."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -460,7 +460,7 @@ msgstr "Автоматично разширяване на дължината"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Изберететази опция за автоматично увеличаване дължината на панела, ако плъгините се нуждаят от повече място."
+msgstr "Изберете тази опция за автоматично увеличаване ширината на панела, ако добавките се нуждаят от повече място."
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
