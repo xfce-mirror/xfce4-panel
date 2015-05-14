@@ -367,7 +367,7 @@ directory_menu_plugin_configure_plugin_file_set (GtkFileChooserButton *button,
   panel_return_if_fail (GTK_IS_FILE_CHOOSER_BUTTON (button));
   panel_return_if_fail (XFCE_IS_DIRECTORY_MENU_PLUGIN (plugin));
 
-  uri = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (button));
+  uri = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (button));
   g_object_set (G_OBJECT (plugin), "base-directory", uri, NULL);
   g_free (uri);
 }
@@ -435,7 +435,7 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   if (!gtk_file_chooser_set_current_folder_file (GTK_FILE_CHOOSER (object),
                                                  plugin->base_directory, NULL))
     gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (object), g_get_home_dir ());
-  g_signal_connect (G_OBJECT (object), "current-folder-changed",
+  g_signal_connect (G_OBJECT (object), "selection-changed",
      G_CALLBACK (directory_menu_plugin_configure_plugin_file_set), plugin);
 
   object = gtk_builder_get_object (builder, "icon-button");
