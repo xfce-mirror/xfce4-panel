@@ -709,7 +709,10 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
     }
 
   if (!result
-      && !exo_execute_preferred_application_on_screen (category, working_dir, working_dir, NULL,
+      && !exo_execute_preferred_application_on_screen (category,
+                                                       path_as_arg ? working_dir : NULL,
+                                                       working_dir,
+                                                       NULL,
                                                        gtk_widget_get_screen (mi), &error))
     {
       xfce_dialog_show_error (NULL, error,
