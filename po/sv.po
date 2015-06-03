@@ -5,14 +5,15 @@
 # Translators:
 # Alexander Toresson <alexander.toresson@gmail.com>, 2006
 # Daniel Nylander <po@danielnylander.se>, 2008-2010
+# Påvel Nicklasson<pavel@frimix.se>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2014-02-23 09:25+0000\n"
-"Last-Translator: PavelNicklasson <pavelnicklasson@bahnhof.se>\n"
-"Language-Team: Swedish (http://www.transifex.com/projects/p/xfce/language/sv/)\n"
+"PO-Revision-Date: 2015-06-03 15:31+0000\n"
+"Last-Translator: Påvel Nicklasson <pavelnicklasson@bahnhof.se>\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/xfce4-panel/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -116,7 +117,7 @@ msgstr "Vänta inte på att en fönsterhanterare skall starta"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "Skriv ut versionsinformation och avsluta"
+msgstr "Visa versionsinformation och avsluta"
 
 #. parse context options
 #: ../panel/main.c:235
@@ -239,7 +240,7 @@ msgstr "Utvecklare"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr "Skrivbordsläge"
+msgstr "Skrivbordsradsläge"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -365,7 +366,7 @@ msgstr "Vertikal"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr "Skrivbordsläge"
+msgstr "Skrivbordsrad"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
@@ -410,7 +411,7 @@ msgstr "_Lås panelen"
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Välj detta alternativ för att gömma panelens handtagen och låsa dess position."
+msgstr "Välj detta alternativ för att dölja panelens handtag och låsa dess position."
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Automatically show and _hide the panel"
@@ -420,7 +421,7 @@ msgstr "Visa och _dölj panelen automatiskt"
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
-msgstr "Välj detta alternativ för att gömma panelen då pekaren inte är över den. Detta fungerar bara då panelen är fäst vid en skärmkant."
+msgstr "Välj detta alternativ för att dölja panelen då muspekaren inte är ovanpå den. Detta fungerar bara då panelen är fäst vid en skärmkant."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
@@ -847,11 +848,11 @@ msgstr "Visa ik_oner i meny"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "_Show button title"
-msgstr "_Visa knapptitel"
+msgstr "Vi_sa knappnamn"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Button _title:"
-msgstr "Knapp_titel:"
+msgstr "Knapp_namn:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
@@ -1481,21 +1482,21 @@ msgstr "Programstartare med meny som tillval"
 
 #: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
-msgstr "Inställningar för a_rbetsyta..."
+msgstr "_Skrivbordsinställningar..."
 
 #: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
-msgstr "Kunde inte öppna inställningar för arbetsyta"
+msgstr "Kunde inte öppna skrivbordsinställningar"
 
 #: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
-msgstr "Arbetsyta %d"
+msgstr "Skrivbord %d"
 
 #: ../plugins/pager/pager-dialog.glade.h:1
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Workspace Switcher"
-msgstr "Arbetsyteväxlare"
+msgstr "Skrivbordsväxlare"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Number of _rows:"
@@ -1509,11 +1510,11 @@ msgstr "Visa mi_niatyrvy"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Visa en miniatyrbild på arbetsytan med rektanglar för synliga fönster"
+msgstr "Visa en miniatyrbild på skrivbordet med rektanglar för synliga fönster"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Växla arbetsytor med mus_hjulet"
+msgstr "Växla skrivbord med mus_hjulet"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 #: ../plugins/tasklist/tasklist-dialog.glade.h:11
@@ -1633,7 +1634,7 @@ msgstr "Fönster_gruppering:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Restore minimized windows to current _workspace"
-msgstr "Återställ minimerade fönster till aktuell _arbetsyta"
+msgstr "_Återställ minimerade fönster till aktuellt skrivbord"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "D_raw window frame when hovering a button"
@@ -1645,7 +1646,7 @@ msgstr "Växla fön_ster med mushjulet"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show windows from _all workspaces or viewports"
-msgstr "Visa fönster från _alla arbetsytor eller skrivbordsvyer"
+msgstr "Visa fönster från _alla skrivbord eller skrivbordsvyer"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
@@ -1673,15 +1674,15 @@ msgstr "Tidsstämpel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Group title and timestamp"
-msgstr "Gruppera titel och tidsstämpel"
+msgstr "Gruppera namn och tidsstämpel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
-msgstr "Fönstertitel"
+msgstr "Fönsternamn"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Group title and window title"
-msgstr "Gruppera titel och fönstertitel"
+msgstr "Gruppera namn och fönstertitel"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "None, allow drag-and-drop"
@@ -1725,17 +1726,17 @@ msgstr "Brådskande fönster"
 
 #: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
-msgstr "Lägg till arbetsyta"
+msgstr "Lägg till skrivbord"
 
 #: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Ta bort arbetsytan \"%s\""
+msgstr "Ta bort skrivbord \"%s\""
 
 #: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Ta bort arbetsyta %d"
+msgstr "Ta bort skrivbord %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
 #: ../plugins/windowmenu/windowmenu.desktop.in.h:1
@@ -1748,11 +1749,11 @@ msgstr "Knapplayout:"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 msgid "Show workspace a_ctions"
-msgstr "Visa åtgärder för ar_betsytor"
+msgstr "Visa åtg_ärder för skrivbord"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Show workspace _names"
-msgstr "Visa namn på a_rbetsytor"
+msgstr "Visa skrivbords_namn"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
@@ -1760,7 +1761,7 @@ msgstr "Aktivera br_ådskande meddelanden"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
-msgstr "Visa fönster från _alla arbetsytor"
+msgstr "Visa fönster från _alla skrivbord"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Icon"
