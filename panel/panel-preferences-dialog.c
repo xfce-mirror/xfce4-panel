@@ -74,6 +74,8 @@ static void                     panel_preferences_dialog_panel_add              
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_panel_remove           (GtkWidget              *widget,
                                                                                  PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_panel_switch           (GtkWidget              *widget,
+                                                                                 PanelPreferencesDialog *dialog);
 static XfcePanelPluginProvider *panel_preferences_dialog_item_get_selected      (PanelPreferencesDialog *dialog,
                                                                                  GtkTreeIter            *return_iter);
 static void                     panel_preferences_dialog_item_store_rebuild     (GtkWidget              *itembar,
@@ -179,6 +181,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   GtkTreeViewColumn *column;
   GtkCellRenderer   *renderer;
   GtkTreeSelection  *selection;
+  gchar             *path;
 
   dialog->bindings = NULL;
   dialog->application = panel_application_get ();
@@ -205,6 +208,14 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-add", "clicked", panel_preferences_dialog_panel_add);
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
+
+  /* check if panel-switch is installed and if so show button */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-switch");
+  path = g_find_program_in_path ("xfpanel-switch");
+  if (path == NULL)
+    gtk_widget_set_visible (GTK_WIDGET (object), FALSE);
+
+  connect_signal ("panel-switch", "clicked", panel_preferences_dialog_panel_switch);
 
   /* style tab */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-style");
@@ -927,6 +938,26 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
     }
 }
 
+
+
+static void
+panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog *dialog)
+{
+  GtkWidget *toplevel;
+  gchar     *path;
+  GError    *error = NULL;
+
+  path = g_find_program_in_path ("xfpanel-switch");
+  if (path == NULL)
+    return;
+
+  /* close the preferences dialog */
+  toplevel = gtk_widget_get_toplevel (widget);
+  panel_preferences_dialog_response (toplevel, 0, dialog);
+
+  /* run xfpanel-switch */
+  g_spawn_command_line_async (path, &error);
+}
 
 
 static XfcePanelPluginProvider *
