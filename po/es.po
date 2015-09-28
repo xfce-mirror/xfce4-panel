@@ -12,7 +12,7 @@
 # Edwin Pujols <edwinpm5@gmail.com>, 2014
 # Edwin Pujols <edwinpm5@gmail.com>, 2014
 # gabrieltandil <gabriel.tandil@gmail.com>, 2014
-# gabrieltandil <gabriel.tandil@gmail.com>, 2014
+# gabrieltandil <gabriel.tandil@gmail.com>, 2014-2015
 # Hernan Gabriel Alvarez Guerra <hernan.alvarez.guerra@gmail.com>, 2013
 # Hernan Gabriel Alvarez Guerra <hernan.alvarez.guerra@gmail.com>, 2013
 # mc <correomc2000-ing@yahoo.es>, 2013
@@ -26,10 +26,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-05 06:30+0200\n"
-"PO-Revision-Date: 2015-06-21 14:22+0000\n"
-"Last-Translator: Manolo Díaz <diaz.manolo@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/xfce4-panel/language/es/)\n"
+"POT-Creation-Date: 2015-09-27 18:30+0200\n"
+"PO-Revision-Date: 2015-09-28 11:34+0000\n"
+"Last-Translator: gabrieltandil <gabriel.tandil@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/xfce/xfce4-panel/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +47,7 @@ msgid ""
 msgstr "Añadir un lanzador nuevo al panel basándose en la información de este archivo .desktop"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2557
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2615
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -58,13 +58,13 @@ msgstr "Personalizar el panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1159
+#: ../panel/panel-preferences-dialog.c:1190
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "¿Está seguro de que quiere eliminar «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1162
+#: ../panel/panel-preferences-dialog.c:1193
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si quita el elemento del panel se perderá permanentemente."
 
@@ -78,17 +78,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2569
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
 msgid "Add _New Items..."
 msgstr "_Añadir elementos nuevos…"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2580
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias del panel…"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2608
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
 msgid "Log _Out"
 msgstr "Cerrar ses_ión"
 
@@ -279,7 +279,7 @@ msgstr "Añadir un elemento nuevo"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Seleccione un panel para el nuevo complemento:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:842
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:853
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -324,41 +324,41 @@ msgid ""
 "permanently removed from the panel."
 msgstr "El complemento se ha reiniciado más de una vez en los últimos %d segundos. Si presiona «Ejecutar», se tratará de reiniciar el complemento; de lo contrario, será removido permanentemente del panel."
 
-#: ../panel/panel-preferences-dialog.c:481
+#: ../panel/panel-preferences-dialog.c:492
 msgid "Automatic"
 msgstr "Automático"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:500
+#: ../panel/panel-preferences-dialog.c:511
 #, c-format
 msgid "Screen %d"
 msgstr "Pantalla %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:526
+#: ../panel/panel-preferences-dialog.c:537
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:908
+#: ../panel/panel-preferences-dialog.c:919
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "El panel y las configuraciones de los complementos serán eliminados permanentemente"
 
-#: ../panel/panel-preferences-dialog.c:909
+#: ../panel/panel-preferences-dialog.c:920
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "¿Está seguro de que quiere eliminar el panel «%d»?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1001
+#: ../panel/panel-preferences-dialog.c:1032
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externo)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1006
+#: ../panel/panel-preferences-dialog.c:1037
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -367,7 +367,7 @@ msgstr "Nombre interno: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1018
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nombre interno: %s-%d"
@@ -419,68 +419,72 @@ msgid "Remove the currently selected panel"
 msgstr "Quitar el panel seleccionado actualmente"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Switch between panel presets"
+msgstr "Cambiar entre las configuraciones preestablecidas del panel"
+
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "M_ode:"
 msgstr "M_odo"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "O_utput:"
 msgstr "_Salida:"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Span mo_nitors"
 msgstr "E_xtender sobre múltiples monitores"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "Seleccione esta opción para extender el panel sobre múltiples monitores."
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "_Lock panel"
 msgstr "Anc_lar panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "Seleccione esta opción para ocultar las manijas del panel y anclar su posición."
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Automatically hide the panel:"
 msgstr "Ocultar el panel automáticamente:"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
 msgstr "No _reservar espacio en los bordes"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "Seleccione esta opción si quiere que las ventanas maximizadas cubran el área debajo del panel. Esto solo funciona si el panel está adjunto a un borde de la pantalla."
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "General"
 msgstr "General"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Row _Size (pixels):"
 msgstr "_Tamaño de la fila (píxeles):"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:26
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "_Longitud (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Num_ber of rows:"
 msgstr "Núm_ero de filas:"
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "A_utomatically increase the length"
 msgstr "A_umentar la longitud automáticamente"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
@@ -488,112 +492,112 @@ msgstr "Seleccione esta opción para aumentar la longitud del panel cuando los c
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Measurements"
 msgstr "Medidas"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "D_isplay"
 msgstr "P_resentación"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:33
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "_Style:"
 msgstr "_Estilo:"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Alpha:"
 msgstr "_Alfa:"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr "Valor alfa del fondo del panel, siendo 0 completamente trasparente y 100 completamente opaco."
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "C_olor:"
 msgstr "C_olor:"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Pick a Panel Color"
 msgstr "Elija el color del panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_File:"
 msgstr "_Archivo:"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Select A Background Image"
 msgstr "Seleccione una imagen de fondo"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Background"
 msgstr "Fondo"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_Enter:"
 msgstr "_Entrada:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
 msgstr "_Salida:"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
 msgstr "Trasparencia cuando el puntero está flotando sobre el panel, siendo 0 completamente trasparente y 100 completamente opaco."
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Trasparencia cuando el puntero no está flotando sobre el panel, siendo 0 completamente trasparente y 100 completamente opaco."
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Opacity"
 msgstr "Opacidad"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "Habilitar la composición en el administrador de ventanas para las opciones de opacidad en el panel."
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
 msgstr "Aparie_ncia"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:50
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item up by one row"
 msgstr "Mover el elemento seleccionado una fila hacia arriba"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item down by one row"
 msgstr "Mover el elemento seleccionado una fila hacia abajo"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Add new item to this panel"
 msgstr "Añadir un nuevo elemento a este panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Remove currently selected item"
 msgstr "Quitar el elemento seleccionado"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:54
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Edit the currently selected item"
 msgstr "Editar el elemento seleccionado"
 
-#: ../panel/panel-preferences-dialog.glade.h:54
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Show about information of the currently selected item"
 msgstr "Mostrar información acerca del elemento seleccionado"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Ite_ms"
 msgstr "Ele_mentos"
 
@@ -621,7 +625,7 @@ msgstr "Experimentado"
 msgid "Expert"
 msgstr "Experto"
 
-#: ../panel/panel-window.c:2594
+#: ../panel/panel-window.c:2652
 msgid "_Lock Panel"
 msgstr "Anc_lar el panel"
 
@@ -836,12 +840,12 @@ msgstr "El equipo se apagará en %d segundos."
 msgid "Separator"
 msgstr "Separador"
 
-#: ../plugins/actions/actions.c:976
+#: ../plugins/actions/actions.c:983
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "No se pudo ejecutar la acción «%s»"
 
-#: ../plugins/actions/actions.c:1147
+#: ../plugins/actions/actions.c:1154
 msgid "John Doe"
 msgstr "Juan Nadie"
 
@@ -1341,16 +1345,16 @@ msgstr "No se encontró una aplicación predeterminada para «%s»"
 msgid "Failed to launch default application for \"%s\""
 msgstr "No se pudo ejecutar la aplicación predeterminada para «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:716
+#: ../plugins/directorymenu/directorymenu.c:719
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "No se pudo ejecutar la aplicación favorita para la categoría «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:789
+#: ../plugins/directorymenu/directorymenu.c:792
 msgid "Open Folder"
 msgstr "Abrir carpeta"
 
-#: ../plugins/directorymenu/directorymenu.c:800
+#: ../plugins/directorymenu/directorymenu.c:803
 msgid "Open in Terminal"
 msgstr "Abrir en una terminal"
 
@@ -1511,11 +1515,11 @@ msgstr "Avanzado"
 msgid "Program launcher with optional menu"
 msgstr "Lanzador de programas con menú opcional"
 
-#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:396 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "_Configuración de áreas de trabajo…"
 
-#: ../plugins/pager/pager.c:451
+#: ../plugins/pager/pager.c:479
 msgid "Unable to open the workspace settings"
 msgstr "No se pudo abrir la configuración de áreas de trabajo"
 
@@ -1731,23 +1735,23 @@ msgstr "Cerrar ventana"
 msgid "Minimize Window"
 msgstr "Minimizar ventana"
 
-#: ../plugins/tasklist/tasklist-widget.c:3306
+#: ../plugins/tasklist/tasklist-widget.c:3326
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3315
+#: ../plugins/tasklist/tasklist-widget.c:3335
 msgid "Un_minimize All"
 msgstr "_Restaurar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3321
+#: ../plugins/tasklist/tasklist-widget.c:3341
 msgid "Ma_ximize All"
 msgstr "M_aximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3330
+#: ../plugins/tasklist/tasklist-widget.c:3350
 msgid "_Unmaximize All"
 msgstr "_Desmaximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3340
+#: ../plugins/tasklist/tasklist-widget.c:3360
 msgid "_Close All"
 msgstr "_Cerrar todas"
 
