@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2015-11-14 23:16+0000\n"
+"PO-Revision-Date: 2015-11-15 00:15+0000\n"
 "Last-Translator: enolp <enolp@softastur.org>\n"
 "Language-Team: Asturian (http://www.transifex.com/xfce/xfce4-panel/language/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Personaliza'l panel"
 #: ../panel/panel-preferences-dialog.c:1190
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "¿De xuru que quies desaniciar \"%s\"?"
+msgstr "¿De xuru que quies desaniciar «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
 #: ../panel/panel-preferences-dialog.c:1193
@@ -129,7 +129,7 @@ msgstr "[ARGUMENTOS...]"
 #: ../panel/main.c:243
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Escribi \"%s --help\" pal usu."
+msgstr "Escribi «%s --help» pal usu."
 
 #: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
@@ -222,7 +222,7 @@ msgstr "¿De xuru que quies colar d'esti panel?"
 #: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Fallu al executar el comandu \"%s\""
+msgstr "Fallu al executar el comandu «%s»"
 
 #: ../panel/panel-dbus-client.c:211
 msgid ""
@@ -300,7 +300,7 @@ msgstr "Introduz una frase de gueta equí"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "El complementu \"%s\" dexó de sutrucu'l panel, ¿quies reanicialu?"
+msgstr "El complementu «%s» dexó de sutrucu'l panel, ¿quies reanicialu?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -829,7 +829,7 @@ msgstr "Separtador"
 #: ../plugins/actions/actions.c:983
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr "Fallu al executar l'aición \"%s\""
+msgstr "Fallu al executar l'aición «%s»"
 
 #: ../plugins/actions/actions.c:1154
 msgid "John Doe"
@@ -852,7 +852,7 @@ msgstr "Amosar nomes d'aplicación xenéricos"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Esbilla esta opción p'amosar el nome xenéricu l'aplicación nel menú, por exemplu \"Xestor de ficheros\" en cuantes de \"Thunar\""
+msgstr "Esbilla esta opción p'amosar el nome xenéricu l'aplicación nel menú, por exemplu «Xestor de ficheros» en cuantes de «Thunar»"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -924,7 +924,7 @@ msgstr "Esbilla un iconu"
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "Fallu al executar el comandu \"%s\"."
+msgstr "Fallu al executar el comandu «%s»."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -981,7 +981,7 @@ msgstr "Reló"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Nome d'un fusu horariu que correspuenda a un ficheru na base de datos d'información de zona, por exemplu \"América/Nueva_York\". Dexar baleru pa usar la hora llocal."
+msgstr "Nome d'un fusu horariu que correspuenda a un ficheru na base de datos d'información de zona, por exemplu «América/Nueva_York». Dexar baleru pa usar la hora llocal."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1010,7 +1010,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "El formatu describe les partes de data y tiempu pa inxertar nel panel. Por exemplu, %Y sustituyiráse col añu, %m col mes y %d col día. De mou similar, les etiquetes <b></b> fadrán el testu en negrina. Mira la páxina d'ayuda pa más información."
+msgstr "El formatu describe les partes de data y tiempu pa inxertar nel panel. Por exemplu, %Y sustituyiráse col añu, %m col mes y %d col día. De mou similar, les etiquetes <b></b> fadrán el testu en negrina. Mira la páxina d'«Ayuda» pa más información."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1314,7 +1314,7 @@ msgstr "Menú de direutoriu"
 #: ../plugins/directorymenu/directorymenu.c:569
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Fallu al llanzar l'aplicación \"%s\""
+msgstr "Fallu al llanzar l'aplicación «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
@@ -1324,17 +1324,17 @@ msgstr "Fallu al solicitar la triba de conteníu pa «%s»"
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr "Nun s'alcontró aplicación predeterminada pa \"%s\""
+msgstr "Nun s'alcontró aplicación predeterminada pa «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:624
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Fallu al llanzar aplicación predeterminada pa \"%s\""
+msgstr "Fallu al llanzar aplicación predeterminada pa «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:719
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Fallu al executar l'aplicación preferida pa la estaya \"%s\""
+msgstr "Fallu al executar l'aplicación preferida pa la estaya «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:792
 msgid "Open Folder"
@@ -1400,7 +1400,7 @@ msgstr "Si desanicies un elementu, desaniciaráse dafechu"
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "¿De xuru que quies desaniciar \"%s\"?"
+msgstr "¿De xuru que quies desaniciar «%s»?"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
@@ -1764,7 +1764,7 @@ msgstr "Amestar estaya de trabayu"
 #: ../plugins/windowmenu/windowmenu.c:1323
 #, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "Desaniciar estaya de trabayu \"%s\""
+msgstr "Desaniciar estaya de trabayu «%s»"
 
 #: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
