@@ -1,22 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# Cedric31 <cvalmary@yahoo.fr>, 2013
+# Cédric Valmary <cvalmary@yahoo.fr>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 21:39+0100\n"
-"PO-Revision-Date: 2013-11-11 08:22+0000\n"
-"Last-Translator: Cedric31 <cvalmary@yahoo.fr>\n"
-"Language-Team: Occitan (post 1500) (http://www.transifex.com/projects/p/xfce/"
-"language/oc/)\n"
-"Language: oc\n"
+"POT-Creation-Date: 2015-09-27 18:30+0200\n"
+"PO-Revision-Date: 2016-02-23 06:54+0000\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"Language-Team: Occitan (post 1500) (http://www.transifex.com/xfce/xfce4-panel/language/oc/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: oc\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
@@ -25,13 +24,12 @@ msgstr "Crear un aviador sul tablèu de bòrd"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
-"Apondre un aviador novèl dins lo tablèu de bòrd amb las informacions "
-"d'aqueste fichièr del burèu"
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr "Apondre un aviador novèl dins lo tablèu de bòrd amb las informacions d'aqueste fichièr del burèu"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2615
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Tablèu de bòrd"
@@ -42,13 +40,13 @@ msgstr "Personalizar lo tablèu de bòrd"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1123
+#: ../panel/panel-preferences-dialog.c:1190
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Sètz segur que volètz suprimir « %s » ?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1126
+#: ../panel/panel-preferences-dialog.c:1193
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se suprimissètz l'element del tablèu de bòrd, o serà definitivament."
 
@@ -62,17 +60,17 @@ msgid "Pane_l"
 msgstr "Tablèu de _bòrd"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2365
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
 msgid "Add _New Items..."
 msgstr "Apondre d'elements _novèls ..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2376
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferéncias del tablèu de bòrd..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2404
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
 msgid "Log _Out"
 msgstr "Des_connexion"
 
@@ -177,12 +175,9 @@ msgstr "Impossible de mandar un messatge D-Bus"
 
 #: ../panel/main.c:404
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
-msgstr ""
-"Volètz aviar lo tablèu de bòrd ? Se òc, atencion que la sesilha siá salvada "
-"al moment de la desconnexion, de tal biais que lo tablèu de bòrd siá reaviat "
-"a la dobèrtura de sesilha que ven."
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
+msgstr "Volètz aviar lo tablèu de bòrd ? Se òc, atencion que la sesilha siá salvada al moment de la desconnexion, de tal biais que lo tablèu de bòrd siá reaviat a la dobèrtura de sesilha que ven."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -193,38 +188,34 @@ msgstr "Cap d'instància de %s es pas estada trobada"
 msgid "Failed to launch the migration application"
 msgstr "Impossible d'aviar la procedura de migracion"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:985
 msgid "Create _Launcher"
 msgstr "Crear un _aviador"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:986
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
-"Aquò va crear un empeuton d'aviada novèl sul tablèu de bòrd e inserirà los "
-"fichièrs depausats coma elements del menú."
+msgstr "Aquò va crear un empeuton d'aviada novèl sul tablèu de bòrd e inserirà los fichièrs depausats coma elements del menú."
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:988
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crear un aviador a partir de %d fichièr de burèu"
 msgstr[1] "Crear un aviador a partir de %d fichièrs de burèu"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1728
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
-"Avètz aviat lo servidor X sens gestionari de sesilha. En clicant sus Quitar "
-"tamparà lo servidor X."
+msgstr "Avètz aviat lo servidor X sens gestionari de sesilha. En clicant sus Quitar tamparà lo servidor X."
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
 msgstr "Sètz segur que volètz quitar lo tablèu de bòrd ?"
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1737
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Impossible d'executar la comanda « %s »"
@@ -232,17 +223,14 @@ msgstr "Impossible d'executar la comanda « %s »"
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr ""
-"Error de sintaxi especificada per l'eveniment de l'empeuton. Utilizar NOM-"
-"EMPEUTON:NOM[:TIPE:VALOR]."
+msgstr "Error de sintaxi especificada per l'eveniment de l'empeuton. Utilizar NOM-EMPEUTON:NOM[:TIPE:VALOR]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
-msgstr ""
-"Tipe invalid trobat : « %s ». Los tipes valids son bool, double, int, string "
-"e uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
+msgstr "Tipe invalid trobat : « %s ». Los tipes valids son bool, double, int, string e uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -273,7 +261,7 @@ msgstr "Apondre un element"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Seleccionatz un tablèu de bòrd per l'empeuton novèl :"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:853
 #, c-format
 msgid "Panel %d"
 msgstr "Tablèu de bòrd %d"
@@ -282,10 +270,7 @@ msgstr "Tablèu de bòrd %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
-"Perque lo tablèu de bòrd es en cors d'execucion en mòde restrench, sètz pas "
-"autorizat a aportar de modificacions a la configuracion del tablèu de bòrd "
-"en tant qu'utilizaire regular"
+msgstr "Perque lo tablèu de bòrd es en cors d'execucion en mòde restrench, sètz pas autorizat a aportar de modificacions a la configuracion del tablèu de bòrd en tant qu'utilizaire regular"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -311,9 +296,7 @@ msgstr "Picatz vòstres tèrmes de recèrca aicí"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
-"L'empeuton « %s » a quitat lo tablèu de bòrd d'un biais imprevist. Lo volètz "
-"reaviar ?"
+msgstr "L'empeuton « %s » a quitat lo tablèu de bòrd d'un biais imprevist. Lo volètz reaviar ?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -321,59 +304,52 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr ""
-"L'empeuton a reaviat mantun còp al cors de las %d darrièras segondas. Se "
-"quichatz sus Executar lo tablèu de bòrd va ensajar de reaviar l'empeuton "
-"siquenon serà suprimit definitivament del tablèu de bòrd."
+msgstr "L'empeuton a reaviat mantun còp al cors de las %d darrièras segondas. Se quichatz sus Executar lo tablèu de bòrd va ensajar de reaviar l'empeuton siquenon serà suprimit definitivament del tablèu de bòrd."
 
-#: ../panel/panel-preferences-dialog.c:472
+#: ../panel/panel-preferences-dialog.c:492
 msgid "Automatic"
 msgstr "Automatic"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:491
+#: ../panel/panel-preferences-dialog.c:511
 #, c-format
 msgid "Screen %d"
 msgstr "Ecran %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:517
+#: ../panel/panel-preferences-dialog.c:537
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:872
+#: ../panel/panel-preferences-dialog.c:919
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr ""
-"Las configuracions del tablèu de bòrd e dels empeutons seràn suprimidas "
-"definitivament"
+msgstr "Las configuracions del tablèu de bòrd e dels empeutons seràn suprimidas definitivament"
 
-#: ../panel/panel-preferences-dialog.c:873
+#: ../panel/panel-preferences-dialog.c:920
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Sètz segur que volètz suprimir lo tablèu de bòrd %d ?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:965
+#: ../panel/panel-preferences-dialog.c:1032
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extèrne)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:970
+#: ../panel/panel-preferences-dialog.c:1037
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
-"Nom intèrne : %s-%d\n"
-"PID : %d"
+msgstr "Nom intèrne : %s-%d\nPID : %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:982
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom intèrne : %s-%d"
@@ -391,225 +367,219 @@ msgid "Deskbar"
 msgstr "Deskbar"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "Pas jamai"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Intelligently"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "Totjorn"
+
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
 msgstr "Pas cap (estil per defaut)"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
 msgstr "Color plena"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
 msgstr "Imatge de rèire plan"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Add a new panel"
 msgstr "Apondre un novèl tablèu de bòrd"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Remove the currently selected panel"
 msgstr "Suprimir lo tablèu de bòrd actualament seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
+msgid "Switch between panel presets"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "M_ode:"
 msgstr "Mò_de :"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "O_utput:"
 msgstr "S_ortida :"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Span mo_nitors"
 msgstr "Espandir a totes los moni_tors"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
-"Seleccionatz aquesta opcion per espandir lo tablèu de bòrd sus mantun "
-"monitor."
+msgstr "Seleccionatz aquesta opcion per espandir lo tablèu de bòrd sus mantun monitor."
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "_Lock panel"
 msgstr "_Varrolhar lo tablèu de bòrd"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
+msgstr "Seleccionatz aquesta opcion per amagar las ponhadas del tablèu de bòrd e varrolhar sa posicion."
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Automatically hide the panel:"
 msgstr ""
-"Seleccionatz aquesta opcion per amagar las ponhadas del tablèu de bòrd e "
-"varrolhar sa posicion."
 
-#: ../panel/panel-preferences-dialog.glade.h:16
-msgid "Automatically show and _hide the panel"
-msgstr "Afichar e _amagar automaticament lo tablèu de bòrd"
-
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr ""
-"Seleccionatz aquesta opcion per amagar lo tablèu de bòrd quand lo puntador "
-"es pas dessús. Fonciona unicament quand lo tablèu de bòrd es estacat al bòrd "
-"de l'ecran."
-
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
 msgstr "_Reservar pas cap d'espaci suls bòrds"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
-"Seleccionatz aquesta opcion se volètz de fenèstras maximizadas que "
-"recobrisson la zòna darrièr lo tablèu de bòrd. Fonciona unicament quand lo "
-"tablèu de bòrd es estacat al bòrd de l'ecran."
+msgstr "Seleccionatz aquesta opcion se volètz de fenèstras maximizadas que recobrisson la zòna darrièr lo tablèu de bòrd. Fonciona unicament quand lo tablèu de bòrd es estacat al bòrd de l'ecran."
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "General"
 msgstr "General"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Row _Size (pixels):"
 msgstr "_Talha d'una linha (pixèls) :"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:26
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "_Largor (%) :"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Num_ber of rows:"
 msgstr "Nombre _de linhas :"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "A_utomatically increase the length"
 msgstr "A_umentar automaticament la largor"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr ""
-"Seleccionatz aquesta opcion per aumentar automaticament la longor del tablèu "
-"de bòrd se los empeutons demandan mai d'espaci."
+msgstr "Seleccionatz aquesta opcion per aumentar automaticament la longor del tablèu de bòrd se los empeutons demandan mai d'espaci."
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:28
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Measurements"
 msgstr "Dimensions"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "D_isplay"
 msgstr "_Afichatge"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:33
 #: ../plugins/separator/separator-dialog.glade.h:2
 msgid "_Style:"
 msgstr "E_stil :"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "_Alpha:"
 msgstr "_Opacitat :"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr ""
-"Opacitat del rèire plan del tablèu de bòrd, 0 es transparent e 100 opac."
+msgstr "Opacitat del rèire plan del tablèu de bòrd, 0 es transparent e 100 opac."
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "C_olor:"
 msgstr "_Color :"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Pick a Panel Color"
 msgstr "Seleccionar una color del tablèu de bòrd"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_File:"
 msgstr "_Fichièr :"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "Select A Background Image"
 msgstr "Seleccionar un imatge pel rèire plan"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Background"
 msgstr "Rèire plan"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_Enter:"
 msgstr "_Entrar :"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
 msgstr "_Daissar :"
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
-"Transparéncia quand lo puntador susvòla lo tablèu de bòrd, 0 es transparent "
-"e 100 opac."
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
+msgstr "Transparéncia quand lo puntador susvòla lo tablèu de bòrd, 0 es transparent e 100 opac."
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
-"Transparéncia quand la mirga susvòla pas lo tablèu de bòrd, 0 es transparent "
-"e 100 opac."
+msgstr "Transparéncia quand la mirga susvòla pas lo tablèu de bòrd, 0 es transparent e 100 opac."
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Opacity"
 msgstr "Opacitat"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
-"Activar lo compositor dins lo gestionari de fenèstra pels reglatges "
-"d'opacitat dins lo tablèu de bòrd."
+msgstr "Activar lo compositor dins lo gestionari de fenèstra pels reglatges d'opacitat dins lo tablèu de bòrd."
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
 msgstr "Aparé_ncia"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:50
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item up by one row"
 msgstr "Desplaçar l'element actualament seleccionat d'una linha cap amont"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item down by one row"
 msgstr "Desplaçar l'element actualament seleccionat d'una linha cap aval"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Add new item to this panel"
 msgstr "Apondre un element novèl al tablèu de bòrd"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Remove currently selected item"
 msgstr "Suprimir l'element actualament seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:54
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Edit the currently selected item"
 msgstr "Editar l'element actualament seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Show about information of the currently selected item"
 msgstr "Afichar d'informacions sus l'element actualament seleccionat"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Ite_ms"
 msgstr "Ele_ment"
 
@@ -637,7 +607,7 @@ msgstr "Confirmat"
 msgid "Expert"
 msgstr "Expèrt"
 
-#: ../panel/panel-window.c:2390
+#: ../panel/panel-window.c:2652
 msgid "_Lock Panel"
 msgstr "_Varrolhar lo tablèu de bòrd"
 
@@ -649,10 +619,7 @@ msgstr "Benvengúda dins la primièra aviada del tablèu de bòrd"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr ""
-"Lo tablèu de bòrd utiliza un novèl sistèma per l'emmagazinatge dels "
-"paramètres sus disc, deu donc se cargar sus una configuracion iniciala "
-"novèla."
+msgstr "Lo tablèu de bòrd utiliza un novèl sistèma per l'emmagazinatge dels paramètres sus disc, deu donc se cargar sus una configuracion iniciala novèla."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -722,9 +689,7 @@ msgstr "_Afichar una bóstia de dialòg de confirmacion"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
-"Afichar una bóstia de dialòg de confirmacion pendent 30 segondas per d'unas "
-"accions."
+msgstr "Afichar una bóstia de dialòg de confirmacion pendent 30 segondas per d'unas accions."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -857,12 +822,12 @@ msgstr "Atudament dins %d segondas."
 msgid "Separator"
 msgstr "Separador"
 
-#: ../plugins/actions/actions.c:976
+#: ../plugins/actions/actions.c:983
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Impossible d'aviar l'accion « %s »"
 
-#: ../plugins/actions/actions.c:1147
+#: ../plugins/actions/actions.c:1154
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -883,9 +848,7 @@ msgstr "Afichar los noms generics de las _aplicacions"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr ""
-"Seleccionatz aquesta opcion per afichar lo nom generic de l'aplicacion dins "
-"lo menú, per exemple « Gestionari de fichièrs » al luòc de « Thunar »"
+msgstr "Seleccionatz aquesta opcion per afichar lo nom generic de l'aplicacion dins lo menú, per exemple « Gestionari de fichièrs » al luòc de « Thunar »"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -945,16 +908,15 @@ msgstr "Fichièr de menú"
 
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
-#, fuzzy
 msgid "Applications"
-msgstr "Menú de las aplicacions"
+msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:644
+#: ../plugins/applicationsmenu/applicationsmenu.c:564
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "Seleccion de l'icòna"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:685
+#: ../plugins/applicationsmenu/applicationsmenu.c:605
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -962,8 +924,7 @@ msgstr "Impossible d'executar la comanda « %s »."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
-msgstr ""
-"Afichar un menú que conten las categorias de las aplicacions installadas"
+msgstr "Afichar un menú que conten las categorias de las aplicacions installadas"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:27
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
@@ -1016,10 +977,7 @@ msgstr "Relòtge"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr ""
-"Lo nom d'un fus orari que correspond a un fichièr dins la banca de donadas "
-"zoneinfo, per exemple « America / Nòva York ». Daissatz void per utilizar "
-"l'ora locala."
+msgstr "Lo nom d'un fus orari que correspond a un fichièr dins la banca de donadas zoneinfo, per exemple « America / Nòva York ». Daissatz void per utilizar l'ora locala."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1045,14 +1003,10 @@ msgstr "Format info_bulla :"
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
-"example, %Y will be substituted with the year, %m with the month and %d with "
-"the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr ""
-"Lo format descriu las datas e oras de las pèças d'inserir dins lo panèl. Per "
-"exemple, %Y serà substituit a l'annada, %m pel mes e %d pel jorn. Amai, las "
-"balisas <b> </b> metràn lo tèxte en gras. Veire la pagina «Ajuda» per mai "
-"d'informacions."
+msgstr "Lo format descriu las datas e oras de las pèças d'inserir dins lo panèl. Per exemple, %Y serà substituit a l'annada, %m pel mes e %d pel jorn. Amai, las balisas <b> </b> metràn lo tèxte en gras. Veire la pagina «Ajuda» per mai d'informacions."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1078,7 +1032,8 @@ msgstr "_Afichar AM/PM"
 msgid "F_ormat:"
 msgstr "F_ormat :"
 
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "F_uzziness:"
 msgstr "_Precision :"
@@ -1372,16 +1327,16 @@ msgstr "Aplicacion per defaut pas trobada per « %s »"
 msgid "Failed to launch default application for \"%s\""
 msgstr "Impossible d'aviar l'aplicacion per defaut de « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:716
+#: ../plugins/directorymenu/directorymenu.c:719
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Impossible d'executar l'aplicacion preferida per la categoria « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:789
+#: ../plugins/directorymenu/directorymenu.c:792
 msgid "Open Folder"
 msgstr "Dobrir lo repertòri"
 
-#: ../plugins/directorymenu/directorymenu.c:800
+#: ../plugins/directorymenu/directorymenu.c:803
 msgid "Open in Terminal"
 msgstr "Dobrir dins un terminal"
 
@@ -1402,11 +1357,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr ""
-"Entratz una lista de modèls que seràn utilizats per determinar quines "
-"fichièrs son visibles dins un repertòri. Se especificatz mai d'un modèl "
-"aicí, los elements de la lista devon èsser separats per de punts-virgulas "
-"(per exemple *.txt;*. doc)."
+msgstr "Entratz una lista de modèls que seràn utilizats per determinar quines fichièrs son visibles dins un repertòri. Se especificatz mai d'un modèl aicí, los elements de la lista devon èsser separats per de punts-virgulas (per exemple *.txt;*. doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1518,11 +1469,9 @@ msgstr "Desactivar las _bullas d'ajudas"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
-"Seleccionatz aquesta opcion per desactivar las infobullas quand la mirga se "
-"desplaça sul boton del tablèu de bòrd o los elements del menú."
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
+msgstr "Seleccionatz aquesta opcion per desactivar las infobullas quand la mirga se desplaça sul boton del tablèu de bòrd o los elements del menú."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1534,9 +1483,7 @@ msgstr "Afichar lo _darrièr element utilizat dins lo tablèu de bòrd"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
-"Seleccionatz aquesta opcion per desplaçar l'element del menú clicat sul "
-"tablèu de bòrd."
+msgstr "Seleccionatz aquesta opcion per desplaçar l'element del menú clicat sul tablèu de bòrd."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
@@ -1550,11 +1497,11 @@ msgstr "Avançat"
 msgid "Program launcher with optional menu"
 msgstr "Aviador de programa amb menú facultatiu"
 
-#: ../plugins/pager/pager.c:368 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:396 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "_Preferéncias dels espacis de trabalh..."
 
-#: ../plugins/pager/pager.c:451
+#: ../plugins/pager/pager.c:479
 msgid "Unable to open the workspace settings"
 msgstr "Impossible de dobrir los paramètres de l'espaci de trabalh"
 
@@ -1580,9 +1527,7 @@ msgstr "Afichar una vista _miniatura"
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr ""
-"Afichar una vista miniatura de l'espaci de trabalh, amb de rectangles que "
-"correspondon a las fenèstras visiblas"
+msgstr "Afichar una vista miniatura de l'espaci de trabalh, amb de rectangles que correspondon a las fenèstras visiblas"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
@@ -1643,9 +1588,7 @@ msgstr "Impossible d'aviar la zòna de notificacion"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr ""
-"Es probable qu'una autra aplicacion aja pres la foncion de zòna de "
-"notificacion. Aquesta zòna demorarà inutilizada."
+msgstr "Es probable qu'una autra aplicacion aja pres la foncion de zòna de notificacion. Aquesta zòna demorarà inutilizada."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
@@ -1684,14 +1627,6 @@ msgstr "Impossible d'aquerir la seleccion del gestionari per l'ecran %d"
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "Zòna ont las icònas de notificacion apareisson"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Never"
-msgstr "Pas jamai"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-msgid "Always"
-msgstr "Totjorn"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1782,23 +1717,23 @@ msgstr "Tampar la fenèstra"
 msgid "Minimize Window"
 msgstr "Minimizar la fenèstra"
 
-#: ../plugins/tasklist/tasklist-widget.c:3308
+#: ../plugins/tasklist/tasklist-widget.c:3326
 msgid "Mi_nimize All"
 msgstr "_Redusir tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3317
+#: ../plugins/tasklist/tasklist-widget.c:3335
 msgid "Un_minimize All"
 msgstr "Des_minimizar tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3323
+#: ../plugins/tasklist/tasklist-widget.c:3341
 msgid "Ma_ximize All"
 msgstr "_Maximizar tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3332
+#: ../plugins/tasklist/tasklist-widget.c:3350
 msgid "_Unmaximize All"
 msgstr "Desma_ximizar tot"
 
-#: ../plugins/tasklist/tasklist-widget.c:3342
+#: ../plugins/tasklist/tasklist-widget.c:3360
 msgid "_Close All"
 msgstr "_Tampar tot"
 
