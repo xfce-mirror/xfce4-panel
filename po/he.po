@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2016-03-09 11:26+0000\n"
+"PO-Revision-Date: 2016-03-09 17:30+0000\n"
 "Last-Translator: Elishai Eliyahu <e1907@mm.st>\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -236,7 +236,7 @@ msgstr "הוגדר תחביר שגוי של מאורע תוסף. השתמש ב P
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+msgstr "סוג רמז לא חוקי \"%s\". סוגים חוקיים הם בוליאני, דאבל, שלם, מחרוזת ושלם חיובי."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -244,7 +244,7 @@ msgstr "מתחזקים"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr "מצב  סרגל צף"
+msgstr "מצב סרגל שולחני"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -252,11 +252,11 @@ msgstr "מתחזקים לא פעילים"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "הלוח של סביבת העבודה Xfce"
+msgstr "הלוח של סביבת שולחן העבודה Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Dotan Kamber <kamberd@yahoo.com>, 2004, 2006\nJonatan Perry <Jonatan443@walla.co.il>, 2004\nYuval Tanny <tanai@int.gov.il>, 2004, 2006\nHezy Amiel <open@hezyamiel.com>, 2010\nYaron Shahrabani <sh.yaron@gmail.com>, 2011, 2013-2014"
+msgstr "שבחים-מתרגמים"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -310,7 +310,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "התוסף הופעל מחדש למעלה מפעם אחת במהלך %d השניות האחרונות. אם תלחץ על הרץ הלוח ינסה להפעיל מחדש את התוסף אחרת זה יוסר לצמיתות מתוך הלוח."
+msgstr "התוסף הופעל מחדש למעלה מפעם אחת במהלך %d השניות האחרונות. אם תלחץ על בצע הלוח ינסה להפעיל מחדש את התוסף אחרת הוא יוסר באופן קבוע מתוך הלוח."
 
 #: ../panel/panel-preferences-dialog.c:492
 msgid "Automatic"
@@ -326,11 +326,11 @@ msgstr "מסך %d"
 #: ../panel/panel-preferences-dialog.c:537
 #, c-format
 msgid "Monitor %d"
-msgstr "מסך %d"
+msgstr "צג %d"
 
 #: ../panel/panel-preferences-dialog.c:919
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "הלוח וכל תצורת תוסף יוסרו לעד"
+msgstr "הלוח ותצורות התוסף יוסרו באופן קבוע"
 
 #: ../panel/panel-preferences-dialog.c:920
 #, c-format
@@ -370,7 +370,7 @@ msgstr "אנכי"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr "סרגל צף"
+msgstr "סרגל שולחני"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -388,11 +388,11 @@ msgstr "תמיד"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
-msgstr "בלי (השתמש בסגנון מערכת)"
+msgstr "אף אחד (השתמש בסגנון מערכת)"
 
 #: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
-msgstr "צבע אחיד"
+msgstr "צבע רצוף"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
@@ -404,11 +404,11 @@ msgstr "הוסף לוח חדש"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Remove the currently selected panel"
-msgstr "הסר את הפריט הנוכחי הנבחר"
+msgstr "הסר את הלוח הנבחר הנוכחי"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Switch between panel presets"
-msgstr "החלף בין לוחות מוסדרים"
+msgstr "העבר בין כיוונים מוקדמים של הלוח"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "M_ode:"
@@ -420,11 +420,11 @@ msgstr "_פלט:"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Span mo_nitors"
-msgstr "_גשר מסכים"
+msgstr "_כסה צגים"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "בחר באפשרות זו כדי להרחיב את הלוח למסכים מרובים."
+msgstr "בחר באפשרות זו כדי להרחיב את הלוח למספר צגים."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "_Lock panel"
@@ -433,7 +433,7 @@ msgstr "_נעל לוח"
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "בחר את אפשרות זו כדי להסתיר את הידיות של הלוח ולנעול את מיקומו."
+msgstr "בחר באפשרות זו כדי להסתיר את הידיות של הלוח ולנעול את מיקומו."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Automatically hide the panel:"
@@ -441,13 +441,13 @@ msgstr "הסתר את הלוח אוטומטית:"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
-msgstr "_אל תשמור מקום במסגרות"
+msgstr "_אל תשמור מקום בשוליים"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "בחר את אפשרות זו אם ברצונך שחלונות מוגדלים יכסו את האזור מאחורי הלוח. זו פועלת רק כאשר הלוח הינו מחובר לשפת מסך."
+msgstr "בחר באפשרות זו אם ברצונך שחלונות מוגדלים יכסו את השטח מאחורי הלוח. זה עובד רק כאשר הלוח מחובר לקצה המסך."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -466,7 +466,7 @@ msgstr "או_רך (%):"
 
 #: ../panel/panel-preferences-dialog.glade.h:27
 msgid "Num_ber of rows:"
-msgstr "מס_פר של שורות:"
+msgstr "מס_פר שורות:"
 
 #: ../panel/panel-preferences-dialog.glade.h:28
 msgid "A_utomatically increase the length"
@@ -501,7 +501,7 @@ msgstr "_אלפא:"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "ערך אלפא של רקע הלוח, כאשר 0 שקוף לגמרי ומנגד 100 אטום לגמרי."
+msgstr "ערך אלפא של רקע הלוח, כאשר 0 שקוף לגמרי ו- 100 אטום לגמרי."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "C_olor:"
@@ -552,7 +552,7 @@ msgstr "אטימות"
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "אפשר קומפוזיציה של מנהל חלונות להגדרות אטימות בלוח."
+msgstr "אפשר חיבור במנהל החלונות להגדרות אטימות בלוח."
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
@@ -625,15 +625,15 @@ msgstr "ברוך בואך להפעלה הראשונה של הלוח"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "מכיוון שהלוח עבר למערכת חדשה לסידור ההגדרות, הוא חייב לטעון תצורה התחלתית חדשה."
+msgstr "מכיוון שהלוח עבר למערכת חדשה לאחסון ההגדרות, הוא חייב לטעון תצורה התחלתית חדשה."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr "נא לבחור להלן את התצורה עבור ההרצה הראשונה."
+msgstr "בחר למטה את הכיוונון עבור ההפעלה הראשונה."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr "הגירת תצורה ישנה"
+msgstr "העברת תצורה ישנה"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
@@ -641,11 +641,11 @@ msgstr "העברת התצורה הישנה של 4.6 אל Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
-msgstr "שימוש בתצורה הישנה"
+msgstr "שימוש בתצורת ברירת מחדל"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr "טעינת תצורת בררת המחדל"
+msgstr "טעינת תצורת ברירת המחדל"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
@@ -657,19 +657,19 @@ msgstr "התחלה עם לוח ריק אחד"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "המעבר לתצורת הלוח הישנה נכשל"
+msgstr "המעבר של תצורת הלוח הישנה נכשל"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr "טעינת תצורת בררת המחדל נכשלה"
+msgstr "טעינת תצורת ברירת המחדל נכשלה"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "תצורת הלוח זקוקה להגירה..."
+msgstr "תצורת הלוח צריכה העברה..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "הגירת התצורה הנוכחית נכשלה"
+msgstr "העברת התצורה הנוכחית נכשלה"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -920,7 +920,7 @@ msgstr "אפליקציות"
 #: ../plugins/applicationsmenu/applicationsmenu.c:564
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
-msgstr "בחירת סמל"
+msgstr "בחירת איקון"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:605
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
@@ -1070,7 +1070,7 @@ msgstr "דיגיטלי"
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fuzzy"
-msgstr "מעורפל"
+msgstr "עמום"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "LCD"
