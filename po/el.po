@@ -6,6 +6,7 @@
 # Efstathios Iosifidis <iefstathios@gmail.com>, 2014-2015
 # Efstathios Iosifidis <iosifidis@opensuse.org>, 2012
 # Evaggelos Balaskas <ebal@ebal.gr>, 2008-2010
+# Panagiotis Tabakis <tabakisp@gmail.com>, 2016
 # Petros Alexandrinos <lipsari@yahoo.com>, 2016
 # Spiros Georgaras <sng@hellug.gr>, 2010
 # Stathis Kamperis <ekamperi@auth.gr>, 2006
@@ -15,8 +16,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2016-03-07 10:31+0000\n"
-"Last-Translator: Petros Alexandrinos <lipsari@yahoo.com>\n"
+"PO-Revision-Date: 2016-04-18 15:51+0000\n"
+"Last-Translator: Panagiotis Tabakis <tabakisp@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/xfce/xfce4-panel/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -202,14 +203,14 @@ msgstr "Δημιουργία _εκκινητή"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Αυτό θα δημιουργήσει νέο πρόσθετο εκκινητή στο ταμπλό και εισάγει τα αρχεία ως αντικείμενα του μενού."
 
 #: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Δημιουργία νέου εκκινητή από %d αρχείο της επιφάνειας εργασίας"
+msgstr[1] "Δημιουργία νέου εκκινητή από %d αρχεία της επιφάνειας εργασίας"
 
 #: ../panel/panel-application.c:1719
 msgid ""
@@ -244,7 +245,7 @@ msgstr "Συντηρητές"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Λειτουργία Deskbar"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -370,7 +371,7 @@ msgstr "Κάθετο"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Deskbar"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
@@ -429,13 +430,13 @@ msgstr "Επιλέξτε αυτή την επιλογή για να αποκρύ
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Να μην _δεσμεύεται χώρος στα περιθώρια"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Επιλέξτε αυτή την ρύθμιση εάν θέλετε τα μεγιστοποιημένα παράθυρα να καλύπτουν την περιοχή πίσω από το ταμπλό. Αυτό δουλεύει μόνο όταν το ταμπλό είναι προσαρτημένο σε μια άκρη της οθόνης."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -657,7 +658,7 @@ msgstr "Εναλλαγή μεταξύ προκαθορισμένων ρυθμί�
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr ""
+msgstr "Αποτυχία μεταφοράς της υπάρχουσας ρύθμισης παραμέτρων"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -674,7 +675,7 @@ msgstr "Εμφά_νιση:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "Αντιστροφή _προσανατολισμού κουμπιών"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
@@ -993,7 +994,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. See the documentation of the date utility for additional "
 "information."
-msgstr ""
+msgstr "Η μορφή περιγράφει τα τμήματα της ημερομηνίας και της ώρας προς εισαγωγή στο ταμπλό. Για παράδειγμα, το %Y θα αντικατασταθεί με το έτος, %m με το μήνα και το %d με την ημέρα. Δείτε την τεκμηρίωση του βοηθητικού προγράμματος date για περισσότερες πληροφορίες."
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
@@ -1646,7 +1647,7 @@ msgstr "Σχ_εδίαση του περιγράμματος ενός παραθ�
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "Εναλλαγή παραθύρων με χρήση της ρόδα_ς του ποντικιού"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show windows from _all workspaces or viewports"
@@ -1690,7 +1691,7 @@ msgstr "Ομαδοποίηση τίτλου και τίτλου παραθύρο
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Κανένα, επιτρέπεται η μεταφορά και απόθεση"
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
