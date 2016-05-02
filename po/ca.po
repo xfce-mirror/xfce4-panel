@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2016-05-02 14:21+0000\n"
+"PO-Revision-Date: 2016-05-02 21:25+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -64,12 +64,12 @@ msgstr "P_lafó"
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
 msgid "Add _New Items..."
-msgstr "Afegir elements _nous…"
+msgstr "Afegeix elements _nous..."
 
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
 msgid "Panel Pr_eferences..."
-msgstr "Pr_eferències del plafó…"
+msgstr "Pr_eferències del plafó..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
@@ -131,7 +131,7 @@ msgstr "Feu «%s --help» per veure l'ús."
 
 #: ../panel/main.c:262
 msgid "The Xfce development team. All rights reserved."
-msgstr "L’equip de desenvolupament d’Xfce. Tots els drets reservats."
+msgstr "L'equip de desenvolupament de Xfce. Tots els drets reservats."
 
 #: ../panel/main.c:263
 #, c-format
@@ -145,7 +145,7 @@ msgstr "Ja hi ha una altra instància executant-se"
 #. spawn ourselfs again
 #: ../panel/main.c:366
 msgid "Restarting..."
-msgstr "Reiniciant…"
+msgstr "S'està reiniciant..."
 
 #: ../panel/main.c:381
 msgid "Failed to show the preferences dialog"
@@ -215,7 +215,7 @@ msgstr "Heu iniciat X sense un gestor de sessions. Premeu Sortir per a sortir de
 
 #: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
-msgstr "Esteu segurs que voleu sortir del plafó?"
+msgstr "Esteu segur que voleu sortir del plafó?"
 
 #: ../panel/panel-application.c:1737
 #, c-format
@@ -225,7 +225,7 @@ msgstr "No s'ha pogut executar l'ordre «%s»"
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "La sintaxis d'esdeveniments per al connector és invàlida. Useu PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr "La sintaxis d'esdeveniments per al connector no és vàlida. Utilitzeu PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
@@ -548,7 +548,7 @@ msgstr "Opacitat"
 #: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr "Habilita la composició al gestor de finestres per als ajusts de la opacitat al plafó."
+msgstr "Habilita la composició al gestor de finestres per als ajusts de l'opacitat al plafó."
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
@@ -661,11 +661,11 @@ msgstr "No s'ha pogut carregar la configuració predeterminada"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "La configuració del plafó necessita la migració…"
+msgstr "La configuració del plafó necessita la migració..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "No s'ha pogut migrar la configuració exitent"
+msgstr "No s'ha pogut migrar la configuració existent"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -724,15 +724,15 @@ msgstr "Esteu segur que voleu sortir?"
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr "Es sortirà en %d segons."
+msgstr "Se sortirà en %d segons."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr "Surt…"
+msgstr "Surt..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr "_Surt…"
+msgstr "_Surt..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
@@ -765,7 +765,7 @@ msgstr "Voleu que la suspensió sigui al disc?"
 #: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr "S'hibernarà en %d segons."
+msgstr "S'hibernarà l'ordinador en %d segons."
 
 #: ../plugins/actions/actions.c:188
 msgid "Suspend"
@@ -782,7 +782,7 @@ msgstr "Voleu que la suspensió sigui a la RAM?"
 #: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
-msgstr "Es suspendrà la màquina en %d segons."
+msgstr "Se suspendrà l'ordinador en %d segons."
 
 #: ../plugins/actions/actions.c:196
 msgid "Restart"
@@ -799,7 +799,7 @@ msgstr "Esteu segur que voleu arrencar de nou la màquina?"
 #: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
-msgstr "Es reiniciarà la màquina en %d segons."
+msgstr "Es reiniciarà l'ordinador en %d segons."
 
 #: ../plugins/actions/actions.c:204
 msgid "Shut Down"
@@ -816,7 +816,7 @@ msgstr "Esteu segur que voleu aturar?"
 #: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
-msgstr "S'apagarà la màquina en %d segons."
+msgstr "S'apagarà l'ordinador en %d segons."
 
 #: ../plugins/actions/actions.c:621
 #: ../plugins/separator/separator-dialog.glade.h:1
@@ -831,7 +831,7 @@ msgstr "No s'ha pogut llançar l'acció «%s»"
 
 #: ../plugins/actions/actions.c:1154
 msgid "John Doe"
-msgstr "Pepet Sensenom"
+msgstr "John Doe"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
@@ -1377,7 +1377,7 @@ msgstr "Filtrant"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
-msgstr "Obrir el menú llençador"
+msgstr "Obre el menú del llançador"
 
 #: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
@@ -1393,12 +1393,12 @@ msgstr "No s'ha pogut obrir l'editor d'elements de l'escriptori"
 
 #: ../plugins/launcher/launcher-dialog.c:857
 msgid "If you delete an item, it will be permanently removed"
-msgstr "Si esborreu un element, serà eliminat permanetment"
+msgstr "Si esborreu un element, se suprimirà permanentment"
 
 #: ../plugins/launcher/launcher-dialog.c:858
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
-msgstr "Esteu segurs de voler suprimir  «%s»?"
+msgstr "Esteu segur de voler suprimir «%s»?"
 
 #: ../plugins/launcher/launcher-dialog.c:859
 msgid "Unnamed item"
@@ -1501,7 +1501,7 @@ msgstr "Llançadora de programa amb menu opcional"
 
 #: ../plugins/pager/pager.c:396 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
-msgstr "_Configuració de l'espai de treball…"
+msgstr "_Configuració de l'espai de treball..."
 
 #: ../plugins/pager/pager.c:479
 msgid "Unable to open the workspace settings"
@@ -1624,7 +1624,7 @@ msgstr "Aplicacions conegudes"
 #: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "No s’ha pogut controlar el gestor de selecció per la pantalla %d"
+msgstr "No s’ha pogut adquirir la selecció del gestor per a la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
