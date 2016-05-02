@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2016-05-01 20:48+0000\n"
+"PO-Revision-Date: 2016-05-02 10:07+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgstr "_Mou"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
-msgstr "_Quadre"
+msgstr "P_lafó"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
@@ -78,7 +78,7 @@ msgstr "_Sortir"
 
 #: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Mostra el diàleg de «Preferències del plafó»"
+msgstr "Mostra el diàleg «Preferències del plafó»"
 
 #: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
@@ -86,7 +86,7 @@ msgstr "PANEL-NUMBER"
 
 #: ../panel/main.c:81
 msgid "Show the 'Add New Items' dialog"
-msgstr "Mostra el diàleg \"Afegir elements nous\""
+msgstr "Mostra el diàleg «Afegeix elements nous»"
 
 #: ../panel/main.c:82
 msgid "Save the panel configuration"
@@ -637,11 +637,11 @@ msgstr "Migra l'antiga configuració a Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
-msgstr "Empra la configuració predeterminada"
+msgstr "Utilitza la configuració predeterminada"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr "Carrega la configuració per defecte"
+msgstr "Carrega la configuració predeterminada"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
@@ -1012,7 +1012,7 @@ msgstr "El format descriu les parts de data i hora per inserir al plafó. Per ex
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
-msgstr "Mostra _segons"
+msgstr "Mostra els _segons"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "True _binary clock"
@@ -1042,11 +1042,11 @@ msgstr "D_ifús:"
 
 #: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Show _inactive dots"
-msgstr "Mostra punts _inactius"
+msgstr "Mostra els punts _inactius"
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 msgid "Show gri_d"
-msgstr "Mostra _graella"
+msgstr "Mostra la _quadrícula"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "Clock Options"
@@ -1359,7 +1359,7 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "Introduïu una llista de patrons que s'empraran per determinar quins fitxers es mostren als directoris. Si especifiqueu més d'un patró la llista d'elements ha d'estar separada amb punts i comes (e.g.: «*.txt;*.doc»)."
+msgstr "Introduïu una llista dels patrons que s'utilitzaran per determinar quins fitxers es mostren en un directori. Si especifiqueu més d'un patró, la llista dels elements ha d'estar separada amb punts i comes (p. ex.: «*.txt;*.doc»)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1367,7 +1367,7 @@ msgstr "Patró de _fitxers:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
-msgstr "Mostra fitxers _ocults"
+msgstr "Mostra els fitxers _ocults"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist-dialog.glade.h:24
@@ -1477,7 +1477,7 @@ msgstr "Seleccioneu aquesta opció per a desactivar els quadres de text emergent
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr "Mostra una _etiqueta enlloc de la icona"
+msgstr "Mostra una _etiqueta en lloc de la icona"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
@@ -1523,17 +1523,17 @@ msgstr "Nombre de _files:"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
 msgid "Show mi_niature view"
-msgstr "Mostra vista en mi_niatura"
+msgstr "Mostra la visualització en mi_niatura"
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
 "Show a miniature view of the workspace with rectangles for the visible "
 "windows"
-msgstr "Mostra una vista en miniatura de l'entorn de treball amb rectangles per a les finestres visibles"
+msgstr "Mostra una visualització en miniatura de l'entorn de treball amb rectangles per a les finestres visibles"
 
 #: ../plugins/pager/pager-dialog.glade.h:7
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Canvia d'espais de treball amb la _roda del ratolí"
+msgstr "Canvia d'espai de treball amb la _roda del ratolí"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
 #: ../plugins/tasklist/tasklist-dialog.glade.h:20
@@ -1583,18 +1583,18 @@ msgstr "Oculta totes les finestres i mostra l'escriptori"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "No s'ha pogut iniciar l'espai de notificacions"
+msgstr "No s'ha pogut iniciar l'àrea de les notificacions"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Sembla que una altra aplicació o connector ha pres la funcionalitat de l'espai de notificació. Aquesta àrea romandrà inutilitzada."
+msgstr "Sembla que una altra aplicació o connector ha pres la funcionalitat de l'àrea de les notificacions. Aquesta àrea romandrà inutilitzada."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr "L'espai de notificació "
+msgstr "L'àrea de notificacions ha perdut la selecció"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1603,7 +1603,7 @@ msgstr "Voleu suprimir la llista d'aplicacions conegudes?"
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
-msgstr "Espai de notificació"
+msgstr "Àrea de les notificacions"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
@@ -1611,7 +1611,7 @@ msgstr "Mida _màxim de la icona (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
-msgstr "Mostra _marc"
+msgstr "Mostra el _marc"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
@@ -1628,7 +1628,7 @@ msgstr "No s’ha pogut controlar el gestor de selecció per la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
-msgstr "Espai on es mostraran las icones de notificació"
+msgstr "L'àrea on es mostraran las icones de notificació"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1741,7 +1741,7 @@ msgstr "_Tanca-ho tot"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Switch between open windows using buttons"
-msgstr "Canvia entre les finestres obertes emprant botons"
+msgstr "Canvia entre les finestres obertes mitjançant els botons"
 
 #: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
@@ -1804,4 +1804,4 @@ msgstr "Fletxa"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
-msgstr "Canvia entre les finestres obertes emprant un menú"
+msgstr "Canvia entre les finestres obertes mitjançant un menú"
