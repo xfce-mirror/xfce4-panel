@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2016-06-24 12:54+0000\n"
+"PO-Revision-Date: 2016-07-01 19:35+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce4-panel/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -139,7 +139,7 @@ msgstr "Apie klaidas praneškite <%s>."
 
 #: ../panel/main.c:321
 msgid "There is already a running instance"
-msgstr "Jau yra veikianti kopija"
+msgstr "Jau yra veikiantis egzempliorius"
 
 #. spawn ourselfs again
 #: ../panel/main.c:366
@@ -183,7 +183,7 @@ msgstr "Ar norite paleisti skydelį? Jei taip, įsitikinkite, kad atsijungdami �
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
 msgid "No running instance of %s was found"
-msgstr "Jokia veikianti %s kopija nerasta"
+msgstr "Joks veikiantis %s egzempliorius nerastas"
 
 #: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
@@ -522,24 +522,24 @@ msgstr "Fonas"
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:42
 msgid "_Enter:"
-msgstr "_Įeiti:"
+msgstr "_Įeinant:"
 
 #. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Leave:"
-msgstr "_Palikti:"
+msgstr "_Paliekant:"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr "Skaidrumas žymekliui slenkant skydeliu, su 0 yra visiškai skaidru, o 100 visiškai nepermatoma."
+msgstr "Permatomumas, kai žymeklis yra virš skydelio, kur 0 reiškia visiškai permatoma, o 100 - visiškai nepermatoma."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Skaidrumas žymekliui neslenkant skydeliu, su 0 yra visiškai skaidru, o 100 visiškai nepermatoma."
+msgstr "Permatomumas, kai žymeklis nėra virš skydelio, kur 0 reiškia visiškai permatoma, o 100 - visiškai nepermatoma."
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Opacity"
@@ -1721,7 +1721,7 @@ msgstr "Suskleisti langą"
 
 #: ../plugins/tasklist/tasklist-widget.c:3326
 msgid "Mi_nimize All"
-msgstr "_Sumažinti visus"
+msgstr "_Suskleisti visus"
 
 #: ../plugins/tasklist/tasklist-widget.c:3335
 msgid "Un_minimize All"
