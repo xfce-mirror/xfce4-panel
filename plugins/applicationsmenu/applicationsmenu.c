@@ -223,6 +223,7 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
 
   plugin->label = gtk_label_new (DEFAULT_TITLE);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->label, FALSE, FALSE, 0);
+  plugin->show_button_title = TRUE;
   gtk_widget_show (plugin->label);
 
   /* prepare the menu */
