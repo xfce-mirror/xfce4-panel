@@ -717,7 +717,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
 
   if (!result
 #ifdef EXO_CHECK_VERSION
-      && !exo_execute_preferred_application_on_screen (category, NULL, working_dir, NULL,
+      && !exo_execute_preferred_application_on_screen (category, working_dir, working_dir, NULL,
                                                        gtk_widget_get_screen (mi), &error)
 #endif
      )
