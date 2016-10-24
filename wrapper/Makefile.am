@@ -8,46 +8,10 @@ AM_CPPFLAGS = \
 wrapperdir = $(HELPER_PATH_PREFIX)/xfce4/panel
 
 wrapper_PROGRAMS = \
-	wrapper-1.0
+	wrapper-2.0
 
 wrapper_built_sources = \
 	wrapper-dbus-client-infos.h
-
-wrapper_1_0_SOURCES = \
-	$(wrapper_built_sources) \
-	main.c \
-	wrapper-module.c \
-	wrapper-module.h \
-	wrapper-plug.c \
-	wrapper-plug.h
-
-wrapper_1_0_CFLAGS = \
-	$(GTK_CFLAGS) \
-	$(DBUS_CFLAGS) \
-	$(GMODULE_CFLAGS) \
-	$(LIBXFCE4UTIL_CFLAGS) \
-	$(PLATFORM_CFLAGS)
-
-wrapper_1_0_LDFLAGS = \
-	-no-undefined \
-	$(PLATFORM_LDFLAGS)
-
-wrapper_1_0_LDADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
-	$(GTK_LIBS) \
-	$(DBUS_LIBS) \
-	$(GMODULE_LIBS) \
-	$(LIBXFCE4UTIL_LIBS)
-
-wrapper_1_0_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
-
-#
-# Gtk+ 3 support library
-#
-if ENABLE_GTK3_LIBRARY
-
-wrapper_PROGRAMS += wrapper-2.0
 
 wrapper_2_0_SOURCES = \
 	$(wrapper_built_sources) \
@@ -58,7 +22,7 @@ wrapper_2_0_SOURCES = \
 	wrapper-plug.h
 
 wrapper_2_0_CFLAGS = \
-	$(GTK3_CFLAGS) \
+	$(GTK_CFLAGS) \
 	$(DBUS_CFLAGS) \
 	$(GMODULE_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
@@ -69,14 +33,50 @@ wrapper_2_0_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 wrapper_2_0_LDADD = \
-	$(top_builddir)/libxfce4panel/libxfce4panel-2.0.la \
-	$(GTK3_LIBS) \
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
+	$(GTK_LIBS) \
 	$(DBUS_LIBS) \
 	$(GMODULE_LIBS) \
 	$(LIBXFCE4UTIL_LIBS)
 
 wrapper_2_0_DEPENDENCIES = \
-	$(top_builddir)/libxfce4panel/libxfce4panel-2.0.la
+	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la
+
+#
+# Gtk+ 2 support library
+#
+if ENABLE_GTK2_LIBRARY
+
+wrapper_PROGRAMS += wrapper-1.0
+
+wrapper_1_0_SOURCES = \
+	$(wrapper_built_sources) \
+	main.c \
+	wrapper-module.c \
+	wrapper-module.h \
+	wrapper-plug.c \
+	wrapper-plug.h
+
+wrapper_1_0_CFLAGS = \
+	$(GTK2_CFLAGS) \
+	$(DBUS_CFLAGS) \
+	$(GMODULE_CFLAGS) \
+	$(LIBXFCE4UTIL_CFLAGS) \
+	$(PLATFORM_CFLAGS)
+
+wrapper_1_0_LDFLAGS = \
+	-no-undefined \
+	$(PLATFORM_LDFLAGS)
+
+wrapper_1_0_LDADD = \
+	$(top_builddir)/libxfce4panel/libxfce4panel-1.0.la \
+	$(GTK2_LIBS) \
+	$(DBUS_LIBS) \
+	$(GMODULE_LIBS) \
+	$(LIBXFCE4UTIL_LIBS)
+
+wrapper_1_0_DEPENDENCIES = \
+	$(top_builddir)/libxfce4panel/libxfce4panel-1.0.la
 
 endif
 

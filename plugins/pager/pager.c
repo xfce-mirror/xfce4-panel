@@ -33,7 +33,6 @@
 #include <common/panel-utils.h>
 #include <common/panel-private.h>
 #include <libwnck/libwnck.h>
-#include <exo/exo.h>
 
 #include "pager.h"
 #include "pager-buttons.h"
@@ -53,8 +52,6 @@ static void     pager_plugin_set_property                 (GObject           *ob
                                                            guint              prop_id,
                                                            const GValue      *value,
                                                            GParamSpec        *pspec);
-static void     pager_plugin_size_request                 (GtkWidget         *widget,
-                                                           GtkRequisition    *requisition);
 static gboolean pager_plugin_scroll_event                 (GtkWidget         *widget,
                                                            GdkEventScroll    *event);
 static void     pager_plugin_screen_changed               (GtkWidget         *widget,
@@ -86,17 +83,14 @@ struct _PagerPlugin
 
   /* settings */
   guint          scrolling : 1;
-  guint          wrap_workspaces : 1;
   guint          miniature_view : 1;
   gint           rows;
-  gfloat         ratio;
 };
 
 enum
 {
   PROP_0,
   PROP_WORKSPACE_SCROLLING,
-  PROP_WRAP_WORKSPACES,
   PROP_MINIATURE_VIEW,
   PROP_ROWS
 };
@@ -122,7 +116,6 @@ pager_plugin_class_init (PagerPluginClass *klass)
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->scroll_event = pager_plugin_scroll_event;
-  widget_class->size_request = pager_plugin_size_request;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
   plugin_class->construct = pager_plugin_construct;
@@ -136,28 +129,21 @@ pager_plugin_class_init (PagerPluginClass *klass)
                                    g_param_spec_boolean ("workspace-scrolling",
                                                          NULL, NULL,
                                                          TRUE,
-                                                         EXO_PARAM_READWRITE));
-
-  g_object_class_install_property (gobject_class,
-                                   PROP_WRAP_WORKSPACES,
-                                   g_param_spec_boolean ("wrap-workspaces",
-                                                         NULL, NULL,
-                                                         FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_MINIATURE_VIEW,
                                    g_param_spec_boolean ("miniature-view",
                                                          NULL, NULL,
                                                          TRUE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ROWS,
                                    g_param_spec_uint ("rows",
                                                       NULL, NULL,
                                                       1, 50, 1,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -167,10 +153,8 @@ pager_plugin_init (PagerPlugin *plugin)
 {
   plugin->wnck_screen = NULL;
   plugin->scrolling = TRUE;
-  plugin->wrap_workspaces = FALSE;
   plugin->miniature_view = TRUE;
   plugin->rows = 1;
-  plugin->ratio = 1.0;
   plugin->pager = NULL;
 }
 
@@ -188,10 +172,6 @@ pager_plugin_get_property (GObject    *object,
     {
     case PROP_WORKSPACE_SCROLLING:
       g_value_set_boolean (value, plugin->scrolling);
-      break;
-
-    case PROP_WRAP_WORKSPACES:
-      g_value_set_boolean (value, plugin->wrap_workspaces);
       break;
 
     case PROP_MINIATURE_VIEW:
@@ -224,10 +204,6 @@ pager_plugin_set_property (GObject      *object,
     {
     case PROP_WORKSPACE_SCROLLING:
       plugin->scrolling = g_value_get_boolean (value);
-      break;
-
-    case PROP_WRAP_WORKSPACES:
-      plugin->wrap_workspaces = g_value_get_boolean (value);
       break;
 
     case PROP_MINIATURE_VIEW:
@@ -283,21 +259,12 @@ pager_plugin_scroll_event (GtkWidget      *widget,
   else
     active_n++;
 
+  /* wrap around */
   n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen) - 1;
-
-  if (plugin->wrap_workspaces == TRUE)
-  {
-    /* wrap around */
-    if (active_n < 0)
-      active_n = n_workspaces;
-    else if (active_n > n_workspaces)
-      active_n = 0;
-  }
-  else if (active_n < 0 || active_n > n_workspaces )
-  {
-    /* we do not need to do anything */
-    return TRUE;
-  }
+  if (active_n < 0)
+    active_n = n_workspaces;
+  else if (active_n > n_workspaces)
+    active_n = 0;
 
   new_ws = wnck_screen_get_workspace (plugin->wnck_screen, active_n);
   if (new_ws != NULL && active_ws != new_ws)
@@ -330,13 +297,18 @@ pager_plugin_screen_layout_changed (PagerPlugin *plugin)
 
   if (plugin->miniature_view)
     {
-      plugin->pager = wnck_pager_new (plugin->wnck_screen);
+      plugin->pager = wnck_pager_new ();
       wnck_pager_set_display_mode (WNCK_PAGER (plugin->pager), WNCK_PAGER_DISPLAY_CONTENT);
       if (!wnck_pager_set_n_rows (WNCK_PAGER (plugin->pager), plugin->rows))
         g_message ("Setting the pager rows returned false. Maybe the setting is not applied.");
 
+#if 0
+      wnck_pager_set_layout_policy (WNCK_PAGER (plugin->pager),
+                                    (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
+                                    WNCK_PAGER_LAYOUT_POLICY_WIDTH_FOR_HEIGHT :
+                                    WNCK_PAGER_LAYOUT_POLICY_HEIGHT_FOR_WIDTH);
+#endif
       wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
-      plugin->ratio = (gfloat) gdk_screen_width () / (gfloat) gdk_screen_height ();
     }
   else
     {
@@ -385,7 +357,6 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty  properties[] =
   {
     { "workspace-scrolling", G_TYPE_BOOLEAN },
-    { "wrap-workspaces", G_TYPE_BOOLEAN },
     { "miniature-view", G_TYPE_BOOLEAN },
     { "rows", G_TYPE_UINT },
     { NULL }
@@ -429,8 +400,6 @@ static gboolean
 pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint             size)
 {
-  gtk_widget_queue_resize (GTK_WIDGET (panel_plugin));
-
   /* do not set fixed size */
   return TRUE;
 }
@@ -449,7 +418,15 @@ pager_plugin_mode_changed (XfcePanelPlugin     *panel_plugin,
     GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
 
   if (plugin->miniature_view)
-    wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+    {
+#if 0
+      wnck_pager_set_layout_policy (WNCK_PAGER (plugin->pager),
+                                    (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) ?
+                                    WNCK_PAGER_LAYOUT_POLICY_WIDTH_FOR_HEIGHT :
+                                    WNCK_PAGER_LAYOUT_POLICY_HEIGHT_FOR_WIDTH);
+#endif
+      wnck_pager_set_orientation (WNCK_PAGER (plugin->pager), orientation);
+    }
   else
     pager_buttons_set_orientation (XFCE_PAGER_BUTTONS (plugin->pager), orientation);
 }
@@ -560,64 +537,24 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   object = gtk_builder_get_object (builder, "workspace-scrolling");
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "workspace-scrolling",
-                          G_OBJECT (object), "active");
+  g_object_bind_property (G_OBJECT (plugin), "workspace-scrolling",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   object = gtk_builder_get_object (builder, "miniature-view");
   panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "miniature-view",
-                          G_OBJECT (object), "active");
+  g_object_bind_property (G_OBJECT (plugin), "miniature-view",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   object = gtk_builder_get_object (builder, "rows");
   panel_return_if_fail (GTK_IS_ADJUSTMENT (object));
-  exo_mutual_binding_new (G_OBJECT (plugin), "rows",
-                          G_OBJECT (object), "value");
+  g_object_bind_property (G_OBJECT (plugin), "rows",
+                          G_OBJECT (object), "value",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   /* update the rows limit */
   pager_plugin_configure_n_workspaces_changed (plugin->wnck_screen, NULL, builder);
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
-
-
-
-static void
-pager_plugin_size_request (GtkWidget      *widget,
-                           GtkRequisition *requisition)
-{
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
-  XfcePanelPluginMode  mode;
-  gint                 n_workspaces, n_cols;
-
-  if (plugin->miniature_view)
-    {
-      mode   = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
-      n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen);
-      n_cols = MAX (1, (n_workspaces + plugin->rows - 1) / plugin->rows);
-      if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
-        {
-          requisition->height = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-          requisition->width = (gint) (requisition->height / plugin->rows * plugin->ratio * n_cols);
-        }
-      else if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        {
-          requisition->width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-          requisition->height = (gint) (requisition->width / plugin->rows / plugin->ratio * n_cols);
-        }
-      else /* (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) */
-        {
-          requisition->width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-          requisition->height = (gint) (requisition->width / n_cols / plugin->ratio * plugin->rows);
-        }
-    }
-  else if (plugin->pager)
-    {
-      gtk_widget_size_request (plugin->pager, requisition);
-    }
-  else // initial fallback
-    {
-      requisition->width = 1;
-      requisition->height = 1;
-    }
-}
-

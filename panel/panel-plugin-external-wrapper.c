@@ -220,7 +220,7 @@ panel_plugin_external_wrapper_get_argv (PanelPluginExternal   *external,
   argv[PLUGIN_ARGV_0] = g_strjoin ("-", WRAPPER_BIN, panel_module_get_api (external->module), NULL);
   argv[PLUGIN_ARGV_FILENAME] = g_strdup (panel_module_get_filename (external->module));
   argv[PLUGIN_ARGV_UNIQUE_ID] = g_strdup_printf ("%d", external->unique_id);;
-  argv[PLUGIN_ARGV_SOCKET_ID] = g_strdup_printf ("%u", gtk_socket_get_id (GTK_SOCKET (external)));;
+  argv[PLUGIN_ARGV_SOCKET_ID] = g_strdup_printf ("%lu", gtk_socket_get_id (GTK_SOCKET (external)));;
   argv[PLUGIN_ARGV_NAME] = g_strdup (panel_module_get_name (external->module));
   argv[PLUGIN_ARGV_DISPLAY_NAME] = g_strdup (panel_module_get_display_name (external->module));
   argv[PLUGIN_ARGV_COMMENT] = g_strdup (panel_module_get_comment (external->module));

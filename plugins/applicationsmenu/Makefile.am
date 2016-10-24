@@ -19,12 +19,10 @@ libapplicationsmenu_la_SOURCES = \
 
 libapplicationsmenu_la_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(GARCON_CFLAGS) \
-	$(GARCON_GTK2_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libapplicationsmenu_la_LDFLAGS = \
@@ -37,12 +35,10 @@ libapplicationsmenu_la_LDFLAGS = \
 libapplicationsmenu_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
-	$(EXO_LIBS) \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(GARCON_LIBS) \
-	$(GARCON_GTK2_LIBS) \
 	$(XFCONF_LIBS)
 
 libapplicationsmenu_la_DEPENDENCIES = \
@@ -84,7 +80,7 @@ DISTCLEANFILES += \
 	$(libapplicationsmenu_built_sources)
 
 applicationsmenu-dialog_ui.h: applicationsmenu-dialog.glade
-	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=applicationsmenu_dialog_ui $< >$@
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=applicationsmenu_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

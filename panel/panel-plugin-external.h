@@ -20,6 +20,7 @@
 #define __PANEL_PLUGIN_EXTERNAL_H__
 
 #include <gtk/gtk.h>
+#include <gtk/gtkx.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-module.h>

@@ -42,4 +42,6 @@ void        panel_utils_set_atk_info   (GtkWidget        *widget,
                                         const gchar      *name,
                                         const gchar      *description);
 
+void        panel_utils_destroy_later  (GtkWidget        *widget);
+
 #endif /* !__PANEL_BUILDER_H__ */

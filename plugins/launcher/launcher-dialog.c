@@ -24,7 +24,6 @@
 #include <string.h>
 #endif
 
-#include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 #include <garcon/garcon.h>
@@ -41,7 +40,7 @@
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
-#define LAUNCHER_WIDGET_XID(widget) ((guint) GDK_WINDOW_XID (GDK_WINDOW ((widget)->window)))
+#define LAUNCHER_WIDGET_XID(widget) ((guint) GDK_WINDOW_XID (gtk_widget_get_root_window (GTK_WIDGET (widget))))
 #else
 #define LAUNCHER_WIDGET_XID(widget) (0)
 #endif
@@ -132,7 +131,7 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
 
   /* get the search string from the item */
   text = gtk_entry_get_text (GTK_ENTRY (user_data));
-  if (G_UNLIKELY (exo_str_is_empty (text)))
+  if (G_UNLIKELY (panel_str_is_empty (text)))
     return TRUE;
 
   /* casefold the search text */
@@ -142,7 +141,7 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
 
   /* try the pre-build search string first */
   gtk_tree_model_get (model, iter, COL_SEARCH, &string, -1);
-  if (!exo_str_is_empty (string))
+  if (!panel_str_is_empty (string))
     {
       /* search */
       visible = (strstr (string, text_casefolded) != NULL);
@@ -151,7 +150,7 @@ launcher_dialog_add_visible_function (GtkTreeModel *model,
     {
       /* get the name */
       gtk_tree_model_get (model, iter, COL_NAME, &string, -1);
-      if (!exo_str_is_empty (string))
+      if (!panel_str_is_empty (string))
         {
           /* escape and casefold the name */
           escaped = g_markup_escape_text (string, -1);
@@ -206,8 +205,6 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
 
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
 
-  GDK_THREADS_ENTER ();
-
   /* load the item pool */
   pool = launcher_plugin_garcon_menu_pool ();
 
@@ -216,8 +213,6 @@ launcher_dialog_add_populate_model_idle (gpointer user_data)
   g_hash_table_foreach (pool, launcher_dialog_add_store_insert, store);
 
   g_hash_table_destroy (pool);
-
-  GDK_THREADS_LEAVE ();
 
   return FALSE;
 }
@@ -245,7 +240,7 @@ launcher_dialog_add_populate_model (LauncherPluginDialog *dialog)
 
   /* fire an idle menu system load */
   if (G_LIKELY (dialog->idle_populate_id == 0))
-    dialog->idle_populate_id = g_idle_add_full (
+    dialog->idle_populate_id = gdk_threads_add_idle_full (
         G_PRIORITY_DEFAULT_IDLE,
         launcher_dialog_add_populate_model_idle,
         dialog, launcher_dialog_add_populate_model_idle_destroyed);
@@ -343,8 +338,8 @@ launcher_dialog_add_key_press_event (GtkTreeView          *treeview,
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
   panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
 
-  if (event->keyval == GDK_Return
-      || event->keyval == GDK_KP_Enter)
+  if (event->keyval == GDK_KEY_Return
+      || event->keyval == GDK_KEY_KP_Enter)
     return launcher_dialog_press_event (dialog, "button-add");
 
   return FALSE;
@@ -466,8 +461,6 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
   GObject   *store;
   GPtrArray *array;
 
-  GDK_THREADS_ENTER ();
-
   store = gtk_builder_get_object (dialog->builder, "item-store");
 
   array = g_ptr_array_new ();
@@ -481,8 +474,6 @@ launcher_dialog_tree_save (LauncherPluginDialog *dialog)
           G_CALLBACK (launcher_dialog_items_load), dialog);
 
   xfconf_array_free (array);
-
-  GDK_THREADS_LEAVE ();
 }
 
 
@@ -647,7 +638,7 @@ launcher_dialog_press_event (LauncherPluginDialog *dialog,
 
   object = gtk_builder_get_object (dialog->builder, object_name);
   panel_return_val_if_fail (GTK_IS_BUTTON (object), FALSE);
-  if (GTK_WIDGET_SENSITIVE (object))
+  if (gtk_widget_get_sensitive (GTK_WIDGET (object)))
     {
       gtk_button_clicked (GTK_BUTTON (object));
       return TRUE;
@@ -749,8 +740,8 @@ launcher_dialog_tree_key_press_event (GtkTreeView          *treeview,
   panel_return_val_if_fail (GTK_IS_BUILDER (dialog->builder), FALSE);
   panel_return_val_if_fail (GTK_IS_TREE_VIEW (treeview), FALSE);
 
-  if (event->keyval == GDK_Return
-      || event->keyval == GDK_KP_Enter)
+  if (event->keyval == GDK_KEY_Return
+      || event->keyval == GDK_KEY_KP_Enter)
     return launcher_dialog_press_event (dialog, "item-edit");
 
   return FALSE;
@@ -856,7 +847,7 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
           if (xfce_dialog_confirm (GTK_WINDOW (toplevel), GTK_STOCK_DELETE, NULL,
                   _("If you delete an item, it will be permanently removed"),
                   _("Are you sure you want to remove \"%s\"?"),
-                  exo_str_is_empty (display_name) ? _("Unnamed item") : display_name))
+                  panel_str_is_empty (display_name) ? _("Unnamed item") : display_name))
             {
               /* remove the item from the store */
               gtk_list_store_remove (GTK_LIST_STORE (model), &iter_a);
@@ -1020,7 +1011,7 @@ launcher_dialog_tree_row_changed (GtkTreeModel         *model,
   panel_return_if_fail (GTK_IS_BUILDER (dialog->builder));
 
   /* item moved with dnd, save the tree to update the plugin */
-  g_idle_add ((GSourceFunc) launcher_dialog_tree_save, dialog);
+  gdk_threads_add_idle ((GSourceFunc) launcher_dialog_tree_save, dialog);
 
   /* select the moved item to there is no selection change on reload */
   treeview = gtk_builder_get_object (dialog->builder, "item-treeview");
@@ -1050,13 +1041,13 @@ launcher_dialog_items_set_item (GtkTreeModel         *model,
   name = garcon_menu_item_get_name (item);
   comment = garcon_menu_item_get_comment (item);
 
-  if (!exo_str_is_empty (comment))
+  if (!panel_str_is_empty (comment))
     markup = g_markup_printf_escaped ("<b>%s</b>\n%s", name, comment);
   else
     markup = g_markup_printf_escaped ("<b>%s</b>", name);
 
   icon_name = garcon_menu_item_get_icon_name (item);
-  if (!exo_str_is_empty (icon_name))
+  if (!panel_str_is_empty (icon_name))
     {
       if (!gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &w, &h))
         w = h = 32;
@@ -1241,8 +1232,9 @@ launcher_dialog_show (LauncherPlugin *plugin)
     {
       object = gtk_builder_get_object (builder, binding_names[i]);
       panel_return_if_fail (GTK_IS_WIDGET (object));
-      exo_mutual_binding_new (G_OBJECT (plugin), binding_names[i],
-                              G_OBJECT (object), "active");
+      g_object_bind_property (G_OBJECT (plugin), binding_names[i],
+                              G_OBJECT (object), "active",
+                              G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
     }
 
   /* setup responses for the add dialog */

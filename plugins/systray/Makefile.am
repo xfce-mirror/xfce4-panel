@@ -28,7 +28,6 @@ libsystray_la_SOURCES = \
 libsystray_la_CFLAGS = \
 	$(LIBX11_CFLAGS) \
 	$(GTK_CFLAGS) \
-	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
@@ -46,7 +45,6 @@ libsystray_la_LIBADD = \
 	$(top_builddir)/common/libpanel-common.la \
 	$(LIBX11_LIBS) \
 	$(GTK_LIBS) \
-	$(EXO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(XFCONF_LIBS)
@@ -89,7 +87,7 @@ systray-marshal.c: systray-marshal.list Makefile
 	&& glib-genmarshal --prefix=_systray_marshal --body $< >> $@
 
 systray-dialog_ui.h: systray-dialog.glade
-	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=systray_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

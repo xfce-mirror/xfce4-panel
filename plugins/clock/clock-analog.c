@@ -46,8 +46,8 @@ static void      xfce_clock_analog_get_property  (GObject              *object,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
 static void      xfce_clock_analog_finalize      (GObject              *object);
-static gboolean  xfce_clock_analog_expose_event  (GtkWidget            *widget,
-                                                  GdkEventExpose       *event);
+static gboolean  xfce_clock_analog_draw          (GtkWidget            *widget,
+                                                  cairo_t              *cr);
 static void      xfce_clock_analog_draw_ticks    (cairo_t              *cr,
                                                   gdouble               xc,
                                                   gdouble               yc,
@@ -106,7 +106,7 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
   gobject_class->finalize = xfce_clock_analog_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->expose_event = xfce_clock_analog_expose_event;
+  gtkwidget_class->draw = xfce_clock_analog_draw;
 
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE_RATIO,
@@ -209,64 +209,55 @@ xfce_clock_analog_finalize (GObject *object)
 
 
 static gboolean
-xfce_clock_analog_expose_event (GtkWidget      *widget,
-                                GdkEventExpose *event)
+xfce_clock_analog_draw (GtkWidget *widget,
+                        cairo_t   *cr)
 {
   XfceClockAnalog *analog = XFCE_CLOCK_ANALOG (widget);
   gdouble          xc, yc;
   gdouble          angle, radius;
-  cairo_t         *cr;
-  GDateTime       *date_time;
+  GDateTime       *time;
+  GtkAllocation    allocation;
+  GtkStyleContext *ctx;
+  GdkRGBA          fg_rgba;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
+  panel_return_val_if_fail (cr != NULL, FALSE);
 
   /* get center of the widget and the radius */
-  xc = (widget->allocation.width / 2.0);
-  yc = (widget->allocation.height / 2.0);
+  gtk_widget_get_allocation (widget, &allocation);
+  xc = (allocation.width / 2.0);
+  yc = (allocation.height / 2.0);
   radius = MIN (xc, yc);
 
-  /* add the window offset */
-  xc += widget->allocation.x;
-  yc += widget->allocation.y;
+  /* get the local time */
+  time = clock_time_get_time (analog->time);
 
-  /* get the cairo context */
-  cr = gdk_cairo_create (widget->window);
+  /* set the line properties */
+  cairo_set_line_width (cr, 1);
+  ctx = gtk_widget_get_style_context (widget);
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget), &fg_rgba);
+  gdk_cairo_set_source_rgba (cr, &fg_rgba);
 
-  if (G_LIKELY (cr != NULL))
+  /* draw the ticks */
+  xfce_clock_analog_draw_ticks (cr, xc, yc, radius);
+
+  if (analog->show_seconds)
     {
-      /* clip the drawing region */
-      gdk_cairo_rectangle (cr, &event->area);
-      cairo_clip (cr);
-
-      /* get the local time */
-      date_time = clock_time_get_time (analog->time);
-
-      /* set the line properties */
-      cairo_set_line_width (cr, 1);
-      gdk_cairo_set_source_color (cr, &widget->style->fg[GTK_WIDGET_STATE (widget)]);
-
-      /* draw the ticks */
-      xfce_clock_analog_draw_ticks (cr, xc, yc, radius);
-
-      if (analog->show_seconds)
-        {
-          /* second pointer */
-          angle = TICKS_TO_RADIANS (g_date_time_get_second (date_time));
-          xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.7, TRUE);
-        }
-
-      /* minute pointer */
-      angle = TICKS_TO_RADIANS (g_date_time_get_minute (date_time));
-      xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.8, FALSE);
-
-      /* hour pointer */
-      angle = HOURS_TO_RADIANS (g_date_time_get_hour (date_time), g_date_time_get_minute (date_time));
-      xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.5, FALSE);
-
-      /* cleanup */
-      g_date_time_unref (date_time);
-      cairo_destroy (cr);
+      /* second pointer */
+      angle = TICKS_TO_RADIANS (g_date_time_get_second (time));
+      xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.7, TRUE);
     }
+
+  /* minute pointer */
+  angle = TICKS_TO_RADIANS (g_date_time_get_minute (time));
+  xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.8, FALSE);
+
+  /* hour pointer */
+  angle = HOURS_TO_RADIANS (g_date_time_get_hour (time), g_date_time_get_minute (time));
+  xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.5, FALSE);
+
+  /* cleanup */
+  g_date_time_unref (time);
 
   return FALSE;
 }
@@ -347,15 +338,15 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
 
 static gboolean
 xfce_clock_analog_update (XfceClockAnalog *analog,
-                          ClockTime       *clock_time)
+                          ClockTime       *time)
 {
   GtkWidget *widget = GTK_WIDGET (analog);
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), FALSE);
+  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
 
   /* update if the widget if visible */
-  if (G_LIKELY (GTK_WIDGET_VISIBLE (widget)))
+  if (G_LIKELY (gtk_widget_get_visible (widget)))
     gtk_widget_queue_draw (widget);
 
   return TRUE;
@@ -364,11 +355,11 @@ xfce_clock_analog_update (XfceClockAnalog *analog,
 
 
 GtkWidget *
-xfce_clock_analog_new (ClockTime *clock_time)
+xfce_clock_analog_new (ClockTime *time)
 {
   XfceClockAnalog *analog = g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
 
-  analog->time = clock_time;
+  analog->time = time;
   analog->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                             analog->time,
                                             G_CALLBACK (xfce_clock_analog_update), analog);

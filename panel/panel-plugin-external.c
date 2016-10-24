@@ -30,7 +30,6 @@
 #include <sys/wait.h>
 #endif
 
-#include <exo/exo.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <libxfce4util/libxfce4util.h>
@@ -40,6 +39,7 @@
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>
 #include <common/panel-debug.h>
+#include <common/panel-utils.h>
 
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
@@ -170,7 +170,7 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
                                    g_param_spec_int ("unique-id",
                                                      NULL, NULL,
                                                      -1, G_MAXINT, -1,
-                                                     EXO_PARAM_READWRITE
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
                                                      | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
@@ -178,7 +178,7 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
                                    g_param_spec_object ("module",
                                                         NULL, NULL,
                                                         PANEL_TYPE_MODULE,
-                                                        EXO_PARAM_READWRITE
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
                                                         | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
@@ -186,7 +186,7 @@ panel_plugin_external_class_init (PanelPluginExternalClass *klass)
                                    g_param_spec_boxed ("arguments",
                                                        NULL, NULL,
                                                        G_TYPE_STRV,
-                                                       EXO_PARAM_READWRITE
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
                                                        | G_PARAM_CONSTRUCT_ONLY));
 }
 
@@ -521,7 +521,7 @@ panel_plugin_external_child_spawn (PanelPluginExternal *external)
   GTimeVal       timestamp;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
-  panel_return_if_fail (GTK_WIDGET_REALIZED (external));
+  panel_return_if_fail (gtk_widget_get_realized (GTK_WIDGET (external)));
 
   /* set plugin specific arguments */
   argv = (*PANEL_PLUGIN_EXTERNAL_GET_CLASS (external)->get_argv) (external, external->priv->arguments);
@@ -639,7 +639,7 @@ panel_plugin_external_child_respawn (gpointer user_data)
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external), FALSE);
 
   /* abort startup if the plugin is not realized */
-  if (!GTK_WIDGET_REALIZED (external))
+  if (!gtk_widget_get_realized (GTK_WIDGET (external)))
     return FALSE;
 
   /* delay startup if the old child is still embedded */
@@ -745,7 +745,7 @@ panel_plugin_external_child_watch (GPid     pid,
                                                   PROVIDER_SIGNAL_REMOVE_PLUGIN);
 
           /* wait until everything is settled before we destroy */
-          exo_gtk_object_destroy_later (GTK_OBJECT (external));
+          panel_utils_destroy_later (GTK_WIDGET (external));
           goto close_pid;
         }
     }
@@ -760,7 +760,7 @@ panel_plugin_external_child_watch (GPid     pid,
         }
     }
 
-  if (GTK_WIDGET_REALIZED (external)
+  if (gtk_widget_get_realized (GTK_WIDGET (external))
       && (auto_restart || panel_plugin_external_child_ask_restart (external)))
     {
       panel_plugin_external_child_respawn_schedule (external);
@@ -1082,7 +1082,7 @@ panel_plugin_external_set_sensitive (PanelPluginExternal *external)
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
 
   g_value_init (&value, G_TYPE_BOOLEAN);
-  g_value_set_boolean (&value, GTK_WIDGET_IS_SENSITIVE (external));
+  g_value_set_boolean (&value, gtk_widget_is_sensitive (GTK_WIDGET (external)));
 
   panel_plugin_external_queue_add (external, PROVIDER_PROP_TYPE_SET_SENSITIVE,
                                    &value);

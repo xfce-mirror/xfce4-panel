@@ -23,7 +23,6 @@ libseparator_la_CFLAGS = \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(CAIRO_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(EXO_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libseparator_la_LDFLAGS = \
@@ -40,7 +39,6 @@ libseparator_la_LIBADD = \
 	$(CAIRO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(EXO_LIBS) \
 	$(XFCONF_LIBS)
 
 libseparator_la_DEPENDENCIES = \
@@ -70,7 +68,7 @@ DISTCLEANFILES += \
 	$(libseparator_built_sources)
 
 separator-dialog_ui.h: separator-dialog.glade
-	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=separator_dialog_ui $< >$@
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=separator_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

@@ -53,7 +53,7 @@ struct _SystraySocket
   GtkSocket __parent__;
 
   /* plug window */
-  GdkNativeWindow window;
+  Window           window;
 
   gchar           *name;
 
@@ -68,8 +68,8 @@ static void     systray_socket_finalize      (GObject        *object);
 static void     systray_socket_realize       (GtkWidget      *widget);
 static void     systray_socket_size_allocate (GtkWidget      *widget,
                                               GtkAllocation  *allocation);
-static gboolean systray_socket_expose_event  (GtkWidget      *widget,
-                                              GdkEventExpose *event);
+static gboolean systray_socket_draw          (GtkWidget      *widget,
+                                              cairo_t        *cr);
 static void     systray_socket_style_set     (GtkWidget      *widget,
                                               GtkStyle       *previous_style);
 
@@ -91,7 +91,7 @@ systray_socket_class_init (SystraySocketClass *klass)
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
   gtkwidget_class->realize = systray_socket_realize;
   gtkwidget_class->size_allocate = systray_socket_size_allocate;
-  gtkwidget_class->expose_event = systray_socket_expose_event;
+  gtkwidget_class->draw = systray_socket_draw;
   gtkwidget_class->style_set = systray_socket_style_set;
 }
 
@@ -122,7 +122,7 @@ static void
 systray_socket_realize (GtkWidget *widget)
 {
   SystraySocket *socket = XFCE_SYSTRAY_SOCKET (widget);
-  GdkColor       transparent = { 0, 0, 0, 0 };
+  GdkRGBA        transparent = { 0.0, 0.0, 0.0, 0.0 };
   GdkWindow     *window;
 
   GTK_WIDGET_CLASS (systray_socket_parent_class)->realize (widget);
@@ -131,15 +131,15 @@ systray_socket_realize (GtkWidget *widget)
 
   if (socket->is_composited)
     {
-      gdk_window_set_background (window, &transparent);
+      gdk_window_set_background_rgba (window, &transparent);
       gdk_window_set_composited (window, TRUE);
 
       socket->parent_relative_bg = FALSE;
     }
   else if (gtk_widget_get_visual (widget) ==
-           gdk_drawable_get_visual (GDK_DRAWABLE (gdk_window_get_parent (window))))
+           gdk_window_get_visual (gdk_window_get_parent (window)))
     {
-      gdk_window_set_back_pixmap (window, NULL, TRUE);
+      gdk_window_set_background_pattern (window, NULL);
 
       socket->parent_relative_bg = TRUE;
     }
@@ -169,27 +169,32 @@ systray_socket_size_allocate (GtkWidget     *widget,
                               GtkAllocation *allocation)
 {
   SystraySocket *socket = XFCE_SYSTRAY_SOCKET (widget);
-  gboolean       moved = allocation->x != widget->allocation.x
-                         || allocation->y != widget->allocation.y;
-  gboolean       resized = allocation->width != widget->allocation.width
-                           ||allocation->height != widget->allocation.height;
+  GtkAllocation  widget_allocation;
+  gboolean       moved;
+  gboolean       resized;
+
+  gtk_widget_get_allocation (widget, &widget_allocation);
+  moved = allocation->x != widget_allocation.x
+       || allocation->y != widget_allocation.y;
+  resized = allocation->width != widget_allocation.width
+          ||allocation->height != widget_allocation.height;
 
   if ((moved || resized)
-      && GTK_WIDGET_MAPPED (widget))
+      && gtk_widget_get_mapped (widget))
     {
       if (socket->is_composited)
-        gdk_window_invalidate_rect (gdk_window_get_parent (widget->window),
-                                    &widget->allocation, FALSE);
+        gdk_window_invalidate_rect (gdk_window_get_parent (gtk_widget_get_window (widget)),
+                                    &widget_allocation, FALSE);
     }
 
   GTK_WIDGET_CLASS (systray_socket_parent_class)->size_allocate (widget, allocation);
 
   if ((moved || resized)
-      && GTK_WIDGET_MAPPED (widget))
+      && gtk_widget_get_mapped (widget))
     {
       if (socket->is_composited)
-        gdk_window_invalidate_rect (gdk_window_get_parent (widget->window),
-                                    &widget->allocation, FALSE);
+        gdk_window_invalidate_rect (gdk_window_get_parent (gtk_widget_get_window (widget)),
+                                    &widget_allocation, FALSE);
       else if (moved && socket->parent_relative_bg)
         systray_socket_force_redraw (socket);
     }
@@ -198,30 +203,24 @@ systray_socket_size_allocate (GtkWidget     *widget,
 
 
 static gboolean
-systray_socket_expose_event (GtkWidget      *widget,
-                             GdkEventExpose *event)
+systray_socket_draw (GtkWidget *widget,
+                     cairo_t   *cr)
 {
   SystraySocket *socket = XFCE_SYSTRAY_SOCKET (widget);
-  cairo_t       *cr;
 
   if (socket->is_composited)
     {
       /* clear to transparent */
-      cr = gdk_cairo_create (widget->window);
       cairo_set_source_rgba (cr, 0, 0, 0, 0);
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-      gdk_cairo_region (cr, event->region);
       cairo_fill (cr);
-      cairo_destroy (cr);
     }
   else if (socket->parent_relative_bg)
     {
       /* clear to parent-relative pixmap */
-      gdk_window_clear_area (widget->window,
-                             event->area.x,
-                             event->area.y,
-                             event->area.width,
-                             event->area.height);
+      cairo_set_source_rgb (cr, 0, 0, 0);
+      cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+      cairo_fill (cr);
     }
 
   return FALSE;
@@ -239,15 +238,14 @@ systray_socket_style_set (GtkWidget *widget,
 
 GtkWidget *
 systray_socket_new (GdkScreen       *screen,
-                    GdkNativeWindow  window)
+                    Window           window)
 {
   SystraySocket     *socket;
   GdkDisplay        *display;
   XWindowAttributes  attr;
   gint               result;
   GdkVisual         *visual;
-  GdkColormap       *colormap;
-  gboolean           release_colormap = FALSE;
+  gint               red_prec, green_prec, blue_prec;
 
   panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
@@ -267,32 +265,17 @@ systray_socket_new (GdkScreen       *screen,
   if (G_UNLIKELY (visual == NULL))
     return NULL;
 
-  /* get the correct colormap */
-  if (visual == gdk_screen_get_rgb_visual (screen))
-    colormap = gdk_screen_get_rgb_colormap (screen);
-  else if (visual == gdk_screen_get_rgba_visual (screen))
-    colormap = gdk_screen_get_rgba_colormap (screen);
-  else if (visual == gdk_screen_get_system_visual (screen))
-    colormap = gdk_screen_get_system_colormap (screen);
-  else
-    {
-      /* create custom colormap */
-      colormap = gdk_colormap_new (visual, FALSE);
-      release_colormap = TRUE;
-    }
-
   /* create a new socket */
   socket = g_object_new (XFCE_TYPE_SYSTRAY_SOCKET, NULL);
   socket->window = window;
   socket->is_composited = FALSE;
-  gtk_widget_set_colormap (GTK_WIDGET (socket), colormap);
-
-  /* release the custom colormap */
-  if (release_colormap)
-    g_object_unref (G_OBJECT (colormap));
+  gtk_widget_set_visual (GTK_WIDGET (socket), visual);
 
   /* check if there is an alpha channel in the visual */
-  if (visual->red_prec + visual->blue_prec + visual->green_prec < visual->depth
+  gdk_visual_get_red_pixel_details (visual, NULL, NULL, &red_prec);
+  gdk_visual_get_green_pixel_details (visual, NULL, NULL, &green_prec);
+  gdk_visual_get_blue_pixel_details (visual, NULL, NULL, &blue_prec);
+  if (red_prec + blue_prec + green_prec < gdk_visual_get_depth (visual)
       && gdk_display_supports_composite (gdk_screen_get_display (screen)))
     socket->is_composited = TRUE;
 
@@ -304,22 +287,25 @@ systray_socket_new (GdkScreen       *screen,
 void
 systray_socket_force_redraw (SystraySocket *socket)
 {
-  GtkWidget  *widget = GTK_WIDGET (socket);
-  XEvent      xev;
-  GdkDisplay *display;
+  GtkWidget     *widget = GTK_WIDGET (socket);
+  XEvent         xev;
+  GdkDisplay    *display;
+  GtkAllocation  allocation;
 
   panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket));
 
-  if (GTK_WIDGET_MAPPED (socket) && socket->parent_relative_bg)
+  if (gtk_widget_get_mapped (widget) && socket->parent_relative_bg)
     {
       display = gtk_widget_get_display (widget);
 
+      gtk_widget_get_allocation (widget, &allocation);
+
       xev.xexpose.type = Expose;
-      xev.xexpose.window = GDK_WINDOW_XWINDOW (GTK_SOCKET (socket)->plug_window);
+      xev.xexpose.window = GDK_WINDOW_XID (gtk_socket_get_plug_window (GTK_SOCKET (socket)));
       xev.xexpose.x = 0;
       xev.xexpose.y = 0;
-      xev.xexpose.width = widget->allocation.width;
-      xev.xexpose.height = widget->allocation.height;
+      xev.xexpose.width = allocation.width;
+      xev.xexpose.height = allocation.height;
       xev.xexpose.count = 0;
 
       gdk_error_trap_push ();
@@ -331,7 +317,7 @@ systray_socket_force_redraw (SystraySocket *socket)
        * since that is asynchronous.
        */
       XSync (GDK_DISPLAY_XDISPLAY (display), False);
-      gdk_error_trap_pop ();
+      gdk_error_trap_pop_ignored ();
     }
 }
 
@@ -421,7 +407,7 @@ systray_socket_get_name (SystraySocket *socket)
 
 
 
-GdkNativeWindow *
+Window *
 systray_socket_get_window (SystraySocket *socket)
 {
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_SOCKET (socket), NULL);

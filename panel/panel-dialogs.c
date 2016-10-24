@@ -24,7 +24,6 @@
 #include <string.h>
 #endif
 
-#include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 
@@ -37,21 +36,28 @@
 
 
 
+#if !GTK_CHECK_VERSION (3, 0, 0)
 static void
 panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
                                      const gchar    *uri,
                                      gpointer        data)
 {
+  GError *error = NULL;
+
   if (g_strcmp0 ("tictactoe@xfce.org", uri) == 0)
     {
       /* open tic-tac-toe */
       panel_tic_tac_toe_show ();
     }
-  else
+  else if (!gtk_show_uri (gtk_window_get_screen (GTK_WINDOW (dialog)),
+                          uri, gtk_get_current_event_time (), &error))
     {
-      exo_gtk_url_about_dialog_hook (dialog, uri, data);
+      xfce_dialog_show_error (GTK_WINDOW (dialog), error,
+                              _("Unable to open the e-mail address"));
+      g_error_free (error);
     }
 }
+#endif
 
 
 
@@ -72,9 +78,8 @@ panel_dialogs_show_about (void)
                                 "Jasper Huijsmans <jasper@xfce.org>",
                                 "Tic-tac-toe <tictactoe@xfce.org>");
 
+#if !GTK_CHECK_VERSION (3, 0, 0)
   gtk_about_dialog_set_email_hook (panel_dialogs_show_about_email_hook, NULL, NULL);
-#if !GTK_CHECK_VERSION (2, 18, 0)
-  gtk_about_dialog_set_url_hook (exo_gtk_url_about_dialog_hook, NULL, NULL);
 #endif
 
   gtk_show_about_dialog (NULL,
@@ -156,7 +161,7 @@ panel_dialogs_choose_panel (PanelApplication *application)
 
   /* setup the dialog */
   dialog = gtk_dialog_new_with_buttons (_("Add New Item"), NULL,
-                                        GTK_DIALOG_NO_SEPARATOR,
+                                        0,
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                         GTK_STOCK_ADD, GTK_RESPONSE_OK, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
@@ -164,8 +169,8 @@ panel_dialogs_choose_panel (PanelApplication *application)
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   /* create widgets */
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), vbox, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
   gtk_widget_show (vbox);
 

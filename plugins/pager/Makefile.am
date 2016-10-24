@@ -26,7 +26,6 @@ libpager_la_CFLAGS = \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBWNCK_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
-	$(EXO_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libpager_la_LDFLAGS = \
@@ -42,7 +41,6 @@ libpager_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBWNCK_LIBS) \
-	$(EXO_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(XFCONF_LIBS)
 
@@ -73,7 +71,7 @@ DISTCLEANFILES += \
 	$(libpager_built_sources)
 
 pager-dialog_ui.h: pager-dialog.glade
-	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=pager_dialog_ui $< >$@
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=pager_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

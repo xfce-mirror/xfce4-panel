@@ -27,7 +27,6 @@ typedef struct _XfceTasklistClass     XfceTasklistClass;
 typedef struct _XfceTasklist          XfceTasklist;
 typedef enum   _XfceTasklistGrouping  XfceTasklistGrouping;
 typedef enum   _XfceTasklistSortOrder XfceTasklistSortOrder;
-typedef enum   _XfceTasklistMClick    XfceTasklistMClick;
 
 #define XFCE_TYPE_TASKLIST            (xfce_tasklist_get_type ())
 #define XFCE_TASKLIST(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TASKLIST, XfceTasklist))
@@ -60,17 +59,6 @@ enum _XfceTasklistSortOrder
   XFCE_TASKLIST_SORT_ORDER_MIN = XFCE_TASKLIST_SORT_ORDER_TIMESTAMP,
   XFCE_TASKLIST_SORT_ORDER_MAX = XFCE_TASKLIST_SORT_ORDER_DND,
   XFCE_TASKLIST_SORT_ORDER_DEFAULT = XFCE_TASKLIST_SORT_ORDER_GROUP_TIMESTAMP
-};
-
-enum _XfceTasklistMClick
-{
-  XFCE_TASKLIST_MIDDLE_CLICK_NOTHING, /* do nothing */
-  XFCE_TASKLIST_MIDDLE_CLICK_CLOSE_WINDOW, /* close the window */
-  XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW, /* minimize, never minimize with button 1 */
-
-  XFCE_TASKLIST_MIDDLE_CLICK_MIN = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING,
-  XFCE_TASKLIST_MIDDLE_CLICK_MAX = XFCE_TASKLIST_MIDDLE_CLICK_MINIMIZE_WINDOW,
-  XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT = XFCE_TASKLIST_MIDDLE_CLICK_NOTHING
 };
 
 

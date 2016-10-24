@@ -25,7 +25,6 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <exo/exo.h>
 #include <dbus/dbus-glib.h>
 
 #include <common/panel-private.h>
@@ -197,7 +196,7 @@ static ActionEntry action_entries[] =
     N_("_Restart"),
     N_("Are you sure you want to restart?"),
     N_("Restarting computer in %d seconds."),
-    "system-reboot"
+    "xfsm-reboot"
   },
   { ACTION_TYPE_SHUTDOWN,
     "shutdown",
@@ -243,7 +242,7 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                    g_param_spec_boxed ("items",
                                                        NULL, NULL,
                                                        PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
-                                                       EXO_PARAM_READWRITE));
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_APPEARANCE,
@@ -252,21 +251,21 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                                       APPEARANCE_TYPE_BUTTONS,
                                                       APPEARANCE_TYPE_MENU,
                                                       APPEARANCE_TYPE_MENU,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_INVERT_ORIENTATION,
                                    g_param_spec_boolean ("invert-orientation",
                                                          NULL, NULL,
                                                          FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ASK_CONFIRMATION,
                                    g_param_spec_boolean ("ask-confirmation",
                                                          NULL, NULL,
                                                          TRUE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   menu_icon_size = gtk_icon_size_from_name ("panel-actions-menu");
   if (menu_icon_size == GTK_ICON_SIZE_INVALID)
@@ -438,8 +437,7 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
       box = gtk_bin_get_child (GTK_BIN (plugin));
       if (box != NULL)
         {
-          if (plugin->invert_orientation !=
-              (xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR))
+          if (plugin->invert_orientation)
             {
               children = gtk_container_get_children (GTK_CONTAINER (box));
               if (G_UNLIKELY (children == NULL))
@@ -596,18 +594,22 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     return;
 
   combo = gtk_builder_get_object (builder, "combo-mode");
-  exo_mutual_binding_new (G_OBJECT (plugin), "appearance",
-                          G_OBJECT (combo), "active");
+  g_object_bind_property (G_OBJECT (plugin), "appearance",
+                          G_OBJECT (combo), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   object = gtk_builder_get_object (builder, "invert-orientation");
-  exo_mutual_binding_new (G_OBJECT (plugin), "invert-orientation",
-                          G_OBJECT (object), "active");
-  exo_binding_new_with_negation (G_OBJECT (combo), "active",
-                                 G_OBJECT (object), "sensitive");
+  g_object_bind_property (G_OBJECT (plugin), "invert-orientation",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_object_bind_property (G_OBJECT (combo), "active",
+                          G_OBJECT (object), "sensitive",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL | G_BINDING_INVERT_BOOLEAN);
 
   object = gtk_builder_get_object (builder, "confirmation-dialog");
-  exo_mutual_binding_new (G_OBJECT (plugin), "ask-confirmation",
-                          G_OBJECT (object), "active");
+  g_object_bind_property (G_OBJECT (plugin), "ask-confirmation",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   store = gtk_builder_get_object (builder, "items-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
@@ -626,7 +628,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       /* get the value and check if it is within range */
       val = g_ptr_array_index (plugin->items, i);
       name = g_value_get_string (val);
-      if (exo_str_is_empty (name))
+      if (panel_str_is_empty (name))
         continue;
 
       /* find the entry in the available actions */
@@ -745,7 +747,7 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
   gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
   gtk_window_stick (GTK_WINDOW (dialog));
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_title (GTK_WINDOW (dialog), _(entry->display_name));
+  gtk_window_set_title (GTK_WINDOW (dialog), _(entry->name));
 
   button = gtk_dialog_add_button (GTK_DIALOG (dialog), _(entry->mnemonic), GTK_RESPONSE_ACCEPT);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
@@ -911,12 +913,10 @@ static void
 actions_plugin_action_activate (GtkWidget      *widget,
                                 ActionsPlugin  *plugin)
 {
-  ActionEntry   *entry;
-  gboolean       unattended = FALSE;
-  GError        *error = NULL;
-  gboolean       succeed = FALSE;
-  XfconfChannel *channel;
-  gboolean       allow_save;
+  ActionEntry *entry;
+  gboolean     unattended = FALSE;
+  GError      *error = NULL;
+  gboolean     succeed = FALSE;
 
   entry = g_object_get_qdata (G_OBJECT (widget), action_quark);
   panel_return_if_fail (entry != NULL);
@@ -927,31 +927,26 @@ actions_plugin_action_activate (GtkWidget      *widget,
       && !actions_plugin_action_confirmation (plugin, entry, &unattended))
     return;
 
-  channel = xfconf_channel_get ("xfce4-session");
-  allow_save = xfconf_channel_get_bool (channel, "/general/SaveOnExit", FALSE);
-  /* unattended shutdown, don't save the session to avoid blocking the logout */
-  allow_save = allow_save && !unattended;
-
   switch (entry->type)
     {
     case ACTION_TYPE_LOGOUT:
       succeed = actions_plugin_action_dbus_xfsm ("Logout", FALSE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_LOGOUT_DIALOG:
       succeed = actions_plugin_action_dbus_xfsm ("Logout", TRUE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_RESTART:
       succeed = actions_plugin_action_dbus_xfsm ("Restart", FALSE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_SHUTDOWN:
       succeed = actions_plugin_action_dbus_xfsm ("Shutdown", FALSE,
-                                                 allow_save, &error);
+                                                 !unattended, &error);
       break;
 
     case ACTION_TYPE_HIBERNATE:
@@ -1100,18 +1095,15 @@ actions_plugin_pack_idle (gpointer data)
   if (plugin->items == NULL)
     plugin->items = actions_plugin_default_array ();
 
+  orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
+
   allowed_types = actions_plugin_actions_allowed ();
 
   if (plugin->type == APPEARANCE_TYPE_BUTTONS)
     {
-      if (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        orientation = GTK_ORIENTATION_VERTICAL;
-      else
-        orientation = GTK_ORIENTATION_HORIZONTAL;
-
       if (plugin->invert_orientation)
         orientation = !orientation;
-      box = xfce_hvbox_new (orientation, FALSE, 0);
+      box = gtk_box_new (orientation, 0);
       gtk_container_add (GTK_CONTAINER (plugin), box);
       gtk_widget_show (box);
 
@@ -1124,8 +1116,7 @@ actions_plugin_pack_idle (gpointer data)
 
           /* skip separators when packing buttons in the opposite
            * orientation */
-          if (plugin->invert_orientation !=
-              (xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin)) == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+          if (plugin->invert_orientation
               && g_strcmp0 (name + 1, "separator") == 0)
             continue;
 
@@ -1145,11 +1136,11 @@ actions_plugin_pack_idle (gpointer data)
     {
       /* get a decent username, not the glib defaults */
       username = g_get_real_name ();
-      if (exo_str_is_empty (username)
+      if (panel_str_is_empty (username)
           || strcmp (username, "Unknown") == 0)
         {
           username = g_get_user_name ();
-          if (exo_str_is_empty (username)
+          if (panel_str_is_empty (username)
               || strcmp (username, "somebody") == 0)
             username = _("John Doe");
         }
@@ -1259,11 +1250,6 @@ actions_plugin_menu (GtkWidget     *button,
   ActionType    allowed_types;
 
   panel_return_if_fail (XFCE_IS_ACTIONS_PLUGIN (plugin));
-  panel_return_if_fail (button != NULL);
-
-  /* do not popup the menu if the button is being toggled off */
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
-    return;
 
   if (plugin->menu == NULL)
     {
@@ -1272,7 +1258,6 @@ actions_plugin_menu (GtkWidget     *button,
           G_CALLBACK (actions_plugin_menu_deactivate), button);
       g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
-      size = DEFAULT_ICON_SIZE;
       if (gtk_icon_size_lookup (menu_icon_size, &w, &h))
         size = MIN (w, h);
 

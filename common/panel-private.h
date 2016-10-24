@@ -69,6 +69,9 @@
 #define TRANSPOSE_AREA(area) G_STMT_START { SWAP_INTEGER (area.width, area.height); \
                                             SWAP_INTEGER (area.x, area.y); } G_STMT_END
 
+/* to avoid exo for gtk3 testing */
+#define panel_str_is_empty(string) ((string) == NULL || *(string) == '\0')
+
 /* quick GList and GSList counting without traversing */
 #define LIST_HAS_ONE_ENTRY(l)           ((l) != NULL && (l)->next == NULL)
 #define LIST_HAS_ONE_OR_NO_ENTRIES(l)   ((l) == NULL || (l)->next == NULL)

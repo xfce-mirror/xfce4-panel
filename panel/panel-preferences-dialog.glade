@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.24"/>
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-requires libxfce4ui 0.0 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="mode-store">
@@ -35,23 +35,6 @@
       <!-- column-name title -->
       <column type="gchararray"/>
     </columns>
-  </object>
-  <object class="GtkListStore" id="autohide-behavior-store">
-    <columns>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Never</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Intelligently</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Always</col>
-      </row>
-    </data>
   </object>
   <object class="GtkListStore" id="styles-store">
     <columns>
@@ -108,11 +91,6 @@
     <property name="upper">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-  </object>
-  <object class="GtkImage" id="image10">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">package-x-generic</property>
   </object>
   <object class="GtkSizeGroup" id="display-sizegroup">
     <widgets>
@@ -205,32 +183,6 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkHBox" id="hbox7">
-                <property name="visible">True</property>
-                <property name="spacing">6</property>
-                <child>
-                  <object class="GtkButton" id="panel-switch">
-                    <property name="label">Backup and restore</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Switch between panel presets</property>
-                    <property name="image">image10</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="pack_type">end</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -364,47 +316,16 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox6">
+                                  <object class="GtkCheckButton" id="autohide">
+                                    <property name="label" translatable="yes">Automatically show and _hide the panel</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="spacing">12</property>
-                                    <child>
-                                      <object class="GtkLabel" id="label20">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Automatically hide the panel:</property>
-                                        <property name="use_underline">True</property>
-                                        <property name="mnemonic_widget">mode</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkComboBox" id="autohide-behavior">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="model">autohide-behavior-store</property>
-                                        <child>
-                                          <object class="GtkCellRendererText" id="cellrenderertext5"/>
-                                          <attributes>
-                                            <attribute name="text">0</attribute>
-                                          </attributes>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge.</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="draw_indicator">True</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
                                     <property name="position">4</property>
                                   </packing>
                                 </child>
@@ -1097,7 +1018,7 @@
                 </child>
               </object>
               <packing>
-                <property name="position">2</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>

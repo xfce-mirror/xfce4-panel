@@ -21,7 +21,7 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <exo/exo.h>
+#include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <common/panel-private.h>
 
@@ -61,12 +61,12 @@ static void pager_buttons_viewport_button_toggled    (GtkWidget     *button,
 
 struct _PagerButtonsClass
 {
-  GtkTableClass __parent__;
+  GtkGridClass    __parent__;
 };
 
 struct _PagerButtons
 {
-  GtkTable __parent__;
+  GtkGrid         __parent__;
 
   GSList         *buttons;
 
@@ -95,7 +95,7 @@ enum
 
 
 
-XFCE_PANEL_DEFINE_TYPE (PagerButtons, pager_buttons, GTK_TYPE_TABLE)
+XFCE_PANEL_DEFINE_TYPE (PagerButtons, pager_buttons, GTK_TYPE_GRID)
 
 
 
@@ -114,7 +114,7 @@ pager_buttons_class_init (PagerButtonsClass *klass)
                                    g_param_spec_object ("screen",
                                                          NULL, NULL,
                                                          WNCK_TYPE_SCREEN,
-                                                         EXO_PARAM_WRITABLE
+                                                         G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS
                                                          | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
@@ -122,7 +122,7 @@ pager_buttons_class_init (PagerButtonsClass *klass)
                                    g_param_spec_int ("rows",
                                                      NULL, NULL,
                                                      1, 100, 1,
-                                                     EXO_PARAM_READWRITE));
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ORIENTATION,
@@ -130,7 +130,7 @@ pager_buttons_class_init (PagerButtonsClass *klass)
                                                      NULL, NULL,
                                                      GTK_TYPE_ORIENTATION,
                                                      GTK_ORIENTATION_HORIZONTAL,
-                                                     EXO_PARAM_READWRITE));
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 
@@ -147,7 +147,9 @@ pager_buttons_init (PagerButtons *pager)
   /* although I'd prefer normal allocation, the homogeneous setting
    * takes care of small panels, while non-homogeneous tables allocate
    * outside the panel size --nick */
-  gtk_table_set_homogeneous (GTK_TABLE (pager), TRUE);
+  /* gtk_table_set_homogeneous (GTK_TABLE (pager), TRUE); */
+  gtk_grid_set_row_homogeneous (GTK_GRID (pager), TRUE);
+  gtk_grid_set_column_homogeneous (GTK_GRID (pager), TRUE);
 }
 
 
@@ -294,8 +296,6 @@ pager_buttons_rebuild_idle (gpointer user_data)
   panel_return_val_if_fail (XFCE_IS_PAGER_BUTTONS (pager), FALSE);
   panel_return_val_if_fail (WNCK_IS_SCREEN (pager->wnck_screen), FALSE);
 
-  GDK_THREADS_ENTER ();
-
   gtk_container_foreach (GTK_CONTAINER (pager),
       (GtkCallback) gtk_widget_destroy, NULL);
 
@@ -351,11 +351,6 @@ pager_buttons_rebuild_idle (gpointer user_data)
         cols++;
     }
 
-  if (pager->orientation == GTK_ORIENTATION_HORIZONTAL)
-    gtk_table_resize (GTK_TABLE (pager), rows, cols);
-  else
-    gtk_table_resize (GTK_TABLE (pager), cols, rows);
-
 
   panel_plugin = gtk_widget_get_ancestor (GTK_WIDGET (pager), XFCE_TYPE_PANEL_PLUGIN);
 
@@ -404,11 +399,8 @@ pager_buttons_rebuild_idle (gpointer user_data)
               col = n % cols;
             }
 
-
-          gtk_table_attach (GTK_TABLE (pager), button,
-                            row, row + 1, col, col + 1,
-                            GTK_FILL | GTK_EXPAND, GTK_FILL | GTK_EXPAND,
-                            0, 0);
+          gtk_grid_attach (GTK_GRID (pager), button,
+                           row, col, 1, 1);
         }
     }
   else
@@ -449,18 +441,14 @@ pager_buttons_rebuild_idle (gpointer user_data)
               col = n % cols;
             }
 
-          gtk_table_attach (GTK_TABLE (pager), button,
-                            row, row + 1, col, col + 1,
-                            GTK_FILL | GTK_EXPAND, GTK_FILL | GTK_EXPAND,
-                            0, 0);
+          gtk_grid_attach (GTK_GRID (pager), button,
+                           row, col, 1, 1);
         }
     }
 
   pager->buttons = g_slist_reverse (pager->buttons);
 
   leave:
-
-  GDK_THREADS_LEAVE ();
 
   return FALSE;
 }
@@ -482,8 +470,8 @@ pager_buttons_queue_rebuild (PagerButtons *pager)
 
   if (pager->rebuild_id == 0)
     {
-      pager->rebuild_id = g_idle_add_full (G_PRIORITY_LOW, pager_buttons_rebuild_idle,
-                                           pager, pager_buttons_rebuild_idle_destroyed);
+      pager->rebuild_id = gdk_threads_add_idle_full (G_PRIORITY_LOW, pager_buttons_rebuild_idle,
+                                                     pager, pager_buttons_rebuild_idle_destroyed);
     }
 }
 
@@ -571,11 +559,11 @@ pager_buttons_workspace_button_label (WnckWorkspace *workspace,
 
   /* try to get an utf-8 valid name */
   name = wnck_workspace_get_name (workspace);
-  if (!exo_str_is_empty (name)
+  if (!panel_str_is_empty (name)
       && !g_utf8_validate (name, -1, NULL))
     name = utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, NULL);
 
-  if (exo_str_is_empty (name))
+  if (panel_str_is_empty (name))
     name = name_num = g_strdup_printf (_("Workspace %d"),
         wnck_workspace_get_number (workspace) + 1);
 

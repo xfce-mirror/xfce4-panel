@@ -20,7 +20,6 @@ libwindowmenu_la_SOURCES = \
 
 libwindowmenu_la_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
@@ -37,7 +36,6 @@ libwindowmenu_la_LDFLAGS = \
 libwindowmenu_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
-	$(EXO_LIBS) \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
@@ -83,7 +81,7 @@ DISTCLEANFILES += \
 	$(libwindowmenu_built_sources)
 
 windowmenu-dialog_ui.h: windowmenu-dialog.glade
-	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=windowmenu_dialog_ui $< >$@
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=windowmenu_dialog_ui $< >$@
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
