@@ -52,8 +52,6 @@ static void     pager_plugin_set_property                 (GObject           *ob
                                                            guint              prop_id,
                                                            const GValue      *value,
                                                            GParamSpec        *pspec);
-static void     pager_plugin_size_request                 (GtkWidget         *widget,
-                                                           GtkRequisition    *requisition);
 static gboolean pager_plugin_scroll_event                 (GtkWidget         *widget,
                                                            GdkEventScroll    *event);
 static void     pager_plugin_screen_changed               (GtkWidget         *widget,
@@ -133,10 +131,9 @@ pager_plugin_class_init (PagerPluginClass *klass)
 
   widget_class = GTK_WIDGET_CLASS (klass);
   widget_class->scroll_event = pager_plugin_scroll_event;
-  //widget_class->size_request = pager_plugin_size_request;
-  //widget_class->get_preferred_width             = pager_plugin_get_preferred_width;
+  widget_class->get_preferred_width = pager_plugin_get_preferred_width;
   widget_class->get_preferred_width_for_height  = pager_plugin_get_preferred_width_for_height;
-  //widget_class->get_preferred_height            = pager_plugin_get_preferred_height;
+  widget_class->get_preferred_height = pager_plugin_get_preferred_height;
   widget_class->get_preferred_height_for_width  = pager_plugin_get_preferred_height_for_width;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
@@ -418,6 +415,8 @@ static gboolean
 pager_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                            gint             size)
 {
+  gtk_widget_queue_resize (GTK_WIDGET (panel_plugin));
+
   /* do not set fixed size */
   return TRUE;
 }
@@ -570,71 +569,6 @@ pager_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 }
 
 
-#if 0
-static void
-pager_plugin_size_request (GtkWidget      *widget,
-                           GtkRequisition *requisition)
-{
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
-  XfcePanelPluginMode  mode;
-  gint                 n_workspaces, n_cols;
-
-  if (plugin->miniature_view)
-    {
-      mode   = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
-      n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen);
-      n_cols = MAX (1, (n_workspaces + plugin->rows - 1) / plugin->rows);
-      if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
-        {
-          requisition->height = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-          requisition->width = (gint) (requisition->height / plugin->rows * plugin->ratio * n_cols);
-        }
-      else if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        {
-          requisition->width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-          requisition->height = (gint) (requisition->width / plugin->rows / plugin->ratio * n_cols);
-        }
-      else /* (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) */
-        {
-          requisition->width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-          requisition->height = (gint) (requisition->width / n_cols / plugin->ratio * plugin->rows);
-        }
-    }
-  else
-    {
-      gtk_widget_size_request (plugin->pager, requisition);
-    }
-}
-#endif
-
-
-static void
-pager_plugin_get_preferred_width (GtkWidget *widget,
-                                  gint      *minimum_width,
-                                  gint      *natural_width)
-{
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
-  XfcePanelPluginMode  mode;
-  gint                 n_workspaces, n_cols;
-
-  if (plugin->miniature_view)
-    {
-      mode   = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
-      n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen);
-      n_cols = MAX (1, (n_workspaces + plugin->rows - 1) / plugin->rows);
-      if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
-        *minimum_width = *natural_width = 1; //(gint) (requisition->height / plugin->rows * plugin->ratio * n_cols);
-      else if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        *minimum_width = *natural_width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-      else /* (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) */
-        *minimum_width = *natural_width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-    }
-  else
-    {
-      gtk_widget_get_preferred_width (plugin->pager, minimum_width, natural_width);
-    }
-}
-
 static void
 pager_plugin_get_preferred_width_for_height (GtkWidget *widget,
                                              gint       height,
@@ -657,36 +591,13 @@ pager_plugin_get_preferred_width_for_height (GtkWidget *widget,
       else /* (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) */
         *minimum_width = *natural_width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
     }
-  else
+  else if (plugin->pager)
     {
       gtk_widget_get_preferred_width_for_height (plugin->pager, height, minimum_width, natural_width);
     }
-}
-
-static void
-pager_plugin_get_preferred_height (GtkWidget *widget,
-                                  gint      *minimum_height,
-                                  gint      *natural_height)
-{
-  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
-  XfcePanelPluginMode  mode;
-  gint                 n_workspaces, n_cols;
-
-  if (plugin->miniature_view)
+  else // initial fallback
     {
-      mode   = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
-      n_workspaces = wnck_screen_get_workspace_count (plugin->wnck_screen);
-      n_cols = MAX (1, (n_workspaces + plugin->rows - 1) / plugin->rows);
-      if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
-        *minimum_height = *natural_height = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
-      else if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL)
-        *minimum_height = *natural_height = 1; //(gint) (requisition->width / plugin->rows / plugin->ratio * n_cols);
-      else /* (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) */
-        *minimum_height = *natural_height = 1; //(gint) (requisition->width / n_cols / plugin->ratio * plugin->rows);
-    }
-  else
-    {
-      gtk_widget_get_preferred_height (plugin->pager, minimum_height, natural_height);
+      *minimum_width = *natural_width = 1;
     }
 }
 
@@ -712,9 +623,44 @@ pager_plugin_get_preferred_height_for_width (GtkWidget *widget,
       else /* (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) */
         *minimum_height = *natural_height = (gint) (width / n_cols / plugin->ratio * plugin->rows);
     }
-  else
+  else if (plugin->pager)
     {
       gtk_widget_get_preferred_height_for_width (plugin->pager, width, minimum_height, natural_height);
     }
+  else // initial fallback
+    {
+      *minimum_height = *natural_height = 1;
+    }
+}
+
+static void
+pager_plugin_get_preferred_width (GtkWidget *widget,
+                                  gint      *minimum_width,
+                                  gint      *natural_width)
+{
+  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
+  XfcePanelPluginMode  mode;
+  gint                 height = 1;
+
+  mode   = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
+  if (mode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+    height = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+  pager_plugin_get_preferred_width_for_height (widget, height, minimum_width, natural_width);
+}
+
+static void
+pager_plugin_get_preferred_height (GtkWidget *widget,
+                                   gint      *minimum_height,
+                                   gint      *natural_height)
+{
+  PagerPlugin         *plugin = XFCE_PAGER_PLUGIN (widget);
+  XfcePanelPluginMode  mode;
+  gint                 width = 1;
+
+  mode   = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
+  if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL ||
+      mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+    width = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+  pager_plugin_get_preferred_height_for_width (widget, width, minimum_height, natural_height);
 }
 
