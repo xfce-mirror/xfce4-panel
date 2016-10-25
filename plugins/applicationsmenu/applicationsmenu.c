@@ -35,7 +35,7 @@
 
 
 /* I18N: default tooltip of the application menu */
-#define DEFAULT_TITLE     _("Applications Menu")
+#define DEFAULT_TITLE     _("Applications")
 #define DEFAULT_ICON_NAME "xfce4-panel-menu"
 #define DEFAULT_ICON_SIZE (16)
 
