@@ -157,7 +157,7 @@ pager_plugin_class_init (PagerPluginClass *klass)
                                    g_param_spec_boolean ("wrap-workspaces",
                                                          NULL, NULL,
                                                          FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_MINIATURE_VIEW,

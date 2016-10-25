@@ -481,7 +481,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                    g_param_spec_boolean ("wrap-windows",
                                                          NULL, NULL,
                                                          FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_INCLUDE_ALL_BLINKING,
