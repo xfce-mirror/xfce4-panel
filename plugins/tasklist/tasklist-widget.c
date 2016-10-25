@@ -491,7 +491,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       XFCE_TASKLIST_MIDDLE_CLICK_MIN,
                                                       XFCE_TASKLIST_MIDDLE_CLICK_MAX,
                                                       XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
