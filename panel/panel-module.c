@@ -369,7 +369,8 @@ panel_module_new_from_desktop_file (const gchar *filename,
             {
               module->mode = WRAPPER;
               g_free (module->api);
-              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
+              //module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", LIBXFCE4PANEL_VERSION_API));
+              module->api = g_strdup (xfce_rc_read_entry (rc, "X-XFCE-API", "1.0"));
             }
           else
             module->mode = INTERNAL;
