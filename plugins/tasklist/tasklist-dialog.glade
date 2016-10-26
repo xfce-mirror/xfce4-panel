@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="2.24"/>
-  <!-- interface-requires libxfce4ui 0.0 -->
-  <!-- interface-naming-policy toplevel-contextual -->
+  <requires lib="gtk+" version="3.20"/>
+  <requires lib="libxfce4ui-2" version="4.12"/>
   <object class="GtkListStore" id="grouping-model">
     <columns>
       <!-- column-name title -->
@@ -17,6 +17,23 @@
       </row>
       <row>
         <col id="0" translatable="yes">When space is limited</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="middle-click-model">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Nothing</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Close Window</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Minimize Window</col>
       </row>
     </data>
   </object>
@@ -49,12 +66,13 @@
     <property name="icon_name">gtk-properties</property>
     <property name="type_hint">normal</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
+      <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
+          <object class="GtkButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -98,10 +116,11 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">6</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkFrame" id="frame3">
@@ -115,10 +134,11 @@
                     <property name="can_focus">False</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkVBox" id="vbox3">
+                      <object class="GtkBox" id="vbox3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">6</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="show-labels">
@@ -169,7 +189,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox2">
+                          <object class="GtkBox" id="hbox2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">12</property>
@@ -245,13 +265,14 @@
                     <property name="can_focus">False</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkVBox" id="vbox2">
+                      <object class="GtkBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">6</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkHBox" id="hbox1">
+                          <object class="GtkBox" id="hbox1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">12</property>
@@ -259,10 +280,10 @@
                               <object class="GtkLabel" id="label4">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Window _grouping:</property>
                                 <property name="use_underline">True</property>
                                 <property name="mnemonic_widget">grouping</property>
+                                <property name="xalign">0</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -296,7 +317,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="hbox3">
+                          <object class="GtkBox" id="hbox3">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">12</property>
@@ -304,10 +325,10 @@
                               <object class="GtkLabel" id="label6">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Mi_ddle click action:</property>
                                 <property name="use_underline">True</property>
                                 <property name="mnemonic_widget">middle-click</property>
+                                <property name="xalign">0</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -421,10 +442,11 @@
                     <property name="can_focus">False</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkVBox" id="vbox4">
+                      <object class="GtkBox" id="vbox4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">6</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="include-all-workspaces">
@@ -443,8 +465,8 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="include-all-monitors">
-                            <property name="label" translatable="yes">Show windows from all mo_nitors</property>
+                          <object class="GtkCheckButton" id="show-only-minimized">
+                            <property name="label" translatable="yes">Show only _minimized windows</property>
                             <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -459,8 +481,8 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton" id="show-only-minimized">
-                            <property name="label" translatable="yes">Show only _minimized windows</property>
+                          <object class="GtkCheckButton" id="include-all-monitors">
+                            <property name="label" translatable="yes">Show windows from all mo_nitors</property>
                             <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -508,23 +530,6 @@
       <action-widget response="0">close-button</action-widget>
       <action-widget response="0">help-button</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkListStore" id="middle-click-model">
-    <columns>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Nothing</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Close Window</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Minimize Window</col>
-      </row>
-    </data>
   </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
