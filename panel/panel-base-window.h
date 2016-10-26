@@ -68,7 +68,7 @@ struct _PanelBaseWindow
 
   gdouble                 background_alpha;
   PanelBgStyle            background_style;
-  GdkColor               *background_color;
+  GdkRGBA                *background_color;
   gchar                  *background_image;
 };
 
@@ -85,7 +85,7 @@ void         panel_base_window_set_borders (PanelBaseWindow *window,
 PanelBorders panel_base_window_get_borders (PanelBaseWindow *window);
 
 void         panel_util_set_source_rgba    (cairo_t         *cr,
-                                            const GdkColor  *color,
+                                            const GdkRGBA   *color,
                                             gdouble          alpha);
 
 G_END_DECLS

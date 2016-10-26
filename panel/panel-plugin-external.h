@@ -90,7 +90,7 @@ void         panel_plugin_external_set_background_alpha (PanelPluginExternal  *e
                                                          gdouble               alpha);
 
 void         panel_plugin_external_set_background_color (PanelPluginExternal  *external,
-                                                         const GdkColor       *color);
+                                                         const GdkRGBA        *color);
 
 void         panel_plugin_external_set_background_image (PanelPluginExternal  *external,
                                                          const gchar          *image);

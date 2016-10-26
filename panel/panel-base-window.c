@@ -235,9 +235,8 @@ panel_base_window_get_property (GObject    *object,
 {
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (object);
   PanelBaseWindowPrivate *priv = window->priv;
-  GdkColor               *color;
-  GdkColor               bg_color;
-  GdkRGBA                bg_rgba;
+  GdkRGBA                *color;
+  GdkRGBA                bg_color;
   GtkStyleContext        *ctx;
 
   switch (prop_id)
@@ -264,10 +263,7 @@ panel_base_window_get_property (GObject    *object,
       else
         {
           ctx = gtk_widget_get_style_context (GTK_WIDGET (window));
-          gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_rgba);
-          bg_color.red   = CLAMP(bg_rgba.red   * 65536, 65535, 0);
-          bg_color.green = CLAMP(bg_rgba.green * 65536, 65535, 0);
-          bg_color.blue  = CLAMP(bg_rgba.blue  * 65536, 65535, 0);
+          gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_color);
           color = &bg_color;
         }
       g_value_set_boxed (value, color);
@@ -485,7 +481,7 @@ static gboolean
 panel_base_window_draw (GtkWidget *widget,
                         cairo_t   *cr)
 {
-  const GdkColor         *color;
+  const GdkRGBA          *color;
   GdkRGBA                 bg_rgba;
   GtkSymbolicColor       *literal;
   GtkSymbolicColor       *shade;
@@ -780,7 +776,7 @@ panel_base_window_set_plugin_background_color (GtkWidget *widget,
                                                gpointer   user_data)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
-  GdkColor        *color;
+  GdkRGBA         *color;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (user_data));
@@ -863,18 +859,18 @@ panel_base_window_get_borders (PanelBaseWindow *window)
 
 void
 panel_util_set_source_rgba (cairo_t        *cr,
-                            const GdkColor *color,
+                            const GdkRGBA  *color,
                             gdouble         alpha)
 {
   panel_return_if_fail (alpha >= 0.00 && alpha <= 1.00);
   panel_return_if_fail (color != NULL);
 
   if (G_LIKELY (alpha == 1.00))
-    cairo_set_source_rgb (cr, color->red / 65535.00,
-                          color->green / 65535.00,
-                          color->blue / 65535.00);
+    cairo_set_source_rgb (cr, color->red,
+                          color->green,
+                          color->blue);
   else
-    cairo_set_source_rgba (cr, color->red / 65535.00,
-                           color->green / 65535.00,
-                           color->blue / 65535.00, alpha);
+    cairo_set_source_rgba (cr, color->red,
+                           color->green,
+                           color->blue, alpha);
 }

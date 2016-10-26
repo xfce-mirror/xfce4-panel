@@ -1136,7 +1136,7 @@ panel_plugin_external_set_background_alpha (PanelPluginExternal *external,
 
 void
 panel_plugin_external_set_background_color (PanelPluginExternal *external,
-                                            const GdkColor      *color)
+                                            const GdkRGBA       *color)
 {
   GValue value = { 0, };
 
@@ -1145,7 +1145,7 @@ panel_plugin_external_set_background_color (PanelPluginExternal *external,
   if (G_LIKELY (color != NULL))
     {
       g_value_init (&value, G_TYPE_STRING);
-      g_value_take_string (&value, gdk_color_to_string (color));
+      g_value_take_string (&value, gdk_rgba_to_string (color));
 
       panel_plugin_external_queue_add (external,
                                        PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,
