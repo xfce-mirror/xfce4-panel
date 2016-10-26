@@ -564,16 +564,10 @@ panel_base_window_draw (GtkWidget *widget,
       else
         {
           gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_rgba);
+          bg_rgba.alpha = alpha;
           gdk_cairo_set_source_rgba (cr, &bg_rgba);
         }
-
-      /* only do something with the background when compositing is enabled */
-      if (G_UNLIKELY (alpha < 1.00
-          || window->background_style != PANEL_BG_STYLE_NONE))
-        {
-          /* draw the background */
-          cairo_paint (cr);
-        }
+      cairo_paint (cr);
     }
 
   /* draw marching ants selection if the timeout is running */
