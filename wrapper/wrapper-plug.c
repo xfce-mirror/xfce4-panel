@@ -131,7 +131,7 @@ wrapper_plug_init (WrapperPlug *plug)
 
   /* We need to set the plugin button to transparent and let everything else
    * be in the theme or panel's color */
-  css_string = g_strdup_printf (".xfce4-panel .button { background-color: transparent; }");
+  css_string = g_strdup_printf (".xfce4-panel button { background-color: transparent; }");
   gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
