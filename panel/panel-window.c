@@ -115,6 +115,14 @@ static void         panel_window_get_preferred_width        (GtkWidget        *w
 static void         panel_window_get_preferred_height       (GtkWidget        *widget,
                                                              gint             *minimum_height,
                                                              gint             *natural_height);
+static void         panel_window_get_preferred_width_for_height (GtkWidget        *widget,
+                                                                 gint              height,
+                                                                 gint             *minimum_width,
+                                                                 gint             *natural_width);
+static void         panel_window_get_preferred_height_for_width (GtkWidget        *widget,
+                                                                 gint              width,
+                                                                 gint             *minimum_height,
+                                                                 gint             *natural_height);
 static void         panel_window_size_allocate              (GtkWidget        *widget,
                                                              GtkAllocation    *alloc);
 static void         panel_window_size_allocate_set_xy       (PanelWindow      *window,
@@ -352,6 +360,8 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->grab_notify = panel_window_grab_notify;
   gtkwidget_class->get_preferred_width = panel_window_get_preferred_width;
   gtkwidget_class->get_preferred_height = panel_window_get_preferred_height;
+  gtkwidget_class->get_preferred_width_for_height = panel_window_get_preferred_width_for_height;
+  gtkwidget_class->get_preferred_height_for_width = panel_window_get_preferred_height_for_width;
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
   gtkwidget_class->style_set = panel_window_style_set;
@@ -1252,6 +1262,28 @@ panel_window_get_preferred_height (GtkWidget *widget,
 
   if (natural_height != NULL)
     *natural_height = n_height;
+}
+
+
+
+static void
+panel_window_get_preferred_width_for_height (GtkWidget *widget,
+                                             gint       height,
+                                             gint      *minimum_width,
+                                             gint      *natural_width)
+{
+  panel_window_get_preferred_width (widget, minimum_width, natural_width);
+}
+
+
+
+static void
+panel_window_get_preferred_height_for_width (GtkWidget *widget,
+                                             gint       width,
+                                             gint      *minimum_height,
+                                             gint      *natural_height)
+{
+  panel_window_get_preferred_height (widget, minimum_height, natural_height);
 }
 
 

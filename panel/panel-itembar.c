@@ -344,7 +344,6 @@ panel_itembar_get_preferred_length (GtkWidget      *widget,
             gtk_widget_get_preferred_width (child->widget, &child_len_min, &child_len);
           else
             gtk_widget_get_preferred_height (child->widget, &child_len_min, &child_len);
-
           /* check if the small child fits in a row */
           if (child->option == CHILD_OPTION_SMALL
               && itembar->nrows > 1)
@@ -388,12 +387,14 @@ panel_itembar_get_preferred_length (GtkWidget      *widget,
 
   /* return the total size */
   border_width = gtk_container_get_border_width (GTK_CONTAINER (widget)) * 2;
+  total_len += border_width;
+  total_len_min += border_width;
 
   if (natural_length != NULL)
-    *natural_length = total_len + border_width;
+    *natural_length = total_len;
 
   if (minimum_length != NULL)
-    *minimum_length = total_len + border_width;
+    *minimum_length = total_len_min;
 }
 
 
