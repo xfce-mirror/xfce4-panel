@@ -50,6 +50,7 @@
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-plugin-external-46.h>
+#include <panel/panel-tic-tac-toe.h>
 
 
 
@@ -147,7 +148,8 @@ static void         panel_window_autohide_queue             (PanelWindow      *w
 static void         panel_window_set_autohide               (PanelWindow      *window,
                                                              gboolean          autohide);
 static void         panel_window_menu_popup                 (PanelWindow      *window,
-                                                             guint32           event_time);
+                                                             guint32           event_time,
+                                                             gboolean          show_tic_tac_toe);
 static void         panel_window_plugins_update             (PanelWindow      *window,
                                                              PluginProp        prop);
 static void         panel_window_plugin_set_mode            (GtkWidget        *widget,
@@ -1064,7 +1066,7 @@ panel_window_button_press_event (GtkWidget      *widget,
   else if (event->button == 3
            || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
     {
-      panel_window_menu_popup (window, event->time);
+      panel_window_menu_popup (window, event->time, modifiers == GDK_SHIFT_MASK);
 
       return TRUE;
     }
@@ -2427,7 +2429,8 @@ panel_window_menu_deactivate (GtkMenu     *menu,
 
 static void
 panel_window_menu_popup (PanelWindow *window,
-                         guint32      event_time)
+                         guint32      event_time,
+                         gboolean     show_tic_tac_toe)
 {
   GtkWidget *menu;
   GtkWidget *item;
@@ -2524,6 +2527,16 @@ panel_window_menu_popup (PanelWindow *window,
       G_CALLBACK (panel_dialogs_show_about), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
+
+  /* tic tac toe item */
+  if (show_tic_tac_toe)
+    {
+      item = gtk_image_menu_item_new_with_label ("Tic Tac Toe");
+      g_signal_connect (G_OBJECT (item), "activate",
+                        G_CALLBACK (panel_tic_tac_toe_show), NULL);
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
+    }
 
   gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
                   NULL, NULL, 0, event_time);

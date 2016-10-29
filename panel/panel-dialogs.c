@@ -32,32 +32,6 @@
 
 #include <panel/panel-dialogs.h>
 #include <panel/panel-application.h>
-#include <panel/panel-tic-tac-toe.h>
-
-
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-static void
-panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
-                                     const gchar    *uri,
-                                     gpointer        data)
-{
-  GError *error = NULL;
-
-  if (g_strcmp0 ("tictactoe@xfce.org", uri) == 0)
-    {
-      /* open tic-tac-toe */
-      panel_tic_tac_toe_show ();
-    }
-  else if (!gtk_show_uri (gtk_window_get_screen (GTK_WINDOW (dialog)),
-                          uri, gtk_get_current_event_time (), &error))
-    {
-      xfce_dialog_show_error (GTK_WINDOW (dialog), error,
-                              _("Unable to open the e-mail address"));
-      g_error_free (error);
-    }
-}
-#endif
 
 
 
@@ -66,21 +40,9 @@ panel_dialogs_show_about (void)
 {
   gchar **authors;
 
-  authors = g_new0 (gchar *, 4);
-  authors[0] = g_strdup_printf ("%s:\n%s\n",
-                                _("Maintainers"),
-                                "Nick Schermer <nick@xfce.org>");
-  authors[1] = g_strdup_printf ("%s:\n%s\n",
-                                _("Deskbar Mode"),
-                                "Andrzej Radecki <ndrwrdck@gmail.com>");
-  authors[2] = g_strdup_printf ("%s:\n%s\n%s\n",
-                                _("Inactive Maintainers"),
-                                "Jasper Huijsmans <jasper@xfce.org>",
-                                "Tic-tac-toe <tictactoe@xfce.org>");
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-  gtk_about_dialog_set_email_hook (panel_dialogs_show_about_email_hook, NULL, NULL);
-#endif
+  authors = g_new0 (gchar *, 3);
+  authors[0] = g_strdup ("Nick Schermer <nick@xfce.org>");
+  authors[1] = g_strdup ("Jasper Huijsmans <jasper@xfce.org>");
 
   gtk_show_about_dialog (NULL,
                          "authors", authors,
