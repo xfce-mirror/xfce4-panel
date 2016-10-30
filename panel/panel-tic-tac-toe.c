@@ -176,8 +176,7 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
       col = (i % 3) * 2;
 
       gtk_grid_attach (GTK_GRID (grid), button,
-                       col, col + 1,
-                       row, row + 1);
+                       col, row, 1, 1);
     }
 
   /* set label attributes */
@@ -564,7 +563,7 @@ panel_tic_tac_toe_highlight_winner (PanelTicTacToe *dialog,
   else
     {
       /* grey out all the cells */
-      attr = pango_attr_foreground_new (0xcccc, 0xcccc, 0xcccc);
+      attr = pango_attr_foreground_new (0x4444, 0x4444, 0x4444);
       winner |= cells_to_hex2 (PLAYER_O, PLAYER_O, PLAYER_O,
                                PLAYER_O, PLAYER_O, PLAYER_O,
                                PLAYER_O, PLAYER_O, PLAYER_O);
