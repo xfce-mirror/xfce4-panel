@@ -84,7 +84,7 @@ xfce_panel_create_toggle_button (void)
   gtk_widget_set_can_default (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_focus (GTK_WIDGET (button), FALSE);
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-  gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+  gtk_widget_set_focus_on_click (GTK_BUTTON (button), FALSE);
   gtk_widget_set_name (button, "xfce-panel-toggle-button");
 
   return button;
