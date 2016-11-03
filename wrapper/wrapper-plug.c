@@ -51,8 +51,11 @@ struct _WrapperPlug
   GtkPlug __parent__;
 
   /* background information */
-  gdouble          background_alpha;
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GdkRGBA         *background_rgba;
+#else
   GdkColor        *background_color;
+#endif
   gchar           *background_image;
   cairo_pattern_t *background_image_cache;
 };
@@ -94,15 +97,16 @@ wrapper_plug_init (WrapperPlug *plug)
   GdkVisual       *visual = NULL;
   GdkScreen       *screen;
   GtkStyleContext *context;
-  GtkCssProvider  *provider = gtk_css_provider_new();
-  gchar           *css_string;
 #else
   GdkColormap *colormap = NULL;
   GdkScreen   *screen;
 #endif
 
-  plug->background_alpha = 1.00;
+#if GTK_CHECK_VERSION (3, 0, 0)
+  plug->background_rgba = NULL;
+#else
   plug->background_color = NULL;
+#endif
   plug->background_image = NULL;
   plug->background_image_cache = NULL;
 
@@ -128,17 +132,6 @@ wrapper_plug_init (WrapperPlug *plug)
   context = gtk_widget_get_style_context (GTK_WIDGET (plug));
   gtk_style_context_add_class (context, "panel");
   gtk_style_context_add_class (context, "xfce4-panel");
-
-  /* We need to set the plugin button to transparent and let everything else
-   * be in the theme or panel's color */
-  css_string = g_strdup_printf (".xfce4-panel button { background-color: transparent; }");
-  gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
-  gtk_style_context_add_provider (context,
-                                  GTK_STYLE_PROVIDER (provider),
-                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-  g_free (css_string);
-  g_object_unref (provider);
 #endif
 }
 
@@ -161,9 +154,8 @@ wrapper_plug_draw (GtkWidget *widget,
 {
   WrapperPlug     *plug = WRAPPER_PLUG (widget);
   GtkStyleContext *style;
-  const GdkColor  *color;
+  const GdkRGBA   *color;
   GdkRGBA          rgba;
-  gdouble          alpha;
   GdkPixbuf       *pixbuf;
   GError          *error = NULL;
 
@@ -212,20 +204,19 @@ wrapper_plug_draw (GtkWidget *widget,
     }
   else
     {
-      alpha = gtk_widget_is_composited (GTK_WIDGET (plug)) ? plug->background_alpha : 1.00;
       cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
-      /* get the background gdk color */
-      if (plug->background_color != NULL)
+      /* get the background gdk rgba */
+      if (plug->background_rgba != NULL)
         {
-          color = plug->background_color;
-          cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color), alpha);
+          color = plug->background_rgba;
+          cairo_set_source_rgba (cr, color->red, color->green,
+                                 color->blue, color->alpha);
         }
       else
         {
           style = gtk_widget_get_style_context (widget);
           gtk_style_context_get_background_color (style, GTK_STATE_FLAG_NORMAL, &rgba);
-          rgba.alpha = alpha;
           gdk_cairo_set_source_rgba (cr, &rgba);
         }
 
@@ -296,9 +287,7 @@ wrapper_plug_expose_event (GtkWidget      *widget,
         }
       else
         {
-          alpha = gtk_widget_is_composited (GTK_WIDGET (plug)) ? plug->background_alpha : 1.00;
-
-          if (alpha < 1.00 || plug->background_color != NULL)
+          if (plug->background_color != NULL)
             {
               /* get the background gdk color */
               if (plug->background_color != NULL)
@@ -308,8 +297,8 @@ wrapper_plug_expose_event (GtkWidget      *widget,
 
               /* draw the background color */
               cr = gdk_cairo_create (widget->window);
+              cairo_set_source_rgba (cr, color->red, color->green, color->blue, 1.00);
               cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-              cairo_set_source_rgba (cr, PANEL_GDKCOLOR_TO_DOUBLE (color), alpha);
               gdk_cairo_rectangle (cr, &event->area);
               cairo_fill (cr);
               cairo_destroy (cr);
@@ -328,9 +317,15 @@ wrapper_plug_background_reset (WrapperPlug *plug)
 {
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  if (plug->background_rgba != NULL)
+    gdk_rgba_free (plug->background_rgba);
+  plug->background_rgba = NULL;
+#else
   if (plug->background_color != NULL)
     gdk_color_free (plug->background_color);
   plug->background_color = NULL;
+#endif
 
   if (plug->background_image_cache != NULL)
     cairo_pattern_destroy (plug->background_image_cache);
@@ -362,23 +357,27 @@ wrapper_plug_new (GdkNativeWindow socket_id)
 
 
 
+#if GTK_CHECK_VERSION (3, 0, 0)
 void
-wrapper_plug_set_background_alpha (WrapperPlug *plug,
-                                   gdouble      alpha)
+wrapper_plug_set_background_color (WrapperPlug *plug,
+                                   const gchar *color_string)
 {
+  GdkRGBA                 color;
+  GtkStyleContext        *context;
+  GtkCssProvider         *provider = gtk_css_provider_new();
+  gchar                  *css_string;
+
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
-  panel_return_if_fail (GTK_IS_WIDGET (plug));
 
-  /* set the alpha */
-  plug->background_alpha = CLAMP (alpha, 0.00, 1.00);
+  wrapper_plug_background_reset (plug);
 
-  /* redraw */
-  if (gtk_widget_is_composited (GTK_WIDGET (plug)))
-    gtk_widget_queue_draw (GTK_WIDGET (plug));
+  if (color_string != NULL
+      && gdk_rgba_parse (&color, color_string))
+    plug->background_rgba = gdk_rgba_copy (&color);
+
+  gtk_widget_queue_draw (GTK_WIDGET (plug));
 }
-
-
-
+#else
 
 void
 wrapper_plug_set_background_color (WrapperPlug *plug,
@@ -390,14 +389,14 @@ wrapper_plug_set_background_color (WrapperPlug *plug,
 
   wrapper_plug_background_reset (plug);
 
+
   if (color_string != NULL
       && gdk_color_parse (color_string, &color))
     plug->background_color = gdk_color_copy (&color);
 
   gtk_widget_queue_draw (GTK_WIDGET (plug));
 }
-
-
+#endif
 
 void
 wrapper_plug_set_background_image (WrapperPlug *plug,

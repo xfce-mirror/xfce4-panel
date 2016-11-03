@@ -64,12 +64,12 @@ struct _PanelBaseWindow
   /*< private >*/
   PanelBaseWindowPrivate *priv;
 
-  guint                   is_composited : 1;
+  guint                    is_composited : 1;
 
-  gdouble                 background_alpha;
-  PanelBgStyle            background_style;
-  GdkRGBA                *background_color;
-  gchar                  *background_image;
+  PanelBgStyle             background_style;
+  GdkRGBA                 *background_rgba;
+  GdkColor                *background_color;
+  gchar                   *background_image;
 };
 
 GType        panel_base_window_get_type    (void) G_GNUC_CONST;
@@ -83,10 +83,6 @@ void         panel_base_window_move_resize (PanelBaseWindow *window,
 void         panel_base_window_set_borders (PanelBaseWindow *window,
                                             PanelBorders     borders);
 PanelBorders panel_base_window_get_borders (PanelBaseWindow *window);
-
-void         panel_util_set_source_rgba    (cairo_t         *cr,
-                                            const GdkRGBA   *color,
-                                            gdouble          alpha);
 
 G_END_DECLS
 

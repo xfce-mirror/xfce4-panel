@@ -86,9 +86,6 @@ GType        panel_plugin_external_get_type             (void) G_GNUC_CONST;
 
 void         panel_plugin_external_restart              (PanelPluginExternal  *external);
 
-void         panel_plugin_external_set_background_alpha (PanelPluginExternal  *external,
-                                                         gdouble               alpha);
-
 void         panel_plugin_external_set_background_color (PanelPluginExternal  *external,
                                                          const GdkRGBA        *color);
 

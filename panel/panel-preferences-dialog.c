@@ -443,17 +443,17 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "length", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "length-adjust", "active", 0);
-  panel_preferences_dialog_bindings_add (dialog, "background-alpha", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "enter-opacity", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "leave-opacity", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "composited", "sensitive", G_BINDING_SYNC_CREATE);
   panel_preferences_dialog_bindings_add (dialog, "background-style", "active", 0);
-  panel_preferences_dialog_bindings_add (dialog, "background-color", "color", 0);
+  panel_preferences_dialog_bindings_add (dialog, "background-rgba", "rgba", 0);
 
   /* watch image changes from the panel */
   dialog->bg_image_notify_handler_id = g_signal_connect_swapped (G_OBJECT (dialog->active),
       "notify::background-image", G_CALLBACK (panel_preferences_dialog_bg_image_notified), dialog);
   panel_preferences_dialog_bg_image_notified (dialog);
+
 
   /* get run mode of the driver (multiple screens or randr) */
   screen = gtk_widget_get_screen (GTK_WIDGET (dialog->active));
@@ -630,11 +630,10 @@ panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog)
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
   active = gtk_combo_box_get_active (GTK_COMBO_BOX (object));
 
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-alpha-box");
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-rgba");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_get (G_OBJECT (dialog->active), "composited", &composited, NULL);
-  g_object_set (G_OBJECT (object), "visible", active < 2,
-                "sensitive", composited, NULL);
+  gtk_color_chooser_set_use_alpha (object, composited);
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-color-box");
   panel_return_if_fail (GTK_IS_WIDGET (object));

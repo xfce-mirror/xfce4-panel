@@ -777,7 +777,6 @@ panel_window_draw (GtkWidget *widget,
   guint             xx, yy, i;
   gint              xs, xe, ys, ye;
   gint              handle_w, handle_h;
-  gdouble           alpha = 1.00;
   GtkWidget        *child;
   GtkStyleContext  *ctx;
 
@@ -810,10 +809,6 @@ panel_window_draw (GtkWidget *widget,
   cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
   cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
-  /* alpha color */
-  if (PANEL_BASE_WINDOW (window)->is_composited)
-    alpha = MAX (0.50, PANEL_BASE_WINDOW (window)->background_alpha);
-
   ctx = gtk_widget_get_style_context (widget);
   gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_rgba);
   literal = gtk_symbolic_color_new_literal (&bg_rgba);
@@ -824,8 +819,8 @@ panel_window_draw (GtkWidget *widget,
   gtk_symbolic_color_resolve (shade, NULL, &dark_rgba);
   gtk_symbolic_color_unref (shade);
   gtk_symbolic_color_unref (literal);
-  light_rgba.alpha = alpha;
-  dark_rgba.alpha = alpha;
+  light_rgba.alpha = bg_rgba.alpha;
+  dark_rgba.alpha = bg_rgba.alpha;
 
   for (i = HANDLE_PIXELS; i >= HANDLE_PIXELS - 1; i--)
     {
@@ -2318,8 +2313,8 @@ panel_window_set_autohide (PanelWindow *window,
   GtkWidget   *popup;
   guint        i;
   const gchar *properties[] = { "enter-opacity", "leave-opacity",
-                                "background-alpha", "borders",
-                                "background-style", "background-color",
+                                "borders", "background-style",
+                                "background-color",
                                 "role", "screen" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
@@ -2753,12 +2748,6 @@ panel_window_set_povider_info (PanelWindow *window,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (provider))
     {
-      if (moving_to_other_panel || base_window->background_alpha < 1.0)
-        {
-          panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
-              base_window->background_alpha);
-        }
-
       if (base_window->background_style == PANEL_BG_STYLE_COLOR)
         {
           panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
