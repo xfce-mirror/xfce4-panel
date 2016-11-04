@@ -238,7 +238,6 @@ wrapper_plug_expose_event (GtkWidget      *widget,
   WrapperPlug    *plug = WRAPPER_PLUG (widget);
   cairo_t        *cr;
   const GdkColor *color;
-  gdouble         alpha;
   GdkPixbuf      *pixbuf;
   GError         *error = NULL;
 
@@ -363,9 +362,6 @@ wrapper_plug_set_background_color (WrapperPlug *plug,
                                    const gchar *color_string)
 {
   GdkRGBA                 color;
-  GtkStyleContext        *context;
-  GtkCssProvider         *provider = gtk_css_provider_new();
-  gchar                  *css_string;
 
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 

@@ -20,10 +20,6 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_MATH_H
-#include <math.h>
-#endif
-
 #include <dbus/dbus-glib.h>
 
 #include <common/panel-private.h>
