@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2009-2010 Nick Schermer <nick@xfce.org>
- * Copyright (C) 2014 Jannis Pohlmann <jannis@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,16 +26,17 @@
 #ifdef HAVE_MATH_H
 #include <math.h>
 #endif
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #endif
 
-#include <libwnck/libwnck.h>
+#include <libxfce4ui/libxfce4ui.h>
 
-#include <exo/exo.h>
-#include <xfconf/xfconf.h>
 #include <common/panel-private.h>
 #include <common/panel-debug.h>
 #include <common/panel-utils.h>
@@ -50,6 +50,7 @@
 #include <panel/panel-dbus-service.h>
 #include <panel/panel-plugin-external.h>
 #include <panel/panel-plugin-external-46.h>
+#include <panel/panel-tic-tac-toe.h>
 
 
 
@@ -69,96 +70,96 @@
 
 
 
-typedef enum _StrutsEgde       StrutsEgde;
-typedef enum _AutohideBehavior AutohideBehavior;
-typedef enum _AutohideState    AutohideState;
-typedef enum _SnapPosition     SnapPosition;
-typedef enum _PluginProp       PluginProp;
+typedef enum _StrutsEgde    StrutsEgde;
+typedef enum _AutohideState AutohideState;
+typedef enum _SnapPosition  SnapPosition;
+typedef enum _PluginProp    PluginProp;
 
 
 
-static void         panel_window_get_property                   (GObject          *object,
-                                                                 guint             prop_id,
-                                                                 GValue           *value,
-                                                                 GParamSpec       *pspec);
-static void         panel_window_set_property                   (GObject          *object,
-                                                                 guint             prop_id,
-                                                                 const GValue     *value,
-                                                                 GParamSpec       *pspec);
-static void         panel_window_finalize                       (GObject          *object);
-static gboolean     panel_window_expose_event                   (GtkWidget        *widget,
-                                                                 GdkEventExpose   *event);
-static gboolean     panel_window_delete_event                   (GtkWidget        *widget,
-                                                                 GdkEventAny      *event);
-static gboolean     panel_window_enter_notify_event             (GtkWidget        *widget,
-                                                                 GdkEventCrossing *event);
-static gboolean     panel_window_leave_notify_event             (GtkWidget        *widget,
-                                                                 GdkEventCrossing *event);
-static gboolean     panel_window_drag_motion                    (GtkWidget        *widget,
-                                                                 GdkDragContext   *context,
-                                                                 gint              x,
-                                                                 gint              y,
-                                                                 guint             drag_time);
-static void         panel_window_drag_leave                     (GtkWidget        *widget,
-                                                                 GdkDragContext   *context,
-                                                                 guint             drag_time);
-static gboolean     panel_window_motion_notify_event            (GtkWidget        *widget,
-                                                                 GdkEventMotion   *event);
-static gboolean     panel_window_button_press_event             (GtkWidget        *widget,
-                                                                 GdkEventButton   *event);
-static gboolean     panel_window_button_release_event           (GtkWidget        *widget,
-                                                                 GdkEventButton   *event);
-static void         panel_window_grab_notify                    (GtkWidget        *widget,
-                                                                 gboolean          was_grabbed);
-static void         panel_window_size_request                   (GtkWidget        *widget,
-                                                                 GtkRequisition   *requisition);
-static void         panel_window_size_allocate                  (GtkWidget        *widget,
-                                                                 GtkAllocation    *alloc);
-static void         panel_window_size_allocate_set_xy           (PanelWindow      *window,
-                                                                 gint              window_width,
-                                                                 gint              window_height,
-                                                                 gint             *return_x,
-                                                                 gint             *return_y);
-static void         panel_window_screen_changed                 (GtkWidget        *widget,
-                                                                 GdkScreen        *previous_screen);
-static void         panel_window_style_set                      (GtkWidget        *widget,
-                                                                 GtkStyle         *previous_style);
-static void         panel_window_realize                        (GtkWidget        *widget);
-static StrutsEgde   panel_window_screen_struts_edge             (PanelWindow      *window);
-static void         panel_window_screen_struts_set              (PanelWindow      *window);
-static void         panel_window_screen_update_borders          (PanelWindow      *window);
-static SnapPosition panel_window_snap_position                  (PanelWindow      *window);
-static void         panel_window_display_layout_debug           (GtkWidget        *widget);
-static void         panel_window_screen_layout_changed          (GdkScreen        *screen,
-                                                                 PanelWindow      *window);
-static void         panel_window_active_window_changed          (WnckScreen       *screen,
-                                                                 WnckWindow       *previous_window,
-                                                                 PanelWindow      *window);
-static void         panel_window_active_window_geometry_changed (WnckWindow       *active_window,
-                                                                 PanelWindow      *window);
-static void         panel_window_active_window_state_changed    (WnckWindow       *active_window,
-                                                                 WnckWindowState   changed,
-                                                                 WnckWindowState   new,
-                                                                 PanelWindow      *window);
-static void         panel_window_autohide_queue                 (PanelWindow      *window,
-                                                                 AutohideState     new_state);
-static void         panel_window_set_autohide_behavior          (PanelWindow      *window,
-                                                                 AutohideBehavior  behavior);
-static void         panel_window_update_autohide_window         (PanelWindow      *window,
-                                                                 WnckScreen       *screen,
-                                                                 WnckWindow       *active_window);
-static void         panel_window_menu_popup                     (PanelWindow      *window,
-                                                                 guint32           event_time);
-static void         panel_window_plugins_update                 (PanelWindow      *window,
-                                                                 PluginProp        prop);
-static void         panel_window_plugin_set_mode                (GtkWidget        *widget,
-                                                                 gpointer          user_data);
-static void         panel_window_plugin_set_size                (GtkWidget        *widget,
-                                                                 gpointer          user_data);
-static void         panel_window_plugin_set_nrows               (GtkWidget        *widget,
-                                                                 gpointer          user_data);
-static void         panel_window_plugin_set_screen_position     (GtkWidget        *widget,
-                                                                 gpointer          user_data);
+static void         panel_window_get_property               (GObject          *object,
+                                                             guint             prop_id,
+                                                             GValue           *value,
+                                                             GParamSpec       *pspec);
+static void         panel_window_set_property               (GObject          *object,
+                                                             guint             prop_id,
+                                                             const GValue     *value,
+                                                             GParamSpec       *pspec);
+static void         panel_window_finalize                   (GObject          *object);
+static gboolean     panel_window_draw                       (GtkWidget        *widget,
+                                                             cairo_t          *cr);
+static gboolean     panel_window_delete_event               (GtkWidget        *widget,
+                                                             GdkEventAny      *event);
+static gboolean     panel_window_enter_notify_event         (GtkWidget        *widget,
+                                                             GdkEventCrossing *event);
+static gboolean     panel_window_leave_notify_event         (GtkWidget        *widget,
+                                                             GdkEventCrossing *event);
+static gboolean     panel_window_drag_motion                (GtkWidget        *widget,
+                                                             GdkDragContext   *context,
+                                                             gint              x,
+                                                             gint              y,
+                                                             guint             drag_time);
+static void         panel_window_drag_leave                 (GtkWidget        *widget,
+                                                             GdkDragContext   *context,
+                                                             guint             drag_time);
+static gboolean     panel_window_motion_notify_event        (GtkWidget        *widget,
+                                                             GdkEventMotion   *event);
+static gboolean     panel_window_button_press_event         (GtkWidget        *widget,
+                                                             GdkEventButton   *event);
+static gboolean     panel_window_button_release_event       (GtkWidget        *widget,
+                                                             GdkEventButton   *event);
+static void         panel_window_grab_notify                (GtkWidget        *widget,
+                                                             gboolean          was_grabbed);
+static void         panel_window_get_preferred_width        (GtkWidget        *widget,
+                                                             gint             *minimum_width,
+                                                             gint             *natural_width);
+static void         panel_window_get_preferred_height       (GtkWidget        *widget,
+                                                             gint             *minimum_height,
+                                                             gint             *natural_height);
+static void         panel_window_get_preferred_width_for_height (GtkWidget        *widget,
+                                                                 gint              height,
+                                                                 gint             *minimum_width,
+                                                                 gint             *natural_width);
+static void         panel_window_get_preferred_height_for_width (GtkWidget        *widget,
+                                                                 gint              width,
+                                                                 gint             *minimum_height,
+                                                                 gint             *natural_height);
+static void         panel_window_size_allocate              (GtkWidget        *widget,
+                                                             GtkAllocation    *alloc);
+static void         panel_window_size_allocate_set_xy       (PanelWindow      *window,
+                                                             gint              window_width,
+                                                             gint              window_height,
+                                                             gint             *return_x,
+                                                             gint             *return_y);
+static void         panel_window_screen_changed             (GtkWidget        *widget,
+                                                             GdkScreen        *previous_screen);
+static void         panel_window_style_set                  (GtkWidget        *widget,
+                                                             GtkStyle         *previous_style);
+static void         panel_window_realize                    (GtkWidget        *widget);
+static StrutsEgde   panel_window_screen_struts_edge         (PanelWindow      *window);
+static void         panel_window_screen_struts_set          (PanelWindow      *window);
+static void         panel_window_screen_update_borders      (PanelWindow      *window);
+static SnapPosition panel_window_snap_position              (PanelWindow      *window);
+static void         panel_window_display_layout_debug       (GtkWidget        *widget);
+static void         panel_window_screen_layout_changed      (GdkScreen        *screen,
+                                                             PanelWindow      *window);
+static void         panel_window_autohide_queue             (PanelWindow      *window,
+                                                             AutohideState     new_state);
+static void         panel_window_set_autohide               (PanelWindow      *window,
+                                                             gboolean          autohide);
+static void         panel_window_menu_popup                 (PanelWindow      *window,
+                                                             guint32           event_time,
+                                                             gboolean          show_tic_tac_toe);
+static void         panel_window_plugins_update             (PanelWindow      *window,
+                                                             PluginProp        prop);
+static void         panel_window_plugin_set_mode            (GtkWidget        *widget,
+                                                             gpointer          user_data);
+static void         panel_window_plugin_set_size            (GtkWidget        *widget,
+                                                             gpointer          user_data);
+static void         panel_window_plugin_set_nrows           (GtkWidget        *widget,
+                                                             gpointer          user_data);
+static void         panel_window_plugin_set_screen_position (GtkWidget        *widget,
+                                                             gpointer          user_data);
 
 
 
@@ -172,7 +173,7 @@ enum
   PROP_LENGTH,
   PROP_LENGTH_ADJUST,
   PROP_POSITION_LOCKED,
-  PROP_AUTOHIDE_BEHAVIOR,
+  PROP_AUTOHIDE,
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
   PROP_POSITION,
@@ -185,13 +186,6 @@ enum _PluginProp
   PLUGIN_PROP_SCREEN_POSITION,
   PLUGIN_PROP_NROWS,
   PLUGIN_PROP_SIZE
-};
-
-enum _AutohideBehavior
-{
-  AUTOHIDE_BEHAVIOR_NEVER = 0,
-  AUTOHIDE_BEHAVIOR_INTELLIGENTLY,
-  AUTOHIDE_BEHAVIOR_ALWAYS,
 };
 
 enum _AutohideState
@@ -302,10 +296,7 @@ struct _PanelWindow
   GdkRectangle         alloc;
 
   /* autohiding */
-  WnckScreen          *wnck_screen;
-  WnckWindow          *wnck_active_window;
   GtkWidget           *autohide_window;
-  AutohideBehavior     autohide_behavior;
   AutohideState        autohide_state;
   guint                autohide_timeout_id;
   gint                 autohide_block;
@@ -359,7 +350,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gobject_class->finalize = panel_window_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->expose_event = panel_window_expose_event;
+  gtkwidget_class->draw = panel_window_draw;
   gtkwidget_class->delete_event = panel_window_delete_event;
   gtkwidget_class->enter_notify_event = panel_window_enter_notify_event;
   gtkwidget_class->leave_notify_event = panel_window_leave_notify_event;
@@ -369,7 +360,10 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->button_press_event = panel_window_button_press_event;
   gtkwidget_class->button_release_event = panel_window_button_release_event;
   gtkwidget_class->grab_notify = panel_window_grab_notify;
-  gtkwidget_class->size_request = panel_window_size_request;
+  gtkwidget_class->get_preferred_width = panel_window_get_preferred_width;
+  gtkwidget_class->get_preferred_height = panel_window_get_preferred_height;
+  gtkwidget_class->get_preferred_width_for_height = panel_window_get_preferred_width_for_height;
+  gtkwidget_class->get_preferred_height_for_width = panel_window_get_preferred_height_for_width;
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
   gtkwidget_class->style_set = panel_window_style_set;
@@ -379,7 +373,7 @@ panel_window_class_init (PanelWindowClass *klass)
                                    PROP_ID,
                                    g_param_spec_int ("id", NULL, NULL,
                                                      0, G_MAXINT, 0,
-                                                     EXO_PARAM_READWRITE
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
                                                      | G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (gobject_class,
@@ -387,69 +381,67 @@ panel_window_class_init (PanelWindowClass *klass)
                                    g_param_spec_enum ("mode", NULL, NULL,
                                                       XFCE_TYPE_PANEL_PLUGIN_MODE,
                                                       XFCE_PANEL_PLUGIN_MODE_HORIZONTAL,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SIZE,
                                    g_param_spec_uint ("size", NULL, NULL,
                                                       16, 128, 48,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_NROWS,
                                    g_param_spec_uint ("nrows", NULL, NULL,
                                                       1, 6, 1,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_LENGTH,
                                    g_param_spec_uint ("length", NULL, NULL,
                                                       1, 100, 10,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_LENGTH_ADJUST,
                                    g_param_spec_boolean ("length-adjust", NULL, NULL,
                                                          TRUE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_POSITION_LOCKED,
                                    g_param_spec_boolean ("position-locked", NULL, NULL,
                                                          FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_AUTOHIDE_BEHAVIOR,
-                                   g_param_spec_uint ("autohide-behavior", NULL, NULL,
-                                                      AUTOHIDE_BEHAVIOR_NEVER,
-                                                      AUTOHIDE_BEHAVIOR_ALWAYS,
-                                                      AUTOHIDE_BEHAVIOR_NEVER,
-                                                      EXO_PARAM_READWRITE));
+                                   PROP_AUTOHIDE,
+                                   g_param_spec_boolean ("autohide", NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SPAN_MONITORS,
                                    g_param_spec_boolean ("span-monitors", NULL, NULL,
                                                          FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_OUTPUT_NAME,
                                    g_param_spec_string ("output-name", NULL, NULL,
                                                         NULL,
-                                                        EXO_PARAM_READWRITE));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_POSITION,
                                    g_param_spec_string ("position", NULL, NULL,
                                                         NULL,
-                                                        EXO_PARAM_READWRITE));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_DISABLE_STRUTS,
                                    g_param_spec_boolean ("disable-struts", NULL, NULL,
                                                          FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("popup-delay",
@@ -457,7 +449,7 @@ panel_window_class_init (PanelWindowClass *klass)
                                                              "Time before the panel will unhide on an enter event",
                                                              1, G_MAXINT,
                                                              DEFAULT_POPUP_DELAY,
-                                                             EXO_PARAM_READABLE));
+                                                             G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("popdown-delay",
@@ -465,7 +457,7 @@ panel_window_class_init (PanelWindowClass *klass)
                                                              "Time before the panel will hide on a leave event",
                                                              1, G_MAXINT,
                                                              DEFAULT_POPDOWN_DELAY,
-                                                             EXO_PARAM_READABLE));
+                                                             G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("autohide-size",
@@ -473,7 +465,7 @@ panel_window_class_init (PanelWindowClass *klass)
                                                              "Size of hidden panel",
                                                              1, G_MAXINT,
                                                              DEFAULT_ATUOHIDE_SIZE,
-                                                             EXO_PARAM_READABLE));
+                                                             G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   /* initialize the atoms */
   cardinal_atom = gdk_atom_intern_static_string ("CARDINAL");
@@ -491,8 +483,6 @@ panel_window_init (PanelWindow *window)
   window->id = -1;
   window->locked = TRUE;
   window->screen = NULL;
-  window->wnck_screen = NULL;
-  window->wnck_active_window = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_disabled = FALSE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
@@ -504,7 +494,6 @@ panel_window_init (PanelWindow *window)
   window->span_monitors = FALSE;
   window->position_locked = FALSE;
   window->autohide_state = AUTOHIDE_DISABLED;
-  window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
   window->autohide_timeout_id = 0;
   window->autohide_block = 0;
   window->autohide_grab_block = 0;
@@ -571,8 +560,8 @@ panel_window_get_property (GObject    *object,
       g_value_set_boolean (value, window->position_locked);
       break;
 
-    case PROP_AUTOHIDE_BEHAVIOR:
-      g_value_set_uint (value, window->autohide_behavior);
+    case PROP_AUTOHIDE:
+      g_value_set_boolean (value, !!(window->autohide_state != AUTOHIDE_DISABLED));
       break;
 
     case PROP_SPAN_MONITORS:
@@ -695,9 +684,8 @@ panel_window_set_property (GObject      *object,
         }
       break;
 
-    case PROP_AUTOHIDE_BEHAVIOR:
-      panel_window_set_autohide_behavior (window, MIN (g_value_get_uint (value),
-                                                       AUTOHIDE_BEHAVIOR_ALWAYS));
+    case PROP_AUTOHIDE:
+      panel_window_set_autohide (window, g_value_get_boolean (value));
       break;
 
     case PROP_SPAN_MONITORS:
@@ -713,7 +701,7 @@ panel_window_set_property (GObject      *object,
       g_free (window->output_name);
 
       val_string = g_value_get_string (value);
-      if (exo_str_is_empty (val_string))
+      if (panel_str_is_empty (val_string))
         window->output_name = NULL;
       else
         window->output_name = g_strdup (val_string);
@@ -723,7 +711,7 @@ panel_window_set_property (GObject      *object,
 
     case PROP_POSITION:
       val_string = g_value_get_string (value);
-      if (!exo_str_is_empty (val_string)
+      if (!panel_str_is_empty (val_string)
           && sscanf (val_string, "p=%d;x=%d;y=%d", &snap_position, &x, &y) == 3)
         {
           window->snap_position = CLAMP (snap_position, SNAP_POSITION_NONE, SNAP_POSITION_S);
@@ -763,9 +751,6 @@ panel_window_finalize (GObject *object)
 {
   PanelWindow *window = PANEL_WINDOW (object);
 
-  /* disconnect from active screen and window */
-  panel_window_update_autohide_window (window, NULL, NULL);
-
   /* stop running autohide timeout */
   if (G_UNLIKELY (window->autohide_timeout_id != 0))
     g_source_remove (window->autohide_timeout_id);
@@ -782,22 +767,23 @@ panel_window_finalize (GObject *object)
 
 
 static gboolean
-panel_window_expose_event (GtkWidget      *widget,
-                           GdkEventExpose *event)
+panel_window_draw (GtkWidget *widget,
+                   cairo_t   *cr)
 {
-  PanelWindow  *window = PANEL_WINDOW (widget);
-  cairo_t      *cr;
-  GdkColor     *color;
-  guint         xx, yy, i;
-  gint          xs, xe, ys, ye;
-  gint          handle_w, handle_h;
-  gdouble       alpha = 1.00;
-  GtkWidget    *child;
+  PanelWindow      *window = PANEL_WINDOW (widget);
+  GdkRGBA           bg_rgba, light_rgba, dark_rgba;
+  GtkSymbolicColor *literal;
+  GtkSymbolicColor *shade;
+  guint             xx, yy, i;
+  gint              xs, xe, ys, ye;
+  gint              handle_w, handle_h;
+  GtkWidget        *child;
+  GtkStyleContext  *ctx;
 
   /* expose the background and borders handled in PanelBaseWindow */
-  (*GTK_WIDGET_CLASS (panel_window_parent_class)->expose_event) (widget, event);
+  (*GTK_WIDGET_CLASS (panel_window_parent_class)->draw) (widget, cr);
 
-  if (window->position_locked || !GTK_WIDGET_DRAWABLE (widget))
+  if (window->position_locked || !gtk_widget_is_drawable (widget))
     goto end;
 
   if (IS_HORIZONTAL (window))
@@ -808,11 +794,6 @@ panel_window_expose_event (GtkWidget      *widget,
       xs = HANDLE_SPACING + 1;
       xe = window->alloc.width - HANDLE_SIZE - HANDLE_SIZE;
       ys = ye = (window->alloc.height - handle_h) / 2;
-
-      /* dirty check if we have to redraw the handles */
-      if (event->area.x > xs + HANDLE_SIZE
-          && event->area.x + event->area.width < xe)
-        goto end;
     }
   else
     {
@@ -822,35 +803,32 @@ panel_window_expose_event (GtkWidget      *widget,
       xs = xe = (window->alloc.width - handle_w) / 2;
       ys = HANDLE_SPACING + 1;
       ye = window->alloc.height - HANDLE_SIZE - HANDLE_SIZE;
-
-      /* dirty check if we have to redraw the handles */
-      if (event->area.y > ys + HANDLE_SIZE
-          && event->area.y + event->area.height < ye)
-        goto end;
     }
 
   /* create cairo context and set some default properties */
-  cr = gdk_cairo_create (widget->window);
-  panel_return_val_if_fail (cr != NULL, FALSE);
   cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
   cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
-  /* clip the drawing area */
-  gdk_cairo_rectangle (cr, &event->area);
-  cairo_clip (cr);
-
-  /* alpha color */
-  if (PANEL_BASE_WINDOW (window)->is_composited)
-    alpha = MAX (0.50, PANEL_BASE_WINDOW (window)->background_alpha);
+  ctx = gtk_widget_get_style_context (widget);
+  gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_rgba);
+  literal = gtk_symbolic_color_new_literal (&bg_rgba);
+  shade = gtk_symbolic_color_new_shade (literal, 1.3);
+  gtk_symbolic_color_resolve (shade, NULL, &light_rgba);
+  gtk_symbolic_color_unref (shade);
+  shade = gtk_symbolic_color_new_shade (literal, 0.7);
+  gtk_symbolic_color_resolve (shade, NULL, &dark_rgba);
+  gtk_symbolic_color_unref (shade);
+  gtk_symbolic_color_unref (literal);
+  light_rgba.alpha = bg_rgba.alpha;
+  dark_rgba.alpha = bg_rgba.alpha;
 
   for (i = HANDLE_PIXELS; i >= HANDLE_PIXELS - 1; i--)
     {
       /* set the source color */
       if (i == HANDLE_PIXELS)
-        color = &(widget->style->light[GTK_STATE_NORMAL]);
+        gdk_cairo_set_source_rgba (cr, &light_rgba);
       else
-        color = &(widget->style->dark[GTK_STATE_NORMAL]);
-      panel_util_set_source_rgba (cr, color, alpha);
+        gdk_cairo_set_source_rgba (cr, &dark_rgba);
 
       /* draw the dots */
       for (xx = 0; xx < (guint) handle_w; xx += HANDLE_PIXELS + HANDLE_PIXEL_SPACE)
@@ -864,13 +842,11 @@ panel_window_expose_event (GtkWidget      *widget,
       cairo_fill (cr);
     }
 
-  cairo_destroy (cr);
-
 end:
   /* send the expose event to the child */
   child = gtk_bin_get_child (GTK_BIN (widget));
   if (G_LIKELY (child != NULL))
-    gtk_container_propagate_expose (GTK_CONTAINER (widget), child, event);
+    gtk_container_propagate_draw (GTK_CONTAINER (widget), child, cr);
 
   return FALSE;
 }
@@ -920,14 +896,8 @@ panel_window_leave_notify_event (GtkWidget        *widget,
    /* queue an autohide timeout if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && window->autohide_state != AUTOHIDE_DISABLED
-      && window->autohide_state != AUTOHIDE_BLOCKED) {
-    /* simulate a geometry change to check for overlapping windows with intelligent hiding */
-    if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-      panel_window_active_window_geometry_changed (window->wnck_active_window, window);
-    /* otherwise just hide the panel */
-    else
-      panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
-  }
+      && window->autohide_state != AUTOHIDE_BLOCKED)
+    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->leave_notify_event) (widget, event);
 }
@@ -986,8 +956,8 @@ panel_window_motion_notify_event (GtkWidget      *widget,
    * the panel that is currently dragged */
   if (event->x == 0 && event->y == 0)
     {
-      gdk_display_get_pointer (gtk_widget_get_display (widget),
-                               &screen, NULL, NULL, NULL);
+      gdk_device_get_position (event->device,
+                               &screen, NULL, NULL);
       if (screen != gtk_window_get_screen (GTK_WINDOW (window)))
         {
           gtk_window_set_screen (GTK_WINDOW (window), screen);
@@ -1053,7 +1023,7 @@ panel_window_button_press_event (GtkWidget      *widget,
   guint          modifiers;
 
   /* leave if the event is not for this window */
-  if (event->window != widget->window)
+  if (event->window != gtk_widget_get_window (widget))
     goto end;
 
   modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
@@ -1070,12 +1040,13 @@ panel_window_button_press_event (GtkWidget      *widget,
       cursor = gdk_cursor_new_for_display (display, GDK_FLEUR);
 
       /* grab the pointer for dragging the window */
-      status = gdk_pointer_grab (event->window, FALSE,
-                                 GDK_BUTTON_MOTION_MASK
-                                 | GDK_BUTTON_RELEASE_MASK,
-                                 NULL, cursor, event->time);
+      status = gdk_device_grab (event->device, event->window,
+                                GDK_OWNERSHIP_NONE, FALSE,
+                                GDK_BUTTON_MOTION_MASK
+                                | GDK_BUTTON_RELEASE_MASK,
+                                cursor, event->time);
 
-      gdk_cursor_unref (cursor);
+      g_object_unref (cursor);
 
       /* set the grab info if the grab was successfully made */
       if (G_LIKELY (status == GDK_GRAB_SUCCESS))
@@ -1090,7 +1061,7 @@ panel_window_button_press_event (GtkWidget      *widget,
   else if (event->button == 3
            || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
     {
-      panel_window_menu_popup (window, event->time);
+      panel_window_menu_popup (window, event->time, modifiers == GDK_SHIFT_MASK);
 
       return TRUE;
     }
@@ -1109,15 +1080,13 @@ panel_window_button_release_event (GtkWidget      *widget,
                                    GdkEventButton *event)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
-  GdkDisplay  *display;
 
   panel_return_val_if_fail (PANEL_IS_WINDOW (window), FALSE);
 
   if (window->grab_time != 0)
     {
       /* ungrab the pointer */
-      display = gdk_screen_get_display (window->screen);
-      gdk_display_pointer_ungrab (display, window->grab_time);
+      gdk_device_ungrab (event->device, window->grab_time);
       window->grab_time = 0;
 
       /* store the new position */
@@ -1143,8 +1112,6 @@ panel_window_grab_notify (GtkWidget *widget,
 {
   PanelWindow *window = PANEL_WINDOW (widget);
   GtkWidget   *current;
-  GdkScreen   *screen;
-  gint         x, y;
 
   current = gtk_grab_get_current ();
   if (GTK_IS_MENU_SHELL (current))
@@ -1162,16 +1129,10 @@ panel_window_grab_notify (GtkWidget *widget,
     {
       if (current != NULL)
         {
-          gdk_display_get_pointer (gtk_widget_get_display (current),
-                                   &screen, &x, &y, NULL);
-
           /* filter out grab event that did not occur in the panel window,
            * but in a windows that is part of this process */
-          if (gtk_window_get_screen (GTK_WINDOW (window)) != screen
-              || x < window->alloc.x
-              || x > window->alloc.x + window->alloc.width
-              || y < window->alloc.y
-              || y > window->alloc.y + window->alloc.height)
+          if (gtk_widget_get_toplevel (GTK_WIDGET (window)) !=
+              gtk_widget_get_toplevel (current))
             {
               /* block the next notification */
               window->autohide_grab_block++;
@@ -1193,26 +1154,26 @@ panel_window_grab_notify (GtkWidget *widget,
 
 
 static void
-panel_window_size_request (GtkWidget      *widget,
-                           GtkRequisition *requisition)
+panel_window_get_preferred_width (GtkWidget *widget,
+                                  gint      *minimum_width,
+                                  gint      *natural_width)
 {
   PanelWindow    *window = PANEL_WINDOW (widget);
-  GtkRequisition  child_requisition = { 0, 0 };
+  gint            m_width = 0;
+  gint            n_width = 0;
   gint            length;
-  gint            extra_width = 0, extra_height = 0;
+  gint            extra_width = 0;
   PanelBorders    borders;
 
   /* get the child requisition */
-  if (GTK_BIN (widget)->child != NULL)
-    gtk_widget_size_request (GTK_BIN (widget)->child, &child_requisition);
+  if (gtk_bin_get_child (GTK_BIN (widget)) != NULL)
+    gtk_widget_get_preferred_width (gtk_bin_get_child (GTK_BIN (widget)), &m_width, &n_width);
 
   /* handle size */
   if (!window->position_locked)
     {
       if (IS_HORIZONTAL (window))
         extra_width += 2 * HANDLE_SIZE_TOTAL;
-      else
-        extra_height += 2 * HANDLE_SIZE_TOTAL;
     }
 
   /* get the active borders */
@@ -1221,31 +1182,105 @@ panel_window_size_request (GtkWidget      *widget,
     extra_width++;
   if (PANEL_HAS_FLAG (borders, PANEL_BORDER_RIGHT))
     extra_width++;
-  if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
-    extra_height++;
-  if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
-    extra_height++;
 
-  requisition->height = child_requisition.height + extra_height;
-  requisition->width = child_requisition.width + extra_width;
+  m_width += extra_width;
+  n_width += extra_width;
 
   /* respect the length and monitor/screen size */
   if (IS_HORIZONTAL (window))
     {
       if (!window->length_adjust)
-        requisition->width = extra_width;
+        {
+          m_width = n_width = extra_width;
+        }
 
       length = window->area.width * window->length;
-      requisition->width = CLAMP (requisition->width, length, window->area.width);
+      m_width = CLAMP (m_width, length, window->area.width);
+      n_width = CLAMP (n_width, length, window->area.width);
     }
-  else
+
+  if (minimum_width != NULL)
+    *minimum_width = m_width;
+
+  if (natural_width != NULL)
+    *natural_width = n_width;
+}
+
+
+
+static void
+panel_window_get_preferred_height (GtkWidget *widget,
+                                   gint      *minimum_height,
+                                   gint      *natural_height)
+{
+  PanelWindow    *window = PANEL_WINDOW (widget);
+  gint            m_height = 0;
+  gint            n_height = 0;
+  gint            length;
+  gint            extra_height = 0;
+  PanelBorders    borders;
+
+  /* get the child requisition */
+  if (gtk_bin_get_child (GTK_BIN (widget)) != NULL)
+    gtk_widget_get_preferred_height (gtk_bin_get_child (GTK_BIN (widget)), &m_height, &n_height);
+
+  /* handle size */
+  if (!window->position_locked)
+    {
+      if (!IS_HORIZONTAL (window))
+        extra_height += 2 * HANDLE_SIZE_TOTAL;
+    }
+
+  /* get the active borders */
+  borders = panel_base_window_get_borders (PANEL_BASE_WINDOW (window));
+  if (PANEL_HAS_FLAG (borders, PANEL_BORDER_TOP))
+    extra_height++;
+  if (PANEL_HAS_FLAG (borders, PANEL_BORDER_BOTTOM))
+    extra_height++;
+
+  m_height += extra_height;
+  n_height += extra_height;
+
+  /* respect the length and monitor/screen size */
+  if (!IS_HORIZONTAL (window))
     {
       if (!window->length_adjust)
-        requisition->height = extra_height;
+        {
+          m_height = n_height = extra_height;
+        }
 
       length = window->area.height * window->length;
-      requisition->height = CLAMP (requisition->height, length, window->area.height);
+      m_height = CLAMP (m_height, length, window->area.height);
+      n_height = CLAMP (n_height, length, window->area.height);
     }
+
+  if (minimum_height != NULL)
+    *minimum_height = m_height;
+
+  if (natural_height != NULL)
+    *natural_height = n_height;
+}
+
+
+
+static void
+panel_window_get_preferred_width_for_height (GtkWidget *widget,
+                                             gint       height,
+                                             gint      *minimum_width,
+                                             gint      *natural_width)
+{
+  panel_window_get_preferred_width (widget, minimum_width, natural_width);
+}
+
+
+
+static void
+panel_window_get_preferred_height_for_width (GtkWidget *widget,
+                                             gint       width,
+                                             gint      *minimum_height,
+                                             gint      *natural_height)
+{
+  panel_window_get_preferred_height (widget, minimum_height, natural_height);
 }
 
 
@@ -1260,7 +1295,7 @@ panel_window_size_allocate (GtkWidget     *widget,
   PanelBorders   borders;
   GtkWidget     *child;
 
-  widget->allocation = *alloc;
+  gtk_widget_set_allocation (widget, alloc);
   window->alloc = *alloc;
 
   if (G_UNLIKELY (window->autohide_state == AUTOHIDE_HIDDEN
@@ -1457,8 +1492,6 @@ panel_window_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
-  WnckWindow  *wnck_window;
-  WnckScreen  *wnck_screen;
   GdkScreen   *screen;
 
   if (G_LIKELY (GTK_WIDGET_CLASS (panel_window_parent_class)->screen_changed != NULL))
@@ -1492,11 +1525,6 @@ panel_window_screen_changed (GtkWidget *widget,
 
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
-
-  /* update wnck screen to be used for the autohide feature */
-  wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
-  wnck_window = wnck_screen_get_active_window (wnck_screen);
-  panel_window_update_autohide_window (window, wnck_screen, wnck_window);
 }
 
 
@@ -1599,7 +1627,7 @@ panel_window_screen_struts_set (PanelWindow *window)
   panel_return_if_fail (cardinal_atom != 0 && net_wm_strut_partial_atom != 0);
   panel_return_if_fail (GDK_IS_SCREEN (window->screen));
 
-  if (!GTK_WIDGET_REALIZED (window))
+  if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
 
   /* set the struts */
@@ -1653,15 +1681,15 @@ panel_window_screen_struts_set (PanelWindow *window)
   gdk_error_trap_push ();
 
   /* set the wm strut partial */
-  panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (window)->window));
-  gdk_property_change (GTK_WIDGET (window)->window,
+  panel_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (GTK_WIDGET (window))));
+  gdk_property_change (gtk_widget_get_window (GTK_WIDGET (window)),
                        net_wm_strut_partial_atom,
                        cardinal_atom, 32, GDK_PROP_MODE_REPLACE,
                        (guchar *) &struts, N_STRUTS);
 
 #if SET_OLD_WM_STRUTS
   /* set the wm strut (old window managers) */
-  gdk_property_change (GTK_WIDGET (window)->window,
+  gdk_property_change (gtk_widget_get_window (GTK_WIDGET (window)),
                        net_wm_strut_atom,
                        cardinal_atom, 32, GDK_PROP_MODE_REPLACE,
                        (guchar *) &struts, 4);
@@ -1853,11 +1881,9 @@ panel_window_display_layout_debug (GtkWidget *widget)
 
       if (panel_debug_has_domain (PANEL_DEBUG_DISPLAY_LAYOUT))
         {
-          g_string_append_printf (str, "{comp=%s, sys=%p:%p, rgba=%p:%p}",
+          g_string_append_printf (str, "{comp=%s, sys=%p, rgba=%p}",
               PANEL_DEBUG_BOOL (gdk_screen_is_composited (screen)),
-              gdk_screen_get_system_colormap (screen),
               gdk_screen_get_system_visual (screen),
-              gdk_screen_get_rgba_colormap (screen),
               gdk_screen_get_rgba_visual (screen));
         }
 
@@ -1983,7 +2009,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                            window, screen_num);
 
               /* out of range, hide the window */
-              if (GTK_WIDGET_VISIBLE (window))
+              if (gtk_widget_get_visible (GTK_WIDGET (window)))
                 gtk_widget_hide (GTK_WIDGET (window));
               return;
             }
@@ -2009,7 +2035,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
     }
   else
     {
-      if (exo_str_is_empty (window->output_name))
+      if (panel_str_is_empty (window->output_name))
         {
           normal_monitor_positioning:
 
@@ -2071,7 +2097,7 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
                            window, window->output_name);
 
               /* hide the panel if the monitor was not found */
-              if (GTK_WIDGET_VISIBLE (window))
+              if (gtk_widget_get_visible (GTK_WIDGET (window)))
                 gtk_widget_hide (GTK_WIDGET (window));
               return;
             }
@@ -2140,116 +2166,8 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
   if (force_struts_update)
     panel_window_screen_struts_set (window);
 
-  if (!GTK_WIDGET_VISIBLE (window))
+  if (!gtk_widget_get_visible (GTK_WIDGET (window)))
     gtk_widget_show (GTK_WIDGET (window));
-}
-
-
-
-static void
-panel_window_active_window_changed (WnckScreen  *screen,
-                                    WnckWindow  *previous_window,
-                                    PanelWindow *window)
-{
-  WnckWindow *active_window;
-
-  panel_return_if_fail (WNCK_IS_SCREEN (screen));
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  /* obtain new active window from the screen */
-  active_window = wnck_screen_get_active_window (screen);
-
-  /* update the active window to be used for the autohide feature */
-  panel_window_update_autohide_window (window, screen, active_window);
-}
-
-
-
-static void
-panel_window_active_window_geometry_changed (WnckWindow  *active_window,
-                                             PanelWindow *window)
-{
-  GdkRectangle panel_area;
-  GdkRectangle window_area;
-
-  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-
-  /* ignore if for some reason the active window does not match the one we know */
-  if (G_UNLIKELY (window->wnck_active_window != active_window))
-    return;
-
-  /* only react to active window geometry changes if we are doing
-   * intelligent autohiding */
-  if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY
-      && window->autohide_block == 0)
-    {
-      if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
-        {
-          /* obtain position and dimensions from the active window */
-          wnck_window_get_geometry (active_window,
-                                    &window_area.x, &window_area.y,
-                                    &window_area.width, &window_area.height);
-
-          /* if a window is shaded, check the height of the window's
-           * decoration */
-          if (wnck_window_is_shaded (active_window))
-          {
-            GdkRectangle window_content;
-
-            wnck_window_get_client_window_geometry (active_window,
-                                                    &window_content.x,
-                                                    &window_content.y,
-                                                    &window_content.width,
-                                                    &window_content.height);
-            window_area.height = window_area.height - window_content.height;
-          }
-
-          /* obtain position and dimension from the panel */
-          panel_window_size_allocate_set_xy (window,
-                                             window->alloc.width,
-                                             window->alloc.height,
-                                             &panel_area.x,
-                                             &panel_area.y);
-          gtk_window_get_size (GTK_WINDOW (window),
-                               &panel_area.width,
-                               &panel_area.height);
-
-          /* show/hide the panel, depending on whether the active window overlaps
-           * with its coordinates */
-          if (window->autohide_state != AUTOHIDE_HIDDEN)
-            {
-              if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL))
-                panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
-            }
-          else
-            {
-              if (!gdk_rectangle_intersect (&panel_area, &window_area, NULL))
-                panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
-            }
-        }
-      else
-        {
-          /* make the panel visible if it isn't at the moment and the active
-           * window is the desktop */
-          if (window->autohide_state != AUTOHIDE_VISIBLE)
-            panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
-        }
-    }
-}
-
-
-
-static void
-panel_window_active_window_state_changed (WnckWindow  *active_window,
-                                             WnckWindowState changed,
-                                             WnckWindowState new,
-                                             PanelWindow *window)
-{
-  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
-
-  if (changed & WNCK_WINDOW_STATE_SHADED)
-    panel_window_active_window_geometry_changed (active_window, window);
 }
 
 
@@ -2389,95 +2307,70 @@ panel_window_autohide_event (GtkWidget        *widget,
 
 
 static void
-panel_window_set_autohide_behavior (PanelWindow     *window,
-                                    AutohideBehavior behavior)
+panel_window_set_autohide (PanelWindow *window,
+                           gboolean     autohide)
 {
   GtkWidget   *popup;
   guint        i;
   const gchar *properties[] = { "enter-opacity", "leave-opacity",
-                                "background-alpha", "borders",
-                                "background-style", "background-color",
+                                "borders", "background-style",
+                                "background-color",
                                 "role", "screen" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  /* do nothing if the behavior hasn't changed at all */
-  if (window->autohide_behavior == behavior)
+  if ((window->autohide_state != AUTOHIDE_DISABLED) == autohide)
     return;
 
-  /* remember the new behavior */
-  window->autohide_behavior = behavior;
+  /* respond to drag motion */
+  gtk_drag_dest_set_track_motion (GTK_WIDGET (window), autohide);
 
-  /* create an autohide window only if we are autohiding at all */
-  if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
+  if (autohide)
     {
-      /* create an autohide window; doing this only when it doesn't exist
-       * yet allows us to transition between "always autohide" and "intelligently
-       * autohide" without recreating the window */
-      if (window->autohide_window == NULL)
+      /* create the window */
+      panel_return_if_fail (window->autohide_window == NULL);
+      popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
+                            "type", GTK_WINDOW_TOPLEVEL,
+                            "decorated", FALSE,
+                            "resizable", TRUE,
+                            "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
+                            "gravity", GDK_GRAVITY_STATIC,
+                            "name", "XfcePanelWindowHidden",
+                            NULL);
+
+      /* move the window offscreen */
+      panel_base_window_move_resize (PANEL_BASE_WINDOW (popup),
+                                     -9999, -9999, 3, 3);
+
+      /* bind some properties to sync the two windows */
+      for (i = 0; i < G_N_ELEMENTS (properties); i++)
         {
-          /* create the window */
-          panel_return_if_fail (window->autohide_window == NULL);
-          popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
-                                "type", GTK_WINDOW_TOPLEVEL,
-                                "decorated", FALSE,
-                                "resizable", TRUE,
-                                "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
-                                "gravity", GDK_GRAVITY_STATIC,
-                                "name", "XfcePanelWindowHidden",
-                                NULL);
-
-          /* move the window offscreen */
-          panel_base_window_move_resize (PANEL_BASE_WINDOW (popup),
-                                         -9999, -9999, 3, 3);
-
-          /* bind some properties to sync the two windows */
-          for (i = 0; i < G_N_ELEMENTS (properties); i++)
-            {
-              exo_binding_new (G_OBJECT (window), properties[i],
-                               G_OBJECT (popup), properties[i]);
-            }
-
-          /* respond to drag motion */
-          gtk_drag_dest_set_track_motion (GTK_WIDGET (window), TRUE);
-
-          /* signals for pointer enter/leave events */
-          g_signal_connect (G_OBJECT (popup), "enter-notify-event",
-              G_CALLBACK (panel_window_autohide_event), window);
-          g_signal_connect (G_OBJECT (popup), "leave-notify-event",
-              G_CALLBACK (panel_window_autohide_event), window);
-
-          /* show/hide the panel on drag events */
-          gtk_drag_dest_set (popup, 0, NULL, 0, 0);
-          gtk_drag_dest_set_track_motion (popup, TRUE);
-          g_signal_connect (G_OBJECT (popup), "drag-motion",
-              G_CALLBACK (panel_window_autohide_drag_motion), window);
-          g_signal_connect (G_OBJECT (popup), "drag-leave",
-              G_CALLBACK (panel_window_autohide_drag_leave), window);
-
-          /* show the window */
-          window->autohide_window = popup;
-          gtk_widget_show (popup);
+          g_object_bind_property (G_OBJECT (window), properties[i],
+                                  G_OBJECT (popup), properties[i],
+                                  G_BINDING_SYNC_CREATE);
         }
 
-      if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_ALWAYS)
-        {
-          /* start autohide by hiding the panel straight away */
-          if (window->autohide_state != AUTOHIDE_HIDDEN)
-            {
-              panel_window_autohide_queue (window,
-                  window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_BLOCKED);
-            }
-        }
-      else if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-        {
-          /* start intelligent autohide by making the panel visible initially */
-          if (window->autohide_state != AUTOHIDE_VISIBLE)
-            {
-              panel_window_autohide_queue (window,
-                  window->autohide_block == 0 ? AUTOHIDE_POPUP : AUTOHIDE_BLOCKED);
-            }
-        }
+      /* signals for pointer enter/leave events */
+      g_signal_connect (G_OBJECT (popup), "enter-notify-event",
+          G_CALLBACK (panel_window_autohide_event), window);
+      g_signal_connect (G_OBJECT (popup), "leave-notify-event",
+          G_CALLBACK (panel_window_autohide_event), window);
+
+      /* show/hide the panel on drag events */
+      gtk_drag_dest_set (popup, 0, NULL, 0, 0);
+      gtk_drag_dest_set_track_motion (popup, TRUE);
+      g_signal_connect (G_OBJECT (popup), "drag-motion",
+          G_CALLBACK (panel_window_autohide_drag_motion), window);
+      g_signal_connect (G_OBJECT (popup), "drag-leave",
+          G_CALLBACK (panel_window_autohide_drag_leave), window);
+
+      /* show the window */
+      window->autohide_window = popup;
+      gtk_widget_show (popup);
+
+      /* start autohide */
+      panel_window_autohide_queue (window,
+          window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_BLOCKED);
     }
   else if (window->autohide_window != NULL)
     {
@@ -2488,68 +2381,6 @@ panel_window_set_autohide_behavior (PanelWindow     *window,
       panel_return_if_fail (GTK_IS_WINDOW (window->autohide_window));
       gtk_widget_destroy (window->autohide_window);
       window->autohide_window = NULL;
-    }
-}
-
-
-
-static void
-panel_window_update_autohide_window (PanelWindow *window,
-                                     WnckScreen  *screen,
-                                     WnckWindow  *active_window)
-{
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (screen == NULL || WNCK_IS_SCREEN (screen));
-  panel_return_if_fail (active_window == NULL || WNCK_IS_WINDOW (active_window));
-
-  /* update current screen */
-  if (screen != window->wnck_screen)
-    {
-      /* disconnect from previous screen */
-      if (G_LIKELY (window->wnck_screen != NULL))
-        {
-          g_signal_handlers_disconnect_by_func (window->wnck_screen,
-              panel_window_active_window_changed, window);
-        }
-
-      /* remember new screen */
-      window->wnck_screen = screen;
-
-      /* connect to the new screen */
-      if (screen != NULL)
-        {
-          g_signal_connect (G_OBJECT (screen), "active-window-changed",
-              G_CALLBACK (panel_window_active_window_changed), window);
-        }
-    }
-
-  /* update active window */
-  if (G_LIKELY (active_window != window->wnck_active_window))
-    {
-      /* disconnect from previously active window */
-      if (G_LIKELY (window->wnck_active_window != NULL))
-        {
-          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
-              panel_window_active_window_geometry_changed, window);
-          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
-              panel_window_active_window_state_changed, window);
-        }
-
-      /* remember the new window */
-      window->wnck_active_window = active_window;
-
-      /* connect to the new window but only if it is not a desktop/root-type window */
-      if (active_window != NULL)
-        {
-          g_signal_connect (G_OBJECT (active_window), "geometry-changed",
-              G_CALLBACK (panel_window_active_window_geometry_changed), window);
-          g_signal_connect (G_OBJECT (active_window), "state-changed",
-              G_CALLBACK (panel_window_active_window_state_changed), window);
-
-          /* simulate a geometry change for immediate hiding when the new active
-           * window already overlaps the panel */
-          panel_window_active_window_geometry_changed (active_window, window);
-        }
     }
 }
 
@@ -2593,7 +2424,8 @@ panel_window_menu_deactivate (GtkMenu     *menu,
 
 static void
 panel_window_menu_popup (PanelWindow *window,
-                         guint32      event_time)
+                         guint32      event_time,
+                         gboolean     show_tic_tac_toe)
 {
   GtkWidget *menu;
   GtkWidget *item;
@@ -2690,6 +2522,16 @@ panel_window_menu_popup (PanelWindow *window,
       G_CALLBACK (panel_dialogs_show_about), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
+
+  /* tic tac toe item */
+  if (show_tic_tac_toe)
+    {
+      item = gtk_image_menu_item_new_with_label ("Tic Tac Toe");
+      g_signal_connect (G_OBJECT (item), "activate",
+                        G_CALLBACK (panel_tic_tac_toe_show), NULL);
+      gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+      gtk_widget_show (item);
+    }
 
   gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
                   NULL, NULL, 0, event_time);
@@ -2906,12 +2748,6 @@ panel_window_set_povider_info (PanelWindow *window,
 
   if (PANEL_IS_PLUGIN_EXTERNAL (provider))
     {
-      if (moving_to_other_panel || base_window->background_alpha < 1.0)
-        {
-          panel_plugin_external_set_background_alpha (PANEL_PLUGIN_EXTERNAL (provider),
-              base_window->background_alpha);
-        }
-
       if (base_window->background_style == PANEL_BG_STYLE_COLOR)
         {
           panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
@@ -2963,14 +2799,8 @@ panel_window_thaw_autohide (PanelWindow *window)
   window->autohide_block--;
 
   if (window->autohide_block == 0
-      && window->autohide_state != AUTOHIDE_DISABLED) {
-    /* simulate a geometry change to check for overlapping windows with intelligent hiding */
-    if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
-      panel_window_active_window_geometry_changed (window->wnck_active_window, window);
-    /* otherwise just hide the panel */
-    else
-      panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
-  }
+      && window->autohide_state != AUTOHIDE_DISABLED)
+    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
 }
 
 
@@ -3003,20 +2833,20 @@ panel_window_focus (PanelWindow *window)
   XClientMessageEvent event;
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (GTK_WIDGET_REALIZED (window));
+  panel_return_if_fail (gtk_widget_get_realized (GTK_WIDGET (window)));
 
   /* we need a slightly custom version of the call through Gtk+ to
    * properly focus the panel when a plugin calls
    * xfce_panel_plugin_focus_widget() */
   event.type = ClientMessage;
-  event.window = GDK_WINDOW_XID (GTK_WIDGET (window)->window);
+  event.window = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (window)));
   event.message_type = gdk_x11_get_xatom_by_name ("_NET_ACTIVE_WINDOW");
   event.format = 32;
   event.data.l[0] = 0;
 
   gdk_error_trap_push ();
 
-  XSendEvent (GDK_DISPLAY (), GDK_ROOT_WINDOW (), False,
+  XSendEvent (gdk_x11_get_default_xdisplay (), GDK_ROOT_WINDOW (), False,
               StructureNotifyMask, (XEvent *) &event);
 
   gdk_flush ();
@@ -3027,52 +2857,4 @@ panel_window_focus (PanelWindow *window)
   /* our best guess on non-x11 clients */
   gtk_window_present (GTK_WINDOW (window));
 #endif
-}
-
-
-
-void
-panel_window_migrate_autohide_property (PanelWindow   *window,
-                                        XfconfChannel *xfconf,
-                                        const gchar   *property_base)
-{
-  gboolean autohide;
-  gchar   *new_property;
-  gchar   *old_property;
-
-  panel_return_if_fail (PANEL_IS_WINDOW (window));
-  panel_return_if_fail (XFCONF_IS_CHANNEL (xfconf));
-  panel_return_if_fail (property_base != NULL && *property_base != '\0');
-
-  old_property = g_strdup_printf ("%s/autohide", property_base);
-
-  /* check if we have an old "autohide" property for this panel */
-  if (xfconf_channel_has_property (xfconf, old_property))
-    {
-      new_property = g_strdup_printf ("%s/autohide-behavior", property_base);
-
-      /* migrate from old "autohide" to new "autohide-behavior" if the latter
-       * isn't set already */
-      if (!xfconf_channel_has_property (xfconf, new_property))
-        {
-          /* find out whether or not autohide was enabled in the old config */
-          autohide = xfconf_channel_get_bool (xfconf, old_property, FALSE);
-
-          /* set autohide behavior to always or never, depending on whether it
-           * was enabled in the old configuration */
-          if (xfconf_channel_set_uint (xfconf,
-                                       new_property,
-                                       autohide ? AUTOHIDE_BEHAVIOR_ALWAYS
-                                                : AUTOHIDE_BEHAVIOR_NEVER))
-            {
-              /* remove the old autohide property */
-              xfconf_channel_reset_property (xfconf, old_property, FALSE);
-            }
-        }
-      else
-        {
-          /* the new property is already set, simply remove the old property */
-          xfconf_channel_reset_property (xfconf, old_property, FALSE);
-        }
-    }
 }

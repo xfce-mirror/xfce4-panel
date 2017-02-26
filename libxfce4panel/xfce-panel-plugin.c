@@ -279,8 +279,6 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    *
    * This signal is emmitted when the plugin is closing. Plugin
    * writers should use this signal to free any allocated resources.
-   *
-   * See also #XfceHVBox.
    **/
   plugin_signals[FREE_DATA] =
     g_signal_new (g_intern_static_string ("free-data"),
@@ -299,8 +297,6 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * This signal is emmitted whenever the orientation of the panel
    * the @plugin is on changes. Plugins writers can for example use
    * this signal to change the order of widgets in the plugin.
-   *
-   * See also: #XfceHVBox.
    **/
   plugin_signals[ORIENTATION_CHANGED] =
     g_signal_new (g_intern_static_string ("orientation-changed"),

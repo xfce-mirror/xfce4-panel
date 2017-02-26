@@ -23,6 +23,7 @@
 #define __SYSTRAY_SOCKET_H__
 
 #include <gtk/gtk.h>
+#include <gtk/gtkx.h>
 
 typedef struct _SystraySocketClass SystraySocketClass;
 typedef struct _SystraySocket      SystraySocket;
@@ -39,7 +40,7 @@ GType            systray_socket_get_type      (void) G_GNUC_CONST;
 void             systray_socket_register_type (GTypeModule     *type_module);
 
 GtkWidget       *systray_socket_new           (GdkScreen       *screen,
-                                               GdkNativeWindow  window) G_GNUC_MALLOC;
+                                               Window           window) G_GNUC_MALLOC;
 
 void             systray_socket_force_redraw  (SystraySocket   *socket);
 
@@ -47,7 +48,7 @@ gboolean         systray_socket_is_composited (SystraySocket   *socket);
 
 const gchar     *systray_socket_get_name      (SystraySocket   *socket);
 
-GdkNativeWindow *systray_socket_get_window    (SystraySocket   *socket);
+Window          *systray_socket_get_window    (SystraySocket   *socket);
 
 gboolean         systray_socket_get_hidden    (SystraySocket   *socket);
 

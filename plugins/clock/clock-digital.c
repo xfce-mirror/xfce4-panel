@@ -194,12 +194,12 @@ xfce_clock_digital_finalize (GObject *object)
 
 static gboolean
 xfce_clock_digital_update (XfceClockDigital *digital,
-                           ClockTime        *clock_time)
+                           ClockTime        *time)
 {
   gchar            *string;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (digital), FALSE);
-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), FALSE);
+  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
 
   /* set time string */
   string = clock_time_strdup_strftime (digital->time, digital->format);
@@ -212,11 +212,11 @@ xfce_clock_digital_update (XfceClockDigital *digital,
 
 
 GtkWidget *
-xfce_clock_digital_new (ClockTime *clock_time)
+xfce_clock_digital_new (ClockTime *time)
 {
   XfceClockDigital *digital = g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
 
-  digital->time = clock_time;
+  digital->time = time;
   digital->timeout = clock_time_timeout_new (clock_time_interval_from_format (digital->format),
                                              digital->time,
                                              G_CALLBACK (xfce_clock_digital_update), digital);

@@ -20,7 +20,6 @@
 #include <config.h>
 #endif
 
-#include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <common/panel-xfconf.h>
 #include <common/panel-utils.h>
@@ -29,6 +28,11 @@
 
 #include "tasklist-widget.h"
 #include "tasklist-dialog_ui.h"
+
+
+#define HANDLE_OFFSET (0.15)
+#define HANDLE_SIZE      (4)
+
 
 /* TODO move to header */
 GType tasklist_plugin_get_type (void) G_GNUC_CONST;
@@ -69,8 +73,8 @@ static void     tasklist_plugin_nrows_changed           (XfcePanelPlugin    *pan
 static void     tasklist_plugin_screen_position_changed (XfcePanelPlugin    *panel_plugin,
                                                          XfceScreenPosition  position);
 static void     tasklist_plugin_configure_plugin        (XfcePanelPlugin    *panel_plugin);
-static gboolean tasklist_plugin_handle_expose_event     (GtkWidget          *widget,
-                                                         GdkEventExpose     *event,
+static gboolean tasklist_plugin_handle_draw             (GtkWidget          *widget,
+                                                         cairo_t            *cr,
                                                          TasklistPlugin     *plugin);
 
 
@@ -102,23 +106,26 @@ tasklist_plugin_init (TasklistPlugin *plugin)
   GtkWidget *box;
 
   /* create widgets */
-  box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_add (GTK_CONTAINER (plugin), box);
-  exo_binding_new (G_OBJECT (plugin), "orientation", G_OBJECT (box), "orientation");
+  g_object_bind_property (G_OBJECT (plugin), "orientation",
+                          G_OBJECT (box), "orientation",
+                          G_BINDING_SYNC_CREATE);
   gtk_widget_show (box);
 
   plugin->handle = gtk_alignment_new (0.00, 0.00, 0.00, 0.00);
   gtk_box_pack_start (GTK_BOX (box), plugin->handle, FALSE, FALSE, 0);
-  g_signal_connect (G_OBJECT (plugin->handle), "expose-event",
-      G_CALLBACK (tasklist_plugin_handle_expose_event), plugin);
+  g_signal_connect (G_OBJECT (plugin->handle), "draw",
+      G_CALLBACK (tasklist_plugin_handle_draw), plugin);
   gtk_widget_set_size_request (plugin->handle, 8, 8);
   gtk_widget_show (plugin->handle);
 
   plugin->tasklist = g_object_new (XFCE_TYPE_TASKLIST, NULL);
   gtk_box_pack_start (GTK_BOX (box), plugin->tasklist, TRUE, TRUE, 0);
 
-  exo_binding_new (G_OBJECT (plugin->tasklist), "show-handle",
-                   G_OBJECT (plugin->handle), "visible");
+  g_object_bind_property (G_OBJECT (plugin->tasklist), "show-handle",
+                          G_OBJECT (plugin->handle), "visible",
+                          G_BINDING_SYNC_CREATE);
 }
 
 
@@ -148,10 +155,6 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* show configure */
   xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
-
-  /* expand the plugin */
-  /* xfce_panel_plugin_set_expand (panel_plugin, FALSE); */
-  xfce_panel_plugin_set_shrink (panel_plugin, TRUE);
 
   /* bind all properties */
   panel_properties_bind (NULL, G_OBJECT (plugin->tasklist),
@@ -234,15 +237,20 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 #define TASKLIST_DIALOG_BIND(name, property) \
   object = gtk_builder_get_object (builder, (name)); \
   panel_return_if_fail (G_IS_OBJECT (object)); \
-  exo_mutual_binding_new (G_OBJECT (plugin->tasklist), (name), \
-                          G_OBJECT (object), (property));
+  g_object_bind_property (G_OBJECT (plugin->tasklist), (name), \
+                          G_OBJECT (object), (property), \
+                          G_BINDING_BIDIRECTIONAL \
+                          | G_BINDING_SYNC_CREATE);
 
 #define TASKLIST_DIALOG_BIND_INV(name, property) \
   object = gtk_builder_get_object (builder, (name)); \
   panel_return_if_fail (G_IS_OBJECT (object)); \
-  exo_mutual_binding_new_with_negation (G_OBJECT (plugin->tasklist), \
-                                        name,  G_OBJECT (object), \
-                                        property);
+  g_object_bind_property (G_OBJECT (plugin->tasklist), \
+                          name,  G_OBJECT (object), \
+                          property, \
+                          G_BINDING_BIDIRECTIONAL \
+                          | G_BINDING_SYNC_CREATE \
+                          | G_BINDING_INVERT_BOOLEAN);
 
   TASKLIST_DIALOG_BIND ("show-labels", "active")
   TASKLIST_DIALOG_BIND ("grouping", "active")
@@ -274,34 +282,40 @@ tasklist_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static gboolean
-tasklist_plugin_handle_expose_event (GtkWidget *widget,
-                                     GdkEventExpose *event,
-                                     TasklistPlugin *plugin)
+tasklist_plugin_handle_draw (GtkWidget      *widget,
+                             cairo_t        *cr,
+                             TasklistPlugin *plugin)
 {
-  GtkOrientation orientation;
+  GtkAllocation     allocation;
+  GtkStyleContext  *ctx;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (plugin->handle == widget, FALSE);
 
-  if (!GTK_WIDGET_DRAWABLE (widget))
+  if (!gtk_widget_is_drawable (widget))
     return FALSE;
 
-  /* get the orientation */
+  gtk_widget_get_allocation (widget, &allocation);
+  ctx = gtk_widget_get_style_context (widget);
+
+  /* get the orientation and render the handle */
   if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
       GTK_ORIENTATION_HORIZONTAL)
-    orientation = GTK_ORIENTATION_VERTICAL;
+    {
+      gtk_render_handle (ctx, cr,
+                         (gdouble) (allocation.width - HANDLE_SIZE) / 2.0,
+                         (gdouble) allocation.height * HANDLE_OFFSET,
+                         (gdouble) HANDLE_SIZE,
+                         (gdouble) allocation.height * (1.0 - 2.0 * HANDLE_OFFSET));
+    }
   else
-    orientation = GTK_ORIENTATION_HORIZONTAL;
-
-  /* paint the handle */
-  gtk_paint_handle (widget->style, widget->window,
-                    GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
-                    &(event->area), widget, "handlebox",
-                    widget->allocation.x,
-                    widget->allocation.y,
-                    widget->allocation.width,
-                    widget->allocation.height,
-                    orientation);
+    {
+      gtk_render_handle (ctx, cr,
+                         (gdouble) allocation.width * HANDLE_OFFSET,
+                         (gdouble) (allocation.height - HANDLE_SIZE) / 2.0,
+                         (gdouble) allocation.width * (1.0 - 2.0 * HANDLE_OFFSET),
+                         (gdouble) HANDLE_SIZE);
+    }
 
   return TRUE;
 }

@@ -24,7 +24,6 @@
 #include <string.h>
 #endif
 
-#include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 
@@ -33,25 +32,6 @@
 
 #include <panel/panel-dialogs.h>
 #include <panel/panel-application.h>
-#include <panel/panel-tic-tac-toe.h>
-
-
-
-static void
-panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
-                                     const gchar    *uri,
-                                     gpointer        data)
-{
-  if (g_strcmp0 ("tictactoe@xfce.org", uri) == 0)
-    {
-      /* open tic-tac-toe */
-      panel_tic_tac_toe_show ();
-    }
-  else
-    {
-      exo_gtk_url_about_dialog_hook (dialog, uri, data);
-    }
-}
 
 
 
@@ -60,22 +40,9 @@ panel_dialogs_show_about (void)
 {
   gchar **authors;
 
-  authors = g_new0 (gchar *, 4);
-  authors[0] = g_strdup_printf ("%s:\n%s\n",
-                                _("Maintainers"),
-                                "Nick Schermer <nick@xfce.org>");
-  authors[1] = g_strdup_printf ("%s:\n%s\n",
-                                _("Deskbar Mode"),
-                                "Andrzej Radecki <ndrwrdck@gmail.com>");
-  authors[2] = g_strdup_printf ("%s:\n%s\n%s\n",
-                                _("Inactive Maintainers"),
-                                "Jasper Huijsmans <jasper@xfce.org>",
-                                "Tic-tac-toe <tictactoe@xfce.org>");
-
-  gtk_about_dialog_set_email_hook (panel_dialogs_show_about_email_hook, NULL, NULL);
-#if !GTK_CHECK_VERSION (2, 18, 0)
-  gtk_about_dialog_set_url_hook (exo_gtk_url_about_dialog_hook, NULL, NULL);
-#endif
+  authors = g_new0 (gchar *, 3);
+  authors[0] = g_strdup ("Nick Schermer <nick@xfce.org>");
+  authors[1] = g_strdup ("Jasper Huijsmans <jasper@xfce.org>");
 
   gtk_show_about_dialog (NULL,
                          "authors", authors,
@@ -156,7 +123,7 @@ panel_dialogs_choose_panel (PanelApplication *application)
 
   /* setup the dialog */
   dialog = gtk_dialog_new_with_buttons (_("Add New Item"), NULL,
-                                        GTK_DIALOG_NO_SEPARATOR,
+                                        0,
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                         GTK_STOCK_ADD, GTK_RESPONSE_OK, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
@@ -164,8 +131,8 @@ panel_dialogs_choose_panel (PanelApplication *application)
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
   /* create widgets */
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), vbox, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
   gtk_widget_show (vbox);
 

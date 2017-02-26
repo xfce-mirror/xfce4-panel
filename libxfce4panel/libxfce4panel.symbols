@@ -61,16 +61,6 @@ xfce_arrow_button_set_blinking
 #endif
 #endif
 
-/* xfce-hvbox.h */
-#if IN_HEADER(__XFCE_HVBOX_H__)
-#if IN_SOURCE(__XFCE_HVBOX_C__)
-xfce_hvbox_get_type G_GNUC_CONST
-xfce_hvbox_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
-xfce_hvbox_set_orientation
-xfce_hvbox_get_orientation
-#endif
-#endif
-
 /* xfce-panel-convenience.h */
 #if IN_HEADER(__XFCE_PANEL_CONVENIENCE_H__)
 #if IN_SOURCE(__XFCE_PANEL_CONVENIENCE_C__)

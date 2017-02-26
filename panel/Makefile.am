@@ -59,7 +59,6 @@ xfce4_panel_SOURCES = \
 xfce4_panel_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(GMODULE_CFLAGS) \
-	$(EXO_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(LIBWNCK_CFLAGS) \
@@ -77,7 +76,6 @@ xfce4_panel_LDADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
-	$(EXO_LIBS) \
 	$(GMODULE_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
@@ -111,7 +109,7 @@ panel-plugin-external-wrapper-infos.h: $(srcdir)/panel-plugin-external-wrapper-i
 	$(AM_V_GEN) dbus-binding-tool --prefix=panel_plugin_external_wrapper --mode=glib-server $< > $@
 
 panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.glade Makefile
-	$(AM_V_GEN) exo-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
+	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
 
 #panel-marshal.h: $(srcdir)/panel-marshal.list Makefile
 #	$(AM_V_GEN) glib-genmarshal --header --prefix=panel_marshal $< > $@

@@ -109,15 +109,12 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
           gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
           break;
 
-        case PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA:
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR:
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE:
         case PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET:
           plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
 
-          if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA)
-            wrapper_plug_set_background_alpha (plug, g_value_get_double (value));
-          else if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR)
+          if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR)
             wrapper_plug_set_background_color (plug, g_value_get_string (value));
           else if (type == PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE)
             wrapper_plug_set_background_image (plug, g_value_get_string (value));

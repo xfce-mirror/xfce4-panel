@@ -25,7 +25,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <exo/exo.h>
 
 #include "clock.h"
 #include "clock-time.h"
@@ -275,12 +274,12 @@ xfce_clock_fuzzy_finalize (GObject *object)
 
 static gboolean
 xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
-                         ClockTime      *clock_time)
+                         ClockTime      *time)
 {
   GDateTime      *date_time;
   gint            sector;
   gint            minute, hour;
-  gchar          *string;
+  GString        *string;
   const gchar    *time_format;
   gchar          *p;
   gchar           pattern[3];
@@ -333,12 +332,25 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
           p = strchr (time_format, '%');
           panel_assert (p != NULL && g_ascii_isdigit (*(p + 1)));
         }
+      
+      string = g_string_new (NULL);
 
       /* replace the %? with the hour name */
       g_snprintf (pattern, sizeof (pattern), "%%%c", p != NULL ? *(p + 1) : '0');
-      string = exo_str_replace (time_format, pattern, _(i18n_hour_names[hour]));
-      gtk_label_set_text (GTK_LABEL (fuzzy), string);
-      g_free (string);
+      p = strstr (time_format, pattern);
+      if (p != NULL)
+        {
+          g_string_append_len (string, time_format, p - time_format);
+          g_string_append (string, _(i18n_hour_names[hour]));
+          g_string_append (string, p + strlen (pattern));
+        }
+      else
+        {
+          g_string_append (string, time_format);
+        }
+
+      gtk_label_set_text (GTK_LABEL (fuzzy), string->str);
+      g_string_free (string, TRUE);
     }
   else /* FUZZINESS_DAY */
     {
@@ -353,11 +365,11 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
 
 
 GtkWidget *
-xfce_clock_fuzzy_new (ClockTime *clock_time)
+xfce_clock_fuzzy_new (ClockTime *time)
 {
   XfceClockFuzzy *fuzzy = g_object_new (XFCE_CLOCK_TYPE_FUZZY, NULL);
 
-  fuzzy->time = clock_time;
+  fuzzy->time = time;
   fuzzy->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
                                            fuzzy->time,
                                            G_CALLBACK (xfce_clock_fuzzy_update), fuzzy);

@@ -9,5 +9,5 @@ Name: libxfce4panel
 Description: Library for the Xfce Panel
 Requires: gtk+-2.0 gmodule-2.0 glib-2.0 libxfce4util-1.0
 Version: @PACKAGE_VERSION@
-Libs: -L${libdir} -lxfce4panel-@LIBXFCE4PANEL_VERSION_API@
-Cflags: -I${includedir}/xfce4/libxfce4panel-@LIBXFCE4PANEL_VERSION_API@
+Libs: -L${libdir} -lxfce4panel-1.0
+Cflags: -I${includedir}/xfce4/libxfce4panel-1.0

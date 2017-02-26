@@ -30,7 +30,6 @@
 #include <math.h>
 #endif
 
-#include <exo/exo.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <libxfce4util/libxfce4util.h>
@@ -49,17 +48,20 @@
 
 
 
-static void       panel_plugin_external_46_finalize       (GObject              *object);
-static gboolean   panel_plugin_external_46_client_event   (GtkWidget            *widget,
-                                                           GdkEventClient       *event);
-static gchar    **panel_plugin_external_46_get_argv       (PanelPluginExternal  *external,
-                                                           gchar               **arguments);
-static void       panel_plugin_external_46_set_properties (PanelPluginExternal  *external,
-                                                           GSList               *properties);
-static gboolean   panel_plugin_external_46_remote_event   (PanelPluginExternal  *external,
-                                                           const gchar          *name,
-                                                           const GValue         *value,
-                                                           guint                *handle);
+static void              panel_plugin_external_46_finalize       (GObject              *object);
+static void              panel_plugin_external_46_realize        (GtkWidget            *widget);
+static void              panel_plugin_external_46_unrealize      (GtkWidget            *widget);
+static GdkFilterReturn   panel_plugin_external_46_event_filter   (GdkXEvent            *xevent,
+                                                                  GdkEvent             *event,
+                                                                  gpointer              data);
+static gchar           **panel_plugin_external_46_get_argv       (PanelPluginExternal  *external,
+                                                                  gchar               **arguments);
+static void              panel_plugin_external_46_set_properties (PanelPluginExternal  *external,
+                                                                  GSList               *properties);
+static gboolean          panel_plugin_external_46_remote_event   (PanelPluginExternal  *external,
+                                                                  const gchar          *name,
+                                                                  const GValue         *value,
+                                                                  guint                *handle);
 
 
 
@@ -77,7 +79,7 @@ struct _PanelPluginExternal46
 
 
 
-static GdkAtom panel_atom = GDK_NONE;
+static Atom panel_atom = None;
 
 
 
@@ -96,14 +98,15 @@ panel_plugin_external_46_class_init (PanelPluginExternal46Class *klass)
   gobject_class->finalize = panel_plugin_external_46_finalize;
 
   gtkwidget_class = GTK_WIDGET_CLASS (klass);
-  gtkwidget_class->client_event = panel_plugin_external_46_client_event;
+  gtkwidget_class->realize = panel_plugin_external_46_realize;
+  gtkwidget_class->unrealize = panel_plugin_external_46_unrealize;
 
   plugin_external_class = PANEL_PLUGIN_EXTERNAL_CLASS (klass);
   plugin_external_class->get_argv = panel_plugin_external_46_get_argv;
   plugin_external_class->set_properties = panel_plugin_external_46_set_properties;
   plugin_external_class->remote_event = panel_plugin_external_46_remote_event;
 
-  panel_atom = gdk_atom_intern_static_string (_PANEL_CLIENT_EVENT_ATOM);
+  panel_atom = XInternAtom( gdk_x11_get_default_xdisplay (), _PANEL_CLIENT_EVENT_ATOM, False);
 }
 
 
@@ -128,16 +131,55 @@ panel_plugin_external_46_finalize (GObject *object)
 
 
 
-static gboolean
-panel_plugin_external_46_client_event (GtkWidget      *widget,
-                                       GdkEventClient *event)
+static void
+panel_plugin_external_46_realize (GtkWidget *widget)
 {
-  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (widget);
-  gint                 provider_signal;
+  GdkWindow *window;
 
-  if (event->message_type == panel_atom)
+  GTK_WIDGET_CLASS (panel_plugin_external_46_parent_class)->realize (widget);
+
+  window = gtk_widget_get_window (widget);
+  if (G_UNLIKELY (window == NULL))
+    return;
+
+  gdk_window_add_filter (window, panel_plugin_external_46_event_filter, widget);
+}
+
+
+
+static void
+panel_plugin_external_46_unrealize (GtkWidget *widget)
+{
+  GdkWindow *window;
+
+  window = gtk_widget_get_window (widget);
+  if (G_LIKELY (window != NULL))
     {
-      provider_signal = event->data.s[0];
+      gdk_window_remove_filter (window, panel_plugin_external_46_event_filter, NULL);
+    }
+
+  GTK_WIDGET_CLASS (panel_plugin_external_46_parent_class)->unrealize (widget);
+}
+
+
+
+static GdkFilterReturn
+panel_plugin_external_46_event_filter (GdkXEvent *xevent,
+                                       GdkEvent  *event,
+                                       gpointer   data)
+{
+  PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (data);
+  gint                 provider_signal;
+  XClientMessageEvent *client_event;
+
+  if (((XEvent*)xevent)->type != ClientMessage)
+    return GDK_FILTER_CONTINUE;
+
+  client_event = (XClientMessageEvent*)xevent;
+
+  if (client_event->message_type == panel_atom)
+    {
+      provider_signal = client_event->data.s[0];
 
       switch (provider_signal)
         {
@@ -156,10 +198,10 @@ panel_plugin_external_46_client_event (GtkWidget      *widget,
           break;
         }
 
-      return FALSE;
+      return GDK_FILTER_REMOVE;
     }
 
-  return TRUE;
+  return GDK_FILTER_CONTINUE;
 }
 
 
@@ -185,7 +227,7 @@ panel_plugin_external_46_get_argv (PanelPluginExternal  *external,
   argv[PLUGIN_ARGV_0] = g_strdup (panel_module_get_filename (external->module));
   argv[PLUGIN_ARGV_FILENAME] = g_strdup (""); /* unused, for wrapper only */
   argv[PLUGIN_ARGV_UNIQUE_ID] = g_strdup_printf ("%d", external->unique_id);;
-  argv[PLUGIN_ARGV_SOCKET_ID] = g_strdup_printf ("%u", gtk_socket_get_id (GTK_SOCKET (external)));;
+  argv[PLUGIN_ARGV_SOCKET_ID] = g_strdup_printf ("%lu", gtk_socket_get_id (GTK_SOCKET (external)));;
   argv[PLUGIN_ARGV_NAME] = g_strdup (panel_module_get_name (external->module));
   argv[PLUGIN_ARGV_DISPLAY_NAME] = g_strdup (panel_module_get_display_name (external->module));
   argv[PLUGIN_ARGV_COMMENT] = g_strdup (panel_module_get_comment (external->module));
@@ -213,24 +255,23 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
 {
   PanelPluginExternal46 *external46 = PANEL_PLUGIN_EXTERNAL_46 (external);
   GSList                *li;
-  GdkEventClient         event;
+  XEvent                 event;
   PluginProperty        *property;
   GdkColor               color = { 0, };
   GdkWindow             *window;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
-  panel_return_if_fail (panel_atom != GDK_NONE);
+  panel_return_if_fail (panel_atom != None);
   panel_return_if_fail (PANEL_IS_MODULE (external->module));
 
-  if (!GTK_WIDGET_REALIZED (external))
+  if (!gtk_widget_get_realized (GTK_WIDGET (external)))
     return;
 
-  event.type = GDK_CLIENT_EVENT;
-  panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (external)->window));
-  event.window = GTK_WIDGET (external)->window;
-  event.send_event = TRUE;
-  event.message_type = panel_atom;
-  event.data_format = 16;
+  event.xclient.type = ClientMessage;
+  panel_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (GTK_WIDGET (external))));
+  event.xclient.window = gdk_x11_window_get_xid (gtk_widget_get_window (GTK_WIDGET (external)));
+  event.xclient.message_type = panel_atom;
+  event.xclient.format = 16;
 
   gdk_error_trap_push ();
 
@@ -238,7 +279,7 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
     {
       property = li->data;
 
-      event.data.s[0] = property->type;
+      event.xclient.data.s[0] = property->type;
 
       switch (property->type)
         {
@@ -246,25 +287,25 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
         case PROVIDER_PROP_TYPE_SET_MODE:
         case PROVIDER_PROP_TYPE_SET_NROWS:
         case PROVIDER_PROP_TYPE_SET_SCREEN_POSITION:
-          event.data.s[1] = g_value_get_int (&property->value);
+          event.xclient.data.s[1] = g_value_get_int (&property->value);
           break;
 
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA:
-          event.data.s[1] = g_value_get_double (&property->value) * 100.00;
+          event.xclient.data.s[1] = g_value_get_double (&property->value) * 100.00;
           break;
 
         case PROVIDER_PROP_TYPE_SET_LOCKED:
         case PROVIDER_PROP_TYPE_SET_SENSITIVE:
-          event.data.s[1] = g_value_get_boolean (&property->value);
+          event.xclient.data.s[1] = g_value_get_boolean (&property->value);
           break;
 
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR:
           if (gdk_color_parse (g_value_get_string (&property->value), &color))
             {
-              event.data.s[1] = color.red;
-              event.data.s[2] = color.green;
-              event.data.s[3] = color.blue;
-              event.data.s[4] = 0;
+              event.xclient.data.s[1] = color.red;
+              event.xclient.data.s[2] = color.green;
+              event.xclient.data.s[3] = color.blue;
+              event.xclient.data.s[4] = 0;
             }
           break;
 
@@ -284,7 +325,7 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
         case PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET:
         case PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE:
         case PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT:
-          event.data.s[1] = 0;
+          event.xclient.data.s[1] = 0;
           break;
 
         default:
@@ -296,7 +337,11 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
 
       window = gtk_socket_get_plug_window (GTK_SOCKET (external));
       panel_return_if_fail (GDK_IS_WINDOW (window));
-      gdk_event_send_client_message ((GdkEvent *) &event, GDK_WINDOW_XID (window));
+      XSendEvent (gdk_x11_display_get_xdisplay (gdk_window_get_display (window)),
+                  gdk_x11_window_get_xid (window),
+                  False,
+                  NoEventMask,
+                  &event);
     }
 
   bailout:

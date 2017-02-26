@@ -28,7 +28,6 @@
 #include <time.h>
 #endif
 
-#include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
 
 #include <common/panel-private.h>
@@ -203,7 +202,7 @@ panel_module_factory_load_modules_dir (PanelModuleFactory *factory,
 
           /* check if this is the launcher */
           if (!factory->has_launcher)
-            factory->has_launcher = exo_str_is_equal (LAUNCHER_PLUGIN_NAME, internal_name);
+            factory->has_launcher = g_strcmp0 (LAUNCHER_PLUGIN_NAME, internal_name) == 0;
         }
       else
         {
@@ -249,8 +248,8 @@ panel_module_factory_modules_cleanup (gpointer key,
 
   /* if we're going to remove this item, check if it is the launcher */
   if (remove_from_table
-      && exo_str_is_equal (LAUNCHER_PLUGIN_NAME,
-                           panel_module_get_name (module)))
+      && g_strcmp0 (LAUNCHER_PLUGIN_NAME,
+                    panel_module_get_name (module)) == 0)
     factory->has_launcher = FALSE;
 
   return remove_from_table;

@@ -24,7 +24,6 @@
 #include <stdlib.h>
 #endif
 
-#include <exo/exo.h>
 #include <glib/gstdio.h>
 #include <xfconf/xfconf.h>
 #include <libxfce4util/libxfce4util.h>
@@ -289,7 +288,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   const PanelProperty  properties[] =
   {
     { "position-locked", G_TYPE_BOOLEAN },
-    { "autohide-behavior", G_TYPE_UINT },
+    { "autohide", G_TYPE_BOOLEAN },
     { "span-monitors", G_TYPE_BOOLEAN },
     { "mode", G_TYPE_UINT },
     { "size", G_TYPE_UINT },
@@ -298,8 +297,8 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "length-adjust", G_TYPE_BOOLEAN },
     { "enter-opacity", G_TYPE_UINT },
     { "leave-opacity", G_TYPE_UINT },
-    { "background-alpha", G_TYPE_UINT },
     { "background-style", G_TYPE_UINT },
+    { "background-rgba", GDK_TYPE_RGBA },
     { "background-color", GDK_TYPE_COLOR },
     { "background-image", G_TYPE_STRING },
     { "output-name", G_TYPE_STRING },
@@ -312,9 +311,6 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
 
   /* create the property base */
   property_base = g_strdup_printf ("/panels/panel-%d", panel_window_get_id (window));
-
-  /* migrate old autohide property */
-  panel_window_migrate_autohide_property (window, application->xfconf, property_base);
 
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
@@ -509,9 +505,7 @@ panel_application_wait_for_window_manager_destroyed (gpointer data)
 
   /* start loading the panels, hopefully a window manager is found, but it
    * probably also works fine without... */
-  GDK_THREADS_ENTER ();
   panel_application_load_real (application);
-  GDK_THREADS_LEAVE ();
 }
 #endif
 
@@ -528,7 +522,7 @@ panel_application_plugin_move_drag_data_get (GtkWidget        *item,
   /* set some data, we never use this, but GTK_DEST_DEFAULT_ALL
    * used in the item dialog requires this */
   gtk_selection_data_set (selection_data,
-                          selection_data->target, 8,
+                          gtk_selection_data_get_target (selection_data), 8,
                           (const guchar *) "0", 1);
 }
 
@@ -579,7 +573,7 @@ panel_application_plugin_move (GtkWidget        *item,
   module = panel_module_get_from_plugin_provider (XFCE_PANEL_PLUGIN_PROVIDER (item));
   icon_name = panel_module_get_icon_name (module);
   theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (item));
-  if (!exo_str_is_empty (icon_name)
+  if (!panel_str_is_empty (icon_name)
       && gtk_icon_theme_has_icon (theme, icon_name))
     gtk_drag_set_icon_name (context, icon_name, 0, 0);
   else
@@ -603,7 +597,7 @@ panel_application_plugin_delete_config (PanelApplication *application,
   gchar *filename, *path;
 
   panel_return_if_fail (PANEL_IS_APPLICATION (application));
-  panel_return_if_fail (!exo_str_is_empty (name));
+  panel_return_if_fail (!panel_str_is_empty (name));
   panel_return_if_fail (unique_id != -1);
 
   /* remove the xfconf property */
@@ -908,10 +902,10 @@ panel_application_drag_data_received (PanelWindow      *window,
       switch (info)
         {
         case TARGET_PLUGIN_NAME:
-          if (G_LIKELY (selection_data->length > 0))
+          if (G_LIKELY (gtk_selection_data_get_length (selection_data) > 0))
             {
               /* create a new item with a unique id */
-              name = (const gchar *) selection_data->data;
+              name = (const gchar *) gtk_selection_data_get_data (selection_data);
               succeed = panel_application_plugin_insert (application, window, name,
                                                          -1, NULL, application->drop_index);
             }
@@ -1220,8 +1214,8 @@ panel_application_load (PanelApplication  *application,
 
       /* setup timeout to check for a window manager */
       application->wait_for_wm_timeout_id =
-          g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, 50, panel_application_wait_for_window_manager,
-                              wfwm, panel_application_wait_for_window_manager_destroyed);
+          gdk_threads_add_timeout_full (G_PRIORITY_DEFAULT_IDLE, 50, panel_application_wait_for_window_manager,
+                                        wfwm, panel_application_wait_for_window_manager_destroyed);
     }
   else
     {
@@ -1523,7 +1517,7 @@ panel_application_new_window (PanelApplication *application,
   /* add the itembar */
   itembar = panel_itembar_new ();
   for (i = 0; i < G_N_ELEMENTS (props); i++)
-    exo_binding_new (G_OBJECT (window), props[i], G_OBJECT (itembar), props[i]);
+    g_object_bind_property (G_OBJECT (window), props[i], G_OBJECT (itembar), props[i], G_BINDING_DEFAULT);
   gtk_container_add (GTK_CONTAINER (window), itembar);
   gtk_widget_show (itembar);
 

@@ -7,7 +7,7 @@ AM_CPPFLAGS = \
 	$(PLATFORM_CPPFLAGS)
 
 lib_LTLIBRARIES = \
-	libxfce4panel-1.0.la
+	libxfce4panel-2.0.la
 
 libxfce4panel_public_built_sources = \
 	libxfce4panel-enum-types.h
@@ -37,56 +37,6 @@ libxfce4panel_includedir = \
 
 libxfce4panel_include_HEADERS = \
 	$(libxfce4panel_public_built_sources) \
-	$(libxfce4panel_headers) \
-	xfce-hvbox.h
-
-libxfce4panel_1_0_la_SOURCES = \
-	$(libxfce4panel_built_sources) \
-	$(libxfce4panel_headers) \
-	xfce-hvbox.h \
-	libxfce4panel-config.c \
-	xfce-arrow-button.c \
-	xfce-hvbox.c \
-	xfce-panel-convenience.c \
-	xfce-panel-plugin.c \
-	xfce-panel-plugin-provider.c \
-	xfce-panel-image.c
-
-libxfce4panel_1_0_la_CFLAGS =	 \
-	$(GTK_CFLAGS) \
-	$(LIBXFCE4UTIL_CFLAGS) \
-	$(PLATFORM_CFLAGS)
-
-libxfce4panel_1_0_la_LDFLAGS = \
-	-no-undefined \
-	-export-dynamic \
-	-version-info $(LIBXFCE4PANEL_VERINFO) \
-	-export-symbols-regex '^[^_].*' \
-	$(PLATFORM_LDFLAGS)
-
-libxfce4panel_1_0_la_LIBADD = \
-	$(GTK_LIBS) \
-	$(LIBXFCE4UTIL_LIBS) \
-	-lm
-
-#
-# Pkg-config file
-#
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).pc
-
-#
-# GTK+ 3 support library
-#
-if ENABLE_GTK3_LIBRARY
-
-lib_LTLIBRARIES += libxfce4panel-2.0.la
-
-libxfce4panel2_includedir = \
-	$(includedir)/xfce4/libxfce4panel-2.0/libxfce4panel
-
-libxfce4panel2_include_HEADERS = \
-	$(libxfce4panel_public_built_sources) \
 	$(libxfce4panel_headers)
 
 libxfce4panel_2_0_la_SOURCES = \
@@ -100,7 +50,7 @@ libxfce4panel_2_0_la_SOURCES = \
 	xfce-panel-image.c
 
 libxfce4panel_2_0_la_CFLAGS =	 \
-	$(GTK3_CFLAGS) \
+	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
@@ -112,11 +62,60 @@ libxfce4panel_2_0_la_LDFLAGS = \
 	$(PLATFORM_LDFLAGS)
 
 libxfce4panel_2_0_la_LIBADD = \
-	$(GTK3_LIBS) \
+	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	-lm
 
-pkgconfig_DATA += libxfce4panel-2.0.pc
+#
+# Pkg-config file
+#
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).pc
+
+#
+# Gtk+ 2 support library
+#
+if ENABLE_GTK2_LIBRARY
+
+lib_LTLIBRARIES += libxfce4panel-1.0.la
+
+libxfce4panel1_includedir = \
+	$(includedir)/xfce4/libxfce4panel-1.0/libxfce4panel
+
+libxfce4panel1_include_HEADERS = \
+	$(libxfce4panel_public_built_sources) \
+	$(libxfce4panel_headers) \
+	xfce-hvbox.h
+
+libxfce4panel_1_0_la_SOURCES = \
+	$(libxfce4panel_built_sources) \
+	$(libxfce4panel_headers) \
+	libxfce4panel-config.c \
+	xfce-arrow-button.c \
+	xfce-hvbox.c \
+	xfce-panel-convenience.c \
+	xfce-panel-plugin.c \
+	xfce-panel-plugin-provider.c \
+	xfce-panel-image.c
+
+libxfce4panel_1_0_la_CFLAGS =	 \
+	$(GTK2_CFLAGS) \
+	$(LIBXFCE4UTIL_CFLAGS) \
+	$(PLATFORM_CFLAGS)
+
+libxfce4panel_1_0_la_LDFLAGS = \
+	-no-undefined \
+	-export-dynamic \
+	-version-info $(LIBXFCE4PANEL_VERINFO) \
+	-export-symbols-regex '^[^_].*' \
+	$(PLATFORM_LDFLAGS)
+
+libxfce4panel_1_0_la_LIBADD = \
+	$(GTK2_LIBS) \
+	$(LIBXFCE4UTIL_LIBS) \
+	-lm
+
+pkgconfig_DATA += libxfce4panel-1.0.pc
 
 endif
 

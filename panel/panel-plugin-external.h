@@ -20,6 +20,7 @@
 #define __PANEL_PLUGIN_EXTERNAL_H__
 
 #include <gtk/gtk.h>
+#include <gtk/gtkx.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4panel/xfce-panel-plugin-provider.h>
 #include <panel/panel-module.h>
@@ -85,11 +86,8 @@ GType        panel_plugin_external_get_type             (void) G_GNUC_CONST;
 
 void         panel_plugin_external_restart              (PanelPluginExternal  *external);
 
-void         panel_plugin_external_set_background_alpha (PanelPluginExternal  *external,
-                                                         gdouble               alpha);
-
 void         panel_plugin_external_set_background_color (PanelPluginExternal  *external,
-                                                         const GdkColor       *color);
+                                                         const GdkRGBA        *color);
 
 void         panel_plugin_external_set_background_image (PanelPluginExternal  *external,
                                                          const gchar          *image);

@@ -25,7 +25,6 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <exo/exo.h>
 #include <dbus/dbus-glib.h>
 
 #include <common/panel-private.h>
@@ -243,7 +242,7 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                    g_param_spec_boxed ("items",
                                                        NULL, NULL,
                                                        PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
-                                                       EXO_PARAM_READWRITE));
+                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_APPEARANCE,
@@ -252,21 +251,21 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                                       APPEARANCE_TYPE_BUTTONS,
                                                       APPEARANCE_TYPE_MENU,
                                                       APPEARANCE_TYPE_MENU,
-                                                      EXO_PARAM_READWRITE));
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_INVERT_ORIENTATION,
                                    g_param_spec_boolean ("invert-orientation",
                                                          NULL, NULL,
                                                          FALSE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_ASK_CONFIRMATION,
                                    g_param_spec_boolean ("ask-confirmation",
                                                          NULL, NULL,
                                                          TRUE,
-                                                         EXO_PARAM_READWRITE));
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   menu_icon_size = gtk_icon_size_from_name ("panel-actions-menu");
   if (menu_icon_size == GTK_ICON_SIZE_INVALID)
@@ -596,18 +595,22 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
     return;
 
   combo = gtk_builder_get_object (builder, "combo-mode");
-  exo_mutual_binding_new (G_OBJECT (plugin), "appearance",
-                          G_OBJECT (combo), "active");
+  g_object_bind_property (G_OBJECT (plugin), "appearance",
+                          G_OBJECT (combo), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   object = gtk_builder_get_object (builder, "invert-orientation");
-  exo_mutual_binding_new (G_OBJECT (plugin), "invert-orientation",
-                          G_OBJECT (object), "active");
-  exo_binding_new_with_negation (G_OBJECT (combo), "active",
-                                 G_OBJECT (object), "sensitive");
+  g_object_bind_property (G_OBJECT (plugin), "invert-orientation",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_object_bind_property (G_OBJECT (combo), "active",
+                          G_OBJECT (object), "sensitive",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL | G_BINDING_INVERT_BOOLEAN);
 
   object = gtk_builder_get_object (builder, "confirmation-dialog");
-  exo_mutual_binding_new (G_OBJECT (plugin), "ask-confirmation",
-                          G_OBJECT (object), "active");
+  g_object_bind_property (G_OBJECT (plugin), "ask-confirmation",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   store = gtk_builder_get_object (builder, "items-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
@@ -626,7 +629,7 @@ actions_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       /* get the value and check if it is within range */
       val = g_ptr_array_index (plugin->items, i);
       name = g_value_get_string (val);
-      if (exo_str_is_empty (name))
+      if (panel_str_is_empty (name))
         continue;
 
       /* find the entry in the available actions */
@@ -1111,7 +1114,7 @@ actions_plugin_pack_idle (gpointer data)
 
       if (plugin->invert_orientation)
         orientation = !orientation;
-      box = xfce_hvbox_new (orientation, FALSE, 0);
+      box = gtk_box_new (orientation, 0);
       gtk_container_add (GTK_CONTAINER (plugin), box);
       gtk_widget_show (box);
 
@@ -1145,11 +1148,11 @@ actions_plugin_pack_idle (gpointer data)
     {
       /* get a decent username, not the glib defaults */
       username = g_get_real_name ();
-      if (exo_str_is_empty (username)
+      if (panel_str_is_empty (username)
           || strcmp (username, "Unknown") == 0)
         {
           username = g_get_user_name ();
-          if (exo_str_is_empty (username)
+          if (panel_str_is_empty (username)
               || strcmp (username, "somebody") == 0)
             username = _("John Doe");
         }
