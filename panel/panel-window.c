@@ -35,6 +35,8 @@
 #include <X11/Xlib.h>
 #endif
 
+#include <libwnck/libwnck.h>
+
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <common/panel-private.h>
@@ -173,7 +175,7 @@ enum
   PROP_LENGTH,
   PROP_LENGTH_ADJUST,
   PROP_POSITION_LOCKED,
-  PROP_AUTOHIDE,
+  PROP_AUTOHIDE_BEHAVIOR,
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
   PROP_POSITION,
@@ -186,6 +188,13 @@ enum _PluginProp
   PLUGIN_PROP_SCREEN_POSITION,
   PLUGIN_PROP_NROWS,
   PLUGIN_PROP_SIZE
+};
+
+enum _AutohideBehavior
+{
+  AUTOHIDE_BEHAVIOR_NEVER = 0,
+  AUTOHIDE_BEHAVIOR_INTELLIGENTLY,
+  AUTOHIDE_BEHAVIOR_ALWAYS,
 };
 
 enum _AutohideState
@@ -296,7 +305,10 @@ struct _PanelWindow
   GdkRectangle         alloc;
 
   /* autohiding */
+  WnckScreen          *wnck_screen;
+  WnckWindow          *wnck_active_window;
   GtkWidget           *autohide_window;
+  AutohideBehavior     autohide_behavior;
   AutohideState        autohide_state;
   guint                autohide_timeout_id;
   gint                 autohide_block;
@@ -414,10 +426,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_AUTOHIDE,
-                                   g_param_spec_boolean ("autohide", NULL, NULL,
-                                                         FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                   PROP_AUTOHIDE_BEHAVIOR,
+                                   g_param_spec_uint ("autohide-behavior", NULL, NULL,
+                                                      AUTOHIDE_BEHAVIOR_NEVER,
+                                                      AUTOHIDE_BEHAVIOR_ALWAYS,
+                                                      AUTOHIDE_BEHAVIOR_NEVER,
+                                                      EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SPAN_MONITORS,
@@ -483,6 +497,8 @@ panel_window_init (PanelWindow *window)
   window->id = -1;
   window->locked = TRUE;
   window->screen = NULL;
+  window->wnck_screen = NULL;
+  window->wnck_active_window = NULL;
   window->struts_edge = STRUTS_EDGE_NONE;
   window->struts_disabled = FALSE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
@@ -493,6 +509,7 @@ panel_window_init (PanelWindow *window)
   window->snap_position = SNAP_POSITION_NONE;
   window->span_monitors = FALSE;
   window->position_locked = FALSE;
+  window->autohide_behavior = AUTOHIDE_BEHAVIOR_NEVER;
   window->autohide_state = AUTOHIDE_DISABLED;
   window->autohide_timeout_id = 0;
   window->autohide_block = 0;
@@ -560,8 +577,8 @@ panel_window_get_property (GObject    *object,
       g_value_set_boolean (value, window->position_locked);
       break;
 
-    case PROP_AUTOHIDE:
-      g_value_set_boolean (value, !!(window->autohide_state != AUTOHIDE_DISABLED));
+    case PROP_AUTOHIDE_BEHAVIOR:
+      g_value_set_uint (value, window->autohide_behavior);
       break;
 
     case PROP_SPAN_MONITORS:
@@ -684,8 +701,9 @@ panel_window_set_property (GObject      *object,
         }
       break;
 
-    case PROP_AUTOHIDE:
-      panel_window_set_autohide (window, g_value_get_boolean (value));
+    case PROP_AUTOHIDE_BEHAVIOR:
+      panel_window_set_autohide_behavior (window, MIN (g_value_get_uint (value),
+                                                       AUTOHIDE_BEHAVIOR_ALWAYS));
       break;
 
     case PROP_SPAN_MONITORS:
@@ -750,6 +768,9 @@ static void
 panel_window_finalize (GObject *object)
 {
   PanelWindow *window = PANEL_WINDOW (object);
+
+  /* disconnect from active screen and window */
+  panel_window_update_autohide_window (window, NULL, NULL);
 
   /* stop running autohide timeout */
   if (G_UNLIKELY (window->autohide_timeout_id != 0))
@@ -1492,6 +1513,8 @@ panel_window_screen_changed (GtkWidget *widget,
                              GdkScreen *previous_screen)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
+  WnckWindow  *wnck_window;
+  WnckScreen  *wnck_screen;
   GdkScreen   *screen;
 
   if (G_LIKELY (GTK_WIDGET_CLASS (panel_window_parent_class)->screen_changed != NULL))
@@ -1525,6 +1548,11 @@ panel_window_screen_changed (GtkWidget *widget,
 
   /* update the screen layout */
   panel_window_screen_layout_changed (screen, window);
+
+  /* update wnck screen to be used for the autohide feature */
+  wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
+  wnck_window = wnck_screen_get_active_window (wnck_screen);
+  panel_window_update_autohide_window (window, wnck_screen, wnck_window);
 }
 
 
@@ -2172,6 +2200,85 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
 
 
 
+static void
+panel_window_active_window_changed (WnckScreen  *screen,
+                                    WnckWindow  *previous_window,
+                                    PanelWindow *window)
+{
+  WnckWindow *active_window;
+
+  panel_return_if_fail (WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  /* obtain new active window from the screen */
+  active_window = wnck_screen_get_active_window (screen);
+
+  /* update the active window to be used for the autohide feature */
+  panel_window_update_autohide_window (window, screen, active_window);
+}
+
+
+
+static void
+panel_window_active_window_geometry_changed (WnckWindow  *active_window,
+                                             PanelWindow *window)
+{
+  GdkRectangle panel_area;
+  GdkRectangle window_area;
+
+  panel_return_if_fail (WNCK_IS_WINDOW (active_window));
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  /* ignore if for some reason the active window does not match the one we know */
+  if (G_UNLIKELY (window->wnck_active_window != active_window))
+    return;
+
+  /* only react to active window geometry changes if we are doing
+   * intelligent autohiding */
+  if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+    {
+      if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
+        {
+          /* obtain position and dimensions from the active window */
+          wnck_window_get_geometry (active_window,
+                                    &window_area.x, &window_area.y,
+                                    &window_area.width, &window_area.height);
+
+          /* obtain position and dimension from the panel */
+          panel_window_size_allocate_set_xy (window,
+                                             window->alloc.width,
+                                             window->alloc.height,
+                                             &panel_area.x,
+                                             &panel_area.y);
+          gtk_window_get_size (GTK_WINDOW (window),
+                               &panel_area.width,
+                               &panel_area.height);
+
+          /* show/hide the panel, depending on whether the active window overlaps
+           * with its coordinates */
+          if (window->autohide_state != AUTOHIDE_HIDDEN)
+            {
+              if (gdk_rectangle_intersect (&panel_area,  &window_area, NULL))
+                panel_window_autohide_queue (window, AUTOHIDE_HIDDEN);
+            }
+          else
+            {
+              if (!gdk_rectangle_intersect (&panel_area, &window_area, NULL))
+                panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+            }
+        }
+      else
+        {
+          /* make the panel visible if it isn't at the moment and the active
+           * window is the desktop */
+          if (window->autohide_state != AUTOHIDE_VISIBLE)
+            panel_window_autohide_queue (window, AUTOHIDE_VISIBLE);
+        }
+    }
+}
+
+
+
 static gboolean
 panel_window_autohide_timeout (gpointer user_data)
 {
@@ -2307,8 +2414,8 @@ panel_window_autohide_event (GtkWidget        *widget,
 
 
 static void
-panel_window_set_autohide (PanelWindow *window,
-                           gboolean     autohide)
+panel_window_set_autohide_behavior (PanelWindow *window,
+                                    AutohideBehavior behavior)
 {
   GtkWidget   *popup;
   guint        i;
@@ -2319,58 +2426,83 @@ panel_window_set_autohide (PanelWindow *window,
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
 
-  if ((window->autohide_state != AUTOHIDE_DISABLED) == autohide)
+  /* do nothing if the behavior hasn't changed at all */
+  if (window->autohide_behavior == behavior)
     return;
 
-  /* respond to drag motion */
-  gtk_drag_dest_set_track_motion (GTK_WIDGET (window), autohide);
+  /* remember the new behavior */
+  window->autohide_behavior = behavior;
 
-  if (autohide)
+    /* create an autohide window only if we are autohiding at all */
+    if (window->autohide_behavior != AUTOHIDE_BEHAVIOR_NEVER)
     {
-      /* create the window */
-      panel_return_if_fail (window->autohide_window == NULL);
-      popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
-                            "type", GTK_WINDOW_TOPLEVEL,
-                            "decorated", FALSE,
-                            "resizable", TRUE,
-                            "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
-                            "gravity", GDK_GRAVITY_STATIC,
-                            "name", "XfcePanelWindowHidden",
-                            NULL);
-
-      /* move the window offscreen */
-      panel_base_window_move_resize (PANEL_BASE_WINDOW (popup),
-                                     -9999, -9999, 3, 3);
-
-      /* bind some properties to sync the two windows */
-      for (i = 0; i < G_N_ELEMENTS (properties); i++)
+      /* create an authoide window; doing this only when it doesn't exist
+       * yet allows us to transition between "always autohide" and "intelligently
+       * autohide" without recreating the window */
+      if (window->autohide_window == NULL)
         {
-          g_object_bind_property (G_OBJECT (window), properties[i],
-                                  G_OBJECT (popup), properties[i],
-                                  G_BINDING_SYNC_CREATE);
+          /* create the window */
+          panel_return_if_fail (window->autohide_window == NULL);
+          popup = g_object_new (PANEL_TYPE_BASE_WINDOW,
+                                "type", GTK_WINDOW_TOPLEVEL,
+                                "decorated", FALSE,
+                                "resizable", TRUE,
+                                "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
+                                "gravity", GDK_GRAVITY_STATIC,
+                                "name", "XfcePanelWindowHidden",
+                                NULL);
+
+          /* move the window offscreen */
+          panel_base_window_move_resize (PANEL_BASE_WINDOW (popup),
+                                         -9999, -9999, 3, 3);
+
+          /* bind some properties to sync the two windows */
+          for (i = 0; i < G_N_ELEMENTS (properties); i++)
+            {
+              exo_binding_new (G_OBJECT (window), properties[i],
+                               G_OBJECT (popup), properties[i]);
+            }
+
+          /* respond to drag motion */
+          gtk_drag_dest_set_track_motion (GTK_WIDGET (window), TRUE);
+
+          /* signals for pointer enter/leave events */
+          g_signal_connect (G_OBJECT (popup), "enter-notify-event",
+              G_CALLBACK (panel_window_autohide_event), window);
+          g_signal_connect (G_OBJECT (popup), "leave-notify-event",
+              G_CALLBACK (panel_window_autohide_event), window);
+
+          /* show/hide the panel on drag events */
+          gtk_drag_dest_set (popup, 0, NULL, 0, 0);
+          gtk_drag_dest_set_track_motion (popup, TRUE);
+          g_signal_connect (G_OBJECT (popup), "drag-motion",
+              G_CALLBACK (panel_window_autohide_drag_motion), window);
+          g_signal_connect (G_OBJECT (popup), "drag-leave",
+              G_CALLBACK (panel_window_autohide_drag_leave), window);
+
+          /* show the window */
+          window->autohide_window = popup;
+          gtk_widget_show (popup);
         }
 
-      /* signals for pointer enter/leave events */
-      g_signal_connect (G_OBJECT (popup), "enter-notify-event",
-          G_CALLBACK (panel_window_autohide_event), window);
-      g_signal_connect (G_OBJECT (popup), "leave-notify-event",
-          G_CALLBACK (panel_window_autohide_event), window);
-
-      /* show/hide the panel on drag events */
-      gtk_drag_dest_set (popup, 0, NULL, 0, 0);
-      gtk_drag_dest_set_track_motion (popup, TRUE);
-      g_signal_connect (G_OBJECT (popup), "drag-motion",
-          G_CALLBACK (panel_window_autohide_drag_motion), window);
-      g_signal_connect (G_OBJECT (popup), "drag-leave",
-          G_CALLBACK (panel_window_autohide_drag_leave), window);
-
-      /* show the window */
-      window->autohide_window = popup;
-      gtk_widget_show (popup);
-
-      /* start autohide */
-      panel_window_autohide_queue (window,
-          window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_BLOCKED);
+      if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_ALWAYS)
+        {
+          /* start autohide by hiding the panel straight away */
+          if (window->autohide_state != AUTOHIDE_HIDDEN)
+            {
+              panel_window_autohide_queue (window,
+                  window->autohide_block == 0 ? AUTOHIDE_POPDOWN_SLOW : AUTOHIDE_BLOCKED);
+            }
+        }
+      else if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+        {
+          /* start intelligent autohide by making the panel visible initially */
+          if (window->autohide_state != AUTOHIDE_VISIBLE)
+            {
+              panel_window_autohide_queue (window,
+                  window->autohide_block == 0 ? AUTOHIDE_POPUP : AUTOHIDE_BLOCKED);
+            }
+        }
     }
   else if (window->autohide_window != NULL)
     {
@@ -2381,6 +2513,64 @@ panel_window_set_autohide (PanelWindow *window,
       panel_return_if_fail (GTK_IS_WINDOW (window->autohide_window));
       gtk_widget_destroy (window->autohide_window);
       window->autohide_window = NULL;
+    }
+}
+
+
+
+static void
+panel_window_update_autohide_window (PanelWindow *window,
+                                     WnckScreen  *screen,
+                                     WnckWindow  *active_window)
+{
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+  panel_return_if_fail (screen == NULL || WNCK_IS_SCREEN (screen));
+  panel_return_if_fail (active_window == NULL || WNCK_IS_WINDOW (active_window));
+
+  /* update current screen */
+  if (screen != window->wnck_screen)
+    {
+      /* disconnect from previous screen */
+      if (G_LIKELY (window->wnck_screen != NULL))
+        {
+          g_signal_handlers_disconnect_by_func (window->wnck_screen,
+              panel_window_active_window_changed, window);
+        }
+
+      /* remember new screen */
+      window->wnck_screen = screen;
+
+      /* connect to the new screen */
+      if (screen != NULL)
+        {
+          g_signal_connect (G_OBJECT (screen), "active-window-changed",
+              G_CALLBACK (panel_window_active_window_changed), window);
+        }
+    }
+
+  /* update active window */
+  if (G_LIKELY (active_window != window->wnck_active_window))
+    {
+      /* disconnect from previously active window */
+      if (G_LIKELY (window->wnck_active_window != NULL))
+        {
+          g_signal_handlers_disconnect_by_func (window->wnck_active_window,
+              panel_window_active_window_geometry_changed, window);
+        }
+
+      /* remember the new window */
+      window->wnck_active_window = active_window;
+
+      /* connect to the new window but only if it is not a desktop/root-type window */
+      if (active_window != NULL)
+        {
+          g_signal_connect (G_OBJECT (active_window), "geometry-changed",
+              G_CALLBACK (panel_window_active_window_geometry_changed), window);
+
+          /* simulate a geometry change for immediate hiding when the new active
+           * window already overlaps the panel */
+          panel_window_active_window_geometry_changed (active_window, window);
+        }
     }
 }
 

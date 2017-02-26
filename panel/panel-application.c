@@ -288,7 +288,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   const PanelProperty  properties[] =
   {
     { "position-locked", G_TYPE_BOOLEAN },
-    { "autohide", G_TYPE_BOOLEAN },
+    { "autohide-behavior", G_TYPE_BOOLEAN },
     { "span-monitors", G_TYPE_BOOLEAN },
     { "mode", G_TYPE_UINT },
     { "size", G_TYPE_UINT },
