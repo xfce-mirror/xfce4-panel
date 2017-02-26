@@ -3,6 +3,23 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <requires lib="libxfce4ui-2" version="4.12"/>
+  <object class="GtkListStore" id="autohide-behavior-store">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Never</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Intelligently</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Always</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkAdjustment" id="enter-opacity">
     <property name="upper">100</property>
     <property name="value">100</property>
@@ -410,14 +427,35 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkCheckButton" id="autohide">
-                                    <property name="label" translatable="yes">Automatically show and _hide the panel</property>
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="tooltip_text" translatable="yes">Select this option to hide the panel when the pointer is not above it. This only works when the panel is attached to a screen edge.</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="draw_indicator">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel" id="autohide_label">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="label" translatable="yes">Automatically hide the panel:</property>
+                                        <property name="xalign">0</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkComboBox" id="autohide-behavior">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="model">autohide-behavior-store</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1124,7 +1162,6 @@
   <object class="GtkSizeGroup" id="bg-sizegroup">
     <widgets>
       <widget name="label7"/>
-      <widget name="label15"/>
       <widget name="label16"/>
       <widget name="label19"/>
     </widgets>
