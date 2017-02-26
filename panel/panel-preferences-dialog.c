@@ -437,7 +437,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "mode", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "span-monitors", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "position-locked", "active", 0);
-  panel_preferences_dialog_bindings_add (dialog, "autohide-behavior", "active");
+  panel_preferences_dialog_bindings_add (dialog, "autohide-behavior", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "disable-struts", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "size", "value", 0);
   panel_preferences_dialog_bindings_add (dialog, "nrows", "value", 0);
@@ -1414,7 +1414,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
 
       /* move the vbox to the dialog */
       content_area = gtk_dialog_get_content_area (GTK_DIALOG (window));
-      gtk_widget_reparent (GTK_WIDGET (plug_child), content_area);
+      xfce_widget_reparent (GTK_WIDGET (plug_child), content_area);
       gtk_widget_show (GTK_WIDGET (plug_child));
 
       /* destroy the plug */
@@ -1451,7 +1451,7 @@ panel_preferences_dialog_show_internal (PanelWindow *active,
       gtk_widget_show (plug);
 
       /* move the vbox in the plug */
-      gtk_widget_reparent (GTK_WIDGET (plug_child), plug);
+      xfce_widget_reparent (GTK_WIDGET (plug_child), plug);
       gtk_widget_show (GTK_WIDGET (plug_child));
     }
 }
