@@ -312,6 +312,9 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
   /* create the property base */
   property_base = g_strdup_printf ("/panels/panel-%d", panel_window_get_id (window));
 
+  /* migrate old autohide property */
+  panel_window_migrate_autohide_property (window, application->xfconf, property_base);
+
   /* bind all the properties */
   panel_properties_bind (application->xfconf, G_OBJECT (window),
                          property_base, properties, save_properties);
