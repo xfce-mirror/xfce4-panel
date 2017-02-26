@@ -2951,7 +2951,7 @@ panel_window_set_povider_info (PanelWindow *window,
       if (base_window->background_style == PANEL_BG_STYLE_COLOR)
         {
           panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider),
-              base_window->background_color);
+              base_window->background_rgba);
         }
       else if (base_window->background_style == PANEL_BG_STYLE_IMAGE)
         {
