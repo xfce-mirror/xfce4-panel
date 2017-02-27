@@ -927,8 +927,14 @@ panel_window_leave_notify_event (GtkWidget        *widget,
    /* queue an autohide timeout if needed */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && window->autohide_state != AUTOHIDE_DISABLED
-      && window->autohide_state != AUTOHIDE_BLOCKED)
-    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+      && window->autohide_state != AUTOHIDE_BLOCKED) {
+    /* simulate a geometry change to check for overlapping windows with intelligent hiding */
+    if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+      panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+    /* otherwise just hide the panel */
+    else
+      panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+  }
 
   return (*GTK_WIDGET_CLASS (panel_window_parent_class)->leave_notify_event) (widget, event);
 }
