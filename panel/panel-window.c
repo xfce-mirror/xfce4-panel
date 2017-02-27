@@ -3006,8 +3006,14 @@ panel_window_thaw_autohide (PanelWindow *window)
   window->autohide_block--;
 
   if (window->autohide_block == 0
-      && window->autohide_state != AUTOHIDE_DISABLED)
-    panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+      && window->autohide_state != AUTOHIDE_DISABLED) {
+    /* simulate a geometry change to check for overlapping windows with intelligent hiding */
+    if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+      panel_window_active_window_geometry_changed (window->wnck_active_window, window);
+    /* otherwise just hide the panel */
+    else
+      panel_window_autohide_queue (window, AUTOHIDE_POPDOWN);
+  }
 }
 
 
