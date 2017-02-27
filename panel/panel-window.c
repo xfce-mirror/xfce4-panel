@@ -2079,13 +2079,21 @@ panel_window_screen_layout_changed (GdkScreen   *screen,
     }
   else
     {
-      if (panel_str_is_empty (window->output_name))
+      if (g_strcmp0 (window->output_name, "Automatic") == 0
+          || window->output_name == NULL)
         {
-          normal_monitor_positioning:
-
           /* get the monitor geometry based on the panel position */
           monitor_num = gdk_screen_get_monitor_at_point (screen, window->base_x,
                                                          window->base_y);
+          gdk_screen_get_monitor_geometry (screen, monitor_num, &a);
+          panel_return_if_fail (a.width > 0 && a.height > 0);
+        }
+      else if (g_strcmp0 (window->output_name, "Primary") == 0)
+        {
+          normal_monitor_positioning:
+          /* get the primary monitor */
+          monitor_num = gdk_screen_get_primary_monitor (screen);
+
           gdk_screen_get_monitor_geometry (screen, monitor_num, &a);
           panel_return_if_fail (a.width > 0 && a.height > 0);
         }
