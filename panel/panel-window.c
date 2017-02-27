@@ -2251,7 +2251,8 @@ panel_window_active_window_geometry_changed (WnckWindow  *active_window,
 
   /* only react to active window geometry changes if we are doing
    * intelligent autohiding */
-  if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY)
+  if (window->autohide_behavior == AUTOHIDE_BEHAVIOR_INTELLIGENTLY
+      && window->autohide_block == 0)
     {
       if (wnck_window_get_window_type (active_window) != WNCK_WINDOW_DESKTOP)
         {
