@@ -586,7 +586,7 @@ panel_base_window_set_background_color_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_rgba != NULL);
   css_string = g_strdup_printf (".xfce4-panel.background { background-image: none; background-color: %s; }"
-                                ".xfce4-panel.background button { background: transparent; }",
+                                ".xfce4-panel.background button { background: transparent;  padding: 0; }",
                                 gdk_rgba_to_string (window->background_rgba));
   panel_base_window_set_background_css (window, css_string);
 }
@@ -598,7 +598,7 @@ panel_base_window_set_background_image_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_image != NULL);
   css_string = g_strdup_printf (".xfce4-panel.background { background-image: url('%s'); }"
-                                ".xfce4-panel.background button { background: transparent; }",
+                                ".xfce4-panel.background button { background: transparent; padding: 0; }",
                                 window->background_image);
   panel_base_window_set_background_css (window, css_string);
 }
