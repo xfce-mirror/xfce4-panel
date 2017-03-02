@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 18:30+0100\n"
-"PO-Revision-Date: 2017-02-27 01:56+0000\n"
+"POT-Creation-Date: 2017-02-28 00:30+0100\n"
+"PO-Revision-Date: 2017-03-02 01:17+0000\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/xfce/xfce4-panel/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgid ""
 msgstr "加入新的啟動器 (以此桌面檔資訊為基礎) 至面板"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2447
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2704
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "面板"
@@ -44,13 +44,13 @@ msgstr "自訂面板"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1028
-#: ../panel/panel-preferences-dialog.c:1157
+#: ../panel/panel-preferences-dialog.c:1192
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您確定要移除「%s」嗎？"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1033
-#: ../panel/panel-preferences-dialog.c:1160
+#: ../panel/panel-preferences-dialog.c:1195
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您要從面板移除該項目，它將永遠消失。"
 
@@ -64,17 +64,17 @@ msgid "Pane_l"
 msgstr "面板(_L)"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2459
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2716
 msgid "Add _New Items..."
 msgstr "加入新項目(_N)..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2470
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2498
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2755
 msgid "Log _Out"
 msgstr "登出(_O)"
 
@@ -192,33 +192,33 @@ msgstr "找不到執行中的 %s 實體"
 msgid "Failed to launch the migration application"
 msgstr "未能啟動轉移應用程式"
 
-#: ../panel/panel-application.c:979
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "建立啟動器(_L)"
 
-#: ../panel/panel-application.c:980
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "這會在面板尚建立新的啟動器插件，並將放下的檔案插入為選單項目。"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "由 %d 項桌面檔建立新的啟動器"
 
-#: ../panel/panel-application.c:1722
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "若您未透過工作階段管理程式啟動 X。只要點擊「退出」就會關閉 X 伺服器。"
 
-#: ../panel/panel-application.c:1723
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "您確定要退出該面板嗎？"
 
-#: ../panel/panel-application.c:1731
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "未能執行指令 \"%s\""
@@ -252,7 +252,7 @@ msgstr "加入新項目"
 msgid "Please choose a panel for the new plugin:"
 msgstr "請為新插件選擇面板："
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:820
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:855
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
@@ -297,41 +297,41 @@ msgid ""
 "permanently removed from the panel."
 msgstr "該插件在 %d 秒內重新啟動超過一次。若您按下「執行」，面板將試著重新啟動該插件，否則它將永久自面板上移除。"
 
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:494
 msgid "Automatic"
 msgstr "自動"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:505
+#: ../panel/panel-preferences-dialog.c:513
 #, c-format
 msgid "Screen %d"
 msgstr "螢幕 %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:531
+#: ../panel/panel-preferences-dialog.c:539
 #, c-format
 msgid "Monitor %d"
 msgstr "顯示器 %d"
 
-#: ../panel/panel-preferences-dialog.c:886
+#: ../panel/panel-preferences-dialog.c:921
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "面板與插件組態將被永久移除"
 
-#: ../panel/panel-preferences-dialog.c:887
+#: ../panel/panel-preferences-dialog.c:922
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "您確定要移除面板 %d 嗎？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:999
+#: ../panel/panel-preferences-dialog.c:1034
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1004
+#: ../panel/panel-preferences-dialog.c:1039
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -340,213 +340,221 @@ msgstr "內部名稱：%s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1016
+#: ../panel/panel-preferences-dialog.c:1051
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "內部名稱：%s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
+#: ../plugins/tasklist/tasklist-dialog.glade.h:1
+msgid "Never"
+msgstr "永不"
+
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Intelligently"
+msgstr "聰明地"
+
+#: ../panel/panel-preferences-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Always"
+msgstr "總是"
+
+#: ../panel/panel-preferences-dialog.glade.h:4
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-preferences-dialog.glade.h:2
+#: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Vertical"
 msgstr "垂直"
 
-#: ../panel/panel-preferences-dialog.glade.h:3
+#: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Deskbar"
 msgstr "桌面列"
 
-#: ../panel/panel-preferences-dialog.glade.h:4
+#: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
 msgstr "無 (使用系統樣式)"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:8
 msgid "Solid color"
 msgstr "填滿色彩"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Background image"
 msgstr "背景影像"
 
-#: ../panel/panel-preferences-dialog.glade.h:8
+#: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Add a new panel"
 msgstr "加入新面板"
 
-#: ../panel/panel-preferences-dialog.glade.h:9
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Remove the currently selected panel"
 msgstr "移除目前所選的面板"
 
-#: ../panel/panel-preferences-dialog.glade.h:10
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Switch between panel presets"
 msgstr "在預設配置好的面板設定中切換"
 
-#: ../panel/panel-preferences-dialog.glade.h:11
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "M_ode:"
 msgstr "模式(_O)："
 
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid "O_utput:"
 msgstr "輸入(_U)："
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Span mo_nitors"
 msgstr "跨越螢幕(_N)"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "選取此選項以將面板擴展至多個螢幕。"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "_Lock panel"
 msgstr "鎖住面板(_L)"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "選取此選項以隱藏面板的控制把並且鎖住其位置。"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
-msgid "Automatically show and _hide the panel"
-msgstr "自動顯示及隱藏面板(_H)"
+#: ../panel/panel-preferences-dialog.glade.h:20
+msgid "Automatically hide the panel:"
+msgstr "自動隱藏面板"
 
-#: ../panel/panel-preferences-dialog.glade.h:18
-msgid ""
-"Select this option to hide the panel when the pointer is not above it. This "
-"only works when the panel is attached to a screen edge."
-msgstr "選取此選項以當滑鼠游標不在其上時隱藏面板。這僅當面板吸附在螢幕邊緣時生效。"
-
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
 msgstr "不要保留邊緣空間(_R)"
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "如果你想讓最大化視窗覆蓋面板後的區域，請選取此選項。這只對於附在螢幕邊緣的面板有效。"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "General"
 msgstr "一般"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "A_utomatically increase the length"
 msgstr "自動增加長度(_U)"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "選取此選項以在插件需要更多空間時自動增長面板。"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:27
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "長度 (%)(_E)："
 
-#: ../panel/panel-preferences-dialog.glade.h:26
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "Num_ber of rows:"
 msgstr "列數(_B)："
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:29
 msgid "Row _Size (pixels):"
 msgstr "列大小 (像素)(_S)："
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Measurements"
 msgstr "測量"
 
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "D_isplay"
 msgstr "顯示(_I)"
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:33
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "_Style:"
 msgstr "樣式(_S)："
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "C_olor:"
 msgstr "色彩(_O)："
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Pick a Panel Color"
 msgstr "挑選面板顏色"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "_File:"
 msgstr "檔案(_F)："
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select A Background Image"
 msgstr "選取背景影像"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Background"
 msgstr "背景"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "當指標沒有停在面板上時的透明度，0 代表完全透明，100 代表完全不透明。"
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "_Enter:"
 msgstr "進入(_E)："
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid "_Leave:"
 msgstr "退出(_L)："
 
-#: ../panel/panel-preferences-dialog.glade.h:42
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
 msgstr "不透明度"
 
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "啟用視窗管理員對於面板內不透明設定的混成功能。"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
 msgstr "外觀(_N)"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Move currently selected item up by one row"
 msgstr "將目前所選的項目向上移動一列"
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Move currently selected item down by one row"
 msgstr "將目前所選的項目向下移動一列"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Add new item to this panel"
 msgstr "加入新項目至此面板"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:50
 msgid "Remove currently selected item"
 msgstr "移除目前所選的項目"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "編輯目前所選的項目"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Show about information of the currently selected item"
 msgstr "顯示關於目前所選項目的資訊"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Ite_ms"
 msgstr "項目(_M)"
 
@@ -574,7 +582,7 @@ msgstr "老手"
 msgid "Expert"
 msgstr "專家"
 
-#: ../panel/panel-window.c:2484
+#: ../panel/panel-window.c:2741
 msgid "_Lock Panel"
 msgstr "鎖住面板(_L)"
 
@@ -1594,14 +1602,6 @@ msgstr "未能獲取螢幕 %d 的管理程式選取"
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
 msgstr "顯示通知圖示的區域"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Never"
-msgstr "永不"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-msgid "Always"
-msgstr "總是"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
