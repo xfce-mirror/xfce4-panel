@@ -341,8 +341,6 @@ static void
 launcher_plugin_init (LauncherPlugin *plugin)
 {
   GtkIconTheme *icon_theme;
-  GtkStyleContext *context;
-  GtkCssProvider *provider;
 
   plugin->disable_tooltips = FALSE;
   plugin->move_first = FALSE;
@@ -415,15 +413,6 @@ launcher_plugin_init (LauncherPlugin *plugin)
       G_CALLBACK (launcher_plugin_button_state_changed), plugin->arrow);
   g_signal_connect (G_OBJECT (plugin->arrow), "state-changed",
       G_CALLBACK (launcher_plugin_button_state_changed), plugin->button);
-
-  /* Make sure themes like Adwaita, which set excessive padding, don't cause the
-     launcher buttons to overlap when panels have a fairly normal size */
-  context = gtk_widget_get_style_context (GTK_WIDGET (plugin->button));
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, ".xfce4-panel button { padding: 0; }", -1, NULL);
-  gtk_style_context_add_provider (context,
-                                  GTK_STYLE_PROVIDER (provider),
-                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 
