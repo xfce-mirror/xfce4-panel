@@ -184,6 +184,11 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
 static void
 xfce_arrow_button_init (XfceArrowButton *button)
 {
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GtkStyleContext *context;
+  GtkCssProvider  *provider;
+#endif
+
   button->priv = G_TYPE_INSTANCE_GET_PRIVATE (button, XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonPrivate);
 
   /* initialize button values */
@@ -197,6 +202,17 @@ xfce_arrow_button_init (XfceArrowButton *button)
   gtk_widget_set_can_default (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_focus (GTK_WIDGET (button), FALSE);
   gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+  /* Make sure themes like Adwaita, which set excessive padding, don't cause the
+     launcher buttons to overlap when panels have a fairly normal size */
+  context = gtk_widget_get_style_context (GTK_WIDGET (button));
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (provider, ".xfce4-panel button { padding: 0; }", -1, NULL);
+  gtk_style_context_add_provider (context,
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#endif
 }
 
 
