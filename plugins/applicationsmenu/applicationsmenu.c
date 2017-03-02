@@ -199,9 +199,6 @@ applications_menu_plugin_class_init (ApplicationsMenuPluginClass *klass)
 static void
 applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
 {
-  GtkStyleContext *context;
-  GtkCssProvider *provider;
-
   /* init garcon environment */
   garcon_set_environment_xdg (GARCON_ENVIRONMENT_XFCE);
 
@@ -237,15 +234,6 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
                                                    G_CALLBACK (applications_menu_button_theme_changed), plugin);
   plugin->screen_changed_id = g_signal_connect_swapped (G_OBJECT (plugin->button), "screen-changed",
                                                         G_CALLBACK (applications_menu_button_theme_changed), plugin);
-
-  /* Make sure themes like Adwaita, which set excessive padding, don't cause the
-     launcher buttons to overlap when panels have a fairly normal size */
-  context = gtk_widget_get_style_context (GTK_WIDGET (plugin->button));
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, ".xfce4-panel button { padding: 0; }", -1, NULL);
-  gtk_style_context_add_provider (context,
-                                  GTK_STYLE_PROVIDER (provider),
-                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 
@@ -845,3 +833,4 @@ applications_menu_button_theme_changed (ApplicationsMenuPlugin *plugin)
   applications_menu_plugin_size_changed (panel_plugin,
       xfce_panel_plugin_get_size (panel_plugin));
 }
+
