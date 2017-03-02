@@ -565,9 +565,21 @@ panel_base_window_composited_changed (GtkWidget *widget)
 static gboolean
 panel_base_window_active_timeout (gpointer user_data)
 {
-  /* redraw to update marching ants */
-  gtk_widget_queue_draw (GTK_WIDGET (user_data));
+  PanelBaseWindow        *window = PANEL_BASE_WINDOW (user_data);
+  GTimeVal                timeval;
+  gboolean                solid = TRUE;
+  gchar                  *css_string;
 
+  /* Animate the border à la "marching ants" by changing styles from solid to dashed */
+  g_get_current_time (&timeval);
+  if (timeval.tv_sec%2 == 0)
+    solid = TRUE;
+  else
+    solid = FALSE;
+
+  css_string = g_strdup_printf (".xfce4-panel.background { border: 1px %s #ff0000; }",
+                                solid ? "solid" : "dashed");
+  panel_base_window_set_background_css (window, css_string);
   return TRUE;
 }
 
@@ -577,6 +589,10 @@ static void
 panel_base_window_active_timeout_destroyed (gpointer user_data)
 {
   PANEL_BASE_WINDOW (user_data)->priv->active_timeout_id = 0;
+  PanelBaseWindow        *window = PANEL_BASE_WINDOW (user_data);
+
+  /* Reset the css style provider to disable the marching ants */
+  panel_base_window_reset_background_css (window);
 }
 
 
