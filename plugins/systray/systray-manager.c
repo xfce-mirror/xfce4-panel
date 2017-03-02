@@ -343,8 +343,7 @@ systray_manager_register (SystrayManager  *manager,
   manager->invisible = g_object_ref (G_OBJECT (invisible));
 
   /* set the visial property for transparent tray icons */
-  if (gtk_check_version (2, 16, 0) == NULL)
-    systray_manager_set_visual (manager);
+  systray_manager_set_visual (manager);
 
   /* get the current x server time stamp */
   timestamp = gdk_x11_get_server_time (gtk_widget_get_window (GTK_WIDGET (invisible)));

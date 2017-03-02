@@ -55,7 +55,8 @@ static gboolean systray_plugin_size_changed                 (XfcePanelPlugin    
                                                              gint                   size);
 static void     systray_plugin_configure_plugin             (XfcePanelPlugin       *panel_plugin);
 static void     systray_plugin_box_draw                     (GtkWidget             *box,
-                                                             cairo_t               *cr);
+                                                             cairo_t               *cr,
+                                                             gpointer               user_data);
 static void     systray_plugin_button_toggled               (GtkWidget             *button,
                                                              SystrayPlugin         *plugin);
 static void     systray_plugin_button_set_arrow             (SystrayPlugin         *plugin);
@@ -613,8 +614,8 @@ systray_plugin_box_draw_icon (GtkWidget *child,
       if (alloc.x > -1 && alloc.y > -1)
         {
           // FIXME
-          //gdk_cairo_set_source_pixmap (cr, gtk_widget_get_window (child),
-          //                             alloc.x, alloc.y);
+          gdk_cairo_set_source_window (cr, gtk_widget_get_window (child),
+                                       alloc.x, alloc.y);
           cairo_paint (cr);
         }
     }
@@ -624,7 +625,8 @@ systray_plugin_box_draw_icon (GtkWidget *child,
 
 static void
 systray_plugin_box_draw (GtkWidget *box,
-                         cairo_t   *cr)
+                         cairo_t   *cr,
+                         gpointer   user_data)
 {
   panel_return_if_fail (cr != NULL);
 
@@ -634,7 +636,7 @@ systray_plugin_box_draw (GtkWidget *box,
   /* separately draw all the composed tray icons after gtk
    * handled the draw event */
   gtk_container_foreach (GTK_CONTAINER (box),
-                         systray_plugin_box_draw_icon, cr);
+                         (GtkCallback) systray_plugin_box_draw_icon, cr);
 }
 
 
