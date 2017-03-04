@@ -820,7 +820,7 @@ panel_window_draw (GtkWidget *widget,
   (*GTK_WIDGET_CLASS (panel_window_parent_class)->draw) (widget, cr);
 
   if (window->position_locked || !gtk_widget_is_drawable (widget))
-    goto end;
+    return FALSE;
 
   if (IS_HORIZONTAL (window))
     {
@@ -877,12 +877,6 @@ panel_window_draw (GtkWidget *widget,
       /* fill the rectangles */
       cairo_fill (cr);
     }
-
-end:
-  /* send the expose event to the child */
-  child = gtk_bin_get_child (GTK_BIN (widget));
-  if (G_LIKELY (child != NULL))
-    gtk_container_propagate_draw (GTK_CONTAINER (widget), child, cr);
 
   return FALSE;
 }
