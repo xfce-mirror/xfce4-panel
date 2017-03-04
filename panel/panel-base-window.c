@@ -37,6 +37,11 @@
 
 
 
+#define PANEL_BASE_CSS        ".xfce4-panel.background button { background: transparent;  padding: 0; }"\
+                              ".xfce4-panel.background.marching-ants { border: 1px dashed #ff0000; }"
+
+
+
 static void     panel_base_window_get_property                (GObject              *object,
                                                                guint                 prop_id,
                                                                GValue               *value,
@@ -567,19 +572,16 @@ panel_base_window_active_timeout (gpointer user_data)
 {
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (user_data);
   GTimeVal                timeval;
-  gboolean                solid = TRUE;
-  gchar                  *css_string;
+  GtkStyleContext        *context;
 
-  /* Animate the border à la "marching ants" by changing styles from solid to dashed */
+  context = gtk_widget_get_style_context (GTK_WIDGET (window));
+  /* Animate the border à la "marching ants" by adding a dashed border
+     and removing it again every other second */
   g_get_current_time (&timeval);
   if (timeval.tv_sec%2 == 0)
-    solid = TRUE;
+    gtk_style_context_add_class (context, "marching-ants");
   else
-    solid = FALSE;
-
-  css_string = g_strdup_printf (".xfce4-panel.background { border: 1px %s #ff0000; }",
-                                solid ? "solid" : "dashed");
-  panel_base_window_set_background_css (window, css_string);
+    gtk_style_context_remove_class (context, "marching-ants");
   return TRUE;
 }
 
@@ -590,9 +592,11 @@ panel_base_window_active_timeout_destroyed (gpointer user_data)
 {
   PANEL_BASE_WINDOW (user_data)->priv->active_timeout_id = 0;
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (user_data);
+  GtkStyleContext        *context;
 
-  /* Reset the css style provider to disable the marching ants */
-  panel_base_window_reset_background_css (window);
+  context = gtk_widget_get_style_context (GTK_WIDGET (window));
+  /* Stop the marching ants */
+  gtk_style_context_remove_class (context, "marching-ants");
 }
 
 
@@ -601,9 +605,8 @@ static void
 panel_base_window_set_background_color_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_rgba != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background-image: none; background-color: %s; }"
-                                ".xfce4-panel.background button { background: transparent;  padding: 0; }",
-                                gdk_rgba_to_string (window->background_rgba));
+  css_string = g_strdup_printf (".xfce4-panel.background { background-image: none; background-color: %s; } %s",
+                                gdk_rgba_to_string (window->background_rgba), PANEL_BASE_CSS);
   panel_base_window_set_background_css (window, css_string);
 }
 
@@ -613,9 +616,8 @@ static void
 panel_base_window_set_background_image_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_image != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background-image: url('%s'); }"
-                                ".xfce4-panel.background button { background: transparent; padding: 0; }",
-                                window->background_image);
+  css_string = g_strdup_printf (".xfce4-panel.background { background-image: url('%s'); } %s",
+                                window->background_image, PANEL_BASE_CSS);
   panel_base_window_set_background_css (window, css_string);
 }
 
@@ -643,6 +645,10 @@ panel_base_window_reset_background_css (PanelBaseWindow *window) {
 
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
   gtk_style_context_remove_provider (context, GTK_STYLE_PROVIDER (window->priv->css_provider));
+  gtk_css_provider_load_from_data (window->priv->css_provider, PANEL_BASE_CSS, -1, NULL);
+  gtk_style_context_add_provider (context,
+                                  GTK_STYLE_PROVIDER (window->priv->css_provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 
