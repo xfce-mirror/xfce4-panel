@@ -468,11 +468,15 @@ panel_itembar_size_allocate (GtkWidget     *widget,
   gint               x, y;
   gint               x_init, y_init;
   gboolean           expand_children_fit;
-  gint               new_len;
+  gint               new_len, sub_len;
   gint               child_len, child_len_min;
   gint               row_max_size;
   gint               col_count;
   gint               rows_size;
+
+  #define CHILD_MIN_ALLOC_LEN(child_len) \
+    if (G_UNLIKELY ((child_len) < 1)) \
+      (child_len) = 1;
 
   /* the maximum allocation is limited by that of the
    * panel window, so take over the assigned allocation */
@@ -510,6 +514,10 @@ panel_itembar_size_allocate (GtkWidget     *widget,
             gtk_widget_get_preferred_width (child->widget, &child_len_min, &child_len);
           else
             gtk_widget_get_preferred_height (child->widget, &child_len_min, &child_len);
+
+          /* child will allocate at least 1 pixel */
+          CHILD_MIN_ALLOC_LEN (child_len);
+          CHILD_MIN_ALLOC_LEN (child_len_min);
 
           if (G_UNLIKELY (child->option == CHILD_OPTION_SMALL
                           && itembar->nrows > 1))
@@ -635,6 +643,10 @@ panel_itembar_size_allocate (GtkWidget     *widget,
           panel_assert (expand_len_req > 0);
           new_len = expand_len_avail * child_len / expand_len_req;
 
+          CHILD_MIN_ALLOC_LEN (child_len);
+          CHILD_MIN_ALLOC_LEN (child_len_min);
+          CHILD_MIN_ALLOC_LEN (new_len);
+
           expand_len_req -= child_len;
           expand_len_avail -= new_len;
 
@@ -645,16 +657,24 @@ panel_itembar_size_allocate (GtkWidget     *widget,
         {
           /* equally shrink all shrinking plugins */
           panel_assert (shrink_len_avail > 0);
-          new_len = MIN (shrink_len_req * (child_len - child_len_min) / shrink_len_avail,
+          sub_len = MIN (shrink_len_req * (child_len - child_len_min) / shrink_len_avail,
                          child_len - child_len_min);
-          shrink_len_req -= new_len;
+          new_len = child_len - sub_len;
+
+          CHILD_MIN_ALLOC_LEN (child_len);
+          CHILD_MIN_ALLOC_LEN (child_len_min);
+          CHILD_MIN_ALLOC_LEN (new_len);
+
+          shrink_len_req -= sub_len;
           shrink_len_avail -= (child_len - child_len_min);
 
-          child_len -= new_len;
+          child_len = new_len;
         }
-
-      if (G_UNLIKELY (child_len < 1))
-        child_len = 1;
+      else
+        {
+          CHILD_MIN_ALLOC_LEN (child_len);
+          CHILD_MIN_ALLOC_LEN (child_len_min);
+        }
 
       if (child->option == CHILD_OPTION_SMALL
           && itembar->nrows > 1)
