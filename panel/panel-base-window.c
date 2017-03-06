@@ -505,8 +505,6 @@ panel_base_window_enter_notify_event (GtkWidget        *widget,
       && priv->leave_opacity != priv->enter_opacity)
     gtk_window_set_opacity (GTK_WINDOW (widget), priv->enter_opacity);
 
-  gtk_widget_set_state_flags (widget, GTK_STATE_FLAG_PRELIGHT, TRUE);
-
   return FALSE;
 }
 
