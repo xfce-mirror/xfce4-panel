@@ -37,7 +37,8 @@
 
 
 
-#define PANEL_BASE_CSS        ".xfce4-panel.background button { background: transparent;  padding: 0; }"\
+#define PANEL_BASE_CSS        ".xfce4-panel.background { border-style: solid; }"\
+                              ".xfce4-panel.background button { background: transparent;  padding: 0; }"\
                               ".xfce4-panel.background.marching-ants { border: 1px dashed #ff0000; }"
 
 
@@ -605,8 +606,9 @@ static void
 panel_base_window_set_background_color_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_rgba != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background-image: none; background-color: %s; } %s",
-                                gdk_rgba_to_string (window->background_rgba), PANEL_BASE_CSS);
+  css_string = g_strdup_printf (".xfce4-panel.background { background-color: %s; } %s",
+                                gdk_rgba_to_string (window->background_rgba),
+                                PANEL_BASE_CSS);
   panel_base_window_set_background_css (window, css_string);
 }
 
@@ -641,14 +643,39 @@ panel_base_window_set_background_css (PanelBaseWindow *window, gchar *css_string
 
 static void
 panel_base_window_reset_background_css (PanelBaseWindow *window) {
-  GtkStyleContext        *context;
+  PanelBaseWindowPrivate  *priv = window->priv;
+  GtkStyleContext         *context;
+  GdkRGBA                 *background_rgba;
+  gchar                   *border_side = NULL;
+  gchar                   *base_css;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
-  gtk_style_context_remove_provider (context, GTK_STYLE_PROVIDER (window->priv->css_provider));
-  gtk_css_provider_load_from_data (window->priv->css_provider, PANEL_BASE_CSS, -1, NULL);
+  gtk_style_context_remove_provider (context,
+                                     GTK_STYLE_PROVIDER (window->priv->css_provider));
+  /* Get the background color of the panel to draw the border */
+  gtk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
+                         GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                         &background_rgba, NULL);
+  if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_BOTTOM))
+    border_side = "bottom";
+  else if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_TOP))
+    border_side = "top";
+  else if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_LEFT))
+    border_side = "left";
+  else if (PANEL_HAS_FLAG (priv->borders, PANEL_BORDER_RIGHT))
+    border_side = "right";
+
+  if (border_side) {
+    base_css = g_strdup_printf ("%s .xfce4-panel.background { border-%s: 1px solid shade(%s, 0.7); }",
+                                PANEL_BASE_CSS, border_side, gdk_rgba_to_string (background_rgba));
+    gtk_css_provider_load_from_data (window->priv->css_provider, base_css, -1, NULL);
+  }
+  else
+    gtk_css_provider_load_from_data (window->priv->css_provider, PANEL_BASE_CSS, -1, NULL);
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (window->priv->css_provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gdk_rgba_free (background_rgba);
 }
 
 
@@ -727,6 +754,9 @@ panel_base_window_set_borders (PanelBaseWindow *window,
     {
       priv->borders = borders;
       gtk_widget_queue_resize (GTK_WIDGET (window));
+      /* Re-draw the borders if system colors are being used */
+      if (window->background_style == PANEL_BG_STYLE_NONE)
+        panel_base_window_reset_background_css (window);
     }
 }
 
