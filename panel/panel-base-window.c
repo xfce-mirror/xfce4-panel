@@ -646,6 +646,7 @@ panel_base_window_reset_background_css (PanelBaseWindow *window) {
   GdkRGBA                 *background_rgba;
   gchar                   *border_side = NULL;
   gchar                   *base_css;
+  gchar                   *color_text;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
   gtk_style_context_remove_provider (context,
@@ -664,9 +665,12 @@ panel_base_window_reset_background_css (PanelBaseWindow *window) {
     border_side = "right";
 
   if (border_side) {
+    color_text = gdk_rgba_to_string (background_rgba);
     base_css = g_strdup_printf ("%s .xfce4-panel.background { border-%s: 1px solid shade(%s, 0.7); }",
-                                PANEL_BASE_CSS, border_side, gdk_rgba_to_string (background_rgba));
+                                PANEL_BASE_CSS, border_side, color_text);
     gtk_css_provider_load_from_data (window->priv->css_provider, base_css, -1, NULL);
+    g_free(base_css);
+    g_free(color_text);
   }
   else
     gtk_css_provider_load_from_data (window->priv->css_provider, PANEL_BASE_CSS, -1, NULL);
