@@ -57,6 +57,8 @@ static gboolean pager_plugin_scroll_event                 (GtkWidget         *wi
 static void     pager_plugin_screen_changed               (GtkWidget         *widget,
                                                            GdkScreen         *previous_screen);
 static void     pager_plugin_construct                    (XfcePanelPlugin   *panel_plugin);
+static void     pager_plugin_style_updated                (GtkWidget         *pager,
+                                                           gpointer           user_data);
 static void     pager_plugin_free_data                    (XfcePanelPlugin   *panel_plugin);
 static gboolean pager_plugin_size_changed                 (XfcePanelPlugin   *panel_plugin,
                                                            gint               size);
@@ -272,6 +274,41 @@ pager_plugin_set_property (GObject      *object,
 
 
 
+static void
+pager_plugin_style_updated (GtkWidget *pager,
+                            gpointer   user_data)
+{
+  GtkWidget               *toplevel = gtk_widget_get_toplevel (pager);
+  GtkStyleContext         *context;
+  GtkCssProvider          *provider;
+  GdkRGBA                 *bg_color;
+  gchar                   *css_string;
+  gchar                   *color_string;
+
+  g_return_if_fail (gtk_widget_is_toplevel (toplevel));
+
+  /* Get the background color of the panel to draw selected and hover states */
+  provider = gtk_css_provider_new ();
+  context = gtk_widget_get_style_context (GTK_WIDGET (toplevel));
+  gtk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
+                         GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                         &bg_color, NULL);
+  color_string = gdk_rgba_to_string(bg_color);
+  // FIXME: The shade value only works well visually for bright themes/panels
+  css_string = g_strdup_printf ("wnck-pager:selected { background: shade(%s, 0.7); }"
+                                "wnck-pager:hover { background: shade(%s, 0.9); }",
+                                color_string, color_string);
+  context = gtk_widget_get_style_context (pager);
+  gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
+  gtk_style_context_add_provider (context,
+                               GTK_STYLE_PROVIDER (provider),
+                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gdk_rgba_free (bg_color);
+  g_free (color_string);
+}
+
+
+
 static gboolean
 pager_plugin_scroll_event (GtkWidget      *widget,
                            GdkEventScroll *event)
@@ -424,6 +461,8 @@ pager_plugin_construct (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (plugin), "screen-changed",
       G_CALLBACK (pager_plugin_screen_changed), NULL);
   pager_plugin_screen_changed (GTK_WIDGET (plugin), NULL);
+  g_signal_connect (G_OBJECT (plugin->pager), "style-updated",
+      G_CALLBACK (pager_plugin_style_updated), NULL);
 }
 
 
