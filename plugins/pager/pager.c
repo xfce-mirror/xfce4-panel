@@ -295,9 +295,10 @@ pager_plugin_style_updated (GtkWidget *pager,
                          &bg_color, NULL);
   color_string = gdk_rgba_to_string(bg_color);
   // FIXME: The shade value only works well visually for bright themes/panels
-  css_string = g_strdup_printf ("wnck-pager:selected { background: shade(%s, 0.7); }"
+  css_string = g_strdup_printf ("wnck-pager { background: %s; }"
+                                "wnck-pager:selected { background: shade(%s, 0.7); }"
                                 "wnck-pager:hover { background: shade(%s, 0.9); }",
-                                color_string, color_string);
+                                color_string, color_string, color_string);
   context = gtk_widget_get_style_context (pager);
   gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
   gtk_style_context_add_provider (context,
