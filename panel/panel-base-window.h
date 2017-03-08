@@ -72,17 +72,18 @@ struct _PanelBaseWindow
   gchar                   *background_image;
 };
 
-GType        panel_base_window_get_type    (void) G_GNUC_CONST;
+GType        panel_base_window_get_type                    (void) G_GNUC_CONST;
 
-void         panel_base_window_move_resize (PanelBaseWindow *window,
-                                            gint             x,
-                                            gint             y,
-                                            gint             width,
-                                            gint             height);
+void         panel_base_window_move_resize                 (PanelBaseWindow *window,
+                                                            gint             x,
+                                                            gint             y,
+                                                            gint             width,
+                                                            gint             height);
 
-void         panel_base_window_set_borders (PanelBaseWindow *window,
-                                            PanelBorders     borders);
-PanelBorders panel_base_window_get_borders (PanelBaseWindow *window);
+void         panel_base_window_reset_background_css        (PanelBaseWindow      *window);
+void         panel_base_window_set_borders                 (PanelBaseWindow *window,
+                                                            PanelBorders     borders);
+PanelBorders panel_base_window_get_borders                 (PanelBaseWindow *window);
 
 G_END_DECLS
 

@@ -65,7 +65,6 @@ static void     panel_base_window_set_background_color_css    (PanelBaseWindow  
 static void     panel_base_window_set_background_image_css    (PanelBaseWindow      *window);
 static void     panel_base_window_set_background_css          (PanelBaseWindow      *window,
                                                                gchar                *css_string);
-static void     panel_base_window_reset_background_css        (PanelBaseWindow      *window);
 static void     panel_base_window_set_plugin_data             (PanelBaseWindow      *window,
                                                                GtkCallback           func);
 static void     panel_base_window_set_plugin_background_color (GtkWidget            *widget,
@@ -639,7 +638,7 @@ panel_base_window_set_background_css (PanelBaseWindow *window, gchar *css_string
 
 
 
-static void
+void
 panel_base_window_reset_background_css (PanelBaseWindow *window) {
   PanelBaseWindowPrivate  *priv = window->priv;
   GtkStyleContext         *context;

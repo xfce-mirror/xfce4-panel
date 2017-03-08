@@ -138,8 +138,8 @@ static void         panel_window_size_allocate_set_xy                 (PanelWind
                                                                        gint             *return_y);
 static void         panel_window_screen_changed                       (GtkWidget        *widget,
                                                                        GdkScreen        *previous_screen);
-static void         panel_window_style_set                            (GtkWidget        *widget,
-                                                                       GtkStyle         *previous_style);
+static void         panel_window_style_updated                        (GtkWidget        *widget,
+                                                                       gpointer          user_data);
 static void         panel_window_realize                              (GtkWidget        *widget);
 static StrutsEgde   panel_window_screen_struts_edge                   (PanelWindow      *window);
 static void         panel_window_screen_struts_set                    (PanelWindow      *window);
@@ -393,7 +393,7 @@ panel_window_class_init (PanelWindowClass *klass)
   gtkwidget_class->get_preferred_height_for_width = panel_window_get_preferred_height_for_width;
   gtkwidget_class->size_allocate = panel_window_size_allocate;
   gtkwidget_class->screen_changed = panel_window_screen_changed;
-  gtkwidget_class->style_set = panel_window_style_set;
+  gtkwidget_class->style_updated = panel_window_style_updated;
   gtkwidget_class->realize = panel_window_realize;
 
   g_object_class_install_property (gobject_class,
@@ -1573,19 +1573,20 @@ panel_window_screen_changed (GtkWidget *widget,
 
 
 static void
-panel_window_style_set (GtkWidget *widget,
-                        GtkStyle  *previous_style)
+panel_window_style_updated (GtkWidget *widget,
+                            gpointer   user_data)
 {
   PanelWindow *window = PANEL_WINDOW (widget);
-
-  /* let gtk update the widget style */
-  (*GTK_WIDGET_CLASS (panel_window_parent_class)->style_set) (widget, previous_style);
+  PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
 
   gtk_widget_style_get (GTK_WIDGET (widget),
                         "popup-delay", &window->popup_delay,
                         "popdown-delay", &window->popdown_delay,
                         "autohide-size", &window->autohide_size,
                         NULL);
+  /* Make sure the background and borders are redrawn on Gtk theme changes */
+  if (base_window->background_style == PANEL_BG_STYLE_NONE)
+    panel_base_window_reset_background_css (base_window);
 }
 
 
