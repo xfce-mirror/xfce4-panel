@@ -580,6 +580,7 @@ panel_base_window_active_timeout (gpointer user_data)
     gtk_style_context_add_class (context, "marching-ants");
   else
     gtk_style_context_remove_class (context, "marching-ants");
+  gtk_widget_queue_draw (GTK_WIDGET (window));
   return TRUE;
 }
 
