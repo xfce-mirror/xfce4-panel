@@ -76,7 +76,7 @@ xfce_panel_create_button (void)
      launcher buttons to overlap when panels have a fairly normal size */
   context = gtk_widget_get_style_context (GTK_WIDGET (button));
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, ".xfce4-panel button { padding: 0; }", -1, NULL);
+  gtk_css_provider_load_from_data (provider, ".xfce4-panel button { padding: 1px; }", -1, NULL);
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -120,7 +120,7 @@ xfce_panel_create_toggle_button (void)
      launcher buttons to overlap when panels have a fairly normal size */
   context = gtk_widget_get_style_context (GTK_WIDGET (button));
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, ".xfce4-panel button { padding: 0; }", -1, NULL);
+  gtk_css_provider_load_from_data (provider, ".xfce4-panel button { padding: 1px; }", -1, NULL);
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
