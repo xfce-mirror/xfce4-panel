@@ -569,7 +569,8 @@ panel_application_plugin_move (GtkWidget        *item,
 
   /* create drag context */
   target_list = gtk_target_list_new (drag_targets, G_N_ELEMENTS (drag_targets));
-  context = gtk_drag_begin (item, target_list, GDK_ACTION_MOVE, 1, NULL);
+  context = gtk_drag_begin_with_coordinates (item, target_list,
+                                             GDK_ACTION_MOVE, 1, NULL, -1, -1);
   gtk_target_list_unref (target_list);
 
   /* set the drag context icon name */
