@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-28 00:30+0100\n"
-"PO-Revision-Date: 2017-02-28 18:41+0000\n"
+"POT-Creation-Date: 2017-03-16 00:30+0100\n"
+"PO-Revision-Date: 2017-03-16 09:33+0000\n"
 "Last-Translator: Edin Veskovic <edin.veskovic@openmailbox.org>\n"
 "Language-Team: Croatian (http://www.transifex.com/xfce/xfce4-panel/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid ""
 msgstr "Dodaj novi pokretač na ploču baziran na informaciji ovoge datoteke radne površine"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2704
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2707
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Ploča"
@@ -42,13 +42,13 @@ msgstr "Prilagodi ploču"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1028
-#: ../panel/panel-preferences-dialog.c:1192
+#: ../panel/panel-preferences-dialog.c:1195
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Jeste li sigurni da želite ukloniti \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1033
-#: ../panel/panel-preferences-dialog.c:1195
+#: ../panel/panel-preferences-dialog.c:1198
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Ako uklonite stavku sa ploče, biti će trajno izgubljena."
 
@@ -62,17 +62,17 @@ msgid "Pane_l"
 msgstr "Ploč_a"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2716
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2719
 msgid "Add _New Items..."
 msgstr "Dodaj _nove stavke..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2730
 msgid "Panel Pr_eferences..."
 msgstr "Osobitosti pl_oče..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2755
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2758
 msgid "Log _Out"
 msgstr "Odja_va"
 
@@ -190,17 +190,17 @@ msgstr "Nije pronađena pokrenuta instanca %s"
 msgid "Failed to launch the migration application"
 msgstr "Neuspjelo pokretanje programa za premještanje"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:983
 msgid "Create _Launcher"
 msgstr "Napravi _pokretač"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:984
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Ovo će stvoriti novi priključak pokretača na ploči i umetnuti će ubačene datoteke kao stavke izbornika."
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:986
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -208,17 +208,17 @@ msgstr[0] "Napravi novi pokretač sa %d datoteke radne površine"
 msgstr[1] "Napravi nove pokretače sa %d datoteka radne površine"
 msgstr[2] "Napravi nove pokretače sa %d datoteka radne površine"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1726
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Pokrenuli ste X bez upravitelja sesijom.Kliknte na Isključi i X poslužitelj će se zatvoriti."
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1727
 msgid "Are you sure you want to quit the panel?"
 msgstr "Jeste li sigurni da želite isključiti ploču?"
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1735
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Neuspjelo izvršenje naredbe \"%s\""
@@ -252,7 +252,7 @@ msgstr "Dodaj novu stavku"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Molim odaberite ploču za novi priključak:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:855
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:858
 #, c-format
 msgid "Panel %d"
 msgstr "Ploča %d"
@@ -301,37 +301,41 @@ msgstr "Priključak se ponovno pokrenuo više puta u zadnjih %d sekundi. Ako pri
 msgid "Automatic"
 msgstr "Automatski"
 
+#: ../panel/panel-preferences-dialog.c:497
+msgid "Primary"
+msgstr "Primarni"
+
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:513
+#: ../panel/panel-preferences-dialog.c:516
 #, c-format
 msgid "Screen %d"
 msgstr "Zaslon %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:539
+#: ../panel/panel-preferences-dialog.c:542
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:921
+#: ../panel/panel-preferences-dialog.c:924
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Ploča i konfiguracija priključka biti će trajno uklonjeni"
 
-#: ../panel/panel-preferences-dialog.c:922
+#: ../panel/panel-preferences-dialog.c:925
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Jeste li sigurni da želite ukloniti ploču %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1034
+#: ../panel/panel-preferences-dialog.c:1037
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(vanjski)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1039
+#: ../panel/panel-preferences-dialog.c:1042
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -340,7 +344,7 @@ msgstr "Interno ime: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1051
+#: ../panel/panel-preferences-dialog.c:1054
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interno ime: %s-%d"
@@ -582,7 +586,7 @@ msgstr "Iskusni"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2741
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "_Zaključaj ploču"
 
@@ -1472,11 +1476,11 @@ msgstr "Napredeno"
 msgid "Program launcher with optional menu"
 msgstr "Pokretač programa s neobaveznim izbornikom"
 
-#: ../plugins/pager/pager.c:410 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "Postavke _radnoga prostora..."
 
-#: ../plugins/pager/pager.c:493
+#: ../plugins/pager/pager.c:533
 msgid "Unable to open the workspace settings"
 msgstr "Nije moguće otvoriti postavke radnoga prostora"
 
@@ -1554,22 +1558,22 @@ msgstr "Pokaži radnu površinu"
 msgid "Hide all windows and show the desktop"
 msgstr "Sakrij sve prozore i pokaži radnu površinu"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:400
 msgid "Unable to start the notification area"
 msgstr "Ne mogu pokrenuti područje obavijesti"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:867
+#: ../plugins/systray/systray.c:869
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Najvjerojatnije je druga kontrola preuzela funkciju područja obavijesti. Ovo područje će biti neiskorišteno."
 
-#: ../plugins/systray/systray.c:869
+#: ../plugins/systray/systray.c:871
 msgid "The notification area lost selection"
 msgstr "Područje obavijesti je izgubilo odabir"
 
-#: ../plugins/systray/systray.c:1022
+#: ../plugins/systray/systray.c:1024
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Jeste li sigurni da želite očistiti listu poznatih programa?"
 
@@ -1594,7 +1598,7 @@ msgstr "O_čisti poznate programe"
 msgid "Known Applications"
 msgstr "Poznati programi"
 
-#: ../plugins/systray/systray-manager.c:404
+#: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Neuspjelo pribavljanje izbora upravitelja za zaslon %d"
