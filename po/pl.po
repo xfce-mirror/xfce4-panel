@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-28 00:30+0100\n"
-"PO-Revision-Date: 2017-02-28 15:59+0000\n"
+"POT-Creation-Date: 2017-03-16 00:30+0100\n"
+"PO-Revision-Date: 2017-03-16 06:41+0000\n"
 "Last-Translator: m4sk1n <m4sk1n@o2.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/xfce/xfce4-panel/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgid ""
 msgstr "Dodaje do panelu aplet aktywatora wykorzystując do tego wskazany plik .desktop"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2704
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2707
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -50,13 +50,13 @@ msgstr "Konfiguruje wygląd, zachowanie i zawartość paneli"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1028
-#: ../panel/panel-preferences-dialog.c:1192
+#: ../panel/panel-preferences-dialog.c:1195
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Usunąć aplet „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1033
-#: ../panel/panel-preferences-dialog.c:1195
+#: ../panel/panel-preferences-dialog.c:1198
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Aplet zostanie nieodwracalnie usunięty."
 
@@ -70,17 +70,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2716
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2719
 msgid "Add _New Items..."
 msgstr "_Dodaj aplet..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2730
 msgid "Panel Pr_eferences..."
 msgstr "_Ustawienia..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2755
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2758
 msgid "Log _Out"
 msgstr "Za_kończ sesję"
 
@@ -198,17 +198,17 @@ msgstr "Nie odnaleziono uruchomionego wystąpienia %s"
 msgid "Failed to launch the migration application"
 msgstr "Nie udało się uruchomić programu importowania konfiguracji"
 
-#: ../panel/panel-application.c:982
+#: ../panel/panel-application.c:983
 msgid "Create _Launcher"
 msgstr "Utwórz _aktywator"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:984
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Do panelu zostanie dodany nowy aplet aktywatora z zawartością przeciągniętych plików."
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:986
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -217,17 +217,17 @@ msgstr[1] "Tworzenie %d aktywatorów"
 msgstr[2] "Tworzenie %d aktywatorów"
 msgstr[3] "Tworzenie %d aktywatorów"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1726
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Uruchomiono serwer X bez menedżera sesji. Zakończenie programu zakończy działanie serwera X."
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1727
 msgid "Are you sure you want to quit the panel?"
 msgstr "Zakończyć działanie panelu?"
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1735
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Nie udało się wykonać polecenia „%s”."
@@ -261,7 +261,7 @@ msgstr "Dodawanie aktywatora"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Proszę wybrać panel, do którego zostanie dodany aplet:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:855
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:858
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -310,37 +310,41 @@ msgstr "W ciągu ostatnich %d sekund podjęto kilkukrotną próbę ponownego uru
 msgid "Automatic"
 msgstr "Automatycznie"
 
+#: ../panel/panel-preferences-dialog.c:497
+msgid "Primary"
+msgstr "Nadrzędny"
+
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:513
+#: ../panel/panel-preferences-dialog.c:516
 #, c-format
 msgid "Screen %d"
 msgstr "Ekran %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:539
+#: ../panel/panel-preferences-dialog.c:542
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:921
+#: ../panel/panel-preferences-dialog.c:924
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel zostanie usunięty wraz z konfiguracją apletów."
 
-#: ../panel/panel-preferences-dialog.c:922
+#: ../panel/panel-preferences-dialog.c:925
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Usunąć panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1034
+#: ../panel/panel-preferences-dialog.c:1037
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(zewnętrzny)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1039
+#: ../panel/panel-preferences-dialog.c:1042
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -349,7 +353,7 @@ msgstr "Wewnętrzna nazwa: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1051
+#: ../panel/panel-preferences-dialog.c:1054
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Wewnętrzna nazwa: %s-%d"
@@ -591,7 +595,7 @@ msgstr "Zaawansowany"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2741
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "_Zablokowanie panelu"
 
@@ -1481,11 +1485,11 @@ msgstr "Zaawansowane"
 msgid "Program launcher with optional menu"
 msgstr "Uruchamia programy z opcjonalnymi parametrami"
 
-#: ../plugins/pager/pager.c:410 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "U_stawienia obszarów roboczych..."
 
-#: ../plugins/pager/pager.c:493
+#: ../plugins/pager/pager.c:533
 msgid "Unable to open the workspace settings"
 msgstr "Nie można otworzyć preferencji obszarów roboczych"
 
@@ -1563,22 +1567,22 @@ msgstr "Wyświetlanie pulpitu"
 msgid "Hide all windows and show the desktop"
 msgstr "Minimalizuje wszystkie okna i wyświetla pulpit"
 
-#: ../plugins/systray/systray.c:399
+#: ../plugins/systray/systray.c:400
 msgid "Unable to start the notification area"
 msgstr "Nie można uruchomić obszaru powiadamiania"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:867
+#: ../plugins/systray/systray.c:869
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Prawdopodobnie inny widżet przejął funkcję obszaru powiadamiania. Aplet nie będzie używany."
 
-#: ../plugins/systray/systray.c:869
+#: ../plugins/systray/systray.c:871
 msgid "The notification area lost selection"
 msgstr "Obszar powiadamiania utracił zaznaczenie"
 
-#: ../plugins/systray/systray.c:1022
+#: ../plugins/systray/systray.c:1024
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Wyczyścić listę znanych programów?"
 
@@ -1603,7 +1607,7 @@ msgstr "_Wyczyść listę"
 msgid "Known Applications"
 msgstr "Znane programy"
 
-#: ../plugins/systray/systray-manager.c:404
+#: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Nie udało się pozyskać wyboru menedżera dla ekranu %d"
