@@ -187,6 +187,9 @@ gboolean              xfce_panel_plugin_get_small           (XfcePanelPlugin   *
 void                  xfce_panel_plugin_set_small           (XfcePanelPlugin   *plugin,
                                                              gboolean           small);
 
+gint                  xfce_panel_plugin_get_icon_size       (XfcePanelPlugin   *plugin,
+                                                             GtkWidget         *button) G_GNUC_PURE;
+
 GtkOrientation        xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 XfcePanelPluginMode   xfce_panel_plugin_get_mode            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
