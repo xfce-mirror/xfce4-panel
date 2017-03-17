@@ -915,7 +915,7 @@ xfce_panel_plugin_finalize (GObject *object)
   /* destroy the menu */
   if (plugin->priv->menu != NULL)
     {
-      gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
+      /* attached menu is destroyed by GtkWidget */
       panel_assert (plugin->priv->menu_items == NULL);
     }
   else
@@ -1133,7 +1133,7 @@ xfce_panel_plugin_menu_destroy (XfcePanelPlugin *plugin)
       for (li = plugin->priv->menu_items; li != NULL; li = li->next)
         gtk_container_remove (GTK_CONTAINER (plugin->priv->menu), GTK_WIDGET (li->data));
 
-      gtk_widget_destroy (GTK_WIDGET (plugin->priv->menu));
+      gtk_menu_detach (GTK_MENU (plugin->priv->menu));
       plugin->priv->menu = NULL;
     }
 }
