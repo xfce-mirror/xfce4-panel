@@ -226,7 +226,10 @@ directory_menu_plugin_set_property (GObject      *object,
   gchar                *display_name;
   gchar               **array;
   guint                 i;
+  gint                  icon_size;
   const gchar          *path;
+
+  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (object), GTK_WIDGET (plugin->button));
 
   switch (prop_id)
     {
@@ -250,8 +253,9 @@ directory_menu_plugin_set_property (GObject      *object,
     case PROP_ICON_NAME:
       g_free (plugin->icon_name);
       plugin->icon_name = g_value_dup_string (value);
-      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->icon),
-          panel_str_is_empty (plugin->icon_name) ? DEFAULT_ICON_NAME : plugin->icon_name);
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon),
+          panel_str_is_empty (plugin->icon_name) ? DEFAULT_ICON_NAME : plugin->icon_name,
+          icon_size);
       break;
 
     case PROP_FILE_PATTERN:
@@ -407,7 +411,7 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "icon-name", icon, NULL);
-      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->dialog_icon), icon);
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon), icon, GTK_ICON_SIZE_DIALOG);
       g_free (icon);
     }
 
@@ -448,8 +452,7 @@ directory_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (directory_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = xfce_panel_image_new_from_source (icon_name);
-  xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->dialog_icon), 48);
+  plugin->dialog_icon = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DIALOG);
   gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
   gtk_widget_show (plugin->dialog_icon);
