@@ -255,7 +255,7 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (window_menu_plugin_menu), plugin);
 
-  plugin->icon = xfce_panel_image_new_from_source ("user-desktop");
+  plugin->icon = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_BUTTON);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
   gtk_widget_show (plugin->icon);
 }
@@ -540,6 +540,9 @@ window_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
           gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, button_size);
         }
     }
+  /* Update the plugin's pixbuf size too */
+  if (plugin->screen != NULL)
+    window_menu_plugin_active_window_changed (plugin->screen, NULL, plugin);
 
   return TRUE;
 }
@@ -622,14 +625,16 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
 {
   WnckWindow     *window;
   GdkPixbuf      *pixbuf;
-  XfcePanelImage *icon = XFCE_PANEL_IMAGE (plugin->icon);
+  gint            icon_size;
+  GtkWidget      *icon = GTK_WIDGET (plugin->icon);
   WnckWindowType  type;
 
   panel_return_if_fail (XFCE_IS_WINDOW_MENU_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_PANEL_IMAGE (icon));
+  panel_return_if_fail (GTK_IMAGE (icon));
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
 
+  icon_size = xfce_panel_plugin_get_icon_size (plugin, GTK_WIDGET (plugin->button));
   /* only do this when the icon is visible */
   if (plugin->button_style == BUTTON_STYLE_ICON)
     {
@@ -645,18 +650,24 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon),
                                        wnck_window_get_name (window));
 
-          pixbuf = wnck_window_get_icon (window);
-          if (G_LIKELY (pixbuf != NULL))
-            xfce_panel_image_set_from_pixbuf (icon, pixbuf);
+          if (icon_size <= 31)
+            pixbuf = wnck_window_get_mini_icon (window);
           else
-            xfce_panel_image_set_from_source (icon, GTK_STOCK_MISSING_IMAGE);
+            pixbuf = wnck_window_get_icon (window);
+
+          if (G_LIKELY (pixbuf != NULL))
+            gtk_image_set_from_pixbuf (icon, pixbuf);
+          else {
+            gtk_image_set_from_icon_name (icon, GTK_STOCK_MISSING_IMAGE, icon_size);
+            gtk_image_set_pixel_size (icon, icon_size);
+          }
         }
       else
         {
           show_desktop_icon:
 
           /* desktop is shown right now */
-          xfce_panel_image_set_from_source (icon, "user-desktop");
+          gtk_image_set_from_icon_name (icon, "user-desktop", icon_size);
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
         }
     }
