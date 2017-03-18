@@ -668,6 +668,7 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
 
           /* desktop is shown right now */
           gtk_image_set_from_icon_name (icon, "user-desktop", icon_size);
+          gtk_image_set_pixel_size (icon, icon_size);
           gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
         }
     }
