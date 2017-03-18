@@ -161,8 +161,6 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
 static void
 directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
 {
-  gint icon_size;
-
   plugin->button = xfce_panel_create_toggle_button ();
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
@@ -171,8 +169,7 @@ directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (directory_menu_plugin_menu), plugin);
 
-  icon_size = xfce_panel_plugin_get_icon_size (plugin, GTK_WIDGET (plugin->button));
-  plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, icon_size);
+  plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, GTK_ICON_SIZE_BUTTON);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
   gtk_widget_show (plugin->icon);
 }
