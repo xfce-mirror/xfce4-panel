@@ -161,6 +161,8 @@ directory_menu_plugin_class_init (DirectoryMenuPluginClass *klass)
 static void
 directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
 {
+  gint icon_size;
+
   plugin->button = xfce_panel_create_toggle_button ();
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), plugin->button);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->button);
@@ -169,7 +171,8 @@ directory_menu_plugin_init (DirectoryMenuPlugin *plugin)
   g_signal_connect (G_OBJECT (plugin->button), "toggled",
       G_CALLBACK (directory_menu_plugin_menu), plugin);
 
-  plugin->icon = xfce_panel_image_new_from_source (DEFAULT_ICON_NAME);
+  icon_size = xfce_panel_plugin_get_icon_size (plugin, GTK_WIDGET (plugin->button));
+  plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, icon_size);
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
   gtk_widget_show (plugin->icon);
 }
@@ -348,9 +351,14 @@ static gboolean
 directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                     gint             size)
 {
+  DirectoryMenuPlugin *plugin = XFCE_DIRECTORY_MENU_PLUGIN (panel_plugin);
+  gint icon_size;
+
   /* force a square button */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
+  icon_size = xfce_panel_plugin_get_icon_size (plugin, GTK_WIDGET (plugin->button));
+  gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
 
   return TRUE;
 }
