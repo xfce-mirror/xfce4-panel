@@ -56,6 +56,7 @@ struct _ShowDesktopPlugin
 
   /* the toggle button */
   GtkWidget  *button;
+  GtkWidget  *icon;
 
   /* the wnck screen */
   WnckScreen *wnck_screen;
@@ -84,7 +85,7 @@ show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
 static void
 show_desktop_plugin_init (ShowDesktopPlugin *plugin)
 {
-  GtkWidget *button, *image;
+  GtkWidget *button;
 
   plugin->wnck_screen = NULL;
 
@@ -104,9 +105,9 @@ show_desktop_plugin_init (ShowDesktopPlugin *plugin)
   xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), button);
   gtk_widget_show (button);
 
-  image = xfce_panel_image_new_from_source ("user-desktop");
-  gtk_container_add (GTK_CONTAINER (button), image);
-  gtk_widget_show (image);
+  plugin->icon = gtk_image_new_from_icon_name ("user-desktop", GTK_ICON_SIZE_MENU);
+  gtk_container_add (GTK_CONTAINER (button), plugin->icon);
+  gtk_widget_show (plugin->icon);
 }
 
 
@@ -179,11 +180,16 @@ static gboolean
 show_desktop_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                                   gint             size)
 {
+  ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (panel_plugin);
+  gint  icon_size;
+
   panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (panel_plugin), FALSE);
 
   /* keep the button squared */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
+  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin, GTK_WIDGET (plugin->button));
+  gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
 
   return TRUE;
 }
