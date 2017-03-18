@@ -564,7 +564,7 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
   gchar     *icon;
 
   panel_return_if_fail (XFCE_IS_APPLICATIONS_MENU_PLUGIN (plugin));
-  panel_return_if_fail (XFCE_IS_PANEL_IMAGE (plugin->dialog_icon));
+  panel_return_if_fail (GTK_IMAGE (plugin->dialog_icon));
 
   chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (button)),
@@ -583,9 +583,10 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
     {
       icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
       g_object_set (G_OBJECT (plugin), "button-icon", icon, NULL);
-      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->dialog_icon),
-                                        exo_str_is_empty (plugin->button_icon) ?
-                                        DEFAULT_ICON_NAME : plugin->button_icon);
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->dialog_icon),
+                                    exo_str_is_empty (plugin->button_icon) ?
+                                    DEFAULT_ICON_NAME : plugin->button_icon,
+                                    GTK_ICON_SIZE_DIALOG);
       g_free (icon);
     }
 
@@ -653,9 +654,9 @@ applications_menu_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
   g_signal_connect (G_OBJECT (object), "clicked",
      G_CALLBACK (applications_menu_plugin_configure_plugin_icon_chooser), plugin);
 
-  plugin->dialog_icon = xfce_panel_image_new_from_source (
-      panel_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon);
-  xfce_panel_image_set_size (XFCE_PANEL_IMAGE (plugin->dialog_icon), 48);
+  plugin->dialog_icon = gtk_image_new_from_icon_name (
+      panel_str_is_empty (plugin->button_icon) ? DEFAULT_ICON_NAME : plugin->button_icon,
+      GTK_ICON_SIZE_DIALOG);
   gtk_container_add (GTK_CONTAINER (object), plugin->dialog_icon);
   g_object_add_weak_pointer (G_OBJECT (plugin->dialog_icon), (gpointer) &plugin->dialog_icon);
   gtk_widget_show (plugin->dialog_icon);
@@ -833,4 +834,3 @@ applications_menu_button_theme_changed (ApplicationsMenuPlugin *plugin)
   applications_menu_plugin_size_changed (panel_plugin,
       xfce_panel_plugin_get_size (panel_plugin));
 }
-
