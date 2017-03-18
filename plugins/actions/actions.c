@@ -215,7 +215,6 @@ XFCE_PANEL_DEFINE_PLUGIN (ActionsPlugin, actions_plugin)
 
 
 
-static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
 static GQuark      action_quark = 0;
 
 
@@ -266,12 +265,6 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                                          NULL, NULL,
                                                          TRUE,
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  menu_icon_size = gtk_icon_size_from_name ("panel-actions-menu");
-  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
-    menu_icon_size = gtk_icon_size_register ("panel-actions-menu",
-                                             DEFAULT_ICON_SIZE,
-                                             DEFAULT_ICON_SIZE);
 
   action_quark = g_quark_from_string ("panel-action-quark");
 }
@@ -408,18 +401,6 @@ actions_plugin_free_data (XfcePanelPlugin *panel_plugin)
 
 
 
-static void
-actions_plugin_size_changed_child (GtkWidget *child,
-                                   gpointer   data)
-{
-  gint size = GPOINTER_TO_INT (data);
-
-  if (!GTK_IS_SEPARATOR (child))
-    gtk_widget_set_size_request (child, size, size);
-}
-
-
-
 static gboolean
 actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
                              gint             size)
@@ -427,9 +408,9 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   ActionsPlugin *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
   GtkWidget     *box;
   GList         *children, *li;
-  gint           n_children;
-  gint           child_size;
   gint           max_size;
+  GtkImage      *icon;
+  gint           icon_size;
 
   if (plugin->type == APPEARANCE_TYPE_BUTTONS)
     {
@@ -437,29 +418,17 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
       box = gtk_bin_get_child (GTK_BIN (plugin));
       if (box != NULL)
         {
-          if (plugin->invert_orientation !=
-              (xfce_panel_plugin_get_mode (panel_plugin) == XFCE_PANEL_PLUGIN_MODE_DESKBAR))
-            {
-              children = gtk_container_get_children (GTK_CONTAINER (box));
-              if (G_UNLIKELY (children == NULL))
-                return TRUE;
-              n_children = g_list_length (children);
+          children = gtk_container_get_children (GTK_CONTAINER (box));
+          if (G_UNLIKELY (children == NULL))
+            return TRUE;
 
-              for (li = children; li != NULL; li = li->next)
-                {
-                  child_size = MIN (size / n_children, max_size);
-                  size -= child_size;
-                  n_children--;
-
-                  gtk_widget_set_size_request (GTK_WIDGET (li->data),
-                                               child_size, child_size);
-                }
-            }
-          else
+          for (li = children; li != NULL; li = li->next)
             {
-              gtk_container_foreach (GTK_CONTAINER (box),
-                  actions_plugin_size_changed_child,
-                  GINT_TO_POINTER (max_size));
+              gtk_widget_set_size_request (GTK_WIDGET (li->data),
+                                           max_size, max_size);
+              icon = GTK_IMAGE (gtk_bin_get_child (GTK_BIN (li->data)));
+              icon_size = xfce_panel_plugin_get_icon_size (panel_plugin, GTK_WIDGET (li->data));
+              gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
             }
         }
     }
@@ -1010,10 +979,7 @@ actions_plugin_action_button (ActionsPlugin  *plugin,
 
   if (entry->type == ACTION_TYPE_SEPARATOR)
     {
-      if (orientation == GTK_ORIENTATION_HORIZONTAL)
-        widget = gtk_vseparator_new ();
-      else
-        widget = gtk_hseparator_new ();
+      widget = gtk_separator_new (orientation);
     }
   else
     {
@@ -1024,7 +990,7 @@ actions_plugin_action_button (ActionsPlugin  *plugin,
       g_signal_connect (G_OBJECT (widget), "clicked",
           G_CALLBACK (actions_plugin_action_activate), plugin);
 
-      image = xfce_panel_image_new_from_source (entry->icon_name);
+      image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_BUTTON);
       gtk_container_add (GTK_CONTAINER (widget), image);
       gtk_widget_show (image);
     }
@@ -1039,7 +1005,6 @@ actions_plugin_action_button (ActionsPlugin  *plugin,
 static GtkWidget *
 actions_plugin_action_menu_item (ActionsPlugin *plugin,
                                  const gchar   *name,
-                                 gint           size,
                                  ActionType    *type)
 {
   GtkWidget   *mi;
@@ -1062,13 +1027,9 @@ actions_plugin_action_menu_item (ActionsPlugin *plugin,
   g_signal_connect (G_OBJECT (mi), "activate",
       G_CALLBACK (actions_plugin_action_activate), plugin);
 
-  if (size > 0)
-    {
-      image = xfce_panel_image_new_from_source (entry->icon_name);
-      xfce_panel_image_set_size (XFCE_PANEL_IMAGE (image), size);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-      gtk_widget_show (image);
-    }
+  image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_MENU);
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+  gtk_widget_show (image);
 
   return mi;
 }
@@ -1171,6 +1132,9 @@ actions_plugin_pack_idle (gpointer data)
       mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
       gtk_label_set_angle (GTK_LABEL (label),
           (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) ? 270 : 0);
+      gtk_label_set_ellipsize (GTK_LABEL (label),
+                               (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR) ?
+                               PANGO_ELLIPSIZE_END : PANGO_ELLIPSIZE_NONE);
       gtk_widget_show (label);
     }
 
@@ -1257,7 +1221,6 @@ actions_plugin_menu (GtkWidget     *button,
   const GValue *val;
   const gchar  *name;
   GtkWidget    *mi;
-  gint          w, h, size;
   ActionType    type;
   ActionType    allowed_types;
 
@@ -1275,10 +1238,6 @@ actions_plugin_menu (GtkWidget     *button,
           G_CALLBACK (actions_plugin_menu_deactivate), button);
       g_object_add_weak_pointer (G_OBJECT (plugin->menu), (gpointer) &plugin->menu);
 
-      size = DEFAULT_ICON_SIZE;
-      if (gtk_icon_size_lookup (menu_icon_size, &w, &h))
-        size = MIN (w, h);
-
       allowed_types = actions_plugin_actions_allowed ();
 
       for (i = 0; i < plugin->items->len; i++)
@@ -1288,7 +1247,7 @@ actions_plugin_menu (GtkWidget     *button,
           if (name == NULL || *name != '+')
             continue;
 
-          mi = actions_plugin_action_menu_item (plugin, name + 1, size, &type);
+          mi = actions_plugin_action_menu_item (plugin, name + 1, &type);
           if (mi != NULL)
             {
               gtk_menu_shell_append (GTK_MENU_SHELL (plugin->menu), mi);
