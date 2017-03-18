@@ -384,7 +384,7 @@ launcher_plugin_init (LauncherPlugin *plugin)
   g_signal_connect_after (G_OBJECT (plugin->button), "draw",
       G_CALLBACK (launcher_plugin_button_draw), plugin);
 
-  plugin->child = xfce_panel_image_new ();
+  plugin->child = gtk_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
 
   plugin->arrow = xfce_arrow_button_new (GTK_ARROW_UP);
@@ -875,7 +875,7 @@ launcher_plugin_set_property (GObject      *object,
       if (G_UNLIKELY (plugin->show_label))
         plugin->child = gtk_label_new (NULL);
       else
-        plugin->child = xfce_panel_image_new ();
+        plugin->child = gtk_image_new ();
       gtk_container_add (GTK_CONTAINER (plugin->button), plugin->child);
       gtk_widget_show (plugin->child);
 
@@ -1259,12 +1259,14 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   LauncherPlugin    *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   gint               p_width, p_height;
   gint               a_size;
+  gint               icon_size;
   gboolean           horizontal;
   LauncherArrowType  arrow_position;
 
   /* initialize the plugin size */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   p_width = p_height = size;
+  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin, plugin->button);
 
   /* add the arrow size */
   if (gtk_widget_get_visible (plugin->arrow))
@@ -1308,6 +1310,8 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
   else
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
+  /* set the panel plugin icon size */
+  gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
 
   return TRUE;
 }
@@ -1618,8 +1622,8 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       icon_name = garcon_menu_item_get_icon_name (item);
       if (!panel_str_is_empty (icon_name))
         {
-          image = xfce_panel_image_new_from_source (icon_name);
-          xfce_panel_image_set_size (XFCE_PANEL_IMAGE (image), size);
+          image = gtk_image_new_from_icon_name (icon_name, size);
+          gtk_image_set_pixel_size (image, size);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
           gtk_widget_show (image);
         }
@@ -1708,6 +1712,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
   GarconMenuItem      *item = NULL;
   const gchar         *icon_name;
   XfcePanelPluginMode  mode;
+  gint                 icon_size;
 
   panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
@@ -1723,6 +1728,8 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
     item = GARCON_MENU_ITEM (plugin->items->data);
 
   mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
+  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin),
+                                               GTK_WIDGET (plugin->button));
 
   /* disable the "small" property in the deskbar mode and the label visible */
   if (G_UNLIKELY (plugin->show_label && mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR))
@@ -1741,11 +1748,13 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
     }
   else if (G_LIKELY (item != NULL))
     {
-      panel_return_if_fail (XFCE_IS_PANEL_IMAGE (plugin->child));
+      panel_return_if_fail (GTK_IS_WIDGET (plugin->child));
+
 
       icon_name = garcon_menu_item_get_icon_name (item);
-      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->child),
-          panel_str_is_empty (icon_name) ? GTK_STOCK_MISSING_IMAGE : icon_name);
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child),
+          panel_str_is_empty (icon_name) ? GTK_STOCK_MISSING_IMAGE : icon_name,
+          icon_size);
 
       panel_utils_set_atk_info (plugin->button,
           garcon_menu_item_get_name (item),
@@ -1754,9 +1763,9 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
   else
     {
       /* set missing image icon */
-      panel_return_if_fail (XFCE_IS_PANEL_IMAGE (plugin->child));
-      xfce_panel_image_set_from_source (XFCE_PANEL_IMAGE (plugin->child),
-                                        GTK_STOCK_MISSING_IMAGE);
+      panel_return_if_fail (GTK_IS_WIDGET (plugin->child));
+      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child),
+                                    GTK_STOCK_MISSING_IMAGE, icon_size);
     }
 }
 
