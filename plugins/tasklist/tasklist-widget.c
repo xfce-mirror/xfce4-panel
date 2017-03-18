@@ -2143,7 +2143,7 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   gtk_container_add (GTK_CONTAINER (child->button), child->box);
   gtk_widget_show (child->box);
 
-  child->icon = xfce_panel_image_new ();
+  child->icon = gtk_image_new ();
   if (tasklist->show_labels)
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, TRUE, 0);
   else
@@ -2486,9 +2486,10 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   GdkPixbuf    *pixbuf;
   GdkPixbuf    *lucent = NULL;
   XfceTasklist *tasklist = child->tasklist;
+  gint          icon_size;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
-  panel_return_if_fail (XFCE_IS_PANEL_IMAGE (child->icon));
+  panel_return_if_fail (GTK_IS_WIDGET (child->icon));
   panel_return_if_fail (WNCK_IS_WINDOW (window));
   panel_return_if_fail (child->window == window);
 
@@ -2496,8 +2497,12 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   if (tasklist->minimized_icon_lucency == 0)
     return;
 
+  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist),
+                                               GTK_WIDGET (child->button));
   /* get the window icon */
   if (tasklist->show_labels)
+    pixbuf = wnck_window_get_mini_icon (window);
+  else if (icon_size <= 31)
     pixbuf = wnck_window_get_mini_icon (window);
   else
     pixbuf = wnck_window_get_icon (window);
@@ -2505,7 +2510,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   /* leave when there is no valid pixbuf */
   if (G_UNLIKELY (pixbuf == NULL))
     {
-      xfce_panel_image_clear (XFCE_PANEL_IMAGE (child->icon));
+      gtk_image_clear (GTK_IMAGE (child->icon));
       return;
     }
 
@@ -2521,7 +2526,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
 #endif
     }
 
-  xfce_panel_image_set_from_pixbuf (XFCE_PANEL_IMAGE (child->icon), pixbuf);
+  gtk_image_set_from_pixbuf (GTK_IMAGE (child->icon), pixbuf);
 
   if (lucent != NULL && lucent != pixbuf)
     g_object_unref (G_OBJECT (lucent));
@@ -2683,6 +2688,20 @@ xfce_tasklist_button_geometry_changed2 (WnckWindow        *window,
       else
         gtk_widget_hide (child->button);
     }
+}
+
+
+
+static gboolean
+xfce_tasklist_button_size_allocate (GtkWidget         *widget,
+                                    GdkRectangle      *allocation,
+                                    gpointer           user_data)
+{
+  XfceTasklistChild *child = user_data;
+  /* Make sure the icons have the correct size */
+  xfce_tasklist_button_icon_changed (child->window, child);
+
+  return TRUE;
 }
 
 
@@ -2899,9 +2918,9 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
 
   if (G_LIKELY (tasklist->menu_icon_size > 0))
     {
-      image = xfce_panel_image_new ();
+      image = gtk_image_new ();
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-      xfce_panel_image_set_size (XFCE_PANEL_IMAGE (image), tasklist->menu_icon_size);
+      gtk_image_set_pixel_size (GTK_IMAGE (image), tasklist->menu_icon_size);
       g_object_bind_property (G_OBJECT (child->icon), "pixbuf",
                               G_OBJECT (image), "pixbuf",
                               G_BINDING_SYNC_CREATE);
@@ -3210,6 +3229,8 @@ xfce_tasklist_button_new (WnckWindow   *window,
       G_CALLBACK (xfce_tasklist_button_button_release_event), child);
 
   /* monitor window changes */
+  g_signal_connect (G_OBJECT (child->button), "size-allocate",
+      G_CALLBACK (xfce_tasklist_button_size_allocate), child);
   g_signal_connect (G_OBJECT (window), "icon-changed",
       G_CALLBACK (xfce_tasklist_button_icon_changed), child);
   g_signal_connect (G_OBJECT (window), "name-changed",
@@ -3569,9 +3590,9 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
     pixbuf = wnck_class_group_get_icon (class_group);
 
   if (G_LIKELY (pixbuf != NULL))
-    xfce_panel_image_set_from_pixbuf (XFCE_PANEL_IMAGE (group_child->icon), pixbuf);
+    gtk_image_set_from_pixbuf (GTK_IMAGE (group_child->icon), pixbuf);
   else
-    xfce_panel_image_clear (XFCE_PANEL_IMAGE (group_child->icon));
+    gtk_image_clear (GTK_IMAGE (group_child->icon));
 }
 
 
@@ -4069,4 +4090,3 @@ xfce_tasklist_update_monitor_geometry (XfceTasklist *tasklist)
                                                                        tasklist, xfce_tasklist_update_monitor_geometry_idle_destroy);
     }
 }
-
