@@ -303,7 +303,7 @@ pager_plugin_style_updated (GtkWidget *pager,
   gtk_css_provider_load_from_data (provider, css_string, -1, NULL);
   gtk_style_context_add_provider (context,
                                GTK_STYLE_PROVIDER (provider),
-                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+                               GTK_STYLE_PROVIDER_PRIORITY_THEME);
   gdk_rgba_free (bg_color);
   g_free (color_string);
 }
