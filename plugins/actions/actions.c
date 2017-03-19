@@ -427,7 +427,7 @@ actions_plugin_size_changed (XfcePanelPlugin *panel_plugin,
               gtk_widget_set_size_request (GTK_WIDGET (li->data),
                                            max_size, max_size);
               icon = GTK_IMAGE (gtk_bin_get_child (GTK_BIN (li->data)));
-              icon_size = xfce_panel_plugin_get_icon_size (panel_plugin, GTK_WIDGET (li->data));
+              icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
               gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
             }
         }

@@ -2497,8 +2497,8 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   if (tasklist->minimized_icon_lucency == 0)
     return;
 
-  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist),
-                                               GTK_WIDGET (child->button));
+  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist));
+
   /* get the window icon */
   if (tasklist->show_labels)
     pixbuf = wnck_window_get_mini_icon (window);

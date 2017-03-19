@@ -634,7 +634,7 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
   panel_return_if_fail (WNCK_IS_SCREEN (screen));
   panel_return_if_fail (plugin->screen == screen);
 
-  icon_size = xfce_panel_plugin_get_icon_size (plugin, GTK_WIDGET (plugin->button));
+  icon_size = xfce_panel_plugin_get_icon_size (plugin);
   /* only do this when the icon is visible */
   if (plugin->button_style == BUTTON_STYLE_ICON)
     {

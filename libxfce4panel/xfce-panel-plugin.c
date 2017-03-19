@@ -1958,15 +1958,13 @@ xfce_panel_plugin_set_small (XfcePanelPlugin *plugin,
 /**
  * xfce_panel_plugin_get_icon_size:
  * @plugin : an #XfcePanelPlugin,
- * @button : a #GtkWidget.
  *
- * Returns preferred icon size inside a button.
+ * Returns a preferred icon size.
  *
  * Since: 4.14
  **/
 gint
-xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin,
-                                 GtkWidget       *button)
+xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin)
 {
   gint width;
   width = xfce_panel_plugin_get_size (plugin) / xfce_panel_plugin_get_nrows (plugin);

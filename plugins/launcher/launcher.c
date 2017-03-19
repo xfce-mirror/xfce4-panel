@@ -1266,7 +1266,7 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   /* initialize the plugin size */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   p_width = p_height = size;
-  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin, plugin->button);
+  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
 
   /* add the arrow size */
   if (gtk_widget_get_visible (plugin->arrow))
@@ -1728,8 +1728,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
     item = GARCON_MENU_ITEM (plugin->items->data);
 
   mode = xfce_panel_plugin_get_mode (XFCE_PANEL_PLUGIN (plugin));
-  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin),
-                                               GTK_WIDGET (plugin->button));
+  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (plugin));
 
   /* disable the "small" property in the deskbar mode and the label visible */
   if (G_UNLIKELY (plugin->show_label && mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR))

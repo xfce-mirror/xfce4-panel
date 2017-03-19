@@ -229,8 +229,6 @@ directory_menu_plugin_set_property (GObject      *object,
   gint                  icon_size;
   const gchar          *path;
 
-  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (object), GTK_WIDGET (plugin->button));
-
   switch (prop_id)
     {
     case PROP_BASE_DIRECTORY:
@@ -253,6 +251,7 @@ directory_menu_plugin_set_property (GObject      *object,
     case PROP_ICON_NAME:
       g_free (plugin->icon_name);
       plugin->icon_name = g_value_dup_string (value);
+      icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (object));
       gtk_image_set_from_icon_name (GTK_IMAGE (plugin->icon),
           panel_str_is_empty (plugin->icon_name) ? DEFAULT_ICON_NAME : plugin->icon_name,
           icon_size);
@@ -358,7 +357,7 @@ directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   /* force a square button */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
-  icon_size = xfce_panel_plugin_get_icon_size (plugin, GTK_WIDGET (plugin->button));
+  icon_size = xfce_panel_plugin_get_icon_size (plugin);
   gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
 
   return TRUE;
