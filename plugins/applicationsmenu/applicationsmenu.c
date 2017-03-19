@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include <exo/exo.h>
 #include <garcon/garcon.h>
 #include <garcon-gtk/garcon-gtk.h>
 #include <libxfce4ui/libxfce4ui.h>

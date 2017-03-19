@@ -28,6 +28,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libwnck/libwnck.h>
 #include <libxfce4panel/libxfce4panel.h>

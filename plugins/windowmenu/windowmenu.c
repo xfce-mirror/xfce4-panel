@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include <exo/exo.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libwnck/libwnck.h>

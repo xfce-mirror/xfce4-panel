@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include <exo/exo.h>
 #include <gio/gio.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
@@ -728,7 +729,7 @@ directory_menu_plugin_menu_open (GtkWidget   *mi,
                                                        path_as_arg ? working_dir : NULL,
                                                        working_dir,
                                                        NULL,
-                                                       gtk_widget_get_screen (mi), &error))
+                                                       gtk_widget_get_screen (mi), &error)
 #endif
      )
     {

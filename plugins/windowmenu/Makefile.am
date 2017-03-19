@@ -20,6 +20,7 @@ libwindowmenu_la_SOURCES = \
 
 libwindowmenu_la_CFLAGS = \
 	$(GTK_CFLAGS) \
+	$(EXO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
@@ -37,6 +38,7 @@ libwindowmenu_la_LIBADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
+	$(EXO_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBWNCK_LIBS) \
