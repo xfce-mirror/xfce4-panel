@@ -31,7 +31,7 @@
 #include "clock-time.h"
 #include "clock-analog.h"
 
-#define CLOCK_SCALE 0.1
+#define CLOCK_SCALE 0.08
 #define TICKS_TO_RADIANS(x)   (G_PI - (G_PI / 30.0) * (x))
 #define HOURS_TO_RADIANS(x,y) (G_PI - (G_PI / 6.0) * (((x) > 12 ? (x) - 12 : (x)) + (y) / 60.0))
 
@@ -280,10 +280,38 @@ xfce_clock_analog_draw_ticks (cairo_t *cr,
       x = xc + sin (angle) * (radius * (1.0 - CLOCK_SCALE));
       y = yc + cos (angle) * (radius * (1.0 - CLOCK_SCALE));
 
-      /* draw arc */
-      cairo_move_to (cr, x, y);
-      cairo_arc (cr, x, y, radius * CLOCK_SCALE, 0, 2 * G_PI);
-      cairo_close_path (cr);
+      if (i == 0)
+        {
+          /* draw triangle */
+          cairo_move_to (cr, x + radius * CLOCK_SCALE * 1.2, y - radius * CLOCK_SCALE);
+          cairo_line_to (cr, x, y + radius * CLOCK_SCALE * 3.0);
+          cairo_line_to (cr, x - radius * CLOCK_SCALE * 1.2, y - radius * CLOCK_SCALE);
+          cairo_close_path (cr);
+        }
+      else if (i % 3 == 0)
+        {
+          /* draw rectangle */
+          x = x + cos (angle) * radius * CLOCK_SCALE * 0.6 + sin (angle) * radius * CLOCK_SCALE;
+          y = y + sin (angle) * radius * CLOCK_SCALE * 0.6 + cos (angle) * radius * CLOCK_SCALE;
+          cairo_move_to (cr, x, y);
+          x = x - sin (angle) * radius * CLOCK_SCALE * 3.0;
+          y = y - cos (angle) * radius * CLOCK_SCALE * 3.0;
+          cairo_line_to (cr, x, y);
+          x = x - cos (angle) * radius * CLOCK_SCALE * 0.6 * 2;
+          y = y - sin (angle) * radius * CLOCK_SCALE * 0.6 * 2;
+          cairo_line_to (cr, x, y);
+          x = x + sin (angle) * radius * CLOCK_SCALE * 3.0;
+          y = y + cos (angle) * radius * CLOCK_SCALE * 3.0;
+          cairo_line_to (cr, x, y);
+          cairo_close_path (cr);
+        }
+      else
+        {
+          /* draw arc */
+          cairo_move_to (cr, x, y);
+          cairo_arc (cr, x, y, radius * CLOCK_SCALE, 0, 2 * G_PI);
+          cairo_close_path (cr);
+        }
     }
 
   /* fill the arcs */
