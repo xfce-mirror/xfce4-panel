@@ -3577,7 +3577,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (WNCK_IS_CLASS_GROUP (class_group));
   panel_return_if_fail (group_child->class_group == class_group);
-  panel_return_if_fail (XFCE_IS_PANEL_IMAGE (group_child->icon));
+  panel_return_if_fail (GTK_IS_WIDGET (group_child->icon));
 
   /* 0 means icons are disabled, although the grouping button does
    * not use lucient icons */
