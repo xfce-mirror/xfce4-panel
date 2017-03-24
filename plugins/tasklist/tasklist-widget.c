@@ -3929,6 +3929,7 @@ xfce_tasklist_set_show_labels (XfceTasklist *tasklist,
             xfce_tasklist_group_button_icon_changed (child->class_group, child);
           else
             xfce_tasklist_button_icon_changed (child->window, child);
+          gtk_widget_queue_resize (GTK_WIDGET (tasklist));
         }
     }
 }
