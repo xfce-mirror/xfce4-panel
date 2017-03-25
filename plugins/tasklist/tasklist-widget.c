@@ -3573,6 +3573,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
                                          XfceTasklistChild *group_child)
 {
   GdkPixbuf *pixbuf;
+  gint       icon_size;
 
   panel_return_if_fail (XFCE_IS_TASKLIST (group_child->tasklist));
   panel_return_if_fail (WNCK_IS_CLASS_GROUP (class_group));
@@ -3584,8 +3585,12 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   if (group_child->tasklist->minimized_icon_lucency == 0)
     return;
 
+  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
+
   /* get the class group icon */
   if (group_child->tasklist->show_labels)
+    pixbuf = wnck_class_group_get_mini_icon (class_group);
+  else if (icon_size <= 31)
     pixbuf = wnck_class_group_get_mini_icon (class_group);
   else
     pixbuf = wnck_class_group_get_icon (class_group);
