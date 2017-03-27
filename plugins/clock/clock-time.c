@@ -109,7 +109,7 @@ static void
 clock_time_init (ClockTime *time)
 {
   time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
-  time->timezone = g_time_zone_new_local ();
+  time->timezone = NULL;
 }
 
 
@@ -121,7 +121,8 @@ clock_time_finalize (GObject *object)
 
   g_free (time->timezone_name);
 
-  g_time_zone_unref (time->timezone);
+  if (time->timezone != NULL)
+    g_time_zone_unref (time->timezone);
 
   G_OBJECT_CLASS (clock_time_parent_class)->finalize (object);
 }
@@ -166,11 +167,12 @@ clock_time_set_property (GObject      *object,
       if (g_strcmp0 (time->timezone_name, str_value) != 0)
         {
           g_free (time->timezone_name);
-          g_time_zone_unref (time->timezone);
+          if (time->timezone != NULL)
+            g_time_zone_unref (time->timezone);
           if (str_value == NULL || g_strcmp0 (str_value, "") == 0)
             {
               time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
-              time->timezone = g_time_zone_new_local ();
+              time->timezone = NULL;
             }
           else
             {
