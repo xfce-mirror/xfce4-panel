@@ -249,7 +249,7 @@ xfce_clock_analog_draw (GtkWidget *widget,
     }
 
   /* minute pointer */
-  angle = TICKS_TO_RADIANS (g_date_time_get_minute (time));
+  angle = TICKS_TO_RADIANS (g_date_time_get_minute (time) + g_date_time_get_second (time) / 60.0);
   xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.8, FALSE);
 
   /* hour pointer */
