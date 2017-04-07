@@ -488,11 +488,20 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
       || !exo_str_is_empty (output_name))
     {
       gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
-                                         OUTPUT_NAME, NULL,
+                                         OUTPUT_NAME, "Automatic",
                                          OUTPUT_TITLE, _("Automatic"), -1);
-      if (exo_str_is_empty (output_name))
+      if (g_strcmp0 (output_name, "Automatic") == 0) {
+        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
+        output_selected = TRUE;
+        span_monitors_sensitive = TRUE;
+      }
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
+                                         OUTPUT_NAME, "Primary",
+                                         OUTPUT_TITLE, _("Primary"), -1);
+      if (exo_str_is_empty (output_name) ||
+          g_strcmp0 (output_name, "Primary") == 0)
         {
-          gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (object), &iter);
           output_selected = TRUE;
           span_monitors_sensitive = TRUE;
         }
