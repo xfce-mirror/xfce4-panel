@@ -1031,8 +1031,8 @@ xfce_panel_plugin_menu_remove (XfcePanelPlugin *plugin)
       gtk_widget_get_screen (GTK_WIDGET (plugin)));
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
       _("If you remove the item from the panel, it is permanently lost."));
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog), GTK_STOCK_CANCEL,
-      GTK_RESPONSE_NO, GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog), _("Cancel"),
+      GTK_RESPONSE_NO, _("Remove"), GTK_RESPONSE_YES, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
 
   if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
@@ -1196,7 +1196,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           gtk_widget_show (item);
 
-          image = gtk_image_new_from_stock (GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("go-next", GTK_ICON_SIZE_MENU);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
           gtk_widget_show (image);
 
@@ -1238,7 +1238,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
           gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
           gtk_widget_show (item);
 
-          image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
           gtk_widget_show (image);
 
@@ -1249,7 +1249,7 @@ xfce_panel_plugin_menu_get (XfcePanelPlugin *plugin)
           gtk_menu_shell_append (GTK_MENU_SHELL (submenu), item);
           gtk_widget_show (item);
 
-          image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+          image = gtk_image_new_from_icon_name ("preferences-system", GTK_ICON_SIZE_MENU);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
           gtk_widget_show (image);
 

@@ -844,7 +844,7 @@ launcher_dialog_item_button_clicked (GtkWidget            *button,
 
           /* ask the user */
           toplevel = gtk_widget_get_toplevel (button);
-          if (xfce_dialog_confirm (GTK_WINDOW (toplevel), GTK_STOCK_DELETE, NULL,
+          if (xfce_dialog_confirm (GTK_WINDOW (toplevel), "edit-delete", NULL,
                   _("If you delete an item, it will be permanently removed"),
                   _("Are you sure you want to remove \"%s\"?"),
                   panel_str_is_empty (display_name) ? _("Unnamed item") : display_name))

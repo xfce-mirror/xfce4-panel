@@ -3416,7 +3416,7 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_minimize_all), group_child);
       gtk_widget_show (mi);
-      image = gtk_image_new_from_stock ("wnck-stock-minimize", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("wnck-stock-minimize", GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (image);
 
@@ -3431,7 +3431,7 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_maximize_all), group_child);
       gtk_widget_show (mi);
-      image = gtk_image_new_from_stock ("wnck-stock-maximize", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("wnck-stock-maximize", GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (image);
 
@@ -3451,7 +3451,7 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
           G_CALLBACK (xfce_tasklist_group_button_menu_close_all), group_child);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_stock ("wnck-stock-delete", GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("wnck-stock-delete", GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (image);
     }

@@ -535,8 +535,8 @@ applications_menu_plugin_configure_plugin_icon_chooser (GtkWidget              *
 
   chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (button)),
-                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+                                         _("Cancel"), GTK_RESPONSE_CANCEL,
+                                         _("OK"), GTK_RESPONSE_ACCEPT,
                                          NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
   gtk_dialog_set_alternative_button_order (GTK_DIALOG (chooser),

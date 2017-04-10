@@ -659,7 +659,7 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
           if (G_LIKELY (pixbuf != NULL))
             gtk_image_set_from_pixbuf (icon, pixbuf);
           else {
-            gtk_image_set_from_icon_name (icon, GTK_STOCK_MISSING_IMAGE, icon_size);
+            gtk_image_set_from_icon_name (icon, "image-missing", icon_size);
             gtk_image_set_pixel_size (icon, icon_size);
           }
         }
@@ -1326,7 +1326,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
           G_CALLBACK (window_menu_plugin_workspace_add), plugin);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_ADD, menu_icon_size);
+      image = gtk_image_new_from_icon_name ("list-add", menu_icon_size);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (mi);
 
@@ -1354,7 +1354,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
       g_free (label);
       g_free (utf8);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_REMOVE, menu_icon_size);
+      image = gtk_image_new_from_icon_name ("list-remove", menu_icon_size);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
       gtk_widget_show (mi);
     }

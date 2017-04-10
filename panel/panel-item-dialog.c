@@ -167,6 +167,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   GtkWidget         *entry;
   GtkWidget         *scroll;
   GtkWidget         *treeview;
+  GtkWidget         *icon;
   GtkTreeModel      *filter;
   GtkTreeViewColumn *column;
   GtkCellRenderer   *renderer;
@@ -189,16 +190,18 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_window_set_title (GTK_WINDOW (dialog), _("Add New Items"));
   xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (dialog),
       _("Add new plugins to the panel"));
-  gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_ADD);
+  gtk_window_set_icon_name (GTK_WINDOW (dialog), "list-add");
   gtk_window_set_default_size (GTK_WINDOW (dialog), 350, 450);
   gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 
-  dialog->add_button = gtk_button_new_from_stock (GTK_STOCK_ADD);
-  gtk_widget_show (dialog->add_button);
+  icon = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON);
+  dialog->add_button = gtk_button_new_with_mnemonic ("_Add");
+  gtk_button_set_image (dialog->add_button, GTK_IMAGE (icon));
+  gtk_widget_show_all (dialog->add_button);
 
-  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Help"), GTK_RESPONSE_HELP);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog), dialog->add_button, GTK_RESPONSE_OK);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
+  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Close"), GTK_RESPONSE_CLOSE);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
   main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER * 2);
@@ -514,7 +517,7 @@ panel_item_dialog_drag_begin (GtkWidget       *treeview,
       else
         {
           /* plugin is not usable */
-          gtk_drag_set_icon_name (context, GTK_STOCK_CANCEL, 0, 0);
+          gtk_drag_set_icon_name (context, "window-close", 0, 0);
         }
 
       g_object_unref (G_OBJECT (module));

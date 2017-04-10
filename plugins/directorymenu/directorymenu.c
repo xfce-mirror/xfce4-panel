@@ -396,8 +396,8 @@ directory_menu_plugin_configure_plugin_icon_chooser (GtkWidget           *button
 
   chooser = exo_icon_chooser_dialog_new (_("Select An Icon"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (button)),
-                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+                                         _("Cancel"), GTK_RESPONSE_CANCEL,
+                                         _("OK"), GTK_RESPONSE_ACCEPT,
                                          NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
   gtk_dialog_set_alternative_button_order (GTK_DIALOG (chooser),
@@ -814,7 +814,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
       g_object_ref (dir), (GClosureNotify) g_object_unref, 0);
   gtk_widget_show (mi);
 
-  image = gtk_image_new_from_stock (GTK_STOCK_OPEN, menu_icon_size);
+  image = gtk_image_new_from_icon_name ("folder-open", menu_icon_size);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
   gtk_widget_show (image);
 

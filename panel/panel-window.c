@@ -2722,7 +2722,7 @@ panel_window_menu_popup (PanelWindow *window,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
       gtk_widget_show (image);
 
@@ -2733,7 +2733,7 @@ panel_window_menu_popup (PanelWindow *window,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
-      image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+      image = gtk_image_new_from_icon_name ("preferences-system", GTK_ICON_SIZE_MENU);
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
       gtk_widget_show (image);
 
@@ -2770,14 +2770,14 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_widget_show (item);
 
   /* help item */
-  item = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
+  item = gtk_image_menu_item_new_with_mnemonic ("_Help");
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_window_menu_help), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
   /* about item */
-  item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
+  item = gtk_image_menu_item_new_with_mnemonic ("_About");
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_dialogs_show_about), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
