@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 00:30+0100\n"
-"PO-Revision-Date: 2017-04-03 17:13+0000\n"
+"POT-Creation-Date: 2017-04-11 00:30+0200\n"
+"PO-Revision-Date: 2017-04-11 11:08+0000\n"
 "Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/xfce/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -55,6 +55,16 @@ msgstr "Soll »%s« wirklich entfernt werden?"
 #: ../panel/panel-preferences-dialog.c:1198
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:399
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1035
+msgid "Remove"
+msgstr "Entfernen"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1193
@@ -270,20 +280,28 @@ msgstr "Da sich die Leiste im »Kiosk«-Modus befindet, sind Änderungen an der 
 msgid "Modifying the panel is not allowed"
 msgstr "Verändern der Leiste ist nicht erlaubt"
 
-#: ../panel/panel-item-dialog.c:189
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Neue Elemente hinzufügen"
 
-#: ../panel/panel-item-dialog.c:191
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Neue Erweiterungen zur Leiste hinzufügen"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:202
+msgid "Help"
+msgstr "Hilfe"
+
+#: ../panel/panel-item-dialog.c:204
+msgid "Close"
+msgstr "Schließen"
+
+#: ../panel/panel-item-dialog.c:217
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "_Suche:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:225
 msgid "Enter search phrase here"
 msgstr "Suchbegriff hier eingeben"
 
@@ -798,18 +816,18 @@ msgstr "Wollen Sie den Rechner wirklich herunterfahren?"
 msgid "Turning off computer in %d seconds."
 msgstr "Rechner wird in %d Sekunden heruntergefahren"
 
-#: ../plugins/actions/actions.c:624
+#: ../plugins/actions/actions.c:593
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Trennelement"
 
-#: ../plugins/actions/actions.c:986
+#: ../plugins/actions/actions.c:955
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Aktion »%s« konnte nicht ausgeführt werden."
 
-#: ../plugins/actions/actions.c:1157
+#: ../plugins/actions/actions.c:1118
 msgid "John Doe"
 msgstr "Max Mustermann"
 
@@ -889,17 +907,22 @@ msgid "Menu File"
 msgstr "Menüdatei"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:569
-#: ../plugins/directorymenu/directorymenu.c:388
+#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/directorymenu/directorymenu.c:397
 msgid "Select An Icon"
 msgstr "Symbol auswählen"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2328
+#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/directorymenu/directorymenu.c:400
+msgid "OK"
+msgstr "OK"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:579
+#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Befehl »%s« konnte nicht ausgeführt werden."
@@ -1283,42 +1306,42 @@ msgstr "zwölf"
 msgid "What time is it?"
 msgstr "Wie spät ist es?"
 
-#: ../plugins/directorymenu/directorymenu.c:245
+#: ../plugins/directorymenu/directorymenu.c:247
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Verzeichnismenü"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:582
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Anwendung »%s« konnte nicht gestartet werden"
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:614
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Inhaltstyp für »%s« konnte nicht erfragen werden"
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:623
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Keine Standardanwendung für »%s« gefunden"
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:639
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Vorgabeanwendung für »%s« konnte nicht gestartet werden"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Bevorzugte Anwendung der Kategorie »%s« konnte nicht gestartet werden"
 
-#: ../plugins/directorymenu/directorymenu.c:802
+#: ../plugins/directorymenu/directorymenu.c:810
 msgid "Open Folder"
 msgstr "Ordner öffnen"
 
-#: ../plugins/directorymenu/directorymenu.c:813
+#: ../plugins/directorymenu/directorymenu.c:821
 msgid "Open in Terminal"
 msgstr "In Terminal öffnen"
 
@@ -1359,11 +1382,11 @@ msgstr "Filtern"
 msgid "Open launcher menu"
 msgstr "Startermenü öffnen"
 
-#: ../plugins/launcher/launcher.c:1591
+#: ../plugins/launcher/launcher.c:1595
 msgid "Unnamed Item"
 msgstr "Unbenanntes Objekt"
 
-#: ../plugins/launcher/launcher.c:1740
+#: ../plugins/launcher/launcher.c:1746
 msgid "No items"
 msgstr "Keine Objekte"
 
@@ -1487,7 +1510,7 @@ msgstr "_Arbeitsflächeneinstellungen …"
 msgid "Unable to open the workspace settings"
 msgstr "Arbeitsflächeneinstellungen konnten nicht geöffnet werden"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:862
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbeitsfläche %d"
@@ -1544,15 +1567,15 @@ msgstr "_Ausdehnen"
 msgid "Adds a separator or space between panel items"
 msgstr "Fügt ein Trennelement oder Platz zwischen Leistenelementen ein"
 
-#: ../plugins/showdesktop/showdesktop.c:210
+#: ../plugins/showdesktop/showdesktop.c:216
 msgid "Restore the minimized windows"
 msgstr "Versteckte Fenster wiederherstellen"
 
-#: ../plugins/showdesktop/showdesktop.c:212
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Minimize all open windows and show the desktop"
 msgstr "Geöffnete Fenster verstecken und Schreibtisch anzeigen"
 
-#: ../plugins/showdesktop/showdesktop.c:215
+#: ../plugins/showdesktop/showdesktop.c:221
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Schreibtisch anzeigen"
@@ -1699,23 +1722,23 @@ msgstr "N_ur verkleinerte Fenster anzeigen"
 msgid "Show windows from all mo_nitors"
 msgstr "Fenster v_on allen Bildschirmen anzeigen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3392
+#: ../plugins/tasklist/tasklist-widget.c:3414
 msgid "Mi_nimize All"
 msgstr "_Alle verkleinern"
 
-#: ../plugins/tasklist/tasklist-widget.c:3401
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Un_minimize All"
 msgstr "Alle _wiederherstellen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3429
 msgid "Ma_ximize All"
 msgstr "_Alle vergrößern"
 
-#: ../plugins/tasklist/tasklist-widget.c:3416
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "_Unmaximize All"
 msgstr "Alle _wiederherstellen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3426
+#: ../plugins/tasklist/tasklist-widget.c:3448
 msgid "_Close All"
 msgstr "_Alle schließen"
 
@@ -1723,28 +1746,28 @@ msgstr "_Alle schließen"
 msgid "Switch between open windows using buttons"
 msgstr "Mit Knöpfen zwischen offenen Fenstern umschalten"
 
-#: ../plugins/windowmenu/windowmenu.c:660
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "Schreibtisch"
 
-#: ../plugins/windowmenu/windowmenu.c:1253
+#: ../plugins/windowmenu/windowmenu.c:1266
 msgid "No Windows"
 msgstr "Keine Fenster"
 
-#: ../plugins/windowmenu/windowmenu.c:1268
+#: ../plugins/windowmenu/windowmenu.c:1281
 msgid "Urgent Windows"
 msgstr "Wichtige Fenster"
 
-#: ../plugins/windowmenu/windowmenu.c:1310
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Arbeitsfläche hinzufügen"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1343
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Arbeitsfläche »%s« entfernen"
 
-#: ../plugins/windowmenu/windowmenu.c:1332
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Arbeitsfläche %d entfernen"
