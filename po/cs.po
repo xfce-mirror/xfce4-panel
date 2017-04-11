@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 00:30+0100\n"
-"PO-Revision-Date: 2017-03-17 11:53+0000\n"
+"POT-Creation-Date: 2017-04-11 00:30+0200\n"
+"PO-Revision-Date: 2017-04-11 06:09+0000\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/xfce/xfce4-panel/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -51,6 +51,16 @@ msgstr "Opravdu chcete odstranit \"%s\"?"
 #: ../panel/panel-preferences-dialog.c:1198
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Pokud odstraníte položku z panelu, bude nenávratně ztracena."
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:399
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1035
+msgid "Remove"
+msgstr "Odebrat"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1193
@@ -267,20 +277,28 @@ msgstr "Není možné provést změny nastavení panelu jako běžný uživatel,
 msgid "Modifying the panel is not allowed"
 msgstr "Úpravy panelu nejsou povoleny"
 
-#: ../panel/panel-item-dialog.c:189
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Přidat nové položky"
 
-#: ../panel/panel-item-dialog.c:191
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Přidat na panel nové zásuvné moduly"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:202
+msgid "Help"
+msgstr "Nápověda"
+
+#: ../panel/panel-item-dialog.c:204
+msgid "Close"
+msgstr "Zavřít"
+
+#: ../panel/panel-item-dialog.c:217
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "_Hledat:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:225
 msgid "Enter search phrase here"
 msgstr "Sem vložte hledaný text"
 
@@ -795,18 +813,18 @@ msgstr "Opravdu chcete systém vypnout?"
 msgid "Turning off computer in %d seconds."
 msgstr "Vypnutí proběhne za %d sekund."
 
-#: ../plugins/actions/actions.c:624
+#: ../plugins/actions/actions.c:593
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Oddělovač"
 
-#: ../plugins/actions/actions.c:986
+#: ../plugins/actions/actions.c:955
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Nepodařilo se spustit akci %s"
 
-#: ../plugins/actions/actions.c:1157
+#: ../plugins/actions/actions.c:1118
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -886,17 +904,22 @@ msgid "Menu File"
 msgstr "Soubor nabídky"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
 msgstr "Aplikace"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:569
-#: ../plugins/directorymenu/directorymenu.c:388
+#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/directorymenu/directorymenu.c:397
 msgid "Select An Icon"
 msgstr "Vyberte ikonu"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2328
+#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/directorymenu/directorymenu.c:400
+msgid "OK"
+msgstr "OK"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:579
+#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Nepodařilo se spustit příkaz %s."
@@ -1280,42 +1303,42 @@ msgstr "dvanáct"
 msgid "What time is it?"
 msgstr "Kolik je hodin?"
 
-#: ../plugins/directorymenu/directorymenu.c:245
+#: ../plugins/directorymenu/directorymenu.c:247
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Adresářová nabídka"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:582
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Nepodařilo se spustit aplikaci %s."
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:614
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Nepodařilo se spustit dotaz na typ obsahu pro soubor %s"
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:623
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Nepodařilo se najít výchozí aplikaci pro %s"
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:639
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Nepodařilo se spustit výchozí aplikaci pro %s"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Nepodařilo se spustit předvolenou aplikaci kategorie %s"
 
-#: ../plugins/directorymenu/directorymenu.c:802
+#: ../plugins/directorymenu/directorymenu.c:810
 msgid "Open Folder"
 msgstr "Otevřít složku"
 
-#: ../plugins/directorymenu/directorymenu.c:813
+#: ../plugins/directorymenu/directorymenu.c:821
 msgid "Open in Terminal"
 msgstr "Otevřít v terminálu"
 
@@ -1356,11 +1379,11 @@ msgstr "Filtrování"
 msgid "Open launcher menu"
 msgstr "Otevřít nabídku spouštěče"
 
-#: ../plugins/launcher/launcher.c:1591
+#: ../plugins/launcher/launcher.c:1595
 msgid "Unnamed Item"
 msgstr "Nepojmenovaná položka"
 
-#: ../plugins/launcher/launcher.c:1740
+#: ../plugins/launcher/launcher.c:1746
 msgid "No items"
 msgstr "Žádné položky"
 
@@ -1484,7 +1507,7 @@ msgstr "_Nastavení pracovní plochy..."
 msgid "Unable to open the workspace settings"
 msgstr "Nelze otevřít nastavení pracovní plochy"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:862
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
 #, c-format
 msgid "Workspace %d"
 msgstr "Pracovní plocha %d"
@@ -1541,15 +1564,15 @@ msgstr "_Rozšířit"
 msgid "Adds a separator or space between panel items"
 msgstr "Přidá oddělovač nebo prostor mezi položkami panelu"
 
-#: ../plugins/showdesktop/showdesktop.c:210
+#: ../plugins/showdesktop/showdesktop.c:216
 msgid "Restore the minimized windows"
 msgstr "Obnovit minimalizovaná okna"
 
-#: ../plugins/showdesktop/showdesktop.c:212
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimalizovat všechna otevřená okna a zobrazí pracovní plochu"
 
-#: ../plugins/showdesktop/showdesktop.c:215
+#: ../plugins/showdesktop/showdesktop.c:221
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Zobrazit plochu"
@@ -1696,23 +1719,23 @@ msgstr "Zobrazit pouze _minimalizovaná okna"
 msgid "Show windows from all mo_nitors"
 msgstr "Zobrazit okna _na všech monitorech"
 
-#: ../plugins/tasklist/tasklist-widget.c:3392
+#: ../plugins/tasklist/tasklist-widget.c:3414
 msgid "Mi_nimize All"
 msgstr "Mi_nimalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:3401
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Un_minimize All"
 msgstr "Obnovit vše z _minima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3429
 msgid "Ma_ximize All"
 msgstr "Ma_ximalizovat vše"
 
-#: ../plugins/tasklist/tasklist-widget.c:3416
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "_Unmaximize All"
 msgstr "_Obnovit vše z maxima"
 
-#: ../plugins/tasklist/tasklist-widget.c:3426
+#: ../plugins/tasklist/tasklist-widget.c:3448
 msgid "_Close All"
 msgstr "_Zavřít vše"
 
@@ -1720,28 +1743,28 @@ msgstr "_Zavřít vše"
 msgid "Switch between open windows using buttons"
 msgstr "Přepnout mezi otevřenými okny pomocí tlačítek"
 
-#: ../plugins/windowmenu/windowmenu.c:660
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "Pracovní plocha"
 
-#: ../plugins/windowmenu/windowmenu.c:1253
+#: ../plugins/windowmenu/windowmenu.c:1266
 msgid "No Windows"
 msgstr "Bez oken"
 
-#: ../plugins/windowmenu/windowmenu.c:1268
+#: ../plugins/windowmenu/windowmenu.c:1281
 msgid "Urgent Windows"
 msgstr "Urgentní okna"
 
-#: ../plugins/windowmenu/windowmenu.c:1310
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Přidat pracovní plochu"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1343
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Odebrat pracovní plochu %s"
 
-#: ../plugins/windowmenu/windowmenu.c:1332
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Odebrat pracovní plochu %d"
