@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 00:30+0100\n"
-"PO-Revision-Date: 2017-03-17 13:53+0000\n"
+"POT-Creation-Date: 2017-04-11 00:30+0200\n"
+"PO-Revision-Date: 2017-04-11 06:18+0000\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/xfce/xfce4-panel/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -53,6 +53,16 @@ msgstr "您確定要移除「%s」嗎？"
 #: ../panel/panel-preferences-dialog.c:1198
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您要從面板移除該項目，它將永遠消失。"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:399
+msgid "Cancel"
+msgstr "取消"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1035
+msgid "Remove"
+msgstr "移除"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1193
@@ -267,20 +277,28 @@ msgstr "因為面板正在以 kiosk 模式執行中，您不被允許以一般�
 msgid "Modifying the panel is not allowed"
 msgstr "修改面板不被允許"
 
-#: ../panel/panel-item-dialog.c:189
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "加入新項目"
 
-#: ../panel/panel-item-dialog.c:191
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "加入新插件至面板"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:202
+msgid "Help"
+msgstr "說明"
+
+#: ../panel/panel-item-dialog.c:204
+msgid "Close"
+msgstr "關閉"
+
+#: ../panel/panel-item-dialog.c:217
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "搜尋(_S)："
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:225
 msgid "Enter search phrase here"
 msgstr "在這裡輸入搜尋詞語"
 
@@ -795,18 +813,18 @@ msgstr "您確定要關機嗎？"
 msgid "Turning off computer in %d seconds."
 msgstr "%d 秒內關閉電腦。"
 
-#: ../plugins/actions/actions.c:624
+#: ../plugins/actions/actions.c:593
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "分隔符"
 
-#: ../plugins/actions/actions.c:986
+#: ../plugins/actions/actions.c:955
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "無法執行動作「%s」"
 
-#: ../plugins/actions/actions.c:1157
+#: ../plugins/actions/actions.c:1118
 msgid "John Doe"
 msgstr "陳大文"
 
@@ -886,17 +904,22 @@ msgid "Menu File"
 msgstr "選單檔案"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
 msgstr "應用程式"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:569
-#: ../plugins/directorymenu/directorymenu.c:388
+#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/directorymenu/directorymenu.c:397
 msgid "Select An Icon"
 msgstr "選取圖示"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2328
+#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/directorymenu/directorymenu.c:400
+msgid "OK"
+msgstr "確定"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:579
+#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」。"
@@ -1280,42 +1303,42 @@ msgstr "十二"
 msgid "What time is it?"
 msgstr "現在幾點？"
 
-#: ../plugins/directorymenu/directorymenu.c:245
+#: ../plugins/directorymenu/directorymenu.c:247
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "目錄選單"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:582
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "無法啟動應用程式「%s」"
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:614
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "無法查詢「%s」的內容類型"
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:623
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "找不到「%s」的預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:639
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "無法為「%s」啟動預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "未能執行分類「%s」的偏好應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:802
+#: ../plugins/directorymenu/directorymenu.c:810
 msgid "Open Folder"
 msgstr "開啟資料夾"
 
-#: ../plugins/directorymenu/directorymenu.c:813
+#: ../plugins/directorymenu/directorymenu.c:821
 msgid "Open in Terminal"
 msgstr "在終端機內開啟"
 
@@ -1356,11 +1379,11 @@ msgstr "過濾方式"
 msgid "Open launcher menu"
 msgstr "開啟啟動器選單"
 
-#: ../plugins/launcher/launcher.c:1591
+#: ../plugins/launcher/launcher.c:1595
 msgid "Unnamed Item"
 msgstr "未命名項目"
 
-#: ../plugins/launcher/launcher.c:1740
+#: ../plugins/launcher/launcher.c:1746
 msgid "No items"
 msgstr "無項目"
 
@@ -1484,7 +1507,7 @@ msgstr "工作區設定值(_S)..."
 msgid "Unable to open the workspace settings"
 msgstr "無法開啟工作區設定值"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:862
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
 #, c-format
 msgid "Workspace %d"
 msgstr "工作區 %d"
@@ -1541,15 +1564,15 @@ msgstr "延展(_E)"
 msgid "Adds a separator or space between panel items"
 msgstr "在面板項目間加入分隔符或空格"
 
-#: ../plugins/showdesktop/showdesktop.c:210
+#: ../plugins/showdesktop/showdesktop.c:216
 msgid "Restore the minimized windows"
 msgstr "還原最小化的視窗"
 
-#: ../plugins/showdesktop/showdesktop.c:212
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Minimize all open windows and show the desktop"
 msgstr "最小化所有開啟視窗並顯示桌面"
 
-#: ../plugins/showdesktop/showdesktop.c:215
+#: ../plugins/showdesktop/showdesktop.c:221
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "顯示桌面"
@@ -1696,23 +1719,23 @@ msgstr "只顯示最小化的視窗(_M)"
 msgid "Show windows from all mo_nitors"
 msgstr "顯示所有螢幕的視窗(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3392
+#: ../plugins/tasklist/tasklist-widget.c:3414
 msgid "Mi_nimize All"
 msgstr "最小化全部(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3401
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Un_minimize All"
 msgstr "取消"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3429
 msgid "Ma_ximize All"
 msgstr "最大化全部(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3416
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "_Unmaximize All"
 msgstr "取消最大化(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3426
+#: ../plugins/tasklist/tasklist-widget.c:3448
 msgid "_Close All"
 msgstr "關閉全部(_C)"
 
@@ -1720,28 +1743,28 @@ msgstr "關閉全部(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "使用按鈕在開啟視窗間切換"
 
-#: ../plugins/windowmenu/windowmenu.c:660
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../plugins/windowmenu/windowmenu.c:1253
+#: ../plugins/windowmenu/windowmenu.c:1266
 msgid "No Windows"
 msgstr "無視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1268
+#: ../plugins/windowmenu/windowmenu.c:1281
 msgid "Urgent Windows"
 msgstr "緊急視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1310
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "新增工作區"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1343
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作區「%s」"
 
-#: ../plugins/windowmenu/windowmenu.c:1332
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作區 %d"
