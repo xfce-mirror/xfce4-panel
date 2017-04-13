@@ -215,7 +215,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_widget_show (hbox);
 
   label = gtk_label_new_with_mnemonic (_("_Search:"));
-  gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+  gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
   gtk_widget_show (label);
 
