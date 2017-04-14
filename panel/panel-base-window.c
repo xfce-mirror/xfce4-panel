@@ -331,7 +331,7 @@ panel_base_window_set_property (GObject      *object,
       /* set the new leave opacity */
       priv->leave_opacity = g_value_get_uint (value) / 100.00;
       if (window->is_composited)
-        gtk_window_set_opacity (GTK_WINDOW (object), priv->leave_opacity);
+        gtk_widget_set_opacity (GTK_WIDGET (object), priv->leave_opacity);
       break;
 
     case PROP_BACKGROUND_STYLE:
@@ -457,8 +457,7 @@ panel_base_window_finalize (GObject *object)
     gdk_rgba_free (window->background_rgba);
   if (window->background_color != NULL)
     gdk_color_free (window->background_color);
-    g_object_unref (window->priv->css_provider);
-
+  g_object_unref (window->priv->css_provider);
 
   (*G_OBJECT_CLASS (panel_base_window_parent_class)->finalize) (object);
 }
@@ -502,7 +501,7 @@ panel_base_window_enter_notify_event (GtkWidget        *widget,
   if (event->detail != GDK_NOTIFY_INFERIOR
       && PANEL_BASE_WINDOW (widget)->is_composited
       && priv->leave_opacity != priv->enter_opacity)
-    gtk_window_set_opacity (GTK_WINDOW (widget), priv->enter_opacity);
+    gtk_widget_set_opacity (GTK_WIDGET (widget), priv->enter_opacity);
 
   return FALSE;
 }
@@ -520,7 +519,7 @@ panel_base_window_leave_notify_event (GtkWidget        *widget,
   if (event->detail != GDK_NOTIFY_INFERIOR
       && PANEL_BASE_WINDOW (widget)->is_composited
       && priv->leave_opacity != priv->enter_opacity)
-    gtk_window_set_opacity (GTK_WINDOW (widget), priv->leave_opacity);
+    gtk_widget_set_opacity (GTK_WIDGET (widget), priv->leave_opacity);
 
   return FALSE;
 }
@@ -541,7 +540,7 @@ panel_base_window_composited_changed (GtkWidget *widget)
     return;
 
   if (window->is_composited)
-    gtk_window_set_opacity (GTK_WINDOW (widget), window->priv->leave_opacity);
+    gtk_widget_set_opacity (GTK_WIDGET (widget), window->priv->leave_opacity);
 
   panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "%p: compositing=%s", window,
