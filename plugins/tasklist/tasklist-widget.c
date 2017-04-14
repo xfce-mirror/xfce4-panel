@@ -2498,7 +2498,7 @@ xfce_tasklist_button_icon_changed (WnckWindow        *window,
   if (tasklist->minimized_icon_lucency == 0)
     return;
 
-  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (tasklist));
+  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (tasklist)));
 
   /* get the window icon */
   if (tasklist->show_labels)
@@ -3585,7 +3585,7 @@ xfce_tasklist_group_button_icon_changed (WnckClassGroup    *class_group,
   if (group_child->tasklist->minimized_icon_lucency == 0)
     return;
 
-  icon_size = xfce_panel_plugin_get_icon_size (xfce_tasklist_get_panel_plugin (group_child->tasklist));
+  icon_size = xfce_panel_plugin_get_icon_size (XFCE_PANEL_PLUGIN (xfce_tasklist_get_panel_plugin (group_child->tasklist)));
 
   /* get the class group icon */
   if (group_child->tasklist->show_labels)
