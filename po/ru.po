@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 00:30+0100\n"
-"PO-Revision-Date: 2017-03-16 11:43+0000\n"
+"POT-Creation-Date: 2017-04-11 00:30+0200\n"
+"PO-Revision-Date: 2017-04-14 13:54+0000\n"
 "Last-Translator: Igor <f2404@yandex.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce4-panel/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -64,6 +64,16 @@ msgstr "Вы действительно хотите удалить «%s»?"
 #: ../panel/panel-preferences-dialog.c:1198
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Если вы удалите этот элемент с панели, он будет окончательно удалён."
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:399
+msgid "Cancel"
+msgstr "Отменить"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1035
+msgid "Remove"
+msgstr "Удалить"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1193
@@ -281,20 +291,28 @@ msgstr "Поскольку панель запущена в режиме кио�
 msgid "Modifying the panel is not allowed"
 msgstr "Изменение панели запрещено"
 
-#: ../panel/panel-item-dialog.c:189
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Добавление новых элементов"
 
-#: ../panel/panel-item-dialog.c:191
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Добавьте на панель новые модули"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:202
+msgid "Help"
+msgstr "Справка"
+
+#: ../panel/panel-item-dialog.c:204
+msgid "Close"
+msgstr "Закрыть"
+
+#: ../panel/panel-item-dialog.c:217
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "_Искать:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:225
 msgid "Enter search phrase here"
 msgstr "Введите фразу для поиска"
 
@@ -809,18 +827,18 @@ msgstr "Вы действительно хотите выключить комп
 msgid "Turning off computer in %d seconds."
 msgstr "Компьютер будет выключен через %d с."
 
-#: ../plugins/actions/actions.c:624
+#: ../plugins/actions/actions.c:593
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Разделитель"
 
-#: ../plugins/actions/actions.c:986
+#: ../plugins/actions/actions.c:955
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Не удалось выполнить действие «%s»"
 
-#: ../plugins/actions/actions.c:1157
+#: ../plugins/actions/actions.c:1118
 msgid "John Doe"
 msgstr "Вася Пупкин"
 
@@ -900,17 +918,22 @@ msgid "Menu File"
 msgstr "Файл меню"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
 msgstr "Приложения"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:569
-#: ../plugins/directorymenu/directorymenu.c:388
+#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/directorymenu/directorymenu.c:397
 msgid "Select An Icon"
 msgstr "Выберите значок"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2328
+#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/directorymenu/directorymenu.c:400
+msgid "OK"
+msgstr "Ок"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:579
+#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не удалось выполнить команду «%s»."
@@ -1294,42 +1317,42 @@ msgstr "двенадцать"
 msgid "What time is it?"
 msgstr "Который час?"
 
-#: ../plugins/directorymenu/directorymenu.c:245
+#: ../plugins/directorymenu/directorymenu.c:247
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Меню каталога"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:582
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Не удалось запустить приложение «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:614
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Не удалось получить тип содержимого для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:623
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Не найдено приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:639
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Не удалось запустить приложение по умолчанию для «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Не удалось запустить предпочитаемое приложение для категории «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:802
+#: ../plugins/directorymenu/directorymenu.c:810
 msgid "Open Folder"
 msgstr "Открыть папку"
 
-#: ../plugins/directorymenu/directorymenu.c:813
+#: ../plugins/directorymenu/directorymenu.c:821
 msgid "Open in Terminal"
 msgstr "Открыть в окне терминала"
 
@@ -1370,11 +1393,11 @@ msgstr "Фильтрация"
 msgid "Open launcher menu"
 msgstr "Открыть меню запуска"
 
-#: ../plugins/launcher/launcher.c:1591
+#: ../plugins/launcher/launcher.c:1595
 msgid "Unnamed Item"
 msgstr "Элемент без названия"
 
-#: ../plugins/launcher/launcher.c:1740
+#: ../plugins/launcher/launcher.c:1746
 msgid "No items"
 msgstr "Без элементов"
 
@@ -1498,7 +1521,7 @@ msgstr "_Настройки рабочих мест..."
 msgid "Unable to open the workspace settings"
 msgstr "Не удалось открыть настройки рабочих мест"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:862
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
 #, c-format
 msgid "Workspace %d"
 msgstr "Рабочее место %d"
@@ -1555,15 +1578,15 @@ msgstr "_Расширять"
 msgid "Adds a separator or space between panel items"
 msgstr "Добавляет разделитель или промежуток между элементами панели"
 
-#: ../plugins/showdesktop/showdesktop.c:210
+#: ../plugins/showdesktop/showdesktop.c:216
 msgid "Restore the minimized windows"
 msgstr "Восстановить свёрнутые окна"
 
-#: ../plugins/showdesktop/showdesktop.c:212
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Minimize all open windows and show the desktop"
 msgstr "Скрыть окна и показать рабочий стол"
 
-#: ../plugins/showdesktop/showdesktop.c:215
+#: ../plugins/showdesktop/showdesktop.c:221
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Показать рабочий стол"
@@ -1710,23 +1733,23 @@ msgstr "Показывать только с_вёрнутые окна"
 msgid "Show windows from all mo_nitors"
 msgstr "Показывать окна со всех _мониторов"
 
-#: ../plugins/tasklist/tasklist-widget.c:3392
+#: ../plugins/tasklist/tasklist-widget.c:3414
 msgid "Mi_nimize All"
 msgstr "Св_ернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3401
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Un_minimize All"
 msgstr "Отменить сво_рачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3429
 msgid "Ma_ximize All"
 msgstr "Раз_вернуть все"
 
-#: ../plugins/tasklist/tasklist-widget.c:3416
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "_Unmaximize All"
 msgstr "Отменить _разворачивание всех"
 
-#: ../plugins/tasklist/tasklist-widget.c:3426
+#: ../plugins/tasklist/tasklist-widget.c:3448
 msgid "_Close All"
 msgstr "_Закрыть все"
 
@@ -1734,28 +1757,28 @@ msgstr "_Закрыть все"
 msgid "Switch between open windows using buttons"
 msgstr "Переключаться между открытыми окнами с помощью кнопок"
 
-#: ../plugins/windowmenu/windowmenu.c:660
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "Рабочий стол"
 
-#: ../plugins/windowmenu/windowmenu.c:1253
+#: ../plugins/windowmenu/windowmenu.c:1266
 msgid "No Windows"
 msgstr "Без окон"
 
-#: ../plugins/windowmenu/windowmenu.c:1268
+#: ../plugins/windowmenu/windowmenu.c:1281
 msgid "Urgent Windows"
 msgstr "Срочные окна"
 
-#: ../plugins/windowmenu/windowmenu.c:1310
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Добавить рабочее место"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1343
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Удалить рабочее место «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1332
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Удалить рабочее место %d"
