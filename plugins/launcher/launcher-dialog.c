@@ -40,7 +40,7 @@
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
-#define LAUNCHER_WIDGET_XID(widget) ((guint) GDK_WINDOW_XID (gtk_widget_get_root_window (GTK_WIDGET (widget))))
+#define LAUNCHER_WIDGET_XID(widget) ((guint) GDK_WINDOW_XID (gdk_screen_get_root_window (gtk_widget_get_screen (GTK_WIDGET (widget)))))
 #else
 #define LAUNCHER_WIDGET_XID(widget) (0)
 #endif
