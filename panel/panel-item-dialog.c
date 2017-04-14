@@ -196,7 +196,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 
   icon = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON);
   dialog->add_button = gtk_button_new_with_mnemonic ("_Add");
-  gtk_button_set_image (dialog->add_button, GTK_IMAGE (icon));
+  gtk_button_set_image (GTK_BUTTON (dialog->add_button), icon);
   gtk_widget_show_all (dialog->add_button);
 
   gtk_dialog_add_button (GTK_DIALOG (dialog), _("Help"), GTK_RESPONSE_HELP);
