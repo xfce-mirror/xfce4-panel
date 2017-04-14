@@ -2486,7 +2486,7 @@ panel_window_set_autohide_behavior (PanelWindow *window,
   guint        i;
   const gchar *properties[] = { "enter-opacity", "leave-opacity",
                                 "borders", "background-style",
-                                "background-color",
+                                "background-rgba",
                                 "role", "screen" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));

@@ -84,7 +84,6 @@ enum
   PROP_COMPOSITED,
   PROP_BACKGROUND_STYLE,
   PROP_BACKGROUND_RGBA,
-  PROP_BACKGROUND_COLOR,
   PROP_BACKGROUND_IMAGE
 };
 
@@ -160,13 +159,6 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_BACKGROUND_COLOR,
-                                   g_param_spec_boxed ("background-color",
-                                                       NULL, NULL,
-                                                       GDK_TYPE_COLOR,
-                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (gobject_class,
                                    PROP_BACKGROUND_IMAGE,
                                    g_param_spec_string ("background-image",
                                                         NULL, NULL,
@@ -209,7 +201,6 @@ panel_base_window_init (PanelBaseWindow *window)
   window->background_style = PANEL_BG_STYLE_NONE;
   window->background_image = NULL;
   window->background_rgba = NULL;
-  window->background_color = NULL;
 
   window->priv->css_provider = gtk_css_provider_new ();
   window->priv->enter_opacity = 1.00;
@@ -241,7 +232,6 @@ panel_base_window_get_property (GObject    *object,
   PanelBaseWindow         *window = PANEL_BASE_WINDOW (object);
   PanelBaseWindowPrivate  *priv = window->priv;
   GdkRGBA                 *rgba;
-  GdkColor                *color;
   GdkRGBA                  bg_color;
   GtkStyleContext         *ctx;
 
@@ -270,18 +260,6 @@ panel_base_window_get_property (GObject    *object,
           rgba = &bg_color;
         }
       g_value_set_boxed (value, rgba);
-      break;
-
-    case PROP_BACKGROUND_COLOR:
-      if (window->background_color != NULL)
-        color = window->background_color;
-      else
-        {
-          ctx = gtk_widget_get_style_context (GTK_WIDGET (window));
-          gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_color);
-          color = &bg_color;
-        }
-      g_value_set_boxed (value, color);
       break;
 
     case PROP_BACKGROUND_IMAGE:
@@ -380,19 +358,6 @@ panel_base_window_set_property (GObject      *object,
         }
       break;
 
-    case PROP_BACKGROUND_COLOR:
-      if (window->background_color != NULL)
-        gdk_color_free (window->background_color);
-      window->background_color = g_value_dup_boxed (value);
-
-      if (window->background_style == PANEL_BG_STYLE_COLOR)
-        {
-          gtk_widget_queue_draw (GTK_WIDGET (window));
-          panel_base_window_set_plugin_data (window,
-              panel_base_window_set_plugin_background_color);
-        }
-      break;
-
     case PROP_BACKGROUND_IMAGE:
       /* store new filename */
       g_free (window->background_image);
@@ -455,8 +420,6 @@ panel_base_window_finalize (GObject *object)
   g_free (window->background_image);
   if (window->background_rgba != NULL)
     gdk_rgba_free (window->background_rgba);
-  if (window->background_color != NULL)
-    gdk_color_free (window->background_color);
   g_object_unref (window->priv->css_provider);
 
   (*G_OBJECT_CLASS (panel_base_window_parent_class)->finalize) (object);
