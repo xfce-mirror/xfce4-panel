@@ -153,9 +153,9 @@ wrapper_plug_draw (GtkWidget *widget,
                    cairo_t   *cr)
 {
   WrapperPlug     *plug = WRAPPER_PLUG (widget);
-  GtkStyleContext *style;
+  GtkStyleContext *context;
   const GdkRGBA   *color;
-  GdkRGBA          rgba;
+  GdkRGBA         *rgba;
   GdkPixbuf       *pixbuf;
   GError          *error = NULL;
 
@@ -215,9 +215,11 @@ wrapper_plug_draw (GtkWidget *widget,
         }
       else
         {
-          style = gtk_widget_get_style_context (widget);
-          gtk_style_context_get_background_color (style, GTK_STATE_FLAG_NORMAL, &rgba);
-          gdk_cairo_set_source_rgba (cr, &rgba);
+          context = gtk_widget_get_style_context (widget);
+          gtk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
+                                 GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                                 &rgba, NULL);
+          gdk_cairo_set_source_rgba (cr, rgba);
         }
 
       /* draw the background color */

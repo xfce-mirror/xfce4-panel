@@ -232,7 +232,6 @@ panel_base_window_get_property (GObject    *object,
   PanelBaseWindow         *window = PANEL_BASE_WINDOW (object);
   PanelBaseWindowPrivate  *priv = window->priv;
   GdkRGBA                 *rgba;
-  GdkRGBA                  bg_color;
   GtkStyleContext         *ctx;
 
   switch (prop_id)
@@ -256,8 +255,9 @@ panel_base_window_get_property (GObject    *object,
       else
         {
           ctx = gtk_widget_get_style_context (GTK_WIDGET (window));
-          gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_color);
-          rgba = &bg_color;
+          gtk_style_context_get (ctx, GTK_STATE_FLAG_NORMAL,
+                                 GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                                 &rgba, NULL);
         }
       g_value_set_boxed (value, rgba);
       break;
@@ -295,9 +295,7 @@ panel_base_window_set_property (GObject      *object,
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (object);
   PanelBaseWindowPrivate *priv = window->priv;
   PanelBgStyle            bg_style;
-  GtkStyleContext        *context;
 
-  context = gtk_widget_get_style_context (GTK_WIDGET (window));
   switch (prop_id)
     {
     case PROP_ENTER_OPACITY:
