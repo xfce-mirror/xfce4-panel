@@ -54,7 +54,7 @@ struct _WrapperPlug
 #if GTK_CHECK_VERSION (3, 0, 0)
   GdkRGBA         *background_rgba;
 #else
-  GdkColor        *background_color;
+  gchar           *background_color;
 #endif
   gchar           *background_image;
   cairo_pattern_t *background_image_cache;
@@ -237,8 +237,10 @@ wrapper_plug_expose_event (GtkWidget      *widget,
 {
   WrapperPlug    *plug = WRAPPER_PLUG (widget);
   cairo_t        *cr;
-  const GdkColor *color;
+  gchar          *color_string;
+  gchar         **color_strings;
   GdkPixbuf      *pixbuf;
+  gdouble         red, green, blue, alpha;
   GError         *error = NULL;
 
   if (GTK_WIDGET_DRAWABLE (widget))
@@ -289,14 +291,25 @@ wrapper_plug_expose_event (GtkWidget      *widget,
           if (plug->background_color != NULL)
             {
               /* get the background gdk color */
-              if (plug->background_color != NULL)
-                color = plug->background_color;
-              else
-                color = &(widget->style->bg[GTK_STATE_NORMAL]);
+              if (plug->background_color != NULL) {
+                color_string = g_strdup (plug->background_color);
+                /* the rgba color string format is always either rgb(0,0,0) or
+                   rgba(0,0,0,0.0) */
+                color_strings = g_strsplit_set (color_string, "(),", -1);
+                red = g_ascii_strtod (color_strings[1], NULL) / 255;
+                green = g_ascii_strtod (color_strings[2], NULL) / 255;
+                blue = g_ascii_strtod (color_strings[3], NULL) / 255;
+                /* as the rgb string is null-terminated, check whether an alpha value
+                   is provided or fall back to full opacity */
+                if (g_strcmp0(color_strings[0],"rgba") == 0)
+                  alpha = g_ascii_strtod (color_strings[4], NULL);
+                else
+                  alpha = 1.0;
+              }
 
               /* draw the background color */
               cr = gdk_cairo_create (widget->window);
-              cairo_set_source_rgba (cr, color->red, color->green, color->blue, 1.00);
+              cairo_set_source_rgba (cr, red, green, blue, alpha);
               cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
               gdk_cairo_rectangle (cr, &event->area);
               cairo_fill (cr);
@@ -322,7 +335,7 @@ wrapper_plug_background_reset (WrapperPlug *plug)
   plug->background_rgba = NULL;
 #else
   if (plug->background_color != NULL)
-    gdk_color_free (plug->background_color);
+    g_free (plug->background_color);
   plug->background_color = NULL;
 #endif
 
@@ -379,16 +392,12 @@ void
 wrapper_plug_set_background_color (WrapperPlug *plug,
                                    const gchar *color_string)
 {
-  GdkColor color = { 0, };
-
   panel_return_if_fail (WRAPPER_IS_PLUG (plug));
 
   wrapper_plug_background_reset (plug);
 
-
-  if (color_string != NULL
-      && gdk_color_parse (color_string, &color))
-    plug->background_color = gdk_color_copy (&color);
+  if (color_string != NULL)
+    plug->background_color = g_strdup (color_string);
 
   gtk_widget_queue_draw (GTK_WIDGET (plug));
 }
