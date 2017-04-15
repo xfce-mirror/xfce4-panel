@@ -201,9 +201,8 @@ xfce_arrow_button_init (XfceArrowButton *button)
   gtk_widget_set_has_window (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_default (GTK_WIDGET (button), FALSE);
   gtk_widget_set_can_focus (GTK_WIDGET (button), FALSE);
-  gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
-
 #if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_set_focus_on_click (GTK_WIDGET (button), FALSE);
   /* Make sure themes like Adwaita, which set excessive padding, don't cause the
      launcher buttons to overlap when panels have a fairly normal size */
   context = gtk_widget_get_style_context (GTK_WIDGET (button));
@@ -212,6 +211,8 @@ xfce_arrow_button_init (XfceArrowButton *button)
   gtk_style_context_add_provider (context,
                                   GTK_STYLE_PROVIDER (provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#else
+  gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
 #endif
 }
 
