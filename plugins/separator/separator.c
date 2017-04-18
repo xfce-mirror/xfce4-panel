@@ -36,7 +36,8 @@
 
 #define SEPARATOR_OFFSET (0.15)
 #define SEPARATOR_SIZE   (8)
-#define DOTS_SIZE        (6)
+#define DOTS_OFFSET      (4)
+#define DOTS_SIZE        (3)
 #define HANDLE_SIZE      (4)
 
 
@@ -94,15 +95,6 @@ enum
   PROP_0,
   PROP_STYLE,
   PROP_EXPAND
-};
-
-
-
-static const gchar bits[3][6] =
-{
-  { 0x00, 0x0e, 0x02, 0x02, 0x00, 0x00 }, /* dark */
-  { 0x00, 0x00, 0x10, 0x10, 0x1c, 0x00 }, /* light */
-  { 0x00, 0x00, 0x0c, 0x0c, 0x00, 0x00 }  /* mid */
 };
 
 
@@ -226,9 +218,8 @@ separator_plugin_draw (GtkWidget *widget,
 {
   SeparatorPlugin  *plugin = XFCE_SEPARATOR_PLUGIN (widget);
   GtkAllocation     alloc;
-  gint              x, y, w, h;
-  gint              rows, cols;
-  guint             i;
+  gdouble           x, y;
+  guint             dotcount, i;
   GtkStyleContext  *ctx;
   GdkRGBA           fg_rgba;
 
@@ -236,6 +227,8 @@ separator_plugin_draw (GtkWidget *widget,
 
   ctx = gtk_widget_get_style_context (widget);
   gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget), &fg_rgba);
+  /* Tone down the foreground color a bit for the separators */
+  fg_rgba.alpha = 0.5;
   gdk_cairo_set_source_rgba (cr, &fg_rgba);
 
   switch (plugin->style)
@@ -267,75 +260,55 @@ separator_plugin_draw (GtkWidget *widget,
       break;
 
     case SEPARATOR_PLUGIN_STYLE_HANDLE:
-      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-          GTK_ORIENTATION_HORIZONTAL)
+      x = (alloc.width - HANDLE_SIZE) / 2;
+      y = (alloc.height - HANDLE_SIZE) / 2;
+      cairo_set_line_width (cr, 1.5);
+      /* draw the handle */
+      for (i = 0; i < 3; i++)
         {
-          gtk_render_handle (ctx, cr,
-                             (gdouble) (alloc.width - HANDLE_SIZE) / 2.0,
-                             (gdouble) alloc.height * SEPARATOR_OFFSET,
-                             (gdouble) HANDLE_SIZE,
-                             (gdouble) alloc.height * (1.0 - 2.0 * SEPARATOR_OFFSET));
-        }
-      else
-        {
-          gtk_render_handle (ctx, cr,
-                             (gdouble) alloc.width * SEPARATOR_OFFSET,
-                             (gdouble) (alloc.height - HANDLE_SIZE) / 2.0,
-                             (gdouble) alloc.width * (1.0 - 2.0 * SEPARATOR_OFFSET),
-                             (gdouble) HANDLE_SIZE);
-        }
-      break;
-
-      /* temporarily disabled */
-#if 0
-    case SEPARATOR_PLUGIN_STYLE_DOTS:
-      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-          GTK_ORIENTATION_HORIZONTAL)
-        {
-          rows = MAX (alloc.height / DOTS_SIZE, 1);
-          w = DOTS_SIZE;
-          h = rows * DOTS_SIZE;
-        }
-      else
-        {
-          cols = MAX (alloc.width / DOTS_SIZE, 1);
-          h = DOTS_SIZE;
-          w = cols * DOTS_SIZE;
-        }
-
-      x = alloc.x + (alloc.width - w) / 2;
-      y = alloc.y + (alloc.height - h) / 2;
-
-      for (i = 0; i < G_N_ELEMENTS (bits); i++)
-        {
-          /* pick color, but be same order as bits array */
-          if (i == 0)
-            gc = widget->style->dark_gc[state];
-          else if (i == 1)
-            gc = widget->style->light_gc[state];
+          if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+              GTK_ORIENTATION_HORIZONTAL)
+            {
+              cairo_move_to (cr, x, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));
+              cairo_line_to (cr, x + HANDLE_SIZE, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));
+            }
           else
-            gc = widget->style->mid_gc[state];
-
-          /* clip to drawing area */
-          gdk_gc_set_clip_rectangle (gc, &(event->area));
-
-          /* set the stipple for the gc */
-          bmap = gdk_bitmap_create_from_data (widget->window, bits[i],
-                                              DOTS_SIZE, DOTS_SIZE);
-          gdk_gc_set_stipple (gc, bmap);
-          gdk_gc_set_fill (gc, GDK_STIPPLED);
-          g_object_unref (G_OBJECT (bmap));
-
-          /* draw the dots */
-          gdk_gc_set_ts_origin (gc, x, y);
-          gdk_draw_rectangle (widget->window, gc, TRUE, x, y, w, h);
-          gdk_gc_set_fill (gc, GDK_SOLID);
-
-          /* unset the clip */
-          gdk_gc_set_clip_rectangle (gc, NULL);
+            {
+              cairo_move_to (cr, x + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2), y);
+              cairo_line_to (cr, x + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2), y + HANDLE_SIZE);
+            }
+          cairo_stroke (cr);
         }
       break;
-#endif
+
+    case SEPARATOR_PLUGIN_STYLE_DOTS:
+      x = (alloc.width - DOTS_SIZE) / 2;
+      y = (alloc.height - DOTS_SIZE) / 2;
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+          GTK_ORIENTATION_HORIZONTAL)
+        {
+          dotcount = MAX(alloc.height / (DOTS_SIZE + DOTS_OFFSET), 1);
+          y = (alloc.height / (double) dotcount - DOTS_SIZE) / 2;
+        }
+      else
+        {
+          dotcount = MAX(alloc.width / (DOTS_SIZE + DOTS_OFFSET), 1);
+          x = (alloc.width / (double) dotcount - DOTS_SIZE) / 2;
+        }
+
+      /* draw the dots */
+      for (i = 0; i < dotcount; i++)
+        {
+          if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+              GTK_ORIENTATION_HORIZONTAL)
+              cairo_arc (cr, x , y + (i * (alloc.height / (double) dotcount)) + (DOTS_SIZE / 2),
+                         DOTS_SIZE / 2, 0, 2 * 3.14);
+          else
+              cairo_arc (cr, x + (i * (alloc.width / (double) dotcount)) + (DOTS_SIZE / 2), y,
+                         DOTS_SIZE / 2, 0, 2 * 3.14);
+          cairo_fill (cr);
+        }
+      break;
     }
 
   return FALSE;
