@@ -70,6 +70,10 @@ struct _PanelBaseWindow
   GdkRGBA                 *background_rgba;
   GdkColor                *background_color;
   gchar                   *background_image;
+
+  /* transparency settings */
+  gdouble                  enter_opacity;
+  gdouble                  leave_opacity;
 };
 
 GType        panel_base_window_get_type                    (void) G_GNUC_CONST;

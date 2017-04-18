@@ -48,6 +48,9 @@ WrapperPlug  *wrapper_plug_new                  (Window           socket_id);
 WrapperPlug  *wrapper_plug_new                  (GdkNativeWindow  socket_id);
 #endif
 
+void          wrapper_plug_set_opacity          (WrapperPlug     *plug,
+                                                 gdouble          opacity);
+
 void          wrapper_plug_set_background_alpha (WrapperPlug     *plug,
                                                  gdouble          alpha);
 

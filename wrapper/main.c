@@ -109,6 +109,13 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
           gtk_widget_set_sensitive (GTK_WIDGET (provider), g_value_get_boolean (value));
           break;
 
+        case PROVIDER_PROP_TYPE_SET_OPACITY:
+#if GTK_CHECK_VERSION (3, 0, 0)
+          plug = g_object_get_qdata (G_OBJECT (provider), plug_quark);
+          wrapper_plug_set_opacity (plug, g_value_get_double (value));
+#endif
+          break;
+
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR:
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE:
         case PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET:

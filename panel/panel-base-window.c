@@ -67,6 +67,13 @@ static void     panel_base_window_set_background_css          (PanelBaseWindow  
                                                                gchar                *css_string);
 static void     panel_base_window_set_plugin_data             (PanelBaseWindow      *window,
                                                                GtkCallback           func);
+static void     panel_base_window_set_plugin_opacity          (GtkWidget            *widget,
+                                                               gpointer              user_data,
+                                                               gdouble               opacity);
+static void     panel_base_window_set_plugin_enter_opacity    (GtkWidget            *widget,
+                                                               gpointer              user_data);
+static void     panel_base_window_set_plugin_leave_opacity    (GtkWidget            *widget,
+                                                               gpointer              user_data);
 static void     panel_base_window_set_plugin_background_color (GtkWidget            *widget,
                                                                gpointer              user_data);
 static void     panel_base_window_set_plugin_background_image (GtkWidget            *widget,
@@ -93,10 +100,6 @@ struct _PanelBaseWindowPrivate
 
   /* background css style provider */
   GtkCssProvider  *css_provider;
-
-  /* transparency settings */
-  gdouble          enter_opacity;
-  gdouble          leave_opacity;
 
   /* active window timeout id */
   guint            active_timeout_id;
@@ -201,10 +204,10 @@ panel_base_window_init (PanelBaseWindow *window)
   window->background_style = PANEL_BG_STYLE_NONE;
   window->background_image = NULL;
   window->background_rgba = NULL;
+  window->enter_opacity = 1.00;
+  window->leave_opacity = 1.00;
 
   window->priv->css_provider = gtk_css_provider_new ();
-  window->priv->enter_opacity = 1.00;
-  window->priv->leave_opacity = 1.00;
   window->priv->borders = PANEL_BORDER_NONE;
   window->priv->active_timeout_id = 0;
 
@@ -237,11 +240,11 @@ panel_base_window_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_ENTER_OPACITY:
-      g_value_set_uint (value, rint (priv->enter_opacity * 100.00));
+      g_value_set_uint (value, rint (window->enter_opacity * 100.00));
       break;
 
     case PROP_LEAVE_OPACITY:
-      g_value_set_uint (value, rint (priv->leave_opacity * 100.00));
+      g_value_set_uint (value, rint (window->leave_opacity * 100.00));
       break;
 
     case PROP_BACKGROUND_STYLE:
@@ -300,14 +303,18 @@ panel_base_window_set_property (GObject      *object,
     {
     case PROP_ENTER_OPACITY:
       /* set the new enter opacity */
-      priv->enter_opacity = g_value_get_uint (value) / 100.00;
+      window->enter_opacity = g_value_get_uint (value) / 100.00;
       break;
 
     case PROP_LEAVE_OPACITY:
       /* set the new leave opacity */
-      priv->leave_opacity = g_value_get_uint (value) / 100.00;
+      window->leave_opacity = g_value_get_uint (value) / 100.00;
       if (window->is_composited)
-        gtk_widget_set_opacity (GTK_WIDGET (object), priv->leave_opacity);
+        {
+          gtk_widget_set_opacity (GTK_WIDGET (object), window->leave_opacity);
+          panel_base_window_set_plugin_data (window,
+                                             panel_base_window_set_plugin_leave_opacity);
+        }
       break;
 
     case PROP_BACKGROUND_STYLE:
@@ -455,14 +462,19 @@ static gboolean
 panel_base_window_enter_notify_event (GtkWidget        *widget,
                                       GdkEventCrossing *event)
 {
+  PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
   PanelBaseWindowPrivate *priv = PANEL_BASE_WINDOW (widget)->priv;
 
   /* switch to enter opacity when compositing is enabled
    * and the two values are different */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && PANEL_BASE_WINDOW (widget)->is_composited
-      && priv->leave_opacity != priv->enter_opacity)
-    gtk_widget_set_opacity (GTK_WIDGET (widget), priv->enter_opacity);
+      && window->leave_opacity != window->enter_opacity)
+    {
+      gtk_widget_set_opacity (GTK_WIDGET (widget), window->enter_opacity);
+      panel_base_window_set_plugin_data (window,
+                                         panel_base_window_set_plugin_enter_opacity);
+    }
 
   return FALSE;
 }
@@ -473,14 +485,19 @@ static gboolean
 panel_base_window_leave_notify_event (GtkWidget        *widget,
                                       GdkEventCrossing *event)
 {
+  PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
   PanelBaseWindowPrivate *priv = PANEL_BASE_WINDOW (widget)->priv;
 
   /* switch to leave opacity when compositing is enabled
    * and the two values are different */
   if (event->detail != GDK_NOTIFY_INFERIOR
       && PANEL_BASE_WINDOW (widget)->is_composited
-      && priv->leave_opacity != priv->enter_opacity)
-    gtk_widget_set_opacity (GTK_WIDGET (widget), priv->leave_opacity);
+      && window->leave_opacity != window->enter_opacity)
+    {
+      gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
+      panel_base_window_set_plugin_data (window,
+                                         panel_base_window_set_plugin_leave_opacity);
+    }
 
   return FALSE;
 }
@@ -501,7 +518,12 @@ panel_base_window_composited_changed (GtkWidget *widget)
     return;
 
   if (window->is_composited)
-    gtk_widget_set_opacity (GTK_WIDGET (widget), window->priv->leave_opacity);
+    {
+      gtk_widget_set_opacity (GTK_WIDGET (widget), window->leave_opacity);
+      panel_base_window_set_plugin_data (window,
+                                         panel_base_window_set_plugin_leave_opacity);
+
+    }
 
   panel_debug (PANEL_DEBUG_BASE_WINDOW,
                "%p: compositing=%s", window,
@@ -651,6 +673,44 @@ panel_base_window_set_plugin_data (PanelBaseWindow *window,
   itembar = gtk_bin_get_child (GTK_BIN (window));
   if (G_LIKELY (itembar != NULL))
     gtk_container_foreach (GTK_CONTAINER (itembar), func, window);
+}
+
+
+
+static void
+panel_base_window_set_plugin_enter_opacity (GtkWidget *widget,
+                                            gpointer   user_data)
+{
+  PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
+  PanelBaseWindowPrivate *priv = window->priv;
+
+  panel_base_window_set_plugin_opacity (widget, user_data, window->enter_opacity);
+}
+
+
+
+static void
+panel_base_window_set_plugin_leave_opacity (GtkWidget *widget,
+                                            gpointer   user_data)
+{
+  PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
+  PanelBaseWindowPrivate *priv = window->priv;
+
+  panel_base_window_set_plugin_opacity (widget, user_data, window->leave_opacity);
+}
+
+
+
+static void
+panel_base_window_set_plugin_opacity (GtkWidget *widget,
+                                      gpointer   user_data,
+                                      gdouble    opacity)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  panel_return_if_fail (PANEL_IS_BASE_WINDOW (user_data));
+
+  if (PANEL_IS_PLUGIN_EXTERNAL (widget))
+    panel_plugin_external_set_opacity (PANEL_PLUGIN_EXTERNAL (widget), opacity);
 }
 
 

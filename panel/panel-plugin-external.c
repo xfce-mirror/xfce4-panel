@@ -1116,6 +1116,26 @@ panel_plugin_external_restart (PanelPluginExternal *external)
 
 
 void
+panel_plugin_external_set_opacity (PanelPluginExternal *external,
+                                   gdouble              opacity)
+{
+  GValue value = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (external));
+
+  g_value_init (&value, G_TYPE_DOUBLE);
+  g_value_set_double (&value, opacity);
+
+  panel_plugin_external_queue_add (external,
+                                   PROVIDER_PROP_TYPE_SET_OPACITY,
+                                   &value);
+
+  g_value_unset (&value);
+}
+
+
+
+void
 panel_plugin_external_set_background_color (PanelPluginExternal *external,
                                             const GdkRGBA       *color)
 {

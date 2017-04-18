@@ -373,6 +373,21 @@ wrapper_plug_new (GdkNativeWindow socket_id)
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 void
+wrapper_plug_set_opacity (WrapperPlug *plug,
+                          gdouble      opacity)
+{
+
+  panel_return_if_fail (WRAPPER_IS_PLUG (plug));
+
+  if (gtk_widget_get_opacity (GTK_WIDGET (plug)) != opacity)
+    gtk_widget_set_opacity (GTK_WIDGET (plug), opacity);
+}
+#endif
+
+
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+void
 wrapper_plug_set_background_color (WrapperPlug *plug,
                                    const gchar *color_string)
 {

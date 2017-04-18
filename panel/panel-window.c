@@ -3023,6 +3023,11 @@ panel_window_set_povider_info (PanelWindow *window,
           /* unset the background (PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET) */
           panel_plugin_external_set_background_color (PANEL_PLUGIN_EXTERNAL (provider), NULL);
         }
+      if (base_window->leave_opacity != 1.0)
+        {
+          panel_plugin_external_set_opacity (PANEL_PLUGIN_EXTERNAL (provider),
+              base_window->leave_opacity);
+        }
     }
 
   panel_window_plugin_set_mode (provider, window);
