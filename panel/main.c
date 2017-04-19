@@ -400,7 +400,7 @@ dbus_return:
             {
               g_clear_error (&error);
 
-              if (xfce_dialog_confirm (NULL, GTK_STOCK_EXECUTE, NULL,
+              if (xfce_dialog_confirm (NULL, "system-run", _("Execute"),
                                        _("Do you want to start the panel? If you do, make sure "
                                          "you save the session on logout, so the panel is "
                                          "automatically started the next time you login."),

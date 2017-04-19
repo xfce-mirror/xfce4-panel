@@ -1020,7 +1020,7 @@ systray_plugin_dialog_clear_clicked (GtkWidget     *button,
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->box));
 
   if (xfce_dialog_confirm (GTK_WINDOW (gtk_widget_get_toplevel (button)),
-                           GTK_STOCK_CLEAR, NULL, NULL,
+                           "edit-clear", _("Clear"), NULL,
                            _("Are you sure you want to clear the list of "
                              "known applications?")))
     {

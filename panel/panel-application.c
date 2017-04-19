@@ -979,7 +979,7 @@ panel_application_drag_data_received (PanelWindow      *window,
               if (G_LIKELY (uris != NULL))
                 {
                   n_items = g_strv_length (uris);
-                  if (xfce_dialog_confirm (NULL, GTK_STOCK_ADD, _("Create _Launcher"),
+                  if (xfce_dialog_confirm (NULL, "list-add", _("Create _Launcher"),
                                            _("This will create a new launcher plugin on the panel and inserts "
                                              "the dropped files as menu items."),
                                            ngettext ("Create new launcher from %d desktop file",
@@ -1721,7 +1721,7 @@ panel_application_logout (void)
     }
   else if (g_getenv ("SESSION_MANAGER") == NULL)
     {
-      if (xfce_dialog_confirm (NULL, GTK_STOCK_QUIT, NULL,
+      if (xfce_dialog_confirm (NULL, "application-exit", _("Quit"),
           _("You have started X without session manager. Clicking Quit will close the X server."),
           _("Are you sure you want to quit the panel?")))
         command = "xfce4-panel --quit";
