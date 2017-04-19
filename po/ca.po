@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 00:30+0200\n"
-"PO-Revision-Date: 2017-04-11 05:43+0000\n"
+"POT-Creation-Date: 2017-04-19 12:30+0200\n"
+"PO-Revision-Date: 2017-04-19 18:32+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -43,13 +43,13 @@ msgstr "Personalitzeu el plafó"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1028
-#: ../panel/panel-preferences-dialog.c:1195
+#: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Esteu segur que voleu suprimir «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1033
-#: ../panel/panel-preferences-dialog.c:1198
+#: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si suprimiu l'element del plafó, es perdrà permanentment."
 
@@ -60,6 +60,7 @@ msgid "Cancel"
 msgstr "Cancel·la"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../panel/panel-preferences-dialog.c:929
 msgid "Remove"
 msgstr "Suprimeix"
 
@@ -186,6 +187,10 @@ msgstr "No s'ha pogut sortir del plafó"
 msgid "Failed to send D-Bus message"
 msgstr "No s'ha pogut enviar un missatge a través de D-BUS"
 
+#: ../panel/main.c:403
+msgid "Execute"
+msgstr "Executa"
+
 #: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
@@ -201,34 +206,38 @@ msgstr "No s'ha trobat una instància en marxa de %s"
 msgid "Failed to launch the migration application"
 msgstr "No s'ha pogut iniciar l'aplicació de migració"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Crea un _llançador"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Això crearà un nou connector de llançador en el plafó i inserirà els fitxers que es deixin caure com a elements de menú."
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Crea un nou llançador per %d fitxer d'escriptori"
 msgstr[1] "Crea un nou llançador per %d fitxers d'escriptori"
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1724
+msgid "Quit"
+msgstr "Surt"
+
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Heu iniciat les X sense un gestor de sessions. Premeu Surt per a sortir del servidor de les X."
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "Esteu segur que voleu sortir del plafó?"
 
-#: ../panel/panel-application.c:1735
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "No s'ha pogut executar l'ordre «%s»"
@@ -262,7 +271,7 @@ msgstr "Afegeix un element nou"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Trieu un plafó per al connector nou:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:858
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
 #, c-format
 msgid "Panel %d"
 msgstr "Plafó %d"
@@ -319,41 +328,41 @@ msgstr "El connector s'ha reiniciat més d'un cop en els últims %d segons. Si p
 msgid "Automatic"
 msgstr "Automàtica"
 
-#: ../panel/panel-preferences-dialog.c:497
+#: ../panel/panel-preferences-dialog.c:502
 msgid "Primary"
 msgstr "Primària"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:516
+#: ../panel/panel-preferences-dialog.c:522
 #, c-format
 msgid "Screen %d"
 msgstr "Pantalla %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:542
+#: ../panel/panel-preferences-dialog.c:548
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:924
+#: ../panel/panel-preferences-dialog.c:930
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "El plafó i la configuració dels connectors seran eliminats permanentment."
 
-#: ../panel/panel-preferences-dialog.c:925
+#: ../panel/panel-preferences-dialog.c:931
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Esteu segur que voleu eliminar el plafó %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1043
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1042
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -362,7 +371,7 @@ msgstr "Nom intern: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1060
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nom intern: %s-%d"
@@ -1595,6 +1604,10 @@ msgstr "Sembla que un altre estri ha pres la funcionalitat de l'àrea de les not
 #: ../plugins/systray/systray.c:871
 msgid "The notification area lost selection"
 msgstr "L'àrea de notificacions ha perdut la selecció"
+
+#: ../plugins/systray/systray.c:1023
+msgid "Clear"
+msgstr "Neteja"
 
 #: ../plugins/systray/systray.c:1024
 msgid "Are you sure you want to clear the list of known applications?"
