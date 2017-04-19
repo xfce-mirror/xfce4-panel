@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 00:30+0100\n"
-"PO-Revision-Date: 2017-03-20 23:06+0000\n"
+"POT-Creation-Date: 2017-04-11 00:30+0200\n"
+"PO-Revision-Date: 2017-04-18 23:47+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/xfce/xfce4-panel/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,16 @@ msgstr "Er du sikker på at du vil fjerne «%s»?"
 #: ../panel/panel-preferences-dialog.c:1198
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Hvis du sletter elementer fra panelet vil den slettes permanent."
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:399
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1035
+msgid "Remove"
+msgstr "Fjern"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1193
@@ -101,7 +111,7 @@ msgstr "Legg til nytt programtillegg på panel"
 
 #: ../panel/main.c:83
 msgid "PLUGIN-NAME"
-msgstr "PLUGIN-NAVN"
+msgstr "PROGRAMTILLEGGS-NAVN"
 
 #: ../panel/main.c:84
 msgid "Restart the running panel instance"
@@ -139,7 +149,7 @@ msgstr "Xfce utviklingsteam. Alle rettigheter reververt."
 #: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Vennligst rapporter feil til <%s>."
+msgstr "Rapporter feil til <%s>."
 
 #: ../panel/main.c:321
 msgid "There is already a running instance"
@@ -228,7 +238,7 @@ msgstr "Klarte ikke kjøre kommandoen «%s»"
 #: ../panel/panel-dbus-client.c:210
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ugyldug programtillett hendelsessyntaks. Bruk PLUGIN-NAVN:NAVN[:TYPE:VERDI]."
+msgstr "Ugyldug programtillett hendelsessyntaks. Bruk PROGRAMTILLEGGS-NAVN:NAVN[:TYPE:VERDI]."
 
 #: ../panel/panel-dbus-client.c:243
 #, c-format
@@ -239,7 +249,7 @@ msgstr "Ugyldig hinttype \"%s\". Gyldige verdier er bool, double, int, string og
 
 #: ../panel/panel-dialogs.c:49
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "Panelet til Xfce Skrivebordsmiljø"
+msgstr "Panelet til Xfce skrivebordsmiljø"
 
 #: ../panel/panel-dialogs.c:54
 msgid "translator-credits"
@@ -269,20 +279,28 @@ msgstr "Ettersom panelet kjører i kiosk-modus, kan du ikke gjøre endringer på
 msgid "Modifying the panel is not allowed"
 msgstr "Endring av panelet er ikke tillatt"
 
-#: ../panel/panel-item-dialog.c:189
+#: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
 msgstr "Legg til nye elementer"
 
-#: ../panel/panel-item-dialog.c:191
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
 msgstr "Legg til nye programtillegg i panel"
 
-#: ../panel/panel-item-dialog.c:214
+#: ../panel/panel-item-dialog.c:202
+msgid "Help"
+msgstr "Hjelp"
+
+#: ../panel/panel-item-dialog.c:204
+msgid "Close"
+msgstr "Lukk"
+
+#: ../panel/panel-item-dialog.c:217
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "_Søk:"
 
-#: ../panel/panel-item-dialog.c:222
+#: ../panel/panel-item-dialog.c:225
 msgid "Enter search phrase here"
 msgstr "Skriv inn søkeord her"
 
@@ -797,18 +815,18 @@ msgstr "Er du sikker på at du vil avslutte?"
 msgid "Turning off computer in %d seconds."
 msgstr "Datamaskinen slås av om %d sekunder."
 
-#: ../plugins/actions/actions.c:624
+#: ../plugins/actions/actions.c:593
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Skille"
 
-#: ../plugins/actions/actions.c:986
+#: ../plugins/actions/actions.c:955
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Klarte ikke å kjøre handlingen «%s»"
 
-#: ../plugins/actions/actions.c:1157
+#: ../plugins/actions/actions.c:1118
 msgid "John Doe"
 msgstr "Ola Nordmann"
 
@@ -819,7 +837,7 @@ msgstr "Logg ut, lås eller andre systemvalg"
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
 msgid "Applications Menu"
-msgstr "Applikasjonsmeny"
+msgstr "Programmeny"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
@@ -888,17 +906,22 @@ msgid "Menu File"
 msgstr "Menyfil"
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu.c:38
+#: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
 msgstr "Programmer"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:569
-#: ../plugins/directorymenu/directorymenu.c:388
+#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/directorymenu/directorymenu.c:397
 msgid "Select An Icon"
 msgstr "Velg et ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:611
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2328
+#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/directorymenu/directorymenu.c:400
+msgid "OK"
+msgstr "OK"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:579
+#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Klarte ikke kjøre kommandoen «%s»."
@@ -1282,42 +1305,42 @@ msgstr "tolv"
 msgid "What time is it?"
 msgstr "Hva er klokken?"
 
-#: ../plugins/directorymenu/directorymenu.c:245
+#: ../plugins/directorymenu/directorymenu.c:247
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Mappemeny"
 
-#: ../plugins/directorymenu/directorymenu.c:574
+#: ../plugins/directorymenu/directorymenu.c:582
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "Klarte ikke starte applikasjon «%s»"
+msgstr "Klarte ikke starte programmet «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:606
+#: ../plugins/directorymenu/directorymenu.c:614
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "Klarte ikke finne innholdstype for \"%s\""
+msgstr "Klarte ikke å finne innholdstype for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:615
+#: ../plugins/directorymenu/directorymenu.c:623
 #, c-format
 msgid "No default application found for \"%s\""
-msgstr "Ingen standard applikasjon funnet for \"%s\""
+msgstr "Inget forvalgt program funnet for \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:631
+#: ../plugins/directorymenu/directorymenu.c:639
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "Klarte ikke starte standard applikasjon for «%s»"
+msgstr "Klarte ikke starte forvalgt program for «%s»"
 
-#: ../plugins/directorymenu/directorymenu.c:729
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "Klarte ikke kjøre foretrukket applikasjon for kateegori \"%s\""
+msgstr "Klarte ikke kjøre foretrukket program for kategorien \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:802
+#: ../plugins/directorymenu/directorymenu.c:810
 msgid "Open Folder"
 msgstr "Åpne mappe"
 
-#: ../plugins/directorymenu/directorymenu.c:813
+#: ../plugins/directorymenu/directorymenu.c:821
 msgid "Open in Terminal"
 msgstr "Åpne i _terminal"
 
@@ -1358,11 +1381,11 @@ msgstr "Filtrering"
 msgid "Open launcher menu"
 msgstr "Åpne oppstarter-menyen"
 
-#: ../plugins/launcher/launcher.c:1591
+#: ../plugins/launcher/launcher.c:1595
 msgid "Unnamed Item"
 msgstr "Uten navn"
 
-#: ../plugins/launcher/launcher.c:1740
+#: ../plugins/launcher/launcher.c:1746
 msgid "No items"
 msgstr "Ingen element"
 
@@ -1389,7 +1412,7 @@ msgstr "Legg til ett eller flere elementer til programstarteren"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Default"
-msgstr "Standard"
+msgstr "Forvalg"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "North"
@@ -1486,7 +1509,7 @@ msgstr "Arbeid_sområdeinnstillinger"
 msgid "Unable to open the workspace settings"
 msgstr "Klarte ikke åpne innstillinger for arbeidsområde"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:862
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbeidsområde %d"
@@ -1543,15 +1566,15 @@ msgstr "_Utvid"
 msgid "Adds a separator or space between panel items"
 msgstr "Legger til skille eller mellomrom mellom panelelementer"
 
-#: ../plugins/showdesktop/showdesktop.c:210
+#: ../plugins/showdesktop/showdesktop.c:216
 msgid "Restore the minimized windows"
 msgstr "Gjenopprett skjulte vinduer"
 
-#: ../plugins/showdesktop/showdesktop.c:212
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Minimize all open windows and show the desktop"
 msgstr "Skjul alle åpne vinduer og vis skrivebordet"
 
-#: ../plugins/showdesktop/showdesktop.c:215
+#: ../plugins/showdesktop/showdesktop.c:221
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
@@ -1698,23 +1721,23 @@ msgstr "Vis kun _minimerte vinduer"
 msgid "Show windows from all mo_nitors"
 msgstr "Vis vi_nduer fra alle skjermer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3392
+#: ../plugins/tasklist/tasklist-widget.c:3414
 msgid "Mi_nimize All"
 msgstr "S_kjul alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3401
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Un_minimize All"
 msgstr "V_is alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3429
 msgid "Ma_ximize All"
 msgstr "Ma_ksimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3416
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "_Unmaximize All"
 msgstr "De-m_aksimer alle"
 
-#: ../plugins/tasklist/tasklist-widget.c:3426
+#: ../plugins/tasklist/tasklist-widget.c:3448
 msgid "_Close All"
 msgstr "_Lukk alle"
 
@@ -1722,28 +1745,28 @@ msgstr "_Lukk alle"
 msgid "Switch between open windows using buttons"
 msgstr "Skifte mellom åpne vinduer med taster"
 
-#: ../plugins/windowmenu/windowmenu.c:660
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: ../plugins/windowmenu/windowmenu.c:1253
+#: ../plugins/windowmenu/windowmenu.c:1266
 msgid "No Windows"
 msgstr "Ingen vinduer"
 
-#: ../plugins/windowmenu/windowmenu.c:1268
+#: ../plugins/windowmenu/windowmenu.c:1281
 msgid "Urgent Windows"
 msgstr "Prioriterte vinduer"
 
-#: ../plugins/windowmenu/windowmenu.c:1310
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Legg til arbeidsområde"
 
-#: ../plugins/windowmenu/windowmenu.c:1330
+#: ../plugins/windowmenu/windowmenu.c:1343
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Fjern arbeindsområde \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1332
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Fjern arbeidsområde %d"
