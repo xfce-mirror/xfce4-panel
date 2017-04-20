@@ -217,7 +217,7 @@ applications_menu_plugin_init (ApplicationsMenuPlugin *plugin)
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->box);
   gtk_widget_show (plugin->box);
 
-  plugin->icon = gtk_image_new ();
+  plugin->icon = gtk_image_new_from_icon_name (DEFAULT_ICON_NAME, DEFAULT_ICON_SIZE);
   gtk_box_pack_start (GTK_BOX (plugin->box), plugin->icon, FALSE, FALSE, 0);
   gtk_widget_show (plugin->icon);
 
