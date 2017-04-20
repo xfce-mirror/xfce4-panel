@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 00:30+0200\n"
-"PO-Revision-Date: 2017-04-14 13:54+0000\n"
+"POT-Creation-Date: 2017-04-19 12:30+0200\n"
+"PO-Revision-Date: 2017-04-20 12:47+0000\n"
 "Last-Translator: Igor <f2404@yandex.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce4-panel/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -55,13 +55,13 @@ msgstr "Настройка панели"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1028
-#: ../panel/panel-preferences-dialog.c:1195
+#: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Вы действительно хотите удалить «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1033
-#: ../panel/panel-preferences-dialog.c:1198
+#: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Если вы удалите этот элемент с панели, он будет окончательно удалён."
 
@@ -72,6 +72,7 @@ msgid "Cancel"
 msgstr "Отменить"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../panel/panel-preferences-dialog.c:929
 msgid "Remove"
 msgstr "Удалить"
 
@@ -159,11 +160,11 @@ msgstr "Команда разработчиков Xfce. Все права защ
 #: ../panel/main.c:263
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Об ошибках сообщайте на <%s>."
+msgstr "Об ошибках сообщайте, пожалуйста, на <%s>."
 
 #: ../panel/main.c:321
 msgid "There is already a running instance"
-msgstr "Экземпляр уже выполняется на этом экране"
+msgstr "Экземпляр панели уже выполняется"
 
 #. spawn ourselfs again
 #: ../panel/main.c:366
@@ -198,6 +199,10 @@ msgstr "Не удалось закрыть панель"
 msgid "Failed to send D-Bus message"
 msgstr "Не удалось послать сообщение D-Bus"
 
+#: ../panel/main.c:403
+msgid "Execute"
+msgstr "Выполнить"
+
 #: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
@@ -213,17 +218,17 @@ msgstr "Не обнаружено запущенного экземпляра %s
 msgid "Failed to launch the migration application"
 msgstr "Не удалось запустить программу миграции"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Создать _значок запуска"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Это создаст новый модуль значка запуска на панели и вставит брошенные файлы как пункты меню."
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
@@ -232,20 +237,24 @@ msgstr[1] "Создать новый значок запуска на панел
 msgstr[2] "Создать новый значок запуска на панели из %d desktop-файлов"
 msgstr[3] "Создать новый значок запуска из %d desktop-файлов"
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1724
+msgid "Quit"
+msgstr "Закрыть"
+
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Вы запустили X-сервер без менеджера сеансов. Щелчок на «Закрыть» остановит X-сервер."
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "Вы действительно хотите завершить работу панели?"
 
-#: ../panel/panel-application.c:1735
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "Не удалось запустить команду «%s»"
+msgstr "Не удалось выполнить команду «%s»"
 
 #: ../panel/panel-dbus-client.c:210
 msgid ""
@@ -261,7 +270,7 @@ msgstr "Некорректный тип подсказки «%s». Допуст�
 
 #: ../panel/panel-dialogs.c:49
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "Панель рабочей среды Xfce"
+msgstr "Панель окружения Xfce"
 
 #: ../panel/panel-dialogs.c:54
 msgid "translator-credits"
@@ -276,7 +285,7 @@ msgstr "Добавление нового элемента"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Выберите панель для нового модуля:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:858
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -333,41 +342,41 @@ msgstr "Модуль в течение %d секунд был перезапущ
 msgid "Automatic"
 msgstr "Автоматически"
 
-#: ../panel/panel-preferences-dialog.c:497
+#: ../panel/panel-preferences-dialog.c:502
 msgid "Primary"
 msgstr "Основной"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:516
+#: ../panel/panel-preferences-dialog.c:522
 #, c-format
 msgid "Screen %d"
 msgstr "Экран %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:542
+#: ../panel/panel-preferences-dialog.c:548
 #, c-format
 msgid "Monitor %d"
 msgstr "Дисплей %d"
 
-#: ../panel/panel-preferences-dialog.c:924
+#: ../panel/panel-preferences-dialog.c:930
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Выбранная панель и все её элементы будут безвозвратно удалены"
 
-#: ../panel/panel-preferences-dialog.c:925
+#: ../panel/panel-preferences-dialog.c:931
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Вы действительно хотите удалить панель %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1043
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(внешний)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1042
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -376,7 +385,7 @@ msgstr "Внутреннее имя: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1060
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Внутреннее имя: %s-%d"
@@ -1609,6 +1618,10 @@ msgstr "Скорее всего, другой элемент взял на се�
 #: ../plugins/systray/systray.c:871
 msgid "The notification area lost selection"
 msgstr "Область уведомлений потеряла выбор"
+
+#: ../plugins/systray/systray.c:1023
+msgid "Clear"
+msgstr "Очистить"
 
 #: ../plugins/systray/systray.c:1024
 msgid "Are you sure you want to clear the list of known applications?"
