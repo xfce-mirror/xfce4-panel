@@ -1971,11 +1971,8 @@ xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin)
 
   /* Since symbolic icons are usually only provided in 16px we
    * try to be clever and use size steps */
-  if (width < 26)
+  if (width <= 27)
     return 16;
-  /* else if (width < 26)
-   *   return 22;
-   */
   else if (width < 34)
     return 24;
   else if (width < 40)
