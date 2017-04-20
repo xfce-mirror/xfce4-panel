@@ -38,7 +38,7 @@
 
 
 #define PANEL_BASE_CSS        ".xfce4-panel.background { border-style: solid; }"\
-                              ".xfce4-panel.background button { background: transparent;  padding: 0; }"\
+                              ".xfce4-panel.background button { background: transparent; padding: 0; }"\
                               ".xfce4-panel.background.marching-ants { border: 1px dashed #ff0000; }"
 
 
@@ -584,7 +584,7 @@ static void
 panel_base_window_set_background_color_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_rgba != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background-color: %s; } %s",
+  css_string = g_strdup_printf (".xfce4-panel.background { background-color: %s; border-color: transparent; } %s",
                                 gdk_rgba_to_string (window->background_rgba),
                                 PANEL_BASE_CSS);
   panel_base_window_set_background_css (window, css_string);
@@ -596,7 +596,7 @@ static void
 panel_base_window_set_background_image_css (PanelBaseWindow *window) {
   gchar                  *css_string;
   panel_return_if_fail (window->background_image != NULL);
-  css_string = g_strdup_printf (".xfce4-panel.background { background-image: url('%s'); } %s",
+  css_string = g_strdup_printf (".xfce4-panel.background { background-image: url('%s'); border-color: transparent; } %s",
                                 window->background_image, PANEL_BASE_CSS);
   panel_base_window_set_background_css (window, css_string);
 }
@@ -767,8 +767,6 @@ panel_base_window_set_borders (PanelBaseWindow *window,
   PanelBaseWindowPrivate *priv = window->priv;
 
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (window));
-
-  g_warning ("borders set.");
 
   if (priv->borders != borders)
     {
