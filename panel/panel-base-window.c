@@ -463,7 +463,6 @@ panel_base_window_enter_notify_event (GtkWidget        *widget,
                                       GdkEventCrossing *event)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
-  PanelBaseWindowPrivate *priv = PANEL_BASE_WINDOW (widget)->priv;
 
   /* switch to enter opacity when compositing is enabled
    * and the two values are different */
@@ -486,7 +485,6 @@ panel_base_window_leave_notify_event (GtkWidget        *widget,
                                       GdkEventCrossing *event)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (widget);
-  PanelBaseWindowPrivate *priv = PANEL_BASE_WINDOW (widget)->priv;
 
   /* switch to leave opacity when compositing is enabled
    * and the two values are different */
@@ -682,7 +680,6 @@ panel_base_window_set_plugin_enter_opacity (GtkWidget *widget,
                                             gpointer   user_data)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
-  PanelBaseWindowPrivate *priv = window->priv;
 
   panel_base_window_set_plugin_opacity (widget, user_data, window->enter_opacity);
 }
@@ -694,7 +691,6 @@ panel_base_window_set_plugin_leave_opacity (GtkWidget *widget,
                                             gpointer   user_data)
 {
   PanelBaseWindow *window = PANEL_BASE_WINDOW (user_data);
-  PanelBaseWindowPrivate *priv = window->priv;
 
   panel_base_window_set_plugin_opacity (widget, user_data, window->leave_opacity);
 }
@@ -771,6 +767,8 @@ panel_base_window_set_borders (PanelBaseWindow *window,
   PanelBaseWindowPrivate *priv = window->priv;
 
   panel_return_if_fail (PANEL_IS_BASE_WINDOW (window));
+
+  g_warning ("borders set.");
 
   if (priv->borders != borders)
     {
