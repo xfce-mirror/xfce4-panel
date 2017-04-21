@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 00:30+0200\n"
-"PO-Revision-Date: 2017-04-11 05:03+0000\n"
+"POT-Creation-Date: 2017-04-19 12:30+0200\n"
+"PO-Revision-Date: 2017-04-21 17:29+0000\n"
 "Last-Translator: 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce4-panel/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -46,13 +46,13 @@ msgstr "취향에 따른 패널 설정"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1028
-#: ../panel/panel-preferences-dialog.c:1195
+#: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\"을(를) 정말로 없애시렵니까?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1033
-#: ../panel/panel-preferences-dialog.c:1198
+#: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "항목을 패널에서 제거하면 완전히 잃게 됩니다."
 
@@ -63,6 +63,7 @@ msgid "Cancel"
 msgstr "취소"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../panel/panel-preferences-dialog.c:929
 msgid "Remove"
 msgstr "제거"
 
@@ -189,6 +190,10 @@ msgstr "패널 끝내기에 실패했습니다"
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus 메시지를 보내는데 실패했습니다"
 
+#: ../panel/main.c:403
+msgid "Execute"
+msgstr "실행"
+
 #: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
@@ -204,33 +209,37 @@ msgstr "실행 중인 %s 인스턴스가 없습니다"
 msgid "Failed to launch the migration application"
 msgstr "마이그레이션 프로그램을 실행하는데 실패했습니다"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "실행 아이콘 만들기(_L)"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "패널에 새 실행 아이콘 플러그인을 만들고 파일을 메뉴 항목으로 넣습니다."
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "데스크톱 파일 %d개에 대한 새 실행 아이콘 만들기"
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1724
+msgid "Quit"
+msgstr "끝내기"
+
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "세션 매니저 없이 X를 시작했습니다. 나가기를 누르면 X 서버가 닫힙니다."
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "정말 패널을 종료하시렵니까?"
 
-#: ../panel/panel-application.c:1735
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" 명령을 실행하지 못 했습니다."
@@ -264,7 +273,7 @@ msgstr "새 항목 추가"
 msgid "Please choose a panel for the new plugin:"
 msgstr "새 플러그인을 둘 패널을 선택하십시오:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:858
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
@@ -321,41 +330,41 @@ msgstr "최근 %d 초 안에 플러그인을 한 번 이상 다시 시작했습�
 msgid "Automatic"
 msgstr "자동"
 
-#: ../panel/panel-preferences-dialog.c:497
+#: ../panel/panel-preferences-dialog.c:502
 msgid "Primary"
 msgstr "우선 순위"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:516
+#: ../panel/panel-preferences-dialog.c:522
 #, c-format
 msgid "Screen %d"
 msgstr "화면 %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:542
+#: ../panel/panel-preferences-dialog.c:548
 #, c-format
 msgid "Monitor %d"
 msgstr "모니터 %d"
 
-#: ../panel/panel-preferences-dialog.c:924
+#: ../panel/panel-preferences-dialog.c:930
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "패널과 플러그인 환경설정을 완전히 제거합니다"
 
-#: ../panel/panel-preferences-dialog.c:925
+#: ../panel/panel-preferences-dialog.c:931
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "패널 %d을(를) 정말로 없애시렵니까?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1043
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(외부)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1042
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -364,7 +373,7 @@ msgstr "내부 이름: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1060
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "내부 이름: %s-%d"
@@ -1597,6 +1606,10 @@ msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같�
 #: ../plugins/systray/systray.c:871
 msgid "The notification area lost selection"
 msgstr "알림 영역이 선택을 잃었습니다"
+
+#: ../plugins/systray/systray.c:1023
+msgid "Clear"
+msgstr "정리"
 
 #: ../plugins/systray/systray.c:1024
 msgid "Are you sure you want to clear the list of known applications?"
