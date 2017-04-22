@@ -392,7 +392,7 @@ panel_application_load_real (PanelApplication *application)
               && strncmp (output_name, "screen-", 7) == 0
               && sscanf (output_name, "screen-%d", &screen_num) == 1)
             {
-              if (screen_num < gdk_display_get_n_screens (display))
+              if (screen_num < 1)
                 screen = gdk_display_get_screen (display, screen_num);
             }
           g_free (output_name);
@@ -947,7 +947,7 @@ panel_application_drag_data_received (PanelWindow      *window,
 
               /* reparent the widget, this will also call remove and add for the itembar */
               gtk_widget_hide (provider);
-              gtk_widget_reparent (provider, itembar);
+              xfce_widget_reparent (provider, itembar);
               gtk_widget_show (provider);
 
               /* move the item to the correct position on the itembar */
