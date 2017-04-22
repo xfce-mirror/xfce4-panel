@@ -286,6 +286,8 @@ xfce_clock_lcd_draw (GtkWidget *widget,
   gdouble       ratio;
   GDateTime    *time;
   GtkAllocation allocation;
+  GtkStyleContext *ctx;
+  GdkRGBA          fg_rgba;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), FALSE);
   panel_return_val_if_fail (cr != NULL, FALSE);
@@ -296,6 +298,11 @@ xfce_clock_lcd_draw (GtkWidget *widget,
   /* make sure we also fit on small vertical panels */
   gtk_widget_get_allocation (widget, &allocation);
   size = MIN ((gdouble) allocation.width / ratio, allocation.height);
+
+  /* set correct color */
+  ctx = gtk_widget_get_style_context (widget);
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget), &fg_rgba);
+  gdk_cairo_set_source_rgba (cr, &fg_rgba);
 
   /* begin offsets */
   offset_x = rint ((allocation.width - (size * ratio)) / 2.00);
