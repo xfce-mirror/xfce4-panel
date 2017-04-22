@@ -807,9 +807,8 @@ panel_window_draw (GtkWidget *widget,
                    cairo_t   *cr)
 {
   PanelWindow      *window = PANEL_WINDOW (widget);
-  GdkRGBA           bg_rgba, light_rgba, dark_rgba;
-  GtkSymbolicColor *literal;
-  GtkSymbolicColor *shade;
+  GdkRGBA           fg_rgba;
+  GdkRGBA          *dark_rgba;
   guint             xx, yy, i;
   gint              xs, xe, ys, ye;
   gint              handle_w, handle_h;
@@ -846,25 +845,18 @@ panel_window_draw (GtkWidget *widget,
   cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
   ctx = gtk_widget_get_style_context (widget);
-  gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &bg_rgba);
-  literal = gtk_symbolic_color_new_literal (&bg_rgba);
-  shade = gtk_symbolic_color_new_shade (literal, 1.3);
-  gtk_symbolic_color_resolve (shade, NULL, &light_rgba);
-  gtk_symbolic_color_unref (shade);
-  shade = gtk_symbolic_color_new_shade (literal, 0.7);
-  gtk_symbolic_color_resolve (shade, NULL, &dark_rgba);
-  gtk_symbolic_color_unref (shade);
-  gtk_symbolic_color_unref (literal);
-  light_rgba.alpha = bg_rgba.alpha;
-  dark_rgba.alpha = bg_rgba.alpha;
+  gtk_style_context_get_color (ctx, GTK_STATE_NORMAL, &fg_rgba);
+  dark_rgba = gdk_rgba_copy (&fg_rgba);
+  fg_rgba.alpha = 0.5;
+  dark_rgba->alpha = 0.15;
 
   for (i = HANDLE_PIXELS; i >= HANDLE_PIXELS - 1; i--)
     {
       /* set the source color */
       if (i == HANDLE_PIXELS)
-        gdk_cairo_set_source_rgba (cr, &light_rgba);
+        gdk_cairo_set_source_rgba (cr, &fg_rgba);
       else
-        gdk_cairo_set_source_rgba (cr, &dark_rgba);
+        gdk_cairo_set_source_rgba (cr, dark_rgba);
 
       /* draw the dots */
       for (xx = 0; xx < (guint) handle_w; xx += HANDLE_PIXELS + HANDLE_PIXEL_SPACE)
@@ -877,6 +869,7 @@ panel_window_draw (GtkWidget *widget,
       /* fill the rectangles */
       cairo_fill (cr);
     }
+  gdk_rgba_free (dark_rgba);
 
   return FALSE;
 }
