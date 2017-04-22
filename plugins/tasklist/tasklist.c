@@ -288,6 +288,9 @@ tasklist_plugin_handle_draw (GtkWidget      *widget,
 {
   GtkAllocation     allocation;
   GtkStyleContext  *ctx;
+  gdouble           x, y;
+  guint             i;
+  GdkRGBA           fg_rgba;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST_PLUGIN (plugin), FALSE);
   panel_return_val_if_fail (plugin->handle == widget, FALSE);
@@ -298,23 +301,30 @@ tasklist_plugin_handle_draw (GtkWidget      *widget,
   gtk_widget_get_allocation (widget, &allocation);
   ctx = gtk_widget_get_style_context (widget);
 
-  /* get the orientation and render the handle */
-  if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
-      GTK_ORIENTATION_HORIZONTAL)
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget), &fg_rgba);
+  /* Tone down the foreground color a bit for the separators */
+  fg_rgba.alpha = 0.5;
+  gdk_cairo_set_source_rgba (cr, &fg_rgba);
+  cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
+
+  x = (allocation.width - HANDLE_SIZE) / 2;
+  y = (allocation.height - HANDLE_SIZE) / 2;
+  cairo_set_line_width (cr, 1.0);
+  /* draw the handle */
+  for (i = 0; i < 3; i++)
     {
-      gtk_render_handle (ctx, cr,
-                         (gdouble) (allocation.width - HANDLE_SIZE) / 2.0,
-                         (gdouble) allocation.height * HANDLE_OFFSET,
-                         (gdouble) HANDLE_SIZE,
-                         (gdouble) allocation.height * (1.0 - 2.0 * HANDLE_OFFSET));
-    }
-  else
-    {
-      gtk_render_handle (ctx, cr,
-                         (gdouble) allocation.width * HANDLE_OFFSET,
-                         (gdouble) (allocation.height - HANDLE_SIZE) / 2.0,
-                         (gdouble) allocation.width * (1.0 - 2.0 * HANDLE_OFFSET),
-                         (gdouble) HANDLE_SIZE);
+      if (xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+          GTK_ORIENTATION_HORIZONTAL)
+        {
+          cairo_move_to (cr, x, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));
+          cairo_line_to (cr, x + HANDLE_SIZE, y + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2));
+        }
+      else
+        {
+          cairo_move_to (cr, x + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2), y);
+          cairo_line_to (cr, x + (i * HANDLE_SIZE) - (HANDLE_SIZE / 2), y + HANDLE_SIZE);
+        }
+      cairo_stroke (cr);
     }
 
   return TRUE;
