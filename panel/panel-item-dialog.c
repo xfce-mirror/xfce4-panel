@@ -223,9 +223,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_box_pack_start (GTK_BOX (hbox), entry, FALSE, FALSE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
   gtk_widget_set_tooltip_text (entry, _("Enter search phrase here"));
-#if GTK_CHECK_VERSION (2, 16, 0)
-  gtk_entry_set_icon_from_stock (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, GTK_STOCK_FIND);
-#endif
+  gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry), GTK_ENTRY_ICON_PRIMARY, "edit-find");
   gtk_widget_show (entry);
 
   /* scroller */

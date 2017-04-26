@@ -1752,7 +1752,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
 
       icon_name = garcon_menu_item_get_icon_name (item);
       gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child),
-          panel_str_is_empty (icon_name) ? GTK_STOCK_MISSING_IMAGE : icon_name,
+          panel_str_is_empty (icon_name) ? "image-missing" : icon_name,
           icon_size);
 
       panel_utils_set_atk_info (plugin->button,
@@ -1764,7 +1764,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
       /* set missing image icon */
       panel_return_if_fail (GTK_IS_WIDGET (plugin->child));
       gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child),
-                                    GTK_STOCK_MISSING_IMAGE, icon_size);
+                                    "image-missing", icon_size);
     }
 }
 

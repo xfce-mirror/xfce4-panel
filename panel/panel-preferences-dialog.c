@@ -466,7 +466,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   /* get run mode of the driver (multiple screens or randr) */
   screen = gtk_widget_get_screen (GTK_WIDGET (dialog->active));
   display = gtk_widget_get_display (GTK_WIDGET (dialog->active));
-  n_screens = gdk_display_get_n_screens (display);
+  n_screens = 1;
   n_monitors = 1;
   if (G_LIKELY (n_screens <= 1))
     {
@@ -677,7 +677,7 @@ panel_preferences_dialog_bg_style_changed (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "background-rgba");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_get (G_OBJECT (dialog->active), "composited", &composited, NULL);
-  gtk_color_chooser_set_use_alpha (object, composited);
+  gtk_color_chooser_set_use_alpha (GTK_COLOR_CHOOSER (object), composited);
 
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "bg-color-box");
   panel_return_if_fail (GTK_IS_WIDGET (object));
@@ -1203,8 +1203,8 @@ panel_preferences_dialog_item_remove (GtkWidget              *button,
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (widget),
                                                 _("If you remove the item from the panel, "
                                                   "it is permanently lost."));
-      gtk_dialog_add_buttons (GTK_DIALOG (widget), GTK_STOCK_CANCEL, GTK_RESPONSE_NO,
-                              GTK_STOCK_REMOVE, GTK_RESPONSE_YES, NULL);
+      gtk_dialog_add_buttons (GTK_DIALOG (widget), _("Cancel"), GTK_RESPONSE_NO,
+                              _("Remove"), GTK_RESPONSE_YES, NULL);
       gtk_dialog_set_default_response (GTK_DIALOG (widget), GTK_RESPONSE_NO);
 
       /* run the dialog */

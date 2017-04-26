@@ -115,7 +115,7 @@ main (gint argc, gchar **argv)
       dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
                                        _("Welcome to the first start of the panel"));
       gtk_window_set_title (GTK_WINDOW (dialog), _("Panel"));
-      gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PREFERENCES);
+      gtk_window_set_icon_name (GTK_WINDOW (dialog), "preferences-system");
       gtk_window_stick (GTK_WINDOW (dialog));
       gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
 
