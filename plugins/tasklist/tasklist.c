@@ -113,7 +113,7 @@ tasklist_plugin_init (TasklistPlugin *plugin)
                           G_BINDING_SYNC_CREATE);
   gtk_widget_show (box);
 
-  plugin->handle = gtk_alignment_new (0.00, 0.00, 0.00, 0.00);
+  plugin->handle = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_pack_start (GTK_BOX (box), plugin->handle, FALSE, FALSE, 0);
   g_signal_connect (G_OBJECT (plugin->handle), "draw",
       G_CALLBACK (tasklist_plugin_handle_draw), plugin);
