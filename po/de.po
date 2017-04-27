@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 00:30+0200\n"
-"PO-Revision-Date: 2017-04-11 11:08+0000\n"
+"POT-Creation-Date: 2017-04-27 00:30+0200\n"
+"PO-Revision-Date: 2017-04-27 12:15+0000\n"
 "Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/xfce/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgid ""
 msgstr "Einen neuen Starter zur Leiste hinzufügen, basierend auf den Informationen in dieser Schreibtischdatei"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2707
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Leiste"
@@ -46,23 +46,26 @@ msgstr "Leiste einrichten"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1028
-#: ../panel/panel-preferences-dialog.c:1195
+#: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1033
-#: ../panel/panel-preferences-dialog.c:1198
+#: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:399
 msgid "Cancel"
 msgstr "Abbrechen"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -76,17 +79,17 @@ msgid "Pane_l"
 msgstr "_Leiste"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2719
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "_Neue Elemente hinzufügen …"
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2730
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
 msgid "Panel Pr_eferences..."
 msgstr "_Leisteneinstellungen …"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2758
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
 msgid "Log _Out"
 msgstr "_Abmelden"
 
@@ -189,6 +192,10 @@ msgstr "Leiste konnte nicht beendet werden"
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus-Nachricht konnte nicht gesendet werden"
 
+#: ../panel/main.c:403
+msgid "Execute"
+msgstr "Ausführen"
+
 #: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
@@ -204,34 +211,38 @@ msgstr "Keine laufende Instanz von %s gefunden"
 msgid "Failed to launch the migration application"
 msgstr "Anwendung zum Migrieren der Leisteneinstellungen konnte nicht gestartet werden"
 
-#: ../panel/panel-application.c:983
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Starter an_legen"
 
-#: ../panel/panel-application.c:984
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Das erzeugt eine neue Startererweiterung auf der Leiste und fügt die abgelegten Dateien als Menüpunkte hinzu."
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Neuen Starter aus %d Schreibtischdatei erstellen"
 msgstr[1] "Neuen Starter aus %d Schreibtischdateien erstellen"
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1724
+msgid "Quit"
+msgstr "Beenden"
+
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Sie haben X ohne Sitzungsverwaltung gestartet. Wenn Sie jetzt »Beenden« klicken, beendet das den X-Server."
 
-#: ../panel/panel-application.c:1727
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "Soll die Leiste wirklich beendet werden?"
 
-#: ../panel/panel-application.c:1735
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Befehl »%s« konnte nicht ausgeführt werden"
@@ -261,11 +272,15 @@ msgstr "Moritz Heiber\nFabian Nowak\nEnrico Tröger\nSimon Schneider\nPaul Seyfe
 msgid "Add New Item"
 msgstr "Neues Element hinzufügen"
 
+#: ../panel/panel-dialogs.c:128
+msgid "Add"
+msgstr "Hinzufügen"
+
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "Bitte eine Leiste für das neue Element auswählen:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:858
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
@@ -292,7 +307,7 @@ msgstr "Neue Erweiterungen zur Leiste hinzufügen"
 msgid "Help"
 msgstr "Hilfe"
 
-#: ../panel/panel-item-dialog.c:204
+#: ../panel/panel-item-dialog.c:204 ../panel/panel-tic-tac-toe.c:124
 msgid "Close"
 msgstr "Schließen"
 
@@ -322,41 +337,41 @@ msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neu gestart
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: ../panel/panel-preferences-dialog.c:497
+#: ../panel/panel-preferences-dialog.c:502
 msgid "Primary"
 msgstr "Haupt"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:516
+#: ../panel/panel-preferences-dialog.c:522
 #, c-format
 msgid "Screen %d"
 msgstr "Bildschirm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:542
+#: ../panel/panel-preferences-dialog.c:548
 #, c-format
 msgid "Monitor %d"
 msgstr "Bildschirm %d"
 
-#: ../panel/panel-preferences-dialog.c:924
+#: ../panel/panel-preferences-dialog.c:930
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Die Einstellungen der Leiste und der Erweiterungen werden dauerhaft entfernt."
 
-#: ../panel/panel-preferences-dialog.c:925
+#: ../panel/panel-preferences-dialog.c:931
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Soll die Leiste %d wirklich entfernt werden?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1043
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1042
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -365,7 +380,7 @@ msgstr "Interner Name: %s-%d\nProzesskennung: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1054
+#: ../panel/panel-preferences-dialog.c:1060
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interner Name: %s-%d"
@@ -607,7 +622,7 @@ msgstr "Profi"
 msgid "Expert"
 msgstr "Experte"
 
-#: ../panel/panel-window.c:2744
+#: ../panel/panel-window.c:2737
 msgid "_Lock Panel"
 msgstr "_Leiste sperren"
 
@@ -1598,6 +1613,10 @@ msgstr "Wahrscheinlich hat ein anderes Programm die Funktion der Benachrichtigun
 #: ../plugins/systray/systray.c:871
 msgid "The notification area lost selection"
 msgstr "Die Benachrichtigungsfläche hat die Auswahl verloren"
+
+#: ../plugins/systray/systray.c:1023
+msgid "Clear"
+msgstr "Leeren"
 
 #: ../plugins/systray/systray.c:1024
 msgid "Are you sure you want to clear the list of known applications?"
