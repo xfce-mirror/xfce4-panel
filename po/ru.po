@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 12:30+0200\n"
-"PO-Revision-Date: 2017-04-24 10:51+0000\n"
+"POT-Creation-Date: 2017-04-27 00:30+0200\n"
+"PO-Revision-Date: 2017-04-27 14:58+0000\n"
 "Last-Translator: Igor <f2404@yandex.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/xfce/xfce4-panel/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgid ""
 msgstr "Создать значок запуска для приложения, описываемого этим desktop-файлом"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2707
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Панель"
@@ -65,7 +65,8 @@ msgstr "Вы действительно хотите удалить «%s»?"
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Если вы удалите этот элемент с панели, он будет потерян окончательно."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:399
 msgid "Cancel"
@@ -73,6 +74,7 @@ msgstr "Отменить"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1035
 #: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "Удалить"
 
@@ -86,17 +88,17 @@ msgid "Pane_l"
 msgstr "Пане_ль"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2719
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "_Добавить новые элементы..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2730
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
 msgid "Panel Pr_eferences..."
 msgstr "_Параметры панели..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2758
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
 msgid "Log _Out"
 msgstr "_Завершить сеанс"
 
@@ -281,6 +283,10 @@ msgstr "Poul Ionkin <wizzard@nmg.lv>, 2003\nAnthony Ivanoff <a-i@bk.ru>, 2004, 2
 msgid "Add New Item"
 msgstr "Добавление нового элемента"
 
+#: ../panel/panel-dialogs.c:128
+msgid "Add"
+msgstr "Добавить"
+
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "Выберите панель для нового модуля:"
@@ -312,7 +318,7 @@ msgstr "Добавьте на панель новые модули"
 msgid "Help"
 msgstr "Справка"
 
-#: ../panel/panel-item-dialog.c:204
+#: ../panel/panel-item-dialog.c:204 ../panel/panel-tic-tac-toe.c:124
 msgid "Close"
 msgstr "Закрыть"
 
@@ -627,7 +633,7 @@ msgstr "Опытный"
 msgid "Expert"
 msgstr "Эксперт"
 
-#: ../panel/panel-window.c:2744
+#: ../panel/panel-window.c:2737
 msgid "_Lock Panel"
 msgstr "_Закрепить панель"
 
