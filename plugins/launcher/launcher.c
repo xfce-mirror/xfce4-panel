@@ -1537,7 +1537,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
   GtkArrowType    arrow_type;
   guint           n;
   GarconMenuItem *item;
-  GtkWidget      *mi, *image;
+  GtkWidget      *mi, *box, *label, *image;
   const gchar    *name, *icon_name;
   GSList         *li;
 
@@ -1565,12 +1565,13 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
       /* create the menu item */
       name = garcon_menu_item_get_name (item);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      mi = gtk_image_menu_item_new_with_label (
-          panel_str_is_empty (name) ? _("Unnamed Item") : name);
-G_GNUC_END_IGNORE_DEPRECATIONS
+      mi = gtk_menu_item_new ();
+      label = gtk_label_new (panel_str_is_empty (name) ? _("Unnamed Item") : name);
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      gtk_box_pack_end (GTK_BOX (box), label, TRUE, TRUE, 0);
+      gtk_container_add (GTK_CONTAINER (mi), box);
       g_object_set_qdata (G_OBJECT (mi), launcher_plugin_quark, plugin);
-      gtk_widget_show (mi);
+      gtk_widget_show_all (mi);
       gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets,
                          G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
       g_signal_connect (G_OBJECT (mi), "activate",
@@ -1599,9 +1600,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       if (!panel_str_is_empty (icon_name))
         {
           image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DND);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-G_GNUC_END_IGNORE_DEPRECATIONS
+          gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 3);
           gtk_widget_show (image);
         }
     }
