@@ -358,7 +358,7 @@ directory_menu_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   /* force a square button */
   size /= xfce_panel_plugin_get_nrows (panel_plugin);
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
-  icon_size = xfce_panel_plugin_get_icon_size (plugin);
+  icon_size = xfce_panel_plugin_get_icon_size (panel_plugin);
   gtk_image_set_pixel_size (GTK_IMAGE (plugin->icon), icon_size);
 
   return TRUE;
