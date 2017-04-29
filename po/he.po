@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 12:30+0200\n"
-"PO-Revision-Date: 2017-04-23 17:19+0000\n"
+"POT-Creation-Date: 2017-04-27 00:30+0200\n"
+"PO-Revision-Date: 2017-04-29 18:14+0000\n"
 "Last-Translator: Elishai Eliyahu <e1907@mm.st>\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgid ""
 msgstr "הוסף מפעיל ללוח על בסיס המידע של קובץ שולחן עבודה זה"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2707
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "לוח"
@@ -56,7 +56,8 @@ msgstr "האם אתה בטוח כי ברצונך להסיר את \"%s\"?"
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "אם תסיר את הפריט מתוך הלוח, הוא יאבד באופן קבוע."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:399
 msgid "Cancel"
@@ -64,6 +65,7 @@ msgstr "ביטול"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1035
 #: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "הסרה"
 
@@ -77,17 +79,17 @@ msgid "Pane_l"
 msgstr "_לוח"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2719
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "הוסף פריטים _חדשים..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2730
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
 msgid "Panel Pr_eferences..."
 msgstr "_העדפות לוח..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2758
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
 msgid "Log _Out"
 msgstr "הת_נתק"
 
@@ -270,6 +272,10 @@ msgstr "שבחים-מתרגמים"
 msgid "Add New Item"
 msgstr "הוסף פריט חדש"
 
+#: ../panel/panel-dialogs.c:128
+msgid "Add"
+msgstr "הוסף"
+
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "אנא בחר לוח עבור התוסף החדש:"
@@ -301,7 +307,7 @@ msgstr "הוסף תוספים חדשים לפאנל"
 msgid "Help"
 msgstr "עזרה"
 
-#: ../panel/panel-item-dialog.c:204
+#: ../panel/panel-item-dialog.c:204 ../panel/panel-tic-tac-toe.c:124
 msgid "Close"
 msgstr "סגירה"
 
@@ -616,7 +622,7 @@ msgstr "מנוסה"
 msgid "Expert"
 msgstr "מומחה"
 
-#: ../panel/panel-window.c:2744
+#: ../panel/panel-window.c:2737
 msgid "_Lock Panel"
 msgstr "_נעל לוח"
 
