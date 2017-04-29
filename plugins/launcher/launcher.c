@@ -1567,6 +1567,7 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       name = garcon_menu_item_get_name (item);
       mi = gtk_menu_item_new ();
       label = gtk_label_new (panel_str_is_empty (name) ? _("Unnamed Item") : name);
+      gtk_label_set_xalign (GTK_LABEL (label), 0.0);
       box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       gtk_box_pack_end (GTK_BOX (box), label, TRUE, TRUE, 0);
       gtk_container_add (GTK_CONTAINER (mi), box);
