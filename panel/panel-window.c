@@ -812,7 +812,6 @@ panel_window_draw (GtkWidget *widget,
   guint             xx, yy, i;
   gint              xs, xe, ys, ye;
   gint              handle_w, handle_h;
-  GtkWidget        *child;
   GtkStyleContext  *ctx;
 
   /* expose the background and borders handled in PanelBaseWindow */
