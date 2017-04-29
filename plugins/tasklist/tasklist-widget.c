@@ -47,7 +47,6 @@
 
 #define DEFAULT_BUTTON_SIZE          (25)
 #define DEFAULT_MAX_BUTTON_LENGTH    (200)
-#define DEFAULT_MENU_ICON_SIZE       (16)
 #define DEFAULT_MIN_BUTTON_LENGTH    (DEFAULT_MAX_BUTTON_LENGTH / 4)
 #define DEFAULT_ICON_LUCENCY         (50)
 #define DEFAULT_ELLIPSIZE_MODE       (PANGO_ELLIPSIZE_END)
@@ -199,7 +198,6 @@ struct _XfceTasklist
   gint                  max_button_size;
   PangoEllipsizeMode    ellipsize_mode;
   gint                  minimized_icon_lucency;
-  gint                  menu_icon_size;
   gint                  menu_max_width_chars;
 
   gint n_windows;
@@ -362,10 +360,6 @@ static void               xfce_tasklist_set_grouping                     (XfceTa
 
 
 G_DEFINE_TYPE (XfceTasklist, xfce_tasklist, GTK_TYPE_CONTAINER)
-
-
-
-static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
 
 
 
@@ -547,11 +541,6 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                              DEFAULT_MENU_MAX_WIDTH_CHARS,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
-  menu_icon_size = gtk_icon_size_from_name ("panel-tasklist-menu");
-  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
-    menu_icon_size = gtk_icon_size_register ("panel-tasklist-menu",
-                                             DEFAULT_MENU_ICON_SIZE,
-                                             DEFAULT_MENU_ICON_SIZE);
 }
 
 
@@ -594,7 +583,6 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->ellipsize_mode = DEFAULT_ELLIPSIZE_MODE;
   tasklist->grouping = XFCE_TASKLIST_GROUPING_DEFAULT;
   tasklist->sort_order = XFCE_TASKLIST_SORT_ORDER_DEFAULT;
-  tasklist->menu_icon_size = DEFAULT_MENU_ICON_SIZE;
   tasklist->menu_max_width_chars = DEFAULT_MENU_MAX_WIDTH_CHARS;
   tasklist->class_groups = g_hash_table_new_full (g_direct_hash, g_direct_equal,
                                                   (GDestroyNotify) g_object_unref,
@@ -1222,7 +1210,6 @@ xfce_tasklist_style_set (GtkWidget *widget,
   gint          max_button_length;
   gint          max_button_size;
   gint          min_button_length;
-  gint          w, h;
 
   /* let gtk update the widget style */
   (*GTK_WIDGET_CLASS (xfce_tasklist_parent_class)->style_set) (widget, previous_style);
@@ -1236,9 +1223,6 @@ xfce_tasklist_style_set (GtkWidget *widget,
                         "minimized-icon-lucency", &tasklist->minimized_icon_lucency,
                         "menu-max-width-chars", &tasklist->menu_max_width_chars,
                         NULL);
-
-  if (gtk_icon_size_lookup (menu_icon_size, &w, &h))
-    tasklist->menu_icon_size = MIN (w, h);
 
   /* update the widget */
   if (tasklist->max_button_length != max_button_length
@@ -2919,18 +2903,15 @@ G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_label_set_max_width_chars (GTK_LABEL (label), tasklist->menu_max_width_chars);
   gtk_label_set_ellipsize (GTK_LABEL (label), tasklist->ellipsize_mode);
 
-  if (G_LIKELY (tasklist->menu_icon_size > 0))
-    {
-      image = gtk_image_new ();
+  image = gtk_image_new ();
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
-      gtk_image_set_pixel_size (GTK_IMAGE (image), tasklist->menu_icon_size);
-      g_object_bind_property (G_OBJECT (child->icon), "pixbuf",
-                              G_OBJECT (image), "pixbuf",
-                              G_BINDING_SYNC_CREATE);
-      gtk_widget_show (image);
-    }
+  gtk_image_set_pixel_size (GTK_IMAGE (image), GTK_ICON_SIZE_MENU);
+  g_object_bind_property (G_OBJECT (child->icon), "pixbuf",
+                          G_OBJECT (image), "pixbuf",
+                          G_BINDING_SYNC_CREATE);
+  gtk_widget_show (image);
 
   if (allow_wireframe)
     {

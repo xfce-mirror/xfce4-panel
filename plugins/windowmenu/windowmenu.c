@@ -138,7 +138,6 @@ XFCE_PANEL_DEFINE_PLUGIN_RESIDENT (WindowMenuPlugin, window_menu_plugin)
 
 
 static GQuark window_quark = 0;
-static GtkIconSize menu_icon_size = GTK_ICON_SIZE_INVALID;
 
 
 
@@ -226,10 +225,6 @@ window_menu_plugin_class_init (WindowMenuPluginClass *klass)
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   window_quark = g_quark_from_static_string ("window-list-window-quark");
-
-  menu_icon_size = gtk_icon_size_from_name ("panel-window-menu");
-  if (menu_icon_size == GTK_ICON_SIZE_INVALID)
-    menu_icon_size = gtk_icon_size_register ("panel-window-menu", 16, 16);
 }
 
 
@@ -1027,7 +1022,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
       if (pixbuf != NULL)
         {
-          /* scle the icon if needed */
+          /* scale the icon if needed */
           if (gdk_pixbuf_get_width (pixbuf) > icon_w
               || gdk_pixbuf_get_height (pixbuf) > icon_h)
             {
@@ -1173,8 +1168,7 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   italic = pango_font_description_from_string ("italic");
   bold = pango_font_description_from_string ("bold");
 
-  if (!gtk_icon_size_lookup (menu_icon_size, &w, &h))
-    w = h = 16;
+  w = h = GTK_ICON_SIZE_MENU;
 
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "key-press-event",
@@ -1332,7 +1326,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
           G_CALLBACK (window_menu_plugin_workspace_add), plugin);
       gtk_widget_show (mi);
 
-      image = gtk_image_new_from_icon_name ("list-add", menu_icon_size);
+      image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
@@ -1364,7 +1358,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       g_free (label);
       g_free (utf8);
 
-      image = gtk_image_new_from_icon_name ("list-remove", menu_icon_size);
+      image = gtk_image_new_from_icon_name ("list-remove", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
