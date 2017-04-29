@@ -858,10 +858,10 @@ actions_plugin_actions_allowed (void)
 
           if (actions_plugin_action_dbus_can (proxy, "CanRestart"))
             PANEL_SET_FLAG (allow_mask, ACTION_TYPE_RESTART);
-        
+
           if (actions_plugin_action_dbus_can (proxy, "CanSuspend"))
             PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SUSPEND);
-          
+
           if (actions_plugin_action_dbus_can (proxy, "CanHibernate"))
             PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HIBERNATE);
 
@@ -1022,13 +1022,17 @@ actions_plugin_action_menu_item (ActionsPlugin *plugin,
   if (entry->type == ACTION_TYPE_SEPARATOR)
     return gtk_separator_menu_item_new ();
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   mi = gtk_image_menu_item_new_with_mnemonic (_(entry->mnemonic));
+G_GNUC_END_IGNORE_DEPRECATIONS
   g_object_set_qdata (G_OBJECT (mi), action_quark, entry);
   g_signal_connect (G_OBJECT (mi), "activate",
       G_CALLBACK (actions_plugin_action_activate), plugin);
 
   image = gtk_image_new_from_icon_name (entry->icon_name, GTK_ICON_SIZE_MENU);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_widget_show (image);
 
   return mi;

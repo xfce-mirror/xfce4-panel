@@ -2697,7 +2697,7 @@ panel_window_menu_popup (PanelWindow *window,
   g_signal_connect (G_OBJECT (menu), "deactivate",
       G_CALLBACK (panel_window_menu_deactivate), window);
 
-  item = gtk_image_menu_item_new_with_label (_("Panel"));
+  item = gtk_menu_item_new_with_label (_("Panel"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_set_sensitive (item, FALSE);
   gtk_widget_show (item);
@@ -2709,25 +2709,33 @@ panel_window_menu_popup (PanelWindow *window,
   if (!panel_window_get_locked (window))
     {
       /* add new items */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       item = gtk_image_menu_item_new_with_mnemonic (_("Add _New Items..."));
+G_GNUC_END_IGNORE_DEPRECATIONS
       g_signal_connect_swapped (G_OBJECT (item), "activate",
           G_CALLBACK (panel_item_dialog_show), window);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
       image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_MENU);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_widget_show (image);
 
       /* customize panel */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       item = gtk_image_menu_item_new_with_mnemonic (_("Panel Pr_eferences..."));
+G_GNUC_END_IGNORE_DEPRECATIONS
       g_signal_connect_swapped (G_OBJECT (item), "activate",
           G_CALLBACK (panel_preferences_dialog_show), window);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
       gtk_widget_show (item);
 
       image = gtk_image_new_from_icon_name ("preferences-system", GTK_ICON_SIZE_MENU);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_widget_show (image);
 
       item = gtk_separator_menu_item_new ();
@@ -2748,14 +2756,18 @@ panel_window_menu_popup (PanelWindow *window,
     }
 
   /* logout item */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   item = gtk_image_menu_item_new_with_mnemonic (_("Log _Out"));
+G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect_swapped (G_OBJECT (item), "activate",
       G_CALLBACK (panel_application_logout), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
   image = gtk_image_new_from_icon_name ("system-log-out", GTK_ICON_SIZE_MENU);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
   gtk_widget_show (image);
 
   item = gtk_separator_menu_item_new ();
@@ -2763,14 +2775,18 @@ panel_window_menu_popup (PanelWindow *window,
   gtk_widget_show (item);
 
   /* help item */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   item = gtk_image_menu_item_new_with_mnemonic ("_Help");
+G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_window_menu_help), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_show (item);
 
   /* about item */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   item = gtk_image_menu_item_new_with_mnemonic ("_About");
+G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_dialogs_show_about), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -2779,7 +2795,7 @@ panel_window_menu_popup (PanelWindow *window,
   /* tic tac toe item */
   if (show_tic_tac_toe)
     {
-      item = gtk_image_menu_item_new_with_label ("Tic Tac Toe");
+      item = gtk_menu_item_new_with_label ("Tic Tac Toe");
       g_signal_connect (G_OBJECT (item), "activate",
                         G_CALLBACK (panel_tic_tac_toe_show), NULL);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);

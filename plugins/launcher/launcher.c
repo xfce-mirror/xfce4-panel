@@ -1591,8 +1591,10 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
 
       /* create the menu item */
       name = garcon_menu_item_get_name (item);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       mi = gtk_image_menu_item_new_with_label (
           panel_str_is_empty (name) ? _("Unnamed Item") : name);
+G_GNUC_END_IGNORE_DEPRECATIONS
       g_object_set_qdata (G_OBJECT (mi), launcher_plugin_quark, plugin);
       gtk_widget_show (mi);
       gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets,
@@ -1624,7 +1626,9 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
         {
           image = gtk_image_new_from_icon_name (icon_name, size);
           gtk_image_set_pixel_size (image, size);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
           gtk_widget_show (image);
         }
     }

@@ -2904,7 +2904,9 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   panel_return_val_if_fail (GTK_IS_LABEL (child->label), NULL);
   panel_return_val_if_fail (WNCK_IS_WINDOW (child->window), NULL);
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   mi = gtk_image_menu_item_new ();
+G_GNUC_END_IGNORE_DEPRECATIONS
   g_object_bind_property (G_OBJECT (child->label), "label",
                           G_OBJECT (mi), "label",
                           G_BINDING_SYNC_CREATE);
@@ -2920,7 +2922,9 @@ xfce_tasklist_button_proxy_menu_item (XfceTasklistChild *child,
   if (G_LIKELY (tasklist->menu_icon_size > 0))
     {
       image = gtk_image_new ();
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_image_set_pixel_size (GTK_IMAGE (image), tasklist->menu_icon_size);
       g_object_bind_property (G_OBJECT (child->icon), "pixbuf",
                               G_OBJECT (image), "pixbuf",
@@ -3411,31 +3415,33 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       gtk_widget_show (mi);
 
+      image = gtk_image_new_from_icon_name ("wnck-stock-minimize", GTK_ICON_SIZE_MENU);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       mi = gtk_image_menu_item_new_with_mnemonic (_("Mi_nimize All"));
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_minimize_all), group_child);
-      gtk_widget_show (mi);
-      image = gtk_image_new_from_icon_name ("wnck-stock-minimize", GTK_ICON_SIZE_MENU);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-      gtk_widget_show (image);
+      gtk_widget_show_all (mi);
 
-      mi =  gtk_image_menu_item_new_with_mnemonic (_("Un_minimize All"));
+      mi =  gtk_menu_item_new_with_mnemonic (_("Un_minimize All"));
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_unminimize_all), group_child);
       gtk_widget_show (mi);
 
+      image = gtk_image_new_from_icon_name ("wnck-stock-maximize", GTK_ICON_SIZE_MENU);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       mi = gtk_image_menu_item_new_with_mnemonic (_("Ma_ximize All"));
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_maximize_all), group_child);
-      gtk_widget_show (mi);
-      image = gtk_image_new_from_icon_name ("wnck-stock-maximize", GTK_ICON_SIZE_MENU);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-      gtk_widget_show (image);
+      gtk_widget_show_all (mi);
 
-      mi =  gtk_image_menu_item_new_with_mnemonic (_("_Unmaximize All"));
+      mi =  gtk_menu_item_new_with_mnemonic (_("_Unmaximize All"));
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_unmaximize_all), group_child);
@@ -3445,15 +3451,15 @@ xfce_tasklist_group_button_menu (XfceTasklistChild *group_child,
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       gtk_widget_show (mi);
 
+      image = gtk_image_new_from_icon_name ("wnck-stock-delete", GTK_ICON_SIZE_MENU);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       mi = gtk_image_menu_item_new_with_mnemonic(_("_Close All"));
+      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect_swapped (G_OBJECT (mi), "activate",
           G_CALLBACK (xfce_tasklist_group_button_menu_close_all), group_child);
-      gtk_widget_show (mi);
-
-      image = gtk_image_new_from_icon_name ("wnck-stock-delete", GTK_ICON_SIZE_MENU);
-      gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
-      gtk_widget_show (image);
+      gtk_widget_show_all (mi);
     }
 
   return menu;
