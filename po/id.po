@@ -5,15 +5,16 @@
 # Translators:
 # Andhika Padmawan <andhika.padmawan@gmail.com>, 2010
 # Ardjuna <Asyura.x@gmail.com>, 2015
-# Mohamad Hasan Al Banna <se7entime@protonmail.com>, 2014
-# Mohamad Hasan Al Banna <se7entime@protonmail.com>, 2013
-# Mohamad Hasan Al Banna <se7entime@protonmail.com>, 2013-2014
+# Mohamad Hasan Al Banna <se7entime@openmailbox.org>, 2014
+# Mohamad Hasan Al Banna <se7entime@openmailbox.org>, 2013
+# Mohamad Hasan Al Banna <se7entime@openmailbox.org>, 2013-2014
+# Mohamad Hasan Al Banna <se7entime@openmailbox.org>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2017-02-11 11:29+0000\n"
+"POT-Creation-Date: 2017-04-27 00:30+0200\n"
+"PO-Revision-Date: 2017-05-16 04:28+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/xfce/xfce4-panel/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +34,7 @@ msgid ""
 msgstr "Tambah sebuah peluncur ke panel berdasarkan informasi dari berkas desktop ini"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2615
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -43,38 +44,51 @@ msgid "Customize the panel"
 msgstr "Sesuaikan panel"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1190
+#: ../libxfce4panel/xfce-panel-plugin.c:1028
+#: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Anda yakin ingin menghapus \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1193
+#: ../libxfce4panel/xfce-panel-plugin.c:1033
+#: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Item yang anda hapus dari panel akan dibuang secara permanen."
 
+#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../panel/panel-preferences-dialog.c:1206
+#: ../plugins/applicationsmenu/applicationsmenu.c:538
+#: ../plugins/directorymenu/directorymenu.c:399
+msgid "Cancel"
+msgstr "Batal"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:1207
+msgid "Remove"
+msgstr "Hapus"
+
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1197
+#: ../libxfce4panel/xfce-panel-plugin.c:1193
 msgid "_Move"
 msgstr "_Pindah"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1231
+#: ../libxfce4panel/xfce-panel-plugin.c:1227
 msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "_Tambah Item Baru..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
 msgid "Panel Pr_eferences..."
 msgstr "_Konfigurasi Panel"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
 msgid "Log _Out"
 msgstr "_Keluar"
 
@@ -177,6 +191,10 @@ msgstr "Gagal mematikan panel"
 msgid "Failed to send D-Bus message"
 msgstr "Gagal mengirim pesan D-Bus"
 
+#: ../panel/main.c:403
+msgid "Execute"
+msgstr "Eksekusi"
+
 #: ../panel/main.c:404
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
@@ -188,94 +206,90 @@ msgstr "Anda ingin menjalankan panel? Jika iya, pastikan anda menyimpan sesi saa
 msgid "No running instance of %s was found"
 msgstr "Tidak ada instansi %s berjalan yang ditemukan"
 
-#: ../panel/panel-application.c:216
+#: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
 msgstr "Gagal meluncurkan aplikasi migrasi"
 
-#: ../panel/panel-application.c:985
+#: ../panel/panel-application.c:982
 msgid "Create _Launcher"
 msgstr "Buat _Peluncur"
 
-#: ../panel/panel-application.c:986
+#: ../panel/panel-application.c:983
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr "Ini akan membuat plugin peluncur baru di panel dan memasukkan berkas yang ditaruh sebagai item menu."
 
-#: ../panel/panel-application.c:988
+#: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Tambahkan peluncur baru dari %d berkas desktop"
 
-#: ../panel/panel-application.c:1728
+#: ../panel/panel-application.c:1724
+msgid "Quit"
+msgstr "Keluar"
+
+#: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Anda telah menjalankan X tanpa manajer sesi. Klik Keluar akan menutup server X."
 
-#: ../panel/panel-application.c:1729
+#: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
 msgstr "Anda yakin anda ingin keluar panel?"
 
-#: ../panel/panel-application.c:1737
+#: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Gagal menjalankan perintah \"%s\""
 
-#: ../panel/panel-dbus-client.c:211
+#: ../panel/panel-dbus-client.c:210
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Sintaks yang diberikan pada plugin tidak valid. Gunakan: PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
-#: ../panel/panel-dbus-client.c:244
+#: ../panel/panel-dbus-client.c:243
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr "Tipe \"%s\" tidak valid. Gunakan salah satu tipe berikut: bool, double, int, string, dan uint."
 
-#: ../panel/panel-dialogs.c:65
-msgid "Maintainers"
-msgstr "Pengelola"
-
-#: ../panel/panel-dialogs.c:68
-msgid "Deskbar Mode"
-msgstr "Mode Deskbar"
-
-#: ../panel/panel-dialogs.c:71
-msgid "Inactive Maintainers"
-msgstr "Pengelola Tidak Aktif"
-
-#: ../panel/panel-dialogs.c:82
+#: ../panel/panel-dialogs.c:49
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Panel Desktop Xfce "
 
-#: ../panel/panel-dialogs.c:87
+#: ../panel/panel-dialogs.c:54
 msgid "translator-credits"
-msgstr "Para penerjemah"
+msgstr "Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017."
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Tambah Item Baru"
 
-#: ../panel/panel-dialogs.c:172
+#: ../panel/panel-dialogs.c:128
+msgid "Add"
+msgstr "Tambah"
+
+#: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "Mohon pilih sebuah panel untuk menempatkan plugin baru:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:853
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:232
+#: ../panel/panel-dialogs.c:199
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Anda tidak diizinkan untuk mengubah konfigurasi panel dengan akun pengguna biasa dikarenakan panel sedang berjalan pada mode kiosk"
 
-#: ../panel/panel-dialogs.c:234
+#: ../panel/panel-dialogs.c:201
 msgid "Modifying the panel is not allowed"
 msgstr "Perubahan pada panel tidak diizinkan"
 
@@ -287,12 +301,20 @@ msgstr "Tambah Item Baru"
 msgid "Add new plugins to the panel"
 msgstr "Tambah plugin baru ke panel"
 
-#: ../panel/panel-item-dialog.c:216
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../panel/panel-item-dialog.c:202
+msgid "Help"
+msgstr "Bantuan"
+
+#: ../panel/panel-item-dialog.c:204 ../panel/panel-tic-tac-toe.c:124
+msgid "Close"
+msgstr "Tutup"
+
+#: ../panel/panel-item-dialog.c:217
+#: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "Te_lusuri:"
 
-#: ../panel/panel-item-dialog.c:224
+#: ../panel/panel-item-dialog.c:225
 msgid "Enter search phrase here"
 msgstr "Masukkan kata pencarian di sini"
 
@@ -309,41 +331,45 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Plugin dijalankan ulang lebih dari satu kali dalam %d detik terakhir. Jika anda menekan tombol Eksekusi, maka panel akan mencoba untuk menjalankan ulang plugin tersebut. Jika tidak, plugin akan dihilangkan dari panel."
 
-#: ../panel/panel-preferences-dialog.c:492
+#: ../panel/panel-preferences-dialog.c:494
 msgid "Automatic"
 msgstr "Otomatis"
 
+#: ../panel/panel-preferences-dialog.c:502
+msgid "Primary"
+msgstr "Utama"
+
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:511
+#: ../panel/panel-preferences-dialog.c:522
 #, c-format
 msgid "Screen %d"
 msgstr "Layar %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:537
+#: ../panel/panel-preferences-dialog.c:548
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:919
+#: ../panel/panel-preferences-dialog.c:930
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panel terpilih dan seluruh item serta konfigurasinya akan dihapus"
 
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:931
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Anda yakin ingin menghapus panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../panel/panel-preferences-dialog.c:1043
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(eksternal)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1048
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -352,36 +378,36 @@ msgstr "Nama internal: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1060
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nama internal: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-msgid "Horizontal"
-msgstr "Horizontal"
-
-#: ../panel/panel-preferences-dialog.glade.h:2
-msgid "Vertical"
-msgstr "Vertikal"
-
-#: ../panel/panel-preferences-dialog.glade.h:3
-msgid "Deskbar"
-msgstr "Deskbar"
-
-#: ../panel/panel-preferences-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 msgid "Never"
 msgstr "Tidak Pernah"
 
-#: ../panel/panel-preferences-dialog.glade.h:5
+#: ../panel/panel-preferences-dialog.glade.h:2
 msgid "Intelligently"
-msgstr "Mode Pintar"
+msgstr "Cerdas"
 
-#: ../panel/panel-preferences-dialog.glade.h:6
+#: ../panel/panel-preferences-dialog.glade.h:3
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
 msgid "Always"
 msgstr "Selalu"
+
+#: ../panel/panel-preferences-dialog.glade.h:4
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Vertical"
+msgstr "Vertikal"
+
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "Deskbar"
+msgstr "Deskbar"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
@@ -434,7 +460,7 @@ msgstr "Pilih opsi ini untuk menyembunyikan handel dan mengunci posisi panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Automatically hide the panel:"
-msgstr "Otomatis sembunyikan panel:"
+msgstr "Secara otomatis menyembunyikan panel:"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
@@ -447,33 +473,33 @@ msgid ""
 msgstr "Tentukan pilihan ini jika kamu menginginkan jendela maksimal untuk sampul diwilayah belakang panel. Ini hanya bekerja ketika panel adalah terlampir ke tepian layar."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
-#: ../plugins/actions/actions-dialog.glade.h:6
-#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/actions/actions-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "General"
 msgstr "Umum"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
-msgid "Row _Size (pixels):"
-msgstr "_Ukuran Baris (piksel):"
-
-#: ../panel/panel-preferences-dialog.glade.h:26
-#, no-c-format
-msgid "L_ength (%):"
-msgstr "Pan_jang"
-
-#: ../panel/panel-preferences-dialog.glade.h:27
-msgid "Num_ber of rows:"
-msgstr "Jumlah _baris:"
-
-#: ../panel/panel-preferences-dialog.glade.h:28
 msgid "A_utomatically increase the length"
 msgstr "Per_lebar otomatis"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "Pilih opsi ini untuk menotomatisasi penyesuaian ukuran panel (jika diperlukan)."
+
+#: ../panel/panel-preferences-dialog.glade.h:27
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "Pan_jang"
+
+#: ../panel/panel-preferences-dialog.glade.h:28
+msgid "Num_ber of rows:"
+msgstr "Jumlah _baris:"
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "Row _Size (pixels):"
+msgstr "_Ukuran Baris (piksel):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -486,131 +512,115 @@ msgid "D_isplay"
 msgstr "Pe_nampil"
 
 #: ../panel/panel-preferences-dialog.glade.h:33
-#: ../plugins/separator/separator-dialog.glade.h:2
+#: ../plugins/separator/separator-dialog.glade.h:5
 msgid "_Style:"
 msgstr "_Gaya:"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
-msgid "_Alpha:"
-msgstr "_Alfa:"
-
-#: ../panel/panel-preferences-dialog.glade.h:35
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr "Nilai alfa untuk latar panel, 0 berarti transparan sepenuhnya dan 100 opasitas sepenuhnya."
-
-#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "C_olor:"
 msgstr "_Warna:"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "Pick a Panel Color"
 msgstr "Pilih Warna Panel"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:36
 msgid "_File:"
 msgstr "_Berkas"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Select A Background Image"
 msgstr "Pilih gambar latar"
 
-#: ../panel/panel-preferences-dialog.glade.h:40
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Background"
 msgstr "Latar"
 
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:42
-msgid "_Enter:"
-msgstr "Mun_cul:"
-
-#. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:44
-msgid "_Leave:"
-msgstr "_Hilang:"
-
-#: ../panel/panel-preferences-dialog.glade.h:45
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully"
-" transparent and 100 fully opaque."
-msgstr "Transparansi ketika penunjuk berada di atas panel, dengan 0 berarti transparan sepenuhnya dan 100 opasitas sepenuhnya."
-
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "Transparansi ketika penunjuk tidak berada di atas panel, dengan 0 berarti transparan sepenuhnya dan 100 opasitas sepenuhnya."
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:41
+msgid "_Enter:"
+msgstr "Mun_cul:"
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:43
+msgid "_Leave:"
+msgstr "_Hilang:"
+
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
 msgstr "Opasitas"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "Aktifkan mode komposit pada manajer jendela untuk aturan opasitas pada panel."
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
 msgstr "_Tampilan"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
-#: ../plugins/launcher/launcher-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Move currently selected item up by one row"
 msgstr "Pindahkan item terpilih ke atas sebanyak satu baris"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/launcher/launcher-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Move currently selected item down by one row"
 msgstr "Pindahkan item terpilih ke bawah sebanyak satu baris"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Add new item to this panel"
 msgstr "Tambah item baru ke panel ini"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:50
 msgid "Remove currently selected item"
 msgstr "Hapus item terpilih"
 
-#: ../panel/panel-preferences-dialog.glade.h:54
-#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "Sunting panel terpilih saat ini"
 
-#: ../panel/panel-preferences-dialog.glade.h:55
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Show about information of the currently selected item"
 msgstr "Tampilan informasi tentang item terpilih"
 
-#: ../panel/panel-preferences-dialog.glade.h:56
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Ite_ms"
 msgstr "_Item"
 
-#: ../panel/panel-tic-tac-toe.c:123
+#: ../panel/panel-tic-tac-toe.c:122
 msgid "_New Game"
 msgstr "Permainan _Baru"
 
-#: ../panel/panel-tic-tac-toe.c:134
+#: ../panel/panel-tic-tac-toe.c:133
 msgid "_Level:"
 msgstr "_Level:"
 
-#: ../panel/panel-tic-tac-toe.c:140
+#: ../panel/panel-tic-tac-toe.c:139
 msgid "Novice"
 msgstr "Pemula"
 
-#: ../panel/panel-tic-tac-toe.c:141
+#: ../panel/panel-tic-tac-toe.c:140
 msgid "Intermediate"
 msgstr "Menengah"
 
-#: ../panel/panel-tic-tac-toe.c:142
+#: ../panel/panel-tic-tac-toe.c:141
 msgid "Experienced"
 msgstr "Berpengalaman"
 
-#: ../panel/panel-tic-tac-toe.c:143
+#: ../panel/panel-tic-tac-toe.c:142
 msgid "Expert"
 msgstr "Mahir"
 
-#: ../panel/panel-window.c:2652
+#: ../panel/panel-window.c:2737
 msgid "_Lock Panel"
 msgstr "_Kunci Panel"
 
@@ -678,8 +688,8 @@ msgid "Action Buttons"
 msgstr "Tombol Aksi"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-msgid "Appeara_nce:"
-msgstr "_Tampilan:"
+msgid "Session Menu"
+msgstr "Menu Sesi"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
@@ -694,143 +704,143 @@ msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr "Tampilkan dialog konfirmasi dengan waktu jeda 30 detik untuk aksi."
 
-#: ../plugins/actions/actions-dialog.glade.h:7
+#: ../plugins/actions/actions-dialog.glade.h:6
+msgid "Appeara_nce:"
+msgstr "_Tampilan:"
+
+#: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Visible"
 msgstr "Tampak"
 
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:9
 msgid "Action"
 msgstr "Aksi"
 
-#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/actions/actions-dialog.glade.h:10
 msgid "_Actions"
 msgstr "_Aksi"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
-msgid "Session Menu"
-msgstr "Menu Sesi"
-
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:150
 msgid "Log Out"
 msgstr "Log Keluar"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:151
 msgid "_Log Out"
 msgstr "_Log Keluar"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:152
 msgid "Are you sure you want to log out?"
 msgstr "Anda yakin ingin menghapus keluar?"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:153
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Keluar dalam %d detik."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:158
 msgid "Log Out..."
 msgstr "Log Keluar..."
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:159
 msgid "Log _Out..."
 msgstr "Log _Keluar..."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:165
 msgid "Switch User"
 msgstr "Ganti Pengguna"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:166
 msgid "_Switch User"
 msgstr "_Ganti Pengguna"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:172
 msgid "Lock Screen"
 msgstr "Kunci Layar"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:173
 msgid "Loc_k Screen"
 msgstr "K_unci Layar"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:179
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:180
 msgid "_Hibernate"
 msgstr "_Hibernasi"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:181
 msgid "Do you want to suspend to disk?"
 msgstr "Anda yakin ingin suspensi ke cakram?"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:182
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Hibernasi komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:187
 msgid "Suspend"
 msgstr "Siaga"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:188
 msgid "Sus_pend"
 msgstr "Sus_pensi"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:189
 msgid "Do you want to suspend to RAM?"
 msgstr "Anda ingin suspensi ke RAM?"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:190
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Suspensi komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:195
 msgid "Restart"
 msgstr "Mulai Kembali"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:196
 msgid "_Restart"
 msgstr "Start _Ulang"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:197
 msgid "Are you sure you want to restart?"
 msgstr "Anda yakin ingin menghidupkan ulang?"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:198
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Menghidupkan ulang komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:203
 msgid "Shut Down"
 msgstr "Matikan"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:204
 msgid "Shut _Down"
 msgstr "_Matikan"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:205
 msgid "Are you sure you want to shut down?"
 msgstr "Anda yakin anda ingin mematikan?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:206
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Mematikan komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:621
-#: ../plugins/separator/separator-dialog.glade.h:1
+#: ../plugins/actions/actions.c:593
+#: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Pemisah"
 
-#: ../plugins/actions/actions.c:983
+#: ../plugins/actions/actions.c:955
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Gagal menjalankan aksi \"%s\""
 
-#: ../plugins/actions/actions.c:1154
+#: ../plugins/actions/actions.c:1118
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -844,44 +854,44 @@ msgid "Applications Menu"
 msgstr "Menu Aplikasi"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid "_Icon:"
+msgstr "_Ikon:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+msgid "Button _title:"
+msgstr "_Judul tombol:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "_Show button title"
+msgstr "Tampilkan judul _tombol"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "Show application d_escription in tooltip"
+msgstr "Tampilkan d_eskripsi aplikasi dalam tip alat"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Show ic_ons in menu"
+msgstr "Tampilkan _ikon dalam menu"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Show generic application n_ames"
 msgstr "Tampilkan n_ama aplikasi generik"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr "Pilih opsi ini untuk menampilkan nama aplikasi generik pada menu, seperti: \"Thunar\" yang akan menjadi \"Manajer Berkas\" "
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-msgid "Show ic_ons in menu"
-msgstr "Tampilkan _ikon dalam menu"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "_Show button title"
-msgstr "Tampilkan judul _tombol"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Button _title:"
-msgstr "_Judul tombol:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-msgid "_Icon:"
-msgstr "_Ikon:"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
-msgid "Show application d_escription in tooltip"
-msgstr "Tampilkan d_eskripsi aplikasi dalam tip alat"
-
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:15
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 #: ../plugins/pager/pager-dialog.glade.h:6
-#: ../plugins/separator/separator-dialog.glade.h:4
+#: ../plugins/separator/separator-dialog.glade.h:7
 #: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Appearance"
 msgstr "Tampilan"
 
@@ -914,13 +924,18 @@ msgstr "Berkas Menu"
 msgid "Applications"
 msgstr "Aplikasi"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:564
-#: ../plugins/directorymenu/directorymenu.c:388
+#: ../plugins/applicationsmenu/applicationsmenu.c:536
+#: ../plugins/directorymenu/directorymenu.c:397
 msgid "Select An Icon"
 msgstr "Pilih Ikon"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:605
-#: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
+#: ../plugins/applicationsmenu/applicationsmenu.c:539
+#: ../plugins/directorymenu/directorymenu.c:400
+msgid "OK"
+msgstr "OK"
+
+#: ../plugins/applicationsmenu/applicationsmenu.c:579
+#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Gagal mengeksekusi perintah \"%s\"."
@@ -959,50 +974,62 @@ msgstr "Menu popup di posisi tetikus saat ini"
 msgid "Show help options"
 msgstr "Tampilkan opsi bantuan"
 
-#: ../plugins/clock/clock.c:174
+#: ../plugins/clock/clock.c:176
 msgid "Week %V"
 msgstr "Minggu %V"
 
-#: ../plugins/clock/clock.c:457
+#: ../plugins/clock/clock.c:469
 msgid "Failed to execute clock command"
 msgstr "Gagal mengeksekusi perintah jam"
 
-#: ../plugins/clock/clock.c:807
+#: ../plugins/clock/clock.c:820
 msgid "Custom Format"
 msgstr "Format Suai"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
+msgid "Analog"
+msgstr "Analog"
+
+#: ../plugins/clock/clock-dialog.glade.h:2
+msgid "Binary"
+msgstr "Biner"
+
+#: ../plugins/clock/clock-dialog.glade.h:3
+msgid "Digital"
+msgstr "Digital"
+
+#: ../plugins/clock/clock-dialog.glade.h:4
+msgid "Fuzzy"
+msgstr "Tepat"
+
+#: ../plugins/clock/clock-dialog.glade.h:5
+msgid "LCD"
+msgstr "LCD"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Jam"
 
-#: ../plugins/clock/clock-dialog.glade.h:2
+#: ../plugins/clock/clock-dialog.glade.h:7
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "Nama zona waktu yang sesuai dengan data yang terdaftar, misalnya \"Indonesia/Jakarta\". Jika ingin menggunakan waktu lokal pada komputer, biarkan dalam keadaan kosong."
 
-#: ../plugins/clock/clock-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Time_zone:"
 msgstr "_Zona Waktu:"
 
-#: ../plugins/clock/clock-dialog.glade.h:4
+#: ../plugins/clock/clock-dialog.glade.h:9
 msgid "Time and Date _Settings..."
 msgstr "_Pengaturan Waktu dan Tanggal ..."
 
-#: ../plugins/clock/clock-dialog.glade.h:5
+#: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time Settings"
 msgstr "Pengaturan Waktu"
 
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "_Layout:"
-msgstr "Tata _Letak:"
-
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "_Tooltip format:"
-msgstr "_Format tip alat:"
-
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:12
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1011,292 +1038,280 @@ msgid ""
 "page for additional information."
 msgstr "Format menjelaskan bagian tanggal dan waktu untuk dimasukkan ke dalam nama berkas. Misalnya, %Y akan diganti dengan tahun, %m dengan bulan dan %d dengan hari. Lihat dokumentasi utilitas tanggal untuk informasi tambahan."
 
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "Display _seconds"
-msgstr "Tampilkan _detik"
-
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "True _binary clock"
-msgstr "Jam _biner nyata"
-
 #: ../plugins/clock/clock-dialog.glade.h:13
-msgid "24-_hour clock"
-msgstr "Jam 24-_jam"
+msgid "_Tooltip format:"
+msgstr "_Format tip alat:"
 
 #: ../plugins/clock/clock-dialog.glade.h:14
-msgid "Fl_ash time separators"
-msgstr "Pemisah waktu fl_ash"
+msgid "_Layout:"
+msgstr "Tata _Letak:"
 
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:16
 msgid "Sho_w AM/PM"
 msgstr "Tampil_kan AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Fl_ash time separators"
+msgstr "Pemisah waktu fl_ash"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "24-_hour clock"
+msgstr "Jam 24-_jam"
+
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid "True _binary clock"
+msgstr "Jam _biner nyata"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
+msgid "Display _seconds"
+msgstr "Tampilkan _detik"
+
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "F_uzziness:"
 msgstr "Kete_patan:"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:24
 msgid "Show _inactive dots"
 msgstr "Tampilkan t_itik tidak aktif"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Show gri_d"
 msgstr "Tampilkan _petak"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Clock Options"
 msgstr "Opsi Jam"
 
-#: ../plugins/clock/clock-dialog.glade.h:22
-msgid "Analog"
-msgstr "Analog"
-
-#: ../plugins/clock/clock-dialog.glade.h:23
-msgid "Binary"
-msgstr "Biner"
-
-#: ../plugins/clock/clock-dialog.glade.h:24
-msgid "Digital"
-msgstr "Digital"
-
-#: ../plugins/clock/clock-dialog.glade.h:25
-msgid "Fuzzy"
-msgstr "Tepat"
-
-#: ../plugins/clock/clock-dialog.glade.h:26
-msgid "LCD"
-msgstr "LCD"
-
-#: ../plugins/clock/clock-fuzzy.c:88
+#: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
 msgstr "Malam"
 
-#: ../plugins/clock/clock-fuzzy.c:89
+#: ../plugins/clock/clock-fuzzy.c:88
 msgid "Early morning"
 msgstr "Dini hari"
 
-#: ../plugins/clock/clock-fuzzy.c:90
+#: ../plugins/clock/clock-fuzzy.c:89
 msgid "Morning"
 msgstr "Pagi"
 
-#: ../plugins/clock/clock-fuzzy.c:91
+#: ../plugins/clock/clock-fuzzy.c:90
 msgid "Almost noon"
 msgstr "Hampir siang"
 
-#: ../plugins/clock/clock-fuzzy.c:92
+#: ../plugins/clock/clock-fuzzy.c:91
 msgid "Noon"
 msgstr "Siang"
 
-#: ../plugins/clock/clock-fuzzy.c:93
+#: ../plugins/clock/clock-fuzzy.c:92
 msgid "Afternoon"
 msgstr "Sore"
 
-#: ../plugins/clock/clock-fuzzy.c:94
+#: ../plugins/clock/clock-fuzzy.c:93
 msgid "Evening"
 msgstr "Malam"
 
-#: ../plugins/clock/clock-fuzzy.c:95
+#: ../plugins/clock/clock-fuzzy.c:94
 msgid "Late evening"
 msgstr "Tengah malam"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
-#: ../plugins/clock/clock-fuzzy.c:102
+#: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "%0 o'clock"
 msgstr "pukul %0"
 
-#: ../plugins/clock/clock-fuzzy.c:103
+#: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "five past %0"
 msgstr "pukul %0 lewat lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:104
+#: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "ten past %0"
 msgstr "pukul %0 lewat sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:105
+#: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "quarter past %0"
 msgstr "pukul %0 lewat seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:106
+#: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty past %0"
 msgstr "pukul %0 lewat dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:107
+#: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "twenty five past %0"
 msgstr "pukul %0 lewat dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:108
+#: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "half past %0"
 msgstr "pukul %0 lewat tiga puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:109
+#: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty five to %1"
 msgstr "pukul %1 kurang dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:110
+#: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "twenty to %1"
 msgstr "pukul %1 kurang dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:111
+#: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "quarter to %1"
 msgstr "pukul %1 kurang seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:112
+#: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "ten to %1"
 msgstr "pukul %1 kurang sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:113
+#: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "five to %1"
 msgstr "pukul %1 kurang lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:114
+#: ../plugins/clock/clock-fuzzy.c:113
 #, no-c-format
 msgid "%1 o'clock"
 msgstr "pukul %1"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
-#: ../plugins/clock/clock-fuzzy.c:121
+#: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
 msgstr "pukul %0"
 
-#: ../plugins/clock/clock-fuzzy.c:122
+#: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
 msgstr "pukul %0 lewat lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:123
+#: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
 msgstr "pukul %0 lewat sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:124
+#: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
 msgstr "pukul %0 lewat seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:125
+#: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
 msgstr "pukul %0 lewat dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:126
+#: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
 msgstr "pukul %0 lewat dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:127
+#: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
 msgstr "pukul %0 lewat tiga puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:128
+#: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
 msgstr "pukul %1 kurang dua puluh lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:129
+#: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
 msgstr "pukul %1 kurang dua puluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:130
+#: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
 msgstr "pukul %1 kurang seperempat jam"
 
-#: ../plugins/clock/clock-fuzzy.c:131
+#: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
 msgstr "pukul %1 kurang sepuluh menit"
 
-#: ../plugins/clock/clock-fuzzy.c:132
+#: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
 msgstr "pukul %1 kurang lima menit"
 
-#: ../plugins/clock/clock-fuzzy.c:133
+#: ../plugins/clock/clock-fuzzy.c:132
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
 msgstr "pukul %1"
 
-#: ../plugins/clock/clock-fuzzy.c:138
+#: ../plugins/clock/clock-fuzzy.c:137
 msgid "one"
 msgstr "satu"
 
-#: ../plugins/clock/clock-fuzzy.c:139
+#: ../plugins/clock/clock-fuzzy.c:138
 msgid "two"
 msgstr "dua"
 
-#: ../plugins/clock/clock-fuzzy.c:140
+#: ../plugins/clock/clock-fuzzy.c:139
 msgid "three"
 msgstr "tiga"
 
-#: ../plugins/clock/clock-fuzzy.c:141
+#: ../plugins/clock/clock-fuzzy.c:140
 msgid "four"
 msgstr "empat"
 
-#: ../plugins/clock/clock-fuzzy.c:142
+#: ../plugins/clock/clock-fuzzy.c:141
 msgid "five"
 msgstr "lima"
 
-#: ../plugins/clock/clock-fuzzy.c:143
+#: ../plugins/clock/clock-fuzzy.c:142
 msgid "six"
 msgstr "enam"
 
-#: ../plugins/clock/clock-fuzzy.c:144
+#: ../plugins/clock/clock-fuzzy.c:143
 msgid "seven"
 msgstr "tujuh"
 
-#: ../plugins/clock/clock-fuzzy.c:145
+#: ../plugins/clock/clock-fuzzy.c:144
 msgid "eight"
 msgstr "delapan"
 
-#: ../plugins/clock/clock-fuzzy.c:146
+#: ../plugins/clock/clock-fuzzy.c:145
 msgid "nine"
 msgstr "sembilan"
 
-#: ../plugins/clock/clock-fuzzy.c:147
+#: ../plugins/clock/clock-fuzzy.c:146
 msgid "ten"
 msgstr "sepuluh"
 
-#: ../plugins/clock/clock-fuzzy.c:148
+#: ../plugins/clock/clock-fuzzy.c:147
 msgid "eleven"
 msgstr "sebelas"
 
-#: ../plugins/clock/clock-fuzzy.c:149
+#: ../plugins/clock/clock-fuzzy.c:148
 msgid "twelve"
 msgstr "dua belas"
 
@@ -1304,42 +1319,42 @@ msgstr "dua belas"
 msgid "What time is it?"
 msgstr "Jam berapa sekarang?"
 
-#: ../plugins/directorymenu/directorymenu.c:246
+#: ../plugins/directorymenu/directorymenu.c:247
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Menu Direktori"
 
-#: ../plugins/directorymenu/directorymenu.c:569
+#: ../plugins/directorymenu/directorymenu.c:582
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Gagal menjalankan aplikasi \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:600
+#: ../plugins/directorymenu/directorymenu.c:614
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Gagal menanyakan tipe isi untuk \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:623
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Tak ada aplikasi standar yang ditemukan untuk \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:624
+#: ../plugins/directorymenu/directorymenu.c:639
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Gagal menjalankan aplikasi standar untuk \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:719
+#: ../plugins/directorymenu/directorymenu.c:737
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Gagal mengeksekusi aplikasi kesukaan untuk kategori \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:792
+#: ../plugins/directorymenu/directorymenu.c:810
 msgid "Open Folder"
 msgstr "Buka Folder"
 
-#: ../plugins/directorymenu/directorymenu.c:803
+#: ../plugins/directorymenu/directorymenu.c:821
 msgid "Open in Terminal"
 msgstr "Buka di Terminal"
 
@@ -1351,148 +1366,148 @@ msgstr "Tampilkan pohon direktori di menu"
 msgid "Select A Directory"
 msgstr "Pilih Sebuah Direktori"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 msgid "_Base Directory:"
 msgstr "_Direktori Dasar:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+msgid "Show _hidden files"
+msgstr "Tampilkan _berkas tersembunyi"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Masukkan senarai pola yang akan digunakan untuk menentukan berkas mana yang tampak di dalam direktori. Jika anda menentukan lebih dari satu pola di sini, item senarai harus dipisahkan dengan titik koma (misalnya *.txt;*.doc)."
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "_File Pattern:"
 msgstr "_Pola Berkas:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "Show _hidden files"
-msgstr "Tampilkan _berkas tersembunyi"
-
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Filtering"
 msgstr "Memfilter"
 
-#: ../plugins/launcher/launcher.c:405
+#: ../plugins/launcher/launcher.c:404
 msgid "Open launcher menu"
 msgstr "Buka peluncuran menu"
 
-#: ../plugins/launcher/launcher.c:1575
+#: ../plugins/launcher/launcher.c:1595
 msgid "Unnamed Item"
 msgstr "Item Tak Bernama"
 
-#: ../plugins/launcher/launcher.c:1728
+#: ../plugins/launcher/launcher.c:1746
 msgid "No items"
 msgstr "Tak ada item"
 
-#: ../plugins/launcher/launcher-dialog.c:798
+#: ../plugins/launcher/launcher-dialog.c:789
 msgid "Failed to open desktop item editor"
 msgstr "Gagal membuka penyunting item desktop"
 
-#: ../plugins/launcher/launcher-dialog.c:857
+#: ../plugins/launcher/launcher-dialog.c:848
 msgid "If you delete an item, it will be permanently removed"
 msgstr "Jika anda menghapus sebuah item, maka item akan secara permanen dihapus"
 
-#: ../plugins/launcher/launcher-dialog.c:858
+#: ../plugins/launcher/launcher-dialog.c:849
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "Anda yakin ingin menghapus \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:859
+#: ../plugins/launcher/launcher-dialog.c:850
 msgid "Unnamed item"
 msgstr "Item tak bernama"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "Add one or more existing items to the launcher"
+msgstr "Tambahkan satu atau lebih item yang telah ada ke peluncur"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:4
 msgid "Default"
 msgstr "Standar"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
+#: ../plugins/launcher/launcher-dialog.glade.h:5
 msgid "North"
 msgstr "Utara"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:6
 msgid "West"
 msgstr "Barat"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:4
+#: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "East"
 msgstr "Timur"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "South"
 msgstr "Selatan"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Inside Button"
 msgstr "Dalam Tombol"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "_Edit Item"
 msgstr "_Sunting Item"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:8
+#: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "D_elete Item"
 msgstr "Hapus It_em"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "Add Appli_cation"
 msgstr "Tambah Apli_kasi"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:10
+#: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "New _Application"
 msgstr "Aplikasi _Baru"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:11
+#: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "New _Link"
 msgstr "_Tautan Baru"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:12
+#: ../plugins/launcher/launcher-dialog.glade.h:15
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Peluncur"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "Add one or more existing items to the launcher"
-msgstr "Tambahkan satu atau lebih item yang telah ada ke peluncur"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Add a new empty item"
 msgstr "Tambah item kosong baru"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/launcher/launcher-dialog.glade.h:19
 msgid "Delete the currently selected item"
 msgstr "Hapus item terpilih saat ini"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Disable t_ooltips"
 msgstr "N_onaktifkan batang alat"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Pilih opsi ini untuk menonaktifkan tip alat ketika berpindah di atas tombol panel atau item menu."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Show _label instead of icon"
 msgstr "Tampilkan _label ketimbang ikon"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "Show last _used item in panel"
 msgstr "Tampilkan item yang dig_unakan terakhir di panel"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Pilih opsi ini untuk memindahkan item menu yang diklik ke panel."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "_Arrow button position:"
 msgstr "Posisi tombol _panah:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Advanced"
 msgstr "Lanjutan"
 
@@ -1500,15 +1515,15 @@ msgstr "Lanjutan"
 msgid "Program launcher with optional menu"
 msgstr "Peluncur program dengan menu opsional"
 
-#: ../plugins/pager/pager.c:396 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "_Pengaturan Ruang Kerja..."
 
-#: ../plugins/pager/pager.c:479
+#: ../plugins/pager/pager.c:533
 msgid "Unable to open the workspace settings"
 msgstr "Tak dapat membuka pengaturan ruang kerja"
 
-#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
 #, c-format
 msgid "Workspace %d"
 msgstr "Ruang kerja %d"
@@ -1537,7 +1552,7 @@ msgid "Switch workspaces using the mouse _wheel"
 msgstr "Pindah ruang kerja menggunakan roda tetik_us"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "Behaviour"
 msgstr "Perilaku"
 
@@ -1545,35 +1560,35 @@ msgstr "Perilaku"
 msgid "Switch between virtual desktops"
 msgstr "Tukar diantara desktop virtual"
 
-#: ../plugins/separator/separator-dialog.glade.h:3
-msgid "_Expand"
-msgstr "_Perluas"
-
-#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/separator/separator-dialog.glade.h:1
 msgid "Transparent"
 msgstr "Transparan"
 
-#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:3
 msgid "Handle"
 msgstr "Penanganan"
 
-#: ../plugins/separator/separator-dialog.glade.h:7
+#: ../plugins/separator/separator-dialog.glade.h:4
 msgid "Dots"
 msgstr "Titik"
+
+#: ../plugins/separator/separator-dialog.glade.h:6
+msgid "_Expand"
+msgstr "_Perluas"
 
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
 msgstr "Tambah pemisah atau spasi diantara item panel"
 
-#: ../plugins/showdesktop/showdesktop.c:210
+#: ../plugins/showdesktop/showdesktop.c:216
 msgid "Restore the minimized windows"
 msgstr "Kembalikan jendela yang diminimalkan"
 
-#: ../plugins/showdesktop/showdesktop.c:212
+#: ../plugins/showdesktop/showdesktop.c:218
 msgid "Minimize all open windows and show the desktop"
 msgstr "Minimalkan semua jendela yang terbuka dan tampilkan desktop"
 
-#: ../plugins/showdesktop/showdesktop.c:215
+#: ../plugins/showdesktop/showdesktop.c:221
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
 msgstr "Tampilkan Desktop"
@@ -1582,22 +1597,26 @@ msgstr "Tampilkan Desktop"
 msgid "Hide all windows and show the desktop"
 msgstr "Sembunyikan semua jendela dan tampilkan desktop"
 
-#: ../plugins/systray/systray.c:398
+#: ../plugins/systray/systray.c:400
 msgid "Unable to start the notification area"
 msgstr "Tak dapat menjalankan area notifikasi"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:868
+#: ../plugins/systray/systray.c:869
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Kelihatannya widget lain mengambil alih fungsi area notifikasi. Area ini tidak akan digunakan."
 
-#: ../plugins/systray/systray.c:870
+#: ../plugins/systray/systray.c:871
 msgid "The notification area lost selection"
 msgstr "Area notifikasi kehilangan pilihan"
 
 #: ../plugins/systray/systray.c:1023
+msgid "Clear"
+msgstr "Bersihkan"
+
+#: ../plugins/systray/systray.c:1024
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Anda yakin ingin membersihkan senarai aplikasi yang diketahui?"
 
@@ -1622,7 +1641,7 @@ msgstr "Bersihkan Ap_likasi Yang Dikenal"
 msgid "Known Applications"
 msgstr "Aplikasi Yang Dikenal"
 
-#: ../plugins/systray/systray-manager.c:404
+#: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Gagal mengakuisisi manajer seleksi untuk layar %d"
@@ -1636,107 +1655,107 @@ msgid "When space is limited"
 msgstr "Jika ruang terbatas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
+msgid "Nothing"
+msgstr "Tidak ada"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Close Window"
+msgstr "Tutup Jendela"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+msgid "Minimize Window"
+msgstr "Perkecil Jendela"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:7
 msgid "Timestamp"
 msgstr "Stempel waktu"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Group title and timestamp"
 msgstr "Judul grup dan stempel waktu"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "Window title"
 msgstr "Judul jendela"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "Group title and window title"
 msgstr "Judul grup dan judul jendela"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
 msgid "None, allow drag-and-drop"
 msgstr "Tak ada, perbolehkan tarik-dan-letakkan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Window Buttons"
 msgstr "Tombol Jendela"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show button _labels"
 msgstr "Tampilkan _label tombol"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "Show _flat buttons"
 msgstr "Tampilkan _tombol rata"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show _handle"
 msgstr "Tampilkan _penanganan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Sorting _order:"
 msgstr "Urutan _pengurutan:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Window _grouping:"
 msgstr "Pen_gelompokan jendela:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "Mi_ddle click action:"
 msgstr "Aksi klik teng_ah:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Restore minimized windows to current _workspace"
 msgstr "Kembalikan jendela yang diminimalkan ke _ruang kerja saat ini"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "D_raw window frame when hovering a button"
 msgstr "Gamba_r bingkai jendela ketika menyorot tombol"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "_Switch windows using the mouse wheel"
 msgstr "Pindah jendela menggunakan roda tetik_us"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Tampilkan _jendela dari semua ruang kerja atau pangkalan tampilan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-msgid "Show windows from all mo_nitors"
-msgstr "Tampilkan jendela dari semua mo_nitor"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Show only _minimized windows"
 msgstr "Hanya tampilkan jendela yang di_minimalkan"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
-msgid "Nothing"
-msgstr "Tidak ada"
-
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
-msgid "Close Window"
-msgstr "Tutup Jendela"
+msgid "Show windows from all mo_nitors"
+msgstr "Tampilkan jendela dari semua mo_nitor"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
-msgid "Minimize Window"
-msgstr "Perkecil Jendela"
-
-#: ../plugins/tasklist/tasklist-widget.c:3326
+#: ../plugins/tasklist/tasklist-widget.c:3414
 msgid "Mi_nimize All"
 msgstr "Mi_nimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3335
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Un_minimize All"
 msgstr "Tidak Mini_malkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3341
+#: ../plugins/tasklist/tasklist-widget.c:3429
 msgid "Ma_ximize All"
 msgstr "Ma_ksimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3350
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "_Unmaximize All"
 msgstr "Tidak Maksima_lkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3360
+#: ../plugins/tasklist/tasklist-widget.c:3448
 msgid "_Close All"
 msgstr "_Tutup Semua"
 
@@ -1744,64 +1763,64 @@ msgstr "_Tutup Semua"
 msgid "Switch between open windows using buttons"
 msgstr "Tukar diantara jendela yang terbuka dengan menggunakan tombol"
 
-#: ../plugins/windowmenu/windowmenu.c:655
+#: ../plugins/windowmenu/windowmenu.c:673
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1246
+#: ../plugins/windowmenu/windowmenu.c:1266
 msgid "No Windows"
 msgstr "Tak Ada Jendela"
 
-#: ../plugins/windowmenu/windowmenu.c:1261
+#: ../plugins/windowmenu/windowmenu.c:1281
 msgid "Urgent Windows"
 msgstr "Jendela Penting"
 
-#: ../plugins/windowmenu/windowmenu.c:1303
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Tambah Ruang Kerja"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
+#: ../plugins/windowmenu/windowmenu.c:1343
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Hapus Ruang Kerja \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1325
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Hapus Ruang Kerja %d"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+msgid "Icon"
+msgstr "Ikon"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+msgid "Arrow"
+msgstr "Panah"
+
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:1
 msgid "Window Menu"
 msgstr "Menu Jendela"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
 msgid "Button layout:"
 msgstr "Tata letak tombol:"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Show workspace a_ctions"
 msgstr "Tampilkan aksi ruang _kerja"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
 msgid "Show workspace _names"
 msgstr "Tampilkan nama ruan_g kerja"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Enable _urgency notification"
 msgstr "Aktifkan _notifikasi penting"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
 msgid "Show windows from _all workspaces"
 msgstr "Tampilkan _jendela dari semua ruang kerja"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-msgid "Icon"
-msgstr "Ikon"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-msgid "Arrow"
-msgstr "Panah"
 
 #: ../plugins/windowmenu/windowmenu.desktop.in.in.h:2
 msgid "Switch between open windows using a menu"
