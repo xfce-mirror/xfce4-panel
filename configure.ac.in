@@ -42,6 +42,7 @@ dnl ***************************
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.8 no-dist-gzip dist-bzip2 tar-ustar])
 AM_MAINTAINER_MODE()
+AC_CONFIG_MACRO_DIR([m4])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 dnl ******************************
@@ -180,7 +181,7 @@ if test x"$enable_visibility" != x"no"; then
   save_CFLAGS="$CFLAGS"
   CFLAGS="$CFLAGS -Wall -Werror"
   AC_MSG_CHECKING([whether $CC supports the GNUC visibility attribute])
-  AC_COMPILE_IFELSE(AC_LANG_SOURCE(
+  AC_COMPILE_IFELSE([AC_LANG_SOURCE(
   [
     void test_default (void);
     void test_hidden (void);
@@ -189,7 +190,7 @@ if test x"$enable_visibility" != x"no"; then
     void __attribute__ ((visibility("hidden"))) test_hidden (void) {}
 
     int main (int argc, char **argv) { test_default (); test_hidden (); return 0; }
-  ]),
+  ])],
   [
     have_gnuc_visibility=yes
     AC_MSG_RESULT([yes])
