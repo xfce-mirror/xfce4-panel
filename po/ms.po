@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 12:30+0200\n"
-"PO-Revision-Date: 2017-04-26 10:58+0000\n"
+"POT-Creation-Date: 2017-04-27 00:30+0200\n"
+"PO-Revision-Date: 2017-05-21 10:45+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/xfce/xfce4-panel/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid ""
 msgstr "Tambah pelancar baru kepada panel berdasarkan maklumat fail desktop ini"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2707
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -52,7 +52,8 @@ msgstr "Anda pasti ingin membuang \"%s\"?"
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Jika anda membuang item.dari panel, ia akan kekal hilang."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034
+#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:399
 msgid "Cancel"
@@ -60,6 +61,7 @@ msgstr "Batal"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1035
 #: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "Buang"
 
@@ -73,17 +75,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2719
+#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "Tambah Item Baharu..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2730
+#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
 msgid "Panel Pr_eferences..."
 msgstr "Ciri-ciri Pan_el..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2758
+#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
 msgid "Log _Out"
 msgstr "Daftar Keluar"
 
@@ -265,6 +267,10 @@ msgstr "Mohd Nadzrin Sapari <terjemah.puretech@gmail.com>"
 msgid "Add New Item"
 msgstr "Tambah Item Baharu"
 
+#: ../panel/panel-dialogs.c:128
+msgid "Add"
+msgstr "Tambah"
+
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "Sila pilih panel untuk plugin baharu:"
@@ -296,7 +302,7 @@ msgstr "Tambah plugin baharu pada panel"
 msgid "Help"
 msgstr "Bantuan"
 
-#: ../panel/panel-item-dialog.c:204
+#: ../panel/panel-item-dialog.c:204 ../panel/panel-tic-tac-toe.c:124
 msgid "Close"
 msgstr "Tutup"
 
@@ -611,7 +617,7 @@ msgstr "Berpengalaman"
 msgid "Expert"
 msgstr "Pakar"
 
-#: ../panel/panel-window.c:2744
+#: ../panel/panel-window.c:2737
 msgid "_Lock Panel"
 msgstr "Kunci Pane_l"
 
