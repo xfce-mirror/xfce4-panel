@@ -1,3 +1,31 @@
+4.13.0
+======
+- Port to Gtk3:
+    The port is the result of the hard work Nick, Peter, Andrzejr, Simon and
+    many others that helped with testing, patches and translations.
+- Features:
+  - Support for the "primary" monitor option in RandR
+  - Gtk2 plugins are still supported and work almost completely fine
+    (see regressions below)
+- Deprecations:
+  - xfce_panel_image is deprecated, instead plugins shall use GtkImage and
+    xfce_panel_plugin_get_icon_size which introduces defined icon size-steps
+    to avoid fuzzy icons
+- Known regressions:
+  - The panel is not visually focused by default (fixed in Xfwm4>=4.12.4)
+  - Moving panel plugins via drag and drop on the panel directly via the plugins
+    context menu action "Move" is currently broken (works fine in preferences dialog)
+  - Small regression with intelligent hiding (when opening a menu, the panel
+    hides and comes back immediately while it should just remain visible)
+  - Enter/leave opacity does not work for Gtk2 plugins
+  - Not all panel settings may be kept as the configuration is not 100% backward
+    compatible (e.g. we're using GdkRGBA instead of GdkColor for the backgorund)
+- Known todos:
+  - Fix all bugs/regressions
+  - Remove more/all Gtk+ deprecations
+    (lots of warnings when compiling currently)
+- Lots of translations updates
+
 4.12.1
 ======
 - Long overdue maintenance release.
