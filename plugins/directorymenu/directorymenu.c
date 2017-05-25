@@ -826,7 +826,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       g_object_ref (dir), (GClosureNotify) g_object_unref, 0);
   gtk_widget_show (mi);
 
-  image = gtk_image_new_from_icon_name ("terminal", GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("utilities-terminal", GTK_ICON_SIZE_MENU);
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
 G_GNUC_END_IGNORE_DEPRECATIONS
