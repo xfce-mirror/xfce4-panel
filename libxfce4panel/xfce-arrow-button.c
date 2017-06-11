@@ -107,8 +107,10 @@ struct _XfceArrowButtonPrivate
    * MAX_BLINKING_COUNT is reached */
   guint          blinking_counter;
 
+#if !GTK_CHECK_VERSION (3, 0, 0)
   /* button relief when the blinking starts */
   GtkReliefStyle last_relief;
+#endif
 };
 
 
@@ -195,7 +197,9 @@ xfce_arrow_button_init (XfceArrowButton *button)
   button->priv->arrow_type = GTK_ARROW_UP;
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
+#if !GTK_CHECK_VERSION (3, 0, 0)
   button->priv->last_relief = GTK_RELIEF_NORMAL;
+#endif
 
   /* set some widget properties */
   gtk_widget_set_has_window (GTK_WIDGET (button), FALSE);
@@ -590,6 +594,20 @@ static gboolean
 xfce_arrow_button_blinking_timeout (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GtkStateFlags    flags = gtk_widget_get_state_flags (GTK_WIDGET (button));
+
+  if ((flags & GTK_STATE_FLAG_ACTIVE) == GTK_STATE_FLAG_ACTIVE
+    || button->priv->blinking_timeout_id == 0)
+    {
+      gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE);
+    }
+  else
+    {
+      gtk_widget_set_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE, FALSE);
+    }
+#else
   GtkStyle        *style;
   GtkRcStyle      *rc;
 
@@ -609,6 +627,7 @@ xfce_arrow_button_blinking_timeout (gpointer user_data)
       rc->bg[GTK_STATE_NORMAL] = style->bg[GTK_STATE_SELECTED];
       gtk_widget_modify_style(GTK_WIDGET (button), rc);
     }
+#endif
 
   return (button->priv->blinking_counter++ < MAX_BLINKING_COUNT);
 }
@@ -619,12 +638,17 @@ static void
 xfce_arrow_button_blinking_timeout_destroyed (gpointer user_data)
 {
   XfceArrowButton *button = XFCE_ARROW_BUTTON (user_data);
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_unset_state_flags (GTK_WIDGET (button), GTK_STATE_FLAG_ACTIVE);
+#else
   GtkRcStyle      *rc;
 
   rc = gtk_widget_get_modifier_style (GTK_WIDGET (button));
   gtk_button_set_relief (GTK_BUTTON (button), button->priv->last_relief);
   PANEL_UNSET_FLAG (rc->color_flags[GTK_STATE_NORMAL], GTK_RC_BG);
   gtk_widget_modify_style (GTK_WIDGET (button), rc);
+#endif
 
   button->priv->blinking_timeout_id = 0;
   button->priv->blinking_counter = 0;
@@ -738,8 +762,10 @@ xfce_arrow_button_set_blinking (XfceArrowButton *button,
 
   if (blinking)
     {
+#if !GTK_CHECK_VERSION (3, 0, 0)
       /* store the relief of the button */
       button->priv->last_relief = gtk_button_get_relief (GTK_BUTTON (button));
+#endif
 
       if (button->priv->blinking_timeout_id == 0)
         {
