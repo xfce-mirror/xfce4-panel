@@ -548,6 +548,8 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
 static void
 xfce_tasklist_init (XfceTasklist *tasklist)
 {
+  GtkStyleContext *context;
+
   gtk_widget_set_has_window (GTK_WIDGET (tasklist), FALSE);
 
   tasklist->locked = 0;
@@ -587,6 +589,10 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->class_groups = g_hash_table_new_full (g_direct_hash, g_direct_equal,
                                                   (GDestroyNotify) g_object_unref,
                                                   (GDestroyNotify) xfce_tasklist_group_button_remove);
+
+  /* add style class for the tasklist widget */
+  context = gtk_widget_get_style_context (GTK_WIDGET (tasklist));
+  gtk_style_context_add_class (context, "tasklist");
 
   /* widgets for the overflow menu */
   /* TODO support drag-motion and drag-leave */
