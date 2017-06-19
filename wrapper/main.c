@@ -156,7 +156,9 @@ wrapper_gproxy_set (DBusGProxy              *dbus_gproxy,
           break;
 
         default:
-          panel_assert_not_reached ();
+          g_critical ("Received unknown plugin property %u for %s-%d",
+                      type, xfce_panel_plugin_provider_get_name (provider),
+                      xfce_panel_plugin_provider_get_unique_id (provider));
           break;
         }
 

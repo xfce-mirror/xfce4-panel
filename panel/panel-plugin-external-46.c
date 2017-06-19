@@ -290,10 +290,6 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
           event.xclient.data.s[1] = g_value_get_int (&property->value);
           break;
 
-        case PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA:
-          event.xclient.data.s[1] = g_value_get_double (&property->value) * 100.00;
-          break;
-
         case PROVIDER_PROP_TYPE_SET_LOCKED:
         case PROVIDER_PROP_TYPE_SET_SENSITIVE:
           event.xclient.data.s[1] = g_value_get_boolean (&property->value);

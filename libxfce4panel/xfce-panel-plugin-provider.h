@@ -107,7 +107,6 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_SET_NROWS,               /* gint */
   PROVIDER_PROP_TYPE_SET_LOCKED,              /* gboolean */
   PROVIDER_PROP_TYPE_SET_SENSITIVE,           /* gboolean */
-  PROVIDER_PROP_TYPE_SET_OPACITY,             /* gdouble */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR,    /* string, wrapper only */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_IMAGE,    /* string, wrapper only */
   PROVIDER_PROP_TYPE_ACTION_REMOVED,          /* none */
@@ -117,7 +116,8 @@ typedef enum /*< skip >*/
   PROVIDER_PROP_TYPE_ACTION_BACKGROUND_UNSET, /* none */
   PROVIDER_PROP_TYPE_ACTION_SHOW_CONFIGURE,   /* none */
   PROVIDER_PROP_TYPE_ACTION_SHOW_ABOUT,       /* none */
-  PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE        /* none */
+  PROVIDER_PROP_TYPE_ACTION_ASK_REMOVE,       /* none */
+  PROVIDER_PROP_TYPE_SET_OPACITY              /* gdouble */
 }
 XfcePanelPluginProviderPropType;
 
