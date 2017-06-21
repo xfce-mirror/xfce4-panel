@@ -42,7 +42,8 @@
 #include "clock-lcd.h"
 #include "clock-dialog_ui.h"
 
-#define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
+/* TRANSLATORS: adjust this accordingly for your locale format */
+#define DEFAULT_TOOLTIP_FORMAT NC_("Date", "%A %d %B %Y")
 
 /* Please adjust the following command to match your distribution */
 /* e.g. "time-admin" */

@@ -21,7 +21,8 @@
 
 G_BEGIN_DECLS
 
-#define DEFAULT_DIGITAL_FORMAT "%R"
+/* TRANSLATORS: adjust this accordingly for your locale format */
+#define DEFAULT_DIGITAL_FORMAT NC_("Time", "%R")
 
 typedef struct _XfceClockDigitalClass XfceClockDigitalClass;
 typedef struct _XfceClockDigital      XfceClockDigital;
