@@ -1001,15 +1001,29 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
 
 
 
+static gboolean
+xfce_panel_plugin_idle_move (XfcePanelPlugin *plugin)
+{
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin), FALSE);
+
+  /* move the plugin */
+  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
+                                          PROVIDER_SIGNAL_MOVE_PLUGIN);
+
+  return FALSE;
+}
+
+
+
 static void
 xfce_panel_plugin_menu_move (XfcePanelPlugin *plugin)
 {
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (plugin));
 
-  /* move the plugin */
-  xfce_panel_plugin_provider_emit_signal (XFCE_PANEL_PLUGIN_PROVIDER (plugin),
-                                          PROVIDER_SIGNAL_MOVE_PLUGIN);
+  /* wait for the popup to go down */
+  g_idle_add (xfce_panel_plugin_idle_move, plugin);
 }
 
 
