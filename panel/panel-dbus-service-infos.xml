@@ -6,10 +6,7 @@
     with the panel.
   -->
   <interface name="org.xfce.Panel">
-    <annotation name="org.freedesktop.DBus.GLib.CSymbol"
-                value="panel_dbus_service"/>
-    <annotation name="org.freedesktop.DBus.GLib.ClientCSymbol"
-                value="_panel_dbus_client"/>
+    <annotation name="org.gtk.GDBus.C.Name" value="ExportedService" />
 
     <!--
       DisplayPreferencesDialog (active : UINT, socket-id : STRING) : VOID

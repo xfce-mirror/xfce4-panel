@@ -126,6 +126,18 @@ dnl *******************************
 XDT_CHECK_LIBX11_REQUIRE()
 
 dnl ***********************************
+dnl *** Check for gdbus-codegen ***
+dnl ***********************************
+AC_ARG_VAR([GDBUS_CODEGEN], [D-Bus code and documentation generator from XML D-Bus interface definitions])
+AC_PATH_PROG([GDBUS_CODEGEN], [gdbus-codegen], [no])
+if test x"$GDBUS_CODEGEN" = x"no"; then
+  AC_MSG_ERROR([could not find gdbus-codegen in \$PATH. You can run
+  ./configure GDBUS_CODEGEN=/path/to/gdbus-codegen to define
+  a custom location for it.])
+fi
+
+
+dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
 XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.9.0])
@@ -137,6 +149,7 @@ XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.16.0])
 XDT_CHECK_PACKAGE([EXO], [exo-2], [0.11.2])
 XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.24.0])
 XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.24.0])
+PKG_CHECK_MODULES([GIO_UNIX], [gio-unix-2.0 >= 2.24.0])
 XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.24.0])
 XDT_CHECK_PACKAGE([DBUS], [dbus-glib-1], [0.73])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])

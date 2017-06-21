@@ -15,8 +15,8 @@ bin_PROGRAMS = \
 	xfce4-panel
 
 xfce4_panel_built_sources = \
-	panel-dbus-service-infos.h \
-	panel-dbus-client-infos.h \
+	panel-gdbus-exported-service.h \
+	panel-gdbus-exported-service.c \
 	panel-marshal.c \
 	panel-marshal.h \
 	panel-plugin-external-wrapper-infos.h \
@@ -29,10 +29,10 @@ xfce4_panel_SOURCES = \
 	panel-application.h \
 	panel-base-window.c \
 	panel-base-window.h \
-	panel-dbus-client.c \
-	panel-dbus-client.h \
 	panel-dbus-service.c \
 	panel-dbus-service.h \
+	panel-dbus-client.c \
+	panel-dbus-client.h \
 	panel-dialogs.c \
 	panel-dialogs.h \
 	panel-item-dialog.c \
@@ -59,6 +59,7 @@ xfce4_panel_SOURCES = \
 xfce4_panel_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(GMODULE_CFLAGS) \
+	$(GIO_UNIX_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(LIBWNCK_CFLAGS) \
@@ -77,6 +78,7 @@ xfce4_panel_LDADD = \
 	$(top_builddir)/common/libpanel-common.la \
 	$(GTK_LIBS) \
 	$(GMODULE_LIBS) \
+	$(GIO_UNIX_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(LIBWNCK_LIBS) \
@@ -99,11 +101,13 @@ panel-marshal.c: panel-marshal.list Makefile
 	$(AM_V_GEN) echo "#include <panel/panel-marshal.h>" > $@ \
 	&& glib-genmarshal --prefix=_panel_marshal --body $< >> $@
 
-panel-dbus-service-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
-	$(AM_V_GEN) dbus-binding-tool --prefix=panel_dbus_service --mode=glib-server $< > $@
-
-panel-dbus-client-infos.h: $(srcdir)/panel-dbus-service-infos.xml Makefile
-	$(AM_V_GEN) dbus-binding-tool --mode=glib-client $< > $@
+panel-gdbus-exported-service.h:
+panel-gdbus-exported-service.c: panel-dbus-service-infos.xml Makefile
+	$(AM_V_GEN) $(GDBUS_CODEGEN) \
+	--interface-prefix org.xfce.Panel \
+	--c-namespace XfcePanel   \
+	--generate-c-code panel-gdbus-exported-service \
+	$(srcdir)/panel-dbus-service-infos.xml
 
 panel-plugin-external-wrapper-infos.h: $(srcdir)/panel-plugin-external-wrapper-infos.xml Makefile
 	$(AM_V_GEN) dbus-binding-tool --prefix=panel_plugin_external_wrapper --mode=glib-server $< > $@
