@@ -313,7 +313,7 @@ main (gint argc, gchar **argv)
 
   /* start dbus service */
   dbus_service = panel_dbus_service_get ();
-  if (!panel_dbus_service_is_owner (dbus_service))
+  if (!panel_dbus_service_is_exported (dbus_service))
     {
       /* quit without error if an instance is running */
       succeed = TRUE;

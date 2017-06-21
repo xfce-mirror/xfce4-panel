@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2017 Ali Abdallah <ali@xfce.org>
  * Copyright (C) 2008-2010 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -369,7 +370,7 @@ panel_dbus_service_terminate (XfcePanelExportedService *skeleton,
                               gboolean                  restart,
                               PanelDBusService         *service)
 {
-  return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
+  panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);
 
   panel_dbus_service_exit_panel (restart);
 
