@@ -362,6 +362,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
                     }
 
                   cells += ratio;
+                  box->n_visible_children++;
 
                   continue;
                 }
