@@ -3,10 +3,7 @@
     org.xfce.Panel.Wrapper
   -->
   <interface name="org.xfce.Panel.Wrapper">
-    <annotation name="org.freedesktop.DBus.GLib.CSymbol"
-                value="panel_plugin_external_wrapper_dbus" />
-    <annotation name="org.freedesktop.DBus.GLib.ClientCSymbol"
-                value="wrapper_dbus" />
+    <annotation name="org.gtk.GDBus.C.Name" value="Exported" />
 
     <!--
       i : unsigned integer : enum from XfcePanelPluginProviderPropType.

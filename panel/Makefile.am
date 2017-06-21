@@ -19,7 +19,8 @@ xfce4_panel_built_sources = \
 	panel-gdbus-exported-service.c \
 	panel-marshal.c \
 	panel-marshal.h \
-	panel-plugin-external-wrapper-infos.h \
+	panel-plugin-external-wrapper-exported.h \
+	panel-plugin-external-wrapper-exported.c \
 	panel-preferences-dialog-ui.h
 
 xfce4_panel_SOURCES = \
@@ -109,8 +110,13 @@ panel-gdbus-exported-service.c: panel-dbus-service-infos.xml Makefile
 	--generate-c-code panel-gdbus-exported-service \
 	$(srcdir)/panel-dbus-service-infos.xml
 
-panel-plugin-external-wrapper-infos.h: $(srcdir)/panel-plugin-external-wrapper-infos.xml Makefile
-	$(AM_V_GEN) dbus-binding-tool --prefix=panel_plugin_external_wrapper --mode=glib-server $< > $@
+panel-plugin-external-wrapper-exported.h:
+panel-plugin-external-wrapper-exported.c: panel-plugin-external-wrapper-infos.xml Makefile
+	$(AM_V_GEN) $(GDBUS_CODEGEN) \
+	--interface-prefix org.xfce.Panel.Wrapper \
+	--c-namespace XfcePanelPluginWrapper   \
+	--generate-c-code panel-plugin-external-wrapper-exported \
+	$(srcdir)/panel-plugin-external-wrapper-infos.xml
 
 panel-preferences-dialog-ui.h: $(srcdir)/panel-preferences-dialog.glade Makefile
 	$(AM_V_GEN) xdt-csource --static --strip-comments --strip-content --name=panel_preferences_dialog_ui $< >$@
