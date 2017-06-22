@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2017 Ali Abdallah <ali@xfce.org>
  * Copyright (C) 2008-2010 Nick Schermer <nick@xfce.org>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -37,7 +38,7 @@
 #endif
 
 #include <glib.h>
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libwnck/libwnck.h>
@@ -196,6 +197,14 @@ panel_debug_notify_proxy (void)
     }
 }
 
+static void
+panel_dbus_name_lost (GDBusConnection *connection,
+                      const gchar     *name,
+                      gpointer         user_data) {
+
+  g_critical (_("Name %s lost on the message dbus, exiting."), name);
+  gtk_main_quit ();
+}
 
 
 gint
@@ -311,6 +320,14 @@ main (gint argc, gchar **argv)
 
   launch_panel:
 
+  g_bus_own_name (G_BUS_TYPE_SESSION,
+                  PANEL_DBUS_NAME,
+                  G_BUS_NAME_OWNER_FLAGS_NONE,
+                  NULL,
+                  NULL,
+                  panel_dbus_name_lost,
+                  NULL, NULL);
+
   /* start dbus service */
   dbus_service = panel_dbus_service_get ();
   if (!panel_dbus_service_is_exported (dbus_service))
@@ -393,7 +410,7 @@ dbus_return:
         error_msg = _("Failed to send D-Bus message");
 
       /* show understandable message for this common error */
-      if (error->code == DBUS_GERROR_NAME_HAS_NO_OWNER)
+      if (error->code == G_DBUS_ERROR_NAME_HAS_NO_OWNER)
         {
           /* normally start the panel */
           if (opt_preferences >= 0 || opt_restart)
