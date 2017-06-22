@@ -10,11 +10,7 @@ wrapperdir = $(HELPER_PATH_PREFIX)/xfce4/panel
 wrapper_PROGRAMS = \
 	wrapper-2.0
 
-wrapper_built_sources = \
-	wrapper-dbus-client-infos.h
-
 wrapper_2_0_SOURCES = \
-	$(wrapper_built_sources) \
 	main.c \
 	wrapper-module.c \
 	wrapper-module.h \
@@ -23,7 +19,7 @@ wrapper_2_0_SOURCES = \
 
 wrapper_2_0_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(DBUS_CFLAGS) \
+	$(GIO_CFLAGS) \
 	$(GMODULE_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
@@ -35,7 +31,7 @@ wrapper_2_0_LDFLAGS = \
 wrapper_2_0_LDADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-$(LIBXFCE4PANEL_VERSION_API).la \
 	$(GTK_LIBS) \
-	$(DBUS_LIBS) \
+	$(GIO_LIBS) \
 	$(GMODULE_LIBS) \
 	$(LIBXFCE4UTIL_LIBS)
 
@@ -50,7 +46,6 @@ if ENABLE_GTK2_LIBRARY
 wrapper_PROGRAMS += wrapper-1.0
 
 wrapper_1_0_SOURCES = \
-	$(wrapper_built_sources) \
 	main.c \
 	wrapper-module.c \
 	wrapper-module.h \
