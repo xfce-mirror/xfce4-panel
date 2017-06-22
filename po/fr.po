@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:30+0200\n"
-"PO-Revision-Date: 2017-04-27 08:43+0000\n"
-"Last-Translator: Charles Monzat <superboa@hotmail.fr>\n"
+"POT-Creation-Date: 2017-06-22 00:30+0200\n"
+"PO-Revision-Date: 2017-06-22 10:59+0000\n"
+"Last-Translator: Yannick Le Guen <leguen.yannick@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/xfce/xfce4-panel/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgid ""
 msgstr "Ajouter un nouveau lanceur dans le tableau de bord avec les informations de ce fichier desktop"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Tableau de bord"
@@ -46,53 +46,69 @@ msgid "Customize the panel"
 msgstr "Personnaliser le tableau de bord"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1028
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Voulez-vous vraiment supprimer « %s » ?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1033
+#: ../libxfce4panel/xfce-panel-plugin.c:1047
 #: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Si vous supprimez l’élément du tableau de bord, il le sera définitivement."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
 #: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:399
+#: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "Supprimer"
 
-#. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1193
+#: ../libxfce4panel/xfce-panel-plugin.c:1190
+msgid "_Properties"
+msgstr "_Propriétés"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1205
+msgid "_About"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1220
 msgid "_Move"
 msgstr "_Déplacer"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
+msgid "_Remove"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1265
 msgid "Pane_l"
 msgstr "Tableau de _bord"
 
-#. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1274 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "Ajouter de _nouveaux éléments..."
 
-#. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
+#: ../libxfce4panel/xfce-panel-plugin.c:1289 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "Pr_éférences du tableau de bord..."
 
-#. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "Dé_connexion"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1330
+msgid "_Help"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1345
+msgid "About"
+msgstr "À propos"
 
 #: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
@@ -623,7 +639,7 @@ msgstr "Confirmé"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2737
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "_Verrouiller le tableau de bord"
 
@@ -843,7 +859,7 @@ msgstr "Séparateur"
 msgid "Failed to run action \"%s\""
 msgstr "Impossible d’exécuter l’action « %s »"
 
-#: ../plugins/actions/actions.c:1118
+#: ../plugins/actions/actions.c:1122
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -928,17 +944,17 @@ msgid "Applications"
 msgstr "Applications"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:536
-#: ../plugins/directorymenu/directorymenu.c:397
+#: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Choisir une icône"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
-#: ../plugins/directorymenu/directorymenu.c:400
+#: ../plugins/directorymenu/directorymenu.c:395
 msgid "OK"
 msgstr "OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossible d’exécuter la commande « %s »."
@@ -977,15 +993,21 @@ msgstr "Menu contextuel à la position actuelle de la souris"
 msgid "Show help options"
 msgstr "Afficher les options d’aide"
 
-#: ../plugins/clock/clock.c:176
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock.c:46
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr ""
+
+#: ../plugins/clock/clock.c:177
 msgid "Week %V"
 msgstr "Semaine %V"
 
-#: ../plugins/clock/clock.c:469
+#: ../plugins/clock/clock.c:470
 msgid "Failed to execute clock command"
 msgstr "Impossible d’exécuter la commande de l’horloge"
 
-#: ../plugins/clock/clock.c:820
+#: ../plugins/clock/clock.c:821
 msgid "Custom Format"
 msgstr "Format personnalisé"
 
@@ -1090,6 +1112,12 @@ msgstr "Afficher une _grille"
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Clock Options"
 msgstr "Options de l’horloge"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1322,38 +1350,38 @@ msgstr "douze"
 msgid "What time is it?"
 msgstr "Quelle heure est-il ?"
 
-#: ../plugins/directorymenu/directorymenu.c:247
+#: ../plugins/directorymenu/directorymenu.c:242
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Menu de répertoire"
 
-#: ../plugins/directorymenu/directorymenu.c:582
+#: ../plugins/directorymenu/directorymenu.c:577
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Impossible de lancer l’application « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:614
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Impossible de déterminer le type de contenu pour « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:623
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Application par défaut non trouvée pour « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:639
+#: ../plugins/directorymenu/directorymenu.c:634
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Impossible de lancer l’application par défaut pour « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:737
+#: ../plugins/directorymenu/directorymenu.c:732
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Impossible d’exécuter l’application préférée pour la catégorie « %s »"
 
-#: ../plugins/directorymenu/directorymenu.c:810
+#: ../plugins/directorymenu/directorymenu.c:806
 msgid "Open Folder"
 msgstr "Ouvrir le dossier"
 
@@ -1394,15 +1422,15 @@ msgstr "_Motif des fichiers :"
 msgid "Filtering"
 msgstr "Filtrage"
 
-#: ../plugins/launcher/launcher.c:404
+#: ../plugins/launcher/launcher.c:388
 msgid "Open launcher menu"
 msgstr "Ouvrir le menu du lanceur"
 
-#: ../plugins/launcher/launcher.c:1595
+#: ../plugins/launcher/launcher.c:1569
 msgid "Unnamed Item"
 msgstr "Élément sans nom"
 
-#: ../plugins/launcher/launcher.c:1746
+#: ../plugins/launcher/launcher.c:1723
 msgid "No items"
 msgstr "Aucun élément"
 
@@ -1518,15 +1546,15 @@ msgstr "Avancé"
 msgid "Program launcher with optional menu"
 msgstr "Lanceur de programme avec menu facultatif"
 
-#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "_Paramètres des espaces de travail..."
 
-#: ../plugins/pager/pager.c:533
+#: ../plugins/pager/pager.c:537
 msgid "Unable to open the workspace settings"
 msgstr "Impossible d’ouvrir les paramètres des espaces de travail"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
 #, c-format
 msgid "Workspace %d"
 msgstr "Espace de travail %d"
@@ -1742,23 +1770,23 @@ msgstr "Afficher uniquement les fenêtres _réduites"
 msgid "Show windows from all mo_nitors"
 msgstr "Afficher les fenêtres de tous les _moniteurs"
 
-#: ../plugins/tasklist/tasklist-widget.c:3414
+#: ../plugins/tasklist/tasklist-widget.c:3407
 msgid "Mi_nimize All"
 msgstr "Tout _réduire"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3415
 msgid "Un_minimize All"
 msgstr "Tout _afficher"
 
-#: ../plugins/tasklist/tasklist-widget.c:3429
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Ma_ximize All"
 msgstr "Tout _maximiser"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3431
 msgid "_Unmaximize All"
 msgstr "Tout r_estaurer"
 
-#: ../plugins/tasklist/tasklist-widget.c:3448
+#: ../plugins/tasklist/tasklist-widget.c:3443
 msgid "_Close All"
 msgstr "Tout _fermer"
 
@@ -1766,28 +1794,28 @@ msgstr "Tout _fermer"
 msgid "Switch between open windows using buttons"
 msgstr "Basculer entre les fenêtres ouvertes en utilisant des boutons"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:668
 msgid "Desktop"
 msgstr "Bureau"
 
-#: ../plugins/windowmenu/windowmenu.c:1266
+#: ../plugins/windowmenu/windowmenu.c:1264
 msgid "No Windows"
 msgstr "Aucune fenêtre"
 
-#: ../plugins/windowmenu/windowmenu.c:1281
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "Urgent Windows"
 msgstr "Fenêtres urgentes"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
+#: ../plugins/windowmenu/windowmenu.c:1322
 msgid "Add Workspace"
 msgstr "Ajouter un espace de travail"
 
-#: ../plugins/windowmenu/windowmenu.c:1343
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Supprimer l’espace de travail « %s »"
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1347
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Supprimer l’espace de travail %d"
