@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:30+0200\n"
-"PO-Revision-Date: 2017-06-10 10:38+0000\n"
+"POT-Creation-Date: 2017-06-22 00:30+0200\n"
+"PO-Revision-Date: 2017-06-22 05:27+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/xfce/xfce4-panel/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid ""
 msgstr "Voeg een nieuwe starter toe aan de werkbalk, gebaseerd op de informatie van dit bureaubladbestand"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Werkbalk"
@@ -41,53 +41,69 @@ msgid "Customize the panel"
 msgstr "Pas de werkbalk aan"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1028
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Weet u zeker dat u '%s' wil verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1033
+#: ../libxfce4panel/xfce-panel-plugin.c:1047
 #: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Als u een element van de werkbalk verwijdert, dan kan dit niet meer ongedaan worden gemaakt."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
 #: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:399
+#: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "Afbreken"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "Verwijderen"
 
-#. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1193
+#: ../libxfce4panel/xfce-panel-plugin.c:1190
+msgid "_Properties"
+msgstr "Eigenscha_ppen"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1205
+msgid "_About"
+msgstr "_Over"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1220
 msgid "_Move"
 msgstr "_Verplaatsen"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
+msgid "_Remove"
+msgstr "_Verwijderen"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1265
 msgid "Pane_l"
 msgstr "_Werkbalk"
 
-#. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1274 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "_Nieuwe elementen toevoegen..."
 
-#. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
+#: ../libxfce4panel/xfce-panel-plugin.c:1289 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "Werkbalkvoork_euren..."
 
-#. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "Af_melden"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1330
+msgid "_Help"
+msgstr "_Hulp"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1345
+msgid "About"
+msgstr "Over"
 
 #: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
@@ -618,7 +634,7 @@ msgstr "Ervaren"
 msgid "Expert"
 msgstr "Deskundige"
 
-#: ../panel/panel-window.c:2737
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "Werkbalk vergrendelen"
 
@@ -838,7 +854,7 @@ msgstr "Scheidingslijn"
 msgid "Failed to run action \"%s\""
 msgstr "Kon actie '%s' niet uitvoeren"
 
-#: ../plugins/actions/actions.c:1118
+#: ../plugins/actions/actions.c:1122
 msgid "John Doe"
 msgstr "Jantje"
 
@@ -923,17 +939,17 @@ msgid "Applications"
 msgstr "Toepassingen"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:536
-#: ../plugins/directorymenu/directorymenu.c:397
+#: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Kies een pictogram"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
-#: ../plugins/directorymenu/directorymenu.c:400
+#: ../plugins/directorymenu/directorymenu.c:395
 msgid "OK"
 msgstr "OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Kon opdracht '%s' niet uitvoeren."
@@ -972,15 +988,21 @@ msgstr "Opduikmenu bij de huidige muispositie"
 msgid "Show help options"
 msgstr "Toon hulpopties"
 
-#: ../plugins/clock/clock.c:176
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock.c:46
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr "%A %d %B %Y"
+
+#: ../plugins/clock/clock.c:177
 msgid "Week %V"
 msgstr "Week %V"
 
-#: ../plugins/clock/clock.c:469
+#: ../plugins/clock/clock.c:470
 msgid "Failed to execute clock command"
 msgstr "Kon de klokopdracht niet uitvoeren"
 
-#: ../plugins/clock/clock.c:820
+#: ../plugins/clock/clock.c:821
 msgid "Custom Format"
 msgstr "Aangepaste bestandopmaak"
 
@@ -1085,6 +1107,12 @@ msgstr "Toon _raster"
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Clock Options"
 msgstr "Klok-opties"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1317,38 +1345,38 @@ msgstr "twaalf"
 msgid "What time is it?"
 msgstr "Hoe laat is het?"
 
-#: ../plugins/directorymenu/directorymenu.c:247
+#: ../plugins/directorymenu/directorymenu.c:242
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Mapmenu"
 
-#: ../plugins/directorymenu/directorymenu.c:582
+#: ../plugins/directorymenu/directorymenu.c:577
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Kon toepassing '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:614
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Kon het type inhoud van '%s' niet achterhalen"
 
-#: ../plugins/directorymenu/directorymenu.c:623
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Geen standaardtoepassing gevonden voor '%s'"
 
-#: ../plugins/directorymenu/directorymenu.c:639
+#: ../plugins/directorymenu/directorymenu.c:634
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Kon standaardtoepassing voor '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:737
+#: ../plugins/directorymenu/directorymenu.c:732
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Kon de voorkeurstoepassing voor de categorie '%s' niet starten"
 
-#: ../plugins/directorymenu/directorymenu.c:810
+#: ../plugins/directorymenu/directorymenu.c:806
 msgid "Open Folder"
 msgstr "Map openen"
 
@@ -1389,15 +1417,15 @@ msgstr "_Bestandpatroon:"
 msgid "Filtering"
 msgstr "Filteren"
 
-#: ../plugins/launcher/launcher.c:404
+#: ../plugins/launcher/launcher.c:388
 msgid "Open launcher menu"
 msgstr "Open startermenu"
 
-#: ../plugins/launcher/launcher.c:1595
+#: ../plugins/launcher/launcher.c:1569
 msgid "Unnamed Item"
 msgstr "Naamloos element"
 
-#: ../plugins/launcher/launcher.c:1746
+#: ../plugins/launcher/launcher.c:1723
 msgid "No items"
 msgstr "Geen elementen"
 
@@ -1513,15 +1541,15 @@ msgstr "Geavanceerd"
 msgid "Program launcher with optional menu"
 msgstr "Programma-starter met optioneel menu"
 
-#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "Werkbladinstellingen"
 
-#: ../plugins/pager/pager.c:533
+#: ../plugins/pager/pager.c:537
 msgid "Unable to open the workspace settings"
 msgstr "Kon de werkbladinstellingen niet openen"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
 #, c-format
 msgid "Workspace %d"
 msgstr "Werkblad %d"
@@ -1737,23 +1765,23 @@ msgstr "Toon alleen ge_minimaliseerde vensters"
 msgid "Show windows from all mo_nitors"
 msgstr "Toon vensters van alle _monitors"
 
-#: ../plugins/tasklist/tasklist-widget.c:3414
+#: ../plugins/tasklist/tasklist-widget.c:3407
 msgid "Mi_nimize All"
 msgstr "Alles mi_nimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3415
 msgid "Un_minimize All"
 msgstr "Alles _ONTminimaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3429
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Ma_ximize All"
 msgstr "Alles ma_ximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3431
 msgid "_Unmaximize All"
 msgstr "Alles ONT_maximaliseren"
 
-#: ../plugins/tasklist/tasklist-widget.c:3448
+#: ../plugins/tasklist/tasklist-widget.c:3443
 msgid "_Close All"
 msgstr "Alles _sluiten"
 
@@ -1761,28 +1789,28 @@ msgstr "Alles _sluiten"
 msgid "Switch between open windows using buttons"
 msgstr "Wisselen tussen open vensters met behulp van knoppen"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:668
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#: ../plugins/windowmenu/windowmenu.c:1266
+#: ../plugins/windowmenu/windowmenu.c:1264
 msgid "No Windows"
 msgstr "Geen vensters"
 
-#: ../plugins/windowmenu/windowmenu.c:1281
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "Urgent Windows"
 msgstr "Belangrijke vensters"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
+#: ../plugins/windowmenu/windowmenu.c:1322
 msgid "Add Workspace"
 msgstr "Werkblad toevoegen"
 
-#: ../plugins/windowmenu/windowmenu.c:1343
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Verwijder werkblad '%s'"
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1347
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Verwijder werkblad %d"
