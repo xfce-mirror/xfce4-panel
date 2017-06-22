@@ -353,7 +353,7 @@ panel_application_load_real (PanelApplication *application)
 
   if (xfconf_channel_get_property (application->xfconf, "/panels", &val)
       && (G_VALUE_HOLDS_UINT (&val)
-          || G_VALUE_HOLDS (&val, PANEL_PROPERTIES_TYPE_VALUE_ARRAY)))
+          || G_VALUE_HOLDS (&val, G_TYPE_PTR_ARRAY)))
     {
       if (G_VALUE_HOLDS_UINT (&val))
         {

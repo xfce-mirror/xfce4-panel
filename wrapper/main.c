@@ -45,7 +45,6 @@
 
 #include <wrapper/wrapper-plug.h>
 #include <wrapper/wrapper-module.h>
-#include <wrapper/wrapper-dbus-client-infos.h>
 
 
 

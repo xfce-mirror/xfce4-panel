@@ -240,7 +240,7 @@ actions_plugin_class_init (ActionsPluginClass *klass)
                                    PROP_ITEMS,
                                    g_param_spec_boxed ("items",
                                                        NULL, NULL,
-                                                       PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
+                                                       G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
@@ -360,7 +360,7 @@ actions_plugin_construct (XfcePanelPlugin *panel_plugin)
   ActionsPlugin       *plugin = XFCE_ACTIONS_PLUGIN (panel_plugin);
   const PanelProperty  properties[] =
   {
-    { "items", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
+    { "items", G_TYPE_PTR_ARRAY },
     { "appearance", G_TYPE_UINT },
     { "invert-orientation", G_TYPE_BOOLEAN },
     { "ask-confirmation", G_TYPE_BOOLEAN },

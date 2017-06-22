@@ -199,14 +199,14 @@ systray_plugin_class_init (SystrayPluginClass *klass)
                                    PROP_NAMES_ORDERED,
                                    g_param_spec_boxed ("names-ordered",
                                                        NULL, NULL,
-                                                       PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
+                                                       G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_NAMES_HIDDEN,
                                    g_param_spec_boxed ("names-hidden",
                                                        NULL, NULL,
-                                                       PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
+                                                       G_TYPE_PTR_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
@@ -472,8 +472,8 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "size-max", G_TYPE_UINT },
     { "show-frame", G_TYPE_BOOLEAN },
-    { "names-ordered", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
-    { "names-hidden", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
+    { "names-ordered", G_TYPE_PTR_ARRAY },
+    { "names-hidden", G_TYPE_PTR_ARRAY },
     { NULL }
   };
 

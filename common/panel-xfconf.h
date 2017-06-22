@@ -21,8 +21,6 @@
 
 #include <xfconf/xfconf.h>
 
-#define PANEL_PROPERTIES_TYPE_VALUE_ARRAY (panel_properties_value_array_get_type ())
-
 
 
 typedef struct _PanelProperty PanelProperty;

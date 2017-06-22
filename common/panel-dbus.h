@@ -26,17 +26,6 @@
 #define PANEL_DBUS_WRAPPER_PATH      PANEL_DBUS_PATH "/Wrapper/%d"
 #define PANEL_DBUS_WRAPPER_INTERFACE PANEL_DBUS_INTERFACE ".Wrapper"
 
-/* special types for dbus communication */
-#define PANEL_TYPE_DBUS_SET_PROPERTY \
-  dbus_g_type_get_struct ("GValueArray", \
-                          G_TYPE_UINT, \
-                          G_TYPE_VALUE, \
-                          G_TYPE_INVALID)
-
-#define PANEL_TYPE_DBUS_SET_SIGNAL \
-  dbus_g_type_get_collection ("GPtrArray", \
-                              PANEL_TYPE_DBUS_SET_PROPERTY)
-
 enum
 {
   DBUS_SET_TYPE,

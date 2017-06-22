@@ -20,8 +20,6 @@
 #include <config.h>
 #endif
 
-#include <dbus/dbus-glib.h>
-
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
 #include <libxfce4panel/xfce-panel-macros.h>
@@ -148,21 +146,4 @@ void
 panel_properties_unbind (GObject *object)
 {
   xfconf_g_property_unbind_all (object);
-}
-
-
-
-GType
-panel_properties_value_array_get_type (void)
-{
-  static volatile gsize type__volatile = 0;
-  GType                 type;
-
-  if (g_once_init_enter (&type__volatile))
-    {
-      type = dbus_g_type_get_collection ("GPtrArray", G_TYPE_VALUE);
-      g_once_init_leave (&type__volatile, type);
-    }
-
-  return type__volatile;
 }
