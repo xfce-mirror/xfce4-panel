@@ -167,7 +167,7 @@ wrapper_dbus_return_remote_event_result (GDBusProxy *proxy,
                                                    handle,
                                                    wrapper_result),
                                     G_DBUS_CALL_FLAGS_NONE,
-                                    100000000, /* 100 seconds worth of timeout */
+                                    -1,
                                     NULL,
                                     &error);
 
@@ -257,7 +257,7 @@ wrapper_gproxy_provider_signal (XfcePanelPluginProvider       *provider,
                                     g_variant_new ("(u)",
                                                    provider_signal),
                                     G_DBUS_CALL_FLAGS_NONE,
-                                    100000000, /* 100 seconds worth of timeout */
+                                    -1,
                                     NULL,
                                     &error);
 
@@ -420,8 +420,8 @@ main (gint argc, gchar **argv)
           G_CALLBACK (wrapper_gproxy_provider_signal), dbus_gproxy);
 
       /* connect to service signals */
-      g_signal_connect (dbus_gproxy, "g-signal",
-                        G_CALLBACK (wrapper_gproxy_g_signal), provider);
+      gproxy_signal_id = g_signal_connect (dbus_gproxy, "g-signal",
+                                           G_CALLBACK (wrapper_gproxy_g_signal), provider);
 
       /* show the plugin */
       gtk_widget_show (GTK_WIDGET (provider));
@@ -447,7 +447,8 @@ main (gint argc, gchar **argv)
 leave:
   if (G_LIKELY (dbus_gproxy != NULL))
     {
-      if (G_LIKELY (gproxy_destroy_id != 0))
+      /* We are listening to destroy notify signal but we go no plugin provider */
+      if (G_LIKELY (gproxy_destroy_id != 0) && provider == NULL)
         g_signal_handler_disconnect (G_OBJECT (dbus_gproxy), gproxy_destroy_id);
 
       g_object_unref (G_OBJECT (dbus_gproxy));
