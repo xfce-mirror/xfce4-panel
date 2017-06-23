@@ -69,7 +69,8 @@ static void     systray_box_forall                (GtkContainer    *container,
                                                    gpointer         callback_data);
 static GType    systray_box_child_type            (GtkContainer    *container);
 static gint     systray_box_compare_function      (gconstpointer    a,
-                                                   gconstpointer    b);
+                                                   gconstpointer    b,
+                                                   gpointer         user_data);
 
 
 
@@ -90,6 +91,9 @@ struct _SystrayBox
 
   /* all the icons packed in this box */
   GSList       *childeren;
+
+  /* table of item indexes */
+  GHashTable   *names_ordered;
 
   /* orientation of the box */
   guint         horizontal : 1;
@@ -152,6 +156,7 @@ systray_box_init (SystrayBox *box)
   gtk_widget_set_has_window (GTK_WIDGET (box), FALSE);
 
   box->childeren = NULL;
+  box->names_ordered = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   box->size_max = SIZE_MAX_DEFAULT;
   box->size_alloc = SIZE_MAX_DEFAULT;
   box->n_hidden_childeren = 0;
@@ -188,6 +193,8 @@ static void
 systray_box_finalize (GObject *object)
 {
   SystrayBox *box = XFCE_SYSTRAY_BOX (object);
+
+  g_hash_table_destroy (box->names_ordered);
 
   /* check if we're leaking */
   if (G_UNLIKELY (box->childeren != NULL))
@@ -625,8 +632,9 @@ systray_box_add (GtkContainer *container,
   panel_return_if_fail (GTK_IS_WIDGET (child));
   panel_return_if_fail (gtk_widget_get_parent (child) == NULL);
 
-  box->childeren = g_slist_insert_sorted (box->childeren, child,
-                                          systray_box_compare_function);
+  box->childeren = g_slist_insert_sorted_with_data (box->childeren, child,
+                                                    systray_box_compare_function,
+                                                    box);
 
   gtk_widget_set_parent (child, GTK_WIDGET (box));
 
@@ -689,10 +697,14 @@ systray_box_child_type (GtkContainer *container)
 
 static gint
 systray_box_compare_function (gconstpointer a,
-                              gconstpointer b)
+                              gconstpointer b,
+                              gpointer      user_data)
 {
+  SystrayBox  *box = user_data;
   const gchar *name_a, *name_b;
+  gint         index_a = -1, index_b = -1;
   gboolean     hidden_a, hidden_b;
+  gpointer     value;
 
   /* sort hidden icons before visible ones */
   hidden_a = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (a));
@@ -700,10 +712,23 @@ systray_box_compare_function (gconstpointer a,
   if (hidden_a != hidden_b)
     return hidden_a ? 1 : -1;
 
-  /* sort icons by name */
   name_a = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (a));
   name_b = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (b));
 
+  if (g_hash_table_lookup_extended (box->names_ordered, name_a, NULL, &value))
+    index_a = GPOINTER_TO_INT (value);
+  if (g_hash_table_lookup_extended (box->names_ordered, name_b, NULL, &value))
+    index_b = GPOINTER_TO_INT (value);
+
+  /* sort ordered icons before unordered ones */
+  if ((index_a >= 0) != (index_b >= 0))
+    return index_a >= 0 ? 1 : -1;
+
+  /* sort ordered icons by index */
+  if (index_a >= 0 && index_b >= 0)
+    return index_a - index_b;
+
+  /* sort unordered icons by name */
 #if GLIB_CHECK_VERSION (2, 16, 0)
   return g_strcmp0 (name_a, name_b);
 #else
@@ -820,12 +845,22 @@ systray_box_get_show_hidden (SystrayBox *box)
 
 
 void
-systray_box_update (SystrayBox *box)
+systray_box_update (SystrayBox *box,
+                    GSList     *names_ordered)
 {
+  GSList *li;
+  gint    i;
+
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
 
-  box->childeren = g_slist_sort (box->childeren,
-                                 systray_box_compare_function);
+  g_hash_table_remove_all (box->names_ordered);
+
+  for (li = names_ordered, i = 0; li != NULL; li = li->next, i++)
+    g_hash_table_replace (box->names_ordered, g_strdup (li->data), GINT_TO_POINTER (i));
+
+  box->childeren = g_slist_sort_with_data (box->childeren,
+                                           systray_box_compare_function,
+                                           box);
 
   /* update the box, so we update the has-hidden property */
   gtk_widget_queue_resize (GTK_WIDGET (box));

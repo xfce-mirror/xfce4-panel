@@ -30,8 +30,8 @@
   <object class="XfceTitledDialog" id="dialog">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Notification Area</property>
-    <property name="default_width">325</property>
-    <property name="default_height">425</property>
+    <property name="default_width">400</property>
+    <property name="default_height">500</property>
     <property name="icon_name">gtk-properties</property>
     <property name="type_hint">normal</property>
     <child internal-child="vbox">
@@ -202,63 +202,132 @@
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkScrolledWindow" id="scrolledwindow1">
+                          <object class="GtkBox" id="hbox2">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="vexpand">True</property>
-                            <property name="shadow_type">in</property>
+                            <property name="can_focus">False</property>
+                            <property name="border_width">6</property>
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">6</property>
                             <child>
-                              <object class="GtkTreeView" id="applications-treeview">
+                              <object class="GtkScrolledWindow" id="scrolledwindow1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="model">applications-store</property>
-                                <property name="headers_clickable">False</property>
-                                <property name="rules_hint">True</property>
-                                <property name="enable_search">False</property>
-                                <child internal-child="selection">
-                                  <object class="GtkTreeSelection"/>
-                                </child>
+                                <property name="vexpand">True</property>
+                                <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                                    <property name="min_width">24</property>
-                                    <child>
-                                      <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
-                                      <attributes>
-                                        <attribute name="pixbuf">0</attribute>
-                                      </attributes>
+                                  <object class="GtkTreeView" id="applications-treeview">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="model">applications-store</property>
+                                    <property name="headers_clickable">False</property>
+                                    <property name="rules_hint">True</property>
+                                    <property name="enable_search">False</property>
+                                    <child internal-child="selection">
+                                      <object class="GtkTreeSelection"/>
                                     </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkTreeViewColumn" id="treeviewcolumn2">
-                                    <property name="title">Application</property>
-                                    <property name="expand">True</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
-                                      <attributes>
-                                        <attribute name="text">1</attribute>
-                                      </attributes>
+                                      <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                                        <property name="min_width">24</property>
+                                        <child>
+                                          <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+                                          <attributes>
+                                            <attribute name="pixbuf">0</attribute>
+                                          </attributes>
+                                        </child>
+                                      </object>
                                     </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkTreeViewColumn" id="treeviewcolumn3">
-                                    <property name="title">Hidden</property>
                                     <child>
-                                      <object class="GtkCellRendererToggle" id="hidden-toggle"/>
-                                      <attributes>
-                                        <attribute name="active">2</attribute>
-                                      </attributes>
+                                      <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                                        <property name="title">Application</property>
+                                        <property name="expand">True</property>
+                                        <child>
+                                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                                          <attributes>
+                                            <attribute name="text">1</attribute>
+                                          </attributes>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                                        <property name="title">Hidden</property>
+                                        <child>
+                                          <object class="GtkCellRendererToggle" id="hidden-toggle"/>
+                                          <attributes>
+                                            <attribute name="active">2</attribute>
+                                          </attributes>
+                                        </child>
+                                      </object>
                                     </child>
                                   </object>
                                 </child>
                               </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="vbox4">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkButton" id="item-up">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Move currently selected item up by one row</property>
+                                    <child>
+                                      <object class="GtkImage" id="image2">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">gtk-go-up</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="item-down">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Move currently selected item down by one row</property>
+                                    <child>
+                                      <object class="GtkImage" id="image3">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">gtk-go-down</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
                             </child>
                           </object>
                           <packing>
-                            <property name="expand">True</property>
+                            <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>

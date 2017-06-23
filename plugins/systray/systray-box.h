@@ -56,6 +56,7 @@ void       systray_box_set_show_hidden (SystrayBox          *box,
 
 gboolean   systray_box_get_show_hidden (SystrayBox          *box);
 
-void       systray_box_update          (SystrayBox          *box);
+void       systray_box_update          (SystrayBox          *box,
+                                        GSList              *names_ordered);
 
 #endif /* !__SYSTRAY_BOX_H__ */

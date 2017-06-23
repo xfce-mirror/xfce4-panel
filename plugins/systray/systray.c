@@ -60,13 +60,9 @@ static void     systray_plugin_box_draw                     (GtkWidget          
 static void     systray_plugin_button_toggled               (GtkWidget             *button,
                                                              SystrayPlugin         *plugin);
 static void     systray_plugin_button_set_arrow             (SystrayPlugin         *plugin);
-static void     systray_plugin_names_collect_visible        (gpointer               key,
-                                                             gpointer               value,
+static void     systray_plugin_names_collect_ordered        (gpointer               data,
                                                              gpointer               user_data);
 static void     systray_plugin_names_collect_hidden         (gpointer               key,
-                                                             gpointer               value,
-                                                             gpointer               user_data);
-static gboolean systray_plugin_names_remove                 (gpointer               key,
                                                              gpointer               value,
                                                              gpointer               user_data);
 static void     systray_plugin_names_update                 (SystrayPlugin         *plugin);
@@ -80,14 +76,19 @@ static void     systray_plugin_icon_removed                 (SystrayManager     
                                                              SystrayPlugin         *plugin);
 static void     systray_plugin_lost_selection               (SystrayManager        *manager,
                                                              SystrayPlugin         *plugin);
-static void     systray_plugin_dialog_add_application_names (gpointer               key,
-                                                             gpointer               value,
+static void     systray_plugin_dialog_add_application_names (gpointer               data,
                                                              gpointer               user_data);
 static void     systray_plugin_dialog_hidden_toggled        (GtkCellRendererToggle *renderer,
                                                              const gchar           *path_string,
                                                              SystrayPlugin         *plugin);
+static void     systray_plugin_dialog_selection_changed     (GtkTreeSelection      *selection,
+                                                             SystrayPlugin         *plugin);
+static void     systray_plugin_dialog_item_move_clicked     (GtkWidget             *button,
+                                                             SystrayPlugin         *plugin);
 static void     systray_plugin_dialog_clear_clicked         (GtkWidget             *button,
                                                              SystrayPlugin         *plugin);
+static void     systray_plugin_dialog_cleanup               (SystrayPlugin         *plugin,
+                                                             GtkBuilder            *builder);
 
 
 
@@ -113,7 +114,10 @@ struct _SystrayPlugin
 
   /* settings */
   guint           show_frame : 1;
-  GHashTable     *names;
+  GSList         *names_ordered;
+  GHashTable     *names_hidden;
+
+  GtkBuilder     *configure_builder;
 };
 
 enum
@@ -121,8 +125,8 @@ enum
   PROP_0,
   PROP_SIZE_MAX,
   PROP_SHOW_FRAME,
-  PROP_NAMES_HIDDEN,
-  PROP_NAMES_VISIBLE
+  PROP_NAMES_ORDERED,
+  PROP_NAMES_HIDDEN
 };
 
 enum
@@ -192,15 +196,15 @@ systray_plugin_class_init (SystrayPluginClass *klass)
                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_NAMES_HIDDEN,
-                                   g_param_spec_boxed ("names-hidden",
+                                   PROP_NAMES_ORDERED,
+                                   g_param_spec_boxed ("names-ordered",
                                                        NULL, NULL,
                                                        PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
-                                   PROP_NAMES_VISIBLE,
-                                   g_param_spec_boxed ("names-visible",
+                                   PROP_NAMES_HIDDEN,
+                                   g_param_spec_boxed ("names-hidden",
                                                        NULL, NULL,
                                                        PANEL_PROPERTIES_TYPE_VALUE_ARRAY,
                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
@@ -216,7 +220,8 @@ systray_plugin_init (SystrayPlugin *plugin)
   plugin->manager = NULL;
   plugin->show_frame = TRUE;
   plugin->idle_startup = 0;
-  plugin->names = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  plugin->names_ordered = NULL;
+  plugin->names_hidden = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   plugin->frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (plugin), plugin->frame);
@@ -273,16 +278,16 @@ systray_plugin_get_property (GObject    *object,
       g_value_set_boolean (value, plugin->show_frame);
       break;
 
-   case PROP_NAMES_VISIBLE:
+    case PROP_NAMES_ORDERED:
       array = g_ptr_array_new ();
-      g_hash_table_foreach (plugin->names, systray_plugin_names_collect_visible, array);
+      g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
       g_value_set_boxed (value, array);
       xfconf_array_free (array);
       break;
 
     case PROP_NAMES_HIDDEN:
       array = g_ptr_array_new ();
-      g_hash_table_foreach (plugin->names, systray_plugin_names_collect_hidden, array);
+      g_hash_table_foreach (plugin->names_hidden, systray_plugin_names_collect_hidden, array);
       g_value_set_boxed (value, array);
       xfconf_array_free (array);
       break;
@@ -303,7 +308,6 @@ systray_plugin_set_property (GObject      *object,
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
   gboolean       show_frame;
-  gboolean       hidden = TRUE;
   GPtrArray     *array;
   const GValue  *tmp;
   gchar         *name;
@@ -336,15 +340,9 @@ systray_plugin_set_property (GObject      *object,
         }
       break;
 
-    case PROP_NAMES_VISIBLE:
-      hidden = FALSE;
-      /* fall-though */
-
-    case PROP_NAMES_HIDDEN:
-      /* remove old names with this state */
-      g_hash_table_foreach_remove (plugin->names,
-                                   systray_plugin_names_remove,
-                                   GUINT_TO_POINTER (hidden));
+    case PROP_NAMES_ORDERED:
+      g_slist_free_full (plugin->names_ordered, g_free);
+      plugin->names_ordered = NULL;
 
       /* add new values */
       array = g_value_get_boxed (value);
@@ -355,7 +353,29 @@ systray_plugin_set_property (GObject      *object,
               tmp = g_ptr_array_index (array, i);
               panel_assert (G_VALUE_HOLDS_STRING (tmp));
               name = g_value_dup_string (tmp);
-              g_hash_table_replace (plugin->names, name, GUINT_TO_POINTER (hidden));
+              plugin->names_ordered = g_slist_prepend (plugin->names_ordered, name);
+            }
+
+          plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
+        }
+
+      /* update icons in the box */
+      systray_plugin_names_update (plugin);
+      break;
+
+    case PROP_NAMES_HIDDEN:
+      g_hash_table_remove_all (plugin->names_hidden);
+
+      /* add new values */
+      array = g_value_get_boxed (value);
+      if (G_LIKELY (array != NULL))
+        {
+          for (i = 0; i < array->len; i++)
+            {
+              tmp = g_ptr_array_index (array, i);
+              panel_assert (G_VALUE_HOLDS_STRING (tmp));
+              name = g_value_dup_string (tmp);
+              g_hash_table_replace (plugin->names_hidden, name, NULL);
             }
         }
 
@@ -452,7 +472,7 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   {
     { "size-max", G_TYPE_UINT },
     { "show-frame", G_TYPE_BOOLEAN },
-    { "names-visible", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
+    { "names-ordered", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
     { "names-hidden", PANEL_PROPERTIES_TYPE_VALUE_ARRAY },
     { NULL }
   };
@@ -488,7 +508,8 @@ systray_plugin_free_data (XfcePanelPlugin *panel_plugin)
   g_signal_handlers_disconnect_by_func (G_OBJECT (plugin),
       systray_plugin_screen_changed, NULL);
 
-  g_hash_table_destroy (plugin->names);
+  g_slist_free_full (plugin->names_ordered, g_free);
+  g_hash_table_destroy (plugin->names_hidden);
 
   if (G_LIKELY (plugin->manager != NULL))
     {
@@ -555,9 +576,11 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 static void
 systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
-  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
-  GtkBuilder    *builder;
-  GObject       *dialog, *object, *store;
+  SystrayPlugin    *plugin = XFCE_SYSTRAY_PLUGIN (panel_plugin);
+  GtkBuilder       *builder;
+  GObject          *dialog, *object, *store;
+  GtkTreeSelection *selection;
+  gpointer          user_data_array[2];
 
   /* setup the dialog */
   PANEL_UTILS_LINK_4UI
@@ -565,6 +588,8 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                      systray_dialog_ui_length, &dialog);
   if (G_UNLIKELY (builder == NULL))
     return;
+
+  plugin->configure_builder = builder;
 
   object = gtk_builder_get_object (builder, "size-max");
   panel_return_if_fail (GTK_IS_WIDGET (object));
@@ -580,19 +605,41 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
   store = gtk_builder_get_object (builder, "applications-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
-  g_hash_table_foreach (plugin->names,
-      systray_plugin_dialog_add_application_names, store);
-  g_object_set_data (G_OBJECT (plugin), "applications-store", store);
+  user_data_array[0] = plugin;
+  user_data_array[1] = store;
+  g_slist_foreach (plugin->names_ordered,
+      systray_plugin_dialog_add_application_names, user_data_array);
 
   object = gtk_builder_get_object (builder, "hidden-toggle");
   panel_return_if_fail (GTK_IS_CELL_RENDERER_TOGGLE (object));
   g_signal_connect (G_OBJECT (object), "toggled",
       G_CALLBACK (systray_plugin_dialog_hidden_toggled), plugin);
 
+  object = gtk_builder_get_object (builder, "applications-treeview");
+  panel_return_if_fail (GTK_IS_TREE_VIEW (object));
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
+  g_signal_connect (G_OBJECT (selection), "changed",
+      G_CALLBACK (systray_plugin_dialog_selection_changed), plugin);
+
+  object = gtk_builder_get_object (builder, "item-up");
+  panel_return_if_fail (GTK_IS_BUTTON (object));
+  g_signal_connect (G_OBJECT (object), "clicked",
+      G_CALLBACK (systray_plugin_dialog_item_move_clicked), plugin);
+
+  object = gtk_builder_get_object (builder, "item-down");
+  panel_return_if_fail (GTK_IS_BUTTON (object));
+  g_signal_connect (G_OBJECT (object), "clicked",
+      G_CALLBACK (systray_plugin_dialog_item_move_clicked), plugin);
+
   object = gtk_builder_get_object (builder, "applications-clear");
   panel_return_if_fail (GTK_IS_BUTTON (object));
   g_signal_connect (G_OBJECT (object), "clicked",
       G_CALLBACK (systray_plugin_dialog_clear_clicked), plugin);
+
+  g_object_weak_ref (G_OBJECT (builder),
+                     (GWeakNotify) systray_plugin_dialog_cleanup,
+                     plugin);
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
@@ -692,13 +739,10 @@ systray_plugin_names_collect (GPtrArray   *array,
 
 
 static void
-systray_plugin_names_collect_visible (gpointer key,
-                                      gpointer value,
+systray_plugin_names_collect_ordered (gpointer data,
                                       gpointer user_data)
 {
-  /* add all the visible names */
-  if (!GPOINTER_TO_UINT (value))
-    systray_plugin_names_collect (user_data, key);
+  systray_plugin_names_collect (user_data, data);
 }
 
 
@@ -708,19 +752,7 @@ systray_plugin_names_collect_hidden (gpointer key,
                                      gpointer value,
                                      gpointer user_data)
 {
-  /* add all the hidden names */
-  if (GPOINTER_TO_UINT (value))
-    systray_plugin_names_collect (user_data, key);
-}
-
-
-
-static gboolean
-systray_plugin_names_remove (gpointer key,
-                             gpointer value,
-                             gpointer user_data)
-{
-  return GPOINTER_TO_UINT (value) == GPOINTER_TO_UINT (user_data);
+  systray_plugin_names_collect (user_data, key);
 }
 
 
@@ -749,8 +781,9 @@ systray_plugin_names_update (SystrayPlugin *plugin)
   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
 
   gtk_container_foreach (GTK_CONTAINER (plugin->box),
-     systray_plugin_names_update_icon, plugin);
-  systray_box_update (XFCE_SYSTRAY_BOX (plugin->box));
+    systray_plugin_names_update_icon, plugin);
+  systray_box_update (XFCE_SYSTRAY_BOX (plugin->box),
+    plugin->names_ordered);
 }
 
 
@@ -763,12 +796,13 @@ systray_plugin_names_set_hidden (SystrayPlugin *plugin,
   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
   panel_return_if_fail (!panel_str_is_empty (name));
 
-  g_hash_table_replace (plugin->names, g_strdup (name),
-                        GUINT_TO_POINTER (hidden ? 1 : 0));
+  if (g_hash_table_contains (plugin->names_hidden, name))
+    g_hash_table_remove (plugin->names_hidden, name);
+  else
+    g_hash_table_replace (plugin->names_hidden, g_strdup (name), NULL);
 
   systray_plugin_names_update (plugin);
 
-  g_object_notify (G_OBJECT (plugin), "names-visible");
   g_object_notify (G_OBJECT (plugin), "names-hidden");
 }
 
@@ -778,25 +812,22 @@ static gboolean
 systray_plugin_names_get_hidden (SystrayPlugin *plugin,
                                  const gchar   *name)
 {
-  gpointer p;
-
   if (panel_str_is_empty (name))
     return FALSE;
 
-  /* lookup the name in the table */
-  p = g_hash_table_lookup (plugin->names, name);
-  if (G_UNLIKELY (p == NULL))
+  /* lookup the name in the list */
+  if (g_slist_find_custom (plugin->names_ordered, name, (GCompareFunc)g_strcmp0) == NULL)
     {
       /* add the new name */
-      g_hash_table_insert (plugin->names, g_strdup (name), GUINT_TO_POINTER (0));
-      g_object_notify (G_OBJECT (plugin), "names-visible");
+      plugin->names_ordered = g_slist_prepend (plugin->names_ordered, g_strdup (name));
+      g_object_notify (G_OBJECT (plugin), "names-ordered");
 
       /* do not hide the icon */
       return FALSE;
     }
   else
     {
-      return (GPOINTER_TO_UINT (p) == 1 ? TRUE : FALSE);
+      return g_hash_table_contains (plugin->names_hidden, name);
     }
 }
 
@@ -805,10 +836,12 @@ systray_plugin_names_get_hidden (SystrayPlugin *plugin,
 static void
 systray_plugin_names_clear (SystrayPlugin *plugin)
 {
-  g_hash_table_remove_all (plugin->names);
+  g_slist_free_full (plugin->names_ordered, g_free);
+  plugin->names_ordered = NULL;
+  g_hash_table_remove_all (plugin->names_hidden);
 
+  g_object_notify (G_OBJECT (plugin), "names-ordered");
   g_object_notify (G_OBJECT (plugin), "names-hidden");
-  g_object_notify (G_OBJECT (plugin), "names-visible");
 
   systray_plugin_names_update (plugin);
 }
@@ -915,19 +948,20 @@ systray_plugin_dialog_camel_case (const gchar *text)
 
 
 static void
-systray_plugin_dialog_add_application_names (gpointer key,
-                                             gpointer value,
+systray_plugin_dialog_add_application_names (gpointer data,
                                              gpointer user_data)
 {
-  GtkListStore *store = GTK_LIST_STORE (user_data);
-  const gchar  *name = key;
-  gboolean      hidden = GPOINTER_TO_UINT (value);
-  const gchar  *title = NULL;
-  gchar        *camelcase = NULL;
-  const gchar  *icon_name = name;
-  GdkPixbuf    *pixbuf;
-  guint         i;
-  GtkTreeIter   iter;
+  gpointer      **user_data_array = user_data;
+  SystrayPlugin  *plugin = (SystrayPlugin *)user_data_array[0];
+  GtkListStore   *store = (GtkListStore *)user_data_array[1];
+  const gchar    *name = data;
+  gboolean        hidden = g_hash_table_contains (plugin->names_hidden, name);
+  const gchar    *title = NULL;
+  gchar          *camelcase = NULL;
+  const gchar    *icon_name = name;
+  GdkPixbuf      *pixbuf;
+  guint           i;
+  GtkTreeIter     iter;
 
   panel_return_if_fail (GTK_IS_LIST_STORE (store));
   panel_return_if_fail (name == NULL || g_utf8_validate (name, -1, NULL));
@@ -989,7 +1023,7 @@ systray_plugin_dialog_hidden_toggled (GtkCellRendererToggle *renderer,
   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (plugin->box));
 
-  model = g_object_get_data (G_OBJECT (plugin), "applications-store");
+  model = GTK_TREE_MODEL (gtk_builder_get_object (plugin->configure_builder, "applications-store"));
   panel_return_if_fail (GTK_IS_LIST_STORE (model));
   if (gtk_tree_model_get_iter_from_string (model, &iter, path_string))
     {
@@ -1011,6 +1045,117 @@ systray_plugin_dialog_hidden_toggled (GtkCellRendererToggle *renderer,
 
 
 static void
+systray_plugin_dialog_selection_changed (GtkTreeSelection *selection,
+                                         SystrayPlugin    *plugin)
+{
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  GtkTreePath  *path;
+  gint         *indices;
+  gint          count = 0, position = -1, depth;
+  gboolean      item_up_sensitive, item_down_sensitive;
+  GObject      *object;
+
+  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      path = gtk_tree_model_get_path (model, &iter);
+      indices = gtk_tree_path_get_indices_with_depth (path, &depth);
+
+      if (indices != NULL && depth > 0)
+        position = indices[0];
+
+      count = gtk_tree_model_iter_n_children (model, NULL);
+
+      gtk_tree_path_free (path);
+    }
+
+  item_up_sensitive = position > 0;
+  item_down_sensitive = position + 1 < count;
+
+  object = gtk_builder_get_object (plugin->configure_builder, "item-up");
+  if (GTK_IS_BUTTON (object))
+    gtk_widget_set_sensitive (GTK_WIDGET (object), item_up_sensitive);
+
+  object = gtk_builder_get_object (plugin->configure_builder, "item-down");
+  if (GTK_IS_BUTTON (object))
+    gtk_widget_set_sensitive (GTK_WIDGET (object), item_down_sensitive);
+}
+
+
+
+static gboolean
+systray_plugin_dialog_tree_iter_insert (GtkTreeModel *model,
+                                        GtkTreePath  *path,
+                                        GtkTreeIter  *iter,
+                                        gpointer      user_data)
+{
+  SystrayPlugin *plugin = user_data;
+  gchar         *name;
+
+  gtk_tree_model_get (model, iter, COLUMN_INTERNAL_NAME, &name, -1);
+  plugin->names_ordered = g_slist_prepend (plugin->names_ordered, g_strdup (name));
+
+  return FALSE;
+}
+
+
+
+static void
+systray_plugin_dialog_item_move_clicked (GtkWidget     *button,
+                                         SystrayPlugin *plugin)
+{
+  GObject          *object;
+  GtkTreeSelection *selection;
+  GtkTreeModel     *model;
+  GtkTreeIter       iter, from_iter;
+  GtkTreePath      *path;
+  gint              direction;
+
+  object = gtk_builder_get_object (plugin->configure_builder, "applications-treeview");
+  panel_return_if_fail (GTK_IS_TREE_VIEW (object));
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (object));
+
+  object = gtk_builder_get_object (plugin->configure_builder, "item-up");
+  panel_return_if_fail (GTK_IS_BUTTON (object));
+  direction = object == G_OBJECT (button) ? -1 : 1;
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      path = gtk_tree_model_get_path (model, &iter);
+
+      if (direction > 0)
+        gtk_tree_path_next (path);
+      else
+        gtk_tree_path_prev (path);
+
+      if (gtk_tree_model_get_iter (model, &from_iter, path))
+        {
+          if (direction > 0)
+            gtk_list_store_move_after (GTK_LIST_STORE (model), &iter, &from_iter);
+          else
+            gtk_list_store_move_before (GTK_LIST_STORE (model), &iter, &from_iter);
+
+          /* update buttons state */
+          systray_plugin_dialog_selection_changed (selection, plugin);
+
+          /* update order */
+          g_slist_free_full (plugin->names_ordered, g_free);
+          plugin->names_ordered = NULL;
+          gtk_tree_model_foreach (model, systray_plugin_dialog_tree_iter_insert, plugin);
+          plugin->names_ordered = g_slist_reverse (plugin->names_ordered);
+          g_object_notify (G_OBJECT (plugin), "names-ordered");
+        }
+
+      gtk_tree_path_free (path);
+    }
+}
+
+
+
+static void
 systray_plugin_dialog_clear_clicked (GtkWidget     *button,
                                      SystrayPlugin *plugin)
 {
@@ -1024,10 +1169,22 @@ systray_plugin_dialog_clear_clicked (GtkWidget     *button,
                            _("Are you sure you want to clear the list of "
                              "known applications?")))
     {
-      store = g_object_get_data (G_OBJECT (plugin), "applications-store");
+      store = GTK_LIST_STORE (gtk_builder_get_object (plugin->configure_builder, "applications-store"));
       panel_return_if_fail (GTK_IS_LIST_STORE (store));
       gtk_list_store_clear (store);
 
       systray_plugin_names_clear (plugin);
     }
+}
+
+
+
+static void
+systray_plugin_dialog_cleanup (SystrayPlugin *plugin,
+                               GtkBuilder    *builder)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+
+  if (plugin->configure_builder == builder)
+    plugin->configure_builder = NULL;
 }
