@@ -25,7 +25,8 @@
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4ui/libxfce4ui.h>
-#include <dbus/dbus-glib.h>
+
+#include <gio/gio.h>
 
 #include <common/panel-private.h>
 #include <common/panel-xfconf.h>
@@ -749,13 +750,17 @@ actions_plugin_action_confirmation (ActionsPlugin *plugin,
 
 
 
-static DBusGProxy *
-actions_plugin_action_dbus_proxy_session (DBusGConnection *conn)
+static GDBusProxy *
+actions_plugin_action_dbus_proxy_session (GDBusConnection *conn)
 {
-  return dbus_g_proxy_new_for_name (conn,
-                                    "org.xfce.SessionManager",
-                                    "/org/xfce/SessionManager",
-                                    "org.xfce.Session.Manager");
+  return g_dbus_proxy_new_sync (conn,
+                                G_DBUS_PROXY_FLAGS_NONE,
+                                NULL,
+                                "org.xfce.SessionManager",
+                                "/org/xfce/SessionManager",
+                                "org.xfce.Session.Manager",
+                                NULL,
+                                NULL);
 }
 
 
@@ -766,11 +771,11 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
                                  gboolean      allow_save,
                                  GError      **error)
 {
-  DBusGConnection *conn;
-  DBusGProxy      *proxy;
-  gboolean         retval = FALSE;
+  GDBusConnection *conn;
+  GDBusProxy      *proxy;
+  GVariant        *retval;
 
-  conn = dbus_g_bus_get (DBUS_BUS_SESSION, error);
+  conn = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, error);
   if (conn == NULL)
     return FALSE;
 
@@ -779,45 +784,77 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
     {
       if (g_strcmp0 (method, "Logout") == 0)
         {
-          retval = dbus_g_proxy_call (proxy, method, error,
-                                      G_TYPE_BOOLEAN, show_dialog,
-                                      G_TYPE_BOOLEAN, allow_save,
-                                      G_TYPE_INVALID, G_TYPE_INVALID);
+          retval = g_dbus_proxy_call_sync (proxy, method,
+                                           g_variant_new ("(bb)",
+                                                          show_dialog,
+                                                          allow_save),
+                                           G_DBUS_CALL_FLAGS_NONE,
+                                           -1,
+                                           NULL,
+                                           error);
         }
       else if (g_strcmp0 (method, "Suspend") == 0
                || g_strcmp0 (method, "Hibernate") == 0)
         {
-          retval = dbus_g_proxy_call (proxy, method, error,
-                                      G_TYPE_INVALID, G_TYPE_INVALID);
+          retval = g_dbus_proxy_call_sync (proxy, method,
+                                           NULL,
+                                           G_DBUS_PROXY_FLAGS_NONE,
+                                           -1,
+                                           NULL,
+                                           error);
         }
       else
         {
-          retval = dbus_g_proxy_call (proxy, method, error,
-                                      G_TYPE_BOOLEAN, allow_save,
-                                      G_TYPE_INVALID, G_TYPE_INVALID);
+          retval = g_dbus_proxy_call_sync (proxy, method,
+                                           g_variant_new ("(b)",
+                                                          show_dialog),
+                                           G_DBUS_CALL_FLAGS_NONE,
+                                           -1,
+                                           NULL,
+                                           error);
         }
 
       g_object_unref (G_OBJECT (proxy));
     }
 
-  return retval;
+  if (retval)
+    {
+      g_variant_unref (retval);
+      return TRUE;
+    }
+
+  return FALSE;
 }
 
 
 
 static gboolean
-actions_plugin_action_dbus_can (DBusGProxy  *proxy,
+actions_plugin_action_dbus_can (GDBusProxy  *proxy,
                                 const gchar *method)
 {
+  GVariant *retval;
   gboolean allowed = FALSE;
+  GError *error = NULL;
 
-  if (dbus_g_proxy_call (proxy, method, NULL,
-                         G_TYPE_INVALID,
-                         G_TYPE_BOOLEAN, &allowed,
-                         G_TYPE_INVALID))
-    return allowed;
+  retval = g_dbus_proxy_call_sync (proxy, method,
+                                   NULL,
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   -1,
+                                   NULL,
+                                   error);
 
-  return FALSE;
+  if (G_LIKELY (retval))
+    {
+      g_variant_get (retval, "(b)", &allowed);
+      g_variant_unref (retval);
+    }
+  else if (error)
+    {
+      g_warning ("Calling %s failed %s", method, error->message);
+      g_error_free (error);
+    }
+
+  return allowed;
 }
 
 
@@ -825,10 +862,10 @@ actions_plugin_action_dbus_can (DBusGProxy  *proxy,
 static ActionType
 actions_plugin_actions_allowed (void)
 {
-  DBusGConnection *conn;
+  GDBusConnection *conn;
   ActionType       allow_mask = ACTION_TYPE_SEPARATOR;
   gchar           *path;
-  DBusGProxy      *proxy;
+  GDBusProxy      *proxy;
   GError          *error = NULL;
 
   /* check for commands we use */
@@ -843,7 +880,7 @@ actions_plugin_actions_allowed (void)
   g_free (path);
 
   /* session bus for querying the managers */
-  conn = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
+  conn = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
   if (conn != NULL)
     {
       /* xfce4-session */
