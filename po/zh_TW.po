@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:30+0200\n"
-"PO-Revision-Date: 2017-04-27 12:33+0000\n"
+"POT-Creation-Date: 2017-06-22 00:30+0200\n"
+"PO-Revision-Date: 2017-06-23 07:22+0000\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/xfce/xfce4-panel/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgid ""
 msgstr "加入新的啟動器 (以此桌面檔資訊為基礎) 至面板"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "面板"
@@ -43,53 +43,69 @@ msgid "Customize the panel"
 msgstr "自訂面板"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1028
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "您確定要移除「%s」嗎？"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1033
+#: ../libxfce4panel/xfce-panel-plugin.c:1047
 #: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "如果您要從面板移除該項目，它將永遠消失。"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
 #: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:399
+#: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "取消"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "移除"
 
-#. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1193
+#: ../libxfce4panel/xfce-panel-plugin.c:1190
+msgid "_Properties"
+msgstr "屬性(_P)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1205
+msgid "_About"
+msgstr "關於(_A)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1220
 msgid "_Move"
 msgstr "移動(_M)"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
+msgid "_Remove"
+msgstr "移除(_R)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1265
 msgid "Pane_l"
 msgstr "面板(_L)"
 
-#. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1274 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "加入新項目(_N)..."
 
-#. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
+#: ../libxfce4panel/xfce-panel-plugin.c:1289 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "面板偏好設定(_E)..."
 
-#. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "登出(_O)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1330
+msgid "_Help"
+msgstr "說明(_H)"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1345
+msgid "About"
+msgstr "關於"
 
 #: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
@@ -619,7 +635,7 @@ msgstr "老手"
 msgid "Expert"
 msgstr "專家"
 
-#: ../panel/panel-window.c:2737
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "鎖住面板(_L)"
 
@@ -839,7 +855,7 @@ msgstr "分隔符"
 msgid "Failed to run action \"%s\""
 msgstr "無法執行動作「%s」"
 
-#: ../plugins/actions/actions.c:1118
+#: ../plugins/actions/actions.c:1122
 msgid "John Doe"
 msgstr "陳大文"
 
@@ -924,17 +940,17 @@ msgid "Applications"
 msgstr "應用程式"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:536
-#: ../plugins/directorymenu/directorymenu.c:397
+#: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "選取圖示"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
-#: ../plugins/directorymenu/directorymenu.c:400
+#: ../plugins/directorymenu/directorymenu.c:395
 msgid "OK"
 msgstr "確定"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "未能執行「%s」。"
@@ -973,15 +989,21 @@ msgstr "於目前滑鼠位置彈出選單"
 msgid "Show help options"
 msgstr "顯示幫助選項"
 
-#: ../plugins/clock/clock.c:176
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock.c:46
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr "%A %d %B %Y"
+
+#: ../plugins/clock/clock.c:177
 msgid "Week %V"
 msgstr "第 %V 週"
 
-#: ../plugins/clock/clock.c:469
+#: ../plugins/clock/clock.c:470
 msgid "Failed to execute clock command"
 msgstr "未能執行時鐘指令"
 
-#: ../plugins/clock/clock.c:820
+#: ../plugins/clock/clock.c:821
 msgid "Custom Format"
 msgstr "自訂格式"
 
@@ -1086,6 +1108,12 @@ msgstr "顯示格欄(_F)"
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Clock Options"
 msgstr "時鐘選項"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1318,38 +1346,38 @@ msgstr "十二"
 msgid "What time is it?"
 msgstr "現在幾點？"
 
-#: ../plugins/directorymenu/directorymenu.c:247
+#: ../plugins/directorymenu/directorymenu.c:242
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "目錄選單"
 
-#: ../plugins/directorymenu/directorymenu.c:582
+#: ../plugins/directorymenu/directorymenu.c:577
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "無法啟動應用程式「%s」"
 
-#: ../plugins/directorymenu/directorymenu.c:614
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "無法查詢「%s」的內容類型"
 
-#: ../plugins/directorymenu/directorymenu.c:623
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "找不到「%s」的預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:639
+#: ../plugins/directorymenu/directorymenu.c:634
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "無法為「%s」啟動預設應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:737
+#: ../plugins/directorymenu/directorymenu.c:732
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "未能執行分類「%s」的偏好應用程式"
 
-#: ../plugins/directorymenu/directorymenu.c:810
+#: ../plugins/directorymenu/directorymenu.c:806
 msgid "Open Folder"
 msgstr "開啟資料夾"
 
@@ -1390,15 +1418,15 @@ msgstr "檔案樣式(_F)："
 msgid "Filtering"
 msgstr "過濾方式"
 
-#: ../plugins/launcher/launcher.c:404
+#: ../plugins/launcher/launcher.c:388
 msgid "Open launcher menu"
 msgstr "開啟啟動器選單"
 
-#: ../plugins/launcher/launcher.c:1595
+#: ../plugins/launcher/launcher.c:1569
 msgid "Unnamed Item"
 msgstr "未命名項目"
 
-#: ../plugins/launcher/launcher.c:1746
+#: ../plugins/launcher/launcher.c:1723
 msgid "No items"
 msgstr "無項目"
 
@@ -1514,15 +1542,15 @@ msgstr "進階"
 msgid "Program launcher with optional menu"
 msgstr "程式啟動器，可附加選單"
 
-#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "工作區設定值(_S)..."
 
-#: ../plugins/pager/pager.c:533
+#: ../plugins/pager/pager.c:537
 msgid "Unable to open the workspace settings"
 msgstr "無法開啟工作區設定值"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
 #, c-format
 msgid "Workspace %d"
 msgstr "工作區 %d"
@@ -1738,23 +1766,23 @@ msgstr "只顯示最小化的視窗(_M)"
 msgid "Show windows from all mo_nitors"
 msgstr "顯示所有螢幕的視窗(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3414
+#: ../plugins/tasklist/tasklist-widget.c:3407
 msgid "Mi_nimize All"
 msgstr "最小化全部(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3415
 msgid "Un_minimize All"
 msgstr "取消"
 
-#: ../plugins/tasklist/tasklist-widget.c:3429
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Ma_ximize All"
 msgstr "最大化全部(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3431
 msgid "_Unmaximize All"
 msgstr "取消最大化(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3448
+#: ../plugins/tasklist/tasklist-widget.c:3443
 msgid "_Close All"
 msgstr "關閉全部(_C)"
 
@@ -1762,28 +1790,28 @@ msgstr "關閉全部(_C)"
 msgid "Switch between open windows using buttons"
 msgstr "使用按鈕在開啟視窗間切換"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:668
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../plugins/windowmenu/windowmenu.c:1266
+#: ../plugins/windowmenu/windowmenu.c:1264
 msgid "No Windows"
 msgstr "無視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1281
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "Urgent Windows"
 msgstr "緊急視窗"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
+#: ../plugins/windowmenu/windowmenu.c:1322
 msgid "Add Workspace"
 msgstr "新增工作區"
 
-#: ../plugins/windowmenu/windowmenu.c:1343
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "移除工作區「%s」"
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1347
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作區 %d"
