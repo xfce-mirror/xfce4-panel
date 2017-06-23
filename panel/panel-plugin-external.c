@@ -34,7 +34,7 @@
 #include <gdk/gdkx.h>
 #include <libxfce4util/libxfce4util.h>
 
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 
 #include <common/panel-private.h>
 #include <common/panel-dbus.h>

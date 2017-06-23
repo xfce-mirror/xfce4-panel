@@ -54,7 +54,7 @@ wrapper_1_0_SOURCES = \
 
 wrapper_1_0_CFLAGS = \
 	$(GTK2_CFLAGS) \
-	$(DBUS_CFLAGS) \
+	$(GIO_CFLAGS) \
 	$(GMODULE_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(PLATFORM_CFLAGS)
@@ -66,7 +66,7 @@ wrapper_1_0_LDFLAGS = \
 wrapper_1_0_LDADD = \
 	$(top_builddir)/libxfce4panel/libxfce4panel-1.0.la \
 	$(GTK2_LIBS) \
-	$(DBUS_LIBS) \
+	$(GIO_LIBS) \
 	$(GMODULE_LIBS) \
 	$(LIBXFCE4UTIL_LIBS)
 

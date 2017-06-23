@@ -22,7 +22,7 @@ libactions_la_CFLAGS = \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(XFCONF_CFLAGS) \
-	$(DBUS_CFLAGS) \
+	$(GIO_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 libactions_la_LDFLAGS = \
@@ -38,7 +38,7 @@ libactions_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-	$(DBUS_LIBS) \
+	$(GIO_LIBS) \
 	$(XFCONF_LIBS)
 
 libactions_la_DEPENDENCIES = \

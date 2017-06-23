@@ -27,7 +27,6 @@ liblauncher_la_CFLAGS = \
 	$(GARCON_CFLAGS) \
 	$(GIO_CFLAGS) \
 	$(XFCONF_CFLAGS) \
-	$(DBUS_CFLAGS) \
 	$(PLATFORM_CFLAGS)
 
 liblauncher_la_LDFLAGS = \
@@ -44,7 +43,6 @@ liblauncher_la_LIBADD = \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
 	$(GARCON_LIBS) \
-	$(DBUS_LIBS) \
 	$(GIO_LIBS) \
 	$(XFCONF_LIBS)
 
