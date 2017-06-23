@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Andhika Padmawan <andhika.padmawan@gmail.com>, 2010
-# Ardjuna <Asyura.x@gmail.com>, 2015
+# Ardjuna <Asyura.x@gmail.com>, 2015,2017
 # Mohamad Hasan Al Banna <se7entime@openmailbox.org>, 2014
 # Mohamad Hasan Al Banna <se7entime@openmailbox.org>, 2013
 # Mohamad Hasan Al Banna <se7entime@openmailbox.org>, 2013-2014
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:30+0200\n"
-"PO-Revision-Date: 2017-05-16 04:28+0000\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"POT-Creation-Date: 2017-06-22 00:30+0200\n"
+"PO-Revision-Date: 2017-06-23 08:36+0000\n"
+"Last-Translator: Ardjuna <Asyura.x@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/xfce/xfce4-panel/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid ""
 msgstr "Tambah sebuah peluncur ke panel berdasarkan informasi dari berkas desktop ini"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -44,53 +44,69 @@ msgid "Customize the panel"
 msgstr "Sesuaikan panel"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1028
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Anda yakin ingin menghapus \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1033
+#: ../libxfce4panel/xfce-panel-plugin.c:1047
 #: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Item yang anda hapus dari panel akan dibuang secara permanen."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
 #: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:399
+#: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "Batal"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "Hapus"
 
-#. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1193
+#: ../libxfce4panel/xfce-panel-plugin.c:1190
+msgid "_Properties"
+msgstr "Atur _Properti"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1205
+msgid "_About"
+msgstr "Info _Aplikasi"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1220
 msgid "_Move"
 msgstr "_Pindah"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
+msgid "_Remove"
+msgstr "_Hapus"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1265
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1274 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "_Tambah Item Baru..."
 
-#. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
+#: ../libxfce4panel/xfce-panel-plugin.c:1289 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "_Konfigurasi Panel"
 
-#. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "_Keluar"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1330
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1345
+msgid "About"
+msgstr "Info Aplikasi"
 
 #: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
@@ -620,7 +636,7 @@ msgstr "Berpengalaman"
 msgid "Expert"
 msgstr "Mahir"
 
-#: ../panel/panel-window.c:2737
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "_Kunci Panel"
 
@@ -840,7 +856,7 @@ msgstr "Pemisah"
 msgid "Failed to run action \"%s\""
 msgstr "Gagal menjalankan aksi \"%s\""
 
-#: ../plugins/actions/actions.c:1118
+#: ../plugins/actions/actions.c:1122
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -925,17 +941,17 @@ msgid "Applications"
 msgstr "Aplikasi"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:536
-#: ../plugins/directorymenu/directorymenu.c:397
+#: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Pilih Ikon"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
-#: ../plugins/directorymenu/directorymenu.c:400
+#: ../plugins/directorymenu/directorymenu.c:395
 msgid "OK"
 msgstr "OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Gagal mengeksekusi perintah \"%s\"."
@@ -974,15 +990,21 @@ msgstr "Menu popup di posisi tetikus saat ini"
 msgid "Show help options"
 msgstr "Tampilkan opsi bantuan"
 
-#: ../plugins/clock/clock.c:176
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock.c:46
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr ""
+
+#: ../plugins/clock/clock.c:177
 msgid "Week %V"
 msgstr "Minggu %V"
 
-#: ../plugins/clock/clock.c:469
+#: ../plugins/clock/clock.c:470
 msgid "Failed to execute clock command"
 msgstr "Gagal mengeksekusi perintah jam"
 
-#: ../plugins/clock/clock.c:820
+#: ../plugins/clock/clock.c:821
 msgid "Custom Format"
 msgstr "Format Suai"
 
@@ -1087,6 +1109,12 @@ msgstr "Tampilkan _petak"
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Clock Options"
 msgstr "Opsi Jam"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr ""
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1319,38 +1347,38 @@ msgstr "dua belas"
 msgid "What time is it?"
 msgstr "Jam berapa sekarang?"
 
-#: ../plugins/directorymenu/directorymenu.c:247
+#: ../plugins/directorymenu/directorymenu.c:242
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Menu Direktori"
 
-#: ../plugins/directorymenu/directorymenu.c:582
+#: ../plugins/directorymenu/directorymenu.c:577
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Gagal menjalankan aplikasi \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:614
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Gagal menanyakan tipe isi untuk \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:623
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Tak ada aplikasi standar yang ditemukan untuk \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:639
+#: ../plugins/directorymenu/directorymenu.c:634
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Gagal menjalankan aplikasi standar untuk \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:737
+#: ../plugins/directorymenu/directorymenu.c:732
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Gagal mengeksekusi aplikasi kesukaan untuk kategori \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:810
+#: ../plugins/directorymenu/directorymenu.c:806
 msgid "Open Folder"
 msgstr "Buka Folder"
 
@@ -1391,15 +1419,15 @@ msgstr "_Pola Berkas:"
 msgid "Filtering"
 msgstr "Memfilter"
 
-#: ../plugins/launcher/launcher.c:404
+#: ../plugins/launcher/launcher.c:388
 msgid "Open launcher menu"
 msgstr "Buka peluncuran menu"
 
-#: ../plugins/launcher/launcher.c:1595
+#: ../plugins/launcher/launcher.c:1569
 msgid "Unnamed Item"
 msgstr "Item Tak Bernama"
 
-#: ../plugins/launcher/launcher.c:1746
+#: ../plugins/launcher/launcher.c:1723
 msgid "No items"
 msgstr "Tak ada item"
 
@@ -1515,15 +1543,15 @@ msgstr "Lanjutan"
 msgid "Program launcher with optional menu"
 msgstr "Peluncur program dengan menu opsional"
 
-#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "_Pengaturan Ruang Kerja..."
 
-#: ../plugins/pager/pager.c:533
+#: ../plugins/pager/pager.c:537
 msgid "Unable to open the workspace settings"
 msgstr "Tak dapat membuka pengaturan ruang kerja"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
 #, c-format
 msgid "Workspace %d"
 msgstr "Ruang kerja %d"
@@ -1739,23 +1767,23 @@ msgstr "Hanya tampilkan jendela yang di_minimalkan"
 msgid "Show windows from all mo_nitors"
 msgstr "Tampilkan jendela dari semua mo_nitor"
 
-#: ../plugins/tasklist/tasklist-widget.c:3414
+#: ../plugins/tasklist/tasklist-widget.c:3407
 msgid "Mi_nimize All"
 msgstr "Mi_nimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3415
 msgid "Un_minimize All"
 msgstr "Tidak Mini_malkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3429
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Ma_ximize All"
 msgstr "Ma_ksimalkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3431
 msgid "_Unmaximize All"
 msgstr "Tidak Maksima_lkan Semua"
 
-#: ../plugins/tasklist/tasklist-widget.c:3448
+#: ../plugins/tasklist/tasklist-widget.c:3443
 msgid "_Close All"
 msgstr "_Tutup Semua"
 
@@ -1763,28 +1791,28 @@ msgstr "_Tutup Semua"
 msgid "Switch between open windows using buttons"
 msgstr "Tukar diantara jendela yang terbuka dengan menggunakan tombol"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:668
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../plugins/windowmenu/windowmenu.c:1266
+#: ../plugins/windowmenu/windowmenu.c:1264
 msgid "No Windows"
 msgstr "Tak Ada Jendela"
 
-#: ../plugins/windowmenu/windowmenu.c:1281
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "Urgent Windows"
 msgstr "Jendela Penting"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
+#: ../plugins/windowmenu/windowmenu.c:1322
 msgid "Add Workspace"
 msgstr "Tambah Ruang Kerja"
 
-#: ../plugins/windowmenu/windowmenu.c:1343
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Hapus Ruang Kerja \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1347
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Hapus Ruang Kerja %d"
