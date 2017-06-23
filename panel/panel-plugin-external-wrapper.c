@@ -299,7 +299,7 @@ panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
 
   wrapper = PANEL_PLUGIN_EXTERNAL_WRAPPER (external);
 
-  g_variant_builder_init (&builder, G_VARIANT_TYPE("a(uv)"));
+  g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
 
   /* put properties in a dbus-suitable array for the wrapper */
   for (li = properties; li != NULL; li = li->next)
