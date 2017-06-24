@@ -108,8 +108,12 @@ struct _SystrayBox
   /* maximum icon size */
   gint          size_max;
 
+  /* whether icons are squared */
+  guint         square_icons : 1;
+
   /* allocated size by the plugin */
   gint          size_alloc;
+  gint          nrows;
 };
 
 
@@ -163,6 +167,7 @@ systray_box_init (SystrayBox *box)
   box->n_visible_children = 0;
   box->horizontal = TRUE;
   box->show_hidden = FALSE;
+  box->square_icons = FALSE;
 }
 
 
@@ -222,40 +227,55 @@ systray_box_size_get_max_child_size (SystrayBox *box,
   gint              row_size;
   GtkStyleContext  *ctx;
   GtkBorder         padding;
+  gint              spacing;
 
   ctx = gtk_widget_get_style_context (widget);
   gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (widget), &padding);
   alloc_size -= MAX (padding.left+padding.right, padding.top+padding.bottom);
 
-  /* count the number of rows that fit in the allocated space */
-  for (rows = 1;; rows++)
+  if (box->square_icons)
     {
-      size = rows * box->size_max + (rows - 1) * SPACING;
-      if (size < alloc_size)
-        continue;
+      if (rows_ret != NULL)
+        *rows_ret = box->nrows;
 
-      /* decrease rows if the new size doesn't fit */
-      if (rows > 1 && size > alloc_size)
-        rows--;
+      if (row_size_ret != NULL)
+        *row_size_ret = alloc_size / box->nrows;
 
-      break;
-    }
-
-  row_size = (alloc_size - (rows - 1) * SPACING) / rows;
-  row_size = MIN (box->size_max, row_size);
-
-  if (rows_ret != NULL)
-    *rows_ret = rows;
-
-  if (row_size_ret != NULL)
-    *row_size_ret = row_size;
-
-  if (offset_ret != NULL)
-    {
-      rows = MIN (rows, box->n_visible_children);
-      *offset_ret = (alloc_size - (rows * row_size + (rows - 1) * SPACING)) / 2;
-      if (*offset_ret < 1)
+      if (offset_ret != NULL)
         *offset_ret = 0;
+    }
+  else
+    {
+      /* count the number of rows that fit in the allocated space */
+      for (rows = 1;; rows++)
+        {
+          size = rows * box->size_max + (rows - 1) * SPACING;
+          if (size < alloc_size)
+            continue;
+
+          /* decrease rows if the new size doesn't fit */
+          if (rows > 1 && size > alloc_size)
+            rows--;
+
+          break;
+        }
+
+      row_size = (alloc_size - (rows - 1) * SPACING) / rows;
+      row_size = MIN (box->size_max, row_size);
+
+      if (rows_ret != NULL)
+        *rows_ret = rows;
+
+      if (row_size_ret != NULL)
+        *row_size_ret = row_size;
+
+      if (offset_ret != NULL)
+        {
+          rows = MIN (rows, box->n_visible_children);
+          *offset_ret = (alloc_size - (rows * row_size + (rows - 1) * SPACING)) / 2;
+          if (*offset_ret < 1)
+            *offset_ret = 0;
+        }
     }
 }
 
@@ -282,6 +302,7 @@ systray_box_get_preferred_width   (GtkWidget       *widget,
 }
 
 
+
 static void
 systray_box_get_preferred_height  (GtkWidget       *widget,
                                    gint            *minimum_height,
@@ -301,6 +322,7 @@ systray_box_get_preferred_height  (GtkWidget       *widget,
       systray_box_get_preferred_length (widget, minimum_height, natural_height);
     }
 }
+
 
 
 static void
@@ -351,7 +373,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
           /* special handling for non-squared icons. this only works if
            * the icon size ratio is > 1.00, if this is lower then 1.00
            * the icon implementation should respect the tray orientation */
-          if (G_UNLIKELY (child_req.width != child_req.height))
+          if (!box->square_icons && G_UNLIKELY (child_req.width != child_req.height))
             {
               ratio = (gdouble) child_req.width / (gdouble) child_req.height;
               if (!box->horizontal)
@@ -398,7 +420,10 @@ systray_box_get_preferred_length (GtkWidget      *widget,
       if (min_seq_cells != -1)
         cols = MAX (min_seq_cells, cols);
 
-      length = row_size * cols + (cols - 1) * SPACING;
+      if (box->square_icons)
+        length = row_size * cols;
+      else
+        length = row_size * cols + (cols - 1) * SPACING;
     }
   else
     {
@@ -449,6 +474,7 @@ systray_box_size_allocate (GtkWidget     *widget,
   gint              idx;
   GtkStyleContext  *ctx;
   GtkBorder         padding;
+  gint              spacing;
 
   gtk_widget_set_allocation (widget, allocation);
 
@@ -456,6 +482,7 @@ systray_box_size_allocate (GtkWidget     *widget,
   gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (widget), &padding);
 
   alloc_size = box->horizontal ? allocation->height : allocation->width;
+  spacing = box->square_icons ? 0 : SPACING;
 
   systray_box_size_get_max_child_size (box, alloc_size, &rows, &row_size, &offset);
 
@@ -507,7 +534,7 @@ systray_box_size_allocate (GtkWidget     *widget,
       else
         {
           /* special case handling for non-squared icons */
-          if (G_UNLIKELY (child_req.width != child_req.height))
+          if (!box->square_icons && G_UNLIKELY (child_req.width != child_req.height))
             {
               ratio = (gdouble) child_req.width / (gdouble) child_req.height;
 
@@ -541,10 +568,20 @@ systray_box_size_allocate (GtkWidget     *widget,
           else
             {
               /* fix icon to row size */
-              child_alloc.width = row_size;
-              child_alloc.height = row_size;
-              child_alloc.x = 0;
-              child_alloc.y = 0;
+              if (box->square_icons)
+                {
+                  child_alloc.width = MIN (row_size, box->size_max);
+                  child_alloc.height = MIN (row_size, box->size_max);
+                  child_alloc.x = (row_size - child_alloc.width) / 2;
+                  child_alloc.y = (row_size - child_alloc.height) / 2;
+                }
+              else
+                {
+                  child_alloc.width = row_size;
+                  child_alloc.height = row_size;
+                  child_alloc.x = 0;
+                  child_alloc.y = 0;
+                }
 
               ratio = 1.00;
             }
@@ -568,9 +605,9 @@ systray_box_size_allocate (GtkWidget     *widget,
               if (box->horizontal)
                 {
                   x = x_start;
-                  y += row_size + SPACING;
+                  y += row_size + spacing;
 
-                  if (y > y_end)
+                  if (!box->square_icons && y > y_end)
                     {
                       /* we overflow the number of rows, restart
                        * allocation with 1px smaller icons */
@@ -586,9 +623,9 @@ systray_box_size_allocate (GtkWidget     *widget,
               else
                 {
                   y = y_start;
-                  x += row_size + SPACING;
+                  x += row_size + spacing;
 
-                  if (x > x_end)
+                  if (!box->square_icons && x > x_end)
                     {
                       /* we overflow the number of rows, restart
                        * allocation with 1px smaller icons */
@@ -607,9 +644,9 @@ systray_box_size_allocate (GtkWidget     *widget,
           child_alloc.y += y;
 
           if (box->horizontal)
-            x += row_size * ratio + SPACING;
+            x += row_size * ratio + spacing;
           else
-            y += row_size * ratio + SPACING;
+            y += row_size * ratio + spacing;
         }
 
       panel_debug_filtered (PANEL_DEBUG_SYSTRAY, "allocated %s[%p] at (%d,%d;%d,%d)",
@@ -617,6 +654,13 @@ systray_box_size_allocate (GtkWidget     *widget,
           child_alloc.x, child_alloc.y, child_alloc.width, child_alloc.height);
 
       gtk_widget_size_allocate (child, &child_alloc);
+    }
+
+  /* recalculate size with higher precise */
+  if (alloc_size != box->size_alloc)
+    {
+      box->size_alloc = alloc_size;
+      gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }
 
@@ -802,13 +846,15 @@ systray_box_get_size_max (SystrayBox *box)
 
 void
 systray_box_set_size_alloc (SystrayBox *box,
-                            gint        size_alloc)
+                            gint        size_alloc,
+                            gint        nrows)
 {
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
 
-  if (G_LIKELY (size_alloc != box->size_alloc))
+  if (G_LIKELY (size_alloc != box->size_alloc || nrows != box->nrows))
     {
       box->size_alloc = size_alloc;
+      box->nrows = nrows;
 
       if (box->children != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
@@ -819,7 +865,7 @@ systray_box_set_size_alloc (SystrayBox *box,
 
 void
 systray_box_set_show_hidden (SystrayBox *box,
-                              gboolean   show_hidden)
+                             gboolean    show_hidden)
 {
   panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
 
@@ -840,6 +886,33 @@ systray_box_get_show_hidden (SystrayBox *box)
   panel_return_val_if_fail (XFCE_IS_SYSTRAY_BOX (box), FALSE);
 
   return box->show_hidden;
+}
+
+
+
+void
+systray_box_set_squared (SystrayBox *box,
+                         gboolean    square_icons)
+{
+  panel_return_if_fail (XFCE_IS_SYSTRAY_BOX (box));
+
+  if (box->square_icons != square_icons)
+    {
+      box->square_icons = square_icons;
+
+      if (box->children != NULL)
+        gtk_widget_queue_resize (GTK_WIDGET (box));
+    }
+}
+
+
+
+gboolean
+systray_box_get_squared (SystrayBox *box)
+{
+  panel_return_val_if_fail (XFCE_IS_SYSTRAY_BOX (box), FALSE);
+
+  return box->square_icons;
 }
 
 

@@ -124,6 +124,7 @@ enum
 {
   PROP_0,
   PROP_SIZE_MAX,
+  PROP_SQUARE_ICONS,
   PROP_SHOW_FRAME,
   PROP_NAMES_ORDERED,
   PROP_NAMES_HIDDEN
@@ -187,6 +188,13 @@ systray_plugin_class_init (SystrayPluginClass *klass)
                                                       SIZE_MAX_MAX,
                                                       SIZE_MAX_DEFAULT,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
+                                   PROP_SQUARE_ICONS,
+                                   g_param_spec_boolean ("square-icons",
+                                                         NULL, NULL,
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_FRAME,
@@ -279,7 +287,12 @@ systray_plugin_get_property (GObject    *object,
     {
     case PROP_SIZE_MAX:
       g_value_set_uint (value,
-          systray_box_get_size_max (XFCE_SYSTRAY_BOX (plugin->box)));
+                        systray_box_get_size_max (XFCE_SYSTRAY_BOX (plugin->box)));
+      break;
+
+    case PROP_SQUARE_ICONS:
+      g_value_set_boolean (value,
+                           systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box)));
       break;
 
     case PROP_SHOW_FRAME:
@@ -315,7 +328,7 @@ systray_plugin_set_property (GObject      *object,
                              GParamSpec   *pspec)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
-  gboolean       show_frame;
+  gboolean       boolean_val, old_boolean_val;
   GPtrArray     *array;
   const GValue  *tmp;
   gchar         *name;
@@ -329,22 +342,39 @@ systray_plugin_set_property (GObject      *object,
                                 g_value_get_uint (value));
       break;
 
+    case PROP_SQUARE_ICONS:
     case PROP_SHOW_FRAME:
-      show_frame = g_value_get_boolean (value);
-      if (plugin->show_frame != show_frame)
+      boolean_val = g_value_get_boolean (value);
+      old_boolean_val = !systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box))
+                        && plugin->show_frame;
+
+      switch (prop_id)
         {
-          plugin->show_frame = show_frame;
+        case PROP_SQUARE_ICONS:
+          systray_box_set_squared (XFCE_SYSTRAY_BOX (plugin->box), boolean_val);
+          break;
+
+        case PROP_SHOW_FRAME:
+          plugin->show_frame = boolean_val;
+          break;
+        }
+
+      boolean_val = !systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box))
+                    && plugin->show_frame;
+
+      if (old_boolean_val != boolean_val)
+        {
           gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame),
-              show_frame ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
+                                     boolean_val ? GTK_SHADOW_ETCHED_IN : GTK_SHADOW_NONE);
 
           // FIXME
           //style = gtk_rc_style_new ();
-          //style->xthickness = style->ythickness = show_frame ? 1 : 0;
+          //style->xthickness = style->ythickness = boolean_val ? 1 : 0;
           //gtk_widget_modify_style (plugin->frame, style);
           //g_object_unref (G_OBJECT (style));
 
           systray_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-              xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
+                                       xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
         }
       break;
 
@@ -479,6 +509,7 @@ systray_plugin_construct (XfcePanelPlugin *panel_plugin)
   const PanelProperty  properties[] =
   {
     { "size-max", G_TYPE_UINT },
+    { "square-icons", G_TYPE_BOOLEAN },
     { "show-frame", G_TYPE_BOOLEAN },
     { "names-ordered", G_TYPE_PTR_ARRAY },
     { "names-hidden", G_TYPE_PTR_ARRAY },
@@ -561,8 +592,11 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   GtkBorder         padding;
 
   /* set the frame border */
-  if (plugin->show_frame && size > 26)
-    border = 1;
+  if (!systray_box_get_squared (XFCE_SYSTRAY_BOX (plugin->box)) &&
+      plugin->show_frame && size > 26)
+    {
+      border = 1;
+    }
   gtk_container_set_border_width (GTK_CONTAINER (frame), border);
 
   /* because the allocated size, used in size_requested is always 1 step
@@ -573,8 +607,9 @@ systray_plugin_size_changed (XfcePanelPlugin *panel_plugin,
   ctx = gtk_widget_get_style_context (frame);
   gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (frame), &padding);
 
-  border += MAX (padding.left+padding.right, padding.top+padding.bottom);
-  systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->box), size - border);
+  border += MAX (padding.left + padding.right, padding.top + padding.bottom);
+  systray_box_set_size_alloc (XFCE_SYSTRAY_BOX (plugin->box), size - 2 * border,
+                              xfce_panel_plugin_get_nrows (panel_plugin));
 
   return TRUE;
 }
@@ -605,11 +640,20 @@ systray_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                           G_OBJECT (object), "value",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
+  object = gtk_builder_get_object (builder, "square-icons");
+  panel_return_if_fail (GTK_IS_WIDGET (object));
+  g_object_bind_property (G_OBJECT (plugin), "square-icons",
+                          G_OBJECT (object), "active",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
   object = gtk_builder_get_object (builder, "show-frame");
   panel_return_if_fail (GTK_IS_WIDGET (object));
   g_object_bind_property (G_OBJECT (plugin), "show-frame",
                           G_OBJECT (object), "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_object_bind_property (G_OBJECT (plugin), "square-icons",
+                          G_OBJECT (object), "sensitive",
+                          G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
   store = gtk_builder_get_object (builder, "applications-store");
   panel_return_if_fail (GTK_IS_LIST_STORE (store));

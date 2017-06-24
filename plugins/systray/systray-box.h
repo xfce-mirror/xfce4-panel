@@ -49,12 +49,18 @@ void       systray_box_set_size_max    (SystrayBox          *box,
 gint       systray_box_get_size_max    (SystrayBox          *box);
 
 void       systray_box_set_size_alloc  (SystrayBox          *box,
-                                        gint                 size_alloc);
+                                        gint                 size_alloc,
+                                        gint                 nrows);
 
 void       systray_box_set_show_hidden (SystrayBox          *box,
                                         gboolean             show_hidden);
 
 gboolean   systray_box_get_show_hidden (SystrayBox          *box);
+
+void       systray_box_set_squared     (SystrayBox          *box,
+                                        gboolean             square_icons);
+
+gboolean   systray_box_get_squared     (SystrayBox          *box);
 
 void       systray_box_update          (SystrayBox          *box,
                                         GSList              *names_ordered);
