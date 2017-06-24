@@ -792,7 +792,7 @@ xfce_panel_image_new (void)
 
 /**
  * xfce_panel_image_new_from_pixbuf:
- * @pixbuf : a #GdkPixbuf, or %NULL.
+ * @pixbuf : (allow-none): a #GdkPixbuf, or %NULL.
  *
  * Creates a new #XfcePanelImage displaying @pixbuf. #XfcePanelImage
  * will add its own reference rather than adopting yours. You don't
@@ -817,7 +817,7 @@ xfce_panel_image_new_from_pixbuf (GdkPixbuf *pixbuf)
 
 /**
  * xfce_panel_image_new_from_source:
- * @source : source of the image. This can be an absolute path or
+ * @source : (allow-none): source of the image. This can be an absolute path or
  *           an icon-name or %NULL.
  *
  * Creates a new #XfcePanelImage displaying @source. #XfcePanelImage
@@ -844,7 +844,7 @@ xfce_panel_image_new_from_source (const gchar *source)
 /**
  * xfce_panel_image_set_from_pixbuf:
  * @image  : an #XfcePanelImage.
- * @pixbuf : a #GdkPixbuf, or %NULL.
+ * @pixbuf : (allow-none): a #GdkPixbuf, or %NULL.
  *
  * See xfce_panel_image_new_from_pixbuf() for details.
  *
@@ -871,7 +871,7 @@ xfce_panel_image_set_from_pixbuf (XfcePanelImage *image,
 /**
  * xfce_panel_image_set_from_source:
  * @image  : an #XfcePanelImage.
- * @source : source of the image. This can be an absolute path or
+ * @source : (allow-none): source of the image. This can be an absolute path or
  *           an icon-name or %NULL.
  *
  * See xfce_panel_image_new_from_source() for details.

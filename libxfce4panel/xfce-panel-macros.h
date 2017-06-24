@@ -16,9 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-/* #if !defined(LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H) && !defined(LIBXFCE4PANEL_COMPILATION)
-#error "Only <libxfce4panel/libxfce4panel.h> can be included directly, this file may disappear or change contents"
-#endif */
+
 
 #ifndef __XFCE_PANEL_MACROS_H__
 #define __XFCE_PANEL_MACROS_H__
@@ -110,7 +108,7 @@ typedef GTypeModule XfcePanelTypeModule;
  * XFCE_PANEL_DEFINE_PLUGIN:
  * @TypeName  : The name of the new type, in Camel case.
  * @type_name : The name of the new type, in lowercase, with words separated by '_'.
- * @args...   : Optional list of *_register_type() function from other
+ * @...       : Optional list of *_register_type() function from other
  *              objects in the plugin created with #XFCE_PANEL_DEFINE_TYPE.
  *
  * Define a new (resident) GObject panel plugin, the parent type of the object
@@ -127,7 +125,7 @@ typedef GTypeModule XfcePanelTypeModule;
  * XFCE_PANEL_DEFINE_PLUGIN_RESIDENT:
  * @TypeName  : The name of the new type, in Camel case.
  * @type_name : The name of the new type, in lowercase, with words separated by '_'.
- * @args...   : Optional list of *_register_type() function from other
+ * @...       : Optional list of *_register_type() function from other
  *              objects in the plugin created with #XFCE_PANEL_DEFINE_TYPE.
  *
  * Same as #XFCE_PANEL_DEFINE_PLUGIN, but if you use special libraries or objects,

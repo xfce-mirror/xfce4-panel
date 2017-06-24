@@ -2473,9 +2473,9 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * xfce_panel_plugin_position_widget:
  * @plugin        : an #XfcePanelPlugin.
  * @menu_widget   : a #GtkWidget that will be used as popup menu.
- * @attach_widget : a #GtkWidget relative to which the menu should be positioned.
- * @x             : return location for the x coordinate.
- * @y             : return location for the x coordinate.
+ * @attach_widget : (allow-none): a #GtkWidget relative to which the menu should be positioned.
+ * @x             : (out): return location for the x coordinate.
+ * @y             : (out): return location for the x coordinate.
  *
  * The menu widget is positioned relative to @attach_widget.
  * If @attach_widget is NULL, the menu widget is instead positioned
@@ -2622,8 +2622,8 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 /**
  * xfce_panel_plugin_position_menu:
  * @menu         : a #GtkMenu.
- * @x            : return location for the x coordinate.
- * @y            : return location for the y coordinate.
+ * @x            : (out): return location for the x coordinate.
+ * @y            : (out): return location for the y coordinate.
  * @push_in      : keep inside the screen (see #GtkMenuPositionFunc)
  * @panel_plugin : an #XfcePanelPlugin.
  *
@@ -2779,7 +2779,7 @@ xfce_panel_plugin_block_autohide (XfcePanelPlugin *plugin,
  *
  * See also: xfce_panel_plugin_save_location() and xfce_resource_lookup()
  *
- * Returns: The path to a config file or %NULL if no file was found.
+ * Returns: (transfer full): The path to a config file or %NULL if no file was found.
  *          The returned string must be freed using g_free()
  **/
 gchar *
@@ -2810,7 +2810,7 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
  *
  * See also: xfce_panel_plugin_lookup_rc_file() and xfce_resource_save_location()
  *
- * Returns: The path to a config file or %NULL if no file was found.
+ * Returns: (transfer full): The path to a config file or %NULL if no file was found.
  *          The returned string must be freed u sing g_free().
  **/
 gchar *

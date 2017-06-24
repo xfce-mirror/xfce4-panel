@@ -47,6 +47,7 @@ DISTCLEANFILES = \
 	intltool-update-tmp
 
 DISTCHECK_CONFIGURE_FLAGS = \
-	--enable-gtk-doc
+	--enable-gtk-doc \
+	--enable-introspection
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

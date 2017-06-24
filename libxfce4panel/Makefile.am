@@ -1,3 +1,4 @@
+DISTCLEANFILES =
 
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
@@ -155,7 +156,7 @@ libxfce4panel-enum-types.c:  $(libxfce4panel_headers) Makefile
 		--ftail "\n#define __LIBXFCE4PANEL_ENUM_TYPES_C__\n#include <libxfce4panel/libxfce4panel-aliasdef.c>\n" \
 		$(libxfce4panel_headers) ) > $@
 
-DISTCLEANFILES = \
+DISTCLEANFILES += \
 	$(libxfce4panel_built_sources)
 
 BUILT_SOURCES = \
@@ -166,6 +167,45 @@ CLEANFILES = \
 	expected-abi
 
 endif
+# endif MAINTAINER_MODE
+
+
+# GObject Introspection
+include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS =
+INTROSPECTION_SCANNER_ENV = CC="$(CC)"
+INTROSPECTION_SCANNER_ARGS = \
+	--add-include-path=$(srcdir) \
+	--warn-all \
+	--identifier-prefix=Xfce \
+	--identifier-prefix=xfce \
+	--identifier-prefix=LIBXFCE4PANEL \
+	--identifier-prefix=libxfce4panel \
+	--identifier-prefix=Plugin
+INTROSPECTION_COMPILER_ARGS = \
+	--includedir=$(srcdir) \
+	--includedir=.
+
+if HAVE_INTROSPECTION
+introspection_sources = $(libxfce4panel_2_0_la_SOURCES)
+
+libxfce4panel-2.0.gir: libxfce4panel-2.0.la Makefile
+libxfce4panel_2_0_gir_INCLUDES = GObject-2.0 GLib-2.0 Gtk-3.0 libxfce4util-1.0
+libxfce4panel_2_0_gir_CFLAGS = $(AM_CPPFLAGS)
+libxfce4panel_2_0_gir_LIBS = libxfce4panel-2.0.la
+libxfce4panel_2_0_gir_FILES = $(introspection_sources)
+libxfce4panel_2_0_gir_EXPORT_PACKAGES = libxfce4panel-2.0
+INTROSPECTION_GIRS += libxfce4panel-2.0.gir
+
+girdir = $(datadir)/gir-1.0
+gir_DATA = $(INTROSPECTION_GIRS)
+
+typelibdir = $(libdir)/girepository-1.0
+typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+
+DISTCLEANFILES += $(gir_DATA) $(typelib_DATA)
+endif
+# endif HAVE_INTROSPECTION
 
 EXTRA_DIST = \
 	abicheck.sh \

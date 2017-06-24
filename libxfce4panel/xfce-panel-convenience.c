@@ -50,7 +50,7 @@
  * Create regular #GtkButton with a few properties set to be useful in the
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.
  *
- * Returns: newly created #GtkButton.
+ * Returns: (transfer full): newly created #GtkButton.
  **/
 GtkWidget *
 xfce_panel_create_button (void)
@@ -93,7 +93,7 @@ xfce_panel_create_button (void)
  * Create regular #GtkToggleButton with a few properties set to be useful in
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.
  *
- * Returns: newly created #GtkToggleButton.
+ * Returns: (transfer full): newly created #GtkToggleButton.
  **/
 GtkWidget *
 xfce_panel_create_toggle_button (void)
@@ -166,7 +166,7 @@ xfce_panel_get_channel_name (void)
 /**
  * xfce_panel_pixbuf_from_source_at_size:
  * @source: string that contains the location of an icon
- * @icon_theme: icon theme or %NULL to use the default icon theme
+ * @icon_theme: (allow-none): icon theme or %NULL to use the default icon theme
  * @dest_width: the maximum returned width of the GdkPixbuf
  * @dest_height: the maximum returned height of the GdkPixbuf
  *
@@ -181,7 +181,7 @@ xfce_panel_get_channel_name (void)
  * If it is when loaded from the disk, the pixbuf is scaled
  * preserving the aspect ratio.
  *
- * Returns: a GdkPixbuf or %NULL if nothing was found. The value should
+ * Returns: (transfer full): a GdkPixbuf or %NULL if nothing was found. The value should
  *          be released with g_object_unref when no longer used.
  *
  * See also: XfcePanelImage
@@ -296,12 +296,12 @@ xfce_panel_pixbuf_from_source_at_size (const gchar  *source,
 /**
  * xfce_panel_pixbuf_from_source:
  * @source: string that contains the location of an icon
- * @icon_theme: icon theme or %NULL to use the default icon theme
+ * @icon_theme: (allow-none): icon theme or %NULL to use the default icon theme
  * @size: size the icon that should be loaded
  *
  * See xfce_panel_pixbuf_from_source_at_size
  *
- * Returns: a GdkPixbuf or %NULL if nothing was found. The value should
+ * Returns: (transfer full): a GdkPixbuf or %NULL if nothing was found. The value should
  *          be released with g_object_unref when no longer used.
  *
  * See also: XfcePanelImage
