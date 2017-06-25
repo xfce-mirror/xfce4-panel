@@ -257,6 +257,14 @@ systray_plugin_init (SystrayPlugin *plugin)
 }
 
 
+static void
+systray_free_array_element (gpointer data)
+{
+  GValue *value = (GValue *)data;
+
+  g_value_unset (value);
+  g_free (value);
+}
 
 static void
 systray_plugin_get_property (GObject    *object,
@@ -279,17 +287,17 @@ systray_plugin_get_property (GObject    *object,
       break;
 
     case PROP_NAMES_ORDERED:
-      array = g_ptr_array_new ();
+      array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
       g_slist_foreach (plugin->names_ordered, systray_plugin_names_collect_ordered, array);
       g_value_set_boxed (value, array);
-      xfconf_array_free (array);
+      g_ptr_array_unref (array);
       break;
 
     case PROP_NAMES_HIDDEN:
-      array = g_ptr_array_new ();
+      array = g_ptr_array_new_full (1, (GDestroyNotify) systray_free_array_element);
       g_hash_table_foreach (plugin->names_hidden, systray_plugin_names_collect_hidden, array);
       g_value_set_boxed (value, array);
-      xfconf_array_free (array);
+      g_ptr_array_unref (array);
       break;
 
     default:

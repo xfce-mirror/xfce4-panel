@@ -402,6 +402,17 @@ launcher_plugin_init (LauncherPlugin *plugin)
 
 
 static void
+launcher_free_array_element (gpointer data)
+{
+  GValue *value = (GValue *)data;
+
+  g_value_unset (value);
+  g_free (value);
+}
+
+
+
+static void
 launcher_plugin_get_property (GObject    *object,
                               guint       prop_id,
                               GValue     *value,
@@ -416,7 +427,7 @@ launcher_plugin_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_ITEMS:
-      array = g_ptr_array_new ();
+      array = g_ptr_array_new_full (1, (GDestroyNotify) launcher_free_array_element);
       for (li = plugin->items; li != NULL; li = li->next)
         {
           tmp = g_new0 (GValue, 1);
@@ -431,7 +442,7 @@ launcher_plugin_get_property (GObject    *object,
           g_ptr_array_add (array, tmp);
         }
       g_value_set_boxed (value, array);
-      xfconf_array_free (array);
+      g_ptr_array_unref (array);
       break;
 
     case PROP_DISABLE_TOOLTIPS:
