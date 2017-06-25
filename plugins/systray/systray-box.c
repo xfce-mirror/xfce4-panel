@@ -90,7 +90,7 @@ struct _SystrayBox
   GtkContainer  __parent__;
 
   /* all the icons packed in this box */
-  GSList       *childeren;
+  GSList       *children;
 
   /* table of item indexes */
   GHashTable   *names_ordered;
@@ -98,8 +98,8 @@ struct _SystrayBox
   /* orientation of the box */
   guint         horizontal : 1;
 
-  /* hidden childeren counter */
-  gint          n_hidden_childeren;
+  /* hidden children counter */
+  gint          n_hidden_children;
   gint          n_visible_children;
 
   /* whether hidden icons are visible */
@@ -155,11 +155,11 @@ systray_box_init (SystrayBox *box)
 {
   gtk_widget_set_has_window (GTK_WIDGET (box), FALSE);
 
-  box->childeren = NULL;
+  box->children = NULL;
   box->names_ordered = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   box->size_max = SIZE_MAX_DEFAULT;
   box->size_alloc = SIZE_MAX_DEFAULT;
-  box->n_hidden_childeren = 0;
+  box->n_hidden_children = 0;
   box->n_visible_children = 0;
   box->horizontal = TRUE;
   box->show_hidden = FALSE;
@@ -178,7 +178,7 @@ systray_box_get_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_HAS_HIDDEN:
-      g_value_set_boolean (value, box->n_hidden_childeren > 0);
+      g_value_set_boolean (value, box->n_hidden_children > 0);
       break;
 
     default:
@@ -197,10 +197,10 @@ systray_box_finalize (GObject *object)
   g_hash_table_destroy (box->names_ordered);
 
   /* check if we're leaking */
-  if (G_UNLIKELY (box->childeren != NULL))
+  if (G_UNLIKELY (box->children != NULL))
     {
       /* free the child list */
-      g_slist_free (box->childeren);
+      g_slist_free (box->children);
       g_debug ("Not all icons has been removed from the systray.");
     }
 
@@ -311,7 +311,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
   SystrayBox       *box = XFCE_SYSTRAY_BOX (widget);
   GtkWidget        *child;
   GtkRequisition    child_req;
-  gint              n_hidden_childeren = 0;
+  gint              n_hidden_children = 0;
   gint              rows;
   gdouble           cols;
   gint              row_size;
@@ -329,7 +329,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
   /* get some info about the n_rows we're going to allocate */
   systray_box_size_get_max_child_size (box, box->size_alloc, &rows, &row_size, NULL);
 
-  for (li = box->childeren, cells = 0.00; li != NULL; li = li->next)
+  for (li = box->children, cells = 0.00; li != NULL; li = li->next)
     {
       child = GTK_WIDGET (li->data);
       panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (child));
@@ -343,7 +343,7 @@ systray_box_get_preferred_length (GtkWidget      *widget,
 
       hidden = systray_socket_get_hidden (XFCE_SYSTRAY_SOCKET (child));
       if (hidden)
-        n_hidden_childeren++;
+        n_hidden_children++;
 
       /* if we show hidden icons */
       if (!hidden || box->show_hidden)
@@ -406,13 +406,13 @@ systray_box_get_preferred_length (GtkWidget      *widget,
     }
 
   /* emit property if changed */
-  if (box->n_hidden_childeren != n_hidden_childeren)
+  if (box->n_hidden_children != n_hidden_children)
     {
       panel_debug_filtered (PANEL_DEBUG_SYSTRAY,
           "hidden children changed (%d -> %d)",
-          n_hidden_childeren, box->n_hidden_childeren);
+          n_hidden_children, box->n_hidden_children);
 
-      box->n_hidden_childeren = n_hidden_childeren;
+      box->n_hidden_children = n_hidden_children;
       g_object_notify (G_OBJECT (box), "has-hidden");
     }
 
@@ -481,7 +481,7 @@ systray_box_size_allocate (GtkWidget     *widget,
   x = x_start;
   y = y_start;
 
-  for (li = box->childeren; li != NULL; li = li->next)
+  for (li = box->children; li != NULL; li = li->next)
     {
       child = GTK_WIDGET (li->data);
       panel_return_if_fail (XFCE_IS_SYSTRAY_SOCKET (child));
@@ -558,9 +558,9 @@ systray_box_size_allocate (GtkWidget     *widget,
                   /* child doesn't fit, but maybe we still have space for the
                    * next icon, so move the child 1 step forward in the list
                    * and restart allocating the box */
-                  idx = g_slist_position (box->childeren, li);
-                  box->childeren = g_slist_delete_link (box->childeren, li);
-                  box->childeren = g_slist_insert (box->childeren, child, idx + 1);
+                  idx = g_slist_position (box->children, li);
+                  box->children = g_slist_delete_link (box->children, li);
+                  box->children = g_slist_insert (box->children, child, idx + 1);
 
                   goto restart_allocation;
                 }
@@ -632,7 +632,7 @@ systray_box_add (GtkContainer *container,
   panel_return_if_fail (GTK_IS_WIDGET (child));
   panel_return_if_fail (gtk_widget_get_parent (child) == NULL);
 
-  box->childeren = g_slist_insert_sorted_with_data (box->childeren, child,
+  box->children = g_slist_insert_sorted_with_data (box->children, child,
                                                     systray_box_compare_function,
                                                     box);
 
@@ -651,13 +651,13 @@ systray_box_remove (GtkContainer *container,
   GSList     *li;
 
   /* search the child */
-  li = g_slist_find (box->childeren, child);
+  li = g_slist_find (box->children, child);
   if (G_LIKELY (li != NULL))
     {
       panel_assert (GTK_WIDGET (li->data) == child);
 
       /* unparent widget */
-      box->childeren = g_slist_remove_link (box->childeren, li);
+      box->children = g_slist_remove_link (box->children, li);
       gtk_widget_unparent (child);
 
       /* resize, so we update has-hidden */
@@ -676,8 +676,8 @@ systray_box_forall (GtkContainer *container,
   SystrayBox *box = XFCE_SYSTRAY_BOX (container);
   GSList     *li, *lnext;
 
-  /* run callback for all childeren */
-  for (li = box->childeren; li != NULL; li = lnext)
+  /* run callback for all children */
+  for (li = box->children; li != NULL; li = lnext)
     {
       lnext = li->next;
       (*callback) (GTK_WIDGET (li->data), callback_data);
@@ -764,7 +764,7 @@ systray_box_set_orientation (SystrayBox     *box,
     {
       box->horizontal = horizontal;
 
-      if (box->childeren != NULL)
+      if (box->children != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }
@@ -783,7 +783,7 @@ systray_box_set_size_max (SystrayBox *box,
     {
       box->size_max = size_max;
 
-      if (box->childeren != NULL)
+      if (box->children != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }
@@ -810,7 +810,7 @@ systray_box_set_size_alloc (SystrayBox *box,
     {
       box->size_alloc = size_alloc;
 
-      if (box->childeren != NULL)
+      if (box->children != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }
@@ -827,7 +827,7 @@ systray_box_set_show_hidden (SystrayBox *box,
     {
       box->show_hidden = show_hidden;
 
-      if (box->childeren != NULL)
+      if (box->children != NULL)
         gtk_widget_queue_resize (GTK_WIDGET (box));
     }
 }
@@ -858,7 +858,7 @@ systray_box_update (SystrayBox *box,
   for (li = names_ordered, i = 0; li != NULL; li = li->next, i++)
     g_hash_table_replace (box->names_ordered, g_strdup (li->data), GINT_TO_POINTER (i));
 
-  box->childeren = g_slist_sort_with_data (box->childeren,
+  box->children = g_slist_sort_with_data (box->children,
                                            systray_box_compare_function,
                                            box);
 
