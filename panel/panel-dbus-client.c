@@ -255,11 +255,10 @@ panel_dbus_client_plugin_event (const gchar  *plugin_event,
   result = xfce_panel_exported_service_call_plugin_event_sync (dbus_proxy,
                                                                tokens[PLUGIN_NAME],
                                                                tokens[NAME],
-                                                               variant,
+                                                               g_variant_new_variant(variant),
                                                                return_succeed,
                                                                NULL,
                                                                error);
-  g_variant_unref (variant);
 out:
   g_strfreev (tokens);
   g_object_unref (G_OBJECT (dbus_proxy));
