@@ -277,7 +277,7 @@ main (gint argc, gchar **argv)
   else if (opt_preferences >= 0)
     {
       /* send a signal to the running instance to show the preferences dialog */
-      succeed = panel_dbus_client_display_preferences_dialog (opt_preferences, opt_socket_id, &error);
+      succeed = panel_dbus_client_display_preferences_dialog (opt_preferences, &error);
       goto dbus_return;
     }
   else if (opt_add_items >= 0)

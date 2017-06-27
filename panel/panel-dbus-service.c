@@ -49,7 +49,6 @@ static void      panel_dbus_service_plugin_event_result        (XfcePanelPluginP
 static gboolean  panel_dbus_service_display_preferences_dialog (XfcePanelExportedService *skeleton,
                                                                 GDBusMethodInvocation    *invocation,
                                                                 guint                     active,
-                                                                const gchar              *socket_id,
                                                                 PanelDBusService         *service);
 static gboolean  panel_dbus_service_display_items_dialog       (XfcePanelExportedService *skeleton,
                                                                 GDBusMethodInvocation    *invocation,
@@ -197,7 +196,6 @@ static gboolean
 panel_dbus_service_display_preferences_dialog (XfcePanelExportedService *skeleton,
                                                GDBusMethodInvocation    *invocation,
                                                guint                     active,
-                                               const gchar              *socket_id,
                                                PanelDBusService         *service)
 {
   panel_return_val_if_fail (PANEL_IS_DBUS_SERVICE (service), FALSE);

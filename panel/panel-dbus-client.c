@@ -64,7 +64,6 @@ panel_dbus_client_get_proxy (GError **error)
 
 gboolean
 panel_dbus_client_display_preferences_dialog (guint         active,
-                                              const gchar  *socket_id,
                                               GError      **error)
 {
   XfcePanelExportedService *dbus_proxy;
@@ -78,7 +77,6 @@ panel_dbus_client_display_preferences_dialog (guint         active,
 
   result = xfce_panel_exported_service_call_display_preferences_dialog_sync (dbus_proxy,
                                                                              active,
-                                                                             socket_id,
                                                                              NULL,
                                                                              error);
 
