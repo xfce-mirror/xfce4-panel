@@ -142,6 +142,7 @@ panel_dbus_client_add_new_item (const gchar  *plugin_name,
 
   XfcePanelExportedService *dbus_proxy;
   gboolean                  result;
+  const gchar              *empty_arguments[] = {"", NULL};
 
   panel_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -149,10 +150,16 @@ panel_dbus_client_add_new_item (const gchar  *plugin_name,
   if (G_UNLIKELY (dbus_proxy == NULL))
     return FALSE;
 
-  result = xfce_panel_exported_service_call_add_new_item_sync (dbus_proxy, plugin_name,
-                                                               (const gchar **) arguments,
-                                                               NULL,
-                                                               error);
+  if (arguments != NULL && *arguments != NULL)
+    result = xfce_panel_exported_service_call_add_new_item_sync (dbus_proxy, plugin_name,
+                                                                 (const gchar **) arguments,
+                                                                 NULL,
+                                                                 error);
+  else
+    result = xfce_panel_exported_service_call_add_new_item_sync (dbus_proxy, plugin_name,
+                                                                 empty_arguments,
+                                                                 NULL,
+                                                                 error);
 
   g_object_unref (G_OBJECT (dbus_proxy));
 
