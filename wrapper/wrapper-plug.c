@@ -133,6 +133,8 @@ wrapper_plug_init (WrapperPlug *plug)
   gtk_style_context_add_class (context, "panel");
   gtk_style_context_add_class (context, "xfce4-panel");
 #endif
+
+  gtk_drag_dest_unset (GTK_WIDGET (plug));
 }
 
 
