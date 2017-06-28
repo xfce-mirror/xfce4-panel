@@ -322,7 +322,7 @@ panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
 
   /* send array to the wrapper */
   g_dbus_connection_emit_signal (wrapper->connection,
-                                 "org.xfce.Panel",
+                                 NULL,
                                  g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (wrapper->skeleton)),
                                  "org.xfce.Panel.Wrapper",
                                  "Set",
@@ -339,6 +339,7 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
                                             guint               *handle)
 {
   PanelPluginExternalWrapper  *wrapper;
+  GVariant                    *variant;
   static guint                 handle_counter = 0;
 
   panel_return_val_if_fail (PANEL_IS_PLUGIN_EXTERNAL_WRAPPER (external), TRUE);
@@ -351,13 +352,25 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
     handle_counter = 0;
   *handle = ++handle_counter;
 
+  if (value == NULL)
+    variant = g_variant_new_byte ('\0');
+  else
+    variant = panel_plugin_external_wrapper_gvalue_prop_to_gvariant (value);
+
+  if (G_UNLIKELY (variant == NULL))
+    {
+      g_warning ("Failed to convert gvalue to gvariant for remote event signal");
+      variant = g_variant_new_byte ('\0');
+    }
+
   g_dbus_connection_emit_signal (wrapper->connection,
-                                 "org.xfce.Panel",
+                                 NULL,
                                  g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (wrapper->skeleton)),
                                  "org.xfce.Panel.Wrapper",
                                  "RemoteEvent",
                                  g_variant_new ("(svu)",
                                                 name,
+                                                g_variant_new_variant (variant),
                                                 g_variant_new_byte('\0'),
                                                 *handle),
                                  NULL);

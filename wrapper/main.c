@@ -63,7 +63,7 @@ wrapper_gproxy_set (XfcePanelPluginProvider *provider,
   XfcePanelPluginProviderPropType type;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
-  panel_return_if_fail (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("a(uv)")));
+  panel_return_if_fail (g_variant_is_of_type (parameters, G_VARIANT_TYPE_TUPLE));
 
   g_variant_iter_init (&iter, parameters);
 
