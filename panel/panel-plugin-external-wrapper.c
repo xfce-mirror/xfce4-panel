@@ -353,13 +353,13 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
   *handle = ++handle_counter;
 
   if (value == NULL)
-    variant = g_variant_new_byte ('\0');
+    variant = g_variant_new_variant (g_variant_new_byte ('\0'));
   else if (G_VALUE_TYPE(value) == G_TYPE_VARIANT)
-    variant = g_dbus_gvalue_to_gvariant (value, G_VARIANT_TYPE_VARIANT);
+    variant = g_variant_get_variant(g_value_get_variant (value));
   else
     {
       g_warning ("Unexpected value of type: %s", G_VALUE_TYPE_NAME(value));
-      variant = g_variant_new_byte ('\0');
+      variant = g_variant_new_variant (g_variant_new_byte ('\0'));
     }
 
   g_dbus_connection_emit_signal (wrapper->connection,
@@ -369,8 +369,7 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
                                  "RemoteEvent",
                                  g_variant_new ("(svu)",
                                                 name,
-                                                g_variant_new_variant (variant),
-                                                g_variant_new_byte('\0'),
+                                                variant,
                                                 *handle),
                                  NULL);
 
