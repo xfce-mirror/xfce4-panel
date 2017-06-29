@@ -51,7 +51,7 @@
 #include <panel/panel-dbus-client.h>
 #include <panel/panel-preferences-dialog.h>
 
-
+static PanelApplication *application = NULL;
 
 static gint       opt_preferences = -1;
 static gint       opt_add_items = -1;
@@ -197,21 +197,34 @@ panel_debug_notify_proxy (void)
     }
 }
 
+
+
 static void
 panel_dbus_name_lost (GDBusConnection *connection,
                       const gchar     *name,
-                      gpointer         user_data) {
-
+                      gpointer         user_data)
+{
   g_critical (_("Name %s lost on the message dbus, exiting."), name);
   gtk_main_quit ();
 }
+
+
+
+static void
+panel_dbus_name_acquired (GDBusConnection *connection,
+                          const gchar     *name,
+                          gpointer         user_data)
+{
+  application = panel_application_get ();
+  panel_application_load (application, opt_disable_wm_check);
+}
+
 
 
 gint
 main (gint argc, gchar **argv)
 {
   GOptionContext   *context;
-  PanelApplication *application;
   GError           *error = NULL;
   PanelDBusService *dbus_service;
   gboolean          succeed = FALSE;
@@ -324,7 +337,7 @@ main (gint argc, gchar **argv)
                   PANEL_DBUS_NAME,
                   G_BUS_NAME_OWNER_FLAGS_NONE,
                   NULL,
-                  NULL,
+                  panel_dbus_name_acquired,
                   panel_dbus_name_lost,
                   NULL, NULL);
 
@@ -359,9 +372,6 @@ main (gint argc, gchar **argv)
   /* set EWMH source indication */
   wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
 
-  application = panel_application_get ();
-  panel_application_load (application, opt_disable_wm_check);
-
   /* open dialog if we started from launch_panel */
   if (opt_preferences >= 0)
     panel_preferences_dialog_show_from_id (opt_preferences, opt_socket_id);
@@ -371,10 +381,15 @@ main (gint argc, gchar **argv)
   /* make sure there are no incomming events when we close */
   g_object_unref (G_OBJECT (dbus_service));
 
-  /* destroy all the opened dialogs */
-  panel_application_destroy_dialogs (application);
+  /* Application is set on name acquired, otherwise it is NULL */
+  if (application)
+    {
+      /* destroy all the opened dialogs */
+      panel_application_destroy_dialogs (application);
 
-  g_object_unref (G_OBJECT (application));
+      g_object_unref (G_OBJECT (application));
+    }
+
   g_object_unref (G_OBJECT (sm_client));
 
   if (panel_dbus_service_get_restart ())
