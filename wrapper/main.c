@@ -198,7 +198,7 @@ wrapper_gproxy_remote_event (XfcePanelPluginProvider *provider,
 
   if (G_LIKELY (g_variant_is_of_type (parameters, G_VARIANT_TYPE("(svu)"))))
     {
-      g_variant_get (parameters, "&sv&u", &name, &variant, &handle);
+      g_variant_get (parameters, "&svu", &name, &variant, &handle);
       if ( g_variant_is_of_type (variant, G_VARIANT_TYPE_BYTE) &&
            g_variant_get_byte (variant) == '\0')
         {

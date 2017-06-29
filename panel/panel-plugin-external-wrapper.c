@@ -354,12 +354,11 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
 
   if (value == NULL)
     variant = g_variant_new_byte ('\0');
+  else if (G_VALUE_TYPE(value) == G_TYPE_VARIANT)
+    variant = g_dbus_gvalue_to_gvariant (value, G_VARIANT_TYPE_VARIANT);
   else
-    variant = panel_plugin_external_wrapper_gvalue_prop_to_gvariant (value);
-
-  if (G_UNLIKELY (variant == NULL))
     {
-      g_warning ("Failed to convert gvalue to gvariant for remote event signal");
+      g_warning ("Unexpected value of type: %s", G_VALUE_TYPE_NAME(value));
       variant = g_variant_new_byte ('\0');
     }
 
