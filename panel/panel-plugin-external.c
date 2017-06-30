@@ -432,8 +432,8 @@ panel_plugin_external_child_ask_restart_dialog (GtkWindow   *parent,
                                             "the last %d seconds. If you press Execute the panel will try to restart "
                                             "the plugin otherwise it will be permanently removed from the panel."),
                                             PANEL_PLUGIN_AUTO_RESTART);
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog), "system-run", GTK_RESPONSE_OK,
-                          "list-remove", GTK_RESPONSE_CLOSE, NULL);
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog), _("Execute"), GTK_RESPONSE_OK,
+                          _("Remove"), GTK_RESPONSE_CLOSE, NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
