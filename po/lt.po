@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-22 00:30+0200\n"
-"PO-Revision-Date: 2017-06-22 18:34+0000\n"
+"PO-Revision-Date: 2017-07-01 10:29+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce4-panel/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -650,23 +650,23 @@ msgstr "Kadangi nustatymų saugojimui skydelis perkeltas į naują sistemą, jis
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr "Žemiau pasirinkite pirmojo užkrovimo, norimą diegimą."
+msgstr "Žemiau pasirinkite norimą pirmojo paleidimo sąranką."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr "Atkelti seną sąranką"
+msgstr "Perkelti senąją konfigūraciją"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "Atkelti seną 4.6 sąranką į Xfconf"
+msgstr "Perkelti senąją 4.6 konfigūraciją į Xfconf"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
-msgstr "Naudoti numatytąją sąranką"
+msgstr "Naudoti numatytąją konfigūraciją"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr "Įkelti numatytąją sąranką"
+msgstr "Įkelti numatytąją konfigūraciją"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
@@ -678,19 +678,19 @@ msgstr "Pradėti su vienu tuščiu skydeliu"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "Nepavyko atkelti senos skydelio sąrankos"
+msgstr "Nepavyko perkelti senosios skydelio konfigūracijos"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr "Nepavyko įkelti numatytos sąrankos"
+msgstr "Nepavyko įkelti numatytosios konfigūracijos"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "Skydelio konfigūracijai reikia migravimo..."
+msgstr "Skydelio konfigūracijai reikia perkėlimo..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "Nepavyko atkelti senos skydelio sąrankos"
+msgstr "Nepavyko perkelti senosios skydelio konfigūracijos"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -777,20 +777,20 @@ msgstr "Už_rakinti ekraną"
 
 #: ../plugins/actions/actions.c:179
 msgid "Hibernate"
-msgstr "Sustabdyti"
+msgstr "Užmigdyti"
 
 #: ../plugins/actions/actions.c:180
 msgid "_Hibernate"
-msgstr "S_ustabdyti"
+msgstr "Už_migdyti"
 
 #: ../plugins/actions/actions.c:181
 msgid "Do you want to suspend to disk?"
-msgstr "Ar norite užlaikyti diske (užmigdyti)?"
+msgstr "Ar norite pristabdyti į diską (užmigdyti)?"
 
 #: ../plugins/actions/actions.c:182
 #, c-format
 msgid "Hibernating computer in %d seconds."
-msgstr "Kompiuteris bus sustabdytas po %d sekundžių."
+msgstr "Kompiuteris bus užmigdytas po %d sekundžių."
 
 #: ../plugins/actions/actions.c:187
 msgid "Suspend"
@@ -798,11 +798,11 @@ msgstr "Pristabdyti"
 
 #: ../plugins/actions/actions.c:188
 msgid "Sus_pend"
-msgstr "Sus_tabdyti"
+msgstr "Pris_tabdyti"
 
 #: ../plugins/actions/actions.c:189
 msgid "Do you want to suspend to RAM?"
-msgstr "Ar norite užlaikyti atmintyje (pristabdyti)?"
+msgstr "Ar norite pristabdyti į RAM (pristabdyti)?"
 
 #: ../plugins/actions/actions.c:190
 #, c-format
@@ -860,7 +860,7 @@ msgstr "Vardenis Pavardenis"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out, lock or other system actions"
-msgstr "Atsijungti, užrakinti arba kiti sistemos veiksmai"
+msgstr "Atsijungimas, užrakinimas ar kiti sistemos veiksmai"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:1
@@ -882,7 +882,7 @@ msgstr "_Rodyti mygtuko antraštę"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Show application d_escription in tooltip"
-msgstr "Paaiškinime rodyti programos _aprašymą"
+msgstr "Paaiškinime rodyti programos _aprašą"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "Show ic_ons in menu"
@@ -890,13 +890,13 @@ msgstr "Meniu rodyti _piktogramas"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Show generic application n_ames"
-msgstr "Rodyti pilnus programų _pavadinimus"
+msgstr "Rodyti bendrinius programų _pavadinimus"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Pasirinkite šį parametrą, norėdami pamatyti bendrinį programos vardą meniu, pavyzdžiui „Failų tvarkytuvė“, o ne „Thunar“"
+msgstr "Pasirinkite šį parametrą, norėdami meniu matyti bendrinį programos pavadinimą, pavyzdžiui „Failų tvarkytuvė“, o ne „Thunar“"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -1043,7 +1043,7 @@ msgstr "Laiko _juosta:"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "Time and Date _Settings..."
-msgstr "Laiko ir datos _nustatymai"
+msgstr "Laiko ir datos _nustatymai..."
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time Settings"
@@ -1072,11 +1072,11 @@ msgstr "_Rodyti AM/PM"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Fl_ash time separators"
-msgstr "Šviečiantys _laiko skirtukai"
+msgstr "Blykčiojantys _laiko skirtukai"
 
 #: ../plugins/clock/clock-dialog.glade.h:18
 msgid "24-_hour clock"
-msgstr "24-_valandų laikrodis"
+msgstr "24 _valandų laikrodis"
 
 #: ../plugins/clock/clock-dialog.glade.h:19
 msgid "True _binary clock"
