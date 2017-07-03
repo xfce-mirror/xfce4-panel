@@ -305,6 +305,7 @@ panel_dbus_service_plugin_event (XfcePanelExportedService *skeleton,
    * plugins returns TRUE in this remote-event handler */
   factory = panel_module_factory_get ();
   plugins = panel_module_factory_get_plugins (factory, plugin_name);
+  variant = g_variant_get_variant (variant);
 
   g_dbus_gvariant_to_gvalue (variant, &value);
 

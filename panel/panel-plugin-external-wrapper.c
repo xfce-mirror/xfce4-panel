@@ -354,11 +354,11 @@ panel_plugin_external_wrapper_remote_event (PanelPluginExternal *external,
 
   if (value == NULL)
     variant = g_variant_new_variant (g_variant_new_byte ('\0'));
-  else if (G_VALUE_TYPE(value) == G_TYPE_VARIANT)
-    variant = g_variant_get_variant(g_value_get_variant (value));
   else
+    variant = panel_plugin_external_wrapper_gvalue_prop_to_gvariant (value);
+  if (variant == NULL)
     {
-      g_warning ("Unexpected value of type: %s", G_VALUE_TYPE_NAME(value));
+      g_warning ("Failed to convert value from gvalue:%s to gvariant", G_VALUE_TYPE_NAME(value));
       variant = g_variant_new_variant (g_variant_new_byte ('\0'));
     }
 
