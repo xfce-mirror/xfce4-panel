@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-22 00:30+0200\n"
-"PO-Revision-Date: 2017-06-22 05:45+0000\n"
+"POT-Creation-Date: 2017-07-04 00:30+0200\n"
+"PO-Revision-Date: 2017-07-04 05:53+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/xfce/xfce4-panel/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +61,7 @@ msgid "Cancel"
 msgstr "Отказ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
+#: ../panel/panel-plugin-external.c:436
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
@@ -106,116 +107,121 @@ msgstr "_Помощ"
 msgid "About"
 msgstr "Относно"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Показване на прозореца „Настройки на панела“"
 
-#: ../panel/main.c:80 ../panel/main.c:81
+#: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
 msgstr "НОМЕР НА ПАНЕЛ"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
 msgstr "Показване на прозореца „Добавяне на нови елементи“"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Save the panel configuration"
 msgstr "Запазване на конфигурацията на панела"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
 msgstr "Добавяне на нова добавка в панела"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "PLUGIN-NAME"
 msgstr "ИМЕ НА ДОБАВКА"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Restart the running panel instance"
 msgstr "Рестартиране на текущо стартираният панел"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Quit the running panel instance"
 msgstr "Изключване на текущо стартираният панел"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
 msgstr "Не изчаквай мениджъра на прозорци при стартиране"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Показване на информация за версията и изход"
 
+#: ../panel/main.c:207
+#, c-format
+msgid "Name %s lost on the message dbus, exiting."
+msgstr "Името %s е изгубено от съобщението на dbus, излизане."
+
 #. parse context options
-#: ../panel/main.c:236
+#: ../panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "[ПАРАМЕТРИ...]"
 
-#: ../panel/main.c:243
+#: ../panel/main.c:265
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Напишете „%s --help“ за показване на потребителското ръководство."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:284
 msgid "The Xfce development team. All rights reserved."
 msgstr "Екипът по разработката на Xfce. Всички права са запазени."
 
-#: ../panel/main.c:263
+#: ../panel/main.c:285
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Моля, докладвайте грешки на <%s>."
 
-#: ../panel/main.c:321
+#: ../panel/main.c:351
 msgid "There is already a running instance"
 msgstr "Вече има стартирано копие"
 
 #. spawn ourselfs again
-#: ../panel/main.c:366
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "Рестартиране..."
 
-#: ../panel/main.c:381
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "Не може да бъде показан диалогът с настройките"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "Не може да бъде показан диалогът за добавяне на нови елементи"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "Не могат да бъдат запазени настройките на панела"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "Неуспешно добавяне на добавка в панела"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "Не може да бъде рестартиран панела"
 
-#: ../panel/main.c:391
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "Не може да бъде изключен панела"
 
-#: ../panel/main.c:393
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "Не може да бъде изпратено съобщение на D-Bus"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Изпълнение"
 
-#: ../panel/main.c:404
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Искате ли да стартирате панела? Ако искате, запазете сесията преди да излезете. Панелът ще стартира автоматично при следващото влизане."
 
-#: ../panel/main.c:407 ../panel/main.c:421
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Не е намерено стартирано копие на %s"
@@ -260,12 +266,12 @@ msgstr "Наистина ли искате да изключите панела?
 msgid "Failed to execute command \"%s\""
 msgstr "Не може да бъде стартирана команда „%s“"
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:216
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Неправилен синтаксис на събитие в добавка. Използвайте ИМЕ НА ДОБАВКА:ТИП[:ТИП:СТОЙНОСТ]."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:246
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -582,11 +588,13 @@ msgstr "Външен вид"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Move currently selected item up by one row"
 msgstr "Преместване на избраният елемент с един ред нагоре"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item down by one row"
 msgstr "Преместване на избраният елемент с един ред надолу"
 
@@ -735,127 +743,127 @@ msgstr "Действие"
 msgid "_Actions"
 msgstr "_Действия"
 
-#: ../plugins/actions/actions.c:150
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Изход"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "Изход"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "Сигурен ли сте, че искате да излезете?"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Излизане след %d секунди."
 
-#: ../plugins/actions/actions.c:158
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Излизане..."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "Излизане..."
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Смяна на потребител"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "Смяна на потребител..."
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Заключване на екрана"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
 msgstr "Заключване на екрана"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Дълбоко приспиване"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "Дълбоко приспиване"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "Искате ли да приспите компютъра върху диска?"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Дълбоко приспиване на компютъра след %d секунди."
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Приспиване"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
 msgstr "Приспиване"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
 msgstr "Искате ли да приспите компютъра върху RAM паметта?"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Приспиване на компютъра след %d секунди."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Рестартиране"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "Рестартиране"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "Сигурен ли сте, че искате да рестартирате компютъра?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Рестартиране на компютъра след %d секунди."
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Изключване"
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
 msgstr "Изключване"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "Сигурен ли сте, че искате да изключите компютъра?"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Компютърът ще бъде изключен след %d секунди."
 
-#: ../plugins/actions/actions.c:593
+#: ../plugins/actions/actions.c:594
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Разделител"
 
-#: ../plugins/actions/actions.c:955
+#: ../plugins/actions/actions.c:992
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Неуспешно изпълнение на действие „%s“"
 
-#: ../plugins/actions/actions.c:1122
+#: ../plugins/actions/actions.c:1159
 msgid "John Doe"
 msgstr "Джон Доу"
 
@@ -950,7 +958,7 @@ msgid "OK"
 msgstr "ОК"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Неуспех при изпълнението на команда „%s“."
@@ -1422,11 +1430,11 @@ msgstr "Филтриране"
 msgid "Open launcher menu"
 msgstr "Отваряне на стартер на меню"
 
-#: ../plugins/launcher/launcher.c:1569
+#: ../plugins/launcher/launcher.c:1580
 msgid "Unnamed Item"
 msgstr "Елемент без име"
 
-#: ../plugins/launcher/launcher.c:1723
+#: ../plugins/launcher/launcher.c:1734
 msgid "No items"
 msgstr "Няма елементи"
 
@@ -1624,26 +1632,26 @@ msgstr "Показване на работният плот"
 msgid "Hide all windows and show the desktop"
 msgstr "Скриване на всички прозорци и показване на работният плот"
 
-#: ../plugins/systray/systray.c:400
+#: ../plugins/systray/systray.c:428
 msgid "Unable to start the notification area"
 msgstr "Неуспех при стартиране на областта за уведомяване"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:869
+#: ../plugins/systray/systray.c:910
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Най-вероятно, друга програма е поела функцията на областта за уведомяване. Тази зона няма да бъде използвана."
 
-#: ../plugins/systray/systray.c:871
+#: ../plugins/systray/systray.c:912
 msgid "The notification area lost selection"
 msgstr "Областта за уведомяване изгуби селекцията си"
 
-#: ../plugins/systray/systray.c:1023
+#: ../plugins/systray/systray.c:1176
 msgid "Clear"
 msgstr "Изчистване"
 
-#: ../plugins/systray/systray.c:1024
+#: ../plugins/systray/systray.c:1177
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Наистина ли искате да изчистите списъка с познатите приложения?"
 
@@ -1660,11 +1668,11 @@ msgstr "Максимален размер на икона (в пискели):"
 msgid "Show _frame"
 msgstr "Показване на рамка"
 
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "C_lear Known Applications"
 msgstr "Изчистване на списъка с познатите приложения"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Known Applications"
 msgstr "Познати приложения"
 
