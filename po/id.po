@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-22 00:30+0200\n"
-"PO-Revision-Date: 2017-06-23 08:36+0000\n"
-"Last-Translator: Ardjuna <Asyura.x@gmail.com>\n"
+"POT-Creation-Date: 2017-07-04 00:30+0200\n"
+"PO-Revision-Date: 2017-07-06 07:15+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/xfce/xfce4-panel/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,6 +63,7 @@ msgid "Cancel"
 msgstr "Batal"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
+#: ../panel/panel-plugin-external.c:436
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
@@ -108,116 +109,121 @@ msgstr "_Bantuan"
 msgid "About"
 msgstr "Info Aplikasi"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Tampilkan dialog 'Konfigurasi Panel'"
 
-#: ../panel/main.c:80 ../panel/main.c:81
+#: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
 msgstr "NOMOR-PANEL"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
 msgstr "Tampilkan dialog 'Tambah Item Baru'"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Save the panel configuration"
 msgstr "Simpan konfigurasi panel"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
 msgstr "Tambah panel baru"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "PLUGIN-NAME"
 msgstr "NAMA-PLUGIN"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Restart the running panel instance"
 msgstr "Start ulang instansiasi panel"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Quit the running panel instance"
 msgstr "Keluar dari proses instansiasi panel"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
 msgstr "Jangan menunggu itu untuk suatu jendela manajer pada startup"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Cetak informasi versi lalu keluar"
 
+#: ../panel/main.c:207
+#, c-format
+msgid "Name %s lost on the message dbus, exiting."
+msgstr "Nama %s hilang pada pesan dbus, keluar."
+
 #. parse context options
-#: ../panel/main.c:236
+#: ../panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "[ARGUMEN...]"
 
-#: ../panel/main.c:243
+#: ../panel/main.c:265
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Ketik \"%s --help\" untuk bantuan penggunaan."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:284
 msgid "The Xfce development team. All rights reserved."
 msgstr "Tim pengembang Xfce. Hak cipta dilindungi undang-undang."
 
-#: ../panel/main.c:263
+#: ../panel/main.c:285
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Silakan laporkan kutu ke <%s>."
 
-#: ../panel/main.c:321
+#: ../panel/main.c:351
 msgid "There is already a running instance"
 msgstr "Telah ada baki area notifikasi yang berjalan di layar ini"
 
 #. spawn ourselfs again
-#: ../panel/main.c:366
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "Sedang memulai ulang..."
 
-#: ../panel/main.c:381
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "Gagal menampilkan jendela dialog 'Konfigurasi...'"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "Gagal menampilkan jendela dialog 'Tambah Item Baru'"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "Gagal menyimpan konfigurasi panel"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "Gagal menambahkan plugin ke panel"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "Gagal memulai ulang panel"
 
-#: ../panel/main.c:391
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "Gagal mematikan panel"
 
-#: ../panel/main.c:393
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "Gagal mengirim pesan D-Bus"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Eksekusi"
 
-#: ../panel/main.c:404
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Anda ingin menjalankan panel? Jika iya, pastikan anda menyimpan sesi saat keluar, sehingga panel secara otomatis dijalankan ketika lain kali anda masuk."
 
-#: ../panel/main.c:407 ../panel/main.c:421
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Tidak ada instansi %s berjalan yang ditemukan"
@@ -261,12 +267,12 @@ msgstr "Anda yakin anda ingin keluar panel?"
 msgid "Failed to execute command \"%s\""
 msgstr "Gagal menjalankan perintah \"%s\""
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:216
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Sintaks yang diberikan pada plugin tidak valid. Gunakan: PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:246
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -583,11 +589,13 @@ msgstr "_Tampilan"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Move currently selected item up by one row"
 msgstr "Pindahkan item terpilih ke atas sebanyak satu baris"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item down by one row"
 msgstr "Pindahkan item terpilih ke bawah sebanyak satu baris"
 
@@ -736,127 +744,127 @@ msgstr "Aksi"
 msgid "_Actions"
 msgstr "_Aksi"
 
-#: ../plugins/actions/actions.c:150
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Log Keluar"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "_Log Keluar"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "Anda yakin ingin menghapus keluar?"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Keluar dalam %d detik."
 
-#: ../plugins/actions/actions.c:158
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Log Keluar..."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "Log _Keluar..."
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Ganti Pengguna"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "_Ganti Pengguna"
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Kunci Layar"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
 msgstr "K_unci Layar"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "_Hibernasi"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "Anda yakin ingin suspensi ke cakram?"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Hibernasi komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Siaga"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
 msgstr "Sus_pensi"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
 msgstr "Anda ingin suspensi ke RAM?"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Suspensi komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Mulai Kembali"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "Start _Ulang"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "Anda yakin ingin menghidupkan ulang?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Menghidupkan ulang komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Matikan"
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
 msgstr "_Matikan"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "Anda yakin anda ingin mematikan?"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Mematikan komputer dalam %d detik."
 
-#: ../plugins/actions/actions.c:593
+#: ../plugins/actions/actions.c:594
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Pemisah"
 
-#: ../plugins/actions/actions.c:955
+#: ../plugins/actions/actions.c:992
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Gagal menjalankan aksi \"%s\""
 
-#: ../plugins/actions/actions.c:1122
+#: ../plugins/actions/actions.c:1159
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -951,7 +959,7 @@ msgid "OK"
 msgstr "OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Gagal mengeksekusi perintah \"%s\"."
@@ -994,7 +1002,7 @@ msgstr "Tampilkan opsi bantuan"
 #: ../plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%A %d %B %Y"
 
 #: ../plugins/clock/clock.c:177
 msgid "Week %V"
@@ -1114,7 +1122,7 @@ msgstr "Opsi Jam"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1423,11 +1431,11 @@ msgstr "Memfilter"
 msgid "Open launcher menu"
 msgstr "Buka peluncuran menu"
 
-#: ../plugins/launcher/launcher.c:1569
+#: ../plugins/launcher/launcher.c:1580
 msgid "Unnamed Item"
 msgstr "Item Tak Bernama"
 
-#: ../plugins/launcher/launcher.c:1723
+#: ../plugins/launcher/launcher.c:1734
 msgid "No items"
 msgstr "Tak ada item"
 
@@ -1625,26 +1633,26 @@ msgstr "Tampilkan Desktop"
 msgid "Hide all windows and show the desktop"
 msgstr "Sembunyikan semua jendela dan tampilkan desktop"
 
-#: ../plugins/systray/systray.c:400
+#: ../plugins/systray/systray.c:428
 msgid "Unable to start the notification area"
 msgstr "Tak dapat menjalankan area notifikasi"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:869
+#: ../plugins/systray/systray.c:910
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Kelihatannya widget lain mengambil alih fungsi area notifikasi. Area ini tidak akan digunakan."
 
-#: ../plugins/systray/systray.c:871
+#: ../plugins/systray/systray.c:912
 msgid "The notification area lost selection"
 msgstr "Area notifikasi kehilangan pilihan"
 
-#: ../plugins/systray/systray.c:1023
+#: ../plugins/systray/systray.c:1176
 msgid "Clear"
 msgstr "Bersihkan"
 
-#: ../plugins/systray/systray.c:1024
+#: ../plugins/systray/systray.c:1177
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Anda yakin ingin membersihkan senarai aplikasi yang diketahui?"
 
@@ -1661,11 +1669,11 @@ msgstr "_Maksimal ukuran ikon (px):"
 msgid "Show _frame"
 msgstr "Tampilkan _bingkai"
 
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "C_lear Known Applications"
 msgstr "Bersihkan Ap_likasi Yang Dikenal"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Known Applications"
 msgstr "Aplikasi Yang Dikenal"
 
