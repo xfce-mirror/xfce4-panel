@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-22 00:30+0200\n"
-"PO-Revision-Date: 2017-06-22 14:44+0000\n"
+"POT-Creation-Date: 2017-07-04 00:30+0200\n"
+"PO-Revision-Date: 2017-07-10 01:05+0000\n"
 "Last-Translator: 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce4-panel/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -64,6 +64,7 @@ msgid "Cancel"
 msgstr "취소"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
+#: ../panel/panel-plugin-external.c:436
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
@@ -109,116 +110,121 @@ msgstr "도움말(_H)"
 msgid "About"
 msgstr "소개"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "'패널 기본 설정' 대화상자 표시"
 
-#: ../panel/main.c:80 ../panel/main.c:81
+#: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
 msgstr "<패널-번호>"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
 msgstr "'새 항목 추가' 대화상자 표시"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Save the panel configuration"
 msgstr "패널 설정 저장하기"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
 msgstr "패널에 새 항목 추가"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "PLUGIN-NAME"
 msgstr "<플러그인-이름>"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Restart the running panel instance"
 msgstr "실행 중인 패널 인스턴스를 다시 시작"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Quit the running panel instance"
 msgstr "실행 중인 패널 인스턴스를 끝내기"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
 msgstr "시작시 창 관리자를 기다리지 않기"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "버전 정보를 출력하고 끝내기"
 
+#: ../panel/main.c:207
+#, c-format
+msgid "Name %s lost on the message dbus, exiting."
+msgstr "메시지 dbus에서 %s를 찾을 수 없습니다, 마무리하겠습니다."
+
 #. parse context options
-#: ../panel/main.c:236
+#: ../panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "<인자...>"
 
-#: ../panel/main.c:243
+#: ../panel/main.c:265
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "사용방법을 보려면 \"%s --help\"를 입력하십시오."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:284
 msgid "The Xfce development team. All rights reserved."
 msgstr "XFCE 개발 팀. All rights reserved."
 
-#: ../panel/main.c:263
+#: ../panel/main.c:285
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "<%s>(으)로 버그를 알려주십시오."
 
-#: ../panel/main.c:321
+#: ../panel/main.c:351
 msgid "There is already a running instance"
 msgstr "이미 실행 중인 인스턴스가 있습니다"
 
 #. spawn ourselfs again
-#: ../panel/main.c:366
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "다시 시작하는 중..."
 
-#: ../panel/main.c:381
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "기본 설정 대화상자 보여주기에 실패했습니다"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "새 항목 추가 대화상자를 보여주는데 실패했습니다"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "패널 설정 저장에 실패했습니다"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "패널 플러그인 추가에 실패했습니다"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "패널 다시 시작에 실패했습니다"
 
-#: ../panel/main.c:391
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "패널 끝내기에 실패했습니다"
 
-#: ../panel/main.c:393
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus 메시지를 보내는데 실패했습니다"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "실행"
 
-#: ../panel/main.c:404
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "패널을 시작하시렵니까? 패널을 시작 하면 로그아웃시 세션을 저장하는지 확인하여 다음 로그인시 패널이 자동으로 시작하도록 합니다."
 
-#: ../panel/main.c:407 ../panel/main.c:421
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "실행 중인 %s 인스턴스가 없습니다"
@@ -262,12 +268,12 @@ msgstr "정말 패널을 종료하시렵니까?"
 msgid "Failed to execute command \"%s\""
 msgstr "\"%s\" 명령을 실행하지 못 했습니다."
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:216
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "정의된 플러그인 이벤트 문법이 잘못되었습니다. PLUGIN-NAME:NAME[:TYPE:VALUE]를 사용합니다."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:246
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -584,11 +590,13 @@ msgstr "모양새(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Move currently selected item up by one row"
 msgstr "현재 선택한 목록을 한 줄 위로 옮기기"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item down by one row"
 msgstr "현재 선택한 목록을 한 줄 아래로 옮기기"
 
@@ -737,127 +745,127 @@ msgstr "동작"
 msgid "_Actions"
 msgstr "동작(_A)"
 
-#: ../plugins/actions/actions.c:150
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "로그아웃"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "로그아웃(_L)"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "정말로 로그아웃 하시렵니까?"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "%d초 후 로그아웃합니다."
 
-#: ../plugins/actions/actions.c:158
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "로그아웃..."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "로그아웃(_O)..."
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "사용자 전환"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "사용자 전환(_S)"
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "화면 잠금"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
 msgstr "화면 잠금(_K)"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "최대절전"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "최대절전(_H)"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "디스크를 대기 상태로 두시렵니까?"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "%d초 후 컴퓨터는 최대절전 상태가 됩니다."
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "대기"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
 msgstr "대기(_P)"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
 msgstr "RAM을 대기 상태로 두시렵니까?"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "%d초 후 컴퓨터는 대기 상태가 됩니다."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "다시 시작"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "다시 시작(_R)"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "정말로 다시 시작 하시렵니까?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "%d초 후 컴퓨터를 다시 시작합니다."
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "시스템 종료"
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
 msgstr "시스템 종료(_D)"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "정말로 컴퓨터를 끄시렵니까?"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "%d초 후 컴퓨터를 끕니다."
 
-#: ../plugins/actions/actions.c:593
+#: ../plugins/actions/actions.c:594
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "구분선"
 
-#: ../plugins/actions/actions.c:955
+#: ../plugins/actions/actions.c:992
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "\"%s\" 동작을 실행하는데 실패했습니다"
 
-#: ../plugins/actions/actions.c:1122
+#: ../plugins/actions/actions.c:1159
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -952,7 +960,7 @@ msgid "OK"
 msgstr "확인"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "\"%s\" 명령을 실행하는데 실패했습니다."
@@ -1424,11 +1432,11 @@ msgstr "필터링"
 msgid "Open launcher menu"
 msgstr "실행 아이콘 메뉴 열기"
 
-#: ../plugins/launcher/launcher.c:1569
+#: ../plugins/launcher/launcher.c:1580
 msgid "Unnamed Item"
 msgstr "이름 없는 항목"
 
-#: ../plugins/launcher/launcher.c:1723
+#: ../plugins/launcher/launcher.c:1734
 msgid "No items"
 msgstr "항목 없음"
 
@@ -1626,26 +1634,26 @@ msgstr "데스크톱 표시"
 msgid "Hide all windows and show the desktop"
 msgstr "모든 창을 숨기고 데스크톱 표시합니다"
 
-#: ../plugins/systray/systray.c:400
+#: ../plugins/systray/systray.c:428
 msgid "Unable to start the notification area"
 msgstr "알림 영역을 시작할 수 없습니다"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:869
+#: ../plugins/systray/systray.c:910
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용하지 않습니다."
 
-#: ../plugins/systray/systray.c:871
+#: ../plugins/systray/systray.c:912
 msgid "The notification area lost selection"
 msgstr "알림 영역이 선택을 잃었습니다"
 
-#: ../plugins/systray/systray.c:1023
+#: ../plugins/systray/systray.c:1176
 msgid "Clear"
 msgstr "정리"
 
-#: ../plugins/systray/systray.c:1024
+#: ../plugins/systray/systray.c:1177
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "알려진 프로그램의 목록을 정말 없애시렵니까?"
 
@@ -1662,11 +1670,11 @@ msgstr "최대 아이콘 크기(픽셀)(_M):"
 msgid "Show _frame"
 msgstr "틀 표시(_F)"
 
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "C_lear Known Applications"
 msgstr "알려진 프로그램 지우기(_L)"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Known Applications"
 msgstr "알려진 프로그램"
 
