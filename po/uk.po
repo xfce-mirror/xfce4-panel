@@ -6,13 +6,14 @@
 # Dmitry Nikitin <luckas_fb@mail.ru>, 2007-2008
 # dsafsadf <heneral@gmail.com>, 2017
 # Yarema aka Knedlyk <yupadmin@gmail.com>, 2013-2015,2017
+# zubr139, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-22 00:30+0200\n"
-"PO-Revision-Date: 2017-06-24 21:22+0000\n"
-"Last-Translator: dsafsadf <heneral@gmail.com>\n"
+"POT-Creation-Date: 2017-07-04 00:30+0200\n"
+"PO-Revision-Date: 2017-07-12 18:08+0000\n"
+"Last-Translator: zubr139\n"
 "Language-Team: Ukrainian (http://www.transifex.com/xfce/xfce4-panel/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,6 +61,7 @@ msgid "Cancel"
 msgstr "Скасувати"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
+#: ../panel/panel-plugin-external.c:436
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
@@ -105,116 +107,121 @@ msgstr "_Допомога"
 msgid "About"
 msgstr "Про"
 
-#: ../panel/main.c:80
+#: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Показати діалог 'Налаштування панелі'"
 
-#: ../panel/main.c:80 ../panel/main.c:81
+#: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
 msgstr "ПАНЕЛЬ-НОМЕР"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
 msgstr "Показати діалог 'Додати нові елементи'"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Save the panel configuration"
 msgstr "Зберегти конфігурацію панелі"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
 msgstr "Додати нове розширення до панелі"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "PLUGIN-NAME"
 msgstr "РОЗШИРЕННЯ-НАЗВА"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Restart the running panel instance"
 msgstr "Перезапустити діючі екземпляри панелі"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Quit the running panel instance"
 msgstr "Завершення запущених екземплярів панелі"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
 msgstr "Не очікувати на запуск менеджера вікон"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Надрукувати інформацію про версію і вийти"
 
+#: ../panel/main.c:207
+#, c-format
+msgid "Name %s lost on the message dbus, exiting."
+msgstr ""
+
 #. parse context options
-#: ../panel/main.c:236
+#: ../panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "[АРГУМЕНТИ...]"
 
-#: ../panel/main.c:243
+#: ../panel/main.c:265
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Наберіть \"%s --help\" для використання."
 
-#: ../panel/main.c:262
+#: ../panel/main.c:284
 msgid "The Xfce development team. All rights reserved."
 msgstr "Команда розробки Xfce. Всі права захищені."
 
-#: ../panel/main.c:263
+#: ../panel/main.c:285
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Сповістіть про помилку на <%s>."
 
-#: ../panel/main.c:321
+#: ../panel/main.c:351
 msgid "There is already a running instance"
 msgstr "Вже існує запущений екземпляр"
 
 #. spawn ourselfs again
-#: ../panel/main.c:366
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "Перезапуск..."
 
-#: ../panel/main.c:381
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "Не вдалось показати діалог налаштування"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "Не вдалось показати діалог додавання нових елементів"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "Не вдалось зберегти конфігурацію панелі"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "Не вдалось додати розширення до панелі"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "Не вдалось перезапустити панель"
 
-#: ../panel/main.c:391
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "Не вдалось вийти з панелі"
 
-#: ../panel/main.c:393
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "Не вдалось відіслати повідомлення D-Bus"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Виконати"
 
-#: ../panel/main.c:404
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Ви бажаєте запустити панель? Якщо так, то тоді переконайтеся, що Ви зберегли сесію при виході, щоб наступним разом при вході панель запускалася автоматично."
 
-#: ../panel/main.c:407 ../panel/main.c:421
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Не знайдено запущених екземплярів %s"
@@ -260,12 +267,12 @@ msgstr "Ви впевнені, що бажаєте закрити панель?"
 msgid "Failed to execute command \"%s\""
 msgstr "Не вдалось виконати команду \"%s\""
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:216
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Присвоєно неправильну подію плагіну. Використовуйте ПЛАГІН-НАЗВА:НАЗВА[:ТИП:ЗНАЧЕННЯ]."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:246
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -582,11 +589,13 @@ msgstr "Зовніш_ній вигляд"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Move currently selected item up by one row"
 msgstr "Перемістити поточний виділений елемент вверх на один рядок"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item down by one row"
 msgstr "Перемістити поточний виділений елемент вниз на один рядок"
 
@@ -735,127 +744,127 @@ msgstr "Дія"
 msgid "_Actions"
 msgstr "_Дії"
 
-#: ../plugins/actions/actions.c:150
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Вийти з сеансу"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "_Вийти з сеансу"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "Дійсно бажаєте вийти?"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Вихід через %d секунд."
 
-#: ../plugins/actions/actions.c:158
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Вийти з сеансу..."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "Вийти з _сеансу..."
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Переключити користувача"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "_Переключити користувача"
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Блокувати екран"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
 msgstr "_Блокувати екран"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "_Приспати"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "Ви бажаєте призупинити на диск?"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Комп'ютер засне через %d секунд."
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
 msgstr "При_зупинити"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
 msgstr "Ви бажаєте призупинити на RAM?"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Комп'ютер призупиниться через %d секунд."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Перезапустити"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "_Перезапустити"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "Дійсно бажаєте перезавантажити?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Перезавантаження комп'ютера через %d секунд."
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Вимкнути комп'ютер"
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
 msgstr "_Вимкнути комп'ютер"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "Ви впевнені, що бажаєте виключити?"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Вимкнення комп'ютера за %d секунд."
 
-#: ../plugins/actions/actions.c:593
+#: ../plugins/actions/actions.c:594
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Розділювач"
 
-#: ../plugins/actions/actions.c:955
+#: ../plugins/actions/actions.c:992
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Не вдається запустити дію \"%s\""
 
-#: ../plugins/actions/actions.c:1122
+#: ../plugins/actions/actions.c:1159
 msgid "John Doe"
 msgstr "Джон До"
 
@@ -950,7 +959,7 @@ msgid "OK"
 msgstr "Гаразд"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2313
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не вдається виконати команду \"%s\"."
@@ -1113,7 +1122,7 @@ msgstr "Параметри годинника"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1422,11 +1431,11 @@ msgstr "Фільтрування"
 msgid "Open launcher menu"
 msgstr "Відкрити меню пускача"
 
-#: ../plugins/launcher/launcher.c:1569
+#: ../plugins/launcher/launcher.c:1580
 msgid "Unnamed Item"
 msgstr "Неназваний елемент"
 
-#: ../plugins/launcher/launcher.c:1723
+#: ../plugins/launcher/launcher.c:1734
 msgid "No items"
 msgstr "Немає елементів"
 
@@ -1624,26 +1633,26 @@ msgstr "Показати Стільницю"
 msgid "Hide all windows and show the desktop"
 msgstr "Сховати всі вікна та показати робочу стільницю"
 
-#: ../plugins/systray/systray.c:400
+#: ../plugins/systray/systray.c:428
 msgid "Unable to start the notification area"
 msgstr "Не можу запустити область повідомлень"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:869
+#: ../plugins/systray/systray.c:910
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Швидше за все інший віджет взяв на себе цю функцію в області повідомлень. Ця область неможливо буде використовувати."
 
-#: ../plugins/systray/systray.c:871
+#: ../plugins/systray/systray.c:912
 msgid "The notification area lost selection"
 msgstr "Область повідомлень втратила виділення"
 
-#: ../plugins/systray/systray.c:1023
+#: ../plugins/systray/systray.c:1176
 msgid "Clear"
 msgstr "Очистити"
 
-#: ../plugins/systray/systray.c:1024
+#: ../plugins/systray/systray.c:1177
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ви впевнені, що бажаєте очистити список відомих програм?"
 
@@ -1660,11 +1669,11 @@ msgstr "_Максимальний розмір значка (px):"
 msgid "Show _frame"
 msgstr "Показувати _рамку"
 
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "C_lear Known Applications"
 msgstr "Очистити ві_домі програми"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Known Applications"
 msgstr "Відомі програми"
 
