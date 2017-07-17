@@ -267,6 +267,15 @@ panel_plugin_external_wrapper_gvalue_prop_to_gvariant (const GValue *value)
     case G_TYPE_INT:
       type = G_VARIANT_TYPE_INT32;
       break;
+    case G_TYPE_INT64:
+      type = G_VARIANT_TYPE_INT64;
+      break;
+    case G_TYPE_UINT:
+      type = G_VARIANT_TYPE_UINT32;
+      break;
+    case G_TYPE_UINT64:
+      type = G_VARIANT_TYPE_UINT64;
+      break;
     case G_TYPE_BOOLEAN:
       type = G_VARIANT_TYPE_BOOLEAN;
       break;
