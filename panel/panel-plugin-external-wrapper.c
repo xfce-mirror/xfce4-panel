@@ -286,7 +286,7 @@ panel_plugin_external_wrapper_gvalue_prop_to_gvariant (const GValue *value)
       type = G_VARIANT_TYPE_STRING;
       break;
     default:
-      panel_assert_not_reached();
+      g_warn_if_reached ();
     }
 
   if (type)
