@@ -285,6 +285,8 @@ panel_plugin_external_wrapper_gvalue_prop_to_gvariant (const GValue *value)
     case G_TYPE_STRING:
       type = G_VARIANT_TYPE_STRING;
       break;
+    /* only throw a warning (instead of an assertion) here as otherwise invalid
+       types sent to the panel via dbus would let the panel crash */
     default:
       g_warn_if_reached ();
     }
@@ -326,6 +328,7 @@ panel_plugin_external_wrapper_set_properties (PanelPluginExternal *external,
       else
         {
           g_warning ("Failed to convert wrapper property from gvalue:%s to gvariant", G_VALUE_TYPE_NAME(&property->value));
+          return;
         }
     }
 
