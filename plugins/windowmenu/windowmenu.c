@@ -1168,7 +1168,8 @@ window_menu_plugin_menu_new (WindowMenuPlugin *plugin)
   italic = pango_font_description_from_string ("italic");
   bold = pango_font_description_from_string ("bold");
 
-  w = h = GTK_ICON_SIZE_MENU;
+  if (!gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h))
+    w = h = 16;
 
   menu = gtk_menu_new ();
   g_signal_connect (G_OBJECT (menu), "key-press-event",
