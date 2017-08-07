@@ -174,6 +174,11 @@ dnl ***************************************
 GOBJECT_INTROSPECTION_CHECK([1.30.0])
 
 dnl *************************
+dnl *** Check for vapigen ***
+dnl *************************
+VAPIGEN_CHECK()
+
+dnl *************************
 dnl *** Check for gtk-doc ***
 dnl *************************
 GTK_DOC_CHECK([1.9])
