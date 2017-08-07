@@ -5,6 +5,7 @@ AM_CPPFLAGS = \
 	-DG_LOG_DOMAIN=\"libxfce4panel\" \
 	-DLIBXFCE4PANEL_COMPILATION \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
+	-Wno-expansion-to-defined \
 	$(PLATFORM_CPPFLAGS)
 
 lib_LTLIBRARIES = \
