@@ -176,6 +176,7 @@ INTROSPECTION_GIRS =
 INTROSPECTION_SCANNER_ENV = CC="$(CC)"
 INTROSPECTION_SCANNER_ARGS = \
 	--add-include-path=$(srcdir) \
+	--add-include-path=$(prefix)/share/gir-1.0 \
 	--warn-all \
 	--identifier-prefix=Xfce \
 	--identifier-prefix=xfce \
@@ -184,6 +185,7 @@ INTROSPECTION_SCANNER_ARGS = \
 	--identifier-prefix=Plugin
 INTROSPECTION_COMPILER_ARGS = \
 	--includedir=$(srcdir) \
+	--includedir=$(prefix)/share/gir-1.0 \
 	--includedir=.
 
 if HAVE_INTROSPECTION
