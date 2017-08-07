@@ -226,8 +226,8 @@ libxfce4panel-2.0.vapi: libxfce4panel-2.0.gir libxfce4panel-2.0.deps
 VAPIGEN_VAPIS = libxfce4panel-2.0.vapi
 VAPIGEN_GIRDIRS = $(prefix)/share/gir-1.0
 
-libxfce4panel_2_0_vapi_DEPS = libxfce4panel-2.0 GObject-2.0 GLib-2.0 Gtk-3.0 libxfce4util-1.0
-libxfce4panel_2_0_vapi_METADATADIRS = $(srcdir)
+##libxfce4panel_2_0_vapi_DEPS = libxfce4panel-2.0 GObject-2.0 GLib-2.0 Gtk-3.0 libxfce4util-1.0
+libxfce4panel_2_0_vapi_METADATADIRS = .
 libxfce4panel_2_0_vapi_FILES = libxfce4panel-2.0.gir
 
 vapidir = $(datadir)/vala/vapi
