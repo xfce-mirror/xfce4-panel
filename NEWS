@@ -1,3 +1,28 @@
+4.13.1
+======
+- Port to GDBus (Ali)
+   This means the panel now depends on xfconf 4.13 - recommended is 4.13.3.
+- Features:
+  - systray: Allow ordering of items (Bug #11929)
+  - tasklist: Add styleclass to make life easier for themers
+- Bugfixes:
+  - Fix DND between external plugins (Bug #13687)
+  - Fix drag and drop for internal plugins (Bug #13642)
+  - Correct enter and leave opacity label positions (Bug #13594)
+  - Fix Gtk3 XfceArrowButtons not blinking (Bug #13599)
+  - Fix datarootdir declaration in .pc files (Bug #13589)
+  - Use fd.org terminal icon name (Bug #13592)
+  - Don't let the wrapper crash on unknown properties (Bug #13614)
+  - Set default panel-2 size of default settings
+  - windowmenu: Fix icon size in menu
+  - systray: Fix alignment of single non-square items (Bug #9095)
+  - clock: Make the default date and time format translatable (Bug #9637)
+- Translation updates: Arabic, Bengali, Bulgarian, Catalan, Chinese (China),
+   Chinese (Taiwan), Croatian, Czech, Danish, Dutch (Flemish), French, German,
+   Hebrew, Indonesian, Japanese, Kazakh, Korean, Lithuanian, Norwegian Bokmål,
+   Polish, Portuguese, Portuguese (Brazilian), Russian, Slovak, Spanish, Swedish,
+   Turkish, Ukrainian
+
 4.13.0
 ======
 - Port to Gtk3:
