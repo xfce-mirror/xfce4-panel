@@ -715,9 +715,9 @@ systray_box_compare_function (gconstpointer a,
   name_a = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (a));
   name_b = systray_socket_get_name (XFCE_SYSTRAY_SOCKET (b));
 
-  if (g_hash_table_lookup_extended (box->names_ordered, name_a, NULL, &value))
+  if (name_a != NULL && g_hash_table_lookup_extended (box->names_ordered, name_a, NULL, &value))
     index_a = GPOINTER_TO_INT (value);
-  if (g_hash_table_lookup_extended (box->names_ordered, name_b, NULL, &value))
+  if (name_b != NULL && g_hash_table_lookup_extended (box->names_ordered, name_b, NULL, &value))
     index_b = GPOINTER_TO_INT (value);
 
   /* sort ordered icons before unordered ones */
