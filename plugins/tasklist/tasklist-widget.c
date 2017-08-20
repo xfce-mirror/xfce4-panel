@@ -1285,9 +1285,10 @@ static gboolean
 xfce_tasklist_scroll_event (GtkWidget      *widget,
                             GdkEventScroll *event)
 {
-  XfceTasklist      *tasklist = XFCE_TASKLIST (widget);
-  XfceTasklistChild *child = NULL;
-  GList             *li, *lnew = NULL;
+  XfceTasklist        *tasklist = XFCE_TASKLIST (widget);
+  XfceTasklistChild   *child = NULL;
+  GList               *li, *lnew = NULL;
+  GdkScrollDirection  scrolling_direction;
 
   if (!tasklist->window_scrolling)
     return TRUE;
@@ -1305,7 +1306,23 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
   if (G_UNLIKELY (li == NULL))
     return TRUE;
 
-  switch (event->direction)
+  if (event->direction != GDK_SCROLL_SMOOTH)
+    scrolling_direction = event->direction;
+  else if (event->delta_y < 0)
+    scrolling_direction = GDK_SCROLL_UP;
+  else if (event->delta_y > 0)
+    scrolling_direction = GDK_SCROLL_DOWN;
+  else if (event->delta_x < 0)
+    scrolling_direction = GDK_SCROLL_LEFT;
+  else if (event->delta_x > 0)
+    scrolling_direction = GDK_SCROLL_RIGHT;
+  else
+    {
+      panel_debug_filtered (PANEL_DEBUG_TASKLIST, "scrolling event with no delta happend");
+      return TRUE;
+    }
+
+  switch (scrolling_direction)
     {
     case GDK_SCROLL_UP:
       /* find previous button on the tasklist */
@@ -1340,10 +1357,6 @@ xfce_tasklist_scroll_event (GtkWidget      *widget,
       break;
 
     case GDK_SCROLL_RIGHT:
-      /* TODO */
-      break;
-
-    case GDK_SCROLL_SMOOTH:
       /* TODO */
       break;
     }
@@ -2128,6 +2141,8 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   gtk_widget_set_parent (child->button, GTK_WIDGET (tasklist));
   gtk_button_set_relief (GTK_BUTTON (child->button),
                          tasklist->button_relief);
+  gtk_widget_add_events (GTK_WIDGET(child->button), GDK_SCROLL_MASK
+                                                  | GDK_SMOOTH_SCROLL_MASK);
 
   child->box = gtk_box_new (!xfce_tasklist_vertical (tasklist) ?
       GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, 6);
