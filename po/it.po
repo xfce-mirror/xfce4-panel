@@ -7,6 +7,7 @@
 # Cristian Marchi <cri.panta@gmail.com>, 2009
 # Cristian Marchi <cri.penta@gmail.com>, 2013-2015
 # Enrico B. <enricobe@hotmail.com>, 2017
+# Francesco Galizzi <f.galizzi92@gmail.com>, 2017
 # Luca Marrocco <buildup@libero.it>, 2005
 # Marco <marco.sting@gmail.com>, 2013
 # idetao <marcxosm@gmail.com>, 2017
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:30+0200\n"
-"PO-Revision-Date: 2017-05-19 04:57+0000\n"
-"Last-Translator: idetao <marcxosm@gmail.com>\n"
+"POT-Creation-Date: 2017-07-04 00:30+0200\n"
+"PO-Revision-Date: 2017-09-11 07:00+0000\n"
+"Last-Translator: Francesco Galizzi <f.galizzi92@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +36,7 @@ msgid ""
 msgstr "Aggiunge un nuovo avviatore sul pannello sulla base delle informazioni contenute in questo file desktop"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2700
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Pannello"
@@ -45,164 +46,186 @@ msgid "Customize the panel"
 msgstr "Personalizzazione del pannello"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1028
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1201
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Rimuovere davvero \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1033
+#: ../libxfce4panel/xfce-panel-plugin.c:1047
 #: ../panel/panel-preferences-dialog.c:1204
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se si rimuove l'elemento dal pannello, verrà perso per sempre."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1034 ../panel/panel-dialogs.c:127
+#: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
 #: ../panel/panel-preferences-dialog.c:1206
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
-#: ../plugins/directorymenu/directorymenu.c:399
+#: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "Annulla"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1035
+#: ../libxfce4panel/xfce-panel-plugin.c:1049
+#: ../panel/panel-plugin-external.c:436
 #: ../panel/panel-preferences-dialog.c:929
 #: ../panel/panel-preferences-dialog.c:1207
 msgid "Remove"
 msgstr "Rimuovi"
 
-#. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1193
+#: ../libxfce4panel/xfce-panel-plugin.c:1190
+msgid "_Properties"
+msgstr "_Proprietà"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1205
+msgid "_About"
+msgstr "_Informazioni"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1220
 msgid "_Move"
 msgstr "_Sposta"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1227
+#: ../libxfce4panel/xfce-panel-plugin.c:1244
+msgid "_Remove"
+msgstr "_Rimuovi"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1265
 msgid "Pane_l"
 msgstr "_Pannello"
 
-#. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1235 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1274 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "A_ggiungi nuovi elementi..."
 
-#. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1246 ../panel/panel-window.c:2723
+#: ../libxfce4panel/xfce-panel-plugin.c:1289 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "_Preferenze del pannello..."
 
-#. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1263 ../panel/panel-window.c:2751
+#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "_Esci"
 
-#: ../panel/main.c:80
+#: ../libxfce4panel/xfce-panel-plugin.c:1330
+msgid "_Help"
+msgstr "_Aiuto"
+
+#: ../libxfce4panel/xfce-panel-plugin.c:1345
+msgid "About"
+msgstr "Informazioni"
+
+#: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
 msgstr "Mostra la finestra di personalizzazione del pannello"
 
-#: ../panel/main.c:80 ../panel/main.c:81
+#: ../panel/main.c:81 ../panel/main.c:82
 msgid "PANEL-NUMBER"
 msgstr "NUMERO-PANNELLO"
 
-#: ../panel/main.c:81
+#: ../panel/main.c:82
 msgid "Show the 'Add New Items' dialog"
 msgstr "Mostra la finestra per aggiungere nuovi elementi"
 
-#: ../panel/main.c:82
+#: ../panel/main.c:83
 msgid "Save the panel configuration"
 msgstr "Salva la configurazione del pannello"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
 msgstr "Aggiunge un nuovo plugin al pannello"
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "PLUGIN-NAME"
 msgstr "NOME-PLUGIN"
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
 msgid "Restart the running panel instance"
 msgstr "Riavvia l'istanza del pannello in esecuzione"
 
-#: ../panel/main.c:85
+#: ../panel/main.c:86
 msgid "Quit the running panel instance"
 msgstr "Esce dall'istanza del pannello in esecuzione"
 
-#: ../panel/main.c:86
+#: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
 msgstr "Non attendere un gestore delle finestre all'avvio"
 
-#: ../panel/main.c:87
+#: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
 msgstr "Stampa le informazioni di versione ed esce"
 
+#: ../panel/main.c:207
+#, c-format
+msgid "Name %s lost on the message dbus, exiting."
+msgstr "Nome '%s' perso nel messaggio dbus, esco."
+
 #. parse context options
-#: ../panel/main.c:236
+#: ../panel/main.c:258
 msgid "[ARGUMENTS...]"
 msgstr "[ARGOMENTI...]"
 
-#: ../panel/main.c:243
+#: ../panel/main.c:265
 #, c-format
 msgid "Type \"%s --help\" for usage."
 msgstr "Digitare \"%s --help\" per le modalità d'uso"
 
-#: ../panel/main.c:262
+#: ../panel/main.c:284
 msgid "The Xfce development team. All rights reserved."
 msgstr "Il team di sviluppo di Xfce. Tutti i diritti riservati."
 
-#: ../panel/main.c:263
+#: ../panel/main.c:285
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Segnalare i problemi a <%s>."
 
-#: ../panel/main.c:321
+#: ../panel/main.c:351
 msgid "There is already a running instance"
 msgstr "Un'altra istanza è già in esecuzione"
 
 #. spawn ourselfs again
-#: ../panel/main.c:366
+#: ../panel/main.c:398
 msgid "Restarting..."
 msgstr "Riavvio in corso..."
 
-#: ../panel/main.c:381
+#: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
 msgstr "Impossibile mostrare la finestra delle preferenze"
 
-#: ../panel/main.c:383
+#: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
 msgstr "Impossibile mostrare la finestra per aggiungere nuovi elementi"
 
-#: ../panel/main.c:385
+#: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
 msgstr "Impossibile salvare la configurazione del pannello"
 
-#: ../panel/main.c:387
+#: ../panel/main.c:419
 msgid "Failed to add a plugin to the panel"
 msgstr "Impossibile aggiungere il plugin al pannello"
 
-#: ../panel/main.c:389
+#: ../panel/main.c:421
 msgid "Failed to restart the panel"
 msgstr "Impossibile riavviare il pannello"
 
-#: ../panel/main.c:391
+#: ../panel/main.c:423
 msgid "Failed to quit the panel"
 msgstr "Impossibile uscire dal pannello"
 
-#: ../panel/main.c:393
+#: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
 msgstr "Impossibile inviare il messaggio D-Bus"
 
-#: ../panel/main.c:403
+#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Esegui"
 
-#: ../panel/main.c:404
+#: ../panel/main.c:436
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Avviare il pannello? se sì, salvare la sessione all'uscita, in modo che il pannello venga avviato automaticamente al prossimo riavvio della sessione."
 
-#: ../panel/main.c:407 ../panel/main.c:421
+#: ../panel/main.c:439 ../panel/main.c:453
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
@@ -247,12 +270,12 @@ msgstr "Rimuovere davvero il pannello?"
 msgid "Failed to execute command \"%s\""
 msgstr "Impossibile eseguire il comando \"%s\""
 
-#: ../panel/panel-dbus-client.c:210
+#: ../panel/panel-dbus-client.c:216
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "È stata specificata una sintassi dell'evento del plugin non valida. Usare NOME-PLUGIN:NOME[:TIPO:VALORE]."
 
-#: ../panel/panel-dbus-client.c:243
+#: ../panel/panel-dbus-client.c:246
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -569,11 +592,13 @@ msgstr "_Aspetto"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Move currently selected item up by one row"
 msgstr "Sposta alla riga superiore l'elemento selezionato "
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item down by one row"
 msgstr "Sposta alla riga inferiore l'elemento selezionato "
 
@@ -622,7 +647,7 @@ msgstr "Esperto"
 msgid "Expert"
 msgstr "Veterano"
 
-#: ../panel/panel-window.c:2737
+#: ../panel/panel-window.c:2744
 msgid "_Lock Panel"
 msgstr "_Blocca il pannello"
 
@@ -722,127 +747,127 @@ msgstr "Azione"
 msgid "_Actions"
 msgstr "_Azioni"
 
-#: ../plugins/actions/actions.c:150
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
 msgstr "Esce"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "_Log Out"
 msgstr "_Esci"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
 msgstr "Uscire davvero?"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Uscita tra %d secondi."
 
-#: ../plugins/actions/actions.c:158
+#: ../plugins/actions/actions.c:159
 msgid "Log Out..."
 msgstr "Esci..."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
 msgstr "_Esci..."
 
-#: ../plugins/actions/actions.c:165
+#: ../plugins/actions/actions.c:166
 msgid "Switch User"
 msgstr "Cambia utente"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "_Switch User"
 msgstr "Cambia _utente"
 
-#: ../plugins/actions/actions.c:172
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
 msgstr "Blocca lo schermo"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Loc_k Screen"
 msgstr "_Blocca schermo"
 
-#: ../plugins/actions/actions.c:179
+#: ../plugins/actions/actions.c:180
 msgid "Hibernate"
 msgstr "Iberna"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
 msgstr "_Iberna"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
 msgstr "Sospendere su disco?"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Il sistema si ibernerà tra %d secondi."
 
-#: ../plugins/actions/actions.c:187
+#: ../plugins/actions/actions.c:188
 msgid "Suspend"
 msgstr "Sospende"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
 msgid "Sus_pend"
 msgstr "Sos_pendi"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
 msgstr "Sospendere su RAM?"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:191
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Il sistema si sospenderà tra %d secondi."
 
-#: ../plugins/actions/actions.c:195
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "Riavvia"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:197
 msgid "_Restart"
 msgstr "_Riavvia"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
 msgstr "Riavviare davvero?"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:199
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Il sistema si riavvierà tra %d secondi."
 
-#: ../plugins/actions/actions.c:203
+#: ../plugins/actions/actions.c:204
 msgid "Shut Down"
 msgstr "Spegne"
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:205
 msgid "Shut _Down"
 msgstr "_Spegni"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
 msgstr "Spegnere davvero?"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:207
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Spegnimento del computer in %d secondi."
 
-#: ../plugins/actions/actions.c:593
+#: ../plugins/actions/actions.c:594
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Separatore"
 
-#: ../plugins/actions/actions.c:955
+#: ../plugins/actions/actions.c:992
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Impossibile avviare l'azione \"%s\""
 
-#: ../plugins/actions/actions.c:1118
+#: ../plugins/actions/actions.c:1159
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -927,17 +952,17 @@ msgid "Applications"
 msgstr "Applicazioni"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:536
-#: ../plugins/directorymenu/directorymenu.c:397
+#: ../plugins/directorymenu/directorymenu.c:392
 msgid "Select An Icon"
 msgstr "Selezionare un'icona"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
-#: ../plugins/directorymenu/directorymenu.c:400
+#: ../plugins/directorymenu/directorymenu.c:395
 msgid "OK"
 msgstr "OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:878 ../plugins/launcher/launcher.c:2336
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Impossibile eseguire il comando \"%s\"."
@@ -976,15 +1001,21 @@ msgstr "Fa comparire il menu nell'attuale posizione del mouse"
 msgid "Show help options"
 msgstr "Visualizza le opzioni dell'aiuto"
 
-#: ../plugins/clock/clock.c:176
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock.c:46
+msgctxt "Date"
+msgid "%A %d %B %Y"
+msgstr "%A %d %B %Y"
+
+#: ../plugins/clock/clock.c:177
 msgid "Week %V"
 msgstr "Settimana %V"
 
-#: ../plugins/clock/clock.c:469
+#: ../plugins/clock/clock.c:470
 msgid "Failed to execute clock command"
 msgstr "Esecuzione del comando clock non riuscita"
 
-#: ../plugins/clock/clock.c:820
+#: ../plugins/clock/clock.c:821
 msgid "Custom Format"
 msgstr "Formato personalizzato"
 
@@ -1089,6 +1120,12 @@ msgstr "Mostra g_riglia"
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Clock Options"
 msgstr "Opzioni dell'orologio"
+
+#. TRANSLATORS: adjust this accordingly for your locale format
+#: ../plugins/clock/clock-digital.h:25
+msgctxt "Time"
+msgid "%R"
+msgstr "%R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1321,38 +1358,38 @@ msgstr "dodici"
 msgid "What time is it?"
 msgstr "Che ora è?"
 
-#: ../plugins/directorymenu/directorymenu.c:247
+#: ../plugins/directorymenu/directorymenu.c:242
 #: ../plugins/directorymenu/directorymenu.desktop.in.in.h:1
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
 msgid "Directory Menu"
 msgstr "Menu delle cartelle"
 
-#: ../plugins/directorymenu/directorymenu.c:582
+#: ../plugins/directorymenu/directorymenu.c:577
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "Impossibile avviare l'applicazione \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:614
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "Impossibile interrogare il tipo di contenuto per \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:623
+#: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "Non è stata trovata alcuna applicazione predefinita per \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:639
+#: ../plugins/directorymenu/directorymenu.c:634
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "Impossibile avviare l'applicazione predefinita per \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:737
+#: ../plugins/directorymenu/directorymenu.c:732
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "Impossibile eseguire l'applicazione preferita per la categoria \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:810
+#: ../plugins/directorymenu/directorymenu.c:806
 msgid "Open Folder"
 msgstr "Apri cartella"
 
@@ -1393,15 +1430,15 @@ msgstr "Schema del _file:"
 msgid "Filtering"
 msgstr "Filtraggio"
 
-#: ../plugins/launcher/launcher.c:404
+#: ../plugins/launcher/launcher.c:388
 msgid "Open launcher menu"
 msgstr "Apre il menu dell'avviatore"
 
-#: ../plugins/launcher/launcher.c:1595
+#: ../plugins/launcher/launcher.c:1580
 msgid "Unnamed Item"
 msgstr "Elemento senza nome"
 
-#: ../plugins/launcher/launcher.c:1746
+#: ../plugins/launcher/launcher.c:1734
 msgid "No items"
 msgstr "Nessun elemento"
 
@@ -1517,15 +1554,15 @@ msgstr "Avanzate"
 msgid "Program launcher with optional menu"
 msgstr "Avviatore di programmi con menu opzionale"
 
-#: ../plugins/pager/pager.c:448 ../plugins/pager/pager-dialog.glade.h:5
+#: ../plugins/pager/pager.c:449 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
 msgstr "Impostazioni dello _spazio di lavoro..."
 
-#: ../plugins/pager/pager.c:533
+#: ../plugins/pager/pager.c:537
 msgid "Unable to open the workspace settings"
 msgstr "Impossibile aprire le impostazioni dello spazio di lavoro"
 
-#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:875
+#: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
 #, c-format
 msgid "Workspace %d"
 msgstr "Spazio di lavoro %d"
@@ -1599,26 +1636,26 @@ msgstr "Mostra scrivania"
 msgid "Hide all windows and show the desktop"
 msgstr "Nasconde tutte le finestre e mostra la scrivania"
 
-#: ../plugins/systray/systray.c:400
+#: ../plugins/systray/systray.c:428
 msgid "Unable to start the notification area"
 msgstr "Impossibile avviare l'area di notifica"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:869
+#: ../plugins/systray/systray.c:910
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Probabilmente un altro widget ha preso il controllo dell'area di notifica. Quest'area non verrà utilizzata."
 
-#: ../plugins/systray/systray.c:871
+#: ../plugins/systray/systray.c:912
 msgid "The notification area lost selection"
 msgstr "L'area di notifica ha perso la selezione"
 
-#: ../plugins/systray/systray.c:1023
+#: ../plugins/systray/systray.c:1176
 msgid "Clear"
 msgstr "Pulisci"
 
-#: ../plugins/systray/systray.c:1024
+#: ../plugins/systray/systray.c:1177
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ripulire davvero l'elenco delle applicazioni conosciute?"
 
@@ -1635,11 +1672,11 @@ msgstr "Dimensione _massima delle icone (px):"
 msgid "Show _frame"
 msgstr "Mostra cor_nice"
 
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "C_lear Known Applications"
 msgstr "Cance_lla le applicazioni conosciute"
 
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Known Applications"
 msgstr "Applicazioni conosciute"
 
@@ -1741,23 +1778,23 @@ msgstr "Mostra solo le finestre mi_nimizzate"
 msgid "Show windows from all mo_nitors"
 msgstr "Mostra le _finestre di tutti gli sc_hermi"
 
-#: ../plugins/tasklist/tasklist-widget.c:3414
+#: ../plugins/tasklist/tasklist-widget.c:3407
 msgid "Mi_nimize All"
 msgstr "Mi_nimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3415
 msgid "Un_minimize All"
 msgstr "_Deminimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3429
+#: ../plugins/tasklist/tasklist-widget.c:3423
 msgid "Ma_ximize All"
 msgstr "_Massimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3431
 msgid "_Unmaximize All"
 msgstr "D_emassimizza tutte"
 
-#: ../plugins/tasklist/tasklist-widget.c:3448
+#: ../plugins/tasklist/tasklist-widget.c:3443
 msgid "_Close All"
 msgstr "_Chiudi tutte"
 
@@ -1765,28 +1802,28 @@ msgstr "_Chiudi tutte"
 msgid "Switch between open windows using buttons"
 msgstr "Scorre tra le finestre aperte utilizzando i pulsanti"
 
-#: ../plugins/windowmenu/windowmenu.c:673
+#: ../plugins/windowmenu/windowmenu.c:668
 msgid "Desktop"
 msgstr "Scrivania"
 
-#: ../plugins/windowmenu/windowmenu.c:1266
+#: ../plugins/windowmenu/windowmenu.c:1264
 msgid "No Windows"
 msgstr "Nessuna finestra"
 
-#: ../plugins/windowmenu/windowmenu.c:1281
+#: ../plugins/windowmenu/windowmenu.c:1279
 msgid "Urgent Windows"
 msgstr "Finestre urgenti"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
+#: ../plugins/windowmenu/windowmenu.c:1322
 msgid "Add Workspace"
 msgstr "Aggiungi spazio di lavoro"
 
-#: ../plugins/windowmenu/windowmenu.c:1343
+#: ../plugins/windowmenu/windowmenu.c:1345
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Rimuovi spazio di lavoro \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1347
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Rimuovi spazio di lavoro \"%d\""
