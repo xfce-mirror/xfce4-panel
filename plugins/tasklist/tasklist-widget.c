@@ -92,7 +92,8 @@ enum
   PROP_WINDOW_SCROLLING,
   PROP_WRAP_WINDOWS,
   PROP_INCLUDE_ALL_BLINKING,
-  PROP_MIDDLE_CLICK
+  PROP_MIDDLE_CLICK,
+  PROP_LABEL_DECORATIONS
 };
 
 struct _XfceTasklistClass
@@ -160,6 +161,9 @@ struct _XfceTasklist
 
   /* action to preform when middle clicking */
   XfceTasklistMClick    middle_click;
+
+  /* whether decorate labels when window is not visible */
+  guint                 label_decorations : 1;
 
   /* whether we only show windows that are in the geometry of
    * the monitor the tasklist is on */
@@ -355,6 +359,8 @@ static void               xfce_tasklist_set_show_only_minimized          (XfceTa
                                                                           gboolean              only_minimized);
 static void               xfce_tasklist_set_show_wireframes              (XfceTasklist         *tasklist,
                                                                           gboolean              show_wireframes);
+static void               xfce_tasklist_set_label_decorations            (XfceTasklist         *tasklist,
+                                                                          gboolean              label_decorations);
 static void               xfce_tasklist_set_grouping                     (XfceTasklist         *tasklist,
                                                                           XfceTasklistGrouping  grouping);
 
@@ -494,6 +500,13 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
                                                       XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT,
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
+  g_object_class_install_property (gobject_class,
+                                   PROP_LABEL_DECORATIONS,
+                                   g_param_spec_boolean ("label-decorations",
+                                                         NULL, NULL,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("max-button-length",
                                                              NULL,
@@ -572,6 +585,7 @@ xfce_tasklist_init (XfceTasklist *tasklist)
   tasklist->wrap_windows = FALSE;
   tasklist->all_blinking = TRUE;
   tasklist->middle_click = XFCE_TASKLIST_MIDDLE_CLICK_DEFAULT;
+  tasklist->label_decorations = TRUE;
   xfce_tasklist_geometry_set_invalid (tasklist);
 #ifdef GDK_WINDOWING_X11
   tasklist->wireframe_window = 0;
@@ -673,6 +687,10 @@ xfce_tasklist_get_property (GObject    *object,
       g_value_set_uint (value, tasklist->middle_click);
       break;
 
+    case PROP_LABEL_DECORATIONS:
+      g_value_set_boolean (value, tasklist->label_decorations);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -753,6 +771,10 @@ xfce_tasklist_set_property (GObject      *object,
 
     case PROP_MIDDLE_CLICK:
       tasklist->middle_click= g_value_get_uint (value);
+      break;
+
+    case PROP_LABEL_DECORATIONS:
+      xfce_tasklist_set_label_decorations (tasklist, g_value_get_boolean (value));
       break;
 
     default:
@@ -2130,6 +2152,7 @@ static XfceTasklistChild *
 xfce_tasklist_child_new (XfceTasklist *tasklist)
 {
   XfceTasklistChild *child;
+  GtkCssProvider    *provider;
 
   panel_return_val_if_fail (XFCE_IS_TASKLIST (tasklist), NULL);
 
@@ -2172,6 +2195,12 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
       gtk_label_set_angle (GTK_LABEL (child->label), 270);
       /* TODO can we already ellipsize here yet? */
     }
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (provider, ".label-hidden { opacity: 0.75; }", -1, NULL);
+  gtk_style_context_add_provider (gtk_widget_get_style_context (child->label),
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
 
   /* don't show the label if we're in iconbox style */
   if (tasklist->show_labels)
@@ -2544,8 +2573,9 @@ static void
 xfce_tasklist_button_name_changed (WnckWindow        *window,
                                    XfceTasklistChild *child)
 {
-  const gchar *name;
-  gchar       *label = NULL;
+  const gchar     *name;
+  gchar           *label = NULL;
+  GtkStyleContext *ctx;
 
   panel_return_if_fail (window == NULL || child->window == window);
   panel_return_if_fail (WNCK_IS_WINDOW (child->window));
@@ -2554,12 +2584,25 @@ xfce_tasklist_button_name_changed (WnckWindow        *window,
   name = wnck_window_get_name (child->window);
   gtk_widget_set_tooltip_text (GTK_WIDGET (child->button), name);
 
-  /* create the button label */
-  if (!child->tasklist->only_minimized
-      && wnck_window_is_minimized (child->window))
-    name = label = g_strdup_printf ("[%s]", name);
-  else if (wnck_window_is_shaded (child->window))
-    name = label = g_strdup_printf ("=%s=", name);
+  ctx = gtk_widget_get_style_context (child->label);
+  gtk_style_context_remove_class (ctx, "label-hidden");
+
+  if (child->tasklist->label_decorations)
+    {
+      /* create the button label */
+      if (!child->tasklist->only_minimized
+          && wnck_window_is_minimized (child->window))
+        name = label = g_strdup_printf ("[%s]", name);
+      else if (wnck_window_is_shaded (child->window))
+        name = label = g_strdup_printf ("=%s=", name);
+    }
+  else
+    {
+      if ((!child->tasklist->only_minimized
+          && wnck_window_is_minimized (child->window))
+          || wnck_window_is_shaded (child->window))
+        gtk_style_context_add_class (ctx, "label-hidden");
+    }
 
   gtk_label_set_text (GTK_LABEL (child->label), name);
 
@@ -3982,6 +4025,29 @@ xfce_tasklist_set_show_wireframes (XfceTasklist *tasklist,
   /* destroy the window if needed */
   xfce_tasklist_wireframe_destroy (tasklist);
 #endif
+}
+
+
+
+static void
+xfce_tasklist_set_label_decorations (XfceTasklist *tasklist,
+                                     gboolean      label_decorations)
+{
+  GList             *li;
+  XfceTasklistChild *child;
+
+  panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+
+  if (tasklist->label_decorations != label_decorations)
+    {
+      tasklist->label_decorations = label_decorations;
+
+      for (li = tasklist->windows; li != NULL; li = li->next)
+        {
+          child = li->data;
+          xfce_tasklist_button_name_changed (NULL, child);
+        }
+    }
 }
 
 

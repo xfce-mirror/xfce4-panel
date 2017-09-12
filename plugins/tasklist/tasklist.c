@@ -150,6 +150,7 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
     { "wrap-windows", G_TYPE_BOOLEAN },
     { "include-all-blinking", G_TYPE_BOOLEAN },
     { "middle-click", G_TYPE_UINT },
+    { "label-decorations", G_TYPE_BOOLEAN },
     { NULL }
   };
 
