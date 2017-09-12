@@ -9,7 +9,7 @@
     <annotation name="org.gtk.GDBus.C.Name" value="ExportedService" />
 
     <!--
-      DisplayPreferencesDialog (active : UINT, socket-id : STRING) : VOID
+      DisplayPreferencesDialog (active : UINT, socket-id : UINT) : VOID
 
       active    : The active panel number in the dialog, starting
                   at zero.
@@ -19,6 +19,7 @@
     -->
     <method name="DisplayPreferencesDialog">
       <arg name="active" direction="in" type="u" />
+      <arg name="socket_id" direction="in" type="u" />
     </method>
 
     <!--

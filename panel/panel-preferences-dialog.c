@@ -1513,16 +1513,10 @@ panel_preferences_dialog_show (PanelWindow *active)
 
 void
 panel_preferences_dialog_show_from_id (gint         panel_id,
-                                       const gchar *socket_id)
+                                       Window       socket_window)
 {
   PanelApplication *application;
   PanelWindow      *window;
-  Window            socket_window = 0;
-
-  /* x11 windows are ulong on 64 bit platforms
-   * or uint32 on other platforms */
-  if (socket_id != NULL)
-    socket_window = (Window) strtoul (socket_id, NULL, 0);
 
   application = panel_application_get ();
   window = panel_application_get_window (application, panel_id);

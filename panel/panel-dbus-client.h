@@ -23,6 +23,7 @@
 #include <gdk/gdk.h>
 
 gboolean  panel_dbus_client_display_preferences_dialog (guint         active,
+                                                        guint         socket_id,
                                                         GError      **error);
 
 gboolean  panel_dbus_client_display_items_dialog       (guint         active,

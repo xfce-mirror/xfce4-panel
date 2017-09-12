@@ -63,7 +63,7 @@ static gboolean   opt_version = FALSE;
 static gboolean   opt_disable_wm_check = FALSE;
 static gchar     *opt_plugin_event = NULL;
 static gchar    **opt_arguments = NULL;
-static gchar     *opt_socket_id = NULL;
+static guint      opt_socket_id = 0;
 
 
 
@@ -87,7 +87,7 @@ static GOptionEntry option_entries[] =
   { "disable-wm-check", 'd', 0, G_OPTION_ARG_NONE, &opt_disable_wm_check, N_("Do not wait for a window manager on startup"), NULL },
   { "version", 'V', 0, G_OPTION_ARG_NONE, &opt_version, N_("Print version information and exit"), NULL },
   { "plugin-event", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_plugin_event, NULL, NULL },
-  { "socket-id", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_socket_id, NULL, NULL },
+  { "socket-id", '\0', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_INT, &opt_socket_id, NULL, NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &opt_arguments, NULL, NULL },
   { NULL }
 };
@@ -290,7 +290,7 @@ main (gint argc, gchar **argv)
   else if (opt_preferences >= 0)
     {
       /* send a signal to the running instance to show the preferences dialog */
-      succeed = panel_dbus_client_display_preferences_dialog (opt_preferences, &error);
+      succeed = panel_dbus_client_display_preferences_dialog (opt_preferences, opt_socket_id, &error);
       goto dbus_return;
     }
   else if (opt_add_items >= 0)
@@ -371,10 +371,6 @@ main (gint argc, gchar **argv)
 
   /* set EWMH source indication */
   wnck_set_client_type (WNCK_CLIENT_TYPE_PAGER);
-
-  /* open dialog if we started from launch_panel */
-  if (opt_preferences >= 0)
-    panel_preferences_dialog_show_from_id (opt_preferences, opt_socket_id);
 
   gtk_main ();
 

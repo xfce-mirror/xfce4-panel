@@ -40,7 +40,7 @@ GType      panel_preferences_dialog_get_type     (void) G_GNUC_CONST;
 void       panel_preferences_dialog_show         (PanelWindow *active);
 
 void       panel_preferences_dialog_show_from_id (gint         panel_id,
-                                                  const gchar *socket_id);
+                                                  Window       socket_window);
 
 gboolean   panel_preferences_dialog_visible      (void);
 
