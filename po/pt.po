@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-04 00:30+0200\n"
-"PO-Revision-Date: 2017-09-12 14:15+0000\n"
+"POT-Creation-Date: 2017-09-13 00:30+0200\n"
+"PO-Revision-Date: 2017-09-13 16:51+0000\n"
 "Last-Translator: José Vieira <jvieira33@sapo.pt>\n"
 "Language-Team: Portuguese (http://www.transifex.com/xfce/xfce4-panel/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -590,13 +590,13 @@ msgstr "Aparê_ncia"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item up by one row"
 msgstr "Mover item atualmente selecionado uma linha para cima"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item down by one row"
 msgstr "Mover item atualmente selecionado uma linha para baixo"
 
@@ -914,7 +914,7 @@ msgstr "Ativar esta opção para mostrar o nome da aplicação no menu; por exem
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:7
-#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:5
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Appearance"
@@ -1634,26 +1634,26 @@ msgstr "Mostrar a área de trabalho"
 msgid "Hide all windows and show the desktop"
 msgstr "Ocultar todas as janelas e mostrar a área de trabalho"
 
-#: ../plugins/systray/systray.c:428
+#: ../plugins/systray/systray.c:458
 msgid "Unable to start the notification area"
 msgstr "Incapaz de iniciar a área de notificação"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:910
+#: ../plugins/systray/systray.c:954
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "É provável que outro \"widget\" se tenha apoderado da área de notificação. Esta área não será usada.  "
 
-#: ../plugins/systray/systray.c:912
+#: ../plugins/systray/systray.c:956
 msgid "The notification area lost selection"
 msgstr "A área de notificação perdeu a seleção"
 
-#: ../plugins/systray/systray.c:1176
+#: ../plugins/systray/systray.c:1220
 msgid "Clear"
 msgstr "Limpar"
 
-#: ../plugins/systray/systray.c:1177
+#: ../plugins/systray/systray.c:1221
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Tem a certeza de que pretende apagar a lista de aplicações conhecidas?"
 
@@ -1667,14 +1667,18 @@ msgid "_Maximum icon size (px):"
 msgstr "Tamanho _máximo do ícone (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Sq_uare icons"
+msgstr "Ícones q_uadrados"
+
+#: ../plugins/systray/systray-dialog.glade.h:4
 msgid "Show _frame"
 msgstr "Mostrar cai_xilho"
 
-#: ../plugins/systray/systray-dialog.glade.h:7
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "C_lear Known Applications"
 msgstr "Apagar ap_licações conhecidas"
 
-#: ../plugins/systray/systray-dialog.glade.h:8
+#: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Known Applications"
 msgstr "Aplicações conhecidas"
 
@@ -1776,23 +1780,23 @@ msgstr "Mostrar apenas janelas _minimizadas"
 msgid "Show windows from all mo_nitors"
 msgstr "Mostrar janelas de todos os mo_nitores"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3422
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3415
+#: ../plugins/tasklist/tasklist-widget.c:3430
 msgid "Un_minimize All"
 msgstr "Reverter _minimização"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "Ma_ximize All"
 msgstr "Ma_ximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3431
+#: ../plugins/tasklist/tasklist-widget.c:3446
 msgid "_Unmaximize All"
 msgstr "_Reverter maximização"
 
-#: ../plugins/tasklist/tasklist-widget.c:3443
+#: ../plugins/tasklist/tasklist-widget.c:3458
 msgid "_Close All"
 msgstr "Fe_char todas"
 
@@ -1804,24 +1808,24 @@ msgstr "Trocar entre janelas abertas com os botões"
 msgid "Desktop"
 msgstr "Área de trabalho"
 
-#: ../plugins/windowmenu/windowmenu.c:1264
+#: ../plugins/windowmenu/windowmenu.c:1265
 msgid "No Windows"
 msgstr "Sem janelas"
 
-#: ../plugins/windowmenu/windowmenu.c:1279
+#: ../plugins/windowmenu/windowmenu.c:1280
 msgid "Urgent Windows"
 msgstr "Janelas urgentes"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Adicionar área de trabalho"
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1346
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Remover área de trabalho \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1347
+#: ../plugins/windowmenu/windowmenu.c:1348
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Remover área de trabalho %d"
