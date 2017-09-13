@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2017-03-22 03:28+0000\n"
+"PO-Revision-Date: 2017-09-13 16:03+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce4-panel/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -485,7 +485,7 @@ msgstr "_Alfa:"
 msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
-msgstr "Alfaværdi af panelbaggrunden med 0 gennemsigtig og 100 ugennemsigtig."
+msgstr "Alfaværdi af panelbaggrunden hvor 0 er fuld gennemsigtig og 100 er fuld synlig."
 
 #: ../panel/panel-preferences-dialog.glade.h:33
 msgid "C_olor:"
@@ -521,17 +521,17 @@ msgstr "_Ikke over:"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr "Gennemsigtigt når markøren svæver over panelet med 0 fuld gennemsigtig og 100 uigennemsigtig."
+msgstr "Gennemsigtigt når markøren svæver over panelet hvor 0 er fuld gennemsigtig og 100 er fuld synlig."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Gennemsigtigt når markøren svæver over panelet med 0 fuld gennemsigtig og 100 uigennemsigtig."
+msgstr "Gennemsigtigt når markøren svæver over panelet hvor 0 er fuld gennemsigtig og 100 er fuld synlig."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
-msgstr "Ugennemsigtig"
+msgstr "Opacitet"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
@@ -683,7 +683,7 @@ msgstr "Vis en bekræftelsesdialog med 30 sekunders udløbstid for en del af han
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
-msgstr "Synligt"
+msgstr "Synlig"
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Action"
@@ -810,7 +810,7 @@ msgstr "Lukker computeren ned om %d sekunder."
 #: ../plugins/separator/separator-dialog.glade.h:1
 #: ../plugins/separator/separator.desktop.in.h:1
 msgid "Separator"
-msgstr "Skillelinje"
+msgstr "Separator"
 
 #: ../plugins/actions/actions.c:975
 #, c-format
@@ -944,7 +944,7 @@ msgstr "Tilvalg:"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:31
 msgid "Popup menu at current mouse position"
-msgstr "Pop op-menu på aktuelle position af musen"
+msgstr "Pop op-menu ved nuværende museposition"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
@@ -1005,7 +1005,7 @@ msgstr "24-_timers ur"
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Fl_ash time separators"
-msgstr "B_linkende linjeskillere"
+msgstr "B_linkende separatore"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Sho_w AM/PM"
@@ -1543,7 +1543,7 @@ msgstr "Prikker"
 
 #: ../plugins/separator/separator.desktop.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr "Tilføj en skillelinje eller et mellemrum mellem panelets elementer"
+msgstr "Tilføj en separator eller et mellemrum mellem panelets elementer"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
@@ -1564,18 +1564,18 @@ msgstr "Skjul alle vinduer og vis skrivebordet"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "Kunne ikke starte beskedsområdet"
+msgstr "Kunne ikke starte notifikationsområdet"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et beskedsområde. Dette område vil være ubenyttet."
+msgstr "Mest sandsynligt en anden widget har overtaget funktionen af et notifikationsområde. Dette område vil være ubenyttet."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr "Beskedsområdet mistede valget"
+msgstr "Notifikationsområdet mistede valget"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1584,11 +1584,11 @@ msgstr "Er du sikker på at du vil slette listen over kendte programmer?"
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.h:1
 msgid "Notification Area"
-msgstr "Påmindelsesområde"
+msgstr "Notifikationsområde"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr "_Maksimum ikonstørrelse (pixel):"
+msgstr "_Maksimum ikonstørrelse (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
@@ -1605,7 +1605,7 @@ msgstr "Kunne ikke allokere håndteringsvalg for skærm %d"
 
 #: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
-msgstr "Område hvor beskedikoner fremkommer"
+msgstr "Område hvor notifikationsikoner fremkommer"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
 #: ../plugins/tasklist/tasklist.desktop.in.h:1
@@ -1757,7 +1757,7 @@ msgstr "Vis arbejdsom_rådenavne"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
-msgstr "Slå _vigtige beskeder til"
+msgstr "Slå _vigtige notifikationer til"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
