@@ -368,7 +368,7 @@ panel_plugin_external_unrealize (GtkWidget *widget)
     }
 
   panel_debug (PANEL_DEBUG_EXTERNAL,
-               "%s-%d: plugin unrealized; quiting child",
+               "%s-%d: plugin unrealized; quitting child",
                panel_module_get_name (external->module),
                external->unique_id);
 

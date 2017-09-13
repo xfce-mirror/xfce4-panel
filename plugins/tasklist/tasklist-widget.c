@@ -505,7 +505,7 @@ xfce_tasklist_class_init (XfceTasklistClass *klass)
   gtk_widget_class_install_style_property (gtkwidget_class,
                                            g_param_spec_int ("min-button-length",
                                                              NULL,
-                                                             "The minumum length of a window button",
+                                                             "The minimum length of a window button",
                                                              1, G_MAXINT,
                                                              DEFAULT_MIN_BUTTON_LENGTH,
                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));

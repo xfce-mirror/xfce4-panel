@@ -96,7 +96,7 @@ panel_utils_builder_new (XfcePanelPlugin  *panel_plugin,
         }
     }
 
-  g_critical ("Faild to construct the builder for plugin %s-%d: %s.",
+  g_critical ("Failed to construct the builder for plugin %s-%d: %s.",
               xfce_panel_plugin_get_name (panel_plugin),
               xfce_panel_plugin_get_unique_id (panel_plugin),
               error->message);

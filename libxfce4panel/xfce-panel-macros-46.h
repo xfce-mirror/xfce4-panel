@@ -270,11 +270,11 @@ G_BEGIN_DECLS
   static void \
   _xpp_quit_main_loop (void) \
   { \
-     static gboolean quiting = FALSE; \
+     static gboolean quitting = FALSE; \
      \
-     if (!quiting) \
+     if (!quitting) \
        { \
-         quiting = TRUE; \
+         quitting = TRUE; \
          gtk_main_quit (); \
        } \
   } \
