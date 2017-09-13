@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-04 00:30+0200\n"
-"PO-Revision-Date: 2017-09-08 09:28+0000\n"
-"Last-Translator: dsafsadf <heneral@gmail.com>\n"
+"POT-Creation-Date: 2017-09-13 00:30+0200\n"
+"PO-Revision-Date: 2017-09-13 20:06+0000\n"
+"Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/xfce/xfce4-panel/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -589,13 +589,13 @@ msgstr "Зовніш_ній вигляд"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item up by one row"
 msgstr "Перемістити поточний виділений елемент вверх на один рядок"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item down by one row"
 msgstr "Перемістити поточний виділений елемент вниз на один рядок"
 
@@ -913,7 +913,7 @@ msgstr "Виберіть цю опцію щоб показати основну 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:7
-#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:5
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Appearance"
@@ -1002,7 +1002,7 @@ msgstr "Показати опції допомоги"
 #: ../plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%A %d %B %Y"
 
 #: ../plugins/clock/clock.c:177
 msgid "Week %V"
@@ -1633,26 +1633,26 @@ msgstr "Показати Стільницю"
 msgid "Hide all windows and show the desktop"
 msgstr "Сховати всі вікна та показати робочу стільницю"
 
-#: ../plugins/systray/systray.c:428
+#: ../plugins/systray/systray.c:458
 msgid "Unable to start the notification area"
 msgstr "Не можу запустити область повідомлень"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:910
+#: ../plugins/systray/systray.c:954
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Швидше за все інший віджет взяв на себе цю функцію в області повідомлень. Ця область неможливо буде використовувати."
 
-#: ../plugins/systray/systray.c:912
+#: ../plugins/systray/systray.c:956
 msgid "The notification area lost selection"
 msgstr "Область повідомлень втратила виділення"
 
-#: ../plugins/systray/systray.c:1176
+#: ../plugins/systray/systray.c:1220
 msgid "Clear"
 msgstr "Очистити"
 
-#: ../plugins/systray/systray.c:1177
+#: ../plugins/systray/systray.c:1221
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Ви впевнені, що бажаєте очистити список відомих програм?"
 
@@ -1666,14 +1666,18 @@ msgid "_Maximum icon size (px):"
 msgstr "_Максимальний розмір значка (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Sq_uare icons"
+msgstr "Квад_ратні значки"
+
+#: ../plugins/systray/systray-dialog.glade.h:4
 msgid "Show _frame"
 msgstr "Показувати _рамку"
 
-#: ../plugins/systray/systray-dialog.glade.h:7
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "C_lear Known Applications"
 msgstr "Очистити ві_домі програми"
 
-#: ../plugins/systray/systray-dialog.glade.h:8
+#: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Known Applications"
 msgstr "Відомі програми"
 
@@ -1775,23 +1779,23 @@ msgstr "Показувати тіл_ьки мінімізовані вікна"
 msgid "Show windows from all mo_nitors"
 msgstr "Показувати вікна з усіх моні_торів"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3422
 msgid "Mi_nimize All"
 msgstr "Мінімізува_ти всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3415
+#: ../plugins/tasklist/tasklist-widget.c:3430
 msgid "Un_minimize All"
 msgstr "Д_емінімізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "Ma_ximize All"
 msgstr "Ма_ксимізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3431
+#: ../plugins/tasklist/tasklist-widget.c:3446
 msgid "_Unmaximize All"
 msgstr "Демаксимізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3443
+#: ../plugins/tasklist/tasklist-widget.c:3458
 msgid "_Close All"
 msgstr "Закрити в_сі"
 
@@ -1803,24 +1807,24 @@ msgstr "Перемикатись між відкритими вікнами ви
 msgid "Desktop"
 msgstr "Стільниця"
 
-#: ../plugins/windowmenu/windowmenu.c:1264
+#: ../plugins/windowmenu/windowmenu.c:1265
 msgid "No Windows"
 msgstr "Без вікон"
 
-#: ../plugins/windowmenu/windowmenu.c:1279
+#: ../plugins/windowmenu/windowmenu.c:1280
 msgid "Urgent Windows"
 msgstr "Важливі вікна"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Додати робочу область"
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1346
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Видалити робочу область \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1347
+#: ../plugins/windowmenu/windowmenu.c:1348
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Видалити робочу область %d"
