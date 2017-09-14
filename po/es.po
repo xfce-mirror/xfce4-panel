@@ -22,9 +22,10 @@
 # Manolo Díaz <diaz.manolo@gmail.com>, 2016
 # mc <correomc2000-ing@yahoo.es>, 2013
 # mc <correomc2000-ing@yahoo.es>, 2013
-# Pablo Roberto “Jristz” Lezaeta Reyes <prflr88@gmail.com>, 2013
-# Pablo Roberto “Jristz” Lezaeta Reyes <prflr88@gmail.com>, 2013-2015
-# Pablo Roberto “Jristz” Lezaeta Reyes <prflr88@gmail.com>, 2013,2017
+# Pablo Lezaeta Reyes [pˈaβ̞lo lˌe̞θaˈeta rˈejɛ] <prflr88@gmail.com>, 2013
+# Pablo Lezaeta Reyes [pˈaβ̞lo lˌe̞θaˈeta rˈejɛ] <prflr88@gmail.com>, 2017
+# Pablo Lezaeta Reyes [pˈaβ̞lo lˌe̞θaˈeta rˈejɛ] <prflr88@gmail.com>, 2013-2015
+# Pablo Lezaeta Reyes [pˈaβ̞lo lˌe̞θaˈeta rˈejɛ] <prflr88@gmail.com>, 2013,2017
 # Pamir Matos <pamirmatos@gmail.com>, 2013
 # Pamir Matos <pamirmatos@gmail.com>, 2013
 # Brian Peraza-Orozco <brian.peraza@gmail.com>, 2013
@@ -32,9 +33,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-04 00:30+0200\n"
-"PO-Revision-Date: 2017-07-09 20:17+0000\n"
-"Last-Translator: Pablo Roberto “Jristz” Lezaeta Reyes <prflr88@gmail.com>\n"
+"POT-Creation-Date: 2017-09-13 00:30+0200\n"
+"PO-Revision-Date: 2017-09-14 01:51+0000\n"
+"Last-Translator: Pablo Lezaeta Reyes [pˈaβ̞lo lˌe̞θaˈeta rˈejɛ] <prflr88@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/xfce/xfce4-panel/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -609,13 +610,13 @@ msgstr "Aparie_ncia"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item up by one row"
 msgstr "Mover el elemento seleccionado una fila hacia arriba"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item down by one row"
 msgstr "Mover el elemento seleccionado una fila hacia abajo"
 
@@ -933,7 +934,7 @@ msgstr "Active esta opción para mostrar el nombre genérico de las aplicaciones
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:7
-#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:5
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Appearance"
@@ -1653,26 +1654,26 @@ msgstr "Mostrar escritorio"
 msgid "Hide all windows and show the desktop"
 msgstr "Minimizar todas las ventanas para mostrar el escritorio"
 
-#: ../plugins/systray/systray.c:428
+#: ../plugins/systray/systray.c:458
 msgid "Unable to start the notification area"
 msgstr "No se pudo iniciar el área de notificación"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:910
+#: ../plugins/systray/systray.c:954
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "Probablemente otro elemento está funcionando como área de notificación. Esta área no será utilizada."
 
-#: ../plugins/systray/systray.c:912
+#: ../plugins/systray/systray.c:956
 msgid "The notification area lost selection"
 msgstr "El área de notificación ha perdido el foco"
 
-#: ../plugins/systray/systray.c:1176
+#: ../plugins/systray/systray.c:1220
 msgid "Clear"
 msgstr "Limpiar"
 
-#: ../plugins/systray/systray.c:1177
+#: ../plugins/systray/systray.c:1221
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "¿Está seguro de que quiere limpiar la lista de aplicaciones conocidas?"
 
@@ -1686,14 +1687,18 @@ msgid "_Maximum icon size (px):"
 msgstr "_Tamaño máximo de icono (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Sq_uare icons"
+msgstr "Iconos c_uadrados"
+
+#: ../plugins/systray/systray-dialog.glade.h:4
 msgid "Show _frame"
 msgstr "Mostrar _marco"
 
-#: ../plugins/systray/systray-dialog.glade.h:7
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "C_lear Known Applications"
 msgstr "_Limpiar aplicaciones conocidas"
 
-#: ../plugins/systray/systray-dialog.glade.h:8
+#: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Known Applications"
 msgstr "Aplicaciones conocidas"
 
@@ -1795,23 +1800,23 @@ msgstr "Solo mostrar ventanas _minimizadas"
 msgid "Show windows from all mo_nitors"
 msgstr "Mostrar ventanas de todos los mo_nitores"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3422
 msgid "Mi_nimize All"
 msgstr "Mi_nimizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3415
+#: ../plugins/tasklist/tasklist-widget.c:3430
 msgid "Un_minimize All"
 msgstr "_Restaurar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "Ma_ximize All"
 msgstr "M_aximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3431
+#: ../plugins/tasklist/tasklist-widget.c:3446
 msgid "_Unmaximize All"
 msgstr "_Desmaximizar todas"
 
-#: ../plugins/tasklist/tasklist-widget.c:3443
+#: ../plugins/tasklist/tasklist-widget.c:3458
 msgid "_Close All"
 msgstr "_Cerrar todas"
 
@@ -1823,24 +1828,24 @@ msgstr "Cambiar entre ventanas abiertas utilizando botones"
 msgid "Desktop"
 msgstr "Escritorio"
 
-#: ../plugins/windowmenu/windowmenu.c:1264
+#: ../plugins/windowmenu/windowmenu.c:1265
 msgid "No Windows"
 msgstr "No hay ventanas"
 
-#: ../plugins/windowmenu/windowmenu.c:1279
+#: ../plugins/windowmenu/windowmenu.c:1280
 msgid "Urgent Windows"
 msgstr "Ventanas urgentes"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "Añadir área de trabajo"
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1346
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "Eliminar el área de trabajo «%s»"
 
-#: ../plugins/windowmenu/windowmenu.c:1347
+#: ../plugins/windowmenu/windowmenu.c:1348
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Eliminar el área de trabajo %d"
