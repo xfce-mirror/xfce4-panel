@@ -112,6 +112,7 @@ struct _SystrayBox
   guint         square_icons : 1;
 
   /* allocated size by the plugin */
+  gint          size_alloc_init;
   gint          size_alloc;
   gint          nrows;
 };
@@ -162,6 +163,7 @@ systray_box_init (SystrayBox *box)
   box->children = NULL;
   box->names_ordered = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   box->size_max = SIZE_MAX_DEFAULT;
+  box->size_alloc_init = SIZE_MAX_DEFAULT;
   box->size_alloc = SIZE_MAX_DEFAULT;
   box->n_hidden_children = 0;
   box->n_visible_children = 0;
@@ -286,7 +288,7 @@ systray_box_get_preferred_width   (GtkWidget       *widget,
                                    gint            *minimum_width,
                                    gint            *natural_width)
 {
-  SystrayBox     *box = XFCE_SYSTRAY_BOX (widget);
+  SystrayBox *box = XFCE_SYSTRAY_BOX (widget);
 
   if (box->horizontal)
     {
@@ -295,9 +297,9 @@ systray_box_get_preferred_width   (GtkWidget       *widget,
   else
     {
       if (minimum_width != NULL)
-        *minimum_width = -1;
+        *minimum_width = box->size_alloc_init;
       if (natural_width != NULL)
-        *natural_width = -1;
+        *natural_width = box->size_alloc_init;
     }
 }
 
@@ -308,14 +310,14 @@ systray_box_get_preferred_height  (GtkWidget       *widget,
                                    gint            *minimum_height,
                                    gint            *natural_height)
 {
-  SystrayBox     *box = XFCE_SYSTRAY_BOX (widget);
+  SystrayBox *box = XFCE_SYSTRAY_BOX (widget);
 
   if (box->horizontal)
     {
       if (minimum_height != NULL)
-        *minimum_height = -1;
+        *minimum_height = box->size_alloc_init;
       if (natural_height != NULL)
-        *natural_height = -1;
+        *natural_height = box->size_alloc_init;
     }
   else
     {
@@ -853,6 +855,7 @@ systray_box_set_size_alloc (SystrayBox *box,
 
   if (G_LIKELY (size_alloc != box->size_alloc || nrows != box->nrows))
     {
+      box->size_alloc_init = size_alloc;
       box->size_alloc = size_alloc;
       box->nrows = nrows;
 
