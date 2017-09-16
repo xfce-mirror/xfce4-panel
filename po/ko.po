@@ -7,16 +7,16 @@
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2013
 # 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>, 2017
 # lego37yoon <lego37yoon@outlook.com>, 2014
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2013-2014,2016
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2013-2014,2016-2017
 # Sungjin Kang <potopro@gmail.com>, 2013
 # Sungjin Kang <potopro@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-04 00:30+0200\n"
-"PO-Revision-Date: 2017-07-10 01:05+0000\n"
-"Last-Translator: 박정규(Jung-Kyu Park) <bagjunggyu@gmail.com>\n"
+"POT-Creation-Date: 2017-09-13 00:30+0200\n"
+"PO-Revision-Date: 2017-09-16 06:05+0000\n"
+"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/xfce/xfce4-panel/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,7 @@ msgstr "패널"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Customize the panel"
-msgstr "취향에 따른 패널 설정"
+msgstr "패널 개별 설정"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
@@ -76,7 +76,7 @@ msgstr "속성(_P)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1205
 msgid "_About"
-msgstr "소개(_A)"
+msgstr "정보(_A)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1220
 msgid "_Move"
@@ -108,7 +108,7 @@ msgstr "도움말(_H)"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1345
 msgid "About"
-msgstr "소개"
+msgstr "정보"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
@@ -136,15 +136,15 @@ msgstr "<플러그인-이름>"
 
 #: ../panel/main.c:85
 msgid "Restart the running panel instance"
-msgstr "실행 중인 패널 인스턴스를 다시 시작"
+msgstr "실행 중인 패널 인스턴스 다시 시작"
 
 #: ../panel/main.c:86
 msgid "Quit the running panel instance"
-msgstr "실행 중인 패널 인스턴스를 끝내기"
+msgstr "실행 중인 패널 인스턴스 끝내기"
 
 #: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
-msgstr "시작시 창 관리자를 기다리지 않기"
+msgstr "시작시 창 관리자 기다리지 않기"
 
 #: ../panel/main.c:88
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
@@ -188,11 +188,11 @@ msgstr "다시 시작하는 중..."
 
 #: ../panel/main.c:413
 msgid "Failed to show the preferences dialog"
-msgstr "기본 설정 대화상자 보여주기에 실패했습니다"
+msgstr "기본 설정 대화상자 표시에 실패했습니다"
 
 #: ../panel/main.c:415
 msgid "Failed to show the add new items dialog"
-msgstr "새 항목 추가 대화상자를 보여주는데 실패했습니다"
+msgstr "새 항목 추가 대화상자 표시에 실패했습니다"
 
 #: ../panel/main.c:417
 msgid "Failed to save the panel configuration"
@@ -483,11 +483,11 @@ msgstr "패널의 손잡이를 숨기고 위치를 고정하려면 이 옵션을
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Automatically hide the panel:"
-msgstr "패널을 자동으로 숨깁니다:"
+msgstr "패널 자동 숨김:"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
-msgstr "테두리 공간 무시(_R)"
+msgstr "패널 영역 무시(_R)"
 
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
@@ -590,13 +590,13 @@ msgstr "모양새(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item up by one row"
 msgstr "현재 선택한 목록을 한 줄 위로 옮기기"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item down by one row"
 msgstr "현재 선택한 목록을 한 줄 아래로 옮기기"
 
@@ -665,19 +665,19 @@ msgstr "처음 시작시 원하는 설정을 아래에서 선택하십시오."
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
-msgstr "이전 환경설정을 가져오기"
+msgstr "이전 설정 가져오기"
 
 #: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "이전 4.6 환경설정을 Xfconf로 가져오기"
+msgstr "이전 4.6 설정을 xfconf로 가져오기"
 
 #: ../migrate/main.c:141
 msgid "Use default config"
-msgstr "기본 환경설정 사용하기"
+msgstr "기본 설정 사용하기"
 
 #: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr "기본 환경설정 불러오기"
+msgstr "기본 설정 불러오기"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
@@ -689,19 +689,19 @@ msgstr "단일 빈 패널로 시작하기"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "이전 패널 환경설정을 가져오는데 실패했습니다"
+msgstr "이전 패널 설정 불러오기를 실패했습니다"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr "기본 환경설정을 불러오는데 실패했습니다"
+msgstr "기본 설정 불러오기를 실패했습니다"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "패널 설정을 가져올 필요가 있습니다..."
+msgstr "패널 설정을 가져와야 합니다..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "이전 설정을 가져오는데 실패했습니다"
+msgstr "이전 설정을 가져오기를 실패했습니다"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -788,11 +788,11 @@ msgstr "화면 잠금(_K)"
 
 #: ../plugins/actions/actions.c:180
 msgid "Hibernate"
-msgstr "최대절전"
+msgstr "최대 절전"
 
 #: ../plugins/actions/actions.c:181
 msgid "_Hibernate"
-msgstr "최대절전(_H)"
+msgstr "최대 절전(_H)"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
@@ -914,7 +914,7 @@ msgstr "메뉴에서 일반적 프로그램 이름을 보이려면 이 옵션을
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:7
-#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:5
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Appearance"
@@ -963,7 +963,7 @@ msgstr "확인"
 #: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "\"%s\" 명령을 실행하는데 실패했습니다."
+msgstr "\"%s\" 명령 실행에 실패했습니다."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1634,26 +1634,26 @@ msgstr "데스크톱 표시"
 msgid "Hide all windows and show the desktop"
 msgstr "모든 창을 숨기고 데스크톱 표시합니다"
 
-#: ../plugins/systray/systray.c:428
+#: ../plugins/systray/systray.c:458
 msgid "Unable to start the notification area"
 msgstr "알림 영역을 시작할 수 없습니다"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:910
+#: ../plugins/systray/systray.c:954
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "다른 위젯이 알림 영역의 기능을 거의 대신하는 것 같습니다. 이 영역은 사용하지 않습니다."
 
-#: ../plugins/systray/systray.c:912
+#: ../plugins/systray/systray.c:956
 msgid "The notification area lost selection"
 msgstr "알림 영역이 선택을 잃었습니다"
 
-#: ../plugins/systray/systray.c:1176
+#: ../plugins/systray/systray.c:1220
 msgid "Clear"
 msgstr "정리"
 
-#: ../plugins/systray/systray.c:1177
+#: ../plugins/systray/systray.c:1221
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "알려진 프로그램의 목록을 정말 없애시렵니까?"
 
@@ -1667,14 +1667,18 @@ msgid "_Maximum icon size (px):"
 msgstr "최대 아이콘 크기(픽셀)(_M):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Sq_uare icons"
+msgstr "정방형 아이콘(_U)"
+
+#: ../plugins/systray/systray-dialog.glade.h:4
 msgid "Show _frame"
 msgstr "틀 표시(_F)"
 
-#: ../plugins/systray/systray-dialog.glade.h:7
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "C_lear Known Applications"
 msgstr "알려진 프로그램 지우기(_L)"
 
-#: ../plugins/systray/systray-dialog.glade.h:8
+#: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Known Applications"
 msgstr "알려진 프로그램"
 
@@ -1685,7 +1689,7 @@ msgstr "화면 %d에 대한 관리자 선택 실패"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
-msgstr "알림 아이콘을 보일 영역입니다"
+msgstr "알림 아이콘을 보일 부분입니다"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1776,23 +1780,23 @@ msgstr "숨겨둔 창만 표시(_M)"
 msgid "Show windows from all mo_nitors"
 msgstr "모든 모니터의 창 표시(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3407
+#: ../plugins/tasklist/tasklist-widget.c:3422
 msgid "Mi_nimize All"
 msgstr "모두 최소화(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3415
+#: ../plugins/tasklist/tasklist-widget.c:3430
 msgid "Un_minimize All"
 msgstr "모두 최소화 취소(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3423
+#: ../plugins/tasklist/tasklist-widget.c:3438
 msgid "Ma_ximize All"
 msgstr "모두 최대화(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3431
+#: ../plugins/tasklist/tasklist-widget.c:3446
 msgid "_Unmaximize All"
 msgstr "모두 최대화 취소(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3443
+#: ../plugins/tasklist/tasklist-widget.c:3458
 msgid "_Close All"
 msgstr "모두 닫기(_C)"
 
@@ -1804,24 +1808,24 @@ msgstr "단추를 사용하여 열려있는 창을 전환합니다"
 msgid "Desktop"
 msgstr "데스크톱"
 
-#: ../plugins/windowmenu/windowmenu.c:1264
+#: ../plugins/windowmenu/windowmenu.c:1265
 msgid "No Windows"
 msgstr "창 없음"
 
-#: ../plugins/windowmenu/windowmenu.c:1279
+#: ../plugins/windowmenu/windowmenu.c:1280
 msgid "Urgent Windows"
 msgstr "긴급 창"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1323
 msgid "Add Workspace"
 msgstr "작업 공간 추가"
 
-#: ../plugins/windowmenu/windowmenu.c:1345
+#: ../plugins/windowmenu/windowmenu.c:1346
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "작업 공간 \"%s\" 제거"
 
-#: ../plugins/windowmenu/windowmenu.c:1347
+#: ../plugins/windowmenu/windowmenu.c:1348
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "작업 공간 %d 제거"
