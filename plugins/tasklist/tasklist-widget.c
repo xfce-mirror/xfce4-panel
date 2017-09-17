@@ -2192,12 +2192,14 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
     {
       /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, 0); */
       gtk_label_set_xalign (GTK_LABEL (child->label), 0.0);
+      gtk_label_set_yalign (GTK_LABEL (child->label), 0.5);
       gtk_label_set_ellipsize (GTK_LABEL (child->label), tasklist->ellipsize_mode);
     }
   else
     {
       /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, -1); */
       gtk_label_set_yalign (GTK_LABEL (child->label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (child->label), 0.5);
       gtk_label_set_angle (GTK_LABEL (child->label), 270);
       /* TODO can we already ellipsize here yet? */
     }
@@ -4105,6 +4107,7 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
         {
           /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, 0); */
           gtk_label_set_xalign (GTK_LABEL (child->label), 0.0);
+          gtk_label_set_yalign (GTK_LABEL (child->label), 0.5);
           gtk_label_set_angle (GTK_LABEL (child->label), 0);
           gtk_label_set_ellipsize (GTK_LABEL (child->label),
                                    child->tasklist->ellipsize_mode);
@@ -4113,6 +4116,7 @@ xfce_tasklist_update_orientation (XfceTasklist *tasklist)
         {
           /* gtk_box_reorder_child (GTK_BOX (child->box), child->icon, -1); */
           gtk_label_set_yalign (GTK_LABEL (child->label), 0.0);
+          gtk_label_set_xalign (GTK_LABEL (child->label), 0.5);
           gtk_label_set_angle (GTK_LABEL (child->label), 270);
           gtk_label_set_ellipsize (GTK_LABEL (child->label), PANGO_ELLIPSIZE_NONE);
         }
