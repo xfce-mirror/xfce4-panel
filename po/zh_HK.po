@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2013-10-08 06:45+0000\n"
+"PO-Revision-Date: 2017-09-19 20:16+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
-"Language-Team: Chinese (Hong Kong) (http://www.transifex.com/projects/p/xfce/language/zh_HK/)\n"
+"Language-Team: Chinese (Hong Kong) (http://www.transifex.com/xfce/xfce4-panel/language/zh_HK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,12 +47,12 @@ msgstr "自訂面板"
 #: ../panel/panel-preferences-dialog.c:1099
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "您確定要移除「%s」嗎？"
+msgstr "確定要移除「%s」嗎？"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
 #: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "如果您要從面板移除該項目，它將永遠消失。"
+msgstr "如果要從面板移除該項目，它將永遠消失。"
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1202
@@ -108,7 +108,7 @@ msgstr "重新啟動執行中的面板實體"
 
 #: ../panel/main.c:84
 msgid "Quit the running panel instance"
-msgstr "退出執行中的面板實體"
+msgstr "結束執行中的面板實體"
 
 #: ../panel/main.c:85
 msgid "Do not wait for a window manager on startup"
@@ -119,7 +119,7 @@ msgstr "啟動時不要等待視窗管理器"
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr "印出版本資訊並離開"
+msgstr "印出版本資訊並結束"
 
 #. parse context options
 #: ../panel/main.c:235
@@ -171,7 +171,7 @@ msgstr "未能重新啟動面板"
 
 #: ../panel/main.c:387
 msgid "Failed to quit the panel"
-msgstr "未能退出面板"
+msgstr "未能結束面板"
 
 #: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
@@ -181,7 +181,7 @@ msgstr "未能傳送 D-Bus 訊息"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "您想要啟動面板嗎？如果要的話，請確認在登出時您有儲存工作階段，這樣該面板才能在下一次您登入時自動啟動。"
+msgstr "想要啟動面板嗎？如果要的話，請確認在登出時您有儲存工作階段，這樣該面板才能在下一次您登入時自動啟動。"
 
 #: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
@@ -212,16 +212,16 @@ msgstr[0] "由 %d 項桌面檔建立新的啟動列"
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "若您未透過工作階段管理程式啟動 X。只要點擊「退出」就會關閉 X 伺服器。"
+msgstr "若未透過工作階段管理程式啟動 X。只要點擊「結束」就會關閉 X 伺服器。"
 
 #: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
-msgstr "您確定要退出該面板嗎？"
+msgstr "確定要結束該面板嗎？"
 
 #: ../panel/panel-application.c:1728
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "未能執行指令 \"%s\""
+msgstr "未能執行「%s」指令"
 
 #: ../panel/panel-dbus-client.c:211
 msgid ""
@@ -233,7 +233,7 @@ msgstr "指定了無效的插件事件語法。請使用 PLUGIN-NAME:NAME[:TYPE:
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "無效的暗示類型「%s」。有效的類型為真假值 (bool)、倍精度 (double)、整數 (int)、字串 (string)、單位 (unit)。"
+msgstr "暗示類型「%s」無效。有效的類型為真假值 (bool)、倍精度 (double)、整數 (int)、字串 (string)、單位 (unit)。"
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -253,7 +253,7 @@ msgstr "Xfce 桌面環境的面板"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2010."
+msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2010.\nWalter Cheuk <wwycheuk@gmail.com>, 2013."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -299,7 +299,7 @@ msgstr "在這裡輸入搜尋詞語"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "插件「%s」無預期退出面板，您想要重新啟動它嗎？"
+msgstr "插件「%s」不正常地離開了面板，想要重新啟動它嗎？"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -332,7 +332,7 @@ msgstr "面板與插件組態將被永久移除"
 #: ../panel/panel-preferences-dialog.c:873
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "您確定要移除面板 %d 嗎？"
+msgstr "確定要移除面板 %d 嗎？"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -399,7 +399,7 @@ msgstr "輸入(_U)："
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Span mo_nitors"
-msgstr "跨越螢幕(_N)"
+msgstr "跨螢幕(_N)"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
@@ -432,7 +432,7 @@ msgstr "不要保留邊緣空間(_R)"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "如果你想讓最大化視窗覆蓋面板後的區域，請選取此選項。這只對於附在螢幕邊緣的面板有效。"
+msgstr "如果想讓最大化視窗覆蓋面板後的區域，請選取此選項。這只對於附在螢幕邊緣的面板有效。"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -614,7 +614,7 @@ msgstr "由於該面板移動至新系統，若要儲存設定值它必須載入
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
-msgstr "從下方選擇您想要最先啟動的設置。"
+msgstr "從下方選擇想要最先啟動的設置。"
 
 #: ../migrate/main.c:129
 msgid "Migrate old config"
@@ -708,7 +708,7 @@ msgstr "登出(_L)"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
-msgstr "您確定要登出嗎？"
+msgstr "確定要登出嗎？"
 
 #: ../plugins/actions/actions.c:154
 #, c-format
@@ -749,7 +749,7 @@ msgstr "休眠(_H)"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr "您想要將電腦暫停至磁碟中嗎？"
+msgstr "想要將電腦暫停至磁碟中嗎？"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -766,7 +766,7 @@ msgstr "暫停(_P)"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr "您想要將電腦暫停至 RAM 中嗎？"
+msgstr "想要將電腦暫停至 RAM 中嗎？"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -783,7 +783,7 @@ msgstr "重新啟動"
 
 #: ../plugins/actions/actions.c:198
 msgid "Are you sure you want to restart?"
-msgstr "您確定要重新啟動嗎？"
+msgstr "確定要重新啟動嗎？"
 
 #: ../plugins/actions/actions.c:199
 #, c-format
@@ -800,7 +800,7 @@ msgstr "關機(_D)"
 
 #: ../plugins/actions/actions.c:206
 msgid "Are you sure you want to shut down?"
-msgstr "您確定要關機嗎？"
+msgstr "確定要關機嗎？"
 
 #: ../plugins/actions/actions.c:207
 #, c-format
@@ -820,7 +820,7 @@ msgstr "無法執行動作「%s」"
 
 #: ../plugins/actions/actions.c:1142
 msgid "John Doe"
-msgstr "John Doe"
+msgstr "陳大文"
 
 #: ../plugins/actions/actions.desktop.in.h:2
 msgid "Log out, lock or other system actions"
@@ -909,7 +909,7 @@ msgstr "選取圖示"
 #: ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "未能執行「%s」。"
+msgstr "未能執行「%s」指令。"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
@@ -994,7 +994,7 @@ msgstr "要插入面板的格式，用來描述日期與時間的部份。舉例
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
-msgstr "顯示秒(_S)"
+msgstr "顯示秒數(_S)"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "True _binary clock"
@@ -1010,7 +1010,7 @@ msgstr "讓時間分隔符閃爍(_F)"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Sho_w AM/PM"
-msgstr "顯示 AM/PM(_W)"
+msgstr "顯示「上午／下午」(_W)"
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "F_ormat:"
@@ -1096,27 +1096,27 @@ msgstr "%0點鐘"
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr "%0點過五分"
+msgstr "%0點零五分"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr "%0點過十分"
+msgstr "%0點零十分"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr "%0點過十五分"
+msgstr "%0點零十五分"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr "%0點過二十分"
+msgstr "%0點零二十分"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr "%0點過二十五分"
+msgstr "%0點零二十五分"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
@@ -1165,31 +1165,31 @@ msgstr "%0點鐘"
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr "%0點過五分"
+msgstr "%0點零五分"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr "%0點過十分"
+msgstr "%0點零十分"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr "%0點過十五分"
+msgstr "%0點零十五分"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr "%0點過二十分"
+msgstr "%0點零二十分"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr "%0點過二十五分"
+msgstr "%0點零二十五分"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
@@ -1314,7 +1314,7 @@ msgstr "無法為「%s」啟動預設應用程式"
 #: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "未能執行分類「%s」的偏好應用程式"
+msgstr "未能執行「%s」分類的偏好應用程式"
 
 #: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
@@ -1322,7 +1322,7 @@ msgstr "開啟資料夾"
 
 #: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
-msgstr "在終端機內開啟"
+msgstr "在終端機開啟"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
@@ -1355,7 +1355,7 @@ msgstr "顯示隱藏檔(_F)"
 #: ../plugins/tasklist/tasklist-dialog.glade.h:15
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Filtering"
-msgstr "過濾方式"
+msgstr "篩選方式"
 
 #: ../plugins/launcher/launcher.c:405
 msgid "Open launcher menu"
@@ -1459,7 +1459,7 @@ msgstr "選取此選項以停用移動至面板按鈕上方或選單項目上方
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
-msgstr "顯示標籤而不是圖示(_L)"
+msgstr "顯示標籤而非圖示(_L)"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
@@ -1497,7 +1497,7 @@ msgstr "工作區 %d"
 #: ../plugins/pager/pager-dialog.glade.h:1
 #: ../plugins/pager/pager.desktop.in.h:1
 msgid "Workspace Switcher"
-msgstr "工作區切換器"
+msgstr "工作區切換"
 
 #: ../plugins/pager/pager-dialog.glade.h:2
 msgid "Number of _rows:"
@@ -1580,7 +1580,7 @@ msgstr "通知區域失去選取項目"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "您確定要清除已知應用程式的清單嗎？"
+msgstr "確定要清除已知應用程式的清單嗎？"
 
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.h:1
@@ -1589,7 +1589,7 @@ msgstr "通知區域"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr "最大圖示大小 (px)(_M)："
+msgstr "最大圖示大小 (像素)(_M)："
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
@@ -1691,15 +1691,15 @@ msgstr "無，允許拖放"
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
-msgstr "最小化全部(_N)"
+msgstr "全部最小化(_N)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
-msgstr "取消"
+msgstr "取消最小化(_M)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
-msgstr "最大化全部(_X)"
+msgstr "全部最大化(_X)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
@@ -1707,7 +1707,7 @@ msgstr "取消最大化(_U)"
 
 #: ../plugins/tasklist/tasklist-widget.c:3236
 msgid "_Close All"
-msgstr "關閉全部(_C)"
+msgstr "全部關閉(_C)"
 
 #: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Switch between open windows using buttons"
