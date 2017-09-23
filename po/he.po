@@ -1,23 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Dotan Kamber <kamberd@yahoo.com>, 2004,2006
-# Elishai Eliyahu <e1907@mm.st>, 2016
-# GenghisKhan <genghiskhan@gmx.ca>, 2014-2015
-# Hezy Amiel <open@hezyamiel.com>, 2010
-# Jonatan Perry <Jonatan443@walla.co.il>, 2004
-# Yaron Shahrabani <sh.yaron@gmail.com>, 2011,2013-2014
-# Yuval Tanny <tanai@int.gov.il>, 2004,2006
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2016-03-21 13:06+0000\n"
-"Last-Translator: Elishai Eliyahu <e1907@mm.st>\n"
-"Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
+"POT-Creation-Date: 2017-09-09 18:31+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2017\n"
+"Language-Team: Hebrew (https://www.transifex.com/xfce/teams/16840/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -183,7 +177,9 @@ msgstr "נכשל לשלוח מסר D-Bus"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "האם ברצונך להתחיל את הפאנל? אם כן, וודא ששמרת את הסשן ביציאה, כך שהפאנל יתחיל אוטומטית בפעם הבאה בה תתחבר."
+msgstr ""
+"האם ברצונך להתחיל את הפאנל? אם כן, וודא ששמרת את הסשן ביציאה, כך שהפאנל "
+"יתחיל אוטומטית בפעם הבאה בה תתחבר."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -202,7 +198,8 @@ msgstr "צור _מפעיל"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "פעולה זו תיצור תוסף מפעיל חדש בפאנל ותכניס את הקבצים שהושלכו כפריטים בתפריט."
+msgstr ""
+"פעולה זו תיצור תוסף מפעיל חדש בפאנל ותכניס את הקבצים שהושלכו כפריטים בתפריט."
 
 #: ../panel/panel-application.c:988
 #, c-format
@@ -229,14 +226,17 @@ msgstr "נכשל לבצע פקודה \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "הוגדר תחביר שגוי של מאורע תוסף. השתמש ב PLUGIN-NAME:NAME[:TYPE:VALUE]."
+msgstr ""
+"הוגדר תחביר שגוי של מאורע תוסף. השתמש ב PLUGIN-NAME:NAME[:TYPE:VALUE]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "סוג רמז לא חוקי \"%s\". סוגים חוקיים הם בוליאני, דאבל, שלם, מחרוזת ושלם חיובי."
+msgstr ""
+"סוג רמז לא חוקי \"%s\". סוגים חוקיים הם בוליאני, דאבל, שלם, מחרוזת ושלם "
+"חיובי."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -276,7 +276,9 @@ msgstr "פאנל %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "משום שהפאנל מורץ במצב קיוסק, אינך מורשה לערוך שינויים לתצורת פאנל כמו משתמש רגיל"
+msgstr ""
+"משום שהפאנל מורץ במצב קיוסק, אינך מורשה לערוך שינויים לתצורת פאנל כמו משתמש "
+"רגיל"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -310,7 +312,9 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "התוסף הופעל מחדש למעלה מפעם אחת במהלך %d השניות האחרונות. אם תלחץ על בצע הלוח ינסה להפעיל מחדש את התוסף אחרת הוא יוסר באופן קבוע מתוך הלוח."
+msgstr ""
+"התוסף הופעל מחדש למעלה מפעם אחת במהלך %d השניות האחרונות. אם תלחץ על בצע "
+"הלוח ינסה להפעיל מחדש את התוסף אחרת הוא יוסר באופן קבוע מתוך הלוח."
 
 #: ../panel/panel-preferences-dialog.c:492
 msgid "Automatic"
@@ -351,7 +355,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(חיצוני)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "שם פנימי: %s-%d\nPID: %d"
+msgstr ""
+"שם פנימי: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -447,7 +453,9 @@ msgstr "_אל תשמור מקום בשוליים"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "בחר באפשרות זו אם ברצונך שחלונות מוגדלים יכסו את השטח מאחורי הלוח. זה עובד רק כאשר הלוח מחובר לקצה המסך."
+msgstr ""
+"בחר באפשרות זו אם ברצונך שחלונות מוגדלים יכסו את השטח מאחורי הלוח. זה עובד "
+"רק כאשר הלוח מחובר לקצה המסך."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -476,7 +484,9 @@ msgstr "הג_דל אורך אוטומטית"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "בחר את אפשרות זו כדי להגדיל אוטומטית את האורך של הלוח אם התוספות מצריכות עוד מרווח."
+msgstr ""
+"בחר את אפשרות זו כדי להגדיל אוטומטית את האורך של הלוח אם התוספות מצריכות עוד"
+" מרווח."
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -537,13 +547,17 @@ msgstr "_עזיבה:"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr "שקיפות כאשר הסמן הינו מעל הלוח, כאשר הערך 0 הוא שקוף לגמרי והערך 100 הוא אטום לגמרי."
+msgstr ""
+"שקיפות כאשר הסמן הינו מעל הלוח, כאשר הערך 0 הוא שקוף לגמרי והערך 100 הוא "
+"אטום לגמרי."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "שקיפות כאשר הסמן אינו מעל הלוח, כאשר הערך 0 הוא שקוף לגמרי והערך 100 הוא אטום לגמרי."
+msgstr ""
+"שקיפות כאשר הסמן אינו מעל הלוח, כאשר הערך 0 הוא שקוף לגמרי והערך 100 הוא "
+"אטום לגמרי."
 
 #: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Opacity"
@@ -625,7 +639,9 @@ msgstr "ברוך בואך להפעלה הראשונה של הלוח"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "מכיוון שהלוח עבר למערכת חדשה לאחסון ההגדרות, הוא חייב לטעון תצורה התחלתית חדשה."
+msgstr ""
+"מכיוון שהלוח עבר למערכת חדשה לאחסון ההגדרות, הוא חייב לטעון תצורה התחלתית "
+"חדשה."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -854,7 +870,9 @@ msgstr "הצג שמות יישומים _כלליים"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "בחר באפשרות זו כדי להציג את השם הכללי של יישום בתפריט, לדוגמא \"מנהל קבצים\" במקום \"Thunar\""
+msgstr ""
+"בחר באפשרות זו כדי להציג את השם הכללי של יישום בתפריט, לדוגמא \"מנהל קבצים\""
+" במקום \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -917,12 +935,12 @@ msgstr "קובץ תפריט"
 msgid "Applications"
 msgstr "יישומים"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:564
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "בחירת איקון"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:605
+#: ../plugins/applicationsmenu/applicationsmenu.c:606
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -983,7 +1001,9 @@ msgstr "שעון"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "שם אזור זמן תואם קובץ בתוך מסד נתונים zoneinfo, לדוגמא \"America/New_York\". השאר ריק כדי להשתמש בזמן מקומי."
+msgstr ""
+"שם אזור זמן תואם קובץ בתוך מסד נתונים zoneinfo, לדוגמא \"America/New_York\"."
+" השאר ריק כדי להשתמש בזמן מקומי."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1012,7 +1032,10 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "הפורמט שמתאר חלקי תאריך וזמן להזנה לתוך הלוח. לדוגמא, Y% יוחלף בשנה, m% יוחלף בחודש d% יוחלף ביום. באופן דומה, תגיות <b></b> יהפכו את הטקסט למודגש. ראה עמוד \"עזרה\" לשם מידע נוסף."
+msgstr ""
+"הפורמט שמתאר חלקי תאריך וזמן להזנה לתוך הלוח. לדוגמא, Y% יוחלף בשנה, m% "
+"יוחלף בחודש d% יוחלף ביום. באופן דומה, תגיות <b></b> יהפכו את הטקסט למודגש. "
+"ראה עמוד \"עזרה\" לשם מידע נוסף."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1363,7 +1386,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "הזן רשימה של תבניות אשר ינוצלו לקביעת אילו קבצים זמינים בתוך ספרייה. אם תציין כאן יותר מתבנית אחת, על רשימת הפריטים להיות מופרדת בעזרת נקודה פסיק (דוגמא ‎*.txt;*.doc)."
+msgstr ""
+"הזן רשימה של תבניות אשר ינוצלו לקביעת אילו קבצים זמינים בתוך ספרייה. אם "
+"תציין כאן יותר מתבנית אחת, על רשימת הפריטים להיות מופרדת בעזרת נקודה פסיק "
+"(דוגמא ‎*.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1477,7 +1503,8 @@ msgstr "נטרל _תיבות צצות"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "בחר את אפשרות זו כדי לנטרל תיבות צצות בעת מעבר מעל לחצן לוח או פריטי תפריט."
+msgstr ""
+"בחר את אפשרות זו כדי לנטרל תיבות צצות בעת מעבר מעל לחצן לוח או פריטי תפריט."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1594,7 +1621,9 @@ msgstr "לא מסוגל להתחיל אזור התראה"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "קרוב לוודאי כי תוכנית אחרת השתלטה על התפקודיות של אזור התראה. אזור זה לא ינוצל."
+msgstr ""
+"קרוב לוודאי כי תוכנית אחרת השתלטה על התפקודיות של אזור התראה. אזור זה לא "
+"ינוצל."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
