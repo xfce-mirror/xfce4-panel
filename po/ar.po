@@ -1,22 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Karim Oulad Chalha <herr.linux88@gmail.com>, 2013
-# Mohamed Sakhri, 2016
-# محمد الحرقان <malham1@gmail.com>, 2012
-# Saleh Alhathal <hathalsal@hotmail.com>, 2004
-# Karim Oulad Chalha <herr.linux88@gmail.com>, 2012-2013
-# محمد الحرقان <malham1@gmail.com>, 2012-2013
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2016-03-01 19:07+0000\n"
-"Last-Translator: Mohamed Sakhri\n"
-"Language-Team: Arabic (http://www.transifex.com/xfce/xfce4-panel/language/ar/)\n"
+"POT-Creation-Date: 2017-09-09 18:31+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2017\n"
+"Language-Team: Arabic (https://www.transifex.com/xfce/teams/16840/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -182,7 +177,9 @@ msgstr "فشل إرسال رسالة D-Bus"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "هل تريد تشغيل اللوحة؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, لتتمكن اللوحة من البدء تلقائيا عند الولوج التالي."
+msgstr ""
+"هل تريد تشغيل اللوحة؟ إذا قمت بذلك, تأكد من حفظ الجلسة عنذ تسجيل الخروج, "
+"لتتمكن اللوحة من البدء تلقائيا عند الولوج التالي."
 
 #: ../panel/main.c:407 ../panel/main.c:421
 #, c-format
@@ -201,7 +198,8 @@ msgstr "أنش_ئ مُطْلِق"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "هذا سينشئ ملحق مطلقة في اللوحة و إدراج الملفات المحددة في قائمة العناصر."
+msgstr ""
+"هذا سينشئ ملحق مطلقة في اللوحة و إدراج الملفات المحددة في قائمة العناصر."
 
 #: ../panel/panel-application.c:988
 #, c-format
@@ -232,14 +230,18 @@ msgstr "فشل تنفيد الأمر \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم [:نوع:قيمة]."
+msgstr ""
+"بناء جملة الحدث المحدد الملحق غير صالح. استخدم الملحق--الاسم:اسم "
+"[:نوع:قيمة]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "نوع التلميح غير صالح \"%s\". الأنواع الصالحة هي bool مزدوج، int والسلسلة و uint."
+msgstr ""
+"نوع التلميح غير صالح \"%s\". الأنواع الصالحة هي bool مزدوج، int والسلسلة و "
+"uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -279,7 +281,9 @@ msgstr "لوحة %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "لأن اللوحة قيد التشغيل في وضع kiosk، لا يسمح بإجراء تغييرات على إعداد اللوحة كمستخدم عادي"
+msgstr ""
+"لأن اللوحة قيد التشغيل في وضع kiosk، لا يسمح بإجراء تغييرات على إعداد اللوحة"
+" كمستخدم عادي"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -313,7 +317,9 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "تم إعادة تشغيل الملحق اكثر من مرة في آخر %d ثانية. إذا ضغطت على تنفيذ سيتم إعادة تشغيله من على اللوحة وإلا سيتم حذفه نهائيا من اللوحة."
+msgstr ""
+"تم إعادة تشغيل الملحق اكثر من مرة في آخر %d ثانية. إذا ضغطت على تنفيذ سيتم "
+"إعادة تشغيله من على اللوحة وإلا سيتم حذفه نهائيا من اللوحة."
 
 #: ../panel/panel-preferences-dialog.c:492
 msgid "Automatic"
@@ -354,7 +360,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(الخارجية)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "إسم داخلي: %s-%d\nمعرف العملية: %d"
+msgstr ""
+"إسم داخلي: %s-%d\n"
+"معرف العملية: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -450,7 +458,9 @@ msgstr "لا تحجز مساحة على اللوحة"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "حدد هذا الخيار إذا أردت تغطية النوافذ المكبرة للمنطقة خلف اللوحة. هذا يعمل فقط عند وصول اللوحة إلى حافة شاشة."
+msgstr ""
+"حدد هذا الخيار إذا أردت تغطية النوافذ المكبرة للمنطقة خلف اللوحة. هذا يعمل "
+"فقط عند وصول اللوحة إلى حافة شاشة."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -479,7 +489,8 @@ msgstr "زيادة الطول تلقائياًً"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "حدد هذا الخيار لزيادة طول اللوحة تلقائياً إذا تطلبت الإضافات مساحة أكبر."
+msgstr ""
+"حدد هذا الخيار لزيادة طول اللوحة تلقائياً إذا تطلبت الإضافات مساحة أكبر."
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -628,7 +639,8 @@ msgstr "مرحبا بكم في البداية الأولى للوحة"
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
-msgstr "بسبب نقل اللوحة إلى نظام تخزين إعدادات جديد، تم تحميل إعدادات أولية جديدة."
+msgstr ""
+"بسبب نقل اللوحة إلى نظام تخزين إعدادات جديد، تم تحميل إعدادات أولية جديدة."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -857,7 +869,9 @@ msgstr "عرض اسماء التطبيقات العامة"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "حدد هذا الخيار لعرض اسم التطبيق العام في القائمة، على سبيل المثال \"إدارة الملفات\" بدلاً من \"Thunar\""
+msgstr ""
+"حدد هذا الخيار لعرض اسم التطبيق العام في القائمة، على سبيل المثال \"إدارة "
+"الملفات\" بدلاً من \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -920,12 +934,12 @@ msgstr "ملف القائمة"
 msgid "Applications"
 msgstr "التطبيقات"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:564
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "اختر أيقونة"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:605
+#: ../plugins/applicationsmenu/applicationsmenu.c:606
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -986,7 +1000,9 @@ msgstr "الساعة"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "اسم المنطقة الزمنية المقابل للملف في قاعدة البيانات zoneinfo، على سبيل المثال \"أمريكا/New_York\". ترك فارغاً ليتم استخدامها في المنطقة الزمنية."
+msgstr ""
+"اسم المنطقة الزمنية المقابل للملف في قاعدة البيانات zoneinfo، على سبيل "
+"المثال \"أمريكا/New_York\". ترك فارغاً ليتم استخدامها في المنطقة الزمنية."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1015,7 +1031,10 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "يصف التنسيق أجزاء التاريخ والوقت المدرجة في اللوحة. على سبيل المثال، سيتم استبدال%Y للسنة، %m للشهر و %d لليوم. وهكذا <b></b> العلامات ستجعل النص غامقاً. انظر صفحة \"التعليمات\" للحصول على معلومات إضافية."
+msgstr ""
+"يصف التنسيق أجزاء التاريخ والوقت المدرجة في اللوحة. على سبيل المثال، سيتم "
+"استبدال%Y للسنة، %m للشهر و %d لليوم. وهكذا <b></b> العلامات ستجعل النص "
+"غامقاً. انظر صفحة \"التعليمات\" للحصول على معلومات إضافية."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1366,7 +1385,10 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "اكتب قائمة بالأنماط التي سيتم استخدامها لتحديد الملفات المرئية في المجلد. إذا أردت تحديد أكثر من نمط واحد. يجب فصل عناصر القائمة بواسطة الفواصل المنقوطة (مثلاً *.txt;*.doc)."
+msgstr ""
+"اكتب قائمة بالأنماط التي سيتم استخدامها لتحديد الملفات المرئية في المجلد. "
+"إذا أردت تحديد أكثر من نمط واحد. يجب فصل عناصر القائمة بواسطة الفواصل "
+"المنقوطة (مثلاً *.txt;*.doc)."
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
@@ -1480,7 +1502,9 @@ msgstr "عطل تلميحات الأدوات"
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
-msgstr "حدد هذا الخيار لتعطيل تلميحات الأدوات عندما تتحرك عبر عناصر قائمة أو زر في اللوحة."
+msgstr ""
+"حدد هذا الخيار لتعطيل تلميحات الأدوات عندما تتحرك عبر عناصر قائمة أو زر في "
+"اللوحة."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1597,7 +1621,9 @@ msgstr "غير قادر على بدء تشغيل منطقة التنبيه"
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
-msgstr "الاحتمال الأكثر أن برنامج آخر أخذ وظيفة ومساحة التنبيه. وستكون هذه المساحة غير مستخدمة."
+msgstr ""
+"الاحتمال الأكثر أن برنامج آخر أخذ وظيفة ومساحة التنبيه. وستكون هذه المساحة "
+"غير مستخدمة."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
