@@ -1,17 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Nobuhiro Iwamatsu <iwamatsu@gmail.com>, 2016
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Xfce4-panel\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-27 18:30+0200\n"
-"PO-Revision-Date: 2016-03-04 03:35+0000\n"
-"Last-Translator: Nobuhiro Iwamatsu <iwamatsu@gmail.com>\n"
-"Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
+"POT-Creation-Date: 2017-09-09 18:31+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2017\n"
+"Language-Team: Japanese (https://www.transifex.com/xfce/teams/16840/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -249,7 +249,9 @@ msgstr "Xfce デスクトップ環境のパネルです。"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr "Daichi Kawahata <daichi@xfce.org>, 2005-2007.\nMasato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
+msgstr ""
+"Daichi Kawahata <daichi@xfce.org>, 2005-2007.\n"
+"Masato Hashimoto <cabezon.hashimoto@gmail.com>, 2010-2012."
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
@@ -303,7 +305,9 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "プラグインは最近 %d 秒以内に 1 回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
+msgstr ""
+"プラグインは最近 %d 秒以内に 1 "
+"回以上再起動されました。「実行」を押すとパネルはプラグインの再起動を試みます。その他の場合はパネルから完全に削除されます。"
 
 #: ../panel/panel-preferences-dialog.c:492
 msgid "Automatic"
@@ -344,7 +348,9 @@ msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr "内部名: %s-%d\nPID: %d"
+msgstr ""
+"内部名: %s-%d\n"
+"PID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
@@ -440,7 +446,8 @@ msgstr "パネル分のスペースを確保しない(_R)"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "ウィンドウを最大化した時にパネルの後ろまで広げたい場合はこのオプションを選択してください。これはパネルが画面端に付着している場合のみ機能します。"
+msgstr ""
+"ウィンドウを最大化した時にパネルの後ろまで広げたい場合はこのオプションを選択してください。これはパネルが画面端に付着している場合のみ機能します。"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -847,7 +854,9 @@ msgstr "アプリケーションを一般名で表示する(_A)"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "アプリケーションを一般名でメニューに表示する場合にこのオプションを選択してください。例えば \"Thunar\" は \"ファイルマネージャー\" と表示されます。"
+msgstr ""
+"アプリケーションを一般名でメニューに表示する場合にこのオプションを選択してください。例えば \"Thunar\" は \"ファイルマネージャー\" "
+"と表示されます。"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "Show ic_ons in menu"
@@ -910,12 +919,12 @@ msgstr "メニューファイル"
 msgid "Applications"
 msgstr "アプリケーション"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:564
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
 msgstr "アイコンを選択してください"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:605
+#: ../plugins/applicationsmenu/applicationsmenu.c:606
 #: ../plugins/clock/clock.c:865 ../plugins/launcher/launcher.c:2308
 #, c-format
 msgid "Failed to execute command \"%s\"."
@@ -976,7 +985,9 @@ msgstr "時計"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "zoneinfo database 内と一致するタイムゾーン名を指定してください (例: Asia/Tokyo)。省略するとシステムのタイムゾーンが使用されます。"
+msgstr ""
+"zoneinfo database 内と一致するタイムゾーン名を指定してください (例: "
+"Asia/Tokyo)。省略するとシステムのタイムゾーンが使用されます。"
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1005,7 +1016,9 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m は月に、%d は日に置き換えられます。また、<b></b> タグで太字にすることもできます。詳しくは \"ヘルプ\" ページを参照してください。"
+msgstr ""
+"この形式はパネルに表示される日付と時刻部分を表します。例えば、%Y は年に、%m は月に、%d は日に置き換えられます。また、<b></b> "
+"タグで太字にすることもできます。詳しくは \"ヘルプ\" ページを参照してください。"
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1356,7 +1369,9 @@ msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
-msgstr "ディレクトリ内のファイルを表示するパターンのリストを入力してください。1 つ以上のパターンを指定する場合は、それぞれをセミコロンで区切ってください (例: *.txt;*.doc)。"
+msgstr ""
+"ディレクトリ内のファイルを表示するパターンのリストを入力してください。1 つ以上のパターンを指定する場合は、それぞれをセミコロンで区切ってください "
+"(例: *.txt;*.doc)。"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
