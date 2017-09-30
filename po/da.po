@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2017-09-29 17:27+0000\n"
+"PO-Revision-Date: 2017-09-30 13:38+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce4-panel/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -22,13 +22,13 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
-msgstr "Opret opstarter på panelet"
+msgstr "Opret starter på panelet"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
-msgstr "Føj en ny opstarter til panelet baseret på informationen fra denne skrivebordsfil"
+msgstr "Tilføj en ny starter til panelet baseret på informationen fra denne skrivebordsfil"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
@@ -94,11 +94,11 @@ msgstr "Gem indstilling til panelet"
 
 #: ../panel/main.c:82
 msgid "Add a new plugin to the panel"
-msgstr "Tilføj et nyt udvidelsesmodul til panelet"
+msgstr "Tilføj et nyt plugin til panelet"
 
 #: ../panel/main.c:82
 msgid "PLUGIN-NAME"
-msgstr "UDVIDELSESMODULNAVN"
+msgstr "PLUGINNAVN"
 
 #: ../panel/main.c:83
 msgid "Restart the running panel instance"
@@ -127,7 +127,7 @@ msgstr "[ARGUMENTER...]"
 #: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Tast \"%s --help\" for anvendelse."
+msgstr "Skriv \"%s --help\" for anvendelse."
 
 #: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
@@ -161,7 +161,7 @@ msgstr "Kunne ikke gemme indstillingen til panelet"
 
 #: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
-msgstr "Kunne ikke føje et udvidelsesmodul til panelet"
+msgstr "Kunne ikke føje et plugin til panelet"
 
 #: ../panel/main.c:385
 msgid "Failed to restart the panel"
@@ -198,14 +198,14 @@ msgstr "Opret op_starter"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Dette vil oprette et udvidelsesmodul for opstart på panelet og indsætter dine flyttede filer som menuelementer."
+msgstr "Dette vil oprette et plugin for opstart på panelet og indsætter dine flyttede filer som menuelementer."
 
 #: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Opret en ny opstarter fra %d skrivebordsfilen"
-msgstr[1] "Opret en ny opstarter fra %d skrivebordsfilerne"
+msgstr[1] "Opret en ny starter fra %d skrivebordsfilerne"
 
 #: ../panel/panel-application.c:1719
 msgid ""
@@ -225,7 +225,7 @@ msgstr "Kunne ikke køre kommandoen \"%s\""
 #: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "Ugyldigt udvidelsesmodul syntaks angivet. Brug UDVIDELSESMODULNAVN:NAVN[:TYPE:VÆRDI]."
+msgstr "Ugyldig plugin event syntaks angivet. Brug PLUGINNAVN:NAVN[:TYPE:VÆRDI]."
 
 #: ../panel/panel-dbus-client.c:244
 #, c-format
@@ -261,7 +261,7 @@ msgstr "Tilføj nyt element"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr "Vælg venligst et panel for det nye udvidelsesmodul:"
+msgstr "Vælg venligst et panel for det nye plugin:"
 
 #: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
@@ -284,7 +284,7 @@ msgstr "Tilføj nye elementer"
 
 #: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
-msgstr "Tilføj nye udvidelsesmoduler til panelet"
+msgstr "Tilføj nye plugins til panelet"
 
 #: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
@@ -298,7 +298,7 @@ msgstr "Indtasts søgeudtryk her"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Udvidelsesmodul \"%s\" forlod uventet panelet. Vil du genstarte det?"
+msgstr "Pluginet \"%s\" forlod uventet panelet. Vil du genstarte det?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -306,7 +306,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Udvidelsesmodulet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker 'Kør' vil panelet prøve at genstarte udvidelsesmodulet ellers vil det blive permanent fjernet fra panelet."
+msgstr "Pluginet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker 'Kør' vil panelet prøve at genstarte pluginet ellers vil det blive permanent fjernet fra panelet."
 
 #: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
@@ -326,7 +326,7 @@ msgstr "Overvåg %d"
 
 #: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Indstillingerne til panel og udvidelsesmoduler vil blive fjernet for altid"
+msgstr "Indstillingerne til panel og plugin vil blive fjernet for altid"
 
 #: ../panel/panel-preferences-dialog.c:873
 #, c-format
@@ -386,7 +386,7 @@ msgstr "Tilføj et nyt panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Remove the currently selected panel"
-msgstr "Fjern det aktuelle valgte panel"
+msgstr "Fjern det nuværende valgte panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:10
 msgid "M_ode:"
@@ -460,7 +460,7 @@ msgstr "Udvid længden _automatisk"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Vælg denne indstilling for automatisk udvidelse af panelets længde hvis udvidelsesmodulerne behøver mere plads."
+msgstr "Vælg denne indstilling for automatisk udvidelse af panelets længde hvis pluginsene behøver mere plads."
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -545,12 +545,12 @@ msgstr "_Udseende"
 #: ../panel/panel-preferences-dialog.glade.h:47
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "Move currently selected item up by one row"
-msgstr "Flyt det aktuelle valgte element en række op"
+msgstr "Flyt det nuværende valgte element en række op"
 
 #: ../panel/panel-preferences-dialog.glade.h:48
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "Move currently selected item down by one row"
-msgstr "Flyt det aktuelle valgte element en række ned"
+msgstr "Flyt det nuværende valgte element en række ned"
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Add new item to this panel"
@@ -558,16 +558,16 @@ msgstr "Tilføj nye elementer til dette panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:50
 msgid "Remove currently selected item"
-msgstr "Fjern det aktuelle valgte element"
+msgstr "Fjern det nuværende valgte element"
 
 #: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 msgid "Edit the currently selected item"
-msgstr "Redigér det aktuelle valgte element"
+msgstr "Redigér det nuværende valgte element"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Show about information of the currently selected item"
-msgstr "Vis om information af det aktuelle valgte element"
+msgstr "Vis om information af det nuværende valgte element"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Ite_ms"
@@ -1436,7 +1436,7 @@ msgstr "Starter"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
 msgid "Add one or more existing items to the launcher"
-msgstr "Føj en eller flere eksisterende elementer til opstarteren"
+msgstr "Føj en eller flere eksisterende elementer til starteren"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 msgid "Add a new empty item"
@@ -1444,7 +1444,7 @@ msgstr "Tilføj et nyt tomt element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Delete the currently selected item"
-msgstr "Fjern det aktuelle valgte element"
+msgstr "Fjern det nuværende valgte element"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Disable t_ooltips"
@@ -1634,7 +1634,7 @@ msgstr "Vindue_gruppering:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "Restore minimized windows to current _workspace"
-msgstr "Gendan minimerede vinduer til det aktuelle _arbejdsområde"
+msgstr "Gendan minimerede vinduer til det nuværende _arbejdsområde"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 msgid "D_raw window frame when hovering a button"
