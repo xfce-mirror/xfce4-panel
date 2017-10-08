@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-13 00:30+0200\n"
-"PO-Revision-Date: 2017-09-19 18:01+0000\n"
+"PO-Revision-Date: 2017-10-08 22:26+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce4-panel/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr "Iš naujo paleisti veikiantį skydelį"
 
 #: ../panel/main.c:86
 msgid "Quit the running panel instance"
-msgstr "Uždaryti veikiantį skydelį"
+msgstr "Baigti veikiančio skydelio darbą"
 
 #: ../panel/main.c:87
 msgid "Do not wait for a window manager on startup"
@@ -203,7 +203,7 @@ msgstr "Nepavyko iš naujo paleisti skydelio"
 
 #: ../panel/main.c:423
 msgid "Failed to quit the panel"
-msgstr "Nepavyko uždaryti skydelio"
+msgstr "Nepavyko baigti skydelio darbo"
 
 #: ../panel/main.c:425
 msgid "Failed to send D-Bus message"
@@ -236,7 +236,7 @@ msgstr "Sukurti _leistuką"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Skydelyje bus sukurtas ir įterptas naujas leistukas, atvilkti failai kaip meniu elementai."
+msgstr "Tai skydelyje sukurs naują leistuko įskiepį ir įterps atvilktus failus kaip meniu elementus."
 
 #: ../panel/panel-application.c:985
 #, c-format
@@ -248,17 +248,17 @@ msgstr[2] "Sukurti naujus leistukus iš %d darbalaukio failų"
 
 #: ../panel/panel-application.c:1724
 msgid "Quit"
-msgstr "Išeiti"
+msgstr "Baigti"
 
 #: ../panel/panel-application.c:1725
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr "Jūs paleidote X be seansų tvarkytuvės. Spustelėjus „Užverti”, X serveris bus užvertas."
+msgstr "Jūs paleidote X be seansų tvarkytuvės. Spustelėjus „Baigti”, X serveris bus užvertas."
 
 #: ../panel/panel-application.c:1726
 msgid "Are you sure you want to quit the panel?"
-msgstr "Ar tikrai norite uždaryti skydelį?"
+msgstr "Ar tikrai norite baigti skydelio darbą?"
 
 #: ../panel/panel-application.c:1734
 #, c-format
@@ -283,7 +283,7 @@ msgstr "Xfce darbalaukio aplinkos skydelis"
 
 #: ../panel/panel-dialogs.c:54
 msgid "translator-credits"
-msgstr "Mantas Zapolskas <mantaz@users.sf.net>\nAlgimantas Margevičius <margevicius.algimantas@gmail.com>"
+msgstr "Mantas Zapolskas <mantaz@users.sf.net>\nAlgimantas Margevičius <margevicius.algimantas@gmail.com>\nMoo"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -1682,7 +1682,7 @@ msgstr "Žinomos programos"
 #: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Nepavyko pasiekti pasirinkimo tvarkytuvės ekranui %d"
+msgstr "Nepavyko gauti tvarkytuvės pasirinkimo ekranui %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
