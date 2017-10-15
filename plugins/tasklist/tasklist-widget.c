@@ -2172,7 +2172,13 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
   gtk_container_add (GTK_CONTAINER (child->button), child->box);
   gtk_widget_show (child->box);
 
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (provider, "image { padding: 3px; }", -1, NULL);
   child->icon = gtk_image_new ();
+  gtk_style_context_add_provider (gtk_widget_get_style_context (child->icon),
+                                  GTK_STYLE_PROVIDER (provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
   if (tasklist->show_labels)
     gtk_box_pack_start (GTK_BOX (child->box), child->icon, FALSE, TRUE, 0);
   else
@@ -2195,6 +2201,7 @@ xfce_tasklist_child_new (XfceTasklist *tasklist)
       gtk_label_set_angle (GTK_LABEL (child->label), 270);
       /* TODO can we already ellipsize here yet? */
     }
+
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (provider, ".label-hidden { opacity: 0.75; }", -1, NULL);
   gtk_style_context_add_provider (gtk_widget_get_style_context (child->label),
