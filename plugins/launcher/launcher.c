@@ -1611,9 +1611,18 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       icon_name = garcon_menu_item_get_icon_name (item);
       if (!panel_str_is_empty (icon_name))
         {
-          image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DND);
+          GdkPixbuf *pix = NULL;
+          if (g_path_is_absolute (icon_name))
+            {
+              pix = gdk_pixbuf_new_from_file_at_size (icon_name, 16, 16, NULL);
+              image = gtk_image_new_from_pixbuf (pix);
+            }
+          else
+            image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
           gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 3);
           gtk_widget_show (image);
+          if (pix)
+            g_object_unref (G_OBJECT (pix));
         }
     }
 }
@@ -1739,9 +1748,19 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
 
 
       icon_name = garcon_menu_item_get_icon_name (item);
-      gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child),
-          panel_str_is_empty (icon_name) ? "image-missing" : icon_name,
-          icon_size);
+      if (!panel_str_is_empty (icon_name))
+        {
+          if (g_path_is_absolute (icon_name)) {
+            GdkPixbuf *pix = NULL;
+
+            pix = gdk_pixbuf_new_from_file_at_size (icon_name, icon_size, icon_size, NULL);
+            gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), pix);
+            g_object_unref (G_OBJECT (pix));
+          }
+          else
+            gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child), icon_name,
+                                          icon_size);
+        }
 
       panel_utils_set_atk_info (plugin->button,
           garcon_menu_item_get_name (item),
