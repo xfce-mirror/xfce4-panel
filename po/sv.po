@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-09 18:31+0200\n"
+"POT-Creation-Date: 2017-10-10 00:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2017\n"
+"Last-Translator: Påvel Nicklasson <pavel2@frimix.se>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/xfce/teams/16840/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr ""
 "denna skrivbordsfil"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2615
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2623
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -42,13 +42,13 @@ msgstr "Anpassa panelen"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1190
+#: ../panel/panel-preferences-dialog.c:1199
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1193
+#: ../panel/panel-preferences-dialog.c:1202
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Om du tar bort objektet från panelen så kan du inte ångra det."
 
@@ -62,17 +62,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2635
 msgid "Add _New Items..."
 msgstr "Lägg till _nya objekt..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2646
 msgid "Panel Pr_eferences..."
 msgstr "Panelinstä_llningar..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2674
 msgid "Log _Out"
 msgstr "Logga _ut"
 
@@ -282,7 +282,7 @@ msgstr "Lägg till nytt objekt"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Välj en panel för den nya insticksmodulen:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:853
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:862
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -336,37 +336,41 @@ msgstr ""
 msgid "Automatic"
 msgstr "Automatiskt"
 
+#: ../panel/panel-preferences-dialog.c:500
+msgid "Primary"
+msgstr "Primär"
+
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:511
+#: ../panel/panel-preferences-dialog.c:520
 #, c-format
 msgid "Screen %d"
 msgstr "Skärm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:537
+#: ../panel/panel-preferences-dialog.c:546
 #, c-format
 msgid "Monitor %d"
 msgstr "Skärm %d"
 
-#: ../panel/panel-preferences-dialog.c:919
+#: ../panel/panel-preferences-dialog.c:928
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Panelen och instickskonfigurationerna kommer att permanent tas bort"
 
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Är du säker på att du vill ta bort panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../panel/panel-preferences-dialog.c:1041
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1046
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -377,7 +381,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1058
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Internt namn: %s-%d"
@@ -649,7 +653,7 @@ msgstr "Erfaren"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2652
+#: ../panel/panel-window.c:2660
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -1641,7 +1645,7 @@ msgstr "Dölj alla fönster och visa skrivbordet"
 
 #: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "Det gick inte att starta meddelandefältet"
+msgstr "Det gick inte att starta aviseringsfältet"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:868
@@ -1649,12 +1653,12 @@ msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
-"Sannolikt tog en annan widget över meddelandefältets funktion. Detta område "
+"Sannolikt tog en annan widget över aviseringsfältets funktion. Detta område "
 "kommer inte att användas."
 
 #: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr "Meddelandefältet förlorade markering"
+msgstr "Aviseringsfältet förlorade markering"
 
 #: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
@@ -1663,7 +1667,7 @@ msgstr "Är du säker på att du vill tömma listan över kända program?"
 #: ../plugins/systray/systray-dialog.glade.h:1
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Notification Area"
-msgstr "Notifieringsfält"
+msgstr "Aviseringsfält"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
@@ -1688,7 +1692,7 @@ msgstr "Misslyckades med att komma över hanterarvalet för skärm %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
-msgstr "Område där notifieringsikoner visas"
+msgstr "Område där aviseringsikoner visas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:3
 msgid "When space is limited"
@@ -1848,7 +1852,7 @@ msgstr "Visa skrivbords_namn"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
 msgid "Enable _urgency notification"
-msgstr "Aktivera br_ådskande meddelanden"
+msgstr "Aktivera br_ådskande aviseringar"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
 msgid "Show windows from _all workspaces"
