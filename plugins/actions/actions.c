@@ -283,6 +283,17 @@ actions_plugin_init (ActionsPlugin *plugin)
 
 
 static void
+actions_plugin_free_array_element (gpointer data)
+{
+  GValue *value = (GValue *)data;
+
+  g_value_unset (value);
+  g_free (value);
+}
+
+
+
+static void
 actions_plugin_get_property (GObject    *object,
                              guint       prop_id,
                              GValue     *value,
@@ -327,8 +338,9 @@ actions_plugin_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_ITEMS:
-      if (plugin->items != NULL)
-        xfconf_array_free (plugin->items);
+      if (plugin->items != NULL) {
+        g_ptr_array_unref (plugin->items);
+      }
       plugin->items = g_value_dup_boxed (value);
       actions_plugin_pack (plugin);
       break;
@@ -394,7 +406,7 @@ actions_plugin_free_data (XfcePanelPlugin *panel_plugin)
     g_source_remove (plugin->pack_idle_id);
 
   if (plugin->items != NULL)
-    xfconf_array_free (plugin->items);
+    g_ptr_array_unref (plugin->items);
 
   if (plugin->menu != NULL)
     gtk_widget_destroy (plugin->menu);
@@ -454,7 +466,7 @@ actions_plugin_configure_store (gpointer data)
   model = g_object_get_data (G_OBJECT (plugin), "items-store");
   panel_return_val_if_fail (GTK_IS_LIST_STORE (model), FALSE);
 
-  array = g_ptr_array_new ();
+  array = g_ptr_array_new_full (1, (GDestroyNotify) actions_plugin_free_array_element);
 
   if (gtk_tree_model_get_iter_first (model, &iter))
     {
@@ -479,7 +491,7 @@ actions_plugin_configure_store (gpointer data)
 
   /* Store the new array */
   if (plugin->items != NULL)
-    xfconf_array_free (plugin->items);
+    g_ptr_array_unref (plugin->items);
   plugin->items = array;
   g_object_notify (G_OBJECT (plugin), "items");
 
