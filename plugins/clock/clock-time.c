@@ -223,7 +223,12 @@ clock_time_strdup_strftime (ClockTime       *time,
 
   g_date_time_unref (date_time);
 
-  return str;
+  /* Explicitely return NULL if a format specifier fails */
+  if (!str ||
+      g_strcmp0 (str, "") == 0)
+    return NULL;
+  else
+    return str;
 }
 
 

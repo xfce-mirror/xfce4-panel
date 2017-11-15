@@ -799,19 +799,27 @@ clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
   for (i = 0; formats[i] != NULL; i++)
     {
       preview = clock_time_strdup_strftime (plugin->time, _(formats[i]));
-      gtk_list_store_insert_with_values (store, &iter, i,
-                                         COLUMN_FORMAT, _(formats[i]),
-                                         COLUMN_TEXT, preview, -1);
-      g_free (preview);
-
-      if (has_active == FALSE
-          && !panel_str_is_empty (active_format)
-          && strcmp (active_format, formats[i]) == 0)
+      if (preview)
         {
-          gtk_combo_box_set_active_iter (combo, &iter);
-          gtk_widget_hide (GTK_WIDGET (entry));
-          has_active = TRUE;
+          gtk_list_store_insert_with_values (store, &iter, i,
+            COLUMN_FORMAT, _(formats[i]),
+            COLUMN_TEXT, preview, -1);
+
+          g_free (preview);
+
+          if (has_active == FALSE
+            && !panel_str_is_empty (active_format)
+            && strcmp (active_format, formats[i]) == 0)
+            {
+              gtk_combo_box_set_active_iter (combo, &iter);
+              gtk_widget_hide (GTK_WIDGET (entry));
+              has_active = TRUE;
+
+            }
         }
+      else
+        g_warning ("Getting a time preview failed for format specifier %s, so"
+                    "omitting it from the list of default formats", formats[i]);
     }
 
   gtk_list_store_insert_with_values (store, NULL, i++,
