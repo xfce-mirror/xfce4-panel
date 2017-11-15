@@ -113,9 +113,10 @@ typedef enum
   ACTION_TYPE_SWITCH_USER   = 1 << 4,
   ACTION_TYPE_LOCK_SCREEN   = 1 << 5,
   ACTION_TYPE_HIBERNATE     = 1 << 6,
-  ACTION_TYPE_SUSPEND       = 1 << 7,
-  ACTION_TYPE_RESTART       = 1 << 8,
-  ACTION_TYPE_SHUTDOWN      = 1 << 9
+  ACTION_TYPE_HYBRID_SLEEP  = 1 << 7,
+  ACTION_TYPE_SUSPEND       = 1 << 8,
+  ACTION_TYPE_RESTART       = 1 << 9,
+  ACTION_TYPE_SHUTDOWN      = 1 << 10
 }
 ActionType;
 
@@ -181,6 +182,14 @@ static ActionEntry action_entries[] =
     N_("_Hibernate"),
     N_("Do you want to suspend to disk?"),
     N_("Hibernating computer in %d seconds."),
+    "system-hibernate"
+  },
+  { ACTION_TYPE_HYBRID_SLEEP,
+    "hybrid-sleep",
+    N_("Hybrid Sleep"),
+    N_("_Hybrid Sleep"),
+    N_("Do you want to hibernate and suspend the system?"),
+    N_("Hibernating and Suspending computer in %d seconds."),
     "system-hibernate"
   },
   { ACTION_TYPE_SUSPEND,
@@ -806,7 +815,8 @@ actions_plugin_action_dbus_xfsm (const gchar  *method,
                                            error);
         }
       else if (g_strcmp0 (method, "Suspend") == 0
-               || g_strcmp0 (method, "Hibernate") == 0)
+               || g_strcmp0 (method, "Hibernate") == 0
+               || g_strcmp0 (method, "HybridSleep") == 0)
         {
           retval = g_dbus_proxy_call_sync (proxy, method,
                                            NULL,
@@ -914,6 +924,9 @@ actions_plugin_actions_allowed (void)
           if (actions_plugin_action_dbus_can (proxy, "CanHibernate"))
             PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HIBERNATE);
 
+          if (actions_plugin_action_dbus_can (proxy, "CanHybridSleep"))
+            PANEL_SET_FLAG (allow_mask, ACTION_TYPE_HYBRID_SLEEP);
+
           g_object_unref (G_OBJECT (proxy));
         }
     }
@@ -977,6 +990,11 @@ actions_plugin_action_activate (GtkWidget      *widget,
 
     case ACTION_TYPE_HIBERNATE:
       succeed = actions_plugin_action_dbus_xfsm ("Hibernate", FALSE,
+                                                 FALSE, &error);
+      break;
+
+    case ACTION_TYPE_HYBRID_SLEEP:
+      succeed = actions_plugin_action_dbus_xfsm ("HybridSleep", FALSE,
                                                  FALSE, &error);
       break;
 
@@ -1229,6 +1247,7 @@ actions_plugin_default_array (void)
       "+separator",
       "+suspend",
       "-hibernate",
+      "-hybrid-sleep",
       "-separator",
       "+shutdown",
       "-restart",

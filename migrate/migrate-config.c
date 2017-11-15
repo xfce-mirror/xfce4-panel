@@ -99,6 +99,9 @@ migrate_config_action_48_convert (gint action)
     case 7: /* ACTION_HIBERNATE */
       return "+hibernate";
 
+    case 8: /* ACTION_HYBRID_SLEEP */
+      return "+hybrid-sleep";
+
     default: /* ACTION_DISABLED */
       return "-switch-user"; /* something else */
     }
