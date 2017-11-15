@@ -772,6 +772,38 @@ clock_plugin_configure_plugin_chooser_separator (GtkTreeModel *model,
 
 
 static void
+clock_plugin_validate_format_specifier (GtkEntry *entry, gchar *format, ClockPlugin *plugin)
+{
+  GtkStyleContext *context;
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (entry));
+
+  if (!clock_time_strdup_strftime (plugin->time, format))
+    gtk_style_context_add_class (context, "error");
+  else
+    gtk_style_context_remove_class (context, "error");
+}
+
+
+
+static void
+clock_plugin_validate_entry_text (GtkEntry *entry,
+                                  const gchar *text,
+                                  gint length,
+                                  gint *position,
+                                  ClockPlugin *plugin)
+{
+  gchar *format;
+
+  format = g_strdup_printf ("%s%s",gtk_entry_get_text(entry), text);
+  clock_plugin_validate_format_specifier (entry, format, plugin);
+
+  g_free (format);
+}
+
+
+
+static void
 clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
                                             GtkComboBox *combo,
                                             GtkEntry    *entry,
@@ -818,8 +850,8 @@ clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
             }
         }
       else
-        g_warning ("Getting a time preview failed for format specifier %s, so"
-                    "omitting it from the list of default formats", formats[i]);
+        g_warning ("Getting a time preview failed for format specifier %s, so "
+                    "omitting it from the list of default formats.", formats[i]);
     }
 
   gtk_list_store_insert_with_values (store, NULL, i++,
@@ -831,6 +863,9 @@ clock_plugin_configure_plugin_chooser_fill (ClockPlugin *plugin,
     {
       gtk_combo_box_set_active_iter (combo, &iter);
       gtk_widget_show (GTK_WIDGET (entry));
+      clock_plugin_validate_format_specifier (entry,
+                                              gtk_entry_get_text (entry),
+                                              plugin);
     }
 
   g_signal_connect (G_OBJECT (combo), "changed",
@@ -1027,6 +1062,8 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                               tooltip_formats);
 
   object = gtk_builder_get_object (builder, "digital-format");
+  g_signal_connect (G_OBJECT (object), "insert_text",
+                    G_CALLBACK (clock_plugin_validate_entry_text), plugin);
   combo = gtk_builder_get_object (builder, "digital-chooser");
   clock_plugin_configure_plugin_chooser_fill (plugin,
                                               GTK_COMBO_BOX (combo),
