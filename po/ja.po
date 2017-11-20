@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-13 00:30+0200\n"
-"PO-Revision-Date: 2017-09-15 22:57+0000\n"
+"POT-Creation-Date: 2017-11-15 18:31+0100\n"
+"PO-Revision-Date: 2017-11-20 05:56+0000\n"
 "Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/xfce/xfce4-panel/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -41,18 +41,18 @@ msgstr "パネルをカスタマイズします"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1201
+#: ../panel/panel-preferences-dialog.c:1202
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "\"%s\" を削除してもよろしいですか?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1204
+#: ../panel/panel-preferences-dialog.c:1205
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "パネルから削除すると、このアイテムは完全に失われます。"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1206
+#: ../panel/panel-preferences-dialog.c:1207
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -60,8 +60,8 @@ msgstr "キャンセル"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:929
-#: ../panel/panel-preferences-dialog.c:1207
+#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:1208
 msgid "Remove"
 msgstr "削除"
 
@@ -177,49 +177,49 @@ msgid "There is already a running instance"
 msgstr "すでに実行中のインスタンスがあります"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:394
 msgid "Restarting..."
 msgstr "再起動しています..."
 
-#: ../panel/main.c:413
+#: ../panel/main.c:409
 msgid "Failed to show the preferences dialog"
 msgstr "設定ダイアログの表示に失敗しました"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:411
 msgid "Failed to show the add new items dialog"
 msgstr "'新しいアイテムの追加' ダイアログの表示に失敗しました"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:413
 msgid "Failed to save the panel configuration"
 msgstr "パネルの設定の保存に失敗しました"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:415
 msgid "Failed to add a plugin to the panel"
 msgstr "パネルへのプラグインの追加に失敗しました"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:417
 msgid "Failed to restart the panel"
 msgstr "パネルの再起動に失敗しました"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:419
 msgid "Failed to quit the panel"
 msgstr "パネルの終了に失敗しました"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:421
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus メッセージの送信に失敗しました"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "実行"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:432
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "パネルを起動しますか? 起動した場合、ログアウト時にセッションを保存すれば次回ログイン時にパネルは自動起動されます。"
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:435 ../panel/main.c:449
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "動作中の %s インスタンスが見つかりませんでした"
@@ -263,12 +263,12 @@ msgstr "パネルを終了してもよろしいですか?"
 msgid "Failed to execute command \"%s\""
 msgstr "コマンド \"%s\" の実行に失敗しました"
 
-#: ../panel/panel-dbus-client.c:216
+#: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "不正なプラグインイベント構文が指定されています。PLUGIN-NAME:NAME[:TYPE:VALUE] と指定してください。"
 
-#: ../panel/panel-dbus-client.c:246
+#: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -296,7 +296,7 @@ msgstr "追加"
 msgid "Please choose a panel for the new plugin:"
 msgstr "新しいプラグインのパネルを選択してください:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:865
 #, c-format
 msgid "Panel %d"
 msgstr "パネル %d"
@@ -353,41 +353,41 @@ msgstr "プラグインは最近 %d 秒以内に 1 回以上再起動されま�
 msgid "Automatic"
 msgstr "自動"
 
-#: ../panel/panel-preferences-dialog.c:502
+#: ../panel/panel-preferences-dialog.c:504
 msgid "Primary"
 msgstr "プライマリー"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:522
+#: ../panel/panel-preferences-dialog.c:523
 #, c-format
 msgid "Screen %d"
 msgstr "スクリーン %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:548
+#: ../panel/panel-preferences-dialog.c:549
 #, c-format
 msgid "Monitor %d"
 msgstr "モニター %d"
 
-#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:931
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "パネルとプラグインの設定は完全に削除されます"
 
-#: ../panel/panel-preferences-dialog.c:931
+#: ../panel/panel-preferences-dialog.c:932
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "パネル %d を削除してもよろしいですか?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1043
+#: ../panel/panel-preferences-dialog.c:1044
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(外部)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1048
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -396,7 +396,7 @@ msgstr "内部名: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1060
+#: ../panel/panel-preferences-dialog.c:1061
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "内部名: %s-%d"
@@ -740,127 +740,144 @@ msgstr "アクション"
 msgid "_Actions"
 msgstr "アクション(_A)"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "Log Out"
 msgstr "ログアウト"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "_Log Out"
 msgstr "ログアウト(_L)"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 msgid "Are you sure you want to log out?"
 msgstr "ログアウトしてもよろしいですか?"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:155
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "%d 秒後にログアウトします。"
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log Out..."
 msgstr "ログアウト..."
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:161
 msgid "Log _Out..."
 msgstr "ログアウト(_O)..."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "Switch User"
 msgstr "ユーザーの切り替え"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:168
 msgid "_Switch User"
 msgstr "ユーザーの切り替え(_S)"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Lock Screen"
 msgstr "画面をロック"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:175
 msgid "Loc_k Screen"
 msgstr "画面をロック(_K)"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "Hibernate"
 msgstr "ハイバネート"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "_Hibernate"
 msgstr "ハイバネート(_H)"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 msgid "Do you want to suspend to disk?"
 msgstr "現在の状態をディスクに保存してシステムを一時停止しますか?"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:184
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "%d 秒後にコンピューターをハイバネートします。"
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
+msgid "Hybrid Sleep"
+msgstr "ハイブリッドスリープ"
+
+#: ../plugins/actions/actions.c:190
+msgid "_Hybrid Sleep"
+msgstr "ハイブリッドスリープ(_H)"
+
+#: ../plugins/actions/actions.c:191
+msgid "Do you want to hibernate and suspend the system?"
+msgstr ""
+
+#: ../plugins/actions/actions.c:192
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr ""
+
+#: ../plugins/actions/actions.c:197
 msgid "Suspend"
 msgstr "サスペンド"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:198
 msgid "Sus_pend"
 msgstr "サスペンド(_P)"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:199
 msgid "Do you want to suspend to RAM?"
 msgstr "現在の状態を RAM に保存してシステムを一時停止しますか?"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:200
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "%d 秒後にコンピューターをサスペンドします。"
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:205
 msgid "Restart"
 msgstr "再起動"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:206
 msgid "_Restart"
 msgstr "再起動(_R)"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:207
 msgid "Are you sure you want to restart?"
 msgstr "再起動してもよろしいですか?"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "%d 秒後にコンピューターを再起動します。"
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:213
 msgid "Shut Down"
 msgstr "シャットダウン"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:214
 msgid "Shut _Down"
 msgstr "シャットダウン(_D)"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to shut down?"
 msgstr "シャットダウンしてもよろしいですか?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:216
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "%d 秒後にコンピューターを停止します。"
 
-#: ../plugins/actions/actions.c:594
+#: ../plugins/actions/actions.c:615
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "セパレーター"
 
-#: ../plugins/actions/actions.c:992
+#: ../plugins/actions/actions.c:1022
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "アクション \"%s\" の実行に失敗しました"
 
-#: ../plugins/actions/actions.c:1159
+#: ../plugins/actions/actions.c:1189
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -955,7 +972,7 @@ msgid "OK"
 msgstr "OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2343
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "コマンド \"%s\" の実行に失敗しました"
@@ -1431,7 +1448,7 @@ msgstr "ランチャーメニューを開く"
 msgid "Unnamed Item"
 msgstr "未設定"
 
-#: ../plugins/launcher/launcher.c:1734
+#: ../plugins/launcher/launcher.c:1743
 msgid "No items"
 msgstr "アイテムなし"
 
@@ -1775,23 +1792,23 @@ msgstr "最小化されたウィンドウのみ表示する(_M)"
 msgid "Show windows from all mo_nitors"
 msgstr "全モニターのウィンドウを表示する(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3422
+#: ../plugins/tasklist/tasklist-widget.c:3474
 msgid "Mi_nimize All"
 msgstr "すべて最小化(_N)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3430
+#: ../plugins/tasklist/tasklist-widget.c:3482
 msgid "Un_minimize All"
 msgstr "すべて元に戻す(_M)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3490
 msgid "Ma_ximize All"
 msgstr "すべて最大化(_X)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3446
+#: ../plugins/tasklist/tasklist-widget.c:3498
 msgid "_Unmaximize All"
 msgstr "すべて元に戻す(_U)"
 
-#: ../plugins/tasklist/tasklist-widget.c:3458
+#: ../plugins/tasklist/tasklist-widget.c:3510
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
