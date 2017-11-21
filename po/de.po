@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-13 00:30+0200\n"
-"PO-Revision-Date: 2017-10-02 17:24+0000\n"
-"Last-Translator: Vinzenz Vietzke <vinz@vinzv.de>\n"
+"POT-Creation-Date: 2017-11-15 18:31+0100\n"
+"PO-Revision-Date: 2017-11-21 14:21+0000\n"
+"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/xfce/xfce4-panel/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,18 +48,18 @@ msgstr "Leiste einrichten"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1201
+#: ../panel/panel-preferences-dialog.c:1202
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Soll »%s« wirklich entfernt werden?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1204
+#: ../panel/panel-preferences-dialog.c:1205
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Wenn Sie dieses Element von der Leiste entfernen, ist es dauerhaft verloren."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1206
+#: ../panel/panel-preferences-dialog.c:1207
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -67,8 +67,8 @@ msgstr "Abbrechen"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:929
-#: ../panel/panel-preferences-dialog.c:1207
+#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:1208
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -184,49 +184,49 @@ msgid "There is already a running instance"
 msgstr "Es ist bereits eine laufende Instanz vorhanden"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:394
 msgid "Restarting..."
 msgstr "Neustart …"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:409
 msgid "Failed to show the preferences dialog"
 msgstr "Einstellungsdialog konnte nicht geöffnet werden"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:411
 msgid "Failed to show the add new items dialog"
 msgstr "»Neue Elemente hinzufügen«-Dialog konnte nicht angezeigt werden"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:413
 msgid "Failed to save the panel configuration"
 msgstr "Leisteneinstellungen konnten nicht gespeichert werden"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:415
 msgid "Failed to add a plugin to the panel"
 msgstr "Erweiterung konnte nicht zur Leiste hinzugefügt werden"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:417
 msgid "Failed to restart the panel"
 msgstr "Leiste konnte nicht neu gestartet werden"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:419
 msgid "Failed to quit the panel"
 msgstr "Leiste konnte nicht beendet werden"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:421
 msgid "Failed to send D-Bus message"
 msgstr "D-Bus-Nachricht konnte nicht gesendet werden"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Ausführen"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:432
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Möchten Sie die Leiste starten? Ist das der Fall, so stellen Sie bitte sicher, dass Sie die Sitzung beim Abmelden speichern, damit die Leiste beim nächsten Mal automatisch geladen wird."
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:435 ../panel/main.c:449
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Keine laufende Instanz von %s gefunden"
@@ -271,12 +271,12 @@ msgstr "Soll die Leiste wirklich beendet werden?"
 msgid "Failed to execute command \"%s\""
 msgstr "Befehl »%s« konnte nicht ausgeführt werden"
 
-#: ../panel/panel-dbus-client.c:216
+#: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Ungültige Syntax für Erweiterungsereignis angegeben. Bitte ERWEITERUNGSNAME:NAME[:TYP:WERT] verwenden."
 
-#: ../panel/panel-dbus-client.c:246
+#: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -304,7 +304,7 @@ msgstr "Hinzufügen"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Bitte eine Leiste für das neue Element auswählen:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:865
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
@@ -361,41 +361,41 @@ msgstr "Das Element wurde in den letzten %d Sekunden mehr als einmal neu gestart
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: ../panel/panel-preferences-dialog.c:502
+#: ../panel/panel-preferences-dialog.c:504
 msgid "Primary"
 msgstr "Haupt"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:522
+#: ../panel/panel-preferences-dialog.c:523
 #, c-format
 msgid "Screen %d"
 msgstr "Bildschirm %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:548
+#: ../panel/panel-preferences-dialog.c:549
 #, c-format
 msgid "Monitor %d"
 msgstr "Bildschirm %d"
 
-#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:931
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Die Einstellungen der Leiste und der Erweiterungen werden dauerhaft entfernt."
 
-#: ../panel/panel-preferences-dialog.c:931
+#: ../panel/panel-preferences-dialog.c:932
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Soll die Leiste %d wirklich entfernt werden?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1043
+#: ../panel/panel-preferences-dialog.c:1044
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(extern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1048
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -404,7 +404,7 @@ msgstr "Interner Name: %s-%d\nProzesskennung: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1060
+#: ../panel/panel-preferences-dialog.c:1061
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Interner Name: %s-%d"
@@ -748,127 +748,144 @@ msgstr "Aktionsknöpfe"
 msgid "_Actions"
 msgstr "_Aktionen"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "Log Out"
 msgstr "Abmelden"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "_Log Out"
 msgstr "_Abmelden"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 msgid "Are you sure you want to log out?"
 msgstr "Wollen Sie sich wirklich abmelden?"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:155
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Sie werden in %d Sekunden abgemeldet."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log Out..."
 msgstr "Abmelden …"
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:161
 msgid "Log _Out..."
 msgstr "_Abmelden …"
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "Switch User"
 msgstr "Benutzer wechseln"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:168
 msgid "_Switch User"
 msgstr "_Benutzer wechseln"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Lock Screen"
 msgstr "Bildschirm sperren"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:175
 msgid "Loc_k Screen"
 msgstr "Bildschirm _sperren"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "Hibernate"
 msgstr "Ruhezustand"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "_Hibernate"
 msgstr "_Ruhezustand"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 msgid "Do you want to suspend to disk?"
 msgstr "In Bereitschaft versetzen?"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:184
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Rechner wird in %d Sekunden in den Ruhezustand versetzt."
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
+msgid "Hybrid Sleep"
+msgstr "Ruhezustand"
+
+#: ../plugins/actions/actions.c:190
+msgid "_Hybrid Sleep"
+msgstr "_Ruhezustand"
+
+#: ../plugins/actions/actions.c:191
+msgid "Do you want to hibernate and suspend the system?"
+msgstr "Möchten Sie das System in den Ruhezustand und Bereitschaft versetzen?"
+
+#: ../plugins/actions/actions.c:192
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr "Das System wird in den Ruhezustand und Bereitschaft in %d Sekunden versetzt."
+
+#: ../plugins/actions/actions.c:197
 msgid "Suspend"
 msgstr "Bereitschaft"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:198
 msgid "Sus_pend"
 msgstr "Bereit_schaft"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:199
 msgid "Do you want to suspend to RAM?"
 msgstr "In den Bereitschaftsmodus versetzen?"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:200
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Der Rechner wird in %d Sekunden in Bereitschaft versetzt."
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:205
 msgid "Restart"
 msgstr "Neustarten"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:206
 msgid "_Restart"
 msgstr "Neustarten"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:207
 msgid "Are you sure you want to restart?"
 msgstr "Wollen Sie wirklich neustarten?"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Rechner wird in %d Sekunden neu gestartet."
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:213
 msgid "Shut Down"
 msgstr "Herunterfahren"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:214
 msgid "Shut _Down"
 msgstr "_Herunterfahren"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to shut down?"
 msgstr "Wollen Sie den Rechner wirklich herunterfahren?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:216
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Rechner wird in %d Sekunden heruntergefahren"
 
-#: ../plugins/actions/actions.c:594
+#: ../plugins/actions/actions.c:615
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Trennelement"
 
-#: ../plugins/actions/actions.c:992
+#: ../plugins/actions/actions.c:1022
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Aktion »%s« konnte nicht ausgeführt werden."
 
-#: ../plugins/actions/actions.c:1159
+#: ../plugins/actions/actions.c:1189
 msgid "John Doe"
 msgstr "Max Mustermann"
 
@@ -963,7 +980,7 @@ msgid "OK"
 msgstr "OK"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2343
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Befehl »%s« konnte nicht ausgeführt werden."
@@ -1439,7 +1456,7 @@ msgstr "Startermenü öffnen"
 msgid "Unnamed Item"
 msgstr "Unbenanntes Objekt"
 
-#: ../plugins/launcher/launcher.c:1734
+#: ../plugins/launcher/launcher.c:1743
 msgid "No items"
 msgstr "Keine Objekte"
 
@@ -1783,23 +1800,23 @@ msgstr "N_ur verkleinerte Fenster anzeigen"
 msgid "Show windows from all mo_nitors"
 msgstr "Fenster v_on allen Bildschirmen anzeigen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3422
+#: ../plugins/tasklist/tasklist-widget.c:3474
 msgid "Mi_nimize All"
 msgstr "_Alle verkleinern"
 
-#: ../plugins/tasklist/tasklist-widget.c:3430
+#: ../plugins/tasklist/tasklist-widget.c:3482
 msgid "Un_minimize All"
 msgstr "Alle _wiederherstellen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3490
 msgid "Ma_ximize All"
 msgstr "_Alle vergrößern"
 
-#: ../plugins/tasklist/tasklist-widget.c:3446
+#: ../plugins/tasklist/tasklist-widget.c:3498
 msgid "_Unmaximize All"
 msgstr "Alle _wiederherstellen"
 
-#: ../plugins/tasklist/tasklist-widget.c:3458
+#: ../plugins/tasklist/tasklist-widget.c:3510
 msgid "_Close All"
 msgstr "_Alle schließen"
 
