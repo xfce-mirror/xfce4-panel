@@ -787,18 +787,14 @@ clock_plugin_validate_format_specifier (GtkEntry *entry, gchar *format, ClockPlu
 
 
 static void
-clock_plugin_validate_entry_text (GtkEntry *entry,
-                                  const gchar *text,
-                                  gint length,
-                                  gint *position,
-                                  ClockPlugin *plugin)
+clock_plugin_validate_entry_text (GtkEditable *entry,
+                                  gpointer user_data)
 {
-  gchar *format;
+  ClockPlugin *plugin = user_data;
 
-  format = g_strdup_printf ("%s%s",gtk_entry_get_text(entry), text);
-  clock_plugin_validate_format_specifier (entry, format, plugin);
-
-  g_free (format);
+  clock_plugin_validate_format_specifier (entry,
+                                          gtk_entry_get_text(GTK_ENTRY (entry)),
+                                          plugin);
 }
 
 
@@ -1062,7 +1058,7 @@ clock_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
                                               tooltip_formats);
 
   object = gtk_builder_get_object (builder, "digital-format");
-  g_signal_connect (G_OBJECT (object), "insert_text",
+  g_signal_connect (G_OBJECT (object), "changed",
                     G_CALLBACK (clock_plugin_validate_entry_text), plugin);
   combo = gtk_builder_get_object (builder, "digital-chooser");
   clock_plugin_configure_plugin_chooser_fill (plugin,
