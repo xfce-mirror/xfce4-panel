@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-09 18:31+0200\n"
+"POT-Creation-Date: 2017-10-10 00:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2017\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2017\n"
 "Language-Team: English (United Kingdom) (https://www.transifex.com/xfce/teams/16840/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr ""
 "file"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2615
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2623
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -42,13 +42,13 @@ msgstr "Customise the panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1190
+#: ../panel/panel-preferences-dialog.c:1199
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Are you sure that you want to remove \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1193
+#: ../panel/panel-preferences-dialog.c:1202
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "If you remove the item from the panel, it is permanently lost."
 
@@ -62,17 +62,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2635
 msgid "Add _New Items..."
 msgstr "Add _New Items..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2646
 msgid "Panel Pr_eferences..."
 msgstr "Panel Pr_eferences..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2674
 msgid "Log _Out"
 msgstr "Log _Out"
 
@@ -272,7 +272,7 @@ msgstr "Add New Item"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Please choose a panel for the new plug-in:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:853
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:862
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -326,37 +326,41 @@ msgstr ""
 msgid "Automatic"
 msgstr "Automatic"
 
+#: ../panel/panel-preferences-dialog.c:500
+msgid "Primary"
+msgstr "Primary"
+
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:511
+#: ../panel/panel-preferences-dialog.c:520
 #, c-format
 msgid "Screen %d"
 msgstr "Screen %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:537
+#: ../panel/panel-preferences-dialog.c:546
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:919
+#: ../panel/panel-preferences-dialog.c:928
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "The panel and plug-in configurations will be permanently removed"
 
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Are you sure you want to remove panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../panel/panel-preferences-dialog.c:1041
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(external)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1046
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -367,7 +371,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1058
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Internal name: %s-%d"
@@ -391,7 +395,7 @@ msgstr "Never"
 
 #: ../panel/panel-preferences-dialog.glade.h:5
 msgid "Intelligently"
-msgstr ""
+msgstr "Intelligently"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 #: ../plugins/tasklist/tasklist-dialog.glade.h:2
@@ -420,7 +424,7 @@ msgstr "Remove the currently selected panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Switch between panel presets"
-msgstr ""
+msgstr "Switch between panel presets"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "M_ode:"
@@ -450,7 +454,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Automatically hide the panel:"
-msgstr ""
+msgstr "Automatically hide the panel:"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
@@ -637,7 +641,7 @@ msgstr "Experienced"
 msgid "Expert"
 msgstr "Expert"
 
-#: ../panel/panel-window.c:2652
+#: ../panel/panel-window.c:2660
 msgid "_Lock Panel"
 msgstr "_Lock Panel"
 
@@ -945,7 +949,7 @@ msgstr "Menu File"
 #. I18N: default tooltip of the application menu
 #: ../plugins/applicationsmenu/applicationsmenu.c:39
 msgid "Applications"
-msgstr ""
+msgstr "Applications"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:565
 #: ../plugins/directorymenu/directorymenu.c:388
