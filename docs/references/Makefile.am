@@ -10,7 +10,7 @@ DOC_MODULE_VERSION=$(LIBXFCE4PANEL_VERSION_API)
 DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.xml
 
 # Extra options to supply to gtkdoc-scan
-SCAN_OPTIONS=
+SCAN_OPTIONS=--deprecated-guards="LIBXFCE4PANEL_DEPRECATED"
 
 # The directory containing the source code. Relative to $(srcdir)
 DOC_SOURCE_DIR=../../libxfce4panel
@@ -29,7 +29,8 @@ CFILE_GLOB=$(top_srcdir)/libxfce4panel/*.c
 IGNORE_HFILES= \
 	libxfce4panel-alias.h \
 	libxfce4panel-marshal.h \
-	xfce-panel-plugin-provider.h
+	xfce-panel-plugin-provider.h \
+	libxfce4panel-enum-types.h
 
 # Extra files to add when scanning (relative to $srcdir)
 EXTRA_HFILES=

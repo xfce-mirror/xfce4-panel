@@ -39,12 +39,13 @@
  * @short_description: Container widget with configurable orientation
  * @include: libxfce4panel/libxfce4panel.h
  *
+ * > #XfceHVBox is deprecated and will not work with Gtk3.
+ * > If your code depends on Gtk+ 2.16 or later, if it better to use
+ * > the normal #GtkBox widgets in combination with
+ * > gtk_orientable_set_orientation().
+ *
  * #XfceHVBox is a #GtkBox widget that allows the user to change
  * its orientation. It is in fact a combination of #GtkHBox and #GtkVBox.
- *
- * If your code depends on Gtk+ 2.16 or later, if it better to use
- * the normal #GtkBox widgets in combination with
- * gtk_orientable_set_orientation().
  *
  * See also: #GtkOrientable and #GtkBox.
  **/
@@ -227,6 +228,8 @@ xfce_hvbox_size_allocate (GtkWidget     *widget,
  *
  * Creates a new #XfceHVBox container widget.
  *
+ * Deprecated: 4.14: Use gtk_box_new() instead
+ *
  * Returns: the newly allocated #XfceHVBox container widget.
  **/
 GtkWidget *
@@ -258,6 +261,8 @@ xfce_hvbox_new (GtkOrientation orientation,
  * @orientation : the new orientation of the #XfceHVBox
  *
  * Set the new orientation of the #XfceHVBox container widget.
+ *
+ * Deprecated: 4.14: Use gtk_orientable_set_orientation() instead
  **/
 void
 xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
@@ -285,6 +290,8 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
  * @hvbox       : #XfceHVBox
  *
  * Get the current orientation of the @hvbox.
+ *
+ * Deprecated: 4.14: Use gtk_orientable_get_orientation() instead
  *
  * Returns: the current orientation of the #XfceHVBox.
  **/
