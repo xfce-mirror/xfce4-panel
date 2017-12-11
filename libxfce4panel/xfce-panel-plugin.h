@@ -97,6 +97,8 @@ typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
  * @configure_plugin :        See #XfcePanelPlugin::configure-plugin for more information.
  * @removed :                 See #XfcePanelPlugin::removed for more information.
  * @remote_event :            See #XfcePanelPlugin::remote-event for more information.
+ * @mode_changed :            See #XfcePanelPlugin::mode-changed for more information.
+ * @nrows_changed :           See #XfcePanelPlugin::nrows-changed for more information.
  *
  * Class of an #XfcePanelPlugin. The interface can be used to create GObject based plugin.
  **/

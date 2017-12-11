@@ -577,7 +577,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
    * XfcePanelPlugin:screen-position:
    *
    * The #XfceScreenPosition of the #XfcePanelPlugin. Plugin writer can use it
-   * to read the plugin's screen position, but xfce_panel_plugin_get_screen_psotion()
+   * to read the plugin's screen position, but xfce_panel_plugin_get_screen_position()
    * is recommended.
    **/
   plugin_props[PROP_SCREEN_POSITION] =
@@ -2377,7 +2377,7 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  *
  * Register a menu that is about to popup. This will make sure the panel
  * will properly handle its autohide behaviour. You have to call this
- * function every time the menu is opened (e.g. using gtk_popup_menu()).
+ * function every time the menu is opened (e.g. using gtk_menu_popup()).
  *
  * If you want to open the menu aligned to the side of the panel (and the
  * plugin), you should use xfce_panel_plugin_position_menu() as
