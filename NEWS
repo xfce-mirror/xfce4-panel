@@ -1,3 +1,34 @@
+4.13.2
+======
+- Add support for gobject-introspection (Vidar Haarr)
+- Bugfixes:
+  - actions: Fix GPtrArray usage (Bug #13981)
+  - actions: Show Hybrid Sleep option (Bug #12771)
+  - clock: Fix invalid datetime formats appearing in list (Bug #11527)
+  - clock: Use freedesktop.org compliant icon (Bug #13779)
+  - clock: Add a validator for digital custom formats (Bug #11527)
+  - clock: Fix format validation (Bug #11527)
+  - launcher: Fix custom images
+  - tasklist: Fix scrolling to cycle through open windows (Bug #13789)
+  - tasklist: Define cosmetic default padding for images (Bug #13865)
+  - tasklist: Fix alignment of labels when orientation is changed (Bug #13864)
+  - tasklist: Allow to hide label decorations (Bug #10546)
+  - systray: Fix crash when systray is empty (Bug #13927)
+  - systray: Don't lookup hash table for null keys (Bug #11929)
+  - systray: Add option to display icons with square sizing (Bug #12093)
+  - Pass socket id to D-Bus service to embed settings window (Bug #13854)
+  - Make "Automatic" the default selection in the panel config dialog
+  - Fix make distcheck (But #14040)
+  - Improve gtkdoc
+- Translation updates: Arabic, Asturian, Basque, Bengali, Bulgarian, Catalan,
+   Chinese (China), Chinese (Hong Kong), Chinese (Taiwan), Croatian, Czech,
+   Danish, Dutch (Flemish), English (Australia), English (Great Britain),
+   Estonian, Finnish, French, Galician, German, Greek, Hebrew, Hungarian,
+   Icelandic, Indonesian, Italian, Japanese, Kazakh, Korean, Lithuanian, Malay,
+   Norwegian Bokmål, Norwegian Nynorsk, Occitan, Panjabi, Polish, Portuguese,
+   Portuguese (Brazilian), Romanian, Russian, Serbian, Slovak, Slovenian,
+   Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur, Vietnamese
+
 4.13.1
 ======
 - Port to GDBus (Ali)
