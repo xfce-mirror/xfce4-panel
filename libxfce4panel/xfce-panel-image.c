@@ -501,10 +501,12 @@ xfce_panel_image_draw (GtkWidget *widget,
   XfcePanelImagePrivate *priv = XFCE_PANEL_IMAGE (widget)->priv;
   gint                   source_width, source_height;
   gint                   dest_x, dest_y;
-  GtkIconSource         *source;
   GdkPixbuf             *rendered = NULL;
   GdkPixbuf             *pixbuf = priv->cache;
   GtkStyleContext       *context;
+  GdkScreen             *screen;
+  GtkIconTheme          *icon_theme;
+  GtkIconInfo           *icon_info;
 
   if (G_LIKELY (pixbuf != NULL))
     {
@@ -520,10 +522,10 @@ xfce_panel_image_draw (GtkWidget *widget,
 
       if (!gtk_widget_is_sensitive (widget))
         {
-          source = gtk_icon_source_new ();
-          gtk_icon_source_set_pixbuf (source, pixbuf);
-          rendered = gtk_render_icon_pixbuf (context, source, -1);
-          gtk_icon_source_free (source);
+          screen = gtk_widget_get_screen (widget);
+          icon_theme = gtk_icon_theme_get_for_screen (screen);
+          icon_info = gtk_icon_info_new_for_pixbuf (icon_theme, pixbuf);
+          rendered = gtk_icon_info_load_icon (icon_info, NULL);
 
           if (G_LIKELY (rendered != NULL))
             pixbuf = rendered;
