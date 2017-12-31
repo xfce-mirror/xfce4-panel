@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-15 18:31+0100\n"
-"PO-Revision-Date: 2017-12-15 07:41+0000\n"
+"PO-Revision-Date: 2017-12-31 20:13+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce4-panel/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -185,31 +185,31 @@ msgstr "S'està reiniciant..."
 
 #: ../panel/main.c:409
 msgid "Failed to show the preferences dialog"
-msgstr "No s'ha pogut mostrar el diàleg de preferències"
+msgstr "Ha fallat la visualització del diàleg de preferències"
 
 #: ../panel/main.c:411
 msgid "Failed to show the add new items dialog"
-msgstr "No s'ha pogut mostrar el diàleg per afegir elements"
+msgstr "Ha fallat la visualització del diàleg d'afegiment d'elements nous"
 
 #: ../panel/main.c:413
 msgid "Failed to save the panel configuration"
-msgstr "No s'ha pogut desar la configuració del plafó"
+msgstr "Ha fallat el desament de la configuració del plafó"
 
 #: ../panel/main.c:415
 msgid "Failed to add a plugin to the panel"
-msgstr "No s'ha pogut afegir un connector al plafó"
+msgstr "Ha fallat l'afegiment d'un connector al plafó"
 
 #: ../panel/main.c:417
 msgid "Failed to restart the panel"
-msgstr "No s'ha pogut reiniciar el plafó"
+msgstr "Ha fallat el reinici del plafó"
 
 #: ../panel/main.c:419
 msgid "Failed to quit the panel"
-msgstr "No s'ha pogut sortir del plafó"
+msgstr "Ha fallat la sortida del plafó"
 
 #: ../panel/main.c:421
 msgid "Failed to send D-Bus message"
-msgstr "No s'ha pogut enviar un missatge a través de D-BUS"
+msgstr "Ha fallat l'enviament del missatge D-BUS"
 
 #: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
 msgid "Execute"
@@ -228,7 +228,7 @@ msgstr "No s'ha trobat una instància en marxa de %s"
 
 #: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
-msgstr "No s'ha pogut iniciar l'aplicació de migració"
+msgstr "Ha fallat el llançament de l'aplicació de migració"
 
 #: ../panel/panel-application.c:982
 msgid "Create _Launcher"
@@ -264,7 +264,7 @@ msgstr "Esteu segur que voleu sortir del plafó?"
 #: ../panel/panel-application.c:1734
 #, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "No s'ha pogut executar l'ordre «%s»"
+msgstr "Ha fallat l'execució de l'ordre «%s»"
 
 #: ../panel/panel-dbus-client.c:218
 msgid ""
@@ -687,11 +687,11 @@ msgstr "Arranca amb un plafó buit"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "No s'ha pogut migrar la configuració antiga del plafó"
+msgstr "Ha fallat la migració de la configuració antiga del plafó"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr "No s'ha pogut carregar la configuració predeterminada"
+msgstr "Ha fallat la càrrega de la configuració predeterminada"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
@@ -699,7 +699,7 @@ msgstr "La configuració del plafó necessita la migració..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "No s'ha pogut migrar la configuració existent"
+msgstr "Ha fallat la migració de la configuració existent"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -878,7 +878,7 @@ msgstr "Separador"
 #: ../plugins/actions/actions.c:1022
 #, c-format
 msgid "Failed to run action \"%s\""
-msgstr "No s'ha pogut llançar l'acció «%s»"
+msgstr "Ha fallat l'execució de l'acció «%s»"
 
 #: ../plugins/actions/actions.c:1189
 msgid "John Doe"
@@ -978,7 +978,7 @@ msgstr "D'acord"
 #: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2343
 #, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "No s'ha pogut executar l'ordre «%s»."
+msgstr "Ha fallat l'execució de l'ordre «%s»."
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -1026,7 +1026,7 @@ msgstr "Setmana %V"
 
 #: ../plugins/clock/clock.c:470
 msgid "Failed to execute clock command"
-msgstr "No s'ha pogut executar l'ordre clock."
+msgstr "Ha fallat l'execució de l'ordre clock."
 
 #: ../plugins/clock/clock.c:821
 msgid "Custom Format"
@@ -1380,12 +1380,12 @@ msgstr "Menú dels directoris"
 #: ../plugins/directorymenu/directorymenu.c:577
 #, c-format
 msgid "Failed to launch application \"%s\""
-msgstr "No s'ha pogut llançar l'aplicació «%s»"
+msgstr "Ha fallat el llançament de l'aplicació «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "Failed to query content type for \"%s\""
-msgstr "No s'ha pogut consultar el tipus de contingut per a «%s»"
+msgstr "Ha fallat la consulta del tipus de contingut per «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:618
 #, c-format
@@ -1395,12 +1395,12 @@ msgstr "No s'ha trobat una aplicació predeterminada per «%s»"
 #: ../plugins/directorymenu/directorymenu.c:634
 #, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "No s'ha pogut llançar l'aplicació predeterminada per «%s»"
+msgstr "Ha fallat el llançament de l'aplicació predeterminada per «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:732
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
-msgstr "No s'ha pogut obrir l'aplicació preferida per a la categoria «%s»"
+msgstr "Ha fallat l'execució de l'aplicació preferida per a la categoria «%s»"
 
 #: ../plugins/directorymenu/directorymenu.c:806
 msgid "Open Folder"
@@ -1457,7 +1457,7 @@ msgstr "Sense elements"
 
 #: ../plugins/launcher/launcher-dialog.c:789
 msgid "Failed to open desktop item editor"
-msgstr "No s'ha pogut obrir l'editor d'elements de l'escriptori"
+msgstr "Ha fallat l'obriment de l'editor d'elements de l'escriptori"
 
 #: ../plugins/launcher/launcher-dialog.c:848
 msgid "If you delete an item, it will be permanently removed"
@@ -1573,7 +1573,7 @@ msgstr "Ajust_s de l'espai de treball..."
 
 #: ../plugins/pager/pager.c:537
 msgid "Unable to open the workspace settings"
-msgstr "No s'han pogut obrir els ajusts de l'espai de treball"
+msgstr "No es poden obrir els ajusts de l'espai de treball"
 
 #: ../plugins/pager/pager-buttons.c:567 ../plugins/windowmenu/windowmenu.c:870
 #, c-format
@@ -1651,7 +1651,7 @@ msgstr "Oculta totes les finestres i mostra l'escriptori"
 
 #: ../plugins/systray/systray.c:458
 msgid "Unable to start the notification area"
-msgstr "No s'ha pogut iniciar l'àrea de les notificacions"
+msgstr "No es pot iniciar l'àrea de les notificacions"
 
 #. create fake error and show it
 #: ../plugins/systray/systray.c:954
@@ -1700,7 +1700,7 @@ msgstr "Aplicacions conegudes"
 #: ../plugins/systray/systray-manager.c:403
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "No s'ha pogut adquirir la selecció del gestor per a la pantalla %d"
+msgstr "Ha fallat l'adquisició de la selecció del gestor per a la pantalla %d"
 
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Area where notification icons appear"
