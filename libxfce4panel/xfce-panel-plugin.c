@@ -991,7 +991,12 @@ xfce_panel_plugin_button_press_event (GtkWidget      *widget,
         gtk_widget_set_sensitive (item, plugin->priv->menu_blocked == 0);
 
       /* popup the menu */
-      gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button, event->time);
+#if GTK_CHECK_VERSION (3, 22, 0)
+      gtk_menu_popup_at_pointer (menu, (GdkEvent *) event);
+#else
+      gtk_menu_popup (menu, NULL, NULL, NULL, NULL,
+                      event->button, event->time);
+#endif
 
       return TRUE;
     }

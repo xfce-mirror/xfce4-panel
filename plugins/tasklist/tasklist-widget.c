@@ -1512,10 +1512,17 @@ xfce_tasklist_arrow_button_toggled (GtkWidget    *button,
         }
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
+#if GTK_CHECK_VERSION (3, 22, 0)
+      gtk_menu_popup_at_widget (GTK_MENU (menu),
+                                xfce_tasklist_get_panel_plugin (tasklist),
+                                GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST, NULL);
+#else
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
                       xfce_panel_plugin_position_menu,
                       xfce_tasklist_get_panel_plugin (tasklist),
                       1, gtk_get_current_event_time ());
+#endif
     }
 }
 
@@ -2864,11 +2871,19 @@ xfce_tasklist_button_button_press_event (GtkWidget         *button,
           G_CALLBACK (gtk_widget_destroy), NULL);
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
+#if GTK_CHECK_VERSION (3, 22, 0)
+      gtk_menu_popup_at_widget (GTK_MENU (menu),
+                                xfce_tasklist_get_panel_plugin (child->tasklist),
+                                GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST,
+                                (GdkEvent *) event);
+#else
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
                       child->type == CHILD_TYPE_WINDOW ? xfce_panel_plugin_position_menu : NULL,
                       xfce_tasklist_get_panel_plugin (child->tasklist),
                       event->button,
                       event->time);
+#endif
 
       return TRUE;
     }
@@ -3574,11 +3589,19 @@ xfce_tasklist_group_button_button_press_event (GtkWidget         *button,
           G_CALLBACK (xfce_tasklist_group_button_menu_destroy), group_child);
 
       gtk_menu_attach_to_widget (GTK_MENU (menu), button, NULL);
+#if GTK_CHECK_VERSION (3, 22, 0)
+      gtk_menu_popup_at_widget (GTK_MENU (menu),
+                                xfce_tasklist_get_panel_plugin (group_child->tasklist),
+                                GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST,
+                                (GdkEvent *) event);
+#else
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
                       xfce_panel_plugin_position_menu,
                       xfce_tasklist_get_panel_plugin (group_child->tasklist),
                       event->button,
                       event->time);
+#endif
 
       return TRUE;
     }

@@ -165,7 +165,7 @@ static void         panel_window_update_autohide_window               (PanelWind
                                                                        WnckScreen       *screen,
                                                                        WnckWindow       *active_window);
 static void         panel_window_menu_popup                           (PanelWindow      *window,
-                                                                       guint32           event_time,
+                                                                       GdkEventButton   *event,
                                                                        gboolean          show_tic_tac_toe);
 static void         panel_window_plugins_update                       (PanelWindow      *window,
                                                                        PluginProp        prop);
@@ -1089,7 +1089,7 @@ panel_window_button_press_event (GtkWidget      *widget,
   else if (event->button == 3
            || (event->button == 1 && modifiers == GDK_CONTROL_MASK))
     {
-      panel_window_menu_popup (window, event->time, modifiers == GDK_SHIFT_MASK);
+      panel_window_menu_popup (window, event, modifiers == GDK_SHIFT_MASK);
 
       return TRUE;
     }
@@ -2675,9 +2675,9 @@ panel_window_menu_deactivate (GtkMenu     *menu,
 
 
 static void
-panel_window_menu_popup (PanelWindow *window,
-                         guint32      event_time,
-                         gboolean     show_tic_tac_toe)
+panel_window_menu_popup (PanelWindow    *window,
+                         GdkEventButton *event,
+                         gboolean        show_tic_tac_toe)
 {
   GtkWidget *menu;
   GtkWidget *item;
@@ -2801,8 +2801,12 @@ G_GNUC_END_IGNORE_DEPRECATIONS
       gtk_widget_show (item);
     }
 
+#if GTK_CHECK_VERSION (3, 22, 0)
+  gtk_menu_popup_at_pointer (GTK_MENU (menu), (GdkEvent *) event);
+#else
   gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                  NULL, NULL, 0, event_time);
+                  NULL, NULL, 0, event->time);
+#endif
 }
 
 

@@ -660,10 +660,17 @@ launcher_dialog_tree_popup_menu (GtkWidget            *treeview,
 
   /* show the menu */
   menu = gtk_builder_get_object (dialog->builder, "popup-menu");
+#if GTK_CHECK_VERSION (3, 22, 0)
+  gtk_menu_popup_at_widget (GTK_MENU (menu), treeview,
+                            GDK_GRAVITY_SOUTH_WEST,
+                            GDK_GRAVITY_NORTH_WEST,
+                            NULL);
+#else
   gtk_menu_popup (GTK_MENU (menu),
                   NULL, treeview,
                   NULL, NULL, 3,
                   gtk_get_current_event_time ());
+  #endif
 
   return TRUE;
 }

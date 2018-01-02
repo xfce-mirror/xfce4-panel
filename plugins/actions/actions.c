@@ -863,7 +863,7 @@ actions_plugin_action_dbus_can (GDBusProxy  *proxy,
                                    G_DBUS_CALL_FLAGS_NONE,
                                    -1,
                                    NULL,
-                                   error);
+                                   &error);
 
   if (G_LIKELY (retval))
     {
@@ -1329,7 +1329,14 @@ actions_plugin_menu (GtkWidget     *button,
         }
     }
 
+#if GTK_CHECK_VERSION (3, 22, 0)
+  gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
+                            GDK_GRAVITY_SOUTH_WEST,
+                            GDK_GRAVITY_NORTH_WEST,
+                            NULL);
+#else
   gtk_menu_popup (GTK_MENU (plugin->menu), NULL, NULL,
                   button != NULL ? xfce_panel_plugin_position_menu : NULL,
                   plugin, 1, gtk_get_current_event_time ());
+#endif
 }
