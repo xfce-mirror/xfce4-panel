@@ -1331,8 +1331,10 @@ actions_plugin_menu (GtkWidget     *button,
 
 #if GTK_CHECK_VERSION (3, 22, 0)
   gtk_menu_popup_at_widget (GTK_MENU (plugin->menu), button,
-                            GDK_GRAVITY_SOUTH_WEST,
-                            GDK_GRAVITY_NORTH_WEST,
+                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
+                            ? GDK_GRAVITY_WEST : GDK_GRAVITY_NORTH,
+                            xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) == GTK_ORIENTATION_VERTICAL
+                            ? GDK_GRAVITY_EAST : GDK_GRAVITY_SOUTH,
                             NULL);
 #else
   gtk_menu_popup (GTK_MENU (plugin->menu), NULL, NULL,
