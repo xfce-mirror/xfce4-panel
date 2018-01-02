@@ -249,7 +249,7 @@ systray_plugin_init (SystrayPlugin *plugin)
   plugin->box = systray_box_new ();
   gtk_box_pack_start (GTK_BOX (plugin->hvbox), plugin->box, TRUE, TRUE, 0);
   g_signal_connect (G_OBJECT (plugin->box), "draw",
-      G_CALLBACK (systray_plugin_box_draw), NULL);
+      G_CALLBACK (systray_plugin_box_draw), plugin);
   gtk_container_set_border_width (GTK_CONTAINER (plugin->box), FRAME_SPACING);
   gtk_widget_show (plugin->box);
 
@@ -721,7 +721,32 @@ systray_plugin_box_draw_icon (GtkWidget *child,
 }
 
 
+#if GTK_CHECK_VERSION (3, 22, 0)
+static void
+systray_plugin_box_draw (GtkWidget *box,
+                         cairo_t   *cr,
+                         gpointer   user_data)
+{
+  SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
+  GdkScreen      *screen;
 
+  panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+  panel_return_if_fail (cr != NULL);
+
+  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+
+  if (G_LIKELY (screen != NULL))
+    {
+      if (!gdk_screen_is_composited (screen))
+        return;
+    }
+
+  /* separately draw all the composed tray icons after gtk
+   * handled the draw event */
+  gtk_container_foreach (GTK_CONTAINER (box),
+                         (GtkCallback) systray_plugin_box_draw_icon, cr);
+}
+#else
 static void
 systray_plugin_box_draw (GtkWidget *box,
                          cairo_t   *cr,
@@ -737,6 +762,7 @@ systray_plugin_box_draw (GtkWidget *box,
   gtk_container_foreach (GTK_CONTAINER (box),
                          (GtkCallback) systray_plugin_box_draw_icon, cr);
 }
+#endif
 
 
 

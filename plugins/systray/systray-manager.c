@@ -766,9 +766,14 @@ systray_manager_set_visual (SystrayManager *manager)
   visual_atom = gdk_x11_get_xatom_by_name_for_display (display,
       "_NET_SYSTEM_TRAY_VISUAL");
 
+#if GTK_CHECK_VERSION (3, 22, 0)
+  if (gdk_screen_is_composited (gtk_widget_get_screen (manager->invisible))
+      && (gdk_screen_get_rgba_visual (screen) != NULL))
+#else
   if (gtk_widget_is_composited (manager->invisible)
       && gdk_screen_get_rgba_visual (screen) != NULL
       && gdk_display_supports_composite (display))
+#endif
     {
       /* get the rgba visual */
       xvisual = GDK_VISUAL_XVISUAL (gdk_screen_get_rgba_visual (screen));

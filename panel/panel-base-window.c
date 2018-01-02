@@ -448,7 +448,11 @@ panel_base_window_screen_changed (GtkWidget *widget, GdkScreen *previous_screen)
   if (visual != NULL)
     {
       gtk_widget_set_visual (widget, visual);
+#if GTK_CHECK_VERSION (3, 22, 0)
+      window->is_composited = gdk_screen_is_composited (screen);
+#else
       window->is_composited = gtk_widget_is_composited (widget);
+#endif
     }
 
    panel_debug (PANEL_DEBUG_BASE_WINDOW,
@@ -511,7 +515,14 @@ panel_base_window_composited_changed (GtkWidget *widget)
   GtkAllocation    allocation;
 
   /* set new compositing state */
+#if GTK_CHECK_VERSION (3, 22, 0)
+  GdkScreen       *screen;
+
+  screen = gtk_window_get_screen (GTK_WINDOW (window));
+  window->is_composited = gdk_screen_is_composited (screen);
+#else
   window->is_composited = gtk_widget_is_composited (widget);
+#endif
   if (window->is_composited == was_composited)
     return;
 
