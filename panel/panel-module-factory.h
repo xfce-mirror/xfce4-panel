@@ -36,7 +36,8 @@ typedef struct _PanelModuleFactory      PanelModuleFactory;
 #define PANEL_IS_MODULE_FACTORY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_MODULE_FACTORY))
 #define PANEL_MODULE_FACTORY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PANEL_TYPE_MODULE_FACTORY, PanelModuleFactoryClass))
 
-#define LAUNCHER_PLUGIN_NAME "launcher"
+#define LAUNCHER_PLUGIN_NAME  "launcher"
+#define SEPARATOR_PLUGIN_NAME "separator"
 
 GType               panel_module_factory_get_type            (void) G_GNUC_CONST;
 

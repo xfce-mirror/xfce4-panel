@@ -609,7 +609,7 @@ panel_item_dialog_populate_store (PanelItemDialog *dialog)
 
   /* add an empty item for separator in 2nd position */
   if (panel_module_factory_has_launcher (dialog->factory))
-    gtk_list_store_insert_with_values (dialog->store, &iter, 1,
+    gtk_list_store_insert_with_values (dialog->store, &iter, 2,
                                        COLUMN_MODULE, NULL, -1);
 }
 
@@ -646,6 +646,18 @@ panel_item_dialog_compare_func (GtkTreeModel *model,
                       panel_module_get_name (module_b)) == 0)
     {
       /* move the launcher to the first position */
+      result = 1;
+    }
+  else if (g_strcmp0 (SEPARATOR_PLUGIN_NAME,
+                      panel_module_get_name (module_a)) == 0)
+    {
+      /* move the separator to the second position */
+      result = -1;
+    }
+  else if (g_strcmp0 (SEPARATOR_PLUGIN_NAME,
+                      panel_module_get_name (module_b)) == 0)
+    {
+      /* move the separator to the second position */
       result = 1;
     }
   else
