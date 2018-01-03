@@ -194,6 +194,8 @@ struct _LauncherPlugin
 
   GSList            *items;
 
+  GdkPixbuf         *pixbuf;
+  gchar             *icon_name;
   GdkPixbuf         *tooltip_cache;
 
   gulong             theme_change_id;
@@ -334,6 +336,8 @@ launcher_plugin_init (LauncherPlugin *plugin)
   plugin->items = NULL;
   plugin->child = NULL;
   plugin->tooltip_cache = NULL;
+  plugin->pixbuf = NULL;
+  plugin->icon_name = NULL;
   plugin->menu_timeout_id = 0;
   plugin->save_timeout_id = 0;
 
@@ -1124,6 +1128,11 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   /* release the cached tooltip */
   if (plugin->tooltip_cache != NULL)
     g_object_unref (G_OBJECT (plugin->tooltip_cache));
+  /* release the cached pixbuf */
+  if (plugin->pixbuf != NULL)
+    g_object_unref (G_OBJECT (plugin->pixbuf));
+  if (plugin->icon_name != NULL)
+    g_free (plugin->icon_name);
 }
 
 
@@ -1305,8 +1314,18 @@ launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), -1, -1);
   else {
     gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), p_width, p_height);
+    /* if the icon is a pixbuf we have to recreate and scale it */
+    if (plugin->pixbuf != NULL &&
+        plugin->icon_name != NULL) {
+      g_object_unref (plugin->pixbuf);
+      plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (plugin->icon_name,
+                                                         icon_size, icon_size,
+                                                         NULL);
+      gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), plugin->pixbuf);
+    }
     /* set the panel plugin icon size */
-    gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
+    else
+      gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
   }
 
 
@@ -1611,21 +1630,22 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
       icon_name = garcon_menu_item_get_icon_name (item);
       if (!panel_str_is_empty (icon_name))
         {
-          GdkPixbuf *pix = NULL;
           if (g_path_is_absolute (icon_name))
             {
-              pix = gdk_pixbuf_new_from_file_at_size (icon_name, 16, 16, NULL);
-              image = gtk_image_new_from_pixbuf (pix);
+              /* remember the icon name for recreating the pixbuf when panel
+                 size changes */
+              plugin->icon_name = g_strdup (icon_name);
+              plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, 16, 16, NULL);
+              image = gtk_image_new_from_pixbuf (plugin->pixbuf);
             }
           else
             {
               image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
               gtk_image_set_pixel_size (GTK_IMAGE (image), 16);
+              plugin->icon_name = NULL;
             }
           gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 3);
           gtk_widget_show (image);
-          if (pix)
-            g_object_unref (G_OBJECT (pix));
         }
     }
 }
@@ -1732,7 +1752,11 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
       g_object_unref (G_OBJECT (plugin->tooltip_cache));
       plugin->tooltip_cache = NULL;
     }
-
+  if (plugin->pixbuf != NULL)
+    {
+      g_object_unref (G_OBJECT (plugin->pixbuf));
+      plugin->pixbuf = NULL;
+    }
   /* get first item */
   if (G_LIKELY (plugin->items != NULL))
     item = GARCON_MENU_ITEM (plugin->items->data);
@@ -1759,16 +1783,15 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
     {
       panel_return_if_fail (GTK_IS_WIDGET (plugin->child));
 
-
       icon_name = garcon_menu_item_get_icon_name (item);
       if (!panel_str_is_empty (icon_name))
         {
           if (g_path_is_absolute (icon_name)) {
-            GdkPixbuf *pix = NULL;
-
-            pix = gdk_pixbuf_new_from_file_at_size (icon_name, icon_size, icon_size, NULL);
-            gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), pix);
-            g_object_unref (G_OBJECT (pix));
+            /* remember the icon name for recreating the pixbuf when panel
+               size changes */
+            plugin->icon_name = g_strdup (icon_name);
+            plugin->pixbuf = gdk_pixbuf_new_from_file_at_size (icon_name, icon_size, icon_size, NULL);
+            gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), plugin->pixbuf);
           }
           else {
             gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child), icon_name,
