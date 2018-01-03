@@ -1773,7 +1773,7 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
           else {
             gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child), icon_name,
                                           icon_size);
-            gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), 16);
+            gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), icon_size);
           }
         }
 
