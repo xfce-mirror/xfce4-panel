@@ -1618,7 +1618,10 @@ launcher_plugin_menu_construct (LauncherPlugin *plugin)
               image = gtk_image_new_from_pixbuf (pix);
             }
           else
-            image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
+            {
+              image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
+              gtk_image_set_pixel_size (GTK_IMAGE (image), 16);
+            }
           gtk_box_pack_start (GTK_BOX (box), image, FALSE, TRUE, 3);
           gtk_widget_show (image);
           if (pix)
@@ -1767,9 +1770,11 @@ launcher_plugin_button_update (LauncherPlugin *plugin)
             gtk_image_set_from_pixbuf (GTK_IMAGE (plugin->child), pix);
             g_object_unref (G_OBJECT (pix));
           }
-          else
+          else {
             gtk_image_set_from_icon_name (GTK_IMAGE (plugin->child), icon_name,
                                           icon_size);
+            gtk_image_set_pixel_size (GTK_IMAGE (plugin->child), 16);
+          }
         }
 
       panel_utils_set_atk_info (plugin->button,
