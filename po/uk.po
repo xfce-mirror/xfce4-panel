@@ -5,14 +5,14 @@
 # Translators:
 # Dmitry Nikitin <luckas_fb@mail.ru>, 2007-2008
 # dsafsadf <heneral@gmail.com>, 2017
-# Yarema aka Knedlyk <yupadmin@gmail.com>, 2013-2015,2017
+# Yarema aka Knedlyk <yupadmin@gmail.com>, 2013-2015,2017-2018
 # zubr139, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-13 00:30+0200\n"
-"PO-Revision-Date: 2017-09-19 18:01+0000\n"
+"POT-Creation-Date: 2017-11-15 18:31+0100\n"
+"PO-Revision-Date: 2018-01-15 18:44+0000\n"
 "Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/xfce/xfce4-panel/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -43,18 +43,18 @@ msgstr "Упорядкувати панель"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1201
+#: ../panel/panel-preferences-dialog.c:1202
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Дійсно бажаєте видалити \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1204
+#: ../panel/panel-preferences-dialog.c:1205
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Якщо Ви видалите цей елемент з панелі, він буде повністю втрачений."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1206
+#: ../panel/panel-preferences-dialog.c:1207
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -62,8 +62,8 @@ msgstr "Скасувати"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:929
-#: ../panel/panel-preferences-dialog.c:1207
+#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:1208
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -179,49 +179,49 @@ msgid "There is already a running instance"
 msgstr "Вже існує запущений екземпляр"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:394
 msgid "Restarting..."
 msgstr "Перезапуск..."
 
-#: ../panel/main.c:413
+#: ../panel/main.c:409
 msgid "Failed to show the preferences dialog"
 msgstr "Не вдалось показати діалог налаштування"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:411
 msgid "Failed to show the add new items dialog"
 msgstr "Не вдалось показати діалог додавання нових елементів"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:413
 msgid "Failed to save the panel configuration"
 msgstr "Не вдалось зберегти конфігурацію панелі"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:415
 msgid "Failed to add a plugin to the panel"
 msgstr "Не вдалось додати розширення до панелі"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:417
 msgid "Failed to restart the panel"
 msgstr "Не вдалось перезапустити панель"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:419
 msgid "Failed to quit the panel"
 msgstr "Не вдалось вийти з панелі"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:421
 msgid "Failed to send D-Bus message"
 msgstr "Не вдалось відіслати повідомлення D-Bus"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Виконати"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:432
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Ви бажаєте запустити панель? Якщо так, то тоді переконайтеся, що Ви зберегли сесію при виході, щоб наступним разом при вході панель запускалася автоматично."
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:435 ../panel/main.c:449
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Не знайдено запущених екземплярів %s"
@@ -267,12 +267,12 @@ msgstr "Ви впевнені, що бажаєте закрити панель?"
 msgid "Failed to execute command \"%s\""
 msgstr "Не вдалось виконати команду \"%s\""
 
-#: ../panel/panel-dbus-client.c:216
+#: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Присвоєно неправильну подію плагіну. Використовуйте ПЛАГІН-НАЗВА:НАЗВА[:ТИП:ЗНАЧЕННЯ]."
 
-#: ../panel/panel-dbus-client.c:246
+#: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -300,7 +300,7 @@ msgstr "Додати"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Будь-ласка виберіть панель для нового розширення:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:865
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
@@ -357,41 +357,41 @@ msgstr "Розширення перезапускалось більше одн�
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../panel/panel-preferences-dialog.c:502
+#: ../panel/panel-preferences-dialog.c:504
 msgid "Primary"
 msgstr "Початково"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:522
+#: ../panel/panel-preferences-dialog.c:523
 #, c-format
 msgid "Screen %d"
 msgstr "Екран %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:548
+#: ../panel/panel-preferences-dialog.c:549
 #, c-format
 msgid "Monitor %d"
 msgstr "Монітор %d"
 
-#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:931
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Панель та конфігурації розширень будуть видалені"
 
-#: ../panel/panel-preferences-dialog.c:931
+#: ../panel/panel-preferences-dialog.c:932
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ви впевнені, що бажаєте видалити панель %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1043
+#: ../panel/panel-preferences-dialog.c:1044
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(зовнішній)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1048
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -400,7 +400,7 @@ msgstr "Внутрішня назва: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1060
+#: ../panel/panel-preferences-dialog.c:1061
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Внутрішня назва: %s-%d"
@@ -744,127 +744,144 @@ msgstr "Дія"
 msgid "_Actions"
 msgstr "_Дії"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "Log Out"
 msgstr "Вийти з сеансу"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "_Log Out"
 msgstr "_Вийти з сеансу"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 msgid "Are you sure you want to log out?"
 msgstr "Дійсно бажаєте вийти?"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:155
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Вихід через %d секунд."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log Out..."
 msgstr "Вийти з сеансу..."
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:161
 msgid "Log _Out..."
 msgstr "Вийти з _сеансу..."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "Switch User"
 msgstr "Переключити користувача"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:168
 msgid "_Switch User"
 msgstr "_Переключити користувача"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Lock Screen"
 msgstr "Блокувати екран"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:175
 msgid "Loc_k Screen"
 msgstr "_Блокувати екран"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "_Hibernate"
 msgstr "_Приспати"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 msgid "Do you want to suspend to disk?"
 msgstr "Ви бажаєте призупинити на диск?"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:184
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Комп'ютер засне через %d секунд."
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
+msgid "Hybrid Sleep"
+msgstr "Гібридна сплячка"
+
+#: ../plugins/actions/actions.c:190
+msgid "_Hybrid Sleep"
+msgstr "_Гібридна сплячка"
+
+#: ../plugins/actions/actions.c:191
+msgid "Do you want to hibernate and suspend the system?"
+msgstr "Ви бажаєте перевести систему у сплячку і приспати?"
+
+#: ../plugins/actions/actions.c:192
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr "Засинання і сплячка через %d секунд."
+
+#: ../plugins/actions/actions.c:197
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:198
 msgid "Sus_pend"
 msgstr "При_зупинити"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:199
 msgid "Do you want to suspend to RAM?"
 msgstr "Ви бажаєте призупинити на RAM?"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:200
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Комп'ютер призупиниться через %d секунд."
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:205
 msgid "Restart"
 msgstr "Перезапустити"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:206
 msgid "_Restart"
 msgstr "_Перезапустити"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:207
 msgid "Are you sure you want to restart?"
 msgstr "Дійсно бажаєте перезавантажити?"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Перезавантаження комп'ютера через %d секунд."
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:213
 msgid "Shut Down"
 msgstr "Вимкнути комп'ютер"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:214
 msgid "Shut _Down"
 msgstr "_Вимкнути комп'ютер"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to shut down?"
 msgstr "Ви впевнені, що бажаєте виключити?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:216
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Вимкнення комп'ютера за %d секунд."
 
-#: ../plugins/actions/actions.c:594
+#: ../plugins/actions/actions.c:615
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Розділювач"
 
-#: ../plugins/actions/actions.c:992
+#: ../plugins/actions/actions.c:1022
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Не вдається запустити дію \"%s\""
 
-#: ../plugins/actions/actions.c:1159
+#: ../plugins/actions/actions.c:1189
 msgid "John Doe"
 msgstr "Джон До"
 
@@ -959,7 +976,7 @@ msgid "OK"
 msgstr "Гаразд"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2343
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Не вдається виконати команду \"%s\"."
@@ -1435,7 +1452,7 @@ msgstr "Відкрити меню пускача"
 msgid "Unnamed Item"
 msgstr "Неназваний елемент"
 
-#: ../plugins/launcher/launcher.c:1734
+#: ../plugins/launcher/launcher.c:1743
 msgid "No items"
 msgstr "Немає елементів"
 
@@ -1779,23 +1796,23 @@ msgstr "Показувати тіл_ьки мінімізовані вікна"
 msgid "Show windows from all mo_nitors"
 msgstr "Показувати вікна з усіх моні_торів"
 
-#: ../plugins/tasklist/tasklist-widget.c:3422
+#: ../plugins/tasklist/tasklist-widget.c:3474
 msgid "Mi_nimize All"
 msgstr "Мінімізува_ти всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3430
+#: ../plugins/tasklist/tasklist-widget.c:3482
 msgid "Un_minimize All"
 msgstr "Д_емінімізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3490
 msgid "Ma_ximize All"
 msgstr "Ма_ксимізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3446
+#: ../plugins/tasklist/tasklist-widget.c:3498
 msgid "_Unmaximize All"
 msgstr "Демаксимізувати всі"
 
-#: ../plugins/tasklist/tasklist-widget.c:3458
+#: ../plugins/tasklist/tasklist-widget.c:3510
 msgid "_Close All"
 msgstr "Закрити в_сі"
 
