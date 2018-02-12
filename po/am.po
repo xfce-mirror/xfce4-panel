@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# samson <sambelet@yahoo.com>, 2016-2017
+# samson <sambelet@yahoo.com>, 2016-2018
 # Tegegne Tefera <tefera@mekuria.com>, 2007
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-13 00:30+0200\n"
-"PO-Revision-Date: 2017-09-19 18:01+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>\n"
+"POT-Creation-Date: 2017-11-15 18:31+0100\n"
+"PO-Revision-Date: 2018-02-12 02:00+0000\n"
+"Last-Translator: samson <sambelet@yahoo.com>\n"
 "Language-Team: Amharic (http://www.transifex.com/xfce/xfce4-panel/language/am/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,37 +41,37 @@ msgstr "ክፍል ማስተካከያ"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1201
+#: ../panel/panel-preferences-dialog.c:1202
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "በ እርግጥ ማስወገድ ይፈልጋሉ \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1204
+#: ../panel/panel-preferences-dialog.c:1205
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1206
+#: ../panel/panel-preferences-dialog.c:1207
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
-msgstr ""
+msgstr "መሰረዣ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:929
-#: ../panel/panel-preferences-dialog.c:1207
+#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:1208
 msgid "Remove"
-msgstr ""
+msgstr "ማስወገጃ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1190
 msgid "_Properties"
-msgstr ""
+msgstr "_ባህሪዎች..."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1205
 msgid "_About"
-msgstr ""
+msgstr "_ስለ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1220
 msgid "_Move"
@@ -79,7 +79,7 @@ msgstr "_ማንቀሳቀሻ "
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1244
 msgid "_Remove"
-msgstr ""
+msgstr " _ማስወገጃ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1265
 msgid "Pane_l"
@@ -99,11 +99,11 @@ msgstr "መው_ጫ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1330
 msgid "_Help"
-msgstr ""
+msgstr "_እርዳታ"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1345
 msgid "About"
-msgstr ""
+msgstr "ስለ"
 
 #: ../panel/main.c:81
 msgid "Show the 'Panel Preferences' dialog"
@@ -177,49 +177,49 @@ msgid "There is already a running instance"
 msgstr ""
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:394
 msgid "Restarting..."
 msgstr "እንደገና በማስጀመር ላይ"
 
-#: ../panel/main.c:413
+#: ../panel/main.c:409
 msgid "Failed to show the preferences dialog"
 msgstr "የ ምርጫ ንግግር ማሳየት አልተቻለም"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:411
 msgid "Failed to show the add new items dialog"
 msgstr "የ አዲስ እቃ ምርጫ ንግግር ማሳየት አልተቻለም"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:413
 msgid "Failed to save the panel configuration"
 msgstr "የ ክፍል ማሰናጃ ማስቀመጥ አልተቻለም"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:415
 msgid "Failed to add a plugin to the panel"
 msgstr "አዲስ ተሰኪ ወደ ክፍል መጨመር አልተቻለም"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:417
 msgid "Failed to restart the panel"
 msgstr "አዲስ ተሰኪ ክፍል ማስጀመር አልተቻለም"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:419
 msgid "Failed to quit the panel"
 msgstr "ከ ክፍል መውጣት አልተቻለም"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:421
 msgid "Failed to send D-Bus message"
 msgstr ""
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
 msgid "Execute"
-msgstr ""
+msgstr "መፈጸሚያ"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:432
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:435 ../panel/main.c:449
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
@@ -247,7 +247,7 @@ msgstr[1] ""
 
 #: ../panel/panel-application.c:1724
 msgid "Quit"
-msgstr ""
+msgstr "ማጥፊያ"
 
 #: ../panel/panel-application.c:1725
 msgid ""
@@ -264,12 +264,12 @@ msgstr ""
 msgid "Failed to execute command \"%s\""
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:216
+#: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:246
+#: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -291,13 +291,13 @@ msgstr "አዲስ እቃ መጨመሪያ"
 
 #: ../panel/panel-dialogs.c:128
 msgid "Add"
-msgstr ""
+msgstr "መጨመሪያ"
 
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
 msgstr "እባክዎን ለ አዲሱ ተሰኪ ክፍል ይምረጡ:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:865
 #, c-format
 msgid "Panel %d"
 msgstr "ክፍል %d"
@@ -322,11 +322,11 @@ msgstr "አዲስ ተሰኪ ወደ ክፍል መጨመሪያ"
 
 #: ../panel/panel-item-dialog.c:202
 msgid "Help"
-msgstr ""
+msgstr "እርዳታ"
 
 #: ../panel/panel-item-dialog.c:204 ../panel/panel-tic-tac-toe.c:124
 msgid "Close"
-msgstr ""
+msgstr "መዝጊያ"
 
 #: ../panel/panel-item-dialog.c:217
 #: ../plugins/launcher/launcher-dialog.glade.h:3
@@ -354,41 +354,41 @@ msgstr ""
 msgid "Automatic"
 msgstr "ራሱ በራሱ "
 
-#: ../panel/panel-preferences-dialog.c:502
+#: ../panel/panel-preferences-dialog.c:504
 msgid "Primary"
-msgstr ""
+msgstr "ቀዳሚ"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:522
+#: ../panel/panel-preferences-dialog.c:523
 #, c-format
 msgid "Screen %d"
 msgstr "መመልከቻ %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:548
+#: ../panel/panel-preferences-dialog.c:549
 #, c-format
 msgid "Monitor %d"
 msgstr "ሞኒተር %d "
 
-#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:931
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.c:931
+#: ../panel/panel-preferences-dialog.c:932
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "በ እርግጥ ክፍሉን ማስወገድ ይፈልጋሉ %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1043
+#: ../panel/panel-preferences-dialog.c:1044
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(የ ውጪ)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1048
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -397,7 +397,7 @@ msgstr "የ ውስጥ ስም: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1060
+#: ../panel/panel-preferences-dialog.c:1061
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "የ ውስጥ ስም: %s-%d"
@@ -479,7 +479,7 @@ msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Automatically hide the panel:"
-msgstr ""
+msgstr "ራሱ በራሱ ክፍል መደበቂያ:"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
@@ -573,7 +573,7 @@ msgstr "_መተው:"
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
-msgstr ""
+msgstr "በ ውስጡ የማያሳልፍ"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
@@ -741,127 +741,144 @@ msgstr "ተግባር"
 msgid "_Actions"
 msgstr "_ተግባሮች"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "Log Out"
 msgstr "መውጫ"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "_Log Out"
 msgstr "_መውጫ"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 msgid "Are you sure you want to log out?"
 msgstr "በ እርግጥ መውጣት ይፈልጋሉ?"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:155
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "በ መውጣት ላይ በ %d ሰከንዶች"
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log Out..."
 msgstr "መውጫ..."
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:161
 msgid "Log _Out..."
 msgstr "መው_ጫ..."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "Switch User"
 msgstr "ተጠቃሚ መቀየሪያ"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:168
 msgid "_Switch User"
 msgstr "ተጠቃሚ _መቀየሪያ"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Lock Screen"
 msgstr "መመልከቻ መቆለፊያ"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:175
 msgid "Loc_k Screen"
 msgstr "መመልከቻ መቆለፊ_ያ"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "Hibernate"
 msgstr "ማስተኛ"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "_Hibernate"
 msgstr "_ማስተኛ"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 msgid "Do you want to suspend to disk?"
 msgstr ""
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:184
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:188
-msgid "Suspend"
-msgstr "ማገጃ"
-
 #: ../plugins/actions/actions.c:189
-msgid "Sus_pend"
-msgstr "ማ_ገጃ"
+msgid "Hybrid Sleep"
+msgstr ""
 
 #: ../plugins/actions/actions.c:190
-msgid "Do you want to suspend to RAM?"
+msgid "_Hybrid Sleep"
 msgstr ""
 
 #: ../plugins/actions/actions.c:191
+msgid "Do you want to hibernate and suspend the system?"
+msgstr ""
+
+#: ../plugins/actions/actions.c:192
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr ""
+
+#: ../plugins/actions/actions.c:197
+msgid "Suspend"
+msgstr "ማገጃ"
+
+#: ../plugins/actions/actions.c:198
+msgid "Sus_pend"
+msgstr "ማ_ገጃ"
+
+#: ../plugins/actions/actions.c:199
+msgid "Do you want to suspend to RAM?"
+msgstr ""
+
+#: ../plugins/actions/actions.c:200
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:205
 msgid "Restart"
 msgstr "እንደገና ማስጀመሪያ"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:206
 msgid "_Restart"
 msgstr "እንደገና ማስጀመሪያ"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:207
 msgid "Are you sure you want to restart?"
 msgstr "በ እርግጥ እንደገና ማስጀመር ይፈልጋሉ?"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "ኮምፒዩተሩን እንደገና በማስጀመር ላይ በ %d ሰከንዶች"
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:213
 msgid "Shut Down"
 msgstr "ማጥፊያ"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:214
 msgid "Shut _Down"
 msgstr "_ማጥፊያ"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to shut down?"
 msgstr "በ እርግጥ ማጥፋት ይፈልጋሉ?"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:216
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "ኮምፒዩተሩን ማጥፋት ይፈልጋሉ በ %d ሰከንዶች"
 
-#: ../plugins/actions/actions.c:594
+#: ../plugins/actions/actions.c:615
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "መለያያ"
 
-#: ../plugins/actions/actions.c:992
+#: ../plugins/actions/actions.c:1022
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "ተግባሩን ማስኬድ አልተቻለም \"%s\""
 
-#: ../plugins/actions/actions.c:1159
+#: ../plugins/actions/actions.c:1189
 msgid "John Doe"
 msgstr "ጆንዶ"
 
@@ -885,7 +902,7 @@ msgstr "የ _አርእስት ቁልፍ"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
 msgid "_Show button title"
-msgstr ""
+msgstr "የ ቁልፍ አርእስት _ማሳያ"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Show application d_escription in tooltip"
@@ -953,10 +970,10 @@ msgstr "ምልክት ይምረጡ"
 #: ../plugins/applicationsmenu/applicationsmenu.c:539
 #: ../plugins/directorymenu/directorymenu.c:395
 msgid "OK"
-msgstr ""
+msgstr "እሺ"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2343
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "ትእዛዝ መፈጸም አልተቻለም \"%s\"."
@@ -999,7 +1016,7 @@ msgstr "የ እርዳታ ምርጫዎች ማሳያ"
 #: ../plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%A %d %B %Y"
 
 #: ../plugins/clock/clock.c:177
 msgid "Week %V"
@@ -1031,7 +1048,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:5
 msgid "LCD"
-msgstr ""
+msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.glade.h:6
 #: ../plugins/clock/clock.desktop.in.in.h:1
@@ -1091,7 +1108,7 @@ msgstr ""
 
 #: ../plugins/clock/clock-dialog.glade.h:20
 msgid "Display _seconds"
-msgstr ""
+msgstr "_ሰከንዶች ማሳያ"
 
 #: ../plugins/clock/clock-dialog.glade.h:21
 msgid "F_ormat:"
@@ -1119,7 +1136,7 @@ msgstr "የሰዓት ምርጫዎች"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
@@ -1135,11 +1152,11 @@ msgstr "ጠዋት"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Almost noon"
-msgstr ""
+msgstr "እኩለ ቀን"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Noon"
-msgstr ""
+msgstr "ቀትር"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Afternoon"
@@ -1426,13 +1443,13 @@ msgstr "በ ማጣራት ላይ"
 
 #: ../plugins/launcher/launcher.c:388
 msgid "Open launcher menu"
-msgstr ""
+msgstr "ዝርዝር ማስጀመሪያ መክፈቻ"
 
 #: ../plugins/launcher/launcher.c:1580
 msgid "Unnamed Item"
 msgstr "የማይታወቅ እቃ"
 
-#: ../plugins/launcher/launcher.c:1734
+#: ../plugins/launcher/launcher.c:1743
 msgid "No items"
 msgstr "ምንም እቃ የለም"
 
@@ -1491,11 +1508,11 @@ msgstr "እቃ _ማጥፊያ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 msgid "Add Appli_cation"
-msgstr ""
+msgstr "መተግ_በሪያ መጨመሪያ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:13
 msgid "New _Application"
-msgstr ""
+msgstr "አዲስ _መተግበሪያ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:14
 msgid "New _Link"
@@ -1776,23 +1793,23 @@ msgstr ""
 msgid "Show windows from all mo_nitors"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3422
+#: ../plugins/tasklist/tasklist-widget.c:3474
 msgid "Mi_nimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3430
+#: ../plugins/tasklist/tasklist-widget.c:3482
 msgid "Un_minimize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3490
 msgid "Ma_ximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3446
+#: ../plugins/tasklist/tasklist-widget.c:3498
 msgid "_Unmaximize All"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-widget.c:3458
+#: ../plugins/tasklist/tasklist-widget.c:3510
 msgid "_Close All"
 msgstr "ሁሉንም _መዝጊያ"
 
