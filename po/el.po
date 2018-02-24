@@ -12,13 +12,13 @@
 # Spiros Georgaras <sng@hellug.gr>, 2010
 # Stathis Kamperis <ekamperi@auth.gr>, 2006
 # Stavros Giannouris <stavros@hellug.gr>, 2005-2006,2008-2010
-# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2017
+# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-13 00:30+0200\n"
-"PO-Revision-Date: 2017-10-23 17:08+0000\n"
+"POT-Creation-Date: 2017-11-15 18:31+0100\n"
+"PO-Revision-Date: 2018-02-24 15:05+0000\n"
 "Last-Translator: Πέτρος Σαμαράς <psamaras1@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/xfce/xfce4-panel/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -49,18 +49,18 @@ msgstr "Προσαρμογή του ταμπλό"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1042
-#: ../panel/panel-preferences-dialog.c:1201
+#: ../panel/panel-preferences-dialog.c:1202
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το \"%s\";"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1204
+#: ../panel/panel-preferences-dialog.c:1205
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Εάν αφαιρέσετε το αντικείμενο από το ταμπλό, χάνεται οριστικά."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1206
+#: ../panel/panel-preferences-dialog.c:1207
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -68,8 +68,8 @@ msgstr "Ακύρωση"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1049
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:929
-#: ../panel/panel-preferences-dialog.c:1207
+#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:1208
 msgid "Remove"
 msgstr "Αφαίρεση"
 
@@ -185,49 +185,49 @@ msgid "There is already a running instance"
 msgstr "Υπάρχει ήδη μια εκτελούμενη διεργασία"
 
 #. spawn ourselfs again
-#: ../panel/main.c:398
+#: ../panel/main.c:394
 msgid "Restarting..."
 msgstr "Επανεκκίνηση..."
 
-#: ../panel/main.c:413
+#: ../panel/main.c:409
 msgid "Failed to show the preferences dialog"
 msgstr "Αποτυχία εμφάνισης του διαλόγου προτιμήσεων"
 
-#: ../panel/main.c:415
+#: ../panel/main.c:411
 msgid "Failed to show the add new items dialog"
 msgstr "Αποτυχία εμφάνισης του διαλόγου προσθήκης νέων αντικειμένων"
 
-#: ../panel/main.c:417
+#: ../panel/main.c:413
 msgid "Failed to save the panel configuration"
 msgstr "Αποτυχία αποθήκευσης της ρύθμισης παραμέτρων του ταμπλό"
 
-#: ../panel/main.c:419
+#: ../panel/main.c:415
 msgid "Failed to add a plugin to the panel"
 msgstr "Αποτυχία προσθήκης ενός νέου αρθρώματος στο ταμπλό"
 
-#: ../panel/main.c:421
+#: ../panel/main.c:417
 msgid "Failed to restart the panel"
 msgstr "Αποτυχία επανεκκίνησης του ταμπλό"
 
-#: ../panel/main.c:423
+#: ../panel/main.c:419
 msgid "Failed to quit the panel"
 msgstr "Αποτυχία τερματισμού του ταμπλό"
 
-#: ../panel/main.c:425
+#: ../panel/main.c:421
 msgid "Failed to send D-Bus message"
 msgstr "Αποτυχία αποστολής μηνύματος D-BUS"
 
-#: ../panel/main.c:435 ../panel/panel-plugin-external.c:435
+#: ../panel/main.c:431 ../panel/panel-plugin-external.c:435
 msgid "Execute"
 msgstr "Εκτέλεση"
 
-#: ../panel/main.c:436
+#: ../panel/main.c:432
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr "Θέλετε να εκκινηθεί το ταμπλό; Αν το εκκινήσετε, αποθηκεύστε τη συνεδρία κατά την αποσύνδεσή σας, ώστε το ταμπλό να εκκινηθεί αυτόματα την επόμενη φορά που θα συνδεθείτε."
 
-#: ../panel/main.c:439 ../panel/main.c:453
+#: ../panel/main.c:435 ../panel/main.c:449
 #, c-format
 msgid "No running instance of %s was found"
 msgstr "Δεν βρέθηκε να τρέχει κάποια διεργασία του %s"
@@ -272,12 +272,12 @@ msgstr "Είστε σίγουροι ότι θέλετε να κλείσετε τ
 msgid "Failed to execute command \"%s\""
 msgstr "Αδυναμία εκτέλεσης της εντολής \"%s\""
 
-#: ../panel/panel-dbus-client.c:216
+#: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr "Προσδιορίστηκε μη έγκυρη σύνταξη του γεγονότος αρθρώματος: Χρησιμοποιήστε το ΟΝΟΜΑ-ΑΡΘΡΩΜΑΤΟΣ:ΟΝΟΜΑ[:ΤΥΠΟΣ:ΤΙΜΗ]."
 
-#: ../panel/panel-dbus-client.c:246
+#: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
@@ -305,7 +305,7 @@ msgstr "Προσθήκη"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Παρακαλώ επιλέξτε ένα ταμπλό για το νέο άρθρωμα:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:864
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:865
 #, c-format
 msgid "Panel %d"
 msgstr "Ταμπλό %d"
@@ -362,41 +362,41 @@ msgstr "Το άρθρωμα επανεκκινήθηκε περισσότερε�
 msgid "Automatic"
 msgstr "Αυτόματο"
 
-#: ../panel/panel-preferences-dialog.c:502
+#: ../panel/panel-preferences-dialog.c:504
 msgid "Primary"
 msgstr "Κύρια"
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:522
+#: ../panel/panel-preferences-dialog.c:523
 #, c-format
 msgid "Screen %d"
 msgstr "Οθόνη %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:548
+#: ../panel/panel-preferences-dialog.c:549
 #, c-format
 msgid "Monitor %d"
 msgstr "Οθόνη %d"
 
-#: ../panel/panel-preferences-dialog.c:930
+#: ../panel/panel-preferences-dialog.c:931
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Οι ρυθμίσεις παραμέτρων του ταμπλό και του πρόσθετου θα διαγραφούν οριστικά."
 
-#: ../panel/panel-preferences-dialog.c:931
+#: ../panel/panel-preferences-dialog.c:932
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το ταμπλό %d;"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1043
+#: ../panel/panel-preferences-dialog.c:1044
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(εξωτερικό/)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1048
+#: ../panel/panel-preferences-dialog.c:1049
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -405,7 +405,7 @@ msgstr "Εσωτερικό όνομα: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1060
+#: ../panel/panel-preferences-dialog.c:1061
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Εσωτερικό όνομα: %s-%d"
@@ -749,127 +749,144 @@ msgstr "Ενέργεια"
 msgid "_Actions"
 msgstr "_Ενέργειες"
 
-#: ../plugins/actions/actions.c:151
+#: ../plugins/actions/actions.c:152
 msgid "Log Out"
 msgstr "Αποσύνδεση"
 
-#: ../plugins/actions/actions.c:152
+#: ../plugins/actions/actions.c:153
 msgid "_Log Out"
 msgstr "_Αποσύνδεση"
 
-#: ../plugins/actions/actions.c:153
+#: ../plugins/actions/actions.c:154
 msgid "Are you sure you want to log out?"
 msgstr "Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;"
 
-#: ../plugins/actions/actions.c:154
+#: ../plugins/actions/actions.c:155
 #, c-format
 msgid "Logging out in %d seconds."
 msgstr "Αποσύνδεση σε %d δευτερόλεπτα."
 
-#: ../plugins/actions/actions.c:159
+#: ../plugins/actions/actions.c:160
 msgid "Log Out..."
 msgstr "Αποσύνδεση..."
 
-#: ../plugins/actions/actions.c:160
+#: ../plugins/actions/actions.c:161
 msgid "Log _Out..."
 msgstr "Απ_οσύνδεση..."
 
-#: ../plugins/actions/actions.c:166
+#: ../plugins/actions/actions.c:167
 msgid "Switch User"
 msgstr "Εναλλαγή Χρήστη"
 
-#: ../plugins/actions/actions.c:167
+#: ../plugins/actions/actions.c:168
 msgid "_Switch User"
 msgstr "_Εναλλαγή Χρήστη"
 
-#: ../plugins/actions/actions.c:173
+#: ../plugins/actions/actions.c:174
 msgid "Lock Screen"
 msgstr "Κλείδωμα οθόνης"
 
-#: ../plugins/actions/actions.c:174
+#: ../plugins/actions/actions.c:175
 msgid "Loc_k Screen"
 msgstr "Κλ_είδωμα οθόνης"
 
-#: ../plugins/actions/actions.c:180
+#: ../plugins/actions/actions.c:181
 msgid "Hibernate"
 msgstr "Αδρανοποίηση"
 
-#: ../plugins/actions/actions.c:181
+#: ../plugins/actions/actions.c:182
 msgid "_Hibernate"
 msgstr "_Αδρανοποίηση"
 
-#: ../plugins/actions/actions.c:182
+#: ../plugins/actions/actions.c:183
 msgid "Do you want to suspend to disk?"
 msgstr "Θέλετε αναστολή στον δίσκο;"
 
-#: ../plugins/actions/actions.c:183
+#: ../plugins/actions/actions.c:184
 #, c-format
 msgid "Hibernating computer in %d seconds."
 msgstr "Αδρανοποίηση του υπολογιστή σε %d δευτερόλεπτα."
 
-#: ../plugins/actions/actions.c:188
+#: ../plugins/actions/actions.c:189
+msgid "Hybrid Sleep"
+msgstr "Υβριδική Αναστολή"
+
+#: ../plugins/actions/actions.c:190
+msgid "_Hybrid Sleep"
+msgstr "Υ_βριδική Αναστολή"
+
+#: ../plugins/actions/actions.c:191
+msgid "Do you want to hibernate and suspend the system?"
+msgstr "Θέλετε να θέσετε το σύστημα σε αδρανοποίηση και αναστολή;"
+
+#: ../plugins/actions/actions.c:192
+#, c-format
+msgid "Hibernating and Suspending computer in %d seconds."
+msgstr "Αδρανοποίηση και Αναστολή του υπολογιστή σε %d δευτερόλεπτα."
+
+#: ../plugins/actions/actions.c:197
 msgid "Suspend"
 msgstr "Αναστολή"
 
-#: ../plugins/actions/actions.c:189
+#: ../plugins/actions/actions.c:198
 msgid "Sus_pend"
 msgstr "Ανα_στολή"
 
-#: ../plugins/actions/actions.c:190
+#: ../plugins/actions/actions.c:199
 msgid "Do you want to suspend to RAM?"
 msgstr "Θέλετε αναστολή στην μνήμη RAM;"
 
-#: ../plugins/actions/actions.c:191
+#: ../plugins/actions/actions.c:200
 #, c-format
 msgid "Suspending computer in %d seconds."
 msgstr "Αναστολή του υπολογιστή σε %d δευτερόλεπτα."
 
-#: ../plugins/actions/actions.c:196
+#: ../plugins/actions/actions.c:205
 msgid "Restart"
 msgstr "Επανεκκίνηση"
 
-#: ../plugins/actions/actions.c:197
+#: ../plugins/actions/actions.c:206
 msgid "_Restart"
 msgstr "_Επανεκκίνηση"
 
-#: ../plugins/actions/actions.c:198
+#: ../plugins/actions/actions.c:207
 msgid "Are you sure you want to restart?"
 msgstr "Είστε σίγουροι ότι θέλετε να κάνετε επανεκκίνηση;"
 
-#: ../plugins/actions/actions.c:199
+#: ../plugins/actions/actions.c:208
 #, c-format
 msgid "Restarting computer in %d seconds."
 msgstr "Επανεκκίνηση του υπολογιστή σε %d δευτερόλεπτα."
 
-#: ../plugins/actions/actions.c:204
+#: ../plugins/actions/actions.c:213
 msgid "Shut Down"
 msgstr "Τερματισμός"
 
-#: ../plugins/actions/actions.c:205
+#: ../plugins/actions/actions.c:214
 msgid "Shut _Down"
 msgstr "_Τερματισμός"
 
-#: ../plugins/actions/actions.c:206
+#: ../plugins/actions/actions.c:215
 msgid "Are you sure you want to shut down?"
 msgstr "Είστε σίγουροι ότι θέλετε να τερματίσετε τον υπολογιστή;"
 
-#: ../plugins/actions/actions.c:207
+#: ../plugins/actions/actions.c:216
 #, c-format
 msgid "Turning off computer in %d seconds."
 msgstr "Τερματισμός του υπολογιστή σε %d δευτερόλεπτα."
 
-#: ../plugins/actions/actions.c:594
+#: ../plugins/actions/actions.c:615
 #: ../plugins/separator/separator-dialog.glade.h:2
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Separator"
 msgstr "Διαχωριστικό"
 
-#: ../plugins/actions/actions.c:992
+#: ../plugins/actions/actions.c:1022
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Αποτυχία εκτέλεσης της ενέργειας \"%s\""
 
-#: ../plugins/actions/actions.c:1159
+#: ../plugins/actions/actions.c:1189
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -964,7 +981,7 @@ msgid "OK"
 msgstr "Εντάξει"
 
 #: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2324
+#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2343
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "Αδυναμία εκτέλεσης της εντολής \"%s\"."
@@ -1440,7 +1457,7 @@ msgstr "Άνοιγμα μενού εκκινητή"
 msgid "Unnamed Item"
 msgstr "Αντικείμενο χωρίς όνομα"
 
-#: ../plugins/launcher/launcher.c:1734
+#: ../plugins/launcher/launcher.c:1743
 msgid "No items"
 msgstr "Δε βρέθηκαν αντικείμενα"
 
@@ -1784,23 +1801,23 @@ msgstr "Εμφάνιση μόνο ελα_χιστοποιημένων εφαρμ
 msgid "Show windows from all mo_nitors"
 msgstr "Προβολή παραθύρων από όλα τα mo_nitor"
 
-#: ../plugins/tasklist/tasklist-widget.c:3422
+#: ../plugins/tasklist/tasklist-widget.c:3474
 msgid "Mi_nimize All"
 msgstr "Ελα_χιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3430
+#: ../plugins/tasklist/tasklist-widget.c:3482
 msgid "Un_minimize All"
 msgstr "Αποε_λαχιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3438
+#: ../plugins/tasklist/tasklist-widget.c:3490
 msgid "Ma_ximize All"
 msgstr "Με_γιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3446
+#: ../plugins/tasklist/tasklist-widget.c:3498
 msgid "_Unmaximize All"
 msgstr "Α_πομεγιστοποίηση όλων"
 
-#: ../plugins/tasklist/tasklist-widget.c:3458
+#: ../plugins/tasklist/tasklist-widget.c:3510
 msgid "_Close All"
 msgstr "_Κλείσιμο Όλων"
 
