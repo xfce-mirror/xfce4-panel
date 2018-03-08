@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-15 18:31+0100\n"
-"PO-Revision-Date: 2018-03-08 09:48+0000\n"
+"PO-Revision-Date: 2018-03-08 13:23+0000\n"
 "Last-Translator: Pasi Lallinaho <pasi@shimmerproject.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/xfce/xfce4-panel/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -155,7 +155,7 @@ msgstr "Näytä versiotiedot ja poistu"
 #: ../panel/main.c:207
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr "Nimi %s menetettiin istunnon viestintärajapinnalla, poistutaan."
+msgstr "Nimi %s menetettiin viestintärajapinnalla, poistutaan."
 
 #. parse context options
 #: ../panel/main.c:258
@@ -796,7 +796,7 @@ msgstr "L_epotila"
 
 #: ../plugins/actions/actions.c:183
 msgid "Do you want to suspend to disk?"
-msgstr "Haluatko siirtyä levypohjaiseen lepotilaan?"
+msgstr "Haluatko siirtyä levypohjaiseen keskeytystilaan?"
 
 #: ../plugins/actions/actions.c:184
 #, c-format
@@ -805,20 +805,20 @@ msgstr "Siirrytään lepotilaan %d sekunnin kuluessa."
 
 #: ../plugins/actions/actions.c:189
 msgid "Hybrid Sleep"
-msgstr ""
+msgstr "Hybridi unitila"
 
 #: ../plugins/actions/actions.c:190
 msgid "_Hybrid Sleep"
-msgstr ""
+msgstr "_Hybridi unitila"
 
 #: ../plugins/actions/actions.c:191
 msgid "Do you want to hibernate and suspend the system?"
-msgstr ""
+msgstr "Haluatko siirtyä lepo- ja keskeytystilaan?"
 
 #: ../plugins/actions/actions.c:192
 #, c-format
 msgid "Hibernating and Suspending computer in %d seconds."
-msgstr ""
+msgstr "Siirrytään lepo- ja keskeytystilaan %d sekunnin päästä."
 
 #: ../plugins/actions/actions.c:197
 msgid "Suspend"
@@ -1020,7 +1020,7 @@ msgstr "Näytä ohjevalitsimet:"
 #: ../plugins/clock/clock.c:46
 msgctxt "Date"
 msgid "%A %d %B %Y"
-msgstr ""
+msgstr "%A %d. %Bta %Y"
 
 #: ../plugins/clock/clock.c:177
 msgid "Week %V"
@@ -1140,7 +1140,7 @@ msgstr "Kellon asetukset"
 #: ../plugins/clock/clock-digital.h:25
 msgctxt "Time"
 msgid "%R"
-msgstr ""
+msgstr "%R"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Night"
