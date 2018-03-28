@@ -844,7 +844,7 @@ panel_window_draw (GtkWidget *widget,
   cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
 
   ctx = gtk_widget_get_style_context (widget);
-  gtk_style_context_get_color (ctx, GTK_STATE_NORMAL, &fg_rgba);
+  gtk_style_context_get_color (ctx, gtk_widget_get_state_flags(widget), &fg_rgba);
   dark_rgba = gdk_rgba_copy (&fg_rgba);
   fg_rgba.alpha = 0.5;
   dark_rgba->alpha = 0.15;
