@@ -127,7 +127,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button-close">
-                <property name="label">_Close</property>
+                <property name="label" translatable="yes">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -141,7 +141,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button-help">
-                <property name="label">_Help</property>
+                <property name="label" translatable="yes">_Help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -255,7 +255,7 @@
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkButton" id="panel-switch">
-                    <property name="label">Backup and restore</property>
+                    <property name="label" translatable="yes">Backup and restore</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
