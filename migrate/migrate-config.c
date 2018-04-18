@@ -38,11 +38,11 @@ migrate_config_strchr_count (const gchar *haystack,
                              const gchar  needle)
 {
   const gchar *p;
-  guint        count;
+  guint        count = 0;
 
   if (G_UNLIKELY (haystack != NULL))
     {
-      for (p = haystack, count = 0; *p != '\0'; ++p)
+      for (p = haystack; *p != '\0'; ++p)
         if (*p == needle)
           count++;
     }
