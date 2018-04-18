@@ -396,7 +396,7 @@ migrate_46_plugin_launcher (XfconfChannel  *channel,
       else if (g_file_test (path, G_FILE_TEST_EXISTS))
         {
           g_set_error (error, G_FILE_ERROR_EXIST, G_FILE_ERROR,
-                       "Deasktop item \"%s\" already exists", path);
+                       "Desktop item \"%s\" already exists", path);
           g_free (path);
           break;
         }
