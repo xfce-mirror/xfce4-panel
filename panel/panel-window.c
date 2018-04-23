@@ -1047,9 +1047,9 @@ panel_window_button_press_event (GtkWidget      *widget,
                                  GdkEventButton *event)
 {
   PanelWindow   *window = PANEL_WINDOW (widget);
+  GdkSeat       *seat;
   GdkCursor     *cursor;
   GdkGrabStatus  status;
-  GdkDisplay    *display;
   guint          modifiers;
 
   /* leave if the event is not for this window */
@@ -1066,15 +1066,14 @@ panel_window_button_press_event (GtkWidget      *widget,
       panel_return_val_if_fail (window->grab_time == 0, FALSE);
 
       /* create a cursor */
-      display = gdk_screen_get_display (window->screen);
-      cursor = gdk_cursor_new_for_display (display, GDK_FLEUR);
+      cursor = gdk_cursor_new_for_display (window->display, GDK_FLEUR);
 
       /* grab the pointer for dragging the window */
-      status = gdk_device_grab (event->device, event->window,
-                                GDK_OWNERSHIP_NONE, FALSE,
-                                GDK_BUTTON_MOTION_MASK
-                                | GDK_BUTTON_RELEASE_MASK,
-                                cursor, event->time);
+      seat = gdk_device_get_seat (event->device);
+
+      status = gdk_seat_grab (seat, event->window,
+                              GDK_SEAT_CAPABILITY_ALL_POINTING,
+                              FALSE, cursor, (GdkEvent*)event, NULL, NULL);
 
       g_object_unref (cursor);
 
@@ -1116,7 +1115,7 @@ panel_window_button_release_event (GtkWidget      *widget,
   if (window->grab_time != 0)
     {
       /* ungrab the pointer */
-      gdk_device_ungrab (event->device, window->grab_time);
+      gdk_seat_ungrab (gdk_device_get_seat (event->device));
       window->grab_time = 0;
 
       /* store the new position */
