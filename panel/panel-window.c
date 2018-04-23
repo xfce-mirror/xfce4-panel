@@ -1655,48 +1655,56 @@ panel_window_screen_struts_set (PanelWindow *window)
 {
   gulong         struts[N_STRUTS] = { 0, };
   GdkRectangle  *alloc = &window->alloc;
+  GdkMonitor    *monitor;
+  GdkRectangle   geometry;
   guint          i;
   gboolean       update_struts = FALSE;
   gint           n;
+  gint           scale_factor;
   const gchar   *strut_border[] = { "left", "right", "top", "bottom" };
   const gchar   *strut_xy[] = { "y", "y", "x", "x" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (cardinal_atom != 0 && net_wm_strut_partial_atom != 0);
   panel_return_if_fail (GDK_IS_SCREEN (window->screen));
+  panel_return_if_fail (GDK_IS_DISPLAY (window->display));
 
   if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     return;
+
+  monitor = gdk_display_get_monitor_at_point (window->display, window->base_x, window->base_y);
+  scale_factor = gdk_monitor_get_scale_factor(monitor);
+  gdk_monitor_get_geometry(monitor, &geometry);
 
   /* set the struts */
   /* note that struts are relative to the screen edge! */
   if (window->struts_edge == STRUTS_EDGE_TOP)
     {
       /* the window is snapped on the top screen edge */
-      struts[STRUT_TOP] = alloc->y + alloc->height;
-      struts[STRUT_TOP_START_X] = alloc->x;
-      struts[STRUT_TOP_END_X] = alloc->x + alloc->width - 1;
+      struts[STRUT_TOP] = (alloc->y + alloc->height) * scale_factor;
+      struts[STRUT_TOP_START_X] = alloc->x * scale_factor;
+      struts[STRUT_TOP_END_X] = (alloc->x + alloc->width - 1) * scale_factor;
     }
   else if (window->struts_edge == STRUTS_EDGE_BOTTOM)
     {
       /* the window is snapped on the bottom screen edge */
-      struts[STRUT_BOTTOM] = gdk_screen_get_height (window->screen) - alloc->y;
-      struts[STRUT_BOTTOM_START_X] = alloc->x;
-      struts[STRUT_BOTTOM_END_X] = alloc->x + alloc->width - 1;
+      struts[STRUT_BOTTOM] = (geometry.height - alloc->y) * scale_factor;
+      struts[STRUT_BOTTOM_START_X] = alloc->x * scale_factor;
+      struts[STRUT_BOTTOM_END_X] = (alloc->x + alloc->width - 1) * scale_factor;
     }
   else if (window->struts_edge == STRUTS_EDGE_LEFT)
     {
       /* the window is snapped on the left screen edge */
-      struts[STRUT_LEFT] = alloc->x + alloc->width;
-      struts[STRUT_LEFT_START_Y] = alloc->y;
-      struts[STRUT_LEFT_END_Y] = alloc->y + alloc->height - 1;
+      struts[STRUT_LEFT] = (alloc->x + alloc->width) * scale_factor;
+      struts[STRUT_LEFT_START_Y] = alloc->y * scale_factor;
+      struts[STRUT_LEFT_END_Y] = (alloc->y + alloc->height - 1) * scale_factor;
     }
   else if (window->struts_edge == STRUTS_EDGE_RIGHT)
     {
       /* the window is snapped on the right screen edge */
-      struts[STRUT_RIGHT] = gdk_screen_get_width (window->screen) - alloc->x;
-      struts[STRUT_RIGHT_START_Y] = alloc->y;
-      struts[STRUT_RIGHT_END_Y] = alloc->y + alloc->height - 1;
+      struts[STRUT_RIGHT] = (geometry.width - alloc->x) * scale_factor;
+      struts[STRUT_RIGHT_START_Y] = alloc->y * scale_factor;
+      struts[STRUT_RIGHT_END_Y] = (alloc->y + alloc->height - 1) * scale_factor;
     }
 
   /* store the new struts */
