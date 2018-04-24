@@ -423,9 +423,9 @@ panel_preferences_dialog_bindings_add (PanelPreferencesDialog *dialog,
 static void
 panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 {
-  GdkScreen   *screen;
   GdkDisplay  *display;
-  gint         n_screens, n_monitors = 1;
+  GdkMonitor  *monitor;
+  gint         n_monitors = 1;
   GObject     *object;
   GObject     *store;
   gchar       *output_name = NULL;
@@ -463,15 +463,9 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bg_image_notified (dialog);
 
 
-  /* get run mode of the driver (multiple screens or randr) */
-  screen = gtk_widget_get_screen (GTK_WIDGET (dialog->active));
+  /* get run mode of the driver (multiple monitors or randr) */
   display = gtk_widget_get_display (GTK_WIDGET (dialog->active));
-  n_screens = 1;
-  n_monitors = 1;
-  if (G_LIKELY (n_screens <= 1))
-    {
-      n_monitors = gdk_screen_get_n_monitors (screen);
-    }
+  n_monitors = gdk_display_get_n_monitors (display);
 
   /* update the output selector */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "output-name");
@@ -485,9 +479,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
 
   g_object_get (G_OBJECT (dialog->active), "output-name", &output_name, NULL);
 
-  if (n_screens > 1
-      || n_monitors > 1
-      || !panel_str_is_empty (output_name))
+  if (n_monitors > 1 || !panel_str_is_empty (output_name))
     {
       gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
                                          OUTPUT_NAME, "Automatic",
@@ -509,38 +501,12 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
           span_monitors_sensitive = TRUE;
         }
 
-      if (n_screens > 1)
-        {
-          for (i = 0; i < n_screens; i++)
-            {
-              /* warn the user about layouts we don't support */
-              screen = gdk_display_get_screen (display, i);
-              if (gdk_screen_get_n_monitors (screen) > 1)
-                g_message ("Screen %d has multiple monitors, the panel does not "
-                           "support such a configuration", i + 1);
-
-              /* I18N: screen name in the output selector */
-              title = g_strdup_printf (_("Screen %d"), i + 1);
-              name = g_strdup_printf ("screen-%d", i);
-              gtk_list_store_insert_with_values (GTK_LIST_STORE (store), &iter, n++,
-                                                 OUTPUT_NAME, name,
-                                                 OUTPUT_TITLE, title, -1);
-
-              if (!output_selected && g_strcmp0 (name, output_name) == 0)
-                {
-                  gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (object), &iter);
-                  output_selected = TRUE;
-                }
-
-              g_free (name);
-              g_free (title);
-            }
-        }
-      else if (n_monitors >= 1)
+      if (n_monitors >= 1)
         {
           for (i = 0; i < n_monitors; i++)
             {
-              name = gdk_screen_get_monitor_plug_name (screen, i);
+              monitor = gdk_display_get_monitor(display, i);
+              name = g_strdup(gdk_monitor_get_model (monitor));
               if (panel_str_is_empty (name))
                 {
                   g_free (name);
