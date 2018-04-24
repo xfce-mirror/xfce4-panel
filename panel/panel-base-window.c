@@ -580,10 +580,10 @@ panel_base_window_active_timeout (gpointer user_data)
 static void
 panel_base_window_active_timeout_destroyed (gpointer user_data)
 {
-  PANEL_BASE_WINDOW (user_data)->priv->active_timeout_id = 0;
   PanelBaseWindow        *window = PANEL_BASE_WINDOW (user_data);
   GtkStyleContext        *context;
 
+  window->priv->active_timeout_id = 0;
   context = gtk_widget_get_style_context (GTK_WIDGET (window));
   /* Stop the marching ants */
   gtk_style_context_remove_class (context, "marching-ants");
