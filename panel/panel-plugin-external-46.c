@@ -257,7 +257,7 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
   GSList                *li;
   XEvent                 event;
   PluginProperty        *property;
-  GdkColor               color = { 0, };
+  GdkRGBA                color;
   GdkWindow             *window;
 
   panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL_46 (external));
@@ -296,7 +296,7 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
           break;
 
         case PROVIDER_PROP_TYPE_SET_BACKGROUND_COLOR:
-          if (gdk_color_parse (g_value_get_string (&property->value), &color))
+          if (gdk_rgba_parse (&color, g_value_get_string (&property->value)))
             {
               event.xclient.data.s[1] = color.red;
               event.xclient.data.s[2] = color.green;

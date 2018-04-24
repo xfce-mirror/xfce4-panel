@@ -496,14 +496,13 @@ static void
 panel_plugin_external_child_spawn_child_setup (gpointer data)
 {
   PanelPluginExternal *external = PANEL_PLUGIN_EXTERNAL (data);
-  GdkScreen           *screen;
-  gchar               *name;
+  GdkDisplay          *display;
+  const gchar         *name;
 
   /* this is what gdk_spawn_on_screen does */
-  screen = gtk_widget_get_screen (GTK_WIDGET (external));
-  name = gdk_screen_make_display_name (screen);
+  display = gtk_widget_get_display (GTK_WIDGET (external));
+  name = gdk_display_get_name (display);
   g_setenv ("DISPLAY", name, TRUE);
-  g_free (name);
 }
 
 
