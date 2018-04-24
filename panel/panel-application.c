@@ -393,7 +393,7 @@ panel_application_load_real (PanelApplication *application)
               && sscanf (output_name, "screen-%d", &screen_num) == 1)
             {
               if (screen_num < 1)
-                screen = gdk_display_get_screen (display, screen_num);
+                screen = gdk_display_get_default_screen (display);
             }
           g_free (output_name);
 
