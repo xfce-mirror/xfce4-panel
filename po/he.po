@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Dotan Kamber <kamberd@yahoo.com>, 2004,2006
-# Elishai Eliyahu <e1907@mm.st>, 2016-2017
+# Elishai Eliyahu <e1907@mm.st>, 2016-2018
 # GenghisKhan <genghiskhan@gmx.ca>, 2014-2015
 # Hezy Amiel <open@hezyamiel.com>, 2010
 # Jonatan Perry <Jonatan443@walla.co.il>, 2004
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-15 18:31+0100\n"
-"PO-Revision-Date: 2017-11-20 18:46+0000\n"
+"POT-Creation-Date: 2018-04-19 00:31+0200\n"
+"PO-Revision-Date: 2018-04-25 12:25+0000\n"
 "Last-Translator: Elishai Eliyahu <e1907@mm.st>\n"
 "Language-Team: Hebrew (http://www.transifex.com/xfce/xfce4-panel/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -45,68 +45,70 @@ msgid "Customize the panel"
 msgstr "התאם אישית את הלוח"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../libxfce4panel/xfce-panel-plugin.c:1047
 #: ../panel/panel-preferences-dialog.c:1202
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "האם אתה בטוח כי ברצונך להסיר את \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1047
+#: ../libxfce4panel/xfce-panel-plugin.c:1052
 #: ../panel/panel-preferences-dialog.c:1205
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "אם תסיר את הפריט מתוך הלוח, הוא יאבד באופן קבוע."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1048 ../panel/panel-dialogs.c:127
+#: ../libxfce4panel/xfce-panel-plugin.c:1053 ../panel/panel-dialogs.c:127
 #: ../panel/panel-preferences-dialog.c:1207
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "ביטול"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1049
+#: ../libxfce4panel/xfce-panel-plugin.c:1054
 #: ../panel/panel-plugin-external.c:436
 #: ../panel/panel-preferences-dialog.c:930
 #: ../panel/panel-preferences-dialog.c:1208
+#: ../plugins/launcher/launcher-dialog.c:854
 msgid "Remove"
 msgstr "הסרה"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1190
+#: ../libxfce4panel/xfce-panel-plugin.c:1195
 msgid "_Properties"
 msgstr "_מאפיינים"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1205
+#: ../libxfce4panel/xfce-panel-plugin.c:1210
 msgid "_About"
 msgstr "_אודות"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1220
+#: ../libxfce4panel/xfce-panel-plugin.c:1225
 msgid "_Move"
 msgstr "_הזז"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1244
+#: ../libxfce4panel/xfce-panel-plugin.c:1249
 msgid "_Remove"
 msgstr "_הסר"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1265
+#: ../libxfce4panel/xfce-panel-plugin.c:1270
 msgid "Pane_l"
 msgstr "_לוח"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1274 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1279 ../panel/panel-window.c:2712
 msgid "Add _New Items..."
 msgstr "הוסף פריטים _חדשים..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1289 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2727
 msgid "Panel Pr_eferences..."
 msgstr "_העדפות לוח..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1310 ../panel/panel-window.c:2759
+#: ../libxfce4panel/xfce-panel-plugin.c:1315 ../panel/panel-window.c:2759
 msgid "Log _Out"
 msgstr "הת_נתק"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1330
+#: ../libxfce4panel/xfce-panel-plugin.c:1335
+#: ../panel/panel-preferences-dialog.glade.h:12
 msgid "_Help"
 msgstr "_עזרה"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1345
+#: ../libxfce4panel/xfce-panel-plugin.c:1350
 msgid "About"
 msgstr "אודות"
 
@@ -325,6 +327,10 @@ msgstr "הוספת פריטים חדשים"
 msgid "Add new plugins to the panel"
 msgstr "הוסף תוספים חדשים לפאנל"
 
+#: ../panel/panel-item-dialog.c:198
+msgid "_Add"
+msgstr "_הוסף"
+
 #: ../panel/panel-item-dialog.c:202
 msgid "Help"
 msgstr "עזרה"
@@ -446,179 +452,187 @@ msgid "Background image"
 msgstr "תמונת רקע"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
+msgid "_Close"
+msgstr "_סגור"
+
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
 msgstr "הוסף לוח חדש"
 
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Remove the currently selected panel"
 msgstr "הסר את הלוח הנבחר הנוכחי"
 
-#: ../panel/panel-preferences-dialog.glade.h:13
+#: ../panel/panel-preferences-dialog.glade.h:15
+msgid "Backup and restore"
+msgstr "גיבוי ושחזור"
+
+#: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Switch between panel presets"
 msgstr "העבר בין כיוונים מוקדמים של הלוח"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid "M_ode:"
 msgstr "_מצב:"
 
-#: ../panel/panel-preferences-dialog.glade.h:15
+#: ../panel/panel-preferences-dialog.glade.h:18
 msgid "O_utput:"
 msgstr "_פלט:"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
+#: ../panel/panel-preferences-dialog.glade.h:19
 msgid "Span mo_nitors"
 msgstr "_כסה צגים"
 
-#: ../panel/panel-preferences-dialog.glade.h:17
+#: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr "בחר באפשרות זו כדי להרחיב את הלוח למספר צגים."
 
-#: ../panel/panel-preferences-dialog.glade.h:18
+#: ../panel/panel-preferences-dialog.glade.h:21
 msgid "_Lock panel"
 msgstr "_נעל לוח"
 
-#: ../panel/panel-preferences-dialog.glade.h:19
+#: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr "בחר באפשרות זו כדי להסתיר את הידיות של הלוח ולנעול את מיקומו."
 
-#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Automatically hide the panel:"
 msgstr "הסתר אוטומטית את הלוח:"
 
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
 msgstr "_אל תשמור מקום בשוליים"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
+#: ../panel/panel-preferences-dialog.glade.h:25
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr "בחר באפשרות זו אם ברצונך שחלונות מוגדלים יכסו את השטח מאחורי הלוח. זה עובד רק כאשר הלוח מחובר לקצה המסך."
 
-#: ../panel/panel-preferences-dialog.glade.h:23
+#: ../panel/panel-preferences-dialog.glade.h:26
 #: ../plugins/actions/actions-dialog.glade.h:7
 #: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "General"
 msgstr "כללי"
 
-#: ../panel/panel-preferences-dialog.glade.h:24
+#: ../panel/panel-preferences-dialog.glade.h:27
 msgid "A_utomatically increase the length"
 msgstr "הג_דל אורך אוטומטית"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
+#: ../panel/panel-preferences-dialog.glade.h:28
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr "בחר את אפשרות זו כדי להגדיל אוטומטית את האורך של הלוח אם התוספות מצריכות עוד מרווח."
 
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:30
 #, no-c-format
 msgid "L_ength (%):"
 msgstr "או_רך (%):"
 
-#: ../panel/panel-preferences-dialog.glade.h:28
+#: ../panel/panel-preferences-dialog.glade.h:31
 msgid "Num_ber of rows:"
 msgstr "מס_פר שורות:"
 
-#: ../panel/panel-preferences-dialog.glade.h:29
+#: ../panel/panel-preferences-dialog.glade.h:32
 msgid "Row _Size (pixels):"
 msgstr "_גודל שורה (פיקסלים):"
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:34
 msgid "Measurements"
 msgstr "מידות"
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:35
 msgid "D_isplay"
 msgstr "_תצוגה"
 
-#: ../panel/panel-preferences-dialog.glade.h:33
+#: ../panel/panel-preferences-dialog.glade.h:36
 #: ../plugins/separator/separator-dialog.glade.h:5
 msgid "_Style:"
 msgstr "_סגנון:"
 
-#: ../panel/panel-preferences-dialog.glade.h:34
+#: ../panel/panel-preferences-dialog.glade.h:37
 msgid "C_olor:"
 msgstr "_צבע:"
 
-#: ../panel/panel-preferences-dialog.glade.h:35
+#: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Pick a Panel Color"
 msgstr "בחר צבע לוח"
 
-#: ../panel/panel-preferences-dialog.glade.h:36
+#: ../panel/panel-preferences-dialog.glade.h:39
 msgid "_File:"
 msgstr "_קובץ:"
 
-#: ../panel/panel-preferences-dialog.glade.h:37
+#: ../panel/panel-preferences-dialog.glade.h:40
 msgid "Select A Background Image"
 msgstr "בחר תמונת רקע"
 
-#: ../panel/panel-preferences-dialog.glade.h:38
+#: ../panel/panel-preferences-dialog.glade.h:41
 msgid "Background"
 msgstr "רקע"
 
-#: ../panel/panel-preferences-dialog.glade.h:39
+#: ../panel/panel-preferences-dialog.glade.h:42
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr "שקיפות כאשר הסמן אינו מעל הלוח, כאשר הערך 0 הוא שקוף לגמרי והערך 100 הוא אטום לגמרי."
 
 #. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
+#: ../panel/panel-preferences-dialog.glade.h:44
 msgid "_Enter:"
 msgstr "_כניסה:"
 
 #. I18N: label for the leave transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:43
+#: ../panel/panel-preferences-dialog.glade.h:46
 msgid "_Leave:"
 msgstr "_עזיבה:"
 
-#: ../panel/panel-preferences-dialog.glade.h:44
+#: ../panel/panel-preferences-dialog.glade.h:47
 msgid "Opacity"
 msgstr "אטימות"
 
-#: ../panel/panel-preferences-dialog.glade.h:45
+#: ../panel/panel-preferences-dialog.glade.h:48
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr "אפשר חיבור במנהל החלונות להגדרות אטימות בלוח."
 
-#: ../panel/panel-preferences-dialog.glade.h:46
+#: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
 msgstr "מ_ראה"
 
-#: ../panel/panel-preferences-dialog.glade.h:47
+#: ../panel/panel-preferences-dialog.glade.h:50
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 #: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Move currently selected item up by one row"
 msgstr "הזז מעלה בשורה אחת פריט נבחר נוכחי"
 
-#: ../panel/panel-preferences-dialog.glade.h:48
+#: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/launcher/launcher-dialog.glade.h:17
 #: ../plugins/systray/systray-dialog.glade.h:7
 msgid "Move currently selected item down by one row"
 msgstr "הזז מטה בשורה אחת פריט נבחר נוכחי"
 
-#: ../panel/panel-preferences-dialog.glade.h:49
+#: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Add new item to this panel"
 msgstr "הוסף פריט חדש ללוח זה"
 
-#: ../panel/panel-preferences-dialog.glade.h:50
+#: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Remove currently selected item"
 msgstr "הסר פריט נבחר נוכחי"
 
-#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../panel/panel-preferences-dialog.glade.h:54
 #: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Edit the currently selected item"
 msgstr "ערוך את הפריט הנבחר הנוכחי"
 
-#: ../panel/panel-preferences-dialog.glade.h:52
+#: ../panel/panel-preferences-dialog.glade.h:55
 msgid "Show about information of the currently selected item"
 msgstr "הצג מידע אודות של הפריט הנבחר הנוכחי"
 
-#: ../panel/panel-preferences-dialog.glade.h:53
+#: ../panel/panel-preferences-dialog.glade.h:56
 msgid "Ite_ms"
 msgstr "פרי_טים"
 
@@ -977,8 +991,8 @@ msgstr "בחירת איקון"
 msgid "OK"
 msgstr "אישור"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:579
-#: ../plugins/clock/clock.c:879 ../plugins/launcher/launcher.c:2343
+#: ../plugins/applicationsmenu/applicationsmenu.c:581
+#: ../plugins/clock/clock.c:918 ../plugins/launcher/launcher.c:2381
 #, c-format
 msgid "Failed to execute command \"%s\"."
 msgstr "נכשל לבצע פקודה \"%s\"."
@@ -1031,7 +1045,7 @@ msgstr "שבוע %V"
 msgid "Failed to execute clock command"
 msgstr "נכשל לבצע פקודת שעון"
 
-#: ../plugins/clock/clock.c:821
+#: ../plugins/clock/clock.c:857
 msgid "Custom Format"
 msgstr "פורמט מותאם אישית"
 
@@ -1380,36 +1394,36 @@ msgstr "מה השעה?"
 msgid "Directory Menu"
 msgstr "תפריט ספרייה"
 
-#: ../plugins/directorymenu/directorymenu.c:577
+#: ../plugins/directorymenu/directorymenu.c:579
 #, c-format
 msgid "Failed to launch application \"%s\""
 msgstr "נכשל להפעיל יישום \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:609
+#: ../plugins/directorymenu/directorymenu.c:611
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr "נכשל לתשאל סוג תוכן עבור \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:618
+#: ../plugins/directorymenu/directorymenu.c:620
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr "לא נמצא יישום ברירת מחדל עבור \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:634
+#: ../plugins/directorymenu/directorymenu.c:636
 #, c-format
 msgid "Failed to launch default application for \"%s\""
 msgstr "נכשל להפעיל יישום ברירת מחדל עבור \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:732
+#: ../plugins/directorymenu/directorymenu.c:734
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr "נכשל לבצע את היישום המועדף עבור קטגוריה \"%s\""
 
-#: ../plugins/directorymenu/directorymenu.c:806
+#: ../plugins/directorymenu/directorymenu.c:808
 msgid "Open Folder"
 msgstr "פתח תיקייה"
 
-#: ../plugins/directorymenu/directorymenu.c:821
+#: ../plugins/directorymenu/directorymenu.c:823
 msgid "Open in Terminal"
 msgstr "פתח בתוך מסוף"
 
@@ -1446,32 +1460,32 @@ msgstr "תבנית _קובץ:"
 msgid "Filtering"
 msgstr "סינון"
 
-#: ../plugins/launcher/launcher.c:388
+#: ../plugins/launcher/launcher.c:392
 msgid "Open launcher menu"
 msgstr "פתח תפריט משגר"
 
-#: ../plugins/launcher/launcher.c:1580
+#: ../plugins/launcher/launcher.c:1599
 msgid "Unnamed Item"
 msgstr "פריט בלי שם"
 
-#: ../plugins/launcher/launcher.c:1743
+#: ../plugins/launcher/launcher.c:1780
 msgid "No items"
 msgstr "אין פריטים"
 
-#: ../plugins/launcher/launcher-dialog.c:789
+#: ../plugins/launcher/launcher-dialog.c:796
 msgid "Failed to open desktop item editor"
 msgstr "נכשל לפתוח עורך פריט שולחן עבודה"
 
-#: ../plugins/launcher/launcher-dialog.c:848
+#: ../plugins/launcher/launcher-dialog.c:855
 msgid "If you delete an item, it will be permanently removed"
 msgstr "אם תמחק פריט, זה יוסר לעד"
 
-#: ../plugins/launcher/launcher-dialog.c:849
+#: ../plugins/launcher/launcher-dialog.c:856
 #, c-format
 msgid "Are you sure you want to remove \"%s\"?"
 msgstr "האם אתה בטוח כי ברצונך להסיר את \"%s\"?"
 
-#: ../plugins/launcher/launcher-dialog.c:850
+#: ../plugins/launcher/launcher-dialog.c:857
 msgid "Unnamed item"
 msgstr "פריט ללא שם"
 
@@ -1657,21 +1671,21 @@ msgid "Unable to start the notification area"
 msgstr "לא מסוגל להתחיל אזור התראה"
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:954
+#: ../plugins/systray/systray.c:980
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr "קרוב לוודאי כי תוכנית אחרת השתלטה על התפקודיות של אזור התראה. אזור זה לא ינוצל."
 
-#: ../plugins/systray/systray.c:956
+#: ../plugins/systray/systray.c:982
 msgid "The notification area lost selection"
 msgstr "אזור התראה איבד בחירה"
 
-#: ../plugins/systray/systray.c:1220
+#: ../plugins/systray/systray.c:1246
 msgid "Clear"
 msgstr "נקה"
 
-#: ../plugins/systray/systray.c:1221
+#: ../plugins/systray/systray.c:1247
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "האם אתה בטוח כי ברצונך לטהר את הרשימה של יישומים מוכרים?"
 
@@ -1798,23 +1812,23 @@ msgstr "הצד חלונות _ממוזערים בלבד"
 msgid "Show windows from all mo_nitors"
 msgstr "הצג חלונות מכל ה_מסכים"
 
-#: ../plugins/tasklist/tasklist-widget.c:3474
+#: ../plugins/tasklist/tasklist-widget.c:3492
 msgid "Mi_nimize All"
 msgstr "מ_זער הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3482
+#: ../plugins/tasklist/tasklist-widget.c:3500
 msgid "Un_minimize All"
 msgstr "בטל מז_ער הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3490
+#: ../plugins/tasklist/tasklist-widget.c:3508
 msgid "Ma_ximize All"
 msgstr "הג_דל הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3498
+#: ../plugins/tasklist/tasklist-widget.c:3516
 msgid "_Unmaximize All"
 msgstr "_בטל הגדל הכל"
 
-#: ../plugins/tasklist/tasklist-widget.c:3510
+#: ../plugins/tasklist/tasklist-widget.c:3528
 msgid "_Close All"
 msgstr "_סגור הכל"
 
@@ -1826,24 +1840,24 @@ msgstr "החלף בין חלונות פתוחים באמצעות לחצנים"
 msgid "Desktop"
 msgstr "שולחן עבודה"
 
-#: ../plugins/windowmenu/windowmenu.c:1265
+#: ../plugins/windowmenu/windowmenu.c:1272
 msgid "No Windows"
 msgstr "אין חלונות"
 
-#: ../plugins/windowmenu/windowmenu.c:1280
+#: ../plugins/windowmenu/windowmenu.c:1287
 msgid "Urgent Windows"
 msgstr "חלונות דחופים"
 
-#: ../plugins/windowmenu/windowmenu.c:1323
+#: ../plugins/windowmenu/windowmenu.c:1330
 msgid "Add Workspace"
 msgstr "הוסף משטח עבודה"
 
-#: ../plugins/windowmenu/windowmenu.c:1346
+#: ../plugins/windowmenu/windowmenu.c:1353
 #, c-format
 msgid "Remove Workspace \"%s\""
 msgstr "הסר משטח עבודה \"%s\""
 
-#: ../plugins/windowmenu/windowmenu.c:1348
+#: ../plugins/windowmenu/windowmenu.c:1355
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "הסרת משטח עבודה %d"
