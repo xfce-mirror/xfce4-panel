@@ -61,6 +61,10 @@ static gboolean     panel_item_dialog_separator_func         (GtkTreeModel      
 static void         panel_item_dialog_selection_changed      (GtkTreeSelection   *selection,
                                                               PanelItemDialog    *dialog);
 static PanelModule *panel_item_dialog_get_selected_module    (GtkTreeView        *treeview);
+static void         panel_item_dialog_row_activated          (GtkTreeView        *treeview,
+                                                              GtkTreePath        *path,
+                                                              GtkTreeViewColumn  *column,
+                                                              gpointer            user_data);
 static void         panel_item_dialog_drag_begin             (GtkWidget          *treeview,
                                                               GdkDragContext     *context,
                                                               PanelItemDialog    *dialog);
@@ -256,6 +260,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (panel_item_dialog_selection_changed), dialog);
+  g_signal_connect (G_OBJECT (treeview), "row-activated", G_CALLBACK (panel_item_dialog_row_activated), dialog);
 
   g_object_unref (G_OBJECT (filter));
 
@@ -481,6 +486,19 @@ panel_item_dialog_get_selected_module (GtkTreeView *treeview)
     }
 
   return module;
+}
+
+
+
+static void
+panel_item_dialog_row_activated (GtkTreeView *treeview,
+                                 GtkTreePath *path,
+                                 GtkTreeViewColumn *column,
+                                 gpointer user_data)
+{
+  GtkDialog *dialog = GTK_DIALOG (user_data);
+
+  panel_item_dialog_response (dialog, GTK_RESPONSE_OK);
 }
 
 
