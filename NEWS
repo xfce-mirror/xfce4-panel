@@ -1,3 +1,32 @@
+4.13.3
+======
+- Bugfixes:
+  - Get the actual widget state flags to avoid constant redraws (Bug #14307)
+  -	launcher: Fix empty button in remove launcher dialog (Bug #13962)
+  -	launcher: Make sure icons are not oversize
+  - launcher: Make sure the appropriate icon size is used
+  - launcher: Fix resizing of pixbuf based icons (Bug #14138)
+  - Move "Separator" to the top of the "Add New Items..." menu (Bug #14086)
+  - Make a couple of strings translatable (Bug #14338)
+  - Make former GtkStock dialog buttons translateable (Bug #14338)
+  - Make double-click add plugin in the "Add item" dialog (Bug #9784)
+  - clock: Improve discoverability of tooltip help-texts (Bug #11708)
+  - Correctly initialize return value (Bug #10873)
+  - Gtk+3 fixes:
+    Fix various warnings with Gtk3 (Bug #14135)
+    Fix Gtk+3 version in ifdef
+    Use 'gdk_screen_is_composited' with Gtk3 (Bug #14128)
+  	Try to fix menu positioning with Gtk3.22
+  - Various icon fixes:
+    Switch to GtkIconTheme (Bug #14125)
+    Fix missing icons with Adwaita icon theme (Bug #14133)
+    Fix remaining deprecated icon names
+- Translation updates: Belarusian, Bulgarian, Catalan, Chinese (China),
+   Croatian, Czech, Danish, Dutch (Flemish), English (Australia), Finnish,
+   French, Galician, German, Greek, Hebrew, Hungarian, Italian, Japanese,
+   Lithuanian, Malay, Norwegian Bokmål, Polish, Portuguese (Brazilian),
+   Russian, Serbian, Turkish, Ukrainian
+
 4.13.2
 ======
 - Add support for gobject-introspection (Vidar Haarr)
