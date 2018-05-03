@@ -114,11 +114,12 @@
                       <object class="GtkEntry" id="timezone-name">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">Name of a timezone corresponding a file in the zoneinfo database, for example "America/New_York". Leave empty to use the localtime.</property>
                         <property name="hexpand">True</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">True</property>
+                        <property name="secondary_icon_name">help-contents</property>
+                        <property name="secondary-icon-tooltip-text" translatable="yes">Name of a timezone corresponding a file in the zoneinfo database, for example "America/New_York". Leave empty to use the localtime.</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -192,13 +193,16 @@
                       <object class="GtkEntry" id="tooltip-format">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See the "Help" page for additional information.</property>
+                        <property name="hexpand">True</property>
                         <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">True</property>
+                        <property name="secondary_icon_name">help-contents</property>
+                        <property name="secondary-icon-tooltip-text" translatable="yes">The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See the "Help" page for additional information.</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
+                        <property name="left_attach">0</property>
                         <property name="top_attach">2</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -412,13 +416,16 @@
                           <object class="GtkEntry" id="digital-format">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="tooltip_text" translatable="yes">The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See the "Help" page for additional information.</property>
+                            <property name="hexpand">True</property>
                             <property name="primary_icon_activatable">False</property>
-                            <property name="secondary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">True</property>
+                            <property name="secondary_icon_name">help-contents</property>
+                            <property name="secondary-icon-tooltip-text" translatable="yes">The format describes the date and time parts to insert into the panel. For example, %Y will be substituted with the year, %m with the month and %d with the day. Similarly, &lt;b&gt;&lt;/b&gt; tags will make the text bold. See the "Help" page for additional information.</property>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
+                            <property name="left_attach">0</property>
                             <property name="top_attach">1</property>
+                            <property name="width">2</property>
                           </packing>
                         </child>
                         <child>
