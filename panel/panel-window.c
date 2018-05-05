@@ -2742,7 +2742,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   /* help item */
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  item = gtk_image_menu_item_new_with_mnemonic ("_Help");
+  item = gtk_image_menu_item_new_with_mnemonic (_("_Help"));
 G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_window_menu_help), NULL);
@@ -2751,7 +2751,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   /* about item */
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  item = gtk_image_menu_item_new_with_mnemonic ("_About");
+  item = gtk_image_menu_item_new_with_mnemonic (_("_About"));
 G_GNUC_END_IGNORE_DEPRECATIONS
   g_signal_connect (G_OBJECT (item), "activate",
       G_CALLBACK (panel_dialogs_show_about), NULL);
