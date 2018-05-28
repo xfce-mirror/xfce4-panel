@@ -915,6 +915,9 @@ xfce_panel_plugin_finalize (GObject *object)
   /* destroy the menu */
   if (plugin->priv->menu != NULL)
     {
+      /* remove custom items before they get destroyed */
+      for (li = plugin->priv->menu_items; li != NULL; li = li->next)
+        gtk_container_remove (GTK_CONTAINER (plugin->priv->menu), GTK_WIDGET (li->data));
       /* attached menu is destroyed by GtkWidget */
       panel_assert (plugin->priv->menu_items == NULL);
     }
