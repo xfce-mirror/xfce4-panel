@@ -891,9 +891,17 @@ actions_plugin_actions_allowed (void)
   GError          *error = NULL;
 
   /* check for commands we use */
-  path = g_find_program_in_path ("gdmflexiserver");
+  path = g_find_program_in_path ("dm-tool");
   if (path != NULL)
     PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SWITCH_USER);
+  else
+  {
+    /* check for gdmflexiserver if dm-tool is not present */
+    g_free (path);
+    path = g_find_program_in_path ("gdmflexiserver");
+    if (path != NULL)
+      PANEL_SET_FLAG (allow_mask, ACTION_TYPE_SWITCH_USER);
+  }
   g_free (path);
 
   path = g_find_program_in_path ("xflock4");
@@ -1004,7 +1012,12 @@ actions_plugin_action_activate (GtkWidget      *widget,
       break;
 
     case ACTION_TYPE_SWITCH_USER:
-      succeed = g_spawn_command_line_async ("gdmflexiserver", &error);
+      path = g_find_program_in_path ("dm-tool");
+      if (path != NULL)
+        succeed = g_spawn_command_line_async ("dm-tool switch-to-greeter", &error);
+      else
+        succeed = g_spawn_command_line_async ("gdmflexiserver", &error);
+      g_free (path);
       break;
 
     case ACTION_TYPE_LOCK_SCREEN:
