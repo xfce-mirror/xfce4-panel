@@ -959,6 +959,7 @@ actions_plugin_action_activate (GtkWidget      *widget,
   gboolean       succeed = FALSE;
   XfconfChannel *channel;
   gboolean       allow_save;
+  gchar         *path;
 
   entry = g_object_get_qdata (G_OBJECT (widget), action_quark);
   panel_return_if_fail (entry != NULL);
