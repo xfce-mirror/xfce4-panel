@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Daniel Muñiz Fontoira <dani@damufo.com>, 2018
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2008-2010
 # Ricardo Domínguez Rouco <riklaren@gmail.com>, 2006
 msgid ""
@@ -10,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-02 23:10+0200\n"
-"PO-Revision-Date: 2017-09-19 18:02+0000\n"
-"Last-Translator: Nick Schermer <nick@xfce.org>\n"
+"PO-Revision-Date: 2018-06-09 08:38+0000\n"
+"Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>\n"
 "Language-Team: Galician (http://www.transifex.com/xfce/xfce4-panel/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -197,20 +198,20 @@ msgstr "Crear un _iniciador"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr ""
+msgstr "Con isto créase un engadido iniciador novo no panel e insírense os ficheiros que se arrastran para enriba del como elementos do menú."
 
 #: ../panel/panel-application.c:985
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Crear un novo iniciador de %d ficheiro de escritorio"
+msgstr[1] "Crear un novo iniciador de %d ficheiros de escritorio"
 
 #: ../panel/panel-application.c:1719
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
-msgstr ""
+msgstr "Iniciou X sen un xestor de sesións. Ao premer Saír vai pechar o servidor de X."
 
 #: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
@@ -231,7 +232,7 @@ msgstr "Especificouse unha sintaxe de evento de engadido incorrecta. Use ENGADID
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr ""
+msgstr "O tipo \"%s\" non é válido. O tipos válidos son: bool, double, int, string e uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -239,7 +240,7 @@ msgstr "Mantedores"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Modo barra de escritorio"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -271,7 +272,7 @@ msgstr "Panel %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr ""
+msgstr "Como o panel está a ser executado en modo quiosque, non se lle permite realizar cambios na configuración do panel como usuario normal"
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
@@ -365,7 +366,7 @@ msgstr "Vertical"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Barra de escritorio"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
@@ -424,13 +425,13 @@ msgstr "Seleccione esta opción para ocultar o panel cando o punteiro non está 
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "Don't _reserve space on borders"
-msgstr ""
+msgstr "Non _reservar espazo nos bordos"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr ""
+msgstr "Seleccione esta opción se desexa que as xanelas maximizadas cubran a zona por detrás do panel. Isto só funciona cando o panel está ancorado a unha beira da pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 #: ../plugins/actions/actions-dialog.glade.h:6
@@ -440,7 +441,7 @@ msgstr "Xeral"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Row _Size (pixels):"
-msgstr ""
+msgstr "_Tamaño de fila (píxeles):"
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 #, no-c-format
@@ -520,13 +521,13 @@ msgstr "_Saír:"
 msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
-msgstr ""
+msgstr "Transparencia cando o punteiro pasa sobre o panel, sendo 0 transparencia total e 100 opacidade total."
 
 #: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr ""
+msgstr "Transparencia cando o punteiro non está pasando sobre o panel, sendo 0 transparencia total e 100 opacidade total."
 
 #: ../panel/panel-preferences-dialog.glade.h:44
 msgid "Opacity"
@@ -535,7 +536,7 @@ msgstr "Opacidade"
 #: ../panel/panel-preferences-dialog.glade.h:45
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
-msgstr ""
+msgstr "Activar a composición no xestor de xanelas para as opcións de opacidade do panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
 msgid "Appeara_nce"
@@ -648,7 +649,7 @@ msgstr "Produciuse un erro ao cargar a configuración predeterminada"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "É preciso migrar a configuración do panel..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
@@ -669,7 +670,7 @@ msgstr "Apare_ncia:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
 msgid "Invert buttons _orientation"
-msgstr ""
+msgstr "Inverter a _orientación dos botóns"
 
 #: ../plugins/actions/actions-dialog.glade.h:4
 msgid "_Show confirmation dialog"
@@ -678,7 +679,7 @@ msgstr "Mo_strar o diálogo de confirmación"
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr ""
+msgstr "Amosar un diálogo de confirmación cun tempo de espera de 30 segundos para algunhas accións."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -702,32 +703,32 @@ msgstr "Saír da sesión"
 
 #: ../plugins/actions/actions.c:152
 msgid "_Log Out"
-msgstr ""
+msgstr "_Saír"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
-msgstr ""
+msgstr "Confirma que desexa saír?"
 
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "Vai saír dentro de %d segundos."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr ""
+msgstr "Saír..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr ""
+msgstr "_Saír..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
-msgstr ""
+msgstr "Cambiar de usuario"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "_Cambiar de usuario"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
@@ -747,7 +748,7 @@ msgstr "_Hibernar"
 
 #: ../plugins/actions/actions.c:182
 msgid "Do you want to suspend to disk?"
-msgstr ""
+msgstr "Desexa suspender no disco?"
 
 #: ../plugins/actions/actions.c:183
 #, c-format
@@ -764,7 +765,7 @@ msgstr "Sus_pender"
 
 #: ../plugins/actions/actions.c:190
 msgid "Do you want to suspend to RAM?"
-msgstr ""
+msgstr "Desexa suspender na RAM?"
 
 #: ../plugins/actions/actions.c:191
 #, c-format
@@ -988,7 +989,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. See the documentation of the date utility for additional "
 "information."
-msgstr ""
+msgstr "O formato describe as partes da data e da hora a inserir no panel. Por exemplo, %Y substituirase polo ano, %m polo mes e %d polo día. Consulte a documentación da utilidade date para obter información adicional."
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Display _seconds"
@@ -1022,7 +1023,7 @@ msgstr "E_xactitude:"
 
 #: ../plugins/clock/clock-dialog.glade.h:16
 msgid "Show _inactive dots"
-msgstr ""
+msgstr "Amosar os puntos _inactivos"
 
 #: ../plugins/clock/clock-dialog.glade.h:17
 msgid "Show gri_d"
@@ -1046,7 +1047,7 @@ msgstr "Dixital"
 
 #: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Fuzzy"
-msgstr ""
+msgstr "Difuso"
 
 #: ../plugins/clock/clock-dialog.glade.h:23
 msgid "LCD"
@@ -1066,7 +1067,7 @@ msgstr "Mañá"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
-msgstr ""
+msgstr "Case mediodía"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
@@ -1587,7 +1588,7 @@ msgstr "Zona de notificación"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "Tamaño _máximo das iconas (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:5
 msgid "C_lear Known Applications"
@@ -1641,11 +1642,11 @@ msgstr "Debuxa_r o marco de xanela ao pasar por riba dun botón"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:10
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "_Alternar entre xanelas empregando a roda do rato"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:12
 msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgstr "Amosar as xanelas de _todos os espazos de traballo ou vistas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "Show only _minimized windows"
@@ -1685,7 +1686,7 @@ msgstr "Agrupar o título e o título da xanela"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Ningún, permitir arrastrar e soltar"
 
 #: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
@@ -1693,7 +1694,7 @@ msgstr "Mi_nimizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Des_minimizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
@@ -1701,7 +1702,7 @@ msgstr "Ma_ximizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "_Desmaximizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3236
 msgid "_Close All"
