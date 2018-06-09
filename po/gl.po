@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-09 18:31+0200\n"
+"POT-Creation-Date: 2017-10-10 00:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2017\n"
+"Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>, 2018\n"
 "Language-Team: Galician (https://www.transifex.com/xfce/teams/16840/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr ""
 "desktop"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2615
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2623
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -42,13 +42,13 @@ msgstr "Personalizar o panel"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1190
+#: ../panel/panel-preferences-dialog.c:1199
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Está seguro de que desexa eliminar \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1193
+#: ../panel/panel-preferences-dialog.c:1202
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Se elimina o elemento do panel, perderase permanentemente."
 
@@ -62,17 +62,17 @@ msgid "Pane_l"
 msgstr "Pane_l"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2635
 msgid "Add _New Items..."
 msgstr "Engadir _novos elementos..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2646
 msgid "Panel Pr_eferences..."
 msgstr "Pr_eferencias do panel..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2674
 msgid "Log _Out"
 msgstr "Saír da _sesión"
 
@@ -209,8 +209,8 @@ msgstr ""
 #, c-format
 msgid "Create new launcher from %d desktop file"
 msgid_plural "Create new launcher from %d desktop files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Crear un novo iniciador de %d ficheiro de escritorio"
+msgstr[1] "Crear un novo iniciador de %d ficheiros de escritorio"
 
 #: ../panel/panel-application.c:1728
 msgid ""
@@ -242,6 +242,8 @@ msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
 msgstr ""
+"O tipo \"%s\" non é válido. O tipos válidos son: bool, double, int, string e"
+" uint."
 
 #: ../panel/panel-dialogs.c:65
 msgid "Maintainers"
@@ -249,7 +251,7 @@ msgstr "Mantedores"
 
 #: ../panel/panel-dialogs.c:68
 msgid "Deskbar Mode"
-msgstr ""
+msgstr "Modo barra de escritorio"
 
 #: ../panel/panel-dialogs.c:71
 msgid "Inactive Maintainers"
@@ -277,7 +279,7 @@ msgstr "Engadir un novo elemento"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Escolla un panel para o novo engadido:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:853
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:862
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
@@ -331,38 +333,42 @@ msgstr ""
 msgid "Automatic"
 msgstr "Automático"
 
+#: ../panel/panel-preferences-dialog.c:500
+msgid "Primary"
+msgstr "Primaria"
+
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:511
+#: ../panel/panel-preferences-dialog.c:520
 #, c-format
 msgid "Screen %d"
 msgstr "Pantalla %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:537
+#: ../panel/panel-preferences-dialog.c:546
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitor %d"
 
-#: ../panel/panel-preferences-dialog.c:919
+#: ../panel/panel-preferences-dialog.c:928
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
 "Eliminaranse de xeito permanente as configuracións do panel e do engadido"
 
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Está seguro de que desexa eliminar o panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../panel/panel-preferences-dialog.c:1041
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(externo)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1046
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -373,7 +379,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1058
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Nome interno: %s-%d"
@@ -388,7 +394,7 @@ msgstr "Vertical"
 
 #: ../panel/panel-preferences-dialog.glade.h:3
 msgid "Deskbar"
-msgstr ""
+msgstr "Barra de escritorio"
 
 #: ../panel/panel-preferences-dialog.glade.h:4
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
@@ -426,7 +432,7 @@ msgstr "Eliminar o panel seleccionado"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Switch between panel presets"
-msgstr ""
+msgstr "Alternar entre as predefinicións do panel"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "M_ode:"
@@ -584,6 +590,8 @@ msgstr "Opacidade"
 msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
+"Activar a composición no xestor de xanelas para as opcións de opacidade do "
+"panel."
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
@@ -644,7 +652,7 @@ msgstr "Con experiencia"
 msgid "Expert"
 msgstr "Experto"
 
-#: ../panel/panel-window.c:2652
+#: ../panel/panel-window.c:2660
 msgid "_Lock Panel"
 msgstr "B_loquear o panel"
 
@@ -698,7 +706,7 @@ msgstr "Produciuse un erro ao cargar a configuración predeterminada"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr ""
+msgstr "É preciso migrar a configuración do panel..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
@@ -729,6 +737,8 @@ msgstr "Mo_strar o diálogo de confirmación"
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr ""
+"Amosar un diálogo de confirmación cun tempo de espera de 30 segundos para "
+"algunhas accións."
 
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid "Visible"
@@ -752,32 +762,32 @@ msgstr "Saír da sesión"
 
 #: ../plugins/actions/actions.c:152
 msgid "_Log Out"
-msgstr ""
+msgstr "_Saír"
 
 #: ../plugins/actions/actions.c:153
 msgid "Are you sure you want to log out?"
-msgstr ""
+msgstr "Confirma que desexa saír?"
 
 #: ../plugins/actions/actions.c:154
 #, c-format
 msgid "Logging out in %d seconds."
-msgstr ""
+msgstr "Vai saír dentro de %d segundos."
 
 #: ../plugins/actions/actions.c:159
 msgid "Log Out..."
-msgstr ""
+msgstr "Saír..."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log _Out..."
-msgstr ""
+msgstr "_Saír..."
 
 #: ../plugins/actions/actions.c:166
 msgid "Switch User"
-msgstr ""
+msgstr "Cambiar de usuario"
 
 #: ../plugins/actions/actions.c:167
 msgid "_Switch User"
-msgstr ""
+msgstr "_Cambiar de usuario"
 
 #: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
@@ -1019,6 +1029,9 @@ msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr ""
+"Nume dun fuso horario que corresponda cun ficheiro na base de datos de fusos"
+" horarios, como «America/New_York». Déixeo en branco para empregar a hora "
+"local."
 
 #: ../plugins/clock/clock-dialog.glade.h:3
 msgid "Time_zone:"
@@ -1048,6 +1061,10 @@ msgid ""
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
 msgstr ""
+"O formato describe as partes de data e hora para inserir no panel. Por "
+"exemplo, %Y substitúese polo ano, %m polo mes e %d polo día. Igualmente, as "
+"etiquetas <b></b> poñen o texto en letra grosa. Vexa a páxina «Axuda» para "
+"información adicional."
 
 #: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Display _seconds"
@@ -1105,7 +1122,7 @@ msgstr "Dixital"
 
 #: ../plugins/clock/clock-dialog.glade.h:25
 msgid "Fuzzy"
-msgstr ""
+msgstr "Difuso"
 
 #: ../plugins/clock/clock-dialog.glade.h:26
 msgid "LCD"
@@ -1656,7 +1673,7 @@ msgstr "Zona de notificación"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
 msgid "_Maximum icon size (px):"
-msgstr ""
+msgstr "Tamaño _máximo das iconas (px):"
 
 #: ../plugins/systray/systray-dialog.glade.h:3
 msgid "Show _frame"
@@ -1702,7 +1719,7 @@ msgstr "Agrupar o título e o título da xanela"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:8
 msgid "None, allow drag-and-drop"
-msgstr ""
+msgstr "Ningún, permitir arrastrar e soltar"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:9
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -1731,7 +1748,7 @@ msgstr "A_grupamento de xanelas:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Mi_ddle click action:"
-msgstr ""
+msgstr "Acción do botón _central do rato:"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Restore minimized windows to current _workspace"
@@ -1743,11 +1760,11 @@ msgstr "Debuxa_r o marco de xanela ao pasar por riba dun botón"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:19
 msgid "_Switch windows using the mouse wheel"
-msgstr ""
+msgstr "_Alternar entre xanelas empregando a roda do rato"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Show windows from _all workspaces or viewports"
-msgstr ""
+msgstr "Mostrar as xanelas de _todos os espazos de traballo ou vistas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Show windows from all mo_nitors"
@@ -1759,7 +1776,7 @@ msgstr "Só mostrar as xanelas _minimizadas"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
-msgstr ""
+msgstr "Nada"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
@@ -1775,7 +1792,7 @@ msgstr "Mi_nimizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3335
 msgid "Un_minimize All"
-msgstr ""
+msgstr "Des_minimizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3341
 msgid "Ma_ximize All"
@@ -1783,7 +1800,7 @@ msgstr "Ma_ximizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3350
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "_Desmaximizar todo"
 
 #: ../plugins/tasklist/tasklist-widget.c:3360
 msgid "_Close All"
