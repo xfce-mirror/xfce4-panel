@@ -1552,6 +1552,7 @@ panel_application_new_window (PanelApplication *application,
       idx = g_slist_index (application->windows, window);
       position = g_strdup_printf ("p=0;x=100;y=%d", 30 + (idx * (48 + 10)));
       g_object_set (G_OBJECT (window), "position", position, NULL);
+      g_object_set (G_OBJECT (window), "size", 48, NULL);
       g_free (position);
     }
 
