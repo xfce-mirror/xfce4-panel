@@ -84,6 +84,8 @@ static const gchar *panel_plugin_external_get_name                (XfcePanelPlug
 static gint         panel_plugin_external_get_unique_id           (XfcePanelPluginProvider          *provider);
 static void         panel_plugin_external_set_size                (XfcePanelPluginProvider          *provider,
                                                                    gint                              size);
+static void         panel_plugin_external_set_icon_size           (XfcePanelPluginProvider          *provider,
+                                                                   gint                              icon_size);
 static void         panel_plugin_external_set_mode                (XfcePanelPluginProvider          *provider,
                                                                    XfcePanelPluginMode               mode);
 static void         panel_plugin_external_set_nrows               (XfcePanelPluginProvider          *provider,
@@ -222,6 +224,7 @@ panel_plugin_external_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->get_name = panel_plugin_external_get_name;
   iface->get_unique_id = panel_plugin_external_get_unique_id;
   iface->set_size = panel_plugin_external_set_size;
+  iface->set_icon_size = panel_plugin_external_set_icon_size;
   iface->set_mode = panel_plugin_external_set_mode;
   iface->set_nrows = panel_plugin_external_set_nrows;
   iface->set_screen_position = panel_plugin_external_set_screen_position;
@@ -893,6 +896,26 @@ panel_plugin_external_set_size (XfcePanelPluginProvider *provider,
 
   panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
                                    PROVIDER_PROP_TYPE_SET_SIZE, &value);
+
+  g_value_unset (&value);
+}
+
+
+
+static void
+panel_plugin_external_set_icon_size (XfcePanelPluginProvider *provider,
+                                     gint                     icon_size)
+{
+  GValue value = { 0, };
+
+  panel_return_if_fail (PANEL_IS_PLUGIN_EXTERNAL (provider));
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  g_value_init (&value, G_TYPE_INT);
+  g_value_set_int (&value, icon_size);
+
+  panel_plugin_external_queue_add (PANEL_PLUGIN_EXTERNAL (provider),
+                                   PROVIDER_PROP_TYPE_SET_ICON_SIZE, &value);
 
   g_value_unset (&value);
 }

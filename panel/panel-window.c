@@ -172,6 +172,8 @@ static void         panel_window_plugin_set_mode                      (GtkWidget
                                                                        gpointer          user_data);
 static void         panel_window_plugin_set_size                      (GtkWidget        *widget,
                                                                        gpointer          user_data);
+static void         panel_window_plugin_set_icon_size                 (GtkWidget        *widget,
+                                                                       gpointer          user_data);
 static void         panel_window_plugin_set_nrows                     (GtkWidget        *widget,
                                                                        gpointer          user_data);
 static void         panel_window_plugin_set_screen_position           (GtkWidget        *widget,
@@ -193,7 +195,8 @@ enum
   PROP_SPAN_MONITORS,
   PROP_OUTPUT_NAME,
   PROP_POSITION,
-  PROP_DISABLE_STRUTS
+  PROP_DISABLE_STRUTS,
+  PROP_ICON_SIZE
 };
 
 enum _PluginProp
@@ -201,7 +204,8 @@ enum _PluginProp
   PLUGIN_PROP_MODE,
   PLUGIN_PROP_SCREEN_POSITION,
   PLUGIN_PROP_NROWS,
-  PLUGIN_PROP_SIZE
+  PLUGIN_PROP_SIZE,
+  PLUGIN_PROP_ICON_SIZE
 };
 
 enum _AutohideBehavior
@@ -308,6 +312,7 @@ struct _PanelWindow
 
   /* window positioning */
   guint                size;
+  guint                icon_size;
   gdouble              length;
   guint                length_adjust : 1;
   XfcePanelPluginMode  mode;
@@ -417,6 +422,12 @@ panel_window_class_init (PanelWindowClass *klass)
                                                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class,
+                                   PROP_ICON_SIZE,
+                                   g_param_spec_uint ("icon-size", NULL, NULL,
+                                                      0, 256, 0,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (gobject_class,
                                    PROP_NROWS,
                                    g_param_spec_uint ("nrows", NULL, NULL,
                                                       1, 6, 1,
@@ -519,6 +530,7 @@ panel_window_init (PanelWindow *window)
   window->struts_disabled = FALSE;
   window->mode = XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
   window->size = 48;
+  window->icon_size = 0;
   window->nrows = 1;
   window->length = 0.10;
   window->length_adjust = TRUE;
@@ -575,6 +587,10 @@ panel_window_get_property (GObject    *object,
 
     case PROP_SIZE:
       g_value_set_uint (value, window->size);
+      break;
+
+    case PROP_ICON_SIZE:
+      g_value_set_uint (value, window->icon_size);
       break;
 
     case PROP_NROWS:
@@ -669,6 +685,17 @@ panel_window_set_property (GObject      *object,
 
       /* send the new size to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_SIZE);
+      break;
+
+    case PROP_ICON_SIZE:
+      val_uint = g_value_get_uint (value);
+      if (window->icon_size != val_uint)
+        {
+          window->icon_size = val_uint;
+        }
+
+      /* send the new icon size to the panel plugins */
+      panel_window_plugins_update (window, PLUGIN_PROP_ICON_SIZE);
       break;
 
     case PROP_NROWS:
@@ -2800,6 +2827,10 @@ panel_window_plugins_update (PanelWindow *window,
       func = panel_window_plugin_set_size;
       break;
 
+    case PLUGIN_PROP_ICON_SIZE:
+      func = panel_window_plugin_set_icon_size;
+      break;
+
     default:
       panel_assert_not_reached ();
       return;
@@ -2837,6 +2868,19 @@ panel_window_plugin_set_size (GtkWidget *widget,
 
   xfce_panel_plugin_provider_set_size (XFCE_PANEL_PLUGIN_PROVIDER (widget),
                                        PANEL_WINDOW (user_data)->size);
+}
+
+
+
+static void
+panel_window_plugin_set_icon_size (GtkWidget *widget,
+                                   gpointer   user_data)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (widget));
+  panel_return_if_fail (PANEL_IS_WINDOW (user_data));
+
+  xfce_panel_plugin_provider_set_icon_size (XFCE_PANEL_PLUGIN_PROVIDER (widget),
+                                            PANEL_WINDOW (user_data)->icon_size);
 }
 
 
@@ -3007,6 +3051,7 @@ panel_window_set_povider_info (PanelWindow *window,
   panel_window_plugin_set_mode (provider, window);
   panel_window_plugin_set_screen_position (provider, window);
   panel_window_plugin_set_size (provider, window);
+  panel_window_plugin_set_icon_size (provider, window);
   panel_window_plugin_set_nrows (provider, window);
 }
 

@@ -300,6 +300,7 @@ panel_application_xfconf_window_bindings (PanelApplication *application,
     { "background-style", G_TYPE_UINT },
     { "background-rgba", GDK_TYPE_RGBA },
     { "background-image", G_TYPE_STRING },
+    { "icon-size", G_TYPE_UINT },
     { "output-name", G_TYPE_STRING },
     { "position", G_TYPE_STRING },
     { "disable-struts", G_TYPE_BOOLEAN },
@@ -1479,7 +1480,7 @@ panel_application_new_window (PanelApplication *application,
   GtkWidget          *itembar;
   gchar              *property;
   gint                idx;
-  static const gchar *props[] = { "mode", "size", "nrows" };
+  static const gchar *props[] = { "mode", "size", "nrows", "icon-size" };
   guint               i;
   gchar              *position;
   static gint         unqiue_id_counter = 1;

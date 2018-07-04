@@ -52,6 +52,8 @@ struct _XfcePanelPluginProviderInterface
   gint         (*get_unique_id)       (XfcePanelPluginProvider       *provider);
   void         (*set_size)            (XfcePanelPluginProvider       *provider,
                                        gint                           size);
+  void         (*set_icon_size)       (XfcePanelPluginProvider       *provider,
+                                       gint                           icon_size);
   void         (*set_mode)            (XfcePanelPluginProvider       *provider,
                                        XfcePanelPluginMode            mode);
   void         (*set_nrows)           (XfcePanelPluginProvider       *provider,
@@ -101,6 +103,7 @@ XfcePanelPluginProviderSignal;
 typedef enum /*< skip >*/
 {
   PROVIDER_PROP_TYPE_SET_SIZE,                /* gint */
+  PROVIDER_PROP_TYPE_SET_ICON_SIZE,           /* gint */
   PROVIDER_PROP_TYPE_SET_MODE,                /* XfcePanelPluginMode (as gint) */
   PROVIDER_PROP_TYPE_SET_SCREEN_POSITION,     /* XfceScreenPosition (as gint) */
   PROVIDER_PROP_TYPE_SET_BACKGROUND_ALPHA,    /* gdouble */
@@ -157,6 +160,9 @@ gint                  xfce_panel_plugin_provider_get_unique_id       (XfcePanelP
 
 void                  xfce_panel_plugin_provider_set_size            (XfcePanelPluginProvider       *provider,
                                                                       gint                           size);
+
+void                  xfce_panel_plugin_provider_set_icon_size       (XfcePanelPluginProvider       *provider,
+                                                                      gint                           icon_size);
 
 void                  xfce_panel_plugin_provider_set_mode            (XfcePanelPluginProvider       *provider,
                                                                       XfcePanelPluginMode            mode);

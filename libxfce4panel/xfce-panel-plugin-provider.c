@@ -115,6 +115,17 @@ xfce_panel_plugin_provider_set_size (XfcePanelPluginProvider *provider,
 
 
 void
+xfce_panel_plugin_provider_set_icon_size (XfcePanelPluginProvider *provider,
+                                          gint                     icon_size)
+{
+  panel_return_if_fail (XFCE_IS_PANEL_PLUGIN_PROVIDER (provider));
+
+  (*XFCE_PANEL_PLUGIN_PROVIDER_GET_INTERFACE (provider)->set_icon_size) (provider, icon_size);
+}
+
+
+
+void
 xfce_panel_plugin_provider_set_mode (XfcePanelPluginProvider *provider,
                                      XfcePanelPluginMode      mode)
 {

@@ -73,6 +73,11 @@ static void                     panel_preferences_dialog_panel_add              
                                                                                  PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_panel_remove           (GtkWidget              *widget,
                                                                                  PanelPreferencesDialog *dialog);
+static gboolean                 panel_preferences_dialog_icon_size_state_set    (GtkSwitch              *widget,
+                                                                                 gboolean                state,
+                                                                                 PanelPreferencesDialog *dialog);
+static void                     panel_preferences_dialog_icon_size_changed      (GtkSpinButton          *button,
+                                                                                 PanelPreferencesDialog *dialog);
 static void                     panel_preferences_dialog_compositing_clicked    (GtkButton              *button,
                                                                                  gpointer                user_data);
 static void                     panel_preferences_dialog_panel_switch           (GtkWidget              *widget,
@@ -226,6 +231,16 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   g_signal_connect_swapped (G_OBJECT (object), "changed",
       G_CALLBACK (panel_preferences_dialog_bg_style_changed), dialog);
 
+  /* icon size switch, handling enabling/disabling of custom icon sizes */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-spinbutton");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  g_signal_connect (G_OBJECT (object), "value-changed",
+                    G_CALLBACK (panel_preferences_dialog_icon_size_changed), dialog);
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-switch");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  g_signal_connect (G_OBJECT (object), "state-set",
+                    G_CALLBACK (panel_preferences_dialog_icon_size_state_set), dialog);
+
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "composited");
   panel_return_if_fail (G_IS_OBJECT (object));
   g_signal_connect_swapped (G_OBJECT (object), "notify::visible",
@@ -289,7 +304,7 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   renderer = gtk_cell_renderer_pixbuf_new ();
   column = gtk_tree_view_column_new_with_attributes ("", renderer, "icon-name",
                                                      ITEM_COLUMN_ICON_NAME, NULL);
-  g_object_set (G_OBJECT (renderer), "stock-size", GTK_ICON_SIZE_BUTTON, NULL);
+  g_object_set (G_OBJECT (renderer), "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
   /* text renderer */
@@ -449,6 +464,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   gint         n = 0, i;
   gchar       *name, *title;
   gboolean     span_monitors_sensitive = FALSE;
+  gboolean     icon_size_set;
 
   /* leave when there is no active panel */
   panel_return_if_fail (G_IS_OBJECT (dialog->active));
@@ -470,6 +486,7 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   panel_preferences_dialog_bindings_add (dialog, "composited", "sensitive", G_BINDING_SYNC_CREATE);
   panel_preferences_dialog_bindings_add (dialog, "background-style", "active", 0);
   panel_preferences_dialog_bindings_add (dialog, "background-rgba", "rgba", 0);
+  panel_preferences_dialog_bindings_add (dialog, "icon-size", "value", 0);
 
   /* watch image changes from the panel */
   dialog->bg_image_notify_handler_id = g_signal_connect_swapped (G_OBJECT (dialog->active),
@@ -589,6 +606,23 @@ panel_preferences_dialog_bindings_update (PanelPreferencesDialog *dialog)
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "autohide-behavior");
   panel_return_if_fail (GTK_IS_COMBO_BOX (object));
   panel_preferences_dialog_autohide_changed (GTK_COMBO_BOX (object), dialog);
+
+  /* update visibility of the "icon-size" widgets */
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-spinbutton");
+  panel_return_if_fail (G_IS_OBJECT (object));
+
+  if (gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (object)) == 0)
+    icon_size_set = FALSE;
+  else
+    icon_size_set = TRUE;
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-revealer");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  gtk_revealer_set_reveal_child (GTK_REVEALER (object), icon_size_set);
+
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-switch");
+  panel_return_if_fail (G_IS_OBJECT (object));
+  gtk_switch_set_state (GTK_SWITCH (object), !icon_size_set);
 }
 
 
@@ -940,6 +974,58 @@ panel_preferences_dialog_panel_remove (GtkWidget              *widget,
       /* rebuild the selector */
       panel_preferences_dialog_panel_combobox_rebuild (dialog, CLAMP (idx, 0, n_windows));
     }
+}
+
+
+
+static gboolean
+panel_preferences_dialog_icon_size_state_set (GtkSwitch              *widget,
+                                              gboolean                state,
+                                              PanelPreferencesDialog *dialog)
+{
+  GObject   *spinbutton, *revealer;
+
+  panel_return_val_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog), FALSE);
+  spinbutton = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-spinbutton");
+  panel_return_val_if_fail (G_IS_OBJECT (spinbutton), FALSE);
+  revealer = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-revealer");
+  panel_return_val_if_fail (G_IS_OBJECT (revealer), FALSE);
+
+  /* we set the icon-size to 0 for auto-handling */
+  if (state)
+    {
+      gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinbutton), 0.0);
+    }
+  else
+    {
+      /* if the setting is initially enabled we start at the low default of 16px */
+      if (gtk_spin_button_get_value (GTK_SPIN_BUTTON (spinbutton)) == 0)
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinbutton), 16.0);
+    }
+
+  gtk_revealer_set_reveal_child (GTK_REVEALER (revealer), !state);
+  gtk_switch_set_state (GTK_SWITCH (widget), state);
+
+  return TRUE;
+}
+
+
+
+static void
+panel_preferences_dialog_icon_size_changed (GtkSpinButton          *button,
+                                            PanelPreferencesDialog *dialog)
+{
+  GObject   *object;
+
+  panel_return_if_fail (PANEL_IS_PREFERENCES_DIALOG (dialog));
+  object = gtk_builder_get_object (GTK_BUILDER (dialog), "icon-size-switch");
+  panel_return_if_fail (G_IS_OBJECT (object));
+
+  /* 0 means the setting is disabled (icon-size-switch's state == true) so the lower value
+     of the spinbutton has to be 0. however, we want to set 16px as the reasonable lower limit for icons. */
+  if (gtk_spin_button_get_value_as_int (button) < 16
+      && gtk_switch_get_state (GTK_SWITCH (object)))
+      gtk_spin_button_set_value (button, 16.0);
 }
 
 

@@ -93,6 +93,8 @@ static void          xfce_panel_plugin_unregister_menu        (GtkMenu          
                                                                XfcePanelPlugin                  *plugin);
 static void          xfce_panel_plugin_set_size               (XfcePanelPluginProvider          *provider,
                                                                gint                              size);
+static void          xfce_panel_plugin_set_icon_size          (XfcePanelPluginProvider          *provider,
+                                                               gint                              icon_size);
 static void          xfce_panel_plugin_set_mode               (XfcePanelPluginProvider          *provider,
                                                                XfcePanelPluginMode               mode);
 static void          xfce_panel_plugin_set_nrows              (XfcePanelPluginProvider          *provider,
@@ -129,6 +131,7 @@ enum
   PROP_UNIQUE_ID,
   PROP_ORIENTATION,
   PROP_SIZE,
+  PROP_ICON_SIZE,
   PROP_SMALL,
   PROP_SCREEN_POSITION,
   PROP_EXPAND,
@@ -175,6 +178,7 @@ struct _XfcePanelPluginPrivate
   gchar               *property_base;
   gchar              **arguments;
   gint                 size; /* single row size */
+  gint                 icon_size;
   guint                expand : 1;
   guint                shrink : 1;
   guint                nrows;
@@ -574,6 +578,22 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
                         | G_PARAM_STATIC_STRINGS);
 
   /**
+   * XfcePanelPlugin:icon-size:
+   *
+   * The icon-size in pixels of the #XfcePanelPlugin. Plugin writers can use it to read the
+   * plugin's icon size, but xfce_panel_plugin_get_icon_size() is recommended.
+   *
+   * Since: 4.14
+   **/
+  plugin_props[PROP_ICON_SIZE] =
+      g_param_spec_int ("icon-size",
+                        "Icon Size",
+                        "Size of the plugin's icon",
+                        0, (128 * 6), 0,
+                        G_PARAM_READABLE
+                        | G_PARAM_STATIC_STRINGS);
+
+  /**
    * XfcePanelPlugin:screen-position:
    *
    * The #XfceScreenPosition of the #XfcePanelPlugin. Plugin writer can use it
@@ -690,6 +710,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->property_base = NULL;
   plugin->priv->arguments = NULL;
   plugin->priv->size = 0;
+  plugin->priv->icon_size = 0;
   plugin->priv->small = FALSE;
   plugin->priv->expand = FALSE;
   plugin->priv->shrink = FALSE;
@@ -722,6 +743,7 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderInterface *iface)
   iface->get_name = (ProviderToPluginChar) xfce_panel_plugin_get_name;
   iface->get_unique_id = (ProviderToPluginInt) xfce_panel_plugin_get_unique_id;
   iface->set_size = xfce_panel_plugin_set_size;
+  iface->set_icon_size = xfce_panel_plugin_set_icon_size;
   iface->set_mode = xfce_panel_plugin_set_mode;
   iface->set_nrows = xfce_panel_plugin_set_nrows;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
@@ -791,6 +813,10 @@ xfce_panel_plugin_get_property (GObject    *object,
 
     case PROP_SIZE:
       g_value_set_int (value, private->size * private->nrows);
+      break;
+
+    case PROP_ICON_SIZE:
+      g_value_set_uint (value, private->icon_size);
       break;
 
     case PROP_NROWS:
@@ -1425,6 +1451,7 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
   XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
   gboolean         handled = FALSE;
   gint             real_size;
+  gint             icon_size;
 
   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (provider));
 
@@ -1445,6 +1472,24 @@ xfce_panel_plugin_set_size (XfcePanelPluginProvider *provider,
         gtk_widget_set_size_request (GTK_WIDGET (plugin), real_size, real_size);
 
       g_object_notify_by_pspec (G_OBJECT (plugin), plugin_props[PROP_SIZE]);
+    }
+}
+
+
+
+static void
+xfce_panel_plugin_set_icon_size (XfcePanelPluginProvider *provider,
+                                 gint                     icon_size)
+{
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (provider);
+
+  if (G_LIKELY (plugin->priv->icon_size != icon_size))
+    {
+      plugin->priv->icon_size = icon_size;
+      g_object_notify_by_pspec (G_OBJECT (plugin), plugin_props[PROP_ICON_SIZE]);
+
+      /* also update the size so the icon gets re-rendered */
+      xfce_panel_plugin_set_size (provider, -1);
     }
 }
 
@@ -2036,7 +2081,8 @@ xfce_panel_plugin_set_small (XfcePanelPlugin *plugin,
  * xfce_panel_plugin_get_icon_size:
  * @plugin : an #XfcePanelPlugin,
  *
- * Returns a preferred icon size.
+ * Returns either the icon size defined in the panel's settings or
+ * a preferred icon size.
  *
  * Since: 4.14
  **/
@@ -2044,18 +2090,30 @@ gint
 xfce_panel_plugin_get_icon_size (XfcePanelPlugin *plugin)
 {
   gint width;
-  width = xfce_panel_plugin_get_size (plugin) / xfce_panel_plugin_get_nrows (plugin);
 
-  /* Since symbolic icons are usually only provided in 16px we
-   * try to be clever and use size steps */
-  if (width <= 27)
-    return 16;
-  else if (width < 34)
-    return 24;
-  else if (width < 40)
-    return 32;
+  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
+  g_return_val_if_fail (XFCE_PANEL_PLUGIN_CONSTRUCTED (plugin), FALSE);
+
+  /* 0 is handled as 'automatic sizing' */
+  if (plugin->priv->icon_size == 0)
+    {
+      width = xfce_panel_plugin_get_size (plugin) / xfce_panel_plugin_get_nrows (plugin);
+
+      /* Since symbolic icons are usually only provided in 16px we
+      * try to be clever and use size steps */
+      if (width <= 27)
+        return 16;
+      else if (width < 34)
+        return 24;
+      else if (width < 40)
+        return 32;
+      else
+        return width;
+    }
   else
-    return width;
+    {
+      return plugin->priv->icon_size;
+    }
 }
 
 
