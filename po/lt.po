@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-19 00:31+0200\n"
-"PO-Revision-Date: 2018-04-19 09:01+0000\n"
+"POT-Creation-Date: 2018-05-04 06:31+0200\n"
+"PO-Revision-Date: 2018-07-12 21:47+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/xfce/xfce4-panel/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: lt\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
@@ -30,7 +30,7 @@ msgid ""
 msgstr "Pridėti naują leistuką į skydelį, remiantis šio darbalaukio failo informacija"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2699
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Skydelis"
@@ -41,18 +41,18 @@ msgstr "Tinkinti skydelį"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1202
+#: ../panel/panel-preferences-dialog.c:1168
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Ar esate tikri, jog norite pašalinti „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1052
-#: ../panel/panel-preferences-dialog.c:1205
+#: ../panel/panel-preferences-dialog.c:1171
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Jei pašalinsite elementą iš skydelio, jis bus prarastas visam laikui."
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1053 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1207
+#: ../panel/panel-preferences-dialog.c:1173
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
@@ -60,8 +60,8 @@ msgstr "Atsisakyti"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1054
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:930
-#: ../panel/panel-preferences-dialog.c:1208
+#: ../panel/panel-preferences-dialog.c:896
+#: ../panel/panel-preferences-dialog.c:1174
 #: ../plugins/launcher/launcher-dialog.c:854
 msgid "Remove"
 msgstr "Šalinti"
@@ -86,20 +86,28 @@ msgstr "Ša_linti"
 msgid "Pane_l"
 msgstr "_Skydelis"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1279 ../panel/panel-window.c:2712
+#: ../libxfce4panel/xfce-panel-plugin.c:1279 ../panel/panel-window.c:2679
 msgid "Add _New Items..."
 msgstr "Pridėti _naujų elementų..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2727
+#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2694
 msgid "Panel Pr_eferences..."
 msgstr "Skydelio _nuostatos..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1315 ../panel/panel-window.c:2759
+#: ../libxfce4panel/xfce-panel-plugin.c:1315 ../panel/panel-window.c:2726
 msgid "Log _Out"
 msgstr "_Atsijungti"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1335
 #: ../panel/panel-preferences-dialog.glade.h:12
+#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+#: ../plugins/launcher/launcher-dialog.glade.h:16
+#: ../plugins/pager/pager-dialog.glade.h:10
+#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/systray/systray-dialog.glade.h:3
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
 msgid "_Help"
 msgstr "Ž_inynas"
 
@@ -247,6 +255,7 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Sukurti naują leistuką iš %d darbalaukio failo"
 msgstr[1] "Sukurti naujus leistukus iš %d darbalaukio failų"
 msgstr[2] "Sukurti naujus leistukus iš %d darbalaukio failų"
+msgstr[3] "Sukurti naujus leistukus iš %d darbalaukio failų"
 
 #: ../panel/panel-application.c:1724
 msgid "Quit"
@@ -300,7 +309,7 @@ msgstr "Pridėti"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Prašome pasirinkti naujo įskiepio skydelį:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:865
+#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:831
 #, c-format
 msgid "Panel %d"
 msgstr "Skydelis %d"
@@ -315,39 +324,40 @@ msgstr "Kadangi skydelis jau veikia „kiosk” veiksenoje, jums, kaip paprastam
 msgid "Modifying the panel is not allowed"
 msgstr "Skydelio keitimas neleidžiamas"
 
-#: ../panel/panel-item-dialog.c:190
+#: ../panel/panel-item-dialog.c:194
 msgid "Add New Items"
 msgstr "Pridėti naujus elementus"
 
-#: ../panel/panel-item-dialog.c:192
+#: ../panel/panel-item-dialog.c:196
 msgid "Add new plugins to the panel"
 msgstr "Pridėti naujus įskiepius į skydelį"
 
-#: ../panel/panel-item-dialog.c:198
+#: ../panel/panel-item-dialog.c:202
 msgid "_Add"
 msgstr "_Pridėti"
 
-#: ../panel/panel-item-dialog.c:202
+#: ../panel/panel-item-dialog.c:206
 msgid "Help"
 msgstr "Žinynas"
 
-#: ../panel/panel-item-dialog.c:204 ../panel/panel-tic-tac-toe.c:124
+#: ../panel/panel-item-dialog.c:208 ../panel/panel-tic-tac-toe.c:124
+#: ../plugins/launcher/launcher-dialog.glade.h:17
 msgid "Close"
 msgstr "Užverti"
 
-#: ../panel/panel-item-dialog.c:217
+#: ../panel/panel-item-dialog.c:221
 #: ../plugins/launcher/launcher-dialog.glade.h:3
 msgid "_Search:"
 msgstr "_Ieškoti:"
 
-#: ../panel/panel-item-dialog.c:225
+#: ../panel/panel-item-dialog.c:229
 msgid "Enter search phrase here"
 msgstr "Įveskite paieškos frazę čia"
 
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Įskiepis „%s” nelauktai paliko skydelį, norite paleisti jį iš naujo?"
+msgstr "Įskiepis „%s” netikėtai paliko skydelį, ar norite jį paleisti iš naujo?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -355,47 +365,41 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Įskiepis daugiau nei vieną kartą per pastarąsias %d sekundžių pasileido iš naujo. Jei paspausite „Execute” skydelis bandys jį vėl paleisti. Kitaip įskiepis bus galutinai pašalintas iš skydelio."
+msgstr "Per pastarąsias %d sekundžių įskiepis daugiau nei vieną kartą pasileido iš naujo. Jei paspausite „Vykdyti” skydelis vėl bandys jį paleisti, tuo tarpu priešingu atveju įskiepis bus galutinai pašalintas iš skydelio."
 
-#: ../panel/panel-preferences-dialog.c:494
+#: ../panel/panel-preferences-dialog.c:486
 msgid "Automatic"
 msgstr "Automatinis"
 
-#: ../panel/panel-preferences-dialog.c:504
+#: ../panel/panel-preferences-dialog.c:496
 msgid "Primary"
 msgstr "Pirminis"
 
-#. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:523
-#, c-format
-msgid "Screen %d"
-msgstr "Ekranas %d"
-
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:549
+#: ../panel/panel-preferences-dialog.c:515
 #, c-format
 msgid "Monitor %d"
 msgstr "Monitorius %d"
 
-#: ../panel/panel-preferences-dialog.c:931
+#: ../panel/panel-preferences-dialog.c:897
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Skydelio ir įskiepių sąranka bus galutinai pašalinta"
 
-#: ../panel/panel-preferences-dialog.c:932
+#: ../panel/panel-preferences-dialog.c:898
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Ar tikrai norite pašalinti %d skydelį?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1044
+#: ../panel/panel-preferences-dialog.c:1010
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(išorinis)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1015
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -404,7 +408,7 @@ msgstr "Vidinis pavadinimas: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1061
+#: ../panel/panel-preferences-dialog.c:1027
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Vidinis pavadinimas: %s-%d"
@@ -448,6 +452,13 @@ msgid "Background image"
 msgstr "Fono paveikslas"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
+#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/pager/pager-dialog.glade.h:9
+#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/systray/systray-dialog.glade.h:2
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
 msgid "_Close"
 msgstr "_Užverti"
 
@@ -507,8 +518,8 @@ msgid ""
 msgstr "Pasirinkite šį parametrą, jei norite paslėpti skydelį kai žymeklis nėra virš jo. Tai veikia tik tuomet, kai skydelis yra pritvirtintas prie ekrano krašto."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
-#: ../plugins/actions/actions-dialog.glade.h:7
-#: ../plugins/launcher/launcher-dialog.glade.h:21
+#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "General"
 msgstr "Bendra"
 
@@ -546,7 +557,7 @@ msgid "D_isplay"
 msgstr "_Ekranas"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-#: ../plugins/separator/separator-dialog.glade.h:5
+#: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Style:"
 msgstr "_Stilius:"
 
@@ -600,14 +611,14 @@ msgid "Appeara_nce"
 msgstr "_Išvaizda"
 
 #: ../panel/panel-preferences-dialog.glade.h:50
-#: ../plugins/launcher/launcher-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
 msgstr "Perkelti pasirinktą elementą viena eilute viršun"
 
 #: ../panel/panel-preferences-dialog.glade.h:51
-#: ../plugins/launcher/launcher-dialog.glade.h:17
-#: ../plugins/systray/systray-dialog.glade.h:7
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
 msgstr "Perkelti pasirinktą elementą viena eilute žemyn"
 
@@ -620,7 +631,7 @@ msgid "Remove currently selected item"
 msgstr "Pašalinti pasirinktą elementą"
 
 #: ../panel/panel-preferences-dialog.glade.h:54
-#: ../plugins/launcher/launcher-dialog.glade.h:20
+#: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Edit the currently selected item"
 msgstr "Redaguoti pasirinktą elementą"
 
@@ -656,7 +667,7 @@ msgstr "Patyręs"
 msgid "Expert"
 msgstr "Ekspertas"
 
-#: ../panel/panel-window.c:2744
+#: ../panel/panel-window.c:2711
 msgid "_Lock Panel"
 msgstr "_Užrakinti skydelį"
 
@@ -727,32 +738,32 @@ msgstr "Veiksmų mygtukai"
 msgid "Session Menu"
 msgstr "Seanso meniu"
 
-#: ../plugins/actions/actions-dialog.glade.h:3
+#: ../plugins/actions/actions-dialog.glade.h:5
 msgid "Invert buttons _orientation"
 msgstr "Apversti mygtukų _orientaciją"
 
-#: ../plugins/actions/actions-dialog.glade.h:4
+#: ../plugins/actions/actions-dialog.glade.h:6
 msgid "_Show confirmation dialog"
 msgstr "_Rodyti patvirtinimo dialogą"
 
-#: ../plugins/actions/actions-dialog.glade.h:5
+#: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr "Kai kuriems veiksmams rodyti patvirtinimo dialogą su 30 sekundžių galiojimo laiku."
 
-#: ../plugins/actions/actions-dialog.glade.h:6
+#: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
 msgstr "_Išvaizda:"
 
-#: ../plugins/actions/actions-dialog.glade.h:8
+#: ../plugins/actions/actions-dialog.glade.h:10
 msgid "Visible"
 msgstr "Matoma"
 
-#: ../plugins/actions/actions-dialog.glade.h:9
+#: ../plugins/actions/actions-dialog.glade.h:11
 msgid "Action"
 msgstr "Veiksmas"
 
-#: ../plugins/actions/actions-dialog.glade.h:10
+#: ../plugins/actions/actions-dialog.glade.h:12
 msgid "_Actions"
 msgstr "_Veiksmai"
 
@@ -906,69 +917,69 @@ msgstr "Atsijungimas, užrakinimas ar kiti sistemos veiksmai"
 msgid "Applications Menu"
 msgstr "Programų meniu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
 msgid "_Icon:"
 msgstr "_Piktograma:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
 msgid "Button _title:"
 msgstr "Mygtuko _antraštė:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
 msgid "_Show button title"
 msgstr "_Rodyti mygtuko antraštę"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
 msgid "Show application d_escription in tooltip"
 msgstr "Paaiškinime rodyti programos _aprašą"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show ic_ons in menu"
 msgstr "Meniu rodyti _piktogramas"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
 msgid "Show generic application n_ames"
 msgstr "Rodyti bendrinius programų _pavadinimus"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr "Pasirinkite šį parametrą, norėdami meniu matyti bendrinį programos pavadinimą, pavyzdžiui „Failų tvarkytuvė“, o ne „Thunar“"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:15
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/pager/pager-dialog.glade.h:6
-#: ../plugins/separator/separator-dialog.glade.h:7
-#: ../plugins/systray/systray-dialog.glade.h:5
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+#: ../plugins/separator/separator-dialog.glade.h:9
+#: ../plugins/systray/systray-dialog.glade.h:7
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
 msgid "Appearance"
 msgstr "Išvaizda"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use the _default menu"
 msgstr "Naudoti _numatytąjį meniu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
 msgid "Ed_it Menu"
 msgstr "_Taisyti meniu"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
 msgid "Use c_ustom menu file:"
 msgstr "Naudoti _pasirinktinį meniu failą:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
 msgid "Menu _file:"
 msgstr "Meniu _failas:"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:16
 msgid "Select A Menu File"
 msgstr "Pasirinkite meniu failą"
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:17
 msgid "Menu File"
 msgstr "Meniu failas"
 
@@ -1427,31 +1438,31 @@ msgstr "Atverti terminale"
 msgid "Show a directory tree in a menu"
 msgstr "Rodyti meniu katalogų medį"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
 msgid "Select A Directory"
 msgstr "Pasirinkite katalogą"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid "_Base Directory:"
 msgstr "_Pagrindinis katalogas:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
 msgstr "Rodyti _paslėptus failus"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr "Įveskite formų sąrašą, kuris bus naudojamas spręsti kokie failų tipai bus matomi kataloge. Jei nurodote daugiau nei vieną formą, sąrašo elementai turi būti atskirti kabliataškiu (pvz. *txt;*.doc)"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:10
 msgid "_File Pattern:"
 msgstr "F_ailų šablonas:"
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#: ../plugins/tasklist/tasklist-dialog.glade.h:27
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:11
+#: ../plugins/tasklist/tasklist-dialog.glade.h:29
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
 msgid "Filtering"
 msgstr "Filtravimas"
@@ -1538,41 +1549,41 @@ msgstr "Nauja _nuoroda"
 msgid "Launcher"
 msgstr "Leistukas"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:18
+#: ../plugins/launcher/launcher-dialog.glade.h:20
 msgid "Add a new empty item"
 msgstr "Pridėti naują tuščią elementą"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:19
+#: ../plugins/launcher/launcher-dialog.glade.h:21
 msgid "Delete the currently selected item"
 msgstr "Ištrinti pasirinktą elementą"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:22
+#: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Disable t_ooltips"
 msgstr "Išjungti pa_aiškinimus"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:23
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid ""
 "Select this option to disable the tooltips when moving over the panel button"
 " or menu items."
 msgstr "Pasirinkite šį parametrą, jei norite išjungti paaiškinimus, kurie rodomi užvedus pelę virš skydelio ar meniu elementų."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:24
+#: ../plugins/launcher/launcher-dialog.glade.h:26
 msgid "Show _label instead of icon"
 msgstr "Vietoj _piktogramos rodyti antraštę"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:25
+#: ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Show last _used item in panel"
 msgstr "Skydelyje rodyti _paskiausiai naudotą elementą"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:26
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr "Pasirinkite šį parametrą, kad perkeltumėte spustelėtą elementą į skydelį."
 
-#: ../plugins/launcher/launcher-dialog.glade.h:27
+#: ../plugins/launcher/launcher-dialog.glade.h:29
 msgid "_Arrow button position:"
 msgstr "_Krypties mygtuko vieta:"
 
-#: ../plugins/launcher/launcher-dialog.glade.h:28
+#: ../plugins/launcher/launcher-dialog.glade.h:30
 msgid "Advanced"
 msgstr "Išplėstiniai"
 
@@ -1617,7 +1628,7 @@ msgid "Switch workspaces using the mouse _wheel"
 msgstr "Perjungti darbo sritis naudojant p_elės ratuką"
 
 #: ../plugins/pager/pager-dialog.glade.h:8
-#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+#: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Behaviour"
 msgstr "Elgsena"
 
@@ -1637,7 +1648,7 @@ msgstr "Rankenėlė"
 msgid "Dots"
 msgstr "Taškai"
 
-#: ../plugins/separator/separator-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:8
 msgid "_Expand"
 msgstr "_Išplėsti"
 
@@ -1690,23 +1701,23 @@ msgstr "Ar tikrai norite išvalyti žinomų programų sąrašą?"
 msgid "Notification Area"
 msgstr "Pranešimų sritis"
 
-#: ../plugins/systray/systray-dialog.glade.h:2
+#: ../plugins/systray/systray-dialog.glade.h:4
 msgid "_Maximum icon size (px):"
 msgstr "_Didžiausias piktogramos dydis (pikseliais):"
 
-#: ../plugins/systray/systray-dialog.glade.h:3
+#: ../plugins/systray/systray-dialog.glade.h:5
 msgid "Sq_uare icons"
 msgstr "K_vadratinės piktogramos"
 
-#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "Show _frame"
 msgstr "Rodyti _rėmelį"
 
-#: ../plugins/systray/systray-dialog.glade.h:8
+#: ../plugins/systray/systray-dialog.glade.h:10
 msgid "C_lear Known Applications"
 msgstr "_Išvalyti žinomas programas"
 
-#: ../plugins/systray/systray-dialog.glade.h:9
+#: ../plugins/systray/systray-dialog.glade.h:11
 msgid "Known Applications"
 msgstr "Žinomos programos"
 
@@ -1760,51 +1771,51 @@ msgstr "Jokia, leisti vilkti ir numesti"
 msgid "Window Buttons"
 msgstr "Langų mygtukai"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
 msgid "Show button _labels"
 msgstr "Rodyti progr_amų pavadinimus"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
 msgid "Show _flat buttons"
 msgstr "Rodyti _plokščius mygtukus"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
 msgid "Show _handle"
 msgstr "Rodyti _rankenėlę"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
 msgid "Sorting _order:"
 msgstr "Rikiavimo _tvarka:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
 msgid "Window _grouping:"
 msgstr "Langų _grupavimas:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Mi_ddle click action:"
 msgstr "Vi_durinio mygtuko spustelėjimo veiksmas:"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
 msgid "Restore minimized windows to current _workspace"
 msgstr "Atkurti suskleistus langus į dabartinę _darbo sritį"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
 msgid "D_raw window frame when hovering a button"
 msgstr "_Užvedus pelę ant mygtuko, piešti lango rėmelį"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+#: ../plugins/tasklist/tasklist-dialog.glade.h:24
 msgid "_Switch windows using the mouse wheel"
 msgstr "_Perjungti langus naudojant pelės ratuką"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:24
+#: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Show windows from _all workspaces or viewports"
 msgstr "Rodyti langus iš _visų darbo sričių"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:25
+#: ../plugins/tasklist/tasklist-dialog.glade.h:27
 msgid "Show only _minimized windows"
 msgstr "Rodyti tik _suskleistus langus"
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:26
+#: ../plugins/tasklist/tasklist-dialog.glade.h:28
 msgid "Show windows from all mo_nitors"
 msgstr "Rodyti langus iš _visų ekranų"
 
