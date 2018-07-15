@@ -180,7 +180,8 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   GtkTreeViewColumn *column;
   GtkCellRenderer   *renderer;
   GtkTreeSelection  *selection;
-  gchar             *path;
+  gchar             *path_old;
+  gchar             *path_new;
 
   dialog->bindings = NULL;
   dialog->application = panel_application_get ();
@@ -208,12 +209,12 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   connect_signal ("panel-remove", "clicked", panel_preferences_dialog_panel_remove);
   connect_signal ("panel-combobox", "changed", panel_preferences_dialog_panel_combobox_changed);
 
-  /* check if panel-switch is installed and if so show button */
+  /* check if xfce4-panel-profiles or panel-switch are installed and if either is show the button */
   object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-switch");
-  path = g_find_program_in_path ("xfpanel-switch");
-  if (path == NULL)
-    gtk_widget_set_visible (GTK_WIDGET (object), FALSE);
-
+  path_old = g_find_program_in_path ("xfpanel-switch");
+  path_new = g_find_program_in_path ("xfce4-panel-profiles");
+  if (path_new == NULL && path_old == NULL)
+    gtk_widget_hide (GTK_WIDGET (object));
   connect_signal ("panel-switch", "clicked", panel_preferences_dialog_panel_switch);
 
   /* style tab */
@@ -922,19 +923,24 @@ static void
 panel_preferences_dialog_panel_switch (GtkWidget *widget, PanelPreferencesDialog *dialog)
 {
   GtkWidget *toplevel;
-  gchar     *path;
+  gchar     *path_old;
+  gchar     *path_new;
   GError    *error = NULL;
 
-  path = g_find_program_in_path ("xfpanel-switch");
-  if (path == NULL)
+  path_old = g_find_program_in_path ("xfpanel-switch");
+  path_new = g_find_program_in_path ("xfce4-panel-profiles");
+  if (path_old == NULL && path_new == NULL)
     return;
 
   /* close the preferences dialog */
   toplevel = gtk_widget_get_toplevel (widget);
   panel_preferences_dialog_response (toplevel, 0, dialog);
 
-  /* run xfpanel-switch */
-  g_spawn_command_line_async (path, &error);
+  /* first try the new name of the executable, then the old */
+  if (path_new)
+    g_spawn_command_line_async (path_new, &error);
+  else if (path_old)
+    g_spawn_command_line_async (path_old, &error);
 }
 
 
