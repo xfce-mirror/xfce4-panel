@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-04 06:31+0200\n"
-"PO-Revision-Date: 2018-08-12 17:18+0000\n"
+"PO-Revision-Date: 2018-08-15 16:49+0000\n"
 "Last-Translator: Emanuele Petriglia <inbox@emanuelepetriglia.me>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -96,11 +96,11 @@ msgstr "_Pannello"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1279 ../panel/panel-window.c:2679
 msgid "Add _New Items..."
-msgstr "A_ggiungi nuovi elementi..."
+msgstr "A_ggiungi nuovi elementi…"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2694
 msgid "Panel Pr_eferences..."
-msgstr "_Preferenze del pannello..."
+msgstr "_Preferenze del pannello…"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1315 ../panel/panel-window.c:2726
 msgid "Log _Out"
@@ -141,11 +141,11 @@ msgstr "Salva la configurazione del pannello"
 
 #: ../panel/main.c:84
 msgid "Add a new plugin to the panel"
-msgstr "Aggiunge un nuovo plugin al pannello"
+msgstr "Aggiunge un nuovo componente aggiuntivo al pannello"
 
 #: ../panel/main.c:84
 msgid "PLUGIN-NAME"
-msgstr "NOME-PLUGIN"
+msgstr "NOME-COMPONENTE AGGIUNTIVO"
 
 #: ../panel/main.c:85
 msgid "Restart the running panel instance"
@@ -169,17 +169,17 @@ msgstr "Stampa le informazioni di versione ed esce"
 #: ../panel/main.c:207
 #, c-format
 msgid "Name %s lost on the message dbus, exiting."
-msgstr "Nome '%s' perso nel messaggio dbus, esco."
+msgstr "Nome %s perso nel messaggio dbus, uscita in corso."
 
 #. parse context options
 #: ../panel/main.c:258
 msgid "[ARGUMENTS...]"
-msgstr "[ARGOMENTI...]"
+msgstr "[ARGOMENTI…]"
 
 #: ../panel/main.c:265
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr "Digitare \"%s --help\" per le modalità d'uso"
+msgstr "Digitare \"%s --help\" per le informazioni d'uso."
 
 #: ../panel/main.c:284
 msgid "The Xfce development team. All rights reserved."
@@ -197,7 +197,7 @@ msgstr "Un'altra istanza è già in esecuzione"
 #. spawn ourselfs again
 #: ../panel/main.c:394
 msgid "Restarting..."
-msgstr "Riavvio in corso..."
+msgstr "Riavvio in corso…"
 
 #: ../panel/main.c:409
 msgid "Failed to show the preferences dialog"
@@ -213,7 +213,7 @@ msgstr "Impossibile salvare la configurazione del pannello"
 
 #: ../panel/main.c:415
 msgid "Failed to add a plugin to the panel"
-msgstr "Impossibile aggiungere il plugin al pannello"
+msgstr "Impossibile aggiungere il componente aggiuntivo al pannello"
 
 #: ../panel/main.c:417
 msgid "Failed to restart the panel"
@@ -235,7 +235,7 @@ msgstr "Esegui"
 msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
-msgstr "Avviare il pannello? se sì, salvare la sessione all'uscita, in modo che il pannello venga avviato automaticamente al prossimo riavvio della sessione."
+msgstr "Avviare il pannello? Se sì, salvare la sessione all'uscita, in modo che il pannello venga avviato automaticamente al prossimo riavvio della sessione."
 
 #: ../panel/main.c:435 ../panel/main.c:449
 #, c-format
@@ -244,7 +244,7 @@ msgstr "Non è stata trovata alcuna istanza di %s in esecuzione"
 
 #: ../panel/panel-application.c:215
 msgid "Failed to launch the migration application"
-msgstr "Avvio dell'applicazione di migrazione non riuscito"
+msgstr "Impossibile avviare l'applicazione di migrazione"
 
 #: ../panel/panel-application.c:982
 msgid "Create _Launcher"
@@ -254,7 +254,7 @@ msgstr "Crea _avviatore"
 msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
-msgstr "Questo comando creerà un nuovo avviatore sul pannello e inserirà i file trascinati su di esso come elementi del menu"
+msgstr "Questo comando creerà un nuovo avviatore sul pannello e inserirà i file trascinati su di esso come elementi del menu."
 
 #: ../panel/panel-application.c:985
 #, c-format
