@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-04 06:31+0200\n"
-"PO-Revision-Date: 2018-08-15 16:49+0000\n"
+"PO-Revision-Date: 2018-08-16 12:55+0000\n"
 "Last-Translator: Emanuele Petriglia <inbox@emanuelepetriglia.me>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -285,22 +285,22 @@ msgstr "Impossibile eseguire il comando \"%s\""
 #: ../panel/panel-dbus-client.c:218
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
-msgstr "È stata specificata una sintassi dell'evento del plugin non valida. Usare NOME-PLUGIN:NOME[:TIPO:VALORE]."
+msgstr "È stata specificata una sintassi dell'evento del plugin non valida. Usare NOME-COMPONENTE AGGIUNTIVO:NOME[:TIPO:VALORE]."
 
 #: ../panel/panel-dbus-client.c:248
 #, c-format
 msgid ""
 "Invalid hint type \"%s\". Valid types are bool, double, int, string and "
 "uint."
-msgstr "Tipo di suggerimento \"%s\" non valido. Sono accettati i tipo bool, double, int, string e uint."
+msgstr "Tipo di suggerimento \"%s\" non valido. Sono accettati i tipi bool, double, int, string e uint."
 
 #: ../panel/panel-dialogs.c:49
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "Il pannello dell'ambiente Xfce"
+msgstr "Il pannello dell'ambiente grafico Xfce"
 
 #: ../panel/panel-dialogs.c:54
 msgid "translator-credits"
-msgstr "Alex Dupre <ale@FreeBSD.org>, 2004\nLuca Marrocco <buildup@libero.it>, 2005\nCristian Marchi <cri.penta@gmail.com>, 2013"
+msgstr "Alex Dupre <ale@FreeBSD.org>, 2004\nLuca Marrocco <buildup@libero.it>, 2005\nCristian Marchi <cri.penta@gmail.com>, 2013\nEmanuele Petriglia <inbox@emanuelepetriglia.me>, 2018"
 
 #. setup the dialog
 #: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
@@ -313,7 +313,7 @@ msgstr "Aggiungi"
 
 #: ../panel/panel-dialogs.c:139
 msgid "Please choose a panel for the new plugin:"
-msgstr "Selezionare un pannello per il nuovo plugin:"
+msgstr "Selezionare un pannello per il nuovo componente aggiuntivo:"
 
 #: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:831
 #, c-format
@@ -324,7 +324,7 @@ msgstr "Pannello %d"
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
-msgstr "Dato che il pannello è in esecuzione in modalità protetta (kiosk), non è permesso effettuare delle modifiche alla sua configurazione come utente regolare"
+msgstr "Dato che il pannello è in esecuzione in modalità protetta (kiosk), non è permesso effettuare delle modifiche alla sua configurazione come utente normale"
 
 #: ../panel/panel-dialogs.c:201
 msgid "Modifying the panel is not allowed"
@@ -332,11 +332,11 @@ msgstr "La modifica del pannello non è consentita"
 
 #: ../panel/panel-item-dialog.c:194
 msgid "Add New Items"
-msgstr "Aggiunge nuovi elementi"
+msgstr "Aggiungi nuovi elementi"
 
 #: ../panel/panel-item-dialog.c:196
 msgid "Add new plugins to the panel"
-msgstr "Aggiunge un nuovo plugin al pannello"
+msgstr "Aggiungi un nuovo componente aggiuntivo al pannello"
 
 #: ../panel/panel-item-dialog.c:202
 msgid "_Add"
@@ -363,7 +363,7 @@ msgstr "Inserire qui la frase da cercare"
 #: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr "Il plugin \"%s\" ha inaspettatamente abbandonato il pannello; riavviarlo?"
+msgstr "Il componente aggiuntivo \"%s\" ha inaspettatamente abbandonato il pannello; riavviarlo?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -371,7 +371,7 @@ msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
 "Execute the panel will try to restart the plugin otherwise it will be "
 "permanently removed from the panel."
-msgstr "Il plugin è stato riavviato più di una volta negli ultimi %d secondi. Premendo «Esegui» il pannello tenterà di riavviare il plugin altrimenti verrà rimosso definitivamente dal pannello."
+msgstr "Il componente aggiuntivo è stato riavviato più di una volta negli ultimi %d secondi. Premendo «Esegui» il pannello tenterà di riavviare il componente aggiuntivo altrimenti verrà rimosso definitivamente dal pannello."
 
 #: ../panel/panel-preferences-dialog.c:486
 msgid "Automatic"
@@ -389,12 +389,12 @@ msgstr "Monitor %d"
 
 #: ../panel/panel-preferences-dialog.c:897
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "Le configurazioni del pannello e dei plugin saranno rimosse in modo permanente"
+msgstr "Le configurazioni del pannello e dei componenti aggiuntivi saranno rimosse in modo permanente"
 
 #: ../panel/panel-preferences-dialog.c:898
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Rimuovere davvero il pannello \"%d\"?"
+msgstr "Rimuovere davvero il pannello %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -443,7 +443,7 @@ msgstr "Verticale"
 
 #: ../panel/panel-preferences-dialog.glade.h:6
 msgid "Deskbar"
-msgstr "Deskbar"
+msgstr "Barra"
 
 #: ../panel/panel-preferences-dialog.glade.h:7
 msgid "None (use system style)"
@@ -470,11 +470,11 @@ msgstr "_Chiudi"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Add a new panel"
-msgstr "Aggiunge un nuovo pannello"
+msgstr "Aggiungi un nuovo pannello"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "Remove the currently selected panel"
-msgstr "Rimuove il pannello selezionato"
+msgstr "Rimuovi il pannello selezionato"
 
 #: ../panel/panel-preferences-dialog.glade.h:15
 msgid "Backup and restore"
@@ -482,7 +482,7 @@ msgstr "Backup e ripristino"
 
 #: ../panel/panel-preferences-dialog.glade.h:16
 msgid "Switch between panel presets"
-msgstr "Scorre tra le impostazioni predefinite del pannello"
+msgstr "Scorri tra le impostazioni predefinite del pannello"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "M_ode:"
@@ -498,7 +498,7 @@ msgstr "Estendi su più sc_hermi"
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr "Selezionare questa opzione per estendere il pannello su più monitor"
+msgstr "Selezionare questa opzione per estendere il pannello su più schermi."
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "_Lock panel"
@@ -507,7 +507,7 @@ msgstr "_Blocca il pannello"
 #: ../panel/panel-preferences-dialog.glade.h:22
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
-msgstr "Selezionare questa opzione per nascondere le maniglie del pannello e bloccarne la posizione"
+msgstr "Selezionare questa opzione per nascondere le maniglie del pannello e bloccarne la posizione."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Automatically hide the panel:"
