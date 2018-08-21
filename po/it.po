@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-04 06:31+0200\n"
-"PO-Revision-Date: 2018-08-16 12:55+0000\n"
+"PO-Revision-Date: 2018-08-21 16:23+0000\n"
 "Last-Translator: Emanuele Petriglia <inbox@emanuelepetriglia.me>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -511,7 +511,7 @@ msgstr "Selezionare questa opzione per nascondere le maniglie del pannello e blo
 
 #: ../panel/panel-preferences-dialog.glade.h:23
 msgid "Automatically hide the panel:"
-msgstr "Nascondi pannello automaticamente:"
+msgstr "Nascondi automaticamente il pannello:"
 
 #: ../panel/panel-preferences-dialog.glade.h:24
 msgid "Don't _reserve space on borders"
@@ -521,7 +521,7 @@ msgstr "N_on riservare lo spazio ai bordi"
 msgid ""
 "Select this option if you want maximized windows to cover the area behind "
 "the panel. This only works when the panel is attached to a screen edge."
-msgstr "Selezionare questa opzione per far occupare alle finestre massimizzate lo spazio dietro al pannello. Questa impostazione funziona solamente quando il pannello è attaccato al bordo dello schermo"
+msgstr "Selezionare questa opzione per far occupare alle finestre massimizzate lo spazio dietro al pannello. Questa impostazione funziona solamente quando il pannello è attaccato al bordo dello schermo."
 
 #: ../panel/panel-preferences-dialog.glade.h:26
 #: ../plugins/actions/actions-dialog.glade.h:9
@@ -537,7 +537,7 @@ msgstr "Aumenta la lunghezza a_utomaticamente"
 msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
-msgstr "Selezionare questa opzione per aumentare automaticamente la lunghezza del pannello se i plugin richiedono più spazio"
+msgstr "Selezionare questa opzione per aumentare automaticamente la lunghezza del pannello se i componenti aggiuntivi richiedono più spazio."
 
 #: ../panel/panel-preferences-dialog.glade.h:30
 #, no-c-format
@@ -569,7 +569,7 @@ msgstr "_Stile:"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "C_olor:"
-msgstr "C_olore"
+msgstr "C_olore:"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "Pick a Panel Color"
@@ -591,7 +591,7 @@ msgstr "Sfondo"
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
-msgstr "Trasparenza quando il puntatore non è sul pannello; 0 completamente trasparente e 100 completamente opaco"
+msgstr "Trasparenza quando il puntatore non è sul pannello: con 0 è completamente trasparente mentre con 100 completamente opaco."
 
 #. I18N: label for the enter transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
@@ -620,13 +620,13 @@ msgstr "_Aspetto"
 #: ../plugins/launcher/launcher-dialog.glade.h:18
 #: ../plugins/systray/systray-dialog.glade.h:8
 msgid "Move currently selected item up by one row"
-msgstr "Sposta alla riga superiore l'elemento selezionato "
+msgstr "Sposta l'elemento selezionato una riga sopra"
 
 #: ../panel/panel-preferences-dialog.glade.h:51
 #: ../plugins/launcher/launcher-dialog.glade.h:19
 #: ../plugins/systray/systray-dialog.glade.h:9
 msgid "Move currently selected item down by one row"
-msgstr "Sposta alla riga inferiore l'elemento selezionato "
+msgstr "Sposta l'elemento selezionato una riga sotto"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Add new item to this panel"
@@ -717,7 +717,7 @@ msgstr "Inizia con un pannello vuoto"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "Impossibile trasferire la vecchia configurazione del pannello"
+msgstr "Impossibile migrare la vecchia configurazione del pannello"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
@@ -725,11 +725,11 @@ msgstr "Impossibile caricare la configurazione predefinita"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "La configurazione del pannello deve essere trasferita..."
+msgstr "La configurazione del pannello deve essere migrata…"
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
-msgstr "Impossibile trasferire la configurazione esistente"
+msgstr "Impossibile migrare la configurazione esistente"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
@@ -746,7 +746,7 @@ msgstr "Menu di sessione"
 
 #: ../plugins/actions/actions-dialog.glade.h:5
 msgid "Invert buttons _orientation"
-msgstr "Inverti l'ori_entazione dei pulsanti"
+msgstr "Inverti l'ori_entamento dei pulsanti"
 
 #: ../plugins/actions/actions-dialog.glade.h:6
 msgid "_Show confirmation dialog"
@@ -755,7 +755,7 @@ msgstr "Mostra _finestra di conferma"
 #: ../plugins/actions/actions-dialog.glade.h:7
 msgid ""
 "Show a confirmation dialog with a 30 second timeout for some of the actions."
-msgstr "Mostra una schermata di conferma con un conto alla rovescia di 30 secondi prima di eseguire l'azione"
+msgstr "Mostra una schermata di conferma con un conto alla rovescia di 30 secondi prima di eseguire l'azione."
 
 #: ../plugins/actions/actions-dialog.glade.h:8
 msgid "Appeara_nce:"
@@ -792,11 +792,11 @@ msgstr "Uscita tra %d secondi."
 
 #: ../plugins/actions/actions.c:160
 msgid "Log Out..."
-msgstr "Esci..."
+msgstr "Esci…"
 
 #: ../plugins/actions/actions.c:161
 msgid "Log _Out..."
-msgstr "_Esci..."
+msgstr "_Esci…"
 
 #: ../plugins/actions/actions.c:167
 msgid "Switch User"
