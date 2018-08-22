@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-04 06:31+0200\n"
-"PO-Revision-Date: 2018-08-21 16:23+0000\n"
+"PO-Revision-Date: 2018-08-22 19:30+0000\n"
 "Last-Translator: Emanuele Petriglia <inbox@emanuelepetriglia.me>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce4-panel/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -952,7 +952,7 @@ msgstr "Mostra i no_mi generici delle applicazioni"
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
-msgstr "Selezionare questa opzione per mostrare il nome generico dell'applicazione nel menu, per esempio \"Gestore dei file\" in luogo di \"Thunar\""
+msgstr "Selezionare questa opzione per mostrare il nome generico dell'applicazione nel menu, per esempio \"Gestore dei file\" invece di \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
 #: ../plugins/clock/clock-dialog.glade.h:15
@@ -1056,7 +1056,7 @@ msgstr "Settimana %V"
 
 #: ../plugins/clock/clock.c:470
 msgid "Failed to execute clock command"
-msgstr "Esecuzione del comando clock non riuscita"
+msgstr "Impossibile eseguire il comando clock"
 
 #: ../plugins/clock/clock.c:857
 msgid "Custom Format"
@@ -1091,7 +1091,7 @@ msgstr "Orologio"
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
-msgstr "Nome del fuso orario corrispondente al database dei fusi orari di sistema, per esempio \"America/New_York\"; Lasciare vuoto per tornare all'ora locale"
+msgstr "Nome del fuso orario corrispondente al database dei fusi orari di sistema, per esempio \"America/New_York\". Lasciare vuoto per usare l'ora locale."
 
 #: ../plugins/clock/clock-dialog.glade.h:8
 msgid "Time_zone:"
@@ -1099,11 +1099,11 @@ msgstr "_Fuso orario:"
 
 #: ../plugins/clock/clock-dialog.glade.h:9
 msgid "Time and Date _Settings..."
-msgstr "Impostazione data e _ora..."
+msgstr "Impostazioni data e _ora…"
 
 #: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time Settings"
-msgstr "Impostazione orario"
+msgstr "Impostazioni orario"
 
 #: ../plugins/clock/clock-dialog.glade.h:12
 #, no-c-format
@@ -1112,7 +1112,7 @@ msgid ""
 "example, %Y will be substituted with the year, %m with the month and %d with"
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
-msgstr "Il formato descrive la date e l'ora da inserire nel nome del file: per esempio %Y verrà sostituito con l'anno, %m con il mese e %d con il giorno; i tag <b></b> visualizzeranno il testo in grassetto. Consultare la documentazione di aiuto per maggiori informazioni."
+msgstr "Il formato descrive le parti della data e dell'ora che verrano mostrate nel pannello. Per esempio, \"%Y\" verrà sostituito con l'anno, \"%m\" con il mese e \"%d\" con il giorno. Analogamente, le etichette \"<b></b>\" renderanno in grassetto il testo. Consultare la pagina \"Aiuto\" per maggiori informazioni."
 
 #: ../plugins/clock/clock-dialog.glade.h:13
 msgid "_Tooltip format:"
