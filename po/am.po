@@ -1,308 +1,304 @@
-# Amharic translation to xfce4-panel.
-# Copyright (C) 2002-2007 The Xfce development team.
-# This file is distributed under the same license as the xfce4-panel package.
-# Tegegne Tefera <tefera@mekuria.com>, 2007.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Tegegne Tefera <tefera@mekuria.com>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.7.0\n"
+"Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 17:01+0100\n"
-"PO-Revision-Date: 2008-01-06 18:39+0100\n"
-"Last-Translator: Tegegne Tefera <tefera@mekuria.com>\n"
-"Language-Team: Amharic <l10n-am@googlegroups.com>\n"
-"Language: am\n"
+"POT-Creation-Date: 2013-07-02 23:10+0200\n"
+"PO-Revision-Date: 2018-09-14 00:23+0000\n"
+"Last-Translator: samson <sambelet@yahoo.com>\n"
+"Language-Team: Amharic (http://www.transifex.com/xfce/xfce4-panel/language/am/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Bookmarks: 105,-1,159,-1,-1,-1,-1,-1,-1,-1\n"
+"Language: am\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
-msgid ""
-"Add a new launcher to the panel based on the information of this desktop file"
-msgstr ""
+msgid "Create Launcher on the panel"
+msgstr "በ ክፍል ላይ ማስጀመሪያ መፍጠሪያ"
 
 #: ../panel-desktop-handler.desktop.in.h:2
-#, fuzzy
-msgid "Create Launcher on the panel"
-msgstr "ስለ ሸፍሲ ፓነል"
+msgid ""
+"Add a new launcher to the panel based on the information of this desktop "
+"file"
+msgstr ""
 
 #: ../panel-preferences.desktop.in.h:1
-#, fuzzy
-msgid "Customize the panel"
-msgstr "ስለ ሸፍሲ ፓነል"
+#: ../panel/panel-preferences-dialog.glade.h:7 ../panel/panel-window.c:2353
+#: ../migrate/main.c:117
+msgid "Panel"
+msgstr "ክፍል"
 
 #: ../panel-preferences.desktop.in.h:2
-#: ../panel/panel-preferences-dialog.glade.h:24 ../panel/panel-window.c:2222
-#: ../migrate/main.c:84
-#, fuzzy
-msgid "Panel"
-msgstr "ፓነል %d"
-
-#: ../common/panel-utils.c:155
-msgid "_Read Online"
-msgstr ""
-
-#: ../common/panel-utils.c:156
-msgid ""
-"You can read the user manual online. This manual may however not exactly "
-"match your panel version."
-msgstr ""
-
-#: ../common/panel-utils.c:158
-msgid "The user manual is not installed on your computer"
-msgstr ""
-
-#. display an error message to the user
-#: ../common/panel-utils.c:171
-msgid "Failed to open the documentation browser"
-msgstr ""
+msgid "Customize the panel"
+msgstr "ክፍል ማስተካከያ"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:889
-#: ../panel/panel-preferences-dialog.c:1048
-#, fuzzy, c-format
+#: ../libxfce4panel/xfce-panel-plugin.c:1037
+#: ../panel/panel-preferences-dialog.c:1099
+#, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
-msgstr "የስራ ገበታ '%s'ን ለመሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?"
+msgstr "በ እርግጥ ማስወገድ ይፈልጋሉ \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:894
-#: ../panel/panel-preferences-dialog.c:1051
+#: ../libxfce4panel/xfce-panel-plugin.c:1042
+#: ../panel/panel-preferences-dialog.c:1102
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr ""
 
 #. move item
-#: ../libxfce4panel/xfce-panel-plugin.c:1054
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1202
 msgid "_Move"
-msgstr "ውሰድ"
+msgstr "_ማንቀሳቀሻ "
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1088
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1236
 msgid "Pane_l"
-msgstr "ፓነል %d"
+msgstr "ክፍ_ል"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1096 ../panel/panel-window.c:2234
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin.c:1244 ../panel/panel-window.c:2365
 msgid "Add _New Items..."
-msgstr "አዲስ ዕቃ ጨምር"
+msgstr "_አዲስ እቃ መጨመሪያ..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1107 ../panel/panel-window.c:2245
+#: ../libxfce4panel/xfce-panel-plugin.c:1255 ../panel/panel-window.c:2376
 msgid "Panel Pr_eferences..."
-msgstr ""
+msgstr "የ ክፍል ምር_ጫዎች..."
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1124 ../panel/panel-window.c:2261
+#: ../libxfce4panel/xfce-panel-plugin.c:1272 ../panel/panel-window.c:2404
 msgid "Log _Out"
-msgstr ""
-
-#: ../panel/main.c:78
-#, fuzzy
-msgid "Show the 'Panel Preferences' dialog"
-msgstr "ፓነሉን አመቻች"
-
-#: ../panel/main.c:78 ../panel/main.c:79
-msgid "PANEL-NUMBER"
-msgstr ""
+msgstr "መው_ጫ"
 
 #: ../panel/main.c:79
-#, fuzzy
-msgid "Show the 'Add New Items' dialog"
-msgstr "አዲስ ዕቃ ጨምር"
+msgid "Show the 'Panel Preferences' dialog"
+msgstr "'የ ክፍል ምርጫዎች' ንግግር ማሳያ"
+
+#: ../panel/main.c:79 ../panel/main.c:80
+msgid "PANEL-NUMBER"
+msgstr "የ ክፍል-ቁጥር"
 
 #: ../panel/main.c:80
-#, fuzzy
+msgid "Show the 'Add New Items' dialog"
+msgstr "የ አዲስ እቃ መጨመሪያ ንግግር ማሳያ"
+
+#: ../panel/main.c:81
 msgid "Save the panel configuration"
-msgstr "የማሳወቂያ መለዮን አሳይ"
-
-#: ../panel/main.c:81
-#, fuzzy
-msgid "Add a new plugin to the panel"
-msgstr "እቃዎችን ፓነል ላይ ጨምር"
-
-#: ../panel/main.c:81
-msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "የ ክፍል ማሰናጃ ማስቀመጫ"
 
 #: ../panel/main.c:82
+msgid "Add a new plugin to the panel"
+msgstr "አዲስ ተሰኪ ወደ ክፍል መጨመሪያ"
+
+#: ../panel/main.c:82
+msgid "PLUGIN-NAME"
+msgstr "የ ተሰኪ-ስም"
+
+#: ../panel/main.c:83
 msgid "Restart the running panel instance"
 msgstr ""
 
-#: ../panel/main.c:83
+#: ../panel/main.c:84
 msgid "Quit the running panel instance"
 msgstr ""
 
-#: ../panel/main.c:84
+#: ../panel/main.c:85
+msgid "Do not wait for a window manager on startup"
+msgstr "በሚጀምር ጊዜ የ መስኮት አስተዳዳሪን አትጠብቅ"
+
+#: ../panel/main.c:86
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:33
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:33
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:33
 msgid "Print version information and exit"
-msgstr ""
+msgstr "የ እትም መረጃ ማተሚያ እና መውጫ"
 
 #. parse context options
-#: ../panel/main.c:240
+#: ../panel/main.c:235
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ክርክሮች...]"
 
-#: ../panel/main.c:247
+#: ../panel/main.c:242
 #, c-format
 msgid "Type \"%s --help\" for usage."
-msgstr ""
+msgstr "አይነት \"%s --እርዳታ\" ለ መጠቀም."
 
-#: ../panel/main.c:266
+#: ../panel/main.c:261
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "The Xfce development team. All rights reserved."
 
-#: ../panel/main.c:267
+#: ../panel/main.c:262
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "እባክዎን ችግሩን ያሳውቁን ለ <%s>."
 
-#: ../panel/main.c:318
-#, fuzzy
+#: ../panel/main.c:320
 msgid "There is already a running instance"
-msgstr "በዚህ ስክሪን ላይ የስርዓት ትሪ ከበፊቱም አለ"
+msgstr ""
 
 #. spawn ourselfs again
-#: ../panel/main.c:367
-#, fuzzy
+#: ../panel/main.c:362
 msgid "Restarting..."
-msgstr "እንደገና አስጀምር"
+msgstr "እንደገና በማስጀመር ላይ"
 
-#: ../panel/main.c:382
+#: ../panel/main.c:377
 msgid "Failed to show the preferences dialog"
-msgstr ""
+msgstr "የ ምርጫ ንግግር ማሳየት አልተቻለም"
 
-#: ../panel/main.c:384
-#, fuzzy
+#: ../panel/main.c:379
 msgid "Failed to show the add new items dialog"
-msgstr "አዲስ ዕቃ ጨምር"
+msgstr "የ አዲስ እቃ ምርጫ ንግግር ማሳየት አልተቻለም"
 
-#: ../panel/main.c:386
-#, fuzzy
+#: ../panel/main.c:381
 msgid "Failed to save the panel configuration"
-msgstr "የማሳወቂያ መለዮን አሳይ"
+msgstr "የ ክፍል ማሰናጃ ማስቀመጥ አልተቻለም"
 
-#: ../panel/main.c:388
+#: ../panel/main.c:383
 msgid "Failed to add a plugin to the panel"
-msgstr ""
+msgstr "አዲስ ተሰኪ ወደ ክፍል መጨመር አልተቻለም"
 
-#: ../panel/main.c:390
-#, fuzzy
+#: ../panel/main.c:385
 msgid "Failed to restart the panel"
-msgstr "እቃዎችን ፓነል ላይ ጨምር"
+msgstr "ክፍሉን እንደገና ማስጀመር አልተቻለም"
 
-#: ../panel/main.c:392
-#, fuzzy
+#: ../panel/main.c:387
 msgid "Failed to quit the panel"
-msgstr "እቃዎችን ፓነል ላይ ጨምር"
+msgstr "ከ ክፍል መውጣት አልተቻለም"
 
-#: ../panel/main.c:394
+#: ../panel/main.c:389
 msgid "Failed to send D-Bus message"
-msgstr ""
+msgstr "ወደ D-Bus መልእክት መላክ አይቻልም"
 
-#: ../panel/main.c:405
+#: ../panel/main.c:400
 msgid ""
-"Do you want to start the panel? If you do, make sure you save the session on "
-"logout, so the panel is automatically started the next time you login."
+"Do you want to start the panel? If you do, make sure you save the session on"
+" logout, so the panel is automatically started the next time you login."
 msgstr ""
 
-#: ../panel/main.c:408 ../panel/main.c:422
+#: ../panel/main.c:403 ../panel/main.c:417
 #, c-format
 msgid "No running instance of %s was found"
 msgstr ""
 
-#: ../panel/panel-application.c:196
+#: ../panel/panel-application.c:216
 msgid "Failed to launch the migration application"
 msgstr ""
 
-#: ../panel/panel-application.c:1446 ../plugins/actions/actions.c:413
+#: ../panel/panel-application.c:982
+msgid "Create _Launcher"
+msgstr "_ማስጀመሪያ መፍጠሪያ"
+
+#: ../panel/panel-application.c:983
+msgid ""
+"This will create a new launcher plugin on the panel and inserts the dropped "
+"files as menu items."
+msgstr ""
+
+#: ../panel/panel-application.c:985
+#, c-format
+msgid "Create new launcher from %d desktop file"
+msgid_plural "Create new launcher from %d desktop files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../panel/panel-application.c:1719
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr ""
 
-#: ../panel/panel-application.c:1447 ../plugins/actions/actions.c:414
-#, fuzzy
+#: ../panel/panel-application.c:1720
 msgid "Are you sure you want to quit the panel?"
-msgstr "የስራ ገበታ %dን ለመሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?"
+msgstr "እርስዎ በ እርግጥ ክፍሉን ማስወገድ ይፈልጋሉ?"
 
-#: ../panel/panel-application.c:1455 ../plugins/actions/actions.c:422
-#, fuzzy, c-format
+#: ../panel/panel-application.c:1728
+#, c-format
 msgid "Failed to execute command \"%s\""
-msgstr "\"%s\"ን ማስኬድ አልተቻለም"
+msgstr "ትእዛዝ መፈጸም አልተቻለም \"%s\""
 
-#: ../panel/panel-dbus-client.c:209
+#: ../panel/panel-dbus-client.c:211
 msgid ""
 "Invalid plugin event syntax specified. Use PLUGIN-NAME:NAME[:TYPE:VALUE]."
 msgstr ""
 
-#: ../panel/panel-dbus-client.c:242
+#: ../panel/panel-dbus-client.c:244
 #, c-format
 msgid ""
-"Invalid hint type \"%s\". Valid types are bool, double, int, string and uint."
+"Invalid hint type \"%s\". Valid types are bool, double, int, string and "
+"uint."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:76
+#: ../panel/panel-dialogs.c:65
+msgid "Maintainers"
+msgstr "ጠጋኞች"
+
+#: ../panel/panel-dialogs.c:68
+msgid "Deskbar Mode"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:71
+msgid "Inactive Maintainers"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:81
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
-msgstr ""
+msgstr "ምስጋና - ለ ተርጓሚዎች"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:122 ../plugins/launcher/launcher-dialog.glade.h:1
-#, fuzzy
+#: ../panel/panel-dialogs.c:158 ../plugins/launcher/launcher-dialog.glade.h:27
 msgid "Add New Item"
-msgstr "አዲስ ዕቃ ጨምር"
+msgstr "አዲስ እቃ መጨመሪያ"
 
-#: ../panel/panel-dialogs.c:136
+#: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr ""
+msgstr "እባክዎን ለ አዲሱ ተሰኪ ክፍል ይምረጡ:"
 
-#. I18N: panel combo box in the preferences dialog
-#: ../panel/panel-dialogs.c:147 ../panel/panel-preferences-dialog.c:767
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:806
 #, c-format
 msgid "Panel %d"
 msgstr "ፓነል %d"
 
-#: ../panel/panel-dialogs.c:183
+#: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:185
+#: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
-msgstr ""
-
-#: ../panel/panel-item-dialog.c:188
-#, fuzzy
-msgid "Add New Items"
-msgstr "አዲስ ዕቃ ጨምር"
+msgstr "ክፍል ማሻሻል አይቻልም"
 
 #: ../panel/panel-item-dialog.c:190
-#, fuzzy
+msgid "Add New Items"
+msgstr "አዲስ እቃ መጨመሪያ"
+
+#: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
-msgstr "እቃዎችን ፓነል ላይ ጨምር"
+msgstr "አዲስ ተሰኪ ወደ ክፍል መጨመሪያ"
 
-#: ../panel/panel-item-dialog.c:213
-#: ../plugins/launcher/launcher-dialog.glade.h:23
+#: ../panel/panel-item-dialog.c:216
+#: ../plugins/launcher/launcher-dialog.glade.h:28
 msgid "_Search:"
-msgstr ""
+msgstr "_መፈለጊያ:"
 
-#: ../panel/panel-item-dialog.c:221
+#: ../panel/panel-item-dialog.c:224
 msgid "Enter search phrase here"
-msgstr ""
+msgstr "የ መፈለጊያ ሀረግ እዚህ ያስገቡ"
 
-#: ../panel/panel-plugin-external.c:420
+#: ../panel/panel-plugin-external.c:429
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
-msgstr ""
+msgstr "ተሰኪ \"%s\" በድንገት ከ ክፍሉ ውስጥ ጠፍቷል: እርስዎ እንደገና ማስጀመር ይፈልጋሉ?"
 
-#: ../panel/panel-plugin-external.c:422
+#: ../panel/panel-plugin-external.c:431
 #, c-format
 msgid ""
 "The plugin restarted more than once in the last %d seconds. If you press "
@@ -310,331 +306,356 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.c:453
+#: ../panel/panel-preferences-dialog.c:472
 msgid "Automatic"
-msgstr ""
+msgstr "ራሱ በራሱ "
 
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:472
+#: ../panel/panel-preferences-dialog.c:491
 #, c-format
 msgid "Screen %d"
-msgstr ""
+msgstr "መመልከቻ %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:498
-#, fuzzy, c-format
+#: ../panel/panel-preferences-dialog.c:517
+#, c-format
 msgid "Monitor %d"
-msgstr "ሞኒቶሩን ሙላ"
+msgstr "ሞኒተር %d "
 
-#: ../panel/panel-preferences-dialog.c:828
-#, fuzzy
+#: ../panel/panel-preferences-dialog.c:872
 msgid "The panel and plugin configurations will be permanently removed"
-msgstr "የተመረጠው ፓነልና ያቀፋቸው ሁሉ ይሰረዛሉ።"
+msgstr "የ ክፍል እና ተሰኪ ማሰናጃ በቋሚነት ይወገዳል "
 
-#: ../panel/panel-preferences-dialog.c:829
-#, fuzzy, c-format
+#: ../panel/panel-preferences-dialog.c:873
+#, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "የስራ ገበታ %dን ለመሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?"
+msgstr "በ እርግጥ ክፍሉን ማስወገድ ይፈልጋሉ %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:912
+#: ../panel/panel-preferences-dialog.c:958
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
-msgstr ""
+msgstr "%s <span color=\"grey\" size=\"small\">(የ ውጪ)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:917
+#: ../panel/panel-preferences-dialog.c:963
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
 "PID: %d"
-msgstr ""
+msgstr "የ ውስጥ ስም: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:929
+#: ../panel/panel-preferences-dialog.c:975
 #, c-format
 msgid "Internal name: %s-%d"
-msgstr ""
+msgstr "የ ውስጥ ስም: %s-%d"
 
 #: ../panel/panel-preferences-dialog.glade.h:1
-msgid "A_utomatically increase the length"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:2
-#, fuzzy
-msgid "Add a new panel"
-msgstr "አዲስ ዕቃ ጨምር"
-
-#: ../panel/panel-preferences-dialog.glade.h:3
-#, fuzzy
-msgid "Add new item to this panel"
-msgstr "እቃዎችን ፓነል ላይ ጨምር"
-
-#: ../panel/panel-preferences-dialog.glade.h:4
-msgid ""
-"Alpha value of the panel background, with 0 being fully transparent and 100 "
-"fully opaque."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:5
-#, fuzzy
-msgid "Appeara_nce"
-msgstr "አቀራረብ"
-
-#: ../panel/panel-preferences-dialog.glade.h:6
-msgid "Automatically show and _hide the panel"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:7
-msgid "Background"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:8
-msgid "Background image"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:9
-msgid "C_olor:"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:10
-msgid "D_isplay"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:11
-#: ../plugins/launcher/launcher-dialog.glade.h:9
-msgid "Edit the currently selected item"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:12
-#: ../plugins/launcher/launcher-dialog.glade.h:10
-msgid "General"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Horizontal"
 msgstr "አግድም"
 
-#: ../panel/panel-preferences-dialog.glade.h:14
-#, fuzzy
-msgid "Ite_ms"
-msgstr "እቃ ጨምር"
+#: ../panel/panel-preferences-dialog.glade.h:2
+msgid "Vertical"
+msgstr "ሽቅብ"
 
-#: ../panel/panel-preferences-dialog.glade.h:16
-#, no-c-format
-msgid "L_ength (%):"
+#: ../panel/panel-preferences-dialog.glade.h:3
+msgid "Deskbar"
 msgstr ""
 
-#. I18N: name of the section (frame) in the panel preferences where the user can define the length and size of the panel
-#: ../panel/panel-preferences-dialog.glade.h:18
-msgid "Measurements"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:19
-#: ../plugins/launcher/launcher-dialog.glade.h:13
-msgid "Move currently selected item down by one row"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:20
-#: ../plugins/launcher/launcher-dialog.glade.h:14
-msgid "Move currently selected item up by one row"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:21
+#: ../panel/panel-preferences-dialog.glade.h:4
 msgid "None (use system style)"
-msgstr ""
+msgstr "ምንም (የ ስርአቱን ዘዴ ይጠቀሙ)"
 
-#: ../panel/panel-preferences-dialog.glade.h:22
-msgid "O_utput:"
-msgstr ""
+#: ../panel/panel-preferences-dialog.glade.h:5
+msgid "Solid color"
+msgstr "ሙሉ ቀለም"
 
-#: ../panel/panel-preferences-dialog.glade.h:23
-msgid "Opacity"
-msgstr ""
+#: ../panel/panel-preferences-dialog.glade.h:6
+msgid "Background image"
+msgstr "የ መደብ ምስል"
 
-#: ../panel/panel-preferences-dialog.glade.h:25
-msgid "Pick a Panel Color"
-msgstr ""
+#: ../panel/panel-preferences-dialog.glade.h:8
+msgid "Add a new panel"
+msgstr "አዲስ ክፍል መጨመሪያ"
 
-#: ../panel/panel-preferences-dialog.glade.h:26
-msgid "Remove currently selected item"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:27
+#: ../panel/panel-preferences-dialog.glade.h:9
 msgid "Remove the currently selected panel"
+msgstr "አሁን የ ተመረጠውን ክፍል ማስወገጃ"
+
+#: ../panel/panel-preferences-dialog.glade.h:10
+msgid "M_ode:"
+msgstr "ዘ_ዴ:"
+
+#: ../panel/panel-preferences-dialog.glade.h:11
+msgid "O_utput:"
+msgstr "ው_ጤት:"
+
+#: ../panel/panel-preferences-dialog.glade.h:12
+msgid "Span mo_nitors"
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:28
-#, fuzzy
-msgid "Select A Background Image"
-msgstr "ትዕዛዝ ምረጥ"
-
-#: ../panel/panel-preferences-dialog.glade.h:29
-msgid ""
-"Select this option to automatically increase the length of the panel if the "
-"plugins request more space."
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Select this option to extend the panel over multiple monitors."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:31
+#: ../panel/panel-preferences-dialog.glade.h:14
+msgid "_Lock panel"
+msgstr "ክፍል _መቆለፊያ"
+
+#: ../panel/panel-preferences-dialog.glade.h:15
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:32
+#: ../panel/panel-preferences-dialog.glade.h:16
+msgid "Automatically show and _hide the panel"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:17
 msgid ""
 "Select this option to hide the panel when the pointer is not above it. This "
 "only works when the panel is attached to a screen edge."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:33
-msgid "Show about information of the currently selected item"
+#: ../panel/panel-preferences-dialog.glade.h:18
+msgid "Don't _reserve space on borders"
+msgstr "በ ድንበሮች ላይ ክፍተት አታስ_ቀምጥ"
+
+#: ../panel/panel-preferences-dialog.glade.h:19
+msgid ""
+"Select this option if you want maximized windows to cover the area behind "
+"the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:20
+#: ../plugins/actions/actions-dialog.glade.h:6
+#: ../plugins/launcher/launcher-dialog.glade.h:19
+msgid "General"
+msgstr "ባጠቃላይ"
+
+#: ../panel/panel-preferences-dialog.glade.h:21
+msgid "Row _Size (pixels):"
+msgstr "የ ረድፍ _መጠን (ፒክስል):"
+
+#: ../panel/panel-preferences-dialog.glade.h:23
+#, no-c-format
+msgid "L_ength (%):"
+msgstr "እ_ርዝመት (%):"
+
+#: ../panel/panel-preferences-dialog.glade.h:24
+msgid "Num_ber of rows:"
+msgstr "የ ረድፎች _ቁጥር:"
+
+#: ../panel/panel-preferences-dialog.glade.h:25
+msgid "A_utomatically increase the length"
+msgstr "ራ_ሱ በራሱ እርዝመት መጨመሪያ"
+
+#: ../panel/panel-preferences-dialog.glade.h:26
+msgid ""
+"Select this option to automatically increase the length of the panel if the "
+"plugins request more space."
+msgstr ""
+
+#. I18N: name of the section (frame) in the panel preferences where the user
+#. can define the length and size of the panel
+#: ../panel/panel-preferences-dialog.glade.h:28
+msgid "Measurements"
+msgstr "መለኪያ"
+
+#: ../panel/panel-preferences-dialog.glade.h:29
+msgid "D_isplay"
+msgstr "ማ_ሳያ"
+
+#: ../panel/panel-preferences-dialog.glade.h:30
+#: ../plugins/separator/separator-dialog.glade.h:2
+msgid "_Style:"
+msgstr "_ዘዴ:"
+
+#: ../panel/panel-preferences-dialog.glade.h:31
+msgid "_Alpha:"
+msgstr "_አልፋ:"
+
+#: ../panel/panel-preferences-dialog.glade.h:32
+msgid ""
+"Alpha value of the panel background, with 0 being fully transparent and 100 "
+"fully opaque."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:33
+msgid "C_olor:"
+msgstr "ቀ_ለም:"
 
 #: ../panel/panel-preferences-dialog.glade.h:34
-msgid "Solid color"
-msgstr ""
+msgid "Pick a Panel Color"
+msgstr "የ ክፍል ቀለም ይምረጡ"
 
 #: ../panel/panel-preferences-dialog.glade.h:35
-#, fuzzy
-msgid "Span mo_nitors"
-msgstr "ሞኒቶሩን ሙላ"
+msgid "_File:"
+msgstr "_ፋይል:"
 
 #: ../panel/panel-preferences-dialog.glade.h:36
-msgid ""
-"Transparency when the pointer is hovering over the panel, with 0 being fully "
-"transparent and 100 fully opaque."
-msgstr ""
+msgid "Select A Background Image"
+msgstr "የ መደብ ምስል ይምረጡ"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
+msgid "Background"
+msgstr "መደብ"
+
+#. I18N: label for the enter transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:39
+msgid "_Enter:"
+msgstr "_ማስገቢያ:"
+
+#. I18N: label for the leave transparency slider
+#: ../panel/panel-preferences-dialog.glade.h:41
+msgid "_Leave:"
+msgstr "_መተው:"
+
+#: ../panel/panel-preferences-dialog.glade.h:42
+msgid ""
+"Transparency when the pointer is hovering over the panel, with 0 being fully"
+" transparent and 100 fully opaque."
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:43
 msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
 
-#: ../panel/panel-preferences-dialog.glade.h:38
-msgid "Vertical"
-msgstr "ሽቅብ"
-
-#: ../panel/panel-preferences-dialog.glade.h:39
-msgid "_Alpha:"
-msgstr ""
-
-#. I18N: label for the enter transparency slider
-#: ../panel/panel-preferences-dialog.glade.h:41
-msgid "_Enter:"
-msgstr ""
-
-#: ../panel/panel-preferences-dialog.glade.h:42
-msgid "_File:"
-msgstr ""
-
-#. I18N: label for the leave transparency slider
 #: ../panel/panel-preferences-dialog.glade.h:44
-#, fuzzy
-msgid "_Leave:"
-msgstr "ስም"
+msgid "Opacity"
+msgstr "በ ውስጡ የማያሳልፍ"
 
 #: ../panel/panel-preferences-dialog.glade.h:45
-msgid "_Lock panel"
+msgid ""
+"Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:46
-#, fuzzy
-msgid "_Orientation:"
-msgstr "አቅጣጫ፦"
+msgid "Appeara_nce"
+msgstr "አቀራ_ረብ"
 
 #: ../panel/panel-preferences-dialog.glade.h:47
-#, fuzzy
-msgid "_Size (pixels):"
-msgstr "መጠን (ፕክስሎች)፦"
+#: ../plugins/launcher/launcher-dialog.glade.h:13
+msgid "Move currently selected item up by one row"
+msgstr ""
 
 #: ../panel/panel-preferences-dialog.glade.h:48
-#: ../plugins/separator/separator-dialog.glade.h:8
-msgid "_Style:"
+#: ../plugins/launcher/launcher-dialog.glade.h:14
+msgid "Move currently selected item down by one row"
 msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:49
+msgid "Add new item to this panel"
+msgstr "አዲስ እቃ ወደ ክፍል መጨመሪያ"
+
+#: ../panel/panel-preferences-dialog.glade.h:50
+msgid "Remove currently selected item"
+msgstr "አሁን የ ተመረጠውን እቃ ማስወገጃ"
+
+#: ../panel/panel-preferences-dialog.glade.h:51
+#: ../plugins/launcher/launcher-dialog.glade.h:18
+msgid "Edit the currently selected item"
+msgstr "አሁን የ ተመረጠውን እቃ ማረሚያ"
+
+#: ../panel/panel-preferences-dialog.glade.h:52
+msgid "Show about information of the currently selected item"
+msgstr ""
+
+#: ../panel/panel-preferences-dialog.glade.h:53
+msgid "Ite_ms"
+msgstr "እቃ_ዎች"
 
 #: ../panel/panel-tic-tac-toe.c:123
 msgid "_New Game"
-msgstr ""
+msgstr "_አዲስ ጨዋታ"
 
 #: ../panel/panel-tic-tac-toe.c:134
-#, fuzzy
 msgid "_Level:"
-msgstr "ስም"
+msgstr "_ምልክት:"
 
 #: ../panel/panel-tic-tac-toe.c:140
 msgid "Novice"
-msgstr ""
+msgstr "አዲስ"
 
 #: ../panel/panel-tic-tac-toe.c:141
 msgid "Intermediate"
-msgstr ""
+msgstr "መካከለኛ"
 
 #: ../panel/panel-tic-tac-toe.c:142
 msgid "Experienced"
-msgstr ""
+msgstr "ብዙ ልምድ ያለው"
 
 #: ../panel/panel-tic-tac-toe.c:143
 msgid "Expert"
+msgstr "ባለሞያ "
+
+#: ../panel/panel-window.c:2390
+msgid "_Lock Panel"
+msgstr "ክፍል _መቆለፊያ"
+
+#: ../migrate/main.c:116
+msgid "Welcome to the first start of the panel"
 msgstr ""
 
-#: ../migrate/main.c:78
-#, fuzzy
-msgid "Welcome to the first start of the panel"
-msgstr "እቃዎችን ፓነል ላይ ጨምር"
-
-#: ../migrate/main.c:80
+#: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
 
-#: ../migrate/main.c:83
+#: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
 msgstr ""
 
-#: ../migrate/main.c:89
+#: ../migrate/main.c:129
 msgid "Migrate old config"
 msgstr ""
 
-#: ../migrate/main.c:90
-#, fuzzy
+#: ../migrate/main.c:130
 msgid "Migrate the old 4.6 configuration to Xfconf"
-msgstr "የማሳወቂያ መለዮን አሳይ"
+msgstr ""
 
-#: ../migrate/main.c:95
+#: ../migrate/main.c:141
 msgid "Use default config"
-msgstr ""
+msgstr "ነባር ማሰናጃ ይጠቀሙ"
 
-#: ../migrate/main.c:96
-#, fuzzy
+#: ../migrate/main.c:142
 msgid "Load the default configuration"
-msgstr "የማሳወቂያ መለዮን አሳይ"
+msgstr "ነባር ማሰናጃ መጫኛ"
 
-#: ../migrate/main.c:102
+#: ../migrate/main.c:148
 msgid "One empty panel"
-msgstr ""
+msgstr "አንድ ባዶ ቦታ"
 
-#: ../migrate/main.c:103
+#: ../migrate/main.c:149
 msgid "Start with one empty panel"
+msgstr "በ አንድ ባዶ ቦታ ማስጀመሪያ"
+
+#: ../migrate/main.c:160
+msgid "Failed to migrate the old panel configuration"
 msgstr ""
 
-#: ../migrate/main.c:115
-#, fuzzy
-msgid "Failed to migrate the old panel configuration"
-msgstr "የማሳወቂያ መለዮን አሳይ"
-
-#: ../migrate/main.c:125
-#, fuzzy
+#: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
-msgstr "የማሳወቂያ መለዮን አሳይ"
+msgstr ""
+
+#: ../migrate/main.c:185
+msgid "Panel config needs migration..."
+msgstr ""
+
+#: ../migrate/main.c:189
+msgid "Failed to migrate the existing configuration"
+msgstr ""
+
+#: ../migrate/main.c:195
+msgid "Panel configuration has been updated."
+msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.h:1
@@ -642,161 +663,258 @@ msgid "Action Buttons"
 msgstr "የተግባር አዝራር"
 
 #: ../plugins/actions/actions-dialog.glade.h:2
-#, fuzzy
-msgid "Button Actions"
-msgstr "የፓነል ተግባር"
+msgid "Appeara_nce:"
+msgstr "አቀራ_ረብ:"
 
 #: ../plugins/actions/actions-dialog.glade.h:3
-#, fuzzy
-msgid "_First button:"
-msgstr "የቀስት አዝራር_r"
+msgid "Invert buttons _orientation"
+msgstr ""
 
 #: ../plugins/actions/actions-dialog.glade.h:4
-#, fuzzy
-msgid "_Second button:"
-msgstr "የመለዩ አዝራር_I"
+msgid "_Show confirmation dialog"
+msgstr "የ ማረጋገጫ ንግግር _ማሳያ"
 
-#: ../plugins/actions/actions.c:108
-#, fuzzy
-msgid "Disabled"
-msgstr "በስራ ላይ አይደለም_D"
-
-#: ../plugins/actions/actions.c:109
-msgid "Log Out Dialog"
+#: ../plugins/actions/actions-dialog.glade.h:5
+msgid ""
+"Show a confirmation dialog with a 30 second timeout for some of the actions."
 msgstr ""
 
-#: ../plugins/actions/actions.c:110
+#: ../plugins/actions/actions-dialog.glade.h:7
+msgid "Visible"
+msgstr "የሚታይ"
+
+#: ../plugins/actions/actions-dialog.glade.h:8
+msgid "Action"
+msgstr "ተግባር"
+
+#: ../plugins/actions/actions-dialog.glade.h:9
+msgid "_Actions"
+msgstr "_ተግባሮች"
+
+#: ../plugins/actions/actions-dialog.glade.h:10
+msgid "Session Menu"
+msgstr "የ ክፍለ ጊዜ ዝርዝር"
+
+#: ../plugins/actions/actions.c:151
 msgid "Log Out"
-msgstr ""
+msgstr "መውጫ"
 
-#: ../plugins/actions/actions.c:111
-#, fuzzy
+#: ../plugins/actions/actions.c:152
+msgid "_Log Out"
+msgstr "_መውጫ"
+
+#: ../plugins/actions/actions.c:153
+msgid "Are you sure you want to log out?"
+msgstr "በ እርግጥ መውጣት ይፈልጋሉ?"
+
+#: ../plugins/actions/actions.c:154
+#, c-format
+msgid "Logging out in %d seconds."
+msgstr "በ መውጣት ላይ በ %d ሰከንዶች"
+
+#: ../plugins/actions/actions.c:159
+msgid "Log Out..."
+msgstr "መውጫ..."
+
+#: ../plugins/actions/actions.c:160
+msgid "Log _Out..."
+msgstr "መው_ጫ..."
+
+#: ../plugins/actions/actions.c:166
+msgid "Switch User"
+msgstr "ተጠቃሚ መቀየሪያ"
+
+#: ../plugins/actions/actions.c:167
+msgid "_Switch User"
+msgstr "ተጠቃሚ _መቀየሪያ"
+
+#: ../plugins/actions/actions.c:173
 msgid "Lock Screen"
-msgstr "ስክሪኑን ቆልፍ"
+msgstr "መመልከቻ መቆለፊያ"
 
-#: ../plugins/actions/actions.c:112
-msgid "Shut Down"
+#: ../plugins/actions/actions.c:174
+msgid "Loc_k Screen"
+msgstr "መመልከቻ መቆለፊ_ያ"
+
+#: ../plugins/actions/actions.c:180
+msgid "Hibernate"
+msgstr "ማስተኛ"
+
+#: ../plugins/actions/actions.c:181
+msgid "_Hibernate"
+msgstr "_ማስተኛ"
+
+#: ../plugins/actions/actions.c:182
+msgid "Do you want to suspend to disk?"
+msgstr "እርስዎ ዲስኩን ማገድ ይፈልጋሉ?"
+
+#: ../plugins/actions/actions.c:183
+#, c-format
+msgid "Hibernating computer in %d seconds."
 msgstr ""
 
-#: ../plugins/actions/actions.c:113
+#: ../plugins/actions/actions.c:188
+msgid "Suspend"
+msgstr "ማገጃ"
+
+#: ../plugins/actions/actions.c:189
+msgid "Sus_pend"
+msgstr "ማ_ገጃ"
+
+#: ../plugins/actions/actions.c:190
+msgid "Do you want to suspend to RAM?"
+msgstr "እርስዎ RAM ማገድ ይፈልጋሉ?"
+
+#: ../plugins/actions/actions.c:191
+#, c-format
+msgid "Suspending computer in %d seconds."
+msgstr ""
+
+#: ../plugins/actions/actions.c:196
 msgid "Restart"
 msgstr "እንደገና አስጀምር"
 
-#: ../plugins/actions/actions.c:114
-#, fuzzy
-msgid "Suspend"
-msgstr "ድምፅ"
+#: ../plugins/actions/actions.c:197
+msgid "_Restart"
+msgstr "እንደገና ማስጀመሪያ"
 
-#: ../plugins/actions/actions.c:115
-msgid "Hibernate"
-msgstr ""
+#: ../plugins/actions/actions.c:198
+msgid "Are you sure you want to restart?"
+msgstr "በ እርግጥ እንደገና ማስጀመር ይፈልጋሉ?"
+
+#: ../plugins/actions/actions.c:199
+#, c-format
+msgid "Restarting computer in %d seconds."
+msgstr "ኮምፒዩተሩን እንደገና በማስጀመር ላይ በ %d ሰከንዶች"
+
+#: ../plugins/actions/actions.c:204
+msgid "Shut Down"
+msgstr "ማጥፊያ"
+
+#: ../plugins/actions/actions.c:205
+msgid "Shut _Down"
+msgstr "_ማጥፊያ"
+
+#: ../plugins/actions/actions.c:206
+msgid "Are you sure you want to shut down?"
+msgstr "በ እርግጥ ማጥፋት ይፈልጋሉ?"
+
+#: ../plugins/actions/actions.c:207
+#, c-format
+msgid "Turning off computer in %d seconds."
+msgstr "ኮምፒዩተሩን ማጥፋት ይፈልጋሉ በ %d ሰከንዶች"
+
+#: ../plugins/actions/actions.c:620
+#: ../plugins/separator/separator-dialog.glade.h:1
+#: ../plugins/separator/separator.desktop.in.h:1
+msgid "Separator"
+msgstr "መለያያ"
+
+#: ../plugins/actions/actions.c:975
+#, c-format
+msgid "Failed to run action \"%s\""
+msgstr "ተግባሩን ማስኬድ አልተቻለም \"%s\""
+
+#: ../plugins/actions/actions.c:1142
+msgid "John Doe"
+msgstr "ጆንዶ"
 
 #: ../plugins/actions/actions.desktop.in.h:2
-#, fuzzy
 msgid "Log out, lock or other system actions"
-msgstr "ሎግውጣ ውይም ስክሪኑን ቆልፍ"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
-#: ../plugins/clock/clock-dialog.glade.h:3
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
-#: ../plugins/pager/pager-dialog.glade.h:1
-#: ../plugins/separator/separator-dialog.glade.h:1
-#: ../plugins/systray/systray-dialog.glade.h:1
-#: ../plugins/tasklist/tasklist-dialog.glade.h:2
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
-msgid "Appearance"
-msgstr "አቀራረብ"
+msgstr ""
 
 #. I18N: default tooltip of the application menu
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:1
 #: ../plugins/applicationsmenu/applicationsmenu.c:38
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:1
-#, fuzzy
 msgid "Applications Menu"
-msgstr "የፕሮግራም መለዮን አሳይ _p"
+msgstr "የ መተግበሪያ ዝርዝር"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+msgid "Show generic application n_ames"
+msgstr ""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
-#, fuzzy
-msgid "Button _title:"
-msgstr "የፓነል ተግባር"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
-msgid "Ed_it Menu"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
-msgid "Menu File"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
-msgid "Menu _file:"
-msgstr ""
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
-#, fuzzy
-msgid "Select A Menu File"
-msgstr "ትዕዛዝ ምረጥ"
-
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid ""
 "Select this option to show the generic application name in the menu, for "
 "example \"File Manager\" instead of \"Thunar\""
 msgstr ""
 
-#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:4
+msgid "Show ic_ons in menu"
+msgstr "በ ዝርዝር ውስጥ ምል_ክት ማሳያ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:5
+msgid "_Show button title"
+msgstr "የ ቁልፍ አርእስት _ማሳያ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:6
+msgid "Button _title:"
+msgstr "የ _አርእስት ቁልፍ"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
+msgid "_Icon:"
+msgstr "_ምልክት:"
+
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:8
 msgid "Show application d_escription in tooltip"
 msgstr ""
 
+#: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
+#: ../plugins/pager/pager-dialog.glade.h:6
+#: ../plugins/separator/separator-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:4
+#: ../plugins/tasklist/tasklist-dialog.glade.h:6
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
+msgid "Appearance"
+msgstr "አቀራረብ"
+
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:10
-#, fuzzy
-msgid "Show generic application n_ames"
-msgstr "የፕሮግራም መለዮን አሳይ _p"
+msgid "Use the _default menu"
+msgstr "_ነባር ዝርዝር ይጠቀሙ"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-msgid "Show ic_ons in menu"
-msgstr ""
+msgid "Ed_it Menu"
+msgstr "ዝርዝር ማረ_ሚያ"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:12
 msgid "Use c_ustom menu file:"
-msgstr ""
+msgstr "ዝርዝር የ ፋይል ማ_ስተካከያ ይጠቀሙ"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:13
-msgid "Use the _default menu"
-msgstr ""
+msgid "Menu _file:"
+msgstr "የ ዝርዝር _ፋይል:"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:14
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
-#, fuzzy
-msgid "_Icon:"
-msgstr "የመለዮ ሳጥን"
+msgid "Select A Menu File"
+msgstr "የ ዝርዝር ፋይል ይምረጡ"
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:15
-#, fuzzy
-msgid "_Show button title"
-msgstr "የፕሮግራም ስሞችን አሳይ _n"
+msgid "Menu File"
+msgstr "የ ዝርዝር ፋይል"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:475
-#: ../plugins/directorymenu/directorymenu.c:369
-#, fuzzy
+#: ../plugins/applicationsmenu/applicationsmenu.c:565
+#: ../plugins/directorymenu/directorymenu.c:388
 msgid "Select An Icon"
-msgstr "ትዕዛዝ ምረጥ"
+msgstr "ምልክት ይምረጡ"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:513
-#: ../plugins/applicationsmenu/applicationsmenu.c:754
-#: ../plugins/launcher/launcher.c:2264
-#, fuzzy, c-format
+#: ../plugins/applicationsmenu/applicationsmenu.c:603
+#: ../plugins/applicationsmenu/applicationsmenu.c:844
+#: ../plugins/launcher/launcher.c:2308
+#, c-format
 msgid "Failed to execute command \"%s\"."
-msgstr "\"%s\"ን ማስኬድ አልተቻለም"
+msgstr "ትእዛዝ መፈጸም አልተቻለም \"%s\"."
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1010
-#, fuzzy
+#: ../plugins/applicationsmenu/applicationsmenu.c:1113
 msgid "No applications found"
-msgstr "የፕሮግራም መለዮን አሳይ _p"
+msgstr "ምንም መተግበሪያ አልተገኘም"
 
-#: ../plugins/applicationsmenu/applicationsmenu.c:1033
-#, fuzzy
+#: ../plugins/applicationsmenu/applicationsmenu.c:1136
 msgid "Failed to load the applications menu"
-msgstr "\"%s\"ን ማስኬድ አልተቻለም"
+msgstr "የ መተግበሪያ ዝርዝር መጫን አልተቻለም"
 
 #: ../plugins/applicationsmenu/applicationsmenu.desktop.in.h:2
 msgid "Show a menu containing categories of installed applications"
@@ -806,20 +924,19 @@ msgstr ""
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:27
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:27
 msgid "Usage:"
-msgstr ""
+msgstr "አጠቃቀም:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:28
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:28
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:28
 msgid "OPTION"
-msgstr ""
+msgstr "ምርጫ"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:30
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:30
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:30
-#, fuzzy
 msgid "Options:"
-msgstr "የሰዓት ምርጫዎች"
+msgstr "ምርጫ:"
 
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:31
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:31
@@ -830,214 +947,208 @@ msgstr ""
 #: ../plugins/applicationsmenu/xfce4-popup-applicationsmenu.sh:32
 #: ../plugins/directorymenu/xfce4-popup-directorymenu.sh:32
 #: ../plugins/windowmenu/xfce4-popup-windowmenu.sh:32
-#, fuzzy
 msgid "Show help options"
-msgstr "ፍላት አዝራሮችን ተጠቀም"
+msgstr "የ እርዳታ ምርጫዎች ማሳያ"
 
 #: ../plugins/clock/clock.c:146
 msgid "Week %V"
-msgstr ""
+msgstr "ሳምንት %V"
 
 #: ../plugins/clock/clock.c:407
 msgid "Failed to execute clock command"
 msgstr ""
 
-#: ../plugins/clock/clock.c:719
+#: ../plugins/clock/clock.c:729
 msgid "Custom Format"
-msgstr ""
+msgstr "አቀራረብ ማስተካከያ"
 
 #: ../plugins/clock/clock-dialog.glade.h:1
-#, fuzzy
-msgid "24-_hour clock"
-msgstr "በ24-_ስዓት ቁጠር"
-
-#: ../plugins/clock/clock-dialog.glade.h:2
-msgid "Analog"
-msgstr "አናሎግ"
-
-#: ../plugins/clock/clock-dialog.glade.h:4
-msgid "Binary"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:5
 #: ../plugins/clock/clock.desktop.in.h:1
 msgid "Clock"
 msgstr "ስዓት"
 
-#: ../plugins/clock/clock-dialog.glade.h:6
-msgid "Clock Options"
-msgstr "የሰዓት ምርጫዎች"
-
-#: ../plugins/clock/clock-dialog.glade.h:7
-msgid "Digital"
-msgstr "ዲጂታል"
-
-#: ../plugins/clock/clock-dialog.glade.h:8
-#, fuzzy
-msgid "Display _seconds"
-msgstr "ሰከንድ አሳይ"
-
-#: ../plugins/clock/clock-dialog.glade.h:9
-msgid "F_ormat:"
-msgstr ""
-
-#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15 or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:11
-msgid "F_uzziness:"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:12
-msgid "Fl_ash time separators"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:13
-msgid "Fuzzy"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:14
-#, fuzzy
-msgid "LCD"
-msgstr "መብራት"
-
-#: ../plugins/clock/clock-dialog.glade.h:15
-#, fuzzy
-msgid "Sho_w AM/PM"
-msgstr "AM/PMን አሳይ"
-
-#: ../plugins/clock/clock-dialog.glade.h:16
-#: ../plugins/systray/systray-dialog.glade.h:5
-msgid "Show _frame"
-msgstr "ፍሬምን አሳይ _f"
-
-#: ../plugins/clock/clock-dialog.glade.h:17
-msgid "Show _inactive dots"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:18
-#, fuzzy
-msgid "Show gri_d"
-msgstr "ፍሬምን አሳይ _f"
-
-#: ../plugins/clock/clock-dialog.glade.h:20
-#, no-c-format
-msgid ""
-"The format describes the date and time parts to insert into the file name. "
-"For example, %Y will be substituted with the year, %m with the month and %d "
-"with the day. See the documentation of the date utility for additional "
-"information."
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:21
-msgid "True _binary clock"
-msgstr ""
-
-#: ../plugins/clock/clock-dialog.glade.h:22
+#: ../plugins/clock/clock-dialog.glade.h:2
 msgid "_Layout:"
-msgstr ""
+msgstr "_እቅድ:"
 
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:3
 msgid "_Tooltip format:"
 msgstr ""
 
+#: ../plugins/clock/clock-dialog.glade.h:4
+#: ../plugins/systray/systray-dialog.glade.h:3
+msgid "Show _frame"
+msgstr "ፍሬምን አሳይ _f"
+
+#: ../plugins/clock/clock-dialog.glade.h:6
+#, no-c-format
+msgid ""
+"The format describes the date and time parts to insert into the panel. For "
+"example, %Y will be substituted with the year, %m with the month and %d with"
+" the day. See the documentation of the date utility for additional "
+"information."
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:8
+msgid "Display _seconds"
+msgstr "_ሰከንዶች ማሳያ"
+
+#: ../plugins/clock/clock-dialog.glade.h:9
+msgid "True _binary clock"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:10
+msgid "24-_hour clock"
+msgstr "24-_ሰአት አቆጣጠር"
+
+#: ../plugins/clock/clock-dialog.glade.h:11
+msgid "Fl_ash time separators"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:12
+msgid "Sho_w AM/PM"
+msgstr "ጠዋት/ከሰአት ማሳ_ያ"
+
+#: ../plugins/clock/clock-dialog.glade.h:13
+msgid "F_ormat:"
+msgstr "አ_ቀራረብ:"
+
+#. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
+#. or parts of the day.
+#: ../plugins/clock/clock-dialog.glade.h:15
+msgid "F_uzziness:"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:16
+msgid "Show _inactive dots"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.glade.h:17
+msgid "Show gri_d"
+msgstr "መጋጠሚ_ያ ማሳያ"
+
+#: ../plugins/clock/clock-dialog.glade.h:18
+msgid "Clock Options"
+msgstr "የሰዓት ምርጫዎች"
+
+#: ../plugins/clock/clock-dialog.glade.h:19
+msgid "Analog"
+msgstr "አናሎግ"
+
+#: ../plugins/clock/clock-dialog.glade.h:20
+msgid "Binary"
+msgstr "ባይነሪ"
+
+#: ../plugins/clock/clock-dialog.glade.h:21
+msgid "Digital"
+msgstr "ዲጂታል"
+
+#: ../plugins/clock/clock-dialog.glade.h:22
+msgid "Fuzzy"
+msgstr "Fuzzy"
+
+#: ../plugins/clock/clock-dialog.glade.h:23
+msgid "LCD"
+msgstr "LCD"
+
 #: ../plugins/clock/clock-fuzzy.c:86
-#, fuzzy
 msgid "Night"
-msgstr "ቀኝ"
+msgstr "ማታ"
 
 #: ../plugins/clock/clock-fuzzy.c:87
 msgid "Early morning"
-msgstr ""
+msgstr "ጠዋት"
 
 #: ../plugins/clock/clock-fuzzy.c:88
 msgid "Morning"
-msgstr ""
+msgstr "ጠዋት"
 
 #: ../plugins/clock/clock-fuzzy.c:89
 msgid "Almost noon"
-msgstr ""
+msgstr "እኩለ ቀን"
 
 #: ../plugins/clock/clock-fuzzy.c:90
 msgid "Noon"
-msgstr ""
+msgstr "ቀትር"
 
 #: ../plugins/clock/clock-fuzzy.c:91
 msgid "Afternoon"
-msgstr ""
+msgstr "ከሰአት በኋላ"
 
 #: ../plugins/clock/clock-fuzzy.c:92
 msgid "Evening"
-msgstr ""
+msgstr "ምሽት"
 
 #: ../plugins/clock/clock-fuzzy.c:93
 msgid "Late evening"
-msgstr ""
+msgstr "በጣም ምሽት"
 
 #. I18N: %0 will be replaced with the preceding hour, %1 with
 #. * the comming hour
 #: ../plugins/clock/clock-fuzzy.c:100
 #, no-c-format
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0 ሰአት"
 
 #: ../plugins/clock/clock-fuzzy.c:101
 #, no-c-format
 msgid "five past %0"
-msgstr ""
+msgstr "ከ አምስት %0"
 
 #: ../plugins/clock/clock-fuzzy.c:102
 #, no-c-format
 msgid "ten past %0"
-msgstr ""
+msgstr "ከ አስር %0"
 
 #: ../plugins/clock/clock-fuzzy.c:103
 #, no-c-format
 msgid "quarter past %0"
-msgstr ""
+msgstr "ከ ሩብ %0"
 
 #: ../plugins/clock/clock-fuzzy.c:104
 #, no-c-format
 msgid "twenty past %0"
-msgstr ""
+msgstr "ከ ሀያ %0"
 
 #: ../plugins/clock/clock-fuzzy.c:105
 #, no-c-format
 msgid "twenty five past %0"
-msgstr ""
+msgstr "ከ ሀያ አምስት %0"
 
 #: ../plugins/clock/clock-fuzzy.c:106
 #, no-c-format
 msgid "half past %0"
-msgstr ""
+msgstr "ተኩል %0"
 
 #: ../plugins/clock/clock-fuzzy.c:107
 #, no-c-format
 msgid "twenty five to %1"
-msgstr ""
+msgstr "ሀያ አምስት ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:108
 #, no-c-format
 msgid "twenty to %1"
-msgstr ""
+msgstr "ሀያ ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:109
 #, no-c-format
 msgid "quarter to %1"
-msgstr ""
+msgstr "ሩብ ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:110
 #, no-c-format
 msgid "ten to %1"
-msgstr ""
+msgstr "አስር ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:111
 #, no-c-format
 msgid "five to %1"
-msgstr ""
+msgstr "አምስት ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:112
 #, no-c-format
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1 ሰአት"
 
 #. I18N: some languages have a singular form for the first hour,
 #. * other languages should just use the same strings as above
@@ -1045,269 +1156,276 @@ msgstr ""
 #, no-c-format
 msgctxt "one"
 msgid "%0 o'clock"
-msgstr ""
+msgstr "%0 ሰአት"
 
 #: ../plugins/clock/clock-fuzzy.c:120
 #, no-c-format
 msgctxt "one"
 msgid "five past %0"
-msgstr ""
+msgstr "ከ አምስት %0"
 
 #: ../plugins/clock/clock-fuzzy.c:121
 #, no-c-format
 msgctxt "one"
 msgid "ten past %0"
-msgstr ""
+msgstr "ከ አስር %0"
 
 #: ../plugins/clock/clock-fuzzy.c:122
 #, no-c-format
 msgctxt "one"
 msgid "quarter past %0"
-msgstr ""
+msgstr "ከ ሩብ %0"
 
 #: ../plugins/clock/clock-fuzzy.c:123
 #, no-c-format
 msgctxt "one"
 msgid "twenty past %0"
-msgstr ""
+msgstr "ከ ሀያ %0"
 
 #: ../plugins/clock/clock-fuzzy.c:124
 #, no-c-format
 msgctxt "one"
 msgid "twenty five past %0"
-msgstr ""
+msgstr "ከ ሀያ አምስት %0"
 
 #: ../plugins/clock/clock-fuzzy.c:125
 #, no-c-format
 msgctxt "one"
 msgid "half past %0"
-msgstr ""
+msgstr "ተኩል %0"
 
 #: ../plugins/clock/clock-fuzzy.c:126
 #, no-c-format
 msgctxt "one"
 msgid "twenty five to %1"
-msgstr ""
+msgstr "ሀያ አምስት ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:127
 #, no-c-format
 msgctxt "one"
 msgid "twenty to %1"
-msgstr ""
+msgstr "ሀያ ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:128
 #, no-c-format
 msgctxt "one"
 msgid "quarter to %1"
-msgstr ""
+msgstr "ሩብ ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:129
 #, no-c-format
 msgctxt "one"
 msgid "ten to %1"
-msgstr ""
+msgstr "አስር ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:130
 #, no-c-format
 msgctxt "one"
 msgid "five to %1"
-msgstr ""
+msgstr "አምስት ጉዳይ ለ %1"
 
 #: ../plugins/clock/clock-fuzzy.c:131
 #, no-c-format
 msgctxt "one"
 msgid "%1 o'clock"
-msgstr ""
+msgstr "%1 ሰአት"
 
 #: ../plugins/clock/clock-fuzzy.c:136
 msgid "one"
-msgstr ""
+msgstr "አንድ"
 
 #: ../plugins/clock/clock-fuzzy.c:137
-#, fuzzy
 msgid "two"
-msgstr "አውታር"
+msgstr "ሁለት"
 
 #: ../plugins/clock/clock-fuzzy.c:138
 msgid "three"
-msgstr ""
+msgstr "ሶስት"
 
 #: ../plugins/clock/clock-fuzzy.c:139
 msgid "four"
-msgstr ""
+msgstr "አራት "
 
 #: ../plugins/clock/clock-fuzzy.c:140
-#, fuzzy
 msgid "five"
-msgstr "ቢሮ"
+msgstr "አምስት"
 
 #: ../plugins/clock/clock-fuzzy.c:141
 msgid "six"
-msgstr ""
+msgstr "ስድስት"
 
 #: ../plugins/clock/clock-fuzzy.c:142
 msgid "seven"
-msgstr ""
+msgstr "ሰባት"
 
 #: ../plugins/clock/clock-fuzzy.c:143
-#, fuzzy
 msgid "eight"
-msgstr "ቀኝ"
+msgstr "ስምንት"
 
 #: ../plugins/clock/clock-fuzzy.c:144
 msgid "nine"
-msgstr ""
+msgstr "ዘጠኝ"
 
 #: ../plugins/clock/clock-fuzzy.c:145
 msgid "ten"
-msgstr ""
+msgstr "አስር"
 
 #: ../plugins/clock/clock-fuzzy.c:146
 msgid "eleven"
-msgstr ""
+msgstr "አስራ አንድ"
 
 #: ../plugins/clock/clock-fuzzy.c:147
 msgid "twelve"
-msgstr ""
+msgstr "አስራ ሁለት"
 
 #: ../plugins/clock/clock.desktop.in.h:2
 msgid "What time is it?"
 msgstr "ስዓት ስንት ነው?"
 
-#: ../plugins/directorymenu/directorymenu.c:550
-#, fuzzy, c-format
-msgid "Failed to launch application \"%s\""
-msgstr "\"%s\"ን ማስኬድ አልተቻለም"
+#: ../plugins/directorymenu/directorymenu.c:246
+#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:1
+msgid "Directory Menu"
+msgstr "የ ዳይሬክቶሪ ዝርዝር"
 
-#: ../plugins/directorymenu/directorymenu.c:581
+#: ../plugins/directorymenu/directorymenu.c:569
+#, c-format
+msgid "Failed to launch application \"%s\""
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu.c:600
 #, c-format
 msgid "Failed to query content type for \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:590
+#: ../plugins/directorymenu/directorymenu.c:609
 #, c-format
 msgid "No default application found for \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:605
-#, fuzzy, c-format
+#: ../plugins/directorymenu/directorymenu.c:624
+#, c-format
 msgid "Failed to launch default application for \"%s\""
-msgstr "\"%s\"ን ማስኬድ አልተቻለም"
+msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:696
+#: ../plugins/directorymenu/directorymenu.c:716
 #, c-format
 msgid "Failed to execute the preferred application for category \"%s\""
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu.c:769
+#: ../plugins/directorymenu/directorymenu.c:789
 msgid "Open Folder"
-msgstr ""
+msgstr "ፎልደር መክፈቻ"
 
-#: ../plugins/directorymenu/directorymenu.c:780
-#, fuzzy
+#: ../plugins/directorymenu/directorymenu.c:800
 msgid "Open in Terminal"
-msgstr "በተርሚናል ላይ አስኪድ_t"
-
-#: ../plugins/directorymenu/directorymenu.desktop.in.h:1
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
-msgid "Directory Menu"
-msgstr ""
+msgstr "በ ተርሚናል ውስጥ መክፈቻ"
 
 #: ../plugins/directorymenu/directorymenu.desktop.in.h:2
 msgid "Show a directory tree in a menu"
-msgstr ""
+msgstr "በ ዝርዝር ውስጥ የ ዳይሬክቶሪ ዛፍ ማሳያ"
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
+msgid "Select A Directory"
+msgstr "ዳይሬክቶሪ ይምረጡ"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
+msgid "_Base Directory:"
+msgstr ""
+
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
 msgid ""
 "Enter a list of patterns that will be used to determine which files are "
 "visible in a directory. If you specify more than one pattern here, the list "
 "items must be separated with semicolons (e.g. *.txt;*.doc)."
 msgstr ""
 
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:4
-#: ../plugins/tasklist/tasklist-dialog.glade.h:5
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
-msgid "Filtering"
-msgstr ""
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:5
-#, fuzzy
-msgid "Select A Directory"
-msgstr "ትዕዛዝ ምረጥ"
-
-#: ../plugins/directorymenu/directorymenu-dialog.glade.h:6
-#, fuzzy
-msgid "Show _hidden files"
-msgstr "ፍሬምን አሳይ _f"
-
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
-msgid "_Base Directory:"
-msgstr ""
+msgid "_File Pattern:"
+msgstr "የ _ፋይል ንድፍ:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
-msgid "_File Pattern:"
-msgstr ""
+msgid "Show _hidden files"
+msgstr "የ _ተደበቁ ፋይሎች ማሳያ"
 
-#: ../plugins/launcher/launcher.c:1555
-#, fuzzy
+#: ../plugins/directorymenu/directorymenu-dialog.glade.h:9
+#: ../plugins/tasklist/tasklist-dialog.glade.h:15
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
+msgid "Filtering"
+msgstr "በ ማጣራት ላይ"
+
+#: ../plugins/launcher/launcher.c:405
+msgid "Open launcher menu"
+msgstr "ዝርዝር ማስጀመሪያ መክፈቻ"
+
+#: ../plugins/launcher/launcher.c:1575
 msgid "Unnamed Item"
-msgstr "አዲስ ዕቃ"
+msgstr "የማይታወቅ እቃ"
 
-#: ../plugins/launcher/launcher.c:1696
-#, fuzzy
+#: ../plugins/launcher/launcher.c:1728
 msgid "No items"
-msgstr "አዲስ ዕቃ"
+msgstr "ምንም እቃ የለም"
 
-#: ../plugins/launcher/launcher-dialog.c:740
-msgid "If you delete an item, it will be permanently removed"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.c:741
-#, fuzzy, c-format
-msgid "Are you sure you want to remove \"%s\"?"
-msgstr "የስራ ገበታ '%s'ን ለመሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?"
-
-#: ../plugins/launcher/launcher-dialog.c:742
-msgid "Unnamed item"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.c:787
+#: ../plugins/launcher/launcher-dialog.c:798
 msgid "Failed to open desktop item editor"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:2
-#, fuzzy
-msgid "Add a new empty item"
-msgstr "አዲስ ዕቃ ጨምር"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:3
-msgid "Add one or more existing items to the launcher"
+#: ../plugins/launcher/launcher-dialog.c:857
+msgid "If you delete an item, it will be permanently removed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:4
-msgid "Advanced"
+#: ../plugins/launcher/launcher-dialog.c:858
+#, c-format
+msgid "Are you sure you want to remove \"%s\"?"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.glade.h:5
+#: ../plugins/launcher/launcher-dialog.c:859
+msgid "Unnamed item"
+msgstr "ያልተሰየመ እቃ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Default"
 msgstr "ቀዳሚ"
 
+#: ../plugins/launcher/launcher-dialog.glade.h:2
+msgid "North"
+msgstr "ሰሜን"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:3
+msgid "West"
+msgstr "ምእራብ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:4
+msgid "East"
+msgstr "ምስራቅ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:5
+msgid "South"
+msgstr "ደቡብ"
+
 #: ../plugins/launcher/launcher-dialog.glade.h:6
-msgid "Delete the currently selected item"
-msgstr ""
+msgid "Inside Button"
+msgstr "የ ውስጥ ቁልፍ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
-msgid "Disable t_ooltips"
-msgstr ""
+msgid "_Edit Item"
+msgstr "_እቃ ማረሚያ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
-msgid "East"
-msgstr ""
+msgid "D_elete Item"
+msgstr "እቃ _ማጥፊያ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:9
+msgid "Add Appli_cation"
+msgstr "መተግ_በሪያ መጨመሪያ"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:10
+msgid "New _Application"
+msgstr "አዲስ _መተግበሪያ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
-#, fuzzy
-msgid "Inside Button"
-msgstr "የመለዩ አዝራር_I"
+msgid "New _Link"
+msgstr "አዲስ _አገናኝ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.h:1
@@ -1315,69 +1433,76 @@ msgid "Launcher"
 msgstr "አስነሽ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:15
-msgid "North"
+msgid "Add one or more existing items to the launcher"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:16
-msgid ""
-"Select this option to disable the tooltips when moving over the panel button "
-"or menu items."
-msgstr ""
+msgid "Add a new empty item"
+msgstr "አዲስ ባዶ እቃ መጨመሪያ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:17
-msgid "Select this option to move the clicked menu item to the panel."
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.glade.h:18
-#, fuzzy
-msgid "Show _label instead of icon"
-msgstr "የፕሮግራም መለዮን አሳይ _p"
-
-#: ../plugins/launcher/launcher-dialog.glade.h:19
-msgid "Show last _used item in panel"
-msgstr ""
+msgid "Delete the currently selected item"
+msgstr "አሁን የ ተመረጠውን እቃ ማጥፊያ"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:20
-#, fuzzy
-msgid "South"
-msgstr "ስለ"
+msgid "Disable t_ooltips"
+msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:21
-msgid "West"
+msgid ""
+"Select this option to disable the tooltips when moving over the panel button"
+" or menu items."
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
-#, fuzzy
+msgid "Show _label instead of icon"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:23
+msgid "Show last _used item in panel"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:24
+msgid "Select this option to move the clicked menu item to the panel."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
-msgstr "የቀስት አዝራር_r"
+msgstr "የ _ቀስት ቁልፍ ቦታ:"
+
+#: ../plugins/launcher/launcher-dialog.glade.h:26
+msgid "Advanced"
+msgstr "የ ረቀቀ"
 
 #: ../plugins/launcher/launcher.desktop.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "የምርጫ ምናሌ ያለው የፕሮግራም ማስነሻ"
 
-#: ../plugins/pager/pager.c:354 ../plugins/pager/pager-dialog.glade.h:8
-#, fuzzy
+#: ../plugins/pager/pager.c:370 ../plugins/pager/pager-dialog.glade.h:5
 msgid "Workspace _Settings..."
-msgstr "የስራ ቦታ %d"
+msgstr "የ ስራ ቦታ ማሰናጃ..."
 
-#: ../plugins/pager/pager.c:429
+#: ../plugins/pager/pager.c:461
 msgid "Unable to open the workspace settings"
 msgstr ""
 
-#: ../plugins/pager/pager-buttons.c:555 ../plugins/windowmenu/windowmenu.c:854
+#: ../plugins/pager/pager-buttons.c:579 ../plugins/windowmenu/windowmenu.c:857
 #, c-format
 msgid "Workspace %d"
 msgstr "የስራ ቦታ %d"
 
+#: ../plugins/pager/pager-dialog.glade.h:1
+#: ../plugins/pager/pager.desktop.in.h:1
+msgid "Workspace Switcher"
+msgstr "የ ስራ ቦታ መቀየሪያ"
+
 #: ../plugins/pager/pager-dialog.glade.h:2
-#: ../plugins/tasklist/tasklist-dialog.glade.h:3
-msgid "Behaviour"
-msgstr ""
+msgid "Number of _rows:"
+msgstr "የ _ረድፎች ቁጥር:"
 
 #: ../plugins/pager/pager-dialog.glade.h:3
-#, fuzzy
-msgid "Number of _rows:"
-msgstr " የአግድም ቁጥር፦"
+msgid "Show mi_niature view"
+msgstr ""
 
 #: ../plugins/pager/pager-dialog.glade.h:4
 msgid ""
@@ -1385,335 +1510,265 @@ msgid ""
 "windows"
 msgstr ""
 
-#: ../plugins/pager/pager-dialog.glade.h:5
-msgid "Show mi_niature view"
+#: ../plugins/pager/pager-dialog.glade.h:7
+msgid "Switch workspaces using the mouse _wheel"
 msgstr ""
 
-#: ../plugins/pager/pager-dialog.glade.h:6
-#, fuzzy
-msgid "Switch workspaces using the mouse _wheel"
-msgstr "የአይጥ መዘውርን በመጠቀም የስራ ገበታን ቀይር"
+#: ../plugins/pager/pager-dialog.glade.h:8
+#: ../plugins/tasklist/tasklist-dialog.glade.h:11
+msgid "Behaviour"
+msgstr "ባህሪ"
 
-#: ../plugins/pager/pager-dialog.glade.h:7
 #: ../plugins/pager/pager.desktop.in.h:2
-#, fuzzy
-msgid "Workspace Switcher"
-msgstr "የስራ ቦታ %d"
-
-#: ../plugins/pager/pager.desktop.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "የሁሉም መሳይ ገበታዎች ደቂቅ እይታ"
-
-#: ../plugins/separator/separator-dialog.glade.h:2
-msgid "Dots"
 msgstr ""
 
 #: ../plugins/separator/separator-dialog.glade.h:3
-#, fuzzy
-msgid "Handle"
-msgstr "ድርጊት፦"
-
-#: ../plugins/separator/separator-dialog.glade.h:4
-#, fuzzy
-msgid "New Line"
-msgstr "አዲስ ፓነል"
-
-#: ../plugins/separator/separator-dialog.glade.h:5
-#: ../plugins/separator/separator.desktop.in.h:2
-#, fuzzy
-msgid "Separator"
-msgstr "ከፋይ ወይም ክፍት ቦታ"
-
-#: ../plugins/separator/separator-dialog.glade.h:6
-#, fuzzy
-msgid "Transparent"
-msgstr "ውስታይነት (%)፦"
-
-#: ../plugins/separator/separator-dialog.glade.h:7
 msgid "_Expand"
 msgstr "አስፋ_E"
 
-#: ../plugins/separator/separator.desktop.in.h:1
-#, fuzzy
+#: ../plugins/separator/separator-dialog.glade.h:5
+msgid "Transparent"
+msgstr "ግልጽ"
+
+#: ../plugins/separator/separator-dialog.glade.h:6
+msgid "Handle"
+msgstr ""
+
+#: ../plugins/separator/separator-dialog.glade.h:7
+msgid "Dots"
+msgstr "ነጥብ"
+
+#: ../plugins/separator/separator.desktop.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr "በፓነል ዕቃዎች መሃከል መስመር ወይም ቦታን ይጨምራል"
+msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:193
-#, fuzzy
+#: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
-msgstr "የተደበቀ መስኮትን መልስ"
+msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:194
-#, fuzzy
+#: ../plugins/showdesktop/showdesktop.c:212
 msgid "Minimize all open windows and show the desktop"
-msgstr "መስኮቶችን ደብቀህ ገበታን አሳይ"
+msgstr ""
 
+#: ../plugins/showdesktop/showdesktop.c:215
 #: ../plugins/showdesktop/showdesktop.desktop.in.h:1
-#, fuzzy
-msgid "Hide all windows and show the desktop"
-msgstr "መስኮቶችን ደብቀህ ገበታን አሳይ"
-
-#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
 msgid "Show Desktop"
 msgstr "ደስኩን አሳይ"
 
-#: ../plugins/systray/systray.c:382
-#, fuzzy
+#: ../plugins/showdesktop/showdesktop.desktop.in.h:2
+msgid "Hide all windows and show the desktop"
+msgstr ""
+
+#: ../plugins/systray/systray.c:398
 msgid "Unable to start the notification area"
-msgstr "አስቸኳይ ማስታወቂያ"
+msgstr ""
 
 #. create fake error and show it
-#: ../plugins/systray/systray.c:850
+#: ../plugins/systray/systray.c:868
 msgid ""
 "Most likely another widget took over the function of a notification area. "
 "This area will be unused."
 msgstr ""
 
-#: ../plugins/systray/systray.c:852
-#, fuzzy
+#: ../plugins/systray/systray.c:870
 msgid "The notification area lost selection"
-msgstr "በዚህ ስክሪን ላይ የስርዓት ትሪ ከበፊቱም አለ"
+msgstr ""
 
-#: ../plugins/systray/systray.c:1005
-#, fuzzy
+#: ../plugins/systray/systray.c:1023
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "የስራ ገበታ '%s'ን ለመሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?"
+msgstr ""
+
+#: ../plugins/systray/systray-dialog.glade.h:1
+#: ../plugins/systray/systray.desktop.in.h:1
+msgid "Notification Area"
+msgstr "የ ማስታወቂያ ቦታ"
 
 #: ../plugins/systray/systray-dialog.glade.h:2
-#, fuzzy
-msgid "C_lear Known Applications"
-msgstr "የተግባር አይነትን ይምረጡ"
-
-#: ../plugins/systray/systray-dialog.glade.h:3
-#, fuzzy
-msgid "Known Applications"
-msgstr "የፕሮግራም መለዮን አሳይ _p"
-
-#: ../plugins/systray/systray-dialog.glade.h:4
-#: ../plugins/systray/systray.desktop.in.h:2
-#, fuzzy
-msgid "Notification Area"
-msgstr "አስቸኳይ ማስታወቂያ"
-
-#: ../plugins/systray/systray-dialog.glade.h:6
 msgid "_Maximum icon size (px):"
 msgstr ""
 
-#: ../plugins/systray/systray-manager.c:406
+#: ../plugins/systray/systray-dialog.glade.h:5
+msgid "C_lear Known Applications"
+msgstr "የታወቀ መተግበሪያ ማ_ጽጃ"
+
+#: ../plugins/systray/systray-dialog.glade.h:6
+msgid "Known Applications"
+msgstr "የታወቀ መተግበሪያ"
+
+#: ../plugins/systray/systray-manager.c:404
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
-#: ../plugins/systray/systray.desktop.in.h:1
-#, fuzzy
+#: ../plugins/systray/systray.desktop.in.h:2
 msgid "Area where notification icons appear"
-msgstr "የማሳወቂያ መለዮን አሳይ"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:1
-msgid "Always"
-msgstr ""
+#: ../plugins/tasklist/tasklist.desktop.in.h:1
+msgid "Window Buttons"
+msgstr "የ መስኮት ቁልፎች"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:2
+msgid "Show button _labels"
+msgstr "የ ቁልፍ _ምልክት ማሳያ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:3
+msgid "Show _flat buttons"
+msgstr "_ጠፍጣፋ ቁልፍ ማሳያ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:4
-msgid "D_raw window frame when hovering a button"
+msgid "Show _handle"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:6
-msgid "Group title and timestamp"
-msgstr ""
+#: ../plugins/tasklist/tasklist-dialog.glade.h:5
+msgid "Sorting _order:"
+msgstr "መለያ _ደንብ"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:7
-msgid "Group title and window title"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:8
-msgid "Never"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:9
-msgid "Restore minimized windows to current _workspace"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:10
-msgid "Ro_tate buttons in vertical panel"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:11
-#, fuzzy
-msgid "Show _flat buttons"
-msgstr "ፍላት አዝራሮችን ተጠቀም"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:12
-#, fuzzy
-msgid "Show _handle"
-msgstr "ፍሬምን አሳይ _f"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:13
-#, fuzzy
-msgid "Show button _labels"
-msgstr "የፕሮግራም ስሞችን አሳይ _n"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:14
-msgid "Show only _minimized windows"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:15
-#, fuzzy
-msgid "Show windows from _all workspaces or viewports"
-msgstr "ሁሉም የስራ ገበታዎች ያሉ መስኮቶችን አሳይ_w"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:16
-#, fuzzy
-msgid "Show windows from all mo_nitors"
-msgstr "ሁሉም የስራ ገበታዎች ያሉ መስኮቶችን አሳይ_w"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:17
-msgid "Sorting _order:"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:18
-msgid "Timestamp"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:19
-msgid "When space is limited"
-msgstr ""
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:20
-#: ../plugins/tasklist/tasklist.desktop.in.h:2
-#, fuzzy
-msgid "Window Buttons"
-msgstr "የተግባር አዝራር"
-
-#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window _grouping:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialog.glade.h:22
-#, fuzzy
+#: ../plugins/tasklist/tasklist-dialog.glade.h:8
+msgid "Restore minimized windows to current _workspace"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:9
+msgid "D_raw window frame when hovering a button"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:10
+msgid "_Switch windows using the mouse wheel"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:12
+msgid "Show windows from _all workspaces or viewports"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:13
+msgid "Show only _minimized windows"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:14
+msgid "Show windows from all mo_nitors"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:16
+msgid "Never"
+msgstr "በፍጹም"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:17
+msgid "Always"
+msgstr "ሁልጊዜ"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:18
+msgid "When space is limited"
+msgstr "ክፍተት የ ተወሰነ ሲሆን"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:19
+msgid "Timestamp"
+msgstr "የ ሰአት ማህተም"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:20
+msgid "Group title and timestamp"
+msgstr "የ ቡድን አርእስት እና የ ሰአት ማህተም"
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:21
 msgid "Window title"
-msgstr "የመስኮቶች ዝርዝር"
+msgstr "የ መስኮት አርእስት"
 
-#: ../plugins/tasklist/tasklist-widget.c:3012
+#: ../plugins/tasklist/tasklist-dialog.glade.h:22
+msgid "Group title and window title"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-dialog.glade.h:23
+msgid "None, allow drag-and-drop"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist-widget.c:3202
 msgid "Mi_nimize All"
-msgstr ""
+msgstr "ሁሉንም ማሳ_ነሻ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3021
+#: ../plugins/tasklist/tasklist-widget.c:3211
 msgid "Un_minimize All"
-msgstr ""
+msgstr "ሁሉንም አታ_ሳንስ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3027
+#: ../plugins/tasklist/tasklist-widget.c:3217
 msgid "Ma_ximize All"
-msgstr ""
+msgstr "ሁሉንም ማሳ_ደጊያ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3036
+#: ../plugins/tasklist/tasklist-widget.c:3226
 msgid "_Unmaximize All"
-msgstr ""
+msgstr "ሁሉንም _አታሳድግ"
 
-#: ../plugins/tasklist/tasklist-widget.c:3046
+#: ../plugins/tasklist/tasklist-widget.c:3236
 msgid "_Close All"
-msgstr ""
+msgstr "ሁሉንም _መዝጊያ"
 
-#: ../plugins/tasklist/tasklist.desktop.in.h:1
+#: ../plugins/tasklist/tasklist.desktop.in.h:2
 msgid "Switch between open windows using buttons"
 msgstr ""
 
-#: ../plugins/windowmenu/windowmenu.c:652
-#, fuzzy
+#: ../plugins/windowmenu/windowmenu.c:655
 msgid "Desktop"
-msgstr "ደስኩን አሳይ"
+msgstr "ዴስክቶፕ "
 
-#: ../plugins/windowmenu/windowmenu.c:1243
-#, fuzzy
+#: ../plugins/windowmenu/windowmenu.c:1246
 msgid "No Windows"
-msgstr "የመስኮቶች ዝርዝር"
+msgstr "ምንም መስኮት የለም"
 
-#: ../plugins/windowmenu/windowmenu.c:1258
+#: ../plugins/windowmenu/windowmenu.c:1261
 msgid "Urgent Windows"
-msgstr ""
+msgstr "አስቸኳይ መስኮት"
 
-#: ../plugins/windowmenu/windowmenu.c:1300
-#, fuzzy
+#: ../plugins/windowmenu/windowmenu.c:1303
 msgid "Add Workspace"
-msgstr "የስራ ቦታን ጨምር"
+msgstr "የ ስራ ቦታ መጨመሪያ"
 
-#: ../plugins/windowmenu/windowmenu.c:1320
-#, fuzzy, c-format
+#: ../plugins/windowmenu/windowmenu.c:1323
+#, c-format
 msgid "Remove Workspace \"%s\""
-msgstr "የስራ ገበታ '%s'ን ሰርዝ"
+msgstr "የ ስራ ቦታ ማስወገጃ '%s'"
 
-#: ../plugins/windowmenu/windowmenu.c:1322
+#: ../plugins/windowmenu/windowmenu.c:1325
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "የስራ ገበታ %dን ሰረዝ"
 
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:1
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
+msgid "Window Menu"
+msgstr "የ መስኮት ዝርዝር"
+
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:2
-#, fuzzy
-msgid "Arrow"
-msgstr "የቀስት አዝራር_r"
+msgid "Button layout:"
+msgstr "የ እቅድ ቁልፍ"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:3
-msgid "Button layout:"
-msgstr ""
+msgid "Show workspace a_ctions"
+msgstr "የ ስራ ቦታ ተ_ግባር ማሳያ"
 
 #: ../plugins/windowmenu/windowmenu-dialog.glade.h:4
-#, fuzzy
-msgid "Enable _urgency notification"
-msgstr "አስቸኳይ ማስታወቂያ"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:6
-#, fuzzy
-msgid "Icon"
-msgstr "የመለዮ ሳጥን"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
-#, fuzzy
-msgid "Show windows from _all workspaces"
-msgstr "ሁሉም የስራ ገበታዎች ያሉ መስኮቶችን አሳይ_w"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:8
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "የስራ ገበታ ተግባራትን አሳይr_k"
+msgstr "የ ስራ ቦታ _ስሞች ዝርዝር ማሳያ"
 
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
-#, fuzzy
-msgid "Show workspace a_ctions"
-msgstr "የስራ ገበታ ተግባራትን አሳይr_k"
-
-#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
-#, fuzzy
-msgid "Window Menu"
-msgstr "የመስኮቶች ዝርዝር"
-
-#: ../plugins/windowmenu/windowmenu.desktop.in.h:1
-msgid "Switch between open windows using a menu"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:5
+msgid "Enable _urgency notification"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Transparency"
-#~ msgstr "ውስታይነት (%)፦"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:7
+msgid "Show windows from _all workspaces"
+msgstr ""
 
-#~ msgid "Xfce Panel"
-#~ msgstr "የሸፍሲ ፓነል"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:9
+msgid "Icon"
+msgstr "ምልክት"
 
-#, fuzzy
-#~ msgid "Xfce Menu"
-#~ msgstr "የሸፍሲ ፓነል"
+#: ../plugins/windowmenu/windowmenu-dialog.glade.h:10
+msgid "Arrow"
+msgstr "ቀስት"
 
-#, fuzzy
-#~ msgid "_Number of rows:"
-#~ msgstr " የአግድም ቁጥር፦"
-
-#, fuzzy
-#~ msgid "_Restart"
-#~ msgstr "እንደገና አስጀምር"
-
-#, fuzzy
-#~ msgid "C_ompositing"
-#~ msgstr "ቦታ"
-
-#, fuzzy
-#~ msgid "Action Button"
-#~ msgstr "የተግባር አዝራር"
+#: ../plugins/windowmenu/windowmenu.desktop.in.h:2
+msgid "Switch between open windows using a menu"
+msgstr ""
