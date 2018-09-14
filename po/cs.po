@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
@@ -210,6 +210,7 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Vytvořit nový spouštěč z %d souboru na ploše"
 msgstr[1] "Vytvořit nový spouštěč z %d souborů na ploše"
 msgstr[2] "Vytvořit nový spouštěč z %d souborů na ploše"
+msgstr[3] "Vytvořit nový spouštěč z %d souborů na ploše"
 
 #: ../panel/panel-application.c:1728
 msgid ""
