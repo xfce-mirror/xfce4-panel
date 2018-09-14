@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-09 18:31+0200\n"
+"POT-Creation-Date: 2017-10-10 00:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2017\n"
+"Last-Translator: Nick Schermer <nick@xfce.org>, 2018\n"
 "Language-Team: Estonian (https://www.transifex.com/xfce/teams/16840/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgid ""
 msgstr "Lisa ribale uus käivitaja selle töölaua faili teabe põhjal"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2615
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2623
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Riba"
@@ -40,13 +40,13 @@ msgstr "Kohanda riba"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
-#: ../panel/panel-preferences-dialog.c:1190
+#: ../panel/panel-preferences-dialog.c:1199
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Kas soovite kindlalt eemaldada „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
-#: ../panel/panel-preferences-dialog.c:1193
+#: ../panel/panel-preferences-dialog.c:1202
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Kui eemaldate eseme ribalt, kaob see jäädavalt."
 
@@ -60,17 +60,17 @@ msgid "Pane_l"
 msgstr "_Riba"
 
 #. add new items
-#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2627
+#: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2635
 msgid "Add _New Items..."
 msgstr "Lisa _uusi esemeid..."
 
 #. customize panel
-#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2638
+#: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2646
 msgid "Panel Pr_eferences..."
 msgstr "Riba _sätted"
 
 #. logout item
-#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2666
+#: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2674
 msgid "Log _Out"
 msgstr "Logi _välja"
 
@@ -120,7 +120,7 @@ msgstr "Trüki versioon ja välju"
 #. parse context options
 #: ../panel/main.c:236
 msgid "[ARGUMENTS...]"
-msgstr ""
+msgstr "[ARGUMENDID...]"
 
 #: ../panel/main.c:243
 #, c-format
@@ -138,7 +138,7 @@ msgstr "Palun teata vigadest <%s>."
 
 #: ../panel/main.c:321
 msgid "There is already a running instance"
-msgstr ""
+msgstr "Üks paneel juba töötab"
 
 #. spawn ourselfs again
 #: ../panel/main.c:366
@@ -264,7 +264,7 @@ msgstr "Lisa uus ese"
 msgid "Please choose a panel for the new plugin:"
 msgstr "Palun valige uuele pluginale riba:"
 
-#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:853
+#: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:862
 #, c-format
 msgid "Panel %d"
 msgstr "%d. ääreriba"
@@ -319,37 +319,41 @@ msgstr ""
 msgid "Automatic"
 msgstr "Automaatne"
 
+#: ../panel/panel-preferences-dialog.c:500
+msgid "Primary"
+msgstr ""
+
 #. I18N: screen name in the output selector
-#: ../panel/panel-preferences-dialog.c:511
+#: ../panel/panel-preferences-dialog.c:520
 #, c-format
 msgid "Screen %d"
 msgstr "Ekraan %d"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:537
+#: ../panel/panel-preferences-dialog.c:546
 #, c-format
 msgid "Monitor %d"
 msgstr "Kuvar %d"
 
-#: ../panel/panel-preferences-dialog.c:919
+#: ../panel/panel-preferences-dialog.c:928
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Riba ja plugina sätted eemaldatakse jäädavalt"
 
-#: ../panel/panel-preferences-dialog.c:920
+#: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Kas soovite kindlalt eemaldada riba %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1032
+#: ../panel/panel-preferences-dialog.c:1041
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1037
+#: ../panel/panel-preferences-dialog.c:1046
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -360,7 +364,7 @@ msgstr ""
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1049
+#: ../panel/panel-preferences-dialog.c:1058
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Sisemine nimetus: %s-%d"
@@ -627,9 +631,9 @@ msgstr "Kogenud"
 msgid "Expert"
 msgstr "Asjatundja"
 
-#: ../panel/panel-window.c:2652
+#: ../panel/panel-window.c:2660
 msgid "_Lock Panel"
-msgstr ""
+msgstr "_Lukusta riba"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
@@ -1385,7 +1389,7 @@ msgstr ""
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 msgid "_File Pattern:"
-msgstr ""
+msgstr "_Faili muster:"
 
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:8
 msgid "Show _hidden files"
@@ -1452,23 +1456,23 @@ msgstr "Sisemine nupp"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:7
 msgid "_Edit Item"
-msgstr ""
+msgstr "_Muuda kirjet"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:8
 msgid "D_elete Item"
-msgstr ""
+msgstr "_Kustuta kirje"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:9
 msgid "Add Appli_cation"
-msgstr ""
+msgstr "Lisa _rakendus"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:10
 msgid "New _Application"
-msgstr ""
+msgstr "Uus _rakendus"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:11
 msgid "New _Link"
-msgstr ""
+msgstr "Uus _link"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:12
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
@@ -1737,7 +1741,7 @@ msgstr "Näita ainult _vähendatud aknaid"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:25
 msgid "Nothing"
-msgstr ""
+msgstr "Ei midagi"
 
 #: ../plugins/tasklist/tasklist-dialog.glade.h:26
 msgid "Close Window"
