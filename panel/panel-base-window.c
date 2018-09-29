@@ -673,6 +673,31 @@ panel_base_window_reset_background_css (PanelBaseWindow *window) {
 
 
 
+void
+panel_base_window_orientation_changed (PanelBaseWindow *window,
+                                       gint             mode)
+{
+  GtkStyleContext         *context = gtk_widget_get_style_context (GTK_WIDGET (window));
+
+  /* Reset all orientation-related style-classes */
+  if (gtk_style_context_has_class (context, "horizontal"))
+    gtk_style_context_remove_class (context, "horizontal");
+  if (gtk_style_context_has_class (context, "vertical"))
+    gtk_style_context_remove_class (context, "vertical");
+  if (gtk_style_context_has_class (context, "deskbar"))
+    gtk_style_context_remove_class (context, "deskbar");
+
+  /* Apply the appropriate style-class */
+  if (mode == 0)
+    gtk_style_context_add_class (context, "horizontal");
+  else if (mode == 1)
+    gtk_style_context_add_class (context, "vertical");
+  else if (mode == 2)
+    gtk_style_context_add_class (context, "deskbar");
+}
+
+
+
 static void
 panel_base_window_set_plugin_data (PanelBaseWindow *window,
                                    GtkCallback      func)

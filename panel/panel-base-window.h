@@ -84,7 +84,9 @@ void         panel_base_window_move_resize                 (PanelBaseWindow *win
                                                             gint             width,
                                                             gint             height);
 
-void         panel_base_window_reset_background_css        (PanelBaseWindow      *window);
+void         panel_base_window_reset_background_css        (PanelBaseWindow *window);
+void         panel_base_window_orientation_changed         (PanelBaseWindow *window,
+                                                            gint             mode);
 void         panel_base_window_set_borders                 (PanelBaseWindow *window,
                                                             PanelBorders     borders);
 PanelBorders panel_base_window_get_borders                 (PanelBaseWindow *window);
