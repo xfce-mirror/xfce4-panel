@@ -119,7 +119,7 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_icon_name (GTK_WINDOW (dialog), "applications-games");
 
-  button = xfce_gtk_button_new_mixed (GTK_STOCK_NEW, _("_New Game"));
+  button = xfce_gtk_button_new_mixed ("document-new", _("_New Game"));
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_ACCEPT);
   gtk_dialog_add_button (GTK_DIALOG (dialog), _("Close"), GTK_RESPONSE_CLOSE);
 
@@ -142,22 +142,19 @@ panel_tic_tac_toe_init (PanelTicTacToe *dialog)
   gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("Expert"));
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), LEVEL_EXPERIENCED);
 
-  align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-  gtk_box_pack_start (GTK_BOX (vbox), align, TRUE, TRUE, 0);
-
   grid = gtk_grid_new ();
   gtk_grid_set_column_spacing (GTK_GRID (grid), 1);
   gtk_grid_set_row_spacing (GTK_GRID (grid), 1);
-  gtk_container_add (GTK_CONTAINER (align), grid);
+  gtk_container_add (GTK_CONTAINER (vbox), grid);
 
   separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-  gtk_grid_attach (GTK_GRID (grid), separator, 0, 5, 1, 2);
+  gtk_grid_attach (GTK_GRID (grid), separator, 0, 1, 5, 1);
   separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-  gtk_grid_attach (GTK_GRID (grid), separator, 0, 5, 3, 4);
+  gtk_grid_attach (GTK_GRID (grid), separator, 0, 3, 5, 1);
   separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
-  gtk_grid_attach (GTK_GRID (grid), separator, 1, 2, 0, 5);
+  gtk_grid_attach (GTK_GRID (grid), separator, 1, 0, 1, 5);
   separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
-  gtk_grid_attach (GTK_GRID (grid), separator, 3, 4, 0, 5);
+  gtk_grid_attach (GTK_GRID (grid), separator, 3, 0, 1, 5);
 
   for (i = 0; i < 9; i++)
     {

@@ -32,32 +32,68 @@
 
 #include <panel/panel-dialogs.h>
 #include <panel/panel-application.h>
+#include <panel/panel-tic-tac-toe.h>
+
+
+
+static gboolean
+panel_dialogs_show_about_email_hook (GtkAboutDialog *dialog,
+                                     const gchar    *uri,
+                                     gpointer        data)
+{
+  GError *error = NULL;
+
+  if (g_strcmp0 ("mailto:tictactoe%40xfce.org", uri) == 0)
+    {
+      /* open tic-tac-toe */
+      panel_tic_tac_toe_show ();
+      /* close the about dialog as its modality will otherwise prevent you from playing */
+      gtk_widget_destroy (GTK_WIDGET (dialog));
+      return TRUE;
+    }
+  else if (!gtk_show_uri_on_window (GTK_WINDOW (dialog),
+                                    uri, gtk_get_current_event_time (), &error))
+    {
+      xfce_dialog_show_error (GTK_WINDOW (dialog), error,
+                              _("Unable to open the e-mail address"));
+      g_error_free (error);
+      return FALSE;
+    }
+  return TRUE;
+}
 
 
 
 void
 panel_dialogs_show_about (void)
 {
+  GtkWidget *about_dialog;
   gchar **authors;
 
-  authors = g_new0 (gchar *, 3);
+  authors = g_new0 (gchar *, 6);
   authors[0] = g_strdup ("Nick Schermer <nick@xfce.org>");
-  authors[1] = g_strdup ("Jasper Huijsmans <jasper@xfce.org>");
+  authors[1] = g_strdup ("Andrzej Radecki <ndrwrdck@gmail.com>");
+  authors[2] = g_strdup ("Simon Steinbeiß <simon@xfce.org>");
+  authors[3] = g_strdup ("Jasper Huijsmans <jasper@xfce.org>");
+  authors[4] = g_strdup ("Tic-Tac-Toe <tictactoe@xfce.org>");
 
-  gtk_show_about_dialog (NULL,
-                         "authors", authors,
-                         "comments", _("The panel of the Xfce Desktop Environment"),
-                         "copyright", "Copyright \302\251 2004-2012 Xfce Development Team",
-                         "destroy-with-parent", TRUE,
-                         "license", XFCE_LICENSE_GPL,
-                         "program-name", PACKAGE_NAME,
-                         "translator-credits", _("translator-credits"),
-                         "version", PACKAGE_VERSION,
-                         "website", "http://www.xfce.org/",
-                         "logo-icon-name", PACKAGE_NAME,
-                         NULL);
-
+  about_dialog = gtk_about_dialog_new ();
+  gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (about_dialog), (const gchar**) authors);
   g_strfreev (authors);
+  gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG (about_dialog), _("The panel of the Xfce Desktop Environment"));
+  gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG (about_dialog), "Copyright \302\251 2004-2018 Xfce Development Team");
+  gtk_about_dialog_set_license (GTK_ABOUT_DIALOG (about_dialog), XFCE_LICENSE_GPL);
+  gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (about_dialog), PACKAGE_NAME);
+  gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG (about_dialog), _("translator-credits"));
+  gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (about_dialog), PACKAGE_VERSION);
+  gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (about_dialog), "http://www.xfce.org/");
+  gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (about_dialog), PACKAGE_NAME);
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (about_dialog), TRUE);
+  g_signal_connect (G_OBJECT (about_dialog), "activate-link",
+                    G_CALLBACK (panel_dialogs_show_about_email_hook), NULL);
+  gtk_dialog_run (GTK_DIALOG (about_dialog));
+  if (GTK_IS_WIDGET (about_dialog))
+    gtk_widget_destroy (about_dialog);
 }
 
 
