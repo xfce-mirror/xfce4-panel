@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-04 06:31+0200\n"
-"PO-Revision-Date: 2018-09-27 22:33+0000\n"
+"POT-Creation-Date: 2018-10-18 06:31+0200\n"
+"PO-Revision-Date: 2018-10-18 19:51+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce4-panel/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgid ""
 msgstr "Tilføj en ny starter til panelet baseret på informationen fra denne skrivebordsfil"
 
 #: ../panel-preferences.desktop.in.h:1
-#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2666
+#: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2667
 #: ../migrate/main.c:117
 msgid "Panel"
 msgstr "Panel"
@@ -44,68 +44,69 @@ msgid "Customize the panel"
 msgstr "Tilpas panelet"
 
 #. I18N: %s is the name of the plugin
-#: ../libxfce4panel/xfce-panel-plugin.c:1047
-#: ../panel/panel-preferences-dialog.c:1168
+#: ../libxfce4panel/xfce-panel-plugin.c:1050
+#: ../panel/panel-preferences-dialog.c:1174
 #, c-format
 msgid "Are you sure that you want to remove \"%s\"?"
 msgstr "Er du sikker på, at du vil fjerne \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1052
-#: ../panel/panel-preferences-dialog.c:1171
+#: ../libxfce4panel/xfce-panel-plugin.c:1055
+#: ../panel/panel-preferences-dialog.c:1177
 msgid "If you remove the item from the panel, it is permanently lost."
 msgstr "Hvis du fjerner elementet fra panelet vil det gå tabt permanent."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1053 ../panel/panel-dialogs.c:127
-#: ../panel/panel-preferences-dialog.c:1173
+#: ../libxfce4panel/xfce-panel-plugin.c:1056 ../panel/panel-dialogs.c:163
+#: ../panel/panel-preferences-dialog.c:1179
 #: ../plugins/applicationsmenu/applicationsmenu.c:538
 #: ../plugins/directorymenu/directorymenu.c:394
 msgid "Cancel"
 msgstr "Annuller"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1054
+#: ../libxfce4panel/xfce-panel-plugin.c:1057
 #: ../panel/panel-plugin-external.c:436
-#: ../panel/panel-preferences-dialog.c:896
-#: ../panel/panel-preferences-dialog.c:1174
+#: ../panel/panel-preferences-dialog.c:897
+#: ../panel/panel-preferences-dialog.c:1180
 #: ../plugins/launcher/launcher-dialog.c:854
 msgid "Remove"
 msgstr "Fjern"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1195
+#: ../libxfce4panel/xfce-panel-plugin.c:1198
 msgid "_Properties"
 msgstr "_Egenskaber"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1210
+#: ../libxfce4panel/xfce-panel-plugin.c:1213 ../panel/panel-window.c:2755
 msgid "_About"
 msgstr "_Om"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1225
+#: ../libxfce4panel/xfce-panel-plugin.c:1228
 msgid "_Move"
 msgstr "_Flyt"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1249
+#: ../libxfce4panel/xfce-panel-plugin.c:1252
 msgid "_Remove"
 msgstr "_Fjern"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1270
+#: ../libxfce4panel/xfce-panel-plugin.c:1273
 msgid "Pane_l"
 msgstr "Pane_l"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1279 ../panel/panel-window.c:2679
+#: ../libxfce4panel/xfce-panel-plugin.c:1282 ../panel/panel-window.c:2680
 msgid "Add _New Items..."
 msgstr "Tilføj _nye elementer..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1294 ../panel/panel-window.c:2694
+#: ../libxfce4panel/xfce-panel-plugin.c:1297 ../panel/panel-window.c:2695
 msgid "Panel Pr_eferences..."
 msgstr "Paneli_ndstillinger..."
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1315 ../panel/panel-window.c:2726
+#: ../libxfce4panel/xfce-panel-plugin.c:1318 ../panel/panel-window.c:2727
 msgid "Log _Out"
 msgstr "_Log ud"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1335
-#: ../panel/panel-preferences-dialog.glade.h:12
+#: ../libxfce4panel/xfce-panel-plugin.c:1338
+#: ../panel/panel-preferences-dialog.glade.h:12 ../panel/panel-window.c:2746
 #: ../plugins/actions/actions-dialog.glade.h:4
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:2
+#: ../plugins/clock/clock-dialog.glade.h:8
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:3
 #: ../plugins/launcher/launcher-dialog.glade.h:16
 #: ../plugins/pager/pager-dialog.glade.h:10
@@ -115,7 +116,7 @@ msgstr "_Log ud"
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../libxfce4panel/xfce-panel-plugin.c:1350
+#: ../libxfce4panel/xfce-panel-plugin.c:1353
 msgid "About"
 msgstr "Om"
 
@@ -259,21 +260,21 @@ msgid_plural "Create new launcher from %d desktop files"
 msgstr[0] "Opret en ny opstarter fra %d skrivebordsfilen"
 msgstr[1] "Opret en ny starter fra %d skrivebordsfilerne"
 
-#: ../panel/panel-application.c:1724
+#: ../panel/panel-application.c:1725
 msgid "Quit"
 msgstr "Afslut"
 
-#: ../panel/panel-application.c:1725
+#: ../panel/panel-application.c:1726
 msgid ""
 "You have started X without session manager. Clicking Quit will close the X "
 "server."
 msgstr "Hvis du har startet X uden sessionshåndteringen vil dette lukke X-serveren ned."
 
-#: ../panel/panel-application.c:1726
+#: ../panel/panel-application.c:1727
 msgid "Are you sure you want to quit the panel?"
 msgstr "Er du sikker på, at du vil afslutte panelet?"
 
-#: ../panel/panel-application.c:1734
+#: ../panel/panel-application.c:1735
 #, c-format
 msgid "Failed to execute command \"%s\""
 msgstr "Kunne ikke udføre kommandoen \"%s\""
@@ -290,39 +291,43 @@ msgid ""
 "uint."
 msgstr "Ugyldig hentydningstype \"%s\". Valide typer er boolesk, heltal , strenge og heltal uden fortegn."
 
-#: ../panel/panel-dialogs.c:49
+#: ../panel/panel-dialogs.c:58
+msgid "Unable to open the e-mail address"
+msgstr "Kan ikke åbne e-mailadressen"
+
+#: ../panel/panel-dialogs.c:83
 msgid "The panel of the Xfce Desktop Environment"
 msgstr "Panelet til Xfce-skrivebordsmiljøet"
 
-#: ../panel/panel-dialogs.c:54
+#: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
 msgstr "Per Kongstad <p_kongstad@op.pl>\n\nDansk-gruppen <dansk@dansk-gruppen.dk>\nMere info: http://www.dansk-gruppen.dk"
 
 #. setup the dialog
-#: ../panel/panel-dialogs.c:125 ../plugins/launcher/launcher-dialog.glade.h:1
+#: ../panel/panel-dialogs.c:161 ../plugins/launcher/launcher-dialog.glade.h:1
 msgid "Add New Item"
 msgstr "Tilføj nyt element"
 
-#: ../panel/panel-dialogs.c:128
+#: ../panel/panel-dialogs.c:164
 msgid "Add"
 msgstr "Tilføj"
 
-#: ../panel/panel-dialogs.c:139
+#: ../panel/panel-dialogs.c:175
 msgid "Please choose a panel for the new plugin:"
 msgstr "Vælg venligst et panel for det nye plugin:"
 
-#: ../panel/panel-dialogs.c:159 ../panel/panel-preferences-dialog.c:831
+#: ../panel/panel-dialogs.c:195 ../panel/panel-preferences-dialog.c:832
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:199
+#: ../panel/panel-dialogs.c:235
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr "Fordi panelet kører i kiosktilstand, er du ikke tilladt at lave ændringer til panelindstillingen som en normal bruger"
 
-#: ../panel/panel-dialogs.c:201
+#: ../panel/panel-dialogs.c:237
 msgid "Modifying the panel is not allowed"
 msgstr "Tilpasning af panelet er ikke tilladt"
 
@@ -369,39 +374,39 @@ msgid ""
 "permanently removed from the panel."
 msgstr "Pluginet genstartede mere end én gang i de sidste %d sekunder. Hvis du trykker på 'Udfør' vil panelet prøve at genstarte pluginet ellers vil det blive permanent fjernet fra panelet."
 
-#: ../panel/panel-preferences-dialog.c:486
+#: ../panel/panel-preferences-dialog.c:487
 msgid "Automatic"
 msgstr "Automatisk"
 
-#: ../panel/panel-preferences-dialog.c:496
+#: ../panel/panel-preferences-dialog.c:497
 msgid "Primary"
 msgstr "Primær"
 
 #. I18N: monitor name in the output selector
-#: ../panel/panel-preferences-dialog.c:515
+#: ../panel/panel-preferences-dialog.c:516
 #, c-format
 msgid "Monitor %d"
 msgstr "Overvåg %d"
 
-#: ../panel/panel-preferences-dialog.c:897
+#: ../panel/panel-preferences-dialog.c:898
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr "Indstillingerne til panel og plugin vil blive fjernet for altid"
 
-#: ../panel/panel-preferences-dialog.c:898
+#: ../panel/panel-preferences-dialog.c:899
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
 msgstr "Er du sikker på, at du vil fjerne panel %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
-#: ../panel/panel-preferences-dialog.c:1010
+#: ../panel/panel-preferences-dialog.c:1016
 #, c-format
 msgid "%s <span color=\"grey\" size=\"small\">(external)</span>"
 msgstr "%s <span color=\"grey\" size=\"small\">(ekstern)</span>"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for external plugins
-#: ../panel/panel-preferences-dialog.c:1015
+#: ../panel/panel-preferences-dialog.c:1021
 #, c-format
 msgid ""
 "Internal name: %s-%d\n"
@@ -410,7 +415,7 @@ msgstr "Internt navn: %s-%d\nPID: %d"
 
 #. I18N: tooltip in preferences dialog when hovering an item in the list
 #. * for internal plugins
-#: ../panel/panel-preferences-dialog.c:1027
+#: ../panel/panel-preferences-dialog.c:1033
 #, c-format
 msgid "Internal name: %s-%d"
 msgstr "Internt navn: %s-%d"
@@ -456,6 +461,7 @@ msgstr "Baggrundsbillede"
 #: ../panel/panel-preferences-dialog.glade.h:11
 #: ../plugins/actions/actions-dialog.glade.h:3
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:3
+#: ../plugins/clock/clock-dialog.glade.h:7
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:2
 #: ../plugins/pager/pager-dialog.glade.h:9
 #: ../plugins/separator/separator-dialog.glade.h:5
@@ -669,7 +675,7 @@ msgstr "Øvet"
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../panel/panel-window.c:2711
+#: ../panel/panel-window.c:2712
 msgid "_Lock Panel"
 msgstr "_Lås panel"
 
@@ -901,12 +907,12 @@ msgstr "Lukker computeren ned om %d sekunder."
 msgid "Separator"
 msgstr "Separator"
 
-#: ../plugins/actions/actions.c:1022
+#: ../plugins/actions/actions.c:1036
 #, c-format
 msgid "Failed to run action \"%s\""
 msgstr "Kunne ikke starte handling \"%s\""
 
-#: ../plugins/actions/actions.c:1189
+#: ../plugins/actions/actions.c:1203
 msgid "John Doe"
 msgstr "John Doe"
 
@@ -951,7 +957,7 @@ msgid ""
 msgstr "Vælg denne indstilling for at vise det generiske navn i menuen, eksempelvis \"Filhåndtering\" i stedet for \"Thunar\""
 
 #: ../plugins/applicationsmenu/applicationsmenu-dialog.glade.h:11
-#: ../plugins/clock/clock-dialog.glade.h:15
+#: ../plugins/clock/clock-dialog.glade.h:17
 #: ../plugins/directorymenu/directorymenu-dialog.glade.h:7
 #: ../plugins/pager/pager-dialog.glade.h:6
 #: ../plugins/separator/separator-dialog.glade.h:9
@@ -1083,25 +1089,25 @@ msgstr "LCD"
 msgid "Clock"
 msgstr "Ur"
 
-#: ../plugins/clock/clock-dialog.glade.h:7
+#: ../plugins/clock/clock-dialog.glade.h:9
 msgid ""
 "Name of a timezone corresponding a file in the zoneinfo database, for "
 "example \"America/New_York\". Leave empty to use the localtime."
 msgstr "Navn på en tidszone, der svarer til en fil i zoneinfo-databasen; eks. \"America/New_York\". Lad stå tom for at bruge lokaltid."
 
-#: ../plugins/clock/clock-dialog.glade.h:8
+#: ../plugins/clock/clock-dialog.glade.h:10
 msgid "Time_zone:"
 msgstr "Tids_zone:"
 
-#: ../plugins/clock/clock-dialog.glade.h:9
+#: ../plugins/clock/clock-dialog.glade.h:11
 msgid "Time and Date _Settings..."
 msgstr "_Indstillinger for tid og dato..."
 
-#: ../plugins/clock/clock-dialog.glade.h:10
+#: ../plugins/clock/clock-dialog.glade.h:12
 msgid "Time Settings"
 msgstr "Indstillinger for tid"
 
-#: ../plugins/clock/clock-dialog.glade.h:12
+#: ../plugins/clock/clock-dialog.glade.h:14
 #, no-c-format
 msgid ""
 "The format describes the date and time parts to insert into the panel. For "
@@ -1110,53 +1116,53 @@ msgid ""
 "page for additional information."
 msgstr "Formatet beskriver dato- og tidsdele som skal indsættes i panelet. Eksempelvis vil %Y blive erstattet med året, %m med måneden og %d med dagen. Tilsvarende vil <b></b>-mærker give fed skrift. Læs siden \"Hjælp\" for yderligere information."
 
-#: ../plugins/clock/clock-dialog.glade.h:13
+#: ../plugins/clock/clock-dialog.glade.h:15
 msgid "_Tooltip format:"
 msgstr "_Værktøjstipformat:"
 
-#: ../plugins/clock/clock-dialog.glade.h:14
+#: ../plugins/clock/clock-dialog.glade.h:16
 msgid "_Layout:"
 msgstr "_Layout:"
 
-#: ../plugins/clock/clock-dialog.glade.h:16
+#: ../plugins/clock/clock-dialog.glade.h:18
 msgid "Sho_w AM/PM"
 msgstr "_Vis AM/PM"
 
-#: ../plugins/clock/clock-dialog.glade.h:17
+#: ../plugins/clock/clock-dialog.glade.h:19
 msgid "Fl_ash time separators"
 msgstr "B_linkende separatorer"
 
-#: ../plugins/clock/clock-dialog.glade.h:18
+#: ../plugins/clock/clock-dialog.glade.h:20
 msgid "24-_hour clock"
 msgstr "24-_timers ur"
 
-#: ../plugins/clock/clock-dialog.glade.h:19
+#: ../plugins/clock/clock-dialog.glade.h:21
 msgid "True _binary clock"
 msgstr "Ægte _binært ur"
 
-#: ../plugins/clock/clock-dialog.glade.h:20
+#: ../plugins/clock/clock-dialog.glade.h:22
 msgid "Display _seconds"
 msgstr "Vis _sekunder"
 
-#: ../plugins/clock/clock-dialog.glade.h:21
+#: ../plugins/clock/clock-dialog.glade.h:23
 msgid "F_ormat:"
 msgstr "F_ormat:"
 
 #. I18N: the fuzziness the *precision* of the fuzzy clock. Time steps of 5, 15
 #. or parts of the day.
-#: ../plugins/clock/clock-dialog.glade.h:23
+#: ../plugins/clock/clock-dialog.glade.h:25
 msgid "F_uzziness:"
 msgstr "I_ntervaller:"
 
-#: ../plugins/clock/clock-dialog.glade.h:24
+#: ../plugins/clock/clock-dialog.glade.h:26
 msgid "Show _inactive dots"
 msgstr "Vis _inaktive prikker"
 
-#: ../plugins/clock/clock-dialog.glade.h:25
+#: ../plugins/clock/clock-dialog.glade.h:27
 msgid "Show gri_d"
 msgstr "Vis _gitter"
 
-#: ../plugins/clock/clock-dialog.glade.h:26
+#: ../plugins/clock/clock-dialog.glade.h:28
 msgid "Clock Options"
 msgstr "Urindstillinger"
 
