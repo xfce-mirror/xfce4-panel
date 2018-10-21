@@ -20,25 +20,25 @@ msgstr ""
 
 #: ../panel-desktop-handler.desktop.in.h:1
 msgid "Create Launcher on the panel"
-msgstr "Crea un llançador al plafó"
+msgstr "Crea un llançador al tauler"
 
 #: ../panel-desktop-handler.desktop.in.h:2
 msgid ""
 "Add a new launcher to the panel based on the information of this desktop "
 "file"
 msgstr ""
-"Afegeix un nou llançador al plafó a partir de la informació d'aquest fitxer "
-"d'escriptori"
+"Afegeix un nou llançador al tauler a partir de la informació d'aquest fitxer"
+" d'escriptori"
 
 #: ../panel-preferences.desktop.in.h:1
 #: ../panel/panel-preferences-dialog.glade.h:10 ../panel/panel-window.c:2623
 #: ../migrate/main.c:117
 msgid "Panel"
-msgstr "Plafó"
+msgstr "Tauler"
 
 #: ../panel-preferences.desktop.in.h:2
 msgid "Customize the panel"
-msgstr "Personalitzeu el plafó"
+msgstr "Personalitzeu el tauler"
 
 #. I18N: %s is the name of the plugin
 #: ../libxfce4panel/xfce-panel-plugin.c:1032
@@ -50,7 +50,7 @@ msgstr "Esteu segur que voleu suprimir «%s»?"
 #: ../libxfce4panel/xfce-panel-plugin.c:1037
 #: ../panel/panel-preferences-dialog.c:1202
 msgid "If you remove the item from the panel, it is permanently lost."
-msgstr "Si suprimiu l'element del plafó, es perdrà permanentment."
+msgstr "Si suprimiu l'element del tauler, es perdrà permanentment."
 
 #. move item
 #: ../libxfce4panel/xfce-panel-plugin.c:1197
@@ -59,7 +59,7 @@ msgstr "_Mou"
 
 #: ../libxfce4panel/xfce-panel-plugin.c:1231
 msgid "Pane_l"
-msgstr "P_lafó"
+msgstr "Tau_ler"
 
 #. add new items
 #: ../libxfce4panel/xfce-panel-plugin.c:1239 ../panel/panel-window.c:2635
@@ -69,7 +69,7 @@ msgstr "Afegeix elements _nous..."
 #. customize panel
 #: ../libxfce4panel/xfce-panel-plugin.c:1250 ../panel/panel-window.c:2646
 msgid "Panel Pr_eferences..."
-msgstr "Pr_eferències del plafó..."
+msgstr "Pr_eferències del tauler..."
 
 #. logout item
 #: ../libxfce4panel/xfce-panel-plugin.c:1267 ../panel/panel-window.c:2674
@@ -78,7 +78,7 @@ msgstr "_Surt"
 
 #: ../panel/main.c:80
 msgid "Show the 'Panel Preferences' dialog"
-msgstr "Mostra el diàleg «Preferències del plafó»"
+msgstr "Mostra el diàleg «Preferències del tauler»"
 
 #: ../panel/main.c:80 ../panel/main.c:81
 msgid "PANEL-NUMBER"
@@ -90,11 +90,11 @@ msgstr "Mostra el diàleg «Afegeix elements nous»"
 
 #: ../panel/main.c:82
 msgid "Save the panel configuration"
-msgstr "Desa la configuració del plafó"
+msgstr "Desa la configuració del tauler"
 
 #: ../panel/main.c:83
 msgid "Add a new plugin to the panel"
-msgstr "Afegeix un connector nou al plafó"
+msgstr "Afegeix un connector nou al tauler"
 
 #: ../panel/main.c:83
 msgid "PLUGIN-NAME"
@@ -102,11 +102,11 @@ msgstr "PLUGIN-NAME"
 
 #: ../panel/main.c:84
 msgid "Restart the running panel instance"
-msgstr "Reinicia la instància del plafó en execució"
+msgstr "Reinicia la instància del tauler en execució"
 
 #: ../panel/main.c:85
 msgid "Quit the running panel instance"
-msgstr "Surt de la instància activa del plafó"
+msgstr "Surt de la instància activa del tauler"
 
 #: ../panel/main.c:86
 msgid "Do not wait for a window manager on startup"
@@ -157,19 +157,19 @@ msgstr "No s'ha pogut mostrar el diàleg per afegir elements"
 
 #: ../panel/main.c:385
 msgid "Failed to save the panel configuration"
-msgstr "No s'ha pogut desar la configuració del plafó"
+msgstr "Ha fallat el desament de la configuració del tauler"
 
 #: ../panel/main.c:387
 msgid "Failed to add a plugin to the panel"
-msgstr "No s'ha pogut afegir un connector al plafó"
+msgstr "Ha fallat l'afegiment d'un connector al tauler"
 
 #: ../panel/main.c:389
 msgid "Failed to restart the panel"
-msgstr "No s'ha pogut reiniciar el plafó"
+msgstr "Ha fallat el reinici del tauler"
 
 #: ../panel/main.c:391
 msgid "Failed to quit the panel"
-msgstr "No s'ha pogut sortir del plafó"
+msgstr "Ha fallat la sortida del tauler"
 
 #: ../panel/main.c:393
 msgid "Failed to send D-Bus message"
@@ -180,8 +180,8 @@ msgid ""
 "Do you want to start the panel? If you do, make sure you save the session on"
 " logout, so the panel is automatically started the next time you login."
 msgstr ""
-"Voleu iniciar el plafó? Si és el cas, assegureu-vos que deseu la sessió quan"
-" sortiu per tal que el plafó s'iniciï automàticament el pròxim cop que "
+"Voleu iniciar el tauler? Si és el cas, assegureu-vos que deseu la sessió "
+"quan sortiu per tal que el tauler s'iniciï automàticament el pròxim cop que "
 "inicieu la sessió."
 
 #: ../panel/main.c:407 ../panel/main.c:421
@@ -202,8 +202,8 @@ msgid ""
 "This will create a new launcher plugin on the panel and inserts the dropped "
 "files as menu items."
 msgstr ""
-"Això crearà un nou connector de llançador en el plafó i inserirà els fitxers"
-" que es deixin caure com a elements de menú."
+"Això crearà un nou connector de llançador al tauler i inserirà els fitxers "
+"que es deixin caure com a elements de menú."
 
 #: ../panel/panel-application.c:988
 #, c-format
@@ -222,7 +222,7 @@ msgstr ""
 
 #: ../panel/panel-application.c:1729
 msgid "Are you sure you want to quit the panel?"
-msgstr "Esteu segur que voleu sortir del plafó?"
+msgstr "Esteu segur que voleu sortir del tauler?"
 
 #: ../panel/panel-application.c:1737
 #, c-format
@@ -259,7 +259,7 @@ msgstr "Mantenidors anteriors"
 
 #: ../panel/panel-dialogs.c:82
 msgid "The panel of the Xfce Desktop Environment"
-msgstr "El plafó de l'entorn d'escriptori Xfce"
+msgstr "El tauler de l'entorn d'escriptori Xfce"
 
 #: ../panel/panel-dialogs.c:87
 msgid "translator-credits"
@@ -277,24 +277,24 @@ msgstr "Afegeix un element nou"
 
 #: ../panel/panel-dialogs.c:172
 msgid "Please choose a panel for the new plugin:"
-msgstr "Trieu un plafó per al connector nou:"
+msgstr "Trieu un tauler per al connector nou:"
 
 #: ../panel/panel-dialogs.c:192 ../panel/panel-preferences-dialog.c:862
 #, c-format
 msgid "Panel %d"
-msgstr "Plafó %d"
+msgstr "Tauler %d"
 
 #: ../panel/panel-dialogs.c:232
 msgid ""
 "Because the panel is running in kiosk mode, you are not allowed to make "
 "changes to the panel configuration as a regular user"
 msgstr ""
-"El plafó està executant-se en mode Kiosk; no se us permet fer cap canvi a la"
-" configuració del plafó com a usuari convencional."
+"El tauler està executant-se en mode Kiosk; no se us permet fer cap canvi a "
+"la configuració del tauler com a usuari convencional."
 
 #: ../panel/panel-dialogs.c:234
 msgid "Modifying the panel is not allowed"
-msgstr "No es permet la modificació del plafó"
+msgstr "No es permet la modificació del tauler"
 
 #: ../panel/panel-item-dialog.c:190
 msgid "Add New Items"
@@ -302,7 +302,7 @@ msgstr "Afegeix elements nous"
 
 #: ../panel/panel-item-dialog.c:192
 msgid "Add new plugins to the panel"
-msgstr "Afegiu connectors nous al plafó"
+msgstr "Afegiu connectors nous al tauler"
 
 #: ../panel/panel-item-dialog.c:216
 #: ../plugins/launcher/launcher-dialog.glade.h:28
@@ -317,8 +317,8 @@ msgstr "Introduïu la frase a cercar aquí"
 #, c-format
 msgid "Plugin \"%s\" unexpectedly left the panel, do you want to restart it?"
 msgstr ""
-"El connector del plafó \"%s\" ha finalitzat inesperadament. Voleu reiniciar-"
-"ho?"
+"El connector del tauler \"%s\" ha finalitzat inesperadament. Voleu "
+"reiniciar-lo?"
 
 #: ../panel/panel-plugin-external.c:431
 #, c-format
@@ -328,8 +328,8 @@ msgid ""
 "permanently removed from the panel."
 msgstr ""
 "El connector s'ha reiniciat més d'un cop en els últims %d segons. Si premeu "
-"«Executa» el plafó intentarà reiniciar el connector, altrament serà eliminat"
-" permanentment del plafó."
+"«Executa» el tauler intentarà reiniciar el connector, altrament serà "
+"eliminat permanentment del tauler."
 
 #: ../panel/panel-preferences-dialog.c:492
 msgid "Automatic"
@@ -354,12 +354,12 @@ msgstr "Monitor %d"
 #: ../panel/panel-preferences-dialog.c:928
 msgid "The panel and plugin configurations will be permanently removed"
 msgstr ""
-"El plafó i la configuració dels connectors seran eliminats permanentment."
+"El tauler i la configuració dels connectors seran eliminats permanentment."
 
 #: ../panel/panel-preferences-dialog.c:929
 #, c-format
 msgid "Are you sure you want to remove panel %d?"
-msgstr "Esteu segur que voleu eliminar el plafó %d?"
+msgstr "Esteu segur que voleu eliminar el tauler %d?"
 
 #. I18N: append (external) in the preferences dialog if the plugin
 #. * runs external
@@ -426,15 +426,15 @@ msgstr "Imatge de fons"
 
 #: ../panel/panel-preferences-dialog.glade.h:11
 msgid "Add a new panel"
-msgstr "Afegeix un plafó nou"
+msgstr "Afegeix un tauler nou"
 
 #: ../panel/panel-preferences-dialog.glade.h:12
 msgid "Remove the currently selected panel"
-msgstr "Suprimeix el plafó seleccionat"
+msgstr "Suprimeix el tauler seleccionat actualment"
 
 #: ../panel/panel-preferences-dialog.glade.h:13
 msgid "Switch between panel presets"
-msgstr "Canvia entre els preestabliments del plafó"
+msgstr "Canvia entre els preestabliments del tauler"
 
 #: ../panel/panel-preferences-dialog.glade.h:14
 msgid "M_ode:"
@@ -450,23 +450,22 @@ msgstr "Expandeix els mo_nitors"
 
 #: ../panel/panel-preferences-dialog.glade.h:17
 msgid "Select this option to extend the panel over multiple monitors."
-msgstr ""
-"Seleccioneu aquesta opció per a estendre el plafó a múltiples monitors."
+msgstr "Seleccioneu aquesta opció per estendre el tauler a diversos monitors."
 
 #: ../panel/panel-preferences-dialog.glade.h:18
 msgid "_Lock panel"
-msgstr "_Bloqueja el plafó"
+msgstr "_Bloqueja el tauler"
 
 #: ../panel/panel-preferences-dialog.glade.h:19
 msgid ""
 "Select this option to hide the handles of the panel and lock its position."
 msgstr ""
-"Seleccioneu aquesta opció per bloquejar la posició del plafó i ocultar els "
+"Seleccioneu aquesta opció per bloquejar la posició del tauler i ocultar els "
 "tiradors."
 
 #: ../panel/panel-preferences-dialog.glade.h:20
 msgid "Automatically hide the panel:"
-msgstr "Oculta automàticament el plafó:"
+msgstr "Oculta automàticament el tauler:"
 
 #: ../panel/panel-preferences-dialog.glade.h:21
 msgid "Don't _reserve space on borders"
@@ -478,7 +477,7 @@ msgid ""
 "the panel. This only works when the panel is attached to a screen edge."
 msgstr ""
 "Seleccioneu aquesta opció per maximitzar les finestres i que cobreixin el "
-"plafó. Això només funciona quan el plafó està adjuntat a una vora de la "
+"tauler. Això només funciona quan el tauler està adjuntat a una vora de la "
 "pantalla."
 
 #: ../panel/panel-preferences-dialog.glade.h:23
@@ -509,8 +508,8 @@ msgid ""
 "Select this option to automatically increase the length of the panel if the "
 "plugins request more space."
 msgstr ""
-"Seleccioneu aquesta opció per augmentar automàticament la longitud del plafó"
-" quan els connectors necessitin més espai."
+"Seleccioneu aquesta opció per augmentar automàticament la longitud del "
+"tauler quan els connectors necessitin més espai."
 
 #. I18N: name of the section (frame) in the panel preferences where the user
 #. can define the length and size of the panel
@@ -536,8 +535,8 @@ msgid ""
 "Alpha value of the panel background, with 0 being fully transparent and 100 "
 "fully opaque."
 msgstr ""
-"Valor alfa per al fons del plafó, essent 0 completament transparent i 100 "
-"completament opac."
+"Transparència quan el punter no està sobre el tauler, essent 0 completament "
+"transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:36
 msgid "C_olor:"
@@ -545,7 +544,7 @@ msgstr "C_olor:"
 
 #: ../panel/panel-preferences-dialog.glade.h:37
 msgid "Pick a Panel Color"
-msgstr "Tria un color del plafó"
+msgstr "Tria un color del tauler"
 
 #: ../panel/panel-preferences-dialog.glade.h:38
 msgid "_File:"
@@ -574,7 +573,7 @@ msgid ""
 "Transparency when the pointer is hovering over the panel, with 0 being fully"
 " transparent and 100 fully opaque."
 msgstr ""
-"Transparència quan el punter passa per sobre del plafó, essent 0 "
+"Transparència quan el punter passa per sobre del tauler, essent 0 "
 "completament transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:46
@@ -582,7 +581,7 @@ msgid ""
 "Transparency when the pointer is not hovering over the panel, with 0 being "
 "fully transparent and 100 fully opaque."
 msgstr ""
-"Transparència quan el punter no està sobre el plafó, essent 0 completament "
+"Transparència quan el punter no està sobre el tauler, essent 0 completament "
 "transparent i 100 completament opac."
 
 #: ../panel/panel-preferences-dialog.glade.h:47
@@ -594,7 +593,7 @@ msgid ""
 "Enable compositing in the window manager for opacity settings in the panel."
 msgstr ""
 "Habilita la composició al gestor de finestres per als ajusts de l'opacitat "
-"al plafó."
+"al tauler."
 
 #: ../panel/panel-preferences-dialog.glade.h:49
 msgid "Appeara_nce"
@@ -612,7 +611,7 @@ msgstr "Mou l'element seleccionat a una fila inferior"
 
 #: ../panel/panel-preferences-dialog.glade.h:52
 msgid "Add new item to this panel"
-msgstr "Afegeix un element nou a aquest plafó"
+msgstr "Afegeix un element nou a aquest tauler"
 
 #: ../panel/panel-preferences-dialog.glade.h:53
 msgid "Remove currently selected item"
@@ -657,19 +656,19 @@ msgstr "Expert"
 
 #: ../panel/panel-window.c:2660
 msgid "_Lock Panel"
-msgstr "_Bloqueja el plafó"
+msgstr "_Bloqueja el tauler"
 
 #: ../migrate/main.c:116
 msgid "Welcome to the first start of the panel"
-msgstr "Benvingut al primer cop que s'inicia el plafó"
+msgstr "Benvingut al primer cop que s'inicia el tauler"
 
 #: ../migrate/main.c:125
 msgid ""
 "Because the panel moved to a new system for storing the settings, it has to "
 "load a fresh initial configuration."
 msgstr ""
-"A causa que el plafó s'ha mogut a un nou sistema per a l'emmagatzematge dels"
-" ajusts, aquest ha de carregar una configuració inicial des de zero."
+"A causa que el tauler s'ha mogut a un nou sistema per a l'emmagatzematge "
+"dels ajusts, aquest ha de carregar una configuració inicial des de zero."
 
 #: ../migrate/main.c:127 ../migrate/main.c:136
 msgid "Choose below which setup you want for the first startup."
@@ -693,15 +692,15 @@ msgstr "Carrega la configuració predeterminada"
 
 #: ../migrate/main.c:148
 msgid "One empty panel"
-msgstr "Un plafó buit"
+msgstr "Un tauler buit"
 
 #: ../migrate/main.c:149
 msgid "Start with one empty panel"
-msgstr "Arranca amb un plafó buit"
+msgstr "Comença amb un tauler buit"
 
 #: ../migrate/main.c:160
 msgid "Failed to migrate the old panel configuration"
-msgstr "No s'ha pogut migrar la configuració antiga del plafó"
+msgstr "Ha fallat la migració de la configuració antiga del tauler"
 
 #: ../migrate/main.c:172
 msgid "Failed to load the default configuration"
@@ -709,7 +708,7 @@ msgstr "No s'ha pogut carregar la configuració predeterminada"
 
 #: ../migrate/main.c:185
 msgid "Panel config needs migration..."
-msgstr "La configuració del plafó necessita la migració..."
+msgstr "La configuració del tauler necessita la migració..."
 
 #: ../migrate/main.c:189
 msgid "Failed to migrate the existing configuration"
@@ -717,7 +716,7 @@ msgstr "No s'ha pogut migrar la configuració existent"
 
 #: ../migrate/main.c:195
 msgid "Panel configuration has been updated."
-msgstr "La configuració del plafó s'ha actualitzat."
+msgstr "La configuració del tauler s'ha actualitzat."
 
 #: ../plugins/actions/actions-dialog.glade.h:1
 #: ../plugins/actions/actions.desktop.in.in.h:1
@@ -1065,7 +1064,7 @@ msgid ""
 " the day. Similarly, <b></b> tags will make the text bold. See the \"Help\" "
 "page for additional information."
 msgstr ""
-"El format descriu les parts de data i hora per inserir al plafó. Per "
+"El format descriu les parts de data i hora per inserir al tauler. Per "
 "exemple, %Y serà substituït per l'any,  %m amb el mes i %d amb el dia. De la"
 " mateixa manera, les  etiquetes <b></b> faran que el text estigui en "
 "negreta. Consulteu la pàgina d'ajuda per obtenir informació addicional."
@@ -1539,7 +1538,7 @@ msgid ""
 " or menu items."
 msgstr ""
 "Seleccioneu aquesta opció per a inhabilitar els quadres de text emergents "
-"que apareixen als botons del plafó o als elements del menú."
+"que apareixen als botons del tauler o als elements del menú."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:22
 msgid "Show _label instead of icon"
@@ -1547,13 +1546,13 @@ msgstr "Mostra una _etiqueta en lloc de la icona"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:23
 msgid "Show last _used item in panel"
-msgstr "Mostra l'últim _element utilitzat al plafó"
+msgstr "Mostra l'últim _element utilitzat al tauler"
 
 #: ../plugins/launcher/launcher-dialog.glade.h:24
 msgid "Select this option to move the clicked menu item to the panel."
 msgstr ""
 "Seleccioneu aquesta opció per a moure l'element del menú que s'ha fet clic "
-"al plafó."
+"al tauler."
 
 #: ../plugins/launcher/launcher-dialog.glade.h:25
 msgid "_Arrow button position:"
@@ -1632,7 +1631,7 @@ msgstr "Punts"
 
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Adds a separator or space between panel items"
-msgstr "Afegeix un espai o un separador entre elements del plafó"
+msgstr "Afegeix un espai o un separador entre elements del tauler"
 
 #: ../plugins/showdesktop/showdesktop.c:210
 msgid "Restore the minimized windows"
