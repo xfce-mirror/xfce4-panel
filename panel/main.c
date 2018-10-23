@@ -254,6 +254,10 @@ main (gint argc, gchar **argv)
   g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING);
 #endif
 
+  /* Workaround for xinput2's subpixel handling triggering unwanted enter/leave-notify events:
+   * https://bugs.freedesktop.org/show_bug.cgi?id=92681 */
+  g_setenv ("GDK_CORE_DEVICE_EVENTS", "1", TRUE);
+
   /* parse context options */
   context = g_option_context_new (_("[ARGUMENTS...]"));
   g_option_context_add_main_entries (context, option_entries, GETTEXT_PACKAGE);
