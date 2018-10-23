@@ -107,7 +107,7 @@ struct _PanelBaseWindowPrivate
 
 
 
-G_DEFINE_TYPE (PanelBaseWindow, panel_base_window, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (PanelBaseWindow, panel_base_window, GTK_TYPE_WINDOW)
 
 
 
@@ -116,9 +116,6 @@ panel_base_window_class_init (PanelBaseWindowClass *klass)
 {
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
-
-  /* add private data */
-  g_type_class_add_private (klass, sizeof (PanelBaseWindowPrivate));
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->get_property = panel_base_window_get_property;
@@ -198,7 +195,7 @@ panel_base_window_init (PanelBaseWindow *window)
 {
   GtkStyleContext *context;
 
-  window->priv = G_TYPE_INSTANCE_GET_PRIVATE (window, PANEL_TYPE_BASE_WINDOW, PanelBaseWindowPrivate);
+  window->priv = panel_base_window_get_instance_private (window);
 
   window->is_composited = FALSE;
   window->background_style = PANEL_BG_STYLE_NONE;
