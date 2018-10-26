@@ -167,6 +167,7 @@ panel_item_dialog_init (PanelItemDialog *dialog)
 {
   GtkWidget         *main_vbox;
   GtkWidget         *hbox;
+  GtkWidget         *button;
   GtkWidget         *label;
   GtkWidget         *entry;
   GtkWidget         *scroll;
@@ -203,9 +204,17 @@ panel_item_dialog_init (PanelItemDialog *dialog)
   gtk_button_set_image (GTK_BUTTON (dialog->add_button), icon);
   gtk_widget_show_all (dialog->add_button);
 
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Help"), GTK_RESPONSE_HELP);
+  icon = gtk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_BUTTON);
+  button = gtk_button_new_with_mnemonic (_("_Help"));
+  gtk_button_set_image (GTK_BUTTON (button), icon);
+  gtk_widget_show_all (button);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_HELP);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog), dialog->add_button, GTK_RESPONSE_OK);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("Close"), GTK_RESPONSE_CLOSE);
+  icon = gtk_image_new_from_icon_name ("window-close", GTK_ICON_SIZE_BUTTON);
+  button = gtk_button_new_with_mnemonic (_("_Close"));
+  gtk_button_set_image (GTK_BUTTON (button), icon);
+  gtk_widget_show_all (button);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_CLOSE);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
   main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, BORDER * 2);
