@@ -772,7 +772,7 @@ clock_plugin_configure_plugin_chooser_separator (GtkTreeModel *model,
 
 
 static void
-clock_plugin_validate_format_specifier (GtkEntry *entry, gchar *format, ClockPlugin *plugin)
+clock_plugin_validate_format_specifier (GtkEntry *entry, const gchar *format, ClockPlugin *plugin)
 {
   GtkStyleContext *context;
 
@@ -792,8 +792,8 @@ clock_plugin_validate_entry_text (GtkEditable *entry,
 {
   ClockPlugin *plugin = user_data;
 
-  clock_plugin_validate_format_specifier (entry,
-                                          gtk_entry_get_text(GTK_ENTRY (entry)),
+  clock_plugin_validate_format_specifier (GTK_ENTRY (entry),
+                                          gtk_entry_get_text (GTK_ENTRY (entry)),
                                           plugin);
 }
 
