@@ -271,37 +271,26 @@ xfce_clock_binary_draw_true_binary (XfceClockBinary *binary,
   gint              ticks;
   GtkStyleContext  *ctx;
   GdkRGBA           active_rgba, inactive_rgba;
-  GtkSymbolicColor *literal;
-  GtkSymbolicColor *shade;
 
-  ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
+  ctx = gtk_widget_get_style_context (GTK_WIDGET (gtk_widget_get_parent (GTK_WIDGET (binary))));
 
-  if (G_UNLIKELY (gtk_widget_get_state_flags (GTK_WIDGET (binary)) & GTK_STATE_INSENSITIVE))
+  if (G_UNLIKELY (gtk_widget_get_state_flags (GTK_WIDGET (binary)) & GTK_STATE_FLAG_INSENSITIVE))
     {
-      gtk_style_context_get_background_color (ctx, GTK_STATE_INSENSITIVE, &inactive_rgba);
-      literal = gtk_symbolic_color_new_literal (&inactive_rgba);
-      shade = gtk_symbolic_color_new_shade (literal, 0.7);
-      gtk_symbolic_color_resolve (shade, NULL, &active_rgba);
-      gtk_symbolic_color_unref (shade);
-      gtk_symbolic_color_unref (literal);
+      gtk_style_context_get_color (ctx, GTK_STATE_FLAG_INSENSITIVE,
+                                   &inactive_rgba);
+      inactive_rgba.alpha = 0.2;
+      gtk_style_context_get_color (ctx, GTK_STATE_FLAG_INSENSITIVE,
+                                   &active_rgba);
+      active_rgba.alpha = 1.0;
     }
   else
     {
-      gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &inactive_rgba);
-      literal = gtk_symbolic_color_new_literal (&inactive_rgba);
-      shade = gtk_symbolic_color_new_shade (literal, 0.7);
-      gtk_symbolic_color_resolve (shade, NULL, &inactive_rgba);
-      gtk_symbolic_color_unref (shade);
-      gtk_symbolic_color_unref (literal);
-
-      gtk_style_context_get_background_color (ctx, GTK_STATE_SELECTED, &active_rgba);
-      literal = gtk_symbolic_color_new_literal (&active_rgba);
-      shade = gtk_symbolic_color_new_shade (literal, 0.7);
-      gtk_symbolic_color_resolve (shade, NULL, &active_rgba);
-      gtk_symbolic_color_unref (shade);
-      gtk_symbolic_color_unref (literal);
-      gtk_style_context_get_color (ctx, GTK_STATE_NORMAL, &inactive_rgba);
-      gtk_style_context_get_color (ctx, GTK_STATE_SELECTED, &active_rgba);
+      gtk_style_context_get_color (ctx, GTK_STATE_FLAG_NORMAL,
+                                   &inactive_rgba);
+      inactive_rgba.alpha = 0.2;
+      gtk_style_context_get_color (ctx, GTK_STATE_FLAG_ACTIVE,
+                                   &active_rgba);
+      active_rgba.alpha = 1.0;
     }
 
   time = clock_time_get_time (binary->time);
@@ -379,37 +368,26 @@ xfce_clock_binary_draw_binary (XfceClockBinary *binary,
   gint              ticks = 0;
   GtkStyleContext  *ctx;
   GdkRGBA           active_rgba, inactive_rgba;
-  GtkSymbolicColor *literal;
-  GtkSymbolicColor *shade;
 
   ctx = gtk_widget_get_style_context (GTK_WIDGET (binary));
 
   if (G_UNLIKELY (gtk_widget_get_state_flags (GTK_WIDGET (binary)) & GTK_STATE_INSENSITIVE))
     {
-      gtk_style_context_get_background_color (ctx, GTK_STATE_INSENSITIVE, &inactive_rgba);
-      literal = gtk_symbolic_color_new_literal (&inactive_rgba);
-      shade = gtk_symbolic_color_new_shade (literal, 0.7);
-      gtk_symbolic_color_resolve (shade, NULL, &active_rgba);
-      gtk_symbolic_color_unref (shade);
-      gtk_symbolic_color_unref (literal);
+      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                                   &inactive_rgba);
+      inactive_rgba.alpha = 0.2;
+      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                                   &active_rgba);
+      active_rgba.alpha = 1.0;
     }
   else
     {
-      gtk_style_context_get_background_color (ctx, GTK_STATE_NORMAL, &inactive_rgba);
-      literal = gtk_symbolic_color_new_literal (&inactive_rgba);
-      shade = gtk_symbolic_color_new_shade (literal, 0.7);
-      gtk_symbolic_color_resolve (shade, NULL, &inactive_rgba);
-      gtk_symbolic_color_unref (shade);
-      gtk_symbolic_color_unref (literal);
-
-      gtk_style_context_get_background_color (ctx, GTK_STATE_SELECTED, &active_rgba);
-      literal = gtk_symbolic_color_new_literal (&active_rgba);
-      shade = gtk_symbolic_color_new_shade (literal, 0.7);
-      gtk_symbolic_color_resolve (shade, NULL, &active_rgba);
-      gtk_symbolic_color_unref (shade);
-      gtk_symbolic_color_unref (literal);
-      gtk_style_context_get_color (ctx, GTK_STATE_NORMAL, &inactive_rgba);
-      gtk_style_context_get_color (ctx, GTK_STATE_SELECTED, &active_rgba);
+      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                                   &inactive_rgba);
+      inactive_rgba.alpha = 0.2;
+      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (GTK_WIDGET (binary)),
+                                   &active_rgba);
+      active_rgba.alpha = 1.0;
     }
 
   time = clock_time_get_time (binary->time);
@@ -484,15 +462,17 @@ xfce_clock_binary_draw (GtkWidget *widget,
   gint              pad_x, pad_y;
   gint              diff;
   GtkStyleContext  *ctx;
-  GdkRGBA           bg_rgba, light_rgba;
-  GtkSymbolicColor *literal;
-  GtkSymbolicColor *shade;
+  GdkRGBA           grid_rgba;
+  GtkBorder         padding;
 
   panel_return_val_if_fail (XFCE_CLOCK_IS_BINARY (binary), FALSE);
   //panel_return_val_if_fail (gtk_widget_get_has_window (widget), FALSE);
   panel_return_val_if_fail (cr != NULL, FALSE);
 
-  gtk_misc_get_padding (GTK_MISC (widget), &pad_x, &pad_y);
+  ctx = gtk_widget_get_style_context (widget);
+  gtk_style_context_get_padding (ctx, gtk_widget_get_state_flags (widget), &padding);
+  pad_x = MAX (padding.left, padding.right);
+  pad_y = MAX (padding.top, padding.bottom);
 
   gtk_widget_get_allocation (widget, &alloc);
   alloc.width -= 1 + 2 * pad_x;
@@ -514,16 +494,10 @@ xfce_clock_binary_draw (GtkWidget *widget,
 
   if (binary->show_grid)
     {
-      ctx = gtk_widget_get_style_context (widget);
-      gtk_style_context_get_background_color (ctx, GTK_STATE_SELECTED, &bg_rgba);
-      /* make the bg color lighter */
-      literal = gtk_symbolic_color_new_literal (&bg_rgba);
-      shade = gtk_symbolic_color_new_shade (literal, 1.3);
-      gtk_symbolic_color_resolve (shade, NULL, &light_rgba);
-      gtk_symbolic_color_unref (shade);
-      gtk_symbolic_color_unref (literal);
-
-      gdk_cairo_set_source_rgba (cr, &light_rgba);
+      gtk_style_context_get_color (ctx, gtk_widget_get_state_flags (widget),
+                                   &grid_rgba);
+      grid_rgba.alpha = 0.4;
+      gdk_cairo_set_source_rgba (cr, &grid_rgba);
       cairo_set_line_width (cr, 1);
 
       remain_w = alloc.width;
