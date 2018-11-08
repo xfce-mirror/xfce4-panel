@@ -218,8 +218,6 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
 
-  g_type_class_add_private (klass, sizeof (XfcePanelPluginPrivate));
-
   klass->construct = NULL;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -681,7 +679,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
 static void
 xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 {
-  plugin->priv = G_TYPE_INSTANCE_GET_PRIVATE (plugin, XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate);
+  plugin->priv = xfce_panel_plugin_get_instance_private (plugin);
 
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;
@@ -2433,8 +2431,13 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 {
   XfceScreenPosition  screen_position;
   GdkScreen          *screen;
+#if GTK_CHECK_VERSION (3, 22, 0)
+  GdkDisplay         *display;
+  GdkMonitor         *monitor;
+#else
   gint                monitor_num;
-  GdkRectangle        monitor;
+#endif
+  GdkRectangle        geometry;
   gint                x, y;
   GdkWindow          *window;
 
@@ -2461,17 +2464,22 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 
       /* get the monitor geometry */
       screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+#if GTK_CHECK_VERSION (3, 22, 0)
+      display = gdk_screen_get_display (screen);
+      monitor = gdk_display_get_monitor_at_window (display, window);
+      gdk_monitor_get_geometry (monitor, &geometry);
+#else
       monitor_num = gdk_screen_get_monitor_at_window (screen, window);
-      gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
-
+      gdk_screen_get_monitor_geometry (screen, monitor_num, &geometry);
+#endif
       /* get the plugin root origin */
       gdk_window_get_root_origin (window, &x, &y);
 
       /* detect arrow type */
       if (screen_position == XFCE_SCREEN_POSITION_FLOATING_H)
-        return (y < (monitor.y + monitor.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP;
+        return (y < (geometry.y + geometry.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP;
       else
-        return (x < (monitor.x + monitor.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT;
+        return (x < (geometry.x + geometry.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT;
     }
 }
 
@@ -2504,8 +2512,13 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 {
   GtkRequisition  requisition;
   GdkScreen      *screen;
-  GdkRectangle    monitor;
+  GdkRectangle    geometry;
+#if GTK_CHECK_VERSION (3, 22, 0)
+  GdkDisplay     *display;
+  GdkMonitor     *monitor;
+#else
   gint            monitor_num;
+#endif
   GTimeVal        now_t, end_t;
   GtkWidget      *toplevel, *plug;
   gint            px, py;
@@ -2605,18 +2618,24 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin *plugin,
 
   /* get the monitor geometry */
   screen = gtk_widget_get_screen (attach_widget);
+#if GTK_CHECK_VERSION (3, 22, 0)
+  display = gdk_screen_get_display (screen);
+  monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (attach_widget));
+  gdk_monitor_get_geometry (monitor, &geometry);
+#else
   monitor_num = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (attach_widget));
-  gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
+  gdk_screen_get_monitor_geometry (screen, monitor_num, &geometry);
+#endif
 
   /* keep the menu inside the screen */
-  if (*x > monitor.x + monitor.width - requisition.width)
-    *x = monitor.x + monitor.width - requisition.width;
-  if (*x < monitor.x)
-    *x = monitor.x;
-  if (*y > monitor.y + monitor.height - requisition.height)
-    *y = monitor.y + monitor.height - requisition.height;
-  if (*y < monitor.y)
-    *y = monitor.y;
+  if (*x > geometry.x + geometry.width - requisition.width)
+    *x = geometry.x + geometry.width - requisition.width;
+  if (*x < geometry.x)
+    *x = geometry.x;
+  if (*y > geometry.y + geometry.height - requisition.height)
+    *y = geometry.y + geometry.height - requisition.height;
+  if (*y < geometry.y)
+    *y = geometry.y;
 
   /* popup on the correct screen */
   if (G_LIKELY (GTK_IS_MENU (menu_widget)))
