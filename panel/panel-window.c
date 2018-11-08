@@ -653,7 +653,7 @@ panel_window_set_property (GObject      *object,
           window->mode = val_mode;
           panel_window_screen_layout_changed (window->screen, window);
         }
-      panel_base_window_orientation_changed (window, window->mode);
+      panel_base_window_orientation_changed (PANEL_BASE_WINDOW (window), window->mode);
       /* send the new orientation and screen position to the panel plugins */
       panel_window_plugins_update (window, PLUGIN_PROP_MODE);
       panel_window_plugins_update (window, PLUGIN_PROP_SCREEN_POSITION);
