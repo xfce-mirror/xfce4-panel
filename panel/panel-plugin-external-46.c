@@ -273,7 +273,8 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
   event.xclient.message_type = panel_atom;
   event.xclient.format = 16;
 
-  gdk_error_trap_push ();
+  window = gtk_socket_get_plug_window (GTK_SOCKET (external));
+  gdk_x11_display_error_trap_push (gdk_window_get_display (window));
 
   for (li = properties; li != NULL; li = li->next)
     {
@@ -342,9 +343,9 @@ panel_plugin_external_46_set_properties (PanelPluginExternal *external,
 
   bailout:
 
-  gdk_flush ();
+  gdk_display_flush (gdk_window_get_display (window));
 
-  if (gdk_error_trap_pop () != 0)
+  if (gdk_x11_display_error_trap_pop (gdk_window_get_display (window)) != 0)
     {
       g_critical ("Failed to send client messages for %s-%d",
                   panel_module_get_name (external->module),

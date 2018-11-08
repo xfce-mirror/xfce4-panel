@@ -251,12 +251,12 @@ systray_socket_new (GdkScreen       *screen,
 
   /* get the window attributes */
   display = gdk_screen_get_display (screen);
-  gdk_error_trap_push ();
+  gdk_x11_display_error_trap_push (display);
   result = XGetWindowAttributes (GDK_DISPLAY_XDISPLAY (display),
                                  window, &attr);
 
   /* leave on an error or if the window does not exist */
-  if (gdk_error_trap_pop () != 0 || result == 0)
+  if (gdk_x11_display_error_trap_pop (display) != 0 || result == 0)
     return NULL;
 
   /* get the windows visual */
@@ -308,7 +308,7 @@ systray_socket_force_redraw (SystraySocket *socket)
       xev.xexpose.height = allocation.height;
       xev.xexpose.count = 0;
 
-      gdk_error_trap_push ();
+      gdk_x11_display_error_trap_push (display);
       XSendEvent (GDK_DISPLAY_XDISPLAY (display),
                   xev.xexpose.window,
                   False, ExposureMask,
@@ -317,7 +317,7 @@ systray_socket_force_redraw (SystraySocket *socket)
        * since that is asynchronous.
        */
       XSync (GDK_DISPLAY_XDISPLAY (display), False);
-      gdk_error_trap_pop_ignored ();
+      gdk_x11_display_error_trap_pop_ignored (display);
     }
 }
 
@@ -354,7 +354,7 @@ systray_socket_get_name_prop (SystraySocket *socket,
 
   req_type = gdk_x11_get_xatom_by_name_for_display (display, type_name);
 
-  gdk_error_trap_push ();
+  gdk_x11_display_error_trap_push (display);
 
   result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display),
                                socket->window,
@@ -366,7 +366,7 @@ systray_socket_get_name_prop (SystraySocket *socket,
                                (guchar **) &val);
 
   /* check if everything went fine */
-  if (gdk_error_trap_pop () != 0
+  if (gdk_x11_display_error_trap_pop (display) != 0
       || result != Success
       || val == NULL)
     return NULL;

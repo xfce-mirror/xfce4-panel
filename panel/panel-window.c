@@ -1714,7 +1714,7 @@ panel_window_screen_struts_set (PanelWindow *window)
     return;
 
   /* don't crash on x errors */
-  gdk_error_trap_push ();
+  gdk_x11_display_error_trap_push (window->display);
 
   /* set the wm strut partial */
   panel_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (GTK_WIDGET (window))));
@@ -1732,7 +1732,7 @@ panel_window_screen_struts_set (PanelWindow *window)
 #endif
 
   /* release the trap */
-  if (gdk_error_trap_pop () != 0)
+  if (gdk_x11_display_error_trap_pop (window->display) != 0)
     g_critical ("Failed to set the struts");
 
   if (panel_debug_has_domain (PANEL_DEBUG_YES))
@@ -3094,14 +3094,14 @@ panel_window_focus (PanelWindow *window)
   event.format = 32;
   event.data.l[0] = 0;
 
-  gdk_error_trap_push ();
+  gdk_x11_display_error_trap_push (window->display);
 
   XSendEvent (gdk_x11_get_default_xdisplay (), GDK_ROOT_WINDOW (), False,
               StructureNotifyMask, (XEvent *) &event);
 
-  gdk_flush ();
+  gdk_display_flush (window->display);
 
-  if (gdk_error_trap_pop () != 0)
+  if (gdk_x11_display_error_trap_pop (window->display) != 0)
     g_critical ("Failed to focus panel window");
 #else
   /* our best guess on non-x11 clients */
