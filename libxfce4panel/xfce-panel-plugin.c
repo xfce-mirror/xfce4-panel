@@ -218,6 +218,8 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   GObjectClass   *gobject_class;
   GtkWidgetClass *gtkwidget_class;
 
+  g_type_class_add_private (klass, sizeof (XfcePanelPluginPrivate));
+
   klass->construct = NULL;
 
   gobject_class = G_OBJECT_CLASS (klass);
@@ -679,7 +681,7 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
 static void
 xfce_panel_plugin_init (XfcePanelPlugin *plugin)
 {
-  plugin->priv = xfce_panel_plugin_get_instance_private (plugin);
+  plugin->priv = G_TYPE_INSTANCE_GET_PRIVATE (plugin, XFCE_TYPE_PANEL_PLUGIN, XfcePanelPluginPrivate);
 
   plugin->priv->name = NULL;
   plugin->priv->display_name = NULL;
